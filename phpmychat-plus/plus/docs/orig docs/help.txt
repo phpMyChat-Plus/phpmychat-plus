@@ -1,0 +1,9 @@
+--------------
+ Getting Help
+--------------
+
+
+There is a web page for phpMyChat at http://www.phpheaven.net/
+
+There is also a mailing list phpmychat@egroups.com to which you can subscribe
+by sending a blank email to phpmychat-subscribe@egroups.com
