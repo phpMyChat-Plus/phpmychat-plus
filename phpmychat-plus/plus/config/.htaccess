@@ -1,0 +1,4 @@
+<files config.lib.php>
+Order Deny,Allow
+Deny From All
+</files>
