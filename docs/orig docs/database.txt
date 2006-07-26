@@ -1,0 +1,41 @@
+-----------
+ Databases
+-----------
+
+
+The goal is not to help you setup your database for general use,
+just how to setup the tables for phpMyChat.
+
+
+Requirements
+""""""""""""
+
+phpMyChat currently supports 3 types of database :
+
+   MySql
+   PostgreSQL
+   ODBC
+
+MySql is the original database supported by phpMyChat and should at
+all times (most likely) work for sure.
+
+You will need to have your database preconfigured and working on
+your system before you get to this stage. For help with this, please
+consult your database specific help files.
+
+
+Installation
+""""""""""""
+
+You will need to setup 3 tables.
+
+The database name itself can be anything but the best name for it is
+just 'phpmychat'.
+
+The table names also can be changed; but by leaving them to what is
+shown, you'll have one less step later on.
+
+For those who want to change table names, you'll also need to change
+the values for each within the 'chat/config/config.lib.php' file.
+
+Table creation scripts are in the 'chat/install/databases' directory.
