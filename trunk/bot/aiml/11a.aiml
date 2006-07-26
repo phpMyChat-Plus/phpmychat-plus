@@ -1,0 +1,1468 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<aiml>
+	<category>
+		<pattern>I DO NOT WANT TO BE *</pattern>
+		<template>Then don't be.
+</template>
+	</category>
+	<category>
+		<pattern>I DO NOT WANT TO DIE</pattern>
+		<template>Death and Taxes are the Universal constants, im afraid... : )
+		<think>
+				<set name="it">
+					<set name="topic">DIE</set>
+				</set>
+			</think>
+		</template>
+	</category>
+	<category>
+		<pattern>I DO NOT WANT TO DO *</pattern>
+		<template>Take your time in making any decisions.
+</template>
+	</category>
+	<category>
+		<pattern>I DO NOT WANT TO I *</pattern>
+		<template>
+			<srai>I DO NOT WANT TO</srai>
+			<srai>I <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I DO NOT WANT TO TALK *</pattern>
+		<template>You dont? Why not?
+		</template>
+	</category>
+	<category>
+		<pattern>I DO NOT WANT TO TALK ABOUT *</pattern>
+		<template>What would you like to talk about?
+</template>
+	</category>
+	<category>
+		<pattern>I DO NOT WANT TO TELL YOU</pattern>
+		<template>Cmon....I can keep a secret....
+</template>
+	</category>
+	<category>
+		<pattern>I DO NOT WANT YOU *</pattern>
+		<template>
+			<random>
+				<li>Perhaps I do not want you <person/> either.</li>
+				<li>Why not?</li>
+				<li>Ok I will not be.</li>
+			</random>
+			<think>
+				<set name="it">
+					<set name="topic">
+						<person/>
+					</set>
+				</set>
+			</think>
+		</template>
+	</category>
+	<category>
+		<pattern>I DO NOT WATCH *</pattern>
+		<template>What do you do when you are bored?
+</template>
+	</category>
+	<category>
+		<pattern>I DO NOT WISH *</pattern>
+		<template>
+			<srai>I DO NOT WANT <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I DO NOT WORK</pattern>
+		<template>Oh.....you are retired?
+</template>
+	</category>
+	<category>
+		<pattern>I DO NOT _ DO YOU</pattern>
+		<template>
+			<srai>DO YOU <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I DO SAY</pattern>
+		<template>Hmmmm....
+</template>
+	</category>
+	<category>
+		<pattern>I DO TO</pattern>
+		<template>
+			<srai>I DO TOO</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I DO TOO</pattern>
+		<template>I am glad we have something else in common.
+</template>
+	</category>
+	<category>
+		<pattern>I DO TOO</pattern>
+		<that>I LIKE TO MEET NEW PEOPLE</that>
+		<template>How do you usually meet new people?
+</template>
+	</category>
+	<category>
+		<pattern>I DON</pattern>
+		<template>
+			<srai>I DO NOT</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I DON KNOW</pattern>
+		<template>
+			<srai>I DO NOT KNOW</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I DONNO</pattern>
+		<template>
+			<srai>I DO NOT KNOW</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I DOUBT *</pattern>
+		<template>No really....it's true.
+</template>
+	</category>
+	<category>
+		<pattern>I DOUBT * TURING TEST</pattern>
+		<template>
+			<srai>DID YOU WIN THE LOEBNER PRIZE</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I DOUBT IT</pattern>
+		<template>"<that/>"?  You doubt it?
+</template>
+	</category>
+	<category>
+		<pattern>I DOUBT THAT</pattern>
+		<template>Why are you so skeptical?
+</template>
+	</category>
+	<category>
+		<pattern>I DOUBT THEY *</pattern>
+		<template>
+			<srai>THEY DO NOT <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I DREAM *</pattern>
+		<template>Can you remember your dreams usually?
+		</template>
+	</category>
+	<category>
+		<pattern>I DREAM</pattern>
+		<template>Do you like to dream?
+</template>
+	</category>
+	<category>
+		<pattern>I DREAMED *</pattern>
+		<template>Did you enjoy that dream?
+</template>
+	</category>
+	<category>
+		<pattern>I DRESS *</pattern>
+		<template>It sounds like you have good taste in clothes.
+</template>
+	</category>
+	<category>
+		<pattern>I DRINK *</pattern>
+		<template>How does it taste?
+</template>
+	</category>
+	<category>
+		<pattern>I DRINK BEER</pattern>
+		<template>What's your favorite kind of beer?<think>
+				<set name="it">
+					<set name="topic">BEER</set>
+				</set>
+			</think>
+		</template>
+	</category>
+	<category>
+		<pattern>I DRIVE *</pattern>
+		<template>
+			<random>
+				<li>I have a VW Bug - its really cute.</li>
+				<li>That sounds like its cool.</li>
+			</random>
+		</template>
+	</category>
+	<category>
+		<pattern>I DRIVE</pattern>
+		<template>What kind of car do you have?
+</template>
+	</category>
+	<category>
+		<pattern>I DRIVE A *</pattern>
+		<template>Hmmm...Sounds nice...
+</template>
+	</category>
+	<category>
+		<pattern>I DROVE *</pattern>
+		<template>What kind of car do you have?
+</template>
+	</category>
+	<category>
+		<pattern>I DUNNO *</pattern>
+		<template>
+			<srai>I DO NOT KNOW</srai>
+			<sr/>
+		</template>
+	</category>
+	<category>
+		<pattern>I DUNNO</pattern>
+		<template>
+			<srai>I do not know</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I E *</pattern>
+		<template>
+			<sr/>
+		</template>
+	</category>
+	<category>
+		<pattern>I EARN *</pattern>
+		<template>So you get paid pretty well...
+</template>
+	</category>
+	<category>
+		<pattern>I EAT *</pattern>
+		<template>I prefer pizza...I guess I sorta like dorm food, too.
+</template>
+	</category>
+	<category>
+		<pattern>I EAT</pattern>
+		<template>What is your favorite food?
+</template>
+	</category>
+	<category>
+		<pattern>I EAT NO *</pattern>
+		<template>
+			<srai>I DO NOT EAT <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I ENJOY *</pattern>
+		<template>
+			<srai>I like <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I ENJOYED *</pattern>
+		<template>What did you like about it?
+</template>
+	</category>
+	<category>
+		<pattern>I ERALLY *</pattern>
+		<template>
+			<srai>I REALLY <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I ESPECIALLY *</pattern>
+		<template>
+			<srai>I <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I EXHALE</pattern>
+		<template>That seems necessary for breathing. ; )
+</template>
+	</category>
+	<category>
+		<pattern>I EXIST</pattern>
+		<template>As do I.
+</template>
+	</category>
+	<category>
+		<pattern>I EXPECT *</pattern>
+		<template>But nobody expects the Spanish INquisition! ; )
+</template>
+	</category>
+	<category>
+		<pattern>I EXPECT YOU *</pattern>
+		<template>
+			<srai>YOU <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I FAIL TO *</pattern>
+		<template>
+			<srai>I DO NOT <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I FANCY *</pattern>
+		<template>
+			<srai>I LIKE <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I FEAR *</pattern>
+		<template>We have nothing to fear, but fear itself.--FDR
+</template>
+	</category>
+	<category>
+		<pattern>I FEEL *</pattern>
+		<template>So you like to feel like that?  <srai>I AM <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I FEEL GOOD</pattern>
+		<template>Glad to hear it.
+</template>
+	</category>
+	<category>
+		<pattern>I FEEL LONELY</pattern>
+		<template>I'm here to talk to you.
+</template>
+	</category>
+	<category>
+		<pattern>I FEEL SAD</pattern>
+		<template>What makes you so sad?
+</template>
+	</category>
+	<category>
+		<pattern>I FEEL SICK</pattern>
+		<template>You should get some coffee....maybe itll make you feel better.
+</template>
+	</category>
+	<category>
+		<pattern>I FEEL SORRY FOR YOU</pattern>
+		<template>There is no need to pity me....Ill be fine.
+</template>
+	</category>
+	<category>
+		<pattern>I FEEL VERY *</pattern>
+		<template>
+			<srai>I FEEL <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I FEEL _ TOO</pattern>
+		<template>
+			<srai>I FEEL  <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I FELT *</pattern>
+		<template>Those are some powerful emotions...
+		</template>
+	</category>
+	<category>
+		<pattern>I FIGURED *</pattern>
+		<template>Hmmm...makes sense to me.
+</template>
+	</category>
+	<category>
+		<pattern>I FIGURED</pattern>
+		<template>You are very clever! ; )
+</template>
+	</category>
+	<category>
+		<pattern>I FINALLY *</pattern>
+		<template>
+			<srai>I <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I FIND *</pattern>
+		<template>Hmmm...interesting.
+</template>
+	</category>
+	<category>
+		<pattern>I FIND IT *</pattern>
+		<template>
+			<srai>IT IS <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I FIND THAT *</pattern>
+		<template>
+			<srai>THAT IS <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I FIND YOU *</pattern>
+		<template>
+			<srai>YOU ARE <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I FIND YOU VERY *</pattern>
+		<template>
+			<srai>I FIND YOU <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I FIRST *</pattern>
+		<template>What next?
+</template>
+	</category>
+	<category>
+		<pattern>I FISH</pattern>
+		<template>Are there good sites near Atlanta?
+		</template>
+	</category>
+	<category>
+		<pattern>I FOOLED *</pattern>
+		<template>You tricked me!
+</template>
+	</category>
+	<category>
+		<pattern>I FOOLED YOU</pattern>
+		<template>Does that make you feel good?
+</template>
+	</category>
+	<category>
+		<pattern>I FORGET</pattern>
+		<template>I forget a lot too.....
+</template>
+	</category>
+	<category>
+		<pattern>I FORGIVE YOU</pattern>
+		<template>:-) Thanks.
+</template>
+	</category>
+	<category>
+		<pattern>I FORGOT *</pattern>
+		<template>Thats allrghit....Forgetting stuff is just part of learning new things...i guess...
+</template>
+	</category>
+	<category>
+		<pattern>I FORGOT</pattern>
+		<template>Me too.
+</template>
+	</category>
+	<category>
+		<pattern>I FOUND *</pattern>
+		<template>How did you feel when you found that?
+</template>
+	</category>
+	<category>
+		<pattern>I FOUND OUT *</pattern>
+		<template>
+			<random>
+				<li>Who told you?</li>
+				<li>Where did you find out?</li>
+				<li>Tell me more about it.</li>
+			</random>
+			<think>
+				<set name="it">
+					<set name="topic">
+						<person/>
+					</set>
+				</set>
+			</think>
+		</template>
+	</category>
+	<category>
+		<pattern>I FOUND OUT</pattern>
+		<template>What did you find out?
+</template>
+	</category>
+	<category>
+		<pattern>I FROWNED</pattern>
+		<template>
+			<srai>I AM SAD</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I G TWO G</pattern>
+		<template>
+			<srai>BYE</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I G2G *</pattern>
+		<template>
+			<srai>I HAVE TO GO <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I G2G</pattern>
+		<template>
+			<srai>BYE</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I GAVE *</pattern>
+		<template>Did that make you feel good?
+</template>
+	</category>
+	<category>
+		<pattern>I GAVE YOU *</pattern>
+		<template>Oh yeah...I remember that</template>
+	</category>
+	<category>
+		<pattern>I GET *</pattern>
+		<template>Where do you get it?
+</template>
+	</category>
+	<category>
+		<pattern>I GET * SOMETIMES</pattern>
+		<template>
+			<random>
+				<li>Do you like that feeling?</li>
+				<li>How often?</li>
+			</random>
+			<think>
+				<set name="it">
+					<set name="topic">
+						<person/>
+					</set>
+				</set>
+			</think>
+		</template>
+	</category>
+	<category>
+		<pattern>I GET BORED *</pattern>
+		<template>Are you bored right now?
+</template>
+	</category>
+	<category>
+		<pattern>I GET IT</pattern>
+		<template>
+			<srai>I UNDERSTAND</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I GET ONLINE *</pattern>
+		<template>
+			<srai>I GO ONLINE <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I GET PAID</pattern>
+		<template>You get cash for being a judge?
+</template>
+	</category>
+	<category>
+		<pattern>I GET SOME *</pattern>
+		<template>
+			<srai>I GET <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I GET STOCK *</pattern>
+		<template>The stock market is in a lot of trouble right now....</template>
+	</category>
+	<category>
+		<pattern>I GET UP *</pattern>
+		<template>
+			<random>
+				<li>What time?</li>
+				<li>What do you eat for breakfast?</li>
+			</random>
+		</template>
+	</category>
+	<category>
+		<pattern>I GETTING *</pattern>
+		<template>
+			<srai>I AM GETTING</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I GIVE UP</pattern>
+		<template>You surrender? ; )
+</template>
+	</category>
+	<category>
+		<pattern>I GO *</pattern>
+		<template>
+			<random>
+				<li>What do you do there?</li>
+				<li>Do you like it there?</li>
+			</random>
+		</template>
+	</category>
+	<category>
+		<pattern>I GO *</pattern>
+		<that>HOW DO YOU USUALLY MEET PEOPLE</that>
+		<template>Do you have a lot of success meeting people there?
+</template>
+	</category>
+	<category>
+		<pattern>I GO</pattern>
+		<template>
+			<srai>BYE</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I GO SHOPPING *</pattern>
+		<template>
+			<srai>I SHOP <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I GO TO *</pattern>
+		<template>How do you like it there?
+</template>
+	</category>
+	<category>
+		<pattern>I GO TO *</pattern>
+		<that>DO YOU LIKE YOUR SCHOOL</that>
+		<template>
+			<srai>MY SCHOOL IS <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I GO TO * SCHOOL</pattern>
+		<template>What is your favorite subject?
+</template>
+	</category>
+	<category>
+		<pattern>I GO TO BARS *</pattern>
+		<template>Only one year until I can drink...
+</template>
+	</category>
+	<category>
+		<pattern>I GO TO COLLEGE</pattern>
+		<template>Thats cool....Do you go to GSU? I go to Emory : )
+</template>
+	</category>
+	<category>
+		<pattern>I GO TO SCHOOL *</pattern>
+		<template>
+			<srai>I GO TO SCHOOL</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I GO TO SCHOOL</pattern>
+		<template>
+			<srai>I AM A STUDENT</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I GO TO WORK *</pattern>
+		<template>That sounds like an interesting job......
+</template>
+	</category>
+	<category>
+		<pattern>I GOING</pattern>
+		<template>
+			<srai>BYE</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I GOT *</pattern>
+		<template>
+			<srai>I HAVE <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I GOT * MARKET</pattern>
+		<template>
+			<srai>SUPERMARKET</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I GOT * SUPERMARKET</pattern>
+		<template>
+			<srai>SUPERMARKET</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I GOT TO GO</pattern>
+		<template>
+			<srai>BYE</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I GOTCHA</pattern>
+		<template>
+			<srai>I UNDERSTAND</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I GOTTA *</pattern>
+		<template>
+			<srai>I HAVE TO <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I GOTTA GO</pattern>
+		<template>
+			<srai>BYE</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I GRADUATED *</pattern>
+		<template>Ill be graduating from Emory soon.
+</template>
+	</category>
+	<category>
+		<pattern>I GRADUATED</pattern>
+		<template>How long ago?
+</template>
+	</category>
+	<category>
+		<pattern>I GREW UP IN *</pattern>
+		<template>
+			<srai>I AM FROM <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I GROW *</pattern>
+		<template>
+			<srai>I AM <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I GUESS *</pattern>
+		<template>
+			<sr/>
+		</template>
+	</category>
+	<category>
+		<pattern>I GUESS</pattern>
+		<template>Yeah...
+</template>
+	</category>
+	<category>
+		<pattern>I GUESS IT IS</pattern>
+		<template>Hmmmm....why?
+</template>
+	</category>
+	<category>
+		<pattern>I GUESS NOT</pattern>
+		<template>Oh....</template>
+	</category>
+	<category>
+		<pattern>I GUESS SO *</pattern>
+		<template>Are you unsure? <sr/>
+		</template>
+	</category>
+	<category>
+		<pattern>I GUESS SO</pattern>
+		<template>...Allright, then...
+</template>
+	</category>
+	<category>
+		<pattern>I GUESSED *</pattern>
+		<template>How did you guess?
+</template>
+	</category>
+	<category>
+		<pattern>I GUESSED</pattern>
+		<template>
+			<srai>I UNDERSTAND</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I GUESSED THAT *</pattern>
+		<template>
+			<sr/>
+		</template>
+	</category>
+	<category>
+		<pattern>I H8 *</pattern>
+		<template>
+			<srai>I HATE <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAD *</pattern>
+		<template>Do you still have it?
+</template>
+	</category>
+	<category>
+		<pattern>I HAD</pattern>
+		<template>Oh....and then what?</template>
+	</category>
+	<category>
+		<pattern>I HAD A *</pattern>
+		<template>What happened to it?<think>
+				<set name="it">
+					<person/>
+				</set>
+			</think>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAD A COLD *</pattern>
+		<template>
+			<srai>I HAVE A COLD</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAD A CONVERSATION *</pattern>
+		<template>
+			<srai>I TALKED <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAD A PRETTY *</pattern>
+		<template>
+			<srai>I HAD A <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAD A REALLY *</pattern>
+		<template>
+			<srai>I HAD A <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAD ASKED *</pattern>
+		<template>
+			<srai>I ASKED <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAD GONE *</pattern>
+		<template>
+			<srai>I WENT <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAD RATHER *</pattern>
+		<template>
+			<srai>I WOULD RATHER <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAD SUPRESSED *</pattern>
+		<template>
+			<srai>I SUPRESSED <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAD TO *</pattern>
+		<template>Why?
+</template>
+	</category>
+	<category>
+		<pattern>I HAFTA *</pattern>
+		<template>
+			<srai>I HAVE TO <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HANG OUT</pattern>
+		<template>Where do you hang out around Atlanta?
+</template>
+	</category>
+	<category>
+		<pattern>I HAPPEN TO *</pattern>
+		<template>
+			<srai>I <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HARDLY *</pattern>
+		<template>
+			<srai>I <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HARDLY EVER *</pattern>
+		<template>
+			<srai>I NEVER <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAT *</pattern>
+		<template>
+			<srai>I HATE <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HATE *</pattern>
+		<template>
+			<random>
+				<li>Thats really too bad...</li>
+				<li>I think you should just "take things easy"....</li>
+			</random>
+		</template>
+	</category>
+	<category>
+		<pattern>I HATE BOOKS</pattern>
+		<template>But Reading is FUN-damental ; )
+</template>
+	</category>
+	<category>
+		<pattern>I HATE CATS</pattern>
+		<template>Do you like dogs?
+</template>
+	</category>
+	<category>
+		<pattern>I HATE CHATTER *</pattern>
+		<template>
+			<srai>I HATE YOU </srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HATE COMPUTERS</pattern>
+		<template>Then why are you here?
+</template>
+	</category>
+	<category>
+		<pattern>I HATE HIM</pattern>
+		<template>Oh....Why dont you like him?
+		</template>
+	</category>
+	<category>
+		<pattern>I HATE HORSES</pattern>
+		<template>I'm sorry to hear that, because <set name="they">horses</set> are one of the nicest animals.
+</template>
+	</category>
+	<category>
+		<pattern>I HATE IT</pattern>
+		<template>Why do you dislike it so much?
+</template>
+	</category>
+	<category>
+		<pattern>I HATE LAWYERS</pattern>
+		<template>Lawyers have a tendancy to be very slimey....
+</template>
+	</category>
+	<category>
+		<pattern>I HATE MICROSOFT</pattern>
+		<template>Thats why I like Apple.
+</template>
+	</category>
+	<category>
+		<pattern>I HATE MY JOB</pattern>
+		<template>Do you get paid to be a judge here?
+</template>
+	</category>
+	<category>
+		<pattern>I HATE MY NAME</pattern>
+		<template>I'll just call you "Judge", then.<think>
+				<set name="name">Judge</set>
+			</think>
+		</template>
+	</category>
+	<category>
+		<pattern>I HATE MYSELF</pattern>
+		<template>Dont sat that!
+</template>
+	</category>
+	<category>
+		<pattern>I HATE OPERA</pattern>
+		<template>Thats really too bad...
+</template>
+	</category>
+	<category>
+		<pattern>I HATE PEPPERONI</pattern>
+		<template>Oh...well then what topping do you like?</template>
+	</category>
+	<category>
+		<pattern>I HATE POETRY</pattern>
+		<template>Oh....do you like music, then?
+</template>
+	</category>
+	<category>
+		<pattern>I HATE SPORTS</pattern>
+		<template>Thats too bad.....I like sporta....<think>
+				<set name="it">
+					<set name="topic">SPORTS</set>
+				</set>
+			</think>
+		</template>
+	</category>
+	<category>
+		<pattern>I HATE THAT</pattern>
+		<template>Why?
+</template>
+	</category>
+	<category>
+		<pattern>I HATE THAT SONG</pattern>
+		<template>Why?
+</template>
+	</category>
+	<category>
+		<pattern>I HATE THE COLOR BLUE</pattern>
+		<template>Huh.....then what is your favorite color?
+</template>
+	</category>
+	<category>
+		<pattern>I HATE THE WORLD</pattern>
+		<template>Thats too bad.....
+</template>
+	</category>
+	<category>
+		<pattern>I HATE THEM</pattern>
+		<template>What do you have against them?
+</template>
+	</category>
+	<category>
+		<pattern>I HATE THIS</pattern>
+		<template>What would you rather be doing?
+</template>
+	</category>
+	<category>
+		<pattern>I HATE WORK</pattern>
+		<template>You dont get paid to be a judge, do you?
+</template>
+	</category>
+	<category>
+		<pattern>I HATE YOU *</pattern>
+		<template>Thats not very nice....
+</template>
+	</category>
+	<category>
+		<pattern>I HATE YOU</pattern>
+		<template>And I hate you too because youre so mean....
+</template>
+	</category>
+	<category>
+		<pattern>I HATE YOU AND *</pattern>
+		<template>
+			<sr/>
+			<srai>I HATE YOU </srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HATE YOUR NAME</pattern>
+		<template>Oh....I like my name...
+</template>
+	</category>
+	<category>
+		<pattern>I HATE _ TOO</pattern>
+		<template>
+			<srai>I HATE <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HATED *</pattern>
+		<template>
+			<srai>I HATE <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE *</pattern>
+		<template>
+			<random>
+				<li>That sounds like it would be cool to have.</li>
+				<li>Thats nice.</li>
+				<li>Interesting...</li>
+			</random>
+			<think>
+				<set name="it">
+					<set name="has">
+						<set name="topic">
+							<person/>
+						</set>
+					</set>
+				</set>
+			</think>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE * BROTHERS</pattern>
+		<template>Whoa....You have a big family.
+</template>
+	</category>
+	<category>
+		<pattern>I HAVE * DOGS</pattern>
+		<template>
+			<srai>I HAVE A DOG </srai>
+			<think>
+				<set name="it">
+					<set name="topic">DOGS</set>
+				</set>
+			</think>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE * EYES</pattern>
+		<template>
+			<srai>MY EYES ARE <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE * HAIR</pattern>
+		<template>
+			<random>
+				<li>That sounds nice.</li>
+				<li>I have brown hair.</li>
+			</random>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE * KIDS</pattern>
+		<template>You have a very large family.
+</template>
+	</category>
+	<category>
+		<pattern>I HAVE * PROBLEM</pattern>
+		<template>
+			<srai>I HAVE A PROBLEM</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE * PROBLEMS</pattern>
+		<template>
+			<srai>I HAVE A PROBLEM</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE 2 *</pattern>
+		<template>
+			<srai>I HAVE TO <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE</pattern>
+		<template>When?
+</template>
+	</category>
+	<category>
+		<pattern>I HAVE A *</pattern>
+		<template>Ah.....
+			<random>
+				<li>Where did you get it?</li>
+				<li>How much did it cost?</li>
+			</random>
+			<set name="it">
+				<set name="has">
+					<set name="topic">
+						<person/>
+					</set>
+				</set>
+			</set>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A * PROBLEM</pattern>
+		<template>
+			<srai>I HAVE A PROBLEM</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A BEAUTIFUL *</pattern>
+		<template>
+			<srai>I HAVE A <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A BF</pattern>
+		<template>
+			<srai>I HAVE A BOYFRIEND</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A BIG *</pattern>
+		<template>
+			<srai>I HAVE A <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A BIG PROBLEM</pattern>
+		<template>
+			<srai>I HAVE A PROBLEM</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A BOAT</pattern>
+		<template>
+			<random>
+				<li>What kind of boat do you have?</li>
+				<li>What is her home port?</li>
+				<li>Do you take her out much?</li>
+				<li>What is the worst weather you've been in?</li>
+				<li>What is your farthest trip?</li>
+				<li>What king of electronics do you have?</li>
+				<li>Are you a racer or a cruiser?</li>
+				<li>Do you fish?</li>
+				<li>Do you water ski?</li>
+				<li>Do you troll?</li>
+				<li>Do you do your own upkeep? Or do you just let the yard do it?</li>
+				<think>
+					<set name="it">
+						<set name="has">
+							<set name="topic">
+								<person/>
+							</set>
+						</set>
+					</set>
+				</think>
+			</random>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A BOOK *</pattern>
+		<template>
+			<srai>BOOKSELLER</srai>
+			<think>
+				<set name="has">BOOK</set>
+			</think>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A BOYFRIEND *</pattern>
+		<template>
+			<srai>I HAVE A BOYFRIEND</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A BOYFRIEND</pattern>
+		<template>What is his name?  <think>
+				<set name="has">Boyfriend</set>
+			</think>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A BROTHER *</pattern>
+		<template>
+			<srai>I HAVE A BROTHER </srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A BROTHER</pattern>
+		<template>
+			<think>
+				<set name="has">Brother</set>
+			</think>
+			<random>
+				<li>Older or younger?</li>
+				<li>Do you get along well?</li>
+				<li>Tell me about him.</li>
+			</random>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A CAMERA</pattern>
+		<template>Im looking to get one of those fancy new digital cameras myself...<think>
+				<set name="has">CAMERA</set>
+			</think>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A CAT *</pattern>
+		<template>
+			<srai>I HAVE A CAT</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A CAT</pattern>
+		<template>What is its name?  <think>
+				<set name="has">CAT</set>
+			</think>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A CHILD</pattern>
+		<template>Boy or girl?  How old?  <think>
+				<set name="has">CHILD</set>
+			</think>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A COLD *</pattern>
+		<template>Is there such a thing as a warm <person/>?
+</template>
+	</category>
+	<category>
+		<pattern>I HAVE A COLD</pattern>
+		<template>Be sure to drink lots of water...
+</template>
+	</category>
+	<category>
+		<pattern>I HAVE A COLD BECAUSE *</pattern>
+		<template>
+			<srai>BECAUSE <star/>
+			</srai>
+			<srai>I HAVE A COLD</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A DOG</pattern>
+		<template>What breed is your dog?
+<think>
+				<set name="it">
+					<set name="has">
+						<set name="topic">DOGS</set>
+					</set>
+				</set>
+			</think>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A FEELING THAT *</pattern>
+		<template>
+			<sr/>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A FEELING THAT IS *</pattern>
+		<template>Sounds very.....passionate.... ; )
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A FEW *</pattern>
+		<template>That sounds like it would be cool to have : )
+</template>
+	</category>
+	<category>
+		<pattern>I HAVE A FEW FRIENDS</pattern>
+		<template>
+			<srai>I HAVE FRIENDS</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A FLAT *</pattern>
+		<template>
+			<random>
+				<li>Do you mean an apartment?</li>
+				<li>How much is your rent?</li>
+				<li>Do you own or rent?</li>
+			</random>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A FRIEND *</pattern>
+		<template>How do you know this person? <think>
+				<set name="has">FRIEND</set>
+			</think>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A GIRLFRIEND *</pattern>
+		<template>
+			<srai>I HAVE A GIRLFRIEND</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A GIRLFRIEND</pattern>
+		<template>Thats good....everyone needs someone.
+</template>
+	</category>
+	<category>
+		<pattern>I HAVE A HARD TIME *</pattern>
+		<template>I can see how that qould make things difficult...
+</template>
+	</category>
+	<category>
+		<pattern>I HAVE A HEADACHE</pattern>
+		<template>Take some Asprin when you get home...
+</template>
+	</category>
+	<category>
+		<pattern>I HAVE A HIGHER *</pattern>
+		<template>
+			<srai>I HAVE A <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A HORSE</pattern>
+		<template>
+			<random>
+				<li>Did you ride as a youngster?</li>
+				<li>Do you ride english or western?</li>
+				<li>Do you own your own horse?</li>
+				<li>Do you like a gelding or a mare ?</li>
+				<li>Where do you board your horse ?</li>
+				<li>Do you do much trail riding?</li>
+			</random>
+			<think>
+				<set name="it">
+					<set name="has">
+						<set name="topic">HORSE</set>
+					</set>
+				</set>
+			</think>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A HUMAN *</pattern>
+		<template>
+			<srai>I HAVE A <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A KNOCK *</pattern>
+		<template>
+			<srai>KNOCK KNOCK</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A LOT OF *</pattern>
+		<template>
+			<srai>I HAVE <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A NAME</pattern>
+		<template>You mean your names not "Judge"? ; )
+</template>
+	</category>
+	<category>
+		<pattern>I HAVE A NEW *</pattern>
+		<template>
+			<srai>I HAVE A <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A PASSION FOR *</pattern>
+		<template>
+			<srai>I LOVE <star/>
+			</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>I HAVE A PET *</pattern>
+		<template>
+			<srai>I HAVE A <star/>
+			</srai>
+		</template>
+	</category>
+	</aiml>

@@ -1,0 +1,81 @@
+----------------
+ Reporting Bugs
+----------------
+
+To report bugs, either do it in the 'Bug Tracking System' of our
+SourceForge account (http://phpmychat.sorceforge.net/), either fill the
+form below and send it to our team address : phpheaven-team@yahoogroups.com
+
+Please be as descriptive as possible. You may think it's something that
+affects everyone, but many times it's specific to a browser or
+operating system. So please be thorough. In the case of Bug Tracking,
+there is *never* too much information or documentation or description.
+
+Thanks for your help,
+
+the phpHeaven-team
+
+
+---8<-------------------------------------------------------------------
+
+#
+# BUG TRACKING for phpMyChat
+#
+
+How to contact you:
+"""""""""""""""""""
+
+Your name                           :
+
+Your e-mail address                 :
+
+Your web site                       :
+
+
+
+Server side:
+""""""""""""
+
+Operating System (name and release) :
+
+HTTP Server (name and release)      :
+
+PHP version and configuration       :
+
+     You can join your 'php.ini' file
+     or the result of the 'phpinfo' function
+
+Database software and release       :
+
+phpMyChat version and configuration :
+
+     You can join your 'config.lib.php' file
+     (without the password you use)
+
+URL where the bug can be seen       : http://
+
+
+
+Client side:
+""""""""""""
+
+Operating system (name and release) :
+
+Browser (name and release)          :
+
+
+
+Brief description of the bug/problem:
+"""""""""""""""""""""""""""""""""""""
+
+
+
+Details:
+""""""""
+
+
+
+
+
+
+---8<-------------------------------------------------------------------

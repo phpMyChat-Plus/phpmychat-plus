@@ -1,0 +1,471 @@
+
+--------------------
+ Releases follow up
+--------------------
+
+
+This file presents the evolutions of phpMyChat for each release.
+
+
+v 0.14.6-dev - 26/06/2002
+"""""""""""""""""""""""""
+
+  BUG FIXED   : fixed collapses between phpMyChat and other scripts login and
+		password .
+  BUG FIXED   : some more security issues has been fixed thanks to
+		Alexei Shalin <happyalex@totel.kg>, Pepe <pepe@feeha.sk>
+                & Sergey Sazonenkov <seazon@users.sourceforge.net>.
+  BUG FIXED   : the beginning of a message sent to an user whose name starts
+		with "www" by clicking on his nick on the users frame was changed to an
+		url. Fixed thanks to Pepe <pepe@feeha.sk>.
+  ENHANCEMENT : iso-8859-2 charsets uses the same font faces than iso-8859-1.
+  ENHANCEMENT : Azerbaijani, Bulgarian and Hungarian translations have been added
+  		and some other ones have been completed.
+
+
+v 0.14.5 - 02/07/2001
+"""""""""""""""""""""
+
+  BUG FIXED   : two security issues has been fixed thanks to
+		Alexei Shalin <happyalex@totel.kg>.
+  BUG FIXED   : nicks containing dot characters can't be deleted/banished/updated
+		in the administration sheets
+  BUG FIXED   : when registered users used the '/join' command or clicked on the
+		link in an invitation messages they may loose their rights or be
+		kicked off because of a wrong password encoding.
+		Bug fixed thanks to Tinou <tinou@tinou.net>.
+  ENHANCEMENT : some translations have been completed.
+
+
+v 0.14.4 - 31/05/2001
+"""""""""""""""""""""
+
+  BUG FIXED   : some important security fixes have been merged into this release.
+  BUG FIXED   : users may be displayed twice at the user frame under PostgreSQL.
+  ENHANCEMENT : some translations have been completed and Argentinian spanish has been
+		added.
+
+
+v 0.14.3 - 16/05/2001
+"""""""""""""""""""""
+
+  ENHANCEMENT : clicking on the connection status button (at the 'exit' frame) if it turns
+		to red now frees the submit button at the 'input' frame.
+  ENHANCEMENT : gender of the user is displayed in the users list rather than the whois
+		icon.
+  ENHANCEMENT : some translations have been completed and Malay has been added.
+  ENHANCEMENT : a bug report form has been added in the 'docs' directory.
+  BUG FIXED   : some important security fixes have been merged into this release thanks to
+		contributors.
+  BUG FIXED   : the (in)famous javascript bug with IE4 thanks to
+	 	Maiwen zhang <zhangmaiwen@yeah.net>.
+  BUG FIXED   : if one close a 'whois popup' after he/she left the chat, a js error was
+	 	displayed.
+  BUG FIXED   : overlapped chat name rooms with Netscape 4+.
+  BUG FIXED   : the 'refresh' header is not a valid one according to RFC specifications:
+		it's actually just an HTML one, then it has been moved back in an HTML
+                meta tag.
+  BUG FIXED   : the test to avoid space characters in nicks had been accidentally removed
+		from the 0.14.2.
+  CHANGE      : the 'C_BAD_WORDS' setting has been renamed to 'C_NO_SWEAR' in the
+		configuration file.
+
+
+v 0.14.2 - 27/02/2001
+"""""""""""""""""""""
+
+  ENHANCEMENT : the function to optimize tables with PostgreSQL has been implemented thanks
+		to Peter Hasko <pepe@feeha.sk> & 'spirit' <spirit@feeha.sk>.
+  ENHANCEMENT : all the default public rooms are displayed in the users list, even empty
+		ones.
+  ENHANCEMENT : the IRC like '/me' command has been added.
+  ENHANCEMENT : Some translations have been completed; Estonian and Turkish ones have
+			been added.
+  BUG FIXED   : There were some typos inside the 'headers()' calls. They have been fixed
+			thanks to Don Schueler <dons@axio.com>.
+			Maybe this will help to fix some of the problems under IE5 for Mac and Opera.
+
+
+v 0.14.1 - 28/12/2000
+"""""""""""""""""""""
+
+  ENHANCEMENT : all the JavaScript work has been rewritten to ensure a better compatibility
+			with old browsers.
+  ENHANCEMENT : a second hidden frame handles what is sent by the user at the 'input' frame
+			to reduce the server work.
+  ENHANCEMENT : the way smilies are taken into account has been rewritten to make it easier
+			to add your own ones.
+  ENHANCEMENT : the red color for message is reserved to the administrator and the moderators
+			of the current room thanks to Christian Hacker <c.hacker@dreamer-chat.de>.
+  ENHANCEMENT : Add the ability to have a translated caption for the submit button in the input
+			frame thanks to Khalid Aljabri <webksa@yahoo.com>.
+  ENHANCEMENT : A separator has been added between the messages sent 'today' and the oldest
+			ones.
+  ENHANCEMENT : Notification messages for exit when an user is kicked or banished are explicit.
+  ENHANCEMENT : a mail sending feature has been added to the administration sheets thanks to
+			Christian Hacker <c.hacker@dreamer-chat.de>.
+  ENHANCEMENT : Far better support for right-to-left written languages thanks to
+			Khalid Aljabri <webksa@yahoo.com>.
+  ENHANCEMENT : Some translations have been completed and Catalan has been added.
+  BUG FIXED   : when inviting an user whose nick contains a single quote, a SQL error occurs.
+  BUG FIXED   : when banishing an user 'forever', PostgreSQL send an out of range error.
+			And test for banishment doesn't run for private rooms (except when user
+		 	tries to enter this private room from the 'join' command).
+  BUG FIXED   : clicking on an message sender name kills the message frame appending work.
+  BUG FIXED   : lots of problems with the 'invite' command when it used inside a private room.
+  BUG FIXED   : users aren't deleted from the users list/table when they use the 'exit' command
+			to leave the chat.
+  BUG FIXED   : a stupid mistake in e-mail validation for the registration and modification of
+			the profiles.
+  CHANGE      : the first and second administration scripts have been rewritten to become more
+			usable.
+
+
+v 0.14.0 - 29/11/2000
+"""""""""""""""""""""
+
+  Thanks a lot to all beta users who helped us making this release stable and so featured,
+  and to all translators we give a lot of work.
+
+  Despite a lot of debug, there are still problems with Mac version of
+  Internet Explorer 5 ...
+
+
+  TABLES HAVE BEEN UPDATED !!!
+
+  ENHANCEMENT : for DHTML enabled browsers, added a hidden frame that checks for new
+			messages and changes to the users' list. This also allows for much
+			faster, non-blinking appearance of new messages.
+                	Under these conditions, the state of the connection to the database
+			is displayed in a changing color icon form.
+  ENHANCEMENT : the script now grabs the IP of users (and attempts to find the 'true' IP when
+			the user is behind a proxy). Only the administrator or moderators of
+			default rooms (those defined in 'chat/config.lib.php') can see this 
+			information in the whois popup.
+  ENHANCEMENT : a banishing feature (by IP and nick) has been added.
+  ENHANCEMENT : the admin script has been rewritten to take into account banished users.
+  ENHANCEMENT : you can now choose to generate a password and send it to the e-mail user
+			address during the regsitration process. Thanks to
+			Jose' Carlos Pereira <phpHeaven@abismo.org>.
+  ENHANCEMENT : e-mail validation is now much accurate according to the RFC822 (but maybe not
+			fully compliant).
+  ENHANCEMENT : the administrator may kick an user whatever is the room this user is chatting
+			into.
+  ENHANCEMENT : a little clickable icon has beeen added before the nick of registered users in
+			the users list. Such a click will display the whois popup for the users,
+			unless the user clicks on the icon corresponding to his own nick. In
+			that case, the profile command for that user will be run.
+  ENHANCEMENT : all nicks, except for the current user, are now 'clickable' in the users frame,
+			even those of users chatting in others rooms.
+  ENHANCEMENT : all nicks of senders in the messages frame are now 'clickable'. Such a click
+			will add the command for private messages to the clicked user in the
+			input box (credit for the idea goes to 'lion_cool').
+  ENHANCEMENT : private messages become again room dependant but the '/invite' command has been
+			created to invite an user to join the current room of the message
+			sender.
+  ENHANCEMENT : commands are now clickable in the help popup (credit for the idea goes to
+			Ray Lopez <kaidream@hotmail.com>).
+  ENHANCEMENT : settings for the save command have been modified so the administrator can
+			specify a maximum number of messages to be exported.
+  ENHANCEMENT : the javascript stuff to avoid multiple submission of the input frame has
+			been improved.
+  ENHANCEMENT : Some rooms name may be reserved for private rooms in the config file (credit
+			for this idea goes to Michael Newlyn Blake <mblake@frogtown.com>).
+  ENHANCEMENT : Autocompletion of forms under IE has been set to off.
+  ENHANCEMENT : added gender information to the registered users profiles.
+  ENHANCEMENT : take into account languages that are written from the right to the left.
+  ENHANCEMENT : Some translations have been completed and three added (French Canadian, Bosnian
+			and Arabic).
+  BUG FIXED   : lots of bugs under IE5 for Mac have been fixed thanks to
+			Paul Brejla <paul@justmac.de>.
+  BUG FIXED   : huge debugging of the way the status of users is defined.
+  CHANGE      : languages detection system has been rewritten that it will be easy to add
+			or remove translations.
+  CHANGE      : code for persistent connection mode has been removed because of an
+			unfixable bug.
+  CHANGE      : javascript alert box is no longer displayed when a promote command runs
+			succesfully.
+  CHANGE      : all system messages are now stored in the same way in the messages table.
+			The user name is 'SYS xxx' where xxx stands for the action (enter,
+			exit, promote, delusr, announce, inviteTo and inviteFrom).
+
+
+v 0.13.3 - 10/10/2000
+"""""""""""""""""""""
+
+  ENHANCEMENT : For MySQL database, the OPTIMIZE function is called by the
+			'admin.php'script.
+  ENHANCEMENT : Many cosmetic changes in the help popup (clicking smilies,
+			position of the popup...) thanks to
+			Laurent BRANCALEONI <l.brancaleoni@ision.fr>.
+  ENHANCEMENT : The administrator can always see the e-mail address of an user in
+			the whois popup thanks to Tinou <tinou@tinou.net>.
+  ENHANCEMENT : Added a command to save messages in a local HTML file thanks to
+			Tinou <tinou@tinou.net>. This feature can be enabled in the
+			config file.
+  ENHANCEMENT : Private messages are no more room dependant; i.e., you can send such a
+			message to an user who chats in an other room than the one you
+			are in.
+  ENHANCEMENT : Added a test to avoid twice submitted messages.
+  ENHANCEMENT : Code for persistent connections in messages.php have been put in
+			an independant file to reduce the parsing work for the
+			server.
+  ENHANCEMENT : A message is displayed when the English tutorial is loaded because
+			there is no translation.
+  ENHANCEMENT : Some translations have been completed and a new one has been added
+			(Georgian).
+  BUG FIXED   : 'require' and 'include' paths have been modified to take into account
+			the case in which 'include_path var' is defined in the PHP config
+			file thanks to Laurent BRANCALEONI <l.brancaleoni@ision.fr>.
+  BUG FIXED   : the $PWD variable used in some of the scripts may be owerwriten by
+			the PHP-ENV-Variable $PWD when track_vars option is enabled.
+  CHANGE      : the 'chat/link.php' script has been renamed to 'chat/link.htm.'
+  CHANGE      : the message sent by the promote command is no longer private.
+  CHANGE      : the 'chat/command.php' file has been renamed and moved to the 'chat/lib'
+			directory.
+  CHANGE      : an independant script for the translation from text codes to graphical
+			smilies into messages has been created and put in 'chat/lib'
+			directory so it will be easier to modify the list of smilies
+			used by the script.
+
+
+v 0.13.2 - 20/09/2000
+"""""""""""""""""""""
+
+  ENHANCEMENT : Added a tutorial that users may launch from the start screen thanks to
+			Sharif Islam <mislam@students.uiuc.edu>
+			& Jessica Gibson <oram@uiuc.edu>.
+  ENHANCEMENT : All the scripts have been well documented, so you should be able to
+			change them according to your wants fairly easily.
+  ENHANCEMENT : Join command and index.lib.php have been rewriten together in order
+			to reduce the number of SQL queries.
+  ENHANCEMENT : Add a beep feature in users popup for notification of user entrance.
+  ENHANCEMENT : Message from the system (notification of user entrance/exit, promotion
+			to moderator...) are now all language dependant.
+  ENHANCEMENT : Replaced the drop down list for message color by a color picker for 
+			JavaScript1.1+ enabled browsers thanks to
+			Tomas Haluza <thaluza@kiss.cz>, else display the drop down list.
+  ENHANCEMENT : Added a 'swear words' filter thanks to Gustavo Iwamoto <iwamoto@zaz.com.br>
+			and Fabiano R. Prestes <zoso@post.com>
+  ENHANCEMENT : Added persistent connection mode that allows much faster and non-blinking
+			appearance of new messages thanks to Jezek2 of the phpHeaven Team.
+  ENHANCEMENT : Added an undocumented command to lauch the help popup : /help or /?
+  ENHANCEMENT : ignored nicks are dynamicaly displayed in the ignored popup.
+  ENHANCEMENT : Setup process to automatically check for administrator language at startup.
+  ENHANCEMENT : three more translations (Croatian, partial Korean and some Japanese words).
+  BUG FIXED   : some problems of compatibility with php4 have been solved using
+			associated arrays for input data (POST, GET, cookies, environment and
+			other server variables).
+  BUG FIXED   : on the start page, links for registering and admin stuff lacks of the
+			chat path for javascript non-enabled browsers.
+  BUG FIXED   : users list in users frame and users popup is now well displayed under
+			Netscape Navigator.
+  BUG FIXED   : user can no longer chat in two rooms at the same time with the same nick.
+  BUG FIXED   : user will be automatically connected again when they resize the main
+			window with Netscape.
+  BUG FIXED   : bad link was displayed in whois popup when the user had registered an
+			url without the "http://" prefix.
+  BUG FIXED   : list of nicks separated by a comma wasn't working in the ignore command.
+  BUG FIXED   : cookies didn't work the way they should because of invalid
+			specifications.
+  CHANGE      : the readme.txt file and the whole 'docs' dir have been put to the root
+			of the package.
+
+
+v 0.13.1 - 21/07/2000
+"""""""""""""""""""""
+  ENHANCEMENT : rewrite of the "easy configuration" process. It now allows
+			a choice of interface languages. Also a far better English
+			syntax thanks to Martin Edelius <martin.edelius@spirex.se>.
+
+
+v 0.13.0 - 20/07/2000
+"""""""""""""""""""""
+
+  Huge debugging of the whole script and enhancements, thank to
+	Lolo and Jezek2 of the phpHeaven Team,
+	Alexei Shalin <sysadmin@dom.bishkek.su>,
+	Dean Lin <dean@xlinux.com>,
+	Martin Edelius <martin.edelius@spirex.se>,
+	Charles <webmestre@picardie-infos.com>,
+	Sébastien BERNARD <sbernard@mouzaia.com>,
+	and many other people with great ideas ...
+
+  BUG FIXED   : a private message containing a comma gave an error
+  BUG FIXED   : when a registered user called the join command or clicked
+			on a room name at the users frame, the value of the php variable
+			that contained the password was automatically changed so it no
+			longer corresponded to the password stored in the database.
+  BUG FIXED   : an user who didn't quit phpMyChat in a clean way and who
+			was then kicked by the admin or a moderator never was
+			removed from the database.
+  BUG FIXED   : problems with IE when messages with iso-8859-1 special
+			characters were typed in on a non iso-8859-1 charset
+  BUG FIXED   : bad regular expressions to exclude some special
+			characters from users and rooms name in 'index.php', 
+			'register.php', 'edituser.php'...
+  BUG FIXED   : bad number of message displayed in the message frame when
+			notification was off
+  BUG FIXED   : when no messages were available and notify was off,
+			the 'no message' text wasn't displayed
+  BUG FIXED   : because of notifications, rooms created by users were always
+			displayed in the start page even if there was no "true"
+			message into.
+  ENHANCEMENT : new lib to add the number or list of users connected to any
+			of your own pages
+  ENHANCEMENT : new lib to add the chat connexion layout to your own page
+  ENHANCEMENT : registered users can now log with the same nick even if they
+			weren't deleted from db.
+  ENHANCEMENT : rewrite of the "easy configuration" process that allows now
+			to update database from previous releases (0.12.0 & 0.12.1)
+  ENHANCEMENT : from the admin script, you can now delete rooms. And registered
+			users who haven't login for a delay defined in config file
+			may be automatically deleted.
+  ENHANCEMENT : status of users (admin or moderator/other) are now displayed
+			in user list
+  ENHANCEMENT : you can set a timezone offset between server time and your
+			country in config file.
+  ENHANCEMENT : server time is now displayed in status bar if user choose to
+			show timestamps before messages.
+  ENHANCEMENT : new command '/promote'
+  ENHANCEMENT : database structure and access optimisation
+  ENHANCEMENT : in the config file, a switch allows to show/hide the delete
+			profile link at the start page
+  ENHANCEMENT : three more translations (swedish, romanian and greek)
+  CHANGE      : commands have been separated in multiple files, one for each
+  CHANGE      : commands in help popup are now ordered alphabetically
+
+
+v 0.12.1 - 13/06/2000
+"""""""""""""""""""""
+
+  BUG FIXED   : database query error while kicking an user.
+
+
+v 0.12.0 - 12/06/2000
+"""""""""""""""""""""
+
+  Huge revalidation of the whole script.
+
+  ENHANCEMENT : a registration procedure is available for users, and you can
+			choose to allow only regitered users, or not, with a switch in
+			config file (optional registration is default).
+  ENHANCEMENT : administrator functionalities have been created. You can put
+			a link to run them at the first screen of the chat
+			with a switch in config file (default is disabled).
+  ENHANCEMENT : multi-language stuff can be disabled with a switch in config
+			file (default to enabled).
+  ENHANCEMENT : notifications are added to message tables when users log in or
+			exit. A switch in config file set them displayed or not to
+			default.
+  ENHANCEMENT : more commands (true private messages, whois popup,
+			kick for the administrator of a room, profile to edit his
+			own one, notify to show/hide notifications).
+  ENHANCEMENT : a php setup file has been added to simplify phpMyChat
+			installation.
+  ENHANCEMENT : help popup now contains some lines for text formatting elements.
+  ENHANCEMENT : all "_top" targets in link tags and top objects in javascript
+			functions have been replaced by "_parent".
+  ENHANCEMENT : more translations.
+  BUG FIXED   : style sheet problem in link frame with Netscape Navigator.
+
+
+v 0.11.2 - 30/05/2000
+
+"""""""""""""""""""""
+
+  ENHANCEMENT : when users forget to choose a room, they are logged
+			into the first default room
+  ENHANCEMENT : more translations
+  BUG FIXED   : error when single quotes are included in messages
+
+
+v 0.11.1 - 18/05/2000
+"""""""""""""""""""""
+
+  BUG FIXED   : error in PostgreSQL library
+  BUG FIXED   : style sheet problem in help popup
+  BUG FIXED   : language translation corrections
+
+
+v 0.11.0 - 17/05/2000
+"""""""""""""""""""""
+
+  ENHANCEMENT : more IRC-like commands, thanks to
+                  Loïc Chapeaux <loic-info@netcourrier.com>
+  ENHANCEMENT : user can now chose the interface language, thanks to
+                  Loïc Chapeaux <loic-info@netcourrier.com>
+  BUG FIXED   : PERL-like regular expressions used only if they are supported  
+  BUG FIXED   : database connections number minimized to avoid errors
+
+
+v 0.10.3 - 28/04/2000
+"""""""""""""""""""""
+
+  BUG FIXED
+
+
+v 0.10.2 - 28/04/2000
+"""""""""""""""""""""
+
+  ENHANCEMENT : now supports some IRC-like commands, thanks to
+                  Loïc Chapeaux <loic-info@netcourrier.com>
+
+
+v 0.10.1 - 21/04/2000
+"""""""""""""""""""""
+
+  BUG FIXED   : moving to another room was impossible
+  CHANGE      : available languages shown on index page as flags
+
+
+v 0.10.0 - 19/04/2000
+"""""""""""""""""""""
+
+  A LOT OF CHANGES, YOU MUST MODIFY YOUR TABLES IN THE DATABASE !!!
+  
+  ENHANCEMENT : now supports PostgreSQL database, thanks to
+                  Martin Dvorak <jezek2@penguin.cz>
+  ENHANCEMENT : now supports ODBC, thanks to J. "Guli" Mikulas <guli1@email.cz>
+  ENHANCEMENT : now accepts some HTML tags in messages (configurable), thanks to
+                  Martin Dvorak <jezek2@penguin.cz> and Matthieu Belge <mbelge@free.fr>
+  CHANGE      : more and more options in config/config.lib.php !!!
+
+
+v 0.9.2 - 14/04/2000
+""""""""""""""""""""
+
+  LANGUAGE    : Czech by Martin Dvorak <jezek2@penguin.cz>
+
+
+v 0.9.1 - 14/04/2000
+""""""""""""""""""""
+
+  BUG FIXED   : Users in private rooms were counted on index page
+  ADDITION    : First release with '*.txt' files
+
+
+v 0.9.0 - 13/04/2000
+""""""""""""""""""""
+
+  ENHANCEMENT : Messages order chosable by the user, default one chosen by admin
+  LANGUAGE    : Thai by Patrice Thiroloix <keng@franco-thai.com>
+
+
+v 0.8.0 - 03/04/2000
+""""""""""""""""""""
+
+
+v 0.7.0 - 09/03/2000
+""""""""""""""""""""
+
+  CHANGE      : configuration done with constants instead of variables
+  ENHANCEMENT : now works with PHP4
+  ENHANCEMENT : list of users in a popup
+  ENHANCEMENT : language now configurable, English and French available
+
+
+v 0.1.0 - ?
+"""""""""""
+
+  First release, so no bugs, no changes and no enhancements !!! :D
