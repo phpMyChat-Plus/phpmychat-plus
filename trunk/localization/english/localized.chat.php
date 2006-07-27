@@ -216,7 +216,7 @@ define("L_HELP_CMD_31", "Change the order users are sorted in lists: by entrance
 define("L_HELP_CMD_32", "This is a third (roleplaying) version of the dice rolling.<br>Usage: /d{n1}[tn2] or /d{n1};<br>n1 can take any value <b>between 1 and 100</b> (it represents the number of rolls per dice).<br>n2 can take any value <b>between 1 and %s</b> (it represents the number of rolling dices per throw).");
 define("L_HELP_ETIQ_1", "Chat Etiquette");
 define("L_HELP_ETIQ_2", "Our site would like to keep its community friendly and fun, so please adhere to the following guidelines. If you fail to observe these rules, one of our chat moderators may boot you from the chat.<br><br>Thank you,");
-define("L_HELP_ETIQ_3", "Our Chat Etiquette Guidelinese");
+define("L_HELP_ETIQ_3", "Our Chat Etiquette Guidelines");
 define("L_HELP_ETIQ_4", "Do not &quot;spam&quot; the chat by typing nonsense or random letters.</li><li>Do not use aLtErnAtiNg characters</li><li>Keep ALL CAPS use to a minimum, as it is considered yelling</li><li>Keep in mind that our chat users are from all over the world, and, most likely, you will encounter people of different beliefs. Please be kind and polite to these people.</li><li>Do not direct profanity towards other members.  In fact, try to steer clear of using profanity and/or swear words altogether</li><li>Do not call other members by their real names that they may not appreciate. Use their nicknames instead.");
 
 // messages frame
