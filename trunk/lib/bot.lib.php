@@ -40,11 +40,9 @@ global $uid ;                   // WORKS  it is to keep the bot on a topic per u
           		$BOT = C_BOT_NAME;
               //Format response for phpMyChat DB
               $D1 = ereg_replace("[\r]|[\n]|\t", " ",$botresponse->response) ;
-
               $D1 = "<FONT COLOR=".C_BOT_FONT_COLOR."><I>" . $D1 . "</I></FONT>" ;
               $D1 = "".$myuniqueid  . " > " . $D1;
               $D1 = trim($D1) ;
-
               global $numselects;
               $DR = addslashes($D1);
               //." NumSelect = ".$numselects;
@@ -53,8 +51,8 @@ global $uid ;                   // WORKS  it is to keep the bot on a topic per u
               mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS)or
               die("Could not connect");
               mysql_select_db(C_DB_NAME) ;
-                $mytime = time() + 2;                    // Add 5 secs to bot time, seperates it in the DB better.
-                  mysql_query("INSERT INTO ".C_MSG_TBL." VALUES ('1', '$R', '$BOT', '1', '$mytime', '$Private', '$DR', '')") ;
+              $mytime = time() + 2;                    // Add 5 secs to bot time, seperates it in the DB better.
+              mysql_query("INSERT INTO ".C_MSG_TBL." VALUES ('1', '$R', '$BOT', '1', '$mytime', '', '$DR', '', '')") ;
         }              // End of function
 
                        // set and execute the above function via an if statment WORKS
@@ -73,9 +71,9 @@ global $uid ;                   // WORKS  it is to keep the bot on a topic per u
           global $M;
           global $botmess;
           $botmess = eregi_replace(C_BOT_NAME, "", $M);      // removes the word "BOT NAME" from the input helps the bot to make sense? NEEDS WORK.
-          bottalk($botmess, $R);
+          bottalk(&$botmess, $R);
       }
-     if (eregi("bye ".C_BOT_NAME, $M))             // if statment looks for "bye storm"
+     if (eregi("bye ".C_BOT_NAME, $M))             // if statment looks for "bye bot"
       {
       	unlink ($botpath);                          // it deletes the users file if found
                                                     // Stops coversation with bot

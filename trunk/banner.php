@@ -47,7 +47,7 @@ if (strcasecmp(ucfirst(stripslashes($R)), ROOM9) == 0) $Room = ROOM9;
 		switch ($Room)
 		{
 		default:
-			$UR='This is a default topic for first room and new created. Edit banner.php to change it!';	//topic for the first and all the new created rooms
+			$UR='This is a default topic for first and new created rooms. Edit banner.php to change it!';	//topic for the first and all the new created rooms
 			break;
 		case ROOM2:
 			$UR="This is a default topic for - ".$Room." - room. Edit banner.php to change it!";
@@ -62,7 +62,7 @@ if (strcasecmp(ucfirst(stripslashes($R)), ROOM9) == 0) $Room = ROOM9;
 			$UR="This is a default topic for - ".$Room." - room. Edit banner.php to change it!";
 			break;
 		case ROOM6:
-			$UR="This is a default topic for ".$Room.". Edit banner.php to change it!";
+			$UR="This is a default topic for - ".$Room." - room. Edit banner.php to change it!";
 			break;
 		case ROOM7:
 			$UR="This is a default topic for - ".$Room." - room. Edit banner.php to change it!";
@@ -80,11 +80,18 @@ if (strcasecmp(ucfirst(stripslashes($R)), ROOM9) == 0) $Room = ROOM9;
 		$UR.='This is a default topic. Edit banner.php to change it!';	//same topic for all the rooms
 	};
 };
-$botcontrol ="botfb/$Room.txt";
-if (file_exists($botcontrol))
+	$DbLink->query("SELECT room FROM ".C_USR_TBL." WHERE username='$BOT_NAME'");
+	list($BR) = $DbLink->next_record();
+	$botcontrol ="botfb/$Room.txt";
+	if (file_exists($botcontrol) || $BR ==  $Room)
   {
 		$Expl.= BOT_TIPS;
-		$Ex.='<BR><FONT SIZE=-1 COLOR="40E0D0"><I>'.$Expl.'</I></FONT>';
+		$Ex.='<BR><FONT SIZE=-2 COLOR="40E0D0"><I>'.$Expl.'</I></FONT>';
+	}
+	elseif($BR != "")
+	{
+		$Expl.= BOT_PRIV_TIPS;
+		$Ex.='<BR><FONT SIZE=-2 COLOR="40E0D0"><I>'.$Expl.'</I></FONT>';
 	}
 	else
 	{
@@ -104,6 +111,6 @@ if (file_exists($botcontrol))
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <HEAD>
 <BODY class="frame">
-        <FONT size="2"><I><B>Welcome to <?php echo (stripslashes($R)) ?>!</B> Topic: <span style="letter-spacing: 1pt; color:yellow"><B><BLINK><?php echo ($UR);?></BLINK></B></span></I><?php echo ($Ex);?></FONT>
+        <FONT size="2"><I><B>Welcome to <?php echo (stripslashes($R)) ?>!</B> Topic: <font color=<?php echo($CD); ?>><B><?php echo ($UR);?></B></font></I><?php echo ($Ex);?></FONT>
 </BODY>
 </HTML>

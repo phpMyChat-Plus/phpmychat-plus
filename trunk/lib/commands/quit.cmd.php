@@ -8,7 +8,7 @@ if (trim($Cmd[3]) != "")
 		include("./lib/swearing.lib.php");
 		$Cmd[3] = checkwords($Cmd[3], false);
 	}
-	AddMessage(stripslashes($Cmd[3]), $T, $R, $U, $C, '', '');
+	AddMessage(stripslashes($Cmd[3]), $T, $R, $U, $C, '', '', '');
 }
 $IsCommand = true;
 ?>

@@ -200,7 +200,7 @@ if(isset($E) && $E != "")
 		$DbLink->query("DELETE FROM ".C_USR_TBL." WHERE username='$U' AND room='$E'");
 		if (isset($EN))
 		{
-			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($EN, '$E', 'SYS exit', '', ".time().", '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '')");
+			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($EN, '$E', 'SYS exit', '', ".time().", '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '', '')");
 		}
 	}
 }
@@ -609,9 +609,9 @@ if(!isset($Error) && (isset($N) && $N != ""))
 			$DbLink->query("SELECT type FROM ".C_MSG_TBL." WHERE room='".addslashes($room)."' LIMIT 1");
 			list($type) = $DbLink->next_record();
 			$DbLink->clean_results();
-			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS exit', '', '$current_time', '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '')");
+			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS exit', '', '$current_time', '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '', '')");
 // next line WELCOME SOUND feature altered for compatibility with /away command R Dickow:
-  $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '')");
+  $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
 // modified by R Dickow for /away command:
 			$DbLink->query("UPDATE ".C_USR_TBL." SET room='$R',u_time='$current_time', status='$status', ip='$IP', awaystat='0' WHERE username='$U'");
 // end R Dickow /away modification.
@@ -626,7 +626,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 				// Insert a new welcome message in the messages table
 				include("./${ChatPath}lib/welcome.lib.php");
 				$current_time_plus = $current_time + 1;	// ensures the welcome msg is the last one
-				$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '', '$current_time_plus', '$U', 'sprintf(\"".WELCOME_MSG."\")', '')");
+				$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '', '$current_time_plus', '$U', 'sprintf(\"".WELCOME_MSG."\")', '', '')");
 			};
 		};
 	}
@@ -642,7 +642,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	{
 		$DbLink->query("INSERT INTO ".C_USR_TBL." VALUES ('$R', '$U', '$Latin1', '$current_time', '$status','$IP', '0', '$current_time')");
 // next line WELCOME SOUND feature altered for compatibility with /away command R Dickow:
-   $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '')");
+   $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
 
 		//Color Input Box mod by Ciprian - it will add the status to the curent cookie for the color_popup
 		setcookie("CookieStatus", $status, time() + 60*60*24*365);        // cookie expires in one year
@@ -654,7 +654,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 			// Insert a new welcome message in the messages table
 			include("./${ChatPath}lib/welcome.lib.php");
 			$current_time_plus = $current_time + 1;	// ensures the welcome msg is the last one
-			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '', '$current_time_plus', '$U', 'sprintf(\"".WELCOME_MSG."\")', '')");
+			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '', '$current_time_plus', '$U', 'sprintf(\"".WELCOME_MSG."\")', '', '')");
 		};
 	};
 

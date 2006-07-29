@@ -46,10 +46,6 @@ require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
 require("./lib/clean.lib.php");
 
-//-- BOT control Popeye---------
-if (C_BOT_CONTROL) include("bot/respond.php");
-//-- BOT control---------
-
 header("Content-Type: text/html; charset=${Charset}");
 
 // avoid server configuration for magic quotes
@@ -112,12 +108,12 @@ if ($DbLink->num_rows() != 0)
 	// Update users info
 	if ($room != stripslashes($R))	// Same nick in another room
 	{
-		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '')");
+		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '', '')");
 		$kicked = 3;
 	}
 	elseif ($status == "k")			// Kicked by a moderator or the admin.
 	{
-		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_KICKED, \"".special_char($U,$Latin1)."\")', '')");
+		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_KICKED, \"".special_char($U,$Latin1)."\")', '', '')");
 		$kicked = 1;
 	}
 	elseif ($status == "d")			// The admin just deleted the room
@@ -126,7 +122,7 @@ if ($DbLink->num_rows() != 0)
 	}
 	elseif ($status == "b")			// Banished by a moderator or the admin.
 	{
-		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_BANISHED, \"".special_char($U,$Latin1)."\")', '')");
+		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_BANISHED, \"".special_char($U,$Latin1)."\")', '', '')");
 		$kicked = 4;
 	};
 	if ($kicked > 0)
@@ -163,16 +159,20 @@ else
 
 // Extended one field for Private Message Popup by Ciprian
 // ** Send formated messages to the message table **
-function AddMessage($M, $T, $R, $U, $C, $Private, $Read)
+include("bot/respond.php");
+function AddMessage($M, $T, $R, $U, $C, $Private, $Read, $RF)
 {
-if (BOT_CONTROL && $Private == "")
+if (C_BOT_CONTROL && $Private == "")
 {
 	//--Bot Control Popeye
 $botpath = "botfb/" . $U . ".txt" ;
 $botcontrol ="botfb/$R.txt";
 	if(file_exists($botcontrol))
 	{
-		if (file_exists ($botpath) || eregi(C_BOT_NAME, $M)) include "lib/bot.lib.php";
+		if (file_exists ($botpath) || eregi(C_BOT_NAME, $M))
+		{
+			include "lib/bot.lib.php";
+		}
 	}
 }
 //---End Bot Control
@@ -298,7 +298,7 @@ $botcontrol ="botfb/$R.txt";
 			}
 		}
 		setcookie("CookieColor", $C, time() + 60*60*24*365);        // cookie expires in one year
-	$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', ".time().", '$Private', '".addslashes($M)."', '$Read')");
+	$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', ".time().", '$Private', '".addslashes($M)."', '$Read', '$RF')");
 };
 
 // ** Define the default color that will be used for messages **
@@ -369,11 +369,11 @@ if (isset($M) && trim($M) != "" && (!isset($M0) || ($M != $M0)) && !($IsCommand 
      $Msg = sprintf(L_BACK . C_UPDTUSRS, special_char($U,$Latin1));
      $Msg = " <B>$Msg</B>";
      $awaystat = '0';
-     AddMessage(stripslashes($M), $T, $R, $U, $C, "", "");
-     $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', ".time().", '$Private', '".addslashes($Msg)."', '')");
+     AddMessage(stripslashes($M), $T, $R, $U, $C, "", "", $RF);
+     $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', ".time().", '$Private', '".addslashes($Msg)."', '', '$RF')");
      $DbLink->query("UPDATE ".C_USR_TBL." SET awaystat='0' WHERE username='$U'");
    } else {
-     AddMessage(stripslashes($M), $T, $R, $U, $C, "", "");
+     AddMessage(stripslashes($M), $T, $R, $U, $C, "", "", $RF);
    }
 // END Bob Dickow custom code for /away command modification.
 	$RefreshMessages = true;

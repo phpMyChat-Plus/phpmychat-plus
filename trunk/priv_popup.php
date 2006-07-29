@@ -392,11 +392,11 @@ function postReply10(e,i)
 	$Neww = "Neww";
 	global $DbLinkp;
 	$DbLinkp= new DB;
-	$DbLinkp->query("SELECT m_time, username, room, address, message, pm_read FROM ".C_MSG_TBL." WHERE ((room = '$R' OR room = 'Offline PMs') AND address = '$U' AND username != '$U' AND pm_read = 'New') OR (address = '$U' AND username != '$U' AND pm_read = 'Neww') ORDER BY username AND m_time DESC");
+	$DbLinkp->query("SELECT m_time, username, room, address, message, pm_read, room_from FROM ".C_MSG_TBL." WHERE ((room = '$R' OR room = 'Offline PMs') AND address = '$U' AND username != '$U' AND (pm_read = 'New' OR pm_read = 'Neww')) ORDER BY username AND m_time DESC");
 	$NewPMs = $DbLinkp->num_rows();
 if ($NewPMs == 1)
 {
-	list($T, $User, $Room, $Dest, $M, $Read) = $DbLinkp->next_record();
+	list($T, $User, $Room, $Dest, $M, $Read, $RF) = $DbLinkp->next_record();
 $DbLinkp->clean_results();
 	$Time = date("d-M, H:i:s", $T + C_TMZ_OFFSET*60*60);
 switch ($Read)
@@ -416,7 +416,7 @@ switch ($Read)
 	<TR><TD><B><U><?php echo(L_PRIV_MSG1); ?></U></B></TD>
 		<TD width="100%" style="font-size: 11pt"><B><I><?php echo($User); ?></I></B></TD></TR>
 	<TR><TD><B><U><?php echo(L_PRIV_MSG2); ?></U></B></TD>
-		<TD width="100%"><I><?php echo($Room); ?></I></TD></TR>
+		<TD width="100%"><I><?php echo(($RF == "") || ($RF == $Room) || ($Room != "Offline PMs") ? $Room : $RF); ?></I></TD></TR>
 	<TR><TD><B><U><?php echo(L_PRIV_MSG3); ?></U></B></TD>
 		<TD width="100%"><I><?php echo($Dest); ?></I></TD></TR>
 	<TR><TD><B><U><?php echo(L_PRIV_MSG4); ?></U></B></TD>
@@ -432,7 +432,8 @@ switch ($Read)
 <?php echo(L_PRIV_POPUP); ?> <a href="#" onClick="window.parent.runCmd('profile','<?php stripslashes($Dest) ?>'); return false;" onMouseOver="window.status='Change your settings.'; return true">here</a>.
 </CENTER>
 <?php
-	$DbLinkp->query("UPDATE ".C_MSG_TBL." SET pm_read='Old' WHERE ((room = '$R' OR room = 'Offline PMs') AND address = '$U' AND username != '$U' AND pm_read = 'New') OR (address = '$U' AND username != '$U' AND pm_read = 'Neww') ORDER BY username AND m_time DESC LIMIT 1");
+	$DbLinkp->query("UPDATE ".C_MSG_TBL." SET pm_read='Old' WHERE ((room = '$R' OR room = 'Offline PMs') AND address = '$U' AND username != '$U' AND pm_read = 'New') ORDER BY username AND m_time DESC LIMIT 1");
+	$DbLinkp->query("UPDATE ".C_MSG_TBL." SET pm_read='Oldw' WHERE ((room = '$R' OR room = 'Offline PMs') AND address = '$U' AND username != '$U' AND pm_read = 'Neww') ORDER BY username AND m_time DESC LIMIT 1");
 	$DbLinkp->clean_results;
 	}
 elseif ($NewPMs > 1)
@@ -453,8 +454,8 @@ if($NewPMs > 10)
 <?php
 	$i = 1;
 	$DbLinkp->clean_results;
-	$DbLinkp->query("SELECT m_time, username, room, address, message, pm_read FROM ".C_MSG_TBL." WHERE ((room = '$R' OR room = 'Offline PMs') AND address = '$U' AND username != '$U' AND pm_read = 'New') OR (address = '$U' AND username != '$U' AND pm_read = 'Neww') ORDER BY username AND m_time DESC LIMIT 10");
-	while(list($T, $User, $Room, $Dest, $M, $Read) = $DbLinkp->next_record())
+	$DbLinkp->query("SELECT m_time, username, room, address, message, pm_read, room_from FROM ".C_MSG_TBL." WHERE ((room = '$R' OR room = 'Offline PMs') AND address = '$U' AND username != '$U' AND (pm_read = 'New' OR pm_read = 'Neww')) ORDER BY username AND m_time DESC LIMIT 10");
+	while(list($T, $User, $Room, $Dest, $M, $Read, $RF) = $DbLinkp->next_record())
 {
 	$Time = date("d-M, H:i:s", $T + C_TMZ_OFFSET*60*60);
 switch ($Read)
@@ -467,7 +468,7 @@ switch ($Read)
 	break;
 }
 ?>
-	<TR><TD width="73%"><B><?php echo($i.". "); ?><U><?php echo(L_PRIV_MSG1); ?></U>&nbsp;<SPAN style="font-size: 11pt"><?php echo($User); ?></SPAN></B></TD><TD align="right" style="font-size: 8pt"><I><U><?php echo(L_PRIV_MSG5); ?></U>&nbsp;<?php echo($Time); ?></I></TD></TR>
+	<TR><TD width="73%"><B><?php echo($i.". "); ?><U><?php echo(L_PRIV_MSG1); ?></U>&nbsp;<SPAN style="font-size: 11pt"><?php echo($User); ?></SPAN></B>&nbsp;(<B><U><?php echo(L_PRIV_MSG2); ?></U></B>&nbsp;<I><?php echo(($RF == "") || ($RF == $Room) || ($Room != "Offline PMs") ? $Room : $RF); ?></I>)</TD><TD align="right" style="font-size: 8pt"><I><U><?php echo(L_PRIV_MSG5); ?></U><br><?php echo($Time); ?></I></TD></TR>
 	<TR><TD width="100%" style="font-size: 12pt" colspan="2"><I><?php echo($M); ?></I></TD></TR>
 <TR><TD width="100%" colspan="2"></TD></TR>
 <input type="hidden" value="<?php echo($ReplyTo) ?>" name="ReplyTo<?php echo($i)?>">

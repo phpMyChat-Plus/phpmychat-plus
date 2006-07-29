@@ -68,7 +68,11 @@ require_once "plugins/customtags.php";
 *
 * @return string                    The bot's reply.
 */
-function replybotname($userinput,$uniqueid,$botname = "PlusBot"){
+function replybotname($userinput,$uniqueid,$botname){
+  $userinput = eregi_replace("^\/to  (private)", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
+  $userinput = eregi_replace("^\/msg  (private)", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
+  $userinput = eregi_replace("^\/wisp  (whisper)", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
+  $userinput = eregi_replace("^\/whisp  (whisper)", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
 
 	$botid = lookupbotid($botname);
 
@@ -113,7 +117,7 @@ function replybotname($userinput,$uniqueid,$botname = "PlusBot"){
 *
 * @return object                        A class link to 'Response'.
 */
-function reply($userinput,$uniqueid, $bot = 1){
+function reply($userinput,$uniqueid, $bot){
 
 	global $that,$topic,$uid,$loopcounter,$patternmatched,$inputmatched,$selectbot;
 

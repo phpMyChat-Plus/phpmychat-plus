@@ -47,7 +47,7 @@ while(list($userroom, $userclosed, $usertime) = $Chat->next_record())
 {
 $when = date('r', $usertime + C_TMZ_OFFSET*60*60);
 $userclosed = addslashes($userclosed);
-$ChatM->query("INSERT INTO ".C_MSG_TBL." VALUES ('1', '".$userroom."', 'SYS exit', '', ".time().", '', 'sprintf(L_CLOSED_ROM, \"($when) $userclosed\")', '')");
+$ChatM->query("INSERT INTO ".C_MSG_TBL." VALUES ('1', '".$userroom."', 'SYS exit', '', ".time().", '', 'sprintf(L_CLOSED_ROM, \"($when) $userclosed\")', '', '')");
 $ChatM->query("DELETE FROM ".C_USR_TBL." WHERE username='".$userclosed."'");
 };
 $Chat->close();
@@ -64,8 +64,8 @@ $ChatU->query("DELETE FROM ".C_USR_TBL." WHERE ".$CondForQueryU."");
 $CleanUsrTbl = ($ChatU->affected_rows() > 0);
 if($ChatU->affected_rows() > 0)
 {
-$ChatU->query("INSERT INTO ".C_MSG_TBL." VALUES ('1', '".$room."', 'SYS exit', '', ".time().", '', 'sprintf(L_BOOT_ROM, \"$U\")', '')");
-$ChatU->query("INSERT INTO ".C_MSG_TBL." VALUES ('1', '".$room."', 'SYS exit', '', ".time().", '', 'sprintf(L_EXIT_ROM, \"$U\")', '')");
+$ChatU->query("INSERT INTO ".C_MSG_TBL." VALUES ('1', '".$room."', 'SYS exit', '', ".time().", '', 'sprintf(L_BOOT_ROM, \"$U\")', '', '')");
+$ChatU->query("INSERT INTO ".C_MSG_TBL." VALUES ('1', '".$room."', 'SYS exit', '', ".time().", '', 'sprintf(L_EXIT_ROM, \"$U\")', '', '')");
 $ChatU = '';
 ?>
 <SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">

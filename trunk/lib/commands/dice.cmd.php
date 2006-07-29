@@ -14,7 +14,7 @@ if(($Cmd[1] > '0') && ($Cmd[1] <= MAX_ROLLS))
          };
 			$M = "<font size = -2 color = red>".addslashes($nums);
 			$M .= " (sum = ".$sum.")</font></b>&nbsp;<img src=images/tick.gif>";
-      $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS dice1', '', '".time()."', '$U', '$M', '')");
+      $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS dice1', '', '".time()."', '$U', '$M', '', '')");
 		}
  	elseif ($Cmd[1] == '')
      {
@@ -30,7 +30,7 @@ if(($Cmd[1] > '0') && ($Cmd[1] <= MAX_ROLLS))
          };
 			$M = "<font size = -2 color = red>".addslashes($nums);
 			$M .= " (sum = ".$sum.")</font></b>&nbsp;<img src=images/tick.gif>";
-      $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS dice1', '', '".time()."', '$U', '$M', '')");
+      $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS dice1', '', '".time()."', '$U', '$M', '', '')");
  		}
     else
 		       {
