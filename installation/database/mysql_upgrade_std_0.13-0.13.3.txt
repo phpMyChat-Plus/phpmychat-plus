@@ -233,53 +233,25 @@ CREATE TABLE c_lurkers (
   KEY file (file)
 ) TYPE=MyISAM;
 
-CREATE TABLE c_messages (
-  type tinyint(1) NOT NULL default '0',
-  room varchar(30) NOT NULL default '',
-  username varchar(30) NOT NULL default '',
-  latin1 tinyint(1) NOT NULL default '0',
-  m_time int(11) NOT NULL default '0',
-  address varchar(30) NOT NULL default '',
-  message text NOT NULL,
-  pm_read varchar(10) NOT NULL default ''
-) TYPE=MyISAM;
+ALTER TABLE c_messages
+			ADD pm_read varchar(10) NOT NULL default '',
+			ADD room_from varchar(30) NOT NULL default '';
 
-CREATE TABLE c_reg_users (
-  username varchar(30) NOT NULL default '',
-  latin1 tinyint(1) NOT NULL default '0',
-  password varchar(32) NOT NULL default '',
-  firstname varchar(64) NOT NULL default '',
-  lastname varchar(64) NOT NULL default '',
-  country varchar(64) NOT NULL default '',
-  website varchar(64) NOT NULL default '',
-  email varchar(64) NOT NULL default '',
-  showemail tinyint(1) NOT NULL default '0',
-  perms varchar(9) NOT NULL default '',
-  rooms varchar(128) NOT NULL default '',
-  reg_time int(11) NOT NULL default '0',
-  ip varchar(16) NOT NULL default '',
-  gender tinyint(1) NOT NULL default '0',
-  allowpopup tinyint(1) NOT NULL default '1',
-  picture varchar(255) NOT NULL default '',
-  description text NOT NULL,
-  favlink varchar(255) NOT NULL default '',
-  favlink1 varchar(255) NOT NULL default '',
-  slang varchar(255) NOT NULL default '',
-  colorname varchar(25) NOT NULL default '',
-  avatar varchar(255) NOT NULL default ''
-) TYPE=MyISAM;
+ALTER TABLE c_reg_users
+			ADD ip varchar(16) NOT NULL default '',
+			ADD gender tinyint(1) DEFAULT '0' NOT NULL default '',
+			ADD allowpopup tinyint(1) NOT NULL default '1',
+			ADD picture varchar(255) NOT NULL default '',
+			ADD description text NOT NULL,
+			ADD favlink varchar(255) NOT NULL default '',
+			ADD favlink1 varchar(255) NOT NULL default '',
+			ADD slang varchar(255) NOT NULL default '',
+			ADD colorname varchar(25) NOT NULL default '',
+			ADD avatar varchar(255) NOT NULL default '';
 
-INSERT INTO c_reg_users VALUES ('admin', '', '21232f297a57a5a743894a0e4a801fc3', '', '', '', '', '', 0, 'admin', '', '', '', 0, 1, '', '', '', '', '', 'red', './images/avatars/def_avatar.gif');
 INSERT INTO c_reg_users VALUES('plusbot', '', '47e014ee34869ded7e5236541246319d', 'Bot', 'phpMyChat - Plus', 'WorldWideWeb', '', 'bot@bot.bot.com', '0', 'admin', '', 1130763311, '', '1', '0', './images/alice.gif', 'I am a Robot originally called Alice; I am proud to be the first Artificial Intelligence on the net! Please test my capabilities as you wish! To start a conversation with me, just type "/hello PlusBot" in the room I am active in, to stop the conversation type "/bye PlusBot". Ohhh... I wish to express my gratitude to Roy, Popeye and Ciprian for making me available for chatting in here. :)', 'http://ciprianmp.com/plus', 'http://plus/gamedogs.com', 'English only', 'olive', './images/avatars/avatar52.gif');
 
-CREATE TABLE c_users (
-  room varchar(30) NOT NULL default '',
-  username varchar(30) NOT NULL default '',
-  latin1 tinyint(1) NOT NULL default '0',
-  u_time int(11) NOT NULL default '0',
-  status char(1) NOT NULL default '',
-  ip varchar(16) NOT NULL default '',
-  awaystat char(1) NOT NULL default '0',
-  r_time int(11) NOT NULL default '0',
-  UNIQUE KEY room (room,username)
-) TYPE=MyISAM;
+ALTER TABLE c_users
+			ADD ip varchar(16) NOT NULL default '',
+			ADD awaystat char(1) NOT NULL default '0',
+			ADD r_time int(11) NOT NULL default '0';

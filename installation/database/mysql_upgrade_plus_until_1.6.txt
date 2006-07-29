@@ -1,0 +1,2 @@
+ALTER TABLE c_config ADD EMAIL_USER enum('0','1') NOT NULL default '1';
+ALTER TABLE c_messages ADD room_from varchar(30) NOT NULL default '';
