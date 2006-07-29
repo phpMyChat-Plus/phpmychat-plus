@@ -15,7 +15,7 @@ if (($status == "m") OR ($status == "a")) // use this to enable /buzz for both a
 	{
 	  $M = "<B>[Buzzz... Signal]</B> " . $Cmd[2] . L_BUZZ_SND ;
 	}
-		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', ".time().", '$Private', '".addslashes($M)."', '')");
+		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', ".time().", '$Private', '".addslashes($M)."', '', '')");
 		$IsCommand = true;
 		$RefreshMessages = true;
 }

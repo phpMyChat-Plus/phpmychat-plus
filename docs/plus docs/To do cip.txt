@@ -1,21 +1,23 @@
 -Log archive - Ciprian - done
--img width in config - done
--move smilies to bottom in help - done
+-img width in config - Ciprpian -done
+-move smilies to bottom in help - Ciprian - done
 -avatar - done
 -bot - done
--register from room - done
--first/last name optional or compulsory - done
--colored nickname in profile - done
--colored nickname in loader - done
--lurking mod - done
--users list ordered by entrance time - done (/sort command)
--color filters for admin and mod in usernames as well - done
+-register from room - Ciprian - done
+-first/last name optional or compulsory - Ciprian - done
+-colored nickname in profile - Ciprian - done
+-colored nickname in loader - Ciprian - done
+-colored nickname in users list - Ciprian - done
+-lurking mod - Ciprian - done
+-users list ordered by entrance time - Ciprian - done (/sort command)
+-color filters for admin and mod in usernames as well - Ciprian - done
 -dice3 addition - done
--dices eval(messages) fixed in firefox - done
--unspecified gender field in profiles - done
--Statistics mod - Mei Yung
+-dices eval(messages) fixed in firefox - Ciprian - done
+-unspecified gender field in profiles - Ciprian - done
+-Statistics mod - Mei Yung - ?
 -members page/profiles - Ciprian
 -default color font stored in database not cookie - Ciprian
--installer - ?
+-installer/setup - Ciprian - on the way
 -credits page - Ciprian
 -update the localizations - Ciprian and Nick
+-conversation with the robot also private - (based on Sally Linus Lucy's idea) - Ciprian - done

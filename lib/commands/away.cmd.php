@@ -100,7 +100,7 @@ if ($awaystat != 2) {
 
    $M = " <B>$msg</B> ".stripslashes($xtra);
    $M = $M . C_UPDTUSRS;
-   $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', ".time().", '$Private', '".addslashes($M)."', '')");
+   $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', ".time().", '$Private', '".addslashes($M)."', '', '')");
    $DbLink->query("UPDATE ".C_USR_TBL." SET awaystat='".$awaystat."' WHERE username='$U'");
 
    $IsCommand = true;

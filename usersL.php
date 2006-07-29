@@ -256,7 +256,7 @@ while(list($User, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup,
   if ($awaystat == 0) {
 //--------------------------Begin HighLight command by R.Worley
 		$Cmd2Send = ($User == stripslashes($U) ? "'high',''" : "'high','".special_char2($User,$Latin1)."'");
-			if (C_PRIV_POPUP == 1 && ($allowpopup == 1 || $status = "u") && $User != C_BOT_NAME)
+			if (C_PRIV_POPUP == 1 && ($allowpopup == 1 || $status = "u"))
 			{
 				if (COLOR_NAMES)
 				{
@@ -459,7 +459,7 @@ if($DbLink->num_rows() > 0)
 				{
 					echo('<img src="'.$ava_none.'" width="'.$ava_width.'" height="'.$ava_height.'" border="0" alt="' . L_NO_PROFILE . '">&nbsp;');
 				};
-			if (C_PRIV_POPUP == 1 && ($allowpopup == 1 || $status = "u") && $OtherUser != C_BOT_NAME)
+			if (C_PRIV_POPUP == 1 && ($allowpopup == 1 || $status = "u"))
 			{
 				if (COLOR_NAMES)
 				{

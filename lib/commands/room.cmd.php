@@ -44,10 +44,7 @@ else
 				}
 			}
 
-// with avatar system
-//   $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS room', '$Latin1', ".time().", '$U', '".stripslashes($Cmd[1])."', '', '')");
-// without avatar system
-   $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS room', '$Latin1', ".time().", '$U', '".addslashes(stripslashes($Cmd[1]))."', '')");
+   $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS room', '$Latin1', ".time().", '$U', '".addslashes(stripslashes($Cmd[1]))."', '', '')");
 
    $IsCommand = true;
    $RefreshMessages = true;

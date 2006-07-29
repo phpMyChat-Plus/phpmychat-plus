@@ -17,11 +17,11 @@ else
 	{
 		$Invited[$i] = trim($Invited[$i]);
 		if ($Invited[$i] == "") continue;
-		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS inviteTo', '$Latin1', '$TimeSend', '$Invited[$i]', 'sprintf(L_INVITE, \"".special_char($U,$Latin1)."\", \"JOIN\", \"$T #".addslashes(special_char($R,0))."\", \"".special_char($R,0)."\")$ReqRegist', '')");
+		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS inviteTo', '$Latin1', '$TimeSend', '$Invited[$i]', 'sprintf(L_INVITE, \"".special_char($U,$Latin1)."\", \"JOIN\", \"$T #".addslashes(special_char($R,0))."\", \"".special_char($R,0)."\")$ReqRegist', '', '')");
 	};
 	unset($Invited);
 	// Insert a message for the sender
-	$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS inviteFrom', '$Latin1', '$TimeSend', '$U', 'sprintf(L_INVITE_DONE, \"".special_char($Cmd[2],0)."\")', '')");
+	$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS inviteFrom', '$Latin1', '$TimeSend', '$U', 'sprintf(L_INVITE_DONE, \"".special_char($Cmd[2],0)."\")', '', '')");
 };
 
 ?>

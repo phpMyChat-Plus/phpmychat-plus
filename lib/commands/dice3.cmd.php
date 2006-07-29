@@ -27,7 +27,7 @@ if($Cmd[1]<=100 && ($Cmd[3]<=MAX_ROLLS || $Cmd[3] == ''))
 	$M .= " (sum = ".$sum.", max/dice ".$Cmd[1].")</font></b>&nbsp;<img src=images/tick.gif>";
 
 	//add the command HTML into the messages table
-  $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS dice3', '', '".time()."', '$U', '$M', '')");
+  $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS dice3', '', '".time()."', '$U', '$M', '', '')");
 }
 else
 {

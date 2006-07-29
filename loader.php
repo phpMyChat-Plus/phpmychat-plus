@@ -116,12 +116,12 @@ if($DbLink->num_rows() != 0)
 	$kicked = 0;
 	if ($room != stripslashes($R))	// Same nick in another room
 	{
-		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1,1)."\")', '')");
+		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1,1)."\")', '', '')");
 		$kicked = 3;
 	}
 	elseif ($status == "k")			// Kicked by a moderator or the admin.
 	{
-		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_KICKED, \"".special_char($U,$Latin1,1)."\")', '')");
+		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_KICKED, \"".special_char($U,$Latin1,1)."\")', '', '')");
 		$kicked = 1;
 	}
 	elseif ($status == "d")			// The admin just deleted the room
@@ -130,7 +130,7 @@ if($DbLink->num_rows() != 0)
 	}
 	elseif ($status == "b")			// Banished by a moderator or the admin.
 	{
-		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_BANISHED, \"".special_char($U,$Latin1,1)."\")', '')");
+		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_BANISHED, \"".special_char($U,$Latin1,1)."\")', '', '')");
 		$kicked = 4;
 	}
 	else if ($knownIp != $IP)
@@ -220,9 +220,9 @@ if ($First) $LastLoad = 0;
 $CondForQuery	= "";
 $IgnoreList	= "";
 if (isset($Ign)) $IgnoreList = "'".str_replace(",","','",addslashes(urldecode($Ign)))."'";
-if ($NT == "0") $IgnoreList		.= ($IgnoreList != "" ? ",":"")."'SYS enter','SYS exit'";
-if ($IgnoreList != "") $CondForQuery	 = "username NOT IN (${IgnoreList}) AND ";
-$CondForQuery .= "(address = ' *' OR (address = '$U' AND (room = '$R' OR room = 'Offline PMs' OR username = 'SYS inviteTo')) OR ((room = '$R' OR room = 'Offline PMs') AND (address = '' OR username = '$U')) OR room = '*' OR (room = '$R' AND username = 'SYS room') OR (room = '$R' AND (username = 'SYS image' OR username='SYS dice1' OR username='SYS dice2' OR username='SYS dice3')))";
+if ($NT == "0") $IgnoreList .= ($IgnoreList != "" ? ",":"")."'SYS enter','SYS exit'";
+if ($IgnoreList != "") $CondForQuery = "username NOT IN (${IgnoreList}) AND ";
+$CondForQuery .= "(address = ' *' OR ((address = '$U' OR username = '$U') AND (room = '$R' OR room_from='$R' OR room = 'Offline PMs' OR username = 'SYS inviteTo')) OR ((room = '$R' OR room = 'Offline PMs') AND (address = '' OR username = '$U')) OR room = '*' OR (room = '$R' AND username = 'SYS room') OR (room = '$R' AND (username = 'SYS image' OR username='SYS dice1' OR username='SYS dice2' OR username='SYS dice3')))";
 $LimitForQuery = ($First ? " LIMIT $N" : "");
 
 $DbLink->query("SELECT m_time, username, latin1, address, message FROM ".C_MSG_TBL." WHERE m_time > '$LastLoad' AND ".$CondForQuery." ORDER BY m_time DESC".$LimitForQuery);
@@ -314,7 +314,7 @@ if($contents == $User)
 		if (substr($User,0,4) != "SYS ")
 		{
 			$Userx = $User;  // Avatar System insered only.
-			if($User != stripslashes($U) && $User != C_BOT_NAME)
+			if($User != stripslashes($U))
 			{
 				if (C_PRIV_POPUP && ($allowpopup || $status == "u"))
 				{
@@ -546,7 +546,7 @@ else $allowpopupu = 1;
 $DbLink->clean_results();
 	if (substr($User,0,4) != "SYS " && C_PRIV_POPUP && $allowpopupu)
 	{
-		$DbLink->query("SELECT username, address, room, pm_read FROM ".C_MSG_TBL." WHERE ((room = '$R' OR room = 'Offline PMs') AND address = '$U' AND username != '$U' AND pm_read = 'New') OR (address = '$U' AND username != '$U' AND pm_read = 'Neww') ORDER BY m_time DESC");
+		$DbLink->query("SELECT username, address, room, pm_read FROM ".C_MSG_TBL." WHERE ((room = '$R' OR room = 'Offline PMs') AND address = '$U' AND pm_read = 'New') OR (address = '$U' AND pm_read = 'Neww') ORDER BY m_time DESC");
 		if($DbLink->num_rows() > 0)
 		{
 			$NewPMs = $DbLink->num_rows();

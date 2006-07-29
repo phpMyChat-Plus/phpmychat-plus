@@ -10,7 +10,7 @@ if (C_NO_SWEAR == 1)
 
 $M = "<B>* ".$U." </B>".stripslashes($Cmd[1]);
 
-AddMessage($M, $T, $R, $U, $C, '', '');
+AddMessage($M, $T, $R, $U, $C, '', '', '');
 
 $IsCommand = true;
 $RefreshMessages = true;

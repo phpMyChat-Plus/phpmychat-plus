@@ -39,7 +39,7 @@ if ($Cmd[1]<=MAX_DICES)
       }
 	    $M = "<font size = -2 color = blue>".addslashes($nums);
 			$M .= " (sum = ".$sum.")</font></b>&nbsp;<img src=images/tick.gif>";
-	    $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS dice2', '', '".time()."', '$U', '".stripslashes($M)."', '')");
+	    $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS dice2', '', '".time()."', '$U', '".stripslashes($M)."', '', '')");
   	}
   	else
 	  {
@@ -71,7 +71,7 @@ if ($Cmd[1]<=MAX_DICES)
      	// Alter the html tags in the line below to format your text as you want.
 			$M = " <br><font size = -2 color = blue>".addslashes($nums);
 			$M .= " (sum = ".$sum.", rolls = ".$Cmd[1].")</font></b>&nbsp;<img src=images/tick.gif>";
-			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS dice2', '', '".time()."', '$U', '".stripslashes($M)."', '')");
+			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS dice2', '', '".time()."', '$U', '".stripslashes($M)."', '', '')");
    	}
 	}
 	else

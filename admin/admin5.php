@@ -167,7 +167,7 @@ if(C_BOT_NAME != $vBOT_NAME || C_BOT_FONT_COLOR != $vBOT_FONT_COLOR || BOT_AVATA
 	}
 	if((C_USE_AVATARS != $vUSE_AVATARS) || (COLOR_NAMES != $vCOLOR_NAMES) || (C_PRIV_POPUP != $vPRIV_POPUP))
 	{
-		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES (1, 'Admin Panel', 'SYS announce', '', ".time().", ' *', '".L_RELOAD_CHAT."', '')");
+		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES (1, 'Admin Panel', 'SYS announce', '', ".time().", ' *', '".L_RELOAD_CHAT."', '', '')");
 	}
 }
 else

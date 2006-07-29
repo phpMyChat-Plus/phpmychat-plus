@@ -1,5 +1,4 @@
 <?php
-
 // This is an example of what may be done to include phpMyChat into an
 // existing web page, regardless of its name.
 // You can also include such a file in a frameset.

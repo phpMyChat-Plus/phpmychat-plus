@@ -3,8 +3,8 @@
 // ------ THESE SETTINGS MUST BE COMPLETED ------
 
 // Database settings
-define("C_DB_NAME", 'plus');						// Logical database name on that server
-define("C_DB_USER", 'username');				// Database username
+define("C_DB_NAME", 'plus');						// Logical database name on that server (most of the times like: cpanelusername_databasename)
+define("C_DB_USER", 'username');				// Database username (most of the times like: cpanelusername_username)
 define("C_DB_PASS", 'password');				// Database user's password
 // We recommend you keep the names bellow
 define("C_DB_TYPE", 'mysql');						// SQL server type ("mysql", "pgsql" or "odbc")

@@ -70,16 +70,16 @@ else
 if (strcasecmp($Top, "top reset") == 0)
 {
 					$DbLink = new DB;
-					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS topic', '', ".time().", '*', '', '')");
+					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS topic', '', ".time().", '*', '', '', '')");
 					global $Top;
- 					AddMessage(stripslashes(L_TOPIC_RESET), $T, $R, $U, $C, '', '');
+ 					AddMessage(stripslashes(L_TOPIC_RESET), $T, $R, $U, $C, '', '', '');
 }
 else
 {
 					$DbLink = new DB;
-					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS topic', '', ".time().", '*', '$Top', '')");
+					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS topic', '', ".time().", '*', '$Top', '', '')");
 					global $Top;
- 					AddMessage(stripslashes(L_TOPIC).$Cmd[2]." ".$Cmd[3], $T, $R, $U, $C, '', '');
+ 					AddMessage(stripslashes(L_TOPIC).$Cmd[2]." ".$Cmd[3], $T, $R, $U, $C, '', '', '');
 }
 					$IsCommand = true;
 					$RefreshMessages = true;

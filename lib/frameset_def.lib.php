@@ -13,6 +13,9 @@ require("./config/config.lib.php");
 $U1 = urlencode(stripslashes($U));
 $R1 = urlencode(stripslashes($R));
 $botcontrol ="botfb/$R.txt";
+$DbLink = new DB;
+	$DbLink->query("SELECT room FROM ".C_USR_TBL." WHERE username='$BOT_NAME'");
+	list($BR) = $DbLink->next_record();
 
 // ** Define the Frameset for the chat depending on the browser capacities for DHTML **
 
@@ -30,7 +33,7 @@ if ($Ver1 == "H")
 <?php
 if ((isset($dropdownmsga) && $status == "a") || (isset($dropdownmsgm) && $status == "m") || isset($dropdownmsg))
 {
-	if (file_exists($botcontrol))
+	if (file_exists($botcontrol) || $BR !=  "")
   {
 ?>
 			<FRAMESET ROWS="38,*,60" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0">
@@ -45,7 +48,7 @@ if ((isset($dropdownmsga) && $status == "a") || (isset($dropdownmsgm) && $status
 }
 else
 {
-	if (file_exists($botcontrol))
+	if (file_exists($botcontrol) || $BR !=  "")
   {
 ?>
 			<FRAMESET ROWS="38,*,35" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0">
@@ -88,7 +91,7 @@ else
 <?php
 if ((isset($dropdownmsga) && $status == "a") || (isset($dropdownmsgm) && $status == "m") || isset($dropdownmsg))
 {
-	if (file_exists($botcontrol))
+	if (file_exists($botcontrol) || $BR !=  "")
   {
 ?>
 			<FRAMESET ROWS="38,*,55"BORDER="0">
@@ -103,7 +106,7 @@ if ((isset($dropdownmsga) && $status == "a") || (isset($dropdownmsgm) && $status
 }
 else
 {
-	if (file_exists($botcontrol))
+	if (file_exists($botcontrol) || $BR !=  "")
   {
 ?>
 			<FRAMESET ROWS="38,*,35" BORDER="0">

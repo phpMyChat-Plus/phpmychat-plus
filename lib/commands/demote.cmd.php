@@ -61,10 +61,7 @@ else
 				{
 					$DbLink->query("UPDATE ".C_REG_TBL." SET perms='user', rooms='' WHERE username='$UU'");
 					$DbLink->query("UPDATE ".C_USR_TBL." SET status='r' WHERE username='$UU'");
-// with avatar system
-//					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS demote', '$Latin1', ".time().", '', 'sprintf(L_IS_NO_MOD_ALL, \"".special_char($UU,$Latin1_UU)."\")', '', '')");
-// without avatar system
-					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS demote', '$Latin1', ".time().", '', 'sprintf(L_IS_NO_MOD_ALL, \"".special_char($UU,$Latin1_UU)."\")', '')");
+					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS demote', '$Latin1', ".time().", '', 'sprintf(L_IS_NO_MOD_ALL, \"".special_char($UU,$Latin1_UU)."\")', '', '')");
 				}
 				elseif (($perms == "moderator")&&(room_in($R,addslashes($rooms))))
 				{
@@ -79,10 +76,7 @@ else
 					$DbLink->query("UPDATE ".C_REG_TBL." SET rooms='".addslashes($rooms_new_clean)."' WHERE username='$UU'");
 					}
 					$DbLink->query("UPDATE ".C_USR_TBL." SET status='r' WHERE username='$UU' AND room='$R'");
-// with avatar system
-//					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS demote', '$Latin1', ".time().", '', 'sprintf(L_ADM_1, \"".special_char($UU,$Latin1_UU)."\")', '', '')");
-// without avatar system
-					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS demote', '$Latin1', ".time().", '', 'sprintf(L_ADM_1, \"".special_char($UU,$Latin1_UU)."\")', '')");
+					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS demote', '$Latin1', ".time().", '', 'sprintf(L_ADM_1, \"".special_char($UU,$Latin1_UU)."\")', '', '')");
 				}
 				else
 				{
@@ -124,10 +118,7 @@ else
 				{
 					$DbLink->query("UPDATE ".C_REG_TBL." SET perms='user', rooms='' WHERE username='$UU'");
 					$DbLink->query("UPDATE ".C_USR_TBL." SET status='r' WHERE username='$UU'");
-// with avatar system
-//					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS demote', '$Latin1', ".time().", '', 'sprintf(L_IS_NO_MOD_ALL, \"".special_char($UU,$Latin1_UU)."\")', '', '')");
-// without avatar system
-					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS demote', '$Latin1', ".time().", '', 'sprintf(L_IS_NO_MOD_ALL, \"".special_char($UU,$Latin1_UU)."\")', '')");
+					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS demote', '$Latin1', ".time().", '', 'sprintf(L_IS_NO_MOD_ALL, \"".special_char($UU,$Latin1_UU)."\")', '', '')");
 				}
 				elseif (($perms == "moderator")&&(room_in($R,addslashes($rooms))))
 				{
@@ -142,10 +133,7 @@ else
 					$DbLink->query("UPDATE ".C_REG_TBL." SET rooms='".addslashes($rooms_new_clean)."' WHERE username='$UU'");
 					}
 					$DbLink->query("UPDATE ".C_USR_TBL." SET status='r' WHERE username='$UU' AND room='$R'");
-// with avatar system
-//					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS demote', '$Latin1', ".time().", '', 'sprintf(L_ADM_1, \"".special_char($UU,$Latin1_UU)."\")', '', '')");
-// without avatar system
-					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS demote', '$Latin1', ".time().", '', 'sprintf(L_ADM_1, \"".special_char($UU,$Latin1_UU)."\")', '')");
+					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS demote', '$Latin1', ".time().", '', 'sprintf(L_ADM_1, \"".special_char($UU,$Latin1_UU)."\")', '', '')");
 				}
 				else
 				{

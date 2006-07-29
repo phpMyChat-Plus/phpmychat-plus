@@ -59,7 +59,7 @@ else
 					$rooms .= stripslashes($rooms == "" ? $R:",${R}");
 					$DbLink->query("UPDATE ".C_REG_TBL." SET perms='moderator', rooms='".addslashes($rooms)."' WHERE username='$UU'");
 					$DbLink->query("UPDATE ".C_USR_TBL." SET status='m' WHERE username='$UU'");
-					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS promote', '$Latin1', ".time().", '', 'sprintf(L_MODERATOR, \"".special_char($UU,$Latin1_UU)."\")', '')");
+					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS promote', '$Latin1', ".time().", '', 'sprintf(L_MODERATOR, \"".special_char($UU,$Latin1_UU)."\")', '', '')");
 				}
 				else
 				{

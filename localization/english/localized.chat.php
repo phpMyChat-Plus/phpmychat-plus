@@ -124,6 +124,7 @@ define("L_ERR_USR_23", "To join a private room you must be registered.");
 define("L_ERR_USR_24", "To create your own private room you must be registered.");
 define("L_ERR_USR_25", "Only the administrator can use ".$COLORNAME." color!<br>Don't try to use ".COLOR_CA.", ".COLOR_CAS.", ".COLOR_CM." or ".COLOR_CMS." (or their correspondent HEX codes).<br>These are reserved to power users!");
 define("L_ERR_USR_26", "Only the admins and moderators can use ".$COLORNAME." color!<br>Don't try to use ".COLOR_CA.", ".COLOR_CAS.", ".COLOR_CM." or ".COLOR_CMS." (or their correspondent HEX codes).<br>These are reserved to power users!");
+define("L_ERR_USR_27", "You cannot talk private to yourself.\\nDo that in your mind please...\\nNow choose a different username.");
 define("L_ERR_ROM_1", "Room's name cannot contain commas or backslashes (\\).");
 define("L_ERR_ROM_2", "Banished word found in the room's name you want to create.");
 define("L_ERR_ROM_3", "This room already exists as a public one.");
@@ -149,9 +150,9 @@ define("L_NO_PROFILE", "No profile");
 define("L_HLP", "Help");
 define("L_BAD_CMD", "This is not a valid command!");
 define("L_ADMIN", "%s is already the administrator!");
-define("L_IS_MODERATOR", "%s is already a moderator!");
+define("L_IS_MODERATOR", "User %s is already a moderator!");
 define("L_NO_MODERATOR", "Only a moderator of this room can use this command.");
-define("L_MODERATOR", "%s is now a moderator for this room.");
+define("L_MODERATOR", "User %s is now a moderator for this room.");
 define("L_NONEXIST_USER", "User %s isn't in the current room.");
 define("L_NONREG_USER", "User %s isn't registered.");
 define("L_NONREG_USER_IP", "His IP is: %s.");
@@ -164,7 +165,7 @@ define("L_NO_SAVE", "No message to save!");
 define("L_NO_ADMIN", "Only the administrator can use this command.");
 define("L_NO_REG_USER", "You must be registered on this chat to use this command.");
 define("L_ANNOUNCE", "ANNOUNCE");
-define("L_INVITE", "%s requests that you join her/him into the <a href=\"#\" onClick=\"window.parent.runCmd('%s','%s')\">%s</a> room.");
+define("L_INVITE", "User %s requests that you join her/him into the <a href=\"#\" onClick=\"window.parent.runCmd('%s','%s')\">%s</a> room.");
 define("L_INVITE_REG", " You have to be registered to enter this room.");
 define("L_INVITE_DONE", "Your invitation has been sent to %s.");
 define("L_OK", "Send");
@@ -287,8 +288,9 @@ define("L_EXPL_AV", "(Enter URL, then hit ENTER to view)");
 define("L_CANCEL", "Cancel");
 define("L_CLICK", "Click:");
 
-// Alice bot mod
-define("BOT_TIPS", "TIPS: To start talking to the bot, type <b>hello ".C_BOT_NAME.'</b>. To stop it, type <b>bye '.C_BOT_NAME.'</b>. Case insensitive.');
+// PluceBot bot mod
+define("BOT_TIPS", "<b>".C_BOT_NAME."</b> - BOT TIPS: Our bot is active in this room. To start talking to the bot, type <b>hello ".C_BOT_NAME.'</b>. To end conversation, type: <b>bye '.C_BOT_NAME.'</b>. Case insensitive.');
+define("BOT_PRIV_TIPS", "<b>".C_BOT_NAME."</b> - BOT TIPS: Our bot is active but in a different room. You can talk private to the bot by clicking on his name and whispering. To end conversation, tell him <b>bye</b>.");
 define("BOT_STOP_ERROR", "Bot is not running in this room!");
 define("BOT_START_ERROR", "Bot is already running in this room!");
 
@@ -312,12 +314,14 @@ define("L_PRIV_MSG1", "From:");
 define("L_PRIV_MSG2", "Room:");
 define("L_PRIV_MSG3", "To:");
 define("L_PRIV_MSG4", "Message:");
-define("L_PRIV_MSG5", "Posted&nbsp;at:");
+define("L_PRIV_MSG5", "Posted&nbsp;:");
 define("L_PRIV_REPLY", "Reply");
 define("L_PRIV_READ", "Press the Close button to mark all posts as read!");
 define("L_PRIV_POPUP", "You can disable/re-enable anytime this popup feature<br>by editing your profile (only registered users)");
-define("L_PRIV_NOT_ONLINE", "%s is not online right now,\\nbut will still receive your message after login.");
-define("L_PRIV_AWAY", "%s is marked away,\\nbut will still receive your message\\nwhen will be back.");
+define("L_NOT_ONLINE", "User %s is not online right now.");
+define("L_PRIV_NOT_ONLINE", "User %s is not online right now,\\nbut will still receive your message after login.");
+define("L_PRIV_NOT_INROOM", "User %s is not in this room.\\nIf you still want to pm this user,\\nuse the command: /wisp %s message.");
+define("L_PRIV_AWAY", "User %s is marked away,\\nbut will still receive your message\\nwhen will be back.");
 
 // Color Input Box mod by Ciprian
 define("L_COLOR", "Color:");

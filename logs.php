@@ -1,8 +1,26 @@
 <?php
+// Get the names and values for vars sent to index.lib.php
+
+if (isset($HTTP_GET_VARS))
+{
+	while(list($name,$value) = each($HTTP_GET_VARS))
+	{
+		$$name = $value;
+	};
+};
+
+if (isset($HTTP_POST_VARS))
+{
+	while(list($name,$value) = each($HTTP_POST_VARS))
+	{
+		$$name = $value;
+	};
+};
 if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
 if (!isset($R)) $skin == "style";
 
 require("config/config.lib.php");
+if (!isset($L)) $L = C_LANGUAGE;
 require("localization/".$L."/localized.chat.php");
 require("lib/release.lib.php");
 ?>

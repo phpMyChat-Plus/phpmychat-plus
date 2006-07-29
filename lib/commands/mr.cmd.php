@@ -18,7 +18,7 @@ else $salutation = "*";
 
 $M = "<B>* ".$salutation." ".$U." </B>".stripslashes($Cmd[1]);
 
-AddMessage($M, $T, $R, $U, $C, '', '');
+AddMessage($M, $T, $R, $U, $C, '', '', '');
 
 $IsCommand = true;
 $RefreshMessages = true;
