@@ -20,10 +20,11 @@ alert("<?php echo(sprintf(A_SHEET5_0, APP_VERSION, APP_LAST_VERSION)); ?>")
 <?php
 }
 ?>
-<a href="http://www.ciprianmp.com/atm/index.php?&direction=0&order=&directory=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Open the Download page" onMouseOver="window.status='Open the Download page.'; return true">Download Page</a>&nbsp;&nbsp;
-<a href="http://svn.sourceforge.net/viewvc/phpmychat/trunk/" target=_blank Title="Open the SVC Project Page" onMouseOver="window.status='Open the SVC Project Page.'; return true">SVC Project Page</a>&nbsp;&nbsp;
-<a href="https://sourceforge.net/tracker/?group_id=19371&atid=387646/" target=_blank Title="Open the Translations Project" onMouseOver="window.status='Open the Translations Project.'; return true">Translations Project</a>&nbsp;&nbsp;
-<a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Fixes readme.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Check what's new in <?php echo(APP_LAST_VERSION); ?>." onMouseOver="window.status='Check what\'s new in <?php echo(APP_LAST_VERSION); ?>.'; return true">Check what's new in <?php echo(APP_LAST_VERSION); ?></a><br>
+<a href="http://www.ciprianmp.com/atm/index.php?&direction=0&order=&directory=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Open the Download page" onMouseOver="window.status='Open the Download page.'; return true">Download Page</a>&nbsp;|
+<a href="http://svn.sourceforge.net/viewvc/phpmychat/trunk/" target=_blank Title="Open the phpMyChat SVN Project Page" onMouseOver="window.status='Open the phpMyChat SVN Project Page.'; return true"> phpMyChat SVN Project Page</a>&nbsp;|
+<a href="https://sourceforge.net/tracker/?group_id=19371&atid=387646/" target=_blank Title="Open the Translations Project" onMouseOver="window.status='Open the Translations Project.'; return true">Translations Project</a>&nbsp;|
+<a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Fixes readme.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Check what's new in <?php echo(APP_LAST_VERSION); ?>." onMouseOver="window.status='Check what\'s new in <?php echo(APP_LAST_VERSION); ?>.'; return true">Check what's new in <?php echo(APP_LAST_VERSION); ?></a>&nbsp;|
+<a href="http://plus.gamedogs.com" target=_blank Title="Go to Try me server." onMouseOver="window.status='Go to Try me server.'; return true">Try me server</a><br>
 <?php
 
 // If form is submitted update values in the database
