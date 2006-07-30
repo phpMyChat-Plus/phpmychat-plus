@@ -3,7 +3,7 @@
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
 
   require("./config/config.lib.php");
-
+	include("./lib/update.lib.php");
 // If form is submitted update values in the database
 if (isset($FORM_SEND) && $FORM_SEND == 5)
 {
