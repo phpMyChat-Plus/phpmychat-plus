@@ -52,5 +52,7 @@ Insert, modify and translate according to the new lines added in english version
 For more instructions read the Plus FAQ.txt in the docs/plus docs folder.
 That's all for now! Have a nice one and let me know how it goes!
 
+Do you need some tries of different configurations before applying to your chat server? Don't hesitate to use the Demo/Try me server at http://plus.gamedogs.com (use admin/admin or moderator/moderator as login for different powers - not registration required)
+
 My best regards,
 Ciprian Murariu
