@@ -2,7 +2,7 @@ Note: if you've already modded your own files, please compare and edit the chang
 This archive includes all the previously released fixes.
 
 Fixes History:
-29.07.2006 - v1.8:
+31.07.2006 - v1.8:
 - The bot has been enhanced (thanks to Sally Linus for her ideas)! It acts now just like any other human user in the chat. It can be invoked private and he answers private. He can talk from different rooms (functionality extension)
 - private messaging have been improved (mostly because of the bot improvements); it shows an user's whisper also to him (in his room), not just to the receiver (in the destination room). It can extend the functionality in the future. (functionality related)
 - the code was cleaned up a bit in several files. (size related)
