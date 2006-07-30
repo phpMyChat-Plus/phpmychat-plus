@@ -1,5 +1,7 @@
 Note: if you've already modded your own files, please compare and edit the changes from those included in this archive to identify the changes done for the fix. If not, just replace them in the according folders.
 This archive includes all the previously released fixes.
+Tested with: IE 6.0 SP2, Mozilla Firefox 1.5.0.4, Mozilla Firebird 0.7, Netscape 8.1, Opera 9.0 build 8502, AvantBrowser 10.2 build 52.
+Connection troubles with IE 7.0 beta. (reported on different sites)
 
 Fixes History:
 31.07.2006 - v1.8:
@@ -17,6 +19,12 @@ Files moved:
 - Instructions.txt - from plus/docs/plus docs to plus/installation/;
 Files added:
 - plus/lib/bot_priv.lib.php;  //used for bot to talk privately.
+- plus/install/database/mysql_newinstall.txt;
+- plus/install/database/mysql_upgrade_plus_1.7.txt;
+- plus/install/database/mysql_upgrade_plus_until_1.6.txt;
+- plus/install/database/mysql_std_0.12.txt;		//I really hope no one use such an old version
+- plus/install/database/mysql_std_0.13.txt;		//I really hope no one use such an old version
+- plus/install/database/mysql_std_0.14-0.15.txt;
 - 111 aiml files for bot to be loaded (distributed as optional before) - you can remove the ones you don't want, before loading them into the database (these are the most interesting I found over the internet 1 year ago. if anyone has time to check them out and optimize them, it would be appreciated)
 
 05.07.2006: - The Plus version is called now v1.7 and it's mature enough to become a final release (New name: phpMyChat-Plus v1.7 - not "based on 0.15.4" anymore - this is not alpha nor beta, it is not preview nor starter edition - it is the mature version of phpMyChat - I hope Nick Hozey will agree with me, as well as the other contributors who might have tried the Plus version so far)
@@ -49,7 +57,6 @@ SQL updates:
 Files edited = 53 - too many to mention here:
 Files added (61 optional extra sounds) - available as a separate pack (thanks to bluntdog):
 - plus/sounds/name.wav;  //please be aware that some of the provided sounds contain bad language - listen to them in Media Player and remove the inappropriate ones.
-Tested with: IE 6.0 SP2, Mozilla Firefox 1.5.0.4, Mozilla Firebird 0.7, Netscape 8.1, Opera 9.0 build 8502, AvantBrowser 10.2 build 52.
 
 09.05.2006:
 - FireFox flickering fix (by Popeye). It made Firefox not being treated as an "L" browser anymore. (functionality related)
