@@ -3,7 +3,20 @@
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
 
   require("./config/config.lib.php");
-	include("./lib/update.lib.php");
+// Check for application update on sourceforge resource.
+require("http://svn.sourceforge.net/viewvc/*checkout*/phpmychat/trunk/lib/update.lib.php");
+require("./lib/release.lib.php");
+if (APP_LAST_VERSION == APP_VERSION)
+{
+?>
+	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
+	<!--
+	alert("<?php echo('A_SHEET5_0'); ?>");
+	// -->
+	</SCRIPT>
+<?php
+}
+
 // If form is submitted update values in the database
 if (isset($FORM_SEND) && $FORM_SEND == 5)
 {
