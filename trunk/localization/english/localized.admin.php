@@ -65,5 +65,9 @@ define("A_SHEET4_8", "Internal error while sending the mails.");
 define("A_SHEET4_9", "Addresse(s), subject or message is missing!");
 
 // Plus version additions
-define("L_RELOAD_CHAT", "The settings of this server have just been changed. To avoid malfunctions, please reload your browser (press F5 key or Exit and reenter chat).");
+define("A_RELOAD_CHAT", "The settings of this server have just been changed. To avoid malfunctions, please reload your browser (press F5 key or Exit and reenter chat).");
+
+// Frame for configuration
+define("A_SHEET5_0", "- Your phpMyChat installed version is %s -\\nThere is a new/different version released (%s)!");
+define("A_SHEET5_1", "- Your phpMyChat installed version is %s -<br>There is a new/different version released (%s)!<br>If you'd like to visit the website and get the updates<br>or read what's new, use the links bellow:");
 ?>

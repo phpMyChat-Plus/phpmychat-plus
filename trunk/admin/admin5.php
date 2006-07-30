@@ -2,20 +2,29 @@
 
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
 
-  require("./config/config.lib.php");
+require("./config/config.lib.php");
+
 // Check for application update on sourceforge resource.
-require("http://svn.sourceforge.net/viewvc/*checkout*/phpmychat/trunk/lib/update.lib.php");
+include_once("http://svn.sourceforge.net/viewvc/*checkout*/phpmychat/trunk/lib/update.lib.php");
 require("./lib/release.lib.php");
-if (APP_LAST_VERSION == APP_VERSION)
+if (APP_LAST_VERSION != APP_VERSION)
 {
 ?>
 	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
 	<!--
-	alert("<?php echo('A_SHEET5_0'); ?>");
+alert("<?php echo(sprintf(A_SHEET5_0, APP_VERSION, APP_LAST_VERSION)); ?>")
 	// -->
 	</SCRIPT>
+<p class=title><font color=green><?php echo(sprintf(A_SHEET5_1, APP_VERSION, APP_LAST_VERSION)); ?></font>
+<br></p>
 <?php
 }
+?>
+<a href="http://www.ciprianmp.com/atm/index.php?&direction=0&order=&directory=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Open the Download page" onMouseOver="window.status='Open the Download page.'; return true">Download Page</a>&nbsp;&nbsp;
+<a href="http://svn.sourceforge.net/viewvc/phpmychat/trunk/" target=_blank Title="Open the SVC Project Page" onMouseOver="window.status='Open the SVC Project Page.'; return true">SVC Project Page</a>&nbsp;&nbsp;
+<a href="https://sourceforge.net/tracker/?group_id=19371&atid=387646/" target=_blank Title="Open the Translations Project" onMouseOver="window.status='Open the Translations Project.'; return true">Translations Project</a>&nbsp;&nbsp;
+<a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Fixes readme.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Check what's new in <?php echo(APP_LAST_VERSION); ?>." onMouseOver="window.status='Check what\'s new in <?php echo(APP_LAST_VERSION); ?>.'; return true">Check what's new in <?php echo(APP_LAST_VERSION); ?></a><br>
+<?php
 
 // If form is submitted update values in the database
 if (isset($FORM_SEND) && $FORM_SEND == 5)
@@ -180,7 +189,7 @@ if(C_BOT_NAME != $vBOT_NAME || C_BOT_FONT_COLOR != $vBOT_FONT_COLOR || BOT_AVATA
 	}
 	if((C_USE_AVATARS != $vUSE_AVATARS) || (COLOR_NAMES != $vCOLOR_NAMES) || (C_PRIV_POPUP != $vPRIV_POPUP))
 	{
-		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES (1, 'Admin Panel', 'SYS announce', '', ".time().", ' *', '".L_RELOAD_CHAT."', '', '')");
+		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES (1, 'Admin Panel', 'SYS announce', '', ".time().", ' *', '".A_RELOAD_CHAT."', '', '')");
 	}
 }
 else

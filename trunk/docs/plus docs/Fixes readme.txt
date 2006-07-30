@@ -4,20 +4,20 @@ This archive includes all the previously released fixes.
 Fixes History:
 29.07.2006 - v1.8:
 - The bot has been enhanced (thanks to Sally Linus for her ideas)! It acts now just like any other human user in the chat. It can be invoked private and he answers private. He can talk from different rooms (functionality extension)
-- private messaging have been improved (mostly because of the bot improvements). (functionality related)
+- private messaging have been improved (mostly because of the bot improvements); it shows an user's whisper also to him (in his room), not just to the receiver (in the destination room). It can extend the functionality in the future. (functionality related)
 - the code was cleaned up a bit in several files. (size related)
 - some more details in Installation/Instructions.txt for editing the config database details. (support related)
-- created mysql database upgrade files for different versions already installed. (installation related)
+- created mysql database upgrade files for different versions of phpmychat. (installation related)
 - added the docs/plus docs/Plus FAQ.txt. (support related)
+- NEW&COOL: the admin panel/configuration tab now checks the official website for new versions released and alert the admin of a new version published, then the admin can directly open the download page! (support related)
 SQL updates:
-- Added one field [room_from varchar('30') NOT NULL default ''] at the end of table c_messages - to show an user's whisper also to him (in his room), not just to the receiver (in the destination room). It can extend the functionality in the future.
+- Added one field [room_from varchar('30') NOT NULL default ''] at the end of table c_messages
 Files edited = 41 - too many to mention here (most of the files because of the c_messages fields' number modification);
 Files moved:
 - Instructions.txt - from plus/docs/plus docs to plus/installation/;
 Files added:
 - plus/lib/bot_priv.lib.php;  //used for bot to talk privately.
-- 111 aiml files for bot to be loaded (distributed as optional before) - you can remove the ones you don't want, before loading them into the database (these are the most interesting I found over the internet 1 year ago. if anyone has time to check them out and optimize them, it would be apreciated)
-- 60 extra .wav sounds for the buzz command (distributed as optional before) - please be aware that some of the provided sounds contain bad language - listen to them in Media Player and remove the inappropriate ones.
+- 111 aiml files for bot to be loaded (distributed as optional before) - you can remove the ones you don't want, before loading them into the database (these are the most interesting I found over the internet 1 year ago. if anyone has time to check them out and optimize them, it would be appreciated)
 
 05.07.2006: - The Plus version is called now v1.7 and it's mature enough to become a final release (New name: phpMyChat-Plus v1.7 - not "based on 0.15.4" anymore - this is not alpha nor beta, it is not preview nor starter edition - it is the mature version of phpMyChat - I hope Nick Hozey will agree with me, as well as the other contributors who might have tried the Plus version so far)
 - Main reason of this release: Firefox is now treated as an "H" browser due to Popeye's flickering fix, so I wanted to improve its behavior a little bit.
