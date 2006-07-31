@@ -77,7 +77,8 @@ elseif ($Read == "Neww" || $Read == "Oldw")
       }
      elseif (eregi(C_BOT_NAME, $M) || eregi(C_BOT_NAME, $Private))                          // Looks for "BOT NAME" in $M (typed in INPUT)  WORKS
       {
-//          botmemory($U);                                     // starts conversation with BOT if none already.
+					$botcontrol ="botfb/$R.txt";
+//					if(file_exists($botcontrol)) botmemory($U);                                     // starts conversation with BOT if none already.
           global $M;
           global $botmess;
           $botmess = eregi_replace(C_BOT_NAME, "", $M);      // removes the word "BOT NAME" from the input helps the bot to make sense? NEEDS WORK.
