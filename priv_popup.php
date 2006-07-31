@@ -416,7 +416,7 @@ switch ($Read)
 	<TR><TD><B><U><?php echo(L_PRIV_MSG1); ?></U></B></TD>
 		<TD width="100%" style="font-size: 11pt"><B><I><?php echo($User); ?></I></B></TD></TR>
 	<TR><TD><B><U><?php echo(L_PRIV_MSG2); ?></U></B></TD>
-		<TD width="100%"><I><?php echo(($RF == "") || ($RF == $Room) || ($Room != "Offline PMs") ? $Room : $RF); ?></I></TD></TR>
+		<TD width="100%"><I><?php echo(($RF != "") || ($RF == $Room) ? $RF : $Room); ?></I></TD></TR>
 	<TR><TD><B><U><?php echo(L_PRIV_MSG3); ?></U></B></TD>
 		<TD width="100%"><I><?php echo($Dest); ?></I></TD></TR>
 	<TR><TD><B><U><?php echo(L_PRIV_MSG4); ?></U></B></TD>
@@ -468,7 +468,7 @@ switch ($Read)
 	break;
 }
 ?>
-	<TR><TD width="73%"><B><?php echo($i.". "); ?><U><?php echo(L_PRIV_MSG1); ?></U>&nbsp;<SPAN style="font-size: 11pt"><?php echo($User); ?></SPAN></B>&nbsp;(<B><U><?php echo(L_PRIV_MSG2); ?></U></B>&nbsp;<I><?php echo(($RF == "") || ($RF == $Room) || ($Room != "Offline PMs") ? $Room : $RF); ?></I>)</TD><TD align="right" style="font-size: 8pt"><I><U><?php echo(L_PRIV_MSG5); ?></U><br><?php echo($Time); ?></I></TD></TR>
+	<TR><TD width="73%"><B><?php echo($i.". "); ?><U><?php echo(L_PRIV_MSG1); ?></U>&nbsp;<SPAN style="font-size: 11pt"><?php echo($User); ?></SPAN></B>&nbsp;(<B><U><?php echo(L_PRIV_MSG2); ?></U></B>&nbsp;<I><?php echo(($RF != "") || ($RF == $Room) ? $RF : $Room); ?></I>)</TD><TD align="right" style="font-size: 8pt"><I><U><?php echo(L_PRIV_MSG5); ?></U><br><?php echo($Time); ?></I></TD></TR>
 	<TR><TD width="100%" style="font-size: 12pt" colspan="2"><I><?php echo($M); ?></I></TD></TR>
 <TR><TD width="100%" colspan="2"></TD></TR>
 <input type="hidden" value="<?php echo($ReplyTo) ?>" name="ReplyTo<?php echo($i)?>">
