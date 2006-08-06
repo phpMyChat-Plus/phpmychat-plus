@@ -868,128 +868,92 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
 </tr>
 <tr>
     <td><b>1. First Public room name (also <u>default</u> if none selected):</b></td>
-    <td><input name="vROOM1" type="text" size="35" maxlength="25" value="<? echo $ROOM1; ?>"></td>
-</tr>
-<tr>
-    <td><b>Enable this room in chat:</b></td>
-    <td>
+    <td><input name="vROOM1" type="text" size="35" maxlength="25" value="<? echo $ROOM1; ?>"><br>
         <select name="vEN_ROOM1">
-	        <option value="0"<? if($EN_ROOM1==0){ echo " selected"; } ?>>No
-	        <option value="1"<? if($EN_ROOM1==1){ echo " selected"; } ?>>Yes
+	        <option value="0"<? if($EN_ROOM1==0){ echo " selected"; } ?>>Disable
+	        <option value="1"<? if($EN_ROOM1==1){ echo " selected"; } ?>>Enable
         </select>
-    </td>
+    	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>2. Second Public room name:</b></td>
-    <td><input name="vROOM2" type="text" size="35" maxlength="25" value="<? echo $ROOM2; ?>"></td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Enable this room in chat:</b></td>
-    <td>
+    <td><input name="vROOM2" type="text" size="35" maxlength="25" value="<? echo $ROOM2; ?>"><br>
         <select name="vEN_ROOM2">
-	        <option value="0"<? if($EN_ROOM2==0){ echo " selected"; } ?>>No
-	        <option value="1"<? if($EN_ROOM2==1){ echo " selected"; } ?>>Yes
+	        <option value="0"<? if($EN_ROOM2==0){ echo " selected"; } ?>>Disable
+	        <option value="1"<? if($EN_ROOM2==1){ echo " selected"; } ?>>Enable
         </select>
-    </td>
+    	</td>
 </tr>
 <tr>
     <td><b>3. Third Public room name:</b></td>
-    <td><input name="vROOM3" type="text" size="35" maxlength="25" value="<? echo $ROOM3; ?>"></td>
-</tr>
-<tr>
-    <td><b>Enable this room in chat:</b></td>
-    <td>
+    <td><input name="vROOM3" type="text" size="35" maxlength="25" value="<? echo $ROOM3; ?>"><br>
         <select name="vEN_ROOM3">
-	        <option value="0"<? if($EN_ROOM3==0){ echo " selected"; } ?>>No
-	        <option value="1"<? if($EN_ROOM3==1){ echo " selected"; } ?>>Yes
+	        <option value="0"<? if($EN_ROOM3==0){ echo " selected"; } ?>>Disable
+	        <option value="1"<? if($EN_ROOM3==1){ echo " selected"; } ?>>Enable
         </select>
-    </td>
+    	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>4. Forth Public room name:</b></td>
-    <td><input name="vROOM4" type="text" size="35" maxlength="25" value="<? echo $ROOM4; ?>"></td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Enable this room in chat:</b></td>
-    <td>
+    <td><input name="vROOM4" type="text" size="35" maxlength="25" value="<? echo $ROOM4; ?>"><br>
         <select name="vEN_ROOM4">
-	        <option value="0"<? if($EN_ROOM4==0){ echo " selected"; } ?>>No
-	        <option value="1"<? if($EN_ROOM4==1){ echo " selected"; } ?>>Yes
+	        <option value="0"<? if($EN_ROOM4==0){ echo " selected"; } ?>>Disable
+	        <option value="1"<? if($EN_ROOM4==1){ echo " selected"; } ?>>Enable
         </select>
-    </td>
+    	</td>
 </tr>
 <tr>
     <td><b>5. Fifth Public room name:</b></td>
-    <td><input name="vROOM5" type="text" size="35" maxlength="25" value="<? echo $ROOM5; ?>"></td>
-</tr>
-<tr>
-    <td><b>Enable this room in chat:</b></td>
-    <td>
+    <td><input name="vROOM5" type="text" size="35" maxlength="25" value="<? echo $ROOM5; ?>"><br>
         <select name="vEN_ROOM5">
-	        <option value="0"<? if($EN_ROOM5==0){ echo " selected"; } ?>>No
-	        <option value="1"<? if($EN_ROOM5==1){ echo " selected"; } ?>>Yes
+	        <option value="0"<? if($EN_ROOM5==0){ echo " selected"; } ?>>Disable
+	        <option value="1"<? if($EN_ROOM5==1){ echo " selected"; } ?>>Enable
         </select>
-    </td>
+    	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>6. First Private room name:</b><br>
     			<i>Note: This is displayed on login only to admin(s)</i>
     	</td>
-    <td><input name="vROOM6" type="text" size="35" maxlength="25" value="<? echo $ROOM6; ?>"></td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Enable this room in chat:</b></td>
-    <td>
+    <td><input name="vROOM6" type="text" size="35" maxlength="25" value="<? echo $ROOM6; ?>"><br>
         <select name="vEN_ROOM6">
-	        <option value="0"<? if($EN_ROOM6==0){ echo " selected"; } ?>>No
-	        <option value="1"<? if($EN_ROOM6==1){ echo " selected"; } ?>>Yes
+	        <option value="0"<? if($EN_ROOM6==0){ echo " selected"; } ?>>Disable
+	        <option value="1"<? if($EN_ROOM6==1){ echo " selected"; } ?>>Enable
         </select>
-    </td>
+    	</td>
 </tr>
 <tr>
     <td><b>7. Second Private room name (also default if none selected):</b><br>
     			<i>Note: This is displayed on login only to admin(s)</i>
     	</td>
-    <td><input name="vROOM7" type="text" size="35" maxlength="25" value="<? echo $ROOM7; ?>"></td>
-</tr>
-<tr>
-    <td><b>Enable this room in chat:</b></td>
-    <td>
+    <td><input name="vROOM7" type="text" size="35" maxlength="25" value="<? echo $ROOM7; ?>"><br>
         <select name="vEN_ROOM7">
-	        <option value="0"<? if($EN_ROOM7==0){ echo " selected"; } ?>>No
-	        <option value="1"<? if($EN_ROOM7==1){ echo " selected"; } ?>>Yes
+	        <option value="0"<? if($EN_ROOM7==0){ echo " selected"; } ?>>Disable
+	        <option value="1"<? if($EN_ROOM7==1){ echo " selected"; } ?>>Enable
         </select>
-    </td>
+    	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>8. Third Private room name:</b><br>
     			<i>Note: This is displayed on login to all power users (fits for staff only rooms)</i>
     	</td>
-    <td><input name="vROOM8" type="text" size="35" maxlength="25" value="<? echo $ROOM8; ?>"></td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Enable this room in chat:</b></td>
-    <td>
+    <td><input name="vROOM8" type="text" size="35" maxlength="25" value="<? echo $ROOM8; ?>"><br>
         <select name="vEN_ROOM8">
-	        <option value="0"<? if($EN_ROOM8==0){ echo " selected"; } ?>>No
-	        <option value="1"<? if($EN_ROOM8==1){ echo " selected"; } ?>>Yes
+	        <option value="0"<? if($EN_ROOM8==0){ echo " selected"; } ?>>Disable
+	        <option value="1"<? if($EN_ROOM8==1){ echo " selected"; } ?>>Enable
         </select>
-    </td>
+    	</td>
 </tr>
 <tr>
     <td><b>9. Forth Private room name:</b><br>
     			<i>Note: This is displayed by default on login to all users (fits for support like rooms)</i>
     	</td>
-    <td><input name="vROOM9" type="text" size="35" maxlength="25" value="<? echo $ROOM9; ?>"></td>
-</tr>
-<tr>
-    <td><b>Enable this room in chat:</b></td>
-    <td>
+    <td><input name="vROOM9" type="text" size="35" maxlength="25" value="<? echo $ROOM9; ?>"><br>
         <select name="vEN_ROOM9">
-	        <option value="0"<? if($EN_ROOM9==0){ echo " selected"; } ?>>No
-	        <option value="1"<? if($EN_ROOM9==1){ echo " selected"; } ?>>Yes
+	        <option value="0"<? if($EN_ROOM9==0){ echo " selected"; } ?>>Disable
+	        <option value="1"<? if($EN_ROOM9==1){ echo " selected"; } ?>>Enable
         </select>
-    </td>
+    	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>1. Room name to show swear words (avoid the filter):</b><br>
@@ -1041,7 +1005,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     				- blue, mediumblue, 0000FF, 0000CD, #0000FF, #0000CD - default for moderators.</i>
     	</td>
     <td>Name:&nbsp;<input name="vCOLOR_CD1" type="text" size="28" maxlength="25" value="<? echo $COLOR_CD1; ?>">
-    Code:&nbsp;&nbsp;<input name="vCOLOR_CDC1" type="text" size="28" maxlength="6" value="<? echo $COLOR_CDC1; ?>">
+    <br>Code:&nbsp;&nbsp;<input name="vCOLOR_CDC1" type="text" size="28" maxlength="6" value="<? echo $COLOR_CDC1; ?>">
     	</td>
 </tr>
 <tr>
