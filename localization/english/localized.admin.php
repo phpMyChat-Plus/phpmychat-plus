@@ -1,6 +1,7 @@
 <?php
-// File : english.lang.php
+// File : english.admin.php - plus version
 // Original file by Loïc Chapeaux <lolo@phpheaven.net> & Dean Collins <joelford@pacbell.net>
+// Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 
 // extra header for charset
 $Charset = "iso-8859-1";
@@ -68,6 +69,6 @@ define("A_SHEET4_9", "Addresse(s), subject or message is missing!");
 define("A_RELOAD_CHAT", "The settings of this server have just been changed. To avoid malfunctions, please reload your browser (press F5 key or Exit and reenter chat).");
 
 // Frame for configuration
-define("A_SHEET5_0", "- Your phpMyChat installed version is %s -\\nThere is a new version released (%s)!");
-define("A_SHEET5_1", "- Your phpMyChat installed version is %s -<br>There is a new version released (%s)!<br>If you'd like to visit the website and get the updates<br>or read what's new, use the links bellow:");
+define("A_SHEET5_0", "- Your phpMyChat-Plus installed version is %s -\\nThere is a new version released (%s)!");
+define("A_SHEET5_1", "- Your phpMyChat-Plus installed version is %s -<br>There is a new version released (%s)!<br>If you'd like to visit the website and get the updates<br>or read what's new, use the links bellow:");
 ?>

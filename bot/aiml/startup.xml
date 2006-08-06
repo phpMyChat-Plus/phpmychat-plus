@@ -30,7 +30,7 @@
             <property name="talkabout" value="anything"/>
             <property name="wear" value="nothing"/>
             <property name="website" value="http://sourceforge.net/projects/programe"/>
-            <property name="email" value="not-set@no-domain.org"/>
+            <property name="email" value="bot@bot.bot.com"/>
             <property name="language" value="english"/>
             <property name="msagent" value="no"/>
             <!--You may enumerate each file you want the bot to load, or use the "*"

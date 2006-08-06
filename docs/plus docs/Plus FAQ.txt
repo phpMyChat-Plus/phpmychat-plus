@@ -57,4 +57,17 @@ How do I avoid being booted from a chat after the time set for booting?
 An admin and a moderator should never be booted. If that happens, it means your browser lost the connection with the server somehow.
 For an user to stay logged even though he don't type for a while, he can go away using /away command (away users don't get booted)
 
+6Q.
+How can I totally disable the plusbot? I've already disabled it in the config menu but the name still appears in the chat room...
+6A.
+First - you need to go to Admin panel and re-enable it, then please go to the room he is in and use the command /bot stop.
+Rule: Everytime you want to change a settings related to the bot (disable, name of the bot, font, avatar, aso), you need to stop it first in the room/rooms he is eventually running!
+Bot has admin permissions therefore, if you don't follow the rule or forget about it, you won't be able to change/kick/remove the old running bot user from chat. So be careful.
+If you did it already, go back to Admin panel and rename it back to the old name, then stop it then change the settings at your will.
+6aQ.
+How do I make my bot talk only private?
+6aA.
+Enable/Disable public conversations in Admin panel.
+
+
 More to come...

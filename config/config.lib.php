@@ -140,6 +140,19 @@ $REG_CHARS_ALLOWED		= $row[111];
 $EXIT_LINK_TYPE				= $row[112];
 $CHAT_EXTRAS					= $row[113];
 $EMAIL_USER						= $row[114];
+$BOT_HELLO						= $row[115];
+$BOT_BYE							= $row[116];
+$BOT_PUBLIC						= $row[117];
+$ENABLE_PM						= $row[118];
+$EN_ROOM1							= $row[119];
+$EN_ROOM2							= $row[120];
+$EN_ROOM3							= $row[121];
+$EN_ROOM4							= $row[122];
+$EN_ROOM5							= $row[123];
+$EN_ROOM6							= $row[124];
+$EN_ROOM7							= $row[125];
+$EN_ROOM8							= $row[126];
+$EN_ROOM9							= $row[127];
 
 $query_bot1 = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.bot.com'";
 $result_bot1 = mysql_query($query_bot1);
@@ -203,14 +216,26 @@ define("ROOM7", $ROOM7);
 define("ROOM8", $ROOM8);
 define("ROOM9", $ROOM9);
 
+$PUBLIC_ROOMS = $EN_ROOM1 ? ROOM1.", " : "";
+$PUBLIC_ROOMS .= $EN_ROOM2 ? ROOM2.", " : "";
+$PUBLIC_ROOMS .= $EN_ROOM3 ? ROOM3.", " : "";
+$PUBLIC_ROOMS .= $EN_ROOM4 ? ROOM4.", " : "";
+$PUBLIC_ROOMS .= $EN_ROOM5 ? ROOM5.", " : "";
+$PUBLIC_ROOMS = trim($PUBLIC_ROOMS,", ");
+$PRIVATE_ROOMS = $EN_ROOM6 ? ROOM6.", " : "";
+$PRIVATE_ROOMS .= $EN_ROOM7 ? ROOM7.", " : "";
+$PRIVATE_ROOMS .= $EN_ROOM8 ? ROOM8.", " : "";
+$PRIVATE_ROOMS .= $EN_ROOM9 ? ROOM9.", " : "";
+$PRIVATE_ROOMS = trim($PRIVATE_ROOMS,", ");
+$DefaultChatRooms = explode(", ", $PUBLIC_ROOMS);
+$DefaultPrivateRooms = explode(", ", $PRIVATE_ROOMS);
+
 //	Profanity filter disabled for following rooms - by Ciprian
 define("C_NO_SWEAR_ROOM1", $SWEAR1);
 define("C_NO_SWEAR_ROOM2", $SWEAR2);
 define("C_NO_SWEAR_ROOM3", $SWEAR3);
 define("C_NO_SWEAR_ROOM4", $SWEAR4);
 
-$DefaultChatRooms = array(ROOM1, ROOM2, ROOM3, ROOM4, ROOM5);
-$DefaultPrivateRooms = array(ROOM6, ROOM7, ROOM8, ROOM9);
 
 // For Bob Dickow's multi/split smiley's in help popup modification:
 define("SMILEY_COLS", $SMILEY_COLS);
@@ -253,6 +278,7 @@ define("ROOM_SAYS", $ROOM_SAYS);
 define("C_DEMOTE_MOD", $DEMOTE_MOD);
 
 // Private message popup mod by Ciprian
+define("C_ENABLE_PM", $ENABLE_PM);
 define("C_PRIV_POPUP", $PRIV_POPUP);
 
 // Chat Etiquete by Ealdwulf&Emma-Kate from http://wizardtales.net/chat
@@ -418,10 +444,13 @@ define("C_AVA_PROFBUTTON", $AVA_PROFBUTTON); // show, (0=no show) click button f
 define("MAX_DICES", $MAX_DICES);        // Maximum number of die per throw; change as you see fit
 define("MAX_ROLLS", $MAX_ROLLS);        // Maximum number of rolls per die; change as you see fit
 
-define("C_BOT_CONTROL", $BOT_CONTROL);                 // enable/disable bot
-define("C_BOT_NAME", $BOT_NAME);                 // The Name of your ProjectE Bot (Will change later)
-define("C_BOT_FONT_COLOR", $BOT_FONT_COLOR);         // Font color BOT text will be.
-define("BOT_AVATAR", $BOT_AVATAR);		//avatar of the bot
+define("C_BOT_CONTROL", $BOT_CONTROL);    // enable/disable bot
+define("C_BOT_NAME", $BOT_NAME);         // The Name of your ProjectE Bot (Will change later)
+define("C_BOT_FONT_COLOR", $BOT_FONT_COLOR);   // Font color BOT text will be.
+define("C_BOT_AVATAR", $BOT_AVATAR);		//avatar of the bot
+define("C_BOT_HELLO", $BOT_HELLO);      // The hello text bot will post to the room.
+define("C_BOT_BYE", $BOT_BYE);         // The bye text bot will post to the room.
+define("C_BOT_PUBLIC", $BOT_PUBLIC);   // Enable/Disable public conversations with bot in the room/rooms.
 
 // Set the maximum size for resizing posted pictures using /img command
 define("MAX_PIC_SIZE", $MAX_PIC_SIZE);

@@ -59,7 +59,7 @@ if($DbLink1->num_rows() > 0)
 		}
 		if ($User == "SYS announce")
 		{
-			$NewMsg .= "<td></td><td><SPAN CLASS=\"notify2\">[".L_ANNOUNCE."] $Message</SPAN></td>";
+			$NewMsg .= "<td colspan=2><SPAN CLASS=\"notify2\">[".L_ANNOUNCE."] $Message</SPAN></td>";
 		}
 		if ($User == "SYS room")
 		{

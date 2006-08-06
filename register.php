@@ -55,7 +55,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 	}
 	else if (ereg(REG_CHARS_ALLOWED, stripslashes($U)))
 	{
-		$Error = L_ERR_USR_16;
+		$Error = L_ERR_USR_16a;
 	}
 	else if(C_NO_SWEAR == 1 && checkwords($U, true))
 	{
@@ -379,7 +379,7 @@ else
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_REG_45); ?> :</TD>
 			<TD VALIGN="TOP">
 				<INPUT TYPE="radio" NAME="GENDER" VALUE="1" <?php if (isset($GENDER) && $GENDER == "1") echo("CHECKED"); if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_REG_46); ?><br>
-				<INPUT TYPE="radio" NAME="GENDER" VALUE="2" <?php if (isset($GENDER) && $GENDER == "2") echo("CHECKED"); if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_REG_47); ?>
+				<INPUT TYPE="radio" NAME="GENDER" VALUE="2" <?php if (isset($GENDER) && $GENDER == "2") echo("CHECKED"); if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_REG_47); ?><br>
 				<INPUT TYPE="radio" NAME="GENDER" VALUE="0" <?php if (isset($GENDER) && $GENDER == "0") echo("CHECKED"); if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_REG_48); ?>
 			</TD>
 		</TR>

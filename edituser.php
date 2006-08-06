@@ -54,7 +54,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 	}
 	else if (ereg(REG_CHARS_ALLOWED, stripslashes($U)))
 	{
-		$Error = L_ERR_USR_16;
+		$Error = L_ERR_USR_16a;
 	}
 	else if(C_NO_SWEAR && checkwords($U, true))
 	{

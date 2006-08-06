@@ -83,15 +83,20 @@ if (strcasecmp(ucfirst(stripslashes($R)), ROOM9) == 0) $Room = ROOM9;
 	$DbLink->query("SELECT room FROM ".C_USR_TBL." WHERE username='$BOT_NAME'");
 	list($BR) = $DbLink->next_record();
 	$botcontrol ="botfb/$Room.txt";
-	if (file_exists($botcontrol) || $BR ==  $Room)
+	if ((file_exists($botcontrol) || $BR ==  $Room) && C_BOT_PUBLIC)
   {
 		$Expl.= BOT_TIPS;
-		$Ex.='<BR><FONT SIZE=-2 COLOR="40E0D0"><I>'.$Expl.'</I></FONT>';
+		$Ex.='<BR><FONT SIZE=-2 COLOR="40E0D0"><I><b>'.C_BOT_NAME.'</b> - '.$Expl.'</I></FONT>';
 	}
-	elseif($BR != "")
+	elseif($BR != "" && C_BOT_PUBLIC)
 	{
 		$Expl.= BOT_PRIV_TIPS;
-		$Ex.='<BR><FONT SIZE=-2 COLOR="40E0D0"><I>'.$Expl.'</I></FONT>';
+		$Ex.='<BR><FONT SIZE=-2 COLOR="40E0D0"><I><b>'.C_BOT_NAME.'</b> - '.$Expl.'</I></FONT>';
+	}
+	elseif(file_exists($botcontrol) && !C_BOT_PUBLIC)
+	{
+		$Expl.= BOT_PRIVONLY_TIPS;
+		$Ex.='<BR><FONT SIZE=-2 COLOR="40E0D0"><I><b>'.C_BOT_NAME.'</b> - '.$Expl.'</I></FONT>';
 	}
 	else
 	{
@@ -111,6 +116,6 @@ if (strcasecmp(ucfirst(stripslashes($R)), ROOM9) == 0) $Room = ROOM9;
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <HEAD>
 <BODY class="frame">
-        <FONT size="2"><I><B>Welcome to <?php echo (stripslashes($R)) ?>!</B> Topic: <font color=<?php echo($CD); ?>><B><?php echo ($UR);?></B></font></I><?php echo ($Ex);?></FONT>
+        <FONT size="2"><I><B>Welcome to <?php echo (stripslashes($R)) ?>!</B> Topic: <font color=yellow><B><?php echo ($UR);?></B></font></I><?php echo ($Ex);?></FONT>
 </BODY>
 </HTML>

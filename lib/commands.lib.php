@@ -91,6 +91,10 @@ elseif (C_SAVE != "0" && eregi("^\/save([[:space:]]([[:digit:]]*))?$", $M, $Cmd)
 {
 	include("./lib/commands/save.cmd.php");
 }
+elseif (eregi("^\/size([[:space:]]([[:digit:]]+))?$", $M, $Cmd))
+{
+	include("./lib/commands/size.cmd.php");
+}
 elseif (eregi("^\/announce[[:space:]](.*)?$", $M, $Cmd))
 {
 	include("./lib/commands/announce.cmd.php");
@@ -128,7 +132,7 @@ elseif (eregi("^\/img[[:space:]](.+)?$", $M, $Cmd))
 {
   include("./lib/commands/img.cmd.php");
 }
-elseif (eregi("^\/room([[:space:]](.+))?$", $M, $Cmd))
+elseif (eregi("^\/room([[:space:]]\*)?([[:space:]].+)$", $M, $Cmd))
 {
 	include("./lib/commands/room.cmd.php");
 }

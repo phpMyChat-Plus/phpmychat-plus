@@ -100,7 +100,7 @@ A
 A:hover, A:active
 {
 	color: #FF9900;
-	text-decoration: underline overline;
+	text-decoration: underline;
 }
 
 A.user, A.user:active

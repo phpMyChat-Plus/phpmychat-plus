@@ -16,6 +16,9 @@ require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
 require("./lib/clean.lib.php");
 
+// Size command by Ciprian
+if (isset($HTTP_COOKIE_VARS["CookieFontSize"])) $FontSize = $HTTP_COOKIE_VARS["CookieFontSize"];
+
 header("Content-Type: text/html; charset=${Charset}");
 
 // Avoid server configuration for magic quotes
@@ -316,13 +319,17 @@ if($contents == $User)
 			$Userx = $User;  // Avatar System insered only.
 			if($User != stripslashes($U))
 			{
-				if (C_PRIV_POPUP && ($allowpopup || $status == "u"))
+				if (C_ENABLE_PM && C_PRIV_POPUP && ($allowpopup || $status == "u"))
 				{
 					$User = "<A HREF=\"#\" onClick=\"window.parent.send_popup('/to ".special_char2($User,$Latin1)."');\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."<\/A>";
 				}
-				else
+				elseif (C_ENABLE_PM && !C_PRIV_POPUP)
 				{
 					$User = "<A HREF=\"#\" onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',true); return false\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."<\/A>";
+				}
+				else
+				{
+					$User = "<A HREF=\"#\" onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false); return false\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."<\/A>";
 				}
 			}
 			if ($Dest != "") $Dest = "]<BDO dir=\"${textDirection}\"><\/BDO>".$colorname_endtag.">".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest));
@@ -544,7 +551,7 @@ $DbLink->query("SELECT allowpopup FROM ".C_REG_TBL." WHERE username = '$U'");
 if($DbLink->num_rows() != 0) list($allowpopupu) = $DbLink->next_record();
 else $allowpopupu = 1;
 $DbLink->clean_results();
-	if (substr($User,0,4) != "SYS " && C_PRIV_POPUP && $allowpopupu)
+	if (substr($User,0,4) != "SYS " && C_ENABLE_PM && C_PRIV_POPUP && $allowpopupu)
 	{
 		$DbLink->query("SELECT username, address, room, pm_read FROM ".C_MSG_TBL." WHERE ((room = '$R' OR room = 'Offline PMs') AND address = '$U' AND pm_read = 'New') OR (address = '$U' AND pm_read = 'Neww') ORDER BY m_time DESC");
 		if($DbLink->num_rows() > 0)

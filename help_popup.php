@@ -256,6 +256,10 @@ if (C_HTML_TAGS_KEEP != "none")
 		<TD WIDTH=10>&nbsp;</TD>
 		<TD><?php echo(L_HELP_CMD_20); ?><br><?php echo(L_HELP_CMD_30); ?></TD>
 	</TR>
+<?php
+if (C_ENABLE_PM)
+{
+?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
 		<A HREF="#" onClick="cmd2Input('/msg',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/msg <?php echo("{".L_HELP_USR."} {".L_HELP_MSG."}"); ?></A><br>
 		<A HREF="#" onClick="cmd2Input('/to',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/to <?php echo("{".L_HELP_USR."} {".L_HELP_MSG."}"); ?></A>
@@ -264,6 +268,9 @@ if (C_HTML_TAGS_KEEP != "none")
 		<TD WIDTH=10>&nbsp;</TD>
 		<TD><?php echo(L_HELP_CMD_10); ?></TD>
 	</TR>
+<?php
+}
+?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2><A HREF="#" onClick="cmd2Input('/notify',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/notify</A></TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
@@ -342,6 +349,11 @@ if (C_HTML_TAGS_KEEP != "none")
 		<TD WIDTH=10>&nbsp;</TD>
 		<TD><?php echo(($Ver == "H") ? L_HELP_CMD_1b : L_HELP_CMD_1a); ?></TD>
 	</TR>
+	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2><A HREF="#" onClick="cmd2Input('/size',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/size <BDO dir="<?php echo($TextDir); ?>">[n]</BDO></A></TH></TR>
+		<TR>
+			<TD WIDTH=10>&nbsp;</TD>
+			<TD><?php echo(L_HELP_CMD_33); ?></TD>
+		</TR>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2><A HREF="#" onClick="cmd2Input('/sort',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/sort</A></TH></TR>
 		<TR>
 			<TD WIDTH=10>&nbsp;</TD>
@@ -375,12 +387,22 @@ if (C_HTML_TAGS_KEEP != "none")
 		<TD><?php echo(L_HELP_CMD_11); ?></TD>
 	</TR>
 <!-- The wisp command doc -->
-  <TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2><A HREF="#" onClick="cmd2Input('/wisp', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/wisp {<?php echo(L_HELP_USR); ?>}</A></TH></TR>
+<?php
+if (C_ENABLE_PM)
+{
+?>
+  <TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
+  	<A HREF="#" onClick="cmd2Input('/wisp', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/wisp <?php echo("{".L_HELP_USR."} {".L_HELP_MSG."}"); ?></A><br>
+  	<A HREF="#" onClick="cmd2Input('/whisp', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/whisp <?php echo("{".L_HELP_USR."} {".L_HELP_MSG."}"); ?></A>
+	</TH></TR>
   <TR>
     <TD WIDTH=10>&nbsp;</TD>
     <TD><?php echo(L_HELP_CMD_23); ?></TD>
   </TR>
 <!-- End wisp command doc -->
+<?php
+}
+?>
 </TABLE>
 <!-- Color Picker Text Input Box help start -->
 <TABLE BORDER=0 CELLPADDING=3 WIDTH=574 CLASS="table">

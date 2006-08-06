@@ -1,5 +1,10 @@
 <?php
-
+if (!C_ENABLE_PM)
+{
+	$Error = PM_DISABLED_ERROR;
+}
+else
+{
 // Check for invalid characters in the addressee name
 if (ereg("[\, ]", stripslashes($Cmd[2])))
 {
@@ -69,6 +74,7 @@ else
 		$RefreshMessages = true;
 		if(C_PRIV_POPUP) $Error = sprintf(L_PRIV_NOT_ONLINE, special_char($Cmd[2],$Latin1));
 		else $Error = sprintf(L_NOT_ONLINE, special_char($Cmd[2],$Latin1));
-	}
-}
+	};
+};
+};
 ?>

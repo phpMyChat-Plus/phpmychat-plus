@@ -3,14 +3,14 @@ CREATE TABLE bot_bot (
   bot tinyint(4) NOT NULL default '0',
   name varchar(255) NOT NULL default '',
   value text NOT NULL,
-  PRIMARY KEY  (id),
+  PRIMARY KEY (id),
   KEY botname (bot,name)
 ) TYPE=MyISAM AUTO_INCREMENT=53 ;
 
 CREATE TABLE bot_bots (
   id tinyint(3) unsigned NOT NULL auto_increment,
   botname varchar(255) NOT NULL default '',
-  PRIMARY KEY  (botname),
+  PRIMARY KEY (botname),
   KEY id (id)
 ) TYPE=MyISAM AUTO_INCREMENT=3 ;
 
@@ -21,7 +21,7 @@ CREATE TABLE bot_conversationlog (
   response text,
   uid varchar(255) default NULL,
   enteredtime timestamp(14) NOT NULL,
-  PRIMARY KEY  (id),
+  PRIMARY KEY (id),
   KEY botid (bot)
 ) TYPE=MyISAM AUTO_INCREMENT=54 ;
 
@@ -31,7 +31,7 @@ CREATE TABLE bot_dstore (
   value text,
   enteredtime timestamp(14) NOT NULL,
   id int(11) NOT NULL auto_increment,
-  PRIMARY KEY  (id),
+  PRIMARY KEY (id),
   KEY nameidx (name(40))
 ) TYPE=MyISAM AUTO_INCREMENT=212 ;
 
@@ -45,7 +45,7 @@ CREATE TABLE bot_gmcache (
   patternmatched text,
   inputmatched text,
   combined text NOT NULL,
-  PRIMARY KEY  (id),
+  PRIMARY KEY (id),
   KEY combined (bot,combined(255))
 ) TYPE=MyISAM AUTO_INCREMENT=1 ;
 
@@ -53,7 +53,7 @@ CREATE TABLE bot_gossip (
   bot tinyint(3) unsigned NOT NULL default '0',
   gossip text,
   id int(11) NOT NULL auto_increment,
-  PRIMARY KEY  (id),
+  PRIMARY KEY (id),
   KEY botidx (bot)
 ) TYPE=MyISAM AUTO_INCREMENT=9 ;
 
@@ -64,7 +64,7 @@ CREATE TABLE bot_patterns (
   ordera tinyint(4) NOT NULL default '0',
   parent int(11) NOT NULL default '0',
   isend tinyint(4) NOT NULL default '0',
-  PRIMARY KEY  (id),
+  PRIMARY KEY (id),
   KEY wordparent (parent,word),
   KEY botid (bot)
 ) TYPE=MyISAM AUTO_INCREMENT=193873 ;
@@ -83,7 +83,7 @@ CREATE TABLE bot_thatindex (
   uid varchar(255) default NULL,
   enteredtime timestamp(14) NOT NULL,
   id int(11) NOT NULL auto_increment,
-  PRIMARY KEY  (id)
+  PRIMARY KEY (id)
 ) TYPE=MyISAM AUTO_INCREMENT=54 ;
 
 CREATE TABLE bot_thatstack (
@@ -91,7 +91,7 @@ CREATE TABLE bot_thatstack (
   id int(11) NOT NULL auto_increment,
   value varchar(255) default NULL,
   enteredtime timestamp(14) NOT NULL,
-  PRIMARY KEY  (id)
+  PRIMARY KEY (id)
 ) TYPE=MyISAM AUTO_INCREMENT=63 ;
 
 CREATE TABLE c_ban_users (
@@ -218,17 +218,30 @@ CREATE TABLE c_config (
   EXIT_LINK_TYPE enum('0','1') NOT NULL default '0',
   CHAT_EXTRAS enum('0','1') NOT NULL default '1',
   EMAIL_USER enum('0','1') NOT NULL default '1',
-  PRIMARY KEY  (ID)
+  BOT_HELLO varchar(100) NOT NULL default '',
+  BOT_BYE varchar(100) NOT NULL default '',
+  BOT_PUBLIC enum('0','1') NOT NULL default '1',
+  ENABLE_PM enum('0','1') NOT NULL default '1',
+  EN_ROOM1 enum('0','1') NOT NULL default '1',
+  EN_ROOM2 enum('0','1') NOT NULL default '1',
+  EN_ROOM3 enum('0','1') NOT NULL default '1',
+  EN_ROOM4 enum('0','1') NOT NULL default '1',
+  EN_ROOM5 enum('0','1') NOT NULL default '1',
+  EN_ROOM6 enum('0','1') NOT NULL default '1',
+  EN_ROOM7 enum('0','1') NOT NULL default '1',
+  EN_ROOM8 enum('0','1') NOT NULL default '1',
+  EN_ROOM9 enum('0','1') NOT NULL default '1',
+  PRIMARY KEY (ID)
 ) TYPE=MyISAM;
 
-INSERT INTO c_config VALUES (0, 48, 10, 0, 'english', '1', '0', '1', '0', 6, '1', 'Your name/chat name here', 'Your email address here', 'Your server/chat URL here', '1', '1', '2', 1, '1', '@#$*!', '*', '1', '', '1', 0, '1', 20, 10, '1', '1', '1', 10, 5, '1', 'sounds/beep.wav', '1', 'sounds/chimedwn.wav', '1', '1', '1', '1', '<br>/away /buzz /demote /dice /dice2 /high /img /mr /room /sort /topic /wisp', '1', '<br>Advanced Admin, Avatars, Smilies Popup, Color Input Box,<br>Private Popup, Quick Menu, Logs Archive, Lurking, Color names', '1', 'Attention Room:', '0', '1', '1', '1', '''./images/icon.gif''', '''./''', '''MyChat based on phpMyChat plus''', '1', '1', '1', '1', '1', '25-11-2005', '1', 'Public Room 1', 'Public Room 2', 'Public Room 3', 'Public Room 4', 'Public Room 5', 'Private Room 1', 'Private Room 2', 'Staff Only', 'Support Room', 'Public Room 5', 'Staff Only', 'Support Room', '', '1', '1', 'black', 'orange', 'brown', 'violet', 'green', 'maroon', 'navy', '000000', 'FFA500', 'A52A2A', 'EE82EE', '008000', '800000', '000080', 'Greetings|\r\nWelcome|\r\nThanks for coming by|\r\nLoL|\r\n:rofl|\r\n/announce I have to go now!|\r\n/away be right back...|\r\n/away ...I''m back!|\r\n/bot start|\r\n/bot stop|\r\n/me is busy right now!|\r\n/mr is watching TV|\r\n/bye See you around!|\r\n/high user|\r\n/join 0 #%s|\r\n/join 1 #%s|\r\n/invite %s|\r\n/img http://www.path_to_image|\r\n/promote %s|\r\n/demote %s|\r\n/demote * %s|\r\n/room Please follow the topic|\r\n/topic |\r\n/topic top reset|\r\n/wisp %s Hey, in which room ru?|\r\n/whois %s', 'Greetings|\r\nWelcome|\r\nThanks for coming by|\r\nLoL|\r\n:rofl|\r\n/away be right back...|\r\n/away ...I''m back!|\r\n/me is busy right now!|\r\n/mr is reading|\r\n/bye cyall!|\r\n/high %s|\r\n/join 0 #%s|\r\n/join 1 #%s|\r\n/invite %s|\r\n/img http://www.path_to_image|\r\n/promote %s|\r\n/room Please follow the topic|\r\n/topic |\r\n/topic top reset|\r\n/wisp %s Hey, in which room ru?|\r\n/whois %s', 'Hello everyone|\r\nlol|\r\n:rofl|\r\n/away brb...|\r\n/away ...back!|\r\n/me is busy!|\r\n/mr is lurking|\r\n/bye ttyl!|\r\n/high %s|\r\n/join 0 #%s|\r\n/join 1 #%s|\r\n/invite %s|\r\n/img http://www.path_to_image|\r\n/wisp %s Hey, in which room ru?|\r\n/whois %s', '1', '1', 55, './images/avatars/', 'def_avatar.gif', 25, 25, '1', 20, 6, '1', 350, '0', '1', 'logsadmin', '1', '1', '1', '0', 'a-zA-Z0-9_.-@#$%^&*()=<>?~|`:', '1', '1', '1');
+INSERT INTO c_config VALUES (0, 48, 10, 0, 'english', '1', '0', '1', '0', 6, '1', 'Your name/chat name here', 'Your email address here', 'Your server/chat URL here', '1', '1', '2', 1, '1', '@#$*!', '*', '1', '', '1', 0, '1', 20, 10, '1', '1', '1', 10, 5, '1', 'sounds/beep.wav', '1', 'sounds/chimedwn.wav', '1', '1', '1', '1', '<br>/away /buzz /demote /dice /dice2 /dice3 /high /img /mr /room /size /sort /topic /wisp', '1', '<br>Advanced Admin, Avatars, Smilies Popup, Color Input Box, Private Popup,<br>Quick Menu, Logs Archive, Lurking, Color names', '1', 'Attention Room:', '0', '1', '1', '1', '''./images/icon.gif''', '''./''', '''MyChat based on phpMyChat plus''', '1', '1', '1', '1', '1', '01-08-2005', '1', 'Public Room 1', 'Public Room 2', 'Public Room 3', 'Public Room 4', 'Public Room 5', 'Private Room 1', 'Private Room 2', 'Staff Only', 'Support Room', 'Public Room 5', 'Staff Only', 'Support Room', '', '1', '1', 'black', 'orange', 'brown', 'violet', 'green', 'maroon', 'navy', '000000', 'FFA500', 'A52A2A', 'EE82EE', '008000', '800000', '000080', 'Greetings|\r\nWelcome|\r\nThanks for coming by|\r\nLoL|\r\n:rofl|\r\n/announce I have to go now!|\r\n/away be right back...|\r\n/away ...I''m back!|\r\n/bot start|\r\n/bot stop|\r\n/buzz|\r\n/buzz ~chimeup|\r\n/me is busy right now!|\r\n/mr is watching TV|\r\n/bye See you around!|\r\n/high user|\r\n/join 0 #%s|\r\n/join 1 #%s|\r\n/invite %s|\r\n/img http://www.path_to_image|\r\n/promote %s|\r\n/demote %s|\r\n/demote * %s|\r\n/room Please follow the topic|\r\n/size 12|\r\n/size|\r\n/sort|\r\n/topic |\r\n/topic top reset|\r\n/wisp %s Hey, in which room ru?|\r\n/whois %s', 'Greetings|\r\nWelcome|\r\nThanks for coming by|\r\nLoL|\r\n:rofl|\r\n/away be right back...|\r\n/away ...I''m back!|\r\n/buzz|\r\n/buzz ~chimeup|\r\n/me is busy right now!|\r\n/mr is reading|\r\n/bye cyall!|\r\n/high %s|\r\n/join 0 #%s|\r\n/join 1 #%s|\r\n/invite %s|\r\n/img http://www.path_to_image|\r\n/promote %s|\r\n/room Please follow the topic|\r\n/size 12|\r\n/size|\r\n/sort|\r\n/topic |\r\n/topic top reset|\r\n/wisp %s Hey, in which room ru?|\r\n/whois %s', 'Hello everyone|\r\nlol|\r\n:rofl|\r\n/away brb...|\r\n/away ...back!|\r\n/me is busy!|\r\n/mr is lurking|\r\n/bye ttyl!|\r\n/high %s|\r\n/join 0 #%s|\r\n/join 1 #%s|\r\n/invite %s|\r\n/img http://www.path_to_image|\r\n/size 12|\r\n/size|\r\n/sort|\r\n/wisp %s Hey, in which room ru?|\r\n/whois %s', '1', '1', 55, './images/avatars/', 'def_avatar.gif', 25, 25, '1', 20, 6, '1', 350, '0', '1', 'logsadmin', '1', '1', '1', '0', 'a-zA-Z0-9_.-@#$%^&*()=<>?~|`:', '1', '1', '1', 'Hello People!!! Have you been missing me?', 'Bye Bye everyone! See you when I see you...', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
 
 CREATE TABLE c_lurkers (
   time int(15) NOT NULL default '0',
   ip varchar(15) NOT NULL default '',
   browser varchar(255) NOT NULL default '',
   file varchar(50) NOT NULL default '',
-  PRIMARY KEY  (time),
+  PRIMARY KEY (time),
   KEY ip (ip),
   KEY file (file)
 ) TYPE=MyISAM;
@@ -257,7 +270,7 @@ ALTER TABLE c_reg_users
 			ADD avatar varchar(255) NOT NULL default '';
 
 UPDATE c_reg_users SET reg_time =".time().";
-INSERT INTO c_reg_users VALUES('plusbot', '', '47e014ee34869ded7e5236541246319d', 'Bot', 'phpMyChat - Plus', 'WorldWideWeb', '', 'bot@bot.bot.com', '0', 'admin', '', 1130763311, '', '1', '0', './images/alice.gif', 'I am a Robot originally called Alice; I am proud to be the first Artificial Intelligence on the net! Please test my capabilities as you wish! To start a conversation with me, just type "/hello PlusBot" in the room I am active in, to stop the conversation type "/bye PlusBot". Ohhh... I wish to express my gratitude to Roy, Popeye and Ciprian for making me available for chatting in here. :)', 'http://ciprianmp.com/plus', 'http://plus/gamedogs.com', 'English only', 'olive', './images/avatars/avatar52.gif');
+INSERT INTO c_reg_users VALUES('plusbot', '', '47e014ee34869ded7e5236541246319d', 'Bot', 'phpMyChat - Plus', 'WorldWideWeb', '', 'bot@bot.bot.com', '0', 'admin', '', 1130763311, '-No tracking IP-', '1', '0', './images/alice.gif', 'I am a Robot originally called Alice. I am proud to be the first Artificial Intelligence on the net! Please test my capabilities as you wish! To start a public conversation with me just type "hello myname" in the room I am active in, to stop the conversation type "bye myname" or "myname> bye". But we can also talk in private; just click on my name whenever you need a shoulder to cry on :p Ohhh... I wish to express my gratitude to Roy, Popeye and Ciprian for making me available for chatting in here. :)', 'http://ciprianmp.com/plus', 'http://plus/gamedogs.com', 'English only', 'olive', './images/avatars/avatar52.gif');
 
 ALTER TABLE c_users
 			CHANGE latin1 latin1 tinyint(1) NOT NULL default '0',

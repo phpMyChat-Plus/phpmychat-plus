@@ -256,7 +256,7 @@ while(list($User, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup,
   if ($awaystat == 0) {
 //--------------------------Begin HighLight command by R.Worley
 		$Cmd2Send = ($User == stripslashes($U) ? "'high',''" : "'high','".special_char2($User,$Latin1)."'");
-			if (C_PRIV_POPUP == 1 && ($allowpopup == 1 || $status = "u"))
+			if (C_ENABLE_PM && C_PRIV_POPUP && ($allowpopup || $status = "u"))
 			{
 				if (COLOR_NAMES)
 				{
@@ -459,7 +459,7 @@ if($DbLink->num_rows() > 0)
 				{
 					echo('<img src="'.$ava_none.'" width="'.$ava_width.'" height="'.$ava_height.'" border="0" alt="' . L_NO_PROFILE . '">&nbsp;');
 				};
-			if (C_PRIV_POPUP == 1 && ($allowpopup == 1 || $status = "u"))
+			if (C_ENABLE_PM && C_PRIV_POPUP && ($allowpopup || $status = "u"))
 			{
 				if (COLOR_NAMES)
 				{
@@ -519,6 +519,20 @@ $Cmd2Send = ("'quit','".special_char2(stripslashes($U),$Latin1)." - brb (need to
 </TD><br>
 <?php
 }
+if ((C_CHAT_LOGS && C_SHOW_LOGS_USR) || (!C_SHOW_LOGS_USR && $statusu == "a") || (C_CHAT_LURKING && C_SHOW_LURK_USR) || (!C_SHOW_LOGS_USR && $statusu == "a") || (!C_REQUIRE_REGISTER && $statusu == "u"))
+{
+?>
+	<CENTER><TD><B>Extra Options</B></TD></CENTER>
+<?php
+if ($statusu == "u"  && !C_REQUIRE_REGISTER)
+{
+$Cmd2Send = ("'quit','".special_char2(stripslashes($U),$Latin1)." - brb (need to register first :p)'");
+?>
+<TD valign="bottom">
+<A HREF="<?php echo($ChatPath); ?>register.php" onClick="reg_popup_room(); window.parent.runCmd(<?php echo($Cmd2Send); ?>); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_3); ?>.'; return true;" title="<?php echo(L_REG_3); ?>"><?php echo(L_REG_3); ?></A>
+</TD><br>
+<?php
+}
 if (C_CHAT_LOGS && (C_SHOW_LOGS_USR || $statusu == "a"))
 {
 ?>
@@ -538,7 +552,7 @@ if (C_CHAT_LOGS && (C_SHOW_LOGS_USR || $statusu == "a"))
 		$online_users = @mysql_numrows($result);
 		@mysql_close();
 		$lurklink = " <A HREF=\"lurking.php?D=".$D."&L=".$L."\" CLASS=\"ChatLink\" TARGET=\"_blank\" onMouseOver=\"window.status='Open the lurking page.'; return true;\" title=\"Lurking page\">";
-		echo("<TD valign=bottom>".$lurklink.$online_users." ".($online_users != 1 ? L_USERS : L_USER)." ".L_CUR_5."</A></TD>");
+		echo("<TD valign=bottom>".$lurklink.$online_users." ".($online_users != 1 ? L_LURKERS : L_LURKER)."</A></TD>");
 		$CleanUsrTbl = 1;
 	}
 }

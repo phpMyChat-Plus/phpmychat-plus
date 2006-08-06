@@ -35,20 +35,20 @@ else
 		else
 		{
 			// Check for swear words in the message to be sent if there is one
-			if (trim($Cmd[1]) != "")
+			if (trim($Cmd[2]) != "")
 			{
 				if (C_NO_SWEAR == 1 && $R != C_NO_SWEAR_ROOM1 && $R != C_NO_SWEAR_ROOM2 && $R != C_NO_SWEAR_ROOM3 && $R != C_NO_SWEAR_ROOM4)
 				{
 				include("./lib/swearing.lib.php");
-				$Cmd[1] = checkwords($Cmd[1], false);
+				$Cmd[2] = checkwords($Cmd[1], false);
 				}
 			}
-
-   $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS room', '$Latin1', ".time().", '$U', '".addslashes(stripslashes($Cmd[1]))."', '', '')");
-
-   $IsCommand = true;
-   $RefreshMessages = true;
-   $First = 1;
+		if (trim($Cmd[1]) == "*")
+$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS room', '$Latin1', ".time().", '$U', '".addslashes(stripslashes($Cmd[2]))."', '', '')");
+		else
+		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS room', '$Latin1', ".time().", '$U', '".addslashes(stripslashes($Cmd[2]))."', '', '')");
+		$IsCommand = true;
+		$RefreshMessages = true;
 		};
 	};
 };

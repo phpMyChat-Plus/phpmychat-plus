@@ -50,7 +50,7 @@ $Room_type = (isset($CookieRoomType) ? $CookieRoomType : "");
 $Color = (isset($CookieColor) ? $CookieColor : "");
 $Status = (isset($CookieStatus) ? $CookieStatus : "");
 
-layout($Is_Error,$Username,$Room_name,$Room_type);
+layout($Is_Error,$Username,$Room_name,$Room_type,$Color,$Status);
 
 // You can add php code here, or add html statements before the "</BODY>" tag.
 ?>

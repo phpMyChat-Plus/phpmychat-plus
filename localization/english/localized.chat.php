@@ -1,7 +1,7 @@
 <?php
-// File : english.lang.php
+// File : english.chat.php - plus version
 // Original file by Nicolas Hoizey <nhoizey@phpheaven.net>
-// Additions for the plus version by Ciprian Murariu <ciprianmp@yahoo.com>
+// Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 
 // extra header for Charset
 $Charset = "iso-8859-1";
@@ -13,15 +13,16 @@ $FontSize = 10;
 define("L_TUTORIAL", "Tutorial");
 
 define("L_WEL_1", "Messages are deleted after");
-define("L_WEL_2", "hours and usernames after");
+define("L_WEL_2", "hours and inactive users after");
 define("L_WEL_3", "minutes ...");
 
-define("L_CUR_1", "There are (is) currently");
-define("L_CUR_2", "in the chat.");
+define("L_CUR_1", "There");
+define("L_CUR_1a", "are currently");
+define("L_CUR_1b", "is currently");
+define("L_CUR_2", "in the chat");
 define("L_CUR_3", "Users currently in the chat rooms");
 define("L_CUR_4", "users in private rooms");
-define("L_CUR_5", "lurking");
-define("L_CUR_6", "Users currently lurking<br>(monitoring this page):");
+define("L_CUR_5", "Users currently lurking<br>(monitoring this page):");
 
 define("L_SET_1", "Please set ...");
 define("L_SET_2", "your username");
@@ -113,7 +114,8 @@ define("L_ERR_USR_12", "You are the administrator, so you cannot be removed.");
 define("L_ERR_USR_13", "To create your own room you must be registered.");
 define("L_ERR_USR_14", "You must be registered before chatting.");
 define("L_ERR_USR_15", "You must type your full name.");
-define("L_ERR_USR_16", "Username can only contain these characters:<br>".$REG_CHARS_ALLOWED."");
+define("L_ERR_USR_16", "Only these extra-characters allowed:\\n".$REG_CHARS_ALLOWED."\\nSpaces, commas or backslashes (\\) not allowed.\\nCheck the sintax.");
+define("L_ERR_USR_16a", "Only these extra-characters allowed:<br>".$REG_CHARS_ALLOWED."<br>Spaces, commas or backslashes (\\) not allowed. Check the sintax.");
 define("L_ERR_USR_17", "This room doesn't exist, and you are not allowed to create one.");
 define("L_ERR_USR_18", "Banished word found in your username.");
 define("L_ERR_USR_19", "You cannot be in more than one room at the same time.");
@@ -138,6 +140,8 @@ define("L_CONN_STATE", "Refresh Connection state");
 define("L_CHAT", "Chat");
 define("L_USER", "user");
 define("L_USERS", "users");
+define("L_LURKER", "lurker");
+define("L_LURKERS", "lurkers");
 define("L_NO_USER", "No user");
 define("L_ROOM", "room");
 define("L_ROOMS", "rooms");
@@ -149,7 +153,7 @@ define("L_NO_PROFILE", "No profile");
 // input frame
 define("L_HLP", "Help");
 define("L_BAD_CMD", "This is not a valid command!");
-define("L_ADMIN", "%s is already the administrator!");
+define("L_ADMIN", "User %s is already the administrator!");
 define("L_IS_MODERATOR", "User %s is already a moderator!");
 define("L_NO_MODERATOR", "Only a moderator of this room can use this command.");
 define("L_MODERATOR", "User %s is now a moderator for this room.");
@@ -185,7 +189,7 @@ define("L_HELP_CMD_1a", "Set number of messages to show. Minimum and default are
 define("L_HELP_CMD_1b", "Reload the messages frame and display the n latest messages, minimum and default are 5.");
 define("L_HELP_CMD_2a", "Modify messages list refresh delay (in seconds).<br>If n is not specified or less than 3, toggles between no refresh and 10s refresh.");
 define("L_HELP_CMD_2b", "Modify messages and users lists refresh delay (in seconds).<br>If n is not specified or less than 3, toggles between no refresh and 10s refresh.");
-define("L_HELP_CMD_3", "Inverts messages order.");
+define("L_HELP_CMD_3", "Inverts messages order (not in all browsers).");
 define("L_HELP_CMD_4", "Join another room, creating it if it doesn't exist and if you're allowed to.<br>n equals 0 for private and 1 for public, default to 1 if not specified.");
 define("L_HELP_CMD_5", "Leave the chat after displaying an optionnal message.");
 define("L_HELP_CMD_6", "Avoid diplaying messages from a user if nick is specified.<br>Set ignoring off for a user when nick and - are both specified, for all users when - is but not nick.<br>With no option, this command pops up a window that shows all ignored nicks.");
@@ -215,6 +219,7 @@ define("L_HELP_CMD_29", "The second command will allow the administrator or mode
 define("L_HELP_CMD_30", "The second command does the same as /me but it will show your respective gender<br>E.g. * Mr Ciprian is watching TV or Mrs Dana is happy.");
 define("L_HELP_CMD_31", "Change the order users are sorted in lists: by entrance time or alphabetically.");
 define("L_HELP_CMD_32", "This is a third (roleplaying) version of the dice rolling.<br>Usage: /d{n1}[tn2] or /d{n1};<br>n1 can take any value <b>between 1 and 100</b> (it represents the number of rolls per dice).<br>n2 can take any value <b>between 1 and %s</b> (it represents the number of rolling dices per throw).");
+define("L_HELP_CMD_33", "Change the font size of the messages in chat to user choice (allowed values for n: <b>between 7 and 15</b>); the /size command resets the font size to the default value.");
 define("L_HELP_ETIQ_1", "Chat Etiquette");
 define("L_HELP_ETIQ_2", "Our site would like to keep its community friendly and fun, so please adhere to the following guidelines. If you fail to observe these rules, one of our chat moderators may boot you from the chat.<br><br>Thank you,");
 define("L_HELP_ETIQ_3", "Our Chat Etiquette Guidelines");
@@ -236,6 +241,7 @@ define("L_WHOIS_USER", "User");
 
 // Notification messages of user entrance/exit
 define("L_ENTER_ROM", "%s enters this room" . L_ENTER_SND);
+define("L_ENTER_ROM_NOSOUND", "%s enters this room");
 define("L_EXIT_ROM", "%s exits from this room");
 
 // Clean mod/fix by Ciprian
@@ -247,10 +253,10 @@ define("L_AWAY", "%s is marked away");
 define("L_BACK", "%s is back!");
 
 // Quick Menu mod
-define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***** Quick Menu *****&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"); //&nbsp; means one blank space. this will center align the title of the drop list.
+define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***** Quick Menu *****");	//&nbsp; means one blank space. this will center align the title of the drop list.
 
-// Topic Banner
-define("L_TOPIC", " has set the TOPIC to:- ");
+// Topic Banner mod
+define("L_TOPIC", " has set the TOPIC to: - ");
 define("L_TOPIC_RESET", " has reset the TOPIC.");
 define("L_HELP_TOP", "at least two words as topic");
 
@@ -269,16 +275,16 @@ define("INFO_CMDS", "<span style=\"color:orange\">Extra Commands available:</spa
 define("INFO_MODS", "<span style=\"color:orange\">Extra Features/Mods available:</span>".MODS.".");
 define("INFO_BOT", "<span style=\"color:orange\">Our available bot is: </span><u>".C_BOT_NAME."</u>.");
 
-// profile mod
+// Profile mod
 define("L_PRO_1", "spoken languages");
 define("L_PRO_2", "favorite link 1");
 define("L_PRO_3", "favorite link 2");
 define("L_PRO_4", "description");
 define("L_PRO_5", "picture URL");
-define("L_PRO_6", "your name's <a href=".$ChatPath."colorchart.htm onMouseOver=\"window.status='Click to open the HTML Color Chat.'; return true\" target=_blank class=ChatLink>color</a>");
+define("L_PRO_6", "your name's <a href=".$ChatPath."colorchart.htm onMouseOver=\"window.status='Click to open the HTML Color Chart.'; return true\" target=_blank class=ChatLink>color</a>");
 
 // Avatar mod
-define("L_ERR_AV", "Invalid URL or nonexisting host.");
+define("L_ERR_AV", "Invalid URL or non-existing host.");
 define("L_TITLE_AV", "Your current avatar: ");
 define("L_CHG_AV", "Click 'Change' in the Profile form<br>to store your Avatar.");
 define("L_SEL_NEW_AV", "Select a new Avatar");
@@ -288,18 +294,20 @@ define("L_EXPL_AV", "(Enter URL, then hit ENTER to view)");
 define("L_CANCEL", "Cancel");
 define("L_CLICK", "Click:");
 
-// PluceBot bot mod
-define("BOT_TIPS", "<b>".C_BOT_NAME."</b> - BOT TIPS: Our bot is active in this room. To start talking to the bot, type <b>hello ".C_BOT_NAME.'</b>. To end conversation, type: <b>bye '.C_BOT_NAME.'</b>. Case insensitive.');
-define("BOT_PRIV_TIPS", "<b>".C_BOT_NAME."</b> - BOT TIPS: Our bot is active but in a different room. You can talk private to the bot by clicking on his name and whispering. To end conversation, tell him <b>bye</b>.");
+// PluceBot bot mod (based on Alice bot)
+define("BOT_TIPS", "TIPS: Our bot is publicly active in this room. To start talking to the bot, type <b>hello ".C_BOT_NAME.'</b>. To end conversation, type: <b>bye '.C_BOT_NAME.'</b>. (private: /to <b>'.C_BOT_NAME.'</b> Message)'); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
+define("BOT_PRIV_TIPS", "TIPS: Our bot is publicly active in ".$R." room. You can only talk private by clicking on it's name and whispering. (command: /wisp <b>".C_BOT_NAME."</b> Message)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
+define("BOT_PRIVONLY_TIPS", "TIPS: Our bot is not publicly active. You can only talk private by clicking on it's name. (commands: /to <b>".C_BOT_NAME."</b> Message or /wisp <b>".C_BOT_NAME."</b> Message)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
 define("BOT_STOP_ERROR", "Bot is not running in this room!");
 define("BOT_START_ERROR", "Bot is already running in this room!");
+define("BOT_DISABLED_ERROR", "Bot has been disabled from Admin Panel!");
 
 // Dice v.1, v.2 and v.3 modes
 define("DICE_RESULTS", " rolls the dice, the results are:");
 define("DICE_WRONG", "You have to select how many dices you want to roll\\n(Choose a number between 1 and ".MAX_ROLLS.').\\nJust type /dice to roll all '.MAX_ROLLS.' dices.');
 define("DICE2_WRONG", "The second value has to be between 1 and ".MAX_ROLLS.'.\\nLeave it empty to use all '.MAX_ROLLS.' dices\\n(e.g. /'.MAX_DICES.'d or /'.MAX_DICES.'d'.MAX_ROLLS.').');
 define("DICE2_WRONG1", "The first value has to be between 1 and ".MAX_DICES.'.\\n(e.g. /'.MAX_DICES.'d or /'.MAX_DICES.'d'.MAX_ROLLS.').');
-define("DICE3_WRONG", "The second value has to be between 1 and ".MAX_ROLLS.'.\\nLeave it empty to use all '.MAX_ROLLS.' dices\\n(e.g. /50d or /100d'.MAX_ROLLS.').');
+define("DICE3_WRONG", "The second value has to be between 1 and ".MAX_ROLLS.'.\\nLeave it empty to use all '.MAX_ROLLS.' dices\\n(e.g. /d50 or /d100t'.MAX_ROLLS.').');
 
 // Log mod by Ciprian
 define("L_ARCHIVE", "Open Archive");
@@ -346,7 +354,7 @@ define("L_COL_HELP_P2", "<u>Color Range</u><br>Any HEX code in the range #000000
 define("L_COL_HELP_P2a", "If a user claims he cannot see your selected color it means he is probably using an older browser; if you want him to see your distinct color, you should use the Color HEX value in the \"<b>".L_COLOR."</b>\" text box for your favorite color.");
 define("L_COL_HELP_SUB3", "Settings defined on this chat:");
 define("L_COL_HELP_P3", "<u>Power levels of color usage</u>:<br>1. Administrator can use any color.<br>The default color for the administrator is <SPAN style=\"color:".COLOR_CAFH."\">".COLOR_CA."</SPAN>.<br>2. Moderators can use any color but <SPAN style=\"color:".COLOR_CAFH."\">".COLOR_CA."</SPAN> (including the word \"<SPAN style=\"color:".COLOR_CAFH."\">".COLOR_CAS."</SPAN>\", which seems to trick the <SPAN style=\"color:".COLOR_CAFH."\">".COLOR_CA."</SPAN> color).<br>The default color for moderators is <SPAN style=\"color:".COLOR_CMFH."\">".COLOR_CM."</SPAN>.<br>3. The other users can use any color but <SPAN style=\"color:".COLOR_CAFH."\">".COLOR_CA."</SPAN> and <SPAN style=\"color:".COLOR_CMFH."\">".COLOR_CM."</SPAN> (including two very close shades for each - \"<SPAN style=\"color:".COLOR_CAFH."\">".COLOR_CAS."</SPAN>\" and \"<SPAN style=\"color:".COLOR_CMSH."\">".COLOR_CMS."</SPAN>\", respectively).");
-define("L_COL_HELP_P3a", "The default color is <u><SPAN style=\"color:".COLOR_CDH."\">".COLOR_CD."</SPAN></u>.<br><br><u>Technical stuff</u>: These colors have been defined by the administrator in config/color.lib.php and config/style.css.php (.php3 for v.0.14.5).<br>If anything goes wrong or if there it is something you don't like about the default colors, you should contact the <b>administrator</b> first, not the other users in your room. :-)");
+define("L_COL_HELP_P3a", "The default color is <u><SPAN style=\"color:".COLOR_CDH."\">".COLOR_CD."</SPAN></u>.<br><br><u>Technical stuff</u>: These colors have been defined by the administrator in admin panel.<br>If anything goes wrong or if there is something you don't like about the default colors, you should contact the <b>administrator</b> first, not the other users in your room. :-)");
 define("L_COL_HELP_USER_STATUS", "Your status");
 define("L_COL_HELP_SUPP1", "Download \"Color Input Box\" mod now from");
 define("L_COL_HELP_SUPP2", "Please register for further support!");
@@ -364,8 +372,17 @@ define("COL_ERROR_BOX_MODA", "Only the administrator can use ".$C." color!\\n(or
 define("COL_ERROR_BOX_USRA", "Only the administrator can use ".$C." color!\\n\\nDon't try to use ".COLOR_CA.", ".COLOR_CM." or ".COLOR_CMS."\\n(or their correspondent HEX codes).\\nThese are reserved to power users!\\n\\nYour text color resets to ".COLOR_CD."!\\n\\nPlease choose any other color.");
 define("COL_ERROR_BOX_USRM", "You must be a moderator to use ".$C." color!\\n\\nDon't try to use ".COLOR_CA.", ".COLOR_CM." or ".COLOR_CMS."\\n(or their correspondent HEX codes).\\nThese are reserved to power users!\\n\\nYour text color resets to ".COLOR_CD."!\\n\\nPlease choose any other color.");
 
-// Chat Activity displayed in remote web pages
+// Chat Activity displayed on remote web pages
 define("NB_USERS_IN","users are ".LOGIN_LINK."chatting</A> at this time.</td></tr>");
-define("USERS_LOGIN","One user is ".LOGIN_LINK."chatting</A> at this time.</td></tr>");
+define("USERS_LOGIN","1 user is ".LOGIN_LINK."chatting</A> at this time.</td></tr>");
 define("NO_USER","Nobody is ".LOGIN_LINK."chatting</A> at this time.</td></tr>");
+
+//Welcome message to be displayed on login
+define('WELCOME_MSG', "Welcome to our chat. Please obey the net etiquette while chatting: <I>try to be pleasant and polite</I>.");
+
+//PM control by Ciprian
+define('PM_DISABLED_ERROR', "Whispering (private messaging)\\nhas been disabled in this chat.");
+
+//Size command error by Ciprian
+define('L_ERR_SIZE', "The font size value can only be\\nnull (for reset) or between 7 and 15");
 ?>

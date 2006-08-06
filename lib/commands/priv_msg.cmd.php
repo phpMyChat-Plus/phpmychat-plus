@@ -1,8 +1,16 @@
 <?php
-
-	$DbLink->query("SELECT room FROM ".C_USR_TBL." WHERE username='$Cmd[2]'");
+if (!C_ENABLE_PM)
+{
+	$Error = PM_DISABLED_ERROR;
+}
+else
+{
+	$DbLink->query("SELECT room FROM ".C_USR_TBL." WHERE username='$Cmd[2]' AND room='$R'");
 	list($UR) = $DbLink->next_record();
-	if( $UR != $R && $UR != "") $Error = sprintf(L_PRIV_NOT_INROOM, special_char($Cmd[2],$Latin1), special_char($Cmd[2],$Latin1));
+if( $UR != $R && $UR != "")
+{
+	$Error = sprintf(L_PRIV_NOT_INROOM, special_char($Cmd[2],$Latin1), special_char($Cmd[2],$Latin1));
+}
 // Check for invalid characters in the addressee name
 elseif (ereg("[\, ]", stripslashes($Cmd[2])))
 {
@@ -71,6 +79,7 @@ else
 						$RefreshMessages = true;
 						if(C_PRIV_POPUP) $Error = sprintf(L_PRIV_NOT_ONLINE, special_char($Cmd[2],$Latin1));
 						else $Error = sprintf(L_NOT_ONLINE, special_char($Cmd[2],$Latin1));
-}
-}
+};
+};
+};
 ?>

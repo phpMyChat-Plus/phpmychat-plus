@@ -19,5 +19,7 @@
 -default color font stored in database not cookie - Ciprian
 -installer/setup - Ciprian - on the way
 -credits page - Ciprian
--update the localizations - Ciprian and Nick
--conversation with the robot also private - (based on Sally Linus Lucy's idea) - Ciprian - done
+-update the localizations - Ciprian and Nick (?)
+-conversation with the robot also private (based on Sally Linus Lucy's idea) - Ciprian - done
+-option for admin to totally disable private messaging in chat (/to and /wisp) (based on bluntdog's idea) - Ciprian - done
+-add the size command to dinamically change the font size in messages frame (based on Sally Makeham's idea) - Ciprian - done
