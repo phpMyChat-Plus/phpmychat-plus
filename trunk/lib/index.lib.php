@@ -1521,7 +1521,7 @@ if (SET_BOT==1) echo("<br>".INFO_BOT);
 </FONT><br>
 <?php
 }
-echo("<FONT COLOR=lightblue SIZE=-1>Download this full chat pack from <A href=http://ciprianmp.com/atm/index.php?&direction=0&order=&directory=programming/phpMyChat/Ciprian_releases/Plus_version target=_blank onMouseOver=\"window.status='Download this phpMyChat Plus Pack.'; return true;\">here</A></FONT>");
+echo("<FONT COLOR=lightblue SIZE=-1>Download this full chat pack from <A href=https://sourceforge.net/project/showfiles.php?group_id=19371 target=_blank onMouseOver=\"window.status='Download this phpMyChat Plus Pack.'; return true;\">here</A></FONT>");
 ?>
 <P>
 <?php
