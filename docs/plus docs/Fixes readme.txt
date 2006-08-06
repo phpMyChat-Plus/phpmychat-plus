@@ -4,7 +4,7 @@ Tested with: IE 6.0 SP2, Mozilla Firefox 1.5.0.4, Mozilla Firebird 0.7, Netscape
 Connection troubles with IE 7.0 beta. (reported on different sites)
 
 Fixes History:
-06.08.2006 - v1.90:
+06.08.2006 - 1.90:
 - /size command added (changes the font size of the messages' text in the rooms) (functionality extension)
 - Help file udated to include the demote and size commands usage (support related)
 - Tutorial updated to include the demote and room command usage (on Promote and Announce sections) (support related)
