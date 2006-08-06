@@ -74,7 +74,7 @@ $fp = fopen($logpath, "a") ;
 $message_nb = count($Messages);
 for ($i = 0; $i < $message_nb; $i++)
 {
-	fwrite($fp, print($Messages[$message_nb-1-$i]));
+	fwrite($fp, sprintf($Messages[$message_nb-1-$i]));
 };
 @flock($fp, LOCK_UN);
 fclose($fp) ;
@@ -142,7 +142,7 @@ $fpu = fopen($logpathu, "a") ;
 $message_nbu = count($Messagesu);
 for ($iu = 0; $iu < $message_nbu; $iu++)
 {
-	fwrite($fpu, print($Messagesu[$message_nbu-1-$iu]));
+	fwrite($fpu, sprintf($Messagesu[$message_nbu-1-$iu]));
 };
 @flock($fpu, LOCK_UN);
 fclose($fpu) ;
