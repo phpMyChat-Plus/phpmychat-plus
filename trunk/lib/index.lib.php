@@ -231,7 +231,7 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 	// Check for invalid characters or empty nick
 	elseif (trim($U) == "" || (ereg(REG_CHARS_ALLOWED, stripslashes($U))))
 	{
-		$Error = L_ERR_USR_16;
+		$Error = L_ERR_USR_16a;
 	}
 	// Check for swear words in the nick
 	elseif (C_NO_SWEAR == 1 && checkwords($U, true))
@@ -624,7 +624,6 @@ if(!isset($Error) && (isset($N) && $N != ""))
 				// Delete old welcome messages sent to the current user
 				$DbLink->query("DELETE FROM ".C_MSG_TBL." WHERE username = 'SYS welcome' AND address = '$U'");
 				// Insert a new welcome message in the messages table
-				include("./${ChatPath}lib/welcome.lib.php");
 				$current_time_plus = $current_time + 1;	// ensures the welcome msg is the last one
 				$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '', '$current_time_plus', '$U', 'sprintf(\"".WELCOME_MSG."\")', '', '')");
 			};
@@ -652,7 +651,6 @@ if(!isset($Error) && (isset($N) && $N != ""))
 			// Delete old welcome messages sent to the current user
 			$DbLink->query("DELETE FROM ".C_MSG_TBL." WHERE username = 'SYS welcome' AND address = '$U'");
 			// Insert a new welcome message in the messages table
-			include("./${ChatPath}lib/welcome.lib.php");
 			$current_time_plus = $current_time + 1;	// ensures the welcome msg is the last one
 			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '', '$current_time_plus', '$U', 'sprintf(\"".WELCOME_MSG."\")', '', '')");
 		};
@@ -895,7 +893,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 		// Submission looks like a command?
 		isCmd	= (inputFrameForm.elements['M'].value.substring(0,1) == '/');
 		// RegExp to quick check for valid commands
-		re = /^\/(!$|announce .+|ban .+|clear$|help$|\?$ .+|ignore|invite .+|join .+|kick .+|me .+|msg .+|to .+|notify$|order$|sort|profile$|promote|quit|exit|bye|refresh|save|show|last|timestamp$|whois .+|mr .+|away|demote .+|high|img .+|room .+|topic .+|wisp .+|whisp .+|buzz|bot|dice|([1-9][0-9]?d)|([1-9][0-9]?d[1-9][0-9]?)|d([1-9][0-9]?[0-9]?)([t])([1-9][0-9]?)|d([1-9][0-9]?[0-9]?))/i;
+		re = /^\/(!$|announce .+|ban .+|clear$|help$|\?$ .+|ignore|invite .+|join .+|kick .+|me .+|msg .+|to .+|notify$|order$|sort$|profile$|promote|quit|exit|bye|refresh|save|show|last|size|timestamp$|whois .+|mr .+|away|demote .+|high|img .+|room .+|topic .+|wisp .+|whisp .+|buzz|bot|dice|([1-9][0-9]?d)|([1-9][0-9]?d[1-9][0-9]?)|d([1-9][0-9]?[0-9]?)([t])([1-9][0-9]?)|d([1-9][0-9]?[0-9]?))/i;
 
 		// Ensure the message box isn't empty
 		if (inputFrameForm.elements['M'].value == '')
@@ -1072,7 +1070,7 @@ function isCookieEnabled() {
 	function users_popup()
 	{
 		window.focus();
-		users_popupWin = window.open("<?php echo($ChatPath); ?>users_popup"+ver4+".php?<?php echo("From=$From&L=$L"); ?>","users_popup_<?php echo(md5(uniqid(""))); ?>","width=180,height=300,resizable=yes,scrollbars=yes");
+		users_popupWin = window.open("<?php echo($ChatPath); ?>users_popup"+ver4+".php?<?php echo("From=$From&L=$L"); ?>","users_popup_<?php echo(md5(uniqid(""))); ?>","width=230,height=300,resizable=yes,scrollbars=yes");
 		users_popupWin.focus();
 	}
 
@@ -1185,7 +1183,7 @@ if($DbLink->query("SELECT DISTINCT u.username FROM ".C_USR_TBL." u, ".C_MSG_TBL.
 {
 	$Nb = $DbLink->num_rows();
 	$link = " <A HREF=\"${ChatPath}users_popupL.php?From=$From&L=$L\" CLASS=\"ChatLink\" onClick=\"users_popup(); return false\" TARGET=\"_blank\" onMouseOver=\"window.status='Check who is chatting.'; return true;\">";
-	echo("<P CLASS=\"ChatP1\">".L_CUR_1.$link.$Nb." ".($Nb != 1 ? L_USERS : L_USER)."</A> ".L_CUR_2."");
+	echo("<P CLASS=\"ChatP1\">".L_CUR_1." ".($Nb != 1 ? L_CUR_1a." ".$link.$Nb." ".L_USERS."</A>" : L_CUR_1b." ".$link.$Nb." ".L_USER."</A>")." ".L_CUR_2."");
 }
 $DbLink->clean_results();
 if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $status == "a"))
@@ -1199,7 +1197,7 @@ $result = @mysql_query("SELECT DISTINCT ip,browser FROM ".C_LRK_TBL."",$handler)
 $online_users = @mysql_numrows($result);
 @mysql_close();
 $lurklink = " <A HREF=\"lurking.php?L=$L&D=10\" CLASS=\"ChatLink\" TARGET=\"_blank\" onMouseOver=\"window.status='Open the Lurking Page.'; return true;\">";
-echo("<br>".L_CUR_1.$lurklink.$online_users." ".($online_users != 1 ? L_USERS : L_USER)."</A> ".L_CUR_5."");
+echo("<br>".L_CUR_1." ".($online_users != 1 ? L_CUR_1a.$lurklink.$online_users." ".L_LURKERS."</A>" : L_CUR_1b.$lurklink.$online_users." ".L_LURKER."</A>"));
 }
 ?>
 </P>

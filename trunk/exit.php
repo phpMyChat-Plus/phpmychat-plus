@@ -20,13 +20,13 @@ header("Content-Type: text/html; charset=${Charset}");
 $Ver1 = ($Ver == "H" ? $Ver : "L");
 
 //---------------------------Begin HighLight command by R.Worley
-$botpath = "botfb/" .$U ;         // file is in DIR "botfb" and called "usersname"
+$botpath = "botfb/" .$U;         // file is in DIR "botfb" and called "usersname"
 if (file_exists($botpath)) unlink($botpath); // checks to see if user file exists.
                                      // if it does delete it.
 //----------------------------End HighLight Mod
 
 // Added for Bot conversations only in sessions
-$botpathbot = "botfb/" .$U. ".txt" ;
+$botpathbot = "botfb/" .$U. ".txt";
 if (file_exists($botpathbot)) unlink($botpathbot); // checks to see if user file exists.
 
 // For translations with an explicit charset (not the 'x-user-defined' one)
@@ -44,7 +44,7 @@ if (!isset($FontName)) $FontName = "";
 function users_popup()
 {
 	window.focus();
-	users_popupWin = window.open("users_popup<?php echo($Ver1); ?>.php?<?php echo("From=$From&L=$L"); ?>","users_popup_<?php echo(md5(uniqid(""))); ?>","width=180,height=300,resizable=yes,scrollbars=yes");
+	users_popupWin = window.open("users_popup<?php echo($Ver1); ?>.php?<?php echo("From=$From&L=$L"); ?>","users_popup_<?php echo(md5(uniqid(""))); ?>","width=230,height=300,resizable=yes,scrollbars=yes");
 	users_popupWin.focus();
 }
 

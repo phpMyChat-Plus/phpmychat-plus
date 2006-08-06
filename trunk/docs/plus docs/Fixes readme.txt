@@ -4,6 +4,95 @@ Tested with: IE 6.0 SP2, Mozilla Firefox 1.5.0.4, Mozilla Firebird 0.7, Netscape
 Connection troubles with IE 7.0 beta. (reported on different sites)
 
 Fixes History:
+06.08.2006 - v1.90:
+- /size command added (changes the font size of the messages' text in the rooms) (functionality extension)
+- Help file udated to include the demote and size commands usage (support related)
+- Tutorial updated to include the demote and room command usage (on Promote and Announce sections) (support related)
+- Romanian language updated and included (localization related)
+- Some English language corrections - bugs discovered while I was translating to Romanian (make some strings to have more sense). (localization related)
+- Extra commands and mods lists displayed on Info Section at login page have been updated in mysql (info update)
+- Bot Hello and Bye messages posted to the room on start/stop can be customized now in Admin Panel (functionality related)
+- Bot can be enabled now in more than one room (before, it could talk only in the single room he was running; now, he can talk public to people in each room he is enabled in - at this point, the bot will have the same name in everyroom he is enabled - should we change that so he might have more names? umm...) (functionality extension)
+- Fixed the bot responses by removing some trailing expressions from the user input (like /to , /to  Re: , Re: , and others) - that made bot answer very strange before on replies (Ummm... and non-senses) (functionality related)
+		- I have to admit, this was caused by my own mistakes (priv popup mod) not checking what is actually the user input to the bot in bot_conversationlog
+- Extra setting for bot: disable/enable public conversations - the bot can be running in chat but won't talk to the public, only private (functionality related)
+- Room says command improved (roleplaying useful): a narator can say something to all the rooms using the [/room * message to display] command (functionality extension)
+- Welcome messages moved to localization/[lang]/localized.chat.php - no need for lib/welcome.lib.php anymore (localization/optimization related)
+- Number of default rooms and which to be used/shown can now also be defined/configured in Admin Panel (no more file editting needed for that) (support related)
+- Removed the strikethrough for hyperlinks in styles (only underline left) (display related)
+- Changed the version format from vX.X to X.XX (v1.9 is called now 1.90)
+SQL updates:
+- CMDS, MODS, QUICKA, QUICKM and QUICKU fields of the c_config table have been updated to include the latest commands/mods (for the login page and Quick menu in the chat); //this step is not compulsory for upgrades from 1.7 or 1.8
+- Added two more fields [BOT_HELLO varchar(100) NOT NULL default ''] and [BOT_BYE varchar(100) NOT NULL default ''] at the end of table c_messages;
+- IP and description fields values for the bot in c_reg_users have been updated to make more sense about how to use the bot;
+Files edited:
+- plus/avatar.php;
+- plus/banner.php;
+- plus/exit.php;
+- plus/edituser.php;
+- plus/handle_inputH.php;
+- plus/help_popup.php;
+- plus/input.php;
+- plus/loader.php;
+- plus/lurking.php;
+- plus/messagesL.php;
+- plus/register.php;
+- plus/useronline.php;
+- plus/usersH.php;
+- plus/usersL.php;
+- plus/admin/admin5.php;
+- plus/admin/admin8.php;
+- plus/bot/respond.php;
+- plus/config/config.lib.php;
+- plus/config/style.css.php;
+- plus/config/style2.css.php;
+- plus/config/style3.css.php;
+- plus/config/style4.css.php;
+- plus/config/style5.css.php;
+- plus/config/style6.css.php;
+- plus/config/style7.css.php;
+- plus/install/Instructions.txt;
+- plus/install/database/mysql_newinstall.txt;
+- plus/install/database/mysql_upgrade_plus_1.7.txt;
+- plus/install/database/mysql_upgrade_plus_until_1.6.txt;
+- plus/install/database/mysql_std_0.12.txt;
+- plus/install/database/mysql_std_0.13.txt;
+- plus/install/database/mysql_std_0.14-0.15.txt;
+- plus/lib/bot.lib.php;
+- plus/lib/bot_priv.lib.php;
+- plus/lib/clean.lib.php;
+- plus/lib/commands.lib.php;
+- plus/lib/index.lib.php;
+- plus/lib/logs.lib.php;
+- plus/lib/release.lib.php;
+- plus/lib/update.lib.php;
+- plus/lib/commands/bot.cmd.php;
+- plus/lib/commands/buzz.cmd.php;
+- plus/lib/commands/high.cmd.php;
+- plus/lib/commands/kick.cmd.php;
+- plus/lib/commands/priv_msg.cmd.php;
+- plus/lib/commands/room.cmd.php;
+- plus/lib/commands/sort.cmd.php;
+- plus/localization/english/localized.admin.php;
+- plus/localization/english/localized.chat.php;
+- plus/localization/english/localized.tutorial.php;
+Files added:
+- plus/lib/commands/size.cmd.php;
+- plus/install/database/mysql_upgrade_plus_1.8.txt;
+- plus/localization/romanian folder:
+	- plus/localization/romanian/index.html;
+	- plus/localization/romanian/flag.gif;
+	- plus/localization/romanian/localized.admin.php;
+	- plus/localization/romanian/localized.chat.php;
+	- plus/localization/romanian/localized.tutorial.php;
+	- plus/localization/romanian/regex.txt;
+Files removed:
+- plus/lib/welcome.lib.php; (welcome messages included now in each language file)
+To do (other then To do Cip.txt):
+- database installer/upgrade for mysql;
+- put back the old color picker with an option for which one to use in admin panel;
+- extend the bannishment feature to be able to ban an ip either by using the command or from admin panel;
+
 31.07.2006 - v1.8:
 - The bot has been enhanced (thanks to Sally Linus for her ideas)! It acts now just like any other human user in the chat. It can be invoked private and he answers private. He can talk from different rooms (functionality extension)
 - private messaging have been improved (mostly because of the bot improvements); it shows an user's whisper also to him (in his room), not just to the receiver (in the destination room). It can extend the functionality in the future. (functionality related)
@@ -13,7 +102,7 @@ Fixes History:
 - added the docs/plus docs/Plus FAQ.txt. (support related)
 - NEW&COOL: the admin panel/configuration tab now checks the official website for new versions released and alert the admin of a new version published, then the admin can directly open the download page! (support related)
 SQL updates:
-- Added one field [room_from varchar('30') NOT NULL default ''] at the end of table c_messages
+- Added one more field [room_from varchar('30') NOT NULL default ''] at the end of table c_messages
 Files edited = 41 - too many to mention here (most of the files because of the c_messages fields' number modification);
 Files moved:
 - Instructions.txt - from plus/docs/plus docs to plus/installation/;
@@ -27,7 +116,7 @@ Files added:
 - plus/install/database/mysql_std_0.14-0.15.txt;
 - 111 aiml files for bot to be loaded (distributed as optional before) - you can remove the ones you don't want, before loading them into the database (these are the most interesting I found over the internet 1 year ago. if anyone has time to check them out and optimize them, it would be appreciated)
 
-05.07.2006: - The Plus version is called now v1.7 and it's mature enough to become a final release (New name: phpMyChat-Plus v1.7 - not "based on 0.15.4" anymore - this is not alpha nor beta, it is not preview nor starter edition - it is the mature version of phpMyChat - I hope Nick Hozey will agree with me, as well as the other contributors who might have tried the Plus version so far)
+05.07.2006: - v1.7 - The Plus version is called now v1.7 and it's mature enough to become a final release (New name: phpMyChat-Plus v1.7 - not "based on 0.15.4" anymore - this is not alpha nor beta, it is not preview nor starter edition - it is the mature version of phpMyChat - I hope Nick Hozey will agree with me, as well as the other contributors who might have tried the Plus version so far)
 - Main reason of this release: Firefox is now treated as an "H" browser due to Popeye's flickering fix, so I wanted to improve its behavior a little bit.
 - /buzz command improvements: (functionality related)
   - able to choose different sounds to be sent;
@@ -58,17 +147,17 @@ Files edited = 53 - too many to mention here:
 Files added (61 optional extra sounds) - available as a separate pack (thanks to bluntdog):
 - plus/sounds/name.wav;  //please be aware that some of the provided sounds contain bad language - listen to them in Media Player and remove the inappropriate ones.
 
-09.05.2006:
+09.05.2006 - v1.6a:
 - FireFox flickering fix (by Popeye). It made Firefox not being treated as an "L" browser anymore. (functionality related)
 Files edited:
 - plus/lib/index.lib.php;
 
-10.02.2006:
+10.02.2006: - v1.6
 - index page (MySQL error on setting RoomAccessType to 1) fixed. (functionality related)
 Files edited:
 - plus/lib/index.lib.php.
 
-09.12.2005:
+09.12.2005 - d.15:
 - Mass email subject (Send emails admin panel) changed. (functionality related)
 Files edited:
 - plus/admin/admin4.php;

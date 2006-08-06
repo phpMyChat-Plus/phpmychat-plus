@@ -158,27 +158,46 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"REG_CHARS_ALLOWED = '$vREG_CHARS_ALLOWED', ".
 						"EXIT_LINK_TYPE = '$vEXIT_LINK_TYPE', ".
 						"CHAT_EXTRAS = '$vCHAT_EXTRAS', ".
-						"EMAIL_USER = '$vEMAIL_USER'".
+						"EMAIL_USER = '$vEMAIL_USER', ".
+						"BOT_HELLO = '$vBOT_HELLO', ".
+						"BOT_BYE = '$vBOT_BYE', ".
+						"BOT_PUBLIC = '$vBOT_PUBLIC', ".
+						"ENABLE_PM = '$vENABLE_PM', ".
+						"EN_ROOM1 = '$vEN_ROOM1', ".
+						"EN_ROOM2 = '$vEN_ROOM2', ".
+						"EN_ROOM3 = '$vEN_ROOM3', ".
+						"EN_ROOM4 = '$vEN_ROOM4', ".
+						"EN_ROOM5 = '$vEN_ROOM5', ".
+						"EN_ROOM6 = '$vEN_ROOM6', ".
+						"EN_ROOM7 = '$vEN_ROOM7', ".
+						"EN_ROOM8 = '$vEN_ROOM8', ".
+						"EN_ROOM9 = '$vEN_ROOM9'".
             " WHERE ID='0'";
 
-if(C_BOT_NAME != $vBOT_NAME || C_BOT_FONT_COLOR != $vBOT_FONT_COLOR || BOT_AVATAR != $vBOT_AVATAR)
+if(C_BOT_NAME != $vBOT_NAME || C_BOT_FONT_COLOR != $vBOT_FONT_COLOR || C_BOT_AVATAR != $vBOT_AVATAR)
 {
-  $query_bot = "UPDATE bot_bot SET ".
+$query_botid = "SELECT id FROM bot_bots WHERE botname='".C_BOT_NAME."'";
+$id_result = mysql_query($query_botid);
+list($id) = mysql_fetch_row($id_result);
+  $query_botname1 = "UPDATE bot_bot SET ".
 						"value = '$vBOT_NAME'".
-            " WHERE ID='1'";
-  $query_bot1 = "UPDATE bot_bots SET ".
+            " WHERE id='1'";
+  $query_botname2 = "UPDATE bot_bots SET ".
 						"botname = '$vBOT_NAME'".
-            " WHERE ID='1'";
-
-  $query_bot2 = "UPDATE ".C_REG_TBL." SET ".
+            " WHERE botname='".C_BOT_NAME."'";
+	$query_botname3 = "UPDATE ".C_REG_TBL." SET ".
 						"username = '$vBOT_NAME', ".
 						"colorname = '$vBOT_FONT_COLOR', ".
 						"avatar = '$vBOT_AVATAR'".
             " WHERE email='bot@bot.bot.com'";
+	$query_botname4 = "UPDATE ".C_USR_TBL." SET ".
+						"username = '$vBOT_NAME'".
+            " WHERE username='".C_BOT_NAME."'";
 
-   mysql_query($query_bot);
-   mysql_query($query_bot1);
-   mysql_query($query_bot2);
+   mysql_query($query_botname1);
+   mysql_query($query_botname2);
+   mysql_query($query_botname3);
+   mysql_query($query_botname4);
 }
    mysql_query($query);
 
@@ -317,10 +336,23 @@ $REG_CHARS_ALLOWED		= $row[111];
 $EXIT_LINK_TYPE				= $row[112];
 $CHAT_EXTRAS					= $row[113];
 $EMAIL_USER						= $row[114];
+$BOT_HELLO						= $row[115];
+$BOT_BYE							= $row[116];
+$BOT_PUBLIC						= $row[117];
+$ENABLE_PM						= $row[118];
+$EN_ROOM1							= $row[119];
+$EN_ROOM2							= $row[120];
+$EN_ROOM3							= $row[121];
+$EN_ROOM4							= $row[122];
+$EN_ROOM5							= $row[123];
+$EN_ROOM6							= $row[124];
+$EN_ROOM7							= $row[125];
+$EN_ROOM8							= $row[126];
+$EN_ROOM9							= $row[127];
 
-$query_bot1 = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.bot.com'";
-$result_bot1 = mysql_query($query_bot1);
-list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_bot1);
+$query_botdata = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.bot.com'";
+$result_botdata = mysql_query($query_botdata);
+list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata);
 
 ?>
 <P CLASS=title><?php echo(APP_NAME); ?> Configuration Page</P>
@@ -741,6 +773,17 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_bot1);
     </td>
 </tr>
 <tr>
+    <td><b>Enable whispers (private messages) system:</b><br>
+    				(only public messages will be posted in chat)<br>
+    	</td>
+    <td>
+        <select name="vENABLE_PM">
+	        <option value="0"<? if($ENABLE_PM==0){ echo " selected"; } ?>>No
+	        <option value="1"<? if($ENABLE_PM==1){ echo " selected"; } ?>>Yes
+        </select>
+    </td>
+</tr>
+<tr>
     <td><b>Enable popup whispers (private messages) system:</b><br>
     				(if enabled, guests cannot disable popups - they must register)<br>
     		<i>Hint: can be also disabled by each user in their profile<br>
@@ -827,21 +870,66 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_bot1);
     <td><b>1. First Public room name (also <u>default</u> if none selected):</b></td>
     <td><input name="vROOM1" type="text" size="35" maxlength="25" value="<? echo $ROOM1; ?>"></td>
 </tr>
+<tr>
+    <td><b>Enable this room in chat:</b></td>
+    <td>
+        <select name="vEN_ROOM1">
+	        <option value="0"<? if($EN_ROOM1==0){ echo " selected"; } ?>>No
+	        <option value="1"<? if($EN_ROOM1==1){ echo " selected"; } ?>>Yes
+        </select>
+    </td>
+</tr>
 <tr bgcolor="#B0C4DE">
     <td><b>2. Second Public room name:</b></td>
     <td><input name="vROOM2" type="text" size="35" maxlength="25" value="<? echo $ROOM2; ?>"></td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Enable this room in chat:</b></td>
+    <td>
+        <select name="vEN_ROOM2">
+	        <option value="0"<? if($EN_ROOM2==0){ echo " selected"; } ?>>No
+	        <option value="1"<? if($EN_ROOM2==1){ echo " selected"; } ?>>Yes
+        </select>
+    </td>
 </tr>
 <tr>
     <td><b>3. Third Public room name:</b></td>
     <td><input name="vROOM3" type="text" size="35" maxlength="25" value="<? echo $ROOM3; ?>"></td>
 </tr>
+<tr>
+    <td><b>Enable this room in chat:</b></td>
+    <td>
+        <select name="vEN_ROOM3">
+	        <option value="0"<? if($EN_ROOM3==0){ echo " selected"; } ?>>No
+	        <option value="1"<? if($EN_ROOM3==1){ echo " selected"; } ?>>Yes
+        </select>
+    </td>
+</tr>
 <tr bgcolor="#B0C4DE">
     <td><b>4. Forth Public room name:</b></td>
     <td><input name="vROOM4" type="text" size="35" maxlength="25" value="<? echo $ROOM4; ?>"></td>
 </tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Enable this room in chat:</b></td>
+    <td>
+        <select name="vEN_ROOM4">
+	        <option value="0"<? if($EN_ROOM4==0){ echo " selected"; } ?>>No
+	        <option value="1"<? if($EN_ROOM4==1){ echo " selected"; } ?>>Yes
+        </select>
+    </td>
+</tr>
 <tr>
     <td><b>5. Fifth Public room name:</b></td>
     <td><input name="vROOM5" type="text" size="35" maxlength="25" value="<? echo $ROOM5; ?>"></td>
+</tr>
+<tr>
+    <td><b>Enable this room in chat:</b></td>
+    <td>
+        <select name="vEN_ROOM5">
+	        <option value="0"<? if($EN_ROOM5==0){ echo " selected"; } ?>>No
+	        <option value="1"<? if($EN_ROOM5==1){ echo " selected"; } ?>>Yes
+        </select>
+    </td>
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>6. First Private room name:</b><br>
@@ -849,11 +937,29 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_bot1);
     	</td>
     <td><input name="vROOM6" type="text" size="35" maxlength="25" value="<? echo $ROOM6; ?>"></td>
 </tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Enable this room in chat:</b></td>
+    <td>
+        <select name="vEN_ROOM6">
+	        <option value="0"<? if($EN_ROOM6==0){ echo " selected"; } ?>>No
+	        <option value="1"<? if($EN_ROOM6==1){ echo " selected"; } ?>>Yes
+        </select>
+    </td>
+</tr>
 <tr>
     <td><b>7. Second Private room name (also default if none selected):</b><br>
     			<i>Note: This is displayed on login only to admin(s)</i>
     	</td>
     <td><input name="vROOM7" type="text" size="35" maxlength="25" value="<? echo $ROOM7; ?>"></td>
+</tr>
+<tr>
+    <td><b>Enable this room in chat:</b></td>
+    <td>
+        <select name="vEN_ROOM7">
+	        <option value="0"<? if($EN_ROOM7==0){ echo " selected"; } ?>>No
+	        <option value="1"<? if($EN_ROOM7==1){ echo " selected"; } ?>>Yes
+        </select>
+    </td>
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>8. Third Private room name:</b><br>
@@ -861,11 +967,29 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_bot1);
     	</td>
     <td><input name="vROOM8" type="text" size="35" maxlength="25" value="<? echo $ROOM8; ?>"></td>
 </tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Enable this room in chat:</b></td>
+    <td>
+        <select name="vEN_ROOM8">
+	        <option value="0"<? if($EN_ROOM8==0){ echo " selected"; } ?>>No
+	        <option value="1"<? if($EN_ROOM8==1){ echo " selected"; } ?>>Yes
+        </select>
+    </td>
+</tr>
 <tr>
     <td><b>9. Forth Private room name:</b><br>
     			<i>Note: This is displayed by default on login to all users (fits for support like rooms)</i>
     	</td>
     <td><input name="vROOM9" type="text" size="35" maxlength="25" value="<? echo $ROOM9; ?>"></td>
+</tr>
+<tr>
+    <td><b>Enable this room in chat:</b></td>
+    <td>
+        <select name="vEN_ROOM9">
+	        <option value="0"<? if($EN_ROOM9==0){ echo " selected"; } ?>>No
+	        <option value="1"<? if($EN_ROOM9==1){ echo " selected"; } ?>>Yes
+        </select>
+    </td>
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>1. Room name to show swear words (avoid the filter):</b><br>
@@ -1068,7 +1192,20 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_bot1);
     </td>
 </tr>
 <tr>
-    <td><b>Enter the desired name for your BOT:</b></td>
+    <td><b>Enable Public conversations with BOT in chat:</b><br>
+    	<i>Hint: if you disable this, the will only talk by private messages to users in chat</i>
+    	</td>
+    <td>
+        <select name="vBOT_PUBLIC">
+	        <option value="0"<? if($BOT_PUBLIC==0){ echo " selected"; } ?>>No
+	        <option value="1"<? if($BOT_PUBLIC==1){ echo " selected"; } ?>>Yes
+        </select>
+    </td>
+</tr>
+<tr>
+    <td><b>Enter the desired name for your BOT:</b><br>
+    	<i><font color=red>Important: Don't change this name before you make sure bot is fully loaded (check if it can post in chat).</font></i>
+    	</td>
     <td><input name="vBOT_NAME" type="text" size="35" maxlength="25" value="<? echo $BOT_NAME; ?>"></td>
 </tr>
 <tr bgcolor="#B0C4DE">
@@ -1080,6 +1217,18 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_bot1);
     	<i>Hint: It will be shown only if the avatar system is enabled</i>
     	</td>
     <td><input name="vBOT_AVATAR" type="text" size="35" maxlength="255" value="<? echo $BOT_AVATAR; ?>"></td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Enter the message to be posted by BOT on start:</b><br>
+    	<i>Hint: Avoid special characters or the settings won't be saved</i>
+    	</td>
+    <td><input name="vBOT_HELLO" type="text" size="35" maxlength="100" value="<? echo $BOT_HELLO; ?>"></td>
+</tr>
+<tr>
+    <td><b>Enter the message to be posted by BOT on stop</b><br>
+    	<i>Hint: Avoid special characters or the settings won't be saved</i>
+    	</td>
+    <td><input name="vBOT_BYE" type="text" size="35" maxlength="100" value="<? echo $BOT_BYE; ?>"></td>
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>Set the maximum size for resizing posted pictures using /img command</b></td>
@@ -1109,7 +1258,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_bot1);
 </tr>
 <tr>
     <td><b>Set the name of your admin logs folder:</b><br>
-    	<i><font color=red>Important: rename the original "logsadmin" folder to a hard to guess name for your full logs folder.</font><br>
+    	<i><font color=red>Important: Rename the original "logsadmin" folder to a hard to guess name for your full logs folder.</font><br>
     		Hint: This is different from the user accessible one (called logs), which doesn't include any private/confidential data from your chat conversations/actions.</i>
     		</td>
     <td><input name="vLOG_DIR" type="text" size="35" maxlength="25" value="<? echo $LOG_DIR; ?>"></td>

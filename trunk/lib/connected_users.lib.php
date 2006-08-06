@@ -61,6 +61,4 @@ function display_connected($Private,$Full,$NU,$String1,$String2,$DbLink)
 	$DbLink->close();
 }
 
-//		display_connected($ShowPrivate,$DisplayUsers,$NbUsers,($NbUsers != 1 ? $NbUsers." ".NB_USERS_IN : USERS_LOGIN),NO_USER,$DbLink);
-
 ?>

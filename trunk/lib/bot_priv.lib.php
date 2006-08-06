@@ -17,7 +17,7 @@ global $uid ;                   // WORKS  it is to keep the bot on a topic per u
          $numselects=0;                              // This doesn't seem to work either
   global $botpath;
   global $Read;
-    $botpath = "botfb/" . $U . ".txt" ;             // Made this global so I can delete user file when they don't want to talk to bot anymore.
+    $botpath = "botfb/" .$U. ".txt" ;             // Made this global so I can delete user file when they don't want to talk to bot anymore.
 
  // Include the guts of the program. respond.php at top of handle_inputH.php
         function bottalk(&$botmess, $R, $UR, $Private, $Read)
@@ -67,26 +67,12 @@ elseif ($Read == "Neww" || $Read == "Oldw")
 
                        // set and execute the above function via an if statment WORKS
 
-     if (file_exists ($botpath))                            // checks to see if user .txt file exists.
-      {                                                     // if it does continues to talk to bot
-          clearstatcache () ;
-          global $M;
-          global $botmess;
-          $botmess = eregi_replace(C_BOT_NAME, "", $M);      // removes the word "BOT NAME" from the input helps the bot to make sense? NEEDS WORK.
-            bottalk(&$botmess, $R, $UR, $Private, $Read);
-      }
-     elseif (eregi(C_BOT_NAME, $M) || eregi(C_BOT_NAME, $Private))                          // Looks for "BOT NAME" in $M (typed in INPUT)  WORKS
+			if (eregi(C_BOT_NAME, $M) || eregi(C_BOT_NAME, $Private))                          // Looks for "BOT NAME" in $M (typed in INPUT)  WORKS
       {
-					$botcontrol ="botfb/$R.txt";
-//					if(file_exists($botcontrol)) botmemory($U);                                     // starts conversation with BOT if none already.
+          botmemory($U);                                     // starts conversation with BOT if none already.
           global $M;
           global $botmess;
           $botmess = eregi_replace(C_BOT_NAME, "", $M);      // removes the word "BOT NAME" from the input helps the bot to make sense? NEEDS WORK.
           bottalk(&$botmess, $R, $UR, $Private, $Read);
-      }
-     if (eregi("bye", $M))             // if statment looks for "bye" in a pm to bot
-      {
-      	unlink ($botpath);                          // it deletes the users file if found
-                                                    // Stops coversation with bot
       }
 ?>

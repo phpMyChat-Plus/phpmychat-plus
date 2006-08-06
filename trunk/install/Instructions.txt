@@ -24,8 +24,8 @@ plus/bot/subs.inc
 plus/botfb/
 plus/logs/
 plus/logsadmin/
-6. Go to plus/installation/ folder on your drive and open mysql.sql file. Don't change any data there. You will be able to customize
-your chat later, from the config page (Clicking Administration link on your index page)
+6. Go to plus/installation/ folder on your drive and open mysql_newinstall.txt (or the corresponding upgrade) file.
+Don't change any data there. You will be able to customize your chat later, from the config page (Clicking Administration link on your index page)
 7. Test your site functionality by opening http://yoururl.com/plus (plus is the name you used in step 4.) in your browser. Note that there is only one admin right now: admin, password admin.
 8. Register your desired administrator name and change its permissions to 'admin' in c_reg_table table. Check if your new name has become indeed an admin.
 9. Delete the admin user from the c_reg_users table
@@ -35,7 +35,7 @@ That's it! It should fly!
 
 Optional
 If you want to use the bot follow these instructions:
-- Very important: Don't change bot's name (in admin panel) before the next 7 steps (only if successful)
+- Very important: Don't change bot's name (in admin panel) before the next 8 steps (only if successful)
 1. Open your browser and type: http://yoursiteurl.com/plus/bot/boatloader.php
 2. Wait for the loader to finish the import operation. At the end, you can test the bot following the instructions on the bottom of that page.
 3. If it works from talk.htm (.php), it should work now in your chat as well.
@@ -43,13 +43,17 @@ If you want to use the bot follow these instructions:
 5. To talk to the bot, just mention his name "plusbot" in a message (same room)
 6. To shut the bot up type "bye plusbot"
 7. To stop the bot and make him quit the room, type /bot stop in the room it's running into.
+8. To talk privately to the bot (less annoying) use /to or /wisp, like with all the other users.
+Bot successful loading Test: make sure the bot is able to answer you in the chat. If his message is empty, then something went wrong.
+Contact me on ciprianmp@yahoo.com for support (only initial loading support, not customizing the replies)
+If the bot posts coherent answers, then you can go to admin panel and chenge your name (using the same rules for registered usernames: no spaces, commas, backslashes or other banned characters, otherwise it will break your chat's functionality)
 Note: If you don't intend to use the bot, edit the quick menu in admin config panel to eliminate the bot commands from the quick list.
 
 This version comes only with the english language files. A translation project is under way.
 To ass other languages by yourself, edit all the other languages you want but english from the standard pack and add them in chat/localization/.
 Insert, modify and translate according to the new lines added in english version (use a text compare software).
 
-For more instructions read the Plus FAQ.txt in the docs/plus docs folder.
+For more instructions (e.g. how to upgrade the c_reg_users table) read the Plus FAQ.txt in the docs/plus docs folder.
 That's all for now! Have a nice one and let me know how it goes!
 
 Do you need some tries of different configurations before applying to your chat server? Don't hesitate to use the Demo/Try me server at http://plus.gamedogs.com (use admin/admin or moderator/moderator as login for different powers - not registration required)

@@ -73,6 +73,16 @@ function replybotname($userinput,$uniqueid,$botname){
   $userinput = eregi_replace("^\/msg  (private)", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
   $userinput = eregi_replace("^\/wisp  (whisper)", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
   $userinput = eregi_replace("^\/whisp  (whisper)", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
+  $userinput = eregi_replace("^\/to  Re: ", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
+  $userinput = eregi_replace("^\/msg  Re: ", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
+  $userinput = eregi_replace("^\/wisp  Re: ", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
+  $userinput = eregi_replace("^\/whisp  Re: ", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
+  $userinput = eregi_replace("^\/to  ", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
+  $userinput = eregi_replace("^\/msg  ", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
+  $userinput = eregi_replace("^\/wisp  ", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
+  $userinput = eregi_replace("^\/whisp  ", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
+  $userinput = eregi_replace("^\/Re: ", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
+  $userinput = eregi_replace("^\> ", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
 
 	$botid = lookupbotid($botname);
 

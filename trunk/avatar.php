@@ -90,16 +90,16 @@ $textDirection = ($Charset == "windows-1256") ? "RTL" : "LTR";
 print(" src=\"$avatar\">");
 ?>
 </TH>
-</TR><tr><td>
-<H5><center><u><font color="ltblue"><?php echo(L_SEL_NEW_AV); ?></font></u></center></H5>
+</TR><tr align=center><td>
+<H5><u><font color="ltblue"><?php echo(L_SEL_NEW_AV); ?></font></u></H5>
 <?php
 $avatarmatch = $avatar;
 ?>
 
 <form action="<?php echo($From);?>" METHOD="GET" AUTOCOMPLETE="" TARGET="_self">
-<font size="-1" color="blue">(example: http://mysite/images/mypic.gif)</font>
-<center><font size="-1"><?php echo(L_URL_AV); ?></font><input type="text" name="url" size="30" limit="254" VALUE="<?php echo($url); ?>">&nbsp;<?php echo($avamsg); ?>
-<br><font size="-2"><i><?php echo(L_EXPL_AV); ?></i></font></center>
+<font size="2" color="blue">(example: http://mysite/images/mypic.gif)</font>
+<center><font size="2"><?php echo(L_URL_AV); ?></font><input type="text" name="url" size="30" limit="254" VALUE="<?php echo($url); ?>">&nbsp;<?php echo($avamsg); ?>
+<br><font size="1"><i><?php echo(L_EXPL_AV); ?></i></font></center>
 <!-- <input type="hidden" name="avatar" value="<?php echo($avatar); ?>"> -->
 <input type="hidden" name="User" value="<?php echo($User); ?>">
 <input type="hidden" name="Link" value="1">
@@ -144,7 +144,7 @@ For ($i=0; $i <= C_NUM_AVATARS; $i++) {
 </tr></table>
 <center>
 <?php
-echo("<a href=\"$From?User=$User&U=$User&L=$L&FORM_SEND=0&LIMIT=$LIMIT&pmc_password=$pmc_password&pmc_username=$User&Link=1\" onMouseOver=\"window.status='Cancel.'; return true;\" ><br>".L_CANCEL."</a>");
+echo("<a href=\"$From?User=$User&U=$User&L=$L&FORM_SEND=0&LIMIT=$LIMIT&pmc_password=$pmc_password&pmc_username=$User&Link=1\" onMouseOver=\"window.status='".L_REG_10.".'; return true;\" ><br>".L_REG_10."</a>");
 ?>
 </center>
 </body>

@@ -205,21 +205,21 @@ if($DbLink->num_rows() > 0)
 	while(list($Time, $Room, $User, $Latin1, $Dest, $Message) = $DbLink->next_record())
 	{
 		$Message = stripslashes($Message);
-		$NewMsg = "<tr>";
-		$NewMsg .= "<td>".date("d-M, H:i:s", $Time + C_TMZ_OFFSET*60*60)."</td><td nowrap>&nbsp;".$Room."</td>";
+		$NewMsg = "<tr align=texttop valign=top>";
+		$NewMsg .= "<td width=1% nowrap>".date("d-M, H:i:s", $Time + C_TMZ_OFFSET*60*60)."</td><td nowrap>&nbsp;".$Room."</td>";
 		if ($Dest != " *" && $User != "SYS room")
 		{
 			$User = special_char($User,$Latin1);
 			if ($Dest != "") $Dest = "]>[".htmlspecialchars(stripslashes($Dest));
-			$NewMsg .= "<td NOWRAP>&nbsp;<B>[${User}${Dest}]</B></td><td>&nbsp;$Message</td>";
+			$NewMsg .= "<td width=1% nowrap><B>[${User}${Dest}]</B></td><td>$Message</td>";
 		}
 		if ($User == "SYS announce")
 		{
-			$NewMsg .= "<td></td><td>&nbsp;<SPAN CLASS=\"notify2\">[".L_ANNOUNCE."] $Message</SPAN></td>";
+			$NewMsg .= "<td colspan=2><SPAN CLASS=\"notify2\">[".L_ANNOUNCE."] $Message</SPAN></td>";
 		}
 		if ($User == "SYS room")
 		{
- 			$NewMsg .= "<td NOWRAP><B>&nbsp;[${Dest}]</B></td><td><FONT class=\"notify2\"><I>&nbsp;".ROOM_SAYS."<FONT class=\"notify\">".$Message."</FONT></FONT></I></td>";
+ 			$NewMsg .= "<td  width=1% nowrap><B>[${Dest}]</B></td><td><FONT class=\"notify2\"><I>".ROOM_SAYS."<FONT class=\"notify\">".$Message."</FONT></FONT></I></td>";
     }
 
 		// Separator between messages sent before today and other ones
@@ -234,14 +234,13 @@ if($DbLink->num_rows() > 0)
 }
 else
 {
-	$MessagesString = "<td><SPAN CLASS=\"error\">".L_NO_MSG."</SPAN></td>";
+	$MessagesString = "<td><SPAN CLASS=\"notify\">".L_NO_MSG."</SPAN></td>";
 };
 
 
 $DbLink->clean_results();
 $DbLink->close();
-$IsCommand = true;
-$Users_Refresh = "1";
+$CleanUsrTbl = 1;
 
 ?>
 <P CLASS=title><?php echo(APP_NAME); ?> Connected Users and Lurking</P>
@@ -277,14 +276,14 @@ $online_users = @mysql_numrows($result);
 @mysql_close();
 ?>
 <table border=1 cellspacing=0 cellpadding=0 class="table">
-<tr><td width=130>
-<?php echo(L_CUR_6)?></td>
+<tr><td>
+<?php echo(L_CUR_5)?></td>
 	<td align="center">
 	<font size="4" color="#6666ff"><b>&nbsp <?php echo($online_users); ?> &nbsp</font></b></td>
 </td></tr></table>
 <table border=1 cellspacing=0 cellpadding=0 class="table">
 <?php
-	while($data = @mysql_fetch_array($result))
+while($data = @mysql_fetch_array($result))
 {
 	echo("<tr><td>".$ip = $data[ip]."</td>");
 	echo("<td>".$browser = $data[browser]."</td></tr>");
@@ -293,7 +292,7 @@ $online_users = @mysql_numrows($result);
 </table>
 <?php
 	echo("<hr>");
-	echo("<table BORDER=0 CELLSPACING=0 CELLPADDING=0 class=table>".$MessagesString."</table>");
+	echo("<table BORDER=1 WIDTH=100% CELLSPACING=0 CELLPADDING=0 CLASS=table>".$MessagesString."</table>");
 	unset($MessagesString);
 }
 ?>

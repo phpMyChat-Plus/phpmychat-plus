@@ -1,5 +1,5 @@
 <?php
-
+$bot=1;
 /*
     Program E
     Copyright 2002, Paul Rydell

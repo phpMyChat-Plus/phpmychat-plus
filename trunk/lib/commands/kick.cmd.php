@@ -68,7 +68,7 @@ else
 			{
 						$IsCommand = true;
 						$RefreshMessages = true;
-						$DbLink->query("UPDATE ".C_USR_TBL." SET u_time='".time()."', status='k'WHERE username!='$U'");
+						$DbLink->query("UPDATE ".C_USR_TBL." SET u_time='".time()."', status='k' WHERE username!='$U'");
 			}
 		}
 	}

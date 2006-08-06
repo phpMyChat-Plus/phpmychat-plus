@@ -1,7 +1,7 @@
 <?php
-// File : english.tutorial.php
-// Original file by Sharif Islam <mislam@students.uiuc.edu> & Jessica Gibson <oram@uiuc.edu>
-// & Dean Collins <joelford@pacbell.net>
+// File : english.tutorial.php - plus version
+// Original file by Sharif Islam <mislam@students.uiuc.edu> & Jessica Gibson <oram@uiuc.edu> & Dean Collins <joelford@pacbell.net>
+// Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 
 // Get the names and values for vars sent by the script that called this one
 if (isset($HTTP_GET_VARS))
@@ -142,7 +142,7 @@ if (C_BANISH != "0")
 	<?php
 };
 ?>
-&nbsp&nbsp&nbsp&nbsp<A HREF="#promote" CLASS="topLink">Promote a user to moderator</A><br>
+&nbsp&nbsp&nbsp&nbsp<A HREF="#promote" CLASS="topLink">Promote/Demote a user to/from moderator:</A><br>
 <P>
 <HR>
 <HR>
@@ -611,6 +611,11 @@ The administrator may make a system wide announcement to all the rooms and reach
 <I>For example: /announce The chat system is going down for maintenance tonight at 8pm.</I>
 <br><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 <P>
+There is another useful announcement like command for roleplaying chats; the administrator or moderators in a room may also send an announcement to all users in current room or all the rooms with the <B>room command</B>.
+<P>
+<I>For example: /room The meeting starts at 15 pm.</I> or <I>/room * The meeting starts at 15 pm in the Staff room.</I>
+<BR><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
+<P>
 <HR>
 
 <P>
@@ -633,7 +638,7 @@ if (C_BANISH != "0")
 	Moderators can banish a user and the administrator can banish a user or a moderator with the <B>ban command</B>.<br>
 	The administrator can banish a user from another room than the one he is chatting into. He can also banish a user forever and from the chat as a whole with the '<B>&nbsp;*&nbsp;</B>' setting that must be inserted before the nick of the user to be banished.
 	<P>
-	<I>For example</I>, if Jack is the name of the user to banish : <I>/ban Jack</I> or <I>/ban * Jack</I>
+	<I>For example</I>, if Jack is the name of the user to banish: <I>/ban Jack</I> or <I>/ban * Jack</I>
 	<br><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 	<P>
 	<HR>
@@ -642,13 +647,15 @@ if (C_BANISH != "0")
 ?>
 
 <P>
-<FONT SIZE="+1"><A NAME="promote"><B>Promote a user to moderator:</B></A></FONT>
+<FONT SIZE="+1"><A NAME="promote"><B>Promote/Demote a user to/from moderator:</B></A></FONT>
 <P>
 Moderators and the administrator can promote an other user to moderator with the <B>promote command</B>.
 <P>
-<I>For example</I>, if Jack is the name of the user to promote:<I> /promote Jack</I>
+<I>For example</I>, if Jack is the name of the user to promote: <I>/promote Jack</I>
 <P>
 Only the administrator can access the opposite feature (reduce a moderator to simple user) using the <B>demote command</B>.
+<P>
+<I>For example</I>, if Jack is the name of the moderator to demote: <I>/demote Jack</I> or <I>/demote * Jack</I> (will demote him from current or all the rooms).
 <br><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 <P>
 

@@ -157,7 +157,7 @@ else
 include("bot/respond.php");
 function AddMessage($M, $T, $R, $U, $C, $Private, $Read, $RF)
 {
-if (C_BOT_CONTROL && $Private == "")
+if (C_BOT_CONTROL && C_BOT_PUBLIC && $Private == "")
 {
 	//--Bot Control Popeye
 $botpath = "botfb/" . $U . ".txt" ;
