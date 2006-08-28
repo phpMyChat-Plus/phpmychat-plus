@@ -972,8 +972,9 @@ function send_headers($title, $icon)
 	?>
 	<!--
 	The lines below are usefull for debugging purpose, please do not remove them!
-	Release: phpMyChat 0.14.5
-	© 2000-2001 The phpHeaven Team  (http://www.phpheaven.net/)
+	Release: phpMyChat Plus 1.90
+	© 2000-2006 The phpHeaven Team (http://www.phpheaven.net/)
+	© 2005-2006 Ciprian Murariu (ciprianmp@yahoo.com)
 	-->
 	<META NAME="description" CONTENT="phpMyChat">
 	<META NAME="keywords" CONTENT="phpMyChat">
@@ -1342,7 +1343,7 @@ if (!isset($Ver)) $Ver = "L";
 						<OPTION VALUE=""><?php echo(L_SET_7); ?></OPTION>
 						<?php
 						// Display other public rooms in the drop down list
-						$DbLink->query("SELECT DISTINCT room FROM ".C_MSG_TBL." WHERE type = 1 AND room != 'Offline PMs' AND room != 'Offline Whispers' AND username NOT LIKE 'SYS %' ORDER BY room");
+						$DbLink->query("SELECT DISTINCT room FROM ".C_MSG_TBL." WHERE type = 1 AND room != 'Offline PMs' AND username NOT LIKE 'SYS %' ORDER BY room");
 						while(list($Room) = $DbLink->next_record())
 						{
 							if (!room_in($Room, $DefaultRoomsString))
@@ -1363,7 +1364,7 @@ if (!isset($Ver)) $Ver = "L";
 			</TR>
 			<?php
 		}
-		if (C_VERSION > 0 && C_SHOW_PRIV == 1)
+		if (C_VERSION > 0 && C_SHOW_PRIV)
 		{
 			$DefaultPrivateRoomFound = 0;
 			if($R != "") $PrevPrivateRoom = urldecode($R);
@@ -1382,6 +1383,8 @@ if (!isset($Ver)) $Ver = "L";
 						<OPTION VALUE=""><?php echo(L_SET_7); ?></OPTION>
 						<?php
 						// Display default private rooms in the drop down list
+						if (C_VERSION == 2)
+						{
 							echo("<OPTION VALUE=\"".$U."\"");
 							if(strcasecmp($U, $PrevPrivateRoom) == 0)
 							{
@@ -1389,6 +1392,7 @@ if (!isset($Ver)) $Ver = "L";
 								$DefaultPrivateRoomFound = 1;
 							}
 							echo(">".$U."</OPTION>");
+						}
 						$PrevPrivateRoom = "";
 						$DefaultPrivateRoomsString = "";
 							for($i = 0; $i < count($DefaultPrivateRooms); $i++)
@@ -1409,7 +1413,7 @@ if (!isset($Ver)) $Ver = "L";
 			</TR>
 			<?php
 			}
-			elseif ($perms == "moderator" && C_SHOW_PRIV_MOD == 1)
+			elseif ($perms == "moderator" && C_SHOW_PRIV_MOD)
 			{
 			?>
 			<TR CLASS="ChatCell">
@@ -1418,6 +1422,8 @@ if (!isset($Ver)) $Ver = "L";
 					<SELECT NAME="R2" CLASS="ChatBox" onChange="reset_R2();">
 						<OPTION VALUE=""><?php echo(L_SET_7); ?></OPTION>
 							<?php
+						if (C_VERSION == 2)
+						{
 							echo("<OPTION VALUE=\"".$U."\"");
 							if(strcasecmp($U, $PrevPrivateRoom) == 0)
 							{
@@ -1425,6 +1431,7 @@ if (!isset($Ver)) $Ver = "L";
 								$DefaultPrivateRoomFound = 1;
 							}
 							echo(">".$U."</OPTION>");
+						}
 							echo("<OPTION VALUE=\"".htmlspecialchars(ROOM8)."\"");
 							if(strcasecmp(ROOM8, $PrevPrivateRoom) == 0)
 							{
@@ -1445,7 +1452,7 @@ if (!isset($Ver)) $Ver = "L";
 			</TR>
 			<?php
 			}
-			elseif (C_SHOW_PRIV_USR == 1)
+			elseif (C_SHOW_PRIV_USR)
 			{
 			?>
 			<TR CLASS="ChatCell">
@@ -1454,6 +1461,8 @@ if (!isset($Ver)) $Ver = "L";
 					<SELECT NAME="R2" CLASS="ChatBox" onChange="reset_R2();">
 						<OPTION VALUE=""><?php echo(L_SET_7); ?></OPTION>
 						<?php
+						if (C_VERSION == 2)
+						{
 							if ($U != "")
 							{
 							echo("<OPTION VALUE=\"".$U."\"");
@@ -1464,6 +1473,7 @@ if (!isset($Ver)) $Ver = "L";
 							}
 							echo(">".$U."</OPTION>");
 							}
+						}
 							echo("<OPTION VALUE=\"".htmlspecialchars(ROOM9)."\"");
 							if(strcasecmp(ROOM9, $PrevPrivateRoom) == 0)
 							{
@@ -1488,12 +1498,18 @@ if (!isset($Ver)) $Ver = "L";
 						<OPTION VALUE="1" <?php if($T == 1 && $DefaultPrivateRoomFound == 0) echo("SELECTED"); ?>><?php echo(L_SET_10); ?></OPTION>
 						<OPTION VALUE="0" <?php if($T == 0 && $DefaultRoomFound == 0) echo("SELECTED"); ?>><?php echo(L_SET_11); ?></OPTION>
 					</SELECT>
-					<?php echo(" ".L_SET_12); ?> :
+					<?php echo(" ".L_SET_12." :"); ?>
 				</TD>
 				<TD VALIGN="TOP" CLASS="ChatCell">
 					<INPUT TYPE="text" NAME="R3" SIZE=11 MAXLENGTH=14 <?php if($DefaultRoomFound == 0 && $DefaultPrivateRoomFound == 0 && $R != "") echo("VALUE=\"".htmlspecialchars(urldecode($R))."\""); ?> CLASS="ChatBox" onChange="reset_R3();">
 				</TD>
 			</TR>
+			<?php
+		}
+		if (C_VERSION == 1)
+		{
+			?>
+		<INPUT TYPE="hidden" NAME="T" VALUE="0" <?php if($T == 0 && $DefaultRoomFound == 0) echo("SELECTED"); ?>>
 			<?php
 		}
 		?>
