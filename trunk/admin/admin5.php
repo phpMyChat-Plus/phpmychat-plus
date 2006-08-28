@@ -4,8 +4,30 @@ if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security
 
 require("./config/config.lib.php");
 
-// Check for application update on sourceforge resource.
-include_once("http://svn.sourceforge.net/viewvc/*checkout*/phpmychat/trunk/lib/update.lib.php");
+// Check for application update on main sites (ciprianmp.com & sourceforge) resources.
+$updatepath1 = "http://plus.gamedogs.com/lib/update.txt";
+$updatepath2 = "http://ciprianmp.com/plus/lib/update.txt";
+$updatepath3 = "http://svn.sourceforge.net/viewvc/*checkout*/phpmychat/trunk/lib/update.txt";
+$updatepath4 = "./lib/update.txt";
+if (@fopen($updatepath1, "r"))
+{
+ @fclose($updatepath1);
+ include_once($updatepath1);
+}
+elseif (@fopen($updatepath2, "r"))
+{
+	@fclose($updatepath2);
+	include_once($updatepath2);
+}
+elseif (@fopen($updatepath3, "r"))
+{
+	@fclose($updatepath3);
+	include_once($updatepath3);
+}
+else
+{
+	include_once($updatepath4);
+}
 require("./lib/release.lib.php");
 if (APP_LAST_VERSION != APP_VERSION)
 {
@@ -487,13 +509,13 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
 <tr bgcolor="#B0C4DE">
     <td><b>Types of Rooms Available for users:</b><br>
                   0 : only the first room within the public default ones<br>
-                  1 : all the public default rooms but not create a room<br>
+                  1 : all default rooms, but not create a room<br>
                   2 : all the rooms and create new ones
     </td>
     <td>
         <select name="vVERSION">
 	        <option value="0"<? if($VERSION==0){ echo " selected"; } ?>>0-Only the first room
-	        <option value="1"<? if($VERSION==1){ echo " selected"; } ?>>1-All public rooms
+	        <option value="1"<? if($VERSION==1){ echo " selected"; } ?>>1-All default rooms
 	        <option value="2"<? if($VERSION==2){ echo " selected"; } ?>>2-Create new rooms
         </select>
     </td>
