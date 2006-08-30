@@ -62,6 +62,7 @@ if (isset($HTTP_POST_VARS))
 
 // Fix some security holes
 if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
+if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) $L = "english";
 
 require("./${ChatPath}config/config.lib.php");
 require("./${ChatPath}lib/release.lib.php");
@@ -118,12 +119,23 @@ function room_in($what, $in)
 /*********** PART I ***********/
 
 // Define the message to display if user comes here because he has been kicked
-if (isset($KICKED))
+$DbLink = new DB;
+$DbLink->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE 'sprintf(L_KICKED_REASON, \"".$U."\", %' AND m_time>".(time()-30)." LIMIT 1");
+	$kickeduser = (list($message) = $DbLink->next_record());
+	$DbLink->clean_results();
+	// The user has been kicked for a reason
+	if ($kickeduser)
 {
-	switch ($KICKED)
+	$Reason = trim($message,"sprintf(L_KICKED_REASON, \".$U.\", ");
+	$Reason = trim($Reason,"\")");
+}
+if (isset($KK))
+{
+	switch ($KK)
 	{
 		case '1':
-			$Error = L_REG_18;
+			if ($Reason == "") $Error = L_REG_18;
+			else $Error = sprintf(L_REG_18a, $Reason);
 			break;
 		case '2':
 			$Error = L_REG_39;
@@ -138,7 +150,6 @@ if (isset($KICKED))
 	};
 };
 
-$DbLink = new DB;
 
 // Fix some security issues
 if (isset($Reload))
@@ -829,8 +840,8 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	<SCRIPT TYPE="text/javascript" LANGUAGE="javascript1.1">
 	<!--
 	// Misc vars
-	imgHelpOff = new Image(15,15); imgHelpOff.src = path2Chat + "images/helpOff.gif";
-	imgHelpOn = new Image(15,15); imgHelpOn.src = path2Chat + "images/helpOn.gif";
+	imgHelpOff = new Image(30,20); imgHelpOff.src = path2Chat + "images/helpOff.gif";
+	imgHelpOn = new Image(30,20); imgHelpOn.src = path2Chat + "images/helpOn.gif";
 	ProfimageOff = new Image(25,25); ProfimageOff.src = path2Chat + "images/avatarbuttonroll.gif";
 	ProfimageOn = new Image(25,25); ProfimageOn.src = path2Chat + "images/avatarbutton.gif";
 
@@ -972,7 +983,7 @@ function send_headers($title, $icon)
 	?>
 	<!--
 	The lines below are usefull for debugging purpose, please do not remove them!
-	Release: phpMyChat Plus 1.90
+	Release: phpMyChat Plus 1.91
 	© 2000-2006 The phpHeaven Team (http://www.phpheaven.net/)
 	© 2005-2006 Ciprian Murariu (ciprianmp@yahoo.com)
 	-->
