@@ -40,7 +40,7 @@ else
 				if (C_NO_SWEAR == 1 && $R != C_NO_SWEAR_ROOM1 && $R != C_NO_SWEAR_ROOM2 && $R != C_NO_SWEAR_ROOM3 && $R != C_NO_SWEAR_ROOM4)
 				{
 				include("./lib/swearing.lib.php");
-				$Cmd[2] = checkwords($Cmd[1], false);
+				$Cmd[2] = checkwords($Cmd[2], false);
 				}
 			}
 		if (trim($Cmd[1]) == "*")
