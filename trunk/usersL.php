@@ -505,20 +505,6 @@ for($k = 0; $k < count($DefaultChatRooms); $k++)
 ?>
 </P>
 <?php
-if (((C_CHAT_LOGS && C_SHOW_LOGS_USR) || $statusu == "a") || ((C_CHAT_LURKING && C_SHOW_LURK_USR) || $statusu == "a"))
-{
-?>
-	<CENTER><TD><B>Extra Options</B></TD></CENTER>
-<?php
-if ($statusu == "u")
-{
-$Cmd2Send = ("'quit','".special_char2(stripslashes($U),$Latin1)." - brb (need to register first :p)'");
-?>
-<TD valign="bottom">
-<A HREF="<?php echo($ChatPath); ?>register.php" onClick="reg_popup_room(); window.parent.runCmd(<?php echo($Cmd2Send); ?>); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_3); ?>.'; return true;" title="<?php echo(L_REG_3); ?>"><?php echo(L_REG_3); ?></A>
-</TD><br>
-<?php
-}
 if ((C_CHAT_LOGS && C_SHOW_LOGS_USR) || (!C_SHOW_LOGS_USR && $statusu == "a") || (C_CHAT_LURKING && C_SHOW_LURK_USR) || (!C_SHOW_LOGS_USR && $statusu == "a") || (!C_REQUIRE_REGISTER && $statusu == "u"))
 {
 ?>
