@@ -7,8 +7,6 @@ if (isset($HTTP_GET_VARS))
 		$$name = $value;
 	};
 };
-// Translate to html special characters, and entities if message was sent with a latin 1 charset
-$Latin1 = ($Charset == "iso-8859-1");
 $ChatS = new DB;
 $ChatS->query("DELETE FROM ".C_MSG_TBL." WHERE message = '<B>[Buzzz... Signal]</B>' AND m_time<".(time()-60)."");
 $ChatS->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE '<B>[Buzzz... Signal]%' AND m_time<".(time()-10)." ORDER BY m_time DESC LIMIT 1");
@@ -67,7 +65,7 @@ $ChatM->close();
 if($U != '')
 {
 $ChatU = new DB;
-$CondForQueryM = "(username='$U' OR (username='SYS image' AND address='$U') OR message = 'stripslashes(sprintf(L_ENTER_ROM, \"".$U."\"))' OR (username='SYS welcome' AND address = '$U') OR ((username='SYS dice1' OR username='SYS dice2' OR username='SYS dice3') AND address = '$U'))";
+$CondForQueryM = "(username='$U' OR (username='SYS image' AND address='$U') OR message = 'stripslashes(sprintf(L_ENTER_ROM, \"".$U."\"))' OR message = 'stripslashes(sprintf(L_ENTER_ROM_NOSOUND, \"".$U."\"))' OR (username='SYS welcome' AND address = '$U') OR ((username='SYS dice1' OR username='SYS dice2' OR username='SYS dice3') AND address = '$U'))";
 $ChatU->query("SELECT m_time,room FROM ".C_MSG_TBL." WHERE ".$CondForQueryM." ORDER BY m_time DESC LIMIT 1");
 list($m_time,$room) = $ChatU->next_record();
 $ChatU->clean_results();
@@ -77,7 +75,6 @@ if($ChatU->affected_rows() > 0)
 {
 $CleanUsrTbl = ($ChatU->affected_rows() > 0);
 $ChatU->query("INSERT INTO ".C_MSG_TBL." VALUES ('1', '".$room."', 'SYS exit', '', ".time().", '', 'sprintf(L_BOOT_ROM, \"$U\")', '', '')");
-//$ChatU->query("INSERT INTO ".C_MSG_TBL." VALUES ('1', '".$room."', 'SYS exit', '', ".time().", '', 'sprintf(L_EXIT_ROM, \"$U\")', '', '')");
 $ChatU = '';
 $botpath = "botfb/" .$U;         // file is in DIR "botfb" and called "username"
 if (file_exists($botpath)) unlink($botpath); // checks to see if user file exists.
