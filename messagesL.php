@@ -322,15 +322,15 @@ if($contents == $User)
 			{
 				if (C_ENABLE_PM && C_PRIV_POPUP && ($allowpopup || $status == "u"))
 				{
-					$User = "<A HREF=\"#\" onClick=\"window.parent.send_popup('/to ".special_char2($User,$Latin1)."');\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."<\/A>";
+					$User = "<A HREF=\"#\" onClick=\"window.parent.send_popup('/to ".special_char2($User,$Latin1)."');\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."</A>";
 				}
 				elseif (C_ENABLE_PM && !C_PRIV_POPUP)
 				{
-					$User = "<A HREF=\"#\" onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',true); return false\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."<\/A>";
+					$User = "<A HREF=\"#\" onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',true); return false\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."</A>";
 				}
 				else
 				{
-					$User = "<A HREF=\"#\" onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false); return false\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."<\/A>";
+					$User = "<A HREF=\"#\" onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false); return false\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."</A>";
 				}
 			}
 			if ($Dest != "") $Dest = "]<BDO dir=\"${textDirection}\"></BDO>".$colorname_endtag.">".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest));
@@ -387,7 +387,7 @@ if($contents == $User)
 	    {
 				if(substr($User,0,8) == "SYS dice")
 				{
-					$NewMsg .="<B>".$Dest.DICE_RESULTS.$Message."<\/P>";
+					$NewMsg .="<B>".$Dest.DICE_RESULTS.$Message."</P>";
 				}
 			  else
 			  {
