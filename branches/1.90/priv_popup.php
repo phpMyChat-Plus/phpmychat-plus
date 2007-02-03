@@ -14,7 +14,7 @@ if (isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"]
 if (isset($HTTP_COOKIE_VARS["CookieUsername"])) $U = $HTTP_COOKIE_VARS["CookieUsername"];
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 require("./config/config.lib.php");
 require("./localization/".$L."/localized.chat.php");
@@ -385,7 +385,7 @@ function postReply10(e,i)
 //-->
 </SCRIPT>
 </HEAD>
-<BODY CLASS="frame" onLoad="setTimeout('window.close()',120000); window.status='New private message received.'; self.focus(); document.forms['ReplyForm'].elements['Reply1'].focus();" onUnload="window.opener.window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].focus();">
+<BODY CLASS="frame" onLoad="setTimeout('window.close()',120000); window.status='New private message received.'; self.focus(); window.document.forms['ReplyForm'].elements['Reply1'].focus();" onUnload="window.opener.window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].focus();">
 <CENTER>
 <?php
 	$New = "New";
@@ -424,7 +424,7 @@ switch ($Read)
 	<TR><TD><B><U><?php echo(L_PRIV_MSG5); ?></U></B></TD>
 		<TD width="100%" style="font-size: 8pt"><I><?php echo($Time); ?></I></TD></TR>
 </TABLE>
-<br>
+<br />
 <FORM ACTION="priv_popup.php" METHOD="POST" AUTOCOMPLETE="OFF" NAME="ReplyForm">
 <input type="hidden" value="<?php echo($ReplyTo) ?>" name="ReplyTo1">
 <tr><td><input type="text" size="60" value="Re: " name="Reply1" CLASS="ChatBox" onKeyPress="postReply11(event);"></td></tr>
@@ -439,16 +439,16 @@ switch ($Read)
 elseif ($NewPMs > 1)
 {
 ?>
-<FONT size="3"><B><?php echo($NewPMs." ".L_PRIV_MSGS) ?><B></FONT><br>
+<FONT size="3"><B><?php echo($NewPMs." ".L_PRIV_MSGS) ?><B></FONT><br />
 <?php
 if($NewPMs > 10)
 {
 ?>
-<FONT size="1" class="ChatLink"><?php echo(L_PRIV_MSGSa) ?></FONT><br>
+<FONT size="1" class="ChatLink"><?php echo(L_PRIV_MSGSa) ?></FONT><br />
 <?php
 }
 ?>
-<br><TABLE BORDER=1 CELLPADDING=3 WIDTH=400 CLASS="table">
+<br /><TABLE BORDER=1 CELLPADDING=3 WIDTH=400 CLASS="table">
 	<TR><TD width="100%" align="center" CLASS="tabtitle" colspan="2"><B><FONT class="notify2"><I><?php echo($R); ?></I></B></TD></TR>
 <FORM AUTOCOMPLETE="OFF" NAME="ReplyForm">
 <?php
@@ -468,7 +468,7 @@ switch ($Read)
 	break;
 }
 ?>
-	<TR><TD width="73%"><B><?php echo($i.". "); ?><U><?php echo(L_PRIV_MSG1); ?></U>&nbsp;<SPAN style="font-size: 11pt"><?php echo($User); ?></SPAN></B>&nbsp;(<B><U><?php echo(L_PRIV_MSG2); ?></U></B>&nbsp;<I><?php echo(($RF != "") || ($RF == $Room) ? $RF : $Room); ?></I>)</TD><TD align="right" style="font-size: 8pt"><I><U><?php echo(L_PRIV_MSG5); ?></U><br><?php echo($Time); ?></I></TD></TR>
+	<TR><TD width="73%"><B><?php echo($i.". "); ?><U><?php echo(L_PRIV_MSG1); ?></U>&nbsp;<SPAN style="font-size: 11pt"><?php echo($User); ?></SPAN></B>&nbsp;(<B><U><?php echo(L_PRIV_MSG2); ?></U></B>&nbsp;<I><?php echo(($RF != "") || ($RF == $Room) ? $RF : $Room); ?></I>)</TD><TD align="right" style="font-size: 8pt"><I><U><?php echo(L_PRIV_MSG5); ?></U><br /><?php echo($Time); ?></I></TD></TR>
 	<TR><TD width="100%" style="font-size: 12pt" colspan="2"><I><?php echo($M); ?></I></TD></TR>
 <TR><TD width="100%" colspan="2"></TD></TR>
 <input type="hidden" value="<?php echo($ReplyTo) ?>" name="ReplyTo<?php echo($i)?>">
@@ -486,12 +486,12 @@ if($NewPMs > 10)
 {
 $NewPMsRest = $NewPMs - 10;
 ?>
-<br><a href=<?php $PHP_SELF ?> onMouseOver="window.status='Go to the next page.'; return true">Read the next <?php echo(($NewPMsRest == 1) ? " message" : " ".$NewPMsRest." messages"); ?> </a><br>
+<br /><a href=<?php $PHP_SELF ?> onMouseOver="window.status='Go to the next page.'; return true">Read the next <?php echo(($NewPMsRest == 1) ? " message" : " ".$NewPMsRest." messages"); ?> </a><br />
 <?php
 }
 ?>
-<br><SPAN style="font-weight: 400"><?php echo(L_PRIV_READ); ?><br>
-<input type="submit" value="<?php echo(L_REG_25)?>" name="Close" onClick="self.close(); return false;"><br><br>
+<br /><SPAN style="font-weight: 400"><?php echo(L_PRIV_READ); ?><br />
+<input type="submit" value="<?php echo(L_REG_25)?>" name="Close" onClick="self.close(); return false;"><br /><br />
 <?php echo(L_PRIV_POPUP); ?> <a href="#" onClick="window.parent.runCmd('profile','<?php stripslashes($Dest) ?>'); return false;" onMouseOver="window.status='Change your settings.'; return true">here</a>.</SPAN>
 </CENTER>
 <?php

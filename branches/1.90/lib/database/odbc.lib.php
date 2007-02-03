@@ -21,7 +21,7 @@ class DB
 	function halt($msg)
 	{
 		printf("</td></tr></table><b>Database error:</b> %s<br>\n", $msg);
-		printf("<b>ODBC Error</b>: %s (%s)<br>\n",
+		printf("<b>ODBC Error</b>: %s (%s)<br />\n",
 		$this->Errno,
 		$this->Error);
 		die("Session halted.");
@@ -131,7 +131,7 @@ class DB
 	{
 		# Many ODBC drivers don't support odbc_num_rows() on SELECT statements.
 		$num_rows = odbc_num_rows($this->Query_ID);
-		//printf ($num_rows."<br>");
+		//printf ($num_rows."<br />");
 
 		# This is a workaround. It is intended to be ugly.
 		if ($num_rows < 0)
@@ -154,7 +154,7 @@ class DB
 					else 
 						$i=$j; 
 				};
-				//printf("$i $j $k <br>");
+				//printf("$i $j $k <br />");
 			};
 			$num_rows=$i;
 		}

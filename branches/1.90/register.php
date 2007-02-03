@@ -21,7 +21,7 @@ if (isset($HTTP_POST_VARS))
 };
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 require("./config/config.lib.php");
 require("./lib/release.lib.php");
@@ -81,11 +81,11 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 	{
 		$Error = L_ERR_USR_8;
 	}
-	else if (COLOR_NAMES && COLOR_FILTERS && $COLORNAME && (strcasecmp($COLORNAME, COLOR_CA) == 0 || strcasecmp($COLORNAME, COLOR_CAF) == 0 || strcasecmp($COLORNAME, COLOR_CAFH) == 0 || strcasecmp($COLORNAME, COLOR_CAS) == 0 || strcasecmp($COLORNAME, COLOR_CASC) == 0 || strcasecmp($COLORNAME, COLOR_CASH) == 0))
+	else if (COLOR_NAMES && COLOR_FILTERS && (strcasecmp($COLORNAME, COLOR_CA) == 0 || strcasecmp($COLORNAME, COLOR_CA1) == 0 || strcasecmp($COLORNAME, COLOR_CA2) == 0) && $COLORNAME != "" && $status != "a")
 	{
 		$Error = L_ERR_USR_25;
 	}
-	else if (COLOR_NAMES && COLOR_FILTERS && $COLORNAME && (strcasecmp($COLORNAME, COLOR_CM) == 0 || strcasecmp($COLORNAME, COLOR_CMF) == 0 || strcasecmp($COLORNAME, COLOR_CMFH) == 0 || strcasecmp($COLORNAME, COLOR_CMS) == 0 || strcasecmp($COLORNAME, COLOR_CMSC) == 0 || strcasecmp($COLORNAME, COLOR_CMSH) == 0))
+	else if (COLOR_NAMES && COLOR_FILTERS && (strcasecmp($COLORNAME, COLOR_CM) == 0 || strcasecmp($COLORNAME, COLOR_CM1) == 0 || strcasecmp($COLORNAME, COLOR_CM2) == 0) && $COLORNAME != "" && $status != "a" && $status != "m")
 	{
 		$Error = L_ERR_USR_26;
 	}
@@ -115,7 +115,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 			// Send e-mail
 			if (C_EMAIL_PASWD)
 			{
-				$send = send_email("[".APP_NAME."] ".L_EMAIL_VAL_1, L_SET_2, L_REG_7, L_EMAIL_VAL_2);
+				$send = send_email("[".APP_NAME."] ".L_EMAIL_VAL_1, L_SET_2, L_REG_1, L_EMAIL_VAL_2);
 				if (!$send) $Error = sprintf(L_EMAIL_VAL_Err,$Sender_email,$Sender_email);
 			};
 			if (!isset($Error) || $Error == "")
@@ -238,6 +238,11 @@ if ($done)
 		windowHandle.document.forms['Params'].elements['pmc_password'].value = regform.elements['pmc_password'].value;
 		<?php
 	};
+	if (isset($COLORNAME))
+	{
+		$C = $COLORNAME;
+		setcookie("CookieColor", $C, time() + 60*60*24*365);        // cookie expires in one year
+	}
 };
 ?>
 };
@@ -263,7 +268,7 @@ function get_focus()
 
 <BODY onLoad="if (window.focus) get_focus();">
 <CENTER>
-<br>
+<br />
 <FORM ACTION="register.php" METHOD="POST" AUTOCOMPLETE="" NAME="RegParams">
 <P></P>
 <?php
@@ -290,7 +295,7 @@ if(isset($Error))
                         <?php
                         if (C_USE_AVATARS) {
                         ?>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_SET_17); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_SET_17); ?> :</TD>
  			<TD VALIGN="TOP">
 			<!-- Avatar System Start. Splits above original line and inserts the following: -->
                         <?php
@@ -310,7 +315,7 @@ if(isset($Error))
                         ?>
 <!-- Avatar System End  -->
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_SET_2); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_SET_2); ?> :</TD>
 			<TD VALIGN="TOP">
 				<INPUT TYPE="text" NAME="U" SIZE=15 MAXLENGTH=15 VALUE="<?php if (isset($U)) echo(htmlspecialchars(stripslashes($U))); ?>"<?php if ($done) echo(" READONLY"); ?>>
 				<?php if (!$done) { ?><SPAN CLASS=error>*</SPAN><?php }; ?>
@@ -321,7 +326,7 @@ if(isset($Error))
 		{
 			?>
 			<TR>
-				<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_REG_7); ?> :</TD>
+				<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_1); ?> :</TD>
 				<TD VALIGN="TOP">
 					<INPUT TYPE="password" NAME="pmc_password" SIZE=15 MAXLENGTH=15 VALUE="<?php if (isset($pmc_password)) echo(htmlspecialchars(stripslashes($pmc_password))); ?>"<?php if ($done) echo(" READONLY"); ?>>
 					<?php if (!$done) { ?><SPAN CLASS=error>*</SPAN><?php }; ?>
@@ -331,7 +336,7 @@ if(isset($Error))
 		};
 ?>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_REG_8); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_8); ?> :</TD>
 			<TD VALIGN="TOP">
 				<INPUT TYPE="text" NAME="EMAIL" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($EMAIL)) echo(htmlspecialchars(stripslashes($EMAIL))); ?>"<?php if ($done) echo(" READONLY"); ?>>
 				<?php if (!$done) { ?><SPAN CLASS="error">*</SPAN><?php }; ?>
@@ -342,14 +347,14 @@ if (C_REQUIRE_NAMES)
 {
 ?>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_REG_30); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_30); ?> :</TD>
 			<TD VALIGN="TOP">
 				<INPUT TYPE="text" NAME="FIRSTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($FIRSTNAME)) echo(htmlspecialchars(stripslashes($FIRSTNAME))); ?>"<?php if ($done) echo(" READONLY"); ?>>
 				<?php if (!$done) { ?><SPAN CLASS=error>*</SPAN><?php }; ?>
 			</TD>
 		</TR>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_REG_31); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_31); ?> :</TD>
 			<TD VALIGN="TOP">
 				<INPUT TYPE="text" NAME="LASTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($LASTNAME)) echo(htmlspecialchars(stripslashes($LASTNAME))); ?>"<?php if ($done) echo(" READONLY"); ?>>
 				<?php if (!$done) { ?><SPAN CLASS=error>*</SPAN><?php }; ?>
@@ -361,13 +366,13 @@ else
 {
 ?>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_REG_30); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_30); ?> :</TD>
 			<TD VALIGN="TOP">
 				<INPUT TYPE="text" NAME="FIRSTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($FIRSTNAME)) echo(htmlspecialchars(stripslashes($FIRSTNAME))); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
 		</TR>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_REG_31); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_31); ?> :</TD>
 			<TD VALIGN="TOP">
 				<INPUT TYPE="text" NAME="LASTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($LASTNAME)) echo(htmlspecialchars(stripslashes($LASTNAME))); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
@@ -376,10 +381,10 @@ else
 };
 ?>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_REG_45); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_45); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="radio" NAME="GENDER" VALUE="1" <?php if (isset($GENDER) && $GENDER == "1") echo("CHECKED"); if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_REG_46); ?><br>
-				<INPUT TYPE="radio" NAME="GENDER" VALUE="2" <?php if (isset($GENDER) && $GENDER == "2") echo("CHECKED"); if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_REG_47); ?><br>
+				<INPUT TYPE="radio" NAME="GENDER" VALUE="1" <?php if (isset($GENDER) && $GENDER == "1") echo("CHECKED"); if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_REG_46); ?><br />
+				<INPUT TYPE="radio" NAME="GENDER" VALUE="2" <?php if (isset($GENDER) && $GENDER == "2") echo("CHECKED"); if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_REG_47); ?><br />
 				<INPUT TYPE="radio" NAME="GENDER" VALUE="0" <?php if (isset($GENDER) && $GENDER == "0") echo("CHECKED"); if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_REG_48); ?>
 			</TD>
 		</TR>
@@ -390,43 +395,43 @@ else
 			</TD>
 		</TR>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_REG_36); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_36); ?> :</TD>
 			<TD VALIGN="TOP">
 				<INPUT TYPE="text" NAME="COUNTRY" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($COUNTRY)) echo(htmlspecialchars(stripslashes($COUNTRY))); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
 		</TR>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_REG_32); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_32); ?> :</TD>
 			<TD VALIGN="TOP">
 				<INPUT TYPE="text" NAME="WEBSITE" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($WEBSITE)) echo(htmlspecialchars(stripslashes($WEBSITE))); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
 		</TR>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_PRO_1); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_1); ?> :</TD>
 			<TD VALIGN="TOP">
 				<INPUT TYPE="text" NAME="SLANG" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($SLANG)) echo(htmlspecialchars(stripslashes($SLANG))); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
 		</TR>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_PRO_2); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_2); ?> :</TD>
 			<TD VALIGN="TOP">
 				<INPUT TYPE="text" NAME="FAVLINK" SIZE=25 MAXLENGTH=255 VALUE="<?php if (isset($FAVLINK)) echo(htmlspecialchars(stripslashes($FAVLINK))); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
 		</TR>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_PRO_3); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_3); ?> :</TD>
 			<TD VALIGN="TOP">
 				<INPUT TYPE="text" NAME="FAVLINK1" SIZE=25 MAXLENGTH=255 VALUE="<?php if (isset($FAVLINK1)) echo(htmlspecialchars(stripslashes($FAVLINK1))); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
 		</TR>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_PRO_4); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_4); ?> :</TD>
 			<TD VALIGN="TOP">
 				<TEXTAREA NAME="DESCRIPTION" COLS=27 ROWS=5 WRAP=ON<?php if ($done) echo(" READONLY"); ?>><?php if (isset($DESCRIPTION)) echo(htmlspecialchars(stripslashes($DESCRIPTION))); ?></TEXTAREA>
 			</TD>
 		</TR>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_PRO_5); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_5); ?> :</TD>
 			<TD VALIGN="TOP">
 				<INPUT TYPE="text" NAME="PICTURE" SIZE=25 MAXLENGTH=255 VALUE="<?php if (isset($PICTURE)) echo(htmlspecialchars(stripslashes($PICTURE))); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
@@ -436,16 +441,46 @@ if (COLOR_NAME)
 {
 ?>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_PRO_6); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_6); ?> :</TD>
 			<TD VALIGN="TOP">
 <?php
-if (empty($colorname))
+// Color Input Select mod by Alexander Eisele <xaex@mail.ru> & Ciprian
+// Drop down list of colors
+$ColorList = COLORLIST;
+if (COLOR_FILTERS)
 {
-  $COLORNAME = $CD;
-  $colorname = $COLORNAME;
+	if ($status != "a" && $status != "m")
+	{
+		if (COLOR_CA != "") $ColorList = eregi_replace('"'.COLOR_CA.'",', "", $ColorList);
+		if (COLOR_CA1 != "") $ColorList = eregi_replace('"'.COLOR_CA1.'",', "", $ColorList);
+		if (COLOR_CA2 != "") $ColorList = eregi_replace('"'.COLOR_CA2.'",', "", $ColorList);
+		if (COLOR_CM != "") $ColorList = eregi_replace('"'.COLOR_CM.'",', "", $ColorList);
+		if (COLOR_CM1 != "") $ColorList = eregi_replace('"'.COLOR_CM1.'",', "", $ColorList);
+		if (COLOR_CM2 != "") $ColorList = eregi_replace('"'.COLOR_CM2.'",', "", $ColorList);
+	}
+	elseif ($status == "m")
+	{
+		if (COLOR_CA != "") $ColorList = eregi_replace('"'.COLOR_CA.'",', "", $ColorList);
+		if (COLOR_CA1 != "") $ColorList = eregi_replace('"'.COLOR_CA1.'",', "", $ColorList);
+		if (COLOR_CA2 != "") $ColorList = eregi_replace('"'.COLOR_CA2.'",', "", $ColorList);
+	}
 }
+$ColorList = eregi_replace('"',"", $ColorList);
+$CC = explode(",", $ColorList);
+			echo("<SELECT NAME=\"COLORNAME\">\n");
+			while(list($ColorNumber1, $ColorCode) = each($CC))
+			{
+				// Red color is reserved to the admin or a moderator for the current room
+				echo("<OPTION style=\"background-color:".$ColorCode."; color:".$ColorCode."\" VALUE=\"".$ColorCode."\"");
+				if ($COLORNAME == $ColorCode) echo(" SELECTED");
+				if ($ColorCode != "" && $ColorCode != $COLORNAME && $ColorCode != COLOR_CA && $ColorCode != COLOR_CM) echo(">".$ColorCode."</OPTION>");
+				elseif ($ColorCode == $COLORNAME && $ColorCode != "") echo(">".$ColorCode." (selected)</OPTION>");
+				elseif ($ColorCode == COLOR_CA) echo(COLOR_FILTERS ? ">".$ColorCode." (admin's)</OPTION>" : ">".$ColorCode."</OPTION>");
+				elseif ($ColorCode == COLOR_CM) echo(COLOR_FILTERS ? ">".$ColorCode." (moder's)</OPTION>" : ">".$ColorCode."</OPTION>");
+				elseif ($ColorCode == "") echo(">Null (not selected)</OPTION>");
+			}
+			echo("\n</SELECT>&nbsp;\n");
 ?>
-				<INPUT TYPE="text" NAME="COLORNAME" SIZE=25 MAXLENGTH=25 VALUE="<?php if (isset($COLORNAME)) echo(htmlspecialchars(stripslashes($COLORNAME))); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
 		</TR>
 <?php

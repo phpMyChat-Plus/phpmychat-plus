@@ -129,6 +129,15 @@ $DbLink->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE 'sprintf(L_
 	$Reason = trim($message,"sprintf(L_KICKED_REASON, \".$U.\", ");
 	$Reason = trim($Reason,"\")");
 }
+$DbLink->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE 'sprintf(L_BANISHED_REASON, \"".$U."\", %' AND m_time>".(time()-30)." LIMIT 1");
+	$banisheduser = (list($message) = $DbLink->next_record());
+	$DbLink->clean_results();
+	// The user has been kicked for a reason
+	if ($banisheduser)
+{
+	$Reason = trim($message,"sprintf(L_BANISHED_REASON, \".$U.\", ");
+	$Reason = trim($Reason,"\")");
+}
 if (isset($KK))
 {
 	switch ($KK)
@@ -144,7 +153,8 @@ if (isset($KK))
 			$Error = L_ERR_USR_19;
 			break;
 		case '4':
-			$Error = L_ERR_USR_20;
+			if ($Reason == "") $Error = L_ERR_USR_20;
+			else $Error = sprintf(L_ERR_USR_20a, $Reason);
 			break;
 		default:
 	};
@@ -204,7 +214,8 @@ if(isset($E) && $E != "")
 		// HACKERS Atack !!!
 		unset($E);
 		if (isset($U)) unset($U);
-		$Error = L_ERR_USR_21;
+		if ($BT) $Error = L_ERR_USR_21;
+		else $Error = L_ERR_USR_10;
 	}
 	else
 	{
@@ -218,7 +229,7 @@ if(isset($E) && $E != "")
 
 // If no room is specified but the main form has been posted, define the room to enter
 // in as the first among default ones
-if ((isset($Form_Send) && $Form_Send) && (((C_VERSION == 0) || ((!isset($R0) || $R0 == "") && (!isset($R1) || $R1 == "") && (!isset($R2) || $R2 == "") && (!isset($R3) || $R3 == ""))))) $R0 = $DefaultChatRooms[0];
+if ((isset($Form_Send) && $Form_Send) && ((!C_VERSION || ((!isset($R0) || $R0 == "") && (!isset($R1) || $R1 == "") && (!isset($R2) || $R2 == "") && (!isset($R3) || $R3 == ""))))) $R0 = $DefaultChatRooms[0];
 
 // Optimize some of the tables when the user logs in
 if(isset($U) && (isset($N) && $N != ""))
@@ -316,7 +327,11 @@ if(!isset($Error) && (isset($N) && $N != "") && !isset($Reload))
 	if (C_BANISH != "0" && (!isset($perms) || $perms != "admin"))
 	{
 		include("./${ChatPath}lib/banish.lib.php");
-		if ($IsBanished) $Error = L_ERR_USR_20;
+		if ($IsBanished)
+		{
+			if ($Reason == "") $Error = L_ERR_USR_20;
+			else $Error = sprintf(L_ERR_USR_20a, $Reason);
+		}
 	};
 };
 
@@ -633,10 +648,10 @@ if(!isset($Error) && (isset($N) && $N != ""))
 			if (C_WELCOME)
 			{
 				// Delete old welcome messages sent to the current user
-				$DbLink->query("DELETE FROM ".C_MSG_TBL." WHERE username = 'SYS welcome' AND address = '$U'");
+				$DbLink->query("DELETE FROM ".C_MSG_TBL." WHERE username LIKE 'SYS welcome' AND address = '$U'");
 				// Insert a new welcome message in the messages table
 				$current_time_plus = $current_time + 1;	// ensures the welcome msg is the last one
-				$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '', '$current_time_plus', '$U', 'sprintf(\"".WELCOME_MSG."\")', '', '')");
+				$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '', '$current_time_plus', '$U', 'sprintf(WELCOME_MSG)', '', '')");
 			};
 		};
 	}
@@ -660,10 +675,10 @@ if(!isset($Error) && (isset($N) && $N != ""))
 		if (C_WELCOME)
 		{
 			// Delete old welcome messages sent to the current user
-			$DbLink->query("DELETE FROM ".C_MSG_TBL." WHERE username = 'SYS welcome' AND address = '$U'");
+			$DbLink->query("DELETE FROM ".C_MSG_TBL." WHERE username LIKE 'SYS welcome' AND address = '$U'");
 			// Insert a new welcome message in the messages table
 			$current_time_plus = $current_time + 1;	// ensures the welcome msg is the last one
-			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '', '$current_time_plus', '$U', 'sprintf(\"".WELCOME_MSG."\")', '', '')");
+			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '', '$current_time_plus', '$U', 'sprintf(WELCOME_MSG)', '', '')");
 		};
 	};
 
@@ -685,7 +700,44 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	<LINK REL="SHORTCUT ICON" HREF="<?php echo($ChatPath); ?>favicon.ico">
 	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
 	<!--
-
+// Display & remove the server time at the status bas
+// Returns the days in the status bas
+function get_day(time,plus)
+{
+		monday = " <?php echo(L_MON) ?>";
+		tuesday = " <?php echo(L_TUE) ?>";
+		wednesday = " <?php echo(L_WED) ?>";
+		thursday = " <?php echo(L_THU) ?>";
+		friday = " <?php echo(L_FRI) ?>";
+		saturday = " <?php echo(L_SAT) ?>";
+		sunday = " <?php echo(L_SUN) ?>";
+		dayN = time.getDay();
+		day = dayN + plus;
+		if (day == 1 || day == 8) is_day = monday;
+		if (day == 2) is_day = tuesday;
+		if (day == 3) is_day = wednesday;
+		if (day == 4) is_day = thursday;
+		if (day == 5) is_day = friday;
+		if (day == 6) is_day = saturday;
+		if (day == 0 || day == 7) is_day = sunday;
+		return is_day;
+}
+// Calculates the european Daylight savings from 2006 to 2011
+	function time_dst()
+	{
+		timedst = 0;
+		timenow = <?php echo(time()); ?>;
+		if ((timenow > 1174784400 && timenow < 1193533199) || (timenow > 1206838800 && timenow < 1224982799) || (timenow > 1238288400 && timenow < 1256432399) || (timenow > 1269997200 && timenow < 1288486799) || (timenow > 1301187600 && timenow < 1319936399)) timedst = 60;
+		return timedst;
+	}
+// Calculates the US Daylight savings from 2006 to 2011
+	function time_utc()
+	{
+		timeutc = 0;
+		timenow = <?php echo(time()); ?>;
+		if ((timenow > 1173578400 && timenow < 1194141599) || (timenow > 1205028000 && timenow < 1225591199) || (timenow > 1236477600 && timenow < 1257040799) || (timenow > 1268532000 && timenow < 1289095199) || (timenow > 1299981600 && timenow < 1320544799)) timeutc = 60;
+		return timeutc;
+	}
 // Display & remove the server time at the status bas
 	function clock(gap)
 	{
@@ -697,18 +749,56 @@ if(!isset($Error) && (isset($N) && $N != ""))
 		if (calc_hours < 10) calc_hours = "0" + calc_hours;
 		if (calc_minuts < 10) calc_minuts = "0" + calc_minuts;
 		if (calc_seconds < 10) calc_seconds = "0" + calc_seconds;
-		calc_time = calc_hours + ":" + calc_minuts + ":" + calc_seconds;
-		window.status = "<?php echo(L_SVR_TIME); ?>" + calc_time;
+		calc_time = calc_hours + ":" + calc_minuts + ":" + calc_seconds<?php echo((C_WORLDTIME) ? ' + get_day(calc_date,0)' :''); ?>;
+		cur_gapGMT_DST = (cur_date.getTimezoneOffset()+time_dst())/60;
+		cur_hoursGMT_DST = cur_date.getHours()+cur_gapGMT_DST;
+		cur_hoursLON = cur_hoursGMT_DST;
+		dayLON = "";
+		if (cur_hoursLON < 0) { cur_hoursLON = 24 + cur_hoursLON; dayLON = get_day(cur_date,-1) }
+		else dayLON = get_day(cur_date);
+		if (cur_hoursLON < 10) cur_hoursLON = "0" + cur_hoursLON;
+		cur_timeGMT = cur_hoursLON + ":" + calc_minuts + dayLON;
+		cur_gapGMT_UTC = (cur_date.getTimezoneOffset()+time_utc())/60;
+		cur_hoursGMT_UTC = cur_date.getHours()+cur_gapGMT_UTC;
+		cur_hoursNYC = cur_hoursGMT_UTC - 5;
+		dayNYC = "";
+		if (cur_hoursNYC < 0) { cur_hoursNYC = 24 + cur_hoursNYC; if (cur_hoursLON - cur_hoursNYC < 0) dayNYC = get_day(cur_date,-1); }
+		if (cur_hoursNYC < 10) cur_hoursNYC = "0" + cur_hoursNYC;
+		cur_timeNYC = cur_hoursNYC + ":" + calc_minuts + dayNYC;
+		cur_hoursPAR = cur_hoursGMT_DST + 1;
+		dayPAR = "";
+		if (cur_hoursPAR < 0) cur_hoursPAR = 24 + cur_hoursPAR;
+		if (cur_hoursPAR > 23) { cur_hoursPAR = cur_hoursPAR - 24; if (cur_hoursPAR - cur_hoursLON < 0) dayPAR = get_day(cur_date,1); }
+		if (cur_hoursPAR < 10) cur_hoursPAR = "0" + cur_hoursPAR;
+		cur_timePAR = cur_hoursPAR + ":" + calc_minuts + dayPAR;
+		cur_hoursBUC = cur_hoursGMT_DST + 2;
+		dayBUC = "";
+		if (cur_hoursBUC > 23) { cur_hoursBUC = cur_hoursBUC - 24; if (cur_hoursBUC - cur_hoursLON < 0) dayBUC = get_day(cur_date,1); }
+		if (cur_hoursBUC < 10) cur_hoursBUC = "0" + cur_hoursBUC;
+		cur_timeBUC = cur_hoursBUC + ":" + calc_minuts + dayBUC;
+		cur_gapGMT = cur_date.getTimezoneOffset()/60;
+		cur_hoursGMT = cur_date.getHours()+cur_gapGMT;
+		cur_hoursTYO = cur_hoursGMT + 9;
+		dayTYO = "";
+		if (cur_hoursTYO > 23) { cur_hoursTYO = cur_hoursTYO - 24; if (cur_hoursTYO - cur_hoursLON < 0) dayTYO = get_day(cur_date,1); }
+		if (cur_hoursTYO < 10) cur_hoursTYO = "0" + cur_hoursTYO;
+		cur_timeTYO = cur_hoursTYO + ":" + calc_minuts + dayTYO;
+		cur_hoursSYD = cur_hoursGMT + 10;
+		daySYD = "";
+		if (cur_hoursSYD > 23) { cur_hoursSYD = cur_hoursSYD - 24; if (cur_hoursSYD - cur_hoursLON < 0) daySYD = get_day(cur_date,1); }
+		if (cur_hoursSYD < 10) cur_hoursSYD = "0" + cur_hoursSYD
+		cur_timeSYD = cur_hoursSYD + ":" + calc_minuts + daySYD;;
+		window.status = "<?php echo(L_SVR_TIME); ?>" + calc_time<?php echo((C_WORLDTIME) ? ' + " (NYC: " + cur_timeNYC + " | LON: " + cur_timeGMT + " | PAR: " + cur_timePAR + " | BUC: " + cur_timeBUC + " | TYO: " + cur_timeTYO + " | SYD: " + cur_timeSYD + ")"' : ''); ?>;
 
 		clock_disp = setTimeout('clock(' + gap + ')', 1000);
 	}
-
+// Stops the clock in the status bar
 	function stop_clock()
 	{
 		clearTimeout(clock_disp);
 		window.status = '';
 	}
-
+// Calculates the gap between the server and the local date
 	function calc_gap(serv_date)
 	{
 		server_date = new Date(serv_date);
@@ -1170,7 +1260,7 @@ function layout($Err, $U, $R, $T, $C, $status)
 
 <CENTER>
 <FORM ACTION="<?php echo("$Action"); ?>" METHOD="POST" AUTOCOMPLETE="" NAME="Params" onSubmit="defineVerField(); return isCookieEnabled()">
-<SPAN CLASS="ChatTitle"><?php if (C_SHOW_LOGO) echo(APP_LOGO."<br>".APP_NAME." (".APP_VERSION.")"); ?></SPAN>
+<SPAN CLASS="ChatTitle"><?php if (C_SHOW_LOGO) echo(APP_LOGO."<br />".APP_NAME." (".APP_VERSION.")"); ?></SPAN>
 <?php
 // Msg for translations with no real iso code
 if (isset($FontPack) && $FontPack != "" && file_exists($ChatPath."localization/${L}/${FontPack}"))
@@ -1187,7 +1277,7 @@ if (C_SHOW_TUT == 1)
 }
 ?>
 <P CLASS="ChatP1">
-<?php echo(L_WEL_1." ".C_MSG_DEL." ".L_WEL_2." ".C_USR_DEL." ".(C_USR_DEL == 1 ? L_MIN : L_MINS)."."); ?>
+<?php echo(L_WEL_1." ".C_MSG_DEL." ".(C_MSG_DEL == 1 ? L_HOUR : L_HOURS)." ".L_WEL_2." ".C_USR_DEL." ".(C_USR_DEL == 1 ? L_MIN : L_MINS)."."); ?>
 </P>
 <?php
 $DefaultRoomFound = 0;
@@ -1209,7 +1299,7 @@ $result = @mysql_query("SELECT DISTINCT ip,browser FROM ".C_LRK_TBL."",$handler)
 $online_users = @mysql_numrows($result);
 @mysql_close();
 $lurklink = " <A HREF=\"lurking.php?L=$L&D=10\" CLASS=\"ChatLink\" TARGET=\"_blank\" onMouseOver=\"window.status='Open the Lurking Page.'; return true;\">";
-echo("<br>".L_CUR_1." ".($online_users != 1 ? L_CUR_1a.$lurklink.$online_users." ".L_LURKERS."</A>" : L_CUR_1b.$lurklink.$online_users." ".L_LURKER."</A>"));
+echo("<br />".L_CUR_1." ".($online_users != 1 ? L_CUR_1a.$lurklink.$online_users." ".L_LURKERS."</A>" : L_CUR_1b.$lurklink.$online_users." ".L_LURKER."</A>"));
 }
 ?>
 </P>
@@ -1248,7 +1338,7 @@ if (!isset($Ver)) $Ver = "L";
 					$i++;
 					echo("<A HREF=\"$Action?L=${name}\" onMouseOver=\"window.status='Switch to ".ucfirst(str_replace("_"," ",$name)).".'; return true;\" Title=\"".ucfirst(str_replace("_"," ",$name))."\">");
 					echo("<IMG SRC=\"${ChatPath}localization/${name}/flag.gif\" BORDER=0 WIDTH=24 HEIGHT=16 ALT=\"".ucfirst(str_replace("_"," ",$name))."\"></A>&nbsp;");
-					if ($i % 15 == 0) echo ("<br>");
+					if ($i % 15 == 0) echo ("<br />");
 				};
 				unset($AvailableLanguages);
 				?>
@@ -1265,14 +1355,14 @@ if (!isset($Ver)) $Ver = "L";
 			<TH COLSPAN=2 CLASS="ChatTabTitle"><?php echo(L_SET_1); ?></TH>
 		</TR>
 		<TR CLASS="ChatCell">
-			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP><?php echo(L_SET_2); ?> :</TD>
+			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_SET_2); ?> :</TD>
 			<TD VALIGN="TOP" CLASS="ChatCell">
 				<INPUT TYPE="text" NAME="U" SIZE=11 MAXLENGTH=15 VALUE="<?php echo(htmlspecialchars(urldecode($U))); ?>" CLASS="ChatBox">
 			</TD>
 		</TR>
 		<TR CLASS="ChatCell">
-			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP><?php echo(L_REG_1); ?> :</TD>
-			<TD VALIGN="TOP" CLASS="ChatCell" NOWRAP>
+			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_REG_1); ?> :</TD>
+			<TD VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP">
 				<INPUT TYPE="password" NAME="pmc_password" SIZE=11 MAXLENGTH=16 CLASS="ChatBox">
 				<?php if (!C_REQUIRE_REGISTER) echo("&nbsp;<U>".L_REG_1r."</U>"); ?>
 			</TD>
@@ -1285,7 +1375,7 @@ if (!isset($Ver)) $Ver = "L";
 		</TR>
 		<TR CLASS="ChatCell">
 			<TD ALIGN="center" COLSPAN=2 CLASS="ChatCell">
-				<br>
+				<br />
 					<A HREF="<?php echo($ChatPath); ?>register.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('register'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_3); ?>.'; return true;"><?php echo(L_REG_3); ?></A>
 					| <A HREF="<?php echo($ChatPath); ?>edituser.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('edituser'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_4); ?>.'; return true;"><?php echo(L_REG_4); ?></A>
 				<?php
@@ -1317,7 +1407,7 @@ if (!isset($Ver)) $Ver = "L";
 			</TABLE>
 			<TABLE BORDER=0 CLASS="ChatTable">
 			<TR CLASS="ChatCell">
-				<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP><?php echo(L_SET_6); ?> :</TD>
+				<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_SET_6); ?> :</TD>
 				<TD VALIGN="TOP" CLASS="ChatCell">
 					<SELECT NAME="R0" CLASS="ChatBox" onChange="reset_R0();">
 						<OPTION VALUE=""><?php echo(L_SET_7); ?></OPTION>
@@ -1348,7 +1438,7 @@ if (!isset($Ver)) $Ver = "L";
 		{
 			?>
 			<TR CLASS="ChatCell">
-				<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP><?php echo(L_SET_8); ?> :</TD>
+				<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_SET_8); ?> :</TD>
 				<TD VALIGN="TOP" CLASS="ChatCell">
 					<SELECT NAME="R1" CLASS="ChatBox" onChange="reset_R1();">
 						<OPTION VALUE=""><?php echo(L_SET_7); ?></OPTION>
@@ -1388,7 +1478,7 @@ if (!isset($Ver)) $Ver = "L";
 			{
 			?>
 			<TR CLASS="ChatCell">
-				<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP><?php echo(L_SET_15); ?> :</TD>
+				<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_SET_15); ?> :</TD>
 				<TD VALIGN="TOP" CLASS="ChatCell">
 					<SELECT NAME="R2" CLASS="ChatBox" onChange="reset_R2();">
 						<OPTION VALUE=""><?php echo(L_SET_7); ?></OPTION>
@@ -1428,7 +1518,7 @@ if (!isset($Ver)) $Ver = "L";
 			{
 			?>
 			<TR CLASS="ChatCell">
-				<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP><?php echo(L_SET_15); ?> :</TD>
+				<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_SET_15); ?> :</TD>
 				<TD VALIGN="TOP" CLASS="ChatCell">
 					<SELECT NAME="R2" CLASS="ChatBox" onChange="reset_R2();">
 						<OPTION VALUE=""><?php echo(L_SET_7); ?></OPTION>
@@ -1467,7 +1557,7 @@ if (!isset($Ver)) $Ver = "L";
 			{
 			?>
 			<TR CLASS="ChatCell">
-				<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP><?php echo(L_SET_15); ?> :</TD>
+				<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_SET_15); ?> :</TD>
 				<TD VALIGN="TOP" CLASS="ChatCell">
 					<SELECT NAME="R2" CLASS="ChatBox" onChange="reset_R2();">
 						<OPTION VALUE=""><?php echo(L_SET_7); ?></OPTION>
@@ -1503,7 +1593,7 @@ if (!isset($Ver)) $Ver = "L";
 		{
 			?>
 			<TR CLASS="ChatCell">
-				<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP>
+				<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP">
 					<?php echo(L_SET_9." "); ?>
 					<SELECT NAME="T" CLASS="ChatBox">
 						<OPTION VALUE="1" <?php if($T == 1 && $DefaultPrivateRoomFound == 0) echo("SELECTED"); ?>><?php echo(L_SET_10); ?></OPTION>
@@ -1525,7 +1615,7 @@ if (!isset($Ver)) $Ver = "L";
 		}
 		?>
 		</TABLE>
-		<br><?php echo(L_SET_18); ?><br>
+		<br /><?php echo(L_SET_18); ?><br />
 		<P CLASS="ChatP2">
 		<?php echo(L_SET_13." "); ?>
 		<INPUT TYPE="submit" VALUE="<?php echo(L_SET_14); ?>" CLASS="ChatBox"> ...
@@ -1541,14 +1631,14 @@ if (C_SHOW_INFO == 1)
 <FONT COLOR=yellow SIZE=-1>
 <?php
 // Info on welcome page about cmds, mods and bot. Edit lib/info.lib.php to add more infos about your chat features
-if (SET_CMDS==1) echo("<br>".INFO_CMDS);
-if (SET_MODS==1) echo("<br>".INFO_MODS);
-if (SET_BOT==1) echo("<br>".INFO_BOT);
+if (SET_CMDS==1) echo("<br />".INFO_CMDS);
+if (SET_MODS==1) echo("<br />".INFO_MODS);
+if (SET_BOT==1) echo("<br />".INFO_BOT);
 ?>
-</FONT><br>
+</FONT><br />
 <?php
 }
-echo("<FONT COLOR=lightblue SIZE=-1>Download this full chat pack from <A href=https://sourceforge.net/project/showfiles.php?group_id=19371 target=_blank onMouseOver=\"window.status='Download this phpMyChat Plus Pack.'; return true;\">here</A></FONT>");
+echo("<FONT COLOR=lightblue SIZE=-1>Download this full chat pack from <A href=\"https://sourceforge.net/project/showfiles.php?group_id=19371&package_id=199435\" target=_blank onMouseOver=\"window.status='Download this phpMyChat Plus Pack.'; return true;\">here</A></FONT>");
 ?>
 <P>
 <?php
@@ -1564,15 +1654,15 @@ echo ($ani_counter->create_output("chat_index"));
 ?>
 </P>
 <SPAN CLASS="ChatCopy" dir="LTR">
-&copy; 2000-<?php echo(date(Y))?> <A HREF="http://phpmychat.sourceforge.net/" TARGET=_blank CLASS="ChatLink" Title="Visit the phpMyChat homepage" onMouseOver="window.status='Click to visit phpMyChat Homepage.'; return true">The phpHeaven Team</A><br>
-&copy; 2005-<?php echo(date(Y))?> Plus development by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" Title="Send Ciprian your feedback" CLASS="ChatLink" onMouseOver="window.status='Send your feedback to Ciprian at ciprianmp@yahoo.com.'; return true;">Ciprian M</a>.<br>
+&copy; 2000-<?php echo(date(Y))?> <A HREF="http://phpmychat.sourceforge.net/" TARGET=_blank CLASS="ChatLink" Title="Visit the phpMyChat homepage" onMouseOver="window.status='Click to visit phpMyChat Homepage.'; return true">The phpHeaven Team</A><br />
+&copy; 2005-<?php echo(date(Y))?> Plus development by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" Title="Send Ciprian your feedback" CLASS="ChatLink" onMouseOver="window.status='Send your feedback to Ciprian at ciprianmp@yahoo.com.'; return true;">Ciprian M</a>.<br />
 Thanks to all the contributors in the <a href="http://groups.yahoo.com/subscribe/phpmychat" CLASS="ChatLink" title="Subscribe to phpMyChat group on yahoo" onMouseOver="window.status='Click here to join phpMyChat group.'; return true;" target=_blank>phpMyChat group</a> !
 </SPAN>
 <?php
 if (C_SHOW_OWNER == 1)
 {
 ?>
-<br><SPAN CLASS="ChatCopy" dir="LTR">
+<br /><SPAN CLASS="ChatCopy" dir="LTR">
 Owner of this chat server -
 <?php
 include_once("./admin/mail4admin.lib.php");

@@ -12,7 +12,7 @@ if (isset($HTTP_COOKIE_VARS["CookieStatus"])) $statusu = $HTTP_COOKIE_VARS["Cook
 if (isset($HTTP_COOKIE_VARS["CookieUserSort"])) $sort_order = $HTTP_COOKIE_VARS["CookieUserSort"];
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 require("./config/config.lib.php");
@@ -101,18 +101,18 @@ function userColor($type,$colorname)
 	{
 		if (COLOR_NAMES)
 		{
-			$color = ($colorname != '' ? $colorname:($type == 'a' ? "FF0000":($type == 'm' ? "0000FF":"")));
+			$color = ($colorname != '' ? $colorname:($type == 'a' ? COLOR_CA:($type == 'm' ? COLOR_CM:COLOR_CD)));
 			return $color;
 		}
 		else
 		{
-			$color = ($type == 'a' ? "FF0000":($type == 'm' ? "0000FF":""));
+			$color = ($type == 'a' ? COLOR_CA:($type == 'm' ? COLOR_CM:""));
 			return $color;
 		};
 	}
 	elseif (COLOR_NAMES)
 	{
-			$color = ($colorname != '' ? $colorname:"");
+			$color = ($colorname != '' ? $colorname:COLOR_CD);
 			return $color;
 	}
 	else
@@ -211,7 +211,7 @@ else
 }
 
 $DbLink->query($currentRoomQuery);
-echo("<B>".htmlspecialchars(stripslashes($R))."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$DbLink->num_rows().")</SPAN><br>\n");
+echo("<B>".htmlspecialchars(stripslashes($R))."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$DbLink->num_rows().")</SPAN><br />\n");
 while(list($User, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup, $colorname, $avatar) = $DbLink->next_record())
 {
 	if (C_USE_AVATARS)
@@ -297,48 +297,49 @@ while(list($User, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup,
 					echo("<A HREF=\"javascript:window.parent.userClick('".special_char2($User,$Latin1)."',false);\" ".userClass($status)." title=\"Use this name\" onMouseOver=\"window.status='Use this username.'; return true\">".special_char($User,$Latin1,$status)."</A>&nbsp;");
 				}
 			}
-//------------------------------Begin HighLight command by R.Worley
-global $contents ;
-$botpath = "botfb/" .$U ;
-if (file_exists ($botpath))
-	{
-		$fd = fopen ($botpath, "rb");
-                  $contents = fread ($fd, filesize ($botpath));
-                fclose ($fd);
+			//------------------------------Begin HighLight command by R.Worley
+			global $contents ;
+			$highpath = "botfb/" .$U ;
+			if (file_exists ($highpath))
+			{
+				$fd = fopen ($highpath, "rb");
+				$contents = fread ($fd, filesize ($highpath));
+				fclose ($fd);
+			}
+			if($contents == $User)
+			{
+				$highlight = "images/highlightOn.gif";
+			}
+			else
+			{
+				$highlight = "images/highlightOff.gif";
+			}
+			//-------------------------------End HighLight Mod
+			echo('<a href="#" onClick="window.parent.runCmd('.$Cmd2Send.'); return false;" title="Highlight/Un-Highlight" onMouseOver="window.status=\'Highlight/Un-Highlight messages sent by this user.\'; return true"><img src="'.$highlight.'" border="0"></a><br />');
   }
-if($contents == $User)
-	{
-		$highlight = "images/highlightOn.gif";
-	}
-	else
-	{
-		$highlight = "images/highlightOff.gif";
-	}
-//-------------------------------End HighLight Mod
-		echo('<a href="#" onClick="window.parent.runCmd('.$Cmd2Send.'); return false;" title="Highlight/Un-Highlight" onMouseOver="window.status=\'Highlight/Un-Highlight messages sent by this user.\'; return true"><img src="'.$highlight.'" border="0"></a><br>');
-  } else {
+  else
+  {
 		$Cmd2Send = ($User == stripslashes($U) ? "'high',''" : "'high','".special_char2($Usera,$Latin1)."'");
 		echo("<span style=color:".userColor($status,$colorname).";>".special_char($User,$Latin1,$status)."</span>&nbsp;");
-//------------------------------Begin HighLight command by R.Worley
-global $contents ;
-$botpath = "botfb/" .$U ;
-if (file_exists ($botpath))
-	{
-		$fd = fopen ($botpath, "rb");
-                  $contents = fread ($fd, filesize ($botpath));
-                fclose ($fd);
-  }
-if($contents == $Usera)
-	{
-		$highlight = "images/highlightOn.gif";
-	}
-	else
-	{
-		$highlight = "images/highlightOff.gif";
-	}
-//-------------------------------End HighLight Mod
-		echo('<a href="#" onClick="window.parent.runCmd('.$Cmd2Send.'); return false;" title="Highlight/Un-Highlight" onMouseOver="window.status=\'Highlight/Un-Highlight messages sent by this user.\'; return true"><img src="'.$highlight.'" border="0"></a><br>');
-//---------------------------End HighLight Mod
+		//------------------------------Begin HighLight command by R.Worley
+		global $contents ;
+		$highpath = "botfb/" .$U ;
+		if (file_exists ($highpath))
+		{
+			$fd = fopen ($highpath, "rb");
+			$contents = fread ($fd, filesize ($highpath));
+			fclose ($fd);
+		}
+		if($contents == $Usera)
+		{
+			$highlight = "images/highlightOn.gif";
+		}
+		else
+		{
+			$highlight = "images/highlightOff.gif";
+		}
+		echo('<a href="#" onClick="window.parent.runCmd('.$Cmd2Send.'); return false;" title="Highlight/Un-Highlight" onMouseOver="window.status=\'Highlight/Un-Highlight messages sent by this user.\'; return true"><img src="'.$highlight.'" border="0"></a><br />');
+		//---------------------------End HighLight Mod
   }
 // end /away mod alteration.
 	}
@@ -346,28 +347,28 @@ if($contents == $Usera)
 	{
 		$Cmd2Send = ($User != stripslashes($U) ? "'high',''" : "'high','".special_char2($User,$Latin1)."'");
 		echo("<span style=color:".userColor($status,$colorname).";>".special_char($User,$Latin1,$status)."</span>&nbsp;");
-//------------------------------Begin HighLight command by R.Worley
-global $contents ;
-$botpath = "botfb/" .$U ;
-if (file_exists ($botpath))
-	{
-		$fd = fopen ($botpath, "rb");
-                  $contents = fread ($fd, filesize ($botpath));
-                fclose ($fd);
-  }
-if($contents == $User)
-	{
-		$highlight = "images/highlightOn.gif";
-	}
-	else
-	{
-		$highlight = "images/highlightOff.gif";
-	}
-		echo('<a href="#" onClick="window.parent.runCmd('.$Cmd2Send.'); return false;" title="Highlight/Un-Highlight" onMouseOver="window.status=\'Highlight/Un-Highlight messages sent by this user.\'; return true"><img src="'.$highlight.'" border="0"></a><br>');
-//-------------------------------End HighLight Mod
+		//------------------------------Begin HighLight command by R.Worley
+		global $contents ;
+		$highpath = "botfb/" .$U ;
+		if (file_exists ($highpath))
+		{
+			$fd = fopen ($highpath, "rb");
+			$contents = fread ($fd, filesize ($highpath));
+			fclose ($fd);
+		}
+		if($contents == $User)
+		{
+			$highlight = "images/highlightOn.gif";
+		}
+		else
+		{
+			$highlight = "images/highlightOff.gif";
+		}
+		echo('<a href="#" onClick="window.parent.runCmd('.$Cmd2Send.'); return false;" title="Highlight/Un-Highlight" onMouseOver="window.status=\'Highlight/Un-Highlight messages sent by this user.\'; return true"><img src="'.$highlight.'" border="0"></a><br />');
+		//-------------------------------End HighLight Mod
 	}
 }
-echo("</DIV><br>\n");
+echo("</DIV><br />\n");
 $DbLink->clean_results();
 
 //** Build users list for other rooms **
@@ -489,22 +490,22 @@ if($DbLink->num_rows() > 0)
 			{
 				if (COLOR_NAMES)
 				{
-					echo("<A HREF=\"javascript:window.parent.send_popup('/wisp ".special_char2($OtherUser,$Latin1)."');\" ".userClass($status)." title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></A><br>\n");
+					echo("<A HREF=\"javascript:window.parent.send_popup('/wisp ".special_char2($OtherUser,$Latin1)."');\" ".userClass($status)." title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></A><br />\n");
 				}
 				else
 				{
-					echo("<A HREF=\"javascript:window.parent.send_popup('/wisp ".special_char2($OtherUser,$Latin1)."');\" ".userClass($status)." title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\">".special_char($OtherUser,$Latin1,$status)."</A><br>\n");
+					echo("<A HREF=\"javascript:window.parent.send_popup('/wisp ".special_char2($OtherUser,$Latin1)."');\" ".userClass($status)." title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\">".special_char($OtherUser,$Latin1,$status)."</A><br />\n");
 				}
 			}
 			else
 			{
 				if (COLOR_NAMES)
 				{
-					echo("<A HREF=\"javascript:window.parent.userClick('".special_char2($OtherUser,$Latin1)."',false);\" ".userClass($status)." title=\"Use this name\" onMouseOver=\"window.status='Use this username.'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></A><br>\n");
+					echo("<A HREF=\"javascript:window.parent.userClick('".special_char2($OtherUser,$Latin1)."',false);\" ".userClass($status)." title=\"Use this name\" onMouseOver=\"window.status='Use this username.'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></A><br />\n");
 				}
 				else
 				{
-					echo("<A HREF=\"javascript:window.parent.userClick('".special_char2($OtherUser,$Latin1)."',false);\" ".userClass($status)." title=\"Use this name\" onMouseOver=\"window.status='Use this username.'; return true\">".special_char($OtherUser,$Latin1,$status)."</A><br>\n");
+					echo("<A HREF=\"javascript:window.parent.userClick('".special_char2($OtherUser,$Latin1)."',false);\" ".userClass($status)." title=\"Use this name\" onMouseOver=\"window.status='Use this username.'; return true\">".special_char($OtherUser,$Latin1,$status)."</A><br />\n");
 				}
 			}
 			}
@@ -547,15 +548,15 @@ $Cmd2Send = ("'quit','".special_char2(stripslashes($U),$Latin1)." - brb (need to
 ?>
 <TD valign="bottom">
 <A HREF="<?php echo($ChatPath); ?>register.php" onClick="reg_popup_room(); window.parent.runCmd(<?php echo($Cmd2Send); ?>); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_3); ?>.'; return true;" title="<?php echo(L_REG_3); ?>"><?php echo(L_REG_3); ?></A>
-</TD><br>
+</TD><br />
 <?php
 }
 if (C_CHAT_LOGS && (C_SHOW_LOGS_USR || $statusu == "a"))
 {
 ?>
 <TD valign="bottom">
-<A HREF="<?php echo($ChatPath); ?>logs.php?L=<?php echo($L); ?>" TARGET="_blank" onMouseOver="window.status='<?php echo(L_ARCHIVE); ?>.'; return true;" title="<?php echo(L_ARCHIVE); ?>"><?php echo(L_ARCHIVE); ?></A>
-</TD><br>
+<A HREF="<?php echo($ChatPath); ?>logs.php" TARGET="_blank" onMouseOver="window.status='<?php echo(L_ARCHIVE); ?>.'; return true;" title="<?php echo(L_ARCHIVE); ?>"><?php echo(L_ARCHIVE); ?></A>
+</TD><br />
 <?php
 }
 	if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $statusu == "a"))
@@ -568,7 +569,7 @@ if (C_CHAT_LOGS && (C_SHOW_LOGS_USR || $statusu == "a"))
 		$result = @mysql_query("SELECT DISTINCT ip,browser FROM ".C_LRK_TBL."",$handler);
 		$online_users = @mysql_numrows($result);
 		@mysql_close();
-		$lurklink = " <A HREF=\"lurking.php?D=".$D."&L=".$L."\" CLASS=\"ChatLink\" TARGET=\"_blank\" onMouseOver=\"window.status='Open the lurking page.'; return true;\" title=\"Lurking page\">";
+		$lurklink = " <A HREF=\"lurking.php?D=".$D."\" CLASS=\"ChatLink\" TARGET=\"_blank\" onMouseOver=\"window.status='Open the lurking page.'; return true;\" title=\"Lurking page\">";
 		echo("<TD valign=bottom>".$lurklink.$online_users." ".($online_users != 1 ? L_LURKERS : L_LURKER)."</A></TD>");
 		$CleanUsrTbl = 1;
 	}

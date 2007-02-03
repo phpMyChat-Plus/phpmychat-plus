@@ -1,4 +1,9 @@
 <?php
+// Chat Extras panel by DigiozMultimedia
+// This sheet is diplayed when the admin wants to check/view/delete messages from the chat
+
+if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
+
 if (!C_CHAT_EXTRAS)
 {
 ?>
@@ -47,9 +52,9 @@ if($mdel != "")
 // View List of Current Chat (HIDDEN and VISIBLE) ------------------------------------------------------
 
 $sql = "SELECT * FROM `c_messages`".$sqlT;
-$query = mysql_query($sql) or die("Cannot query the database.<br>" . mysql_error());
+$query = mysql_query($sql) or die("Cannot query the database.<br />" . mysql_error());
 
-echo "<center><a href=\"$pstr&mdel=\"><b><font color=white>Refresh Messages</font></b></a></center><br>";
+echo "<center><a href=\"$pstr&mdel=\"><b><font color=white>Refresh Messages</font></b></a></center><br />";
 echo "<table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" width=\"780\" CLASS=table>";
 echo "<tr CLASS=\"thumbIndex\">
 <td VALIGN=CENTER ALIGN=CENTER height=20 CLASS=tabtitle align=center><a href=\"$pstr&mord=T\"><b>Del</b></a></td>
@@ -77,6 +82,6 @@ echo "<tr bgcolor=\"#FFFFFF\">
 <td>$message</td></tr>";
 }
 
-echo "</table><br>";
+echo "</table><br />";
 }
 ?>

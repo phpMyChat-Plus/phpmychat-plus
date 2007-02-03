@@ -13,11 +13,104 @@ require("./${ChatPath}lib/index.lib.php");
 <HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
-<script language="JavaScript">
+<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
 <!--
 window.name="login";
+// Display & remove the server time at the status bas
+function get_day(time,plus)
+{
+		monday = " <?php echo(L_MON) ?>";
+		tuesday = " <?php echo(L_TUE) ?>";
+		wednesday = " <?php echo(L_WED) ?>";
+		thursday = " <?php echo(L_THU) ?>";
+		friday = " <?php echo(L_FRI) ?>";
+		saturday = " <?php echo(L_SAT) ?>";
+		sunday = " <?php echo(L_SUN) ?>";
+		dayN = time.getDay();
+		day = dayN + plus;
+		if (day == 1 || day == 8) is_day = monday;
+		if (day == 2) is_day = tuesday;
+		if (day == 3) is_day = wednesday;
+		if (day == 4) is_day = thursday;
+		if (day == 5) is_day = friday;
+		if (day == 6) is_day = saturday;
+		if (day == 0 || day == 7) is_day = sunday;
+		return is_day;
+}
+	function clock(gap)
+	{
+		cur_date = new Date();
+		calc_date = new Date(cur_date - gap);
+		calc_hours = calc_date.getHours();
+		calc_minuts = calc_date.getMinutes();
+		calc_seconds = calc_date.getSeconds();
+		if (calc_hours < 10) calc_hours = "0" + calc_hours;
+		if (calc_minuts < 10) calc_minuts = "0" + calc_minuts;
+		if (calc_seconds < 10) calc_seconds = "0" + calc_seconds;
+		calc_time = calc_hours + ":" + calc_minuts + ":" + calc_seconds<?php echo((C_WORLDTIME) ? ' + get_day(calc_date,0)' :''); ?>;
+		cur_gapGMT_DST = (cur_date.getTimezoneOffset()+60)/60;
+		cur_hoursGMT_DST = cur_date.getHours()+cur_gapGMT_DST;
+		if (cur_hoursGMT_DST < 0) cur_hoursLON = 24 + cur_hoursGMT_DST;
+		if (cur_hoursGMT_DST < 10) cur_hoursLON = "0" + cur_hoursGMT_DST;
+		else cur_hoursLON = cur_hoursGMT_DST;
+		cur_timeGMT =cur_hoursLON + ":" + calc_minuts + get_day(cur_date);
+		cur_hoursNYC = cur_hoursGMT_DST - 5;
+		dayNYC = "";
+		if (cur_hoursNYC < 0) { cur_hoursNYC = 24 + cur_hoursNYC; if (cur_hoursLON - cur_hoursNYC < 0) dayNYC = get_day(cur_date,-1); }
+		if (cur_hoursNYC < 10) cur_hoursNYC = "0" + cur_hoursNYC;
+		cur_timeNYC = cur_hoursNYC + ":" + calc_minuts + dayNYC;
+		cur_hoursPAR = cur_hoursGMT_DST + 1;
+		dayPAR = "";
+		if (cur_hoursPAR > 23) { cur_hoursPAR = cur_hoursPAR - 24; if (cur_hoursPAR - cur_hoursLON < 0) dayPAR = get_day(cur_date,1); }
+		if (cur_hoursPAR < 10) cur_hoursPAR = "0" + cur_hoursPAR;
+		cur_timePAR = cur_hoursPAR + ":" + calc_minuts + dayPAR;
+		cur_hoursBUC = cur_hoursGMT_DST + 2;
+		dayBUC = "";
+		if (cur_hoursBUC > 23) { cur_hoursBUC = cur_hoursBUC - 24; if (cur_hoursBUC - cur_hoursLON < 0) dayBUC = get_day(cur_date,1); }
+		if (cur_hoursBUC < 10) cur_hoursBUC = "0" + cur_hoursBUC;
+		cur_timeBUC = cur_hoursBUC + ":" + calc_minuts + dayBUC;
+		cur_gapGMT = cur_date.getTimezoneOffset()/60;
+		cur_hoursGMT = cur_date.getHours()+cur_gapGMT;
+		cur_hoursTYO = cur_hoursGMT + 9;
+		dayTYO = "";
+		if (cur_hoursTYO > 23) { cur_hoursTYO = cur_hoursTYO - 24; if (cur_hoursTYO - cur_hoursLON < 0) dayTYO = get_day(cur_date,1); }
+		if (cur_hoursTYO < 10) cur_hoursTYO = "0" + cur_hoursTYO;
+		cur_timeTYO = cur_hoursTYO + ":" + calc_minuts + dayTYO;
+		cur_hoursSYD = cur_hoursGMT + 10;
+		daySYD = "";
+		if (cur_hoursSYD > 23) { cur_hoursSYD = cur_hoursSYD - 24; if (cur_hoursSYD - cur_hoursLON < 0) daySYD = get_day(cur_date,1); }
+		if (cur_hoursSYD < 10) cur_hoursSYD = "0" + cur_hoursSYD
+		cur_timeSYD = cur_hoursSYD + ":" + calc_minuts + daySYD;;
+		window.status = "<?php echo(L_SVR_TIME); ?>" + calc_time<?php echo((C_WORLDTIME) ? ' + " (NYC: " + cur_timeNYC + " | LON: " + cur_timeGMT + " | PAR: " + cur_timePAR + " | BUC: " + cur_timeBUC + " | TYO: " + cur_timeTYO + " | SYD: " + cur_timeSYD + ")"' : ''); ?>;
+
+		clock_disp = setTimeout('clock(' + gap + ')', 1000);
+	}
+
+	function stop_clock()
+	{
+		clearTimeout(clock_disp);
+		window.status = '';
+	}
+
+	function calc_gap(serv_date)
+	{
+		server_date = new Date(serv_date);
+		local_date = new Date();
+		return local_date - server_date;
+	}
+
+	<?php
+	if (C_WORLDTIME == 2)
+	{
+		$CorrectedDate = mktime(date("H") + C_TMZ_OFFSET,date("i"),date("s"),date("m"),date("d"),date("Y"));
+		?>
+		gap = calc_gap("<?php echo(date("F d, Y H:i:s", $CorrectedDate)); ?>");
+		clock(gap);
+		<?php
+	}
+	?>
 //-->
-</script>
+</SCRIPT>
 <?php
 // You can put html head statements right after the "<HEAD>" tag.
 
@@ -53,6 +146,7 @@ $Status = (isset($CookieStatus) ? $CookieStatus : "");
 layout($Is_Error,$Username,$Room_name,$Room_type,$Color,$Status);
 
 // You can add php code here, or add html statements before the "</BODY>" tag.
+if ($S) echo("<TD><SPAN style=\"color:yellow; background-color:black;\"><b>Debug data:</b><br>Admin name: <b>".C_ADMIN_NAME."</b><br>Admin email: <b>".C_ADMIN_EMAIL."</b><br>App name: <b>".APP_NAME."</b><br>App version: <b>".APP_VERSION."</b></SPAN></TD>");
 ?>
 </CENTER>
 </BODY>

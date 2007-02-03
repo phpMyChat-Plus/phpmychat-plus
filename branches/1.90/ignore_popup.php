@@ -11,7 +11,7 @@ if (isset($HTTP_GET_VARS))
 if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 require("./config/config.lib.php");
 require("./lib/release.lib.php");
@@ -53,7 +53,7 @@ if(isset($Ign))
 	$Ignore = explode (",", $Ign);
 	for ($i = 0; $i < count($Ignore); $i++)
 	{
-		echo("-&nbsp;".urldecode($Ignore[$i])."<br>");
+		echo("-&nbsp;".urldecode($Ignore[$i])."<br />");
 	}
 }
 else

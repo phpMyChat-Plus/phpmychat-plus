@@ -18,7 +18,7 @@ if (isset($HTTP_POST_VARS))
 };
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 // avoid server configuration for magic quotes
 set_magic_quotes_runtime(0);

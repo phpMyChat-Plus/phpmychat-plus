@@ -97,7 +97,7 @@ function get_focus()
 
 <BODY onLoad="if (window.focus) get_focus();">
 <CENTER>
-<br>
+<br />
 <?php
 // Get the name of the script that called the login library
 if (!isset($PHP_SELF)) $PHP_SELF = $HTTP_SERVER_VARS["PHP_SELF"];
@@ -122,13 +122,13 @@ if(isset($Error))
 			<TH COLSPAN=2 CLASS="tabtitle"><?php echo(L_REG_14); ?></TH>
 		</TR>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_SET_2); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_SET_2); ?> :</TD>
 			<TD VALIGN="TOP">
 				<INPUT TYPE="text" NAME="pmc_username" SIZE=11 MAXLENGTH=15 VALUE="<?php if (isset($pmc_username)) echo(htmlspecialchars(stripslashes($pmc_username))); ?>">
 			</TD>
 		</TR>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_REG_7); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_1); ?> :</TD>
 			<TD VALIGN="TOP">
 				<INPUT TYPE="password" NAME="pmc_password" SIZE=11 MAXLENGTH=16 VALUE="<?php if (isset($pmc_password)) echo(htmlspecialchars(stripslashes($pmc_password))); ?>">
 			</TD>

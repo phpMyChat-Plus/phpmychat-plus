@@ -17,6 +17,7 @@ if (isset($HTTP_POST_VARS))
 	};
 };
 if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
+if (isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"];
 if (!isset($R)) $skin == "style";
 
 require("config/config.lib.php");
@@ -45,7 +46,7 @@ while (false !== ($yru = readdir($yearu)))
 	{
 		$yeardiru = $yru;
 		echo("<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table><tr>");
-		echo ("<td valign=top align=center nowrap colspan=5><font size=4 color=red><b>$yru</b></font></td>"); #print name of each file found
+		echo ("<td valign=top align=center nowrap=\"nowrap\" colspan=5><font size=4 color=red><b>$yru</b></font></td>"); #print name of each file found
 	$mu=$yu.$yeardiru; #define which month you want to read
 	$monthu = opendir($mu); #open directory
 		while (false !== ($mtu = readdir($monthu)))
@@ -54,8 +55,8 @@ while (false !== ($yru = readdir($yearu)))
 			{
 				$monthdiru = $mtu;
 						echo("<tr>");
-						echo ("<td valign=top align=center nowrap><font size=4 color=green><b>$mtu</b></font></td>"); #print name of each file found
-						echo ("<td valign=top align=left nowrap>");
+						echo ("<td valign=top align=center nowrap=\"nowrap\"><font size=4 color=green><b>$mtu</b></font></td>"); #print name of each file found
+						echo ("<td valign=top align=left nowrap=\"nowrap\">");
 				$du=$yu.$yeardiru."/".$monthdiru; #define which month you want to read
 				$dayu = opendir($du); #open directory
 				while (false !== ($dyu = readdir($dayu)))
@@ -70,17 +71,18 @@ while (false !== ($yru = readdir($yearu)))
 				$j=1;
 			  foreach ($dayarrayu as $dyu)
 			  {
-					$dyuhtm=str_replace(".htm","",$dyu);
+					if (eregi(".htm",$dyu)) $dyuhtm=str_replace(".htm","",$dyu);
+					else $dyuhtm=str_replace(".php","",$dyu);
 					$dyuhtm=str_replace($yru.$mtu,"",$dyuhtm);
-					echo ("<li><a href=$du/$dyu title=\"Read $dyuhtm $mtu $yru archive\" target=_self>$dyuhtm</a> (".filesize($du."/".$dyu)." bytes)<br>\n"); #print name of each file found
-					if ($j==7 || $j==14 || $j==21 || $j==28) echo ("<td valign=top align=left nowrap>");
+					echo ("<li><a href=$du/$dyu?L=$L title=\"Read $dyuhtm $mtu $yru archive\">$dyuhtm</a> (".filesize($du."/".$dyu)." bytes)<br />\n"); #print name of each file found
+					if ($j==7 || $j==14 || $j==21 || $j==28) echo ("<td valign=top align=left nowrap=\"nowrap\">");
 					$j++;
 				}
 				unset($dayarrayu);
 					echo("</tr>");
 			}
 		}
-		echo("</td></tr></table><br>");
+		echo("</td></tr></table><br />");
 		closedir($monthu);
 	}
 }

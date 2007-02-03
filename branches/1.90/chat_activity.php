@@ -2,14 +2,23 @@
 // This script is an example of display, in another page of your website,
 // the list or number of users connected to the chat
 
+// Call this file in a iframe like this:
+// <iframe name="PlusFrame" id="PlusFrame" height="30" scroll="no" frameborder="no" src="chat_activity.php"></iframe>
+
 // Lines below must be at the top of your file and completed according
 // to your settings
 
 // Set relative path from this page to your chat directory (it ends with a trailing slash like: "../chat/" or empty "")
-$ChatPath = "";
+// Considering /plus/ is in a path like http://www.website.com/folders/plus/
+//$ChatPath = "../../plus/";	//use it if the output page is in a path like this: http://www.website.com/folders/sample1/sample2
+$ChatPath = "../plus/";	//use it if the output page is in a path like this: http://www.website.com/folders/sample/
+//$ChatPath = "plus/";	//(most often) use it if the output page is in a path like this: http://www.website.com/folders/
+//$ChatPath = "";	//use it if the output page is in the same directory as plus
+
+define("LOGIN_LINK","<A HREF=\"".$ChatPath."\" TITLE=\"Chat Login Page\" onMouseOver=\"window.status='Click to open the Chat Login Page.'; return true;\" TARGET=_blank>");
 
 if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
-if (!isset($R)) $skin == "style";
+if (!isset($R)) $skin == "style";	//you can use any style in your pluschat/config folder (style, style2, ..., style7)
 
 if (isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"];
 
@@ -22,7 +31,7 @@ require("./${ChatPath}/localization/".$L."/localized.chat.php");
 $ShowPrivate = "0";     // 1 to display users even if they are in a private room,
 												// 0 else
 
-$DisplayUsers = "1";    // 0 to display only the number of connected users
+$DisplayUsers = "0";    // 0 to display only the number of connected users
                         // 1 to display a list of users
 // End configuration
 ?>
@@ -35,10 +44,8 @@ $DisplayUsers = "1";    // 0 to display only the number of connected users
 <!-- To integrate this page into a different designed page and remove the style sheet, either comment out the line bellow or change the .css style sheet to be used (and the Body class)-->
 <LINK REL="stylesheet" HREF="<?php echo("${ChatPath}".$skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 </HEAD>
-
 <BODY CLASS="frame">
 	<CENTER>
-<hr>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=0 CLASS="table">
 <TR>
 	<TD ALIGN=CENTER colspan=3>
@@ -49,8 +56,6 @@ $DisplayUsers = "1";    // 0 to display only the number of connected users
 	</TD>
 </TR>
 </TABLE>
-<hr>
 </CENTER>
 </BODY>
-
 </HTML>

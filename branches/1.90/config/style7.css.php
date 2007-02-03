@@ -1,5 +1,6 @@
 <?php
-// Seventh room
+// Second private room skin ("Private Room 2" as default)
+// "Black & white" skin for phpMyChat plus - by Bluntdog
 
 // Get the names and values for vars sent by the script that called this one
 if (isset($HTTP_GET_VARS))
@@ -32,43 +33,64 @@ $small = round(0.8 * $medium);
 
 /*	Color Input Box mod by Ciprian
 Here you can customize the default color for messages window general look
-the font for text messages, colors, some popup windows' text color, aso)
-Optionally you might want to replace color: #000000; in the .time block with:
- 	color: <?php echo($CD); ?>;
+the font for text messages, colors, some popup windows' text color, aso.
 This will make time, sender and message color have the same default color defined bellow.*/
 
-	$CD = "navy";			//default messages color
+$CD = "white";			//default messages color, Filter code: FFFFFF
 
 ?>
 
 BODY
 {
-	background-color: #666699;
-	color: #FFFFFF;
-	font-size: <?php echo($medium); ?>pt;
-	font-weight: 400;
-	margin: 5px;
-	text-indent: 0;
-}
-
-BODY.frame
-{
-	background-color: #666699;
-	color: #FFFFFF;
-	font-size: <?php echo($medium); ?>pt;
-	font-weight: 400;
-	margin: 5px;
-	text-indent: 0;
-}
-
-
-BODY.mainframe
-{
-	background-color: #CCCCFF;
+	background-color: #000000;
 	color: <?php echo($CD); ?>;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
 	margin: 5px;
+	text-indent: 0;
+	scrollbar-3dlight-color: #000000;
+	scrollbar-arrow-color: #ffffff;
+	scrollbar-base-color: #808080;
+	scrollbar-track-color: #A9A9A9;
+	scrollbar-darkshadow-color: #000000;
+	scrollbar-face-color: #000000;
+	scrollbar-highlight-color: #ffffff;
+	scrollbar-shadow-color: #808080;
+}
+
+BODY.frame
+{
+	background-color: #000000;
+	color: #ccccff;
+	font-size: <?php echo($medium); ?>pt;
+	font-weight: 400;
+	margin: 5px;
+	text-indent: 0;
+	scrollbar-3dlight-color: #000000;
+	scrollbar-arrow-color: #ffffff;
+	scrollbar-base-color: #808080;
+	scrollbar-track-color: #A9A9A9;
+	scrollbar-darkshadow-color: #000000;
+	scrollbar-face-color: #000000;
+	scrollbar-highlight-color: #ffffff;
+	scrollbar-shadow-color: #808080;
+}
+
+BODY.mainframe
+{
+	background-color: #000000;
+	color: <?php echo($CD); ?>;
+	font-size: <?php echo($medium); ?>pt;
+	font-weight: 400;
+	margin: 5px;
+	scrollbar-3dlight-color: #000000;
+	scrollbar-arrow-color: #ffffff;
+	scrollbar-base-color: #808080;
+	scrollbar-track-color: #A9A9A9;
+	scrollbar-darkshadow-color: #000000;
+	scrollbar-face-color: #000000;
+	scrollbar-highlight-color: #ffffff;
+	scrollbar-shadow-color: #808080;
 }
 
 TABLE, TR, TD, TH
@@ -93,7 +115,7 @@ TH, B
 A
 {
 	text-decoration: none;
-	color: #FFFFFF;
+	color: <?php echo($CD); ?>;
 	font-weight: 600;
 }
 
@@ -124,11 +146,6 @@ A.mod, A.mod:active
 	font-weight: 600;
 }
 
-INPUT, SELECT, TEXTAREA
-{
-	background: #EEEEFF;
-}
-
 A.sender, A.sender:active
 {
 	text-decoration: none;
@@ -136,13 +153,18 @@ A.sender, A.sender:active
 	font-weight: 600;
 }
 
+INPUT, SELECT, TEXTAREA
+{
+	background: #eeeeff;
+}
+
 .msg
 {
 	margin-top: 0px;
 	margin-bottom: 2px;
-	margin-left: <?php echo($Charset == "windows-1256" ? "5" : "55"); ?>px;
-	margin-right: <?php echo($Charset == "windows-1256" ? "55" : "5"); ?>px;
-	text-indent: -50px;
+	margin-left: <?php #echo($Charset == "windows-1256" ? "5" : "55"); ?>0px;
+	margin-right: <?php #echo($Charset == "windows-1256" ? "55" : "5"); ?>0px;
+	text-indent: 0px;
 }
 
 .msg2
@@ -150,9 +172,9 @@ A.sender, A.sender:active
 	background: #FFFAFA;
 	margin-top: 0px;
 	margin-bottom: 0px;
-	margin-left: <?php echo($Charset == "windows-1256" ? "5" : "55"); ?>px;
-	margin-right: <?php echo($Charset == "windows-1256" ? "55" : "5"); ?>px;
-	text-indent: -50px;
+	margin-left: <?php #echo($Charset == "windows-1256" ? "5" : "55"); ?>0px;
+	margin-right: <?php #echo($Charset == "windows-1256" ? "55" : "5"); ?>0px;
+	text-indent: 0px;
 }
 
 .title
@@ -172,7 +194,7 @@ A.sender, A.sender:active
 
 .tabtitle
 {
-	background-color: #666699;
+	background-color: #000000;
 	color: #FFFFFF;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 800;
@@ -194,12 +216,12 @@ A.sender, A.sender:active
 {
 	unicode-bidi: embed;
 	color: <?php echo($CD); ?>;
-	font-size: 8pt;
+	font-size: <?php echo($FontSize); ?>;;
 }
 
 .notify
 {
-	color: #666699;
+	color: #FFFFFF;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 600;
 }
@@ -211,53 +233,52 @@ A.sender, A.sender:active
 	font-weight: 600;
 }
 
-
 .menu
 {
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 600;
-	background-color: #666699;
-	color: #FFFFFF;
-	border-bottom: 1pt solid #FFFFFF;
+	background-color: #000000;
+	color: #ffffff;
+	border-bottom: 1pt solid #ffffff;
 };
 
 .menuTitle
 {
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 600;
-	background-color: #666699;
-	color: #FFFFFF;
+	background-color: #000000;
+	color: #ffffff;
 };
 
 .thumbIndex
 {
 	font-size: <?php echo($small); ?>pt;
 	font-weight: 600;
-	background-color: #9999CC;
-	color: #FFFFFF;
-	border-top: 1pt solid #FFFFFF;
-	border-left: 1pt solid #FFFFFF;
-	border-right: 1pt solid #FFFFFF;
+	background-color: #ffffff;
+	color: #000000;
+	border-top: 1pt solid #ffffff;
+	border-left: 1pt solid #ffffff;
+	border-right: 1pt solid #ffffff;
 };
 
 .thumbIndex A
 {
 	text-decoration: none;
-	color: #FFFFFF;
+	color: #000000;
 	font-weight: 600;
 }
 
 .thumbIndex A.selected
 {
 	text-decoration: none;
-	color: #FFFFFF;
+	color: #000000;
 	font-weight: 600;
 }
 
 .thumbIndex A:hover, .thumbIndex A:active
 {
 	text-decoration: none;
-	background: #666699;
+	background: #000000;
 	color: #FF9933;
 }
 

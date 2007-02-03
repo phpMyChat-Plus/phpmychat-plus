@@ -44,9 +44,9 @@ if (!isset($HTTP_ACCEPT_LANGUAGE))
 if (!isset($HTTP_USER_AGENT))
 	$HTTP_USER_AGENT = getenv("HTTP_USER_AGENT");
 
-if ((isset($L) && $L != "" && is_dir('./'.$ChatPath.'localization/'.$L)) || C_MULTI_LANG == 0)
+if ((isset($L) && $L != "" && is_dir('./'.$ChatPath.'localization/'.$L)) || !C_MULTI_LANG)
 {
-}	
+}
 elseif (isset($CookieLang)
 		&& is_dir('./'.$ChatPath.'localization/'.$CookieLang)
 		&& file_exists('./'.$ChatPath.'localization/'.$CookieLang.'/localized.chat.php'))
@@ -54,12 +54,12 @@ elseif (isset($CookieLang)
 	$L = $CookieLang;
 }
 elseif ($HTTP_ACCEPT_LANGUAGE != "")
-{	
+{
 	$Accepted = explode(",", $HTTP_ACCEPT_LANGUAGE);
 	Detect($Accepted[0],1);
 }
 elseif ($HTTP_USER_AGENT != "")
-{	
+{
 	Detect($HTTP_USER_AGENT,2);
 };
 

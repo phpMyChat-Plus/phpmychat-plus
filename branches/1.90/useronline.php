@@ -44,7 +44,7 @@ $online_users = @mysql_numrows($result);
 	while($data = @mysql_fetch_array($result))
 {
 	echo($ip = $data[ip]." - ");
-	echo($browser = $data[browser]."<br>");
+	echo($browser = $data[browser]."<br />");
 }
 }
 */

@@ -85,7 +85,7 @@ function gettemplate($input,$that,$topic,&$inputstarvals,&$thatstarvals,&$topics
 	debugger("Combined: $combined",2);
 
 	if (CACHE_CONTROL == 1 && checkcache($combined,$template,$inputstarvals,$thatstarvals,$topicstarvals,$patternmatched,$inputmatched)) {
-		debugger("<BR><b>HIT CACHE!</b><br>",2);
+		debugger("<br /><b>HIT CACHE!</b><br />",2);
 		return $template;
 	}
 	else {

@@ -14,10 +14,10 @@ if (isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"]
 //if no language detected set default one
 if (!isset($L)) $L = C_LANGUAGE;
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 require("./config/config.lib.php");
@@ -151,11 +151,11 @@ if(isset($NbUsers) && $NbUsers > 0)
 					{
 						if($Users->num_rows() > 0)
 						{
-							echo("<B>".htmlspecialchars($Other)."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$Users->num_rows().")</SPAN><br>");
+							echo("<B>".htmlspecialchars($Other)."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$Users->num_rows().")</SPAN><br />");
 							while(list($Username,$Latin1,$status,$room_time) = $Users->next_record())
 							{
 								$room_time = date("d-M, H:i:s", $room_time + C_TMZ_OFFSET*60*60);
-								echo("-&nbsp;".special_char($Username,$Latin1,$status)." <font size=1>".special_char("(".$room_time.")",$Latin1,$status)."</font><br>");
+								echo("-&nbsp;".special_char($Username,$Latin1,$status)." <font size=1>".special_char("(".$room_time.")",$Latin1,$status)."</font><br />");
 							}
 						}
 					}
@@ -166,11 +166,11 @@ if(isset($NbUsers) && $NbUsers > 0)
 					{
 						if($Users->num_rows() > 0)
 						{
-							echo("<B>".htmlspecialchars($Other)."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$Users->num_rows().")</SPAN><br>");
+							echo("<B>".htmlspecialchars($Other)."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$Users->num_rows().")</SPAN><br />");
 							while(list($Username,$Latin1,$status,$room_time) = $Users->next_record())
 							{
 								$room_time = date("d-M, H:i:s", $room_time + C_TMZ_OFFSET*60*60);
-								echo("-&nbsp;".special_char($Username,$Latin1,$status)." <font size=1>".special_char("(".$room_time.")",$Latin1,$status)."</font><br>");
+								echo("-&nbsp;".special_char($Username,$Latin1,$status)." <font size=1>".special_char("(".$room_time.")",$Latin1,$status)."</font><br />");
 							}
 						}
 					}

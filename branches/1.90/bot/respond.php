@@ -35,7 +35,7 @@
 /**
 * The general preferences and database details.
 */
-require_once "dbprefs.php";
+require_once "db_prefs.php";
 
 /**
 * The matching engine functions of the AIML interpreter.

@@ -9,7 +9,7 @@ if (isset($HTTP_GET_VARS))
 };
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 require("config/config.lib.php");
 require("localization/".$L."/localized.chat.php");
@@ -82,7 +82,7 @@ if($DbLink->num_rows() > 0)
 		// Separator between messages sent before today and other ones
 		if (!isset($day_separator) && date("j", $Time +  C_TMZ_OFFSET*60*60) != date("j", time() +  C_TMZ_OFFSET*60*60))
 		{
-			$day_separator = "<P CLASS=\"msg\"><SPAN CLASS=\"notify\">--------- ".($O == 0 ? L_TODAY_UP : L_TODAY_DWN)." ---------</SPAN></P>";
+			$day_separator = "<P CLASS=\"msg\"><SPAN CLASS=\"notify\" style=\"background-color:yellow;\">--------- ".(!$O ? L_TODAY_UP : L_TODAY_DWN)." ---------</SPAN></P>";
 		};
 
 		$MessagesString = $NewMsg.((isset($day_separator) && $day_separator != "") ? "\n".$day_separator : "")."\n".$MessagesString;

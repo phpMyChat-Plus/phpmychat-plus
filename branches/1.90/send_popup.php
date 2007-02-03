@@ -15,7 +15,7 @@ if (isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"]
 if (isset($HTTP_COOKIE_VARS["CookieUsername"])) $U = $HTTP_COOKIE_VARS["CookieUsername"];
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 require("./config/config.lib.php");
 require("./localization/".$L."/localized.chat.php");
@@ -77,7 +77,7 @@ return true;
 <TABLE BORDER=1 CELLPADDING=3 WIDTH=400 CLASS="table">
 	<TR><TD width="100%" ALIGN="CENTER" CLASS="tabtitle"><?php echo(L_PRIV_POST_MSG) ?></TD></TR>
 </TABLE>
-<br>
+<br />
 <FORM ACTION="send_popup.php" METHOD="POST" AUTOCOMPLETE="OFF" NAME="PostForm">
 <tr><td><input type="text" size="60" value="" name="Post" CLASS="ChatBox" onKeyPress="checkEnter(event)";></td></tr>
 </FORM>

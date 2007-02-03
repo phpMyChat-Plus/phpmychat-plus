@@ -20,7 +20,7 @@ if (isset($HTTP_POST_VARS))
 require("./localization/".$L."/localized.chat.php");
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 require("./lib/release.lib.php");
 require("./config/config.lib.php");
@@ -41,7 +41,7 @@ if (isset($url)) {
     if ($isok) {
       $avatar = $url;
     } else {
-      $avamsg = "<br>Error: ".L_ERR_AV."<br>";
+      $avamsg = "<br>Error: ".L_ERR_AV."<br />";
     }
 }
 
@@ -79,7 +79,7 @@ $textDirection = ($Charset == "windows-1256") ? "RTL" : "LTR";
 
 <HEAD>
 <TITLE>Avatar</TITLE>
-<LINK REL="stylesheet" HREF="config/style.css.php?<?php echo("Charset=${Charset}&medium=${FontSize}&FontName=${FontName}"); ?>" TYPE="text/css">
+<LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 </HEAD>
 <body onLoad="if (window.focus) window.focus();" CLASS="frame">
 <table rows="3" width="90%" align="center" BORDER="0" CELLPADDING="2" CLASS="table">
@@ -99,7 +99,7 @@ $avatarmatch = $avatar;
 <form action="<?php echo($From);?>" METHOD="GET" AUTOCOMPLETE="" TARGET="_self">
 <font size="2" color="blue">(example: http://mysite/images/mypic.gif)</font>
 <center><font size="2"><?php echo(L_URL_AV); ?></font><input type="text" name="url" size="30" limit="254" VALUE="<?php echo($url); ?>">&nbsp;<?php echo($avamsg); ?>
-<br><font size="1"><i><?php echo(L_EXPL_AV); ?></i></font></center>
+<br /><font size="1"><i><?php echo(L_EXPL_AV); ?></i></font></center>
 <!-- <input type="hidden" name="avatar" value="<?php echo($avatar); ?>"> -->
 <input type="hidden" name="User" value="<?php echo($User); ?>">
 <input type="hidden" name="Link" value="1">
@@ -139,12 +139,12 @@ For ($i=0; $i <= C_NUM_AVATARS; $i++) {
 }
 ?>
 </center></td></tr><tr><td>
-<?php echo("<br><center><font size=\"-1\">$typeit</font></center>"); ?>
+<?php echo("<br /><center><font size=\"-1\">$typeit</font></center>"); ?>
 </td>
 </tr></table>
 <center>
 <?php
-echo("<a href=\"$From?User=$User&U=$User&L=$L&FORM_SEND=0&LIMIT=$LIMIT&pmc_password=$pmc_password&pmc_username=$User&Link=1\" onMouseOver=\"window.status='".L_REG_10.".'; return true;\" ><br>".L_REG_10."</a>");
+echo("<a href=\"$From?User=$User&U=$User&L=$L&FORM_SEND=0&LIMIT=$LIMIT&pmc_password=$pmc_password&pmc_username=$User&Link=1\" onMouseOver=\"window.status='".L_REG_10."'; return true;\" ><br />".L_REG_10."</a>");
 ?>
 </center>
 </body>

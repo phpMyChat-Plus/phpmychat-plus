@@ -1,4 +1,5 @@
 <?php
+// Registered Users panel
 // This sheet is diplayed when the admin wants to modify perms for registered users
 // or remove the profiles of some of them
 
@@ -52,6 +53,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 1)
 		// Banish an user
 		elseif ($BANISH_MODE)
 		{
+			$VarName = "reason"; $reason = $$VarName;
 			$VarName = "selected_".$usrHash;
 			if (isset($$VarName))
 			{
@@ -65,9 +67,13 @@ if (isset($FORM_SEND) && $FORM_SEND == 1)
 				if ($Nb == "0")
 				{
 					$Until = time() + round(C_BANISH * 60 * 60 * 24);
-					if ($Until > 2147483647) $Until = "2147483647";
-					$DbLink->query("INSERT INTO ".C_BAN_TBL." VALUES ('$uuu','$Latin1','$IP','**ToDefine**','$Until')");
-				};
+					if ($Until > 2222222222) $Until = "2222222222";
+					$DbLink->query("INSERT INTO ".C_BAN_TBL." VALUES ('$uuu','$Latin1','$IP','*','$Until','$reason')");
+				}
+				else
+				{
+					$DbLink->query("UPDATE ".C_BAN_TBL." SET reason = '$reason' where username='$uuu'");
+				}
 				$Warning = A_SHEET1_10;
 			};
 		}
@@ -177,7 +183,7 @@ function reset_perms(user)
 <P CLASS=title><?php echo(A_SHEET1_1); ?></P>
 
 <?php
-if (isset($Warning) && $Warning != "") echo("<P CLASS=\"success\">$Warning</SPAN></P><br>\n");
+if (isset($Warning) && $Warning != "") echo("<P CLASS=\"success\">$Warning</SPAN></P><br />\n");
 ?>
 
 <TABLE BORDER=0 CELLPADDING=3 CLASS="table">
@@ -279,8 +285,9 @@ if ($count_RegUsers != 0)
 		<TR>
 			<TD VALIGN=CENTER ALIGN=CENTER COLSPAN=5>
 				<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(A_SHEET1_6); ?>">
-				<br><br>
-				<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(A_SHEET1_9); ?>">
+				<br /><br />
+				<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(A_SHEET1_9); ?>"><br />
+				<?php echo(A_SHEET1_12); ?>: <INPUT TYPE="text" NAME="reason" VALUE="">
 			</TD>
 			<TD VALIGN=CENTER ALIGN=CENTER>
 				<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(A_SHEET1_7); ?>">

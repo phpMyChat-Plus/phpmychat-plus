@@ -1,5 +1,5 @@
 <?php
-// File : romanian.admin.php - plus version
+// File : romanian/localized.admin.php - plus version (17.09.2006 - rev.6)
 // Translation started by Radu Swider <swidera@satline.ro>, first updated by Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro>
 // Corrected, finalized and updated to Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -33,6 +33,7 @@ define("A_SHEET1_8", "Nu exista utilizatori inregistrati, cu exceptia ta.");
 define("A_SHEET1_9", "Blocheaza utilizatorii selectati");
 define("A_SHEET1_10", "Va trebui sa intri in sectiunea 'Utilizatori blocati' pentru ajustari.");
 define("A_SHEET1_11", "Ultima conectare");
+define("A_SHEET1_12", "Motivul blocarii (optional)");
 define("A_USER", "Utilizator");
 define("A_MODER", "Moderator");
 define("A_PAGE_CNT", "Pagina %s din %s");
@@ -43,9 +44,10 @@ define("A_SHEET2_2", "IP");
 define("A_SHEET2_3", "Camere blocate");
 define("A_SHEET2_4", "Pana la");
 define("A_SHEET2_5", "Definitiv");
-define("A_SHEET2_6", "Camerele sunt separate prin virgula fara spatii (,) daca sunt mai putine de 4, altfel, semnul '<B>&nbsp;*&nbsp;</B>' <BR>blocheaza in toate camerele.");
+define("A_SHEET2_6", "Camerele sunt separate prin virgula fara spatii (,) daca sunt mai putine de 4, altfel, semnul '<B>&nbsp;*&nbsp;</B>' va bloca accesul in toate camerele.");
 define("A_SHEET2_7", "Deblocheaza utilizatorii selectati");
 define("A_SHEET2_8", "Nu exista utilizatori blocati.");
+define("A_SHEET2_9", "Motivul (optional)");
 
 // Frame for cleaning rooms
 define("A_SHEET3_1", "Lista camerelor care ar trebui curatate");
@@ -64,9 +66,6 @@ define("A_SHEET4_6", "Trimite");
 define("A_SHEET4_7", "Toate email-urile au fost trimise.");
 define("A_SHEET4_8", "Eroare interna intampinata la trimitere.");
 define("A_SHEET4_9", "Destinatia, subiectul sau mesajul nu au fost completate!");
-
-// Send alert to users in chat when avatar enabled/disabled in admin panel
-define("A_RELOAD_CHAT", "Setarile serverului de chat tocmai au fost modificate. Pentru o buna functionare, trebuie sa reincarcati chat-ul (apasati tasta F5 sau Iesire si reintrati pe chat).");
 
 // Frame for configuration
 define("A_SHEET5_0", "- Aveti instalat phpMyChat-Plus versiunea %s -\\nA fost lansata deja o noua versiune (%s)!");

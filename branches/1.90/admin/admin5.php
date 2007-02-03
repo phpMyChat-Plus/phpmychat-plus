@@ -1,8 +1,11 @@
 <?php
+// Configuration panel by DigiozMultimedia and Ciprian Murariu <ciprianmp@yahoo.com>
+// This sheet is diplayed when the admin wants to modify settings of the chat server
 
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
 
 require("./config/config.lib.php");
+$ColorList = eregi_replace('"',"", COLORLIST);
 
 // Check for application update on main sites (ciprianmp.com & sourceforge) resources.
 $updatepath1 = "http://plus.gamedogs.com/lib/update.txt";
@@ -37,16 +40,16 @@ if (APP_LAST_VERSION != APP_VERSION)
 alert("<?php echo(sprintf(A_SHEET5_0, APP_VERSION, APP_LAST_VERSION)); ?>")
 	// -->
 	</SCRIPT>
-<p class=title><font color=green><?php echo(sprintf(A_SHEET5_1, APP_VERSION, APP_LAST_VERSION)); ?></font>
-<br></p>
+<p class=error><font color=green><?php echo(sprintf(A_SHEET5_1, APP_VERSION, APP_LAST_VERSION)); ?></font>
+<br /></p>
 <?php
 }
 ?>
 <a href="http://www.ciprianmp.com/atm/index.php?&direction=0&order=&directory=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Open the Download page" onMouseOver="window.status='Open the Download page.'; return true">Download Page</a>&nbsp;|
 <a href="http://svn.sourceforge.net/viewvc/phpmychat/trunk/" target=_blank Title="Open the phpMyChat SVN Project Page" onMouseOver="window.status='Open the phpMyChat SVN Project Page.'; return true"> phpMyChat SVN Project Page</a>&nbsp;|
-<a href="https://sourceforge.net/tracker/?group_id=19371&atid=387646/" target=_blank Title="Open the Translations Project" onMouseOver="window.status='Open the Translations Project.'; return true">Translations Project</a>&nbsp;|
 <a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Fixes readme.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Check what's new in <?php echo(APP_LAST_VERSION); ?>." onMouseOver="window.status='Check what\'s new in <?php echo(APP_LAST_VERSION); ?>.'; return true">Check what's new in <?php echo(APP_LAST_VERSION); ?></a>&nbsp;|
-<a href="http://plus.gamedogs.com" target=_blank Title="Go to Try me server." onMouseOver="window.status='Go to Try me server.'; return true">Try me server</a><br>
+<a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Plus FAQ.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Read the FAQ" onMouseOver="window.status='Read the FAQ'; return true">Read the FAQ</a>&nbsp;|
+<a href="http://plus.gamedogs.com" target=_blank Title="Go to Try me server." onMouseOver="window.status='Go to Try me server.'; return true">Try me server</a><br />
 <?php
 
 // If form is submitted update values in the database
@@ -148,13 +151,14 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"COLOR_CD5 = '$vCOLOR_CD5', ".
 						"COLOR_CD6 = '$vCOLOR_CD6', ".
 						"COLOR_CD7 = '$vCOLOR_CD7', ".
-						"COLOR_CDC1 = '$vCOLOR_CDC1', ".
-						"COLOR_CDC2 = '$vCOLOR_CDC2', ".
-						"COLOR_CDC3 = '$vCOLOR_CDC3', ".
-						"COLOR_CDC4 = '$vCOLOR_CDC4', ".
-						"COLOR_CDC5 = '$vCOLOR_CDC5', ".
-						"COLOR_CDC6 = '$vCOLOR_CDC6', ".
-						"COLOR_CDC7 = '$vCOLOR_CDC7', ".
+						"COLOR_CD8 = '$vCOLOR_CD8', ".
+						"COLOR_CD9 = '$vCOLOR_CD9', ".
+						"COLOR_CA = '$vCOLOR_CA', ".
+						"COLOR_CA1 = '$vCOLOR_CA1', ".
+						"COLOR_CA2 = '$vCOLOR_CA2', ".
+						"COLOR_CM = '$vCOLOR_CM', ".
+						"COLOR_CM1 = '$vCOLOR_CM1', ".
+						"COLOR_CM2 = '$vCOLOR_CM2', ".
 						"QUICKA = '$vQUICKA', ".
 						"QUICKM = '$vQUICKM', ".
 						"QUICKU = '$vQUICKU', ".
@@ -193,7 +197,10 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"EN_ROOM6 = '$vEN_ROOM6', ".
 						"EN_ROOM7 = '$vEN_ROOM7', ".
 						"EN_ROOM8 = '$vEN_ROOM8', ".
-						"EN_ROOM9 = '$vEN_ROOM9'".
+						"EN_ROOM9 = '$vEN_ROOM9', ".
+						"CHAT_BOOT = '$vCHAT_BOOT', ".
+						"WELCOME_SOUND = '$vWELCOME_SOUND', ".
+						"WORLDTIME = '$vWORLDTIME'".
             " WHERE ID='0'";
 
 if(C_BOT_NAME != $vBOT_NAME || C_BOT_FONT_COLOR != $vBOT_FONT_COLOR || C_BOT_AVATAR != $vBOT_AVATAR)
@@ -229,9 +236,9 @@ list($id) = mysql_fetch_row($id_result);
 	{
 	  echo "<P><TABLE BORDER=0 CELLPADDING=3 CLASS=menu><TR><TD CLASS=notify2 ALIGN=CENTER VALIGN=TOP>Important!</TD><TD CLASS=success ALIGN=CENTER>Don't forget to change remotely the name of <SPAN style=background-color:white>".C_LOG_DIR."</SPAN> directory to <SPAN style=background-color:white>".$vLOG_DIR."</SPAN><br>and set its the atributes to <b>777</b>!</TD></TR></TABLE></P>";
 	}
-	if((C_USE_AVATARS != $vUSE_AVATARS) || (COLOR_NAMES != $vCOLOR_NAMES) || (C_PRIV_POPUP != $vPRIV_POPUP))
+	if((C_USE_AVATARS != $vUSE_AVATARS) || (COLOR_NAMES != $vCOLOR_NAMES) || (C_PRIV_POPUP != $vPRIV_POPUP) || (C_SKIN != $vUSE_SKIN))
 	{
-		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES (1, 'Admin Panel', 'SYS announce', '', ".time().", ' *', '".A_RELOAD_CHAT."', '', '')");
+		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES (1, 'Admin Panel', 'SYS announce', '', ".time().", ' *', 'L_RELOAD_CHAT', '', '')");
 	}
 }
 else
@@ -325,52 +332,56 @@ $COLOR_CD4						= $row[78];
 $COLOR_CD5						= $row[79];
 $COLOR_CD6						= $row[80];
 $COLOR_CD7						= $row[81];
-$COLOR_CDC1						= $row[82];
-$COLOR_CDC2						= $row[83];
-$COLOR_CDC3						= $row[84];
-$COLOR_CDC4						= $row[85];
-$COLOR_CDC5						= $row[86];
-$COLOR_CDC6						= $row[87];
-$COLOR_CDC7						= $row[88];
-$QUICKA								= $row[89];
-$QUICKM								= $row[90];
-$QUICKU								= $row[91];
-$COLOR_NAMES					= $row[92];
-$USE_AVATARS					= $row[93];
-$NUM_AVATARS					= $row[94];
-$AVA_RELPATH					= $row[95];
-$DEF_AVATAR						= $row[96];
-$AVA_WIDTH						= $row[97];
-$AVA_HEIGHT						= $row[98];
-$AVA_PROFBUTTON				= $row[99];
-$MAX_DICES						= $row[100];
-$MAX_ROLLS						= $row[101];
-$BOT_CONTROL					= $row[102];
-$MAX_PIC_SIZE					= $row[103];
-$USERS_SORT_ORD				= $row[104];
-$CHAT_LOGS						= $row[105];
-$LOG_DIR							= $row[106];
-$SHOW_LOGS_USR				= $row[107];
-$CHAT_LURKING					= $row[108];
-$SHOW_LURK_USR				= $row[109];
-$BAN_IP								= $row[110];
-$REG_CHARS_ALLOWED		= $row[111];
-$EXIT_LINK_TYPE				= $row[112];
-$CHAT_EXTRAS					= $row[113];
-$EMAIL_USER						= $row[114];
-$BOT_HELLO						= $row[115];
-$BOT_BYE							= $row[116];
-$BOT_PUBLIC						= $row[117];
-$ENABLE_PM						= $row[118];
-$EN_ROOM1							= $row[119];
-$EN_ROOM2							= $row[120];
-$EN_ROOM3							= $row[121];
-$EN_ROOM4							= $row[122];
-$EN_ROOM5							= $row[123];
-$EN_ROOM6							= $row[124];
-$EN_ROOM7							= $row[125];
-$EN_ROOM8							= $row[126];
-$EN_ROOM9							= $row[127];
+$COLOR_CD8						= $row[82];
+$COLOR_CD9						= $row[83];
+$COLOR_CA							= $row[84];
+$COLOR_CA1						= $row[85];
+$COLOR_CA2						= $row[86];
+$COLOR_CM							= $row[87];
+$COLOR_CM1						= $row[88];
+$COLOR_CM2						= $row[89];
+$QUICKA								= $row[90];
+$QUICKM								= $row[91];
+$QUICKU								= $row[92];
+$COLOR_NAMES					= $row[93];
+$USE_AVATARS					= $row[94];
+$NUM_AVATARS					= $row[95];
+$AVA_RELPATH					= $row[96];
+$DEF_AVATAR						= $row[97];
+$AVA_WIDTH						= $row[98];
+$AVA_HEIGHT						= $row[99];
+$AVA_PROFBUTTON				= $row[100];
+$MAX_DICES						= $row[101];
+$MAX_ROLLS						= $row[102];
+$BOT_CONTROL					= $row[103];
+$MAX_PIC_SIZE					= $row[104];
+$USERS_SORT_ORD				= $row[105];
+$CHAT_LOGS						= $row[106];
+$LOG_DIR							= $row[107];
+$SHOW_LOGS_USR				= $row[108];
+$CHAT_LURKING					= $row[109];
+$SHOW_LURK_USR				= $row[110];
+$BAN_IP								= $row[111];
+$REG_CHARS_ALLOWED		= $row[112];
+$EXIT_LINK_TYPE				= $row[113];
+$CHAT_EXTRAS					= $row[114];
+$EMAIL_USER						= $row[115];
+$BOT_HELLO						= $row[116];
+$BOT_BYE							= $row[117];
+$BOT_PUBLIC						= $row[118];
+$ENABLE_PM						= $row[119];
+$EN_ROOM1							= $row[120];
+$EN_ROOM2							= $row[121];
+$EN_ROOM3							= $row[122];
+$EN_ROOM4							= $row[123];
+$EN_ROOM5							= $row[124];
+$EN_ROOM6							= $row[125];
+$EN_ROOM7							= $row[126];
+$EN_ROOM8							= $row[127];
+$EN_ROOM9							= $row[128];
+$CHAT_BOOT						= $row[129];
+$WELCOME_SOUND				= $row[130];
+$WORLDTIME						= $row[131];
 
 $query_botdata = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.bot.com'";
 $result_botdata = mysql_query($query_botdata);
@@ -397,14 +408,20 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     <td><input name="vMSG_DEL" type="text" size="1" maxlength="3" value="<? echo $MSG_DEL; ?>"></td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Autoboot time for inactive users in rooms (minutes):</b><br>
-    	<i>Hint:  This autoboot feature forces users to be active in rooms. If they want to be lurking, they should just use the lurking page; admins, moderators and away users won't be booted (but keep this secret... until they will notice anyway).</i><br>
+    <td><b>Autoboot time for inactive users in rooms (minutes):</b><br />
+    	<i>Hint:  This autoboot feature forces users to be active in rooms. If they want to be lurking, they should just use the lurking page; admins, moderators and away users won't be booted (but keep this secret... until they will notice anyway).</i><br />
     	Clean-up time for users already left from rooms by closing their browsers or kicked by admin it's set to 1 minute.
     	</td>
-    <td><input name="vUSR_DEL" type="text" size="1" maxlength="2" value="<? echo $USR_DEL; ?>"></td>
+    <td>
+    	<input name="vUSR_DEL" type="text" size="1" maxlength="2" value="<? echo $USR_DEL; ?>"><br />
+        <select name="vCHAT_BOOT">
+	        <option value="0"<? if($CHAT_BOOT==0){ echo " selected"; } ?>>Disable
+	        <option value="1"<? if($CHAT_BOOT==1){ echo " selected"; } ?>>Enable
+        </select>
+		</td>
 </tr>
 <tr>
-    <td><b>Clean-up time for registered users not active in this interval (days):</b><br>
+    <td><b>Clean-up time for registered users not active in this interval (days):</b><br />
     							(0 for never)
     </td>
     <td><input name="vREG_DEL" type="text" size="1" maxlength="4" value="<? echo $REG_DEL; ?>"></td>
@@ -476,7 +493,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     <td><input name="vADMIN_NAME" type="text" size="35" maxlength="35" value="<? echo $ADMIN_NAME; ?>"></td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enter admin email to be sent on email headers:</b><br>
+    <td><b>Enter admin email to be sent on email headers:</b><br />
     	<i>Hint: also to receive notifications on new user registration</i>
     	</td>
     <td><input name="vADMIN_EMAIL" type="text" size="35" maxlength="35" value="<? echo $ADMIN_EMAIL; ?>"></td>
@@ -486,7 +503,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     <td><input name="vCHAT_URL" type="text" size="35" maxlength="50" value="<? echo $CHAT_URL; ?>"></td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Show Administration link on index:</b><br>
+    <td><b>Show Administration link on index:</b><br />
     												(to open this Administration Menu)
     </td>
     <td>
@@ -497,7 +514,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr>
-    <td><b>Show Delete link on index</b><br>
+    <td><b>Show Delete link on index</b><br />
     			(to allow users delete their own profile):</td>
     <td>
         <select name="vSHOW_DEL_PROF">
@@ -507,7 +524,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Types of Rooms Available for users:</b><br>
+    <td><b>Types of Rooms Available for users:</b><br />
                   0 : only the first room within the public default ones<br>
                   1 : all default rooms, but not create a room<br>
                   2 : all the rooms and create new ones
@@ -521,12 +538,21 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr>
-    <td><b>Enable banishment feature and define the delay for it (days):</b><br>
-    0 = disabled, any integer = day(s) for banishment</td>
-    <td><input name="vBANISH" type="text" size="1" maxlength="3" value="<? echo $BANISH; ?>"></td>
+    <td><b>Enable banishment feature and define the delay for it (days):</b><br />
+    0 = disabled, any integer = day(s) for banishment<br>
+    <b>Banishment type:</b><br />
+    	<i>Hint: ban only by IP or, by IP and username simultaneously (useful when the banned user comes from a shared IP or for parental control purposes)</i>
+    </td>
+    <td valign="top">
+    	<input name="vBANISH" type="text" size="1" maxlength="3" value="<? echo $BANISH; ?>"><br /><br />
+        <select name="vBAN_IP">
+	        <option value="0"<? if($BAN_IP==0){ echo " selected"; } ?>>IP and username
+	        <option value="1"<? if($BAN_IP==1){ echo " selected"; } ?>>Only IP
+        </select>
+    	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enable Profanity filter:</b><br>
+    <td><b>Enable Profanity filter:</b><br />
     											(replacement of posted swear words with the value bellow)
     </td>
     <td>
@@ -541,7 +567,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     <td><input name="vSWEAR_EXPR" type="text" size="1" maxlength="5" value="<? echo $SWEAR_EXPR; ?>"></td>
 </tr>
 <tr>
-    <td><b>Max number of messages that user may export:</b><br>
+    <td><b>Max number of messages that user may export:</b><br />
     								(0=disable, any integer=number of messages, *=no limit)
     </td>
     <td><input name="vSAVE" type="text" size="1" maxlength="2" value="<? echo $SAVE; ?>"></td>
@@ -556,7 +582,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr>
-    <td><b>Keep HTML tags in messages:</b><br>
+    <td><b>Keep HTML tags in messages:</b><br />
     <b>simple</b>: keep bold, italic and underline tags<br>
     <b>none</b>: keep none</td>
     <td>
@@ -576,14 +602,20 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr>
-    <td><b>Timezone offset:</b><br>
+    <td><b>Timezone offset and Worldtime in Status bar:</b><br />
     			- the difference between the Chat server time and GMT (UMT) - Greenwich (hours)
     </td>
-    <td><input name="vTMZ_OFFSET" type="text" size="1" maxlength="2" value="<? echo $TMZ_OFFSET; ?>"></td>
+    <td><input name="vTMZ_OFFSET" type="text" size="1" maxlength="2" value="<? echo $TMZ_OFFSET; ?>"><br />
+        <select name="vWORLDTIME">
+	        <option value="0"<? if($WORLDTIME==0){ echo " selected"; } ?>>Server time (standard)
+	        <option value="1"<? if($WORLDTIME==1){ echo " selected"; } ?>>Worldtime only in Chat
+	        <option value="2"<? if($WORLDTIME==2){ echo " selected"; } ?>>Worldtime on Index & Chat
+        </select>
+			</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Default messages scroll order:</b><br>
-    												(only for non-"H" browsers - others than IE)<br>
+    <td><b>Default messages scroll order:</b><br />
+    												(only for non-"H" browsers - others than IE)<br />
     												<i>Hint: users can also use /order command to change this behaviour.</i>
     </td>
     <td>
@@ -594,17 +626,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr>
-    <td><b>Default number of messages to display on join:</b><br>
-    			<i>Hint: users can also use /show "n" or /last "n" commands to view a different amount.</i>
-    </td>
-    <td><input name="vMSG_NB" type="text" size="1" maxlength="2" value="<? echo $MSG_NB; ?>"></td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Default timeout between each update (seconds):</b></td>
-    <td><input name="vMSG_REFRESH" type="text" size="1" maxlength="2" value="<? echo $MSG_REFRESH; ?>"></td>
-</tr>
-<tr>
-    <td><b>Show Timsestamp in front of the message:</b><br>
+    <td><b>Show Timestamp in front of the message:</b><br />
     			(also shows the Server Time in the Status bar)
     </td>
     <td>
@@ -613,6 +635,17 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
 	        <option value="1"<? if($SHOW_TIMESTAMP==1){ echo " selected"; } ?>>Yes
         </select>
     </td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Default timeout between each update (seconds):</b></td>
+    <td><input name="vMSG_REFRESH" type="text" size="1" maxlength="2" value="<? echo $MSG_REFRESH; ?>"></td>
+</tr>
+<tr>
+    <td><b>Default number of messages to display on join:</b><br />
+    	<font color=red>Important: for 0, set the both <b>next two</b> settings to "No"; for 1 disable only one of them.<br>If you want to keep both set to "Yes", the value <b>must be at least 2</b>.</font></i><br />
+    			<i>Hint: users can also use /show "n" or /last "n" commands to view a different amount.</i>
+    </td>
+    <td><input name="vMSG_NB" type="text" size="1" maxlength="2" value="<? echo $MSG_NB; ?>"></td>
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>Show nofications on every user's entrance/exit in Chat rooms</b>:</td>
@@ -633,6 +666,43 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
+    <td><b>Play a sound on entrance:</b></td>
+    <td>
+        <select name="vALLOW_ENTRANCE_SOUND">
+	        <option value="0"<? if($ALLOW_ENTRANCE_SOUND==0){ echo " selected"; } ?>>0 - Disabled
+	        <option value="1"<? if($ALLOW_ENTRANCE_SOUND==1){ echo " selected"; } ?>>1 - Notify the entire room
+	        <option value="2"<? if($ALLOW_ENTRANCE_SOUND==2){ echo " selected"; } ?>>2 - Welcome only the user
+	        <option value="3"<? if($ALLOW_ENTRANCE_SOUND==3){ echo " selected"; } ?>>3 - Notify & Welcome (1&2)
+        </select>
+    </td>
+</tr>
+<tr>
+    <td><b>Path to the sound to be played on entrance (only .wav extensions):</b><br />
+    	<i>Note: Only one will be played, according to the setting above (welcome only to the user who enters the room or notify everyone in the room about the entrance)</i>
+    				Example: 'sounds/beep.wav' (include the quotes if you use long URL's)
+    	</td>
+    <td>On Welcome: <input name="vWELCOME_SOUND" type="text" size="20" maxlength="255" value="<? echo $WELCOME_SOUND; ?>"><br />
+    		On Notify:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input name="vENTRANCE_SOUND" type="text" size="20" maxlength="255" value="<? echo $ENTRANCE_SOUND; ?>">
+    	</td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Play a buzz sound on /buzz command:</b><br />
+    												(or just display a message without any sound)
+    	</td>
+    <td>
+        <select name="vALLOW_BUZZ_SOUND">
+	        <option value="0"<? if($ALLOW_BUZZ_SOUND==0){ echo " selected"; } ?>>No sound
+	        <option value="1"<? if($ALLOW_BUZZ_SOUND==1){ echo " selected"; } ?>>Enabled
+        </select>
+    </td>
+</tr>
+<tr>
+    <td><b>Path to the buzz sound to be played (only .wav extensions):</b><br />
+    				Example: 'sounds/chimedwn.wav' (include the quotes if you use long URL's)
+    	</td>
+    <td><input name="vBUZZ_SOUND" type="text" size="35" maxlength="255" value="<? echo $BUZZ_SOUND; ?>"></td>
+</tr>
+<tr bgcolor="#B0C4DE">
     <td><b>Number of smilies on a row in tutorial/help:</b></td>
     <td><input name="vSMILEY_COLS" type="text" size="1" maxlength="2" value="<? echo $SMILEY_COLS; ?>"></td>
 </tr>
@@ -641,39 +711,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     <td><input name="vSMILEY_COLS_POP" type="text" size="1" maxlength="2" value="<? echo $SMILEY_COLS_POP; ?>"></td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Play a sound on entrance:</b></td>
-    <td>
-        <select name="vALLOW_ENTRANCE_SOUND">
-	        <option value="0"<? if($ALLOW_ENTRANCE_SOUND==0){ echo " selected"; } ?>>No
-	        <option value="1"<? if($ALLOW_ENTRANCE_SOUND==1){ echo " selected"; } ?>>Yes
-        </select>
-    </td>
-</tr>
-<tr>
-    <td><b>Path to the sound to be played (.wav):</b><br>
-    				Example: 'sounds/beep.wav' (include the quotes if you use long URL's)
-    	</td>
-    <td><input name="vENTRANCE_SOUND" type="text" size="35" maxlength="255" value="<? echo $ENTRANCE_SOUND; ?>"></td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Play a buzz sound on /buzz command:</b><br>
-    												(or just display a message without any sound)
-    	</td>
-    <td>
-        <select name="vALLOW_BUZZ_SOUND">
-	        <option value="0"<? if($ALLOW_BUZZ_SOUND==0){ echo " selected"; } ?>>No
-	        <option value="1"<? if($ALLOW_BUZZ_SOUND==1){ echo " selected"; } ?>>Yes
-        </select>
-    </td>
-</tr>
-<tr>
-    <td><b>Path to the buzz sound to be played (.wav):</b><br>
-    				Example: 'sounds/chimedwn.wav' (include the quotes if you use long URL's)
-    	</td>
-    <td><input name="vBUZZ_SOUND" type="text" size="35" maxlength="255" value="<? echo $BUZZ_SOUND; ?>"></td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Enable Different Topics for each room:</b><br>
+    <td><b>Enable Different Topics for each room:</b><br />
     												(or just display a default one - topics must be edited in banner.php)
     	</td>
     <td>
@@ -693,8 +731,8 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>1. Show Default Private rooms on index page:</b><br>
-    			<i>Hint: Not all the private rooms will be shown as options for all the users (see next two settings)<br>
+    <td><b>1. Show Default Private rooms on index page:</b><br />
+    			<i>Hint: Not all the private rooms will be shown as options for all the users (see next two settings)<br />
     				This option will just let the <b>admins</b> see all default private rooms, but is <u><b>required</b></u> for the next two to work.</i>
     	</td>
     <td>
@@ -705,7 +743,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr>
-    <td><b>2. Show Default Private rooms on index page to MODERATORS:</b><br>
+    <td><b>2. Show Default Private rooms on index page to MODERATORS:</b><br />
     			<i>Hint: Moderators will only see room 8 and 9 (Staff and Support). Setting no.1 is required.</i>
     	</td>
     <td>
@@ -716,7 +754,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>3. Show Default Private rooms on index page to NORMAL USERS:</b><br>
+    <td><b>3. Show Default Private rooms on index page to NORMAL USERS:</b><br />
     			<i>Hint: Non-power users (including guests) will only see room 9 (Support). Setting no.1 is required.</i>
     	</td>
     <td>
@@ -727,7 +765,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr>
-    <td><b>Enable Info on index page:</b><br>
+    <td><b>Enable Info on index page:</b><br />
     												(contain some info about the chat extra-features)
     	</td>
     <td>
@@ -747,7 +785,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr>
-    <td><b>List your extra commands:</b><br>
+    <td><b>List your extra commands:</b><br />
     												(don't remove the first break and use it anytime to split the line)
     	</td>
     <td><input name="vCMDS" type="text" size="35" maxlength="255" value="<? echo $CMDS; ?>"></td>
@@ -762,7 +800,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr>
-    <td><b>List your extra features/mods:</b><br>
+    <td><b>List your extra features/mods:</b><br />
     												(don't remove the first break and use it anytime to split the line)
     	</td>
     <td><input name="vMODS" type="text" size="35" maxlength="255" value="<? echo $MODS; ?>"></td>
@@ -777,14 +815,14 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr>
-    <td><b>Enter the expression for the /room command:</b><br>
+    <td><b>Enter the expression for the /room command:</b><br />
     												Exemples: Attention Room:, Narator Says:, Read this:, Author says:
     	</td>
     <td><input name="vROOM_SAYS" type="text" size="35" maxlength="25" value="<? echo $ROOM_SAYS; ?>"></td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Allow moderators to use /demote command:</b><br>
-    				NO - only admins will demote moderators.<br>
+    <td><b>Allow moderators to use /demote command:</b><br />
+    				NO - only admins will demote moderators.<br />
     				YES - also moderators will be able to demote other moderators.
     	</td>
     <td>
@@ -795,8 +833,8 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr>
-    <td><b>Enable whispers (private messages) system:</b><br>
-    				(only public messages will be posted in chat)<br>
+    <td><b>Enable whispers (private messages) system:</b><br />
+    				(only public messages will be posted in chat)<br />
     	</td>
     <td>
         <select name="vENABLE_PM">
@@ -806,8 +844,8 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr>
-    <td><b>Enable popup whispers (private messages) system:</b><br>
-    				(if enabled, guests cannot disable popups - they must register)<br>
+    <td><b>Enable popup whispers (private messages) system:</b><br />
+    				(if enabled, guests cannot disable popups - they must register)<br />
     		<i>Hint: can be also disabled by each user in their profile<br>
     	<font color=red>Important: If you change this setting while there are users logged in, all your users must reload their browsers or exit and relogin. An announcement to all the rooms will be automatically sent if you enable/disable this.</font></i>
     	</td>
@@ -837,8 +875,8 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Path to the LOGO image:</b><br>
-    			<i>Hint: Logo image to show - e.g. http://ciprianmp.com/forum/my_logo.jpg</i><br>
+    <td><b>Path to the LOGO image:</b><br />
+    			<i>Hint: Logo image to show - e.g. http://ciprianmp.com/forum/my_logo.jpg</i><br />
     			(my_logo.jpg can be any image accessible on the web - .jpg, .gif, .bmp, .png)
     	</td>
     <td><input name="vLOGO_IMG" type="text" size="35" maxlength="255" value="<? echo $LOGO_IMG; ?>"></td>
@@ -848,7 +886,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     <td><input name="vLOGO_OPEN" type="text" size="35" maxlength="255" value="<? echo $LOGO_OPEN; ?>"></td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Text to display by LOGO on MouseOver (the ALT property):</b><br>
+    <td><b>Text to display by LOGO on MouseOver (the ALT property):</b><br />
     			<i>Hint: Keep the quotation marks to use spaces in your text</i>
     	</td>
     <td><input name="vLOGO_ALT" type="text" size="35" maxlength="255" value="<? echo $LOGO_ALT; ?>"></td>
@@ -863,7 +901,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Show owner/webmaster of the chat info on index page (bellow the copyright link):</b><br>
+    <td><b>Show owner/webmaster of the chat info on index page (bellow the copyright link):</b><br />
     	<i>Hint: It is the same name/text you entered in the registration section - Admin name/Chat name</i>
     	</td>
     <td>
@@ -874,13 +912,15 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr>
-    <td><b>Edit the installation date of your plus version:</b><br>
+    <td><b>Edit the installation date of your plus version:</b><br />
 				(the date since the counter had been suposed to start - keep the format to max 10 chars length)
     	</td>
     <td><input name="vINSTALL_DATE" type="text" size="35" maxlength="255" value="<? echo $INSTALL_DATE; ?>"></td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enable skin mod in rooms:</b></td>
+    <td><b>Enable skin mod in rooms:</b><br />
+    	    	<font color=red>Important: If you change this setting while there are users logged in, all your users must reload their browsers or exit and relogin. An announcement to all the rooms will be automatically sent if you enable/disable this.</font></i>
+</td>
     <td>
         <select name="vUSE_SKIN">
 	        <option value="0"<? if($USE_SKIN==0){ echo " selected"; } ?>>No
@@ -890,7 +930,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
 </tr>
 <tr>
     <td><b>1. First Public room name (also <u>default</u> if none selected):</b></td>
-    <td><input name="vROOM1" type="text" size="35" maxlength="25" value="<? echo $ROOM1; ?>"><br>
+    <td><input name="vROOM1" type="text" size="35" maxlength="25" value="<? echo $ROOM1; ?>"><br />
         <select name="vEN_ROOM1">
 	        <option value="0"<? if($EN_ROOM1==0){ echo " selected"; } ?>>Disable
 	        <option value="1"<? if($EN_ROOM1==1){ echo " selected"; } ?>>Enable
@@ -899,7 +939,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>2. Second Public room name:</b></td>
-    <td><input name="vROOM2" type="text" size="35" maxlength="25" value="<? echo $ROOM2; ?>"><br>
+    <td><input name="vROOM2" type="text" size="35" maxlength="25" value="<? echo $ROOM2; ?>"><br />
         <select name="vEN_ROOM2">
 	        <option value="0"<? if($EN_ROOM2==0){ echo " selected"; } ?>>Disable
 	        <option value="1"<? if($EN_ROOM2==1){ echo " selected"; } ?>>Enable
@@ -908,7 +948,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
 </tr>
 <tr>
     <td><b>3. Third Public room name:</b></td>
-    <td><input name="vROOM3" type="text" size="35" maxlength="25" value="<? echo $ROOM3; ?>"><br>
+    <td><input name="vROOM3" type="text" size="35" maxlength="25" value="<? echo $ROOM3; ?>"><br />
         <select name="vEN_ROOM3">
 	        <option value="0"<? if($EN_ROOM3==0){ echo " selected"; } ?>>Disable
 	        <option value="1"<? if($EN_ROOM3==1){ echo " selected"; } ?>>Enable
@@ -917,7 +957,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>4. Forth Public room name:</b></td>
-    <td><input name="vROOM4" type="text" size="35" maxlength="25" value="<? echo $ROOM4; ?>"><br>
+    <td><input name="vROOM4" type="text" size="35" maxlength="25" value="<? echo $ROOM4; ?>"><br />
         <select name="vEN_ROOM4">
 	        <option value="0"<? if($EN_ROOM4==0){ echo " selected"; } ?>>Disable
 	        <option value="1"<? if($EN_ROOM4==1){ echo " selected"; } ?>>Enable
@@ -926,7 +966,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
 </tr>
 <tr>
     <td><b>5. Fifth Public room name:</b></td>
-    <td><input name="vROOM5" type="text" size="35" maxlength="25" value="<? echo $ROOM5; ?>"><br>
+    <td><input name="vROOM5" type="text" size="35" maxlength="25" value="<? echo $ROOM5; ?>"><br />
         <select name="vEN_ROOM5">
 	        <option value="0"<? if($EN_ROOM5==0){ echo " selected"; } ?>>Disable
 	        <option value="1"<? if($EN_ROOM5==1){ echo " selected"; } ?>>Enable
@@ -934,10 +974,10 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>6. First Private room name:</b><br>
+    <td><b>6. First Private room name:</b><br />
     			<i>Note: This is displayed on login only to admin(s)</i>
     	</td>
-    <td><input name="vROOM6" type="text" size="35" maxlength="25" value="<? echo $ROOM6; ?>"><br>
+    <td><input name="vROOM6" type="text" size="35" maxlength="25" value="<? echo $ROOM6; ?>"><br />
         <select name="vEN_ROOM6">
 	        <option value="0"<? if($EN_ROOM6==0){ echo " selected"; } ?>>Disable
 	        <option value="1"<? if($EN_ROOM6==1){ echo " selected"; } ?>>Enable
@@ -945,10 +985,10 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     	</td>
 </tr>
 <tr>
-    <td><b>7. Second Private room name (also default if none selected):</b><br>
+    <td><b>7. Second Private room name (also default if none selected):</b><br />
     			<i>Note: This is displayed on login only to admin(s)</i>
     	</td>
-    <td><input name="vROOM7" type="text" size="35" maxlength="25" value="<? echo $ROOM7; ?>"><br>
+    <td><input name="vROOM7" type="text" size="35" maxlength="25" value="<? echo $ROOM7; ?>"><br />
         <select name="vEN_ROOM7">
 	        <option value="0"<? if($EN_ROOM7==0){ echo " selected"; } ?>>Disable
 	        <option value="1"<? if($EN_ROOM7==1){ echo " selected"; } ?>>Enable
@@ -956,10 +996,10 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>8. Third Private room name:</b><br>
+    <td><b>8. Third Private room name:</b><br />
     			<i>Note: This is displayed on login to all power users (fits for staff only rooms)</i>
     	</td>
-    <td><input name="vROOM8" type="text" size="35" maxlength="25" value="<? echo $ROOM8; ?>"><br>
+    <td><input name="vROOM8" type="text" size="35" maxlength="25" value="<? echo $ROOM8; ?>"><br />
         <select name="vEN_ROOM8">
 	        <option value="0"<? if($EN_ROOM8==0){ echo " selected"; } ?>>Disable
 	        <option value="1"<? if($EN_ROOM8==1){ echo " selected"; } ?>>Enable
@@ -967,10 +1007,10 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     	</td>
 </tr>
 <tr>
-    <td><b>9. Forth Private room name:</b><br>
+    <td><b>9. Forth Private room name:</b><br />
     			<i>Note: This is displayed by default on login to all users (fits for support like rooms)</i>
     	</td>
-    <td><input name="vROOM9" type="text" size="35" maxlength="25" value="<? echo $ROOM9; ?>"><br>
+    <td><input name="vROOM9" type="text" size="35" maxlength="25" value="<? echo $ROOM9; ?>"><br />
         <select name="vEN_ROOM9">
 	        <option value="0"<? if($EN_ROOM9==0){ echo " selected"; } ?>>Disable
 	        <option value="1"<? if($EN_ROOM9==1){ echo " selected"; } ?>>Enable
@@ -978,7 +1018,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>1. Room name to show swear words (avoid the filter):</b><br>
+    <td><b>1. Room name to show swear words (avoid the filter):</b><br />
     			<i>Note: You must enter the exact name of the room.</i>
     	</td>
     <td><input name="vSWEAR1" type="text" size="35" maxlength="25" value="<? echo $SWEAR1; ?>"></td>
@@ -996,9 +1036,8 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     <td><input name="vSWEAR4" type="text" size="35" maxlength="25" value="<? echo $SWEAR4; ?>"></td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enable color filter in messages:</b><br>
-    	<i>Hint: If enabled, all the users can use any color, if not, all but <b>red, forest, blue and mediumblue</b> (power colors).<br>
-    The color filters reffer to default color of the rooms (defined in each style(n).css.php/.php3 by the variable $CD).</i>
+    <td><b>Enable color filter in messages:</b><br />
+    	<i>Hint: If enabled, all the users can use any color, if not, all but the power colors set bellow.
     	</td>
     <td>
         <select name="vCOLOR_FILTERS">
@@ -1008,9 +1047,98 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr>
-    <td><b>Allow guests to use colors:</b><br>
-    	<i>Hint: If disabled, unregistered users will only use the default color for that room in their messages.<br>
-    		This will encourage them to register (hopefully).</i>
+    <td><b>Set the Power Colors to be used only by admins (first as default):</b></td>
+    <td>
+			<SELECT NAME="vCOLOR_CA">
+			<?php
+			$CCA = explode(",", $ColorList);
+			while(list($ColorNumber, $ColorCode) = each($CCA))
+			{
+				// Red color is reserved to the admin or a moderator for the current room
+				echo("<OPTION style=\"background-color:".$ColorCode."; color:black\" VALUE=\"".$ColorCode."\"");
+				if($COLOR_CA == $ColorCode) echo(" SELECTED");
+				if ($ColorCode != "") echo(">".$ColorCode."</OPTION>");
+				else echo(">Null (not selected)</OPTION>");
+			}
+			?>
+			</SELECT><br />
+			<SELECT NAME="vCOLOR_CA1">
+			<?php
+			$CCA1 = explode(",", $ColorList);
+			while(list($ColorNumber, $ColorCode) = each($CCA1))
+			{
+				// Red color is reserved to the admin or a moderator for the current room
+				echo("<OPTION style=\"background-color:".$ColorCode."; color:black\" VALUE=\"".$ColorCode."\"");
+				if($COLOR_CA1 == $ColorCode) echo(" SELECTED");
+				if ($ColorCode != "") echo(">".$ColorCode."</OPTION>");
+				else echo(">Null (not selected)</OPTION>");
+			}
+			?>
+			</SELECT><br />
+			<SELECT NAME="vCOLOR_CA2">
+			<?php
+			$CCA2 = explode(",", $ColorList);
+			while(list($ColorNumber, $ColorCode) = each($CCA2))
+			{
+				// Red color is reserved to the admin or a moderator for the current room
+				echo("<OPTION style=\"background-color:".$ColorCode."; color:black\" VALUE=\"".$ColorCode."\"");
+				if($COLOR_CA2 == $ColorCode) echo(" SELECTED");
+				if ($ColorCode != "") echo(">".$ColorCode."</OPTION>");
+				else echo(">Null (not selected)</OPTION>");
+			}
+			?>
+			</SELECT>
+    </td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Set the Power Colors to be used only by moderators (first as default):</b><br />
+    	<i>Hint: Admins will also be able to use these colors, but no other users.
+    		</td>
+    <td>
+			<SELECT NAME="vCOLOR_CM">
+			<?php
+			$CCM = explode(",", $ColorList);
+			while(list($ColorNumber, $ColorCode) = each($CCM))
+			{
+				// Red color is reserved to the admin or a moderator for the current room
+				echo("<OPTION style=\"background-color:".$ColorCode."; color:black\" VALUE=\"".$ColorCode."\"");
+				if($COLOR_CM == $ColorCode) echo(" SELECTED");
+				if ($ColorCode != "") echo(">".$ColorCode."</OPTION>");
+				else echo(">Null (not selected)</OPTION>");
+			}
+			?>
+			</SELECT><br />
+			<SELECT NAME="vCOLOR_CM1">
+			<?php
+			$CCM1 = explode(",", $ColorList);
+			while(list($ColorNumber, $ColorCode) = each($CCM1))
+			{
+				// Red color is reserved to the admin or a moderator for the current room
+				echo("<OPTION style=\"background-color:".$ColorCode."; color:black\" VALUE=\"".$ColorCode."\"");
+				if($COLOR_CM1 == $ColorCode) echo(" SELECTED");
+				if ($ColorCode != "") echo(">".$ColorCode."</OPTION>");
+				else echo(">Null (not selected)</OPTION>");
+			}
+			?>
+			</SELECT><br />
+			<SELECT NAME="vCOLOR_CM2">
+			<?php
+			$CCM2 = explode(",", $ColorList);
+			while(list($ColorNumber, $ColorCode) = each($CCM2))
+			{
+				// Red color is reserved to the admin or a moderator for the current room
+				echo("<OPTION style=\"background-color:".$ColorCode."; color:black\" VALUE=\"".$ColorCode."\"");
+				if ($COLOR_CM2 == $ColorCode) echo(" SELECTED");
+				if ($ColorCode != "") echo(">".$ColorCode."</OPTION>");
+				else echo(">Null (not selected)</OPTION>");
+			}
+			?>
+			</SELECT>
+    </td>
+</tr>
+<tr>
+    <td><b>Allow guests to use colors:</b><br />
+    	<i>Hint: If disabled, unregistered users will only use the default color for that room in their messages.	This will encourage them to register (hopefully).</i>
     	</td>
     <td>
         <select name="vCOLOR_ALLOW_GUESTS">
@@ -1020,90 +1148,214 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>1. First skin (style) default Color (to filter the users' color usage by power):</b><br>
-    			<i><font color=red>Important: Don't change these values if you haven't changed the $CD variable in the according config/style(n).css.php file.</font><br>
-    				Hint: The following color names/HEX codes cannot be used in filters:<br>
-    				- red, forest, FF0000, #FF0000 - default for admin(s);<br>
-    				- blue, mediumblue, 0000FF, 0000CD, #0000FF, #0000CD - default for moderators.</i>
+    <td><b>1. First skin (style) default Color (to filter the users' color usage by power):</b><br />
+    			<i><font color=red>Important: Don't change these values if you haven't changed the $CD variable in the according config/style(n).css.php file.</font><br />
+    				Hint: The following color names codes cannot be used in filters:<br />
+    				- <?php echo(COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2); ?> - default for admin(s);<br />
+    				- <?php echo(COLOR_CM.", ".COLOR_CM1.", ".COLOR_CM2); ?>  - default for moderators.</i>
     	</td>
-    <td>Name:&nbsp;<input name="vCOLOR_CD1" type="text" size="28" maxlength="25" value="<? echo $COLOR_CD1; ?>">
-    <br>Code:&nbsp;&nbsp;<input name="vCOLOR_CDC1" type="text" size="28" maxlength="6" value="<? echo $COLOR_CDC1; ?>">
+    <td>
+			<SELECT NAME="vCOLOR_CD1">
+			<?php
+			$CCD1 = explode(",", $ColorList);
+			while(list($ColorNumber, $ColorCode) = each($CCD1))
+			{
+				// Red color is reserved to the admin or a moderator for the current room
+				echo("<OPTION style=\"background-color:".$ColorCode."; color:black\" VALUE=\"".$ColorCode."\"");
+				if($COLOR_CD1 == $ColorCode) echo(" SELECTED");
+				if ($ColorCode != "") echo(">".$ColorCode."</OPTION>");
+				else echo(">Null (not selected)</OPTION>");
+			}
+			?>
+			</SELECT>
     	</td>
 </tr>
 <tr>
-    <td><b>2. Second skin (style) default Color:</b><br>
-    			<i>Hint: read hint no 1. above.</i><br>
-    				<a href="<?php echo($ChatPath); ?>colorchart.htm" onMouseOver="window.status='Click to open the HTML Color Chat.'; return true" target="_blank" class="ChatLink">Open the HTML version of the Color Chart to select your colors</a>
+    <td><b>2. Second skin (style) default Color:</b><br />
+    			<i>Hint: read hint no 1. above.</i>
     	</td>
-    <td>Name:&nbsp;<input name="vCOLOR_CD2" type="text" size="28" maxlength="25" value="<? echo $COLOR_CD2; ?>">
-    <br>Code:&nbsp;&nbsp;<input name="vCOLOR_CDC2" type="text" size="28" maxlength="6" value="<? echo $COLOR_CDC2; ?>">
+    <td>
+			<SELECT NAME="vCOLOR_CD2">
+			<?php
+			$CCD2 = explode(",", $ColorList);
+			while(list($ColorNumber, $ColorCode) = each($CCD2))
+			{
+				// Red color is reserved to the admin or a moderator for the current room
+				echo("<OPTION style=\"background-color:".$ColorCode."; color:black\" VALUE=\"".$ColorCode."\"");
+				if($COLOR_CD2 == $ColorCode) echo(" SELECTED");
+				if ($ColorCode != "") echo(">".$ColorCode."</OPTION>");
+				else echo(">Null (not selected)</OPTION>");
+			}
+			?>
+			</SELECT>
     	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>3. Third skin (style) default Color:</b><br>
+    <td><b>3. Third skin (style) default Color:</b><br />
     			<i>Hint: read hint no 1. above.</i>
     	</td>
-    <td>Name:&nbsp;<input name="vCOLOR_CD3" type="text" size="28" maxlength="25" value="<? echo $COLOR_CD3; ?>">
-    <br>Code:&nbsp;&nbsp;<input name="vCOLOR_CDC3" type="text" size="28" maxlength="6" value="<? echo $COLOR_CDC3; ?>">
+    <td>
+			<SELECT NAME="vCOLOR_CD3">
+			<?php
+			$CCD3 = explode(",", $ColorList);
+			while(list($ColorNumber, $ColorCode) = each($CCD3))
+			{
+				// Red color is reserved to the admin or a moderator for the current room
+				echo("<OPTION style=\"background-color:".$ColorCode."; color:black\" VALUE=\"".$ColorCode."\"");
+				if($COLOR_CD3 == $ColorCode) echo(" SELECTED");
+				if ($ColorCode != "") echo(">".$ColorCode."</OPTION>");
+				else echo(">Null (not selected)</OPTION>");
+			}
+			?>
+			</SELECT>
     	</td>
 </tr>
 <tr>
-    <td><b>4. Forth skin (style) default Color:</b><br>
+    <td><b>4. Forth skin (style) default Color:</b><br />
     			<i>Hint: read hint no 1. above.</i>
     	</td>
-    <td>Name:&nbsp;<input name="vCOLOR_CD4" type="text" size="28" maxlength="25" value="<? echo $COLOR_CD4; ?>">
-    <br>Code:&nbsp;&nbsp;<input name="vCOLOR_CDC4" type="text" size="28" maxlength="6" value="<? echo $COLOR_CDC4; ?>">
+    <td>
+			<SELECT NAME="vCOLOR_CD4">
+			<?php
+			$CCD4 = explode(",", $ColorList);
+			while(list($ColorNumber, $ColorCode) = each($CCD4))
+			{
+				// Red color is reserved to the admin or a moderator for the current room
+				echo("<OPTION style=\"background-color:".$ColorCode."; color:black\" VALUE=\"".$ColorCode."\"");
+				if($COLOR_CD4 == $ColorCode) echo(" SELECTED");
+				if ($ColorCode != "") echo(">".$ColorCode."</OPTION>");
+				else echo(">Null (not selected)</OPTION>");
+			}
+			?>
+			</SELECT>
+    	</td>
     	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>5. Fifth skin (style) default Color:</b><br>
+    <td><b>5. Fifth skin (style) default Color:</b><br />
     			<i>Hint: read hint no 1. above.</i>
     	</td>
-    <td>Name:&nbsp;<input name="vCOLOR_CD5" type="text" size="28" maxlength="25" value="<? echo $COLOR_CD5; ?>">
-    <br>Code:&nbsp;&nbsp;<input name="vCOLOR_CDC5" type="text" size="28" maxlength="6" value="<? echo $COLOR_CDC5; ?>">
+    <td>
+			<SELECT NAME="vCOLOR_CD5">
+			<?php
+			$CCD5 = explode(",", $ColorList);
+			while(list($ColorNumber, $ColorCode) = each($CCD5))
+			{
+				// Red color is reserved to the admin or a moderator for the current room
+				echo("<OPTION style=\"background-color:".$ColorCode."; color:black\" VALUE=\"".$ColorCode."\"");
+				if($COLOR_CD5 == $ColorCode) echo(" SELECTED");
+				if ($ColorCode != "") echo(">".$ColorCode."</OPTION>");
+				else echo(">Null (not selected)</OPTION>");
+			}
+			?>
+			</SELECT>
     	</td>
 </tr>
 <tr>
-    <td><b>6. Sixth skin (style) default Color:</b><br>
+    <td><b>6. Sixth skin (style) default Color:</b><br />
     			<i>Hint: read hint no 1. above.</i>
     	</td>
-    <td>Name:&nbsp;<input name="vCOLOR_CD6" type="text" size="28" maxlength="25" value="<? echo $COLOR_CD6; ?>">
-    <br>Code:&nbsp;&nbsp;<input name="vCOLOR_CDC6" type="text" size="28" maxlength="6" value="<? echo $COLOR_CDC6; ?>">
+    <td>
+			<SELECT NAME="vCOLOR_CD6">
+			<?php
+			$CCD6 = explode(",", $ColorList);
+			while(list($ColorNumber, $ColorCode) = each($CCD6))
+			{
+				// Red color is reserved to the admin or a moderator for the current room
+				echo("<OPTION style=\"background-color:".$ColorCode."; color:black\" VALUE=\"".$ColorCode."\"");
+				if($COLOR_CD6 == $ColorCode) echo(" SELECTED");
+				if ($ColorCode != "") echo(">".$ColorCode."</OPTION>");
+				else echo(">Null (not selected)</OPTION>");
+			}
+			?>
+			</SELECT>
     	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>7. Seventh skin (style) default Color:</b><br>
+    <td><b>7. Seventh skin (style) default Color:</b><br />
     			<i>Hint: read hint no 1. above.</i>
     	</td>
-    <td>Name:&nbsp;<input name="vCOLOR_CD7" type="text" size="28" maxlength="25" value="<? echo $COLOR_CD7; ?>">
-    <br>Code:&nbsp;&nbsp;<input name="vCOLOR_CDC7" type="text" size="28" maxlength="6" value="<? echo $COLOR_CDC7; ?>">
+    <td>
+			<SELECT NAME="vCOLOR_CD7">
+			<?php
+			$CCD7 = explode(",", $ColorList);
+			while(list($ColorNumber, $ColorCode) = each($CCD7))
+			{
+				// Red color is reserved to the admin or a moderator for the current room
+				echo("<OPTION style=\"background-color:".$ColorCode."; color:black\" VALUE=\"".$ColorCode."\"");
+				if($COLOR_CD7 == $ColorCode) echo(" SELECTED");
+				if ($ColorCode != "") echo(">".$ColorCode."</OPTION>");
+				else echo(">Null (not selected)</OPTION>");
+			}
+			?>
+			</SELECT>
     	</td>
 </tr>
 <tr>
-    <td><b>Define the Quick Menu for admin(s):</b><br>
+    <td><b>8. Eight skin (style) default Color:</b><br />
+    			<i>Hint: read hint no 1. above.</i>
+    	</td>
+    <td>
+			<SELECT NAME="vCOLOR_CD8">
+			<?php
+			$CCD8 = explode(",", $ColorList);
+			while(list($ColorNumber, $ColorCode) = each($CCD8))
+			{
+				// Red color is reserved to the admin or a moderator for the current room
+				echo("<OPTION style=\"background-color:".$ColorCode."; color:black\" VALUE=\"".$ColorCode."\"");
+				if($COLOR_CD8 == $ColorCode) echo(" SELECTED");
+				if ($ColorCode != "") echo(">".$ColorCode."</OPTION>");
+				else echo(">Null (not selected)</OPTION>");
+			}
+			?>
+			</SELECT>
+    	</td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>7. Ninth skin (style) default Color:</b><br />
+    			<i>Hint: read hint no 1. above.</i>
+    	</td>
+    <td>
+			<SELECT NAME="vCOLOR_CD9">
+			<?php
+			$CCD9 = explode(",", $ColorList);
+			while(list($ColorNumber, $ColorCode) = each($CCD9))
+			{
+				// Red color is reserved to the admin or a moderator for the current room
+				echo("<OPTION style=\"background-color:".$ColorCode."; color:black\" VALUE=\"".$ColorCode."\"");
+				if($COLOR_CD9 == $ColorCode) echo(" SELECTED");
+				if ($ColorCode != "") echo(">".$ColorCode."</OPTION>");
+				else echo(">Null (not selected)</OPTION>");
+			}
+			?>
+			</SELECT>
+    	</td>
+</tr>
+<tr>
+    <td><b>Define the Quick Menu for admin(s):</b><br />
     			<i>Hint: keep these chars: <b>|</b> at the end of each line but the last one<br>
     				Empty the box to hide Quick Menu.</i>
     	</td>
     <td><textarea name="vQUICKA" rows=5 cols=37 wrap=on><? echo $QUICKA; ?></textarea></td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Define the Quick Menu for moderators:</b><br>
+    <td><b>Define the Quick Menu for moderators:</b><br />
     			<i>Hint: keep these chars: <b>|</b> at the end of each line but the last one<br>
     				Empty the box to hide Quick Menu.</i>
     	</td>
     <td><textarea name="vQUICKM" rows=5 cols=37 wrap=on><? echo $QUICKM; ?></textarea></td>
 </tr>
 <tr>
-    <td><b>Define the Quick Menu for other users:</b><br>
+    <td><b>Define the Quick Menu for other users:</b><br />
     			<i>Hint: keep these chars: <b>|</b> at the end of each line but the last one<br>
     				Empty the box to hide Quick Menu.</i>
     	</td>
     <td><textarea name="vQUICKU" rows=5 cols=37 wrap=on><? echo $QUICKU; ?></textarea></td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enable different Colored Names in users list:</b><br>
-    	<i><font color=red>Important: If you change this setting while there are users logged in, all your users must reload their browsers or exit and relogin. An announcement to all the rooms will be automatically sent if you enable/disable this.</font><br>
-    	Hint: If enabled, users can set their personal color to use for their usernames in users list.<br>
+    <td><b>Enable different Colored Names in users list:</b><br />
+    	<i><font color=red>Important: If you change this setting while there are users logged in, all your users must reload their browsers or exit and relogin. An announcement to all the rooms will be automatically sent if you enable/disable this.</font><br />
+    	Hint: If enabled, users can set their personal color to use for their usernames in users list.<br />
     	If disabled, admins will be show in red and moderators in blue (their default power colors).</i>
     </td>
     <td>
@@ -1114,7 +1366,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr>
-    <td><b>Enable AVATAR System:</b><br>
+    <td><b>Enable AVATAR System:</b><br />
     	<i><font color=red>Important: If you change this setting while there are users logged in, all your users must reload their browsers or exit and relogin. An announcement to all the rooms will be automatically sent if you enable/disable this.</font></i>
     	</td>
     <td>
@@ -1141,7 +1393,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     <td><input name="vAVA_WIDTH" type="text" size="2" maxlength="3" value="<? echo $AVA_WIDTH; ?>"></td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enter the height for the avatars to be shown</b><br>
+    <td><b>Enter the height for the avatars to be shown</b><br />
     	<i>Hint: Usually, for a nice layout, width and hight values should be equal.</i>
     	</td>
     <td><input name="vAVA_HEIGHT" type="text" size="2" maxlength="3" value="<? echo $AVA_HEIGHT; ?>"></td>
@@ -1156,7 +1408,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enter the max number of dices per throw</b><br>
+    <td><b>Enter the max number of dices per throw</b><br />
     	<i>Hint: Needed ONLY for Dice v.2. Use a value smaller than 99. Please note that increasing this value too much, will lead to a load of how many dices images you choose, which can return delays displaying the messages (drastically for non-IE browsers)</i>
     		</td>
     <td><input name="vMAX_DICES" type="text" size="2" maxlength="2" value="<? echo $MAX_DICES; ?>"></td>
@@ -1166,7 +1418,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     <td><input name="vMAX_ROLLS" type="text" size="2" maxlength="3" value="<? echo $MAX_ROLLS; ?>"></td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enable BOT in chat:</b><br>
+    <td><b>Enable BOT in chat:</b><br />
     	<i>Hint: Before changing any of the bot settings bellow, please stop the bot if it is running in the chat<br>
     		(you won't be able to kick it out afterwards, because it is set as admin)</i>
     	</td>
@@ -1178,7 +1430,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr>
-    <td><b>Enable Public conversations with BOT in chat:</b><br>
+    <td><b>Enable Public conversations with BOT in chat:</b><br />
     	<i>Hint: if you disable this, the will only talk by private messages to users in chat</i>
     	</td>
     <td>
@@ -1189,29 +1441,43 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr>
-    <td><b>Enter the desired name for your BOT:</b><br>
+    <td><b>Enter the desired name for your BOT:</b><br />
     	<i><font color=red>Important: Don't change this name before you make sure bot is fully loaded (check if it can post in chat).</font></i>
     	</td>
     <td><input name="vBOT_NAME" type="text" size="35" maxlength="25" value="<? echo $BOT_NAME; ?>"></td>
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>Enter the color of the response messages from BOT:</b></td>
-    <td><input name="vBOT_FONT_COLOR" type="text" size="35" maxlength="20" value="<? echo $BOT_FONT_COLOR; ?>"></td>
+    <td>
+			<SELECT NAME="vBOT_FONT_COLOR">
+			<?php
+			$BOTF = explode(",", $ColorList);
+			while(list($ColorNumber, $ColorCode) = each($BOTF))
+			{
+				// Red color is reserved to the admin or a moderator for the current room
+				echo("<OPTION style=\"background-color:".$ColorCode."; color:black\" VALUE=\"".$ColorCode."\"");
+				if($BOT_FONT_COLOR == $ColorCode) echo(" SELECTED");
+				if ($ColorCode != "") echo(">".$ColorCode."</OPTION>");
+				else echo(">Null (not selected)</OPTION>");
+			}
+			?>
+			</SELECT>
+    	</td>
 </tr>
 <tr>
-    <td><b>Enter the avatar of the BOT</b><br>
+    <td><b>Enter the avatar of the BOT</b><br />
     	<i>Hint: It will be shown only if the avatar system is enabled</i>
     	</td>
     <td><input name="vBOT_AVATAR" type="text" size="35" maxlength="255" value="<? echo $BOT_AVATAR; ?>"></td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enter the message to be posted by BOT on start:</b><br>
+    <td><b>Enter the message to be posted by BOT on start:</b><br />
     	<i>Hint: Avoid special characters or the settings won't be saved</i>
     	</td>
     <td><input name="vBOT_HELLO" type="text" size="35" maxlength="100" value="<? echo $BOT_HELLO; ?>"></td>
 </tr>
 <tr>
-    <td><b>Enter the message to be posted by BOT on stop</b><br>
+    <td><b>Enter the message to be posted by BOT on stop</b><br />
     	<i>Hint: Avoid special characters or the settings won't be saved</i>
     	</td>
     <td><input name="vBOT_BYE" type="text" size="35" maxlength="100" value="<? echo $BOT_BYE; ?>"></td>
@@ -1221,7 +1487,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     <td><input name="vMAX_PIC_SIZE" type="text" size="2" maxlength="3" value="<? echo $MAX_PIC_SIZE; ?>"></td>
 </tr>
 <tr>
-    <td><b>Default sort order in the users lists:</b><br>
+    <td><b>Default sort order in the users lists:</b><br />
     	<i>Hint: users can also use the /sort command to change their sorting order</i>
     	</td>
     <td>
@@ -1232,7 +1498,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enable chat logging:</b><br>
+    <td><b>Enable chat logging:</b><br />
     	<i>Hint: it will generate html files of the cleaner deleted conversations. The full version can be accessed via the admin advanced menu, the short version from the Extra Options menu in chat rooms.</i>
     	</td>
     <td>
@@ -1243,14 +1509,14 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr>
-    <td><b>Set the name of your admin logs folder:</b><br>
-    	<i><font color=red>Important: Rename the original "logsadmin" folder to a hard to guess name for your full logs folder.</font><br>
+    <td><b>Set the name of your admin logs folder:</b><br />
+    	<i><font color=red>Important: Rename the original "logsadmin" folder to a hard to guess name for your full logs folder.</font><br />
     		Hint: This is different from the user accessible one (called logs), which doesn't include any private/confidential data from your chat conversations/actions.</i>
     		</td>
     <td><input name="vLOG_DIR" type="text" size="35" maxlength="25" value="<? echo $LOG_DIR; ?>"></td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Display logs to non-admin users in chat:</b><br>
+    <td><b>Display logs to non-admin users in chat:</b><br />
     	<i>Hint: Only if Chat logging is enabled.</i>
     	</td>
     <td>
@@ -1261,7 +1527,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr>
-    <td><b>Enable chat lurking:</b><br>
+    <td><b>Enable chat lurking:</b><br />
     	<i>Hint: it will allow people monitor public conversations and events in the chat, even without loging in.</i>
     	</td>
     <td>
@@ -1272,7 +1538,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Display lurking page to non-admin users in chat and login page:</b><br>
+    <td><b>Display lurking page to non-admin users in chat and login page:</b><br />
     	<i>Hint: Only if Chat lurking is enabled.</i>
     	</td>
     <td>
@@ -1282,27 +1548,16 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
         </select>
     </td>
 </tr>
-<tr>
-    <td><b>Banishment type:</b><br>
-    	<i>Hint: ban only by IP or, by IP and username simultaneously (useful when the banned user comes from a shared IP or for parental control purposes)</i>
-    	</td>
-    <td>
-        <select name="vBAN_IP">
-	        <option value="0"<? if($BAN_IP==0){ echo " selected"; } ?>>IP and username
-	        <option value="1"<? if($BAN_IP==1){ echo " selected"; } ?>>Only IP
-        </select>
-    </td>
-</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Set the characters you wish your users to be allowed to use on registration/login:</b><br>
-    	<i>Hint: This is the default set of chars: </i><b>a-zA-Z0-9_.-@#$%^&*()=<>?~{}|`:</b><i> tested for login, which won't break the layout/functionality of your chat.<br>
-    		<font color=red>Important: Don't allow these characters as they will break your chat page after login: exclamation mark, slash, backslash, comma, space, single and double quotes and square (box) brackets (e.g. <b>! / \ , ' " [ ]</b>)</font><br></i>
+    <td><b>Set the characters you wish your users to be allowed to use on registration/login:</b><br />
+    	<i>Hint: This is the default set of chars: </i><b>a-zA-Z0-9_.-@#$%^&*()=<>?~{}|`:</b><i> tested for login, which won't break the layout/functionality of your chat.<br />
+    		<font color=red>Important: Don't allow these characters as they will break your chat page after login: exclamation mark, slash, backslash, comma, space, single and double quotes and square (box) brackets (e.g. <b>! / \ , ' " [ ]</b>)</font><br /></i>
     		Eventough they won't break anything, it seems / and ; can't be banned from being used in login names.
     		</td>
     <td><input name="vREG_CHARS_ALLOWED" type="text" size="35" maxlength="50" value="<? echo $REG_CHARS_ALLOWED; ?>"></td>
 </tr>
 <tr>
-    <td><b>Exit link type:</b><br>
+    <td><b>Exit link type:</b><br />
     	<i>Hint: Link stands for the original Exit link, Door rolling stands for the image of such a door</i>
     	</td>
     <td>
@@ -1369,7 +1624,7 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
 		</TR>
 		</TABLE>
 </table>
-<br>
+<br />
 <tr>
     <td></td><td><input type="submit" name="submit_type" value="Save Changed Settings"></td>
 </tr>

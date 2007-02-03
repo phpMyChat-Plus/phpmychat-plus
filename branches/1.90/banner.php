@@ -10,17 +10,34 @@ if (isset($HTTP_GET_VARS))
 };
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 require("./config/config.lib.php");
 require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
 
 header("Content-Type: text/html; charset=${Charset}");
+$UR = "";
+global $toppath;
+global $topgpath;
+       $toppath = "botfb/" .$R ;         // file is in DIR "botfb" and called "roomname"
+       $topgpath = "botfb/Global topic" ;         // file is in DIR "botfb" and called "roomname"
+				if (file_exists ($toppath))                            // checks to see if room file exists.
+				{
+					$fd = fopen ($toppath, "rb");
+	        $UR = fread ($fd, filesize ($toppath));
+	        fclose ($fd);
+  			}
+				elseif (file_exists ($topgpath))                            // checks to see if room file exists.
+				{
+					$fd = fopen ($topgpath, "rb");
+	        $UR = fread ($fd, filesize ($topgpath));
+	        fclose ($fd);
+  			}
 $DbLink = new DB;
-$DbLink->query("SELECT m_time, message FROM ".C_MSG_TBL." WHERE room = '$R' AND username='SYS topic' ORDER BY m_time DESC LIMIT 1");
-list($Ti, $UR) = $DbLink->next_record();
-if ($UR=="")
+//$DbLink->query("SELECT message FROM ".C_MSG_TBL." WHERE room = '$R' AND (username='SYS topic' OR username='SYS topic reset') ORDER BY m_time DESC LIMIT 1");
+//list($UR) = $DbLink->next_record();
+if ($UR == "")
 {
 $Room = stripslashes($R);
 if (strcmp(stripslashes($R), ROOM8) == 1)
@@ -86,28 +103,22 @@ if (strcasecmp(ucfirst(stripslashes($R)), ROOM9) == 0) $Room = ROOM9;
 	if ((file_exists($botcontrol) || $BR ==  $Room) && C_BOT_PUBLIC)
   {
 		$Expl.= BOT_TIPS;
-		$Ex.='<BR><FONT SIZE=-2 COLOR="40E0D0"><I><b>'.C_BOT_NAME.'</b> - '.$Expl.'</I></FONT>';
+		$Ex.='<br /><FONT SIZE=-2 COLOR="40E0D0"><I><b>'.C_BOT_NAME.'</b> - '.$Expl.'</I></FONT>';
 	}
 	elseif($BR != "" && C_BOT_PUBLIC)
 	{
-		$Expl.= BOT_PRIV_TIPS;
-		$Ex.='<BR><FONT SIZE=-2 COLOR="40E0D0"><I><b>'.C_BOT_NAME.'</b> - '.$Expl.'</I></FONT>';
+		$Expl.= sprintf(BOT_PRIV_TIPS, $BR);
+		$Ex.='<br /><FONT SIZE=-2 COLOR="40E0D0"><I><b>'.C_BOT_NAME.'</b> - '.$Expl.'</I></FONT>';
 	}
 	elseif(file_exists($botcontrol) && !C_BOT_PUBLIC)
 	{
 		$Expl.= BOT_PRIVONLY_TIPS;
-		$Ex.='<BR><FONT SIZE=-2 COLOR="40E0D0"><I><b>'.C_BOT_NAME.'</b> - '.$Expl.'</I></FONT>';
+		$Ex.='<br /><FONT SIZE=-2 COLOR="40E0D0"><I><b>'.C_BOT_NAME.'</b> - '.$Expl.'</I></FONT>';
 	}
 	else
 	{
 		$Ex.='';
 	}
-	if (C_USE_SMILIES)
-	{
-		include("./lib/smilies.lib.php");
-		Check4Smilies($UR,$SmiliesTbl);
-		unset($SmiliesTbl);
-	};
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">

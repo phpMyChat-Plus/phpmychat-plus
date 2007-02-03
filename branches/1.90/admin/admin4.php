@@ -1,4 +1,5 @@
 <?php
+// Send Email panel
 // This sheet is diplayed when the admin wants to send an e-mail to registered users
 // Credit for it goes to Christian Hacker <c.hacker@dreamer-chat.de>
 
@@ -31,7 +32,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 4)
 <P CLASS=title><?php echo(A_SHEET4_1); ?></P>
 
 <?php
-if (isset($Message) && $Message != "") echo("<P CLASS=\"$MsgStyle\">$Message</P><br>\n");
+if (isset($Message) && $Message != "") echo("<P CLASS=\"$MsgStyle\">$Message</P><br />\n");
 ?>
 
 <TABLE CLASS=table>

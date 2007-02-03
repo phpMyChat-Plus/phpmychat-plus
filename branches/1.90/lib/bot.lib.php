@@ -75,7 +75,7 @@ if (C_BOT_PUBLIC)
           $botmess = eregi_replace(C_BOT_NAME, "", $M);      // removes the word "BOT NAME" from the input helps the bot to make sense? NEEDS WORK.
           bottalk(&$botmess, $R);
       }
-     if (eregi("bye ".C_BOT_NAME, $M) || eregi(C_BOT_NAME."> bye", $M) || eregi(C_BOT_NAME."> bye</FONT>", $M))             // if statment looks for "bye bot"
+     if (eregi("bye ".C_BOT_NAME, $M) || eregi(C_BOT_NAME."> bye", $M) || eregi(C_BOT_NAME."> bye</FONT>", $M))             // if statment looks for "bye bot" or "bot> bye"
       {
       	if (file_exists ($botpath)) unlink ($botpath);    // it deletes the users file if found (Stops coversation with bot)
       }

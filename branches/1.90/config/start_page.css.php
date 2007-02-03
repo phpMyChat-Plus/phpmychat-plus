@@ -29,7 +29,7 @@ $small = round(0.8 * $medium);
 .ChatBody
 {
 	<?php if (isset($FontFace)) echo($FontFace); ?>
-	background-color: #666699;
+	background-color: #4682b4;
 	color: #FFFFFF;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
@@ -49,7 +49,7 @@ $small = round(0.8 * $medium);
 .ChatTabTitle
 {
 	<?php if (isset($FontFace)) echo($FontFace); ?>
-	background-color: #666699;
+	background-color: #4682b4;
 	color: #FFFFFF;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 800;
@@ -110,14 +110,14 @@ A.ChatReg
 {
 	<?php if (isset($FontFace)) echo($FontFace); ?>
 	text-decoration: underline;
-	color: #0000C0;
+	color: #4682b4;
 	font-weight: 800;
 }
 
 A.ChatReg:hover,A.ChatReg:active
 {
 	<?php if (isset($FontFace)) echo($FontFace); ?>
-	color: #0000C0;
+	color: #FF9900;
 	text-decoration: none;
 }
 

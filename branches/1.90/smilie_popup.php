@@ -10,7 +10,7 @@ if (isset($HTTP_GET_VARS))
 };
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 // Added for Skin mod
@@ -113,7 +113,7 @@ function cmd2Input(code,addstring)
 	unset($ResultTbl);
 	?>
 	</TABLE>
-<br><input type="submit" value="<?php echo(L_REG_25)?>" name="Close" onClick="self.close(); return false;">
+<br /><input type="submit" value="<?php echo(L_REG_25)?>" name="Close" onClick="self.close(); return false;">
 <P align="right" style="font-weight: 800; color:#FFD700; font-size: 7pt">
 &copy; 2005-<?php echo(date(Y)); ?> - by <a href=mailto:ciprianmp@yahoo.com onMouseOver="window.status='Click to email author.'; return true;">Ciprian Murariu</a>
 </P>

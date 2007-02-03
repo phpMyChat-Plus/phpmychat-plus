@@ -18,7 +18,7 @@ if (isset($HTTP_POST_VARS))
 };
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 // Fix some security issues
@@ -27,7 +27,7 @@ if ((empty($From) || trim($From) == '')
 	|| (empty($R) || trim($R) == '')
 	|| (empty($Ver) || empty($L) || empty($N))
 	|| (!isset($T) || !isset($D) || !isset($O) || !isset($ST) || !isset($NT))
-	|| !is_dir('./localization/'.$L))
+	|| !is_dir("./localization/".$L))
 {
 	exit();
 }
@@ -108,7 +108,6 @@ if ($DbLink->num_rows() != 0)
 	}
 	elseif ($status == "k")			// Kicked by a moderator or the admin.
 	{
-		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_KICKED, \"".special_char($U,$Latin1)."\")', '', '')");
 		$kicked = 1;
 	}
 	elseif ($status == "d")			// The admin just deleted the room
@@ -124,7 +123,7 @@ if ($DbLink->num_rows() != 0)
 	{
 		// Kick the user from the current room
 		$kickedUrl	= ($kicked < 5)
-					? "$From?L=$L&U=".urlencode(stripslashes($U))."&E=".urlencode(stripslashes($R))."&KICKED=$kicked"
+					? "$From?L=$L&U=".urlencode(stripslashes($U))."&E=".urlencode(stripslashes($R))."&KK=$kicked"
 					: "$From?L=$L";
 		?>
 		<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
@@ -152,7 +151,7 @@ else
 	exit;
 };
 
-// Extended one field for Private Message Popup by Ciprian
+// Extended two fields for Private Message Popup and room_from by Ciprian
 // ** Send formated messages to the message table **
 include("bot/respond.php");
 function AddMessage($M, $T, $R, $U, $C, $Private, $Read, $RF)
@@ -212,9 +211,21 @@ $botcontrol ="botfb/$R.txt";
 
 	// URL
 	$M = eregi_replace('([[:space:]]|^)(www[.])', '\\1http://\\2', $M); // no prefix (www.myurl.ext)
+	// Word wrap fix by Alexander Eisele <xaex@mail.ru>
+	if (!preg_match_all("((http://|https://|ftp ://|mailto:)[^ ]+)", $M, $pmatch))
+	{
+		$M = wordwrap($M, 40, " ", 1);
+	}
 	$prefix = '(http|https|ftp|telnet|news|gopher|file|wais)://';
   $pureUrl = '([[:alnum:]/\n+-=%&:_.~?]+[#[:alnum:]+-_~]*)';
-	$M = eregi_replace($prefix . $pureUrl, '<a href="\\1://\\2" title="Click to open link" onMouseOver="window.status=\'Click to open link.\'; return true" target="_blank">\\1://\\2</a>', $M);
+//	$M = eregi_replace($prefix . $pureUrl, '<a href="\\1://\\2" title="Click to open link" onMouseOver="window.status=\'Click to open link.\'; return true" target="_blank">\\1://\\2</a>', $M);
+       $purl="";
+       for ($x=0; $x<count($pmatch[0]); $x++)
+       {
+       		$purl .= "||".$pmatch[0][$x];
+       }
+
+       $M = eregi_replace($prefix.$pureUrl, '<a href="links.php?xxx='.urlencode($purl).'" title="Click to open links window" onMouseOver="window.status=\'Click to open links window.\'; return true" target="_blank"></a>', $M);
 
 	// e-mail addresses
 	$M = eregi_replace('([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](fo|g|l|m|mes|o|op|pa|ro|seum|t|u|v|z)?)', '<a href="mailto:\\1" title="Send email" onMouseOver="window.status=\'Send email.\'; return true">\\1</a>', $M);
@@ -252,9 +263,35 @@ $botcontrol ="botfb/$R.txt";
 		}
 	}
 
-	//Color Input Box Mod by Ciprian
+// Color Sniffer scripting safe mode filter by Alexander Eisele <xaex@mail.ru> & Ciprian
+$C = str_replace("<", "&lt;", $C);
+$C = str_replace(">", "&gt;", $C);
+$C = str_replace("\"", "&quot;", $C);
+$C = str_replace("x3c", "&lt;", $C);
+$C = str_replace("x3e", "&gt;", $C);
+
+$CC = array("","black","dimgray","gray","darkgray","silver","lightgrey","gainsboro","whitesmoke","ghostwhite","white","slategray","lightslategray","midnightblue","navy","darkblue","darkslateblue","mediumblue","blue","steelblue","royalblue","cornflowerblue","dodgerblue","deepskyblue","lightskyblue","skyblue","lightsteelblue","lightblue","powderblue","paleturquoise","lightcyan","aliceblue","azure","mintcream","darkslategray","cadetblue","teal","darkcyan","lightseagreen","darkturquoise","mediumturquoise","turquoise","aqua","cyan","mediumaquamarine","aquamarine","darkolivegreen","olive","olivedrab","darkkhaki","darkgreen","green","forestgreen","seagreen","mediumseagreen","darkseagreen","mediumspringgreen","springgreen","palegreen","honeydew","limegreen","lime","lightgreen","lawngreen","chartreuse","greenyellow","yellowgreen","indigo","purple","darkmagenta","darkviolet","darkorchid","mediumorchid","orchid","violet","plum","thistle","blueviolet","mediumpurple","slateblue","mediumslateblue","lavender","mediumvioletred","magenta","fuchsia","deeppink","palevioletred","hotpink","lightpink","pink","mistyrose","lavenderblush","maroon","darkred","firebrick","crimson","red","orangered","tomato","indianred","lightcoral","salmon","darksalmon","lightsalmon","coral","darkorange","orange","sandybrown","darkgoldenrod","goldenrod","gold","yellow","khaki","palegoldenrod","lemonchiffon","cornsilk","lightgoldenrodyellow","beige","lightyellow","ivory","rosybrown","saddlebrown","brown","sienna","chocolate","peru","tan","burlywood","wheat","navajowhite","peachpuff","moccasin","bisque","blanchedalmond","papayawhip","antiquewhite","linen","oldlace","seashell","floralwhite","snow");
+
+if (trim($C)!="")
+{
+	if (!in_array($C, $CC))
+	{
+		$C="lime";
+	}
+}
+
+	//Color's Power Filter Mod by Ciprian
 	if (isset($HTTP_COOKIE_VARS["CookieColor"]) && (!isset($C))) $C = $HTTP_COOKIE_VARS["CookieColor"];
-	if ((COLOR_ALLOW_GUESTS == 0) && ($status == "u")) $C = '';
+	//Registered colorname to use for text color by Ciprian
+	else
+	{
+		$DbLink->query("SELECT colorname FROM ".C_REG_TBL." WHERE username = '$U' LIMIT 1");
+		if ($DbLink->num_rows() != 0 && (!isset($C)))
+		{
+	    list($C) = $DbLink->next_record();
+		}
+	}
+	if (!COLOR_ALLOW_GUESTS && $status == "u") $C = '';
 	if (COLOR_FILTERS)
 	{
 		if (!isset($C))
@@ -265,7 +302,7 @@ $botcontrol ="botfb/$R.txt";
 		elseif ($C != '')
 		{
 			// Red colors are reserved to the admin
-			if ((strcasecmp($C, COLOR_CA) == 0 || strcasecmp($C, COLOR_CAF) == 0 || strcasecmp($C, COLOR_CAFH) == 0 || strcasecmp($C, COLOR_CAS) == 0 || strcasecmp($C, COLOR_CASC) == 0 || strcasecmp($C, COLOR_CASH) == 0) && !($status == "a"))
+			if ((strcasecmp($C, COLOR_CA) == 0 || strcasecmp($C, COLOR_CA1) == 0 || strcasecmp($C, COLOR_CA2) == 0) && $C != "" && $status != "a")
 			{
 				if ($status == "m")
 				{
@@ -277,7 +314,7 @@ $botcontrol ="botfb/$R.txt";
 				}
 			}
 			// Blue colors are reserved to a moderator for the current room
-			elseif ((strcasecmp($C, COLOR_CM) == 0 || strcasecmp($C, COLOR_CMF) == 0 || strcasecmp($C, COLOR_CMFH) == 0 || strcasecmp($C, COLOR_CMS) == 0 || strcasecmp($C, COLOR_CMSC) == 0 || strcasecmp($C, COLOR_CMSH) == 0) && !($status == "a" || $status == "m"))
+			elseif ((strcasecmp($C, COLOR_CM) == 0 || strcasecmp($C, COLOR_CM1) == 0 || strcasecmp($C, COLOR_CM2) == 0) && $C != "" && $status != "a" && $status != "m")
 			{
 				$C = '';	//default color
 			}
@@ -287,19 +324,26 @@ $botcontrol ="botfb/$R.txt";
 		if (checkwords($C, true)) $C = '';		//if user is using a swear word (defined in swearing.lib.php), the font color will resets to default. this is to keep your database as well as our computer clean of swearing (no swear into your cookies on your local computer).
 		if (isset($C) && $C != '')
 		{
-			if (strcasecmp($C, COLOR_CD) != 0 && strcasecmp($C, COLOR_CDC) != 0 && strcasecmp($C, COLOR_CDH) != 0 && ($C!= ''))
+			if (strcasecmp($C, COLOR_CD) != 0)
 			{
 				$M = "<FONT COLOR=\"".$C."\">".$M."</FONT>";
+				setcookie("CookieColor", $C, time() + 60*60*24*365);        // cookie expires in one year
 			}
 		}
-				setcookie("CookieColor", $C, time() + 60*60*24*365);        // cookie expires in one year
 	$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', ".time().", '$Private', '".addslashes($M)."', '$Read', '$RF')");
 };
 
-// ** Define the default color that will be used for messages **
-//Color Input Box Mod by Ciprian
+	// ** Define the default color that will be used for messages **
+	//Color's Power Filter Mod by Ciprian
+		$DbLink->query("SELECT colorname FROM ".C_REG_TBL." WHERE username = '$U' LIMIT 1");
+		if ($DbLink->num_rows() != 0 && (!isset($C)))
+		{
+	    list($colorname) = $DbLink->next_record();
+		}
 	if (isset($HTTP_COOKIE_VARS["CookieColor"]) && (!isset($C))) $C = $HTTP_COOKIE_VARS["CookieColor"];
-	if ((COLOR_ALLOW_GUESTS == 0) && ($status == "u")) $C = '';
+	//Registered colorname to use for text color by Ciprian
+	elseif (isset($colorname) && (!isset($C))) $C = $colorname;
+	if (!COLOR_ALLOW_GUESTS && $status == "u") $C = '';
 	if (COLOR_FILTERS)
 	{
 		if (!isset($C))
@@ -310,23 +354,26 @@ $botcontrol ="botfb/$R.txt";
 		elseif ($C != '')
 		{
 			// Red colors are reserved to the admin
-			if ((strcasecmp($C, COLOR_CA) == 0 || strcasecmp($C, COLOR_CAF) == 0 || strcasecmp($C, COLOR_CAFH) == 0 || strcasecmp($C, COLOR_CAS) == 0 || strcasecmp($C, COLOR_CASC) == 0 || strcasecmp($C, COLOR_CASH) == 0) && !($status == "a"))
+			if ((strcasecmp($C, COLOR_CA) == 0 || strcasecmp($C, COLOR_CA1) == 0 || strcasecmp($C, COLOR_CA2) == 0) && $C != "" && $status != "a")
 			{
 				if ($status == "m")
 				{
 					$ErrorC = COL_ERROR_BOX_MODA;
+					setcookie("CookieColor", "", time());        // delete power color cookie
 					$C = COLOR_CM; //default moderator's color
 				}
 				else
 				{
 					$ErrorC = COL_ERROR_BOX_USRA;
+					setcookie("CookieColor", "", time());        // delete power color cookie
 					$C = '';	//default color
 				}
 			}
 			// Blue colors are reserved to a moderator for the current room
-			elseif ((strcasecmp($C, COLOR_CM) == 0 || strcasecmp($C, COLOR_CMF) == 0 || strcasecmp($C, COLOR_CMFH) == 0 || strcasecmp($C, COLOR_CMS) == 0 || strcasecmp($C, COLOR_CMSC) == 0 || strcasecmp($C, COLOR_CMSH) == 0) && !($status == "a" || $status == "m"))
+			elseif ((strcasecmp($C, COLOR_CM) == 0 || strcasecmp($C, COLOR_CM1) == 0 || strcasecmp($C, COLOR_CM2) == 0) && $C != "" && $status != "a" && $status != "m")
 			{
 					$ErrorC = COL_ERROR_BOX_USRM;
+					setcookie("CookieColor", "", time());        // delete power color cookie
 					$C = '';	//default color
 			}
 		}
@@ -405,7 +452,7 @@ document.onmousedown = window.parent.displayLocation;
 <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
 <TR>
 	<!-- Input form  -->
-	<TD valign=top align=left nowrap>
+	<TD valign=top align=left nowrap="nowrap">
 	<?php
 	// Define the way posted values will be handled according to the javascript abilities
 	// of the browser
@@ -440,7 +487,7 @@ document.onmousedown = window.parent.displayLocation;
 		<!-- Last sent message or command (will be used for the '/!' command) -->
 		<INPUT TYPE="hidden" NAME="M0" VALUE="<?php echo(isset($M) ? htmlspecialchars(stripslashes($M)) : ""); ?>">
 
-&nbsp;&nbsp;<A HREF="help_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>" onClick="window.parent.help_popup(); return false" TARGET="_blank" onmouseover="document.images['helpImg'].src = window.parent.imgHelpOn.src" onmouseout="document.images['helpImg'].src = window.parent.imgHelpOff.src" title="<?php echo(L_HLP); ?>"><IMG NAME="helpImg" SRC="images/helpOff.gif" WIDTH=15 HEIGHT=15 BORDER=0 ALT="<?php echo(L_HLP); ?>" onMouseOver="window.status='Open the Help page.'; return true" onClick="document.forms['MsgForm'].elements['M'].focus();"></A>&nbsp;
+		<A HREF="help_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>" onClick="window.parent.help_popup(); return false" TARGET="_blank" onmouseover="document.images['helpImg'].src = window.parent.imgHelpOn.src" onmouseout="document.images['helpImg'].src = window.parent.imgHelpOff.src" title="<?php echo(L_HLP); ?>"><IMG NAME="helpImg" SRC="images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="<?php echo(L_HLP); ?>" onMouseOver="window.status='Open the Help page.'; return true" onClick="document.forms['MsgForm'].elements['M'].focus();"></A>&nbsp;
 
 		<?php
 		// Get the value to put in the message box : preceding M0 field value for /! command,
@@ -448,22 +495,68 @@ document.onmousedown = window.parent.displayLocation;
 		$ValM = $IsM ? $M0 : "";
 		if (isset($Error) && !($IsCommand)) $ValM = $M;
 		?>
-		&nbsp;<INPUT TYPE="text" NAME="M" SIZE="50" MAXLENGTH="299" VALUE="<?php echo(htmlspecialchars(stripslashes($ValM))); ?>">
+		<INPUT TYPE="text" NAME="M" SIZE="50" MAXLENGTH="299" VALUE="<?php echo(htmlspecialchars(stripslashes($ValM))); ?>">
 
 		<!-- Addressee that will be filled when the user click on a nick at the users frame -->
 		<INPUT TYPE="hidden" NAME="MsgTo" VALUE="">
 
-		<!-- Color Input Box mod by Ciprian - the color picker as text box input -->
-
-		&nbsp;<A HREF="color_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>" onMouseOver="window.status='Pick up a Color.'; return true" onClick="window.parent.color_popup(); return false" TARGET=_blank onClick="document.forms['MsgForm'].elements['C'].focus();"><?php echo(L_COLOR); ?></A>&nbsp;
-		<INPUT TYPE="text" NAME="C" SIZE="10" MAXLENGTH="20" VALUE="<?php	echo($C)?>">
-		<!-- End the color picker as text box input -->
+<?php
+// Color Input Select mod by Alexander Eisele <xaex@mail.ru> & Ciprian
+// Drop down list of colors
+$ColorList = COLORLIST;
+if (COLOR_FILTERS)
+{
+	if (!COLOR_ALLOW_GUESTS && $status == "u")
+	{
+		$ColorList = '"",'.COLOR_CD.'';
+	}
+	elseif (COLOR_ALLOW_GUESTS && $status != "a" && $status != "m")
+	{
+		if (COLOR_CA != "") $ColorList = eregi_replace('"'.COLOR_CA.'",', "", $ColorList);
+		if (COLOR_CA1 != "") $ColorList = eregi_replace('"'.COLOR_CA1.'",', "", $ColorList);
+		if (COLOR_CA2 != "") $ColorList = eregi_replace('"'.COLOR_CA2.'",', "", $ColorList);
+		if (COLOR_CM != "") $ColorList = eregi_replace('"'.COLOR_CM.'",', "", $ColorList);
+		if (COLOR_CM1 != "") $ColorList = eregi_replace('"'.COLOR_CM1.'",', "", $ColorList);
+		if (COLOR_CM2 != "") $ColorList = eregi_replace('"'.COLOR_CM2.'",', "", $ColorList);
+	}
+	elseif ($status == "m")
+	{
+		if (COLOR_CA != "") $ColorList = eregi_replace('"'.COLOR_CA.'",', "", $ColorList);
+		if (COLOR_CA1 != "") $ColorList = eregi_replace('"'.COLOR_CA1.'",', "", $ColorList);
+		if (COLOR_CA2 != "") $ColorList = eregi_replace('"'.COLOR_CA2.'",', "", $ColorList);
+	}
+}
+else
+{
+	if (!COLOR_ALLOW_GUESTS && $status == "u")
+	{
+		$ColorList = '"",'.COLOR_CD.'';
+	}
+}
+$ColorList = eregi_replace('"',"", $ColorList);
+$CC = explode(",", $ColorList);
+			echo("<SELECT NAME=\"C\">\n");
+			while(list($ColorNumber1, $ColorCode) = each($CC))
+			{
+				// Red color is reserved to the admin or a moderator for the current room
+				if ($ColorCode != "" && $ColorCode != COLOR_CD) echo("<OPTION style=\"background-color:".$ColorCode."; color:".$ColorCode."\" VALUE=\"".$ColorCode."\"");
+				else echo("<OPTION style=\"background-color:".COLOR_CD."; color:".COLOR_CD."\" VALUE=\"".$ColorCode."\"");
+				if ($C == $ColorCode) echo(" SELECTED");
+				if ($ColorCode != "" && $ColorCode != COLOR_CD && $ColorCode != COLOR_CA && $ColorCode != COLOR_CM && $ColorCode != $colorname) echo(">".$ColorCode."</OPTION>");
+				elseif ($ColorCode == $colorname && $ColorCode != "") echo(">".$ColorCode." (profile color)</OPTION>");
+				elseif ($ColorCode == COLOR_CA) echo(COLOR_FILTERS ? ">".$ColorCode." (admin's color)</OPTION>" : ">".$ColorCode."</OPTION>");
+				elseif ($ColorCode == COLOR_CM) echo(COLOR_FILTERS ? ">".$ColorCode." (moder's color)</OPTION>" : ">".$ColorCode."</OPTION>");
+				elseif ($ColorCode == "") echo(">Null (default)</OPTION>");
+				else echo(">".COLOR_CD." (room's color)</OPTION>");
+			}
+			echo("\n</SELECT>\n");
+?>
 		<INPUT TYPE="hidden" NAME="sent" VALUE="0">
 		<INPUT TYPE="submit" NAME="sendForm" VALUE=<?php echo(L_OK); ?> onClick="document.forms['MsgForm'].elements['M'].focus();">
 </TD>
 </TR>
 <TR>
-<TD valign=top align=left nowrap>
+<TD valign=top align=left nowrap="nowrap">
 <?php
 // Avatar System Start.
 	if (C_USE_AVATARS && C_AVA_PROFBUTTON)

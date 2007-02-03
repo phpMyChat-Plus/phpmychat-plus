@@ -8,7 +8,7 @@ if (!isset($L))
 	$L = "";
 }
 // Fix a security hole
-else if (!is_dir('./localization/'.$L))
+else if (!is_dir("./localization/".$L))
 {
 	exit();
 }

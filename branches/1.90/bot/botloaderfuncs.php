@@ -572,7 +572,7 @@ function startS($parser,$name,$attrs)
 		$selectbot=$newbotid;
 		$allbots[]=$selectbot;
 
-		#print "<font size='3'><b>Loading bot: $bot ($selectbot)<BR></b></font>\n";
+		#print "<font size='3'><b>Loading bot: $bot ($selectbot)<br /></b></font>\n";
 		flush();
     }
     elseif (strtoupper($name)=="SPLITTER"){

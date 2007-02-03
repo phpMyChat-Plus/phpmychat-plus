@@ -69,10 +69,13 @@ elseif ($Read == "Neww" || $Read == "Oldw")
 
 			if (eregi(C_BOT_NAME, $M) || eregi(C_BOT_NAME, $Private))                          // Looks for "BOT NAME" in $M (typed in INPUT)  WORKS
       {
-          botmemory($U);                                     // starts conversation with BOT if none already.
           global $M;
           global $botmess;
           $botmess = eregi_replace(C_BOT_NAME, "", $M);      // removes the word "BOT NAME" from the input helps the bot to make sense? NEEDS WORK.
           bottalk(&$botmess, $R, $UR, $Private, $Read);
+      }
+     if (eregi(bye, $M))             // if private statment contains "bye"
+      {
+      	if (file_exists ($botpath)) unlink ($botpath);    // it deletes the users file if found (Stops coversation with bot)
       }
 ?>

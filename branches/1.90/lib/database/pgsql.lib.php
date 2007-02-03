@@ -17,7 +17,7 @@ class DB
 	function halt($msg)
 	{
 		echo("</TD></TR></TABLE><B>Database error:</B> $msg<br>\n");
-		echo("<B>PostgreSQL error</B>: $this->Errno ($this->Error)<br>\n");
+		echo("<B>PostgreSQL error</B>: $this->Errno ($this->Error)<br />\n");
 		die("Session halted.");
 	}
 

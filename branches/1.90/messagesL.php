@@ -9,7 +9,7 @@ if (isset($HTTP_GET_VARS))
 };
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 require("./config/config.lib.php");
 require("./localization/".$L."/localized.chat.php");
@@ -126,7 +126,6 @@ if($DbLink->num_rows() != 0)
 	}
 	elseif ($status == "k")			// Kicked by a moderator or the admin.
 	{
-		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_KICKED, \"".special_char($U,$Latin1,1)."\")', '', '')");
 		$kicked = 1;
 	}
 	elseif ($status == "d")			// The admin just deleted the room
@@ -135,8 +134,21 @@ if($DbLink->num_rows() != 0)
 	}
 	elseif ($status == "b")			// Banished by a moderator or the admin.
 	{
-		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_BANISHED, \"".special_char($U,$Latin1,1)."\")', '', '')");
-		$kicked = 4;
+		$DbLink->clean_results();
+		$DbLink->query("SELECT reason FROM ".C_BAN_TBL." WHERE username='$U' LIMIT 1");
+		$Nb = $DbLink->num_rows();
+		// IP is banished from some rooms
+		if ($Nb != "0")
+		{
+			list($Reason) = $DbLink->next_record();
+			$DbLink->clean_results();
+			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_BANISHED_REASON, \"".special_char($U,$Latin1)."\", $Reason)', '', '')");
+		}
+		else
+		{
+			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_BANISHED, \"".special_char($U,$Latin1)."\")', '', '')");
+		}
+			$kicked = 4;
 	}
 	else if ($knownIp != $IP)
 	{
@@ -152,7 +164,7 @@ else
 {
 	// User hasn't been found in the users table -> add a row if he is registered
 	$DbLink->clean_results();
-	$DbLink->query("SELECT latin1,perms,rooms,allowpopup,avatar FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
+	$DbLink->query("SELECT perms,rooms,allowpopup,avatar FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	$reguser = ($DbLink->num_rows() != 0);
 	if ($reguser) list($perms, $rooms, $allowpopup, $avatar) = $DbLink->next_record();
 	$DbLink->clean_results();
@@ -191,7 +203,7 @@ if (!empty($kicked))
 {
 	// Kick the user from the current room
 	$kickedUrl = "$From?L=$L&U=" . urlencode(stripslashes($U));
-	if ($kicked < 5) $kickedUrl .= "&E=$R&$KICKED=$kicked";
+	if ($kicked < 5) $kickedUrl .= "&E=$R&KK=$kicked";
 	?>
 	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
 	<!--
@@ -235,7 +247,7 @@ $IgnoreList = "";
 if (isset($Ign)) $IgnoreList = "'".str_replace(",","','",addslashes(urldecode($Ign)))."'";
 if ($NT == "0") $IgnoreList .= ($IgnoreList != "" ? ",":"")."'SYS enter','SYS exit'";
 if ($IgnoreList != "") $CondForQuery = "username NOT IN (${IgnoreList}) AND ";
-$CondForQuery .= "(address = ' *' OR ((address = '$U' OR username = '$U') AND (room = '$R' OR room_from='$R' OR room = 'Offline PMs' OR username = 'SYS inviteTo')) OR ((room = '$R' OR room = 'Offline PMs') AND (address = '' OR username = '$U')) OR room = '*' OR (room = '$R' AND username = 'SYS room') OR (room = '$R' AND (username = 'SYS image' OR username='SYS dice1' OR username='SYS dice2' OR username='SYS dice3')))";
+$CondForQuery .= "(address = ' *' OR ((address = '$U' OR username = '$U') AND (room = '$R' OR room_from='$R' OR room = 'Offline PMs' OR username = 'SYS inviteTo')) OR ((room = '$R' OR room = 'Offline PMs') AND (address = '' OR username = '$U')) OR room = '*' OR (room = '$R' AND (username = 'SYS room' OR username = 'SYS image' OR username LIKE 'SYS top%' OR username='SYS dice1' OR username='SYS dice2' OR username='SYS dice3')))";
 $DbLink->query("SELECT m_time, username, latin1, address, message FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC LIMIT $N");
 
 // Format and display new messages
@@ -247,6 +259,7 @@ if($DbLink->num_rows() > 0)
 	while(list($Time, $User, $Latin1, $Dest, $Message) = $DbLink->next_record())
 	{
 		$Message = stripslashes($Message);
+		$Message = eregi_replace('target="_blank"></a>','target="_blank">'.L_CLICK.'</a>',$Message);
 		if (C_USE_AVATARS)
 		{
 			$DbAvatar = new DB;
@@ -268,7 +281,7 @@ if($DbLink->num_rows() > 0)
 			}
 			else
 			{
-				$colorname_tag = "<FONT color=".$CD.">";
+				$colorname_tag = "<FONT color=".COLOR_CD.">";
 			  $colorname_endtag = "</FONT>";
 			}
 			$DbColor->query("SELECT colorname FROM ".C_REG_TBL." WHERE username = '$Dest'");
@@ -281,7 +294,7 @@ if($DbLink->num_rows() > 0)
 			}
 			else
 			{
-				$colornamedest_tag = "<FONT color=".$CD.">";
+				$colornamedest_tag = "<FONT color=".COLOR_CD.">";
 				$colornamedest_endtag = "</FONT>";
 			}
 		}
@@ -296,23 +309,25 @@ if($DbLink->num_rows() > 0)
 		if (isset($day_separator) && $i == $N) continue;
 //------------------------------Begin HighLight command by R.Worley
 global $contents ;
-$botpath = "botfb/" .$U ;
-if (file_exists ($botpath))
-	{
-		$fd = fopen ($botpath, "rb");
-                  $contents = fread ($fd, filesize ($botpath));
-                fclose ($fd);
-  }
+$highpath = "botfb/" .$U ;
+if (file_exists ($highpath))
+{
+	$fd = fopen ($highpath, "rb");
+  $contents = fread ($fd, filesize ($highpath));
+  fclose ($fd);
+}
 if($contents == $User)
-	{
-		$NewMsg = "<P CLASS=\"msg2\">";
-	}
-	else
-	{
-	$NewMsg = "<P CLASS=\"msg\">";
-	}
+{
+	$NewMsg = "<table cellspacing=0 cellpading=0 class=\"msg2\"><tr><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\" align=\"left\">";
+#	$NewMsg = "<P CLASS=\"msg2\">";
+}
+else
+{
+	$NewMsg = "<table cellspacing=0 cellpading=0 class=\"msg\"><tr><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\" align=\"left\">";
+#	$NewMsg = "<P CLASS=\"msg\">";
+}
 //-------------------------------End HighLight Mod
-		if ($ST == 1) $NewMsg .= "<SPAN CLASS=\"time\">".date("H:i:s", $Time + C_TMZ_OFFSET*60*60)."</SPAN> ";
+		if ($ST == 1) $NewMsg .= "<SPAN CLASS=\"time\">".date("H:i:s", $Time + C_TMZ_OFFSET*60*60)."</SPAN></td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\" align=\"left\">";
 
 		// "Standard" messages
 		if (substr($User,0,4) != "SYS ")
@@ -320,30 +335,40 @@ if($contents == $User)
 			$Userx = $User;  // Avatar System insered only.
 			if($User != stripslashes($U))
 			{
-				if (C_ENABLE_PM && C_PRIV_POPUP && ($allowpopup || $status == "u"))
-				{
-					$User = "<A HREF=\"#\" onClick=\"window.parent.send_popup('/to ".special_char2($User,$Latin1)."');\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."</A>";
-				}
-				elseif (C_ENABLE_PM && !C_PRIV_POPUP)
-				{
-					$User = "<A HREF=\"#\" onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',true); return false\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."</A>";
-				}
-				else
-				{
-					$User = "<A HREF=\"#\" onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false); return false\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."</A>";
-				}
+//				if (C_ENABLE_PM && C_PRIV_POPUP && ($allowpopup || $status == "u"))
+//				{
+//					$User = "<A HREF=\"#\" onClick=\"window.parent.send_popup('/to ".special_char2($User,$Latin1)."');\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."</A>";
+//				}
+//				elseif (C_ENABLE_PM && !C_PRIV_POPUP)
+//				{
+//					$User = "<A HREF=\"#\" onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',true); return false\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."</A>";
+//				}
+//				else
+//				{
+					$User = "<A HREF=\"#\" onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false); return false\" title=\"Use this name\" onMouseOver=\"window.status='Reffer to this username.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."</A>";
+//				}
 			}
-			if ($Dest != "") $Dest = "]<BDO dir=\"${textDirection}\"></BDO>".$colorname_endtag.">".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest));
+			if($Dest != "" && $Dest != stripslashes($U))
+			{
+					$Dest = htmlspecialchars(stripslashes($Dest));
+					$Dest = "<A HREF=\"#\" onClick=\"window.parent.userClick('".special_char($Dest,$Latin1,1)."',false); return false\" title=\"Use this name\" onMouseOver=\"window.status='Reffer to this username.'; return true\" CLASS=\"sender\">".$colornamedest_tag."".special_char($Dest,$Latin1,0)."".$colornamedest_endtag."</A>";
+			}
+			if ($Dest != "") $Dest = "]<BDO dir=\"${textDirection}\"></BDO>".$colorname_endtag."</B></td><td width=\"1%\" valign=\"top\" align=\"left\"><B>&gt;</B></td><td width=\"1%\" valign=\"top\" align=\"left\"><B>".$colornamedest_tag."[".$Dest;
+#			if ($Dest != "") $Dest = "]<BDO dir=\"${textDirection}\"></BDO>".$colorname_endtag.">".$colornamedest_tag."[".$Dest;
 // Avatar System Start:
       if (C_USE_AVATARS)
     	{
         if (empty($avatar)) $avatar = C_AVA_RELPATH . C_DEF_AVATAR;
-       		$avatar = "<a href=\"#\" onClick=\"window.parent.runCmd('whois','".special_char2(stripslashes($Userx),$Latin1)."'); return false\" onMouseOver=\"window.status='".L_PROFILE.".'; return true\" title=\"".L_PROFILE."\"><img align=\"center\" src=\"$avatar\" width=".C_AVA_WIDTH." height=".C_AVA_HEIGHT." alt=\"".L_PROFILE."\" border=0></a>&nbsp;";
-   			$NewMsg .= "$avatar<B><font size=\"-1\">".$colorname_tag."[${User}${Dest}]".$colornamedest_endtag."</font><BDO dir=\"${textDirection}\"></BDO></B> $Message</P>";
+       		$avatar = "<a href=\"#\" onClick=\"window.parent.runCmd('whois','".special_char2(stripslashes($Userx),$Latin1)."'); return false\" onMouseOver=\"window.status='".L_PROFILE.".'; return true\" title=\"".L_PROFILE."\"><img align=\"center\" src=\"$avatar\" width=".C_AVA_WIDTH." height=".C_AVA_HEIGHT." alt=\"".L_PROFILE."\" border=0></a>";
+   			if ($ST != 1) $NewMsg .= "</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\" align=\"left\">".$avatar."</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\" align=\"left\"><B>".$colorname_tag."[${User}${Dest}]".$colornamedest_endtag."<BDO dir=\"${textDirection}\"></BDO></B></td><td valign=\"top\" align=\"left\">".$Message."</td></tr></table>";
+   			else $NewMsg .= $avatar."</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\" align=\"left\"><B>".$colorname_tag."[${User}${Dest}]".$colornamedest_endtag."<BDO dir=\"${textDirection}\"></BDO></B></td><td valign=\"top\" align=\"left\">".$Message."</td></tr></table>";
+#   			$NewMsg .= "$avatar<B><font size=\"-1\">".$colorname_tag."[${User}${Dest}]".$colornamedest_endtag."</font><BDO dir=\"${textDirection}\"></BDO></B> $Message</P>";
       }
       else
       {
-			$NewMsg .= "<B>".$colorname_tag."[${User}${Dest}]".$colornamedest_endtag."<BDO dir=\"${textDirection}\"></BDO></B> $Message</P>";
+			if ($ST != 1) $NewMsg .= "</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\" align=\"left\"><B>".$colorname_tag."[${User}${Dest}]".$colornamedest_endtag."<BDO dir=\"${textDirection}\"></BDO></B></td><td valign=\"top\" align=\"left\">".$Message."</td></tr></table>";
+			else $NewMsg .= "<B>".$colorname_tag."[${User}${Dest}]".$colornamedest_endtag."<BDO dir=\"${textDirection}\"></BDO></B></td><td valign=\"top\" align=\"left\">".$Message."</td></tr></table>";
+#			$NewMsg .= "<B>".$colorname_tag."[${User}${Dest}]".$colornamedest_endtag."<BDO dir=\"${textDirection}\"></BDO></B> $Message</P>";
 			}
 		}
 // Avatar System end.
@@ -353,12 +378,27 @@ if($contents == $User)
 		{
 			if ($User == "SYS announce")
 			{
-				$Message = "[".L_ANNOUNCE."]<BDO dir=\"${textDirection}\"></BDO> ".$Message;
+				if ($Message == 'L_RELOAD_CHAT') $Message = L_RELOAD_CHAT;
+				$Message = "[".L_ANNOUNCE."]<BDO dir=\"${textDirection}\"></BDO></td><td width=\"99%\" CLASS=\"notify2\" valign=\"top\" align=\"left\">".$Message."</td></tr></table>";
+#				$Message = "[".L_ANNOUNCE."]<BDO dir=\"${textDirection}\"></BDO> ".$Message;
 				$noteclass = "notify2";
 			}
 			elseif ($Dest == "*" || $Room == "*")
 			{
-				$Message = "[".L_ANNOUNCE."]<BDO dir=\"${textDirection}\"></BDO> ".$Message;
+				$Message = "[".L_ANNOUNCE."]<BDO dir=\"${textDirection}\"></BDO></td><td width=\"99%\" CLASS=\"notify\" valign=\"top\" align=\"left\">".$Message."</td></tr></table>";
+#				$Message = "[".L_ANNOUNCE."]<BDO dir=\"${textDirection}\"></BDO> ".$Message;
+				$noteclass = "notify";
+			}
+			elseif ($User == "SYS topic")
+			{
+				$Message = "<nobr>".$Dest." ".L_TOPIC."<BDO dir=\"${textDirection}\"></BDO></nobr></td><td width=\"99%\" CLASS=\"notify\" valign=\"top\" align=\"left\">".$Message."</td></tr></table>";
+#				$Message = "".$Dest." ".L_TOPIC."<BDO dir=\"${textDirection}\"></BDO> ".$Message;
+				$noteclass = "notify";
+			}
+			elseif ($User == "SYS topic reset")
+			{
+				$Message = "".$Dest." ".L_TOPIC_RESET."</td></tr></table>";
+#				$Message = "".$Dest." ".L_TOPIC_RESET;
 				$noteclass = "notify";
 			}
 			elseif ($User == "SYS image")
@@ -367,31 +407,36 @@ if($contents == $User)
 				$Pic = L_PIC;
 				$maxSize = MAX_PIC_SIZE;
 				if($imgSize[0] == $maxSize || $imgSize[1] == $maxSize)
-				$Resized = "<br>(".L_PIC_RESIZED." <B>".round($imgSize[0],-1)."</B> x <B>".round($imgSize[1],-1)."</B>)";
+				$Resized = "<br />(".L_PIC_RESIZED." <B>".round($imgSize[0],-1)."</B> x <B>".round($imgSize[1],-1)."</B>)";
 				else $Resized = '';
-        $NewMsg .= "$Pic"." <B>".$Dest."</B>:<FRAME><CENTER><A href=".$Message."  onMouseOver=\"window.status='Click to open the full size picture.'; return true\" title=\"Click to open the full size picture\" target=_blank><img src=".$Message." width=".$imgSize[0]." height=".$imgSize[1]." border=0 alt=\"Click to open the full size picture\"></A>".$Resized."</CENTER></FRAME><br>";
+        $NewMsg .= "$Pic"." <B>".$Dest."</B>:</td><td valign=\"top\" align=\"left\"><A href=".$Message." onMouseOver=\"window.status='Click to open the full size picture.'; return true\" title=\"Click to open the full size picture\" target=_blank><img src=".$Message." width=".$imgSize[0]." height=".$imgSize[1]." border=0 alt=\"Click to open the full size picture\"></A>".$Resized."</td></tr></table>";
+#       $NewMsg .= "$Pic"." <B>".$Dest."</B>:<FRAME><CENTER><A href=".$Message."  onMouseOver=\"window.status='Click to open the full size picture.'; return true\" title=\"Click to open the full size picture\" target=_blank><img src=".$Message." width=".$imgSize[0]." height=".$imgSize[1]." border=0 alt=\"Click to open the full size picture\"></A>".$Resized."</CENTER></FRAME><br />";
       }
 			elseif ($User == "SYS room")
 			{
-        $Message = "<I>".ROOM_SAYS."<FONT class=\"notify\">".$Message."</FONT></FONT></I><br>";
+        $Message = "<I>".ROOM_SAYS." <FONT class=\"notify\">".$Message."</FONT></FONT></I></td></tr></table>";
+#       $Message = "<I>".ROOM_SAYS." <FONT class=\"notify\">".$Message."</FONT></FONT></I><br />";
         $noteclass = "notify2";
       }
 			else
 			{
-				if ($Dest != "" && substr($User,0,8) != "SYS dice") $NewMsg .= "<B>".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]<BDO dir=\"${textDirection}\"></BDO>".$colornamedest_endtag."></B> ";
+				if ($Dest != "" && substr($User,0,8) != "SYS dice") $NewMsg .= "</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\" align=\"left\"><B>".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]<BDO dir=\"${textDirection}\"></BDO>".$colornamedest_endtag."></B> ";
+#				if ($Dest != "" && substr($User,0,8) != "SYS dice") $NewMsg .= "<B>".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]<BDO dir=\"${textDirection}\"></BDO>".$colornamedest_endtag."></B> ";
 				$Message = str_replace("$","\\$",$Message);	// avoid '$' chars in nick to be parsed below
-				if (substr($Message,0,2) != " <") eval("\$Message = $Message;"); // add the condition as a fix in firefox for dices (Ciprian)
+				if (substr($Message,0,2) != "<f") eval("\$Message = $Message;"); // add the condition as a fix in firefox for dices (Ciprian)
 				$noteclass = "notify";
 			};
 	    if ($User != "SYS image")
 	    {
 				if(substr($User,0,8) == "SYS dice")
 				{
-					$NewMsg .="<B>".$Dest.DICE_RESULTS.$Message."</P>";
+					$NewMsg .="</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\" align=\"left\"><FONT class=\"notify\">".$Dest." ".DICE_RESULTS."</FONT></td><td nowrap=\"nowrap\" valign=\"top\" align=\"left\">".$Message."</td></tr></table>";
+#					$NewMsg .="<B>".$Dest."</B> ".DICE_RESULTS.$Message."</P>";
 				}
 			  else
 			  {
-					$NewMsg .= "<SPAN CLASS=\"$noteclass\">".$Message."</SPAN></P>";
+					$NewMsg .= "</td><td nowrap=\"nowrap\" valign=\"top\" align=\"left\"><SPAN CLASS=\"$noteclass\">".$Message."</SPAN></td></tr></table>";
+#					$NewMsg .= "<SPAN CLASS=\"$noteclass\">".$Message."</SPAN></P>";
 				};
 			}
 		};
@@ -399,13 +444,14 @@ if($contents == $User)
 		// Separator between messages sent before today and other ones
 		if (!isset($day_separator) && date("j", $Time +  C_TMZ_OFFSET*60*60) != $today)
 		{
-			$day_separator = "<P CLASS=\"msg\"><SPAN CLASS=\"notify\">--------- ".($O == 0 ? L_TODAY_UP : L_TODAY_DWN)." ---------</SPAN></P>";
+			$day_separator = "<tr class=\"msg\"><td colspan=6 width=\"1%\" nowrap=\"nowrap\" valign=\"top\" align=\"left\"><SPAN CLASS=\"notify\" style=\"background-color:yellow;\">--------- ".($O == 0 ? L_TODAY_UP : L_TODAY_DWN)." ---------</SPAN></td></tr></table>";
+#			$day_separator = "<P CLASS=\"msg\"><SPAN CLASS=\"notify\" style=\"background-color:yellow;\">--------- ".($O == 0 ? L_TODAY_UP : L_TODAY_DWN)." ---------</SPAN></P>";
 		};
 
 		if($O == 0) {
 			$MessagesString .= ((isset($day_separator) && $day_separator != "") ? $day_separator."\n" : "").$NewMsg."\n";
 		} else {
-			$MessagesString = $NewMsg.((isset($day_separator) && $day_separator != "") ? "\n".$day_separator : "")."\n".$MessagesString;
+			$MessagesString = $NewMsg.((isset($day_separator) && $day_separator != "") ? "\n".$day_separator : "")."\n".$MessagesString."";
 		};
 
 		if (isset($day_separator)) $day_separator = "";		// Today separator already printed
@@ -415,7 +461,7 @@ if($contents == $User)
 }
 else
 {
-	echo("<SPAN CLASS=\"notify\">".L_NO_MSG."</SPAN>");
+	echo("<table cellspacing=0 cellpading=0><tr><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\" align=\"left\"><SPAN CLASS=\"notify\" style=\"background-color:yellow;\">".L_NO_MSG."</SPAN></td></tr></table>");
 };
 $DbLink->clean_results();
 
@@ -426,13 +472,13 @@ else $allowpopupu = 1;
 $DbLink->clean_results();
 	if (substr($User,0,4) != "SYS " && C_ENABLE_PM && C_PRIV_POPUP && $allowpopupu)
 	{
-		$DbLink->query("SELECT username, address, room, pm_read FROM ".C_MSG_TBL." WHERE ((room = '$R' OR room = 'Offline PMs') AND address = '$U' AND username != '$U' AND pm_read = 'New') OR (address = '$U' AND username != '$U' AND pm_read = 'Neww') ORDER BY m_time DESC");
+		$DbLink->query("SELECT username, address, room, pm_read FROM ".C_MSG_TBL." WHERE (room = '$R' OR room = 'Offline PMs') AND address = '$U' AND (pm_read = 'New' OR pm_read = 'Neww') ORDER BY m_time DESC");
 		if($DbLink->num_rows() > 0)
 		{
 			$NewPMs = $DbLink->num_rows();
 			list($Sender,$Destin,$Room,$Read) = $DbLink->next_record();
 			$DbLink->clean_results();
-			if (($Read == "New" && ($R = $Room || $R == "Offline PMs") && $U = $Destin && $U != $Sender) || ($Read == "Neww" && $U = $Destin && $U != $Sender))
+			if (($Read == "New" && ($R = $Room || $R == "Offline PMs") && $U = $Destin && $U != $Sender) || ($Read == "Neww" && ($R = $Room || $R == "Offline PMs") && $U = $Destin && $U != $Sender))
 			{
 					// add this for /away command modification by R Dickow (adapted by Ciprian for priv popup):
 					$DbLink = new DB;

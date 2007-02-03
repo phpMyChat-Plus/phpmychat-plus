@@ -60,6 +60,15 @@ else
 					{
 						$IsCommand = true;
 						$RefreshMessages = true;
+						if ($Cmd[2] != "")
+						{
+							$Reason = trim($Cmd[2]);
+							$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_KICKED_REASON, \"".special_char($UU,$Latin1)."\", \"".$Reason."\")', '', '')");
+						}
+						else
+						{
+							$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_KICKED, \"".special_char($UU,$Latin1)."\")', '', '')");
+						}
 						$DbLink->query("UPDATE ".C_USR_TBL." SET u_time='".time()."', status='k' WHERE ".$Query4Moder."username='$UU'");
 					}
 				}
@@ -69,9 +78,9 @@ else
 						$IsCommand = true;
 						$RefreshMessages = true;
 						$DbLink->query("UPDATE ".C_USR_TBL." SET u_time='".time()."', status='k' WHERE username!='$U'");
-			}
-		}
-	}
-}
+			};
+		};
+	};
+};
 
 ?>

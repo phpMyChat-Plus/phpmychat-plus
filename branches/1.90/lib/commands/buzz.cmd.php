@@ -1,5 +1,5 @@
 <?php
-
+if (isset($C)) $Cmd[2] = "<font color=".$C.">$Cmd[2]</font>";
 //if ($status == "a") // use this line if you only want administrators to be able to use this.
 if (($status == "m") OR ($status == "a")) // use this to enable /buzz for both admins and moderators.
 //if (($status == "m") OR ($status == "a") OR ($status == "r")) // use this to enable /buzz for admins, moderators and registered users. Guests can't use it.

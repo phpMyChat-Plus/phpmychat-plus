@@ -7,7 +7,7 @@ if(($Cmd[1] > '0') && ($Cmd[1] <= MAX_ROLLS))
          {
 	   $Dice = rand(1,6); // first number is the LOWEST one it will use, second is the HIGHEST number it will use.
 
-           $nums = $nums." <img src=images/nums".$Dice.".gif>"." ";       // slash this line to turn OFF images
+           $nums = $nums." <img src=images/dice/nums".$Dice.".gif>"." ";       // slash this line to turn OFF images
            $nums = $nums." ".$Dice." ";                                    // slash this line to turn OFF text
 					 $sum = $sum+$Dice;
            $count++;
@@ -23,7 +23,7 @@ if(($Cmd[1] > '0') && ($Cmd[1] <= MAX_ROLLS))
          {
 	   $Dice = rand(1,6); // first number is the LOWEST one it will use, second is the HIGHEST number it will use.
 
-           $nums = $nums." <img src=images/nums".$Dice.".gif>"." ";       // slash this line to turn OFF images
+           $nums = $nums." <img src=images/dice/nums".$Dice.".gif>"." ";       // slash this line to turn OFF images
            $nums = $nums." ".$Dice." ";                                    // slash this line to turn OFF text
 					 $sum = $sum+$Dice;
            $count++;

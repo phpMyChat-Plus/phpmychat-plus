@@ -2,7 +2,7 @@
 if (isset($HTTP_GET_VARS["L"])) $L = $HTTP_GET_VARS["L"];
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 require("./localization/".$L."/localized.chat.php");
 header("Content-Type: text/html; charset=${Charset}");

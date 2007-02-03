@@ -18,7 +18,7 @@ if (isset($HTTP_POST_VARS))
 };
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 require("./config/config.lib.php");
 require("./lib/release.lib.php");
@@ -64,7 +64,7 @@ if (!isset($FontName)) $FontName = "";
 
 <BODY>
 <CENTER>
-<br>
+<br />
 <FORM ACTION="deluser.php" METHOD="POST" AUTOCOMPLETE="" NAME="DelUsrForm">
 <INPUT type="hidden" name="FORM_SEND" value="1">
 <INPUT type="hidden" name="pmc_username" value="<?echo(htmlspecialchars(stripslashes($pmc_username)))?>">

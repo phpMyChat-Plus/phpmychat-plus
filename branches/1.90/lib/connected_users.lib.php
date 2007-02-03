@@ -38,12 +38,12 @@ function display_connected($Private,$Full,$NU,$String1,$String2,$DbLink)
 	{
 		if ($Full)
 		{
-			echo($String1."<br>");
+			echo($String1."<br />");
 			while(list($User,$Latin1,$Room,$RTime) = $DbLink->next_record())
 			{
 				if ($Latin1) $User = htmlentities($User);
 				$RTime = date("d-M, H:i:s", $RTime + C_TMZ_OFFSET*60*60);
-				$List .= ($List == "" ? "<tr><td nowrap>".$User."</td><td nowrap>".$Room."</td><td nowrap>joined on ".$RTime."</td></tr>" : "<tr><td nowrap>".$User."</td><td nowrap>".$Room."</td><td align=center nowrap>joined on ".$RTime."");
+				$List .= ($List == "" ? "<tr><td nowrap=\"nowrap\">".$User."</td><td nowrap=\"nowrap\">".$Room."</td><td nowrap=\"nowrap\">joined on ".$RTime."</td></tr>" : "<tr><td nowrap=\"nowrap\">".$User."</td><td nowrap=\"nowrap\">".$Room."</td><td align=center nowrap=\"nowrap\">joined on ".$RTime."");
 			}
 			echo($List);
 		}

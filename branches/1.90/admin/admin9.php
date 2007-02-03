@@ -1,4 +1,6 @@
 <?php
+// Archive Panel (logs) by Ciprian Murariu <ciprianmp@yahoo.com>.
+// This sheet is diplayed when the admin wants to check the messages archive
 
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
 
@@ -61,7 +63,7 @@ while (false !== ($yr = readdir($year)))
 	{
 		$yeardir = $yr;
 				echo("<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table><tr>");
-				echo ("<td valign=top align=center nowrap colspan=5><font size=4 color=red><b>$yr</b></font><br><a href=\"$pstr&ydel=".$y.$yr."\"><font size=-2 color=red><b>Delete</b></font></a></td>"); #print name of each file found
+				echo ("<td valign=top align=center nowrap=\"nowrap\" colspan=5><font size=4 color=red><b>$yr</b></font><br /><a href=\"$pstr&ydel=".$y.$yr."\" title=\"Delete all $yr logs\"><font size=-2 color=red><b>Delete year</b></font></a></td>"); #print name of each file found
 		$m=$y.$yeardir; #define which month you want to read
 		$month = opendir($m); #open directory
 		while (false !== ($mt = readdir($month)))
@@ -70,8 +72,8 @@ while (false !== ($yr = readdir($year)))
 			{
 				$monthdir = $mt;
 						echo("<tr>");
-						echo ("<td valign=top align=center nowrap><font size=4 color=green><b>$mt</b></font><br><a href=\"$pstr&mdel=".$y.$yr."/".$mt."\"><font size=-2 color=red><b>Delete</b></font></a></td>"); #print name of each file found
-						echo ("<td valign=top align=left nowrap>");
+						echo ("<td valign=top align=center nowrap=\"nowrap\"><font size=4 color=green><b>$mt</b></font><br /><a href=\"$pstr&mdel=".$y.$yr."/".$mt."\" title=\"Delete all $mt/$yr logs\"><font size=-2 color=red><b>Delete<br>month</b></font></a></td>"); #print name of each file found
+						echo ("<td valign=top align=left nowrap=\"nowrap\">");
 				$d=$y.$yeardir."/".$monthdir; #define which month you want to read
 				$day = opendir($d); #open directory
 				while (false !== ($dy = readdir($day)))
@@ -86,17 +88,18 @@ while (false !== ($yr = readdir($year)))
 				$i=1;
 				foreach ($dayarray as $dy)
 				{
-					$dyhtm=str_replace(".htm","",$dy);
+					if (eregi(".htm",$dy)) $dyhtm=str_replace(".htm","",$dy);
+					else $dyhtm=str_replace(".php","",$dy);
 					$dyhtm=str_replace($yr.$mt,"",$dyhtm);
-					echo ("<li><a href=$d/$dy target=_self>$dyhtm</a><a href=\"$pstr&fdel=".$y.$yr."/".$mt."/".$dy."\"><font size=-2 color=red><b>&nbsp;&nbsp;X&nbsp;&nbsp;</b></font></a>&nbsp;(".filesize($d."/".$dy)." bytes)<br>\n"); #print name of each file found
-					if ($i==7 || $i==14 || $i==21 || $i==28) echo ("<td valign=top align=left nowrap>");
+					echo ("<li><a href=$d/$dy?L=$L title=\"Read $dyhtm $mt $yr log\" target=_blank>$dyhtm</a>&nbsp;&nbsp;<a href=\"$pstr&fdel=".$y.$yr."/".$mt."/".$dy."\" title=\"Delete this log\"><font size=-2 color=red><b>x</b></font></a>&nbsp;&nbsp;&nbsp;(".filesize($d."/".$dy)." bytes)<br />\n"); #print name of each file found
+					if ($i==7 || $i==14 || $i==21 || $i==28) echo ("<td valign=top align=left nowrap=\"nowrap\">");
 					$i++;
 				}
 				unset($dayarray);
 					echo("</tr>");
 			}
 		}
-		echo("</td></tr></table><br>");
+		echo("</td></tr></table><br />");
 		closedir($month);
 	}
 }
@@ -115,7 +118,7 @@ while (false !== ($yru = readdir($yearu)))
 	{
 		$yeardiru = $yru;
 		echo("<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table><tr>");
-		echo ("<td valign=top align=center nowrap colspan=5><font size=4 color=red><b>$yru</b></font><br><a href=\"$pstr&ydel=".$yu.$yru."\"><font size=-2 color=red><b>Delete</b></font></a></td>"); #print name of each file found
+		echo ("<td valign=top align=center nowrap=\"nowrap\" colspan=5><font size=4 color=red><b>$yru</b></font><br /><a href=\"$pstr&ydel=".$yu.$yru."\" title=\"Delete all $yru logs\"><font size=-2 color=red><b>Delete year</b></font></a></td>"); #print name of each file found
 	$mu=$yu.$yeardiru; #define which month you want to read
 	$monthu = opendir($mu); #open directory
 		while (false !== ($mtu = readdir($monthu)))
@@ -124,8 +127,8 @@ while (false !== ($yru = readdir($yearu)))
 			{
 				$monthdiru = $mtu;
 						echo("<tr>");
-						echo ("<td valign=top align=center nowrap><font size=4 color=green><b>$mtu</b></font><br><a href=\"$pstr&mdel=".$yu.$yru."/".$mtu."\"><font size=-2 color=red><b>Delete</b></font></a></td>"); #print name of each file found
-						echo ("<td valign=top align=left nowrap>");
+						echo ("<td valign=top align=center nowrap=\"nowrap\"><font size=4 color=green><b>$mtu</b></font><br /><a href=\"$pstr&mdel=".$yu.$yru."/".$mtu."\" title=\"Delete all $mtu/$yru logs\"><font size=-2 color=red><b>Delete<br>month</b></font></a></td>"); #print name of each file found
+						echo ("<td valign=top align=left nowrap=\"nowrap\">");
 				$du=$yu.$yeardiru."/".$monthdiru; #define which month you want to read
 				$dayu = opendir($du); #open directory
 				while (false !== ($dyu = readdir($dayu)))
@@ -140,17 +143,18 @@ while (false !== ($yru = readdir($yearu)))
 				$j=1;
 			  foreach ($dayarrayu as $dyu)
 			  {
-					$dyuhtm=str_replace(".htm","",$dyu);
+					if (eregi(".htm",$dyu)) $dyuhtm=str_replace(".htm","",$dyu);
+					else $dyuhtm=str_replace(".php","",$dyu);
 					$dyuhtm=str_replace($yru.$mtu,"",$dyuhtm);
-					echo ("<li><a href=$du/$dyu target=_self>$dyuhtm</a><a href=\"$pstr&fdel=".$yu.$yru."/".$mtu."/".$dyu."\"><font size=-2 color=red><b>&nbsp;&nbsp;X&nbsp;&nbsp;</b></font></a>&nbsp;(".filesize($du."/".$dyu)." bytes)<br>\n"); #print name of each file found
-					if ($j==7 || $j==14 || $j==21 || $j==28) echo ("<td valign=top align=left nowrap>");
+					echo ("<li><a href=$du/$dyu?L=$L title=\"Read $dyuhtm $mtu $yru log\" target=_blank>$dyuhtm</a>&nbsp;&nbsp;<a href=\"$pstr&fdel=".$yu.$yru."/".$mtu."/".$dyu."\" title=\"Delete this log\"><font size=-2 color=red><b>x</b></font></a>&nbsp;&nbsp;&nbsp;(".filesize($du."/".$dyu)." bytes)<br />\n"); #print name of each file found
+					if ($j==7 || $j==14 || $j==21 || $j==28) echo ("<td valign=top align=left nowrap=\"nowrap\">");
 					$j++;
 				}
 				unset($dayarrayu);
 					echo("</tr>");
 			}
 		}
-		echo("</td></tr></table><br>");
+		echo("</td></tr></table><br />");
 		closedir($monthu);
 	}
 }

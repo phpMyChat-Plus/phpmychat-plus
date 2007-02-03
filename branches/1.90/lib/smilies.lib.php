@@ -131,12 +131,12 @@ function DisplaySmilies(&$ToDisplay,&$Table,&$TblSize,$Target)
 	{
 		if (($Target == "help") || ($Target == "input")) {
 		  	$Str1 .= "\t\t<TD ALIGN=\"CENTER\" WIDTH=$MaxWidth HEIGHT=$MaxHeight><A HREF=\"#\" onClick=\"smiley2Input('".SpecialSlash($key)."'); return false\" onMouseOver=\"window.status='Click to insert this smiley.'; return true\" title=\"".str_replace("\"","&quot;", stripslashes($key))."\"><IMG SRC=images/smilies/$prop[0] BORDER=0 ALT=\"".str_replace("\"","&quot;", stripslashes($key))."\"></A></TD>\n";
-	      $Str2 .= "\t\t<TD ALIGN=\"CENTER\" WIDTH=50 HEIGHT=15 NOWRAP>".stripslashes($key)."</TD>\n";
+	      $Str2 .= "\t\t<TD ALIGN=\"CENTER\" WIDTH=50 HEIGHT=15 NOWRAP=\"NOWRAP\">".stripslashes($key)."</TD>\n";
 		} elseif ($Target == "popup") {
 		  	$Str1 .= "\t\t<TD ALIGN=\"CENTER\"><A HREF=\"#\" onClick=\"smiley2Input('".SpecialSlash($key)."'); return false\" onMouseOver=\"window.status='Click to insert this smiley.'; return true\" title=\"".str_replace("\"","&quot;", stripslashes($key))."\"><IMG SRC=images/smilies/$prop[0] BORDER=0 ALT=\"".str_replace("\"","&quot;", stripslashes($key))."\"></A></TD>\n";
 		} else {
 				$Str1 .= "\t\t<TD ALIGN=CENTER WIDTH=$MaxWidth HEIGHT=$MaxHeight><IMG SRC=images/smilies/$prop[0] BORDER=0 ALT=\"".str_replace("\"","&quot;", stripslashes($key))."\"></TD>\n";
-				$Str2 .= "\t\t<TD ALIGN=\"CENTER\" NOWRAP>".stripslashes($key)."</TD>\n";
+				$Str2 .= "\t\t<TD ALIGN=\"CENTER\" NOWRAP=\"NOWRAP\">".stripslashes($key)."</TD>\n";
 		};
 		//   Set SMILEY_COLS in config.lib.php.
                 if ($Target == "input") {  // for compatibility with input.php modifications by RD

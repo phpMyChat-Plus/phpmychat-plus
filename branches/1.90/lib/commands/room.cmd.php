@@ -42,9 +42,15 @@ else
 				include("./lib/swearing.lib.php");
 				$Cmd[2] = checkwords($Cmd[2], false);
 				}
+				if (C_USE_SMILIES)
+				{
+					include("./lib/smilies.lib.php");
+					Check4Smilies($Cmd[2],$SmiliesTbl);
+					unset($SmiliesTbl);
+				};
 			}
 		if (trim($Cmd[1]) == "*")
-$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS room', '$Latin1', ".time().", '$U', '".addslashes(stripslashes($Cmd[2]))."', '', '')");
+		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS room', '$Latin1', ".time().", '$U', '".addslashes(stripslashes($Cmd[2]))."', '', '')");
 		else
 		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS room', '$Latin1', ".time().", '$U', '".addslashes(stripslashes($Cmd[2]))."', '', '')");
 		$IsCommand = true;

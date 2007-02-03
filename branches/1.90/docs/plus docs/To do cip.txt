@@ -20,6 +20,25 @@
 -installer/setup - Ciprian - on the way
 -credits page - Ciprian
 -update the localizations - Ciprian and Nick (?)
--conversation with the robot also private (based on Sally Linus Lucy's idea) - Ciprian - done
--option for admin to totally disable private messaging in chat (/to and /wisp) (based on bluntdog's idea) - Ciprian - done
--add the size command to dinamically change the font size in messages frame (based on Sally Makeham's idea) - Ciprian - done
+-conversation with the robot also private (based on Sally Linus Lucy's idea) - Ciprian - done (1.90)
+-option for admin to totally disable private messaging in chat (/to and /wisp) (based on bluntdog's idea) - Ciprian - done (1.90)
+-add the size command to dinamically change the font size in messages frame (based on Sally Makeham's idea) - Ciprian - done (1.90)
+-promote to moderator - not from private rooms (mods only by creating a non-default room shouldn't have powers in any other rooms) - (based on bugs submitted on SourceForge.net) - Ciprian
+-I would be pleased if it would be possible to insert reasons for kicking and banning (based on a Feature Request submited by miukumauku on SourceForge) - Ciprian - done (1.91)
+/kick lamer Spamming would print:
+[11:02] lamer was kicked (reason: Spamming)
+-same for banishing - Ciprian - done
+-commands table & archiving/logging the commands used in chat as well - Ciprian
+-archiving/logging/lurking the pictures links posted using the /img command - Ciprian - done
+-Is there a way to tie your profile color to your chat text color, and not just the nick? (based on Auggy's idea) - Ciprian - done
+		- /ghost command: put the user into a ghost state (the ghost user and his posts cannot be seen in the room, he won't know about this, so he gives up and leave the chat - works when banning has no effect on a specific user; it also allow an admin/moder to go invisible in the chat);
+- fix the pmpopup script error
+- add link for offline pms
+- change the pm function to >
+- is there any tool aviable or planned to reset user passwords?
+I've from time to time to reset a user password when he forgot it.
+Maybe there should be a "forgot password" field, where the user has to
+enter his mailadress (the one which he registered himself) and gets a
+new password.
+- add the members page
+- add the gallery feature

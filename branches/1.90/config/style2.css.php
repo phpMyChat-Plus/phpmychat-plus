@@ -1,5 +1,7 @@
 <?php
-// Second room
+// Second public room skin
+// "Firebrick & tomato" skin for phpMyChat plus - by Bluntdog
+
 
 // Get the names and values for vars sent by the script that called this one
 if (isset($HTTP_GET_VARS))
@@ -32,12 +34,10 @@ $small = round(0.8 * $medium);
 
 /*	Color Input Box mod by Ciprian
 Here you can customize the default color for messages window general look
-the font for text messages, colors, some popup windows' text color, aso)
-Optionally you might want to replace color: #000000; in the .time block with:
- 	color: <?php echo($CD); ?>;
+the font for text messages, colors, some popup windows' text color, aso.
 This will make time, sender and message color have the same default color defined bellow.*/
 
-	$CD = "orange";			//default messages color
+	$CD = "tomato";			//default messages color, Filter code: FFA500
 
 ?>
 
@@ -76,7 +76,6 @@ BODY.frame
 	scrollbar-highlight-color: #ffd700;
 	scrollbar-shadow-color: #ff0000;
 }
-
 
 BODY.mainframe
 {
@@ -148,11 +147,6 @@ A.mod, A.mod:active
 	font-weight: 600;
 }
 
-INPUT, SELECT, TEXTAREA
-{
-	background: #ffd700;
-}
-
 A.sender, A.sender:active
 {
 	text-decoration: none;
@@ -160,13 +154,18 @@ A.sender, A.sender:active
 	font-weight: 600;
 }
 
+INPUT, SELECT, TEXTAREA
+{
+	background: #ffd700;
+}
+
 .msg
 {
 	margin-top: 0px;
 	margin-bottom: 2px;
-	margin-left: <?php echo($Charset == "windows-1256" ? "5" : "55"); ?>px;
-	margin-right: <?php echo($Charset == "windows-1256" ? "55" : "5"); ?>px;
-	text-indent: -50px;
+	margin-left: <?php #echo($Charset == "windows-1256" ? "5" : "55"); ?>0px;
+	margin-right: <?php #echo($Charset == "windows-1256" ? "55" : "5"); ?>0px;
+	text-indent: 0px;
 }
 
 .msg2
@@ -174,9 +173,9 @@ A.sender, A.sender:active
 	background: #FFFAFA;
 	margin-top: 0px;
 	margin-bottom: 0px;
-	margin-left: <?php echo($Charset == "windows-1256" ? "5" : "55"); ?>px;
-	margin-right: <?php echo($Charset == "windows-1256" ? "55" : "5"); ?>px;
-	text-indent: -50px;
+	margin-left: <?php #echo($Charset == "windows-1256" ? "5" : "55"); ?>0px;
+	margin-right: <?php #echo($Charset == "windows-1256" ? "55" : "5"); ?>0px;
+	text-indent: 0px;
 }
 
 .title
@@ -196,7 +195,7 @@ A.sender, A.sender:active
 
 .tabtitle
 {
-	background-color: #666699;
+	background-color: #4682b4;
 	color: #FFFFFF;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 800;
@@ -218,12 +217,12 @@ A.sender, A.sender:active
 {
 	unicode-bidi: embed;
 	color: <?php echo($CD); ?>;
-	font-size: 8pt;
+	font-size: <?php echo($FontSize); ?>;;
 }
 
 .notify
 {
-	color: #666699;
+	color: #4682b4;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 600;
 }

@@ -1,4 +1,6 @@
 <?php
+// Search panel by Digioz Multimedia.
+// This sheet is diplayed when the admin wants to search the database for registered users
 
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
 
@@ -47,7 +49,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 7)
   }
 
    //echo $query;
-   $query = mysql_query($sql) or die("Cannot query the database.<br>" . mysql_error());
+   $query = mysql_query($sql) or die("Cannot query the database.<br />" . mysql_error());
    //mysql_query($query)or die("Could not execute search query!");
 
    // Display search result on screen
@@ -80,7 +82,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 7)
        echo "<tr bgcolor=\"#FFFFFF\"><td width=100> $s_username </td><td> $s_firstname </td><td> $s_lastname </td><td> <a href=\"mailto:$s_email\"><font color=\"orange\">$s_email</font></a> </td><td> $s_perms </td><td> $s_ip </td><td><center> $s_gender </center></td></tr>";
    }
 
-echo "</table><br>";
+echo "</table><br />";
 }
 
 ?>
@@ -117,8 +119,8 @@ echo "</table><br>";
 <table align="center" width="500" CLASS=table>
 <tr>
     <td>
-    <b>*</b> For Permissions Category, options are <b>ad</b>, <b>mod</b> or <b>u</b>.<br>
-    <b>*</b> For Gender Category, options are <b>0</b> for Unspecified, <b>1</b> for Male, or <b>2</b> for Female.<br>
+    <b>*</b> For Permissions Category, options are <b>ad</b>, <b>mod</b> or <b>u</b>.<br />
+    <b>*</b> For Gender Category, options are <b>0</b> for Unspecified, <b>1</b> for Male, or <b>2</b> for Female.<br />
 </tr>
 </table>
 <?php

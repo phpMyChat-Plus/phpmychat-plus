@@ -43,7 +43,7 @@ elseif (eregi("^\/!$", $M, $Cmd) && (isset ($M0) && $M0 != ""))
 {
 	include("./lib/commands/history.cmd.php");
 }
-elseif (eregi("^\/kick[[:space:]](.{1,30})$", $M, $Cmd))
+elseif (eregi("^\/kick[[:space:]]([^[:space:]]{1,30})([[:space:]](.+))?$", $M, $Cmd))
 {
 	include("./lib/commands/kick.cmd.php");
 }
@@ -103,7 +103,7 @@ elseif (eregi("^\/invite([[:space:]](.+))+$", $M, $Cmd))
 {
 	include("./lib/commands/invite.cmd.php");
 }
-elseif (C_BANISH != "0" && eregi("^\/ban[[:space:]](\*[[:space:]])?(.{1,30})$", $M, $Cmd))
+elseif (C_BANISH != "0" && eregi("^\/ban[[:space:]](\*[[:space:]])?([^[:space:]]{1,30})([[:space:]](.+))?$", $M, $Cmd))
 {
 	include("./lib/commands/banish.cmd.php");
 }
@@ -136,7 +136,7 @@ elseif (eregi("^\/room([[:space:]]\*)?([[:space:]].+)$", $M, $Cmd))
 {
 	include("./lib/commands/room.cmd.php");
 }
-elseif (eregi("^\/(topic)[[:space:]]([^[:space:]]{1,30})[[:space:]](.+)$", $M, $Cmd))
+elseif (eregi("^\/topic[[:space:]](\*)?([^[:space:]]{1,30})[[:space:]](.+)$", $M, $Cmd))
 {
 	include("./lib/commands/topic.cmd.php");
 }

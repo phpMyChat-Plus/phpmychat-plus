@@ -14,10 +14,10 @@ if (isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"]
 //if no language detected set default one
 if (!isset($L)) $L = C_LANGUAGE;
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 require("./config/config.lib.php");
@@ -174,7 +174,7 @@ if(isset($NbUsers) && $NbUsers > 0)
 							echo("<DIV ID=\"${id}Parent\" CLASS=\"parent\" STYLE=\"margin-top: 5px; CURSOR: hand\">");
 							echo("<A HREF=\"#\" onClick=\"expandIt('${id}'); return false\" onMouseOver=\"window.status='".L_EXPCOL."'; return true;\" title=\"<?php echo(L_EXPCOL); ?>\">");
 							echo("<IMG NAME=\"imEx\" SRC=\"images/closed.gif\" WIDTH=9 HEIGHT=9 BORDER=0 ALT=\"".L_EXPCOL."\"></A>");
-							echo("&nbsp;<B>".htmlspecialchars($Other)."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$Users->num_rows().")</SPAN><br>");
+							echo("&nbsp;<B>".htmlspecialchars($Other)."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$Users->num_rows().")</SPAN><br />");
 							echo("</DIV>");
 							echo("<DIV ID=\"${id}Child\" CLASS=\"child\" STYLE=\"margin-left: 12px\">");
 							$j = 0;
@@ -182,7 +182,7 @@ if(isset($NbUsers) && $NbUsers > 0)
 							{
 								$j++;
 								$room_time = date("d-M, H:i:s", $room_time + C_TMZ_OFFSET*60*60);
-								echo("-&nbsp;".special_char($Username,$Latin1,$status)." <font size=1>".special_char("(".$room_time.")",$Latin1,$status)."</font><br>");
+								echo("-&nbsp;".special_char($Username,$Latin1,$status)." <font size=1>".special_char("(".$room_time.")",$Latin1,$status)."</font><br />");
 							};
 							echo("</DIV>");
 							$ChildNb[$id] = $j;
@@ -201,7 +201,7 @@ if(isset($NbUsers) && $NbUsers > 0)
 							echo("<DIV ID=\"${id}Parent\" CLASS=\"parent\" STYLE=\"margin-top: 5px; CURSOR: hand\">");
 							echo("<A HREF=\"#\" onClick=\"expandIt('${id}'); return false\" onMouseOver=\"window.status='".L_EXPCOL."'; return true;\" title=\"<?php echo(L_EXPCOL); ?>\">");
 							echo("<IMG NAME=\"imEx\" SRC=\"images/closed.gif\" WIDTH=9 HEIGHT=9 BORDER=0 ALT=\"".L_EXPCOL."\"></A>");
-							echo("&nbsp;<B>".htmlspecialchars($Other)."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$Users->num_rows().")</SPAN><br>");
+							echo("&nbsp;<B>".htmlspecialchars($Other)."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$Users->num_rows().")</SPAN><br />");
 							echo("</DIV>");
 							echo("<DIV ID=\"${id}Child\" CLASS=\"child\" STYLE=\"margin-left: 12px\">");
 							$j = 0;
@@ -209,7 +209,7 @@ if(isset($NbUsers) && $NbUsers > 0)
 							{
 								$j++;
 								$room_time = date("d-M, H:i:s", $room_time + C_TMZ_OFFSET*60*60);
-								echo("-&nbsp;".special_char($Username,$Latin1,$status)." <font size=1>".special_char("(".$room_time.")",$Latin1,$status)."</font><br>");
+								echo("-&nbsp;".special_char($Username,$Latin1,$status)." <font size=1>".special_char("(".$room_time.")",$Latin1,$status)."</font><br />");
 							};
 							echo("</DIV>");
 							$ChildNb[$id] = $j;

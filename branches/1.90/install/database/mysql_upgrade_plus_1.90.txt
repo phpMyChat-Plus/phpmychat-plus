@@ -1,0 +1,37 @@
+ALTER TABLE c_config
+			CHANGE ALLOW_ENTRANCE_SOUND ALLOW_ENTRANCE_SOUND enum('0','1','2','3') NOT NULL default '1',
+			CHANGE COLOR_CDC1 COLOR_CD8 VARCHAR(25) NOT NULL,
+			CHANGE COLOR_CDC2 COLOR_CD9 VARCHAR(25) NOT NULL,
+			CHANGE COLOR_CDC3 COLOR_CA VARCHAR(25) NOT NULL,
+			CHANGE COLOR_CDC4 COLOR_CA1 VARCHAR(25) NOT NULL,
+			CHANGE COLOR_CDC5 COLOR_CA2 VARCHAR(25) NOT NULL,
+			CHANGE COLOR_CDC6 COLOR_CM VARCHAR(25) NOT NULL,
+			CHANGE COLOR_CDC7 COLOR_CM1 VARCHAR(25) NOT NULL,
+			ADD COLOR_CM2 VARCHAR(25) NOT NULL default '' AFTER COLOR_CM1,
+			ADD CHAT_BOOT enum('0','1') NOT NULL default '1',
+			ADD WELCOME_SOUND varchar(255) NOT NULL default '',
+			ADD WORLDTIME enum('0','1','2') NOT NULL default '2';
+UPDATE c_config SET
+			ENTRANCE_SOUND = 'sounds/beep.wav',
+			CMDS = '<br>/away /buzz /demote /dice /dice2 /dice3 /high /img /mr /room<br>/size /sort /topic /wisp',
+			COLOR_CD2 = 'tomato',
+			COLOR_CD3 = 'dimgray',
+			COLOR_CD4 = 'indigo',
+			COLOR_CD7 = 'white',
+			COLOR_CD8 = 'magenta',
+			COLOR_CD9 = 'blueviolet',
+			COLOR_CA = 'red',
+			COLOR_CA1 = 'crimson',
+			COLOR_CA2 = 'orangered',
+			COLOR_CM = 'blue',
+			COLOR_CM1 = 'mediumblue',
+			COLOR_CM2 = 'royalblue',
+			CHAT_BOOT = '1',
+			WELCOME_SOUND = 'sounds/hello.wav',
+			WORLDTIME = '2'
+	WHERE ID='0';
+UPDATE c_reg_users SET
+			slang = 'English, German',
+			favlink = 'http://www.alicebot.org/documentation/',
+			favlink1 = 'http://sourceforge.net/forum/?group_id=43190'
+	WHERE email='bot@bot.bot.com';

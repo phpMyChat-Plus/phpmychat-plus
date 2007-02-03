@@ -9,7 +9,7 @@ if (isset($HTTP_GET_VARS))
 };
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 require("./config/config.lib.php");
@@ -20,14 +20,20 @@ header("Content-Type: text/html; charset=${Charset}");
 $Ver1 = ($Ver == "H" ? $Ver : "L");
 
 //---------------------------Begin HighLight command by R.Worley
-$botpath = "botfb/" .$U;         // file is in DIR "botfb" and called "usersname"
-if (file_exists($botpath)) unlink($botpath); // checks to see if user file exists.
+$highpath = "botfb/" .$U;         // file is in DIR "botfb" and called "usersname"
+if (file_exists($highpath)) unlink($highpath); // checks to see if user file exists.
                                      // if it does delete it.
 //----------------------------End HighLight Mod
 
 // Added for Bot conversations only in sessions
-$botpathbot = "botfb/" .$U. ".txt";
-if (file_exists($botpathbot)) unlink($botpathbot); // checks to see if user file exists.
+$botpath = "botfb/" .$U. ".txt";
+if (file_exists($botpath)) unlink($botpath); // checks to see if user file exists.
+
+if (COLOR_FILTERS)
+{
+	if (strcasecmp($C, $COLOR_CA) == 0 || strcasecmp($C, $COLOR_CA1) == 0 || strcasecmp($C, $COLOR_CA2) == 0 || strcasecmp($C, $COLOR_CM) == 0 || strcasecmp($C, $COLOR_CM1) == 0 || strcasecmp($C, $COLOR_CM2) == 0)
+	setcookie("CookieColor", "", time());        // delete power color cookie
+}
 
 // For translations with an explicit charset (not the 'x-user-defined' one)
 if (!isset($FontName)) $FontName = "";
@@ -118,9 +124,9 @@ else
 <?php
 }
 ?>
-<br>
+<br />
 <?php
-if ($FontSize < 10) echo("<br>");
+if ($FontSize < 10) echo("<br />");
 if ($Ver == "H")
 {
 	?>
@@ -144,7 +150,7 @@ if ($Ver == "H")
 }
 ?>
 </CENTER>
-<hr>
+<hr />
 </BODY>
 </HTML>
 <?php

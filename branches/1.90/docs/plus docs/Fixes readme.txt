@@ -1,9 +1,129 @@
 Note: if you've already modded your own files, please compare and edit the changes from those included in this archive to identify the changes done for the fix. If not, just replace them in the according folders.
 This archive includes all the previously released fixes.
-Tested with: IE 6.0 SP2, Mozilla Firefox 1.5.0.4, Mozilla Firebird 0.7, Netscape 8.1, Opera 9.0 build 8502, AvantBrowser 10.2 build 52.
+Client browsers - tested with: IE 6.0 SP2, Mozilla Firefox 1.5.0.4, Mozilla Firebird 0.7, Netscape 8.1, Opera 9.0 build 8502, AvantBrowser 10.2 build 52.
+Server environment - tested env: Apache/1.3.34 (Unix), php v.4.3.11 (non-safe-mode), MySQL v4.1.19, exif support enabled (gif/jpeg processing), GD2 support enabled (gif/jpeg processing).
 Connection troubles with IE 7.0 beta. (reported on different sites)
 
 Fixes History:
+06.09.2006 - 1.91:
+- Some Admin panel/Configuration adjustments (usability related)
+- Improved/fixed the update check in Config/Admin panel. (administration related)
+- Download link on index page directed to the SourceForge page (link update)
+- Cleaned up the bot folder, removing unnecessary files and folders (size related)
+- Fixed a Color cookie issue for power users switching to normal users on login - now deleting the cookie color of a power user when exits chat, to avoid the filter error alert if he logs in back as a lowered power user (functionality related)
+- Changed the Entrance sound feature to include an optional Welcome sound heard only by the user.
+	- there are 4 types of settings for this:
+			- 0 - Disabled - no sounds on entrance;
+			- 1 - Notify the whole room - every user in the chat (including the new comer) will hear an entrance sound;
+			- 2 - Welcome only the user - Only the new comer will get an Welcome sound;
+			- 3 - Notify & Welcome (1&2) - Newcomer will hear only the Welcome sound and all the others will be notified with an Entrance sound;
+			Note: to make sense, I suggest the two sounds should be different from each other, otherwise, setting to only 1 OR 2 would be enough.
+- Changed the /kick command to display a reason of kicking (optional)
+	Usage:
+	- old format/behavior:
+			/kick user - displays: "You have been kicked out of the room by a moderator of this room" to the kicked user and
+												"user has successfully been kicked away."
+	- new format/behavior:
+			/kick user [for spamming] - displays: "You have been kicked out of the room by a moderator of this room.<br>(Reason: for spamming)" to the kicked user and
+												"user has successfully been kicked away. (Reason: for spamming)" - ["for spamming" can be any text string]
+- Changed the /ban command and Admin Panel/Banish tab to display a reason of baning (optional)
+	Usage:
+	- old format/behavior (there is also an optional * /ban * user to ban forever - read the chat for more details):
+			/ban user - displays: "You have been banished from this room or from the chat." to the banished user and
+												"user has successfully been banished." to the room
+	- new format/behavior:
+			/ban user [for spamming] - displays: "You have been banished from this room or from the chat.<br>(Reason: for spamming)" to the banished user and
+												"user has successfully been banished. (Reason: for spamming)" to the room - ["for spamming" can be any text string]
+		The Reason field added in both Admin panels ("Registered Users" and "Banished Users") to add/edit the reason of banishment (the reson will be displayed to the banished user everytime he tries to login)
+- Changed the Help link image from ? to Help text. (functionality related)
+- Fixed the Archive/Log feature to display the right formated system messages: entrances/exits from chat, topic changes, announcements, aso. It is also multilangual, according to the reader language (functionality related)
+- /topic command improvements: (functionality related)
+		- Topic subject now stored in a file in botfb (keep it shown in banners even after messages clean-up);
+		- There are two types of topics now: global (for all rooms) and specific (for each room);
+		- /topic * and /topic * top reset are used to post global topics;
+		- Priority of topics (if multi-topics allowed in admin panel):
+			- 1. specific topics set with /topic command;
+			- 2. global topics set with /topic * command (if specific doesn't exist);
+			- 3. local topics stored in banner.php (these will be moved to Admin panel as well soon)
+- Several security fixes and other mods by and thanks to Alexander Eisele <xaex@mail.ru>
+		- Links clean-up/popup mod; (security related)
+		- Input message Wordwrap (40 chars) fix; (display related)
+		- Color selector in input bar, register/edituser pages and admin panel; (replaces the color picker) (functionality related)
+		- Color sniffer scripting safe mode filter; (security related)
+		- Messages displayed in tables in messages frame (text alignment fix by cells); (display related)
+- Dutch language updated and included (localization related) - Thanks to Danny.
+- German language updated and included (localization related) - Thanks to Alexander Eisele  <xaex@mail.ru>.
+- French language updated and included (localization related) - Thanks to Lelou  <lelou@lelou.inf>.
+SQL updates:
+- Added four more fields in table c_config: one: [COLOR_CM2 VARCHAR(25) NOT NULL default '' AFTER COLOR_CM1] and three: [CHAT_BOOT enum('0','1') NOT NULL default '1'], [WELCOME_SOUND varchar(255) NOT NULL default ''] and [WORLDTIME enum('0','1','2') NOT NULL default '2'] at the end of table
+- Changed the ALLOW_ENTRANCE_SOUND field type from enum('0','1') to enum('0','1','2','3') in c_config table;
+- Changed the COLOR_CDC1 field name and type to COLOR_CD8 VARCHAR(25) in c_config table;
+- Changed the COLOR_CDC2 field name and type to  COLOR_CD9 VARCHAR(25) in c_config table;
+- Changed the COLOR_CDC3 field name and type to  COLOR_CA VARCHAR(25) in c_config table;
+- Changed the COLOR_CDC4 field name and type to  COLOR_CA1 VARCHAR(25) in c_config table;
+- Changed the COLOR_CDC5 field name and type to  COLOR_CA2 VARCHAR(25) in c_config table;
+- Changed the COLOR_CDC6 field name and type to  COLOR_CM VARCHAR(25) in c_config table;
+- Changed the COLOR_CDC7 field name and type to  COLOR_CM1 VARCHAR(25) in c_config table;
+- Changed the values of the following fields in c_config table as follows: ENTRANCE_SOUND to 'sounds/beep.wav', COLOR_CD2 to 'tomato', COLOR_CD3 to 'dimgray', COLOR_CD4 to 'indigo', COLOR_CD7 to 'white', COLOR_CD8 to 'magenta', COLOR_CD9 to 'blueviolet';
+- Changed the value of language field in c_reg_users table for bot: language = 'English, German';
+Files edited:
+- plus/banner.php;
+- plus/chat_activity.php;
+- plus/exit.php;
+- plus/export.php;
+- plus/handle_inputH.php;
+- plus/help_popup.php;
+- plus/index.php;
+- plus/index1.php;
+- plus/input.php;
+- plus/loader.php;
+- plus/lurking.php;
+- plus/messagesL.php;
+- plus/phpMyChat.php3;
+- plus/admin/admin1.php;
+- plus/admin/admin2.php;
+- plus/admin/admin5.php;
+- plus/admin/admin6.php;
+- plus/admin/admin8.php;
+- plus/config/config.lib.php;
+- plus/config/start_page.css.php;
+- plus/config/style(1-7).css.php;
+- plus/lib/commands.lib.php;
+- plus/lib/clean.lib.php;
+- plus/lib/banish.lib.php;
+- plus/lib/index.lib.php;
+- plus/lib/logs.lib.php;
+- plus/lib/release.lib.php;
+- plus/lib/commands/kick.cmd.php;
+- plus/lib/commands/banish.cmd.php;
+- plus/lib/commands/topic.cmd.php;
+- plus/localization/english/localized.admin.php;
+- plus/localization/english/localized.chat.php;
+- plus/localization/english/localized.tutorial.php;
+- plus/localization/romanian/localized.admin.php;
+- plus/localization/romanian/localized.chat.php;
+- plus/localization/romanian/localized.tutorial.php;
+Files removed:
+- plus/config/color.lib.php;
+- plus/lib/update.lib.php;
+Files moved:
+- plus/images/nums(1-6).gif to:
+- plus/images/dice/nums(1-6).gif;
+Files added:
+- plus/config/style(8-10).css.php; (Black&White, Pink and DarkViolet skins)
+- plus/install/database/mysql_upgrade_plus_1.90.txt; (all the old ones updated accordingly)
+- plus/lib/update.txt;
+- plus/localization/dutch folder:
+	- plus/localization/dutch/index.html;
+	- plus/localization/dutch/flag.gif;
+	- plus/localization/dutch/localized.admin.php;
+	- plus/localization/dutch/localized.chat.php;
+	- plus/localization/dutch/regex.txt;
+	- Note: plus/localization/dutch/localized.tutorial.php; - not ready yet - to be added
+Files replaced:
+- plus/images/helpOn.gif;
+- plus/images/helpOff.gif;
+
 06.08.2006 - 1.90:
 - /size command added (changes the font size of the messages' text in the rooms) (functionality extension)
 - Help file udated to include the demote and size commands usage (support related)

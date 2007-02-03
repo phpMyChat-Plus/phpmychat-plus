@@ -6,7 +6,7 @@
 // notification messages or not)
 
 $CondForQuery = "";
-$IgnoreList = "'SYS enter','SYS exit','SYS delreg','SYS promote','SYS demote','SYS updateusers','SYS inviteTo','SYS inviteFrom','SYS topic','SYS announce','SYS welcome'";
+$IgnoreList = "'SYS enter','SYS exit','SYS delreg','SYS promote','SYS demote','SYS inviteTo','SYS inviteFrom','SYS topic','SYS announce','SYS welcome'";
 if (isset($Ign) && $Ign != "") $IgnoreList = ",'".str_replace(",","','",addslashes(urldecode($Ign)))."'";
 if ($IgnoreList != "") $CondForQuery = "username NOT IN (${IgnoreList}) AND ";
 $CondForQuery .= "(address IN ('$U',' *') OR (room = '$R' AND (address = '' OR username = '$U')) OR (room = '$R' AND username = 'SYS room'))";

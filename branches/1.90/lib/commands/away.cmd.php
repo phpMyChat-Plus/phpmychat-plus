@@ -23,7 +23,7 @@ if ($awaystat != 2) {
 	// Text formating tags
 	if(C_HTML_TAGS_KEEP == "none")
 	{
-		if(C_HTML_TAGS_SHOW == 0)
+		if(!C_HTML_TAGS_SHOW)
 		{
 			// eliminates every HTML like tags
 			$xtra = ereg_replace("<[^>]+>", "", $xtra);
@@ -47,7 +47,7 @@ if ($awaystat != 2) {
 			{
 				$xtra = preg_replace("/&lt;([ubi]?)&gt;(.*?)&lt;(\/\\1)&gt;/i","<\\1>\\2<\\3>",$xtra);
 			}
-			if(C_HTML_TAGS_SHOW == 0)
+			if(!C_HTML_TAGS_SHOW)
 			{
 				$xtra = preg_replace("/&lt;\/?[ubi]?&gt;/i","",$xtra);
 			}

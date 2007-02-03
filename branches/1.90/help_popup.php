@@ -2,7 +2,7 @@
 if (isset($HTTP_GET_VARS["L"])) $L = $HTTP_GET_VARS["L"];
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 if (isset($HTTP_GET_VARS["Ver"])) $Ver = $HTTP_GET_VARS["Ver"];
 // Color Input Box mod by Ciprian
@@ -88,7 +88,7 @@ if(SHOW_ETIQ_IN_HELP == "1")
 ?>
 <TABLE BORDER=0 CELLPADDING=3 WIDTH=574 CLASS="table">
 	<TR><TD ALIGN="CENTER" CLASS="tabtitle"><?php echo(L_HELP_ETIQ_1); ?></TD></TR>
-	<TR><TD ALIGN="<?php echo($CellAlign); ?>"><?php echo(L_HELP_ETIQ_2); ?><br>
+	<TR><TD ALIGN="<?php echo($CellAlign); ?>"><?php echo(L_HELP_ETIQ_2); ?><br />
 		<SPAN CLASS="ChatCopy" dir="LTR">
 <?php
 include_once("./admin/mail4admin.lib.php");
@@ -102,9 +102,9 @@ else echo(C_ADMIN_NAME);
 ?>
 </SPAN>
 </TD></TR>
-	<TR><TD ALIGN="<?php echo($CellAlign); ?>"><br><b><?php echo(L_HELP_ETIQ_3); ?></b><br><ul><li><?php echo(L_HELP_ETIQ_4); ?></li></TD></TR>
+	<TR><TD ALIGN="<?php echo($CellAlign); ?>"><br /><b><?php echo(L_HELP_ETIQ_3); ?></b><br /><ul><li><?php echo(L_HELP_ETIQ_4); ?></li></TD></TR>
 </TABLE>
-<br>
+<br />
 <?php
 }
 if (C_HTML_TAGS_KEEP != "none")
@@ -116,7 +116,7 @@ if (C_HTML_TAGS_KEEP != "none")
 		<TR><TD ALIGN="<?php echo($CellAlign); ?>"><?php echo(L_HELP_FMT_1); ?></TD></TR>
 		<TR><TD ALIGN="<?php echo($CellAlign); ?>"><?php echo(L_HELP_FMT_2); ?></TD></TR>
 	</TABLE>
-	<br>
+	<br />
 	<?php
 }
 ?>
@@ -153,7 +153,7 @@ if (C_HTML_TAGS_KEEP != "none")
 	if (C_BANISH != "0")
 	{
 		?>
-		<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2><A HREF="#" onClick="cmd2Input('/ban',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/ban <BDO dir="<?php echo($TextDir); ?>">[*]</BDO> {<?php echo(L_HELP_USR); ?>}</A></TH></TR>
+		<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2><A HREF="#" onClick="cmd2Input('/ban',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/ban <BDO dir="<?php echo($TextDir); ?>">[*]</BDO> {<?php echo(L_HELP_USR); ?>} [<?php echo(L_HELP_REASON); ?>]</A></TH></TR>
 		<TR>
 			<TD WIDTH=10>&nbsp;</TD>
 			<TD><?php echo(L_HELP_CMD_19); ?></TD>
@@ -240,7 +240,7 @@ if (C_HTML_TAGS_KEEP != "none")
 	if ($CookieStatus == "a" || $CookieStatus == "m")
 	{
 		?>
-	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2><A HREF="#" onClick="cmd2Input('/kick',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/kick {<?php echo(L_HELP_USR); ?>}</A></TH></TR>
+	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2><A HREF="#" onClick="cmd2Input('/kick',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/kick {<?php echo(L_HELP_USR); ?>} [<?php echo(L_HELP_REASON); ?>]</A></TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
 		<TD><?php echo(L_HELP_CMD_9); ?></TD>
@@ -249,19 +249,19 @@ if (C_HTML_TAGS_KEEP != "none")
 	}
 	?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/me',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/me {<?php echo(L_HELP_MSG); ?>}</A><br>
+	<A HREF="#" onClick="cmd2Input('/me',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/me {<?php echo(L_HELP_MSG); ?>}</A><br />
 	<A HREF="#" onClick="cmd2Input('/mr',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/mr {<?php echo(L_HELP_MSG); ?>}</A>
 	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
-		<TD><?php echo(L_HELP_CMD_20); ?><br><?php echo(L_HELP_CMD_30); ?></TD>
+		<TD><?php echo(L_HELP_CMD_20); ?><br /><?php echo(L_HELP_CMD_30); ?></TD>
 	</TR>
 <?php
 if (C_ENABLE_PM)
 {
 ?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-		<A HREF="#" onClick="cmd2Input('/msg',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/msg <?php echo("{".L_HELP_USR."} {".L_HELP_MSG."}"); ?></A><br>
+		<A HREF="#" onClick="cmd2Input('/msg',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/msg <?php echo("{".L_HELP_USR."} {".L_HELP_MSG."}"); ?></A><br />
 		<A HREF="#" onClick="cmd2Input('/to',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/to <?php echo("{".L_HELP_USR."} {".L_HELP_MSG."}"); ?></A>
 	</TH></TR>
 	<TR>
@@ -298,19 +298,19 @@ if (C_ENABLE_PM)
 	{
 		?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/promote',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/promote {<?php echo(L_HELP_USR); ?>}</A><br>
+	<A HREF="#" onClick="cmd2Input('/promote',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/promote {<?php echo(L_HELP_USR); ?>}</A><br />
 	<A HREF="#" onClick="cmd2Input('/demote',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/demote [*] {<?php echo(L_HELP_USR); ?>}</A>
 	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
-		<TD><?php echo(L_HELP_CMD_14); ?><br><?php echo(L_HELP_CMD_29); ?></TD>
+		<TD><?php echo(L_HELP_CMD_14); ?><br /><?php echo(L_HELP_CMD_29); ?></TD>
 	</TR>
 <?php
 };
 ?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-		<A HREF="#" onClick="cmd2Input('/quit',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/quit [<?php echo(L_HELP_MSG); ?>]</A><br>
-		<A HREF="#" onClick="cmd2Input('/exit',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/exit [<?php echo(L_HELP_MSG); ?>]</A><br>
+		<A HREF="#" onClick="cmd2Input('/quit',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/quit [<?php echo(L_HELP_MSG); ?>]</A><br />
+		<A HREF="#" onClick="cmd2Input('/exit',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/exit [<?php echo(L_HELP_MSG); ?>]</A><br />
 		<A HREF="#" onClick="cmd2Input('/bye',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/bye [<?php echo(L_HELP_MSG); ?>]</A>
 	</TH></TR>
 	<TR>
@@ -340,7 +340,7 @@ if (C_ENABLE_PM)
 		if ($Ver == "H")
 		{
 			?>
-			<br><A HREF="#" onClick="cmd2Input('/last',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/last <BDO dir="<?php echo($TextDir); ?>">[n]</BDO></A>
+			<br /><A HREF="#" onClick="cmd2Input('/last',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/last <BDO dir="<?php echo($TextDir); ?>">[n]</BDO></A>
 			<?php
 		};
 		?>
@@ -370,8 +370,8 @@ if (C_ENABLE_PM)
 		?>
 	<!-- The topic command doc -->
   <TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-  	<A HREF="#" onClick="cmd2Input('/topic', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/topic {<?php echo(L_HELP_TOP); ?>}</A><br>
-  	<A HREF="#" onClick="cmd2Input('/topic top reset', false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/topic top reset</A>
+  	<A HREF="#" onClick="cmd2Input('/topic', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/topic [*] {<?php echo(L_HELP_TOP); ?>}</A><br />
+  	<A HREF="#" onClick="cmd2Input('/topic top reset', false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/topic [*] top reset</A>
   </TH></TR>
   <TR>
     <TD WIDTH=10>&nbsp;</TD>
@@ -392,7 +392,7 @@ if (C_ENABLE_PM)
 {
 ?>
   <TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-  	<A HREF="#" onClick="cmd2Input('/wisp', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/wisp <?php echo("{".L_HELP_USR."} {".L_HELP_MSG."}"); ?></A><br>
+  	<A HREF="#" onClick="cmd2Input('/wisp', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/wisp <?php echo("{".L_HELP_USR."} {".L_HELP_MSG."}"); ?></A><br />
   	<A HREF="#" onClick="cmd2Input('/whisp', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/whisp <?php echo("{".L_HELP_USR."} {".L_HELP_MSG."}"); ?></A>
 	</TH></TR>
   <TR>
@@ -407,9 +407,9 @@ if (C_ENABLE_PM)
 <!-- Color Picker Text Input Box help start -->
 <TABLE BORDER=0 CELLPADDING=3 WIDTH=574 CLASS="table">
 	<TR><TD ALIGN="CENTER" CLASS="tabtitle"><?php echo(L_COL_HELP_TITLE); ?></TD></TR>
-	<TR><TD ALIGN="<?php echo($CellAlign); ?>"><b><?php echo(L_COL_HELP_SUB1); ?></b><br><?php echo(L_COL_HELP_P1); ?><br><br></TD></TR>
-	<TR><TD ALIGN="<?php echo($CellAlign); ?>"><b><?php echo(L_COL_HELP_SUB2); ?></b><br><?php echo(L_COL_HELP_P2); ?><br><br><center><?php echo(COLOR_LIST); ?></center><br><?php echo(L_COL_HELP_P2a); ?><br><br></TD></TR>
-	<TR><TD ALIGN="<?php echo($CellAlign); ?>"><b><?php echo(L_COL_HELP_SUB3); ?></b><br><?php echo(L_COLOR_HEAD_SETTINGS); ?><br><?php if (COLOR_FILTERS == 1) echo(L_COLOR_HEAD_SETTINGSa."<br>"); ?><u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo("Administrator"); elseif ($CookieStatus == "m") echo("Moderator"); elseif ($CookieStatus == "u") echo("Guest (Normal)"); else echo("Registered (Normal)");?></b><br><?php if (COLOR_FILTERS == 1) echo("<br>".L_COL_HELP_P3."<br>"); ?><?php echo(L_COL_HELP_P3a); ?><br><br></TD></TR>
+	<TR><TD ALIGN="<?php echo($CellAlign); ?>"><b><?php echo(L_COL_HELP_SUB1); ?></b><br /><?php echo(L_COL_HELP_P1); ?><br /></TD></TR>
+	<TR><TD ALIGN="<?php echo($CellAlign); ?>"><b><?php echo(L_COL_HELP_SUB2); ?></b><br /><?php echo(L_COL_HELP_P2); ?><br /><br /><center><?php echo(COLOR_LIST); ?></center><?php echo(L_COL_HELP_P2a); ?><br /></TD></TR>
+	<TR><TD ALIGN="<?php echo($CellAlign); ?>"><b><?php echo(L_COL_HELP_SUB3); ?></b><br /><?php echo(L_COLOR_HEAD_SETTINGS); ?><br /><?php if (COLOR_FILTERS == 1) echo(L_COLOR_HEAD_SETTINGSa."<br />"); ?><u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo("Administrator"); elseif ($CookieStatus == "m") echo("Moderator"); elseif ($CookieStatus == "u") echo("Guest (Normal)"); else echo("Registered (Normal)");?></b><br /><?php if (COLOR_FILTERS == 1) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?><br /></TD></TR>
 <!-- Color Picker Text Input Box help end -->
 <?php
 if (C_USE_SMILIES == "1")
@@ -442,7 +442,7 @@ if (C_USE_SMILIES == "1")
 	unset($ResultTbl);
 	?>
 	</TABLE>
-	<br>
+	<br />
 	<?php
 };
 ?>

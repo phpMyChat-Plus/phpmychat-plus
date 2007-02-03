@@ -1,4 +1,5 @@
 <?php
+// Clean Rooms panel
 // This sheet is diplayed when the admin wants to clean some rooms
 
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.

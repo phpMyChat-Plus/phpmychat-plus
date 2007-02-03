@@ -1,5 +1,6 @@
 <?php
-// First room and the default for new created ones
+// Third private room skin ("Staff Only" as default)
+// "Pink & magenta" skin for phpMyChat plus - by Ciprian
 
 // Get the names and values for vars sent by the script that called this one
 if (isset($HTTP_GET_VARS))
@@ -32,79 +33,76 @@ $small = round(0.8 * $medium);
 
 /*	Color Input Box mod by Ciprian
 Here you can customize the default color for messages window general look
-the font for text messages, colors, some popup windows' text color, aso)
-Optionally you might want to replace color: #000000; in the .time block with:
- 	color: <?php echo($CD); ?>;
+the font for text messages, colors, some popup windows' text color, aso.
 This will make time, sender and message color have the same default color defined bellow.*/
 
-$CD = "black";			//default messages color
+$CD = "magenta";			//default messages color, Filter code: FF00FF (fuchsia)
 
 ?>
 
 BODY
 {
-	background-color: #4682b4;
-	color: #ffe4e1;
+	background-color: <?php echo($CD); ?>;
+	color: #FFFFFF;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
 	margin: 5px;
 	text-indent: 0;
-	scrollbar-3dlight-color: #00ffff;
-	scrollbar-arrow-color: #ffff00;
-	scrollbar-base-color: #191970;
-	scrollbar-track-color: #ffdead;
-	scrollbar-darkshadow-color: #0000ff;
-	scrollbar-face-color: #37658d;
-	scrollbar-highlight-color: #ffff00;
-	scrollbar-shadow-color: #808080;
+	scrollbar-3dlight-color: <?php echo($CD); ?>;
+	scrollbar-arrow-color: #FFFFFF;
+	scrollbar-base-color: #FFE4E1;
+	scrollbar-track-color: #D766AC;
+	scrollbar-darkshadow-color: <?php echo($CD); ?>;
+	scrollbar-face-color: <?php echo($CD); ?>;
+	scrollbar-highlight-color: #FFFFFF;
+	scrollbar-shadow-color: #D766AC;
 }
 
 BODY.frame
 {
-	background-color: #4682b4;
-	color: #ffe4e1;
+	background-color: <?php echo($CD); ?>;
+	color: #FFE4E1;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
 	margin: 5px;
 	text-indent: 0;
-	scrollbar-3dlight-color: #00ffff;
-	scrollbar-arrow-color: #ffff00;
-	scrollbar-base-color: #191970;
-	scrollbar-track-color: #ffdead;
-	scrollbar-darkshadow-color: #0000ff;
-	scrollbar-face-color: #37658d;
-	scrollbar-highlight-color: #ffff00;
-	scrollbar-shadow-color: #808080;
+	scrollbar-3dlight-color: #FFFFFF;
+	scrollbar-arrow-color: #FFFFFF;
+	scrollbar-base-color: #636363;
+	scrollbar-track-color: #333333;
+	scrollbar-darkshadow-color: #000000;
+	scrollbar-face-color: #000000;
+	scrollbar-highlight-color: #636363;
+	scrollbar-shadow-color: #333333;
 }
-
 
 BODY.mainframe
 {
-	background-color: #dcdcdc;
+	background-color: #FFE4E1;
 	color: <?php echo($CD); ?>;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
 	margin: 5px;
-	scrollbar-3dlight-color: #00ffff;
-	scrollbar-arrow-color: #ffff00;
-	scrollbar-base-color: #191970;
-	scrollbar-track-color: #ffdead;
-	scrollbar-darkshadow-color: #0000ff;
-	scrollbar-face-color: #37658d;
-	scrollbar-highlight-color: #ffff00;
-	scrollbar-shadow-color: #808080;
+	scrollbar-3dlight-color: <?php echo($CD); ?>;
+	scrollbar-arrow-color: #FFFFFF;
+	scrollbar-base-color: #FFE4E1;
+	scrollbar-track-color: #D766AC;
+	scrollbar-darkshadow-color: <?php echo($CD); ?>;
+	scrollbar-face-color: <?php echo($CD); ?>;
+	scrollbar-highlight-color: #FFFFFF;
+	scrollbar-shadow-color: #D766AC;
 }
 
 TABLE, TR, TD, TH
 {
-	color: #000000;
+	color: #800080;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
 }
 
 TD.whois, .whois
 {
-	color: #CCCCFF;
+	color: #FFFFFF;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 600;
 }
@@ -117,21 +115,21 @@ TH, B
 A
 {
 	text-decoration: none;
-	color: #e6e68f;
+	color: #FFFFFF;
 	font-weight: 600;
 }
 
 A:hover, A:active
 {
-	color: #FF9900;
+	color: #800080;
 	text-decoration: underline;
 }
 
 A.user, A.user:active
 {
 	text-decoration: none;
-	color: #CCCCFF;
-	font-weight: 600;
+	color: #FFFFFF;
+	font-weight: 400;
 }
 
 A.admin, A.admin:active
@@ -157,16 +155,16 @@ A.sender, A.sender:active
 
 INPUT, SELECT, TEXTAREA
 {
-	background: #fffff0;
+	background: #FFE4E1;
 }
 
 .msg
 {
 	margin-top: 0px;
 	margin-bottom: 2px;
-	margin-left: <?php echo($Charset == "windows-1256" ? "5" : "55"); ?>px;
-	margin-right: <?php echo($Charset == "windows-1256" ? "55" : "5"); ?>px;
-	text-indent: -50px;
+	margin-left: <?php #echo($Charset == "windows-1256" ? "5" : "55"); ?>0px;
+	margin-right: <?php #echo($Charset == "windows-1256" ? "55" : "5"); ?>0px;
+	text-indent: 0px;
 }
 
 .msg2
@@ -174,29 +172,29 @@ INPUT, SELECT, TEXTAREA
 	background: #FFFAFA;
 	margin-top: 0px;
 	margin-bottom: 0px;
-	margin-left: <?php echo($Charset == "windows-1256" ? "5" : "55"); ?>px;
-	margin-right: <?php echo($Charset == "windows-1256" ? "55" : "5"); ?>px;
-	text-indent: -50px;
+	margin-left: <?php #echo($Charset == "windows-1256" ? "5" : "55"); ?>0px;
+	margin-right: <?php #echo($Charset == "windows-1256" ? "55" : "5"); ?>0px;
+	text-indent: 0px;
 }
 
 .title
 {
-	color: #CCCCFF;
+	color: #FFFFFF;
 	font-size: <?php echo($large); ?>pt;
 	font-weight: 800;
 }
 
 .table
 {
-	background-color: #CCCCFF;
-	color: #000000;
+	background-color: #FFFFFF;
+	color: #800080;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
 }
 
 .tabtitle
 {
-	background-color: #666699;
+	background-color: <?php echo($CD); ?>;
 	color: #FFFFFF;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 800;
@@ -218,12 +216,12 @@ INPUT, SELECT, TEXTAREA
 {
 	unicode-bidi: embed;
 	color: <?php echo($CD); ?>;
-	font-size: 8pt;
+	font-size: <?php echo($FontSize); ?>;;
 }
 
 .notify
 {
-	color: #666699;
+	color: #800080;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 600;
 }
@@ -239,17 +237,17 @@ INPUT, SELECT, TEXTAREA
 {
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 600;
-	background-color: #4682b4;
-	color: #ffe4e1;
-	border-bottom: 1pt solid #ffe4e1;
+	background-color:  <?php echo($CD); ?>;
+	color: #FFFFFF;
+	border-bottom: 1pt solid #FFFFFF;
 };
 
 .menuTitle
 {
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 600;
-	background-color: #4682b4;
-	color: #ffe4e1;
+	background-color:  <?php echo($CD); ?>;
+	color: #FFFFFF;
 };
 
 .thumbIndex
@@ -257,31 +255,31 @@ INPUT, SELECT, TEXTAREA
 	font-size: <?php echo($small); ?>pt;
 	font-weight: 600;
 	background-color: #9999CC;
-	color: #ffe4e1;
-	border-top: 1pt solid #ffe4e1;
-	border-left: 1pt solid #ffe4e1;
-	border-right: 1pt solid #ffe4e1;
+	color: #FFFFFF;
+	border-top: 1pt solid #FFFFFF;
+	border-left: 1pt solid #FFFFFF;
+	border-right: 1pt solid #FFFFFF;
 };
 
 .thumbIndex A
 {
 	text-decoration: none;
-	color: #ffe4e1;
+	color: #FFFFFF;
 	font-weight: 600;
 }
 
 .thumbIndex A.selected
 {
 	text-decoration: none;
-	color: #ffe4e1;
+	color: #FFFFFF;
 	font-weight: 600;
 }
 
 .thumbIndex A:hover, .thumbIndex A:active
 {
 	text-decoration: none;
-	background: #4682b4;
-	color: #FF9933;
+	background:  <?php echo($CD); ?>;
+	color: #800080;
 }
 
 .success

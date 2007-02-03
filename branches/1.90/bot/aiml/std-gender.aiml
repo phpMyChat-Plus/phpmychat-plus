@@ -47,6 +47,7 @@
 <li value="bobby">male</li>
 <li value="brad">male</li>
 <li value="brandon">male</li>
+<li value="ciprian">male</li>
 <li value="mark">male</li>
 <li value="max">male</li>
 <li value="jon">male</li>
@@ -107,6 +108,7 @@
 <li value="amber">female</li>
 <li value="amy">female</li>
 <li value="angel">female</li>
+<li value="andreea">female</li>
 <li value="angela">female</li>
 <li value="ann">female</li>
 <li value="anna">female</li>
@@ -144,9 +146,13 @@
 <li value="erika">female</li>
 <li value="erin">female</li>
 <li value="eva">female</li>
+<li value="gabriela">female</li>
 <li value="gina">female</li>
 <li value="heather">female</li>
 <li value="helen">female</li>
+<li value="ingrid">female</li>
+<li value="ioana">female</li>
+<li value="iulia">female</li>
 <li value="jackie">female</li>
 <li value="jan">female</li>
 <li value="jane">female</li>
