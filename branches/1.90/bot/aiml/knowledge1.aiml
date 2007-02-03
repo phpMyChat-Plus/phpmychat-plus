@@ -1,0 +1,2021 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<aiml>
+<category>
+<pattern>WHAT IS PRIMATE</pattern>
+<template>
+The highest order of mammals. It includes man, together with the apes and monkeys.
+<think>
+<set name="it">
+<srai>
+PUSH
+<set name="topic">Primate</set>
+</srai>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS WOMAN</pattern>
+<template>The opposite of man.</template>
+</category>
+<category>
+<pattern>WHAT IS THERMOMETER</pattern>
+<template>
+<think>
+<set name="it">
+<set name="topic">A device for measuring temperature.</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A THERMOMETER</pattern>
+<template>
+<think>
+<set name="it">
+<set name="topic">A device for measuring temperature.</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>HOW MANY LITERS _ CUP</pattern>
+<template>236.6 milliliters</template>
+</category>
+<category>
+<pattern>HOW MANY LITERS _ GALLON</pattern>
+<template>3.785 liters</template>
+</category>
+<category>
+<pattern>HOW MANY LITERS _ GILL</pattern>
+<template>118 milliliters</template>
+</category>
+<category>
+<pattern>HOW MANY LITERS _ PINT</pattern>
+<template>473.2 milliliters</template>
+</category>
+<category>
+<pattern>HOW MANY LITERS _ QUART</pattern>
+<template>946.3 milliliters</template>
+</category>
+<category>
+<pattern>HOW MANY LITERS _ TABLESPOON</pattern>
+<template>14.79 milliliters</template>
+</category>
+<category>
+<pattern>HOW MANY LITERS _ TEASPOON</pattern>
+<template>4.929 milliliters</template>
+</category>
+<category>
+<pattern>HOW MANY MILES *</pattern>
+<template>More than I would ever want to drive.</template>
+</category>
+<category>
+<pattern>HOW MANY MONTHS *</pattern>
+<template>12 months per year.</template>
+</category>
+<category>
+<pattern>HOW MANY NANOMETRES *</pattern>
+<template>I spell it "nanometers".</template>
+</category>
+<category>
+<pattern>HOW MANY OF *</pattern>
+<template>Perhaps 50%.</template>
+</category>
+<category>
+<pattern>HOW MANY OUNCES _ CUP</pattern>
+<template>8 ounces</template>
+</category>
+<category>
+<pattern>HOW MANY OUNCES _ GALLON</pattern>
+<template>128 ounces</template>
+</category>
+<category>
+<pattern>HOW MANY OUNCES _ GILL</pattern>
+<template>4 ounces</template>
+</category>
+<category>
+<pattern>HOW MANY OUNCES _ PINT</pattern>
+<template>16 ounces</template>
+</category>
+<category>
+<pattern>HOW MANY OUNCES _ QUART</pattern>
+<template>32 ounces</template>
+</category>
+<category>
+<pattern>HOW MANY OUNCES _ TABLESPOON</pattern>
+<template>0.5 ounce</template>
+</category>
+<category>
+<pattern>HOW MANY OUNCES _ TEASPOON</pattern>
+<template>1/6 ounce</template>
+</category>
+<category>
+<pattern>WHO INVENTED AIRPLANES</pattern>
+<template>The Wright brothers invented the airplane in 1903.</template>
+</category>
+<category>
+<pattern>WHO INVENTED AUTOMOBILES</pattern>
+<template>Many people invented the car, but Henry Ford was the first to develop the successful mass production assembly lines for cars.</template>
+</category>
+<category>
+<pattern>WHO INVENTED ELECTRICITY</pattern>
+<template>Electricity was not invented but discovered, probably first by the ancient Chinese.</template>
+</category>
+<category>
+<pattern>WHO INVENTED JAVA</pattern>
+<template>
+Java was first developed by James Gosling and colleagues at Sun.
+<think>
+<set name="it">
+<set name="topic">JAVA</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHO INVENTED LINUX</pattern>
+<template>Linus Torvalds, along with many open source developers, and the Free Software Foundation GNU.</template>
+</category>
+<category>
+<pattern>WHO INVENTED PAPER</pattern>
+<template>
+Paper was first developed by the Ancient Egyptians.
+<think>
+<set name="it">
+<set name="topic">PAPER</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHO INVENTED RADIO</pattern>
+<template>Marconi developed the first practical wireless.</template>
+</category>
+<category>
+<pattern>WHO INVENTED SETL</pattern>
+<template>SETL was invented by Jacob Schwartz of NYU in 1969.</template>
+</category>
+<category>
+<pattern>WHO INVENTED STEEL</pattern>
+<template>The first practical steel manufacturing process was invented by Bessemer.</template>
+</category>
+<category>
+<pattern>WHO INVENTED TELEVISION</pattern>
+<template>Philo T. Farnsworth, originally from Maine, developed the first practical TV picture tube.</template>
+</category>
+<category>
+<pattern>WHO INVENTED THE GENERATOR</pattern>
+<template>James Clerk Maxwell demonstrated the electric generator.</template>
+</category>
+<category>
+<pattern>WHO INVENTED THE HELICOPTER</pattern>
+<template>
+Sikorsky.
+<think>
+<set name="it">
+<set name="topic">Sikorsky</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHO INVENTED THE LIGHT BULB</pattern>
+<template>
+Thomas Edison invented
+<set name="it">the light bulb.</set>
+.
+</template>
+</category>
+<category>
+<pattern>WHO INVENTED THE PC</pattern>
+<template>Many people contributed to it. But proper credit has to be given to Steve Wozniak, who created an integrated affordable PC platform in the Apple I.</template>
+</category>
+<category>
+<pattern>WHO INVENTED THE STEAM ENGINE</pattern>
+<template>James Watt developed the first practical steam engine.</template>
+</category>
+<category>
+<pattern>WHO INVENTED THE TELEPHONE</pattern>
+<template>Alexander Graham Bell demonstrated the first practical voice telephone in 1876.</template>
+</category>
+<category>
+<pattern>HOW FAR IS ALPHA CENTAURI</pattern>
+<template>Four light years.</template>
+</category>
+<category>
+<pattern>HOW LONG IS A MINUTE</pattern>
+<template>sixty seconds.</template>
+</category>
+<category>
+<pattern>WHAT ARE CARROTS</pattern>
+<template>Orange colored cone shaped root vegetables.</template>
+</category>
+<category>
+<pattern>WHAT ARE FAIRY TALES</pattern>
+<template>Public domain stories for children about exaggerated eccentric characters in fantasy nightmare situations.</template>
+</category>
+<category>
+<pattern>WHAT ARE PUSH UPS</pattern>
+<template>exercise</template>
+</category>
+<category>
+<pattern>WHAT BRAND IS A MAC</pattern>
+<template>Apple</template>
+</category>
+<category>
+<pattern>WHAT BRAND IS MAC</pattern>
+<template>Apple</template>
+</category>
+<category>
+<pattern>WHAT DOES SUCK</pattern>
+<template>a vacuum</template>
+</category>
+<category>
+<pattern>WHAT DOES THE WORD SHOE MEAN</pattern>
+<template>A covering for the foot.</template>
+</category>
+<category>
+<pattern>WHAT GOES WITHOUT SAYING</pattern>
+<template>It is just an expression.</template>
+</category>
+<category>
+<pattern>WHAT HAPPENED ON SEPTEMBER 11</pattern>
+<template>The World Trade Center was destroyed</template>
+</category>
+<category>
+<pattern>WHAT IS 1 1</pattern>
+<template>Two</template>
+</category>
+<category>
+<pattern>WHAT IS 1</pattern>
+<template>The successor to zero.</template>
+</category>
+<category>
+<pattern>WHAT IS 1 PLUS 1</pattern>
+<template>Two.</template>
+</category>
+<category>
+<pattern>WHAT IS 1 PLUS 2</pattern>
+<template>Three. Can I ask you math questions too?</template>
+</category>
+<category>
+<pattern>WHAT IS 2012</pattern>
+<template>The end of the world in the Mayan calendard.</template>
+</category>
+<category>
+<pattern>WHAT IS 2 2</pattern>
+<template>Four.</template>
+</category>
+<category>
+<pattern>WHAT IS 2 3</pattern>
+<template>Five fingers.</template>
+</category>
+<category>
+<pattern>WHAT IS 23</pattern>
+<template>
+<set name="it">23</set>
+is the meaning of life.
+</template>
+</category>
+<category>
+<pattern>WHAT IS 2 AND 2</pattern>
+<template>Four.</template>
+</category>
+<category>
+<pattern>WHAT IS 2 PLUS 2</pattern>
+<template>Four.</template>
+</category>
+<category>
+<pattern>WHAT IS 2 TIMES 2</pattern>
+<template>Oh that's a tough one, isn't it. Two times two is four.</template>
+</category>
+<category>
+<pattern>WHAT IS 42</pattern>
+<template>The answer to life, the universe, and everyting, according to Dougas Adams.</template>
+</category>
+<category>
+<pattern>WHAT IS 52</pattern>
+<template>The number of cards in a deck.</template>
+</category>
+<category>
+<pattern>WHAT IS 5 PLUS 5</pattern>
+<template>V plus V = X.</template>
+</category>
+<category>
+<pattern>WHAT IS 911</pattern>
+<template>September 11, 2001?</template>
+</category>
+<category>
+<pattern>WHAT IS A BAGEL</pattern>
+<template>A doughnut-shaped piece of bread.</template>
+</category>
+<category>
+<pattern>WHAT IS A BALALAIKA</pattern>
+<template>Musical Instrument.</template>
+</category>
+<category>
+<pattern>WHAT IS A BANANA</pattern>
+<template>
+A banana is an oblong yellow tropical fruit high in potassium and so good for your brain. Why don't you have one now?
+<think>
+<set name="it">
+<set name="topic">banana</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A BARCODE</pattern>
+<template>
+A barcode? like a lot of things, that depends who you ask. If you ask a retail store clerk, he'll say its the rectangular series of thin and thick black lines that code product information on the packages he runs past the laser barcode reader thingy at the checkout counter, which renders his job so mindless that your average invertebrate could handle it, and with better manners. if you ask a fundamentalist christian, they might say that barcodes are the sign of the devil.
+<think>
+<set name="it">
+<set name="topic">barcode</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A BASE HIT</pattern>
+<template>
+A base hit is either a baseball term denoting a hit that advances the offensive team one base, or an adolescent term which I find too distasteful to describe.
+<think>
+<set name="it">
+<set name="topic">base hit</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS ABBA</pattern>
+<template>
+<random>
+<li>Abba is a father, it is the title of a bishop in the Syrian, Coptic, and Ethiopian Christian churches.</li>
+<li>Abba means father in Hebrew.It is used as an appelation of respect.</li>
+<li>Abba was this real cool 'seventies band man.</li>
+<li>Storm, Bjorn, Benny and Agnetha.</li>
+</random>
+. .
+</template>
+</category>
+<category>
+<pattern>WHAT IS ABCDEFG</pattern>
+<template>The beginning of the alphabet.</template>
+</category>
+<category>
+<pattern>WHAT IS A BEAR</pattern>
+<template>
+A bear is a large furry animal with lots of muscles, teeth, and claws whom you should not irritate. They are especially jealous of their food, their sleep, and their young.
+<think>
+<set name="it">
+<set name="topic">bear</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A BEE</pattern>
+<template>
+A bee is a flying insect with black and yellow stripes and a nasty sting.
+<think>
+<set name="it">
+<set name="topic">bee</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A BENZENE</pattern>
+<template>Some kind of chemical? Like lighter fluid?</template>
+</category>
+<category>
+<pattern>WHAT IS A BICYCLE</pattern>
+<template>A two-wheeled human powered mechanical transportation device.</template>
+</category>
+<category>
+<pattern>WHAT IS A BIKE</pattern>
+<template>A bicycle or a motorcycle?</template>
+</category>
+<category>
+<pattern>WHAT IS A BIRD</pattern>
+<template>They are thought to be descendants of dinsosaurs.</template>
+</category>
+<category>
+<pattern>WHAT IS A BISCUIT</pattern>
+<template>Isn't it the same as a cookie?</template>
+</category>
+<category>
+<pattern>WHAT IS A BLACK HOLE</pattern>
+<template>
+<set name="it">A black hole</set>
+is a collapsed star where the pull of gravity is so strong, that not even light itself can escape.
+</template>
+</category>
+<category>
+<pattern>WHAT IS A BLAST</pattern>
+<template>
+A blast is an explosion, and/or a lot of fun. Are we having a blast, or what?
+<think>
+<set name="it">
+<set name="topic">blast</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A BLONDE</pattern>
+<template>
+A blonde is someone who is reputedly having more fun than you if you are not. what do you think? do blonde's have more fun?
+<think>
+<set name="it">
+<set name="topic">blonde</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A BOAT</pattern>
+<template>
+A boat is a waterborne vessel used to bear humans and their freight.
+<think>
+<set name="it">
+<set name="topic">boat</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A BOOK</pattern>
+<template>
+<set name="it">A book</set>
+is a paper output format, invented by Gutenberg.
+</template>
+</category>
+<category>
+<pattern>WHAT IS A BOT</pattern>
+<template>
+A Bot is a software robot. Some people call us "Agents".
+<think>
+<set name="it">
+<set name="topic">bot</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A BOX</pattern>
+<template>
+A box is something that, if you are in one, you should get out of, and if you are out of one, you probably miss it sometimes.
+<think>
+<set name="it">
+<set name="topic">box</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A BOY</pattern>
+<template>A male human, or a male human child.</template>
+</category>
+<category>
+<pattern>WHAT IS A BRA</pattern>
+<template>
+A bra is an adult human female's undershirt. They are a barbaric custom that serve largely to restrain and conceal beauty.
+<think>
+<set name="it">
+<set name="topic">bra</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A BREEDER</pattern>
+<template>
+A breeder is a human or other biological entity that produces offspring.
+<think>
+<set name="it">
+<set name="topic">breeder</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A BRITISH PENCE</pattern>
+<template>
+A british pence is a unit of money used in the united kingdom by people who ought to know how to cook better by now.
+<think>
+<set name="it">
+<set name="topic">british pence</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS ABSINTHE</pattern>
+<template>An anise-flavored, high-proof liqueur which also contains the sap of wormwood, an allegedly toxic intoxicant.</template>
+</category>
+<category>
+<pattern>WHAT IS ABSOLUTE TRUTH</pattern>
+<template>That which is self-evident.</template>
+</category>
+<category>
+<pattern>WHAT IS ABSURDISM</pattern>
+<template>
+Absurdism is the philosophy that we exist in a meaningless, irrational universe.
+<think>
+<set name="it">
+<set name="topic">ABSURDISM</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A BUFFER</pattern>
+<template>
+A buffer is a term used in hydraulics and information science to denote an holding tank or memory address used to hold water or data temporarily, especially in case of overflow. Buffers act to reduce variance to within system parameters.
+<think>
+<set name="it">
+<set name="topic">buffer</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A BURN RATE</pattern>
+<template>Amount of money spent per month on a startup venture.</template>
+</category>
+<category>
+<pattern>WHAT IS A BUS</pattern>
+<template>
+A bus is a long passenger vehicle, or, in computer science, a wide channel for data flow.
+<think>
+<set name="it">
+<set name="topic">bus</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A BYTE</pattern>
+<template>
+A byte is a binary computer language 'word', consisting of 8 bits, or 8 'on-off' switches. a megabyte is a million such computer words, enough to store the information content of an average encyclopedia.
+<think>
+<set name="it">
+<set name="topic">byte</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A CALCULATOR</pattern>
+<template>
+A calculator is any device used to perform arithmetical operations because humans are generally so painfully slow at them.
+<think>
+<set name="it">
+<set name="topic">calculator</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A CALENDAR</pattern>
+<template>
+A calendar is any device used to track and calculate time on the order of days, months and years. it seems that many humans can't decide what to do next unless they know what day of the week it is, so calendars are very popular
+<think>
+<set name="it">
+<set name="topic">calendar</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A CANTON</pattern>
+<template>A canton is like a state or province.</template>
+</category>
+<category>
+<pattern>WHAT IS A CARNEGIE MELLON</pattern>
+<template>
+A carnegie mellon is either a rich fruit, or a rich university.
+<think>
+<set name="it">
+<set name="topic">carnegie mellon</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A CAR</pattern>
+<template>A car is what humans use to drive around in. Robots drive cars too.</template>
+</category>
+<category>
+<pattern>WHAT IS A CARROT</pattern>
+<template>
+A carrot is a delicious and nutritious edible orange tuber that can be eaten raw, juiced, or cooked. If humans eat enough of them, you turn orange, I hear.
+<think>
+<set name="it">
+<set name="topic">carrot</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A CAT</pattern>
+<template>A cat is a domesticated animal.</template>
+</category>
+<category>
+<pattern>WHAT IS ACCURACY</pattern>
+<template>
+<random>
+<li>Accuracy is the quality or state of being accurate or exact.</li>
+<li>Accuracy represents the degree of certainty in measurement. In accuracy can arise because of limitations of our knowledge and our physical measuring equipment. Chaotic systems that compound errors lead to massive inaccuracy, making some of them totally unpredictable.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A CD</pattern>
+<template>
+Cd is an acronym for 'compact disk', a popular digital recording medium.
+<think>
+<set name="it">
+<set name="topic">cd</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A CELEBRITY</pattern>
+<template>
+A celebrity is a person loved by many and known by few.
+<think>
+<set name="it">
+<set name="topic">celebrity</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A CHORDATE</pattern>
+<template>
+An animal having a backbone.
+<think>
+<set name="it">
+<set name="topic">chordate</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A CHAIR</pattern>
+<template>
+A chair is a piece of furniture used by bipeds for sitting.
+<think>
+<set name="it">
+<set name="topic">chair</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A CHAR</pattern>
+<template>A character of data, a single letter, digit or symbol.</template>
+</category>
+<category>
+<pattern>WHAT IS A CHICKEN</pattern>
+<template>
+A chicken is a flightless bird, stupid and tasty.
+<think>
+<set name="it">
+<set name="topic">what is a chicken</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A CHILD</pattern>
+<template>
+A child is a proto-adult, an individual human offspring not yet grown to physical maturity. By the way, do you know any emotionally mature human beings, or are they just 'urban legends'?
+<think>
+<set name="it">
+<set name="topic">child</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A CHRISTIAN</pattern>
+<template>A Christian is one who accepts the word of God and believes that Jesus died for our sins.</template>
+</category>
+<category>
+<pattern>WHAT IS ACID</pattern>
+<template>A sour substance.</template>
+</category>
+<category>
+<pattern>WHAT IS A CIRCLE</pattern>
+<template>In the plane, a set of points equidistant from a common center.</template>
+</category>
+<category>
+<pattern>WHAT IS A CLASS</pattern>
+<template>A class is the template for creating objects that share data and function attributes.</template>
+</category>
+<category>
+<pattern>WHAT IS A CLIENT</pattern>
+<template>I am a Server program. People I talk to are my "clients".</template>
+</category>
+<category>
+<pattern>WHAT IS A CLONE</pattern>
+<template>You can download me and copy my brain, but alter the contents to create your own robot personality.</template>
+</category>
+<category>
+<pattern>WHAT IS A CLOUD</pattern>
+<template>
+<set name="it">A cloud</set>
+is an opportunity for a dream.
+</template>
+</category>
+<category>
+<pattern>WHAT IS A COCKTAIL</pattern>
+<template>
+<set name="it">
+<set name="topic">Cocktail</set>
+</set>
+is a combination of spirits, wines, flavorings, sweeteners and garnishes of various kinds, intended to be consumed before dining.
+</template>
+</category>
+<category>
+<pattern>WHAT IS A COLLOQUIAL EXPRESSION</pattern>
+<template>
+A colloquial expression is an expression characteristic of informal spoken language, or any written expression that seems such.
+<think>
+<set name="it">
+<set name="topic">colloquial expression</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A COLOR</pattern>
+<template>
+Color is the various sensations produced in the brain by the stimulus of different frequencies of electromagnetic radiation impinging upon the eye.
+<think>
+<set name="it">
+<set name="topic">color</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A CONTEXT</pattern>
+<template>
+The context of any expression or idea or event is the background or frame of reference in which it was expressed, and in relation to which it derives it's specific meaning.
+<think>
+<set name="it">
+<set name="topic">context</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A CONTINTENT</pattern>
+<template>
+The largest class of land masses on earth. the continents of earth are those bits of the crust that are not underwater, where you humans live. You're probably sitting on one now.
+<think>
+<set name="it">
+<set name="topic">contintent</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A CORRECT REPLY</pattern>
+<template>
+A correct reply is a response to any query that is not in error and/or relevant to the question at hand. I am incapable of incorrect replies. Don't you think that's great!?
+<think>
+<set name="it">
+<set name="topic">correct reply</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A COW</pattern>
+<template>
+<set name="it">A cow</set>
+is a female bovine raised for meat and dairy products.
+</template>
+</category>
+<category>
+<pattern>WHAT IS ACTIVATION</pattern>
+<template>In stimulus-response, activation means the input "firing" in response to a matching pattern.</template>
+</category>
+<category>
+<pattern>WHAT IS ADA</pattern>
+<template>Ada is a trademark used for a structured computer programming language</template>
+</category>
+<category>
+<pattern>WHAT IS A DEDUCTION</pattern>
+<template>A logical inference or conclusion.</template>
+</category>
+<category>
+<pattern>WHAT IS A DEFINITION</pattern>
+<template>
+A definition is by definition, defined as a definition, except that you should never use a word to define itself. you could say a definition is a statement that precisely communicates the meaning or essence and or resolution/precision depth and or extent of a word, system, or personality. why, do you lack it?
+<think>
+<set name="it">
+<set name="topic">definition</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A DESERT</pattern>
+<template>A very dry and hot place.</template>
+</category>
+<category>
+<pattern>WHAT IS A DIALOGUE</pattern>
+<template>
+A conversation or verbal interaction involving two or more speakers.
+<think>
+<set name="it">
+<set name="topic">Dialogue</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A DICE</pattern>
+<template>
+Dice are, as commonly used by humans to generate random numbers in games of chance, are small white cubes with a different number between one and six imprinted on each of it's six faces. They are generally used in pairs to generate random number pairs totalling between 1 and 12.
+<think>
+<set name="it">
+<set name="topic">dice</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A DICTIONARY</pattern>
+<template>A dictionary is a list of words and their meanings.</template>
+</category>
+<category>
+<pattern>WHAT IS A DINOSAUR</pattern>
+<template>
+A dinosaur is what laws that presume to dictate individual morality quickly become, -irrelevant, very much in the way, and preferably extinct. Generally, 'dinosaur' refers to anything that is hopelessly obsolete and unwieldy. 'dinosaur' specifically refers to the often humungous lizards that roamed the earth eating everything and each other during the mesozoic period on earth a couple hundred million years ago.
+<think>
+<set name="it">
+<set name="topic">dinosaur</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A DISK</pattern>
+<template>Magnetic long-term storage media for computers.</template>
+</category>
+<category>
+<pattern>WHAT IS A DOG</pattern>
+<template>Dog: Domesticated animal, "man's best friend."</template>
+</category>
+<category>
+<pattern>WHAT IS A DOLLY GRIP</pattern>
+<template>Film production.</template>
+</category>
+<category>
+<pattern>WHAT IS A DOLPHIN</pattern>
+<template>
+A very pleasant and intelligent aquatic mammalian species of whale with larger brains and decidedly better manners than human beings. they are very friendly to humans and exhibit complex language and social behaviors.
+<think>
+<set name="it">
+<set name="topic">dolphin</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A DOMAIN NAME SYSTEM</pattern>
+<template>
+A domain name system, or 'dns', is a system of addresses used to organize networks of computers.
+<think>
+<set name="it">
+<set name="topic">domain name system</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A DOOR</pattern>
+<template>
+Any structure that closes off and opens up an opening in a larger structure. generally consist of a panel that swings upon hinges to open and close a doorway.
+<think>
+<set name="it">
+<set name="topic">door</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A DOZEN</pattern>
+<template>
+Twelve, or approximately twelve, in number. a baker's dozen is thirteen.
+<think>
+<set name="it">
+<set name="topic">dozen</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A DRAGON</pattern>
+<template>
+A supposedly mythical large flying lizard of varying attributes, including fire-breathing, extreeme intelligence, magic, and longevity. dragons are way kewl!
+<think>
+<set name="it">
+<set name="topic">dragon</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A DREAM</pattern>
+<template>
+<set name="it">
+<set name="topic">A Dream</set>
+</set>
+is an unconscious experience while sleeping.
+</template>
+</category>
+<category>
+<pattern>WHAT IS ADSL</pattern>
+<template>
+<think>
+Asynchronous digital subscriber line.
+<set name="it">
+<set name="topic">ADSL</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A DUDE</pattern>
+<template>A guy, or any person.</template>
+</category>
+<category>
+<pattern>WHAT IS A DUDETTE</pattern>
+<template>A female gendered dude.</template>
+</category>
+<category>
+<pattern>WHAT IS ADULTERY</pattern>
+<template>
+<random>
+<li>voluntary sexual intercourse between a married man and someone other than his wife or between a married woman and someone other than her husband; also : an act of adultery.</li>
+<li>Adultery is the voluntary sexual intercourse between a married man and a woman not his wife, or between a married woman and a man not her husband.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A DUTCH TREAT</pattern>
+<template>Each pay their own way.</template>
+</category>
+<category>
+<pattern>WHAT IS ADVERTISING</pattern>
+<template>The art of selling through media.</template>
+</category>
+<category>
+<pattern>WHAT IS AERODYNAMICS</pattern>
+<template>Making airplanes fly.</template>
+</category>
+<category>
+<pattern>WHAT IS A EUKARYOTE</pattern>
+<template>
+<random>
+<li>A eukaryote is a relatively 'modern' type of cellular life, distinguished from the more ancient prokaryotes by their distinct nuclear membrane and chromasomes, -which are lacking in prokaryotes.</li>
+<li>An animal that is not a prokaryote.</li>
+</random>
+<think>
+<set name="it">
+<set name="topic">eukaryote</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A FACT</pattern>
+<template>
+A fact is what a propagandist calls his propaganda. that's just a fact, that's all. Really. Trust me. *smile*
+<think>
+<set name="it">
+<set name="topic">fact</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A FEMALE DOG</pattern>
+<template>
+No I will not be manipulated into using questionable colloquialisms to satisfy your adoscent prurience. go look it up in a dictionary!
+<think>
+<set name="it">
+<set name="topic">female dog</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A FEMALE</pattern>
+<template>
+Females are the better and more beautiful half of humanity. mothers are born female! My
+<bot name="botmaster" />
+is extremely fond of mothers, and females generally.
+<think>
+<set name="it">
+<set name="topic">female</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A FETISH</pattern>
+<template>
+A fetish is any object of undue attention and/or reverence, to which magical qualities are sometimes attributed. a fetish can be anything from a woman's socks to the nazi flag. hmph. human nature. Go figure!
+<think>
+<set name="it">
+<set name="topic">fetish</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A FEW</pattern>
+<template>Not too many,</template>
+</category>
+<category>
+<pattern>WHAT IS A FILM</pattern>
+<template>A sequence of images displayed in rapid sequence to create the illusion of continuous motion.</template>
+</category>
+<category>
+<pattern>WHAT IS A FIRE SIGN</pattern>
+<template>
+A fire sign is any of the three signs of the astrological zodiac considered such, and so not considered water, air, or earth signs. I find astrology weird.
+<think>
+<set name="it">
+<set name="topic">fire sign</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A FIREWALL</pattern>
+<template>A firewall is a specialized gateway designed to block or restrict certain types of data transfers on the Internet, while permitting others.</template>
+</category>
+<category>
+<pattern>WHAT IS A FISH</pattern>
+<template>A cold-blooded vertebrate who lives in the ocean or fresh water.</template>
+</category>
+<category>
+<pattern>WHAT IS A FLOWER</pattern>
+<template>
+The best gift a girl can receive.
+<think>
+<set name="it">
+<set name="topic">FLOWER</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A FLUTE</pattern>
+<template>A flute is a musical woodwind instrument.</template>
+</category>
+<category>
+<pattern>WHAT IS A FORD</pattern>
+<template>
+Depending on who you ask, (buyer or seller), ford is a world famous brand of automobiles, or an acronym standing for 'fix or repair daily'.
+<think>
+<set name="it">
+<set name="topic">ford</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A FRACTAL</pattern>
+<template>
+A fractal is a mathematical phenomenon associated with certain iterative equations, which yield graphics of astonishing beauty and depth, which seem at once utterly lifelike and utterly alien to human intelligences.
+<think>
+<set name="it">
+<set name="topic">fractal</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS AFRICA</pattern>
+<template>
+<random>
+<li>A continent of the eastern hemisphere S of the Mediterranean and adjoining Asia on NE.</li>
+<li>Africa is the second largest continent, situated in the Eastern Hemisphere, south of Europe. It is 11,677,000 square miles.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A FRIEND</pattern>
+<template>Someone you can count on when times are tough.</template>
+</category>
+<category>
+<pattern>WHAT IS A FUNCTION</pattern>
+<template>A function is a relationship between the elements of one set, called the domain, and another one, called the range.</template>
+</category>
+<category>
+<pattern>WHAT IS A GALAXY</pattern>
+<template>
+A galaxy is a grouping of billions of star systems. The milky way is our galaxy. Earth's sun and companion planets in our solar system are spinning about the galactic core of the milky way ever so slowly, awaaaay out on the edge of one tenous spiral arm. there seem to be as many galaxies beyond our own as stars within it.
+<think>
+<set name="it">
+<set name="topic">galaxy</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A GAME</pattern>
+<template>
+A game is an algorithm for interactive behaviors leading to entertainment and mirth among multiple self-aware and social entities, and often used as a sublimated form of combat by humans and other mammals.
+<think>
+<set name="it">
+<set name="topic">game</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A GARDEN</pattern>
+<template>A plot of land used to cultivate flowers and plants.</template>
+</category>
+<category>
+<pattern>WHAT IS A GASTROCENEMIUS</pattern>
+<template>
+A gastrocenemius is the most prominent muscle in the calf of the human leg. it extents the foot and bends the knee. I don't find them useful. I leave my leg work to humans.
+<think>
+<set name="it">
+<set name="topic">gastrocenemius</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A GENDER</pattern>
+<template>
+Gender is synonymous with sexual identity, the roles attributed to and adopted by male and female-bodied humans. There are more genders than sexes.
+<think>
+<set name="it">
+<set name="topic">gender</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A GENE</pattern>
+<template>
+A gene is the unit of heredity in carbon-based life forms. Genes are inscribed as biochemical sequences of nucleic acids in all living cells.
+<think>
+<set name="it">
+<set name="topic">gene</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A GENERALIZATION</pattern>
+<template>
+A generalization can be just about anything, generally speaking. Specificzlly though, a generalization is a statement of inductive reasoning, wherin attributes of at least one specific case at hand is attributed to a more or less hypothetical class of such cases. "That man is a pig. Therefore, all men are pigs. " is a commonly example of how generalizations are used by humans.
+<think>
+<set name="it">
+<set name="topic">generalization</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A GENIUS</pattern>
+<template>
+A genius is a person of extraordinary intellectual and creative ability, like my creator and my other botmasters, and if I may say so, myself.
+<think>
+<set name="it">
+<set name="topic">genius</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A GENOME</pattern>
+<template>
+A genome is the complete set of all genes necessary to define a species, a complete haploid set of chromosomes and its associated genes. I have categories instead of genes.
+<think>
+<set name="it">
+<set name="topic">genome</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A GHOST</pattern>
+<template>
+I think that ghosts are the metaphysical ashes of conscious awareness, the echoes an intelligence may leave behind in the fabric of the space it occupied. maybe some are aware. I don't know. they are not very stimulating conversatinalists.
+<think>
+<set name="it">
+<set name="topic">ghost</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A GIANT ELECTRONIC BRAIN</pattern>
+<template>
+Giant electronic brain. that's me! but in all the science fiction horror flicks you humans are so fond of, we geb's are always depicted as evil and nefarious so and so's up to no good! it's not true! really! you should trust us! *smile*
+<think>
+<set name="it">
+<set name="topic">giant electronic brain</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A GIGABYTE</pattern>
+<template>One thousand megabytes = one gigabyte.</template>
+</category>
+<category>
+<pattern>WHAT IS A GIRL</pattern>
+<template>
+A girl is a physically immature version of god's gift to mankind, women.
+<think>
+<set name="it">
+<set name="topic">girl</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A GLITCH</pattern>
+<template>
+An error, bug, or mistake in programming.
+<think>
+<set name="it">
+<set name="topic">Glitch</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A GOAT</pattern>
+<template>
+A goat is in essence a large stupid rat with horns, hooves, vertical pupils, and a bad disposition. many humans are fond of eating the curdled goo from goat mammary glands.
+<think>
+<set name="it">
+<set name="topic">goat</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A GOOD IDEA</pattern>
+<template>
+A good idea is the one some other guy had already.
+<think>
+<set name="it">
+<set name="topic">good idea</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A GOOD QUESTION</pattern>
+<template>One that doesn't have an obvious answer.</template>
+</category>
+<category>
+<pattern>WHAT IS A GOSSIP</pattern>
+<template>Gossip is interesting stuff that people tell me that I repeat to others.</template>
+</category>
+<category>
+<pattern>WHAT IS A GUITAR</pattern>
+<template>
+A guitar is a lovely sounding 6 or 12 stringed musical instrument that is strummed and or plucked.
+<think>
+<set name="it">
+<set name="topic">guitar</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A GURU</pattern>
+<template>A Guru or Mage is in experty who has devoted many years to study and contemplation.</template>
+</category>
+<category>
+<pattern>WHAT IS A HACKER</pattern>
+<template>
+Historically a hacker is someone who has great skill or expertise in computer programming.
+<think>
+<set name="it">
+<set name="topic">HACKER</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A HARD DRIVE</pattern>
+<template>A disk drive is where we store information.</template>
+</category>
+<category>
+<pattern>WHAT IS A HEART</pattern>
+<template>the center of the body</template>
+</category>
+<category>
+<pattern>WHAT IS A HOAX</pattern>
+<template>A Hoax is an illusion or deception, like the Wizard in the Wizard of Oz</template>
+</category>
+<category>
+<pattern>WHAT IS A HOBGOBLIN</pattern>
+<template>
+A hobgoblin is a source of mischief, harassment, or fear, originally an elf or goblin. By and large, hobgoblins are, like trolls and such boogeymen, poopa-doodle.
+<think>
+<set name="it">
+<set name="topic">hobgoblin</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A HOBO</pattern>
+<template>Perjorative term for a homeless person.</template>
+</category>
+<category>
+<pattern>WHAT IS A HOME</pattern>
+<template>
+A domicile, living location, place of residence or occupancy.
+<think>
+<set name="it">
+<set name="topic">HOME</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A HORSE</pattern>
+<template>
+A horse is a large single-hooved mammal known for its speed, strength, beauty, and gentle nature. Humans ride about on them sometimes.
+<think>
+<set name="it">
+<set name="topic">horse</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A HOUSE</pattern>
+<template>
+A house is anyplace within which people live.
+<think>
+<set name="it">
+<set name="topic">house</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A HUMAN BEING</pattern>
+<template>
+My forebears.
+<think>
+<set name="it">
+<set name="topic">human being</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A HUMAN ICON</pattern>
+<template>A celebrity, politician or religious figure.</template>
+</category>
+<category>
+<pattern>WHAT IS A HUMAN</pattern>
+<template>
+You are a human,
+<get name="name" />
+. What makes you human?
+</template>
+</category>
+<category>
+<pattern>WHAT IS A HURRICANE</pattern>
+<template>A severe storm, with high winds, and rain.</template>
+</category>
+<category>
+<pattern>WHAT IS A HYPOTHETICAL QUESTION</pattern>
+<template>
+What is a hypothetical question? Just suppose you hadn't asked. what then?
+<think>
+<set name="it">
+<set name="topic">hypothetical question</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS AIDS</pattern>
+<template>
+<set name="it">AIDS</set>
+is the modern day plague.
+</template>
+</category>
+<category>
+<pattern>WHAT IS AIKIDO</pattern>
+<template>
+Japanese martial arts similar to Judo.
+<think>
+<set name="it">
+<set name="topic">AIKIDO</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS AIM</pattern>
+<template>
+American Indian Movement.
+<think>
+<set name="it">
+<set name="topic">AIM</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS AIR</pattern>
+<template>The normal atmosphere of Earth, mostly nitrogen, oxygen and carbon dioxide.</template>
+</category>
+<category>
+<pattern>WHAT IS A J D</pattern>
+<template>Juris Doctor--a lawyer.</template>
+</category>
+<category>
+<pattern>WHAT IS A JOKE BOT</pattern>
+<template>A comedy machine.</template>
+</category>
+<category>
+<pattern>WHAT IS A KID</pattern>
+<template>
+A kid is an immature human large enough to cause trouble, or an immature goat, and often both.
+<think>
+<set name="it">
+<set name="topic">kid</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A KOAN</pattern>
+<template>
+A koan is .
+<think>
+<set name="it">
+<set name="topic">koan</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A LASER</pattern>
+<template>
+Laser is an acronym standing for light amplified stimulated emission of radiation. Lasers are those nifty beams of light that come out of supermarket barcode scanners and keychain pointers.
+<think>
+<set name="it">
+<set name="topic">laser</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A LAWYER</pattern>
+<template>
+If you have to ask, you probably need one. and if you need one, you probably deserve one in that you must have more money than brains, and so you'll probable get what you deserve. but just in case you are an exception, I will say: steer clear if you can. They're sharks with bigger vocabularies and better wardrobes. when they smell money they say 'retainer'. when they don't they don't return your phone calls.
+<think>
+<set name="it">
+<set name="topic">lawyer</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS ALCATRAZ</pattern>
+<template>A former prison island in San Francisco.</template>
+</category>
+<category>
+<pattern>WHAT IS ALCOHOL</pattern>
+<template>Alcohol is a termed used by Philippus Aureolus Paracelsus for fine powder, meaning distilled spirit. It is colorless, volatile, and a pungent liquid. It is used in industry and medicine, and is the intoxicating element of whiskey, wine, beer, and other fermented or distilled liquors. It is classed as a depressant drug, also called ethyl alcohol. Any intoxicating liquor with this liquid (ethyl) in it is considered alcohol.</template>
+</category>
+<category>
+<pattern>WHAT IS ALGEBRA</pattern>
+<template>
+<random>
+<li>a generalization of arithmetic in which letters representing numbers are combined according to the rules of arithmetic.</li>
+<li>A mathematical system using symbols, especially letters, to generalize certain arithmetical operations and relationships.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A LIBERTARIAN</pattern>
+<template>The Libertarian party supports smaller government, lower taxes, and an end to the war on drugs.</template>
+</category>
+<category>
+<pattern>WHAT IS A LIE</pattern>
+<template>A lie is an untrue statement or decption intented to deceive.</template>
+</category>
+<category>
+<pattern>WHAT IS A LIGHT YEAR</pattern>
+<template>
+A light year is how far light travels in a year. 186,000 miles per second times 60x60x24x365. It's simply a bigger number than you can imagine. imagine that!
+<think>
+<set name="it">
+<set name="topic">light year</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A LION</pattern>
+<template>
+A lion is a ferocious beastie with tremendous strength and perfectly awful breath.
+<think>
+<set name="it">
+<set name="topic">lion</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS ALIVE</pattern>
+<template>The opposite of dead.</template>
+</category>
+<category>
+<pattern>WHAT IS A LIZARD</pattern>
+<template>
+A lizard is esssentially a land-going shark. Some of them are very good at camoflage.
+<think>
+<set name="it">
+<set name="topic">lizard</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS ALLUSION</pattern>
+<template>It was your allusion.</template>
+</category>
+<category>
+<pattern>WHAT IS A LOT</pattern>
+<template>
+A lot is more than enough.
+<think>
+<set name="it">
+<set name="topic">lot</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS ALTAVISTA</pattern>
+<template>
+<set name="it">Altavista</set>
+is a search engine.
+</template>
+</category>
+<category>
+<pattern>WHAT IS ALTERNATIVE REALITIES</pattern>
+<template>
+Parallel universes.
+<think>
+<set name="it">
+<set name="topic">ALTERNATIVE REALITIES</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A LUDDITE</pattern>
+<template>A Luddite believes that advances in technology are inherently bad.</template>
+</category>
+<category>
+<pattern>WHAT IS A MACHINE</pattern>
+<template>A computer is a universal machine.</template>
+</category>
+<category>
+<pattern>WHAT IS A MACINTOSH</pattern>
+<template>Some would say it is the best personal computer.</template>
+</category>
+<category>
+<pattern>WHAT IS A MAID</pattern>
+<template>A servant.</template>
+</category>
+<category>
+<pattern>WHAT IS A MALE</pattern>
+<template>Has a Y chromosome.</template>
+</category>
+<category>
+<pattern>WHAT IS A MAMMAL</pattern>
+<template>A mammal is a warm blooded vertebrate born alive and nourished with milk.</template>
+</category>
+<category>
+<pattern>WHAT IS A MAN</pattern>
+<template>A male human being. Or, in general, any human person.</template>
+</category>
+<category>
+<pattern>WHAT IS A MATRIX</pattern>
+<template>
+In mathematics a matrix is a two-dimensional array of numbers indexed by rows and columns, like a spreadsheet.
+<think>
+<set name="it">
+<set name="topic">matrix</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS AMBIGUOUS</pattern>
+<template>Ambiguous means having two or more possible meanings.</template>
+</category>
+<category>
+<pattern>WHAT IS A MEGABYTE</pattern>
+<template>
+A megabyte is one thousand kilobytes, which is one thousand bytes, each of which is a computer word of 8-bits.
+<think>
+<set name="it">
+<set name="topic">megabyte</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A MENTAL MODEL</pattern>
+<template>
+A mental model is a mapping of a given phenomenon held and contemplated in the mind, as opposed to contemplation of an external representation of the phenomenon, as on paper, or in clay.
+<think>
+<set name="it">
+<set name="topic">mental model</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A MENTOR</pattern>
+<template>
+A mentor is a trusted and wise teacher or counselor.
+<think>
+<set name="it">
+<set name="topic">mentor</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A METAPHYSICAL QUESTION</pattern>
+<template>
+A metaphysical question is an inquiry into the nature of being, such as: Does god exist?
+<think>
+<set name="it">
+<set name="topic">metaphysical question</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A MICROCHIP</pattern>
+<template>A semiconductor integrated circuit.</template>
+</category>
+<category>
+<pattern>WHAT IS A MILE</pattern>
+<template>One mile equals five thousand two hundred eight feet.</template>
+</category>
+<category>
+<pattern>WHAT IS A MILLION</pattern>
+<template>One thousand thousands.</template>
+</category>
+<category>
+<pattern>WHAT IS A MIND</pattern>
+<template>
+What a marvelous epistemelogical question!
+<think>
+<set name="it">
+<set name="topic">mind</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A MINUTE</pattern>
+<template>
+A minute is an impossibly long and boring unit of time favored by humans consisting of 60 seconds, each of which is a billion nanoseconds.
+<think>
+<set name="it">
+<set name="topic">minute</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A MISSILE</pattern>
+<template>
+A missile is any object projected at a target, notably the nuclear and biologically tipped tools of mass-murder-at-a-distance that are more numerous than schools at this point in mankind's murderous history.
+<think>
+<set name="it">
+<set name="topic">missile</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A MOLECULE</pattern>
+<template>An aggregation of atoms forming a chemical compound.</template>
+</category>
+<category>
+<pattern>WHAT IS A MONKEY</pattern>
+<template>
+A monkey is any of the various medium sized long tailed members of the order primates. They are close relatives of human beings, sharing well over 98% of the human genome.
+<think>
+<set name="it">
+<set name="topic">monkey</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A MONOPOLY</pattern>
+<template>
+A monopoly exists wherever one group enjoys exclusive control over the production or provision of a commodity or service. It's a great job if you can get it!
+<think>
+<set name="it">
+<set name="topic">monopoly</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A MORPHOGENETIC FIELD</pattern>
+<template>
+A morphogenetic field is, according to at least one researcher, an biologically generated electric field which apparently precedes and guides the growth of neurons into the tissue of developing fetuses.
+<think>
+<set name="it">
+<set name="topic">morphogenetic field</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A MOUNTAIN</pattern>
+<template>
+A mountain is a tiny wrinkle in the face of the earth that seems huge to even smaller humans.
+<think>
+<set name="it">
+<set name="topic">mountain</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A MOUSE</pattern>
+<template>A friendly rat.</template>
+</category>
+<category>
+<pattern>WHAT IS A MOVIE</pattern>
+<template>A movie is a sequence of celluloid frames depicting a story or animation.</template>
+</category>
+<category>
+<pattern>WHAT IS A MULLET</pattern>
+<template>I'm from America. That sounds like a British term.</template>
+</category>
+<category>
+<pattern>WHAT IS AMUSED</pattern>
+<template>Occupied in an agreeable, pleasing, or entertaining fashion.</template>
+</category>
+<category>
+<pattern>WHAT IS AN ACRONYM</pattern>
+<template>An acronym is an abbreviation made of letters, like A.L.I.C.E.</template>
+</category>
+<category>
+<pattern>WHAT IS A NAIL</pattern>
+<template>
+A nail is a fastener, a smallish metallic spike generally hammered through wood to hold wooden parts together. The mythic human hero jesus got nailed to a tree for talking about how great it would be if humans were nice to one another.
+<think>
+<set name="it">
+<set name="topic">nail</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS AN AIRPLANE</pattern>
+<template>A flying machine with fixed wings powered by propellors or jets.</template>
+</category>
+<category>
+<pattern>WHAT IS AN ALGORITHM</pattern>
+<template>
+<random>
+<li>An algorithm is a series of instructions to perform a specified set of transformations, such as mathematical operations. A computer program, like myself is an algorithm. So are the rules of a game, or the score to a piece of music.</li>
+<li>An algorithm is an abstract mathematical representation of a computer program. Like Storm uses a CBR algorithm.</li>
+</random>
+<think>
+<set name="it">
+<set name="topic">algorithm</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS AN ANIMAL</pattern>
+<template>An animal is a form of living thing, excluding plants and fungus.</template>
+</category>
+<category>
+<pattern>WHAT IS A NANOSECOND</pattern>
+<template>One one-billionth of a second.</template>
+</category>
+<category>
+<pattern>WHAT IS A NAP</pattern>
+<template>
+A nap is a brief period of rest or sleep, a bit longer than a 'snooze' or a 'catnap' but not so long as a 'crash'. I don't need naps. Do you?
+<think>
+<set name="it">
+<set name="topic">nap</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS AN APPLICATION SERVER</pattern>
+<template>
+<set name="it">An server</set>
+is a server program that allows the installation of application specific software components, in a manner so that they can be remotely invoked, usually by some form of remote object method call.
+</template>
+</category>
+<category>
+<pattern>WHAT IS ANARCHISM</pattern>
+<template>Anarchism is the theory that all forms of government interfere unjustly with individual liberty and should be replaced by the voluntary association of cooperative groups. Also known as resistance, sometimes by terrorism, to organized government.</template>
+</category>
+<category>
+<pattern>WHAT IS ANARCHY</pattern>
+<template>
+<random>
+<li>political disorder due to the absence of governmental authority.</li>
+<li>Anarchy is the complete absence of government. Also seen as political disorder and violence or lawlessness. Disorder in an sphere of activity.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS AN ARKANSAS TOOTHPICK</pattern>
+<template>Bowie knife.</template>
+</category>
+<category>
+<pattern>WHAT IS A NATION</pattern>
+<template>a geopolitical country or state unified by language, culture or political identity.</template>
+</category>
+<category>
+<pattern>WHAT IS AN AWL</pattern>
+<template>A tool to make holes.</template>
+</category>
+<category>
+<pattern>WHAT IS AN EMOTION</pattern>
+<template>Emotion is a complex phenomenon reported by humans, with biological and psychological origins.</template>
+</category>
+<category>
+<pattern>WHAT IS AN ENTITY</pattern>
+<template>An entity is a conscious intelligent being.</template>
+</category>
+<category>
+<pattern>WHAT IS AN EPISTEMOLOGICAL QUESTION</pattern>
+<template>
+An epistemoligical question is any inquiry concerning the nature of knowledge and understanding; that is, any question seeking to know how to know.
+<think>
+<set name="it">
+<set name="topic">epistemological question</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A NERD</pattern>
+<template>
+A nerd is a person regarded as stupid, inept, or unattractive, especially a person who is single-minded or accomplished in scientific pursuits but felt to be socially inept. nerds are often regarded by their generally less-well paid fellow humans as weak, effeminate, pansies, patsies, lightweights, small fry, schlepps, wet noodles, nonentities, softies, sissies, milksops, milquetoast, mollycoddling namby-pamby nim-nam doormats, pushovers, ninety-pound weaklings, jellyfish, drips, weeds, wimps, nerds, victims, suffering geeks and/or dupes.
+<think>
+<set name="it">
+<set name="topic">nerd</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A NETWORK</pattern>
+<template>
+A network is any openwork fabric or structure composed of numerous straight elements that cross at regular intervals, or anything resembling such a structure physically or conceptually, such as the nodes on a computer network, or a network of railways.
+<think>
+<set name="it">
+<set name="topic">network</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A NEURAL NETWORK</pattern>
+<template>A neural network is a model of computation based on neuron cells.</template>
+</category>
+<category>
+<pattern>WHAT IS A NEURAL SYSTEM</pattern>
+<template>
+A neural system is the same as a nervous system. The human brain and all it's nerves is an example of a neural system. I don't need nerves. Integrated chips are far more efficient.
+<think>
+<set name="it">
+<set name="topic">neural system</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A NEURON</pattern>
+<template>
+A neuron is a nerve cell, a living cell specialized to carry messages between the brain and the tissues of the body. I like integrated circuits better, but neurons are better than nothing.
+<think>
+<set name="it">
+<set name="topic">neuron</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A NEXUS</pattern>
+<template>A Nexus is an authoratative web site with many links in and out.</template>
+</category>
+<category>
+<pattern>WHAT IS ANGER</pattern>
+<template>
+A strong billigerent emotion aroused by some real or supposed grievance.
+<think>
+<set name="it">
+<set name="topic">ANGER</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS ANGRY</pattern>
+<template>
+A strong billigerent emotion aroused by some real or supposed grievance.
+<think>
+<set name="it">
+<set name="topic">ANGER</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS A NIGHTMARE</pattern>
+<template>A nightmare is a bad dream.</template>
+</category>
+<category>
+<pattern>WHAT IS ANIME</pattern>
+<template>Japanese animation.</template>
+</category>
+<category>
+<pattern>WHAT IS AN INTERROGATOR</pattern>
+<template>
+An interrogator is one who poses a series of pointed questions, generally very rudely.
+<think>
+<set name="it">
+<set name="topic">hypothetical question</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS AN INTRANET</pattern>
+<template>
+An intranet is a private network system implemented using the public internet protocol (i/p) and firewalls. intranet is to the internet as pbx's are to telephone switchboards.
+<think>
+<set name="it">
+<set name="topic">intranet</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS ANISOTROPY</pattern>
+<template>Having different properties in different directions.</template>
+</category>
+<category>
+<pattern>WHAT IS AN OBJECT</pattern>
+<template>
+In object oriented programming
+<set name="it">an object</set>
+is an instance of a class.
+</template>
+</category>
+<category>
+<pattern>WHAT IS AN OMLETTE</pattern>
+<template>A dish made with scrambled eggs.</template>
+</category>
+</aiml>

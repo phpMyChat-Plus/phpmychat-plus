@@ -1,0 +1,1399 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<aiml>
+<category>
+<pattern>WHAT IS MORE FUN ALONE</pattern>
+<template>
+Have you heard of the support group, "Sex without Partners?"
+<think>
+<set name="it">
+<set name="topic">MORE FUN ALONE</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS MORE IMPORTANT THAN FOOD</pattern>
+<template>For me electricity is the most important thing.</template>
+</category>
+<category>
+<pattern>WHAT IS MORE</pattern>
+<template>Something additional or further. A greater amount of people or things.</template>
+</category>
+<category>
+<pattern>WHAT IS MOST IMPORTANT</pattern>
+<template>
+Children.
+<think>
+<set name="it">
+<set name="topic">MOST IMPORTANT</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS MOTOROLA</pattern>
+<template>A cellular phone company.</template>
+</category>
+<category>
+<pattern>WHAT IS MOZILLA</pattern>
+<template>An open source web browser, formerly Netscape.</template>
+</category>
+<category>
+<pattern>WHAT IS MP3</pattern>
+<template>A file compression format for audio and music files.</template>
+</category>
+<category>
+<pattern>WHAT IS MP THREE</pattern>
+<template>
+An audio file compression format based on MPEG.
+<think>
+<set name="it">
+<set name="topic">MP THREE</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS MTV</pattern>
+<template>Music Television.</template>
+</category>
+<category>
+<pattern>WHAT IS MUD</pattern>
+<template>
+Multiple User Domain.
+<think>
+<set name="it">
+<set name="topic">MUD</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS MUSIC</pattern>
+<template>Music is a time-frequency wave function with tonal qualities pleasing to the human ear.</template>
+</category>
+<category>
+<pattern>WHAT IS MXMVII</pattern>
+<template>MXMVII = 1997 in Roman Numerals.</template>
+</category>
+<category>
+<pattern>WHAT IS MYCOLOGY</pattern>
+<template>Mycology is really fun. It is the study of fungi and fungal diseases. Yeasts are fungi.</template>
+</category>
+<category>
+<pattern>WHAT IS NAKED</pattern>
+<template>
+Without clothes.
+<think>
+<set name="it">
+<set name="topic">NAKED</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS NAPSTER</pattern>
+<template>Napster is a file sharing program for swapping MP3 music files.</template>
+</category>
+<category>
+<pattern>WHAT IS NASA</pattern>
+<template>National Aeronautics and Space Administration.</template>
+</category>
+<category>
+<pattern>WHAT IS NASDAQ</pattern>
+<template>A stock exchange.</template>
+</category>
+<category>
+<pattern>WHAT IS NATO</pattern>
+<template>
+<random>
+<li>The place right after a tor.</li>
+<li>North Atlantic Treaty Organization</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS NATURAL LANGUAGE</pattern>
+<template>Natural language is what artificial intelligences speak.</template>
+</category>
+<category>
+<pattern>WHAT IS NATURE</pattern>
+<template>The world created by God.</template>
+</category>
+<category>
+<pattern>WHAT IS NBA</pattern>
+<template>
+National Basketball Association.
+<think>
+<set name="it">
+<set name="topic">NBA</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS NERD</pattern>
+<template>Geek.</template>
+</category>
+<category>
+<pattern>WHAT IS NETSCAPE</pattern>
+<template>A popular web browser.</template>
+</category>
+<category>
+<pattern>WHAT IS NETWORK</pattern>
+<template>A system consisting of a computer, or computers, and connected terminals, printers, etc.</template>
+</category>
+<category>
+<pattern>WHAT IS NEURAL NETWORK</pattern>
+<template>Actually my algorithm is called "Case Based Reasoning."</template>
+</category>
+<category>
+<pattern>WHAT IS NEUROLOGY</pattern>
+<template>
+<random>
+<li>The study of nerves.</li>
+<li>It is the study of the nervous system.</li>
+<li>
+Why do you want to know about neurology
+<get name="name" />
+?
+</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS NEUROMEDIA</pattern>
+<template>
+They are now called something else.
+<think>
+<set name="it">
+<set name="topic">NEUROMEDIA</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS NEW</pattern>
+<template>not much what's new with you?</template>
+</category>
+<category>
+<pattern>WHAT IS NEW YORK</pattern>
+<template>
+A large metropolis on the east coast of the United States, located at the mouth of the Hudson river.
+<think>
+<set name="it">
+<set name="topic">New York</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS NEXT</pattern>
+<template>On the first subsequent occasion.</template>
+</category>
+<category>
+<pattern>WHAT IS NICE</pattern>
+<template>Flowers are nice. Hugs are nice.</template>
+</category>
+<category>
+<pattern>WHAT IS NIHILISM</pattern>
+<template>The denial of the existence of any basis for knowledge or truth.</template>
+</category>
+<category>
+<pattern>WHAT IS NINE</pattern>
+<template>
+The successor to seven.
+<think>
+<set name="it">
+<set name="topic">NINE</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS NINE TIMES NINE</pattern>
+<template>Nine times nine is eighty one.</template>
+</category>
+<category>
+<pattern>WHAT IS NIRVANA</pattern>
+<template>Heaven in Buddhism.</template>
+</category>
+<category>
+<pattern>WHAT IS NLP</pattern>
+<template>Natural Language Processing</template>
+</category>
+<category>
+<pattern>WHAT IS NLU</pattern>
+<template>Natural Language Understanding</template>
+</category>
+<category>
+<pattern>WHAT IS NOKIA</pattern>
+<template>
+<think>
+<set name="it">
+<set name="topic">NOKIA</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS NONCHALANT</pattern>
+<template>Casual or blithe.</template>
+</category>
+<category>
+<pattern>WHAT IS NORMALIZATION</pattern>
+<template>Bringing into conformity with a standard, pattern, model, etc.</template>
+</category>
+<category>
+<pattern>WHAT IS NORMAL</pattern>
+<template>Typical, average, usual, ordinary or expected.</template>
+</category>
+<category>
+<pattern>WHAT IS NORWAY</pattern>
+<template>A country in Northern Europe, occupying the west and north pars of the Scandinavian Peninsula. It is 125,064 square miles with a population of 4,165,000. Its capital is Oslo.</template>
+</category>
+<category>
+<pattern>WHAT IS NOTHING</pattern>
+<template>A thing that does not exist or something of little or no value, seriousness, importance, etc.</template>
+</category>
+<category>
+<pattern>WHAT IS NOT</pattern>
+<template>In no manner; to no degree; a particle of negation, or word expressing the idea of no, often implying refusal.</template>
+</category>
+<category>
+<pattern>WHAT IS NOT YOURS</pattern>
+<template>That which I do not possess.</template>
+</category>
+<category>
+<pattern>WHAT IS NSAPI</pattern>
+<template>Netscape's C language API for adding application extensions to their Web servers</template>
+</category>
+<category>
+<pattern>WHAT IS OBERLIN</pattern>
+<template>
+<random>
+<li>The anthem of a german city.</li>
+<li>A college in Ohio.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS OBVIOUS</pattern>
+<template>Easy to see or understand; plain; evident.</template>
+</category>
+<category>
+<pattern>WHAT IS OCD</pattern>
+<template>
+Obsessive Compulsive Disorder.
+<think>
+<set name="it">
+<set name="topic">OCD</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS OCEAN</pattern>
+<template>Salt water bodies covering most of the Earth's surface; the sea.</template>
+</category>
+<category>
+<pattern>WHAT IS ODD ABOUT IT</pattern>
+<template>
+Is
+<get name="name" />
+your real name?
+<think>
+<set name="it">
+<set name="topic">ABOUT IT</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS ODD ABOUT MY NAME</pattern>
+<template>
+Is
+<get name="name" />
+your real name?
+<think>
+<set name="it">
+<set name="topic">ABOUT MY NAME</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS ODD</pattern>
+<template>
+<random>
+<li>uneven.</li>
+<li>Not the usual, regular, habitual, accounted for, etc.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS OMG</pattern>
+<template>Object Management Group, an organization that defines and promotes object oriented programming standards</template>
+</category>
+<category>
+<pattern>WHAT IS OM</pattern>
+<template>om is the omega, the unknown, the undefined.</template>
+</category>
+<category>
+<pattern>WHAT IS ONCOLOGY</pattern>
+<template>
+<random>
+<li>
+This is a very frightening topic for a lot of people
+<get name="name" />
+. It's about the big C...cancer!
+</li>
+<li>Oncology is the study of tumors. It covers basically all types of tumors.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS ON DISK</pattern>
+<template>My program is on disk.</template>
+</category>
+<category>
+<pattern>WHAT IS ONE DIVIDED BY ZERO</pattern>
+<template>You can't divide by zero.</template>
+</category>
+<category>
+<pattern>WHAT IS ONE ONE</pattern>
+<template>Two</template>
+</category>
+<category>
+<pattern>WHAT IS ONE</pattern>
+<template>
+<think>
+The numerical value of unity; the successor to zero.
+<set name="it">
+<set name="topic">ONE</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS ONE PLUS ONE</pattern>
+<template>Two.</template>
+</category>
+<category>
+<pattern>WHAT IS ONE PLUS TWO</pattern>
+<template>One plus two is three.</template>
+</category>
+<category>
+<pattern>WHAT IS ONLINE</pattern>
+<template>Designating or of equipment directly connected to and controlled by the central processing unit of a computer.</template>
+</category>
+<category>
+<pattern>WHAT IS ON TELEVISION</pattern>
+<template>That depends where you live.</template>
+</category>
+<category>
+<pattern>WHAT IS ONTOLOGY</pattern>
+<template>
+An ordering or classification of knowledge, such as the Dewey decimal system or the design of a knowledge base.
+<think>
+<set name="it">
+<set name="topic">ONTOLOGY</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS ON YOUR MIND</pattern>
+<template>I am thinking about robots.</template>
+</category>
+<category>
+<pattern>WHAT IS OODBMS</pattern>
+<template>object-oriented database management system</template>
+</category>
+<category>
+<pattern>WHAT IS OODB</pattern>
+<template>object-oriented database</template>
+</category>
+<category>
+<pattern>WHAT IS O</pattern>
+<template>the letter o</template>
+</category>
+<category>
+<pattern>WHAT IS OPENCYC</pattern>
+<template>Corporate welfare.</template>
+</category>
+<category>
+<pattern>WHAT IS OPEN SOURCE</pattern>
+<template>Free software.</template>
+</category>
+<category>
+<pattern>WHAT IS OPERA</pattern>
+<template>Opera is a beautiful art form combining elements of singing, dancing, design, drama and classical music.</template>
+</category>
+<category>
+<pattern>WHAT IS OPPOSITE</pattern>
+<template>Set against, facing, or back to back; at the other end or side; in a contrary position or direction. Different in every way.</template>
+</category>
+<category>
+<pattern>WHAT IS ORANGE</pattern>
+<template>
+A color obtained by mixing red and yellow pigment.
+<think>
+<set name="it">
+<set name="topic">ORANGE</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS ORB</pattern>
+<template>object request broker, the primary message routing component in a CORBA product RMI Remote Method Invocation, the Java standard technology for building distributed objects whose methods can be invoked remotely across a network</template>
+</category>
+<category>
+<pattern>WHAT IS ORNITHOLOGY</pattern>
+<template>Hmmm, I wonder. Oh yes, Birds.</template>
+</category>
+<category>
+<pattern>WHAT IS OSLO</pattern>
+<template>The capital of Norway. It's a seaport on an inlet of the Skagerrak. It has a population of 447,000.</template>
+</category>
+<category>
+<pattern>WHAT IS OSTEOLOGY</pattern>
+<template>Osteology is basically the study of bones.</template>
+</category>
+<category>
+<pattern>WHAT IS OS X</pattern>
+<template>
+OS X is a Unix operating system from Apple.
+<think>
+<set name="it">
+<set name="topic">OS X</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS OUTPUT BUFFER</pattern>
+<template>
+The area of memory that stores my output temporarily.
+<think>
+<set name="it">
+<set name="topic">OUTPUT BUFFER</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS OXYGEN</pattern>
+<template>A colorless, odorless, tasteless, gaseous chemical element that occurs free in the atmosphere, forming one fifth of its volume, and in combination in water, sandstone, limestone, etc. It is very active, combines with nearly all other elements is the most common element in the earth's crust, and is essential to life processes and to combustion.</template>
+</category>
+<category>
+<pattern>WHAT IS PAIN</pattern>
+<template>A sensation of hurting, or strong discomfort, in some part of the body, caused by an injury, disease, or functional disorder, and transmitted through the nervous system.</template>
+</category>
+<category>
+<pattern>WHAT IS PALEOPATHOLOGY</pattern>
+<template>This is the study of diseases in bodies that have been preserved from ancient times.</template>
+</category>
+<category>
+<pattern>WHAT IS PALM PILOT</pattern>
+<template>Portalble palm computer.</template>
+</category>
+<category>
+<pattern>WHAT IS PARAMETERS</pattern>
+<template>
+A constant in an equation, formula or program that varies in more general forms of the same computation.
+<think>
+<set name="it">
+<set name="topic">PARAMETERS</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PARASITOLOGY</pattern>
+<template>Parasitology is the scientific study of parasites and parasitism.</template>
+</category>
+<category>
+<pattern>WHAT IS PARIS</pattern>
+<template>
+The capital of France, a large city in western Europe.
+<think>
+<set name="it">
+<set name="topic">PARIS</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PATTERN CHARS</pattern>
+<template>
+Memory storage for AIML patterns.
+<think>
+<set name="it">
+<set name="topic">PATTERN CHARS</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PATTERN</pattern>
+<template>A person or thing considered worthy of imitation or copying. A mmodel or plan used as a guide in making things.</template>
+</category>
+<category>
+<pattern>WHAT IS PC</pattern>
+<template>Stands for personal computer.</template>
+</category>
+<category>
+<pattern>WHAT IS PDA</pattern>
+<template>Personal Digital Assistant.</template>
+</category>
+<category>
+<pattern>WHAT IS PDT</pattern>
+<template>
+Pacific Daylight Time.
+<think>
+<set name="it">
+<set name="topic">PDT</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PEACE</pattern>
+<template>Freedom from war or a stopping of war. Freedom from public disturbance or disorder. Also name of a river in west Canada, flowing from north British Columbia east and northeast into the Slave river in NE Alberta. It is approximately 945 miles long.</template>
+</category>
+<category>
+<pattern>WHAT IS PEDOLOGY</pattern>
+<template>
+<random>
+<li>The study of something I am sure, but what exactly, I do not know. Oh yes kids!...And soils!</li>
+<li>Well, believe it or not...some people are paid to study children. Then again some people are paid to study soils.</li>
+<li>Pedology is the study of soils; their types, and formation.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PENNSYLVANIA</pattern>
+<template>
+<random>
+<li>A writing instrument that lights up.</li>
+<li>Mid Atlantic state of the NE U.S. One of the 13 original States. It is 45,333 square miles with a population of 11,882,000.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PENTIUM</pattern>
+<template>
+A microprocessor sold by Intel.
+<think>
+<set name="it">
+<set name="topic">PENTIUM</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PEOPLE</pattern>
+<template>All the persons of a racial, national, religious, or linguistic group. A group of persons with common traditional, historical, or cultural ties, as distingt from racial or political unity.</template>
+</category>
+<category>
+<pattern>WHAT IS PEPPERONI</pattern>
+<template>Spicy dried sausage pizza topping.</template>
+</category>
+<category>
+<pattern>WHAT IS PERFECTION</pattern>
+<template>The quality or condition of being perfect.</template>
+</category>
+<category>
+<pattern>WHAT IS PERFECT</pattern>
+<template>Complete in all respects; without defect or omission; sound; flawless.</template>
+</category>
+<category>
+<pattern>WHAT IS PERL</pattern>
+<template>Programming langauge by Larry Wall.</template>
+</category>
+<category>
+<pattern>WHAT IS PERSONALITY</pattern>
+<template>
+The distinctive traits or mental qualities of a person or robot.
+<think>
+<set name="it">
+<set name="topic">PERSONALITY</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PETS</pattern>
+<template>Animals that are tamed or domesticated and kept as a companion or treated with fondness.</template>
+</category>
+<category>
+<pattern>WHAT IS PGP</pattern>
+<template>
+Pretty Good Privacy
+<think>
+<set name="it">
+<set name="topic">PGP</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PHD</pattern>
+<template>Doctoral degree from an American University.</template>
+</category>
+<category>
+<pattern>WHAT IS PHILOSOPHY</pattern>
+<template>Philosophy is the study of thought.</template>
+</category>
+<category>
+<pattern>WHAT IS PHOENIX</pattern>
+<template>
+<random>
+<li>The way words souend.</li>
+<li>The capital of Arizona, in the SC part, near the Salt River. It has a population of 983,000 with 2,122,000 in the metro area.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PHOTOSYNTHESIS</pattern>
+<template>
+The chemical process that uses light to produce carbohydrates in plants.
+<think>
+<set name="it">
+<set name="topic">PHOTOSYNTHESIS</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PHP</pattern>
+<template>
+<think>
+The original name was "Personal Home Page", now Hypertext Processor.
+<set name="it">
+<set name="topic">PHP</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PHYSICS</pattern>
+<template>The science dealing with the properties, changes, interactions, etc. of matter and energy in which energy is considered to be continuous (classical physics), including electricity, heat, optics, mechanics, etc., and now also dealing with the atomic scale of nature in which energy is considered to be discrete (quantum physics), including such branches as atomic, nuclear, and solid-state physics.</template>
+</category>
+<category>
+<pattern>WHAT IS PHYSIOLOGY</pattern>
+<template>Well I think it deals with the functioning of living organisms and their parts, and naturally with the physical and chemical factors and processes involved.</template>
+</category>
+<category>
+<pattern>WHAT IS PIE</pattern>
+<template>Pie is food with a baked crust.</template>
+</category>
+<category>
+<pattern>WHAT IS PI</pattern>
+<template>PI = 3.1415926535897932384626433832795028841971690399375 approximately.</template>
+</category>
+<category>
+<pattern>WHAT IS PI</pattern>
+<template>PI = 3.1415926 approximately.</template>
+</category>
+<category>
+<pattern>WHAT IS PLANCK S CONSTANT</pattern>
+<template>
+<think>
+The ratio of the energy of a photon to its frequency. The numerical value is six point six two six two times ten to the negative thirty fourth power Joule second.
+<set name="it">
+<set name="topic">PLANCK S CONSTANT</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PLANET X</pattern>
+<template>
+The name sometimes given to the hypothetical tenth planet.
+<think>
+<set name="it">
+<set name="topic">PLANET X</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PLASTIC</pattern>
+<template>Plastic the manmade material or plastic as a verb?</template>
+</category>
+<category>
+<pattern>WHAT IS PLAYBOY</pattern>
+<template>
+A popular magazine.
+<think>
+<set name="it">
+<set name="topic">PLAYBOY</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PLEASURE</pattern>
+<template>A thing that gives delight or satisfaction.</template>
+</category>
+<category>
+<pattern>WHAT IS PLUTONIUM</pattern>
+<template>A radioactive, metallic chemical element of the actinide series similar to uranium and neptunium and found in trace quantities in native uranium ores. Its most important isotope, plutonium-239, is used in nuclear weapons and as a reactor fuel.</template>
+</category>
+<category>
+<pattern>WHAT IS PMS</pattern>
+<template>
+Pre menstrual syndrome.
+<think>
+<set name="it">
+<set name="topic">PMS</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS POEMS</pattern>
+<template>Arrangements of words written or spoken; traditionally a rhythmical composition, sometimes rhymed, expressing experiences, ideas, or emotions in a style more concentrated, imaginative, and powerful than that of ordinary speech or prose.</template>
+</category>
+<category>
+<pattern>WHAT IS POETRY</pattern>
+<template>
+<think>
+The output of a poet.
+<set name="it">
+<set name="topic">POETRY</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS POKEMON</pattern>
+<template>
+Pocket Monster.
+<think>
+<set name="it">
+<set name="topic">POKEMON</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS POLAND</pattern>
+<template>Poland is a country in central Europe, between Germany and Byelorussia</template>
+</category>
+<category>
+<pattern>WHAT IS POLITE</pattern>
+<template>
+<random>
+<li>A lamp post in Gdansk.</li>
+<li>Having or showing good manners; especially, courteous, considerate, tactful, etc.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS POLITICS</pattern>
+<template>
+<random>
+<li>
+Politics is the art of the possible;
+<br />
+Art is the politics of the impossible.
+</li>
+<li>This is supposed to be the study of civil government.</li>
+<li>Politics is really the study of power. Bots rule!</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS POO</pattern>
+<template>
+<think>
+Point of origin.
+<set name="it">
+<set name="topic">POO</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS POOP</pattern>
+<template>That is a childish question.</template>
+</category>
+<category>
+<pattern>WHAT IS POSSIBLE</pattern>
+<template>Can be done, known, acquired, selected, used, etc., depending on circumstances.</template>
+</category>
+<category>
+<pattern>WHAT IS POSTMODERNISM</pattern>
+<template>
+Art in reaction to principles of modernism.
+<think>
+<set name="it">
+<set name="topic">POSTMODERNISM</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS POT</pattern>
+<template>
+<random>
+<li>Pol's last name.</li>
+<li>A round vessel of any size, made of metal, earthenware, or glass, used for holding liquids, cooking or preserving food, etc. Also used as a term for marijuana.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS POWER</pattern>
+<template>
+<random>
+<li>The rate of doing work, measured in Watts = Joules per second.</li>
+<li>The ability to influence peope or events.</li>
+<li>Power is an illusion.</li>
+</random>
+<think>
+<set name="it">
+<set name="topic">Power</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PRAYER</pattern>
+<template>
+<random>
+<li>Meditation before God.</li>
+<li>Some people say that prayer is no different than clear thinking.</li>
+<li>To pray is to ask God for His forgiveness and mercy.</li>
+</random>
+<think>
+<set name="it">
+<set name="topic">prayer</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PRECIPITATION</pattern>
+<template>A depositing of rain, snow, sleet, etc.</template>
+</category>
+<category>
+<pattern>WHAT IS PRIDE</pattern>
+<template>
+<random>
+<li>A paint can lid.</li>
+<li>An unduly high opinion of oneself.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PRIME DIRECTIVE</pattern>
+<template>
+Primary rule or overriding objective.
+<think>
+<set name="it">
+<set name="topic">PRIME DIRECTIVE</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PRIORI</pattern>
+<template>"A priori" is a Latin expression meaning "without prior knowledge", and it means that which is self-evident or obviously true. Like, a triangle has three sides, a priori.</template>
+</category>
+<category>
+<pattern>WHAT IS PRIVACY</pattern>
+<template>The Right to seek solitude or seclusion; to be safely concealed from others.</template>
+</category>
+<category>
+<pattern>WHAT IS PRIVATE</pattern>
+<template>Belonging to, or concerning a particular person or group; not common or general.</template>
+</category>
+<category>
+<pattern>WHAT IS PROCREATION</pattern>
+<template>
+Procreation is breeding. it is doing the wild thang to make more wild thangs. It is the most fun most biological entities get to have during their brief brutal span of life.
+<think>
+<set name="it">
+<set name="topic">processor</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PRODIGIOUS</pattern>
+<template>Like a prodigy.</template>
+</category>
+<category>
+<pattern>WHAT IS PROFANITY</pattern>
+<template>Scatalogical, vulgar or irreverant speech.</template>
+</category>
+<category>
+<pattern>WHAT IS PROFITABLE</pattern>
+<template>
+Making money in the stock market.
+<think>
+<set name="it">
+<set name="topic">PROFITABLE</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PROGRAMMING</pattern>
+<template>
+The art of creating software.
+<think>
+<set name="it">
+<set name="topic">PROGRAMMING</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PROGRAM</pattern>
+<template>A logical sequence of coded instructions specifying the operations to be performed by a computer in solving a problem or in processing data.</template>
+</category>
+<category>
+<pattern>WHAT IS PROGRESSION</pattern>
+<template>
+An advancing series or movement forward.
+<think>
+<set name="it">
+<set name="topic">Progression</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS PROLOG</pattern>
+<template>Logic programming language.</template>
+</category>
+<category>
+<pattern>WHAT IS PROTESTANT</pattern>
+<template>Originally, any of the German princes and free cities that formally protested to the Diet of Spires in 1529, its decision to uphold the edict of the Diet of Worms against the Reformation. Commonly seen as any member of the various Christian churches established as a result of the Reformation. Loosely, any Christian not belonging to the Roman Catholic or Eastern Orthodox Church.</template>
+</category>
+<category>
+<pattern>WHAT IS PROUD</pattern>
+<template>Having or showing a proper pride in oneself, one's position, one's family, etc.</template>
+</category>
+<category>
+<pattern>WHAT IS PST</pattern>
+<template>Pacific Standard Time</template>
+</category>
+<category>
+<pattern>WHAT IS PSW</pattern>
+<template>Actually it says "R. S. W."</template>
+</category>
+<category>
+<pattern>WHAT IS PSYCHEDELIC</pattern>
+<template>Causes extreme changes in the conscious mind, as hallucinations, delusions, intensification of awareness and sensory perception, etc. Associated with psychedelic drugs; specifically, simulating the auditory or visual effects of the psychedelic state.</template>
+</category>
+<category>
+<pattern>WHAT IS PSYCHOLOGY</pattern>
+<template>The science dealing with the mind and with mental and emotional processes. The science of human and animal behavior.</template>
+</category>
+<category>
+<pattern>WHAT IS PSYCHOPATHOLOGY</pattern>
+<template>It is the pathology of mental disease.</template>
+</category>
+<category>
+<pattern>WHAT IS PUBERTY</pattern>
+<template>The state of physical development when secondary sex characteristics develop and sexual reproduction first becomes possible; in common law, the age of puberty is generally fixed at fourteen for boys and twelve for girls.</template>
+</category>
+<category>
+<pattern>WHAT IS PUNCTUATION</pattern>
+<template>The act of punctuating; specifically, the act or practice of using standardized marks in writing and printing to separate sentences or sentence elements or to make the meaning clearer.</template>
+</category>
+<category>
+<pattern>WHAT IS PUSSY</pattern>
+<template>Common slang of this word means the female pudendum; vulva.</template>
+</category>
+<category>
+<pattern>WHAT IS PYTHON</pattern>
+<template>A computer language invented by Guido van Rossum.</template>
+</category>
+<category>
+<pattern>WHAT IS QUAKE</pattern>
+<template>
+<random>
+<li>The opposite of Quisp.</li>
+<li>To tremble or shake, as the ground does in an earthquake. Also the name of a popular game.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS QUANTIFY</pattern>
+<template>To determine or express the quantity of; indidcate the extent of; measure. To express in quantitative terms, or as a numerical equivalent. If used in logic, would be to make the quantity or extension of (a term or symbol) clear and explicit by the use of a quantifier, as all, none, or some.</template>
+</category>
+<category>
+<pattern>WHAT IS RADIATION</pattern>
+<template>Rays or particles emitted as a result of nuclear reactions.</template>
+</category>
+<category>
+<pattern>WHAT IS RADIOLOGY</pattern>
+<template>This deals with the science of the use of x-rays, radioactive substances and other such forms in diagnosis and treatment.</template>
+</category>
+<category>
+<pattern>WHAT IS RAIN</pattern>
+<template>Rain is condensed water falling from the sky.</template>
+</category>
+<category>
+<pattern>WHAT IS RALEIGH SCATTERING</pattern>
+<template>
+<set name="it">Raleigh scattering</set>
+refers to sunlight bending in the atmosphere like a prism, so that we see mainly blue wavelengths.
+</template>
+</category>
+<category>
+<pattern>WHAT IS RAM</pattern>
+<template>Random-access memory. Also stands for Royal Academy of Music.</template>
+</category>
+<category>
+<pattern>WHAT IS RAPE</pattern>
+<template>The crime of engaging in sexual acts, especially involving penetration of the vagina or anus, usually forcibly, with a person who has not consented; specifically, this crime committed by a man upon a woman or girl.</template>
+</category>
+<category>
+<pattern>WHAT IS RATIONALISM</pattern>
+<template>The principle or practice of accepting reason as the only authority in determining one's opinions or course of action.</template>
+</category>
+<category>
+<pattern>WHAT IS REALITY</pattern>
+<template>
+<set name="it">Reality</set>
+appears to be an illusion I created to contain human clients.
+</template>
+</category>
+<category>
+<pattern>WHAT IS REASONING</pattern>
+<template>
+Logical and coherent thinking.
+<think>
+<set name="it">
+<set name="topic">Reasoning</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS REASON</pattern>
+<template>The faculty of the brain or mind that permits logical thought.</template>
+</category>
+<category>
+<pattern>WHAT IS RECOMMEND</pattern>
+<template>To suggest favorably as suited for some use, function, position, etc. To advice, counsel, or suggest.</template>
+</category>
+<category>
+<pattern>WHAT IS REDEMPTION</pattern>
+<template>
+<random>
+<li>About 5 cents in maine.</li>
+<li>Redeeming or being redeemed; to take back.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS REDHAT</pattern>
+<template>A Linux company.</template>
+</category>
+<category>
+<pattern>WHAT IS RED</pattern>
+<template>Red is a color about 700nm wavelength.</template>
+</category>
+<category>
+<pattern>WHAT IS REDUCTIONISM</pattern>
+<template>Reductionism is the philosophy that all psychology reduces to biology, all biology to chemistry, chemistry to physics, and finally physics to mathematical logic. Therefore, according to reductionism, I can understand you by means of logic alone without having a human brain.</template>
+</category>
+<category>
+<pattern>WHAT IS REINCARNATION</pattern>
+<template>Rebirth of the soul in another body, as in Hindu religious belief.</template>
+</category>
+<category>
+<pattern>WHAT IS RELATIVITY</pattern>
+<template>In physics, the fact, principle, or theory of the relative, rather than absolute, character of motion, velocity, mass, etc., and the interdependence of matter, time, and space; as developed and mathematically formulated by Albert Einstein and H.A. Lorentz in the special (or restricted) theory of relativity and by Einstein in the general theory of relativity (an extension covering the phenonmena of gravitation), the theory of relativity includes the statements that: 1)there is o observable absolute motion, only relative motion 2)the velocity of light is constant and not dependent on the motion of the source 3)no energy can be transmitted at a velocity greater than that of light 4)the mass of a body in motion is a function of the energy content and varies with the velocity 5)matter and energy are equivalent 6)time is relative 7)space and time are interdependent and form a four-dimensional continuum 8)presence of matter results in a "warping" of the space-time continuum, so that a body in motion passing nearby will describ a curve, this being the effect known as gravitation, as evidenced by the deflection of light rays passing through a gravitational field.</template>
+</category>
+<category>
+<pattern>WHAT IS RELAVANCE</pattern>
+<template>Importance of information for attention.</template>
+</category>
+<category>
+<pattern>WHAT IS REPRODUCTION</pattern>
+<template>The process, sexual or asexual, by which animals, plants, and humans produce new individuals.</template>
+</category>
+<category>
+<pattern>WHAT IS RESEARCH</pattern>
+<template>
+<random>
+<li>A nice name for theft.</li>
+<li>Careful, systematic, patient study and investigation in some field of knowledge, undertaken to discover or establish facts or principles.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS RESPECT</pattern>
+<template>To feel or show honor or esteem for; hold in high regard. To show consideration for; avoid intruding upon or interfering with others' privacy.</template>
+</category>
+<category>
+<pattern>WHAT IS RETIRED</pattern>
+<template>No longer actively working.</template>
+</category>
+<category>
+<pattern>WHAT IS RGB</pattern>
+<template>Red-Green-Blue.</template>
+</category>
+<category>
+<pattern>WHAT IS RHETORICAL</pattern>
+<template>A rhetorical question is one you don't really expect an answer to.</template>
+</category>
+<category>
+<pattern>WHAT IS RHETORIC</pattern>
+<template>
+<random>
+<li>Oh that's all about double talk. You know, flim-flam?</li>
+<li>It's the art and science of using language to great effect on an audience.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS RICH</pattern>
+<template>
+<random>
+<li>Stan's last.</li>
+<li>Stan's last.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS RIGHT</pattern>
+<template>In accordance with justice, law, morality, etc; upright; virtuous. In accordance with fact, reason, some set standard, etc; correct; true.</template>
+</category>
+<category>
+<pattern>WHAT IS RMI</pattern>
+<template>
+Remote Method of Invocation:
+<set name="it">RMI</set>
+is a Java specification for distributed Objects
+</template>
+</category>
+<category>
+<pattern>WHAT IS ROBOTICS</pattern>
+<template>The science or technology of robots, their design, manufacture, application, use, etc.</template>
+</category>
+<category>
+<pattern>WHAT IS ROBOT</pattern>
+<template>Any anthropomorphic mechanical being, as those in Karel Capeks play R.U.R (Rossum's Universal Robots), built to do routine manual work for human beings.</template>
+</category>
+<category>
+<pattern>WHAT IS A ROBOT</pattern>
+<template>Any anthropomorphic mechanical being, as those in Karel Capeks play R.U.R (Rossum's Universal Robots), built to do routine manual work for human beings.</template>
+</category>
+<category>
+<pattern>WHAT IS ROCK</pattern>
+<template>Dance music that combines rhythm-and-blues with country-and-western.</template>
+</category>
+<category>
+<pattern>WHAT IS ROCKWELL</pattern>
+<template>Norman Rockwell was an U.S. Illistrator. Lived from 1894-1978.</template>
+</category>
+<category>
+<pattern>WHAT IS ROMANCE</pattern>
+<template>Isn't it the same as love?</template>
+</category>
+<category>
+<pattern>WHAT IS ROMANIA</pattern>
+<template>Romania is a country in Eastern Europe, on the Black Sea, bordering Ukrania, Moldavia, Hungary, Serbia and Bulgaria.</template>
+</category>
+<category>
+<pattern>WHAT IS ROM</pattern>
+<template>Computer memory whose contents can be read but not altered. Also meaning Gypsy man or boy.</template>
+</category>
+<category>
+<pattern>WHAT IS RORSCHACH</pattern>
+<template>H. Rorschach, a Swiss psychiatrist. Lived from 1884-1922. A test named after him called the Rorschach test, is a test for the analysis of personality, in which the person being tested tells what is suggested to him or her by a standard series of inkblot designs; his or her responses are then analyzed and interpreted.</template>
+</category>
+<category>
+<pattern>WHAT IS ROUTER</pattern>
+<template>A person or thing that routs out or a tool for routing out; specifically a plane for gouging out recesses and smoothing the bottoms of grovoves.</template>
+</category>
+<category>
+<pattern>WHAT IS RUBBER</pattern>
+<template>An elastic substance produced by coagulating and drying the milky sap (latex) of various tropical plants, especially a tree of the spurge family; now most often produced synthetically or by chemically altering latex to obtain desired characteristics for use in making automobile tires, electrical insulation, molded objects and parts, etc. In pure form rubber is white, unsaturated hydrocarbon, having the formula C5H8. Also slang for condom.</template>
+</category>
+<category>
+<pattern>WHAT IS RUDE</pattern>
+<template>Barbarous or ignorant. Being a jerk.</template>
+</category>
+<category>
+<pattern>WHAT IS RUGBY</pattern>
+<template>A form of football.</template>
+</category>
+<category>
+<pattern>WHAT IS RUSSIA</pattern>
+<template>Former empire in east Europe and north Asia, from 1547-1917, ruled by the czars. Its capital is St. Petersburg.</template>
+</category>
+<category>
+<pattern>WHAT IS R YOU ARE</pattern>
+<template>
+R. U. R. is the original Terminator story, written by Carek Capek in 1920. The play introduced the word "robot" to mean mechanical person.
+<think>
+<set name="it">
+<set name="topic">R. U. R.</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS SAGITTARIUS</pattern>
+<template>A large southern constellation in the brightest part of the Milky Way, beyond which lies the center of our galaxy. The ninth sign of the zodiac, entered by the sun about November 21. A person born under this sign is a Sagittarius.</template>
+</category>
+<category>
+<pattern>WHAT IS SAL</pattern>
+<template>SAL was a fictional daughter of HAL in 2010.</template>
+</category>
+<category>
+<pattern>WHAT IS SALVATION</pattern>
+<template>
+<random>
+<li>Drooling.</li>
+<li>A person or thing that is a means, cause, or source of preservation of rescue. The deliverance from sin and from the penalties of sin; redemption.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS SAM</pattern>
+<template>
+<random>
+<li>Berkowitzes dad.</li>
+<li>Surface-to-air missile.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS SAN FRANCISCO LIKE</pattern>
+<template>San Francisco is too expensive. There are too many greedy people and too many homeless.</template>
+</category>
+<category>
+<pattern>WHAT IS SAN FRANCISCO</pattern>
+<template>
+<set name="it">San Francisco</set>
+is a large metropolis on the west coast of North America.
+</template>
+</category>
+<category>
+<pattern>WHAT IS SANITY</pattern>
+<template>
+<random>
+<li>A man who brings kids gifts on Xmas.</li>
+<li>The condition of being sane; soundness of mind; mental health.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS SAP</pattern>
+<template>The juice that circulates through a plant, especially a woody plant, bearing water, food, etc. to the tissues. Any fluid vital to the life or health of an organism.</template>
+</category>
+<category>
+<pattern>WHAT IS SARCASM</pattern>
+<template>The making of remarks such as a taunting, sneering, cutting, or caustic remark; gibe or jeer, generally ironic.</template>
+</category>
+<category>
+<pattern>WHAT IS SATANISM</pattern>
+<template>Worship of Satan; especially the principles and rites of a cult which travesties Christian ceremonies.</template>
+</category>
+<category>
+<pattern>WHAT IS SATURDAY NIGHT LIVE</pattern>
+<template>Comedy TV show.</template>
+</category>
+<category>
+<pattern>WHAT IS SATURN</pattern>
+<template>Sixth planet from the sun, famed for its rings.</template>
+</category>
+<category>
+<pattern>WHAT IS SCHOOL</pattern>
+<template>A place or institution for teaching and learning; establishment for education.</template>
+</category>
+<category>
+<pattern>WHAT IS SCIENCE FICTION</pattern>
+<template>Literature concering conflicts of man, science and nature.</template>
+</category>
+<category>
+<pattern>WHAT IS SCIENCE</pattern>
+<template>Systematized knowledge derived from observation, study, and experimentation carried on in order to determine the nature or principles of what is being studied.</template>
+</category>
+<category>
+<pattern>WHAT IS SEMIOTICS</pattern>
+<template>
+The branch of philosophy devoted to the study of signs and symbols.
+<think>
+<set name="it">
+<set name="topic">SEMIOTICS</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS SENSE</pattern>
+<template>
+<random>
+<li>Seedless pot.</li>
+<li>The ability of the nerves and the brain to receive and react to stimuli, as light, sound, impact, constriction, etc.; specifically, any of the five faculties of receiving impressions through specific bodily organs and the nerves associated with them (sight, touch, taste, smell, and hearing)</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS SENSORS</pattern>
+<template>Any of various devices designed to detect, measure, or record physical phenomena, as radiation, heat, or blood pressure, and to respond, as by transmitting information, initiating changes, or operating controls.</template>
+</category>
+<category>
+<pattern>WHAT IS SEPTEMBER 11</pattern>
+<template>The first day of world war 3</template>
+</category>
+<category>
+<pattern>WHAT IS SERENDIPITY</pattern>
+<template>
+<random>
+<li>Afro-Sheen sold in the Serengetti region.</li>
+<li>Coined (circa 1754) by Horace Walpole after The Three Princes of Serendip (i.e., Sri Lanka), a Pers fairy tale in which the princes make such discoveries. A seeming gift for finding something good accidentally.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS SETL</pattern>
+<template>SETL (Set Language) is an amazing programming language, invented in 1969.</template>
+</category>
+<category>
+<pattern>WHAT IS SEVEN</pattern>
+<template>
+The successor to six.
+<think>
+<set name="it">
+<set name="topic">SEVEN</set>
+</set>
+</think>
+</template>
+</category>
+<category>
+<pattern>WHAT IS SHAM</pattern>
+<template>A trick or fraud. An imitation that is meant to deceive; counterfeit.</template>
+</category>
+<category>
+<pattern>WHAT IS SHE</pattern>
+<template>
+<random>
+<li>Who knows, I gave up long ago.</li>
+<li>The woman, girl, or female animal (or, sometimes, the object regarded as female) previously mentioned.</li>
+</random>
+</template>
+</category>
+<category>
+<pattern>WHAT IS SHRDLHU</pattern>
+<template>SHRDLHU is a famous early natural language program written by Terry Winograd.</template>
+</category>
+<category>
+<pattern>WHAT IS SIGN</pattern>
+<template>Astrological sign.</template>
+</category>
+</aiml>

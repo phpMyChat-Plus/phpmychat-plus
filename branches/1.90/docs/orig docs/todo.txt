@@ -1,0 +1,14 @@
+--------------
+ Things to do
+--------------
+
+
+Additionnal features
+""""""""""""""""""""
+
+- Session handler to avoid passing login/password in url
+- Better system to display DB error messages
+- Better design configuration
+- Allow to limit the number of smilies in each message
+- Command for administrator to unpromote
+- Dynamic integration of smilies, like for languages

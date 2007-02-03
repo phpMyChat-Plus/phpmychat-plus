@@ -1,0 +1,42 @@
+-----------------------
+ Translating phpMyChat
+-----------------------
+
+
+If you can translate phpMyChat in a language that is not included in the
+package or improve/complete an existing translation, please do so and send us back the
+files. They will be included in the next release with credits for you, of
+course.
+
+Four parts of phpMyChat may be translated : the strings used
+during a chat discussion, the tutorial, the string used by the administration
+script and the strings used for the setup process.
+
+
+How to translate phpMyChat ?
+""""""""""""""""""""""""""""
+
+The most important ones are the first three file in the list before. Among them:
+- if you have not much time just translate the first one (used by the main script);
+- if you have a little more time translate the third one (used by the admin script);
+- if you still have some free time, translate the second one (the tutorial).
+
+To create a new translation for phpMyChat:
+- duplicate the 'chat/localization/english' sub-directory and rename it with the
+	name of the new language (for example, 'chat/localization/venusian');
+- inside this new directory, edit the file you want to do the work for
+	('localized.chat.php', 'localized.admin.php' and 'localized.tutorial.php'
+	contain strings used by the main script, the administration script
+	and tutorial) and translate all the English strings inside (those which
+	appear in "define" instructions);
+- you may now add your name and e-mail at the top of the file you have translated;
+- then replace the 'flag.gif' icon with the one corresponding to your translation
+	(same format, please).
+
+To improve/complete a translation: just edit the corresponding file from the
+'chat/localization/yourlang' sub-directory and do the work.
+
+
+Lastly, if you don't know what to do all day long, you can translate the
+setup process. The work to do is the same than the one described before, except that it
+applies to only one file located in the 'chat/setup/languages' sub-directory.

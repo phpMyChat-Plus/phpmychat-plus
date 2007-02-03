@@ -1,0 +1,28 @@
+-----------------
+ Giving feedback
+-----------------
+
+
+Found a Bug?
+""""""""""""
+
+If you have found a bug you can help us!
+Please have a look at the 'docs/bug_report.txt' file.
+
+
+How to Help Us?
+"""""""""""""""
+
+There are many ways in which you can help out in the development of
+phpMyChat.
+
+The first and best way you are already doing. You are using, or trying to use, it.
+
+One of the keys to a great product is its users. Without users we can't
+find bugs or get feedback on what's good and what sucks.
+
+There are also certain areas that need improvement, especially databases.
+... and English documentation authoring. :)
+
+Lastly you can translate phpMyChat or complete/improve existing tanslations
+(see translation.txt in the 'docs' dir).
