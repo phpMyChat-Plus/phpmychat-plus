@@ -59,13 +59,13 @@ $y='./'.C_LOG_DIR.'/'; #define which year you want to read
 $year = opendir($y); #open directory
 while (false !== ($yr = readdir($year)))
 {
-	if (!eregi("\.html",$yr) && $yr!='.' && $yr!='..')
+	if (!eregi("\.html",$yr) && $yr!='.' && $yr!='..' && !eregi("\.htaccess",$yr))
 	{
 		$yeardir = $yr;
 				echo("<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table><tr>");
 				echo ("<td valign=top align=center nowrap=\"nowrap\" colspan=5><font size=4 color=red><b>$yr</b></font><br /><a href=\"$pstr&ydel=".$y.$yr."\" title=\"Delete all $yr logs\"><font size=-2 color=red><b>Delete year</b></font></a></td>"); #print name of each file found
 		$m=$y.$yeardir; #define which month you want to read
-		$month = opendir($m); #open directory
+ $month = opendir($m); #open directory
 		while (false !== ($mt = readdir($month)))
 		{
 			if (!eregi("\.html",$mt) && $mt!='.' && $mt!='..')
