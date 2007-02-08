@@ -151,7 +151,7 @@ else
 <head>
 <title>Invalid address - Lurking feature disabled</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<LINK REL="stylesheet" HREF="./config/style.css.php" TYPE="text/css">
+<LINK REL="stylesheet" HREF="./config/style1.css.php" TYPE="text/css">
 </head>
 
 <body class="frame">

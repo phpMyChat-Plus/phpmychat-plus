@@ -5,12 +5,14 @@ Server environment - tested env: Apache/1.3.34 (Unix), php v.4.3.11 (non-safe-mo
 Connection troubles with IE 7.0 beta. (reported on different sites)
 
 Fixes History:
-06.09.2006 - 1.91:
+15.02.2007 - 1.91:
 - Some Admin panel/Configuration adjustments (usability related)
 - Improved/fixed the update check in Config/Admin panel. (administration related)
 - Download link on index page directed to the SourceForge page (link update)
 - Cleaned up the bot folder, removing unnecessary files and folders (size related)
 - Fixed a Color cookie issue for power users switching to normal users on login - now deleting the cookie color of a power user when exits chat, to avoid the filter error alert if he logs in back as a lowered power user (functionality related)
+- Admin/user notifications improvements. (email display related)
+- Added Admin notification on user deletion. (administration related)
 - Changed the Entrance sound feature to include an optional Welcome sound heard only by the user.
 	- there are 4 types of settings for this:
 			- 0 - Disabled - no sounds on entrance;

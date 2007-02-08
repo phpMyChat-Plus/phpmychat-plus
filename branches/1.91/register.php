@@ -143,7 +143,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 	if (C_ADMIN_NOTIFY)
 	{
      $emailMessage = "New user registration notification for "
-     . APP_NAME.":\n\n"
+     . APP_NAME ." at ". C_CHAT_URL." :\n\n"
      . "----------------------------------------------\n"
      . "Username: ".stripslashes($U)."\n\n"
      . "Password: ".stripslashes($pmc_password)."\n"
@@ -173,7 +173,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 	if (C_EMAIL_USER)
 	{
      $emailMessage = "You have just registered this account for "
-     . APP_NAME.":\n\n"
+     . APP_NAME ." at ". C_CHAT_URL." :\n\n"
      . "----------------------------------------------\n"
      . "Username: ".stripslashes($U)."\n"
 	   . "Password: ".stripslashes($pmc_password)."\n\n"

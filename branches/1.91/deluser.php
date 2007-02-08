@@ -46,6 +46,50 @@ if ($perms == "admin") $Msg = L_ERR_USR_12;
 if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_20)
 {
 	$DbLink = new DB;
+// Patch to send an email to the Admin after deletion of an username.
+// by Ciprian using Bob Dickow's registration patch.
+	if (C_ADMIN_NOTIFY)
+	{
+	include("./lib/get_IP.lib.php");		// Set the $IP var
+	$DbLink->query("SELECT firstname,lastname,country,website,email,showemail,gender,allowpopup,picture,description,favlink,favlink1,slang FROM ".C_REG_TBL." WHERE username='$pmc_username' LIMIT 1");
+	if ($DbLink->num_rows() != 0)
+	{
+			  list($FIRSTNAME, $LASTNAME, $COUNTRY, $WEBSITE, $EMAIL, $SHOWEMAIL, $GENDER, $ALLOWPOPUP, $PICTURE, $DESCRIPTION, $FAVLINK, $FAVLINK1, $SLANG) = $DbLink->next_record();
+	}
+     if (($GENDER & 3) == 1) {
+       $sex = " male";
+     } elseif (($GENDER & 3) == 2 ) {
+       $sex = " female";
+     } else {
+       $sex = " unspecified";
+     }
+	     $tm = getdate();
+	     $dt = $tm[mon]."/".$tm[mday]."/".$tm[year];
+	     $tm = sprintf("%02.u:%02.u:%02.u",$tm[hours],$tm[minutes],$tm[seconds]);
+     $emailMessage = "User account deleted from "
+     . APP_NAME ." at ". C_CHAT_URL." :\n\n"
+     . "----------------------------------------------\n"
+     . "Username: ".stripslashes($pmc_username)."\n\n"
+     . "----------------------------------------------\n"
+     . "First name: ".stripslashes($FIRSTNAME)."\n"
+     . "Last name: ".stripslashes($LASTNAME)."\n"
+     . "Gender: $sex\n"
+     . "Email: $EMAIL\n"
+     . "Country: ".stripslashes($COUNTRY)."\n"
+     . "WWW: ".stripslashes($WEBSITE)."\n"
+     . "Spoken languages: ".stripslashes($SLANG)."\n"
+     . "Description: ".stripslashes($DESCRIPTION)."\n"
+     . "Favorite link 1: ".stripslashes($FAVLINK)."\n"
+     . "Favorite link 2: ".stripslashes($FAVLINK1)."\n"
+     . "Picture: ".stripslashes($PICTURE)."\n"
+     . "Date of deletion: $dt\n"
+     . "Time of deletion: $tm\n"
+     . "IP address: $IP (".gethostbyaddr($IP).")\n"
+     . "----------------------------------------------";
+     mail(C_ADMIN_EMAIL,"[".APP_NAME."] "
+     . "User Account Deletion Notification",$emailMessage);
+// end of patch to send an email to the Admin at the time of user account deletion.
+	}
 	$DbLink->query("DELETE FROM ".C_REG_TBL." WHERE username='$pmc_username'");
 	$Msg = L_REG_21;
 	$DbLink->close();

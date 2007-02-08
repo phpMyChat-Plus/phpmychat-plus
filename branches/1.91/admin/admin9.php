@@ -59,7 +59,7 @@ $y='./'.C_LOG_DIR.'/'; #define which year you want to read
 $year = opendir($y); #open directory
 while (false !== ($yr = readdir($year)))
 {
-	if (!eregi("\.html",$yr) && $yr!='.' && $yr!='..' && !eregi("\.htaccess",$yr))
+	if (!eregi("\.html",$yr) && $yr!='.' && $yr!='..')
 	{
 		$yeardir = $yr;
 				echo("<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table><tr>");

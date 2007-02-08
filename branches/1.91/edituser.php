@@ -129,7 +129,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 	     $dt = $tm[mon]."/".$tm[mday]."/".$tm[year];
 	     $tm = sprintf("%02.u:%02.u:%02.u",$tm[hours],$tm[minutes],$tm[seconds]);
 	     $emailMessage = "You have just changed important account info for "
-	     . APP_NAME." (account affected: ".stripslashes($pmc_username).")\n\n"
+     . APP_NAME ." at ". C_CHAT_URL." : (account affected: ".stripslashes($pmc_username).")\n\n"
 	     . "Here is your updated account info:\n\n"
 	     . "----------------------------------------------\n"
 	     . "New Username: ".stripslashes($U)."\n"

@@ -125,7 +125,7 @@ header("Content-Type: text/html; charset=${Charset}");
 <HEAD>
 <META HTTP-EQUIV="Refresh" CONTENT="10" CHARSET=<?php echo($Charset); ?>">
 <TITLE><?php echo(APP_NAME." - Current messages ".($Room != "" ? "in ".stripslashes($R)." room" : "")." - ".date("r")); ?></TITLE>
-<LINK REL="stylesheet" HREF="<?php echo("./${ChatPath}config/style.css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
+<LINK REL="stylesheet" HREF="<?php echo("./${ChatPath}config/style1.css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 </HEAD>
 	<BODY>
 <?php
