@@ -1,3 +1,5 @@
+ALTER TABLE c_ban_users
+			ADD reason varchar(100) NOT NULL default '';
 ALTER TABLE c_config
 			CHANGE ALLOW_ENTRANCE_SOUND ALLOW_ENTRANCE_SOUND enum('0','1','2','3') NOT NULL default '1',
 			CHANGE COLOR_CDC1 COLOR_CD8 VARCHAR(25) NOT NULL,

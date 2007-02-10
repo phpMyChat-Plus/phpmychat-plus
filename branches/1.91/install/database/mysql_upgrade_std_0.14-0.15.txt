@@ -94,6 +94,9 @@ CREATE TABLE bot_thatstack (
   PRIMARY KEY (id)
 ) TYPE=MyISAM AUTO_INCREMENT=63 ;
 
+ALTER TABLE c_ban_users
+			ADD reason varchar(100) NOT NULL default '';
+
 CREATE TABLE c_config (
   ID tinyint(1) NOT NULL default '0',
   MSG_DEL tinyint(1) NOT NULL default '0',
