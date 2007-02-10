@@ -40,7 +40,7 @@ That's it! It should fly!
 Optional
 If you want to use the bot follow these instructions:
 - Very important: Don't change bot's name (in admin panel) before the next 8 steps (only if successful)
-1. Open your browser and type: http://yoursiteurl.com/plus/bot/boatloader.php
+1. Open your browser and type: http://yoursiteurl.com/plus/bot/botloader.php
 2. Wait for the loader to finish the import operation. At the end, you can test the bot following the instructions on the bottom of that page.
 3. If it works from talk.htm (.php), it should work now in your chat as well.
 4. To start the bot in a room, type: /bot start
