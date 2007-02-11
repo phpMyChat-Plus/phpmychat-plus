@@ -14,7 +14,7 @@ ALTER TABLE c_config
 			ADD WELCOME_SOUND varchar(255) NOT NULL default '',
 			ADD WORLDTIME enum('0','1','2') NOT NULL default '2';
 UPDATE c_config SET
-			ENTRANCE_SOUND = 'sounds/beep.wav',
+			ENTRANCE_SOUND = 'sounds/chimeup.wav',
 			CMDS = '<br>/away /buzz /demote /dice /dice2 /dice3 /high /img /mr /room<br>/size /sort /topic /wisp',
 			COLOR_CD2 = 'tomato',
 			COLOR_CD3 = 'dimgray',
