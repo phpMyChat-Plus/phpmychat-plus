@@ -32,6 +32,10 @@ UPDATE c_config SET
 			WELCOME_SOUND = 'sounds/hello.wav',
 			WORLDTIME = '2'
 	WHERE ID='0';
+ALTER TABLE c_reg_users
+			ADD id int(11) NOT NULL default '0' FIRST,
+			ADD cid int(11) NOT NULL auto_increment after id,
+			ADD PRIMARY KEY (cid);
 UPDATE c_reg_users SET
 			slang = 'English, German',
 			favlink = 'http://www.alicebot.org/documentation/',

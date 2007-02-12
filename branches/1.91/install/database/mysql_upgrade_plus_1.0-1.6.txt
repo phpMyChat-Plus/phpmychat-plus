@@ -66,6 +66,10 @@ UPDATE c_config SET
 	WHERE ID='0';
 ALTER TABLE c_messages
 			ADD room_from varchar(30) NOT NULL default '';
+ALTER TABLE c_reg_users
+			ADD id int(11) NOT NULL default '0' FIRST,
+			ADD cid int(11) NOT NULL auto_increment after id,
+			ADD PRIMARY KEY (cid);
 UPDATE c_reg_users SET
 			IP = '-No tracking IP-',
 			description = 'I am a Robot originally called Alice. I am proud to be the first Artificial Intelligence on the net! Please test my capabilities as you wish! To start a public conversation with me just type "hello myname" in the room I am active in, to stop the conversation type "bye myname" or "myname> bye". But we can also talk in private; just click on my name whenever you need a shoulder to cry on :p Ohhh... I wish to express my gratitude to Roy, Popeye and Ciprian for making me available for chatting in here. :)',

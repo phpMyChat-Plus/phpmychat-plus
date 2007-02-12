@@ -256,6 +256,8 @@ ALTER TABLE c_messages
 			ADD room_from varchar(30) NOT NULL default '';
 
 ALTER TABLE c_reg_users
+			ADD id int(11) NOT NULL default '0' FIRST,
+			ADD cid int(11) NOT NULL auto_increment after id,
 			ADD ip varchar(16) NOT NULL default '',
 			ADD gender tinyint(1) DEFAULT '0' NOT NULL default '',
 			ADD allowpopup tinyint(1) NOT NULL default '1',
@@ -265,7 +267,8 @@ ALTER TABLE c_reg_users
 			ADD favlink1 varchar(255) NOT NULL default '',
 			ADD slang varchar(255) NOT NULL default '',
 			ADD colorname varchar(25) NOT NULL default '',
-			ADD avatar varchar(255) NOT NULL default '';
+			ADD avatar varchar(255) NOT NULL default '',
+			ADD PRIMARY KEY (cid);
 
 INSERT INTO c_reg_users VALUES('plusbot', '', '47e014ee34869ded7e5236541246319d', 'Bot', 'phpMyChat - Plus', 'WorldWideWeb', '', 'bot@bot.bot.com', '0', 'admin', '', 1130763311, '-No tracking IP-', '1', '0', './images/alice.gif', 'I am a Robot originally called Alice. I am proud to be the first Artificial Intelligence on the net! Please test my capabilities as you wish! To start a public conversation with me just type "hello myname" in the room I am active in, to stop the conversation type "bye myname" or "myname> bye". But we can also talk in private; just click on my name whenever you need a shoulder to cry on :p Ohhh... I wish to express my gratitude to Roy, Popeye and Ciprian for making me available for chatting in here. :)', 'http://www.alicebot.org/documentation/', 'http://sourceforge.net/forum/?group_id=43190', 'English, German', 'olive', './images/avatars/avatar52.gif');
 

@@ -87,7 +87,7 @@ if(C_CHAT_BOOT)
 	$ChatU->query("SELECT m_time,room FROM ".C_MSG_TBL." WHERE ".$CondForQueryM." ORDER BY m_time DESC LIMIT 1");
 	list($m_time,$room) = $ChatU->next_record();
 	$ChatU->clean_results();
-	$CondForQueryU = "status != 'a' AND status != 'm' AND username='$U' AND awaystat='0' AND (u_time > ".($m_time + C_USR_DEL * 60)." OR (status = 'k' AND u_time <  ".(time() - 20)."))";
+	$CondForQueryU = "status!='a' AND status!='m' AND username='$U' AND username!='C_BOT_NAME' AND awaystat='0' AND (u_time > ".($m_time + C_USR_DEL * 60)." OR (status ='k' AND u_time <  ".(time() - 20)."))";
 	$ChatU->query("DELETE FROM ".C_USR_TBL." WHERE ".$CondForQueryU."");
 	if($ChatU->affected_rows() > 0)
 	{
