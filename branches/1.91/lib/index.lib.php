@@ -1277,7 +1277,14 @@ if (C_SHOW_TUT == 1)
 }
 ?>
 <P CLASS="ChatP1">
-<?php echo(L_WEL_1." ".C_MSG_DEL." ".(C_MSG_DEL == 1 ? L_HOUR : L_HOURS)." ".L_WEL_2." ".C_USR_DEL." ".(C_USR_DEL == 1 ? L_MIN : L_MINS)."."); ?>
+<?php
+ echo(L_WEL_1." ".C_MSG_DEL." ".(C_MSG_DEL == 1 ? L_HOUR : L_HOURS));
+if(C_CHAT_BOOT)
+{
+ echo(" ".L_WEL_2." ".C_USR_DEL." ".(C_USR_DEL == 1 ? L_MIN : L_MINS));
+}
+	echo(".");
+	?>
 </P>
 <?php
 $DefaultRoomFound = 0;
