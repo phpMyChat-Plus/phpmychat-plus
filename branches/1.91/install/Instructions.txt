@@ -1,5 +1,5 @@
 Instructions for a New installation.
-Note: This version need a manual install. (not running the setup.php as the base version does)
+Note: This version needs a manual install. (not running the setup.php as the base version does)
 
 1. Extract plus.zip
 2. Edit this file:
@@ -15,7 +15,7 @@ define("C_DB_USER", 'ciprianmp_username');				// Database username (most of the 
 define("C_DB_PASS", 'password');				// Database user's password
 3. Upload the plus directory into your public_html folder.
 Note: index.php must be in the plus folder, not plus/chat/ as for the previous versions.
-The file index1.php is the index version with the full page filled. Choose the one you want and keep it as index.php.
+The file index1.php is the index file with the full page filled. Choose the one you want and keep it as index.php.
 4. Rename plus folder to whatever you'd like.
 5. Change Attributes to 777 for these files/folders:
 plus/acount/pages/chat_index.txt
@@ -24,13 +24,20 @@ plus/bot/subs.inc
 plus/botfb/
 plus/logs/
 plus/logsadmin/
-6. Go to plus/installation/ folder on your drive and open mysql_newinstall.txt (or the corresponding upgrade) file.
+6. Go to plus/install/ folder on your drive and open mysql_new_install.txt (or the corresponding upgrade) file.
 Don't change any data there. You will be able to customize your chat later, from the config page (Clicking Administration link on your index page)
+Note: if you'd like to change the admin name to one you'll use, this is a good opportunity, but let the password untouched.
+By default, the admin account is admin/admin.
+Go to line 291:
+INSERT INTO c_reg_users VALUES ('admin', '', '21232f297a57a5a743894a0e4a801fc3', '', '', '', '', '', 0, 'admin', '', '', '', 0, 1, '', '', '', '', '', 'red', './images/avatars/def_avatar.gif');
+and replace admin with your desired username. The password will still be "admin", being easy to change in edituser.php.edituser
+If you preffer to change the password as well, you can use this link http://ciprianmp.com/scripts/hash.php to generate the md5 hash of your desired password, then copy it and replace "21232f297a57a5a743894a0e4a801fc3" (don't touch the leading/ending 's)
+DO NOT change any data on the next line (the one regarding the bot)!
 6a. Open your phpmyadmin link and browse to your desired database (if you haven't created one, you'll need to do so in Cpanel);
 6b. In the desired database (the same added to your config/config.lib.php) click on SQL. This will show a window waiting for some code to be added;
 6c. Copy the content of the text file opened at 6th step and paste it in the SQL frame/window, then click OK.
 6d. Make sure it says "Your SQL statement has been executed successfully" or something like that. In the left frame, you can see/check the tables added.
-7. Test your site functionality by opening http://yoururl.com/plus (plus is the name you used in step 4.) in your browser. Note that there is only one admin right now: admin, password admin.
+7. Test your site functionality by opening http://yoursiteurl.com/plus (plus is the name you used in step 4.) in your browser. Note that there is only one admin right now: admin, password admin.
 8. Register your desired administrator name and change its permissions to 'admin' in c_reg_table table. Check if your new name has become indeed an admin.
 9. Delete the admin user from the c_reg_users table
 10. Open the Administration menu/link (Admin Panel) and customize your chat (do not rename your bot yet).
@@ -39,7 +46,7 @@ That's it! It should fly!
 
 Optional
 If you want to use the bot follow these instructions:
-- Very important: Don't change bot's name (in admin panel) before the next 8 steps (only if successful)
+- Very important: Don't change bot's name (in admin panel) before the next 8 steps (only if successful). Also reread the last line of paragraph 6!
 1. Open your browser and type: http://yoursiteurl.com/plus/bot/botloader.php
 2. Wait for the loader to finish the import operation. At the end, you can test the bot following the instructions on the bottom of that page.
 3. If it works from talk.htm (.php), it should work now in your chat as well.
