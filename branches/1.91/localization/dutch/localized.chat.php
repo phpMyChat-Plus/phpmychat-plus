@@ -1,6 +1,6 @@
 <?php
-// File : dutch/localized.chat.php - plus version (20.09.2006 - rev.13)
-// Translation by Hans Paijmans <paai@kub.nl>, Kasper Souren <guaka@industree.org>
+// File : dutch/localized.chat.php - plus version (14.02.2007 - rev.15)
+// Original translation by Hans Paijmans <paai@kub.nl>, Kasper Souren <guaka@industree.org>
 // and Sander Corbesir <rock@jascrc.com>
 // Updates, corrections and additions for the Plus version by DJE.Amesz & Romanesko Genieusdanny@gmail.com
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -353,8 +353,6 @@ define("L_PRIV_NOT_INROOM", "%s is niet in deze ruimte.\\nals je deze gebruiker 
 define("L_PRIV_AWAY", "%s is afwezig,\\nmaar zal wel je boodschap ontvangen\\nals deze terug komt.");
 
 // Color Input Box mod by Ciprian
-define("L_COLOR", "kleur:");
-define("L_COLOR_HEAD", "kleuren raster");
 define("L_COLOR_HEAD_COLF_SETTINGS", "".COLOR_FILTERS == 1 ? "Aan " : "Uit"."");
 define("L_COLOR_HEAD_ALLG_SETTINGS", "".COLOR_ALLOW_GUESTS == 1 ? "Aan " : "Uit"."");
 define("L_COLOR_HEAD_SETTINGS", "<u>Huidige Instellingen</u>:<br>a) Kleur Filters = <b>".L_COLOR_HEAD_COLF_SETTINGS."</b>;<br>b) kleuren voor gasten = <b>".L_COLOR_HEAD_ALLG_SETTINGS."</b>.");

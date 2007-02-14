@@ -1,7 +1,6 @@
 <?php
 // File : german/localized.tutorial.php - plus version (17.09.2006 - rev.3)
-// Translation by Michael Schoening <m.schoening@ticketboy.de>
-// 			& Reinhard Hofmann <e9625556@student.tuwien.ac.at>
+// Original translation by Michael Schoening <m.schoening@ticketboy.de> & Reinhard Hofmann <e9625556@student.tuwien.ac.at>
 // Updates, corrections and additions for the Plus version by Alexander Eisele <xaex@mail.ru>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 

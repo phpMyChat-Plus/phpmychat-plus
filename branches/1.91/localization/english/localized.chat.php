@@ -351,8 +351,6 @@ define("L_PRIV_NOT_INROOM", "%s is not in this room.\\nIf you still want to pm t
 define("L_PRIV_AWAY", "%s is marked away,\\nbut will still receive your message\\nwhen will be back.");
 
 // Color Input Box mod by Ciprian
-define("L_COLOR", "Color:");
-define("L_COLOR_HEAD", "Color Chart Picker");
 define("L_COLOR_HEAD_COLF_SETTINGS", "".COLOR_FILTERS == 1 ? "Enabled" : "Disabled"."");
 define("L_COLOR_HEAD_ALLG_SETTINGS", "".COLOR_ALLOW_GUESTS == 1 ? "Enabled" : "Disabled"."");
 define("L_COLOR_HEAD_SETTINGS", "<u>Current Settings on this server</u>:<br>a) COLOR_FILTERS = <b>".L_COLOR_HEAD_COLF_SETTINGS."</b>;<br>b) COLOR_ALLOW_GUESTS = <b>".L_COLOR_HEAD_ALLG_SETTINGS."</b>.");

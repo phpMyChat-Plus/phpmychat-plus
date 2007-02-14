@@ -1,6 +1,6 @@
 <?php
 // File : dutch/localized.admin.php - plus version (17.09.2006 - rev.6)
-// Translation by Corbesir <rock@jascrc.com>
+// Original translation by Corbesir <rock@jascrc.com>
 // Updates, corrections and additions for the Plus version by DJE Amesz & Romanesko  Genieusdanny@gmail.com
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 

@@ -1,6 +1,6 @@
 <?php
-// File : german/localized.chat.php - plus version (20.09.2006 - rev.13)
-// Translation by Robert Schaller <robert@schaller.com> & Wolfgang Schneider <schneider@bibelcenter.de>
+// File : german/localized.chat.php - plus version (14.02.2006 - rev.15)
+// Original translation by Robert Schaller <robert@schaller.com> & Wolfgang Schneider <schneider@bibelcenter.de>
 //    & Martin Sander <Martin.Sander@touch-screen.de> & Bernard Piller <bernard@bmpsystems.com>
 //    & Reinhard Hofmann <e9625556@student.tuwien.ac.at> & Christian Hacker <c.hacker@dreamer-chat.de>
 // Updates, corrections and additions for the Plus version by Alexander Eisele <xaex@mail.ru>
@@ -356,8 +356,6 @@ define("L_PRIV_NOT_INROOM", "%s ist nicht in diesem Raum.\\n Wenn Sie eine PN hi
 define("L_PRIV_AWAY", "%s ist als abwesend markiert,\\n wird aber Ihre Nachricht erhalten\\n wenn Er/Sie wieder da ist.");
 
 // Color Input Box mod by Ciprian
-define("L_COLOR", "Farbe:");
-define("L_COLOR_HEAD", "Farbskala-Picker");
 define("L_COLOR_HEAD_COLF_SETTINGS", "".COLOR_FILTERS == 1 ? "aktiviert" : "deaktiviert"."");
 define("L_COLOR_HEAD_ALLG_SETTINGS", "".COLOR_ALLOW_GUESTS == 1 ? "aktiviert" : "deaktiviert"."");
 define("L_COLOR_HEAD_SETTINGS", "<u>Gegenw&auml;rtige Einstellungen auf diesem Server</u>:<br>a) COLOR_FILTERS = <b>".L_COLOR_HEAD_COLF_SETTINGS."</b>;<br>b) COLOR_ALLOW_GUESTS = <b>".L_COLOR_HEAD_ALLG_SETTINGS."</b>.");

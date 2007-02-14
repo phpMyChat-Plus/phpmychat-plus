@@ -1,6 +1,6 @@
 <?php
 // File : english/localized.tutorial.php - plus version (17.09.2006 - rev.3)
-// Original file by Sharif Islam <mislam@students.uiuc.edu> & Jessica Gibson <oram@uiuc.edu> & Dean Collins <joelford@pacbell.net>
+// Original translation by Sharif Islam <mislam@students.uiuc.edu> & Jessica Gibson <oram@uiuc.edu> & Dean Collins <joelford@pacbell.net>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 
 // Get the names and values for vars sent by the script that called this one

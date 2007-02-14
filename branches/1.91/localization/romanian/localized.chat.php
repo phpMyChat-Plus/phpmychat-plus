@@ -1,6 +1,6 @@
 <?php
-// File : romanian/localized.chat.php - plus version (20.09.2006 - rev.13)
-// Translation started by Radu Swider <swidera@satline.ro>, first updated by Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro>
+// File : romanian/localized.chat.php - plus version (14.02.2007 - rev.15)
+// Original translation started by Radu Swider <swidera@satline.ro>, first updated by Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro>
 // Corrected, finalized and updated to Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 
 // extra header for charset
@@ -351,8 +351,6 @@ define("L_PRIV_NOT_INROOM", "%s nu este in aceasta camera.\\nDaca vrei totusi sa
 define("L_PRIV_AWAY", "%s nu este la calculator,\\ndar va primi mesajul tau la intoarcere.");
 
 // Color Input Box mod by Ciprian
-define("L_COLOR", "Culoare:");
-define("L_COLOR_HEAD", "Spectrul de Culori");
 define("L_COLOR_HEAD_COLF_SETTINGS", "".COLOR_FILTERS == 1 ? "Activat" : "Dezactivat"."");
 define("L_COLOR_HEAD_ALLG_SETTINGS", "".COLOR_ALLOW_GUESTS == 1 ? "Activat" : "Dezactivat"."");
 define("L_COLOR_HEAD_SETTINGS", "<u>Setarile curente ale serverului</u>:<br>a) COLOR_FILTERS = <b>".L_COLOR_HEAD_COLF_SETTINGS."</b>;<br>b) COLOR_ALLOW_GUESTS = <b>".L_COLOR_HEAD_ALLG_SETTINGS."</b>.");

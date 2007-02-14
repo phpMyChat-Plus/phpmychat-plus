@@ -1,6 +1,6 @@
 <?php
 // File : german/localized.admin.php - plus version (17.09.2006 - rev.6)
-// Translation by Robert Schaller <robert@schaller.com> & Wolfgang Schneider <schneider@bibelcenter.de>
+// Original translation by Robert Schaller <robert@schaller.com> & Wolfgang Schneider <schneider@bibelcenter.de>
 //    & Martin Sander <Martin.Sander@touch-screen.de> & Bernard Piller <bernard@bmpsystems.com>
 //    & Reinhard Hofmann <e9625556@student.tuwien.ac.at> & Christian Hacker <c.hacker@dreamer-chat.de>
 // Updates, corrections and additions for the Plus version by Alexander Eisele <xaex@mail.ru>
