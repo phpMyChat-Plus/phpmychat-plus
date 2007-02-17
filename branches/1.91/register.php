@@ -120,7 +120,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 			};
 			if (!isset($Error) || $Error == "")
 			{
-				$DbLink->query("INSERT INTO ".C_REG_TBL." VALUES ('$U', '$Latin1', '$PWD_Hash', '$FIRSTNAME', '$LASTNAME', '$COUNTRY', '$WEBSITE', '$EMAIL', $showemail, 'user', '',".time().", '$IP', '$GENDER', '$allowpopup', '$PICTURE', '$DESCRIPTION', '$FAVLINK', '$FAVLINK1', '$SLANG', '$COLORNAME', '$AVATARURL')");
+				$DbLink->query("INSERT INTO ".C_REG_TBL." VALUES ('', '', '$U', '$Latin1', '$PWD_Hash', '$FIRSTNAME', '$LASTNAME', '$COUNTRY', '$WEBSITE', '$EMAIL', $showemail, 'user', '',".time().", '$IP', '$GENDER', '$allowpopup', '$PICTURE', '$DESCRIPTION', '$FAVLINK', '$FAVLINK1', '$SLANG', '$COLORNAME', '$AVATARURL')");
 				$Message = L_REG_9;
 // Patch for sending an email to the Administrator upon new user registration to the chat system.
 // by Bob Dickow, April 28, 2003
