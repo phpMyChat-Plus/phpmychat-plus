@@ -3,15 +3,16 @@ This archive includes all the previously released fixes.
 Client browsers - tested with: IE 6.0 SP2, Mozilla Firefox 1.5.0.4, Mozilla Firebird 0.7, Netscape 8.1, Opera 9.0 build 8502, AvantBrowser 10.2 build 52.
 Server environment - tested env: Apache/1.3.34 (Unix), php v.4.3.11 (non-safe-mode), MySQL v4.1.19, exif support enabled (gif/jpeg processing), GD2 support enabled (gif/jpeg processing).
 Connection troubles with IE 7.0 beta. (reported on different sites)
+Important: everytime you upgrade/reinstall a phpmychat server, the old cookies must be deleted from the clients' machines - so let your users now! ()
 
 Fixes History:
 15.02.2007 - 1.91:
 - Some Admin panel/Configuration adjustments (usability related)
-- Improved/fixed the update check in Config/Admin panel. (administration related)
-- Download link on index page directed to the SourceForge page (link update)
+- Improved/fixed the update check in Config/Admin panel. Also inserted the first option in panel to enable/disable this feature, useful for sites with remote file access disabled (administration & functionality related)
+- Download link on index page moved in Credits area and redirected to the SourceForge page (link update)
 - Cleaned up the bot folder, removing unnecessary files and folders (size related)
 - Fixed a Color cookie issue for power users switching to normal users on login - now deleting the cookie color of a power user when exits chat, to avoid the filter error alert if he logs in back as a lowered power user (functionality related)
-- Admin/user notifications improvements. (email display related)
+- Admin/user email notifications improvements. (email display related)
 - Added Admin notification on user deletion. (administration related)
 - Changed the Entrance sound feature to include an optional Welcome sound heard only by the user.
 	- there are 4 types of settings for this:
@@ -19,7 +20,7 @@ Fixes History:
 			- 1 - Notify the whole room - every user in the chat (including the new comer) will hear an entrance sound;
 			- 2 - Welcome only the user - Only the new comer will get an Welcome sound;
 			- 3 - Notify & Welcome (1&2) - Newcomer will hear only the Welcome sound and all the others will be notified with an Entrance sound;
-			Note: to make sense, I suggest the two sounds should be different from each other, otherwise, setting to only 1 OR 2 would be enough.
+			Note: to make sense, I suggest the two sounds to be different from each other, otherwise, setting to only 1 or 2 would be enough.
 - Changed the /kick command to display a reason of kicking (optional)
 	Usage:
 	- old format/behavior:
@@ -39,6 +40,7 @@ Fixes History:
 		The Reason field added in both Admin panels ("Registered Users" and "Banished Users") to add/edit the reason of banishment (the reson will be displayed to the banished user everytime he tries to login)
 - Changed the Help link image from ? to Help text. (functionality related)
 - Fixed the Archive/Log feature to display the right formated system messages: entrances/exits from chat, topic changes, announcements, aso. It is also multilangual, according to the reader language (functionality related)
+- Fixed the /invite command to remove sender's name from the invitation list (based on Matias Oliveira feedback, a user could have invited himself, in the same room, of course) (functionality related)
 - /topic command improvements: (functionality related)
 		- Topic subject now stored in a file in botfb (keep it shown in banners even after messages clean-up);
 		- There are two types of topics now: global (for all rooms) and specific (for each room);
@@ -53,11 +55,18 @@ Fixes History:
 		- Color selector in input bar, register/edituser pages and admin panel; (replaces the color picker) (functionality related)
 		- Color sniffer scripting safe mode filter; (security related)
 		- Messages displayed in tables in messages frame (text alignment fix by cells); (display related)
-- Dutch language updated and included (localization related) - Thanks to Danny.
-- German language updated and included (localization related) - Thanks to Alexander Eisele  <xaex@mail.ru>.
-- French language updated and included (localization related) - Thanks to Lelou  <lelou@lelou.inf>.
+- Argentinian spanish language updated and included (localization related) - Thanks to Matias Olivera <matiolivera@yahoo.com>.
+- Dutch language updated and included (localization project) - Thanks to Danny.
+- French language updated and included (localization project) - Thanks to Leloup <leloup@le-loup.info>.
+- German language updated and included (localization project) - Thanks to Alexander Eisele <xaex@mail.ru>.
+- Spanish language updated and included (localization project) - Thanks to Roxana Castaneda <roxminu@yahoo.com>.
+- Changed the icon.gif background to transparency in order to pick and fit the chat room skin background color; (display related)
+
 SQL updates:
-- Added four more fields in table c_config: one: [COLOR_CM2 VARCHAR(25) NOT NULL default '' AFTER COLOR_CM1] and three: [CHAT_BOOT enum('0','1') NOT NULL default '1'], [WELCOME_SOUND varchar(255) NOT NULL default ''] and [WORLDTIME enum('0','1','2') NOT NULL default '2'] at the end of table
+- Added five more fields in table c_config:
+		- [COLOR_CM2 VARCHAR(25) NOT NULL default '' AFTER COLOR_CM1];
+		- [CHAT_BOOT enum('0','1') NOT NULL default '1'], [WELCOME_SOUND varchar(255) NOT NULL default ''], [WORLDTIME enum('0','1','2') NOT NULL default '2'] and [UPD_CHECK enum('0','1') NOT NULL default '1'] at the end of table;
+- Added two more fields in table c_reg_users at the beginning of the table: [id int(11) NOT NULL default '0'] and [cid int(11) NOT NULL auto_increment] - for further implementation of integrations with other cms (ModX, forums, etc.);
 - Changed the ALLOW_ENTRANCE_SOUND field type from enum('0','1') to enum('0','1','2','3') in c_config table;
 - Changed the COLOR_CDC1 field name and type to COLOR_CD8 VARCHAR(25) in c_config table;
 - Changed the COLOR_CDC2 field name and type to  COLOR_CD9 VARCHAR(25) in c_config table;
@@ -109,20 +118,52 @@ Files removed:
 - plus/config/color.lib.php;
 - plus/lib/update.lib.php;
 Files moved:
-- plus/images/nums(1-6).gif to:
-- plus/images/dice/nums(1-6).gif;
+- plus/images/nums(1-6).gif to plus/images/dice/nums(1-6).gif;
 Files added:
 - plus/config/style(8-10).css.php; (Black&White, Pink and DarkViolet skins)
 - plus/install/database/mysql_upgrade_plus_1.90.txt; (all the old ones updated accordingly)
 - plus/lib/update.txt;
+- plus/localization/argentinian_spanish folder:
+	- plus/localization/argentinian_spanish/index.html;
+	- plus/localization/argentinian_spanish/flag.gif; (3D)
+	- plus/localization/argentinian_spanish/flag0.gif; (flat) - renamed
+	- plus/localization/argentinian_spanish/localized.admin.php;
+	- plus/localization/argentinian_spanish/localized.chat.php;
+	- plus/localization/argentinian_spanish/localized.tutorial.php;
+	- plus/localization/argentinian_spanish/regex.txt;
 - plus/localization/dutch folder:
 	- plus/localization/dutch/index.html;
-	- plus/localization/dutch/flag.gif;
+	- plus/localization/dutch/flag.gif; (3D)
+	- plus/localization/spanish/flag0.gif; (flat) - renamed
 	- plus/localization/dutch/localized.admin.php;
 	- plus/localization/dutch/localized.chat.php;
 	- plus/localization/dutch/regex.txt;
 	- Note: plus/localization/dutch/localized.tutorial.php; - not ready yet - to be added
-Files replaced:
+- plus/localization/french folder:
+	- plus/localization/french/index.html;
+	- plus/localization/french/flag.gif; (3D)
+	- plus/localization/french/flag0.gif; (flat) - renamed
+	- plus/localization/french/localized.admin.php;
+	- plus/localization/french/localized.chat.php;
+	- plus/localization/french/localized.tutorial.php;
+	- plus/localization/french/regex.txt;
+- plus/localization/german folder:
+	- plus/localization/german/index.html;
+	- plus/localization/german/flag.gif; (3D)
+	- plus/localization/german/flag0.gif; (flat) - renamed
+	- plus/localization/german/localized.admin.php;
+	- plus/localization/german/localized.chat.php;
+	- plus/localization/german/localized.tutorial.php;
+	- plus/localization/german/regex.txt;
+- plus/localization/spanish folder:
+	- plus/localization/spanish/index.html;
+	- plus/localization/spanish/flag.gif; (3D)
+	- plus/localization/spanish/flag0.gif; (flat) - renamed
+	- plus/localization/spanish/localized.admin.php;
+	- plus/localization/spanish/localized.chat.php;
+	- plus/localization/spanish/localized.tutorial.php;
+	- plus/localization/spanish/regex.txt;
+Files updated:
 - plus/images/helpOn.gif;
 - plus/images/helpOff.gif;
 

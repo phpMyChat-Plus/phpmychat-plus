@@ -18,7 +18,7 @@ if (isset($Charset))
 		* {font-family: <?php echo($FontName); ?>, sans-serif;}
 		<?php
 	}
-	elseif ($Charset == "iso-8859-1" || $Charset == "iso-8859-2")
+	else
 	{
 		?>
 		* {font-family: helvetica, arial, geneva, sans-serif;}
@@ -215,7 +215,7 @@ INPUT, SELECT, TEXTAREA
 {
 	unicode-bidi: embed;
 	color: <?php echo($CD); ?>;
-	font-size: <?php echo($FontSize); ?>;;
+	font-size: <?php echo($FontSize); ?>;
 }
 
 .notify

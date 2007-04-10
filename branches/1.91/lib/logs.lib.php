@@ -12,15 +12,15 @@ function RecursiveMkdir($path)
 					umask($old_umask);
        }
 }
-require("./${ChatPath}/localization/".C_LANGUAGE."/localized.chat.php");
-//require("localization/".C_LANGUAGE."/localized.chat.php");
+
 $lang = 'include("../../../config/config.lib.php");';
 $lang .= "\r\n";
 $lang .= 'if (!isset($L) || $L == "") $L = C_LANGUAGE;';
 $lang .= "\r\n";
-$lang .= 'if (isset($L) && $L != "" && !is_dir("../../../localization/".$L)) include("../../../localization/".C_LANGUAGE."/localized.chat.php");';
+$lang .= 'elseif (isset($L) && $L != "" && !is_dir("../../../localization/".$L)) include("../../../localization/".C_LANGUAGE."/localized.chat.php");';
 $lang .= "\r\n";
 $lang .= 'else include("../../../localization/".$L."/localized.chat.php");';
+
 $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
 mysql_select_db(C_DB_NAME);
 
@@ -124,8 +124,19 @@ $logpath = "./".C_LOG_DIR."/".$year."/".$month."/".$year.$month.$day.".php"  ;
 		$fp = fopen($logpath, "a");
 		fwrite($fp, sprintf("<?php\r\n"));
 		fwrite($fp, sprintf($lang));
+		fwrite($fp, sprintf("\r\n"));
+		fwrite($fp, sprintf('$textDirection = ($Charset == "windows-1256") ? "RTL" : "LTR";'));
 		fwrite($fp, sprintf("\r\n?>"));
-		fwrite($fp, sprintf("\r\n<html>\r\n<head>\r\n<title>".$mess_time."</title>\r\n<style type='text/css'>\r\n<!--\r\nbody\r\n{ background-color: lightcyan;}\r\ntable\r\n{ font-family: arial; font-size:9pt;}\r\n-->\r\n</style>\r\n</head>\r\n<body>\r\n<center>\r\n<span style=\"font-weight:600; font-size:14pt; font-color:blue\">\r\n<hr>\r\nLog file generated on ".$mess_time." GMT<br>with Chat Log Mod - &copy; 2005-".date(Y)." - by <a href=mailto:ciprianmp@yahoo.com onMouseOver=\"window.status='Click to email author.'; return true;\">Ciprian Murariu</a>.\r\n<hr>\r\n</span>\r\n</center>"));
+		fwrite($fp, sprintf("\r\n<html dir="));
+		fwrite($fp, sprintf("<?php echo("));
+		fwrite($fp, sprintf('$textDirection'));
+		fwrite($fp, sprintf(") ?>"));
+		fwrite($fp, sprintf(">\r\n<head>\r\n"));
+		fwrite($fp, sprintf('<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET='));
+		fwrite($fp, sprintf("<?php echo("));
+		fwrite($fp, sprintf('$Charset'));
+		fwrite($fp, sprintf(") ?>"));
+		fwrite($fp, sprintf("\">\r\n<title>".$mess_time."</title>\r\n<style type='text/css'>\r\n<!--\r\nbody\r\n{ background-color: lightcyan;}\r\ntable\r\n{ font-family: arial; font-size:9pt;}\r\n-->\r\n</style>\r\n</head>\r\n<body>\r\n<center>\r\n<span style=\"font-weight:600; font-size:14pt; font-color:blue\">\r\n<hr>\r\nLog file generated on ".$mess_time." GMT<br>with Chat Log Mod - &copy; 2005-".date(Y)." - by <a href=mailto:ciprianmp@yahoo.com onMouseOver=\"window.status='Click to email author.'; return true;\">Ciprian Murariu</a>.\r\n<hr>\r\n</span>\r\n</center>"));
 		fwrite($fp, sprintf("\r\n\r\n\r\n<!-- MESSAGES TABLE STARTS BELLOW -->\r\n\r\n<table border=1 cellspacing=0 cellpading=0>\r\n<tr style=\"font-weight:bold; color:blue; background-color=yellow\" align=\"center\">\r\n<td nowrap=\"nowrap\">Post Time</td>\r\n<td nowrap=\"nowrap\">Posted in (from) Room</td>\r\n<td nowrap=\"nowrap\">Sender (to Addressee)</td>\r\n<td>Message posted</td>\r\n</tr>"));
 	}
 $fp = fopen($logpath, "a") ;
@@ -239,8 +250,19 @@ $logpathu = "./logs/".$yearu."/".$monthu."/".$yearu.$monthu.$dayu.".php"  ;
 		$fpu = fopen($logpathu, "a");
 		fwrite($fpu, sprintf("<?php\r\n"));
 		fwrite($fpu, sprintf($lang));
+		fwrite($fpu, sprintf("\r\n"));
+		fwrite($fpu, sprintf('$textDirection = ($Charset == "windows-1256") ? "RTL" : "LTR";'));
 		fwrite($fpu, sprintf("\r\n?>"));
-		fwrite($fpu, sprintf("\r\n<html>\r\n<head>\r\n<title>".$mess_timeu."</title>\r\n<style type='text/css'>\r\n<!--\r\nbody\r\n{ background-color: lightcyan;}\r\ntable\r\n{ font-family: arial; font-size:9pt;}\r\n-->\r\n</style>\r\n</head>\r\n<body>\r\n<center>\r\n<span style=\"font-weight:600; font-size:14pt; font-color:blue\">\r\n<hr>\r\nLog file generated on ".$mess_timeu." GMT<br>with Chat Log mod - &copy; 2005-".date(Y)." - by <a href=mailto:ciprianmp@yahoo.com onMouseOver=\"window.status='Click to email author.'; return true;\">Ciprian Murariu</a>.\r\n<hr>\r\n</span>\r\n</center>"));
+		fwrite($fpu, sprintf("\r\n<html dir="));
+		fwrite($fpu, sprintf("<?php echo("));
+		fwrite($fpu, sprintf('$textDirection'));
+		fwrite($fpu, sprintf(") ?>"));
+		fwrite($fpu, sprintf(">\r\n<head>\r\n"));
+		fwrite($fpu, sprintf('<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET='));
+		fwrite($fpu, sprintf("<?php echo("));
+		fwrite($fpu, sprintf('$Charset'));
+		fwrite($fpu, sprintf(") ?>"));
+		fwrite($fpu, sprintf("\">\r\n<title>".$mess_timeu."</title>\r\n<style type='text/css'>\r\n<!--\r\nbody\r\n{ background-color: lightcyan;}\r\ntable\r\n{ font-family: arial; font-size:9pt;}\r\n-->\r\n</style>\r\n</head>\r\n<body>\r\n<center>\r\n<span style=\"font-weight:600; font-size:14pt; font-color:blue\">\r\n<hr>\r\nLog file generated on ".$mess_timeu." GMT<br>with Chat Log mod - &copy; 2005-".date(Y)." - by <a href=mailto:ciprianmp@yahoo.com onMouseOver=\"window.status='Click to email author.'; return true;\">Ciprian Murariu</a>.\r\n<hr>\r\n</span>\r\n</center>"));
 		fwrite($fpu, sprintf("\r\n\r\n\r\n<!-- MESSAGES TABLE STARTS BELLOW -->\r\n\r\n<table border=1 cellspacing=0 cellpading=0>\r\n<tr style=\"font-weight:bold; color:blue; background-color=yellow\" align=\"center\">\r\n<td nowrap=\"nowrap\">Post Time</td>\r\n<td nowrap=\"nowrap\">Posted in Room</td>\r\n<td nowrap=\"nowrap\">Sender</td>\r\n<td>Message posted</td>\r\n</tr>"));
 	}
 $fpu = fopen($logpathu, "a") ;

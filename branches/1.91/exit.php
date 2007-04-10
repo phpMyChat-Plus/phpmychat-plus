@@ -60,9 +60,6 @@ function close_popups()
 	with (window.parent)
 	{
 		if (is_help_popup && !is_help_popup.closed) is_help_popup.close();
-		// Color Input Box mod by Cipprian
-		if (is_color_popup && !is_color_popup.closed) is_color_popup.close();
-		if (is_colorhelp_popup && !is_colorhelp_popup.closed) is_colorhelp_popup.close();
 		// Smilie Popup mod by Cipprian
 		if (is_smilie_popup && !is_smilie_popup.closed) is_smilie_popup.close();
 		// Private Message Popup mod by Cipprian

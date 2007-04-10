@@ -1,7 +1,8 @@
-Instructions for a New installation.
+Instructions for a NEW installation (or an UPGRADE) of the Plus version you just downloaded.
 Note: This version needs a manual install. (not running the setup.php as the base version does)
 
 1. Extract plus.zip
+
 2. Edit this file:
 - config/config.lib.php - only the database details (first 3 lines at the begining of the file):
 // Database settings
@@ -11,44 +12,62 @@ define("C_DB_PASS", 'password');				// Database user's password
 Example:
 My server cpanel username is "ciprianmp". My lines look like:
 define("C_DB_NAME", 'ciprianmp_plus');						// Logical database name on that server (most of the times like: cpanelusername_databasename)
-define("C_DB_USER", 'ciprianmp_username');				// Database username (most of the times like: cpanelusername_username)
+define("C_DB_USER", 'ciprianmp_myname');				// Database username (most of the times like: cpanelusername_username)
 define("C_DB_PASS", 'password');				// Database user's password
+
+In certain cases, this line must be edited as well:
+define("C_DB_HOST", ‘localhost’); 
+While "localhost" works in most cases, sometime it is necessary to refer to the full address of your database. Your service provider will normally tell you if this is the case!
+
 3. Upload the plus directory into your public_html folder.
 Note: index.php must be in the plus folder, not plus/chat/ as for the previous versions.
 The file index1.php is the index file with the full page filled. Choose the one you want and keep it as index.php.
-4. Rename plus folder to whatever you'd like.
-5. Change Attributes to 777 for these files/folders:
+
+4. Optionally, rename plus folder to whatever you'd like (chat, mychat).
+
+5. Change Attributes to 777 for these files/folders (chmod):
 plus/acount/pages/chat_index.txt
 plus/acount/pages/ip.txt
 plus/bot/subs.inc
 plus/botfb/
 plus/logs/
 plus/logsadmin/
+
 6. Go to plus/install/ folder on your drive and open mysql_new_install.txt (or the corresponding upgrade) file.
 Don't change any data there. You will be able to customize your chat later, from the config page (Clicking Administration link on your index page)
+
 Note: if you'd like to change the admin name to one you'll use, this is a good opportunity, but let the password untouched.
 By default, the admin account is admin/admin.
 Go to line 291:
-INSERT INTO c_reg_users VALUES ('admin', '', '21232f297a57a5a743894a0e4a801fc3', '', '', '', '', '', 0, 'admin', '', '', '', 0, 1, '', '', '', '', '', 'red', './images/avatars/def_avatar.gif');
-and replace admin with your desired username. The password will still be "admin", being easy to change in edituser.php.edituser
+INSERT INTO c_reg_users VALUES ('', '', 'admin', '1', '21232f297a57a5a743894a0e4a801fc3', '', '', '', '', '', 0, 'admin', '', '', '', 0, 1, '', '', '', '', '', 'red', './images/avatars/def_avatar.gif');
+and replace the first "admin" word with your desired username. The password will still be "admin", being easy to change in edituser.php.
 If you preffer to change the password as well, you can use this link http://ciprianmp.com/scripts/hash.php to generate the md5 hash of your desired password, then copy it and replace "21232f297a57a5a743894a0e4a801fc3" (don't touch the leading/ending 's)
-DO NOT change any data on the next line (the one regarding the bot)!
+DO NOT change any data on the next line (it is regarding the bot)!
+
 6a. Open your phpmyadmin link and browse to your desired database (if you haven't created one, you'll need to do so in Cpanel);
 6b. In the desired database (the same added to your config/config.lib.php) click on SQL. This will show a window waiting for some code to be added;
 6c. Copy the content of the text file opened at 6th step and paste it in the SQL frame/window, then click OK.
 6d. Make sure it says "Your SQL statement has been executed successfully" or something like that. In the left frame, you can see/check the tables added.
+Note: steps 6b-6d will also work by importing the coresponding .txt file into your mysql database (import file operation)
+
 7. Test your site functionality by opening http://yoursiteurl.com/plus (plus is the name you used in step 4.) in your browser. Note that there is only one admin right now: admin, password admin.
-8. Register your desired administrator name and change its permissions to 'admin' in c_reg_table table. Check if your new name has become indeed an admin.
+
+8. Register your desired administrator name and change its permissions to 'admin' in c_reg_users table. Check if your new name has become indeed an admin.
+
 9. Delete the admin user from the c_reg_users table
+
 10. Open the Administration menu/link (Admin Panel) and customize your chat (do not rename your bot yet).
+
 11. Rename your logsadmin folder on both admin config panel and ftp folder to a hardly to guess name.
+
 That's it! It should fly!
 
 Optional
 If you want to use the bot follow these instructions:
-- Very important: Don't change bot's name (in admin panel) before the next 8 steps (only if successful). Also reread the last line of paragraph 6!
+- Very important: Don't change bot's name (in admin panel) before the next 8 steps (and change it only if successful). Also read again the last line of paragraph 6!
 1. Open your browser and type: http://yoursiteurl.com/plus/bot/botloader.php
-2. Wait for the loader to finish the import operation. At the end, you can test the bot following the instructions on the bottom of that page.
+2. Wait for the loader to finish the import operation. It might look like being frozen - it means it works in the background,
+so don't close the browser! At the end, you can test the bot following the instructions on the bottom of that page.
 3. If it works from talk.htm (.php), it should work now in your chat as well.
 4. To start the bot in a room, type: /bot start
 5. To talk to the bot, just mention his name "plusbot" in a message (same room)

@@ -35,11 +35,11 @@ $online_users = @mysql_numrows($result);
 <table border=1 cellspacing=0 cellpadding=0 class=table>
 <tr><td>
 	<?php echo(L_CUR_5)?></td>
-	<td align="center">
+	<td align="center" style="vertical-align:middle">
 	<font size="4" color="#6666ff"><b>&nbsp <?php echo($online_users); ?> &nbsp</font></b></td>
 		<td>
 		<?php
-/*if ($status == "a")
+if ($status == "a")
 {
 	while($data = @mysql_fetch_array($result))
 {
@@ -47,6 +47,5 @@ $online_users = @mysql_numrows($result);
 	echo($browser = $data[browser]."<br />");
 }
 }
-*/
 	?>
 			</td></tr></table>

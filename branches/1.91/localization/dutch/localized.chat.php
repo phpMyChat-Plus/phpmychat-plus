@@ -1,8 +1,7 @@
 <?php
-// File : dutch/localized.chat.php - plus version (14.02.2007 - rev.15)
-// Original translation by Hans Paijmans <paai@kub.nl>, Kasper Souren <guaka@industree.org>
-// and Sander Corbesir <rock@jascrc.com>
-// Updates, corrections and additions for the Plus version by DJE.Amesz & Romanesko Genieusdanny@gmail.com
+// File : dutch/localized.chat.php - plus version (25.03.2007 - rev.16)
+// Original translation by Hans Paijmans <paai@kub.nl>, Kasper Souren <guaka@industree.org> and Sander Corbesir <rock@jascrc.com>
+// Updates, corrections and additions for the Plus version by DJE.Amesz & Romanesko <Genieusdanny@gmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 
 // extra meta-tag for charset
@@ -54,12 +53,12 @@ define("L_HOURS", "uren");
 
 // registration stuff:
 define("L_REG_1", "je wachtwoord");
-define("L_REG_1r", "(alleen als je geregistreerd bent)");
 define("L_REG_2", "Geregistreerde gebruikers");
 define("L_REG_3", "Registreer");
 define("L_REG_4", "Pas gebruikersprofiel aan");
 define("L_REG_5", "Wis gebruiker");
 define("L_REG_6", "Gebruikers registratie");
+define("L_REG_7", "alleen als je geregistreerd bent");
 define("L_REG_8", "je e-mail adres");
 define("L_REG_9", "Je bent geregistreerd.");
 define("L_REG_10", "Terug");
@@ -226,7 +225,7 @@ define("L_HELP_CMD_29", "het tweede commando laat toe dat de administrator of mo
 define("L_HELP_CMD_30", "het tweede commando doet hetzelfde als het /me commando maar zal nu ook je geslacht laten weten: B.V.<br /> * Mr Ciprian is tv aan het kijken of Mrs Dana is blij.");
 define("L_HELP_CMD_31", "Verander de volgorde van de gebruikers in een ruimte: op binnenkomst of naam.");
 define("L_HELP_CMD_32", "dit is en derder versie van de dobbelstenen.<br>Gebruik: /d{n1}[tn2] of /d{n1};<br>n1 kan elke waarde zijn <b>tussen 1 en 100</b> (het geeft aan hoeveel buerten per dobbelsteen).<br>n2 kan elke waarde zijn <b>tussen 1 en %s</b> (dit geeft aan het antal dobbelstenen).");
-define("L_HELP_CMD_33", "veranderd de grote van de letters door de gebruikers gekozen grote (toegestane waardes n: <b>tussen 7 en 15</b>); het /size commando resets alles weer na de standard waardes.");
+define("L_HELP_CMD_33", "veranderd de grote van de letters door de gebruikers gekozen grote (toegestane waardes n: <b>tussen 7 en 15</b>); het /size commando resets alles weer na de standard waardes (<b>".$FontSize."</b>).");
 define("L_HELP_ETIQ_1", "Chat regels");
 define("L_HELP_ETIQ_2", "we willen deze site leuk en netjes houden, dus gaarne de volgende regels volgen. als je je niet aan de regels kunt houden loop je kans door een moderator of administrator eruit gegooid te worden of zlefst geband.<br /><br>Dank u wel,");
 define("L_HELP_ETIQ_3", "Onze chat regels");
@@ -258,6 +257,8 @@ define("L_IGNOR_NON", "Geen geïgnoreerde gebruiker");
 define("L_WHOIS_ADMIN", "Administrator");
 define("L_WHOIS_MODER", "Supervisor");
 define("L_WHOIS_USER", "Gebruikers");
+define("L_WHOIS_GUEST", "Gast");
+define("L_WHOIS_REG", "Geregistreerd");
 
 // Notification messages of user entrance/exit
 if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", "%s komt binnen in deze ruimte" . L_ENTER_SND);
@@ -294,7 +295,7 @@ define("L_ERR_IS_ADMIN", "%s is de administrator!\\nje kunt zijn rechten niet wi
 // Info mod by Ciprian - displays a list of all the features & mods, including Bot's name, on the welcome page
 define("INFO_CMDS", "<span style=\"color:orange\">Extra commando's beschikbaar:</span>".CMDS.".");
 define("INFO_MODS", "<span style=\"color:orange\">Extra onderdelen beschikbaar:</span>".MODS.".");
-define("INFO_BOT", "<span style=\"color:orange\">onze beschikbare bot is: </span><u>".C_BOT_NAME."</u>.");
+define("INFO_BOT", "<span style=\"color:orange\">Onze beschikbare bot is: </span><u>".C_BOT_NAME."</u>.");
 
 // Profile mod
 define("L_PRO_1", "je moedertaal");
@@ -315,7 +316,7 @@ define("L_EXPL_AV", "(Enter URL, daarne ENTER om te kijken)");
 define("L_CANCEL", "afwijzen");
 define("L_CLICK", "klik hier");
 
-// PluceBot bot mod (based on Alice bot)
+// PlusBot bot mod (based on Alice bot)
 define("BOT_TIPS", "TIPS: Onze bot is actief in de ruimtes, om te praten, type <b>hello ".C_BOT_NAME.'</b>. om te stoppen, type: <b>bye '.C_BOT_NAME.'</b>. (private: /to <b>'.C_BOT_NAME.'</b> Message)'); //make sure uw translation don't go too long here; it must fit to one line on the banner (under topic)
 define("BOT_PRIV_TIPS", "TIPS: Onze bot is actief in de ruimtes %s. u kunt prive met de bot chatten. (commando: /wisp <b>".C_BOT_NAME."</b> Message)"); //make sure uw translation don't go too long here; it must fit to one line on the banner (under topic)
 define("BOT_PRIVONLY_TIPS", "TIPS: Onze bot is niet publiek aanwezig. alleen prive gesprekken mogelijk. (commands: /to <b>".C_BOT_NAME."</b> Message or /wisp <b>".C_BOT_NAME."</b> Message)"); //make sure uw translation don't go too long here; it must fit to one line on the banner (under topic)
@@ -402,4 +403,7 @@ define("L_THU", "Do"); //Donderdag
 define("L_FRI", "Vr"); //Vrijdag
 define("L_SAT", "Za"); //Zaterdag
 define("L_SUN", "Zo"); //Zondag
+
+// Extra options by Ciprian
+define("L_EXTRA_OPT", "Extra Options");
 ?>

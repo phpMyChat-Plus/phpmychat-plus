@@ -12,8 +12,7 @@ if (isset($HTTP_GET_VARS))
 	};
 };
 
-// Color Input Box mod by Ciprian - you MUST delete this line if you uninstall this mod
-require("./config/config.lib.php");
+//require("./config/config.lib.php");
 require("./lib/index.lib.php");
 if (isset($HTTP_COOKIE_VARS["CookieStatus"])) $CookieStatus = $HTTP_COOKIE_VARS["CookieStatus"];
 
@@ -379,7 +378,7 @@ There are many different ways to customize the look of the Chat. To change setti
 
 <FONT SIZE="+1"><A NAME="help"><B>Help command:</B></A></FONT>
 <P>
-Once inside a chat room, you can lauch a help popup by clicking on the <IMG SRC="images/helpOff.gif" WIDTH=15 HEIGHT=15 BORDER=0 ALT="?"> image that sits just before the message box. You can also type the <B>"/help" or "/?" commands</B> in the message box.
+Once inside a chat room, you can lauch a help popup by clicking on the <IMG SRC="images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="Help"> image that sits just before the message box. You can also type the <B>"/help" or "/?" commands</B> in the message box.
 <br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 <P>
 <P>

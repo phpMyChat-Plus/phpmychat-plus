@@ -533,13 +533,13 @@ else
 		$ColorList = '"",'.COLOR_CD.'';
 	}
 }
-$ColorList = eregi_replace('"',"", $ColorList);
+$ColorList = eregi_replace('"', "", $ColorList);
 $CC = explode(",", $ColorList);
 			echo("<SELECT NAME=\"C\">\n");
 			while(list($ColorNumber1, $ColorCode) = each($CC))
 			{
 				// Red color is reserved to the admin or a moderator for the current room
-				if ($ColorCode != "" && $ColorCode != COLOR_CD) echo("<OPTION style=\"background-color:".$ColorCode."; color:".$ColorCode."\" VALUE=\"".$ColorCode."\"");
+				if ($ColorCode != "" && $ColorCode != COLOR_CD) echo("<OPTION style=\"background-color:".$ColorCode."; color:".COLOR_CD."\" VALUE=\"".$ColorCode."\"");
 				else echo("<OPTION style=\"background-color:".COLOR_CD."; color:".COLOR_CD."\" VALUE=\"".$ColorCode."\"");
 				if ($C == $ColorCode) echo(" SELECTED");
 				if ($ColorCode != "" && $ColorCode != COLOR_CD && $ColorCode != COLOR_CA && $ColorCode != COLOR_CM && $ColorCode != $colorname) echo(">".$ColorCode."</OPTION>");

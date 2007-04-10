@@ -236,6 +236,10 @@ if(isset($U) && (isset($N) && $N != ""))
 {
 	$DbLink->optimize(C_MSG_TBL);
 	$DbLink->optimize(C_USR_TBL);
+	$DbLink->optimize(C_REG_TBL);
+	$DbLink->optimize(C_BAN_TBL);
+	$DbLink->optimize(C_CFG_TBL);
+	$DbLink->optimize(C_LRK_TBL);
 }
 
 
@@ -251,7 +255,7 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 		$Error = L_ERR_USR_2;
 	}
 	// Check for invalid characters or empty nick
-	elseif (trim($U) == "" || (ereg(REG_CHARS_ALLOWED, stripslashes($U))))
+	elseif (trim($U) == "" || ereg(REG_CHARS_ALLOWED, stripslashes($U)))
 	{
 		$Error = L_ERR_USR_16a;
 	}
@@ -788,7 +792,8 @@ function get_day(time,plus)
 		if (cur_hoursSYD > 23) { cur_hoursSYD = cur_hoursSYD - 24; if (cur_hoursSYD - cur_hoursLON < 0) daySYD = get_day(cur_date,1); }
 		if (cur_hoursSYD < 10) cur_hoursSYD = "0" + cur_hoursSYD
 		cur_timeSYD = cur_hoursSYD + ":" + calc_minuts + daySYD;;
-		window.status = "<?php echo(L_SVR_TIME); ?>" + calc_time<?php echo((C_WORLDTIME) ? ' + " (NYC: " + cur_timeNYC + " | LON: " + cur_timeGMT + " | PAR: " + cur_timePAR + " | BUC: " + cur_timeBUC + " | TYO: " + cur_timeTYO + " | SYD: " + cur_timeSYD + ")"' : ''); ?>;
+		WORLD_TIME = <?php echo((C_WORLDTIME) ? '" " + "(NYC: " + cur_timeNYC + " | LON: " + cur_timeGMT + " | PAR: " + cur_timePAR + " | BUC: " + cur_timeBUC + " | TYO: " + cur_timeTYO + " | SYD: " + cur_timeSYD + ")"' : ''); ?>;
+		window.status = "<?php echo(L_SVR_TIME); ?>" + calc_time + WORLD_TIME;
 
 		clock_disp = setTimeout('clock(' + gap + ')', 1000);
 	}
@@ -889,23 +894,6 @@ function get_day(time,plus)
 		else
 		{
 			is_smilie_popup = window.open("smilie_popup.php?<?php echo("L=$L"); ?>","smilie_popup","bottom=0,right=0,width=300,height=300,scrollbars=yes,resizable=yes,status=no,toolbar=no,menubar=no,directories=no,location=no");
-		};
-	};
-
-	// Color Input Box mod by Ciprian
-	// Launch the color chart popup
-	var is_colorhelp_popup = null;
-	var is_color_popup = null;
-
-	function color_popup()
-	{
-		if (is_color_popup && !is_color_popup.closed)
-		{
-			is_color_popup.focus();
-		}
-		else
-		{
-			is_color_popup = window.open("color_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>","color_popup","width=760,height=500,scrollbars=yes,resizable=no,status=yes,toolbar=no,menubar=no,directories=no,location=no");
 		};
 	};
 
@@ -1074,8 +1062,8 @@ function send_headers($title, $icon)
 	<!--
 	The lines below are usefull for debugging purpose, please do not remove them!
 	Release: phpMyChat Plus 1.91
-	© 2000-2006 The phpHeaven Team (http://www.phpheaven.net/)
-	© 2005-2006 Ciprian Murariu (ciprianmp@yahoo.com)
+	© 2000-2007 The phpHeaven Team (http://www.phpheaven.net/)
+	© 2005-2007 Ciprian Murariu (ciprianmp@yahoo.com)
 	-->
 	<META NAME="description" CONTENT="phpMyChat">
 	<META NAME="keywords" CONTENT="phpMyChat">
@@ -1181,7 +1169,7 @@ function isCookieEnabled() {
 	{
 		window.focus();
 		url = "<?php echo($ChatPath); ?>" + name + ".php?L=<?php echo($L); ?>&Link=1";
-		pop_width = (name != 'admin'? 360:820);
+		pop_width = (name != 'admin'? 400:820);
 		pop_height = (name != 'deluser'? (name != 'admin'? 640:550):190);
 		param = "width=" + pop_width + ",height=" + pop_height + ",resizable=yes,scrollbars=yes";
 		name += "_popup";
@@ -1260,7 +1248,7 @@ function layout($Err, $U, $R, $T, $C, $status)
 
 <CENTER>
 <FORM ACTION="<?php echo("$Action"); ?>" METHOD="POST" AUTOCOMPLETE="" NAME="Params" onSubmit="defineVerField(); return isCookieEnabled()">
-<SPAN CLASS="ChatTitle"><?php if (C_SHOW_LOGO) echo(APP_LOGO."<br />".APP_NAME." (".APP_VERSION.")"); ?></SPAN>
+<SPAN CLASS="ChatTitle"><?php if (C_SHOW_LOGO) echo(APP_LOGO."<br>".APP_NAME." (".APP_VERSION.")"); ?></SPAN>
 <?php
 // Msg for translations with no real iso code
 if (isset($FontPack) && $FontPack != "" && file_exists($ChatPath."localization/${L}/${FontPack}"))
@@ -1281,7 +1269,7 @@ if (C_SHOW_TUT == 1)
  echo(L_WEL_1." ".C_MSG_DEL." ".(C_MSG_DEL == 1 ? L_HOUR : L_HOURS));
 if(C_CHAT_BOOT)
 {
- echo(" ".L_WEL_2." ".C_USR_DEL." ".(C_USR_DEL == 1 ? L_MIN : L_MINS));
+ echo("<br>".L_WEL_2." ".C_USR_DEL." ".(C_USR_DEL == 1 ? L_MIN : L_MINS));
 }
 	echo(".");
 	?>
@@ -1306,7 +1294,7 @@ $result = @mysql_query("SELECT DISTINCT ip,browser FROM ".C_LRK_TBL."",$handler)
 $online_users = @mysql_numrows($result);
 @mysql_close();
 $lurklink = " <A HREF=\"lurking.php?L=$L&D=10\" CLASS=\"ChatLink\" TARGET=\"_blank\" onMouseOver=\"window.status='Open the Lurking Page.'; return true;\">";
-echo("<br />".L_CUR_1." ".($online_users != 1 ? L_CUR_1a.$lurklink.$online_users." ".L_LURKERS."</A>" : L_CUR_1b.$lurklink.$online_users." ".L_LURKER."</A>"));
+echo("<br>".L_CUR_1." ".($online_users != 1 ? L_CUR_1a.$lurklink.$online_users." ".L_LURKERS."</A>" : L_CUR_1b.$lurklink.$online_users." ".L_LURKER."</A>"));
 }
 ?>
 </P>
@@ -1344,8 +1332,8 @@ if (!isset($Ver)) $Ver = "L";
 				{
 					$i++;
 					echo("<A HREF=\"$Action?L=${name}\" onMouseOver=\"window.status='Switch to ".ucfirst(str_replace("_"," ",$name)).".'; return true;\" Title=\"".ucfirst(str_replace("_"," ",$name))."\">");
-					echo("<IMG SRC=\"${ChatPath}localization/${name}/flag.gif\" BORDER=0 WIDTH=24 HEIGHT=16 ALT=\"".ucfirst(str_replace("_"," ",$name))."\"></A>&nbsp;");
-					if ($i % 15 == 0) echo ("<br />");
+					echo("<IMG SRC=\"${ChatPath}localization/${name}/flag.gif\" BORDER=0 WIDTH=20 HEIGHT=13 ALT=\"".ucfirst(str_replace("_"," ",$name))."\"></A>&nbsp;");
+					if ($i % 15 == 0) echo ("<br>");
 				};
 				unset($AvailableLanguages);
 				?>
@@ -1371,7 +1359,7 @@ if (!isset($Ver)) $Ver = "L";
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_REG_1); ?> :</TD>
 			<TD VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP">
 				<INPUT TYPE="password" NAME="pmc_password" SIZE=11 MAXLENGTH=16 CLASS="ChatBox">
-				<?php if (!C_REQUIRE_REGISTER) echo("&nbsp;<U>".L_REG_1r."</U>"); ?>
+				<?php if (!C_REQUIRE_REGISTER) echo("&nbsp;(<U>".L_REG_7."</U>)"); ?>
 			</TD>
 		</TR>
 
@@ -1382,7 +1370,7 @@ if (!isset($Ver)) $Ver = "L";
 		</TR>
 		<TR CLASS="ChatCell">
 			<TD ALIGN="center" COLSPAN=2 CLASS="ChatCell">
-				<br />
+				<br>
 					<A HREF="<?php echo($ChatPath); ?>register.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('register'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_3); ?>.'; return true;"><?php echo(L_REG_3); ?></A>
 					| <A HREF="<?php echo($ChatPath); ?>edituser.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('edituser'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_4); ?>.'; return true;"><?php echo(L_REG_4); ?></A>
 				<?php
@@ -1622,7 +1610,7 @@ if (!isset($Ver)) $Ver = "L";
 		}
 		?>
 		</TABLE>
-		<br /><?php echo(L_SET_18); ?><br />
+		<br><?php echo(L_SET_18); ?><br>
 		<P CLASS="ChatP2">
 		<?php echo(L_SET_13." "); ?>
 		<INPUT TYPE="submit" VALUE="<?php echo(L_SET_14); ?>" CLASS="ChatBox"> ...
@@ -1638,14 +1626,13 @@ if (C_SHOW_INFO == 1)
 <FONT COLOR=yellow SIZE=-1>
 <?php
 // Info on welcome page about cmds, mods and bot. Edit lib/info.lib.php to add more infos about your chat features
-if (SET_CMDS==1) echo("<br />".INFO_CMDS);
-if (SET_MODS==1) echo("<br />".INFO_MODS);
-if (SET_BOT==1) echo("<br />".INFO_BOT);
+if (SET_CMDS==1) echo(INFO_CMDS."<br>");
+if (SET_MODS==1) echo(INFO_MODS."<br>");
+if (SET_BOT==1) echo(INFO_BOT."<br>");
 ?>
-</FONT><br />
+</FONT>
 <?php
 }
-echo("<FONT COLOR=lightblue SIZE=-1>Download this full chat pack from <A href=\"https://sourceforge.net/project/showfiles.php?group_id=19371&package_id=199435\" target=_blank onMouseOver=\"window.status='Download this phpMyChat Plus Pack.'; return true;\">here</A></FONT>");
 ?>
 <P>
 <?php
@@ -1661,15 +1648,16 @@ echo ($ani_counter->create_output("chat_index"));
 ?>
 </P>
 <SPAN CLASS="ChatCopy" dir="LTR">
-&copy; 2000-<?php echo(date(Y))?> <A HREF="http://phpmychat.sourceforge.net/" TARGET=_blank CLASS="ChatLink" Title="Visit the phpMyChat homepage" onMouseOver="window.status='Click to visit phpMyChat Homepage.'; return true">The phpHeaven Team</A><br />
-&copy; 2005-<?php echo(date(Y))?> Plus development by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" Title="Send Ciprian your feedback" CLASS="ChatLink" onMouseOver="window.status='Send your feedback to Ciprian at ciprianmp@yahoo.com.'; return true;">Ciprian M</a>.<br />
-Thanks to all the contributors in the <a href="http://groups.yahoo.com/subscribe/phpmychat" CLASS="ChatLink" title="Subscribe to phpMyChat group on yahoo" onMouseOver="window.status='Click here to join phpMyChat group.'; return true;" target=_blank>phpMyChat group</a> !
+&copy; 2000-<?php echo(date(Y))?> <a HREF="http://phpmychat.sourceforge.net/" TARGET=_blank CLASS="ChatLink" Title="Visit the phpMyChat homepage" onMouseOver="window.status='Click to visit phpMyChat Homepage.'; return true">The phpHeaven Team</a><br>
+&copy; 2005-<?php echo(date(Y))?> Plus development by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" Title="Send Ciprian your feedback" CLASS="ChatLink" onMouseOver="window.status='Send your feedback to Ciprian at ciprianmp@yahoo.com.'; return true;">Ciprian M</a>.<br>
+Thanks to all the contributors in the <a href="http://groups.yahoo.com/subscribe/phpmychat" CLASS="ChatLink" title="Subscribe to phpMyChat group on yahoo" onMouseOver="window.status='Click here to join phpMyChat group.'; return true;" target=_blank>phpMyChat group</a> !<br>
+Download this full chat pack from <a href="https://sourceforge.net/project/showfiles.php?group_id=19371&package_id=199435" target=_blank title="Download this phpMyChat Plus Pack" onMouseOver="window.status='Download this phpMyChat Plus Pack.'; return true;" CLASS="ChatLink">here</a>
 </SPAN>
 <?php
 if (C_SHOW_OWNER == 1)
 {
 ?>
-<br /><SPAN CLASS="ChatCopy" dir="LTR">
+<br><SPAN CLASS="ChatCopy" dir="LTR">
 Owner of this chat server -
 <?php
 include_once("./admin/mail4admin.lib.php");

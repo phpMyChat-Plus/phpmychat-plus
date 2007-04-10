@@ -15,7 +15,7 @@ if (isset($Charset))
 		$FontFace = "font-family: \"${FontName}, sans-serif\";";
 		$SpecialFont = "1";
 	}
-	elseif ($Charset == "iso-8859-1" || $Charset == "iso-8859-2")
+	else
 	{
 		$FontFace = "font-family: helvetica, arial, geneva, sans-serif;";
 	};

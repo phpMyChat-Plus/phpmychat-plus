@@ -383,9 +383,11 @@ else
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_45); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="radio" NAME="GENDER" VALUE="1" <?php if (isset($GENDER) && $GENDER == "1") echo("CHECKED"); if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_REG_46); ?><br />
-				<INPUT TYPE="radio" NAME="GENDER" VALUE="2" <?php if (isset($GENDER) && $GENDER == "2") echo("CHECKED"); if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_REG_47); ?><br />
-				<INPUT TYPE="radio" NAME="GENDER" VALUE="0" <?php if (isset($GENDER) && $GENDER == "0") echo("CHECKED"); if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_REG_48); ?>
+				<SELECT name="GENDER">
+				<OPTION value="1" <?php if ($GENDER==1) echo ("selected=\"selected\"")?>><?php echo(L_REG_46)?></OPTION>
+				<OPTION value="2" <?php if ($GENDER==2) echo ("selected=\"selected\"")?>><?php echo(L_REG_47)?></OPTION>
+				<OPTION value="0" <?php if ($GENDER==0 || $GENDER=="") echo ("selected=\"selected\"")?>><?php echo(L_REG_48)?></OPTION>
+				</SELECT>
 			</TD>
 		</TR>
 		<TR>
@@ -465,13 +467,13 @@ if (COLOR_FILTERS)
 		if (COLOR_CA2 != "") $ColorList = eregi_replace('"'.COLOR_CA2.'",', "", $ColorList);
 	}
 }
-$ColorList = eregi_replace('"',"", $ColorList);
+$ColorList = eregi_replace('"', "", $ColorList);
 $CC = explode(",", $ColorList);
 			echo("<SELECT NAME=\"COLORNAME\">\n");
 			while(list($ColorNumber1, $ColorCode) = each($CC))
 			{
 				// Red color is reserved to the admin or a moderator for the current room
-				echo("<OPTION style=\"background-color:".$ColorCode."; color:".$ColorCode."\" VALUE=\"".$ColorCode."\"");
+				echo("<OPTION style=\"background-color:".$ColorCode."; color:".COLOR_CD."\" VALUE=\"".$ColorCode."\"");
 				if ($COLORNAME == $ColorCode) echo(" SELECTED");
 				if ($ColorCode != "" && $ColorCode != $COLORNAME && $ColorCode != COLOR_CA && $ColorCode != COLOR_CM) echo(">".$ColorCode."</OPTION>");
 				elseif ($ColorCode == $COLORNAME && $ColorCode != "") echo(">".$ColorCode." (selected)</OPTION>");

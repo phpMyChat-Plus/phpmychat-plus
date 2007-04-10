@@ -1,5 +1,5 @@
 <?php
-// File : english/localized.chat.php - plus version (20.09.2006 - rev.13)
+// File : english/localized.chat.php - plus version (25.03.2007 - rev.16)
 // Original file by Nicolas Hoizey <nhoizey@phpheaven.net>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -52,12 +52,12 @@ define("L_HOURS", "hours");
 
 // registration stuff:
 define("L_REG_1", "your password");
-define("L_REG_1r", "(only if you are registered)");
 define("L_REG_2", "Account management");
 define("L_REG_3", "Register");
 define("L_REG_4", "Edit your profile");
 define("L_REG_5", "Delete user");
 define("L_REG_6", "User registration");
+define("L_REG_7", "only if you are registered");
 define("L_REG_8", "your e-mail");
 define("L_REG_9", "You have successfully registered.");
 define("L_REG_10", "Back");
@@ -97,13 +97,13 @@ define("L_EMAIL_VAL_Done", "Your password has been sent to your e-mail address.<
 
 // admin stuff
 define("L_ADM_1", "%s is no longer a moderator for this room.");
-define("L_ADM_2", "You're no longer a registered user.");
+define("L_ADM_2", "You are no longer a registered user.");
 
 // error messages
 define("L_ERR_USR_1", "This username is already in use. Please chose another.");
 define("L_ERR_USR_2", "You must chose a username.");
 define("L_ERR_USR_3", "This username is registered.<br>Please type your password or chose another username.");
-define("L_ERR_USR_4", "You typed a incorrect password.");
+define("L_ERR_USR_4", "You typed an incorrect password.");
 define("L_ERR_USR_5", "You must type your username.");
 define("L_ERR_USR_6", "You must type your password.");
 define("L_ERR_USR_7", "You must type your e-mail.");
@@ -184,6 +184,7 @@ define("L_HELP_TIT_2", "Text formating for messages");
 define("L_HELP_FMT_1", "You can put bold, italic or underlined text in messages by encasing the applicable sections of your text with either the &lt;B&gt; &lt;/B&gt;, &lt;I&gt; &lt;/I&gt; or &lt;U&gt; &lt;/U&gt; tags.<br>For example, &lt;B&gt;this text&lt;/B&gt; will produce <B>this text</B>.");
 define("L_HELP_FMT_2", "To create a hyperlink (for e-mail or URL) in your message, simply type the corresponding address without any tag. The hyperlink will be created automatically.");
 define("L_HELP_TIT_3", "Commands");
+define("L_HELP_NOTE", "All the commands must be used in English!");
 define("L_HELP_USR", "user");
 define("L_HELP_MSG", "message");
 define("L_HELP_ROOM", "room");
@@ -224,7 +225,7 @@ define("L_HELP_CMD_29", "The second command will allow the administrator or mode
 define("L_HELP_CMD_30", "The second command does the same as /me but it will show your respective gender<br>E.g. * Mr Ciprian is watching TV or Mrs Dana is happy.");
 define("L_HELP_CMD_31", "Change the order users are sorted in lists: by entrance time or alphabetically.");
 define("L_HELP_CMD_32", "This is a third (roleplaying) version of the dice rolling.<br>Usage: /d{n1}[tn2] or /d{n1};<br>n1 can take any value <b>between 1 and 100</b> (it represents the number of rolls per dice).<br>n2 can take any value <b>between 1 and %s</b> (it represents the number of rolling dices per throw).");
-define("L_HELP_CMD_33", "Change the font size of the messages in chat to user choice (allowed values for n: <b>between 7 and 15</b>); the /size command resets the font size to the default value.");
+define("L_HELP_CMD_33", "Change the font size of the messages in chat to user choice (allowed values for n: <b>between 7 and 15</b>); the /size command resets the font size to the default value (<b>".$FontSize."</b>).");
 define("L_HELP_ETIQ_1", "Chat Etiquette");
 define("L_HELP_ETIQ_2", "Our site would like to keep its community friendly and fun, so please adhere to the following guidelines. If you fail to observe these rules, one of our chat moderators may boot you from the chat.<br /><br>Thank you,");
 define("L_HELP_ETIQ_3", "Our Chat Etiquette Guidelines");
@@ -256,6 +257,8 @@ define("L_IGNOR_NON", "No ignored user");
 define("L_WHOIS_ADMIN", "Administrator");
 define("L_WHOIS_MODER", "Moderator");
 define("L_WHOIS_USER", "User");
+define("L_WHOIS_GUEST", "Guest");
+define("L_WHOIS_REG", "Registered");
 
 // Notification messages of user entrance/exit
 if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", "%s enters this room" . L_ENTER_SND);
@@ -313,7 +316,7 @@ define("L_EXPL_AV", "(Enter URL, then hit ENTER to view)");
 define("L_CANCEL", "Cancel");
 define("L_CLICK", "Click here");
 
-// PluceBot bot mod (based on Alice bot)
+// PlusBot bot mod (based on Alice bot)
 define("BOT_TIPS", "TIPS: Our bot is publicly active in this room. To start talking to the bot, type <b>hello ".C_BOT_NAME.'</b>. To end conversation, type: <b>bye '.C_BOT_NAME.'</b>. (private: /to <b>'.C_BOT_NAME.'</b> Message)'); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
 define("BOT_PRIV_TIPS", "TIPS: Our bot is publicly active in %s room. You can only talk private by clicking on it's name and whispering. (command: /wisp <b>".C_BOT_NAME."</b> Message)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
 define("BOT_PRIVONLY_TIPS", "TIPS: Our bot is not publicly active. You can only talk private by clicking on it's name. (commands: /to <b>".C_BOT_NAME."</b> Message or /wisp <b>".C_BOT_NAME."</b> Message)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
@@ -400,4 +403,7 @@ define("L_THU", "Th"); //Thursday
 define("L_FRI", "Fr"); //Friday
 define("L_SAT", "Sa"); //Saturday
 define("L_SUN", "Su"); //Sunday
+
+// Extra options by Ciprian
+define("L_EXTRA_OPT", "Extra Options");
 ?>

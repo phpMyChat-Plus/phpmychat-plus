@@ -1,5 +1,33 @@
+-update the localizations - Ciprian - ongoing
+-Statistics mod - Mei Yung - ?
+-members page/profiles - Ciprian
+-default color font stored in database not cookie - Ciprian
+-installer/setup - Ciprian
+-credits page - Ciprian
+-commands table & archiving/logging the commands used in chat as well - Ciprian
+- /ghost command: put the user into a ghost state (the ghost user and his posts cannot be seen in the room, he won't know about this, so he gives up and leave the chat - works when banning has no effect on a specific user; it also allow an admin/moder to go invisible in the chat);
+- add link for offline pms?
+- is there any tool available or planned to reset user passwords?
+I've from time to time to reset a user password when he forgot it.
+Maybe there should be a "forgot password" field, where the user has to
+enter his mail address (the one which he registered himself) and gets a
+new password.
+- add the members page - Ciprian
+- add the gallery feature - Ciprian (not sure if useful, as the hosting space/size is variable and can be limited for many users)
+- move the bot installer into an install folder, to be removed after installation - Ciprian
+- change the update feature to @fsock - Ciprian - done, no improvement, so reverted and added the disable option in panel.
+- add the mod admin permissions (to moderate moders as well, but cannot admin/kick the admin) (based on Luke's idea) - Ciprian
+- cell align right in chat (for right-to-left languages) - Ciprian
+- cookie handler - to delete the old cookies automatically on new installs/upgrades and to remove the old room names on panel changes - Ciprian
+- fix the enable/disable sound command and add the option in the right menu in chat, not just in users_popup - Ciprian
+- add colornames in users_popup list - Ciprian
+- coming back from avatar chooser loses the previous values in profile - parsing - Ciprian
+- automatically delete cookies after upgrade on each client machine - Ciprian
+- room names check for invalid chars in admin panel - urgent - Ciprian
+
+Done:
 -Log archive - Ciprian - done
--img width in config - Ciprpian -done
+-img width in config - Ciprian -done
 -move smilies to bottom in help - Ciprian - done
 -avatar - done
 -bot - done
@@ -9,36 +37,21 @@
 -colored nickname in loader - Ciprian - done
 -colored nickname in users list - Ciprian - done
 -lurking mod - Ciprian - done
--users list ordered by entrance time - Ciprian - done (/sort command)
+-users list ordered by entrance time (/sort command) - Ciprian - done
 -color filters for admin and mod in usernames as well - Ciprian - done
 -dice3 addition - done
 -dices eval(messages) fixed in firefox - Ciprian - done
 -unspecified gender field in profiles - Ciprian - done
--Statistics mod - Mei Yung - ?
--members page/profiles - Ciprian
--default color font stored in database not cookie - Ciprian
--installer/setup - Ciprian - on the way
--credits page - Ciprian
--update the localizations - Ciprian and Nick (?)
 -conversation with the robot also private (based on Sally Linus Lucy's idea) - Ciprian - done (1.90)
 -option for admin to totally disable private messaging in chat (/to and /wisp) (based on bluntdog's idea) - Ciprian - done (1.90)
--add the size command to dinamically change the font size in messages frame (based on Sally Makeham's idea) - Ciprian - done (1.90)
+-add the size command to dynamically change the font size in messages frame (based on Sally Makeham's idea) - Ciprian - done (1.90)
 -promote to moderator - not from private rooms (mods only by creating a non-default room shouldn't have powers in any other rooms) - (based on bugs submitted on SourceForge.net) - Ciprian
 -I would be pleased if it would be possible to insert reasons for kicking and banning (based on a Feature Request submited by miukumauku on SourceForge) - Ciprian - done (1.91)
 /kick lamer Spamming would print:
 [11:02] lamer was kicked (reason: Spamming)
--same for banishing - Ciprian - done
--commands table & archiving/logging the commands used in chat as well - Ciprian
+-same for banishing - Ciprian - done (1.91)
 -archiving/logging/lurking the pictures links posted using the /img command - Ciprian - done
+- change the pm function to > / done (1.91)
+- fix the pmpopup script error - done?
 -Is there a way to tie your profile color to your chat text color, and not just the nick? (based on Auggy's idea) - Ciprian - done
-		- /ghost command: put the user into a ghost state (the ghost user and his posts cannot be seen in the room, he won't know about this, so he gives up and leave the chat - works when banning has no effect on a specific user; it also allow an admin/moder to go invisible in the chat);
-- fix the pmpopup script error
-- add link for offline pms
-- change the pm function to >
-- is there any tool aviable or planned to reset user passwords?
-I've from time to time to reset a user password when he forgot it.
-Maybe there should be a "forgot password" field, where the user has to
-enter his mailadress (the one which he registered himself) and gets a
-new password.
-- add the members page
-- add the gallery feature
+- text cell valign top on messages (for smilies) - Ciprian - done

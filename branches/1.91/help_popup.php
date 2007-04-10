@@ -124,7 +124,8 @@ if (C_HTML_TAGS_KEEP != "none")
 <!-- Commands help -->
 <TABLE BORDER=0 CELLPADDING=3 WIDTH=574 CLASS="table">
 	<TR><TH ALIGN="CENTER" CLASS="tabtitle" COLSPAN=2><?php echo(L_HELP_TIT_3); ?></TH></TR>
-	<TR><TH ALIGN="CENTER" COLSPAN=2><?php echo(L_HELP_CMD_0); ?></TH></TR>
+	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2><I><?php echo(L_HELP_NOTE); ?></I></TH></TR>
+	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2><I><?php echo(L_HELP_CMD_0); ?></I></TH></TR>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2><A HREF="#" onClick="cmd2Input('/!',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/!</A></TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
@@ -409,7 +410,7 @@ if (C_ENABLE_PM)
 	<TR><TD ALIGN="CENTER" CLASS="tabtitle"><?php echo(L_COL_HELP_TITLE); ?></TD></TR>
 	<TR><TD ALIGN="<?php echo($CellAlign); ?>"><b><?php echo(L_COL_HELP_SUB1); ?></b><br /><?php echo(L_COL_HELP_P1); ?><br /></TD></TR>
 	<TR><TD ALIGN="<?php echo($CellAlign); ?>"><b><?php echo(L_COL_HELP_SUB2); ?></b><br /><?php echo(L_COL_HELP_P2); ?><br /><br /><center><?php echo(COLOR_LIST); ?></center><?php echo(L_COL_HELP_P2a); ?><br /></TD></TR>
-	<TR><TD ALIGN="<?php echo($CellAlign); ?>"><b><?php echo(L_COL_HELP_SUB3); ?></b><br /><?php echo(L_COLOR_HEAD_SETTINGS); ?><br /><?php if (COLOR_FILTERS == 1) echo(L_COLOR_HEAD_SETTINGSa."<br />"); ?><u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo("Administrator"); elseif ($CookieStatus == "m") echo("Moderator"); elseif ($CookieStatus == "u") echo("Guest (Normal)"); else echo("Registered (Normal)");?></b><br /><?php if (COLOR_FILTERS == 1) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?><br /></TD></TR>
+	<TR><TD ALIGN="<?php echo($CellAlign); ?>"><b><?php echo(L_COL_HELP_SUB3); ?></b><br /><?php echo(L_COLOR_HEAD_SETTINGS); ?><br /><?php if (COLOR_FILTERS == 1) echo(L_COLOR_HEAD_SETTINGSa."<br />"); ?><u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo(L_WHOIS_ADMIN); elseif ($CookieStatus == "m") echo(L_WHOIS_MODER); elseif ($CookieStatus == "u") echo(L_WHOIS_GUEST); else echo(L_WHOIS_GUEST);?></b><br /><?php if (COLOR_FILTERS == 1) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?><br /></TD></TR>
 <!-- Color Picker Text Input Box help end -->
 <?php
 if (C_USE_SMILIES == "1")

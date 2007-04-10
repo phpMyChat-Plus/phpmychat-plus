@@ -364,7 +364,7 @@ Es gibt verschiedene Methoden, die Chatansicht zu ändern. Um die Vorgaben zu änd
 
 <FONT SIZE="+1"><A NAME="help"><B>Help Befehl:</B></A></FONT>
 <P>
-Wenn Du im Chatraum bist, kannst Du auf das  <IMG SRC="images/helpOff.gif" WIDTH=15 HEIGHT=15 BORDER=0 ALT="?"> Zeichen vor der Nachrichteneingabe klicken. Du kannst auch den  <B>"/help" oder "/?" Befehl</B> eingeben (ohne Anführungszeichen).
+Wenn Du im Chatraum bist, kannst Du auf das  <IMG SRC="images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="Help"> Zeichen vor der Nachrichteneingabe klicken. Du kannst auch den  <B>"/help" oder "/?" Befehl</B> eingeben (ohne Anführungszeichen).
 <br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <P>

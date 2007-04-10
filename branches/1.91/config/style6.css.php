@@ -19,7 +19,7 @@ if (isset($Charset))
 		* {font-family: <?php echo($FontName); ?>, sans-serif;}
 		<?php
 	}
-	elseif ($Charset == "iso-8859-1" || $Charset == "iso-8859-2")
+	else
 	{
 		?>
 		* {font-family: helvetica, arial, geneva, sans-serif;}
@@ -36,7 +36,7 @@ Here you can customize the default color for messages window general look
 the font for text messages, colors, some popup windows' text color, aso.
 This will make time, sender and message color have the same default color defined bellow.*/
 
-	$CD = "maroon";			//default messages color, Filter code: 800000
+	$CD = "maroon";			//default messages color (this color should be chosen in the Admin panel tab, filter color of this rooms' skin)
 
 ?>
 
@@ -98,6 +98,12 @@ TABLE, TR, TD, TH
 	color: #000000;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
+	vertical-align: top;
+}
+
+IMG
+{
+	vertical-align: top;
 }
 
 TD.whois, .whois
@@ -216,7 +222,7 @@ INPUT, SELECT, TEXTAREA
 {
 	unicode-bidi: embed;
 	color: <?php echo($CD); ?>;
-	font-size: <?php echo($FontSize); ?>;;
+	font-size: <?php echo($FontSize); ?>;
 }
 
 .notify

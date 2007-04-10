@@ -13,7 +13,7 @@ if (!C_CHAT_EXTRAS)
 }
 else
 {
-// Credit for this goes to Pete Soheil <webmaster@digioz.com>.
+// Credit for this goes to Pete Soheil <webmaster@digioz.com>
 $pstr = "admin.php?From=admin.php&What=Body&L=english"."&pmc_username=".$pmc_username."&pmc_password=".$pmc_password."&sheet=6";
 $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
 mysql_select_db(C_DB_NAME);

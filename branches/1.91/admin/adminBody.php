@@ -22,6 +22,7 @@ if (isset($First))
 	$DbLink->optimize(C_REG_TBL);
 	$DbLink->optimize(C_BAN_TBL);
 	$DbLink->optimize(C_CFG_TBL);
+	$DbLink->optimize(C_LRK_TBL);
 };
 
 if ($sheet < 3)

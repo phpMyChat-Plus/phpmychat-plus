@@ -1,7 +1,7 @@
 <?php
 // File : french/localized.tutorial.php - plus version
 // Translation by Loïc Chapeaux <lolo@phpheaven.net>
-// Updates, corrections and additions for the Plus version by Leloup <leloup@le-loup.info>
+// Updates, corrections and additions for the Plus version by Leloup <leloup@le-loup.info> and Christophe Luke <christophe.lucsky@gmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>)
 
 // Get the names and values for vars sent by the script that called this one
@@ -158,7 +158,7 @@ if (C_MULTI_LANG == "1")
 	<P>
 	Vous pouvez choisir la langue à utiliser parmi celles dans lesquelles <?php echo(APP_NAME); ?> a été traduit en cliquant sur le drapeau correspondant de la page d'accueil. Dans l'exemple ci-dessous, un utilisateur choisit le français :
 	<P ALIGN="center">
-	<IMG SRC="file:///K|/CHAT/phpmychat1_9/phpMyChat-Plus_1.90_fixed/plus/localization/english/images/tutorials/flags.gif" HEIGHT="44" WIDTH="424" ALT="Drapeau de sélection de langue">
+	<IMG SRC="images/tutorials/flags.gif" HEIGHT="44" WIDTH="424" ALT="Drapeau de sélection de langue">
 	<br /><P ALIGN="right"><A HREF="#top">Début de la page</A></P>
 	<hr />
 	<?php
@@ -232,9 +232,9 @@ if ($Ver == "H")
 	En haut à droite de votre écran est affiché un sigle résumant l'état des connexions. Il peut prendre trois formes :
 	<P>
 	<UL>
-		<LI><IMG SRC="file:///K|/CHAT/phpmychat1_9/phpMyChat-Plus_1.90_fixed/plus/localization/english/images/connectOff.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Pas de connexion"> lorsqu'aucune connexion n'est requise ;
-		<LI><IMG SRC="file:///K|/CHAT/phpmychat1_9/phpMyChat-Plus_1.90_fixed/plus/localization/english/images/connectOn.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Connexion en cours"> lorsqu'une tentative de connexion est en cours ;
-		<LI><IMG SRC="file:///K|/CHAT/phpmychat1_9/phpMyChat-Plus_1.90_fixed/plus/localization/english/images/connectError.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Echec"> lorsqu'une tentative de connexion a échoué.
+		<LI><IMG SRC="images/connectOff.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Pas de connexion"> lorsqu'aucune connexion n'est requise ;
+		<LI><IMG SRC="images/connectOn.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Connexion en cours"> lorsqu'une tentative de connexion est en cours ;
+		<LI><IMG SRC="images/connectError.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Echec"> lorsqu'une tentative de connexion a échoué.
 	</UL>
 	<P>
 	Dans le dernier de ces trois cas de figure, cliquer sur le "bouton" rouge ré-engagera une tentative de connexion.
@@ -268,7 +268,7 @@ Vous pouvez choisir la couleur dans laquelle seront affichés vos messages à l'ai
 <TABLE BORDER=0 CELLSPACING=10>
 <TR>
 	<TD>
-		<IMG SRC="file:///K|/CHAT/phpmychat1_9/phpMyChat-Plus_1.90_fixed/plus/localization/english/images/tutorials/usersList.gif" WIDTH=128 HEIGHT=145 BORDER=0 ALT="users list">
+		<IMG SRC="images/tutorials/usersList.gif" WIDTH=128 HEIGHT=145 BORDER=0 ALT="users list">
 	</TD>
 	<TD>
 	<UL>
@@ -304,10 +304,10 @@ affichera le message "A bientôt !" puis vous renverra sur la page d'accueil.
 <P>
 <FONT SIZE="+1"><A NAME="users_popup"><B>Savoir qui est connecté sans l'être soi-même :</B></A></FONT>
 <P>
-En cliquant sur le lien affichant le nombre d'utilisateurs de la page d'accueil ou bien, une fois dans une salon, sur l'icône <IMG SRC="file:///K|/CHAT/phpmychat1_9/phpMyChat-Plus_1.90_fixed/plus/localization/english/images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Users popup">  en haut et à droite de votre écran ,vous ouvrirez une petite fenêtre indépendante présentant la liste des utilisateurs connectés et des salons dans lesquels ils sont présents en temps presque réél.<br />
+En cliquant sur le lien affichant le nombre d'utilisateurs de la page d'accueil ou bien, une fois dans une salon, sur l'icône <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Users popup">  en haut et à droite de votre écran ,vous ouvrirez une petite fenêtre indépendante présentant la liste des utilisateurs connectés et des salons dans lesquels ils sont présents en temps presque réél.<br />
 Vous noterez que le titre de cette fenêtre est composé des pseudos des utilisateurs connectés s'ils sont moins de trois, de leur nombre ainsi que de celui des salons ouverts sinon.
 <P>
-Dans cette même fenêtre, cliquer sur l'icône <IMG SRC="file:///K|/CHAT/phpmychat1_9/phpMyChat-Plus_1.90_fixed/plus/localization/english/images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Signal sonore"> vous permettra d'activer ou de désactiver le système de notification sonore à l'arrivée d'un nouvel utilisateur.
+Dans cette même fenêtre, cliquer sur l'icône <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Signal sonore"> vous permettra d'activer ou de désactiver le système de notification sonore à l'arrivée d'un nouvel utilisateur.
 <br /><P ALIGN="right"><A HREF="#top">Début de la page</A></P>
 <P>
 <hr />
@@ -381,7 +381,7 @@ Il est de multiples façons de modifier les paramètres d'affichage. Il vous suffi
 
 <FONT SIZE="+1"><A NAME="help"><B>Aide en ligne :</B></A></FONT>
 <P>
-Une fois entré dans un salon de discussion, vous pourrez obtenir de l'aide en cliquant sur l'image <IMG SRC="file:///K|/CHAT/phpmychat1_9/phpMyChat-Plus_1.90_fixed/plus/localization/english/images/helpOff.gif" WIDTH=15 HEIGHT=15 BORDER=0 ALT="?"> qui est placée à gauche de la "boite à messages". Vous pourrez encore utiliser les <B>commandes "/help" ou "/?"</B> à cet effet.
+Une fois entré dans un salon de discussion, vous pourrez obtenir de l'aide en cliquant sur l'image <IMG SRC="images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="Help"> qui est placée à gauche de la "boite à messages". Vous pourrez encore utiliser les <B>commandes "/help" ou "/?"</B> à cet effet.
 <br /><P ALIGN="right"><A HREF="#top">Début de la page</A></P>
 <P>
 <P>
@@ -418,7 +418,7 @@ if (C_USE_SMILIES == "1")
 	?>
 	</TABLE>
 	<P>
-	<I>Par exemple</I>, en tapant le texte "Salut Coco :)" sans les guillemets, le message "Salut Coco <IMG SRC="file:///K|/CHAT/phpmychat1_9/phpMyChat-Plus_1.90_fixed/plus/localization/english/images/smilies/smile1.gif" WIDTH=15 HEIGHT=15 ALT=":)"> (sans guillemets) sera affiché dans le cadre principal.
+	<I>Par exemple</I>, en tapant le texte "Salut Coco :)" sans les guillemets, le message "Salut Coco <IMG SRC="images/smilies/smile1.gif" WIDTH=15 HEIGHT=15 ALT=":)"> (sans guillemets) sera affiché dans le cadre principal.
 	<br /><P ALIGN="right"><A HREF="#top">Début de la page</A></P>
 	<P>
 	<hr />

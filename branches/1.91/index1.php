@@ -166,7 +166,6 @@ $Status = (isset($CookieStatus) ? $CookieStatus : "");
 layout($Is_Error,$Username,$Room_name,$Room_type,$Color,$Status);
 
 // You can add php code here, or add html statements before the "</BODY>" tag.
-if ($S) echo("<TD><SPAN style=\"color:yellow; background-color:black;\"><b>Debug data:</b><br>Admin name: <b>".C_ADMIN_NAME."</b><br>Admin email: <b>".C_ADMIN_EMAIL."</b><br>App name: <b>".APP_NAME."</b><br>App version: <b>".APP_VERSION."</b></SPAN></TD>");
 ?>
 </CENTER>
 </BODY>

@@ -19,7 +19,7 @@ if (isset($Charset))
 		* {font-family: <?php echo($FontName); ?>, sans-serif;}
 		<?php
 	}
-	elseif ($Charset == "iso-8859-1" || $Charset == "iso-8859-2")
+	else
 	{
 		?>
 		* {font-family: helvetica, arial, geneva, sans-serif;}
@@ -38,7 +38,7 @@ Optionally you might want to replace color: #000000; in the .time block with:
  	color: <?php echo($CD); ?>;
 This will make time, sender and message color have the same default color defined bellow.*/
 
-$CD = "black";			//default messages color, Filter code: 000000
+$CD = "black";			//default messages color (this color should be chosen in the Admin panel tab, filter color of this rooms' skin)
 
 ?>
 
@@ -100,6 +100,12 @@ TABLE, TR, TD, TH
 	color: #000000;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
+	vertical-align: top;
+}
+
+IMG
+{
+	vertical-align: top;
 }
 
 TD.whois, .whois
@@ -218,7 +224,7 @@ INPUT, SELECT, TEXTAREA
 {
 	unicode-bidi: embed;
 	color: <?php echo($CD); ?>;
-	font-size: <?php echo($FontSize); ?>;;
+	font-size: <?php echo($FontSize); ?>;
 }
 
 .notify

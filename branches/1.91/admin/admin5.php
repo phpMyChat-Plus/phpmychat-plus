@@ -5,51 +5,50 @@
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
 
 require("./config/config.lib.php");
-$ColorList = eregi_replace('"',"", COLORLIST);
-
-// Check for application update on main sites (ciprianmp.com & sourceforge) resources.
-$updatepath1 = "http://plus.gamedogs.com/lib/update.txt";
-$updatepath2 = "http://ciprianmp.com/plus/lib/update.txt";
-$updatepath3 = "http://svn.sourceforge.net/viewvc/*checkout*/phpmychat/trunk/lib/update.txt";
-$updatepath4 = "./lib/update.txt";
-if (@fopen($updatepath1, "r"))
-{
- @fclose($updatepath1);
- include_once($updatepath1);
-}
-elseif (@fopen($updatepath2, "r"))
-{
-	@fclose($updatepath2);
-	include_once($updatepath2);
-}
-elseif (@fopen($updatepath3, "r"))
-{
-	@fclose($updatepath3);
-	include_once($updatepath3);
-}
-else
-{
-	include_once($updatepath4);
-}
 require("./lib/release.lib.php");
-if (APP_LAST_VERSION != APP_VERSION)
+settype($app_version = APP_VERSION, "double");
+$ColorList = eregi_replace('"', "", COLORLIST);
+if (UPD_CHECK)
 {
-?>
-	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
-	<!--
-alert("<?php echo(sprintf(A_SHEET5_0, APP_VERSION, APP_LAST_VERSION)); ?>")
-	// -->
-	</SCRIPT>
-<p class=error><font color=green><?php echo(sprintf(A_SHEET5_1, APP_VERSION, APP_LAST_VERSION)); ?></font>
-<br /></p>
-<?php
+	// Check for application update on main sites (ciprianmp.com & sourceforge) resources.
+	$updatepath1 = "http://ciprianmp.com/latest/lib/update.txt";
+	$updatepath2 = "http://svn.sourceforge.net/viewvc/*checkout*/phpmychat/trunk/lib/update.txt";
+	if (@fopen($updatepath1, "r"))
+	{
+	 @fclose($updatepath1);
+	 include_once($updatepath1);
+	settype($app_last_version = APP_LAST_VERSION, "double");
+	}
+	elseif (@fopen($updatepath2, "r"))
+	{
+		@fclose($updatepath2);
+		include_once($updatepath2);
+	settype($app_last_version = APP_LAST_VERSION, "double");
+	}
+	else
+	{
+	settype($app_last_version = APP_VERSION, "double");
+	}
+
+	if ($app_last_version > $app_version)
+	{
+	?>
+		<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
+		<!--
+	alert("<?php echo(sprintf(A_SHEET5_0, APP_VERSION, APP_LAST_VERSION)); ?>")
+		// -->
+		</SCRIPT>
+	<p class=error><font color=green><?php echo(sprintf(A_SHEET5_1, APP_VERSION, APP_LAST_VERSION)); ?></font>
+	<br /></p>
+	<?php
+	}
 }
 ?>
 <a href="http://www.ciprianmp.com/atm/index.php?&direction=0&order=&directory=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Open the Download page" onMouseOver="window.status='Open the Download page.'; return true">Download Page</a>&nbsp;|
 <a href="http://svn.sourceforge.net/viewvc/phpmychat/trunk/" target=_blank Title="Open the phpMyChat SVN Project Page" onMouseOver="window.status='Open the phpMyChat SVN Project Page.'; return true"> phpMyChat SVN Project Page</a>&nbsp;|
-<a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Fixes readme.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Check what's new in <?php echo(APP_LAST_VERSION); ?>." onMouseOver="window.status='Check what\'s new in <?php echo(APP_LAST_VERSION); ?>.'; return true">Check what's new in <?php echo(APP_LAST_VERSION); ?></a>&nbsp;|
+<a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Fixes readme.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Check what's new in <?php echo((UPD_CHECK && ($app_last_version > $app_version)) ? APP_LAST_VERSION : APP_VERSION); ?>." onMouseOver="window.status='Check what\'s new in <?php echo((UPD_CHECK && ($app_last_version > $app_version)) ? APP_LAST_VERSION : APP_VERSION); ?>.'; return true">Check what's new in <?php echo((UPD_CHECK && ($app_last_version > $app_version)) ? APP_LAST_VERSION : APP_VERSION); ?></a>&nbsp;|
 <a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Plus FAQ.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Read the FAQ" onMouseOver="window.status='Read the FAQ'; return true">Read the FAQ</a>&nbsp;|
-<a href="http://plus.gamedogs.com" target=_blank Title="Go to Try me server." onMouseOver="window.status='Go to Try me server.'; return true">Try me server</a><br />
+<a href="http://www.ciprianmp.com/latest/" target=_blank Title="Go to Try me server." onMouseOver="window.status='Go to Try me server.'; return true">Try me server</a><br />
 <?php
 
 // If form is submitted update values in the database
@@ -200,7 +199,8 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"EN_ROOM9 = '$vEN_ROOM9', ".
 						"CHAT_BOOT = '$vCHAT_BOOT', ".
 						"WELCOME_SOUND = '$vWELCOME_SOUND', ".
-						"WORLDTIME = '$vWORLDTIME'".
+						"WORLDTIME = '$vWORLDTIME', ".
+						"UPD_CHECK = '$vUPD_CHECK'".
             " WHERE ID='0'";
 
 if(C_BOT_NAME != $vBOT_NAME || C_BOT_FONT_COLOR != $vBOT_FONT_COLOR || C_BOT_AVATAR != $vBOT_AVATAR)
@@ -243,7 +243,7 @@ list($id) = mysql_fetch_row($id_result);
 }
 else
 {
-// Credit for this goes to Pete Soheil <webmaster@digioz.com>.
+// Credit for this goes to Pete Soheil <webmaster@digioz.com>
 $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
 mysql_select_db(C_DB_NAME);
 
@@ -382,6 +382,7 @@ $EN_ROOM9							= $row[128];
 $CHAT_BOOT						= $row[129];
 $WELCOME_SOUND				= $row[130];
 $WORLDTIME						= $row[131];
+$UPD_CHECK						= $row[132];
 
 $query_botdata = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.bot.com'";
 $result_botdata = mysql_query($query_botdata);
@@ -403,6 +404,18 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_botdata)
 			<TD VALIGN=CENTER ALIGN=CENTER height="20" CLASS=tabtitle>Selected Settings
 			</TD>
 		</TR>
+<tr bgcolor="#B0C4DE">
+    <td><b>Enable checking for online updates on the servers:</b><br />
+    	<i>Hint: The script can automatically check up for new releases on: ciprianmp.com, plus.gamedogs.com, svn.sourceforge.net. No info is sent out from your server!</i><br />
+    	<font color=red size=-1>Important: if you get on error that the latest version is "APP_LAST_VERSION" and not a number, disable this feature; the erroneous message is there because "URL file-access is disabled on your server configuration"</b>.</font>
+    		</td>
+    <td>
+        <select name="vUPD_CHECK">
+	        <option value="0"<? if($UPD_CHECK==0){ echo " selected"; } ?>>Disable
+	        <option value="1"<? if($UPD_CHECK==1){ echo " selected"; } ?>>Enable
+        </select>
+		</td>
+</tr>
 <tr>
     <td><b>Clean-up time for old messages (hours):</b></td>
     <td><input name="vMSG_DEL" type="text" size="1" maxlength="3" value="<? echo $MSG_DEL; ?>"></td>

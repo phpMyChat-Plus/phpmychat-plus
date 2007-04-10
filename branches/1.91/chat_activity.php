@@ -2,23 +2,24 @@
 // This script is an example of display, in another page of your website,
 // the list or number of users connected to the chat
 
-// Call this file in a iframe like this:
-// <iframe name="PlusFrame" id="PlusFrame" height="30" scroll="no" frameborder="no" src="chat_activity.php"></iframe>
+/* Call this file in a iframe like this:
+<iframe name="PlusFrame" id="PlusFrame" height="30" scroll="no" frameborder="no" src="../plus/chat_activity.php"></iframe>
+*/
 
-// Lines below must be at the top of your file and completed according
-// to your settings
-
+// Lines below must be at the top of your file and completed according to your settings (path to your chat or plus directory)
 // Set relative path from this page to your chat directory (it ends with a trailing slash like: "../chat/" or empty "")
-// Considering /plus/ is in a path like http://www.website.com/folders/plus/
-//$ChatPath = "../../plus/";	//use it if the output page is in a path like this: http://www.website.com/folders/sample1/sample2
-$ChatPath = "../plus/";	//use it if the output page is in a path like this: http://www.website.com/folders/sample/
-//$ChatPath = "plus/";	//(most often) use it if the output page is in a path like this: http://www.website.com/folders/
-//$ChatPath = "";	//use it if the output page is in the same directory as plus
+// Considering /plus/ is in a path like http://www.website.com/plus/ (/public_html/plus/)
+// Note:	./ = current directory = /plus/;
+//				../ = parent directory = /folders/ (one folder up);
+//$ChatPath = "../../plus/";	//use it if the output page is in a path like this: http://www.website.com/private/phpbb (/public_html/private/phpbb/)
+$ChatPath = "../plus/";	//use it if the output page is in a path like this: http://www.website.com/phpbb/ (/public_html/phpbb/)
+//$ChatPath = "plus/";	//(most often) use it if the output page is in a path like this: http://www.website.com/ (root, /public_html/)
+//$ChatPath = "";	//use it if the output page is in the same directory with /plus/
 
 define("LOGIN_LINK","<A HREF=\"".$ChatPath."\" TITLE=\"Chat Login Page\" onMouseOver=\"window.status='Click to open the Chat Login Page.'; return true;\" TARGET=_blank>");
 
 if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
-if (!isset($R)) $skin == "style";	//you can use any style in your pluschat/config folder (style, style2, ..., style7)
+if (!isset($R)) $skin == "style1";	//you can use any style in your pluschat/config folder (style1, style2, ..., style7)
 
 if (isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"];
 
@@ -28,10 +29,10 @@ if (!isset($L)) $L = C_LANGUAGE;
 require("./${ChatPath}/localization/".$L."/localized.chat.php");
 
 // Configure here:
-$ShowPrivate = "0";     // 1 to display users even if they are in a private room,
+$ShowPrivate = 0;     // 1 to display users even if they are in a private room,
 												// 0 else
 
-$DisplayUsers = "0";    // 0 to display only the number of connected users
+$DisplayUsers = 0;    // 0 to display only the number of connected users
                         // 1 to display a list of users
 // End configuration
 ?>

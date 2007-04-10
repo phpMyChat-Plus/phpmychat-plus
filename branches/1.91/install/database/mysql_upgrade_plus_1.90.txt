@@ -13,9 +13,11 @@ ALTER TABLE c_config
 			ADD CHAT_BOOT enum('0','1') NOT NULL default '1',
 			ADD WELCOME_SOUND varchar(255) NOT NULL default '',
 			ADD WORLDTIME enum('0','1','2') NOT NULL default '2';
+			ADD UPD_CHECK enum('0','1') NOT NULL default '1';
 UPDATE c_config SET
 			ENTRANCE_SOUND = 'sounds/chimeup.wav',
-			CMDS = '<br>/away /buzz /demote /dice /dice2 /dice3 /high /img /mr /room<br>/size /sort /topic /wisp',
+			CMDS = '<br>/away /buzz /demote /dice /dice2 /dice3 /high /img /mr<br>/room /size /sort /topic /wisp',
+			MODS = '<br>Advanced Admin, Avatars, Smilies Popup, Color Drop Box, Private Popup,<br>Quick Menu, Logs Archive, Lurking, Color names, WorldTime',
 			COLOR_CD2 = 'tomato',
 			COLOR_CD3 = 'dimgray',
 			COLOR_CD4 = 'indigo',
@@ -30,7 +32,8 @@ UPDATE c_config SET
 			COLOR_CM2 = 'royalblue',
 			CHAT_BOOT = '1',
 			WELCOME_SOUND = 'sounds/hello.wav',
-			WORLDTIME = '2'
+			WORLDTIME = '2',
+			UPD_CHECK = '1'
 	WHERE ID='0';
 ALTER TABLE c_reg_users
 			ADD id int(11) NOT NULL default '0' FIRST,

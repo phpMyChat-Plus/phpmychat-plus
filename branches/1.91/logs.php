@@ -24,6 +24,9 @@ require("config/config.lib.php");
 if (!isset($L)) $L = C_LANGUAGE;
 require("localization/".$L."/localized.chat.php");
 require("lib/release.lib.php");
+
+if (C_CHAT_LOGS && (C_SHOW_LOGS_USR || $statusu == "a"))
+{
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
@@ -92,4 +95,24 @@ closedir($yearu);
 </HTML>
 <?php
 exit();
+}
+else
+{
+?>
+<html>
+<head>
+<title>Invalid address - Lurking feature disabled</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
+</head>
+
+<body class="frame">
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><center><font size="+2"><b>You don't have access to this file.<br>Lurking feature has been disabled<br>Press <a href=./>here</a> to go to the index page or just wait...</b><font>
+<br /><br /><br /><br>Hacking attempt! Redirection to the index page in 5 seconds.</center>
+<meta http-equiv="refresh" content="5; url=./">
+</body>
+</html>
+<?php
+exit();
+}
 ?>

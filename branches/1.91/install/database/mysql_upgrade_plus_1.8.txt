@@ -25,7 +25,8 @@ ALTER TABLE c_config
 			ADD EN_ROOM9 enum('0','1') NOT NULL default '1',
 			ADD CHAT_BOOT enum('0','1') NOT NULL default '1',
 			ADD WELCOME_SOUND varchar(255) NOT NULL default '',
-			ADD WORLDTIME enum('0','1','2') NOT NULL default '2';
+			ADD WORLDTIME enum('0','1','2') NOT NULL default '2',
+			ADD UPD_CHECK enum('0','1') NOT NULL default '1';
 UPDATE c_config SET
 			ENTRANCE_SOUND = 'sounds/chimeup.wav',
 			COLOR_CD2 = 'tomato',
@@ -40,8 +41,8 @@ UPDATE c_config SET
 			COLOR_CM = 'blue',
 			COLOR_CM1 = 'mediumblue',
 			COLOR_CM2 = 'royalblue',
-			CMDS = '<br>/away /buzz /demote /dice /dice2 /dice3 /high /img /mr /room<br>/size /sort /topic /wisp',
-			MODS = '<br>Advanced Admin, Avatars, Smilies Popup, Color Input Box, Private Popup,<br>Quick Menu, Logs Archive, Lurking, Color names',
+			CMDS = '<br>/away /buzz /demote /dice /dice2 /dice3 /high /img /mr<br>/room /size /sort /topic /wisp',
+			MODS = '<br>Advanced Admin, Avatars, Smilies Popup, Color Drop Box, Private Popup,<br>Quick Menu, Logs Archive, Lurking, Color names, WorldTime',
 			QUICKA = 'Greetings|\r\nWelcome|\r\nThanks for coming by|\r\nLoL|\r\n:rofl|\r\n/announce I have to go now!|\r\n/away be right back...|\r\n/away ...I''m back!|\r\n/bot start|\r\n/bot stop|\r\n/buzz|\r\n/buzz ~chimeup|\r\n/me is busy right now!|\r\n/mr is watching TV|\r\n/bye See you around!|\r\n/high user|\r\n/join 0 #%s|\r\n/join 1 #%s|\r\n/invite %s|\r\n/img http://www.path_to_image|\r\n/promote %s|\r\n/demote %s|\r\n/demote * %s|\r\n/room Please follow the topic|\r\n/size 12|\r\n/size|\r\n/sort|\r\n/topic |\r\n/topic top reset|\r\n/wisp %s Hey, in which room ru?|\r\n/whois %s',
 			QUICKM = 'Greetings|\r\nWelcome|\r\nThanks for coming by|\r\nLoL|\r\n:rofl|\r\n/away be right back...|\r\n/away ...I''m back!|\r\n/buzz|\r\n/buzz ~chimeup|\r\n/me is busy right now!|\r\n/mr is reading|\r\n/bye cyall!|\r\n/high %s|\r\n/join 0 #%s|\r\n/join 1 #%s|\r\n/invite %s|\r\n/img http://www.path_to_image|\r\n/promote %s|\r\n/room Please follow the topic|\r\n/size 12|\r\n/size|\r\n/sort|\r\n/topic |\r\n/topic top reset|\r\n/wisp %s Hey, in which room ru?|\r\n/whois %s',
 			QUICKU = 'Hello everyone|\r\nlol|\r\n:rofl|\r\n/away brb...|\r\n/away ...back!|\r\n/me is busy!|\r\n/mr is lurking|\r\n/bye ttyl!|\r\n/high %s|\r\n/join 0 #%s|\r\n/join 1 #%s|\r\n/invite %s|\r\n/img http://www.path_to_image|\r\n/size 12|\r\n/size|\r\n/sort|\r\n/wisp %s Hey, in which room ru?|\r\n/whois %s',
@@ -60,7 +61,8 @@ UPDATE c_config SET
 			EN_ROOM9 = '1',
 			CHAT_BOOT = '1',
 			WELCOME_SOUND = 'sounds/hello.wav',
-			WORLDTIME = '2'
+			WORLDTIME = '2',
+			UPD_CHECK = '1'
 	WHERE ID='0';
 ALTER TABLE c_reg_users
 			ADD id int(11) NOT NULL default '0' FIRST,

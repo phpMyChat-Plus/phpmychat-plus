@@ -1,5 +1,5 @@
 <?php
-// File : german/localized.chat.php - plus version (14.02.2006 - rev.15)
+// File : german/localized.chat.php - plus version (25.03.2007 - rev.16)
 // Original translation by Robert Schaller <robert@schaller.com> & Wolfgang Schneider <schneider@bibelcenter.de>
 //    & Martin Sander <Martin.Sander@touch-screen.de> & Bernard Piller <bernard@bmpsystems.com>
 //    & Reinhard Hofmann <e9625556@student.tuwien.ac.at> & Christian Hacker <c.hacker@dreamer-chat.de>
@@ -56,12 +56,12 @@ define("L_HOURS", "Stunden");
 
 // registration stuff:
 define("L_REG_1", "Dein Passwort");
-define("L_REG_1r", "(nur wenn Du registriert bist)");
 define("L_REG_2", "Registrierte Benutzer");
 define("L_REG_3", "Registrieren");
 define("L_REG_4", "Benutzerprofil &auml;ndern");
 define("L_REG_5", "Benutzer l&ouml;schen");
 define("L_REG_6", "Benutzerregistrierung");
+define("L_REG_7", "nur wenn Du registriert bist");
 define("L_REG_8", "Deine E-Mail-Adresse");
 define("L_REG_9", "Du hast Dich erfolgreich registriert.");
 define("L_REG_10", "Zur&uuml;ck");
@@ -228,7 +228,7 @@ define("L_HELP_CMD_29", "Der zweite Befehl erlaubt dem Administrator oder dem Mo
 define("L_HELP_CMD_30", "Der zweite Befehl ist &auml;hnlich dem Befehl \"/me\" aber er zeigt noch zus&auml;tzlich das Geschlecht an. <br>Bsp: * Herr Ciprian schaut TV oder Frau Dana ist gl&uuml;cklich.");
 define("L_HELP_CMD_31", "Sortiert die User nach alphabetischer Reihenfolge oder nach Eingangszeit.");
 define("L_HELP_CMD_32", "Das ist die dritte Version des W&uuml;rfelspiels.<br>Anwendung: /d{n1}t[n2] oder /d{n1};<br>n1 kann eine Zahl zwischen <b>1 und 100</b> sein (es ist die Anzahl der W&uuml;rfe pro W&uuml;rfel).<br>n2 kann eine Zahl zwischen <b> 1 and %s</b> (es ist die Anzahl der W&uuml;rfel.");
-define("L_HELP_CMD_33", "&Auml;ndert die Gr&ouml;&szlig;e der Schriftart in den Nachrichten (erlaubt sind Werte f&uuml;r n zwischen <b>7 und 15</b>); Der Befehl \"/size\" setzt die Gr&ouml;&szlig;e der Schriftart auf standard zur&uuml;ck.");
+define("L_HELP_CMD_33", "&Auml;ndert die Gr&ouml;&szlig;e der Schriftart in den Nachrichten (erlaubt sind Werte f&uuml;r n zwischen <b>7 und 15</b>); Der Befehl \"/size\" setzt die Gr&ouml;&szlig;e der Schriftart auf standard zur&uuml;ck (<b>".$FontSize."</b>).");
 define("L_HELP_ETIQ_1", "Chat-Etikette");
 define("L_HELP_ETIQ_2", "Unsere Community sollte freundlich und lustig bleiben, also halten Sie sich bitte an folgende Richtlinien. Wenn Sie die Regeln nicht einhalten, werden Sie von unseren Moderatoren aus dem Chat verwiesen.<br><br>Danke!");
 define("L_HELP_ETIQ_3", "Unsere Chat-Etikette-Richtlinien");
@@ -260,6 +260,8 @@ define("L_IGNOR_NON", "Keine ignorierten Benutzer");
 define("L_WHOIS_ADMIN", "Administrator");
 define("L_WHOIS_MODER", "Moderator");
 define("L_WHOIS_USER", "Benutzer");
+define("L_WHOIS_GUEST", "Guest");
+define("L_WHOIS_REG", "Registered");
 
 // Notification messages of user entrance/exit
 #define("L_ENTER_ROM", "%s betritt den Raum");
@@ -318,7 +320,7 @@ define("L_EXPL_AV", "(Geben Sie URL-Adresse ein, und bet&auml;tigen die Enter-Ta
 define("L_CANCEL", "Abbrechen");
 define("L_CLICK", "Klick hier");
 
-// PluceBot bot mod (based on Alice bot)
+// PlusBot bot mod (based on Alice bot)
 define("BOT_TIPS", "TIPPS: Unser Bot ist in diesem Raum &ouml;ffentlich aktiv. Um mit dem Bot zu sprechen, tippen Sie <b>hello ".C_BOT_NAME."</b> ein. Zum Beenden, eintippen: <b>bye ".C_BOT_NAME."</b>. (privat: /to <b>".C_BOT_NAME."</b> Nachricht)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
 define("BOT_PRIV_TIPS", "TIPPS: Unser Bot ist im %s Raum &ouml;ffentlich aktiv. Sie k&ouml;nnen nur privat sprechen, indem Sie seinen Namen anklicken. (Befehl: /wisp <b>".C_BOT_NAME."</b> Nachricht)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
 define("BOT_PRIVONLY_TIPS", "TIPPS: Unser bot ist nicht &ouml;ffentlich aktiv. Sie k&ouml;nnen nur privat sprechen, indem Sie seinen Namen anklicken. (Befehle: /to <b>".C_BOT_NAME."</b> Nachricht oder /wisp <b>".C_BOT_NAME."</b> Nachricht)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
@@ -405,4 +407,7 @@ define("L_THU", "Do"); //Donnerstag
 define("L_FRI", "Fr"); //Freitag
 define("L_SAT", "Sa"); //Samstag
 define("L_SUN", "So"); //Sonntag
+
+// Extra options by Ciprian
+define("L_EXTRA_OPT", "Extra Optionen");
 ?>

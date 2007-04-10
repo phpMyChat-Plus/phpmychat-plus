@@ -104,7 +104,8 @@ function get_day(time,plus)
 		if (cur_hoursSYD > 23) { cur_hoursSYD = cur_hoursSYD - 24; if (cur_hoursSYD - cur_hoursLON < 0) daySYD = get_day(cur_date,1); }
 		if (cur_hoursSYD < 10) cur_hoursSYD = "0" + cur_hoursSYD
 		cur_timeSYD = cur_hoursSYD + ":" + calc_minuts + daySYD;;
-		window.status = "<?php echo(L_SVR_TIME); ?>" + calc_time<?php echo((C_WORLDTIME) ? ' + " (NYC: " + cur_timeNYC + " | LON: " + cur_timeGMT + " | PAR: " + cur_timePAR + " | BUC: " + cur_timeBUC + " | TYO: " + cur_timeTYO + " | SYD: " + cur_timeSYD + ")"' : ''); ?>;
+		WORLD_TIME = <?php echo((C_WORLDTIME) ? '" " + "(NYC: " + cur_timeNYC + " | LON: " + cur_timeGMT + " | PAR: " + cur_timePAR + " | BUC: " + cur_timeBUC + " | TYO: " + cur_timeTYO + " | SYD: " + cur_timeSYD + ")"' : ''); ?>;
+		window.status = "<?php echo(L_SVR_TIME); ?>" + calc_time + WORLD_TIME;
 
 		clock_disp = setTimeout('clock(' + gap + ')', 1000);
 	}
@@ -169,7 +170,6 @@ $Status = (isset($CookieStatus) ? $CookieStatus : "");
 layout($Is_Error,$Username,$Room_name,$Room_type,$Color,$Status);
 
 // You can add php code here, or add html statements before the "</BODY>" tag.
-if ($S) echo("<TD><SPAN style=\"color:yellow; background-color:black;\"><b>Debug data:</b><br>Admin name: <b>".C_ADMIN_NAME."</b><br>Admin email: <b>".C_ADMIN_EMAIL."</b><br>App name: <b>".APP_NAME."</b><br>App version: <b>".APP_VERSION."</b></SPAN></TD>");
 ?>
 </CENTER>
 </BODY>

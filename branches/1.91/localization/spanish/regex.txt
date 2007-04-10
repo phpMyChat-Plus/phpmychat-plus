@@ -1,0 +1,1 @@
+es([-_][[:alpha:]]{2})?|spanish

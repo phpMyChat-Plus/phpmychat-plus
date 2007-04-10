@@ -155,6 +155,7 @@ $EN_ROOM9							= $row[128];
 $CHAT_BOOT						= $row[129];
 $WELCOME_SOUND				= $row[130];
 $WORLDTIME						= $row[131];
+$UPD_CHECK						= $row[132];
 
 $query_bot1 = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.bot.com'";
 $result_bot1 = mysql_query($query_bot1);
@@ -338,6 +339,8 @@ define("COLOR_ALLOW_GUESTS", $COLOR_ALLOW_GUESTS);
 
 // ------ THESE IS A WEB STANDARD - SETTINGS MUST NOT BE CHANGED!!!  (it will show the 16 web-safe standard colors on the Color Help Page)------
 define("COLOR_LIST", "<P style=\"background-color:tan; color:black;\">[ <SPAN style=\"color:aqua\">aqua</SPAN> - <SPAN style=\"color:black\">black</SPAN> - <SPAN style=\"color:blue\">blue</SPAN> - <SPAN style=\"color:fuchsia\">fuchsia</SPAN> - <SPAN style=\"color:gray\">gray</SPAN> - <SPAN style=\"color:green\">green</SPAN> - <SPAN style=\"color:lime\">lime</SPAN> - <SPAN style=\"color:maroon\">maroon</SPAN> ]<br />[ <SPAN style=\"color:navy\">navy</SPAN> - <SPAN style=\"color:olive\">olive</SPAN> - <SPAN style=\"color:purple\">purple</SPAN> - <SPAN style=\"color:red\">red</SPAN> - <SPAN style=\"color:silver\">silver</SPAN> - <SPAN style=\"color:teal\">teal</SPAN> - <SPAN style=\"color:white\">white</SPAN> - <SPAN style=\"color:yellow\">yellow</SPAN> ]</P>");
+
+// ------ THIS IS THE LIST OF COLORS DISPLAYED IN YOUR DROP-DOWN LIST. IF YOU KNOW MORE, JUST ADD THEM HERE ------
 define("COLORLIST", '"","black","dimgray","gray","darkgray","silver","lightgrey","gainsboro","whitesmoke","ghostwhite","white","slategray","lightslategray","midnightblue","navy","darkblue","darkslateblue","mediumblue","blue","steelblue","royalblue","cornflowerblue","dodgerblue","deepskyblue","lightskyblue","skyblue","lightsteelblue","lightblue","powderblue","paleturquoise","lightcyan","aliceblue","azure","mintcream","darkslategray","cadetblue","teal","darkcyan","lightseagreen","darkturquoise","mediumturquoise","turquoise","aqua","cyan","mediumaquamarine","aquamarine","darkolivegreen","olive","olivedrab","darkkhaki","darkgreen","green","forestgreen","seagreen","mediumseagreen","darkseagreen","mediumspringgreen","springgreen","palegreen","honeydew","limegreen","lime","lightgreen","lawngreen","chartreuse","greenyellow","yellowgreen","indigo","purple","darkmagenta","darkviolet","darkorchid","mediumorchid","orchid","violet","plum","thistle","blueviolet","mediumpurple","slateblue","mediumslateblue","lavender","mediumvioletred","magenta","fuchsia","deeppink","palevioletred","hotpink","lightpink","pink","mistyrose","lavenderblush","maroon","darkred","firebrick","crimson","red","orangered","tomato","indianred","lightcoral","salmon","darksalmon","lightsalmon","coral","darkorange","orange","sandybrown","darkgoldenrod","goldenrod","gold","yellow","khaki","palegoldenrod","lemonchiffon","cornsilk","lightgoldenrodyellow","beige","lightyellow","ivory","rosybrown","saddlebrown","brown","sienna","chocolate","peru","tan","burlywood","wheat","navajowhite","peachpuff","moccasin","bisque","blanchedalmond","papayawhip","antiquewhite","linen","oldlace","seashell","floralwhite","snow"');
 
 // ------ THESE SETTINGS MUST NOT BE CHANGED WITHOUT EXPERTISE ------
@@ -492,4 +495,7 @@ define("C_CHAT_EXTRAS", $CHAT_EXTRAS);
 
 // Display the worldtimes in status bar
 define("C_WORLDTIME", $WORLDTIME);
+
+// Enable/disable the update check feature in cpanel
+define("UPD_CHECK", $UPD_CHECK);
 ?>

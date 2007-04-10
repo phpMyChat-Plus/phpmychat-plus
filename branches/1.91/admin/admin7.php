@@ -2,6 +2,7 @@
 // Search panel by Digioz Multimedia.
 // This sheet is diplayed when the admin wants to search the database for registered users
 
+// Credit for this goes to Pete Soheil <webmaster@digioz.com>
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
 
 // If form is submitted update values in the database

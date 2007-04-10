@@ -44,12 +44,20 @@ if (!isset($FontName)) $FontName = "";
 <HEAD>
 <SCRIPT TYPE="text/javascript" LANGUAGE="javascript1.2">
 <!--
+// Open the tutorial popup
+	function tutorial_popup()
+	{
+		window.focus();
+		tutorial_popupWin = window.open("<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L&Ver="); ?>"+ver4,"tutorial_popup","width=700,height=800,resizable=yes,scrollbars=yes,toolbar=yes,menubar=yes,status=yes");
+		tutorial_popupWin.focus();
+	}
+
 	// Open popup for registration stuff
 	function reg_popup_room()
 	{
 		window.focus();
 		url = "<?php echo($ChatPath); ?>register.php?L=<?php echo($L); ?>&Link=1";
-		param = "width=360,height=640,resizable=yes,scrollbars=yes";
+		param = "width=400,height=640,resizable=yes,scrollbars=yes";
 		window.open(url,"register_popup",param);
 	}
 // -->
@@ -503,45 +511,39 @@ for($k = 0; $k < count($DefaultChatRooms); $k++)
 };
 ?>
 </P>
-<?php
-if ((C_CHAT_LOGS && C_SHOW_LOGS_USR) || (!C_SHOW_LOGS_USR && $statusu == "a") || (C_CHAT_LURKING && C_SHOW_LURK_USR) || (!C_SHOW_LOGS_USR && $statusu == "a") || (!C_REQUIRE_REGISTER && $statusu == "u"))
-{
-?>
-	<CENTER><TD><B>Extra Options</B></TD></CENTER>
+<P valign=bottom>
+	<TD><B><?php echo(L_EXTRA_OPT); ?></B></TD>
 <?php
 if ($statusu == "u"  && !C_REQUIRE_REGISTER)
 {
 $Cmd2Send = ("'quit','".special_char2(stripslashes($U),$Latin1)." - brb (need to register first :p)'");
 ?>
-<TD valign="bottom">
-<A HREF="<?php echo($ChatPath); ?>register.php" onClick="reg_popup_room(); window.parent.runCmd(<?php echo($Cmd2Send); ?>); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_3); ?>.'; return true;" title="<?php echo(L_REG_3); ?>"><?php echo(L_REG_3); ?></A>
-</TD><br />
+<br /><TD valign=bottom><A HREF="<?php echo($ChatPath); ?>register.php" onClick="reg_popup_room(); window.parent.runCmd(<?php echo($Cmd2Send); ?>); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_3); ?>.'; return true;" title="<?php echo(L_REG_3); ?>"><?php echo(L_REG_3); ?></A></TD>
 <?php
 }
 if (C_CHAT_LOGS && (C_SHOW_LOGS_USR || $statusu == "a"))
 {
 ?>
-<TD valign="bottom">
-<A HREF="<?php echo($ChatPath); ?>logs.php" TARGET="_blank" onMouseOver="window.status='<?php echo(L_ARCHIVE); ?>.'; return true;" title="<?php echo(L_ARCHIVE); ?>"><?php echo(L_ARCHIVE); ?></A>
-</TD><br />
+<br /><TD valign=bottom><A HREF="<?php echo($ChatPath); ?>logs.php" TARGET="_blank" onMouseOver="window.status='<?php echo(L_ARCHIVE); ?>.'; return true;" title="<?php echo(L_ARCHIVE); ?>"><?php echo(L_ARCHIVE); ?></A></TD>
 <?php
 }
-	if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $statusu == "a"))
-	{
-		$handler = @mysql_connect(C_DB_HOST,C_DB_USER,C_DB_PASS);
-		@mysql_select_db(C_DB_NAME,$handler);
-		$timeout = "15";
-		$closetime = $time-($timeout);
-		$result = @mysql_query("DELETE FROM ".C_LRK_TBL." WHERE time<'$closetime'",$handler);
-		$result = @mysql_query("SELECT DISTINCT ip,browser FROM ".C_LRK_TBL."",$handler);
-		$online_users = @mysql_numrows($result);
-		@mysql_close();
-		$lurklink = " <A HREF=\"lurking.php?D=".$D."\" CLASS=\"ChatLink\" TARGET=\"_blank\" onMouseOver=\"window.status='Open the lurking page.'; return true;\" title=\"Lurking page\">";
-		echo("<TD valign=bottom>".$lurklink.$online_users." ".($online_users != 1 ? L_LURKERS : L_LURKER)."</A></TD>");
-		$CleanUsrTbl = 1;
-	}
+if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $statusu == "a"))
+{
+	$handler = @mysql_connect(C_DB_HOST,C_DB_USER,C_DB_PASS);
+	@mysql_select_db(C_DB_NAME,$handler);
+	$timeout = "15";
+	$closetime = $time-($timeout);
+	$result = @mysql_query("DELETE FROM ".C_LRK_TBL." WHERE time<'$closetime'",$handler);
+	$result = @mysql_query("SELECT DISTINCT ip,browser FROM ".C_LRK_TBL."",$handler);
+	$online_users = @mysql_numrows($result);
+	@mysql_close();
+	$lurklink = "<A HREF=\"lurking.php?D=".$D."\" CLASS=\"ChatLink\" TARGET=\"_blank\" onMouseOver=\"window.status='Open the lurking page.'; return true;\" title=\"Lurking page\">";
+	echo("<br /><TD valign=bottom>".$lurklink.$online_users." ".($online_users != 1 ? L_LURKERS : L_LURKER)."</A></TD>");
+	$CleanUsrTbl = 1;
 }
 ?>
+<br /><TD valign=bottom><A HREF="<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L&Ver=H"); ?>" onClick="tutorial_popup(); return false" TARGET="_blank" onMouseOver="window.status='Open <?php echo(L_TUTORIAL); ?>.'; return true;" title="<?php echo(L_TUTORIAL); ?>"><?php echo(L_TUTORIAL); ?></A></TD>
+</P>
 </BODY>
 
 </HTML>

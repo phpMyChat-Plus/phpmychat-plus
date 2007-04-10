@@ -9,6 +9,7 @@ $Type = " AND type='1'";	//This is to display only the public rooms
 
 if (isset($HTTP_COOKIE_VARS["CookieUsername"])) $U = urldecode($HTTP_COOKIE_VARS["CookieUsername"]);
 if (isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"];
+if (isset($HTTP_COOKIE_VARS["CookieStatus"])) $status = $HTTP_COOKIE_VARS["CookieStatus"];
 if (!isset($U)) $U = "Guest";
 
 // Fix a security hole
@@ -16,7 +17,7 @@ if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 // Added for Skin mod
 if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
-if (!isset($R)) $skin == "style";
+if (!isset($R)) $skin == "style1";
 
 require("config/config.lib.php");
 require("./${ChatPath}lib/release.lib.php");
@@ -25,7 +26,7 @@ require("localization/".$L."/localized.chat.php");
 require("lib/connected_users.lib.php");
 
 
-if (C_CHAT_LURKING)
+if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $statusu == "a"))
 {
 // Avoid server configuration for magic quotes
 set_magic_quotes_runtime(0);
@@ -151,7 +152,7 @@ else
 <head>
 <title>Invalid address - Lurking feature disabled</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<LINK REL="stylesheet" HREF="./config/style1.css.php" TYPE="text/css">
+<LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 </head>
 
 <body class="frame">
