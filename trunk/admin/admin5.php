@@ -1,52 +1,52 @@
 <?php
+// Configuration panel by DigiozMultimedia and Ciprian Murariu <ciprianmp@yahoo.com>
+// This sheet is diplayed when the admin wants to modify settings of the chat server
 
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
 
 require("./config/config.lib.php");
-
-// Check for application update on main sites (ciprianmp.com & sourceforge) resources.
-$updatepath1 = "http://plus.gamedogs.com/lib/update.txt";
-$updatepath2 = "http://ciprianmp.com/plus/lib/update.txt";
-$updatepath3 = "http://svn.sourceforge.net/viewvc/*checkout*/phpmychat/trunk/lib/update.txt";
-$updatepath4 = "./lib/update.txt";
-if (@fopen($updatepath1, "r"))
-{
- @fclose($updatepath1);
- include_once($updatepath1);
-}
-elseif (@fopen($updatepath2, "r"))
-{
-	@fclose($updatepath2);
-	include_once($updatepath2);
-}
-elseif (@fopen($updatepath3, "r"))
-{
-	@fclose($updatepath3);
-	include_once($updatepath3);
-}
-else
-{
-	include_once($updatepath4);
-}
 require("./lib/release.lib.php");
-if (APP_LAST_VERSION != APP_VERSION)
-{
-?>
-	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
-	<!--
-alert("<?php echo(sprintf(A_SHEET5_0, APP_VERSION, APP_LAST_VERSION)); ?>")
-	// -->
-	</SCRIPT>
-<p class=title><font color=green><?php echo(sprintf(A_SHEET5_1, APP_VERSION, APP_LAST_VERSION)); ?></font>
-<br></p>
-<?php
-}
+settype($app_version = APP_VERSION, "double");
+$ColorList = eregi_replace('"', "", COLORLIST);
+	// Check for application update on main sites (ciprianmp.com & sourceforge) resources.
+//	$updatepath1 = "http://ciprianmp.com/latest/lib/update.txt";
+//	$updatepath2 = "http://svn.sourceforge.net/viewvc/*checkout*/phpmychat/trunk/lib/update.txt";
+	$updatepath3 = "./lib/update.txt";
+	if (@fopen($updatepath1, "r"))
+	{
+	 @fclose($updatepath1);
+	 include_once($updatepath1);
+	settype($app_last_version = APP_LAST_VERSION, "double");
+	}
+	elseif (@fopen($updatepath2, "r"))
+	{
+		@fclose($updatepath2);
+		include_once($updatepath2);
+	settype($app_last_version = APP_LAST_VERSION, "double");
+	}
+	else
+	{
+	settype($app_last_version = APP_VERSION, "double");
+	}
+
+	if ($app_last_version > $app_version)
+	{
+	?>
+		<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
+		<!--
+	alert("<?php echo(sprintf(A_SHEET5_0, APP_VERSION, APP_LAST_VERSION)); ?>")
+		// -->
+		</SCRIPT>
+	<p class=error><font color=green><?php echo(sprintf(A_SHEET5_1, APP_VERSION, APP_LAST_VERSION)); ?></font>
+	<br /></p>
+	<?php
+	}
 ?>
 <a href="http://www.ciprianmp.com/atm/index.php?&direction=0&order=&directory=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Open the Download page" onMouseOver="window.status='Open the Download page.'; return true">Download Page</a>&nbsp;|
 <a href="http://svn.sourceforge.net/viewvc/phpmychat/trunk/" target=_blank Title="Open the phpMyChat SVN Project Page" onMouseOver="window.status='Open the phpMyChat SVN Project Page.'; return true"> phpMyChat SVN Project Page</a>&nbsp;|
-<a href="https://sourceforge.net/tracker/?group_id=19371&atid=387646/" target=_blank Title="Open the Translations Project" onMouseOver="window.status='Open the Translations Project.'; return true">Translations Project</a>&nbsp;|
-<a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Fixes readme.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Check what's new in <?php echo(APP_LAST_VERSION); ?>." onMouseOver="window.status='Check what\'s new in <?php echo(APP_LAST_VERSION); ?>.'; return true">Check what's new in <?php echo(APP_LAST_VERSION); ?></a>&nbsp;|
-<a href="http://plus.gamedogs.com" target=_blank Title="Go to Try me server." onMouseOver="window.status='Go to Try me server.'; return true">Try me server</a><br>
+<a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Fixes readme.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Check what's new in <?php echo((UPD_CHECK && ($app_last_version > $app_version)) ? APP_LAST_VERSION : APP_VERSION); ?>." onMouseOver="window.status='Check what\'s new in <?php echo((UPD_CHECK && ($app_last_version > $app_version)) ? APP_LAST_VERSION : APP_VERSION); ?>.'; return true">Check what's new in <?php echo((UPD_CHECK && ($app_last_version > $app_version)) ? APP_LAST_VERSION : APP_VERSION); ?></a>&nbsp;|
+<a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Plus FAQ.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Read the FAQ" onMouseOver="window.status='Read the FAQ'; return true">Read the FAQ</a>&nbsp;|
+<a href="http://www.ciprianmp.com/latest/" target=_blank Title="Go to Try me server." onMouseOver="window.status='Go to Try me server.'; return true">Try me server</a><br />
 <?php
 
 // If form is submitted update values in the database
