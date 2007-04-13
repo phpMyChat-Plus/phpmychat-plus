@@ -134,7 +134,7 @@ header("Content-Type: text/html; charset=${Charset}");
 </TR>
 </TABLE><br />
 <?php
-	include("useronline.php");
+	include("lib/useronline.lib.php");
 	echo("<hr />");
 	echo("<TABLE BORDER=1 WIDTH=100% CELLSPACING=0 CELLPADDING=0 CLASS=table>".$MessagesString."</table>");
 	unset($MessagesString);

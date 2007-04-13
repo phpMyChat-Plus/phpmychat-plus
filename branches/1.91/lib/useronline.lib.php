@@ -39,7 +39,7 @@ $online_users = @mysql_numrows($result);
 	<font size="4" color="#6666ff"><b>&nbsp <?php echo($online_users); ?> &nbsp</font></b></td>
 		<td>
 		<?php
-if ($status == "a")
+/*if ($status == "a")
 {
 	while($data = @mysql_fetch_array($result))
 {
@@ -47,5 +47,6 @@ if ($status == "a")
 	echo($browser = $data[browser]."<br />");
 }
 }
+*/
 	?>
 			</td></tr></table>
