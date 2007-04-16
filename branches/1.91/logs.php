@@ -8,7 +8,6 @@ if (isset($HTTP_GET_VARS))
 		$$name = $value;
 	};
 };
-
 if (isset($HTTP_POST_VARS))
 {
 	while(list($name,$value) = each($HTTP_POST_VARS))
@@ -16,9 +15,14 @@ if (isset($HTTP_POST_VARS))
 		$$name = $value;
 	};
 };
-if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
-if (isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"];
-if (!isset($R)) $skin == "style";
+
+// Fix a security hole
+if (isset($L) && !is_dir("./localization/".$L)) exit();
+if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
+
+if (isset($HTTP_COOKIE_VARS["CookieStatus"])) $statusu = $HTTP_COOKIE_VARS["CookieStatus"];
+if (isset($HTTP_COOKIE_VARS["CookieRoom"]) && !isset($R)) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
+if (!isset($R)) $skin == "style1";
 
 require("config/config.lib.php");
 if (!isset($L)) $L = C_LANGUAGE;
@@ -31,6 +35,7 @@ if (C_CHAT_LOGS && (C_SHOW_LOGS_USR || $statusu == "a"))
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
 <HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=<?php echo($Charset); ?>">
 <TITLE><?php echo(APP_NAME); ?> Users Logs Archive</TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 </HEAD>
@@ -101,13 +106,13 @@ else
 ?>
 <html>
 <head>
-<title>Invalid address - Lurking feature disabled</title>
+<title>Invalid address - Logging feature disabled</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 </head>
 
 <body class="frame">
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><center><font size="+2"><b>You don't have access to this file.<br>Lurking feature has been disabled<br>Press <a href=./>here</a> to go to the index page or just wait...</b><font>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><center><font size="+2"><b>You don't have access to this file.<br>Logging feature has been disabled<br>Press <a href=./>here</a> to go to the index page or just wait...</b><font>
 <br /><br /><br /><br>Hacking attempt! Redirection to the index page in 5 seconds.</center>
 <meta http-equiv="refresh" content="5; url=./">
 </body>

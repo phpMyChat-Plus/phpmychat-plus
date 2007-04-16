@@ -127,6 +127,6 @@ if (strcasecmp(ucfirst(stripslashes($R)), ROOM9) == 0) $Room = ROOM9;
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <HEAD>
 <BODY class="frame">
-        <FONT size="2"><I><B>Welcome to <?php echo (stripslashes($R)) ?>!</B> Topic: <font color=yellow><B><?php echo ($UR);?></B></font></I><?php echo ($Ex);?></FONT>
+        <FONT size="2"><I><B>Welcome to <?php echo (stripslashes($R)) ?>!</B> Topic: <MARQUEE WIDTH="70%"><span style="letter-spacing: 1pt; color:yellow"><B><?php echo ($UR);?></B></span></MARQUEE></I><?php echo ($Ex);?></FONT>
 </BODY>
 </HTML>

@@ -1,5 +1,5 @@
 <?php
-// File : english/localized.chat.php - plus version (25.03.2007 - rev.16)
+// File : english/localized.chat.php - plus version (14.04.2007 - rev.17)
 // Original file by Nicolas Hoizey <nhoizey@phpheaven.net>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -177,6 +177,7 @@ define("L_INVITE", "%s requests that you join her/him into the <a href=\"#\" onC
 define("L_INVITE_REG", " You have to be registered to enter this room.");
 define("L_INVITE_DONE", "Your invitation has been sent to %s.");
 define("L_OK", "Send");
+define("L_BUZZ", "Buzzes Gallery");
 
 // help popup
 define("L_HELP_TIT_1", "Smilies");

@@ -16,6 +16,7 @@ if (!isset($U)) $U = "Guest";
 if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 // Added for Skin mod
+if (isset($HTTP_COOKIE_VARS["CookieStatus"])) $statusu = $HTTP_COOKIE_VARS["CookieStatus"];
 if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
 if (!isset($R)) $skin == "style1";
 

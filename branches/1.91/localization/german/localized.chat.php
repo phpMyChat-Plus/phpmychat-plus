@@ -1,5 +1,5 @@
 <?php
-// File : german/localized.chat.php - plus version (25.03.2007 - rev.16)
+// File : german/localized.chat.php - plus version (14.04.2007 - rev.17)
 // Original translation by Robert Schaller <robert@schaller.com> & Wolfgang Schneider <schneider@bibelcenter.de>
 //    & Martin Sander <Martin.Sander@touch-screen.de> & Bernard Piller <bernard@bmpsystems.com>
 //    & Reinhard Hofmann <e9625556@student.tuwien.ac.at> & Christian Hacker <c.hacker@dreamer-chat.de>
@@ -180,6 +180,7 @@ define("L_INVITE_DONE", "Deine Einladung wurde an %s geschickt.");
 define("L_OK", "Senden");
 define("L_KICKED_REASON", "%s wurde erfolgreich gekickt. (Grund: %s)");
 define("L_NO_REG_USER", "Sie m&uuml;ssen registriert sein um diesen Befehl nutzen zu k&ouml;nnen.");
+define("L_BUZZ", "Buzzes Gallery");
 
 // help popup
 define("L_HELP_BUZZ", "~Soundname");

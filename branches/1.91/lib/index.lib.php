@@ -897,6 +897,22 @@ function get_day(time,plus)
 		};
 	};
 
+	// Buzzes Popup mod by Ciprian
+	// Launch the Buzzes Gallery popup
+	var is_buzz_popup = null;
+
+	function buzz_popup()
+	{
+		if (is_buzz_popup && !is_buzz_popup.closed)
+		{
+			is_buzz_popup.focus();
+		}
+		else
+		{
+			is_buzz_popup = window.open("buzz_popup.php?<?php echo("L=$L"); ?>","buzz_popup","bottom=0,right=0,width=550,height=440,scrollbars=yes,resizable=yes,status=no,toolbar=no,menubar=no,directories=no,location=no");
+		};
+	};
+
 	// Private Message Popup mod by Ciprian
 	// Launch the popup window on PM
 	var is_send_popup = null;
@@ -939,13 +955,35 @@ function get_day(time,plus)
 			}
 			else
 			{
-				msgbox.value += user;
+				if (msgbox.value == "") msgbox.value += user;
+				else msgbox.value += " " + user;
 				if (msgbox.value == user) msgbox.value += "> ";
 			};
 			msgbox.focus();
 		};
 	};
 
+	function userClick2(user,privMsg)
+	{
+		if (window.frames['input'] && window.frames['input'].window.document.forms['MsgForm'].elements['MsgTo'])
+		{
+			window.frames['input'].window.document.forms['MsgForm'].elements['MsgTo'].value = user;
+			var msgbox = window.frames['input'].window.document.forms['MsgForm'].elements['M'];
+			if (privMsg)
+			{
+				var oldStr = msgbox.value;
+				if (oldStr == "" || oldStr.substring(0,1) != " ") oldStr = " " + oldStr;
+				msgbox.value = "/wisp " + user + oldStr;
+			}
+			else
+			{
+				if (msgbox.value == "") msgbox.value += user;
+				else msgbox.value += " " + user;
+				if (msgbox.value == user) msgbox.value += "> ";
+			};
+			msgbox.focus();
+		};
+	};
 	// Define the moderator status for color power/limitations;
 	isModerator = <?php echo((isset($status) && ($status == "m")) ? 1 : 0); ?>;
 

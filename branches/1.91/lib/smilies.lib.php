@@ -1,7 +1,7 @@
 <?
 /* ------------------------------------------------------------------
 	This library allows to transform text codes to graphical smilies.
-	It is called by 'chat/input.php'.
+	It is called by 'plus/input.php'.
    ------------------------------------------------------------------ */
 
 // The table below define smilies code and associated gif names, width and height.
@@ -53,7 +53,7 @@ $SmiliesTbl = Array(
 	":disco" => array("smile40.gif", "36", "23"),
 	":clap"	=> array("smile41.gif", "19", "16"),
 	":yea"	=> array("smile42.gif", "27", "16"),
-	":splt"	=> array("smile43.gif", "15", "15"),
+	":splat"	=> array("smile43.gif", "15", "15"),
 	":uch"	=> array("smile44.gif", "33", "26"),
 	":cryn"	=> array("smile45.gif", "21", "16"),
 	":whoa"	=> array("smile46.gif", "15", "15"),
@@ -69,6 +69,16 @@ $SmiliesTbl = Array(
 	":hahaha"	=> array("smile56.gif", "15", "19"),
 	":hy"	=> array("smile57.gif", "19", "20"),
 	":mad"	=> array("smile58.gif", "15", "17"),
+	":shock" => array("smile59.gif", "19", "25"),
+	":slap"	=> array("smile60.gif", "39", "22"),
+	":bop"	=> array("smile61.gif", "45", "35"),
+	":music"	=> array("smile62.gif", "32", "25"),
+	":argue"	=> array("smile63.gif", "50", "25"),
+	":mischief" => array("smile64.gif", "61", "32"),
+	":groin"	=> array("smile65.gif", "60", "30"),
+	";punch"	=> array("smile66.gif", "48", "18"),
+	":drunk"	=> array("smile67.gif", "57", "28"),
+	":back"	=> array("smile68.gif", "37", "15"),
 );
 
 $MaxWidth = "50";		// Set the maximum width among similes
@@ -117,6 +127,7 @@ function Check4Smilies(&$string,&$Table)
 
 // Bob Dickow modification Rev 2 for multiple smileys rows in help popup
 // Display smilies in the help popup and in the tutorials
+// Added the popup for Smilie popup by Ciprian
 
 function DisplaySmilies(&$ToDisplay,&$Table,&$TblSize,$Target)
 {

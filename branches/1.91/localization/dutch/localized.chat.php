@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.chat.php - plus version (25.03.2007 - rev.16)
+// File : dutch/localized.chat.php - plus version (14.04.2007 - rev.17)
 // Original translation by Hans Paijmans <paai@kub.nl>, Kasper Souren <guaka@industree.org> and Sander Corbesir <rock@jascrc.com>
 // Updates, corrections and additions for the Plus version by DJE.Amesz & Romanesko <Genieusdanny@gmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -178,6 +178,7 @@ define("L_INVITE", "%s vraag hem of haar je te vergezellen in <a href=\"#\" onCl
 define("L_INVITE_REG", " je moet je registreren om deze ruimte in te kunnen.");
 define("L_INVITE_DONE", "uw uitnodiging is verzonden aan %s.");
 define("L_OK", "verstuur");
+define("L_BUZZ", "Buzzes Gallery");
 
 // help popup
 define("L_HELP_TIT_1", "lachen");

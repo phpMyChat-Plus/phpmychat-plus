@@ -62,6 +62,8 @@ function close_popups()
 		if (is_help_popup && !is_help_popup.closed) is_help_popup.close();
 		// Smilie Popup mod by Cipprian
 		if (is_smilie_popup && !is_smilie_popup.closed) is_smilie_popup.close();
+		// Buzzes Popup mod by Cipprian
+		if (is_buzz_popup && !is_buzz_popup.closed) is_buzz_popup.close();
 		// Private Message Popup mod by Cipprian
 		if (is_priv_popup && !is_priv_popup.closed) is_priv_popup.close();
 		if (is_send_popup && !is_send_popup.closed) is_send_popup.close();

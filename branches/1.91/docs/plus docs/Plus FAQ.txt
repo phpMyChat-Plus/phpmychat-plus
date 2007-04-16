@@ -11,6 +11,16 @@ Fatal error: require() [function.require]: Failed opening required './localizati
 This error is related to misconfig of your sql data in config/config.lib.php.
 Make sure the database and username have a prefix like yourcpanelusername_name.
 
+1aQ.
+After installing, I get this errors:
+- I cannot login or register a new account;
+- There is no error message returned;
+- I cannot select a different language. Whatever I try, the page is in English;
+- The font on the index page is with serifs, not the Arial or Verdana.
+1aA.
+This error is related to the restrictions of your php server (register_globals = off).
+Check the settings using a phpinfo.php file, and check if either safe_mode is on or register_globals is off. Disable first and enable the second one.
+
 2Q.
 How do I migrate my registered users from phpmychat standard c_reg_users table to plus?
 2A.

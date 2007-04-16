@@ -140,7 +140,7 @@ if($DbLink->num_rows() != 0)
 		{
 			list($Reason) = $DbLink->next_record();
 			$DbLink->clean_results();
-			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_BANISHED_REASON, \"".special_char($U,$Latin1)."\", $Reason)', '', '')");
+			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_BANISHED_REASON, \"".special_char($U,$Latin1)."\", \"".$Reason."\")', '', '')");
 		}
 		else
 		{
@@ -305,7 +305,6 @@ if($DbLink->num_rows() > 0)
 		if (!isset($day_separator) && date("j", $Time +  C_TMZ_OFFSET*60*60) != $today)
 		{
 			$Messages[] = "<tr class=\"msg\"><td valign=\"top\"><SPAN CLASS=\"notify\" style=\"background-color:yellow;\">--------- ".L_TODAY_DWN." ---------<\/SPAN><\/td><\/tr><\/table>";
-#			$Messages[] = "<P CLASS=\"msg\"><SPAN CLASS=\"notify\" style=\"background-color:yellow;\">--------- ".L_TODAY_DWN." ---------<\/SPAN><\/P>";
 			$day_separator = "1";
 		};
 
@@ -321,12 +320,10 @@ if (file_exists ($highpath))
 if($contents == $User)
 {
 	$NewMsg = "<table cellspacing=0 cellpading=0><tr class=\"msg2\"><td nowrap=\"nowrap\" valign=\"top\">";
-#	$NewMsg = "<P CLASS=\"msg2\">";
 }
 else
 {
 	$NewMsg = "<table cellspacing=0 cellpading=0><tr class=\"msg\"><td nowrap=\"nowrap\" valign=\"top\">";
-#	$NewMsg = "<P CLASS=\"msg\">";
 }
 //-------------------------------End HighLight Mod
 		if ($ST == 1) $NewMsg .= "<SPAN CLASS=\"time\">".date("H:i:s", $Time + C_TMZ_OFFSET*60*60)."<\/SPAN><\/td><td nowrap=\"nowrap\" valign=\"top\">";
@@ -336,26 +333,36 @@ else
 			$Userx = $User;  // Avatar System insered only.
 			if($User != stripslashes($U))
 			{
-//				if (C_ENABLE_PM && C_PRIV_POPUP && ($allowpopup || $status == "u"))
-//				{
-//					$User = "<A HREF=\"#\" onClick=\"window.parent.send_popup('/to ".special_char2($User,$Latin1)."');\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."<\/A>";
-//				}
-//				elseif (C_ENABLE_PM && !C_PRIV_POPUP)
-//				{
-//					$User = "<A HREF=\"#\" onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',true); return false\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."<\/A>";
-//				}
-//				else
-//				{
+				if (C_ENABLE_PM && C_PRIV_POPUP && ($allowpopup || $status = "u"))
+				{
+					$User = "<A HREF=\"#\" onClick=\"window.parent.send_popup('/to ".special_char($User,$Latin1,1)."');\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."<\/A>";
+				}
+				elseif (C_ENABLE_PM)
+				{
+					$User = "<A HREF=\"#\" onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',true);\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."<\/A>";
+				}
+				else
+				{
 					$User = "<A HREF=\"#\" onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false); return false\" title=\"Use this name\" onMouseOver=\"window.status='Reffer to this username.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."<\/A>";
-//				}
+				}
 			}
 			if($Dest != "" && $Dest != stripslashes($U))
 			{
-					$Dest = htmlspecialchars(stripslashes($Dest));
+				$Dest = htmlspecialchars(stripslashes($Dest));
+				if (C_ENABLE_PM && C_PRIV_POPUP && ($allowpopup || $status = "u"))
+				{
+					$Dest = "<A HREF=\"#\" onClick=\"window.parent.send_popup('/to ".special_char($Dest,$Latin1,1)."');\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colornamedest_tag."".special_char($Dest,$Latin1,0)."".$colornamedest_endtag."<\/A>";
+				}
+				elseif (C_ENABLE_PM)
+				{
+					$Dest = "<A HREF=\"#\" onClick=\"window.parent.userclick('".special_char($Dest,$Latin1,1)."',true);\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colornamedest_tag."".special_char($Dest,$Latin1,0)."".$colornamedest_endtag."<\/A>";
+				}
+				else
+				{
 					$Dest = "<A HREF=\"#\" onClick=\"window.parent.userClick('".special_char($Dest,$Latin1,1)."',false); return false\" title=\"Use this name\" onMouseOver=\"window.status='Reffer to this username.'; return true\" CLASS=\"sender\">".$colornamedest_tag."".special_char($Dest,$Latin1,0)."".$colornamedest_endtag."<\/A>";
+				}
 			}
 			if ($Dest != "") $Dest = "]<BDO dir=\"${textDirection}\"><\/BDO>".$colorname_endtag."<\/B><\/td><td valign=\"top\"><B>&gt;<\/B><\/td><td valign=\"top\"><B>".$colornamedest_tag."[".$Dest;
-#			if ($Dest != "") $Dest = "]<BDO dir=\"${textDirection}\"><\/BDO>".$colorname_endtag.">".$colornamedest_tag."[".$Dest;
 			$Message = str_replace("</FONT>","<\\/FONT>",$Message);	// slashes the closing HTML font tag
  // Avatar System Start:
       if (C_USE_AVATARS)
@@ -364,13 +371,11 @@ else
        		$avatar = "<a href=\"#\" onClick=\"window.parent.runCmd('whois','".special_char2(stripslashes($Userx),$Latin1)."'); return false\" onMouseOver=\"window.status='".L_PROFILE.".'; return true\" title=\"".L_PROFILE."\"><img align=\"center\" src=\"$avatar\" width=".C_AVA_WIDTH." height=".C_AVA_HEIGHT." alt=\"".L_PROFILE."\" border=0><\/a>";
 					if ($ST != 1) $NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\">".$avatar."<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."[${User}${Dest}]".$colornamedest_endtag."<BDO dir=\"${textDirection}\"><\/BDO><\/B><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
    				else $NewMsg .= $avatar."<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."[${User}${Dest}]".$colornamedest_endtag."<BDO dir=\"${textDirection}\"><\/BDO><\/B><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
-#   				$NewMsg .= "$avatar<B><font size=-1>".$colorname_tag."[${User}${Dest}]".$colornamedest_endtag."<BDO dir=\"${textDirection}\"><\/BDO><\/B> $Message<\/P>";
 	    }
       else
       {
 					if ($ST != 1) $NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."[${User}${Dest}]".$colornamedest_endtag."<BDO dir=\"${textDirection}\"><\/BDO><\/B><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
 					else $NewMsg .= "<B>".$colorname_tag."[${User}${Dest}]".$colornamedest_endtag."<BDO dir=\"${textDirection}\"><\/BDO><\/B><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
-#			$NewMsg .= "<B>".$colorname_tag."[${User}${Dest}]".$colornamedest_endtag."<BDO dir=\"${textDirection}\"><\/BDO><\/B> $Message<\/P>";
 			}
     }
 // Avatar System end.
@@ -382,25 +387,21 @@ else
 			{
 				if ($Message == 'L_RELOAD_CHAT') $Message = L_RELOAD_CHAT;
 				$Message = "[".L_ANNOUNCE."]<BDO dir=\"${textDirection}\"><\/BDO><\/td><td CLASS=\"notify2\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
-#        $Message = "[".L_ANNOUNCE."]<BDO dir=\"${textDirection}\"><\/BDO> ".$Message;
 				$noteclass = "notify2";
 			}
 			elseif ($Dest == "*" || $Room == "*")
 			{
 				$Message = "[".L_ANNOUNCE."]<BDO dir=\"${textDirection}\"><\/BDO><\/td><td CLASS=\"notify\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
-#				$Message = "[".L_ANNOUNCE."]<BDO dir=\"${textDirection}\"><\/BDO> ".$Message;
 				$noteclass = "notify";
 			}
 			elseif ($User == "SYS topic")
 			{
 				$Message = "<nobr>".$Dest."&nbsp;".L_TOPIC."<BDO dir=\"${textDirection}\"><\/BDO><\/nobr><\/td><td CLASS=\"notify\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
-#				$Message = "".$Dest." ".L_TOPIC."<BDO dir=\"${textDirection}\"><\/BDO> ".$Message;
 				$noteclass = "notify";
 			}
 			elseif ($User == "SYS topic reset")
 			{
 				$Message = "".$Dest."&nbsp;".L_TOPIC_RESET."<\/td><\/tr><\/table>";
-#				$Message = "".$Dest." ".L_TOPIC_RESET;
 				$noteclass = "notify";
 			}
 			elseif ($User == "SYS image")
@@ -412,18 +413,15 @@ else
 				$Resized = "<br \/>(".L_PIC_RESIZED." <B>".round($imgSize[0],-1)."<\/B> x <B>".round($imgSize[1],-1)."<\/B>)";
 				else $Resized = '';
         $NewMsg .= "$Pic"." <B>".$Dest."<\/B>:<\/td><td width=\"99%\" valign=\"top\"><A href=".$Message." onMouseOver=\"window.status='Click to open the full size picture.'; return true\" title=\"Click to open the full size picture\" target=_blank><img src=".$Message." width=".$imgSize[0]." height=".$imgSize[1]." border=0 alt=\"Click to open the full size picture\"><\/A>".$Resized."<\/td><\/tr><\/table>";
-#        $NewMsg .= "$Pic"." <B>".$Dest."<\/B>:<FRAME><CENTER><A href=".$Message." onMouseOver=\"window.status='Click to open the full size picture.'; return true\" title=\"Click to open the full size picture\" target=_blank><img src=".$Message." width=".$imgSize[0]." height=".$imgSize[1]." border=0 alt=\"Click to open the full size picture\"><\/A>".$Resized."<\/CENTER><\/FRAME><br \/>";
       }
 			elseif ($User == "SYS room")
 			{
         $Message = "<I>".ROOM_SAYS." <FONT class=\"notify\">".$Message."<\/FONT><\/FONT><\/I><\/td><\/tr><\/table>";
-#        $Message = "<I>".ROOM_SAYS." <FONT class=\"notify\">".$Message."<\/FONT><\/FONT><\/I><br \/>";
         $noteclass = "notify2";
       }
 			else
 			{
 				if ($Dest != "" && substr($User,0,8) != "SYS dice") $NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]<BDO dir=\"${textDirection}\"><\/BDO>".$colornamedest_endtag."><\/B> ";
-#				if ($Dest != "" && substr($User,0,8) != "SYS dice") $NewMsg .= "<B>".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]<BDO dir=\"${textDirection}\"><\/BDO>".$colornamedest_endtag."><\/B> ";
 				$Message = str_replace("$","\\$",$Message);	// avoid '$' chars in nick to be parsed below
 				eval("\$Message = $Message;");
 				$noteclass = "notify";
@@ -433,12 +431,10 @@ else
 				if(substr($User,0,8) == "SYS dice")
 				{
 					$NewMsg .="<\/td><td nowrap=\"nowrap\" valign=\"top\"><FONT class=\"notify\">".$Dest." ".DICE_RESULTS."<\/FONT><\/td><td nowrap=\"nowrap\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
-#					$NewMsg .="<B>".$Dest."<\/B> ".DICE_RESULTS.$Message."<\/P>";
 				}
 		    else
 		    {
 					$NewMsg .= "<\/td><td valign=\"top\"><SPAN CLASS=\"$noteclass\">".$Message."<\/SPAN><\/td><\/tr><\/table>";
-#					$NewMsg .= "<SPAN CLASS=\"$noteclass\">".$Message."<\/SPAN><\/P>";
 				};
 			}
 		};
@@ -451,7 +447,6 @@ $DbLink->clean_results();
 else
 {
 	if ($First) $Messages[] = "<table cellspacing=0 cellpading=0><tr><td valign=\"top\"><SPAN CLASS=\"notify\"  style=\"background-color:yellow;\">".L_NO_MSG."<\/SPAN><\/td><\/tr><\/table>";
-#	if ($First) $Messages[] = "<SPAN CLASS=\"notify\"  style=\"background-color:yellow;\">".L_NO_MSG."<\/SPAN>";
 };
 
 

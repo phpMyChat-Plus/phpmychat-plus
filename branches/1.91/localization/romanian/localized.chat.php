@@ -1,5 +1,5 @@
 <?php
-// File : romanian/localized.chat.php - plus version (25.03.2007 - rev.16)
+// File : romanian/localized.chat.php - plus version (14.04.2007 - rev.17)
 // Original translation started by Radu Swider <swidera@satline.ro>, first updated by Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro>
 // Corrected, finalized, diacritics addition and updated to Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -177,6 +177,7 @@ define("L_INVITE", "%s te invitã sã intri cu el/ea în camera <a href=\"#\" onCli
 define("L_INVITE_REG", " Trebuie sã fii înregistrat pentru a intra în aceastã camerã.");
 define("L_INVITE_DONE", "Invitaþia a fost trimisã lui %s.");
 define("L_OK", "Trimite");
+define("L_BUZZ", "Galerie Buzz-uri");
 
 // help popup
 define("L_HELP_TIT_1", "Emoþii");

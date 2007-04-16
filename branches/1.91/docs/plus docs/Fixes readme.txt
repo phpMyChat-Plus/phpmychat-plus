@@ -6,14 +6,15 @@ Connection troubles with IE 7.0 beta. (reported on different sites)
 Important: everytime you upgrade/reinstall a phpmychat server, the old cookies must be deleted from the clients' machines - so let your users now! ()
 
 Fixes History:
-15.02.2007 - 1.91:
-- Some Admin panel/Configuration adjustments (usability related)
-- Improved/fixed the update check in Config/Admin panel. Also inserted the first option in panel to enable/disable this feature, useful for sites with remote file access disabled (administration & functionality related)
-- Download link on index page moved in Credits area and redirected to the SourceForge page (link update)
-- Cleaned up the bot folder, removing unnecessary files and folders (size related)
-- Fixed a Color cookie issue for power users switching to normal users on login - now deleting the cookie color of a power user when exits chat, to avoid the filter error alert if he logs in back as a lowered power user (functionality related)
-- Admin/user email notifications improvements. (email display related)
-- Added Admin notification on user deletion. (administration related)
+15.04.2007 - 1.91:
+- Some Admin panel/Configuration adjustments; (usability related)
+- Improved/fixed the update check in Config/Admin panel. Also inserted the first option in panel to enable/disable this feature, useful for sites with remote file access disabled; (administration & functionality related)
+- Download link on index page moved in Credits area and redirected to the SourceForge page; (link update)
+- Link frame updated to send the sourceforge; (link update)
+- Cleaned up the bot folder, removing unnecessary files and folders; (size related)
+- Fixed a Color cookie issue for power users switching to normal users on login - now deleting the cookie color of a power user when exits chat, to avoid the filter error alert if he logs in back as a lowered power user; (functionality related)
+- Admin/user email notifications improvements; (email display related)
+- Added Admin notification on user deletion; (administration related)
 - Changed the Entrance sound feature to include an optional Welcome sound heard only by the user.
 	- there are 4 types of settings for this:
 			- 0 - Disabled - no sounds on entrance;
@@ -61,6 +62,11 @@ Fixes History:
 - German language updated and included (localization project) - Thanks to Alexander Eisele <xaex@mail.ru>.
 - Spanish language updated and included (localization project) - Thanks to Roxana Castaneda <roxminu@yahoo.com>.
 - Changed the icon.gif background to transparency in order to pick and fit the chat room skin background color; (display related)
+- Added ten more smilies;
+- Added Buzz Gallery popup link in input bar (like smilies) - to automatically add a different sound from the sounds folder; (functionality related)
+- Enlarged the users frame (for long names); (display related)
+- Fixed the private messages function in users list, when pm popup is disabled but pm enabled; (functionality related)
+- Switched the pm links on names (when pm enabled): messages frame names will return /to while users list names will return name> in the same room or /wisp in the other rooms
 
 SQL updates:
 - Added five more fields in table c_config:
@@ -105,6 +111,7 @@ Files edited:
 - plus/lib/index.lib.php;
 - plus/lib/logs.lib.php;
 - plus/lib/release.lib.php;
+- plus/lib/smilies.lib.php;
 - plus/lib/commands/kick.cmd.php;
 - plus/lib/commands/banish.cmd.php;
 - plus/lib/commands/topic.cmd.php;
@@ -124,45 +131,11 @@ Files added:
 - plus/install/database/mysql_upgrade_plus_1.90.txt; (all the old ones updated accordingly)
 - plus/lib/update.txt;
 - plus/localization/argentinian_spanish folder:
-	- plus/localization/argentinian_spanish/index.html;
-	- plus/localization/argentinian_spanish/flag.gif; (3D)
-	- plus/localization/argentinian_spanish/flag0.gif; (flat) - renamed
-	- plus/localization/argentinian_spanish/localized.admin.php;
-	- plus/localization/argentinian_spanish/localized.chat.php;
-	- plus/localization/argentinian_spanish/localized.tutorial.php;
-	- plus/localization/argentinian_spanish/regex.txt;
 - plus/localization/dutch folder:
-	- plus/localization/dutch/index.html;
-	- plus/localization/dutch/flag.gif; (3D)
-	- plus/localization/spanish/flag0.gif; (flat) - renamed
-	- plus/localization/dutch/localized.admin.php;
-	- plus/localization/dutch/localized.chat.php;
-	- plus/localization/dutch/regex.txt;
-	- Note: plus/localization/dutch/localized.tutorial.php; - not ready yet - to be added
+	- Note: plus/localization/dutch/localized.tutorial.php; - not done yet - to be added
 - plus/localization/french folder:
-	- plus/localization/french/index.html;
-	- plus/localization/french/flag.gif; (3D)
-	- plus/localization/french/flag0.gif; (flat) - renamed
-	- plus/localization/french/localized.admin.php;
-	- plus/localization/french/localized.chat.php;
-	- plus/localization/french/localized.tutorial.php;
-	- plus/localization/french/regex.txt;
 - plus/localization/german folder:
-	- plus/localization/german/index.html;
-	- plus/localization/german/flag.gif; (3D)
-	- plus/localization/german/flag0.gif; (flat) - renamed
-	- plus/localization/german/localized.admin.php;
-	- plus/localization/german/localized.chat.php;
-	- plus/localization/german/localized.tutorial.php;
-	- plus/localization/german/regex.txt;
 - plus/localization/spanish folder:
-	- plus/localization/spanish/index.html;
-	- plus/localization/spanish/flag.gif; (3D)
-	- plus/localization/spanish/flag0.gif; (flat) - renamed
-	- plus/localization/spanish/localized.admin.php;
-	- plus/localization/spanish/localized.chat.php;
-	- plus/localization/spanish/localized.tutorial.php;
-	- plus/localization/spanish/regex.txt;
 Files updated:
 - plus/images/helpOn.gif;
 - plus/images/helpOff.gif;

@@ -72,7 +72,7 @@ while (false !== ($yr = readdir($year)))
 			{
 				$monthdir = $mt;
 						echo("<tr>");
-						echo ("<td valign=top align=center nowrap=\"nowrap\"><font size=4 color=green><b>$mt</b></font><br /><a href=\"$pstr&mdel=".$y.$yr."/".$mt."\" title=\"Delete all $mt/$yr logs\"><font size=-2 color=red><b>Delete<br>month</b></font></a></td>"); #print name of each file found
+						echo ("<td valign=top align=center nowrap=\"nowrap\"><font size=4 color=green><b>$mt</b></font><br /><a href=\"$pstr&mdel=".$y.$yr."/".$mt."\" title=\"Delete all $mt/$yr logs\"><font size=-2 color=red><b>Delete<br />month</b></font></a></td>"); #print name of each file found
 						echo ("<td valign=top align=left nowrap=\"nowrap\">");
 				$d=$y.$yeardir."/".$monthdir; #define which month you want to read
 				$day = opendir($d); #open directory
@@ -91,7 +91,7 @@ while (false !== ($yr = readdir($year)))
 					if (eregi(".htm",$dy)) $dyhtm=str_replace(".htm","",$dy);
 					else $dyhtm=str_replace(".php","",$dy);
 					$dyhtm=str_replace($yr.$mt,"",$dyhtm);
-					echo ("<li><a href=$d/$dy?L=$L title=\"Read $dyhtm $mt $yr log\" target=_blank>$dyhtm</a>&nbsp;&nbsp;<a href=\"$pstr&fdel=".$y.$yr."/".$mt."/".$dy."\" title=\"Delete this log\"><font size=-2 color=red><b>x</b></font></a>&nbsp;&nbsp;&nbsp;(".filesize($d."/".$dy)." bytes)<br />\n"); #print name of each file found
+					echo ("<li><a href=$d/$dy?L=$L title=\"Read $dyhtm $mt $yr log\" target=_self>$dyhtm</a>&nbsp;&nbsp;<a href=\"$pstr&fdel=".$y.$yr."/".$mt."/".$dy."\" title=\"Delete this log\"><font size=-2 color=red><b>x</b></font></a>&nbsp;&nbsp;&nbsp;(".filesize($d."/".$dy)." bytes)<br />\n"); #print name of each file found
 					if ($i==7 || $i==14 || $i==21 || $i==28) echo ("<td valign=top align=left nowrap=\"nowrap\">");
 					$i++;
 				}
@@ -127,7 +127,7 @@ while (false !== ($yru = readdir($yearu)))
 			{
 				$monthdiru = $mtu;
 						echo("<tr>");
-						echo ("<td valign=top align=center nowrap=\"nowrap\"><font size=4 color=green><b>$mtu</b></font><br /><a href=\"$pstr&mdel=".$yu.$yru."/".$mtu."\" title=\"Delete all $mtu/$yru logs\"><font size=-2 color=red><b>Delete<br>month</b></font></a></td>"); #print name of each file found
+						echo ("<td valign=top align=center nowrap=\"nowrap\"><font size=4 color=green><b>$mtu</b></font><br /><a href=\"$pstr&mdel=".$yu.$yru."/".$mtu."\" title=\"Delete all $mtu/$yru logs\"><font size=-2 color=red><b>Delete<br />month</b></font></a></td>"); #print name of each file found
 						echo ("<td valign=top align=left nowrap=\"nowrap\">");
 				$du=$yu.$yeardiru."/".$monthdiru; #define which month you want to read
 				$dayu = opendir($du); #open directory
@@ -146,7 +146,7 @@ while (false !== ($yru = readdir($yearu)))
 					if (eregi(".htm",$dyu)) $dyuhtm=str_replace(".htm","",$dyu);
 					else $dyuhtm=str_replace(".php","",$dyu);
 					$dyuhtm=str_replace($yru.$mtu,"",$dyuhtm);
-					echo ("<li><a href=$du/$dyu?L=$L title=\"Read $dyuhtm $mtu $yru log\" target=_blank>$dyuhtm</a>&nbsp;&nbsp;<a href=\"$pstr&fdel=".$yu.$yru."/".$mtu."/".$dyu."\" title=\"Delete this log\"><font size=-2 color=red><b>x</b></font></a>&nbsp;&nbsp;&nbsp;(".filesize($du."/".$dyu)." bytes)<br />\n"); #print name of each file found
+					echo ("<li><a href=$du/$dyu?L=$L title=\"Read $dyuhtm $mtu $yru log\" target=_self>$dyuhtm</a>&nbsp;&nbsp;<a href=\"$pstr&fdel=".$yu.$yru."/".$mtu."/".$dyu."\" title=\"Delete this log\"><font size=-2 color=red><b>x</b></font></a>&nbsp;&nbsp;&nbsp;(".filesize($du."/".$dyu)." bytes)<br />\n"); #print name of each file found
 					if ($j==7 || $j==14 || $j==21 || $j==28) echo ("<td valign=top align=left nowrap=\"nowrap\">");
 					$j++;
 				}

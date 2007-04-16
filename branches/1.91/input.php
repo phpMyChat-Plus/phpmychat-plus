@@ -625,13 +625,22 @@ else {
 if (C_USE_SMILIES == 1)
 {
 ?>
-		<A HREF="<?php echo($ChatPath); ?>smilie_popup.php?L=<?php echo($L); ?>" onClick="window.parent.smilie_popup(); return false" TARGET="_blank" onClick="document.forms['MsgForm'].elements['M'].focus();" onMouseOver="window.status='Open the smilie gallery.'; return true" title="Smilie Gallery" ><img src="images/smilies/smile42.gif" border=0></A>&nbsp;
+		<A HREF="<?php echo($ChatPath); ?>smilie_popup.php?L=<?php echo($L); ?>" onClick="window.parent.smilie_popup(); return false" TARGET="_blank" onClick="document.forms['MsgForm'].elements['M'].focus();" onMouseOver="window.status='Open the Smilies Gallery.'; return true" title="Smilie Gallery" ><img src="images/smilies/smile42.gif" border=0></A>&nbsp;
 <?php
 }
 if ($status == "a")
 {
 ?>
 		<A HREF="<?php echo($ChatPath); ?>admin.php?L=<?php echo($L); ?>&Link=1" CLASS="ChatReg" onClick="adm_popup(); return false" onMouseOver="window.status='Administration panel.'; return true" TARGET="_blank"><?php echo(L_REG_35); ?></A>&nbsp;
+<?php
+}
+// Settings bellow should be the same as in lib/commands/buzz.php.
+ //if ($status == "a") // use this  to show buzz list only to administrators
+if (($status == "m") OR ($status == "a")) // use this to show buzz list to both admins and moderators.
+//if (($status == "m") OR ($status == "a") OR ($status == "r")) // use this to show buzz list to admins, moderators and registered users. Guests can't use it.
+{
+?>
+		<A HREF="<?php echo($ChatPath); ?>buzz_popup.php?L=<?php echo($L); ?>" onClick="window.parent.buzz_popup(); return false" CLASS="ChatReg" onClick="document.forms['MsgForm'].elements['M'].focus();" onMouseOver="window.status='Open the Buzzes Gallery.'; return true" title="Buzzes Gallery" TARGET="_blank"><?php echo(L_BUZZ); ?></A>&nbsp;
 <?php
 }
 ?>

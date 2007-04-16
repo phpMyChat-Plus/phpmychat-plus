@@ -26,7 +26,7 @@ if ($Ver1 == "H")
 	<FRAMESET COLS="100%,*,*" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0" OnResize="if (document.layers) window.location = '<?php echo("$From?L=$L&Ver=$Ver&U=$U1$AddPwd2Url&R=$R1&T=$T&D=$D&N=$N&Reload=NNResize"); ?>';">
 
 		<!-- Visible framesets -->
-		<FRAMESET COLS="*,180" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0">
+		<FRAMESET COLS="*,190" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0">
                         <!-- Régler ROWS="40,*,x" pour modifier les tailles des frames, 40,*,50 est typique. -->
                         <!-- Le premier numéro a rapport au format de la frame sur le haut, le dernier numéro de la large de ce du bas. -->
                         <!-- 50,*,65 marche bien si on emploit les smiles au-dessous de la frame au bas de l'ecran -->
@@ -87,7 +87,7 @@ else
 else
 {
 	?>
-	<FRAMESET COLS="*,180" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0" OnResize="if (document.layers) window.location = '<?php echo("$From?L=$L&Ver=$Ver&U=$U1$AddPwd2Url&R=$R1&T=$T&D=$D&N=$N&Reload=NNResize"); ?>';">
+	<FRAMESET COLS="*,190" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0" OnResize="if (document.layers) window.location = '<?php echo("$From?L=$L&Ver=$Ver&U=$U1$AddPwd2Url&R=$R1&T=$T&D=$D&N=$N&Reload=NNResize"); ?>';">
 <?php
 if ((isset($dropdownmsga) && $status == "a") || (isset($dropdownmsgm) && $status == "m") || isset($dropdownmsg))
 {

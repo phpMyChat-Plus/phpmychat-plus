@@ -1,5 +1,5 @@
 <?php
-// File : argentinian_spanish/localized.chat.php - plus version (25.03.2007 - rev.16)
+// File : argentinian_spanish/localized.chat.php - plus version (14.04.2007 - rev.17)
 // Original translation in Spanish (for the Argentinian dialect usage) by Jorge Colaccini <jrc@informas.com>
 // Updates, corrections and additions for the Plus version by Matias Olivera <matiolivera@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -177,6 +177,7 @@ define("L_INVITE", "%s solicitud para que ingrese al usuario a <a href=\"#\" onC
 define("L_INVITE_REG", " Debes estar registrado para ingresar en este salón.");
 define("L_INVITE_DONE", "Su invitación ha sido enviada a %s.");
 define("L_OK", "Enviar");
+define("L_BUZZ", "Galería de zumbidos");
 
 // help popup
 define("L_HELP_TIT_1", "Caritas");

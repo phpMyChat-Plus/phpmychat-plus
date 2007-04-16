@@ -1,5 +1,5 @@
 <?php
-// File : french/localized.chat.php - plus version (25.03.2007 - rev.16)
+// File : french/localized.chat.php - plus version (14.04.2007 - rev.17)
 // Translation by Loïc Chapeaux <lolo@phpheaven.net>
 // Updates, corrections and additions for the Plus version by Leloup <leloup@le-loup.info> and Christophe Luke <christophe.lucsky@gmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>)
@@ -178,6 +178,7 @@ define("L_INVITE", " %s Vous propose de le rejoindre sur le salon <a href=\"#\" 
 define("L_INVITE_REG", " Vous devez etre enregistré pour acceder a ce salon .");
 define("L_INVITE_DONE", "Votre invitation a été envoyé à %s.");
 define("L_OK", "Send");
+define("L_BUZZ", "Galerie des Buzzs");
 
 // help popup
 define("L_HELP_TIT_1", "Smilies");
@@ -228,7 +229,7 @@ define("L_HELP_CMD_31", "Change l&prime;ordre d&prime;affichage de laliste des U
 define("L_HELP_CMD_32", "c&prime;est une troisieme (jeux de role) version du jeux de dés.<br>Utilisation: /d{n1}[tn2] ou /d{n1};<br>n1 peut prendre n&prime;importe quel valeur <b>entre 1 et 100</b> (represente le nombre de faces par dés).<br>n2 peut prendre n&prime;importe quel valeur <b>entre 1 et %s</b> (cela represente le nombre de dés joué à chaque lancé).");
 define("L_HELP_CMD_33", "Change la taille des police de caractaires des messages dans la fenetre de dialogue (valeurs autorisé: <b>entre 7 et 15</b>); la commande /size remet la taille par défaut (<b>".$FontSize."</b>).");
 define("L_HELP_ETIQ_1", "Netiquette du chat");
-define("L_HELP_ETIQ_2", "Ce chat n&prime;est pas un Chat Caramail ou Love@Lycos, Nous souhaitons avoir une communauté paisible, sympatique et agréable, Aussi, S&prime;il vous plait veuilez adhérer aux régles suivantes. Si vous n&prime;arrivez pas à vous conformer a ses regles de simple politesse, un de nos moderateurs risque de vous ejecter du Caht.<br /><br>Merci,");
+define("L_HELP_ETIQ_2", "Ce chat n&prime;est pas un Chat Caramail ou Love@Lycos, Nous souhaitons avoir une communauté paisible, sympatique et agréable, Aussi, S&prime;il vous plait veuilez adhérer aux régles suivantes. Si vous n&prime;arrivez pas à vous conformer a ses regles de simple politesse, un de nos moderateurs risque de vous ejecter du Chat.<br /><br>Merci,");
 define("L_HELP_ETIQ_3", "Netiquette du Chat");
 define("L_HELP_ETIQ_4", "Ne &quot;Spamez&quot; pas le chat en saisissant des phrases incomprehensible ou des lettres au hasard.</li><li>N'utilisez pas des caractaires aLtERnatIF</li><li>Utilisez les Majuscules avec moderation, elle sont utiliser pour signifier que l&prime;on crie</li><li>Gardez en memoire que les Utilisateurs peuvent venir de n&prime;importe quel coin du monde, et, probablement, vous rencontrerez des gens de differente provenance. S&prime;il vous plait soyez gentil et polis avec eux.</li><li>Ne soyez pas injurieux avec les autres utilisateurs. Dans tous les cas , veuillez ne pas utliser d' Injures ou autres Gros mot</li><li>n&prime;appellez pas les autres utilisateur par leur vrai Nom, il risquent de ne pas aprecier.Utilisez plutôt leur Pseudo.");
 

@@ -9,8 +9,8 @@ if (isset($HTTP_GET_VARS))
 };
 // Clean the buzz sounds after play
 $ChatS = new DB;
-$ChatS->query("DELETE FROM ".C_MSG_TBL." WHERE message='<B>[Buzzz... Signal]</B>' AND m_time<".(time()-60)."");
-	$ChatS->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE '<B>[Buzzz... Signal]%' AND m_time<".(time()-10)." ORDER BY m_time DESC LIMIT 1");
+$ChatS->query("DELETE FROM ".C_MSG_TBL." WHERE message='<B>[Buzzz...]</B>' AND m_time<".(time()-60)."");
+	$ChatS->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE '<B>[Buzzz...]%' AND m_time<".(time()-10)." ORDER BY m_time DESC LIMIT 1");
 	if ($ChatS->num_rows() > 0)
 	{
 		list($Buzz) = $ChatS->next_record();

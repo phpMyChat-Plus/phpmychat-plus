@@ -21,7 +21,6 @@ require("config/config.lib.php");
 require("lib/release.lib.php");
 if (!isset($L)) $L = C_LANGUAGE;
 require("localization/".$L."/localized.chat.php");
-require("lib/smilies.lib.php");
 
 header("Content-Type: text/html; charset=${Charset}");
 
@@ -37,8 +36,8 @@ $CellAlign = ($Charset != "windows-1256" ? "LEFT" : "RIGHT");
 
 <HEAD>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=<?php echo($Charset); ?>">
-<TITLE><?php echo(L_HELP_TIT_1); ?></TITLE>
-<LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
+<TITLE><?php echo(L_BUZZ); ?></TITLE>
+<LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=10&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <SCRIPT TYPE="text/javascript" LANGUAGE="javascript1.1">
 <!--
 function targetWin()
@@ -51,55 +50,68 @@ function targetWin()
 		return window.opener.window;
 }
 
-function smiley2Input(code)
+function buzz2Input(code)
 {
 	window.focus();
 	if (window.opener && !window.opener.closed)
 	{
-		addTo = targetWin();
+		var addTo = targetWin();
 		if (addTo && !addTo.closed)
 		{
-			addTo.document.forms['MsgForm'].elements['M'].value += code;
+			var oldStr = addTo.document.forms['MsgForm'].elements['M'].value;
+			if (oldStr == "")
+			{
+				addTo.document.forms['MsgForm'].elements['M'].value = "/buzz ~" + code;
+			}
+			else
+			{
+				addTo.document.forms['MsgForm'].elements['M'].value = "/buzz ~" + code + " " + oldStr;
+			}
 			addTo.document.forms['MsgForm'].elements['M'].focus();
 		}
 	};
 }
-
 //-->
 </SCRIPT>
 </HEAD>
 <BODY CLASS="frame" onLoad="if (window.focus) window.focus();">
 <CENTER>
-<?php
-	$Nb = count($SmiliesTbl);
-	$ResultTbl = Array();
-	DisplaySmilies($ResultTbl,$SmiliesTbl,$Nb,"popup");
-	unset($SmiliesTbl);
-	?>
-	<!-- Smilies codes -->
-
-	<TABLE BORDER=0 CLASS="table">
+	<TABLE BORDER=1 CLASS="table">
 	<TR>
-		<TH CLASS="tabtitle" COLSPAN=<?php echo($Nb); ?>><?php echo(L_HELP_TIT_1); ?></TH>
+		<TH CLASS="tabtitle" COLSPAN=5><?php echo(L_BUZZ); ?></TH>
 	</TR>
-	<?php
-	$i = "0";
-	$Nb = count($ResultTbl);
-	while($i < $Nb)
-	{
-		if ($i > 0) echo("\t");
-		echo("<TR VALIGN=\"BOTTOM\">\n");
-		echo("$ResultTbl[$i]");
-		echo("\t</TR>\n\t<TR>\n");
-		$i++;
-		echo("$ResultTbl[$i]");
-		echo("\t</TR>\n");
-		$i++;
-	};
-	unset($ResultTbl);
-	?>
+<?php
+// Credit for this goes to Ciprian Murariu <ciprianmp@yahoo.com>
+		$sounds='./sounds';
+		$buzzfiles = opendir($sounds); #open directory
+		echo("<tr>");
+		echo ("<td valign=top align=$CellAlign nowrap=\"nowrap\">");
+				while (false !== ($buzzfile = readdir($buzzfiles)))
+				{
+					if (!eregi("\.html",$buzzfile) && $buzzfile!=='.' && $buzzfile!=='..')
+					{
+						$buzzsounds[]=$buzzfile;
+			 		}
+			 	}
+				closedir($buzzfiles);
+			  if ($buzzsounds)
+			  {
+			  		sort($buzzsounds);
+				}
+			  $j=1;
+			  foreach ($buzzsounds as $buzzname)
+			  {
+					$buzzname=str_replace(".wav","",$buzzname);
+					echo ("<a href=\"\" onClick=\"buzz2Input('".$buzzname."',0); return false\"  onMouseOver=\"window.status='Click to play this buzz.'; return true\" title=\"Click to play this buzz\">".$buzzname."</a><br />"); #print name of each file found
+					if ($j==20 || $j==40 || $j==60 || $j==80 || $j==100 || $j==120 || $j==140 || $j==160 || $j==180) echo ("</td><td valign=top align=$CellAlign nowrap=\"nowrap\">");
+					$j++;
+				}
+		unset($buzzsounds);
+		echo("</tr>");
+		echo("</td></tr></table><br />");
+?>
 	</TABLE>
-<br /><input type="submit" value="<?php echo(L_REG_25)?>" name="Close" onClick="self.close(); return false;">
+<input type="submit" value="<?php echo(L_REG_25)?>" name="Close" onClick="self.close(); return false;">
 </CENTER>
 <P align="right" style="font-weight: 800; color:#FFD700; font-size: 7pt">
 &copy; 2005-<?php echo(date(Y)); ?> - by <a href=mailto:ciprianmp@yahoo.com onMouseOver="window.status='Click to email author.'; return true;">Ciprian Murariu</a>

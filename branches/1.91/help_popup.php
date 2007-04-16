@@ -29,6 +29,7 @@ $title = "title=\"Use this command\"";
 <HTML dir="<?php echo($TextDir); ?>">
 
 <HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=<?php echo($Charset); ?>">
 <TITLE><?php echo(L_HLP); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <SCRIPT TYPE="text/javascript" LANGUAGE="javascript1.1">
@@ -448,6 +449,7 @@ if (C_USE_SMILIES == "1")
 };
 ?>
 </TABLE>
+<br /><input type="submit" value="<?php echo(L_REG_25)?>" name="Close" onClick="self.close(); return false;">
 </CENTER>
 </BODY>
 

@@ -1,5 +1,5 @@
 <?php
-// File : spanish/localized.chat.php - plus version (25.03.2007 - rev.16)
+// File : spanish/localized.chat.php - plus version (14.04.2007 - rev.17)
 // Original translation by Josep Román <josep.roman@zuerich-see.ch> and && León Del Río <leon@webmaster.com.mx>
 // Updates, corrections and additions for the Plus version by Roxana Castañeda <roxminu@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -178,6 +178,7 @@ define("L_INVITE", "%s lo invita para que se le una en <a href=\"#\" onClick=\"w
 define("L_INVITE_REG", " Tiene que estar registrado para entrar a esta sala.");
 define("L_INVITE_DONE", "Su invitación ha sido enviada a %s.");
 define("L_OK", "Enviar");
+define("L_BUZZ", "Galería de Alarmas");
 
 // help popup
 define("L_HELP_TIT_1", "Caritas Smilies");
