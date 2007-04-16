@@ -23,7 +23,7 @@ if (!isset($FontName)) $FontName = "";
 </HEAD>
 <BODY CLASS="frame">
 <CENTER>
-<A HREF="http://phpmychat.sourceforge.net/rubrique.php3?id_rubrique=29" title="phpMyChat homepage" onMouseOver="window.status='Visit the phpMyChat homepage.'; return true" TARGET="_blank"><IMG SRC="images/icon.gif" WIDTH=88 HEIGHT=31 BORDER=0></A>
+<A HREF="http://sourceforge.net/projects/phpmychat/" title="phpMyChat homepage" onMouseOver="window.status='Visit the phpMyChat homepage.'; return true" TARGET="_blank"><IMG SRC="images/icon.gif" WIDTH=88 HEIGHT=31 BORDER=0></A>
 </CENTER>
 </BODY>
 </HTML>
