@@ -9,9 +9,8 @@ require("./lib/release.lib.php");
 settype($app_version = APP_VERSION, "double");
 $ColorList = eregi_replace('"', "", COLORLIST);
 	// Check for application update on main sites (ciprianmp.com & sourceforge) resources.
-//	$updatepath1 = "http://ciprianmp.com/latest/lib/update.txt";
-//	$updatepath2 = "http://svn.sourceforge.net/viewvc/*checkout*/phpmychat/trunk/lib/update.txt";
-	$updatepath3 = "./lib/update.txt";
+	$updatepath1 = "http://ciprianmp.com/latest/lib/update.txt";
+	$updatepath2 = "http://svn.sourceforge.net/viewvc/*checkout*/phpmychat/trunk/lib/update.txt";
 	if (@fopen($updatepath1, "r"))
 	{
 	 @fclose($updatepath1);
@@ -44,7 +43,7 @@ $ColorList = eregi_replace('"', "", COLORLIST);
 ?>
 <a href="http://www.ciprianmp.com/atm/index.php?&direction=0&order=&directory=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Open the Download page" onMouseOver="window.status='Open the Download page.'; return true">Download Page</a>&nbsp;|
 <a href="http://svn.sourceforge.net/viewvc/phpmychat/trunk/" target=_blank Title="Open the phpMyChat SVN Project Page" onMouseOver="window.status='Open the phpMyChat SVN Project Page.'; return true"> phpMyChat SVN Project Page</a>&nbsp;|
-<a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Fixes readme.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Check what's new in <?php echo((UPD_CHECK && ($app_last_version > $app_version)) ? APP_LAST_VERSION : APP_VERSION); ?>." onMouseOver="window.status='Check what\'s new in <?php echo((UPD_CHECK && ($app_last_version > $app_version)) ? APP_LAST_VERSION : APP_VERSION); ?>.'; return true">Check what's new in <?php echo((UPD_CHECK && ($app_last_version > $app_version)) ? APP_LAST_VERSION : APP_VERSION); ?></a>&nbsp;|
+<a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Fixes readme.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Check what's new in <?php echo(($app_last_version > $app_version) ? APP_LAST_VERSION : APP_VERSION); ?>." onMouseOver="window.status='Check what\'s new in <?php echo(($app_last_version > $app_version) ? APP_LAST_VERSION : APP_VERSION); ?>.'; return true">Check what's new in <?php echo(($app_last_version > $app_version) ? APP_LAST_VERSION : APP_VERSION); ?></a>&nbsp;|
 <a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Plus FAQ.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Read the FAQ" onMouseOver="window.status='Read the FAQ'; return true">Read the FAQ</a>&nbsp;|
 <a href="http://www.ciprianmp.com/latest/" target=_blank Title="Go to Try me server." onMouseOver="window.status='Go to Try me server.'; return true">Try me server</a><br />
 <?php
