@@ -941,23 +941,23 @@ function get_day(time,plus)
 
 	// Put the nick of the user who was clicked on in the messages or the users frames
 	// to the message box in the input frame;
-	function userClick(user,privMsg)
+	function userClick(user,privMsg,uname)
 	{
 		if (window.frames['input'] && window.frames['input'].window.document.forms['MsgForm'].elements['MsgTo'])
 		{
-			window.frames['input'].window.document.forms['MsgForm'].elements['MsgTo'].value = user;
 			var msgbox = window.frames['input'].window.document.forms['MsgForm'].elements['M'];
 			if (privMsg)
 			{
+				window.frames['input'].window.document.forms['MsgForm'].elements['MsgTo'].value = user;
 				var oldStr = msgbox.value;
 				if (oldStr == "" || oldStr.substring(0,1) != " ") oldStr = " " + oldStr;
 				msgbox.value = "/to " + user + oldStr;
 			}
 			else
 			{
-				if (msgbox.value == "") msgbox.value += user;
+				if (msgbox.value == "") msgbox.value = user;
 				else msgbox.value += " " + user;
-				if (msgbox.value == user) msgbox.value += "> ";
+				if ((user != uname) && (msgbox.value == user)) msgbox.value += "> ";
 			};
 			msgbox.focus();
 		};
@@ -967,17 +967,17 @@ function get_day(time,plus)
 	{
 		if (window.frames['input'] && window.frames['input'].window.document.forms['MsgForm'].elements['MsgTo'])
 		{
-			window.frames['input'].window.document.forms['MsgForm'].elements['MsgTo'].value = user;
 			var msgbox = window.frames['input'].window.document.forms['MsgForm'].elements['M'];
 			if (privMsg)
 			{
+				window.frames['input'].window.document.forms['MsgForm'].elements['MsgTo'].value = user;
 				var oldStr = msgbox.value;
 				if (oldStr == "" || oldStr.substring(0,1) != " ") oldStr = " " + oldStr;
 				msgbox.value = "/wisp " + user + oldStr;
 			}
 			else
 			{
-				if (msgbox.value == "") msgbox.value += user;
+				if (msgbox.value == "") msgbox.value = user;
 				else msgbox.value += " " + user;
 				if (msgbox.value == user) msgbox.value += "> ";
 			};
@@ -1382,7 +1382,7 @@ if (!isset($Ver)) $Ver = "L";
 		};
 
 		// Horizontal alignement for cells topic
-		$CellAlign = ($Charset == "windows-1256" ? "LEFT" : "RIGHT");
+		$CellAlign = ($Charset == "windows-1256" ? "RIGHT" : "LEFT");
 		?>
 		<TR CLASS="ChatCell">
 			<TH COLSPAN=2 CLASS="ChatTabTitle"><?php echo(L_SET_1); ?></TH>

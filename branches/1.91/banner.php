@@ -103,17 +103,17 @@ if (strcasecmp(ucfirst(stripslashes($R)), ROOM9) == 0) $Room = ROOM9;
 	if ((file_exists($botcontrol) || $BR ==  $Room) && C_BOT_PUBLIC)
   {
 		$Expl.= BOT_TIPS;
-		$Ex.='<br /><FONT SIZE=-2 COLOR="40E0D0"><I><b>'.C_BOT_NAME.'</b> - '.$Expl.'</I></FONT>';
+		$Ex.='<b>'.C_BOT_NAME.'</b> - '.$Expl.'';
 	}
 	elseif($BR != "" && C_BOT_PUBLIC)
 	{
 		$Expl.= sprintf(BOT_PRIV_TIPS, $BR);
-		$Ex.='<br /><FONT SIZE=-2 COLOR="40E0D0"><I><b>'.C_BOT_NAME.'</b> - '.$Expl.'</I></FONT>';
+		$Ex.='<b>'.C_BOT_NAME.'</b> - '.$Expl.'';
 	}
 	elseif(file_exists($botcontrol) && !C_BOT_PUBLIC)
 	{
 		$Expl.= BOT_PRIVONLY_TIPS;
-		$Ex.='<br /><FONT SIZE=-2 COLOR="40E0D0"><I><b>'.C_BOT_NAME.'</b> - '.$Expl.'</I></FONT>';
+		$Ex.='<b>'.C_BOT_NAME.'</b> - '.$Expl.'';
 	}
 	else
 	{
@@ -121,12 +121,16 @@ if (strcasecmp(ucfirst(stripslashes($R)), ROOM9) == 0) $Room = ROOM9;
 	}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<?php
+$CellAlign = ($Charset == "windows-1256" ? "RIGHT" : "LEFT");
+?>
 <HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
 <HEAD>
         <TITLE>Banner</TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <HEAD>
 <BODY class="frame">
-        <FONT size="2"><I><B>Welcome to <?php echo (stripslashes($R)) ?>!</B> Topic: <MARQUEE WIDTH="70%"><span style="letter-spacing: 1pt; color:yellow"><B><?php echo ($UR);?></B></span></MARQUEE></I><?php echo ($Ex);?></FONT>
+			<FONT size="2"><I><B>Welcome to <?php echo (stripslashes($R)) ?>!</B> Topic: <MARQUEE WIDTH="70%"><FONT color="yellow"><B><?php echo ($UR);?></B></FONT></MARQUEE></I></FONT>
+        	<BR><FONT SIZE=-2 COLOR="40E0D0"><I><?php echo ($Ex);?></I></FONT>
 </BODY>
 </HTML>

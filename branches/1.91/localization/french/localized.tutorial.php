@@ -1,5 +1,5 @@
 <?php
-// File : french/localized.tutorial.php - plus version
+// File : french/localized.tutorial.php - plus version (17.09.2006 - rev.3)
 // Translation by Loïc Chapeaux <lolo@phpheaven.net>
 // Updates, corrections and additions for the Plus version by Leloup <leloup@le-loup.info> and Christophe Luke <christophe.lucsky@gmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>)

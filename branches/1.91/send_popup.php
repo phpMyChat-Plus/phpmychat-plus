@@ -11,7 +11,7 @@ if (isset($HTTP_GET_VARS))
 // Added for Skin mod
 if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
 
-if (isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"];
+if (!isset($L) && isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"]; 
 if (isset($HTTP_COOKIE_VARS["CookieUsername"])) $U = $HTTP_COOKIE_VARS["CookieUsername"];
 
 // Fix a security hole

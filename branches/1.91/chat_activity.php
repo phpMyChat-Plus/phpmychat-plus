@@ -21,7 +21,7 @@ define("LOGIN_LINK","<A HREF=\"".$ChatPath."\" TITLE=\"Chat Login Page\" onMouse
 if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
 if (!isset($R)) $skin == "style1";	//you can use any style in your pluschat/config folder (style1, style2, ..., style7)
 
-if (isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"];
+if (!isset($L) && isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"]; 
 
 require("./${ChatPath}/config/config.lib.php");
 require("./${ChatPath}/lib/release.lib.php");

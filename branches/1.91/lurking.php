@@ -8,7 +8,7 @@ $Type = " AND type='1'";	//This is to display only the public rooms
 //$Type = "";							//This is to display either public or private rooms
 
 if (isset($HTTP_COOKIE_VARS["CookieUsername"])) $U = urldecode($HTTP_COOKIE_VARS["CookieUsername"]);
-if (isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"];
+if (!isset($L) && isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"]; 
 if (isset($HTTP_COOKIE_VARS["CookieStatus"])) $status = $HTTP_COOKIE_VARS["CookieStatus"];
 if (!isset($U)) $U = "Guest";
 

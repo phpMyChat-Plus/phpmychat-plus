@@ -318,11 +318,11 @@ if (file_exists ($highpath))
 }
 if($contents == $User)
 {
-	$NewMsg = "<table cellspacing=0 cellpading=0 class=\"msg2\"><tr><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\">";
+	$NewMsg = "<table cellspacing=0 cellpading=0><tr class=\"msg2\"><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\">";
 }
 else
 {
-	$NewMsg = "<table cellspacing=0 cellpading=0 class=\"msg\"><tr><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\">";
+	$NewMsg = "<table cellspacing=0 cellpading=0><tr class=\"msg\"><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\">";
 }
 //-------------------------------End HighLight Mod
 		if ($ST == 1) $NewMsg .= "<SPAN CLASS=\"time\">".date("H:i:s", $Time + C_TMZ_OFFSET*60*60)."</SPAN></td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\">";
@@ -333,41 +333,49 @@ else
 			$Userx = $User;  // Avatar System insered only.
 			if($User != stripslashes($U))
 			{
-				if (C_ENABLE_PM && C_PRIV_POPUP && ($allowpopup || $status = "u"))
+				if (C_ENABLE_PM && C_PRIV_POPUP && ($allowpopup || $status == "u"))
 				{
-					$User = "<A HREF=\"#\" onClick=\"window.parent.send_popup('/to ".special_char($User,$Latin1,1)."');\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."</A>";
+					$User = "<a onClick=\"window.parent.send_popup('/to ".special_char($User,$Latin1,1)."');\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."</a>";
 				}
 				elseif (C_ENABLE_PM)
 				{
-					$User = "<A HREF=\"#\" onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',true);\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."</A>";
+					$User = "<a onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',true);\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."</a>";
 				}
 				else
 				{
-					$User = "<A HREF=\"#\" onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false); return false\" title=\"Use this name\" onMouseOver=\"window.status='Reffer to this username.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."</A>";
+					$User = "<a onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false); return false\" title=\"Use this name\" onMouseOver=\"window.status='Reffer to this username.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."</a>";
 				}
+			}
+			elseif($User == stripslashes($U))
+			{
+				$User = "<a onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false,'".special_char($U,$Latin1,1)."'); return false\" title=\"Use this name\" onMouseOver=\"window.status='Reffer to this username.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."</a>";
 			}
 			if($Dest != "" && $Dest != stripslashes($U))
 			{
 				$Dest = htmlspecialchars(stripslashes($Dest));
-				if (C_ENABLE_PM && C_PRIV_POPUP && ($allowpopup || $status = "u"))
+				if (C_ENABLE_PM && C_PRIV_POPUP && ($allowpopup || $status == "u"))
 				{
-					$Dest = "<A HREF=\"#\" onClick=\"window.parent.send_popup('/to ".special_char($Dest,$Latin1,1)."');\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colornamedest_tag."".special_char($Dest,$Latin1,0)."".$colornamedest_endtag."</A>";
+					$Dest = "<a onClick=\"window.parent.send_popup('/to ".special_char($Dest,$Latin1,1)."');\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colornamedest_tag."".special_char($Dest,$Latin1,0)."".$colornamedest_endtag."</a>";
 				}
 				elseif (C_ENABLE_PM)
 				{
-					$Dest = "<A HREF=\"#\" onClick=\"window.parent.userclick('".special_char($Dest,$Latin1,1)."',true);\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colornamedest_tag."".special_char($Dest,$Latin1,0)."".$colornamedest_endtag."</A>";
+					$Dest = "<a onClick=\"window.parent.userClick('".special_char($Dest,$Latin1,1)."',true);\" title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\" CLASS=\"sender\">".$colornamedest_tag."".special_char($Dest,$Latin1,0)."".$colornamedest_endtag."</a>";
 				}
 				else
 				{
-					$Dest = "<A HREF=\"#\" onClick=\"window.parent.userClick('".special_char($Dest,$Latin1,1)."',false); return false\" title=\"Use this name\" onMouseOver=\"window.status='Reffer to this username.'; return true\" CLASS=\"sender\">".$colornamedest_tag."".special_char($Dest,$Latin1,0)."".$colornamedest_endtag."</A>";
+					$Dest = "<a onClick=\"window.parent.userClick('".special_char($Dest,$Latin1,1)."',false); return false\" title=\"Use this name\" onMouseOver=\"window.status='Reffer to this username.'; return true\" CLASS=\"sender\">".$colornamedest_tag."".special_char($Dest,$Latin1,0)."".$colornamedest_endtag."</a>";
 				}
+			}
+			elseif($Dest == stripslashes($U))
+			{
+				$Dest = "<a onClick=\"window.parent.userClick('".special_char($Dest,$Latin1,1)."',false,'".special_char($U,$Latin1,1)."'); return false\" title=\"Use this name\" onMouseOver=\"window.status='Reffer to this username.'; return true\" CLASS=\"sender\">".$colornamedest_tag."".special_char($Dest,$Latin1,0)."".$colornamedest_endtag."</a>";
 			}
 			if ($Dest != "") $Dest = "]<BDO dir=\"${textDirection}\"></BDO>".$colorname_endtag."</B></td><td width=\"1%\" valign=\"top\"><B>&gt;</B></td><td width=\"1%\" valign=\"top\"><B>".$colornamedest_tag."[".$Dest;
 // Avatar System Start:
       if (C_USE_AVATARS)
     	{
         if (empty($avatar)) $avatar = C_AVA_RELPATH . C_DEF_AVATAR;
-       		$avatar = "<a href=\"#\" onClick=\"window.parent.runCmd('whois','".special_char2(stripslashes($Userx),$Latin1)."'); return false\" onMouseOver=\"window.status='".L_PROFILE.".'; return true\" title=\"".L_PROFILE."\"><img align=\"center\" src=\"$avatar\" width=".C_AVA_WIDTH." height=".C_AVA_HEIGHT." alt=\"".L_PROFILE."\" border=0></a>";
+       		$avatar = "<a onClick=\"window.parent.runCmd('whois','".special_char2(stripslashes($Userx),$Latin1)."'); return false\" onMouseOver=\"window.status='".L_PROFILE.".'; return true\" title=\"".L_PROFILE."\"><img align=\"center\" src=\"$avatar\" width=".C_AVA_WIDTH." height=".C_AVA_HEIGHT." alt=\"".L_PROFILE."\" border=0></a>";
    			if ($ST != 1) $NewMsg .= "</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\">".$avatar."</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."[${User}${Dest}]".$colornamedest_endtag."<BDO dir=\"${textDirection}\"></BDO></B></td><td valign=\"top\">".$Message."</td></tr></table>";
    			else $NewMsg .= $avatar."</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."[${User}${Dest}]".$colornamedest_endtag."<BDO dir=\"${textDirection}\"></BDO></B></td><td valign=\"top\">".$Message."</td></tr></table>";
       }
@@ -411,7 +419,7 @@ else
 				if($imgSize[0] == $maxSize || $imgSize[1] == $maxSize)
 				$Resized = "<br />(".L_PIC_RESIZED." <B>".round($imgSize[0],-1)."</B> x <B>".round($imgSize[1],-1)."</B>)";
 				else $Resized = '';
-        $NewMsg .= "$Pic"." <B>".$Dest."</B>:</td><td valign=\"top\"><A href=".$Message." onMouseOver=\"window.status='Click to open the full size picture.'; return true\" title=\"Click to open the full size picture\" target=_blank><img src=".$Message." width=".$imgSize[0]." height=".$imgSize[1]." border=0 alt=\"Click to open the full size picture\"></A>".$Resized."</td></tr></table>";
+        $NewMsg .= "$Pic"." <B>".$Dest."</B>:</td><td valign=\"top\"><a href=".$Message." onMouseOver=\"window.status='Click to open the full size picture.'; return true\" title=\"Click to open the full size picture\" target=_blank><img src=".$Message." width=".$imgSize[0]." height=".$imgSize[1]." border=0 alt=\"Click to open the full size picture\"></a>".$Resized."</td></tr></table>";
       }
 			elseif ($User == "SYS room")
 			{
@@ -487,7 +495,7 @@ $DbLink->clean_results();
 								<!--
 								if ((!window.parent.is_priv_popup || window.parent.is_priv_popup.closed) && (!window.parent.is_send_popup || window.parent.is_send_popup.closed))
 								{
-								if (window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].value == '') window.parent.is_priv_popup = window.open("priv_popup.php","priv_popup","width=430,height=<?php echo($height) ?>,scrollbars=yes,resizable=no");
+								if (window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].value == '') window.parent.is_priv_popup = window.open("priv_popup.php?L=<?php echo($L); ?>","priv_popup","width=430,height=<?php echo($height) ?>,scrollbars=yes,resizable=no");
 								};
 								// -->
 								</SCRIPT>

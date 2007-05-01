@@ -33,8 +33,8 @@ $small = round(0.8 * $medium);
 
 /*	Color Input Box mod by Ciprian
 Here you can customize the default color for messages window general look
-the font for text messages, colors, some popup windows' text color, aso.
-This will make time, sender and message color have the same default color defined bellow.*/
+the font for text messages, colors, some popup windows' text color, aso)
+The variable color: <?php echo($CD); ?>  will make time, sender and message color have the same default color defined bellow.*/
 
 	$CD = "navy";			//default messages color (this color should be chosen in the Admin panel tab, filter color of this rooms' skin)
 
@@ -99,12 +99,14 @@ A
 	text-decoration: none;
 	color: #FFFFFF;
 	font-weight: 600;
+	cursor:pointer;
 }
 
 A:hover, A:active
 {
 	color: #FF9900;
-	text-decoration: underline;
+	text-decoration: none;
+	cursor:pointer;
 }
 
 A.user, A.user:active
@@ -112,6 +114,7 @@ A.user, A.user:active
 	text-decoration: none;
 	color: #CCCCFF;
 	font-weight: 600;
+	cursor:pointer;
 }
 
 A.admin, A.admin:active
@@ -119,6 +122,7 @@ A.admin, A.admin:active
 	text-decoration: none;
 	color: #FF0000;
 	font-weight: 600;
+	cursor:pointer;
 }
 
 A.mod, A.mod:active
@@ -126,6 +130,7 @@ A.mod, A.mod:active
 	text-decoration: none;
 	color: #0000FF;
 	font-weight: 600;
+	cursor:pointer;
 }
 
 A.sender, A.sender:active
@@ -133,6 +138,7 @@ A.sender, A.sender:active
 	text-decoration: none;
 	color: <?php echo($CD); ?>;
 	font-weight: 600;
+	cursor:pointer;
 }
 
 INPUT, SELECT, TEXTAREA

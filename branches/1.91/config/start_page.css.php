@@ -79,6 +79,7 @@ if (isset($SpecialFont))
 		text-decoration: underline;
 		color: #FF0000;
 		font-weight: 600;
+		cursor:pointer;
 	}
 
 	A.ChatFonts:hover, A.ChatFonts:active
@@ -86,6 +87,7 @@ if (isset($SpecialFont))
 		<?php if (isset($FontFace)) echo($FontFace); ?>
 		color: #FF0000;
 		text-decoration: none;
+		cursor:pointer;
 	}
 	<?php
 };
@@ -97,6 +99,7 @@ A.ChatLink
 	text-decoration: underline;
 	color: #FFFFFF;
 	font-weight: 600;
+	cursor:pointer;
 }
 
 A.ChatLink:hover, A.ChatLink:active
@@ -104,6 +107,7 @@ A.ChatLink:hover, A.ChatLink:active
 	<?php if (isset($FontFace)) echo($FontFace); ?>
 	color: #FF9900;
 	text-decoration: none;
+	cursor:pointer;
 }
 
 A.ChatReg
@@ -112,6 +116,7 @@ A.ChatReg
 	text-decoration: underline;
 	color: #4682b4;
 	font-weight: 800;
+	cursor:pointer;
 }
 
 A.ChatReg:hover,A.ChatReg:active
@@ -119,6 +124,7 @@ A.ChatReg:hover,A.ChatReg:active
 	<?php if (isset($FontFace)) echo($FontFace); ?>
 	color: #FF9900;
 	text-decoration: none;
+	cursor:pointer;
 }
 
 INPUT.ChatBox, SELECT.ChatBox, TEXTAREA.ChatBox
@@ -155,6 +161,7 @@ A.ChatCopy, A.ChatCopy:active
 {
 	font-family: helvetica, arial, geneva, sans-serif;
 	color: #FFFFFF;
+	cursor:pointer;
 }
 
 .ChatP1

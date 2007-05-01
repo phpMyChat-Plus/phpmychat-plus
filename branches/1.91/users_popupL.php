@@ -10,7 +10,7 @@ if (isset($HTTP_GET_VARS))
 
 if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
 if (isset($HTTP_COOKIE_VARS["CookieUserSort"])) $sort_order = $HTTP_COOKIE_VARS["CookieUserSort"];
-if (isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"];
+if (!isset($L) && isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"]; 
 //if no language detected set default one
 if (!isset($L)) $L = C_LANGUAGE;
 // Fix a security hole

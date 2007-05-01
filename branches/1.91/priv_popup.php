@@ -10,7 +10,7 @@ if (isset($HTTP_GET_VARS))
 
 // Added for Skin mod
 if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
-if (isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"];
+if (!isset($L) && isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"]; 
 if (isset($HTTP_COOKIE_VARS["CookieUsername"])) $U = $HTTP_COOKIE_VARS["CookieUsername"];
 
 // Fix a security hole
@@ -81,7 +81,7 @@ function postReply1(e,i)
 		indexform.elements['sent'].value = '1';
 		if (document.all) indexform.elements['sendForm'].disabled = true;
 		indexform.submit();
-		reform.elements['Reply1'].value += ' - Replyed';
+		reform.elements['Reply1'].value += ' - Replied';
 		reform.elements['Reply1'].disabled = true;
 		if (i>1) reform.elements[1].focus();
 	}
@@ -112,7 +112,7 @@ function postReply2(e,i)
 		indexform.elements['sent'].value = '1';
 		if (document.all) indexform.elements['sendForm'].disabled = true;
 		indexform.submit();
-		reform.elements['Reply2'].value += ' - Replyed';
+		reform.elements['Reply2'].value += ' - Replied';
 		reform.elements['Reply2'].disabled = true;
 		if (i>2) reform.elements[2].focus();
 	}
@@ -143,7 +143,7 @@ function postReply3(e,i)
 		indexform.elements['sent'].value = '1';
 		if (document.all) indexform.elements['sendForm'].disabled = true;
 		indexform.submit();
-		reform.elements['Reply3'].value += ' - Replyed';
+		reform.elements['Reply3'].value += ' - Replied';
 		reform.elements['Reply3'].disabled = true;
 		if (i>3) reform.elements['Reply4'].focus();
 	}
@@ -174,7 +174,7 @@ function postReply4(e,i)
 		indexform.elements['sent'].value = '1';
 		if (document.all) indexform.elements['sendForm'].disabled = true;
 		indexform.submit();
-		reform.elements['Reply4'].value += ' - Replyed';
+		reform.elements['Reply4'].value += ' - Replied';
 		reform.elements['Reply4'].disabled = true;
 		if (i>4) reform.elements['Reply5'].focus();
 	}
@@ -205,7 +205,7 @@ function postReply5(e,i)
 		indexform.elements['sent'].value = '1';
 		if (document.all) indexform.elements['sendForm'].disabled = true;
 		indexform.submit();
-		reform.elements['Reply5'].value += ' - Replyed';
+		reform.elements['Reply5'].value += ' - Replied';
 		reform.elements['Reply5'].disabled = true;
 		if (i>5) reform.elements['Reply6'].focus();
 	}
@@ -236,7 +236,7 @@ function postReply6(e,i)
 		indexform.elements['sent'].value = '1';
 		if (document.all) indexform.elements['sendForm'].disabled = true;
 		indexform.submit();
-		reform.elements['Reply6'].value += ' - Replyed';
+		reform.elements['Reply6'].value += ' - Replied';
 		reform.elements['Reply6'].disabled = true;
 		if (i>6) reform.elements['Reply7'].focus();
 	}
@@ -267,7 +267,7 @@ function postReply7(e,i)
 		indexform.elements['sent'].value = '1';
 		if (document.all) indexform.elements['sendForm'].disabled = true;
 		indexform.submit();
-		reform.elements['Reply7'].value += ' - Replyed';
+		reform.elements['Reply7'].value += ' - Replied';
 		reform.elements['Reply7'].disabled = true;
 		if (i>7) reform.elements['Reply8'].focus();
 	}
@@ -298,7 +298,7 @@ function postReply8(e,i)
 		indexform.elements['sent'].value = '1';
 		if (document.all) indexform.elements['sendForm'].disabled = true;
 		indexform.submit();
-		reform.elements['Reply8'].value += ' - Replyed';
+		reform.elements['Reply8'].value += ' - Replied';
 		reform.elements['Reply8'].disabled = true;
 		if (i>8) reform.elements['Reply9'].focus();
 	}
@@ -329,7 +329,7 @@ function postReply9(e,i)
 		indexform.elements['sent'].value = '1';
 		if (document.all) indexform.elements['sendForm'].disabled = true;
 		indexform.submit();
-		reform.elements['Reply9'].value += ' - Replyed';
+		reform.elements['Reply9'].value += ' - Replied';
 		reform.elements['Reply9'].disabled = true;
 		if (i=10) reform.elements['Reply10'].focus();
 	}
@@ -360,7 +360,7 @@ function postReply10(e,i)
 		indexform.elements['sent'].value = '1';
 		if (document.all) indexform.elements['sendForm'].disabled = true;
 		indexform.submit();
-		reform.elements['Reply10'].value += ' - Replyed';
+		reform.elements['Reply10'].value += ' - Replied';
 		reform.elements['Reply10'].disabled = true;
 	}
 	else
@@ -425,7 +425,7 @@ switch ($Read)
 		<TD width="100%" style="font-size: 8pt"><I><?php echo($Time); ?></I></TD></TR>
 </TABLE>
 <br />
-<FORM ACTION="priv_popup.php" METHOD="POST" AUTOCOMPLETE="OFF" NAME="ReplyForm">
+<FORM ACTION="priv_popup.php?L=<?php echo($L); ?>" METHOD="POST" AUTOCOMPLETE="OFF" NAME="ReplyForm">
 <input type="hidden" value="<?php echo($ReplyTo) ?>" name="ReplyTo1">
 <tr><td><input type="text" size="60" value="Re: " name="Reply1" CLASS="ChatBox" onKeyPress="postReply11(event);"></td></tr>
 </FORM>
