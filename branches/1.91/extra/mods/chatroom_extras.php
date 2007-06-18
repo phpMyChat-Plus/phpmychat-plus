@@ -41,7 +41,7 @@ require("${ChatPath}/lib/database/".C_DB_TYPE.".lib.php");
 set_magic_quotes_runtime(0);
 
 // Translate to html special characters, and entities if message was sent with a latin 1 charset
-$Latin1 = ($Charset == "iso-8859-1");
+$Latin1 = ($Charset == "utf-8");
 function special_char($str,$lang)
 {
 	return ($lang ? htmlentities(stripslashes($str)) : htmlspecialchars(stripslashes($str)));

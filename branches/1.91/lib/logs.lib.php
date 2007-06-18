@@ -35,7 +35,7 @@ $m_time = stripslashes($result["m_time"]);
 $time_posted = date('H:i:s (d)', $m_time + C_TMZ_OFFSET*60*60);
 $room = htmlspecialchars(stripslashes($result["room"]));
 $roomfrom = htmlspecialchars(stripslashes($result["room_from"]));
-if ($roomfrom != "") $room = $room."<br>from ".$roomfrom;
+if ($roomfrom != "") $room = $room."<br />from ".$roomfrom;
 $username = htmlspecialchars(stripslashes($result["username"]));
 $address = htmlspecialchars(stripslashes($result["address"]));
 if ($address != "" && $address != " *" && $username != "SYS topic" && $username != "SYS topic reset" && substr($username,0,8) != "SYS dice" && $username != "SYS image" && $username != "SYS room" && $username != $address) $toaddress = " to <b>".$address."</b>";
@@ -136,7 +136,7 @@ $logpath = "./".C_LOG_DIR."/".$year."/".$month."/".$year.$month.$day.".php"  ;
 		fwrite($fp, sprintf("<?php echo("));
 		fwrite($fp, sprintf('$Charset'));
 		fwrite($fp, sprintf(") ?>"));
-		fwrite($fp, sprintf("\">\r\n<title>".$mess_time."</title>\r\n<style type='text/css'>\r\n<!--\r\nbody\r\n{ background-color: lightcyan;}\r\ntable\r\n{ font-family: arial; font-size:9pt;}\r\n-->\r\n</style>\r\n</head>\r\n<body>\r\n<center>\r\n<span style=\"font-weight:600; font-size:14pt; font-color:blue\">\r\n<hr>\r\nLog file generated on ".$mess_time." GMT<br>with Chat Log Mod - &copy; 2005-".date(Y)." - by <a href=mailto:ciprianmp@yahoo.com onMouseOver=\"window.status='Click to email author.'; return true;\">Ciprian Murariu</a>.\r\n<hr>\r\n</span>\r\n</center>"));
+		fwrite($fp, sprintf("\">\r\n<title>".$mess_time."</title>\r\n<style type='text/css'>\r\n<!--\r\nbody\r\n{ background-color: lightcyan;}\r\ntable\r\n{ font-family: arial; font-size:9pt;}\r\n-->\r\n</style>\r\n</head>\r\n<body>\r\n<center>\r\n<span style=\"font-weight:600; font-size:14pt; font-color:blue\">\r\n<hr>\r\nLog file generated on ".$mess_time." GMT<br />with Chat Log Mod - &copy; 2005-".date(Y)." - by <a href=mailto:ciprianmp@yahoo.com onMouseOver=\"window.status='Click to email author.'; return true;\" title=\"Click to email author\" target=_blank>Ciprian Murariu</a>.\r\n<hr>\r\n</span>\r\n</center>"));
 		fwrite($fp, sprintf("\r\n\r\n\r\n<!-- MESSAGES TABLE STARTS BELLOW -->\r\n\r\n<table border=1 cellspacing=0 cellpading=0>\r\n<tr style=\"font-weight:bold; color:blue; background-color=yellow\" align=\"center\">\r\n<td nowrap=\"nowrap\">Post Time</td>\r\n<td nowrap=\"nowrap\">Posted in (from) Room</td>\r\n<td nowrap=\"nowrap\">Sender (to Addressee)</td>\r\n<td>Message posted</td>\r\n</tr>"));
 	}
 $fp = fopen($logpath, "a") ;
@@ -262,7 +262,7 @@ $logpathu = "./logs/".$yearu."/".$monthu."/".$yearu.$monthu.$dayu.".php"  ;
 		fwrite($fpu, sprintf("<?php echo("));
 		fwrite($fpu, sprintf('$Charset'));
 		fwrite($fpu, sprintf(") ?>"));
-		fwrite($fpu, sprintf("\">\r\n<title>".$mess_timeu."</title>\r\n<style type='text/css'>\r\n<!--\r\nbody\r\n{ background-color: lightcyan;}\r\ntable\r\n{ font-family: arial; font-size:9pt;}\r\n-->\r\n</style>\r\n</head>\r\n<body>\r\n<center>\r\n<span style=\"font-weight:600; font-size:14pt; font-color:blue\">\r\n<hr>\r\nLog file generated on ".$mess_timeu." GMT<br>with Chat Log mod - &copy; 2005-".date(Y)." - by <a href=mailto:ciprianmp@yahoo.com onMouseOver=\"window.status='Click to email author.'; return true;\">Ciprian Murariu</a>.\r\n<hr>\r\n</span>\r\n</center>"));
+		fwrite($fpu, sprintf("\">\r\n<title>".$mess_timeu."</title>\r\n<style type='text/css'>\r\n<!--\r\nbody\r\n{ background-color: lightcyan;}\r\ntable\r\n{ font-family: arial; font-size:9pt;}\r\n-->\r\n</style>\r\n</head>\r\n<body>\r\n<center>\r\n<span style=\"font-weight:600; font-size:14pt; font-color:blue\">\r\n<hr>\r\nLog file generated on ".$mess_timeu." GMT<br />with Chat Log mod - &copy; 2005-".date(Y)." - by <a href=mailto:ciprianmp@yahoo.com? onMouseOver=\"window.status='Click to email author.'; return true;\" title=\"Click to email author\" target=_blank>Ciprian Murariu</a>.\r\n<hr>\r\n</span>\r\n</center>"));
 		fwrite($fpu, sprintf("\r\n\r\n\r\n<!-- MESSAGES TABLE STARTS BELLOW -->\r\n\r\n<table border=1 cellspacing=0 cellpading=0>\r\n<tr style=\"font-weight:bold; color:blue; background-color=yellow\" align=\"center\">\r\n<td nowrap=\"nowrap\">Post Time</td>\r\n<td nowrap=\"nowrap\">Posted in Room</td>\r\n<td nowrap=\"nowrap\">Sender</td>\r\n<td>Message posted</td>\r\n</tr>"));
 	}
 $fpu = fopen($logpathu, "a") ;

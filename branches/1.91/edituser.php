@@ -1,17 +1,17 @@
 <?php
 // Get the names and values for vars sent to this script
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
 };
 
 // Get the names and values for vars posted from the form bellow
-if (isset($HTTP_POST_VARS))
+if (isset($_POST))
 {
-	while(list($name,$value) = each($HTTP_POST_VARS))
+	while(list($name,$value) = each($_POST))
 	{
 		$$name = $value;
 	};
@@ -19,7 +19,7 @@ if (isset($HTTP_POST_VARS))
 
 // Fix a security hole
 if (isset($L) && !is_dir("./localization/".$L)) exit();
-if (isset($HTTP_COOKIE_VARS["CookieStatus"])) $status = $HTTP_COOKIE_VARS["CookieStatus"];
+if (isset($_COOKIE["CookieStatus"])) $status = $_COOKIE["CookieStatus"];
 
 require("./config/config.lib.php");
 require("./lib/release.lib.php");
@@ -94,7 +94,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 
 	if (!isset($Error))
 	{
-		$Latin1 = ($Charset == "iso-8859-1");
+		$Latin1 = ($Charset == "utf-8");
 		$PWD_Hash = md5(stripslashes($prev_PASSWORD));
 		if (!isset($GENDER)) $GENDER = "";
 		$showemail = (isset($SHOWEMAIL) && $SHOWEMAIL)? 1:0;
@@ -109,10 +109,9 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 			$DbLink->query("UPDATE ".C_REG_TBL." SET username='$U', latin1='$Latin1', password='$PWD_Hash', firstname='$FIRSTNAME', lastname='$LASTNAME', country='$COUNTRY', website='$WEBSITE', email='$EMAIL', showemail=$showemail, allowpopup=$allowpopup, reg_time=".time().", ip='$IP', gender='$GENDER', picture='$PICTURE', description='$DESCRIPTION', favlink='$FAVLINK', favlink1='$FAVLINK1', slang='$SLANG', colorname='$COLORNAME', avatar='$AVATARURL' WHERE username='$pmc_username'");
 // Patch to send an email to the User after changing username or password.
 // by Ciprian using Bob Dickow's registration patch.
-	if (C_EMAIL_USER)
+	if (($pmc_username != $U) || ($pmc_password != $prev_PASSWORD))
 	{
-		if (($pmc_username != $U) || ($pmc_password != $prev_PASSWORD))
-		{
+		include("./lib/mail_validation.lib.php");
 	     if (($GENDER & 3) == 1) {
 	       $sex = " male";
 	     } elseif (($GENDER & 3) == 2 ) {
@@ -128,12 +127,14 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 	     $tm = getdate();
 	     $dt = $tm[mon]."/".$tm[mday]."/".$tm[year];
 	     $tm = sprintf("%02.u:%02.u:%02.u",$tm[hours],$tm[minutes],$tm[seconds]);
+		if (C_EMAIL_USER)
+		{
 	     $emailMessage = "You have just changed important account info for "
      . APP_NAME ." at ". C_CHAT_URL." : (account affected: ".stripslashes($pmc_username).")\n\n"
 	     . "Here is your updated account info:\n\n"
 	     . "----------------------------------------------\n"
 	     . "New Username: ".stripslashes($U)."\n"
-		   . "New Password: ".stripslashes($prev_PASSWORD)."\n\n"
+		  . "New Password: ".stripslashes($prev_PASSWORD)."\n\n"
 	     . "----------------------------------------------\n"
 	     . "First name: ".stripslashes($FIRSTNAME)."\n"
 	     . "Last name: ".stripslashes($LASTNAME)."\n"
@@ -152,14 +153,59 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 	     . "----------------------------------------------\n"
 	     . "Please save this email for your usage.\n"
 	     . "Enjoy!";
+
+		$Headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
+		$Headers .= "X-Sender: <${Sender_email}> \r\n";
+		$Headers .= "X-Mailer: PHP/".phpversion()." \r\n";
+		$Headers .= "Return-Path: <${Sender_email}> \r\n";
+		$Headers .= "Date: ${mail_date} \r\n";
+		$Headers .= "Mime-Version: 1.0 \r\n";
+		$Headers .= "Content-Type: text/plain; charset=${Charset} \r\n";
+		$Headers .= "Content-Transfer-Encoding: 8bit \r\n";
 	     mail($EMAIL,"[".APP_NAME."] "
-	     . "Your account updated details",$emailMessage);
-			 if (C_ADMIN_EMAIL != "")
-			 {
-		     mail(C_ADMIN_EMAIL,"[".APP_NAME."] "
-		     . "".stripslashes($U)." account updated details (copy)",$emailMessage);
-			 }
+	     . "Your -".stripslashes($pmc_username)."- account updated details", $emailMessage, $Headers);
 	   };
+
+		if (C_ADMIN_EMAIL != "")
+		{
+	     $emailMessage = stripslashes($pmc_username)." has just changed his/her important account info for "
+     . APP_NAME ." at ". C_CHAT_URL." :\n\n"
+	     . "Here is the updated account info for ".stripslashes($pmc_username).":\n\n"
+	     . "----------------------------------------------\n"
+	     . "New Username: ".stripslashes($U)."\n"
+#		  . "New Password: ".stripslashes($prev_PASSWORD)."\n\n"
+		  . "New Password: (Not enabled by default for privacy concerns!)\n\n"
+	     . "----------------------------------------------\n"
+	     . "First name: ".stripslashes($FIRSTNAME)."\n"
+	     . "Last name: ".stripslashes($LASTNAME)."\n"
+	     . "Gender: $sex\n"
+	     . "Email: $EMAIL\n"
+	     . "Country: ".stripslashes($COUNTRY)."\n"
+	     . "WWW: ".stripslashes($WEBSITE)."\n"
+	     . "Display email address: $shweml\n"
+	     . "Spoken languages: ".stripslashes($SLANG)."\n"
+	     . "Description: ".stripslashes($DESCRIPTION)."\n"
+	     . "Favorite link 1: ".stripslashes($FAVLINK)."\n"
+	     . "Favorite link 2: ".stripslashes($FAVLINK1)."\n"
+	     . "Picture: ".stripslashes($PICTURE)."\n"
+	     . "Date of update: $dt\n"
+	     . "Time of update: $tm\n"
+	     . "IP address: $IP (".gethostbyaddr($IP).")\n"
+	     . "----------------------------------------------\n"
+	     . "Please save this email for your usage.\n"
+	     . "Enjoy!";
+		$Headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
+		$Headers .= "X-Sender: <${Sender_email}> \r\n";
+		$Headers .= "X-Mailer: PHP/".phpversion()." \r\n";
+		$Headers .= "Return-Path: <${Sender_email}> \r\n";
+		$Headers .= "Date: ${mail_date} \r\n";
+		$Headers .= "Mime-Version: 1.0 \r\n";
+		$Headers .= "Content-Type: text/plain; charset=${Charset} \r\n";
+		$Headers .= "Content-Transfer-Encoding: 8bit \r\n";
+
+		  mail(C_ADMIN_EMAIL,"[".APP_NAME."] "
+		  . "-".stripslashes($U)."- account updated details", $emailMessage, $Headers);
+		};
   };
 // End of patch to send an email to the User after registration.
 		}
@@ -449,7 +495,7 @@ if (COLOR_NAME)
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_6); ?> :</TD>
 			<TD VALIGN="TOP">
 <?php
-// Color Input Select mod by Alexander Eisele <xaex@mail.ru> & Ciprian
+// Color Input Select mod by Alexander Eisele <xaex@xeax.de> & Ciprian
 // Drop down list of colors
 $ColorList = COLORLIST;
 if (COLOR_FILTERS)

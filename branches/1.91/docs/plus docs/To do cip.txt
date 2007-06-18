@@ -1,10 +1,12 @@
+-posting links without a leading space hangs the input frame/chat - Alex?
+-runCMD - to return the old M content after using a click command - Ciprian
 -update the localizations - Ciprian - ongoing
 -Statistics mod - Mei Yung - ?
 -members page/profiles - Ciprian
--default color font stored in database not cookie - Ciprian
 -installer/setup - Ciprian
 -credits page - Ciprian
 -commands table & archiving/logging the commands used in chat as well - Ciprian
+-add the iplogs feature (log_IP.lib.php)
 - /ghost command: put the user into a ghost state (the ghost user and his posts cannot be seen in the room, he won't know about this, so he gives up and leave the chat - works when banning has no effect on a specific user; it also allow an admin/moder to go invisible in the chat);
 - add link for offline pms?
 - is there any tool available or planned to reset user passwords?
@@ -55,3 +57,4 @@ Done:
 - fix the pmpopup script error - done?
 -Is there a way to tie your profile color to your chat text color, and not just the nick? (based on Auggy's idea) - Ciprian - done
 - text cell valign top on messages (for smilies) - Ciprian - done
+-default color font stored in database not cookie - Ciprian ??? (too many connections - it will stay in cookie - no security issue) - done

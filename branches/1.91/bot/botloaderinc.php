@@ -69,12 +69,12 @@ $genderarray=array();
 $personarray=array();
 $person2array=array();
 
-if (!isset($HTTP_GET_VARS['fileid'])){
+if (!isset($_GET['fileid'])){
 	#deletebot();
 	$fileid=1;
 }
 else {
-	$fileid=$HTTP_GET_VARS['fileid'];
+	$fileid=$_GET['fileid'];
 }
 
 #deletejustbot();
@@ -100,8 +100,8 @@ ss_timing_stop("all");
 print "<br /><br /><font size='3' color='BLACK'>execution time: " . ss_timing_current("all");
 $avgts=$templatesinserted/ss_timing_current("all");
 $avgtm=$templatesinserted/((ss_timing_current("all"))/60);
-print "<br /><font size='3' color='BLACK'>Templates per second=$avgts<BR>";
-print "<font size='3' color='BLACK'>Templates per minute=$avgtm<BR>";
+print "<br /><font size='3' color='BLACK'>Templates per second=$avgts<br />";
+print "<font size='3' color='BLACK'>Templates per minute=$avgtm<br />";
 
 
 ?>

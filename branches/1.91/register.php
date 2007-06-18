@@ -3,18 +3,18 @@
 // Jose' Carlos Pereira <phpHeaven@abismo.org>
 
 // Get the names and values for vars sent by index.lib.php
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
 };
 
 // Get the names and values for post vars
-if (isset($HTTP_POST_VARS))
+if (isset($_POST))
 {
-	while(list($name,$value) = each($HTTP_POST_VARS))
+	while(list($name,$value) = each($_POST))
 	{
 		$$name = $value;
 	};
@@ -28,6 +28,7 @@ require("./lib/release.lib.php");
 require("./localization/languages.lib.php");
 require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
+include("./lib/mail_validation.lib.php");
 
 // Special cache instructions for IE5+
 $CachePlus	= "";
@@ -48,7 +49,7 @@ $DbLink = new DB;
 // Check for valid entries
 if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 {
-	if (C_NO_SWEAR == 1) include("./lib/swearing.lib.php");
+	if (C_NO_SWEAR) include("./lib/swearing.lib.php");
 	if (trim($U) == "")
 	{
 		$Error = L_ERR_USR_5;
@@ -57,7 +58,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 	{
 		$Error = L_ERR_USR_16a;
 	}
-	else if(C_NO_SWEAR == 1 && checkwords($U, true))
+	else if(C_NO_SWEAR && checkwords($U, true))
 	{
 		$Error = L_ERR_USR_18;
 	}
@@ -100,7 +101,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 		}
 		else
 		{
-			$Latin1 = ($Charset == "iso-8859-1");
+			$Latin1 = ($Charset == "utf-8");
 			if (!isset($GENDER)) $GENDER = "";
 			$showemail = (isset($SHOWEMAIL) && $SHOWEMAIL)? 1:0;
 			$allowpopup = 1;
@@ -108,8 +109,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 
 			if (C_EMAIL_PASWD)		// Define the password
 			{
-				include("./lib/mail_validation.lib.php");
-				$pmc_password = gen_password(C_EMAIL_PASWD);
+				$pmc_password = gen_password();
 			};
 			$PWD_Hash = md5(stripslashes($pmc_password));
 			// Send e-mail
@@ -145,8 +145,9 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      $emailMessage = "New user registration notification for "
      . APP_NAME ." at ". C_CHAT_URL." :\n\n"
      . "----------------------------------------------\n"
-     . "Username: ".stripslashes($U)."\n\n"
-     . "Password: ".stripslashes($pmc_password)."\n"
+     . "Username: ".stripslashes($U)."\n"
+#     . "Password: ".stripslashes($pmc_password)."\n"
+     . "Password: (Not enabled by default, for privacy concerns!)\n\n"
      . "----------------------------------------------\n"
      . "First name: ".stripslashes($FIRSTNAME)."\n"
      . "Last name: ".stripslashes($LASTNAME)."\n"
@@ -164,9 +165,18 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      . "Time of registration: $tm\n"
      . "IP address: $IP (".gethostbyaddr($IP).")\n"
      . "----------------------------------------------";
+		$Headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
+		$Headers .= "X-Sender: <${Sender_email}> \r\n";
+		$Headers .= "X-Mailer: PHP/".phpversion()." \r\n";
+		$Headers .= "Return-Path: <${Sender_email}> \r\n";
+		$Headers .= "Date: ${mail_date} \r\n";
+		$Headers .= "Mime-Version: 1.0 \r\n";
+		$Headers .= "Content-Type: text/plain; charset=${Charset} \r\n";
+		$Headers .= "Content-Transfer-Encoding: 8bit \r\n";
      mail(C_ADMIN_EMAIL,"[".APP_NAME."] "
-     . "New User Registration Notification",$emailMessage);
+     . "New User -".stripslashes($U)."- Registration notification", $emailMessage, $Headers);
 // end of patch to send an email to the Admin at the time of new user registration.
+	};
 
 // Patch to send an email to the User after registration.
 // by Ciprian using Bob Dickow's one above.
@@ -176,7 +186,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      . APP_NAME ." at ". C_CHAT_URL." :\n\n"
      . "----------------------------------------------\n"
      . "Username: ".stripslashes($U)."\n"
-	   . "Password: ".stripslashes($pmc_password)."\n\n"
+	  . "Password: ".stripslashes($pmc_password)."\n\n"
      . "----------------------------------------------\n"
      . "First name: ".stripslashes($FIRSTNAME)."\n"
      . "Last name: ".stripslashes($LASTNAME)."\n"
@@ -195,11 +205,18 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      . "----------------------------------------------\n"
      . "Please save this email for your usage.\n"
      . "Thank you for joining!";
+		$Headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
+		$Headers .= "X-Sender: <${Sender_email}> \r\n";
+		$Headers .= "X-Mailer: PHP/".phpversion()." \r\n";
+		$Headers .= "Return-Path: <${Sender_email}> \r\n";
+		$Headers .= "Date: ${mail_date} \r\n";
+		$Headers .= "Mime-Version: 1.0 \r\n";
+		$Headers .= "Content-Type: text/plain; charset=${Charset} \r\n";
+		$Headers .= "Content-Transfer-Encoding: 8bit \r\n";
      mail($EMAIL,"[".APP_NAME."] "
-     . "Your account details",$emailMessage);
-  };
+     . "Your -".stripslashes($U)."- account details", $emailMessage, $Headers);
+  	};
 // End of patch to send an email to the User after registration.
-		};
 			};
 		}
 	}
@@ -237,7 +254,7 @@ if ($done)
 		?>
 		windowHandle.document.forms['Params'].elements['pmc_password'].value = regform.elements['pmc_password'].value;
 		<?php
-	};
+	}
 	if (isset($COLORNAME))
 	{
 		$C = $COLORNAME;
@@ -300,14 +317,14 @@ if(isset($Error))
 			<!-- Avatar System Start. Splits above original line and inserts the following: -->
                         <?php
                         if (empty($avatar)) {
-                          $AVATARURL = C_AVA_RELPATH . C_DEF_AVATAR;
+                          if (empty($AVATARURL)) $AVATARURL = C_AVA_RELPATH . C_DEF_AVATAR;
                           $avatar = $AVATARURL;
                         }
                         ?>
-   		                <a href="avatar.php?User=<?php echo($AUTH_USERNAME);?>&L=<?php echo($L); ?>&avatar=<?php echo($AVATARURL); ?>&From=register.php&Link=$Link" onMouseOver="window.status='<?php echo(L_SEL_NEW_AV) ?>.'; return true;" title="<?php echo(L_SEL_NEW_AV); ?>" target="_self">
+  		                <a href="avatar.php?User=<?php echo($AUTH_USERNAME);?>&L=<?php echo($L); ?>&avatar=<?php echo($AVATARURL); ?>&From=register.php&Link=$Link" onMouseOver="window.status='<?php echo(L_SEL_NEW_AV) ?>.'; return true;" title="<?php echo(L_SEL_NEW_AV); ?>" target="_self">
                       	        <img src="<?php echo($avatar); ?>" align="center" border="0" width="<?php echo(C_AVA_WIDTH);?>" height="<?php echo(C_AVA_HEIGHT);?>" alt="<?php echo(L_SEL_NEW_AV); ?>"></a>&nbsp;
-                                <input type="hidden" name="AVATARURL" value="<?php echo($avatar); ?>">
-                                <input type="hidden" name="avatar" value="<?php echo($avatar); ?>">
+							<INPUT type="hidden" name="AVATARURL" value="<? echo($avatar);?>">
+                       <input type="hidden" name="avatar" value="<?php echo($avatar); ?>">
 			</TD>
 		</TR>
                         <?php
@@ -446,7 +463,7 @@ if (COLOR_NAME)
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_6); ?> :</TD>
 			<TD VALIGN="TOP">
 <?php
-// Color Input Select mod by Alexander Eisele <xaex@mail.ru> & Ciprian
+// Color Input Select mod by Alexander Eisele <xaex@xeax.de> & Ciprian
 // Drop down list of colors
 $ColorList = COLORLIST;
 if (COLOR_FILTERS)

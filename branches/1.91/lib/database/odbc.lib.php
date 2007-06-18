@@ -20,7 +20,7 @@ class DB
 
 	function halt($msg)
 	{
-		printf("</td></tr></table><b>Database error:</b> %s<br>\n", $msg);
+		printf("</td></tr></table><b>Database error:</b> %s<br />\n", $msg);
 		printf("<b>ODBC Error</b>: %s (%s)<br />\n",
 		$this->Errno,
 		$this->Error);
@@ -49,7 +49,7 @@ class DB
 
 		$this->connect();
 
-		# printf("<br>Debug: query = %s<br>\n", $Query_String);
+		# printf("<br />Debug: query = %s<br />\n", $Query_String);
 
 		# rei@netone.com.br suggested that we use this instead of the odbc_exec().
 		# He is on NT, connecting to a Unix MySQL server with ODBC. -- KK

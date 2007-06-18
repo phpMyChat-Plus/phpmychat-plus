@@ -1,26 +1,25 @@
 <?php
-// File : romanian/localized.tutorial.php - plus version (17.09.2006 - rev.3)
+// File : romanian/localized.tutorial.php - plus version (26.05.2007 - rev.5)
 //Translated and updated to Plus version by Ciprian Murariu <ciprianm@yahoo.com>
 
 // Get the names and values for vars sent by the script that called this one
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
 };
 
-// Color Input Box mod by Ciprian - you MUST delete this line if you uninstall this mod
 require("./lib/index.lib.php");
-if (isset($HTTP_COOKIE_VARS["CookieStatus"])) $CookieStatus = $HTTP_COOKIE_VARS["CookieStatus"];
+if (isset($_COOKIE["CookieStatus"])) $CookieStatus = $_COOKIE["CookieStatus"];
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML>
 
 <HEAD>
-<TITLE>Tutorial în limba românã (incomplet) pentru <?php echo(APP_NAME." - ".APP_VERSION); ?></TITLE>
+<TITLE>Tutorial &icirc;n limba rom&acirc;n&#259 (incomplet) pentru <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?></TITLE>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-2">
 <STYLE>
 A.topLink
@@ -45,20 +44,21 @@ A.topLink:hover, A.topLink:active
 </HEAD>
 
 <BODY BGCOLOR="#CCCCFF">
-
-<P><A NAME="top"></P>
+<P></P>
 <TABLE BORDER="5" CELLPADDING="5" ALIGN="center">
 <TR>
-	<TD ALIGN="center"><FONT SIZE="+2">- Tutorial de utilizare a <?php echo(APP_NAME." - ".APP_VERSION); ?> -</FONT><br /><I>Traducerea ºi adaptarea de Ciprian Murariu (ciprianmp@yahoo.com) - Bucureºti, &copy; 2005-<?php echo(date(Y)); ?></I></TD>
+	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- Tutorial de utilizare a <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -</FONT><br /><I>Traducerea &#351;i adaptarea de <a href="mailto:ciprianmp@yahoo.com?subject=phpMyChat%20Plus%20translation" onMouseOver="window.status='Click to email author.'; return true;" title="Click to email author" target=_blank>Ciprian Murariu</a> - Bucure&#351;ti, &copy; 2005-<?php echo(date(Y)); ?></I></B></TD>
+</TR>
+</TABLE><br /><br />
+<P><A NAME="top"></P>
+<TABLE BORDER="3" CELLPADDING="3">
+<TR>
+	<TD><FONT SIZE="+2">Cuprinsul acestui tutorial</FONT></TD>
 </TR>
 </TABLE><br />
 
-<P CLASS="redText">
-Atentie: Utilizatorii Netscape trebuie sã îºi defineascã limba românã ca mod automat de encoding, altfel fiecare caracter din mesaje va fi inlocuit cu un '?'. Aceasta se poate face astfel: View/CharacterSet/Românã Auto-Detect, apoi View/CharacterSet/SetDefault.
-</P>
-
 <?php
-if (C_MULTI_LANG == "1")
+if (C_MULTI_LANG)
 {
 	?>
 	<A HREF="#language" CLASS="topLink">Alegerea limbii</A><br />
@@ -66,8 +66,8 @@ if (C_MULTI_LANG == "1")
 }
 ?>
 <A HREF="#login" CLASS="topLink">Logarea la Chat</A><br />
-<A HREF="#register" CLASS="topLink">Înregistrarea</A><br />
-<A HREF="#modProfile" CLASS="topLink">Modificarea<?php if (C_SHOW_DEL_PROF == "1") echo("/ºtergerea"); ?> profilului propriu</A><br />
+<A HREF="#register" CLASS="topLink">&Icirc;nregistrarea</A><br />
+<A HREF="#modProfile" CLASS="topLink">Modificarea<?php if (C_SHOW_DEL_PROF) echo("/&#351;tergerea"); ?> profilului propriu</A><br />
 <?php
 if (C_VERSION == "2")
 {
@@ -78,22 +78,22 @@ if (C_VERSION == "2")
 if ($Ver == "H")
 {
 	?>
-	<A HREF="#connection_state" CLASS="topLink">Explicarea stãrii conexiunii</A><br />
+	<A HREF="#connection_state" CLASS="topLink">Explicarea st&#259rii conexiunii</A><br />
 	<?php
 }
 ?>
 <A HREF="#sending" CLASS="topLink">Trimiterea Mesajelor</A><br />
 <A HREF="#users_list" CLASS="topLink">Explicarea Listei de Utilizatori</A><br />
-<A HREF="#exit" CLASS="topLink">Pãrãsirea unei Camere de chat</A><br />
-<A HREF="#users_popup" CLASS="topLink">Cum afli cine e pe chat, fãrã a te loga</A><br />
+<A HREF="#exit" CLASS="topLink">P&#259r&#259sirea unei Camere de chat</A><br />
+<A HREF="#users_popup" CLASS="topLink">Cum afli cine e pe chat, f&#259r&#259 a te loga</A><br />
 <P>
 <A HREF="#customize" CLASS="topLink">Personalizarea aspectului Camerei de Chat</A><br />
 <P>
-<A HREF="#commands" CLASS="topLink">Opþiuni ºi Comenzi:</A><br />
+<A HREF="#commands" CLASS="topLink">Op&#355;iuni &#351;i Comenzi:</A><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#help" CLASS="topLink">Comanda Ajutor</A><br />
 <!-- Avatar System Start. -->
 <?php
-if (C_NUM_AVATARS != 0) {
+if (C_USE_AVATARS) {
 ?>
 	&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#avatars" CLASS="topLink">Avatar-uri</A><br />
 <?php
@@ -101,10 +101,10 @@ if (C_NUM_AVATARS != 0) {
 ?>
 <!-- Avatar System End.  -->
 <?php
-if (C_USE_SMILIES == "1")
+if (C_USE_SMILIES)
 {
 	?>
-	&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#smilies" CLASS="topLink">Zâmbete grafice (Emoticons, Smilies)</A><br />
+	&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#smilies" CLASS="topLink">Z&acirc;mbete grafice (Emoticons, Smilies)</A><br />
 	<?php
 }
 if (C_HTML_TAGS_KEEP != "none")
@@ -117,10 +117,10 @@ if (C_HTML_TAGS_KEEP != "none")
 <!-- Color Input Box mod by Ciprian start -->
 &nbsp&nbsp&nbsp&nbsp<A HREF="#colors" CLASS="topLink"><?php echo(L_COL_TUT); ?></A><br />
 <!-- Color Input Box mod by Ciprian end -->
-&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#invite" CLASS="topLink">Invitarea unui utilizator sã intre în camera ta de chat</A><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#changeroom" CLASS="topLink">Trecerea dintr-o camerã de chat într-alta</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#invite" CLASS="topLink">Invitarea unui utilizator s&#259 intre &icirc;n camera ta de chat</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#changeroom" CLASS="topLink">Trecerea dintr-o camer&#259 de chat &icirc;ntr-alta</A><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#private" CLASS="topLink">Mesaje Private</A><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#actions" CLASS="topLink">Acþiuni</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#actions" CLASS="topLink">Ac&#355;iuni</A><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#ignore" CLASS="topLink">Ignorarea altor Utilizatori</A><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#whois" CLASS="topLink">Aflarea datelor publice ale altor Utilizatori</A><br />
 <?php
@@ -132,8 +132,8 @@ if (C_SAVE != "0")
 }
 ?>
 <P>
-<A HREF="#moderator" CLASS="topLink">Comenzi speciale numai pentru moderatori ºi/sau administrator:</A><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#announce" CLASS="topLink">Trimiterea unui anunþ</A><br />
+<A HREF="#moderator" CLASS="topLink">Comenzi speciale numai pentru moderatori &#351;i/sau administrator:</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#announce" CLASS="topLink">Trimiterea unui anun&#355;</A><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#kick" CLASS="topLink">Eliminarea unui Utilizator</A><br />
 <?php
 if (C_BANISH != "0")
@@ -150,13 +150,13 @@ if (C_BANISH != "0")
 
 
 <?php
-if (C_MULTI_LANG == "1")
+if (C_MULTI_LANG)
 {
 	?>
 	<P>
 	<FONT SIZE="+1"><A NAME="language"><B>Alegerea limbii:</B></A></FONT>
 	<P>
-	Poþi alege una dintre limbile în care <?php echo(APP_NAME); ?> a fost tradus, apãsând pe unul dintre steagurile de pe prima paginã. În exemplul de mai jos, un utilizator îºi selecteaza limba Francezã:
+	Po&#355;i alege una dintre limbile &icirc;n care <?php echo(APP_NAME); ?> a fost tradus, ap&#259s&acirc;nd pe unul dintre steagurile de pe prima pagin&#259. &Icirc;n exemplul de mai jos, un utilizator &icirc;&#351;i selecteaza limba Francez&#259:
 	<P ALIGN="center">
 	<IMG SRC="images/tutorials/flags.gif" HEIGHT="44" WIDTH="424" ALT="Steaguri pentru selectarea limbii">
 	<br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
@@ -168,20 +168,20 @@ if (C_MULTI_LANG == "1")
 <P>
 <FONT SIZE="+1"><A NAME="login"><B>Logarea la chat:</B></A></FONT>
 <P>
-Dacã te-ai înregistrat deja, pur ºi simplu introdu-þi porecla ºi parola. Apoi selecteazã în ce camerã de chat ai vrea sã intri ºi apasã butonul Chat.<br />
+Dac&#259 te-ai &icirc;nregistrat deja, pur &#351;i simplu introdu-&#355;i porecla &#351;i parola. Apoi selecteaz&#259 &icirc;n ce camer&#259 de chat ai vrea s&#259 intri &#351;i apas&#259 butonul '<?php echo(L_SET_14); ?>'.<br />
 <?php
-if (C_REQUIRE_REGISTER == "1")
+if (C_REQUIRE_REGISTER)
 {
 	?>
 	<P>
-	Altfel, va trebui sã te <A HREF="#register">înregistrezi</A> mai întâi.
+	Altfel, va trebui s&#259 te <A HREF="#register">&icirc;nregistrezi</A> mai &icirc;nt&acirc;i.
 	<?php
 }
 else
 {
 	?>
 	<P>
-	Altfel poti sã te <A HREF="#register">înregistrezi</A> mai întâi sau sã intri pe Chat cu porecla aleasã, numai cã nu þi se va rezerva acea poreclã (un alt utilizator va putea folosi aceeaºi porecla dupa ce vei ieºi de pe Chat).
+	Altfel poti s&#259 te <A HREF="#register">&icirc;nregistrezi</A> mai &icirc;nt&acirc;i sau s&#259 intri pe Chat cu porecla aleas&#259, numai c&#259 nu &#355;i se va rezerva acea porecl&#259 (un alt utilizator va putea folosi aceea&#351;i porecla dupa ce vei ie&#351;i de pe Chat).
 	<?php
 }
 ?>
@@ -189,21 +189,21 @@ else
 <hr />
 
 <P>
-<FONT SIZE="+1"><A NAME="register"><B>Pentru înregistrare:</B></A></FONT>
+<FONT SIZE="+1"><A NAME="register"><B>Pentru &icirc;nregistrare:</B></A></FONT>
 <P>
-Dacã nu te-ai înregistrat deja, <?php if (C_REQUIRE_REGISTER == "0") echo("ºi vrei sã o faci"); ?>, alege opþiunea Înregistreazã-te. Va apãrea o micã fereastrã pop-up.
+Dac&#259 nu te-ai &icirc;nregistrat deja<?php if (!C_REQUIRE_REGISTER) echo(" &#351;i vrei s&#259 o faci"); ?>, alege op&#355;iunea &Icirc;nregistreaz&#259-te. Va ap&#259rea o mic&#259 fereastr&#259 pop-up.
 <P>
 <UL>
-	<LI>Mai întâi, alege-þi o poreclã<?php if (!C_EMAIL_PASWD) echo(" ºi o parolã"); ?> în câmpurile (cãsuþele) corespunzãtoare. Porecla aleasã va fi numele cu care vei fi arãtat în mod automat pe chat. Nu poate conþine spaþii, virgule sau backslash-uri (\).
-<?php if (C_NO_SWEAR == "1") echo(" Nu este permisã utilizarea \"cuvintelor obscene\"."); ?>
-	<LI>Apoi, introdu-þi prenumele, numele de familie ºi adresa de email. Pentru a te putea înregistra pe chat, aceste informaþii sunt obligatorii. Informaþia privind sexul este opþionalã (deºi, în funcþie de aceastã alegere, o micã imagine te va particulariza pe chat ca bãiat sau fatã).
-	<LI>Dacã ai o paginã personalã, poþi sã introduci URL-ul pentru a fi vizitatã ºi de ceilalþi utilizatori.
-	<LI>Câmpul Limba poate ajuta pe ceilalti în discuþiile viitoare cu tine. Ei vor sti în ce limbã sa þi se adreseze.
-	<LI>În cele din urmã, dacã vrei ca ceilalþi participanþi sã-þi cunoascã adresa de email, bifeazã cãsuþa de lângã expresia "Aratã e-mailul la comanda /whois". Dacã nu vrei sã-þi fie cunoscut emailul, lasã cãsuþa nebifatã.
-	<LI>Apoi, apasã butonul Înregistreaza-te ºi contul îþi va fi creat. Pentru a te opri fãrã sã te înregistrezi, apasã Închide.
+	<LI>Mai &icirc;nt&acirc;i, alege-&#355;i o porecl&#259<?php if (!C_EMAIL_PASWD) echo(" &#351;i o parol&#259"); ?> &icirc;n c&acirc;mpurile (c&#259su&#355;ele) corespunz&#259toare. Porecla aleas&#259 va fi numele cu care vei fi ar&#259tat &icirc;n mod automat pe chat. Nu poate con&#355;ine spa&#355;ii, virgule sau backslash-uri (\).
+<?php if (C_NO_SWEAR) echo(" Nu este permis&#259 utilizarea \"cuvintelor obscene\"."); ?>
+	<LI>Apoi, introdu-&#355;i prenumele, numele de familie &#351;i adresa de email. Pentru a te putea &icirc;nregistra pe chat, aceste informa&#355;ii sunt obligatorii. Informa&#355;ia privind sexul este op&#355;ional&#259 (de&#351;i, &icirc;n func&#355;ie de aceast&#259 alegere, o mic&#259 imagine te va particulariza pe chat ca b&#259iat sau fat&#259).
+	<LI>Dac&#259 ai o pagin&#259 personal&#259, po&#355;i s&#259 introduci URL-ul pentru a fi vizitat&#259 &#351;i de ceilal&#355;i utilizatori.
+	<LI>C&acirc;mpul Limba poate ajuta pe ceilalti &icirc;n discu&#355;iile viitoare cu tine. Ei vor sti &icirc;n ce limb&#259 sa &#355;i se adreseze.
+	<LI>&Icirc;n cele din urm&#259, dac&#259 vrei ca ceilal&#355;i participan&#355;i s&#259-&#355;i cunoasc&#259 adresa de email, bifeaz&#259 c&#259su&#355;a de l&acirc;ng&#259 expresia "Arat&#259 e-mailul la comanda /whois". Dac&#259 nu vrei s&#259-&#355;i fie cunoscut emailul, las&#259 c&#259su&#355;a nebifat&#259.
+	<LI>Apoi, apas&#259 butonul &Icirc;nregistreaza-te &#351;i contul &icirc;&#355;i va fi creat. Pentru a te opri f&#259r&#259 s&#259 te &icirc;nregistrezi, apas&#259 &Icirc;nchide.
 </UL>
 <P>
-<A NAME="modProfile"></A>Bineînþeles, utilizatorii care s-au înregistrat îºi vor putea modifica<?php if (C_SHOW_DEL_PROF == "1") echo("/ºterge"); ?> profilul personal apãsând pe <?php echo((C_SHOW_DEL_PROF == "0" ? "butonul corespunzãtor" : "butoanele corespunzãtoare")); ?>.<br />
+<A NAME="modProfile"></A>Bine&icirc;n&#355;eles, utilizatorii care s-au &icirc;nregistrat &icirc;&#351;i vor putea modifica<?php if (C_SHOW_DEL_PROF) echo("/&#351;terge"); ?> profilul personal ap&#259s&acirc;nd pe <?php echo((!C_SHOW_DEL_PROF ? "butonul corespunz&#259tor" : "butoanele corespunz&#259toare")); ?>.<br />
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
@@ -213,11 +213,11 @@ if (C_VERSION == "2")
 {
 	?>
 	<P>
-	<FONT SIZE="+1"><A NAME="create_room"><B>Pentru a crea o camerã:</B></A></FONT>
+	<FONT SIZE="+1"><A NAME="create_room"><B>Pentru a crea o camer&#259:</B></A></FONT>
 	<P>
-	Numai utilizatorii înregistraþi pot crea camere. Camerele private vor putea fi accesate numai de cãtre utilizatorii care cunosc numele camerei ºi nu vor fi vãzuþi decât de cãtre participanþii din camera respectivã.<br />
+	Numai utilizatorii &icirc;nregistra&#355;i pot crea camere. Camerele private vor putea fi accesate numai de c&#259tre utilizatorii care cunosc numele camerei &#351;i nu vor fi v&#259zu&#355;i dec&acirc;t de c&#259tre participan&#355;ii din camera respectiv&#259.<br />
 	<P>
-	Numele camerei nu poate conþine virgule sau backslash-uri (\).<?php if (C_NO_SWEAR == "1") echo(" Nu este permisã utilizarea \"cuvintelor obscene\"."); ?>
+	Numele camerei nu poate con&#355;ine virgule sau backslash-uri (\).<?php if (C_NO_SWEAR) echo(" Nu este permis&#259 utilizarea \"cuvintelor obscene\"."); ?>
 	<br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 	<P>
 	<hr />
@@ -227,17 +227,17 @@ if ($Ver == "H")
 {
 	?>
 	<P>
-	<FONT SIZE="+1"><A NAME="connection_state"><B>Explicarea stãrii conexiunii:</B></A></FONT>
+	<FONT SIZE="+1"><A NAME="connection_state"><B>Explicarea st&#259rii conexiunii:</B></A></FONT>
 	<P>
-	Un semn reprezentând starea conexiunii tale este afiºat în colþul din dreapta sus al ecranului. Poate arãta în trei feluri:
+	Un semn reprezent&acirc;nd starea conexiunii tale este afi&#351;at &icirc;n col&#355;ul din dreapta sus al ecranului. Poate ar&#259ta &icirc;n trei feluri:
 	<P>
 	<UL>
-		<LI><IMG SRC="images/connectOff.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Fãrã conexiune"> când nu e nevoie de nici o conexiune;
-		<LI><IMG SRC="images/connectOn.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Conectat"> când e stabilitã o conexiune;
-		<LI><IMG SRC="images/connectError.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Conectare eºuatã"> când conexiunea a eºuat.
+		<LI><IMG SRC="images/connectOff.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="F&#259r&#259 conexiune"> c&acirc;nd nu e nevoie de nici o conexiune;
+		<LI><IMG SRC="images/connectOn.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Conectat"> c&acirc;nd e stabilit&#259 o conexiune;
+		<LI><IMG SRC="images/connectError.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Conectare e&#351;uat&#259"> c&acirc;nd conexiunea a e&#351;uat.
 	</UL>
 	<P>
-	În cel de-al treilea caz, apãsarea "butonului" roºu va lansa o nouã încercare de conectare (refresh).
+	&Icirc;n cel de-al treilea caz, ap&#259sarea "butonului" ro&#351;u va lansa o nou&#259 &icirc;ncercare de conectare (refresh).
 	<br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 	<P>
 	<hr />
@@ -248,23 +248,23 @@ if ($Ver == "H")
 <P>
 <FONT SIZE="+1"><A NAME="sending"><B>Trimiterea mesajelor:</B></A></FONT>
 <P>
-Pentru a afiºa un mesaj în camera de chat, tasteazã textul în cãsuþa text din colþul stanga jos ºi apasã tasta Enter/Return pentru a-l trimite. Mesajele tuturor utilizatorilor se vor derula în fereastra de chat.<br />
-<?php if (C_NO_SWEAR == "1") echo("Þineþi cont cã \"înjurãturile\" vor fi înlocuite cu simboluri arbitrare de tipul \"@#$%\"."); ?>
+Pentru a afi&#351;a un mesaj &icirc;n camera de chat, tasteaz&#259 textul &icirc;n c&#259su&#355;a text din col&#355;ul stanga jos &#351;i apas&#259 tasta Enter/Return pentru a-l trimite. Mesajele tuturor utilizatorilor se vor derula &icirc;n fereastra de chat.<br />
+<?php if (C_NO_SWEAR) echo("&#354;ine&#355;i cont c&#259 \"&icirc;njur&#259turile\" vor fi &icirc;nlocuite cu simboluri arbitrare de tipul \"@#$%\"."); ?>
 <P>
-Poþi schimba culoarea textului afiºat alegând o altã culoare din lista de culori din dreapta cãsuþei pentru introducerea textului. Anumite culori (roºu, albastru) pot fi rezervate numai utilizatorilor cu drepturi speciale (administratori, moderatori).
+Po&#355;i schimba culoarea textului afi&#351;at aleg&acirc;nd o alt&#259 culoare din lista de culori din dreapta c&#259su&#355;ei pentru introducerea textului. Anumite culori (ro&#351;u, albastru) pot fi rezervate numai utilizatorilor cu drepturi speciale (administratori, moderatori).
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
 
 <P>
-<FONT SIZE="+1"><A NAME="users_list"><B>Explicarea listei de utilizatori (nu ºi pentru fereastra tip popup):</B></A></FONT>
+<FONT SIZE="+1"><A NAME="users_list"><B>Explicarea listei de utilizatori (nu &#351;i pentru fereastra tip popup):</B></A></FONT>
 <P>
 <OL>
-	Au fost definite douã reguli de bazã pentru lista de utilizatori:<br />
-	<LI>o micã imagine reprezentând sexul (bãiat sau fatã) este afiºatã înaintea poreclei unui utilizator înregistrat (apãsând pe acea imagine va lansa comanda <A HREF="#whois">whois popup</A>, deschizând un popup cu informaþii despre profilul utilizatorului respectiv), în timp ce utilizatorii neînregistraþi, vor avea doar un spaþiu înaintea poreclei;<br />
-	<LI>porecla administratorului sau a moderatorilor va fi afiºatã cu caractere italice <I>(înclinate)</I>.
+	Au fost definite dou&#259 reguli de baz&#259 pentru lista de utilizatori:<br />
+	<LI>o mic&#259 imagine reprezent&acirc;nd sexul (b&#259iat sau fat&#259) este afi&#351;at&#259 &icirc;naintea poreclei unui utilizator &icirc;nregistrat (ap&#259s&acirc;nd pe acea imagine va lansa comanda <A HREF="#whois">whois popup</A>, deschiz&acirc;nd un popup cu informa&#355;ii despre profilul utilizatorului respectiv), &icirc;n timp ce utilizatorii ne&icirc;nregistra&#355;i, vor avea doar un spa&#355;iu &icirc;naintea poreclei;<br />
+	<LI>porecla administratorului sau a moderatorilor va fi afi&#351;at&#259 cu caractere italice <I>(&icirc;nclinate)</I>.
 </OL>
-<P><I>Spre exemplificare</I>, în imaginea de mai jos poþi înþelege urmãtoarele:
+<P><I>Spre exemplificare</I>, &icirc;n imaginea de mai jos po&#355;i &icirc;n&#355;elege urm&#259toarele:
 <TABLE BORDER=0 CELLSPACING=10>
 <TR>
 	<TD>
@@ -273,8 +273,8 @@ Poþi schimba culoarea textului afiºat alegând o altã culoare din lista de culori
 	<TD>
 	<UL>
 		<LI>Nicolas este administrator sau unul dintre moderatorii camerei phpMyChat;<br /><br />
-		<LI>alien (de sex necunoscut), Jezek2 ºi Caridad sunt utilizatori înregistraþi, fãrã "extra power" pentru camera phpMyChat;<br /><br />
-		<LI>lolo este un simplu utilizator neînregistrat (vizitator, guest).
+		<LI>alien (de sex necunoscut), Jezek2 &#351;i Caridad sunt utilizatori &icirc;nregistra&#355;i, f&#259r&#259 "extra power" pentru camera phpMyChat;<br /><br />
+		<LI>lolo este un simplu utilizator ne&icirc;nregistrat (vizitator, guest).
 	</UL>
 	</TD>
 </TR>
@@ -284,28 +284,28 @@ Poþi schimba culoarea textului afiºat alegând o altã culoare din lista de culori
 <hr />
 
 <P>
-<FONT SIZE="+1"><A NAME="exit"><B>Pãrãsirea unei camere de chat:</B></A></FONT>
+<FONT SIZE="+1"><A NAME="exit"><B>P&#259r&#259sirea unei camere de chat:</B></A></FONT>
 <P>
-Pentru a pãrãsi camera, fã click pe "Ieºire". Poþi face acelaºi lucru utilizând comenzile de mai jos în cãsuþa pentru mesaje (acest lucru poate fi util mai ales pentru cazul în care mouse-ul nu rãspunde la comenzi):<br />
-/exit<br>
-/bye<br>
-/quit<br>
-Oricare dintre aceste comenzi pot fi completate cu un mesaj pe care doriþi sã îl trimiteþi înaintea ieºirii din camerã.
+Pentru a p&#259r&#259si camera, f&#259 click pe "Ie&#351;ire". Po&#355;i face acela&#351;i lucru utiliz&acirc;nd comenzile de mai jos &icirc;n c&#259su&#355;a pentru mesaje (acest lucru poate fi util mai ales pentru cazul &icirc;n care mouse-ul nu r&#259spunde la comenzi):<br />
+/exit<br />
+/bye<br />
+/quit<br />
+Oricare dintre aceste comenzi pot fi completate cu un mesaj pe care dori&#355;i s&#259 &icirc;l trimite&#355;i &icirc;naintea ie&#351;irii din camer&#259.
 <I>Exemplu :</I> /quit La revedere!
 <P>
-va trimite mesajul "La revedere!" pentru a fi citit de cãtre ceilalþi participanþi, iar apoi te va scoate din camerã.
+va trimite mesajul "La revedere!" pentru a fi citit de c&#259tre ceilal&#355;i participan&#355;i, iar apoi te va scoate din camer&#259.
 
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
 
 <P>
-<FONT SIZE="+1"><A NAME="users_popup"><B>Cum afli cine e pe chat, fãrã a te loga:</B></A></FONT>
+<FONT SIZE="+1"><A NAME="users_popup"><B>Cum afli cine e pe chat, f&#259r&#259 a te loga:</B></A></FONT>
 <P>
-Poþi apãsa pe link-ul din pagina de start care aratã numãrul de utilizatori conectaþi pe chat, sau, dacã ai intrat deja în camera de chat, apasã pe imaginea <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="L_DETACH"> din colþul dreapta-sus (sub Ieºire) pentru a deschide o fereastrã separatã ce va afiºa lista utilizatorilor conectati ºi camerele în care se aflã aceºtia, actualizatã aproape în timp real.<br />
-Titlul acestei pagini conþine poreclele utilizatorilor, dacã sunt mai puþin de trei; dacã sunt mai mulþi, titlul va conþine numãrul utilizatorilor ºi camerele deschise.
+Po&#355;i ap&#259sa pe link-ul din pagina de start care arat&#259 num&#259rul de utilizatori conecta&#355;i pe chat, sau, dac&#259 ai intrat deja &icirc;n camera de chat, apas&#259 pe imaginea <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="L_DETACH"> din col&#355;ul dreapta-sus (sub Ie&#351;ire) pentru a deschide o fereastr&#259 separat&#259 ce va afi&#351;a lista utilizatorilor conectati &#351;i camerele &icirc;n care se afl&#259 ace&#351;tia, actualizat&#259 aproape &icirc;n timp real.<br />
+Titlul acestei pagini con&#355;ine poreclele utilizatorilor, dac&#259 sunt mai pu&#355;in de trei; dac&#259 sunt mai mul&#355;i, titlul va con&#355;ine num&#259rul utilizatorilor &#351;i camerele deschise.
 <P>
-Apãsând pe imaginea <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="L_BEEP"> din partea de sus a acestui popup va activa/dezactiva sunetele de înºtiinþare la intrarea unui nou utilizator în camerã.
+Ap&#259s&acirc;nd pe imaginea <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="L_BEEP"> din partea de sus a acestui popup va activa/dezactiva sunetele de &icirc;n&#351;tiin&#355;are la intrarea unui nou utilizator &icirc;n camer&#259.
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
@@ -322,21 +322,21 @@ There are many different ways to customize the look of the Chat. To change setti
 	if ($Ver == "H")
 	{
 		?>
-		<LI>The <B>Clear command</B> allows you to clean the main chat screen and display the last 5 messages sent on your screen.<br>Type "/clear" without quotes.
+		<LI>The <B>Clear command</B> allows you to clean the main chat screen and display the last 5 messages sent on your screen.<br />Type "/clear" without quotes.
 		<P>
 		<?php
 	}
 	else
 	{
 		?>
-		<LI>The <B>Order command</B> allows you to toggle between having new messages appear at the top of the screen or at the bottom.<br>Type "/order" without quotes.
+		<LI>The <B>Order command</B> allows you to toggle between having new messages appear at the top of the screen or at the bottom.<br />Type "/order" without quotes.
 		<P>
 		<?php
 	}
 	?>
-	<LI>The <B>Notify command</B> allows you to toggle on or off the option of seeing the notices when other users enter or exit the chat room. By default this option is <?php echo(C_NOTIFY ? "on" : "off"); ?> and the notices <?php echo(C_NOTIFY ? "will" : "won't"); ?> be seen.<br>Type "/notify" without quotes.
+	<LI>The <B>Notify command</B> allows you to toggle on or off the option of seeing the notices when other users enter or exit the chat room. By default this option is <?php echo(C_NOTIFY ? "on" : "off"); ?> and the notices <?php echo(C_NOTIFY ? "will" : "won't"); ?> be seen.<br />Type "/notify" without quotes.
 	<P>
-	<LI>The <B>Timestamp command</B> allows you to toggle on or off the option of seeing the time the message was posted before each message and the server time in the status bar. By default this option is <?php echo(C_SHOW_TIMESTAMP ? "on" : "off"); ?>.<br>Type "/timestamp" without quotes.
+	<LI>The <B>Timestamp command</B> allows you to toggle on or off the option of seeing the time the message was posted before each message and the server time in the status bar. By default this option is <?php echo(C_SHOW_TIMESTAMP ? "on" : "off"); ?>.<br />Type "/timestamp" without quotes.
 	<P>
 	<LI>The <B>Refresh command</B> allows you to adjust the rate at which the posted message are refreshed on your screen. The default rate is currently <?php echo(C_MSG_REFRESH); ?> seconds. To change the rate type "/refresh n" without quotes where n is the time in seconds of the new refresh rate.
 	<P>
@@ -376,31 +376,21 @@ There are many different ways to customize the look of the Chat. To change setti
 
 <FONT SIZE="+1"><A NAME="help"><B>Help command:</B></A></FONT>
 <P>
-Once inside a chat room, you can lauch a help popup by clicking on the <IMG SRC="images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="Help"> image that sits just before the message box. You can also type the <B>"/help" or "/?" commands</B> in the message box.
+Once inside a chat room, you can launch a help popup by clicking on the <IMG SRC="images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="Ajutor"> image that sits just before the message box. You can also type the <B>"/help" or "/?" commands</B> in the message box.
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <P>
 <!-- Avatar System Start. -->
 <?php
-If (C_NUM_AVATARS != 0) {
+If (C_USE_AVATARS) {
 ?>
 	<hr />
-	<FONT SIZE="+1"><A NAME="avatars" id="avatars"><B>Avatars:</B></A></FONT>
-<P> Avatars are graphic image icons that represent chatters. Only registered
-  users may change their avatar. Registered users may open their Profile (see
-  /PROFILE command) and click on the avatar image to select from a menu of images,
-  or to input a URL to a graphic image available anywhere on the internet. Images
-  should be browser-viewable (.gif, .jpg, etc. ) 32 x 32 pixel graphic files
-  for best display.
-<P>Clicking on a person't
-    avatar in the message display area places their nick name in the message
-  input area so that you can let them know that your message is addressed to
-  them.
-    Clicking on another user's avatar on  the user's list will
-  bring up the /whois information display for that user.
-Clicking on your own avatar will invoke the /profile command, if you are registered.
-If you are not registered, clicking on your own (system default) avatar will
-bring up an alert to encourage you to register.<P ALIGN="right"><A HREF="#top">Back to the top</A></P>
+	<FONT SIZE="+1"><A NAME="avatars"><B>Avatars:</B></A></FONT>
+<P>Avatars are graphic image icons that represent chatters. Only registered users may change their avatar. Registered users may open their Profile (see /profile command) and click on the avatar image to select it from a menu of images, or to input a URL to a graphic image available anywhere on the internet (only images publicly accessible, not password protected sites). Images should be browser-viewable (.gif, .jpg, etc. ) 32 x 32 pixel graphic files for best display.
+<P>Clicking on a person's avatar in the message frame will popup up that person's profile (see <A HREF="#whois">/whois command</A>).
+Clicking on your own avatar on the user's list  will invoke the /profile command, if you are registered.
+If you are not registered, clicking on your own (system's default) avatar will bring up an alert to encourage you to register.
+<P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <?php
 }
@@ -409,7 +399,7 @@ bring up an alert to encourage you to register.<P ALIGN="right"><A HREF="#top">B
 <hr />
 
 <?php
-if (C_USE_SMILIES == "1")
+if (C_USE_SMILIES)
 {
 	include("./lib/smilies.lib.php");
 	$Nb = count($SmiliesTbl);
@@ -466,16 +456,16 @@ if (C_HTML_TAGS_KEEP != "none")
 
 <!-- Color Input Box mod by Ciprian start -->
 <P>
-<FONT SIZE="+1"><A NAME="colors"><B><?php echo(L_COL_TUT); ?></B></A></FONT>
+<FONT SIZE="+1"><A NAME="colors"><B><U><?php echo(L_COL_TUT); ?></U></B></A></FONT>
 <P>
-<b><?php echo(L_COL_HELP_SUB1); ?></b><br /><?php echo(L_COL_HELP_P1); ?><br /><?php echo(L_COLOR_HEAD_SETTINGS); ?><br /><u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo("Administrator"); elseif ($CookieStatus == "m") echo("Moderator"); elseif ($CookieStatus == "u") echo("Guest (Normal)"); else echo("Registered (Normal)");?></b>.<br /><br />
+<b><?php echo(L_COL_HELP_SUB1); ?></b><br /><?php echo(L_COL_HELP_P1); ?><br /><br />
 </P>
 <P>
-<b><?php echo(L_COL_HELP_SUB2); ?></b><br /><?php echo(L_COL_HELP_P2); ?>
+<b><?php echo(L_COL_HELP_SUB2); ?></b><br /><?php echo(L_COL_HELP_P2); ?><br /><br /><center><?php echo(COLOR_LIST); ?></center><br /><?php echo(L_COL_HELP_P2a); ?><br /><br />
 </P>
 <P>
-<b><?php echo(L_COL_HELP_SUB3); ?></b><br /><?php echo(L_COL_HELP_P3); ?><br /><br /><center><?php echo(COLOR_LIST); ?></center><br /><?php echo(L_COL_HELP_P3a); ?>
-<br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
+<b><?php echo(L_COL_HELP_SUB3); ?></b><br /><?php echo(L_COLOR_HEAD_SETTINGS); ?><br /><?php if (COLOR_FILTERS) echo(L_COLOR_HEAD_SETTINGSa."<br />"); ?><u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo("Administrator"); elseif ($CookieStatus == "m") echo("Moderator"); elseif ($CookieStatus == "u") echo("Vizitator (Normal)"); else echo("&Icirc;nregistrat (Normal)");?></b><br /><?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
+<br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <hr />
 <!-- Color Input Box mod by Ciprian end -->
 <P>
@@ -503,7 +493,7 @@ will move you into the RedRoom.
 <?php
 if (C_VERSION == "2")
 {
-	echo(C_REQUIRE_REGISTER == "0" ? "<P>If you're a registered user, you" : "<br /><P>You");
+	echo(!C_REQUIRE_REGISTER ? "<P>If you're a registered user, you" : "<br /><P>You");
 	?>
 	 may also create a new room with this same command. But then you have to specify its type: 0 stands for private, 1 for public (default value).
 	<P>
@@ -511,7 +501,7 @@ if (C_VERSION == "2")
 	<P>
 	will create a new private room (assuming a public one has not already been created with that name) called MyRoom and move you into it.
 	<P>
-	Room's name cannot contain comma or backslash (\).<?php if (C_NO_SWEAR == "1") echo(" It can no more contains \"swear words\"."); ?>
+	Room's name cannot contain comma or backslash (\).<?php if (C_NO_SWEAR) echo(" It cannot contain \"swear words\"."); ?>
 	<?php
 }
 ?>
@@ -522,7 +512,7 @@ if (C_VERSION == "2")
 <P>
 <FONT SIZE="+1"><B>Modifying his own profile inside the chat:</B></FONT>
 <P>
-The <B>Profile command</B> creates a separate pop-up window in which you can edit your user profile and modify it except your nick and password (you have to use the link at the start page to do this).<br>Type /profile
+The <B>Profile command</B> creates a separate pop-up window in which you can edit your user profile and modify it except your nick and password (you have to use the link at the start page to do this).<br />Type /profile
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
@@ -530,7 +520,7 @@ The <B>Profile command</B> creates a separate pop-up window in which you can edi
 <P>
 <FONT SIZE="+1"><B>Recalling the last message or command you have submitted:</B></FONT>
 <P>
-The <B>! command</B> recalls the last message or command you have submitted.<br>Type /!
+The <B>! command</B> recalls the last message or command you have submitted.<br />Type /!
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
@@ -583,7 +573,7 @@ To resume display of message by an ignored user, type the <B>command "/ignore - 
 <I>For example:</I> /ignore - Jack
 <P>
 Now all the messages by Jack posted during the current chat session will be displayed on your screen, including those messages posted by Jack before you typed this command.
-If you don't specify an username after the hyphen, your "ignored list" will be cleaned.
+If you don't specify a username after the hyphen, your "ignored list" will be cleaned.
 <P>
 Note that you can put more than one username in the ignore command (eg "/ignore Jack,Helen,Alf" or "/ignore - Jack,Alf"). They must be splitted by comma (,) without spaces.
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
@@ -660,7 +650,7 @@ if (C_BANISH != "0")
 	Moderators can banish an user and the administrator can banish an user or a moderator with the <B>ban command</B>.<br />
 	The administrator can banish an user from another room than the one he is chatting into. He can also banish an user forever and from the chat as a whole with the '<B>&nbsp;*&nbsp;</B>' setting that must be inserted before the nick of the user to be banished.
 	<P>
-	<I>For example</I>, if Jack is the name of the user to banish: <I>/ban Jack</I> or <I>/ban * Jack</I>
+	<I>For example</I>, if Jack is the name of the user to banish: <I>/ban Jack</I>, <I>/ban * Jack</I>, <I>/ban Jack reason of banning</I> o <I>/ban * Jack reason of banning</I>. The "reason of banning" can be any text e.g. "for spamming!"
 	<br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 	<P>
 	<hr />
@@ -675,7 +665,7 @@ Moderators and the administrator can promote an other user to moderator with the
 <P>
 <I>For example</I>, if Jack is the name of the user to promote: <I>/promote Jack</I>
 <P>
-Only the administrator can access the opposite feature (reduce a moderator to simple user) at a dedicated page. There is no command to do it.
+Only the administrator can access the opposite feature (reduce a moderator to simple user) using the <B>demote command</B>.
 <P>
 <I>For example</I>, if Jack is the name of the moderator to demote: <I>/demote Jack</I> or <I>/demote * Jack</I> (will demote him from current or all the rooms).
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>

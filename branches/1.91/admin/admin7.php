@@ -9,11 +9,11 @@ if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security
 
 if (isset($FORM_SEND) && $FORM_SEND == 7)
 {
-  while(list($name,$value) = each($HTTP_GET_VARS))
+  while(list($name,$value) = each($_GET))
   {
            $$name = $value;
   };
-  while(list($name,$value) = each($HTTP_POST_VARS))
+  while(list($name,$value) = each($_POST))
   {
            $$name = $value;
   };

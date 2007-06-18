@@ -1,5 +1,5 @@
 <?php
-if (isset($HTTP_GET_VARS["L"])) $L = $HTTP_GET_VARS["L"];
+if (isset($_GET["L"])) $L = $_GET["L"];
 
 // Fix a security hole
 if (isset($L) && !is_dir("./localization/".$L)) exit();

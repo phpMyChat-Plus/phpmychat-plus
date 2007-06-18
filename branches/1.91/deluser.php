@@ -1,17 +1,17 @@
 <?
 // Get the names and values for vars sent to this script
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
 };
 
 // Get the names and values for vars posted from the form bellow
-if (isset($HTTP_POST_VARS))
+if (isset($_POST))
 {
-	while(list($name,$value) = each($HTTP_POST_VARS))
+	while(list($name,$value) = each($_POST))
 	{
 		$$name = $value;
 	};
@@ -46,7 +46,7 @@ if ($perms == "admin") $Msg = L_ERR_USR_12;
 if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_20)
 {
 	$DbLink = new DB;
-// Patch to send an email to the Admin after deletion of an username.
+// Patch to send an email to the Admin after deletion of a username.
 // by Ciprian using Bob Dickow's registration patch.
 	if (C_ADMIN_NOTIFY)
 	{

@@ -11,13 +11,18 @@ ALTER TABLE c_config
 			CHANGE COLOR_CDC7 COLOR_CM1 VARCHAR(25) NOT NULL,
 			ADD COLOR_CM2 VARCHAR(25) NOT NULL default '' AFTER COLOR_CM1,
 			ADD CHAT_BOOT enum('0','1') NOT NULL default '1',
-			ADD WELCOME_SOUND varchar(255) NOT NULL default '',
-			ADD WORLDTIME enum('0','1','2') NOT NULL default '2';
-			ADD UPD_CHECK enum('0','1') NOT NULL default '1';
+			ADD WELCOME_SOUND varchar(255) NOT NULL default 'sounds/hello.wav',
+			ADD WORLDTIME enum('0','1','2') NOT NULL default '2',
+			ADD UPD_CHECK enum('0','1') NOT NULL default '1',
+			ADD QUOTE enum('0','1') NOT NULL default '1',
+			ADD QUOTE_TIME tinyint(1) NOT NULL default '2',
+			ADD QUOTE_COLOR varchar(25) NOT NULL default 'brown',
+			ADD QUOTE_ALL enum('0','1') NOT NULL default '0',
+			ADD QUOTE_PATH varchar(255) NOT NULL default 'files/quotes/quotes.txt';
 UPDATE c_config SET
 			ENTRANCE_SOUND = 'sounds/chimeup.wav',
-			CMDS = '<br>/away /buzz /demote /dice /dice2 /dice3 /high /img /mr<br>/room /size /sort /topic /wisp',
-			MODS = '<br>Advanced Admin, Avatars, Smilies Popup, Color Drop Box, Private Popup,<br>Quick Menu, Logs Archive, Lurking, Color names, WorldTime',
+			CMDS = '<br />/away /buzz /demote /dice /dice2 /dice3 /high /img /mr<br />/room /size /sort /topic /wisp',
+			MODS = '<br />Advanced Admin, Avatars, Smilies Popup, Color Drop Box, Private Popup,<br />Quick Menu, Logs Archive, Lurking, Color names, WorldTime',
 			COLOR_CD2 = 'tomato',
 			COLOR_CD3 = 'dimgray',
 			COLOR_CD4 = 'indigo',
@@ -29,18 +34,17 @@ UPDATE c_config SET
 			COLOR_CA2 = 'orangered',
 			COLOR_CM = 'blue',
 			COLOR_CM1 = 'mediumblue',
-			COLOR_CM2 = 'royalblue',
-			CHAT_BOOT = '1',
-			WELCOME_SOUND = 'sounds/hello.wav',
-			WORLDTIME = '2',
-			UPD_CHECK = '1'
+			COLOR_CM2 = 'royalblue'
 	WHERE ID='0';
 ALTER TABLE c_reg_users
 			ADD id int(11) NOT NULL default '0' FIRST,
 			ADD cid int(11) NOT NULL auto_increment after id,
 			ADD PRIMARY KEY (cid);
 UPDATE c_reg_users SET
+			password='3901e4a6c3d27909afef4c22f8337da8',
+			email = 'bot@bot.com',
 			slang = 'English, German',
 			favlink = 'http://www.alicebot.org/documentation/',
 			favlink1 = 'http://sourceforge.net/forum/?group_id=43190'
 	WHERE email='bot@bot.bot.com';
+INSERT INTO c_reg_users VALUES ('', '', 'quote', '1', 'ef93e0948b007826a1a7a49a17b72a59', 'Random Quote', 'phpMyChat - Plus', 'WorldWideWeb', '', 'quote@quote.com', '0', 'admin', '', 1130763311, '-No tracking IP-', '1', '0', './images/avatars/avatar56.gif', 'I am a virtual user, added here to post random quotes at my admin`s will. Ohhh... I wish to express my gratitude to Ciprian for making me available for enlighting you in here. :)', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', 'English (any actually)', 'limegreen', './images/avatars/avatar56.gif');

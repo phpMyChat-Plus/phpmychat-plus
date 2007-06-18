@@ -27,6 +27,7 @@ The file index1.php is the index file with the full page filled. Choose the one 
 
 5. Change Attributes to 777 for these files/folders (chmod):
 plus/acount/pages/chat_index.txt
+plus/acount/pages/chat_ip_logs.txt
 plus/acount/pages/ip.txt
 plus/bot/subs.inc
 plus/botfb/

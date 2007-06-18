@@ -14,7 +14,7 @@ if (!function_exists("room_in"))
 	};
 };
 
-if (C_NO_SWEAR == 1) include("./lib/swearing.lib.php");
+if (C_NO_SWEAR) include("./lib/swearing.lib.php");
 
 $new_room_type = ($Cmd[2] != "" ? $Cmd[2]:1);
 $new_room = $Cmd[3];
@@ -34,7 +34,7 @@ elseif (ereg("[\,]", stripslashes($new_room)))
 	$Error = L_ERR_ROM_1;
 }
 // Check for swear words if necessary
-elseif(C_NO_SWEAR == 1 && checkwords($new_room, true))
+elseif(C_NO_SWEAR && checkwords($new_room, true))
 {
 	$Error = L_ERR_ROM_2;
 }

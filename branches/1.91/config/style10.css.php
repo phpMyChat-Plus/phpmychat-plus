@@ -3,9 +3,9 @@
 // "SlateBlue & navy" skin for phpMyChat plus - by Bluntdog
 
 // Get the names and values for vars sent by the script that called this one
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
@@ -204,7 +204,6 @@ INPUT, SELECT, TEXTAREA
 {
 	unicode-bidi: embed;
 	color: <?php echo($CD); ?>;
-	font-size: <?php echo($FontSize); ?>;
 }
 
 .notify
@@ -221,6 +220,15 @@ INPUT, SELECT, TEXTAREA
 	font-weight: 600;
 }
 
+.quote
+{
+	border: thin ridge <?php echo($QUOTE_COLOR); ?>;
+	background: #FFFAFA;
+	color: #D2691E;
+	text-align: left;
+	font-size: <?php echo($medium); ?>pt;
+	font-weight: 600;
+}
 
 .menu
 {
@@ -275,4 +283,76 @@ INPUT, SELECT, TEXTAREA
 {
 	font-weight: 800;
 	color: #0000FF;
+}
+
+body {
+position: absolute;
+margin: 0;
+padding: 0;
+font: 80% verdana, arial, sans-serif;
+}
+dl, dt, dd, ul, li {
+margin: 0;
+padding: 0;
+list-style-type: none;
+z-index: 100;
+}
+#menu {
+position: absolute; /* Menu position that can be changed at will */
+top: 0;
+left: auto;
+z-index: 100;
+width: 100%; /* precision for Opera */
+margin-left:5px;
+}
+#menu dl {
+float: left;
+width: 12em;
+z-index: 100;
+}
+#menu dt {
+cursor: pointer;
+text-align: center;
+font-weight: bold;
+background: #ccc;
+border: 1px solid gray;
+margin: 0px;
+}
+#menu dd {
+display: none;
+border: 1px solid gray;
+}
+#menu li {
+text-align: center;
+background: #fff;
+}
+#menu li a, #menu dt a {
+color: #000;
+text-decoration: none;
+display: block;
+height: 100%;
+border: 0 none;
+}
+#menu li a:hover, #menu li a:focus, #menu dt a:hover, #menu dt a:focus {
+background: #eee;
+}
+#site {
+position: absolute;
+z-index: 100;
+top : 70px;
+left : 10px;
+color: #000;
+background-color: #ddd;
+padding: 5px;
+border: 1px solid gray; 
+}
+#container {
+position: relative;
+top: 20px;
+left: auto;
+width: 800px;
+height: 480px;
+margin-left:10px;
+z-index: 0;
+overflow:auto;
 }

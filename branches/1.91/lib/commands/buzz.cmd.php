@@ -1,4 +1,11 @@
 <?php
+// Slashes ' and " characters
+function SpecialSlash(&$Str)
+{
+	return str_replace("\"","&quot;",str_replace("\'","&#39;",$Str));
+}
+
+$Cmd[2] = SpecialSlash($Cmd[2]);
 if (isset($C)) $Cmd[2] = "<font color=".$C.">$Cmd[2]</font>";
 //if ($status == "a") // use this line if you only want administrators to be able to use this.
 if (($status == "m") OR ($status == "a")) // use this to enable /buzz for both admins and moderators.

@@ -1,13 +1,13 @@
 <?php
-if (isset($HTTP_GET_VARS["L"])) $L = $HTTP_GET_VARS["L"];
+if (isset($_GET["L"])) $L = $_GET["L"];
 
 // Fix a security hole
 if (isset($L) && !is_dir("./localization/".$L)) exit();
 
-if (isset($HTTP_GET_VARS["Ver"])) $Ver = $HTTP_GET_VARS["Ver"];
+if (isset($_GET["Ver"])) $Ver = $_GET["Ver"];
 // Color Input Box mod by Ciprian
-if (isset($HTTP_COOKIE_VARS["CookieStatus"])) $CookieStatus = $HTTP_COOKIE_VARS["CookieStatus"];
-if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
+if (isset($_COOKIE["CookieStatus"])) $CookieStatus = $_COOKIE["CookieStatus"];
+if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 
 require("./config/config.lib.php");
 require("./lib/release.lib.php");

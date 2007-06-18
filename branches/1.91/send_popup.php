@@ -1,18 +1,18 @@
 <?php
 // Get the names and values for vars sent to this script
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
 };
 
 // Added for Skin mod
-if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
+if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 
-if (!isset($L) && isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"]; 
-if (isset($HTTP_COOKIE_VARS["CookieUsername"])) $U = $HTTP_COOKIE_VARS["CookieUsername"];
+if (!isset($L) && isset($_COOKIE["CookieLang"])) $L = $_COOKIE["CookieLang"]; 
+if (isset($_COOKIE["CookieUsername"])) $U = $_COOKIE["CookieUsername"];
 
 // Fix a security hole
 if (isset($L) && !is_dir("./localization/".$L)) exit();
@@ -28,7 +28,7 @@ header("Content-Type: text/html; charset=${Charset}");
 <HTML dir="<?php echo($TextDir); ?>">
 <HEAD><TITLE><?php echo(L_PRIV_POST_MSG); ?></TITLE>
 </HEAD>
-<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
 <META content="MSHTML 6.00.2900.2722" name=GENERATOR></HEAD>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <SCRIPT TYPE="text/javascript" LANGUAGE="javascript1.2">
@@ -83,7 +83,7 @@ return true;
 </FORM>
 </CENTER>
 <P align="right" style="font-weight: 800; color:#FFD700; font-size: 7pt">
-&copy; 2005-<?php echo(date(Y)); ?> - by <a href=mailto:ciprianmp@yahoo.com onMouseOver="window.status='Click to email author.'; return true;">Ciprian Murariu</a>
+&copy; 2005-<?php echo(date(Y)); ?> - by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='Click to email author.'; return true;" title="Click to email author" target=_blank>Ciprian Murariu</a>
 </P>
 </BODY>
 </HTML>

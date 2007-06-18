@@ -1,9 +1,9 @@
 <?php
 
 // Get the names and values for vars sent by index.lib.php
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
@@ -35,30 +35,9 @@ global $topgpath;
 	        fclose ($fd);
   			}
 $DbLink = new DB;
-//$DbLink->query("SELECT message FROM ".C_MSG_TBL." WHERE room = '$R' AND (username='SYS topic' OR username='SYS topic reset') ORDER BY m_time DESC LIMIT 1");
-//list($UR) = $DbLink->next_record();
+$Room = stripslashes($R);
 if ($UR == "")
 {
-$Room = stripslashes($R);
-if (strcmp(stripslashes($R), ROOM8) == 1)
-{
-	if (strcasecmp(stripslashes($R), ROOM8) == 0)
-	{
-		if ($R != ucfirst(ROOM8)) $Room = ucfirst($R);
-		elseif (ucfirst(stripslashes($R)) == ROOM8) $Room = ROOM8;
-		else $Room = strtolower($R);
-	}
-}
-if (strcasecmp(ucfirst(stripslashes($R)), ROOM8) == 0) $Room = ROOM8;
-if (strcmp(stripslashes($R), ROOM9) == 1)
-{
-	if (strcasecmp(stripslashes($R), ROOM9) == 0)
-	{
-		if ($R != ucfirst(ROOM9)) $Room = ucfirst($R);
-		else $Room = strtolower($R);
-	}
-}
-if (strcasecmp(ucfirst(stripslashes($R)), ROOM9) == 0) $Room = ROOM9;
 	if (TOPIC_DIFF == 1)
 	{
 		switch ($Room)
@@ -99,8 +78,8 @@ if (strcasecmp(ucfirst(stripslashes($R)), ROOM9) == 0) $Room = ROOM9;
 };
 	$DbLink->query("SELECT room FROM ".C_USR_TBL." WHERE username='$BOT_NAME'");
 	list($BR) = $DbLink->next_record();
-	$botcontrol ="botfb/$Room.txt";
-	if ((file_exists($botcontrol) || $BR ==  $Room) && C_BOT_PUBLIC)
+	$botcontrol ="botfb/$R.txt";
+	if ((file_exists($botcontrol) || $BR ==  $R) && C_BOT_PUBLIC)
   {
 		$Expl.= BOT_TIPS;
 		$Ex.='<b>'.C_BOT_NAME.'</b> - '.$Expl.'';
@@ -126,11 +105,15 @@ $CellAlign = ($Charset == "windows-1256" ? "RIGHT" : "LEFT");
 ?>
 <HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
 <HEAD>
-        <TITLE>Banner</TITLE>
+        <TITLE>banner</TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <HEAD>
-<BODY class="frame">
-			<FONT size="2"><I><B>Welcome to <?php echo (stripslashes($R)) ?>!</B> Topic: <MARQUEE WIDTH="70%"><FONT color="yellow"><B><?php echo ($UR);?></B></FONT></MARQUEE></I></FONT>
-        	<BR><FONT SIZE=-2 COLOR="40E0D0"><I><?php echo ($Ex);?></I></FONT>
+<BODY class="frame"><div>
+			<div style="float:<?php echo($CellAlign); ?>;">
+			<FONT size="2"><I><B>Welcome to <?php echo ($Room) ?>!</B> Topic:&nbsp;</I></FONT></div>
+			<div style="float:<?php echo($CellAlign); ?>;">
+			<MARQUEE style=""><FONT color="yellow"><B><?php echo ($UR);?></B></FONT></MARQUEE></div>
+			<?php if ($Ex) {?><div style="float:<?php echo($CellAlign); ?>;"><FONT SIZE=-2 COLOR="40E0D0"><I><?php echo ($Ex);?></I></FONT></div><?php } ?>
+		</div>
 </BODY>
 </HTML>

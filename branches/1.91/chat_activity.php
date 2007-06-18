@@ -18,10 +18,10 @@ $ChatPath = "../plus/";	//use it if the output page is in a path like this: http
 
 define("LOGIN_LINK","<A HREF=\"".$ChatPath."\" TITLE=\"Chat Login Page\" onMouseOver=\"window.status='Click to open the Chat Login Page.'; return true;\" TARGET=_blank>");
 
-if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
+if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 if (!isset($R)) $skin == "style1";	//you can use any style in your pluschat/config folder (style1, style2, ..., style7)
 
-if (!isset($L) && isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"]; 
+if (!isset($L) && isset($_COOKIE["CookieLang"])) $L = $_COOKIE["CookieLang"]; 
 
 require("./${ChatPath}/config/config.lib.php");
 require("./${ChatPath}/lib/release.lib.php");

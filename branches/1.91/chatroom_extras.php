@@ -29,10 +29,10 @@ $Room = ""; 						//Comment the one above and uncomment this line to show messag
 $Type = " AND type='1'";	//This is to display only the public rooms
 //$Type = "";							//This is to display either public or private rooms
 
-if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
+if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 if (!isset($R)) $skin == "style1";	//you can use any style in your pluschat/config folder (style1, style2, ..., style7)
 
-if (!isset($L) && isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"]; 
+if (!isset($L) && isset($_COOKIE["CookieLang"])) $L = $_COOKIE["CookieLang"]; 
 // Fix a security hole
 if (isset($L) && !is_dir("${ChatPath}/localization/".$L)) exit();
 
@@ -47,7 +47,7 @@ require("${ChatPath}/localization/".$L."/localized.chat.php");
 set_magic_quotes_runtime(0);
 
 // Translate to html special characters, and entities if message was sent with a latin 1 charset
-$Latin1 = ($Charset == "iso-8859-1");
+$Latin1 = ($Charset == "utf-8");
 function special_char($str,$lang)
 {
 	return ($lang ? htmlentities(stripslashes($str)) : htmlspecialchars(stripslashes($str)));

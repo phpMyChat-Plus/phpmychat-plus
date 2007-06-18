@@ -37,8 +37,8 @@ function Detect($Str,$From)
 };
 
 // finds the appropriate language file
-if (isset($HTTP_COOKIE_VARS["CookieLang"]))
-	$CookieLang = $HTTP_COOKIE_VARS["CookieLang"];
+if (isset($_COOKIE["CookieLang"]))
+	$CookieLang = $_COOKIE["CookieLang"];
 if (!isset($HTTP_ACCEPT_LANGUAGE))
 	$HTTP_ACCEPT_LANGUAGE = getenv("HTTP_ACCEPT_LANGUAGE");
 if (!isset($HTTP_USER_AGENT))

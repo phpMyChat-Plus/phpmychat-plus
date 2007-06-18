@@ -1,4 +1,4 @@
-<?php
+						<?php
 class DB
 {
 	var $Host = C_DB_HOST;			// Hostname of our MySQL server
@@ -14,7 +14,7 @@ class DB
 
 	function halt($msg)
 	{
-		echo("</TD></TR></TABLE><B>Database error:</B> $msg<br>\n");
+		echo("</TD></TR></TABLE><B>Database error:</B> $msg<br />\n");
 		echo("<B>MySQL error</B>: $this->Errno ($this->Error)<br />\n");
 		die("Session halted.");
 	}
@@ -28,6 +28,8 @@ class DB
 			{
 				$this->halt("Link_ID == false, connect failed");
 			}
+//			mysql_query("SET NAMES 'utf8'",$this->Link_ID);
+//			mysql_query("SET CHARACTER SET 'latin1'",$this->Link_ID);
 			$SelectResult = mysql_select_db($this->Database, $this->Link_ID);
 			if(!$SelectResult)
 			{

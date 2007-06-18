@@ -54,7 +54,7 @@ function room_in($what, $in)
 					elseif (trim($Cmd[2]) != "" && trim($Cmd[3]) != "")
 					{
 						// Check for swear words in the message if necessary
-						if (C_NO_SWEAR == 1)
+						if (C_NO_SWEAR)
 						{
 							include("./lib/swearing.lib.php");
 							$Cmd[3] = checkwords($Cmd[3], false);

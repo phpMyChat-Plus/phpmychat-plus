@@ -1,27 +1,26 @@
 <?php
-// File : english/localized.tutorial.php - plus version (17.09.2006 - rev.3)
+// File : english/localized.tutorial.php - plus version (26.05.2007 - rev.5)
 // Original translation by Sharif Islam <mislam@students.uiuc.edu> & Jessica Gibson <oram@uiuc.edu> & Dean Collins <joelford@pacbell.net>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 
 // Get the names and values for vars sent by the script that called this one
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
 };
 
-//require("./config/config.lib.php");
 require("./lib/index.lib.php");
-if (isset($HTTP_COOKIE_VARS["CookieStatus"])) $CookieStatus = $HTTP_COOKIE_VARS["CookieStatus"];
+if (isset($_COOKIE["CookieStatus"])) $CookieStatus = $_COOKIE["CookieStatus"];
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML>
 
 <HEAD>
-<TITLE>English Tutorial for <?php echo(APP_NAME." - ".APP_VERSION); ?></TITLE>
+<TITLE>English Tutorial for <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?></TITLE>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
 <STYLE>
 A.topLink
@@ -46,26 +45,27 @@ A.topLink:hover, A.topLink:active
 </HEAD>
 
 <BODY BGCOLOR="#CCCCFF">
-<!-- Remove this ง in translation files -->
+<!-- Remove this ยง in translation files -->
 <?php
 if(isset($NoTranslation)) echo($NoTranslation."\n");
 ?>
-<!-- End of the ง to be removed in translation files -->
+<!-- End of the ยง to be removed in translation files -->
 
+<P></P>
+<TABLE BORDER="5" CELLPADDING="5" ALIGN="center">
+<TR>
+	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- English Tutorial for <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -</B></FONT></TD>
+</TR>
+</TABLE><br /><br />
 <P><A NAME="top"></P>
-<TABLE BORDER="5" CELLPADDING="5">
+<TABLE BORDER="3" CELLPADDING="3">
 <TR>
 	<TD><FONT SIZE="+2">Contents of this Tutorial</FONT></TD>
 </TR>
 </TABLE><br />
 
-<P CLASS="redText">
-Warning: Netscape users must define their language as the default encoding or else each character in messages will be replace by a '?'.<br />
-This can be done as follows: View/CharacterSet/your language Auto-Detect, then View/CharacterSet/SetDefault.
-</P>
-
 <?php
-if (C_MULTI_LANG == "1")
+if (C_MULTI_LANG)
 {
 	?>
 	<A HREF="#language" CLASS="topLink">Choosing a language</A><br />
@@ -74,7 +74,7 @@ if (C_MULTI_LANG == "1")
 ?>
 <A HREF="#login" CLASS="topLink">Logging into the Chat</A><br />
 <A HREF="#register" CLASS="topLink">Registering</A><br />
-<A HREF="#modProfile" CLASS="topLink">Modifying<?php if (C_SHOW_DEL_PROF == "1") echo("/deleting"); ?> your profile</A><br />
+<A HREF="#modProfile" CLASS="topLink">Modifying<?php if (C_SHOW_DEL_PROF) echo("/deleting"); ?> your profile</A><br />
 <?php
 if (C_VERSION == "2")
 {
@@ -98,8 +98,17 @@ if ($Ver == "H")
 <P>
 <A HREF="#commands" CLASS="topLink">Features and Commands:</A><br />
 &nbsp&nbsp&nbsp&nbsp<A HREF="#help" CLASS="topLink">Help command</A><br />
+<!-- Avatar System Start. -->
 <?php
-if (C_USE_SMILIES == "1")
+if (C_USE_AVATARS) {
+?>
+	&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#avatars" CLASS="topLink">Avatars</A><br />
+<?php
+}
+?>
+<!-- Avatar System End.  -->
+<?php
+if (C_USE_SMILIES)
 {
 	?>
 	&nbsp&nbsp&nbsp&nbsp<A HREF="#smilies" CLASS="topLink">Graphical smilies</A><br />
@@ -148,7 +157,7 @@ if (C_BANISH != "0")
 
 
 <?php
-if (C_MULTI_LANG == "1")
+if (C_MULTI_LANG)
 {
 	?>
 	<P>
@@ -166,9 +175,9 @@ if (C_MULTI_LANG == "1")
 <P>
 <FONT SIZE="+1"><A NAME="login"><B>Login:</B></A></FONT>
 <P>
-If you have already registered, simply log in by entering your username and password. Then select which chat room you would like to enter and press the Chat button.<br />
+If you have already registered, simply log in by entering your username and password. Then select which chat room you would like to enter and press the '<?php echo(L_SET_14); ?>' button.<br />
 <?php
-if (C_REQUIRE_REGISTER == "1")
+if (C_REQUIRE_REGISTER)
 {
 	?>
 <P>
@@ -189,20 +198,19 @@ else
 <P>
 <FONT SIZE="+1"><A NAME="register"><B>To Register:</B></A></FONT>
 <P>
-If you have not yet registered<?php if (C_REQUIRE_REGISTER == "0") echo("and would like to"); ?>, please choose the registration option. A small pop-up window will appear.
+If you have not yet registered<?php if (!C_REQUIRE_REGISTER) echo(" and would like to"); ?>, please choose the registration option. A small pop-up window will appear.
 <P>
 <UL>
 	<LI>First, create a username<?php if (!C_EMAIL_PASWD) echo(" and a password"); ?> for yourself by typing it into the appropriate boxes. The username you choose is the name that will be automatically displayed in the chat room. It cannot contain spaces, commas or backslashes (\).
-<?php if (C_NO_SWEAR == "1") echo(" It can not contain \"swear words\"."); ?>
+<?php if (C_NO_SWEAR) echo(" It can not contain \"swear words\"."); ?>
 	<LI>Second, please enter your first name, last name, and your email address. In order to register to chat, all of this information must be provided. The gender information is optional.
 	<LI>If you have a homepage, you may enter the URL into the box.
 	<LI>The language field may help other users in future discussions. They will know which language(s) you understand.
-	<LI>Lastly, if you wish to allow your email address to be viewed by other participants, please check the box next to "show e-mail in public information". If
-you do not want your e-mail address to be viewable, leave the box unchecked.
+	<LI>Lastly, if you wish to allow your email address to be viewed by other participants, please check the box next to "show e-mail in public information". If you do not want your e-mail address to be viewable, leave the box unchecked.
 	<LI>Then, press the Register button and your account will be created. If you wish to stop at any time without registering, press the Close button.
 </UL>
 <P>
-<A NAME="modProfile"></A>Of course, registered users would be able to modify<?php if (C_SHOW_DEL_PROF == "1") echo("/delete"); ?> their own profile by clicking on the appropriate <?php echo((C_SHOW_DEL_PROF == "0" ? "link" : "links")); ?>.<br />
+<A NAME="modProfile"></A>Of course, registered users would be able to modify<?php if (C_SHOW_DEL_PROF) echo("/delete"); ?> their own profile by clicking on the appropriate <?php echo((!C_SHOW_DEL_PROF ? "link" : "links")); ?>.<br />
 <br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 <P>
 <hr />
@@ -216,7 +224,7 @@ if (C_VERSION == "2")
 	<P>
 	Registered users can create rooms. Private ones can only be accessed by users who know their name and will never been displayed except for users that are in.<br />
 	<P>
-	Room's name cannot contain comma or backslash (\).<?php if (C_NO_SWEAR == "1") echo(" It can no more contains \"swear words\"."); ?>
+	Room's name cannot contain comma or backslash (\).<?php if (C_NO_SWEAR) echo(" It cannot contain \"swear words\"."); ?>
 	<br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 	<P>
 	<hr />
@@ -228,7 +236,7 @@ if ($Ver == "H")
 	<P>
 	<FONT SIZE="+1"><A NAME="connection_state"><B>Understanding connection state:</B></A></FONT>
 	<P>
-	A sign representing your connection state is dipslayed at the top-right corner of the screen. It may take three forms :
+	A sign representing your connection state is displayed at the top-right corner of the screen. It may take three forms :
 	<P>
 	<UL>
 		<LI><IMG SRC="images/connectOff.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="No connection"> when no connection is required ;
@@ -248,7 +256,7 @@ if ($Ver == "H")
 <FONT SIZE="+1"><A NAME="sending"><B>Sending messages:</B></A></FONT>
 <P>
 To post a message to the chat room, type your text into the text box in the lower left corner and then press the Enter/Return key to send it. Messages from all users scroll in the chat box.<br />
-<?php if (C_NO_SWEAR == "1") echo("Note that \"swear words\" are skipped from messages."); ?>
+<?php if (C_NO_SWEAR) echo("Note that \"swear words\" are skipped from messages."); ?>
 <P>
 You may change the color of the text of your messages by choosing a new color from the list of choices to the right of the text box.
 <br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
@@ -286,9 +294,9 @@ You may change the color of the text of your messages by choosing a new color fr
 <FONT SIZE="+1"><A NAME="exit"><B>Leaving the chat room:</B></A></FONT>
 <P>
 To exit the chat, simply click once on "Exit". Alternatively, you may also enter the one of the following commands into your text box:<br />
-/exit<br>
-/bye<br>
-/quit
+/exit<br />
+/bye<br />
+/quit<br />
 These commands may be completed with a message to be sent before you leave the chat room.
 <I>For example :</I> /quit CU soon!
 <P>
@@ -321,21 +329,21 @@ There are many different ways to customize the look of the Chat. To change setti
 	if ($Ver == "H")
 	{
 		?>
-		<LI>The <B>Clear command</B> allows you to clean the main chat screen and display the last 5 messages sent on your screen.<br>Type "/clear" without quotes.
+		<LI>The <B>Clear command</B> allows you to clean the main chat screen and display the last 5 messages sent on your screen.<br />Type "/clear" without quotes.
 		<P>
 		<?php
 	}
 	else
 	{
 		?>
-		<LI>The <B>Order command</B> allows you to toggle between having new messages appear at the top of the screen or at the bottom.<br>Type "/order" without quotes.
+		<LI>The <B>Order command</B> allows you to toggle between having new messages appear at the top of the screen or at the bottom.<br />Type "/order" without quotes.
 		<P>
 		<?php
 	};
 	?>
-	<LI>The <B>Notify command</B> allows you to toggle on or off the option of seeing the notices when other users enter or exit the chat room. By default this option is <?php echo(C_NOTIFY ? "on" : "off"); ?> and the notices <?php echo(C_NOTIFY ? "will" : "won't"); ?> be seen.<br>Type "/notify" without quotes.
+	<LI>The <B>Notify command</B> allows you to toggle on or off the option of seeing the notices when other users enter or exit the chat room. By default this option is <?php echo(C_NOTIFY ? "on" : "off"); ?> and the notices <?php echo(C_NOTIFY ? "will" : "won't"); ?> be seen.<br />Type "/notify" without quotes.
 	<P>
-	<LI>The <B>Timestamp command</B> allows you to toggle on or off the option of seeing the time the message was posted before each message and the server time in the status bar. By default this option is <?php echo(C_SHOW_TIMESTAMP ? "on" : "off"); ?>.<br>Type "/timestamp" without quotes.
+	<LI>The <B>Timestamp command</B> allows you to toggle on or off the option of seeing the time the message was posted before each message and the server time in the status bar. By default this option is <?php echo(C_SHOW_TIMESTAMP ? "on" : "off"); ?>.<br />Type "/timestamp" without quotes.
 	<P>
 	<LI>The <B>Refresh command</B> allows you to adjust the rate at which the posted message are refreshed on your screen. The default rate is currently <?php echo(C_MSG_REFRESH); ?> seconds. To change the rate type "/refresh n" without quotes where n is the time in seconds of the new refresh rate.
 	<P>
@@ -347,7 +355,7 @@ There are many different ways to customize the look of the Chat. To change setti
 	if ($Ver == "L")
 	{
 		?>
-  <LI>The <B>Show command</B> allows you to adjust the number of messages viewable on your screen. To change the default number, type "/show n" without quotes where n is the number of viewable messages.
+ <LI>The <B>Show command</B> allows you to adjust the number of messages viewable on your screen. To change the default number, type "/show n" without quotes where n is the number of viewable messages.
 		<P>
 		<I>For example:</I> /show 50
 		<P>
@@ -378,14 +386,30 @@ There are many different ways to customize the look of the Chat. To change setti
 
 <FONT SIZE="+1"><A NAME="help"><B>Help command:</B></A></FONT>
 <P>
-Once inside a chat room, you can lauch a help popup by clicking on the <IMG SRC="images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="Help"> image that sits just before the message box. You can also type the <B>"/help" or "/?" commands</B> in the message box.
+Once inside a chat room, you can launch a help popup by clicking on the <IMG SRC="images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="Help"> image that sits just before the message box. You can also type the <B>"/help" or "/?" commands</B> in the message box.
 <br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 <P>
 <P>
+<!-- Avatar System Start. -->
+<?php
+If (C_USE_AVATARS) {
+?>
+	<hr />
+	<FONT SIZE="+1"><A NAME="avatars"><B>Avatars:</B></A></FONT>
+<P>Avatars are graphic image icons that represent chatters. Only registered users may change their avatar. Registered users may open their Profile (see /profile command) and click on the avatar image to select it from a menu of images, or to input a URL to a graphic image available anywhere on the internet (only images publicly accessible, not password protected sites). Images should be browser-viewable (.gif, .jpg, etc. ) 32 x 32 pixel graphic files for best display.
+<P>Clicking on a person's avatar in the message frame will popup up that person's profile (see <A HREF="#whois">/whois command</A>).
+Clicking on your own avatar on the user's list  will invoke the /profile command, if you are registered.
+If you are not registered, clicking on your own (system's default) avatar will bring up an alert to encourage you to register.
+  <P ALIGN="right"><A HREF="#top">Back to the top</A></P>
+<P>
+<?php
+}
+?>
+<!-- Avatar System End. -->
 <hr />
 
 <?php
-if (C_USE_SMILIES == "1")
+if (C_USE_SMILIES)
 {
 	include("./lib/smilies.lib.php");
 	$Nb = count($SmiliesTbl);
@@ -450,7 +474,7 @@ if (C_HTML_TAGS_KEEP != "none")
 <b><?php echo(L_COL_HELP_SUB2); ?></b><br /><?php echo(L_COL_HELP_P2); ?><br /><br /><center><?php echo(COLOR_LIST); ?></center><br /><?php echo(L_COL_HELP_P2a); ?><br /><br />
 </P>
 <P>
-<b><?php echo(L_COL_HELP_SUB3); ?></b><br /><?php echo(L_COLOR_HEAD_SETTINGS); ?><br /><?php if (COLOR_FILTERS == 1) echo(L_COLOR_HEAD_SETTINGSa."<br />"); ?><u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo("Administrator"); elseif ($CookieStatus == "m") echo("Moderator"); elseif ($CookieStatus == "u") echo("Guest (Normal)"); else echo("Registered (Normal)");?></b><br /><?php if (COLOR_FILTERS == 1) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
+<b><?php echo(L_COL_HELP_SUB3); ?></b><br /><?php echo(L_COLOR_HEAD_SETTINGS); ?><br /><?php if (COLOR_FILTERS) echo(L_COLOR_HEAD_SETTINGSa."<br />"); ?><u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo("Administrator"); elseif ($CookieStatus == "m") echo("Moderator"); elseif ($CookieStatus == "u") echo("Guest (Normal)"); else echo("Registered (Normal)");?></b><br /><?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
 <br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 <hr />
 <!-- Color Input Box mod by Ciprian end -->
@@ -479,7 +503,7 @@ will move you into the RedRoom.
 <?php
 if (C_VERSION == "2")
 {
-	echo(C_REQUIRE_REGISTER == "0" ? "<P>If you're a registered user, you" : "<br /><P>You");
+	echo(!C_REQUIRE_REGISTER ? "<P>If you're a registered user, you" : "<br /><P>You");
 	?>
 	 may also create a new room with this same command. But then you have to specify its type: 0 stands for private, 1 for public (default value).
 	<P>
@@ -487,7 +511,7 @@ if (C_VERSION == "2")
 	<P>
 	will create a new private room (assuming a public one has not already been created with that name) called MyRoom and move you into it.
 	<P>
-	Room's name cannot contain comma or backslash (\).<?php if (C_NO_SWEAR == "1") echo(" It can no more contains \"swear words\"."); ?>
+	Room's name cannot contain comma or backslash (\).<?php if (C_NO_SWEAR) echo(" It cannot contain \"swear words\"."); ?>
 	<?php
 }
 ?>
@@ -498,7 +522,7 @@ if (C_VERSION == "2")
 <P>
 <FONT SIZE="+1"><B>Modifying your own profile inside the chat:</B></FONT>
 <P>
-The <B>Profile command</B> creates a separate pop-up window in which you can edit your user profile and modify it except your nick and password (you have to use the link at the start page to do this).<br>Type /profile
+The <B>Profile command</B> creates a separate pop-up window in which you can edit your user profile and modify it except your nick and password (you have to use the link at the start page to do this).<br />Type /profile
 <br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 <P>
 <hr />
@@ -506,7 +530,7 @@ The <B>Profile command</B> creates a separate pop-up window in which you can edi
 <P>
 <FONT SIZE="+1"><B>Recalling the last message or command you have submitted:</B></FONT>
 <P>
-The <B>! command</B> recalls the last message or command you have submitted.<br>Type /!
+The <B>! command</B> recalls the last message or command you have submitted.<br />Type /!
 <br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 <P>
 <hr />
@@ -538,7 +562,7 @@ Note that clicking on the nick of a message sender in the main frame will automa
 <P>
 To describe what you're doing you can use the <B>command "/me action"</B> without quotes.
 <P>
-<I>For example:</I> If Jack sends the message "/me is smoking a cigarette" the message frame will shown "<B>* Jack</B> is smoking a cigarette".
+<I>For example:</I> If Jack sends the message "/me is drinking a coffee" the message frame will shown "<B>* Jack</B> is drinking a coffee".
 <br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 <P>
 <hr />
@@ -559,7 +583,7 @@ To resume display of message by an ignored user, type the <B>command "/ignore - 
 <I>For example:</I> /ignore - Jack
 <P>
 Now all the messages by Jack posted during the current chat session will be displayed on your screen, including those messages posted by Jack before you typed this command.
-If you don't specify a username after the hyphen, your "ignored list" will be cleaned.
+ If you don't specify a username after the hyphen, your "ignored list" will be cleaned.
 <P>
 Note that you can put more than one username in the ignore command (eg "/ignore Jack,Helen,Alf" or "/ignore - Jack,Alf"). They must be splitted by comma (,) without spaces.
 <br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
@@ -601,7 +625,6 @@ if (C_SAVE != "0")
 
 <P>
 <FONT SIZE="+2"><A NAME="moderator"><B><U>Commands for the adminstrator and/or moderators only</U></B></A></FONT>
-
 <P>
 <FONT SIZE="+1"><A NAME="announce"><B>Send an announcement:</B></A></FONT>
 <P>
@@ -613,7 +636,7 @@ The administrator may make a system wide announcement to all the rooms and reach
 There is another useful announcement like command for roleplaying chats; the administrator or moderators in a room may also send an announcement to all users in current room or all the rooms with the <B>room command</B>.
 <P>
 <I>For example: /room The meeting starts at 15 pm.</I> or <I>/room * The meeting starts at 15 pm in the Staff room.</I>
-<br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
+<br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 <P>
 <hr />
 
@@ -622,7 +645,7 @@ There is another useful announcement like command for roleplaying chats; the adm
 <P>
 Moderators can kick a user and the administrator can kick a user or a moderator with the <B>kick command</B>. Except for the administrator, the user to be kicked must be in the current room.
 <P>
-<I>For example</I>, if Jack is the name of the user to kick away: <I>/kick Jack</I> or <I>/kick Jack reason of kicking</I> The "reason of kicking" can be any text e.g. "for spamming!"
+<I>For example</I>, if Jack is the name of the user to kick away: <I>/kick Jack</I> or <I>/kick Jack reason of kicking</I>. The "reason of kicking" can be any text e.g. "for spamming!"
 <br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 <P>
 <hr />
@@ -637,7 +660,7 @@ if (C_BANISH != "0")
 	Moderators can banish a user and the administrator can banish a user or a moderator with the <B>ban command</B>.<br />
 	The administrator can banish a user from another room than the one he is chatting into. He can also banish a user forever and from the chat as a whole with the '<B>&nbsp;*&nbsp;</B>' setting that must be inserted before the nick of the user to be banished.
 	<P>
-	<I>For example</I>, if Jack is the name of the user to banish: <I>/ban Jack</I> or <I>/ban * Jack</I>
+	<I>For example</I>, if Jack is the name of the user to banish: <I>/ban Jack</I>, <I>/ban * Jack</I>, <I>/ban Jack reason of banning</I> o <I>/ban * Jack reason of banning</I>. The "reason of banning" can be any text e.g. "for spamming!"
 	<br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 	<P>
 	<hr />

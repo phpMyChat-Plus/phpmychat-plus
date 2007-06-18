@@ -2,17 +2,17 @@
 
 // Get the names and values for vars sent to index.lib.php
 
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
 };
 
-if (isset($HTTP_POST_VARS))
+if (isset($_POST))
 {
-	while(list($name,$value) = each($HTTP_POST_VARS))
+	while(list($name,$value) = each($_POST))
 	{
 		$$name = $value;
 	};
@@ -41,7 +41,7 @@ if (isset($url)) {
     if ($isok) {
       $avatar = $url;
     } else {
-      $avamsg = "<br>Error: ".L_ERR_AV."<br />";
+      $avamsg = "<br />Error: ".L_ERR_AV."<br />";
     }
 }
 
@@ -85,8 +85,7 @@ $textDirection = ($Charset == "windows-1256") ? "RTL" : "LTR";
 <table rows="3" width="90%" align="center" BORDER="0" CELLPADDING="2" CLASS="table">
 <TR>
 <TH COLSPAN=2 CLASS="tabtitle">
-<center><?php echo(L_TITLE_AV); ?><img border="0"
-<?php echo(" width=\"".C_AVA_WIDTH."\" height=\"".C_AVA_HEIGHT."\"");
+<center><?php echo(L_TITLE_AV); ?><img border="0" <?php echo(" width=\"".C_AVA_WIDTH."\" height=\"".C_AVA_HEIGHT."\"");
 print(" src=\"$avatar\">");
 ?>
 </TH>
@@ -105,7 +104,7 @@ $avatarmatch = $avatar;
 <input type="hidden" name="Link" value="1">
 <input type="hidden" name="L" value="<?php echo($L); ?>">
 <input type="hidden" name="Link" value="<?php echo($Link); ?>">
-<input type="hidden" name="pmc_password" value="<?php echo(stripslashes(($HTTP_GET_VARS[pmc_password]))); ?>">
+<input type="hidden" name="pmc_password" value="<?php echo(stripslashes(($_GET[pmc_password]))); ?>">
 <input type="hidden" name="pmc_username" value="<?php echo($User); ?>">
 </form></td></tr><tr><td>
 <?php

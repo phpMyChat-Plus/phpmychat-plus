@@ -1,8 +1,8 @@
 <?php
 // Get the names and values for vars sent by the script that called this one
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
@@ -30,7 +30,7 @@ $small = round(0.8 * $medium);
 {
 	<?php if (isset($FontFace)) echo($FontFace); ?>
 	background-color: #4682b4;
-	color: #FFFFFF;
+	color: #ffe4e1;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
 	margin: 5px;
@@ -130,7 +130,7 @@ A.ChatReg:hover,A.ChatReg:active
 INPUT.ChatBox, SELECT.ChatBox, TEXTAREA.ChatBox
 {
 	<?php if (isset($FontFace)) echo($FontFace); ?>
-	background: #EEEEFF;
+	background: #ffe4e1;
 }
 
 .ChatTitle

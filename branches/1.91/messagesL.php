@@ -1,8 +1,8 @@
 <?php
 // Get the names and values for vars sent to this script
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
@@ -17,7 +17,7 @@ require("./lib/database/".C_DB_TYPE.".lib.php");
 require("./lib/clean.lib.php");
 
 // Size command by Ciprian
-if (isset($HTTP_COOKIE_VARS["CookieFontSize"])) $FontSize = $HTTP_COOKIE_VARS["CookieFontSize"];
+if (isset($_COOKIE["CookieFontSize"])) $FontSize = $_COOKIE["CookieFontSize"];
 
 // Special cache instructions for IE5+
 $CachePlus	= "";
@@ -34,7 +34,7 @@ header("Content-Type: text/html; charset=${Charset}");
 set_magic_quotes_runtime(0);
 
 // Translate to html special characters, and entities if message was sent with a latin 1 charset
-$Latin1 = ($Charset == "iso-8859-1");
+$Latin1 = ($Charset == "utf-8");
 function special_char($str,$lang,$slash_on)
 {
 	$str = ($lang ? htmlentities(stripslashes($str)) : htmlspecialchars(stripslashes($str)));
@@ -245,7 +245,7 @@ window.parent.frames['banner'].window.location.replace("banner.php?<?php echo( (
 $CondForQuery = "";
 $IgnoreList = "";
 if (isset($Ign)) $IgnoreList = "'".str_replace(",","','",addslashes(urldecode($Ign)))."'";
-if ($NT == "0") $IgnoreList .= ($IgnoreList != "" ? ",":"")."'SYS enter','SYS exit'";
+if ($NT == "0") $IgnoreList .= ($IgnoreList != "" ? ",":"")."'SYS enter','SYS exit','SYS away'";
 if ($IgnoreList != "") $CondForQuery = "username NOT IN (${IgnoreList}) AND ";
 $CondForQuery .= "(address = ' *' OR ((address = '$U' OR username = '$U') AND (room = '$R' OR room_from='$R' OR room = 'Offline PMs' OR username = 'SYS inviteTo')) OR ((room = '$R' OR room = 'Offline PMs') AND (address = '' OR username = '$U')) OR room = '*' OR (room = '$R' AND (username = 'SYS room' OR username = 'SYS image' OR username LIKE 'SYS top%' OR username='SYS dice1' OR username='SYS dice2' OR username='SYS dice3')))";
 $DbLink->query("SELECT m_time, username, latin1, address, message FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC LIMIT $N");
@@ -331,7 +331,7 @@ else
 		if (substr($User,0,4) != "SYS ")
 		{
 			$Userx = $User;  // Avatar System insered only.
-			if($User != stripslashes($U))
+			if($User != stripslashes($U) && $User != $QUOTE_NAME)
 			{
 				if (C_ENABLE_PM && C_PRIV_POPUP && ($allowpopup || $status == "u"))
 				{
@@ -346,11 +346,11 @@ else
 					$User = "<a onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false); return false\" title=\"Use this name\" onMouseOver=\"window.status='Reffer to this username.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."</a>";
 				}
 			}
-			elseif($User == stripslashes($U))
+			elseif($User == stripslashes($U) || $User == $QUOTE_NAME)
 			{
 				$User = "<a onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false,'".special_char($U,$Latin1,1)."'); return false\" title=\"Use this name\" onMouseOver=\"window.status='Reffer to this username.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."</a>";
 			}
-			if($Dest != "" && $Dest != stripslashes($U))
+			if($Dest != "" && $Dest != stripslashes($U) && $Dest != $QUOTE_NAME)
 			{
 				$Dest = htmlspecialchars(stripslashes($Dest));
 				if (C_ENABLE_PM && C_PRIV_POPUP && ($allowpopup || $status == "u"))
@@ -366,7 +366,7 @@ else
 					$Dest = "<a onClick=\"window.parent.userClick('".special_char($Dest,$Latin1,1)."',false); return false\" title=\"Use this name\" onMouseOver=\"window.status='Reffer to this username.'; return true\" CLASS=\"sender\">".$colornamedest_tag."".special_char($Dest,$Latin1,0)."".$colornamedest_endtag."</a>";
 				}
 			}
-			elseif($Dest == stripslashes($U))
+			elseif($Dest == stripslashes($U) || $Dest == $QUOTE_NAME)
 			{
 				$Dest = "<a onClick=\"window.parent.userClick('".special_char($Dest,$Latin1,1)."',false,'".special_char($U,$Latin1,1)."'); return false\" title=\"Use this name\" onMouseOver=\"window.status='Reffer to this username.'; return true\" CLASS=\"sender\">".$colornamedest_tag."".special_char($Dest,$Latin1,0)."".$colornamedest_endtag."</a>";
 			}
@@ -419,13 +419,13 @@ else
 				if($imgSize[0] == $maxSize || $imgSize[1] == $maxSize)
 				$Resized = "<br />(".L_PIC_RESIZED." <B>".round($imgSize[0],-1)."</B> x <B>".round($imgSize[1],-1)."</B>)";
 				else $Resized = '';
-        $NewMsg .= "$Pic"." <B>".$Dest."</B>:</td><td valign=\"top\"><a href=".$Message." onMouseOver=\"window.status='Click to open the full size picture.'; return true\" title=\"Click to open the full size picture\" target=_blank><img src=".$Message." width=".$imgSize[0]." height=".$imgSize[1]." border=0 alt=\"Click to open the full size picture\"></a>".$Resized."</td></tr></table>";
-      }
+        		$NewMsg .= "$Pic"." <B>".$Dest."</B>:</td><td valign=\"top\"><a href=".$Message." onMouseOver=\"window.status='Click to open the full size picture.'; return true\" title=\"Click to open the full size picture\" target=_blank><img src=".$Message." width=".$imgSize[0]." height=".$imgSize[1]." border=0 alt=\"Click to open the full size picture\"></a>".$Resized."</td></tr></table>";
+      		}
 			elseif ($User == "SYS room")
 			{
-        $Message = "<I>".ROOM_SAYS." <FONT class=\"notify\">".$Message."</FONT></FONT></I></td></tr></table>";
-        $noteclass = "notify2";
-      }
+       		$Message = "<I>".ROOM_SAYS." <FONT class=\"notify\">".$Message."</FONT></FONT></I></td></tr></table>";
+       		$noteclass = "notify2";
+      		}
 			else
 			{
 				if ($Dest != "" && substr($User,0,8) != "SYS dice") $NewMsg .= "</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\"><B>".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]<BDO dir=\"${textDirection}\"></BDO>".$colornamedest_endtag."></B> ";
@@ -507,6 +507,34 @@ $DbLink->clean_results();
 		}
 	$DbLink->close();
 	}
+
+// Random Quote mod by Ciprian
+if (C_QUOTE)
+{
+	if (!C_QUOTE_TIME) settype($quotetime = 60, "integer");
+	else settype($quotetime = C_QUOTE_TIME*60, "integer");
+	if (time() % $quotetime < C_MSG_REFRESH*2)
+	{
+		$quotecolor = C_QUOTE_COLOR; // change to the font size of your choice
+		$quotes = file(C_QUOTE_PATH);
+		$quote = rand(0, sizeof($quotes)-1);
+		$quotetext = "<div class=\"quote\">";
+		if($quotecolor != "") $quotetext .= "<font color=\"$quotecolor\">";
+		$quotetext .= $quotes[$quote];
+		if($quotecolor != "") $quotetext .= "</font>";
+		$quotetext .= "</div>";
+		$quotetext = ereg_replace("\r\n", "", $quotetext);
+		
+		$DbLink = new DB;
+		$DbLink->query("SELECT m_time FROM ".C_MSG_TBL." WHERE username='$QUOTE_NAME' AND (room = '$R' OR room='*') AND m_time > ".(time() - $quotetime)." ORDER BY m_time DESC LIMIT 1");
+		if ($DbLink->num_rows() == 0)
+		{
+			if (C_QUOTE_ALL) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', '$QUOTE_NAME', '', ".time().", '', '$quotetext', '', '')");
+			else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '$QUOTE_NAME', '', ".time().", '', '$quotetext', '', '')");
+		}
+	$DbLink->close();
+	}
+}
 ?>
 </BODY>
 </HTML>

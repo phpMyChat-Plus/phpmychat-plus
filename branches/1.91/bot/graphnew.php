@@ -149,7 +149,7 @@ function graphwalker($input,$parent,$timesthrough,$onwild,$parton,&$inputstarval
 
 	$curpmsize=0;
 
-	//print "input: $input<BR>";
+	//print "input: $input<br />";
 	debugger("Graphwalker called. Input|$input| Parent: $parent Timesthrough: $timesthrough Onwild: $onwild Parton: $parton",1);
 
 	$continuenode=1;

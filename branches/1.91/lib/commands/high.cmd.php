@@ -1,7 +1,7 @@
 <?php
 
 // Check for swear words in the message if necessary
-if (C_NO_SWEAR == 1)
+if (C_NO_SWEAR)
 {
 	include("./lib/swearing.lib.php");
 	$Cmd[1] = checkwords($Cmd[1], false);

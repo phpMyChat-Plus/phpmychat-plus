@@ -15,7 +15,7 @@ $jsTbl = array(
 
 if ($ST == 1)
 {
-	$CorrectedDate = mktime(date("H") + C_TMZ_OFFSET,date("i"),date("s"),date("m"),date("d"),date("Y"));
+	$CorrectedDate = mktime(date("G") + C_TMZ_OFFSET,date("i"),date("s"),date("m"),date("d"),date("Y"));
 	$jsTbl[] = "gap = window.parent.calc_gap(\"".date("F d, Y H:i:s", $CorrectedDate)."\");";
 	$jsTbl[] = "window.parent.clock(gap);";
 }

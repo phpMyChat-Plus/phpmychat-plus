@@ -24,7 +24,7 @@
    - $R1 -> the name of the 'other created' public room the user wants to enter in (not
 		defined if he doesn't choose to enter one of the 'other' public rooms);
    - $R2 -> the name of the default private room the user wants to enter in (not
-		defined if he doesn't choose to enter one of the default public rooms);
+		defined if he doesn't choose to enter one of the default private rooms);
    - $R3 -> the name of the room the user wants to create (not defined if he
 		doesn't choose to create a room);
    - $E -> the name of the room the user just leaves. When $E is defined, the $EN
@@ -42,18 +42,18 @@
 /*********** COMMON WORK ***********/
 
 // Get the names and values for vars sent to index.lib.php
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
 };
 
 // Get the names and values for vars posted from the form bellow
-if (isset($HTTP_POST_VARS))
+if (isset($_POST))
 {
-	while(list($name,$value) = each($HTTP_POST_VARS))
+	while(list($name,$value) = each($_POST))
 	{
 		$$name = $value;
 	};
@@ -87,7 +87,7 @@ header("Content-Type: text/html; charset=${Charset}");
 set_magic_quotes_runtime(0);
 
 // Get the relative path to the script that called this one
-if (!isset($PHP_SELF)) $PHP_SELF = $HTTP_SERVER_VARS["PHP_SELF"];
+if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER["PHP_SELF"];
 $Action = basename($PHP_SELF);
 $From = urlencode(ereg_replace("[^/]+/","../",$ChatPath).$Action);
 
@@ -97,7 +97,7 @@ if (!isset($FontFace)) $FontFace = "";
 $DisplayFontMsg = !(isset($U) && $U != "");
 
 // Translate to html special characters, and entities if message was sent with a latin 1 charset
-$Latin1 = ($Charset == "iso-8859-1");
+$Latin1 = ($Charset == "utf-8");
 function special_char($str,$lang)
 {
 	return addslashes($lang ? htmlentities(stripslashes($str)) : htmlspecialchars(stripslashes($str)));
@@ -150,7 +150,7 @@ if (isset($KK))
 			$Error = L_REG_39;
 			break;
 		case '3':
-			$Error = L_ERR_USR_19;
+			$Error = utf8_encode(L_ERR_USR_19);
 			break;
 		case '4':
 			if ($Reason == "") $Error = L_ERR_USR_20;
@@ -248,7 +248,7 @@ if(isset($U) && (isset($N) && $N != ""))
 if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 {
 	$relog = false;
-	if (C_NO_SWEAR == 1) include("./${ChatPath}lib/swearing.lib.php");
+	if (C_NO_SWEAR) include("./${ChatPath}lib/swearing.lib.php");
 	// Check for no nick entered in
 	if ($U == "")
 	{
@@ -260,7 +260,7 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 		$Error = L_ERR_USR_16a;
 	}
 	// Check for swear words in the nick
-	elseif (C_NO_SWEAR == 1 && checkwords($U, true))
+	elseif (C_NO_SWEAR && checkwords($U, true))
 	{
 		$Error = L_ERR_USR_18;
 	}
@@ -350,17 +350,17 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 		// User is not registered -> Deny room creation
 		if (!$reguser)
 		{
-			$Error = $T == 1 ? L_ERR_USR_13 : L_ERR_USR_24;
+			$Error = $T ? utf8_encode(L_ERR_USR_13) : L_ERR_USR_24;
 		}
 		// Check for invalid characters or empty room name
 		else if (trim($R3) == "" || ereg("[,\]", stripslashes($R3)))
 		{
-			$Error = L_ERR_ROM_1;
+			$Error = utf8_encode(L_ERR_ROM_1);
 		}
 		// Check for swear words in room name
-		else if(C_NO_SWEAR == 1 && checkwords($R3, true))
+		else if(C_NO_SWEAR && checkwords($R3, true))
 		{
-			$Error = L_ERR_ROM_2;
+			$Error = utf8_encode(L_ERR_ROM_2);
 		}
 		// Ensure there is no existing room with the same name but a different type...
 		else
@@ -371,7 +371,7 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 			{
 				if (strcasecmp($R3,$ToCheck[$i]) == "0")
 				{
-					$Error = ($T == 0 ? L_ERR_ROM_3 : L_ERR_ROM_4);
+					$Error = (!$T ? utf8_encode(L_ERR_ROM_3)." (".$R3.")" : utf8_encode(L_ERR_ROM_4)." (".$R3.")");
 					break;
 				};
 			};
@@ -384,7 +384,7 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 				$DbLink->query("SELECT count(*) FROM ".C_MSG_TBL." WHERE room = '$R3' AND type = '$T1' LIMIT 1");
 				list($Nb) = $DbLink->next_record();
 				$DbLink->clean_results();
-				if($Nb != 0) $Error = ($T == 0 ? L_ERR_ROM_3:L_ERR_ROM_4);
+				if($Nb != 0) $Error = (!$T ? utf8_encode(L_ERR_ROM_3)." (".$R3.")" : utf8_encode(L_ERR_ROM_4)." (".$R3.")");
 			};
 		};
 	};
@@ -580,12 +580,12 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	$CookieRoom = urlencode(stripslashes($R));
 	setcookie("CookieRoom", $CookieRoom, time() + 60*60*24*365);        // cookie expires in one year
 	setcookie("CookieRoomType", $T, time() + 60*60*24*365);        // cookie expires in one year
-	if (isset($HTTP_COOKIE_VARS))
+	if (isset($_COOKIE))
 	{
-		if (isset($HTTP_COOKIE_VARS["CookieMsgOrder"])) $CookieMsgOrder = $HTTP_COOKIE_VARS["CookieMsgOrder"];
-		if (isset($HTTP_COOKIE_VARS["CookieUserSort"])) $CookieUserSort = $HTTP_COOKIE_VARS["CookieUserSort"];
-		if (isset($HTTP_COOKIE_VARS["CookieShowTimestamp"])) $CookieShowTimestamp = $HTTP_COOKIE_VARS["CookieShowTimestamp"];
-		if (isset($HTTP_COOKIE_VARS["CookieNotify"])) $CookieNotify = $HTTP_COOKIE_VARS["CookieNotify"];
+		if (isset($_COOKIE["CookieMsgOrder"])) $CookieMsgOrder = $_COOKIE["CookieMsgOrder"];
+		if (isset($_COOKIE["CookieUserSort"])) $CookieUserSort = $_COOKIE["CookieUserSort"];
+		if (isset($_COOKIE["CookieShowTimestamp"])) $CookieShowTimestamp = $_COOKIE["CookieShowTimestamp"];
+		if (isset($_COOKIE["CookieNotify"])) $CookieNotify = $_COOKIE["CookieNotify"];
 	};
 	if (!isset($O)) $O = isset($CookieMsgOrder) ? $CookieMsgOrder : C_MSG_ORDER;
 	if (!isset($ST)) $ST = isset($CookieShowTimestamp) ? $CookieShowTimestamp : C_SHOW_TIMESTAMP;
@@ -704,17 +704,17 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	<LINK REL="SHORTCUT ICON" HREF="<?php echo($ChatPath); ?>favicon.ico">
 	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
 	<!--
-// Display & remove the server time in the status bas
-// Returns the days in the status bas
+// Display & remove the server time in the status bar
+// Returns the days in the status bar
 function get_day(time,plus)
 {
-		monday = " <?php echo(L_MON) ?>";
-		tuesday = " <?php echo(L_TUE) ?>";
-		wednesday = " <?php echo(L_WED) ?>";
-		thursday = " <?php echo(L_THU) ?>";
-		friday = " <?php echo(L_FRI) ?>";
-		saturday = " <?php echo(L_SAT) ?>";
-		sunday = " <?php echo(L_SUN) ?>";
+		monday = " <?php echo(utf8_encode(L_MON)) ?>";
+		tuesday = " <?php echo(utf8_encode(L_TUE)) ?>";
+		wednesday = " <?php echo(utf8_encode(L_WED)) ?>";
+		thursday = " <?php echo(utf8_encode(L_THU)) ?>";
+		friday = " <?php echo(utf8_encode(L_FRI)) ?>";
+		saturday = " <?php echo(utf8_encode(L_SAT)) ?>";
+		sunday = " <?php echo(utf8_encode(L_SUN)) ?>";
 		dayN = time.getDay();
 		day = dayN + plus;
 		if (day == 1 || day == 8) is_day = monday;
@@ -742,7 +742,7 @@ function get_day(time,plus)
 		if ((timenow > 1173578400 && timenow < 1194141599) || (timenow > 1205028000 && timenow < 1225591199) || (timenow > 1236477600 && timenow < 1257040799) || (timenow > 1268532000 && timenow < 1289095199) || (timenow > 1299981600 && timenow < 1320544799)) timeutc = 60;
 		return timeutc;
 	}
-// Display & remove the server time at the status bas
+// Display & remove the server time at the status bar
 	function clock(gap)
 	{
 		cur_date = new Date();
@@ -793,7 +793,7 @@ function get_day(time,plus)
 		if (cur_hoursSYD < 10) cur_hoursSYD = "0" + cur_hoursSYD
 		cur_timeSYD = cur_hoursSYD + ":" + calc_minutes + daySYD;;
 		WORLD_TIME = <?php echo((C_WORLDTIME) ? '" " + "(NYC: " + cur_timeNYC + " | LON: " + cur_timeGMT + " | PAR: " + cur_timePAR + " | BUC: " + cur_timeBUC + " | TYO: " + cur_timeTYO + " | SYD: " + cur_timeSYD + ")"' : ''); ?>;
-		window.status = "<?php echo(L_SVR_TIME); ?>" + calc_time + WORLD_TIME;
+		window.status = "<?php echo(utf8_encode(L_SVR_TIME)); ?>" + calc_time + WORLD_TIME;
 
 		clock_disp = setTimeout('clock(' + gap + ')', 1000);
 	}
@@ -812,15 +812,10 @@ function get_day(time,plus)
 	}
 
 	<?php
-	if ($ST == 1)
-	{
-		$CorrectedDate = mktime(date("H") + C_TMZ_OFFSET,date("i"),date("s"),date("m"),date("d"),date("Y"));
+		$CorrectedDate = mktime(date("G") + C_TMZ_OFFSET,date("i"),date("s"),date("m"),date("d"),date("Y"));
 		?>
 		gap = calc_gap("<?php echo(date("F d, Y H:i:s", $CorrectedDate)); ?>");
 		clock(gap);
-		<?php
-	}
-	?>
 
 	// Automatically submit a command
 	function runCmd(CmdName,infos)
@@ -1032,7 +1027,7 @@ function get_day(time,plus)
 		else if (isCmd && !re.test(inputFrameForm.elements['M'].value))
 		{
 			inputFrameForm.elements['M'].select();
-			alert("<?php echo(str_replace("\"","\\\"",L_BAD_CMD)); ?>");
+			alert("<?php echo(str_replace("\"","\\\"",utf8_encode(L_BAD_CMD))); ?>");
 			return false;
 		}
 		// It doesn't look like a command -> it's a message, then ensure a message
@@ -1240,10 +1235,10 @@ function isCookieEnabled() {
 
 	function reset_R2()
 	{
-			document.forms['Params'].elements['R0'].options[0].selected = true;
-			document.forms['Params'].elements['R1'].options[0].selected = true;
-			document.forms['Params'].elements['T'].options[1].selected = true;
-			document.forms['Params'].elements['R3'].value = '';
+		document.forms['Params'].elements['R0'].options[0].selected = true;
+		document.forms['Params'].elements['R1'].options[0].selected = true;
+		document.forms['Params'].elements['T'].options[1].selected = true;
+		document.forms['Params'].elements['R3'].value = '';
 	}
 
 	function reset_R3()
@@ -1286,14 +1281,14 @@ function layout($Err, $U, $R, $T, $C, $status)
 
 <CENTER>
 <FORM ACTION="<?php echo("$Action"); ?>" METHOD="POST" AUTOCOMPLETE="" NAME="Params" onSubmit="defineVerField(); return isCookieEnabled()">
-<SPAN CLASS="ChatTitle"><?php if (C_SHOW_LOGO) echo(APP_LOGO."<br>".APP_NAME." (".APP_VERSION.")"); ?></SPAN>
+<SPAN CLASS="ChatTitle"><?php if (C_SHOW_LOGO) echo(APP_LOGO."<br />".APP_NAME." (".APP_VERSION.APP_MINOR.")"); ?></SPAN>
 <?php
 // Msg for translations with no real iso code
 if (isset($FontPack) && $FontPack != "" && file_exists($ChatPath."localization/${L}/${FontPack}"))
 {
 	if (!isset($Error) && $DisplayFontMsg) echo("<P CLASS=\"ChatError\">This translation of ".APP_NAME." requires <A HREF=\"${ChatPath}localization/${L}/${FontPack}\" CLASS=\"ChatFonts\" title=\"" . str_replace('"', '', $FontName) . "\">these font faces</A></P>");
 }
-if (C_SHOW_TUT == 1)
+if (C_SHOW_TUT)
 {
 ?>
 <P>
@@ -1307,7 +1302,7 @@ if (C_SHOW_TUT == 1)
  echo(L_WEL_1." ".C_MSG_DEL." ".(C_MSG_DEL == 1 ? L_HOUR : L_HOURS));
 if(C_CHAT_BOOT)
 {
- echo("<br>".L_WEL_2." ".C_USR_DEL." ".(C_USR_DEL == 1 ? L_MIN : L_MINS));
+ echo("<br />".L_WEL_2." ".C_USR_DEL." ".(C_USR_DEL == 1 ? L_MIN : L_MINS));
 }
 	echo(".");
 	?>
@@ -1318,7 +1313,7 @@ if($DbLink->query("SELECT DISTINCT u.username FROM ".C_USR_TBL." u, ".C_MSG_TBL.
 {
 	$Nb = $DbLink->num_rows();
 	$link = " <A HREF=\"${ChatPath}users_popupL.php?From=$From&L=$L\" CLASS=\"ChatLink\" onClick=\"users_popup(); return false\" TARGET=\"_blank\" onMouseOver=\"window.status='Check who is chatting.'; return true;\">";
-	echo("<P CLASS=\"ChatP1\">".L_CUR_1." ".($Nb != 1 ? L_CUR_1a." ".$link.$Nb." ".L_USERS."</A>" : L_CUR_1b." ".$link.$Nb." ".L_USER."</A>")." ".L_CUR_2."");
+	echo("<P CLASS=\"ChatP1\">".L_CUR_1." ".($Nb != 1 ? L_CUR_1a." ".$link.$Nb." ".L_USERS."</A>" : L_CUR_1b." ".$link.$Nb." ".L_USER."</A>")." ".L_CUR_2.".");
 }
 $DbLink->clean_results();
 if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $status == "a"))
@@ -1332,7 +1327,7 @@ $result = @mysql_query("SELECT DISTINCT ip,browser FROM ".C_LRK_TBL."",$handler)
 $online_users = @mysql_numrows($result);
 @mysql_close();
 $lurklink = " <A HREF=\"lurking.php?L=$L&D=10\" CLASS=\"ChatLink\" TARGET=\"_blank\" onMouseOver=\"window.status='Open the Lurking Page.'; return true;\">";
-echo("<br>".L_CUR_1." ".($online_users != 1 ? L_CUR_1a.$lurklink.$online_users." ".L_LURKERS."</A>" : L_CUR_1b.$lurklink.$online_users." ".L_LURKER."</A>"));
+echo("<br />".L_CUR_1." ".($online_users != 1 ? L_CUR_1a.$lurklink.$online_users." ".L_LURKERS."</A>." : L_CUR_1b.$lurklink.$online_users." ".L_LURKER."</A>."));
 }
 ?>
 </P>
@@ -1356,7 +1351,7 @@ if (!isset($Ver)) $Ver = "L";
 		<TABLE BORDER=0 CLASS="ChatTable">
 		<?php
 		// Display flags if necessary
-		if (C_MULTI_LANG == 1)
+		if (C_MULTI_LANG)
 		{
 		?>
 		<TR CLASS="ChatCell">
@@ -1369,9 +1364,9 @@ if (!isset($Ver)) $Ver = "L";
 				while(list($key, $name) = each($AvailableLanguages))
 				{
 					$i++;
-					echo("<A HREF=\"$Action?L=${name}\" onMouseOver=\"window.status='Switch to ".ucfirst(str_replace("_"," ",$name)).".'; return true;\" Title=\"".ucfirst(str_replace("_"," ",$name))."\">");
-					echo("<IMG SRC=\"${ChatPath}localization/${name}/flag.gif\" BORDER=0 WIDTH=20 HEIGHT=13 ALT=\"".ucfirst(str_replace("_"," ",$name))."\"></A>&nbsp;");
-					if ($i % 15 == 0) echo ("<br>");
+					echo("<A HREF=\"$Action?L=${name}\" onMouseOver=\"window.status='Switch to ".ucwords(str_replace("_"," ",$name)).".'; return true;\" Title=\"".ucwords(str_replace("_"," ",$name))."\">");
+					echo("<IMG SRC=\"${ChatPath}localization/${name}/flag.gif\" BORDER=0 WIDTH=20 HEIGHT=13 ALT=\"".ucwords(str_replace("_"," ",$name))."\"></A>&nbsp;");
+					if ($i % 15 == 0) echo ("<br />");
 				};
 				unset($AvailableLanguages);
 				?>
@@ -1408,7 +1403,7 @@ if (!isset($Ver)) $Ver = "L";
 		</TR>
 		<TR CLASS="ChatCell">
 			<TD ALIGN="center" COLSPAN=2 CLASS="ChatCell">
-				<br>
+				<br />
 					<A HREF="<?php echo($ChatPath); ?>register.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('register'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_3); ?>.'; return true;"><?php echo(L_REG_3); ?></A>
 					| <A HREF="<?php echo($ChatPath); ?>edituser.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('edituser'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_4); ?>.'; return true;"><?php echo(L_REG_4); ?></A>
 				<?php
@@ -1483,7 +1478,7 @@ if (!isset($Ver)) $Ver = "L";
 							if (!room_in($Room, $DefaultRoomsString))
 							{
 								echo("<OPTION VALUE=\"".htmlspecialchars($Room)."\"");
-								if(strcasecmp($Room, $PrevRoom) == 0 && $DefaultRoomFound == 0)
+								if(strcasecmp($Room, $PrevRoom) == 0 && !$DefaultRoomFound)
 								{
 									echo(" SELECTED");
 									$DefaultRoomFound = 1;
@@ -1504,7 +1499,7 @@ if (!isset($Ver)) $Ver = "L";
 			if($R != "") $PrevPrivateRoom = urldecode($R);
 			$DbLink->query("SELECT perms,rooms FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 			if ($DbLink->num_rows() != 0) $reguser = ($DbLink->num_rows() != 0);
-			else $nonreguser == 1;
+			else $nonreguser = 1;
 			if ($reguser) list($perms,$rooms) = $DbLink->next_record();
 			$DbLink->clean_results();
 			if ($perms == "admin")
@@ -1629,13 +1624,16 @@ if (!isset($Ver)) $Ver = "L";
 				<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP">
 					<?php echo(L_SET_9." "); ?>
 					<SELECT NAME="T" CLASS="ChatBox">
-						<OPTION VALUE="1" <?php if($T == 1 && $DefaultPrivateRoomFound == 0) echo("SELECTED"); ?>><?php echo(L_SET_10); ?></OPTION>
-						<OPTION VALUE="0" <?php if($T == 0 && $DefaultRoomFound == 0) echo("SELECTED"); ?>><?php echo(L_SET_11); ?></OPTION>
+<?php
+if((!$T && !$DefaultRoomFound) || (!$T && !$DefaultPrivateRoomFound)) $T = 1;
+?>
+						<OPTION VALUE="1" <?php if($T && !$DefaultPrivateRoomFound) echo("SELECTED"); ?> <?php if(!$T && $DefaultPrivateRoomFound) echo("DISABLED"); ?>><?php echo(L_SET_10); ?></OPTION>
+						<OPTION VALUE="0" <?php if((!$T && !$DefaultRoomFound) || ($T && $DefaultPrivateRoomFound)) echo("SELECTED"); ?>><?php echo(L_SET_11); ?></OPTION>
 					</SELECT>
 					<?php echo(" ".L_SET_12." :"); ?>
 				</TD>
 				<TD VALIGN="TOP" CLASS="ChatCell">
-					<INPUT TYPE="text" NAME="R3" SIZE=11 MAXLENGTH=14 <?php if($DefaultRoomFound == 0 && $DefaultPrivateRoomFound == 0 && $R != "") echo("VALUE=\"".htmlspecialchars(urldecode($R))."\""); ?> CLASS="ChatBox" onChange="reset_R3();">
+					<INPUT TYPE="text" NAME="R3" SIZE=11 MAXLENGTH=14 <?php if(!$DefaultRoomFound && !$DefaultPrivateRoomFound && $R != "") echo("VALUE=\"".htmlspecialchars(urldecode($R))."\""); ?> CLASS="ChatBox" onChange="reset_R3();">
 				</TD>
 			</TR>
 			<?php
@@ -1643,13 +1641,21 @@ if (!isset($Ver)) $Ver = "L";
 		if (C_VERSION == 1)
 		{
 			?>
-		<INPUT TYPE="hidden" NAME="T" VALUE="0" <?php if($T == 0 && $DefaultRoomFound == 0) echo("SELECTED"); ?>>
+		<INPUT TYPE="hidden" NAME="T" VALUE="0" <?php if((!$T && !$DefaultRoomFound) || ($T && $DefaultPrivateRoomFound)) echo("SELECTED"); ?>>
 			<?php
 		}
 		?>
 		</TABLE>
-		<br><?php echo(L_SET_18); ?><br>
+		<br /><?php echo(L_SET_18); ?><br />
 		<P CLASS="ChatP2">
+<?php
+if (C_REQUIRE_REGISTER)
+{
+?>
+		<div CLASS="ChatError"><?php echo(L_ERR_USR_14); ?></div>
+<?php
+}
+?>
 		<?php echo(L_SET_13." "); ?>
 		<INPUT TYPE="submit" VALUE="<?php echo(L_SET_14); ?>" CLASS="ChatBox"> ...
 		</P>
@@ -1658,15 +1664,15 @@ if (!isset($Ver)) $Ver = "L";
 </TABLE>
 </FORM>
 <?php
-if (C_SHOW_INFO == 1)
+if (C_SHOW_INFO)
 {
 ?>
 <FONT COLOR=yellow SIZE=-1>
 <?php
 // Info on welcome page about cmds, mods and bot. Edit lib/info.lib.php to add more infos about your chat features
-if (SET_CMDS==1) echo(INFO_CMDS."<br>");
-if (SET_MODS==1) echo(INFO_MODS."<br>");
-if (SET_BOT==1) echo(INFO_BOT."<br>");
+if (SET_CMDS) echo(INFO_CMDS."<br />");
+if (SET_MODS) echo(INFO_MODS."<br />");
+if (SET_BOT && C_BOT_CONTROL) echo(INFO_BOT."<br />");
 ?>
 </FONT>
 <?php
@@ -1674,7 +1680,7 @@ if (SET_BOT==1) echo(INFO_BOT."<br>");
 ?>
 <P>
 <?php
-if (C_SHOW_COUNTER == 1)
+if (C_SHOW_COUNTER)
 {
 		include_once("./${ChatPath}acounter.php");
     $ani_counter = new acounter();
@@ -1686,16 +1692,16 @@ echo ($ani_counter->create_output("chat_index"));
 ?>
 </P>
 <SPAN CLASS="ChatCopy" dir="LTR">
-&copy; 2000-<?php echo(date(Y))?> <a HREF="http://phpmychat.sourceforge.net/" TARGET=_blank CLASS="ChatLink" Title="Visit the phpMyChat homepage" onMouseOver="window.status='Click to visit phpMyChat Homepage.'; return true">The phpHeaven Team</a><br>
-&copy; 2005-<?php echo(date(Y))?> Plus development by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" Title="Send Ciprian your feedback" CLASS="ChatLink" onMouseOver="window.status='Send your feedback to Ciprian at ciprianmp@yahoo.com.'; return true;">Ciprian M</a>.<br>
-Thanks to all the contributors in the <a href="http://groups.yahoo.com/subscribe/phpmychat" CLASS="ChatLink" title="Subscribe to phpMyChat group on yahoo" onMouseOver="window.status='Click here to join phpMyChat group.'; return true;" target=_blank>phpMyChat group</a> !<br>
+&copy; 2000-<?php echo(date(Y))?> <a HREF="http://phpmychat.sourceforge.net/" TARGET=_blank CLASS="ChatLink" Title="Visit the phpMyChat homepage" onMouseOver="window.status='Click to visit phpMyChat Homepage.'; return true">The phpHeaven Team</a><br />
+&copy; 2005-<?php echo(date(Y))?> Plus development by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" Title="Send Ciprian your feedback" CLASS="ChatLink" onMouseOver="window.status='Send your feedback to Ciprian at ciprianmp@yahoo.com.'; return true;">Ciprian M</a>.<br />
+Thanks to all the contributors in the <a href="http://groups.yahoo.com/subscribe/phpmychat" CLASS="ChatLink" title="Subscribe to phpMyChat group on yahoo" onMouseOver="window.status='Click here to join phpMyChat group.'; return true;" target=_blank>phpMyChat group</a> !<br />
 Download this full chat pack from <a href="https://sourceforge.net/project/showfiles.php?group_id=19371&package_id=199435" target=_blank title="Download this phpMyChat Plus Pack" onMouseOver="window.status='Download this phpMyChat Plus Pack.'; return true;" CLASS="ChatLink">here</a>
 </SPAN>
 <?php
-if (C_SHOW_OWNER == 1)
+if (C_SHOW_OWNER)
 {
 ?>
-<br><SPAN CLASS="ChatCopy" dir="LTR">
+<br /><SPAN CLASS="ChatCopy" dir="LTR">
 Owner of this chat server -
 <?php
 include_once("./admin/mail4admin.lib.php");
@@ -1711,8 +1717,8 @@ else echo(C_ADMIN_NAME);
 <?php
 }
 ?>
-</CENTER>
 
+</CENTER>
 </TD></TR></TABLE>
 
 <?php

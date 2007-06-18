@@ -37,7 +37,7 @@ else
 			// Check for swear words in the message to be sent if there is one
 			if (trim($Cmd[2]) != "")
 			{
-				if (C_NO_SWEAR == 1 && $R != C_NO_SWEAR_ROOM1 && $R != C_NO_SWEAR_ROOM2 && $R != C_NO_SWEAR_ROOM3 && $R != C_NO_SWEAR_ROOM4)
+				if (C_NO_SWEAR && $R != C_NO_SWEAR_ROOM1 && $R != C_NO_SWEAR_ROOM2 && $R != C_NO_SWEAR_ROOM3 && $R != C_NO_SWEAR_ROOM4)
 				{
 				include("./lib/swearing.lib.php");
 				$Cmd[2] = checkwords($Cmd[2], false);

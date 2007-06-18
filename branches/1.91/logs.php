@@ -1,16 +1,16 @@
 <?php
 // Get the names and values for vars sent to index.lib.php
 
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
 };
-if (isset($HTTP_POST_VARS))
+if (isset($_POST))
 {
-	while(list($name,$value) = each($HTTP_POST_VARS))
+	while(list($name,$value) = each($_POST))
 	{
 		$$name = $value;
 	};
@@ -20,8 +20,8 @@ if (isset($HTTP_POST_VARS))
 if (isset($L) && !is_dir("./localization/".$L)) exit();
 if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
-if (isset($HTTP_COOKIE_VARS["CookieStatus"])) $statusu = $HTTP_COOKIE_VARS["CookieStatus"];
-if (isset($HTTP_COOKIE_VARS["CookieRoom"]) && !isset($R)) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
+if (isset($_COOKIE["CookieStatus"])) $statusu = $_COOKIE["CookieStatus"];
+if (isset($_COOKIE["CookieRoom"]) && !isset($R)) $R = urldecode($_COOKIE["CookieRoom"]);
 if (!isset($R)) $skin == "style1";
 
 require("config/config.lib.php");
@@ -107,13 +107,13 @@ else
 <html>
 <head>
 <title>Invalid address - Logging feature disabled</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 </head>
 
 <body class="frame">
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><center><font size="+2"><b>You don't have access to this file.<br>Logging feature has been disabled<br>Press <a href=./>here</a> to go to the index page or just wait...</b><font>
-<br /><br /><br /><br>Hacking attempt! Redirection to the index page in 5 seconds.</center>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><center><font size="+2"><b>You don't have access to this file.<br />Logging feature has been disabled<br />Press <a href=./>here</a> to go to the index page or just wait...</b><font>
+<br /><br /><br /><br />Hacking attempt! Redirection to the index page in 5 seconds.</center>
 <meta http-equiv="refresh" content="5; url=./">
 </body>
 </html>

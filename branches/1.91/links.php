@@ -1,9 +1,9 @@
 <?php
 
 // Get the names and values for vars sent by the script that called this one
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
@@ -28,8 +28,8 @@ $Ver="";
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
 <head>
-<title>Posted Link</title>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<title>Posted Links</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK REL="stylesheet" HREF="<?php echo($skin); ?>.css.php" TYPE="text/css">
 </head>
 
@@ -56,7 +56,7 @@ echo "<p align=\"center\"><a href=\"".$urlarray[$x]."\" title=\"Click to open li
 </td>
 </tr>
 </table>
-<div align="center"><font size="-2">- Powered by xaex.de -</font></div>
+<div align="right">&copy; 2006-<?php echo(date(Y)); ?> - by <a href=http://www.xaex.de onMouseOver="window.status='Click to open author&#39;s site.'; return true;" title="Open author&#39;s site" target=_blank>xaex.de</a></div>
 </SPAN>
 </body>
 </html>

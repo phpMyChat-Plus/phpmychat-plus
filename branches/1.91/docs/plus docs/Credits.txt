@@ -10,14 +10,14 @@ Pete ... (aka Digioz Multimedia) <email> <website>
 	- Contribution 3
 	- Contribution ...
 
-Alexander Eisele <xaex@mail.ru>
+Alexander Eisele <xaex@xeax.de>
 	- Links posting protection through popup parser
 	- Loader/messages frame change to table format for better alignment
 	- Wrap at 40 chars the messages without spaces
 	
 Yet need to be writen!!!
 
-Thank you very much for all the moders whose work is included in this version. Their credits should and will go to thisplace in the next release packages.
+Thank you very much for all the moders whose work is included in this version. Their credits should and will go to this place in the next release packages.
 Special thanks to Pete (aka Digioz), Mei Yung, Jackee and her BluntDog for their personal support, ideas, suggestions, complaints and thoughts.
 I really appreciate it!
 My best regards,
@@ -27,61 +27,61 @@ Ciprian Murariu - the Integrator
 Localization of the Plus version
 """"""""""""""""""""""""""""""""""""
 
-  Argentinian spanish  : Matias Olivera <matiolivera@yahoo.com>
-  Czech                : Jan Mares <romantikanet@yahoo.com>
-  Dutch                : Danny <danny74@zonnet.nl>
-  English              : Nicolas Hoizey <nhoizey@phpheaven.net>,
+ Argentinian spanish : Matias Olivera <matiolivera@yahoo.com>
+ Czech        : Jan Mares <romantikanet@yahoo.com>
+ Dutch        : Danny <danny74@zonnet.nl>
+ English       : Nicolas Hoizey <nhoizey@phpheaven.net>,
 												 Ciprian Murariu <ciprianmp@yahoo.com>
-  French               : Drazen McLukic - Leloup <leloup@le-loup.info>
-  German               : Alexander Eisele <xaex@mail.ru>
-  Italian              : Mike Mikius <mikiusss@yahoo.com>
-  Romanian             : Ciprian Murariu <ciprianmp@yahoo.com>
-  Russian              : Alexander Eiselle <xaex@mail.ru>
-  Spanish              : Roxana Castaneda <roxminu@yahoo.com>
+ French        : Drazen McLukic - Leloup <leloup@le-loup.info>
+ German        : Alexander Eisele <xaex@xeax.de>
+ Italian       : Mike Mikius <mikiusss@yahoo.com>
+ Romanian       : Ciprian Murariu <ciprianmp@yahoo.com>
+ Russian       : Alexander Eiselle <xaex@xeax.de>
+ Spanish       : Roxana Castaneda <roxminu@yahoo.com>
 
 
 Core developers of the standard version
 """""""""""""""""""""""""""""""""""""""
 
 Nicolas Hoizey <nhoizey@phpheaven.net>
-  Initial concepts and design
-  Bugs fix
-  Documentation
+ Initial concepts and design
+ Bugs fix
+ Documentation
 
 Loïc Chapeaux <lolo@phpheaven.net>
-  JavaScript enhancements
-  IRC-style commands
-  Easy installation process
-  Bugs fix
+ JavaScript enhancements
+ IRC-style commands
+ Easy installation process
+ Bugs fix
 
 Matthieu Belge <mbelge@free.fr>
-  Great Perl-like regular expressions
-  Benchmarks
+ Great Perl-like regular expressions
+ Benchmarks
 
 Martin Dvorak <jezek2@penguin.cz>
-  HTML tags parsing in messages
-  User registration
-  Administration
-  Commands
-  Bugs fix
+ HTML tags parsing in messages
+ User registration
+ Administration
+ Commands
+ Bugs fix
 
 Christian Hacker <c.hacker@dreamer-chat.de>
-  Mail feature for the administrator
+ Mail feature for the administrator
 
 Etienne Gagnon <tinou@tinou.net>
-  Database design and optimization
+ Database design and optimization
 
 Sergey I. Golod <rover@tob.ru>
-  Security analysis
+ Security analysis
 
 Database Specific Code
 """"""""""""""""""""""
 
 Nicolas Hoizey <nhoizey@phpheaven.net>
-  MySQL library
+ MySQL library
 
 Martin Dvorak <jezek2@penguin.cz>
-  PostgreSQL library
+ PostgreSQL library
 
 J. "Guli" Mikulas <guli1@email.cz>
-  ODBC library
+ ODBC library

@@ -156,10 +156,19 @@ $CHAT_BOOT						= $row[129];
 $WELCOME_SOUND				= $row[130];
 $WORLDTIME						= $row[131];
 $UPD_CHECK						= $row[132];
+$QUOTE						= $row[133];
+$QUOTE_TIME			= $row[134];
+$QUOTE_COLOR			= $row[135];
+$QUOTE_ALL			= $row[136];
+$QUOTE_PATH			= $row[137];
 
-$query_bot1 = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.bot.com'";
-$result_bot1 = mysql_query($query_bot1);
-list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_bot1);
+$query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.com'";
+$result_bot = mysql_query($query_bot);
+list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_bot);
+
+$query_quote = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='quote@quote.com'";
+$result_quote = mysql_query($query_quote);
+list($QUOTE_NAME, $QUOTE_AVATAR, $QUOTE_FONT_COLOR) = mysql_fetch_row($result_quote);
 
 // Cleaning settings for messages and usernames
 define("C_MSG_DEL", $MSG_DEL);
@@ -498,4 +507,14 @@ define("C_WORLDTIME", $WORLDTIME);
 
 // Enable/disable the update check feature in cpanel
 define("UPD_CHECK", $UPD_CHECK);
+
+// Random Quote mod by Ciprian
+define("C_QUOTE", $QUOTE);
+define("C_QUOTE_TIME", $QUOTE_TIME);
+define("C_QUOTE_COLOR", $QUOTE_COLOR);
+define("C_QUOTE_ALL", $QUOTE_ALL);
+define("C_QUOTE_PATH", $QUOTE_PATH);
+define("C_QUOTE_NAME", $QUOTE_NAME);
+define("C_QUOTE_AVATAR", $QUOTE_AVATAR);
+define("C_QUOTE_FONT_COLOR", $QUOTE_FONT_COLOR);
 ?>

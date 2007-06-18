@@ -34,8 +34,8 @@ function DetectTutorial($Str,$From)
 };
 
 // finds the appropriate language file
-if (isset($HTTP_COOKIE_VARS["CookieLang"]))
-	$CookieLang = $HTTP_COOKIE_VARS["CookieLang"];
+if (isset($_COOKIE["CookieLang"]))
+	$CookieLang = $_COOKIE["CookieLang"];
 if (!isset($HTTP_ACCEPT_LANGUAGE))
 	$HTTP_ACCEPT_LANGUAGE = getenv("HTTP_ACCEPT_LANGUAGE");
 if (!isset($HTTP_USER_AGENT))
@@ -61,7 +61,6 @@ elseif ($HTTP_USER_AGENT != "")
 if (!isset($L))
 {
 	$L = "english";
-	$NoTranslation = "<CENTER><P CLASS='RedText'>Sorry but the tutorial hasn't been translated to your language at this time.</P></CENTER>";
 };
 	
 // Clear the table

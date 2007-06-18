@@ -12,9 +12,9 @@ Requirements
 
 phpMyChat currently supports 3 types of database :
 
-   MySql
-   PostgreSQL
-   ODBC
+  MySql
+  PostgreSQL
+  ODBC
 
 MySql is the original database supported by phpMyChat and should at
 all times (most likely) work for sure.

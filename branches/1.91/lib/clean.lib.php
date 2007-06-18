@@ -1,8 +1,8 @@
 <?php
 // Get the names and values for vars sent to this script
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
@@ -10,7 +10,7 @@ if (isset($HTTP_GET_VARS))
 // Clean the buzz sounds after play
 $ChatS = new DB;
 $ChatS->query("DELETE FROM ".C_MSG_TBL." WHERE message='<B>[Buzzz...]</B>' AND m_time<".(time()-60)."");
-	$ChatS->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE '<B>[Buzzz...]%' AND m_time<".(time()-10)." ORDER BY m_time DESC LIMIT 1");
+$ChatS->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE '<B>[Buzzz...]%' AND m_time<".(time()-10)." ORDER BY m_time DESC LIMIT 1");
 	if ($ChatS->num_rows() > 0)
 	{
 		list($Buzz) = $ChatS->next_record();
@@ -61,12 +61,14 @@ $ChatLurk->close();
 // Clean the users table of users who closed their browsers
 $Chat = new DB;
 $ChatM = new DB;
-$Chat->query("SELECT room,username,u_time FROM ".C_USR_TBL." WHERE username!='C_BOT_NAME' AND (u_time<".(time() - 60)." OR (status='k' AND u_time<".(time() - 20)."))");
+$Chat->query("SELECT room,username,u_time FROM ".C_USR_TBL." WHERE username != 'C_BOT_NAME' AND (u_time < ".(time() - 60)." OR (status = 'k' AND u_time <  ".(time() - 20)."))");
 while(list($userroom, $userclosed, $usertime) = $Chat->next_record())
 {
 $when = date('r', $usertime + C_TMZ_OFFSET*60*60);
 $userclosed = addslashes($userclosed);
-$ChatM->query("INSERT INTO ".C_MSG_TBL." VALUES ('1', '".$userroom."', 'SYS exit', '', ".time().", '', 'sprintf(L_CLOSED_ROM, \"($when) $userclosed\")', '', '')");
+$ChatM->query("SELECT type FROM ".C_MSG_TBL." WHERE username = '$userclosed' AND room = '$userroom' ORDER BY m_time DESC LIMIT 1");
+list($usertype) = $ChatM->next_record();
+$ChatM->query("INSERT INTO ".C_MSG_TBL." VALUES ('".$usertype."', '".$userroom."', 'SYS exit', '', ".time().", '', 'sprintf(L_CLOSED_ROM, \"($when) $userclosed\")', '', '')");
 $ChatM->query("DELETE FROM ".C_USR_TBL." WHERE username='".$userclosed."'");
 $CleanUsrTbl = ($ChatM->affected_rows() > 0);
 $highpath = "botfb/" .$userclosed;         // file is in DIR "botfb" and called "username"
@@ -83,16 +85,16 @@ if(C_CHAT_BOOT)
 	if($U != '')
 	{
 	$ChatU = new DB;
-	$CondForQueryM = "(username='$U' OR message='stripslashes(sprintf(L_ENTER_ROM, \"".$U."\"))' OR message='stripslashes(sprintf(L_ENTER_ROM_NOSOUND, \"".$U."\"))' OR ((username='SYS welcome' OR username LIKE 'SYS top%' OR username='SYS room' OR username='SYS image' OR username='SYS dice1' OR username='SYS dice2' OR username='SYS dice3') AND address='$U'))";
-	$ChatU->query("SELECT m_time,room FROM ".C_MSG_TBL." WHERE ".$CondForQueryM." ORDER BY m_time DESC LIMIT 1");
-	list($m_time,$room) = $ChatU->next_record();
+	$CondForQueryM = "(username='$U' OR message='stripslashes(sprintf(L_ENTER_ROM, \"".$U."\"))' OR message='stripslashes(sprintf(L_ENTER_ROM_NOSOUND, \"".$U."\"))' OR ((username='SYS welcome' OR username LIKE 'SYS top%' OR username='SYS room' OR username='SYS image' OR username='SYS dice1' OR username='SYS dice2' OR username='SYS dice3' OR username='SYS away') AND address='$U'))";
+	$ChatU->query("SELECT type,m_time,room FROM ".C_MSG_TBL." WHERE ".$CondForQueryM." ORDER BY m_time DESC LIMIT 1");
+	list($m_type, $m_time, $m_room) = $ChatU->next_record();
 	$ChatU->clean_results();
 	$CondForQueryU = "status!='a' AND status!='m' AND username='$U' AND username!='C_BOT_NAME' AND awaystat='0' AND (u_time > ".($m_time + C_USR_DEL * 60)." OR (status ='k' AND u_time <  ".(time() - 20)."))";
 	$ChatU->query("DELETE FROM ".C_USR_TBL." WHERE ".$CondForQueryU."");
 	if($ChatU->affected_rows() > 0)
 	{
 	$CleanUsrTbl = ($ChatU->affected_rows() > 0);
-	$ChatU->query("INSERT INTO ".C_MSG_TBL." VALUES ('1', '".$room."', 'SYS exit', '', ".time().", '', 'sprintf(L_BOOT_ROM, \"$U\")', '', '')");
+	$ChatU->query("INSERT INTO ".C_MSG_TBL." VALUES ('".$m_type."', '".$m_room."', 'SYS exit', '', ".time().", '', 'sprintf(L_BOOT_ROM, \"$U\")', '', '')");
 	$ChatU = '';
 	$botpath = "botfb/" .$U;         // file is in DIR "botfb" and called "username"
 	if (file_exists($botpath)) unlink($botpath); // checks to see if user file exists.

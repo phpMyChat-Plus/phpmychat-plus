@@ -1,16 +1,16 @@
 <?php
 // Get the names and values for vars sent by the script that called this one
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
 };
 
-if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
-if (isset($HTTP_COOKIE_VARS["CookieUserSort"])) $sort_order = $HTTP_COOKIE_VARS["CookieUserSort"];
-if (!isset($L) && isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"]; 
+if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
+if (isset($_COOKIE["CookieUserSort"])) $sort_order = $_COOKIE["CookieUserSort"];
+if (!isset($L) && isset($_COOKIE["CookieLang"])) $L = $_COOKIE["CookieLang"]; 
 //if no language detected set default one
 if (!isset($L)) $L = C_LANGUAGE;
 // Fix a security hole
@@ -42,7 +42,7 @@ $DbLink = new DB;
 
 // ** Check for user entrance to beep **
 // Initialize some vars if necessary and put beep on/off in a cookie
-if (isset($HTTP_COOKIE_VARS["CookieBeep"])) $CookieBeep = $HTTP_COOKIE_VARS["CookieBeep"];
+if (isset($_COOKIE["CookieBeep"])) $CookieBeep = $_COOKIE["CookieBeep"];
 if (!isset($B)) $B = (isset($CookieBeep) ? $CookieBeep : "1");
 setcookie("CookieBeep", $B, time() + 60*60*24*365);		// cookie expires in one year
 $BeepRoom = "0";

@@ -1,5 +1,5 @@
 <?php
-// File : english/localized.admin.php - plus version (17.09.2006 - rev.6)
+// File : english/localized.admin.php - plus version (11.06.2007 - rev.9)
 // Original file by Loïc Chapeaux <lolo@phpheaven.net> & Dean Collins <joelford@pacbell.net>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -36,6 +36,7 @@ define("A_SHEET1_11", "Last connected");
 define("A_SHEET1_12", "Banishment reason (optional)");
 define("A_USER", "User");
 define("A_MODER", "Moderator");
+define("A_ADMIN", "Administrator");
 define("A_PAGE_CNT", "Page %s of %s");
 
 // Frame for banished users
@@ -51,12 +52,12 @@ define("A_SHEET2_9", "Reason (optional)");
 
 // Frame for cleaning rooms
 define("A_SHEET3_1", "List of existing rooms");
-define("A_SHEET3_2", "Clean a \"non-default\" room will also remove all moderator<br>status for this room.");
+define("A_SHEET3_2", "Clean a \"non-default\" room will also remove all moderator<br />status for this room.");
 define("A_SHEET3_3", "Clean selected rooms");
 define("A_SHEET3_4", "There are no rooms to clean.");
 
 // Frame for sending mails
-define("A_SHEET4_0", "You haven't set required variables in the<br>'chat/admin/mail4admin.php' script.");
+define("A_SHEET4_0", "You haven't set the admin email in Configuration tab.");
 define("A_SHEET4_1", "Send e-mails");
 define("A_SHEET4_2", "To:");
 define("A_SHEET4_3", "Select all");
@@ -68,6 +69,6 @@ define("A_SHEET4_8", "Internal error while sending the mails.");
 define("A_SHEET4_9", "Addresse(s), subject or message is missing!");
 
 // Frame for configuration
-define("A_SHEET5_0", "- Your phpMyChat-Plus installed version is %s -\\nThere is a new version released (%s)!");
-define("A_SHEET5_1", "- Your phpMyChat-Plus installed version is %s -<br>There is a new version released (%s)!<br>If you'd like to visit the website and get the updates<br>or read what's new, use the links bellow:");
+define("A_SHEET5_0", "Your phpMyChat-Plus installed version is %s");
+define("A_SHEET5_1", "There is a new version released (%s)!");
 ?>

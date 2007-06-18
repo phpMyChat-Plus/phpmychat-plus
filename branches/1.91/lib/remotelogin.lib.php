@@ -24,7 +24,7 @@
    - $R1 -> the name of the 'other created' public room the user wants to enter in (not
 		defined if he doesn't choose to enter one of the 'other' public rooms);
    - $R2 -> the name of the default private room the user wants to enter in (not
-		defined if he doesn't choose to enter one of the default public rooms);
+		defined if he doesn't choose to enter one of the default private rooms);
    - $R3 -> the name of the room the user wants to create (not defined if he
 		doesn't choose to create a room);
    - $E -> the name of the room the user just leaves. When $E is defined, the $EN
@@ -42,18 +42,18 @@
 /*********** COMMON WORK ***********/
 
 // Get the names and values for vars sent to index.lib.php
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
 };
 
 // Get the names and values for vars posted from the form bellow
-if (isset($HTTP_POST_VARS))
+if (isset($_POST))
 {
-	while(list($name,$value) = each($HTTP_POST_VARS))
+	while(list($name,$value) = each($_POST))
 	{
 		$$name = $value;
 	};
@@ -87,7 +87,7 @@ header("Content-Type: text/html; charset=${Charset}");
 set_magic_quotes_runtime(0);
 
 // Get the relative path to the script that called this one
-if (!isset($PHP_SELF)) $PHP_SELF = $HTTP_SERVER_VARS["PHP_SELF"];
+if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER["PHP_SELF"];
 $Action = basename($PHP_SELF);
 $From = urlencode(ereg_replace("[^/]+/","../",$ChatPath).$Action);
 
@@ -97,7 +97,7 @@ if (!isset($FontFace)) $FontFace = "";
 $DisplayFontMsg = !(isset($U) && $U != "");
 
 // Translate to html special characters, and entities if message was sent with a latin 1 charset
-$Latin1 = ($Charset == "iso-8859-1");
+$Latin1 = ($Charset == "utf-8");
 function special_char($str,$lang)
 {
 	return addslashes($lang ? htmlentities(stripslashes($str)) : htmlspecialchars(stripslashes($str)));
@@ -150,7 +150,7 @@ if (isset($KK))
 			$Error = L_REG_39;
 			break;
 		case '3':
-			$Error = L_ERR_USR_19;
+			$Error = utf8_encode(L_ERR_USR_19);
 			break;
 		case '4':
 			if ($Reason == "") $Error = L_ERR_USR_20;
@@ -248,7 +248,7 @@ if(isset($U) && (isset($N) && $N != ""))
 if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 {
 	$relog = false;
-	if (C_NO_SWEAR == 1) include("./${ChatPath}lib/swearing.lib.php");
+	if (C_NO_SWEAR) include("./${ChatPath}lib/swearing.lib.php");
 	// Check for no nick entered in
 	if ($U == "")
 	{
@@ -260,7 +260,7 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 		$Error = L_ERR_USR_16a;
 	}
 	// Check for swear words in the nick
-	elseif (C_NO_SWEAR == 1 && checkwords($U, true))
+	elseif (C_NO_SWEAR && checkwords($U, true))
 	{
 		$Error = L_ERR_USR_18;
 	}
@@ -350,17 +350,17 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 		// User is not registered -> Deny room creation
 		if (!$reguser)
 		{
-			$Error = $T == 1 ? L_ERR_USR_13 : L_ERR_USR_24;
+			$Error = $T ? utf8_encode(L_ERR_USR_13) : L_ERR_USR_24;
 		}
 		// Check for invalid characters or empty room name
 		else if (trim($R3) == "" || ereg("[,\]", stripslashes($R3)))
 		{
-			$Error = L_ERR_ROM_1;
+			$Error = utf8_encode(L_ERR_ROM_1);
 		}
 		// Check for swear words in room name
-		else if(C_NO_SWEAR == 1 && checkwords($R3, true))
+		else if(C_NO_SWEAR && checkwords($R3, true))
 		{
-			$Error = L_ERR_ROM_2;
+			$Error = utf8_encode(L_ERR_ROM_2);
 		}
 		// Ensure there is no existing room with the same name but a different type...
 		else
@@ -371,7 +371,7 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 			{
 				if (strcasecmp($R3,$ToCheck[$i]) == "0")
 				{
-					$Error = ($T == 0 ? L_ERR_ROM_3 : L_ERR_ROM_4);
+					$Error = (!$T ? utf8_encode(L_ERR_ROM_3)." (".$R3.")" : utf8_encode(L_ERR_ROM_4)." (".$R3.")");
 					break;
 				};
 			};
@@ -384,7 +384,7 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 				$DbLink->query("SELECT count(*) FROM ".C_MSG_TBL." WHERE room = '$R3' AND type = '$T1' LIMIT 1");
 				list($Nb) = $DbLink->next_record();
 				$DbLink->clean_results();
-				if($Nb != 0) $Error = ($T == 0 ? L_ERR_ROM_3:L_ERR_ROM_4);
+				if($Nb != 0) $Error = (!$T ? utf8_encode(L_ERR_ROM_3)." (".$R3.")" : utf8_encode(L_ERR_ROM_4)." (".$R3.")");
 			};
 		};
 	};
@@ -580,12 +580,12 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	$CookieRoom = urlencode(stripslashes($R));
 	setcookie("CookieRoom", $CookieRoom, time() + 60*60*24*365);        // cookie expires in one year
 	setcookie("CookieRoomType", $T, time() + 60*60*24*365);        // cookie expires in one year
-	if (isset($HTTP_COOKIE_VARS))
+	if (isset($_COOKIE))
 	{
-		if (isset($HTTP_COOKIE_VARS["CookieMsgOrder"])) $CookieMsgOrder = $HTTP_COOKIE_VARS["CookieMsgOrder"];
-		if (isset($HTTP_COOKIE_VARS["CookieUserSort"])) $CookieUserSort = $HTTP_COOKIE_VARS["CookieUserSort"];
-		if (isset($HTTP_COOKIE_VARS["CookieShowTimestamp"])) $CookieShowTimestamp = $HTTP_COOKIE_VARS["CookieShowTimestamp"];
-		if (isset($HTTP_COOKIE_VARS["CookieNotify"])) $CookieNotify = $HTTP_COOKIE_VARS["CookieNotify"];
+		if (isset($_COOKIE["CookieMsgOrder"])) $CookieMsgOrder = $_COOKIE["CookieMsgOrder"];
+		if (isset($_COOKIE["CookieUserSort"])) $CookieUserSort = $_COOKIE["CookieUserSort"];
+		if (isset($_COOKIE["CookieShowTimestamp"])) $CookieShowTimestamp = $_COOKIE["CookieShowTimestamp"];
+		if (isset($_COOKIE["CookieNotify"])) $CookieNotify = $_COOKIE["CookieNotify"];
 	};
 	if (!isset($O)) $O = isset($CookieMsgOrder) ? $CookieMsgOrder : C_MSG_ORDER;
 	if (!isset($ST)) $ST = isset($CookieShowTimestamp) ? $CookieShowTimestamp : C_SHOW_TIMESTAMP;
@@ -703,17 +703,17 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	<TITLE><?php echo(APP_NAME); ?></TITLE>
 	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
 	<!--
-// Display & remove the server time in the status bas
-// Returns the days in the status bas
+// Display & remove the server time in the status bar
+// Returns the days in the status bar
 function get_day(time,plus)
 {
-		monday = " <?php echo(L_MON) ?>";
-		tuesday = " <?php echo(L_TUE) ?>";
-		wednesday = " <?php echo(L_WED) ?>";
-		thursday = " <?php echo(L_THU) ?>";
-		friday = " <?php echo(L_FRI) ?>";
-		saturday = " <?php echo(L_SAT) ?>";
-		sunday = " <?php echo(L_SUN) ?>";
+		monday = " <?php echo(utf8_encode(L_MON)) ?>";
+		tuesday = " <?php echo(utf8_encode(L_TUE)) ?>";
+		wednesday = " <?php echo(utf8_encode(L_WED)) ?>";
+		thursday = " <?php echo(utf8_encode(L_THU)) ?>";
+		friday = " <?php echo(utf8_encode(L_FRI)) ?>";
+		saturday = " <?php echo(utf8_encode(L_SAT)) ?>";
+		sunday = " <?php echo(utf8_encode(L_SUN)) ?>";
 		dayN = time.getDay();
 		day = dayN + plus;
 		if (day == 1 || day == 8) is_day = monday;
@@ -741,7 +741,7 @@ function get_day(time,plus)
 		if ((timenow > 1173578400 && timenow < 1194141599) || (timenow > 1205028000 && timenow < 1225591199) || (timenow > 1236477600 && timenow < 1257040799) || (timenow > 1268532000 && timenow < 1289095199) || (timenow > 1299981600 && timenow < 1320544799)) timeutc = 60;
 		return timeutc;
 	}
-// Display & remove the server time at the status bas
+// Display & remove the server time at the status bar
 	function clock(gap)
 	{
 		cur_date = new Date();
@@ -792,7 +792,7 @@ function get_day(time,plus)
 		if (cur_hoursSYD < 10) cur_hoursSYD = "0" + cur_hoursSYD
 		cur_timeSYD = cur_hoursSYD + ":" + calc_minutes + daySYD;;
 		WORLD_TIME = <?php echo((C_WORLDTIME) ? '" " + "(NYC: " + cur_timeNYC + " | LON: " + cur_timeGMT + " | PAR: " + cur_timePAR + " | BUC: " + cur_timeBUC + " | TYO: " + cur_timeTYO + " | SYD: " + cur_timeSYD + ")"' : ''); ?>;
-		window.status = "<?php echo(L_SVR_TIME); ?>" + calc_time + WORLD_TIME;
+		window.status = "<?php echo(utf8_encode(L_SVR_TIME)); ?>" + calc_time + WORLD_TIME;
 
 		clock_disp = setTimeout('clock(' + gap + ')', 1000);
 	}
@@ -811,15 +811,10 @@ function get_day(time,plus)
 	}
 
 	<?php
-	if ($ST == 1)
-	{
-		$CorrectedDate = mktime(date("H") + C_TMZ_OFFSET,date("i"),date("s"),date("m"),date("d"),date("Y"));
+		$CorrectedDate = mktime(date("G") + C_TMZ_OFFSET,date("i"),date("s"),date("m"),date("d"),date("Y"));
 		?>
 		gap = calc_gap("<?php echo(date("F d, Y H:i:s", $CorrectedDate)); ?>");
 		clock(gap);
-		<?php
-	}
-	?>
 
 	// Automatically submit a command
 	function runCmd(CmdName,infos)
@@ -1031,7 +1026,7 @@ function get_day(time,plus)
 		else if (isCmd && !re.test(inputFrameForm.elements['M'].value))
 		{
 			inputFrameForm.elements['M'].select();
-			alert("<?php echo(str_replace("\"","\\\"",L_BAD_CMD)); ?>");
+			alert("<?php echo(str_replace("\"","\\\"",utf8_encode(L_BAD_CMD))); ?>");
 			return false;
 		}
 		// It doesn't look like a command -> it's a message, then ensure a message
@@ -1239,10 +1234,10 @@ function isCookieEnabled() {
 
 	function reset_R2()
 	{
-			document.forms['Params'].elements['R0'].options[0].selected = true;
-			document.forms['Params'].elements['R1'].options[0].selected = true;
-			document.forms['Params'].elements['T'].options[1].selected = true;
-			document.forms['Params'].elements['R3'].value = '';
+		document.forms['Params'].elements['R0'].options[0].selected = true;
+		document.forms['Params'].elements['R1'].options[0].selected = true;
+		document.forms['Params'].elements['T'].options[1].selected = true;
+		document.forms['Params'].elements['R3'].value = '';
 	}
 
 	function reset_R3()
@@ -1307,7 +1302,7 @@ if(isset($Error))
 		if (C_VERSION == 1)
 		{
 			?>
-		<INPUT TYPE="hidden" NAME="T" VALUE="0" <?php if($T == 0 && $DefaultRoomFound == 0) echo("SELECTED"); ?>>
+		<INPUT TYPE="hidden" NAME="T" VALUE="0" <?php if(!$T && !$DefaultRoomFound) echo("SELECTED"); ?>>
 			<?php
 		}
 		?>
@@ -1336,6 +1331,14 @@ if(isset($Error))
 			</TD>
 		</TR>
 		</TABLE>
+<?php
+if (C_REQUIRE_REGISTER)
+{
+?>
+		<div CLASS="ChatError"><?php echo(L_ERR_USR_14); ?></div>
+<?php
+}
+?>
 		<?php echo(L_SET_13." "); ?>
 		<INPUT TYPE="submit" VALUE="<?php echo(L_SET_14); ?>" CLASS="ChatBox"> ...
 	</TD>

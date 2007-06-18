@@ -1,13 +1,13 @@
 <?php
-// File : spanish/localized.tutorial.php - plus version (17.09.2006 - rev.3)
-// Original translation by Josep Román <josep.roman@zuerich-see.ch> && León Del Río <leon@webmaster.com.mx>
+// File : spanish/localized.tutorial.php - plus version (02.05.2007 - rev.4)
+// Original translation by Josep Román <josep.roman@zuerich-see.ch> and León Del Río <leon@webmaster.com.mx>
 // Updates, corrections and additions for the Plus version by Roxana Castañeda <roxminu@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 
 // Get the names and values for vars sent by the script that called this one
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($nombre,$value) = each($HTTP_GET_VARS))
+	while(list($nombre,$value) = each($_GET))
 	{
 		$$nombre = $value;
 	};
@@ -16,14 +16,14 @@ if (isset($HTTP_GET_VARS))
 // Color Input Box mod by Ciprian - you MUST delete this line if you uninstall this mod
 require("./config/config.lib.php");
 require("./lib/index.lib.php");
-if (isset($HTTP_COOKIE_VARS["CookieStatus"])) $CookieStatus = $HTTP_COOKIE_VARS["CookieStatus"];
+if (isset($_COOKIE["CookieStatus"])) $CookieStatus = $_COOKIE["CookieStatus"];
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML>
 
 <HEAD>
-<TITLE>Tutorial en Español para <?php echo(APP_NAME." - ".APP_VERSION); ?></TITLE>
+<TITLE>Tutorial en Espa&ntilde;ol para <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?></TITLE>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
 <STYLE>
 A.topLink
@@ -48,26 +48,21 @@ A.topLink:hover, A.topLink:active
 </HEAD>
 
 <BODY BGCOLOR="#CCCCFF">
-<!-- Remove this § in translation files -->
-<?php
-if(isset($NoTranslation)) echo($NoTranslation."\n");
-?>
-<!-- End of the § to be removed in translation files -->
-
+<P></P>
+<TABLE BORDER="5" CELLPADDING="5" ALIGN="center">
+<TR>
+	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- Tutorial en Espa&ntilde;ol para <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -</B></FONT></TD>
+</TR>
+</TABLE><br /><br />
 <P><A NAME="top"></P>
-<TABLE BORDER="5" CELLPADDING="5">
+<TABLE BORDER="3" CELLPADDING="3">
 <TR>
 	<TD><FONT SIZE="+2">Contenido del Tutorial</FONT></TD>
 </TR>
 </TABLE><br />
 
-<P CLASS="redText">
-Alerta: Los que usan Netscape deben definir su idioma como por defecto en el c&oacute;digo o sino cada caracter en los mensajes ser&aacute; reemplazado por un '?'.<br />
-Esto puede hacerse de la siguiente manera: Ver/JuegodeCaracteres/su idioma Auto-Detectar, luego Ver/JuegodeCaracteres/PorDefecto.
-</P>
-
 <?php
-if (C_MULTI_LANG == "1")
+if (C_MULTI_LANG)
 {
 	?>
 	<A HREF="#language" CLASS="topLink">Escoger un idioma</A><br />
@@ -76,7 +71,7 @@ if (C_MULTI_LANG == "1")
 ?>
 <A HREF="#login" CLASS="topLink">Entrar al Chat</A><br />
 <A HREF="#register" CLASS="topLink">Registrarse</A><br />
-<A HREF="#modProfile" CLASS="topLink">Modificar<?php if (C_SHOW_DEL_PROF == "1") echo("/deleting"); ?> su perfil</A><br />
+<A HREF="#modProfile" CLASS="topLink">Modificar<?php if (C_SHOW_DEL_PROF) echo("/deleting"); ?> su perfil</A><br />
 <?php
 if (C_VERSION == "2")
 {
@@ -100,8 +95,17 @@ if ($Ver == "H")
 <P>
 <A HREF="#commands" CLASS="topLink">Caracter&iacute;sticas y Comandos:</A><br />
 &nbsp&nbsp&nbsp&nbsp<A HREF="#help" CLASS="topLink">El Comando de Ayuda (Help) </A><br />
+<!-- Avatar System Start. -->
 <?php
-if (C_USE_SMILIES == "1")
+if (C_USE_AVATARS) {
+?>
+	&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#avatars" CLASS="topLink">Avatars</A><br />
+<?php
+}
+?>
+<!-- Avatar System End.  -->
+<?php
+if (C_USE_SMILIES)
 {
 	?>
 	&nbsp&nbsp&nbsp&nbsp<A HREF="#smilies" CLASS="topLink">Caritas gr&aacute;ficas o smilies</A><br />
@@ -150,7 +154,7 @@ if (C_BANISH != "0")
 
 
 <?php
-if (C_MULTI_LANG == "1")
+if (C_MULTI_LANG)
 {
 	?>
 	<P>
@@ -168,9 +172,9 @@ if (C_MULTI_LANG == "1")
 <P>
 <FONT SIZE="+1"><A NAME="login"><B>Entrar:</B></A></FONT>
 <P>
-Si ya est&aacute; registrado, simplemente ingrese escribiendo su nombre de usuario y su contrase&ntilde;a. Luego seleccione en que sala de chat desea entrar y presione el bot&oacute;n de Chat.<br />
+Si ya est&aacute; registrado, simplemente ingrese escribiendo su nombre de usuario y su contrase&ntilde;a. Luego seleccione en que sala de chat desea entrar y presione el bot&oacute;n de '<?php echo(L_SET_14); ?>'.<br />
 <?php
-if (C_REQUIRE_REGISTER == "1")
+if (C_REQUIRE_REGISTER)
 {
 	?>
 <P>
@@ -191,12 +195,12 @@ else
 <P>
 <FONT SIZE="+1"><A NAME="register"><B>Para Registrarse:</B></A></FONT>
 <P>
-Si todav&iacute;a no se ha registrado<?php if (C_REQUIRE_REGISTER == "0") echo("and would like to"); ?>, por favor escoja la opci&oacute;n de registrarse. Una peque&ntilde;a ventana emergente (pop-up) aparecer&aacute;.
+Si todav&iacute;a no se ha registrado<?php if (!C_REQUIRE_REGISTER) echo(" and would like to"); ?>, por favor escoja la opci&oacute;n de registrarse. Una peque&ntilde;a ventana emergente (pop-up) aparecer&aacute;.
 <P>
 <UL>
 	<LI>Primero debe crear un nombre de usuario
 	  <?php if (!C_EMAIL_PASWD) echo(" and a password"); ?> para usted, escribiendo en la casilla correspondiente. El nombre de usuario que escriba ser&aacute; el que se muestre autom&aacute;ticamente la sala de chat. No puede contener espacios en blanco, comas (,) o barras invertidas (\).
-<?php if (C_NO_SWEAR == "1") echo(" It can not contain \"swear words\"."); ?>
+<?php if (C_NO_SWEAR) echo(" It can not contain \"swear words\"."); ?>
 	<LI>Segundo, por favor escriba su nombre, apellido y su direcci&oacute;n de correo electr&oacute;nico (email). Para poder registrarse debe llenar todos esos campos. La informaci&oacute;n sobre su g&eacute;nero es opcional.
 	<LI>Si tiene una web, puede escribir la direcci&oacute;n en la casilla.
 	<LI>El campo del idioma puede ayudar a otros usuarios durante conversaciones futuras. As&iacute; sabr&aacute;n que idioma(s) habla usted.
@@ -204,9 +208,9 @@ Si todav&iacute;a no se ha registrado<?php if (C_REQUIRE_REGISTER == "0") echo("
 	<LI>Luego, presione el bot&oacute;n de Registrarse y su cuenta ser&aacute; creada. Si desea detenerse en cualquier momento sin registrarse, s&oacute;lo presione el bot&oacute;n Cerrar.
 </UL>
 <P>
-<A NAME="modProfile"></A>Por supuesto, los usuarios registrados pueden modificar<?php if (C_SHOW_DEL_PROF == "1") echo("/delete"); ?>
+<A NAME="modProfile"></A>Por supuesto, los usuarios registrados pueden modificar<?php if (C_SHOW_DEL_PROF) echo("/delete"); ?>
  su perfil
-haciendo clic donde corresponde <?php echo((C_SHOW_DEL_PROF == "0" ? "link" : "links")); ?>.<br />
+haciendo clic donde corresponde <?php echo((!C_SHOW_DEL_PROF ? "link" : "links")); ?>.<br />
 <br />
 <P ALIGN="right"><A HREF="#top">Subir</A></P>
 <P>
@@ -221,7 +225,7 @@ if (C_VERSION == "2")
 	<P>
 	Los usuarios registrados pueden crear salas. Los &uacute;nicos que pueden ingresar a las salas privadas son los usuarios que saben el nombre de la sala. El nombre de sala privada nunca se mostrar&aacute;, excepto para aquellos usuarios que se encuentran en ella.<br />
 <P>
-	El nombre de una sala no puede contener una coma (,) o barra invertida (\).<?php if (C_NO_SWEAR == "1") echo(" It can no more contains \"swear words\"."); ?>
+	El nombre de una sala no puede contener una coma (,) o barra invertida (\).<?php if (C_NO_SWEAR) echo(" It can no more contains \"swear words\"."); ?>
 	<br />
 <P ALIGN="right"><A HREF="#top">Subir</A></P>
 	<P>
@@ -255,7 +259,7 @@ if ($Ver == "H")
 <FONT SIZE="+1"><A NAME="sending"><B>Enviar mensajes:</B></A></FONT>
 <P>
 Para enviar un mensaje en la sala de chat, escriba su texto en la casilla de escritura o casilla de texto que aparece en la esquina inferior izquierda y luego presione la tecla Intro para enviarlo. Los mensajes de todos los usuarios se desplazan en la ventana del chat.<br />
-<?php if (C_NO_SWEAR == "1") echo("Note that \"swear words\" are skipped from mensajes."); ?>
+<?php if (C_NO_SWEAR) echo("Note that \"swear words\" are skipped from mensajes."); ?>
 <P>
 Si desea puede cambiar el color del texto de sus mensajes escogiendo un color nuevo de la lista de selecci&oacute;n que se encuentra al lado derecho de la ventana del chat.
 <br />
@@ -298,7 +302,8 @@ Si desea puede cambiar el color del texto de sus mensajes escogiendo un color nu
 Para salir del chat, simpemente haga clic una vez en "Salir". Alternativamente, tambi&eacute;n puede escribir uno de los siguientes comandos en la casilla de escritura:<br />
 /exit<br />
 /bye<br />
-/quit Este comando puede ser completado con un mensaje para ser enviado antes de salir de la sala de chat.
+/quit<br />
+Este comando puede ser completado con un mensaje para ser enviado antes de salir de la sala de chat.
 <I>Por ejemplo :</I> /quit &iexcl;Nos vemos pronto!
 <P>
 el mensaje &quot;&iexcl;Nos vemos pronto!&quot; aparecer&aacute; en la ventana del chat y luego usted saldr&aacute; de la sala.
@@ -345,7 +350,7 @@ Hay muchas maneras para personalizar la apariencia del Chat. Para cambiar sus pr
 		<?php
 	};
 	?>
-  <LI>El <B>comando Notify </B> le permite escoger entre ver (on) o no ver (off) los anuncios que se&ntilde;alan el ingreso o salida de otros usuarios a la sala de chat. Por defecto esta opci&oacute;n es <?php echo(C_NOTIFY ? "on" : "off"); ?> y los anuncios <?php echo(C_NOTIFY ? "will" : "won't"); ?> se ven.<br />
+  <LI>El <B>comando Notify </B> le permite escoger entre ver (on) o no ver (off) los anuncios que se&ntilde;alan el ingreso o salida de otros usuarios a la sala de chat. Por defecto esta opci&oacute;n es <?php echo(C_NOTIFY ? "on" : "off"); ?> y los anuncios <?php echo(C_NOTIFY ? "ser&aacute;n" : "no ser&aacute;n"); ?> vistas.<br />
     Escriba "/notify" sin las comillas.
 	<P>
   <LI>El <B>comando Timestamp </B> le permite cambiar entre encender o apagar la opci&oacute;n de ver la hora en que el mensaje fue escrito delante de cada mensaje y la hora del servidor en la barra de estado. Por defecto esta opci&oacute;n es <?php echo(C_SHOW_TIMESTAMP ? "on" : "off"); ?>.<br />
@@ -395,15 +400,31 @@ Hay muchas maneras para personalizar la apariencia del Chat. Para cambiar sus pr
 
 <FONT SIZE="+1"><A NAME="help"><B>Comando Help (Ayuda):</B></A></FONT>
 <P>
-Mientras est&eacute; dentro de una sala de chat puede llamar a la ventana emergente (popup) de Ayuda d&aacute;ndole clic en la <IMG SRC="images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="Help"> imagen que se encuentra justo antes de la casilla de escritura. Tambi&eacute;n puede escribir los <B>comandos "/help" o "/?"</B> en la casilla de escritura.
+Mientras est&eacute; dentro de una sala de chat puede llamar a la ventana emergente (popup) de Ayuda d&aacute;ndole clic en la <IMG SRC="images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="Ayuda"> imagen que se encuentra justo antes de la casilla de escritura. Tambi&eacute;n puede escribir los <B>comandos "/help" o "/?"</B> en la casilla de escritura.
 <br />
 <P ALIGN="right"><A HREF="#top">Subir</A></P>
 <P>
 <P>
+<!-- Avatar System Start. -->
+<?php
+If (C_USE_AVATARS) {
+?>
+	<hr />
+	<FONT SIZE="+1"><A NAME="avatars"><B>Avatars:</B></A></FONT>
+<P>Avatars are graphic image icons that represent chatters. Only registered users may change their avatar. Registered users may open their Profile (see /profile command) and click on the avatar image to select it from a menu of images, or to input a URL to a graphic image available anywhere on the internet (only images publicly accessible, not password protected sites). Images should be browser-viewable (.gif, .jpg, etc. ) 32 x 32 pixel graphic files for best display.
+<P>Clicking on a person's avatar in the message frame will popup up that person's profile (see <A HREF="#whois">/whois command</A>).
+Clicking on your own avatar on the user's list  will invoke the /profile command, if you are registered.
+If you are not registered, clicking on your own (system's default) avatar will bring up an alert to encourage you to register.
+  <P ALIGN="right"><A HREF="#top">Subir</A></P>
+<P>
+<?php
+}
+?>
+<!-- Avatar System End. -->
 <hr />
 
 <?php
-if (C_USE_SMILIES == "1")
+if (C_USE_SMILIES)
 {
 	include("./lib/smilies.lib.php");
 	$Nb = count($SmiliesTbl);
@@ -469,7 +490,7 @@ if (C_HTML_TAGS_KEEP != "none")
 <b><?php echo(L_COL_HELP_SUB2); ?></b><br /><?php echo(L_COL_HELP_P2); ?><br /><br /><center><?php echo(COLOR_LIST); ?></center><br /><?php echo(L_COL_HELP_P2a); ?><br /><br />
 </P>
 <P>
-<b><?php echo(L_COL_HELP_SUB3); ?></b><br /><?php echo(L_COLOR_HEAD_SETTINGS); ?><br /><?php if (COLOR_FILTERS == 1) echo(L_COLOR_HEAD_SETTINGSa."<br />"); ?><u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo("Administrador"); elseif ($CookieStatus == "m") echo("Moderador"); elseif ($CookieStatus == "u") echo("Invitado (Normal)"); else echo("Registrado (Normal)");?></b><br /><?php if (COLOR_FILTERS == 1) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
+<b><?php echo(L_COL_HELP_SUB3); ?></b><br /><?php echo(L_COLOR_HEAD_SETTINGS); ?><br /><?php if (COLOR_FILTERS) echo(L_COLOR_HEAD_SETTINGSa."<br />"); ?><u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo("Administrador"); elseif ($CookieStatus == "m") echo("Moderador"); elseif ($CookieStatus == "u") echo("Invitado (Normal)"); else echo("Registrado (Normal)");?></b><br /><?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
 <br /><P ALIGN="right"><A HREF="#top">Subir</A></P>
 <hr />
 <!-- Color Input Box mod by Ciprian end -->
@@ -499,7 +520,7 @@ lo mover&aacute; a la SalaRoja.
 <?php
 if (C_VERSION == "2")
 {
-	echo(C_REQUIRE_REGISTER == "0" ? "<P>If you're a registered usuario, you" : "<br /><P>You");
+	echo(!C_REQUIRE_REGISTER ? "<P>Si sos un usuario registrado, su" : "<br /><P>Su");
 	?>
 	 tambi&eacute;n puede crear una sala nueva usando el mismo comando. S&oacute;lo tiene que especificar el tipo de sala: 0 es para privada, 1 para p&uacute;blica (valor por defecto).
 	<P>
@@ -507,7 +528,7 @@ if (C_VERSION == "2")
 	<P>
 	crear&aacute; una nueva sala privada (siempre y cuando una sala p&uacute;blica no haya sido creada anteriormente con ese mismo nombre) llamada MiSala y lo mover&aacute; dentro de ella.
 	<P>
-	Los nombres de las Salas no pueden contener coma (,) o barra invertida (\).<?php if (C_NO_SWEAR == "1") echo(" It can no more contains \"swear words\"."); ?>
+	Los nombres de las Salas no pueden contener coma (,) o barra invertida (\).<?php if (C_NO_SWEAR) echo(" It cannot contain \"swear words\"."); ?>
 	<?php
 }
 ?>
@@ -601,7 +622,7 @@ Para ver la informaci&oacute;n p&uacute;blica de un usuario, escriba el <B>coman
 <P>
 <I>Por Ejemplo:</I> /whois Jorge
 <P>
-donde 'Jorge' es el nombre del usuario. Este comando abrir&aacute; una ventana emergente (pop-up) que mostrar&aacute; la informaci&oacute;n p&uacute;blica disponible de ese usuario. Use su propio nombre para revisar como se muestra la informaci&oacute;n de su perfil a otros usuarios usando el mismo comando.
+donde &#39;Jorge&#39; es el nombre del usuario. Este comando abrir&aacute; una ventana emergente (pop-up) que mostrar&aacute; la informaci&oacute;n p&uacute;blica disponible de ese usuario. Use su propio nombre para revisar como se muestra la informaci&oacute;n de su perfil a otros usuarios usando el mismo comando.
 <br />
 <P ALIGN="right"><A HREF="#top">Subir</A></P>
 <P>
@@ -618,7 +639,7 @@ if (C_SAVE != "0")
 	<P>
 	<I>Por Ejemplo:</I> /save 5
 	<P>
-	donde '5' es el n&uacute;mero de mensajes que quiere guardar. Si no especifica n, entonces todos los mensajes disponibles en la sala actual ser&aacute;n guardados.
+	donde &#39;5&#39; es el n&uacute;mero de mensajes que quiere guardar. Si no especifica n, entonces todos los mensajes disponibles en la sala actual ser&aacute;n guardados.
 	<br />
 	<P ALIGN="right"><A HREF="#top">Subir</A></P>
 	<P>
@@ -667,7 +688,7 @@ if (C_BANISH != "0")
 	<FONT SIZE="+1"><A NAME="banish"><B>Desterrar a un usuario:</B></A></FONT>
 	<P>
 	Los moderadores pueden desterrar a un usuario y el administrador puede desterrar a un usuario o a un moderador con el <B>comando ban</B>.<br />
-	El administrador puede desterrar a un usuario de otra sala diferente a aquella en la cual est&aacute; chateando. El tambi&eacute;n puede desterrar a un usuario para siempre y de todo el chat completamente con '<B>&nbsp;*&nbsp;</B>'. La preferencia debe ser insertada antes del alias del usuario que ser&aacute; desterrado.
+	El administrador puede desterrar a un usuario de otra sala diferente a aquella en la cual est&aacute; chateando. El tambi&eacute;n puede desterrar a un usuario para siempre y de todo el chat completamente con &#39;<B>&nbsp;*&nbsp;</B>&#39;. La preferencia debe ser insertada antes del alias del usuario que ser&aacute; desterrado.
 	<P>
 	<I>Por ejemplo</I>, si Jorge es el nombre del usuario que ser&aacute; desterrado: <I>/ban Jorge</I> o <I>/ban * Jorge</I>
 	<br />

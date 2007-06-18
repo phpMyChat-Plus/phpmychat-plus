@@ -7,17 +7,17 @@ $N = 50;									//Set the last number of messages to be displayed
 $Type = " AND type='1'";	//This is to display only the public rooms
 //$Type = "";							//This is to display either public or private rooms
 
-if (isset($HTTP_COOKIE_VARS["CookieUsername"])) $U = urldecode($HTTP_COOKIE_VARS["CookieUsername"]);
-if (!isset($L) && isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"]; 
-if (isset($HTTP_COOKIE_VARS["CookieStatus"])) $status = $HTTP_COOKIE_VARS["CookieStatus"];
+if (isset($_COOKIE["CookieUsername"])) $U = urldecode($_COOKIE["CookieUsername"]);
+if (!isset($L) && isset($_COOKIE["CookieLang"])) $L = $_COOKIE["CookieLang"]; 
+if (isset($_COOKIE["CookieStatus"])) $status = $_COOKIE["CookieStatus"];
 if (!isset($U)) $U = "Guest";
 
 // Fix a security hole
 if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 // Added for Skin mod
-if (isset($HTTP_COOKIE_VARS["CookieStatus"])) $statusu = $HTTP_COOKIE_VARS["CookieStatus"];
-if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
+if (isset($_COOKIE["CookieStatus"])) $statusu = $_COOKIE["CookieStatus"];
+if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 if (!isset($R)) $skin == "style1";
 
 require("config/config.lib.php");
@@ -33,7 +33,7 @@ if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $statusu == "a"))
 set_magic_quotes_runtime(0);
 
 // Translate to html special characters, and entities if message was sent with a latin 1 charset
-$Latin1 = ($Charset == "iso-8859-1");
+$Latin1 = ($Charset == "utf-8");
 function special_char($str,$lang)
 {
 	return ($lang ? htmlentities(stripslashes($str)) : htmlspecialchars(stripslashes($str)));
@@ -44,7 +44,7 @@ function special_char($str,$lang)
 // Define the SQL query (depends on values for ignored users list and on whether to display
 // notification messages or not
 
-$CondForQuery	= "(address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3')))";
+$CondForQuery	= "(address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3' OR username = 'SYS away')))";
 
 $DbLink1 = new DB;
 $DbLink1->query("SELECT m_time, room, username, latin1, address, message FROM ".C_MSG_TBL." WHERE ".$CondForQuery.$Type." ORDER BY m_time DESC LIMIT $N");
@@ -58,7 +58,7 @@ if($DbLink1->num_rows() > 0)
 		$Message = stripslashes($Message);
 		$NewMsg = "<tr align=texttop valign=top>";
 		$NewMsg .= "<td width=1% nowrap=\"nowrap\">".date("d-M, H:i:s", $Time + C_TMZ_OFFSET*60*60)."</td><td width=1% nowrap=\"nowrap\">".$Room."</td>";
-		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS topic" && $User != "SYS topic reset" && substr($User,0,8) != "SYS dice")
+		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS away" && $User != "SYS topic" && $User != "SYS topic reset" && substr($User,0,8) != "SYS dice")
 		{
 			$User = special_char($User,$Latin1);
 			if ($Dest != "") $Dest = "]>[".htmlspecialchars(stripslashes($Dest));
@@ -66,17 +66,22 @@ if($DbLink1->num_rows() > 0)
 		}
 		if ($User == "SYS image")
 		{
-        $NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>[${Dest}]</B></td><td>".L_PIC." ${Dest}: <A href=".$Message." onMouseOver=\"window.status='Click to open the full size picture.'; return true\" title=\"Click to open the full size picture\" target=_blank>".$Message."</A></td>";
-    }
+      		$NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>[${Dest}]</B></td><td>".L_PIC." ${Dest}: <A href=".$Message." onMouseOver=\"window.status='Click to open the full size picture.'; return true\" title=\"Click to open the full size picture\" target=_blank>".$Message."</A></td>";
+    	}
+		if ($User == "SYS away")
+		{
+			$Message1 = $Message;
+ 			$NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>[${Dest}]</B></td><td><FONT class=\"notify\">".$Message1."</FONT></td>";
+		}
 		if ($User == "SYS announce")
 		{
 			if ($Message == 'L_RELOAD_CHAT') $Message = L_RELOAD_CHAT;
-			$NewMsg .= "<td colspan=2><SPAN CLASS=\"notify2\">[".L_ANNOUNCE."] $Message</SPAN></td>";
+			$NewMsg .= "<td width=1% nowrap=\"nowrap\"><SPAN CLASS=\"notify2\">[".L_ANNOUNCE."]</td></SPAN><td><SPAN CLASS=\"notify2\">$Message</td></SPAN>";
 		}
 		if ($User == "SYS room")
 		{
- 			$NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>[${Dest}]</B></td><td><FONT class=\"notify2\"><I>".ROOM_SAYS."<FONT class=\"notify\">".$Message."</FONT></FONT></I></td>";
-    }
+ 			$NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>[${Dest}]</B></td><td><FONT class=\"notify2\"><I>".ROOM_SAYS." <FONT class=\"notify\">".$Message."</FONT></FONT></I></td>";
+    	}
 		if ($User == "SYS topic")
 		{
  			$NewMsg .= "<td colspan=2><FONT class=\"notify\">".$Dest." ".L_TOPIC." ".$Message."</FONT></td>";
@@ -152,13 +157,13 @@ else
 <html>
 <head>
 <title>Invalid address - Lurking feature disabled</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 </head>
 
 <body class="frame">
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><center><font size="+2"><b>You don't have access to this file.<br>Lurking feature has been disabled<br>Press <a href=./>here</a> to go to the index page or just wait...</b><font>
-<br /><br /><br /><br>Hacking attempt! Redirection to the index page in 5 seconds.</center>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><center><font size="+2"><b>You don't have access to this file.<br />Lurking feature has been disabled<br />Press <a href=./>here</a> to go to the index page or just wait...</b><font>
+<br /><br /><br /><br />Hacking attempt! Redirection to the index page in 5 seconds.</center>
 <meta http-equiv="refresh" content="5; url=./">
 </body>
 </html>

@@ -1,8 +1,8 @@
 <?php
 // Get the names and values for vars sent by input.php
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
@@ -28,7 +28,7 @@ header("Cache-Control: no-cache, must-revalidate".$CachePlus);
 header("Pragma: no-cache");
 header("Content-Type: text/html; charset=${Charset}");
 
-$Latin1 = ($Charset == "iso-8859-1");
+$Latin1 = ($Charset == "utf-8");
 function special_char($str,$lang)
 {
 	return ($lang ? htmlentities($str) : htmlspecialchars($str));
@@ -110,6 +110,20 @@ switch ($perms)
 		$tag_open = "";
 		$tag_close = "";
 }
+
+// Random Quote mod by Ciprian
+if (C_QUOTE)
+{
+		$quotecolor = C_QUOTE_COLOR; // change to the font size of your choice
+		$quotes = file(C_QUOTE_PATH);
+		$quote = rand(0, sizeof($quotes)-1);
+		$quotetext = "<div class=quote><font color=$QUOTE_FONT_COLOR>".C_QUOTE_NAME.":<br /></font>";
+		if($quotecolor != "") $quotetext .= "<font color=$quotecolor>";
+		$quotetext .= $quotes[$quote];
+		if($quotecolor != "") $quotetext .= "</font>";
+		$quotetext .= "</div>";
+		$quotetext = ereg_replace("\r\n", "", $quotetext);
+}
 ?>
 <P CLASS="title">
 <span style=color:<?php echo($colorname); ?>><?php echo($tag_open.special_char(stripslashes($U),$Latin1).$tag_close); ?></span>
@@ -167,7 +181,7 @@ if ($slang)
 	<?php
 };
 
-if ($showemail || ($power != "weak" && $email != 'bot@bot.bot.com'))
+if ($showemail || ($power != "weak" && $email != 'bot@bot.com' && $email != 'quote@quote.com'))
 {
 	?>
 	<TR>
@@ -246,6 +260,16 @@ if ($power != "weak")
 <br />
 <SPAN CLASS="whois"><?php echo("> ${tag_open}${perms}${tag_close} <"); ?></SPAN>
 
+<?php
+if ($quotetext)
+{
+	?>
+	<TR>
+		<TD CLASS="whois" colspan=2><?php echo($quotetext); ?></TD>
+	</TR>
+	<?
+};
+?>
 </CENTER>
 </BODY>
 

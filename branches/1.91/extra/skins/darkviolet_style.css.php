@@ -2,9 +2,9 @@
 // "Dark Purple and black" for phpMyChat plus
 
 // Get the names and values for vars sent by the script that called this one
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
@@ -215,7 +215,6 @@ INPUT, SELECT, TEXTAREA
 {
 	unicode-bidi: embed;
 	color: <?php echo($CD); ?>;
-	font-size: <?php echo($FontSize); ?>;
 }
 
 .notify

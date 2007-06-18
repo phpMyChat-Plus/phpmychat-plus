@@ -1,17 +1,17 @@
 <?php
 // Get the names and values for vars sent to this script
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
 };
 
 // Added for Skin mod
-if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
-if (!isset($L) && isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"]; 
-if (isset($HTTP_COOKIE_VARS["CookieUsername"])) $U = $HTTP_COOKIE_VARS["CookieUsername"];
+if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
+if (!isset($L) && isset($_COOKIE["CookieLang"])) $L = $_COOKIE["CookieLang"]; 
+if (isset($_COOKIE["CookieUsername"])) $U = $_COOKIE["CookieUsername"];
 
 // Fix a security hole
 if (isset($L) && !is_dir("./localization/".$L)) exit();
@@ -26,7 +26,7 @@ header("Content-Type: text/html; charset=${Charset}");
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML dir="<?php echo($TextDir); ?>">
 <HEAD><TITLE><?php echo(L_PRIV_MSG); ?></TITLE>
-<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
 <META content="MSHTML 6.00.2900.2722" name=GENERATOR>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <SCRIPT TYPE="text/javascript" LANGUAGE="javascript1.2">
@@ -429,7 +429,7 @@ switch ($Read)
 <input type="hidden" value="<?php echo($ReplyTo) ?>" name="ReplyTo1">
 <tr><td><input type="text" size="60" value="Re: " name="Reply1" CLASS="ChatBox" onKeyPress="postReply11(event);"></td></tr>
 </FORM>
-<?php echo(L_PRIV_POPUP); ?> <a href="#" onClick="window.parent.runCmd('profile','<?php stripslashes($Dest) ?>'); return false;" onMouseOver="window.status='Change your settings.'; return true">here</a>.
+<?php echo(L_PRIV_POPUP); ?>
 </CENTER>
 <?php
 	$DbLinkp->query("UPDATE ".C_MSG_TBL." SET pm_read='Old' WHERE ((room = '$R' OR room = 'Offline PMs') AND address = '$U' AND username != '$U' AND pm_read = 'New') ORDER BY username AND m_time DESC LIMIT 1");
@@ -492,7 +492,7 @@ $NewPMsRest = $NewPMs - 10;
 ?>
 <br /><SPAN style="font-weight: 400"><?php echo(L_PRIV_READ); ?><br />
 <input type="submit" value="<?php echo(L_REG_25)?>" name="Close" onClick="self.close(); return false;"><br /><br />
-<?php echo(L_PRIV_POPUP); ?> <a href="#" onClick="window.parent.runCmd('profile','<?php stripslashes($Dest) ?>'); return false;" onMouseOver="window.status='Change your settings.'; return true">here</a>.</SPAN>
+<?php echo(L_PRIV_POPUP); ?></SPAN>
 </CENTER>
 <?php
 	$DbLinkp->query("UPDATE ".C_MSG_TBL." SET pm_read='Old' WHERE ((room = '$R' OR room = 'Offline PMs') AND address = '$U' AND username != '$U' AND pm_read = 'New') OR (address = '$U' AND username != '$U' AND pm_read = 'Neww') ORDER BY username AND m_time DESC LIMIT 10");
@@ -502,7 +502,7 @@ $DbLinkp->clean_results;
 $DbLinkp->close();
 ?>
 <P align="right" style="font-weight: 800; color:#FFD700; font-size: 7pt">
-&copy; 2005-<?php echo(date(Y)); ?> - by <a href=mailto:ciprianmp@yahoo.com onMouseOver="window.status='Click to email author.'; return true;">Ciprian Murariu</a>
+&copy; 2005-<?php echo(date(Y)); ?> - by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='Click to email author.'; return true;" title="Click to email author" target=_blank>Ciprian Murariu</a>
 </P>
 </BODY>
 </HTML>

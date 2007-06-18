@@ -1,17 +1,17 @@
 <?php
 // Get the names and values for vars sent by index.lib.php
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
 };
 
 // Get the names and values for post vars
-if (isset($HTTP_POST_VARS))
+if (isset($_POST))
 {
-	while(list($name,$value) = each($HTTP_POST_VARS))
+	while(list($name,$value) = each($_POST))
 	{
 		$$name = $value;
 	};
@@ -33,7 +33,7 @@ if ((empty($From) || trim($From) == '')
 }
 
 // Added for Skin mod
-if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
+if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 
 require("./config/config.lib.php");
 require("./lib/release.lib.php");
@@ -156,6 +156,8 @@ else
 include("bot/respond.php");
 function AddMessage($M, $T, $R, $U, $C, $Private, $Read, $RF)
 {
+$M = str_replace("\"", "&quot;", $M);
+$M = str_replace("'","&#39;", $M);
 if (C_BOT_CONTROL && C_BOT_PUBLIC && $Private == "")
 {
 	//--Bot Control Popeye
@@ -178,16 +180,24 @@ $botcontrol ="botfb/$R.txt";
 	// Text formating tags
 	if(C_HTML_TAGS_KEEP == "none")
 	{
-		if(C_HTML_TAGS_SHOW == 0)
+		if(!C_HTML_TAGS_SHOW)
 		{
 			// eliminates every HTML like tags
 			$M = ereg_replace("<[^>]+>", "", $M);
+			$M = ereg_replace("x3c", "", $M);
+			$M = ereg_replace("x3e", "", $M);
+			$M = ereg_replace("\"", "", $M);
+			$M = ereg_replace("\'","", $M);
 		}
 		else
 		{
 			// or keep it without effect
 			$M = str_replace("<", "&lt;", $M);
 			$M = str_replace(">", "&gt;", $M);
+			$M = str_replace("x3c", "&lt;", $M);
+			$M = str_replace("x3e", "&gt;", $M);
+			$M = str_replace("\"", "&quot;", $M);
+			$M = str_replace("\'","&#39;", $M);
 		}
 	}
 	else
@@ -195,6 +205,10 @@ $botcontrol ="botfb/$R.txt";
 		// then C_HTML_TAGS_KEEP == "simple", we keep U, B and I tags
 		$M = str_replace("<", "&lt;", $M);
 		$M = str_replace(">", "&gt;", $M);
+		$M = str_replace("x3c", "&lt;", $M);
+		$M = str_replace("x3e", "&gt;", $M);
+		$M = str_replace("\"", "&quot;", $M);
+		$M = str_replace("\'","&#39;", $M);
 
 		if(function_exists("preg_match"))
 		{
@@ -202,7 +216,7 @@ $botcontrol ="botfb/$R.txt";
 			{
 				$M = preg_replace("/&lt;([ubi]?)&gt;(.*?)&lt;(\/\\1)&gt;/i","<\\1>\\2<\\3>",$M);
 			}
-			if(C_HTML_TAGS_SHOW == 0)
+			if(!C_HTML_TAGS_SHOW)
 			{
 				$M = preg_replace("/&lt;\/?[ubi]?&gt;/i","",$M);
 			}
@@ -211,18 +225,19 @@ $botcontrol ="botfb/$R.txt";
 
 	// URL
 	$M = eregi_replace('([[:space:]]|^)(www[.])', '\\1http://\\2', $M); // no prefix (www.myurl.ext)
-	// Word wrap fix by Alexander Eisele <xaex@mail.ru>
-	if (!preg_match_all("((http://|https://|ftp ://|mailto:)[^ ]+)", $M, $pmatch))
+	$M = eregi_replace('([[:space:]]|^)(ftp[.])', '\\1ftp://\\2', $M); // no prefix (ftp.myurl.ext)
+	// Word wrap fix by Alexander Eisele <xaex@xaex.de>
+	if (!preg_match_all("((http://|https://|ftp://|mailto:)[^ ]+)", $M, $pmatch))
 	{
 		$M = wordwrap($M, 40, " ", 1);
 	}
 	$prefix = '(http|https|ftp|telnet|news|gopher|file|wais)://';
-  $pureUrl = '([[:alnum:]/\n+-=%&:_.~?]+[#[:alnum:]+-_~]*)';
+	$pureUrl = '([[:alnum:]/\n+-=%&:_.~?]+[#[:alnum:]+-_~]*)';
 //	$M = eregi_replace($prefix . $pureUrl, '<a href="\\1://\\2" title="Click to open link" onMouseOver="window.status=\'Click to open link.\'; return true" target="_blank">\\1://\\2</a>', $M);
        $purl="";
        for ($x=0; $x<count($pmatch[0]); $x++)
        {
-       		$purl .= "||".$pmatch[0][$x];
+				$purl .= "||".$pmatch[0][$x];
        }
 
        $M = eregi_replace($prefix.$pureUrl, '<a href="links.php?xxx='.urlencode($purl).'" title="Click to open links window" onMouseOver="window.status=\'Click to open links window.\'; return true" target="_blank"></a>', $M);
@@ -231,7 +246,7 @@ $botcontrol ="botfb/$R.txt";
 	$M = eregi_replace('([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](fo|g|l|m|mes|o|op|pa|ro|seum|t|u|v|z)?)', '<a href="mailto:\\1" title="Send email" onMouseOver="window.status=\'Send email.\'; return true">\\1</a>', $M);
 
 	// Smilies
-	if (C_USE_SMILIES == 1)
+	if (C_USE_SMILIES)
 	{
 		include("./lib/smilies.lib.php");
 		Check4Smilies($M,$SmiliesTbl);
@@ -263,7 +278,7 @@ $botcontrol ="botfb/$R.txt";
 		}
 	}
 
-// Color Sniffer scripting safe mode filter by Alexander Eisele <xaex@mail.ru> & Ciprian
+// Color Sniffer scripting safe mode filter by Alexander Eisele <xaex@xeax.de> & Ciprian
 $C = str_replace("<", "&lt;", $C);
 $C = str_replace(">", "&gt;", $C);
 $C = str_replace("\"", "&quot;", $C);
@@ -281,7 +296,7 @@ if (trim($C)!="")
 }
 
 	//Color's Power Filter Mod by Ciprian
-	if (isset($HTTP_COOKIE_VARS["CookieColor"]) && (!isset($C))) $C = $HTTP_COOKIE_VARS["CookieColor"];
+	if (isset($_COOKIE["CookieColor"]) && (!isset($C))) $C = $_COOKIE["CookieColor"];
 	//Registered colorname to use for text color by Ciprian
 	else
 	{
@@ -340,7 +355,7 @@ if (trim($C)!="")
 		{
 	    list($colorname) = $DbLink->next_record();
 		}
-	if (isset($HTTP_COOKIE_VARS["CookieColor"]) && (!isset($C))) $C = $HTTP_COOKIE_VARS["CookieColor"];
+	if (isset($_COOKIE["CookieColor"]) && (!isset($C))) $C = $_COOKIE["CookieColor"];
 	//Registered colorname to use for text color by Ciprian
 	elseif (isset($colorname) && (!isset($C))) $C = $colorname;
 	if (!COLOR_ALLOW_GUESTS && $status == "u") $C = '';
@@ -397,7 +412,7 @@ if (isset($M) && trim($M) != "" && (!isset($M0) || ($M != $M0)) && !($IsCommand 
 		if (checkwords($C, true)) $C = '';		//if user is using a swear word (defined in swearing.lib.php), the font color will resets to default. this is to keep your database as well as our computer clean of swearing (no swear into your cookies on your local computer).
 		$M = checkwords($M, false);
 	}
-// Bob Dickow Custom code for /away command modification:
+// Bob Dickow Custom code for /away command modification - modified by Ciprian for Plus behaviour.:
 
    $DbLink->query("SELECT awaystat FROM ".C_USR_TBL." WHERE username='$U'");
 
@@ -408,16 +423,14 @@ if (isset($M) && trim($M) != "" && (!isset($M0) || ($M != $M0)) && !($IsCommand 
    $DbLink->clean_results();
 
    if ($awaystat == '1') {
-     $Msg = sprintf(L_BACK . C_UPDTUSRS, special_char($U,$Latin1));
-     $Msg = " <B>$Msg</B>";
+     $Msg = "sprintf(L_BACK, \"".special_char($U,$Latin1)."\")";
+     $time_back = time() - 1;
      $awaystat = '0';
-     AddMessage(stripslashes($M), $T, $R, $U, $C, "", "", $RF);
-     $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', ".time().", '$Private', '".addslashes($Msg)."', '', '$RF')");
+     $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS away', '$Latin1', '$time_back', '$U', '".addslashes($Msg)."', '', '$RF')");
      $DbLink->query("UPDATE ".C_USR_TBL." SET awaystat='0' WHERE username='$U'");
-   } else {
-     AddMessage(stripslashes($M), $T, $R, $U, $C, "", "", $RF);
    }
-// END Bob Dickow custom code for /away command modification.
+   AddMessage(stripslashes($M), $T, $R, $U, $C, "", "", $RF);
+// END Bob Dickow custom code for /away command modification - modified by Ciprian for Plus behaviour..
 	$RefreshMessages = true;
 }
 
@@ -501,7 +514,7 @@ document.onmousedown = window.parent.displayLocation;
 		<INPUT TYPE="hidden" NAME="MsgTo" VALUE="">
 
 <?php
-// Color Input Select mod by Alexander Eisele <xaex@mail.ru> & Ciprian
+// Color Input Select mod by Alexander Eisele <xaex@xeax.de> & Ciprian
 // Drop down list of colors
 $ColorList = COLORLIST;
 if (COLOR_FILTERS)
@@ -622,7 +635,7 @@ else {
 ?>
 &nbsp;&nbsp;
 <?php
-if (C_USE_SMILIES == 1)
+if (C_USE_SMILIES)
 {
 ?>
 		<A HREF="<?php echo($ChatPath); ?>smilie_popup.php?L=<?php echo($L); ?>" onClick="window.parent.smilie_popup(); return false" TARGET="_blank" onClick="document.forms['MsgForm'].elements['M'].focus();" onMouseOver="window.status='Open the Smilies Gallery.'; return true" title="Smilie Gallery" ><img src="images/smilies/smile42.gif" border=0></A>&nbsp;
@@ -691,7 +704,7 @@ if(isset($Error))
 	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
 	<!--
 	document.forms['MsgForm'].elements['M'].select();
-	alert("<?php echo(str_replace("\\\\n","\\n",addslashes($Error))); ?>");
+	alert("<?php echo(utf8_encode(str_replace("\\\\n","\\n",addslashes($Error)))); ?>");
 	// -->
 	</SCRIPT>
 	<?php
@@ -703,7 +716,7 @@ if(isset($ErrorC))
 	?>
 	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
 	<!--
-	alert("<?php echo(str_replace("\\\\n","\\n",addslashes($ErrorC))); ?>");
+	alert("<?php echo(utf8_encode(str_replace("\\\\n","\\n",addslashes($ErrorC)))); ?>");
 	document.forms['MsgForm'].elements['M'].focus();
 	// -->
 	</SCRIPT>

@@ -16,17 +16,17 @@ require("./${ChatPath}lib/index.lib.php");
 <SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
 <!--
 window.name="login";
-// Display & remove the server time in the status bas
-// Returns the days in the status bas
+// Display & remove the server time in the status bar
+// Returns the days in the status bar
 function get_day(time,plus)
 {
-		monday = " <?php echo(L_MON) ?>";
-		tuesday = " <?php echo(L_TUE) ?>";
-		wednesday = " <?php echo(L_WED) ?>";
-		thursday = " <?php echo(L_THU) ?>";
-		friday = " <?php echo(L_FRI) ?>";
-		saturday = " <?php echo(L_SAT) ?>";
-		sunday = " <?php echo(L_SUN) ?>";
+		monday = " <?php echo(utf8_encode(L_MON)) ?>";
+		tuesday = " <?php echo(utf8_encode(L_TUE)) ?>";
+		wednesday = " <?php echo(utf8_encode(L_WED)) ?>";
+		thursday = " <?php echo(utf8_encode(L_THU)) ?>";
+		friday = " <?php echo(utf8_encode(L_FRI)) ?>";
+		saturday = " <?php echo(utf8_encode(L_SAT)) ?>";
+		sunday = " <?php echo(utf8_encode(L_SUN)) ?>";
 		dayN = time.getDay();
 		day = dayN + plus;
 		if (day == 1 || day == 8) is_day = monday;
@@ -54,7 +54,7 @@ function get_day(time,plus)
 		if ((timenow > 1173578400 && timenow < 1194141599) || (timenow > 1205028000 && timenow < 1225591199) || (timenow > 1236477600 && timenow < 1257040799) || (timenow > 1268532000 && timenow < 1289095199) || (timenow > 1299981600 && timenow < 1320544799)) timeutc = 60;
 		return timeutc;
 	}
-// Display & remove the server time at the status bas
+// Display & remove the server time at the status bar
 	function clock(gap)
 	{
 		cur_date = new Date();
@@ -105,7 +105,7 @@ function get_day(time,plus)
 		if (cur_hoursSYD < 10) cur_hoursSYD = "0" + cur_hoursSYD
 		cur_timeSYD = cur_hoursSYD + ":" + calc_minutes + daySYD;;
 		WORLD_TIME = <?php echo((C_WORLDTIME) ? '" " + "(NYC: " + cur_timeNYC + " | LON: " + cur_timeGMT + " | PAR: " + cur_timePAR + " | BUC: " + cur_timeBUC + " | TYO: " + cur_timeTYO + " | SYD: " + cur_timeSYD + ")"' : ''); ?>;
-		window.status = "<?php echo(L_SVR_TIME); ?>" + calc_time + WORLD_TIME;
+		window.status = "<?php echo(utf8_encode(L_SVR_TIME)); ?>" + calc_time + WORLD_TIME;
 
 		clock_disp = setTimeout('clock(' + gap + ')', 1000);
 	}
@@ -126,7 +126,7 @@ function get_day(time,plus)
 	<?php
 	if (C_WORLDTIME == 2)
 	{
-		$CorrectedDate = mktime(date("H") + C_TMZ_OFFSET,date("i"),date("s"),date("m"),date("d"),date("Y"));
+		$CorrectedDate = mktime(date("G") + C_TMZ_OFFSET,date("i"),date("s"),date("m"),date("d"),date("Y"));
 		?>
 		gap = calc_gap("<?php echo(date("F d, Y H:i:s", $CorrectedDate)); ?>");
 		clock(gap);
@@ -153,13 +153,13 @@ send_headers(1,1);
 
 $Is_Error = (isset($Error));
 
-if (isset($HTTP_COOKIE_VARS))
+if (isset($_COOKIE))
 {
-	if (isset($HTTP_COOKIE_VARS["CookieUsername"])) $CookieUsername = $HTTP_COOKIE_VARS["CookieUsername"];
-	if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $CookieRoom = $HTTP_COOKIE_VARS["CookieRoom"];
-	if (isset($HTTP_COOKIE_VARS["CookieRoomType"])) $CookieRoomType = $HTTP_COOKIE_VARS["CookieRoomType"];
-	if (isset($HTTP_COOKIE_VARS["CookieColor"])) $CookieColor = $HTTP_COOKIE_VARS["CookieColor"];
-	if (isset($HTTP_COOKIE_VARS["CookieStatus"])) $CookieStatus = $HTTP_COOKIE_VARS["CookieStatus"];
+	if (isset($_COOKIE["CookieUsername"])) $CookieUsername = $_COOKIE["CookieUsername"];
+	if (isset($_COOKIE["CookieRoom"])) $CookieRoom = $_COOKIE["CookieRoom"];
+	if (isset($_COOKIE["CookieRoomType"])) $CookieRoomType = $_COOKIE["CookieRoomType"];
+	if (isset($_COOKIE["CookieColor"])) $CookieColor = $_COOKIE["CookieColor"];
+	if (isset($_COOKIE["CookieStatus"])) $CookieStatus = $_COOKIE["CookieStatus"];
 };
 $Username = (isset($CookieUsername) ? $CookieUsername : "");
 $Room_name = (isset($CookieRoom) ? $CookieRoom : "");

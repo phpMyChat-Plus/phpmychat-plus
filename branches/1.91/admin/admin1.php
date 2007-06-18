@@ -4,6 +4,10 @@
 // or remove the profiles of some of them
 
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
+  while(list($name,$value) = each($_GET))
+  {
+           $$name = $value;
+  };
 
 // The admin has required an action to be done
 if (isset($FORM_SEND) && $FORM_SEND == 1)
@@ -13,7 +17,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 1)
 	$BANISH_MODE = (stripslashes($submit_type) == A_SHEET1_9)? 1:0;
 
 	// Get the list of the users
-	$DbLink->query("SELECT username,perms FROM ".C_REG_TBL." WHERE perms != 'admin'");
+	$DbLink->query("SELECT username,perms FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND username != '$pmc_username'");
 	$users = Array();
 	while (list($username, $perms) = $DbLink->next_record())
 	{
@@ -189,8 +193,8 @@ if (isset($Warning) && $Warning != "") echo("<P CLASS=\"success\">$Warning</SPAN
 <TABLE BORDER=0 CELLPADDING=3 CLASS="table">
 
 <?php
-// Ensure at least one registered user exist (exept the administrator) before displaying the modify status
-$DbLink->query("SELECT COUNT(*) FROM ".C_REG_TBL." WHERE perms != 'admin' LIMIT 1");
+// Ensure at least one registered user exist (except the logged in administrator) before displaying the modify status
+$DbLink->query("SELECT COUNT(*) FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND username != '$pmc_username' LIMIT 1");
 list($count_RegUsers) = $DbLink->next_record();
 $DbLink->clean_results();
 if ($count_RegUsers != 0)
@@ -241,7 +245,7 @@ if ($count_RegUsers != 0)
 		elseif (C_DB_TYPE == "pgsql") $limits = " LIMIT 10 OFFSET $startReg";
 		else $limits = "";
 
-		$DbLink->query("SELECT username,latin1,perms,rooms,reg_time,ip FROM ".C_REG_TBL." WHERE perms != 'admin' ORDER BY $sortBy $sortOrder".$limits);
+		$DbLink->query("SELECT username,latin1,perms,rooms,reg_time,ip FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND username != '$pmc_username' ORDER BY $sortBy $sortOrder".$limits);
 		while (list($username,$Latin1,$perms,$rooms,$lastTime,$IP) = $DbLink->next_record())
 		{
 			$usrHash = md5($username);
@@ -264,6 +268,7 @@ if ($count_RegUsers != 0)
 					<SELECT name="perms_<?echo($usrHash)?>">
 						<OPTION value="user"<?if($perms=="user") echo(" SELECTED")?>><?echo(A_USER)?></OPTION>
 						<OPTION value="moderator"<?if($perms=="moderator") echo(" SELECTED")?>><?echo(A_MODER)?></OPTION>
+						<OPTION value="admin"<?if($perms=="admin") echo(" SELECTED")?>><?echo(A_ADMIN)?></OPTION>
 					</SELECT>
 					<INPUT type="hidden" name="old_perms_<?echo($usrHash)?>" value="<?echo($perms)?>">
 				</TD>

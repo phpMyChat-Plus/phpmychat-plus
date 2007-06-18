@@ -1,9 +1,9 @@
 <?php
 // Get the names and values for vars sent to index.lib.php
 
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
@@ -14,7 +14,7 @@ if (isset($L) && !is_dir("./localization/".$L)) exit();
 if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 // Added for Skin mod
-if (isset($HTTP_COOKIE_VARS["CookieRoom"]) && !isset($R)) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
+if (isset($_COOKIE["CookieRoom"]) && !isset($R)) $R = urldecode($_COOKIE["CookieRoom"]);
 if (!isset($R)) $skin == "style1";
 
 require("config/config.lib.php");
@@ -114,7 +114,7 @@ function buzz2Input(code)
 <input type="submit" value="<?php echo(L_REG_25)?>" name="Close" onClick="self.close(); return false;">
 </CENTER>
 <P align="right" style="font-weight: 800; color:#FFD700; font-size: 7pt">
-&copy; 2005-<?php echo(date(Y)); ?> - by <a href=mailto:ciprianmp@yahoo.com onMouseOver="window.status='Click to email author.'; return true;">Ciprian Murariu</a>
+&copy; 2005-<?php echo(date(Y)); ?> - by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='Click to email author.'; return true;" title="Click to email author" target=_blank>Ciprian Murariu</a>
 </P>
 </BODY>
 </HTML>

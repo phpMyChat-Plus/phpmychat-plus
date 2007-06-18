@@ -11,15 +11,19 @@
 if ($awaystat != 2) {
 
    if ($awaystat == '0') {
-     $msgstr = L_AWAY;
+     $msgstr = 'L_AWAY';
      $awaystat = '1';
+     $time = time() - 1;
    } else {
-     $msgstr = L_BACK;
+     $msgstr = 'L_BACK';
      $awaystat = '0';
+     $time = time() + 1;
    }
-   $msg = sprintf($msgstr, special_char($U,$Latin1));
+   $msg = "sprintf(".$msgstr.", \"".special_char($U,$Latin1)."\")";
 
    $xtra = $Cmd[2];
+	if ($xtra !="")
+	{
 	// Text formating tags
 	if(C_HTML_TAGS_KEEP == "none")
 	{
@@ -97,10 +101,9 @@ if ($awaystat != 2) {
 	}
 
 	$xtra = "<FONT COLOR=\"".$C."\">".$xtra."</FONT>";
-
-   $M = " <B>$msg</B> ".stripslashes($xtra);
-   $M = $M . C_UPDTUSRS;
-   $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', ".time().", '$Private', '".addslashes($M)."', '', '')");
+	$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', '$time', '$Private', '".addslashes($xtra)."', '', '')");
+	}
+   $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS away', '', '".time()."', '', '$msg', '', '')");
    $DbLink->query("UPDATE ".C_USR_TBL." SET awaystat='".$awaystat."' WHERE username='$U'");
 
    $IsCommand = true;

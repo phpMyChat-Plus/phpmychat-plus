@@ -1,17 +1,17 @@
 <?php
 // Get the names and values for vars sent to the admin script
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
 };
 
 // Get the names and values for post vars
-if (isset($HTTP_POST_VARS))
+if (isset($_POST))
 {
-	while(list($name,$value) = each($HTTP_POST_VARS))
+	while(list($name,$value) = each($_POST))
 	{
 		$$name = $value;
 	};
@@ -76,11 +76,11 @@ if (isset($What) && $What != "") include("./admin/admin".$What.".php");
 // ** Define url query **
 
 // Get the name of the current script;
-if (!isset($PHP_SELF)) $PHP_SELF = $HTTP_SERVER_VARS["PHP_SELF"];
+if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER["PHP_SELF"];
 $From = basename($PHP_SELF);
 
 // Define the sheet to open
-if (!isset($sheet)) $sheet = "1";
+if (!isset($sheet)) $sheet = "5";
 $ToOpen = "admin".$sheet.".php";
 
 // Set username of the admin to a convenient format
@@ -89,7 +89,7 @@ $pmc_username = urlencode(htmlspecialchars(stripslashes($pmc_username)));
 // Define URL queries to be sent to frames
 $URLQueryTop = "From=$From&What=Top&L=$L&pmc_username=$pmc_username&pmc_password=$PWD_Hash&sheet=$sheet";
 $Add2Body = (isset($First) ? "" : "&First=1");
-$Add2Body .= (isset($sortBy) ? "&sortBy=$sortBy" : "&sortBy=username").(isset($sortOrder) ? "&sortOrder=$sortOrder" : "&sortOrder=ASC");
+$Add2Body .= (isset($sortBy)  ? "&sortBy=$sortBy" : ($sheet != "5") ? "&sortBy=username" : "").(isset($sortOrder) ? "&sortOrder=$sortOrder" : ($sheet != "5") ? "&sortOrder=ASC" : "");
 $Add2Body .= (isset($startReg) ? "&startReg=$startReg" : "");
 $Add2Body .= (isset($startCfg) ? "&startCfg=$startCfg" : "");
 $Add2Body .= (isset($ReqVar) ? "&ReqVar=$ReqVar" : "");
@@ -111,6 +111,13 @@ if (document.layers)
 	var startReg = "<?php echo((isset($startReg) && $startReg != "") ? "&startReg=$startReg" : ""); ?>";
 	var startCfg = "<?php echo((isset($startCfg) && $startCfg != "") ? "&startCfg=$startCfg" : ""); ?>";
 };
+
+function logout()
+{
+	<?php
+		session_destroy($_SESSION['adminlogged']);
+	?>
+}
 // -->
 </SCRIPT>
 </HEAD>
@@ -119,5 +126,5 @@ if (document.layers)
 	<FRAME SRC="<?php echo("$From?$URLQueryTop"); ?>" NAME="adminTop" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0" MARGINWIDTH="3" MARGINHEIGHT="3" SCROLLING="NO">
 	<FRAME SRC="<?php echo("$From?$URLQueryBody"); ?>" NAME="adminBody" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0" MARGINWIDTH=0 MARGINHEIGHT=0 NORESIZE>
 </FRAMESET>
-
+<BODY onUnload="logout();"></BODY>
 </HTML>

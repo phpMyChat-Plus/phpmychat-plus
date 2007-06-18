@@ -5,14 +5,14 @@ session_start();
 session_register("adminlogged");
 
 // Added for Skin mod
-if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
+if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 require("./config/config.lib.php");
 
 $DbLink4Login = new DB;
 /*
-	if (isset($HTTP_COOKIE_VARS["CookieUsername"]) && $HTTP_COOKIE_VARS["CookieStatus"] == "a")
+	if (isset($_COOKIE["CookieUsername"]) && $_COOKIE["CookieStatus"] == "a")
 	{
-		$pmc_username = $HTTP_COOKIE_VARS["CookieUsername"];
+		$pmc_username = $_COOKIE["CookieUsername"];
 		$FOCUS = 1;
 	}
 */
@@ -29,7 +29,7 @@ if ((isset($pmc_username) && $pmc_username != "") && (isset($pmc_password) && $p
 			// Ensure the one who lauch the admin.php script is really admin
 			if (isset($MUST_BE_ADMIN) && $perms != "admin")
 			{
-				$Error = L_ERR_USR_11;
+				$Error = utf8_encode(L_ERR_USR_11);
 			}
 			else
 			{
@@ -100,7 +100,7 @@ function get_focus()
 <br />
 <?php
 // Get the name of the script that called the login library
-if (!isset($PHP_SELF)) $PHP_SELF = $HTTP_SERVER_VARS["PHP_SELF"];
+if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER["PHP_SELF"];
 $From = basename($PHP_SELF);
 ?>
 <FORM ACTION="<?php echo($From); ?>" METHOD="POST" AUTOCOMPLETE="" NAME="LoginForm">

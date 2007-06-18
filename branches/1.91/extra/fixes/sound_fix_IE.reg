@@ -1,7 +1,0 @@
-Windows Registry Editor Version 5.00
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\soundrec\shell\open\command]
-@="\"C:\\Program Files\\Windows Media Player\\mplayer2.exe\" \"%1\""
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\soundrec\shell\play\command]
-@="\"C:\\Program Files\\Windows Media Player\\mplayer2.exe\" /Play \"%L\""

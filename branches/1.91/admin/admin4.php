@@ -51,7 +51,7 @@ if (isset($ReqVar) && $ReqVar == "1")
 else
 {
 
-	// Ensure at least one registered user exist (exept the administrator) before displaying the mail form
+	// Ensure at least one registered user exist (except the administrator) before displaying the mail form
 	$DbLink->query("SELECT COUNT(*) FROM ".C_REG_TBL." WHERE perms != 'admin' LIMIT 1");
 	list($count_RegUsers) = $DbLink->next_record();
 	$DbLink->clean_results();
@@ -79,7 +79,7 @@ else
 					<TD ALIGN=CENTER>
 						<SELECT NAME="SendTo[]" MULTIPLE SIZE=15>
 						<?php
-						$DbLink->query("SELECT username,email FROM ".C_REG_TBL." WHERE email != 'bot@bot.bot.com' AND email != '' ORDER BY username");
+						$DbLink->query("SELECT username,email FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND email != '' ORDER BY username");
 						while (list($U,$EMail) = $DbLink->next_record())
 						{
 							echo("<OPTION VALUE=\"$EMail\">".$U." (".$EMail.")</OPTION>");

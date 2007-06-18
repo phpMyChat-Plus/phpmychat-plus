@@ -6,7 +6,7 @@ Connection troubles with IE 7.0 beta. (reported on different sites)
 Important: everytime you upgrade/reinstall a phpmychat server, the old cookies must be deleted from the clients' machines - so let your users now! ()
 
 Fixes History:
-15.04.2007 - 1.91:
+18.06.2007 - 1.91-beta3:
 - Some Admin panel/Configuration adjustments; (usability related)
 - Improved/fixed the update check in Config/Admin panel. Also inserted the first option in panel to enable/disable this feature, useful for sites with remote file access disabled; (administration & functionality related)
 - Download link on index page moved in Credits area and redirected to the SourceForge page; (link update)
@@ -28,7 +28,7 @@ Fixes History:
 			/kick user - displays: "You have been kicked out of the room by a moderator of this room" to the kicked user and
 												"user has successfully been kicked away."
 	- new format/behavior:
-			/kick user [for spamming] - displays: "You have been kicked out of the room by a moderator of this room.<br>(Reason: for spamming)" to the kicked user and
+			/kick user [for spamming] - displays: "You have been kicked out of the room by a moderator of this room.<br />(Reason: for spamming)" to the kicked user and
 												"user has successfully been kicked away. (Reason: for spamming)" - ["for spamming" can be any text string]
 - Changed the /ban command and Admin Panel/Banish tab to display a reason of baning (optional)
 	Usage:
@@ -36,11 +36,11 @@ Fixes History:
 			/ban user - displays: "You have been banished from this room or from the chat." to the banished user and
 												"user has successfully been banished." to the room
 	- new format/behavior:
-			/ban user [for spamming] - displays: "You have been banished from this room or from the chat.<br>(Reason: for spamming)" to the banished user and
+			/ban user [for spamming] - displays: "You have been banished from this room or from the chat.<br />(Reason: for spamming)" to the banished user and
 												"user has successfully been banished. (Reason: for spamming)" to the room - ["for spamming" can be any text string]
 		The Reason field added in both Admin panels ("Registered Users" and "Banished Users") to add/edit the reason of banishment (the reson will be displayed to the banished user everytime he tries to login)
 - Changed the Help link image from ? to Help text. (functionality related)
-- Fixed the Archive/Log feature to display the right formated system messages: entrances/exits from chat, topic changes, announcements, aso. It is also multilangual, according to the reader language (functionality related)
+- Fixed the Archive/Log feature to display the right formated system messages: entrances/exits from chat, topic changes, announcements, aso. It is also multi-langual, according to the reader language (functionality related)
 - Fixed the /invite command to remove sender's name from the invitation list (based on Matias Oliveira feedback, a user could have invited himself, in the same room, of course) (functionality related)
 - /topic command improvements: (functionality related)
 		- Topic subject now stored in a file in botfb (keep it shown in banners even after messages clean-up);
@@ -50,24 +50,29 @@ Fixes History:
 			- 1. specific topics set with /topic command;
 			- 2. global topics set with /topic * command (if specific doesn't exist);
 			- 3. local topics stored in banner.php (these will be moved to Admin panel as well soon)
-- Several security fixes and other mods by and thanks to Alexander Eisele <xaex@mail.ru>
+- Several security fixes and other mods by and thanks to Alexander Eisele <xaex@xeax.de>
 		- Links clean-up/popup mod; (security related)
 		- Input message Wordwrap (40 chars) fix; (display related)
 		- Color selector in input bar, register/edituser pages and admin panel; (replaces the color picker) (functionality related)
 		- Color sniffer scripting safe mode filter; (security related)
 		- Messages displayed in tables in messages frame (text alignment fix by cells); (display related)
 - Argentinian spanish language updated and included (localization related) - Thanks to Matias Olivera <matiolivera@yahoo.com>.
-- Dutch language updated and included (localization project) - Thanks to Danny.
+- Dutch language updated and included (localization project) - Thanks to Danny & Berb.
 - French language updated and included (localization project) - Thanks to Leloup <leloup@le-loup.info>.
-- German language updated and included (localization project) - Thanks to Alexander Eisele <xaex@mail.ru>.
+- German language updated and included (localization project) - Thanks to Alexander Eisele <xaex@xeax.de>.
+- Italian language updated and included (localization project) - Thanks to Mike Mikius <mikiusss@yahoo.com>.
 - Spanish language updated and included (localization project) - Thanks to Roxana Castaneda <roxminu@yahoo.com>.
+- Romanian language changed to include the special chars of the Central European encoding (with diactritics) (display related)
+- In all the languages, the single quote eventually used in phrases (not codes) changed to unicode &#39; in order to eliminate any script error (functionality related)
 - Changed the icon.gif background to transparency in order to pick and fit the chat room skin background color; (display related)
 - Added ten more smilies;
-- Added Buzz Gallery popup link in input bar (like smilies) - to automatically add a different sound from the sounds folder; (functionality related)
+- Added Buzz Gallery popup link in input bar (like smilies) - to automatically add a different sound from the sounds folder; (functionality extension)
+- Added Randome Quote mod - to automatically send a public message containing a quote from a .txt file - configurable in Admin panel/Configuration; (functionality extension)
 - Enlarged the users frame (for long names); (display related)
+- POST, GET, COOKIE and SERVER methods updated to php5 - thanks to Alexander Eisele (compatibility related)
 - Fixed the private messages function in users list, when pm popup is disabled but pm enabled; (functionality related)
 - Switched the pm links on names (when pm enabled): messages frame names will return /to while users list names will return name> in the same room or /wisp in the other rooms
-
+- Changed the active links look and feel in the chat to overcaome the scrolling bug when clicking a name/avatar in messages frame (functionality related)
 SQL updates:
 - Added five more fields in table c_config:
 		- [COLOR_CM2 VARCHAR(25) NOT NULL default '' AFTER COLOR_CM1];
@@ -75,55 +80,19 @@ SQL updates:
 - Added two more fields in table c_reg_users at the beginning of the table: [id int(11) NOT NULL default '0'] and [cid int(11) NOT NULL auto_increment] - for further implementation of integrations with other cms (ModX, forums, etc.);
 - Changed the ALLOW_ENTRANCE_SOUND field type from enum('0','1') to enum('0','1','2','3') in c_config table;
 - Changed the COLOR_CDC1 field name and type to COLOR_CD8 VARCHAR(25) in c_config table;
-- Changed the COLOR_CDC2 field name and type to  COLOR_CD9 VARCHAR(25) in c_config table;
-- Changed the COLOR_CDC3 field name and type to  COLOR_CA VARCHAR(25) in c_config table;
-- Changed the COLOR_CDC4 field name and type to  COLOR_CA1 VARCHAR(25) in c_config table;
-- Changed the COLOR_CDC5 field name and type to  COLOR_CA2 VARCHAR(25) in c_config table;
-- Changed the COLOR_CDC6 field name and type to  COLOR_CM VARCHAR(25) in c_config table;
-- Changed the COLOR_CDC7 field name and type to  COLOR_CM1 VARCHAR(25) in c_config table;
+- Changed the COLOR_CDC2 field name and type to COLOR_CD9 VARCHAR(25) in c_config table;
+- Changed the COLOR_CDC3 field name and type to COLOR_CA VARCHAR(25) in c_config table;
+- Changed the COLOR_CDC4 field name and type to COLOR_CA1 VARCHAR(25) in c_config table;
+- Changed the COLOR_CDC5 field name and type to COLOR_CA2 VARCHAR(25) in c_config table;
+- Changed the COLOR_CDC6 field name and type to COLOR_CM VARCHAR(25) in c_config table;
+- Changed the COLOR_CDC7 field name and type to COLOR_CM1 VARCHAR(25) in c_config table;
 - Changed the values of the following fields in c_config table as follows: ENTRANCE_SOUND to 'sounds/beep.wav', COLOR_CD2 to 'tomato', COLOR_CD3 to 'dimgray', COLOR_CD4 to 'indigo', COLOR_CD7 to 'white', COLOR_CD8 to 'magenta', COLOR_CD9 to 'blueviolet';
 - Changed the value of language field in c_reg_users table for bot: language = 'English, German';
-Files edited:
-- plus/banner.php;
-- plus/chat_activity.php;
-- plus/exit.php;
-- plus/export.php;
-- plus/handle_inputH.php;
-- plus/help_popup.php;
-- plus/index.php;
-- plus/index1.php;
-- plus/input.php;
-- plus/loader.php;
-- plus/lurking.php;
-- plus/messagesL.php;
-- plus/phpMyChat.php3;
-- plus/admin/admin1.php;
-- plus/admin/admin2.php;
-- plus/admin/admin5.php;
-- plus/admin/admin6.php;
-- plus/admin/admin8.php;
-- plus/config/config.lib.php;
-- plus/config/start_page.css.php;
-- plus/config/style(1-7).css.php;
-- plus/lib/commands.lib.php;
-- plus/lib/clean.lib.php;
-- plus/lib/banish.lib.php;
-- plus/lib/index.lib.php;
-- plus/lib/logs.lib.php;
-- plus/lib/release.lib.php;
-- plus/lib/smilies.lib.php;
-- plus/lib/commands/kick.cmd.php;
-- plus/lib/commands/banish.cmd.php;
-- plus/lib/commands/topic.cmd.php;
-- plus/localization/english/localized.admin.php;
-- plus/localization/english/localized.chat.php;
-- plus/localization/english/localized.tutorial.php;
-- plus/localization/romanian/localized.admin.php;
-- plus/localization/romanian/localized.chat.php;
-- plus/localization/romanian/localized.tutorial.php;
+Files edited: too many to be listed
 Files removed:
 - plus/config/color.lib.php;
 - plus/lib/update.lib.php;
+- plus/extra/.htaccess; - should be removed when upgrading - very important (fixes.zip link won't work)!
 Files moved:
 - plus/images/nums(1-6).gif to plus/images/dice/nums(1-6).gif;
 Files added:
@@ -135,6 +104,7 @@ Files added:
 	- Note: plus/localization/dutch/localized.tutorial.php; - not done yet - to be added
 - plus/localization/french folder:
 - plus/localization/german folder:
+- plus/localization/italian folder:
 - plus/localization/spanish folder:
 Files updated:
 - plus/images/helpOn.gif;
@@ -149,7 +119,7 @@ Files updated:
 - Extra commands and mods lists displayed on Info Section at login page have been updated in mysql (info update)
 - Bot Hello and Bye messages posted to the room on start/stop can be customized now in Admin Panel (functionality related)
 - Bot can be enabled now in more than one room (before, it could talk only in the single room he was running; now, he can talk public to people in each room he is enabled in - at this point, the bot will have the same name in everyroom he is enabled - should we change that so he might have more names? umm...) (functionality extension)
-- Fixed the bot responses by removing some trailing expressions from the user input (like /to , /to  Re: , Re: , and others) - that made bot answer very strange before on replies (Ummm... and non-senses) (functionality related)
+- Fixed the bot responses by removing some trailing expressions from the user input (like /to , /to Re: , Re: , and others) - that made bot answer very strange before on replies (Ummm... and non-senses) (functionality related)
 		- I have to admit, this was caused by my own mistakes (priv popup mod) not checking what is actually the user input to the bot in bot_conversationlog
 - Extra setting for bot: disable/enable public conversations - the bot can be running in chat but won't talk to the public, only private (functionality related)
 - Room says command improved (roleplaying useful): a narator can say something to all the rooms using the [/room * message to display] command (functionality extension)
@@ -243,7 +213,7 @@ Files edited = 41 - too many to mention here (most of the files because of the c
 Files moved:
 - Instructions.txt - from plus/docs/plus docs to plus/installation/;
 Files added:
-- plus/lib/bot_priv.lib.php;  //used for bot to talk privately.
+- plus/lib/bot_priv.lib.php; //used for bot to talk privately.
 - plus/install/database/mysql_newinstall.txt;
 - plus/install/database/mysql_upgrade_plus_1.7.txt;
 - plus/install/database/mysql_upgrade_plus_until_1.6.txt;
@@ -255,15 +225,15 @@ Files added:
 05.07.2006: - v1.7 - The Plus version is called now v1.7 and it's mature enough to become a final release (New name: phpMyChat-Plus v1.7 - not "based on 0.15.4" anymore - this is not alpha nor beta, it is not preview nor starter edition - it is the mature version of phpMyChat - I hope Nick Hozey will agree with me, as well as the other contributors who might have tried the Plus version so far)
 - Main reason of this release: Firefox is now treated as an "H" browser due to Popeye's flickering fix, so I wanted to improve its behavior a little bit.
 - /buzz command improvements: (functionality related)
-  - able to choose different sounds to be sent;
-  - the buzz messages get deleted after 60 secs if they were sent like "/buzz" (if there is any text sent like "/buzz hello there", those messages remain in the database to be seen by the users in chat);
-  - all the sounds embedded by the buzz command get removed after 10 seconds:
-    - only admins and moderators can use it by default (reg users could use it before) - this can be changed in the buzz.cmd.php file
-    - the sound is only played once - this makes it usable in Firefox as well;
-    - users logged into chat after buzz commands have been sent, won't hear any old sounds;
-  - Usage (read the help for more details):
-    - old usage: "/buzz" or "/buzz message to be shown" - this plays the default sound for buzz defined in Admin panel;
-    - extended usage: "/buzz ~newsound" or "/buzz ~newsound message to be shown" - this plays the newsound.wav file from the plus/sounds folder; please note the sign "~" to be used at the beginning of the second word, which is the name of the sound file without the extension .wav (no other extensions can be used by default).
+ - able to choose different sounds to be sent;
+ - the buzz messages get deleted after 60 secs if they were sent like "/buzz" (if there is any text sent like "/buzz hello there", those messages remain in the database to be seen by the users in chat);
+ - all the sounds embedded by the buzz command get removed after 10 seconds:
+  - only admins and moderators can use it by default (reg users could use it before) - this can be changed in the buzz.cmd.php file
+  - the sound is only played once - this makes it usable in Firefox as well;
+  - users logged into chat after buzz commands have been sent, won't hear any old sounds;
+ - Usage (read the help for more details):
+  - old usage: "/buzz" or "/buzz message to be shown" - this plays the default sound for buzz defined in Admin panel;
+  - extended usage: "/buzz ~newsound" or "/buzz ~newsound message to be shown" - this plays the newsound.wav file from the plus/sounds folder; please note the sign "~" to be used at the beginning of the second word, which is the name of the sound file without the extension .wav (no other extensions can be used by default).
 - Copyright notes have now the years updated automatically (e.g. "2000-2006 The phpHeaven Team" - 2006 will be automatically replaced by the current year in the future) (cosmetic & functionality related)
 - All the links available in chat include now "titles" (small hints) and mouseover statuses for the Status bar; this hides the addresses where the link would send the user if he clicks on it (security improvement), as well as helps users understand how to use the features (like sending a pm or editing the profile) - use /timestamp to see how it works. (cosmetic, functionality & security related)
 - Fixed the center alignment for the index page elements in Firefox (display related)
@@ -281,7 +251,7 @@ SQL updates:
 - Added one field [EMAIL_USER enum('0','1') NOT NULL default '1'] at the end of table c_config
 Files edited = 53 - too many to mention here:
 Files added (61 optional extra sounds) - available as a separate pack (thanks to bluntdog):
-- plus/sounds/name.wav;  //please be aware that some of the provided sounds contain bad language - listen to them in Media Player and remove the inappropriate ones.
+- plus/sounds/name.wav; //please be aware that some of the provided sounds contain bad language - listen to them in Media Player and remove the inappropriate ones.
 
 09.05.2006 - v1.6a:
 - FireFox flickering fix (by Popeye). It made Firefox not being treated as an "L" browser anymore. (functionality related)
@@ -331,7 +301,7 @@ Files deleted:
 - plus/chat/index.html;
 
 05.12.2005:
-- messages sent when bot is active have no slashes anymore  (functionality related).
+- messages sent when bot is active have no slashes anymore (functionality related).
 Files edited:
 - plus/loader.php;
 - plus/messagesL.php;

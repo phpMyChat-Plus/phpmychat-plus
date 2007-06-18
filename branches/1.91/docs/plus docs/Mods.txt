@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------------
-This file is intend to depict the usage of the included mods (optional mods as well)
+This file is intended to depict the usage of the included mods (optional mods as well)
 ------------------------------------------------------------------------------------
 
 Online users mod (comes from the standard version)

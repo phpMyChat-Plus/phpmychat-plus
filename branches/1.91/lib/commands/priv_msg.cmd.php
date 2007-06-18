@@ -20,6 +20,10 @@ elseif (eregi($U, trim($Cmd[2])))
 {
 	$Error = L_ERR_USR_27;
 }
+elseif (eregi($QUOTE_NAME, trim($Cmd[2])))
+{
+	$Error = L_ERR_USR_11;
+}
 elseif (trim($Cmd[2]) != "" && trim($Cmd[3]) != "")
 {
 	// Check for swear words in the message if necessary

@@ -1,8 +1,8 @@
 <?php
-// File : italian/localized.admin.php - plus version (17.09.2006 - rev.6)
+// File : italian/localized.admin.php - plus version (11.06.2007 - rev.9)
 // Original translation by Andrea D'Alessandro <andrea@abol.it> & Massimo Fubini <massimo@tomato.it>
 //	& Giuliano Yurij Beccaria <yurij@e-pages.it> & Marco Borrini <borrini@tradimento.it>
-//      & Bartolotta Gioachino <developers@rockitalia.com> & Silvia M. Carrassi <silvia@ladysilvia.net>
+// & Bartolotta Gioachino <developers@rockitalia.com> & Silvia M. Carrassi <silvia@ladysilvia.net>
 // Updates, corrections and additions for the Plus version by Mike Mikius <mikiusss@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -39,6 +39,7 @@ define("A_SHEET1_11", "Ultima connessione");
 define("A_SHEET1_12", "Motivo Espulsione (opzionabile)");
 define("A_USER", "Utente");
 define("A_MODER", "Moderatore");
+define("A_ADMIN", "Amministratore");
 define("A_PAGE_CNT", "Pagina %s di %s");
 
 // Frame for banished users
@@ -46,20 +47,20 @@ define("A_SHEET2_1", "Lista degli utenti banditi e stanze interessate");
 define("A_SHEET2_2", "IP");
 define("A_SHEET2_3", "Stanze interessate");
 define("A_SHEET2_4", "Fino a");
-define("A_SHEET2_5", "Senza fine");
-define("A_SHEET2_6", "Stanze sono separate da una virgola senza spazi  (,) se sono meno di 4, diversamente l`asterisco '<B>&nbsp;*&nbsp;</B>' espelle da tutte le stanze.");
-define("A_SHEET2_7", "Rimuovi l`espulsione per gli utenti selezionati");
+define("A_SHEET2_5", "senza fine");
+define("A_SHEET2_6", "Stanze sono separate da una virgola senza spazi (,) se sono meno di 4, diversamente l'asterisco '<B>&nbsp;*&nbsp;</B>' espelle da tutte le stanze.");
+define("A_SHEET2_7", "Rimuovi l'espulsione per gli utenti selezionati");
 define("A_SHEET2_8", "Non ci sono utenti banditi.");
 define("A_SHEET2_9", "Motivo (opzionabile)");
 
 // Frame for cleaning rooms
 define("A_SHEET3_1", "Elenco delle stanze esistenti");
-define("A_SHEET3_2", "Svuotare una stanza  \"non-default\" rimuoverà anche tutti i moderatori<BR>della chat stessa.");
+define("A_SHEET3_2", "Svuotare una stanza \"non-default\" rimuovera anche tutti i moderatori<br />della chat stessa.");
 define("A_SHEET3_3", "Svuota le stanze selezionate");
 define("A_SHEET3_4", "Non ci sono stanze da svuotare.");
 
 // Frame for sending mails
-define("A_SHEET4_0", "Non hai settato le variabili richieste<br>nello script 'chat/admin/mail4admin.php'.");
+define("A_SHEET4_0", "Non hai impostato l'indirizzo email dell'amministratore nella tabella di configurazione.");
 define("A_SHEET4_1", "Invia e-mails:");
 define("A_SHEET4_2", "A:");
 define("A_SHEET4_3", "Seleziona tutto");
@@ -67,10 +68,10 @@ define("A_SHEET4_4", "Oggetto:");
 define("A_SHEET4_5", "Messaggio:");
 define("A_SHEET4_6", "Avvia invio");
 define("A_SHEET4_7", "Tutte le e-mails sono state inviate.");
-define("A_SHEET4_8", "Errore interno durante l`invio delle mails.");
+define("A_SHEET4_8", "Errore interno durante l'invio delle mails.");
 define("A_SHEET4_9", "Indirizzo/i, oggetto o messaggio mancante!");
 
 // Frame for configuration
-define("A_SHEET5_0", "- La versione installata della tua phpMyChat-Plus è %s -\\nC`è una nuova versione realizzata (%s)!");
-define("A_SHEET5_1", "- La versione installata della tua phpMyChat-Plus è %s -<br>C`è una nuova versione realizzata (%s)!<br>Se desideri visitare il sito e scaricare l`aggiornamento<br>o leggere cosa c`è di nuovo, usa il link qui sotto:");
+define("A_SHEET5_0", "La versione installata della tua phpMyChat-Plus e %s");
+define("A_SHEET5_1", "C'e una nuova versione realizzata (%s)!");
 ?>
