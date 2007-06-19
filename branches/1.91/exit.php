@@ -70,7 +70,7 @@ function close_popups()
 		if (is_ignored_popup && !is_ignored_popup.closed)
 		{
 			is_ignored_popup.window.document.forms['IgnForm'].elements['Exit'].value = '1';
-			is_ignored_popup.close()
+			is_ignored_popup.close();
 		};
 		if (frames['loader'] && !frames['loader'].closed && leaveChat)
 		{

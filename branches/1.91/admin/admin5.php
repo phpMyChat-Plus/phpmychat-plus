@@ -44,7 +44,7 @@ if ($action != "submit")
 	// Check for application update on main sites (ciprianmp.com & sourceforge) resources.
 	$updatepath1 = "http://ciprianmp.com/latest/lib/update.php";
 	$updatepath2 = "http://svn.sourceforge.net/viewvc/*checkout*/phpmychat/trunk/lib/update.php";
-	if (APP_MINOR != "") $APP_M = eregi_replace("&beta;","ß", APP_MINOR);
+//	if (APP_MINOR != "") $APP_M = APP_MINOR;
 if (UPD_CHECK)
 {
 	if (@fopen($updatepath1, "r"))
@@ -52,7 +52,7 @@ if (UPD_CHECK)
 		@fclose($updatepath1);
 		if (isset($_GET['alv']) && isset($_GET['alm'])) {
 			define("APP_LAST_VERSION", $alv);
-			define("APP_LAST_MINOR", eregi_replace("ß","&beta;", $alm));
+			define("APP_LAST_MINOR", $alm);
 			settype($app_last_version = APP_LAST_VERSION, "double");
 		} else {
 		  echo "<script language=\"JavaScript\" type=\"text/javascript\" src=\"$updatepath1\"></script>\n";
@@ -68,7 +68,7 @@ if (UPD_CHECK)
 		@fclose($updatepath2);
 		if (isset($_GET['alv']) && isset($_GET['alm'])) {
 			define("APP_LAST_VERSION", "".$alv."");
-			define("APP_LAST_MINOR", eregi_replace("ß","&beta;", $alm));
+			define("APP_LAST_MINOR", $alm);
 			settype($app_last_version = APP_LAST_VERSION, "double");
 		} else {
 		  echo "<script language=\"JavaScript\" type=\"text/javascript\" src=\"$updatepath2\"></script>\n";
@@ -168,7 +168,7 @@ if (UPD_CHECK)
 		?>
 			<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
 			<!--
-		alert("<?php echo("- ".sprintf(A_SHEET5_0, APP_VERSION.$APP_M)." -") ?>\n<?php echo(sprintf(A_SHEET5_1, APP_LAST_VERSION.$alm)); ?>")
+		alert("<?php echo("- ".sprintf(A_SHEET5_0, APP_VERSION.APP_MINOR)." -") ?>\n<?php echo(sprintf(A_SHEET5_1, APP_LAST_VERSION.$alm)); ?>")
 			// -->
 			</SCRIPT>
 <?php

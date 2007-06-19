@@ -4,11 +4,15 @@
 Important: If you think I forgot to mention your contribution, please send me an email
 with your contribution and personal data you agree to share (using the template bellow). Thank you!
 
-Pete ... (aka Digioz Multimedia) <email> <website>
-	- Contribution 1
-	- Contribution 2
-	- Contribution 3
-	- Contribution ...
+Pete Soheil (aka Digioz Multimedia) webmaster@digioz.com www.digioz.com
+- Made Configuration System database based (as opposed to config file based.  
+- Added web admin interface for changing settings of chatroom over the web 
+- Added search feature to admin panel to allow search by: 
+	* Username  
+	* IP Address  
+	* Permissions  
+	* Gender  
+- Added admin Chat View Page Added for admin panel, to allow admin to see all private messages posted in chatrooms.
 
 Alexander Eisele <xaex@xeax.de>
 	- Links posting protection through popup parser
