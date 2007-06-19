@@ -42,7 +42,7 @@ if ($action != "submit")
 	settype($app_version = APP_VERSION, "double");
 
 	// Check for application update on main sites (ciprianmp.com & sourceforge) resources.
-	$updatepath1 = "http://ciprianmp.com/plus/lib/update.php";
+	$updatepath1 = "http://ciprianmp.com/latest/lib/update.php";
 	$updatepath2 = "http://svn.sourceforge.net/viewvc/*checkout*/phpmychat/trunk/lib/update.php";
 	if (APP_MINOR != "") $APP_M = eregi_replace("&beta;","ß", APP_MINOR);
 if (UPD_CHECK)
