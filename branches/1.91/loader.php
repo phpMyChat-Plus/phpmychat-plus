@@ -484,7 +484,7 @@ header("Cache-Control: no-cache, must-revalidate".$CachePlus);
 header("Pragma: no-cache");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
+<HTML dir="<?php echo($textDirection); ?>">
 <HEAD>
 <TITLE>Loader hidden frame</TITLE>
 <?php

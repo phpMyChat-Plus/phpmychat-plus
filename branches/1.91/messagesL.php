@@ -33,6 +33,9 @@ header("Content-Type: text/html; charset=${Charset}");
 // Avoid server configuration for magic quotes
 set_magic_quotes_runtime(0);
 
+// Text direction
+$textDirection = ($Align == "right") ? "RTL" : "LTR";
+
 // Translate to html special characters, and entities if message was sent with a latin 1 charset
 $Latin1 = ($Charset == "utf-8");
 function special_char($str,$lang,$slash_on)
@@ -223,7 +226,7 @@ if (!empty($kicked))
 if (!isset($FontName)) $FontName = "";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
+<HTML dir="<?php echo($textDirection); ?>">
 
 <HEAD>
 <TITLE>Messages frame</TITLE>
