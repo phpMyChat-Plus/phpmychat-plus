@@ -360,7 +360,7 @@ Hay muchas maneras para personalizar la apariencia del Chat. Para cambiar sus pr
 	<P>
 	<I>Por ejemplo:</I> /refresh 5
 	<P>
-	cambiará el intervalo a cada 5 segundos. *Cuidado, si escribe un número menor a 3 para n, el intervalo cambiará a no actualizar en absoluto (lo cual es útil si desea leer un montón de mensajes antiguos sin que lo molesten )!*
+	cambiará el intervalo a cada 5 segundos. *¡Cuidado, si escribe un número menor a 3 para n, el intervalo cambiará a no actualizar en absoluto (lo cual es útil si desea leer un montón de mensajes antiguos sin que lo molesten )!*
 	<P>
 	<?php
 	if ($Ver == "L")

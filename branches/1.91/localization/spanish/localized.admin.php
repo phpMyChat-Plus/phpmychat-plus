@@ -67,9 +67,9 @@ define("A_SHEET4_5", "Mensaje:");
 define("A_SHEET4_6", "Empezar a enviar");
 define("A_SHEET4_7", "Todos los correos han sido enviados.");
 define("A_SHEET4_8", "Ocurrió un error interno mientras se enviaban los correos.");
-define("A_SHEET4_9", "Faltan la dirección o direcciones, el asunto o el mensaje!");
+define("A_SHEET4_9", "¡Faltan la dirección o direcciones, el asunto o el mensaje!");
 
 // Frame for configuration
 define("A_SHEET5_0", "La versión instalada de phpMyChat-Plus es %s");
-define("A_SHEET5_1", "Hay una nueva versión (%s)!:");
+define("A_SHEET5_1", "¡Hay una nueva versión (%s)!:");
 ?>

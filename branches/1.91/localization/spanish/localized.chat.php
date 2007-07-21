@@ -127,8 +127,8 @@ define("L_ERR_USR_21", "Usted NO ha estado activo por los últimos ".C_USR_DEL."
 define("L_ERR_USR_22", "Este comando no está disponible para\\nel navegador que usted usa (IE engine).");
 define("L_ERR_USR_23", "Para unirse a una sala privada debe registrarse.");
 define("L_ERR_USR_24", "Para crear su propia sala privada debe registrarse.");
-define("L_ERR_USR_25", "Sólo el administrador puede usar el color ".$COLORNAME."!<br />No trate de usar ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." o ".COLOR_CM1.".<br />Estos están reservados para los usuarios de control!");
-define("L_ERR_USR_26", "Sólo los administradores y moderadores pueden usar este color ".$COLORNAME."!<br />No intente usar ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." o ".COLOR_CM1.".<br />Estos están reservados para los usuarios de control!");
+define("L_ERR_USR_25", "¡Sólo el administrador puede usar el color ".$COLORNAME."!<br />No trate de usar ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." o ".COLOR_CM1.".<br />¡Estos están reservados para los usuarios de control!");
+define("L_ERR_USR_26", "¡Sólo los administradores y moderadores pueden usar este color ".$COLORNAME."!<br />No intente usar ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." o ".COLOR_CM1.".<br />¡Estos están reservados para los usuarios de control!");
 define("L_ERR_USR_27", "No puede hablar en privado con usted.\\nPor favor conserve eso en su mente...\\nAhora escoja otra nombre de usuario.");
 define("L_ERR_ROM_1", "Los nombres de las salas no pueden contener comas o barras invertidas (\\).");
 define("L_ERR_ROM_2", "Se ha encontrado una palabra no permitida en el nombre de la sala que desea crear.");
@@ -166,9 +166,9 @@ define("L_INVITE_REG", " Tiene que estar registrado para entrar a esta sala.");
 define("L_INVITE_DONE", "Su invitación ha sido enviada a %s.");
 define("L_OK", "Enviar");
 define("L_BUZZ", "Galería de Alarmas");
-define("L_BAD_CMD", "Este no es un comando válido!");
-define("L_ADMIN", "%s ya es el administrador!");
-define("L_IS_MODERATOR", "%s ya es el moderador!");
+define("L_BAD_CMD", "¡Este no es un comando válido!");
+define("L_ADMIN", "¡%s ya es el administrador!");
+define("L_IS_MODERATOR", "¡%s ya es el moderador!");
 define("L_NO_MODERATOR", "Sólo el moderador puede usar este comando.");
 define("L_NOEXIST_USER", "%s no está en esta sala.");
 define("L_NONREG_USER", "%s no está registrado.");
@@ -176,7 +176,7 @@ define("L_NONREG_USER_IP", "Su IP es: %s.");
 define("L_NO_KICKED", "%s es el moderador o el administrador y no puede bloqueado.");
 define("L_NO_BANISHED", "%s es el moderador o el administrador y no puede desterrado.");
 define("L_SVR_TIME", "Hora del servidor: ");
-define("L_NO_SAVE", "No hay mensaje que guardar!");
+define("L_NO_SAVE", "¡No hay mensaje que guardar!");
 define("L_NO_ADMIN", "Sólo el administrador puede usar este comando.");
 define("L_NO_REG_USER", "Debe estar registrado en este chat para poder usar este comando.");
 
@@ -186,7 +186,7 @@ define("L_HELP_TIT_2", "Dar formato al texto de sus mensajes");
 define("L_HELP_FMT_1", "Puede usar texto en negritas, itálicas o subrayado en los mensajes encasillando las secciones de su texto que correspondan en &lt;B&gt; &lt;/B&gt;, &lt;I&gt; &lt;/I&gt; or &lt;U&gt; &lt;/U&gt; tags.<br />Por ejemplo, &lt;B&gt;este texto&lt;/B&gt; producirá <B>este texto</B>.");
 define("L_HELP_FMT_2", "Para crear un hipervínculo (para e-mail o URL) en su mensaje, sólo mecanografíe la dirección sin usar ningana etiqueta. El hipervínculo se creará automáticamente.");
 define("L_HELP_TIT_3", "Comandos");
-define("L_HELP_NOTE", "Todos los comandos deben usarse en Inglés!");
+define("L_HELP_NOTE", "¡Todos los comandos deben usarse en Inglés!");
 define("L_HELP_USR", "usuario");
 define("L_HELP_MSG", "mensaje");
 define("L_HELP_ROOM", "sala");
@@ -222,7 +222,7 @@ define("L_HELP_CMD_24", "Uso: el tema debe contener por lo menos 2 palabras.<br 
 define("L_HELP_CMD_25", "Un juego de dados para números al azar/peligrosos.<br />Uso: /dice o /dice [n];<br />n pueden usar cualquier valor <b>entre 1 y %s</b> (representa el número de dados arrojados). Si no se indica ningún número, por defecto se usará el máximo arrojado.");
 define("L_HELP_CMD_26", "Esta es una versión más compleja del comando /dados.<br />Uso: /{n1}d[n2] o /{n1}d;<br />n1 puede ser cualquier valor <b>entre 1 y %s</b> (representa el número de dados arrojados).<br />n2 puede ser cualquier valor <b>entre 1 y %s</b> (representa el número de dados arrojados por cada tirada).");
 define("L_HELP_CMD_27", "Destaca los mensajes de un usuario específico para una lectura más fácil a través de las conversaciones.<br />Uso: /high {usuario} o presionar el pequeño <img src=./images/highlightOff.gif> cuadrado a la derecha del nombre del usuario (en la lista de salas/usuarios)");
-define("L_HELP_CMD_28", "Permite poner <i>una sola imagen</i> como mensaje.<br />Uso: La imagen tiene que estar en la internet y su acceso tiene que ser libre para todos. No use páginas que requieran loguearse.<br />Se debe escribir el vínculo completo de la imagen! Ej.<b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Extensiones permitidas: .jpg .bmp .gif .png. El vínculo es sensible. Escriba las mayúsculas y minúsculas que correspondan!<br />SUGERENCIAS: escriba /img luego un espacio y pegue el URL en la casilla; para conseguir el URL de una imagen en una página web, dele clic derecho en la imagen, vaya a propiedades, luego seleccione la dirección completa/URL (a veces necesita desplazarse hacia abajo) y copie/pegue después de /img<br />No use imágenes de su computadora/pc: causará problemas en la ventana del chat!!!");
+define("L_HELP_CMD_28", "Permite poner <i>una sola imagen</i> como mensaje.<br />Uso: La imagen tiene que estar en la internet y su acceso tiene que ser libre para todos. No use páginas que requieran loguearse.<br />¡Se debe escribir el vínculo completo de la imagen! Ej.<b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Extensiones permitidas: .jpg .bmp .gif .png. El vínculo es sensible. ¡Escriba las mayúsculas y minúsculas que correspondan!<br />SUGERENCIAS: escriba /img luego un espacio y pegue el URL en la casilla; para conseguir el URL de una imagen en una página web, dele clic derecho en la imagen, vaya a propiedades, luego seleccione la dirección completa/URL (a veces necesita desplazarse hacia abajo) y copie/pegue después de /img<br />¡¡¡No use imágenes de su computadora/pc: causará problemas en la ventana del chat!!!");
 define("L_HELP_CMD_29", "El segundo comando permitirá al administrador o moderador(es) de la sala actual degradar a un usuario registrado previamente promovido a moderador para esa misma sala.<br />La opción * degradará al usuario en todas las salas.");
 define("L_HELP_CMD_30", "El segundo comando hace lo mismo que /me pero mostrará su género<br />Ej. * Sr Ciprian está viendo la TV o * Sra Dana está feliz.");
 define("L_HELP_CMD_31", "Cambia el orden en que los usuarios se muestran en las listas: por hora de ingreso o alfabéticamente.");
@@ -279,7 +279,7 @@ define("L_CLOSED_ROM", "%s ha cerrado su navegador");
 
 // Text for /away command notification string:
 define("L_AWAY", "%s está lejos");
-define("L_BACK", "%s ha regresado!");
+define("L_BACK", "¡%s ha regresado!");
 
 // Quick Menu mod
 define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***** Menu Rápido *****");	//&nbsp; means one blank space. this will center align the title of the drop list.
@@ -297,7 +297,7 @@ define("L_HELP_IMG", "dirección completa de la imagen que se mostrará");
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s ya no es un moderador en ninguna sala de este chat.");
 define("L_IS_NO_MODERATOR", "%s no es un moderador.");
-define("L_ERR_IS_ADMIN", "%s es el administrador!\\nUsted no puede cambiar sus permisos.");
+define("L_ERR_IS_ADMIN", "¡%s es el administrador!\\nUsted no puede cambiar sus permisos.");
 
 // Info mod by Ciprian - displays a list of all the features & mods, including Bot's name, on the welcome page
 define("INFO_CMDS", "<span style=\"color:orange\">Comandos adicionales disponibles:</span>".CMDS.".");
@@ -327,9 +327,9 @@ define("L_CLICK", "Clic aquí");
 define("BOT_TIPS", "CONSEJOS: Nuestro bot estamos aquí. Para hablar escriba <b>hello ".C_BOT_NAME."</b>. Para despedirse, escriba: <b>bye ".C_BOT_NAME."</b>. (private: /to <b>".C_BOT_NAME."</b> Mensaje)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
 define("BOT_PRIV_TIPS", "CONSEJOS: Nuestro bot stamos en la sala %s. Puede hablar en privado haciendo clic en el nombre y susurrando. (command: /wisp <b>".C_BOT_NAME."</b> Mensaje)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
 define("BOT_PRIVONLY_TIPS", "CONSEJOS: Nuestro bot no está públicamente activo. Sólo puede hablar en privado haciendo clic en el nombre. (commands: /to <b>".C_BOT_NAME."</b> Message or /wisp <b>".C_BOT_NAME."</b> Mensaje)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
-define("BOT_STOP_ERROR", "Bot no está funcionando en esta sala!");
-define("BOT_START_ERROR", "Bot está actualmente funcionando en esta sala!");
-define("BOT_DISABLED_ERROR", "Bot ha sido desactivado por el Panel de Administración!");
+define("BOT_STOP_ERROR", "¡Bot no está funcionando en esta sala!");
+define("BOT_START_ERROR", "¡Bot está actualmente funcionando en esta sala!");
+define("BOT_DISABLED_ERROR", "¡Bot ha sido desactivado por el Panel de Administración!");
 
 // Dice v.1, v.2 and v.3 modes
 define("DICE_RESULTS", "tirar los dados, los resultados son:");
@@ -343,17 +343,17 @@ define("L_ARCHIVE", "Abrir Archivo");
 
 // Private Message Popup mod by Ciprian
 define("L_REG_POPUP", "abrir ventanas emergente para mensajes privados");
-define("L_PRIV_POST_MSG", "Envíe un mensaje privado!");
-define("L_PRIV_MSG", "Nuevo mensaje privado recibido!!");
-define("L_PRIV_MSGS", "Nuevo mensaje privado recibido!");
-define("L_PRIV_MSGSa", "Aquí están los primeros 10 mensajes!<br />Use el vínculo que se encuentra al final para ver los demás.");
+define("L_PRIV_POST_MSG", "¡Envíe un mensaje privado!");
+define("L_PRIV_MSG", "¡Nuevo mensaje privado recibido!");
+define("L_PRIV_MSGS", "nuevo mensaje privado recibido!");
+define("L_PRIV_MSGSa", "¡Aquí están los primeros 10 mensajes!<br />Use el vínculo que se encuentra al final para ver los demás.");
 define("L_PRIV_MSG1", "De:");
 define("L_PRIV_MSG2", "Sala:");
 define("L_PRIV_MSG3", "Para:");
 define("L_PRIV_MSG4", "Mensaje:");
 define("L_PRIV_MSG5", "Posted:");
 define("L_PRIV_REPLY", "Responder");
-define("L_PRIV_READ", "Presione el botón de Cerrar para marcar todos los mensajes como leidos!");
+define("L_PRIV_READ", "¡Presione el botón de Cerrar para marcar todos los mensajes como leidos!");
 define("L_PRIV_POPUP", "Usted puede desactivar/activar esta función en cualquier momento<br />editando su <a href=\"#\" onClick=\"window.parent.runCmd('profile',''); return false;\" onMouseOver=\"window.status='Change your settings.'; return true\">Perfil</a> (sólo usuarios registrados)");
 define("L_NOT_ONLINE", "%s no está conectado en este momento.");
 define("L_PRIV_NOT_ONLINE", "%s no esta conectado en este momento,\\npero de todas maneras recibirá su mensaje cuando se conecte.");
@@ -379,9 +379,9 @@ define("L_COL_HELP_USER_STATUS", "Su estado");
 define("L_COL_TUT", "Usando texto de colores en el chat");
 
 // Alert messages on errors for Color Input Box mod by Ciprian
-define("COL_ERROR_BOX_MODA", "Sólo el administrador puede usar el color ".COLOR_CA."!\\n\\nEl color de su texto vuelve a ".COLOR_CM."!\\n\\nPor favor escoja cualquier otro color.");
-define("COL_ERROR_BOX_USRA", "Sólo el administrador puede usar el color ".COLOR_CA."!\\n\\nNo trate de usar ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." o ".COLOR_CM1.".\\n\\nEstos son colores reservados para los usuarios de control!\\n\\nEl color de su texto vuelve a ".COLOR_CD."!\\n\\nPor favor escoja cualquier otro color.");
-define("COL_ERROR_BOX_USRM", "Usted tiene que ser un moderador para usar el color ".COLOR_CM." !\\n\\nNo intente usar ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." o ".COLOR_CM1.".\\n\\nEstos son colores reservados para los usuarios de control!\\n\\nEl color de su texto vuelve a ".COLOR_CD."!\\n\\nPor favor escoja cualquier otro color.");
+define("COL_ERROR_BOX_MODA", "¡Sólo el administrador puede usar el color ".COLOR_CA."!\\n\\n¡El color de su texto vuelve a ".COLOR_CM."!\\n\\nPor favor escoja cualquier otro color.");
+define("COL_ERROR_BOX_USRA", "¡Sólo el administrador puede usar el color ".COLOR_CA."!\\n\\nNo trate de usar ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." o ".COLOR_CM1.".\\n\\n¡Estos son colores reservados para los usuarios de control!\\n\\n¡El color de su texto vuelve a ".COLOR_CD."!\\n\\nPor favor escoja cualquier otro color.");
+define("COL_ERROR_BOX_USRM", "¡Usted tiene que ser un moderador para usar el color ".COLOR_CM."!\\n\\nNo intente usar ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." o ".COLOR_CM1.".\\n\\n¡Estos son colores reservados para los usuarios de control!\\n\\n¡El color de su texto vuelve a ".COLOR_CD."!\\n\\nPor favor escoja cualquier otro color.");
 
 // Chat Activity displayed on remote web pages
 define("NB_USERS_IN","usuarios están ".LOGIN_LINK."chateando</A> en este momento.</td></tr>");
@@ -425,7 +425,7 @@ define("L_PASS_6", "Tu respuesta secreta");
 define("L_PASS_7", "Reiniciar contraseña");
 define("L_PASS_8", "Tu contraseña ha sido reiniciada.");
 define("L_PASS_9", "Tu nueva contraseña para entrar al chat.");
-define("L_PASS_11", "Bienvenido a nuestro servidor de chat!");
+define("L_PASS_11", "¡Bienvenido a nuestro servidor de chat!");
 define("L_PASS_12", "Elige tu pregunta ...");
 define("L_ERR_PASS_1", "Username incorrecto. Elige el tuyo.");
 define("L_ERR_PASS_2", "E-mail incorrecto. ¡Intentalo de nuevo!");
@@ -435,6 +435,6 @@ define("L_ERR_PASS_5", "No has configurado tu pregunta y respuesta secreta.");
 define("L_ERR_PASS_6", "No has configurado tu pregunta y respuesta secreta.<br />Si tu no puedes configurar esto. ¡Contacta con el administrador!");
 
 // admin stuff - added for administrators promotions/demotions in admin panel - by Ciprian
-define("L_ADM_3", "%s has become an administrator of this chat.");
-define("L_ADM_4", "%s is no longer an administrator of this chat.");
+define("L_ADM_3", "%s se ha convertido en un adminitrador en este chat.");
+define("L_ADM_4", "%s ya no es un administrador en este chat.");
 ?>
