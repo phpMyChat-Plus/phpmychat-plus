@@ -315,7 +315,7 @@ define("L_PRO_6", "Tu color de nombre/texto");
 // Avatar mod
 define("L_ERR_AV", "URL inv√°lida o host inexistente.");
 define("L_TITLE_AV", "Tu imagen actual: ");
-define("L_CHG_AV", "Seleccion√° íChangeí en el formulario del Perfil <br />para guardar tu Imagen.");
+define("L_CHG_AV", "Seleccion√° ”Éhange“†en el formulario del Perfil <br />para guardar tu Imagen.");
 define("L_SEL_NEW_AV", "Selecciona una nueva Imagen");
 define("L_EX_AV", "(Ejemplo: http://mysite/images/mypic.gif):");
 define("L_URL_AV", "URL: ");
@@ -417,10 +417,10 @@ define("L_SUN", "Do"); //Domingo
 // Password reset form by Ciprian
 define("L_PASS_0", "Formulario de reseteo de password");
 define("L_PASS_1", "Tu pregunta secreta");
-define("L_PASS_2", "Cu·l fue tu primer auto?"); // Don't change this question! Just translate it!
-define("L_PASS_3", "Cu·l era el nombre de tu primer mascota?"); // Don't change this question! Just translate it!
-define("L_PASS_4", "Cu·l es tu bebida favorita?"); // Don't change this question! Just translate it!
-define("L_PASS_5", "Cu·l es tu fecha de nacimiento?"); // Don't change this question! Just translate it!
+define("L_PASS_2", "Cu√°l fue tu primer auto?"); // Don't change this question! Just translate it!
+define("L_PASS_3", "Cu√°l era el nombre de tu primer mascota?"); // Don't change this question! Just translate it!
+define("L_PASS_4", "Cu√°l es tu bebida favorita?"); // Don't change this question! Just translate it!
+define("L_PASS_5", "Cu√°l es tu fecha de nacimiento?"); // Don't change this question! Just translate it!
 define("L_PASS_6", "Tu respuesta secreta");
 define("L_PASS_7", "Resetear password");
 define("L_PASS_8", "Tu password ha sido reseteado.");
