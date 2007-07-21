@@ -21,26 +21,46 @@ if (isset($FORM_SEND) && $FORM_SEND == 7)
   $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
   mysql_select_db(C_DB_NAME)or die("Could not select the database!");
 
-  if($searchCategory == "1" && $searchTerm != "")
+  if($searchCategory == 1 && $searchTerm != "")
   {
     // create query for 1
-    $sql = "SELECT username,firstname,lastname,email,perms,ip,gender FROM c_reg_users WHERE username LIKE '%".$searchTerm."%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM c_reg_users WHERE (username LIKE '%".$searchTerm."%' OR firstname LIKE '%".$searchTerm."%' OR lastname LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
     //echo $query;
   }
   elseif($searchCategory == 2 && $searchTerm != "")
   {
     // create query for 2
-    $sql = "SELECT username,firstname,lastname,email,perms,ip,gender FROM c_reg_users WHERE ip LIKE '%".$searchTerm."%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM c_reg_users WHERE ip LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   elseif($searchCategory == 3 && $searchTerm != "")
   {
     // create query for 3
-    $sql = "SELECT username,firstname,lastname,email,perms,ip,gender FROM c_reg_users WHERE perms LIKE '%".$searchTerm."%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM c_reg_users WHERE perms LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   elseif($searchCategory == 4 && $searchTerm != "")
   {
     // create query for 4
-    $sql = "SELECT username,firstname,lastname,email,perms,ip,gender FROM c_reg_users WHERE gender='".$searchTerm."';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM c_reg_users WHERE email LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+  }
+  elseif($searchCategory == 5 && $searchTerm != "")
+  {
+    // create query for 5
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM c_reg_users WHERE gender='".$searchTerm."' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+  }
+  elseif($searchCategory == 6 && $searchTerm != "")
+  {
+    // create query for 6
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM c_reg_users WHERE description LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+  }
+  elseif($searchCategory == 7 && $searchTerm != "")
+  {
+    // create query for 7
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM c_reg_users WHERE (favlink LIKE '%".$searchTerm."%' OR favlink1 LIKE '%".$searchTerm."%' OR website LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+  }
+  elseif($searchCategory == 8 && $searchTerm != "")
+  {
+    // create query for 8
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM c_reg_users WHERE (username LIKE '%".$searchTerm."%' OR firstname LIKE '%".$searchTerm."%' OR lastname LIKE '%".$searchTerm."%' OR country LIKE '%".$searchTerm."%' OR website LIKE '%".$searchTerm."%' OR ip LIKE '%".$searchTerm."%' OR perms LIKE '%".$searchTerm."%' OR email LIKE '%".$searchTerm."%' OR slang LIKE '%".$searchTerm."%' OR description LIKE '%".$searchTerm."%' OR favlink LIKE '%".$searchTerm."%' OR favlink1 LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   else
   {
@@ -55,13 +75,14 @@ if (isset($FORM_SEND) && $FORM_SEND == 7)
 
    // Display search result on screen
    echo "<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\" width=\"800\"  bordercolor=\"#C0C0C0\" CLASS=table>";
-   echo "<tr align=\"center\"><td><b>Username</b></td><td><b>First Name</b></td><td><b>Last Name</b></td><td><b>E-mail</b></td><td><b>Permission</b></td><td><b>IP</b></td><td><b>Gender</b></td></tr>";
+   echo "<tr align=\"center\"><td><b>Username</b></td><td><b>First Name</b></td><td><b>Last Name</b></td><td><b>Country</b></td><td><b>E-mail</b></td><td><b>Permission</b></td><td><b>IP</b></td><td><b>Gender</b></td></tr>";
 
    while($result = mysql_fetch_array($query))
    {
        $s_username = stripslashes($result["username"]);
        $s_firstname = stripslashes($result["firstname"]);
        $s_lastname = stripslashes($result["lastname"]);
+       $s_country = stripslashes($result["country"]);
        $s_email = stripslashes($result["email"]);
        $s_perms = stripslashes($result["perms"]);
        $s_ip = stripslashes($result["ip"]);
@@ -80,7 +101,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 7)
          $s_gender = "U";
        }
 
-       echo "<tr bgcolor=\"#FFFFFF\"><td width=100> $s_username </td><td> $s_firstname </td><td> $s_lastname </td><td> <a href=\"mailto:$s_email\"><font color=\"orange\">$s_email</font></a> </td><td> $s_perms </td><td> $s_ip </td><td><center> $s_gender </center></td></tr>";
+       echo "<tr bgcolor=\"#FFFFFF\"><td width=100>$s_username</td><td>$s_firstname</td><td>$s_lastname</td><td>$s_country</td><td><a href=\"mailto:$s_email\">$s_email</a></td><td>$s_perms</td><td>$s_ip</td><td align=center>$s_gender</td></tr>";
    }
 
 echo "</table><br />";
@@ -101,13 +122,17 @@ echo "</table><br />";
     <td><input name="searchTerm" type="text" size="20"></td>
 </tr>
 <tr>
-    <td bgcolor="#9B9DFF"><b>Search Category:</b></td>
+    <td bgcolor="#9B9DFF"><b>Search by:</b></td>
     <td bgcolor="#9B9DFF">
         <select name="searchCategory">
-                <option value="1">Username
+                <option value="8">All categories
+                <option value="1">Names
                 <option value="2">IP Address
                 <option value="3">Permissions
-                <option value="4">Gender
+                <option value="4">Email
+                <option value="5">Gender
+                <option value="6">Description
+                <option value="7">Links
         </select>
 
     </td></tr>

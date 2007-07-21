@@ -10,7 +10,7 @@ $ChatPath = "";		// relative path to chat dir, empty value if this
 require("./${ChatPath}lib/index.lib.php");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
 <SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
@@ -20,13 +20,13 @@ window.name="login";
 // Returns the days in the status bar
 function get_day(time,plus)
 {
-		monday = " <?php echo(utf8_encode(L_MON)) ?>";
-		tuesday = " <?php echo(utf8_encode(L_TUE)) ?>";
-		wednesday = " <?php echo(utf8_encode(L_WED)) ?>";
-		thursday = " <?php echo(utf8_encode(L_THU)) ?>";
-		friday = " <?php echo(utf8_encode(L_FRI)) ?>";
-		saturday = " <?php echo(utf8_encode(L_SAT)) ?>";
-		sunday = " <?php echo(utf8_encode(L_SUN)) ?>";
+		monday = " <?php echo(L_MON) ?>";
+		tuesday = " <?php echo(L_TUE) ?>";
+		wednesday = " <?php echo(L_WED) ?>";
+		thursday = " <?php echo(L_THU) ?>";
+		friday = " <?php echo(L_FRI) ?>";
+		saturday = " <?php echo(L_SAT) ?>";
+		sunday = " <?php echo(L_SUN) ?>";
 		dayN = time.getDay();
 		day = dayN + plus;
 		if (day == 1 || day == 8) is_day = monday;
@@ -105,7 +105,7 @@ function get_day(time,plus)
 		if (cur_hoursSYD < 10) cur_hoursSYD = "0" + cur_hoursSYD
 		cur_timeSYD = cur_hoursSYD + ":" + calc_minutes + daySYD;;
 		WORLD_TIME = <?php echo((C_WORLDTIME) ? '" " + "(NYC: " + cur_timeNYC + " | LON: " + cur_timeGMT + " | PAR: " + cur_timePAR + " | BUC: " + cur_timeBUC + " | TYO: " + cur_timeTYO + " | SYD: " + cur_timeSYD + ")"' : ''); ?>;
-		window.status = "<?php echo(utf8_encode(L_SVR_TIME)); ?>" + calc_time + WORLD_TIME;
+		window.status = "<?php echo(L_SVR_TIME); ?>" + calc_time + WORLD_TIME;
 
 		clock_disp = setTimeout('clock(' + gap + ')', 1000);
 	}

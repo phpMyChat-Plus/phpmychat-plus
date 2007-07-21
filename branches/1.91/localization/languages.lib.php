@@ -44,7 +44,7 @@ if (!isset($HTTP_ACCEPT_LANGUAGE))
 if (!isset($HTTP_USER_AGENT))
 	$HTTP_USER_AGENT = getenv("HTTP_USER_AGENT");
 
-if ((isset($L) && $L != "" && is_dir('./'.$ChatPath.'localization/'.$L)) || !C_MULTI_LANG)
+if ((isset($L) && $L != "" && is_dir('./'.$ChatPath.'localization/'.$L)) || C_MULTI_LANG)
 {
 }
 elseif (isset($CookieLang)
@@ -64,7 +64,7 @@ elseif ($HTTP_USER_AGENT != "")
 };
 
 //if no language detected set default one
-if (!isset($L)) $L = C_LANGUAGE;
+if (!isset($L) || !C_MULTI_LANG) $L = C_LANGUAGE;
 
 //put language in a cookie
 setcookie("CookieLang", $L, time() + 60*60*24*365);		// cookie expires in one year

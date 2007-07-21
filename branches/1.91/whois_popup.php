@@ -38,7 +38,7 @@ function special_char($str,$lang)
 if (!isset($FontName)) $FontName = "";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
 <TITLE><?php echo(special_char(stripslashes($U),$Latin1)); ?></TITLE>
@@ -237,7 +237,7 @@ if ($description)
 
 if ($picture)
 {
-//	$prefix = (strpos($picture,"://") ? "" : "http://");
+//	$prefix = ((strpos($picture,"://") || strpos($picture,"./")) ? "" : "http://");
 	?>
 	<TR>
 		<TD CLASS="whois" nowrap="nowrap" colspan=2><center><IMG SRC="<?php echo($prefix.htmlspecialchars($picture)); ?>"></center></TD>
@@ -258,9 +258,13 @@ if ($power != "weak")
 ?>
 </TABLE>
 <br />
-<SPAN CLASS="whois"><?php echo("> ${tag_open}${perms}${tag_close} <"); ?></SPAN>
-
 <?php
+ if ($email != 'bot@bot.com' && $email != 'quote@quote.com')
+{
+	?>
+<SPAN CLASS="whois"><?php echo("> ${tag_open}${perms}${tag_close} <"); ?></SPAN>
+<?php
+}
 if ($quotetext)
 {
 	?>

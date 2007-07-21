@@ -11,6 +11,15 @@ function room_in($what, $in)
 	return false;
 };
 
+// Transform mysql timestamp to UNIX timestamp format
+function mysql_to_ts($mysql_time)
+{
+	if (!preg_match('/^(\\d{4})-(\\d{2})-(\\d{2}) (\\d{2}):(\\d{2}):(\\d{2})$/', $mysql_time, $matches))
+	{
+		return NULL;
+	}
+	return mktime($matches[4], $matches[5], $matches[6], $matches[2], $matches[3], $matches[1]);
+}
 
 $DbLink = new DB;
 
@@ -50,7 +59,7 @@ if ($sheet < 6)
 
 // Horizontal alignement for cells topic and gifs names
 
-if ($Charset == "windows-1256")	// Arabic
+if ($Align == "right")	// Arabic
 {
 	$CellAlign		= "RIGHT";
 	$InvCellAlign	= "LEFT";
@@ -70,7 +79,7 @@ else
 };
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
 <TITLE><?php echo(APP_NAME); ?></TITLE>

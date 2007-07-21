@@ -20,9 +20,9 @@ function room_in($what, $in)
 	}
 	list($password,$perms,$rooms) = $DbLink->next_record();
 	$DbLink->clean_results();
-	if (($password != $PWD_Hash) || (($perms != "moderator")&&($perms != "admin")) || (($perms == "moderator")&&(!room_in(stripslashes($R), $rooms))))
+	if (($password != $PWD_Hash) || (($perms != "moderator") && ($perms != "admin")) || (($perms == "moderator") && (!room_in(stripslashes($R), $rooms) && !room_in("*", $rooms))))
 	{
-	$Error = L_NO_MODERATOR;
+		$Error = L_NO_MODERATOR;
 	}
 	else
 	{

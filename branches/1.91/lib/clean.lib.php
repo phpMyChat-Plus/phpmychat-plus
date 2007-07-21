@@ -61,7 +61,9 @@ $ChatLurk->close();
 // Clean the users table of users who closed their browsers
 $Chat = new DB;
 $ChatM = new DB;
-$Chat->query("SELECT room,username,u_time FROM ".C_USR_TBL." WHERE username != 'C_BOT_NAME' AND (u_time < ".(time() - 60)." OR (status = 'k' AND u_time <  ".(time() - 20)."))");
+// Ghost Control mod by Ciprian
+$Hide = (C_HIDE_ADMINS && C_HIDE_MODERS) ? "status!= 'a' AND status!= 'm' AND " : (C_HIDE_ADMINS ? "status!= 'a' AND " : (C_HIDE_MODERS ? "status!='m' AND " : ""));
+$Chat->query("SELECT room,username,u_time FROM ".C_USR_TBL." WHERE ".$Hide."username != 'C_BOT_NAME' AND (u_time < ".(time() - 60)." OR (status = 'k' AND u_time <  ".(time() - 20)."))");
 while(list($userroom, $userclosed, $usertime) = $Chat->next_record())
 {
 $when = date('r', $usertime + C_TMZ_OFFSET*60*60);

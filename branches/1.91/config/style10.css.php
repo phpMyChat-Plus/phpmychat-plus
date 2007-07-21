@@ -150,8 +150,8 @@ INPUT, SELECT, TEXTAREA
 {
 	margin-top: 0px;
 	margin-bottom: 2px;
-	margin-left: <?php #echo($Charset == "windows-1256" ? "5" : "55"); ?>0px;
-	margin-right: <?php #echo($Charset == "windows-1256" ? "55" : "5"); ?>0px;
+	margin-left: <?php #echo($Align == "right" ? "5" : "55"); ?>0px;
+	margin-right: <?php #echo($Align == "right" ? "55" : "5"); ?>0px;
 	text-indent: 0px;
 }
 
@@ -160,8 +160,8 @@ INPUT, SELECT, TEXTAREA
 	background: #FFFAFA;
 	margin-top: 0px;
 	margin-bottom: 0px;
-	margin-left: <?php #echo($Charset == "windows-1256" ? "5" : "55"); ?>0px;
-	margin-right: <?php #echo($Charset == "windows-1256" ? "55" : "5"); ?>0px;
+	margin-left: <?php #echo($Align == "right" ? "5" : "55"); ?>0px;
+	margin-right: <?php #echo($Align == "right" ? "55" : "5"); ?>0px;
 	text-indent: 0px;
 }
 

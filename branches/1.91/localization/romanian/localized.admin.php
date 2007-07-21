@@ -4,71 +4,71 @@
 // Corrected, finalized and updated to Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 
 // extra header for charset
-$Charset = "iso-8859-2";
+$Charset = "utf-8";
 
 // medium font size in pt.
 $FontSize = 10;
 
 // Top frame
 define("A_MENU_0", "Administrare pentru %s");
-define("A_MENU_1", "Utilizatori înregistraþi");
-define("A_MENU_2", "Utilizatori blocaþi");
-define("A_MENU_3", "Curãþare camere");
+define("A_MENU_1", "Utilizatori Ã®nregistraÅ£i");
+define("A_MENU_2", "Utilizatori blocaÅ£i");
+define("A_MENU_3", "CurÄƒÅ£are camere");
 define("A_MENU_4", "Trimite emailuri");
 define("A_MENU_5", "Configurare");
 define("A_MENU_6", "Extras Chat");
-define("A_MENU_7", "Cãutare");
-define("A_MENU_8", "Conectãri");
-define("A_MENU_9", "Arhivã");
+define("A_MENU_7", "CÄƒutare");
+define("A_MENU_8", "ConectÄƒri");
+define("A_MENU_9", "ArhivÄƒ");
 
 // Frame for registered users
-define("A_SHEET1_1", "Lista utilizatorilor înregistraþi ºi permisiunile acestora");
+define("A_SHEET1_1", "Lista utilizatorilor Ã®nregistraÅ£i ÅŸi permisiunile acestora");
 define("A_SHEET1_2", "Numele");
 define("A_SHEET1_3", "Permisiuni");
 define("A_SHEET1_4", "Camere moderate");
-define("A_SHEET1_5", "Camerele moderate sunt separate de virgulã (,) fãrã spaþii.");
-define("A_SHEET1_6", "ªterge utilizatorii selectaþi");
-define("A_SHEET1_7", "Schimbã");
-define("A_SHEET1_8", "Nu existã utilizatori înregistraþi, cu excepþia ta.");
-define("A_SHEET1_9", "Blocheazã utilizatorii selectaþi");
-define("A_SHEET1_10", "Va trebui sã intri în secþiunea 'Utilizatori blocaþi' pentru ajustãri.");
+define("A_SHEET1_5", "Camerele moderate sunt separate de virgulÄƒ (,) fÄƒrÄƒ spaÅ£ii.");
+define("A_SHEET1_6", "Åžterge utilizatorii selectaÅ£i");
+define("A_SHEET1_7", "SchimbÄƒ");
+define("A_SHEET1_8", "Nu existÄƒ utilizatori Ã®nregistraÅ£i, cu excepÅ£ia ta.");
+define("A_SHEET1_9", "BlocheazÄƒ utilizatorii selectaÅ£i");
+define("A_SHEET1_10", "Va trebui sÄƒ intri Ã®n secÅ£iunea â€™Utilizatori blocaÅ£iâ€™ pentru ajustÄƒri.");
 define("A_SHEET1_11", "Ultima conectare");
-define("A_SHEET1_12", "Motivul blocãrii (opþional)");
+define("A_SHEET1_12", "Motivul blocÄƒrii (opÅ£ional)");
 define("A_USER", "Utilizator");
 define("A_MODER", "Moderator");
 define("A_ADMIN", "Administrator");
 define("A_PAGE_CNT", "Pagina %s din %s");
 
 // Frame for banished users
-define("A_SHEET2_1", "Lista utilizatorilor blocaþi ºi camerele în care au fost blocaþi");
+define("A_SHEET2_1", "Lista utilizatorilor blocaÅ£i ÅŸi camerele Ã®n care au fost blocaÅ£i");
 define("A_SHEET2_2", "IP");
 define("A_SHEET2_3", "Camere blocate");
-define("A_SHEET2_4", "Pânã la");
+define("A_SHEET2_4", "PÃ¢nÄƒ la");
 define("A_SHEET2_5", "Definitiv");
-define("A_SHEET2_6", "Camerele sunt separate prin virgulã fãrã spaþii (,) dacã sunt mai puþine de 4, altfel, semnul '<B>&nbsp;*&nbsp;</B>' va bloca accesul în toate camerele.");
-define("A_SHEET2_7", "Deblocheazã utilizatorii selectaþi");
-define("A_SHEET2_8", "Nu existã utilizatori blocaþi.");
-define("A_SHEET2_9", "Motivul (opþional)");
+define("A_SHEET2_6", "Camerele sunt separate prin virgulÄƒ fÄƒrÄƒ spaÅ£ii (,) dacÄƒ sunt mai puÅ£ine de 4, altfel, semnul â€™<B>*</B>â€™ va bloca accesul Ã®n toate camerele.");
+define("A_SHEET2_7", "DeblocheazÄƒ utilizatorii selectaÅ£i");
+define("A_SHEET2_8", "Nu existÄƒ utilizatori blocaÅ£i.");
+define("A_SHEET2_9", "Motivul (opÅ£ional)");
 
 // Frame for cleaning rooms
-define("A_SHEET3_1", "Lista camerelor care ar trebui curãþate");
-define("A_SHEET3_2", "Curãþarea unei camere \"non-default\" va elimina ºi statutul de moderatori pentru camera respectivã.");
-define("A_SHEET3_3", "Curãþã camerele selectate");
-define("A_SHEET3_4", "Nu sunt camere de curãþat.");
+define("A_SHEET3_1", "Lista camerelor care ar trebui curÄƒÅ£ate");
+define("A_SHEET3_2", "CurÄƒÅ£area unei camere \"non-default\" va elimina ÅŸi statutul de moderatori pentru camera respectivÄƒ.");
+define("A_SHEET3_3", "CurÄƒÅ£Äƒ camerele selectate");
+define("A_SHEET3_4", "Nu sunt camere de curÄƒÅ£at.");
 
 // Frame for sending mails
-define("A_SHEET4_0", "Nu ai setat adresa de email a administratorului in tab-ul Configurare'.");
+define("A_SHEET4_0", "Nu ai setat adresa de email a administratorului in tab-ul Configurare.");
 define("A_SHEET4_1", "Trimite emailuri");
-define("A_SHEET4_2", "Cãtre:");
-define("A_SHEET4_3", "Selecteazã tot");
+define("A_SHEET4_2", "CÄƒtre:");
+define("A_SHEET4_3", "SelecteazÄƒ tot");
 define("A_SHEET4_4", "Subiect:");
 define("A_SHEET4_5", "Mesaj:");
 define("A_SHEET4_6", "Trimite");
 define("A_SHEET4_7", "Toate email-urile au fost trimise.");
-define("A_SHEET4_8", "Eroare internã întâmpinatã la trimitere.");
-define("A_SHEET4_9", "Destinaþia, subiectul sau mesajul nu au fost completate!");
+define("A_SHEET4_8", "Eroare internÄƒ Ã®ntÃ¢mpinatÄƒ la trimitere.");
+define("A_SHEET4_9", "DestinaÅ£ia, subiectul sau mesajul nu au fost completate!");
 
 // Frame for configuration
-define("A_SHEET5_0", "Aveþi instalat phpMyChat-Plus versiunea %s");
-define("A_SHEET5_1", "A fost lansatã deja o nouã versiune (%s)!");
+define("A_SHEET5_0", "AveÅ£i instalat phpMyChat-Plus versiunea %s");
+define("A_SHEET5_1", "A fost lansatÄƒ deja o nouÄƒ versiune (%s)!");
 ?>

@@ -1,5 +1,6 @@
 ALTER TABLE c_ban_users
 			ADD reason varchar(100) NOT NULL default '';
+
 ALTER TABLE c_config
 			CHANGE ALLOW_ENTRANCE_SOUND ALLOW_ENTRANCE_SOUND enum('0','1','2','3') NOT NULL default '1',
 			CHANGE COLOR_CDC1 COLOR_CD8 VARCHAR(25) NOT NULL,
@@ -28,10 +29,14 @@ ALTER TABLE c_config
 			ADD WORLDTIME enum('0','1','2') NOT NULL default '2',
 			ADD UPD_CHECK enum('0','1') NOT NULL default '1',
 			ADD QUOTE enum('0','1') NOT NULL default '1',
-			ADD QUOTE_TIME tinyint(1) NOT NULL default '2',
+			ADD QUOTE_TIME tinyint(1) NOT NULL default '5',
 			ADD QUOTE_COLOR varchar(25) NOT NULL default 'brown',
-			ADD QUOTE_ALL enum('0','1') NOT NULL default '0',
-			ADD QUOTE_PATH varchar(255) NOT NULL default 'files/quotes/quotes.txt';
+			ADD QUOTE_PATH varchar(255) NOT NULL default 'files/quotes/quotes.txt',
+			ADD HIDE_ADMINS enum('0','1') NOT NULL default '0',
+			ADD HIDE_MODERS enum('0','1') NOT NULL default '0',
+			ADD LAST_SAVED_ON timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+			ADD LAST_SAVED_BY varchar(30) NOT NULL default 'installer (upgrade)';
+
 UPDATE c_config SET
 			ENTRANCE_SOUND = 'sounds/chimeup.wav',
 			COLOR_CD2 = 'tomato',
@@ -52,14 +57,23 @@ UPDATE c_config SET
 			QUICKM = 'Greetings|\r\nWelcome|\r\nThanks for coming by|\r\nLoL|\r\n:rofl|\r\n/away be right back...|\r\n/away ...I''m back!|\r\n/buzz|\r\n/buzz ~chimeup|\r\n/me is busy right now!|\r\n/mr is reading|\r\n/bye cyall!|\r\n/high %s|\r\n/join 0 #%s|\r\n/join 1 #%s|\r\n/invite %s|\r\n/img http://www.path_to_image|\r\n/promote %s|\r\n/room Please follow the topic|\r\n/size 12|\r\n/size|\r\n/sort|\r\n/topic |\r\n/topic top reset|\r\n/wisp %s Hey, in which room ru?|\r\n/whois %s',
 			QUICKU = 'Hello everyone|\r\nlol|\r\n:rofl|\r\n/away brb...|\r\n/away ...back!|\r\n/me is busy!|\r\n/mr is lurking|\r\n/bye ttyl!|\r\n/high %s|\r\n/join 0 #%s|\r\n/join 1 #%s|\r\n/invite %s|\r\n/img http://www.path_to_image|\r\n/size 12|\r\n/size|\r\n/sort|\r\n/wisp %s Hey, in which room ru?|\r\n/whois %s',
 			BOT_HELLO = 'Hello People!!! Have you been missing me?',
-			BOT_BYE = 'Bye Bye everyone! See you when I see you...'
+			BOT_BYE = 'Bye Bye everyone! See you when I see you...',
+			WELCOME_SOUND = 'sounds/hello.wav',
+			QUOTE_COLOR = 'brown',
+			QUOTE_PATH = 'files/quotes/quotes.txt',
+			LAST_SAVED_ON = now()
 	WHERE ID='0';
+
 ALTER TABLE c_messages
 			ADD room_from varchar(30) NOT NULL default '';
+
 ALTER TABLE c_reg_users
 			ADD id int(11) NOT NULL default '0' FIRST,
 			ADD cid int(11) NOT NULL auto_increment after id,
+			ADD s_question enum('0','1','2','3','4') NOT NULL default '0',
+			ADD s_answer varchar(64) NOT NULL default '',
 			ADD PRIMARY KEY (cid);
+
 UPDATE c_reg_users SET
 			password='3901e4a6c3d27909afef4c22f8337da8',
 			IP = '-No tracking IP-',
@@ -67,6 +81,16 @@ UPDATE c_reg_users SET
 			email = 'bot@bot.com',
 			slang = 'English, German',
 			favlink = 'http://www.alicebot.org/documentation/',
-			favlink1 = 'http://sourceforge.net/forum/?group_id=43190'
+			favlink1 = 'http://sourceforge.net/forum/?group_id=43190',
+			avatar = './images/avatars/bot_avatar.gif'
 	WHERE email='bot@bot.bot.com';
-INSERT INTO c_reg_users VALUES ('', '', 'quote', '1', 'ef93e0948b007826a1a7a49a17b72a59', 'Random Quote', 'phpMyChat - Plus', 'WorldWideWeb', '', 'quote@quote.com', '0', 'admin', '', 1130763311, '-No tracking IP-', '1', '0', './images/avatars/avatar56.gif', 'I am a virtual user, added here to post random quotes at my admin`s will. Ohhh... I wish to express my gratitude to Ciprian for making me available for enlighting you in here. :)', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', 'English (any actually)', 'limegreen', './images/avatars/avatar56.gif');
+
+INSERT INTO c_reg_users VALUES ('', '', 'Random_Quote', '1', 'ef93e0948b007826a1a7a49a17b72a59', 'Random Quote', 'phpMyChat - Plus', 'WorldWideWeb', '', 'quote@quote.com', '0', 'admin', '', 1130763311, '-No tracking IP-', '1', '0', './images/avatars/avatar56.gif', 'I am a virtual user, added here to post random quotes at my admin`s will. Ohhh... I wish to express my gratitude to Ciprian for making me available for enlighting you in here. :)', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', 'English (any actually)', 'limegreen', './images/avatars/quote_avatar.gif', '0', '');
+
+ALTER TABLE c_users
+			ADD email varchar(64) NOT NULL default '';
+
+UPDATE c_users u LEFT JOIN c_reg_users r
+			ON u.username = r.username
+			SET u.email='bot@bot.com'
+			WHERE r.email = 'bot@bot.com';

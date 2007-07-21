@@ -39,7 +39,7 @@ if (COLOR_FILTERS)
 if (!isset($FontName)) $FontName = "";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
 <TITLE>Exit frame</TITLE>
@@ -111,7 +111,15 @@ if (EXIT_LINK_TYPE)
 ?>
 <BODY CLASS="frame" onLoad="MM_preloadImages('images/exitdoorRoll.gif')" onUnload="close_popups();">
 <CENTER>
-<a href="<?php echo("$From?Ver=$Ver&L=$L&U=".urlencode(stripslashes($U))."&E=".urlencode(stripslashes($R))."&EN=$T"); ?>" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image4','','images/exitdoorRoll.gif',1); window.status='<?php echo(L_EXIT); ?>.'; return true;" title="<?php echo(L_EXIT); ?>" target="_parent"><img name="Image4" border="0" alt="<?php echo(L_EXIT); ?>" src="images/exitdoor.gif"></a>
+<?php
+if ($Ver != "H")
+{
+	?>
+<table align="center"><tr>
+	<?php
+}
+?>
+	<a href="<?php echo("$From?Ver=$Ver&L=$L&U=".urlencode(stripslashes($U))."&E=".urlencode(stripslashes($R))."&EN=$T"); ?>" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image4','','images/exitdoorRoll.gif',1); window.status='<?php echo(L_EXIT); ?>.'; return true;" title="<?php echo(L_EXIT); ?>" target="_parent"><img name="Image4" border="0" alt="<?php echo(L_EXIT); ?>" src="images/exitdoor.gif"></a>
 <?php
 }
 else
@@ -119,7 +127,15 @@ else
 ?>
 <BODY CLASS="frame" onUnload="close_popups();">
 <CENTER>
-<A HREF="<?php echo("$From?Ver=$Ver&L=$L&U=".urlencode(stripslashes($U))."&E=".urlencode(stripslashes($R))."&EN=$T"); ?>"  title="Exit Chat" onMouseOver="window.status='<?php echo(L_EXIT); ?>.'; return true;" title="<?php echo(L_EXIT); ?>" TARGET="_parent"><?php echo(L_EXIT); ?></A>
+<?php
+if ($Ver != "H")
+{
+	?>
+<table align="center"><tr>
+	<?php
+}
+?>
+	<A HREF="<?php echo("$From?Ver=$Ver&L=$L&U=".urlencode(stripslashes($U))."&E=".urlencode(stripslashes($R))."&EN=$T"); ?>"  title="Exit Chat" onMouseOver="window.status='<?php echo(L_EXIT); ?>.'; return true;" title="<?php echo(L_EXIT); ?>" TARGET="_parent"><?php echo(L_EXIT); ?></A>
 <?php
 }
 ?>
@@ -145,6 +161,12 @@ if ($Ver == "H")
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<A HREF="#"  onMouseOver="window.status='<?php echo(L_CONN_STATE); ?>.'; return true;" onClick="window.parent.reConnect(); if (window.parent.frames['input'] && window.parent.frames['input'].window.document.forms['MsgForm'].elements['M']) window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].focus(); return false" title="<?php echo(L_CONN_STATE); ?>">
 	<IMG NAME="ConState" SRC="images/connectOff.gif" WIDTH=13 HEIGHT=13 ALIGN="MIDDLE" BORDER=0 ALT="<?php echo(L_CONN_STATE); ?>"></A>
+	<?php
+}
+if ($Ver != "H")
+{
+	?>
+</tr></table>
 	<?php
 }
 ?>

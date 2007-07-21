@@ -6,7 +6,11 @@ Connection troubles with IE 7.0 beta. (reported on different sites)
 Important: everytime you upgrade/reinstall a phpmychat server, the old cookies must be deleted from the clients' machines - so let your users now! ()
 
 Fixes History:
-18.06.2007 - 1.91-beta3:
+20.07.2007 - 1.91-beta5:
+- Ghost Control mod added - Admin can set in Config panel to hide admins or/and moderators in chat; (functionality extension)
+- improved the logs sections in both Public Archive and Admin Archive - years and months are sorted now descending, to show the latest first; (display related)
+- utf-8 compatibility added (not full yet - it cannot be used for usernames/roomnames) - first time in ages! (localization related)
+- Reset password function added (below the password field in login pages); (functionality extension)
 - Some Admin panel/Configuration adjustments; (usability related)
 - Improved/fixed the update check in Config/Admin panel. Also inserted the first option in panel to enable/disable this feature, useful for sites with remote file access disabled; (administration & functionality related)
 - Download link on index page moved in Credits area and redirected to the SourceForge page; (link update)
@@ -62,6 +66,8 @@ Fixes History:
 - German language updated and included (localization project) - Thanks to Alexander Eisele <xaex@xeax.de>.
 - Italian language updated and included (localization project) - Thanks to Mike Mikius <mikiusss@yahoo.com>.
 - Spanish language updated and included (localization project) - Thanks to Roxana Castaneda <roxminu@yahoo.com>.
+- Swedish language updated and included (localization project) - Thanks to Heikki <heikki@yttervik.be>.
+- Vetnamese language included - new for phpmychat (localization project) - Thanks to Marshall <hellomarshal_lookatme@netzero.net>.
 - Romanian language changed to include the special chars of the Central European encoding (with diactritics) (display related)
 - In all the languages, the single quote eventually used in phrases (not codes) changed to unicode &#39; in order to eliminate any script error (functionality related)
 - Changed the icon.gif background to transparency in order to pick and fit the chat room skin background color; (display related)
@@ -69,10 +75,10 @@ Fixes History:
 - Added Buzz Gallery popup link in input bar (like smilies) - to automatically add a different sound from the sounds folder; (functionality extension)
 - Added Randome Quote mod - to automatically send a public message containing a quote from a .txt file - configurable in Admin panel/Configuration; (functionality extension)
 - Enlarged the users frame (for long names); (display related)
-- POST, GET, COOKIE and SERVER methods updated to php5 - thanks to Alexander Eisele (compatibility related)
+- POST, GET, COOKIE and SERVER methods updated to php5 - thanks to Alexander Eisele (php5 compatibility related)
 - Fixed the private messages function in users list, when pm popup is disabled but pm enabled; (functionality related)
 - Switched the pm links on names (when pm enabled): messages frame names will return /to while users list names will return name> in the same room or /wisp in the other rooms
-- Changed the active links look and feel in the chat to overcaome the scrolling bug when clicking a name/avatar in messages frame (functionality related)
+- Changed the active links look and feel in the chat to overcome the scrolling bug when clicking a name/avatar in messages frame (functionality related)
 SQL updates:
 - Added five more fields in table c_config:
 		- [COLOR_CM2 VARCHAR(25) NOT NULL default '' AFTER COLOR_CM1];
@@ -99,13 +105,14 @@ Files added:
 - plus/config/style(8-10).css.php; (Black&White, Pink and DarkViolet skins)
 - plus/install/database/mysql_upgrade_plus_1.90.txt; (all the old ones updated accordingly)
 - plus/lib/update.txt;
-- plus/localization/argentinian_spanish folder:
-- plus/localization/dutch folder:
-	- Note: plus/localization/dutch/localized.tutorial.php; - not done yet - to be added
-- plus/localization/french folder:
-- plus/localization/german folder:
-- plus/localization/italian folder:
-- plus/localization/spanish folder:
+- plus/localization/argentinian_spanish folder;
+- plus/localization/dutch folder;
+- plus/localization/french folder;
+- plus/localization/german folder;
+- plus/localization/italian folder;
+- plus/localization/spanish folder;
+- plus/localization/swedish folder;
+- plus/localization/vietnamese folder;
 Files updated:
 - plus/images/helpOn.gif;
 - plus/images/helpOff.gif;

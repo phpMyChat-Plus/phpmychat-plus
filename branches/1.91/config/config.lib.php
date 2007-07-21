@@ -3,12 +3,12 @@
 // ------ THESE SETTINGS MUST BE COMPLETED ------
 
 // Database settings
-define("C_DB_NAME", 'plus');						// Logical database name on that server (most of the times like: cpanelusername_databasename)
-define("C_DB_USER", 'username');				// Database username (most of the times like: cpanelusername_username)
+define("C_DB_NAME", 'plus');						// Logical database name on that server (most common like: cpanelusername_databasename)
+define("C_DB_USER", 'username');				// Database username (most common like: cpanelusername_username)
 define("C_DB_PASS", 'password');				// Database user's password
 // We recommend you keep the names bellow
+define("C_DB_HOST", 'localhost');				// Hostname of your MySQL server (most common "localhost", but sometimes "mysql.domain.com")
 define("C_DB_TYPE", 'mysql');						// SQL server type ("mysql", "pgsql" or "odbc")
-define("C_DB_HOST", 'localhost');				// Hostname of your MySQL server
 define("C_MSG_TBL", 'c_messages');			// Name of the table where messages are stored
 define("C_USR_TBL", 'c_users');					// Name of the table where user names are stored
 define("C_REG_TBL", 'c_reg_users'); 		// Name of the table where registered users are stored
@@ -159,8 +159,11 @@ $UPD_CHECK						= $row[132];
 $QUOTE						= $row[133];
 $QUOTE_TIME			= $row[134];
 $QUOTE_COLOR			= $row[135];
-$QUOTE_ALL			= $row[136];
-$QUOTE_PATH			= $row[137];
+$QUOTE_PATH			= $row[136];
+$HIDE_ADMINS			= $row[137];
+$HIDE_MODERS			= $row[138];
+$LAST_SAVED_ON		= $row[139];
+$LAST_SAVED_BY		= $row[140];
 
 $query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.com'";
 $result_bot = mysql_query($query_bot);
@@ -512,9 +515,16 @@ define("UPD_CHECK", $UPD_CHECK);
 define("C_QUOTE", $QUOTE);
 define("C_QUOTE_TIME", $QUOTE_TIME);
 define("C_QUOTE_COLOR", $QUOTE_COLOR);
-define("C_QUOTE_ALL", $QUOTE_ALL);
 define("C_QUOTE_PATH", $QUOTE_PATH);
 define("C_QUOTE_NAME", $QUOTE_NAME);
 define("C_QUOTE_AVATAR", $QUOTE_AVATAR);
 define("C_QUOTE_FONT_COLOR", $QUOTE_FONT_COLOR);
+
+// Ghost control mod by Ciprian
+define("C_HIDE_ADMINS", $HIDE_ADMINS);
+define("C_HIDE_MODERS", $HIDE_MODERS);
+
+// Last configuration by Ciprian
+define("C_LAST_SAVED_ON", $LAST_SAVED_ON);
+define("C_LAST_SAVED_BY", $LAST_SAVED_BY);
 ?>

@@ -122,7 +122,7 @@ header("Cache-Control: public");
 header("Content-Type: text/html; charset=${Charset}");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 <HEAD>
 <META HTTP-EQUIV="Refresh" CONTENT="<?php echo($D); ?>" CHARSET=<?php echo($Charset); ?>">
 <TITLE><?php echo(APP_NAME." - ".stripslashes($U)." is lurking - ".date("r")); ?></TITLE>
@@ -145,6 +145,9 @@ header("Content-Type: text/html; charset=${Charset}");
 	echo("<TABLE BORDER=1 WIDTH=100% CELLSPACING=0 CELLPADDING=0 CLASS=table>".$MessagesString."</table>");
 	unset($MessagesString);
 	?>
+<P align="right" style="font-weight: 800; color:#FFD700; font-size: 7pt">
+&copy; 2006-<?php echo(date(Y)); ?> - by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='Click to email author.'; return true;" title="Click to email author" target=_blank>Ciprian Murariu</a>
+</P>
 	</BODY>
 	</HTML>
 	<?php

@@ -1,18 +1,18 @@
 <?php
 // File : french/localized.admin.php - plus version (11.06.2007 - rev.9)
-// Translation by LoÔc Chapeaux <lolo@phpheaven.net>
+// Translation by Loƒèc Chapeaux <lolo@phpheaven.net>
 // Updates, corrections and additions for the Plus version by Leloup <leloup@le-loup.info> and Christophe Luke <christophe.lucsky@gmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>)
 
 // extra header for charset
-$Charset = "iso-8859-1";
+$Charset = "utf-8";
 
 // medium font size in pt.
 $FontSize = 10;
 
 // Top frame
 define("A_MENU_0", "Administration pour %s");
-define("A_MENU_1", "Utilisateurs enregistrÈs");
+define("A_MENU_1", "Utilisateurs enregistr√©s");
 define("A_MENU_2", "Utilisateurs bannis");
 define("A_MENU_3", "Effacer le salon");
 define("A_MENU_4", "Envoyer des mails");
@@ -23,53 +23,53 @@ define("A_MENU_8", "Connections");
 define("A_MENU_9", "Log archive");
 
 // Frame for registered users
-define("A_SHEET1_1", "Liste des Utilisateurs enregistrÈs et de leurs permissions");
+define("A_SHEET1_1", "Liste des Utilisateurs enregistr√©s et de leurs permissions");
 define("A_SHEET1_2", "Pseudo");
 define("A_SHEET1_3", "Permissions");
-define("A_SHEET1_4", "Salons ModÈrÈs");
-define("A_SHEET1_5", "Les salons modÈrÈs sont sÈpare par des virgules (,) sans espace.");
-define("A_SHEET1_6", "Supprimer les profiles cochÈs");
+define("A_SHEET1_4", "Salons Mod√©r√©s");
+define("A_SHEET1_5", "Les salons mod√©r√©s sont s√©pare par des virgules (,) sans espace.");
+define("A_SHEET1_6", "Supprimer les profiles coch√©s");
 define("A_SHEET1_7", "Modifier");
-define("A_SHEET1_8", "Il n'y a pas d'utilisateur enregistre e part pour meme.");
-define("A_SHEET1_9", "Bannir les profils sÈlectionnÈs");
-define("A_SHEET1_10", "Maintenant il vous faut aller dans la feuille des Utilisateurs Bannis pour redÈfinir vos choix.");
+define("A_SHEET1_8", "Il n‚Äôy a pas d‚Äôutilisateur enregistre e part pour meme.");
+define("A_SHEET1_9", "Bannir les profils s√©lectionn√©s");
+define("A_SHEET1_10", "Maintenant il vous faut aller dans la feuille des Utilisateurs Bannis pour red√©finir vos choix.");
 define("A_SHEET1_11", "Dernier connecte");
 define("A_SHEET1_12", "Raison du Bannissement (optionnel)");
 define("A_USER", "Utilisateur");
-define("A_MODER", "ModÈrateur");
+define("A_MODER", "Mod√©rateur");
 define("A_ADMIN", "Administrateur");
 define("A_PAGE_CNT", "Page %s de %s");
 
 // Frame for banished users
-define("A_SHEET2_1", "Liste des Utilisateurs bannis et des salons concernÈs");
+define("A_SHEET2_1", "Liste des Utilisateurs bannis et des salons concern√©s");
 define("A_SHEET2_2", "IP");
-define("A_SHEET2_3", "Salons concernÈ");
-define("A_SHEET2_4", "Jusqu'a");
+define("A_SHEET2_3", "Salons concern√©");
+define("A_SHEET2_4", "Jusqu‚Äôa");
 define("A_SHEET2_5", "sans fin");
-define("A_SHEET2_6", "Les salons sont sÈpare par des virgules (,) si ils sont moins de 4, sinon le '<B>&nbsp;*&nbsp;</B>' signe<br />bannis de tout les salons.");
+define("A_SHEET2_6", "Les salons sont s√©pare par des virgules (,) si ils sont moins de 4, sinon le ‚Äô<B>*</B>‚Äô signe<br />bannis de tout les salons.");
 define("A_SHEET2_7", "Supprimer le Bannissement des Utilisateurs coche(s)");
-define("A_SHEET2_8", "Il n'y a pas d'Utilisateur Bannis.");
+define("A_SHEET2_8", "Il n‚Äôy a pas d‚ÄôUtilisateur Bannis.");
 define("A_SHEET2_9", "Raison (optionnel)");
 
 // Frame for cleaning rooms
 define("A_SHEET3_1", "Liste des salons existant");
-define("A_SHEET3_2", "Effacer les salons \"non-default\" va Ègalement supprimer le statut des<br />modÈrateurs pour ces Salons.");
-define("A_SHEET3_3", "Effacer les salons sÈlectionnes");
-define("A_SHEET3_4", "Il n'y a pas de salon e effacer.");
+define("A_SHEET3_2", "Effacer les salons \"non-default\" va √©galement supprimer le statut des<br />mod√©rateurs pour ces Salons.");
+define("A_SHEET3_3", "Effacer les salons s√©lectionnes");
+define("A_SHEET3_4", "Il n‚Äôy a pas de salon e effacer.");
 
 // Frame for sending mails
-define("A_SHEET4_0", "Vous n'avez pas defini l'e-mail de l'admin dans la table de Configuration.");
+define("A_SHEET4_0", "Vous n‚Äôavez pas defini l‚Äôe-mail de l‚Äôadmin dans la table de Configuration.");
 define("A_SHEET4_1", "Envoyer des e-mails");
 define("A_SHEET4_2", "A :");
-define("A_SHEET4_3", "Tout SÈlectionner");
+define("A_SHEET4_3", "Tout S√©lectionner");
 define("A_SHEET4_4", "Subject:");
 define("A_SHEET4_5", "Message:");
-define("A_SHEET4_6", "Lancer l'envois");
-define("A_SHEET4_7", "Tout les e-mails ont ÈtÈ envoyÈs.");
-define("A_SHEET4_8", "Erreur interne durant l'envois des mails.");
-define("A_SHEET4_9", "Destinataire(s), subject ou message ont ÈtÈ oublie!");
+define("A_SHEET4_6", "Lancer l‚Äôenvois");
+define("A_SHEET4_7", "Tout les e-mails ont √©t√© envoy√©s.");
+define("A_SHEET4_8", "Erreur interne durant l‚Äôenvois des mails.");
+define("A_SHEET4_9", "Destinataire(s), subject ou message ont √©t√© oublie!");
 
 // Frame for configuration
-define("A_SHEET5_0", "La version de phpMyChat-Plus installÈ est %s");
+define("A_SHEET5_0", "La version de phpMyChat-Plus install√© est %s");
 define("A_SHEET5_1", "Il y a une nouvelle version de prete (%s)!");
 ?>

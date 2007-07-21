@@ -59,7 +59,6 @@ if (isset($_POST))
 	};
 };
 
-
 // Fix some security holes
 if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
 if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) $L = "english";
@@ -150,7 +149,7 @@ if (isset($KK))
 			$Error = L_REG_39;
 			break;
 		case '3':
-			$Error = utf8_encode(L_ERR_USR_19);
+			$Error = L_ERR_USR_19;
 			break;
 		case '4':
 			if ($Reason == "") $Error = L_ERR_USR_20;
@@ -219,11 +218,18 @@ if(isset($E) && $E != "")
 	}
 	else
 	{
-		$DbLink->query("DELETE FROM ".C_USR_TBL." WHERE username='$U' AND room='$E'");
-		if (isset($EN))
+		// Ghost Control mod by Ciprian
+		$DbLink->query("SELECT status FROM ".C_USR_TBL." WHERE username='$U' AND room='$E' LIMIT 1");
+		if ($DbLink->num_rows() != 0);
 		{
-			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($EN, '$E', 'SYS exit', '', ".time().", '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '', '')");
+			list($statusu) = $DbLink->next_record();
+			$DbLink->clean_results();
 		}
+		$DbLink->query("DELETE FROM ".C_USR_TBL." WHERE username='$U' AND room='$E'");
+				if (isset($EN) && ((C_HIDE_ADMINS && $statusu != "a") || (!C_HIDE_ADMINS && $statusu == "a") || (C_HIDE_MODERS && $statusu != "m") || (!C_HIDE_MODERS && $statusu == "m")))
+				{
+						$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($EN, '$E', 'SYS exit', '', ".time().", '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '', '')");
+				}
 	}
 }
 
@@ -350,17 +356,17 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 		// User is not registered -> Deny room creation
 		if (!$reguser)
 		{
-			$Error = $T ? utf8_encode(L_ERR_USR_13) : L_ERR_USR_24;
+			$Error = $T ? L_ERR_USR_13 : L_ERR_USR_24;
 		}
 		// Check for invalid characters or empty room name
 		else if (trim($R3) == "" || ereg("[,\]", stripslashes($R3)))
 		{
-			$Error = utf8_encode(L_ERR_ROM_1);
+			$Error = L_ERR_ROM_1;
 		}
 		// Check for swear words in room name
 		else if(C_NO_SWEAR && checkwords($R3, true))
 		{
-			$Error = utf8_encode(L_ERR_ROM_2);
+			$Error = L_ERR_ROM_2;
 		}
 		// Ensure there is no existing room with the same name but a different type...
 		else
@@ -371,7 +377,7 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 			{
 				if (strcasecmp($R3,$ToCheck[$i]) == "0")
 				{
-					$Error = (!$T ? utf8_encode(L_ERR_ROM_3)." (".$R3.")" : utf8_encode(L_ERR_ROM_4)." (".$R3.")");
+					$Error = (!$T ? L_ERR_ROM_3." (".$R3.")" : L_ERR_ROM_4." (".$R3.")");
 					break;
 				};
 			};
@@ -384,7 +390,7 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 				$DbLink->query("SELECT count(*) FROM ".C_MSG_TBL." WHERE room = '$R3' AND type = '$T1' LIMIT 1");
 				list($Nb) = $DbLink->next_record();
 				$DbLink->clean_results();
-				if($Nb != 0) $Error = (!$T ? utf8_encode(L_ERR_ROM_3)." (".$R3.")" : utf8_encode(L_ERR_ROM_4)." (".$R3.")");
+				if($Nb != 0) $Error = (!$T ? L_ERR_ROM_3." (".$R3.")" : L_ERR_ROM_4." (".$R3.")");
 			};
 		};
 	};
@@ -466,7 +472,7 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 				$perms = "moderator";
 				$changed = true;
 			}
-			if (($changed)&&($perms != "admin"))
+			if (($changed) && ($perms != "admin"))
 			{
 				$DbLink->query("UPDATE ".C_REG_TBL." SET perms='$perms', rooms='".addslashes($rooms)."' WHERE username='$U'");
 			}
@@ -552,7 +558,7 @@ if(!isset($Error) && (isset($R2) && $R2 != ""))
 				$perms = "moderator";
 				$changed = true;
 			}
-			if (($changed)&&($perms != "admin"))
+			if (($changed) && ($perms != "admin"))
 			{
 				$DbLink->query("UPDATE ".C_REG_TBL." SET perms='$perms', rooms='".addslashes($rooms)."' WHERE username='$U'");
 			}
@@ -604,7 +610,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 				$status = "a";
 				break;
 			case 'moderator':
-				$status = (room_in(stripslashes($R), $rooms) ? "m" : "r");
+				$status = (room_in(stripslashes($R), $rooms) || room_in("*", $rooms) ? "m" : "r");
 				break;
 			case 'noreg':
 				$status = "u";
@@ -616,13 +622,13 @@ if(!isset($Error) && (isset($N) && $N != ""))
 
 	// Color Input Box mod by Ciprian - it will add the status to the curent cookie for the color_popup
 	setcookie("CookieStatus", $status, time() + 60*60*24*365);        // cookie expires in one year
-
+	
 	// Udpates the IP address and the last log. time of the user in the regsistered users table if necessary
 	if (isset($reguser) && $reguser) $DbLink->query("UPDATE ".C_REG_TBL." SET reg_time='".time()."', ip='$IP' WHERE username='$U'");
 
 	// In the case of a registered user that logs again...
 	// ...in the same room update his logging time and update his IP address;
-	// ...in an other room kick him from the other room, put a notification message of
+	// ...in another room kick him from the other room, put a notification message of
 	// 		exit for this room, update the users table and put a notification message of
 	// 		entrance for the room he log in.
 	$current_time = time();
@@ -639,15 +645,16 @@ if(!isset($Error) && (isset($N) && $N != ""))
 			$DbLink->query("SELECT type FROM ".C_MSG_TBL." WHERE room='".addslashes($room)."' LIMIT 1");
 			list($type) = $DbLink->next_record();
 			$DbLink->clean_results();
+// Ghost Control mod by Ciprian
+if ((C_HIDE_ADMINS && $status != "a") || (!C_HIDE_ADMINS && $status == "a") || (C_HIDE_MODERS && $status != "m") || (!C_HIDE_MODERS && $status == "m"))
+{
 			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS exit', '', '$current_time', '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '', '')");
 // next line WELCOME SOUND feature altered for compatibility with /away command R Dickow:
   $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
+}
 // modified by R Dickow for /away command:
 			$DbLink->query("UPDATE ".C_USR_TBL." SET room='$R',u_time='$current_time', status='$status', ip='$IP', awaystat='0' WHERE username='$U'");
 // end R Dickow /away modification.
-
-		//Color Input Box mod by Ciprian - it will add the status to the curent cookie for the color_popup
-		setcookie("CookieStatus", $status, time() + 60*60*24*365);        // cookie expires in one year
 
 			if (C_WELCOME)
 			{
@@ -669,12 +676,13 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	// notification message of entrance in the messages table
 	else
 	{
-		$DbLink->query("INSERT INTO ".C_USR_TBL." VALUES ('$R', '$U', '$Latin1', '$current_time', '$status','$IP', '0', '$current_time')");
+		$DbLink->query("INSERT INTO ".C_USR_TBL." VALUES ('$R', '$U', '$Latin1', '$current_time', '$status', '$IP', '0', '$current_time', '$email')");
+// Ghost Control mod by Ciprian
+if ((C_HIDE_ADMINS && $statusu != "a") || (!C_HIDE_ADMINS && $statusu == "a") || (C_HIDE_MODERS && $statusu != "m") || (!C_HIDE_MODERS && $statusu == "m"))
+{
 // next line WELCOME SOUND feature altered for compatibility with /away command R Dickow:
    $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
-
-		//Color Input Box mod by Ciprian - it will add the status to the curent cookie for the color_popup
-		setcookie("CookieStatus", $status, time() + 60*60*24*365);        // cookie expires in one year
+}
 
 		if (C_WELCOME)
 		{
@@ -708,13 +716,13 @@ if(!isset($Error) && (isset($N) && $N != ""))
 // Returns the days in the status bar
 function get_day(time,plus)
 {
-		monday = " <?php echo(utf8_encode(L_MON)) ?>";
-		tuesday = " <?php echo(utf8_encode(L_TUE)) ?>";
-		wednesday = " <?php echo(utf8_encode(L_WED)) ?>";
-		thursday = " <?php echo(utf8_encode(L_THU)) ?>";
-		friday = " <?php echo(utf8_encode(L_FRI)) ?>";
-		saturday = " <?php echo(utf8_encode(L_SAT)) ?>";
-		sunday = " <?php echo(utf8_encode(L_SUN)) ?>";
+		monday = " <?php echo(L_MON) ?>";
+		tuesday = " <?php echo(L_TUE) ?>";
+		wednesday = " <?php echo(L_WED) ?>";
+		thursday = " <?php echo(L_THU) ?>";
+		friday = " <?php echo(L_FRI) ?>";
+		saturday = " <?php echo(L_SAT) ?>";
+		sunday = " <?php echo(L_SUN) ?>";
 		dayN = time.getDay();
 		day = dayN + plus;
 		if (day == 1 || day == 8) is_day = monday;
@@ -793,7 +801,7 @@ function get_day(time,plus)
 		if (cur_hoursSYD < 10) cur_hoursSYD = "0" + cur_hoursSYD
 		cur_timeSYD = cur_hoursSYD + ":" + calc_minutes + daySYD;;
 		WORLD_TIME = <?php echo((C_WORLDTIME) ? '" " + "(NYC: " + cur_timeNYC + " | LON: " + cur_timeGMT + " | PAR: " + cur_timePAR + " | BUC: " + cur_timeBUC + " | TYO: " + cur_timeTYO + " | SYD: " + cur_timeSYD + ")"' : ''); ?>;
-		window.status = "<?php echo(utf8_encode(L_SVR_TIME)); ?>" + calc_time + WORLD_TIME;
+		window.status = "<?php echo(L_SVR_TIME); ?>" + calc_time + WORLD_TIME;
 
 		clock_disp = setTimeout('clock(' + gap + ')', 1000);
 	}
@@ -870,7 +878,7 @@ function get_day(time,plus)
 		else
 		{
 			var scrTop = mouseY-400;
-			var scrLeft = mouseX-<?php echo($Charset == "windows-1256" ? "610" : "10"); ?>;
+			var scrLeft = mouseX-<?php echo($Align == "right" ? "610" : "10"); ?>;
 			var scrPos = "top=" + scrTop + ",screenY=" + scrTop + ",left=" + scrLeft + ",screenX=" + scrLeft + ",";
 			is_help_popup = window.open("help_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>","help_popup",scrPos + "width=600,height=350,scrollbars=yes,resizable=yes");
 		};
@@ -1027,7 +1035,7 @@ function get_day(time,plus)
 		else if (isCmd && !re.test(inputFrameForm.elements['M'].value))
 		{
 			inputFrameForm.elements['M'].select();
-			alert("<?php echo(str_replace("\"","\\\"",utf8_encode(L_BAD_CMD))); ?>");
+			alert("<?php echo(str_replace("\"","\\\"",L_BAD_CMD)); ?>");
 			return false;
 		}
 		// It doesn't look like a command -> it's a message, then ensure a message
@@ -1203,7 +1211,7 @@ function isCookieEnabled() {
 		window.focus();
 		url = "<?php echo($ChatPath); ?>" + name + ".php?L=<?php echo($L); ?>&Link=1";
 		pop_width = (name != 'admin'? 400:820);
-		pop_height = (name != 'deluser'? (name != 'admin'? 640:550):190);
+		pop_height = ((name != 'deluser' && name != 'pass_reset') ? (name != 'admin'? 640:550):260);
 		param = "width=" + pop_width + ",height=" + pop_height + ",resizable=yes,scrollbars=yes";
 		name += "_popup";
 		window.open(url,name,param);
@@ -1270,7 +1278,7 @@ function layout($Err, $U, $R, $T, $C, $status)
 {
 	global $DbLink;
 	global $ChatPath, $From, $Action, $L;
-	global $Charset, $DisplayFontMsg, $FontPack, $FontName;
+	global $Charset, $CellAlign, $Align, $DisplayFontMsg, $FontPack, $FontName;
 	global $AvailableLanguages;
 	global $DefaultChatRooms;
 	global $DefaultPrivateRooms;
@@ -1309,7 +1317,9 @@ if(C_CHAT_BOOT)
 </P>
 <?php
 $DefaultRoomFound = 0;
-if($DbLink->query("SELECT DISTINCT u.username FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room AND m.type = 1"))
+// Ghost Control mod by Ciprian
+$Hide = (C_HIDE_ADMINS && C_HIDE_MODERS) ? " AND (u.status != 'a' OR u.email = 'bot@bot.com') AND u.status != 'm'" : (C_HIDE_ADMINS ? " AND (u.status != 'a' OR u.email = 'bot@bot.com')" : (C_HIDE_MODERS ? " AND u.status !='m'" : ""));
+if($DbLink->query("SELECT DISTINCT u.username FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room".$Hide." AND m.type = 1"))
 {
 	$Nb = $DbLink->num_rows();
 	$link = " <A HREF=\"${ChatPath}users_popupL.php?From=$From&L=$L\" CLASS=\"ChatLink\" onClick=\"users_popup(); return false\" TARGET=\"_blank\" onMouseOver=\"window.status='Check who is chatting.'; return true;\">";
@@ -1377,7 +1387,7 @@ if (!isset($Ver)) $Ver = "L";
 		};
 
 		// Horizontal alignement for cells topic
-		$CellAlign = ($Charset == "windows-1256" ? "RIGHT" : "LEFT");
+		$CellAlign = ($Align == "right" ? "RIGHT" : "LEFT");
 		?>
 		<TR CLASS="ChatCell">
 			<TH COLSPAN=2 CLASS="ChatTabTitle"><?php echo(L_SET_1); ?></TH>
@@ -1393,10 +1403,9 @@ if (!isset($Ver)) $Ver = "L";
 			<TD VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP">
 				<INPUT TYPE="password" NAME="pmc_password" SIZE=11 MAXLENGTH=16 CLASS="ChatBox">
 				<?php if (!C_REQUIRE_REGISTER) echo("&nbsp;(<U>".L_REG_7."</U>)"); ?>
+				<br/><A HREF="<?php echo($ChatPath); ?>pass_reset.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('pass_reset'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_PASS_7); ?>.'; return true;"><?php echo(L_PASS_7); ?></A>
 			</TD>
 		</TR>
-
-		<TR CLASS="ChatCell"><TD CLASS="ChatCell">&nbsp;</TD></TR>
 
 		<TR CLASS="ChatCell">
 			<TH COLSPAN=2 CLASS="ChatTabTitle"><?php echo(L_REG_2); ?></TH>
@@ -1472,7 +1481,7 @@ if (!isset($Ver)) $Ver = "L";
 						<OPTION VALUE=""><?php echo(L_SET_7); ?></OPTION>
 						<?php
 						// Display other public rooms in the drop down list
-						$DbLink->query("SELECT DISTINCT room FROM ".C_MSG_TBL." WHERE type = 1 AND room != 'Offline PMs' AND username NOT LIKE 'SYS %' ORDER BY room");
+						$DbLink->query("SELECT DISTINCT room FROM ".C_MSG_TBL." WHERE type = 1 AND room != 'Offline PMs' AND room != '*' AND username NOT LIKE 'SYS %' ORDER BY room");
 						while(list($Room) = $DbLink->next_record())
 						{
 							if (!room_in($Room, $DefaultRoomsString))

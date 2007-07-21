@@ -7,7 +7,7 @@
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 
 // extra header for charset
-$Charset = "iso-8859-1";
+$Charset = "utf-8";
 
 // medium font size in pt.
 $FontSize = 10;
@@ -48,8 +48,8 @@ define("A_SHEET2_2", "IP");
 define("A_SHEET2_3", "Stanze interessate");
 define("A_SHEET2_4", "Fino a");
 define("A_SHEET2_5", "senza fine");
-define("A_SHEET2_6", "Stanze sono separate da una virgola senza spazi (,) se sono meno di 4, diversamente l'asterisco '<B>&nbsp;*&nbsp;</B>' espelle da tutte le stanze.");
-define("A_SHEET2_7", "Rimuovi l'espulsione per gli utenti selezionati");
+define("A_SHEET2_6", "Stanze sono separate da una virgola senza spazi (,) se sono meno di 4, diversamente l’asterisco ’<B>*</B>’ espelle da tutte le stanze.");
+define("A_SHEET2_7", "Rimuovi l’espulsione per gli utenti selezionati");
 define("A_SHEET2_8", "Non ci sono utenti banditi.");
 define("A_SHEET2_9", "Motivo (opzionabile)");
 
@@ -60,7 +60,7 @@ define("A_SHEET3_3", "Svuota le stanze selezionate");
 define("A_SHEET3_4", "Non ci sono stanze da svuotare.");
 
 // Frame for sending mails
-define("A_SHEET4_0", "Non hai impostato l'indirizzo email dell'amministratore nella tabella di configurazione.");
+define("A_SHEET4_0", "Non hai impostato l’indirizzo email dell’amministratore nella tabella di configurazione.");
 define("A_SHEET4_1", "Invia e-mails:");
 define("A_SHEET4_2", "A:");
 define("A_SHEET4_3", "Seleziona tutto");
@@ -68,10 +68,10 @@ define("A_SHEET4_4", "Oggetto:");
 define("A_SHEET4_5", "Messaggio:");
 define("A_SHEET4_6", "Avvia invio");
 define("A_SHEET4_7", "Tutte le e-mails sono state inviate.");
-define("A_SHEET4_8", "Errore interno durante l'invio delle mails.");
+define("A_SHEET4_8", "Errore interno durante l’invio delle mails.");
 define("A_SHEET4_9", "Indirizzo/i, oggetto o messaggio mancante!");
 
 // Frame for configuration
 define("A_SHEET5_0", "La versione installata della tua phpMyChat-Plus e %s");
-define("A_SHEET5_1", "C'e una nuova versione realizzata (%s)!");
+define("A_SHEET5_1", "C’e una nuova versione realizzata (%s)!");
 ?>

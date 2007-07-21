@@ -38,14 +38,14 @@ function special_char2($str,$lang)
 }
 
 // Text direction
-$textDirection = ($Charset == "windows-1256") ? "RTL" : "LTR";
+$textDirection = ($Align == "right") ? "RTL" : "LTR";
 
 function setImageSize($image_file) {
 
 require("./config/config.lib.php");
 $maxSize = MAX_PIC_SIZE;
 
-$image_size = getimagesize($image_file,&$image_info);
+$image_size = getimagesize($image_file,$image_info);
 $width = $image_size[0];
 $height = $image_size[1];
 
@@ -119,7 +119,11 @@ if($DbLink->num_rows() != 0)
 	$kicked = 0;
 	if ($room != stripslashes($R))	// Same nick in another room
 	{
+	// Ghost Control mod by Ciprian
+	if ((C_HIDE_ADMINS && $statusu != "a") || (!C_HIDE_ADMINS && $statusu == "a") || (C_HIDE_MODERS && $statusu != "m") || (!C_HIDE_MODERS && $statusu == "m"))
+	{
 		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1,1)."\")', '', '')");
+	}
 		$kicked = 3;
 	}
 	elseif ($status == "k")			// Kicked by a moderator or the admin.
@@ -193,7 +197,7 @@ else
 			default:
 				$status = "r";
 		};
-		$DbLink->query("INSERT INTO ".C_USR_TBL." VALUES ('$R', '$U', '$Latin1', ".time().", '$status', '$IP', '0', ".time().")");
+		$DbLink->query("INSERT INTO ".C_USR_TBL." VALUES ('$R', '$U', '$Latin1', ".time().", '$status', '$IP', '0', ".time().", '$email')");
 	}
 }
 
@@ -346,7 +350,7 @@ else
 					$User = "<a onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false); return false\" title=\"Use this name\" onMouseOver=\"window.status='Reffer to this username.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."<\/a>";
 				}
 			}
-			elseif($User == stripslashes($U) || $User == $QUOTE_NAME)
+			elseif($User == stripslashes($U))
 			{
 				$User = "<a onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false,'".special_char($U,$Latin1,1)."'); return false\" title=\"Use this name\" onMouseOver=\"window.status='Reffer to this username.'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."<\/a>";
 			}
@@ -366,7 +370,7 @@ else
 					$Dest = "<a onClick=\"window.parent.userClick('".special_char($Dest,$Latin1,1)."',false); return false\" title=\"Use this name\" onMouseOver=\"window.status='Reffer to this username.'; return true\" CLASS=\"sender\">".$colornamedest_tag."".special_char($Dest,$Latin1,0)."".$colornamedest_endtag."<\/a>";
 				}
 			}
-			elseif($Dest == stripslashes($U) || $Dest == $QUOTE_NAME)
+			elseif($Dest == stripslashes($U))
 			{
 				$Dest = "<a onClick=\"window.parent.userClick('".special_char($Dest,$Latin1,1)."',false,'".special_char($U,$Latin1,1)."'); return false\" title=\"Use this name\" onMouseOver=\"window.status='Reffer to this username.'; return true\" CLASS=\"sender\">".$colornamedest_tag."".special_char($Dest,$Latin1,0)."".$colornamedest_endtag."<\/a>";
 			}
@@ -480,7 +484,7 @@ header("Cache-Control: no-cache, must-revalidate".$CachePlus);
 header("Pragma: no-cache");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo($textDirection); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 <HEAD>
 <TITLE>Loader hidden frame</TITLE>
 <?php
@@ -611,12 +615,14 @@ if (typeof(window.parent.frames['exit']) != 'undefined'
 // -->
 </SCRIPT>
 <?php
-	// Private Message Popup mod by Ciprian
+// Private Message Popup mod by Ciprian
+if (C_ENABLE_PM && C_PRIV_POPUP)
+{
 $DbLink->query("SELECT allowpopup FROM ".C_REG_TBL." WHERE username = '$U'");
 if($DbLink->num_rows() != 0) list($allowpopupu) = $DbLink->next_record();
 else $allowpopupu = 1;
 $DbLink->clean_results();
-	if (substr($User,0,4) != "SYS " && C_ENABLE_PM && C_PRIV_POPUP && $allowpopupu)
+	if (substr($User,0,4) != "SYS ")
 	{
 		$DbLink->query("SELECT username, address, room, pm_read FROM ".C_MSG_TBL." WHERE (room = '$R' OR room = 'Offline PMs') AND address = '$U' AND (pm_read = 'New' OR pm_read = 'Neww') ORDER BY m_time DESC");
 		if($DbLink->num_rows() > 0)
@@ -649,6 +655,7 @@ $DbLink->clean_results();
 		}
 	$DbLink->close();
 	}
+}
 
 // Random Quote mod by Ciprian
 if (C_QUOTE)
@@ -668,11 +675,10 @@ if (C_QUOTE)
 		$quotetext = ereg_replace("\r\n", "", $quotetext);
 		
 		$DbLink = new DB;
-		$DbLink->query("SELECT m_time FROM ".C_MSG_TBL." WHERE username='$QUOTE_NAME' AND (room = '$R' OR room='*') AND m_time > ".(time() - $quotetime)." ORDER BY m_time DESC LIMIT 1");
+		$DbLink->query("SELECT m_time FROM ".C_MSG_TBL." WHERE username='$QUOTE_NAME' AND room = '$R' AND m_time > ".(time() - $quotetime)." ORDER BY m_time DESC LIMIT 1");
 		if ($DbLink->num_rows() == 0)
 		{
-			if (C_QUOTE_ALL) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', '$QUOTE_NAME', '', ".time().", '', '$quotetext', '', '')");
-			else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '$QUOTE_NAME', '', ".time().", '', '$quotetext', '', '')");
+			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '$QUOTE_NAME', '', ".time().", '', '$quotetext', '', '')");
 		}
 		$DbLink->clean_results();
 	$DbLink->close();

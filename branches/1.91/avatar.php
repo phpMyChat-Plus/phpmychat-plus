@@ -71,11 +71,9 @@ If (!empty($ORIGAVATAR)) {
 
 // For translations with an explicit charset (not the 'x-user-defined' one)
 if (!isset($FontName)) $FontName = "Arial";
-// Text direction
-$textDirection = ($Charset == "windows-1256") ? "RTL" : "LTR";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo($textDirection); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
 <TITLE>Avatar</TITLE>

@@ -28,12 +28,11 @@ header("Content-Type: text/html; charset=${Charset}");
 // For translations with an explicit charset (not the 'x-user-defined' one)
 if (!isset($FontName)) $FontName = "";
 
-// Text direction and horizontal alignment for cells topic
-$TextDir = ($Charset == "windows-1256" ? "RTL" : "LTR");
-$CellAlign = ($Charset != "windows-1256" ? "LEFT" : "RIGHT");
+// Horizontal alignment for cells topic
+$CellAlign = ($Align == "right" ? "RIGHT" : "LEFT");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo($TextDir); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=<?php echo($Charset); ?>">

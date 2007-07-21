@@ -1,0 +1,15 @@
+ALTER TABLE c_config
+			ADD HIDE_ADMINS enum('0','1') NOT NULL default '0',
+			ADD HIDE_MODERS enum('0','1') NOT NULL default '0',
+			ADD LAST_SAVED_ON timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+			ADD LAST_SAVED_BY varchar(30) NOT NULL default 'installer (upgrade)';
+UPDATE c_config SET
+			LAST_SAVED_ON = now();
+	WHERE ID='0';
+
+ALTER TABLE c_users
+			ADD email varchar(64) NOT NULL default '';
+UPDATE c_users u LEFT JOIN c_reg_users r
+			ON u.username = r.username
+			SET u.email='bot@bot.com'
+			WHERE r.email = 'bot@bot.com';

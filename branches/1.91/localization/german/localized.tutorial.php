@@ -1,5 +1,5 @@
 <?php
-// File : german/localized.tutorial.php - to be updated to plus version (02.05.2007 - rev.4)
+// File : german/localized.tutorial.php - to be updated to plus version (10.07.2007 - rev.6)
 // Original translation by Michael Schoening <m.schoening@ticketboy.de> & Reinhard Hofmann <e9625556@student.tuwien.ac.at>
 // Updates, corrections and additions for the Plus version by Alexander Eisele <xaex@xaex.de>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -21,8 +21,8 @@ if (isset($_COOKIE["CookieStatus"])) $CookieStatus = $_COOKIE["CookieStatus"];
 <HTML>
 
 <HEAD>
-<TITLE>Deutsche Anleitung f&uuml;r<?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?></TITLE>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<TITLE>Deutsche Anleitung für<?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?></TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
 <STYLE>
 A.topLink
 {
@@ -49,7 +49,7 @@ A.topLink:hover, A.topLink:active
 <P></P>
 <TABLE BORDER="5" CELLPADDING="5" ALIGN="center">
 <TR>
-	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- Deutsche Anleitung f&uuml;r <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -</B></FONT></TD>
+	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- Deutsche Anleitung für <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -</B></FONT></TD>
 </TR>
 </TABLE><br /><br />
 <P><A NAME="top"></P>
@@ -69,7 +69,7 @@ if (C_MULTI_LANG)
 ?>
 <A HREF="#login" CLASS="topLink">Einloggen im Chat</A><br />
 <A HREF="#register" CLASS="topLink">Registrierung</A><br />
-<A HREF="#modProfile" CLASS="topLink">Modifizieren<?php if (C_SHOW_DEL_PROF) echo("/L&ouml;schen"); ?> Deines Profils</A><br />
+<A HREF="#modProfile" CLASS="topLink">Modifizieren<?php if (C_SHOW_DEL_PROF) echo("/Löschen"); ?> Deines Profils</A><br />
 <?php
 if (C_VERSION == "2")
 {
@@ -91,7 +91,7 @@ if ($Ver == "H")
 <P>
 <A HREF="#customize" CLASS="topLink">Anpassen der Chatansicht</A><br />
 <P>
-<A HREF="#commands" CLASS="topLink">M&ouml;glichkeiten und Befehle:</A><br />
+<A HREF="#commands" CLASS="topLink">Möglichkeiten und Befehle:</A><br />
 &nbsp&nbsp&nbsp&nbsp<A HREF="#help" CLASS="topLink">Hilfe Befehl</A><br />
 <!-- Avatar System Start. -->
 <?php
@@ -124,7 +124,7 @@ if (C_HTML_TAGS_KEEP != "none")
 &nbsp&nbsp&nbsp&nbsp<A HREF="#private" CLASS="topLink">Private Nachrichten</A><br />
 &nbsp&nbsp&nbsp&nbsp<A HREF="#actions" CLASS="topLink">Aktionen</A><br />
 &nbsp&nbsp&nbsp&nbsp<A HREF="#ignore" CLASS="topLink">Andere Benutzer ignorieren</A><br />
-&nbsp&nbsp&nbsp&nbsp<A HREF="#whois" CLASS="topLink">Informationen &uuml;ber andere Benutzer bekommen</A><br />
+&nbsp&nbsp&nbsp&nbsp<A HREF="#whois" CLASS="topLink">Informationen über andere Benutzer bekommen</A><br />
 <?php
 if (C_SAVE != "0")
 {
@@ -134,7 +134,7 @@ if (C_SAVE != "0")
 };
 ?>
 <P>
-<A HREF="#moderator" CLASS="topLink">Spezielle Befehle f&uuml;r Moderatoren und/oder den Administrator:</A><br />
+<A HREF="#moderator" CLASS="topLink">Spezielle Befehle für Moderatoren und/oder den Administrator:</A><br />
 &nbsp&nbsp&nbsp&nbsp<A HREF="#announce" CLASS="topLink">Sende eine Mitteilung</A><br />
 &nbsp&nbsp&nbsp&nbsp<A HREF="#kick" CLASS="topLink">Benutzer rauswerfen</A><br />
 <?php
@@ -158,10 +158,10 @@ if (C_MULTI_LANG)
 	<P>
 	<FONT SIZE="+1"><A NAME="language"><B>Sprachauswahl:</B></A></FONT>
 	<P>
-	Du kannst eine Sprache w&auml;hlen in die <?php echo(APP_NAME); ?> &uuml;bersetzt wurde, einfach durch klicken auf eine der Fahnen auf der Startseite. Im folgenden Beispiel wurde franz&ouml;sisch gew&auml;hlt:
+	Du kannst eine Sprache wählen in die <?php echo(APP_NAME); ?> übersetzt wurde, einfach durch klicken auf eine der Fahnen auf der Startseite. Im folgenden Beispiel wurde französisch gewählt:
 	<P ALIGN="center">
 	<IMG SRC="images/tutorials/flags.gif" HEIGHT="44" WIDTH="424" ALT="Fahnen zur Benutzerauswahl">
-	<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck nach oben</A></P>
+	<br /><P ALIGN="right"><A HREF="#top">Zurück nach oben</A></P>
 	<hr />
 	<?php
 }
@@ -170,43 +170,43 @@ if (C_MULTI_LANG)
 <P>
 <FONT SIZE="+1"><A NAME="login"><B>Login:</B></A></FONT>
 <P>
-Wenn Du bereits registriert bist, gib einfach Deinen Usernamen und Dein Passwort ein. Dann w&auml;hle, welchen Chatraum Du betreten willst und dr&uuml;cke auf den '<?php echo(L_SET_14); ?>' Knopf.<br />
+Wenn Du bereits registriert bist, gib einfach Deinen Usernamen und Dein Passwort ein. Dann wähle, welchen Chatraum Du betreten willst und drücke auf den '<?php echo(L_SET_14); ?>' Knopf.<br />
 <?php
 if (C_REQUIRE_REGISTER)
 {
 	?>
 	<P>
-	Ansonsten mu&szlig;t Du Dich zuerst  <A HREF="#register">registrieren</A> .
+	Ansonsten mußt Du Dich zuerst  <A HREF="#register">registrieren</A> .
 	<?php
 }
 else
 {
 	?>
 	<P>
-	Oder Du kannst Dich <A HREF="#register">registrieren</A> oder einfach einen Raum betreten. Allerdings wird Dein Benutzername dann nicht reserviert (und andere Nutzer k&ouml;nnen diesen Namen benutzen, wenn Du die Seiten verl&auml;&szlig;t).
+	Oder Du kannst Dich <A HREF="#register">registrieren</A> oder einfach einen Raum betreten. Allerdings wird Dein Benutzername dann nicht reserviert (und andere Nutzer können diesen Namen benutzen, wenn Du die Seiten verläßt).
 	<?php
 }
 ?>
-<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck nach oben</A></P>
+<br /><P ALIGN="right"><A HREF="#top">Zurück nach oben</A></P>
 <hr />
 
 <P>
 <FONT SIZE="+1"><A NAME="register"><B>Um Dich zu registrieren:</B></A></FONT>
 <P>
-Wenn Du noch nicht registriert bist<?php if (!C_REQUIRE_REGISTER) echo(" und es tun willst"); ?>, w&auml;hle bitte die Registrierungsoption. Ein kleines Popup-Fenster wird erscheinen.
+Wenn Du noch nicht registriert bist<?php if (!C_REQUIRE_REGISTER) echo(" und es tun willst"); ?>, wähle bitte die Registrierungsoption. Ein kleines Popup-Fenster wird erscheinen.
 <P>
 <UL>
-	<LI>W&auml;hle zun&auml;chst einen Benutzernamen<?php if (!C_EMAIL_PASWD) echo(" und ein Passwort"); ?> durch Eingabe in die jeweiligen Felder. Der Benutzername ist der Name, der im Chatraum erscheinen wird. Er darf keine Leerzeichen, Kommata oder R&uuml;ckstriche enthalten(\).
-<?php if (C_NO_SWEAR) echo(" Es d&uuml;rfen keine \"verbotenen Worte\" enthalten sein."); ?>
-	<LI>Dann f&uuml;lle die Felder Vorname, Nachname, und E-Mail-Adresse aus. Um Deinen Namen f&uuml;r den Chat zu registrieren, m&uuml;ssen alle diese Angaben gemacht werden. Du kannst die Geschlechtsauswahl &uuml;berspringen.
-	<LI>Falls Du eine Homepage hast, gib diese in das daf&uuml;r vorgesehene Feld ein.
-	<LI>Gib an, welche Sprache Du bevorzugt sprichst (als Hilfe f&uuml;r andere Nutzer).
-	<LI>Willst Du, dass andere Deine Mailadresse lesen k&ouml;nnen? Dann w&auml;hle das bitte aus.
-	<LI>Dr&uuml;cke den Registrieren-Knopf und Du bist fertig. Willst Du Dich doch nicht registrieren, dr&uuml;cke den Stop-Knopf.
+	<LI>Wähle zunächst einen Benutzernamen<?php if (!C_EMAIL_PASWD) echo(" und ein Passwort"); ?> durch Eingabe in die jeweiligen Felder. Der Benutzername ist der Name, der im Chatraum erscheinen wird. Er darf keine Leerzeichen, Kommata oder Rückstriche enthalten(\).
+<?php if (C_NO_SWEAR) echo(" Es dürfen keine \"verbotenen Worte\" enthalten sein."); ?>
+	<LI>Dann fülle die Felder Vorname, Nachname, und E-Mail-Adresse aus. Um Deinen Namen für den Chat zu registrieren, müssen alle diese Angaben gemacht werden. Du kannst die Geschlechtsauswahl überspringen.
+	<LI>Falls Du eine Homepage hast, gib diese in das dafür vorgesehene Feld ein.
+	<LI>Gib an, welche Sprache Du bevorzugt sprichst (als Hilfe für andere Nutzer).
+	<LI>Willst Du, dass andere Deine Mailadresse lesen können? Dann wähle das bitte aus.
+	<LI>Drücke den Registrieren-Knopf und Du bist fertig. Willst Du Dich doch nicht registrieren, drücke den Stop-Knopf.
 </UL>
 <P>
-<A NAME="modProfile"></A>Nat&uuml;rlich kannst Du als registrierter Nutzer selber jederzeit Dein Profil &auml;ndern<?php if (C_SHOW_DEL_PROF) echo("/l&ouml;schen"); ?>. Klicke einfach auf den <?php echo((!C_SHOW_DEL_PROF ? "Link" : "Link")); ?>.<br />
-<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+<A NAME="modProfile"></A>Natürlich kannst Du als registrierter Nutzer selber jederzeit Dein Profil ändern<?php if (C_SHOW_DEL_PROF) echo("/löschen"); ?>. Klicke einfach auf den <?php echo((!C_SHOW_DEL_PROF ? "Link" : "Link")); ?>.<br />
+<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />
 
@@ -217,10 +217,10 @@ if (C_VERSION == "2")
 	<P>
 	<FONT SIZE="+1"><A NAME="create_room"><B>Um einen Chatraum zu erstellen:</B></A></FONT>
 	<P>
-	Registrierte Benutzer k&ouml;nnen R&auml;ume erstellen. Privatr&auml;ume k&ouml;nnen nur von Nutzern erreicht werden, die deren Namen kennen. Du wirst niemals angezeigt, nur denen die in diesem Raum selber sind.<br />
+	Registrierte Benutzer können Räume erstellen. Privaträume können nur von Nutzern erreicht werden, die deren Namen kennen. Du wirst niemals angezeigt, nur denen die in diesem Raum selber sind.<br />
 	<P>
-	Raumnamen d&uuml;rfen keine Kommata oder R&uuml;ckstriche enthalten (\).<?php if (C_NO_SWEAR) echo(" Es d&uuml;rfen keine \"verbotenen Worte\" enthalten sein."); ?>
-	<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+	Raumnamen dürfen keine Kommata oder Rückstriche enthalten (\).<?php if (C_NO_SWEAR) echo(" Es dürfen keine \"verbotenen Worte\" enthalten sein."); ?>
+	<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 	<P>
 	<hr />
 	<?php
@@ -231,16 +231,16 @@ if ($Ver == "H")
 	<P>
 	<FONT SIZE="+1"><A NAME="connection_state"><B>Verbindungsstatus:</B></A></FONT>
 	<P>
-	Das Zeichen rechts oben repr&auml;sentiert Deinen Verbindungsstatus. Es kann drei Farben annehmen :
+	Das Zeichen rechts oben repräsentiert Deinen Verbindungsstatus. Es kann drei Farben annehmen :
 	<P>
 	<UL>
-		<LI><IMG SRC="images/connectOff.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Keine Verbindung"> wenn keine Verbindung n&ouml;tig ist;
+		<LI><IMG SRC="images/connectOff.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Keine Verbindung"> wenn keine Verbindung nötig ist;
 		<LI><IMG SRC="images/connectOn.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Verbindung"> wenn eine Verbindung aufgebaut wird;
-		<LI><IMG SRC="images/connectError.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Verbindung fehlgeschlagen"> wenn kein Verbindungsaufbau m&ouml;glich ist.
+		<LI><IMG SRC="images/connectError.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Verbindung fehlgeschlagen"> wenn kein Verbindungsaufbau möglich ist.
 	</UL>
 	<P>
 	Im letzten Fall kann durch klicken auf den roten "Knopf" versucht werden, die Verbindung wieder herzustellen.
-	<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+	<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 	<P>
 	<hr />
 	<?php
@@ -250,20 +250,20 @@ if ($Ver == "H")
 <P>
 <FONT SIZE="+1"><A NAME="sending"><B>Nachrichten senden:</B></A></FONT>
 <P>
-Um eine Nachricht im Chatraum zu ver&ouml;ffentlichen, tippe diese in das Feld unten links und dr&uuml;cke Enter/Return um sie zu senden. Die Nachrichten aller kannst Du im Chatfenster sehen.<br />
-<?php if (C_NO_SWEAR) echo("Beachte, da&szlig; \"verbotene Worte\" aus der Nachricht entfernt werden."); ?>
+Um eine Nachricht im Chatraum zu veröffentlichen, tippe diese in das Feld unten links und drücke Enter/Return um sie zu senden. Die Nachrichten aller kannst Du im Chatfenster sehen.<br />
+<?php if (C_NO_SWEAR) echo("Beachte, daß \"verbotene Worte\" aus der Nachricht entfernt werden."); ?>
 <P>
-Du kannst die Farbe Deiner Nachrichten durch Auswahl einer neuen Farbe rechts von der Texteingabe &auml;ndern. Einfach auf die neue Farbe klicken.
-<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+Du kannst die Farbe Deiner Nachrichten durch Auswahl einer neuen Farbe rechts von der Texteingabe ändern. Einfach auf die neue Farbe klicken.
+<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />
 <P>
 <FONT SIZE="+1"><A NAME="users_list"><B>Benutzerliste (nicht Popup-Fenster):</B></A></FONT>
 <P>
 <OL>
-	Zwei Regeln gelten f&uuml;r die Benutzerliste:<br />
+	Zwei Regeln gelten für die Benutzerliste:<br />
 	<!-- To update
-	<LI>ein kleines Zeichen (<IMG SRC="images/whoisOff.gif" WIDTH=5 HEIGHT=9 BORDER=0 ALT="Whois">) wird vor registrierten Benutzernamen angezeigt und beim Klicken darauf erscheint ein <A HREF="#whois">WhoIs Popup</A> f&uuml;r diesen Benutzer, w&auml;hrend unregistrierte Bnutzer nur ein Minuszeichen vor ihrem Namen haben;<br />
+	<LI>ein kleines Zeichen (<IMG SRC="images/whoisOff.gif" WIDTH=5 HEIGHT=9 BORDER=0 ALT="Whois">) wird vor registrierten Benutzernamen angezeigt und beim Klicken darauf erscheint ein <A HREF="#whois">WhoIs Popup</A> für diesen Benutzer, während unregistrierte Bnutzer nur ein Minuszeichen vor ihrem Namen haben;<br />
 	-->
 	<LI>a little icon that shows gender is displayed before the nick of a registered user (clicking on it will launch the <A HREF="#whois">whois popup</A> for this user), while unregistered users have nothing but blank spaces displayed before their nick;<br />
 	<LI>der Benutzername von Moderatoren/Administrator ist kursiv geschrieben.
@@ -283,7 +283,7 @@ Du kannst die Farbe Deiner Nachrichten durch Auswahl einer neuen Farbe rechts vo
 	</TD>
 </TR>
 </TABLE>
-<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />
 <P>
@@ -293,91 +293,91 @@ Um den Chat zu verlassen, klicke auf "Exit" oben rechts. Alternativ kannst Du fo
 /exit<br />
 /bye<br />
 /quit<br />
-Die Befehle k&ouml;nnen noch durch eine Nachricht erg&auml;nzt werden, die du einfach nach dem Befehl dahinter eintippst..
+Die Befehle können noch durch eine Nachricht ergänzt werden, die du einfach nach dem Befehl dahinter eintippst..
 <I>Beispiel:</I> /quit Bis bald!
 <P>
 sendet diese Nachricht "Bis bald!" im Chatfenster. Danach wirst Du automatisch abgemeldet.
 
-<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />
 <P>
 <FONT SIZE="+1"><A NAME="users_popup"><B>Wissen wer chattet ohne eingeloggt zu sein:</B></A></FONT>
 <P>
-Du kannst auf den Link klicken, der Dir auf der Startseite die Anzahl der Benutzer momentan anzeigt. Wenn Du chattest, klicke auf das Bild  <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Benutzerliste"> in der oberen rechten Ecke des Bilder um ein Fenster zu &ouml;ffnen, da&szlig; Dir alle Benutzer und die R&auml;ume in denen sie sich befinden anzeigt.<br />
+Du kannst auf den Link klicken, der Dir auf der Startseite die Anzahl der Benutzer momentan anzeigt. Wenn Du chattest, klicke auf das Bild  <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Benutzerliste"> in der oberen rechten Ecke des Bilder um ein Fenster zu öffnen, daß Dir alle Benutzer und die Räume in denen sie sich befinden anzeigt.<br />
 <P>
 Beim klick auf das  <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Piep">Bild am oberen Rand dieses Fensters stellt die Benachrichtigung bei neuen Nutzern an oder aus.
-<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />
 <hr />
 <P>
 <FONT SIZE="+1"><A NAME="customize"><B>Anpassen der Chatansicht:</B></A></FONT>
 <P>
-Es gibt verschiedene Methoden, die Chatansicht zu &auml;ndern. Um die Vorgaben zu &auml;ndern, tippe den gew&uuml;nschten Befehl in das Nachrichtenfeld und dr&uuml;cke Enter/Return.
+Es gibt verschiedene Methoden, die Chatansicht zu ändern. Um die Vorgaben zu ändern, tippe den gewünschten Befehl in das Nachrichtenfeld und drücke Enter/Return.
 <P>
 <UL>
 	<?php
 	if ($Ver == "H")
 	{
 		?>
-		<LI>Der <B>Clear Befehl</B> erlaubt Dir, das Hauptfenster zu l&ouml;schen und die letzten 5 Nachrichten anzuzeigen.<br />Tippe "/clear" ohne Anf&uuml;hrungszeichen.
+		<LI>Der <B>Clear Befehl</B> erlaubt Dir, das Hauptfenster zu löschen und die letzten 5 Nachrichten anzuzeigen.<br />Tippe "/clear" ohne Anführungszeichen.
 		<P>
 		<?php
 	}
 	else
 	{
 		?>
-		<LI>Der <B>Order Befehl</B> erlaubt es Dir inzustellen, ob neue Nachrichten obenhalb oder unterhalb der anderen Nachrichten erscheinen.<br />Tippe "/order" ohne Anf&uuml;hrungszeichen.
+		<LI>Der <B>Order Befehl</B> erlaubt es Dir inzustellen, ob neue Nachrichten obenhalb oder unterhalb der anderen Nachrichten erscheinen.<br />Tippe "/order" ohne Anführungszeichen.
 		<P>
 		<?php
 	};
 	?>
-	<LI>Der <B>Notify Befehl</B> erlaubt die Einstellung, ob Du die Anzeige &uuml;ber das Betreten oder Verlassen neuer User in den Raum sehen kannst. Standardm&auml;&szlig;ig ist die Option <?php echo(C_NOTIFY ? "on" : "off"); ?>  und die Benachrichtigung <?php echo(C_NOTIFY ? "will" : "won't"); ?> gesehen.<br />Tippe "/notify" ohne Anf&uuml;hrungszeichen.
+	<LI>Der <B>Notify Befehl</B> erlaubt die Einstellung, ob Du die Anzeige über das Betreten oder Verlassen neuer User in den Raum sehen kannst. Standardmäßig ist die Option <?php echo(C_NOTIFY ? "on" : "off"); ?>  und die Benachrichtigung <?php echo(C_NOTIFY ? "will" : "won't"); ?> gesehen.<br />Tippe "/notify" ohne Anführungszeichen.
 	<P>
-	<LI>Mit dem <B>Timestamp Befehl</B> Kannst Du die Zeit vor einer Nachricht an oder abschaltenr. Vorgabe ist <?php echo(C_SHOW_TIMESTAMP ? "on" : "off"); ?>.<br />Tippe "/timestamp" ohne Anf&uuml;hrungszeichen.
+	<LI>Mit dem <B>Timestamp Befehl</B> Kannst Du die Zeit vor einer Nachricht an oder abschaltenr. Vorgabe ist <?php echo(C_SHOW_TIMESTAMP ? "on" : "off"); ?>.<br />Tippe "/timestamp" ohne Anführungszeichen.
 	<P>
-	<LI>Der <B>Refresh Befehl</B> stellt die Zeit ein, in der Nachrichten auf dem Bildschirm aktualisiert werden. Vorgabe hier sind <?php echo(C_MSG_REFRESH); ?> Sekunden Um die Wiederholrate zu &auml;ndern tippe "/refresh n" ohne Anf&uuml;hrungszeichen, wobei n die Anzahl Sekunden angibt.
+	<LI>Der <B>Refresh Befehl</B> stellt die Zeit ein, in der Nachrichten auf dem Bildschirm aktualisiert werden. Vorgabe hier sind <?php echo(C_MSG_REFRESH); ?> Sekunden Um die Wiederholrate zu ändern tippe "/refresh n" ohne Anführungszeichen, wobei n die Anzahl Sekunden angibt.
 	<P>
 	<I>Beispiel:</I> /refresh 5
 	<P>
-	&auml;ndert die Rate auf 5 Sekunden. *Vorsicht, wenn n kleiner als 3 ist, wir die Wiederholrate auf 0 gesetzt  (n&uuml;tzlich, wenn Du viele Nachrichten lesen willst, ohne gest&ouml;rt zu werden)!*
+	ändert die Rate auf 5 Sekunden. *Vorsicht, wenn n kleiner als 3 ist, wir die Wiederholrate auf 0 gesetzt  (nützlich, wenn Du viele Nachrichten lesen willst, ohne gestört zu werden)!*
 	<P>
 	<?php
 	if ($Ver == "L")
 	{
 		?>
-		<LI>Der <B>Show Befehl</B> erlaubt die Einstellung der maximal zul&auml;ssigen Nachrichten pro Seite. Um die Vorgabe zu &auml;ndern tippe "/show n" ohne Anf&uuml;hrungszeichen wobei n die Anzahl der sichtbaren Nachrichten darstellt..
+		<LI>Der <B>Show Befehl</B> erlaubt die Einstellung der maximal zulässigen Nachrichten pro Seite. Um die Vorgabe zu ändern tippe "/show n" ohne Anführungszeichen wobei n die Anzahl der sichtbaren Nachrichten darstellt..
 		<P>
 		<I>Zum Beispiel:</I> /show 50
 		<P>
-		l&auml;&szlig;t maximal 50 Nachrichten pro Seite zu.Sollten diese nicht alle sichtbar sein, so kannst Du mit dem Scrollbalken am Fensterrand scrollen.</UL>
+		läßt maximal 50 Nachrichten pro Seite zu.Sollten diese nicht alle sichtbar sein, so kannst Du mit dem Scrollbalken am Fensterrand scrollen.</UL>
 		<?php
 	}
 	else
 	{
 		?>
-		<LI>Die <B>Show und Last Befehle</B> erlauben das L&ouml;schen des Bildschirms und das lesen der letzten <I>n</I> Nachrichten die gesendet wurden. Tippe "/show n" oder "/last n" ohne Anf&uuml;hrungszeichen wobei N die Anzahl der sichbaren Nachrichten ist.
+		<LI>Die <B>Show und Last Befehle</B> erlauben das Löschen des Bildschirms und das lesen der letzten <I>n</I> Nachrichten die gesendet wurden. Tippe "/show n" oder "/last n" ohne Anführungszeichen wobei N die Anzahl der sichbaren Nachrichten ist.
 		<P>
 		<I>Beispiel:</I> /show 50 or /last 50
 		<P>
-		l&ouml;scht das Nachrichtenfenster und zeigt die 50 neuesten Nachrichten an. Auch hier erscheint ein Scrollbalken, wenn die Anzahl der Nachrichten nicht in die Ansicht pa&szlig;t.</UL>
+		löscht das Nachrichtenfenster und zeigt die 50 neuesten Nachrichten an. Auch hier erscheint ein Scrollbalken, wenn die Anzahl der Nachrichten nicht in die Ansicht paßt.</UL>
 		<?php
 	};
 	?>
-	<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+	<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 	<P>
 </UL>
 <hr />
 <hr />
 <P>
-<FONT SIZE="+2"><A NAME="commands"><B><U>M&ouml;glichkeiten und Befehle</U></B></A></FONT>
+<FONT SIZE="+2"><A NAME="commands"><B><U>Möglichkeiten und Befehle</U></B></A></FONT>
 <P>
 
 <FONT SIZE="+1"><A NAME="help"><B>Hilfe Befehl:</B></A></FONT>
 <P>
-Wenn Du im Chatraum bist, kannst Du auf das  <IMG SRC="images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="Hilfe"> Zeichen vor der Nachrichteneingabe klicken. Du kannst auch den  <B>"/help" oder "/?" Befehl</B> eingeben (ohne Anf&uuml;hrungszeichen).
-<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+Wenn Du im Chatraum bist, kannst Du auf das  <IMG SRC="images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="Hilfe"> Zeichen vor der Nachrichteneingabe klicken. Du kannst auch den  <B>"/help" oder "/?" Befehl</B> eingeben (ohne Anführungszeichen).
+<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <P>
 <!-- Avatar System Start. -->
@@ -390,7 +390,7 @@ If (C_USE_AVATARS) {
 <P>Clicking on a person's avatar in the message frame will popup up that person's profile (see <A HREF="#whois">/whois command</A>).
 Clicking on your own avatar on the user's list  will invoke the /profile command, if you are registered.
 If you are not registered, clicking on your own (system's default) avatar will bring up an alert to encourage you to register.
-  <P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+  <P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <?php
 }
@@ -408,9 +408,9 @@ if (C_USE_SMILIES)
 	unset($SmiliesTbl);
 	?>
 	<FONT SIZE="+1"><A NAME="smilies"><B>Grafische Smilies:</B></A></FONT>
-	<P>Du kannst grafische Smilies in Deinen Nachrichten benutzen. Schau Dir die einzelnen M&ouml;glichkeiten unten an.
+	<P>Du kannst grafische Smilies in Deinen Nachrichten benutzen. Schau Dir die einzelnen Möglichkeiten unten an.
 	<P>
-	<I>Zum Beispiel</I> ergibt folgende Nachricht: "Hi Jack :)" ohne Anf&uuml;hrungszeichen folgende Nachricht: Hi Jack <IMG SRC="images/smilies/smile1.gif" WIDTH=15 HEIGHT=15 ALT=":)"> im Nachrichtenfenster.
+	<I>Zum Beispiel</I> ergibt folgende Nachricht: "Hi Jack :)" ohne Anführungszeichen folgende Nachricht: Hi Jack <IMG SRC="images/smilies/smile1.gif" WIDTH=15 HEIGHT=15 ALT=":)"> im Nachrichtenfenster.
 	<P ALIGN="center">
 	<TABLE BORDER=0 CELLPADDING=3 CELLSPACING=5>
 	<?php
@@ -430,7 +430,7 @@ if (C_USE_SMILIES)
 	unset($ResultTbl);
 	?>
 	</TABLE>
-	<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+	<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 	<P>
 	<hr />
 	<?php
@@ -441,12 +441,12 @@ if (C_HTML_TAGS_KEEP != "none")
 	?>
 	<FONT SIZE="+1"><A NAME="text"><B>Textformatierung:</B></A></FONT>
 	<P>
-	Text kann sein: fett, schr&auml;ggestellt oder unterstrichen durch einschlie&szlig;en des Textes mit entweder den  &LT;B&GT; &LT;/B&GT, &LT;I&GT; &LT;/I&GT; oder &LT;U&GT; &LT;/U&GT HTML tags.
+	Text kann sein: fett, schräggestellt oder unterstrichen durch einschließen des Textes mit entweder den  &LT;B&GT; &LT;/B&GT, &LT;I&GT; &LT;/I&GT; oder &LT;U&GT; &LT;/U&GT HTML tags.
 	<P>
 	<I>Beispiel:</I> &LT;B&GT;dieser Text&LT;/B&GT; gibt aus <B>dieser Text</B>.
 	<P>
 	Um einen Internet-Link zu erzeugen, tippe einfach die eMail oder die URL ein (ohne HTML Formatierung). Der Link wird automatisch erzeugt.
-	<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+	<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 	<P>
 	<P>
 	<hr />
@@ -465,7 +465,7 @@ if (C_HTML_TAGS_KEEP != "none")
 </P>
 <P>
 <b><?php echo(L_COL_HELP_SUB3); ?></b><br /><?php echo(L_COLOR_HEAD_SETTINGS); ?><br /><?php if (COLOR_FILTERS) echo(L_COLOR_HEAD_SETTINGSa."<br />"); ?><u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo("Administrator"); elseif ($CookieStatus == "m") echo("Moderator"); elseif ($CookieStatus == "u") echo("Gast (Normal)"); else echo("Registriert (Normal)");?></b><br /><?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
-<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <hr />
 <!-- Color Input Box mod by Ciprian end -->
 <P>
@@ -475,114 +475,114 @@ Du kannst den <B>invite Befehl</B> benutzen um einem Benutzer vorzuschlagen, in 
 <P>
 <I>Zum Beispiel:</I> /invite Jack
 <P>
-schickt eine private Einladungs-Nachricht an Jack. Diese Nachricht enth&auml;lt den Namen des Zielraumes als Link.
+schickt eine private Einladungs-Nachricht an Jack. Diese Nachricht enthält den Namen des Zielraumes als Link.
 <P>
-Beachte, dass mehr als ein Benutzername angegeben werden kann (z.B. "/invite Jack,Helen,Alf"). Diese m&uuml;ssen durch Kommata (,) ohne Abst&auml;nde angegeben werden.
-<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+Beachte, dass mehr als ein Benutzername angegeben werden kann (z.B. "/invite Jack,Helen,Alf"). Diese müssen durch Kommata (,) ohne Abstände angegeben werden.
+<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />
 <P>
 <FONT SIZE="+1"><A NAME="changeroom"><B>Raumwechsel:</B></A></FONT>
 <P>
-Die Liste auf der Rechten Seite zeigt Chatr&auml;ume und Benutzer an. Um den aktuellen Raum zu verlassen und in einen neuen zu wechslen, klicke einfach auf dessen Namen. Leere R&auml;ume erscheinen nicht in der Liste. Du kannst auch den <B>Befehl "/join #Raumname"</B> ohne Anf&uuml;hrungszeichen eingeben.
+Die Liste auf der Rechten Seite zeigt Chaträume und Benutzer an. Um den aktuellen Raum zu verlassen und in einen neuen zu wechslen, klicke einfach auf dessen Namen. Leere Räume erscheinen nicht in der Liste. Du kannst auch den <B>Befehl "/join #Raumname"</B> ohne Anführungszeichen eingeben.
 <P>
 <I>Beispiel:</I> /join #RedRoom
 <P>
-f&uuml;hrt Dich zu RedRoom.
+führt Dich zu RedRoom.
 <?php
 if (C_VERSION == "2")
 {
 	echo(!C_REQUIRE_REGISTER ? "<P>Wenn Du ein registrierter Benutzer bist, kannst Du" : "<br /><P>Du");
 	?>
-	 mit dem selben Befehl auch einen neuen Raum aufmachen. Du mu&szlig;t angeben, welchen Typ dieser hat: 0 steht f&uuml;r privat, 1 f&uuml;r &ouml;ffentlich (Vorgabewert).
+	 mit dem selben Befehl auch einen neuen Raum aufmachen. Du mußt angeben, welchen Typ dieser hat: 0 steht für privat, 1 für öffentlich (Vorgabewert).
 	<P>
 	<I>Beispiel:</I> /join 0 #MeinRaum
 	<P>
-	er&ouml;ffnet einen Privatraum mit dem Namen (nur wenn kein gleichlautender &ouml;ffentlicher besteht) und wechselt Dich dorthin.
+	eröffnet einen Privatraum mit dem Namen (nur wenn kein gleichlautender öffentlicher besteht) und wechselt Dich dorthin.
 	<P>
-	Raumnamen d&uuml;rfen keine Kommata oder R&uuml;ckstriche enthalten(\).<?php if (C_NO_SWEAR) echo(" Es d&uuml;rfen keine \"verbotenen Worte\" enthalten sein."); ?>
+	Raumnamen dürfen keine Kommata oder Rückstriche enthalten(\).<?php if (C_NO_SWEAR) echo(" Es dürfen keine \"verbotenen Worte\" enthalten sein."); ?>
 	<?php
 }
 ?>
-<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />
 <P>
-<FONT SIZE="+1"><B>Das eigene Profil im Chat &auml;ndern:</B></FONT>
+<FONT SIZE="+1"><B>Das eigene Profil im Chat ändern:</B></FONT>
 <P>
-Der <B>Profile Befehl</B> &ouml;ffnet ein separates Fenster in dem Du Dein Profil &auml;ndern kannst - au&szlig;er Nutzername und Passwort  (das geht nur von der Startseite aus.).<br />Tippe /profile
-<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+Der <B>Profile Befehl</B> öffnet ein separates Fenster in dem Du Dein Profil ändern kannst - außer Nutzername und Passwort  (das geht nur von der Startseite aus.).<br />Tippe /profile
+<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />
 <P>
 <FONT SIZE="+1"><B>Erneutes Aufrufen der letzten Nachricht oder des letzten Befehles:</B></FONT>
 <P>
 Der <B>! Befehl</B> ruft die letzte Eingabe erneut auf.<br />Tippe /!
-<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />
 <P>
 <FONT SIZE="+1"><B>Einem speziellen Benutzer antworten:</B></FONT>
 <P>
-Wenn Du auf den gew&uuml;nschten Usernamen klickst (in der Liste rechts) erscheint "username>" im Eingabefeld. Damit ist es f&uuml;r den angesprochenen einfacher, sich auch angesprochen zu f&uuml;hlen. Diese Nachricht k&ouml;nnen ALLE lesen, sie ist nicht geheim.
-<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+Wenn Du auf den gewünschten Usernamen klickst (in der Liste rechts) erscheint "username>" im Eingabefeld. Damit ist es für den angesprochenen einfacher, sich auch angesprochen zu fühlen. Diese Nachricht können ALLE lesen, sie ist nicht geheim.
+<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />
 <P>
 <FONT SIZE="+1"><A NAME="private"><B>Private Nachrichten:</B></A></FONT>
 <P>
-Um eine private Nachricht an einen Benutzer in Deinem Ruam zu schicken, tippen den <B>Befehl "/msg Benutzername Nachrichtentext" oder "/to Benutzername Nachrichtentext"</B> ohne Anf&uuml;hrungszeichen.
+Um eine private Nachricht an einen Benutzer in Deinem Ruam zu schicken, tippen den <B>Befehl "/msg Benutzername Nachrichtentext" oder "/to Benutzername Nachrichtentext"</B> ohne Anführungszeichen.
 <P>
 <I>Zum Beispiel, wenn Jack der Benutzername ist:</I> /msg Jack Wie geht es Dir?
 <P>
 Die Nachricht erscheint bei Dir und Jack, aber nicht bei den anderen.
 <P>
 Beachte, dass durch klicken auf den Sendernamen einer Nachricht automatisch dieser Befehl ins Eingabefeld geschrieben wird.
-<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />
 
 <P>
 <FONT SIZE="+1"><A NAME="actions"><B>Aktionen:</B></A></FONT>
 <P>
-Um zu beschreiben, was Du grade tust, kannst Du den <B>Befehl "/me Tat"</B> ohne Anf&uuml;hrungszeichen eingeben.
+Um zu beschreiben, was Du grade tust, kannst Du den <B>Befehl "/me Tat"</B> ohne Anführungszeichen eingeben.
 <P>
 <I>For example:</I> If Jack sends the message "/me is smoking a cigarette" the message frame will shown "<B>* Jack</B>" is smoking a cigarette".
-<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />
 <P>
 <FONT SIZE="+1"><A NAME="ignore"><B>Andere Benutzer ignorieren:</B></A></FONT>
 <P>
-Um die Nachrichten anderer zu ignorieren nutze den <B>Befehl "/ignore username"</B> ohne Anf&uuml;hrungszeichen.
+Um die Nachrichten anderer zu ignorieren nutze den <B>Befehl "/ignore username"</B> ohne Anführungszeichen.
 <P>
 <I>Beispiel:</I> /ignore Jack
 <P>
 Von nun an erscheinen die Nachrichten von Jack nicht mehr auf Deinem Bildschirm.
 <P>
-Um eine Liste von Nutzern zu sehen, die Du ignorierst, nutze den <B>Befehl "/ignore"</B> ohne Anf&uuml;hrungszeichen.
+Um eine Liste von Nutzern zu sehen, die Du ignorierst, nutze den <B>Befehl "/ignore"</B> ohne Anführungszeichen.
 <P>
-Um den Nutzer nicht mehr zu ignorieren tippe den <B>Befehl "/ignore - username"</B> ohne Anf&uuml;hrungszeichen ein, wobei "-" ein Minuszeichen ist. <P>
+Um den Nutzer nicht mehr zu ignorieren tippe den <B>Befehl "/ignore - username"</B> ohne Anführungszeichen ein, wobei "-" ein Minuszeichen ist. <P>
 <P>
 <I>Beispiel:</I> /ignore - Jack
 <P>
-Nun werden wieder alle Nachrichten von Jack angezeigt, inklusive der Nachrichten, die er w&auml;hrend Deiner Ignoranz eingegeben hat.
-L&auml;&szlig;t Du einen Namen nach dem Minuszeichen weg, werden alle wieder normal angezeigt.
+Nun werden wieder alle Nachrichten von Jack angezeigt, inklusive der Nachrichten, die er während Deiner Ignoranz eingegeben hat.
+Läßt Du einen Namen nach dem Minuszeichen weg, werden alle wieder normal angezeigt.
 <P>
-Beachte, dass Du mehrere Benutzernamen angeben kannst (z.B. "/ignore Jack,Helen,Alf" oder "/ignore - Jack,Alf"). Diese m&uuml;ssen durch Kommata (,) ohne Abst&auml;nde getrennt werden.
-<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+Beachte, dass Du mehrere Benutzernamen angeben kannst (z.B. "/ignore Jack,Helen,Alf" oder "/ignore - Jack,Alf"). Diese müssen durch Kommata (,) ohne Abstände getrennt werden.
+<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />
 
 <P>
 <FONT SIZE="+1"><A NAME="whois"><B>Nutzerinformationen bekommen:</B></A></FONT>
 <P>
-Tippe den <B>Befehl "/whois username"</B>ohne Anf&uuml;hrungszeichen, um Informationen &uuml;ber den Nutzer zu bekommen.
+Tippe den <B>Befehl "/whois username"</B>ohne Anführungszeichen, um Informationen über den Nutzer zu bekommen.
 <P>
 <I>Beispiel:</I> /whois Jack
 <P>
-Ein Popup-Fenster erscheint, in dem die Informationen &uuml;ber Jack stehen.
-<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+Ein Popup-Fenster erscheint, in dem die Informationen über Jack stehen.
+<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />
 
@@ -593,12 +593,12 @@ if (C_SAVE != "0")
 	<P>
 	<FONT SIZE="+1"><A NAME="save"><B>Nachrichten speichern:</B></A></FONT>
 	<P>
-	Um Nachrichten in ein lokales HTML-File zu exportieren (Benachrichtigungen ausgeschlossen) , tippe den <B>Befehl "/save n"</B> ohne Anf&uuml;hrungszeichen.
+	Um Nachrichten in ein lokales HTML-File zu exportieren (Benachrichtigungen ausgeschlossen) , tippe den <B>Befehl "/save n"</B> ohne Anführungszeichen.
 	<P>
 	<I>Beispiel:</I> /save 5
 	<P>
 	wobei 5 die Zahl der zu speichernden Nachrichten ist. Wird n nicht angegeben, werden alle Nachrichten des aktuellen Raumes gepeichert.
-	<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+	<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 	<P>
 	<hr />
 	<?php
@@ -606,29 +606,29 @@ if (C_SAVE != "0")
 ?>
 <hr />
 <P>
-<FONT SIZE="+2"><A NAME="moderator"><B><U>Befehle nur f&uuml;r Moderatoren und/oder Administratoren</U></B></A></FONT>
+<FONT SIZE="+2"><A NAME="moderator"><B><U>Befehle nur für Moderatoren und/oder Administratoren</U></B></A></FONT>
 
 <P>
 <FONT SIZE="+1"><A NAME="announce"><B>Mitteilung senden:</B></A></FONT>
 <P>
 Der Administrator kann an alle eine Nachricht senden, egal wo Du Dich befindest, mit dem <B>announce Befehl</B>.
 <P>
-<I>Beispiel:</I> /announce Das Chatsystem wird wegen &Uuml;berarbeitung um 5 Uhr heruntergefahren .</I>
-<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+<I>Beispiel:</I> /announce Das Chatsystem wird wegen Überarbeitung um 5 Uhr heruntergefahren .</I>
+<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
-Es gibt einen weiteren n&uuml;tzlichen Ansagebefehl; Der Administrator oder die Moderatoren k&ouml;nnen an alle User im Raum oder allen R&auml;umen eine Ansage schicken mit dem Befehl <B>room</B>.
+Es gibt einen weiteren nützlichen Ansagebefehl; Der Administrator oder die Moderatoren können an alle User im Raum oder allen Räumen eine Ansage schicken mit dem Befehl <B>room</B>.
 <P>
 <I>Zum Beispiel: /room Das Treffen findet um 15 Uhr statt.</I> oder <I>/room * Das Treffen findet um 15 Uhr im Personal-Raum.</I>
-<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />
 <P>
 <FONT SIZE="+1"><A NAME="kick"><B>Benutzer rauswerfen:</B></FONT>
 <P>
-Moderatoren k&ouml;nnen Benutzer und der Administrator kann Nutzer oder Moderatoren mit dem <B>kick Befehl</B> rauswerfen. Moderatoren m&uuml;ssen dazu im selben Raum wie der rauszuwerfende Benutzer sein.
+Moderatoren können Benutzer und der Administrator kann Nutzer oder Moderatoren mit dem <B>kick Befehl</B> rauswerfen. Moderatoren müssen dazu im selben Raum wie der rauszuwerfende Benutzer sein.
 <P>
-<I>Zum Beispiel</I>, wenn Jack der Name des Users ist, der gekickt werden sollte:  <I>/kick Jack</I> oder <I>/kick Jack Grund des Verweises</I> Der Grund des Rauswurfs k&ouml;nnte z.b. "wegen Spam" sein.!
-<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+<I>Zum Beispiel</I>, wenn Jack der Name des Users ist, der gekickt werden sollte:  <I>/kick Jack</I> oder <I>/kick Jack Grund des Verweises</I> Der Grund des Rauswurfs könnte z.b. "wegen Spam" sein.!
+<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />
 
@@ -639,11 +639,11 @@ if (C_BANISH != "0")
 	<P>
 	<FONT SIZE="+1"><A NAME="banish"><B>Benutzer verbannen:</B></A></FONT>
 	<P>
-	Moderatoren k&ouml;nnen Benutzer verbannen, der Administrator kann zus&auml;tzlich Moderatoren verbannen mit dem <B>ban Befehl</B>.<br />
-	Der Administrator kann auch Benutzer anderer R&auml;ume verbannen, wahlweise auch dauerhaft vom gesamten Chat mit der &#39;<B>&nbsp;*&nbsp;</B>&#39; Einstellung vor dem zu verbannenden Benutzernamen.
+	Moderatoren können Benutzer verbannen, der Administrator kann zusätzlich Moderatoren verbannen mit dem <B>ban Befehl</B>.<br />
+	Der Administrator kann auch Benutzer anderer Räume verbannen, wahlweise auch dauerhaft vom gesamten Chat mit der "<B>*</B>" Einstellung vor dem zu verbannenden Benutzernamen.
 	<P>
 	<I>Zum Beispiel</I>, wenn Jack der zu verbannende Benutzer ist : <I>/ban Jack</I> oder <I>/ban * Jack</I>
-	<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+	<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 	<P>
 	<hr />
 	<?php
@@ -653,14 +653,14 @@ if (C_BANISH != "0")
 <P>
 <FONT SIZE="+1"><A NAME="promote"><B>Ernennen/Degradieren eines Users zum/vom Moderator:</B></A></FONT>
 <P>
-Moderatoren und Administratoren k&ouml;nnen andere Benutzer mit dem <B>promote Befehl</B> zu Moderatoren ernennen.
+Moderatoren und Administratoren können andere Benutzer mit dem <B>promote Befehl</B> zu Moderatoren ernennen.
 <P>
 <I>Beispiel: /promote Jack</I>
 <P>
 Nur ein Administrator ist berechtigt dem Moderator die Rechte zu entziehen mit Hilfe des <B>demote Befehls</B>.
 <P>
-<I>Zum Beispiel</I>, wenn Jack der Name des Moderators ist, der degradiert werden sollte: <I>/demote Jack</I> oder <I>/demote * Jack</I> (entzieht Moderatorrechte in diesem Raum oder allen R&auml;umen).
-<br /><P ALIGN="right"><A HREF="#top">Zur&uuml;ck zum Anfang</A></P>
+<I>Zum Beispiel</I>, wenn Jack der Name des Moderators ist, der degradiert werden sollte: <I>/demote Jack</I> oder <I>/demote * Jack</I> (entzieht Moderatorrechte in diesem Raum oder allen Räumen).
+<br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 </BODY>
 </HTML>

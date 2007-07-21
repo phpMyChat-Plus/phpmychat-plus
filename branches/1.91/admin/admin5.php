@@ -44,12 +44,10 @@ if ($action != "submit")
 	// Check for application update on main sites (ciprianmp.com & sourceforge) resources.
 	$updatepath1 = "http://ciprianmp.com/latest/lib/update.php";
 	$updatepath2 = "http://svn.sourceforge.net/viewvc/*checkout*/phpmychat/trunk/lib/update.php";
-//	if (APP_MINOR != "") $APP_M = APP_MINOR;
 if (UPD_CHECK)
 {
-	if (@fopen($updatepath1, "r"))
+	if (fsockopen("ciprianmp.com", 80, $errno, $errstr, 12))
 	{
-		@fclose($updatepath1);
 		if (isset($_GET['alv']) && isset($_GET['alm'])) {
 			define("APP_LAST_VERSION", $alv);
 			define("APP_LAST_MINOR", $alm);
@@ -57,24 +55,21 @@ if (UPD_CHECK)
 		} else {
 		  echo "<script language=\"JavaScript\" type=\"text/javascript\" src=\"$updatepath1\"></script>\n";
 		  echo "<script language=\"javascript\">\n";
-		  echo "  location.href=\"${_SERVER['SCRIPT_NAME']}?${_SERVER['QUERY_STRING']}"
-		            . "&alv=\" + alv + \"&alm=\" + alm;\n";
+		  echo "location.href=\"".$_SERVER['SCRIPT_NAME']."?".$_SERVER['QUERY_STRING']."&alv=\" + alv + \"&alm=\" + alm;\n";
 		  echo "</script>\n";
 		  exit();
 		}
 	}
-	elseif (@fopen($updatepath2, "r"))
+	elseif (fsockopen("svn.sourceforge.net", 80, $errno, $errstr, 12))
 	{
-		@fclose($updatepath2);
 		if (isset($_GET['alv']) && isset($_GET['alm'])) {
-			define("APP_LAST_VERSION", "".$alv."");
+			define("APP_LAST_VERSION", $alv);
 			define("APP_LAST_MINOR", $alm);
 			settype($app_last_version = APP_LAST_VERSION, "double");
 		} else {
 		  echo "<script language=\"JavaScript\" type=\"text/javascript\" src=\"$updatepath2\"></script>\n";
 		  echo "<script language=\"javascript\">\n";
-		  echo "  location.href=\"${_SERVER['SCRIPT_NAME']}?${_SERVER['QUERY_STRING']}"
-		            . "&alv=\" + alv + \"&alm=\" + alm;\n";
+		  echo "location.href=\"".$_SERVER['SCRIPT_NAME']."?".$_SERVER['QUERY_STRING']."&alv=\" + alv + \"&alm=\" + alm;\n";
 		  echo "</script>\n";
 		  exit();
 		}
@@ -121,6 +116,7 @@ if (UPD_CHECK)
 					<li><a href="#logging">Logging mod</a></li>
 					<li><a href="#lurking">Lurking mod</a></li>
 					<li><a href="#quote">Random Quote</a></li>
+					<li><a href="#ghost">Ghost Control</a></li>
 				</ul>
 			</dd>
 	</dl>
@@ -133,12 +129,12 @@ if (UPD_CHECK)
 					<li><a href="http://sourceforge.net/projects/phpmychat/" target=_blank Title="Open the phpMyChat Project Page" onMouseOver="window.status='Open the phpMyChat Project Page.'; return true">Project page</a></li>
 					<li><a href="http://svn.sourceforge.net/viewvc/phpmychat/trunk/" target=_blank Title="Open the phpMyChat SVN Project Page" onMouseOver="window.status='Open the phpMyChat SVN Project Page.'; return true">Project SVN page</a></li>
 					<li><a href="http://tech.groups.yahoo.com/group/phpmychat/" target=_blank Title="Open the phpMyChat Yahoo Support Group Page" onMouseOver="window.status='Open the phpMyChat Yahoo Support Group Page.'; return true">Support Group page</a></li>
-					<li><a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Fixes readme.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_VERSION.APP_MINOR); ?>" target=_blank Title="Open the <?php echo(APP_VERSION.APP_MINOR); ?> Release notes" onMouseOver="window.status='Open the <?php echo(APP_VERSION.APP_MINOR); ?> Release notes.'; return true">Read <?php echo(APP_VERSION.APP_MINOR); ?> notes</a></li>
+					<li><a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Fixes readme.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_VERSION); ?>" target=_blank Title="Open the <?php echo(APP_VERSION.APP_MINOR); ?> Release notes" onMouseOver="window.status='Open the <?php echo(APP_VERSION.APP_MINOR); ?> Release notes.'; return true">Read <?php echo(APP_VERSION.APP_MINOR); ?> notes</a></li>
  <?php
- if(UPD_CHECK && (($app_last_version > $app_version) || (($app_last_version == $app_version) && (APP_LAST_MINOR != APP_MINOR))))
+  if(UPD_CHECK && $app_last_version > $app_version) 
  {
  	?>
- 						<li><a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Fixes readme.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo((UPD_CHECK && (($app_last_version > $app_version) || (($app_last_version == $app_version) && (APP_LAST_MINOR != APP_MINOR)))) ? APP_LAST_VERSION.APP_LAST_MINOR : APP_VERSION.APP_MINOR); ?>" target=_blank Title="Open the <?php echo((UPD_CHECK && (($app_last_version > $app_version) || (($app_last_version == $app_version) && (APP_LAST_MINOR != APP_MINOR)))) ? APP_LAST_VERSION.APP_LAST_MINOR : APP_VERSION.APP_MINOR); ?> Release notes" onMouseOver="window.status='Open the <?php echo((UPD_CHECK && (($app_last_version > $app_version) || (($app_last_version == $app_version) && (APP_LAST_MINOR != APP_MINOR)))) ? APP_LAST_VERSION.APP_LAST_MINOR : APP_VERSION.APP_MINOR); ?> Release notes.'; return true">Latest <?php echo((UPD_CHECK && (($app_last_version > $app_version) || (($app_last_version == $app_version) && (APP_LAST_MINOR != APP_MINOR)))) ? APP_LAST_VERSION.APP_LAST_MINOR : APP_VERSION.APP_MINOR); ?> notes</a></li>
+ 						<li><a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Fixes readme.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_LAST_VERSION); ?>" target=_blank Title="Open the <?php echo(APP_LAST_VERSION); ?> Release notes" onMouseOver="window.status='Open the <?php echo(APP_LAST_VERSION); ?> Release notes.'; return true">Latest <?php echo(APP_LAST_VERSION); ?> notes</a></li>
  <?php
  }
  	?>
@@ -146,7 +142,7 @@ if (UPD_CHECK)
 					<li><a href="http://www.ciprianmp.com/latest/" target=_blank Title="Go to Try me server." onMouseOver="window.status='Go to Try me server'; return true">Try me server</a></li>
 					<li><a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='Click to email author.'; return true;" title="Click to email author" target=_blank>Submit your feedback</a></li>
 					<li><a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20donation" onMouseOver="window.status='Wish to donate to the author?'; return true;" title="Wish to donate to the author?" target=_blank>Wish to donate?</a></li>
-					<li><a onClick="javascript:alert('Your currently installed version is:\n<?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?>')" Title="What is this?" onMouseOver="window.status='What is this?'; return true">About</a></li>
+					<li><a onClick="javascript:alert('Your currently installed version is:\n<?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?>.\n\n&copy; 2001-<?php echo(date(Y)); ?>.\nDeveloper - Ciprian Murariu -\nthanks to all the contributors\nof the phpHeaven Team.\n\nThank you for using our work!')" Title="What is this?" onMouseOver="window.status='What is this?'; return true">About Plus</a></li>
 				</ul>
 			</dd>
 	</dl>
@@ -163,7 +159,7 @@ if (UPD_CHECK)
 		?>
 <DIV><P><TABLE BORDER=0 CELLPADDING=0 CLASS=menu style=background:white><TR><TD CLASS=success ALIGN=CENTER><?php echo("<br />- ".sprintf(A_SHEET5_0, APP_VERSION.APP_MINOR)." -<br />"); ?>
 <?php
-		if (($app_last_version > $app_version) || (($app_last_version == $app_version) && (APP_LAST_MINOR != APP_MINOR)))
+		if (($app_last_version > $app_version) || (($app_last_version == $app_version) && (eregi_replace("-ß","",APP_LAST_MINOR) > eregi_replace("-ß","",APP_MINOR))))
 		{
 		?>
 			<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
@@ -330,8 +326,10 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"QUOTE = '$vQUOTE', ".
 						"QUOTE_TIME = '$vQUOTE_TIME', ".
 						"QUOTE_COLOR = '$vQUOTE_COLOR', ".
-						"QUOTE_ALL = '$vQUOTE_ALL', ".
-						"QUOTE_PATH = '$vQUOTE_PATH'".
+						"QUOTE_PATH = '$vQUOTE_PATH', ".
+						"HIDE_ADMINS = '$vHIDE_ADMINS', ".
+						"HIDE_MODERS = '$vHIDE_MODERS', ".
+						"LAST_SAVED_BY = '$pmc_username'".
 				" WHERE ID='0'";
 
 if((C_BOT_NAME != $vBOT_NAME || C_BOT_FONT_COLOR != $vBOT_FONT_COLOR || C_BOT_AVATAR != $vBOT_AVATAR) && $vBOT_CONTROL)
@@ -419,6 +417,7 @@ if((C_QUOTE_NAME != $vQUOTE_NAME || C_QUOTE_FONT_COLOR != $vQUOTE_FONT_COLOR || 
   		}
   	}
 }
+
    mysql_query($query);
 
 if (isset($Error))
@@ -427,13 +426,14 @@ if (isset($Error))
 }
 else
 {
-	echo "<DIV><P><TABLE BORDER=0 CELLPADDING=3 CLASS=menu style=background:white><TR><TD CLASS=success ALIGN=CENTER><br /><H3>Configuration Settings Changed Successfully!</H3></TD></TR></TABLE></P></DIV>";
-}
-
+	echo "<DIV><P><TABLE BORDER=0 CELLPADDING=3 CLASS=menu style=background:white><TR><TD CLASS=success ALIGN=CENTER><br /><H3>Configuration Settings Changed Successfully!</H3></TD></TR></TABLE></P>";
 	if(C_LOG_DIR != $vLOG_DIR)
 	{
-		echo "<DIV><P><TABLE BORDER=0 CELLPADDING=3 CLASS=menu style=background:white><TR><TD CLASS=success ALIGN=CENTER><br /><H3>Configuration Settings Changed Successfully!</H3></TD></TR><TR><TD CLASS=notify2 ALIGN=CENTER VALIGN=TOP>Important!</TD><TD CLASS=success ALIGN=CENTER>Don't forget to change remotely the name of <SPAN style=background-color:white>".C_LOG_DIR."</SPAN> directory to <SPAN style=background-color:white>".$vLOG_DIR."</SPAN><br />and set its atributes to <b>777</b>!</TD></TR></TABLE></P></DIV>";
+		echo "<TABLE BORDER=0 CELLPADDING=3 CLASS=menu style=background:white><TR><TD CLASS=notify2 ALIGN=CENTER VALIGN=TOP>Important!</TD><TD CLASS=success ALIGN=CENTER>Don't forget to change remotely the name of <SPAN style=background-color:white>".C_LOG_DIR."</SPAN> directory to <SPAN style=background-color:white>".$vLOG_DIR."</SPAN><br />(and set its atributes to <b>777</b>)!</TD></TR></TABLE></P>";
 	}
+	echo "</DIV>";
+}
+
 	if((C_USE_AVATARS != $vUSE_AVATARS) || (COLOR_NAMES != $vCOLOR_NAMES) || (C_PRIV_POPUP != $vPRIV_POPUP) || (C_SKIN != $vUSE_SKIN))
 	{
 		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES (1, 'Admin Panel', 'SYS announce', '', ".time().", ' *', 'L_RELOAD_CHAT', '', '')");
@@ -584,8 +584,11 @@ $UPD_CHECK						= $row[132];
 $QUOTE								= $row[133];
 $QUOTE_TIME						= $row[134];
 $QUOTE_COLOR					= $row[135];
-$QUOTE_ALL						= $row[136];
-$QUOTE_PATH						= $row[137];
+$QUOTE_PATH					= $row[136];
+$HIDE_ADMINS				= $row[137];
+$HIDE_MODERS				= $row[138];
+//$LAST_SAVED_ON			= $row[139];
+//$LAST_SAVED_BY			= $row[140];
 
 $query_botdata = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.com'";
 $result_botdata = mysql_query($query_botdata);
@@ -599,7 +602,20 @@ list($QUOTE_NAME, $QUOTE_AVATAR, $QUOTE_FONT_COLOR) = mysql_fetch_row($result_qu
 <a name="home"></a>
 <br />
 <P CLASS=title><?php echo(APP_NAME); ?> Configuration Page</P>
-
+<?php
+if (C_LAST_SAVED_ON)
+{
+	settype($last_saved_on = mysql_to_ts(C_LAST_SAVED_ON), "integer");
+	if (C_TMZ_OFFSET) settype($tmz_offset = C_TMZ_OFFSET, "integer");
+	$Last_Saved_On = $last_saved_on + $tmz_offset*60*60;
+}
+if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
+{
+	?>
+		<DIV><P><TABLE BORDER=0 CELLPADDING=0 CLASS=menu style=background:white><TR><TD CLASS=success ALIGN=RIGHT>These settings were last saved <?php if (C_LAST_SAVED_ON) echo("on <SPAN class=error>".date('l, jS of F Y H:i:s', $Last_Saved_On)."</SPAN> "); ?><?php if (C_LAST_SAVED_BY) echo("by <SPAN class=error>".C_LAST_SAVED_BY."</SPAN> "); ?>!</TD></TR></TABLE></DIV>
+	<?php
+}
+	?>
 <FORM ACTION="<?php echo("$From?$URLQueryBody"); ?>" METHOD="POST" AUTOCOMPLETE="" NAME="Form5">
 		<INPUT TYPE=hidden NAME="From" value="<?php echo($From); ?>">
 		<INPUT TYPE=hidden NAME="pmc_username" value="<?php echo(htmlspecialchars(stripslashes($pmc_username))); ?>">
@@ -1804,18 +1820,29 @@ list($QUOTE_NAME, $QUOTE_AVATAR, $QUOTE_FONT_COLOR) = mysql_fetch_row($result_qu
 </tr>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="quote"></a><b>Random Quote</b></td></tr>
 <tr>
-    <td><b>Enable Random Quote mod.</b></td>
-    <td><input name="vQUOTE_NAME" type="text" size="25" maxlength="25" value="<? echo $QUOTE_NAME; ?>"><br />
-        <select name="vQUOTE">
+    <td><b>Enable Random Quote mod.</b><br />
+    	<i><font color=red>Important: to change these settings, you have to enable quote mode first!</font><br /></i>
+</td>
+    <td><select name="vQUOTE">
 	        <option value="0"<? if($QUOTE==0){ echo " selected"; } ?>>Disable Quotes
 	        <option value="1"<? if($QUOTE==1){ echo " selected"; } ?>>Enable Quotes
         </select><br />
     	<input name="vQUOTE_PATH" type="text" size="25" maxlength="255" value="<? echo $QUOTE_PATH; ?>"><br />
-        <select name="vQUOTE_ALL">
-	        <option value="0"<? if($QUOTE_ALL==0){ echo " selected"; } ?>>Only in Current room
-	        <option value="1"<? if($QUOTE_ALL==1){ echo " selected"; } ?>>Post to All rooms
-        </select><br />
 			Frequency in mins:&nbsp;<input name="vQUOTE_TIME" type="text" size="1" maxlength="2" value="<? echo $QUOTE_TIME; ?>"><br />
+			Background:&nbsp;<SELECT NAME="vQUOTE_COLOR">
+			<?php
+			$CQP = explode(",", $ColorList);
+			while(list($ColorNumber, $ColorCode) = each($CQP))
+			{
+				// Red color is reserved to the admin or a moderator for the current room
+				echo("<OPTION style=\"background-color:".$ColorCode."; color:black\" VALUE=\"".$ColorCode."\"");
+				if($QUOTE_COLOR == $ColorCode) echo(" SELECTED");
+				if ($ColorCode != "") echo(">".$ColorCode."</OPTION>");
+				else echo(">Default (not selected)</OPTION>");
+			}
+			?>
+			</SELECT><br />
+			Name:&nbsp;<input name="vQUOTE_NAME" type="text" size="25" maxlength="25" value="<? echo $QUOTE_NAME; ?>"><br />
 			Name color:&nbsp;<SELECT NAME="vQUOTE_FONT_COLOR">
 			<?php
 			$CQ = explode(",", $ColorList);
@@ -1829,20 +1856,24 @@ list($QUOTE_NAME, $QUOTE_AVATAR, $QUOTE_FONT_COLOR) = mysql_fetch_row($result_qu
 			}
 			?>
 			</SELECT><br />
-			Quote color:&nbsp;<SELECT NAME="vQUOTE_COLOR">
-			<?php
-			$CQP = explode(",", $ColorList);
-			while(list($ColorNumber, $ColorCode) = each($CQP))
-			{
-				// Red color is reserved to the admin or a moderator for the current room
-				echo("<OPTION style=\"background-color:".$ColorCode."; color:black\" VALUE=\"".$ColorCode."\"");
-				if($QUOTE_COLOR == $ColorCode) echo(" SELECTED");
-				if ($ColorCode != "") echo(">".$ColorCode."</OPTION>");
-				else echo(">Default (not selected)</OPTION>");
-			}
-			?>
-			</SELECT><br />
-			<input name="vQUOTE_AVATAR" type="text" size="25" maxlength="255" value="<? echo $QUOTE_AVATAR; ?>">
+			Avatar:&nbsp;<input name="vQUOTE_AVATAR" type="text" size="25" maxlength="255" value="<? echo $QUOTE_AVATAR; ?>">
+    </td>
+</tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="ghost"></a><b>Ghost Control</b></td></tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Control who will be visible in chat rooms.</b><br />
+    	<i><font color=red>Important: if you enable Ghost Control, users set as ghosts (invisible) will also be hiden from all the public pages and counters, except their posts and commands in rooms (messages frame)!</font><br />
+    	Hint: You can still monitor ghosts connections and activity in the Conections tab. Please note that ghosts will still be able to act as usual in chat (can post public or private messages and can use all the commands, according to their powers).</i>
+</td>
+    <td>
+        <select name="vHIDE_ADMINS">
+	        <option value="0"<? if($HIDE_ADMINS==0){ echo " selected"; } ?>>Show online administrators
+	        <option value="1"<? if($HIDE_ADMINS==1){ echo " selected"; } ?>>Hide online admins (ghosts)
+        </select><br />
+        <select name="vHIDE_MODERS">
+	        <option value="0"<? if($HIDE_MODERS==0){ echo " selected"; } ?>>Show online moderators
+	        <option value="1"<? if($HIDE_MODERS==1){ echo " selected"; } ?>>Hide online moders (ghosts)
+        </select>
     </td>
 </tr>
 </table>
@@ -1850,6 +1881,14 @@ list($QUOTE_NAME, $QUOTE_AVATAR, $QUOTE_FONT_COLOR) = mysql_fetch_row($result_qu
 <tr>
 	<input type="hidden" name="action" value="submit">
     <td></td><td><input type="submit" name="submit_type" value="Save Changed Settings"></td>
+<?php
+if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
+{
+	?>
+		<DIV><P><TABLE BORDER=0 CELLPADDING=0 CLASS=menu style=background:white><TR><TD CLASS=success ALIGN=RIGHT>These settings were last saved <?php if (C_LAST_SAVED_ON) echo("on <SPAN class=error>".date('l, jS of F Y H:i:s', $Last_Saved_On)."</SPAN> "); ?><?php if (C_LAST_SAVED_BY) echo("by <SPAN class=error>".C_LAST_SAVED_BY."</SPAN> "); ?>!</TD></TR></TABLE></DIV>
+	<?php
+}
+	?>
 </tr>
 </form>
 </div>

@@ -18,6 +18,12 @@ else
 {
 	$IsCommand = true;
 
+	$DbLink->query("SELECT perms,rooms FROM ".C_REG_TBL." WHERE username='".$Cmd[1]."' LIMIT 1");
+	if ($DbLink->num_rows() > 0)
+	{
+		list($perms,$rooms) = $DbLink->next_record();
+		$DbLink->clean_results();
+	}
 	// Define what can see the current user:
 	// - the whole profile including e-mail and IP address if he is admin or moderator of the current room
 	//   if this room is one of the default rooms;
@@ -26,7 +32,7 @@ else
 	{
 		$power = "all";
 	}
-	elseif ($status == "m" && room_in(stripslashes($R),$DefaultChatRooms))
+	elseif (($status == "m" && room_in(stripslashes($R),$DefaultChatRooms)) || (($perms == "moderator") && room_in("*", $rooms)))
 	{
 		$power = "medium";
 	}

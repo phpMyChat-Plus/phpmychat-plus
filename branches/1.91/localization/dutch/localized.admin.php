@@ -5,7 +5,7 @@
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 
 // extra header for charset
-$Charset = "iso-8859-1";
+$Charset = "utf-8";
 
 // medium font size in pt.
 $FontSize = 10;
@@ -17,7 +17,7 @@ define("A_MENU_2", "Verbannen gebruikers ");
 define("A_MENU_3", "Leeg ruimtes");
 define("A_MENU_4", "Verstuur E-mails");
 define("A_MENU_5", "Configuratie");
-define("A_MENU_6", "Chat extra·s");
+define("A_MENU_6", "Chat extra√°s");
 define("A_MENU_7", "Zoek");
 define("A_MENU_8", "Verbindingen");
 define("A_MENU_9", "Log archief");
@@ -27,7 +27,7 @@ define("A_SHEET1_1", "lijst van geregistreerde gebruikers en hun rechten");
 define("A_SHEET1_2", "Gebruikersnaam");
 define("A_SHEET1_3", "Rechten");
 define("A_SHEET1_4", "Gemodereerde ruimtes");
-define("A_SHEET1_5", "Gemodereerde ruimtes worden geschijden door komma·s (,) zonder spaties.");
+define("A_SHEET1_5", "Gemodereerde ruimtes worden geschijden door komma√°s (,) zonder spaties.");
 define("A_SHEET1_6", "Verwijder aangevinkte namen");
 define("A_SHEET1_7", "Veranderen");
 define("A_SHEET1_8", "Er zijn geen geregistreerde gebruikers behalve jezelf.");
@@ -46,7 +46,7 @@ define("A_SHEET2_2", "IP");
 define("A_SHEET2_3", "Betrokken ruimtes");
 define("A_SHEET2_4", "Tot");
 define("A_SHEET2_5", "eindeloos");
-define("A_SHEET2_6", "Ruimtes zijn gescheiden door komma·s (,) als het minder zijn dan 4, anders het ·<B>&nbsp;*&nbsp;</B>· teken voor verbanning van alle ruimtes.");
+define("A_SHEET2_6", "Ruimtes zijn gescheiden door komma√°s (,) als het minder zijn dan 4, anders het ‚Äô<B>*</B>‚Äô teken voor verbanning van alle ruimtes.");
 define("A_SHEET2_7", "Verwijder de ban voor gevinkte namen");
 define("A_SHEET2_8", "Er zijn geen verbannen gebruikers.");
 define("A_SHEET2_9", "Reden (optioneel)");

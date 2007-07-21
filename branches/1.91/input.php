@@ -186,8 +186,8 @@ $botcontrol ="botfb/$R.txt";
 			$M = ereg_replace("<[^>]+>", "", $M);
 			$M = ereg_replace("x3c", "", $M);
 			$M = ereg_replace("x3e", "", $M);
-			$M = ereg_replace("\"", "", $M);
-			$M = ereg_replace("\'","", $M);
+			$M = ereg_replace("\"", "&quot;", $M);
+			$M = ereg_replace("\'","&#39;", $M);
 		}
 		else
 		{
@@ -240,7 +240,7 @@ $botcontrol ="botfb/$R.txt";
 				$purl .= "||".$pmatch[0][$x];
        }
 
-       $M = eregi_replace($prefix.$pureUrl, '<a href="links.php?xxx='.urlencode($purl).'" title="Click to open links window" onMouseOver="window.status=\'Click to open links window.\'; return true" target="_blank"></a>', $M);
+    $M = eregi_replace($prefix.$pureUrl, '<a href="links.php?xxx='.urlencode($purl).'" title="Click to open links window" onMouseOver="window.status=\'Click to open links window.\'; return true" target="_blank"></a>', $M);
 
 	// e-mail addresses
 	$M = eregi_replace('([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](fo|g|l|m|mes|o|op|pa|ro|seum|t|u|v|z)?)', '<a href="mailto:\\1" title="Send email" onMouseOver="window.status=\'Send email.\'; return true">\\1</a>', $M);
@@ -438,7 +438,7 @@ if (isset($M) && trim($M) != "" && (!isset($M0) || ($M != $M0)) && !($IsCommand 
 if (!isset($FontName)) $FontName = "";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
 <TITLE>Input frame</TITLE>
@@ -704,7 +704,7 @@ if(isset($Error))
 	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
 	<!--
 	document.forms['MsgForm'].elements['M'].select();
-	alert("<?php echo(utf8_encode(str_replace("\\\\n","\\n",addslashes($Error)))); ?>");
+	alert("<?php echo(str_replace("\\\\n","\\n",addslashes($Error))); ?>");
 	// -->
 	</SCRIPT>
 	<?php
@@ -716,7 +716,7 @@ if(isset($ErrorC))
 	?>
 	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
 	<!--
-	alert("<?php echo(utf8_encode(str_replace("\\\\n","\\n",addslashes($ErrorC)))); ?>");
+	alert("<?php echo(str_replace("\\\\n","\\n",addslashes($ErrorC))); ?>");
 	document.forms['MsgForm'].elements['M'].focus();
 	// -->
 	</SCRIPT>

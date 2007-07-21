@@ -130,23 +130,37 @@ if (isset($FORM_SEND) && $FORM_SEND == 1)
 				}
 
 				// Send a message to the user if he chats into one of the 'diff' rooms
-				if (room_in(addslashes($room), $diff_rooms))
+				if (room_in(addslashes($room), $diff_rooms) || room_in("*", $rrr) || room_in("*", $diff_rooms) || (($ppp == 'admin') || ($old_ppp == 'admin')))
 				{
-					if ($ppp == 'moderator' && room_in(addslashes($room), $rrr))	// user becomes moderator for the room he chats into
+					if ($ppp == 'admin')// user becomes user for the room he chats into
+					{
+						$status = "a";
+						$messagead = "sprintf(L_ADM_3, \"".addslashes(htmlspecialchars(stripslashes($uuu)))."\")";
+					}
+					elseif ($ppp == 'moderator' && (room_in(addslashes($room), $rrr) || room_in("*", $rrr)))	// user becomes moderator for the room he chats into
 					{
 						$status = "m";
 						$message = "sprintf(L_MODERATOR, \"".addslashes(htmlspecialchars(stripslashes($uuu)))."\")";
+						if ($old_ppp == 'admin') $messagead = "sprintf(L_ADM_4, \"".addslashes(htmlspecialchars(stripslashes($uuu)))."\")";
 					}
-					else	// user becomes user for the room he chats into
+					elseif ($ppp == 'user')// user becomes user for the room he chats into
+					{
+						$status = "r";
+						if ($old_ppp == 'moderator') $message = "sprintf(L_ADM_1, \"".addslashes(htmlspecialchars(stripslashes($uuu)))."\")";
+						if ($old_ppp == 'admin') $messagead = "sprintf(L_ADM_4, \"".addslashes(htmlspecialchars(stripslashes($uuu)))."\")";
+					}
+					else // user becomes user for the room he chats into
 					{
 						$status = "r";
 						$message = "sprintf(L_ADM_1, \"".addslashes(htmlspecialchars(stripslashes($uuu)))."\")";
+						if ($old_ppp == 'admin') $messagead = "sprintf(L_ADM_4, \"".addslashes(htmlspecialchars(stripslashes($uuu)))."\")";
 					};
 					$DbLink->query("UPDATE ".C_USR_TBL." SET status='$status' WHERE username='$uuu'");
 					$DbLink->query("SELECT type FROM ".C_MSG_TBL." WHERE room='".addslashes($room)."' LIMIT 1");
 					list($type) = $DbLink->next_record();
 					$DbLink->clean_results();
-					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS promote', '', ".time().", '', '$message', '', '')");
+					if (isset($message)) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS promote', '', ".time().", '', '$message', '', '')");
+					if (isset($messagead)) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '*', 'SYS promote', '', ".time().", '', '$messagead', '', '')");
 				};
 			}
 			else

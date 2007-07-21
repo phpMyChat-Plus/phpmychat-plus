@@ -1,12 +1,11 @@
 <?php
-// File : dutch/localized.chat.php - plus version (27.05.2007 - rev.19)
+// File : dutch/localized.chat.php - plus version (17.07.2007 - rev.23)
 // Original translation by Hans Paijmans <paai@kub.nl>, Kasper Souren <guaka@industree.org> and Sander Corbesir <rock@jascrc.com>
 // Updates, corrections and additions for the Plus version by DJE.Amesz & Romanesko <Genieusdanny@gmail.com> and Bert Moorlag <berbia@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 
 // extra meta-tag for charset
 $Charset = "utf-8";
-require("localized.chatjs.php");
 
 // medium font size in pt.
 $FontSize = 10;
@@ -22,7 +21,7 @@ define("L_CUR_1a", "zijn momenteel");
 define("L_CUR_1b", "is nu");
 define("L_CUR_2", "in de chat");
 define("L_CUR_3", "op dit ogenblik in de chatroom");
-define("L_CUR_4", "in de priv&eacute; kamers");
+define("L_CUR_4", "in de privé kamers");
 define("L_CUR_5", "gebruikers die momenteel gluren<br />(gluren op de chatpagina):");
 
 define("L_SET_1", "geef");
@@ -35,12 +34,12 @@ define("L_SET_7", "kies...");
 define("L_SET_8", "openbare ruimte door gebruikers aangemaakt");
 define("L_SET_9", "maak uw eigen");
 define("L_SET_10", "publiek");
-define("L_SET_11", "priv&eacute;");
+define("L_SET_11", "privé");
 define("L_SET_12", "ruimte");
 define("L_SET_13", "En dan maar");
 define("L_SET_14", "chatten");
-define("L_SET_15", "standaard priv&eacute; ruimtes");
-define("L_SET_16", "priv&eacute; ruimtes gemaakt door gebruikers ");
+define("L_SET_15", "standaard privé ruimtes");
+define("L_SET_16", "privé ruimtes gemaakt door gebruikers ");
 define("L_SET_17", "kies uw avatar");
 define("L_SET_18", "markeer deze page: druk \"CTRL +D\".");
 
@@ -112,18 +111,29 @@ define("L_ERR_USR_7", "Je bent je email vergeten.");
 define("L_ERR_USR_8", "Je moet het juiste emailadres invoeren.");
 define("L_ERR_USR_9", "Deze gebruikersnaam wordt al gebruikt.");
 define("L_ERR_USR_10", "Verkeerde wachtwoord of gebruikersnaam.");
+define("L_ERR_USR_11", "Je moet administrator zijn.");
 define("L_ERR_USR_12", "Je ben zelf administrator, dus je kunt jezelf niet verwijderen.");
+define("L_ERR_USR_13", "Om je eigen kamer te maken, moet je geregistreerd zijn.");
 define("L_ERR_USR_14", "Je moet geregistreerd zijn voordat je kan chatten.");
 define("L_ERR_USR_15", "Je moet je naam voluit typen.");
-define("L_ERR_USR_16a", "Alleen de volgende extra karakters zijn toegestaan:<br />".$REG_CHARS_ALLOWED."<br />Spaties, komma&acute;s of backslashes (\\) zijn niet toegestaan. Check the sintax.");
+define("L_ERR_USR_16", "Alleen de volgende extra karakters zijn toegestaan:\\n".$REG_CHARS_ALLOWED."\\nSpaties, komma’s of backslashes (\\) zijn niet toegestaan.\\nCheck the sintax.");
+define("L_ERR_USR_16a", "Alleen de volgende extra karakters zijn toegestaan:<br />".$REG_CHARS_ALLOWED."<br />Spaties, komma’s of backslashes (\\) zijn niet toegestaan. Check the sintax.");
+define("L_ERR_USR_17", "Deze kamer is niet beschikbaar en je bent niet bevoegd om een nieuwe kamer te maken.");
 define("L_ERR_USR_18", "verboden woord gevonden in je gebruikersnaam.");
+define("L_ERR_USR_19", "Je kunt niet in meer dan 1 ruimte tegelijk zijn.");
 define("L_ERR_USR_20", "je bent verbannen.");
 define("L_ERR_USR_20a", "je bent verbannen uit deze ruimte en of chatbox .<br />De reden hiervoor is: %s");
 define("L_ERR_USR_21", "Omdat je niet actief bent geweest de afgelopen ".C_USR_DEL." minuten,<br />ben je uit de kamer verwijderd.");
-define("L_ERR_USR_23", "Om in een priv&eacute; ruimte te komen moet je je registreren.");
+define("L_ERR_USR_22", "Dit commando is niet beschikbaar in\\nde browser die u gebruikt (IE engine).");
+define("L_ERR_USR_23", "Om in een privé ruimte te komen moet je je registreren.");
 define("L_ERR_USR_24", "om een eigen ruimte te maken moet je jezelf registreren.");
 define("L_ERR_USR_25", "Alleen een administrator of moderator kan de kleuren gebruiken ".$COLORNAME." !<br />gebruik geen ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1.".<br />deze zijn gereserveerd voor power users!");
 define("L_ERR_USR_26", "Alleen een administrator of moderator kan de kleuren gebruiken ".$COLORNAME." !<br />gebruik geen! ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1.".<br />deze zijn gereserveerd voor power users!");
+define("L_ERR_USR_27", "Je kunt niet privé tegen jezelf praten.\\nDoe dat in stilte...\\nKies een andere gebruikersnaam.");
+define("L_ERR_ROM_1", "Kamernaam kan niet met komma en backslash (\\).");
+define("L_ERR_ROM_2", "Verboden woord gevonden in de naam van de ruimte die je wil maken.");
+define("L_ERR_ROM_3", "Deze ruimte is al in gebruik als openbare ruimte.");
+define("L_ERR_ROM_4", "Onbruikbare naam.");
 
 // users frame or popup
 define("L_EXIT", "Verlaat de chat");
@@ -156,14 +166,27 @@ define("L_INVITE_REG", " je moet je registreren om deze ruimte in te kunnen.");
 define("L_INVITE_DONE", "uw uitnodiging is verzonden aan %s.");
 define("L_OK", "Verstuur");
 define("L_BUZZ", "Buzzes Gallerij");
+define("L_BAD_CMD", "Onjuiste opdracht!");
+define("L_ADMIN", "%s is al administrator !");
+define("L_IS_MODERATOR", "%s is al moderator !");
+define("L_NO_MODERATOR", "Alleen moderator van deze kamer kan die gebruiken.");
+define("L_NONEXIST_USER", "%s is niet in de kamer aanwezig.");
+define("L_NONREG_USER", "%s is niet geregisteerd.");
+define("L_NONREG_USER_IP", "Zijn of haar IP is: %s.");
+define("L_NO_KICKED", "%s is moderator of administrator en kan niet worden weggestemd.");
+define("L_NO_BANISHED", "%s is moderator of administrator en kan niet verbannen worden.");
+define("L_SVR_TIME", "Server tijd: ");
+define("L_NO_SAVE", "Geen boodschappen om te bewaren!");
+define("L_NO_ADMIN", "Alleen een administrator kan dit commando gebruiken.");
+define("L_NO_REG_USER", "Om dit commando te gebruiken moet je je registreren.");
 
 // help popup
 define("L_HELP_TIT_1", "lachen");
 define("L_HELP_TIT_2", "Tekst codes voor de berichten");
 define("L_HELP_FMT_1", "Je kan de tekst vet, cursief en onderstrepen in een bericht in de HTML codes zoals &lt;B&gt; &lt;/B&gt;, &lt;I&gt; &lt;/I&gt; of &lt;U&gt; &lt;/U&gt; tags.<br />Ter voorbeeld, &lt;B&gt;deze tekst&lt;/B&gt; wordt <B>deze tekst</B>.");
 define("L_HELP_FMT_2", "Om een link te maken (voor e-mail of URL) in jouw bericht, kun je jou adres zonder alle tags in te voeren. De URL wordt dan automatisch aangemaakt.");
-define("L_HELP_TIT_3", "Commando&acute;s");
-define("L_HELP_NOTE", "Alle commando&acute;s zijn in het Engels!");
+define("L_HELP_TIT_3", "Commando’s");
+define("L_HELP_NOTE", "Alle commando’s zijn in het Engels!");
 define("L_HELP_USR", "gebruiker");
 define("L_HELP_MSG", "bericht");
 define("L_HELP_ROOM", "kamer");
@@ -175,13 +198,13 @@ define("L_HELP_CMD_1b", "herlaad het berichtenvenster met aantal berichten dat g
 define("L_HELP_CMD_2a", "Tussenpozen voor het bijwerken van de lijst (in seconden).<br />Als n niet opgegeven of als kleiner dan 3, verspringt het tussen geen bijwerken en bijwerken om de tien seconden.");
 define("L_HELP_CMD_2b", "Tussenpozen voor het bijwerken van de lijst (in seconden).<br />Als n niet opgegeven of als kleiner dan 3, verspringt het tussen geen bijwerken en bijwerken om de tien seconden.");
 define("L_HELP_CMD_3", "Keerom de bericht volgorde (niet in alle browsers).");
-define("L_HELP_CMD_4", "Ga naar een andere ruimte en maak hem indien nodig automatisch aan (als je dat mag tenminste).<br />n is 0 voor een priv&eacute; ruimte en 1 voor een openbare, standaard is 1 (openbaar).");
+define("L_HELP_CMD_4", "Ga naar een andere ruimte en maak hem indien nodig automatisch aan (als je dat mag tenminste).<br />n is 0 voor een privé ruimte en 1 voor een openbare, standaard is 1 (openbaar).");
 define("L_HELP_CMD_5", "Verlaat het chatten, eventueel met achterlaten van een bericht.");
 define("L_HELP_CMD_6", "Vermijdt het tonen van de berichten van een gebruiker als de nickname is aangegeven.<br />Zet het negeren uit voor een gebruiker als nick en - beiden zijn aangegeven, voor alle gebruikers als - is aangegeven maar de nick niet.<br />Als geen optie is gegeven laat dit commando een venster zien met alle genegeerde nicks.");
 define("L_HELP_CMD_7", "Haal de vorige regel terug (commando of bericht).");
 define("L_HELP_CMD_8", "De tijd voor het bericht weglaten of laten zien.");
 define("L_HELP_CMD_9", "Schop een gebruiker van de chatbox. Deze commando kan alleen gebruikt worden door de administrator of moderator.<br />Met de optie , [".L_HELP_REASON."] een rede op te geven van de verwijdering (reden).");
-define("L_HELP_CMD_10", "Stuur een priv&eacute; bericht naar de gespecificeerde gebruiker (andere gebruikers krijgen het niet te zien).");
+define("L_HELP_CMD_10", "Stuur een privé bericht naar de gespecificeerde gebruiker (andere gebruikers krijgen het niet te zien).");
 define("L_HELP_CMD_11", "Laat de informatie zien van gekozen gebruiker.");
 define("L_HELP_CMD_12", "Popup venster om gebruikersprofiel aan te passen.");
 define("L_HELP_CMD_13", "Schakel tussen andere gebruikers, uitloggen van een bestaande kamer.");
@@ -190,11 +213,11 @@ define("L_HELP_CMD_15", "verwijder alle berichten en laat alleen de laatste 5 zi
 define("L_HELP_CMD_16", "bewaar de laatste n berichten (mededelingen niet meegeteld) in een HTML file. als n niet is ingesteld, zullen alle boodschappen worden bewaard.");
 define("L_HELP_CMD_17", "hiermee kan de admin een boodschap sturen aan alle gebruikers in een ruimte.");
 define("L_HELP_CMD_18", "stel voor aan een andere gebruiker in een andere ruimte om bij jou te komen.");
-define("L_HELP_CMD_19", "staat een administrator of moderator om te \"verbannen\" van een gebruiker op een door de administrator ingestelde tijd..<br />om een gebruiker van de chat te bannen en niet alleen van een ruimte gebruik dan het &acute;*&acute; teken.<br />Met de optie , [".L_HELP_REASON."] een reden op te geven van de verbannen (reden).");
+define("L_HELP_CMD_19", "staat een administrator of moderator om te \"verbannen\" van een gebruiker op een door de administrator ingestelde tijd..<br />om een gebruiker van de chat te bannen en niet alleen van een ruimte gebruik dan het ’*’ teken.<br />Met de optie , [".L_HELP_REASON."] een reden op te geven van de verbannen (reden).");
 define("L_HELP_CMD_20", "Vertel wat je doet zonder jezelf prijs te geven.");
 define("L_HELP_CMD_21", "Dit laat iedereen zien in de ruimte en iedereen die jou een bericht stuurt<br /> Dat je afwezig bent van je pc, als je weer terug komt kun je gewoon beginnen met typen.");
 define("L_HELP_CMD_22", "Stuurt een buzzer aan de ruimte met eventueel een boodschap<br />- gebruik:<br />- oude boodschap: \"/buzz\" of \"/buzz en dan boodschap\" - dit speelt de vooraf ingestelde tune dat is ingesteld in het Admin paneel;<br />- extern gebruik: \"/buzz ~geluidsnaam\" of \"/buzz ~geluidsnaam en de boodschap\" - deze speelt dan de geluidsnaam.wav vanaf de plus/sounds folder; denk eraan dat het teken \"~\" vooraan het geluidsfragment moet staan. ");
-define("L_HELP_CMD_23", "Stuur een <i>fluister</i> (priv&eacute; bericht). het bericht zal altijd aankomen ook als de geadresseerde niet aanwezig is, of in een andere ruimte.");
+define("L_HELP_CMD_23", "Stuur een <i>fluister</i> (privé bericht). het bericht zal altijd aankomen ook als de geadresseerde niet aanwezig is, of in een andere ruimte.");
 define("L_HELP_CMD_24", "Gebruik: De uitdrukking voor het onderwerp voor de ruimtes moeten minimaal 2 woorden bevatten.<br />dit commando veranderd het onderwerp van de huidige ruimte. Probeer niet om onderwerpen van andere gebruikers te onderdruken. Gebruik belangrijke onderwerpen.<br />Standaard, dit is een moderator/admin commando.<br />gebruik \"/topic top reset\" dit commado zal het huidige onderwerp wissen en terug zetten naar het standaard onderwerp.<br />Optioneel, \"/topic * {onderwerp}\" doet precies hetzelfde alleen nu in alle ruimtes (gemeenschappelijk onderwerp en gemeenschappelijk onderwerp reset).");
 define("L_HELP_CMD_25", "Een spel met dobbelstenen.<br />Gebruik: /dice of /dice [n];<br />n kan elke waarde zijn <b>tussen 1 en %s</b> (deze waarde bepaald het aantal dobbelstenen). Als er geen waarde word gekozen zal het standaard aantal worden gebruik.");
 define("L_HELP_CMD_26", "dit is een meer ingewikkelde versie van het commando /dice (dobbelstenen).<br />gebruik: /{n1}d[n2] of /{n1}d;<br />n1 Kan elke waarde zijn <b>tussen 1 en %s</b> (deze waarde is het aantal wordpen ).<br />n2 kan elke waarde zijn <b>tussen 1 en %s</b> (it represents the number of rolling dices per throw).");
@@ -208,7 +231,7 @@ define("L_HELP_CMD_33", "veranderd de grote van de letters door de gebruikers ge
 define("L_HELP_ETIQ_1", "Chat regels");
 define("L_HELP_ETIQ_2", "we willen deze site leuk en netjes houden, dus graag de volgende regels volgen. als je je niet aan de regels kunt houden loop je kans door een moderator of administrator eruit gegooid te worden of zelfs geband.<br /><br />Dank u wel,");
 define("L_HELP_ETIQ_3", "Onze chat regels");
-define("L_HELP_ETIQ_4", "Ga niet &quot;spammen&quot; door bijvoorbeeld constant onzin te typen.</li>
+define("L_HELP_ETIQ_4", "Ga niet \"spammen\" door bijvoorbeeld constant onzin te typen.</li>
 <li>Gebruik geen rare teksten zoals HaLlO AllEmAl.</li>
 <li>Let erop dat je caps uitstaan (hoofdletters) dit word gezien als schreeuwen.</li>
 <li>Houdt er rekening mee dat er mensen van over de hele wereld hier kunnen chatten, hou er dus rekening mee dat er verschillende geloven kunnen zijn, respecteer ook deze mensen.</li>
@@ -273,9 +296,11 @@ define("L_HELP_IMG", "volledige url adres van de foto/plaatje");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s is geen moderator meer voor de kamers van deze chatbox.");
+define("L_IS_NO_MODERATOR", "%s is geen moderator.");
+define("L_ERR_IS_ADMIN", "%s is de administrator!\\nje kunt zijn rechten niet wijzigen.");
 
 // Info mod by Ciprian - displays a list of all the features & mods, including Bot's name, on the welcome page
-define("INFO_CMDS", "<span style=\"color:orange\">Extra commando&acute;s beschikbaar:</span>".CMDS.".");
+define("INFO_CMDS", "<span style=\"color:orange\">Extra commando’s beschikbaar:</span>".CMDS.".");
 define("INFO_MODS", "<span style=\"color:orange\">Extra onderdelen beschikbaar:</span>".MODS.".");
 define("INFO_BOT", "<span style=\"color:orange\">Onze beschikbare bot is: </span><u>".C_BOT_NAME."</u>.");
 
@@ -290,7 +315,7 @@ define("L_PRO_6", "uw naam/text kleuren");
 // Avatar mod
 define("L_ERR_AV", "verkeerd adres.");
 define("L_TITLE_AV", "uw huidige avatar: ");
-define("L_CHG_AV", "klik &acute;verander&acute; het profiel<br />om uw Avatar op te slaan.");
+define("L_CHG_AV", "klik ’verander’ het profiel<br />om uw Avatar op te slaan.");
 define("L_SEL_NEW_AV", "Selecteer een nieuwe Avatar");
 define("L_EX_AV", "(voorbeeld: http://mysite/images/mypic.gif):");
 define("L_URL_AV", "URL: ");
@@ -299,21 +324,28 @@ define("L_CANCEL", "Annuleren");
 define("L_CLICK", "Klik hier");
 
 // PlusBot bot mod (based on Alice bot)
-define("BOT_TIPS", "TIPS: Onze bot is actief in de ruimtes, om te praten, type <b>hello ".C_BOT_NAME.'</b>. om te stoppen, type: <b>bye '.C_BOT_NAME.'</b>. (private: /to <b>'.C_BOT_NAME.'</b> Message)'); //make sure uw translation don't go too long here; it must fit to one line on the banner (under topic)
-define("BOT_PRIV_TIPS", "TIPS: Onze bot is actief in de ruimtes %s. u kunt priv&eacute; met de bot chatten. (commando: /wisp <b>".C_BOT_NAME."</b> Message)"); //make sure uw translation don't go too long here; it must fit to one line on the banner (under topic)
-define("BOT_PRIVONLY_TIPS", "TIPS: Onze bot is niet publiek aanwezig. alleen priv&eacute; gesprekken mogelijk. (commands: /to <b>".C_BOT_NAME."</b> Message or /wisp <b>".C_BOT_NAME."</b> Message)"); //make sure uw translation don't go too long here; it must fit to one line on the banner (under topic)
+define("BOT_TIPS", "TIPS: Onze bot is actief in de ruimtes, om te praten, type <b>hello ".C_BOT_NAME."</b>. om te stoppen, type: <b>bye ".C_BOT_NAME."</b>. (private: /to <b>".C_BOT_NAME."</b> Message)"); //make sure uw translation don't go too long here; it must fit to one line on the banner (under topic)
+define("BOT_PRIV_TIPS", "TIPS: Onze bot is actief in de ruimtes %s. u kunt privé met de bot chatten. (commando: /wisp <b>".C_BOT_NAME."</b> Message)"); //make sure uw translation don't go too long here; it must fit to one line on the banner (under topic)
+define("BOT_PRIVONLY_TIPS", "TIPS: Onze bot is niet publiek aanwezig. alleen privé gesprekken mogelijk. (commands: /to <b>".C_BOT_NAME."</b> Message or /wisp <b>".C_BOT_NAME."</b> Message)"); //make sure uw translation don't go too long here; it must fit to one line on the banner (under topic)
+define("BOT_STOP_ERROR", "Bot niet aanwezig in deze ruimte!");
+define("BOT_START_ERROR", "Bot aanwezig in deze ruimte!");
+define("BOT_DISABLED_ERROR", "Bot is uitgeschakeld!");
 
 // Dice v.1, v.2 and v.3 modes
 define("DICE_RESULTS", "heeft de dobbelstenen gegooid:");
+define("DICE_WRONG", "Geef aan hoeveel dobbelstenen\\n(kies a nummer tussen 1 en ".MAX_ROLLS.").\\n type /dice aantal dobbelstenen ".MAX_ROLLS." dices.");
+define("DICE2_WRONG", "De tweede waarde moet tussen 1 en ".MAX_ROLLS.".\\nleeg om ze allemaal te gebruiken ".MAX_ROLLS." dices\\n(e.g. /".MAX_DICES."d of /".MAX_DICES."d".MAX_ROLLS.").");
+define("DICE2_WRONG1", "De eerste waarde moet tussen 1 en ".MAX_DICES.".\\n(e.g. /".MAX_DICES."d of /".MAX_DICES."d".MAX_ROLLS.").");
+define("DICE3_WRONG", "De tweede waarde moet tussen 1 en ".MAX_ROLLS.".\\nleeg om ze allemaal te gebruiken ".MAX_ROLLS." dices\\n(e.g. /d50 of /d100t".MAX_ROLLS.").");
 
 // Log mod by Ciprian
 define("L_ARCHIVE", "Open archieven");
 
 // Private Message Popup mod by Ciprian
-define("L_REG_POPUP", "popups voor priv&eacute; berichten");
-define("L_PRIV_POST_MSG", "stuur een priv&eacute; berichten!");
-define("L_PRIV_MSG", "Nieuwe priv&eacute;bericht ontvangen!");
-define("L_PRIV_MSGS", "nieuwe priv&eacute;bericht ontvangen!");
+define("L_REG_POPUP", "popups voor privé berichten");
+define("L_PRIV_POST_MSG", "stuur een privé berichten!");
+define("L_PRIV_MSG", "Nieuwe privébericht ontvangen!");
+define("L_PRIV_MSGS", "nieuwe privébericht ontvangen!");
 define("L_PRIV_MSGSa", "Hier zijn de eerste 10 berichtenen!<br />gebruik de link onderaan om de rest te zien.");
 define("L_PRIV_MSG1", "Van:");
 define("L_PRIV_MSG2", "kamer:");
@@ -323,6 +355,10 @@ define("L_PRIV_MSG5", "geplaatst:");
 define("L_PRIV_REPLY", "Beantwoord");
 define("L_PRIV_READ", "klik op de sluiten link om alles als gelezen te markeren!");
 define("L_PRIV_POPUP", "Je kunt deze popup functie altijd aan of uit zetten<br />door uw <a href=\"#\" onClick=\"window.parent.runCmd('profile',''); return false;\" onMouseOver=\"window.status='Instellingen veranderen.'; return true\">Profiel</a> te raadplegen (alleen geregistreerde gebruikers)");
+define("L_NOT_ONLINE", "%s is niet online.");
+define("L_PRIV_NOT_ONLINE", "%s is niet online,\\nMaar zal uw boodschap ontvangen wanneer deze weer inlogt.");
+define("L_PRIV_NOT_INROOM", "%s is niet in deze ruimte.\\nals je deze gebruiker toch een boodschap wil sturen,\\ngebruik het commando: /wisp %s boodschap.");
+define("L_PRIV_AWAY", "%s is afwezig,\\nmaar zal wel je boodschap ontvangen\\nals deze terug komt.");
 
 // Color Input Box mod by Ciprian
 define("L_COLOR_HEAD_COLF_SETTINGS", "".COLOR_FILTERS == 1 ? "Aan " : "Uit"."");
@@ -342,6 +378,11 @@ define("L_COL_HELP_P3a", "De standaard Kleuris <u><SPAN style=\"color:".COLOR_CD
 define("L_COL_HELP_USER_STATUS", "Uw status");
 define("L_COL_TUT", "Gebruikend van de kleuren tekst raster");
 
+// Alert messages on errors for Color Input Box mod by Ciprian
+define("COL_ERROR_BOX_MODA", "Alleen een admin kan gebruik maken van: ".COLOR_CA." color!\\n\\nUw tekst kleur reset naar ".COLOR_CM."!\\n\\nKies een andere kleur.");
+define("COL_ERROR_BOX_USRA", "Alleen een admin kan gebruik maken van: ".COLOR_CA." color!\\n\\nGebruik geen ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1.".\\n\\nDze zijn gereserveerd voor admin en mods!\\n\\nUw tekst kleur reset naar ".COLOR_CD."!\\n\\nKies een andere kleur.");
+define("COL_ERROR_BOX_USRM", "Je moet een moderator zijn om gebruik te maken van ".COLOR_CM." color!\\n\\nGebruik geen ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1.".\\n\\nDze zijn gereserveerd voor admin en mods!\\n\\nUw tekst kleur reset naar ".COLOR_CD."!\\n\\nKies een andere kleur.");
+
 // Chat Activity displayed on remote web pages
 define("NB_USERS_IN","gebruikers zijn ".LOGIN_LINK."aan het chatten</A> op dit moment.</td></tr>");
 define("USERS_LOGIN","1 gebruiker is ".LOGIN_LINK."aan het chatten</A> op dit moment.</td></tr>");
@@ -356,5 +397,39 @@ define("WELCOME_MSG_NOSOUND", "Welkom op deze chatbox, wees netjes en aardig voo
 define("L_RELOAD_CHAT", "De instellingen van deze chatserver zijn zojuist veranderd. Om fouten te voorkomen graag op F5 drukken of uitloggen en weer opnieuw inloggen.");
 
 // Extra options by Ciprian
-define("L_EXTRA_OPT", "Extra Optie&acute;s");
-?>
+define("L_EXTRA_OPT", "Extra Optie’s");
+
+//PM control by Ciprian
+define("PM_DISABLED_ERROR", "Fluisteren (Privé berichten)\\nis uitgeschakeld in deze chat.");
+
+//Size command error by Ciprian
+define("L_ERR_SIZE", "De grote van de letters kunnen alleen\\nnul (zijn voor een reset) of tussen 7 en 15");
+
+// Week days for status worldtime by Ciprian
+define("L_MON", "Ma"); //Maandag
+define("L_TUE", "Di"); //Dinsdag
+define("L_WED", "Wo"); //Woensdag
+define("L_THU", "Do"); //Donderdag
+define("L_FRI", "Vr"); //Vrijdag
+define("L_SAT", "Za"); //Zaterdag
+define("L_SUN", "Zo"); //Zondag
+
+// Password reset form by Ciprian
+define("L_PASS_0", "Forumulier verander paswoord");
+define("L_PASS_1", "Je geheime vraag");
+define("L_PASS_2", "Wat was je eerste auto?"); // Don't change this question! Just translate it!
+define("L_PASS_3", "Naam van je lievelings dier?"); // Don't change this question! Just translate it!
+define("L_PASS_4", "Wat is je favoriete drankje?"); // Don't change this question! Just translate it!
+define("L_PASS_5", "Wat is je geboortedatum?"); // Don't change this question! Just translate it!
+define("L_PASS_6", "Jou geheime antwoord");
+define("L_PASS_7", "Verander paswoord");
+define("L_PASS_8", "Je paswoord is succesvol veranderd.");
+define("L_PASS_9", "Jou nieuwe paswoord om de chat binnen te gaan.");
+define("L_PASS_11", "Welkom terug bij onze chat server!");
+define("L_PASS_12", "Kies je vraag ...");
+define("L_ERR_PASS_1", "Verkeerde gebruikersnaam. Kies die van jou.");
+define("L_ERR_PASS_2", "Verkeerde email. Probeer opnieuw!");
+define("L_ERR_PASS_3", "Verkeerde geheime vraag.<br />Antwoord één van de onderstaande!");
+define("L_ERR_PASS_4", "Verkeerde  geheime antwoord. Probeer opnieuw!");
+define("L_ERR_PASS_5", "Je hebt nog niet de juiste privé/geheime data ingesteld.");
+define("L_ERR_PASS_6", "Je hebt nog niet jou privé/geheime data ingesteld.<br />Je kan niet dit formulier gebruiken.<br />Neem contact op met de admin!");?>

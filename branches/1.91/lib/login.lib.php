@@ -29,7 +29,7 @@ if ((isset($pmc_username) && $pmc_username != "") && (isset($pmc_password) && $p
 			// Ensure the one who lauch the admin.php script is really admin
 			if (isset($MUST_BE_ADMIN) && $perms != "admin")
 			{
-				$Error = utf8_encode(L_ERR_USR_11);
+				$Error = L_ERR_USR_11;
 			}
 			else
 			{
@@ -79,7 +79,7 @@ $Focus = ((isset($LIMIT) && $LIMIT) || (isset($FOCUS) && $FOCUS)) ? "pmc_passwor
 if (!isset($FontName)) $FontName = "";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
 <TITLE><?php echo(APP_NAME); ?></TITLE>
@@ -92,6 +92,18 @@ function get_focus()
 	document.forms['LoginForm'].elements['<?php echo($Focus); ?>'].focus();
 }
 // -->
+
+	// Open popups for registration stuff
+	function reg_popup(name)
+	{
+		window.focus();
+		url = "<?php echo($ChatPath); ?>" + name + ".php?L=<?php echo($L); ?>&Link=1";
+		pop_width = 400;
+		pop_height = 260;
+		param = "width=" + pop_width + ",height=" + pop_height + ",resizable=yes,scrollbars=yes";
+		name += "_popup";
+		window.open(url,name,param);
+	}
 </SCRIPT>
 </HEAD>
 
@@ -128,10 +140,16 @@ if(isset($Error))
 			</TD>
 		</TR>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_1); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_1); ?> :	</TD>
 			<TD VALIGN="TOP">
 				<INPUT TYPE="password" NAME="pmc_password" SIZE=11 MAXLENGTH=16 VALUE="<?php if (isset($pmc_password)) echo(htmlspecialchars(stripslashes($pmc_password))); ?>">
-			</TD>
+				</TD>
+		</TR>
+		<TR>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"></TD>
+			<TD VALIGN="TOP">
+			<A HREF="<?php echo($ChatPath); ?>pass_reset.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('pass_reset'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_PASS_7); ?>.'; return true;"><?php echo(L_PASS_7); ?></A>
+				</TD>
 		</TR>
 		</TABLE>
 		<P>

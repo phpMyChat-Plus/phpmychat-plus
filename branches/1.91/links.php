@@ -26,7 +26,7 @@ $Ver="";
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 <head>
 <title>Posted Links</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">

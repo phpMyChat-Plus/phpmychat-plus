@@ -96,7 +96,7 @@ $Add2Body .= (isset($ReqVar) ? "&ReqVar=$ReqVar" : "");
 $URLQueryBody = "From=$From&What=Body&L=$L&pmc_username=$pmc_username&pmc_password=$PWD_Hash&sheet=$sheet".$Add2Body;
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
 <TITLE><?php echo(APP_NAME); ?></TITLE>

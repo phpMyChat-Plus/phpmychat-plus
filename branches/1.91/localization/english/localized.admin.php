@@ -1,10 +1,10 @@
 <?php
 // File : english/localized.admin.php - plus version (11.06.2007 - rev.9)
-// Original file by Lo�c Chapeaux <lolo@phpheaven.net> & Dean Collins <joelford@pacbell.net>
+// Original file by Loďc Chapeaux <lolo@phpheaven.net> & Dean Collins <joelford@pacbell.net>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 
 // extra header for charset
-$Charset = "iso-8859-1";
+$Charset = "utf-8";
 
 // medium font size in pt.
 $FontSize = 10;
@@ -45,7 +45,7 @@ define("A_SHEET2_2", "IP");
 define("A_SHEET2_3", "Concerned rooms");
 define("A_SHEET2_4", "Until");
 define("A_SHEET2_5", "no end");
-define("A_SHEET2_6", "Rooms are separated by commas without spaces (,) if there are less than 4, else the '<B>&nbsp;*&nbsp;</B>' sign banish from all rooms.");
+define("A_SHEET2_6", "Rooms are separated by commas without spaces (,) if there are less than 4, else the ’<B>*</B>’ sign banish from all rooms.");
 define("A_SHEET2_7", "Remove banishment for checked user(s)");
 define("A_SHEET2_8", "There are no banished users.");
 define("A_SHEET2_9", "Reason (optional)");
@@ -57,7 +57,7 @@ define("A_SHEET3_3", "Clean selected rooms");
 define("A_SHEET3_4", "There are no rooms to clean.");
 
 // Frame for sending mails
-define("A_SHEET4_0", "You haven't set the admin email in Configuration tab.");
+define("A_SHEET4_0", "You haven’t set the admin email in Configuration tab.");
 define("A_SHEET4_1", "Send e-mails");
 define("A_SHEET4_2", "To:");
 define("A_SHEET4_3", "Select all");

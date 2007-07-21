@@ -101,14 +101,15 @@ if ($UR == "")
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <?php
-$CellAlign = ($Charset == "windows-1256" ? "RIGHT" : "LEFT");
+$CellAlign = ($Align == "right" ? "RIGHT" : "LEFT");
 ?>
-<HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 <HEAD>
         <TITLE>banner</TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <HEAD>
-<BODY class="frame"><div>
+<BODY class="frame">
+	<div>
 			<div style="float:<?php echo($CellAlign); ?>;">
 			<FONT size="2"><I><B>Welcome to <?php echo ($Room) ?>!</B> Topic:&nbsp;</I></FONT></div>
 			<div style="float:<?php echo($CellAlign); ?>;">

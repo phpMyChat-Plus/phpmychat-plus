@@ -16,15 +16,22 @@ if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
 require("./${ChatPath}/lib/database/".C_DB_TYPE.".lib.php");
 require("./${ChatPath}/lib/clean.lib.php");
 
+
 	if ($Private)
 	{
-		$query = "SELECT DISTINCT username, latin1, room, r_time FROM ".C_USR_TBL;
+		if ($sort_order == "1")	$ordquery = "username";
+		else $ordquery = "r_time";
+		// Ghost Control mod by Ciprian
+		$Hide = (C_HIDE_ADMINS && C_HIDE_MODERS) ? "WHERE (status != 'a' OR email = 'bot@bot.com') AND status != 'm'" : (C_HIDE_ADMINS ? "WHERE (status != 'a' OR email = 'bot@bot.com')" : (C_HIDE_MODERS ? "WHERE status !='m'" : ""));
+		$query = "SELECT DISTINCT username, latin1, room, r_time FROM ".C_USR_TBL." ORDER BY ".$ordquery."";
 	}
 	else
 	{
 		if ($sort_order == "1")	$ordquery = "username";
 		else $ordquery = "r_time";
-		$query = "SELECT DISTINCT u.username, u.latin1, u.room, u.r_time FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room AND m.type = 1 ORDER BY ".$ordquery."";
+		// Ghost Control mod by Ciprian
+		$Hide = (C_HIDE_ADMINS && C_HIDE_MODERS) ? "AND (u.status != 'a' OR u.email = 'bot@bot.com') AND u.status != 'm'" : (C_HIDE_ADMINS ? "AND (u.status != 'a' OR u.email = 'bot@bot.com')" : (C_HIDE_MODERS ? "AND u.status !='m'" : ""));
+		$query = "SELECT DISTINCT u.username, u.latin1, u.room, u.r_time FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room AND m.type = 1 ".$Hide." ORDER BY ".$ordquery."";
 	}
 	$DbLink = new DB;
 	$DbLink->query($query);

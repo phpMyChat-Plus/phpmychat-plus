@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.tutorial.php - plus version (02.05.2007 - rev.4)
+// File : dutch/localized.tutorial.php - plus version (10.07.2007 - rev.6)
 // Original translation for the Plus version by Bert Moorlag <berbia@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -22,7 +22,7 @@ if (isset($_COOKIE["CookieStatus"])) $CookieStatus = $_COOKIE["CookieStatus"];
 
 <HEAD>
 <TITLE>Nederlands - Handleiding voor <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?></TITLE>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
 <STYLE>
 A.topLink
 {
@@ -49,7 +49,7 @@ A.topLink:hover, A.topLink:active
 <P></P>
 <TABLE BORDER="5" CELLPADDING="5" ALIGN="center">
 <TR>
-	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- Handleiding voor <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -</B></FONT></TD>
+	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- Handleiding voor <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -</FONT><br /><I>Vertaling door Bert Moorlag - Vlissingen, Nederland, &copy; 2007<?php echo((date(Y)>"2007") ? "-".date(Y) : ""); ?></I></B></TD>
 </TR>
 </TABLE><br /><br />
 <P><A NAME="top"></P>
@@ -121,7 +121,7 @@ if (C_HTML_TAGS_KEEP != "none")
 <!-- Color Input Box mod by Ciprian end -->
 &nbsp&nbsp&nbsp&nbsp<A HREF="#invite" CLASS="topLink">Een gebruiker uitnodigen voor jou chatroom</A><br />
 &nbsp&nbsp&nbsp&nbsp<A HREF="#changeroom" CLASS="topLink">Veranderen van kamer</A><br />
-&nbsp&nbsp&nbsp&nbsp<A HREF="#private" CLASS="topLink">Priv&eacute; berichten</A><br />
+&nbsp&nbsp&nbsp&nbsp<A HREF="#private" CLASS="topLink">Privé berichten</A><br />
 &nbsp&nbsp&nbsp&nbsp<A HREF="#actions" CLASS="topLink">Actie</A><br />
 &nbsp&nbsp&nbsp&nbsp<A HREF="#ignore" CLASS="topLink">Negeer andere gebruikers</A><br />
 &nbsp&nbsp&nbsp&nbsp<A HREF="#whois" CLASS="topLink">Gebruikers informatie</A><br />
@@ -134,7 +134,7 @@ if (C_SAVE != "0")
 };
 ?>
 <P>
-<A HREF="#moderator" CLASS="topLink">Commando&acute;s alleen voor administrator en/of moderators:</A><br />
+<A HREF="#moderator" CLASS="topLink">Commando’s alleen voor administrator en/of moderators:</A><br />
 &nbsp&nbsp&nbsp&nbsp<A HREF="#announce" CLASS="topLink">Verstuur een bekendmaking</A><br />
 &nbsp&nbsp&nbsp&nbsp<A HREF="#kick" CLASS="topLink">Een gebruiker kicken</A><br />
 <?php
@@ -170,7 +170,7 @@ if (C_MULTI_LANG)
 <P>
 <FONT SIZE="+1"><A NAME="login"><B>Login naar chat:</B></A></FONT>
 <P>
-Als je al bent geregistreert, log in door je gebruikersnaam en wachtwoord in te voeren. Selecteer daarna de chat room die je binnen wilt gaan en klik op de '<?php echo(L_SET_14); ?>' knop.<br />
+Als je al bent geregistreert, log in door je gebruikersnaam en wachtwoord in te voeren. Selecteer daarna de chat room die je binnen wilt gaan en klik op de ’<?php echo(L_SET_14); ?>’ knop.<br />
 <?php
 if (C_REQUIRE_REGISTER)
 {
@@ -196,7 +196,7 @@ else
 Als je nog niet hebt geregistreert<?php if (!C_REQUIRE_REGISTER) echo(" en je wilt dit"); ?>, kies de registratie optie. Een klein pop-up venster zal verschijnen.
 <P>
 <UL>
-	<LI>Stap 1, bedenk een gebruikersnaam<?php if (!C_EMAIL_PASWD) echo(" en een paswoord"); ?> voor jezelf door deze in de bijbehorende vakken te typen. De gekozen gebruikersnaam is de naam die automatisch wordt vertoond in de chat room. Je mag geen spaties, komma&acute;s of backslashes (\) gebruiken.
+	<LI>Stap 1, bedenk een gebruikersnaam<?php if (!C_EMAIL_PASWD) echo(" en een paswoord"); ?> voor jezelf door deze in de bijbehorende vakken te typen. De gekozen gebruikersnaam is de naam die automatisch wordt vertoond in de chat room. Je mag geen spaties, komma’s of backslashes (\) gebruiken.
 <?php if (C_NO_SWEAR) echo(" Geen \"vloek woorden\"."); ?>
 	<LI>Stap 2, Vul je voornaam, achternaam en je emailadres in. Om geregistreerd te kunnen chatten, moet dit worden ingevuld. Het geslacht is optineel, om in te vullen.
 	<LI>Als je een eigen website hebt, mag je de URL ook invullen.
@@ -292,7 +292,7 @@ Je kan de chat verlaten door eenvoudig op de "Exit" te klikken. Ook kan je een c
 /exit<br />
 /bye<br />
 /quit<br />
-Deze commando&acute;s kan je samen met een bericht schrijven, voordat je de chat verlaat.
+Deze commando’s kan je samen met een bericht schrijven, voordat je de chat verlaat.
 <I>Voorbeeld :</I> /quit Tot de volgende keer!
 <P>
 Het bericht is dan &quot;Tot de volgende keer!&quot; en daarna wordt je uitgelogd.
@@ -391,10 +391,10 @@ If (C_USE_AVATARS) {
 ?>
 	<hr />
 	<FONT SIZE="+1"><A NAME="avatars"><B>Avatars:</B></A></FONT>
-<P>Avatars are graphic image icons that represent chatters. Only registered users may change their avatar. Registered users may open their Profile (see /profile command) and click on the avatar image to select it from a menu of images, or to input a URL to a graphic image available anywhere on the internet (only images publicly accessible, not password protected sites). Images should be browser-viewable (.gif, .jpg, etc. ) 32 x 32 pixel graphic files for best display.
-<P>Clicking on a person's avatar in the message frame will popup up that person's profile (see <A HREF="#whois">/whois command</A>).
-Clicking on your own avatar on the user's list  will invoke the /profile command, if you are registered.
-If you are not registered, clicking on your own (system's default) avatar will bring up an alert to encourage you to register.
+<P>Avatars zijn afbeeldingen hoe de gebruiker zich voor stelt. Alleen geregistreerde gebruikers kunnen hun avatar veranderen. Geregistreerde gebruikers kunnen hun Profiel openen (zie /profile command) klik daarna op de avatar afbeelding of een andere avatar te kunnen selecteren uit de keuze menu, of om een URL in te vullen, deze moet dan wel publiekelijk zijn op het internet(dus niet met een paswoord beveiligde site). De afbeelding moet geschikt zijn voor browsers (.gif, .jpg, etc. ) en de grootte 32 x 32 pixel is het beste formaat om te laten zien.
+<P>Door op iemand zijn avatar te klikken, zal er een gebruikers profiel pop-up venster verschijnen (zie <A HREF="#whois">/whois command</A>).
+Op je eigen avatar klikken in de gebruikerslijst krijg je automatisch de /profile command oproepen, mits je geregistreerd bent.
+Ben je niet geregistreerd, klik dan op je eigen avatar( default) zal een bericht laten verschijnen om je aan te moedigen toch te laten registreren.
   <P ALIGN="right"><A HREF="#top">Naar boven</A></P>
 <P>
 <?php
@@ -500,11 +500,11 @@ if (C_VERSION == "2")
 {
 	echo(!C_REQUIRE_REGISTER ? "<P>Als je een geregistreerde gebruiker bent, dan" : "<br /><P>Jij");
 	?>
-	 kan dan zelf een kamer cre&euml;eren met dezelfde commando. Maar dan moet je deze kamer specificeren met: 0 staat voor priv&eacute;, 1 voor iedereen (standaard).
+	 kan dan zelf een kamer creëeren met dezelfde commando. Maar dan moet je deze kamer specificeren met: 0 staat voor privé, 1 voor iedereen (standaard).
 	<P>
 	<I>Bijvoorbeeld:</I> /join 0 #MyRoom
 	<P>
-	cre&euml;ert een priv&eacute; kamer (vanuit gegaan dat er niet al een publieke kamer met dezelfde naam is gemaakt) genaamd MyRoom en zet jou daarin.
+	creëert een privé kamer (vanuit gegaan dat er niet al een publieke kamer met dezelfde naam is gemaakt) genaamd MyRoom en zet jou daarin.
 	<P>
 	Namen van een kamer mogen geen komma of een backslash (\) bevatten.<?php if (C_NO_SWEAR) echo(" Verboden woorden zijn \"vloekwoorden\"."); ?>
 	<?php
@@ -539,15 +539,15 @@ Door op een bepaalde naam van een gebruiker te klikken (rechts van het scherm) z
 <hr />
 
 <P>
-<FONT SIZE="+1"><A NAME="private"><B>Priv&eacute; berichten:</B></A></FONT>
+<FONT SIZE="+1"><A NAME="private"><B>Privé berichten:</B></A></FONT>
 <P>
-Om een priv&eacute; bericht te verzenden naar een gebruiker in jou chatroom, typ het commando <B> "/msg username messagetext" of "/to username messagetext"</B> zonder &quot;.
+Om een privé bericht te verzenden naar een gebruiker in jou chatroom, typ het commando <B> "/msg username messagetext" of "/to username messagetext"</B> zonder &quot;.
 <P>
 <I>Bijvoorbeeld, wanneer Jack een gebruiker is:</I> /msg Jack Hallo, hoe gaat het met je?
 <P>
 het bericht zal alleen zichtbaar zijn voor Jack en jij, en niet voor de andere gebruikers.
 <P>
-Merk op dat wanneer je op een nick klikt of een bericht in het hoofdscherm, dat de priv&eacute; commando automatisch wordt toegepast.
+Merk op dat wanneer je op een nick klikt of een bericht in het hoofdscherm, dat de privé commando automatisch wordt toegepast.
 <br /><P ALIGN="right"><A HREF="#top">Naar boven</A></P>
 <P>
 <hr />
@@ -592,7 +592,7 @@ Om publieke informatie te zien van een gebruiker, typ het commando <B>"/whois us
 <P>
 <I>Bijvoorbeeld:</I> /whois Jack
 <P>
- &acute;Jack&acute; is de gebruikersnaam. Deze commando zal een nieuwe venster openen, waarin de gebruikers gegevens staan van de gebruiker. Test het met je eigen naam om te zien hoe jou profiel eruit zal zien, zoals anderen die krijgen te zien als ze deze commando invoeren.
+ ’Jack’ is de gebruikersnaam. Deze commando zal een nieuwe venster openen, waarin de gebruikers gegevens staan van de gebruiker. Test het met je eigen naam om te zien hoe jou profiel eruit zal zien, zoals anderen die krijgen te zien als ze deze commando invoeren.
 <br /><P ALIGN="right"><A HREF="#top">Naar boven</A></P>
 <P>
 <hr />
@@ -608,7 +608,7 @@ if (C_SAVE != "0")
 	<P>
 	<I>Bijvoorbeeld:</I> /save 5
 	<P>
-	Het getal &acute;5&acute; is het aantal berichten die je wilt opslaan. Als je niet het aantal vermeld, zal er geen beschikbare berichten worden opgeslagen in je account.
+	Het getal ’5’ is het aantal berichten die je wilt opslaan. Als je niet het aantal vermeld, zal er geen beschikbare berichten worden opgeslagen in je account.
 	<br /><P ALIGN="right"><A HREF="#top">Naar boven</A></P>
 	<P>
 	<hr />
@@ -619,7 +619,7 @@ if (C_SAVE != "0")
 
 
 <P>
-<FONT SIZE="+2"><A NAME="moderator"><B><U>Commando&acute;s alleen voor adminstrator en/of moderators </U></B></A></FONT>
+<FONT SIZE="+2"><A NAME="moderator"><B><U>Commando’s alleen voor adminstrator en/of moderators </U></B></A></FONT>
 <P>
 <FONT SIZE="+1"><A NAME="announce"><B>Verstuur een bekendmaking:</B></A></FONT>
 <P>
@@ -653,7 +653,7 @@ if (C_BANISH != "0")
 	<FONT SIZE="+1"><A NAME="banish"><B>Een gebruiker bannen:</B></A></FONT>
 	<P>
 	Moderators kunnen een gebruiker verbannen en de administrator kan gebruikers en een moderator verbannen met het commando <B>ban</B>.<br />
-	De administrator kan ook een gebruiker verbannen die in een andere kamer zit te chatten. Hij kan besluiten om deze gebruiker te bannen voor altijd of voor gedurende de chat in zijn geheel met de &acute;<B>&nbsp;*&nbsp;</B>&acute; instelling dat voor de nicknaam geplaatst moet worden.
+	De administrator kan ook een gebruiker verbannen die in een andere kamer zit te chatten. Hij kan besluiten om deze gebruiker te bannen voor altijd of voor gedurende de chat in zijn geheel met de ’<B>*</B>’ instelling dat voor de nicknaam geplaatst moet worden.
 	<P>
 	<I>Bijvoorbeeld</I>, Jack is de gebruikersnaam om te bannen: <I>/ban Jack</I> of <I>/ban * Jack</I>
 	<br /><P ALIGN="right"><A HREF="#top">Naar boven</A></P>

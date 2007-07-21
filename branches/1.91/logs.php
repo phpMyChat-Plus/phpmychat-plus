@@ -28,12 +28,13 @@ require("config/config.lib.php");
 if (!isset($L)) $L = C_LANGUAGE;
 require("localization/".$L."/localized.chat.php");
 require("lib/release.lib.php");
+include("lib/preg_find.php");
 
 if (C_CHAT_LOGS && (C_SHOW_LOGS_USR || $statusu == "a"))
 {
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 <HEAD>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=<?php echo($Charset); ?>">
 <TITLE><?php echo(APP_NAME); ?> Users Logs Archive</TITLE>
@@ -46,55 +47,52 @@ if (C_CHAT_LOGS && (C_SHOW_LOGS_USR || $statusu == "a"))
 </CENTER>
 <?php
 // Credit for this goes to Ciprian Murariu <ciprianmp@yahoo.com>.
-$yu='./logs/'; #define which year you want to read
-$yearu = opendir($yu); #open directory
-while (false !== ($yru = readdir($yearu)))
+$yu='./logs'; #define which year you want to read
+$yrsu = preg_find('/./', $yu, PREG_FIND_DIRONLY|PREG_FIND_SORTKEYS|PREG_FIND_SORTDESC);
+foreach($yrsu as $yru)
 {
-	if (!eregi("\.html",$yru) && $yru!=='.' && $yru!=='..')
-	{
-		$yeardiru = $yru;
+		$yeardiru = eregi_replace($yu."/",'',$yru);
 		echo("<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table><tr>");
-		echo ("<td valign=top align=center nowrap=\"nowrap\" colspan=5><font size=4 color=red><b>$yru</b></font></td>"); #print name of each file found
-	$mu=$yu.$yeardiru; #define which month you want to read
-	$monthu = opendir($mu); #open directory
-		while (false !== ($mtu = readdir($monthu)))
+		echo ("<td valign=top align=center nowrap=\"nowrap\" colspan=6><font size=4 color=red><b>$yeardiru</b></font></td>"); #print name of each file found
+		$mu=$yu."/".$yeardiru; #define which month you want to read
+		$mtsu = preg_find('/./', $mu, PREG_FIND_DIRONLY|PREG_FIND_RETURNASSOC|PREG_FIND_SORTMODIFIED|PREG_FIND_SORTKEYS|PREG_FIND_SORTDESC);
+		foreach($mtsu as $mtu => $stats)
 		{
-			if (!eregi("\.html",$mtu) && $mtu!=='.' && $mtu!=='..')
+			$monthdiru = eregi_replace($mu."/",'',$mtu);
+					echo("<tr>");
+					echo ("<td valign=top align=left nowrap=\"nowrap\" colspan=6><font size=4 color=green><b>$monthdiru</b></font></td>"); #print name of each file found
+					echo ("<tr><td valign=top align=left nowrap=\"nowrap\">");
+			$du=$yru."/".$monthdiru; #define which month you want to read
+			$dayu = opendir($du); #open directory
+			while (false !== ($dyu = readdir($dayu)))
 			{
-				$monthdiru = $mtu;
-						echo("<tr>");
-						echo ("<td valign=top align=center nowrap=\"nowrap\"><font size=4 color=green><b>$mtu</b></font></td>"); #print name of each file found
-						echo ("<td valign=top align=left nowrap=\"nowrap\">");
-				$du=$yu.$yeardiru."/".$monthdiru; #define which month you want to read
-				$dayu = opendir($du); #open directory
-				while (false !== ($dyu = readdir($dayu)))
+				if (!eregi("\.html",$dyu) && $dyu!=='.' && $dyu!=='..')
 				{
-					if (!eregi("\.html",$dyu) && $dyu!=='.' && $dyu!=='..')
-					{
-						$dayarrayu[]=$dyu;
-			 		}
-			 	}
-				closedir($dayu);
-			  if ($dayarrayu) sort($dayarrayu);
+					$dayarrayu[]=$dyu;
+		 		}
+		 	}
+			closedir($dayu);
+		  if ($dayarrayu)
+		  {
+				sort($dayarrayu);
 				$j=1;
+				echo("<ul>");
 			  foreach ($dayarrayu as $dyu)
 			  {
 					if (eregi(".htm",$dyu)) $dyuhtm=str_replace(".htm","",$dyu);
 					else $dyuhtm=str_replace(".php","",$dyu);
-					$dyuhtm=str_replace($yru.$mtu,"",$dyuhtm);
-					echo ("<li><a href=$du/$dyu?L=$L title=\"Read $dyuhtm $mtu $yru archive\">$dyuhtm</a> (".filesize($du."/".$dyu)." bytes)<br />\n"); #print name of each file found
-					if ($j==7 || $j==14 || $j==21 || $j==28) echo ("<td valign=top align=left nowrap=\"nowrap\">");
+					$dyuhtm=str_replace($yeardiru.$monthdiru,"",$dyuhtm);
+					echo ("<li>&nbsp;&middot;&nbsp;<a href=$du/$dyu?L=$L title=\"Read $dyuhtm $monthdiru $yeardiru archive!\">$dyuhtm</a> (".filesize($du."/".$dyu)." bytes)<br />\n"); #print name of each file found
+					if ($j==5 || $j==10 || $j==15 || $j==20 || $j==25) echo ("</ul><td valign=top align=left nowrap=\"nowrap\"><ul>");
 					$j++;
 				}
-				unset($dayarrayu);
-					echo("</tr>");
+				echo("<ul>");
 			}
-		}
+			unset($dayarrayu);
+			echo("</tr>");
+			}
 		echo("</td></tr></table><br />");
-		closedir($monthu);
-	}
 }
-closedir($yearu);
 ?>
 </BODY>
 </HTML>

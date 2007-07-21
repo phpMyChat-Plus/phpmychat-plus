@@ -32,14 +32,11 @@ header("Cache-Control: no-cache, must-revalidate".$CachePlus);
 header("Pragma: no-cache");
 header("Content-Type: text/html; charset=".$Charset);
 
-// Text direction
-$textDirection = ($Charset == "windows-1256") ? "RTL" : "LTR";
-
 // For translations with an explicit charset (not the 'x-user-defined' one)
 if (!isset($FontName)) $FontName = "";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo($textDirection); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
 <SCRIPT TYPE="text/javascript" LANGUAGE="javascript1.2">
@@ -137,64 +134,35 @@ function special_char2($str,$lang)
 
 $DbLink = new DB;
 
-//** Display users list for the current room **
-if ($sort_order == "1")
-{
+// Ghost Control mod by Ciprian
+$Hide = (C_HIDE_ADMINS && C_HIDE_MODERS) ? " AND (usr.status != 'a' OR reg.email = 'bot@bot.com') AND usr.status != 'm'" : (C_HIDE_ADMINS ? " AND (usr.status != 'a' OR reg.email = 'bot@bot.com')" : (C_HIDE_MODERS ? " AND usr.status !='m'" : ""));
+
+//** Build users list for the current room **
 if (C_DB_TYPE == 'mysql')
 {
 // Modified next line by R Dickow for /away command:
   $currentRoomQuery = 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar '
 						. 'FROM ' . C_USR_TBL . ' usr LEFT JOIN ' . C_REG_TBL . ' reg ON usr.username = reg.username '
-						. 'WHERE usr.room = \'' . $R . '\' '
-						. 'ORDER BY username';
+						. 'WHERE usr.room = \'' . $R . '\'' . $Hide . ' '
+						. 'ORDER BY ' . ($sort_order == "1" ? "username" : "r_time") . '';
 }
 else if (C_DB_TYPE == 'pgsql')
 {
 	$currentRoomQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar '
 						. 'FROM ' . C_USR_TBL . ' usr, ' . C_REG_TBL . ' reg '
-						. 'WHERE usr.room = \'' . $R . '\' AND usr.username = reg.username '
+						. 'WHERE usr.room = \'' . $R . '\'' . $Hide . ' AND usr.username = reg.username '
 						. 'UNION '
 						. 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time,  NULL AS gender '
 						. 'FROM ' . C_USR_TBL . ' usr '
-						. 'WHERE usr.username NOT IN (SELECT reg.username FROM ' . C_REG_TBL . ' reg) AND usr.room = \'' . $R . '\' '
-						. 'ORDER BY username';
+						. 'WHERE usr.username NOT IN (SELECT reg.username FROM ' . C_REG_TBL . ' reg) AND usr.room = \'' . $R . '\'' . $Hide . ' '
+						. 'ORDER BY ' . ($sort_order == "1" ? "username" : "r_time") . '';
 }
 else
 {
 	$currentRoomQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar NULL AS gender '
 						. 'FROM ' . C_USR_TBL . ' usr, ' . C_REG_TBL . ' reg '
-						. 'WHERE usr.room = \'' . $R . '\' '
-						. 'ORDER BY username';
-}
-}
-else
-{
-if (C_DB_TYPE == 'mysql')
-{
-// Modified next line by R Dickow for /away command:
-  $currentRoomQuery = 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar '
-						. 'FROM ' . C_USR_TBL . ' usr LEFT JOIN ' . C_REG_TBL . ' reg ON usr.username = reg.username '
-						. 'WHERE usr.room = \'' . $R . '\' '
-						. 'ORDER BY r_time';
-}
-else if (C_DB_TYPE == 'pgsql')
-{
-	$currentRoomQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar '
-						. 'FROM ' . C_USR_TBL . ' usr, ' . C_REG_TBL . ' reg '
-						. 'WHERE usr.room = \'' . $R . '\' AND usr.username = reg.username '
-						. 'UNION '
-						. 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time,  NULL AS gender '
-						. 'FROM ' . C_USR_TBL . ' usr '
-						. 'WHERE usr.username NOT IN (SELECT reg.username FROM ' . C_REG_TBL . ' reg) AND usr.room = \'' . $R . '\' '
-						. 'ORDER BY r_time';
-}
-else
-{
-	$currentRoomQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar NULL AS gender '
-						. 'FROM ' . C_USR_TBL . ' usr, ' . C_REG_TBL . ' reg '
-						. 'WHERE usr.room = \'' . $R . '\' '
-						. 'ORDER BY r_time';
-}
+						. 'WHERE usr.room = \'' . $R . '\'' . $Hide . ' '
+						. 'ORDER BY ' . ($sort_order == "1" ? "username" : "r_time") . '';
 }
 
 $DbLink->query($currentRoomQuery);
@@ -367,64 +335,35 @@ $DbLink->query("SELECT DISTINCT room FROM ".C_MSG_TBL." WHERE room != '$R' AND t
 if($DbLink->num_rows() > 0)
 {
 	$OthersUsers = new DB;
+	// Ghost Control mod by Ciprian
+	$Hide = (C_HIDE_ADMINS && C_HIDE_MODERS) ? " AND (usr.status != 'a' OR reg.email = 'bot@bot.com') AND usr.status != 'm'" : (C_HIDE_ADMINS ? " AND (usr.status != 'a' OR reg.email = 'bot@bot.com')" : (C_HIDE_MODERS ? " AND usr.status !='m'" : ""));
 	while(list($Other) = $DbLink->next_record())
 	{
-	if ($sort_order == "1")
-	{
 		if (C_DB_TYPE == 'mysql')
 		{
 			$otherRoomsQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar '
 								. 'FROM ' . C_USR_TBL . ' usr LEFT JOIN ' . C_REG_TBL . ' reg ON usr.username = reg.username '
-								. 'WHERE usr.room = \'' . addslashes($Other) . '\' '
-								. 'ORDER BY username';
+								. 'WHERE usr.room = \'' . addslashes($Other) . '\'' . $Hide . ' '
+								. 'ORDER BY ' . ($sort_order == "1" ? "username" : "r_time") . '';
 		}
 		else if (C_DB_TYPE == 'pgsql')
 		{
 			$otherRoomsQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar '
 								. 'FROM ' . C_USR_TBL . ' usr, ' . C_REG_TBL . ' reg '
-								. 'WHERE usr.room = \'' . addslashes($Other) . '\' AND usr.username = reg.username '
+								. 'WHERE usr.room = \'' . addslashes($Other) . '\'' . $Hide . ' AND usr.username = reg.username '
 								. 'UNION '
 								. 'SELECT usr.username, usr.latin1, usr.status, usr.r_time, NULL AS gender '
 								. 'FROM ' . C_USR_TBL . ' usr '
-								. 'WHERE usr.username NOT IN (SELECT reg.username FROM ' . C_REG_TBL . ' reg) AND usr.room = \'' . addslashes($Other) . '\' '
-								. 'ORDER BY username';
+								. 'WHERE usr.username NOT IN (SELECT reg.username FROM ' . C_REG_TBL . ' reg) AND usr.room = \'' . addslashes($Other) . '\'' . $Hide . ' '
+								. 'ORDER BY ' . ($sort_order == "1" ? "username" : "r_time") . '';
 		}
 		else
 		{
 			$otherRoomsQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar NULL AS gender '
 								. 'FROM ' . C_USR_TBL . ' usr, ' . C_REG_TBL . ' reg '
-								. 'WHERE usr.room = \'' . addslashes($Other) . '\' '
-								. 'ORDER BY username';
+								. 'WHERE usr.room = \'' . addslashes($Other) . '\'' . $Hide . ' '
+								. 'ORDER BY ' . ($sort_order == "1" ? "username" : "r_time") . '';
 		}
-	}
-	else
-	{
-		if (C_DB_TYPE == 'mysql')
-		{
-			$otherRoomsQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar '
-								. 'FROM ' . C_USR_TBL . ' usr LEFT JOIN ' . C_REG_TBL . ' reg ON usr.username = reg.username '
-								. 'WHERE usr.room = \'' . addslashes($Other) . '\' '
-								. 'ORDER BY username';
-		}
-		else if (C_DB_TYPE == 'pgsql')
-		{
-			$otherRoomsQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar '
-								. 'FROM ' . C_USR_TBL . ' usr, ' . C_REG_TBL . ' reg '
-								. 'WHERE usr.room = \'' . addslashes($Other) . '\' AND usr.username = reg.username '
-								. 'UNION '
-								. 'SELECT usr.username, usr.latin1, usr.status, usr.r_time, NULL AS gender '
-								. 'FROM ' . C_USR_TBL . ' usr '
-								. 'WHERE usr.username NOT IN (SELECT reg.username FROM ' . C_REG_TBL . ' reg) AND usr.room = \'' . addslashes($Other) . '\' '
-								. 'ORDER BY username';
-		}
-		else
-		{
-			$otherRoomsQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar NULL AS gender '
-								. 'FROM ' . C_USR_TBL . ' usr, ' . C_REG_TBL . ' reg '
-								. 'WHERE usr.room = \'' . addslashes($Other) . '\' '
-								. 'ORDER BY username';
-		}
-	}
 
 		$OthersUsers->query($otherRoomsQuery);
 		if($OthersUsers->num_rows() > 0)
@@ -477,22 +416,22 @@ if($DbLink->num_rows() > 0)
 			{
 				if (COLOR_NAMES)
 				{
-					echo("<a onClick=\"window.parent.send_popup('/wisp ".special_char2($OtherUser,$Latin1)."');\" ".userClass($status)." title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a><br />\n");
+					echo("<a onClick=\"window.parent.send_popup('/wisp ".special_char2($OtherUser,$Latin1)."');\" ".userClass($status)." title=\"Whisper\" onMouseOver=\"window.status='Send a Whisper.'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a><br />\n");
 				}
 				else
 				{
-					echo("<a onClick=\"window.parent.send_popup('/wisp ".special_char2($OtherUser,$Latin1)."');\" ".userClass($status)." title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\">".special_char($OtherUser,$Latin1,$status)."</a><br />\n");
+					echo("<a onClick=\"window.parent.send_popup('/wisp ".special_char2($OtherUser,$Latin1)."');\" ".userClass($status)." title=\"Whisper\" onMouseOver=\"window.status='Send a Whisper.'; return true\">".special_char($OtherUser,$Latin1,$status)."</a><br />\n");
 				}
 			}
 			elseif (C_ENABLE_PM)
 			{
 				if (COLOR_NAMES)
 				{
-					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUser,$Latin1)."',true);\" ".userClass($status)." title=\"Whisper\" onMouseOver=\"window.status='Send a Whisper.'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a>&nbsp;");
+					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUser,$Latin1)."',true);\" ".userClass($status)." title=\"Whisper\" onMouseOver=\"window.status='Send a Whisper.'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a><br />\n");
 				}
 				else
 				{
-					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUser,$Latin1)."',true);\" ".userClass($status)." title=\"Whisper\" onMouseOver=\"window.status='Send a Whisper.'; return true\">".special_char($OtherUser,$Latin1,$status)."</a>&nbsp;");
+					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUser,$Latin1)."',true);\" ".userClass($status)." title=\"Whisper\" onMouseOver=\"window.status='Send a Whisper.'; return true\">".special_char($OtherUser,$Latin1,$status)."</a><br />\n");
 				}
 			}
 			else
@@ -521,22 +460,22 @@ if($DbLink->num_rows() > 0)
 			{
 				if (COLOR_NAMES)
 				{
-					echo("<a onClick=\"window.parent.send_popup('/wisp ".special_char2($OtherUsera,$Latin1)."');\" ".userClass($status)." title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a><br />\n");
+					echo("<a onClick=\"window.parent.send_popup('/wisp ".special_char2($OtherUsera,$Latin1)."');\" ".userClass($status)." title=\"Whisper\" onMouseOver=\"window.status='Send a Whisper.'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a><br />\n");
 				}
 				else
 				{
-					echo("<a onClick=\"window.parent.send_popup('/wisp ".special_char2($OtherUsera,$Latin1)."');\" ".userClass($status)." title=\"Send PM\" onMouseOver=\"window.status='Send a Private message.'; return true\">".special_char($OtherUser,$Latin1,$status)."</a><br />\n");
+					echo("<a onClick=\"window.parent.send_popup('/wisp ".special_char2($OtherUsera,$Latin1)."');\" ".userClass($status)." title=\"Whisper\" onMouseOver=\"window.status='Send a Whisper.'; return true\">".special_char($OtherUser,$Latin1,$status)."</a><br />\n");
 				}
 			}
 			elseif (C_ENABLE_PM)
 			{
 				if (COLOR_NAMES)
 				{
-					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUsera,$Latin1)."',true);\" ".userClass($status)." title=\"Whisper\" onMouseOver=\"window.status='Send a Whisper.'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a>&nbsp;");
+					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUsera,$Latin1)."',true);\" ".userClass($status)." title=\"Whisper\" onMouseOver=\"window.status='Send a Whisper.'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a><br />\n");
 				}
 				else
 				{
-					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUsera,$Latin1)."',true);\" ".userClass($status)." title=\"Whisper\" onMouseOver=\"window.status='Send a Whisper.'; return true\">".special_char($OtherUser,$Latin1,$status)."</a>&nbsp;");
+					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUsera,$Latin1)."',true);\" ".userClass($status)." title=\"Whisper\" onMouseOver=\"window.status='Send a Whisper.'; return true\">".special_char($OtherUser,$Latin1,$status)."</a><br />\n");
 				}
 			}
 			else

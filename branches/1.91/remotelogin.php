@@ -19,7 +19,7 @@ $ChatPath = "";	//use it if the output page is in the same directory with /plus/
 require("./${ChatPath}/lib/remotelogin.lib.php");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
 	<SCRIPT TYPE="text/javascript" LANGUAGE="javascript">

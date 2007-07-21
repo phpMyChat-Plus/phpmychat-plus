@@ -90,6 +90,10 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 	{
 		$Error = L_ERR_USR_26;
 	}
+	else	if ($SECRET_QUESTION == 0 || $SECRET_ANSWER == "")
+	{
+		$Error = L_ERR_PASS_5;
+	}
 	else
 	{
 		$DbLink->query("SELECT count(*) FROM ".C_REG_TBL." WHERE username='$U'");
@@ -120,7 +124,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 			};
 			if (!isset($Error) || $Error == "")
 			{
-				$DbLink->query("INSERT INTO ".C_REG_TBL." VALUES ('', '', '$U', '$Latin1', '$PWD_Hash', '$FIRSTNAME', '$LASTNAME', '$COUNTRY', '$WEBSITE', '$EMAIL', $showemail, 'user', '',".time().", '$IP', '$GENDER', '$allowpopup', '$PICTURE', '$DESCRIPTION', '$FAVLINK', '$FAVLINK1', '$SLANG', '$COLORNAME', '$AVATARURL')");
+				$DbLink->query("INSERT INTO ".C_REG_TBL." VALUES ('', '', '$U', '$Latin1', '$PWD_Hash', '$FIRSTNAME', '$LASTNAME', '$COUNTRY', '$WEBSITE', '$EMAIL', $showemail, 'user', '',".time().", '$IP', '$GENDER', '$allowpopup', '$PICTURE', '$DESCRIPTION', '$FAVLINK', '$FAVLINK1', '$SLANG', '$COLORNAME', '$AVATARURL', '$SECRET_QUESTION', '$SECRET_ANSWER')");
 				$Message = L_REG_9;
 // Patch for sending an email to the Administrator upon new user registration to the chat system.
 // by Bob Dickow, April 28, 2003
@@ -140,19 +144,35 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      $dt = $tm[mon]."/".$tm[mday]."/".$tm[year];
      $tm = sprintf("%02.u:%02.u:%02.u",$tm[hours],$tm[minutes],$tm[seconds]);
 
-	if (C_ADMIN_NOTIFY)
+		if 	($SECRET_QUESTION==0) $secret_question = L_PASS_12; 
+		if 	($SECRET_QUESTION==1) $secret_question = L_PASS_2; 
+		if 	($SECRET_QUESTION==2) $secret_question = L_PASS_3; 
+		if 	($SECRET_QUESTION==3) $secret_question = L_PASS_4; 
+		if 	($SECRET_QUESTION==4) $secret_question = L_PASS_5; 
+
+		if (isset($COLORNAME))
+		{
+			$C = $COLORNAME;
+			setcookie("CookieColor", $C, time() + 60*60*24*365);        // cookie expires in one year
+		}
+
+	if (C_ADMIN_NOTIFY && (C_ADMIN_EMAIL != ""))
 	{
      $emailMessage = "New user registration notification for "
      . APP_NAME ." at ". C_CHAT_URL." :\n\n"
      . "----------------------------------------------\n"
      . "Username: ".stripslashes($U)."\n"
-#     . "Password: ".stripslashes($pmc_password)."\n"
-     . "Password: (Not enabled by default, for privacy concerns!)\n\n"
-     . "----------------------------------------------\n"
+#    . "Password: ".stripslashes($pmc_password)."\n"
+     . "Password: (Not enabled by default, for privacy concerns!)\n"
+     . "----------------------------------------------\n\n"
+#    . "Secret question: ".stripslashes($secret_question)."\n"
+#    . "Secret answer: ".stripslashes($SECRET_ANSWER)."\n"
+	  . "Secret question: (Not enabled by default for privacy concerns!)\n"
+	  . "Secret answer: (Not enabled by default for privacy concerns!)\n"
+     . "Email: $EMAIL\n"
      . "First name: ".stripslashes($FIRSTNAME)."\n"
      . "Last name: ".stripslashes($LASTNAME)."\n"
      . "Gender: $sex\n"
-     . "Email: $EMAIL\n"
      . "Country: ".stripslashes($COUNTRY)."\n"
      . "WWW: ".stripslashes($WEBSITE)."\n"
      . "Display email address: $shweml\n"
@@ -161,6 +181,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      . "Favorite link 1: ".stripslashes($FAVLINK)."\n"
      . "Favorite link 2: ".stripslashes($FAVLINK1)."\n"
      . "Picture: ".stripslashes($PICTURE)."\n"
+     . "Color name/text: ".stripslashes($C)."\n"
      . "Date of registration: $dt\n"
      . "Time of registration: $tm\n"
      . "IP address: $IP (".gethostbyaddr($IP).")\n"
@@ -186,12 +207,14 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      . APP_NAME ." at ". C_CHAT_URL." :\n\n"
      . "----------------------------------------------\n"
      . "Username: ".stripslashes($U)."\n"
-	  . "Password: ".stripslashes($pmc_password)."\n\n"
-     . "----------------------------------------------\n"
+	  . "Password: ".stripslashes($pmc_password)."\n"
+     . "----------------------------------------------\n\n"
+     . "Secret question: ".stripslashes($secret_question)."\n"
+     . "Secret answer: ".stripslashes($SECRET_ANSWER)."\n"
+     . "Email: $EMAIL\n"
      . "First name: ".stripslashes($FIRSTNAME)."\n"
      . "Last name: ".stripslashes($LASTNAME)."\n"
      . "Gender: $sex\n"
-     . "Email: $EMAIL\n"
      . "Country: ".stripslashes($COUNTRY)."\n"
      . "WWW: ".stripslashes($WEBSITE)."\n"
      . "Display email address: $shweml\n"
@@ -200,6 +223,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      . "Favorite link 1: ".stripslashes($FAVLINK)."\n"
      . "Favorite link 2: ".stripslashes($FAVLINK1)."\n"
      . "Picture: ".stripslashes($PICTURE)."\n"
+     . "Color name/text: ".stripslashes($C)."\n"
      . "Date of registration: $dt\n"
      . "Time of registration: $tm\n"
      . "----------------------------------------------\n"
@@ -231,7 +255,7 @@ $done = (isset($Message) && $Message == L_REG_9);
 if (!isset($FontName)) $FontName = "";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
 <TITLE><?php echo(APP_NAME); ?></TITLE>
@@ -254,11 +278,6 @@ if ($done)
 		?>
 		windowHandle.document.forms['Params'].elements['pmc_password'].value = regform.elements['pmc_password'].value;
 		<?php
-	}
-	if (isset($COLORNAME))
-	{
-		$C = $COLORNAME;
-		setcookie("CookieColor", $C, time() + 60*60*24*365);        // cookie expires in one year
 	}
 };
 ?>
@@ -345,7 +364,7 @@ if(isset($Error))
 			<TR>
 				<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_1); ?> :</TD>
 				<TD VALIGN="TOP">
-					<INPUT TYPE="password" NAME="pmc_password" SIZE=15 MAXLENGTH=15 VALUE="<?php if (isset($pmc_password)) echo(htmlspecialchars(stripslashes($pmc_password))); ?>"<?php if ($done) echo(" READONLY"); ?>>
+					<INPUT TYPE="password" NAME="pmc_password" AUTOCOMPLETE="OFF" SIZE=15 MAXLENGTH=15 VALUE="<?php if (isset($pmc_password)) echo(htmlspecialchars(stripslashes($pmc_password))); ?>"<?php if ($done) echo(" READONLY"); ?>>
 					<?php if (!$done) { ?><SPAN CLASS=error>*</SPAN><?php }; ?>
 				</TD>
 			</TR>
@@ -355,7 +374,27 @@ if(isset($Error))
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_8); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="EMAIL" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($EMAIL)) echo(htmlspecialchars(stripslashes($EMAIL))); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<INPUT TYPE="text" NAME="EMAIL" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($EMAIL)) echo(stripslashes($EMAIL)); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<?php if (!$done) { ?><SPAN CLASS="error">*</SPAN><?php }; ?>
+			</TD>
+		</TR>
+		<TR>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PASS_1); ?> :</TD>
+			<TD VALIGN="TOP">
+				<SELECT name="SECRET_QUESTION">
+				<OPTION value="0" <?php if ($SECRET_QUESTION==0 || $SECRET_QUESTION=="") echo ("selected=\"selected\"")?>><?php echo(L_PASS_12)?></OPTION>
+				<OPTION value="1" <?php if ($SECRET_QUESTION==1) echo ("selected=\"selected\"")?>><?php echo(L_PASS_2)?></OPTION>
+				<OPTION value="2" <?php if ($SECRET_QUESTION==2) echo ("selected=\"selected\"")?>><?php echo(L_PASS_3)?></OPTION>
+				<OPTION value="3" <?php if ($SECRET_QUESTION==3) echo ("selected=\"selected\"")?>><?php echo(L_PASS_4)?></OPTION>
+				<OPTION value="4" <?php if ($SECRET_QUESTION==4) echo ("selected=\"selected\"")?>><?php echo(L_PASS_5)?></OPTION>
+				</SELECT>
+				<?php if (!$done) { ?><SPAN CLASS="error">*</SPAN><?php }; ?>
+			</TD>
+		</TR>
+		<TR>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PASS_6); ?> :</TD>
+			<TD VALIGN="TOP">
+				<INPUT TYPE="text" NAME="SECRET_ANSWER" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($SECRET_ANSWER)) echo(stripslashes($SECRET_ANSWER)); ?>"<?php if ($done) echo(" READONLY"); ?>>
 				<?php if (!$done) { ?><SPAN CLASS="error">*</SPAN><?php }; ?>
 			</TD>
 		</TR>
@@ -366,14 +405,14 @@ if (C_REQUIRE_NAMES)
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_30); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="FIRSTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($FIRSTNAME)) echo(htmlspecialchars(stripslashes($FIRSTNAME))); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<INPUT TYPE="text" NAME="FIRSTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($FIRSTNAME)) echo(stripslashes($FIRSTNAME)); ?>"<?php if ($done) echo(" READONLY"); ?>>
 				<?php if (!$done) { ?><SPAN CLASS=error>*</SPAN><?php }; ?>
 			</TD>
 		</TR>
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_31); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="LASTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($LASTNAME)) echo(htmlspecialchars(stripslashes($LASTNAME))); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<INPUT TYPE="text" NAME="LASTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($LASTNAME)) echo(stripslashes($LASTNAME)); ?>"<?php if ($done) echo(" READONLY"); ?>>
 				<?php if (!$done) { ?><SPAN CLASS=error>*</SPAN><?php }; ?>
 			</TD>
 		</TR>
@@ -385,13 +424,13 @@ else
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_30); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="FIRSTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($FIRSTNAME)) echo(htmlspecialchars(stripslashes($FIRSTNAME))); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<INPUT TYPE="text" NAME="FIRSTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($FIRSTNAME)) echo(stripslashes($FIRSTNAME)); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
 		</TR>
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_31); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="LASTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($LASTNAME)) echo(htmlspecialchars(stripslashes($LASTNAME))); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<INPUT TYPE="text" NAME="LASTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($LASTNAME)) echo(stripslashes($LASTNAME)); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
 		</TR>
 <?php
@@ -416,43 +455,43 @@ else
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_36); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="COUNTRY" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($COUNTRY)) echo(htmlspecialchars(stripslashes($COUNTRY))); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<INPUT TYPE="text" NAME="COUNTRY" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($COUNTRY)) echo(stripslashes($COUNTRY)); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
 		</TR>
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_32); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="WEBSITE" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($WEBSITE)) echo(htmlspecialchars(stripslashes($WEBSITE))); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<INPUT TYPE="text" NAME="WEBSITE" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($WEBSITE)) echo(stripslashes($WEBSITE)); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
 		</TR>
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_1); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="SLANG" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($SLANG)) echo(htmlspecialchars(stripslashes($SLANG))); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<INPUT TYPE="text" NAME="SLANG" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($SLANG)) echo(stripslashes($SLANG)); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
 		</TR>
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_2); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="FAVLINK" SIZE=25 MAXLENGTH=255 VALUE="<?php if (isset($FAVLINK)) echo(htmlspecialchars(stripslashes($FAVLINK))); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<INPUT TYPE="text" NAME="FAVLINK" SIZE=25 MAXLENGTH=255 VALUE="<?php if (isset($FAVLINK)) echo(stripslashes($FAVLINK)); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
 		</TR>
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_3); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="FAVLINK1" SIZE=25 MAXLENGTH=255 VALUE="<?php if (isset($FAVLINK1)) echo(htmlspecialchars(stripslashes($FAVLINK1))); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<INPUT TYPE="text" NAME="FAVLINK1" SIZE=25 MAXLENGTH=255 VALUE="<?php if (isset($FAVLINK1)) echo(stripslashes($FAVLINK1)); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
 		</TR>
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_4); ?> :</TD>
 			<TD VALIGN="TOP">
-				<TEXTAREA NAME="DESCRIPTION" COLS=27 ROWS=5 WRAP=ON<?php if ($done) echo(" READONLY"); ?>><?php if (isset($DESCRIPTION)) echo(htmlspecialchars(stripslashes($DESCRIPTION))); ?></TEXTAREA>
+				<TEXTAREA NAME="DESCRIPTION" COLS=27 ROWS=5 WRAP=ON<?php if ($done) echo(" READONLY"); ?>><?php if (isset($DESCRIPTION)) echo(stripslashes($DESCRIPTION)); ?></TEXTAREA>
 			</TD>
 		</TR>
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_5); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="PICTURE" SIZE=25 MAXLENGTH=255 VALUE="<?php if (isset($PICTURE)) echo(htmlspecialchars(stripslashes($PICTURE))); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<INPUT TYPE="text" NAME="PICTURE" SIZE=25 MAXLENGTH=255 VALUE="<?php if (isset($PICTURE)) echo(stripslashes($PICTURE)); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
 		</TR>
 <?php
@@ -522,7 +561,6 @@ $CC = explode(",", $ColorList);
 </FORM>
 </CENTER>
 </BODY>
-
 </HTML>
 <?php
 

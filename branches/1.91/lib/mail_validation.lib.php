@@ -95,7 +95,7 @@ function quote_printable($str,$WithCharset)
 	$mail_date = rfcDate();
 	$Sender_Name = quote_printable($Sender_Name,$Charset);
 
-function send_email($Subject,$userString,$pswdString,$welcomeString)
+function send_email($subject,$userString,$pswdString,$welcomeString)
 {
 	global $Charset;
 	global $EMAIL, $U, $pmc_password;

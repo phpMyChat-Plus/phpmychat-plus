@@ -8,7 +8,7 @@ require("./localization/".$L."/localized.chat.php");
 header("Content-Type: text/html; charset=${Charset}");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 <HEAD>
 	<TITLE>Blank title</TITLE>
 <HEAD>

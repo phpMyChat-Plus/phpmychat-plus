@@ -76,11 +76,9 @@ $ChangeBeeps_Reload = ereg_replace("&B=([0-2])","&B=${B1}",$Refresh);
 
 // For translations with an explicit charset (not the 'x-user-defined' one)
 if (!isset($FontName)) $FontName = "";
-// Text direction
-$textDirection = ($Charset == "windows-1256") ? "RTL" : "LTR";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo($textDirection); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
 <?php
@@ -99,7 +97,11 @@ $DbLink->clean_results();
 if ($NbRooms > 0)
 {
 	// ** count users **
-	$DbLink->query("SELECT DISTINCT u.username, u.latin1, u.r_time FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room AND m.type = 1 ORDER BY username");
+	if ($sort_order == "1")	$ordquery = "username";
+	else $ordquery = "r_time";
+	// Ghost Control mod by Ciprian
+	$Hide = (C_HIDE_ADMINS && C_HIDE_MODERS) ? " AND (u.status != 'a' OR u.email = 'bot@bot.com') AND u.status != 'm'" : (C_HIDE_ADMINS ? " AND (u.status != 'a' OR u.email = 'bot@bot.com')" : (C_HIDE_MODERS ? " AND u.status !='m'" : ""));
+	$DbLink->query("SELECT DISTINCT u.username, u.latin1, u.r_time FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room AND m.type = 1".$Hide." ORDER BY ".$ordquery."");
 	$NbUsers = $DbLink->num_rows();
 	if($NbUsers > 3)
 	{
@@ -163,60 +165,34 @@ if(isset($NbUsers) && $NbUsers > 0)
 			$Users = new DB;
 			while(list($Other) = $DbLink->next_record())
 			{
-				if ($sort_order == "1")
+				if ($sort_order == "1")	$ordquery = "username";
+				else $ordquery = "r_time";
+				// Ghost Control mod by Ciprian
+				$Hide = (C_HIDE_ADMINS && C_HIDE_MODERS) ? " AND (status != 'a' OR email = 'bot@bot.com') AND status != 'm'" : (C_HIDE_ADMINS ? " AND (status != 'a' OR email = 'bot@bot.com')" : (C_HIDE_MODERS ? " AND status !='m'" : ""));
+				if($Users->query("SELECT username, latin1, status, r_time FROM ".C_USR_TBL." WHERE room = '".addslashes($Other)."'".$Hide." ORDER BY ".$ordquery.""))
 				{
-					if($Users->query("SELECT username, latin1, status, r_time FROM ".C_USR_TBL." WHERE room = '".addslashes($Other)."' ORDER BY username"))
+					if($Users->num_rows() > 0)
 					{
-						if($Users->num_rows() > 0)
+						$i++;
+						$id = "room".$i;
+						echo("<DIV ID=\"${id}Parent\" CLASS=\"parent\" STYLE=\"margin-top: 5px; CURSOR: hand\">");
+						echo("<A HREF=\"#\" onClick=\"expandIt('${id}'); return false\" onMouseOver=\"window.status='".L_EXPCOL."'; return true;\" title=\"<?php echo(L_EXPCOL); ?>\">");
+						echo("<IMG NAME=\"imEx\" SRC=\"images/closed.gif\" WIDTH=9 HEIGHT=9 BORDER=0 ALT=\"".L_EXPCOL."\"></A>");
+						echo("&nbsp;<B>".htmlspecialchars($Other)."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$Users->num_rows().")</SPAN><br />");
+						echo("</DIV>");
+						echo("<DIV ID=\"${id}Child\" CLASS=\"child\" STYLE=\"margin-left: 12px\">");
+						$j = 0;
+						while(list($Username,$Latin1,$status,$room_time) = $Users->next_record())
 						{
-							$i++;
-							$id = "room".$i;
-							echo("<DIV ID=\"${id}Parent\" CLASS=\"parent\" STYLE=\"margin-top: 5px; CURSOR: hand\">");
-							echo("<A HREF=\"#\" onClick=\"expandIt('${id}'); return false\" onMouseOver=\"window.status='".L_EXPCOL."'; return true;\" title=\"<?php echo(L_EXPCOL); ?>\">");
-							echo("<IMG NAME=\"imEx\" SRC=\"images/closed.gif\" WIDTH=9 HEIGHT=9 BORDER=0 ALT=\"".L_EXPCOL."\"></A>");
-							echo("&nbsp;<B>".htmlspecialchars($Other)."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$Users->num_rows().")</SPAN><br />");
-							echo("</DIV>");
-							echo("<DIV ID=\"${id}Child\" CLASS=\"child\" STYLE=\"margin-left: 12px\">");
-							$j = 0;
-							while(list($Username,$Latin1,$status,$room_time) = $Users->next_record())
-							{
-								$j++;
-								$room_time = date("d-M, H:i:s", $room_time + C_TMZ_OFFSET*60*60);
-								echo("-&nbsp;".special_char($Username,$Latin1,$status)." <font size=1>".special_char("(".$room_time.")",$Latin1,$status)."</font><br />");
-							};
-							echo("</DIV>");
-							$ChildNb[$id] = $j;
-						}
+							$j++;
+							$room_time = date("d-M, H:i:s", $room_time + C_TMZ_OFFSET*60*60);
+							echo("-&nbsp;".special_char($Username,$Latin1,$status)." <font size=1>".special_char("(".$room_time.")",$Latin1,$status)."</font><br />");
+						};
+						echo("</DIV>");
+						$ChildNb[$id] = $j;
 					}
-					$Users->clean_results();
 				}
-				else
-				{
-					if($Users->query("SELECT username, latin1, status, r_time FROM ".C_USR_TBL." WHERE room = '".addslashes($Other)."' ORDER BY r_time"))
-					{
-						if($Users->num_rows() > 0)
-						{
-							$i++;
-							$id = "room".$i;
-							echo("<DIV ID=\"${id}Parent\" CLASS=\"parent\" STYLE=\"margin-top: 5px; CURSOR: hand\">");
-							echo("<A HREF=\"#\" onClick=\"expandIt('${id}'); return false\" onMouseOver=\"window.status='".L_EXPCOL."'; return true;\" title=\"<?php echo(L_EXPCOL); ?>\">");
-							echo("<IMG NAME=\"imEx\" SRC=\"images/closed.gif\" WIDTH=9 HEIGHT=9 BORDER=0 ALT=\"".L_EXPCOL."\"></A>");
-							echo("&nbsp;<B>".htmlspecialchars($Other)."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$Users->num_rows().")</SPAN><br />");
-							echo("</DIV>");
-							echo("<DIV ID=\"${id}Child\" CLASS=\"child\" STYLE=\"margin-left: 12px\">");
-							$j = 0;
-							while(list($Username,$Latin1,$status,$room_time) = $Users->next_record())
-							{
-								$j++;
-								$room_time = date("d-M, H:i:s", $room_time + C_TMZ_OFFSET*60*60);
-								echo("-&nbsp;".special_char($Username,$Latin1,$status)." <font size=1>".special_char("(".$room_time.")",$Latin1,$status)."</font><br />");
-							};
-							echo("</DIV>");
-							$ChildNb[$id] = $j;
-						}
-					}
-					$Users->clean_results();
-				}
+				$Users->clean_results();
 			}
 		}
 	}
@@ -289,5 +265,4 @@ if ($BeepRoom)
 
 </HTML>
 <?php
-
 ?>

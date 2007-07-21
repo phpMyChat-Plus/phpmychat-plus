@@ -102,7 +102,7 @@ if (isset($MessagesString) && $MessagesString != "")
 	header("Content-Disposition: attachement; filename=\"chat_save_".date("mdY").".htm\"");
 	?>
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-	<HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
+	<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 	<HEAD>
 		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=<?php echo($Charset); ?>">
 		<TITLE><?php echo(APP_NAME." - ".htmlspecialchars(stripslashes($R))." - ".date("F j, Y")); ?></TITLE>

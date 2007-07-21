@@ -3,6 +3,7 @@
 // This sheet is diplayed when the admin wants to check the messages archive
 
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
+include("lib/preg_find.php");
 
 if (!C_CHAT_LOGS)
 {
@@ -14,7 +15,7 @@ if (!C_CHAT_LOGS)
 else
 {
 ?>
-<A NAME="full">
+<A NAME="full"></A>
 	<P CLASS=title><?php echo(APP_NAME); ?> Full Logs Archive</P>
 </center>
 <?php
@@ -55,26 +56,22 @@ function delFile($fileName) {
 }
 }
 		echo("<P ALIGN=right><A HREF=#user>Show the users' archive section</A></P>");
-$y='./'.C_LOG_DIR.'/'; #define which year you want to read
-$year = opendir($y); #open directory
-while (false !== ($yr = readdir($year)))
+$y='./'.C_LOG_DIR.''; #define which year you want to read
+$yrs = preg_find('/./', $y, PREG_FIND_DIRONLY|PREG_FIND_SORTKEYS|PREG_FIND_SORTDESC);
+foreach($yrs as $yr)
 {
-	if (!eregi("\.html",$yr) && $yr!='.' && $yr!='..')
-	{
-		$yeardir = $yr;
+		$yeardir = eregi_replace($y."/",'',$yr);
 				echo("<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table><tr>");
-				echo ("<td valign=top align=center nowrap=\"nowrap\" colspan=5><font size=4 color=red><b>$yr</b></font><br /><a href=\"$pstr&ydel=".$y.$yr."\" title=\"Delete all $yr logs\"><font size=-2 color=red><b>Delete year</b></font></a></td>"); #print name of each file found
-		$m=$y.$yeardir; #define which month you want to read
- $month = opendir($m); #open directory
-		while (false !== ($mt = readdir($month)))
+				echo ("<td valign=top align=center nowrap=\"nowrap\" colspan=6><font size=4 color=red><b>$yeardir</b></font> - <a href=\"$pstr&ydel=".$y."/".$yeardir."\" onclick=\"return confirm('This will delete all the files and folders\\nstored in the $yeardir folder!\\nThis is not reversible...\\n\\nAre you sure?');\" title=\"Delete all $yeardir logs\"><font size=-2 color=red><b>Delete year</b></font></a></td>"); #print name of each file found
+		$m=$yr; #define which month you want to read
+		$mts = preg_find('/./', $yr, PREG_FIND_DIRONLY|PREG_FIND_RETURNASSOC|PREG_FIND_SORTMODIFIED|PREG_FIND_SORTKEYS|PREG_FIND_SORTDESC);
+		foreach($mts as $mt => $stats)
 		{
-			if (!eregi("\.html",$mt) && $mt!='.' && $mt!='..')
-			{
-				$monthdir = $mt;
-						echo("<tr>");
-						echo ("<td valign=top align=center nowrap=\"nowrap\"><font size=4 color=green><b>$mt</b></font><br /><a href=\"$pstr&mdel=".$y.$yr."/".$mt."\" title=\"Delete all $mt/$yr logs\"><font size=-2 color=red><b>Delete<br />month</b></font></a></td>"); #print name of each file found
-						echo ("<td valign=top align=left nowrap=\"nowrap\">");
-				$d=$y.$yeardir."/".$monthdir; #define which month you want to read
+				$monthdir = eregi_replace($yr."/",'',$mt);
+				echo("<tr>");
+				echo ("<td valign=top align=left nowrap=\"nowrap\" colspan=6><font size=4 color=green><b>$monthdir</b></font> - <a href=\"$pstr&mdel=".$yr."/".$monthdir."\" onclick=\"return confirm('This will delete all the files\\nstored in the ".$yeardir."/".$monthdir." folder!\\nThis is not reversible...\\n\\nAre you sure?');\" title=\"Delete all $monthdir/$yeardir logs\"><font size=-2 color=red><b>Delete month</b></font></a></td>"); #print name of each file found
+				echo ("<tr><td valign=top align=left nowrap=\"nowrap\">");
+				$d=$yr."/".$monthdir; #define which month you want to read
 				$day = opendir($d); #open directory
 				while (false !== ($dy = readdir($day)))
 				{
@@ -84,81 +81,79 @@ while (false !== ($yr = readdir($year)))
 			 		}
 			 	}
 				closedir($day);
-				if ($dayarray) sort($dayarray);
-				$i=1;
-				foreach ($dayarray as $dy)
+				if ($dayarray)
 				{
-					if (eregi(".htm",$dy)) $dyhtm=str_replace(".htm","",$dy);
-					else $dyhtm=str_replace(".php","",$dy);
-					$dyhtm=str_replace($yr.$mt,"",$dyhtm);
-					echo ("<li><a href=$d/$dy?L=$L title=\"Read $dyhtm $mt $yr log\" target=_self>$dyhtm</a>&nbsp;&nbsp;<a href=\"$pstr&fdel=".$y.$yr."/".$mt."/".$dy."\" title=\"Delete this log\"><font size=-2 color=red><b>x</b></font></a>&nbsp;&nbsp;(".filesize($d."/".$dy)." bytes)<br />\n"); #print name of each file found
-					if ($i==7 || $i==14 || $i==21 || $i==28) echo ("<td valign=top align=left nowrap=\"nowrap\">");
-					$i++;
+					sort($dayarray);
+					$i=1;
+					foreach ($dayarray as $dy)
+					{
+						echo("<ul><div style=\"background: white;\">");
+						if (eregi(".htm",$dy)) $dyhtm=str_replace(".htm","",$dy);
+						else $dyhtm=str_replace(".php","",$dy);
+						$dyhtm=str_replace($yeardir.$monthdir,"",$dyhtm);
+						echo ("<li>&nbsp;<a href=\"$pstr&fdel=".$mt."/".$dy."\" onclick=\"return confirm('This will delete the $dy file!\\nThis is not reversible...\\n\\nAre you sure?');\" title=\"Delete this log\"><font size=-2 color=red><b>x</b></font></a>&nbsp;<a href=$d/$dy?L=$L title=\"Read $dyhtm $monthdir $yeardir log\" target=_self>$dyhtm</a>&nbsp;(".filesize($d."/".$dy)." bytes)<br />\n"); #print name of each file found
+						if ($i==5 || $i==10 || $i==15 || $i==20 || $i==25) echo ("</ul><td valign=top align=left nowrap=\"nowrap\"><ul>");
+						$i++;
+					echo("</div></ul>");
+					}
 				}
 				unset($dayarray);
-					echo("</tr>");
-			}
+				echo("</tr>");
 		}
 		echo("</td></tr></table><br />");
-		closedir($month);
-	}
 }
-closedir($year);
 ?>
 <center>
-<A NAME="user">
+<A NAME="user"></A>
 	<P CLASS=title><?php echo(APP_NAME); ?> Users Logs Archive</P>
 </center>
 <?php
-$yu='./logs/'; #define which year you want to read
-$yearu = opendir($yu); #open directory
-while (false !== ($yru = readdir($yearu)))
+$yu='./logs'; #define which year you want to read
+$yrsu = preg_find('/./', $yu, PREG_FIND_DIRONLY|PREG_FIND_SORTKEYS|PREG_FIND_SORTDESC);
+foreach($yrsu as $yru)
 {
-	if (!eregi("\.html",$yru) && $yru!=='.' && $yru!=='..')
-	{
-		$yeardiru = $yru;
-		echo("<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table><tr>");
-		echo ("<td valign=top align=center nowrap=\"nowrap\" colspan=5><font size=4 color=red><b>$yru</b></font><br /><a href=\"$pstr&ydel=".$yu.$yru."\" title=\"Delete all $yru logs\"><font size=-2 color=red><b>Delete year</b></font></a></td>"); #print name of each file found
-	$mu=$yu.$yeardiru; #define which month you want to read
-	$monthu = opendir($mu); #open directory
-		while (false !== ($mtu = readdir($monthu)))
+		$yeardiru = eregi_replace($yu."/",'',$yru);
+				echo("<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table><tr>");
+				echo ("<td valign=top align=center nowrap=\"nowrap\" colspan=6><font size=4 color=red><b>$yeardiru</b></font> - <a href=\"$pstr&ydel=".$yu."/".$yeardiru."\" onclick=\"return confirm('This will delete all the files and folders\\nstored in the $yeardir folder!\\nThis is not reversible...\\n\\nAre you sure?');\" title=\"Delete all $yeardiru logs\"><font size=-2 color=red><b>Delete year</b></font></a></td>"); #print name of each file found
+		$mu=$yru; #define which month you want to read
+		$mtsu = preg_find('/./', $yru, PREG_FIND_DIRONLY|PREG_FIND_RETURNASSOC|PREG_FIND_SORTMODIFIED|PREG_FIND_SORTKEYS|PREG_FIND_SORTDESC);
+		foreach($mtsu as $mtu => $stats)
 		{
-			if (!eregi("\.html",$mtu) && $mtu!=='.' && $mtu!=='..')
-			{
-				$monthdiru = $mtu;
-						echo("<tr>");
-						echo ("<td valign=top align=center nowrap=\"nowrap\"><font size=4 color=green><b>$mtu</b></font><br /><a href=\"$pstr&mdel=".$yu.$yru."/".$mtu."\" title=\"Delete all $mtu/$yru logs\"><font size=-2 color=red><b>Delete<br />month</b></font></a></td>"); #print name of each file found
-						echo ("<td valign=top align=left nowrap=\"nowrap\">");
-				$du=$yu.$yeardiru."/".$monthdiru; #define which month you want to read
+				$monthdiru = eregi_replace($yru."/",'',$mtu);
+				echo("<tr>");
+				echo ("<td valign=top align=left nowrap=\"nowrap\" colspan=6><font size=4 color=green><b>$monthdiru</b></font> - <a href=\"$pstr&mdel=".$yru."/".$monthdiru."\" onclick=\"return confirm('This will delete all the files\\nstored in the ".$yeardir."/".$monthdir." folder!\\nThis is not reversible...\\n\\nAre you sure?');\" title=\"Delete all $monthdiru/$yeardiru logs\"><font size=-2 color=red><b>Delete month</b></font></a></td>"); #print name of each file found
+				echo ("<tr><td valign=top align=left nowrap=\"nowrap\">");
+				$du=$yru."/".$monthdiru; #define which month you want to read
 				$dayu = opendir($du); #open directory
 				while (false !== ($dyu = readdir($dayu)))
 				{
-					if (!eregi("\.html",$dyu) && $dyu!=='.' && $dyu!=='..')
+					if (!eregi("\.html",$dyu) && $dyu!='.' && $dyu!='..')
 					{
 						$dayarrayu[]=$dyu;
 			 		}
 			 	}
 				closedir($dayu);
-			  if ($dayarrayu) sort($dayarrayu);
-				$j=1;
-			  foreach ($dayarrayu as $dyu)
-			  {
-					if (eregi(".htm",$dyu)) $dyuhtm=str_replace(".htm","",$dyu);
-					else $dyuhtm=str_replace(".php","",$dyu);
-					$dyuhtm=str_replace($yru.$mtu,"",$dyuhtm);
-					echo ("<li><a href=$du/$dyu?L=$L title=\"Read $dyuhtm $mtu $yru log\" target=_self>$dyuhtm</a>&nbsp;&nbsp;<a href=\"$pstr&fdel=".$yu.$yru."/".$mtu."/".$dyu."\" title=\"Delete this log\"><font size=-2 color=red><b>x</b></font></a>&nbsp;&nbsp;(".filesize($du."/".$dyu)." bytes)<br />\n"); #print name of each file found
-					if ($j==7 || $j==14 || $j==21 || $j==28) echo ("<td valign=top align=left nowrap=\"nowrap\">");
-					$j++;
+				if ($dayarrayu)
+				{
+					sort($dayarrayu);
+					$j=1;
+					foreach ($dayarrayu as $dyu)
+					{
+						echo("<ul><div style=\"background: white;\">");
+						if (eregi(".htm",$dyu)) $dyhtmu=str_replace(".htm","",$dyu);
+						else $dyhtmu=str_replace(".php","",$dyu);
+						$dyhtmu=str_replace($yeardiru.$monthdiru,"",$dyhtmu);
+						echo ("<li>&nbsp;<a href=\"$pstr&fdel=".$mtu."/".$dyu."\" onclick=\"return confirm('This will delete the $dy file!\\nThis is not reversible...\\n\\nAre you sure?');\" title=\"Delete this log\"><font size=-2 color=red><b>x</b></font></a>&nbsp;<a href=$du/$dyu?L=$L title=\"Read $dyhtmu $monthdiru $yeardiru log\" target=_self>$dyhtmu</a>&nbsp;(".filesize($du."/".$dyu)." bytes)<br />\n"); #print name of each file found
+						if ($j==5 || $j==10 || $j==15 || $j==20 || $j==25) echo ("</ul><td valign=top align=left nowrap=\"nowrap\"><ul>");
+						$j++;
+						echo("</div></ul>");
+					}
 				}
 				unset($dayarrayu);
-					echo("</tr>");
-			}
+				echo("</tr>");
 		}
 		echo("</td></tr></table><br />");
-		closedir($monthu);
-	}
 }
-closedir($yearu);
 		echo("<P ALIGN=right><A HREF=#full>Show the full archive section</A></P>");
 				if($ydel != "")
 				{

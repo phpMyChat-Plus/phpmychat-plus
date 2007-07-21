@@ -153,4 +153,28 @@ The best practice is to use a different type of browser for each user, otherwise
 (like turning a private room into public), as well as malfunctions on your side.
 I recommend IE7 + Firefox / Netscape / Opera
 
+12Q.
+One problem that I see is that there are no ways when I change a rooms Name that it keep that Name, it always go back to the default as Public, etc.
+12A.
+That happens because the cookies stored on each client computer contain the last room name they were logged off from.
+Therefore, after changing the default room names, you'll have to clean up the cookies, before loading the login page again.
+Also, as administrator in Admin panel, check if the old room name (Public Room 1 and so on) are still shown in the Clear Rooms tab.
+If so, they will be cleanned up as the messages of that room go in the archive. If not, just use the clean function on that page - that way,
+the old room names won't be shown in the "User created public rooms list" in the login page - the 2nd dropdown/box list.
+But remember, any other client who don't clean up his cookies, will have set as default the previous name. For a better fix,
+you should set your chat to version 0 - Only default room - in Configuration tab. Do that for a few days, while most of your clients (idealy - all)
+will login at least once into the new default public room as you wished to be named.
+Then change it back to 1 or 2, as you wish your chat to run.
+
+13Q.
+Now, when clicking on the Administration link I get the log-in page with the following error warnings:
+Warning: session_start() [function.session-start]: open(/tmp/sess_9d9at3sbphsje5khququj6vrs5, O_RDWR) failed: No space left on device (28) in /www/[my domain]/web/milchat/lib/login.lib.php on line 4
+[login box]
+Warning: Unknown: open(/tmp/sess_9d9at3sbphsje5khququj6vrs5, O_RDWR) failed: No space left on device (28) in Unknown on line 0
+Warning: Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/tmp) in Unknown on line 0
+
+If I try to log in regardless of this warning, I then get the same error warnings on a blank page, but no access to the admin panel.
+13A.
+The appropriate "Temporary Internet Files"/"Browser Cache" storage got full on your pc. Either clear browser's cache or increase that allotted space. Also clear the cookies.
+
 More to come...

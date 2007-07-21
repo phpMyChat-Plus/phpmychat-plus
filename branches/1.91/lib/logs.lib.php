@@ -24,7 +24,7 @@ $lang .= 'else include("../../../localization/".$L."/localized.chat.php");';
 $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
 mysql_select_db(C_DB_NAME);
 
-$sql = "SELECT * FROM ".C_MSG_TBL." WHERE m_time < ".(time() - C_MSG_DEL*60*60)." ORDER BY m_time DESC";
+$sql = "SELECT * FROM ".C_MSG_TBL." WHERE (m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."') ORDER BY m_time DESC";
 $query = mysql_query($sql) or die("Cannot query the database.<br />" . mysql_error());
 // Collect and store new messages
 $Messages = Array();
@@ -96,7 +96,7 @@ $i++;
 if ($i > 1)
 {
 $today = date('d-m-y H:i:s', time() + C_TMZ_OFFSET*60*60);
-$lastsql = "SELECT * FROM ".C_MSG_TBL." WHERE m_time < ".(time() - C_MSG_DEL*60*60)." ORDER BY m_time ASC LIMIT 1";
+$lastsql = "SELECT * FROM ".C_MSG_TBL." WHERE (m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."') ORDER BY m_time ASC LIMIT 1";
 $lastquery = mysql_query($lastsql) or die("Cannot query the database.<br />" . mysql_error());
 while($lastresult = mysql_fetch_array($lastquery))
 {
@@ -125,7 +125,7 @@ $logpath = "./".C_LOG_DIR."/".$year."/".$month."/".$year.$month.$day.".php"  ;
 		fwrite($fp, sprintf("<?php\r\n"));
 		fwrite($fp, sprintf($lang));
 		fwrite($fp, sprintf("\r\n"));
-		fwrite($fp, sprintf('$textDirection = ($Charset == "windows-1256") ? "RTL" : "LTR";'));
+		fwrite($fp, sprintf('$textDirection = ($Align == "right") ? "RTL" : "LTR";'));
 		fwrite($fp, sprintf("\r\n?>"));
 		fwrite($fp, sprintf("\r\n<html dir="));
 		fwrite($fp, sprintf("<?php echo("));
@@ -152,7 +152,7 @@ $done = 1;
 }
 
 $CondForQuery	= "(address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3')))";
-$sqlu = "SELECT * FROM ".C_MSG_TBL." WHERE m_time < ".(time() - C_MSG_DEL*60*60)." AND ".$CondForQuery." ORDER BY m_time DESC";
+$sqlu = "SELECT * FROM ".C_MSG_TBL." WHERE (m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."' AND ".$CondForQuery.") ORDER BY m_time DESC";
 $queryu = mysql_query($sqlu) or die("Cannot query the database.<br />" . mysql_error());
 // Collect and store new messages
 $Messages = Array();
@@ -222,7 +222,7 @@ $iu++;
 if ($iu > 1)
 {
 $todayu = date('d-m-y H:i:s', time() + C_TMZ_OFFSET*60*60);
-$lastsqlu = "SELECT * FROM ".C_MSG_TBL." WHERE m_time < ".(time() - C_MSG_DEL*60*60)." ORDER BY m_time DESC LIMIT 1";
+$lastsqlu = "SELECT * FROM ".C_MSG_TBL." WHERE (m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."') ORDER BY m_time DESC LIMIT 1";
 $lastqueryu = mysql_query($lastsqlu) or die("Cannot query the database.<br />" . mysql_error());
 while($lastresultu = mysql_fetch_array($lastqueryu))
 {
@@ -251,7 +251,7 @@ $logpathu = "./logs/".$yearu."/".$monthu."/".$yearu.$monthu.$dayu.".php"  ;
 		fwrite($fpu, sprintf("<?php\r\n"));
 		fwrite($fpu, sprintf($lang));
 		fwrite($fpu, sprintf("\r\n"));
-		fwrite($fpu, sprintf('$textDirection = ($Charset == "windows-1256") ? "RTL" : "LTR";'));
+		fwrite($fpu, sprintf('$textDirection = ($Align == "right") ? "RTL" : "LTR";'));
 		fwrite($fpu, sprintf("\r\n?>"));
 		fwrite($fpu, sprintf("\r\n<html dir="));
 		fwrite($fpu, sprintf("<?php echo("));

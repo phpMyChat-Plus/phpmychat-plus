@@ -1,5 +1,5 @@
 <?php
-// File : english/localized.tutorial.php - plus version (26.05.2007 - rev.5)
+// File : english/localized.tutorial.php - plus version (10.07.2007 - rev.6)
 // Original translation by Sharif Islam <mislam@students.uiuc.edu> & Jessica Gibson <oram@uiuc.edu> & Dean Collins <joelford@pacbell.net>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -21,7 +21,7 @@ if (isset($_COOKIE["CookieStatus"])) $CookieStatus = $_COOKIE["CookieStatus"];
 
 <HEAD>
 <TITLE>English Tutorial for <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?></TITLE>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
 <STYLE>
 A.topLink
 {
@@ -97,7 +97,7 @@ if ($Ver == "H")
 <A HREF="#customize" CLASS="topLink">Customizing the Chat View</A><br />
 <P>
 <A HREF="#commands" CLASS="topLink">Features and Commands:</A><br />
-&nbsp&nbsp&nbsp&nbsp<A HREF="#help" CLASS="topLink">Help command</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#help" CLASS="topLink">Help command</A><br />
 <!-- Avatar System Start. -->
 <?php
 if (C_USE_AVATARS) {
@@ -111,46 +111,46 @@ if (C_USE_AVATARS) {
 if (C_USE_SMILIES)
 {
 	?>
-	&nbsp&nbsp&nbsp&nbsp<A HREF="#smilies" CLASS="topLink">Graphical smilies</A><br />
+	&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#smilies" CLASS="topLink">Graphical smilies</A><br />
 	<?php
 };
 if (C_HTML_TAGS_KEEP != "none")
 {
 	?>
-	&nbsp&nbsp&nbsp&nbsp<A HREF="#text" CLASS="topLink">Text Formatting</A><br />
+	&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#text" CLASS="topLink">Text Formatting</A><br />
 	<?php
 };
 ?>
 <!-- Color Input Box mod by Ciprian start -->
-&nbsp&nbsp&nbsp&nbsp<A HREF="#colors" CLASS="topLink"><?php echo(L_COL_TUT); ?></A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#colors" CLASS="topLink"><?php echo(L_COL_TUT); ?></A><br />
 <!-- Color Input Box mod by Ciprian end -->
-&nbsp&nbsp&nbsp&nbsp<A HREF="#invite" CLASS="topLink">Invite a user to join your current chat room</A><br />
-&nbsp&nbsp&nbsp&nbsp<A HREF="#changeroom" CLASS="topLink">Changing from one chat room to another</A><br />
-&nbsp&nbsp&nbsp&nbsp<A HREF="#private" CLASS="topLink">Private Messages</A><br />
-&nbsp&nbsp&nbsp&nbsp<A HREF="#actions" CLASS="topLink">Actions</A><br />
-&nbsp&nbsp&nbsp&nbsp<A HREF="#ignore" CLASS="topLink">Ignoring other Users</A><br />
-&nbsp&nbsp&nbsp&nbsp<A HREF="#whois" CLASS="topLink">Getting Public Information about other Users</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#invite" CLASS="topLink">Invite a user to join your current chat room</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#changeroom" CLASS="topLink">Changing from one chat room to another</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#private" CLASS="topLink">Private Messages</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#actions" CLASS="topLink">Actions</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#ignore" CLASS="topLink">Ignoring other Users</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#whois" CLASS="topLink">Getting Public Information about other Users</A><br />
 <?php
 if (C_SAVE != "0")
 {
 	?>
-	&nbsp&nbsp&nbsp&nbsp<A HREF="#save" CLASS="topLink">Save messages</A><br />
+	&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#save" CLASS="topLink">Save messages</A><br />
 	<?php
 };
 ?>
 <P>
 <A HREF="#moderator" CLASS="topLink">Special commands for moderators and/or the administrator:</A><br />
-&nbsp&nbsp&nbsp&nbsp<A HREF="#announce" CLASS="topLink">Send an announcement</A><br />
-&nbsp&nbsp&nbsp&nbsp<A HREF="#kick" CLASS="topLink">Kicking a user</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#announce" CLASS="topLink">Send an announcement</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#kick" CLASS="topLink">Kicking a user</A><br />
 <?php
 if (C_BANISH != "0")
 {
 	?>
-	&nbsp&nbsp&nbsp&nbsp<A HREF="#banish" CLASS="topLink">Banish a user</A><br />
+	&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#banish" CLASS="topLink">Banish a user</A><br />
 	<?php
 };
 ?>
-&nbsp&nbsp&nbsp&nbsp<A HREF="#promote" CLASS="topLink">Promote/Demote a user to/from moderator:</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#promote" CLASS="topLink">Promote/Demote a user to/from moderator:</A><br />
 <P>
 <hr />
 <hr />
@@ -175,7 +175,7 @@ if (C_MULTI_LANG)
 <P>
 <FONT SIZE="+1"><A NAME="login"><B>Login:</B></A></FONT>
 <P>
-If you have already registered, simply log in by entering your username and password. Then select which chat room you would like to enter and press the '<?php echo(L_SET_14); ?>' button.<br />
+If you have already registered, simply log in by entering your username and password. Then select which chat room you would like to enter and press the ’<?php echo(L_SET_14); ?>’ button.<br />
 <?php
 if (C_REQUIRE_REGISTER)
 {
@@ -188,7 +188,7 @@ else
 {
 	?>
 <P>
-	Else you can <A HREF="#register">register</A> first or simply enter a room but your nick won't be reserved (an other user may use the same nick once you have logged out).
+	Else you can <A HREF="#register">register</A> first or simply enter a room but your nick won’t be reserved (an other user may use the same nick once you have logged out).
 	<?php
 }
 ?>
@@ -224,7 +224,7 @@ if (C_VERSION == "2")
 	<P>
 	Registered users can create rooms. Private ones can only be accessed by users who know their name and will never been displayed except for users that are in.<br />
 	<P>
-	Room's name cannot contain comma or backslash (\).<?php if (C_NO_SWEAR) echo(" It cannot contain \"swear words\"."); ?>
+	Room’s name cannot contain comma or backslash (\).<?php if (C_NO_SWEAR) echo(" It cannot contain \"swear words\"."); ?>
 	<br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 	<P>
 	<hr />
@@ -298,7 +298,7 @@ To exit the chat, simply click once on "Exit". Alternatively, you may also enter
 /bye<br />
 /quit<br />
 These commands may be completed with a message to be sent before you leave the chat room.
-<I>For example :</I> /quit CU soon!
+<I>For example :</I> /quit See you soon!
 <P>
 will send the message "CU soon!" in the main frame then log you out.
 
@@ -341,7 +341,7 @@ There are many different ways to customize the look of the Chat. To change setti
 		<?php
 	};
 	?>
-	<LI>The <B>Notify command</B> allows you to toggle on or off the option of seeing the notices when other users enter or exit the chat room. By default this option is <?php echo(C_NOTIFY ? "on" : "off"); ?> and the notices <?php echo(C_NOTIFY ? "will" : "won't"); ?> be seen.<br />Type "/notify" without quotes.
+	<LI>The <B>Notify command</B> allows you to toggle on or off the option of seeing the notices when other users enter or exit the chat room. By default this option is <?php echo(C_NOTIFY ? "on" : "off"); ?> and the notices <?php echo(C_NOTIFY ? "will" : "won’t"); ?> be seen.<br />Type "/notify" without quotes.
 	<P>
 	<LI>The <B>Timestamp command</B> allows you to toggle on or off the option of seeing the time the message was posted before each message and the server time in the status bar. By default this option is <?php echo(C_SHOW_TIMESTAMP ? "on" : "off"); ?>.<br />Type "/timestamp" without quotes.
 	<P>
@@ -397,9 +397,9 @@ If (C_USE_AVATARS) {
 	<hr />
 	<FONT SIZE="+1"><A NAME="avatars"><B>Avatars:</B></A></FONT>
 <P>Avatars are graphic image icons that represent chatters. Only registered users may change their avatar. Registered users may open their Profile (see /profile command) and click on the avatar image to select it from a menu of images, or to input a URL to a graphic image available anywhere on the internet (only images publicly accessible, not password protected sites). Images should be browser-viewable (.gif, .jpg, etc. ) 32 x 32 pixel graphic files for best display.
-<P>Clicking on a person's avatar in the message frame will popup up that person's profile (see <A HREF="#whois">/whois command</A>).
-Clicking on your own avatar on the user's list  will invoke the /profile command, if you are registered.
-If you are not registered, clicking on your own (system's default) avatar will bring up an alert to encourage you to register.
+<P>Clicking on a person’s avatar in the message frame will popup up that person’s profile (see <A HREF="#whois">/whois command</A>).
+Clicking on your own avatar on the user’s list  will invoke the /profile command, if you are registered.
+If you are not registered, clicking on your own (system’s default) avatar will bring up an alert to encourage you to register.
   <P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 <P>
 <?php
@@ -503,7 +503,7 @@ will move you into the RedRoom.
 <?php
 if (C_VERSION == "2")
 {
-	echo(!C_REQUIRE_REGISTER ? "<P>If you're a registered user, you" : "<br /><P>You");
+	echo(!C_REQUIRE_REGISTER ? "<P>If you’re a registered user, you" : "<br /><P>You");
 	?>
 	 may also create a new room with this same command. But then you have to specify its type: 0 stands for private, 1 for public (default value).
 	<P>
@@ -511,7 +511,7 @@ if (C_VERSION == "2")
 	<P>
 	will create a new private room (assuming a public one has not already been created with that name) called MyRoom and move you into it.
 	<P>
-	Room's name cannot contain comma or backslash (\).<?php if (C_NO_SWEAR) echo(" It cannot contain \"swear words\"."); ?>
+	Room’s name cannot contain comma or backslash (\).<?php if (C_NO_SWEAR) echo(" It cannot contain \"swear words\"."); ?>
 	<?php
 }
 ?>
@@ -560,7 +560,7 @@ Note that clicking on the nick of a message sender in the main frame will automa
 <P>
 <FONT SIZE="+1"><A NAME="actions"><B>Actions:</B></A></FONT>
 <P>
-To describe what you're doing you can use the <B>command "/me action"</B> without quotes.
+To describe what you’re doing you can use the <B>command "/me action"</B> without quotes.
 <P>
 <I>For example:</I> If Jack sends the message "/me is drinking a coffee" the message frame will shown "<B>* Jack</B> is drinking a coffee".
 <br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
@@ -583,7 +583,7 @@ To resume display of message by an ignored user, type the <B>command "/ignore - 
 <I>For example:</I> /ignore - Jack
 <P>
 Now all the messages by Jack posted during the current chat session will be displayed on your screen, including those messages posted by Jack before you typed this command.
- If you don't specify a username after the hyphen, your "ignored list" will be cleaned.
+ If you don’t specify a username after the hyphen, your "ignored list" will be cleaned.
 <P>
 Note that you can put more than one username in the ignore command (eg "/ignore Jack,Helen,Alf" or "/ignore - Jack,Alf"). They must be splitted by comma (,) without spaces.
 <br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
@@ -597,7 +597,7 @@ To see public information about a user, type the <B>command "/whois username"</B
 <P>
 <I>For Example:</I> /whois Jack
 <P>
-where 'Jack' is the username. This command will create a separate pop-up window that will display the publicly available information about that user. Use your own name to check out how your profile info is displayed to other users using the same command.
+where ’Jack’ is the username. This command will create a separate pop-up window that will display the publicly available information about that user. Use your own name to check out how your profile info is displayed to other users using the same command.
 <br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 <P>
 <hr />
@@ -613,7 +613,7 @@ if (C_SAVE != "0")
 	<P>
 	<I>For Example:</I> /save 5
 	<P>
-	where '5' is the number of messages to save. If n is not specified, all available messages sent to the current room will be taken into account.
+	where ’5’ is the number of messages to save. If n is not specified, all available messages sent to the current room will be taken into account.
 	<br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 	<P>
 	<hr />
@@ -658,9 +658,9 @@ if (C_BANISH != "0")
 	<FONT SIZE="+1"><A NAME="banish"><B>Banish a user:</B></A></FONT>
 	<P>
 	Moderators can banish a user and the administrator can banish a user or a moderator with the <B>ban command</B>.<br />
-	The administrator can banish a user from another room than the one he is chatting into. He can also banish a user forever and from the chat as a whole with the '<B>&nbsp;*&nbsp;</B>' setting that must be inserted before the nick of the user to be banished.
+	The administrator can banish a user from another room than the one he is chatting into. He can also banish a user forever and from the chat as a whole with the ’<B>*</B>’ setting that must be inserted before the nick of the user to be banished.
 	<P>
-	<I>For example</I>, if Jack is the name of the user to banish: <I>/ban Jack</I>, <I>/ban * Jack</I>, <I>/ban Jack reason of banning</I> o <I>/ban * Jack reason of banning</I>. The "reason of banning" can be any text e.g. "for spamming!"
+	<I>For example</I>, if Jack is the name of the user to banish: <I>/ban Jack</I>, <I>/ban * Jack</I>, <I>/ban Jack reason of banning</I> or <I>/ban * Jack reason of banning</I>. The "reason of banning" can be any text e.g. "for spamming!"
 	<br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 	<P>
 	<hr />
