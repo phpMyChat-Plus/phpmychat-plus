@@ -12,13 +12,19 @@
 
 $SmiliesTbl = Array(
 	":\)"	=> array("smile1.gif", "15", "15"),
+	":-\)"	=> array("smile1.gif", "15", "15"),
 	":D"	=> array("smile2.gif", "15", "15"),
 	":o"	=> array("smile3.gif", "15", "15"),
+	":O"	=> array("smile3.gif", "15", "15"),
 	":\("	=> array("smile4.gif", "15", "15"),
+	":-\("	=> array("smile4.gif", "15", "15"),
 	";\)"	=> array("smile5.gif", "15", "15"),
 	":p"	=> array("smile6.gif", "15", "15"),
+	":P"	=> array("smile6.gif", "15", "15"),
 	"8\)"	=> array("smile7.gif", "15", "15"),
+	"8-\)"	=> array("smile7.gif", "15", "15"),
 	":\["	=> array("smile8.gif", "15", "15"),
+	":-\["	=> array("smile8.gif", "15", "15"),
 	":kill:"	=> array("smile9.gif", "50", "15"),
 	":wave"	=> array("smile10.gif", "25", "15"),
 	":baby"	=> array("smile11.gif", "40", "15"),
@@ -126,7 +132,7 @@ function Check4Smilies(&$string,&$Table)
 }
 
 // Bob Dickow modification Rev 2 for multiple smileys rows in help popup
-// Display smilies in the help popup and in the tutorials
+// Display smilies in the help popup and in the tutorials (added popups by Ciprian)
 // Added the popup for Smilie popup by Ciprian
 
 function DisplaySmilies(&$ToDisplay,&$Table,&$TblSize,$Target)

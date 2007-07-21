@@ -1681,7 +1681,16 @@ if (C_SHOW_INFO)
 // Info on welcome page about cmds, mods and bot. Edit lib/info.lib.php to add more infos about your chat features
 if (SET_CMDS) echo(INFO_CMDS."<br />");
 if (SET_MODS) echo(INFO_MODS."<br />");
-if (SET_BOT && C_BOT_CONTROL) echo(INFO_BOT."<br />");
+if (SET_BOT && C_BOT_CONTROL)
+{
+		$DbLink->query("SELECT Count(*) FROM ".C_USR_TBL." WHERE username='".C_BOT_NAME."' LIMIT 1");
+		list($botinroom) = $DbLink->next_record();
+		$DbLink->clean_results();
+		if ($botinroom != 0)
+		{
+			echo(INFO_BOT."<br />");
+		}
+}
 ?>
 </FONT>
 <?php
