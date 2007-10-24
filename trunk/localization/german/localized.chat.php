@@ -91,6 +91,8 @@ define("L_REG_45", "Geschlecht");
 define("L_REG_46", "männlich");
 define("L_REG_47", "weiblich");
 define("L_REG_48", "keine Angaben");
+define("L_REG_49", "Anmeldung erforderlich!");
+define("L_REG_50", "Anmeldung ausgesetzt!");
 
 // e-mail validation stuff
 define("L_EMAIL_VAL_1", "Deine Einstellungen zum Einstieg in den Chat");

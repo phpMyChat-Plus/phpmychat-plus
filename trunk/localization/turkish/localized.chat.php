@@ -90,7 +90,7 @@ define("L_REG_46", "Bay");
 define("L_REG_47", "Bayan");
 define("L_REG_48", "Belirtilmedi");
 define("L_REG_49", "Kayıt olunması gerekiyor!");
-define("L_REG_50", "Kayıt onay bekliyor!");
+define("L_REG_50", "Kayıtlar dondurulmuştur!");
 
 // e-mail validation stuff
 define("L_EMAIL_VAL_1", "Sohbete giriş için ayarlarınız");
