@@ -45,7 +45,7 @@ function display_connected($Private,$Full,$String1,$String2)
 			{
 				if ($Latin1) $User = htmlentities($User);
 				$RTime = date("d-M, H:i:s", $RTime + C_TMZ_OFFSET*60*60);
-				$List .= ($List == "" ? "<tr><td>".$User."</td><td>".$Room."</td><td>joined at ".$RTime."</td><td>".$IP."": "<tr><td>".$User."</td><td>".$Room."</td><td>joined at ".$RTime."</td><td>".$IP."");
+				$List .= ($List == "" ? "<tr><td>".$User."</td><td>".$Room."</td><td>".L_LURKING_4." ".$RTime."</td><td>".$IP."": "<tr><td>".$User."</td><td>".$Room."</td><td>".L_LURKING_4." ".$RTime."</td><td>".$IP."");
 			}
 			echo($List);
 		}
@@ -63,7 +63,7 @@ function display_connected($Private,$Full,$String1,$String2)
 			{
 				if ($Latin1) $User = htmlentities($User);
 				$RTime = date("d-M, H:i:s", $RTime + C_TMZ_OFFSET*60*60);
-				$List .= ($List == "" ? "<tr><td>".$User."</td><td>".$Room."</td><td>joined at ".$RTime."</td><td>".$IP."": "<tr><td>".$User."</td><td>".$Room."</td><td>joined at ".$RTime."</td><td>".$IP."");
+				$List .= ($List == "" ? "<tr><td>".$User."</td><td>".$Room."</td><td>".L_LURKING_4." ".$RTime."</td><td>".$IP."": "<tr><td>".$User."</td><td>".$Room."</td><td>".L_LURKING_4." ".$RTime."</td><td>".$IP."");
 			}
 			echo($List);
 		}
@@ -85,7 +85,7 @@ function display_connected($Private,$Full,$String1,$String2)
 // Define the SQL query (depends on values for ignored users list and on whether to display
 // notification messages or not
 
-$CondForQuery	= "(address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (username NOT LIKE 'SYS %' OR username = 'SYS image' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3') OR (address != '' AND username = 'SYS room'))";
+$CondForQuery	= "(address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3')))";
 
 $DbLink = new DB;
 $DbLink->query("SELECT m_time, room, username, latin1, address, message FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC");
@@ -97,9 +97,13 @@ if($DbLink->num_rows() > 0)
 	while(list($Time, $Room, $User, $Latin1, $Dest, $Message) = $DbLink->next_record())
 	{
 		$Message = stripslashes($Message);
+		if ($Room == '*') $Room = L_ROOM_ALL;
+		if ($L!="turkish") $Message = eregi_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$Message);
+		else $Message = eregi_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_1,L_LINKS_15).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_1,L_LINKS_15).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_1,L_LINKS_15).'</a>',$Message);
+		$Message = eregi_replace('alt="Send email">','title="'.sprintf(L_CLICK,L_EMAIL_1).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_EMAIL_1).'.\'; return true">',$Message);
 		$NewMsg = "<tr align=texttop valign=top>";
 		$NewMsg .= "<td width=1% nowrap=\"nowrap\">".date("d-M, H:i:s", $Time + C_TMZ_OFFSET*60*60)."</td><td width=1% nowrap=\"nowrap\">&nbsp;".$Room."</td>";
-		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS topic" && $User != "SYS topic reset")
+		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS topic" && $User != "SYS topic reset" && substr($User,0,8) != "SYS dice")
 		{
 			$User = special_char($User,$Latin1);
 			if ($Dest != "") $Dest = "]>[".htmlspecialchars(stripslashes($Dest));
@@ -107,8 +111,8 @@ if($DbLink->num_rows() > 0)
 		}
 		if ($User == "SYS image")
 		{
-        $NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>[${Dest}]</B></td><td><A href=".$Message." onMouseOver=\"window.status='Click to open the full size picture.'; return true\" title=\"Click to open the full size picture\" target=_blank>".$Message."</A></td>";
-    }
+      $NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>[${Dest}]</B></td><td><FONT class=\"notify\">".L_PIC."</FONT> <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_FULLSIZE_PIC).".'; return true\" title=\"".sprintf(L_CLICK,L_FULLSIZE_PIC)."\" target=_blank>".$Message."</A></td>";
+		}
 		if ($User == "SYS announce")
 		{
 			if ($Message == 'L_RELOAD_CHAT') $Message = L_RELOAD_CHAT;
@@ -126,6 +130,10 @@ if($DbLink->num_rows() > 0)
 		{
  			$NewMsg .= "<td colspan=2><FONT class=\"notify\">".$Dest." ".L_TOPIC_RESET." ".$Message."</FONT></td>";
 		}
+		if (substr($User,0,8) == "SYS dice")
+		{
+ 			$NewMsg .= "<td colspan=2 valign=\"top\"><FONT class=\"notify\">".$Dest." ".DICE_RESULTS."</FONT> ".$Message."</td>";
+		}
 
 		// Separator between messages sent before today and other ones
 		if (!isset($day_separator) && date("j", $Time +  C_TMZ_OFFSET*60*60) != date("j", time() +  C_TMZ_OFFSET*60*60))
@@ -139,7 +147,7 @@ if($DbLink->num_rows() > 0)
 }
 else
 {
-	$MessagesString = "<td><SPAN CLASS=\"notify\" style=\"background-color:yellow;\">".L_NO_MSG."</SPAN></td>";
+	$MessagesString = "<td colspan=4 align=center style=\"background-color:yellow;\"><SPAN CLASS=\"notify\">".L_NO_MSG."</SPAN></td>";
 };
 
 
@@ -148,19 +156,20 @@ $DbLink->close();
 $CleanUsrTbl = 1;
 
 ?>
-<P CLASS=title><?php echo(APP_NAME); ?> Connected Users and Lurking</P>
+<P CLASS=title><?php echo(APP_NAME."  ".A_LURKING_1) ; ?></P>
 </CENTER>
 <?
 if (!C_CHAT_LURKING)
 {
 ?>
-<P CLASS=mainframe><A NAME="full">Lurking has been disabled in chat</P>
+<P CLASS=mainframe><A NAME="full"><?php echo (A_LURKING_2) ; ?></P>
+</CENTER>
 <?
 }
 ?>
 <META HTTP-EQUIV="Refresh" CONTENT="30">
 <hr />
-<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=0 CLASS="table">
+<TABLE BORDER=1 CELLSPACING=2 CELLPADDING=1 CLASS="table">
 <TR>
 	<TD ALIGN=CENTER colspan=4>
 		<?php
@@ -168,7 +177,7 @@ if (!C_CHAT_LURKING)
 		?>
 	</TD>
 </TR>
-</TABLE><br />
+</TABLE>
 <?php
 if (C_CHAT_LURKING)
 {
@@ -186,28 +195,37 @@ $handler = @mysql_connect(C_DB_HOST,C_DB_USER,C_DB_PASS);
 
 //Database-Commands
 $delete = @mysql_query("DELETE FROM ".C_LRK_TBL." WHERE time<'$closetime'",$handler);
-$result = @mysql_query("SELECT DISTINCT ip,browser FROM ".C_LRK_TBL." ORDER BY ip ASC",$handler);
+$result = @mysql_query("SELECT DISTINCT ip,browser,username FROM ".C_LRK_TBL." ORDER BY ip ASC",$handler);
 $online_users = @mysql_numrows($result);
 @mysql_close();
 ?>
-<table border=1 cellspacing=0 cellpadding=0 class="table">
-<tr><td>
-<?php echo(L_CUR_5)?></td>
+<hr /><table border=1 cellspacing=1 cellpadding=1 class="table">
+<tr>
+	<td><?php echo(L_CUR_5)?></td>
 	<td align="center" style="vertical-align:middle">
 	<font size="4" color="#6666ff"><b>&nbsp <?php echo($online_users); ?> &nbsp</font></b></td>
-</td></tr></table>
-<table border=1 cellspacing=0 cellpadding=0 class="table">
+	</tr></table>
+<table border=1 width=98% cellspacing=0 cellpadding=1 class="table">
 <?php
 while($data = @mysql_fetch_array($result))
 {
-	echo("<tr><td>".$ip = $data[ip]."</td>");
-	echo("<td>".$browser = $data[browser]."</td></tr>");
+	if ($data[username] == "Guest") $data[username] = L_LURKING_5;
+	echo("<tr><td>".$data[username]."</td>");
+	echo("<td>".$data[ip]."</td>");
+	echo("<td>".$data[browser]."</td></tr>");
 }
 ?>
 </table>
 <?php
 }
-	echo("<hr />");
-	echo("<table BORDER=1 WIDTH=100% CELLSPACING=0 CELLPADDING=0 CLASS=table>".$MessagesString."</table>");
+	echo("<center><hr />");
+	echo("<table ALIGN=CENTER BORDER=1 WIDTH=98% CELLSPACING=0 CELLPADDING=1 CLASS=table>");
+	echo("<tr>
+<td VALIGN=CENTER ALIGN=CENTER><b>".A_POST_TIME."</b></td>
+<td VALIGN=CENTER ALIGN=CENTER><b>".A_CHTEX_ROOM."</b></td>
+<td VALIGN=CENTER ALIGN=CENTER><b>".A_FROM_TO."</b></td>
+<td VALIGN=CENTER ALIGN=CENTER><b>".A_CHTEX_MSG."</b></td>
+</tr>");
+	echo($MessagesString."</table><br />");
 	unset($MessagesString);
 ?>

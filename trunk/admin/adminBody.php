@@ -11,17 +11,27 @@ function room_in($what, $in)
 	return false;
 };
 
+// Transform mysql timestamp to UNIX timestamp format
+function mysql_to_ts($mysql_time)
+{
+	if (!preg_match('/^(\\d{4})-(\\d{2})-(\\d{2}) (\\d{2}):(\\d{2}):(\\d{2})$/', $mysql_time, $matches))
+	{
+		return NULL;
+	}
+	return mktime($matches[4], $matches[5], $matches[6], $matches[2], $matches[3], $matches[1]);
+}
 
 $DbLink = new DB;
 
 // Optimize MySQL table when the script run for the first time
 if (isset($First))
 {
-	$DbLink->optimize(C_MSG_TBL);
-	$DbLink->optimize(C_USR_TBL);
-	$DbLink->optimize(C_REG_TBL);
 	$DbLink->optimize(C_BAN_TBL);
 	$DbLink->optimize(C_CFG_TBL);
+	$DbLink->optimize(C_LRK_TBL);
+	$DbLink->optimize(C_MSG_TBL);
+	$DbLink->optimize(C_REG_TBL);
+	$DbLink->optimize(C_USR_TBL);
 };
 
 if ($sheet < 3)
@@ -41,15 +51,13 @@ $URLQueryBody_Links = "From=$From&".$URLQueryBody."&pmc_username=".urlencode($pm
 if ($sheet < 6)
 {
 		// Define the lower bound to be displayed for registered users table
-		if (!isset($startCfg)) $startCfg = "0";
-		$URLQueryBody_MoveCfgLinks = $URLQueryBody_Links."&startCfg=$startCfg";
 		$URLQueryBody_SortLinks = $URLQueryBody_Links."&startReg=$startReg";
 		$URLQueryBody_MoveLinks = $URLQueryBody_Links."&sortBy=$sortBy&sortOrder=$sortOrder";
 };
 
 // Horizontal alignement for cells topic and gifs names
 
-if ($Charset == "windows-1256")	// Arabic
+if ($Align == "right")	// Arabic
 {
 	$CellAlign		= "RIGHT";
 	$InvCellAlign	= "LEFT";
@@ -69,10 +77,10 @@ else
 };
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
-<TITLE><?php echo(APP_NAME); ?></TITLE>
+<TITLE><?php echo((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <?php
 if ($sheet < 3)

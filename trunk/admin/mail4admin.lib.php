@@ -9,11 +9,11 @@
 // -- SETTINGS BELLOW MUST BE COMPLETED --
 
 $Sender_Name = C_ADMIN_NAME;	// May also be the name of your site
-$Sender_email = C_ADMIN_EMAIL;	// For the reply address;
+$Sender_email = C_ADMIN_EMAIL;	// For the reply address
 
 // -- CORE FUNCTIONS - DO NOT MODIFY --
 
-$MailFunctionOn = (function_exists("mail") && @mail('','',''));
+$MailFunctionOn = (function_exists("mail"));
 
 if (isset($MailFunctionOn))
 {
@@ -64,6 +64,7 @@ if (isset($MailFunctionOn))
 
 		$Subject = quote_printable($Subject,$Charset);
 
+		$Body = stripslashes($Body);
 		$Headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
 		$Headers .= "X-Sender: <${Sender_email}> \r\n";
 		$Headers .= "X-Mailer: PHP/".phpversion()." \r\n";
@@ -73,7 +74,7 @@ if (isset($MailFunctionOn))
 		$Headers .= "Content-Type: text/plain; charset=${Charset} \r\n";
 		$Headers .= "Content-Transfer-Encoding: 8bit \r\n";
 
-		return @mail($To, $Subject, stripslashes($Body), $Headers);
+		return @mail($To, $Subject, $Body, $Headers);
 	};
 
 };

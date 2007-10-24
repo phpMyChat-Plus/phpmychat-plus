@@ -1,66 +1,52 @@
-Instructions for a New installation.
-Note: This version need a manual install. (not running the setup.php as the base version does)
+Instructions for a NEW installation (or an UPGRADE) of the Plus version you just downloaded.
+Note: This version comes with a fully automated wizard to help you install phpMyChat Plus on your site.
+Alternatively a manual install folder. If you choose the manual installation, please read the step 7 then go to manual install folder and follow those instructions..
 
 1. Extract plus.zip
-2. Edit this file:
-- config/config.lib.php - only the database details (first 3 lines at the begining of the file):
-// Database settings
-define("C_DB_NAME", 'plus');						// Logical database name on that server (most of the times like: cpanelusername_databasename)
-define("C_DB_USER", 'username');				// Database username (most of the times like: cpanelusername_username)
-define("C_DB_PASS", 'password');				// Database user's password
-Example:
-My server cpanel username is "ciprianmp". My lines look like:
-define("C_DB_NAME", 'ciprianmp_plus');						// Logical database name on that server (most of the times like: cpanelusername_databasename)
-define("C_DB_USER", 'ciprianmp_username');				// Database username (most of the times like: cpanelusername_username)
-define("C_DB_PASS", 'password');				// Database user's password
-3. Upload the plus directory into your public_html folder.
+
+2. Upload the plus directory into your public_html folder.
 Note: index.php must be in the plus folder, not plus/chat/ as for the previous versions.
-The file index1.php is the index version with the full page filled. Choose the one you want and keep it as index.php.
-4. Rename plus folder to whatever you'd like.
-5. Change Attributes to 777 for these files/folders:
-plus/acount/pages/chat_index.txt
-plus/acount/pages/ip.txt
-plus/bot/subs.inc
-plus/botfb/
-plus/logs/
-plus/logsadmin/
-6. Go to plus/installation/ folder on your drive and open mysql_newinstall.txt (or the corresponding upgrade) file.
-Don't change any data there. You will be able to customize your chat later, from the config page (Clicking Administration link on your index page)
-6a. Open your phpmyadmin link and browse to your desired database (if you haven't created one, you'll need to do so in Cpanel);
-6b. In the desired database (the same added to your config/config.lib.php) click on SQL. This will show a window waiting for some code to be added;
-6c. Copy the content of the text file opened at 6th step and paste it in the SQL frame/window, then click OK.
-6d. Make sure it says "Your SQL statement has been executed successfully" or something like that. In the left frame, you can see/check the tables added.
-7. Test your site functionality by opening http://yoururl.com/plus (plus is the name you used in step 4.) in your browser. Note that there is only one admin right now: admin, password admin.
-8. Register your desired administrator name and change its permissions to 'admin' in c_reg_table table. Check if your new name has become indeed an admin.
-9. Delete the admin user from the c_reg_users table
-10. Open the Administration menu/link (Admin Panel) and customize your chat (do not rename your bot yet).
-11. Rename your logsadmin folder on both admin config panel and ftp folder to a hardly to guess name.
+The file index1.php is the index file with the full page filled. Choose the one you want and keep it as index.php.
+
+3. Optionally, rename plus folder to whatever you'd like (chat, mychat).
+
+4. Open http://yoursiteurl.com/plus  (plus is the name you used in step 3.). The setup will load automatically.
+
+5. Pick up an available language and go through the installer (thanks to Thomas Pschernig and Ciprian).
+
+6. Make sure the file install/install.php is deleted from your chat, otherwise you won't be able to open the chat login page.
+
+7. Test your site functionality by opening http://yoursiteurl.com/plus (plus is the name you used in step 3.) in your browser. Note that there is only one admin right now: the one defines suring setup.
+
+8. Open the Administration menu/link (Admin Panel) and customize your chat (do not rename your bot yet).
+
 That's it! It should fly!
 
-Optional
-If you want to use the bot follow these instructions:
-- Very important: Don't change bot's name (in admin panel) before the next 8 steps (only if successful)
-1. Open your browser and type: http://yoursiteurl.com/plus/bot/boatloader.php
-2. Wait for the loader to finish the import operation. At the end, you can test the bot following the instructions on the bottom of that page.
-3. If it works from talk.htm (.php), it should work now in your chat as well.
-4. To start the bot in a room, type: /bot start
-5. To talk to the bot, just mention his name "plusbot" in a message (same room)
-6. To shut the bot up type "bye plusbot"
-7. To stop the bot and make him quit the room, type /bot stop in the room it's running into.
-8. To talk privately to the bot (less annoying) use /to or /wisp, like with all the other users.
-Bot successfully loaded Test: make sure the bot is able to answer you in the chat. If his message is empty, then something went wrong.
-Contact me on ciprianmp@yahoo.com for support (only initial loading support, not customizing the replies)
-If the bot posts coherent answers, then you can go to admin panel and chenge your name (using the same rules for registered usernames: no spaces, commas, backslashes or other banned characters, otherwise it will break your chat's functionality)
-Note: If you don't intend to use the bot, edit the quick menu in admin config panel to eliminate the bot commands from the quick list.
+
+After install Support
+
+A: If you don't intend to use the bot, edit the quick menu in admin config panel to eliminate the bot commands from the quick list.
 If bot answers you (posts any content) then you can change it's name in Admin Panel now - it's safe.
-This version comes only with the English and Romanian language files. A translation project is under way.
+This version comes only with the English and German files.
 To add other languages by yourself, edit all the other languages you want but english from the standard pack and add them in chat/localization/.
 Insert, modify and translate according to the new lines added in english version (use a text compare software).
 
-For more instructions (e.g. how to upgrade the c_reg_users table) read the Plus FAQ.txt in the docs/plus docs folder.
+B: If you get into troubles with bot, you need to uninstall and reinstall it to make it work again:
+B1. Stop the bot in chat rooms it is started in, using the /bot stop command (if it doesn't work, just delete the bot records in c_users table - with phpmyadmin - and botfb folder).
+B2. Rename the bot to "plusbot" in Admin panel.
+B3. Use phpmyadmin to "empty" the following tables: bot_bot, bot_bots, bot_patterns and bot_templates.
+B4. Reupload back (restore) the file called botloader.php (or botloadrinc.php, if first frozes).
+B5. Make sure all the original distributed files are in the aiml folder (startup.xml and *.aiml files).
+B6. Make sure the plus/bot/subs.inc file is chmoded to 777 (step 5 in this tutorial).
+B7. Reinstall the bot following the steps described in paragraph A. (A1-A8)
+
+C. This chat comes with 10 different skins (config/style1-10.css.php) Play with them and decide which ones fits best your site style. To do that, use a temporary/backup folder where you can rename them one by one to style1.css.php then upload them (again, one by one) into the config folder. Login to first default room, take a look, when you're done, logout and do the same with the next style. And so on. At the end, reupload the original style1.css.php.
+After you discovered how all the skins look like, just rename them to match the room number (1-5 are for the first 5 public rooms, in order; 6-9 are the first 4 private rooms, in order - all 9 are defined and enabled by default in admin panel; 10th skin is unused by default)
+
+For more instructions (e.g. how to upgrade the c_reg_users table) read the Plus FAQ.txt in the "docs/plus docs" folder. Actually, read also the Fixes readme.txt which might give you some more hints about new features/fixes and other stuff.
 That's all for now! Have a nice one and let me know how it goes!
 
-Do you need some more tries of different configurations before applying to your chat server? Don't hesitate to use the Demo/Try me server at http://plus.gamedogs.com (use admin/admin or moderator/moderator as login for different powers - not registration required)
+Do you need some more tries of different configurations before applying to your chat server? Don't hesitate to use the Demo/Try me server at http://ciprianmp.com/latest/ or http://plus.gamedogs.com (use admin/admin or moderator/moderator as login for different powers - not registration required)
 
 My best regards,
 Ciprian Murariu

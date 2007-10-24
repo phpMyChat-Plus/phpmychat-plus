@@ -5,25 +5,25 @@
    ------------------------------------------------------------------------------------ */
 
 // Get the names and values for vars sent by index.lib.php
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
 };
 
 // Get the names and values for post vars
-if (isset($HTTP_POST_VARS))
+if (isset($_POST))
 {
-	while(list($name,$value) = each($HTTP_POST_VARS))
+	while(list($name,$value) = each($_POST))
 	{
 		$$name = $value;
 	};
 };
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 // Fix some security issues
@@ -32,13 +32,13 @@ if ((empty($From) || trim($From) == '')
 	|| (empty($R) || trim($R) == '')
 	|| (empty($Ver) || empty($L) || empty($N))
 	|| (!isset($T) || !isset($D) || !isset($O) || !isset($ST) || !isset($NT))
-	|| !is_dir('./localization/'.$L))
+	|| !is_dir("./localization/".$L))
 {
 	exit();
 }
 
 // Added for Skin mod
-if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
+if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 
 require("./config/config.lib.php");
 require("./lib/release.lib.php");
@@ -55,14 +55,13 @@ $U = urldecode($U);
 $R = urldecode($R);
 
 // Translate to html special characters, and entities if message was sent with a latin 1 charset
-$Latin1 = ($Charset == "iso-8859-1");
+$Latin1 = ($Charset != "utf-8");
 function special_char($str,$lang)
 {
 	return addslashes($lang ? htmlentities(stripslashes($str)) : htmlspecialchars(stripslashes($str)));
 };
 
 $DbLink = new DB;
-
 
 // ** Updates user info in connected users tables and fix some security issues **
 // Fixed a security issue thanks to SeazoN
@@ -113,7 +112,6 @@ if ($DbLink->num_rows() != 0)
 	}
 	elseif ($status == "k")			// Kicked by a moderator or the admin.
 	{
-		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_KICKED, \"".special_char($U,$Latin1)."\")', '', '')");
 		$kicked = 1;
 	}
 	elseif ($status == "d")			// The admin just deleted the room
@@ -129,7 +127,7 @@ if ($DbLink->num_rows() != 0)
 	{
 		// Kick the user from the current room
 		$kickedUrl	= ($kicked < 5)
-					? "$From?L=$L&U=".urlencode(stripslashes($U))."&E=".urlencode(stripslashes($R))."&KICKED=$kicked"
+					? "$From?L=$L&U=".urlencode(stripslashes($U))."&E=".urlencode(stripslashes($R))."&KK=$kicked"
 					: "$From?L=$L";
 		?>
 		<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
@@ -157,11 +155,13 @@ else
 	exit;
 };
 
-// Extended one field for Private Message Popup by Ciprian
+// Extended two fields for Private Message Popup and room_from by Ciprian
 // ** Send formated messages to the message table **
 include("bot/respond.php");
 function AddMessage($M, $T, $R, $U, $C, $Private, $Read, $RF)
 {
+$M = str_replace("\"", "&quot;", $M);
+$M = str_replace("'","&#39;", $M);
 if (C_BOT_CONTROL && C_BOT_PUBLIC && $Private == "")
 {
 	//--Bot Control Popeye
@@ -184,16 +184,24 @@ $botcontrol ="botfb/$R.txt";
 	// Text formating tags
 	if(C_HTML_TAGS_KEEP == "none")
 	{
-		if(C_HTML_TAGS_SHOW == 0)
+		if(!C_HTML_TAGS_SHOW)
 		{
 			// eliminates every HTML like tags
 			$M = ereg_replace("<[^>]+>", "", $M);
+			$M = ereg_replace("x3c", "", $M);
+			$M = ereg_replace("x3e", "", $M);
+			$M = ereg_replace("\"", "&quot;", $M);
+			$M = ereg_replace("\'","&#39;", $M);
 		}
 		else
 		{
 			// or keep it without effect
 			$M = str_replace("<", "&lt;", $M);
 			$M = str_replace(">", "&gt;", $M);
+			$M = str_replace("x3c", "&lt;", $M);
+			$M = str_replace("x3e", "&gt;", $M);
+			$M = str_replace("\"", "&quot;", $M);
+			$M = str_replace("\'","&#39;", $M);
 		}
 	}
 	else
@@ -201,6 +209,10 @@ $botcontrol ="botfb/$R.txt";
 		// then C_HTML_TAGS_KEEP == "simple", we keep U, B and I tags
 		$M = str_replace("<", "&lt;", $M);
 		$M = str_replace(">", "&gt;", $M);
+		$M = str_replace("x3c", "&lt;", $M);
+		$M = str_replace("x3e", "&gt;", $M);
+		$M = str_replace("\"", "&quot;", $M);
+		$M = str_replace("\'","&#39;", $M);
 
 		if(function_exists("preg_match"))
 		{
@@ -208,7 +220,7 @@ $botcontrol ="botfb/$R.txt";
 			{
 				$M = preg_replace("/&lt;([ubi]?)&gt;(.*?)&lt;(\/\\1)&gt;/i","<\\1>\\2<\\3>",$M);
 			}
-			if(C_HTML_TAGS_SHOW == 0)
+			if(!C_HTML_TAGS_SHOW)
 			{
 				$M = preg_replace("/&lt;\/?[ubi]?&gt;/i","",$M);
 			}
@@ -217,15 +229,28 @@ $botcontrol ="botfb/$R.txt";
 
 	// URL
 	$M = eregi_replace('([[:space:]]|^)(www[.])', '\\1http://\\2', $M); // no prefix (www.myurl.ext)
+	$M = eregi_replace('([[:space:]]|^)(ftp[.])', '\\1ftp://\\2', $M); // no prefix (ftp.myurl.ext)
+	// Word wrap fix by Alexander Eisele <xaex@xaex.de>
+	if (!preg_match_all("((http://|https://|ftp://|mailto:)[^ ]+)", $M, $pmatch))
+	{
+		$M = wordwrap($M, 40, " ", 1);
+	}
 	$prefix = '(http|https|ftp|telnet|news|gopher|file|wais)://';
-  $pureUrl = '([[:alnum:]/\n+-=%&:_.~?]+[#[:alnum:]+-_~]*)';
-	$M = eregi_replace($prefix . $pureUrl, '<a href="\\1://\\2" title="Click to open link" onMouseOver="window.status=\'Click to open link.\'; return true" target="_blank">\\1://\\2</a>', $M);
+	$pureUrl = '([[:alnum:]/\n+-=%&:_.~?]+[#[:alnum:]+-_~]*)';
+//	$M = eregi_replace($prefix . $pureUrl, '<a href="\\1://\\2" title="Click to open link" onMouseOver="window.status=\'Click to open link.\'; return true" target="_blank">\\1://\\2</a>', $M);
+       $purl="";
+       for ($x=0; $x<count($pmatch[0]); $x++)
+       {
+				$purl .= "||".$pmatch[0][$x];
+       }
+
+    $M = eregi_replace($prefix.$pureUrl, '<a href="links.php?link='.urlencode($purl).'" target="_blank"></a>', $M);
 
 	// e-mail addresses
-	$M = eregi_replace('([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](fo|g|l|m|mes|o|op|pa|ro|seum|t|u|v|z)?)', '<a href="mailto:\\1" title="Send email" onMouseOver="window.status=\'Send email.\'; return true">\\1</a>', $M);
+	$M = eregi_replace('([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](fo|g|l|m|mes|o|op|pa|ro|seum|t|u|v|z)?)', '<a href="mailto:\\1" alt="Send email">\\1</a>', $M);
 
 	// Smilies
-	if (C_USE_SMILIES == 1)
+	if (C_USE_SMILIES)
 	{
 		include("./lib/smilies.lib.php");
 		Check4Smilies($M,$SmiliesTbl);
@@ -257,20 +282,46 @@ $botcontrol ="botfb/$R.txt";
 		}
 	}
 
-	//Color Input Box Mod by Ciprian
-	if (isset($HTTP_COOKIE_VARS["CookieColor"]) && (!isset($C))) $C = $HTTP_COOKIE_VARS["CookieColor"];
-	if ((COLOR_ALLOW_GUESTS == 0) && ($status == "u")) $C = '';
+// Color Sniffer scripting safe mode filter by Alexander Eisele <xaex@xeax.de> & Ciprian
+$C = str_replace("<", "&lt;", $C);
+$C = str_replace(">", "&gt;", $C);
+$C = str_replace("\"", "&quot;", $C);
+$C = str_replace("x3c", "&lt;", $C);
+$C = str_replace("x3e", "&gt;", $C);
+
+$CC = array("","black","dimgray","gray","darkgray","silver","lightgrey","gainsboro","whitesmoke","ghostwhite","white","slategray","lightslategray","midnightblue","navy","darkblue","darkslateblue","mediumblue","blue","steelblue","royalblue","cornflowerblue","dodgerblue","deepskyblue","lightskyblue","skyblue","lightsteelblue","lightblue","powderblue","paleturquoise","lightcyan","aliceblue","azure","mintcream","darkslategray","cadetblue","teal","darkcyan","lightseagreen","darkturquoise","mediumturquoise","turquoise","aqua","cyan","mediumaquamarine","aquamarine","darkolivegreen","olive","olivedrab","darkkhaki","darkgreen","green","forestgreen","seagreen","mediumseagreen","darkseagreen","mediumspringgreen","springgreen","palegreen","honeydew","limegreen","lime","lightgreen","lawngreen","chartreuse","greenyellow","yellowgreen","indigo","purple","darkmagenta","darkviolet","darkorchid","mediumorchid","orchid","violet","plum","thistle","blueviolet","mediumpurple","slateblue","mediumslateblue","lavender","mediumvioletred","magenta","fuchsia","deeppink","palevioletred","hotpink","lightpink","pink","mistyrose","lavenderblush","maroon","darkred","firebrick","crimson","red","orangered","tomato","indianred","lightcoral","salmon","darksalmon","lightsalmon","coral","darkorange","orange","sandybrown","darkgoldenrod","goldenrod","gold","yellow","khaki","palegoldenrod","lemonchiffon","cornsilk","lightgoldenrodyellow","beige","lightyellow","ivory","rosybrown","saddlebrown","brown","sienna","chocolate","peru","tan","burlywood","wheat","navajowhite","peachpuff","moccasin","bisque","blanchedalmond","papayawhip","antiquewhite","linen","oldlace","seashell","floralwhite","snow");
+
+if (trim($C)!="")
+{
+	if (!in_array($C, $CC))
+	{
+		$C="lime";
+	}
+}
+
+	//Color's Power Filter Mod by Ciprian
+	if (isset($_COOKIE["CookieColor"]) && (!isset($C))) $C = $_COOKIE["CookieColor"];
+	//Registered colorname to use for text color by Ciprian
+	else
+	{
+		$DbLink->query("SELECT colorname FROM ".C_REG_TBL." WHERE username = '$U' LIMIT 1");
+		if ($DbLink->num_rows() != 0 && (!isset($C)))
+		{
+	    list($C) = $DbLink->next_record();
+		}
+	}
+	if (!COLOR_ALLOW_GUESTS && $status == "u") $C = '';
 	if (COLOR_FILTERS)
 	{
 		if (!isset($C))
 		{
-			if ($status == "a") $C = COLOR_CA;
+			if ($status == "a" || $status == "t") $C = COLOR_CA;
 			elseif ($status == "m") $C = COLOR_CM;
 		}
 		elseif ($C != '')
 		{
 			// Red colors are reserved to the admin
-			if ((strcasecmp($C, COLOR_CA) == 0 || strcasecmp($C, COLOR_CAF) == 0 || strcasecmp($C, COLOR_CAFH) == 0 || strcasecmp($C, COLOR_CAS) == 0 || strcasecmp($C, COLOR_CASC) == 0 || strcasecmp($C, COLOR_CASH) == 0) && !($status == "a"))
+			if ((strcasecmp($C, COLOR_CA) == 0 || strcasecmp($C, COLOR_CA1) == 0 || strcasecmp($C, COLOR_CA2) == 0) && $C != "" && $status != "a" && $status != "t")
 			{
 				if ($status == "m")
 				{
@@ -282,7 +333,7 @@ $botcontrol ="botfb/$R.txt";
 				}
 			}
 			// Blue colors are reserved to a moderator for the current room
-			elseif ((strcasecmp($C, COLOR_CM) == 0 || strcasecmp($C, COLOR_CMF) == 0 || strcasecmp($C, COLOR_CMFH) == 0 || strcasecmp($C, COLOR_CMS) == 0 || strcasecmp($C, COLOR_CMSC) == 0 || strcasecmp($C, COLOR_CMSH) == 0) && !($status == "a" || $status == "m"))
+			elseif ((strcasecmp($C, COLOR_CM) == 0 || strcasecmp($C, COLOR_CM1) == 0 || strcasecmp($C, COLOR_CM2) == 0) && $C != "" && $status != "a" && $status != "t" && $status != "m")
 			{
 				$C = '';	//default color
 			}
@@ -292,46 +343,61 @@ $botcontrol ="botfb/$R.txt";
 		if (checkwords($C, true)) $C = '';		//if user is using a swear word (defined in swearing.lib.php), the font color will resets to default. this is to keep your database as well as our computer clean of swearing (no swear into your cookies on your local computer).
 		if (isset($C) && $C != '')
 		{
-			if (strcasecmp($C, COLOR_CD) != 0 && strcasecmp($C, COLOR_CDC) != 0 && strcasecmp($C, COLOR_CDH) != 0 && ($C!= ''))
+			if (strcasecmp($C, COLOR_CD) != 0)
 			{
 				$M = "<FONT COLOR=\"".$C."\">".$M."</FONT>";
+				setcookie("CookieColor", $C, time() + 60*60*24*365);        // cookie expires in one year
 			}
 		}
-		setcookie("CookieColor", $C, time() + 60*60*24*365);        // cookie expires in one year
+		else
+		{
+				$M = "<FONT COLOR=\"".COLOR_CD."\">".$M."</FONT>";
+				setcookie("CookieColor", '', time());        // cookie expires in one year
+		}
 	$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', ".time().", '$Private', '".addslashes($M)."', '$Read', '$RF')");
 };
 
-// ** Define the default color that will be used for messages **
-//Color Input Box Mod by Ciprian
-	if (isset($HTTP_COOKIE_VARS["CookieColor"]) && (!isset($C))) $C = $HTTP_COOKIE_VARS["CookieColor"];
-	if ((COLOR_ALLOW_GUESTS == 0) && ($status == "u")) $C = '';
+	// ** Define the default color that will be used for messages **
+	//Color's Power Filter Mod by Ciprian
+		$DbLink->query("SELECT colorname FROM ".C_REG_TBL." WHERE username = '$U' LIMIT 1");
+		if ($DbLink->num_rows() != 0 && (!isset($C)))
+		{
+	    list($colorname) = $DbLink->next_record();
+		}
+	if (isset($_COOKIE["CookieColor"]) && (!isset($C))) $C = $_COOKIE["CookieColor"];
+	//Registered colorname to use for text color by Ciprian
+	elseif (isset($colorname) && (!isset($C))) $C = $colorname;
+	if (!COLOR_ALLOW_GUESTS && $status == "u") $C = '';
 	if (COLOR_FILTERS)
 	{
 		if (!isset($C))
 		{
-			if ($status == "a") $C = COLOR_CA;
+			if ($status == "a" || $status == "t") $C = COLOR_CA;
 			elseif ($status == "m") $C = COLOR_CM;
 		}
 		elseif ($C != '')
 		{
 			// Red colors are reserved to the admin
-			if ((strcasecmp($C, COLOR_CA) == 0 || strcasecmp($C, COLOR_CAF) == 0 || strcasecmp($C, COLOR_CAFH) == 0 || strcasecmp($C, COLOR_CAS) == 0 || strcasecmp($C, COLOR_CASC) == 0 || strcasecmp($C, COLOR_CASH) == 0) && !($status == "a"))
+			if ((strcasecmp($C, COLOR_CA) == 0 || strcasecmp($C, COLOR_CA1) == 0 || strcasecmp($C, COLOR_CA2) == 0) && $C != "" && $status != "a" && $status != "t")
 			{
 				if ($status == "m")
 				{
 					$ErrorC = COL_ERROR_BOX_MODA;
+					setcookie("CookieColor", "", time());        // delete power color cookie
 					$C = COLOR_CM; //default moderator's color
 				}
 				else
 				{
 					$ErrorC = COL_ERROR_BOX_USRA;
+					setcookie("CookieColor", "", time());        // delete power color cookie
 					$C = '';	//default color
 				}
 			}
 			// Blue colors are reserved to a moderator for the current room
-			elseif ((strcasecmp($C, COLOR_CM) == 0 || strcasecmp($C, COLOR_CMF) == 0 || strcasecmp($C, COLOR_CMFH) == 0 || strcasecmp($C, COLOR_CMS) == 0 || strcasecmp($C, COLOR_CMSC) == 0 || strcasecmp($C, COLOR_CMSH) == 0) && !($status == "a" || $status == "m"))
+			elseif ((strcasecmp($C, COLOR_CM) == 0 || strcasecmp($C, COLOR_CM1) == 0 || strcasecmp($C, COLOR_CM2) == 0) && $C != "" && $status != "a" && $status != "t" && $status != "m")
 			{
 					$ErrorC = COL_ERROR_BOX_USRM;
+					setcookie("CookieColor", "", time());        // delete power color cookie
 					$C = '';	//default color
 			}
 		}
@@ -343,9 +409,9 @@ $RefreshMessages = false;
 $IsPopup = false;
 $IsM = false;
 
-if (isset($M) && trim($M) != "" && ereg("^\/", $M)) include("./lib/commands.lib.php");
+if (isset($M) && trim($M) != "" && (ereg("^\/", $M) || ereg("^: ", $M))) include("./lib/commands.lib.php");
 
-if (isset($M) && ereg("^\/", $M) && !($IsCommand) && !isset($Error)) $Error = L_BAD_CMD;
+if (isset($M) && (ereg("^\/", $M) || ereg("^: ", $M)) && !($IsCommand) && !isset($Error)) $Error = L_BAD_CMD;
 
 if (isset($M) && trim($M) != "" && (!isset($M0) || ($M != $M0)) && !($IsCommand || isset($Error)))
 {
@@ -355,7 +421,7 @@ if (isset($M) && trim($M) != "" && (!isset($M0) || ($M != $M0)) && !($IsCommand 
 		if (checkwords($C, true)) $C = '';		//if user is using a swear word (defined in swearing.lib.php), the font color will resets to default. this is to keep your database as well as our computer clean of swearing (no swear into your cookies on your local computer).
 		$M = checkwords($M, false);
 	}
-// Bob Dickow Custom code for /away command modification:
+// Bob Dickow Custom code for /away command modification - modified by Ciprian for Plus behaviour.:
 
    $DbLink->query("SELECT awaystat FROM ".C_USR_TBL." WHERE username='$U'");
 
@@ -366,23 +432,21 @@ if (isset($M) && trim($M) != "" && (!isset($M0) || ($M != $M0)) && !($IsCommand 
    $DbLink->clean_results();
 
    if ($awaystat == '1') {
-     $Msg = sprintf(L_BACK . C_UPDTUSRS, special_char($U,$Latin1));
-     $Msg = " <B>$Msg</B>";
+     $Msg = "sprintf(L_BACK, \"".special_char($U,$Latin1)."\")";
+     $time_back = time() - 1;
      $awaystat = '0';
-     AddMessage(stripslashes($M), $T, $R, $U, $C, "", "", $RF);
-     $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', ".time().", '$Private', '".addslashes($Msg)."', '', '$RF')");
+     $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS away', '$Latin1', '$time_back', '', '".addslashes($Msg)."', '', '$RF')");
      $DbLink->query("UPDATE ".C_USR_TBL." SET awaystat='0' WHERE username='$U'");
-   } else {
-     AddMessage(stripslashes($M), $T, $R, $U, $C, "", "", $RF);
    }
-// END Bob Dickow custom code for /away command modification.
+   AddMessage(stripslashes($M), $T, $R, $U, $C, "", "", $RF);
+// END Bob Dickow custom code for /away command modification - modified by Ciprian for Plus behaviour..
 	$RefreshMessages = true;
 }
 
 $DbLink->close();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
 <TITLE>Hidden Input frame</TITLE>
@@ -470,7 +534,7 @@ if(isset($ErrorC))
 		}
 		<?php
 	}
-	elseif (!isset($status) || $status != "a")
+	elseif (!isset($status) || ($status != "a" && $status != "t"))
 	{
 		?>
 		/* Remove the mod's color when the user has became a 'simple user */

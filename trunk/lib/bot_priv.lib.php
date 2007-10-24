@@ -53,12 +53,12 @@ global $uid ;                   // WORKS  it is to keep the bot on a topic per u
 if ($Read == "New" || $Read == "Old")
 {
 	$D1 = "<FONT COLOR=".C_BOT_FONT_COLOR."><I>(private) " . $D1 . "</I></FONT>" ;
-  mysql_query("UPDATE ".C_MSG_TBL." SET pm_read='Old' WHERE pm_read='New' AND address='$BOT' AND username='$myuniqueid'") ;
+  mysql_query("UPDATE ".C_MSG_TBL." SET pm_read='".date("Y-m-d H:i:s")."' WHERE pm_read='New' AND address='$BOT' AND username='$myuniqueid'") ;
 }
 elseif ($Read == "Neww" || $Read == "Oldw")
 {
 	$D1 = "<FONT COLOR=".C_BOT_FONT_COLOR."><I>(whisper) " . $D1 . "</I></FONT>" ;
-	mysql_query("UPDATE ".C_MSG_TBL." SET pm_read='Oldw' WHERE pm_read='Neww' AND address='$BOT' AND username='$myuniqueid'") ;
+	mysql_query("UPDATE ".C_MSG_TBL." SET pm_read='".date("Y-m-d H:i:s")."' WHERE pm_read='Neww' AND address='$BOT' AND username='$myuniqueid'") ;
 }
               $D1 = trim($D1) ;
               $DR = addslashes($D1);
@@ -69,10 +69,13 @@ elseif ($Read == "Neww" || $Read == "Oldw")
 
 			if (eregi(C_BOT_NAME, $M) || eregi(C_BOT_NAME, $Private))                          // Looks for "BOT NAME" in $M (typed in INPUT)  WORKS
       {
-          botmemory($U);                                     // starts conversation with BOT if none already.
           global $M;
           global $botmess;
           $botmess = eregi_replace(C_BOT_NAME, "", $M);      // removes the word "BOT NAME" from the input helps the bot to make sense? NEEDS WORK.
           bottalk(&$botmess, $R, $UR, $Private, $Read);
+      }
+     if (eregi("bye", $M))             // if private statment contains "bye"
+      {
+      	if (file_exists ($botpath)) unlink ($botpath);    // it deletes the users file if found (Stops coversation with bot)
       }
 ?>

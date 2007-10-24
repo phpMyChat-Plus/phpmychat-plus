@@ -11,7 +11,6 @@ function room_in($what, $in)
 }
 
 if ($Cmd[1] != "*") $UU = $Cmd[1];
-
 // Check for invalid characters
 if (ereg("[\, ]", stripslashes($UU)))
 {
@@ -30,7 +29,7 @@ else
 	{
 		list($password,$perms,$rooms) = $DbLink->next_record();
 		$DbLink->clean_results();
-		if (($password != $PWD_Hash) || (($perms != "moderator")&&($perms != "admin")) || (($perms == "moderator")&&(!room_in(stripslashes($R), $rooms))))
+		if (($password != $PWD_Hash) || (($perms != "moderator") && ($perms != "admin") && ($perms != "topmod")) || (($perms == "moderator") && (!room_in(stripslashes($R), $rooms) && !room_in("*", $rooms))))
 		{
 			$Error = L_NO_MODERATOR;
 		}
@@ -39,7 +38,7 @@ else
 			if ($UU != "")
 			{
 				// Define an additional condition for moderators so they can only kick an user from their current room
-				$Query4Moder = ($perms != "admin" ? "room='$R' AND " : "");
+				$Query4Moder = (($perms != "admin" && $perms != "topmod") ? "room='$R' AND " : "");
 				// Ensure the user to be kicked is logged in (into the current room for moderators)
 				$DbLink->query("SELECT status FROM ".C_USR_TBL." WHERE ".$Query4Moder."username='$UU' LIMIT 1");
 				if ($DbLink->num_rows() == 0)
@@ -52,7 +51,7 @@ else
 					list($status) = $DbLink->next_record();
 					$DbLink->clean_results();
 					// Ensure the user to be kicked is not a more powerfull user (admin>moderator)
-					if ($status == "a" || ($status == "m" && $perms != "admin"))
+					if ($status == "a" || $status == "t" || ($status == "m" && ($perms != "admin" && $perms != "topmod" )))
 					{
 						$Error = sprintf(L_NO_KICKED, stripslashes($UU));
 					}
@@ -61,6 +60,15 @@ else
 						$IsCommand = true;
 						$RefreshMessages = true;
 						$DbLink->query("UPDATE ".C_USR_TBL." SET u_time='".time()."', status='k' WHERE ".$Query4Moder."username='$UU'");
+						if ($Cmd[2] != "")
+						{
+							$Reason = trim($Cmd[2]);
+							$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_KICKED_REASON, \"".special_char($UU,$Latin1)."\", \"".$Reason."\")', '', '')");
+						}
+						else
+						{
+							$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_KICKED, \"".special_char($UU,$Latin1)."\")', '', '')");
+						}
 					}
 				}
 			}
@@ -69,9 +77,8 @@ else
 						$IsCommand = true;
 						$RefreshMessages = true;
 						$DbLink->query("UPDATE ".C_USR_TBL." SET u_time='".time()."', status='k' WHERE username!='$U'");
-			}
-		}
-	}
-}
-
+			};
+		};
+	};
+};
 ?>

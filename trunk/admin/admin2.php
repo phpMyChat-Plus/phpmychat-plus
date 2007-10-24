@@ -1,4 +1,5 @@
 <?php
+// Banished Users panel
 // This sheet is diplayed when the admin wants to modify the list of banished users
 
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
@@ -42,10 +43,12 @@ if (isset($FORM_SEND) && $FORM_SEND == 2)
 			$VarName = "until_".$usrHash; $ttt = $$VarName;
 			$VarName = "old_rooms_".$usrHash; $old_rrr = $$VarName;
 			$VarName = "old_until_".$usrHash; $old_ttt = $$VarName;
-			if ($rrr == $old_rrr && $ttt == $old_ttt) continue;
-			$AddUntil = ($ttt == "forever" ? ", ban_until='2147483647'" : "");
+			$VarName = "reason_".$usrHash; $reas = $$VarName;
+			$VarName = "old_reason_".$usrHash; $old_reas = $$VarName;
+			if ($rrr == $old_rrr && $ttt == $old_ttt && $reas == $old_reas) continue;
+			$AddUntil = ($ttt == "forever" ? ", ban_until='2222222222'" : "");
 			$uuu = addslashes($username);
-			$DbLink->query("UPDATE ".C_BAN_TBL." SET rooms='$rrr'".$AddUntil." WHERE username='$uuu'");
+			$DbLink->query("UPDATE ".C_BAN_TBL." SET rooms='$rrr'".$AddUntil.",reason='$reas' WHERE username='$uuu'");
 
 			// banish the user if he's currently chatting
 			if ($rrr == "*")
@@ -79,7 +82,7 @@ $DbLink->query("DELETE FROM ".C_BAN_TBL." WHERE ".$ToCheck);
 
 <P CLASS=title><?php echo(A_SHEET2_1); ?></P>
 
-<TABLE BORDER=0 CELLPADDING=3 CLASS=table>
+<TABLE ALIGN=CENTER BORDER=0 CELLPADDING=3 CLASS=table>
 
 <?php
 // Ensure at least one banished user exist
@@ -117,6 +120,9 @@ if ($count_BanUsers != 0)
 			<TD VALIGN=CENTER ALIGN=CENTER CLASS=tabtitle>
 				<?echo(A_SHEET2_4)?>
 			</TD>
+			<TD VALIGN=CENTER ALIGN=CENTER CLASS=tabtitle>
+				<?echo(A_SHEET2_9)?>
+			</TD>
 		</TR>
 
 		<?php
@@ -131,8 +137,8 @@ if ($count_BanUsers != 0)
 		elseif (C_DB_TYPE == "pgsql") $limits = " LIMIT 10 OFFSET $startReg";
 		else $limits = "";
 
-		$DbLink->query("SELECT username,latin1,ip,rooms,ban_until FROM ".C_BAN_TBL." ORDER BY $sortBy $sortOrder".$limits);
-		while (list($username,$Latin1,$ip,$rooms,$until) = $DbLink->next_record())
+		$DbLink->query("SELECT username,latin1,ip,rooms,ban_until,reason FROM ".C_BAN_TBL." ORDER BY $sortBy $sortOrder".$limits);
+		while (list($username,$Latin1,$ip,$rooms,$until,$reason) = $DbLink->next_record())
 		{
 			$usrHash = md5($username);
 			?>
@@ -148,7 +154,7 @@ if ($count_BanUsers != 0)
 					<?php echo($ip); ?>
 				</TD>
 				<TD VALIGN=CENTER ALIGN=CENTER>
-					<INPUT type=text name="rooms_<?echo($usrHash)?>" value="<?echo(stripslashes(htmlspecialchars($rooms)))?>" SIZE="40">
+					<INPUT type=text name="rooms_<?echo($usrHash)?>" value="<?echo(stripslashes(htmlspecialchars($rooms)))?>" SIZE="30">
 					<INPUT type="hidden" name="old_rooms_<?echo($usrHash)?>" value="<?echo(htmlspecialchars($rooms))?>">
 				</TD>
 				<TD VALIGN=CENTER ALIGN=CENTER>
@@ -173,19 +179,23 @@ if ($count_BanUsers != 0)
 					</SELECT>
 					<INPUT type="hidden" name="old_until_<?echo($usrHash)?>" value="<?echo($until > $ForeverVal ? "forever" : "date")?>">
 				</TD>
+				<TD VALIGN=CENTER ALIGN=CENTER>
+					<INPUT type=text name="reason_<?echo($usrHash)?>" value="<?echo(stripslashes(htmlspecialchars($reason)))?>" size="15">
+					<INPUT type="hidden" name="old_reason_<?echo($usrHash)?>" value="<?echo(htmlspecialchars($reason))?>">
+				</TD>
 			</TR>
 			<?
 		};
 		$DbLink->clean_results();
 		?>
 		<TR>
-			<TD VALIGN=CENTER ALIGN=CENTER COLSPAN=5>
+			<TD VALIGN=CENTER ALIGN=CENTER COLSPAN=6>
 				<FONT size=-1>* <?echo(A_SHEET2_6)?></FONT>
 			</TD>
 		</TR>
 		<TR><TD>&nbsp;</TD></TR>
 		<TR>
-			<TD VALIGN=CENTER ALIGN=CENTER COLSPAN=4>
+			<TD VALIGN=CENTER ALIGN=CENTER COLSPAN=5>
 				<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(A_SHEET2_7); ?>">
 			</TD>
 			<TD VALIGN=CENTER ALIGN=CENTER>

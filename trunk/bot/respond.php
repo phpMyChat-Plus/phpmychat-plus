@@ -35,7 +35,7 @@
 /**
 * The general preferences and database details.
 */
-require_once "dbprefs.php";
+require_once "db_prefs.php";
 
 /**
 * The matching engine functions of the AIML interpreter.
@@ -87,7 +87,7 @@ function replybotname($userinput,$uniqueid,$botname){
 	$botid = lookupbotid($botname);
 
 	if ($botid==-1){
-		print "I don't know that bot: $botname<BR>\n";
+		print "I don't know that bot: $botname<br />\n";
 	}
 	else {
 		return reply($userinput,$uniqueid,$botid);

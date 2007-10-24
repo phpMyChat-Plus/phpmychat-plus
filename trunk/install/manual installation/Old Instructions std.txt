@@ -1,0 +1,36 @@
+This is the install documentation for the standard version, previously published on phpheaven site:
+You won't need this, unless something strange will happen.
+
+Standard Installation Document 1/11/06 3:24PM 
+
+Step 1 
+Unzip the phpMyChat package to your hard drive. 
+
+Step 2 
+You need to have access to, or create an SQL DB. 
+Via your sites “Control Panel” logon to your SQL tool (phpMyAdmin), point it to the data base you want to use for “PhpMyChat” and execute the sql batch file in the folder “chat/install/database/xxx.sql” on your hard drive. This will create the tables phpMyChat needs to work! 
+
+Step 3 
+Open chat/config/config.lib.php from your hard drive in a text editor such as note pad etc. and edit these settings 
+Database settings 
+define(”C_DB_TYPE”, ‘mysql’); 
+define(”C_DB_HOST”, ‘localhost’); 
+define(”C_DB_NAME”, ‘db_name’); 
+define(”C_DB_USER”, ‘username’); 
+define(”C_DB_PASS”, ‘password’); 
+
+A point to note: While “localhost” works in most cases, sometime it is necessary to refer to the full address of your data base. Your service provider will normally tell you if this is the case! 
+While you have this file open check through the other settings available to you. These control the behavior of your Chat site. Most are self explanatory and are fine left to the default setting, unless you have special needs. 
+See more here http://www.gobombala.com/html/modules/wfsection/article.php?articleid=7 
+
+Step 4
+Upload all files and folders except the “install” folder to your site via FTP. 
+
+Step 5
+(Security point!)
+Access your chat via a browser and register a new user name of your choice. 
+Now via phpMyAdmin access the c_reg_users table in your chat data base. Delete the “admin” entry, yes “DELETE” it.
+Now alter the “perms” field of the user name you created before from “user” to “admin”, save and exit.
+This user name is now your Admin account, keep it secret. 
+
+Happy Chatting.

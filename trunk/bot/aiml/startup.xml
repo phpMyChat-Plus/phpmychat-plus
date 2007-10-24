@@ -30,14 +30,44 @@
             <property name="talkabout" value="anything"/>
             <property name="wear" value="nothing"/>
             <property name="website" value="http://sourceforge.net/projects/programe"/>
-            <property name="email" value="not-set@no-domain.org"/>
+            <property name="email" value="bot@bot.com"/>
             <property name="language" value="english"/>
             <property name="msagent" value="no"/>
             <!--You may enumerate each file you want the bot to load, or use the "*"
                 to indicate you want all AIML files in a given directory.
                 The path is relative to server.engine.home in your server properties.-->
-	    <learn>*</learn>
-        </bot>
+			<learn>*</learn>
+<!-- 
+            <learn>cybora_brazilian.aiml</learn>
+            <learn>Maria.aiml</learn>
+            <learn>Gattini.aiml</learn>
+            <learn>Errori.aiml</learn>
+            <learn>Turing-ita.aiml</learn>
+            <learn>SioNo.aiml</learn>
+            <learn>Ciao.aiml</learn>
+            <learn>Ami.aiml</learn>
+            <learn>Politica.aiml</learn>
+            <learn>Religione.aiml</learn>
+            <learn>Numeri.aiml</learn>
+            <learn>Invenzioni.aiml</learn>
+            <learn>Geografia.aiml</learn>
+            <learn>German.aiml</learn>
+            <learn>that_ed.aiml</learn>
+            <learn>atomique_ed.aiml</learn>
+            <learn>comment_ed.aiml</learn>
+            <learn>estu_ed.aiml</learn>
+            <learn>humour_ed.aiml</learn>
+            <learn>ou_ed.aiml</learn>
+            <learn>pourquoi_ed.aiml</learn>
+            <learn>quand_ed.aiml</learn>
+            <learn>quel_ed.aiml</learn>
+            <learn>questceque_ed.aiml</learn>
+            <learn>qui_ed.aiml</learn>
+            <learn>srai_ed.aiml</learn>
+            <learn>quel_ed.aiml</learn>
+            <learn>questceque_ed.aiml</learn>
+-->
+       </bot>
     </bots>
     <!--Substitutions are grouped according to several AIML interpreter functions.-->
     <substitutions>
@@ -270,9 +300,10 @@
             <substitute find=".inf " replace=" dot inf "/>
             <substitute find=".uk " replace=" dot uk "/>
             <substitute find=".jp " replace=" dot jp "/>
+            <substitute find=".ac " replace=" dot ac "/>
             <substitute find=".au " replace=" dot au "/>
             <substitute find=".co " replace=" dot co "/>
-            <substitute find=".ac " replace=" dot ac "/>
+            <substitute find=".eu " replace=" dot ro "/>
             <substitute find=".ro " replace=" dot ro "/>
             <substitute find=".us " replace=" dot us "/>
             <substitute find=" o.k. " replace=" ok "/>
@@ -337,7 +368,126 @@
             <substitute find=",what " replace=".  what "/>
             <substitute find=", do " replace=".  do "/>
             <substitute find=",do " replace=".  do "/>
-        </input>
+<!-- German substitutions -->
+            <substitute find="Ž" replace="Ae"/>
+            <substitute find="„" replace="ae"/>
+            <substitute find="™" replace="Oe"/>
+            <substitute find="”" replace="oe"/>
+            <substitute find="š" replace="Ue"/>
+            <substitute find="" replace="ue"/>
+            <substitute find="á" replace="ss"/>
+            <substitute find=" AHBE " replace=" HABE "/>
+            <substitute find=" ANATOMI " replace=" ANATOMIE "/>
+            <substitute find=" ANDRES " replace=" ANDERES "/>
+            <substitute find=" BEMUEH " replace=" BEMUEHE "/>
+            <substitute find=" BISTE " replace=" BIST DU "/>
+            <substitute find=" CHATEN " replace=" CHATTEN "/>
+            <substitute find=" CHATEST " replace=" CHATTEST "/>
+            <substitute find=" CHATET " replace=" CHATTET "/>
+            <substitute find=" CMPUTER " replace=" COMPUTER "/>
+            <substitute find=" DACHT " replace=" DACHTE "/>
+            <substitute find=" DIRS " replace=" DIR ES "/>
+            <substitute find=" DROSSMAN " replace=" DROSSMANN "/>
+            <substitute find=" DROSMANN " replace=" DROSSMANN "/>
+            <substitute find=" DROSMAN " replace=" DROSSMANN "/>
+            <substitute find=" DRUEBER " replace=" DARUEBER "/>
+            <substitute find=" DRUMM " replace=" DARUM "/>
+            <substitute find=" DUS " replace=" DU ES "/>
+            <substitute find=" DU SPRICHTS " replace=" DU SPRICHST "/>
+            <substitute find=" ERGIEBT " replace=" ERGIBT "/>
+            <substitute find=" ERKLAER " replace=" ERKLAERE "/>
+            <substitute find=" FINDS " replace=" FINDE ES "/>
+            <substitute find=" FRAG " replace=" FRAGE "/>
+            <substitute find=" GEHTS " replace=" GEHT ES "/>
+            <substitute find=" GEH " replace=" GEHE "/>
+            <substitute find=" GEHT S " replace=" GEHT ES "/>
+            <substitute find=" GETZ " replace=" JETZT "/>
+            <substitute find=" GIBTS " replace=" GIBT ES "/>
+            <substitute find=" GINGS " replace=" GING ES "/>
+            <substitute find=" GIBS " replace=" GIB ES "/>
+            <substitute find=" GLAUB " replace=" GLAUBE "/>
+            <substitute find=" GLAUBS " replace=" GLAUBE ES "/>
+            <substitute find=" HAB " replace=" HABE "/>
+            <substitute find=" HABS " replace=" HABE ES "/>
+            <substitute find=" HALO " replace=" HALLO "/>
+            <substitute find=" HAS DU " replace=" HAST DU "/>
+            <substitute find=" HASTE " replace=" HAST DU "/>
+            <substitute find=" HAELTS " replace=" HAELTST "/>
+            <substitute find=" HAELST " replace=" HAELTST "/>
+            <substitute find=" HAELLST " replace=" HAELTST "/>
+            <substitute find=" HEIST " replace=" HEISST "/>
+            <substitute find=" DU HST " replace=" DU HAST "/>
+            <substitute find=" ICH HAB " replace=" ICH HABE "/>
+            <substitute find=" ICHS " replace=" ICH ES "/>
+            <substitute find=" INTELIGENT " replace=" INTELLIGENT "/>
+            <substitute find=" INTERESANT " replace=" INTERESSANT "/>
+            <substitute find=" ISSES " replace=" IST ES "/>
+            <substitute find=" ISTS " replace=" IST ES "/>
+            <substitute find=" IST S " replace=" IST ES "/>
+            <substitute find=" ISSET " replace=" IST ES "/>
+            <substitute find=" JAP " replace=" JA "/>
+            <substitute find=" JAU " replace=" JA "/>
+            <substitute find=" JAWOLL " replace=" JA "/>
+            <substitute find=" JEP " replace=" JA "/>
+            <substitute find=" JEPP " replace=" JA "/>
+            <substitute find=" JO " replace=" JA "/>
+            <substitute find=" JETZ " replace=" JETZT "/>
+            <substitute find=" KATHEGORIE " replace=" KATEGORIE "/>
+            <substitute find=" KATHEGORIEN " replace=" KATEGORIEN "/>
+            <substitute find=" KATHEGORISCH " replace=" KATEGORISCH "/>
+            <substitute find=" KENNSTE " replace=" KENNST DU "/>
+            <substitute find=" KENNSE " replace=" KENNST DU "/>
+            <substitute find=" KANNSTE " replace=" KANNST DU "/>
+            <substitute find=" KANNSE " replace=" KANNST DU "/>
+            <substitute find=" KENNT DU " replace=" KENNST DU "/>
+            <substitute find=" KENN " replace=" KENNE "/>
+            <substitute find=" MACHSTE " replace=" MACHST DU "/>
+            <substitute find=" MAENLICH " replace=" MAENNLICH "/>
+            <substitute find=" MAGSTE " replace=" MAGST DU "/>
+            <substitute find=" MANS " replace=" MAN ES "/>
+            <substitute find=" MASCHIENE " replace=" MASCHINE "/>
+            <substitute find=" MGAST " replace=" MAGST "/>
+            <substitute find=" MIER " replace=" MIR "/>
+            <substitute find=" MIRS " replace=" MIR ES "/>
+            <substitute find=" MOECHT " replace=" MOECHTE "/>
+            <substitute find=" MUST " replace=" MUSST "/>
+            <substitute find=" NEE " replace=" NEIN "/>
+            <substitute find=" NEIEN " replace=" NEIN "/>
+            <substitute find=" NEN " replace=" EINEN "/>
+            <substitute find=" NENN " replace=" NENNE "/>
+            <substitute find=" NEHMS " replace=" NEHME ES "/>
+            <substitute find=" NEUGIRIG " replace=" NEUGIERIG "/>
+            <substitute find=" NICH " replace=" NICHT "/>
+            <substitute find=" NIHTS " replace=" NICHTS "/>
+            <substitute find=" NIMMS " replace=" NIMM ES "/>
+            <substitute find=" NIMM S " replace=" NIMM ES "/>
+            <substitute find=" NIX " replace=" NICHTS "/>
+            <substitute find=" OHH " replace=" OH "/>
+            <substitute find=" SCHO " replace=" SCHON "/>
+            <substitute find=" SOLL " replace=" SOLL ES "/>
+            <substitute find=" SONS " replace=" SONST "/>
+            <substitute find=" SPEZIEL " replace=" SPEZIELL "/>
+            <substitute find=" SPIELN " replace=" SPIELEN "/>
+            <substitute find=" STIMMTS " replace=" STIMMT ES "/>
+            <substitute find=" TELEFONIERN " replace=" TELEFONIEREN "/>
+            <substitute find=" TSCHUES " replace=" TSCHUESS "/>
+            <substitute find=" UMS " replace=" UM ES "/>
+            <substitute find=" VERSTEH " replace=" VERSTEHE "/>
+            <substitute find=" VERSUCHS " replace=" VERSUCHE ES "/>
+            <substitute find=" YEAH " replace=" JA "/>
+            <substitute find=" WAT " replace=" WAS "/>
+            <substitute find=" WAEHRE " replace=" WAERE "/>
+            <substitute find=" WAERS " replace=" WAERE ES "/>
+            <substitute find=" WEILS " replace=" WEIL ES "/>
+            <substitute find=" WERS " replace=" WER ES "/>
+            <substitute find=" WERD " replace=" WERDE "/>
+            <substitute find=" WERDS " replace=" WERDE ES "/>
+            <substitute find=" WEIS " replace=" WEISS "/>
+            <substitute find=" WEIST " replace=" WEISST "/>
+            <substitute find=" WIEDE " replace=" WIEDER "/>
+            <substitute find=" WIRSTE " replace=" WIRST DU "/>
+            <substitute find=" YEP " replace=" JA "/>
+         </input>
         <gender>
             <substitute find=" he " replace=" she "/>
             <substitute find=" she " replace=" he "/>
@@ -354,10 +504,20 @@
             <substitute find=" his " replace=" her "/>
             <substitute find=" her " replace=" his "/>
             <substitute find=" him " replace=" her "/>
+<!-- German -->
             <substitute find=" er " replace=" Sie "/>
             <substitute find=" ihm " replace=" ihr "/>
             <substitute find=" sein " replace=" ihr "/>
             <substitute find=" ihn " replace=" Sie "/>
+<!-- Cybora Brazilian -->
+			<substitute find=" ele " replace=" ela "/>
+			<substitute find=" ela " replace=" ele "/>
+			<substitute find=" para ele " replace=" para ela "/>
+			<substitute find=" para ela " replace=" para ele "/>
+			<substitute find=" pra ela " replace=" pra ele "/>
+			<substitute find=" pra ele " replace=" pra ela "/>
+			<substitute find=" com ele " replace=" com ela "/>
+			<substitute find=" com ela " replace=" com ele "/>
         </gender>
         <person>
             <substitute find=" I was " replace=" he or she was "/>
@@ -369,6 +529,20 @@
             <substitute find=" my " replace=" his or her "/>
             <substitute find=" myself " replace=" him or herself "/>
             <substitute find=" mine " replace=" his or hers "/>
+<!-- Cybora Brazilian -->
+			<!-- person repõe palavras com a 1 pessoa pela 3 pessoa  e vice-versa -->
+			<substitute find=" Eu estava " replace=" ele estava "/>
+			<substitute find=" ele estava " replace=" Eu estava "/>
+			<substitute find=" ela estava " replace=" Eu estava "/>
+			<substitute find=" Eu estou " replace=" ele esta "/>
+			<substitute find=" Eu sou " replace=" ele é "/>
+			<substitute find=" Eu " replace=" ele "/>
+			<substitute find=" mim " replace=" ele "/>
+			<substitute find=" meu " replace=" seu "/>
+			<substitute find=" eu " replace=" ele "/>
+			<substitute find=" minha " replace=" sua "/>
+			<substitute find=" sei " replace=" sabe "/>
+			<substitute find=" sabe " replace=" sei "/>
         </person>
         <person2>
             <substitute find=" with you " replace=" with me "/>
@@ -419,6 +593,7 @@
             <substitute find=" me " replace=" you "/>
             <substitute find=" my " replace=" your "/>
             <substitute find=" your " replace=" my "/>
+<!-- German -->
             <substitute find=" ich war " replace=" er war "/>
             <substitute find=" ich bin " replace=" er ist "/>
             <substitute find=" ich " replace=" er "/>
@@ -431,6 +606,12 @@
             <substitute find=" du " replace=" ich "/>
             <substitute find=" dein " replace=" mein "/>
             <substitute find=" deins " replace=" meins "/>
+<!-- Cybora Brazilian -->
+			<!--person2 repõe palavras com a 1 pessoa pela 2 pessoa  e vice-versa -->
+			<substitute find=" eu " replace=" você "/>
+			<substitute find=" você " replace=" eu "/>
+			<substitute find=" sei " replace=" sabe "/>
+			<substitute find=" sabe " replace=" sei "/>
         </person2>
     </substitutions>
     <!--Sentence splitters defined strings that mark the end of a sentence,
@@ -439,5 +620,6 @@
         <splitter value="."/>
         <splitter value="!"/>
         <splitter value="?"/>
+        <splitter value=";"/>
     </sentence-splitters>
 </programd-startup>

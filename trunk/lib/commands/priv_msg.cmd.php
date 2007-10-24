@@ -20,6 +20,10 @@ elseif (eregi($U, trim($Cmd[2])))
 {
 	$Error = L_ERR_USR_27;
 }
+elseif (eregi($QUOTE_NAME, trim($Cmd[2])))
+{
+	$Error = L_ERR_USR_11;
+}
 elseif (trim($Cmd[2]) != "" && trim($Cmd[3]) != "")
 {
 	// Check for swear words in the message if necessary
@@ -32,6 +36,7 @@ elseif (trim($Cmd[2]) != "" && trim($Cmd[3]) != "")
 	$DbLink = new DB;
 	$DbLink->query("SELECT allowpopup FROM ".C_REG_TBL." WHERE username='$Cmd[2]'");
 	if($DbLink->num_rows() != 0) list($allowpopup) = $DbLink->next_record();
+	else $allowpopup = 0;
 	$DbLink->clean_results();
 if (C_PRIV_POPUP)
 {
@@ -62,7 +67,7 @@ else
         } else {
 // end R Dickow /away command modification addition.
  	AddMessage(stripslashes($Cmd[3]), $T, $R, $U, $C, $Cmd[2], $Read, '');
-	if (eregi(C_BOT_NAME, trim($Cmd[2])))	include "lib/bot_priv.lib.php";
+	if (eregi(C_BOT_NAME, trim($Cmd[2]))) include "lib/bot_priv.lib.php";
 	$IsCommand = true;
 	$RefreshMessages = true;
 }

@@ -1,5 +1,54 @@
+Requests / Suggestions
+-add Private channels popup - separate private conversations - mirc like - based on Volkan Övün idea.
+-add chat title to display it on titles and index
+-boot/kick from admin panel
+-posting links without a leading space hangs the input frame/chat - Alex?
+-runCMD - to return the old M content after using a click command - Ciprian
+-Statistics mod - Mei Yung - ?
+-members page/profiles - Ciprian
+-installer/setup - Ciprian
+-credits page - Ciprian
+-/ghost command: put the user into a ghost state (the ghost user and his posts cannot be seen in the room, he won’t know about this, so he gives up and leave the chat - works when banning has no effect on a specific user; it also allow an admin/moder to go invisible in the chat);
+-commands table & archiving/logging the commands used in chat as well - Ciprian
+-allow admins/moders to go invisible in the chat from panel - Ciprian
+-add link for offline pms?
+-add the members page - Ciprian
+-add the gallery feature - Ciprian (not sure if useful, as the hosting space/size is variable and can be limited for many users)
+-cookie handler - to delete the old cookies automatically on new installs/upgrades and to remove the old room names on panel changes - Ciprian
+-automatically delete cookies after upgrade on each client machine - Ciprian (not sure yet how to do this - how can we check if a user is first time loading the page?)
+-fix the enable/disable sound command and add the option in the right menu in chat, not just in users_popup - Ciprian
+-add colornames in users_popup list - Ciprian
+-coming back from avatar picker loses the previous values in profile - parsing - Ciprian
+-room names check for invalid chars in admin panel - urgent - Ciprian
+-update the localizations - Ciprian - ongoing
+
+Suzzanne Carlson - phpMyChat: One quick question if you have time?
+Ciprian Murariu: yes please
+Suzzanne Carlson - phpMyChat: I want to allow permissions for certain rooms without them having to "sign in"  and keep people out of them that aren’t supposed to be there.  Is that possible?
+Ciprian Murariu: i don’t understand
+Suzzanne Carlson - phpMyChat: Okay, say I want to make room three where only certain people can get in it, I don’t want them to have to have a special password, but just be approved for there.  It would be something I would have to "allow" as an admin.
+Ciprian Murariu: well, that’s not possible as it is
+Suzzanne Carlson - phpMyChat: hmm
+Suzzanne Carlson - phpMyChat: okay so I just set up a room and put a password on it then?
+Ciprian Murariu: how would you do that?
+Suzzanne Carlson - phpMyChat: I don’t know that is what I am asking
+Ciprian Murariu: hmmm
+Suzzanne Carlson - phpMyChat: could we write a code in the styles, like "get permission" for a certain room?
+Suzzanne Carlson - phpMyChat: where it would show up on the admin cp?
+Ciprian Murariu: some extra code will certanly be necesar to have this happen
+Suzzanne Carlson - phpMyChat: thats what I figured.  It’s kinda important for this particular chat facility
+Ciprian Murariu: well, it seems a nice mod, but i need time to develop it
+Suzzanne Carlson - phpMyChat: okay let me know what you come up with?
+Suzzanne Carlson - phpMyChat: I appreciate it very much
+Ciprian Murariu: ok, no problem
+
+
+Done:
+-add the mod admin permissions (to moderate moders as well, but cannot admin/kick the admin) (based on Luke’s idea & Cissy’s request) - Ciprian - done - Top Moderator power (topmod)
+-cell align right in chat (for right-to-left languages); also some display order fixes needed - I will adjust all these as it goes, but mainly when a right-to-left language will be translated - Ciprian
+-change the update feature to @fsock - no improvement, so changed to fsockopen; also added the disable option in panel. - Ciprian - done
 -Log archive - Ciprian - done
--img width in config - Ciprpian -done
+-img width in config - Ciprian -done
 -move smilies to bottom in help - Ciprian - done
 -avatar - done
 -bot - done
@@ -9,17 +58,24 @@
 -colored nickname in loader - Ciprian - done
 -colored nickname in users list - Ciprian - done
 -lurking mod - Ciprian - done
--users list ordered by entrance time - Ciprian - done (/sort command)
+-users list ordered by entrance time (/sort command) - Ciprian - done
 -color filters for admin and mod in usernames as well - Ciprian - done
 -dice3 addition - done
 -dices eval(messages) fixed in firefox - Ciprian - done
 -unspecified gender field in profiles - Ciprian - done
--Statistics mod - Mei Yung - ?
--members page/profiles - Ciprian
--default color font stored in database not cookie - Ciprian
--installer/setup - Ciprian - on the way
--credits page - Ciprian
--update the localizations - Ciprian and Nick (?)
--conversation with the robot also private (based on Sally Linus Lucy's idea) - Ciprian - done
--option for admin to totally disable private messaging in chat (/to and /wisp) (based on bluntdog's idea) - Ciprian - done
--add the size command to dinamically change the font size in messages frame (based on Sally Makeham's idea) - Ciprian - done
+-conversation with the robot also private (based on Sally Linus Lucy’s idea) - Ciprian - done (1.90)
+-option for admin to totally disable private messaging in chat (/to and /wisp) (based on bluntdog’s idea) - Ciprian - done (1.90)
+-add the size command to dynamically change the font size in messages frame (based on Sally Makeham’s idea) - Ciprian - done (1.90)
+-promote to moderator - not from private rooms (mods only by creating a non-default room shouldn’t have powers in any other rooms) - (based on bugs submitted on SourceForge.net) - Ciprian
+-I would be pleased if it would be possible to insert reasons for kicking and banning (based on a Feature Request submited by miukumauku on SourceForge) - Ciprian - done (1.91)
+/kick lamer Spamming would print:
+[11:02] lamer was kicked (reason: Spamming)
+-same for banishing - Ciprian - done (1.91)
+-archiving/logging/lurking the pictures links posted using the /img command - Ciprian - done
+- change the pm function to > / done (1.91)
+- fix the pmpopup script error - done?
+-Is there a way to tie your profile color to your chat text color, and not just the nick? (based on Auggy’s idea) - Ciprian - done
+- text cell valign top on messages (for smilies) - Ciprian - done
+-default color font stored in database not cookie - Ciprian ??? (too many connections - it will stay in cookie and database - no security issue) - done
+- is there any tool available or planned to reset user passwords? - Ciprian - done
+-add the iplogs feature (log_IP.lib.php) - Ciprian - done

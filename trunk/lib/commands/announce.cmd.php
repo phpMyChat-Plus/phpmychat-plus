@@ -1,6 +1,6 @@
 <?php
 
-if ($status == "a")
+if ($status == "a" || $status == "t")
 {
 	AddMessage(stripslashes($Cmd[1]), $T, $R, 'SYS announce', '', ' *', '', '');
 	$IsCommand = true;

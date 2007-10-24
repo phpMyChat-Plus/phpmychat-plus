@@ -1,4 +1,4 @@
-Plus FAQ and Ciprian's answers:
+Plus FAQ and Ciprian’s answers:
 
 1Q.
 After installing, I get this error:
@@ -8,8 +8,18 @@ Warning: Cannot modify header information - headers already sent by (output star
 Warning: require(./localization//localized.chat.php) [function.require]: failed to open stream: No such file or directory in /home/troop100/public_html/phpmychat/lib/index.lib.php on line 69
 Fatal error: require() [function.require]: Failed opening required './localization//localized.chat.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/troop100/public_html/phpmychat/lib/index.lib.php on line 69
 1A.
-This error is related to missconfig of your sql data in config/config.lib.php.
+This error is related to misconfig of your sql data in config/config.lib.php.
 Make sure the database and username have a prefix like yourcpanelusername_name.
+
+1aQ.
+After installing, I get this errors:
+- I cannot login or register a new account;
+- There is no error message returned;
+- I cannot select a different language. Whatever I try, the page is in English;
+- The font on the index page is with serifs, not the Arial or Verdana.
+1aA.
+This error is related to the restrictions of your php server (register_globals = off).
+Check the settings using a phpinfo.php file, and check if either safe_mode is on or register_globals is off. Disable first and enable the second one.
 
 2Q.
 How do I migrate my registered users from phpmychat standard c_reg_users table to plus?
@@ -31,13 +41,13 @@ INSERT INTO `c_reg_users` VALUES ('blabla', '', '47e014ee34869ded7e5236541246319
 3Q.
 The installation process is so complicated for me...
 3A.
-Well, my personal record time for a full instalation including upload of the new files, migration of the old users to Plus, fully adding the bot and addition of all the extrasounds for /buzz command is 28 minutes (the time between the user contacted me on Yahoo Messenger and the moment I said "All done!"); this hapenned on a brand new site for me (I also had to ask for cpanel details and so on, so the effective time consumed for installation was like 20 minutes). If you don't believe me, ask kay_s_ok@yahoo.com. She will confirm this.
-So it is not actually too complicated, but requires some knowledge of mysql and ftp. How could an website admin have no clue about this? That's his problem, I guess...
+Well, my personal record time for a full instalation including upload of the new files, migration of the old users to Plus, fully adding the bot and addition of all the extrasounds for /buzz command is 28 minutes (the time between the user contacted me on Yahoo Messenger and the moment I said "All done!"); this hapenned on a brand new site for me (I also had to ask for cpanel details and so on, so the effective time consumed for installation was like 20 minutes). If you don’t believe me, ask kay_s_ok@yahoo.com. She will confirm this.
+So it is not actually too complicated, but requires some knowledge of mysql and ftp. How could an website admin have no clue about this? That’s his problem, I guess...
 
 4Q.
-I run phpMyChat-Plus and I set up to have only a single public room. But there are some (0) 's displayed on my rooms list in the chat. How can I remove them?
+I run phpMyChat-Plus and I set up to have only a single public room. But there are some (0) ’s displayed on my rooms list in the chat. How can I remove them?
 4A.
-If you personalize the rooms names and also the number of rooms, it is not enough to do it in the configuration tab of admin panel. It also requires a 2 lines editting in config/config.lib.php as follows:
+If you personalize the rooms’ names and also the number of rooms, it is not enough to do it in the configuration tab of admin panel. It also requires a 2 lines editting in config/config.lib.php as follows:
 Open config/config.lib.php and look for these lines:
 $DefaultChatRooms = array(ROOM1, ROOM2, ROOM3, ROOM4, ROOM5);
 $DefaultPrivateRooms = array(ROOM6, ROOM7, ROOM8, ROOM9);
@@ -54,20 +64,142 @@ $DefaultPrivateRooms = array(ROOM2, ROOM6);
 5Q.
 How do I avoid being booted from a chat after the time set for booting?
 5A.
-An admin and a moderator should never be booted. If that happens, it means your browser lost the connection with the server somehow.
-For an user to stay logged even though he don't type for a while, he can go away using /away command (away users don't get booted)
+An admin and/or a moderator should never be booted. If that happens, it means your browser lost the connection with the server somehow.
+For an user to stay logged even though he don’t type for a while, he can go away using /away command (away users don’t get booted)
 
 6Q.
-How can I totally disable the plusbot? I've already disabled it in the config menu but the name still appears in the chat room...
+How can I totally disable the plusbot? I’ve already disabled it in the config menu but the name still appears in the chat room...
 6A.
 First - you need to go to Admin panel and re-enable it, then please go to the room he is in and use the command /bot stop.
 Rule: Everytime you want to change a settings related to the bot (disable, name of the bot, font, avatar, aso), you need to stop it first in the room/rooms he is eventually running!
-Bot has admin permissions therefore, if you don't follow the rule or forget about it, you won't be able to change/kick/remove the old running bot user from chat. So be careful.
+Bot has admin permissions therefore, if you don’t follow the rule or forget about it, you won’t be able to change/kick/remove the old running bot user from chat. So be careful.
 If you did it already, go back to Admin panel and rename it back to the old name, then stop it then change the settings at your will.
 6aQ.
 How do I make my bot talk only private?
 6aA.
 Enable/Disable public conversations in Admin panel.
+
+6Q.
+How can I change the size of the differents frames of the room page? (i.e. size of banner.php, link.php, messages.php etc.)
+6A.
+All the sizes can be handled in lib/frameset_def.lib.php (not too much different from 0.14.5)
+Basically:
+a. the width of left and right sides is set by this line:
+ <FRAMESET COLS="*,180" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0">
+(180 stands for the width of the right side frames, * means the first frame takes the difference to 100% - measured in number of colons)
+
+b. the heights of the right side frames are set by this line for IE and Firefox:
+  <FRAMESET ROWS="80,*,40" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0">
+or this line for the rest of the browsers (considered "of low capabilities "):
+ <FRAMESET ROWS="80,*,50" BORDER=0>
+(80 stands for exit frame, 40/50 stands for link frame and * for the users/rooms list - it represents the rest of the height of the page)
+
+c. the height of the banner, messages and input frame requires more attention, as there are some conditions for the size to be displayed (if the bot is active or not - for the banner Bot tips row and, if the quick menu’s are enabled or not - for the input Quick menu)
+All these lines should be modified accordingly for IE and Firefox:
+  <FRAMESET ROWS="38,*,60" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0">
+  <FRAMESET ROWS="25,*,60" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0">
+  <FRAMESET ROWS="38,*,35" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0">
+  <FRAMESET ROWS="25,*,35" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0">
+or this line for the rest of the browsers (considered "of low capabilities "):
+  <FRAMESET ROWS="38,*,55"BORDER="0">
+  <FRAMESET ROWS="25,*,55"BORDER="0">
+  <FRAMESET ROWS="38,*,35" BORDER="0">
+  <FRAMESET ROWS="25,*,35"BORDER="0">
+Explanation: the left numbers stand for the banner frame size, right ones for the input frame size and * is the rest of the page for the messages frame.
+As an exemple, if I want to increase the size of the input frame, I would change 35 to 45 in all four lines where 35 appears (45 will be the new size of the frame when there is no Quick menu to be shown - the commands in the Admin Panel are empty) and, change 60 to 70 and 55 to 65 in all the lines they appear (for the Quick menu to be shown if defined).
+Please note that for this last c. instructions, you need to keep the proportions accordigly (I increased with 10 lines the input frame in all 8 lines, no matter the conditions)
+
+7Q.
+How do I change the name of the Rooms in my phpmychat plus?
+7A.
+Only in Admin panel. Read it all to understand the power of the Configuration tab in the plus version...
+
+8Q.
+Whats happen here? On mozilla it’s alright but not at the IE!
+Warning: main(): Unable to access
+./localization/ Deutsch/localize d.chat.php in
+/home/www/web2/ html/plus/ lib/index. lib.php on line 69
+Warning: main(./localization /Deutsch/ localized. chat.php) : failed to
+open stream: No such file or directory in
+/home/www/web2/ html/plus/ lib/index. lib.php on line 69
+Fatal error: main(): Failed opening required
+'./localization/ Deutsch/localize d.chat.php' (include_path= '.') in
+/home/www/web2/ html/plus/ lib/index. lib.php on line 69
+8A.
+That’s because the Deutch language isn’t installed. It really shouldn’t happen. I’ll check on that for the next version...
+The reason is: you have to delete the chat cookie after upgrade (clean the cookies). So tell that your users.
+Quick solution: type in the address bar this url: http://yourwebsite/ plus/index. php?L=english (for the first time only)
+
+9Q.
+I cannot make any changes in the admin panel. It says it was successfully updated, but when I check back, nothing changed.
+9A.
+a. A reason could be if you use the ' character in a field, without commenting it out with a backslash \.
+Example:
+If a room name is called Men’s Room, you have to comment it out with \' like this: Men\'s Room.
+But I strongly recommend you avoid ussage of the ' (use ’ instead) or \ chars in your chat setting values.
+b. There is something wrong in your database (c_config table) like the order of the fields or types/sizes of them.
+c. You’re using a wrong config/config.lib.php file - if you upgraded (make sure you replaced the old one with the new released one)
+
+10Q.
+I use IE7 and Firefox 2.0 and I cannot see the messages in the status bar (Server time and such)
+10A.
+Yes, I noticed that as well. To see them just fine, I had to add my chat site to "Trusted sites" list in Tools/Internet Options/Security tab in IE;
+Firefox 2.0 uses the latest Internet Explorer engine lately so it has to have such a setting somewhere, but I couldn’t find it.
+
+11Q.
+I want to log in in multiple windows with different usernames - what is the best way to do it?
+11A.
+The best practice is to use a different type of browser for each user, otherwise, the cookie handling will expose your chat to security breaches
+(like turning a private room into public), as well as malfunctions on your side.
+I recommend IE7 + Firefox / Netscape / Opera
+
+12Q.
+One problem that I see is that there are no ways when I change a rooms Name that it keeps that Name, it always go back to the default as Public, etc.
+12A.
+That happens because the cookies stored on each client computer contain the last room name they were logged off from.
+Therefore, after changing the default room names, you’ll have to clean up the cookies, before loading the login page again.
+Also, as administrator in Admin panel, check if the old room name (Public Room 1 and so on) are still shown in the Clear Rooms tab.
+If so, they will be cleanned up as the messages of that room go in the archive. If not, just use the clean function on that page - that way,
+the old room names won’t be shown in the "User created public rooms list" in the login page - the 2nd dropdown/box list.
+But remember, any other client who don’t clean up his cookies, will have set as default the previous name. For a better fix,
+you should set your chat to version 0 - Only default room - in Configuration tab. Do that for a few days, while most of your clients (idealy - all)
+will login at least once into the new default public room as you wished to be named.
+Then change it back to 1 or 2, as you wish your chat to run.
+
+13Q.
+Now, when clicking on the Administration link I get the log-in page with the following error warnings:
+Warning: session_start() [function.session-start]: open(/tmp/sess_9d9at3sbphsje5khququj6vrs5, O_RDWR) failed: No space left on device (28) in /www/[my domain]/web/milchat/lib/login.lib.php on line 4
+[login box]
+Warning: Unknown: open(/tmp/sess_9d9at3sbphsje5khququj6vrs5, O_RDWR) failed: No space left on device (28) in Unknown on line 0
+Warning: Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/tmp) in Unknown on line 0
+If I try to log in regardless of this warning, I then get the same error warnings on a blank page, but no access to the admin panel.
+13A.
+The appropriate "Temporary Internet Files"/"Browser Cache" storage got full on your pc. Either clear browser’s cache or increase that allotted space. Also clear the cookies.
+
+14Q.
+I can’t kill the bot, and he won’t answer me. I can start the bot in other rooms and he works. I just can’t get him out of the room he’s stuck in.
+14A.
+First, you can’t kill the bot coz it was already dead. Gost hunting? lol
+The bot issue was cauzed by either:
+- changing it’s name while running - read the Admin panel red notes before applying changes...
+- removing the start roomname.txt file from botfb file - that’s actually the bot running control - database is just for displaying it among users in chat only.
+Now, to get rid of a dead bot in chat, you have to follow 2 steps:
+1. go to phpmyadmin/c_users table and delete the row holding the undesirable bot as username (that should be the previous/old name of your bot, or, easier, the name he is in the room) (Caution: also match the room bot is dead in, if there are bots running in more rooms)
+2. do the same with ftp, in plus/botfb/roomname.txt , where roomname is the name of the room the bot is dead in.
+
+15Q.
+How do I add my own expressions in chat. Like "administrator" to be called "master", "moderator" to be called "operator" and so on?
+15A.
+There is a folder called plus/localization/_owner which contains the file localized.owner.php (starting with 1.91-beta5 only). Open that file and also open the specific language file you want to modify.
+Search for the expression you want to modify. In this example, the lines would be:
+define("L_WHOIS_ADMIN", "Administrator");
+define("L_WHOIS_MODER", "Moderator");
+Paste the lines in the plus/localization/_owner/localized.owner.php file and change them to:
+define("L_WHOIS_ADMIN", "Master");
+define("L_WHOIS_MODER", "Operator");
+Save the file and upload it to ftp. That’s all!
+Important: never change directly the files provided in localization/"language"/ folder - if you do so, you will fail to upgrade your chat in the future without loosing your personalizations.
+Note: You can do the same with expressions from localized.admin.php and localized.tutorial.php - all should be redefined only in plus/localization/_owner/localized.owner.php
 
 
 More to come...

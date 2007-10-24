@@ -47,7 +47,7 @@ require_once "botloaderfuncs.php";
 
 ss_timing_start("all");
 
-print "<font size='3' color='black'>This script is loading your AIML files one at a time to prevent the script from timing out. Only use this script if your PHP is running in safe mode. If you are still experiencing timeouts then you need to edit your AIML files into smaller files.</font><br><BR>\n";
+print "<font size='3' color='black'>This script is loading your AIML files one at a time to prevent the script from timing out. Only use this script if your PHP is running in safe mode. If you are still experiencing timeouts then you need to edit your AIML files into smaller files.</font><br /><br />\n";
 
 
 $fp="";
@@ -69,12 +69,12 @@ $genderarray=array();
 $personarray=array();
 $person2array=array();
 
-if (!isset($HTTP_GET_VARS['fileid'])){
+if (!isset($_GET['fileid'])){
 	#deletebot();
 	$fileid=1;
 }
 else {
-	$fileid=$HTTP_GET_VARS['fileid'];
+	$fileid=$_GET['fileid'];
 }
 
 #deletejustbot();
@@ -83,25 +83,25 @@ $fileid++;
 makesubscode();
 
 
-print "<font size='3' color='BLUE'>Inserted $templatesinserted categories into database</font><br><BR>\n";
+print "<font size='3' color='BLUE'>Inserted $templatesinserted categories into database</font><br /><br />\n";
 
 if ($doneloading==0){
 	print "<p><font size='3' color='BLACK'><a href='botloaderinc.php?fileid=$fileid'>Click here to load the next file.</a></p></font>\n";
 }
 else {
-	print "<font size='3' color='RED'><b>DONE LOADING</B><BR></font>\n";
+	print "<font size='3' color='RED'><b>DONE LOADING</B><br /></font>\n";
 	print "<font size='3' color='RED'><b>WARNING!</b> You should password protect the admin directory or remove the botloader.php script or people may be able to abuse your server.</b></font>\n";
 	print "<p><font size='3' color='BLACK'><a href='talk.php'>Click here to talk to the bot</a></p></font>\n";
 }
 
-print "<BR>";
+print "<br />";
 
 ss_timing_stop("all");
-print "<BR><BR><font size='3' color='BLACK'>execution time: " . ss_timing_current("all");
+print "<br /><br /><font size='3' color='BLACK'>execution time: " . ss_timing_current("all");
 $avgts=$templatesinserted/ss_timing_current("all");
 $avgtm=$templatesinserted/((ss_timing_current("all"))/60);
-print "<BR><font size='3' color='BLACK'>Templates per second=$avgts<BR>";
-print "<font size='3' color='BLACK'>Templates per minute=$avgtm<BR>";
+print "<br /><font size='3' color='BLACK'>Templates per second=$avgts<br />";
+print "<font size='3' color='BLACK'>Templates per minute=$avgtm<br />";
 
 
 ?>

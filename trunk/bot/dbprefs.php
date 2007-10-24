@@ -39,12 +39,12 @@ set_magic_quotes_runtime(0);
 
 // Can't turn off magic quotes gpc so just redo what it did if it is on.
 if (get_magic_quotes_gpc()) {
-	foreach($HTTP_GET_VARS as $k=>$v)
-		$HTTP_GET_VARS[$k] = stripslashes($v);
-	foreach($HTTP_POST_VARS as $k=>$v)
-		$HTTP_POST_VARS[$k] = stripslashes($v);
-	foreach($HTTP_COOKIE_VARS as $k=>$v)
-		$HTTP_COOKIE_VARS[$k] = stripslashes($v);
+	foreach($_GET as $k=>$v)
+		$_GET[$k] = stripslashes($v);
+	foreach($_POST as $k=>$v)
+		$_POST[$k] = stripslashes($v);
+	foreach($_COOKIE as $k=>$v)
+		$_COOKIE[$k] = stripslashes($v);
 }
 
 /**
@@ -93,7 +93,7 @@ $rootdir="aiml/";
 
 $errors="";
 
-if (C_DB_HOST != 'localhost') include("./../config/config.lib.php");
+if (C_DB_HOST != 'localhost' || C_DB_HOST == '') include("./../config/config.lib.php");
 mysql_connect(C_DB_HOST,C_DB_USER,C_DB_PASS) or $errors = $errors . "Could not connect to database.\n";
 @mysql_select_db(C_DB_NAME) or $errors = $errors . "Unable to select database\n";
 ?>

@@ -20,8 +20,8 @@ class DB
 
 	function halt($msg)
 	{
-		printf("</td></tr></table><b>Database error:</b> %s<br>\n", $msg);
-		printf("<b>ODBC Error</b>: %s (%s)<br>\n",
+		printf("</td></tr></table><b>Database error:</b> %s<br />\n", $msg);
+		printf("<b>ODBC Error</b>: %s (%s)<br />\n",
 		$this->Errno,
 		$this->Error);
 		die("Session halted.");
@@ -49,7 +49,7 @@ class DB
 
 		$this->connect();
 
-		# printf("<br>Debug: query = %s<br>\n", $Query_String);
+		# printf("<br />Debug: query = %s<br />\n", $Query_String);
 
 		# rei@netone.com.br suggested that we use this instead of the odbc_exec().
 		# He is on NT, connecting to a Unix MySQL server with ODBC. -- KK
@@ -131,7 +131,7 @@ class DB
 	{
 		# Many ODBC drivers don't support odbc_num_rows() on SELECT statements.
 		$num_rows = odbc_num_rows($this->Query_ID);
-		//printf ($num_rows."<br>");
+		//printf ($num_rows."<br />");
 
 		# This is a workaround. It is intended to be ugly.
 		if ($num_rows < 0)
@@ -154,7 +154,7 @@ class DB
 					else 
 						$i=$j; 
 				};
-				//printf("$i $j $k <br>");
+				//printf("$i $j $k <br />");
 			};
 			$num_rows=$i;
 		}

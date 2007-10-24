@@ -32,7 +32,7 @@ else
 	{
 		list($password,$perms,$rooms) = $DbLink->next_record();
 		$DbLink->clean_results();
-		if (($password != $PWD_Hash) || (($perms != "moderator")&&($perms != "admin")) || (($perms == "moderator")&&(!room_in(stripslashes($R), $rooms))))
+		if (($password != $PWD_Hash) || (($perms != "moderator") && ($perms != "admin") && ($perms != "topmod")) || (($perms == "moderator") && (!room_in(stripslashes($R), $rooms) && !room_in("*", $rooms))))
 		{
 			$Error = L_NO_MODERATOR;
 		}
@@ -52,7 +52,7 @@ else
 				list($Latin1_UU,$perms,$rooms) = $DbLink->next_record();
 				$DbLink->clean_results();
 				// Demote the user if is not already an ordinary user for the current room or admin
-				if ($perms == "admin")
+				if ($perms == "admin" || $perms == "topmod")
 				{
 					$Error = sprintf(L_ERR_IS_ADMIN, stripslashes($UU));
 				}
@@ -63,7 +63,7 @@ else
 					$DbLink->query("UPDATE ".C_USR_TBL." SET status='r' WHERE username='$UU'");
 					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS demote', '$Latin1', ".time().", '', 'sprintf(L_IS_NO_MOD_ALL, \"".special_char($UU,$Latin1_UU)."\")', '', '')");
 				}
-				elseif (($perms == "moderator")&&(room_in($R,addslashes($rooms))))
+				elseif (($perms == "moderator") && (room_in($R,addslashes($rooms)) || room_in("*",addslashes($rooms))))
 				{
 					$rooms_new .= ($Cmd[1] == "* ") ? $rooms = "" : str_replace($R, "", $rooms);
 					if ($rooms_new == "" ||$Cmd[1] == "* ")
@@ -89,7 +89,7 @@ else
 	{
 		list($password,$perms,$rooms) = $DbLink->next_record();
 		$DbLink->clean_results();
-		if (($password != $PWD_Hash) || ($perms != "admin"))
+		if (($password != $PWD_Hash) || ($perms != "admin" && $perms != "topmod"))
 		{
 			$Error = L_NO_ADMIN;
 		}
@@ -109,7 +109,7 @@ else
 				list($Latin1_UU,$perms,$rooms) = $DbLink->next_record();
 				$DbLink->clean_results();
 				// Demote the user if is not already an ordinary user for the current room or admin
-				if ($perms == "admin")
+				if ($perms == "admin" && $perms == "topmod")
 				{
 					$Error = sprintf(L_ERR_IS_ADMIN, stripslashes($UU));
 				}
@@ -120,7 +120,7 @@ else
 					$DbLink->query("UPDATE ".C_USR_TBL." SET status='r' WHERE username='$UU'");
 					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS demote', '$Latin1', ".time().", '', 'sprintf(L_IS_NO_MOD_ALL, \"".special_char($UU,$Latin1_UU)."\")', '', '')");
 				}
-				elseif (($perms == "moderator")&&(room_in($R,addslashes($rooms))))
+				elseif (($perms == "moderator") && (room_in($R,addslashes($rooms)) || room_in("*",addslashes($rooms))))
 				{
 					$rooms_new .= ($Cmd[1] == "* ") ? $rooms = "" : str_replace($R, "", $rooms);
 					if ($rooms_new == "" ||$Cmd[1] == "* ")

@@ -5,6 +5,7 @@
 // Ray Lopez (<kaidream@hotmail.com>) and Fabiano R. Prestes (<zoso@post.com>)
 
 $IsBanished = false;
+$Reason = "";
 
 // Clean the banished users table
 $DbLink->query("DELETE FROM ".C_BAN_TBL." WHERE ban_until < ".time());
@@ -26,17 +27,17 @@ if (!isset($IP) || $IP == "") include("./${ChatPath}lib/get_IP.lib.php");
 // Seek for a banished nick
 if (C_BAN_IP) // ban only by IP
 {
-	$DbLink->query("SELECT ip,rooms FROM ".C_BAN_TBL." WHERE ip='$IP' LIMIT 1");
+	$DbLink->query("SELECT ip,rooms,reason FROM ".C_BAN_TBL." WHERE ip='$IP' LIMIT 1");
 }
-else // ban by IP and username
+else // ban by both IP or username
 {
-	$DbLink->query("SELECT ip,rooms FROM ".C_BAN_TBL." WHERE ip='$IP' and username='$U' LIMIT 1");
+	$DbLink->query("SELECT ip,rooms,reason FROM ".C_BAN_TBL." WHERE ip='$IP' or username='$U' LIMIT 1");
 }
 $Nb = $DbLink->num_rows();
 // Nick of the user is banished from some rooms
 if ($Nb != "0")
 {
-	list($Old_IP,$BanishedFromRooms) = $DbLink->next_record();
+	list($Old_IP,$BanishedFromRooms,$Reason) = $DbLink->next_record();
 	$DbLink->clean_results();
 	$BanishedFromRooms = addslashes($BanishedFromRooms);
 
@@ -69,20 +70,19 @@ if ($Nb != "0")
 else
 {
 	$DbLink->clean_results();
-
-if (C_BAN_IP) // ban only by IP
-{
-	$DbLink->query("SELECT rooms,ban_until FROM ".C_BAN_TBL." WHERE ip='$IP' LIMIT 1");
-}
-else // ban by IP and username
-{
-	$DbLink->query("SELECT rooms,ban_until FROM ".C_BAN_TBL." WHERE ip='$IP' and username='$U' LIMIT 1");
-}
+	if (C_BAN_IP) // ban only by IP
+	{
+		$DbLink->query("SELECT rooms,ban_until,reason FROM ".C_BAN_TBL." WHERE ip='$IP' LIMIT 1");
+	}
+	else // ban by both IP or username
+	{
+		$DbLink->query("SELECT rooms,ban_until,reason FROM ".C_BAN_TBL." WHERE ip='$IP' or username='$U' LIMIT 1");
+	}
 	$Nb = $DbLink->num_rows();
 	// IP is banished from some rooms
 	if ($Nb != "0")
 	{
-		list($BanishedFromRooms,$Until) = $DbLink->next_record();
+		list($BanishedFromRooms,$Until,$Reason) = $DbLink->next_record();
 		$DbLink->clean_results();
 		$BanishedFromRooms = addslashes($BanishedFromRooms);
 
@@ -109,7 +109,7 @@ else // ban by IP and username
 		};
 
 		// Add the user to the banished table when necessary
-		if ($IsBanished) $DbLink->query("INSERT INTO ".C_BAN_TBL." VALUES ('$U', '$Latin1', '$IP', '$BanishedFromRooms', '$Until')");
+		if ($IsBanished) $DbLink->query("INSERT INTO ".C_BAN_TBL." VALUES ('$U', '$Latin1', '$IP', '$BanishedFromRooms', '$Until', '$Reason')");
 	}
 	else
 	{

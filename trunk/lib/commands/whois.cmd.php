@@ -8,9 +8,9 @@ function room_in($what, $in)
 	}
 	return false;
 }
-
+$UU = stripslashes($Cmd[1]);
 // Check for invalid characters in the user name
-if (ereg("[\, ]", stripslashes($Cmd[1])))
+if (ereg("[\, ]", $UU))
 {
 	$Error = L_ERR_USR_16;
 }
@@ -18,15 +18,21 @@ else
 {
 	$IsCommand = true;
 
+	$DbLink->query("SELECT perms,rooms FROM ".C_REG_TBL." WHERE username='".$UU."' LIMIT 1");
+	if ($DbLink->num_rows() > 0)
+	{
+		list($perms,$rooms) = $DbLink->next_record();
+		$DbLink->clean_results();
+	}
 	// Define what can see the current user:
 	// - the whole profile including e-mail and IP address if he is admin or moderator of the current room
 	//   if this room is one of the default rooms;
 	// - e-mail only if the registered user accepted this to be displayed and no IP
-	if ($status == "a")
+	if ($status == "a" || $status == "t")
 	{
 		$power = "all";
 	}
-	elseif ($status == "m" && room_in(stripslashes($R),$DefaultChatRooms))
+	elseif (($status == "m" && room_in(stripslashes($R),$DefaultChatRooms)) || (($perms == "moderator") && room_in("*", $rooms)))
 	{
 		$power = "medium";
 	}
@@ -36,15 +42,15 @@ else
 	};
 
 	// Ensure the user whose profile is required is a registered one
-	$DbLink->query("SELECT count(*) FROM ".C_REG_TBL." WHERE username='".$Cmd[1]."' LIMIT 1");
+	$DbLink->query("SELECT count(*) FROM ".C_REG_TBL." WHERE username='".$UU."' LIMIT 1");
 	list($count) = $DbLink->next_record();
 	$DbLink->clean_results();
 	if ($count == 0)
 	{
-		$Error = sprintf(L_NONREG_USER, stripslashes($Cmd[1]));
+		$Error = sprintf(L_NONREG_USER, $UU);
 		if ($power != "weak")
 		{
-			$DbLink->query("SELECT ip FROM ".C_USR_TBL." WHERE username='".$Cmd[1]."' LIMIT 1");
+			$DbLink->query("SELECT ip FROM ".C_USR_TBL." WHERE username='".$UU."' LIMIT 1");
 			$Nb = $DbLink->num_rows();
 			if ($Nb != "0")
 			{
@@ -65,7 +71,7 @@ else
 			"<SCRIPT TYPE=\"text/javascript\" LANGUAGE=\"JavaScript\">",
 			"<!--",
 			"// Lauch the whois popup",
-			"window.open(\"whois_popup.php?L=$L&power=$power&U=".urlencode(stripslashes($Cmd[1]))."&R=".urlencode(stripslashes($R))."\",\"$win_name\",\"width=500,height=500,resizable=yes,scrollbars=yes\");",
+			"window.open(\"whois_popup.php?L=$L&power=$power&U=".urlencode($UU)."&R=".urlencode(stripslashes($R))."\",\"$win_name\",\"width=500,height=500,resizable=yes,scrollbars=yes\");",
 			"// -->",
 			"</SCRIPT>"
 		);

@@ -1,27 +1,23 @@
 <?php
 // Get the names and values for vars sent by the script that called this one
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
 };
 
-if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
-if (isset($HTTP_COOKIE_VARS["CookieUserSort"])) $sort_order = $HTTP_COOKIE_VARS["CookieUserSort"];
-if (isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"];
+if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
+if (isset($_COOKIE["CookieUserSort"])) $sort_order = $_COOKIE["CookieUserSort"];
+if (!isset($L) && isset($_COOKIE["CookieLang"])) $L = $_COOKIE["CookieLang"]; 
 //if no language detected set default one
-if (!isset($L)) $L = C_LANGUAGE;
+if (!isset($L) || $L == "") $L = C_LANGUAGE;
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
-
-// Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 require("./config/config.lib.php");
-require("./lib/release.lib.php");
 require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
 require("./lib/clean.lib.php");
@@ -42,7 +38,7 @@ $DbLink = new DB;
 
 // ** Check for user entrance to beep **
 // Initialize some vars if necessary and put beep on/off in a cookie
-if (isset($HTTP_COOKIE_VARS["CookieBeep"])) $CookieBeep = $HTTP_COOKIE_VARS["CookieBeep"];
+if (isset($_COOKIE["CookieBeep"])) $CookieBeep = $_COOKIE["CookieBeep"];
 if (!isset($B)) $B = (isset($CookieBeep) ? $CookieBeep : "1");
 setcookie("CookieBeep", $B, time() + 60*60*24*365);		// cookie expires in one year
 $BeepRoom = "0";
@@ -76,17 +72,15 @@ $ChangeBeeps_Reload = ereg_replace("&B=([0-2])","&B=${B1}",$Refresh);
 
 // For translations with an explicit charset (not the 'x-user-defined' one)
 if (!isset($FontName)) $FontName = "";
-// Text direction
-$textDirection = ($Charset == "windows-1256") ? "RTL" : "LTR";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo($textDirection); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
 <?php
 function special_char($str,$lang,$type)
 {
-	$tag_open = (($type == 'a' || $type == 'm') ? "<I>":"");
+	$tag_open = (($type == 'a' || $type == 't' || $type == 'm') ? "<I>":"");
 	$tag_close = ($tag_open != "" ? "</I>":"");
 	return $tag_open.($lang ? htmlentities($str) : htmlspecialchars($str)).$tag_close;
 }
@@ -99,7 +93,12 @@ $DbLink->clean_results();
 if ($NbRooms > 0)
 {
 	// ** count users **
-	$DbLink->query("SELECT DISTINCT u.username, u.latin1, u.r_time FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room AND m.type = 1 ORDER BY username");
+	if ($sort_order == "1")	$ordquery = "username";
+	else $ordquery = "r_time";
+	// Ghost Control mod by Ciprian
+	$Hide = (C_HIDE_ADMINS) ? " AND ((u.status != 'a' AND u.status != 't') OR u.email = 'bot@bot.com')" : "";
+	$Hide .= (C_HIDE_MODERS ? " AND u.status !='m'" : "");
+	$DbLink->query("SELECT DISTINCT u.username, u.latin1, u.r_time FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room AND m.type = 1".$Hide." ORDER BY ".$ordquery."");
 	$NbUsers = $DbLink->num_rows();
 	if($NbUsers > 3)
 	{
@@ -163,60 +162,36 @@ if(isset($NbUsers) && $NbUsers > 0)
 			$Users = new DB;
 			while(list($Other) = $DbLink->next_record())
 			{
-				if ($sort_order == "1")
+				if ($sort_order == "1")	$ordquery = "username";
+				else $ordquery = "r_time";
+				// Ghost Control mod by Ciprian
+				$Hide = (C_HIDE_ADMINS) ? " AND ((status != 'a' AND status != 't') OR email = 'bot@bot.com')" : "";
+				$Hide .= (C_HIDE_MODERS ? " AND status !='m'" : "");
+				if($Users->query("SELECT username, latin1, status, r_time FROM ".C_USR_TBL." WHERE room = '".addslashes($Other)."'".$Hide." ORDER BY ".$ordquery.""))
 				{
-					if($Users->query("SELECT username, latin1, status, r_time FROM ".C_USR_TBL." WHERE room = '".addslashes($Other)."' ORDER BY username"))
+					if($Users->num_rows() > 0)
 					{
-						if($Users->num_rows() > 0)
+						$i++;
+						$id = "room".$i;
+						echo("<DIV ID=\"${id}Parent\" CLASS=\"parent\" STYLE=\"margin-top: 5px; CURSOR: hand\">");
+						echo("<A HREF=\"#\" onClick=\"expandIt('${id}'); return false\" onMouseOver=\"window.status='".L_EXPCOL."'; return true;\" title=\"<?php echo(L_EXPCOL); ?>\">");
+						echo("<IMG NAME=\"imEx\" SRC=\"images/closed.gif\" WIDTH=9 HEIGHT=9 BORDER=0 ALT=\"".L_EXPCOL."\"></A>");
+						echo("&nbsp;<B>".htmlspecialchars($Other)."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$Users->num_rows().")</SPAN><br />");
+						echo("</DIV>");
+						echo("<DIV ID=\"${id}Child\" CLASS=\"child\" STYLE=\"margin-left: 12px\">");
+						$j = 0;
+						while(list($Username,$Latin1,$status,$room_time) = $Users->next_record())
 						{
-							$i++;
-							$id = "room".$i;
-							echo("<DIV ID=\"${id}Parent\" CLASS=\"parent\" STYLE=\"margin-top: 5px; CURSOR: hand\">");
-							echo("<A HREF=\"#\" onClick=\"expandIt('${id}'); return false\" onMouseOver=\"window.status='".L_EXPCOL."'; return true;\" title=\"<?php echo(L_EXPCOL); ?>\">");
-							echo("<IMG NAME=\"imEx\" SRC=\"images/closed.gif\" WIDTH=9 HEIGHT=9 BORDER=0 ALT=\"".L_EXPCOL."\"></A>");
-							echo("&nbsp;<B>".htmlspecialchars($Other)."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$Users->num_rows().")</SPAN><br>");
-							echo("</DIV>");
-							echo("<DIV ID=\"${id}Child\" CLASS=\"child\" STYLE=\"margin-left: 12px\">");
-							$j = 0;
-							while(list($Username,$Latin1,$status,$room_time) = $Users->next_record())
-							{
-								$j++;
-								$room_time = date("d-M, H:i:s", $room_time + C_TMZ_OFFSET*60*60);
-								echo("-&nbsp;".special_char($Username,$Latin1,$status)." <font size=1>".special_char("(".$room_time.")",$Latin1,$status)."</font><br>");
-							};
-							echo("</DIV>");
-							$ChildNb[$id] = $j;
-						}
+							$j++;
+							$room_time = date("d-M, H:i:s", $room_time + C_TMZ_OFFSET*60*60);
+							if ($Username != C_BOT_NAME) echo("-&nbsp;".special_char($Username,$Latin1,$status)." <font size=1>".special_char("(".$room_time.")",$Latin1,$status)."</font><br />");
+							else echo("-&nbsp;".special_char($Username,$Latin1,"")." <font size=1>".special_char("(".$room_time.")",$Latin1,"")."</font><br />");
+						};
+						echo("</DIV>");
+						$ChildNb[$id] = $j;
 					}
-					$Users->clean_results();
 				}
-				else
-				{
-					if($Users->query("SELECT username, latin1, status, r_time FROM ".C_USR_TBL." WHERE room = '".addslashes($Other)."' ORDER BY r_time"))
-					{
-						if($Users->num_rows() > 0)
-						{
-							$i++;
-							$id = "room".$i;
-							echo("<DIV ID=\"${id}Parent\" CLASS=\"parent\" STYLE=\"margin-top: 5px; CURSOR: hand\">");
-							echo("<A HREF=\"#\" onClick=\"expandIt('${id}'); return false\" onMouseOver=\"window.status='".L_EXPCOL."'; return true;\" title=\"<?php echo(L_EXPCOL); ?>\">");
-							echo("<IMG NAME=\"imEx\" SRC=\"images/closed.gif\" WIDTH=9 HEIGHT=9 BORDER=0 ALT=\"".L_EXPCOL."\"></A>");
-							echo("&nbsp;<B>".htmlspecialchars($Other)."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$Users->num_rows().")</SPAN><br>");
-							echo("</DIV>");
-							echo("<DIV ID=\"${id}Child\" CLASS=\"child\" STYLE=\"margin-left: 12px\">");
-							$j = 0;
-							while(list($Username,$Latin1,$status,$room_time) = $Users->next_record())
-							{
-								$j++;
-								$room_time = date("d-M, H:i:s", $room_time + C_TMZ_OFFSET*60*60);
-								echo("-&nbsp;".special_char($Username,$Latin1,$status)." <font size=1>".special_char("(".$room_time.")",$Latin1,$status)."</font><br>");
-							};
-							echo("</DIV>");
-							$ChildNb[$id] = $j;
-						}
-					}
-					$Users->clean_results();
-				}
+				$Users->clean_results();
 			}
 		}
 	}
@@ -289,5 +264,4 @@ if ($BeepRoom)
 
 </HTML>
 <?php
-
 ?>
