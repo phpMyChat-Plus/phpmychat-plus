@@ -11,19 +11,23 @@
 if ($awaystat != 2) {
 
    if ($awaystat == '0') {
-     $msgstr = L_AWAY;
+     $msgstr = 'L_AWAY';
      $awaystat = '1';
+     $time = time() - 1;
    } else {
-     $msgstr = L_BACK;
+     $msgstr = 'L_BACK';
      $awaystat = '0';
+     $time = time() + 1;
    }
-   $msg = sprintf($msgstr, special_char($U,$Latin1));
+   $msg = "sprintf(".$msgstr.", \"".special_char($U,$Latin1)."\")";
 
    $xtra = $Cmd[2];
+	if ($xtra !="")
+	{
 	// Text formating tags
 	if(C_HTML_TAGS_KEEP == "none")
 	{
-		if(C_HTML_TAGS_SHOW == 0)
+		if(!C_HTML_TAGS_SHOW)
 		{
 			// eliminates every HTML like tags
 			$xtra = ereg_replace("<[^>]+>", "", $xtra);
@@ -47,7 +51,7 @@ if ($awaystat != 2) {
 			{
 				$xtra = preg_replace("/&lt;([ubi]?)&gt;(.*?)&lt;(\/\\1)&gt;/i","<\\1>\\2<\\3>",$xtra);
 			}
-			if(C_HTML_TAGS_SHOW == 0)
+			if(!C_HTML_TAGS_SHOW)
 			{
 				$xtra = preg_replace("/&lt;\/?[ubi]?&gt;/i","",$xtra);
 			}
@@ -64,7 +68,7 @@ if ($awaystat != 2) {
 	$xtra = eregi_replace('([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](fo|g|l|m|mes|o|op|pa|ro|seum|t|u|v|z)?)', '<a href="mailto:\\1" target="_blank">\\1</a>', $xtra);
 
 	// Smilies
-	if (C_USE_SMILIES == "1")
+	if (C_USE_SMILIES)
 	{
 		include("./lib/smilies.lib.php");
 		Check4Smilies($xtra,$SmiliesTbl);
@@ -97,10 +101,9 @@ if ($awaystat != 2) {
 	}
 
 	$xtra = "<FONT COLOR=\"".$C."\">".$xtra."</FONT>";
-
-   $M = " <B>$msg</B> ".stripslashes($xtra);
-   $M = $M . C_UPDTUSRS;
-   $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', ".time().", '$Private', '".addslashes($M)."', '', '')");
+	$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', '$time', '$Private', '".addslashes($xtra)."', '', '')");
+	}
+   $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS away', '', '".time()."', '', '$msg', '', '')");
    $DbLink->query("UPDATE ".C_USR_TBL." SET awaystat='".$awaystat."' WHERE username='$U'");
 
    $IsCommand = true;

@@ -1,7 +1,7 @@
 <?php
 
 // Check for swear words in the message if necessary
-if (C_NO_SWEAR == 1)
+if (C_NO_SWEAR)
 {
 	include("./lib/swearing.lib.php");
 	$Cmd[1] = checkwords($Cmd[1], false);
@@ -14,7 +14,7 @@ list($gender) = $DbLink->next_record();
 $DbLink->clean_results();
 if ($gender == 2) $salutation = "Ms";
 elseif ($gender == 1) $salutation = "Mr";
-else $salutation = "*";
+else $salutation = "* *";
 
 $M = "<B>* ".$salutation." ".$U." </B>".stripslashes($Cmd[1]);
 

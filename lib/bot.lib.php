@@ -40,8 +40,7 @@ global $uid ;                   // WORKS  it is to keep the bot on a topic per u
           		$BOT = C_BOT_NAME;
               //Format response for phpMyChat DB
               $D1 = ereg_replace("[\r]|[\n]|\t", " ",$botresponse->response) ;
-              $D1 = "<FONT COLOR=".C_BOT_FONT_COLOR."><I>" . $D1 . "</I></FONT>" ;
-              $D1 = "".$myuniqueid  . "> " . $D1;
+              $D1 = "<FONT COLOR=".C_BOT_FONT_COLOR."><I>".$myuniqueid  . "> " . $D1 . "</I></FONT>";
               $D1 = trim($D1) ;
               global $numselects;
               $DR = addslashes($D1);
@@ -75,7 +74,7 @@ if (C_BOT_PUBLIC)
           $botmess = eregi_replace(C_BOT_NAME, "", $M);      // removes the word "BOT NAME" from the input helps the bot to make sense? NEEDS WORK.
           bottalk(&$botmess, $R);
       }
-     if (eregi("bye ".C_BOT_NAME, $M) || eregi(C_BOT_NAME."> bye", $M) || eregi(C_BOT_NAME."> bye</FONT>", $M))             // if statment looks for "bye bot"
+     if (eregi("bye ".C_BOT_NAME, $M) || eregi(C_BOT_NAME."> bye", $M) || eregi(C_BOT_NAME."> bye</FONT>", $M))             // if statment looks for "bye bot" or "bot> bye"
       {
       	if (file_exists ($botpath)) unlink ($botpath);    // it deletes the users file if found (Stops coversation with bot)
       }

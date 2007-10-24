@@ -1,21 +1,21 @@
 <?php
 // Get the names and values for vars sent to this script
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
 };
 
 // Added for Skin mod
-if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
+if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 
-if (isset($HTTP_COOKIE_VARS["CookieLang"])) $L = $HTTP_COOKIE_VARS["CookieLang"];
-if (isset($HTTP_COOKIE_VARS["CookieUsername"])) $U = $HTTP_COOKIE_VARS["CookieUsername"];
+if (!isset($L) && isset($_COOKIE["CookieLang"])) $L = $_COOKIE["CookieLang"]; 
+if (isset($_COOKIE["CookieUsername"])) $U = urldecode($_COOKIE["CookieUsername"]);
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 require("./config/config.lib.php");
 require("./localization/".$L."/localized.chat.php");
@@ -25,12 +25,11 @@ header("Content-Type: text/html; charset=${Charset}");
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo($TextDir); ?>">
-<HEAD><TITLE><?php echo(L_PRIV_POST_MSG); ?></TITLE>
-</HEAD>
-<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
-<META content="MSHTML 6.00.2900.2722" name=GENERATOR></HEAD>
-<LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=${Charset}">
+	<TITLE><?php echo(L_PRIV_POST_MSG); ?></TITLE>
+	<LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <SCRIPT TYPE="text/javascript" LANGUAGE="javascript1.2">
 <!--
 function postPM()
@@ -77,13 +76,12 @@ return true;
 <TABLE BORDER=1 CELLPADDING=3 WIDTH=400 CLASS="table">
 	<TR><TD width="100%" ALIGN="CENTER" CLASS="tabtitle"><?php echo(L_PRIV_POST_MSG) ?></TD></TR>
 </TABLE>
-<br>
-<FORM ACTION="send_popup.php" METHOD="POST" AUTOCOMPLETE="OFF" NAME="PostForm">
+<br />
+<FORM ACTION="send_popup.php?L=<?php echo($L); ?>" METHOD="POST" AUTOCOMPLETE="OFF" NAME="PostForm">
 <tr><td><input type="text" size="60" value="" name="Post" CLASS="ChatBox" onKeyPress="checkEnter(event)";></td></tr>
 </FORM>
 </CENTER>
-<P align="right" style="font-weight: 800; color:#FFD700; font-size: 7pt">
-&copy; 2005-<?php echo(date(Y)); ?> - by <a href=mailto:ciprianmp@yahoo.com onMouseOver="window.status='Click to email author.'; return true;">Ciprian Murariu</a>
-</P>
+<P align="right"><div align="right"><span dir="LTR" style="font-weight: 600; color:#FFD700; font-size: 7pt">
+&copy; 2005-<?php echo(date(Y)); ?> - by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo (($L!="turkish") ? sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR) : sprintf(L_CLICKS,L_AUTHOR,L_LINKS_6)); ?>.'; return true;" title="<?php echo (($L!="turkish") ? sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR) : sprintf(L_CLICKS,L_AUTHOR,L_LINKS_6)); ?>" target=_blank>Ciprian Murariu</a></span></div></P>
 </BODY>
 </HTML>

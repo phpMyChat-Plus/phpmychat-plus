@@ -37,9 +37,9 @@
 /**
 * Include the guts of the program.
 */
-include "respond.php";
+include "respond_talk.php";
 
-if (isset($HTTP_POST_VARS['input'])){
+if (isset($_POST['input'])){
 
 	$numselects=0;
 
@@ -48,12 +48,12 @@ if (isset($HTTP_POST_VARS['input'])){
 	$myuniqueid=session_id();
 
 	// Here is where we get the reply.
-	$botresponse=replybotname($HTTP_POST_VARS['input'],$myuniqueid,$HTTP_POST_VARS['botname']);
+	$botresponse=replybotname($_POST['input'],$myuniqueid,$_POST['botname']);
 
 	// Print the results.
-	print "<B>RESPONSE: " . $botresponse->response . "<BR></b>";
-	print "<BR><BR>execution time: " . $botresponse->timer;
-	print "<BR>numselects= $numselects";
+	print "<B>RESPONSE: " . $botresponse->response . "<br /></b>";
+	print "<br /><br />execution time: " . $botresponse->timer;
+	print "<br />numselects= $numselects";
 
 	//print_r($botresponse->inputs);
 	//print_r($botresponse->patternsmatched);
@@ -69,7 +69,7 @@ if (isset($HTTP_POST_VARS['input'])){
 	<body>
 	<form name="form1" method="post" action="talk.php">
 	<input type="hidden" name="<?=session_name()?>" value="<?=$uid?>">
-	<input type="hidden" name="botname" value="<?=$HTTP_POST_VARS['botname']?>">
+	<input type="hidden" name="botname" value="<?=$_POST['botname']?>">
 	  Input: <input type="text" name="input" size="55">
 
 	  <input type="submit" name="Submit" value="Submit">
@@ -115,7 +115,7 @@ else {
 		print "<option value=\"$onebot\">$onebot</option>";
 	}
 	?>
-	</select><BR>
+	</select><br />
 
 	  Input: <input type="text" name="input" size="55">
 

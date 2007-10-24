@@ -34,8 +34,8 @@ function DetectTutorial($Str,$From)
 };
 
 // finds the appropriate language file
-if (isset($HTTP_COOKIE_VARS["CookieLang"]))
-	$CookieLang = $HTTP_COOKIE_VARS["CookieLang"];
+if (isset($_COOKIE["CookieLang"]))
+	$CookieLang = $_COOKIE["CookieLang"];
 if (!isset($HTTP_ACCEPT_LANGUAGE))
 	$HTTP_ACCEPT_LANGUAGE = getenv("HTTP_ACCEPT_LANGUAGE");
 if (!isset($HTTP_USER_AGENT))
@@ -57,11 +57,11 @@ elseif ($HTTP_USER_AGENT != "")
 	DetectTutorial($HTTP_USER_AGENT,2);
 };
 
-//if no language detected set the english one
+//if no language detected set the english (UK or US) or the default one (this is for those who remove languages from server: I might want to chat in a Turkish only room, but want to use an English tutorial - so i want to try those first)
 if (!isset($L))
 {
-	$L = "english";
-	$NoTranslation = "<CENTER><P CLASS='RedText'>Sorry but the tutorial hasn't been translated to your language at this time.</P></CENTER>";
+	if (file_exists("./localization/english/localized.chat.php")) $L = "engish";
+	else $L = C_LANGUAGE;
 };
 	
 // Clear the table

@@ -27,13 +27,13 @@ class acounter {
         $this->config['height'] = 13;
 
         /* ip blocking (true/false) */
-        $this->config['block_ip'] = false;
+        $this->config['block_ip'] = true;
 
         /* path to ip logfiles */
         $this->config['logfile'] = "./acount/pages/ip.txt";
 
         /* timeout (minutes) */
-        $this->config['block_time'] = 5;
+        $this->config['block_time'] = 1;
     }
 
     function is_new_visitor() {
@@ -117,4 +117,40 @@ class acounter {
 
 }
 
+
+// This script exports all the IPs that hit this chat server into a file called /logs/chat_ip_logs.txt
+function getip() { 
+  if(isset($_SERVER)) { 
+    if(isset($_SERVER["HTTP_X_FORWARDED_FOR"])) { 
+    $realip = $_SERVER["HTTP_X_FORWARDED_FOR"]; 
+    }elseif(isset($_SERVER["HTTP_CLIENT_IP"])) { 
+      $realip = $_SERVER["HTTP_CLIENT_IP"]; 
+    }else{ 
+      $realip = $_SERVER["REMOTE_ADDR"]; 
+    } 
+  }else{ 
+  if(getenv( 'HTTP_X_FORWARDED_FOR' ) ) { 
+    $realip = getenv( 'HTTP_X_FORWARDED_FOR' ); 
+  }elseif (getenv( 'HTTP_CLIENT_IP' ) ) { 
+    $realip = getenv( 'HTTP_CLIENT_IP' ); 
+  }else { 
+    $realip = getenv( 'REMOTE_ADDR' ); 
+  } 
+} 
+return $realip; 
+} 
+
+$logIP = getip(); 
+if (!eregi("86.121.5", $logIP)) //Replace this IP (mine) with yours IP (entire - if it's a static IP or partial - if it's a dinamic one like mine)
+{
+	$proxy = $_SERVER['REMOTE_ADDR'];
+	$loguri = $_SERVER['REQUEST_URI']; 
+	$logref = $_SERVER['HTTP_REFERER']; 
+	$logDATE = date("D, d-m-y, H:i:s"); 
+	$logHOST = gethostbyaddr($logIP); 
+	$invoegen = $logDATE . " | " . $logIP . " | " . $logHOST . " | " . $proxy . " | " . $loguri . " - " . $logref . "\n";
+	$fopen = fopen("./acount/pages/chat_ip_logs.txt", "a");
+	fwrite($fopen, $invoegen);
+	fclose($fopen);
+}
 ?>

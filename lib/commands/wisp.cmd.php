@@ -20,6 +20,7 @@ elseif (trim($Cmd[2]) != "" && trim($Cmd[3]) != "")
 	$DbLink = new DB;
 	$DbLink->query("SELECT allowpopup FROM ".C_REG_TBL." WHERE username='$Cmd[2]'");
 	if($DbLink->num_rows() != 0) list($allowpopup) = $DbLink->next_record();
+	else $allowpopup = 0;
 	$DbLink->clean_results();
 if (C_PRIV_POPUP)
 {
@@ -57,7 +58,7 @@ else
         } else {
 // end R Dickow /away command modification addition.
  	AddMessage(stripslashes($Cmd[3]), $T, $UR, $U, $C, $Cmd[2], $Read, $R);
-	if (eregi(C_BOT_NAME, trim($Cmd[2])))	include "lib/bot_priv.lib.php";
+	if (eregi(C_BOT_NAME, trim($Cmd[2]))) include "lib/bot_priv.lib.php";
 	$IsCommand = true;
 	$RefreshMessages = true;
 	}

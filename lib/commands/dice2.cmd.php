@@ -19,7 +19,7 @@ if ($Cmd[1]<=MAX_DICES)
         {
 	   			$Dice = rand(1,6); // first number is the LOWEST one it will use, second is the HIGHEST number it will use.
 
-          $nums = $nums." <img src=images/nums".$Dice.".gif>"." ";       // slash this line to turn OFF images
+          $nums = $nums." <img src=images/dice/nums".$Dice.".gif>"." ";       // slash this line to turn OFF images
           $nums = $nums." ".$Dice." ";                                    // slash this line to turn OFF text
           if($count < $Cmd[3])
           {
@@ -49,7 +49,7 @@ if ($Cmd[1]<=MAX_DICES)
 		    {
 			  $Dice = rand(1,6); // first number is the LOWEST one it will use, second is the HIGHEST number it will use.
 
-		           $nums = $nums." <img src=images/nums".$Dice.".gif>"." ";       // slash this line to turn OFF images
+		           $nums = $nums." <img src=images/dice/nums".$Dice.".gif>"." ";       // slash this line to turn OFF images
 		           $nums = $nums." ".$Dice." ";                                    // slash this line to turn OFF text
 									if($count < $Cmd[3])
 									{
@@ -62,14 +62,14 @@ if ($Cmd[1]<=MAX_DICES)
 		     // Alter the html tags in the line below to format your text as you want.
 		     if($count2 < $Cmd[1])
 		     {
-		       $nums = $nums." <img src=images/arrowd.gif><br>";
+		       $nums = $nums." <img src=images/arrowd.gif><br />";
 				 }
 		       $count2++;
 		       $count = "1";
 		   }
 
      	// Alter the html tags in the line below to format your text as you want.
-			$M = " <br><font size = -2 color = blue>".addslashes($nums);
+			$M = "<font size = -2 color = blue>".addslashes($nums);
 			$M .= " (sum = ".$sum.", rolls = ".$Cmd[1].")</font></b>&nbsp;<img src=images/tick.gif>";
 			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS dice2', '', '".time()."', '$U', '".stripslashes($M)."', '', '')");
    	}

@@ -1,0 +1,93 @@
+Instructie voor installatie(of een UPGRADE) van de Plus versie die je zojuist hebt gedownload.
+Merk op: Deze versie kan alleen handmatig worden geinstalleerd(dus niet de setup.php openen, zoals in de basis versie moest)
+
+1. Extract plus.zip
+
+2. Bewerk deze file:
+- config/config.lib.php - alleen de database details (eerste 3 regels aan het begin van de file):
+// Database settings
+define("C_DB_NAME", 'plus');						// De naam van de database van je server(meestal is dit als: cpanelusername_databasename)
+define("C_DB_USER", 'gebruikersnaam');				// De gebruikersnaam(meestal: cpanelusername_username)
+define("C_DB_PASS", 'paswoord');				// Paswoord van de database 
+Example:
+My server cpanel gebruikersnaam is "ciprianmp". Mijn regels zien er als volgt uit:
+define("C_DB_NAME", 'ciprianmp_plus');						// De naam van de database van je server(meestal is dit als: cpanelusername_databasename)
+define("C_DB_USER", 'ciprianmp_myname');				// De gebruikersnaam(meestal: cpanelusername_username)
+define("C_DB_PASS", 'paswoord');				// Paswoord van de database 
+
+In sommige gevallen, moet je deze regel ook aanpassen:
+define("C_DB_HOST", ‘localhost’); 
+Omdat "localhost" in de meeste gevallen wel werkt, en soms is het nodig om het hele adres in te vullen van je database. Mocht dit het geval zijn, kan je deze informatie aan je provider vragen!
+
+3. Upload de plus directory naar jou publieke_html map.
+Merk op: index.php moet in de plus map, dus niet plus/chat/ zoals de vorige versies.
+De file index1.php is de index file met een volledige pagina. Kies degene die jij wilt houden als index.php.
+
+4. Optioneel, hernoem de plus folder naar wat jij leuk vindt(chat, mychat).
+
+5. Verander kenmerk van de volgende files/mappen naar 777(chmod):
+plus/acount/pages/chat_index.txt
+plus/acount/pages/ip.txt
+plus/bot/subs.inc
+plus/botfb/
+plus/logs/
+plus/logsadmin/
+
+6. Ga naar de map plus/install/ folder op jij disk en open mysql_new_install.txt (of de corresponderende upgrade) file.
+Verander hier geen enkele data. Je kan deze later aanpassen, via de config page (Klik op Administratie link op jou index pagina)
+
+Merk op: Als je de admin naam wilt veranderen naar die jij wilt gebruiken, is dit een mooie kans, maar verander niet het paswoord.
+Standaard, de admin account is admin/admin.
+Go to line 291:
+INSERT INTO c_reg_users VALUES ('', '', 'admin', '1', '21232f297a57a5a743894a0e4a801fc3', '', '', '', '', '', 0, 'admin', '', '', '', 0, 1, '', '', '', '', '', 'red', './images/avatars/def_avatar.gif');
+en verander de eerste "admin" met de door jou gewenste gebruikersnaam. Het paswoord is nog steeds "admin", wat gemakkelijk te veranderen is in edituser.php.
+Als je toch liever het paswoord wilt veranderen, kan je deze link gebruiken http://ciprianmp.com/scripts/hash.php om een nieuw passwoord te maken, dan copy deze en vervang dan deze "21232f297a57a5a743894a0e4a801fc3" (verander niet het begin/einde)
+Verander GEEN enkele data op de volgende regel(dit is de benodigde bot)!
+
+6a. Open je phpmyadmin link en browse naar jou gewenste database (als je er nog geen hebt, moet je dit doen in Cpanel);
+6b. In het gewenste database (dezelfde als je hebt ingevuld in config/config.lib.php) klik op SQL. Dit laat een venster zien, waar je een code kan invullen;
+6c. Copy de tekst inhoud van stap 6 en plak het in de SQL frame/venster, dan klik OK.
+6d. Wees er zeker van dat er staat "Your SQL statement has been executed successfully" of zoiets. In de linker frame, zie je see/check (bekijk/controleer) de toegevoegde tabellenl.
+Merk op: stap 6b-6d werkt ook door de corresponderende .txt file te importeren in je mysql database(import file operation)
+
+7. Test jou site op het functioneren door http://jousiteurl.com/plus te openen(plus is de name die je in step 4 hebt gebruikt.) in je browser. Merk op dat er maar 1 admin is: gebruikersnaam admin, paswoord admin.
+
+8. Registreer jou gewenste administrator naam en verander zijn permissie´s naar admin in c_reg_users tabel. Check eerst of jou nieuwe naam inderdaad is omgezet als admin.
+
+9. Verwijder daarna pas de admin gebruiker uit de c_reg_users tabel
+
+10. Open de Administration menu/link (Admin Panel) en pas jou chat aan(verander niet de naam van jou bot).
+
+11. Hernoem jou logsadmin map op beide admin config panel en ftp map naar een moeilijk te raden naam.
+
+Dat was het! Nu zou het moeten werken!
+
+Optioneel
+Wanneer je de bot wilt gebruiken, voer de volgende stappen uit:
+- Belangrijk: Verander niet de naam van de bot(in admin panel) voordat je de 8 stappen hebt gedaan(en verander alleen als dit allemaal is gelukt). Lees ook opnieuw de laatste regel van paragraaf 6!
+1. Open je browser and typ: http://yoursiteurl.com/plus/bot/botloader.php
+2. Wacht totdat alles is geladen om de import te uit te voeren. Het lijkt misschien dat er niets gebeurt - maar dit gebeurt op de achtergrond,
+dus sluit NIET je browser! Aan het eind, kan je de bot testen door het volgen van de instructies onderaan de pagina.
+3. Als het werkt vanuit talk.htm (.php), zou het nu al in jou chat moeten werken.
+4. Om de bot te starten in jou kamer, typ: /bot start
+5. Om met de bot te praten, noem zijn naam "plusbot" in een bericht(dezelfde kamer)
+6. Om de bot te sluiten typ "bye plusbot"
+7. Om de bot te stoppen en hem de kamer te laten verlaten, typ /bot stop in de kamer waar hij actief is.
+8. Om privé te praten tegen de bot(minder vervelend) gebruik /to of /wisp, net als tegen de andere gebruikers.
+Bot successvol geladen Test: wees er zeker van dat de bot antwoordt geeft in de chat. Als het bericht leeg is, is er iets verkeerd gegaan.
+Neem dan contact met mij op ciprianmp@yahoo.com voor ondersteuning(alleen basis ondersteuning, niet voor het veranderen van instellingen)
+Als de bot normale antwoorden geeft, ga dan naar de admin panel and verander jou naam (hanteer dezelfde regels als voor geregistreerde gebruikersnamen: geen spaties, komma´s, backslashes of andere veboden karakters, anders zal de chat funties haperen)
+Merk op: Mocht je niet van plan zijn om de bot te gebruiken, bewerk het snel menu in admin config panel om de bot commando´s te verwijderen van de snel lijst.
+Als de bot jou antwoordt, dan kan je zijn naam veranderen in Admin Panel nu - het is veilig.
+Deze versie komt alleen met de Engelse en Roemeense taalpakket. Andere verteling zijn we druk mee bezig.
+Om zelf andere talen toe te voegen, bewerk alle andere talen die je wilt, behalve de engelse in de standaard pakket en voeg dan toe in chat/localization/.
+Voeg toe, wijzig en vertaling in de nieuwe regels van de Engelse versie(gebruik een text programma, zoals kladblok of WordPad).
+
+Voor meer instructies(e.g. hoe upgrade de c_reg_users tabel) lees de Plus FAQ.txt in de docs/plus docs map.
+Voor nu is dit alles! Veel plezier en laat mij weten of het allemaal gelukt is!
+
+Wil je het misschien eerst de verschillende instellingen uitproberen? Aarzel dan niet om de Demo te gebruiken, die je kan vinden op http://plus.gamedogs.com (gebruik admin/admin of moderator/moderator als login voor verschillende mogelijkheden - hier hoef je niet voor geregistreerd zijn)
+
+Vriendelijke groeten,
+Original text by Ciprian Murariu
+Translation of this file by Bert Moorlag

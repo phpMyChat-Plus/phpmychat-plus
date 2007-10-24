@@ -1,7 +1,7 @@
 <?
 /* ------------------------------------------------------------------
 	This library allows to transform text codes to graphical smilies.
-	It is called by 'chat/input.php'.
+	It is called by 'plus/input.php'.
    ------------------------------------------------------------------ */
 
 // The table below define smilies code and associated gif names, width and height.
@@ -12,13 +12,19 @@
 
 $SmiliesTbl = Array(
 	":\)"	=> array("smile1.gif", "15", "15"),
+	":-\)"	=> array("smile1.gif", "15", "15"),
 	":D"	=> array("smile2.gif", "15", "15"),
 	":o"	=> array("smile3.gif", "15", "15"),
+	":O"	=> array("smile3.gif", "15", "15"),
 	":\("	=> array("smile4.gif", "15", "15"),
+	":-\("	=> array("smile4.gif", "15", "15"),
 	";\)"	=> array("smile5.gif", "15", "15"),
 	":p"	=> array("smile6.gif", "15", "15"),
+	":P"	=> array("smile6.gif", "15", "15"),
 	"8\)"	=> array("smile7.gif", "15", "15"),
+	"8-\)"	=> array("smile7.gif", "15", "15"),
 	":\["	=> array("smile8.gif", "15", "15"),
+	":-\["	=> array("smile8.gif", "15", "15"),
 	":kill:"	=> array("smile9.gif", "50", "15"),
 	":wave"	=> array("smile10.gif", "25", "15"),
 	":baby"	=> array("smile11.gif", "40", "15"),
@@ -35,6 +41,8 @@ $SmiliesTbl = Array(
 	":sneak" => array("smile22.gif", "47", "20"),
 	":handshake" => array("smile23.gif", "36", "15"),
 	":kiss"	=> array("smile24.gif", "32", "15"),
+	":\*"	=> array("smile24.gif", "32", "15"),
+	":-\*"	=> array("smile24.gif", "32", "15"),
 	":heart" => array("smile25.gif", "19", "19"),
 	":bang"	=> array("smile26.gif", "25", "20"),
 	":type"	=> array("smile27.gif", "40", "15"),
@@ -53,7 +61,7 @@ $SmiliesTbl = Array(
 	":disco" => array("smile40.gif", "36", "23"),
 	":clap"	=> array("smile41.gif", "19", "16"),
 	":yea"	=> array("smile42.gif", "27", "16"),
-	":splt"	=> array("smile43.gif", "15", "15"),
+	":splat"	=> array("smile43.gif", "15", "15"),
 	":uch"	=> array("smile44.gif", "33", "26"),
 	":cryn"	=> array("smile45.gif", "21", "16"),
 	":whoa"	=> array("smile46.gif", "15", "15"),
@@ -69,6 +77,16 @@ $SmiliesTbl = Array(
 	":hahaha"	=> array("smile56.gif", "15", "19"),
 	":hy"	=> array("smile57.gif", "19", "20"),
 	":mad"	=> array("smile58.gif", "15", "17"),
+	":shock" => array("smile59.gif", "19", "25"),
+	":slap"	=> array("smile60.gif", "39", "22"),
+	":bop"	=> array("smile61.gif", "45", "35"),
+	":music"	=> array("smile62.gif", "32", "25"),
+	":argue"	=> array("smile63.gif", "50", "25"),
+	":mischief" => array("smile64.gif", "61", "32"),
+	":groin"	=> array("smile65.gif", "60", "30"),
+	";punch"	=> array("smile66.gif", "48", "18"),
+	":drunk"	=> array("smile67.gif", "57", "28"),
+	":back"	=> array("smile68.gif", "37", "15"),
 );
 
 $MaxWidth = "50";		// Set the maximum width among similes
@@ -116,7 +134,8 @@ function Check4Smilies(&$string,&$Table)
 }
 
 // Bob Dickow modification Rev 2 for multiple smileys rows in help popup
-// Display smilies in the help popup and in the tutorials
+// Display smilies in the help popup and in the tutorials (added popups by Ciprian)
+// Added the popup for Smilie popup by Ciprian
 
 function DisplaySmilies(&$ToDisplay,&$Table,&$TblSize,$Target)
 {
@@ -130,13 +149,13 @@ function DisplaySmilies(&$ToDisplay,&$Table,&$TblSize,$Target)
 	while(list($key, $prop) = each($Table))
 	{
 		if (($Target == "help") || ($Target == "input")) {
-		  	$Str1 .= "\t\t<TD ALIGN=\"CENTER\" WIDTH=$MaxWidth HEIGHT=$MaxHeight><A HREF=\"#\" onClick=\"smiley2Input('".SpecialSlash($key)."'); return false\" onMouseOver=\"window.status='Click to insert this smiley.'; return true\" title=\"".str_replace("\"","&quot;", stripslashes($key))."\"><IMG SRC=images/smilies/$prop[0] BORDER=0 ALT=\"".str_replace("\"","&quot;", stripslashes($key))."\"></A></TD>\n";
-	      $Str2 .= "\t\t<TD ALIGN=\"CENTER\" WIDTH=50 HEIGHT=15 NOWRAP>".stripslashes($key)."</TD>\n";
+		  	$Str1 .= "\t\t<TD ALIGN=\"CENTER\" WIDTH=$MaxWidth HEIGHT=$MaxHeight><A HREF=\"#\" onClick=\"smiley2Input('".SpecialSlash($key)."'); return false\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_5).".'; return true\" title=\"".str_replace("\"","&quot;", stripslashes($key))."\"><IMG SRC=images/smilies/$prop[0] BORDER=0 ALT=\"".str_replace("\"","&quot;", stripslashes($key))."\"></A></TD>\n";
+	      $Str2 .= "\t\t<TD ALIGN=\"CENTER\" WIDTH=50 HEIGHT=15 NOWRAP=\"NOWRAP\">".stripslashes($key)."</TD>\n";
 		} elseif ($Target == "popup") {
-		  	$Str1 .= "\t\t<TD ALIGN=\"CENTER\"><A HREF=\"#\" onClick=\"smiley2Input('".SpecialSlash($key)."'); return false\" onMouseOver=\"window.status='Click to insert this smiley.'; return true\" title=\"".str_replace("\"","&quot;", stripslashes($key))."\"><IMG SRC=images/smilies/$prop[0] BORDER=0 ALT=\"".str_replace("\"","&quot;", stripslashes($key))."\"></A></TD>\n";
+		  	$Str1 .= "\t\t<TD ALIGN=\"CENTER\"><A HREF=\"#\" onClick=\"smiley2Input('".SpecialSlash($key)."'); return false\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_5).".'; return true\" title=\"".str_replace("\"","&quot;", stripslashes($key))."\"><IMG SRC=images/smilies/$prop[0] BORDER=0 ALT=\"".str_replace("\"","&quot;", stripslashes($key))."\"></A></TD>\n";
 		} else {
 				$Str1 .= "\t\t<TD ALIGN=CENTER WIDTH=$MaxWidth HEIGHT=$MaxHeight><IMG SRC=images/smilies/$prop[0] BORDER=0 ALT=\"".str_replace("\"","&quot;", stripslashes($key))."\"></TD>\n";
-				$Str2 .= "\t\t<TD ALIGN=\"CENTER\" NOWRAP>".stripslashes($key)."</TD>\n";
+				$Str2 .= "\t\t<TD ALIGN=\"CENTER\" NOWRAP=\"NOWRAP\">".stripslashes($key)."</TD>\n";
 		};
 		//   Set SMILEY_COLS in config.lib.php.
                 if ($Target == "input") {  // for compatibility with input.php modifications by RD

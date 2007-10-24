@@ -1,8 +1,13 @@
 <?php
+// Registered Users panel
 // This sheet is diplayed when the admin wants to modify perms for registered users
 // or remove the profiles of some of them
 
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
+  while(list($name,$value) = each($_GET))
+  {
+           $$name = $value;
+  };
 
 // The admin has required an action to be done
 if (isset($FORM_SEND) && $FORM_SEND == 1)
@@ -12,7 +17,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 1)
 	$BANISH_MODE = (stripslashes($submit_type) == A_SHEET1_9)? 1:0;
 
 	// Get the list of the users
-	$DbLink->query("SELECT username,perms FROM ".C_REG_TBL." WHERE perms != 'admin'");
+	$DbLink->query("SELECT username,perms FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND username != '$pmc_username'");
 	$users = Array();
 	while (list($username, $perms) = $DbLink->next_record())
 	{
@@ -52,6 +57,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 1)
 		// Banish an user
 		elseif ($BANISH_MODE)
 		{
+			$VarName = "reason"; $reason = $$VarName;
 			$VarName = "selected_".$usrHash;
 			if (isset($$VarName))
 			{
@@ -65,9 +71,13 @@ if (isset($FORM_SEND) && $FORM_SEND == 1)
 				if ($Nb == "0")
 				{
 					$Until = time() + round(C_BANISH * 60 * 60 * 24);
-					if ($Until > 2147483647) $Until = "2147483647";
-					$DbLink->query("INSERT INTO ".C_BAN_TBL." VALUES ('$uuu','$Latin1','$IP','**ToDefine**','$Until')");
-				};
+					if ($Until > 2222222222) $Until = "2222222222";
+					$DbLink->query("INSERT INTO ".C_BAN_TBL." VALUES ('$uuu','$Latin1','$IP','*','$Until','$reason')");
+				}
+				else
+				{
+					$DbLink->query("UPDATE ".C_BAN_TBL." SET reason = '$reason' where username='$uuu'");
+				}
 				$Warning = A_SHEET1_10;
 			};
 		}
@@ -120,23 +130,42 @@ if (isset($FORM_SEND) && $FORM_SEND == 1)
 				}
 
 				// Send a message to the user if he chats into one of the 'diff' rooms
-				if (room_in(addslashes($room), $diff_rooms))
+				if (room_in(addslashes($room), $diff_rooms) || room_in("*", $rrr) || room_in("*", $diff_rooms) || (($ppp == 'admin') || ($old_ppp == 'admin')) || (($ppp == 'topmod') || ($old_ppp == 'topmod')))
 				{
-					if ($ppp == 'moderator' && room_in(addslashes($room), $rrr))	// user becomes moderator for the room he chats into
+					if ($ppp == 'admin')// user becomes user for the room he chats into
+					{
+						$status = "a";
+						$messagead = "sprintf(L_ADM_3, \"".addslashes(htmlspecialchars(stripslashes($uuu)))."\")";
+					}
+					elseif ($ppp == 'topmod')// user becomes user for the room he chats into
+					{
+						$status = "t";
+						$messagead = "sprintf(L_ADM_3, \"".addslashes(htmlspecialchars(stripslashes($uuu)))."\")";
+					}
+					elseif ($ppp == 'moderator' && (room_in(addslashes($room), $rrr) || room_in("*", $rrr)))	// user becomes moderator for the room he chats into
 					{
 						$status = "m";
 						$message = "sprintf(L_MODERATOR, \"".addslashes(htmlspecialchars(stripslashes($uuu)))."\")";
+						if ($old_ppp == 'admin' || $old_ppp == 'topmod') $messagead = "sprintf(L_ADM_4, \"".addslashes(htmlspecialchars(stripslashes($uuu)))."\")";
 					}
-					else	// user becomes user for the room he chats into
+					elseif ($ppp == 'user')// user becomes user for the room he chats into
+					{
+						$status = "r";
+						if ($old_ppp == 'moderator') $message = "sprintf(L_ADM_1, \"".addslashes(htmlspecialchars(stripslashes($uuu)))."\")";
+						if ($old_ppp == 'admin' || $old_ppp == 'topmod') $messagead = "sprintf(L_ADM_4, \"".addslashes(htmlspecialchars(stripslashes($uuu)))."\")";
+					}
+					else // user becomes user for the room he chats into
 					{
 						$status = "r";
 						$message = "sprintf(L_ADM_1, \"".addslashes(htmlspecialchars(stripslashes($uuu)))."\")";
+						if ($old_ppp == 'admin' || $old_ppp == 'topmod') $messagead = "sprintf(L_ADM_4, \"".addslashes(htmlspecialchars(stripslashes($uuu)))."\")";
 					};
 					$DbLink->query("UPDATE ".C_USR_TBL." SET status='$status' WHERE username='$uuu'");
 					$DbLink->query("SELECT type FROM ".C_MSG_TBL." WHERE room='".addslashes($room)."' LIMIT 1");
 					list($type) = $DbLink->next_record();
 					$DbLink->clean_results();
-					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS promote', '', ".time().", '', '$message', '', '')");
+					if (isset($message)) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS promote', '', ".time().", '', '$message', '', '')");
+					if (isset($messagead)) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '*', 'SYS promote', '', ".time().", '', '$messagead', '', '')");
 				};
 			}
 			else
@@ -148,7 +177,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 1)
 };
 
 // Remove profiles of users that have not been chatting for a time > C_REG_DEL
-if (!isset($FORM_SEND) && C_REG_DEL != 0) $DbLink->query("DELETE FROM ".C_REG_TBL." WHERE reg_time < ".(time() - C_REG_DEL * 60 * 60 * 24)." AND perms != 'admin'");
+if (!isset($FORM_SEND) && C_REG_DEL != 0) $DbLink->query("DELETE FROM ".C_REG_TBL." WHERE reg_time < ".(time() - C_REG_DEL * 60 * 60 * 24)." AND perms != 'admin' AND perms != 'topmod'");
 
 // Remove moderator status if no room is specified
 $DbLink->query("UPDATE ".C_REG_TBL." SET perms='user' WHERE perms='moderator' AND rooms=''");
@@ -177,14 +206,14 @@ function reset_perms(user)
 <P CLASS=title><?php echo(A_SHEET1_1); ?></P>
 
 <?php
-if (isset($Warning) && $Warning != "") echo("<P CLASS=\"success\">$Warning</SPAN></P><br>\n");
+if (isset($Warning) && $Warning != "") echo("<P CLASS=\"success\">$Warning</SPAN></P><br />\n");
 ?>
 
-<TABLE BORDER=0 CELLPADDING=3 CLASS="table">
+<TABLE ALIGN=CENTER BORDER=0 CELLPADDING=3 CLASS="table">
 
 <?php
-// Ensure at least one registered user exist (exept the administrator) before displaying the modify status
-$DbLink->query("SELECT COUNT(*) FROM ".C_REG_TBL." WHERE perms != 'admin' LIMIT 1");
+// Ensure at least one registered user exist (except the logged in administrator) before displaying the modify status
+$DbLink->query("SELECT COUNT(*) FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND username != '$pmc_username' LIMIT 1");
 list($count_RegUsers) = $DbLink->next_record();
 $DbLink->clean_results();
 if ($count_RegUsers != 0)
@@ -235,7 +264,7 @@ if ($count_RegUsers != 0)
 		elseif (C_DB_TYPE == "pgsql") $limits = " LIMIT 10 OFFSET $startReg";
 		else $limits = "";
 
-		$DbLink->query("SELECT username,latin1,perms,rooms,reg_time,ip FROM ".C_REG_TBL." WHERE perms != 'admin' ORDER BY $sortBy $sortOrder".$limits);
+		$DbLink->query("SELECT username,latin1,perms,rooms,reg_time,ip FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND username != '$pmc_username' ORDER BY $sortBy $sortOrder".$limits);
 		while (list($username,$Latin1,$perms,$rooms,$lastTime,$IP) = $DbLink->next_record())
 		{
 			$usrHash = md5($username);
@@ -258,6 +287,8 @@ if ($count_RegUsers != 0)
 					<SELECT name="perms_<?echo($usrHash)?>">
 						<OPTION value="user"<?if($perms=="user") echo(" SELECTED")?>><?echo(A_USER)?></OPTION>
 						<OPTION value="moderator"<?if($perms=="moderator") echo(" SELECTED")?>><?echo(A_MODER)?></OPTION>
+						<OPTION value="topmod"<?if($perms=="topmod") echo(" SELECTED")?>><?echo(A_TOPMOD)?></OPTION>
+						<OPTION value="admin"<?if($perms=="admin") echo(" SELECTED")?>><?echo(A_ADMIN)?></OPTION>
 					</SELECT>
 					<INPUT type="hidden" name="old_perms_<?echo($usrHash)?>" value="<?echo($perms)?>">
 				</TD>
@@ -279,8 +310,9 @@ if ($count_RegUsers != 0)
 		<TR>
 			<TD VALIGN=CENTER ALIGN=CENTER COLSPAN=5>
 				<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(A_SHEET1_6); ?>">
-				<br><br>
-				<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(A_SHEET1_9); ?>">
+				<br /><br />
+				<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(A_SHEET1_9); ?>"><br />
+				<?php echo(A_SHEET1_12); ?>: <INPUT TYPE="text" NAME="reason" VALUE="">
 			</TD>
 			<TD VALIGN=CENTER ALIGN=CENTER>
 				<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(A_SHEET1_7); ?>">

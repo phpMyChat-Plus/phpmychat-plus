@@ -572,7 +572,7 @@ function startS($parser,$name,$attrs)
 		$selectbot=$newbotid;
 		$allbots[]=$selectbot;
 
-		#print "<font size='3'><b>Loading bot: $bot ($selectbot)<BR></b></font>\n";
+		#print "<font size='3'><b>Loading bot: $bot ($selectbot)<br /></b></font>\n";
 		flush();
     }
     elseif (strtoupper($name)=="SPLITTER"){
@@ -945,7 +945,7 @@ function loadstartupinc($fileid){
 		$areinc=1;
 	}
 
-	print "<font size='3'>Loading startup.xml<BR></font>\n";
+	print "<font size='3'>Loading startup.xml<br /></font>\n";
 	$learnfiles = array(); # This array will hold the files to LEARN
 
 	$file = $rootdir . "startup.xml";
@@ -971,7 +971,7 @@ function loadstartupinc($fileid){
 
 	foreach ($allbots as $bot){
 
-		# print "<font size='3'><b>Loading bot: $bot<BR></b></font>\n";
+		# print "<font size='3'><b>Loading bot: $bot<br /></b></font>\n";
 
 	    $single_learnfiles = $learnfiles[$bot];
 		$single_learnfiles = array_unique($single_learnfiles);
@@ -1025,7 +1025,7 @@ function loadstartup()
 
 	$areinc=1;
 
-    print "<font size='3'>Loading startup.xml<BR></font>\n";
+    print "<font size='3'>Loading startup.xml<br /></font>\n";
     $learnfiles = array(); // This array will hold the files to LEARN
 
 
@@ -1048,7 +1048,7 @@ function loadstartup()
 
 	# For each of the bots learn all of the files
 	foreach ($allbots as $bot){
-		print "<font size='3'><b>Loading bot: $bot<BR></b></font>\n";
+		print "<font size='3'><b>Loading bot: $bot<br /></b></font>\n";
 	    $single_learnfiles = $learnfiles[$bot];
 		$single_learnfiles = array_unique($single_learnfiles);
 		foreach ($single_learnfiles as $file) {
@@ -1142,7 +1142,7 @@ function learn($file)
     xml_parser_set_option($xml_parser,XML_OPTION_CASE_FOLDING,0);
     xml_set_element_handler($xml_parser, "startElement", "endElement");
     xml_set_character_data_handler ($xml_parser, "handleme");
-    print "<font size='3'>Loading data aiml file: $file<BR></font>\n";
+    print "<font size='3'>Loading data aiml file: $file<br /></font>\n";
     flush();
 
     if (strtoupper(substr($file,0,7))=="HTTP://"){

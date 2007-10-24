@@ -25,11 +25,11 @@ the phpHeaven-team
 How to contact you:
 """""""""""""""""""
 
-Your name                           :
+Your name              :
 
-Your e-mail address                 :
+Your e-mail address         :
 
-Your web site                       :
+Your web site            :
 
 
 
@@ -38,21 +38,21 @@ Server side:
 
 Operating System (name and release) :
 
-HTTP Server (name and release)      :
+HTTP Server (name and release)   :
 
-PHP version and configuration       :
+PHP version and configuration    :
 
-     You can join your 'php.ini' file
-     or the result of the 'phpinfo' function
+   You can join your 'php.ini' file
+   or the result of the 'phpinfo' function
 
-Database software and release       :
+Database software and release    :
 
 phpMyChat version and configuration :
 
-     You can join your 'config.lib.php' file
-     (without the password you use)
+   You can join your 'config.lib.php' file
+   (without the password you use)
 
-URL where the bug can be seen       : http://
+URL where the bug can be seen    : http://
 
 
 
@@ -61,7 +61,7 @@ Client side:
 
 Operating system (name and release) :
 
-Browser (name and release)          :
+Browser (name and release)     :
 
 
 

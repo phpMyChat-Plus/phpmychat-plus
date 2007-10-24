@@ -1,0 +1,29 @@
+<?php
+include("../../../config/config.lib.php");
+if (!isset($L) || $L == "") $L = C_LANGUAGE;
+include("../../../localization/".$L."/localized.chat.php");
+include("../../../localization/".$L."/localized.admin.php");
+$textDirection = ($Align == "right") ? "RTL" : "LTR";
+?>
+<html dir=<?php echo($textDirection) ?>>
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=<?php echo($Charset) ?>">
+<title><?php echo(A_CHAT_LOGS_22); ?></title>
+<style type="text/css">
+<!--
+body
+{ background-color: lightcyan;}
+table
+{ font-family: arial; font-size:9pt;}
+-->
+</style>
+</head>
+<body>
+<center>
+<span style="font-weight:600; font-size:14pt; font-color:blue; font-family: helvetica, arial, geneva, sans-serif;">
+<hr>
+<?php echo(A_CHAT_LOGS_22); ?>
+<div align="right"><span dir="LTR" style="font-weight: 600; color:#FFD700; font-size: 7pt;">
+&copy; 2005-<?php echo(date(Y)); ?> - by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo (($L!="turkish") ? sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR) : sprintf(L_CLICKS,L_AUTHOR,L_LINKS_6)); ?>.'; return true;" title="<?php echo (($L!="turkish") ? sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR) : sprintf(L_CLICKS,L_AUTHOR,L_LINKS_6)); ?>" target=_blank>Ciprian Murariu</a></span></div>
+<hr>
+</span>

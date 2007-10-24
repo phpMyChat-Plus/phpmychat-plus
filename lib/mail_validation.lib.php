@@ -6,15 +6,12 @@
 // an other function has been developed by your ISP to send PHP mail, just modify
 // the send_email function to make in runable.
 
-
-// -- SETTINGS BELLOW MUST BE COMPLETED --
+// -- SETTINGS BELLOW MUST BE COMPLETED IN ADMIN PANEL --
 
 $Paswd_Length = C_PASS_LENGTH;					// Length of the password to be generated
 $Sender_Name = C_ADMIN_NAME;		// May also be the name of your site
 $Sender_email = C_ADMIN_EMAIL;			// For the reply address
 $Chat_URL = C_CHAT_URL;	// To be send as a signature
-
-
 
 // -- FUNCTIONS --
 
@@ -57,13 +54,6 @@ function gen_password()
 	};
 
 	return $password;
-} ;
-
-
-function quote_printable($str,$WithCharset)
-{
-	$str = str_replace("%","=",rawurlencode($str));
-	return "=?${WithCharset}?Q?${str}?=";
 };
 
 // Credits for this function goes to fwancho <fwancho@whc.net>
@@ -96,7 +86,14 @@ function rfcDate()
 	return date('D, d M Y H:i:s ', $tn).$zone_sign.sprintf("%02d%02d", abs($zone)/60, abs($zone)%60)." (".strftime("%Z").")";
 }
 
-$mail_date = rfcDate();
+function quote_printable($str,$WithCharset)
+{
+	$str = str_replace("%","=",rawurlencode($str));
+	return "=?${WithCharset}?Q?${str}?=";
+};
+
+	$mail_date = rfcDate();
+	$Sender_Name = quote_printable($Sender_Name,$Charset);
 
 function send_email($subject,$userString,$pswdString,$welcomeString)
 {
@@ -106,14 +103,14 @@ function send_email($subject,$userString,$pswdString,$welcomeString)
 	global $Sender_Name, $Sender_email;
 	global $mail_date;
 
-	$subject = quote_printable($subject,$Charset);
+	$Subject = quote_printable($subject,$Charset);
 
 	$body =  $userString.": $U\n";
 	$body .= $pswdString.": $pmc_password\n\n";
 	$body .= $welcomeString."\n";
 	$body .= $Chat_URL."\n";
+	$body = stripslashes($body);
 
-	$Sender_Name = quote_printable($Sender_Name,$Charset);
 	$headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
 	$headers .= "X-Sender: <${Sender_email}> \r\n";
 	$headers .= "X-Mailer: PHP/".phpversion()." \r\n";
@@ -123,6 +120,6 @@ function send_email($subject,$userString,$pswdString,$welcomeString)
 	$headers .= "Content-Type: text/plain; charset=${Charset} \r\n";
 	$headers .= "Content-Transfer-Encoding: 8bit \r\n";
 
-	return @mail($EMAIL, $subject, $body, $headers);
+	return @mail($EMAIL, $Subject, $body, $headers);
 };
 ?>

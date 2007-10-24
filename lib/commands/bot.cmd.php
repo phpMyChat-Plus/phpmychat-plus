@@ -37,7 +37,7 @@ else
 	{
 		list($password,$perms,$rooms) = $DbLink->next_record();
 		$DbLink->clean_results();
-		if (($password != $PWD_Hash) || (($perms != "moderator")&&($perms != "admin")) || (($perms == "moderator")&&(!room_in(stripslashes($R), $rooms))))
+		if (($password != $PWD_Hash) || (($perms != "moderator") && ($perms != "admin") && ($perms != "topmod")) || (($perms == "moderator") && (!room_in(stripslashes($R), $rooms) && !room_in("*", $rooms))))
 		{
 			$Error = L_NO_MODERATOR;
 		}
@@ -68,7 +68,7 @@ else
 		       else
 		       {
       	             $botuser = C_BOT_NAME;
-		     $DbLink->query("INSERT INTO ".C_USR_TBL." VALUES ('$R','$botuser', '$Latin1', '9999999999', '$status','$IP', '0', ".time().")");
+		     $DbLink->query("INSERT INTO ".C_USR_TBL." VALUES ('$R','$botuser', '$Latin1', '9999999999', '$status','$IP', '0', ".time().", 'bot@bot.com')");
 		     $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '$botuser', '$Latin1', ".time().", '$Private', '<FONT color=".C_BOT_FONT_COLOR.">".C_BOT_HELLO."</FONT> <img src=images/smilies/smile30.gif>".C_UPDTUSRS."', '', '')");
 	             $fp = fopen($botcontrol, "a") ;               // file will be writen to if user types a trigger word
                      fputs($fp, $Cmd[1]);                      // BUT only the existence of file (or not) is used.

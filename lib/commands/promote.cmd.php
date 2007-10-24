@@ -30,7 +30,7 @@ else
 	{
 		list($password,$perms,$rooms) = $DbLink->next_record();
 		$DbLink->clean_results();
-		if (($password != $PWD_Hash) || (($perms != "moderator")&&($perms != "admin")) || (($perms == "moderator")&&(!room_in(stripslashes($R), $rooms))))
+		if (($password != $PWD_Hash) || (($perms != "moderator") && ($perms != "admin") && ($perms != "topmod")) || (($perms == "moderator") && (!room_in(stripslashes($R), $rooms) && !room_in("*", $rooms))))
 		{
 			$Error = L_NO_MODERATOR;
 		}
@@ -50,11 +50,11 @@ else
 				list($Latin1_UU,$perms,$rooms) = $DbLink->next_record();
 				$DbLink->clean_results();
 				// Promote the user if is not already moderator for the current room or admin
-				if ($perms == "admin")
+				if ($perms == "admin" || $perms == "topmod")
 				{
 					$Error = sprintf(L_ADMIN, stripslashes($UU));
 				}
-				elseif (!room_in($R,addslashes($rooms)))
+				elseif (!room_in($R,addslashes($rooms)) && !room_in("*",addslashes($rooms)))
 				{
 					$rooms .= stripslashes($rooms == "" ? $R:",${R}");
 					$DbLink->query("UPDATE ".C_REG_TBL." SET perms='moderator', rooms='".addslashes($rooms)."' WHERE username='$UU'");

@@ -1,15 +1,15 @@
 <?php
 // Get the names and values for vars sent by index.lib.php
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
 };
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 require("./config/config.lib.php");
@@ -20,20 +20,26 @@ header("Content-Type: text/html; charset=${Charset}");
 $Ver1 = ($Ver == "H" ? $Ver : "L");
 
 //---------------------------Begin HighLight command by R.Worley
-$botpath = "botfb/" .$U;         // file is in DIR "botfb" and called "usersname"
-if (file_exists($botpath)) unlink($botpath); // checks to see if user file exists.
+$highpath = "botfb/" .$U;         // file is in DIR "botfb" and called "usersname"
+if (file_exists($highpath)) unlink($highpath); // checks to see if user file exists.
                                      // if it does delete it.
 //----------------------------End HighLight Mod
 
 // Added for Bot conversations only in sessions
-$botpathbot = "botfb/" .$U. ".txt";
-if (file_exists($botpathbot)) unlink($botpathbot); // checks to see if user file exists.
+$botpath = "botfb/" .$U. ".txt";
+if (file_exists($botpath)) unlink($botpath); // checks to see if user file exists.
+
+if (COLOR_FILTERS)
+{
+	if (strcasecmp($C, $COLOR_CA) == 0 || strcasecmp($C, $COLOR_CA1) == 0 || strcasecmp($C, $COLOR_CA2) == 0 || strcasecmp($C, $COLOR_CM) == 0 || strcasecmp($C, $COLOR_CM1) == 0 || strcasecmp($C, $COLOR_CM2) == 0)
+	setcookie("CookieColor", "", time());        // delete power color cookie
+}
 
 // For translations with an explicit charset (not the 'x-user-defined' one)
 if (!isset($FontName)) $FontName = "";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
 <TITLE>Exit frame</TITLE>
@@ -54,18 +60,17 @@ function close_popups()
 	with (window.parent)
 	{
 		if (is_help_popup && !is_help_popup.closed) is_help_popup.close();
-		// Color Input Box mod by Cipprian
-		if (is_color_popup && !is_color_popup.closed) is_color_popup.close();
-		if (is_colorhelp_popup && !is_colorhelp_popup.closed) is_colorhelp_popup.close();
 		// Smilie Popup mod by Cipprian
 		if (is_smilie_popup && !is_smilie_popup.closed) is_smilie_popup.close();
+		// Buzzes Popup mod by Cipprian
+		if (is_buzz_popup && !is_buzz_popup.closed) is_buzz_popup.close();
 		// Private Message Popup mod by Cipprian
 		if (is_priv_popup && !is_priv_popup.closed) is_priv_popup.close();
 		if (is_send_popup && !is_send_popup.closed) is_send_popup.close();
 		if (is_ignored_popup && !is_ignored_popup.closed)
 		{
 			is_ignored_popup.window.document.forms['IgnForm'].elements['Exit'].value = '1';
-			is_ignored_popup.close()
+			is_ignored_popup.close();
 		};
 		if (frames['loader'] && !frames['loader'].closed && leaveChat)
 		{
@@ -104,9 +109,17 @@ function MM_swapImage() { //v3.0
 if (EXIT_LINK_TYPE)
 {
 ?>
-<BODY CLASS="frame" onLoad="MM_preloadImages('images/exitdoorRoll.gif')" onUnload="close_popups();">
+<BODY CLASS="frame" onLoad="MM_preloadImages('localization/<? echo ($L) ?>/images/exitdoorRoll.gif')" onUnload="close_popups();">
 <CENTER>
-<a href="<?php echo("$From?Ver=$Ver&L=$L&U=".urlencode(stripslashes($U))."&E=".urlencode(stripslashes($R))."&EN=$T"); ?>" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image4','','images/exitdoorRoll.gif',1); window.status='<?php echo(L_EXIT); ?>.'; return true;" title="<?php echo(L_EXIT); ?>" target="_parent"><img name="Image4" border="0" alt="<?php echo(L_EXIT); ?>" src="images/exitdoor.gif"></a>
+<?php
+if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT']))
+{
+	?>
+<table align="center"><tr>
+	<?php
+}
+?>
+	<a href="<?php echo("$From?Ver=$Ver&L=$L&U=".urlencode(stripslashes($U))."&E=".urlencode(stripslashes($R))."&EN=$T"); ?>" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image4','','localization/<? echo ($L) ?>/images/exitdoorRoll.gif',1); window.status='<?php echo(L_EXIT); ?>.'; return true;" title="<?php echo(L_EXIT); ?>" target="_parent"><img name="Image4" border="0" alt="<?php echo(L_EXIT); ?>" src="localization/<? echo ($L) ?>/images/exitdoor.gif"></a>
 <?php
 }
 else
@@ -114,13 +127,21 @@ else
 ?>
 <BODY CLASS="frame" onUnload="close_popups();">
 <CENTER>
-<A HREF="<?php echo("$From?Ver=$Ver&L=$L&U=".urlencode(stripslashes($U))."&E=".urlencode(stripslashes($R))."&EN=$T"); ?>"  title="Exit Chat" onMouseOver="window.status='<?php echo(L_EXIT); ?>.'; return true;" title="<?php echo(L_EXIT); ?>" TARGET="_parent"><?php echo(L_EXIT); ?></A>
+<?php
+if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT']))
+{
+	?>
+<table align="center"><tr>
+	<?php
+}
+?>
+	<A HREF="<?php echo("$From?Ver=$Ver&L=$L&U=".urlencode(stripslashes($U))."&E=".urlencode(stripslashes($R))."&EN=$T"); ?>"  title="<?php echo(L_EXIT); ?>" onMouseOver="window.status='<?php echo(L_EXIT); ?>.'; return true;" title="<?php echo(L_EXIT); ?>" TARGET="_parent"><?php echo(L_EXIT); ?></A>
 <?php
 }
 ?>
-<br>
+<br />
 <?php
-if ($FontSize < 10) echo("<br>");
+if ($FontSize < 10) echo("<br />");
 if ($Ver == "H")
 {
 	?>
@@ -142,9 +163,15 @@ if ($Ver == "H")
 	<IMG NAME="ConState" SRC="images/connectOff.gif" WIDTH=13 HEIGHT=13 ALIGN="MIDDLE" BORDER=0 ALT="<?php echo(L_CONN_STATE); ?>"></A>
 	<?php
 }
+if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT']))
+{
+	?>
+</tr></table>
+	<?php
+}
 ?>
 </CENTER>
-<hr>
+<hr />
 </BODY>
 </HTML>
 <?php

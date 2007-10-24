@@ -1,0 +1,4 @@
+<Files ".ht*">
+deny from all
+</Files>
+AddDefaultCharset utf-8

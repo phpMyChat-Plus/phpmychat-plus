@@ -1,4 +1,5 @@
 <?php
+// Clean Rooms panel
 // This sheet is diplayed when the admin wants to clean some rooms
 
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
@@ -58,7 +59,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 3)
 
 <P CLASS=title><?php echo(A_SHEET3_1); ?></P>
 
-<TABLE BORDER=0 CELLPADDING=3 CLASS=table>
+<TABLE ALIGN=CENTER BORDER=0 CELLPADDING=3 CLASS=table>
 
 <?php
 // Ensure at least one room can be cleaned before displaying the form to do this

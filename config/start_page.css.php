@@ -1,8 +1,8 @@
 <?php
 // Get the names and values for vars sent by the script that called this one
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
@@ -15,7 +15,7 @@ if (isset($Charset))
 		$FontFace = "font-family: \"${FontName}, sans-serif\";";
 		$SpecialFont = "1";
 	}
-	elseif ($Charset == "iso-8859-1" || $Charset == "iso-8859-2")
+	else
 	{
 		$FontFace = "font-family: helvetica, arial, geneva, sans-serif;";
 	};
@@ -29,8 +29,8 @@ $small = round(0.8 * $medium);
 .ChatBody
 {
 	<?php if (isset($FontFace)) echo($FontFace); ?>
-	background-color: #666699;
-	color: #FFFFFF;
+	background-color: #4682b4;
+	color: #ffe4e1;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
 	margin: 5px;
@@ -49,7 +49,7 @@ $small = round(0.8 * $medium);
 .ChatTabTitle
 {
 	<?php if (isset($FontFace)) echo($FontFace); ?>
-	background-color: #666699;
+	background-color: #4682b4;
 	color: #FFFFFF;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 800;
@@ -79,6 +79,7 @@ if (isset($SpecialFont))
 		text-decoration: underline;
 		color: #FF0000;
 		font-weight: 600;
+		cursor:pointer;
 	}
 
 	A.ChatFonts:hover, A.ChatFonts:active
@@ -86,6 +87,7 @@ if (isset($SpecialFont))
 		<?php if (isset($FontFace)) echo($FontFace); ?>
 		color: #FF0000;
 		text-decoration: none;
+		cursor:pointer;
 	}
 	<?php
 };
@@ -97,6 +99,7 @@ A.ChatLink
 	text-decoration: underline;
 	color: #FFFFFF;
 	font-weight: 600;
+	cursor:pointer;
 }
 
 A.ChatLink:hover, A.ChatLink:active
@@ -104,27 +107,30 @@ A.ChatLink:hover, A.ChatLink:active
 	<?php if (isset($FontFace)) echo($FontFace); ?>
 	color: #FF9900;
 	text-decoration: none;
+	cursor:pointer;
 }
 
 A.ChatReg
 {
 	<?php if (isset($FontFace)) echo($FontFace); ?>
 	text-decoration: underline;
-	color: #0000C0;
+	color: #4682b4;
 	font-weight: 800;
+	cursor:pointer;
 }
 
 A.ChatReg:hover,A.ChatReg:active
 {
 	<?php if (isset($FontFace)) echo($FontFace); ?>
-	color: #0000C0;
+	color: #FF9900;
 	text-decoration: none;
+	cursor:pointer;
 }
 
 INPUT.ChatBox, SELECT.ChatBox, TEXTAREA.ChatBox
 {
 	<?php if (isset($FontFace)) echo($FontFace); ?>
-	background: #EEEEFF;
+	background: #ffe4e1;
 }
 
 .ChatTitle
@@ -155,6 +161,7 @@ A.ChatCopy, A.ChatCopy:active
 {
 	font-family: helvetica, arial, geneva, sans-serif;
 	color: #FFFFFF;
+	cursor:pointer;
 }
 
 .ChatP1
@@ -169,6 +176,14 @@ A.ChatCopy, A.ChatCopy:active
 	<?php if (isset($FontFace)) echo($FontFace); ?>
 	font-size: <?php echo($medium); ?>pt;
 	color: #000000;
+}
+
+.ChatP3
+{
+	<?php if (isset($FontFace)) echo($FontFace); ?>
+	font-size: <?php echo($medium); ?>pt;
+	font-weight: 600;
+	color: #CCCCFF;
 }
 
 .ChatFlags

@@ -1,14 +1,14 @@
 <?php
 // Get the names and values for vars sent to this script
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
 };
 
-if (isset($HTTP_COOKIE_VARS["CookieUserSort"])) $sort_order = $HTTP_COOKIE_VARS["CookieUserSort"];
+if (isset($_COOKIE["CookieUserSort"])) $sort_order = $_COOKIE["CookieUserSort"];
 
 // Fix a security holes
 if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
@@ -16,15 +16,22 @@ if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
 require("./${ChatPath}/lib/database/".C_DB_TYPE.".lib.php");
 require("./${ChatPath}/lib/clean.lib.php");
 
+
 	if ($Private)
 	{
-		$query = "SELECT DISTINCT username, latin1, room, r_time FROM ".C_USR_TBL;
+		if ($sort_order == "1")	$ordquery = "username";
+		else $ordquery = "r_time";
+		// Ghost Control mod by Ciprian
+		$Hide = (C_HIDE_ADMINS && C_HIDE_MODERS) ? "WHERE ((status != 'a' AND status != 't') OR email = 'bot@bot.com') AND status != 'm'" : (C_HIDE_ADMINS ? "WHERE ((status != 'a' AND status != 't') OR email = 'bot@bot.com')" : (C_HIDE_MODERS ? "WHERE status !='m'" : ""));
+		$query = "SELECT DISTINCT username, latin1, room, r_time FROM ".C_USR_TBL." ORDER BY ".$ordquery."";
 	}
 	else
 	{
 		if ($sort_order == "1")	$ordquery = "username";
 		else $ordquery = "r_time";
-		$query = "SELECT DISTINCT u.username, u.latin1, u.room, u.r_time FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room AND m.type = 1 ORDER BY ".$ordquery."";
+		// Ghost Control mod by Ciprian
+		$Hide = (C_HIDE_ADMINS && C_HIDE_MODERS) ? "AND ((u.status != 'a' AND u.status != 't') OR u.email = 'bot@bot.com') AND u.status != 'm'" : (C_HIDE_ADMINS ? "AND ((u.status != 'a' AND u.status != 't') OR u.email = 'bot@bot.com')" : (C_HIDE_MODERS ? "AND u.status !='m'" : ""));
+		$query = "SELECT DISTINCT u.username, u.latin1, u.room, u.r_time FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room AND m.type = 1 ".$Hide." ORDER BY ".$ordquery."";
 	}
 	$DbLink = new DB;
 	$DbLink->query($query);
@@ -38,12 +45,12 @@ function display_connected($Private,$Full,$NU,$String1,$String2,$DbLink)
 	{
 		if ($Full)
 		{
-			echo($String1."<br>");
+			echo($String1."<br />");
 			while(list($User,$Latin1,$Room,$RTime) = $DbLink->next_record())
 			{
 				if ($Latin1) $User = htmlentities($User);
 				$RTime = date("d-M, H:i:s", $RTime + C_TMZ_OFFSET*60*60);
-				$List .= ($List == "" ? "<tr><td nowrap>".$User."</td><td nowrap>".$Room."</td><td nowrap>joined on ".$RTime."</td></tr>" : "<tr><td nowrap>".$User."</td><td nowrap>".$Room."</td><td align=center nowrap>joined on ".$RTime."");
+				$List .= ($List == "" ? "<tr><td nowrap=\"nowrap\">".$User."</td><td nowrap=\"nowrap\">".$Room."</td><td nowrap=\"nowrap\"> ".L_LURKING_4." ".$RTime."</td></tr>" : "<tr><td nowrap=\"nowrap\">".$User."</td><td nowrap=\"nowrap\">".$Room."</td><td align=center nowrap=\"nowrap\"> ".L_LURKING_4." ".$RTime."");
 			}
 			echo($List);
 		}
@@ -60,5 +67,4 @@ function display_connected($Private,$Full,$NU,$String1,$String2,$DbLink)
 	$DbLink->clean_results();
 	$DbLink->close();
 }
-
 ?>

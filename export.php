@@ -1,15 +1,15 @@
 <?php
 // Get the names and values for vars sent to this script
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
 };
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 require("config/config.lib.php");
 require("localization/".$L."/localized.chat.php");
@@ -36,7 +36,7 @@ else
 }
 
 // Translate to html special characters, and entities if message was sent with a latin 1 charset
-$Latin1 = ($Charset == "iso-8859-1");
+$Latin1 = ($Charset != "utf-8");
 function special_char($str,$lang)
 {
 	return ($lang ? htmlentities(stripslashes($str)) : htmlspecialchars(stripslashes($str)));
@@ -82,7 +82,7 @@ if($DbLink->num_rows() > 0)
 		// Separator between messages sent before today and other ones
 		if (!isset($day_separator) && date("j", $Time +  C_TMZ_OFFSET*60*60) != date("j", time() +  C_TMZ_OFFSET*60*60))
 		{
-			$day_separator = "<P CLASS=\"msg\"><SPAN CLASS=\"notify\">--------- ".($O == 0 ? L_TODAY_UP : L_TODAY_DWN)." ---------</SPAN></P>";
+			$day_separator = "<P CLASS=\"msg\"><SPAN CLASS=\"notify\" style=\"background-color:yellow;\">--------- ".(!$O ? L_TODAY_UP : L_TODAY_DWN)." ---------</SPAN></P>";
 		};
 
 		$MessagesString = $NewMsg.((isset($day_separator) && $day_separator != "") ? "\n".$day_separator : "")."\n".$MessagesString;
@@ -102,12 +102,11 @@ if (isset($MessagesString) && $MessagesString != "")
 	header("Content-Disposition: attachement; filename=\"chat_save_".date("mdY").".htm\"");
 	?>
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-	<HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
+	<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 	<HEAD>
 		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=<?php echo($Charset); ?>">
-		<TITLE><?php echo(APP_NAME." - ".htmlspecialchars(stripslashes($R))." - ".date("F j, Y")); ?></TITLE>
+		<TITLE><?php echo(((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)." - ".htmlspecialchars(stripslashes($R))." - ".date("F j, Y")); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
-	<HEAD>
 
 	<BODY CLASS="mainframe">
 	<?php

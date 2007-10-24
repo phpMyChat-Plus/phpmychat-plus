@@ -5,14 +5,14 @@ session_start();
 session_register("adminlogged");
 
 // Added for Skin mod
-if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
+if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 require("./config/config.lib.php");
 
 $DbLink4Login = new DB;
 /*
-	if (isset($HTTP_COOKIE_VARS["CookieUsername"]) && $HTTP_COOKIE_VARS["CookieStatus"] == "a")
+	if (isset($_COOKIE["CookieUsername"]) && ($_COOKIE["CookieStatus"] == "a" || $_COOKIE["CookieStatus"] == "t"))
 	{
-		$pmc_username = $HTTP_COOKIE_VARS["CookieUsername"];
+		$pmc_username = urldecode($_COOKIE["CookieUsername"]);
 		$FOCUS = 1;
 	}
 */
@@ -79,10 +79,10 @@ $Focus = ((isset($LIMIT) && $LIMIT) || (isset($FOCUS) && $FOCUS)) ? "pmc_passwor
 if (!isset($FontName)) $FontName = "";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
-<TITLE><?php echo(APP_NAME); ?></TITLE>
+<TITLE><?php echo((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript1.1">
 <!--
@@ -92,15 +92,27 @@ function get_focus()
 	document.forms['LoginForm'].elements['<?php echo($Focus); ?>'].focus();
 }
 // -->
+
+	// Open popups for registration stuff
+	function reg_popup(name)
+	{
+		window.focus();
+		url = "<?php echo($ChatPath); ?>" + name + ".php?L=<?php echo($L); ?>&Link=1";
+		pop_width = 400;
+		pop_height = 260;
+		param = "width=" + pop_width + ",height=" + pop_height + ",resizable=yes,scrollbars=yes";
+		name += "_popup";
+		window.open(url,name,param);
+	}
 </SCRIPT>
 </HEAD>
 
 <BODY onLoad="if (window.focus) get_focus();">
 <CENTER>
-<br>
+<br />
 <?php
 // Get the name of the script that called the login library
-if (!isset($PHP_SELF)) $PHP_SELF = $HTTP_SERVER_VARS["PHP_SELF"];
+if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER["PHP_SELF"];
 $From = basename($PHP_SELF);
 ?>
 <FORM ACTION="<?php echo($From); ?>" METHOD="POST" AUTOCOMPLETE="" NAME="LoginForm">
@@ -114,7 +126,7 @@ if(isset($Error))
 <INPUT TYPE="hidden" NAME="L" VALUE="<?php echo($L); ?>">
 <INPUT TYPE="hidden" NAME="Link" VALUE="<?php if (isset($Link)) echo($Link); ?>">
 <INPUT TYPE="hidden" NAME="LIMIT" VALUE="<?php if (isset($LIMIT)) echo($LIMIT); ?>">
-<TABLE BORDER=0 CELLPADDING=3 CLASS="table">
+<TABLE ALIGN="center" BORDER=0 CELLPADDING=3 CLASS="table">
 <TR>
 	<TD ALIGN="CENTER">
 		<TABLE BORDER=0>
@@ -122,16 +134,22 @@ if(isset($Error))
 			<TH COLSPAN=2 CLASS="tabtitle"><?php echo(L_REG_14); ?></TH>
 		</TR>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_SET_2); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_SET_2); ?> :</TD>
 			<TD VALIGN="TOP">
 				<INPUT TYPE="text" NAME="pmc_username" SIZE=11 MAXLENGTH=15 VALUE="<?php if (isset($pmc_username)) echo(htmlspecialchars(stripslashes($pmc_username))); ?>">
 			</TD>
 		</TR>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP><?php echo(L_REG_7); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_1); ?> :	</TD>
 			<TD VALIGN="TOP">
 				<INPUT TYPE="password" NAME="pmc_password" SIZE=11 MAXLENGTH=16 VALUE="<?php if (isset($pmc_password)) echo(htmlspecialchars(stripslashes($pmc_password))); ?>">
-			</TD>
+				</TD>
+		</TR>
+		<TR>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"></TD>
+			<TD VALIGN="TOP">
+			<A HREF="<?php echo($ChatPath); ?>pass_reset.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('pass_reset'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_PASS_7); ?>.'; return true;"><?php echo(L_PASS_7); ?></A>
+				</TD>
 		</TR>
 		</TABLE>
 		<P>

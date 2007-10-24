@@ -1,17 +1,17 @@
 <?php
 // Get the names and values for vars sent by input.php
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};
 };
 
-if (isset($HTTP_COOKIE_VARS["CookieRoom"])) $R = urldecode($HTTP_COOKIE_VARS["CookieRoom"]);
+if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 
 // Fix a security hole
-if (isset($L) && !is_dir('./localization/'.$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 require("./config/config.lib.php");
 require("./lib/release.lib.php");
@@ -23,7 +23,7 @@ header("Content-Type: text/html; charset=${Charset}");
 if (!isset($FontName)) $FontName = "";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML dir="<?php echo(($Charset == "windows-1256") ? "RTL" : "LTR"); ?>">
+<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
 <TITLE><?php echo(L_IGNOR_TIT); ?></TITLE>
@@ -53,7 +53,7 @@ if(isset($Ign))
 	$Ignore = explode (",", $Ign);
 	for ($i = 0; $i < count($Ignore); $i++)
 	{
-		echo("-&nbsp;".urldecode($Ignore[$i])."<br>");
+		echo("-&nbsp;".urldecode($Ignore[$i])."<br />");
 	}
 }
 else
