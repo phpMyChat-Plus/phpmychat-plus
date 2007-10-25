@@ -274,7 +274,7 @@ define("L_WHOIS_REG", "Kayıtlı");
 
 
 // Notification messages of user entrance/exit
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", "%s enters this room" . L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", "%s bu odaya girdi" . L_ENTER_SND);
 else define("L_ENTER_ROM", "%s bu odaya girdi");
 define("L_ENTER_ROM_NOSOUND", "%s bu odaya girdi");
 define("L_EXIT_ROM", "%s bu odadan çıktı");
@@ -291,8 +291,8 @@ define("L_BACK", "%s geri döndü!");
 define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***** Pratik Menü *****");	//&nbsp; means one blank space. this will center align the title of the drop list.
 
 // Topic Banner mod
-define("L_TOPIC", " KONU adını şu şekilde ayarladı: - ");
-define("L_TOPIC_RESET", " KONU yu yeniden başlattı.");
+define("L_TOPIC", "KONU adını şu şekilde ayarladı: - ");
+define("L_TOPIC_RESET", "KONU yu yeniden başlattı.");
 define("L_HELP_TOP", "konu olarak en az iki kelime");
 
 // Img cmd mod
