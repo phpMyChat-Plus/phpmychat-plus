@@ -1797,7 +1797,7 @@ else echo(C_ADMIN_NAME);
 <?php
 }
 if (file_exists("${ChatPath}localization/".$L."/images/paypal_donate.gif")) $donation = "${ChatPath}localization/".$L."/images/paypal_donate.gif";
-else $donation = "https://www.paypal.com/en_US/i/btn/x-click-but04.gif";
+else $donation = "./localization/english/images/make_a_donation.gif";
 ?>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" name="support" target="_blank">
 <input type="hidden" name="cmd" value="_s-xclick">
