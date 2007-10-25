@@ -10,7 +10,7 @@
 
 require("./config/config.lib.php");
 if (file_exists("./localization/".$L."/images/make_a_donation.gif")) $donation = "./localization/".$L."/images/make_a_donation.gif";
-else $donation = "https://www.paypal.com/en_US/i/btn/x-click-but21.gif";
+else $donation = "./localization/english/images/make_a_donation.gif";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML>
