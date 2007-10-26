@@ -285,7 +285,7 @@ define("L_AWAY", "%s nu mai e lângă calculator...");
 define("L_BACK", "%s s-a întors!");
 
 // Quick Menu mod
-define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***** Meniu Rapid *****");	//&nbsp; înseamnă un spaţiu. numărul acestora ajuta la centrarea titlului listei de comenzi în căsuţă.
+define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***** Meniu Rapid *****");	//&nbsp; înseamnă un spaţiu. numărul acestora ajuta la centrarea titlului listei de comenzi în căsuţă.
 
 // Topic Banner mod
 define("L_TOPIC", "a setat TOPIC-ul:");
