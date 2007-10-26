@@ -17,6 +17,7 @@ Fixes History:
 - fixed url/email parsing in private messaging popups; (functionality related)
 - Firefox select boxes color fixed - in both input frame and Config tab; (functionality related)
 - added a new option: to allow/suspend registrations; (based on GazB’s idea) (functionality related)
+- added localized Google Adsearch on index. (support & localization related)
 
 10.10.2007 - 1.91-beta7:
 - some tutorial fixes/changes; (localization related)
