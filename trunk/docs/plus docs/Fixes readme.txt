@@ -10,6 +10,9 @@ Important: everytime you upgrade/reinstall a phpmychat server or change sensitiv
 When you install Firefox2 and/or QuickTime (Realplayer), a quicktime plugin will break the wmp plugin in IE, necesary for playing .wav sounds, therefore, you won’t get sounds in IE anymore. I fixed playing with enabling/disabling these plugins in IE, but not sure what exactly does the fix. I also added a small script (reg file) as a link in Exra Options in chat.
 
 Fixes History:
+26.10.2007 - 1.91-beta9:
+- Added multilanguage paypal buttons for desirable donations; (support & localization related)
+
 20.10.2007 - 1.91-beta8:
 - fixed url/email parsing in private messaging popups; (functionality related)
 - Firefox select boxes color fixed - in both input frame and Config tab; (functionality related)
