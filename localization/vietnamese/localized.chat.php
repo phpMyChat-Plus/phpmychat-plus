@@ -223,7 +223,7 @@ define("L_HELP_CMD_23", "Gửi tới <i>âm thầm</i> (thông báo riêng tư).
 define("L_HELP_CMD_24", "Cách dùng: đề tài phải ghi ít nhất 2 từ.<br />Lệnh này thay đổi đề tài phòng hiện thời.Sử dụng những đề tài quan trọng<br />Theo mặc định thì mod/admin được quyền ra lệnh.<br />Sử dụng \"/topic top reset\" lệnh.đề tài hiện thời sẽ là sự khởi động lại và đã bị xóa để vắng mặt một trong số phòng.<br />Để chọn, \"/topic * {}\" chính xác trong tất cả các phòng (đề tài và sự khởi động lại tòan cầu).");
 define("L_HELP_CMD_25", "Mộ trò chơi ngẫu nhiên như gane xúc sắc , hên xui.<br />Hướng dẫn: /dice or /dice [n];<br />n cần nói số lượng <b>giữa 1 and %s</b> (nó đại diện cho những xúc sắc lăn). Nếu không có số được vào, những cuộn cực đại mặc định sẽ là được dùng.");
 define("L_HELP_CMD_26", "Đây là một phiên bản phức tạp hơn (của) lệnh xúc xắc/.<br />Usage: /{n1}d[n2] or /{n1}d;<br />n1 có thể cầm lấy bất kỳ giá trị nào <b>giữa 1 and %s</b> (nó đại diện cho những con số tượng trưng).<br />n2 có thể cầm lấy bất kỳ giá trị nào <b>giữa 1 và %s</b> (nó đại diện cho số lượng xúc xắc lăn trên sự tung).");
-define("L_HELP_CMD_27", "làm đặc trực ánh sáng bằng một thông báo.<br />hướng dẫn: /high {user} hoặc nó nhỏ gọn <img src=./images/highlightOff.gif> thẳng góc trên quyền thành viên (trong danh sách phòng thành viên)");
+define("L_HELP_CMD_27", "Làm đặc trực ánh sáng bằng một thông báo.<br />hướng dẫn: /high {user} hoặc nó nhỏ gọn <img src=./images/highlightOff.gif> thẳng góc trên quyền thành viên (trong danh sách phòng thành viên)");
 define("L_HELP_CMD_28", "It allows posting of <i>one single image</i> as message.<br />Usage: Bức tranh phải là trên Internet và tự do Có thể tiếp cận bởi bất cứ ai. Không sử dụng nhiều trang để đăng nhập <br />Mối liên kết ảnh đầy đủ được đánh máy! E.g.<b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />cho phép mở rộng chỉ: .jpg .bmp .gif .png. Link sẽ dẫn đến!<br />HINTS: type /img không có khỏang trống URl trong box; mở bức ảnh từ link cho website, click chuột phảt lên ảnh, chọn properties, bạn sẽ thấy address/URL (đôi khi bạn cần cuộn xuống để xem hết) và copy/dán sau khi /img<br />không sử dụng hình ảnh trong máy tính của bạn: Ý định phá họai cuộc tán gẫu!!!");
 define("L_HELP_CMD_29", "Lệnh thứ 2 dành cho mod và admin (s) người sử dụng trước đó đẫy mạnh đến người điều tiết như vậy.<br />mục * tùy chọn sẽ giáng chức người sử dụng từ tất cả những phòng.");
 define("L_HELP_CMD_30", "Ra lệnh thứ 2 của người có cấp bậc lớn hơn sẽ giống người thứ 2<br />E.g. * Mr Ciprian thì xem TV hoặc Mrs Dana thì vui ");
@@ -286,7 +286,7 @@ define("L_AWAY", "%s được đánh dấu ra khỏi");
 define("L_BACK", "%s ra khỏi!");
 
 // Quick Menu mod
-define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***** Thực đơn Nhanh *****");	//&nbsp; means one blank space. this will center align the title of the drop list.
+define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***** Thực đơn Nhanh *****");	//&nbsp; means one blank space. this will center align the title of the drop list.
 
 // Topic Banner mod
 define("L_TOPIC", "đặt đề tài tới:");
