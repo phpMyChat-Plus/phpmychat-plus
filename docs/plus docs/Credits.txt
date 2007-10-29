@@ -21,7 +21,7 @@ Alexander Eisele <xaex@xeax.de>
 
 Thomas Pschernig <tpsde1970@aol.com>
 	- Installer script
-	- MyNukeChat integration module for PHP-Nuke
+	- MyNukeChat integration module for PHP-Nuke - to be included
 
 Yet need to be writen!!!
 
@@ -41,7 +41,7 @@ Localization of the Plus version
  French				: Drazen McLukic - Leloup <leloup@le-loup.info> & Christophe Luke <christophe.lucsky@gmail.com>
  German				: Alexander Eisele <xaex@xeax.de> & Thomas Pschernig <tpsde1970@aol.com>
  Italian			: Mike Mikius <mikiusss@yahoo.com> & Luciano Cataldo <lucianocataldo@gmail.com>
- Romanian			: Ciprian Murariu <ciprianmp@yahoo.com>
+ Romanian			: Radu Swider <swidera@satline.ro>, Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro> & Ciprian Murariu <ciprianmp@yahoo.com>
  Spanish			: Roxana Castañeda <roxminu@yahoo.com> & Shelly Noyes <shelly.noyes@gmail.com>
  Swedish			: Heikki <heikki@yttervik.be>
  Turkish			: Volkan Övün <vovun@hotmail.com>

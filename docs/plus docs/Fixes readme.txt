@@ -1,17 +1,17 @@
-Note: if you’ve already modded your own files, please compare and edit the changes from those included in this archive to identify the changes done for the fix. If not, just replace them in the according folders.
-This archive includes all the previously released fixes.
+Note: if you’ve already modded your own files, please compare and edit the changes from those included in this log to identify the changes done for the fix. If not, just replace them in the according folders.
+This log includes all the previously released fixes.
 Client browsers - tested with: IE 6.0 SP2, IE 7.0 final, Mozilla Firefox > 1.6.0.0, Mozilla Firefox > 2.0, Mozilla Firebird 0.7, Netscape 8.1, Opera 9.0 build 8502, AvantBrowser 10.2 build 52.
 Server environment - tested env: Apache/1.3.34 (Unix), php > v.4.3.11 (non-safe-mode;), MySQL v4.1.19, exif support enabled (gif/jpeg processing), GD2 support enabled (gif/jpeg processing).
 Known issues (read also the FAQ):
 - configurations cannot be saved from admin panel on servers having magic_quotes set "on"; this also happen if the c_config table structure has been altered somehow and it doesn’t follow exactly the admin5.php field definitions;
-- when a username uses utf8 chars like ã î â , php cannot recognize a name with small caps as being similar with caps (Îrban is different than îrban) so please make sure you use the name in pms and commands exacly as the one logged in.
+- when a username uses utf8 chars like ã î â , php cannot recognize a name with small caps as being similar with caps (Îrban is different than îrban) so please make sure you use the name in PMs and commands exacly as the one logged in.
 
-Important: everytime you upgrade/reinstall a phpmychat server or change sensitive data in Admin panel (like default room names), the old cookies must be deleted from the clients’ machines - so let your users now! (also cache clearing might be a good idea)
-When you install Firefox2 and/or QuickTime (Realplayer), a quicktime plugin will break the wmp plugin in IE, necesary for playing .wav sounds, therefore, you won’t get sounds in IE anymore. I fixed playing with enabling/disabling these plugins in IE, but not sure what exactly does the fix. I also added a small script (reg file) as a link in Exra Options in chat.
+Important: everytime you upgrade/reinstall a phpmychat server or change sensitive data in Admin panel (like default room names), the old cookies must be deleted from the clients’ machines - so let your users know! (also cache clearing might be a good idea)
+When you install Firefox2 and/or QuickTime (RealPlayer), a QuickTime plugin will break the WMP plugin in IE, necesary for playing .wav sounds, therefore, you won’t get sounds in IE anymore. I fixed it by playing with enabling/disabling these plugins in IE, but not sure what exactly does the fix. I also added a small script (reg file) as a link in Extra Options in chat.
 
 Fixes History:
 26.10.2007 - 1.91-beta9:
-- Added multilanguage paypal buttons for desirable donations; (support & localization related)
+- Added multilangual PayPal buttons for desirable donations; (support & localization related)
 
 20.10.2007 - 1.91-beta8:
 - fixed url/email parsing in private messaging popups; (functionality related)
@@ -23,7 +23,7 @@ Fixes History:
 - some tutorial fixes/changes; (localization related)
 - Firefox center issue fixed - to align center tables/content in admin pages, exit frame and link frame; (functionality related)
 - added a new power to the chat users: "Top Moderator"; this has all the admin’s powers, except Admin panel access; (based on Luke’s idea & Cissy’s request) (functionality related)
-- language changes/updates to include the turkish grammar needs for different order of words in sentences; (localization related)
+- language changes/updates to include the Turkish grammar needs for different order of words in sentences; (localization related)
 
 01.10.2007 - 1.91-beta6:
 - Send emails tab in Admin panel improvements: can include a signature in emails and extra emails can be added to the existing list; (functionality extension)
@@ -39,8 +39,9 @@ Fixes History:
 - The best phpMyChat Installer script finally added (also ftp chmod operations are done directly from the setup page); (installation related)
 
 Known issues (as of 1.91-beta6):
-- /img won’t work on php5 due to some deprecated image resizing function in this php version - still working on fixing this;
-- installer won’t work for 1.91-beta versions of phpMyChat Plus - Support: export the current database structure to a file and send it to Ciprian at ciprianmp@yahoo.com, in order to get your specific db upgrade script; (note: the reason is I lost track of how many beta minor versions of the database have been distributed in the last months, so the db structures differ now even for the same beta version - sorry!)
+- /img won’t work on php5 due to some deprecated image resizing function in this php version - still working on fixing this (it might be just a specific setting on the tested server - needs to be tested on a different php5 server too);
+- installer won’t work for 1.91-beta versions of phpMyChat Plus - as a support: export the current database structure to a file and send it to Ciprian at ciprianmp@yahoo.com, in order to get your specific db upgrade script; (note: the reason is I lost the track of how many beta minor versions of the database have been distributed in the last months, so the db structures differ now, even for the same beta version - sorry!)
+
 28.08.2007 - 1.91-beta5:
 - Beta downloads available on ciprianmp.com/atm for testing purposes; (release candidates)
 - Worldtime fixes in the status bar (this feature should work fine without changes until 2012 - from the DST point of view - it also includes the latest changes for USA DST schedules); (functionality related)
