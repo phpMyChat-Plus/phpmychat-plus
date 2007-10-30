@@ -529,9 +529,9 @@ elseif (C_ENGLISH_FORMAT == "US")
 {
 // Set the US specific date/time format
 setlocale(LC_TIME, "en_US.UTF-8", "English-usa.UTF-8", "enu.UTF-8", "usa.UTF-8", "enu_enu.UTF-8"); // For American formats
-define("L_SHORT_DATE", "%Y-%m-%d"); //Change this to your local desired format (keep the short form)
+define("L_SHORT_DATE", "%m/%d/%Y"); //Change this to your local desired format (keep the short form)
 define("L_LONG_DATE", "%A, %e".date(S)." %B %Y"); //Change this to your local desired format (keep the long form)
-define("L_SHORT_DATETIME", "%Y-%m-%d %H:%M:%S"); //Change this to your local desired format (keep the short form)
+define("L_SHORT_DATETIME", "%m/%d/%Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
 define("L_LONG_DATETIME", "%A, %e".date(S)." of %B %Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
 }
 
