@@ -521,19 +521,17 @@ if (C_ENGLISH_FORMAT == "UK")
 // Set the UK specific date/time format
 setlocale(LC_TIME, "en_GB.UTF-8", "en_GB.UTF-8@euro", "English-uk.UTF-8", "eng.UTF-8", "uk.UTF-8", "eng_eng.UTF-8"); // For UK formats
 define("L_SHORT_DATE", "%d/%m/%Y"); //Change this to your local desired format (keep the short form)
-define("L_LONG_DATE", "%A, %e".date(S)." of %B %Y"); //Change this to your local desired format (keep the long form)
 define("L_SHORT_DATETIME", "%d/%m/%Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
-define("L_LONG_DATETIME", "%A, %e".date(S)." of %B %Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
 }
 elseif (C_ENGLISH_FORMAT == "US")
 {
 // Set the US specific date/time format
 setlocale(LC_TIME, "en_US.UTF-8", "English-usa.UTF-8", "enu.UTF-8", "usa.UTF-8", "enu_enu.UTF-8"); // For American formats
 define("L_SHORT_DATE", "%m/%d/%Y"); //Change this to your local desired format (keep the short form)
-define("L_LONG_DATE", "%A, %e".date(S)." %B %Y"); //Change this to your local desired format (keep the long form)
 define("L_SHORT_DATETIME", "%m/%d/%Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
-define("L_LONG_DATETIME", "%A, %e".date(S)." of %B %Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
 }
+define("L_LONG_DATE", "%A, %e of %B %Y"); //Change this to your local desired format (keep the long form)
+define("L_LONG_DATETIME", "%A, %e of %B %Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
 
 // Chat Activity displayed on remote web pages
 define("LOGIN_LINK", "<A HREF='".$CHAT_URL."?L=".$L."' TITLE='".sprintf(L_CLICK,L_LINKS_12)."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_12).".'; return true;\" TARGET=_blank>");
