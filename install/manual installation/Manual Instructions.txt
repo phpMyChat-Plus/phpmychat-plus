@@ -26,8 +26,11 @@ The file index1.php is the index file with the full page filled. Choose the one 
 4. Optionally, rename plus folder to whatever you'd like (chat, mychat).
 
 5. Change Attributes for these files/folders (chmod):
+plus/acount/pages/ - to 777
+plus/acount/pages/bak/ - to 777
 plus/acount/pages/chat_index.txt - to 666
 plus/acount/pages/chat_ip_logs.txt - to 666
+plus/acount/pages/ip.txt - to 666
 plus/acount/pages/ip.txt - to 666
 plus/bot/subs.inc - to 777
 plus/botfb/ - to 777
