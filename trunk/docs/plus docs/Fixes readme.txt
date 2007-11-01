@@ -17,7 +17,7 @@ Fixes History:
 26.10.2007 - 1.91-beta9:
 - added links and email addresses to topics!; (functionality related)
 - fixed urls and email parsing by /away command and logging; (functionality related)
-- IP logs fix for creating  new log after deleting it from Admin panel; actually, IP logs don't get deleted but backed up into the acounter/pages/bak folder; (functionality related)
+- IP logs fix for creating  new log after deleting it from Admin panel; actually, IP logs don’t get deleted but backed up into the acounter/pages/bak folder; (functionality related)
 - several logging improvements; (functionality related)
 - new PMs & whispers will not get cleaned up/archived until they get read; (functionality related)
 - Added multilangual PayPal buttons for desirable donations; (support & localization related)
