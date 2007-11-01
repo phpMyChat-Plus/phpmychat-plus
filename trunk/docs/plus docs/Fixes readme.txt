@@ -11,6 +11,9 @@ When you install Firefox2 and/or QuickTime (RealPlayer), a QuickTime plugin will
 
 Fixes History:
 26.10.2007 - 1.91-beta9:
+- IP logs fix for creating  new log after deleting it from Admin panel; actually, IP logs don't get deleted but backed up into the acounter/pages/bak folder; (functionlity related)
+- several logging improvements; (functionlity related)
+- new PMs & whispers will not get cleaned up/archived until they get read; (functionlity related)
 - Added multilangual PayPal buttons for desirable donations; (support & localization related)
 
 20.10.2007 - 1.91-beta8:
