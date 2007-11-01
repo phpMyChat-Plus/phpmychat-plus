@@ -46,7 +46,7 @@ require("logs.lib.php");
 else
 {
 $ChatM = new DB;
-$ChatM->query("DELETE FROM ".C_MSG_TBL." WHERE m_time<".(time() - C_MSG_DEL * 60 * 60)."");
+$ChatM->query("DELETE FROM ".C_MSG_TBL." WHERE m_time<".(time() - C_MSG_DEL * 60 * 60)." AND pm_read!='New' AND pm_read!='Neww'");
 $ChatM->close();
 }
 // Clean the lurkers table

@@ -140,7 +140,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 1)
 					elseif ($ppp == 'topmod')// user becomes user for the room he chats into
 					{
 						$status = "t";
-						$messagead = "sprintf(L_ADM_3, \"".addslashes(htmlspecialchars(stripslashes($uuu)))."\")";
+						if($old_ppp != 'admin') $messagead = "sprintf(L_ADM_3, \"".addslashes(htmlspecialchars(stripslashes($uuu)))."\")";
 					}
 					elseif ($ppp == 'moderator' && (room_in(addslashes($room), $rrr) || room_in("*", $rrr)))	// user becomes moderator for the room he chats into
 					{

@@ -1,8 +1,5 @@
 <?php
-$count = "1";
-$count2 = "1";
-
-//the way I have things set up, $Cmd[3] is equivalent to the number of rolls specified by the user.
+//the way I have things set up, $Cmd[3] is equivalent to the number of rolls (dice) specified by the user and $Cmd[1] is equivalent to the number of sides per die.
 if($Cmd[1]<=100 && ($Cmd[3]<=MAX_ROLLS || $Cmd[3] == ''))
 {
  	if ($Cmd[3] == '')

@@ -16,16 +16,17 @@ function RecursiveMkdir($path)
 $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
 mysql_select_db(C_DB_NAME);
 
-$sql = "SELECT * FROM ".C_MSG_TBL." WHERE (m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."') ORDER BY m_time DESC";
+$sql = "SELECT * FROM ".C_MSG_TBL." WHERE (m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."' AND pm_read != 'New' AND pm_read != 'Neww') ORDER BY m_time DESC";
 $query = mysql_query($sql) or die("Cannot query the database.<br />" . mysql_error());
 // Collect and store new messages
 $Messages = Array();
-$i = "1";
+$i = 1;
 while($result = mysql_fetch_array($query))
 {
 $m_time = stripslashes($result["m_time"]);
 $time_posted = date('H:i:s (d)', $m_time + C_TMZ_OFFSET*60*60);
 $room = htmlspecialchars(stripslashes($result["room"]));
+if ($room == '*') $room = '<?php echo(L_ROOM_ALL); ?>';
 $roomfrom = htmlspecialchars(stripslashes($result["room_from"]));
 if ($roomfrom != "" && $roomfrom != $room) $room = $room."<br /> ".$roomfrom;
 $username = htmlspecialchars(stripslashes($result["username"]));
@@ -34,19 +35,19 @@ if ($address != "" && $address != " *" && $username != "SYS welcome" && $usernam
 $address = "<b>".$address."</b>";
 if ($username == "SYS welcome") $username = $address;
 $message = stripslashes($result["message"]);
-$message = eregi_replace("src=images","src=../../../images",$message);
-$message = eregi_replace("<!-- UPDTUSRS //-->","",$message);
-$message = eregi_replace('links.php?link=','../../../links.php?link=',$message);
-$message = eregi_replace('target="_blank"></a>','target="_blank">Click here</a>',$message);
-$message = eregi_replace('alt="Send email"','target="_blank"',$message);
-$NewMsg = "\r\n<tr>\r\n<td valign=top nowrap=\"nowrap\">".$time_posted."</td>\r\n<td valign=top nowrap=\"nowrap\">";
-$NewMsg .= $room."</td>\r\n<td valign=top nowrap=\"nowrap\">";
-$NewMsg .= "<b>".$username."</b>";
-$NewMsg .= $toaddress."</td>\r\n<td valign=top>";
+$message = str_replace("src=images","src=../../../images",$message);
+$message = str_replace("<!-- UPDTUSRS //-->","",$message);
 if (eregi("stripslashes",$message) || eregi("sprintf",$message) || eregi("L_",$message))
 {
 	$message = "<?php echo(".$message."); ?>";
 }
+$message = str_replace("links.php?link=","../../../links.php?link=",$message);
+$message = str_replace("target=\"_blank\"></a>","target=\"_blank\">Click here</a>",$message);
+$message = str_replace('alt="Send email"','target="_blank" title="<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>"',$message);
+$NewMsg = "\r\n<tr>\r\n<td valign=top nowrap=\"nowrap\">".$time_posted."</td>\r\n<td valign=top nowrap=\"nowrap\">";
+$NewMsg .= $room."</td>\r\n<td valign=top nowrap=\"nowrap\">";
+$NewMsg .= "<b>".$username."</b>";
+$NewMsg .= $toaddress."</td>\r\n<td valign=top>";
 if ($username == "SYS topic")
 {
 	$NewMsg .= $address;
@@ -141,36 +142,37 @@ fclose($fp) ;
 $done = 1;
 }
 
-$CondForQuery	= "(m_time < ".(time() - C_MSG_DEL*60*60)." AND (address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3'))))";
+$CondForQuery	= "(m_time < ".(time() - C_MSG_DEL*60*60)." AND (address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3'))) AND pm_read != 'New' AND pm_read != 'Neww')";
 $sqlu = "SELECT * FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC";
 $queryu = mysql_query($sqlu) or die("Cannot query the database.<br />" . mysql_error());
 // Collect and store new messages
 $Messages = Array();
-$iu = "1";
+$iu = 1;
 while($resultu = mysql_fetch_array($queryu))
 {
 $m_timeu = stripslashes($resultu["m_time"]);
 $time_postedu = date('H:i:s (d)', $m_timeu + C_TMZ_OFFSET*60*60);
 $roomu = htmlspecialchars(stripslashes($resultu["room"]));
+if ($roomu == '*') $roomu = '<?php echo(L_ROOM_ALL); ?>';
 $usernameu = htmlspecialchars(stripslashes($resultu["username"]));
 $addressu = htmlspecialchars(stripslashes($resultu["address"]));
 if ($addressu != "" && $addressu != " *" && $usernameu != "SYS welcome" && $usernameu != "SYS topic" && $usernameu != "SYS topic reset" && substr($usernameu,0,8) != "SYS dice" && $usernameu != "SYS image" && $usernameu != "SYS room" && $usernameu != $addressu) $toaddressu = " to <b>".$addressu."</b>";
 $addressu = "<b>".$addressu."</b>";
 if ($usernameu == "SYS welcome") $usernameu = $addressu;
 $messageu = stripslashes($resultu["message"]);
-$messageu = eregi_replace("src=images","src=../../../images",$messageu);
-$messageu = eregi_replace("<!-- UPDTUSRS //-->","",$messageu);
-$messageu = eregi_replace('links.php?link=','../../../links.php?link=',$messageu);
-$messageu = eregi_replace('target="_blank"></a>','target="_blank">Click here</a>',$messageu);
-$messageu = eregi_replace('alt="Send email"','target="_blank"',$messageu);
-$NewMsgu = "\r\n<tr>\r\n<td valign=top nowrap=\"nowrap\">".$time_postedu."</td>\r\n<td valign=top nowrap=\"nowrap\">";
-$NewMsgu .= $roomu."</td>\r\n<td valign=top nowrap=\"nowrap\">";
-$NewMsgu .= "<b>".$usernameu."</b>";
-$NewMsgu .= $toaddressu."</td>\r\n<td valign=top>";
+$messageu = str_replace("src=images","src=../../../images",$messageu);
+$messageu = str_replace("<!-- UPDTUSRS //-->","",$messageu);
 if (eregi("stripslashes",$messageu) || eregi("sprintf",$messageu) || eregi("L_",$messageu))
 {
 	$messageu = '<?php echo('.$messageu.'); ?>';
 }
+$messageu = str_replace("links.php?link=","../../../links.php?link=",$messageu);
+$messageu = str_replace("target=\"_blank\"></a>","target=\"_blank\">Click here</a>",$messageu);
+$messageu = str_replace('alt="Send email"','target="_blank" title="<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>"',$messageu);
+$NewMsgu = "\r\n<tr>\r\n<td valign=top nowrap=\"nowrap\">".$time_postedu."</td>\r\n<td valign=top nowrap=\"nowrap\">";
+$NewMsgu .= $roomu."</td>\r\n<td valign=top nowrap=\"nowrap\">";
+$NewMsgu .= "<b>".$usernameu."</b>";
+$NewMsgu .= $toaddressu."</td>\r\n<td valign=top>";
 if ($usernameu == "SYS topic")
 {
 	$NewMsgu .= $addressu;

@@ -149,6 +149,11 @@ if (!eregi("86.121.5", $logIP)) //Replace this IP (mine) with yours IP (entire -
 	$logDATE = date("D, d-m-y, H:i:s"); 
 	$logHOST = gethostbyaddr($logIP); 
 	$invoegen = $logDATE . " | " . $logIP . " | " . $logHOST . " | " . $proxy . " | " . $loguri . " - " . $logref . "\n";
+if (!file_exists("./acount/pages/chat_ip_logs.txt"))
+{
+	copy("./acount/pages/bak/chat_ip_logs.txt","./acount/pages/chat_ip_logs.txt");
+	chmod("./acount/pages/chat_ip_logs.txt", 0666);
+}
 	$fopen = fopen("./acount/pages/chat_ip_logs.txt", "a");
 	fwrite($fopen, $invoegen);
 	fclose($fopen);
