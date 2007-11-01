@@ -34,7 +34,7 @@ $address = htmlspecialchars(stripslashes($result["address"]));
 if ($address != "" && $address != " *" && $username != "SYS welcome" && $username != "SYS topic" && $username != "SYS topic reset" && substr($username,0,8) != "SYS dice" && $username != "SYS image" && $username != "SYS room" && $username != $address) $toaddress = " to <b>".$address."</b>";
 $address = "<b>".$address."</b>";
 if ($username == "SYS welcome") $username = $address;
-$message = stripslashes($result["message"]);
+$message = urldecode(stripslashes($result["message"]));
 $message = str_replace("src=images","src=../../../images",$message);
 $message = str_replace("<!-- UPDTUSRS //-->","",$message);
 if (eregi("stripslashes",$message) || eregi("sprintf",$message) || eregi("L_",$message))
@@ -140,6 +140,7 @@ for ($i = 0; $i < $message_nb; $i++)
 @flock($fp, LOCK_UN);
 fclose($fp) ;
 $done = 1;
+$i = 0;
 }
 
 $CondForQuery	= "(m_time < ".(time() - C_MSG_DEL*60*60)." AND (address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3'))) AND pm_read != 'New' AND pm_read != 'Neww')";
@@ -159,7 +160,7 @@ $addressu = htmlspecialchars(stripslashes($resultu["address"]));
 if ($addressu != "" && $addressu != " *" && $usernameu != "SYS welcome" && $usernameu != "SYS topic" && $usernameu != "SYS topic reset" && substr($usernameu,0,8) != "SYS dice" && $usernameu != "SYS image" && $usernameu != "SYS room" && $usernameu != $addressu) $toaddressu = " to <b>".$addressu."</b>";
 $addressu = "<b>".$addressu."</b>";
 if ($usernameu == "SYS welcome") $usernameu = $addressu;
-$messageu = stripslashes($resultu["message"]);
+$messageu = urldecode(stripslashes($resultu["message"]));
 $messageu = str_replace("src=images","src=../../../images",$messageu);
 $messageu = str_replace("<!-- UPDTUSRS //-->","",$messageu);
 if (eregi("stripslashes",$messageu) || eregi("sprintf",$messageu) || eregi("L_",$messageu))
@@ -266,12 +267,11 @@ for ($iu = 0; $iu < $message_nbu; $iu++)
 @flock($fpu, LOCK_UN);
 fclose($fpu) ;
 $doneu = 1;
+$iu = 0;
 }
 if ($done = 1 || $doneu = 1)
 {
-$delsql = "DELETE FROM ".C_MSG_TBL." WHERE m_time < ".(time() - C_MSG_DEL*60*60)."";
+$delsql = "DELETE FROM ".C_MSG_TBL." WHERE m_time < ".(time() - C_MSG_DEL*60*60)." AND pm_read != 'New' AND pm_read != 'Neww'";
 $delquery = mysql_query($delsql) or die("Cannot query the database.<br />" . mysql_error());
-$CleanUsrTbl = $delquery;
-$CleanUsrTbl = '';
 }
 ?>

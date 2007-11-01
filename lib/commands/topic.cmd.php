@@ -92,6 +92,28 @@ function room_in($what, $in)
 								Check4Smilies($Top,$SmiliesTbl);
 								unset($SmiliesTbl);
 							};
+	// URL
+	$Top = eregi_replace('([[:space:]]|^)(www[.])', '\\1http://\\2', $Top); // no prefix (www.myurl.ext)
+	$Top = eregi_replace('([[:space:]]|^)(ftp[.])', '\\1ftp://\\2', $Top); // no prefix (ftp.myurl.ext)
+	// Word wrap fix by Alexander Eisele <xaex@xaex.de>
+	if (!preg_match_all("((http://|https://|ftp://|mailto:)[^ ]+)", $Top, $pmatch))
+	{
+		$Top = wordwrap($Top, 40, " ", 1);
+	}
+	$Top = eregi_replace('([[:space:]]|^)(www)', '\\1http://\\2', $Top); // no prefix (www.myurl.ext)
+	$prefix = '(http|https|ftp|telnet|news|gopher|file|wais)://';
+    $pureUrl = '([[:alnum:]/\n+-=%&:_.~?]+[#[:alnum:]+-_~]*)';
+       $purl="";
+       for ($x=0; $x<count($pmatch[0]); $x++)
+       {
+				$purl .= "||".$pmatch[0][$x];
+       }
+
+    $Top = eregi_replace($prefix.$pureUrl, '<a href="links.php?link='.urlencode($purl).'" target="_blank"></a>', $Top);
+
+	// e-mail addresses
+	$Top = eregi_replace('([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](fo|g|l|m|mes|o|op|pa|ro|seum|t|u|v|z)?)', '<a href="mailto:\\1" alt="Send email">\\1</a>', $Top);
+	
 							if (trim($Cmd[2]) != "*")
 							{
 								if (file_exists ($toppath))                            // checks to see if room file exists.
