@@ -20,6 +20,8 @@ else $donation = "./localization/english/images/make_a_donation.gif";
 <BODY CLASS="frame">
 <CENTER>
 <?php
+if (!C_SUPPORT_PAID)
+{
 if ($Ver != "H")
 {
 	?>
@@ -39,6 +41,7 @@ if ($Ver != "H")
 	?>
 </tr></table>
 	<?php
+}
 }
 ?>
 </CENTER>
