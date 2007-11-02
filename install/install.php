@@ -546,6 +546,7 @@ mysql_select_db(C_DB_NAME);
 $query = "SELECT * FROM ".C_CFG_TBL."";
 $result = mysql_query($query);
 $row = mysql_fetch_row($result);
+define("C_SUPPORT_PAID", '');
 
 $MSG_DEL        			= $row[1];
 $USR_DEL		          = $row[2];
@@ -1111,6 +1112,7 @@ else {
   	fputs ( $fh, '$query = "SELECT * FROM ".C_CFG_TBL."";'.$lfeed );
   	fputs ( $fh, '$result = mysql_query($query);'.$lfeed );
   	fputs ( $fh, '$row = mysql_fetch_row($result);'.$lfeed );
+  	fputs ( $fh, 'define("C_SUPPORT_PAID", '');'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '$MSG_DEL        			= $row[1];'.$lfeed );
   	fputs ( $fh, '$USR_DEL		          = $row[2];'.$lfeed );
