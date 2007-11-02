@@ -511,9 +511,9 @@ define("L_DEC", "diciembre");
 // Localized date format - read the parameters here: http://www.php.net/manual/en/function.strftime.php
 setlocale(LC_TIME, "es_ES.UTF-8", "es_ES.UTF-8@euro", "spanish.UTF-8", "esp.UTF-8", "es.UTF-8", "esp_esp.UTF-8");
 define("L_SHORT_DATE", "%d-%m-%Y"); //Cambiar esto al formato de fecha local deseada (guarda la forma corta)
-define("L_LONG_DATE", "%A %e %B %Y"); //Cambiar esto al formato de fecha local deseada (guarda la forma larga)
+define("L_LONG_DATE", "%A %d %B %Y"); //Cambiar esto al formato de fecha local deseada (guarda la forma larga)
 define("L_SHORT_DATETIME", "%d-%m-%Y %H:%M:%S"); //Cambiar esto al formato de fecha y tiempo local (guarda la forma corta)
-define("L_LONG_DATETIME", "%A %e %B %Y %H:%M:%S"); //Cambiar esto al formato de fecha y tiempo local (guarda la forma larga)
+define("L_LONG_DATETIME", "%A %d %B %Y %H:%M:%S"); //Cambiar esto al formato de fecha y tiempo local (guarda la forma larga)
 
 // Language names
 define("L_LANG_AR", "espańol (la argentina)");

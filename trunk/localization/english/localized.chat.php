@@ -530,8 +530,8 @@ setlocale(LC_TIME, "en_US.UTF-8", "English-usa.UTF-8", "enu.UTF-8", "usa.UTF-8",
 define("L_SHORT_DATE", "%m/%d/%Y"); //Change this to your local desired format (keep the short form)
 define("L_SHORT_DATETIME", "%m/%d/%Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
 }
-define("L_LONG_DATE", "%A, %e of %B %Y"); //Change this to your local desired format (keep the long form)
-define("L_LONG_DATETIME", "%A, %e of %B %Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
+define("L_LONG_DATE", "%A, %d of %B %Y"); //Change this to your local desired format (keep the long form)
+define("L_LONG_DATETIME", "%A, %d of %B %Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
 
 // Chat Activity displayed on remote web pages
 define("LOGIN_LINK", "<A HREF='".$CHAT_URL."?L=".$L."' TITLE='".sprintf(L_CLICK,L_LINKS_12)."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_12).".'; return true;\" TARGET=_blank>");

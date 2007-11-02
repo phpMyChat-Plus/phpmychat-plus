@@ -511,9 +511,9 @@ define("L_DEC", "December");
 // Localized date format - read the parameters here: http://www.php.net/manual/en/function.strftime.php
 setlocale(LC_TIME, "nl_NL.UTF-8", "nl_NL.UTF-8@euro", "Dutch.UTF-8", "nld_nld.UTF-8", "nld.UTF-8");
 define("L_SHORT_DATE", "%d-%m-%Y"); //Change this to your local desired date only format (keep the short form)
-define("L_LONG_DATE", "%A %e %B %Y"); //Change this to your local desired date only format (keep the long form)
+define("L_LONG_DATE", "%A %d %B %Y"); //Change this to your local desired date only format (keep the long form)
 define("L_SHORT_DATETIME", "%d-%m-%Y %H:%M:%S"); //Change this to your local desired date&time format (keep the short form)
-define("L_LONG_DATETIME", "%A %e %B %Y %H:%M:%S"); //Change this to your local desired date&time format (keep the long form)
+define("L_LONG_DATETIME", "%A %d %B %Y %H:%M:%S"); //Change this to your local desired date&time format (keep the long form)
 
 // Chat Activity displayed on remote web pages
 define("LOGIN_LINK", "<A HREF='".$CHAT_URL."?L=".$L."' TITLE='".sprintf(L_CLICK,L_LINKS_12)."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_12).".'; return true;\" TARGET=_blank>");

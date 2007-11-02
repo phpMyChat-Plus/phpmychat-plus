@@ -96,8 +96,8 @@ if (UPD_CHECK)
 		<dt onmouseover="javascript:show('smenu2');">Interface</dt>
 			<dd id="smenu2" onmouseover="javascript:show('smenu2');" onmouseout="javascript:show('');">
 				<ul>
-					<li><a href="#login">Login layout</a></li>
-					<li><a href="#skins">Skins</a></li>
+					<li><a href="#layout">Login layout</a></li>
+					<li><a href="#skins">Skins & Colors</a></li>
 					<li><a href="#media">Media</a></li>
 					<li><a href="#profanity">Profanity</a></li>
 					<li><a href="#time">Times</a></li>
@@ -113,8 +113,8 @@ if (UPD_CHECK)
 					<li><a href="#cmds">Commands</a></li>
 					<li><a href="#quick">Quick Menus</a></li>
 					<li><a href="#avatars">Avatars</a></li>
-					<li><a href="#logging">Logging mod</a></li>
-					<li><a href="#lurking">Lurking mod</a></li>
+					<li><a href="#logging">Logging Mod</a></li>
+					<li><a href="#lurking">Lurking Mod</a></li>
 					<li><a href="#quote">Random Quote</a></li>
 					<li><a href="#ghost">Ghost Control</a></li>
 				</ul>
@@ -522,7 +522,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			<TD VALIGN=CENTER ALIGN=CENTER width="25%" height="20" CLASS=tabtitle>Current Settings
 			</TD>
 		</TR>
-<tr>
+<tr bgcolor="#B0C4DE">
     <td><b>Default Language for Chatroom.</b></td>
     <td>
 <?php
@@ -573,7 +573,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </select>
     </td>
 </tr>
-<tr bgcolor="#B0C4DE">
+<tr>
     <td><b>English format (for flags and date&time formats).</b></td>
     <td><select name="vENGLISH_FORMAT">
 	        <option value="UK"<? if($ENGLISH_FORMAT=="UK"){ echo " selected"; } ?>><?php echo(L_LANG_ENUK); ?></option>
@@ -581,7 +581,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         </select>
     </td>
 </tr>
-<tr>
+<tr bgcolor="#B0C4DE">
     <td><b>Allow users to choose a language from the available translations.</b></td>
     <td>
         <select name="vMULTI_LANG">
@@ -590,10 +590,10 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         </select>
     </td>
 </tr>
-<tr bgcolor="#B0C4DE">
+<tr>
     <td><b>Flags images type.</b></td>
     <td><select name="vFLAGS_3D">
-	        <option value="0"<? if($FLAGS_3D==0){ echo " selected"; } ?>>2D</option>
+	        <option value="0"<? if($FLAGS_3D==0){ echo " selected"; } ?>>2D (std)</option>
 	        <option value="1"<? if($FLAGS_3D==1){ echo " selected"; } ?>>3D (new)</option>
         </select>
     </td>
@@ -607,21 +607,21 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			<TD VALIGN=CENTER ALIGN=CENTER width="25%" height="20" CLASS=tabtitle>Current Settings
 			</TD>
 		</TR>
-<tr>
+<tr bgcolor="#B0C4DE"><a name="ownername"></a>
     <td><b>Enter admin real name (or chat name) to be sent on email headers.</b></td>
     <td><input name="vADMIN_NAME" type="text" size="25" maxlength="35" value="<? echo $ADMIN_NAME; ?>"></td>
 </tr>
-<tr bgcolor="#B0C4DE">
+<tr>
     <td><b>Enter admin email to be sent on email headers.</b><br />
     	<i>Hint: also to receive notifications on new user registration</i>
     	</td>
     <td><input name="vADMIN_EMAIL" type="text" size="25" maxlength="35" value="<? echo $ADMIN_EMAIL; ?>"></td>
 </tr>
-<tr>
+<tr bgcolor="#B0C4DE">
     <td><b>Enter your chat URL to be sent on email headers.</b></td>
     <td><input name="vCHAT_URL" type="text" size="25" maxlength="50" value="<? echo $CHAT_URL; ?>"></td>
 </tr>
-<tr bgcolor="#B0C4DE">
+<tr>
     <td><b>Public Name of your chat server as you wish to be known on the web.</b></td>
     <td><input name="vCHAT_NAME" type="text" size="25" maxlength="255" value="<? echo $CHAT_NAME; ?>"></td>
 </tr>
@@ -634,9 +634,9 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			<TD VALIGN=CENTER ALIGN=CENTER width="25%" height="20" CLASS=tabtitle>Current Settings
 			</TD>
 		</TR>
-<tr>
+<tr bgcolor="#B0C4DE">
     <td><b>Allow Registration for your chat.</b><br />
-    			<font color=red>Use this setting only if you want to add the registered users manually</font>
+    			<font color=red>Disable this only if you want to add the registered users manually</font>
 	</td>
     <td>
         <select name="vALLOW_REGISTER">
@@ -645,7 +645,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         </select>
     </td>
 </tr>
-<tr bgcolor="#B0C4DE">
+<tr>
     <td><b>Require Registration to join chat.</b></td>
     <td>
         <select name="vREQUIRE_REGISTER">
@@ -654,7 +654,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         </select>
     </td>
 </tr>
-<tr>
+<tr bgcolor="#B0C4DE">
     <td><b>First and Last names required on registration and profiles.</b></td>
     <td>
         <select name="vREQUIRE_NAMES">
@@ -663,25 +663,32 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         </select>
     </td>
 </tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Generate and email Password to new registered users.</b><br /><br />
-    <b>Length of the Password to be generated and sent by email.</b></td>
+<tr>
+    <td><b>Generate and email Password to new registered users.</b></td>
     <td>
         <select name="vEMAIL_PASWD">
 	        <option value="0"<? if($EMAIL_PASWD==0){ echo " selected"; } ?>>Disabled
 	        <option value="1"<? if($EMAIL_PASWD==1){ echo " selected"; } ?>>Enabled
-        </select><br />
-    <input name="vPASS_LENGTH" type="text" size="2" maxlength="2" value="<? echo $PASS_LENGTH; ?>">
+        </select>
+	</td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Length of the Password to be generated and sent by email.</b></td>
+    <td><input name="vPASS_LENGTH" type="text" size="2" maxlength="2" value="<? echo $PASS_LENGTH; ?>">
     </td>
 </tr>
 <tr>
-    <td><b>Send account details to the new registered user.</b><br /><br />
-    <b>Send account details (notifications) to admin on new user registration.</b></td>
+    <td><b>Send account details to the new registered user.</b></td>
     <td>
         <select name="vEMAIL_USER">
 	        <option value="0"<? if($EMAIL_USER==0){ echo " selected"; } ?>>Don't send
 	        <option value="1"<? if($EMAIL_USER==1){ echo " selected"; } ?>>Send details
-        </select><br />
+        </select>
+	</td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Send account details (notifications) to admin on new user registration.</b></td>
+    <td>
         <select name="vADMIN_NOTIFY">
 	        <option value="0"<? if($ADMIN_NOTIFY==0){ echo " selected"; } ?>>Don't notify
 	        <option value="1"<? if($ADMIN_NOTIFY==1){ echo " selected"; } ?>>Notify admin
@@ -698,73 +705,6 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			</TD>
 		</TR>
 <tr>
-    <td><b>Display a LOGO image on index page.</b></td>
-    <td>
-        <select name="vSHOW_LOGO">
-	        <option value="0"<? if($SHOW_LOGO==0){ echo " selected"; } ?>>No Logo
-	        <option value="1"<? if($SHOW_LOGO==1){ echo " selected"; } ?>>Show the Logo bellow
-        </select>
-    </td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Path to the LOGO image.</b><br />
-    			<i>Hint: Logo image to show (absolute or relative paths allowed) - e.g. http://ciprianmp.com/forum/my_logo.jpg or ./../forum/my_logo.jpg</i><br />
-    			(my_logo.jpg can be any image accessible on the web - .jpg, .gif, .bmp, .png)
-    	</td>
-    <td><input name="vLOGO_IMG" type="text" size="25" maxlength="255" value="<? echo $LOGO_IMG; ?>"></td>
-</tr>
-<tr>
-    <td><b>URL to be opened by LOGO (opens in new window).</b></td>
-    <td><input name="vLOGO_OPEN" type="text" size="25" maxlength="255" value="<? echo $LOGO_OPEN; ?>"></td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Text to be displayed by LOGO on MouseOver (the ALT/TITLE property).</b></td>
-    <td><input name="vLOGO_ALT" type="text" size="25" maxlength="255" value="<? echo $LOGO_ALT; ?>"></td>
-</tr>
-</table>
-<table align="center" width="780" CLASS=table>
-		<TR CLASS=\"thumbIndex\">
-			<TD VALIGN=CENTER ALIGN=CENTER height="20" CLASS=tabtitle>Configuration Options
-				</TD>
-			<TD VALIGN=CENTER ALIGN=CENTER width="25%" height="20" CLASS=tabtitle>Current Settings
-			</TD>
-		</TR>
-<tr bgcolor="#B0C4DE">
-    <td><b>Show Delete link on index.</b><br />
-    			(to allow users delete their own profile)</td>
-    <td>
-        <select name="vSHOW_DEL_PROF">
-	        <option value="0"<? if($SHOW_DEL_PROF==0){ echo " selected"; } ?>>Hide Delete link
-	        <option value="1"<? if($SHOW_DEL_PROF==1){ echo " selected"; } ?>>Show Delete link
-        </select>
-    </td>
-</tr>
-<tr>
-    <td><b>Show Administration link on index.</b><br />
-    			(to open this Administration Panel)
-    </td>
-    <td>
-        <select name="vSHOW_ADMIN">
-	        <option value="0"<? if($SHOW_ADMIN==0){ echo " selected"; } ?>>Hide Admin link
-	        <option value="1"<? if($SHOW_ADMIN==1){ echo " selected"; } ?>>Show Admin link
-        </select>
-    </td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Types of Rooms Available for users.</b><br />
-                  0 : only the first room within the public default ones<br />
-                  1 : all default rooms, but not create a room<br />
-                  2 : all the rooms and create new ones
-    </td>
-    <td>
-        <select name="vVERSION">
-	        <option value="0"<? if($VERSION==0){ echo " selected"; } ?>>0 - Only the first room
-	        <option value="1"<? if($VERSION==1){ echo " selected"; } ?>>1 - All default rooms
-	        <option value="2"<? if($VERSION==2){ echo " selected"; } ?>>2 - Create new rooms
-        </select>
-    </td>
-</tr>
-<tr>
     <td><b>Enable banishment feature and define the delay for it.</b><br />
     0 = disabled, any integer = day(s) for banishment<br />
     <b>Banishment type.</b><br />
@@ -777,21 +717,6 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	        <option value="1"<? if($BAN_IP==1){ echo " selected"; } ?>>Only by IP
         </select>
     	</td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Enable Profanity filter.</b><br />
-    											(replacement of posted swear words with the chars bellow)
-    </td>
-    <td>
-        <select name="vNO_SWEAR">
-	        <option value="0"<? if($NO_SWEAR==0){ echo " selected"; } ?>>Allow swearing
-	        <option value="1"<? if($NO_SWEAR==1){ echo " selected"; } ?>>Filter swearing
-        </select>
-    </td>
-</tr>
-<tr>
-    <td><b>Expression to replace the swear words with.</b></td>
-    <td><input name="vSWEAR_EXPR" type="text" size="1" maxlength="5" value="<? echo $SWEAR_EXPR; ?>"></td>
 </tr>
 <tr>
     <td><b>Max number of messages that user may export.</b><br />
@@ -950,6 +875,144 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
+    <td><b>Enter the expression for the /room command.</b><br />
+    			Examples: Attention Room:, Narator Says:, Read this:, Author says:
+    	</td>
+    <td><input name="vROOM_SAYS" type="text" size="25" maxlength="25" value="<? echo $ROOM_SAYS; ?>"></td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Allow moderators to use /demote command.</b><br />
+    				NO - only admins will demote moderators.<br />
+    				YES - also moderators will be able to demote other moderators.
+    	</td>
+    <td>
+        <select name="vDEMOTE_MOD">
+	        <option value="0"<? if($DEMOTE_MOD==0){ echo " selected"; } ?>>Only admins
+	        <option value="1"<? if($DEMOTE_MOD==1){ echo " selected"; } ?>>Moderators & admins
+        </select>
+    </td>
+</tr>
+<tr>
+    <td><b>Display the Chat Etiquette on top of the Help popup (Chat rules).</b></td>
+    <td>
+        <select name="vSHOW_ETIQ_IN_HELP">
+	        <option value="0"<? if($SHOW_ETIQ_IN_HELP==0){ echo " selected"; } ?>>Hide Etiquette
+	        <option value="1"<? if($SHOW_ETIQ_IN_HELP==1){ echo " selected"; } ?>>Show Etiquette
+        </select>
+    </td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Enter the max number of dice per throw.</b><br />
+    	<i>Hint: Needed ONLY for Dice v.2. Use a value smaller than 99. Please note that increasing this value too much, will lead to a load of how many dices images you choose, which can return delays displaying the messages (drastically for non-IE browsers)</i>
+    		</td>
+    <td><input name="vMAX_DICES" type="text" size="2" maxlength="2" value="<? echo $MAX_DICES; ?>"></td>
+</tr>
+<tr>
+    <td><b>Enter the max number of dice per throw (sides per die for Dice v.2)</b></td>
+    <td><input name="vMAX_ROLLS" type="text" size="2" maxlength="3" value="<? echo $MAX_ROLLS; ?>"></td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Set the maximum size for resizing posted pictures using /img command</b></td>
+    <td><input name="vMAX_PIC_SIZE" type="text" size="2" maxlength="3" value="<? echo $MAX_PIC_SIZE; ?>"></td>
+</tr>
+<tr>
+    <td><b>Default sort order in the users lists.</b><br />
+    	<i>Hint: users can also use the /sort command to change their sorting order</i>
+    	</td>
+    <td>
+        <select name="vUSERS_SORT_ORD">
+	        <option value="0"<? if($USERS_SORT_ORD==0){ echo " selected"; } ?>>By time of entrance
+	        <option value="1"<? if($USERS_SORT_ORD==1){ echo " selected"; } ?>>Alphabetically
+        </select>
+    </td>
+</tr>
+<tr>
+    <td><b>Exit link type.</b><br />
+    	<i>Hint: Link stands for the original Exit link, Door rolling stands for the image of such a door.</i>
+    	</td>
+    <td>
+        <select name="vEXIT_LINK_TYPE">
+	        <option value="0"<? if($EXIT_LINK_TYPE==0){ echo " selected"; } ?>>Exit link
+	        <option value="1"<? if($EXIT_LINK_TYPE==1){ echo " selected"; } ?>>Door rolling
+        </select>
+    </td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Set the characters you wish your users to be allowed to use on registration/login.</b><br />
+    	<i>Hint: This is the default set of chars: </i><b>a-zA-Z0-9_.-@#$%^&*()=<>?~{}|`:</b><i> tested for login, which will not break the layout/functionality of your chat.<br />
+    		<font color=red>Important: Do not allow these characters, as they will break your chat page after login: exclamation mark, slash, backslash, comma, space, single and double quotes and square (box) brackets (<b>! / \ , ' " [ ]</b>)</font><br /></i>
+    		Eventough they will not break anything, it seems that / and ; cannot be banned from being used in login names.
+    		</td>
+    <td><input name="vREG_CHARS_ALLOWED" type="text" size="25" maxlength="50" value="<? echo $REG_CHARS_ALLOWED; ?>"></td>
+</tr>
+</table>
+<table align="center" width="780" CLASS=table>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="layout"></a><b>Login layout</b></td></tr>
+		<TR CLASS=\"thumbIndex\">
+			<TD VALIGN=CENTER ALIGN=CENTER height="20" CLASS=tabtitle>Configuration Options
+				</TD>
+			<TD VALIGN=CENTER ALIGN=CENTER width="25%" height="20" CLASS=tabtitle>Current Settings
+			</TD>
+		</TR>
+<tr>
+    <td><b>Display a LOGO image on index page.</b></td>
+    <td>
+        <select name="vSHOW_LOGO">
+	        <option value="0"<? if($SHOW_LOGO==0){ echo " selected"; } ?>>No Logo
+	        <option value="1"<? if($SHOW_LOGO==1){ echo " selected"; } ?>>Show the Logo bellow
+        </select>
+    </td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Path to the LOGO image.</b><br />
+    			<i>Hint: Logo image to show (absolute or relative paths allowed) - e.g. http://ciprianmp.com/forum/my_logo.jpg or ./../forum/my_logo.jpg</i><br />
+    			(my_logo.jpg can be any image accessible on the web - .jpg, .gif, .bmp, .png)
+    	</td>
+    <td><input name="vLOGO_IMG" type="text" size="25" maxlength="255" value="<? echo $LOGO_IMG; ?>"></td>
+</tr>
+<tr>
+    <td><b>URL to be opened by LOGO (opens in new window).</b></td>
+    <td><input name="vLOGO_OPEN" type="text" size="25" maxlength="255" value="<? echo $LOGO_OPEN; ?>"></td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Text to be displayed by LOGO on MouseOver (the ALT/TITLE property).</b></td>
+    <td><input name="vLOGO_ALT" type="text" size="25" maxlength="255" value="<? echo $LOGO_ALT; ?>"></td>
+<tr bgcolor="#B0C4DE">
+    <td><b>Show Delete link on index.</b><br />
+    			(to allow users delete their own profile)</td>
+    <td>
+        <select name="vSHOW_DEL_PROF">
+	        <option value="0"<? if($SHOW_DEL_PROF==0){ echo " selected"; } ?>>Hide Delete link
+	        <option value="1"<? if($SHOW_DEL_PROF==1){ echo " selected"; } ?>>Show Delete link
+        </select>
+    </td>
+</tr>
+<tr>
+    <td><b>Show Administration link on index.</b><br />
+    			(to open this Administration Panel)
+    </td>
+    <td>
+        <select name="vSHOW_ADMIN">
+	        <option value="0"<? if($SHOW_ADMIN==0){ echo " selected"; } ?>>Hide Admin link
+	        <option value="1"<? if($SHOW_ADMIN==1){ echo " selected"; } ?>>Show Admin link
+        </select>
+    </td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Types of Rooms Available for users.</b><br />
+                  0 : only the first room within the public default ones<br />
+                  1 : all default rooms, but not create a room<br />
+                  2 : all the rooms and create new ones
+    </td>
+    <td>
+        <select name="vVERSION">
+	        <option value="0"<? if($VERSION==0){ echo " selected"; } ?>>0 - Only the first room
+	        <option value="1"<? if($VERSION==1){ echo " selected"; } ?>>1 - All default rooms
+	        <option value="2"<? if($VERSION==2){ echo " selected"; } ?>>2 - Create new rooms
+        </select>
+    </td>
+</tr>
+<tr>
     <td><b>Display the Tutorial link on index page.</b></td>
     <td>
         <select name="vSHOW_TUT">
@@ -1042,57 +1105,6 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         </select>
     </td>
 </tr>
-<tr>
-    <td><b>Enter the expression for the /room command.</b><br />
-    			Examples: Attention Room:, Narator Says:, Read this:, Author says:
-    	</td>
-    <td><input name="vROOM_SAYS" type="text" size="25" maxlength="25" value="<? echo $ROOM_SAYS; ?>"></td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Allow moderators to use /demote command.</b><br />
-    				NO - only admins will demote moderators.<br />
-    				YES - also moderators will be able to demote other moderators.
-    	</td>
-    <td>
-        <select name="vDEMOTE_MOD">
-	        <option value="0"<? if($DEMOTE_MOD==0){ echo " selected"; } ?>>Only admins
-	        <option value="1"<? if($DEMOTE_MOD==1){ echo " selected"; } ?>>Moderators & admins
-        </select>
-    </td>
-</tr>
-<tr>
-    <td><b>Enable whispers (private messages) system.</b><br />
-    				(if disabled, only the public messages will be posted in chat)<br />
-    	</td>
-    <td>
-        <select name="vENABLE_PM">
-	        <option value="0"<? if($ENABLE_PM==0){ echo " selected"; } ?>>PM disabled
-	        <option value="1"<? if($ENABLE_PM==1){ echo " selected"; } ?>>PM enabled
-        </select>
-    </td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Enable popup whispers (private messages) system.</b><br />
-    				(if enabled, guests cannot disable popups - they must register)<br />
-    		<i>Hint: can be also disabled by each user in their profile<br />
-    	<font color=red>Important: If you change this setting while there are users logged in, all your users must reload their browsers or exit and relogin. An announcement to all the rooms will be automatically sent if you enable/disable this.</font></i>
-    	</td>
-    <td>
-        <select name="vPRIV_POPUP">
-	        <option value="0"<? if($PRIV_POPUP==0){ echo " selected"; } ?>>PM pop-ups disabled
-	        <option value="1"<? if($PRIV_POPUP==1){ echo " selected"; } ?>>PM pop-ups enabled
-        </select>
-    </td>
-</tr>
-<tr>
-    <td><b>Display the Chat Etiquette on top of the Help popup (Chat rules).</b></td>
-    <td>
-        <select name="vSHOW_ETIQ_IN_HELP">
-	        <option value="0"<? if($SHOW_ETIQ_IN_HELP==0){ echo " selected"; } ?>>Hide Etiquette
-	        <option value="1"<? if($SHOW_ETIQ_IN_HELP==1){ echo " selected"; } ?>>Show Etiquette
-        </select>
-    </td>
-</tr>
 <tr bgcolor="#B0C4DE">
     <td><b>Show counter (visitor hits) on index page.</b></td>
     <td>
@@ -1104,7 +1116,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr>
     <td><b>Show owner/webmaster of the chat info on index page (bellow the copyright link).</b><br />
-    	<i>Hint: It is the same name/text you entered in the registration section - Admin name/Chat name</i>
+    	<i>Hint: It is the same name/text you entered in the registration section - <a href=#ownername>Admin name</a></i>
     	</td>
     <td>
         <select name="vSHOW_OWNER">
@@ -1115,11 +1127,11 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>Edit the installation date of your chat.</b><br />
-				(the date since the counter had been suposed to start - keep the format to max 10 chars length)
+				(the date since the counter had been suposed to start - keep the format to YYYY-MM-DD)
     	</td>
-    <td><input name="vINSTALL_DATE" type="text" size="25" maxlength="255" value="<? echo $INSTALL_DATE; ?>"></td>
+    <td><input name="vINSTALL_DATE" type="text" size="6" maxlength="10" value="<? echo $INSTALL_DATE; ?>"></td>
 </tr>
-<tr>
+<tr><a name="roomnames"></a>
     <td><b>1. First Public room name (also <u>default</u> if none selected).</b></td>
     <td><input name="vROOM1" type="text" size="25" maxlength="25" value="<? echo $ROOM1; ?>"><br />
         <select name="vEN_ROOM1">
@@ -1208,24 +1220,15 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         </select>
     	</td>
 </tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>1. Room name to allow swear words (avoid the filter).</b><br />
-    			<i>Note: You must enter the exact name of the room.</i>
-    	</td>
-    <td><input name="vSWEAR1" type="text" size="25" maxlength="25" value="<? echo $SWEAR1; ?>"></td>
-</tr>
-<tr>
-    <td><b>2. Room name to allow swear words (avoid the filter).</b></td>
-    <td><input name="vSWEAR2" type="text" size="25" maxlength="25" value="<? echo $SWEAR2; ?>"></td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>3. Room name to allow swear words (avoid the filter).</b></td>
-    <td><input name="vSWEAR3" type="text" size="25" maxlength="25" value="<? echo $SWEAR3; ?>"></td>
-</tr>
-<tr>
-    <td><b>4. Room name to allow swear words (avoid the filter).</b></td>
-    <td><input name="vSWEAR4" type="text" size="25" maxlength="25" value="<? echo $SWEAR4; ?>"></td>
-</tr>
+</table>
+<table align="center" width="780" CLASS=table>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="skins"></a><b>Skins & Colors</b></td></tr>
+		<TR CLASS=\"thumbIndex\">
+			<TD VALIGN=CENTER ALIGN=CENTER height="20" CLASS=tabtitle>Configuration Options
+				</TD>
+			<TD VALIGN=CENTER ALIGN=CENTER width="25%" height="20" CLASS=tabtitle>Current Settings
+			</TD>
+		</TR>
 <tr bgcolor="#B0C4DE">
     <td><b>Enable skin mod in rooms.</b><br />
     	    	<font color=red>Important: If you change this setting while there are users logged in, all your users must reload their browsers or exit and relogin. An announcement to all the rooms will be automatically sent if you enable/disable this.</font></i>
@@ -1292,7 +1295,7 @@ else echo("<SELECT NAME=\"vCOLOR_CA2\">");
 			</SELECT>
     </td>
 </tr>
-<tr bgcolor="#B0C4DE">
+<tr>
     <td><b>Set the Power Colors to be used only by moderators (first as default).</b><br />
     	<i>Hint. Admins will also be able to use these colors, but no other users.
     		</td>
@@ -1338,7 +1341,7 @@ else echo("<SELECT NAME=\"vCOLOR_CM2\">");
 			</SELECT>
     </td>
 </tr>
-<tr>
+<tr bgcolor="#B0C4DE">
     <td><b>Allow guests to use colors.</b><br />
     	<i>Hint: If disabled, unregistered users will only use the default color for that room in their messages.	This will encourage them to register (hopefully).</i>
     	</td>
@@ -1349,24 +1352,16 @@ else echo("<SELECT NAME=\"vCOLOR_CM2\">");
         </select>
     </td>
 </tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>1. First skin (room) default Color (to filter the users color usage by power).<br />
-						2. Second skin (room) default Color.<br />
-						3. Third skin (room) default Color.<br />
-						4. Forth skin (room) default Color.<br />
-						5. Fifth skin (room) default Color.<br />
-						6. Sixth skin (room) default Color.<br />
-						7. Seventh skin (room) default Color.<br />
-						8. Eight skin (room) default Color.<br />
-						9. Ninth skin (room) default Color.</b><br />
+<tr>
+    <td><b>Default Colors to filter the users color usage by power.</b><br />
     			<i><font color=red>Important: Change these values only if you changed the $CD variable in the according config/style(n).css.php file.</font><br />
     				Hint: The following color names codes cannot be used in filters:<br />
-    				- <?php echo(COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2); ?> - default for admin(s);<br />
-    				- <?php echo(COLOR_CM.", ".COLOR_CM1.", ".COLOR_CM2); ?>  - default for moderators.</i>
+    				- <?php echo("<font color=".$COLOR_CA.">".$COLOR_CA."</font>, <font color=".$COLOR_CA1.">".$COLOR_CA1."</font>, <font color=".$COLOR_CA2.">".$COLOR_CA2."</font>"); ?> - default for admin(s);<br />
+    				- <?php echo("<font color=".$COLOR_CM.">".$COLOR_CM."</font>, <font color=".$COLOR_CM1.">".$COLOR_CM1."</font>, <font color=".$COLOR_CM2.">".$COLOR_CM2."</font>"); ?>  - default for moderators.</i>
     	</td>
     <td>
-<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<SELECT NAME=\"vCOLOR_CD1\" style=\"background-color:".$COLOR_CD1.";\">\n");
-else echo("<SELECT NAME=\"vCOLOR_CD1\">");
+<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("Room1: <SELECT NAME=\"vCOLOR_CD1\" style=\"background-color:".$COLOR_CD1.";\">\n");
+else echo("Room1: <SELECT NAME=\"vCOLOR_CD1\">");
 			$CCD1 = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CCD1))
 			{
@@ -1378,8 +1373,8 @@ else echo("<SELECT NAME=\"vCOLOR_CD1\">");
 			}
 			?>
 			</SELECT><br />
-<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<SELECT NAME=\"vCOLOR_CD2\" style=\"background-color:".$COLOR_CD2.";\">\n");
-else echo("<SELECT NAME=\"vCOLOR_CD2\">");
+<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("Room2: <SELECT NAME=\"vCOLOR_CD2\" style=\"background-color:".$COLOR_CD2.";\">\n");
+else echo("Room2: <SELECT NAME=\"vCOLOR_CD2\">");
 			$CCD2 = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CCD2))
 			{
@@ -1391,8 +1386,8 @@ else echo("<SELECT NAME=\"vCOLOR_CD2\">");
 			}
 			?>
 			</SELECT><br />
-<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<SELECT NAME=\"vCOLOR_CD3\" style=\"background-color:".$COLOR_CD3.";\">\n");
-else echo("<SELECT NAME=\"vCOLOR_CD3\">");
+<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("Room3: <SELECT NAME=\"vCOLOR_CD3\" style=\"background-color:".$COLOR_CD3.";\">\n");
+else echo("Room3: <SELECT NAME=\"vCOLOR_CD3\">");
 			$CCD3 = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CCD3))
 			{
@@ -1404,8 +1399,8 @@ else echo("<SELECT NAME=\"vCOLOR_CD3\">");
 			}
 			?>
 			</SELECT><br />
-<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<SELECT NAME=\"vCOLOR_CD4\" style=\"background-color:".$COLOR_CD4.";\">\n");
-else echo("<SELECT NAME=\"vCOLOR_CD4\">");
+<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("Room4: <SELECT NAME=\"vCOLOR_CD4\" style=\"background-color:".$COLOR_CD4.";\">\n");
+else echo("Room4: <SELECT NAME=\"vCOLOR_CD4\">");
 			$CCD4 = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CCD4))
 			{
@@ -1417,8 +1412,8 @@ else echo("<SELECT NAME=\"vCOLOR_CD4\">");
 			}
 			?>
 			</SELECT><br />
-<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<SELECT NAME=\"vCOLOR_CD5\" style=\"background-color:".$COLOR_CD5.";\">\n");
-else echo("<SELECT NAME=\"vCOLOR_CD5\">");
+<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("Room5: <SELECT NAME=\"vCOLOR_CD5\" style=\"background-color:".$COLOR_CD5.";\">\n");
+else echo("Room5: <SELECT NAME=\"vCOLOR_CD5\">");
 			$CCD5 = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CCD5))
 			{
@@ -1430,8 +1425,8 @@ else echo("<SELECT NAME=\"vCOLOR_CD5\">");
 			}
 			?>
 			</SELECT><br />
-<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<SELECT NAME=\"vCOLOR_CD6\" style=\"background-color:".$COLOR_CD6.";\">\n");
-else echo("<SELECT NAME=\"vCOLOR_CD6\">");
+<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("Room6: <SELECT NAME=\"vCOLOR_CD6\" style=\"background-color:".$COLOR_CD6.";\">\n");
+else echo("Room6: <SELECT NAME=\"vCOLOR_CD6\">");
 			$CCD6 = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CCD6))
 			{
@@ -1443,8 +1438,8 @@ else echo("<SELECT NAME=\"vCOLOR_CD6\">");
 			}
 			?>
 			</SELECT><br />
-<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<SELECT NAME=\"vCOLOR_CD7\" style=\"background-color:".$COLOR_CD7.";\">\n");
-else echo("<SELECT NAME=\"vCOLOR_CD7\">");
+<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("Room7: <SELECT NAME=\"vCOLOR_CD7\" style=\"background-color:".$COLOR_CD7.";\">\n");
+else echo("Room7: <SELECT NAME=\"vCOLOR_CD7\">");
 			$CCD7 = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CCD7))
 			{
@@ -1456,8 +1451,8 @@ else echo("<SELECT NAME=\"vCOLOR_CD7\">");
 			}
 			?>
 			</SELECT><br />
-<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<SELECT NAME=\"vCOLOR_CD8\" style=\"background-color:".$COLOR_CD8.";\">\n");
-else echo("<SELECT NAME=\"vCOLOR_CD8\">");
+<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("Room8: <SELECT NAME=\"vCOLOR_CD8\" style=\"background-color:".$COLOR_CD8.";\">\n");
+else echo("Room8: <SELECT NAME=\"vCOLOR_CD8\">");
 			$CCD8 = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CCD8))
 			{
@@ -1469,8 +1464,8 @@ else echo("<SELECT NAME=\"vCOLOR_CD8\">");
 			}
 			?>
 			</SELECT><br />
-<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<SELECT NAME=\"vCOLOR_CD9\" style=\"background-color:".$COLOR_CD9.";\">\n");
-else echo("<SELECT NAME=\"vCOLOR_CD9\">");
+<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("Room9: <SELECT NAME=\"vCOLOR_CD9\" style=\"background-color:".$COLOR_CD9.";\">\n");
+else echo("Room9: <SELECT NAME=\"vCOLOR_CD9\">");
 			$CCD9 = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CCD9))
 			{
@@ -1484,32 +1479,11 @@ else echo("<SELECT NAME=\"vCOLOR_CD9\">");
 			</SELECT>
     	</td>
 </tr>
-<tr>
-    <td><b>Define the Quick Menu for admin(s).</b><br />
-    			<i>Hint: keep these chars: <b>|</b> at the end of each line except the last one<br />
-    				Empty the box to hide Quick Menu.</i>
-    	</td>
-    <td><textarea name="vQUICKA" rows=5 cols=28 wrap=on><? echo $QUICKA; ?></textarea></td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Define the Quick Menu for moderators.</b><br />
-    			<i>Hint: keep these chars: <b>|</b> at the end of each line except the last one<br />
-    				Empty the box to hide Quick Menu.</i>
-    	</td>
-    <td><textarea name="vQUICKM" rows=5 cols=28 wrap=on><? echo $QUICKM; ?></textarea></td>
-</tr>
-<tr>
-    <td><b>Define the Quick Menu for other users.</b><br />
-    			<i>Hint: keep these chars: <b>|</b> at the end of each line except the last one<br />
-    				Empty the box to hide Quick Menu.</i>
-    	</td>
-    <td><textarea name="vQUICKU" rows=5 cols=28 wrap=on><? echo $QUICKU; ?></textarea></td>
-</tr>
 <tr bgcolor="#B0C4DE">
     <td><b>Enable different Colored Names in users list.</b><br />
     	<i><font color=red>Important: If you change this setting while there are users logged in, all your users must reload their browsers or exit and relogin. An announcement to all the rooms will be automatically sent if you enable/disable this.</font><br />
     	Hint: If enabled, users can set their personal color to use for their usernames in users list.<br />
-    	If disabled, admins will be shown in ".$COLOR_CA." and moderators in ".$COLOR_CA." (their default power colors).</i>
+    	If disabled, admins will be shown in <?php echo("<font color=".$COLOR_CA.">".$COLOR_CA."</font>"); ?> and moderators in <?php echo("<font color=".$COLOR_CM.">".$COLOR_CM."</font>"); ?> (their default power colors).</i>
     </td>
     <td>
         <select name="vCOLOR_NAMES">
@@ -1518,58 +1492,90 @@ else echo("<SELECT NAME=\"vCOLOR_CD9\">");
         </select>
     </td>
 </tr>
-<tr>
-    <td><b>Enable AVATAR System.</b><br />
-    	<i><font color=red>Important: If you change this setting while there are users logged in, all your users must reload their browsers or exit and relogin. An announcement to all the rooms will be automatically sent if you enable/disable this.</font></i>
-    	</td>
+</table>
+<table align="center" width="780" CLASS=table>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="profanity"></a><b>Profanity</b></td></tr>
+		<TR CLASS=\"thumbIndex\">
+			<TD VALIGN=CENTER ALIGN=CENTER height="20" CLASS=tabtitle>Configuration Options
+				</TD>
+			<TD VALIGN=CENTER ALIGN=CENTER width="25%" height="20" CLASS=tabtitle>Current Settings
+			</TD>
+		</TR>
+<tr bgcolor="#B0C4DE">
+    <td><b>Enable Profanity filter.</b><br />
+    											(replacement of posted swear words with the chars bellow)
+    </td>
     <td>
-        <select name="vUSE_AVATARS">
-	        <option value="0"<? if($USE_AVATARS==0){ echo " selected"; } ?>>No avatars
-	        <option value="1"<? if($USE_AVATARS==1){ echo " selected"; } ?>>Use avatars
+        <select name="vNO_SWEAR">
+	        <option value="0"<? if($NO_SWEAR==0){ echo " selected"; } ?>>Allow swearing
+	        <option value="1"<? if($NO_SWEAR==1){ echo " selected"; } ?>>Filter swearing
         </select>
     </td>
 </tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Enter the number of avatars in your defined folder.</b></td>
-    <td><input name="vNUM_AVATARS" type="text" size="2" maxlength="3" value="<? echo $NUM_AVATARS; ?>"></td>
-</tr>
 <tr>
-    <td><b>The path to your avatar dir.</b></td>
-    <td><input name="vAVA_RELPATH" type="text" size="25" maxlength="55" value="<? echo $AVA_RELPATH; ?>"></td>
+    <td><b>Expression to replace the swear words with.</b></td>
+    <td><input name="vSWEAR_EXPR" type="text" size="1" maxlength="5" value="<? echo $SWEAR_EXPR; ?>"></td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Users default avatar.</b></td>
-    <td><input name="vDEF_AVATAR" type="text" size="25" maxlength="55" value="<? echo $DEF_AVATAR; ?>"></td>
-</tr>
-<tr>
-    <td><b>Enter the width for the avatars to be shown.</b></td>
-    <td><input name="vAVA_WIDTH" type="text" size="2" maxlength="3" value="<? echo $AVA_WIDTH; ?>"></td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Enter the height for the avatars to be shown.</b><br />
-    	<i>Hint: Usually, for a nice layout, width and hight values should be equal.</i>
+    <td><b>1. Room name to allow swear words (avoid the filter).</b><br />
+    			<i>Note: You must enter the exact name of the room. Click <a href=#roomnames>here</a> to check your room names.</i>
     	</td>
-    <td><input name="vAVA_HEIGHT" type="text" size="2" maxlength="3" value="<? echo $AVA_HEIGHT; ?>"></td>
+    <td><input name="vSWEAR1" type="text" size="25" maxlength="25" value="<? echo $SWEAR1; ?>"></td>
 </tr>
 <tr>
-    <td><b>Show Change Avatar (Profile) button in input bar.</b></td>
+    <td><b>2. Room name to allow swear words (avoid the filter).</b></td>
+    <td><input name="vSWEAR2" type="text" size="25" maxlength="25" value="<? echo $SWEAR2; ?>"></td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>3. Room name to allow swear words (avoid the filter).</b></td>
+    <td><input name="vSWEAR3" type="text" size="25" maxlength="25" value="<? echo $SWEAR3; ?>"></td>
+</tr>
+<tr>
+    <td><b>4. Room name to allow swear words (avoid the filter).</b></td>
+    <td><input name="vSWEAR4" type="text" size="25" maxlength="25" value="<? echo $SWEAR4; ?>"></td>
+</tr>
+</table>
+<table align="center" width="780" CLASS=table>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="pm"></a><b>Private messaging</b></td></tr>
+		<TR CLASS=\"thumbIndex\">
+			<TD VALIGN=CENTER ALIGN=CENTER height="20" CLASS=tabtitle>Configuration Options
+				</TD>
+			<TD VALIGN=CENTER ALIGN=CENTER width="25%" height="20" CLASS=tabtitle>Current Settings
+			</TD>
+		</TR>
+<tr bgcolor="#B0C4DE">
+    <td><b>Enable whispers (private messages) system.</b><br />
+    				(if disabled, only the public messages will be allowed to be posted in chat)<br />
+    	</td>
     <td>
-        <select name="vAVA_PROFBUTTON">
-	        <option value="0"<? if($AVA_PROFBUTTON==0){ echo " selected"; } ?>>Hide Avatar Button
-	        <option value="1"<? if($AVA_PROFBUTTON==1){ echo " selected"; } ?>>Show Avatar Button
+        <select name="vENABLE_PM">
+	        <option value="0"<? if($ENABLE_PM==0){ echo " selected"; } ?>>PM disabled
+	        <option value="1"<? if($ENABLE_PM==1){ echo " selected"; } ?>>PM enabled
         </select>
     </td>
 </tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Enter the max number of dices per throw.</b><br />
-    	<i>Hint: Needed ONLY for Dice v.2. Use a value smaller than 99. Please note that increasing this value too much, will lead to a load of how many dices images you choose, which can return delays displaying the messages (drastically for non-IE browsers)</i>
-    		</td>
-    <td><input name="vMAX_DICES" type="text" size="2" maxlength="2" value="<? echo $MAX_DICES; ?>"></td>
-</tr>
 <tr>
-    <td><b>Enter the max number of rolls per dice</b></td>
-    <td><input name="vMAX_ROLLS" type="text" size="2" maxlength="3" value="<? echo $MAX_ROLLS; ?>"></td>
+    <td><b>Enable popup whispers (private messages) system.</b><br />
+    				(if enabled, guests will not receive PMs in popups - they must register)<br />
+    		<i>Hint: can be also disabled by each registered user in their profile<br />
+    	<font color=red>Important: If you change this setting while there are users logged in, all your users must reload their browsers or exit and relogin. An announcement to all the rooms will be automatically sent if you enable/disable this.</font></i>
+    	</td>
+    <td>
+        <select name="vPRIV_POPUP">
+	        <option value="0"<? if($PRIV_POPUP==0){ echo " selected"; } ?>>PM pop-ups disabled
+	        <option value="1"<? if($PRIV_POPUP==1){ echo " selected"; } ?>>PM pop-ups enabled
+        </select>
+    </td>
 </tr>
+</table>
+<table align="center" width="780" CLASS=table>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="bot"></a><b>Bot Settings</b></td></tr>
+		<TR CLASS=\"thumbIndex\">
+			<TD VALIGN=CENTER ALIGN=CENTER height="20" CLASS=tabtitle>Configuration Options
+				</TD>
+			<TD VALIGN=CENTER ALIGN=CENTER width="25%" height="20" CLASS=tabtitle>Current Settings
+			</TD>
+		</TR>
 <tr bgcolor="#B0C4DE">
     <td><b>Enable BOT in chat.</b><br />
     	<i><font color=red>Important: Before changing any of the bot settings bellow, please stop the bot if it is running in the chat<br />
@@ -1593,13 +1599,13 @@ else echo("<SELECT NAME=\"vCOLOR_CD9\">");
         </select>
     </td>
 </tr>
-<tr>
+<tr bgcolor="#B0C4DE">
     <td><b>Enter the desired name for your BOT.</b><br />
     	<i><font color=red>Important: Do not change this name before you make sure bot is fully loaded (check if it can post in chat).</font></i>
     	</td>
     <td><input name="vBOT_NAME" type="text" size="25" maxlength="25" value="<? echo $BOT_NAME; ?>"></td>
 </tr>
-<tr bgcolor="#B0C4DE">
+<tr>
     <td><b>Enter the color of the response messages from BOT.</b></td>
     <td>
 <?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<SELECT NAME=\"vBOT_FONT_COLOR\" style=\"background-color:".$BOT_FONT_COLOR.";\">\n");
@@ -1617,39 +1623,114 @@ else echo("<SELECT NAME=\"vBOT_FONT_COLOR\">");
 			</SELECT>
     	</td>
 </tr>
-<tr>
+<tr bgcolor="#B0C4DE">
     <td><b>Enter the avatar of the BOT.</b><br />
     	<i>Hint: It will be shown only if the avatar system is enabled</i>
     	</td>
     <td><input name="vBOT_AVATAR" type="text" size="25" maxlength="255" value="<? echo $BOT_AVATAR; ?>"></td>
 </tr>
-<tr bgcolor="#B0C4DE">
+<tr>
     <td><b>Enter the message to be posted by BOT on start.</b><br />
     	<i>Hint: Avoid special characters or the settings will not be saved</i>
     	</td>
     <td><input name="vBOT_HELLO" type="text" size="25" maxlength="100" value="<? echo $BOT_HELLO; ?>"></td>
 </tr>
-<tr>
+<tr bgcolor="#B0C4DE">
     <td><b>Enter the message to be posted by BOT on stop.</b><br />
     	<i>Hint: Avoid special characters or the settings will not be saved</i>
     	</td>
     <td><input name="vBOT_BYE" type="text" size="25" maxlength="100" value="<? echo $BOT_BYE; ?>"></td>
 </tr>
+</table>
+<table align="center" width="780" CLASS=table>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="quick"></a><b>Quick Menus</b></td></tr>
+		<TR CLASS=\"thumbIndex\">
+			<TD VALIGN=CENTER ALIGN=CENTER height="20" CLASS=tabtitle>Configuration Options
+				</TD>
+			<TD VALIGN=CENTER ALIGN=CENTER width="25%" height="20" CLASS=tabtitle>Current Settings
+			</TD>
+		</TR>
 <tr bgcolor="#B0C4DE">
-    <td><b>Set the maximum size for resizing posted pictures using /img command</b></td>
-    <td><input name="vMAX_PIC_SIZE" type="text" size="2" maxlength="3" value="<? echo $MAX_PIC_SIZE; ?>"></td>
+    <td><b>Define the Quick Menu for admin(s).</b><br />
+    			<i>Hint: keep these chars: <b>|</b> at the end of each line except the last one<br />
+    				Empty the box to hide Quick Menu.</i>
+    	</td>
+    <td><textarea name="vQUICKA" rows=5 cols=28 wrap=on><? echo $QUICKA; ?></textarea></td>
 </tr>
 <tr>
-    <td><b>Default sort order in the users lists.</b><br />
-    	<i>Hint: users can also use the /sort command to change their sorting order</i>
+    <td><b>Define the Quick Menu for moderators.</b><br />
+    			<i>Hint: keep these chars: <b>|</b> at the end of each line except the last one<br />
+    				Empty the box to hide Quick Menu.</i>
+    	</td>
+    <td><textarea name="vQUICKM" rows=5 cols=28 wrap=on><? echo $QUICKM; ?></textarea></td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Define the Quick Menu for other users.</b><br />
+    			<i>Hint: keep these chars: <b>|</b> at the end of each line except the last one<br />
+    				Empty the box to hide Quick Menu.</i>
+    	</td>
+    <td><textarea name="vQUICKU" rows=5 cols=28 wrap=on><? echo $QUICKU; ?></textarea></td>
+</tr>
+</table>
+<table align="center" width="780" CLASS=table>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="avatars"></a><b>Avatars</b></td></tr>
+		<TR CLASS=\"thumbIndex\">
+			<TD VALIGN=CENTER ALIGN=CENTER height="20" CLASS=tabtitle>Configuration Options
+				</TD>
+			<TD VALIGN=CENTER ALIGN=CENTER width="25%" height="20" CLASS=tabtitle>Current Settings
+			</TD>
+		</TR>
+<tr bgcolor="#B0C4DE">
+    <td><b>Enable AVATAR System.</b><br />
+    	<i><font color=red>Important: If you change this setting while there are users logged in, all your users must reload their browsers or exit and relogin. An announcement to all the rooms will be automatically sent if you enable/disable this.</font></i>
     	</td>
     <td>
-        <select name="vUSERS_SORT_ORD">
-	        <option value="0"<? if($USERS_SORT_ORD==0){ echo " selected"; } ?>>By time of entrance
-	        <option value="1"<? if($USERS_SORT_ORD==1){ echo " selected"; } ?>>Alphabetically
+        <select name="vUSE_AVATARS">
+	        <option value="0"<? if($USE_AVATARS==0){ echo " selected"; } ?>>No avatars
+	        <option value="1"<? if($USE_AVATARS==1){ echo " selected"; } ?>>Use avatars
         </select>
     </td>
 </tr>
+<tr>
+    <td><b>Enter the number of avatars in your defined folder.</b></td>
+    <td><input name="vNUM_AVATARS" type="text" size="2" maxlength="3" value="<? echo $NUM_AVATARS; ?>"></td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>The path to your avatar dir.</b></td>
+    <td><input name="vAVA_RELPATH" type="text" size="25" maxlength="55" value="<? echo $AVA_RELPATH; ?>"></td>
+</tr>
+<tr>
+    <td><b>Users default avatar.</b></td>
+    <td><input name="vDEF_AVATAR" type="text" size="25" maxlength="55" value="<? echo $DEF_AVATAR; ?>"></td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Enter the width for the avatars to be shown.</b></td>
+    <td><input name="vAVA_WIDTH" type="text" size="2" maxlength="3" value="<? echo $AVA_WIDTH; ?>"></td>
+</tr>
+<tr>
+    <td><b>Enter the height for the avatars to be shown.</b><br />
+    	<i>Hint: Usually, for a nice layout, width and hight values should be equal.</i>
+    	</td>
+    <td><input name="vAVA_HEIGHT" type="text" size="2" maxlength="3" value="<? echo $AVA_HEIGHT; ?>"></td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Show Change Avatar (Profile) button in input bar.</b></td>
+    <td>
+        <select name="vAVA_PROFBUTTON">
+	        <option value="0"<? if($AVA_PROFBUTTON==0){ echo " selected"; } ?>>Hide Avatar Button
+	        <option value="1"<? if($AVA_PROFBUTTON==1){ echo " selected"; } ?>>Show Avatar Button
+        </select>
+    </td>
+</tr>
+</table>
+<table align="center" width="780" CLASS=table>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="logging"></a><b>Logging Mod</b></td></tr>
+		<TR CLASS=\"thumbIndex\">
+			<TD VALIGN=CENTER ALIGN=CENTER height="20" CLASS=tabtitle>Configuration Options
+				</TD>
+			<TD VALIGN=CENTER ALIGN=CENTER width="25%" height="20" CLASS=tabtitle>Current Settings
+			</TD>
+		</TR>
 <tr bgcolor="#B0C4DE">
     <td><b>Enable chat logging.</b><br />
     	<i>Hint: it will generate html files of the cleaned/deleted conversations. The full version can be accessed via the admin advanced menu, the short version (only the public messages) from the Extra Options menu in chat rooms.</i>
@@ -1662,13 +1743,6 @@ else echo("<SELECT NAME=\"vBOT_FONT_COLOR\">");
     </td>
 </tr>
 <tr>
-    <td><b>Set the name of your admin logs folder.</b><br />
-    	<i><font color=red>Important: Rename the original "logsadmin" folder to a hard to guess name for your full logs folder.</font><br />
-    		Hint: This is different from the users accessible one (called logs), which does not include any private/confidential data from your chat conversations/actions.</i>
-    		</td>
-    <td><input name="vLOG_DIR" type="text" size="25" maxlength="25" value="<? echo $LOG_DIR; ?>"></td>
-</tr>
-<tr bgcolor="#B0C4DE">
     <td><b>Display logs to non-admin users in chat.</b><br />
     	<i>Hint: Only if Chat logging is enabled.</i>
     	</td>
@@ -1679,7 +1753,23 @@ else echo("<SELECT NAME=\"vBOT_FONT_COLOR\">");
         </select>
     </td>
 </tr>
-<tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Set the name of your admin (full) logs folder.</b><br />
+    	<i><font color=red>Important: Rename the original "logsadmin" folder to a hard to guess name for your full logs folder.</font><br />
+    		Hint: This is different from the public/users accessible one (called "logs"), which does not include any private/confidential data from your chat conversations/actions.</i>
+    		</td>
+    <td><input name="vLOG_DIR" type="text" size="25" maxlength="25" value="<? echo $LOG_DIR; ?>"></td>
+</tr>
+</table>
+<table align="center" width="780" CLASS=table>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="lurking"></a><b>Lurking Mod</b></td></tr>
+		<TR CLASS=\"thumbIndex\">
+			<TD VALIGN=CENTER ALIGN=CENTER height="20" CLASS=tabtitle>Configuration Options
+				</TD>
+			<TD VALIGN=CENTER ALIGN=CENTER width="25%" height="20" CLASS=tabtitle>Current Settings
+			</TD>
+		</TR>
+<tr bgcolor="#B0C4DE">
     <td><b>Enable chat lurking.</b><br />
     	<i>Hint: it will allow people to monitor public conversations and events in the chat, even without loging in.</i>
     	</td>
@@ -1690,7 +1780,7 @@ else echo("<SELECT NAME=\"vBOT_FONT_COLOR\">");
         </select>
     </td>
 </tr>
-<tr bgcolor="#B0C4DE">
+<tr>
     <td><b>Display lurking page to non-admin users in chat and login page.</b><br />
     	<i>Hint: Only if Chat lurking is enabled.</i>
     	</td>
@@ -1698,25 +1788,6 @@ else echo("<SELECT NAME=\"vBOT_FONT_COLOR\">");
         <select name="vSHOW_LURK_USR">
 	        <option value="0"<? if($SHOW_LURK_USR==0){ echo " selected"; } ?>>Hide
 	        <option value="1"<? if($SHOW_LURK_USR==1){ echo " selected"; } ?>>Show
-        </select>
-    </td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Set the characters you wish your users to be allowed to use on registration/login.</b><br />
-    	<i>Hint: This is the default set of chars: </i><b>a-zA-Z0-9_.-@#$%^&*()=<>?~{}|`:</b><i> tested for login, which will not break the layout/functionality of your chat.<br />
-    		<font color=red>Important: Do not allow these characters, as they will break your chat page after login: exclamation mark, slash, backslash, comma, space, single and double quotes and square (box) brackets (<b>! / \ , ' " [ ]</b>)</font><br /></i>
-    		Eventough they will not break anything, it seems that / and ; cannot be banned from being used in login names.
-    		</td>
-    <td><input name="vREG_CHARS_ALLOWED" type="text" size="25" maxlength="50" value="<? echo $REG_CHARS_ALLOWED; ?>"></td>
-</tr>
-<tr>
-    <td><b>Exit link type.</b><br />
-    	<i>Hint: Link stands for the original Exit link, Door rolling stands for the image of such a door.</i>
-    	</td>
-    <td>
-        <select name="vEXIT_LINK_TYPE">
-	        <option value="0"<? if($EXIT_LINK_TYPE==0){ echo " selected"; } ?>>Exit link
-	        <option value="1"<? if($EXIT_LINK_TYPE==1){ echo " selected"; } ?>>Door rolling
         </select>
     </td>
 </tr>
@@ -1729,18 +1800,92 @@ else echo("<SELECT NAME=\"vBOT_FONT_COLOR\">");
         </select>
     </td>
 </tr>
+</table>
+<table align="center" width="780" CLASS=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="quote"></a><b>Random Quote</b></td></tr>
-<tr>
+		<TR CLASS=\"thumbIndex\">
+			<TD VALIGN=CENTER ALIGN=CENTER height="20" CLASS=tabtitle>Configuration Options
+				</TD>
+			<TD VALIGN=CENTER ALIGN=CENTER width="25%" height="20" CLASS=tabtitle>Current Settings
+			</TD>
+		</TR>
+<tr bgcolor="#B0C4DE">
     <td><b>Enable Random Quote mod.</b><br />
-    	<i><font color=red>Important: to change these settings, you have to enable quote mode first!</font><br /></i>
-</td>
+    	<i><font color=red>Important: to change these settings, you have to enable quote mode first!</font></i>
+	</td>
     <td><select name="vQUOTE">
 	        <option value="0"<? if($QUOTE==0){ echo " selected"; } ?>>Disable Quotes
 	        <option value="1"<? if($QUOTE==1){ echo " selected"; } ?>>Enable Quotes
-        </select><br />
-    	<input name="vQUOTE_PATH" type="text" size="25" maxlength="255" value="<? echo $QUOTE_PATH; ?>"><br />
-			Frequency in mins:&nbsp;<input name="vQUOTE_TIME" type="text" size="1" maxlength="2" value="<? echo $QUOTE_TIME; ?>"><br />
-			Background:&nbsp;
+        </select></td>
+</tr>
+<tr>
+	<td><b>Quote Name:</b></td>
+	<td><input name="vQUOTE_NAME" type="text" size="25" maxlength="25" value="<? echo $QUOTE_NAME; ?>"></td>
+</tr>
+<tr bgcolor="#B0C4DE">
+	<td><b>Quote Name color:</b></td>
+	<td>
+	<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<SELECT NAME=\"vQUOTE_FONT_COLOR\" style=\"background-color:".$QUOTE_FONT_COLOR.";\">\n");
+else echo("<SELECT NAME=\"vQUOTE_FONT_COLOR\">");
+			$CQ = explode(",", $ColorList);
+			while(list($ColorNumber, $ColorCode) = each($CQ))
+			{
+				// Red color is reserved to the admin or a moderator for the current room
+				echo("<OPTION style=\"background-color:".$ColorCode."; color:black\" VALUE=\"".$ColorCode."\"");
+				if($QUOTE_FONT_COLOR == $ColorCode) echo(" SELECTED");
+				if ($ColorCode != "") echo(">".$ColorCode."</OPTION>");
+				else echo(">Default (not selected)</OPTION>");
+			}
+			?>
+			</SELECT>
+	</td>
+</tr>
+<tr>
+	<td><b>Quote Avatar:</b></td>
+	<td><input name="vQUOTE_AVATAR" type="text" size="25" maxlength="255" value="<? echo $QUOTE_AVATAR; ?>">
+    </td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Quote File:</b></td>
+	<td>
+<?php
+		$quotes='files/quotes/';
+		$quotefiles = opendir($quotes); #open directory
+		echo ("<SELECT NAME=\"vQUOTE_PATH\">");
+				$i = 0;
+				while (false !== ($quotefile = readdir($quotefiles)))
+				{
+					if (!eregi("\.html",$quotefile) && $quotefile!=='.' && $quotefile!=='..')
+					{
+						$quotesfile[]=$quotefile;
+			 		$i++;
+			 		}
+			 	}
+				closedir($quotefiles);
+				if ($quotesfile)
+				{
+				  	sort($quotesfile);
+				}
+				foreach ($quotesfile as $quotename)
+				{
+					echo("<OPTION VALUE=\"".$quotes.$quotename."\"");
+					if($QUOTE_PATH == $quotes.$quotename) echo(" SELECTED");
+					echo(">".$quotename."</OPTION>");
+				$j++;
+				}
+		unset($quotesfile);
+		?>
+		</SELECT>
+	</td>
+</tr>
+<tr>
+	<td><b>Quote Posting frequency:</b></td>
+	<td><input name="vQUOTE_TIME" type="text" size="1" maxlength="2" value="<? echo $QUOTE_TIME; ?>"> (mins)
+	</td>
+</tr>
+<tr bgcolor="#B0C4DE">
+	<td><b>Quote Background color:</b></td>
+	<td>
 <?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<SELECT NAME=\"vQUOTE_COLOR\" style=\"background-color:".$QUOTE_COLOR.";\">\n");
 else echo("<SELECT NAME=\"vQUOTE_COLOR\">");
 			$CQP = explode(",", $ColorList);
@@ -1753,26 +1898,18 @@ else echo("<SELECT NAME=\"vQUOTE_COLOR\">");
 				else echo(">Default (not selected)</OPTION>");
 			}
 			?>
-			</SELECT><br />
-			Name:&nbsp;<input name="vQUOTE_NAME" type="text" size="25" maxlength="25" value="<? echo $QUOTE_NAME; ?>"><br />
-			Name color:&nbsp;
-<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<SELECT NAME=\"vQUOTE_FONT_COLOR\" style=\"background-color:".$QUOTE_FONT_COLOR.";\">\n");
-else echo("<SELECT NAME=\"vQUOTE_FONT_COLOR\">");
-			$CQ = explode(",", $ColorList);
-			while(list($ColorNumber, $ColorCode) = each($CQ))
-			{
-				// Red color is reserved to the admin or a moderator for the current room
-				echo("<OPTION style=\"background-color:".$ColorCode."; color:black\" VALUE=\"".$ColorCode."\"");
-				if($QUOTE_FONT_COLOR == $ColorCode) echo(" SELECTED");
-				if ($ColorCode != "") echo(">".$ColorCode."</OPTION>");
-				else echo(">Default (not selected)</OPTION>");
-			}
-			?>
-			</SELECT><br />
-			Avatar:&nbsp;<input name="vQUOTE_AVATAR" type="text" size="25" maxlength="255" value="<? echo $QUOTE_AVATAR; ?>">
-    </td>
+			</SELECT>
+	</td>
 </tr>
+</table>
+<table align="center" width="780" CLASS=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="ghost"></a><b>Ghost Control</b></td></tr>
+		<TR CLASS=\"thumbIndex\">
+			<TD VALIGN=CENTER ALIGN=CENTER height="20" CLASS=tabtitle>Configuration Options
+				</TD>
+			<TD VALIGN=CENTER ALIGN=CENTER width="25%" height="20" CLASS=tabtitle>Current Settings
+			</TD>
+		</TR>
 <tr bgcolor="#B0C4DE">
     <td><b>Control who will be visible in chat rooms.</b><br />
     	<i><font color=red>Important: if you enable Ghost Control, users set as ghosts (invisible) will also be hiden from all the public pages and counters, except their posts and commands in rooms (messages frame)!</font><br />
@@ -1782,7 +1919,7 @@ else echo("<SELECT NAME=\"vQUOTE_FONT_COLOR\">");
         <select name="vHIDE_ADMINS">
 	        <option value="0"<? if($HIDE_ADMINS==0){ echo " selected"; } ?>>Show online administrators
 	        <option value="1"<? if($HIDE_ADMINS==1){ echo " selected"; } ?>>Hide online admins (ghosts)
-        </select><br />
+        </select><br /><br />
         <select name="vHIDE_MODERS">
 	        <option value="0"<? if($HIDE_MODERS==0){ echo " selected"; } ?>>Show online moderators
 	        <option value="1"<? if($HIDE_MODERS==1){ echo " selected"; } ?>>Hide online moders (ghosts)
