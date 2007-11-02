@@ -159,7 +159,7 @@ CREATE TABLE c_config (
  SET_CMDS enum('0','1') NOT NULL default '1',
  CMDS varchar(255) NOT NULL default '<br />/away /buzz /demote /dice /dice2 /dice3 /high /img /mr<br />/room /size /sort /topic /wisp',
  SET_MODS enum('0','1') NOT NULL default '1',
- MODS varchar(255) NOT NULL default '<br />Advanced Admin, Avatars, Smilies Popup, Color Drop Box, Private Popup,<br />Quick Menu, Logs Archive, Lurking, Color names, WorldTime',
+ MODS varchar(255) NOT NULL default '<br />Advanced Admin, Avatars, Smilies Popup, Color Drop Box, Private Popup,<br />Quick Menu, Logs Archive, Lurking, Color names, WorldTime, UTF-8',
  SET_BOT enum('0','1') NOT NULL default '1',
  ROOM_SAYS varchar(25) NOT NULL default 'Attention Room:',
  DEMOTE_MOD enum('0','1') NOT NULL default '0',
