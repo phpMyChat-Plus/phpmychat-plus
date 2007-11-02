@@ -26,7 +26,7 @@ function room_not_in($what, $in)
 
 $UU = stripslashes($Cmd[2]);
 // Check for invalid characters
-if (ereg("[\, ]", $UU))
+if (ereg("[\, \']", $UU))
 {
 	$Error = L_ERR_USR_16;
 }

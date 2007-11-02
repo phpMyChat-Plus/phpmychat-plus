@@ -20,7 +20,7 @@ function room_in($what, $in)
 $UU = $Cmd[1];
 
 // Check for invalid characters
-if (ereg("[\, ]", stripslashes($UU)))
+if (ereg("[\, \']", stripslashes($UU)))
 {
 	$Error = L_ERR_USR_16;
 }

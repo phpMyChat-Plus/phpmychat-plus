@@ -12,7 +12,7 @@ if( $UR != $R && $UR != "")
 	$Error = sprintf(L_PRIV_NOT_INROOM, special_char($Cmd[2],$Latin1), special_char($Cmd[2],$Latin1));
 }
 // Check for invalid characters in the addressee name
-elseif (ereg("[\, ]", stripslashes($Cmd[2])))
+elseif (ereg("[\, \']", stripslashes($Cmd[2])))
 {
 	$Error = L_ERR_USR_16;
 }

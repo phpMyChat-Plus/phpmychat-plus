@@ -1,7 +1,7 @@
 <?php
 
 // Check for invalid characters in the user name
-if ($Cmd[2] != "" && ereg("[\ ]", stripslashes($Cmd[2])))
+if ($Cmd[2] != "" && ereg("[\, \']", stripslashes($Cmd[2])))
 {
 	$Error = L_ERR_USR_16;
 }
