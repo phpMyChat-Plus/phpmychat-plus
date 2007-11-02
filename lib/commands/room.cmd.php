@@ -11,7 +11,7 @@ function room_in($what, $in)
 	return false;
 };
 
-if (ereg("[\, ]", stripslashes($U)))
+if (ereg("[\, \']", stripslashes($U)))
 {
 	$Error = L_ERR_USR_16;
 }

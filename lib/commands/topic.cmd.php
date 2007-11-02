@@ -47,7 +47,7 @@ function room_in($what, $in)
 					$toppath = "botfb/" .$R ;         // file is in DIR "botfb" and called "roomname"
 					$topgpath = "botfb/Global topic" ;         // file is in DIR "botfb" and called "Global topic"
 					// Check for invalid characters in the addressee name
-					if (ereg("[\, ]", stripslashes($Cmd[2])))
+					if (ereg("[\, \']", stripslashes($Cmd[2])))
 					{
 						$Error = L_ERR_USR_16;
 					}

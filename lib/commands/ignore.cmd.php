@@ -12,7 +12,7 @@ function is_user_ignored($who, $userlist)
 }
 
 // Check for invalid characters in the name of the user to be ignored
-if ($Cmd[3] != "" && ereg("[\ ]", stripslashes($Cmd[3])))
+if ($Cmd[3] != "" && ereg("[\, \']", stripslashes($Cmd[3])))
 {
 	$Error = L_ERR_USR_16;
 }

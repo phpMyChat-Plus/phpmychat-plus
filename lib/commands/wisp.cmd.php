@@ -6,7 +6,7 @@ if (!C_ENABLE_PM)
 else
 {
 // Check for invalid characters in the addressee name
-if (ereg("[\, ]", stripslashes($Cmd[2])))
+if (ereg("[\, \']", stripslashes($Cmd[2])))
 {
 	$Error = L_ERR_USR_16;
 }

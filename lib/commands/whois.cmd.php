@@ -10,7 +10,7 @@ function room_in($what, $in)
 }
 $UU = stripslashes($Cmd[1]);
 // Check for invalid characters in the user name
-if (ereg("[\, ]", $UU))
+if (ereg("[\, \']", $UU))
 {
 	$Error = L_ERR_USR_16;
 }
