@@ -14,7 +14,7 @@ Fixes History:
 - 1.92 final release get announced and available for download; (release)
 - Admin Config panel Menu is fully working now; also several explanations/hints adjusted; (functionality & administration related)
 - Random Quote mod settings improvements in Admin panel; (administration related)
-- lot of file changes and several database updates as per each 1.91-beta stage, but it isn't worth to be mentioned here.
+- lot of file changes and several database updates as per each 1.91-beta stage, but it isn’t worth to be mentioned here.
 
 26.10.2007 - 1.91-beta9:
 - added links and email addresses to topics!; (functionality related)
