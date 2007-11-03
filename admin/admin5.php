@@ -88,7 +88,7 @@ if (UPD_CHECK)
 					<li><a href="#owner">Owner data</a></li>
 					<li><a href="#registration">Registration</a></li>
 					<li><a href="#functionality">Functionality</a></li>
-					<li><a href="#powers">Powers</a></li>
+					<li><a href="#timings">Timings</a></li>
 				</ul>
 			</dd>
 	</dl>
@@ -98,9 +98,7 @@ if (UPD_CHECK)
 				<ul>
 					<li><a href="#layout">Login layout</a></li>
 					<li><a href="#skins">Skins & Colors</a></li>
-					<li><a href="#media">Media</a></li>
 					<li><a href="#profanity">Profanity</a></li>
-					<li><a href="#time">Times</a></li>
 				</ul>
 			</dd>
 	</dl>
@@ -110,7 +108,7 @@ if (UPD_CHECK)
 				<ul>
 					<li><a href="#pm">Private messaging</a></li>
 					<li><a href="#bot">Bot settings</a></li>
-					<li><a href="#cmds">Commands</a></li>
+					<li><a href="#commands">Commands</a></li>
 					<li><a href="#quick">Quick Menus</a></li>
 					<li><a href="#avatars">Avatars</a></li>
 					<li><a href="#logging">Logging Mod</a></li>
@@ -718,12 +716,6 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         </select>
     	</td>
 </tr>
-<tr>
-    <td><b>Max number of messages that user may export.</b><br />
-    								(0=disable, any integer=number of messages, *=no limit)
-    </td>
-    <td><input name="vSAVE" type="text" size="1" maxlength="2" value="<? echo $SAVE; ?>"></td>
-</tr>
 <tr bgcolor="#B0C4DE">
     <td><b>Use graphical smilies in messages.</b></td>
     <td>
@@ -752,20 +744,6 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         </select>
     </td>
 </tr>
-<tr>
-    <td><b>Timezone offset and Worldtime in Status bar.</b><br />
-    			- the difference between the server time and the desired location for the Chat (hours)<br />
-    			<i>E.g. If my server is hosted in USA - CST (-6) but the chat is for a Romanian community located in Bucharest - EET (+2),
-    			I might wish to show my users the correct time in the chat. For this, I have to set this value to 8. Negative values are also allowed.</i>
-    </td>
-    <td><input name="vTMZ_OFFSET" type="text" size="2" maxlength="5" value="<? echo $TMZ_OFFSET; ?>"><br />
-        <select name="vWORLDTIME">
-	        <option value="0"<? if($WORLDTIME==0){ echo " selected"; } ?>>Server time (standard)
-	        <option value="1"<? if($WORLDTIME==1){ echo " selected"; } ?>>Worldtime in Chat only 
-	        <option value="2"<? if($WORLDTIME==2){ echo " selected"; } ?>>Worldtime on Index & Chat
-        </select>
-			</td>
-</tr>
 <tr bgcolor="#B0C4DE">
     <td><b>Default messages scroll order.</b><br />
     			(only for "non-H" browsers - other than IE or Firefox)<br />
@@ -777,21 +755,6 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	        <option value="1"<? if($MSG_ORDER==1){ echo " selected"; } ?>>Last on Bottom
         </select>
     </td>
-</tr>
-<tr>
-    <td><b>Show Timestamp in front of the message.</b><br />
-    			(also shows the Server Time in the Status bar)
-    </td>
-    <td>
-        <select name="vSHOW_TIMESTAMP">
-	        <option value="0"<? if($SHOW_TIMESTAMP==0){ echo " selected"; } ?>>No timestamps in chat
-	        <option value="1"<? if($SHOW_TIMESTAMP==1){ echo " selected"; } ?>>Show timestamps in chat
-        </select>
-    </td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Default timeout between each update.</b></td>
-    <td><input name="vMSG_REFRESH" type="text" size="1" maxlength="2" value="<? echo $MSG_REFRESH; ?>"> (seconds)</td>
 </tr>
 <tr>
     <td><b>Default number of messages to display on first entrance.</b><br />
@@ -839,23 +802,6 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Play a buzz sound on /buzz command.</b><br />
-    			(or just display a message without any sound)
-    	</td>
-    <td>
-        <select name="vALLOW_BUZZ_SOUND">
-	        <option value="0"<? if($ALLOW_BUZZ_SOUND==0){ echo " selected"; } ?>>No buzz sounds
-	        <option value="1"<? if($ALLOW_BUZZ_SOUND==1){ echo " selected"; } ?>>Play buzz sounds
-        </select>
-    </td>
-</tr>
-<tr>
-    <td><b>Path to the buzz sound to be played (only .wav extensions).</b><br />
-    				Example: 'sounds/chimedwn.wav' (include the quotes if you use long URLs)
-    	</td>
-    <td><input name="vBUZZ_SOUND" type="text" size="25" maxlength="255" value="<? echo $BUZZ_SOUND; ?>"></td>
-</tr>
-<tr bgcolor="#B0C4DE">
     <td><b>Number of smilies on a row in tutorial/help.</b></td>
     <td><input name="vSMILEY_COLS" type="text" size="1" maxlength="2" value="<? echo $SMILEY_COLS; ?>"></td>
 </tr>
@@ -863,66 +809,12 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     <td><b>Number of smilies on a row in smilie_popup.</b></td>
     <td><input name="vSMILEY_COLS_POP" type="text" size="1" maxlength="2" value="<? echo $SMILEY_COLS_POP; ?>"></td>
 </tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Enable Different Topics for each room.</b><br />
-    			(or just display a default one - topics must be edited in banner.php)
-    	</td>
-    <td>
-        <select name="vTOPIC_DIFF">
-	        <option value="0"<? if($TOPIC_DIFF==0){ echo " selected"; } ?>>Global topic
-	        <option value="1"<? if($TOPIC_DIFF==1){ echo " selected"; } ?>>Multiple topics
-        </select>
-    </td>
-</tr>
-<tr>
-    <td><b>Enter the expression for the /room command.</b><br />
-    			Examples: Attention Room:, Narator Says:, Read this:, Author says:
-    	</td>
-    <td><input name="vROOM_SAYS" type="text" size="25" maxlength="25" value="<? echo $ROOM_SAYS; ?>"></td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Allow moderators to use /demote command.</b><br />
-    				NO - only admins will demote moderators.<br />
-    				YES - also moderators will be able to demote other moderators.
-    	</td>
-    <td>
-        <select name="vDEMOTE_MOD">
-	        <option value="0"<? if($DEMOTE_MOD==0){ echo " selected"; } ?>>Only admins
-	        <option value="1"<? if($DEMOTE_MOD==1){ echo " selected"; } ?>>Moderators & admins
-        </select>
-    </td>
-</tr>
 <tr>
     <td><b>Display the Chat Etiquette on top of the Help popup (Chat rules).</b></td>
     <td>
         <select name="vSHOW_ETIQ_IN_HELP">
 	        <option value="0"<? if($SHOW_ETIQ_IN_HELP==0){ echo " selected"; } ?>>Hide Etiquette
 	        <option value="1"<? if($SHOW_ETIQ_IN_HELP==1){ echo " selected"; } ?>>Show Etiquette
-        </select>
-    </td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Enter the max number of dice per throw.</b><br />
-    	<i>Hint: Needed ONLY for Dice v.2. Use a value smaller than 99. Please note that increasing this value too much, will lead to a load of how many dices images you choose, which can return delays displaying the messages (drastically for non-IE browsers)</i>
-    		</td>
-    <td><input name="vMAX_DICES" type="text" size="2" maxlength="2" value="<? echo $MAX_DICES; ?>"></td>
-</tr>
-<tr>
-    <td><b>Enter the max number of dice per throw (sides per die for Dice v.2)</b></td>
-    <td><input name="vMAX_ROLLS" type="text" size="2" maxlength="3" value="<? echo $MAX_ROLLS; ?>"></td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Set the maximum size for resizing posted pictures using /img command</b></td>
-    <td><input name="vMAX_PIC_SIZE" type="text" size="2" maxlength="3" value="<? echo $MAX_PIC_SIZE; ?>"></td>
-</tr>
-<tr>
-    <td><b>Default sort order in the users lists.</b><br />
-    	<i>Hint: users can also use the /sort command to change their sorting order</i>
-    	</td>
-    <td>
-        <select name="vUSERS_SORT_ORD">
-	        <option value="0"<? if($USERS_SORT_ORD==0){ echo " selected"; } ?>>By time of entrance
-	        <option value="1"<? if($USERS_SORT_ORD==1){ echo " selected"; } ?>>Alphabetically
         </select>
     </td>
 </tr>
@@ -944,6 +836,44 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     		Eventough they will not break anything, it seems that / and ; cannot be banned from being used in login names.
     		</td>
     <td><input name="vREG_CHARS_ALLOWED" type="text" size="25" maxlength="50" value="<? echo $REG_CHARS_ALLOWED; ?>"></td>
+</tr>
+</table>
+<table align="center" width="780" CLASS=table>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="timings"></a><b>Timings</b></td></tr>
+		<TR CLASS=\"thumbIndex\">
+			<TD VALIGN=CENTER ALIGN=CENTER height="20" CLASS=tabtitle>Configuration Options
+				</TD>
+			<TD VALIGN=CENTER ALIGN=CENTER width="25%" height="20" CLASS=tabtitle>Current Settings
+			</TD>
+		</TR>
+<tr bgcolor="#B0C4DE">
+    <td><b>Timezone offset and Worldtime in Status bar.</b><br />
+    			- the difference between the server time and the desired location for the Chat (hours)<br />
+    			<i>E.g. If my server is hosted in USA - CST (-6) but the chat is for a Romanian community located in Bucharest - EET (+2),
+    			I might wish to show my users the correct time in the chat. For this, I have to set this value to 8. Negative values are also allowed.</i>
+    </td>
+    <td><input name="vTMZ_OFFSET" type="text" size="2" maxlength="5" value="<? echo $TMZ_OFFSET; ?>"><br />
+        <select name="vWORLDTIME">
+	        <option value="0"<? if($WORLDTIME==0){ echo " selected"; } ?>>Server time (standard)
+	        <option value="1"<? if($WORLDTIME==1){ echo " selected"; } ?>>Worldtime in Chat only 
+	        <option value="2"<? if($WORLDTIME==2){ echo " selected"; } ?>>Worldtime on Index & Chat
+        </select>
+			</td>
+</tr>
+<tr>
+    <td><b>Show Timestamp in front of the message.</b><br />
+    			(also shows the Server Time in the Status bar)
+    </td>
+    <td>
+        <select name="vSHOW_TIMESTAMP">
+	        <option value="0"<? if($SHOW_TIMESTAMP==0){ echo " selected"; } ?>>No timestamps in chat
+	        <option value="1"<? if($SHOW_TIMESTAMP==1){ echo " selected"; } ?>>Show timestamps in chat
+        </select>
+    </td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Default timeout between each update.</b></td>
+    <td><input name="vMSG_REFRESH" type="text" size="1" maxlength="2" value="<? echo $MSG_REFRESH; ?>"> (seconds)</td>
 </tr>
 </table>
 <table align="center" width="780" CLASS=table>
@@ -1640,6 +1570,91 @@ else echo("<SELECT NAME=\"vBOT_FONT_COLOR\">");
     	<i>Hint: Avoid special characters or the settings will not be saved</i>
     	</td>
     <td><input name="vBOT_BYE" type="text" size="25" maxlength="100" value="<? echo $BOT_BYE; ?>"></td>
+</tr>
+</table>
+<table align="center" width="780" CLASS=table>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="commands"></a><b>Commands</b></td></tr>
+		<TR CLASS=\"thumbIndex\">
+			<TD VALIGN=CENTER ALIGN=CENTER height="20" CLASS=tabtitle>Configuration Options
+				</TD>
+			<TD VALIGN=CENTER ALIGN=CENTER width="25%" height="20" CLASS=tabtitle>Current Settings
+			</TD>
+		</TR>
+<tr bgcolor="#B0C4DE">
+    <td><b>Max number of messages that user may export on /save command.</b><br />
+    			<i>Values: 0=disable, any integer=number of messages, *=no limit</i>
+    </td>
+    <td><input name="vSAVE" type="text" size="1" maxlength="2" value="<? echo $SAVE; ?>"></td>
+</tr>
+<tr>
+    <td><b>Play a buzz sound on /buzz command.</b><br />
+    			(or just display a [Buzz] message, without any sound)
+    	</td>
+    <td>
+        <select name="vALLOW_BUZZ_SOUND">
+	        <option value="0"<? if($ALLOW_BUZZ_SOUND==0){ echo " selected"; } ?>>No buzz sounds
+	        <option value="1"<? if($ALLOW_BUZZ_SOUND==1){ echo " selected"; } ?>>Play buzz sounds
+        </select>
+    </td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Path to the buzz sound to be played (only .wav extensions).</b><br />
+    			<i>Example: 'sounds/chimedwn.wav' (include the quotes if you use long URLs)</i>
+    	</td>
+    <td><input name="vBUZZ_SOUND" type="text" size="25" maxlength="255" value="<? echo $BUZZ_SOUND; ?>"></td>
+</tr>
+<tr>
+    <td><b>Enable Different Topics for each room (/topic or /topic * commands).</b><br />
+    			<i>Hint: or just display a default one (called global topic) - default topics ought to be edited in the according localized.topic.php / per each desired language)</i>
+    	</td>
+    <td>
+        <select name="vTOPIC_DIFF">
+	        <option value="0"<? if($TOPIC_DIFF==0){ echo " selected"; } ?>>Global topic
+	        <option value="1"<? if($TOPIC_DIFF==1){ echo " selected"; } ?>>Multiple topics
+        </select>
+    </td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Enter the expression for the /room command.</b><br />
+    			<i>Examples: Attention Room:, Narator Says:, Read this:, Author says:</i>
+    	</td>
+    <td><input name="vROOM_SAYS" type="text" size="25" maxlength="25" value="<? echo $ROOM_SAYS; ?>"></td>
+</tr>
+<tr>
+    <td><b>Allow moderators to use /demote command.</b>
+			<i>Hint: if set to second option, moderators will be able to demote other moderators - <font color=red>be very careful!</font></i>
+			</td>
+    <td>
+        <select name="vDEMOTE_MOD">
+	        <option value="0"<? if($DEMOTE_MOD==0){ echo " selected"; } ?>>Only admins
+	        <option value="1"<? if($DEMOTE_MOD==1){ echo " selected"; } ?>>Moderators & admins
+        </select>
+    </td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Enter the max number of dice per throw.</b><br />
+    	<i>Hint: Needed ONLY for Dice v.2. Use a value smaller than 99. Please note that increasing this value too much, will lead to a load of how many dices images you choose, which can return delays displaying the messages (drastically for non-IE browsers)</i>
+    		</td>
+    <td><input name="vMAX_DICES" type="text" size="2" maxlength="2" value="<? echo $MAX_DICES; ?>"></td>
+</tr>
+<tr>
+    <td><b>Enter the max number of dice per throw (sides per die for Dice v.2)</b></td>
+    <td><input name="vMAX_ROLLS" type="text" size="2" maxlength="3" value="<? echo $MAX_ROLLS; ?>"></td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Set the maximum size for resizing posted pictures using /img command</b></td>
+    <td><input name="vMAX_PIC_SIZE" type="text" size="2" maxlength="3" value="<? echo $MAX_PIC_SIZE; ?>"></td>
+</tr>
+<tr>
+    <td><b>Default sort order in the users lists (/sort command).</b><br />
+    	<i>Hint: users can also use the /sort command to change their sorting order</i>
+    	</td>
+    <td>
+        <select name="vUSERS_SORT_ORD">
+	        <option value="0"<? if($USERS_SORT_ORD==0){ echo " selected"; } ?>>By time of entrance
+	        <option value="1"<? if($USERS_SORT_ORD==1){ echo " selected"; } ?>>Alphabetically
+        </select>
+    </td>
 </tr>
 </table>
 <table align="center" width="780" CLASS=table>
