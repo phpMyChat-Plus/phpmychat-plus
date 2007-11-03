@@ -10,9 +10,11 @@ Important: everytime you upgrade/reinstall a phpmychat server or change sensitiv
 When you install Firefox2 and/or QuickTime (RealPlayer), a QuickTime plugin will break the WMP plugin in IE, necesary for playing .wav sounds, therefore, you won’t get sounds in IE anymore. I fixed it by playing with enabling/disabling these plugins in IE, but not sure what exactly does the fix. I also added a small script (reg file) as a link in Extra Options in chat.
 
 Fixes History:
-01.11.2007 - 1.92:
+03.11.2007 - 1.92:
 - 1.92 final release get announced and available for download; (release)
-- lot of file changes and several database updates, but not mentioned here.
+- Admin Config panel Menu is fully working now; also several explanations/hints adjusted; (functionality & administration related)
+- Random Quote mod settings improvements in Admin panel; (administration related)
+- lot of file changes and several database updates as per each 1.91-beta stage, but it isn't worth to be mentioned here.
 
 26.10.2007 - 1.91-beta9:
 - added links and email addresses to topics!; (functionality related)
