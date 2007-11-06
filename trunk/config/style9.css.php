@@ -2,6 +2,9 @@
 // Forth private room skin ("Support Room" as default)
 // "Dark Purple and black" for phpMyChat plus
 
+// Sends the appropriate header information (required to work with mozilla)
+header("Content-type: text/css");
+
 // Get the names and values for vars sent by the script that called this one
 if (isset($_GET))
 {
