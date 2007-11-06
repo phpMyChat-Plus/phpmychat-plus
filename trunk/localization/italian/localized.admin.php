@@ -3,7 +3,7 @@
 // Original translation by Andrea D’Alessandro <andrea@abol.it> & Massimo Fubini <massimo@tomato.it>
 //	& Giuliano Yurij Beccaria <yurij@e-pages.it> & Marco Borrini <borrini@tradimento.it>
 // & Bartolotta Gioachino <developers@rockitalia.com> & Silvia M. Carrassi <silvia@ladysilvia.net>
-// Updates, corrections and additions for the Plus version by Mike Mikius <mikiusss@yahoo.com> and Luciano Cataldo <lucianocataldo@gmail.com>
+// Updates, corrections and additions for the Plus version by Mike Mikius <mikiusss@yahoo.com> & Luciano Cataldo <lucianocataldo@gmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 
 // extra header for charset
@@ -72,6 +72,8 @@ define("A_SHEET4_6", "Invia!");
 define("A_SHEET4_7", "Tutte le e-mails sono state inviate.");
 define("A_SHEET4_8", "Errore interno durante l’invio delle mails.");
 define("A_SHEET4_9", "Indirizzo/i, oggetto o messaggio mancante!");
+define("A_SHEET4_10", "Aggiungi e-mail, separali con la virgola (,) senza spazio");
+define("A_SHEET4_11", "Firma");
 define("A_SHEET4_12", "Deseleziona tutto");
 
 // Frame for configuration

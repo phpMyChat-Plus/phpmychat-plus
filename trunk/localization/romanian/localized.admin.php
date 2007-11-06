@@ -70,7 +70,7 @@ define("A_SHEET4_7", "Toate email-urile au fost trimise.");
 define("A_SHEET4_8", "Eroare internă întâmpinată la trimitere.");
 define("A_SHEET4_9", "Destinaţia, subiectul sau mesajul nu au fost completate!");
 define("A_SHEET4_10", "Adaugă email-uri, separate prin virgulă fără spaţii (,)");
-define("A_SHEET4_11", "Signature");
+define("A_SHEET4_11", "Semnătură");
 define("A_SHEET4_12", "Deselectează tot");
 
 // Frame for configuration
