@@ -63,6 +63,9 @@ if (!isset($L) && isset($_COOKIE["CookieLang"])) $L = $_COOKIE["CookieLang"];
 
 // Fix some security holes
 if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
+// Fix some security holes
+if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
+if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) exit();
 
 require("./${ChatPath}config/config.lib.php");
 require("./${ChatPath}lib/release.lib.php");
