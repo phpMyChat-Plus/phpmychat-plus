@@ -34,13 +34,14 @@ $address = htmlspecialchars(stripslashes($result["address"]));
 if ($address != "" && $address != " *" && $username != "SYS welcome" && $username != "SYS topic" && $username != "SYS topic reset" && substr($username,0,8) != "SYS dice" && $username != "SYS image" && $username != "SYS room" && $username != $address) $toaddress = " to <b>".$address."</b>";
 $address = "<b>".$address."</b>";
 if ($username == "SYS welcome") $username = $address;
-$message = urldecode(stripslashes($result["message"]));
+$message = stripslashes($result["message"]);
 $message = str_replace("src=images","src=../../../images",$message);
 $message = str_replace("<!-- UPDTUSRS //-->","",$message);
 if (eregi("stripslashes",$message) || eregi("sprintf",$message) || eregi("L_",$message))
 {
 	$message = "<?php echo(".$message."); ?>";
 }
+$message = urldecode($message);
 $message = str_replace("links.php?link=","../../../links.php?link=",$message);
 $message = str_replace("target=\"_blank\"></a>","target=\"_blank\">Click here</a>",$message);
 $message = str_replace('alt="Send email"','target="_blank" title="<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>"',$message);
@@ -160,13 +161,14 @@ $addressu = htmlspecialchars(stripslashes($resultu["address"]));
 if ($addressu != "" && $addressu != " *" && $usernameu != "SYS welcome" && $usernameu != "SYS topic" && $usernameu != "SYS topic reset" && substr($usernameu,0,8) != "SYS dice" && $usernameu != "SYS image" && $usernameu != "SYS room" && $usernameu != $addressu) $toaddressu = " to <b>".$addressu."</b>";
 $addressu = "<b>".$addressu."</b>";
 if ($usernameu == "SYS welcome") $usernameu = $addressu;
-$messageu = urldecode(stripslashes($resultu["message"]));
+$messageu = stripslashes($resultu["message"]);
 $messageu = str_replace("src=images","src=../../../images",$messageu);
 $messageu = str_replace("<!-- UPDTUSRS //-->","",$messageu);
 if (eregi("stripslashes",$messageu) || eregi("sprintf",$messageu) || eregi("L_",$messageu))
 {
 	$messageu = '<?php echo('.$messageu.'); ?>';
 }
+$messageu = urldecode($message);
 $messageu = str_replace("links.php?link=","../../../links.php?link=",$messageu);
 $messageu = str_replace("target=\"_blank\"></a>","target=\"_blank\">Click here</a>",$messageu);
 $messageu = str_replace('alt="Send email"','target="_blank" title="<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>"',$messageu);

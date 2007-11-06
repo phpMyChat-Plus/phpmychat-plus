@@ -612,7 +612,7 @@ function inputDropMsg()
 // if (isset($dropdownmsg) && ($status == "a" || $status == "m")) {
 // or use the following line version if you want everybody to have access to it:
 $qnotelabel = "".L_QUICK."";
- if (isset($dropdownmsga) && ($status == "a" || $status == "T")) {
+ if (isset($dropdownmsga) && ($status == "a" || $status == "t")) {
   print "<select name=\"quicknote\" onChange=\"inputDropMsg()\">";
        print "<option value=\"\">$qnotelabel</option>\n";
 	foreach ($dropdownmsga as $msg) {
