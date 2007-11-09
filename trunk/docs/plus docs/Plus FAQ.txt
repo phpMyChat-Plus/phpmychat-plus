@@ -34,9 +34,13 @@ Before addition:
 INSERT INTO `c_reg_users` VALUES ('blabla', '', '47e014ee34869ded7e5236541246319d', 'FirstName', 'LastName', 'WorldWideWeb', '', 'bla@...', '0', 'user', '', 1130763311, '80.96.72.233', '1');
 (last '1' stands for gender of that user, so it might have '', '1' or '2' values)
 After addition:
+- for 1.90:
 INSERT INTO `c_reg_users` VALUES ('blabla', '', '47e014ee34869ded7e5236541246319d', 'FirstName', 'LastName', 'WorldWideWeb', '', 'bla@...', '0', 'user', '', 1130763311, '80.96.72.233', '1', 1, '', '', '', '', '', '', './images/avatars/def_avatar.gif');
+- for 1.92 (added two more empty fields at the beggining and at the end):
+INSERT INTO `c_reg_users` VALUES ('', '', 'blabla', '', '47e014ee34869ded7e5236541246319d', 'FirstName', 'LastName', 'WorldWideWeb', '', 'bla@...', '0', 'user', '', 1130763311, '80.96.72.233', '1', 1, '', '', '', '', '', '', './images/avatars/def_avatar.gif', '', '');
+For an upgrade from 1.90 to 1.92, only the first <'', '',> and last <, '', ''> should be added.
 3. Then copy all your new reg lines into plus/instalation/mysql.sql, in the according section of that file (there should be as many lines with INSERT INTO as your registered users number. If you migrate, you should delete the admin account line from mysql.sql, but let the plusbot account unaltered at this point!). It is also a good opportunity to promote your users to admin (just replace the value of desired user to be promoted, from 'moderator' or 'user' to 'admin')
-4. Then follow the plus/docs/Instructions.txt
+4. Then follow the plus/docs/plus docs/Instructions.txt
 
 3Q.
 The installation process is so complicated for me...

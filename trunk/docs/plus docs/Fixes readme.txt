@@ -11,12 +11,14 @@ When you install Firefox2 and/or QuickTime (RealPlayer), a QuickTime plugin will
 
 Fixes History:
 After 1.92 release fixes:
+09.11.2007:
+- lib/logs.lib.php - a small fix for messages storage;
 06.11.2007:
 - input.php - a small fix for Top administrators Quick menu;
 - lib/logs.lib.php - a small fix for smilies;
 - localization/italian/localized.admin.php;
-- localization/romanian/loclized.admin.php;
-
+- localization/romanian/localized.admin.php;
+- config/style...css.php - added a header row into each css file, to get rid of several Mozilla warnings;
 
 03.11.2007 - 1.92:
 - 1.92 final release get announced and available for download; (release)
