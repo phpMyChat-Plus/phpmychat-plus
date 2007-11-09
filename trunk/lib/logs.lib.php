@@ -168,7 +168,7 @@ if (eregi("stripslashes",$messageu) || eregi("sprintf",$messageu) || eregi("L_",
 {
 	$messageu = '<?php echo('.$messageu.'); ?>';
 }
-$messageu = urldecode($message);
+$messageu = urldecode($messageu);
 $messageu = str_replace("links.php?link=","../../../links.php?link=",$messageu);
 $messageu = str_replace("target=\"_blank\"></a>","target=\"_blank\">Click here</a>",$messageu);
 $messageu = str_replace('alt="Send email"','target="_blank" title="<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>"',$messageu);
