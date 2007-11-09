@@ -35,16 +35,16 @@ if ($address != "" && $address != " *" && $username != "SYS welcome" && $usernam
 $address = "<b>".$address."</b>";
 if ($username == "SYS welcome") $username = $address;
 $message = stripslashes($result["message"]);
-$message = str_replace("src=images","src=../../../images",$message);
-$message = str_replace("<!-- UPDTUSRS //-->","",$message);
+$message = eregi_replace("src=images","src=../../../images",$message);
+$message = eregi_replace("<!-- UPDTUSRS //-->","",$message);
 if (eregi("stripslashes",$message) || eregi("sprintf",$message) || eregi("L_",$message))
 {
 	$message = "<?php echo(".$message."); ?>";
 }
 $message = urldecode($message);
-$message = str_replace("links.php?link=","../../../links.php?link=",$message);
-$message = str_replace("target=\"_blank\"></a>","target=\"_blank\">Click here</a>",$message);
-$message = str_replace('alt="Send email"','target="_blank" title="<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>"',$message);
+$message = eregi_replace("links.php?link=","../../../links.php?link=",$message);
+$message = eregi_replace("target=\"_blank\"></a>","target=\"_blank\">Click here</a>",$message);
+$message = eregi_replace('alt="Send email"','target="_blank" title="<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>"',$message);
 $NewMsg = "\r\n<tr>\r\n<td valign=top nowrap=\"nowrap\">".$time_posted."</td>\r\n<td valign=top nowrap=\"nowrap\">";
 $NewMsg .= $room."</td>\r\n<td valign=top nowrap=\"nowrap\">";
 $NewMsg .= "<b>".$username."</b>";
@@ -162,16 +162,16 @@ if ($addressu != "" && $addressu != " *" && $usernameu != "SYS welcome" && $user
 $addressu = "<b>".$addressu."</b>";
 if ($usernameu == "SYS welcome") $usernameu = $addressu;
 $messageu = stripslashes($resultu["message"]);
-$messageu = str_replace("src=images","src=../../../images",$messageu);
-$messageu = str_replace("<!-- UPDTUSRS //-->","",$messageu);
+$messageu = eregi_replace("src=images","src=../../../images",$messageu);
+$messageu = eregi_replace("<!-- UPDTUSRS //-->","",$messageu);
 if (eregi("stripslashes",$messageu) || eregi("sprintf",$messageu) || eregi("L_",$messageu))
 {
 	$messageu = '<?php echo('.$messageu.'); ?>';
 }
 $messageu = urldecode($messageu);
-$messageu = str_replace("links.php?link=","../../../links.php?link=",$messageu);
-$messageu = str_replace("target=\"_blank\"></a>","target=\"_blank\">Click here</a>",$messageu);
-$messageu = str_replace('alt="Send email"','target="_blank" title="<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>"',$messageu);
+$messageu = eregi_replace("links.php?link=","../../../links.php?link=",$messageu);
+$messageu = eregi_replace("target=\"_blank\"></a>","target=\"_blank\">Click here</a>",$messageu);
+$messageu = eregi_replace('alt="Send email"','target="_blank" title="<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>"',$messageu);
 $NewMsgu = "\r\n<tr>\r\n<td valign=top nowrap=\"nowrap\">".$time_postedu."</td>\r\n<td valign=top nowrap=\"nowrap\">";
 $NewMsgu .= $roomu."</td>\r\n<td valign=top nowrap=\"nowrap\">";
 $NewMsgu .= "<b>".$usernameu."</b>";
