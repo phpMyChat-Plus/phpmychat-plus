@@ -386,7 +386,7 @@ if ( $p == 5 )
 					$pass_crypt = MD5 ( $_POST['pass1'] );
 					mysql_connect ( $dbhost, $dbuname, $dbpass );
 					mysql_select_db ( $dbname );
-					mysql_query ( "INSERT INTO c_reg_users VALUES ('', '', '$admin', '1', '$pass_crypt', '', '', '', '', '', 0, 'admin', '', '', '', 0, 1, '', '', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', '', 'red', './images/avatars/def_avatar.gif', '0', '');" );
+					mysql_query ( "INSERT INTO c_reg_users VALUES ('', '', '$admin', '1', '$pass_crypt', '', '', '', '', '', 0, 'admin', '', '', '', 0, 1, '', '', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', '', 'red', 'images/avatars/def_avatar.gif', '0', '');" );
 				}
 			}
 		}
@@ -546,7 +546,7 @@ mysql_select_db(C_DB_NAME);
 $query = "SELECT * FROM ".C_CFG_TBL."";
 $result = mysql_query($query);
 $row = mysql_fetch_row($result);
-define("C_SUPPORT_PAID", '');
+define("C_SUPPORT_PAID", "");
 
 $MSG_DEL        			= $row[1];
 $USR_DEL		          = $row[2];
@@ -1112,7 +1112,7 @@ else {
   	fputs ( $fh, '$query = "SELECT * FROM ".C_CFG_TBL."";'.$lfeed );
   	fputs ( $fh, '$result = mysql_query($query);'.$lfeed );
   	fputs ( $fh, '$row = mysql_fetch_row($result);'.$lfeed );
-  	fputs ( $fh, 'define("C_SUPPORT_PAID", '');'.$lfeed );
+  	fputs ( $fh, 'define("C_SUPPORT_PAID", "");'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '$MSG_DEL        			= $row[1];'.$lfeed );
   	fputs ( $fh, '$USR_DEL		          = $row[2];'.$lfeed );
