@@ -27,7 +27,7 @@ if (d) d.style.display='none';
 //-->
 </script>
 <style type="text/css" media="screen">
-<!-- 
+<!--
 -->
 </style>
 </HEAD>
@@ -79,7 +79,7 @@ if (UPD_CHECK)
 }
 ?>
 <div id="menu">
-	<dl>			
+	<dl>
 		<dt onmouseover="javascript:show('smenu1');">General settings</dt>
 			<dd id="smenu1" onmouseover="javascript:show('smenu1');" onmouseout="javascript:show('');">
 				<ul>
@@ -92,7 +92,7 @@ if (UPD_CHECK)
 				</ul>
 			</dd>
 	</dl>
-	<dl>	
+	<dl>
 		<dt onmouseover="javascript:show('smenu2');">Interface</dt>
 			<dd id="smenu2" onmouseover="javascript:show('smenu2');" onmouseout="javascript:show('');">
 				<ul>
@@ -102,7 +102,7 @@ if (UPD_CHECK)
 				</ul>
 			</dd>
 	</dl>
-	<dl>	
+	<dl>
 		<dt onmouseover="javascript:show('smenu3');">Features & Mods</dt>
 			<dd id="smenu3" onmouseover="javascript:show('smenu3');" onmouseout="javascript:show('');">
 				<ul>
@@ -118,7 +118,7 @@ if (UPD_CHECK)
 				</ul>
 			</dd>
 	</dl>
-	<dl>	
+	<dl>
 		<dt onmouseover="javascript:show('smenu4');">Help & Support</dt>
 			<dd id="smenu4" onmouseover="javascript:show('smenu4');" onmouseout="javascript:show('');">
 				<ul>
@@ -130,10 +130,10 @@ if (UPD_CHECK)
 					<li><a href="http://tech.groups.yahoo.com/group/phpmychat/" target=_blank Title="Open the phpMyChat Yahoo Support Group Page" onMouseOver="window.status='Open the phpMyChat Yahoo Support Group Page.'; return true">Support Group page</a></li>
 					<li><a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Fixes readme.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_VERSION); ?>" target=_blank Title="Open the <?php echo(APP_VERSION.APP_MINOR); ?> Release notes" onMouseOver="window.status='Open the <?php echo(APP_VERSION.APP_MINOR); ?> Release notes.'; return true">Read <?php echo(APP_VERSION.APP_MINOR); ?> notes</a></li>
  <?php
-  if(UPD_CHECK && $app_last_version > $app_version) 
+  if(UPD_CHECK && (($app_last_version > $app_version) || (($app_last_version == $app_version) && (eregi_replace("-ß","",APP_LAST_MINOR) > eregi_replace("-ß","",APP_MINOR) || eregi_replace("-f","",APP_LAST_MINOR) > eregi_replace("-f","",APP_MINOR)))))
  {
  	?>
- 						<li><a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Fixes readme.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_LAST_VERSION); ?>" target=_blank Title="Open the <?php echo(APP_LAST_VERSION); ?> Release notes" onMouseOver="window.status='Open the <?php echo(APP_LAST_VERSION); ?> Release notes.'; return true">Latest <?php echo(APP_LAST_VERSION); ?> notes</a></li>
+ 						<li><a href="http://www.ciprianmp.com/atm/index.php?directory=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_LAST_VERSION); ?>/Fixes/" target=_blank Title="Download the <?php echo(APP_LAST_VERSION.APP_LAST_MINOR); ?> Update" onMouseOver="window.status='Download the <?php echo(APP_LAST_VERSION.APP_LAST_MINOR); ?> Update.'; return true">Download <?php echo(APP_LAST_VERSION.APP_LAST_MINOR); ?></a></li>
  <?php
  }
  	?>
@@ -158,7 +158,7 @@ if (UPD_CHECK)
 		?>
 <DIV><P><TABLE ALIGN=CENTER ALIGN=CENTER BORDER=0 CELLPADDING=0 CLASS=menu style=background:white><TR><TD CLASS=success ALIGN=CENTER><?php echo("<br />- ".sprintf(A_SHEET5_0, APP_VERSION.APP_MINOR)." -<br />"); ?>
 <?php
-		if (($app_last_version > $app_version) || (($app_last_version == $app_version) && (eregi_replace("-ß","",APP_LAST_MINOR) > eregi_replace("-ß","",APP_MINOR))))
+		if (($app_last_version > $app_version) || (($app_last_version == $app_version) && (eregi_replace("-ß","",APP_LAST_MINOR) > eregi_replace("-ß","",APP_MINOR) || eregi_replace("-f","",APP_LAST_MINOR) > eregi_replace("-f","",APP_MINOR))))
 		{
 		?>
 			<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
@@ -167,7 +167,7 @@ if (UPD_CHECK)
 			// -->
 			</SCRIPT>
 <?php
-			echo("</TD></TR><TR><TD CLASS=error ALIGN=CENTER><H3>".sprintf(A_SHEET5_1,APP_LAST_VERSION.APP_LAST_MINOR)."</H3>");
+			echo("</TD></TR><TR><TD CLASS=error ALIGN=CENTER><H3>".sprintf(A_SHEET5_1,APP_LAST_VERSION.APP_LAST_MINOR)."<br />Download the ".APP_LAST_VERSION.APP_LAST_MINOR." update from <a href=\"http://www.ciprianmp.com/atm/index.php?directory=programming/phpMyChat/Ciprian_releases/Plus_version/".APP_LAST_VERSION."/Fixes\" target=_blank Title=\"Download the ".APP_LAST_VERSION.APP_LAST_MINOR." Update\" onMouseOver=\"window.status='Download the ".APP_LAST_VERSION.APP_LAST_MINOR." Update.'; return true\">here</a></H3>");
 		}
 ?>
 <br /></TD></TR></TABLE></P></DIV>
@@ -496,7 +496,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>Autoboot time for inactive users in rooms.</b><br />
-    	<i>Hint: This autoboot feature forces users to be active in rooms. If 
+    	<i>Hint: This autoboot feature forces users to be active in rooms. If
     	they want to be lurking, they should just use the lurking page. Admins, moderators and away users won't be booted</i></td>
     <td>
         <select name="vCHAT_BOOT">
@@ -507,7 +507,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </td>
 </tr>
 <tr>
-    <td><b>Delete registered users accounts not active in this interval (0 for never).</b>    							
+    <td><b>Delete registered users accounts not active in this interval (0 for never).</b>
     </td>
     <td><input name="vREG_DEL" type="text" size="1" maxlength="4" value="<? echo $REG_DEL; ?>"> (days)</td>
 </tr>
@@ -855,7 +855,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     <td><input name="vTMZ_OFFSET" type="text" size="2" maxlength="5" value="<? echo $TMZ_OFFSET; ?>"><br />
         <select name="vWORLDTIME">
 	        <option value="0"<? if($WORLDTIME==0){ echo " selected"; } ?>>Server time (standard)
-	        <option value="1"<? if($WORLDTIME==1){ echo " selected"; } ?>>Worldtime in Chat only 
+	        <option value="1"<? if($WORLDTIME==1){ echo " selected"; } ?>>Worldtime in Chat only
 	        <option value="2"<? if($WORLDTIME==2){ echo " selected"; } ?>>Worldtime on Index & Chat
         </select>
 			</td>
