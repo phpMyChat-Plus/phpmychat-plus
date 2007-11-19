@@ -42,7 +42,7 @@ if (eregi("stripslashes",$message) || eregi("sprintf",$message) || eregi("L_",$m
 	$message = "<?php echo(".$message."); ?>";
 }
 $message = urldecode($message);
-$message = eregi_replace("links.php?link=","../../../links.php?link=",$message);
+$message = str_replace("links.php?link=||","",$message);
 $message = eregi_replace("target=\"_blank\"></a>","target=\"_blank\">Click here</a>",$message);
 $message = eregi_replace('alt="Send email"','target="_blank" title="<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>"',$message);
 $NewMsg = "\r\n<tr>\r\n<td valign=top nowrap=\"nowrap\">".$time_posted."</td>\r\n<td valign=top nowrap=\"nowrap\">";
@@ -169,7 +169,7 @@ if (eregi("stripslashes",$messageu) || eregi("sprintf",$messageu) || eregi("L_",
 	$messageu = '<?php echo('.$messageu.'); ?>';
 }
 $messageu = urldecode($messageu);
-$messageu = eregi_replace("links.php?link=","../../../links.php?link=",$messageu);
+$messageu = str_replace("links.php?link=||","",$messageu);
 $messageu = eregi_replace("target=\"_blank\"></a>","target=\"_blank\">Click here</a>",$messageu);
 $messageu = eregi_replace('alt="Send email"','target="_blank" title="<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>"',$messageu);
 $NewMsgu = "\r\n<tr>\r\n<td valign=top nowrap=\"nowrap\">".$time_postedu."</td>\r\n<td valign=top nowrap=\"nowrap\">";
