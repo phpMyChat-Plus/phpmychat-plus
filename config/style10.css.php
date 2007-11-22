@@ -74,7 +74,7 @@ BODY.mainframe
 
 TABLE, TR, TD, TH
 {
-	color: #000000;
+	color: <?php echo($CD); ?>;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
 	vertical-align: top;
