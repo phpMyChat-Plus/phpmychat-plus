@@ -11,6 +11,8 @@ When you install Firefox2 and/or QuickTime (RealPlayer), a QuickTime plugin will
 
 Fixes History:
 After 1.92 release fixes (f means the released fix):
+24.11.2007 - f5:
+- config/style1-10.css.php - default text color fix for pictures posted and other system messages;
 19.11.2007 - f4:
 - admin/admin.php - added a new minor format "-fn" to help admins get the new fixes right from the panel;
 - lib/logs.php - important fix for posted links;
