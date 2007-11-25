@@ -142,7 +142,7 @@ CREATE TABLE ".$t_config." (
  ADMIN_NOTIFY enum('0','1') NOT NULL default '1',
  ADMIN_NAME varchar(35) NOT NULL default 'Your name/chat name here',
  ADMIN_EMAIL varchar(35) NOT NULL default 'Your email address here',
- CHAT_URL varchar(50) NOT NULL default 'Your server/chat URL here',
+ CHAT_URL varchar(100) NOT NULL default 'Your server/chat URL here',
  SHOW_ADMIN enum('0','1') NOT NULL default '1',
  SHOW_DEL_PROF enum('0','1') NOT NULL default '1',
  VERSION enum('0','1','2') NOT NULL default '2',
@@ -179,7 +179,7 @@ CREATE TABLE ".$t_config." (
  PRIV_POPUP enum('0','1') NOT NULL default '1',
  SHOW_ETIQ_IN_HELP enum('0','1') NOT NULL default '1',
  SHOW_LOGO enum('0','1') NOT NULL default '1',
- LOGO_IMG varchar(255) NOT NULL default './images/icon.gif',
+ LOGO_IMG varchar(255) NOT NULL default 'images/icon.gif',
  LOGO_OPEN varchar(255) NOT NULL default './',
  LOGO_ALT varchar(255) NOT NULL default 'My Chat based on phpMyChat plus',
  SHOW_OWNER enum('0','1') NOT NULL default '1',
@@ -225,7 +225,7 @@ CREATE TABLE ".$t_config." (
  COLOR_NAMES enum('0','1') NOT NULL default '1',
  USE_AVATARS enum('0','1') NOT NULL default '1',
  NUM_AVATARS smallint(1) NOT NULL default '55',
- AVA_RELPATH varchar(255) NOT NULL default './images/avatars/',
+ AVA_RELPATH varchar(255) NOT NULL default 'images/avatars/',
  DEF_AVATAR varchar(255) NOT NULL default 'def_avatar.gif',
  AVA_WIDTH tinyint(1) NOT NULL default '25',
  AVA_HEIGHT tinyint(1) NOT NULL default '25',
@@ -315,7 +315,7 @@ ALTER TABLE ".$t_reg_users."
 			ADD favlink1 varchar(255) NOT NULL default '',
 			ADD slang varchar(255) NOT NULL default '',
 			ADD colorname varchar(25) NOT NULL default '',
-			ADD avatar varchar(255) NOT NULL default './images/avatars/def_avatar.gif',
+			ADD avatar varchar(255) NOT NULL default 'images/avatars/def_avatar.gif',
 			ADD s_question enum('0','1','2','3','4') NOT NULL default '0',
 			ADD s_answer varchar(64) NOT NULL default '',
 			ADD PRIMARY KEY (cid),
@@ -328,10 +328,10 @@ mysql_query("
 UPDATE ".$t_reg_users." SET reg_time =".time().";
 ", $conn);
 mysql_query("
-INSERT INTO ".$t_reg_users." VALUES ('', '', 'plusbot', '1', '3901e4a6c3d27909afef4c22f8337da8', 'Bot', 'phpMyChat - Plus', 'WorldWideWeb', '', 'bot@bot.com', '0', 'admin', '', 1130763311, '-No tracking IP-', '1', '0', './images/alice.gif', 'I am a Robot originally called Alice. I am proud to be the first Artificial Intelligence on the net! Please test my capabilities as you wish! To start a public conversation with me just type \"hello myname\" in the room I am active in, to stop the conversation type \"bye myname\" or \"myname> bye\". But we can also talk in private - just click on my name whenever you need a shoulder to cry on :p Ohhh... I wish to express my gratitude to Roy, Popeye and Ciprian for making me available for chatting in here. :)', 'http://www.alicebot.org/documentation/', 'http://sourceforge.net/forum/?group_id=43190', 'English, German', 'olive', './images/avatars/bot_avatar.gif', '0', '' );
+INSERT INTO ".$t_reg_users." VALUES ('', '', 'plusbot', '1', '3901e4a6c3d27909afef4c22f8337da8', 'Bot', 'phpMyChat - Plus', 'WorldWideWeb', '', 'bot@bot.com', '0', 'admin', '', 1130763311, '-No tracking IP-', '1', '0', 'images/alice.gif', 'I am a Robot originally called Alice. I am proud to be the first Artificial Intelligence on the net! Please test my capabilities as you wish! To start a public conversation with me just type \"hello myname\" in the room I am active in, to stop the conversation type \"bye myname\" or \"myname> bye\". But we can also talk in private - just click on my name whenever you need a shoulder to cry on :p Ohhh... I wish to express my gratitude to Roy, Popeye and Ciprian for making me available for chatting in here. :)', 'http://www.alicebot.org/documentation/', 'http://sourceforge.net/forum/?group_id=43190', 'English, German', 'olive', 'images/avatars/bot_avatar.gif', '0', '' );
 ", $conn);
 mysql_query("
-INSERT INTO ".$t_reg_users." VALUES ('', '', 'Random_Quote', '1', 'ef93e0948b007826a1a7a49a17b72a59', 'Random Quote', 'phpMyChat - Plus', 'WorldWideWeb', '', 'quote@quote.com', '0', 'admin', '', 1130763311, '-No tracking IP-', '1', '0', './images/avatars/avatar56.gif', 'I am a virtual user, added here to post random quotes at my admin`s will. Ohhh... I wish to express my gratitude to Ciprian for making me available for enlighting you in here. :)', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', 'English (any actually)', 'limegreen', './images/avatars/quote_avatar.gif', '0', '' );
+INSERT INTO ".$t_reg_users." VALUES ('', '', 'Random_Quote', '1', 'ef93e0948b007826a1a7a49a17b72a59', 'Random Quote', 'phpMyChat - Plus', 'WorldWideWeb', '', 'quote@quote.com', '0', 'admin', '', 1130763311, '-No tracking IP-', '1', '0', 'images/avatars/avatar56.gif', 'I am a virtual user, added here to post random quotes at my admin’s will. Ohhh... I wish to express my gratitude to Ciprian for making me available for enlighting you in here. :)', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', 'English (any actually)', 'limegreen', 'images/avatars/quote_avatar.gif', '0', '' );
 ", $conn);
 mysql_query("
 ALTER TABLE ".$t_users."
