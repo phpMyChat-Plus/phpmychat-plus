@@ -14,6 +14,7 @@ After 1.92 release fixes (f means the released fix):
 24.11.2007 - f5:
 - config/style1-10.css.php - default text color fix for pictures posted and other system messages;
 - lurking.php - small picture posted text fix;
+- links.php - small security fix;
 19.11.2007 - f4:
 - admin/admin.php - added a new minor format "-fn" to help admins get the new fixes right from the panel;
 - lib/logs.php - important fix for posted links;

@@ -8,6 +8,12 @@ if (isset($_GET))
 	};
 };
 
+
+if (isset($HTTP_COOKIE_VARS["CookieLang"])) $L = urldecode($HTTP_COOKIE_VARS["CookieLang"]);
+require("./config/config.lib.php");
+if (!isset($L) || $L == "") $L = C_LANGUAGE;
+require("./localization/".$L."/localized.chat.php");
+
 $L="";
 $M="";
 $U="";
@@ -15,11 +21,6 @@ $PWD_Hash="";
 $R="";
 $PASSWORD="";
 $Ver="";
-
-if (isset($HTTP_COOKIE_VARS["CookieLang"])) $L = urldecode($HTTP_COOKIE_VARS["CookieLang"]);
-require("./config/config.lib.php");
-if (!isset($L) || $L == "") $L = C_LANGUAGE;
-require("./localization/".$L."/localized.chat.php");
 
 $link=htmlentities($_GET['link']);
 $purl=urldecode($link);
