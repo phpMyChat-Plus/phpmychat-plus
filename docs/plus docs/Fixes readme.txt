@@ -12,11 +12,13 @@ When you install Firefox2 and/or QuickTime (RealPlayer), a QuickTime plugin will
 Fixes History:
 After 1.92 release fixes (f means the released fix):
 24.11.2007 - f5:
+- install/install.php - important fix (plus directory could remain chmod 777 after installer was run);
+- admin/admin5.php + installer files - extended the CHAT_URL box to 100 chars;
 - config/style1-10.css.php - default text color fix for pictures posted and other system messages;
 - lurking.php - small picture posted text fix;
 - links.php - small security fix;
 19.11.2007 - f4:
-- admin/admin.php - added a new minor format "-fn" to help admins get the new fixes right from the panel;
+- admin/admin5.php - added a new minor format "-fn" to help admins get the new fixes right from the panel;
 - lib/logs.php - important fix for posted links;
 12.11.2007 - f3:
 - install/install.php - important fix (installer should work fine now);

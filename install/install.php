@@ -206,7 +206,8 @@ if ( $p == 2 )
   if (ftp_chmod($conn_id, 777, $ftppath."bot/subs.inc") !== false) { } else { $error3 .= L_FILE_ERROR1." &quot;/bot/subs.inc&quot; ".L_FILE_ERROR2."<br><br>\n"; }
   if (ftp_chmod($conn_id, 777, $ftppath."botfb") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/botfb&quot; ".L_FOLD_ERROR2."<br><br>\n"; }
   if (ftp_chmod($conn_id, 777, $ftppath."logs") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/logs&quot; ".L_FOLD_ERROR2."<br><br>\n"; }
-  if (is_dir($ChatPath.$logdir)) { if (ftp_chmod($conn_id, 777, $ftppath.$logdir) !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;".$logdir."&quot; ".L_FOLD_ERROR2."<br><br>\n"; } }
+  if (ftp_chmod($conn_id, 777, $ftppath."logsadmin") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/logsadmin&quot; ".L_FOLD_ERROR2."<br><br>\n"; }
+//  if (is_dir($ChatPath.$logdir)) { if (ftp_chmod($conn_id, 777, $ftppath.$logdir) !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;".$logdir."&quot; ".L_FOLD_ERROR2."<br><br>\n"; } }
   	// close the connection
 	@ftp_close($conn_id);
 }
