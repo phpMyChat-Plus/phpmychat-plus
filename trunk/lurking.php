@@ -68,7 +68,7 @@ if($DbLink1->num_rows() > 0)
 		}
 		if ($User == "SYS image")
 		{
-      $NewMsg .= "<td width=1% nowrap=\"nowrap\" colspan=2><FONT class=\"notify\">".L_PIC." ${Dest}</FONT> <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_FULLSIZE_PIC).".'; return true\" title=\"".sprintf(L_CLICK,L_FULLSIZE_PIC)."\" target=_blank>".$Message."</A></td>";
+      $NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>[${Dest}]</B></td><td><FONT class=\"notify\">".L_PIC." ${Dest}:</FONT> <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_FULLSIZE_PIC).".'; return true\" title=\"".sprintf(L_CLICK,L_FULLSIZE_PIC)."\" target=_blank>".$Message."</A></td>";
 		}
 		if ($User == "SYS announce")
 		{
