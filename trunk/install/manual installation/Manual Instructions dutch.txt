@@ -39,7 +39,7 @@ Verander hier geen enkele data. Je kan deze later aanpassen, via de config page 
 Merk op: Als je de admin naam wilt veranderen naar die jij wilt gebruiken, is dit een mooie kans, maar verander niet het paswoord.
 Standaard, de admin account is admin/admin.
 Go to line 291:
-INSERT INTO c_reg_users VALUES ('', '', 'admin', '1', '21232f297a57a5a743894a0e4a801fc3', '', '', '', '', '', 0, 'admin', '', '', '', 0, 1, '', '', '', '', '', 'red', './images/avatars/def_avatar.gif');
+INSERT INTO c_reg_users VALUES ('', '', 'admin', '1', '21232f297a57a5a743894a0e4a801fc3', '', '', '', '', '', 0, 'admin', '', '', '', 0, 1, '', '', '', '', '', 'red', 'images/avatars/def_avatar.gif');
 en verander de eerste "admin" met de door jou gewenste gebruikersnaam. Het paswoord is nog steeds "admin", wat gemakkelijk te veranderen is in edituser.php.
 Als je toch liever het paswoord wilt veranderen, kan je deze link gebruiken http://ciprianmp.com/scripts/hash.php om een nieuw passwoord te maken, dan copy deze en vervang dan deze "21232f297a57a5a743894a0e4a801fc3" (verander niet het begin/einde)
 Verander GEEN enkele data op de volgende regel(dit is de benodigde bot)!

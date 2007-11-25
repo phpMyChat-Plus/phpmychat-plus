@@ -617,7 +617,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>Enter your chat URL to be sent on email headers.</b></td>
-    <td><input name="vCHAT_URL" type="text" size="25" maxlength="50" value="<? echo $CHAT_URL; ?>"></td>
+    <td><input name="vCHAT_URL" type="text" size="25" maxlength="100" value="<? echo $CHAT_URL; ?>"></td>
 </tr>
 <tr>
     <td><b>Public Name of your chat server as you wish to be known on the web.</b></td>

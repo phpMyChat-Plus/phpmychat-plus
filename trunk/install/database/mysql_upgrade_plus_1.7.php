@@ -5,6 +5,7 @@ ALTER TABLE ".$t_ban_users."
 ", $conn);
 mysql_query("
 ALTER TABLE ".$t_config."
+			CHANGE CHAT_URL CHAT_URL varchar(100) NOT NULL default 'Your server/chat URL here',
 			CHANGE ALLOW_ENTRANCE_SOUND ALLOW_ENTRANCE_SOUND enum('0','1','2','3') NOT NULL default '1',
 			CHANGE INSTALL_DATE INSTALL_DATE date NOT NULL default '0000-00-00',
 			CHANGE COLOR_CDC1 COLOR_CD8 VARCHAR(25) NOT NULL,
@@ -104,11 +105,11 @@ UPDATE ".$t_reg_users." SET
 			slang = 'English, German',
 			favlink = 'http://www.alicebot.org/documentation/',
 			favlink1 = 'http://sourceforge.net/forum/?group_id=43190',
-			avatar = './images/avatars/bot_avatar.gif'
+			avatar = 'images/avatars/bot_avatar.gif'
 	WHERE email='bot@bot.bot.com';
 ", $conn);
 mysql_query("
-INSERT INTO ".$t_reg_users." VALUES ('', '', 'Random_Quote', '1', 'ef93e0948b007826a1a7a49a17b72a59', 'Random Quote', 'phpMyChat - Plus', 'WorldWideWeb', '', 'quote@quote.com', '0', 'admin', '', 1130763311, '-No tracking IP-', '1', '0', './images/avatars/avatar56.gif', 'I am a virtual user, added here to post random quotes at my admin`s will. Ohhh... I wish to express my gratitude to Ciprian for making me available for enlighting you in here. :)', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', 'English (any actually)', 'limegreen', './images/avatars/quote_avatar.gif', '0', '');
+INSERT INTO ".$t_reg_users." VALUES ('', '', 'Random_Quote', '1', 'ef93e0948b007826a1a7a49a17b72a59', 'Random Quote', 'phpMyChat - Plus', 'WorldWideWeb', '', 'quote@quote.com', '0', 'admin', '', 1130763311, '-No tracking IP-', '1', '0', 'images/avatars/avatar56.gif', 'I am a virtual user, added here to post random quotes at my admin’s will. Ohhh... I wish to express my gratitude to Ciprian for making me available for enlighting you in here. :)', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', 'English (any actually)', 'limegreen', 'images/avatars/quote_avatar.gif', '0', '');
 ", $conn);
 mysql_query("
 ALTER TABLE ".$t_users."
