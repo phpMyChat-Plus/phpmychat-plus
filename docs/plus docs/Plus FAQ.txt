@@ -205,5 +205,16 @@ Save the file and upload it to ftp. That’s all!
 Important: never change directly the files provided in localization/"language"/ folder - if you do so, you will fail to upgrade your chat in the future without loosing your personalizations.
 Note: You can do the same with expressions from localized.admin.php and localized.tutorial.php - all should be redefined only in plus/localization/_owner/localized.owner.php
 
+16Q.
+As soon as the install is over it will not load phpMyChat.  I get the following error:
+Internal Server Error
+The server encountered an internal error or misconfiguration and was unable to complete your request.
+Optional:
+When I look at my errorlog I see the following message:
+[25-Nov-2007 06:42:08] PHP Warning:  Unknown(): Your script possibly relies on a session side-effect which existed until PHP 4.2.3. Please be advised that the session extension does not consider global variables as a source of data, unless register_globals is enabled. You can disable this functionality and this warning by setting session.bug_compat_42 or session.bug_compat_warn to off, respectively. in Unknown on line 0
+16A.
+Check if the permissions of your "plus" (chat name) and "config" folders are 777. If so, change them to 755 (chmod). Sometimes, due to different servers configurtion, they remain 777 after the installing process.
+Reply: As soon as I changed the permission of the plus folder (chat folder in my case) it worked.
+
 
 More to come...
