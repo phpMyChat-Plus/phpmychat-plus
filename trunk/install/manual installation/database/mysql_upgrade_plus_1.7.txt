@@ -90,7 +90,7 @@ UPDATE c_config SET
 			LAST_SAVED_ON = NOW()
 	WHERE ID='0';
 
-ALTER TABLE lurkers
+ALTER TABLE c_lurkers
 			ADD username varchar(30) NOT NULL default '';
 
 ALTER TABLE c_messages
