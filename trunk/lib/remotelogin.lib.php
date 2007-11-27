@@ -1125,7 +1125,7 @@ function send_headers($title, $icon)
 	?>
 	<!--
 	The lines below are usefull for debugging purpose, please do not remove them!
-	Release: phpMyChat Plus 1.91-ß6
+	Release: phpMyChat Plus 1.92-f6
 	© 2005-2007 Ciprian Murariu (ciprianmp@yahoo.com)
 	Based on phpMyChat 0.14.6-dev (also called 0.15.0)
 	© 2000-2007 The phpHeaven Team (http://www.phpheaven.net/)
