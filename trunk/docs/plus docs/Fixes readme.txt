@@ -12,6 +12,7 @@ When you install Firefox2 and/or QuickTime (RealPlayer), a QuickTime plugin will
 Fixes History:
 After 1.92 release fixes (f means the released fix):
 24.11.2007 - f5:
+- lib/logs.lib.php + logsadmin/header.html - a relative path fix for servers running on SAFE MODE ON;
 - each localized.chat.php file - some extra blanks removed;
 - mysql manual upgrade files fix - not needed for already installed/working chats;
 - install/install.php - important fix (plus directory could remain chmod 777 after installer was run) - not needed for already installed/working chats;
