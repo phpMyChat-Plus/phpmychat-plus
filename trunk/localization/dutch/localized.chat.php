@@ -164,7 +164,7 @@ define("L_BANISHED", "%s is succesvol verbannen.");
 define("L_BANISHED_REASON", "%s is succesvol verbannen. (Reden: %s)");
 define("L_ANNOUNCE", "MEDEDELING");
 define("L_INVITE", "%s vraag hem of haar je te vergezellen in <a href=\"#\" onClick=\"window.parent.runCmd('%s','%s')\">%s</a> ruimte.");
-define("L_INVITE_REG", " je moet je registreren om deze ruimte in te kunnen.");
+define("L_INVITE_REG", "je moet je registreren om deze ruimte in te kunnen.");
 define("L_INVITE_DONE", "uw uitnodiging is verzonden aan %s.");
 define("L_OK", "Verstuur");
 define("L_BUZZ", "Buzzes Gallerij");
@@ -428,7 +428,7 @@ define("L_PASS_12", "Kies je vraag ...");
 define("L_ERR_PASS_1", "Verkeerde gebruikersnaam. Kies die van jou.");
 define("L_ERR_PASS_2", "Verkeerde email. Probeer opnieuw!");
 define("L_ERR_PASS_3", "Verkeerde geheime vraag.<br />Antwoord één van de onderstaande!");
-define("L_ERR_PASS_4", "Verkeerde  geheime antwoord. Probeer opnieuw!");
+define("L_ERR_PASS_4", "Verkeerde geheime antwoord. Probeer opnieuw!");
 define("L_ERR_PASS_5", "Je hebt nog niet de juiste privé/geheime data ingesteld.");
 define("L_ERR_PASS_6", "Je hebt nog niet jou privé/geheime data ingesteld.<br />Je kan niet dit formulier gebruiken.<br />Neem contact op met de admin!");
 
