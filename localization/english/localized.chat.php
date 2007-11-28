@@ -163,7 +163,7 @@ define("L_BANISHED", "%s has successfully been banished.");
 define("L_BANISHED_REASON", "%s has successfully been banished. (Reason: %s)");
 define("L_ANNOUNCE", "ANNOUNCE");
 define("L_INVITE", "%s requests that you join her/him into the <a href=\"#\" onClick=\"window.parent.runCmd('%s','%s')\">%s</a> room.");
-define("L_INVITE_REG", " You have to be registered to enter this room.");
+define("L_INVITE_REG", "You have to be registered to enter this room.");
 define("L_INVITE_DONE", "Your invitation has been sent to %s.");
 define("L_OK", "Send");
 define("L_BUZZ", "Buzzes Gallery");

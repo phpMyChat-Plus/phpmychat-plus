@@ -13,9 +13,9 @@ $FontSize = 10;
 define("L_TUTORIAL", "Yardım");
 
 define("L_WEL_1", "%s %s eski mesajların silinme süresi");
-define("L_WEL_2", " %s %s aktif olmayan kullanıcıların odadan çıkarılma süresi");
+define("L_WEL_2", "%s %s aktif olmayan kullanıcıların odadan çıkarılma süresi");
 
-define("L_CUR_1", " ");
+define("L_CUR_1", "");
 define("L_CUR_1a", "Şu anda");
 define("L_CUR_1b", "Şu anda");
 define("L_CUR_2", "sohbette");
@@ -23,7 +23,7 @@ define("L_CUR_3", "Şu anda sohbet odalarında bulunan kullanıcılar");
 define("L_CUR_4", "özel odalardaki kullanıcılar");
 define("L_CUR_5", "Gözlemleyen kullanıcı sayısı<br />(bu sayfaya bakıyorlar):");
 
-define("L_SET_1", "Lütfen kullanıcı bilgilerinizi yazın...");
+define("L_SET_1", "Lütfen kullanıcı bilgilerinizi yazın ...");
 define("L_SET_2", "Kullanıcı adınız");
 define("L_SET_3", "gösterilecek mesajların sayısı");
 define("L_SET_4", "her güncellemenin arasındaki zamanaşımı");
@@ -35,12 +35,12 @@ define("L_SET_9", "Kendi");
 define("L_SET_10", "genel");
 define("L_SET_11", "özel");
 define("L_SET_12", "odanızı oluşturun");
-define("L_SET_13", "Sonra ");
+define("L_SET_13", "Sonra");
 define("L_SET_14", "Sohbet Et");
 define("L_SET_15", "Mevcut özel odalar");
 define("L_SET_16", "Kullanıcılar tarafından oluşturulan özel odalar");
 define("L_SET_17", "avatarınızı (sanal simgenizi) seçin");
-define("L_SET_18", "Bu sayfayı favorilerinize ekleyin:  \"CTRL +D\" ye basın.");
+define("L_SET_18", "Bu sayfayı favorilerinize ekleyin: \"CTRL +D\" ye basın.");
 
 define("L_SRC", "ücretsiz olarak var");
 
@@ -164,8 +164,8 @@ define("L_KICKED_REASON", "Kullanıcı %s başarıyla dışarı atıldı. (Sebep
 define("L_BANISHED", "Kullanıcı %s başarıyla yasaklandı.");
 define("L_BANISHED_REASON", "Kullanıcı %s başarıyla yasaklandı. (Sebep: %s)");
 define("L_ANNOUNCE", "DUYURU");
-define("L_INVITE", "Kullanıcı %s  <a href=\"#\" onClick=\"window.parent.runCmd('%s','%s')\">%s</a> odasında kendisine katılmanızı istiyor.");
-define("L_INVITE_REG", " Bu odaya girmek için kayıt olmanız gerekir.");
+define("L_INVITE", "Kullanıcı %s <a href=\"#\" onClick=\"window.parent.runCmd('%s','%s')\">%s</a> odasında kendisine katılmanızı istiyor.");
+define("L_INVITE_REG", "Bu odaya girmek için kayıt olmanız gerekir.");
 define("L_INVITE_DONE", "Davetiniz %s isimli kullanıcıya gönderildi.");
 define("L_OK", "Gönder");
 define("L_BUZZ", "Düdük sesi galerisi");
@@ -186,7 +186,7 @@ define("L_NO_REG_USER", "Bu komutu kullanabilmeniz için kayıt olmanız gerekir
 // help popup
 define("L_HELP_TIT_1", "Yüz ifadeleri");
 define("L_HELP_TIT_2", "Mesajlar için yazı tipi düzenlemesi");
-define("L_HELP_FMT_1", " &lt;B&gt; &lt;/B&gt;, &lt;I&gt; &lt;/I&gt; &lt;U&gt; &lt;/U&gt; HTML etiketlerini kullanarak yazınızı kalın, italik, ya da altı çizili olarak yazabilirsiniz.<br />Örneğin, &lt;B&gt;bu şekilde yazmak&lt;/B&gt; şu sonucu verir: <B>bu şekilde yazmak</B>.");
+define("L_HELP_FMT_1", "&lt;B&gt; &lt;/B&gt;, &lt;I&gt; &lt;/I&gt; &lt;U&gt; &lt;/U&gt; HTML etiketlerini kullanarak yazınızı kalın, italik, ya da altı çizili olarak yazabilirsiniz.<br />Örneğin, &lt;B&gt;bu şekilde yazmak&lt;/B&gt; şu sonucu verir: <B>bu şekilde yazmak</B>.");
 define("L_HELP_FMT_2", "Bir elektronik posta ya da web adresi yazmak için adresleri hiç bir ekleme yapmadan olduğu gibi yazınız. Bağlantı otomatik olarak oluşturulacaktır.");
 define("L_HELP_TIT_3", "Komutlar");
 define("L_HELP_NOTE", "Bütün komutların İngilizce olarak kullanılması gerekir!");
@@ -223,7 +223,7 @@ define("L_HELP_CMD_21", "Odaya ve size mesaj göndermeye çalışan kullanıcıl
 define("L_HELP_CMD_22", "Mevcut odaya bir ikaz sesi ve opsiyonel olarak bir mesaj gönderir.<br /><u>Kullanılışı:</u><br />- Eski kullanım şekli: \"/buzz\" yazın veya \"/buzz [gösterilmesini istediğiniz mesaj]\" yazın - Bu işlem, Yönetici Panelinde belirlenmiş bir uyarı sesini çalar;<br />- Geliştirilmiş kullanım şekli: \"/buzz [~ses_adı]\" veya \"/buzz [~ses_adı] [gösterilmesini istediğiniz mesaj]\" - bu işlem, plus/sounds dizinindeki adını yazdığınız ses_adı.wav ses dosyasını çalar; lütfen \"~\" işaretinin yazıldığı yere dikkat ediniz. (sadece .wav uzantılı dosyalara izin verilir).<br />Varsayılan, bu bir Yönetici/Denetleyici komutu olarak ayarlanmıştır.");
 define("L_HELP_CMD_23", "<i>Fısıltı</i> (özel mesaj gönderimi). Mesaj, gönderilen kullanıcının hangi odada olduğu hiç farketmeksizin hedefine ulaşacaktır. Eğer kullanıcı çevrimiçi değilse, bu konuda bilgilendirileceğiniz bir mesaj alırsınız.");
 define("L_HELP_CMD_24", "Kullanım şekli: Konu adı en az 2 kelime içermelidir.<br />Bu komut mevcut odanın konu adını değiştirir. Diğer kullanıcıların konu adlarını değiştirmeye çalışmayın. Konu adı olarak önemli şeyleri kullanın.<br />Geçerli ayarlarda bu bir Denetleyici/Yönetici komutudur.<br />\"/topic top reset\" komutunun kullanılmasıyla o andaki geçerli konu adı silinecek ve yeniden odanın varsayılan konu adına dönüşecektir.<br />Tercihe bağlı olarak, \"/topic * {}\" komutu tam olarak aynı işi yapar fakat bir farkla ki, bu komut bütün odaları etkiler (genel konu adı ve genel konu adı düzenlemesi).");
-define("L_HELP_CMD_25", "Rasgele şans numaraları olan bir zar oyunu.<br />Kullanımı: /dice veya /dice [n] yazın;<br />n  <b>1 ve %s arasında </b> herhangi bir değer alabilir. (zarların yuvarlanma sayısını ifade eder). Eğer numara yazılmazsa, varsayılan maksimum yuvarlanma sayısı kullanılır.");
+define("L_HELP_CMD_25", "Rasgele şans numaraları olan bir zar oyunu.<br />Kullanımı: /dice veya /dice [n] yazın;<br />n <b>1 ve %s arasında </b> herhangi bir değer alabilir. (zarların yuvarlanma sayısını ifade eder). Eğer numara yazılmazsa, varsayılan maksimum yuvarlanma sayısı kullanılır.");
 define("L_HELP_CMD_26", "Bu, /dice komutunun daha karmaşık bir şeklidir.<br />Kullanımı: /{n1}d[n2] yazın veya /{n1}d;<br />n1 <b>1 ve %s arasında</b> herhangi bir değer alabilir. (zarların atılış sayısını ifade eder).<br />n2 <b>1 ve %s arasında</b> herhangi bir değer alabilir (zarların her atılıştaki yuvarlanma sayısını ifade eder).");
 define("L_HELP_CMD_27", "Sohbet boyunca belirli bir kullanıcının mesajlarını daha rahat takip edebilmek için üzerine renkli bant çekerek işaretler.<br />Kullanımı: /high {user} yazın veya kullanıcı adının sağındaki küçük <img src=./images/highlightOff.gif> şeklindeki kareye tıklayın (odalarda/kullanıcılar listesinde)");
 define("L_HELP_CMD_28", "<i>Tek bir resmin</i> mesaj olarak gönderilmesine izin verir.<br />Kullanımı: Gönderilecek fotoğraf internette ve herkesin erişimine açık bir yerde olmalıdır. Giriş izni gerektiren sayfa adreslerini kullanmayınız.<br />Fotoğrafın tam adresi yazılmalıdır! Örnek: <b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Desteklenen foto dosyası türleri: .jpg .bmp .gif .png. <br />İPUCU: /img yazın, sonra bir boşluk bırakarak fotoğrafın URL adresini kutuya kopyala-yapıştır yapın; bir web sayfasındaki fotoğrafın URL adresini kopyalamak için üzerine sağ tıklayın, Özelliklerine tıklayın sonra fare ile bütün URL adresini kopyalayın daha sonra da yazdığınız /img komutunun ardına yapıştırın.<br />Bilgisayarınızdaki bir resmi adreslemeyin, bu işlem sohbet penceresinin durmasına neden olur!!!");

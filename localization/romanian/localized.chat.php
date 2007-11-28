@@ -163,7 +163,7 @@ define("L_BANISHED", "%s a fost blocat cu succes.");
 define("L_BANISHED_REASON", "%s a fost blocat cu succes. (Motivul: %s)");
 define("L_ANNOUNCE", "ANUNŢ");
 define("L_INVITE", "%s te invită să intri cu el/ea în camera <a href=\"#\" onClick=\"window.parent.runCmd('%s','%s')\">%s</a>.");
-define("L_INVITE_REG", " Trebuie să fii înregistrat pentru a intra în această cameră.");
+define("L_INVITE_REG", "Trebuie să fii înregistrat pentru a intra în această cameră.");
 define("L_INVITE_DONE", "Invitaţia a fost trimisă lui %s.");
 define("L_OK", "Trimite");
 define("L_BUZZ", "Galerie Buzz-uri");
@@ -329,7 +329,7 @@ define("L_CANCEL", "Renunţă");
 // PlusBot bot mod (based on Alice bot)
 define("BOT_TIPS", "Sfat: Bot-ul este activ public în această camera. Pentru a-i vorbi, scrie <b>hello ".C_BOT_NAME."</b>. Pentru a-l opri, scrie <b>bye ".C_BOT_NAME."</b>. (privat: /to <b>".C_BOT_NAME."</b> Mesaj)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
 define("BOT_PRIV_TIPS", "Sfat: Bot-ul este activ public în camera %s. Poţi discuta numai privat cu el apăsând pe numele său <b>".C_BOT_NAME."</b>. (comanda: /wisp <b>".C_BOT_NAME."</b> Mesaj)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
-define("BOT_PRIVONLY_TIPS", "Sfat: Bot-ul nu este activ public.  Poţi discuta numai privat cu el apăsând pe numele său. (comenzile: /to <b>".C_BOT_NAME."</b> Mesaj sau /wisp <b>".C_BOT_NAME."</b> Mesaj)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
+define("BOT_PRIVONLY_TIPS", "Sfat: Bot-ul nu este activ public. Poţi discuta numai privat cu el apăsând pe numele său. (comenzile: /to <b>".C_BOT_NAME."</b> Mesaj sau /wisp <b>".C_BOT_NAME."</b> Mesaj)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
 define("BOT_STOP_ERROR", "RoBoţelul nu este pornit în această cameră!");
 define("BOT_START_ERROR", "RoBoţelul este deja pornit în această cameră!");
 define("BOT_DISABLED_ERROR", "RoBoţelul a fost dezactivat în Admin Panel!");

@@ -163,7 +163,7 @@ define("L_BANISHED", "%s có một cách thành công được trục xuất");
 define("L_BANISHED_REASON", "%s Một cách thành công được trục xuất (Lý do: %s)");
 define("L_ANNOUNCE", "THÔNG BÁO");
 define("L_INVITE", "%s những yêu cầu mà bạn ông/cô phải hòan thành <a href=\"#\" onClick=\"window.parent.runCmd('%s','%s')\">%s</a> phòng.");
-define("L_INVITE_REG", " Bạn phải đăng ký để vào phòng này.");
+define("L_INVITE_REG", "Bạn phải đăng ký để vào phòng này.");
 define("L_INVITE_DONE", "Các bạn đã gửi thơ mời tới %s.");
 define("L_OK", "Gửi");
 define("L_BUZZ", "Những âm thanh hỗ trợ");

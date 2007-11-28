@@ -166,7 +166,7 @@ define("L_BANISHED", "%s wurde erfolgreich verbannt.");
 define("L_BANISHED_REASON", "%s wurde erfolgreich verbannt. (Grund: %s)");
 define("L_ANNOUNCE", "ANKÜNDIGUNG");
 define("L_INVITE", "%s lädt Dich in den Raum <a href=\"#\" onClick=\"window.parent.runCmd('%s','%s')\">%s</a> ein.");
-define("L_INVITE_REG", " Du hast Dich zum Betritt für diesen Raum registriert.");
+define("L_INVITE_REG", "Du hast Dich zum Betritt für diesen Raum registriert.");
 define("L_INVITE_DONE", "Deine Einladung wurde an %s geschickt.");
 define("L_OK", "Senden");
 define("L_BUZZ", "Summergalerie");
@@ -291,8 +291,8 @@ define("L_BACK", "%s ist zurück!");
 define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***** Quick Menu *****");	//&nbsp; means one blank space. this will center align the title of the drop list.
 
 // Topic Banner mod
-define("L_TOPIC", " änderte TOPIC auf: - ");
-define("L_TOPIC_RESET", " hat das TOPIC zurückgesetzt");
+define("L_TOPIC", "änderte TOPIC auf: - ");
+define("L_TOPIC_RESET", "hat das TOPIC zurückgesetzt");
 define("L_HELP_TOP", "Das TOPIC muss mindestens zwei Worte enthalten.");
 
 // Img cmd mod
@@ -338,7 +338,7 @@ define("BOT_START_ERROR", "Bot läuft bereits in diesen Raum!");
 define("BOT_DISABLED_ERROR", "Bot wurde im Adminbereich deaktiviert!");
 
 // Dice v.1, v.2 and v.3 modes
-define("DICE_RESULTS", " rollt die Würfel, die Ergebnisse sind:");
+define("DICE_RESULTS", "rollt die Würfel, die Ergebnisse sind:");
 define("DICE_WRONG", "Sie müssen auswählen wieviele Würfel geworfen werden sollen\\n(Wählen Sie eine Nummer zwischen 1 und ".MAX_ROLLS.").\\nDann nur /dice eintippen um ".MAX_ROLLS." Würfel rollen zu lassen.");
 define("DICE2_WRONG", "Der zweite Wert muss zwischen 1 und ".MAX_ROLLS."sein.\\nLeer lassen für alle ".MAX_ROLLS." Würfel\\n(z.B. /".MAX_DICES."d oder /".MAX_DICES."d".MAX_ROLLS.").");
 define("DICE2_WRONG1", "Der erste Wert muss zwischen 1 und ".MAX_DICES."sein.\\n(z.B. /".MAX_DICES."d oder /".MAX_DICES."d".MAX_ROLLS.").");

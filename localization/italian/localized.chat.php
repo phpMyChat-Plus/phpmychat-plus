@@ -160,13 +160,13 @@ define("L_NO_PROFILE", "Senza profilo");
 // input frame
 define("L_HLP", "Aiuto");
 define("L_MODERATOR", "%s è ora moderatore di questa chat.");
-define("L_KICKED", " %s è stato allontanato con successo.");
+define("L_KICKED", "%s è stato allontanato con successo.");
 define("L_KICKED_REASON", "%s è stato allontanato con successo. (Motivo: %s)");
 define("L_BANISHED", "%s è stato espulso con successo.");
 define("L_BANISHED_REASON", "%s è stato espulso con successo. (Motivo: %s)");
 define("L_ANNOUNCE", "ANNUNCIO");
 define("L_INVITE", "%s ti invita ad unirti a lei/lui nella chat <a href=\"#\" onClick=\"window.parent.runCmd('%s','%s')\">%s</a> stanza.");
-define("L_INVITE_REG", " Devi essere registrato per accedere in questa stanza.");
+define("L_INVITE_REG", "Devi essere registrato per accedere in questa stanza.");
 define("L_INVITE_DONE", "Il tuo invito è stato inviato a %s.");
 define("L_OK", "Invia");
 define("L_BUZZ", "Galleria Buzz");
@@ -177,7 +177,7 @@ define("L_NO_MODERATOR", "Solo il moderatore può usare questo comando.");
 define("L_NONEXIST_USER", "%s non è in questa chat.");
 define("L_NONREG_USER", "%s non è registrato.");
 define("L_NONREG_USER_IP", "Il suo IP è: %s.");
-define("L_NO_KICKED", " %s è moderatore o amministratore e non può essere allontanato dalla chat.");
+define("L_NO_KICKED", "%s è moderatore o amministratore e non può essere allontanato dalla chat.");
 define("L_NO_BANISHED", "%s è un moderatore o amministratore e non può essere espulso.");
 define("L_SVR_TIME", "Orario server: ");
 define("L_NO_SAVE", "Nesun messaggio da salvare!");
@@ -320,7 +320,7 @@ define("L_PRO_6", "colore del tuo testo/nome");
 
 // Avatar mod
 define("L_AVATAR", "Avatar");
-define("L_ERR_AV", " URL non valido o non esistente.");
+define("L_ERR_AV", "URL non valido o non esistente.");
 define("L_TITLE_AV", "Il tuo avatar attuale: ");
 define("L_CHG_AV", "Clicca \"".L_REG_16."\" nel profilo<br />per selezionare il tuo Avatar.");
 define("L_SEL_NEW_AV", "Seleziona un avatar nuovo");
