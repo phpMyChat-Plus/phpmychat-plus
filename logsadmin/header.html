@@ -1,8 +1,8 @@
 <?php
-include("../../../config/config.lib.php");
+include("./../../../config/config.lib.php");
 if (!isset($L) || $L == "") $L = C_LANGUAGE;
-include("../../../localization/".$L."/localized.chat.php");
-include("../../../localization/".$L."/localized.admin.php");
+include("./../../../localization/".$L."/localized.chat.php");
+include("./../../../localization/".$L."/localized.admin.php");
 $textDirection = ($Align == "right") ? "RTL" : "LTR";
 ?>
 <html dir=<?php echo($textDirection) ?>>

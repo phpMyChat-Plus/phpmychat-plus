@@ -35,7 +35,7 @@ if ($address != "" && $address != " *" && $username != "SYS welcome" && $usernam
 $address = "<b>".$address."</b>";
 if ($username == "SYS welcome") $username = $address;
 $message = stripslashes($result["message"]);
-$message = eregi_replace("src=images","src=../../../images",$message);
+$message = eregi_replace("src=images","src=./../../../images",$message);
 $message = eregi_replace("<!-- UPDTUSRS //-->","",$message);
 if (eregi("stripslashes",$message) || eregi("sprintf",$message) || eregi("L_",$message))
 {
@@ -162,7 +162,7 @@ if ($addressu != "" && $addressu != " *" && $usernameu != "SYS welcome" && $user
 $addressu = "<b>".$addressu."</b>";
 if ($usernameu == "SYS welcome") $usernameu = $addressu;
 $messageu = stripslashes($resultu["message"]);
-$messageu = eregi_replace("src=images","src=../../../images",$messageu);
+$messageu = eregi_replace("src=images","src=./../../../images",$messageu);
 $messageu = eregi_replace("<!-- UPDTUSRS //-->","",$messageu);
 if (eregi("stripslashes",$messageu) || eregi("sprintf",$messageu) || eregi("L_",$messageu))
 {
