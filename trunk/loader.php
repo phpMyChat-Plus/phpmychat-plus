@@ -567,6 +567,8 @@ if ($xxx > 1)
 {
 	$tmpstr = stripslashes(L_ENTER_SND);
 	$Messages[$xxx] = str_replace($tmpstr,"",$Messages[$xxx]);
+	$tmpstr1 = stripslashes(L_WELCOME_SND);
+	$Messages[$xxx] = str_replace($tmpstr1,"",$Messages[$xxx]);
 };
 // end Bob Dickow mod for buzzes and hellos.
 	// doubles backslashes except the ones for closing HTML tags
