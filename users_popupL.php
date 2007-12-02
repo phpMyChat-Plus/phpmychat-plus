@@ -183,8 +183,8 @@ if ($B > 0 && $BeepRoom)
 {
 	?>
 	<!-- Sound for user entrance -->
-	<EMBED SRC="images/beep.wav" HIDDEN="true" AUTOSTART="true" LOOP="false" NAME="Beep" MASTERSOUND>
-		<NOEMBED><BGSOUND SRC="images/beep.wav" LOOP=1></NOEMBED>
+	<EMBED SRC="sounds/beep.wav" HIDDEN="true" AUTOSTART="true" LOOP="false" NAME="Beep" MASTERSOUND>
+		<NOEMBED><BGSOUND SRC="sounds/beep.wav" LOOP=1></NOEMBED>
 	</EMBED>
 	<?php
 }

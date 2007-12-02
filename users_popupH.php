@@ -10,7 +10,7 @@ if (isset($_GET))
 
 if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 if (isset($_COOKIE["CookieUserSort"])) $sort_order = $_COOKIE["CookieUserSort"];
-if (!isset($L) && isset($_COOKIE["CookieLang"])) $L = $_COOKIE["CookieLang"]; 
+if (!isset($L) && isset($_COOKIE["CookieLang"])) $L = $_COOKIE["CookieLang"];
 //if no language detected set default one
 if (!isset($L) || $L == "") $L = C_LANGUAGE;
 // Fix a security hole
@@ -250,14 +250,14 @@ if (NS4)
 
 <?php
 // ** Beeps if necessary **
-if ($BeepRoom)
+if ($B > 0 && $BeepRoom)
 {
-	?>
-	<!-- Sound for user entrance -->
-	<EMBED SRC="images/beep.wav" HIDDEN="true" AUTOSTART="true" LOOP="false" NAME="Beep" MASTERSOUND>
-		<NOEMBED><BGSOUND SRC="images/beep.wav" LOOP=1></NOEMBED>
-	</EMBED>
-	<?php
+		?>
+		<!-- Sound for user entrance -->
+		<EMBED SRC="sounds/beep.wav" HIDDEN="true" AUTOSTART="true" LOOP="false" NAME="Beep" MASTERSOUND>
+			<NOEMBED><BGSOUND SRC="sounds/beep.wav" LOOP=1></NOEMBED>
+		</EMBED>
+		<?php
 }
 ?>
 </BODY>
