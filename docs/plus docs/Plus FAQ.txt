@@ -216,5 +216,10 @@ When I look at my errorlog I see the following message:
 Check if the permissions of your "plus" (chat name) and "config" folders are 777. If so, change them to 755 (chmod). Sometimes, due to different servers configurtion, they remain 777 after the installing process.
 Reply: As soon as I changed the permission of the plus folder (chat folder in my case) it worked.
 
+18Q.
+My /img command doesn't seem to work - it returns no error, but it also doesn't return any image.
+18A.
+This happens on php servers which have the getimagesize() function disabled. Please contact your hosting or enable that function.
+
 
 More to come...

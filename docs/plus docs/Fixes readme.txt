@@ -12,6 +12,7 @@ When you install Firefox2 and/or QuickTime (RealPlayer), a QuickTime plugin will
 Fixes History:
 After 1.92 release fixes (f means the released fix):
 24.11.2007 - f5:
+- admin5.php - backup update link check up fix;
 - loader.php - small fix;
 - users_popupH.php, users_popupL.php - sounds path fixed;
 - lib/logs.lib.php + logsadmin/header.html - a relative path fix for servers running on SAFE MODE ON;

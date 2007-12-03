@@ -41,7 +41,7 @@ if ($action != "submit")
 
 	// Check for application update on main sites (ciprianmp.com & sourceforge) resources.
 	$updatepath1 = "http://ciprianmp.com/latest/lib/update.php";
-	$updatepath2 = "http://svn.sourceforge.net/viewvc/*checkout*/phpmychat/trunk/lib/update.php";
+	$updatepath2 = "http://phpmychat.svn.sourceforge.net/viewvc/*checkout*/phpmychat/trunk/lib/update.php";
 if (UPD_CHECK)
 {
 	if (@fsockopen("ciprianmp.com", 80, $errno, $errstr, 12))
@@ -58,7 +58,7 @@ if (UPD_CHECK)
 		  exit();
 		}
 	}
-	elseif (@fsockopen("svn.sourceforge.net", 80, $errno, $errstr, 12))
+	elseif (@fsockopen("phpmychat.svn.sourceforge.net", 80, $errno, $errstr, 12))
 	{
 		if (isset($_GET['alv']) && isset($_GET['alm'])) {
 			define("APP_LAST_VERSION", $alv);
