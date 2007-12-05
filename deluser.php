@@ -26,6 +26,7 @@ require("./localization/languages.lib.php");
 require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
 require("./lib/login.lib.php");
+include("./lib/mail_validation.lib.php");
 
 // Special cache instructions for IE5+
 $CachePlus	= "";
@@ -86,8 +87,16 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_20)
      . "Time of deletion: $tm\n"
      . "IP address: $IP (".gethostbyaddr($IP).")\n"
      . "----------------------------------------------";
+		$Headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
+		$Headers .= "X-Sender: <${Sender_email}> \r\n";
+		$Headers .= "X-Mailer: PHP/".phpversion()." \r\n";
+		$Headers .= "Return-Path: <${Sender_email}> \r\n";
+		$Headers .= "Date: ${mail_date} \r\n";
+		$Headers .= "Mime-Version: 1.0 \r\n";
+		$Headers .= "Content-Type: text/plain; charset=${Charset} \r\n";
+		$Headers .= "Content-Transfer-Encoding: 8bit \r\n";
      mail(C_ADMIN_EMAIL,"[".((C_CHAT_NAME != "") ? C_CHAT_NAME." - ".APP_NAME : APP_NAME)."] "
-     . "User Account Deletion Notification",$emailMessage);
+     . stripslashes($pmc_username)." - User Account Deletion Notification",$emailMessage, $Headers);
 // end of patch to send an email to the Admin at the time of user account deletion.
 	}
 	$DbLink->query("DELETE FROM ".C_REG_TBL." WHERE username='$pmc_username'");
