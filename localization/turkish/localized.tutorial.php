@@ -352,14 +352,13 @@ odadan çıkarır.
 öğrenmek:</b></A></FONT>
 <P>
 Başlangıç sayfasının yukarısında, kullanıcıların sayısını gösteren bağlantıya
-tıklayabilir, veya, eğer sohbet ediyorsanız, pencerenin sağ-üst köşesindeki <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Users popup">
-işaretine tıklamak suretiyle açılan başka bir pencerede, giriş yapmış bütün
+tıklayabilir, veya, eğer sohbet ediyorsanız, pencerenin sağ-üst köşesindeki <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_DETACH ?>"> işaretine tıklamak suretiyle açılan başka bir pencerede, giriş yapmış bütün
 kullanıcıları ve sohbet ettikleri odaları gerçek zamanlı olarak görebilirsiniz.<br />
 Eğer giriş yapmış kullanıcılar üç kişiden azsa, açılan pencerenin başlığı
 kullanıcı adlarını içerir, üçten fazla kullanıcı içerideyse kullanıcı sayısı ve
 açılan oda sayısı açılan pencerenin başlığındadır.
 <P>
-Bu yeni açılan pencerenin yukarısındaki <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Beeps"> ikonuna
+Bu yeni açılan pencerenin yukarısındaki <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_BEEP ?>"> ikonuna
 tıklamak, içeri kullanıcı girdiği zaman çalan sinyal sesini açar veya kapatır.
 <br /><P ALIGN="right"><A HREF="#top">Sayfa başına dön</A></P>
 <P>

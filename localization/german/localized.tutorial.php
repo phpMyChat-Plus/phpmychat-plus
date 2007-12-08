@@ -305,9 +305,9 @@ sendet diese Nachricht "Bis bald!" im Chatfenster. Danach wirst Du automatisch a
 <P>
 <FONT SIZE="+1"><A NAME="users_popup"><B>Wissen wer chattet ohne eingeloggt zu sein:</B></A></FONT>
 <P>
-Du kannst auf den Link klicken, der Dir auf der Startseite die Anzahl der Benutzer momentan anzeigt. Wenn Du chattest, klicke auf das Bild  <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Benutzerliste"> in der oberen rechten Ecke des Bilder um ein Fenster zu öffnen, daß Dir alle Benutzer und die Räume in denen sie sich befinden anzeigt.<br />
+Du kannst auf den Link klicken, der Dir auf der Startseite die Anzahl der Benutzer momentan anzeigt. Wenn Du chattest, klicke auf das Bild  <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_DETACH ?>"> in der oberen rechten Ecke des Bilder um ein Fenster zu öffnen, daß Dir alle Benutzer und die Räume in denen sie sich befinden anzeigt.<br />
 <P>
-Beim klick auf das  <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Piep">Bild am oberen Rand dieses Fensters stellt die Benachrichtigung bei neuen Nutzern an oder aus.
+Beim klick auf das  <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_BEEP ?>">Bild am oberen Rand dieses Fensters stellt die Benachrichtigung bei neuen Nutzern an oder aus.
 <br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />

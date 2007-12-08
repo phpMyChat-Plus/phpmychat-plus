@@ -336,15 +336,15 @@ está chateando sin estar logueado:</B></A></FONT>
 <P>
 Podés hacer click en el vínculo que muestra el número de usuarios
 conectados en el comienzo de la página, o, si estás chateando, hacé click
-en la imagen <img border=0 width=13 height=13 id="_x0000_i1041"
-src="images\popup.gif" alt="Ventana de usuarios"> hacia arriba y a la derecha de la
+en la imagen <img border=0 width=13 height=13
+src="images\popup.gif" alt="<?php echo L_DETACH ?>"> hacia arriba y a la derecha de la
 pantalla, para abrir una ventana independiente que mostrará la lista de usuarios
 conectados y los salones en que ellos están, casi en tiempo real.<br />
 El título de esta ventana contiene el nombre de los usuarios, si son
 menos que tres, el número de usuarios y salones abiertos.
 <P>
-Haciendo click en el icono <img border=0 width=13 height=13 id="_x0000_i1042"
-src="images\sound.gif" alt=Beeps> arriba de esta imagen serán
+Haciendo click en el icono <img border=0 width=13 height=13
+src="images\sound.gif" alt="<?php echo L_BEEP ?>"> arriba de esta imagen serán
 activados/desactivados los sonidos de los usuarios entrantes.
 <br /><P ALIGN="right"><A HREF="#top">Volver al comienzo</A></P>
 <P>

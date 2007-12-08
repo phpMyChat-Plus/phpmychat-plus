@@ -307,10 +307,10 @@ Het bericht is dan &quot;Tot de volgende keer!&quot; en daarna wordt je uitgelog
 <P>
 <FONT SIZE="+1"><A NAME="users_popup"><B>Wie is op de chat, zonder ingelogd te zijn:</B></A></FONT>
 <P>
-Je kan op de link klikken, wat aangeeft hoeveel gebruikers zijn ingelogd (startpagina), of als je aan het chatten bent op het plaatje <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Gebruikers venster"> klikken, rechts-boven in beeld, en er opent een venster met alle gebruikers, en de kamer waar ze zich bevinden.<br />
+Je kan op de link klikken, wat aangeeft hoeveel gebruikers zijn ingelogd (startpagina), of als je aan het chatten bent op het plaatje <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_DETACH ?>"> klikken, rechts-boven in beeld, en er opent een venster met alle gebruikers, en de kamer waar ze zich bevinden.<br />
 De titel van dit venster omvat de gebruikersnamen, wanneer er minder dan drie zijn.
 <P>
-Door op dit <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Geluiden"> plaatje te klikken zal het geluid aan/uit zetten wanneer er een gebruiker te chat binnenkomt. <br />
+Door op dit <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_BEEP ?>"> plaatje te klikken zal het geluid aan/uit zetten wanneer er een gebruiker te chat binnenkomt. <br />
 <P ALIGN="right"><A HREF="#top">Naar boven</A></P>
 <P>
 <hr />
