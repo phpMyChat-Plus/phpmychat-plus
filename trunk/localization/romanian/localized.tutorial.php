@@ -305,10 +305,10 @@ va trimite mesajul "La revedere!" pentru a fi citit de către ceilalţi particip
 <P>
 <FONT SIZE="+1"><A NAME="users_popup"><B>Cum afli cine e pe chat, fără a te loga:</B></A></FONT>
 <P>
-Poţi apăsa pe link-ul din pagina de start care arată numărul de utilizatori conectaţi pe chat, sau, dacă ai intrat deja în camera de chat, apasă pe imaginea <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="L_DETACH"> din colţul dreapta-sus (sub Ieşire) pentru a deschide o fereastră separată ce va afişa lista utilizatorilor conectati şi camerele în care se află aceştia, actualizată aproape în timp real.<br />
+Poţi apăsa pe link-ul din pagina de start care arată numărul de utilizatori conectaţi pe chat, sau, dacă ai intrat deja în camera de chat, apasă pe imaginea <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_DETACH ?>"> din colţul dreapta-sus (sub Ieşire) pentru a deschide o fereastră separată ce va afişa lista utilizatorilor conectati şi camerele în care se află aceştia, actualizată aproape în timp real.<br />
 Titlul acestei pagini conţine poreclele utilizatorilor, dacă sunt mai puţin de trei; dacă sunt mai mulţi, titlul va conţine numărul utilizatorilor şi camerele deschise.
 <P>
-Apăsând pe imaginea <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="L_BEEP"> din partea de sus a acestui popup va activa/dezactiva sunetele de înştiinţare la intrarea unui nou utilizator în cameră.
+Apăsând pe imaginea <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_BEEP ?>"> din partea de sus a acestui popup va activa/dezactiva sunetele de înştiinţare la intrarea unui nou utilizator în cameră.
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />

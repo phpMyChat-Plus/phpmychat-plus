@@ -312,10 +312,10 @@ will send the message "CU soon!" in the main frame then log you out.
 <P>
 <FONT SIZE="+1"><A NAME="users_popup"><B>Knowing who is chatting without being logged in:</B></A></FONT>
 <P>
-You may click on the link that shows the number of connected users at the start page, or, if you are chatting, click on the image <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Users popup"> at the top-right of the screen to open a independent window that will display the list of connected users, and the rooms they are in, in near real time.<br />
+You may click on the link that shows the number of connected users at the start page, or, if you are chatting, click on the image <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_DETACH ?>"> at the top-right of the screen to open a independent window that will display the list of connected users, and the rooms they are in, in near real time.<br />
 The title of this window contains the usernames, if they are less than three, the numbers of users and opened rooms else.
 <P>
-Clicking on the <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Beeps"> icon at the top of this popup will enable/disable beeping sounds at user entrance.
+Clicking on the <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_BEEP ?>"> icon at the top of this popup will enable/disable beeping sounds at user entrance.
 <br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 <P>
 <hr />

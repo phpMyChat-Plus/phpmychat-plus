@@ -309,10 +309,10 @@ sẽ gửi một thông báo "Hẹn gặp lại!" bạn đã thóat.
 <P>
 <FONT SIZE="+1"><A NAME="users_popup"><B>Những người ẩn nick :</B></A></FONT>
 <P>
-Bạn có thể click vào link liên kết tạo trang đăng nhập, hoặc, nếu bạn đang tán gẫu, click vào hình ảnh <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Users popup"> tại điểm trên cùng của màn hình để một cửa sồ hiện một danh sách những người kết nối hiện thời, và những phòng họ ở bây giờ.<br />
+Bạn có thể click vào link liên kết tạo trang đăng nhập, hoặc, nếu bạn đang tán gẫu, click vào hình ảnh <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_DETACH ?>"> tại điểm trên cùng của màn hình để một cửa sồ hiện một danh sách những người kết nối hiện thời, và những phòng họ ở bây giờ.<br />
 Tiêu đề của cửa số này chứa tên đăng nhập, nếu chúng là ít hơn 3, những số lượng và phòng khác được mở.
 <P>
-Click vào<IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Beeps"> việc click vào biểu tượng trên cùng làm tắt đi âm thanh beep cho người sử dụng.
+Click vào<IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_BEEP ?>"> việc click vào biểu tượng trên cùng làm tắt đi âm thanh beep cho người sử dụng.
 <br /><P ALIGN="right"><A HREF="#top">Quay lại từ đầu</A></P>
 <P>
 <hr />

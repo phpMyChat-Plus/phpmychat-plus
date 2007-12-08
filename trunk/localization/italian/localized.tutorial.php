@@ -308,10 +308,10 @@ invierà il messaggio "arrivederci!" nel frame principale dopodichè si uscirà.
 <P>
 <FONT SIZE="+1"><A NAME="users_popup"><B>Conoscere chi sta chattando senza essere collegati:</B></A></FONT>
 <P>
-Potete cliccare sul collegamento che mostra il numero di utenti collegati alla pagina iniziale o, se state chattando, sull’immagine <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Lista degli utenti"> nell’angolo alto a destra dello schermo per aprire una finestra indipendente che mostrerà la lista degli utenti collegati e le stanze in cui stanno in tempo quasi reale.<br />
+Potete cliccare sul collegamento che mostra il numero di utenti collegati alla pagina iniziale o, se state chattando, sull’immagine <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_DETACH ?>"> nell’angolo alto a destra dello schermo per aprire una finestra indipendente che mostrerà la lista degli utenti collegati e le stanze in cui stanno in tempo quasi reale.<br />
 Il titolo della finestra contiene i nomi utente se sono meno di tre, altrimenti il numero degli utenti e le stanze attive.
 <P>
-Cliccando sull’icona <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Beeps"> sopra questo popup abiliterò/disabiliterà l’uso di suoni per l’entrata degli utenti.
+Cliccando sull’icona <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_BEEP ?>"> sopra questo popup abiliterò/disabiliterà l’uso di suoni per l’entrata degli utenti.
 <br /><P ALIGN="right"><A HREF="#top">Torna all’inizio</A></P>
 <P>
 <hr />

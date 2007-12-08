@@ -319,10 +319,10 @@ el mensaje "¡Nos vemos pronto!" aparecerá en la ventana del chat y luego usted
 <P>
 <FONT SIZE="+1"><A NAME="users_popup"><B>Saber quien está chateando sin tener que entrar al chat:</B></A></FONT>
 <P>
-Puede hacer clic en el vínculo que muestra el número de usuarios conectados en la página de inicio, o, si está chateando, haga clic en la imagen <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Users popup"> en la esquina superior derecha de su pantalla para abrir otra ventana que le mostrará la lista de usuarios conectados, y la sala en la que se encuentran, casi en tiempo real.<br />
+Puede hacer clic en el vínculo que muestra el número de usuarios conectados en la página de inicio, o, si está chateando, haga clic en la imagen <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_DETACH ?>"> en la esquina superior derecha de su pantalla para abrir otra ventana que le mostrará la lista de usuarios conectados, y la sala en la que se encuentran, casi en tiempo real.<br />
 El título de esta ventana contiene los nombres de usuarios, si hay menos de tres, o sino la cantidad de usuarios y las salas abiertas.
 <P>
-Si hace clic en el <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Beeps"> icono en la parte superior de esta ventana emergente podrá activar o desactivar el sonido bip que se escucha cuando un usuario ingresa al chat.
+Si hace clic en el <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_BEEP ?>"> icono en la parte superior de esta ventana emergente podrá activar o desactivar el sonido bip que se escucha cuando un usuario ingresa al chat.
 <br /><P ALIGN="right"><A HREF="#top">Subir</A></P>
 <P>
 <hr />
