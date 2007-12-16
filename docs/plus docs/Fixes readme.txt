@@ -11,6 +11,8 @@ When you install Firefox2 and/or QuickTime (RealPlayer), a QuickTime plugin will
 
 Fixes History:
 After 1.92 release fixes (f means the released fix):
+16.12.2007 - f6:
+- lib/logs.lib.php - Private logs fix;
 24.11.2007 - f5:
 - deluser.php - added the header of the email notification on user deletion to show the right originator data;
 - admin5.php - backup update link check up fix;
