@@ -97,7 +97,7 @@ $i++;
 if ($i > 1)
 {
 $today = date('d-m-y H:i:s', time() + C_TMZ_OFFSET*60*60);
-$lastsql = "SELECT * FROM ".C_MSG_TBL." WHERE (m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."') ORDER BY m_time ASC LIMIT 1";
+$lastsql = "SELECT * FROM ".C_MSG_TBL." WHERE (m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."') ORDER BY m_time DESC LIMIT 1";
 $lastquery = mysql_query($lastsql) or die("Cannot query the database.<br />" . mysql_error());
 while($lastresult = mysql_fetch_array($lastquery))
 {
@@ -271,7 +271,7 @@ fclose($fpu) ;
 $doneu = 1;
 $iu = 0;
 }
-if ($done = 1 || $doneu = 1)
+if ($done == 1 || $doneu == 1)
 {
 $delsql = "DELETE FROM ".C_MSG_TBL." WHERE m_time < ".(time() - C_MSG_DEL*60*60)." AND pm_read != 'New' AND pm_read != 'Neww'";
 $delquery = mysql_query($delsql) or die("Cannot query the database.<br />" . mysql_error());
