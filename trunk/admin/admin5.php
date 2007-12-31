@@ -39,11 +39,11 @@ if ($action != "submit")
 	$ColorList = eregi_replace('"', "", COLORLIST);
 	settype($app_version = APP_VERSION, "double");
 
+if (UPD_CHECK)
+{
 	// Check for application update on main sites (ciprianmp.com & sourceforge) resources.
 	$updatepath1 = "http://ciprianmp.com/latest/lib/update.php";
 	$updatepath2 = "http://phpmychat.svn.sourceforge.net/viewvc/*checkout*/phpmychat/trunk/lib/update.php";
-if (UPD_CHECK)
-{
 	if (@fsockopen("ciprianmp.com", 80, $errno, $errstr, 12))
 	{
 		if (isset($_GET['alv']) && isset($_GET['alm'])) {
