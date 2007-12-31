@@ -35,22 +35,22 @@
 /**
 * The general preferences and database details.
 */
-require_once "db_prefs.php";
+require_once "bot/db_prefs.php";
 
 /**
 * The matching engine functions of the AIML interpreter.
 */
-require_once "graphnew.php";
+require_once "bot/graphnew.php";
 
 /**
 * A collection of generally useful utility functions
 */
-require_once "util.php";
+require_once "bot/util.php";
 
 /**
 * The file containing the function that process custom, non AIML 1.0.x specified, tags.
 */
-require_once "plugins/customtags.php";
+require_once "bot/plugins/customtags.php";
 
 
 

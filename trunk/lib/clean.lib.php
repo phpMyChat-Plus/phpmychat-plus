@@ -40,7 +40,7 @@ $ChatS->close();
 // Archive and Clean the old messages
 if(C_CHAT_LOGS)
 {
-require("logs.lib.php");
+require("lib/logs.lib.php");
 }
 // Clean the old messages (without logs)
 else
