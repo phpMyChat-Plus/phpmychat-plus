@@ -56,7 +56,7 @@ class Response
 /**
 * subs.inc has all of the substitution values and sentence splitter values
 */
-require_once "subs.inc";
+require_once "bot/subs.inc";
 
 // Initialize information for search replace routines
 $replacecounter=1;
