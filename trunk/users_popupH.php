@@ -9,7 +9,6 @@ if (isset($_GET))
 };
 
 if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
-if (isset($_COOKIE["CookieUserSort"])) $sort_order = $_COOKIE["CookieUserSort"];
 if (!isset($L) && isset($_COOKIE["CookieLang"])) $L = $_COOKIE["CookieLang"];
 //if no language detected set default one
 if (!isset($L) || $L == "") $L = C_LANGUAGE;
@@ -22,6 +21,7 @@ require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
 require("./lib/clean.lib.php");
 
+if (!isset($sort_order)) $sort_order = isset($CookieUserSort) ? $CookieUserSort : C_USERS_SORT_ORD;
 // Special cache instructions for IE5+
 $CachePlus	= "";
 if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";

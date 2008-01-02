@@ -8,7 +8,7 @@ if (isset($_GET))
 	};
 };
 
-if (isset($_COOKIE["CookieUserSort"])) $sort_order = $_COOKIE["CookieUserSort"];
+if (!isset($sort_order)) $sort_order = isset($CookieUserSort) ? $CookieUserSort : C_USERS_SORT_ORD;
 
 // Fix a security holes
 if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();

@@ -11,7 +11,9 @@ When you install Firefox2 and/or QuickTime (RealPlayer), a QuickTime plugin will
 
 Fixes History:
 After 1.92 release fixes (f means the released fix):
-31.12.2007 - f6:
+02.01.2008 - f7:
+- sorting users fix in all the lists;
+- admin5.php - download folder for fixes added in the Admin Panel drop menu;
 - bot/respond.php, util.php and lib/clean.lib.php - some relative paths fixed for servers running on safe mode;
 16.12.2007 - f6:
 - lib/logs.lib.php - Private logs fix;
