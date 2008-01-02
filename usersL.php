@@ -9,7 +9,6 @@ if (isset($_GET))
 };
 
 if (isset($_COOKIE["CookieStatus"])) $statusu = $_COOKIE["CookieStatus"];
-if (isset($_COOKIE["CookieUserSort"])) $sort_order = $_COOKIE["CookieUserSort"];
 
 // Fix a security hole
 if (isset($L) && !is_dir("./localization/".$L)) exit();
@@ -21,6 +20,7 @@ require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
 require("./lib/clean.lib.php");
 
+if (!isset($sort_order)) $sort_order = isset($CookieUserSort) ? $CookieUserSort : C_USERS_SORT_ORD;
 // Special cache instructions for IE5+
 $CachePlus	= "";
 if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";

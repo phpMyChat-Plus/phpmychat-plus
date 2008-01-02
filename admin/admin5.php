@@ -132,8 +132,10 @@ if (UPD_CHECK)
  <?php
   if(UPD_CHECK && (($app_last_version > $app_version) || (($app_last_version == $app_version) && (eregi_replace("-ß","",APP_LAST_MINOR) > eregi_replace("-ß","",APP_MINOR) || eregi_replace("-f","",APP_LAST_MINOR) > eregi_replace("-f","",APP_MINOR)))))
  {
+ 	if (eregi("f",APP_LAST_MINOR) || eregi("ß",APP_LAST_MINOR)) $minor_dir = "/Fixes/";
+ 	else $minor_dir = "/";
  	?>
- 						<li><a href="http://www.ciprianmp.com/atm/index.php?directory=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_LAST_VERSION); ?>/" target=_blank Title="Download the <?php echo(APP_LAST_VERSION.APP_LAST_MINOR); ?> Update" onMouseOver="window.status='Download the <?php echo(APP_LAST_VERSION.APP_LAST_MINOR); ?> Update.'; return true">Download <?php echo(APP_LAST_VERSION.APP_LAST_MINOR); ?></a></li>
+ 						<li><a href="http://www.ciprianmp.com/atm/index.php?directory=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_LAST_VERSION.$minor_dir); ?>" target=_blank Title="Download the <?php echo(APP_LAST_VERSION.APP_LAST_MINOR); ?> Update" onMouseOver="window.status='Download the <?php echo(APP_LAST_VERSION.APP_LAST_MINOR); ?> Update.'; return true">Download <?php echo(APP_LAST_VERSION.APP_LAST_MINOR); ?></a></li>
  <?php
  }
  	?>
