@@ -1,5 +1,5 @@
 <?php
-// File : romanian/localized.tutorial.php - plus version (09.09.2007 - rev.7)
+// File : romanian/localized.tutorial.php - plus version (10.04.2008 - rev.9)
 //Translated and updated to Plus version by Ciprian Murariu <ciprianm@yahoo.com>
 
 // Get the names and values for vars sent by the script that called this one
@@ -20,7 +20,7 @@ if (isset($_COOKIE["CookieStatus"])) $CookieStatus = $_COOKIE["CookieStatus"];
 
 <HEAD>
 <TITLE>Tutorial în limba română a <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?></TITLE>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=${Charset}">
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo(${Charset}); ?>">
 <STYLE>
 A.topLink
 {
@@ -47,10 +47,10 @@ A.topLink:hover, A.topLink:active
 <P></P>
 <TABLE BORDER="5" CELLPADDING="5" ALIGN="center">
 <TR>
-	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- Tutorial în limba română a <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -</FONT><br /><I>&copy; 2007<?php echo((date(Y)>"2007") ? "-".date(Y) : ""); ?> - Traducerea şi adaptarea de <a href="mailto:ciprianmp@yahoo.com?subject=phpMyChat%20Plus%20translation" onMouseOver="window.status='<?php echo (sprintf(L_CLICKS,L_LINKS_6,L_TRANSLATOR)); ?>.'; return true;" title="<?php echo (sprintf(L_CLICKS,L_LINKS_6,L_TRANSLATOR)); ?>" target=_blank>Ciprian Murariu</a> - Bucureşti, România.</I></B></TD>
+	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- Tutorial în limba română a <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -</FONT><br /><I>&copy; 2005<?php echo((date('Y')>"2005") ? "-".date('Y') : ""); ?> - Traducerea şi adaptarea de <a href="mailto:ciprianmp@yahoo.com?subject=phpMyChat%20Plus%20translation" onMouseOver="window.status='<?php echo (sprintf(L_CLICKS,L_LINKS_6,L_TRANSLATOR)); ?>.'; return true;" title="<?php echo (sprintf(L_CLICKS,L_LINKS_6,L_TRANSLATOR)); ?>" target=_blank>Ciprian Murariu</a> - Bucureşti, România.</I></B></TD>
 </TR>
 </TABLE><br /><br />
-<P><A NAME="top"></P>
+<P><A NAME="top"></A></P>
 <TABLE BORDER="3" CELLPADDING="3">
 <TR>
 	<TD><FONT SIZE="+2">Cuprinsul acestui tutorial</FONT></TD>
@@ -125,7 +125,7 @@ if (C_HTML_TAGS_KEEP != "none")
 &nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#private" CLASS="topLink">Mesaje Private</A><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#actions" CLASS="topLink">Acţiuni</A><br />
 &nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#ignore" CLASS="topLink">Ignorarea altor Utilizatori</A><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#whois" CLASS="topLink">Aflarea datelor publice ale altor Utilizatori</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#whois" CLASS="topLink">Aflarea datelor publice ale Utilizatorilor</A><br />
 <?php
 if (C_SAVE != "0")
 {
@@ -184,7 +184,7 @@ else
 {
 	?>
 	<P>
-	Altfel poti să te <A HREF="#register">înregistrezi</A> mai întâi sau să intri pe Chat cu porecla aleasă, numai că nu ţi se va rezerva acea poreclă (un alt utilizator va putea folosi aceeaşi porecla dupa ce vei ieşi de pe Chat).
+	Altfel poţi să te <A HREF="#register">înregistrezi</A> mai întâi sau să intri pe Chat cu porecla aleasă, numai că nu ţi se va rezerva acea poreclă (un alt utilizator va putea folosi aceeaşi poreclă după ce vei ieşi de pe Chat).
 	<?php
 }
 ?>
@@ -200,10 +200,10 @@ Dacă nu te-ai înregistrat deja<?php if (!C_REQUIRE_REGISTER) echo(" şi vrei s
 	<LI>Mai întâi, alege-ţi o poreclă<?php if (!C_EMAIL_PASWD) echo(" şi o parolă"); ?> în câmpurile (căsuţele) corespunzătoare. Porecla aleasă va fi numele cu care vei fi arătat în mod automat pe chat. Nu poate conţine spaţii, virgule sau backslash-uri (\).
 <?php if (C_NO_SWEAR) echo(" Nu este permisă utilizarea \"cuvintelor obscene\"."); ?>
 	<LI>Apoi, introdu-ţi prenumele, numele de familie şi adresa de email. Pentru a te putea înregistra pe chat, aceste informaţii sunt obligatorii. Informaţia privind sexul este opţională (deşi, în funcţie de această alegere, o mică imagine te va particulariza pe chat ca băiat sau fată).
-	<LI>Dacă ai o pagină personală, poţi să introduci URL-ul pentru a fi vizitată şi de ceilalţi utilizatori.
-	<LI>Câmpul Limba poate ajuta pe ceilalti în discuţiile viitoare cu tine. Ei vor sti în ce limbă sa ţi se adreseze.
+	<LI>Dacă ai o pagină personală, poţi să introduci URL-ul pentru a fi vizitată şi de către ceilalţi utilizatori.
+	<LI>Câmpul Limba poate ajuta pe ceilalti în discuţiile viitoare cu tine. Ei vor şti în ce limbă sa ţi se adreseze.
 	<LI>În cele din urmă, dacă vrei ca ceilalţi participanţi să-ţi cunoască adresa de email, bifează căsuţa de lângă expresia "Arată e-mailul la comanda /whois". Dacă nu vrei să-ţi fie cunoscut emailul, lasă căsuţa nebifată.
-	<LI>Apoi, apasă butonul Înregistreaza-te şi contul îţi va fi creat. Pentru a te opri fără să te înregistrezi, apasă Închide.
+	<LI>Apoi, apasă butonul <?php echo(L_REG_3); ?> şi contul îţi va fi creat. În funcţie de setările servcerului, este posibil să trebuiască să aştepţi aprobarea contului de către Administrator. Oricum, vei primi un email de înştiinţare cu instrucţiuni pentru paşii următori. Pentru a te opri fără să te înregistrezi, apasă <?php echo(L_REG_25); ?>.
 </UL>
 <P>
 <A NAME="modProfile"></A>Bineînţeles, utilizatorii care s-au înregistrat îşi vor putea modifica<?php if (C_SHOW_DEL_PROF) echo("/şterge"); ?> profilul personal apăsând pe <?php echo((!C_SHOW_DEL_PROF ? "butonul corespunzător" : "butoanele corespunzătoare")); ?>.<br />
@@ -264,7 +264,7 @@ Poţi schimba culoarea textului afişat alegând o altă culoare din lista de cu
 <P>
 <OL>
 	Au fost definite două reguli de bază pentru lista de utilizatori:<br />
-	<LI>o mică imagine reprezentând sexul (băiat sau fată) este afişată înaintea poreclei unui utilizator înregistrat (apăsând pe acea imagine va lansa comanda <A HREF="#whois">whois popup</A>, deschizând un popup cu informaţii despre profilul utilizatorului respectiv), în timp ce utilizatorii neînregistraţi, vor avea doar un spaţiu înaintea poreclei;<br />
+	<LI>o mică imagine reprezentând sexul (băiat sau fată) este afişată înaintea poreclei unui utilizator înregistrat (apăsând pe acea imagine va lansa comanda <A HREF="#whois">/whois</A>, deschizând un popup cu informaţii despre profilul utilizatorului respectiv), în timp ce utilizatorii neînregistraţi, vor avea doar un spaţiu înaintea poreclei;<br />
 	<LI>porecla administratorului sau a moderatorilor va fi afişată cu caractere italice <I>(înclinate)</I>.
 </OL>
 <P><I>Spre exemplificare</I>, în imaginea de mai jos poţi înţelege următoarele:
@@ -289,7 +289,7 @@ Poţi schimba culoarea textului afişat alegând o altă culoare din lista de cu
 <P>
 <FONT SIZE="+1"><A NAME="exit"><B>Părăsirea unei camere de chat:</B></A></FONT>
 <P>
-Pentru a părăsi camera, fă click pe "Ieşire". Poţi face acelaşi lucru utilizând comenzile de mai jos în căsuţa pentru mesaje (acest lucru poate fi util mai ales pentru cazul în care mouse-ul nu răspunde la comenzi):<br />
+Pentru a părăsi camera, fă click pe <?php echo (EXIT_LINK_TYPE) ? "imaginea <img src='localization/$L/images/exitdoor.gif' border=0 alt='".L_EXIT."'>" : 'link-ul "'.L_EXIT.'"'; ?>. Poţi face acelaşi lucru utilizând comenzile de mai jos în căsuţa pentru mesaje (acest lucru poate fi util mai ales pentru cazul în care mouse-ul nu răspunde la comenzi):<br />
 /exit<br />
 /bye<br />
 /quit<br />
@@ -316,56 +316,56 @@ Apăsând pe imaginea <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 AL
 
 
 <P>
-<FONT SIZE="+1"><A NAME="customize"><B>Customizing the Chat View:</B></A></FONT>
+<FONT SIZE="+1"><A NAME="customize"><B>Personalizarea aspectului Camerei de Chat:</B></A></FONT>
 <P>
-There are many different ways to customize the look of the Chat. To change settings, simply type the appropriate command into your text box and press the Enter/Return key.
+Sunt mai multe moduri de a personaliza aspectul cmerei de Chat. Pentru a schimba aceste setări, scrie comanda corespunzătoare în căsuţa text şi apoi apasă tasta Enter/Return.
 <P>
 <UL>
 	<?php
 	if ($Ver == "H")
 	{
 		?>
-		<LI>The <B>Clear command</B> allows you to clean the main chat screen and display the last 5 messages sent on your screen.<br />Type "/clear" without quotes.
+		<LI><B>Comanda Clear</B> îţi permite să cureţi ecranul de mesaje şi să vezi numai ultimele 5.<br />Scrie "/clear" fără ghilimele.
 		<P>
 		<?php
 	}
 	else
 	{
 		?>
-		<LI>The <B>Order command</B> allows you to toggle between having new messages appear at the top of the screen or at the bottom.<br />Type "/order" without quotes.
+		<LI><B>Comanda Order</B> > îţi permite să afişezi mesajele noi în partea de sus sau în partea de jos a ecranului.<br />Scrie "/order" fără ghilimele.
 		<P>
 		<?php
 	}
 	?>
-	<LI>The <B>Notify command</B> allows you to toggle on or off the option of seeing the notices when other users enter or exit the chat room. By default this option is <?php echo(C_NOTIFY ? "on" : "off"); ?> and the notices <?php echo(C_NOTIFY ? "will" : "won't"); ?> be seen.<br />Type "/notify" without quotes.
+	<LI><B>Comanda Notify</B> îţi permite să activezi sau să dezactivezi opţiunea de a-ţi fi afişate mesajele referitoare la intrarea sau ieşirea celorlalţi utilizatori din cameră. Implicit, această opţiune este <?php echo(C_NOTIFY ? "activată" : "dezactivată"); ?> iar anunţurile respective <?php echo(C_NOTIFY ? "" : "nu"); ?> vor fi afişate.<br />Scrie "/notify" fără ghilimele.
 	<P>
-	<LI>The <B>Timestamp command</B> allows you to toggle on or off the option of seeing the time the message was posted before each message and the server time in the status bar. By default this option is <?php echo(C_SHOW_TIMESTAMP ? "on" : "off"); ?>.<br />Type "/timestamp" without quotes.
+	<LI><B>Comanda Timestamp</B> îţi permite să activezi sau să dezactivezi opţiunea de a-ţi fi afişat ora la care un mesaj a fost postat (în faţa mesajului respectiv) şi timpul pe server în bara de stare. Implicit, această opţiune este <?php echo(C_SHOW_TIMESTAMP ? "activată" : "dezactivată"); ?>.<br />Scrie "/timestamp" fără ghilimele.
 	<P>
-	<LI>The <B>Refresh command</B> allows you to adjust the rate at which the posted message are refreshed on your screen. The default rate is currently <?php echo(C_MSG_REFRESH); ?> seconds. To change the rate type "/refresh n" without quotes where n is the time in seconds of the new refresh rate.
+	<LI><B>Comanda Refresh</B> îţi permite să ajustezi rata de reîncărcare (reîmprospătare) pe ecran a mesajelor postate. Rata implicită este setată la <?php echo(C_MSG_REFRESH); ?> secunde. Pentru a o schimba, scrie "/refresh n" fără ghilimele, unde n este timpul în secunde al noii rate de reîncărcare.
 	<P>
-	<I>For example:</I> /refresh 5
+	<I>De exemplu:</I> /refresh 5
 	<P>
-	will change the rate to 5 seconds. *Beware, if n is set to less than 3, the refresh is reset not to refresh at all (usefull when you want to read lots of old messages without being disturbed)!*
+	va schimba rata de reîncărcare la 5 secunde. *Atenţie, dacă n este setat la mai puţin de 3, reîncărcarea va fi oprită complet (ar putea fi util atunci când vrei să citeşti foarte multe mesaje vechi, fără a fi întrerupt de reîncărcarea paginii)!*
 	<P>
 	<?php
 	if ($Ver == "L")
 	{
 		?>
-		<LI>The <B>Show command</B> allows you to adjust the number of messages viewable on your screen. To change the default number, type "/show n" without quotes where n is the number of viewable messages.
+		<LI><B>Comanda Show</B> îţi permite să alegi câte mesaje să ai afişate pe ecran la un moment dat. Pentru a schimba numărul implicit, scrie "/show n" fără ghilimele, unde n este numărul de mesaje vizibile.
 		<P>
-		<I>For example:</I> /show 50
+		<I>De exemplu:</I> /show 50
 		<P>
-		will cause the 50 newest messages to be viewable on your screen. If all of the messages cannot be displayed within the message box, a scroll bar will appear on the right side of the message box.</UL>
+		îţi va afişa pe ecran ultimele 50 de mesaje. Dacă nu toate mesajele încap în fereastra de pe ecran, o bară verticală de navigare va apărea în partea dreapta a ferestrei.</UL>
 		<?php
 	}
 	else
 	{
 		?>
-		<LI>The <B>Show and Last commands</B> allow you to clean the screen and display the last <I>n</I> messages sent on your screen. Type "/show n" or "/last n" without quotes where n is the number of viewable messages.
+		<LI><B>Comenzile Show şi Last</B> îţi permit să cureţi ecranul şi să afişezi pe ecran numai ultimele <I>n</I> mesaje. Scrie "/show n" sau "/last n" fără ghilimele, unde n numărul mesajelor de afişat.
 		<P>
-		<I>For example:</I> /show 50 or /last 50
+		<I>De exemplu:</I> /show 50 sau /last 50
 		<P>
-		will clean the message frame and cause the 50 newest messages to be viewable on your screen. If all of the messages cannot be displayed within the message box, a scroll bar will appear on the right side of the message box.</UL>
+		vor curăţa ecranul şi vor afişa numai ultimele 50 de mesaje. Dacă nu toate mesajele încap în fereastra de pe ecran, o bară verticală de navigare va apărea în partea dreapta a ferestrei.</UL>
 		<?php
 	}
 	?>
@@ -374,12 +374,12 @@ There are many different ways to customize the look of the Chat. To change setti
 
 
 <P>
-<FONT SIZE="+2"><A NAME="commands"><B><U>Features and Commands</U></B></A></FONT>
+<FONT SIZE="+2"><A NAME="commands"><B><U>Opţiuni şi Comenzi</U></B></A></FONT>
 <P>
 
-<FONT SIZE="+1"><A NAME="help"><B>Help command:</B></A></FONT>
+<FONT SIZE="+1"><A NAME="help"><B>Comanda Ajutor:</B></A></FONT>
 <P>
-Once inside a chat room, you can launch a help popup by clicking on the <IMG SRC="localization/<?php echo($L); ?>/images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="<?php echo(L_HLP); ?>" TITLE="<?php echo(L_HLP); ?>"> image that sits just before the message box. You can also type the <B>"/help" or "/?" commands</B> in the message box.
+Odată intrat în camera de chat, poţi deschide o pagină de ajutor apăsând pe imaginea <IMG SRC="localization/<?php echo($L); ?>/images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="<?php echo(L_HLP); ?>" TITLE="<?php echo(L_HLP); ?>"> ce se găseşte chiar înainte de căsuţa de mesaje. Acelaşi lucru se poate face şi folosind comenzile <B>"/help" sau "/?"</B> în căsuţa de mesaje.
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <P>
@@ -388,11 +388,11 @@ Once inside a chat room, you can launch a help popup by clicking on the <IMG SRC
 If (C_USE_AVATARS) {
 ?>
 	<hr />
-	<FONT SIZE="+1"><A NAME="avatars"><B>Avatars:</B></A></FONT>
-<P>Avatars are graphic image icons that represent chatters. Only registered users may change their avatar. Registered users may open their Profile (see /profile command) and click on the avatar image to select it from a menu of images, or to input a URL to a graphic image available anywhere on the internet (only images publicly accessible, not password protected sites). Images should be browser-viewable (.gif, .jpg, etc. ) 32 x 32 pixel graphic files for best display.
-<P>Clicking on a person's avatar in the message frame will popup up that person's profile (see <A HREF="#whois">/whois command</A>).
-Clicking on your own avatar on the user's list  will invoke the /profile command, if you are registered.
-If you are not registered, clicking on your own (system's default) avatar will bring up an alert to encourage you to register.
+	<FONT SIZE="+1"><A NAME="avatars"><B>Avatar-uri:</B></A></FONT>
+<P>Avatar-urile sunt imagini grafice care reprezintă utilizatorii. Numai utilizatorii înregistraţi îşi pot alege un avatar personal. Aceştia pot să-şi deschidă Profilul (vezi comanda <A HREF="#changeprofile">/profile</A> pentru mai multe detalii) şi, apăsând pe imaginea avatar, să îşi selecteze avatar-ul dorit dintr-o listă sau prin adăugarea unui link către o imagine disponibilă pe internet (numai imagini accesibile public, nu cele de pe site-uri protejate prin parolă). Imaginile trebuie să fie vizibile în browsere (.gif, .jpg, .png, etc.) - recomandat 32 x 32 pixeli pentru cea mai bună afişare.
+<P>Apăsând pe avatar-ul cuiva în zona de mesaje, se va deschide o pagină popup cu profilul acelei persoane (vezi comanda <A HREF="#whois">/whois</A> pentru mai multe detalii).
+Apăsând pe propriul tău avatar - în lista de utilizatori din zona din dreapta, va fi invocată comanda /profile (numai dacă eşti înregistrat), permiţându-ţi să îţi editezi profilul.
+Dacă nu eşti înregistrat, apăsând pe avatar-ul tău (cel implicit pentru vizitatori) îţi va fi afişat un mesaj cu recomandarea de a te înregistra.
 <P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <?php
@@ -410,10 +410,10 @@ if (C_USE_SMILIES)
 	DisplaySmilies($ResultTbl,$SmiliesTbl,$Nb,"tutorial");
 	unset($SmiliesTbl);
 	?>
-	<FONT SIZE="+1"><A NAME="smilies"><B>Smilies:</B></A></FONT>
-	<P>You may have graphical smilies inside your messages. See bellow the code you have to type into a message to obtain each one of these similes.
+	<FONT SIZE="+1"><A NAME="smilies"><B>Zâmbete grafice (Emoticons, Smilies):</B></A></FONT>
+	<P>Poţi adăuga zâmbete grafice în mesajele tale. Mai găseşti codul pe care trebuie să-l tastezi în cadrul unui mesaj pentru a obţine fiecare din zâmbetele de mai jos.
 	<P>
-	<I>For example</I>, sending the text "Hi Jack :)" without quote will display the message Hi Jack <IMG SRC="images/smilies/smile1.gif" WIDTH=15 HEIGHT=15 ALT=":)"> in the main frame.
+	<I>De exemplu</I>, trimiţând mesajul "Salut Daniele :)" fără ghilimele, va fi afişat mesajul Salut Daniele <IMG SRC="images/smilies/smile1.gif" WIDTH=15 HEIGHT=15 ALT=":)"> în fereastra de mesaje.
 	<P ALIGN="center">
 	<TABLE BORDER=0 CELLPADDING=3 CELLSPACING=5>
 	<?php
@@ -442,13 +442,13 @@ if (C_USE_SMILIES)
 if (C_HTML_TAGS_KEEP != "none")
 {
 	?>
-	<FONT SIZE="+1"><A NAME="text"><B>Text Formatting:</B></A></FONT>
+	<FONT SIZE="+1"><A NAME="text"><B>Formatarea Textului:</B></A></FONT>
 	<P>
-	Text can be bolded, italicized or underlined by encasing the applicable sections of your text with either the &LT;B&GT; &LT;/B&GT, &LT;I&GT; &LT;/I&GT; or &LT;U&GT; &LT;/U&GT HTML tags.
+	Text-ul poate fi îngroşat, înclinat sau subliniat, prin încadrarea textului dorit între tag-urile HTML: &LT;B&GT; &LT;/B&GT, &LT;I&GT; &LT;/I&GT; sau, respectiv, &LT;U&GT; &LT;/U&GT.
 	<P>
-	<I>For example</I>, &LT;B&GT;this text&LT;/B&GT; will produce <B>this text</B>.
+	<I>De exemplu</I>, &LT;B&GT;acest text&LT;/B&GT; va produce <B>acest text</B>.
 	<P>
-	To create a hyperlink for an e-mail address or URL, type the address (without any HTML tags). The hyperlink will be created automatically.
+	Pentru a crea o hyper-legătură (link) pentru o adresă de email sau adresă WEB, pur şi simplu tastează adresa (fără nici un tag HTML). Hyper-legătura va fi creată în mod automat.
 	<br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 	<P>
 	<P>
@@ -467,44 +467,49 @@ if (C_HTML_TAGS_KEEP != "none")
 <b><?php echo(L_COL_HELP_SUB2); ?></b><br /><?php echo(L_COL_HELP_P2); ?><br /><br /><center><?php echo(COLOR_LIST); ?></center><br /><?php echo(L_COL_HELP_P2a); ?><br /><br />
 </P>
 <P>
-<b><?php echo(L_COL_HELP_SUB3); ?></b><br /><?php echo(L_COLOR_HEAD_SETTINGS); ?><br /><?php if (COLOR_FILTERS) echo(L_COLOR_HEAD_SETTINGSa."<br />"); ?><u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo(L_WHOIS_ADMIN); elseif ($CookieStatus == "t") echo(L_WHOIS_TOPMOD); elseif ($CookieStatus == "m") echo(L_WHOIS_MODER); elseif ($CookieStatus == "u") echo(L_WHOIS_GUEST); else echo(L_WHOIS_REG);?></b><br /><?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
+<b><?php echo(L_COL_HELP_SUB3); ?></b><br />
+<u><?php echo(L_COLOR_HEAD_SETTINGS); ?></u><br />
+<?php if (COLOR_FILTERS) echo("a) COLOR_FILTERS = <b>".(COLOR_FILTERS == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />b) COLOR_ALLOW_GUESTS = <b>".(COLOR_ALLOW_GUESTS == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />c) COLOR_NAMES = <b>".(COLOR_NAMES == 1 ? L_ENABLED : L_DISABLED)."</b>.<br />"); ?>
+<?php if (COLOR_FILTERS) echo("<u>".L_COLOR_HEAD_SETTINGSa."</u> ".L_WHOIS_ADMIN." = <b><SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN></b>, ".L_WHOIS_MODERS." = <b><SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN></b>, ".L_WHOIS_OTHERS." = <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>."); else echo("<u>".L_COLOR_HEAD_SETTINGSb."</u> <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>.") ?><br />
+<u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo("<font color=".COLOR_CA.">".L_WHOIS_ADMIN); elseif ($CookieStatus == "t") echo("<font color=".COLOR_CA.">".L_WHOIS_TOPMOD); elseif ($CookieStatus == "m") echo("<font color=".COLOR_CM.">".L_WHOIS_MODER); else echo("<font color=".COLOR_CD.">".L_WHOIS_GUEST); echo("</font>");?></b>.<br /><?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <hr />
 <!-- Color Input Box mod by Ciprian end -->
 <P>
-<FONT SIZE="+1"><A NAME="invite"><B>Invite someone to join your current chat room:</B></A></FONT>
+<FONT SIZE="+1"><A NAME="invite"><B>Invitarea unui utilizator să intre în camera ta de chat:</B></A></FONT>
 <P>
-You can use the <B>invite command</B> to invite an user to join the room you are chatting in.
+Poţi folosi <B>comanda invite</B> pentru a invita un utilizator să intre în camera în care te găseşti.
 <P>
-<I>For example:</I> /invite Jack
+<I>De exemplu:</I> /invite Jack
 <P>
-will send a private message to Jack suggesting him to join you in your current chat room. This message contains the name of the target room and this name appears as a link.
+va trimite lui Jack un mesaj privat, sugerându-i să vină şi el în camera ta de chat. Acest mesaj va conţine numele camerei ţintă şi va fi formatat ca un link.This message contains the name of the target room and this name appears as a link.
 <P>
-Note that you can put more than one username in the invite command (eg "/invite Jack,Helen,Alf"). They must be splitted by comma (,) without spaces.
+Ţine cont că poţi adăuga mai multe nume prin această comandă, invitând mai mulţi utilizatori în camera ta (ex: "/invite Jack,Helen,Alf"). Numele trebuie despărţite prin virgulă (,) fără spaţii.
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
 
 <P>
-<FONT SIZE="+1"><A NAME="changeroom"><B>Changing rooms:</B></A></FONT>
+<FONT SIZE="+1"><A NAME="changeroom"><B>Trecerea dintr-o cameră de chat într-alta:</B></A></FONT>
 <P>
-The list to the right of the screen provides a list of chat rooms and the users who are currently in that room. To leave the room you are in and move into one of those rooms, simply click once on the name of that room. Empty rooms do not appear on this list. You may move into an empty room by typing the <B>command "/join #roomname"</B> without quotes.
+Lista din zona din dreapta oferă o listă a tuturor camerelor disponibile, precum şi utilizatorii care se găsesc la un moment dat în fiecare cameră. Pentru a părăsi camera în care eşti şi a intra într-o altă cameră, apasă pur şi simplu pe numele noii camere. Camerele goale nu apar în această listă. Te poţi muta într-o cameră goală folosind <B>comanda "/join #nume cameră"</B>, fără ghilimele.
 <P>
-<I>For example:</I> /join #RedRoom
+<I>De exemplu:</I> /join #Camera Roşie
 <P>
-will move you into the RedRoom.
+te va muta în "Camera Roşie".
+<br /><P>Totodată,
 <?php
 if (C_VERSION == "2")
 {
-	echo(!C_REQUIRE_REGISTER ? "<P>If you're a registered user, you" : "<br /><P>You");
+	echo(!C_REQUIRE_REGISTER ? " dacă eşti înregistrat, " : " ");
 	?>
-	 may also create a new room with this same command. But then you have to specify its type: 0 stands for private, 1 for public (default value).
+	poţi să creezi o nouă cameră folosind aceeaşi comandă. Pentru aceasta, va trebui să specifici tipul camerei: 0 pentru cameră privată, 1 pentru cameră publică (valoarea implicită dacă nu se specifică tipul).
 	<P>
-	<I>For example:</I> /join 0 #MyRoom
+	<I>De exemplu:</I> /join 0 #Camera Mea
 	<P>
-	will create a new private room (assuming a public one has not already been created with that name) called MyRoom and move you into it.
+	va crea o cameră privată nouă numită "Camera Mea" (considerând că nu există deja una publică cu acelaşi nume) şi te va muta automat în această nouă cameră.
 	<P>
-	Room's name cannot contain comma or backslash (\).<?php if (C_NO_SWEAR) echo(" It cannot contain \"swear words\"."); ?>
+	Numele camerei nu poate conţine virgule sau backslash (\).<?php if (C_NO_SWEAR) echo(" Nu este permisă utilizarea \"cuvintelor obscene\"."); ?>
 	<?php
 }
 ?>
@@ -513,23 +518,23 @@ if (C_VERSION == "2")
 <hr />
 
 <P>
-<FONT SIZE="+1"><B><a name="changeprofile">Modificarea profilului propriu:</B></FONT>
+<FONT SIZE="+1"><a name="changeprofile"><B>Modificarea profilului propriu:</B></FONT>
 <P>
-The <B>Profile command</B> creates a separate pop-up window in which you can edit your user profile and modify it except your nick and password (you have to use the link at the start page to do this).<br />Type /profile
+<B>Comanda Profile</B> va deschide o fereastră separată (pop-up) în care vei putea să-ţi modifici profilul de utilizator, cu excepţia numelui (poreclei) şi parolei (acestea pot fi modificate numai folosind link-ul din pagina de start - fără a fi logat pe chat).<br />Scrie "/profile" fără ghilimele.
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
 
 <P>
-<FONT SIZE="+1"><B><a name="recall">Reutilizarea ultimei comenzi sau ultimului mesaj transmis:</B></FONT>
+<FONT SIZE="+1"><a name="recall"><B>Reutilizarea ultimei comenzi sau ultimului mesaj transmis:</B></FONT>
 <P>
-The <B>! command</B> recalls the last message or command you have submitted.<br />Type /!
+<B>Comanda !</B> va readuce în căsuţa de mesaje ultimul mesaj trimis sau ultima comandă folosită.<br />Scrie "/!" fără ghilimele.
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
 
 <P>
-<FONT SIZE="+1"><B><a name="respond">Adresarea către un anumit utilizator în chat:</B></FONT>
+<FONT SIZE="+1"><a name="respond"><B>Adresarea către un anumit utilizator în chat:</B></FONT>
 <P>
 Clicking once on the name of another user from the list (to the right of the screen) will cause their "username>" to appear in your text box. This feature allows you to easily direct a public message to a user, perhaps in response to something he or she has posted above.
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
@@ -537,45 +542,70 @@ Clicking once on the name of another user from the list (to the right of the scr
 <hr />
 
 <P>
-<FONT SIZE="+1"><A NAME="private"><B>Private messages:</B></A></FONT>
+<FONT SIZE="+1"><A NAME="private"><B>Mesaje Private:</B></A></FONT>
 <P>
-To send a private message to another user currently in your chat room, type the <B>command "/msg username messagetext" or "/to username messagetext"</B> without quotes.
+To send a private message to another user currently in your chat room, type the <B>command "/msg username messagetext" or "/to username messagetext"</B> fără ghilimele.
 <P>
 <I>For example, where Jack is the username:</I> /msg Jack Hi there, how are you?
 <P>
 The message will appear to Jack and yourself, but no other users will see the message.
 <P>
-Note that clicking on the nick of a message sender in the main frame will automatically add this command to the input field for messages.
+When PM feature is enabled, it is also possible to send whispers to a user in a different room, using the <B>command "/wisp username message text"</B> without quotes.
+<P>
+<?php
+if (C_PRIV_POPUP)
+{
+?>
+Clicking on the nick of a message sender in the main frame will automatically add the according /to or /wisp command to the input field for messages.
+<?php
+}
+else
+{
+?>
+Clicking on the nick of a user in users list on the right will automatically open a private pop-up window waiting for you to type your message text and hit ENTER to send the message. The replies you'll receive will automatically open in new windows.
+<?php
+}
+?>
+<P>
+Note: When PM pop-ups are enabled (in both chat settings and your own profile), you'll be able to review all the off-line PMs you received since last time you logged in to chat or while you set "away"; all the new off-line PMs addressed to you will open in a pop-up window; you may reply to them one by one from the same window.
+This PM off-line feature is available only for registered users.
+<P>
+<u><?php echo(L_COLOR_HEAD_SETTINGS); ?></u><br />
+<?php echo("a) ENABLE_PM = <b>".(C_ENABLE_PM == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />b) PRIV_POPUP = <b>".(C_PRIV_POPUP == 1 ? L_ENABLED : L_DISABLED)."</b>.<br />"); ?>
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
 
 <P>
-<FONT SIZE="+1"><A NAME="actions"><B>Actions:</B></A></FONT>
+<FONT SIZE="+1"><A NAME="actions"><B>Acţiuni:</B></A></FONT>
 <P>
-To describe what you're doing you can use the <B>command "/me action"</B> without quotes.
+To describe what you're doing you can use the <B>command "/me action"</B> fără ghilimele.
 <P>
-<I>For example:</I> If Jack sends the message "/me is smoking a cigarette" the message frame will shown "<B>* Jack</B> is smoking a cigarette".
+<I>For example:</I> If Jack sends the message "/me is drinking a coffee" the message frame will show "<B>* Jack</B> is drinking a coffee".
+<P>
+As a variation to this command, there is the <B>/mr command</B> available, which will also put the gender title in front of the username.
+<P>
+<I>For example:</I> If Jack sends the message "/mr is watching TV" the message frame will show "<B>* <?php echo(L_HELP_MR); ?> Jack</B> is watching TV".
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
 
 <P>
-<FONT SIZE="+1"><A NAME="ignore"><B>Ignoring other users:</B></A></FONT>
+<FONT SIZE="+1"><A NAME="ignore"><B>Ignorarea altor Utilizatori:</B></A></FONT>
 <P>
-To ignore all of the posts by another user, type the <B>command "/ignore username"</B> without quotes.
+To ignore all of the posts by another user, type the <B>command "/ignore username"</B> fără ghilimele.
 <P>
 <I>For example:</I> /ignore Jack
 <P>
 From that time onward, no messages by the user Jack will display on your screen.
 <P>
-To have a list of the users whose messages are ignored, just type the <B>command "/ignore"</B> without quotes.
+To have a list of the users whose messages are ignored, scrie <B>comanda "/ignore"</B> fără ghilimele.
 <P>
-To resume display of message by an ignored user, type the <B>command "/ignore - username"</B> without quotes where "-" is a hyphen. <P>
+To resume display of message by an ignored user, scrie <B>comanda "/ignore - nume_utilizator"</B> fără ghilimele, unde "-" este tasta minus. <P>
 <P>
 <I>For example:</I> /ignore - Jack
 <P>
-Now all the messages by Jack posted during the current chat session will be displayed on your screen, including those messages posted by Jack before you typed this command.
+Now all the messages by Jack posted during the current chat session will be displayed on your screen, including those messages posted by Jack before you typed this command.<br />
 If you don't specify a username after the hyphen, your "ignored list" will be cleaned.
 <P>
 Note that you can put more than one username in the ignore command (eg "/ignore Jack,Helen,Alf" or "/ignore - Jack,Alf"). They must be splitted by comma (,) without spaces.
@@ -584,13 +614,13 @@ Note that you can put more than one username in the ignore command (eg "/ignore 
 <hr />
 
 <P>
-<FONT SIZE="+1"><A NAME="whois"><B>Getting information about other Users:</B></A></FONT>
+<FONT SIZE="+1"><A NAME="whois"><B>Aflarea datelor publice ale Utilizatorilor:</B></A></FONT>
 <P>
-To see public information about another user, type the <B>command "/whois username"</B> without quotes.
+To see public information about a user, type the <B>command "/whois username"</B> fără ghilimele.
 <P>
 <I>For Example:</I> /whois Jack
 <P>
-where ’Jack’ is the username. This command will create a separate pop-up window that will display the publically available information about that user.
+where ’Jack’ is the username. This command will create a separate pop-up window that will display the publicly available information about that user. Use your own name to check out how your profile info is displayed to other users using the same command.
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
@@ -600,9 +630,9 @@ if (C_SAVE != "0")
 {
 	?>
 	<P>
-	<FONT SIZE="+1"><A NAME="save"><B>Save messages:</B></A></FONT>
+	<FONT SIZE="+1"><A NAME="save"><B>Salvarea mesajelor:</B></A></FONT>
 	<P>
-	To export messages (notification ones excluded) to a local HTML file, type the <B>command "/save n"</B> without quotes.
+	To export messages (notification ones excluded) to a local HTML file, type the <B>command "/save n"</B> fără ghilimele.
 	<P>
 	<I>For Example:</I> /save 5
 	<P>
@@ -617,16 +647,16 @@ if (C_SAVE != "0")
 
 
 <P>
-<FONT SIZE="+2"><A NAME="moderator"><B><U>Commands for the adminstrator and/or moderators only</U></B></A></FONT>
+<FONT SIZE="+2"><A NAME="moderator"><B><U>Comenzi speciale numai pentru moderatori şi/sau administrator</U></B></A></FONT>
 
 <P>
-<FONT SIZE="+1"><A NAME="announce"><B>Send an announcement:</B></A></FONT>
+<FONT SIZE="+1"><A NAME="announce"><B>Trimiterea unui anunţ:</B></A></FONT>
 <P>
-The administrator may send an announcement to all users whatever the the room they are chatting into with the <B>announce command</B>.
+The administrator may make a system wide announcement to all the rooms and reach all the users currently login with the <B>announce command</B>.
 <P>
 <I>For example: /announce The chat system is going down for maintenance tonight at 8pm.</I>
 <P>
-There is another useful announcement like command for roleplaying chats; the administrator or moderators in a room may also send an announcement to all users in current room or all the rooms with the <B>room command</B>.
+There is another useful announcement like command for role-playing chats; the administrator or moderators in a room may also send an announcement to all users in current room or all the rooms with the <B>room command</B>.
 <P>
 <I>For example: /room The meeting starts at 15 pm.</I> or <I>/room * The meeting starts at 15 pm in the Staff room.</I>
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
@@ -634,11 +664,11 @@ There is another useful announcement like command for roleplaying chats; the adm
 <hr />
 
 <P>
-<FONT SIZE="+1"><A NAME="kick"><B>Kicking an user:</B></FONT>
+<FONT SIZE="+1"><A NAME="kick"><B>Eliminarea unui Utilizator:</B></FONT>
 <P>
-Moderators can kick an user and the administrator can kick an user or a moderator with the <B>kick command</B>. Except for the administrator, the user to be kicked must be in the current room.
+Moderators can kick a user and the administrator can kick a user or a moderator with the <B>kick command</B>. Except for the administrator, the user to be kicked must be in the current room.
 <P>
-<I>For example</I>, if Jack is the name of the user to kick away:<I> /kick Jack</I> or <I>/kick Jack reason of kicking</I> The "reason of kicking" can be any text e.g. "for spamming!"
+<I>For example</I>, if Jack is the name of the user to kick away:<I> /kick Jack</I> or <I>/kick Jack reason of kicking</I>. The "reason of kicking" can be any text e.g. "for spamming!"
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
@@ -648,12 +678,12 @@ if (C_BANISH != "0")
 {
 	?>
 	<P>
-	<FONT SIZE="+1"><A NAME="banish"><B>Banish a user:</B></A></FONT>
+	<FONT SIZE="+1"><A NAME="banish"><B>Blocarea unui Utilizator:</B></A></FONT>
 	<P>
-	Moderators can banish an user and the administrator can banish an user or a moderator with the <B>ban command</B>.<br />
-	The administrator can banish an user from another room than the one he is chatting into. He can also banish an user forever and from the chat as a whole with the "<B>*</B>" setting that must be inserted before the nick of the user to be banished.
+	Moderators can banish a user and the administrator can banish a user or a moderator with the <B>ban command</B>.<br />
+	The administrator can banish a user from another room than the one he is chatting into. He can also banish a user forever and from the chat as a whole with the ’<B>*</B>’ setting that must be inserted before the nick of the user to be banished.
 	<P>
-	<I>For example</I>, if Jack is the name of the user to banish: <I>/ban Jack</I>, <I>/ban * Jack</I>, <I>/ban Jack reason of banning</I> o <I>/ban * Jack reason of banning</I>. The "reason of banning" can be any text e.g. "for spamming!"
+	<I>For example</I>, if Jack is the name of the user to banish: <I>/ban Jack</I>, <I>/ban * Jack</I>, <I>/ban Jack reason of banning</I> or <I>/ban * Jack reason of banning</I>. The "reason of banning" can be any text e.g. "for spamming!"
 	<br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 	<P>
 	<hr />
@@ -662,7 +692,7 @@ if (C_BANISH != "0")
 ?>
 
 <P>
-<FONT SIZE="+1"><A NAME="promote"><B>Promote/Demote a user to/from moderator:</B></A></FONT>
+<FONT SIZE="+1"><A NAME="promote"><B>Promovarea/demiterea unui utilizator ca moderator:</B></A></FONT>
 <P>
 Moderators and the administrator can promote an other user to moderator with the <B>promote command</B>.
 <P>

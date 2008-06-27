@@ -24,6 +24,8 @@ class DB
 		if($this->Link_ID == 0)
 		{
 			$this->Link_ID = mysql_connect($this->Host, $this->User, $this->Password);
+			@mysql_query("SET CHARACTER SET utf8");
+			mysql_query("SET NAMES 'utf8'"); 
 			if (!$this->Link_ID)
 			{
 				$this->halt("Link_ID == false, connect failed");

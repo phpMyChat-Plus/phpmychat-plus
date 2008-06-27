@@ -21,7 +21,7 @@ require("./localization/".$L."/localized.chat.php");
 if ($Ver != "H")
 {
 	?>
-<table align="center"><tr>
+<table align="center"><tr><td align="center">
 	<?php
 }
 ?>
@@ -30,7 +30,7 @@ if ($Ver != "H")
 if ($Ver != "H")
 {
 	?>
-</tr></table>
+</td></tr></table>
 	<?php
 }
 ?>

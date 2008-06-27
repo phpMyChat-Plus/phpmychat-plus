@@ -1,5 +1,5 @@
 <?php
-// File : spanish/localized.admin.php - plus version (11.06.2007 - rev.9)
+// File : spanish/localized.admin.php - plus version (21.02.2008 - rev.11)
 // Original translation by Josep Román <josep.roman@zuerich-see.ch>
 // Updates, corrections and additions for the Plus version by Roxana Castañeda <roxminu@yahoo.com> & Shelly Noyes <shelly.noyes@gmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -13,7 +13,9 @@ $FontSize = 10;
 // Top frame
 define("A_MENU_0", "Administración para %s");
 define("A_MENU_1", "Usuarios registrados");
+define("A_MENU_11", "Usuario registrado");
 define("A_MENU_2", "Usuarios bloqueados");
+define("A_MENU_21", "Usuario bloqueado");
 define("A_MENU_3", "Limpiar salas");
 define("A_MENU_4", "Enviar correos");
 define("A_MENU_5", "Configuración");
@@ -33,7 +35,7 @@ define("A_SHEET1_6", "Eliminar perfiles revisados");
 define("A_SHEET1_7", "Modificar");
 define("A_SHEET1_8", "No hay usuarios registrados, excepto usted.");
 define("A_SHEET1_9", "Desterrar perfiles revisados");
-define("A_SHEET1_10", "Ahora debe ir a su hoja de usuarios bloqueados para redefinir sus preferencias.");
+define("A_SHEET1_10", "Ahora debe ir a su hoja de ’".A_MENU_2."’ para redefinir sus preferencias.");
 define("A_SHEET1_11", "Ultima conexión");
 define("A_SHEET1_12", "Razón del destierro (opcional)");
 define("A_USER", "Usuario");
@@ -60,7 +62,7 @@ define("A_SHEET3_3", "Limpiar salas seleccionadas");
 define("A_SHEET3_4", "No hay salas para limpiar.");
 
 // Frame for sending mails
-define("A_SHEET4_0", "Falta ingresar el correo electrónico de admin en la lengueta de Configuración.");
+define("A_SHEET4_0", "Falta ingresar el correo electrónico de admin en la lengueta de ’".A_MENU_5."’.");
 define("A_SHEET4_1", "Enviar correos");
 define("A_SHEET4_2", "Para:");
 define("A_SHEET4_3", "Seleccionar todos");
@@ -75,7 +77,7 @@ define("A_SHEET4_11", "Firma");
 define("A_SHEET4_12", "Deseleccionar todos");
 
 // Frame for configuration
-define("A_SHEET5_0", "La versión instalada de phpMyChat-Plus es %s");
+define("A_SHEET5_0", "La versión instalada es %s");
 define("A_SHEET5_1", "¡Hay una nueva versión (%s)!");
 
 //Chat Extras
@@ -83,7 +85,7 @@ define("A_EXTR_DSBL", "Extras de Chat inutilizados");
 define("A_REFRESH_MSG", "Refrescar Mensajes");
 define("A_MSG_DEL", "Borrar");
 define("A_POST_TIME", "Expuesto en");
-define("A_FROM_TO", "De  A");
+define("A_FROM_TO", "De › A");
 define("A_FROM", "De") ;
 define("A_CHTEX_ROOM", "Salón");
 define("A_CHTEX_MSG", "Mensaje");
@@ -125,7 +127,7 @@ define("A_SEARCH_8", "Descripción");
 define("A_SEARCH_9", "Enlaces");
 define("A_SEARCH_10", "Buscar");
 define("A_SEARCH_11", "Para la categoría de permisiones, las opciones son <b>ad</b>, <b>mod</b> or <b>u</b>.");
-define("A_SEARCH_12", "Para la categoría de género las opciones son <b>0</b> para no especificado, <b>1</b> para hombre o <b>2</b> para mujer.");
+define("A_SEARCH_12", "Para la categoría de género las opciones son <b>0</b> para no especificado, <b>1</b> para hombre, <b>2</b> para mujer o <b>3</b> para pareja.");
 define("A_SEARCH_13", "Nombre de usuario");
 define("A_SEARCH_14", "Primer Nombre");
 define("A_SEARCH_15", "Apellido");
@@ -136,6 +138,8 @@ define("A_SEARCH_20", "Género");
 define("A_SEARCH_21", "Término de busca");
 define("A_SEARCH_22", "Buscar");
 define("A_SEARCH_23", "¡Por favor provea un término de busca e inténtelo otra vez!");
+define("A_SEARCH_24", "No hay resultados para la búsqueda. Por favor intenta otra vez modificando el criterio.");
+define("A_SEARCH_25", "Moderar a este usuario");
 
 // Connected users Page
 define("A_LURKING_1", "Usuarios conectados y observando");

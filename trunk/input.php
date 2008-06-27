@@ -45,6 +45,15 @@ header("Content-Type: text/html; charset=${Charset}");
 
 // avoid server configuration for magic quotes
 set_magic_quotes_runtime(0);
+// Can't turn off magic quotes gpc so just redo what it did if it is on.
+if (get_magic_quotes_gpc()) {
+	foreach($_GET as $k=>$v)
+		$_GET[$k] = stripslashes($v);
+	foreach($_POST as $k=>$v)
+		$_POST[$k] = stripslashes($v);
+	foreach($_COOKIE as $k=>$v)
+		$_COOKIE[$k] = stripslashes($v);
+}
 
 $U = urldecode($U);
 $R = urldecode($R);
@@ -55,6 +64,29 @@ function special_char($str,$lang)
 {
 	return addslashes($lang ? htmlentities(stripslashes($str)) : htmlspecialchars(stripslashes($str)));
 };
+
+// Added for php4 support of mb functions
+if (!function_exists('mb_convert_case'))
+{
+	function mb_convert_case($str,$type,$Charset)
+	{
+		if (eregi("TITLE",$type)) $str = ucwords($str);
+		elseif (eregi("LOWER",$type)) $str = strtolower($str);
+		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+		return $str;
+	}
+};
+
+// Ghost Control mod by Ciprian
+function ghosts_in($what, $in, $Charset)
+{
+	$ghosts = explode(",",$in);
+	for (reset($ghosts); $ghost_name=current($ghosts); next($ghosts))
+	{
+		if (strcasecmp(mb_convert_case($what,MB_CASE_LOWER,$Charset), mb_convert_case($ghost_name,MB_CASE_LOWER,$Charset)) == 0) return true;
+	}
+	return false;
+}
 
 $DbLink = new DB;
 
@@ -153,11 +185,9 @@ else
 
 // Extended two fields for Private Message Popup and room_from by Ciprian
 // ** Send formated messages to the message table **
-include("bot/respond.php");
-function AddMessage($M, $T, $R, $U, $C, $Private, $Read, $RF)
+if (C_BOT_CONTROL) include("bot/respond.php");
+function AddMessage($M, $T, $R, $U, $C, $Private, $Read, $RF, $Charset)
 {
-$M = str_replace("\"", "&quot;", $M);
-$M = str_replace("'","&#39;", $M);
 if (C_BOT_CONTROL && C_BOT_PUBLIC && $Private == "")
 {
 	//--Bot Control Popeye
@@ -165,7 +195,7 @@ $botpath = "botfb/" . $U . ".txt" ;
 $botcontrol ="botfb/$R.txt";
 	if(file_exists($botcontrol))
 	{
-		if (file_exists ($botpath) || eregi(C_BOT_NAME, $M))
+		if (file_exists ($botpath) || eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)))
 		{
 			include "lib/bot.lib.php";
 		}
@@ -176,18 +206,20 @@ $botcontrol ="botfb/$R.txt";
 	global $Latin1;
 	global $status;
 	global $Read;
+	global $M1;
 
+	$M1 = $M;
+	$M = str_replace("\"", "&quot;", $M);
+	$M = str_replace("'", "&#39;", $M);
 	// Text formating tags
 	if(C_HTML_TAGS_KEEP == "none")
 	{
 		if(!C_HTML_TAGS_SHOW)
 		{
 			// eliminates every HTML like tags
-			$M = ereg_replace("<[^>]+>", "", $M);
-			$M = ereg_replace("x3c", "", $M);
-			$M = ereg_replace("x3e", "", $M);
-			$M = ereg_replace("\"", "&quot;", $M);
-			$M = ereg_replace("\'","&#39;", $M);
+			$M = str_replace("<[^>]+>", "", $M);
+			$M = str_replace("x3c", "", $M);
+			$M = str_replace("x3e", "", $M);
 		}
 		else
 		{
@@ -196,8 +228,6 @@ $botcontrol ="botfb/$R.txt";
 			$M = str_replace(">", "&gt;", $M);
 			$M = str_replace("x3c", "&lt;", $M);
 			$M = str_replace("x3e", "&gt;", $M);
-			$M = str_replace("\"", "&quot;", $M);
-			$M = str_replace("\'","&#39;", $M);
 		}
 	}
 	else
@@ -207,8 +237,6 @@ $botcontrol ="botfb/$R.txt";
 		$M = str_replace(">", "&gt;", $M);
 		$M = str_replace("x3c", "&lt;", $M);
 		$M = str_replace("x3e", "&gt;", $M);
-		$M = str_replace("\"", "&quot;", $M);
-		$M = str_replace("\'","&#39;", $M);
 
 		if(function_exists("preg_match"))
 		{
@@ -233,14 +261,16 @@ $botcontrol ="botfb/$R.txt";
 	}
 	$prefix = '(http|https|ftp|telnet|news|gopher|file|wais)://';
 	$pureUrl = '([[:alnum:]/\n+-=%&:_.~?]+[#[:alnum:]+-_~]*)';
-//	$M = eregi_replace($prefix . $pureUrl, '<a href="\\1://\\2" title="Click to open link" onMouseOver="window.status=\'Click to open link.\'; return true" target="_blank">\\1://\\2</a>', $M);
-       $purl="";
-       for ($x=0; $x<count($pmatch[0]); $x++)
-       {
-				$purl .= "||".$pmatch[0][$x];
-       }
-
-    $M = eregi_replace($prefix.$pureUrl, '<a href="links.php?link='.urlencode($purl).'" target="_blank"></a>', $M);
+	if (C_POPUP_LINKS)
+	{
+	    $purl="";
+	    for ($x=0; $x<count($pmatch[0]); $x++)
+	    {
+			$purl .= "||".$pmatch[0][$x];
+	    }
+		$M = eregi_replace($prefix.$pureUrl, '<a href="links.php?link='.urlencode($purl).'" target="_blank"></a>', $M);
+	}
+	else $M = eregi_replace($prefix.$pureUrl, '<a href="\\1://\\2" target="_blank">\\1://\\2</a>', $M);
 
 	// e-mail addresses
 	$M = eregi_replace('([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](fo|g|l|m|mes|o|op|pa|ro|seum|t|u|v|z)?)', '<a href="mailto:\\1" alt="Send email">\\1</a>', $M);
@@ -336,7 +366,7 @@ if (trim($C)!="")
 		}
 	};
 		include_once("./lib/swearing.lib.php");
-		if (checkwords($C, true)) $C = '';		//if user is using a swear word (defined in swearing.lib.php), the font color will resets to default. this is to keep your database as well as our computer clean of swearing (no swear into your cookies on your local computer).
+		if (checkwords($C, true, $Charset)) $C = '';		//if user is using a swear word (defined in swearing.lib.php), the font color will resets to default. this is to keep your database as well as our computer clean of swearing (no swear into your cookies on your local computer).
 		if (isset($C) && $C != '')
 		{
 			if (strcasecmp($C, COLOR_CD) != 0)
@@ -347,7 +377,6 @@ if (trim($C)!="")
 		}
 		else
 		{
-				$M = "<FONT COLOR=\"".COLOR_CD."\">".$M."</FONT>";
 				setcookie("CookieColor", '', time());        // cookie expires in one year
 		}
 	$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', ".time().", '$Private', '".addslashes($M)."', '$Read', '$RF')");
@@ -414,8 +443,8 @@ if (isset($M) && trim($M) != "" && (!isset($M0) || ($M != $M0)) && !($IsCommand 
 	if (C_NO_SWEAR && $R != C_NO_SWEAR_ROOM1 && $R != C_NO_SWEAR_ROOM2 && $R != C_NO_SWEAR_ROOM3 && $R != C_NO_SWEAR_ROOM4)
 	{
 		include("./lib/swearing.lib.php");
-		if (checkwords($C, true)) $C = '';		//if user is using a swear word (defined in swearing.lib.php), the font color will resets to default. this is to keep your database as well as our computer clean of swearing (no swear into your cookies on your local computer).
-		$M = checkwords($M, false);
+		if (checkwords($C, true, $Charset)) $C = '';		//if user is using a swear word (defined in swearing.lib.php), the font color will resets to default. this is to keep your database as well as our computer clean of swearing (no swear into your cookies on your local computer).
+		$M = checkwords($M, false, $Charset);
 	}
 // Bob Dickow Custom code for /away command modification - modified by Ciprian for Plus behaviour.:
 
@@ -434,7 +463,7 @@ if (isset($M) && trim($M) != "" && (!isset($M0) || ($M != $M0)) && !($IsCommand 
      $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS away', '$Latin1', '$time_back', '', '".addslashes($Msg)."', '', '$RF')");
      $DbLink->query("UPDATE ".C_USR_TBL." SET awaystat='0' WHERE username='$U'");
    }
-   AddMessage(stripslashes($M), $T, $R, $U, $C, "", "", $RF);
+   AddMessage(stripslashes($M), $T, $R, $U, $C, "", "", $RF, $Charset);
 // END Bob Dickow custom code for /away command modification - modified by Ciprian for Plus behaviour..
 	$RefreshMessages = true;
 }
@@ -453,16 +482,8 @@ if (!isset($FontName)) $FontName = "";
 // Get the position for the help popup
 if (window.parent.NS4) document.captureEvents(Event.MOUSEDOWN);
 document.onmousedown = window.parent.displayLocation;
-// -->
 
-	// Open popup for administration menu
-	function adm_popup()
-	{
-		window.focus();
-		url = "<?php echo($ChatPath); ?>admin.php?L=<?php echo($L); ?>&Link=1";
-		param = "width=820,height=550,resizable=yes,scrollbars=yes";
-		window.open(url,"admin_popup",param);
-	}
+// -->
 </SCRIPT>
 </HEAD>
 
@@ -503,15 +524,17 @@ document.onmousedown = window.parent.displayLocation;
 		<INPUT TYPE="hidden" NAME="Ign" VALUE="<?php echo(isset($Ign) ? htmlspecialchars(stripslashes($Ign)) : ""); ?>">
 
 		<!-- Last sent message or command (will be used for the '/!' command) -->
-		<INPUT TYPE="hidden" NAME="M0" VALUE="<?php echo(isset($M) ? htmlspecialchars(stripslashes($M)) : ""); ?>">
+		<INPUT TYPE="hidden" NAME="M0" VALUE="<?php echo(isset($M1) ? htmlspecialchars(stripslashes($M1)) : (isset($M) ?  htmlspecialchars(stripslashes($M)) : "")); ?>">
 
 		<A HREF="help_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>" onClick="window.parent.help_popup(); return false" TARGET="_blank" onmouseover="document.images['helpImg'].src = window.parent.imgHelpOn.src" onmouseout="document.images['helpImg'].src = window.parent.imgHelpOff.src" title="<?php echo(L_HLP); ?>"><IMG NAME="helpImg" SRC="localization/<?php echo($L); ?>/images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="<?php echo(L_HLP); ?>" onMouseOver="window.status='<?php echo(L_HLP); ?>.'; return true" onClick="document.forms['MsgForm'].elements['M'].focus();"></A>&nbsp;
 
 		<?php
 		// Get the value to put in the message box : preceding M0 field value for /! command,
 		// preceding entry if it was an erroneous command, else nothing;
+		$M0 = stripslashes($M0);
+		$M0 = str_replace("&#39;", "'", $M0);
 		$ValM = $IsM ? $M0 : "";
-		if (isset($Error) && !($IsCommand)) $ValM = $M;
+		if (isset($Error) && !($IsCommand)) $ValM = $M1;
 		?>
 		<INPUT TYPE="text" NAME="M" SIZE="50" MAXLENGTH="299" VALUE="<?php echo(htmlspecialchars(stripslashes($ValM))); ?>">
 
@@ -555,24 +578,41 @@ $ColorList = eregi_replace('"', "", $ColorList);
 $CC = explode(",", $ColorList);
 if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<SELECT NAME=\"C\" style=\"background-color:".$C.";\">\n");
 else echo("<SELECT NAME=\"C\">\n");
+$not_selected = ((L_NOT_SELECTED_F != "") ? L_NOT_SELECTED_F : L_NOT_SELECTED);
+$null = ((L_NULL_F != "") ? L_NULL_F : L_NULL);
+$selected = " (".$selected.")";
+$not_selected = " ".$null." (".$not_selected.")";
 			while(list($ColorNumber1, $ColorCode) = each($CC))
 			{
 				// Red color is reserved to the admin or a moderator for the current room
 				if ($ColorCode != "" && $ColorCode != COLOR_CD) echo("<OPTION style=\"background-color:".$ColorCode."; color:".COLOR_CD."\" VALUE=\"".$ColorCode."\"");
 				else echo("<OPTION style=\"background-color:".COLOR_CD."; color:".COLOR_CD."\" VALUE=\"".$ColorCode."\"");
 				if ($C == $ColorCode) echo(" SELECTED");
-				if ($ColorCode != "" && $ColorCode != COLOR_CD && $ColorCode != COLOR_CA && $ColorCode != COLOR_CM && $ColorCode != $colorname) echo(">".$ColorCode."</OPTION>");
-				elseif ($ColorCode == $colorname && $ColorCode != "") echo(">".$ColorCode." (profile color)</OPTION>");
-				elseif ($ColorCode == COLOR_CA) echo(COLOR_FILTERS ? ">".$ColorCode." (admin's color)</OPTION>" : ">".$ColorCode."</OPTION>");
-				elseif ($ColorCode == COLOR_CM) echo(COLOR_FILTERS ? ">".$ColorCode." (moder's color)</OPTION>" : ">".$ColorCode."</OPTION>");
-				elseif ($ColorCode == "") echo(">Null (default)</OPTION>");
-				else echo(">".COLOR_CD." (room's color)</OPTION>");
+				if ($ColorCode != "" && $ColorCode != COLOR_CD && $ColorCode != $colorname && $ColorCode != COLOR_CA && $ColorCode != COLOR_CA1 && $ColorCode != COLOR_CA2 && $ColorCode != COLOR_CM && $ColorCode != COLOR_CM1 && $ColorCode != COLOR_CM2) echo(">".$ColorCode."</OPTION>");
+				elseif ($ColorCode == $colorname && $ColorCode != "") echo(">".$ColorCode." (".L_PRO_COLOR.")</OPTION>");
+				elseif ($ColorCode != "" && ($ColorCode == COLOR_CA || $ColorCode == COLOR_CA1 || $ColorCode == COLOR_CA2)) echo(COLOR_FILTERS ? ">".$ColorCode." (".L_WHOIS_ADMIN.")</OPTION>" : ">".$ColorCode."</OPTION>");
+				elseif ($ColorCode != "" && ($ColorCode == COLOR_CM || $ColorCode == COLOR_CM1 || $ColorCode == COLOR_CM2)) echo(COLOR_FILTERS ? ">".$ColorCode." (".L_WHOIS_MODER.")</OPTION>" : ">".$ColorCode."</OPTION>");
+				elseif ($ColorCode == "") echo(">".$not_selected."</OPTION>");
+				else echo(">".COLOR_CD." (".L_ROOM_COLOR.")</OPTION>");
 			}
 			echo("\n</SELECT>\n");
+	// Ghost Control mod by Ciprian
+	$ghost = 0;
+	$superghost = 0;
+	if ($SPECIAL_GHOSTS != "")
+	{
+			$sghosts = "";
+			$sghosts = eregi_replace("'","",C_SPECIAL_GHOSTS);
+			$sghosts = eregi_replace(" AND username != ",",",$sghosts);
+	}
+	if (($sghosts != "" && ghosts_in(stripslashes($U), $sghosts, $Charset)) || (C_HIDE_MODERS && $status == "m") || (C_HIDE_ADMINS && ($status == "a" || $status == "t")))
+	{
+		if ($status == "a" || $status == "t") $superghost = 1;
+		else $ghost = 1;
+	}
 ?>
 		<INPUT TYPE="hidden" NAME="sent" VALUE="0">
 		<INPUT TYPE="submit" NAME="sendForm" VALUE=<?php echo(L_OK); ?> onClick="document.forms['MsgForm'].elements['M'].focus();">
-&nbsp;&nbsp;<span style="background-color:yellow; color:blue; font-weight:600"><?php echo($U); ?></span>
 </TD>
 </TR>
 <TR>
@@ -606,35 +646,35 @@ function inputDropMsg()
 // -->
 </SCRIPT>
 <?php
+$qnotelabel = L_QUICK;
 // use the following line for admins only to get a quicknote drop menu:
 // if (isset($dropdownmsg) && ($status == "a")) {
 // or use the following line version if you want moderators to get a drop menu too.
 // if (isset($dropdownmsg) && ($status == "a" || $status == "m")) {
 // or use the following line version if you want everybody to have access to it:
-$qnotelabel = "".L_QUICK."";
  if (isset($dropdownmsga) && ($status == "a" || $status == "t")) {
-  print "<select name=\"quicknote\" onChange=\"inputDropMsg()\">";
-       print "<option value=\"\">$qnotelabel</option>\n";
+  print "<select name=\"quicknote\" onChange='inputDropMsg()'>";
+       print "<option value=\"\">&nbsp;&nbsp;".$qnotelabel."</option>\n";
 	foreach ($dropdownmsga as $msg) {
-	   $msg = sprintf ("$msg","$U");
-           print "<option value=\"$msg\">$msg</option>\n";
+	$msg = stripslashes(sprintf($msg,$U));
+        print "<option value=\"".$msg."\">".$msg."</option>\n";
         }
 }
  elseif (isset($dropdownmsgm) && $status == "m") {
-  print "<select name=\"quicknote\" onChange=\"inputDropMsg()\">";
-       print "<option value=\"\">$qnotelabel</option>\n";
+  print "<select name=\"quicknote\" onChange='inputDropMsg()'>";
+       print "<option value=\"\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$qnotelabel</option>\n";
 	foreach ($dropdownmsgm as $msg) {
-	   $msg = sprintf ("$msg","$U");
-           print "<option value=\"$msg\">$msg</option>\n";
+	$msg = stripslashes(sprintf($msg,$U));
+        print "<option value=\"".$msg."\">".$msg."</option>\n";
         }
 }
 else {
  if (isset($dropdownmsg)) {
-  print "<select name=\"quicknote\" onChange=\"inputDropMsg()\">";
-       print "<option value=\"\">$qnotelabel</option>\n";
+  print "<select name=\"quicknote\" onChange='inputDropMsg()'>";
+       print "<option value=\"\">".$qnotelabel."</option>\n";
 	foreach ($dropdownmsg as $msg) {
-	   $msg = sprintf ("$msg","$U");
-           print "<option value=\"$msg\">$msg</option>\n";
+	$msg = stripslashes(sprintf($msg,$U));
+        print "<option value=\"".$msg."\">".$msg."</option>\n";
        }
 		}
 	}
@@ -648,22 +688,29 @@ if (C_USE_SMILIES)
 		<A HREF="<?php echo($ChatPath); ?>smilie_popup.php?L=<?php echo($L); ?>" onClick="window.parent.smilie_popup(); return false" TARGET="_blank" onClick="document.forms['MsgForm'].elements['M'].focus();" onMouseOver="window.status='<?php echo(L_LINKS_16); ?>.'; return true" title="<?php echo(L_LINKS_16); ?>"><img src="images/smilies/smile42.gif" border=0 alt="<?php echo(L_LINKS_16); ?>"></A>&nbsp;
 <?php
 }
-if ($status == "a")
-{
-?>
-		<A HREF="<?php echo($ChatPath); ?>admin.php?L=<?php echo($L); ?>&Link=1" CLASS="ChatReg" onClick="adm_popup(); return false" onMouseOver="window.status='<?php echo(L_REG_35); ?>.'; return true" TARGET="_blank"><?php echo(L_REG_35); ?></A>&nbsp;
-<?php
-}
-// Settings bellow should be the same as in lib/commands/buzz.php.
+// Settings below should be the same as in lib/commands/buzz.php.
  //if ($status == "a" || $status == "t") // use this  to show buzz list only to administrators
 if (($status == "m") || ($status == "t") || ($status == "a")) // use this to show buzz list to both admins and moderators.
 //if (($status == "m") || ($status == "a") || ($status == "t") || ($status == "r")) // use this to show buzz list to admins, moderators and registered users. Guests can't use it.
 {
 ?>
-		<A HREF="<?php echo($ChatPath); ?>buzz_popup.php?L=<?php echo($L); ?>" onClick="window.parent.buzz_popup(); return false" CLASS="ChatReg" onClick="document.forms['MsgForm'].elements['M'].focus();" onMouseOver="window.status='<?php echo(L_BUZZ); ?>.'; return true" TARGET="_blank"><?php echo(L_BUZZ); ?></A>&nbsp;
+		<A HREF="<?php echo($ChatPath); ?>buzz_popup.php?L=<?php echo($L); ?>" onClick="window.parent.buzz_popup(); return false" CLASS="ChatReg" onClick="document.forms['MsgForm'].elements['M'].focus();" onMouseOver="window.status='<?php echo(L_BUZZ); ?>.'; return true" TARGET="_blank" title="<?php echo(L_BUZZ); ?>"><img src="images/buzz.gif" border=0 alt="<?php echo(L_BUZZ); ?>"></A>
 <?php
 }
 ?>
+	&nbsp;<INPUT TYPE="text" NAME="server_clock" SIZE="<?php echo(($L == "georgian" || $L == "greek" || $L == "urdu" || $L == "vietnamese") ? "25" : "19"); ?>" VALUE="Chat time" READONLY style="font-size: 11; font-weight: 800;">
+<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
+<!--
+<?php
+// Display the server time in the clock text box
+	include_once("./${ChatPath}lib/worldtime.lib.php");
+	$CorrectedTime = mktime(date("G") + C_TMZ_OFFSET,date("i"),date("s"),date("m"),date("d"),date("Y"));
+?>
+	gap = calc_gap("<?php echo(date("F d, Y H:i:s", $CorrectedTime)); ?>");
+	clock_input(gap);
+// -->
+</SCRIPT>
+	&nbsp;&nbsp;<span style="background-color:yellow; color:blue; font-weight:800">&nbsp;<?php echo($U); ?><span style="color:red"><?php if($superghost) echo("&nbsp;*&nbsp;".L_SUPER_GHOST."&nbsp;*"); elseif($ghost) echo("&nbsp;*&nbsp;".L_GHOST."&nbsp;*");?>&nbsp;</span></span>
 </TD>
 </FORM>
 </TR>

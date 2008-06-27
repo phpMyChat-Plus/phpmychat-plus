@@ -1,5 +1,5 @@
 <?php
-// File : turkish/localized.admin.php - plus version (25.09.2007 - rev.10)
+// File : turkish/localized.admin.php - plus version (20.05.2008 - rev.12)
 // Original translation in turkish by Volkan Övün <vovun@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -12,7 +12,9 @@ $FontSize = 10;
 // Top frame
 define("A_MENU_0", "%s için Yönetim");
 define("A_MENU_1", "Kayıtlı kullanıcılar");
+define("A_MENU_11", "Kayıtlı kullanıcılar");
 define("A_MENU_2", "Yasaklı kullanıcılar");
+define("A_MENU_21", "Yasaklı kullanıcılar");
 define("A_MENU_3", "Odaları temizle");
 define("A_MENU_4", "E-Postalar gönder");
 define("A_MENU_5", "Ayarlar");
@@ -32,7 +34,7 @@ define("A_SHEET1_6", "İşaretlenmiş profilleri kaldır");
 define("A_SHEET1_7", "Değiştir");
 define("A_SHEET1_8", "Sizden başka kayıtlı kullanıcı bulunmamaktadır.");
 define("A_SHEET1_9", "İşaretli profilleri yasakla");
-define("A_SHEET1_10", "Şimdi, seçiminizi saflaştırmak için yasaklı kullanıcılar sayfasını taşımalısınız.");
+define("A_SHEET1_10", "Şimdi, seçiminizi saflaştırmak için ’".A_MENU_2."’ sayfasını taşımalısınız.");
 define("A_SHEET1_11", "Son Bağlantı");
 define("A_SHEET1_12", "Yasaklama sebebi (tercihe bağlı)");
 define("A_USER", "Kullanıcı");
@@ -59,7 +61,7 @@ define("A_SHEET3_3", "Seçili odaları temizle");
 define("A_SHEET3_4", "Temizlenecek oda yok.");
 
 // Frame for sending mails
-define("A_SHEET4_0", "Ayarlar sekmesinde yönetici e-posta adresini belirtmediniz.");
+define("A_SHEET4_0", "’".A_MENU_5."’ sekmesinde yönetici e-posta adresini belirtmediniz.");
 define("A_SHEET4_1", "E-postalar gönder");
 define("A_SHEET4_2", "Kime:");
 define("A_SHEET4_3", "Hepsini seç");
@@ -74,7 +76,7 @@ define("A_SHEET4_11", "İmza");
 define("A_SHEET4_12", "Bütün seçilenleri iptal et");
 
 // Frame for configuration
-define("A_SHEET5_0", "Kullandığınız phpMyChat-Plus sürümü %s dir");
+define("A_SHEET5_0", "Kullandığınız sürümü %s dir");
 define("A_SHEET5_1", "Yeni sürüm (%s) çıktı!");
 
 //Chat Extras
@@ -82,7 +84,7 @@ define("A_EXTR_DSBL", "Sohbet Ekstraları devre dışı") ;
 define("A_REFRESH_MSG", "Mesajları Yenile") ;
 define("A_MSG_DEL", "Sil") ;
 define("A_POST_TIME", "Gönderildiği tarih") ;
-define("A_FROM_TO", "Kimden  Kime") ;
+define("A_FROM_TO", "Kimden › Kime") ;
 define("A_FROM", "Kimden") ;
 define("A_CHTEX_ROOM", "Oda") ;
 define("A_CHTEX_MSG", "Mesaj") ;
@@ -111,6 +113,12 @@ define("A_CHAT_LOGS_20", "Bütün Sohbet Kayıtları Arşivini göster");
 define("A_CHAT_LOGS_21", "Sayfa başına dön");
 define("A_CHAT_LOGS_22", "Arşivlenmiş kayıt dosyaları");
 define("A_CHAT_LOGS_23", "%s tarihinde oluşturuldu.");
+define("A_CHAT_LOGS_24", "%s tarihli bütün kayıtları zip arşiv dosyasına sıkıştır"); // date
+define("A_CHAT_LOGS_25", "Bir zip dosyası oluşturularak bütün kayıtlar bir\\n%s klasöründe depolanacaktır!\\n"); // month/year
+define("A_CHAT_LOGS_26", "\\Emin misiniz?");
+define("A_CHAT_LOGS_27", "Zip arşivleri");
+define("A_CHAT_LOGS_28", "İndir %s");
+define("A_CHAT_LOGS_29", "Bu zip dosyasını sil");
 
 //Admin Search Page
 define("A_SEARCH_1", "Sohbet Odası Arama Sayfası");
@@ -124,7 +132,7 @@ define("A_SEARCH_8", "Açıklama");
 define("A_SEARCH_9", "Bağlantılar");
 define("A_SEARCH_10", "Ara");
 define("A_SEARCH_11", "İzinler kategorisi için seçenekler; <b>ad</b>, <b>mod</b> veya <b>u</b> ’dur.");
-define("A_SEARCH_12", "Cinsiyet kategorisi için seçenekler: <b>0</b> Belirtilmemiş olanlar, <b>1</b> Baylar, veya <b>2</b> Bayanlar.");
+define("A_SEARCH_12", "Cinsiyet kategorisi için seçenekler: <b>0</b> Belirtilmemiş olanlar, <b>1</b> Baylar, <b>2</b> Bayanlar veya <b>3</b> Evli çift.");
 define("A_SEARCH_13", "Kullanıcı adı");
 define("A_SEARCH_14", "Adı");
 define("A_SEARCH_15", "Soyadı");
@@ -135,6 +143,8 @@ define("A_SEARCH_20", "Cinsiyeti");
 define("A_SEARCH_21", "Aranacak kelime");
 define("A_SEARCH_22", "Buna göre ara");
 define("A_SEARCH_23", "Lütfen aranacak bir kelime yazıp tekrar deneyiniz");
+define("A_SEARCH_24", "Kriterlerinize uyan veri bulunmuyor. Lütfen tekrar arayın.");
+define("A_SEARCH_25", "Bu kullanıcıyı denetle");
 
 // Connected users Page
 define("A_LURKING_1", "Bağlı kullanıcılar ve gözlem yapanlar") ;

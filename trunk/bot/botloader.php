@@ -35,21 +35,27 @@
 /**
 * The general preferences and database details.
 */
-include_once("../config/config.lib.php");
-require_once "dbprefs.php";
+$ChatPath = "../";
+$BotPath = "./";
+include_once("${ChatPath}config/config.lib.php");
+require_once("${BotPath}dbprefs.php");
 
 /**
 * Contains the actual functions used in this file to load the AIML files into MySQL.
 */
-require_once "botloaderfuncs.php";
+require_once("${BotPath}botloaderfuncs.php");
 
-print "<font size='3' color='BLACK'><b>When this script is done running you should see text that says \"DONE LOADING.\" If the script times out it is probably because your PHP is running in safe mode. If this is the case use the file <a href=\"botloaderinc.php\">botloaderinc.php</a> to load your AIML files.</B><br /></font>\n";
+print "<b><font size='3' color='black'>When this script is done running you should see \"<font color='red'>DONE LOADING</font>\".</b><br />\n
+<font color='green'><b>Note:</b> If the script times out it is probably because your PHP is running in safe mode. If this is the case use the file <a href=\"botloaderinc.php\">botloaderinc.php</a> to load your AIML files one by one.<br />\n
+Another reason might be that your timeout php setting is set too low. In this case, you sould split the aiml files in smaller pieces (keep the AIML header and footer in all the splitted pieces).</font><br />\n
+<font color='red'><b>Important:</b> If you need to run/reload this file again, you must empty/truncate all the tables starting with \"bot_\" in your database, otherwise the bot will be broken.</font><br />\n<br />\n<b><font color='blue'>Process started! </font><font color='red'>Please wait...</font></b></font><br />\n";
 
 ss_timing_start("all");
 
 $fp = "";
 
 $templatesinserted=0;
+$patternsinserted=0;
 
 $depth = array();
 $whaton = "";
@@ -70,18 +76,21 @@ loadstartup();
 makesubscode();
 
 print "<font size='3' color='RED'><b>DONE LOADING</B><br /></font>\n";
-print "<font size='3' color='BLUE'>Inserted $templatesinserted categories into database</font><br /><br />\n";
-print "<font size='3' color='RED'><b>WARNING!</b> You should password protect the admin directory or remove the botloader.php script or people may be able to abuse your server.</b></font>\n";
+print "<font size='3' color='BLUE'>Inserted $templatesinserted categories into database</font><br />\n";
+print "<font size='3' color='BLUE'>Inserted $patternsinserted sentences into database</font><br /><br />\n";
+print "<font size='3' color='RED'><b>WARNING!</b> You should either delete or rename the botloader.php and botloaderinc.php scripts, otherwise people may be able to abuse your server.</b></font>\n";
 print "<p><font size='3' color='BLACK'><a href='talk.php'>Click here to talk to the bot</a></p></font>\n";
 
 print "<br />";
 
 ss_timing_stop("all");
 print "<br /><br /><font size='3' color='BLACK'>execution time: " . ss_timing_current("all");
-$avgts = $templatesinserted/ss_timing_current("all");
-$avgtm = $templatesinserted/((ss_timing_current("all"))/60);
+$avgts = round($templatesinserted/ss_timing_current("all"));
+$avgtm = round($templatesinserted/((ss_timing_current("all"))/60));
 print "<br /><font size='3' color='BLACK'>Templates per second=$avgts<br />";
 print "<font size='3' color='BLACK'>Templates per minute=$avgtm<br />";
-
-
+$avgps = round($patternsinserted/ss_timing_current("all"));
+$avgpm = round($patternsinserted/((ss_timing_current("all"))/60));
+print "<font size='3' color='BLACK'>Patterns per second=$avgps<br />";
+print "<font size='3' color='BLACK'>Patterns per minute=$avgpm<br />";
 ?>

@@ -13,7 +13,7 @@ if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //adde
 
 if (isset($_COOKIE["CookieStatus"])) $statusu = $_COOKIE["CookieStatus"];
 if (isset($_COOKIE["CookieRoom"]) && !isset($R)) $R = urldecode($_COOKIE["CookieRoom"]);
-if (!isset($R)) $skin == "style1";
+if (!isset($R)) $skin = "skins/style1";
 
 require("config/config.lib.php");
 if (!isset($L) || $L == "") $L = C_LANGUAGE;
@@ -29,7 +29,7 @@ if (C_CHAT_LOGS && (C_SHOW_LOGS_USR || $statusu == "a" || $statusu == "t"))
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 <HEAD>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=<?php echo($Charset); ?>">
-<TITLE><?php echo(((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)." - ".A_CHAT_LOGS_17) ; ?></TITLE>
+<TITLE><?php echo(A_CHAT_LOGS_17." - ".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)) ; ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 </HEAD>
 
@@ -122,7 +122,7 @@ foreach($yrsu as $yru)
 			$dayu = opendir($du); #open directory
 			while (false !== ($dyu = readdir($dayu)))
 			{
-				if (!eregi("\.html",$dyu) && $dyu!=='.' && $dyu!=='..')
+				if (!eregi("\.html",$dyu) && !eregi("error",$dyu) && $dyu!=='.' && $dyu!=='..')
 				{
 					$dayarrayu[]=$dyu;
 		 		}
@@ -132,17 +132,15 @@ foreach($yrsu as $yru)
 		  {
 				sort($dayarrayu);
 				$j=1;
-				echo("<ul>");
 			  foreach ($dayarrayu as $dyu)
 			  {
 					if (eregi(".\htm",$dyu)) $dyhtmu=str_replace(".htm","",$dyu);
 					else $dyhtmu=str_replace(".php","",$dyu);
 					$dyhtmu=str_replace($yeardiru.$monthdiru,"",$dyhtmu);
-					echo ("<li>&nbsp;&middot;&nbsp;<a href=$du/$dyu?L=$L onMouseOver=\"window.status='".sprintf(A_CHAT_LOGS_16,$dyhtmu." ".$MONTHU)."'; return true;\" title='".sprintf(A_CHAT_LOGS_16,$dyhtmu." ".$MONTHU)."'>$dyhtmu</a> (".filesize($du."/".$dyu)." bytes)<br />\n"); #print name of each file found
-					if ($j==5 || $j==10 || $j==15 || $j==20 || $j==25) echo ("</ul><td valign=top align=left nowrap=\"nowrap\"><ul>");
+					echo ("<li><a href=$du/$dyu?L=$L onMouseOver=\"window.status='".sprintf(A_CHAT_LOGS_16,$dyhtmu." ".$MONTHU)."'; return true;\" title='".sprintf(A_CHAT_LOGS_16,$dyhtmu." ".$MONTHU)."'>$dyhtmu</a> (".filesize($du."/".$dyu)." bytes)<br />\n"); #print name of each file found
+					if ($j % 5 == 0) echo ("<td valign=top align=left nowrap=\"nowrap\">");
 					$j++;
 				}
-				echo("<ul>");
 			}
 			unset($dayarrayu);
 			echo("</tr>");
@@ -151,7 +149,7 @@ foreach($yrsu as $yru)
 }
 ?>
 <P align="right"><div align="right"><span dir="LTR" style="font-weight: 600; color:#FFD700; font-size: 7pt">
-&copy; 2005-<?php echo(date(Y)); ?> - by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo (($L!="turkish") ? sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR) : sprintf(L_CLICKS,L_AUTHOR,L_LINKS_6)); ?>.'; return true;" title="<?php echo (($L!="turkish") ? sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR) : sprintf(L_CLICKS,L_AUTHOR,L_LINKS_6)); ?>" target=_blank>Ciprian Murariu</a></span></div></P>
+&copy; 2005-<?php echo(date('Y')); ?> - by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>.'; return true;" title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>" target=_blank>Ciprian Murariu</a></span></div>
 </BODY>
 </HTML>
 <?php
@@ -163,7 +161,7 @@ else
 <html>
 <head>
 <title>Invalid address - Logging feature disabled</title>
-<meta http-equiv="Content-Type" content="text/html; charset=${Charset}">
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo(${Charset}); ?>">
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 </head>
 

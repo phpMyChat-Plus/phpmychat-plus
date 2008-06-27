@@ -50,6 +50,15 @@ header("Content-Type: text/html; charset=${Charset}");
 
 // avoid server configuration for magic quotes
 set_magic_quotes_runtime(0);
+// Can't turn off magic quotes gpc so just redo what it did if it is on.
+if (get_magic_quotes_gpc()) {
+	foreach($_GET as $k=>$v)
+		$_GET[$k] = stripslashes($v);
+	foreach($_POST as $k=>$v)
+		$_POST[$k] = stripslashes($v);
+	foreach($_COOKIE as $k=>$v)
+		$_COOKIE[$k] = stripslashes($v);
+}
 
 $U = urldecode($U);
 $R = urldecode($R);
@@ -62,6 +71,18 @@ function special_char($str,$lang)
 };
 
 $DbLink = new DB;
+
+// Added for php4 support of mb functions
+if (!function_exists('mb_convert_case'))
+{
+	function mb_convert_case($str,$type,$Charset)
+	{
+		if (eregi("TITLE",$type)) $str = ucwords($str);
+		elseif (eregi("LOWER",$type)) $str = strtolower($str);
+		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+		return $str;
+	}
+};
 
 // ** Updates user info in connected users tables and fix some security issues **
 // Fixed a security issue thanks to SeazoN
@@ -157,11 +178,9 @@ else
 
 // Extended two fields for Private Message Popup and room_from by Ciprian
 // ** Send formated messages to the message table **
-include("bot/respond.php");
-function AddMessage($M, $T, $R, $U, $C, $Private, $Read, $RF)
+if (C_BOT_CONTROL) include("bot/respond.php");
+function AddMessage($M, $T, $R, $U, $C, $Private, $Read, $RF, $Charset)
 {
-$M = str_replace("\"", "&quot;", $M);
-$M = str_replace("'","&#39;", $M);
 if (C_BOT_CONTROL && C_BOT_PUBLIC && $Private == "")
 {
 	//--Bot Control Popeye
@@ -169,7 +188,7 @@ $botpath = "botfb/" . $U . ".txt" ;
 $botcontrol ="botfb/$R.txt";
 	if(file_exists($botcontrol))
 	{
-		if (file_exists ($botpath) || eregi(C_BOT_NAME, $M))
+		if (file_exists ($botpath) || eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)))
 		{
 			include "lib/bot.lib.php";
 		}
@@ -180,18 +199,20 @@ $botcontrol ="botfb/$R.txt";
 	global $Latin1;
 	global $status;
 	global $Read;
+	global $M1;
 
+	$M1 = $M;
+	$M = str_replace("\"", "&quot;", $M);
+	$M = str_replace("'","&#39;", $M);
 	// Text formating tags
 	if(C_HTML_TAGS_KEEP == "none")
 	{
 		if(!C_HTML_TAGS_SHOW)
 		{
 			// eliminates every HTML like tags
-			$M = ereg_replace("<[^>]+>", "", $M);
-			$M = ereg_replace("x3c", "", $M);
-			$M = ereg_replace("x3e", "", $M);
-			$M = ereg_replace("\"", "&quot;", $M);
-			$M = ereg_replace("\'","&#39;", $M);
+			$M = str_replace("<[^>]+>", "", $M);
+			$M = str_replace("x3c", "", $M);
+			$M = str_replace("x3e", "", $M);
 		}
 		else
 		{
@@ -200,8 +221,6 @@ $botcontrol ="botfb/$R.txt";
 			$M = str_replace(">", "&gt;", $M);
 			$M = str_replace("x3c", "&lt;", $M);
 			$M = str_replace("x3e", "&gt;", $M);
-			$M = str_replace("\"", "&quot;", $M);
-			$M = str_replace("\'","&#39;", $M);
 		}
 	}
 	else
@@ -211,8 +230,7 @@ $botcontrol ="botfb/$R.txt";
 		$M = str_replace(">", "&gt;", $M);
 		$M = str_replace("x3c", "&lt;", $M);
 		$M = str_replace("x3e", "&gt;", $M);
-		$M = str_replace("\"", "&quot;", $M);
-		$M = str_replace("\'","&#39;", $M);
+
 
 		if(function_exists("preg_match"))
 		{
@@ -237,14 +255,17 @@ $botcontrol ="botfb/$R.txt";
 	}
 	$prefix = '(http|https|ftp|telnet|news|gopher|file|wais)://';
 	$pureUrl = '([[:alnum:]/\n+-=%&:_.~?]+[#[:alnum:]+-_~]*)';
-//	$M = eregi_replace($prefix . $pureUrl, '<a href="\\1://\\2" title="Click to open link" onMouseOver="window.status=\'Click to open link.\'; return true" target="_blank">\\1://\\2</a>', $M);
-       $purl="";
-       for ($x=0; $x<count($pmatch[0]); $x++)
-       {
-				$purl .= "||".$pmatch[0][$x];
-       }
 
-    $M = eregi_replace($prefix.$pureUrl, '<a href="links.php?link='.urlencode($purl).'" target="_blank"></a>', $M);
+	if (C_POPUP_LINKS)
+	{
+	    $purl="";
+	    for ($x=0; $x<count($pmatch[0]); $x++)
+	    {
+			$purl .= "||".$pmatch[0][$x];
+	    }
+		$M = eregi_replace($prefix.$pureUrl, '<a href="links.php?link='.urlencode($purl).'" target="_blank"></a>', $M);
+	}
+	else $M = eregi_replace($prefix.$pureUrl, '<a href="\\1://\\2" target="_blank">\\1://\\2</a>', $M);
 
 	// e-mail addresses
 	$M = eregi_replace('([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](fo|g|l|m|mes|o|op|pa|ro|seum|t|u|v|z)?)', '<a href="mailto:\\1" alt="Send email">\\1</a>', $M);
@@ -340,10 +361,10 @@ if (trim($C)!="")
 		}
 	};
 		include_once("./lib/swearing.lib.php");
-		if (checkwords($C, true)) $C = '';		//if user is using a swear word (defined in swearing.lib.php), the font color will resets to default. this is to keep your database as well as our computer clean of swearing (no swear into your cookies on your local computer).
+		if (checkwords($C, true, $Charset)) $C = '';		//if user is using a swear word (defined in swearing.lib.php), the font color will resets to default. this is to keep your database as well as our computer clean of swearing (no swear into your cookies on your local computer).
 		if (isset($C) && $C != '')
 		{
-			if (strcasecmp($C, COLOR_CD) != 0)
+			if (strcmp($C, COLOR_CD) != 0)
 			{
 				$M = "<FONT COLOR=\"".$C."\">".$M."</FONT>";
 				setcookie("CookieColor", $C, time() + 60*60*24*365);        // cookie expires in one year
@@ -351,7 +372,6 @@ if (trim($C)!="")
 		}
 		else
 		{
-				$M = "<FONT COLOR=\"".COLOR_CD."\">".$M."</FONT>";
 				setcookie("CookieColor", '', time());        // cookie expires in one year
 		}
 	$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', ".time().", '$Private', '".addslashes($M)."', '$Read', '$RF')");
@@ -418,8 +438,8 @@ if (isset($M) && trim($M) != "" && (!isset($M0) || ($M != $M0)) && !($IsCommand 
 	if (C_NO_SWEAR && $R != C_NO_SWEAR_ROOM1 && $R != C_NO_SWEAR_ROOM2 && $R != C_NO_SWEAR_ROOM3 && $R != C_NO_SWEAR_ROOM4)
 	{
 		include("./lib/swearing.lib.php");
-		if (checkwords($C, true)) $C = '';		//if user is using a swear word (defined in swearing.lib.php), the font color will resets to default. this is to keep your database as well as our computer clean of swearing (no swear into your cookies on your local computer).
-		$M = checkwords($M, false);
+		if (checkwords($C, true, $Charset)) $C = '';		//if user is using a swear word (defined in swearing.lib.php), the font color will resets to default. this is to keep your database as well as our computer clean of swearing (no swear into your cookies on your local computer).
+		$M = checkwords($M, false, $Charset);
 	}
 // Bob Dickow Custom code for /away command modification - modified by Ciprian for Plus behaviour.:
 
@@ -438,7 +458,7 @@ if (isset($M) && trim($M) != "" && (!isset($M0) || ($M != $M0)) && !($IsCommand 
      $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS away', '$Latin1', '$time_back', '', '".addslashes($Msg)."', '', '$RF')");
      $DbLink->query("UPDATE ".C_USR_TBL." SET awaystat='0' WHERE username='$U'");
    }
-   AddMessage(stripslashes($M), $T, $R, $U, $C, "", "", $RF);
+   AddMessage(stripslashes($M), $T, $R, $U, $C, "", "", $RF, $Charset);
 // END Bob Dickow custom code for /away command modification - modified by Ciprian for Plus behaviour..
 	$RefreshMessages = true;
 }
@@ -466,13 +486,15 @@ if (typeof(window.parent.frames['input']) != 'undefined'
 		elements['ST'].value = "<?php echo($ST); ?>";
 		elements['NT'].value = "<?php echo($NT); ?>";
 		elements['Ign'].value = "<?php echo(isset($Ign) ? htmlspecialchars(stripslashes($Ign)) : ""); ?>";
-		elements['M0'].value = "<?php echo(isset($M) ? htmlspecialchars(stripslashes($M)) : ""); ?>";
+		elements['M0'].value = "<?php echo(isset($M1) ? htmlspecialchars(stripslashes($M1)) : (isset($M) ?  htmlspecialchars(stripslashes($M)) : "")); ?>";
 
 		// Get the value to put in the message box : previous M0 field value for /! command,
 		// previous entry if it was an erroneous command, else nothing;
 		<?php
+		$M0 = stripslashes($M0);
+		$M0 = str_replace("&#39;", "'", $M0);
 		$ValM = $IsM ? $M0 : "";
-		if (isset($Error) && !($IsCommand)) $ValM = $M;
+		if (isset($Error) && !($IsCommand)) $ValM = $M1;
 		?>
 		elements['M'].value = "<?php echo(htmlspecialchars(stripslashes($ValM))); ?>";
 		elements['C'].value = "<?php echo($C); ?>";

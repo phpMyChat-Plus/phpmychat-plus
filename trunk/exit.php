@@ -17,6 +17,18 @@ require("./localization/".$L."/localized.chat.php");
 
 header("Content-Type: text/html; charset=${Charset}");
 
+// avoid server configuration for magic quotes
+set_magic_quotes_runtime(0);
+// Can't turn off magic quotes gpc so just redo what it did if it is on.
+if (get_magic_quotes_gpc()) {
+	foreach($_GET as $k=>$v)
+		$_GET[$k] = stripslashes($v);
+	foreach($_POST as $k=>$v)
+		$_POST[$k] = stripslashes($v);
+	foreach($_COOKIE as $k=>$v)
+		$_COOKIE[$k] = stripslashes($v);
+}
+
 $Ver1 = ($Ver == "H" ? $Ver : "L");
 
 //---------------------------Begin HighLight command by R.Worley
@@ -37,6 +49,15 @@ if (COLOR_FILTERS)
 
 // For translations with an explicit charset (not the 'x-user-defined' one)
 if (!isset($FontName)) $FontName = "";
+
+// Delete users files from botfb when they unload chat
+function delete_files()
+{
+	$highpath = "botfb/" .$U;         // file is in DIR "botfb" and called "username"
+	if (file_exists($highpath)) unlink($highpath); // checks to see if user file exists.
+	$botpath = "botfb/" .$U. ".txt";
+	if (file_exists($botpath)) unlink($botpath); // checks to see if user file exists.
+}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
@@ -71,14 +92,17 @@ function close_popups()
 		{
 			is_ignored_popup.window.document.forms['IgnForm'].elements['Exit'].value = '1';
 			is_ignored_popup.close();
-		};
-		if (frames['loader'] && !frames['loader'].closed && leaveChat)
-		{
-			leaveChat = true;
-			frames['loader'].close();
-		};
-	};
-}
+		}
+	}
+};
+function leave()
+{
+	if (window.parent.frames['loader'] && !window.parent.frames['loader'].closed)
+	{
+		window.parent.leaveChat = true;
+		window.parent.frames['loader'].close();
+	}
+};
 function MM_swapImgRestore() { //v3.0
   var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
 }
@@ -109,17 +133,17 @@ function MM_swapImage() { //v3.0
 if (EXIT_LINK_TYPE)
 {
 ?>
-<BODY CLASS="frame" onLoad="MM_preloadImages('localization/<? echo ($L) ?>/images/exitdoorRoll.gif')" onUnload="close_popups();">
+<BODY CLASS="frame" onLoad="MM_preloadImages('localization/<?php echo ($L); ?>/images/exitdoorRoll.gif')" onUnload="leave();">
 <CENTER>
 <?php
 if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT']))
 {
 	?>
-<table align="center"><tr>
+<table align="center"><tr><td align="center">
 	<?php
 }
 ?>
-	<a href="<?php echo("$From?Ver=$Ver&L=$L&U=".urlencode(stripslashes($U))."&E=".urlencode(stripslashes($R))."&EN=$T"); ?>" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image4','','localization/<? echo ($L) ?>/images/exitdoorRoll.gif',1); window.status='<?php echo(L_EXIT); ?>.'; return true;" title="<?php echo(L_EXIT); ?>" target="_parent"><img name="Image4" border="0" alt="<?php echo(L_EXIT); ?>" src="localization/<? echo ($L) ?>/images/exitdoor.gif"></a>
+<a href="<?php echo("$From?Ver=$Ver&L=$L&U=".urlencode(stripslashes($U))."&E=".urlencode(stripslashes($R))."&EN=$T"); ?>" onClick="close_popups();" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image4','','localization/<?php echo ($L); ?>/images/exitdoorRoll.gif',1); window.status='<?php echo(L_EXIT); ?>.'; return true;" title="<?php echo(L_EXIT); ?>" target="_parent"><img name="Image4" border="0" alt="<?php echo(L_EXIT); ?>" src="localization/<?php echo ($L); ?>/images/exitdoor.gif"></a>
 <?php
 }
 else
@@ -131,7 +155,7 @@ else
 if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT']))
 {
 	?>
-<table align="center"><tr>
+<table align="center"><tr><td align="center">
 	<?php
 }
 ?>
@@ -166,7 +190,7 @@ if ($Ver == "H")
 if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT']))
 {
 	?>
-</tr></table>
+</td></tr></table>
 	<?php
 }
 ?>

@@ -60,7 +60,7 @@ elseif ($HTTP_USER_AGENT != "")
 //if no language detected set the english (UK or US) or the default one (this is for those who remove languages from server: I might want to chat in a Turkish only room, but want to use an English tutorial - so i want to try those first)
 if (!isset($L))
 {
-	if (file_exists("./localization/english/localized.chat.php")) $L = "engish";
+	if (file_exists("./english/localized.chat.php")) $L = "english";
 	else $L = C_LANGUAGE;
 };
 	

@@ -1,5 +1,5 @@
 <?php
-// File : turkish/localized.tutorial.php - plus version (10.07.2007 - rev.6)
+// File : turkish/localized.tutorial.php - plus version (10.04.2008 - rev.9)
 // Original translation by Volkan Övün <vovun@hotmail.com>
 
 // Get the names and values for vars sent by the script that called this one
@@ -20,7 +20,7 @@ if (isset($_COOKIE["CookieStatus"])) $CookieStatus = $_COOKIE["CookieStatus"];
 
 <HEAD>
 <TITLE><?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> İçin Türkçe Yardım </TITLE>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=${Charset}">
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo(${Charset}); ?>">
 <STYLE>
 A.topLink
 {
@@ -49,10 +49,10 @@ A.topLink:hover, A.topLink:active
 <TABLE BORDER="5" CELLPADDING="5" ALIGN="center">
 <TR>
 	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> İçin Türkçe Yardım -</FONT>
-	<br /><I>&copy; 2007<?php echo((date(Y)>"2007") ? "-".date(Y) : ""); ?> - Türkçeye çeviren <a href="mailto:vovun@ttnet.net.tr?subject=Türkçe%20phpMyChat%20Plus%20çevirisi" onMouseOver="window.status='<?php echo (sprintf(L_CLICKS,L_TRANSLATOR,L_LINKS_6)); ?>.'; return true;" title="<?php echo (sprintf(L_CLICKS,L_TRANSLATOR,L_LINKS_6)); ?>" target=_blank>Volkan Övün</a> - Ankara, Türkiye.</I></B></TD></TD>
+	<br /><I>&copy; 2007<?php echo((date('Y')>"2007") ? "-".date('Y') : ""); ?> - Türkçeye çeviren <a href="mailto:vovun@ttnet.net.tr?subject=Türkçe%20phpMyChat%20Plus%20çevirisi" onMouseOver="window.status='<?php echo (sprintf(L_CLICKS,L_LINKS_6,L_TRANSLATOR)); ?>.'; return true;" title="<?php echo (sprintf(L_CLICKS,L_LINKS_6,L_TRANSLATOR)); ?>" target=_blank>Volkan Övün</a> - Ankara, Türkiye.</I></B></TD></TD>
 </TR>
 </TABLE><br /><br />
-<P><A NAME="top"></P>
+<P><A NAME="top"></A></P>
 <TABLE BORDER="3" CELLPADDING="3">
 <TR>
 	<TD><FONT SIZE="+2">Yardım İçeriği</FONT></TD>
@@ -98,18 +98,16 @@ ettiğini öğrenmek</A><br />
 <?php
 if (C_USE_AVATARS) {
 ?>
-	&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#avatars" CLASS="topLink">Avatarlar (Sanal
-Simgeler)</A><br />
+	&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#avatars" CLASS="topLink">Avatarlar (Sanal Simgeler)</A><br />
 <?php
 }
 ?>
-<!-- Avatar System End.  -->
+<!-- Avatar System End. -->
 <?php
 if (C_USE_SMILIES)
 {
 	?>
-	&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#smilies" CLASS="topLink">Grafik yüz
-ifadeleri</A><br />
+	&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#smilies" CLASS="topLink">Grafik yüz ifadeleri</A><br />
 	<?php
 };
 if (C_HTML_TAGS_KEEP != "none")
@@ -154,7 +152,7 @@ yasaklamak</A><br />
 };
 ?>
 &nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#promote" CLASS="topLink">Bir kullanıcıyı bir
-    odaya Denetleyici olarak tayin etmek / Denetleyici ünvanını iptal etmek:</A><br />
+ odaya Denetleyici olarak tayin etmek / Denetleyici ünvanını iptal etmek:</A><br />
 <P>
 <hr />
 <hr />
@@ -168,7 +166,7 @@ if (C_MULTI_LANG)
 	<FONT SIZE="+1"><A NAME="language"><b>Dil seçimi:</b></A></FONT>
 	<P>
 	Başlangıç sayfasındaki bayraklardan birine tıklayarak dil seçebilirsiniz.
-    Aşağıdaki örnekte Fransızca seçilmektedir:
+ Aşağıdaki örnekte Fransızca seçilmektedir:
 	<P ALIGN="center">
 	<IMG SRC="images/tutorials/flags.gif" HEIGHT="44" WIDTH="424" ALT="Flags for language selection">
 	<br /><P ALIGN="right"><A HREF="#top">Sayfa başına dön</A></P>
@@ -189,7 +187,7 @@ if (C_REQUIRE_REGISTER)
 	?>
 <P>
 	Eğer daha önce kayıt olmadıysanız, önce <A HREF="#register">kayıt olmanız</A>
-    gerekir.
+ gerekir.
 	<?php
 }
 else
@@ -197,8 +195,8 @@ else
 	?>
 <P>
 	Eğer kayıt olmak istemiyorsanız sadece kullanıcı adı yazarak sohbete
-    girersiniz; fakat kullanıcı adınız kalıcı olarak kaydedilmez.&nbsp; (Başka
-    bir kullanıcı siz çıktıktan sonra aynı kullanıcı adını alabilir).
+ girersiniz; fakat kullanıcı adınız kalıcı olarak kaydedilmez. (Başka
+ bir kullanıcı siz çıktıktan sonra aynı kullanıcı adını alabilir).
 	<?php
 }
 ?>
@@ -213,24 +211,25 @@ bir pencere açılacaktır.
 <P>
 <UL>
 	<LI>Önce, kendinize bir kullanıcı adı bularak ilgili kutuya kullanıcı
-    adınızı yazın. Bu
-    kullanıcı adı sohbet odasında otomatik olarak görüntülenecektir. Kullanıcı
-    adınız boşluk, nokta, virgül ve ters bölü işareti (\) içermemelidir.
+ adınızı yazın. Bu
+ kullanıcı adı sohbet odasında otomatik olarak görüntülenecektir. Kullanıcı
+ adınız boşluk, nokta, virgül ve ters bölü işareti (\) içermemelidir.
 <?php if (C_NO_SWEAR) echo(" It can not contain \"swear words\"."); ?>
 	<LI>İkinci olarak, adınızı soyadınızı ve elektronik posta adresinizi
-    yazınız. Sohbete kayıt olmak için bütün bu bilgilerin belirtilmesi
-    gerekir. Cinsiyet bilgisi tercihe bağlıdır.
+ yazınız. Sohbete kayıt olmak için bütün bu bilgilerin belirtilmesi
+ gerekir. Cinsiyet bilgisi tercihe bağlıdır.
 	<LI>Eğer bir web siteniz varsa, sitenizin URL adresini kutucuğa yazabilirsiniz.
 	<LI>Dil kutusuna bildiğiniz dilleri yazabilirsiniz; ileride diğer kullanıcılara hangi dilleri anladığınıza dair
-    fikir verecektir.
+ fikir verecektir.
 	<LI>Son olarak, eğer e-posta adresinizin diğer kullanıcılar tarafından
-    görülebilmesini arzu ediyorsanız lütfen "E-posta adresini genel bilgilerde
-    göster" onay kutucuğunu işaretleyiniz. Eğer e-posta adresinizin diğer
-    kullanıcılar tarafından görülmesini istemiyorsanız onay kutucuğunu boş
-    bırakınız..
-	<LI>Daha sonra Kayıt ol butonuna tıklayın, kaydınız yapılacaktır. Bu
-    işlemlerin herhangi bir aşamasında kayıt olmaktan vazgeçerseniz Kapat
-    butonuna tıklayınız.
+ görülebilmesini arzu ediyorsanız lütfen "E-posta adresini genel bilgilerde
+ göster" onay kutucuğunu işaretleyiniz. Eğer e-posta adresinizin diğer
+ kullanıcılar tarafından görülmesini istemiyorsanız onay kutucuğunu boş
+ bırakınız..
+	<LI>Sonra <?php echo(L_REG_3); ?> butonuna tıklayın, hesabınız oluşturulacaktır.
+ Yönetici’nin yaptığı ayarlara bağlı olarak hesabınız onay için bekleyebilir.
+ Size bilgi içeren bir e-posta alacaksınız. Eğer herhangi bir anda kayıt olmaktan
+ vazgeçip çıkmak isterseniz <?php echo(L_REG_25); ?> butonuna tıklayın.
 </UL>
 <P>
 <A NAME="modProfile"></A>Tabii ki, kayıtlı kullanıcılar kendi profillerinde
@@ -247,10 +246,10 @@ if (C_VERSION == "2")
 	<FONT SIZE="+1"><A NAME="create_room"><b>Oda oluşturmak:</b></A></FONT>
 	<P>
 	Kayıtlı kullanıcılar oda oluşturabilirler. Özel odalara sadece bu odaların
-    isimlerini bilen kullanıcılar girebilir ve özel odaların isimleri içinde
-    bulunan kullanıcılardan başka hiç kimse tarafından görülemez.<br />
+ isimlerini bilen kullanıcılar girebilir ve özel odaların isimleri içinde
+ bulunan kullanıcılardan başka hiç kimse tarafından görülemez.<br />
 	<P>
-	Oda isimleri virgül ya da ters bölü (\) işareti içermemelidir.<?php if (C_NO_SWEAR) echo(" It cannot contain \"swear words\"."); ?>
+	Oda isimleri virgül ya da ters bölü (\) işareti içermemelidir.<?php if (C_NO_SWEAR) echo(" \"Küfür kelimeleri\" içeremez."); ?>
 	<br /><P ALIGN="right"><A HREF="#top">Sayfa başına dön</A></P>
 	<P>
 	<hr />
@@ -263,15 +262,15 @@ if ($Ver == "H")
 	<FONT SIZE="+1"><A NAME="connection_state"><b>Bağlantı yapısını anlamak:</b></A></FONT>
 	<P>
 	Ekranın sağ-üst köşesindeki bir işaret sohbet odasının bağlantı yapısını
-    ifade eder. üç şekildedir:
+ ifade eder. üç şekildedir:
 	<P>
 	<UL>
 		<LI><IMG SRC="images/connectOff.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="No connection">
-        bağlantı gerekmediği anlarda ;
+ bağlantı gerekmediği anlarda ;
 		<LI><IMG SRC="images/connectOn.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Connecting">
-        bağlantının faal olduğu anlarda ;
+ bağlantının faal olduğu anlarda ;
 		<LI><IMG SRC="images/connectError.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Connection failed">
-        bağlantının kesildiği anlarda.
+ bağlantının kesildiği anlarda.
 	</UL>
 	<P>
 	Üçüncü durumdayken kırmızı "butona" tıklamak, tekrar bağlanmaya çalışır.
@@ -289,7 +288,7 @@ Sohbet odasına bir mesaj göndermek için, mesajınızı sol-alt köşedeki met
 kutusuna yazın sonra da göndermek için Enter tuşuna basın (Ya da Gönder butonuna
 tıklayın). Bütün kullanıcılardan gelen mesajlar sohbet penceresinde ardarda
 sıralanır.<br />
-<?php if (C_NO_SWEAR) echo("Note that \"swear words\" are skipped from messages."); ?>
+<?php if (C_NO_SWEAR) echo("\"Küfür kelimelerinin\" mesajlar tarafından dikkate alınmayacağını biliniz."); ?>
 <P>
 Metin kutusunun sağındaki seçim listesinden bir renk seçerek mesajlarınızın
 rengini değiştirebilirsiniz.
@@ -304,7 +303,7 @@ penceredeki kullanıcılar değil):</b></A></FONT>
 <OL>
 	Kullanıcılar listesi için iki temel yapı tanımlanmıştır:<br />
 	<LI>Kayıtlı bir kullanıcının rumuzunun solundaki küçük bir ikon, o
-    kullanıcının cinsiyeti gösterir (buna tıklamak, o kullanıcı için <A HREF="#whois">whois (kimdir penceresi)</A> ni açar); fakat kayıtlı olmayan kullanıcıların rumuzlarının solunda ikon olmayıp bir boşluk yer alır;<br />
+ kullanıcının cinsiyeti gösterir (buna tıklamak, o kullanıcı için <A HREF="#whois">whois (kimdir penceresi)</A> ni açar); fakat kayıtlı olmayan kullanıcıların rumuzlarının solunda ikon olmayıp bir boşluk yer alır;<br />
 	<LI>Yönetici ve Denetleyicilerin rumuzları sağa yatık (italik) yazılır.
 </OL>
 <P><I>Örneğin</I>, aşağıdaki liste görüntüsünden şunları anlarsınız:
@@ -316,10 +315,10 @@ penceredeki kullanıcılar değil):</b></A></FONT>
 	<TD>
 	<UL>
 		<LI>Nicolas phpMyChat odasının Yöneticisi veya Denetleyicilerinden
-        biridir;<br /><br />
+ biridir;<br /><br />
 		<LI>alien (kayıt sırasında cinsiyetini belirtmemiş), Jezek2 ve Caridad
-        phpMyChat odası için ekstra "yetkileri" olmayan kayıtlı
-        kullanıcılardır;<br /><br />
+ phpMyChat odası için ekstra "yetkileri" olmayan kayıtlı
+ kullanıcılardır;<br /><br />
 		<LI>lolo sıradan bir kayıtlı olmayan kullanıcıdır.
 	</UL>
 	</TD>
@@ -332,7 +331,7 @@ penceredeki kullanıcılar değil):</b></A></FONT>
 <P>
 <FONT SIZE="+1"><A NAME="exit"><b>Sohbet odasından çıkmak:</b></A></FONT>
 <P>
-Sohbetten çıkmak için sadece &quot;Çık&quot; resmine tıklayınız. Alternatif olarak,
+Sohbetten çıkmak için sadece <?php echo (EXIT_LINK_TYPE) ? "<img src='localization/$L/images/exitdoor.gif' border=0 alt='".L_EXIT."'> resmine" : '"'.L_EXIT.'" linkine'; ?> tıklayınız. Alternatif olarak,
 aşağıdaki komutlardan herhangi birini metin kutusuna yazabilirsiniz:<br />
 /exit<br />
 /bye<br />
@@ -379,8 +378,8 @@ basmanız (veya Gönder butonuna tıklamanız) yeterlidir.
 	{
 		?>
 		<LI><b>Clear komutu,</b> gönderilen son 5 mesajı bırakarak daha öncekileri siler
-        ve sohbet penceresini temizler.<br />Tırnak işaretleri olmaksızın "/clear"
-        yazınız.
+ ve sohbet penceresini temizler.<br />Tırnak işaretleri olmaksızın "/clear"
+ yazınız.
 		<P>
 		<?php
 	}
@@ -388,63 +387,63 @@ basmanız (veya Gönder butonuna tıklamanız) yeterlidir.
 	{
 		?>
 		<LI><b>Order komutu</b>, yeni gelen mesajların isteğinize göre, sohbet
-        penceresinin üstünde ya da altında&nbsp; görüntülenmesini sağlar.<br />
-        Tırnak işaretleri olmaksızın "/order" yazınız.
+ penceresinin üstünde ya da altında görüntülenmesini sağlar.<br />
+ Tırnak işaretleri olmaksızın "/order" yazınız.
 		<P>
 		<?php
 	};
 	?>
-	<LI><b>Notify komutu</b>, diğer kullanıcıların&nbsp; sohbet odasına giriş
-    çıkışlarının bilgisinin görüntülenmesini / görüntülenmemesini (açık/kapalı)
-    sağlar. Varsayılan olarak bu seçenek &quot;açık&quot;tır ve giriş çıkış bilgisi
-    görüntülenir.<br />Tırnak işaretleri olmaksızın "/notify" yazınız.
+	<LI><b>Notify komutu</b>, diğer kullanıcıların sohbet odasına giriş
+ çıkışlarının bilgisinin görüntülenmesini / görüntülenmemesini (açık/kapalı)
+ sağlar. Varsayılan olarak bu seçenek "açık"tır ve giriş çıkış bilgisi
+ görüntülenir.<br />Tırnak işaretleri olmaksızın "/notify" yazınız.
 	<P>
 	<LI> <B>Timestamp komutu, </B>gönderilen mesajların önünde gönderiliş
-    zamanının ve durum çubuğunda sunucu zamanının
-    görüntülenmesini/görüntülenmemesini (açık/kapalı) sağlar. Varsayılan olarak
-    bu seçenek &quot;açık&quot;tır <?php echo(C_SHOW_TIMESTAMP ? "on" : "off"); ?>.<br />
-    Tırnak işaretleri olmaksızın "/timestamp" yazınız.
+ zamanının ve durum çubuğunda sunucu zamanının
+ görüntülenmesini/görüntülenmemesini (açık/kapalı) sağlar. Varsayılan olarak
+ bu seçenek "açık"tır <?php echo(C_SHOW_TIMESTAMP ? "açık" : "kapalı"); ?>.<br />
+ Tırnak işaretleri olmaksızın "/timestamp" yazınız.
 	<P>
 	<LI><b>Refresh komutu</b>, gönderilen mesajların ekranda yenilenme değerini
-    ayarlar. Varsayılan değer saniyedir. Değeri değiştirmek için, tırnak
-    işaretleri olmaksızın "/refresh (n)" yazın. (n) yerine, yeni ekran yenilenme
-    değerini saniye cinsinden yazın.
+ ayarlar. Varsayılan değer saniyedir. Değeri değiştirmek için, tırnak
+ işaretleri olmaksızın "/refresh (n)" yazın. (n) yerine, yeni ekran yenilenme
+ değerini saniye cinsinden yazın.
 	<P>
 	<i>Örneğin:</i> /refresh 5
 	<P>
 	değeri 5 saniye olarak değiştirir. *Dikkat, eğer n değeri 3 ten aşağı olursa
-    yenilenme devre dışı kalır. (çok sayıda eski mesajı rahatsız olmadan okumak
-    istediğinizde, yenilenmenin devre dışı bırakılması kullanışlıdır)!*
+ yenilenme devre dışı kalır. (çok sayıda eski mesajı rahatsız olmadan okumak
+ istediğinizde, yenilenmenin devre dışı bırakılması kullanışlıdır)!*
 	<P>
 	<?php
 	if ($Ver == "L")
 	{
 		?>
-      <LI><b>Show komutu,</b> ekranınızda görülen mesajların sayısını ayarlamanızı sağlar.
-      Varsayılan sayıyı değiştirmek için, tırnak işaretleri olmaksızın "/show (n)"
-      yazın. (n) görünecek mesaj sayısıdır.
+ <LI><b>Show komutu,</b> ekranınızda görülen mesajların sayısını ayarlamanızı sağlar.
+ Varsayılan sayıyı değiştirmek için, tırnak işaretleri olmaksızın "/show (n)"
+ yazın. (n) görünecek mesaj sayısıdır.
 		<P>
 		<i>Örneğin:</i> /show 50
 		<P>
 		ekranınızda 50 mesajın görünmesini sağlar. Eğer bütün mesajlar aynı anda
-        (ekran boyunun küçük olması nedeniyle) ekranınızda görünmezse, mesaj
-        çerçevesinin sağında bir sürükleme çubuğu belirir.</UL>
+ (ekran boyunun küçük olması nedeniyle) ekranınızda görünmezse, mesaj
+ çerçevesinin sağında bir sürükleme çubuğu belirir.</UL>
 		<?php
 	}
 	else
 	{
 		?>
 		<LI> <B>Show ve Last komutları</B> sohbet çerçevesini temizleyip, son
-        gönderilen (n) sayıdaki mesajın çerçevede kalmasını sağlar. Tırnak
-        işaretleri olmaksızın "/show (n)" veya "/last (n)" yazın. (n), Görünecek
-        olan mesaj sayısını ifade eder.
+ gönderilen (n) sayıdaki mesajın çerçevede kalmasını sağlar. Tırnak
+ işaretleri olmaksızın "/show (n)" veya "/last (n)" yazın. (n), Görünecek
+ olan mesaj sayısını ifade eder.
 		<P>
 		<i>Örneğin:</i> /show 50 veya /last 50
 		<P>
 		wsohbet çerçevesini temizleyecek ve 50 en son gelen mesajın çerçeve
-        içinde görünmesini sağlar. Eğer bütün mesajlar çerçeve içinde
-        görülemiyecek kadar uzunsa, bu kez çerçevenin sağında bir sürükleme
-        çubuğu belirir.</UL>
+ içinde görünmesini sağlar. Eğer bütün mesajlar çerçeve içinde
+ görülemiyecek kadar uzunsa, bu kez çerçevenin sağında bir sürükleme
+ çubuğu belirir.</UL>
 		<?php
 	};
 	?>
@@ -462,7 +461,7 @@ basmanız (veya Gönder butonuna tıklamanız) yeterlidir.
 
 <FONT SIZE="+1"><A NAME="help"><b>Yardım Komutu:</b></A></FONT>
 <P>
-Sohbet odasına girdiğinizde, mesaj kutusunun solundaki&nbsp; <IMG SRC="localization/<?php echo($L); ?>/images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="<?php echo(L_HLP); ?>" TITLE="<?php echo(L_HLP); ?>"> resmine tıklayarak, ya da mesaj kutusuna /help veya /? komutlarını yazarak yardım penceresine ulaşabilirsiniz.
+Sohbet odasına girdiğinizde, mesaj kutusunun solundaki <IMG SRC="localization/<?php echo($L); ?>/images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="<?php echo(L_HLP); ?>" TITLE="<?php echo(L_HLP); ?>"> resmine tıklayarak, ya da mesaj kutusuna /help veya /? komutlarını yazarak yardım penceresine ulaşabilirsiniz.
 <br /><P ALIGN="right"><A HREF="#top">Sayfa başına dön</A></P>
 <P>
 <P>
@@ -474,18 +473,18 @@ If (C_USE_AVATARS) {
 	<FONT SIZE="+1"><A NAME="avatars"><b>Avatarlar (Sanal Simgeler) :</b></A></FONT>
 <P>Avatarlar (Sanal Simgeler) sohbet edenleri simgeleyen grafik resimlerdir.
 Sadece kayıtlı kullanıcılar sanal simgelerini değiştirebilirler. Kayıtlı
-kullanıcılar profillerini açıp&nbsp; ( /profile komutuna bakınız), resimler
-menüsünden sanal simge resmine tıklayarak&nbsp; ya da, internette herhangi bir
+kullanıcılar profillerini açıp (<A HREF="#changeprofile">/profile</A> komutuna bakınız), resimler
+menüsünden sanal simge resmine tıklayarak ya da, internette herhangi bir
 yerdeki bir resmin URL adresini yazarak sanal simgelerini değiştirebilirler (sadece
 şifreyle korunmayan, genel adreslemeye açık resimler kullanılabilir). Resimler
 tarayıcıların kullanabileceği türden (.gif, .jpg, vesaire. ) 32 x 32 pixel
 grafik dosyalar olmalıdır.
 <P>Mesaj çerçevesinde bir kullanıcının sanal simgesine tıklamak o kullanıcının
-profil penceresini açar (<A HREF="#whois">/whois komutuna</A>&nbsp; bakınız).
+profil penceresini açar (<A HREF="#whois">/whois</A> komutuna bakınız).
 Eğer kayıtlı kullanıcıysanız, kendi sanal simgenize tıklamak, kendi profil
 pencerenizin açılmasına neden olur. Kayıtlı kullanıcı değilseniz kaydolmanız
 gerektiğine ilişkin bir uyarı yazısı alırsınız.
-  <P ALIGN="right"><A HREF="#top">Sayfa başına dön</A></P>
+ <P ALIGN="right"><A HREF="#top">Sayfa başına dön</A></P>
 <P>
 <?php
 }
@@ -504,11 +503,11 @@ if (C_USE_SMILIES)
 	?>
 	<FONT SIZE="+1"><A NAME="smilies"><b>Duygu ifadeleri:</b></A></FONT>
 	<P>Mesajlarınıza grafik duygu ifadeleri ekleyebilirsiniz. Aşağıdaki tabloda
-    kullanabileceğiniz duygu ifadelerinin kodlarına bakınız.
+ kullanabileceğiniz duygu ifadelerinin kodlarına bakınız.
 	<P>
-	<i>Örneğin</i>, tırnak işaretleri olmaksızın&nbsp; "Merhaba Mehmet :)&quot; yazıp
-    göndermek, sohbet çerçevesinde Merhaba Mehmet <IMG SRC="images/smilies/smile1.gif" WIDTH=15 HEIGHT=15 ALT=":)">
-    şeklinde görünür.
+	<i>Örneğin</i>, tırnak işaretleri olmaksızın "Merhaba Mehmet :)" yazıp
+ göndermek, sohbet çerçevesinde Merhaba Mehmet <IMG SRC="images/smilies/smile1.gif" WIDTH=15 HEIGHT=15 ALT=":)">
+ şeklinde görünür.
 	<P ALIGN="center">
 	<TABLE BORDER=0 CELLPADDING=3 CELLSPACING=5>
 	<?php
@@ -539,16 +538,16 @@ if (C_HTML_TAGS_KEEP != "none")
 	?>
 	<FONT SIZE="+1"><A NAME="text"><b>Yazı Biçimlemek:</b></A></FONT>
 	<P>
-	Yazılar,&nbsp; &LT;B&GT; &LT;/B&GT, &LT;I&GT; &LT;/I&GT; or &LT;U&GT; &LT;/U&GT HTML
-    etiketleri kullanılarak kalın, sağa yatık (italik) veya altı çizili olarak
-    yazılabilirler. &lt;B&gt;&lt;/B&gt; etiketleri arasına yazılan yazılar kalın, &lt;I&gt;&lt;/I&gt;
-    etiketleri arasına yazılan yazılar sağa yatık (italik) ve &lt;U&gt;&lt;/U&gt; etiketleri
-    arasına yazılan yazılar altı çizili görünürler.<P>
+	Yazılar, &LT;B&GT; &LT;/B&GT, &LT;I&GT; &LT;/I&GT; or &LT;U&GT; &LT;/U&GT HTML
+ etiketleri kullanılarak kalın, sağa yatık (italik) veya altı çizili olarak
+ yazılabilirler. &lt;B&gt;&lt;/B&gt; etiketleri arasına yazılan yazılar kalın, &lt;I&gt;&lt;/I&gt;
+ etiketleri arasına yazılan yazılar sağa yatık (italik) ve &lt;U&gt;&lt;/U&gt; etiketleri
+ arasına yazılan yazılar altı çizili görünürler.<P>
 	<i>Örneğin</i>, &LT;U&GT;bu yazı&lt;/U&gt; şöyle görünür: <U>bu yazı</U>
 	<P>
 	To Bir e-posta adresine ya da bir URL adresine bağ yaratmak için sadece
-    adresi yazmanız yeterlidir (HTML etiketi gerekmez). Bağ otomatik olarak
-    belirecektir.
+ adresi yazmanız yeterlidir (HTML etiketi gerekmez). Bağ otomatik olarak
+ belirecektir.
 	<br /><P ALIGN="right"><A HREF="#top">Sayfa başına dön</A></P>
 	<P>
 	<P>
@@ -567,7 +566,11 @@ if (C_HTML_TAGS_KEEP != "none")
 <b><?php echo(L_COL_HELP_SUB2); ?></b><br /><?php echo(L_COL_HELP_P2); ?><br /><br /><center><?php echo(COLOR_LIST); ?></center><br /><?php echo(L_COL_HELP_P2a); ?><br /><br />
 </P>
 <P>
-<b><?php echo(L_COL_HELP_SUB3); ?></b><br /><?php echo(L_COLOR_HEAD_SETTINGS); ?><br /><?php if (COLOR_FILTERS) echo(L_COLOR_HEAD_SETTINGSa."<br />"); ?><u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo(L_WHOIS_ADMIN); elseif ($CookieStatus == "t") echo(L_WHOIS_TOPMOD); elseif ($CookieStatus == "m") echo(L_WHOIS_MODER); elseif ($CookieStatus == "u") echo(L_WHOIS_GUEST); else echo(L_WHOIS_REG);?></b><br /><?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
+<b><?php echo(L_COL_HELP_SUB3); ?></b><br />
+<u><?php echo(L_COLOR_HEAD_SETTINGS); ?></u><br />
+<?php if (COLOR_FILTERS) echo("a) COLOR_FILTERS = <b>".(COLOR_FILTERS == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />b) COLOR_ALLOW_GUESTS = <b>".(COLOR_ALLOW_GUESTS == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />c) COLOR_NAMES = <b>".(COLOR_NAMES == 1 ? L_ENABLED : L_DISABLED)."</b>.<br />"); ?>
+<?php if (COLOR_FILTERS) echo("<u>".L_COLOR_HEAD_SETTINGSa."</u> ".L_WHOIS_ADMIN." = <b><SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN></b>, ".L_WHOIS_MODERS." = <b><SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN></b>, ".L_WHOIS_OTHERS." = <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>."); else echo("<u>".L_COLOR_HEAD_SETTINGSb."</u> <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>.") ?><br />
+<u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo("<font color=".COLOR_CA.">".L_WHOIS_ADMIN); elseif ($CookieStatus == "t") echo("<font color=".COLOR_CA.">".L_WHOIS_TOPMOD); elseif ($CookieStatus == "m") echo("<font color=".COLOR_CM.">".L_WHOIS_MODER); else echo("<font color=".COLOR_CD.">".L_WHOIS_GUEST); echo("</font>");?></b>.<br /><?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
 <br /><P ALIGN="right"><A HREF="#top">Sayfa başına dön</A></P>
 <hr />
 <!-- Color Input Box mod by Ciprian end -->
@@ -584,7 +587,7 @@ wMehmete sizin bulunduğunuz odaya gelip size katılması söyleyen kişiye öze
 mesaj gönderir. Bu mesajda, üzerine tıklanabilecek bir bağ olarak sizin
 bulunduğunuz odanın adı da yer alır.
 <P>
-Tek bir invite komutuyla birkaç kişiyi davet edebilirsimiz (örnek &quot;/invite
+Tek bir invite komutuyla birkaç kişiyi davet edebilirsimiz (örnek "/invite
 Mehmet,Ayşe,Murat"). İsimler aralarında boşluk bırakılmaksızın virgülle (,)
 ayrılmalıdır.
 <br /><P ALIGN="right"><A HREF="#top">Sayfa başına dön</A></P>
@@ -597,27 +600,27 @@ ayrılmalıdır.
 Ekranın sağında sohbet odalarının ve içlerindeki kullanıcıların adları bulunan
 bir liste vardır. İçinde bulunduğunuz odayı terkedip listedeki odalardan birine
 girmek için, girmek istediğiniz odanın ismine tıklamanız yeterlidir. Boş odalar
-listede görünmez. Boş bir odaya girmek için, tırnak işareti olmaksızın&nbsp;
-&quot;/join #odanınadı&quot; yazın.
+listede görünmez. Boş bir odaya girmek için, tırnak işareti olmaksızın
+"/join #oda nınadı" yazın.
 <P>
-<i>Örneğn:</i> /join #KırmızıOda
+<i>Örneğn:</i> /join #Kırmızı Oda
 <P>
-komutu sizi KırmızıOda isimli odaya taşır.
+komutu sizi "Kırmızı Oda" isimli odaya taşır.
 <?php
 if (C_VERSION == "2")
 {
-	echo(!C_REQUIRE_REGISTER ? "<P>If you’re a registered user, you" : "<br /><P>You");
+	echo(!C_REQUIRE_REGISTER ? "<P>Eğer kayıtlı kullanıcıysanız, aynı " : "<br /><P>Aynı ");
 	?>
-	 Aynı komutla, mevcut olmayan oda da oluşturulabilir. Fakat bu kez odanın
+komutla, mevcut olmayan oda da oluşturulabilir. Fakat bu kez odanın
 niteliğini belirtmeniz gerekir. 0 özel odayı, 1 ise genel odayı ifade eder. (1
 varsayılan değerdir).
 	<P>
-	<i>Örneğin:</i> /join 0 #BenimOdam
+	<i>Örneğin:</i> /join 0 #Benim Odam
 	<P>
-	komutu BenimOdam adında yeni bir özel oda oluşturur ve sizi o odaya taşır.
-    (Aynı adlı bir odanın daha önceden oluşturulmamış olması gerekir).
+	komutu "Benim Odam" adında yeni bir özel oda oluşturur ve sizi o odaya taşır.
+ (Aynı adlı bir odanın daha önceden oluşturulmamış olması gerekir).
 	<P>
-	Oda isimleri virgül (,) ve ters bölü işareti (\) içeremezler.<?php if (C_NO_SWEAR) echo(" It cannot contain \"swear words\"."); ?>
+	Oda isimleri virgül (,) ve ters bölü işareti (\) içeremezler.<?php if (C_NO_SWEAR) echo(" \"Küfür kelimeleri\" içeremez."); ?>
 	<?php
 }
 ?>
@@ -630,7 +633,7 @@ varsayılan değerdir).
 <P>
 <B>Profile komutu</B>, kullanıcı adınız ve şifreniz hariç kullanıcı profilinizi
 değiştirebileceğiniz bir pencere açar. (Şifrenizi değiştirmek için başlangıç
-sayfasındaki Profiliniz bağlantısını kullanmanız gerekir).<br />&nbsp;/profile
+sayfasındaki Profiliniz bağlantısını kullanmanız gerekir).<br /> /profile
 yazın<br /><P ALIGN="right"><A HREF="#top">Sayfa başına dön</A></P>
 <P>
 <hr />
@@ -649,7 +652,7 @@ olarak tekrar yazılmasını sağlar.<br />Type /!
 <FONT SIZE="+1"><B><a name="respond">Belirli bir kullanıcıya cevap vermek:</a></B></FONT>
 <P>
 Sohbet penceresinin sağında bulunan listedeki bir kullanıcının rumuzunun üzerine
-tıklandığında,&nbsp; o kullanıcının &quot;kullanıcıadı&gt;&quot; mesaj kutusunda belirir. Bu
+tıklandığında, o kullanıcının "kullanıcıadı&gt;" mesaj kutusunda belirir. Bu
 özellik size, bir kullanıcıya daha önce sorduğu bir soru için genel (herkesin
 görebileceği) cevap vermenize olanak verir.
 <br /><P ALIGN="right"><A HREF="#top">Sayfa başına dön</A></P>
@@ -660,15 +663,35 @@ görebileceği) cevap vermenize olanak verir.
 <FONT SIZE="+1"><A NAME="private"><B>Özel mesajlar:</B></A></FONT>
 <P>
 Sizin bulunduğunuz odadaki bir kullanıcıya özel mesaj göndermek için tırnak
-işareti olmaksızın<B> &quot;/msg kullanıcıadı mesajınız&quot; veya &quot;/to kullanıcıadı
-mesajınız&quot;</B> <b>komutunu</b> yazınız.
+işareti olmaksızın<B> "/msg kullanıcıadı mesajınız" veya "/to kullanıcıadı
+mesajınız"</B> <b>komutunu</b> yazınız.
 <P>
 <i>Örneğin, Mehmet kullanıcı adı olsun:</i> /msg Mehmet Merhaba, nasılsın?
 <P>
 Bu mesaj sadece Mehmet ve size görünür, diğer kukullanıcılar göremezler.
 <P>
-Sohbet çerçevesindeki bir kullanıcı adına tıklamak, bu komutun mesaj kutusuna otonatik
-olarak yazılmasını sağlar.
+Eğer PM özelliği aktif edilmişse <B>"/wisp kullanıcı mesajı  komutu"</B> tırnaklar olmaksızın kullanılarak başka odadaki kullanıcıya fısıldamak mümkündür.
+<P>
+<?php
+if (C_PRIV_POPUP)
+{
+?>
+Ana pencerede, mesaj gönderen birinin kullanıcı adına tıklamak /to veya /wisp komutunu devreye sokarak mesaj yazmanız için pencere açar.
+<?php
+}
+else
+{
+?>
+Sağ taraftaki kullanıcılar listesindeki bir kullanıcının adına tıkladığınızda, otomatik olarak bir pencere açılır; bu pencerede mesaj metninizi yazar ve göndermek için ENTER’e basarsınız. Size gönderilen cevaplkar da otomatik olarak başka bir pencere açar..
+<?php
+}
+?>
+<P>
+Not: Eğer (sohbet ayarları ve kendi profilinizda, ikisinde birden) Ö.M etkinleştirilmişse, en son giriş yaptığınız zamandan veya "klavye başında değil" e ayarladığınız andan itibaren size gönderilen bütün çevrimdışı Özel Mesajları alabilirsiniz. Hepsine taker taker aynı pencereden cevap verebilirsiniz.<br />
+Çevrimdışı Ö.M özelliğini sadece kayıtlı kullanıcılar kullanabilir.
+<P>
+<u><?php echo(L_COLOR_HEAD_SETTINGS); ?></u><br />
+<?php echo("a) ENABLE_PM = <b>".(C_ENABLE_PM == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />b) PRIV_POPUP = <b>".(C_PRIV_POPUP == 1 ? L_ENABLED : L_DISABLED)."</b>.<br />"); ?>
 <br /><P ALIGN="right"><A HREF="#top">Sayfa başına dön</A></P>
 <P>
 <hr />
@@ -676,11 +699,15 @@ olarak yazılmasını sağlar.
 <P>
 <FONT SIZE="+1"><A NAME="actions"><B>Eylemler:</B></A></FONT>
 <P>
-TYaptığınız şeyi tanımlamak için <B>&quot;/me eylem&quot; komutunu</B>, tırnaklar
+TYaptığınız şeyi tanımlamak için <B>"/me eylem" komutunu</B>, tırnaklar
 olmaksızın yazınız.
 <P>
 <i>Örneğin:</i> Eğer Mehmet "/me kahve içiyor" diye bir mesaj yazarsa, bu mesaj
 ekranda "<B>* Mehmet</B> kahve içiyor" şeklinde görünür.
+<P>
+Bu komutun başka bir türevi olarak cinsiyetinizi belirten kısaltmayı kullanıcı adınızın önüne yazan <B>/mr command</B> komutu da vardır.
+<P>
+<I>Örneğin:</I> Eğer Ahmet "/mr TV seyrediyor" diye bir mesaj gönderirse bu, mesaj penceresinde the "<B><?php echo(L_HELP_MR); ?> Ahmet</B> TV seyrediyor" olarak görünür.
 <br /><P ALIGN="right"><A HREF="#top">Sayfa başına dön</A></P>
 <P>
 <hr />
@@ -689,7 +716,7 @@ ekranda "<B>* Mehmet</B> kahve içiyor" şeklinde görünür.
 <FONT SIZE="+1"><A NAME="ignore"><B>Diğer kullanıcıları gözardı etmek:</B></A></FONT>
 <P>
 Bir kullanıcının gönderdiği bütün mesajları dikkate almamak ve onları görmemek
-istiyorsanız, <B>&quot;/ignore kullanıcıadı&quot; komutunu</B> tırnak işaretleri
+istiyorsanız, <B>"/ignore kullanıcıadı" komutunu</B> tırnak işaretleri
 olmaksızın yazınız.
 <P>
 <i>Örneğin:</i> /ignore Mehmet
@@ -698,23 +725,23 @@ Bu komutu yazdığınız andan itibaren Mehmetin gönderdiği hiçbir mesaj sizi
 ekranınızda görünmeyecektir.
 <P>
 Gözardı ettiğiniz kullanıcıların bir listesini görmek isterseniz tırnak
-işaretleri olmaksızın<b> &quot;/ignore&quot; komutunu</b>&nbsp; yazın.
+işaretleri olmaksızın<b> "/ignore" komutunu</b> yazın.
 <P>
 Gözardı ettiğiniz kullanıcının mesajlarını tekrar görmek istediğinizde tırnak
-işareti olmaksızın <B>&quot;/ignore - kullanıcıadı&quot; komutunu</B> yazın. "-" gözardı
+işareti olmaksızın <B>"/ignore - kullanıcıadı" komutunu</B> yazın. "-" gözardı
 işlemini iptal eden ifadedir. <P>
 <P>
 <i>Örneğin:</i> /ignore - Mehmet
 <P>
 Şimdi, siz bu komutu yazmadan öncekiler de dahil olmak üzere, Mehmetin
 gönderdiği bütün mesajlar ekranınızda tekrar görüntülenmeye başlayacaktır.
- Eğer &quot;-&quot; işaretinden sonra bir kullanıcı adı yazmazsanız, &quot;gözardı edilenler
-listeniz&quot; temizlenecektir; yani gözardı ettiğiniz bütün kullanıcılar tekrar
+ Eğer "-" işaretinden sonra bir kullanıcı adı yazmazsanız, "gözardı edilenler
+listeniz" temizlenecektir; yani gözardı ettiğiniz bütün kullanıcılar tekrar
 normale döner ve mesajları ekranınızda görünür.
 <P>
-Tek bir komutla birden fazla kullanıcıyı gözardı edebilir, (örnek &quot;/ignore
-Mehmet,Ayşe,Mustafa&quot;) ya da gözardı edilen birden fazla kullanıcıyı normale
-çevirebilirsiniz (örnek &quot;/ignore - Mehmet,Ayşe,Mustafa). Kullanıcı adları,
+Tek bir komutla birden fazla kullanıcıyı gözardı edebilir, (örnek "/ignore
+Mehmet,Ayşe,Mustafa") ya da gözardı edilen birden fazla kullanıcıyı normale
+çevirebilirsiniz (örnek "/ignore - Mehmet,Ayşe,Mustafa). Kullanıcı adları,
 arasında boşluk bırakmaksızın virgülle (,) ayrılmalıdır.
 <br /><P ALIGN="right"><A HREF="#top">Sayfa başına dön</A></P>
 <P>
@@ -725,7 +752,7 @@ arasında boşluk bırakmaksızın virgülle (,) ayrılmalıdır.
 öğrenmek:</B></A></FONT>
 <P>
 Bir kullanıcının genel bilgilerini öğrenmek için, tırnak işaretleri olmaksızın<B>
-&quot;/whois kullanıcıadı&quot; komutunu</B> yazın.
+"/whois kullanıcıadı" komutunu</B> yazın.
 <P>
 <i>Örneğin:</i> /whois Mehmet
 <P>
@@ -745,12 +772,12 @@ if (C_SAVE != "0")
 	<FONT SIZE="+1"><A NAME="save"><B>Mesajları saklamak:</B></A></FONT>
 	<P>
 	Mesajları yerel bir HTML dosyasında saklamak için tırnak işaretleri
-    olmaksızın <B>&quot;/save (n)&quot; komutunu</B> yazınız. (n) saklanması istenen mesaj
-    sayısını temsil eder<P>
+ olmaksızın <B>"/save (n)" komutunu</B> yazınız. (n) saklanması istenen mesaj
+ sayısını temsil eder<P>
 	<I>Örneğin:</I> /save 5
 	<P>
 	’5’ saklanması istenen mesaj sayısıdır. Eğer (n) yani mesaj sayısı
-    belirtilmemişse, o odadaki bütün mesajlar dosyada saklanır.
+ belirtilmemişse, o odadaki bütün mesajlar dosyada saklanır.
 	<br /><P ALIGN="right"><A HREF="#top">Sayfa başına dön</A></P>
 	<P>
 	<hr />
@@ -766,19 +793,19 @@ mahsus komutlar</U></B></A></FONT>
 <P>
 <FONT SIZE="+1"><A NAME="announce"><B>Bir duyuru göndermek:</B></A></FONT>
 <P>
-Yönetici,&nbsp; <B>&quot;/announce&quot;&nbsp; komutuyla </B>tüm sistemi kaplayan, bütün
+Yönetici, <B>"/announce" komutuyla </B>tüm sistemi kaplayan, bütün
 odalardaki bütün kullanıcıların görebileceği mesaj gönderebilir.
 <P>
 <i>Örneğin: /announce Sohbet sistemi bakım yapılacağı için bu akşam saat 20:00
 de geçici olarak kapatılacaktır.</i>
 <br /><P ALIGN="right"><A HREF="#top">Sayfa başına dön</A></P>
 <P>
-Başka bir kullanışlı duyuru komutu da <b>&quot;/room&quot;</b> komutudur. Bu komutla
+Başka bir kullanışlı duyuru komutu da <b>"/room"</b> komutudur. Bu komutla
 Yönetici veya Denetleyiciler, içinde bulundukları odaya veya bütün odalara
 duyuru gönderebilirler.
 <P>
-<i>Örneğin: /room Toplantı öğleden sonra saat 15:00te.</i> Veya:&nbsp; <I>/room *
-Toplantı öğleden sonra 15:00te Personel odasında.</I>&nbsp; (*) işareti,
+<i>Örneğin: /room Toplantı öğleden sonra saat 15:00te.</i> Veya: <I>/room *
+Toplantı öğleden sonra 15:00te Personel odasında.</I> (*) işareti,
 duyurunun bütün odalara iletilmesini sağlar.<br /><P ALIGN="right"><A HREF="#top">Sayfa başına dön</A></P>
 <P>
 <hr />
@@ -787,12 +814,12 @@ duyurunun bütün odalara iletilmesini sağlar.<br /><P ALIGN="right"><A HREF="#
 <A NAME="kick">
 <FONT SIZE="+1"><B>Bir kullanıcıyı odadan atmak:</B></FONT>
 <P>
-Moderatorler kullanıcıyı, Yönetici ise kullanıcıyı veya Moderatörü <b>&quot;/kick&quot;
+Moderatorler kullanıcıyı, Yönetici ise kullanıcıyı veya Moderatörü <b>"/kick"
 komutunu</b> kullanarak odadan dışarı atabilirler. Yönetici odadan atılamaz.
 Atılacak olan kullanıcı, o anki mevcut odada olmalıdır. Başka odadaki kullanıcı
 veya Moderatör atılamaz.<P>
 <i>Örneğin</i>, Mehmetin odadan atılacak kullanıcının rumuzu olduğunu
-varsayalım: <I>/kick Mehmet</I> veya: <I>/kick Mehmet (atma sebebi)</I>.  "Atma
+varsayalım: <I>/kick Mehmet</I> veya: <I>/kick Mehmet (atma sebebi)</I>. "Atma
 sebebi" herhangi bir yazı olabilir mesela "küfrettiği için!"
 <br /><P ALIGN="right"><FONT SIZE="+2" COLOR="GREEN"><A HREF="#top">Sayfa başına
 dön</A></font></P>
@@ -807,15 +834,15 @@ if (C_BANISH != "0")
 	<FONT SIZE="+1"><A NAME="banish"><B>Bir kullanıcıyı yasaklamak:</B></A></FONT>
 	<P>
 	Denetleyiciler bir kullanıcıyı, Yöneticiler hen kullanıcıyı hem de
-    Denetleyiciyi <b>&quot;/ban&quot; komutunu</b> kullanarak yasaklayabilir.<br />
+ Denetleyiciyi <b>"/ban" komutunu</b> kullanarak yasaklayabilir.<br />
 	Yönetici, başka bir odada sohbet eden kullanıcıyı yasaklayabilir. Hatta,
-    rumuzunun önüne ’<B>*</B>’ işareti koyarak o kullanıcıyı kalıcı olarak
-    yasaklayabilir.
+ rumuzunun önüne ’<B>*</B>’ işareti koyarak o kullanıcıyı kalıcı olarak
+ yasaklayabilir.
 	<P>
 	<i>Örneğin</i>, Mehmet in yasaklanacak kullanıcının rumuzu olduğunu
-    varsayalım: <I>/ban Mehmet</I>,&nbsp; <I>/ban * Mehmet</I>,&nbsp; <I>/ban
-    Mehmet (yasaklama sebebi)</I> veya&nbsp; <I>/ban * Mehmet (yasaklama sebebi)</I>.  "Yasaklama
-    sebebi" herhangi bir yazı olabilir mesela "küfrettiği için!"
+ varsayalım: <I>/ban Mehmet</I>, <I>/ban * Mehmet</I>, <I>/ban
+ Mehmet (yasaklama sebebi)</I> veya <I>/ban * Mehmet (yasaklama sebebi)</I>. "Yasaklama
+ sebebi" herhangi bir yazı olabilir mesela "küfrettiği için!"
 	<br /><P ALIGN="right"><A HREF="#top">Sayfa başına dön</A></P>
 	<P>
 	<hr />
@@ -827,18 +854,18 @@ if (C_BANISH != "0")
 <FONT SIZE="+1"><A NAME="promote"><B>Bir kullanıcıyı Denetleyici olarak tayin
 etmek / Denetleyiciliğini iptal etmek:</B></A></FONT>
 <P>
-Denetleyiciler ve Yönetici başka bir kullanıcıyı <b>&quot;/promote&quot; komutu</b> ile
+Denetleyiciler ve Yönetici başka bir kullanıcıyı <b>"/promote" komutu</b> ile
 Denetleyici tayin edebilirler.
 <P>
 <i>Örneğin</i>, Mehmet in Denetleyici olarak tayin edilecek kullanıcının rumuzu
 olduğunu varsayalım: <I>/promote Jack</I>
 <P>
 Sadece Yönetici ters işlemi gerçekleştirebilir (Yani bir Denetleyiciyi, ünvanını
-iptal ederek normal kullanıcı yapabilir). Bunun için &quot;<B>/demote&quot; komutu </B>
+iptal ederek normal kullanıcı yapabilir). Bunun için "<B>/demote" komutu </B>
 kullanılır.
 <P>
 <i>Örneğin</i>, Mehmet in Denetleyiciliği iptal edilecek kullanıcının rumuzu
-olduğunu varsayalım: <I>/demote Mehmet</I> veya&nbsp; <I>/demote * Mehmet</I> (*
+olduğunu varsayalım: <I>/demote Mehmet</I> veya <I>/demote * Mehmet</I> (*
 işareti kullanılarak yapılan komut, Mehmetin sadece bulunduğu odadaki değil,
 bütün odalardaki Denetleyiciliğini iptal eder).
 <br /><P ALIGN="right"><A HREF="#top">Sayfa başına dön</A></P>

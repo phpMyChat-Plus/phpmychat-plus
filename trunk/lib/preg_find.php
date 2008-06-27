@@ -1,4 +1,4 @@
-<?
+<?php
 /*
  * Find files in a directory matching a pattern
  *
@@ -25,7 +25,7 @@ define('PREG_FIND_NEGATE', 8);
 define('PREG_FIND_DIRONLY', 16);
 define('PREG_FIND_RETURNASSOC', 32);
 define('PREG_FIND_SORTDESC', 64);
-define('PREG_FIND_SORTKEYS', 128); 
+define('PREG_FIND_SORTKEYS', 128);
 define('PREG_FIND_SORTBASENAME', 256);   # requires PREG_FIND_RETURNASSOC
 define('PREG_FIND_SORTMODIFIED', 512);   # requires PREG_FIND_RETURNASSOC
 define('PREG_FIND_SORTFILESIZE', 1024);  # requires PREG_FIND_RETURNASSOC
@@ -102,7 +102,7 @@ Function preg_find($pattern, $start_dir='.', $args=NULL) {
     }
   }
 
-  closedir($fh); 
+  closedir($fh);
 
   // Before returning check if we need to sort the results.
   if (($depth==0) && ($args & (PREG_FIND_SORTKEYS|PREG_FIND_SORTBASENAME|PREG_FIND_SORTMODIFIED|PREG_FIND_SORTFILESIZE|PREG_FIND_SORTDISKUSAGE)) ) {

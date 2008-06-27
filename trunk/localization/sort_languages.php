@@ -7,8 +7,11 @@ function KeyComp(&$a, $b)
 	return -(strcmp($a,$b));
 };
 
-function krsort(&$LangArray)
+if (!function_exists('krsort'))
 {
-	uksort($LangArray, "KeyComp");
+	function krsort(&$LangArray)
+	{
+		uksort($LangArray, "KeyComp");
+	};
 };
 ?>

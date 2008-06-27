@@ -6,12 +6,14 @@
 // an other function has been developed by your ISP to send PHP mail, just modify
 // the send_email function to make in runable.
 
-// -- SETTINGS BELLOW MUST BE COMPLETED IN ADMIN PANEL --
+// -- SETTINGS BELOW MUST BE COMPLETED IN ADMIN PANEL --
 
 $Paswd_Length = C_PASS_LENGTH;					// Length of the password to be generated
-$Sender_Name = C_ADMIN_NAME;		// May also be the name of your site
+$Sender_Name = eregi("your name",C_ADMIN_NAME) ? "" : C_ADMIN_NAME;		// May also be the name of your site
+$Sender_Name1 = $Sender_Name;		// unformated
 $Sender_email = C_ADMIN_EMAIL;			// For the reply address
-$Chat_URL = C_CHAT_URL;	// To be send as a signature
+$Mail_Greeting = C_MAIL_GREETING;	// To be send as a signature
+$Chat_URL = (C_CHAT_URL == "./") ? "" : C_CHAT_URL;	// To be send as a signature
 
 // -- FUNCTIONS --
 
@@ -91,33 +93,34 @@ function quote_printable($str,$WithCharset)
 	$str = str_replace("%","=",rawurlencode($str));
 	return "=?${WithCharset}?Q?${str}?=";
 };
-
+	if ($Sender_Name != "") $Sender_Name = quote_printable($Sender_Name,$Charset);
 	$mail_date = rfcDate();
-	$Sender_Name = quote_printable($Sender_Name,$Charset);
 
-function send_email($subject,$userString,$pswdString,$welcomeString)
+function send_email($subject,$userString,$pswdString,$welcomeString,$reset)
 {
 	global $Charset;
 	global $EMAIL, $U, $pmc_password;
-	global $Chat_URL;
-	global $Sender_Name, $Sender_email;
+	global $Mail_Greeting,$Chat_URL;
+	global $Sender_Name, $Sender_Name1, $Sender_email;
 	global $mail_date;
 
 	$Subject = quote_printable($subject,$Charset);
 
-	$body =  $userString.": $U\n";
-	$body .= $pswdString.": $pmc_password\n\n";
-	$body .= $welcomeString."\n";
-	$body .= $Chat_URL."\n";
+	$body =  $userString.": ".$U."\r\n";
+	if ($reset) $body .= $pswdString.": ".$pmc_password."\r\n\r\n";
+	elseif (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@")) $body .= $pswdString."\r\n\r\n";
+	$body .= $welcomeString."\r\n";
+	$body .= $Mail_Greeting."\r\n".$Sender_Name1."\r\n".$Chat_URL;
 	$body = stripslashes($body);
 
 	$headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
-	$headers .= "X-Sender: <${Sender_email}> \r\n";
+	$headers .= "Bcc: ${Sender_email} \r\n";
+	$headers .= "X-Sender: ${Sender_email} \r\n";
 	$headers .= "X-Mailer: PHP/".phpversion()." \r\n";
-	$headers .= "Return-Path: <${Sender_email}> \r\n";
+	$headers .= "Return-Path: ${Sender_email} \r\n";
 	$headers .= "Date: ${mail_date} \r\n";
 	$headers .= "Mime-Version: 1.0 \r\n";
-	$headers .= "Content-Type: text/plain; charset=${Charset} \r\n";
+	$headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed \r\n";
 	$headers .= "Content-Transfer-Encoding: 8bit \r\n";
 
 	return @mail($EMAIL, $Subject, $body, $headers);

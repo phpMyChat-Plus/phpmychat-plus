@@ -15,6 +15,17 @@ require("./localization/".$L."/localized.chat.php");
 
 header("Content-Type: text/html; charset=${Charset}");
 
+// avoid server configuration for magic quotes
+set_magic_quotes_runtime(0);
+// Can't turn off magic quotes gpc so just redo what it did if it is on.
+if (get_magic_quotes_gpc()) {
+	foreach($_GET as $k=>$v)
+		$_GET[$k] = stripslashes($v);
+	foreach($_POST as $k=>$v)
+		$_POST[$k] = stripslashes($v);
+	foreach($_COOKIE as $k=>$v)
+		$_COOKIE[$k] = stripslashes($v);
+}
 
 // For translations with an explicit charset (not the 'x-user-defined' one)
 if (!isset($FontName)) $FontName = "";
@@ -29,7 +40,7 @@ $title = "title=\"".sprintf(L_CLICK,L_LINKS_14)."\"";
 
 <HEAD>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=<?php echo($Charset); ?>">
-<TITLE><?php echo(L_HLP); ?></TITLE>
+<TITLE><?php echo(L_HLP." - ".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <SCRIPT TYPE="text/javascript" LANGUAGE="javascript1.1">
 <!--
@@ -95,14 +106,14 @@ include_once("./admin/mail4admin.lib.php");
 if ($Sender_email)
 {
 ?>
-<a href=mailto:<?php echo($Sender_email) ?> CLASS="ChatLink" Title="<?php echo(($L!="turkish") ? sprintf(L_CLICK,L_LINKS_6,L_OWNER) : sprintf(L_CLICK,L_OWNER,L_LINKS_6)); ?>" onMouseOver="window.status='<?php echo(($L!="turkish") ? sprintf(L_CLICK,L_LINKS_6,L_OWNER) : sprintf(L_CLICK,L_OWNER,L_LINKS_6)); ?>.'; return true"><?php echo(C_ADMIN_NAME) ?></A>
+<a href=mailto:<?php echo($Sender_email) ?> CLASS="ChatLink" Title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_OWNER)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_OWNER)); ?>.'; return true"><?php echo(C_ADMIN_NAME) ?></A>
 <?php
 }
 else echo(C_ADMIN_NAME);
 ?>
 </SPAN>
 </TD></TR>
-	<TR><TD ALIGN="<?php echo($CellAlign); ?>"><br /><b><?php echo(L_HELP_ETIQ_3); ?></b><br /><ul><li><?php echo(L_HELP_ETIQ_4); ?></ul></TD></TR>
+	<TR><TD ALIGN="<?php echo($CellAlign); ?>"><br /><b><?php echo(L_HELP_ETIQ_3); ?></b><ul><?php echo(L_HELP_ETIQ_4); ?></ul></TD></TR>
 </TABLE>
 <br />
 <?php
@@ -158,7 +169,7 @@ if (C_HTML_TAGS_KEEP != "none")
 	{
 		?>
 		<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-		<A HREF="#" onClick="cmd2Input('/ban',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/ban <BDO dir="<?php echo($TextDir); ?>">[*]</BDO> {<?php echo(L_HELP_USR); ?>} [<?php echo(L_HELP_REASON); ?>]</A></TH></TR>
+		<A HREF="#" onClick="cmd2Input('/ban',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/ban <BDO dir="<?php echo($TextDir); ?>">[*]</BDO> {<?php echo(L_USER); ?>} [<?php echo(L_HELP_REASON); ?>]</A></TH></TR>
 		<TR>
 			<TD WIDTH=10>&nbsp;</TD>
 			<TD><?php echo(L_HELP_CMD_19); ?></TD>
@@ -214,14 +225,14 @@ if (C_HTML_TAGS_KEEP != "none")
 ?>
 <!-- The high command doc -->
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/high', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/high {<?php echo(L_HELP_USR); ?>}</A></TH></TR>
+	<A HREF="#" onClick="cmd2Input('/high', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/high {<?php echo(L_USER); ?>}</A></TH></TR>
   <TR>
     <TD WIDTH=10>&nbsp;</TD>
     <TD><?php echo(L_HELP_CMD_27); ?></TD>
   </TR>
 <!-- End high command doc -->
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/ignore',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/ignore <BDO dir="<?php echo($TextDir); ?>">[-]</BDO> <?php echo("[".L_HELP_USR."[,".L_HELP_USR."...]]"); ?></A></TH></TR>
+	<A HREF="#" onClick="cmd2Input('/ignore',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/ignore <BDO dir="<?php echo($TextDir); ?>">[-]</BDO> <?php echo("[".L_USER."[,".L_USER."...]]"); ?></A></TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
 		<TD><?php echo(L_HELP_CMD_6); ?></TD>
@@ -235,7 +246,7 @@ if (C_HTML_TAGS_KEEP != "none")
   </TR>
 <!-- End img command doc -->
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/invite',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/invite {<?php echo(L_HELP_USR); ?>}</A></TH></TR>
+	<A HREF="#" onClick="cmd2Input('/invite',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/invite {<?php echo(L_USER); ?>}</A></TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
 		<TD><?php echo(L_HELP_CMD_18); ?></TD>
@@ -256,7 +267,7 @@ if (C_HTML_TAGS_KEEP != "none")
 	{
 		?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/kick',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/kick {<?php echo(L_HELP_USR); ?>} [<?php echo(L_HELP_REASON); ?>]</A></TH></TR>
+	<A HREF="#" onClick="cmd2Input('/kick',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/kick {<?php echo(L_USER); ?>} [<?php echo(L_HELP_REASON); ?>]</A></TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
 		<TD><?php echo(L_HELP_CMD_9); ?></TD>
@@ -277,8 +288,8 @@ if (C_ENABLE_PM)
 {
 ?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-		<A HREF="#" onClick="cmd2Input('/msg',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/msg <?php echo("{".L_HELP_USR."} {".L_HELP_MSG."}"); ?></A><br />
-		<A HREF="#" onClick="cmd2Input('/to',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/to <?php echo("{".L_HELP_USR."} {".L_HELP_MSG."}"); ?></A>
+		<A HREF="#" onClick="cmd2Input('/msg',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/msg <?php echo("{".L_USER."} {".L_HELP_MSG."}"); ?></A><br />
+		<A HREF="#" onClick="cmd2Input('/to',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/to <?php echo("{".L_USER."} {".L_HELP_MSG."}"); ?></A>
 	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
@@ -317,8 +328,8 @@ if (C_ENABLE_PM)
 	{
 		?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/promote',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/promote {<?php echo(L_HELP_USR); ?>}</A><br />
-	<A HREF="#" onClick="cmd2Input('/demote',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/demote [*] {<?php echo(L_HELP_USR); ?>}</A>
+	<A HREF="#" onClick="cmd2Input('/promote',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/promote {<?php echo(L_USER); ?>}</A><br />
+	<A HREF="#" onClick="cmd2Input('/demote',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/demote [*] {<?php echo(L_USER); ?>}</A>
 	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
@@ -406,7 +417,7 @@ if (C_ENABLE_PM)
 };
 ?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/whois',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/whois {<?php echo(L_HELP_USR); ?>}</A></TH></TR>
+	<A HREF="#" onClick="cmd2Input('/whois',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/whois {<?php echo(L_USER); ?>}</A></TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
 		<TD><?php echo(L_HELP_CMD_11); ?></TD>
@@ -417,8 +428,8 @@ if (C_ENABLE_PM)
 {
 ?>
   <TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-  	<A HREF="#" onClick="cmd2Input('/wisp', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/wisp <?php echo("{".L_HELP_USR."} {".L_HELP_MSG."}"); ?></A><br />
-  	<A HREF="#" onClick="cmd2Input('/whisp', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/whisp <?php echo("{".L_HELP_USR."} {".L_HELP_MSG."}"); ?></A>
+  	<A HREF="#" onClick="cmd2Input('/wisp', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/wisp <?php echo("{".L_USER."} {".L_HELP_MSG."}"); ?></A><br />
+  	<A HREF="#" onClick="cmd2Input('/whisp', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/whisp <?php echo("{".L_USER."} {".L_HELP_MSG."}"); ?></A>
 	</TH></TR>
   <TR>
     <TD WIDTH=10>&nbsp;</TD>
@@ -434,7 +445,11 @@ if (C_ENABLE_PM)
 	<TR><TD ALIGN="CENTER" CLASS="tabtitle"><?php echo(L_COL_HELP_TITLE); ?></TD></TR>
 	<TR><TD ALIGN="<?php echo($CellAlign); ?>"><b><?php echo(L_COL_HELP_SUB1); ?></b><br /><?php echo(L_COL_HELP_P1); ?><br /></TD></TR>
 	<TR><TD ALIGN="<?php echo($CellAlign); ?>"><b><?php echo(L_COL_HELP_SUB2); ?></b><br /><?php echo(L_COL_HELP_P2); ?><br /><br /><center><?php echo(COLOR_LIST); ?></center><?php echo(L_COL_HELP_P2a); ?><br /></TD></TR>
-	<TR><TD ALIGN="<?php echo($CellAlign); ?>"><b><?php echo(L_COL_HELP_SUB3); ?></b><br /><?php echo(L_COLOR_HEAD_SETTINGS); ?><br /><?php if (COLOR_FILTERS == 1) echo(L_COLOR_HEAD_SETTINGSa."<br />"); ?><u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo(L_WHOIS_ADMIN); elseif ($CookieStatus == "t") echo(L_WHOIS_TOPMOD); elseif ($CookieStatus == "m") echo(L_WHOIS_MODER); elseif ($CookieStatus == "u") echo(L_WHOIS_GUEST); else echo(L_WHOIS_GUEST);?></b><br /><?php if (COLOR_FILTERS == 1) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?><br /></TD></TR>
+	<TR><TD ALIGN="<?php echo($CellAlign); ?>"><b><?php echo(L_COL_HELP_SUB3); ?></b><br /><u><?php echo(L_COLOR_HEAD_SETTINGS); ?></u><br />
+<?php if (COLOR_FILTERS) echo("a) COLOR_FILTERS = <b>".(COLOR_FILTERS == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />b) COLOR_ALLOW_GUESTS = <b>".(COLOR_ALLOW_GUESTS == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />c) COLOR_NAMES = <b>".(COLOR_NAMES == 1 ? L_ENABLED : L_DISABLED)."</b>.<br />"); ?>
+<?php if (COLOR_FILTERS) echo("<u>".L_COLOR_HEAD_SETTINGSa."</u> ".L_WHOIS_ADMIN." = <b><SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN></b>, ".L_WHOIS_MODERS." = <b><SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN></b>, ".L_WHOIS_OTHERS." = <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>."); else echo("<u>".L_COLOR_HEAD_SETTINGSb."</u> <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>.") ?><br />
+<u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo("<font color=".COLOR_CA.">".L_WHOIS_ADMIN); elseif ($CookieStatus == "t") echo("<font color=".COLOR_CA.">".L_WHOIS_TOPMOD); elseif ($CookieStatus == "m") echo("<font color=".COLOR_CM.">".L_WHOIS_MODER); else echo("<font color=".COLOR_CD.">".L_WHOIS_GUEST); echo("</font>");?></b>.<br />
+<?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?></TD></TR>
 <!-- Color Picker Text Input Box help end -->
 <?php
 if (C_USE_SMILIES == "1")

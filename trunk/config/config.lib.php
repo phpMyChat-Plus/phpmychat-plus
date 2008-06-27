@@ -6,7 +6,7 @@
 define("C_DB_NAME", 'plus');						// Logical database name on that server (most common like: cpanelusername_databasename)
 define("C_DB_USER", 'username');				// Database username (most common like: cpanelusername_username)
 define("C_DB_PASS", 'password');				// Database user's password
-// We recommend you keep the names bellow
+// We recommend you keep the names below
 define("C_DB_HOST", 'localhost');				// Hostname of your MySQL server (most common "localhost", but sometimes "mysql.domain.com")
 define("C_DB_TYPE", 'mysql');						// SQL server type ("mysql", "pgsql" or "odbc")
 define("C_MSG_TBL", 'c_messages');			// Name of the table where messages are stored
@@ -19,11 +19,12 @@ define("C_LRK_TBL", 'c_lurkers'); 			// Name of the table where data about lurke
 // ------ THESE SETTINGS MUST NOT BE CHANGED ------
 
 $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
+@mysql_query("SET CHARACTER SET utf8");
+mysql_query("SET NAMES 'utf8'");
 mysql_select_db(C_DB_NAME);
 $query = "SELECT * FROM ".C_CFG_TBL."";
 $result = mysql_query($query);
 $row = mysql_fetch_row($result);
-define("C_SUPPORT_PAID", "");
 
 $MSG_DEL        			= $row[1];
 $USR_DEL		          = $row[2];
@@ -97,17 +98,17 @@ $SWEAR1								= $row[69];
 $SWEAR2			 					= $row[70];
 $SWEAR3	 							= $row[71];
 $SWEAR4	 							= $row[72];
-$COLOR_FILTERS				= $row[73];
-$COLOR_ALLOW_GUESTS		= $row[74];
-$COLOR_CD1						= $row[75];
-$COLOR_CD2						= $row[76];
-$COLOR_CD3						= $row[77];
-$COLOR_CD4						= $row[78];
-$COLOR_CD5						= $row[79];
-$COLOR_CD6						= $row[80];
-$COLOR_CD7						= $row[81];
-$COLOR_CD8						= $row[82];
-$COLOR_CD9						= $row[83];
+$COLOR_FILTERS					= $row[73];
+$COLOR_ALLOW_GUESTS				= $row[74];
+$ROOM_SKIN1						= $row[75];
+$ROOM_SKIN2						= $row[76];
+$ROOM_SKIN3						= $row[77];
+$ROOM_SKIN4						= $row[78];
+$ROOM_SKIN5						= $row[79];
+$ROOM_SKIN6						= $row[80];
+$ROOM_SKIN7						= $row[81];
+$ROOM_SKIN8						= $row[82];
+$ROOM_SKIN9						= $row[83];
 $COLOR_CA							= $row[84];
 $COLOR_CA1						= $row[85];
 $COLOR_CA2						= $row[86];
@@ -171,6 +172,23 @@ $CHAT_NAME				= $row[143];
 $ENGLISH_FORMAT			= $row[144];
 $FLAGS_3D				= $row[145];
 $ALLOW_REGISTER			= $row[146];
+$DISP_GENDER			= $row[147];
+$SPECIAL_GHOSTS			= $row[148];
+$FILLED_LOGIN			= $row[149];
+$BACKGR_IMG				= $row[150];
+$BACKGR_IMG_PATH		= $row[151];
+$POPUP_LINKS			= $row[152];
+$ITALICIZE_POWERS		= $row[153];
+$MAIL_GREETING			= $row[154];
+$PM_KEEP_DAYS			= $row[155];
+$ALLOW_PM_DEL			= $row[156];
+$LOGIN_COUNTER			= $row[157];
+$ALLOW_GRAVATARS		= $row[158];
+$GRAVATARS_CACHE		= $row[159];
+$GRAVATARS_CACHE_EXPIRE	= $row[160];
+$GRAVATARS_RATING		= $row[161];
+$GRAVATARS_DYNAMIC_DEF	= $row[162];
+$GRAVATARS_DYNAMIC_DEF_FORCE	= $row[163];
 
 $query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.com'";
 $result_bot = mysql_query($query_bot);
@@ -179,6 +197,8 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_bot);
 $query_quote = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='quote@quote.com'";
 $result_quote = mysql_query($query_quote);
 list($QUOTE_NAME, $QUOTE_AVATAR, $QUOTE_FONT_COLOR) = mysql_fetch_row($result_quote);
+@mysql_close($conn);
+define("C_SUPPORT_PAID", "");
 
 // Cleaning settings for messages and usernames
 define("C_MSG_DEL", $MSG_DEL);
@@ -202,7 +222,7 @@ define("C_PASS_LENGTH", $PASS_LENGTH);
 define("C_ADMIN_NOTIFY", $ADMIN_NOTIFY);
 define("C_ADMIN_NAME", $ADMIN_NAME);
 define("C_ADMIN_EMAIL", $ADMIN_EMAIL);
-define("C_CHAT_URL", $CHAT_URL);
+define("C_CHAT_URL", eregi("http://",$CHAT_URL) ? $CHAT_URL : "./");
 
 // Security and restrictions
 define("C_SHOW_ADMIN", $SHOW_ADMIN);
@@ -391,68 +411,69 @@ if (strcasecmp(ucfirst(stripslashes($R)), ROOM9) == 0) $Room = ROOM9;
 	{
 		default:
 		{
-			$skin = 'config/style1';
-			define("COLOR_CD", $COLOR_CD1);
+			$skin = "${ChatPath}skins/style".$ROOM_SKIN1."";
+			include("${ChatPath}skins/style".$ROOM_SKIN1.".php");
 		}
-	break;
+		break;
 		case ROOM2:
 		{
-			$skin = "config/style2";
-			define("COLOR_CD", $COLOR_CD2);
+			$skin = "${ChatPath}skins/style".$ROOM_SKIN2."";
+			include("${ChatPath}skins/style".$ROOM_SKIN2.".php");
 		}
-	break;
+		break;
 		case ROOM3:
 		{
-			$skin = 'config/style3';
-			define("COLOR_CD", $COLOR_CD3);
+			$skin = "${ChatPath}skins/style".$ROOM_SKIN3."";
+			include("${ChatPath}skins/style".$ROOM_SKIN3.".php");
 		}
-	break;
+		break;
 		case ROOM4:
 		{
-			$skin = 'config/style4';
-			define("COLOR_CD", $COLOR_CD4);
+			$skin = "${ChatPath}skins/style".$ROOM_SKIN4."";
+			include("${ChatPath}skins/style".$ROOM_SKIN4.".php");
 		}
-	break;
+		break;
 		case ROOM5:
 		{
-			$skin = 'config/style5';
-			define("COLOR_CD", $COLOR_CD5);
+			$skin = "${ChatPath}skins/style".$ROOM_SKIN5."";
+			include("${ChatPath}skins/style".$ROOM_SKIN5.".php");
 		}
-	break;
+		break;
 		case ROOM6:
 		{
-			$skin = 'config/style6';
-			define("COLOR_CD", $COLOR_CD6);
+			$skin = "${ChatPath}skins/style".$ROOM_SKIN6."";
+			include("${ChatPath}skins/style".$ROOM_SKIN6.".php");
 		}
-	break;
+		break;
 		case ROOM7:
 		{
-			$skin = 'config/style7';
-			define("COLOR_CD", $COLOR_CD7);
+			$skin = "${ChatPath}skins/style".$ROOM_SKIN7."";
+			include("${ChatPath}skins/style".$ROOM_SKIN7.".php");
 		}
-	break;
+		break;
 		case ROOM8:
 		{
-			$skin = 'config/style8';
-			define("COLOR_CD", $COLOR_CD8);
+			$skin = "${ChatPath}skins/style".$ROOM_SKIN8."";
+			include("${ChatPath}skins/style".$ROOM_SKIN8.".php");
 		}
-	break;
+		break;
 		case ROOM9:
 		{
-			$skin = 'config/style9';
-			define("COLOR_CD", $COLOR_CD9);
+			$skin = "${ChatPath}skins/style".$ROOM_SKIN9."";
+			include("${ChatPath}skins/style".$ROOM_SKIN9.".php");
 		}
-	break;
+		break;
 	}
 }
 else						//default style if Room Skin mod is disabled
 {
-		$skin = 'config/style1';
-		define("COLOR_CD", $COLOR_CD1);
+	if ($ROOM_SKIN1 == "") $ROOM_SKIN1 = "1";
+	$skin = "${ChatPath}skins/style".$ROOM_SKIN1."";
+	include("${ChatPath}skins/style".$ROOM_SKIN1.".php");
 }
 
 // For Bob Dickow's QuickNotes modification
-// Comment the lines bellow to disable the quick menu for any of those mentioned
+// Comment the lines below to disable the quick menu for any of those mentioned
 $dropdownmsga = explode("|",$QUICKA);	//administrators
 $dropdownmsgm = explode("|",$QUICKM);	//moderators
 $dropdownmsg = explode("|",$QUICKU);	//users
@@ -543,11 +564,52 @@ define("C_CHAT_SYSTEM", $CHAT_SYSTEM);
 define("C_NUKE_BB_PATH", $NUKE_BB_PATH);
 
 // Added for owner personalizations to all the languages by Ciprian
-if(is_dir('./'.$ChatPath.'localization/_owner/') && file_exists('./'.$ChatPath.'localization/_owner/localized.owner.php')) include("./${ChatPath}localization/_owner/localized.owner.php");
+if(is_dir('./'.$ChatPath.'localization/_owner/') && file_exists('./'.$ChatPath.'localization/_owner/owner.php')) include("./${ChatPath}localization/_owner/owner.php");
 
 //Check for php server version
 $phpversion = phpversion();
 
 // Public Name of your chat server as you wish to be known on the web - by Ciprian
 define("C_CHAT_NAME", $CHAT_NAME);
+
+// Display genders - by Ciprian
+define("C_DISP_GENDER", $DISP_GENDER);
+
+// Ghost usernames - by Ciprian
+$SPECIALGHOSTS = eregi_replace(",","','",$SPECIAL_GHOSTS);
+$SPECIALGHOSTS = eregi_replace(","," AND username != ",$SPECIALGHOSTS);
+define("C_SPECIAL_GHOSTS", "'".$SPECIALGHOSTS."'");
+
+// Index page body layout - by Ciprian
+define("C_FILLED_LOGIN", $FILLED_LOGIN);
+
+// Background image on login page - by Ciprian
+define("C_BACKGR_IMG", $BACKGR_IMG);
+define("C_BACKGR_IMG_PATH", $BACKGR_IMG_PATH);
+
+// Popup posted links protection - by Alex & Ciprian
+define("C_POPUP_LINKS", $POPUP_LINKS);
+
+// Italicize power usernames - by Ciprian
+define("C_ITALICIZE_POWERS", $ITALICIZE_POWERS);
+
+// Email greeting closure in Admin4 sheet - by Ciprian
+define("C_MAIL_GREETING", $MAIL_GREETING);
+
+// Days to keep unread PMs in the database - by Ciprian
+define("C_PM_KEEP_DAYS", $PM_KEEP_DAYS);
+
+// Allow users to delete their own PMs from the database - by Ciprian
+define("C_ALLOW_PM_DEL", $ALLOW_PM_DEL);
+
+// It counts logins of registered users to chat (returning users) - by Ciprian
+define("C_LOGIN_COUNTER", $LOGIN_COUNTER);
+
+// Gravatars system - by Ciprian (details on www.gravatars.com)
+define("ALLOW_GRAVATARS", $ALLOW_GRAVATARS);
+define("GRAVATARS_CACHE", $GRAVATARS_CACHE);
+define("GRAVATARS_CACHE_EXPIRE", $GRAVATARS_CACHE_EXPIRE);
+define("GRAVATARS_RATING", $GRAVATARS_RATING);
+define("GRAVATARS_DYNAMIC_DEF", $GRAVATARS_DYNAMIC_DEF);
+define("GRAVATARS_DYNAMIC_DEF_FORCE", $GRAVATARS_DYNAMIC_DEF_FORCE);
 ?>

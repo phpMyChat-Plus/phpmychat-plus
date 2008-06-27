@@ -1,5 +1,5 @@
 <?php
-// File : argentinian_spanish/localized.tutorial.php - plus version (09.09.2007 - rev.7)
+// File : argentinian_spanish/localized.tutorial.php - plus version (10.04.2008 - rev.9)
 // Original translation in Spanish (for the Argentinian dialect usage) by Jorge Colaccini <jrc@informas.com>
 // Updates, corrections and additions for the Plus version by Matias Olivera <matiolivera@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -24,7 +24,7 @@ if (isset($_COOKIE["CookieStatus"])) $CookieStatus = $_COOKIE["CookieStatus"];
 
 <HEAD>
 <TITLE>Tutorial en Español para <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?></TITLE>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=${Charset}">
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo(${Charset}); ?>">
 <STYLE>
 A.topLink
 {
@@ -51,10 +51,10 @@ A.topLink:hover, A.topLink:active
 <P></P>
 <TABLE BORDER="5" CELLPADDING="5" ALIGN="center">
 <TR>
-	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- Tutorial en Español para <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -</FONT><br /><I>&copy; 2007<?php echo((date(Y)>"2007") ? "-".date(Y) : ""); ?> - Traducido por Matias Olivera - Buenos Aires, Argentina.</I></B></TD>
+	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- Tutorial en Español para <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -</FONT><br /><I>&copy; 2007<?php echo((date('Y')>"2007") ? "-".date('Y') : ""); ?> - Traducido por Matias Olivera - Buenos Aires, Argentina.</I></B></TD>
 </TR>
 </TABLE><br /><br />
-<P><A NAME="top"></P>
+<P><A NAME="top"></A></P>
 <TABLE BORDER="3" CELLPADDING="3">
 <TR>
 	<TD><FONT SIZE="+2">Contenidos de este tutorial</FONT></TD>
@@ -210,7 +210,7 @@ Aparecerá una pequeña ventana popup.
  <li>Si tenés una página Web, podés ingresar su URL en la casilla correspondiente.</li>
  <li>El campo del idioma puede ayudar a otros usuarios en futuras discuciones. Ellos podrán saber los idiomas que conocés.</li>
  <li>Finalmente, si te interesa que tu dirección de email pueda ser vista por otros usuarios, marcá la casilla ’mostrar e-mail en información pública’. Si no deseás que tu dirección de e-mail sea vista, dejá la casilla sin marcar.</li>
- <li>Luego presioná el botón de Registro y tu cuenta será creada. Si deseás detener en algún momento la registración, presioná el botón Cerrar.</li>
+ <li>Luego presioná el botón de <?php echo(L_REG_3); ?> y tu cuenta será creada. Dependiendo de lo que haya configurado el administrador, puede ser que tengas que esperar su aprobación. De cualquier forma recibirás un mail detallandote los pasos a seguir. Si deseás detener en algún momento la registración, presioná el botón <?php echo(L_REG_25); ?>.</li>
 </UL>
 <P>
 <A NAME="modProfile"></A>Por supuesto, los usuarios registrados podrán modificar
@@ -314,7 +314,7 @@ definidas para la lista de usuarios:<br />
 <P>
 <FONT SIZE="+1"><A NAME="exit"><B>Dejando un salón de chat:</B></A></FONT>
 <P>
-Para salir del chat, simplemente hacé click sobre ’Salir’.
+Para salir del chat, simplemente hacé click sobre <?php echo (EXIT_LINK_TYPE) ? "la imagen <img src='localization/$L/images/exitdoor.gif' border=0 alt='".L_EXIT."'>" : 'el link "'.L_EXIT.'"'; ?>.
 Alternativamente, también podés ingresar uno de los siguientes comandos
 en la barra de escritura:<br />
 /exit<br />
@@ -433,8 +433,8 @@ If (C_USE_AVATARS) {
 ?>
 	<hr />
 	<FONT SIZE="+1"><A NAME="avatars"><B>Avatars:</B></A></FONT>
-<P>Los avatars son iconos con imágenes que representan a los participantes del chat. Solo los usuarios registrados pueden cambiar su avatar. Para hacerlo, pueden abrir su Profile y hacer click sobre el avatar, seleccionandolo de un menú de imágenes, o colocar una URL a una imágen gráfica disponible en cualquier lugar de internet (solo imágenes de acceso público, no de sitios restringidos con clave). Las imágenes deben ser visibles desde un navegador (.gif, .jpg, etc. ) y de 32 x 32 pixeles para una mejor visualización.
-<P>Haciendo click sobre el avatar de algun participante del chat, mostrará su perfil en una ventana popup (ver <A HREF="#whois">comando /whois </A>).
+<P>Los avatars son iconos con imágenes que representan a los participantes del chat. Solo los usuarios registrados pueden cambiar su avatar. Para hacerlo, pueden abrir su Profile (ver comando <A HREF="#changeprofile">/profile</A>) y hacer click sobre el avatar, seleccionandolo de un menú de imágenes, o colocar una URL a una imágen gráfica disponible en cualquier lugar de internet (solo imágenes de acceso público, no de sitios restringidos con clave). Las imágenes deben ser visibles desde un navegador (.gif, .jpg, etc. ) y de 32 x 32 pixeles para una mejor visualización.
+<P>Haciendo click sobre el avatar de algun participante del chat, mostrará su perfil en una ventana popup (ver comando <A HREF="#whois">/whois</A>).
 Clickeando sobre tu propio avatar en la lista de usuarios, invocará al comando /profile (perfil) en caso de que estés registrado.
 Si no estás registrado, al hacer click sobre tu avatar (que será el avatar que por defecto te da el sistema) se mostrará un alerta invitándote a que te registres.
   <P ALIGN="right"><A HREF="#top">Volver al comienzo</A></P>
@@ -513,7 +513,11 @@ if (C_HTML_TAGS_KEEP != "none")
 <b><?php echo(L_COL_HELP_SUB2); ?></b><br /><?php echo(L_COL_HELP_P2); ?><br /><br /><center><?php echo(COLOR_LIST); ?></center><br /><?php echo(L_COL_HELP_P2a); ?><br /><br />
 </P>
 <P>
-<b><?php echo(L_COL_HELP_SUB3); ?></b><br /><?php echo(L_COLOR_HEAD_SETTINGS); ?><br /><?php if (COLOR_FILTERS) echo(L_COLOR_HEAD_SETTINGSa."<br />"); ?><u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo(L_WHOIS_ADMIN); elseif ($CookieStatus == "t") echo(L_WHOIS_TOPMOD); elseif ($CookieStatus == "m") echo(L_WHOIS_MODER); elseif ($CookieStatus == "u") echo(L_WHOIS_GUEST); else echo(L_WHOIS_REG);?></b><br /><?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
+<b><?php echo(L_COL_HELP_SUB3); ?></b><br />
+<u><?php echo(L_COLOR_HEAD_SETTINGS); ?></u><br />
+<?php if (COLOR_FILTERS) echo("a) COLOR_FILTERS = <b>".(COLOR_FILTERS == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />b) COLOR_ALLOW_GUESTS = <b>".(COLOR_ALLOW_GUESTS == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />c) COLOR_NAMES = <b>".(COLOR_NAMES == 1 ? L_ENABLED : L_DISABLED)."</b>.<br />"); ?>
+<?php if (COLOR_FILTERS) echo("<u>".L_COLOR_HEAD_SETTINGSa."</u> ".L_WHOIS_ADMIN." = <b><SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN></b>, ".L_WHOIS_MODERS." = <b><SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN></b>, ".L_WHOIS_OTHERS." = <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>."); else echo("<u>".L_COLOR_HEAD_SETTINGSb."</u> <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>.") ?><br />
+<u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo("<font color=".COLOR_CA.">".L_WHOIS_ADMIN); elseif ($CookieStatus == "t") echo("<font color=".COLOR_CA.">".L_WHOIS_TOPMOD); elseif ($CookieStatus == "m") echo("<font color=".COLOR_CM.">".L_WHOIS_MODER); else echo("<font color=".COLOR_CD.">".L_WHOIS_GUEST); echo("</font>");?></b>.<br /><?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
 <br /><P ALIGN="right"><A HREF="#top">Volver al comienzo</A></P>
 <hr />
 <!-- Color Input Box mod by Ciprian end -->
@@ -538,12 +542,12 @@ Tené en cuenta que podés invitar a más de una persona a la vez (ej "/invite M
 La lista de la derecha de la pantalla muestra un listado de los salones
 y de los usuarios que están actualmente conectados en ese salón. Para dejár el salón e ir a otro de los que se listan,
 simplemente hacé click en uno de los nombres de los salones de chat.
-Los salones vacios no aparecen en la lista. Te podés mover a un salón vacío escribiendo el comando <B>"/join #nombresalon"</B>
+Los salones vacios no aparecen en la lista. Te podés mover a un salón vacío escribiendo el comando <B>"/join #nombre salon"</B>
 sin las comillas.
 <P>
-<I>Por ejemplo:</I> /join #RedRoom
+<I>Por ejemplo:</I> /join #Sala Roja
 <P>
-te moverá al salón RedRoom.
+te moverá al salón "Sala Roja".
 <?php
 if (C_VERSION == "2")
 {
@@ -551,9 +555,9 @@ if (C_VERSION == "2")
 	?>
 	 también podés crear un nuevo salón con este mismo comando. Pero luego tenés que especificar el tipo: 0 se mantiene privado, 1 público (valor por defecto).
 	<P>
-	<I>Por ejemplo:</I> /join 0 #MiSalon
+	<I>Por ejemplo:</I> /join 0 #Mi Salon
 	<P>
-	creará un nuevo salón privado (asumiendo que no se ha creado un salón con ese mismo nombre) llamado MiSalon y te llevará a él.
+	creará un nuevo salón privado (asumiendo que no se ha creado un salón con ese mismo nombre) llamado "Mi Salon" y te llevará a él.
 	<P>
 	Los nombres de salones no pueden contener comas o barras invertidas (\).<?php if (C_NO_SWEAR) echo(" No puede contener \"malas palabras\"."); ?>
 	<?php
@@ -596,7 +600,28 @@ Para enviarle un mensaje privado a otro usuario del salón en el que te encontr�
 <P>
 El mensaje les aparecerá a Matias y a vos, pero los demás usuarios no podrán verlo.
 <P>
-Ten en cuenta que haciendo click en el nick del usuario en el mensaje en la pantalla de mensajes, automáticamente usará este comando y estarás listo para chatear en privado.
+Cuando la utilidad PM está activa, también es posible enviar susurros a un usuario en otro salón de chat, usando: <B>comando "/wisp nombreusuario mensaje"</B> sin comillas.
+<P>
+<?php
+if (C_PRIV_POPUP)
+{
+?>
+Cliqueando en el nick de un mensaje enviado en la pantalla principal, agregará automáticamente el correspondiente comando /to o /wisp al campo de ingreso de texto de mensajes.
+<?php
+}
+else
+{
+?>
+Cliqueando en el nick de un usuario en la lista de usuarios de la derecha, se abrirá automáticamente una ventana emergente esperando que ingreses el texto de tu mensaje. Dando ENTER el mensaje se enviará. La respuesta que recibas se abrirá automáticamente en una ventana nueva.
+<?php
+}
+?>
+<P>
+Nota: Cuando los pop-ups de PM están activos (ya sea en configuración o en tu propio perfil), vas a poder revisar todos los mensajes off-line PMs que recibiste desde la última vez que te logueaste al chat o mientras estabas "ausente". Todos los mensajes off-line PMs que recibas, se abrirán en una ventana emergente. Podrás responderles uno a uno desde la misma ventana.<br />
+La utilidad de PM off-line solo está disponible para usuarios registrados.
+<P>
+<u><?php echo(L_COLOR_HEAD_SETTINGS); ?></u><br />
+<?php echo("a) ENABLE_PM = <b>".(C_ENABLE_PM == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />b) PRIV_POPUP = <b>".(C_PRIV_POPUP == 1 ? L_ENABLED : L_DISABLED)."</b>.<br />"); ?>
 <br /><P ALIGN="right"><A HREF="#top">Volver al comienzo</A></P>
 <P>
 <hr />
@@ -607,6 +632,10 @@ Ten en cuenta que haciendo click en el nick del usuario en el mensaje en la pant
 Para describir lo que estás haciendo <B>comando "/me accion"</B> sin comillas.
 <P>
 <I>Por ejemplo:</I> Si Matias envía el mensaje "/me estoy fumando un cigarrillo" el mensaje mostrará "<B>* Matias</B> estoy fumando un cigarrillo".
+<P>
+Como variante de este comando, está disponible el <B>comando /mr </B>, el cual también pondrá el género en frente del nombre de usuario.
+<P>
+<I>Por ejemplo:</I> Si Jack envía el mensaje "/mr está viendo TV" se mostrará la ventana del mensaje "<B>* <?php echo(L_HELP_MR); ?> Jack</B> está viendo TV".
 <br /><P ALIGN="right"><A HREF="#top">Volver al comienzo</A></P>
 <P>
 <hr />

@@ -1,11 +1,22 @@
 <?php
+// Added for php4 support of mb functions
+if (!function_exists('mb_convert_case'))
+{
+	function mb_convert_case($str,$type,$Charset)
+	{
+		if (eregi("TITLE",$type)) $str = ucwords($str);
+		elseif (eregi("LOWER",$type)) $str = strtolower($str);
+		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+		return $str;
+	}
+};
 
-function room_in($what, $in)
+function room_in($what, $in, $Charset)
 {
 	$rooms = explode(",",$in);
 	for (reset($rooms); $room_name=current($rooms); next($rooms))
 	{
-		if (strcasecmp($what, $room_name) == 0) return true;
+		if (strcasecmp(mb_convert_case($what,MB_CASE_LOWER,$Charset), mb_convert_case($room_name,MB_CASE_LOWER,$Charset)) == 0) return true;
 	}
 	return false;
 }
@@ -30,7 +41,7 @@ else
 	{
 		list($password,$perms,$rooms) = $DbLink->next_record();
 		$DbLink->clean_results();
-		if (($password != $PWD_Hash) || (($perms != "moderator") && ($perms != "admin") && ($perms != "topmod")) || (($perms == "moderator") && (!room_in(stripslashes($R), $rooms) && !room_in("*", $rooms))))
+		if (($password != $PWD_Hash) || (($perms != "moderator") && ($perms != "admin") && ($perms != "topmod")) || (($perms == "moderator") && (!room_in(stripslashes($R), $rooms, $Charset) && !room_in("*", $rooms, $Charset))))
 		{
 			$Error = L_NO_MODERATOR;
 		}
@@ -45,8 +56,6 @@ else
 			}
 			else
 			{
-				$IsCommand = true;
-				$RefreshMessages = true;
 				list($Latin1_UU,$perms,$rooms) = $DbLink->next_record();
 				$DbLink->clean_results();
 				// Promote the user if is not already moderator for the current room or admin
@@ -54,12 +63,15 @@ else
 				{
 					$Error = sprintf(L_ADMIN, stripslashes($UU));
 				}
-				elseif (!room_in($R,addslashes($rooms)) && !room_in("*",addslashes($rooms)))
+				elseif (!room_in($R,addslashes($rooms), $Charset) && !room_in("*",addslashes($rooms), $Charset))
 				{
 					$rooms .= stripslashes($rooms == "" ? $R:",${R}");
 					$DbLink->query("UPDATE ".C_REG_TBL." SET perms='moderator', rooms='".addslashes($rooms)."' WHERE username='$UU'");
 					$DbLink->query("UPDATE ".C_USR_TBL." SET status='m' WHERE username='$UU'");
 					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS promote', '$Latin1', ".time().", '', 'sprintf(L_MODERATOR, \"".special_char($UU,$Latin1_UU)."\")', '', '')");
+					$IsCommand = true;
+					$RefreshMessages = true;
+					$CleanUsrTbl = 1;
 				}
 				else
 				{

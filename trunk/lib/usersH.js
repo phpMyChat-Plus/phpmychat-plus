@@ -177,26 +177,32 @@ function expandIt(el)
 	if (IE4)
 	{
 		whichEl = usersFrame.document.all('Child' + el);
+		whichIm = usersFrame.event.srcElement;
 		if (whichEl.style.display == 'none') {
 			opened_rooms_number++;
 			whichEl.style.display = 'block';
+			whichIm.src = Opened.src;
 			ModifyRoomState(whichEl.id, 'add');
 		} else {
 			opened_rooms_number--;
 			whichEl.style.display = 'none';
+			whichIm.src = Closed.src;
 			ModifyRoomState(whichEl.id, 'del');
 		};
 	}
 	else
 	{
 		whichEl = usersFrame.document.layers['Child' + el];
+		whichIm = usersFrame.document.layers['Parent' + el].document.images['imEx'];
 		if (whichEl.visibility == 'hide') {
 			opened_rooms_number++;
 			whichEl.visibility = 'show';
+			whichIm.src = Opened.src;
 			ModifyRoomState(whichEl.id, 'add');
 		} else {
 			opened_rooms_number--;
 			whichEl.visibility = 'hide';
+			whichIm.src = Closed.src;
 			ModifyRoomState(whichEl.id, 'del');
 		};
 		arrange();
@@ -211,6 +217,7 @@ function expandAll()
 {
 	if (!ver4) return;
 	newSrc_big = (isExpanded) ? bigClosed.src : bigOpened.src;
+	newSrc = (isExpanded) ? Closed.src : Opened.src;
 	what = (isExpanded) ? 'del' : 'add';
 	opened_rooms_number = (isExpanded) ? 0 : rooms_number;
 
@@ -222,7 +229,9 @@ function expandAll()
 				for (i=usersFrame.firstInd; i<usersFrame.document.layers.length; i++)
 				{
 					whichEl = usersFrame.document.layers[i];
-					if (whichEl.id.indexOf('Parent') != -1)
+					if (whichEl.id.indexOf('Parent') != -1
+						&& typeof(whichEl.document.images['imEx']) != 'undefined')
+						whichEl.document.images['imEx'].src = newSrc;
 					if (whichEl.id.indexOf('Child') != -1) {
 						whichEl.visibility = (isExpanded) ? 'hide' : 'show';
 						ModifyRoomState(whichEl.id, what);
@@ -244,6 +253,15 @@ function expandAll()
 			};
 		};
 		exitFrame.document.images.item('imEx_big').src = newSrc_big;
+		imColl = usersFrame.document.images.item('imEx');
+		if (imColl)
+		{
+			for (i=0; i<imColl.length; i++)
+			{
+				imColl(i).src = newSrc;
+			}
+			if(!imColl.length) usersFrame.document.imEx.src = newSrc;
+		};
 	};
 	isExpanded = !isExpanded;
 	if (window.frames['input'] && window.frames['input'].window.document.forms['MsgForm'].elements['M'])

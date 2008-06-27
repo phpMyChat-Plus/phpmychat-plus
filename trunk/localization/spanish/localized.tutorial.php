@@ -1,5 +1,5 @@
 <?php
-// File : spanish/localized.tutorial.php - plus version (09.09.2007 - rev.7)
+// File : spanish/localized.tutorial.php - plus version (08.03.2008 - rev.8)
 // Original translation by Josep Román <josep.roman@zuerich-see.ch> and León Del Río <leon@webmaster.com.mx>
 // Updates, corrections and additions for the Plus version by Roxana Castañeda <roxminu@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -24,7 +24,7 @@ if (isset($_COOKIE["CookieStatus"])) $CookieStatus = $_COOKIE["CookieStatus"];
 
 <HEAD>
 <TITLE>Tutorial en Español para <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?></TITLE>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=${Charset}">
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo(${Charset}); ?>">
 <STYLE>
 A.topLink
 {
@@ -54,7 +54,7 @@ A.topLink:hover, A.topLink:active
 	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- Tutorial en Español para <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -</B></FONT></TD>
 </TR>
 </TABLE><br /><br />
-<P><A NAME="top"></P>
+<P><A NAME="top"></A></P>
 <TABLE BORDER="3" CELLPADDING="3">
 <TR>
 	<TD><FONT SIZE="+2">Contenido del Tutorial</FONT></TD>
@@ -198,12 +198,12 @@ else
 <P>
 <FONT SIZE="+1"><A NAME="register"><B>Para Registrarse:</B></A></FONT>
 <P>
-Si todavía no se ha registrado<?php if (!C_REQUIRE_REGISTER) echo(" and would like to"); ?>, por favor escoja la opción de registrarse. Una pequeña ventana emergente (pop-up) aparecerá.
+Si todavía no se ha registrado<?php if (!C_REQUIRE_REGISTER) echo(" y te gustaría hacerlo"); ?>, por favor escoja la opción de registrarse. Una pequeña ventana emergente (pop-up) aparecerá.
 <P>
 <UL>
 	<LI>Primero debe crear un nombre de usuario
-	  <?php if (!C_EMAIL_PASWD) echo(" and a password"); ?> para usted, escribiendo en la casilla correspondiente. El nombre de usuario que escriba será el que se muestre automáticamente la sala de chat. No puede contener espacios en blanco, comas (,) o barras invertidas (\).
-<?php if (C_NO_SWEAR) echo(" It can not contain \"swear words\"."); ?>
+	  <?php if (!C_EMAIL_PASWD) echo(" y una contraseña"); ?> para usted, escribiendo en la casilla correspondiente. El nombre de usuario que escriba será el que se muestre automáticamente la sala de chat. No puede contener espacios en blanco, comas (,) o barras invertidas (\).
+<?php if (C_NO_SWEAR) echo(" No puede contener \"malas palabras\"."); ?>
 	<LI>Segundo, por favor escriba su nombre, apellido y su dirección de correo electrónico (email). Para poder registrarse debe llenar todos esos campos. La información sobre su género es opcional.
 	<LI>Si tiene una web, puede escribir la dirección en la casilla.
 	<LI>El campo del idioma puede ayudar a otros usuarios durante conversaciones futuras. Así sabrán que idioma(s) habla usted.
@@ -211,7 +211,7 @@ Si todavía no se ha registrado<?php if (!C_REQUIRE_REGISTER) echo(" and would l
 	<LI>Luego, presione el botón de Registrarse y su cuenta será creada. Si desea detenerse en cualquier momento sin registrarse, sólo presione el botón Cerrar.
 </UL>
 <P>
-<A NAME="modProfile"></A>Por supuesto, los usuarios registrados pueden modificar<?php if (C_SHOW_DEL_PROF) echo("/delete"); ?>
+<A NAME="modProfile"></A>Por supuesto, los usuarios registrados pueden modificar<?php if (C_SHOW_DEL_PROF) echo("/borrar"); ?>
  su perfil
 haciendo clic donde corresponde <?php echo((!C_SHOW_DEL_PROF ? "link" : "links")); ?>.<br />
 <br />
@@ -228,7 +228,7 @@ if (C_VERSION == "2")
 	<P>
 	Los usuarios registrados pueden crear salas. Los únicos que pueden ingresar a las salas privadas son los usuarios que saben el nombre de la sala. El nombre de sala privada nunca se mostrará, excepto para aquellos usuarios que se encuentran en ella.<br />
 <P>
-	El nombre de una sala no puede contener una coma (,) o barra invertida (\).<?php if (C_NO_SWEAR) echo(" It can no more contains \"swear words\"."); ?>
+	El nombre de una sala no puede contener una coma (,) o barra invertida (\).<?php if (C_NO_SWEAR) echo(" No pueden contener \"malas palabras\"."); ?>
 	<br />
 <P ALIGN="right"><A HREF="#top">Subir</A></P>
 	<P>
@@ -262,7 +262,7 @@ if ($Ver == "H")
 <FONT SIZE="+1"><A NAME="sending"><B>Enviar mensajes:</B></A></FONT>
 <P>
 Para enviar un mensaje en la sala de chat, escriba su texto en la casilla de escritura o casilla de texto que aparece en la esquina inferior izquierda y luego presione la tecla Intro para enviarlo. Los mensajes de todos los usuarios se desplazan en la ventana del chat.<br />
-<?php if (C_NO_SWEAR) echo("Note that \"swear words\" are skipped from mensajes."); ?>
+<?php if (C_NO_SWEAR) echo("Notarás que las \"malas palabras\" son salteadas en los mensajes."); ?>
 <P>
 Si desea puede cambiar el color del texto de sus mensajes escogiendo un color nuevo de la lista de selección que se encuentra al lado derecho de la ventana del chat.
 <br />
@@ -302,7 +302,7 @@ Si desea puede cambiar el color del texto de sus mensajes escogiendo un color nu
 <P>
 <FONT SIZE="+1"><A NAME="exit"><B>Salir de la sala de chat:</B></A></FONT>
 <P>
-Para salir del chat, simpemente haga clic una vez en "Salir". Alternativamente, también puede escribir uno de los siguientes comandos en la casilla de escritura:<br />
+Para salir del chat, simpemente haga clic una vez en <?php echo (EXIT_LINK_TYPE) ? "la imagen <img src='localization/$L/images/exitdoor.gif' border=0 alt='".L_EXIT."'>" : 'el link "'.L_EXIT.'"'; ?>. Alternativamente, también puede escribir uno de los siguientes comandos en la casilla de escritura:<br />
 /exit<br />
 /bye<br />
 /quit<br />
@@ -414,8 +414,8 @@ If (C_USE_AVATARS) {
 ?>
 	<hr />
 	<FONT SIZE="+1"><A NAME="avatars"><B>Avatars:</B></A></FONT>
-<P>Avatars son iconos graficos que representa a los usuarios del chat. Solo los usuarios registrados pueden cambiar su avatar. Los usuarios registrados pueden abrir su perfil (vease comando /profile )  y haz click en el avatar actual para selecionar uno nuevo del menu de imagenes/avatares, o escribe una URL de Internet  donde halla una imagen (solo imagenes publicas, no sitios protegidos con contraseña). La imagenes deben ser abiertas por el navegador(.gif, .jpg, etc. ) 32 x 32 pixel de tamaño de la imagen para una mejor vision.
-<P>Haz click en el avatar de alguien para ver su perfil (vease <A HREF="#whois">/whois comando</A>).
+<P>Avatars son iconos graficos que representa a los usuarios del chat. Solo los usuarios registrados pueden cambiar su avatar. Los usuarios registrados pueden abrir su perfil (vease comando <A HREF="#changeprofile">/profile</A>)  y haz click en el avatar actual para selecionar uno nuevo del menu de imagenes/avatares, o escribe una URL de Internet  donde halla una imagen (solo imagenes publicas, no sitios protegidos con contraseña). La imagenes deben ser abiertas por el navegador(.gif, .jpg, etc. ) 32 x 32 pixel de tamaño de la imagen para una mejor vision.
+<P>Haz click en el avatar de alguien para ver su perfil (vease <A HREF="#whois">/whois</A> comando).
 Haz click en el avatar tuyo de la lista de usuarios /profile comando, si tu estas registrado.
 Si tu no estas registrado, haz click en tu (por defecto, el que pone el sistema) avatar, se abrira una alerta para que te registres.
   <P ALIGN="right"><A HREF="#top">Subir</A></P>
@@ -493,7 +493,11 @@ if (C_HTML_TAGS_KEEP != "none")
 <b><?php echo(L_COL_HELP_SUB2); ?></b><br /><?php echo(L_COL_HELP_P2); ?><br /><br /><center><?php echo(COLOR_LIST); ?></center><br /><?php echo(L_COL_HELP_P2a); ?><br /><br />
 </P>
 <P>
-<b><?php echo(L_COL_HELP_SUB3); ?></b><br /><?php echo(L_COLOR_HEAD_SETTINGS); ?><br /><?php if (COLOR_FILTERS) echo(L_COLOR_HEAD_SETTINGSa."<br />"); ?><u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo(L_WHOIS_ADMIN); elseif ($CookieStatus == "t") echo(L_WHOIS_TOPMOD); elseif ($CookieStatus == "m") echo(L_WHOIS_MODER); elseif ($CookieStatus == "u") echo(L_WHOIS_GUEST); else echo(L_WHOIS_REG);?></b><br /><?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
+<b><?php echo(L_COL_HELP_SUB3); ?></b><br />
+<u><?php echo(L_COLOR_HEAD_SETTINGS); ?></u><br />
+<?php if (COLOR_FILTERS) echo("a) COLOR_FILTERS = <b>".(COLOR_FILTERS == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />b) COLOR_ALLOW_GUESTS = <b>".(COLOR_ALLOW_GUESTS == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />c) COLOR_NAMES = <b>".(COLOR_NAMES == 1 ? L_ENABLED : L_DISABLED)."</b>.<br />"); ?>
+<?php if (COLOR_FILTERS) echo("<u>".L_COLOR_HEAD_SETTINGSa."</u> ".L_WHOIS_ADMIN." = <b><SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN></b>, ".L_WHOIS_MODERS." = <b><SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN></b>, ".L_WHOIS_OTHERS." = <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>."); else echo("<u>".L_COLOR_HEAD_SETTINGSb."</u> <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>.") ?><br />
+<u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo("<font color=".COLOR_CA.">".L_WHOIS_ADMIN); elseif ($CookieStatus == "t") echo("<font color=".COLOR_CA.">".L_WHOIS_TOPMOD); elseif ($CookieStatus == "m") echo("<font color=".COLOR_CM.">".L_WHOIS_MODER); else echo("<font color=".COLOR_CD.">".L_WHOIS_GUEST); echo("</font>");?></b>.<br /><?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
 <br /><P ALIGN="right"><A HREF="#top">Subir</A></P>
 <hr />
 <!-- Color Input Box mod by Ciprian end -->
@@ -515,11 +519,11 @@ También puede poner más de un nombre de usuario en el comando invitar (ej. "/i
 <P>
 <FONT SIZE="+1"><A NAME="changeroom"><B>Cambiar de sala:</B></A></FONT>
 <P>
-La lista que se encuentra en la parte derecha de su pantalla le muestra todas las salas de chat y los usuarios conectados en ellas en ese momento. Para dejar la sala en la que está y moverse a otra sala, simplemente haga clic una vez en el nombre de la sala a la que desea entrar. Las salas vacías no aparecen en esta lista. Puede moverse a una sala vacía escribiendo el <B>comando "/join #nombredelasala"</B> sin comillas.
+La lista que se encuentra en la parte derecha de su pantalla le muestra todas las salas de chat y los usuarios conectados en ellas en ese momento. Para dejar la sala en la que está y moverse a otra sala, simplemente haga clic una vez en el nombre de la sala a la que desea entrar. Las salas vacías no aparecen en esta lista. Puede moverse a una sala vacía escribiendo el <B>comando "/join #nombre de la sala"</B> sin comillas.
 <P>
-<I>Por ejemplo:</I> /join #SalaRoja
+<I>Por ejemplo:</I> /join #Sala Roja
 <P>
-lo moverá a la SalaRoja.
+lo moverá a la "Sala Roja".
 <?php
 if (C_VERSION == "2")
 {
@@ -527,11 +531,11 @@ if (C_VERSION == "2")
 	?>
 	 también puede crear una sala nueva usando el mismo comando. Sólo tiene que especificar el tipo de sala: 0 es para privada, 1 para pública (valor por defecto).
 	<P>
-	<I>Por ejemplo:</I> /join 0 #MiSala
+	<I>Por ejemplo:</I> /join 0 #Mi Sala
 	<P>
-	creará una nueva sala privada (siempre y cuando una sala pública no haya sido creada anteriormente con ese mismo nombre) llamada MiSala y lo moverá dentro de ella.
+	creará una nueva sala privada (siempre y cuando una sala pública no haya sido creada anteriormente con ese mismo nombre) llamada "Mi Sala" y lo moverá dentro de ella.
 	<P>
-	Los nombres de las Salas no pueden contener coma (,) o barra invertida (\).<?php if (C_NO_SWEAR) echo(" It cannot contain \"swear words\"."); ?>
+	Los nombres de las Salas no pueden contener coma (,) o barra invertida (\).<?php if (C_NO_SWEAR) echo(" No puede contener \"malas palabras\"."); ?>
 	<?php
 }
 ?>

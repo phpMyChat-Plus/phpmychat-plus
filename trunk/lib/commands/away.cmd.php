@@ -68,20 +68,19 @@ if ($awaystat != 2) {
 	}
 	$xtra = eregi_replace('([[:space:]]|^)(www)', '\\1http://\\2', $xtra); // no prefix (www.myurl.ext)
 	$prefix = '(http|https|ftp|telnet|news|gopher|file|wais)://';
-    $pureUrl = '([[:alnum:]/\n+-=%&:_.~?]+[#[:alnum:]+-_~]*)';
-       $purl="";
-       for ($x=0; $x<count($pmatch[0]); $x++)
-       {
-				$purl .= "||".$pmatch[0][$x];
-       }
-
+if (C_POPUP_LINKS)
+{
+    $purl="";
+    for ($x=0; $x<count($pmatch[0]); $x++)
+    {
+		$purl .= "||".$pmatch[0][$x];
+    }
     $xtra = eregi_replace($prefix.$pureUrl, '<a href="links.php?link='.urlencode($purl).'" target="_blank"></a>', $xtra);
-//	$xtra = eregi_replace($prefix . $pureUrl, '<a href="\\1://\\2" target="_blank">\\1://\\2</a>', $xtra);
+}
+else $xtra = eregi_replace($prefix.$pureUrl, '<a href="\\1://\\2" target="_blank">\\1://\\2</a>', $xtra);
 
 	// e-mail addresses
 	$xtra = eregi_replace('([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](fo|g|l|m|mes|o|op|pa|ro|seum|t|u|v|z)?)', '<a href="mailto:\\1" alt="Send email">\\1</a>', $xtra);
-//	$xtra = eregi_replace('([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](fo|g|l|m|mes|o|op|pa|ro|seum|t|u|v|z)?)', '<a href="mailto:\\1" target="_blank">\\1</a>', $xtra);
-
 
 	// Smilies
 	if (C_USE_SMILIES)
@@ -124,7 +123,6 @@ if ($awaystat != 2) {
 
    $IsCommand = true;
    $RefreshMessages = true;
-   $First = 1;
    $CleanUsrTbl = 1;
 }
 ?>

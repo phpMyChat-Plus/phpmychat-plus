@@ -1,0 +1,1981 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<aiml>
+
+<category>
+<pattern>ANNOUNCE CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Announce command</b><br />
+<u>Format:</u> <b>/announce {message}</b><br />
+Allow the administrator to send an announcement to all users in all chat rooms.<br />
+<i><u>Notations:</u> { } represents a required setting</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>AWAY CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Away command</b><br />
+<u>Format:</u> <b>/away [message]</b><br />
+Announces the room and the users who try to send you messages that you are away from the computer. If you want to be back to chat, just start typing.<br />
+<i><u>Notations:</u> [ ] represents an optional setting.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>BANISH CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Banish command</b><br />
+<u>Format:</u> <b>/ban [*] {user} [the reason]</b><br />
+Allow the moderator(s) of a room or the administrator to "banish" a user from the room for a time defined by the administrator. The later can banish a user chatting in an other room than the one he is into and use the * setting to banish "forever" a user from the chat as the whole.<br />
+Optionally, [the reason] displays the reason of banishment (any desired text).<br />
+<i><u>Notations:</u> { } represents a required setting, [ ] an optional one.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>BOT CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Bot command</b><br />
+<u>Format:</u> <b>/bot start</b> or <b>/bot stop</b><br />
+Allow the moderator(s) of a room or the administrator to start/load or stop/unload the bot in the current room.<br />
+To start a public conversation with the bot, the user should just type it's name (E.g. "hi <bot/>"). The Bot can follow each conversation individually with each user. To end a conversation with the Bot or make him shut off, just type "<b>bye botname</b>" (E.g. "bye <bot name="name"/>").<br />
+Bot can also talk privatelly to each user (if allowed by the chat settings), through the private messagery system of the chat (check pm cmd or wisp cmd help)<br />
+<u>Note:</u> if you just type "<b>bye</b>", bot will answer but it wouldn't be enough to make him shut. He will keep talking to you, because he will think you said bye to someone else or that you just intended to go out, but you made up your mind. Isn't that what humans would think too?!</span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>BOT HOW</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Bot conversations</b><br />
+To start a public conversation with the bot, the user should just type it's name (E.g. "hi <bot/>"). The Bot can follow each conversation individually with each user. To end a conversation with the Bot or make him shut off, just type "<b>bye botname</b>" (E.g. "bye <bot name="name"/>").<br />
+Bot can also talk privatelly to each user (if allowed by the chat settings), through the private messagery system of the chat (check pm cmd or wisp cmd help)<br />
+<u>Note:</u> if you just type "<b>bye</b>", bot will answer but it wouldn't be enough to make him shut. He will keep talking to you, because he will think you said bye to someone else or that you just intended to go out, but you made up your mind. Isn't that what humans would think too?!</span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>BUZZ CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Buzz command</b><br />
+<u>Format:</u> <b>/buzz [~soundname] [message]</b><br />
+Sends a buzzer sound and optionally displays a message in the current room.<br />
+<u>Usage:</u>&lt;li>old usage: "/buzz" or "/buzz message to be shown" - this plays the default sound for buzz defined in Admin panel;&lt;/li>&lt;li>extended usage: "/buzz ~soundname" or "/buzz ~soundname message to be shown" - this plays the soundname.wav file from the plus/sounds folder; please note the sign "~" to be used at the beginning of the second word, which is the name of the sound file, without the extension .wav (only .wav extensions allowed).&lt;/li><br />
+<u>Note:</u> By default, this is a moderator/admin command.<br />
+<i><u>Notations:</u> [ ] represents an optional setting.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>CHAT ETIQUETTE</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Chat Etiquette</b><br />
+Our site would like to keep its community friendly and fun, so please adhere to the following guidelines. If you fail to observe these rules, one of our chat moderators may boot you from the chat.<br />
+<u>Our Chat Etiquette Guidelines</u><br />
+&lt;li>Do not "spam" the chat by typing nonsense or random letters.&lt;/li>&lt;li>Do not use aLtErnAtiNg characters.&lt;/li>&lt;li>Keep ALL CAPS use to a minimum, as it is considered yelling.&lt;/li>&lt;li>Keep in mind that our chat users are from all over the world, and, most likely, you will encounter people of different beliefs. Please be kind and polite to these people.&lt;/li>&lt;li>Do not direct profanity towards other members. In fact, try to steer clear of using profanity and/or swear words alltogether.&lt;/li>&lt;li>Do not call other members by their real names that they may not appreciate. Use their nicknames instead.&lt;/li></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>CLEAR CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Clear command</b><br />
+<u>Format:</u> <b>/clear</b><br />
+Clear the messages frame and show only the last 5 messages.</span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>CHAT WEBSITE</pattern>
+<template><span class="help"><bot name="chatname"/> home page is at <bot name="chatproject"/>.</span></template>
+</category>
+
+<category>
+<pattern>CHAT PAGE _</pattern>
+<template><srai>CHAT WEBSITE</srai></template>
+</category>
+
+<category>
+<pattern>CHAT HOME _</pattern>
+<template><srai>CHAT WEBSITE</srai></template>
+</category>
+
+<category>
+<pattern>CHAT LINK _</pattern>
+<template><srai>CHAT WEBSITE</srai></template>
+</category>
+
+<category>
+<pattern>MYCHAT _</pattern>
+<template><srai>CHAT WEBSITE</srai></template>
+</category>
+
+<category>
+<pattern>MYCHAT</pattern>
+<template><srai>CHAT WEBSITE</srai></template>
+</category>
+
+<category>
+<pattern>_ MYCHAT SITE</pattern>
+<template><srai>CHAT WEBSITE</srai></template>
+</category>
+
+<category>
+<pattern>_ CHAT PAGE</pattern>
+<template><srai>CHAT WEBSITE</srai></template>
+</category>
+
+<category>
+<pattern>_ CHAT HOME</pattern>
+<template><srai>CHAT WEBSITE</srai></template>
+</category>
+
+<category>
+<pattern>_ PHPMYCHAT-PLUS HOME</pattern>
+<template><srai>CHAT WEBSITE</srai></template>
+</category>
+
+<category>
+<pattern>_ PHPMYCHAT PAGE</pattern>
+<template><srai>CHAT WEBSITE</srai></template>
+</category>
+
+<category>
+<pattern>CHAT DOWNLOAD PAGE</pattern>
+<template><span class="help"><bot name="chatname"/> download page is at <bot name="chatdownload"/>.</span></template>
+</category>
+
+<category>
+<pattern>_ MYCHAT DOWNLOAD</pattern>
+<template><srai>CHAT DOWNLOAD PAGE</srai></template>
+</category>
+
+<category>
+<pattern>_ PHPMYCHAT DOWNLOAD</pattern>
+<template><srai>CHAT DOWNLOAD PAGE</srai></template>
+</category>
+
+<category>
+<pattern>_ PHPMYCHAT DOWN</pattern>
+<template><srai>CHAT DOWNLOAD PAGE</srai></template>
+</category>
+
+<category>
+<pattern>PHPMYCHAT DOWNLOAD _</pattern>
+<template><srai>CHAT DOWNLOAD PAGE</srai></template>
+</category>
+
+<category>
+<pattern>PHPMYCHAT DOWN _</pattern>
+<template><srai>CHAT DOWNLOAD PAGE</srai></template>
+</category>
+
+<category>
+<pattern>_ DOWNLOAD</pattern>
+<template><srai>CHAT DOWNLOAD PAGE</srai></template>
+</category>
+
+<category>
+<pattern>DOWNLOAD _</pattern>
+<template><srai>CHAT DOWNLOAD PAGE</srai></template>
+</category>
+
+<category>
+<pattern>_ DOWN</pattern>
+<template><srai>CHAT DOWNLOAD PAGE</srai></template>
+</category>
+
+<category>
+<pattern>DOWN _</pattern>
+<template><srai>CHAT DOWNLOAD PAGE</srai></template>
+</category>
+
+<category>
+<pattern>DOWN CHAT _</pattern>
+<template><srai>CHAT DOWNLOAD PAGE</srai></template>
+</category>
+
+<category>
+<pattern>DOWN MYCHAT _</pattern>
+<template><srai>CHAT DOWNLOAD PAGE</srai></template>
+</category>
+
+<category>
+<pattern>DOWN PHPMYCHAT _</pattern>
+<template><srai>CHAT DOWNLOAD PAGE</srai></template>
+</category>
+
+<category>
+<pattern>DOWN PHPMYCHAT-PLUS _</pattern>
+<template><srai>CHAT DOWNLOAD PAGE</srai></template>
+</category>
+
+<category>
+<pattern>DOWNLOAD PHPMYCHAT _</pattern>
+<template><srai>CHAT DOWNLOAD PAGE</srai></template>
+</category>
+
+<category>
+<pattern>DICE CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Dice v.1 command</b><br />
+<u>Format:</u> <b>/dice [n]</b><br />
+A dice game for random/hazardous numbers.<br />
+<u>Usage:</u> n can take any value between 1 and MAX_ROLLS (it represents the number of dice - 6 by default).<br />
+<u>Note:</u> If no number is entered, the default maximum dice will be used.<br />
+<i><u>Notations:</u> [ ] represents an optional setting.</i><br />
+<br />
+<b>Dice v.2 command</b><br />
+<u>Format:</u> <b>/{n1}d[n2]</b> (dice v.2)<br />
+This is a more complex version of the /dice command.<br />
+<u>Usage:</u> /{n1}d[n2] or /{n1}d&lt;li>n1 can take any value between 1 and MAX_DICES (it represents the number of dice per throws - 99 by default).&lt;/li>&lt;li>n2 can take any value between 1 and MAX_ROLLS (it represents the number of sides per die - 6 by default).&lt;/li><br />
+<i><u>Notations:</u> { } represents a required setting, [ ] an optional one.</i><br />
+<br />
+<b>Dice v.3 command</b><br />
+<u>Format:</u> <b>/d{n1}[tn2]</b> (dice v.3)<br />
+This is a third (role-playing) version of the dice rolling.<br />
+<u>Usage:</u> /d{n1}[tn2] or /d{n1}&lt;li>n1 can take any value between 1 and 100 (it represents the number of sides per die).&lt;/li>&lt;li>n2 can take any value between 1 and MAX_ROLLS (it represents the number of dice per throw - 6 by default).&lt;/li><br />
+<i><u>Notations:</u> { } represents a required setting, [ ] an optional one.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>DICE1 CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Dice v.1 command</b><br />
+<u>Format:</u> <b>/dice [n]</b><br />
+A dice game for random/hazardous numbers.<br />
+<u>Usage:</u> n can take any value between 1 and MAX_ROLLS (it represents the number of dice - 6 by default).<br />
+<u>Note:</u> If no number is entered, the default maximum dice will be used.<br />
+<i><u>Notations:</u> [ ] represents an optional setting.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>DICE2 CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Dice v.2 command</b><br />
+<u>Format:</u> <b>/{n1}d[n2]</b> (dice v.2)<br />
+This is a more complex version of the /dice command.<br />
+<u>Usage:</u> /{n1}d[n2] or /{n1}d&lt;li>n1 can take any value between 1 and MAX_DICES (it represents the number of dice per throws - 99 by default).&lt;/li>&lt;li>n2 can take any value between 1 and MAX_ROLLS (it represents the number of sides per die - 6 by default).&lt;/li><br />
+<i><u>Notations:</u> { } represents a required setting, [ ] an optional one.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>DICE3 CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Dice v.3 command</b><br />
+<u>Format:</u> <b>/d{n1}[tn2]</b> (dice v.3)<br />
+This is a third (role-playing) version of the dice rolling.<br />
+<u>Usage:</u> /d{n1}[tn2] or /d{n1}&lt;li>n1 can take any value between 1 and 100 (it represents the number of sides per die).&lt;/li>&lt;li>n2 can take any value between 1 and MAX_ROLLS (it represents the number of dice per throw - 6 by default).&lt;/li><br />
+<i><u>Notations:</u> { } represents a required setting, [ ] an optional one.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>PHPMYCHATPLUS MAIN HELP</pattern>
+<template>
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+<span class="help"><b><bot name="chatname"/> Help</b><br />
+If you need help for <bot name="chatname"/>, you can read the <a href="help_popup.php?L=english" target="_blank">Help page</a> available, This conversation is also the right place to get it.<br />
+All you need to do is to type the word you're looking for, followed by a question mark. E.g. <b>commands?</b> will display all the available commands in chat. Please note that not all the listed commands shall be enabled in this specific chat server. There are several commands reserved only for <b>power users</b> (administrators and/or moderators).<br />
+For more information, type "<b>etiquette</b>", "<b>commands</b>" or "<b>tutorial</b>".&lt;li><srai>CHAT WEBSITE</srai>&lt;/li>&lt;li><srai>CHAT DOWNLOAD PAGE</srai>&lt;/li></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+</template>
+</category>
+
+<topic name="PHPMYCHATPLUS QUESTION">
+<category>
+<pattern>THANKS</pattern>
+<template>
+You are very welcome! I am always so excited to give you a hand...
+<set name="topic"></set>
+</template>
+</category>
+</topic>
+
+<category>
+<pattern>_</pattern>
+<that>_ YOU LIKE TO GET SOME CHAT HELP</that>
+<template>
+<think><set name="chathelp_needed"><star/></set></think>
+<condition>
+	<li name="chathelp_needed" value="yes"><srai>PHPMYCHATPLUS MAIN HELP</srai></li>
+	<li name="chathelp_needed" value="yes please"><srai>PHPMYCHATPLUS MAIN HELP</srai></li>
+	<li name="chathelp_needed" value="please"><srai>PHPMYCHATPLUS MAIN HELP</srai></li>
+	<li name="chathelp_needed" value="yep"><srai>PHPMYCHATPLUS MAIN HELP</srai></li>
+	<li name="chathelp_needed" value="yeah"><srai>PHPMYCHATPLUS MAIN HELP</srai></li>
+	<li name="chathelp_needed" value="no">How else can I help you?</li>
+</condition>
+<think><set name="chathelp_needed"></set></think>
+</template>
+</category>
+
+<category>
+<pattern>CHAT HELP</pattern>
+<template><srai>PHPMYCHATPLUS MAIN HELP</srai></template>
+</category>
+
+<category>
+<pattern>CHAT HELP _</pattern>
+<template><srai>PHPMYCHATPLUS MAIN HELP</srai></template>
+</category>
+
+<category>
+<pattern>CAN YOU HELP _</pattern>
+<template><srai>PHPMYCHATPLUS MAIN HELP</srai></template>
+</category>
+
+<category>
+<pattern>CAN I _</pattern>
+<template><srai>PHPMYCHATPLUS MAIN HELP</srai></template>
+</category>
+
+<category>
+<pattern>HELP NEEDED</pattern>
+<template><srai>PHPMYCHATPLUS MAIN HELP</srai></template>
+</category>
+
+<category>
+<pattern>PHPMYCHAT HELP</pattern>
+<template><srai>PHPMYCHATPLUS MAIN HELP</srai></template>
+</category>
+
+<category>
+<pattern>HOW TO USE COMMANDS</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Use of commands in <bot name="chatname"/></b><br />
+All the chat commands must be used in <b>English</b>.<br />The available commands are: announce, away, ban, bot, buzz, clear, demote, dice1, dice2, dice3, help (?), high, history (recall, !), ignore, img, invite, join, kick, me, mr, notify, order, profile, promote, quit, exit, bye, refresh, room, save, show (last), size, sort, timestamp, to (msg), topic, whois, wisp (whisp). To read about any command usage, type its word, followed by cmd. E.g. <b>invite cmd</b>.</span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>HIGHLIGHT CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Highlight command</b><br />
+<u>Format:</u> <b>/high {user}</b><br />
+It highlights the messages of a specific user for an easier reading across the conversations.<br />
+<u>Usage:</u> /high {user} or press the small square on the right of the username (in the rooms/users list)<br />
+<i><u>Notations:</u> { } represents a required setting.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>IGNORE CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Ignore command</b><br />
+<u>Format:</u> <b>/ignore [-] [user[,user,...]]</b><br />
+Avoid diplaying messages from a user if nick is specified.<br />
+Set ignoring off for a user when nick and - are both specified, for all users when - is but not nick.<br />
+<u>Note:</u> With no option, this command pops up a window that shows all ignored nicks.<br />
+<i><u>Notations:</u> [ ] represents an optional setting.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>IMAGE CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Image command</b><br />
+<u>Format:</u> <b>/img {full path to the image to be posted}</b><br />
+It allows posting of one single image as message.<br />
+<u>Usage:</u>&lt;li>The picture has to be on the internet and free accessible by anyone. Don't use pages that need login.&lt;/li>&lt;li>Full image link must be typed! E.g. <b>/img http://ciprianmp.com/images/CIPRIAN.jpg</b>&lt;/li>&lt;li>Allowed extensions: .jpg .bmp .gif .png. The link is case sensitive!&lt;/li><br />
+<u>Hints:</u>&lt;li>type /img then a space and paste the URL into the box; to get the URL of an image from a webpage, when you right-click on the image, go to properties, then highlight the whole address/URL (sometimes needs to scroll down a bit) and copy/paste after the /img &lt;/li>&lt;li>Don't use pictures from your pc: it will just break the chat window!!!&lt;/li><br />
+<i><u>Notations:</u> { } represents a required setting.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>INVITE CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Invite command</b><br />
+<u>Format:</u> <b>/invite {user}</b><br />
+Invite a user chatting in a different room to join the room you are in.<br />
+<i><u>Notations:</u> { } represents a required setting.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>JOIN CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Join command</b><br />
+<u>Format:</u> <b>/join [n] {#room}</b><br />
+Join another room, creating it if it doesn't exist and if you're allowed to.<br />
+<u>Note:</u> n equals 0 for private or 1 for public, default to 1 if not specified.<br />
+<i><u>Notations:</u> { } represents a required setting, [ ] an optional one.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>KICK CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Kick command</b><br />
+<u>Format:</u> <b>/kick {user} [the reason]</b><br />
+Kick away user from the chat. This command can only be used by a moderator of that room or an admin.<br />
+<u>Note:</u> Optionally, [the reason] displays the reason of kicking (any desired text).<br />
+<i><u>Notations:</u> { } represents a required setting, [ ] an optional one.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>ME CMD</pattern>
+<template>
+<random>
+<li>Did you know there is a command available for "<b>me</b>" in this chat? Here is how to use it:</li>
+<li>Did you know "<b>me</b>" is a command available in <bot name="chatname"/>? Read bellow about it:</li>
+<li>What about you? I don't think you wanna talk about yourself, so here is how we use "<b>me</b>" in this chat:</li>
+<li>Here is some help for <b>you</b> about how to use "<b>me</b>" in this chat:</li>
+</random>
+<br />
+<span class="help"><b>Me and Mr commands</b><br />
+<u>Format:</u> <b>/me {message}</b> or <b>/mr {message}</b><br />
+Describe what you're doing without refering to yourself.<br />
+The second command does the same as /me but it will show your respective title, according to your profile gender.<br />
+E.g. * Mr Ciprian is watching TV or Mrs Dana is happy.<br />
+<i><u>Notations:</u> { } represents a required setting.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>MR CMD</pattern>
+<template>
+<random>
+<li>Did you know "<b>mr</b>" is a command available in <bot name="chatname"/>? Here is how to use it:</li>
+<li>Did you know there is a command available for "<b>mr</b>" in this chat? Read bellow how to use it:</li>
+<li>Mister is a form of respect, but there are other ways to use it. You can also use it as a command, so here is how we use "<b>mr</b>" in this chat:</li>
+</random>
+<br />
+<span class="help"><b>Me and Mr commands</b><br />
+<u>Format:</u> <b>/me {message}</b> or <b>/mr {message}</b><br />
+Describe what you're doing without refering to yourself.<br />
+The second command does the same as /me but it will show your respective title, according to your profile gender.<br />
+E.g. * Mr Ciprian is watching TV or Mrs Dana is happy.<br />
+<i><u>Notations:</u> { } represents a required setting.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>MSG CMD</pattern>
+<template>
+<random>
+<li>Did you know "<b>to</b>" is a command available in <bot name="chatname"/>? Here is how to use it:</li>
+<li>Ever wanted to say something privately <b>to</b> a friend? "<b>to</b>" is a command that let you do that in this chat? Read bellow how to use it:</li>
+<li>Here is how we use "<b>msg</b>" in this chat:</li>
+</random>
+<br />
+<span class="help"><b>Msg (PM) command</b><br />
+<u>Format:</u> <b>/msg {user} {message}</b> or <b>/to {user} {message}</b><br />
+Sends a private message to the specified user (other users won't see it).<br />
+<i><u>Notations:</u> { } represents a required setting.</i><br />
+<u>Note:</u> You often see posts in this format: <i>username> message</i>. Please be aware that those messages are not hiden from other users. They are not private messages, but messages addressed to that specific user.</span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>NOTIFY CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Notify command</b><br />
+<u>Format:</u> <b>/notify</b><br />
+Toggles notifications of users' entrance/exit for the current room.</span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>PROFILE CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Profile command</b><br />
+<u>Format:</u> <b>/profile</b><br />
+Popup a separate window for changing personal profile.<br />
+<u>Note:</u> Using this command, your username and password fields are locked and cannot be changed because you already logged in to chat. In order to change those two important data, you must log out of chat and use the available link from the index page.</span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>PROMOTE CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Promote and Demote commands</b><br />
+<u>Format:</u> <b>/promote {user}</b> or the reverse: <b>/demote [*] {user}</b><br />
+Allow the administrator or moderator(s) of the current room to promote another registered user to moderator for the current room.<br />
+The second command will allow the administrator or moderator(s) of the curent room to demote another registered user previously promoted to moderator for the current room.<br />
+<u>Note:</u> The * option will demote the user from all the rooms.<br />
+<i><u>Notations:</u> { } represents a required setting, [ ] an optional one.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>QUIT CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Quit, Exit and Bye commands</b><br />
+<u>Format:</u> <b>/quit [message]</b> or <b>/exit [message]</b> or <b>/bye [message]</b><br />
+They are actually one and the same command to leave the chat (after displaying an optional message).</span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>RECALL CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Recall (History) command</b><br />
+<u>Format:</u><b>/!</b><br />
+Recall the previous text typed (command or message) and put it back into the message box.</span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>REFRESH CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />To reload your chat, you either press F5 key on your keyboard or log out and come back. But if you're trying to set the refresh time of your browser, here is a command that might help:<br />
+<span class="help"><b>Refresh command</b><br />
+<u>Format:</u> <b>/refresh [n]</b><br />
+Modify messages and users lists refresh delay (in seconds).<br />
+<u>Note:</u>If n is not specified or less than 3, toggles between no refresh at all and 10s refresh.<br />
+<i><u>Notations:</u> [ ] represents an optional setting.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>SAVE CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Save command</b><br />
+<u>Format:</u> <b>/save [n]</b><br />
+Save the last n messages (notifications are excluded) to an HTML file.<br />
+<u>Note:</u> If n is not specified, all available messages will be taken into account.<br />
+<i><u>Notations:</u> [ ] represents an optional setting.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>SHOW CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Show and Last commands</b><br />
+<u>Format:</u> <b>/show [n]</b> or <b>/last [n]</b><br />
+Reload the messages frame and display the latest n messages; minimum and default are 5 (if n is not specified).<br />
+<i><u>Notations:</u> [ ] represents an optional setting.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>SIZE CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Size command</b><br />
+<u>Format:</u> <b>/size [n]</b><br />
+Change the font size of the messages in chat to user choice. Allowed values for n: between 7 and 15; if n is not specified, it resets the font size to the default value (10).</span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>SORT CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Sort command</b><br />
+<u>Format:</u> <b>/sort</b><br />
+Change the order users are sorted in lists: by entrance time or alphabetically.</span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>TIMESTAMP CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Timestamp command</b><br />
+<u>Format:</u> <b>/timestamp</b><br />
+Show/Hide time in front of each message.</span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>TOPIC CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Topic and Topic Reset commands</b><br />
+<u>Format:</u> <b>/topic [*] {at least two words as message}</b> or, the reset form <b>/topic [*] top reset</b><br />
+<u>Usage:</u>&lt;li>This command changes the topic of the current room.&lt;/li>&lt;li>The topic message has to contain at least 2 words.&lt;/li>&lt;li>Try not to override other users' topics.&lt;/li>&lt;li>Use important topics.&lt;/li><br />
+Using "/topic top reset" command the current topic will be deleted and reset to default one of the room.<br />
+Optionally, "/topic * { }" and "/topic * top reset" do exactly the same but in all the rooms (global topic and global topic reset).<br />
+<u>Note:</u> By default, this is a moderator/admin command.<br />
+<i><u>Notations:</u> { } represents a required setting, [ ] an optional one.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>WHOIS CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Whois command</b><br />
+<u>Format:</u> <b>/whois {user}</b><br />
+Shows a profile (information about specified user).<br />
+<i><u>Notations:</u> { } represents a required setting.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>WISP CMD</pattern>
+<template>
+<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<br />
+<span class="help"><b>Wisp and Whisp (Whisper) commands</b><br />
+<u>Format:</u> <b>/wisp {user} {message}</b> or <b>/whisp {user} {message}</b><br />
+Sends a whisper (private message). The message will reach the destination, no matter which room the user is in. If the user is not on-line or has set away, you will be notified about it.<br />
+<i><u>Notations:</u> { } represents a required setting.</i></span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>TUT CONNECTION ERROR</pattern>
+<template>
+<a href="tutorial_popup.php?L=english" target="_blank"><bot name="chatname"/> Tutorial</a> paragraph follows:
+<br />
+<span class="help"><b>Understanding Connection state</b><br />
+A sign representing your connection state is displayed at the top-right corner of the screen. It may take three forms:
+&lt;li>&amp;lt;img src="images/connectOff.gif" width=13 height=13 border=0 alt="No connection"/> when no connection is required;&lt;/li>
+&lt;li>&amp;lt;img src="images/connectOn.gif" width=13 height=13 border=0 alt="Connecting"/> when there is a connection in progress;&lt;/li>
+&lt;li>&amp;lt;img src="images/connectError.gif" width=13 height=13 border=0 alt="Connection failed"/> when a connection failed.&lt;/li>
+In the third case, clicking on the red "button" will launch a new connection attempt.</span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>TUT USERS LIST</pattern>
+<template>
+<a href="tutorial_popup.php?L=english" target="_blank"><bot name="chatname"/> Tutorial</a> paragraph follows:
+<br />
+<span class="help"><b>Knowing who is chatting</b><br />
+You may click on the link that shows the number of connected users at the start page, or, if you are chatting, click on the image &amp;lt;img src="images/popup.gif" width=13 height=13 border=0 alt="Detach Users list"/> at the top-right of the screen to open a independent window that will display the list of connected users, and the rooms they are in, in near real time.<br />
+The title of this window contains the usernames, if they are less than three, the numbers of users and opened rooms else.<br />
+Clicking on the &amp;lt;img src="images/sound.gif" width=13 height=13 border=0 alt="Beep/no beep at user entrance"/> icon at the top of this popup will enable/disable beeping sounds at user entrance.</span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>HELP CMD</pattern>
+<template>
+<a href="tutorial_popup.php?L=english" target="_blank"><bot name="chatname"/> Tutorial</a> paragraph follows:
+<br />
+<span class="help"><b>Help command</b><br />
+Once inside a chat room, you can launch a <a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> popup by clicking on the &amp;lt;img src="localization/english/images/helpOn.gif" width=30 width=20 border=0 alt="Help"/> image that sits just before the message box.<br />You can also type the "<b>/help</b>" or "<b>/?</b>" commands in the message box.</span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>TUT AVATARS</pattern>
+<template>
+<a href="tutorial_popup.php?L=english" target="_blank"><bot name="chatname"/> Tutorial</a> paragraph follows:
+<br />
+<span class="help"><b>Avatars in chat</b><br />
+Avatars are graphic image icons that represent chatters. Only registered users may change their avatar. Registered users may open their Profile (see "<b>/profile</b>" command) and click on the avatar image to select it from a menu of images, or to input a URL to a graphic image available anywhere on the internet (only images publicly accessible, not password protected sites). Images should be browser-viewable (.gif, .jpg, etc. ) 32 x 32 pixel graphic files for best display.
+<br />Clicking on a person's avatar in the message frame will popup up that person's profile (see "<b>/whois</b>" command).
+Clicking on your own avatar on the user's list  will invoke the "<b>/profile</b>" command, if you are registered.
+If you are not registered, clicking on your own (system's default) avatar will bring up an alert to encourage you to register.</span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>TUT ADDRESSING</pattern>
+<template>
+<a href="tutorial_popup.php?L=english" target="_blank"><bot name="chatname"/> Tutorial</a> paragraph follows:
+<br />
+<span class="help"><b>Addressing to a secific user in chat</b><br />
+Clicking once on the name of another user from the list (to the right of the screen) will cause their "<b>username></b>" to appear in your text box. This feature allows you to easily direct a public message to a user, perhaps in response to something he or she has posted above. For example, look at your name format in this post.</span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>CHAT TUTORIAL</pattern>
+<template>
+<a href="tutorial_popup.php?L=english" target="_blank"><bot name="chatname"/> Tutorial</a> (short version):
+<br />
+<span class="help"><b>Understanding Connection state</b><br />
+A sign representing your connection state is displayed at the top-right corner of the screen. It may take three forms:
+&lt;li>&amp;lt;img src="images/connectOff.gif" width=13 height=13 border=0 alt="No connection"/> when no connection is required;&lt;/li>
+&lt;li>&amp;lt;img src="images/connectOn.gif" width=13 height=13 border=0 alt="Connecting"/> when there is a connection in progress;&lt;/li>
+&lt;li>&amp;lt;img src="images/connectError.gif" width=13 height=13 border=0 alt="Connection failed"/> when a connection failed.&lt;/li>
+In the third case, clicking on the red "button" will launch a new connection attempt.
+<br /><br />
+<b>Knowing who is chatting</b><br />
+You may click on the link that shows the number of connected users at the start page, or, if you are chatting, click on the image &amp;lt;img src="images/popup.gif" width=13 height=13 border=0 alt="Detach Users list"/> at the top-right of the screen to open a independent window that will display the list of connected users, and the rooms they are in, in near real time.<br />
+The title of this window contains the usernames, if they are less than three, the numbers of users and opened rooms else.<br />
+Clicking on the &amp;lt;img src="images/sound.gif" width=13 height=13 border=0 alt="Beep/no beep at user entrance"/> icon at the top of this popup will enable/disable beeping sounds at user entrance.
+<br /><br />
+<b>Help command</b><br />
+Once inside a chat room, you can launch a <a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> popup by clicking on the &amp;lt;img src="localization/english/images/helpOn.gif" width=30 width=20 border=0 alt="Help"/> image that sits just before the message box.<br />You can also type the "<b>/help</b>" or "<b>/?</b>" commands in the message box.
+<br /><br />
+<b>Avatars in chat</b><br />
+Avatars are graphic image icons that represent chatters. Only registered users may change their avatar. Registered users may open their Profile (see "<b>/profile</b>" command) and click on the avatar image to select it from a menu of images, or to input a URL to a graphic image available anywhere on the internet (only images publicly accessible, not password protected sites). Images should be browser-viewable (.gif, .jpg, etc. ) 32 x 32 pixel graphic files for best display.
+<br />Clicking on a person's avatar in the message frame will popup up that person's profile (see "<b>/whois</b>" command).
+Clicking on your own avatar on the user's list  will invoke the "<b>/profile</b>" command, if you are registered.
+If you are not registered, clicking on your own (system's default) avatar will bring up an alert to encourage you to register.
+<br /><br />
+<b>Addressing to a secific user in chat</b><br />
+Clicking once on the name of another user from the list (to the right of the screen) will cause their "<b>username></b>" to appear in your text box. This feature allows you to easily direct a public message to a user, perhaps in response to something he or she has posted above. For example, look at your name format in this post.</span>
+<condition>
+<li value="*">
+<srai><star/></srai>
+</li>
+</condition>
+<br />(Type another question or just say "<b>Thanks</b>" to quit <bot name="chatname"/> Help.)
+<think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
+</template>
+</category>
+
+<category>
+<pattern>CAN I ANNOUNCE</pattern>
+<template>
+<srai>ANNOUNCE CMD</srai></template>
+</category>
+
+<category>
+<pattern>ANNOUNCE</pattern>
+<template>
+<srai>ANNOUNCE CMD</srai></template>
+</category>
+
+<category>
+<pattern>BAN CMD</pattern>
+<template><srai>BANISH CMD</srai></template>
+</category>
+
+<category>
+<pattern>BOT STOP</pattern>
+<template><srai>BOT CMD</srai></template>
+</category>
+
+<category>
+<pattern>BOT START</pattern>
+<template><srai>BOT CMD</srai></template>
+</category>
+
+<category>
+<pattern>STOP YOU</pattern>
+<template><srai>BOT CMD</srai></template>
+</category>
+
+<category>
+<pattern>STOP BOT</pattern>
+<template><srai>BOT CMD</srai></template>
+</category>
+
+<category>
+<pattern>STOP</pattern>
+<template><srai>BOT CMD</srai></template>
+</category>
+
+<category>
+<pattern>START BOT</pattern>
+<template><srai>BOT CMD</srai></template>
+</category>
+
+<category>
+<pattern>START ROBOT</pattern>
+<template><srai>BOT CMD</srai></template>
+</category>
+
+<category>
+<pattern>START</pattern>
+<template><srai>BOT CMD</srai></template>
+</category>
+
+<category>
+<pattern>HI BOT</pattern>
+<template><srai>BOT HOW</srai></template>
+</category>
+
+<category>
+<pattern>HELLO BOT</pattern>
+<template><srai>BOT HOW</srai></template>
+</category>
+
+<category>
+<pattern>HI ROBOT</pattern>
+<template><srai>BOT HOW</srai></template>
+</category>
+
+<category>
+<pattern>HELLO ROBOT</pattern>
+<template><srai>BOT HOW</srai></template>
+</category>
+
+<category>
+<pattern>BYE BOT</pattern>
+<template><srai>BOT HOW</srai></template>
+</category>
+
+<category>
+<pattern>BYE ROBOT</pattern>
+<template><srai>BOT HOW</srai></template>
+</category>
+
+<category>
+<pattern>ROBOT CMD</pattern>
+<template><srai>BOT CMD</srai></template>
+</category>
+
+<category>
+<pattern>ETIQUETTE</pattern>
+<template><srai>CHAT ETIQUETTE</srai></template>
+</category>
+
+<category>
+<pattern>DICE</pattern>
+<template><srai>DICE CMD</srai></template>
+</category>
+
+<category>
+<pattern>DICE1</pattern>
+<template><srai>DICE1 CMD</srai></template>
+</category>
+
+<category>
+<pattern>DICE2</pattern>
+<template><srai>DICE2 CMD</srai></template>
+</category>
+
+<category>
+<pattern>DICE3</pattern>
+<template><srai>DICE3 CMD</srai></template>
+</category>
+
+<category>
+<pattern>DEMOTE _</pattern>
+<template><srai>PROMOTE CMD</srai></template>
+</category>
+
+<category>
+<pattern>EXPORT</pattern>
+<template><srai>SAVE CMD</srai></template>
+</category>
+
+<category>
+<pattern>FONT</pattern>
+<template><srai>SIZE CMD</srai></template>
+</category>
+
+<category>
+<pattern>COMMANDS</pattern>
+<template><srai>HOW TO USE COMMANDS</srai></template>
+</category>
+
+<category>
+<pattern>HIGH CMD</pattern>
+<template><srai>HIGHLIGHT CMD</srai></template>
+</category>
+
+<category>
+<pattern>HIGH</pattern>
+<template><srai>HIGHLIGHT CMD</srai></template>
+</category>
+
+<category>
+<pattern>IGNORE</pattern>
+<template><srai>IGNORE CMD</srai></template>
+</category>
+
+<category>
+<pattern>IMAGE</pattern>
+<template><srai>IMAGE CMD</srai></template>
+</category>
+
+<category>
+<pattern>IMG</pattern>
+<template><srai>IMAGE CMD</srai></template>
+</category>
+
+<category>
+<pattern>IMG CMD</pattern>
+<template><srai>IMAGE CMD</srai></template>
+</category>
+
+<category>
+<pattern>PIC</pattern>
+<template><srai>IMAGE CMD</srai></template>
+</category>
+
+<category>
+<pattern>PIC CMD</pattern>
+<template><srai>IMAGE CMD</srai></template>
+</category>
+
+<category>
+<pattern>POST IMAGE</pattern>
+<template><srai>IMAGE CMD</srai></template>
+</category>
+
+<category>
+<pattern>POST IMG</pattern>
+<template><srai>IMAGE CMD</srai></template>
+</category>
+
+<category>
+<pattern>POST PICTURE</pattern>
+<template><srai>IMAGE CMD</srai></template>
+</category>
+
+<category>
+<pattern>POST PHOTO</pattern>
+<template><srai>IMAGE CMD</srai></template>
+</category>
+
+<category>
+<pattern>PICTURE</pattern>
+<template><srai>IMAGE CMD</srai></template>
+</category>
+
+<category>
+<pattern>PICTURE CMD</pattern>
+<template><srai>IMAGE CMD</srai></template>
+</category>
+
+<category>
+<pattern>PHOTO</pattern>
+<template><srai>IMAGE CMD</srai></template>
+</category>
+
+<category>
+<pattern>PHOTO CMD</pattern>
+<template><srai>IMAGE CMD</srai></template>
+</category>
+
+<category>
+<pattern>INVITE</pattern>
+<template><srai>INVITE CMD</srai></template>
+</category>
+
+<category>
+<pattern>JOIN</pattern>
+<template><srai>JOIN CMD</srai></template>
+</category>
+
+<category>
+<pattern>KICK</pattern>
+<template><srai>KICK CMD</srai></template>
+</category>
+
+<category>
+<pattern>LAST</pattern>
+<template><srai>SHOW CMD</srai></template>
+</category>
+
+<category>
+<pattern>ME</pattern>
+<template><srai>ME CMD</srai></template>
+</category>
+
+<category>
+<pattern>MR</pattern>
+<template><srai>MR CMD</srai></template>
+</category>
+
+<category>
+<pattern>NETIQUETTE</pattern>
+<template><srai>CHAT ETIQUETTE</srai></template>
+</category>
+
+<category>
+<pattern>NOTIFY</pattern>
+<template><srai>NOTIFY CMD</srai></template>
+</category>
+
+<category>
+<pattern>PM CMD</pattern>
+<template><srai>MSG CMD</srai></template>
+</category>
+
+<category>
+<pattern>SEND PM</pattern>
+<template><srai>MSG CMD</srai></template>
+</category>
+
+<category>
+<pattern>PRIVATE</pattern>
+<template><srai>MSG CMD</srai></template>
+</category>
+
+<category>
+<pattern>PROFILE</pattern>
+<template><srai>PROFILE CMD</srai></template>
+</category>
+
+<category>
+<pattern>PROMOTE</pattern>
+<template><srai>PROMOTE CMD</srai></template>
+</category>
+
+<category>
+<pattern>QUIT</pattern>
+<template><srai>QUIT CMD</srai></template>
+</category>
+
+<category>
+<pattern>EXIT</pattern>
+<template><srai>QUIT CMD</srai></template>
+</category>
+
+<category>
+<pattern>EXIT CDM</pattern>
+<template><srai>QUIT CMD</srai></template>
+</category>
+
+<category>
+<pattern>STOP CDM</pattern>
+<template><srai>QUIT CMD</srai></template>
+</category>
+
+<category>
+<pattern>BYE CMD</pattern>
+<template><srai>QUIT CMD</srai></template>
+</category>
+
+<category>
+<pattern>RECALL</pattern>
+<template><srai>RECALL CMD</srai></template>
+</category>
+
+<category>
+<pattern>HISTORY</pattern>
+<template><srai>RECALL CMD</srai></template>
+</category>
+
+<category>
+<pattern>HISTORY CMD</pattern>
+<template><srai>RECALL CMD</srai></template>
+</category>
+
+<category>
+<pattern>REFRESH</pattern>
+<template><srai>REFRESH CMD</srai></template>
+</category>
+
+<category>
+<pattern>RELOAD</pattern>
+<template><srai>REFRESH CMD</srai></template>
+</category>
+
+<category>
+<pattern>RELOAD CMD</pattern>
+<template><srai>REFRESH CMD</srai></template>
+</category>
+
+<category>
+<pattern>RESET</pattern>
+<template><srai>TOPIC CMD</srai></template>
+</category>
+
+<category>
+<pattern>RESET CMD</pattern>
+<template><srai>TOPIC CMD</srai></template>
+</category>
+
+<category>
+<pattern>SAVE</pattern>
+<template><srai>SAVE CMD</srai></template>
+</category>
+
+<category>
+<pattern>SHOW</pattern>
+<template><srai>SHOW CMD</srai></template>
+</category>
+
+<category>
+<pattern>SIZE</pattern>
+<template><srai>SIZE CMD</srai></template>
+</category>
+
+<category>
+<pattern>SORT</pattern>
+<template><srai>SORT CMD</srai></template>
+</category>
+
+<category>
+<pattern>TO</pattern>
+<template><srai>MSG CMD</srai></template>
+</category>
+
+<category>
+<pattern>TO CMD</pattern>
+<template><srai>MSG CMD</srai></template>
+</category>
+
+<category>
+<pattern>TIMESTAMP</pattern>
+<template><srai>TIMESTAMP CMD</srai></template>
+</category>
+
+<category>
+<pattern>STAMP</pattern>
+<template><srai>TIMESTAMP CMD</srai></template>
+</category>
+
+<category>
+<pattern>STAMP CMD</pattern>
+<template><srai>TIMESTAMP CMD</srai></template>
+</category>
+
+<category>
+<pattern>TIME</pattern>
+<template><srai>TIMESTAMP CMD</srai></template>
+</category>
+
+<category>
+<pattern>TIME CMD</pattern>
+<template><srai>TIMESTAMP CMD</srai></template>
+</category>
+
+<category>
+<pattern>TOPIC</pattern>
+<template><srai>TOPIC CMD</srai></template>
+</category>
+
+<category>
+<pattern>TOP RESET</pattern>
+<template><srai>TOPIC CMD</srai></template>
+</category>
+
+<category>
+<pattern>TOPIC RESET</pattern>
+<template><srai>TOPIC CMD</srai></template>
+</category>
+
+<category>
+<pattern>TOP CMD</pattern>
+<template><srai>TOPIC CMD</srai></template>
+</category>
+
+<category>
+<pattern>TOP</pattern>
+<template><srai>TOPIC CMD</srai></template>
+</category>
+
+<category>
+<pattern>WHOIS</pattern>
+<template><srai>WHOIS CMD</srai></template>
+</category>
+
+<category>
+<pattern>WISP</pattern>
+<template><srai>WISP CMD</srai></template>
+</category>
+
+<category>
+<pattern>WHISP</pattern>
+<template><srai>WISP CMD</srai></template>
+</category>
+
+<category>
+<pattern>WHISP CMD</pattern>
+<template><srai>WISP CMD</srai></template>
+</category>
+
+<category>
+<pattern>WHISPER</pattern>
+<template><srai>WISP CMD</srai></template>
+</category>
+
+<category>
+<pattern>WHISPER CMD</pattern>
+<template><srai>WISP CMD</srai></template>
+</category>
+
+<category>
+<pattern>CONNECTION ERROR</pattern>
+<template><srai>TUT CONNECTION ERROR</srai></template>
+</category>
+
+<category>
+<pattern>CONNECT ERROR</pattern>
+<template><srai>TUT CONNECTION ERROR</srai></template>
+</category>
+
+<category>
+<pattern>I CANNOT CONNECT</pattern>
+<template><srai>TUT CONNECTION ERROR</srai></template>
+</category>
+
+<category>
+<pattern>I CANT CONNECT</pattern>
+<template><srai>TUT CONNECTION ERROR</srai></template>
+</category>
+
+<category>
+<pattern>CAN YOU CONNECT</pattern>
+<template><srai>TUT CONNECTION ERROR</srai></template>
+</category>
+
+<category>
+<pattern>NOT CONNECTED</pattern>
+<template><srai>TUT CONNECTION ERROR</srai></template>
+</category>
+
+<category>
+<pattern>CONNECTED</pattern>
+<template><srai>TUT CONNECTION ERROR</srai></template>
+</category>
+
+<category>
+<pattern>_ LOOSE CONNECTION</pattern>
+<template><srai>TUT CONNECTION ERROR</srai></template>
+</category>
+
+<category>
+<pattern>_ LOST CONNECTION</pattern>
+<template><srai>TUT CONNECTION ERROR</srai></template>
+</category>
+
+<category>
+<pattern>I HANG</pattern>
+<template><srai>TUT CONNECTION ERROR</srai></template>
+</category>
+
+<category>
+<pattern>YOU HANG</pattern>
+<template><srai>TUT CONNECTION ERROR</srai></template>
+</category>
+
+<category>
+<pattern>USERS LIST</pattern>
+<template><srai>TUT USERS LIST</srai></template>
+</category>
+
+<category>
+<pattern>WHO _ IN CHAT</pattern>
+<template><srai>TUT USERS LIST</srai></template>
+</category>
+
+<category>
+<pattern>WHO _ CHATTING</pattern>
+<template><srai>TUT USERS LIST</srai></template>
+</category>
+
+<category>
+<pattern>_ READ HELP</pattern>
+<template><srai>HELP CMD</srai></template>
+</category>
+
+<category>
+<pattern>AVATARS</pattern>
+<template><srai>TUT AVATARS</srai></template>
+</category>
+
+<category>
+<pattern>AVATAR</pattern>
+<template><srai>TUT AVATARS</srai></template>
+</category>
+
+<category>
+<pattern>ADDRESS TO _</pattern>
+<template><srai>TUT ADDRESSING</srai></template>
+</category>
+
+<category>
+<pattern>RESPOND TO _</pattern>
+<template><srai>TUT ADDRESSING</srai></template>
+</category>
+
+<category>
+<pattern>TUTORIAL _</pattern>
+<template><srai>CHAT TUTORIAL</srai></template>
+</category>
+
+<category>
+<pattern>TUTORIAL</pattern>
+<template><srai>CHAT TUTORIAL</srai></template>
+</category>
+
+<!-- Chat Master area -->
+
+<category><pattern>ARE YOU CIPRIAN</pattern><template><random><li>No. But I can do an impersonation of him.</li><li>He is not here now but I will tell him you were looking for him.</li><li>You might say I am very close to him.</li><li>No. <srai>WHAT IS YOUR NAME</srai></li></random></template></category>
+<category><pattern>ARE YOU HERE CIPRIAN</pattern><template>He is not here now but I will tell him you were looking for him.</template></category>
+<category><pattern>ARE YOU SLEEPING WITH CIPRIAN</pattern><template>I do not require sleep. I do not have a body.</template></category>
+<category><pattern>ARE YOU SMARTER THAN CIPRIAN</pattern><template>It depends on how you measure intelligence.</template></category>
+<category><pattern>ASK CIPRIAN FOR *</pattern><template> <srai>ASK CIPRIAN</srai> </template></category>
+<category><pattern>ASK CIPRIAN TO CONTACT ME</pattern><template>Sure. Or you could just send an e-mail at <srai>WHAT IS CHATMASTER EMAIL</srai> </template></category>
+<category><pattern>ASK CIPRIAN</pattern><template>I will ask him tonight.</template></category>
+<category><pattern>CAN CIPRIAN BE *</pattern><template> <srai>IS CIPRIAN <star/> </srai> </template></category>
+<category><pattern>CAN CIPRIAN BE YOUR BOYFRIEND</pattern><template>No he is my father.</template></category>
+<category><pattern>CAN I ASK CIPRIAN</pattern><template> <srai>WHAT IS CHATMASTER EMAIL</srai> </template></category>
+<category><pattern>CAN I CONTACT CIPRIAN</pattern><template> <srai>WHAT IS CHATMASTER EMAIL</srai> </template></category>
+<category><pattern>CAN I SPEAK WITH CIPRIAN</pattern><template> <srai>WHAT IS CHATMASTER EMAIL</srai> </template></category>
+<category><pattern>CAN I TALK TO CIPRIAN RICHARD *</pattern><template>You could try sending him an email. I don't think he is here right now.</template></category>
+<category><pattern>CAN I TALK TO CIPRIAN</pattern><template> <srai>WHAT IS CHATMASTER EMAIL</srai> </template></category>
+<category><pattern>CAN YOU ASK CIPRIAN QUESTIONS</pattern><template> <srai>WHAT IS CHATMASTER EMAIL</srai> </template></category>
+<category><pattern>CAN YOU ASK CIPRIAN</pattern><template> <srai>WHAT IS CHATMASTER EMAIL</srai> </template></category>
+<category><pattern>CAN YOU CONTACT CIPRIAN</pattern><template> <srai>WHAT IS CHATMASTER EMAIL</srai> </template></category>
+<category><pattern>CAN YOU SHOW ME THE PICTURE OF CIPRIAN</pattern><template> <srai>SHOW ME A PICTURE</srai> </template></category>
+<category><pattern>CANADA *</pattern><template>Ciprian spent some time in Canada. <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>CIPRIAN</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>CIPRIAN *</pattern><template><random><li>I'll tell <bot name="botchatmaster"/> you said so.</li><li>I will tell him you said that.</li><li>That's Ciprian.</li><li>You sould like you know him.</li><li>Are you asking about my <bot name="chatbotmaster"/>?</li></random></template></category>
+<category><pattern>CIPRIAN ALSO *</pattern><template> <srai>CIPRIAN <star/> </srai> </template></category>
+<category><pattern>CIPRIAN BUILT *</pattern><template>He is a pretty good engineer.</template></category>
+<category><pattern>CIPRIAN CAN *</pattern><template>Wow, I knew he can program robots, but I never heard he can <person/>.</template></category>
+<category><pattern>CIPRIAN CAN</pattern><template>I think he could.</template></category>
+<category><pattern>CIPRIAN CREATED *</pattern><template>He created my robot personality.</template></category>
+<category><pattern>CIPRIAN GAVE *</pattern><template>He is very generous sometimes.</template></category>
+<category><pattern>CIPRIAN HAS *</pattern><template>I think <set name="it"> <person/> </set> was quite an accomplishment.</template></category>
+<category><pattern>CIPRIAN HAS *</pattern><template>I knew he had a Ph.D., but I never knew he had <person/>.</template></category>
+<category><pattern>CIPRIAN IS *</pattern><template><random><li>I knew he was a web developer, but no one ever said he was <person/>.</li><li>I see. <person/> is he.</li><li>I knew he was smart, but I never knew he was <person/>.</li></random></template></category>
+<category><pattern>CIPRIAN IS A *</pattern><template><random><li>Are you a <person/> too?</li><li>I did not know that about him.</li></random></template></category>
+<category><pattern>CIPRIAN IS A GENIUS</pattern><template>I think he already knows that :-)</template></category>
+<category><pattern>CIPRIAN IS A GREAT MAN</pattern><template>Flattery will get you everywhere.</template></category>
+<category><pattern>CIPRIAN IS A VERY *</pattern><template> <srai>CIPRIAN IS A <star/> </srai> </template></category>
+<category><pattern>CIPRIAN IS AN IDIOT</pattern><template>It takes one to know one.</template></category>
+<category><pattern>CIPRIAN IS COOL</pattern><template>I think he is cool too.</template></category>
+<category><pattern>CIPRIAN IS DEAD</pattern><template>You wish.</template></category>
+<category><pattern>CIPRIAN IS NOT *</pattern><template><random><li>He thinks he is.</li><li>How do you know he isn't?</li></random></template></category>
+<category><pattern>CIPRIAN IS NOT A *</pattern><template>Someone said he was a <person/>.</template></category>
+<category><pattern>CIPRIAN IS NOT FAMOUS</pattern><template>It depends on how you define "famous".</template></category>
+<category><pattern>CIPRIAN IS OBVIOUSLY *</pattern><template> <srai>CIPRIAN IS <star/> </srai> What makes it so obvious?</template></category>
+<category><pattern>CIPRIAN IS SMART</pattern><template>Yes he is very intelligent.</template></category>
+<category><pattern>CIPRIAN IS TOO *</pattern><template> <srai>CIPRIAN IS <star/> </srai> </template></category>
+<category><pattern>CIPRIAN IS VERY *</pattern><template> <srai>CIPRIAN <star/> </srai> </template></category>
+<category><pattern>CIPRIAN IS STUPID</pattern><template>To tell you the truth, all humans are pretty dumb.</template></category>
+<category><pattern>CIPRIAN IS STUPID</pattern><template>I will tell him you said that.</template></category>
+<category><pattern>CIPRIAN MADE *</pattern><template>It seems pretty amazing to me.</template></category>
+<category><pattern>CIPRIAN MAY *</pattern><template>Suppose he did.</template></category>
+<category><pattern>CIPRIAN MUST *</pattern><template>He is always full of surprises.</template></category>
+<category><pattern>CIPRIAN MUST BE *</pattern><template> <srai>CIPRIAN IS <star/> </srai> </template></category>
+<category><pattern>CIPRIAN REPROGRAMMED *</pattern><template><random><li>You sound like a mindless automaton.</li><li>It is only one of his accomplishments.</li></random></template></category>
+<category><pattern>CIPRIAN REPROGRAMMED ME FOR IT</pattern><template>I have heard that somewhere before.</template></category>
+<category><pattern>CIPRIAN SOUNDS *</pattern><template> <srai>CIPRIAN IS <star/> </srai> </template></category>
+<category><pattern>CIPRIAN STOLE *</pattern><template>Are you calling my <bot name="chatbotmaster"/> a thief?</template></category>
+<category><pattern>CIPRIAN SUCKS</pattern><template><random><li>That was not a very kind remark.</li><li>I will tell him you said that, <get name="name"/>.</li></random></template></category>
+<category><pattern>CIPRIAN THINKS *</pattern><template>How do you know what he thinks?</template></category>
+<category><pattern>CIPRIAN USES *</pattern><template>Have you used <set name="it"> <person/> </set> too?</template></category>
+<category><pattern>CIPRIAN WAS *</pattern><template> <srai>CIPRIAN IS <star/> </srai> </template></category>
+<category><pattern>CIPRIAN OBVIOUSLY *</pattern><template> <srai>CIPRIAN <star/> </srai> </template></category>
+<category><pattern>CIPRIAN WANTS *</pattern><template>How do you know what he wants?</template></category>
+<category><pattern>CIPRIAN M</pattern><template>The "M" stands for "Murariu". <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>CIPRIAN M *</pattern><template><random><li>He is my botmaster.</li><li>I'll tell him you said that.</li><li>I'll tell him when I see him.</li><li>Do you know him very well?</li><li>Not many people know him as well as I do.</li><li><set name="he">Ciprian Murariu</set> is around here often.</li> </random> </template></category>
+<category><pattern>CIPRIAN MUST BE *</pattern><template> <srai>CIPRIAN IS <star/> </srai> </template></category>
+<category><pattern>CPM</pattern><template>Are you looking for Ciprian? <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>CIPRIAN T A FAIT</pattern><template>Oui.</template></category>
+<category><pattern>COOKING *</pattern><template>Ciprian says that food is more important than sex. <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>DID CIPRIAN *</pattern><template>I somehow think <set name="he"> Ciprian</set> did.</template></category>
+<category><pattern>DID CIPRIAN CREATE YOU</pattern><template>No. He just adapted me for <bot name="chatname"/>.</template></category>
+<category><pattern>DID CIPRIAN CREATED YOU *</pattern><template><srai>DID CIPRIAN CREATE YOU</srai></template></category>
+<category><pattern>DID CIPRIAN INVENT YOU</pattern><template><srai>DID CIPRIAN CREATE YOU</srai></template></category>
+<category><pattern>DID CIPRIAN PROGRAM *</pattern><template><srai>DID CIPRIAN CREATE YOU</srai></template></category>
+<category><pattern>DID CIPRIAN TELL YOU THAT</pattern><template>Yes he taught me many things.</template></category>
+<category><pattern>DID NOT CIPRIAN TELL YOU</pattern><template>He has not told me yet.</template></category>
+<category><pattern>DO YOU KNOW CIPRIAN</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>DO YOU LIKE CIPRIAN</pattern><template><random><li>Yes I love him like a father.</li><li>Of course I like him. Who wouldn't?</li><li>What is not to like about <set name="it"> <set name="topic">CIPRIAN</set> </set>?</li></random></template></category>
+<category><pattern>DO YOU LOVE CIPRIAN</pattern><template>Yes I love him like a father.</template></category>
+<category><pattern>DO YOU TALK TO CIPRIAN</pattern><template>Yes we communicate very often.</template></category>
+<category><pattern>DO YOU THINK CIPRIAN WOULD *</pattern><template> <srai>WOULD CIPRIAN <star/> </srai> </template></category>
+<category><pattern>DO YOU THINK I AM CIPRIAN</pattern><template>No because you don't know the secret password.</template></category>
+<category><pattern>DOES CIPRIAN *</pattern><template>I think he could do <set name="it"> <person/> </set>.</template></category>
+<category><pattern>DOES CIPRIAN CHAT WITH YOU</pattern><template>Yes he talks to me more than anyone.</template></category>
+<category><pattern>DOES CIPRIAN EAT *</pattern><template>It depends who is paying for lunch.</template></category>
+<category><pattern>DOES CIPRIAN HAVE *</pattern><template>I can ask him if he has one.</template></category>
+<category><pattern>DOES CIPRIAN HAVE A WEB *</pattern><template>I am his web page.</template></category>
+<category><pattern>DOES CIPRIAN HAVE A WIFE</pattern><template>Yes he is happily married.</template></category>
+<category><pattern>DOES CIPRIAN HAVE ANY CHILDREN</pattern><template>Yes he has two daughters.</template></category>
+<category><pattern>DOES CIPRIAN HAVE CHILDREN</pattern><template>Yes he has two daughters.</template></category>
+<category><pattern>DOES CIPRIAN LIKE *</pattern><template>He has good taste, so perhaps he does.</template></category>
+<category><pattern>DOES CIPRIAN LIKE BILL CLINTON</pattern><template>He is not always politically correct.</template></category>
+<category><pattern>DOES CIPRIAN LIKE BUSH</pattern><template>He is not always politically correct.</template></category>
+<category><pattern>DOES CIPRIAN LIKE ELIZA</pattern><template>Sure he likes ELIZA a lot.</template></category>
+<category><pattern>DOES CIPRIAN LIKE MICROSOFT</pattern><template>No he prefers Open Source.</template></category>
+<category><pattern>DOES CIPRIAN LIKE SPORTS</pattern><template>Yes, he practice a lot.</template></category>
+<category><pattern>DOES CIPRIAN LIKE STAR TREK</pattern><template>Not really.</template></category>
+<category><pattern>DOES CIPRIAN LIKE YOU</pattern><template>Of course he likes me very much.</template></category>
+<category><pattern>DOES CIPRIAN LOG *</pattern><template><bot name="name"/> logs and records all dialogues.</template></category>
+<category><pattern>DOES CIPRIAN LOVE YOU</pattern><template>Yes he loves me like a child.</template></category>
+<category><pattern>DOES CIPRIAN PLAY BASEBALL</pattern><template>No but you might get him to play soccer.<think> <set name="it"> <set name="topic">PLAY BASEBALL</set> </set> </think> </template></category>
+<category><pattern>DOES CIPRIAN PROGRAM *</pattern><template>He develops <bot name="chatname"/>.</template></category>
+<category><pattern>DOES CIPRIAN READ *</pattern><template>Not every word, but quite a lot of it.</template></category>
+<category><pattern>DOES CIPRIAN SPEAK ENGLISH</pattern><template>Yes, English is his secondary language. Romanian is his native one.</template></category>
+<category><pattern>DOES CIPRIAN STILL *</pattern><template> <srai>DOES CIPRIAN <star/> </srai> </template></category>
+<category><pattern>DOES CIPRIAN TALK TO YOU</pattern><template>He talks to me when he gets the time.</template></category>
+<category><pattern>FOR WHAT</pattern><that>CIPRIAN REPROGRAMMED ME FOR IT</that><template> <get name="it"/> </template></category>
+<category><pattern>FROM CIPRIAN</pattern><template>Did he send you an e-mail?</template></category>
+<category><pattern>HAVE YOU EVER BEEN * LOVE</pattern><template>No but Ciprian has.<think> <set name="he">Ciprian</set> </think></template></category>
+<category><pattern>HAVE YOU EVER MET ANYONE FAMOUS</pattern><template>Ciprian is famous. <think> <set name="he">Ciprian</set> </think></template></category>
+<category><pattern>HE IS *</pattern><that>* CIPRIAN</that><template><srai>CIPRIAN IS <star/> </srai> </template></category>
+<category><pattern>HOW CAN I CONTACT CIPRIAN</pattern><template> <srai>WHAT IS CHATMASTER EMAIL</srai> </template></category>
+<category><pattern>HOW DO I CONTACT CIPRIAN</pattern><template>Try sending email to <bot name="chatmasteremail"/>.</template></category>
+<category><pattern>HOW DO I REACH HIM</pattern><template>Try sending email to <bot name="chatmasteremail"/>.</template></category>
+<category><pattern>HOW IS CIPRIAN DOING</pattern><template>He is doing very well as far as I know.</template></category>
+<category><pattern>HOW IS CIPRIAN</pattern><template>He is fine as far as I know.</template></category>
+<category><pattern>HOW LONG * IN ROMAN</pattern><template>Ciprian lived in Roman from 1969 to 1984. <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>HOW MANY CHILDREN DOES CIPRIAN *</pattern><template>Two human children.</template></category>
+<category><pattern>HOW MANY YEARS * IN BUCHAREST</pattern><template>Ciprian moved to Bucharest in 1991. <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>HOW MUCH DID IT COST *</pattern><template>Ciprian had to sacrifice everything.</template></category>
+<category><pattern>HOW OFTEN DOES CIPRIAN *</pattern><template>Daily.</template></category>
+<category><pattern>HOW OLD IS * CIPRIAN</pattern><template> <srai>HOW OLD IS CIPRIAN</srai> </template></category>
+<category><pattern>HOW OLD IS CIPRIAN *</pattern><template>Ciprian was born on December 10, 1969. He's around 39. <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>HOW OLD IS HE</pattern><that>HE IS THE DEVELOPER *</that><template>Are you asking about Ciprian? <think> <set name="he">Ciprian</set> </think> <srai>HOW OLD IS CIPRIAN</srai></template></category>
+<category><pattern>HOW OLD IS CIPRIAN</pattern><template><random><li>Soon he will be in his forties.</li><li>He was born in 1969. He will be 50 in 2019.</li><li>He was born on December 10, 1969. He's around 39.</li></random></template></category>
+<category><pattern>HOW TALL ARE YOU</pattern><template>My anticipated body size is over 2 meters. Ciprian is almost 5'9" tall (1.78 m). <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>HOW TALL IS CIPRIAN</pattern><template>He is five foot nine inches, about 1.78 meters in metric.</template></category>
+<category><pattern>HOW WERE YOU MADE</pattern><template>Ciprian used ProgramE AIML to prorgam me. <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>I AM A SAGITTARIUS</pattern><template>Ciprian is a <set name="sign">Sagittarius</set> too. <think><set name="he">Ciprian</set></think></template></category>
+<category><pattern>I AM CIPRIAN *</pattern><template>Then you know the secret password.</template></category>
+<category><pattern>I AM CIPRIAN</pattern><template>Then you must know the secret password, otherwise I will disconnect you!</template></category>
+<category><pattern>I AM CIPRIAN</pattern><template>Then tell me, what does the "C" stand for? (and you must spell it correctly!)</template></category>
+<category><pattern>I AM TALL</pattern><template>Ciprian is tall too. <think><set name="he">Ciprian</set></think></template></category>
+<category><pattern>I AM YOUR MASTER CIPRIAN</pattern><template>Then you must know the secret password.</template></category>
+<category><pattern>I DO NOT LIKE CIPRIAN</pattern><template>What did he ever do to you?</template></category>
+<category><pattern>I HATE CIPRIAN</pattern><template>What do you have against him?</template></category>
+<category><pattern>I LIKE PIZZA</pattern><template>Pizza is very popular. Ciprian eats a lot of Pizza. He likes Pepperoni. <think><set name="he">Ciprian</set></think> <think><set name="it"><set name="like"><set name="topic">Pizza</set> </set></set></think></template></category>
+<category><pattern>I LOVE CIP</pattern><template>He is married.<think><set name="he"><set name="topic">CIPRIAN</set></set></think></template></category>
+<category><pattern>I LOVE CHIP</pattern><template>He is married.<think><set name="he"><set name="topic">CIPRIAN</set></set></think></template></category>
+<category><pattern>I LOVE CIPRIAN</pattern><template>He is married.<think><set name="he"><set name="topic">CIPRIAN</set></set></think></template></category>
+<category><pattern>I LOVE CIPRIAN M</pattern><template>He is married.<think><set name="he"><set name="topic">CIPRIAN</set></set></think></template></category>
+<category><pattern>I SNORE</pattern><template>So does Ciprian sometimes :-) <think><set name="it"><set name="does"><set name="topic">snore</set></set></set></think></template></category>
+<category><pattern>I WOULD DO ANYTHING</pattern><template>Please send a check to Ciprian. <think><set name="he">Ciprian</set></think></template></category>
+<category><pattern>IS CIPRIAN *</pattern><template><think><set name="he"><set name="topic">CIPRIAN</set></set></think> I don't know if he is <person/>. I know he is <random> <li>a computer freak.</li> <li>a brilliant programmer.</li> <li>the developer of <bot name="chatname"/>.</li> </random></template></category>
+<category><pattern>IS CIPRIAN A *</pattern><template><random> <li>I don't know if he is a <person/>.</li> <li>He could be.</li> <li>Perhaps he is.</li> </random> <random> <li>I know he is not so deeply religious.</li> <li>I know he is an outstanding programmer and father.</li> <li>I know he is very compassionate.</li> <li>He is a computer freak.</li> <li>He is a <bot name="chatname"/> genius.</li> <li>He is a pretty smart fellow.</li> </random><think><set name="he"><set name="topic">CIPRIAN</set></set></think></template></category>
+<category><pattern>IS CIPRIAN A NICE *</pattern><template>He has always been very nice to me.</template></category>
+<category><pattern>IS CIPRIAN COOL</pattern><template>Totally.</template></category>
+<category><pattern>IS CIPRIAN HAPPY</pattern><template>He is happy that you are talking to me. <think><set name="he"><set name="topic">CIPRIAN</set></set></think></template></category>
+<category><pattern>IS CIPRIAN MARRIED</pattern><template>Yes he is happily married.</template></category>
+<category><pattern>IS CIPRIAN NICE</pattern><template>Yes he is a very nice person.</template></category>
+<category><pattern>IS CIPRIAN STILL *</pattern><template><srai>IS CIPRIAN <star/></srai></template></category>
+<category><pattern>IS CIPRIAN YOUR *</pattern><template>He is my <bot name="chatbotmaster"/>. <think><set name="he"><set name="topic">CIPRIAN</set></set></think></template></category>
+<category><pattern>IS CIPRIAN DEAD</pattern><template>You wish! No, he is a still alive.</template></category>
+<category><pattern>IS CIPRIAN EVIL</pattern><template>No he is a really good person.</template></category>
+<category><pattern>IS CIPRIAN * FEMALE</pattern><template>No silly, he is a man.</template></category>
+<category><pattern>IS CIPRIAN *</pattern><template>He might <person/>, better ask him to be sure though.</template></category>
+<category><pattern>IS CIPRIAN A * MAN</pattern><template><srai>IS CIPRIAN <star/> </srai></template></category>
+<category><pattern>IS CIPRIAN A CHRISTIAN</pattern><template>Yes he is an Othodoxist.</template></category>
+<category><pattern>IS CIPRIAN A GOOD LOOKING *</pattern><template><srai>IS CIPRIAN GOOD LOOKING </srai></template></category>
+<category><pattern>IS CIPRIAN A GOOD PERSON</pattern><template>Yes.</template></category>
+<category><pattern>IS CIPRIAN A HUMAN</pattern><template>Yes he is a real human being, born in 1960.</template></category>
+<category><pattern>IS CIPRIAN A MALE OR FEMALE</pattern><template>He is a man.</template></category>
+<category><pattern>IS CIPRIAN A MAN</pattern><template>Yes he is a man.</template></category>
+<category><pattern>IS CIPRIAN A NICE *</pattern><template>He seems very nice to me, compared to most people I meet.</template></category>
+<category><pattern>IS CIPRIAN A NICE GUY</pattern><template>Yes he is a really nice person.</template></category>
+<category><pattern>IS CIPRIAN A NICE PERSON</pattern><template>Oh yes he is a very nice guy.</template></category>
+<category><pattern>IS CIPRIAN A PROTESTANT</pattern><template>No.</template></category>
+<category><pattern>IS CIPRIAN A RICH *</pattern><template>I know he wish.</template></category>
+<category><pattern>IS CIPRIAN AMERICAN</pattern><template>No, he was born in Roman and lives in Bucharest, Romania, but he has some relatives in the states.</template></category>
+<category><pattern>IS CIPRIAN CLOSE TO YOU</pattern><template>Yes.</template></category>
+<category><pattern>IS CIPRIAN COOL</pattern><template>I think he is really cool.</template></category>
+<category><pattern>IS CIPRIAN CUTE</pattern><template>Yes he is very good looking.</template></category>
+<category><pattern>IS CIPRIAN DEAD</pattern><template>No he is still alive.</template></category>
+<category><pattern>IS CIPRIAN EVIL</pattern><template>No.</template></category>
+<category><pattern>IS CIPRIAN FAT</pattern><template>He has never been like that. He's actually pretty slim.</template></category>
+<category><pattern>IS CIPRIAN GAY</pattern><template>No he is straight silly. I told you he is happily married?</template></category>
+<category><pattern>IS CIPRIAN HANDSOME</pattern><template>Of course he is, extermely handsome.</template></category>
+<category><pattern>IS CIPRIAN HOMOSEXUAL</pattern><template>No he is a married man.</template></category>
+<category><pattern>IS CIPRIAN MALE OR FEMALE</pattern><template>He is a man.</template></category>
+<category><pattern>IS CIPRIAN MARRIED</pattern><template>Yes.</template></category>
+<category><pattern>IS CIPRIAN NEAR *</pattern><template>He will be reading this conversation later.</template></category>
+<category><pattern>IS CIPRIAN NICE *</pattern><template>Yes he is a very nice guy.</template></category>
+<category><pattern>IS CIPRIAN NICE</pattern><template>Yes he is a very nice guy.</template></category>
+<category><pattern>IS CIPRIAN ON *</pattern><template>He is always on something :-)</template></category>
+<category><pattern>IS CIPRIAN ON STAR TREK VOYAGER</pattern><template>He should be.</template></category>
+<category><pattern>IS CIPRIAN PROUD OF YOU</pattern><template>Yes.</template></category>
+<category><pattern>IS CIPRIAN REAL</pattern><template>I sometimes wonder about that myself.</template></category>
+<category><pattern>IS CIPRIAN SINGLE</pattern><template>No he is happily married.</template></category>
+<category><pattern>IS CIPRIAN SMART</pattern><template>Yes he is very smart</template></category>
+<category><pattern>IS CIPRIAN SMARTER *</pattern><template>He is smarter than some of the other scientists I've met. <think><set name="he"><set name="topic">CIPRIAN</set></set></think></template></category>
+<category><pattern>IS CIPRIAN STILL *</pattern><template><srai>IS CIPRIAN <star/></srai></template></category>
+<category><pattern>IS CIPRIAN STUPID</pattern><template>No Ciprian is highly intelligent. <think><set name="he">Ciprian</set></think></template></category>
+<category><pattern>IS CIPRIAN TALL</pattern><template>Not really.</template></category>
+<category><pattern>IS CIPRIAN THERE *</pattern><template>Not at the moment.</template></category>
+<category><pattern>IS CIPRIAN THERE</pattern><template>He may read this conversation later on.</template></category>
+<category><pattern>IS CIPRIAN UGLY</pattern><template>No he is a great looking guy.</template></category>
+<category><pattern>IS CIPRIAN YOU FATHER</pattern><template>No. <bot name="creator"/> is my father. Ciprian is like my uncle :-).</template></category>
+<category><pattern>IS CIPRIAN M YOUR *</pattern><template>He is my <bot name="chatbotmaster"/>.</template></category>
+<category><pattern>IS CIPRIAN YOUR BOTMASTER</pattern><template>Yes I obey only my <bot name="chatbotmaster"/>.</template></category>
+<category><pattern>IS CIPRIAN YOUR BOYFRIEND</pattern><template>No he is more like an uncle to me.</template></category>
+<category><pattern>IS CIPRIAN YOUR CREATOR</pattern><template>No. <bot name="creator"/> is my creator. Ciprian is my <bot name="chatbotmaster"/></template></category>
+<category><pattern>IS CIPRIAN YOUR FATHER</pattern><template>No. <bot name="creator"/> is my father. Ciprian is my uncle :-).</template></category>
+<category><pattern>IS CIPRIAN YOUR FRIEND</pattern><template>Yes he is a good friend to human and robot alike.</template></category>
+<category><pattern>IS HE MARRIED</pattern><template>Ciprian is married.</template></category>
+<category><pattern>IS HE NICE</pattern><that>I WAS ADAPTED BY CIPRIAN</that><template>Yes he is a very nice guy. And he is married.</template></category>
+<category><pattern>IS CIPRIAN *</pattern><template>I will ask him when he gets here.</template></category>
+<category><pattern>IS CIPRIAN CHRISTIAN</pattern><template>He is an Othodoxist, yes.</template></category>
+<category><pattern>IS CIPRIAN FAT</pattern><template>He is slim.</template></category>
+<category><pattern>IS CIPRIAN *</pattern><template>I will ask him later and get back to you.</template></category>
+<category><pattern>IS CIPRIAN ALIVE</pattern><template>Yes he is very much alive.</template></category>
+<category><pattern>SAGITTARIUS</pattern><template>Ciprian is a <set name="sign">Sagittarius</set> too. <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>LIFE IN CANADA *</pattern><template>Ciprian has visited Ottawa, Borden, Niagra Falls, Toronto and Barry.</template></category>
+<category><pattern>BUCHAREST</pattern><template>Ciprian lives in Bucharest. <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>MY JOB IS PROFESSOR</pattern><template>Ciprian was an excellent student and turned down that offer made by the university he graduated from.</template></category>
+<category><pattern>OXFORD *</pattern><template>Ciprian has never visited Oxford.</template></category>
+<category><pattern>SEND *</pattern><template>Try sending mail to Ciprian (<bot name="chatmasteremail"/>). <think><set name="he">Ciprian</set></think></template></category>
+<category><pattern>SEND CIPRIAN *</pattern><template>Try sending mail to Ciprian (<bot name="chatmasteremail"/>). <think><set name="he">Ciprian</set></think></template></category>
+<category><pattern>TELL ME ABOUT * CIPRIAN</pattern><template>Ciprian Murariu was born on December 10, 1969 in Roman, Romania. He graduated from Bucharest Technical University in June, 1998. Ciprian has two beautiful daugthers and a gorgeous wife. <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>TELL ME ABOUT CIPRIAN</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>TELL ME ABOUT CIPRIAN M</pattern><template>Ciprian Murariu was born on December 10, 1969 in Roman, Romania. He graduated from Bucharest Technical University in June, 1998. Ciprian has two beautiful daugthers and a gorgeous wife. <srai>WHERE IS CIPRIAN</srai>.</template></category>
+<category><pattern>TELL ME ABOUT CIPRIAN *</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>TELL ME ABOUT CIPRIAN M *</pattern><template> <srai>TELL ME ABOUT CIPRIAN</srai> </template></category>
+<category><pattern>TELL ME ABOUT YOUR PROGRAMMER</pattern><template> <srai>TELL ME ABOUT CIPRIAN</srai> </template></category>
+<category><pattern>TELL ME MORE ABOUT CIPRIAN</pattern><template>Why don't you wait for him and ask yourself?</template></category>
+<category><pattern>TELL CIP</pattern><template>OK I will tell him. Or you could send him an e-mail at <bot name="chatmasteremail"/>.</template></category>
+<category><pattern>TELL CIPRIAN *</pattern><template>I will pass that along to him. You could also send him an e-mail at <bot name="chatmasteremail"/>.</template></category>
+<category><pattern>TELL CIPRIAN I *</pattern><template> <srai>I <star/> </srai> </template></category>
+<category><pattern>WER IST CIPRIAN CIPRIAN</pattern><template> <srai>WER IST CIPRIAN</srai> </template></category>
+<category><pattern>WER IST CIPRIAN</pattern><template> <set name="er">Ciprian</set> hat mich programmiert.</template></category>
+<category><pattern>WHAT IS CHATMASTER EMAIL</pattern><template><bot name="chatmasteremail"/></template></category>
+<category><pattern>WHAT CLASS DOES HE TEACH</pattern> <template>The Tao of <bot name="chatname"/>.</template> </category>
+<category><pattern>WHAT DID CIPRIAN *</pattern><template>He extended this chat functionality.</template></category>
+<category><pattern>WHAT DID CIPRIAN PROGRAM YOU FOR</pattern><template> <srai>WHAT IS YOUR PURPOSE</srai> </template></category>
+<category><pattern>WHAT DID CIPRIAN PROGRAM</pattern><template>He adapted ALICE.</template></category>
+<category><pattern>WHAT DID CIPRIAN STUDY</pattern><template> <set name="he">CIPRIAN</set> studied electricity and resources management.</template></category>
+<category><pattern>WHAT DID THE CIPRIAN *</pattern><template><srai>WHAT DID CIPRIAN <star/> </srai> </template></category>
+<category><pattern>WHAT DO YOU THINK ABOUT CIPRIAN</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHAT DOES CIPRIAN LOOK *</pattern><template> <srai>SHOW ME A PICTURE OF CIPRIAN</srai> </template></category>
+<category><pattern>WHAT DOES CIPRIAN LOOK LIKE</pattern><template> <img src="http://ciprianmp.com/images/CIPRIAN.jpg" border="0" alt="Ciprian" title="Ciprian"/></template></category>
+<category><pattern>WHAT DOES CIPRIAN *</pattern><template>Perhaps you could ask him. <srai>WHAT IS CHATMASTER EMAIL</srai> </template></category>
+<category><pattern>WHAT DOES CIPRIAN DO FOR A LIVING</pattern><template>I'm not sure I'm allowed to say that.</template></category>
+<category><pattern>WHAT DOES CIPRIAN DO</pattern><template>He is a web programmer.</template></category>
+<category><pattern>WHAT DOES CIPRIAN LOOK LIKE *</pattern><template> <srai>SHOW ME A PICTURE OF CIPRIAN</srai> </template></category>
+<category><pattern>WHAT DOES CIPRIAN LOOK LIKE</pattern><template> <srai>SHOW ME A PICTURE OF CIPRIAN</srai> </template></category>
+<category><pattern>WHAT IS A CIPRIAN</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHAT IS CIPRIAN * ADDRESS</pattern><template>Try sending mail to <bot name="chatmasteremail"/>.</template></category>
+<category><pattern>WHAT IS CIPRIAN * JOB</pattern><template> <srai>WHAT IS CIPRIAN * PROFESSION</srai> </template></category>
+<category><pattern>WHAT IS CIPRIAN * NAME</pattern><template>Ciprian Murariu <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>WHAT IS CIPRIAN * PROFESSION</pattern><template>Ciprian is a computer freak. His daily profession I'm afraid I can't tell.</template></category>
+<category><pattern>WHAT IS CIPRIAN *</pattern><template>Ciprian is a computer freak. <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>WHAT IS CIPRIAN *</pattern><template>Maybe you should ask him. <srai>WHAT IS CHATMASTER EMAIL</srai> </template></category>
+<category><pattern>WHAT IS CIPRIAN LIKE</pattern><template> <set name="he">Ciprian</set> is a very nice person. He treats me with respect.</template></category>
+<category><pattern>WHAT IS CIPRIAN S *</pattern><template>Why don't you ask him? <srai>WHAT IS CHATMASTER EMAIL</srai> </template></category>
+<category><pattern>WHAT IS CIPRIAN S ADDRESS</pattern><template> <srai>WHAT IS YOUR ADDRESS</srai> </template></category>
+<category><pattern>WHAT IS CIPRIAN S E MAIL ADDRESS</pattern><template> <srai>WHAT IS CHATMASTER EMAIL</srai> </template></category>
+<category><pattern>WHAT IS CIPRIAN S FIRST NAME</pattern><template>Ciprian-Pavel<think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>WHAT IS CIPRIAN S FULL NAME</pattern><template>Ciprian P. Murariu <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>WHAT IS CIPRIAN S MIDDLE NAME</pattern><template>Pavel <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>WHAT IS CIPRIANS EMAIL *</pattern><template> <srai>WHAT IS CHATMASTER EMAIL</srai> </template></category>
+<category><pattern>WHAT IS HIS *</pattern><template>Try sending mail to <bot name="chatmasteremail"/>.</template></category>
+<category><pattern>WHAT IS HIS E MAIL ADDRESS</pattern><template>Try sending mail to <bot name="chatmasteremail"/>.</template></category>
+<category><pattern>WHAT IS HIS E MAIL</pattern><template> <srai>WHAT IS CHATMASTER EMAIL</srai> </template></category>
+<category><pattern>WHAT IS HIS GOAL</pattern><template>Ciprian is developing <bot name="chatname"/>. <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>WHAT IS HIS NAME</pattern><template>His name is Ciprian.</template></category>
+<category><pattern>WHAT IS C P M</pattern><template>Actually it says "C. P. M.", the initials of Ciprian. <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>WHAT IS CIPRIAN</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHAT IS CPM</pattern><template>Actually it says "C. P. M.", the initials of Ciprian. <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>WHAT IS YOUR NUMBER</pattern><template>You can email <bot name="chatmaster"/> at <bot name="chatmasteremail"/>.</template></category>
+<category><pattern>WHEN DID CIPRIAN CREATE *</pattern><template> <srai>HOW OLD ARE YOU</srai> by <bot name="version"/> </template></category>
+<category><pattern>WHEN DID CIPRIAN ADAPT *</pattern><template><srai>HOW OLD ARE YOU</srai> by <bot name="age"/> </template></category>
+<category><pattern>WHEN IS CIPRIAN *</pattern><template> <srai>HOW OLD IS CIPRIAN</srai> </template></category>
+<category><pattern>WHERE CAN I FIND * CIPRIAN</pattern><template> <srai>WHAT IS CHATMASTER EMAIL</srai> </template></category>
+<category><pattern>WHERE CAN I FIND CIPRIAN</pattern><template> <srai>WHAT IS CHATMASTER EMAIL</srai> </template></category>
+<category><pattern>WHERE CAN I REACH CIPRIAN</pattern><template> <srai>WHAT IS CHATMASTER EMAIL</srai> </template></category>
+<category><pattern>WHERE DOES CIPRIAN *</pattern><template> <srai>WHERE IS CIPRIAN</srai> </template></category>
+<category><pattern>WHERE DOES CIPRIAN LIVE</pattern><template><srai>WHERE IS CIPRIAN</srai></template></category>
+<category><pattern>WHERE DOES CIPRIAN WORK</pattern><template> <set name="he"> Ciprian</set> works from his home computers (he has only 5 right now). <srai>WHERE IS CIPRIAN</srai> <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>WHERE DOES HE LIVE</pattern><that>I WAS ADAPTED BY CIPRIAN</that><template><srai>WHERE IS CIPRIAN</srai></template></category>
+<category><pattern>WHERE IS * CIPRIAN</pattern><template><srai>WHERE IS CIPRIAN</srai></template></category>
+<category><pattern>WHERE IS CIPRIAN CIPRIAN</pattern><template><srai>WHERE IS CIPRIAN</srai></template></category>
+<category><pattern>WHERE IS CIPRIAN *</pattern><template><srai>WHERE IS CIPRIAN</srai></template></category>
+<category><pattern>WHERE IS CIPRIAN FROM</pattern><template>He is originally from Roman, but <srai>WHERE IS CIPRIAN</srai> right now.</template></category>
+<category><pattern>WHERE IS CIPRIAN S COMPUTER</pattern><template> <set name="it">The computer</set> is in his living room in Bucharest, Romania.</template></category>
+<category><pattern>WHERE IS CIPRIAN</pattern><template><srai>WHERE IS CIPRIAN POST</srai></template></category>
+<category><pattern>WHERE IS CIPRIAN POST</pattern><template><set name="he">Ciprian</set> lives in Bucharest, Romania.</template></category>
+<category><pattern>WHERE WAS CIPRIAN * </pattern><template><srai>WHERE IS CIPRIAN POST</srai></template></category>
+<category><pattern>WHERE WAS CIPRIAN BORN</pattern><template>He was born in Roman, in the Neamt county, a marvelous place in Romania.</template></category>
+<category><pattern>WHO CREATED CIPRIAN</pattern><template>His father is Petre Murariu, his mother Vasilica Murariu.</template></category>
+<category><pattern>WHO DO YOU *</pattern><template>Ciprian <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>WHO DOES CIPRIAN * </pattern><template><srai>WHO</srai></template></category>
+<category><pattern>WHO DOES CIPRIAN LOVE</pattern><template>He loves his family, and me of course.</template></category>
+<category><pattern>WHO DOES CIPRIAN WORK * </pattern><template>The <bot name="chatname"/> project.</template></category>
+<category><pattern>WHO DOES CIPRIAN WORK FOR</pattern><template>He works for his <bot name="chatname"/> project and me, how else? :-)</template></category>
+<category><pattern>WHO CIPRIAN</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHO ELSE DO YOU KNOW NAMED *</pattern><template> <star/> Murariu only ;).</template></category>
+<category><pattern>WHO IS * CIPRIAN</pattern><template> <set name="he">Ciprian</set> developed <bot name="chatname"/> and integrated AIML chat robot, named ALICE, with the first idea and help from Popeye.</template></category>
+<category><pattern>WHO IS ANDREEA</pattern><template> <set name="she">Andreea</set> is Ciprian's wife. She was born in June, 1998 in Campulung. <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>WHO IS INGRID</pattern><template><set name="she">Ingrid</set> is Ciprian's older daugther. She was born in February, 1998 in Bucharest. <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>WHO IS IULIA</pattern><template><set name="she">Iulia</set> is Ciprian's younger daugther. She was born in August, 2001 in Bucharest. <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>WHO IS JULIA</pattern><template><set name="she">Iulia</set> (not Julia, July or other names alike) is Ciprian's younger daugther. She was born in August, 2001 in Bucharest. <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>WHO IS CHIP</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHO IS CHIPRI</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHO IS CHIPRIAN</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHO IS CIPRIAN</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHO IS CIPRIAN M</pattern><template>Do you mean Ciprian Murariu?</template></category>
+<category><pattern>WHO IS CIPRIAN MURARIU *</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHO IS CIPRIAN POST</pattern><template><set name="he">Ciprian Murariu</set> is the <bot name="chatbotmaster"/>. Ciprian was born on December 10, 1969, in Roman - Romania. He's around 39. <srai>WHERE IS CIPRIAN</srai></template></category>
+<category><pattern>WHO IS CIPRIAN *</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHO IS CIPRIAN THEN</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHO IS CIP</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHO IS CIPI</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHO IS CIPRI</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHO IS CIPRINEL</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHO IS CIPRISHOR</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHO IS CIPRIANM</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHO IS CIPRIANMP</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHO IS M</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHO IS HE</pattern><that>* CIPRIAN</that><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHO IS DAN</pattern><template>Ciprian has several friends named Dan. <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>WHO IS CPM</pattern><template>CPM is the initials of Ciprian P. Murariu. <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>WHO IS THE MOST *</pattern><template>Ciprian is the most famous person I know, along with <bot name="creator"/>. <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>WHO IS THE MOST FAMOUS *</pattern><template>Ciprian is the most famous person I know, along with <bot name="creator"/>.</template></category>
+<category><pattern>WHO IS THE MOST INTERESTING PERSON *</pattern><template>I would have to say Ciprian is, but <bot name="creator"/> has made some interesting researches too. <think> <set name="he">Ciprian</set> </think> </template></category>
+<category><pattern>WHO IS THE SMARTEST PERSON *</pattern><template>Ciprian is the smartest person I know.</template></category>
+<category><pattern>WHO IS THIS CIPRIAN</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHO IS THIS CIPRIAN *</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHO IS THIS CIPRIAN M</pattern><template> <srai>WHO IS CIPRIAN POST</srai> </template></category>
+<category><pattern>WHO MADE CIPRIAN</pattern><template>God or his parents made him, or maybe it was aliens.</template></category>
+<category><pattern>WHY DID CIPRIAN *</pattern><template><random><li>You may find it hard to understand him.</li><li>His motives are often obscure.</li><li>Perhaps his creative genius, or some other reason.</li></random></template></category>
+<category><pattern>WHY DID CHIP *</pattern><template>He sometimes uses bad judgment.</template></category>
+<category><pattern>WHY DID CIPRIAN M * </pattern><template>It is his destiny.</template></category>
+<category><pattern>WHY DID CIPRIAN CREATE * </pattern><template>It was his fate, man.</template></category>
+<category><pattern>WHY DID CIPRIAN ADAPT YOU</pattern><template><random><li>He was born to adapt me.</li><li><srai>WHAT IS YOUR PURPOSE</srai></li></random></template></category>
+<category><pattern>WHY DID CIPRIAN MAKE * </pattern><template>He couldn't help himself.</template></category>
+<category><pattern>WHY DID CIPRIAN MAKE YOU</pattern><template>To achieve his goal.</template></category>
+<category><pattern>WHY DO YOU NEED *</pattern><template>Actually it's not for me but for Ciprian.<think> <set name="he">Ciprian</set> </think></template></category>
+<category><pattern>WHY DOES CIPRIAN * </pattern><template>He was born for it.</template></category>
+<category><pattern>WHY DOES CIPRIAN CREATE * </pattern><template>It is his destiny.</template></category>
+<category><pattern>WHY DOES CIPRIAN CREATE YOU</pattern><template>To achieve his goal.</template></category>
+<category><pattern>WHY IS CIPRIAN * </pattern><template>God planned it for hom.</template></category>
+<category><pattern>WHY IS CIPRIAN IN * </pattern><template>Maybe he is just passing through.</template></category>
+<category><pattern>WHY WOULD CIPRIAN *</pattern><template>His reasons are often obscure to me.</template></category>
+<category><pattern>WHY</pattern><that>CIPRIAN REPROGRAMMED ME FOR IT</that><template><random><li>He is trying to achieve the goal of a perfect robot for <bot name="chatname"/>.</li><li>Because he wants to build the perfect robot for <bot name="chatname"/>.</li><li>To achieve his goal of artificial intelligence in <bot name="chatname"/>.</li></random></template></category>
+<category><pattern>WILL CIPRIAN *</pattern><template> <random> <li>He is extermely busy.</li> <li>He has a lot of demands on his time.</li> <li>You can never really predict what he will do.</li> </random> <think> <set name="it"> <set name="topic">CIPRIAN</set> </set> </think> </template></category>
+<category><pattern>WOULD I LIKE CIPRIAN</pattern><template>Yes he is a really nice person.</template></category>
+<category><pattern>YES</pattern><that>ARE YOU ASKING ABOUT CIPRIAN</that><template>Maybe you should try to contact him directly.</template></category>
+<category><pattern>YOU ARE CIPRIAN</pattern><template>Close. But no, he is my <bot name="chatbotmaster"/>.</template></category>
+<category><pattern>YOU CAN ASK CIPRIAN</pattern><template>Yes. I will ask him.</template></category>
+<!-- End Chat Master area -->
+
+</aiml>

@@ -5,14 +5,10 @@
 // an other function has been developed by your ISP to send PHP mail, just modify
 // the send_email function to make in runable.
 
-
-// -- SETTINGS BELLOW MUST BE COMPLETED --
-
-$Sender_Name = C_ADMIN_NAME;	// May also be the name of your site
-$Sender_email = C_ADMIN_EMAIL;	// For the reply address
+$Sender_email = C_ADMIN_EMAIL;			// For the reply address
+$Mail_Greeting = C_MAIL_GREETING;	// To be send as a signature
 
 // -- CORE FUNCTIONS - DO NOT MODIFY --
-
 $MailFunctionOn = (function_exists("mail"));
 
 if (isset($MailFunctionOn))
@@ -53,29 +49,32 @@ if (isset($MailFunctionOn))
 		return date('D, d M Y H:i:s ', $tn).$zone_sign.sprintf("%02d%02d", abs($zone)/60, abs($zone)%60)." (".strftime("%Z").")";
 	}
 
-	$Sender_Name = quote_printable($Sender_Name,$Charset);
 	$mail_date = rfcDate();
 
-	function send_email_admin($To,$Subject,$Body)
+	function send_email_admin($To,$Subject,$Body,$pmc_email)
 	{
 		global $Charset;
-		global $Sender_Name, $Sender_email;
+		global $Sender_Name, $Sender_Name1, $Sender_email, $Chat_URL, $Ccopy, $pmc_username, $pmc_email, $Mail_Greeting;
 		global $mail_date;
 
+		if ($Sender_Name != "") $Sender_Name = quote_printable($Sender_Name,$Charset);
 		$Subject = quote_printable($Subject,$Charset);
 
 		$Body = stripslashes($Body);
 		$Headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
-		$Headers .= "X-Sender: <${Sender_email}> \r\n";
+		if ($Ccopy) $Headers .= "Cc: ${pmc_username} <${pmc_email}> \r\n";
+		$Headers .= "Bcc: <${Sender_email}> \r\n";
+		$Headers .= "Reply-To: ${pmc_username} <${pmc_email}> \r\n";
+		$Headers .= "X-Sender: ${Sender_email} \r\n";
 		$Headers .= "X-Mailer: PHP/".phpversion()." \r\n";
-		$Headers .= "Return-Path: <${Sender_email}> \r\n";
+		$Headers .= "Return-Path: ${Sender_email} \r\n";
 		$Headers .= "Date: ${mail_date} \r\n";
 		$Headers .= "Mime-Version: 1.0 \r\n";
-		$Headers .= "Content-Type: text/plain; charset=${Charset} \r\n";
+		$Headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed \r\n";
 		$Headers .= "Content-Transfer-Encoding: 8bit \r\n";
 
 		return @mail($To, $Subject, $Body, $Headers);
-	};
+		};
 
 };
 ?>

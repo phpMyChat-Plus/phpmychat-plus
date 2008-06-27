@@ -5,6 +5,10 @@
 
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
 
+$Sender_Name = (eregi("your name",C_ADMIN_NAME) && C_ADMIN_NAME != "") ? "" : C_ADMIN_NAME;		// May also be the name of your site
+$Sender_Name1 = $Sender_Name;		// unformated
+$Chat_URL = (C_CHAT_URL == "./") ? "" : C_CHAT_URL;	// To be send as a signature
+
 // The admin has required an action to be done
 if (isset($FORM_SEND) && $FORM_SEND == 4)
 {
@@ -15,14 +19,17 @@ if (isset($FORM_SEND) && $FORM_SEND == 4)
 	if ($emails != "") $SendTo = array_merge($SendTo,$SendToExtra);
 	if (count($SendTo) > 0 && trim($subject) != "" && trim($message) != "")
 	{
-		if ($sign) $message .= "\n\n".$signature;
+		if ($sign) $message .= "\r\n\r\n".$signature;
 		include('mail4admin.lib.php');
+		$MultiSend = "";
 		for (reset($SendTo); $mailTo=current($SendTo); next($SendTo))
 		{
-			$Send = send_email_admin($mailTo,$subject,$message);
-			if (!$Send) break;
+			$MultiSend .= $mailTo.", ";
+			if ($MultiSend == "") break;
 		};
-		$Success = "<span style='background-color:white'><table border=1 width=70%><tr><td width=1%><b>".A_SHEET4_2."</b></td><td>".implode("; ",$SendTo)."</td></tr><tr><td width=1%><b>".A_SHEET4_4."</b></td><td>".$subject."</td></tr><tr><td width=1%><b>".A_SHEET4_5."</b></td><td>".str_replace("\n","<br />",$message)."</td></tr></table></span>";
+		$Send = send_email_admin($MultiSend,$subject."\r\n\r\n",$message,$pmc_email);
+		if ($Ccopy) $MessCc = "<tr><td width=1% nowrap=\"nowrap\"><b>Cc:</b></td><td><b>".$pmc_username."</b> &lt;".$pmc_email."></td></tr>";
+		$Success = "<table border=1 width=70% class=\"msg2\"><tr><td width=1% nowrap=\"nowrap\"><b>From:</b></td><td><b>".$Sender_Name1."</b> &lt;".$Sender_email."></td></tr><tr><td width=1% nowrap=\"nowrap\" class=\"success\"><b>".A_SHEET4_2."</b></td><td><b>".str_replace(">,",">,<b>",str_replace("<","</b>&lt;",implode(", ",$SendTo)))."</td></tr>".$MessCc."<tr><td width=1% nowrap=\"nowrap\" class=\"error\"><b>Bcc:</b></td><td>".$Sender_email."</td></tr><tr><td width=1% nowrap=\"nowrap\"><b>".A_SHEET4_4."</b></td><td>".stripslashes($subject)."</td></tr><tr><td width=1% nowrap=\"nowrap\"><b>".A_SHEET4_5."</b></td><td>".stripslashes(str_replace("\n","<br />",$message))."</td></tr></table>";
 		$Message = ($Send ? A_SHEET4_7.$Success : A_SHEET4_8);
 		$MsgStyle = ($Send ? "success" : "error");
 	}
@@ -55,12 +62,10 @@ if (isset($ReqVar) && $ReqVar == "1")
 }
 else
 {
-/*	// Ensure at least one registered user exist (except the administrator) before displaying the mail form
-	$DbLink->query("SELECT COUNT(*) FROM ".C_REG_TBL." WHERE perms != 'admin' LIMIT 1");
+	// Ensure at least one registered user exist (except the administrator) before displaying the mail form
+	$DbLink->query("SELECT COUNT(*) FROM ".C_REG_TBL." WHERE username != '$pmc_username' LIMIT 1");
 	list($count_RegUsers) = $DbLink->next_record();
 	$DbLink->clean_results();
-	if ($count_RegUsers != 0)
-	{*/
 	?>
 	<!-- Mail form -->
 	<TR>
@@ -76,6 +81,10 @@ else
 				<!-- Addressees list -->
 				<TD VALIGN=TOP>
 				<TABLE BORDER=0 WIDTH=100%>
+	<?php
+	if ($count_RegUsers != 0)
+	{
+	?>
 				<TR>
 					<TD ALIGN=CENTER><?php echo(A_SHEET4_2); ?></TD>
 				</TR>
@@ -86,18 +95,45 @@ else
 						$DbLink->query("SELECT username,email FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND email != '' ORDER BY username");
 						while (list($U,$EMail) = $DbLink->next_record())
 						{
-							echo("<OPTION VALUE=\"$EMail\">".$U." (".$EMail.")</OPTION>");
+							if ($U != $pmc_username) echo("<OPTION VALUE=\"".$U." <".$EMail.">\">".$U." (".$EMail.")</OPTION>");
+							else $pmc_email = $EMail;
 						}
 						$DbLink->clean_results();
 						?>
 					</TD>
 				</TR>
-				<TR><TD>&nbsp;</TD></TR>
 				<TR>
 					<TD ALIGN=CENTER>
 						<INPUT TYPE=button VALUE="<?php echo(A_SHEET4_3); ?>" onClick="for (var i = 0; i < document.forms['MailForm'].elements['SendTo[]'].options.length; i++) {document.forms['MailForm'].elements['SendTo[]'].options[i].selected=true;}">
 						&nbsp;<INPUT TYPE=button VALUE="<?php echo(A_SHEET4_12); ?>" onClick="for (var i = 0; i < document.forms['MailForm'].elements['SendTo[]'].options.length; i++) {document.forms['MailForm'].elements['SendTo[]'].options[i].selected=false;}">
-						</SELECT><br /><br /><?php echo(A_SHEET4_10); ?><br />
+						</SELECT>
+						<INPUT TYPE=hidden NAME=pmc_email VALUE="<?php echo($pmc_email); ?>">
+					</TD>
+				</TR>
+		<?php
+		if (isset($pmc_email))
+		{
+		?>
+			<TR><TD ALIGN=CENTER>
+			Cc: <INPUT TYPE="text" NAME="CarbonCopy" SIZE="35" VALUE="<?php echo($pmc_username." <".$pmc_email.">"); ?>" READONLY>&nbsp;<INPUT TYPE="checkbox" NAME="Ccopy" value="1" checked></TD></TR>
+		<?php
+		}
+	}
+	else
+	{
+	?>
+		<TR>
+		<TD ALIGN=CENTER CLASS=error><?php echo(A_SHEET1_8); ?><br /><br /><br /><br /></TD>
+		</TR>
+		<TR>
+			<TD ALIGN=CENTER><?php echo(A_SHEET4_2); ?></TD>
+		</TR>
+	<?php
+	}
+	?>
+				<TR>
+					<TD ALIGN=CENTER>
+					<?php echo(A_SHEET4_10); ?><br />
 						<INPUT TYPE="text" NAME="emails" SIZE="45" MAXLENGTH="500" VALUE="">
 					</TD>
 				</TR>
@@ -124,8 +160,9 @@ else
 				<TR><TD>&nbsp;</TD></TR>
 				<TR>
 					<TD VALIGN=MIDDLE ALIGN="<?php echo($InvCellAlign); ?>"><?php echo(A_SHEET4_11); ?>
-				<input type="checkbox" name="sign" value="1" checked></TD>
-				<TD VALIGN=MIDDLE ALIGN="<?php echo($CellAlign); ?>"><TEXTAREA NAME="signature" WRAP="on" COLS="35" ROWS="4"><?php echo("Best regards,\n".C_ADMIN_NAME."\n".C_CHAT_URL.""); ?></TEXTAREA>
+				&nbsp;<input type="checkbox" name="sign" value="1" checked></TD>
+				<TD VALIGN=MIDDLE ALIGN="<?php echo($CellAlign); ?>">
+				<TEXTAREA NAME="signature" WRAP="on" COLS="35" ROWS="4"><?php echo(C_MAIL_GREETING."\r\n".$Sender_Name1."\r\n".$Chat_URL); ?></TEXTAREA>
 					</TD>
 					<TD VALIGN=BOTTOM ALIGN="<?php echo($InvCellAlign); ?>">
 						<INPUT style="color:#ff0000; font-weight:800" TYPE="submit" NAME="submit_type" VALUE="<?php echo(A_SHEET4_6); ?>">
@@ -138,23 +175,9 @@ else
 			</FORM>
 		</TD>
 	</TR>
-
 	<?php
-/*	}
-	else
-	{
-	?>
-
-	<TR>
-		<TD ALIGN=CENTER CLASS=error><?php echo(A_SHEET1_8); ?></TD>
-	</TR>
-
-	<?php
-	};*/
 };
 ?>
-
 </TABLE>
-
 <?php
 ?>

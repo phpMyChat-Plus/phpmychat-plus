@@ -50,7 +50,7 @@ if (isset($_GET))
 	};
 };
 
-// Get the names and values for vars posted from the form bellow
+// Get the names and values for vars posted from the form below
 if (isset($_POST))
 {
 	while(list($name,$value) = each($_POST))
@@ -59,16 +59,14 @@ if (isset($_POST))
 	};
 };
 
-if (!isset($L) && isset($_COOKIE["CookieLang"])) $L = $_COOKIE["CookieLang"]; 
-
 // Fix some security holes
 if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
-if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) $L="english";
+if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) exit();
+if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 require("./${ChatPath}config/config.lib.php");
 require("./${ChatPath}lib/release.lib.php");
 require("./${ChatPath}localization/languages.lib.php");
-if (!isset($L) || $L == "") $L = C_LANGUAGE;
 require("./${ChatPath}localization/".$L."/localized.chat.php");
 require("./${ChatPath}lib/database/".C_DB_TYPE.".lib.php");
 require("./${ChatPath}lib/clean.lib.php");
@@ -87,6 +85,15 @@ header("Content-Type: text/html; charset=${Charset}");
 
 // avoid server configuration for magic quotes
 set_magic_quotes_runtime(0);
+// Can't turn off magic quotes gpc so just redo what it did if it is on.
+if (get_magic_quotes_gpc()) {
+	foreach($_GET as $k=>$v)
+		$_GET[$k] = stripslashes($v);
+	foreach($_POST as $k=>$v)
+		$_POST[$k] = stripslashes($v);
+	foreach($_COOKIE as $k=>$v)
+		$_COOKIE[$k] = stripslashes($v);
+}
 
 // Get the relative path to the script that called this one
 if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER["PHP_SELF"];
@@ -105,17 +112,39 @@ function special_char($str,$lang)
 	return addslashes($lang ? htmlentities(stripslashes($str)) : htmlspecialchars(stripslashes($str)));
 };
 
+// Added for php4 support of mb functions
+if (!function_exists('mb_convert_case'))
+{
+	function mb_convert_case($str,$type,$Charset)
+	{
+		if (eregi("TITLE",$type)) $str = ucwords($str);
+		elseif (eregi("LOWER",$type)) $str = strtolower($str);
+		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+		return $str;
+	};
+};
+
 // Ensure a room ($what) is include in a rooms list ($in)
-function room_in($what, $in)
+function room_in($what, $in, $Charset)
 {
 	$rooms = explode(",",$in);
 	for (reset($rooms); $room_name=current($rooms); next($rooms))
 	{
-		if (strcasecmp($what, $room_name) == 0) return true;
+		if (strcasecmp(mb_convert_case($what,MB_CASE_LOWER,$Charset), mb_convert_case($room_name,MB_CASE_LOWER,$Charset)) == 0) return true;
 	};
 	return false;
 };
 
+// Ghost Control mod by Ciprian
+function ghosts_in($what, $in, $Charset)
+{
+	$ghosts = explode(",",$in);
+	for (reset($ghosts); $ghost_name=current($ghosts); next($ghosts))
+	{
+		if (strcasecmp(mb_convert_case($what,MB_CASE_LOWER,$Charset), mb_convert_case($ghost_name,MB_CASE_LOWER,$Charset)) == 0) return true;
+	}
+	return false;
+};
 
 
 /*********** PART I ***********/
@@ -221,7 +250,6 @@ if(isset($E) && $E != "")
 	}
 	else
 	{
-		// Ghost Control mod by Ciprian
 		$DbLink->query("SELECT status FROM ".C_USR_TBL." WHERE username='$U' AND room='$E' LIMIT 1");
 		if ($DbLink->num_rows() != 0);
 		{
@@ -229,7 +257,17 @@ if(isset($E) && $E != "")
 			$DbLink->clean_results();
 		}
 		$DbLink->query("DELETE FROM ".C_USR_TBL." WHERE username='$U' AND room='$E'");
-		if (isset($EN) && (!C_HIDE_ADMINS || (C_HIDE_ADMINS && $status != "a" && $status != "t")) && (!C_HIDE_MODERS || (C_HIDE_MODERS && $status != "m")))
+		// Ghost Control mod by Ciprian
+		if (C_SPECIAL_GHOSTS != "")
+		{
+			$sghosts = "";
+			$sghosts = eregi_replace("'","",C_SPECIAL_GHOSTS);
+			$sghosts = eregi_replace(" AND username != ",",",$sghosts);
+		}
+		if (($sghosts != "" && ghosts_in(stripslashes($U), $sghosts, $Charset)) || (C_HIDE_ADMINS && ($statusu == "a" || $statusu == "t")) || (C_HIDE_MODERS && $statusu == "m"))
+		{
+		}
+		elseif (isset($EN))
 		{
 			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($EN, '$E', 'SYS exit', '', ".time().", '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '', '')");
 		}
@@ -269,7 +307,7 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 		$Error = L_ERR_USR_16a;
 	}
 	// Check for swear words in the nick
-	elseif (C_NO_SWEAR && checkwords($U, true))
+	elseif (C_NO_SWEAR && checkwords($U, true, $Charset))
 	{
 		$Error = L_ERR_USR_18;
 	}
@@ -287,9 +325,9 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 		{
 			list($room) = $DbLink->next_record();
 			$DbLink->clean_results();
-			$DbLink->query("SELECT password,perms,rooms FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
+			$DbLink->query("SELECT password,perms,rooms,allowpopup FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 			$reguser = ($DbLink->num_rows() != 0);
-			if ($reguser) list($user_password,$perms,$rooms) = $DbLink->next_record();
+			if ($reguser) list($user_password,$perms,$rooms,$allowpopupu) = $DbLink->next_record();
 			$DbLink->clean_results();
 
 			if (!(isset($E) && $E != ""))
@@ -314,7 +352,7 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 				}
 			}
 
-			// The var bellow is set to 1 when a registered user is allowed to log using a nick
+			// The var below is set to 1 when a registered user is allowed to log using a nick
 			// that already exist in the users table
 			$relog = ($Nb != 0 && !isset($Error));
 
@@ -327,9 +365,9 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 // **	Get perms of the user if the script is called by a join command	**
 if (isset($Reload) && $Reload == "JoinCmd")
 {
-	$DbLink->query("SELECT perms,rooms FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
+	$DbLink->query("SELECT perms,rooms,allowpopup FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	$reguser = ($DbLink->num_rows() != 0);
-	if ($reguser) list($perms,$rooms) = $DbLink->next_record();
+	if ($reguser) list($perms,$rooms,$allowpopupu) = $DbLink->next_record();
 	$DbLink->clean_results();
 };
 
@@ -367,7 +405,7 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 			$Error = L_ERR_ROM_1;
 		}
 		// Check for swear words in room name
-		else if(C_NO_SWEAR && checkwords($R3, true))
+		else if(C_NO_SWEAR && checkwords($R3, true, $Charset))
 		{
 			$Error = L_ERR_ROM_2;
 		}
@@ -378,7 +416,7 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 			$ToCheck = ($T == "1" ? $DefaultPrivateRooms : $DefaultChatRooms);
 			for ($i = 0; $i < count($ToCheck); $i++)
 			{
-				if (strcasecmp($R3,$ToCheck[$i]) == "0")
+				if (strcasecmp(mb_convert_case($R3,MB_CASE_LOWER,$Charset), mb_convert_case($ToCheck[$i],MB_CASE_LOWER,$Charset)) == "0")
 				{
 					$Error = (!$T ? L_ERR_ROM_3." (".$R3.")" : L_ERR_ROM_4." (".$R3.")");
 					break;
@@ -409,7 +447,7 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 			$ToCheck = ($T == "1" ? $DefaultChatRooms : $DefaultPrivateRooms);
 			for ($i = 0; $i < count($ToCheck); $i++)
 			{
-				if (strcasecmp($R3,$ToCheck[$i]) == "0") $register_room = false;
+				if (strcasecmp(mb_convert_case($R3,MB_CASE_LOWER,$Charset), mb_convert_case($ToCheck[$i],MB_CASE_LOWER,$Charset)) == "0") $register_room = false;
 			};
 			unset($ToCheck);
 		};
@@ -445,7 +483,7 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 				$roomTab = explode(",",$mod_rooms);
 				for ($i = 0; $i < count($roomTab); $i++)
 				{
-					if (strcasecmp(stripslashes($R3), $roomTab[$i]) == 0)
+					if (strcasecmp(mb_convert_case(stripslashes($R3),MB_CASE_LOWER,$Charset), mb_convert_case($roomTab[$i],MB_CASE_LOWER,$Charset)) == 0)
 					{
 						$roomTab[$i] = "";
 						$changed = true;
@@ -464,7 +502,7 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 
 			// Update the current user status for the room to be created in registered users table
 			$changed = false;
-			if (!room_in(stripslashes($R3), $rooms))
+			if (!room_in(stripslashes($R3), $rooms, $Charset))
 			{
 				if ($rooms != "") $rooms .= ",";
 				$rooms .= stripslashes($R3);
@@ -531,7 +569,7 @@ if(!isset($Error) && (isset($R2) && $R2 != ""))
 				$roomTab = explode(",",$mod_rooms);
 				for ($i = 0; $i < count($roomTab); $i++)
 				{
-					if (strcasecmp(stripslashes($R2), $roomTab[$i]) == 0)
+					if (strcasecmp(mb_convert_case(stripslashes($R2),MB_CASE_LOWER,$Charset), mb_convert_case($roomTab[$i],MB_CASE_LOWER,$Charset)) == 0)
 					{
 						$roomTab[$i] = "";
 						$changed = true;
@@ -550,7 +588,7 @@ if(!isset($Error) && (isset($R2) && $R2 != ""))
 
 			// Update the current user status for the room to be created in registered users table
 			$changed = false;
-			if (!room_in(stripslashes($R2), $rooms))
+			if (!room_in(stripslashes($R2), $rooms, $Charset))
 			{
 				if ($rooms != "") $rooms .= ",";
 				$rooms .= stripslashes($R2);
@@ -616,7 +654,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 				$status = "t";
 				break;
 			case 'moderator':
-				$status = (room_in(stripslashes($R), $rooms) || room_in("*", $rooms) ? "m" : "r");
+				$status = (room_in(stripslashes($R), $rooms, $Charset) || room_in("*", $rooms, $Charset) ? "m" : "r");
 				break;
 			case 'noreg':
 				$status = "u";
@@ -651,13 +689,22 @@ if(!isset($Error) && (isset($N) && $N != ""))
 			$DbLink->query("SELECT type FROM ".C_MSG_TBL." WHERE room='".addslashes($room)."' LIMIT 1");
 			list($type) = $DbLink->next_record();
 			$DbLink->clean_results();
-// Ghost Control mod by Ciprian
-if ((!C_HIDE_ADMINS || (C_HIDE_ADMINS && $status != "a" && $status != "t")) && (!C_HIDE_MODERS || (C_HIDE_MODERS && $status != "m")))
-{
-			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS exit', '', '$current_time', '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '', '')");
-// next line WELCOME SOUND feature altered for compatibility with /away command R Dickow:
-  $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
-}
+			// Ghost Control mod by Ciprian
+			if (C_SPECIAL_GHOSTS != "")
+			{
+				$sghosts = "";
+				$sghosts = eregi_replace("'","",C_SPECIAL_GHOSTS);
+				$sghosts = eregi_replace(" AND username != ",",",$sghosts);
+			}
+			if (($sghosts != "" && ghosts_in(stripslashes($U), $sghosts, $Charset)) || (C_HIDE_ADMINS && ($status == "a" || $status == "t")) || (C_HIDE_MODERS && $status == "m"))
+			{
+			}
+			else
+			{
+				$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS exit', '', '$current_time', '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '', '')");
+				// next line WELCOME SOUND feature altered for compatibility with /away command R Dickow:
+			  $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
+			}
 // modified by R Dickow for /away command:
 			$DbLink->query("UPDATE ".C_USR_TBL." SET room='$R',u_time='$current_time', status='$status', ip='$IP', awaystat='0' WHERE username='$U'");
 // end R Dickow /away modification.
@@ -683,12 +730,21 @@ if ((!C_HIDE_ADMINS || (C_HIDE_ADMINS && $status != "a" && $status != "t")) && (
 	else
 	{
 		$DbLink->query("INSERT INTO ".C_USR_TBL." VALUES ('$R', '$U', '$Latin1', '$current_time', '$status','$IP', '0', '$current_time', '$email')");
-// Ghost Control mod by Ciprian
-if ((!C_HIDE_ADMINS || (C_HIDE_ADMINS && $statusu != "a" && $status != "t")) && (!C_HIDE_MODERS || (C_HIDE_MODERS && $statusu != "m")))
-{
-// next line WELCOME SOUND feature altered for compatibility with /away command R Dickow:
-   $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
-}
+		// Ghost Control mod by Ciprian
+		if (C_SPECIAL_GHOSTS != "")
+		{
+			$sghosts = "";
+			$sghosts = eregi_replace("'","",C_SPECIAL_GHOSTS);
+			$sghosts = eregi_replace(" AND username != ",",",$sghosts);
+		}
+		if (($sghosts != "" && ghosts_in(stripslashes($U), $sghosts, $Charset)) || (C_HIDE_ADMINS && ($status == "a" || $status == "t")) || (C_HIDE_MODERS && $status == "m"))
+		{
+		}
+		else
+		{
+			// next line WELCOME SOUND feature altered for compatibility with /away command R Dickow:
+		  $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
+		}
 
 		if (C_WELCOME)
 		{
@@ -717,132 +773,11 @@ if ((!C_HIDE_ADMINS || (C_HIDE_ADMINS && $statusu != "a" && $status != "t")) && 
 	<TITLE><?php echo((C_CHAT_NAME != "") ? C_CHAT_NAME." - ".APP_NAME : APP_NAME); ?></TITLE>
 	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
 	<!--
+<?php
 // Display & remove the server time in the status bar
-// Returns the days in the status bar
-function get_day(time,plus)
-{
-		monday = " <?php echo(utf8_substr(L_MON, 0, ($L == 'vietnamese') ? '8' : '3')); ?>";
-		tuesday = " <?php echo(utf8_substr(L_TUE, 0, ($L == 'vietnamese') ? '8' : '3')); ?>";
-		wednesday = " <?php echo(utf8_substr(L_WED, 0, ($L == 'vietnamese') ? '8' : '3')); ?>";
-		thursday = " <?php echo(utf8_substr(L_THU, 0, ($L == 'vietnamese') ? '8' : '3')); ?>";
-		friday = " <?php echo(utf8_substr(L_FRI, 0, ($L == 'vietnamese') ? '8' : '3')); ?>";
-		saturday = " <?php echo(utf8_substr(L_SAT, 0, ($L == 'vietnamese') ? '8' : '3')); ?>";
-		sunday = " <?php echo(utf8_substr(L_SUN, 0, ($L == 'vietnamese') ? '8' : '3')); ?>";
-		dayN = time.getDay();
-		day = dayN + plus;
-		is_day = "";
-		if (day == 1 || day == 8) is_day = monday;
-		if (day == 2) is_day = tuesday;
-		if (day == 3) is_day = wednesday;
-		if (day == 4) is_day = thursday;
-		if (day == 5) is_day = friday;
-		if (day == 6) is_day = saturday;
-		if (day == 0 || day == 7) is_day = sunday;
-		return is_day;
-}
-// Calculates the European Daylight savings from 2006 to 2011
-	function timedst_eu()
-	{
-		timedsteu = 0;
-		timenow = <?php echo(time()); ?>;
-		if ((timenow > 1174784400 && timenow < 1193533199) || (timenow > 1206838800 && timenow < 1224982799) || (timenow > 1238288400 && timenow < 1256432399) || (timenow > 1269997200 && timenow < 1288486799) || (timenow > 1301187600 && timenow < 1319936399)) timedsteu = 1;
-		return timedsteu;
-	}
-// Calculates the US Daylight savings from 2006 to 2011
-	function timedst_usa()
-	{
-		timedstusa = 0;
-		timenow = <?php echo(time()); ?>;
-		if ((timenow > 1173578400 && timenow < 1194141599) || (timenow > 1205028000 && timenow < 1225591199) || (timenow > 1236477600 && timenow < 1257040799) || (timenow > 1268532000 && timenow < 1289095199) || (timenow > 1299981600 && timenow < 1320544799)) timedstusa = 1;
-		return timedstusa;
-	}
-// Calculates the Sydney Daylight savings from 2007 to 2010
-	function timedst_syd()
-	{
-		timedstsyd = 0;
-		timenow = <?php echo(time()); ?>;
-		if ((timenow > 1193536799 && timenow < 1207450800) || (timenow > 1223171999 && timenow < 1238900400) || (timenow > 1254621599 && timenow < 1270341000)) timedstsyd = 1;
-		return timedstsyd;
-	}
-// Display & remove the server time at the status bar
-	function clock(gap)
-	{
-		cur_date = new Date();
-		calc_date = new Date(cur_date - gap);
-		calc_hours = calc_date.getHours();
-		calc_minutes = calc_date.getMinutes();
-		calc_seconds = calc_date.getSeconds();
-		if (calc_hours < 10) calc_hours = "0" + calc_hours;
-		if (calc_minutes < 10) calc_minutes = "0" + calc_minutes;
-		if (calc_seconds < 10) calc_seconds = "0" + calc_seconds;
-		calc_time = calc_hours + ":" + calc_minutes + ":" + calc_seconds<?php echo((C_WORLDTIME >= 1) ? ' + get_day(calc_date,0)' : ''); ?>;
-		<?php if (C_WORLDTIME >= 1)
-		{
-		?>
-		cur_gapGMT = cur_date.getTimezoneOffset()/60;
-		cur_hoursGMT = cur_date.getHours()+cur_gapGMT;
-		cur_hoursGMT_DST_EU = cur_hoursGMT+timedst_eu();
-		cur_hoursGMT_DST_USA = cur_hoursGMT+timedst_usa();
-		cur_hoursGMT_DST_SYD = cur_hoursGMT+timedst_syd();
-		cur_hoursLON = cur_hoursGMT_DST_EU;
-		dayLON = "";
-		if (cur_hoursLON < 0) { cur_hoursLON = 24 + cur_hoursLON; dayLON = get_day(cur_date,-1) }
-		else dayLON = get_day(cur_date);
-		if (cur_hoursLON < 10) cur_hoursLON = "0" + cur_hoursLON;
-		cur_timeLON =cur_hoursLON + ":" + calc_minutes + dayLON;
-		cur_hoursNYC = cur_hoursGMT_DST_USA - 5;
-		dayNYC = "";
-		if (cur_hoursNYC < 0) { cur_hoursNYC = 24 + cur_hoursNYC; if (cur_hoursLON - cur_hoursNYC < 0) dayNYC = get_day(cur_date,-1); }
-		if (cur_hoursNYC < 10) cur_hoursNYC = "0" + cur_hoursNYC;
-		cur_timeNYC = cur_hoursNYC + ":" + calc_minutes + dayNYC;
-		cur_hoursPAR = cur_hoursGMT_DST_EU + 1;
-		dayPAR = "";
-		if (cur_hoursPAR < 0) cur_hoursPAR = 24 + cur_hoursPAR;
-		if (cur_hoursPAR > 23) { cur_hoursPAR = cur_hoursPAR - 24; if (cur_hoursPAR - cur_hoursLON < 0) dayPAR = get_day(cur_date,1); }
-		if (cur_hoursPAR < 10) cur_hoursPAR = "0" + cur_hoursPAR;
-		cur_timePAR = cur_hoursPAR + ":" + calc_minutes + dayPAR;
-		cur_hoursBUC = cur_hoursGMT_DST_EU + 2;
-		dayBUC = "";
-		if (cur_hoursBUC > 23) { cur_hoursBUC = cur_hoursBUC - 24; if (cur_hoursBUC - cur_hoursLON < 0) dayBUC = get_day(cur_date,1); }
-		if (cur_hoursBUC < 10) cur_hoursBUC = "0" + cur_hoursBUC;
-		cur_timeBUC = cur_hoursBUC + ":" + calc_minutes + dayBUC;
-		cur_hoursTYO = cur_hoursGMT + 9;
-		dayTYO = "";
-		if (cur_hoursTYO > 23) { cur_hoursTYO = cur_hoursTYO - 24; if (cur_hoursTYO - cur_hoursLON < 0) dayTYO = get_day(cur_date,1); }
-		if (cur_hoursTYO < 10) cur_hoursTYO = "0" + cur_hoursTYO;
-		cur_timeTYO = cur_hoursTYO + ":" + calc_minutes + dayTYO;
-		cur_hoursSYD = cur_hoursGMT_DST_SYD + 10;
-		daySYD = "";
-		if (cur_hoursSYD > 23) { cur_hoursSYD = cur_hoursSYD - 24; if (cur_hoursSYD - cur_hoursLON < 0) daySYD = get_day(cur_date,1); }
-		if (cur_hoursSYD < 10) cur_hoursSYD = "0" + cur_hoursSYD;
-		cur_timeSYD = cur_hoursSYD + ":" + calc_minutes + daySYD;
-		<?php
-		}
-		?>
-		WORLD_TIME = <?php echo((C_WORLDTIME >= 1) ? '" " + "(NYC: " + cur_timeNYC + " | LON: " + cur_timeLON + " | PAR: " + cur_timePAR + " | BUC: " + cur_timeBUC + " | TYO: " + cur_timeTYO + " | SYD: " + cur_timeSYD + ")"' : '""'); ?>;
-		window.status = "<?php echo(L_SVR_TIME); ?>" + calc_time + WORLD_TIME;
-
-		clock_disp = setTimeout('clock(' + gap + ')', 1000);
-	}
-// Stops the clock in the status bar
-	function stop_clock()
-	{
-		clearTimeout(clock_disp);
-		window.status = '';
-	}
-// Calculates the gap between the server and the local date
-	function calc_gap(serv_date)
-	{
-		server_date = new Date(serv_date);
-		local_date = new Date();
-		return local_date - server_date;
-	}
-
-	<?php
-		$CorrectedDate = mktime(date("G") + C_TMZ_OFFSET,date("i"),date("s"),date("m"),date("d"),date("Y"));
-		?>
-		gap = calc_gap("<?php echo(date("F d, Y H:i:s", $CorrectedDate)); ?>");
-		clock(gap);
+	include_once("./${ChatPath}lib/worldtime.lib.php");
+?>
+	clock(gap);
 
 	// Automatically submit a command
 	function runCmd(CmdName,infos)
@@ -899,7 +834,7 @@ function get_day(time,plus)
 			var scrTop = mouseY-400;
 			var scrLeft = mouseX-<?php echo($Align == "right" ? "610" : "10"); ?>;
 			var scrPos = "top=" + scrTop + ",screenY=" + scrTop + ",left=" + scrLeft + ",screenX=" + scrLeft + ",";
-			is_help_popup = window.open("help_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>","help_popup",scrPos + "width=600,height=350,scrollbars=yes,resizable=yes");
+			is_help_popup = window.open("help_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>","help_popup",scrPos + "width=600,height=350,status=yes,scrollbars=yes,resizable=yes");
 		};
 	};
 
@@ -915,7 +850,7 @@ function get_day(time,plus)
 		}
 		else
 		{
-			is_smilie_popup = window.open("smilie_popup.php?<?php echo("L=$L"); ?>","smilie_popup","bottom=0,right=0,width=300,height=300,scrollbars=yes,resizable=yes,status=no,toolbar=no,menubar=no,directories=no,location=no");
+			is_smilie_popup = window.open("smilie_popup.php?<?php echo("L=$L"); ?>","smilie_popup","bottom=0,right=0,width=350,height=350,scrollbars=yes,resizable=yes,status=yes,toolbar=no,menubar=no,directories=no,location=no");
 		};
 	};
 
@@ -931,7 +866,7 @@ function get_day(time,plus)
 		}
 		else
 		{
-			is_buzz_popup = window.open("buzz_popup.php?<?php echo("L=$L"); ?>","buzz_popup","bottom=0,right=0,width=550,height=440,scrollbars=yes,resizable=yes,status=no,toolbar=no,menubar=no,directories=no,location=no");
+			is_buzz_popup = window.open("buzz_popup.php?<?php echo("L=$L"); ?>","buzz_popup","bottom=0,right=0,width=550,height=440,scrollbars=yes,resizable=yes,status=yes,toolbar=no,menubar=no,directories=no,location=no");
 		};
 	};
 
@@ -1125,10 +1060,10 @@ function send_headers($title, $icon)
 	?>
 	<!--
 	The lines below are usefull for debugging purpose, please do not remove them!
-	Release: phpMyChat Plus 1.92-f6
-	© 2005-2007 Ciprian Murariu (ciprianmp@yahoo.com)
+	Release: phpMyChat-Plus 1.93-b5
+	© 2005-2008 Ciprian Murariu (ciprianmp@yahoo.com)
 	Based on phpMyChat 0.14.6-dev (also called 0.15.0)
-	© 2000-2007 The phpHeaven Team (http://www.phpheaven.net/)
+	© 2000-2008 The phpHeaven Team (http://www.phpheaven.net/)
 	-->
 	<META NAME="description" CONTENT="phpMyChat">
 	<META NAME="keywords" CONTENT="phpMyChat">
@@ -1138,21 +1073,21 @@ function send_headers($title, $icon)
 	// For translations with an explicit charset (not the 'x-user-defined' one)
 	if (!isset($FontName)) $FontName = "";
 	?>
-	<LINK REL="stylesheet" HREF="<?php echo($ChatPath); ?>config/start_page.css.php?<?php echo("Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
+	<LINK REL="stylesheet" HREF="<?php echo($ChatPath); ?>skins/start_page.css.php?<?php echo("Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 	<SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
 	<!--
-         <?
+         <?php
 	if (eregi("firefox", $_SERVER['HTTP_USER_AGENT'])){ ?>
-		var NS4 = "H";
-		var IE4 = "H";
+		var NS4 = 1;
+		var IE4 = 1;
 		var ver4 = "H";
-	<?
+	<?php
 	}
 	else{ ?>
 		var NS4 = (document.layers) ? 1 : 0;
 		var IE4 = ((document.all) && (parseInt(navigator.appVersion)>=4)) ? 1 : 0;
 		var ver4 = (NS4 || IE4) ? "H" : "L";
-	<?
+	<?php
 }
 ?>
 
@@ -1217,7 +1152,7 @@ function isCookieEnabled() {
 	function tutorial_popup()
 	{
 		window.focus();
-		tutorial_popupWin = window.open("<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L&Ver="); ?>"+ver4,"tutorial_popup","width=700,height=800,resizable=yes,scrollbars=yes,toolbar=yes,menubar=yes,status=yes");
+		tutorial_popupWin = window.open("<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L"); ?>","tutorial_popup","width=700,height=800,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,directories=yes,status=yes,location=yes");
 		tutorial_popupWin.focus();
 	}
 
@@ -1225,7 +1160,7 @@ function isCookieEnabled() {
 	function users_popup()
 	{
 		window.focus();
-		users_popupWin = window.open("<?php echo($ChatPath); ?>users_popup"+ver4+".php?<?php echo("From=$From&L=$L"); ?>","users_popup_<?php echo(md5(uniqid(""))); ?>","width=230,height=300,resizable=yes,scrollbars=yes");
+		users_popupWin = window.open("<?php echo($ChatPath); ?>users_popup"+ver4+".php?<?php echo("From=$From&L=$L"); ?>","users_popup_<?php echo(md5(uniqid(""))); ?>","width=230,height=300,resizable=yes,scrollbars=yes,status=yes");
 		users_popupWin.focus();
 	}
 
@@ -1234,14 +1169,14 @@ function isCookieEnabled() {
 	{
 		window.focus();
 		url = "<?php echo($ChatPath); ?>" + name + ".php?L=<?php echo($L); ?>&Link=1";
-		pop_width = (name != 'admin'? 400:820);
+		pop_width = (name != 'admin'? 450:820);
 		pop_height = ((name != 'deluser' && name != 'pass_reset') ? (name != 'admin'? 640:550):260);
 		param = "width=" + pop_width + ",height=" + pop_height + ",resizable=yes,scrollbars=yes";
 		name += "_popup";
 		window.open(url,name,param);
 	}
 
-	// The three functions bellow allows to ensure an unique choice among rooms
+	// The three functions below allows to ensure an unique choice among rooms
 	function reset_R0()
 	{
 		<?php
@@ -1290,7 +1225,7 @@ function isCookieEnabled() {
 /*********** 'layout' FUNCTION ***********/
 
 /* ----------------------------------------------------------------------------------
-   The layout function draw the initial table/form. It will define three way to go
+   The layout function draw the initial table/form. It will define three ways to go
    into the chat (the $Ver et $Ver1 var) dependent of the browser capacities:
    - those that accept DHTML will use "H" (for highest) named scripts, the others
     	will run "L" (for lowest) named scripts;

@@ -23,6 +23,15 @@ header("Content-Type: text/html; charset=${Charset}");
 
 // Avoid server configuration for magic quotes
 set_magic_quotes_runtime(0);
+// Can't turn off magic quotes gpc so just redo what it did if it is on.
+if (get_magic_quotes_gpc()) {
+	foreach($_GET as $k=>$v)
+		$_GET[$k] = stripslashes($v);
+	foreach($_POST as $k=>$v)
+		$_POST[$k] = stripslashes($v);
+	foreach($_COOKIE as $k=>$v)
+		$_COOKIE[$k] = stripslashes($v);
+}
 
 // Translate to html special characters, and entities if message was sent with a latin 1 charset
 $Latin1 = ($Charset != "utf-8");
@@ -36,6 +45,27 @@ function special_char2($str,$lang)
 {
 	return ($lang ? htmlentities(addslashes($str)) : htmlspecialchars(addslashes($str)));
 }
+
+// Added for php4 support of mb functions
+if (!function_exists('mb_convert_case'))
+{
+	function mb_convert_case($str,$type,$Charset)
+	{
+		if (eregi("TITLE",$type)) $str = ucwords($str);
+		elseif (eregi("LOWER",$type)) $str = strtolower($str);
+		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+		return $str;
+	}
+};
+
+if (!function_exists('utf_conv'))
+{
+	function utf_conv($iso,$Charset,$what)
+	{
+		if (function_exists('iconv')) $what = iconv($iso, $Charset, $what);
+		return $what;
+	};
+};
 
 // Text direction
 $textDirection = ($Align == "right") ? "RTL" : "LTR";
@@ -69,10 +99,21 @@ $imgSizeArray[1] = $height;
 return $imgSizeArray;
 }
 
+// Ghost Control mod by Ciprian
+function ghosts_in($what, $in, $Charset)
+{
+	$ghosts = explode(",",$in);
+	for (reset($ghosts); $ghost_name=current($ghosts); next($ghosts))
+	{
+		if (strcasecmp(mb_convert_case($what,MB_CASE_LOWER,$Charset), mb_convert_case($ghost_name,MB_CASE_LOWER,$Charset)) == 0) return true;
+	}
+	return false;
+}
+
 $DbLink = new DB;
 	$DbLink->query("SELECT perms,rooms,allowpopup FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	$reguser = ($DbLink->num_rows() != 0);
-	if ($reguser) list($perms, $rooms, $allowpopup) = $DbLink->next_record();
+	if ($reguser) list($perms, $rooms, $allowpopupu) = $DbLink->next_record();
 	$DbLink->clean_results();
 
 // Get IP address
@@ -117,11 +158,20 @@ if($DbLink->num_rows() != 0)
 	if ($room != stripslashes($R))	// Same nick in another room
 	{
 	// Ghost Control mod by Ciprian
-	if ((!C_HIDE_ADMINS || (C_HIDE_ADMINS && $status != "a" && $status != "t")) && (!C_HIDE_MODERS || (C_HIDE_MODERS && $status != "m")))
+	if (C_SPECIAL_GHOSTS != "")
+	{
+			$sghosts = "";
+			$sghosts = eregi_replace("'","",C_SPECIAL_GHOSTS);
+			$sghosts = eregi_replace(" AND username != ",",",$sghosts);
+	}
+	if (($sghosts != "" && ghosts_in(stripslashes($U), $sghosts, $Charset)) || (C_HIDE_ADMINS && ($status == "a" || $status == "t")) || (C_HIDE_MODERS && $status == "m"))
+	{
+	}
+	else
 	{
 		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1,1)."\")', '', '')");
-		$kicked = 3;
 	}
+		$kicked = 3;
 	}
 	elseif ($status == "k")			// Kicked by a moderator or the admin.
 	{
@@ -163,9 +213,9 @@ else
 {
 	// User hasn't been found in the users table -> add a row if he is registered
 	$DbLink->clean_results();
-	$DbLink->query("SELECT perms,rooms,allowpopup,avatar FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
+	$DbLink->query("SELECT perms,rooms,allowpopup FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	$reguser = ($DbLink->num_rows() != 0);
-	if ($reguser) list($perms, $rooms, $allowpopup, $avatar) = $DbLink->next_record();
+	if ($reguser) list($perms, $rooms, $allowpopupu) = $DbLink->next_record();
 	$DbLink->clean_results();
 	// Kick unreg users
 	if (!$reguser)
@@ -188,7 +238,7 @@ else
 				$roomsTab = explode(",",$rooms);
 				for (reset($roomsTab); $room_name=current($roomsTab); next($roomsTab))
 				{
-					if (strcasecmp(stripslashes($R), $room_name) == 0 || $room_name == "*")
+					if (strcasecmp(mb_convert_case(stripslashes($R),MB_CASE_LOWER,$Charset), mb_convert_case($room_name,MB_CASE_LOWER,$Charset)) == 0 || $room_name == "*")
 					{
 						$status = "m";
 						break;
@@ -242,7 +292,21 @@ $IgnoreList	= "";
 if (isset($Ign)) $IgnoreList = "'".str_replace(",","','",addslashes(urldecode($Ign)))."'";
 if ($NT == "0") $IgnoreList .= ($IgnoreList != "" ? ",":"")."'SYS enter','SYS exit','SYS away'";
 if ($IgnoreList != "") $CondForQuery = "username NOT IN (${IgnoreList}) AND ";
-$CondForQuery .= "(address = ' *' OR ((address = '$U' OR username = '$U') AND (room = '$R' OR room_from='$R' OR room = 'Offline PMs' OR username = 'SYS inviteTo')) OR ((room = '$R' OR room = 'Offline PMs') AND (address = '' OR username = '$U')) OR room = '*' OR (room = '$R' AND (username = 'SYS room' OR username = 'SYS image' OR username LIKE 'SYS top%' OR username='SYS dice1' OR username='SYS dice2' OR username='SYS dice3')))";
+// Ghost Control mod by Ciprian
+if (C_SPECIAL_GHOSTS != "")
+{
+	$sghosts = "";
+	$sghosts = eregi_replace("'","",C_SPECIAL_GHOSTS);
+	$sghosts = eregi_replace(" AND username != ",",",$sghosts);
+}
+if ($sghosts != "" && ghosts_in(stripslashes($U), $sghosts, $Charset) && ($status == "a" || $status == "t"))
+{
+  $CondForQuery .= "(address = ' *' OR room = '$R' OR room = '*' OR room_from='$R' OR room = 'Offline PMs')";
+}
+else
+{
+	$CondForQuery .= "(address = ' *' OR ((address = '$U' OR username = '$U') AND (room = '$R' OR room_from='$R' OR room = 'Offline PMs' OR username = 'SYS inviteTo')) OR ((room = '$R' OR room = 'Offline PMs') AND (address = '' OR username = '$U')) OR room = '*' OR (room = '$R' AND (username = 'SYS room' OR username = 'SYS image' OR username LIKE 'SYS top%' OR username='SYS dice1' OR username='SYS dice2' OR username='SYS dice3')))";
+}
 $LimitForQuery = ($First ? " LIMIT $N" : "");
 
 $DbLink->query("SELECT m_time, username, latin1, address, message FROM ".C_MSG_TBL." WHERE m_time > '$LastLoad' AND ".$CondForQuery." ORDER BY m_time DESC".$LimitForQuery);
@@ -256,52 +320,93 @@ if($DbLink->num_rows() > 0)
 	while(list($Time, $User, $Latin1, $Dest, $Message) = $DbLink->next_record())
 	{
 		$Message = stripslashes($Message);
-		if ($L!="turkish") $Message = eregi_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$Message);
-		else $Message = eregi_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_1,L_LINKS_15).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_1,L_LINKS_15).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_1,L_LINKS_15).'</a>',$Message);
+		$Message = eregi_replace("L_DEL_BYE",L_DEL_BYE,$Message);
+		$Message = eregi_replace("L_REG_BRB",L_REG_BRB,$Message);
+		$Message = eregi_replace("L_HELP_MR",L_HELP_MR,$Message);
+		$Message = eregi_replace("L_HELP_MS",L_HELP_MS,$Message);
+		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
+		{
+			$Message = eregi_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$Message);
+		}
+		else $Message = eregi_replace('target="_blank">','title="'.sprintf(L_CLICK,L_LINKS_3).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_LINKS_3).'.\'; return true" target="_blank">',$Message);
+
 		$Message = eregi_replace('alt="Send email">','title="'.sprintf(L_CLICK,L_EMAIL_1).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_EMAIL_1).'.\'; return true">',$Message);
 		if (C_USE_AVATARS)
 		{
+			// Gravatars initialization
+			unset($email);
+			unset($use_gravatar);
+			unset($avatar);
 			$DbAvatar = new DB;
-			$DbAvatar->query("SELECT avatar FROM ".C_REG_TBL." WHERE username = '$User'");
-			if($DbAvatar->num_rows()!=0) list($avatar) = $DbAvatar->next_record();
-			else $avatar = C_AVA_RELPATH . C_DEF_AVATAR;
+			$DbAvatar->query("SELECT email, avatar, use_gravatar FROM ".C_REG_TBL." WHERE username = '$User'");
+			if($DbAvatar->num_rows()!=0) list($email, $avatar, $use_gravatar) = $DbAvatar->next_record();
+			if (empty($avatar) || $avatar == "") $avatar = C_AVA_RELPATH . C_DEF_AVATAR;
 			$DbAvatar->clean_results();
+			// Gravatar mod added by Ciprian
+			if ((ALLOW_GRAVATARS == 2 || (ALLOW_GRAVATARS == 1 && (!isset($use_gravatar) || $use_gravatar))) && !ereg("SYS ", $User))
+			{
+				if (eregi(C_AVA_RELPATH, $avatar)) $local_avatar = 1;
+				else $local_avatar = 0;
+				require("plugins/gravatars/get_gravatar.php");
+			}
 		}
 		if(COLOR_NAMES)
 		{
+			$colorname_tag = "";
+			$colorname_endtag = "";
+			$colornamedest_tag = "";
+			$colornamedest_endtag = "";
 			$DbColor = new DB;
-			$DbColor->query("SELECT colorname FROM ".C_REG_TBL." WHERE username = '$User'");
-			if($DbColor->num_rows()!=0)
+			if (isset($User))
 			{
-					list($colorname) = $DbColor->next_record();
-					$colorname_tag = "<FONT color=".$colorname.">";
-				  $colorname_endtag = "<\/FONT>";
-					$DbColor->clean_results();
+				$DbColor->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '$User'");
+				list($perms_user,$colorname) = $DbColor->next_record();
+				$DbColor->clean_results();
+			}
+			if (isset($Dest))
+			{
+				$DbColor->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '$Dest'");
+				list($perms_dest,$colornamedest) = $DbColor->next_record();
+				$DbColor->clean_results();
+			}
+			if(isset($colorname) && $colorname != "")
+			{
+				$colorname_tag = "<FONT color=".$colorname.">";
+				unset($colorname);
+			}
+			elseif(C_ITALICIZE_POWERS)
+			{
+				if (($perms_user == "admin" && $User != C_BOT_NAME) || $perms_user == "topmod") $colorname_tag = "<FONT color=".COLOR_CA.">";
+				elseif ($perms_user == "moderator") $colorname_tag = "<FONT color=".COLOR_CM.">";
+				else $colorname_tag = "<FONT color=".COLOR_CD.">";
 			}
 			else
 			{
 				$colorname_tag = "<FONT color=".COLOR_CD.">";
-			  $colorname_endtag = "<\/FONT>";
 			}
-			$DbColor->query("SELECT colorname FROM ".C_REG_TBL." WHERE username = '$Dest'");
-			if($DbColor->num_rows()!=0)
+			if(isset($colornamedest) && $colornamedest != "")
 			{
-					list($colornamedest) = $DbColor->next_record();
-					$colornamedest_tag = "<FONT color=".$colornamedest.">";
-					$colornamedest_endtag = "<\/FONT>";
-					$DbColor->clean_results();
+				$colornamedest_tag = "<FONT color=".$colornamedest.">";
+				unset($colornamedest);
+			}
+			elseif (C_ITALICIZE_POWERS)
+			{
+				if (($perms_dest == "admin" && $Dest != C_BOT_NAME) || $perms_dest == "topmod") $colornamedest_tag = "<FONT color=".COLOR_CA.">";
+				elseif ($perms_dest == "moderator") $colornamedest_tag = "<FONT color=".COLOR_CM.">";
+				else $colornamedest_tag = "<FONT color=".COLOR_CD.">";
 			}
 			else
 			{
 				$colornamedest_tag = "<FONT color=".COLOR_CD.">";
-				$colornamedest_endtag = "<\/FONT>";
 			}
+			$colorname_endtag = "<\/FONT>";
+			$colornamedest_endtag = "<\/FONT>";
 		}
 		else
 		{
 			$colorname_tag = "";
 			$colornamedest_tag = "";
-		  $colorname_endtag = "";
+			$colorname_endtag = "";
 			$colornamedest_endtag = "";
 		}
 		// Skip the oldest message if the day seperator has been added
@@ -339,59 +444,62 @@ else
 			$Userx = $User;  // Avatar System insered only.
 			if($User != stripslashes($U) && $User != $QUOTE_NAME)
 			{
-				if (C_ENABLE_PM && C_PRIV_POPUP && $allowpopup)
+				if (C_ENABLE_PM && C_PRIV_POPUP && $allowpopupu)
 				{
-					$User = "<a onClick=\"window.parent.send_popup('/to ".special_char($User,$Latin1,1)."');\" title='".L_SEND_PM_1."' onMouseOver=\"window.status='".L_SEND_PM_2."'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."<\/a>";
+					$User = "<a onClick=\"window.parent.send_popup('/to ".special_char($User,$Latin1,1)."');\" title='".L_SEND_PM_1."' onMouseOver=\"window.status='".L_SEND_PM_2."'; return true\" CLASS=\"sender\">".$colorname_tag."[".special_char($User,$Latin1,0)."]".$colorname_endtag."<\/a>";
 				}
 				elseif (C_ENABLE_PM)
 				{
-					$User = "<a onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',true);\" title='".L_SEND_PM_1."' onMouseOver=\"window.status='".L_SEND_PM_2."'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."<\/a>";
+					$User = "<a onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',true);\" title='".L_SEND_PM_1."' onMouseOver=\"window.status='".L_SEND_PM_2."'; return true\" CLASS=\"sender\">".$colorname_tag."[".special_char($User,$Latin1,0)."]".$colorname_endtag."<\/a>";
 				}
 				else
 				{
-					$User = "<a onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false); return false\" title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME1."'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."<\/a>";
+					$User = "<a onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false); return false\" title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME1."'; return true\" CLASS=\"sender\">".$colorname_tag."[".special_char($User,$Latin1,0)."]".$colorname_endtag."<\/a>";
 				}
 			}
 			elseif($User == stripslashes($U))
 			{
-				$User = "<a onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false,'".special_char($U,$Latin1,1)."'); return false\" title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME1."'; return true\" CLASS=\"sender\">".$colorname_tag."".special_char($User,$Latin1,0)."".$colorname_endtag."<\/a>";
+				$User = "<a onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false); return false\" title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME1."'; return true\" CLASS=\"sender\">".$colorname_tag."[".special_char($User,$Latin1,0)."]".$colorname_endtag."<\/a>";
+			}
+			elseif($User == $QUOTE_NAME)
+			{
+				$User = "<a onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false,'".special_char($U,$Latin1,1)."'); return false\" title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME1."'; return true\" CLASS=\"sender\">".$colorname_tag."[".special_char($User,$Latin1,0)."]".$colorname_endtag."<\/a>";
 			}
 			if($Dest != "" && $Dest != stripslashes($U) && $Dest != $QUOTE_NAME)
 			{
 				$Dest = htmlspecialchars(stripslashes($Dest));
-				if (C_ENABLE_PM && C_PRIV_POPUP && $allowpopup)
+				if (C_ENABLE_PM && C_PRIV_POPUP && $allowpopupu)
 				{
-					$Dest = "<a onClick=\"window.parent.send_popup('/to ".special_char($Dest,$Latin1,1)."');\" title='".L_SEND_PM_1."' onMouseOver=\"window.status='".L_SEND_PM_2."'; return true\" CLASS=\"sender\">".$colornamedest_tag."".special_char($Dest,$Latin1,0)."".$colornamedest_endtag."<\/a>";
+					$Dest = "<a onClick=\"window.parent.send_popup('/to ".special_char($Dest,$Latin1,1)."');\" title='".L_SEND_PM_1."' onMouseOver=\"window.status='".L_SEND_PM_2."'; return true\" CLASS=\"sender\">".$colornamedest_tag."[".special_char($Dest,$Latin1,0)."]".$colornamedest_endtag."<\/a>";
 				}
 				elseif (C_ENABLE_PM)
 				{
-					$Dest = "<a onClick=\"window.parent.userClick('".special_char($Dest,$Latin1,1)."',true);\" title='".L_SEND_PM_1."' onMouseOver=\"window.status='".L_SEND_PM_2."'; return true\" CLASS=\"sender\">".$colornamedest_tag."".special_char($Dest,$Latin1,0)."".$colornamedest_endtag."<\/a>";
+					$Dest = "<a onClick=\"window.parent.userClick('".special_char($Dest,$Latin1,1)."',true);\" title='".L_SEND_PM_1."' onMouseOver=\"window.status='".L_SEND_PM_2."'; return true\" CLASS=\"sender\">".$colornamedest_tag."[".special_char($Dest,$Latin1,0)."]".$colornamedest_endtag."<\/a>";
 				}
 				else
 				{
-					$Dest = "<a onClick=\"window.parent.userClick('".special_char($Dest,$Latin1,1)."',false); return false\" title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME1."'; return true\" CLASS=\"sender\">".$colornamedest_tag."".special_char($Dest,$Latin1,0)."".$colornamedest_endtag."<\/a>";
+					$Dest = "<a onClick=\"window.parent.userClick('".special_char($Dest,$Latin1,1)."',false); return false\" title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME1."'; return true\" CLASS=\"sender\">".$colornamedest_tag."[".special_char($Dest,$Latin1,0)."]".$colornamedest_endtag."<\/a>";
 				}
 			}
 			elseif($Dest == stripslashes($U))
 			{
-				$Dest = "<a onClick=\"window.parent.userClick('".special_char($Dest,$Latin1,1)."',false,'".special_char($U,$Latin1,1)."'); return false\" title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME1."'; return true\" CLASS=\"sender\">".$colornamedest_tag."".special_char($Dest,$Latin1,0)."".$colornamedest_endtag."<\/a>";
+				$Dest = "<a onClick=\"window.parent.userClick('".special_char($Dest,$Latin1,1)."',false,'".special_char($U,$Latin1,1)."'); return false\" title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME1."'; return true\" CLASS=\"sender\">".$colornamedest_tag."[".special_char($Dest,$Latin1,0)."]".$colornamedest_endtag."<\/a>";
 			}
-			if ($Dest != "") $Dest = "]<BDO dir=\"${textDirection}\"><\/BDO>".$colorname_endtag."<\/B><\/td><td valign=\"top\"><B>><\/B><\/td><td valign=\"top\"><B>".$colornamedest_tag."[".$Dest;
+			if ($Dest != "") $Dest = "<BDO dir=\"${textDirection}\"><\/BDO>".$colorname_endtag."<\/B><\/td><td valign=\"top\"><B>><\/B><\/td><td valign=\"top\"><B>".$colornamedest_tag."".$Dest;
 			$Message = str_replace("</FONT>","<\\/FONT>",$Message);	// slashes the closing HTML font tag
  // Avatar System Start:
-      if (C_USE_AVATARS)
-      {
-          if (empty($avatar)) $avatar = C_AVA_RELPATH . C_DEF_AVATAR;
-       		$avatar = "<a onClick=\"window.parent.runCmd('whois','".special_char2(stripslashes($Userx),$Latin1)."'); return false\" onMouseOver=\"window.status='".L_PROFILE.".'; return true\" title=\"".L_PROFILE."\"><img align=\"center\" src=\"$avatar\" width=".C_AVA_WIDTH." height=".C_AVA_HEIGHT." alt=\"".L_PROFILE."\" border=0><\/a>";
-					if ($ST != 1) $NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\">".$avatar."<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."[${User}${Dest}]".$colornamedest_endtag."<BDO dir=\"${textDirection}\"><\/BDO><\/B><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
-   				else $NewMsg .= $avatar."<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."[${User}${Dest}]".$colornamedest_endtag."<BDO dir=\"${textDirection}\"><\/BDO><\/B><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
-	    }
-      else
-      {
-					if ($ST != 1) $NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."[${User}${Dest}]".$colornamedest_endtag."<BDO dir=\"${textDirection}\"><\/BDO><\/B><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
-					else $NewMsg .= "<B>".$colorname_tag."[${User}${Dest}]".$colornamedest_endtag."<BDO dir=\"${textDirection}\"><\/BDO><\/B><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
+		    if (C_USE_AVATARS)
+		    {
+	       		$avatar = "<a onClick=\"window.parent.runCmd('whois','".special_char2(stripslashes($Userx),$Latin1)."'); return false\" onMouseOver=\"window.status='".L_PROFILE.".'; return true\" title=\"".L_PROFILE."\"><img align=\"center\" src=\"$avatar\" width=".C_AVA_WIDTH." height=".C_AVA_HEIGHT." alt=\"".L_PROFILE."\" border=0><\/a>";
+				if ($ST != 1) $NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\">".$avatar."<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."${User}${Dest}".$colornamedest_endtag."<BDO dir=\"${textDirection}\"><\/BDO><\/B><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
+	   			else $NewMsg .= $avatar."<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."${User}${Dest}".$colornamedest_endtag."<BDO dir=\"${textDirection}\"><\/BDO><\/B><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
 			}
-    }
+			else
+			{
+						if ($ST != 1) $NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>${User}${Dest}<BDO dir=\"${textDirection}\"><\/BDO><\/B><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
+						else $NewMsg .= "<B>${User}${Dest}<BDO dir=\"${textDirection}\"><\/BDO><\/B><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
+			}
+	    }
 // Avatar System end.
 
 		// "System" messages
@@ -425,7 +533,7 @@ else
 				if($imgSize[0] == MAX_PIC_SIZE || $imgSize[1] == MAX_PIC_SIZE)
 				$Resized = "<br \/>(".L_PIC_RESIZED." <B>".round($imgSize[0],-1)."<\/B> x <B>".round($imgSize[1],-1)."<\/B>)";
 				else $Resized = '';
-        		$NewMsg .= $Pic." <B>".$Dest."<\/B>:<\/td><td width=\"99%\" valign=\"top\"><a href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_FULLSIZE_PIC).".'; return true\" title='".sprintf(L_CLICK,L_FULLSIZE_PIC)."' target=_blank><img src=".$Message." width=".$imgSize[0]." height=".$imgSize[1]." border=0 alt='".sprintf(L_CLICK,L_FULLSIZE_PIC)."'><\/a>".$Resized."<\/td><\/tr><\/table>";
+        		$NewMsg .= "<font class=\"notify\">".$Pic." ".$Dest.":<\/font><\/td><td width=\"99%\" valign=\"top\"><a href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_FULLSIZE_PIC).".'; return true\" title='".sprintf(L_CLICK,L_FULLSIZE_PIC)."' target=_blank><img src=".$Message." width=".$imgSize[0]." height=".$imgSize[1]." border=0 alt='".sprintf(L_CLICK,L_FULLSIZE_PIC)."'><\/a>".$Resized."<\/td><\/tr><\/table>";
       		}
 			elseif ($User == "SYS room")
 			{
@@ -435,18 +543,18 @@ else
 			elseif (substr($User,0,8) != "SYS dice")
 			{
 				if ($Dest != "") $NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]<BDO dir=\"${textDirection}\"><\/BDO>".$colornamedest_endtag."><\/B> ";
-					$Message = str_replace("$","\\$",$Message);	// avoid '$' chars in nick to be parsed below
-					eval("\$Message = $Message;");
+				$Message = str_replace("$","\\$",$Message);	// avoid '$' chars in nick to be parsed below
+				eval("\$Message = $Message;");
 				$noteclass = "notify";
 			};
-	    if ($User != "SYS image")
-	    {
+		    if ($User != "SYS image")
+		    {
 				if(substr($User,0,8) == "SYS dice")
 				{
 					$NewMsg .="<\/td><td nowrap=\"nowrap\" valign=\"top\"><FONT class=\"notify\">".$Dest." ".DICE_RESULTS."<\/FONT><\/td><td nowrap=\"nowrap\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
 				}
-		    else
-		    {
+			    else
+			    {
 					$NewMsg .= "<\/td><td valign=\"top\"><SPAN CLASS=\"$noteclass\">".$Message."<\/SPAN><\/td><\/tr><\/table>";
 				};
 			}
@@ -536,7 +644,7 @@ for ($i = 0; $i < $message_nb; $i++)
 {
 // Bob Dickow mod for /away command - modified by Ciprian for Plus behaviour
            $xxx = $message_nb-1-$i;
-           if (($xxx < 2) AND ((substr_count($Messages[$xxx],C_UPDTUSRS)>0) || (substr_count($Messages[$xxx],"L_AWAY")>0) || (substr_count($Messages[$xxx],"L_BACK")>0)))
+           if (($xxx < 2) AND (substr_count($Messages[$xxx],C_UPDTUSRS)>0))
            {
               ?>
                  window.parent.frames['users'].window.location.replace("usersH.php?<?php echo((isset($QUERY_STRING)) ? $QUERY_STRING : getenv("QUERY_STRING")); ?>");
@@ -576,7 +684,7 @@ if ($xxx > 1)
 	// slashes the quotes that should be displayed
 	$ToSend = str_replace("\"","\\\"",$ToSend);
 	?>
-	window.parent.frames['banner'].window.location.replace("banner.php?<?php echo( (isset($QUERY_STRING)) ? $QUERY_STRING : getenv("QUERY_STRING")); ?>");
+	window.parent.frames['topic'].window.location.replace("topic.php?<?php echo( (isset($QUERY_STRING)) ? $QUERY_STRING : getenv("QUERY_STRING")); ?>");
 	window.parent.frames['messages'].window.document.write("<?php echo($ToSend); ?>\n");
 	<?php
 };
@@ -619,27 +727,29 @@ if (typeof(window.parent.frames['exit']) != 'undefined'
 </SCRIPT>
 <?php
 // Private Message Popup mod by Ciprian
-if (C_ENABLE_PM && C_PRIV_POPUP)
+if (C_ENABLE_PM)
 {
-$DbLink->query("SELECT allowpopup FROM ".C_REG_TBL." WHERE username = '$U'");
-if($DbLink->num_rows() != 0) list($allowpopupu) = $DbLink->next_record();
-else $allowpopupu = 0;
-$DbLink->clean_results();
-	if (substr($User,0,4) != "SYS " && $allowpopupu)
+	if (!isset($allowpopupu))
 	{
-		$who = $L."&U=".$U."&R=".$R;
+		$DbLink->query("SELECT allowpopup FROM ".C_REG_TBL." WHERE username = '$U'");
+		if($DbLink->num_rows() != 0) list($allowpopupu) = $DbLink->next_record();
+		else $allowpopupu = 0;
+		$DbLink->clean_results();
+	}
+	if (substr($User,0,4) != "SYS ")
+	{
+		$who = "$L&U=$U&R=$R";
 		$DbLink->query("SELECT username, address, room, pm_read FROM ".C_MSG_TBL." WHERE (room = '$R' OR room = 'Offline PMs') AND address = '$U' AND pm_read LIKE 'New%' ORDER BY username AND m_time DESC LIMIT 1");
 		if($DbLink->num_rows() > 0)
 		{
 			$NewPMs = $DbLink->num_rows();
 			list($Sender,$Destin,$Room,$Read) = $DbLink->next_record();
 			$DbLink->clean_results();
-			if (($Read == "New" && ($R = $Room || $R == "Offline PMs") && $U = $Destin && $U != $Sender) || ($Read == "Neww" && ($R = $Room || $R == "Offline PMs") && $U = $Destin && $U != $Sender))
+			if (($Read == "New" && ($R = $Room || $Room == "Offline PMs") && $U = $Destin && $U != $Sender) || ($Read == "Neww" && ($R = $Room || $Room == "Offline PMs") && $U = $Destin && $U != $Sender))
 			{
 					// add this for /away command modification by R Dickow (adapted by Ciprian for priv popup):
-					$DbLink = new DB;
-					$DbLink->query("SELECT awaystat FROM ".C_USR_TBL." WHERE username='$Destin' AND awaystat!='0'");
-					if($DbLink->num_rows() == 0)
+					$DbLink->query("SELECT awaystat FROM ".C_USR_TBL." WHERE username='$Destin' AND awaystat='0'");
+					if($DbLink->num_rows() == 1 && ($allowpopupu || $Room == "Offline PMs"))
 					{
 						$height = ($NewPMs == "1" ? 320 : 440);
 						?>
@@ -653,11 +763,10 @@ $DbLink->clean_results();
 								</SCRIPT>
 						<?php
 						$IsPopup = true;
+					    $DbLink->clean_results();
 					}
-		    $DbLink->clean_results();
 			}
 		}
-	$DbLink->close();
 	}
 }
 
@@ -680,14 +789,53 @@ if (C_QUOTE)
 		$quotetext = ereg_replace("\n", "", $quotetext);
 		if ($R != "1")
 		{
-		$DbLink = new DB;
 		$DbLink->query("SELECT m_time FROM ".C_MSG_TBL." WHERE username='$QUOTE_NAME' AND room = '$R' AND m_time > ".(time() - $quotetime)." ORDER BY m_time DESC LIMIT 1");
-		if ($DbLink->num_rows() == 0)
+			if ($DbLink->num_rows() == 0)
+			{
+				$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '$QUOTE_NAME', '', ".time().", '', '$quotetext', '', '')");
+			}
+		}
+	}
+}
+if(C_CHAT_BOOT)
+{
+	$CondForQueryM = "(username='$U' OR message='stripslashes(sprintf(L_ENTER_ROM, \"".$U."\"))' OR message='stripslashes(sprintf(L_ENTER_ROM_NOSOUND, \"".$U."\"))' OR ((username='SYS welcome' OR username LIKE 'SYS top%' OR username='SYS room' OR username='SYS image' OR username='SYS dice1' OR username='SYS dice2' OR username='SYS dice3' OR username='SYS away') AND address='$U'))";
+	$DbLink->query("SELECT type,m_time,room FROM ".C_MSG_TBL." WHERE ".$CondForQueryM." ORDER BY m_time DESC LIMIT 1");
+	list($m_type, $m_time, $m_room) = $DbLink->next_record();
+	$DbLink->clean_results();
+	$CondForQueryU = "status!='a' AND status!='t' AND status!='m' AND username='$U' AND username!='".C_BOT_NAME."' AND awaystat='0' AND (u_time > ".($m_time + C_USR_DEL * 60)." OR (status ='k' AND u_time <  ".(time() - 20)."))".$Hide."";
+	$DbLink->query("DELETE FROM ".C_USR_TBL." WHERE ".$CondForQueryU."");
+	$CleanUsrTbl = ($DbLink->affected_rows() > 0);
+	if($DbLink->affected_rows() > 0)
+	{
+		// Ghost Control mod by Ciprian
+		if (C_SPECIAL_GHOSTS != "")
 		{
-			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '$QUOTE_NAME', '', ".time().", '', '$quotetext', '', '')");
+			$sghosts = "";
+			$sghosts = eregi_replace("'","",C_SPECIAL_GHOSTS);
+			$sghosts = eregi_replace(" AND username != ",",",$sghosts);
 		}
-		$DbLink->close();
-		}
+	 		if (($sghosts != "" && ghosts_in(stripslashes($U), $sghosts, $Charset)) || (C_HIDE_ADMINS && ($status == "a" || $status == "t")) || (C_HIDE_MODERS && $status == "m")) {}
+			else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('".$m_type."', '".$m_room."', 'SYS exit', '', ".time().", '', 'sprintf(L_BOOT_ROM, \"$U\")', '', '')");
+	$DbLink->clean_results();
+	$botpath = "botfb/".$U;         // file is in DIR "botfb" and called "username"
+	if (file_exists($botpath)) unlink($botpath); // checks to see if user file exists.
+	                                     // if it does delete it.
+	$botpathbot = "botfb/".$U.".txt";   // file is in DIR "botfb" and called "username.txt"
+	if (file_exists($botpathbot)) unlink($botpathbot); // checks to see if user file exists.
+	?>
+	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
+	<!--
+		if (window.parent.frames['loader'] && !window.parent.frames['loader'].closed)
+		{
+			if (typeof(window.parent.leaveChat) != 'undefined') window.parent.leaveChat = true;
+			window.parent.frames['loader'].close();
+		};
+		window.parent.window.location = '<?php echo("$From?Ver=$Ver&L=$L&U=".urlencode(stripslashes($U))."&O=$O&ST=$ST&NT=$NT&E=".urlencode(stripslashes($R))."&EN=$T&BT=1"); ?>';
+	// -->
+	</SCRIPT>
+	<?php
+	exit();
 	}
 }
 ?>

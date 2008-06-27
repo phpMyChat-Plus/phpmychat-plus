@@ -32,6 +32,9 @@
  * @package Interpreter
  */
 
+$ChatPath = "../";
+$BotPath = "./";
+
 /**
 * The general preferences and database details.
 */
@@ -87,7 +90,7 @@ function replybotname($userinput,$uniqueid,$botname){
 	$botid = lookupbotid($botname);
 
 	if ($botid==-1){
-		print "I don't know that bot: $botname<br />\n";
+		print "There is no such a bot: $botname<br />\n";
 	}
 	else {
 		return reply($userinput,$uniqueid,$botid);
@@ -412,7 +415,12 @@ function handlenode($xmlnode,$inputstar,$thatstar,$topicstar){
 	}
 	elseif (strtoupper($xmlnode["tag"])=="DATE"){
 
-		return getfdate();
+//		return getfdate(); // deprecated
+	$mynode=upperkeysarray($xmlnode["attributes"]);
+
+	// Get the value of an attribute
+	$date_format=$mynode["FORMAT"];
+		return getfdate($date_format);
 
 	}
 	elseif (strtoupper($xmlnode["tag"])=="VERSION"){
@@ -1018,12 +1026,6 @@ function handlenode($xmlnode,$inputstar,$thatstar,$topicstar){
 		}
 
 		return $value;
-
 	}
-
 }
-
-
-
-
 ?>

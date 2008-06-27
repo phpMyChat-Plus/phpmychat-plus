@@ -33,7 +33,7 @@ class acounter {
         $this->config['logfile'] = "./acount/pages/ip.txt";
 
         /* timeout (minutes) */
-        $this->config['block_time'] = 1;
+        $this->config['block_time'] = 120;
     }
 
     function is_new_visitor() {
@@ -93,21 +93,33 @@ class acounter {
         return $this->counter;
     }
 
+	function utf_conv($iso,$Charset,$what)
+	{
+		if (function_exists('iconv')) $what = iconv($iso, $Charset, $what);
+		return $what;
+	}
+
     function create_output($page='') {
         if (empty($page)) {
             $page = "counter";
         }
-        $this->read_counter_file($page);
-        $this->counter = sprintf("%0"."".$this->config['pad'].""."d",$this->counter);
+		$Charset = "utf-8";
+        $visits = $this->read_counter_file($page) + 1;
+/*        $this->counter = sprintf("%0"."".$this->config['pad'].""."d",$this->counter);
         $ani_digits = sprintf("%0"."".$this->config['pad'].""."d",$this->counter+1);
+*/
+        $ani_digits = $this->counter+1;
         $html_output = "<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr align=\"center\">\n";
+		$INSTALL_DATE = strftime(L_SHORT_DATE,strtotime(C_INSTALL_DATE));
+		if (eregi("win", PHP_OS)) $INSTALL_DATE = utf_conv(WIN_DEFAULT,$Charset,$INSTALL_DATE);
+		$visitors = sprintf(L_VISITOR_REPORT,$INSTALL_DATE);
         for ($i=0; $i<strlen($this->counter); $i++) {
             if (substr("$this->counter",$i,1) == substr("$ani_digits",$i,1)) {
                 $digit_pos = substr("$this->counter",$i,1);
-                $html_output .= "<td><img src=\"".$this->config['img']."$digit_pos.gif\" alt=\"Visitors\"";
+                $html_output .= "<td><img src=\"".$this->config['img']."$digit_pos.gif\" alt=\"".$visits." ".$visitors."\" title=\"".$visits." ".$visitors."\"";
             } else {
                 $digit_pos = substr("$ani_digits",$i,1);
-                $html_output .= "<td><img src=\"".$this->config['animated_img']."$digit_pos.gif\" alt=\"Visitors\"";
+                $html_output .= "<td><img src=\"".$this->config['animated_img']."$digit_pos.gif\" alt=\"".$visits." ".$visitors."\" title=\"".$visits." ".$visitors."\"";
             }
             $html_output .= " width=\"".$this->config['width']."\" height=\"".$this->config['height']."\"></td>\n";
         }
@@ -119,42 +131,45 @@ class acounter {
 
 
 // This script exports all the IPs that hit this chat server into a file called /logs/chat_ip_logs.txt
-function getip() { 
-  if(isset($_SERVER)) { 
-    if(isset($_SERVER["HTTP_X_FORWARDED_FOR"])) { 
-    $realip = $_SERVER["HTTP_X_FORWARDED_FOR"]; 
-    }elseif(isset($_SERVER["HTTP_CLIENT_IP"])) { 
-      $realip = $_SERVER["HTTP_CLIENT_IP"]; 
-    }else{ 
-      $realip = $_SERVER["REMOTE_ADDR"]; 
-    } 
-  }else{ 
-  if(getenv( 'HTTP_X_FORWARDED_FOR' ) ) { 
-    $realip = getenv( 'HTTP_X_FORWARDED_FOR' ); 
-  }elseif (getenv( 'HTTP_CLIENT_IP' ) ) { 
-    $realip = getenv( 'HTTP_CLIENT_IP' ); 
-  }else { 
-    $realip = getenv( 'REMOTE_ADDR' ); 
-  } 
-} 
-return $realip; 
-} 
+function getip() {
+  if(isset($_SERVER)) {
+    if(isset($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+    $realip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+    }elseif(isset($_SERVER["HTTP_CLIENT_IP"])) {
+      $realip = $_SERVER["HTTP_CLIENT_IP"];
+    }else{
+      $realip = $_SERVER["REMOTE_ADDR"];
+    }
+  }else{
+  if(getenv( 'HTTP_X_FORWARDED_FOR' ) ) {
+    $realip = getenv( 'HTTP_X_FORWARDED_FOR' );
+  }elseif (getenv( 'HTTP_CLIENT_IP' ) ) {
+    $realip = getenv( 'HTTP_CLIENT_IP' );
+  }else {
+    $realip = getenv( 'REMOTE_ADDR' );
+  }
+}
+return $realip;
+}
 
-$logIP = getip(); 
+$logIP = "&nbsp";
+$logIP = getip();
 if (!eregi("86.121.5", $logIP)) //Replace this IP (mine) with yours IP (entire - if it's a static IP or partial - if it's a dinamic one like mine)
 {
-	$proxy = $_SERVER['REMOTE_ADDR'];
-	$loguri = $_SERVER['REQUEST_URI']; 
-	$logref = $_SERVER['HTTP_REFERER']; 
-	$logDATE = date("D, d-m-y, H:i:s"); 
-	$logHOST = gethostbyaddr($logIP); 
-	$invoegen = $logDATE . " | " . $logIP . " | " . $logHOST . " | " . $proxy . " | " . $loguri . " - " . $logref . "\n";
-if (!file_exists("./acount/pages/chat_ip_logs.txt"))
+	$logURI = "&nbsp";
+	$logHOST = "&nbsp";
+	$logPROXY = ($_SERVER['REMOTE_ADDR'] != $logIP) ? $_SERVER['REMOTE_ADDR'] : "&nbsp";
+	$logURI = $_SERVER['REQUEST_URI'];
+	$logREF = ($_SERVER['HTTP_REFERER'] != '') ? $_SERVER['HTTP_REFERER'] : "&nbsp";
+	$logDATE = date("D, d-m-y, H:i:s");
+	$logHOST = gethostbyaddr($logIP);
+	$invoegen = "<tr valign=top><td nowrap=\"nowrap\">".$logDATE."</td><td>".$logIP."</td><td>".$logHOST."</td><td>".$logURI."</td><td>".$logPROXY."</td><td>".$logREF."</td></tr>\n";
+if (!file_exists("./acount/pages/chat_ip_logs.htm"))
 {
-	copy("./acount/pages/bak/chat_ip_logs.txt","./acount/pages/chat_ip_logs.txt");
-	chmod("./acount/pages/chat_ip_logs.txt", 0666);
+	copy("./acount/pages/bak/chat_ip_logs.htm","./acount/pages/chat_ip_logs.htm");
+	chmod("./acount/pages/chat_ip_logs.htm", 0666);
 }
-	$fopen = fopen("./acount/pages/chat_ip_logs.txt", "a");
+	$fopen = fopen("./acount/pages/chat_ip_logs.htm", "a");
 	fwrite($fopen, $invoegen);
 	fclose($fopen);
 }

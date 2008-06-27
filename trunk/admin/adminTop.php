@@ -17,13 +17,12 @@ $URLQueryTop = "L=$L&pmc_username=".urlencode($pmc_username)."&pmc_password=$pmc
 <BODY>
 <TABLE ALIGN=RIGHT BORDER=0 CELLPADDING=1 CELLSPACING=0 CLASS="menu">
 <TR>
-	<TD ALIGN=LEFT VALIGN=top NOWRAP="NOWRAP" CLASS="tabtitle" colspan=2>
+	<TD ALIGN=LEFT VALIGN=top NOWRAP="NOWRAP" CLASS="menuTitle" colspan=4>
 		<IMG SRC="images/selColor.gif" WIDTH=5><?php echo(sprintf(A_MENU_0,APP_NAME)."\n"); ?>
 	</TD>
 	<TD ALIGN=LEFT VALIGN=top WIDTH=1500 CLASS="menuTitle">
 		<IMG SRC="images/selColor.gif" WIDTH=5>
 	</TD>
-<td colspan=2></td>
 	<TD ALIGN=CENTER NOWRAP="NOWRAP" CLASS="thumbIndex">
 		&nbsp;<A HREF="<?php echo("$From?$URLQueryTop&sheet=1"); ?>" TARGET="_parent"<?php if ($sheet == "1") echo(" CLASS=\"selected\""); ?>><?php echo(A_MENU_1); ?></A>&nbsp;
 	</TD>
@@ -39,7 +38,7 @@ $URLQueryTop = "L=$L&pmc_username=".urlencode($pmc_username)."&pmc_password=$pmc
 	include('./admin/mail4admin.lib.php');
 	if (isset($MailFunctionOn))
 	{
-		$ReqVar = (C_ADMIN_EMAIL ? "" : "&ReqVar=1");
+		$ReqVar = ((strstr($Sender_email,"@") && ($Sender_email != "")) ? "" : "&ReqVar=1");
 		?>
 		<TD WIDTH=1><IMG SRC="images/selColor.gif" WIDTH=1></TD>
 		<TD ALIGN=CENTER NOWRAP="NOWRAP" CLASS="thumbIndex">
@@ -53,7 +52,7 @@ $URLQueryTop = "L=$L&pmc_username=".urlencode($pmc_username)."&pmc_password=$pmc
         <TD ALIGN=CENTER NOWRAP="NOWRAP" CLASS="thumbIndex">
 		&nbsp;<A HREF="<?php echo("$From?$URLQueryTop&sheet=5"); ?>" TARGET="_parent"<?php if ($sheet == "5") echo(" CLASS=\"selected\""); ?>><?php echo(A_MENU_5); ?></A>&nbsp;
 	</TD>
-	<TD>
+	<TD ALIGN=CENTER NOWRAP="NOWRAP">
 		<IMG SRC="images/selColor.gif" WIDTH=5><a href="logout.php?mode=logout" onClick="top.close();"><?php echo (A_LOGOUT) ?></a>
 		</TD>
         <TD WIDTH=1><IMG SRC="images/selColor.gif" WIDTH=1></TD>
@@ -81,7 +80,6 @@ $URLQueryTop = "L=$L&pmc_username=".urlencode($pmc_username)."&pmc_password=$pmc
 	</TD>
 </TR>
 </TABLE>
-</P>
 </BODY>
 </HTML>
 <?php

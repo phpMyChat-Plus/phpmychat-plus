@@ -1,11 +1,22 @@
 <?php
+// Added for php4 support of mb functions
+if (!function_exists('mb_convert_case'))
+{
+	function mb_convert_case($str,$type,$Charset)
+	{
+		if (eregi("TITLE",$type)) $str = ucwords($str);
+		elseif (eregi("LOWER",$type)) $str = strtolower($str);
+		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+		return $str;
+	}
+};
 
-function room_in($what, $in)
+function room_in($what, $in, $Charset)
 {
 	$rooms = explode(",",$in);
 	for (reset($rooms); $room_name=current($rooms); next($rooms))
 	{
-		if (strcasecmp($what, $room_name) == 0) return true;
+		if (strcasecmp(mb_convert_case($what,MB_CASE_LOWER,$Charset), mb_convert_case($room_name,MB_CASE_LOWER,$Charset)) == 0) return true;
 	}
 	return false;
 }
@@ -29,7 +40,7 @@ else
 	{
 		list($password,$perms,$rooms) = $DbLink->next_record();
 		$DbLink->clean_results();
-		if (($password != $PWD_Hash) || (($perms != "moderator") && ($perms != "admin") && ($perms != "topmod")) || (($perms == "moderator") && (!room_in(stripslashes($R), $rooms) && !room_in("*", $rooms))))
+		if (($password != $PWD_Hash) || (($perms != "moderator") && ($perms != "admin") && ($perms != "topmod")) || (($perms == "moderator") && (!room_in(stripslashes($R), $rooms, $Charset) && !room_in("*", $rooms, $Charset))))
 		{
 			$Error = L_NO_MODERATOR;
 		}
@@ -57,8 +68,6 @@ else
 					}
 					else
 					{
-						$IsCommand = true;
-						$RefreshMessages = true;
 						$DbLink->query("UPDATE ".C_USR_TBL." SET u_time='".time()."', status='k' WHERE ".$Query4Moder."username='$UU'");
 						if ($Cmd[2] != "")
 						{
@@ -69,14 +78,18 @@ else
 						{
 							$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_KICKED, \"".special_char($UU,$Latin1)."\")', '', '')");
 						}
+						$IsCommand = true;
+						$RefreshMessages = true;
+						$CleanUsrTbl = 1;
 					}
 				}
 			}
 			else
 			{
-						$IsCommand = true;
-						$RefreshMessages = true;
-						$DbLink->query("UPDATE ".C_USR_TBL." SET u_time='".time()."', status='k' WHERE username!='$U'");
+				$DbLink->query("UPDATE ".C_USR_TBL." SET u_time='".time()."', status='k' WHERE username!='$U'");
+				$IsCommand = true;
+				$RefreshMessages = true;
+				$CleanUsrTbl = 1;
 			};
 		};
 	};

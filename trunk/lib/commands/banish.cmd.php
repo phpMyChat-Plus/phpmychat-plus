@@ -1,25 +1,35 @@
 <?php
+// Added for php4 support of mb functions
+if (!function_exists('mb_convert_case'))
+{
+	function mb_convert_case($str,$type,$Charset)
+	{
+		if (eregi("TITLE",$type)) $str = ucwords($str);
+		elseif (eregi("LOWER",$type)) $str = strtolower($str);
+		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+		return $str;
+	}
+};
 
-// Returns true if the room to check ($what) is in the string ($in),
-// false else
-function room_in($what, $in)
+// Returns true if the room to check ($what) is in the string ($in), false else
+function room_in($what, $in, $Charset)
 {
 	$rooms = explode(",",$in);
 	for (reset($rooms); $room_name=current($rooms); next($rooms))
 	{
-		if (strcasecmp($what, $room_name) == 0) return true;
+		if (strcasecmp(mb_convert_case($what,MB_CASE_LOWER,$Charset), mb_convert_case($room_name,MB_CASE_LOWER,$Charset)) == 0) return true;
 	};
 	return false;
 };
 
 // Returns 0 if the room to check ($what) is in the string ($in), the
 // number of rooms else
-function room_not_in($what, $in)
+function room_not_in($what, $in, $Charset)
 {
 	$rooms = explode(",",$in);
 	for (reset($rooms); $room_name=current($rooms); next($rooms))
 	{
-		if (strcasecmp($what, $room_name) == 0) return "0";
+		if (strcasecmp(mb_convert_case($what,MB_CASE_LOWER,$Charset), mb_convert_case($room_name,MB_CASE_LOWER,$Charset)) == 0) return "0";
 	};
 	return count($rooms);
 };
@@ -43,7 +53,7 @@ else
 	{
 		list($password,$perms,$rooms) = $DbLink->next_record();
 		$DbLink->clean_results();
-		if (($password != $PWD_Hash) || (($perms != "moderator") && ($perms != "admin") && ($perms != "topmod")) || (($perms == "moderator") && (!room_in(stripslashes($R), $rooms) && !room_in("*", $rooms))))
+		if (($password != $PWD_Hash) || (($perms != "moderator") && ($perms != "admin") && ($perms != "topmod")) || (($perms == "moderator") && (!room_in(stripslashes($R), $rooms, $Charset) && !room_in("*", $rooms, $Charset))))
 		{
 			$Error = L_NO_MODERATOR;
 		}
@@ -89,7 +99,7 @@ else
 						{
 							$UURoom = addslashes($UURoom);
 							$Old_ban_rooms = addslashes($Old_ban_rooms);
-							$NbAlrBanished = room_not_in($UURoom, $Old_ban_rooms);
+							$NbAlrBanished = room_not_in($UURoom, $Old_ban_rooms, $Charset);
 							$New_ban_rooms = ($NbAlrBanished > 2 ? "*" : $Old_ban_rooms.",".$UURoom);
 						};
 						// IP needs to be updated ?
@@ -109,6 +119,7 @@ else
 					$DbLink->query("UPDATE ".C_USR_TBL." SET u_time='".time()."', status='b' WHERE username='$UU'");
 					$IsCommand = true;
 					$RefreshMessages = true;
+				    $CleanUsrTbl = 1;
 				};
 			};
 		};

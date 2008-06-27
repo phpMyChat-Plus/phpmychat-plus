@@ -4,13 +4,13 @@
 if (C_NO_SWEAR)
 {
 	include("./lib/swearing.lib.php");
-	$Cmd[1] = checkwords($Cmd[1], false);
+	$Cmd[1] = checkwords($Cmd[1], false, $Charset);
 };
 
  global $highpath;
          $highpath = "botfb/" .$U ;         // file is in DIR "botfb" and called "usersname"
 
-                             // This writes a file to the HD to record user to highlight.
+                             // This writes a file to the botfb folder, to remember the user to highlight.
 
 if (file_exists ($highpath))                            // checks to see if user file exists.
       {

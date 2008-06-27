@@ -1,5 +1,5 @@
 <?php
-// File : german/localized.tutorial.php - to be updated to plus version (09.09.2007 - rev.7)
+// File : german/localized.tutorial.php - to be updated to plus version (10.04.2008 - rev.9)
 // Original translation by Michael Schoening <m.schoening@ticketboy.de> & Reinhard Hofmann <e9625556@student.tuwien.ac.at>
 // Updates, corrections and additions for the Plus version by Alexander Eisele <xaex@xaex.de> && Thomas Pschernig <tpsde1970@aol.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -22,7 +22,7 @@ if (isset($_COOKIE["CookieStatus"])) $CookieStatus = $_COOKIE["CookieStatus"];
 
 <HEAD>
 <TITLE>Deutsche Anleitung für<?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?></TITLE>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=${Charset}">
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo(${Charset}); ?>">
 <STYLE>
 A.topLink
 {
@@ -52,7 +52,7 @@ A.topLink:hover, A.topLink:active
 	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- Deutsche Anleitung für <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -</B></FONT></TD>
 </TR>
 </TABLE><br /><br />
-<P><A NAME="top"></P>
+<P><A NAME="top"></A></P>
 <TABLE BORDER="3" CELLPADDING="3">
 <TR>
 	<TD><FONT SIZE="+2">Inhalt des Tutorials</FONT></TD>
@@ -205,7 +205,7 @@ Wenn Du noch nicht registriert bist<?php if (!C_REQUIRE_REGISTER) echo(" und es 
 	<LI>Falls Du eine Homepage hast, gib diese in das dafür vorgesehene Feld ein.
 	<LI>Gib an, welche Sprache Du bevorzugt sprichst (als Hilfe für andere Nutzer).
 	<LI>Willst Du, dass andere Deine Mailadresse lesen können? Dann wähle das bitte aus.
-	<LI>Drücke den Registrieren-Knopf und Du bist fertig. Willst Du Dich doch nicht registrieren, drücke den Stop-Knopf.
+	<LI>Drücke dann den <?php echo(L_REG_3); ?> Button und dein Account wird erstellt. Je nach dem was der Administrator eingestellt hat, wirst Du auf seine Zustimmung warten müßen. Wie dem auch sei, erhälst du eine Bestätigungsemail mit weiteren Instructionen. Wenn Du jede Zeit die Registrierung stopen willst, so drücke den <?php echo(L_REG_25); ?> Button.
 </UL>
 <P>
 <A NAME="modProfile"></A>Natürlich kannst Du als registrierter Nutzer selber jederzeit Dein Profil ändern<?php if (C_SHOW_DEL_PROF) echo("/löschen"); ?>. Klicke einfach auf den <?php echo((!C_SHOW_DEL_PROF ? "Link" : "Link")); ?>.<br />
@@ -290,7 +290,7 @@ Du kannst die Farbe Deiner Nachrichten durch Auswahl einer neuen Farbe rechts vo
 <P>
 <FONT SIZE="+1"><A NAME="exit"><B>Chatraum verlassen:</B></A></FONT>
 <P>
-Um den Chat zu verlassen, klicke auf "Exit" oben rechts. Alternativ kannst Du folgenden Befehle benutzen, die Du einfach im Texteingabefeld eingibst:<br />
+Um den Chat zu verlassen, klicke auf <?php echo (EXIT_LINK_TYPE) ? "das Bild <img src='localization/$L/images/exitdoor.gif' border=0 alt='".L_EXIT."'>" : 'den Link "'.L_EXIT.'"'; ?> oben rechts. Alternativ kannst Du folgenden Befehle benutzen, die Du einfach im Texteingabefeld eingibst:<br />
 /exit<br />
 /bye<br />
 /quit<br />
@@ -307,7 +307,7 @@ sendet diese Nachricht "Bis bald!" im Chatfenster. Danach wirst Du automatisch a
 <P>
 Du kannst auf den Link klicken, der Dir auf der Startseite die Anzahl der Benutzer momentan anzeigt. Wenn Du chattest, klicke auf das Bild  <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_DETACH ?>"> in der oberen rechten Ecke des Bilder um ein Fenster zu öffnen, daß Dir alle Benutzer und die Räume in denen sie sich befinden anzeigt.<br />
 <P>
-Beim klick auf das  <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_BEEP ?>">Bild am oberen Rand dieses Fensters stellt die Benachrichtigung bei neuen Nutzern an oder aus.
+Beim klick auf das Bild <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_BEEP ?>"> am oberen Rand dieses Fensters stellt die Benachrichtigung bei neuen Nutzern an oder aus.
 <br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />
@@ -387,8 +387,8 @@ If (C_USE_AVATARS) {
 ?>
 	<hr />
 	<FONT SIZE="+1"><A NAME="avatars"><B>Avatar:</B></A></FONT>
-<P>Avataras sind graphische Bildikonen, die chattern darstellen. Nur zugelassene Benutzer können ihren Avatara ändern. Zugelassene Benutzer können ihr Profil öffnen (/profile Befehl sehen) und das Avatarabild an klicken, um es von einem Menü von Bildern vorzuwählen, oder ein URL zu einem graphischen Bild überall einzugeben, das im Internet vorhanden ist (die nur Bilder öffentlich zugänglich, nicht Kennwort geschützte Aufstellungsorte). Bilder sollten Datenbanksuchroutine-sichtbar (.gif, .jpg, etc.) sein. 32 x 32 große Pixels sind für die graphische Anzeige die beste.
-<P>Klicke auf den avatar einer person.Es öffnet sich ein Popup mit dem profil der person. (siehe <A HREF="#whois">/whois Befehl</A>).
+<P>Avataras sind graphische Bildikonen, die chattern darstellen. Nur zugelassene Benutzer können ihren Avatara ändern. Zugelassene Benutzer können ihr Profil öffnen (<A HREF="#changeprofile">/profile</A> Befehl sehen) und das Avatarabild an klicken, um es von einem Menü von Bildern vorzuwählen, oder ein URL zu einem graphischen Bild überall einzugeben, das im Internet vorhanden ist (die nur Bilder öffentlich zugänglich, nicht Kennwort geschützte Aufstellungsorte). Bilder sollten Datenbanksuchroutine-sichtbar (.gif, .jpg, etc.) sein. 32 x 32 große Pixels sind für die graphische Anzeige die beste.
+<P>Klicke auf den avatar einer person.Es öffnet sich ein Popup mit dem profil der person. (siehe <A HREF="#whois">/whois</A> Befehl).
 Klicke auf deinem eigenen Avatar von der Liste des Benutzers was den /profile Befehl hervorruft, wenn du registriert bist.
 Wenn du nicht registriert warst, klickst auf dich Selbst (Rückstellung des Systems) gibt der Avatar einen hinweis aus dich zu Registrieren.
   <P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
@@ -465,7 +465,11 @@ if (C_HTML_TAGS_KEEP != "none")
 <b><?php echo(L_COL_HELP_SUB2); ?></b><br /><?php echo(L_COL_HELP_P2); ?><br /><br /><center><?php echo(COLOR_LIST); ?></center><br /><?php echo(L_COL_HELP_P2a); ?><br /><br />
 </P>
 <P>
-<b><?php echo(L_COL_HELP_SUB3); ?></b><br /><?php echo(L_COLOR_HEAD_SETTINGS); ?><br /><?php if (COLOR_FILTERS) echo(L_COLOR_HEAD_SETTINGSa."<br />"); ?><u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo(L_WHOIS_ADMIN); elseif ($CookieStatus == "t") echo(L_WHOIS_TOPMOD); elseif ($CookieStatus == "m") echo(L_WHOIS_MODER); elseif ($CookieStatus == "u") echo(L_WHOIS_GUEST); else echo(L_WHOIS_REG);?></b><br /><?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
+<b><?php echo(L_COL_HELP_SUB3); ?></b><br />
+<u><?php echo(L_COLOR_HEAD_SETTINGS); ?></u><br />
+<?php if (COLOR_FILTERS) echo("a) COLOR_FILTERS = <b>".(COLOR_FILTERS == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />b) COLOR_ALLOW_GUESTS = <b>".(COLOR_ALLOW_GUESTS == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />c) COLOR_NAMES = <b>".(COLOR_NAMES == 1 ? L_ENABLED : L_DISABLED)."</b>.<br />"); ?>
+<?php if (COLOR_FILTERS) echo("<u>".L_COLOR_HEAD_SETTINGSa."</u> ".L_WHOIS_ADMIN." = <b><SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN></b>, ".L_WHOIS_MODERS." = <b><SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN></b>, ".L_WHOIS_OTHERS." = <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>."); else echo("<u>".L_COLOR_HEAD_SETTINGSb."</u> <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>.") ?><br />
+<u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo("<font color=".COLOR_CA.">".L_WHOIS_ADMIN); elseif ($CookieStatus == "t") echo("<font color=".COLOR_CA.">".L_WHOIS_TOPMOD); elseif ($CookieStatus == "m") echo("<font color=".COLOR_CM.">".L_WHOIS_MODER); else echo("<font color=".COLOR_CD.">".L_WHOIS_GUEST); echo("</font>");?></b>.<br /><?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
 <br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <hr />
 <!-- Color Input Box mod by Ciprian end -->
@@ -486,11 +490,11 @@ Beachte, dass mehr als ein Benutzername angegeben werden kann (z.B. "/invite Jac
 <P>
 <FONT SIZE="+1"><A NAME="changeroom"><B>Raumwechsel:</B></A></FONT>
 <P>
-Die Liste auf der Rechten Seite zeigt Chaträume und Benutzer an. Um den aktuellen Raum zu verlassen und in einen neuen zu wechslen, klicke einfach auf dessen Namen. Leere Räume erscheinen nicht in der Liste. Du kannst auch den <B>Befehl "/join #Raumname"</B> ohne Anführungszeichen eingeben.
+Die Liste auf der Rechten Seite zeigt Chaträume und Benutzer an. Um den aktuellen Raum zu verlassen und in einen neuen zu wechslen, klicke einfach auf dessen Namen. Leere Räume erscheinen nicht in der Liste. Du kannst auch den <B>Befehl "/join #Raum name"</B> ohne Anführungszeichen eingeben.
 <P>
-<I>Beispiel:</I> /join #RedRoom
+<I>Beispiel:</I> /join #Red Room
 <P>
-führt Dich zu RedRoom.
+führt Dich zu "Red Room".
 <?php
 if (C_VERSION == "2")
 {
@@ -498,7 +502,7 @@ if (C_VERSION == "2")
 	?>
 	 mit dem selben Befehl auch einen neuen Raum aufmachen. Du mußt angeben, welchen Typ dieser hat: 0 steht für privat, 1 für öffentlich (Vorgabewert).
 	<P>
-	<I>Beispiel:</I> /join 0 #MeinRaum
+	<I>Beispiel:</I> /join 0 #Mein Raum
 	<P>
 	eröffnet einen Privatraum mit dem Namen (nur wenn kein gleichlautender öffentlicher besteht) und wechselt Dich dorthin.
 	<P>
@@ -540,7 +544,28 @@ Um eine private Nachricht an einen Benutzer in Deinem Ruam zu schicken, tippen d
 <P>
 Die Nachricht erscheint bei Dir und Jack, aber nicht bei den anderen.
 <P>
-Beachte, dass durch klicken auf den Sendernamen einer Nachricht automatisch dieser Befehl ins Eingabefeld geschrieben wird.
+Wenn PM-Funktion aktiviert ist, so ist es auch möglich einen Benutzer in einem anderen Raum anzuflüstern, indem man den <B>Befehl "/wisp Benutzername Nachrichtentext"</B> ohne Anführungszeichen benutzt.
+<P>
+<?php
+if (C_PRIV_POPUP)
+{
+?>
+Klickt man auf den Nick eines Nachrichtenabsenders im Hauptfenster, so wird automatisch /to oder /wisp in das Nachrichteneingabefeld hinzugefügt.
+<?php
+}
+else
+{
+?>
+Klickt man auf den Nickname in der Benutzerliste, rechts, öffnet sich automatisch ein privates Pop-up worin Du eine Nachricht eingeben kannst und mit der ENTER-Taste abschickst. Die Antworten die Du dann erhälst, werden automatisch in einem neuen Fenster geöffnet.
+<?php
+}
+?>
+<P>
+Hinweis: Wenn PM Pop-ups aktiviert sind (in den Chateinstellungen und in deinem Profil), so wirst Du die Möglichkeit haben alle Offline-Nachrichten zu lesen, seitdem Du dich das letzte mal ins Chat eingeloggt oder seitdem Du dich auf "away" (Abwesend) gesetzt hast; alle neuen, an Dich adressierten, Offline-Nachrichten werden sich in einem Pop-up Fenster öffnen; Du kannst diese eins nach dem Anderen im selben Fenster antworten.<br />
+Diese PM Offline-Funktion steht nur registrierten Benutzern zur Verfügung.
+<P>
+<u><?php echo(L_COLOR_HEAD_SETTINGS); ?></u><br />
+<?php echo("a) ENABLE_PM = <b>".(C_ENABLE_PM == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />b) PRIV_POPUP = <b>".(C_PRIV_POPUP == 1 ? L_ENABLED : L_DISABLED)."</b>.<br />"); ?>
 <br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />
@@ -550,7 +575,11 @@ Beachte, dass durch klicken auf den Sendernamen einer Nachricht automatisch dies
 <P>
 Um zu beschreiben, was Du grade tust, kannst Du den <B>Befehl "/me Tat"</B> ohne Anführungszeichen eingeben.
 <P>
-<I>For example:</I> If Jack sends the message "/me is smoking a cigarette" the message frame will shown "<B>* Jack</B>" is smoking a cigarette".
+<I>Beispiel:</I> Wenn Jack die Nachricht sendet "/me trinkt Kaffee" wird die Nachricht Frame Show "<B>* Jack</B>" trinkt Kaffee".
+<P>
+Eine Variation des Befehls ist <b>/mr Befehl</b>, welches vor dem Benutzernamen einen Geschlechts-Titel hinzufügt.
+<P>
+<I>Beispiel:</I> Wenn Jack folgende Nachricht verschickt "/mr schaut TV" das Nachrichtenfenster zeigt dann: "<B>* <?php echo(L_HELP_MR); ?> Jack</B> schaut TV".
 <br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />

@@ -1,9 +1,10 @@
 <?php
-// File : romanian/localized.chat.php - plus version (20.10.2007 - rev.29)
+// File : romanian/localized.chat.php - plus version (18.06.2008 - rev.40)
 // Original translation started by Radu Swider <swidera@satline.ro>, first updated by Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro>
 // Corrected, finalized, diacritics addition and updated to Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
+// Do not use ' ; use ’ instead (utf-8 edit bug)
 
-// extra header for charset
+// extra header for Charset
 $Charset = "utf-8";
 
 // medium font size in pt.
@@ -23,11 +24,11 @@ define("L_CUR_3", "Utilizatori aflaţi în camere de chat");
 define("L_CUR_4", "utilizatori în camere private");
 define("L_CUR_5", "Utilizatori care monitorizează<br />această pagină (spectatori):");
 
-define("L_SET_1", "Introdu-ţi datele...");
+define("L_SET_1", "Introdu-ţi datele ...");
 define("L_SET_2", "Porecla");
 define("L_SET_3", "numărul de mesaje de afişat");
 define("L_SET_4", "timpul de actualizare");
-define("L_SET_5", "Selectează o cameră de chat...");
+define("L_SET_5", "Selectează o cameră de chat ...");
 define("L_SET_6", "Camere disponibile");
 define("L_SET_7", "Alegeţi ...");
 define("L_SET_8", "Camere publice create de utilizatori");
@@ -58,7 +59,7 @@ define("L_REG_4", "Editare profil");
 define("L_REG_5", "Ştergere utilizator");
 define("L_REG_6", "Înregistrare utilizator");
 define("L_REG_7", "numai dacă eşti deja înregistrat");
-define("L_REG_8", "Email-ul tău");
+define("L_REG_8", "Email");
 define("L_REG_9", "Ai fost înregistrat cu succes.");
 define("L_REG_10", "Înapoi");
 define("L_REG_11", "Modificare");
@@ -72,18 +73,20 @@ define("L_REG_18", "Ai fost dat afară din cameră de către un moderator al ace
 define("L_REG_18a", "Ai fost dat afară din cameră de către un moderator al acestui chat.<br />Motivul: %s");
 define("L_REG_19", "Chiar vrei să fii şters?");
 define("L_REG_20", "Da");
-define("L_REG_21", "Ai fost şters cu succes.");
+define("L_REG_21", "Contul a fost şters cu succes.");
 define("L_REG_22", "Nu");
 define("L_REG_25", "Închide");
 define("L_REG_30", "Prenumele");
 define("L_REG_31", "Numele");
 define("L_REG_32", "WEB");
-define("L_REG_33", "Arată e-mailul la comanda /whois");
+define("L_REG_33", "arată email-ul în profilul public");
 define("L_REG_34", "Editare profil");
 define("L_REG_35", "Administrare");
-define("L_REG_36", "Localitatea, ţara");
+define("L_REG_36", "Localitatea/Ţara");
 define("L_REG_37", "Câmpurile care conţin <span class=\"error\">*</span> <b>trebuiesc</b> completate.");
 define("L_REG_39", "Camera în care te aflai a fost curăţată de administrator.");
+define("L_REG_43", "Confidenţial");
+define("L_REG_44", "Cuplu/Pereche");
 define("L_REG_45", "Sex");
 define("L_REG_46", "Masculin");
 define("L_REG_47", "Feminin");
@@ -91,11 +94,24 @@ define("L_REG_48", "Nespecificat");
 define("L_REG_49", "Înregistrare obligatorie!");
 define("L_REG_50", "Înregistrare suspendată!");
 
-// e-mail validation stuff
+// email validation stuff
 define("L_EMAIL_VAL_1", "Datele tale pentru a te loga la chat");
 define("L_EMAIL_VAL_2", "Bun venit pe serverul nostru de chat!");
 define("L_EMAIL_VAL_Err", "Eroare internă, te rugăm să contactezi administratorul: <a href=\"mailto:%s\">%s</a>.");
-define("L_EMAIL_VAL_Done", "Parola a fost trimisă la adresa de e-mail aleasă de tine.");
+define("L_EMAIL_VAL_Done", "Parola a fost trimisă la adresa de email aleasă.<br />Parola poate fi modificată în pagina de editare a profilului.");
+define("L_EMAIL_VAL_PENDING_Done", "Datele de înregistrare au fost trimise pentru analiză.");
+define("L_EMAIL_VAL_PENDING_Done1", "Vei primi parola imediat ce contul va fi aprobat de către Administrator.");
+define("L_EMAIL_VAL_3", "Înregistrare în curs de verificare pentru %s");
+define("L_EMAIL_VAL_31", "Felicitări! Datele tale de înregistrare au fost revizuite şi aprobate!");
+define("L_EMAIL_VAL_32", "Acestea sunt datele de înregistrare pentru %s de la adresa %s:"); //chat name at chaturl
+define("L_EMAIL_VAL_4", "Tocmai ţi-ai înregistrat acest cont pentru %s de la adresa %s:"); //chat name at chaturl
+define("L_EMAIL_VAL_41", "Tocmai ţi-ai schimbat anumite date importante pentru %s de la adresa %s (cont afectat: %s)."); //chat name at chaturl (username)
+define("L_EMAIL_VAL_5", "Detalii ale contului tău - %s - pentru %s"); //username
+define("L_EMAIL_VAL_51", "Detalii actualizate ale contului tău - %s - pentru %s"); //username
+define("L_EMAIL_VAL_6", "Înregistrat la data de: %s");
+define("L_EMAIL_VAL_61", "Actualizat la data de: %s");
+define("L_EMAIL_VAL_7", "Mai jos sunt infromaţiile actualizate ale contului %s:"); //username
+define("L_EMAIL_VAL_8", "Salvează acest email pentru consultarea ulterioară.\nAsigură-l şi nu divulga nimănui datele din acest email.\nMulţumim pentru înregistrare! Distracţie plăcută!");
 
 // admin stuff
 define("L_ADM_1", "%s nu mai este moderator al acestei camere.");
@@ -105,18 +121,18 @@ define("L_ADM_2", "Nu mai eşti înregistrat.");
 define("L_ERR_USR_1", "Acest nume este folosit deja. Alege-ţi altul.");
 define("L_ERR_USR_2", "Trebuie să-ţi alegi un nume.");
 define("L_ERR_USR_3", "Acest nume este deja înregistrat.<br />Introdu parola sau alege o altă poreclă.");
-define("L_ERR_USR_4", "Ai scris o parolă incorectă.");
-define("L_ERR_USR_5", "Trebuie să scrii numele.");
-define("L_ERR_USR_6", "Trebuie să scrii parola.");
-define("L_ERR_USR_7", "Trebuie să scrii adresa ta de e-mail.");
-define("L_ERR_USR_8", "Trebuie să scrii o adresa de e-mail corectă.");
+define("L_ERR_USR_4", "Ai ales o parolă incorectă.");
+define("L_ERR_USR_5", "Trebuie să alegi numele.");
+define("L_ERR_USR_6", "Trebuie să alegi parola.");
+define("L_ERR_USR_7", "Trebuie să alegi adresa ta de email.");
+define("L_ERR_USR_8", "Trebuie să introduci o adresa de email corectă.");
 define("L_ERR_USR_9", "Acest nume este deja folosit.");
 define("L_ERR_USR_10", "Nume sau parolă incorecte.");
 define("L_ERR_USR_11", "Trebuie să fii administrator.");
 define("L_ERR_USR_12", "Eşti administrator, nu poţi fi şters.");
 define("L_ERR_USR_13", "Pentru a crea o cameră trebuie să fii înregistrat.");
 define("L_ERR_USR_14", "Trebuie să fii înregistrat înainte de a intra pe chat.");
-define("L_ERR_USR_15", "Trebuie să scrii numele complet.");
+define("L_ERR_USR_15", "Trebuie să introduci numele complet.");
 define("L_ERR_USR_16", "Numai aceste extra-caractere sunt permise:\\n".$REG_CHARS_ALLOWED."\\nSpaţii, virgule sau backslash-uri (\\) nu sunt permise.\\nVerifică sintaxa!");
 define("L_ERR_USR_16a", "Numai aceste extra-caractere sunt permise:<br />".$REG_CHARS_ALLOWED."<br />Spaţii, virgule sau backslash-uri (\\) nu sunt permise. Verifică sintaxa!");
 define("L_ERR_USR_17", "Camera aleasă nu există sau nu ai dreptul să o creezi.");
@@ -185,15 +201,16 @@ define("L_NO_REG_USER", "Trebuie să fii înregistrat pentru a folosi această c
 define("L_HELP_TIT_1", "Emoţii");
 define("L_HELP_TIT_2", "Formatarea textului pentru mesaje");
 define("L_HELP_FMT_1", "Textul poate fi îngroşat (bold), înclinat (italic) sau subliniat (underline), prin simpla sa încadrare între cuvintele cheie &lt;B&gt; &lt;/B&gt;, &lt;I&gt; &lt;/I&gt; sau &lt;U&gt; &lt;/U&gt;<br />Exemplu, &lt;B&gt;acest text&lt;/B&gt; va produce <B>acest text</B>.");
-define("L_HELP_FMT_2", "Pentru a crea un hyperlink (pentru e-mail sau pagina www) în mesajul tău, tastează pur şi simplu adresa corespunzătoare. Hyperlink-ul va fi creat automat.");
+define("L_HELP_FMT_2", "Pentru a crea un hyperlink (pentru email sau pagina www) în mesajul tău, tastează pur şi simplu adresa corespunzătoare. Hyperlink-ul va fi creat automat.");
 define("L_HELP_TIT_3", "Comenzi");
 define("L_HELP_NOTE", "Toate comenzile se vor folosi obligatoriu în limba engleză!");
-define("L_HELP_USR", "utilizator");
 define("L_HELP_MSG", "mesaj");
 define("L_HELP_MSGS", "mesaje");
 define("L_HELP_ROOM", "cameră");
 define("L_HELP_BUZZ", "~numesunet");
 define("L_HELP_REASON", "motivul");
+define("L_HELP_MR", "Domnul");
+define("L_HELP_MS", "Doamna");
 define("L_HELP_CMD_0", "{} obligatoriu, [] opţional.");
 define("L_HELP_CMD_1a", "Stabileşte câte mesaje să fie arătate (minim 5).");
 define("L_HELP_CMD_1b", "Reîncarcă fereastra cu mesaje şi afişează ultimele n mesaje (implicit sunt minim 5).");
@@ -226,19 +243,19 @@ define("L_HELP_CMD_26", "Versiunea mai dezvoltată a comenzii /dice.<br />Utiliz
 define("L_HELP_CMD_27", "Evidenţiază mesajele trimise de un anumit utilizator, pentru a-l distinge mai uşor în cadrul conversaţiilor.<br />Utilizare: /high {utilizator} sau apasă pe pătrăţelul alb/galben cu litera H din dreapta numelui, în lista de camere/utilizatori.");
 define("L_HELP_CMD_28", "Permite postarea <b>unei imagini</b> în loc de mesaj.<br />Utilizare: Introduceţi link-ul complet! (ex. <b>/img http://ciprianmp.com/images/CIPRIAN.jpg</b>). Extensii recunoscute şi acceptate: .jpg .bmp .gif. Atenţie la literele mari şi mici - contează.");
 define("L_HELP_CMD_29", "Cea de a doua comandă permite administratorului sau moderatorului(ilor) din camera curentă să destituie un alt moderator din cameră la statusul normal de utilizator înregistrat.<br />Opţiunea * va destitui respectivul utilizator din toate camerele.");
-define("L_HELP_CMD_30", "Cea de a doua comandă face acelaşi lucru ca şi /me, numai că va arata şi genul corespunzător<br />Exemplu * Mr Ciprian urmăreşte ştirile ProTV sau Mrs Dana este super fericită.");
+define("L_HELP_CMD_30", "Cea de a doua comandă face acelaşi lucru ca şi /me, numai că va arata şi genul corespunzător<br />Exemplu * ".L_HELP_MR." Ciprian urmăreşte ştirile ProTV sau * ".L_HELP_MS." Dana este super fericită.");
 define("L_HELP_CMD_31", "Schimbă ordinea sortării utilizatorilor în liste: după momentul logării sau alfabetic.");
 define("L_HELP_CMD_32", "Aceasta este a treia versiune de joc de zaruri (roleplaying).<br />Utilizare: /d{n1}[tn2] sau /d{n1};<br />n1 poate avea orice valoare <b>între 1 şi 100</b> (reprezintă numărul de puncte ale fiecărui zar).<br />n2 poate avea orice valoare <b>între 1 şi %s</b> (reprezintă numărul de zaruri aruncate).");
 define("L_HELP_CMD_33", "Schimbă dimensiunea textului mesajelor pe chat (valori permise pentru n: <b>între 7 şi 15</b>); comanda /size resetează dimensiunea fontului la valoarea implicită (<b>".$FontSize."</b>).");
 define("L_HELP_ETIQ_1", "Eticheta Chat-ului");
 define("L_HELP_ETIQ_2", "Site-ul nostru doreşte să păstreze o ambianţă plăcută şi prietenoasă, aşa că vă rugăm să aderaţi la următoarele reguli. Pentru nerespectarea acestor reguli, unul dintre moderatori ar putea să vă elimine din chat.<br /><br />Mulţumim,");
 define("L_HELP_ETIQ_3", "Regulile Etichetei acestui Chat");
-define("L_HELP_ETIQ_4", "Nu faceţi \"spam\" pe chat postând non-sensuri sau litere alandala.</li>
+define("L_HELP_ETIQ_4", "<li>Nu faceţi \"spam\" pe chat postând non-sensuri sau litere alandala.</li>
 <li>Nu folosiţi caractere aLtErnAnte.</li>
 <li>Folosiţi MAJUSCULELE la minimum, întrucât se consideră că ţipaţi.</li>
 <li>Ţineţi cont că utilizatorii noştri pot fi de oriunde în lume, şi, mai mult ca sigur, veţi întâlni persoane cu concepţii/credinţe/idei diferite. Vă rugăm să fiţi politicos şi respectuos cu aceste persoane.</li>
 <li>Nu adresaţi insulte altor utilizatori. De fapt, este interzis să folosiţi injurii şi insulte.</li>
-<li>Nu vă adresaţi celorlalţi utilizatori pe numele lor reale, chiar dacă îi cunoaşteţi personal. Mulţi utilizatori nu apreciază folosirea identităţii reale pe chat-uri. Folosiţi în schimb poreclele acestora (nicknames).");
+<li>Nu vă adresaţi celorlalţi utilizatori pe numele lor reale, chiar dacă îi cunoaşteţi personal. Mulţi utilizatori nu apreciază folosirea identităţii reale pe chat-uri. Folosiţi în schimb poreclele acestora (nicknames).</li>");
 
 // messages frame
 define("L_NO_MSG", "Nu este nici un mesaj ...");
@@ -264,17 +281,22 @@ define("L_IGNOR_NON", "Nici un utilizator ignorat");
 
 // whois popup
 define("L_WHOIS_ADMIN", "Administrator");
+define("L_WHOIS_OWNER", "Proprietar");
 define("L_WHOIS_TOPMOD", "Top Moderator");
 define("L_WHOIS_MODER", "Moderator");
+define("L_WHOIS_MODERS", "Moderatori");
+define("L_WHOIS_OTHERS", "Ceilalţi utilizatori");
 define("L_WHOIS_USER", "Utilizator");
 define("L_WHOIS_GUEST", "Vizitator");
 define("L_WHOIS_REG", "Înregistrat");
+define("L_WHOIS_BOT", "RoBoţel");
 
 // Notification messages of user entrance/exit
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", "%s a intrat în cameră" . L_ENTER_SND);
-else define("L_ENTER_ROM", "%s a intrat în cameră");
-define("L_ENTER_ROM_NOSOUND", "%s a intrat în cameră");
+define("ENTER_ROM", "%s a intrat în cameră");
 define("L_EXIT_ROM", "%s a ieşit din cameră");
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+else define("L_ENTER_ROM", ENTER_ROM);
+define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
 // Clean mod/fix by Ciprian
 define("L_BOOT_ROM", "%s a fost eliminat automat din cameră pentru inactivitate");
@@ -285,12 +307,15 @@ define("L_AWAY", "%s nu mai e lângă calculator...");
 define("L_BACK", "%s s-a întors!");
 
 // Quick Menu mod
-define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***** Meniu Rapid *****");	//&nbsp; înseamnă un spaţiu. numărul acestora ajuta la centrarea titlului listei de comenzi în căsuţă.
+define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***** Meniu Rapid *****");	//&nbsp; înseamnă un spaţiu. numărul acestora ajuta la centrarea titlului listei de comenzi în căsuţă.
 
 // Topic Banner mod
 define("L_TOPIC", "a setat TOPIC-ul:");
 define("L_TOPIC_RESET", "a resetat TOPIC-ul");
 define("L_HELP_TOP", "minim 2 cuvinte ca TOPIC (temă de discuţii)");
+define("L_BANNER_WELCOME", "Bun venit în camera %s!");
+define("L_BANNER_TOPIC", "Subiect:");
+define("L_DEFAULT_TOPIC_1", "Acesta este Subiectul-ul implicit. Pentru a-l schimba, editează localization/_owner/owner.php!");
 
 // Img cmd mod
 define("L_PIC", "Imagine trimisă de");
@@ -298,14 +323,14 @@ define("L_PIC_RESIZED", "Redimensionată la");
 define("L_HELP_IMG", "calea/link-ul către imaginea de postat");
 
 // Demote command by Ciprian
-define("L_IS_NO_MODERATOR", "%s nu este moderator!");
 define("L_IS_NO_MOD_ALL", "%s nu mai este moderator în nici una dintre camerele acestui chat.");
+define("L_IS_NO_MODERATOR", "%s nu este moderator!");
 define("L_ERR_IS_ADMIN", "%s este administrator!\\nNu ai dreptul sa-i modifici permisiunile.");
 
 // Info mod by Ciprian - displays a list of all the features & mods, including Bot's name, on the welcome page
-define("INFO_CMDS", "<span style=\"color:orange\">Extra Comenzi instalate:</span>".CMDS.".");
-define("INFO_MODS", "<span style=\"color:orange\">Extra Opţiuni instalate:</span>".MODS.".");
-define("INFO_BOT", "<span style=\"color:orange\">RoBoţelul nostru este: </span><u>".C_BOT_NAME."</u>.");
+define("INFO_CMDS", "Extra Comenzi instalate:");
+define("INFO_MODS", "Extra Opţiuni instalate:");
+define("INFO_BOT", "RoBoţelul nostru este:");
 
 // Profile mod
 define("L_PRO_1", "Limbi folosite");
@@ -321,10 +346,12 @@ define("L_ERR_AV", "Adresa invalidă sau host-ul nu este online.");
 define("L_TITLE_AV", "Avatarul ales: ");
 define("L_CHG_AV", "Apasă \"".L_REG_16."\" în formularul Profil<br />pentru a-ţi salva Avatarul.");
 define("L_SEL_NEW_AV", "Selectează un nou Avatar");
-define("L_EX_AV", "(exemplu: http://mysite/images/mypic.gif):");
+define("L_EX_AV", "exemplu");
 define("L_URL_AV", "Adresa: ");
 define("L_EXPL_AV", "(Introdu adresa şi apasă Enter pentru a vedea poza)");
 define("L_CANCEL", "Renunţă");
+define("L_AVA_REG", "Trebuie să fii înregistrat pentru\\na-ţi putea schimba avatar-ul");
+define("L_SEL_NEW_AV_CONFIRM", "Acest formular nu a fost salvat.\\nSchimbând avatar-ul, datele introduse\\nîn această sesiune se vor pierde!\\n\\nDoriţi să continuaţi?");
 
 // PlusBot bot mod (based on Alice bot)
 define("BOT_TIPS", "Sfat: Bot-ul este activ public în această camera. Pentru a-i vorbi, scrie <b>hello ".C_BOT_NAME."</b>. Pentru a-l opri, scrie <b>bye ".C_BOT_NAME."</b>. (privat: /to <b>".C_BOT_NAME."</b> Mesaj)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
@@ -341,14 +368,12 @@ define("DICE2_WRONG", "A doua valoare trebuie să fie cuprinsă între 1 şi ".M
 define("DICE2_WRONG1", "Prima valoare trebuie să fie cuprinsă între 1 şi ".MAX_DICES.".\\n(ex. /".MAX_DICES."d sau /".MAX_DICES."d".MAX_ROLLS.").");
 define("DICE3_WRONG", "A doua valoare trebuie să fie cuprinsă între 1 şi ".MAX_ROLLS.".\\nNu o specifica pentru a arunca cu toate ".MAX_ROLLS." zarurile\\n(ex. /d50 or /d100t".MAX_ROLLS.").");
 
-// Log mod by Ciprian
-define("L_ARCHIVE", "Deschide Arhiva");
-
 // Private Message Popup mod by Ciprian
-define("L_REG_POPUP", "Foloseşte popup-uri la mesaje private");
+define("L_REG_POPUP", "foloseşte popup-uri la mesaje private");
+define("L_REG_POPUP_NOTE", "Trebuie dezactivată blocarea popup-urilor!");
 define("L_PRIV_POST_MSG", "Trimite un mesaj privat!");
 define("L_PRIV_MSG", "Nou mesaj privat primit!");
-define("L_PRIV_MSGS", "mesaje private noi primite!");
+define("L_PRIV_MSGS", "%s noi mesaje private primite!");
 define("L_PRIV_MSGSa", "Acestea sunt primele 10 mesaje!<br />Apasă link-ul de jos pentru a vedea restul.");
 define("L_PRIV_MSG1", "De la:");
 define("L_PRIV_MSG2", "Camera:");
@@ -356,7 +381,7 @@ define("L_PRIV_MSG3", "Pentru:");
 define("L_PRIV_MSG4", "Mesaj:");
 define("L_PRIV_MSG5", "Trimis:");
 define("L_PRIV_REPLY", "Răspunde");
-define("L_PRIV_READ", "Apasă butonul Close pentru a marca mesajele ca citite!");
+define("L_PRIV_READ", "Apasă butonul ’".L_REG_25."’ pentru a marca mesajele ca citite!");
 define("L_PRIV_POPUP", "Poţi dezactiva/reactiva aceste popup-uri<br />editându-ţi");
 define("L_PRIV_POPUP1", "Profilul</a> (numai dacă eşti înregistrat)");
 define("L_NOT_ONLINE", "%s nu este online acum.");
@@ -367,13 +392,23 @@ define("PM_DISABLED_ERROR", "Mesageria privată este\\ndezactivată în acest ch
 define("L_NEXT_PAGE", "Pagina următoare");
 define("L_NEXT_READ", "Mai sunt de citit %s"); // message / 10 messages
 define("L_ROOM_ALL", "Toate camerele");
+define("L_PRIV_NO_MSGS", "Nici un mesaj privat primit");
+define("L_PRIV_READ_MSG", "1 mesaj privat primit");
+define("L_PRIV_READ_MSGS", "%s mesaje private primite");
+define("L_PRIV_MSGS_NEW", "Nou");
+define("L_PRIV_MSGS_READ", "Citit");
+define("L_PRIV_MSG6", "Status:");
+define("L_PRIV_RELOAD", "Reîncarcă pagina");
+define("L_PRIV_MARK_ALL", "Marchează toate mesajele ca Citite");
+define("L_PRIV_MARK_SEL", "Marchează mesajele selectate ca Citite");
+define("L_PRIV_REMOVE", "Şterge mesajele selectate");
 
 // Color Input Box mod by Ciprian
-define("L_COLOR_HEAD_COLF_SETTINGS", "".COLOR_FILTERS == 1 ? "Activat" : "Dezactivat"."");
-define("L_COLOR_HEAD_ALLG_SETTINGS", "".COLOR_ALLOW_GUESTS == 1 ? "Activat" : "Dezactivat"."");
-define("L_COLOR_HEAD_SETTINGS", "<u>Setările curente ale serverului</u>:<br />a) COLOR_FILTERS = <b>".L_COLOR_HEAD_COLF_SETTINGS."</b>;<br />b) COLOR_ALLOW_GUESTS = <b>".L_COLOR_HEAD_ALLG_SETTINGS."</b>.");
-define("L_COLOR_HEAD_SETTINGSa", "<u>Culori implicite</u>: Administrator = <b><SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN></b>, Moderatori = <b><SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN></b>, Ceilalţi utilizatori = <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>.");
-define("L_COLOR_HEAD_SETTINGSb", "<u>Culoarea implicită</u>: <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>.");
+define("L_ENABLED", "Activat");
+define("L_DISABLED", "Dezactivat");
+define("L_COLOR_HEAD_SETTINGS", "Setările curente ale serverului:");
+define("L_COLOR_HEAD_SETTINGSa", "Culorile implicite:");
+define("L_COLOR_HEAD_SETTINGSb", "Culoarea implicită:");
 define("L_COL_HELP_TITLE", "Spectrul de Culori");
 define("L_COL_HELP_SUB1", "Folosire:");
 define("L_COL_HELP_P1", "Poţi să-ţi defineşti culoarea ta favorită editându-ţi profilul (aceeaşi cu culoarea numelui). Vei putea totuşi să foloseşti şi celelalte culori. Pentru a reveni la culoarea favorită după ce ai folosit una oarecare din listă, va trebui să selectezi măcar o dată culoarea implicită (Null) - este prima din lista de culori.");
@@ -385,6 +420,10 @@ define("L_COL_HELP_P3", "<u>Culori în funcţie de permisiunile utilizatorului</
 define("L_COL_HELP_P3a", "Culoarea implicită este <u><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></u>.<br /><br /><u>Informaţii tehnice</u>: Aceste culori au fost definite de către administrator în admin panel.<br />Dacă ceva nu e în regulă sau nu vă plac culorile implicite, <b>administratorul</b> este primul pe care ar trebui să-l contactaţi şi nu pe ceilalţi utilizatori de pe chat. :-)");
 define("L_COL_HELP_USER_STATUS", "Statutul tău");
 define("L_COL_TUT", "Folosirea culorilor în textul mesajelor");
+define("L_NULL", "Nul");
+define("L_NULL_F", "Nulă");
+define("L_ROOM_COLOR", "culoarea camerei");
+define("L_PRO_COLOR", "culoarea profilului");
 
 // Alert messages on errors for Color Input Box mod by Ciprian
 define("COL_ERROR_BOX_MODA", "Numai administratorul poate folosi culoarea ".COLOR_CA."!\\n\\nCuloarea a fost resetată la ".COLOR_CM."!\\n\\nAlege orice altă culoare!");
@@ -392,9 +431,10 @@ define("COL_ERROR_BOX_USRA", "Numai administratorul poate folosi culoarea ".COLO
 define("COL_ERROR_BOX_USRM", "Trebuie să fii moderator pentru a folosi culoarea ".COLOR_CM."!\\n\\nNu încerca să foloseşti ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." sau ".COLOR_CM1."\\nAcestea sunt rezervate altor useri!\\n\\nCuloarea a fost resetată la ".COLOR_CD."!\\n\\nAlege orice altă culoare!");
 
 //Welcome message to be displayed on login
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", "Bun venit pe chat-ul nostru! Vă rugăm să nu folosiţi expresii nepoliticoase, <I>pentru o ambianţă cât mai plăcută</I>." . L_ENTER_SND);
-else define("WELCOME_MSG", "Bun venit pe chat-ul nostru! Vă rugăm să nu folosiţi expresii nepoliticoase, <I>pentru o ambianţă cât mai plăcută</I>.");
-define("WELCOME_MSG_NOSOUND", "Bun venit pe chat-ul nostru! Vă rugăm să nu folosiţi expresii nepoliticoase, <I>pentru o ambianţă cât mai plăcută</I>.");
+define("L_WELCOME_MSG", "Bun venit pe chat-ul nostru! Vă rugăm să nu folosiţi expresii nepoliticoase, <I>pentru o ambianţă cât mai plăcută</I>.");
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_ENTER_SND);
+else define("WELCOME_MSG", L_WELCOME_MSG);
+define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
 // Send alert to users in chat when important settings are changed in admin panel
 define("L_RELOAD_CHAT", "Setările serverului de chat tocmai au fost modificate. Pentru o bună funcţionare, trebuie să reîncărcaţi chat-ul (apăsaţi tasta F5 sau Ieşire şi reintraţi pe chat).");
@@ -414,14 +454,14 @@ define("L_SUN", "Duminică");
 // Password reset form by Ciprian
 define("L_PASS_0", "Formular pentru resetarea parolei");
 define("L_PASS_1", "Întrebarea secretă");
-define("L_PASS_2", "Care a fost prima ta maşină?"); // Don't change this question! Just translate it!
+define("L_PASS_2", "Ce marcă a fost prima ta maşină?"); // Don't change this question! Just translate it!
 define("L_PASS_3", "Cum se numea primul tău animal?"); // Don't change this question! Just translate it!
 define("L_PASS_4", "Care este băutura ta preferată?"); // Don't change this question! Just translate it!
 define("L_PASS_5", "Care este data ta de naştere?"); // Don't change this question! Just translate it!
 define("L_PASS_6", "Răspunsul corect");
 define("L_PASS_7", "Resetează parola");
 define("L_PASS_8", "Parola a fost resetată cu succes.");
-define("L_PASS_9", "Noua ta parolă pentru a intra pe chat.");
+define("L_PASS_9", "Noua ta parolă pentru a intra pe chat");
 define("L_PASS_11", "Bine ai revenit pe serverul nostru de chat");
 define("L_PASS_12", "Alegeţi întrebarea ...");
 define("L_ERR_PASS_1", "Poreclă greşită. Alege-o pe-a ta!");
@@ -437,6 +477,7 @@ define("L_ADM_4", "%s nu mai este administrator al acestui chat.");
 
 // Open Schedule by Ciprian
 define("L_DAILY", "Zilnic");
+define("L_ALWAYS", "permanent");
 define("L_OPEN", "Deschis");
 define("L_CLOSED", "Închis");
 define("L_OPEN_PUB", "DESCHIS PUBLICULUI");
@@ -463,8 +504,14 @@ define("L_LINKS_13", "pentru a trimite acest buzz"); // can also be translated a
 define("L_LINKS_14", "pentru a folosi această comandă");
 define("L_LINKS_15", "pentru a deschide");
 define("L_LINKS_16", "Galerie Zâmbete");
+define("L_LINKS_17", "pentru a sorta crescător");
+define("L_LINKS_18", "pentru a sorta descrescător");
+define("L_LINKS_19", "pentru a seta/modifica Gravatar-ul");
 define("L_SWITCH", "Schimbă în");
-define("L_SELECTED", "selectată");
+define("L_SELECTED", "selectat");
+define("L_SELECTED_F", "selectată");
+define("L_NOT_SELECTED", "neselectat");
+define("L_NOT_SELECTED_F", "neselectată");
 define("L_EMAIL_1", "pentru a trimite email");
 define("L_FULLSIZE_PIC", "pentru a deschide poza în mărime originală");
 define("L_AUTHOR", "autorul");
@@ -472,12 +519,8 @@ define("L_DEVELOPER", "dezvoltatorul acestui chat");
 define("L_OWNER", "proprietarul acestui chat");
 define("L_TRANSLATOR", "translatorul");
 
-// Banner topics - the topics are not multi-language!
-define("L_BANNER_WELCOME", "Bun venit în camera %s!");
-define("L_BANNER_TOPIC", "Subiect:");
-
 // Counter on login
-define("L_VISITOR_REPORT", "... vizitatori de la %s");
+define("L_VISITOR_REPORT", "... vizitatori de la data de %s");
 
 // Status bar messages
 define("L_JOIN_ROOM", "Intră în cameră");
@@ -487,17 +530,25 @@ define("L_WHSP", "Şoaptă");
 define("L_SEND_WHSP", "Şopteşte");
 define("L_SEND_PM_1", "Trimite mesaj privat");
 define("L_SEND_PM_2", "Trimite un mesaj privat");
+define("L_HIGHLIGHT", "Evidenţiază/Anulează Evidenţierea");
+define("L_HIGHLIGHT_SB", "Evidenţiază/Anulează Evidenţierea mesajelor acestui utilizator");
 
 //Lurking frame popup
 define("L_LURKING_2", "Pagina de monitorizare");
 define("L_LURKING_3", "monitorizează");
 define("L_LURKING_4", "intrat la");
+define("L_LURKING_5", "Necunoscut");
 
 // Extra options by Ciprian
 define("L_EXTRA_OPT", "Extra Opţiuni");
+define("L_ARCHIVE", "Deschide Arhiva");
 define("L_SOUNDFIX_IE_1", "Sound fix pentru IE");
 define("L_SOUNDFIX_IE_2", "Descarcă un sound fix pentru IE");
 define("L_LURKING_1", "Deschide pagina de monitorizare");
+define("L_REG_BRB", "revin imediat (trebuie să mă înregistrez mai întâi)");
+define("L_DEL_BYE", "nu mă mai aşteptaţi...");
+define("L_EXTRA_PRIV1", "Citeşte PM-uri");
+define("L_EXTRA_PRIV2", "PM-uri Noi");
 
 // Months for Open Schedule by Ciprian
 define("L_JAN", "Ianuarie");
@@ -514,30 +565,73 @@ define("L_NOV", "Noiembrie");
 define("L_DEC", "Decembrie");
 
 // Localized date format - read the parameters here: http://www.php.net/manual/en/function.strftime.php
-setlocale(LC_TIME, "ro_RO.UTF-8", "ro_RO.UTF-8@euro", "Romanian.UTF-8", "rou_rou.UTF-8", "rou.UTF-8");
-define("L_SHORT_DATE", "%d.%m.%Y"); //
+if (eregi("win", PHP_OS)) {
+setlocale(LC_ALL, "ROU_ROU.UTF-8", "ROU_ROU", "romanian.UTF-8", "romanian"); // For Windows servers
+} else {
+setlocale(LC_ALL, "ro_RO.UTF-8@euro", "ro_RO.UTF-8", "rou.UTF-8", "rou_rou.UTF-8"); // For Unix/FreeBSD servers
+}
+define("ISO_DEFAULT", "iso-8859-2");
+define("WIN_DEFAULT", "windows-1250");
+define("L_SHORT_DATE", "%d.%m.%Y");
 define("L_LONG_DATE", "%A, %d %B %Y"); //Change this to your local desired format (keep the short form)
 define("L_SHORT_DATETIME", "%d.%m.%Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
 define("L_LONG_DATETIME", "%A, %d %B %Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
 
 // Chat Activity displayed on remote web pages
-define("LOGIN_LINK", "<A HREF='".$CHAT_URL."?L=".$L."' TITLE='".sprintf(L_CLICK,L_LINKS_12)."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_12).".'; return true;\" TARGET=_blank>");
-define("NB_USERS_IN","utilizatori sunt ".LOGIN_LINK." pe chat</A></td></tr>");
-define("USERS_LOGIN","1 utilizator este ".LOGIN_LINK." pe chat</A></td></tr>");
-define("NO_USER","Nimeni nu este ".LOGIN_LINK." pe chat</A></td></tr>");
+define("LOGIN_LINK", "<A HREF='".C_CHAT_URL."?L=".$L."' TITLE='".sprintf(L_CLICK,L_LINKS_12)."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_12).".'; return true;\" TARGET=_blank>");
+define("NB_USERS_IN","utilizatori sunt ".LOGIN_LINK."pe chat</A>");
+define("USERS_LOGIN","1 utilizator este ".LOGIN_LINK."pe chat</A>");
+define("NO_USER","Nimeni nu este ".LOGIN_LINK."pe chat</A>");
+define("L_PRIV_REPLY_LOGIN", "Loghează-te la chat pentru a ".LOGIN_LINK."răspunde</A> oricărui PM necitit de mai sus");
 
 // Language names
 define("L_LANG_AR", "Spaniolă Argentiniană");
-define("L_LANG_NL", "Olandeză");
+define("L_LANG_BG", "Bulgară - Chirilică");
+define("L_LANG_BR", "Portugheză Braziliană");
+define("L_LANG_CZ", "Cehă");
+define("L_LANG_DA", "Daneză");
+define("L_LANG_DE", "Germană");
 define("L_LANG_EN", "Engleză");
 define("L_LANG_ENUK", "Engleză Britanică");
 define("L_LANG_ENUS", "Engleză Americană");
-define("L_LANG_FR", "Franceză");
-define("L_LANG_DE", "Germană");
-define("L_LANG_IT", "Italiană");
-define("L_LANG_RO", "Română");
 define("L_LANG_ES", "Spaniolă");
+define("L_LANG_FR", "Franceză");
+define("L_LANG_GR", "Greacă");
+define("L_LANG_HI", "Indiană");
+define("L_LANG_HU", "Maghiară");
+define("L_LANG_IT", "Italiană");
+define("L_LANG_KA", "Georgiană");
+define("L_LANG_NL", "Olandeză");
+define("L_LANG_RO", "Română");
+define("L_LANG_SK", "Slovacă");
+define("L_LANG_SRC", "Sârbă - Chirilică");
+define("L_LANG_SRL", "Sârbă - Latină");
 define("L_LANG_SV", "Suedeză");
 define("L_LANG_TR", "Turcă");
+define("L_LANG_UR", "Urdu - Pakistaneză");
 define("L_LANG_VI", "Vietnameză");
+
+// Skins preview page
+define("L_SKINS_TITLE", "Previzualizare Stiluri");
+define("L_SKINS_TITLE1", "Previzualizare Stiluri %s la %s"); // Skins 1 to 4 preview
+define("L_SKINS_AV", "Stiluri disponibile");
+define("L_SKINS_NONAV", "Nu există stiluri definite în directorul \"skins\"");
+
+// Swap image titles by Ciprian
+define("L_GEN_ICON", "Icon-ul genului (m/f)");
+
+// Ghost mode by Ciprian
+define("L_GHOST", "Fantomă");
+define("L_SUPER_GHOST", "Super Fantomă");
+define("L_NO_GHOST", "Vizibil");
+
+// Sorting options by Ciprian
+define("L_ASC", "Crescător");
+define("L_DESC", "Descrescător");
+
+// Returning visitors counter on profiles by Ciprian
+define("L_LOGIN_COUNT", "Total vizite");
+
+// Gravatar from email mod by Ciprian
+define("L_GRAV_USE", "utilizează Gravatar-ul");
 ?>

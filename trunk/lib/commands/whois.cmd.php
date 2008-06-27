@@ -1,10 +1,22 @@
 <?php
-
-function room_in($what, $in)
+// Added for php4 support of mb functions
+if (!function_exists('mb_convert_case'))
 {
+	function mb_convert_case($str,$type,$Charset)
+	{
+		if (eregi("TITLE",$type)) $str = ucwords($str);
+		elseif (eregi("LOWER",$type)) $str = strtolower($str);
+		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+		return $str;
+	}
+};
+
+function room_in($what, $in, $Charset)
+{
+	$in = explode(",",$in);
 	for (reset($in); $room_name=current($in); next($in))
 	{
-		if (strcasecmp($what, $room_name) == 0) return true;
+		if (strcasecmp(mb_convert_case($what,MB_CASE_LOWER,$Charset), mb_convert_case($room_name,MB_CASE_LOWER,$Charset)) == 0) return true;
 	}
 	return false;
 }
@@ -18,7 +30,7 @@ else
 {
 	$IsCommand = true;
 
-	$DbLink->query("SELECT perms,rooms FROM ".C_REG_TBL." WHERE username='".$UU."' LIMIT 1");
+	$DbLink->query("SELECT perms,rooms FROM ".C_REG_TBL." WHERE username='".$U."' LIMIT 1");
 	if ($DbLink->num_rows() > 0)
 	{
 		list($perms,$rooms) = $DbLink->next_record();
@@ -32,7 +44,7 @@ else
 	{
 		$power = "all";
 	}
-	elseif (($status == "m" && room_in(stripslashes($R),$DefaultChatRooms)) || (($perms == "moderator") && room_in("*", $rooms)))
+	elseif ($status == "m" && (room_in(stripslashes($R), $DefaultChatRooms, $Charset) || room_in("*", $rooms, $Charset) || room_in(stripslashes($R), $rooms, $Charset)))
 	{
 		$power = "medium";
 	}
@@ -71,7 +83,7 @@ else
 			"<SCRIPT TYPE=\"text/javascript\" LANGUAGE=\"JavaScript\">",
 			"<!--",
 			"// Lauch the whois popup",
-			"window.open(\"whois_popup.php?L=$L&power=$power&U=".urlencode($UU)."&R=".urlencode(stripslashes($R))."\",\"$win_name\",\"width=500,height=500,resizable=yes,scrollbars=yes\");",
+			"window.open(\"whois_popup.php?L=$L&User=".urlencode($UU)."&R=".urlencode(stripslashes($R))."\",\"$win_name\",\"width=500,height=500,resizable=yes,scrollbars=yes\");",
 			"// -->",
 			"</SCRIPT>"
 		);

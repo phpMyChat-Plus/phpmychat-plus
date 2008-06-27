@@ -16,28 +16,27 @@
 //$ChatPath = "plus/";	//(most often) use it if the output page is in a path like this: http://www.website.com/ (root, /public_html/)
 $ChatPath = "";	//use it if the output page is in the same directory with /plus/
 
+// Added for php4 support of mb functions
+if (!function_exists('mb_convert_case'))
+{
+	function mb_convert_case($str,$type,$Charset)
+	{
+		if (eregi("TITLE",$type)) $str = ucwords($str);
+		elseif (eregi("LOWER",$type)) $str = strtolower($str);
+		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+		return $str;
+	};
+};
+
 require("./${ChatPath}/lib/remotelogin.lib.php");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
-	<SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
-	<!--
+<SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
+<!--
 window.name="login";
-<?php
-function utf8_substr($str,$start)
-{
-   preg_match_all("/./su", $str, $ar);
-
-   if(func_num_args() >= 3) {
-       $end = func_get_arg(2);
-       return join("",array_slice($ar[0],$start,$end));
-   } else {
-       return join("",array_slice($ar[0],$start));
-   }
-}
-?> 
 //-->
 </SCRIPT>
 <?php
@@ -47,14 +46,10 @@ function utf8_substr($str,$start)
 send_headers(1,1);
 ?>
 </HEAD>
-<BODY>
+<BODY<?php echo((C_FILLED_LOGIN) ? " CLASS=\"ChatBody\"" : ""); ?><?php echo((C_BACKGR_IMG && C_BACKGR_IMG_PATH != "") ? " background=\"".C_BACKGR_IMG_PATH."\"" : ""); ?>>
 	<CENTER>
 <?php
-// If nothing other than phpMyChat is loaded in this page, or if you want
-// to have the same background color as phpMyChat for the whole page,
-// you have to modify the BODY tag to '<BODY CLASS="ChatBody">'
-// You can put html statements right after the "<BODY>" tag or add
-// php code here.
+// You can put html statements right after the "<BODY>" tag or add php code here.
 
 $Is_Error = (isset($Error));
 
@@ -74,6 +69,7 @@ $Status = (isset($CookieStatus) ? $CookieStatus : "");
 
 layout($Is_Error,$Username,$Room_name,$Room_type,$Color,$Status);
 ?>
+</CENTER>
 </BODY>
 </HTML>
 <?php

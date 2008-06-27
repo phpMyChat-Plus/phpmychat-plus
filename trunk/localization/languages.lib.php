@@ -7,9 +7,11 @@ $AvailableLanguages = array();
 $languageDirectories = dir('./'.$ChatPath.'localization/');
 while($name = $languageDirectories->read())
 {
-if (eregi("install.php", $_SERVER["PHP_SELF"]))
+if (ereg("install", $_SERVER["PHP_SELF"]))
 {
 		if(is_dir('./'.$ChatPath.'localization/'.$name)
+		&& file_exists('./'.$ChatPath.'localization/'.$name.'/regex.txt')
+		&& file_exists('./'.$ChatPath.'localization/'.$name.'/localized.chat.php')
 		&& file_exists('./'.$ChatPath.'localization/'.$name.'/localized.install.php')
 		&& file_exists('./'.$ChatPath.'localization/'.$name.'/images/flag.gif'))
 	{
@@ -60,15 +62,11 @@ if (!isset($HTTP_ACCEPT_LANGUAGE))
 if (!isset($HTTP_USER_AGENT))
 	$HTTP_USER_AGENT = getenv("HTTP_USER_AGENT");
 
-if ((isset($L) && $L != "" && is_dir('./'.$ChatPath.'localization/'.$L)) || C_MULTI_LANG)
-{
-}
+if ((isset($L) && $L != "" && is_dir('./'.$ChatPath.'localization/'.$L)) || !C_MULTI_LANG) {}
 elseif (isset($CookieLang)
 		&& is_dir('./'.$ChatPath.'localization/'.$CookieLang)
-		&& file_exists('./'.$ChatPath.'localization/'.$CookieLang.'/localized.chat.php'))
-{
-	$L = $CookieLang;
-}
+		&& file_exists('./'.$ChatPath.'localization/'.$CookieLang.'/localized.chat.php')) $L = $CookieLang;
+
 elseif ($HTTP_ACCEPT_LANGUAGE != "")
 {
 	$Accepted = explode(",", $HTTP_ACCEPT_LANGUAGE);
@@ -80,7 +78,7 @@ elseif ($HTTP_USER_AGENT != "")
 };
 
 //if no language detected set default one
-if (!isset($L) || !C_MULTI_LANG) $L = C_LANGUAGE;
+if (!isset($L)) $L = C_LANGUAGE;
 
 //put language in a cookie
 setcookie("CookieLang", $L, time() + 60*60*24*365);		// cookie expires in one year

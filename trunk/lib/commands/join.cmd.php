@@ -1,14 +1,26 @@
 <?php
+// Added for php4 support of mb functions
+if (!function_exists('mb_convert_case'))
+{
+	function mb_convert_case($str,$type,$Charset)
+	{
+		if (eregi("TITLE",$type)) $str = ucwords($str);
+		elseif (eregi("LOWER",$type)) $str = strtolower($str);
+		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+		return $str;
+	}
+};
+
 if (!function_exists("room_in"))
 {
 	// This function will be used to test banishment for the room the user wants to enter in
 	// Returns true if the room to check ($what) is in the string ($in), false else
-	function room_in($what, $in)
+	function room_in($what, $in, $Charset)
 	{
 		$rooms = explode(",",$in);
 		for (reset($rooms); $room_name=current($rooms); next($rooms))
 		{
-			if (strcasecmp($what, $room_name) == 0) return true;
+			if (strcasecmp(mb_convert_case($what,MB_CASE_LOWER,$Charset), mb_convert_case($room_name,MB_CASE_LOWER,$Charset)) == 0) return true;
 		};
 		return false;
 	};
@@ -24,7 +36,7 @@ if (C_VERSION == 1)
 	// Ensure that the room to enter in is among default ones
 	for ($i = 0; $i < count($DefaultChatRooms); $i++)
 	{
-		if (strcasecmp($new_room, $DefaultChatRooms[$i]) == 0) $IsCommand = true;
+		if (strcasecmp(mb_convert_case($new_room,MB_CASE_LOWER,$Charset), mb_convert_case($DefaultChatRooms[$i],MB_CASE_LOWER,$Charset)) == 0) $IsCommand = true;
 	}
 	if (!$IsCommand) $Error = L_ERR_USR_17;
 }
@@ -34,7 +46,7 @@ elseif (ereg("[\,]", stripslashes($new_room)))
 	$Error = L_ERR_ROM_1;
 }
 // Check for swear words if necessary
-elseif(C_NO_SWEAR && checkwords($new_room, true))
+elseif(C_NO_SWEAR && checkwords($new_room, true, $Charset))
 {
 	$Error = L_ERR_ROM_2;
 }
@@ -45,7 +57,7 @@ else
 	$ToCheck = ($new_room_type == "1" ? $DefaultPrivateRooms : $DefaultChatRooms);
 	for ($i = 0; $i < count($ToCheck); $i++)
 	{
-		if (strcasecmp($new_room,$ToCheck[$i]) == "0")
+		if (strcasecmp(mb_convert_case($new_room,MB_CASE_LOWER,$Charset), mb_convert_case($ToCheck[$i],MB_CASE_LOWER,$Charset)) == "0")
 		{
 			$Error = ($new_room_type == 0 ? L_ERR_ROM_3:L_ERR_ROM_4);
 			break;
@@ -63,7 +75,7 @@ if ($IsCommand)
 	$ToCheck = ($new_room_type == "1" ? $DefaultChatRooms : $DefaultPrivateRooms);
 	for ($i = 0; $i < count($DefaultChatRooms); $i++)
 	{
-		if (strcasecmp($new_room, $ToCheck[$i]) == 0)
+		if (strcasecmp(mb_convert_case($new_room,MB_CASE_LOWER,$Charset), mb_convert_case($ToCheck[$i],MB_CASE_LOWER,$Charset)) == 0)
 		{
 			$what_room = "R0";
 			$new_room = $ToCheck[$i];

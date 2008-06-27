@@ -1,12 +1,23 @@
 <?php
+// Added for php4 support of mb functions
+if (!function_exists('mb_convert_case'))
+{
+	function mb_convert_case($str,$type,$Charset)
+	{
+		if (eregi("TITLE",$type)) $str = ucwords($str);
+		elseif (eregi("LOWER",$type)) $str = strtolower($str);
+		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+		return $str;
+	}
+};
 
 // Check if a nick is already in the ignored list
-function is_user_ignored($who, $userlist)
+function is_user_ignored($who, $userlist, $Charset)
 {
 	$users = explode(",", $userlist);
 	for (reset($users); $user_name=current($users); next($users))
 	{
-		if (strcasecmp($who, urldecode($user_name)) == 0) return true;
+		if (strcasecmp(mb_convert_case($who,MB_CASE_LOWER,$Charset), mb_convert_case(urldecode($user_name),MB_CASE_LOWER,$Charset)) == 0) return true;
 	}
 	return false;
 }
@@ -50,7 +61,7 @@ elseif ($Cmd[1] == "")
 		{
 			$Ignore[$i] = trim($Ignore[$i]);
 			if ($Ignore[$i] == "") continue;
-			if ($Ignore[$i] != "" && $Ignore[$i] != stripslashes($U) && !is_user_ignored($Ignore[$i], $Ign))
+			if ($Ignore[$i] != "" && $Ignore[$i] != stripslashes($U) && !is_user_ignored($Ignore[$i], $Ign, $Charset))
 			{
 				$tmp = urlencode($Ignore[$i]);
 				$IsCommand = true;
@@ -83,7 +94,7 @@ else
 			{
 				$Ignore[$i] = trim($Ignore[$i]);
 				if ($Ignore[$i] == "") continue;
-				if ($Ignore[$i] != "" && is_user_ignored($Ignore[$i], $Ign))
+				if ($Ignore[$i] != "" && is_user_ignored($Ignore[$i], $Ign, $Charset))
 				{
 					$users = explode(",", $Ign);
 					$Ign = "";
@@ -104,7 +115,7 @@ if (!$IsPopup && $IsCommand)
 {
 	$Tmp = (isset($Ign) && $Ign != "") ? "&Ign=".urlencode(stripslashes($Ign)) : "";
 
-	// Define a table that contains JavaScript instructions to be ran
+	// Define a table that contains JavaScript instructions to be run
 	$jsTbl = array(
 		"<SCRIPT TYPE=\"text/javascript\" LANGUAGE=\"JavaScript\">",
 		"<!--",

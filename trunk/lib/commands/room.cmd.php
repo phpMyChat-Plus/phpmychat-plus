@@ -1,12 +1,23 @@
 <?php
+// Added for php4 support of mb functions
+if (!function_exists('mb_convert_case'))
+{
+	function mb_convert_case($str,$type,$Charset)
+	{
+		if (eregi("TITLE",$type)) $str = ucwords($str);
+		elseif (eregi("LOWER",$type)) $str = strtolower($str);
+		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+		return $str;
+	}
+};
 
 // Ensure a moderator have such a status for the current room
-function room_in($what, $in)
+function room_in($what, $in, $Charset)
 {
 	$rooms = (is_array($in) ? $in : explode(",",$in));
 	for (reset($rooms); $room_name=current($rooms); next($rooms))
 	{
-		if (strcasecmp($what, $room_name) == 0) return true;
+		if (strcasecmp(mb_convert_case($what,MB_CASE_LOWER,$Charset), mb_convert_case($room_name,MB_CASE_LOWER,$Charset)) == 0) return true;
 	}
 	return false;
 };
@@ -28,7 +39,7 @@ else
 	{
 		list($password,$perms,$rooms) = $DbLink->next_record();
 		$DbLink->clean_results();
-		if (($password != $PWD_Hash) || (($perms != "moderator") && ($perms != "admin") && ($perms != "topmod")) || (($perms == "moderator") && (!room_in(stripslashes($R), $rooms) && !room_in("*", $rooms))))
+		if (($password != $PWD_Hash) || (($perms != "moderator") && ($perms != "admin") && ($perms != "topmod")) || (($perms == "moderator") && (!room_in(stripslashes($R), $rooms, $Charset) && !room_in("*", $rooms, $Charset))))
 		{
 			$Error = L_NO_MODERATOR;
 		}
@@ -40,7 +51,7 @@ else
 				if (C_NO_SWEAR && $R != C_NO_SWEAR_ROOM1 && $R != C_NO_SWEAR_ROOM2 && $R != C_NO_SWEAR_ROOM3 && $R != C_NO_SWEAR_ROOM4)
 				{
 				include("./lib/swearing.lib.php");
-				$Cmd[2] = checkwords($Cmd[2], false);
+				$Cmd[2] = checkwords($Cmd[2], false, $Charset);
 				}
 				if (C_USE_SMILIES)
 				{
