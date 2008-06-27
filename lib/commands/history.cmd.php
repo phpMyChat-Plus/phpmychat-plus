@@ -1,7 +1,8 @@
 <?php
 
 $IsCommand = true;
-$M = $M0;
+if (isset($M1)) $M = $M1;
+else $M = $M0;
 $IsM = true;
 
 ?>

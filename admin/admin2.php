@@ -63,7 +63,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 2)
 				{
 					list($room) = $DbLink->next_record();
 					$DbLink->clean_results();
-					if (room_in(addslashes($room), $rrr)) $DbLink->query("UPDATE ".C_USR_TBL." SET status='b' WHERE username='$uuu'");
+					if (room_in(addslashes($room), $rrr, $Charset)) $DbLink->query("UPDATE ".C_USR_TBL." SET status='b' WHERE username='$uuu'");
 				}
 				else
 				{
@@ -79,6 +79,17 @@ $ToCheck = "rooms = ''";
 if (!isset($FORM_SEND)) $ToCheck = "ban_until < ".time()." OR ".$ToCheck;
 $DbLink->query("DELETE FROM ".C_BAN_TBL." WHERE ".$ToCheck);
 ?>
+
+<SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
+<!--
+// Function to dinamically switch pages
+function jump_Page()
+{
+valJump=(document.PageSelect.PageJump.options[document.PageSelect.PageJump.selectedIndex].text - 1) * 10;
+document.location = '<?php echo("$From?$URLQueryBody_MoveLinks&startReg="); ?>'+valJump;
+}
+// -->
+</SCRIPT>
 
 <P CLASS=title><?php echo(A_SHEET2_1); ?></P>
 
@@ -115,13 +126,13 @@ if ($count_BanUsers != 0)
 				<A HREF="<?php echo("$From?$URLQueryBody_SortLinks&sortBy=ip"); if ($sortBy == "ip") echo("&sortOrder=$New_sortOrder"); ?>"><?php echo(A_SHEET2_2); ?></A>
 			</TD>
 			<TD VALIGN=CENTER ALIGN=CENTER CLASS=tabtitle>
-				<?echo(A_SHEET2_3)?> *
+				<?php echo(A_SHEET2_3)?> *
 			</TD>
 			<TD VALIGN=CENTER ALIGN=CENTER CLASS=tabtitle>
-				<?echo(A_SHEET2_4)?>
+				<?php echo(A_SHEET2_4)?>
 			</TD>
 			<TD VALIGN=CENTER ALIGN=CENTER CLASS=tabtitle>
-				<?echo(A_SHEET2_9)?>
+				<?php echo(A_SHEET2_9)?>
 			</TD>
 		</TR>
 
@@ -142,10 +153,10 @@ if ($count_BanUsers != 0)
 		{
 			$usrHash = md5($username);
 			?>
-			<INPUT TYPE="hidden" NAME="user_<?echo($usrHash)?>" VALUE="1">
 			<TR>
 				<TD VALIGN=CENTER ALIGN=CENTER>
-					<INPUT type=checkbox name="delete_<?echo($usrHash)?>" value="1">
+					<INPUT TYPE="hidden" NAME="user_<?php echo($usrHash)?>" VALUE="1">
+					<INPUT type=checkbox name="delete_<?php echo($usrHash)?>" value="1">
 				</TD>
 				<TD VALIGN=CENTER ALIGN="<?php echo($CellAlign); ?>">
 					<?php echo(special_char($username,$Latin1)); ?>
@@ -154,11 +165,11 @@ if ($count_BanUsers != 0)
 					<?php echo($ip); ?>
 				</TD>
 				<TD VALIGN=CENTER ALIGN=CENTER>
-					<INPUT type=text name="rooms_<?echo($usrHash)?>" value="<?echo(stripslashes(htmlspecialchars($rooms)))?>" SIZE="30">
-					<INPUT type="hidden" name="old_rooms_<?echo($usrHash)?>" value="<?echo(htmlspecialchars($rooms))?>">
+					<INPUT type=text name="rooms_<?php echo($usrHash)?>" value="<?php echo(stripslashes(htmlspecialchars($rooms)))?>" SIZE="30">
+					<INPUT type="hidden" name="old_rooms_<?php echo($usrHash)?>" value="<?php echo(htmlspecialchars($rooms))?>">
 				</TD>
 				<TD VALIGN=CENTER ALIGN=CENTER>
-					<SELECT name="until_<?echo($usrHash)?>">
+					<SELECT name="until_<?php echo($usrHash)?>">
 						<?php
 						 // banished users for more than one year -> forever
 						$ForeverVal = time() + (60 * 60 * 24 * 365);
@@ -177,20 +188,20 @@ if ($count_BanUsers != 0)
 						};
 						?>
 					</SELECT>
-					<INPUT type="hidden" name="old_until_<?echo($usrHash)?>" value="<?echo($until > $ForeverVal ? "forever" : "date")?>">
+					<INPUT type="hidden" name="old_until_<?php echo($usrHash)?>" value="<?php echo($until > $ForeverVal ? "forever" : "date")?>">
 				</TD>
 				<TD VALIGN=CENTER ALIGN=CENTER>
-					<INPUT type=text name="reason_<?echo($usrHash)?>" value="<?echo(stripslashes(htmlspecialchars($reason)))?>" size="15">
-					<INPUT type="hidden" name="old_reason_<?echo($usrHash)?>" value="<?echo(htmlspecialchars($reason))?>">
+					<INPUT type=text name="reason_<?php echo($usrHash)?>" value="<?php echo(stripslashes(htmlspecialchars($reason)))?>" size="15">
+					<INPUT type="hidden" name="old_reason_<?php echo($usrHash)?>" value="<?php echo(htmlspecialchars($reason))?>">
 				</TD>
 			</TR>
-			<?
+			<?php
 		};
 		$DbLink->clean_results();
 		?>
 		<TR>
 			<TD VALIGN=CENTER ALIGN=CENTER COLSPAN=6>
-				<FONT size=-1>* <?echo(A_SHEET2_6)?></FONT>
+				<FONT size=-1>* <?php echo(A_SHEET2_6)?></FONT>
 			</TD>
 		</TR>
 		<TR><TD>&nbsp;</TD></TR>
@@ -230,10 +241,33 @@ if ($count_BanUsers != 0)
 				<?php
 				$PageNum = ceil(($startReg + 1) / 10);
 				$PagesCount = ceil($count_BanUsers / 10);
-				echo(sprintf(A_PAGE_CNT,$PageNum,$PagesCount)."&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;$count_BanUsers ".A_MENU_2);
+				if ($L == "hungarian") echo(sprintf(A_PAGE_CNT,$PageNum,$PagesCount)."&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;$count_BanUsers ".mb_convert_case(A_MENU_21,MB_CASE_LOWER,$Charset));
+				else echo(sprintf(A_PAGE_CNT,$PageNum,$PagesCount)."&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;$count_BanUsers ".(($count_BanUsers == 1) ? mb_convert_case(A_MENU_21,MB_CASE_LOWER,$Charset) : mb_convert_case(A_MENU_2,MB_CASE_LOWER,$Charset)));
 				?>
 				</SPAN>
 			</TD>
+				<?php
+			if ($PagesCount > 1)
+			{
+			?>
+			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN=CENTER HEIGHT=20 CLASS=tabtitle>
+			<?php
+			print "<form name=\"PageSelect\">\n";
+			print "<select name=\"PageJump\" onChange=\"jump_Page()\">\n";
+				$i=1;
+				while ($i <= $PagesCount)
+				{
+			        print "<option value=\"$i\"";
+					if ($i==$PageNum) print " selected";
+					print ">$i</option>\n";
+		        $i++;
+				}
+		        print "</select>\n</form>\n";
+			?>
+			</TD>
+			<?php
+			}
+				?>
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN=CENTER WIDTH=70 HEIGHT=20 CLASS=tabtitle>
 			<?php
 			if ($startReg < $lastPage_startReg)

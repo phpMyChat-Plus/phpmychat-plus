@@ -1,7 +1,8 @@
 <?php
-// File : turkish/localized.chat.php - plus version (28.09.2007 - rev.27)
+// File : turkish/localized.chat.php - plus version (20.05.2008 - rev.39)
 // Original translation in turkish by Volkan Övün <vovun@hotmail.com>
 // Finetunning by Ciprian Murariu <ciprianmp@yahoo.com>
+// Do not use ' ; use ’ instead (utf-8 edit bug)
 
 // extra header for Charset
 $Charset = "utf-8";
@@ -15,9 +16,9 @@ define("L_TUTORIAL", "Yardım");
 define("L_WEL_1", "%s %s eski mesajların silinme süresi");
 define("L_WEL_2", "%s %s aktif olmayan kullanıcıların odadan çıkarılma süresi");
 
-define("L_CUR_1", "");
-define("L_CUR_1a", "Şu anda");
-define("L_CUR_1b", "Şu anda");
+define("L_CUR_1", "Şu anda");
+define("L_CUR_1a", "");
+define("L_CUR_1b", "");
 define("L_CUR_2", "sohbette");
 define("L_CUR_3", "Şu anda sohbet odalarında bulunan kullanıcılar");
 define("L_CUR_4", "özel odalardaki kullanıcılar");
@@ -32,14 +33,14 @@ define("L_SET_6", "Mevcut genel odalar");
 define("L_SET_7", "Seçiminizi yapınız ...");
 define("L_SET_8", "Kullanıcılar tarafından oluşturulan genel odalar");
 define("L_SET_9", "Kendi");
-define("L_SET_10", "genel");
+define("L_SET_10", "Genel");
 define("L_SET_11", "özel");
 define("L_SET_12", "odanızı oluşturun");
 define("L_SET_13", "Sonra");
 define("L_SET_14", "Sohbet Et");
 define("L_SET_15", "Mevcut özel odalar");
 define("L_SET_16", "Kullanıcılar tarafından oluşturulan özel odalar");
-define("L_SET_17", "avatarınızı (sanal simgenizi) seçin");
+define("L_SET_17", "Avatarınızı seçin");
 define("L_SET_18", "Bu sayfayı favorilerinize ekleyin: \"CTRL +D\" ye basın.");
 
 define("L_SRC", "ücretsiz olarak var");
@@ -67,7 +68,6 @@ define("L_REG_13", "Kullanıcı silme");
 define("L_REG_14", "Giriş");
 define("L_REG_15", "Giriş");
 define("L_REG_16", "Değiştir");
-
 define("L_REG_17", "Profiliniz başarıyla güncellendi.");
 define("L_REG_18", "Bir moderatör tarafından bu odadan atıldınız.");
 define("L_REG_18a", "Bir moderatör tarafından bu odadan atıldınız.<br />Sebep: %s");
@@ -85,6 +85,7 @@ define("L_REG_35", "Yönetim");
 define("L_REG_36", "Şehir/ülke");
 define("L_REG_37", "<span class=\"error\">*</span> İşaretli alanların doldurulması zorunludur.");
 define("L_REG_39", "Bulunduğunuz oda Yönetici tarafından kaldırılmıştır.");
+define("L_REG_44", "Evli çift");
 define("L_REG_45", "Cinsiyet");
 define("L_REG_46", "Bay");
 define("L_REG_47", "Bayan");
@@ -97,6 +98,19 @@ define("L_EMAIL_VAL_1", "Sohbete giriş için ayarlarınız");
 define("L_EMAIL_VAL_2", "Sohbet sunucumuza hoşgeldiniz..");
 define("L_EMAIL_VAL_Err", "Yapısal hata! Lütfen Yönetici ile irtibata geçiniz: <a href=\"mailto:%s\">%s</a>.");
 define("L_EMAIL_VAL_Done", "Şifreniz eposta a-dresinize gönderilmiştir.<br />Giriş sayfasındaki Profilinizi denetleyin başlığı altında şifrenizi değiştirebilirsiniz.");
+define("L_EMAIL_VAL_PENDING_Done", "Kayıt bilgileriniz incelenmek üzere gönderildi.");
+define("L_EMAIL_VAL_PENDING_Done1", "Hesabını Yönetici tarafından onaylandıktan sonar şifrenizi alacaksınızi.");
+define("L_EMAIL_VAL_3", "Üyeliğiniz  %s için bekliyor.");
+define("L_EMAIL_VAL_31", "Tebrikler! Üyelik başvurunuz incelendi ve onaylandı!");
+define("L_EMAIL_VAL_32", "Bu, sizin %s adındaki %s adresindeki üyelik bilgilerinizdir.:"); //chat name at chaturl
+define("L_EMAIL_VAL_4", "%s adındaki %s adresine şu anda kaydoldunuz:"); //chat name at chaturl
+define("L_EMAIL_VAL_41", "Şu anda %s adındaki %s adresinde önemli kayıt bilgilerinizi değiştirdiniz (Etkilenen kullanıcı adınız: %s)."); //chat name at chaturl (username)
+define("L_EMAIL_VAL_5", "%s - Kullanıcı adınızın %s için ayrıntıları"); //username - chatname
+define("L_EMAIL_VAL_51", "%s - Kullanıcı adınızın %s için güncellenme ayrıntıları"); //username - chatname
+define("L_EMAIL_VAL_6", "%s Tarihinde kayıt olundu");
+define("L_EMAIL_VAL_61", "%s Tarihinde güncellendi");
+define("L_EMAIL_VAL_7", "%s - Kullanıcı adınızın güncellenme bilgileri aşağıdadır:"); //username
+define("L_EMAIL_VAL_8", "Bu e-postayı gelecekte başvurmak üzere kaydediniz.\nLütfen güvenli bir yerde tutunuz ve bu bilgileri başkalarıyla paylaşmayınız.\nKatıldığınız için teşekkür ederiz! İyi eğlenceler.");
 
 // admin stuff
 define("L_ADM_1", "%s artık bu odanın denetleyicisi değil.");
@@ -138,7 +152,6 @@ define("L_ERR_ROM_3", "Bu oda genel amaçlı olarak zaten bulunmaktadır.");
 define("L_ERR_ROM_4", "Geçersiz oda ismi.");
 
 // users frame or popup
-
 define("L_EXIT", "Sohbetten çıkış");
 define("L_DETACH", "Sohbet eden kullanıcılar listesi");
 define("L_EXPCOL_ALL", "Hepsini yay/topla");
@@ -190,12 +203,13 @@ define("L_HELP_FMT_1", "&lt;B&gt; &lt;/B&gt;, &lt;I&gt; &lt;/I&gt; &lt;U&gt; &lt
 define("L_HELP_FMT_2", "Bir elektronik posta ya da web adresi yazmak için adresleri hiç bir ekleme yapmadan olduğu gibi yazınız. Bağlantı otomatik olarak oluşturulacaktır.");
 define("L_HELP_TIT_3", "Komutlar");
 define("L_HELP_NOTE", "Bütün komutların İngilizce olarak kullanılması gerekir!");
-define("L_HELP_USR", "kullanıcı");
 define("L_HELP_MSG", "mesaj");
 define("L_HELP_MSGS", "mesajı");
 define("L_HELP_ROOM", "oda");
-define("L_HELP_BUZZ", "~ses adı");
+define("L_HELP_BUZZ", "~ses_adı");
 define("L_HELP_REASON", "sebep");
+define("L_HELP_MR", "Bay");
+define("L_HELP_MS", "Bayan");
 define("L_HELP_CMD_0", "{} işaretleri zorunlu olan, [] ise tercihe bağlı ayarları ifade eder.");
 define("L_HELP_CMD_1a", "Gösterilmesini istediğiniz mesaj sayısını yazınız. Geçerli olan ve en az 5 tir.");
 define("L_HELP_CMD_1b", "Mesaj çerçevesini tekrar yenileyerek son n mesajı gösterir. En az 5 mesaj.");
@@ -228,14 +242,14 @@ define("L_HELP_CMD_26", "Bu, /dice komutunun daha karmaşık bir şeklidir.<br /
 define("L_HELP_CMD_27", "Sohbet boyunca belirli bir kullanıcının mesajlarını daha rahat takip edebilmek için üzerine renkli bant çekerek işaretler.<br />Kullanımı: /high {user} yazın veya kullanıcı adının sağındaki küçük <img src=./images/highlightOff.gif> şeklindeki kareye tıklayın (odalarda/kullanıcılar listesinde)");
 define("L_HELP_CMD_28", "<i>Tek bir resmin</i> mesaj olarak gönderilmesine izin verir.<br />Kullanımı: Gönderilecek fotoğraf internette ve herkesin erişimine açık bir yerde olmalıdır. Giriş izni gerektiren sayfa adreslerini kullanmayınız.<br />Fotoğrafın tam adresi yazılmalıdır! Örnek: <b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Desteklenen foto dosyası türleri: .jpg .bmp .gif .png. <br />İPUCU: /img yazın, sonra bir boşluk bırakarak fotoğrafın URL adresini kutuya kopyala-yapıştır yapın; bir web sayfasındaki fotoğrafın URL adresini kopyalamak için üzerine sağ tıklayın, Özelliklerine tıklayın sonra fare ile bütün URL adresini kopyalayın daha sonra da yazdığınız /img komutunun ardına yapıştırın.<br />Bilgisayarınızdaki bir resmi adreslemeyin, bu işlem sohbet penceresinin durmasına neden olur!!!");
 define("L_HELP_CMD_29", "İkinci komut, mevcut odadaki Yöneticiye veya Denetleyici(ler)e, daha önce aynı odaya denetleyici olarak atanmış kayıtlı kullanıcının atamasını (denetleyici haklarını)geri almalarına izin verir.<br />* seçeneği kullanıcının bütün odalardaki denetleyici haklarını iptal eder.");
-define("L_HELP_CMD_30", "İkinci komut /me komutuyla aynı işlevi görür fakat hitap olarak cinsiyetinizi de belirtir<br />Örneğin * Mr Ciprian TV seyrediyor veya Mrs Dana mutlu.");
+define("L_HELP_CMD_30", "İkinci komut /me komutuyla aynıdır fakat cinsiyetinize bağlı olarak kullanıcı adınızın önüne hitap için kısaltma ekler.<br />Örneğin, * ".L_HELP_MR." Ahmet TV seyrediyor * ".L_HELP_MS." Fatma mutlu.");
 define("L_HELP_CMD_31", "Kullanıcıların listedeki sıralamasını giriş saatine göre veya alfabetik olarak değiştirir.");
 define("L_HELP_CMD_32", "Bu, zar atma oyununun üçüncü şeklidir.<br />Kullanımı: /d{n1}[tn2] yazın /d{n1} yazın;<br />n1 <b>1 ve 100</b> arasında herhangi bir değer alabilir.(zarların yuvarlanma sayısını ifade eder).<br />n2 <b>1 ve %s arasında</b> herhangi bir değer alabilir. (zarların her atılıştaki yuvarlanma sayısını ifade eder).");
 define("L_HELP_CMD_33", "Mesajdaki harflerin büyüklüğünü kullanıcının tercihine göre değiştirir. ( n için izin verilen değerler: <b>7 ve 15 arası</b>); /size komutu harf büyüklüğünü varsayılan değere geri çevirir (<b>".$FontSize."</b>).");
 define("L_HELP_ETIQ_1", "Sohbet Görgü Kuralları");
 define("L_HELP_ETIQ_2", "Sitemiz üyelerini arkadaşlık çerçevesi içinde tutmayı ve eğlendirmeyi hedeflemektedir, bu nedenle aşağıdaki kurallara titizlikle uyunuz. Eğer kuralları çiğnerseniz Sohbet Denetleyicilerimizden biri sizi sohbetten dışarı atabilir.<br /><br />Teşekkürler,");
 define("L_HELP_ETIQ_3", "Sohbet Görgü Kuralları");
-define("L_HELP_ETIQ_4", "Anlamsız harfler ya da rastgele harfler yazarak sohbeti meşgul etmeyiniz.</li>
+define("L_HELP_ETIQ_4", "<li>Anlamsız harfler ya da rastgele harfler yazarak sohbeti meşgul etmeyiniz.</li>
 <li>aLtErnAtiF (büyüklü küçüklü karışık) harfler kullanmayınız.</li>
 <li>Büyük harflerle yazmayın. Büyük harfler \"bağırmak\" anlamına gelir.</li>
 <li>Sohbet kullanıcılarının dünyanın her yerinden ve bölgesinden olduğunu ve en önemlisi değişik inançlara mensup olduklarını asla unutmayınız. Lütfen bu insanlara, inançlarına ve kültürlerine nazik ve saygılı davranınız.</li>
@@ -248,7 +262,7 @@ define("L_TODAY_DWN", "Bu gün gönderilen mesajlar aşağıda listelenmiştir")
 define("L_TODAY_UP", "Dün gönderilen mesajlar aşağıda listelenmiştir");
 
 // message colors
-$TextColors = array(	"Siyah" => "#000000",
+$TextColors = array("Siyah" => "#000000",
 				"Kırmızı" => "#FF0000",
 				"Yeşil" => "#009900",
 				"Mavi" => "#0000FF",
@@ -266,18 +280,22 @@ define("L_IGNOR_NON", "Gözardı edilmeyen kullanıcı");
 
 // whois popup
 define("L_WHOIS_ADMIN", "Yönetici");
+define("L_WHOIS_OWNER", "Sahibiyle");
 define("L_WHOIS_TOPMOD", "Şef Denetleyici");
 define("L_WHOIS_MODER", "Denetleyici");
+define("L_WHOIS_MODERS", "Denetleyiciler");
+define("L_WHOIS_OTHERS", "Diğer Kullanıcılar");
 define("L_WHOIS_USER", "Kullanıcı");
 define("L_WHOIS_GUEST", "Misafir");
 define("L_WHOIS_REG", "Kayıtlı");
-
+define("L_WHOIS_BOT", "Robotumuz");
 
 // Notification messages of user entrance/exit
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", "%s bu odaya girdi" . L_ENTER_SND);
-else define("L_ENTER_ROM", "%s bu odaya girdi");
-define("L_ENTER_ROM_NOSOUND", "%s bu odaya girdi");
+define("ENTER_ROM", "%s bu odaya girdi");
 define("L_EXIT_ROM", "%s bu odadan çıktı");
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+else define("L_ENTER_ROM", ENTER_ROM);
+define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
 // Clean mod/fix by Ciprian
 define("L_BOOT_ROM", "%s bir süredir aktif olmadığı için bu odadan otomatik olarak çıkarılmıştır");
@@ -294,6 +312,9 @@ define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
 define("L_TOPIC", "KONU adını şu şekilde ayarladı: - ");
 define("L_TOPIC_RESET", "KONU yu yeniden başlattı.");
 define("L_HELP_TOP", "konu olarak en az iki kelime");
+define("L_BANNER_WELCOME", "%s odasına hoşgeldiniz!");
+define("L_BANNER_TOPIC", "Konu:");
+define("L_DEFAULT_TOPIC_1", "Bu, varsayilan konudur. Degiştirmek için localization/_owner/owner.php sayfasini düzenleyiniz!");
 
 // Img cmd mod
 define("L_PIC", "Resmi gönderen:");
@@ -306,9 +327,9 @@ define("L_IS_NO_MODERATOR", "%s Denetleyici değil.");
 define("L_ERR_IS_ADMIN", "%s Yönetici!\\nİzinlerini değiştiremezsiniz.");
 
 // Info mod by Ciprian - displays a list of all the features & mods, including Bot's name, on the welcome page
-define("INFO_CMDS", "<span style=\"color:orange\">Mevcut olan ilave komutlar:</span>".CMDS.".");
-define("INFO_MODS", "<span style=\"color:orange\">Mevcut olan ilave Yenilik/Düzenlemeler :</span>".MODS.".");
-define("INFO_BOT", "<span style=\"color:orange\">Geçerli robotumuz: </span><u>".C_BOT_NAME."</u>.");
+define("INFO_CMDS", "Mevcut olan ilave komutlar:");
+define("INFO_MODS", "Mevcut olan ilave Yenilik/Düzenlemeler:");
+define("INFO_BOT", "Geçerli robotumuz:");
 
 // Profile mod
 define("L_PRO_1", "Diller");
@@ -324,10 +345,12 @@ define("L_ERR_AV", "Geçersiz URL ya da mevcut olmayan sunucu.");
 define("L_TITLE_AV", "Şu anki Avatarınız (sanal simgeniz): ");
 define("L_CHG_AV", "Avatar’ınızı (sanal simgenizi) saklamak için bu<br />formdaki \"".L_REG_16."\"e tıklayınız.");
 define("L_SEL_NEW_AV", "Yeni Avatar (sanal simge) seçiniz");
-define("L_EX_AV", "(Örnek: http://mysite/images/mypic.gif):");
+define("L_EX_AV", "örnek");
 define("L_URL_AV", "URL: ");
 define("L_EXPL_AV", "(URL’yi yazdıktan sonra görmek için Enter’a basınız)");
 define("L_CANCEL", "Vazgeç");
+define("L_AVA_REG", "Avatarınızı değiştirebilmek için\\nkayıt olmanız gerekir");
+define("L_SEL_NEW_AV_CONFIRM", "Bu form gönderilmedi.\\nŞimdi avatarlara gidiş şu ana kadar yaptığınız\\nbütün değişiklikleri kaybetmenize neden olacaktır!\\n\\nEmin misiniz?");
 
 // PlusBot bot mod (based on Alice bot)
 define("BOT_TIPS", "İPUCU: Bu odada robotumuz genel olarak açıktır. Konuşmak için <b>hello ".C_BOT_NAME."</b> yazınız. Konuşmayı sonlandırmak için: <b>bye ".C_BOT_NAME."</b>. (özel mesaj: /to <b>".C_BOT_NAME."</b> Mesaj)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
@@ -344,14 +367,12 @@ define("DICE2_WRONG", "İkinci değer 1 ve ".MAX_ROLLS." arasında olmalıdır.\
 define("DICE2_WRONG1", "İlk değer 1 ve ".MAX_DICES." arasında olmalıdır.\\n(Örneğin /".MAX_DICES."d veya /".MAX_DICES."d".MAX_ROLLS.").");
 define("DICE3_WRONG", "İkinci değer 1 ve ".MAX_ROLLS." arasında olmalıdır.\\nBütün ".MAX_ROLLS." zarları kullanmak için boş bırakınız.\\n(Örneğin /d50 veya /d100t".MAX_ROLLS.").");
 
-// Log mod by Ciprian
-define("L_ARCHIVE", "Arşivi Aç");
-
 // Private Message Popup mod by Ciprian
-define("L_REG_POPUP", "Özel mesajlarda pencere açar");
+define("L_REG_POPUP", "özel mesajlarda pencere açar");
+define("L_REG_POPUP_NOTE", "Pop-up engelleyicinizi devre dışı bırakmalısınız!");
 define("L_PRIV_POST_MSG", "Özel mesaj gönder!");
 define("L_PRIV_MSG", "Yeni özel mesaj alındı!");
-define("L_PRIV_MSGS", "Yeni özel mesaj alındı!");
+define("L_PRIV_MSGS", "%s yeni özel mesaj alındı!");
 define("L_PRIV_MSGSa", "Burada ilk 10 mesaj görülmektedir!<br />Kalanları görmek için alttaki bağlantıya tıklayın.");
 define("L_PRIV_MSG1", "Kimden:");
 define("L_PRIV_MSG2", "Oda:");
@@ -359,7 +380,7 @@ define("L_PRIV_MSG3", "Kime:");
 define("L_PRIV_MSG4", "Mesaj:");
 define("L_PRIV_MSG5", "Gönderildiği tarih:");
 define("L_PRIV_REPLY", "Cevapla");
-define("L_PRIV_READ", "Bütün mesajları okunmuş olarak işaretlemek için ’Kapat’ butonuna tıklatın!");
+define("L_PRIV_READ", "Bütün mesajları okunmuş olarak işaretlemek için ’".L_REG_25."’ butonuna tıklatın!");
 define("L_PRIV_POPUP", "düzenleyerek bu popup yapıyı her zaman aktif/pasif<br />hale getirebilirsiniz. (sadece kayıtlı kullanıcılar)");
 define("L_PRIV_POPUP1", "Profilinizi</a>");
 define("L_NOT_ONLINE", "Kullanıcı %s şu anda çevrimiçi değil.");
@@ -372,11 +393,11 @@ define("L_NEXT_READ", "Sonraki %s oku"); // message / 10 messages
 define("L_ROOM_ALL", "Bütün odalar");
 
 // Color Input Box mod by Ciprian
-define("L_COLOR_HEAD_COLF_SETTINGS", "".COLOR_FILTERS == 1 ? "Aktif" : "Aktif değil"."");
-define("L_COLOR_HEAD_ALLG_SETTINGS", "".COLOR_ALLOW_GUESTS == 1 ? "Aktif" : "Aktif değil"."");
-define("L_COLOR_HEAD_SETTINGS", "<u>Sunucudaki mevcut ayarlar</u>:<br />a) COLOR_FILTERS = <b>".L_COLOR_HEAD_COLF_SETTINGS."</b>;<br />b) COLOR_ALLOW_GUESTS = <b>".L_COLOR_HEAD_ALLG_SETTINGS."</b>.");
-define("L_COLOR_HEAD_SETTINGSa", "<u>Varsayılan renkler</u>: Yönetici = <b><SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN></b>, Denetleyiciler = <b><SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN></b>, Diğer Kullanıcılar = <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>.");
-define("L_COLOR_HEAD_SETTINGSb", "<u>Varsayılan renk</u>: <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>.");
+define("L_ENABLED", "Aktif");
+define("L_DISABLED", "Aktif değil");
+define("L_COLOR_HEAD_SETTINGS", "Sunucudaki mevcut ayarlar:");
+define("L_COLOR_HEAD_SETTINGSa", "Varsayılan renkler:");
+define("L_COLOR_HEAD_SETTINGSb", "Varsayılan renk:");
 define("L_COL_HELP_TITLE", "Renk Seçici");
 define("L_COL_HELP_SUB1", "Kullanımı:");
 define("L_COL_HELP_P1", "Kendi varsayılan renginizi profilinizde düzenleme yaparak seçebilirsiniz. (kullanıcı adı rengiyle aynı renk). Diğer renkleri de kullanmaya devam edebilirsiniz. Rasgele seçilmiş olan varsayılan renginize dönmek için, bir kere önce varsayılan (Null) rengi seçiniz. - (Seçim listesinde ilk sıradaki.)");
@@ -388,6 +409,20 @@ define("L_COL_HELP_P3", "<u>Renk kullanımında yetki seviyeleri</u>:<br />1. Y�
 define("L_COL_HELP_P3a", "Varsayılan renk <u><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></u>.<br /><br /><u>Teknik konu</u>: Bu renkler Yönetim Panelinde Yönetici tarafından tanımlanmıştır.<br />Eğer bir hata oluşursa veya varsayılan renginizden memnun değilseniz odanızdaki diğer kulanıcılarla değil, <b>Yöneticiyle</b> irtibata geçiniz. :-) <br />Renk ayarlamaları sırasında renk adlarının İngilizce yazılması zorunludur. Program, başka dili anlamaz.");
 define("L_COL_HELP_USER_STATUS", "Statünüz");
 define("L_COL_TUT", "Sohbette renk kullanımı");
+define("L_NULL", "Boş");
+define("L_NULL_F", ""); // feminine word, if it's the case
+define("L_ROOM_COLOR", "oda rengi");
+define("L_PRO_COLOR", "profil rengi");
+define("L_PRIV_NO_MSGS", "Alınan özel mesaj yok");
+define("L_PRIV_READ_MSG", "Alınan 1 özel mesaj var"); //singular
+define("L_PRIV_READ_MSGS", "Alınan %s özel mesaj var"); //plural
+define("L_PRIV_MSGS_NEW", "Yeni"); //singular form
+define("L_PRIV_MSGS_READ", "Okundu"); //singular form
+define("L_PRIV_MSG6", "Durum:");
+define("L_PRIV_RELOAD", "Sayfayı yenile");
+define("L_PRIV_MARK_ALL", "Hepsini okundu olarak işaretle");
+define("L_PRIV_MARK_SEL", "Seçilenleri okundu olarak işaretle");
+define("L_PRIV_REMOVE", "Seçilen Ö.M’ları sil"); // or selected
 
 // Alert messages on errors for Color Input Box mod by Ciprian
 define("COL_ERROR_BOX_MODA", "" .COLOR_CA." rengini sadece yönetici kullanabilir!\\n\\n\\nSizin yazı renginiz ".COLOR_CM."!\\n\\Lütfen başka bir renk seçiniz.");
@@ -395,9 +430,10 @@ define("COL_ERROR_BOX_USRA", "" .COLOR_CA." rengini sadece yönetici kullanabili
 define("COL_ERROR_BOX_USRM", "" .COLOR_CM." rengini sadece yönetici kullanabilir!\\n\\n".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." ya da ".COLOR_CM1."\\n\\nBu renkler yetkili kullanıcılara ayrılmıştır!\\n\\nSizin yazı renginiz ".COLOR_CD."!\\n\\nLütfen başka bir renk seçiniz.");
 
 //Welcome message to be displayed on login
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", "Sohbetimize hoşgeldiniz. Lütfen sohbet ederken internet görgü kurallarına uyunuz: <I>Nazik ve kibar olmaya çalışınız</I>." . L_WELCOME_SND);
-else define("WELCOME_MSG", "Sohbetimize hoşgeldiniz. Lütfen sohbet ederken internet görgü kurallarına uyunuz: <I>Nazik ve kibar olmaya çalışınız</I>.");
-define("WELCOME_MSG_NOSOUND", "Sohbetimize hoşgeldiniz. Lütfen sohbet ederken internet görgü kurallarına uyunuz: <I>Nazik ve kibar olmaya çalışınız</I>.");
+define("L_WELCOME_MSG", "Sohbetimize hoşgeldiniz. Lütfen sohbet ederken internet görgü kurallarına uyunuz: <I>nazik ve kibar olmaya çalışınız</I>.");
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
+else define("WELCOME_MSG", L_WELCOME_MSG);
+define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
 // Send alert to users in chat when important settings are changed in admin panel
 define("L_RELOAD_CHAT", "Bu sunucunun ayarları şu anda değiştirildi. Hatayla karşılaşmamak için tarayıcınızı yenileyiniz. (F5 tuşuna basın veya tarayıcınızı kapatıp sohbete tekrar girin).");
@@ -424,13 +460,9 @@ define("L_PASS_5", "Doğum gününüz nedir?"); // Don't change this question! J
 define("L_PASS_6", "Gizli cevabınız");
 define("L_PASS_7", "Şifreyi yenile");
 define("L_PASS_8", "Şifreniz başarıyla yenilendi.");
-define("L_PASS_9", "Sohbete girmek için yeni şifreniz.");
+define("L_PASS_9", "Sohbete girmek için yeni şifreniz");
 define("L_PASS_11", "Sohbet sunucumuza tekrar hoşgeldiniz!");
 define("L_PASS_12", "Sorunuzu seçin ...");
-define("L_LINKS_13", "bu sesi çalmak için"); // Click to blablabla : it can also be translated as "to play this sound", if buzz has no translation.
-define("L_LINKS_14", "bu komutu kullanmak için");
-define("L_LINKS_15", "açmak için"); // to open/see Posted Links window
-define("L_LINKS_16", "Duygu İfadeleri Galerisi");
 define("L_ERR_PASS_1", "Yanlış kullanıcı adı. Kendinizinkini kullanın.");
 define("L_ERR_PASS_2", "Yanlış e-posta. Tekrar deneyin!");
 define("L_ERR_PASS_3", "Yanlış gizli soru.<br />Aşağıdaki gösterilene cevap verin!");
@@ -439,7 +471,7 @@ define("L_ERR_PASS_5", "Özel gizlilik verinizi ayarlamadınız.");
 define("L_ERR_PASS_6", "Özel gizlilik verinizi henüz ayarlamadınız.<br />Bu formu kullanamazsınız. Yöneticiyle irtibata geçin!");
 
 // admin stuff - added for administrators promotions/demotions in admin panel - by Ciprian
-define("L_ADM_3", "%s Bu sohbete Yönetici oldu.");
+define("L_ADM_3", "%s bu sohbete Yönetici oldu.");
 define("L_ADM_4", "%s artık bu sohbetin öneticisi değil.");
 
 // Open Schedule by Ciprian
@@ -450,28 +482,40 @@ define("L_CLOSED", "Kapalı");
 define("L_OPEN_PUB", "HALKA AÇIK");
 define("L_CLOSED_PUB", "HALKA KAPALI");
 
-//open full size picture
-define("L_FULLSIZE_PIC", "Resmi büyültmek için tıklayın");
-
 // Links popup page by Alex
 define("L_LINKS_1", "Yazılan linkleri");
 define("L_LINKS_2", "Yazılan linkleri buradan açabilirsiniz");
 
 // Javascript Status/title messages on links/images mouseover
-define("L_CLICKS", "%s %s buraya tıkla");
+define("L_CLICKS", "%2\$s %1\$s buraya tıkla");
 define("L_CLICK", "%s buraya tıkla");
 define("L_LINKS_3", "Bağlantıyı açmak için");
 define("L_LINKS_4", "Yazarın sitesini açmak için");
 define("L_LINKS_5", "Bu duygu ifadesini eklemek için");
-define("L_LINKS_6", "irtibata geçmek için");
+define("L_LINKS_6", "Irtibata geçmek için");
 define("L_LINKS_7", "phpMyChat Ana Sayfasını ziyaret etmek için");
 define("L_LINKS_8", "phpMyChat Grubuna katılmak için");
 define("L_LINKS_9", "Düşüncelerinizi göndermek için");
 define("L_LINKS_10", "phpMyChat Plus indirmek için");
 define("L_LINKS_11", "Kimin sohbet ettiğini görmek için");
 define("L_LINKS_12", "Sohbet Giriş Sayfasını açmak için");
-define("L_SWITCH", "değiştir");
+define("L_LINKS_13", "Bu sesi çalmak için"); // Click to blablabla : it can also be translated as "to play this sound", if buzz has no translation.
+define("L_LINKS_14", "Bu komutu kullanmak için");
+define("L_LINKS_15", "Açmak için"); // to open/see Posted Links window
+define("L_LINKS_16", "Duygu İfadeleri Galerisi");
+define("L_LINKS_17", "A’dan Z’ye sıralamak için"); // alphabetcally ascending
+define("L_LINKS_18", "Z’den A’ya sıralamak için"); // alphabetically descending
+define("L_LINKS_17_T", "Eskiden yeniye sıralamak için"); // time: Oldest -> Recent
+define("L_LINKS_18_T", "Yeniden eskiye sıralamak için"); // time: Recent -> Oldest
+define("L_LINKS_17_N", "Küçükten büyüğe sıralamak için"); // numeric acending
+define("L_LINKS_18_N", "Büyükten küçüğe sıralamak için"); // numeric descending
+define("L_ASCa", "");
+define("L_DESCa", "");
+define("L_SWITCH", "Değiştir");
 define("L_SELECTED", "seçildi");
+define("L_SELECTED_F", ""); // feminine word, if it's the case
+define("L_NOT_SELECTED", "seçilmedi");
+define("L_NOT_SELECTED_F", ""); // feminine word, if it's the case
 define("L_EMAIL_1", "E-posta göndermek için");
 define("L_FULLSIZE_PIC", "Resmi büyültmek için");
 define("L_AUTHOR", "Yazarla"); //Phrase will look like this: L_AUTHOR." ".L_LINKS_6." "L_CLICKS. == The author - to contact - click here
@@ -479,12 +523,8 @@ define("L_DEVELOPER", "Sohbetin geliştiricisiyle"); //same here
 define("L_OWNER", "Sohbetin sahibiyle"); //same here
 define("L_TRANSLATOR", "Çevirmenle"); //same here
 
-// Banner topics - the topics are not multi-language!
-define("L_BANNER_WELCOME", "%s odasına hoşgeldiniz!");
-define("L_BANNER_TOPIC", "Konu:");
-
 // Counter on login
-define("L_VISITOR_REPORT", "%s tarihinden beri ziyaretçi sayısı");
+define("L_VISITOR_REPORT", "... %s tarihinden beri ziyaretçi sayısı");
 
 // Status bar messages
 define("L_JOIN_ROOM", "Bu odaya gir");
@@ -494,6 +534,8 @@ define("L_WHSP", "Whisper");
 define("L_SEND_WHSP", "Send a whisper");
 define("L_SEND_PM_1", "Send PM");
 define("L_SEND_PM_2", "Send a private message");
+define("L_HIGHLIGHT", "Renkli bantla işaretle/Renkli bant işaretini kaldır");
+define("L_HIGHLIGHT_SB", "Bu kullanıcının gönderilerini renkli bantla işaretle/renkli bant işaretini kaldır");
 
 //Lurking frame popup
 define("L_LURKING_2", "Gözlemciler sayfası");
@@ -503,9 +545,14 @@ define("L_LURKING_5", "Bilinmeyen");
 
 // Extra options by Ciprian
 define("L_EXTRA_OPT", "Ekstra Seçenekler");
+define("L_ARCHIVE", "Arşivi Aç");
 define("L_SOUNDFIX_IE_1", "IE için ses onarımı");
 define("L_SOUNDFIX_IE_2", "IE için ses onarım dosyasını indir");
 define("L_LURKING_1", "Gözlemciler sayfasını aç");
+define("L_REG_BRB", "hemen dönüyorum (önce kayıt olmam lazım)");
+define("L_DEL_BYE", "beni bekleme");
+define("L_EXTRA_PRIV1", "Ö.M’ları oku");
+define("L_EXTRA_PRIV2", "Yeni Ö.M’lar");
 
 // Months for Open Schedule by Ciprian
 define("L_JAN", "Ocak");
@@ -522,30 +569,74 @@ define("L_NOV", "Kasım");
 define("L_DEC", "Aralık");
 
 // Localized date format
-setlocale(LC_TIME, "tr_TR.UTF-8", "Turkish.UTF-8");
+if (eregi("win", PHP_OS)) {
+setlocale(LC_ALL, "turkish.UTF-8", "turkish");
+} else {
+setlocale(LC_ALL, "tr_TR.UTF-8", "turkish.UTF-8");
+}
+define("ISO_DEFAULT", "iso-8859-9");
+define("WIN_DEFAULT", "windows-1254");
 define("L_SHORT_DATE", "%d-%m-%Y"); //Change this to your local desired format (keep the short form)
 define("L_LONG_DATE", "%A, %d %B %Y"); //Change this to your local desired format (keep the long form)
 define("L_SHORT_DATETIME", "%d-%m-%Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
 define("L_LONG_DATETIME", "%A, %d %B %Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
 
 // Chat Activity displayed on remote web pages
-define("LOGIN_LINK", "<A HREF='".$CHAT_URL."?L=".$L."' TITLE='".sprintf(L_CLICK,L_LINKS_12)."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_12).".'; return true;\" TARGET=_blank>");
-define("NB_USERS_IN","Şu anda ".LOGIN_LINK." kullanıcı</A> sohbet odasında.</td></tr>");
-define("USERS_LOGIN","Şu anda ".LOGIN_LINK." 1 kullanıcı</A> sohbet odasında.</td></tr>");
-define("NO_USER","Şu anda ".LOGIN_LINK." sohbet eden</A> kimse yok.</td></tr>");
+define("LOGIN_LINK", "<A HREF='".C_CHAT_URL."?L=".$L."' TITLE='".sprintf(L_CLICK,L_LINKS_12)."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_12).".'; return true;\" TARGET=_blank>");
+define("NB_USERS_IN","Şu anda ".LOGIN_LINK."kullanıcı</A> sohbet odasında.");
+define("USERS_LOGIN","Şu anda ".LOGIN_LINK."1 kullanıcı</A> sohbet odasında.");
+define("NO_USER","Şu anda ".LOGIN_LINK."sohbet eden</A> kimse yok.");
+define("L_PRIV_REPLY_LOGIN", LOGIN_LINK."Deki bir gönderiye cevap vermek için ve</A> yukarıda listelenen Ö.M’lardan birine cevap vermek için  sohbete giriş yapmalısınız");
 
 // Language names
 define("L_LANG_AR", "Arjantin İspanyolcası");
-define("L_LANG_NL", "Flemenkçe");
+define("L_LANG_BG", "Bulgarca - Kiril");
+define("L_LANG_BR", "Brezilya Portekizcesi");
+define("L_LANG_CZ", "Çekçe");
+define("L_LANG_DA", "Danca");
+define("L_LANG_DE", "Almanca");
 define("L_LANG_EN", "İngilizce");
 define("L_LANG_ENUK", "İngiliz İngilizcesi");
 define("L_LANG_ENUS", "Amerikan İngilizcesi");
-define("L_LANG_FR", "Fransızca");
-define("L_LANG_DE", "Almanca");
-define("L_LANG_IT", "İtalyanca");
-define("L_LANG_RO", "Romence");
 define("L_LANG_ES", "İspanyolca");
+define("L_LANG_FR", "Fransızca");
+define("L_LANG_GR", "Rumca");
+define("L_LANG_HI", "Hintçe");
+define("L_LANG_HU", "Macarca");
+define("L_LANG_IT", "İtalyanca");
+define("L_LANG_KA", "Gürcüce");
+define("L_LANG_NL", "Flemenkçe");
+define("L_LANG_RO", "Romence");
+define("L_LANG_SK", "Slovakça");
+define("L_LANG_SRC", "Sırpça - Kiril");
+define("L_LANG_SRL", "Sırpça - Latin");
 define("L_LANG_SV", "İsveççe");
 define("L_LANG_TR", "Türkçe");
+define("L_LANG_UR", "Urduca"); 
 define("L_LANG_VI", "Vietnamca");
+
+// Skins preview page
+define("L_SKINS_TITLE", "Desen önizlemesi");
+define("L_SKINS_TITLE1", "%s den %s e kadar desenlerin önizlemesi"); // Skins 1 to 4 preview
+define("L_SKINS_AV", "Mevcut desenler");
+define("L_SKINS_NONAV", "\"skins\" klasöründe tanımlanmış bir stil bulunmuyor.");
+
+// Swap image titles by Ciprian
+define("L_GEN_ICON", "Cinsiyet ikonu");
+
+// Ghost mode by Ciprian
+define("L_GHOST", "Hayalet");
+define("L_SUPER_GHOST", "Süper Hayalet");
+define("L_NO_GHOST", "Görünür");
+
+// Sorting options by Ciprian
+define("L_ASC", "A’dan Z’ye"); // alphabetcally ascending
+define("L_DESC", "Z’den A’ya"); // alphabetcally descending
+define("L_ASC_T", "Eskiden yeniye"); // time: Oldest -> Recent
+define("L_DESC_T", "Yeniden eskiye"); // time: Recent -> Oldest
+define("L_ASC_N", "Küçükten büyüğe"); // numeric acending
+define("L_DESC_N", "Büyükten küçüğe"); // numeric descending
+
+// Returning visitors counter on profiles by Ciprian
+define("L_LOGIN_COUNT", "Ziyaretler toplamı"); // number of logins (returning visits) to chat
 ?>

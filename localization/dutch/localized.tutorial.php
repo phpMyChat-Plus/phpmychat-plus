@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.tutorial.php - plus version (09.09.2007 - rev.7)
+// File : dutch/localized.tutorial.php - plus version (08.03.2008 - rev.8)
 // Original translation for the Plus version by Bert Moorlag <berbia@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -22,7 +22,7 @@ if (isset($_COOKIE["CookieStatus"])) $CookieStatus = $_COOKIE["CookieStatus"];
 
 <HEAD>
 <TITLE>Nederlands - Handleiding voor <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?></TITLE>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=${Charset}">
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo(${Charset}); ?>">
 <STYLE>
 A.topLink
 {
@@ -49,10 +49,10 @@ A.topLink:hover, A.topLink:active
 <P></P>
 <TABLE BORDER="5" CELLPADDING="5" ALIGN="center">
 <TR>
-	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- Handleiding voor <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -</FONT><br /><I>&copy; 2007<?php echo((date(Y)>"2007") ? "-".date(Y) : ""); ?> - Vertaling door Bert Moorlag - Vlissingen, Nederland</I></B></TD>
+	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- Handleiding voor <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -</FONT><br /><I>&copy; 2007<?php echo((date('Y')>"2007") ? "-".date('Y') : ""); ?> - Vertaling door Bert Moorlag - Vlissingen, Nederland</I></B></TD>
 </TR>
 </TABLE><br /><br />
-<P><A NAME="top"></P>
+<P><A NAME="top"></A></P>
 <TABLE BORDER="3" CELLPADDING="3">
 <TR>
 	<TD><FONT SIZE="+2">Inhoud: </FONT></TD>
@@ -291,7 +291,7 @@ Je kan de tekst kleuren van je bericht veranderen, door een andere kleur te kiez
 <P>
 <FONT SIZE="+1"><A NAME="exit"><B>De chatroom verlaten :</B></A></FONT>
 <P>
-Je kan de chat verlaten door eenvoudig op de "Exit" te klikken. Ook kan je een commando in je tekst venster schrijven:<br />
+Je kan de chat verlaten door eenvoudig op de <?php echo (EXIT_LINK_TYPE) ? "<img src='localization/$L/images/exitdoor.gif' border=0 alt='".L_EXIT."'> plaatje" : '"'.L_EXIT.'" link'; ?>. Ook kan je een commando in je tekst venster schrijven:<br />
 /exit<br />
 /bye<br />
 /quit<br />
@@ -394,8 +394,8 @@ If (C_USE_AVATARS) {
 ?>
 	<hr />
 	<FONT SIZE="+1"><A NAME="avatars"><B>Avatars:</B></A></FONT>
-<P>Avatars zijn afbeeldingen hoe de gebruiker zich voor stelt. Alleen geregistreerde gebruikers kunnen hun avatar veranderen. Geregistreerde gebruikers kunnen hun Profiel openen (zie /profile command) klik daarna op de avatar afbeelding of een andere avatar te kunnen selecteren uit de keuze menu, of om een URL in te vullen, deze moet dan wel publiekelijk zijn op het internet(dus niet met een paswoord beveiligde site). De afbeelding moet geschikt zijn voor browsers (.gif, .jpg, etc. ) en de grootte 32 x 32 pixel is het beste formaat om te laten zien.
-<P>Door op iemand zijn avatar te klikken, zal er een gebruikers profiel pop-up venster verschijnen (zie <A HREF="#whois">/whois command</A>).
+<P>Avatars zijn afbeeldingen hoe de gebruiker zich voor stelt. Alleen geregistreerde gebruikers kunnen hun avatar veranderen. Geregistreerde gebruikers kunnen hun Profiel openen (zie <A HREF="#changeprofile">/profile</A> command) klik daarna op de avatar afbeelding of een andere avatar te kunnen selecteren uit de keuze menu, of om een URL in te vullen, deze moet dan wel publiekelijk zijn op het internet(dus niet met een paswoord beveiligde site). De afbeelding moet geschikt zijn voor browsers (.gif, .jpg, etc. ) en de grootte 32 x 32 pixel is het beste formaat om te laten zien.
+<P>Door op iemand zijn avatar te klikken, zal er een gebruikers profiel pop-up venster verschijnen (zie <A HREF="#whois">/whois</A> command).
 Op je eigen avatar klikken in de gebruikerslijst krijg je automatisch de /profile command oproepen, mits je geregistreerd bent.
 Ben je niet geregistreerd, klik dan op je eigen avatar (default) zal een bericht laten verschijnen om je aan te moedigen toch te laten registreren.
   <P ALIGN="right"><A HREF="#top">Naar boven</A></P>
@@ -472,7 +472,11 @@ if (C_HTML_TAGS_KEEP != "none")
 <b><?php echo(L_COL_HELP_SUB2); ?></b><br /><?php echo(L_COL_HELP_P2); ?><br /><br /><center><?php echo(COLOR_LIST); ?></center><br /><?php echo(L_COL_HELP_P2a); ?><br /><br />
 </P>
 <P>
-<b><?php echo(L_COL_HELP_SUB3); ?></b><br /><?php echo(L_COLOR_HEAD_SETTINGS); ?><br /><?php if (COLOR_FILTERS) echo(L_COLOR_HEAD_SETTINGSa."<br />"); ?><u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo(L_WHOIS_ADMIN); elseif ($CookieStatus == "t") echo(L_WHOIS_TOPMOD); elseif ($CookieStatus == "m") echo(L_WHOIS_MODER); elseif ($CookieStatus == "u") echo(L_WHOIS_GUEST); else echo(L_WHOIS_REG);?></b><br /><?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
+<b><?php echo(L_COL_HELP_SUB3); ?></b><br />
+<u><?php echo(L_COLOR_HEAD_SETTINGS); ?></u><br />
+<?php if (COLOR_FILTERS) echo("a) COLOR_FILTERS = <b>".(COLOR_FILTERS == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />b) COLOR_ALLOW_GUESTS = <b>".(COLOR_ALLOW_GUESTS == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />c) COLOR_NAMES = <b>".(COLOR_NAMES == 1 ? L_ENABLED : L_DISABLED)."</b>.<br />"); ?>
+<?php if (COLOR_FILTERS) echo("<u>".L_COLOR_HEAD_SETTINGSa."</u> ".L_WHOIS_ADMIN." = <b><SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN></b>, ".L_WHOIS_MODERS." = <b><SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN></b>, ".L_WHOIS_OTHERS." = <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>."); else echo("<u>".L_COLOR_HEAD_SETTINGSb."</u> <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>.") ?><br />
+<u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo("<font color=".COLOR_CA.">".L_WHOIS_ADMIN); elseif ($CookieStatus == "t") echo("<font color=".COLOR_CA.">".L_WHOIS_TOPMOD); elseif ($CookieStatus == "m") echo("<font color=".COLOR_CM.">".L_WHOIS_MODER); else echo("<font color=".COLOR_CD.">".L_WHOIS_GUEST); echo("</font>");?></b>.<br /><?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
 <br /><P ALIGN="right"><A HREF="#top">Naar boven</A></P>
 <hr />
 <!-- Color Input Box mod by Ciprian end -->
@@ -493,11 +497,11 @@ Merk op dat je meer dan 1 naam in deze commando kan zetten (eg "/invite Jack,Hel
 <P>
 <FONT SIZE="+1"><A NAME="changeroom"><B>Veranderen van kamer :</B></A></FONT>
 <P>
-De lijst aan de rechterkant van het scherm, laat een lijst zien van beschikbare chatrooms en de gebruikers wie in de kamers zich bevinden. Om een kamer te verlaten waar je in zit, klik simpelweg op de naam van jou gewenste kamer. Lege kamers staan niet in deze lijst. Je kan in een lege kamer door het volgende commando te typen <B>command "/join #roomname"</B> zonder &quot;.
+De lijst aan de rechterkant van het scherm, laat een lijst zien van beschikbare chatrooms en de gebruikers wie in de kamers zich bevinden. Om een kamer te verlaten waar je in zit, klik simpelweg op de naam van jou gewenste kamer. Lege kamers staan niet in deze lijst. Je kan in een lege kamer door het volgende commando te typen <B>command "/join #room name"</B> zonder &quot;.
 <P>
-<I>Bijvoorbeeld:</I> /join #RedRoom
+<I>Bijvoorbeeld:</I> /join #Red Room
 <P>
-dan kom je in de RedRoom.
+dan kom je in de "Red Room".
 <?php
 if (C_VERSION == "2")
 {
@@ -505,9 +509,9 @@ if (C_VERSION == "2")
 	?>
 	 kan dan zelf een kamer creëeren met dezelfde commando. Maar dan moet je deze kamer specificeren met: 0 staat voor privé, 1 voor iedereen (standaard).
 	<P>
-	<I>Bijvoorbeeld:</I> /join 0 #MyRoom
+	<I>Bijvoorbeeld:</I> /join 0 #My Room
 	<P>
-	creëert een privé kamer (vanuit gegaan dat er niet al een publieke kamer met dezelfde naam is gemaakt) genaamd MyRoom en zet jou daarin.
+	creëert een privé kamer (vanuit gegaan dat er niet al een publieke kamer met dezelfde naam is gemaakt) genaamd "My Room" en zet jou daarin.
 	<P>
 	Namen van een kamer mogen geen komma of een backslash (\) bevatten.<?php if (C_NO_SWEAR) echo(" Verboden woorden zijn \"vloekwoorden\"."); ?>
 	<?php
@@ -561,6 +565,10 @@ Merk op dat wanneer je op een nick klikt of een bericht in het hoofdscherm, dat 
 Om aan te geven wat er gebeurt met het commando <B> "/me action"</B> zonder &quot;.
 <P>
 <I>Bijvoorbeeld:</I> Wanneer Jack een bericht verstuurt "/me is koffie aan het drinken" zal er in beeld verschijnen "<B>* Jack</B> is koffie aan het drinken".
+<P>
+Een variatie op deze commando is de <B>/mr command</B> , waarin ook het geslacht van de gebruiker in beeld verschijnt.
+<P>
+<I>Bijvoorbeeld:</I> Wanneer Jack een bericht verstuurt "/mr is koffie aan het drinken" zal er in beeld verschijnen "<B>* <?php echo(L_HELP_MR); ?> Jack</B> is koffie aan het drinken".
 <br /><P ALIGN="right"><A HREF="#top">Naar boven</A></P>
 <P>
 <hr />

@@ -15,7 +15,7 @@ if (($status == "m") || ($status == "t") || ($status == "a")) // use this to ena
 		if (C_NO_SWEAR && $R != C_NO_SWEAR_ROOM1 && $R != C_NO_SWEAR_ROOM2 && $R != C_NO_SWEAR_ROOM3 && $R != C_NO_SWEAR_ROOM4)
 		{
 		include("./lib/swearing.lib.php");
-		$Mess = checkwords($Mess, false);
+		$Mess = checkwords($Mess, false, $Charset);
 		}
 /*
 				if (C_USE_SMILIES)

@@ -23,8 +23,10 @@ if (isset($_POST))
 	};
 };
 
-// Fix a security hole
-if (isset($L) && !is_dir("./localization/".$L)) exit();
+// Fix some security holes
+if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
+if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) exit();
+if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 // Added for Skin mod
 if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
@@ -49,6 +51,15 @@ header("Content-Type: text/html; charset=${Charset}");
 
 // avoid server configuration for magic quotes
 set_magic_quotes_runtime(0);
+// Can't turn off magic quotes gpc so just redo what it did if it is on.
+if (get_magic_quotes_gpc()) {
+	foreach($_GET as $k=>$v)
+		$_GET[$k] = stripslashes($v);
+	foreach($_POST as $k=>$v)
+		$_POST[$k] = stripslashes($v);
+	foreach($_COOKIE as $k=>$v)
+		$_COOKIE[$k] = stripslashes($v);
+}
 
 $DbLink = new DB;
 
@@ -64,7 +75,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_PASS_7)
 	{
 		$Error = L_ERR_USR_16a;
 	}
-	else if(C_NO_SWEAR && checkwords($U, true))
+	else if(C_NO_SWEAR && checkwords($U, true, $Charset))
 	{
 		$Error = L_ERR_USR_18;
 	}
@@ -113,11 +124,11 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_PASS_7)
 				{
 					$Latin1 = ($Charset != "utf-8");
 					include("./lib/get_IP.lib.php");		// Set the $IP var
-		
+
 					$pmc_password = gen_password();
 					$PWD_Hash = md5(stripslashes($pmc_password));
 					// Send e-mail
-					$send = send_email("[".((C_CHAT_NAME != "") ? C_CHAT_NAME." - ".APP_NAME : APP_NAME)."] ".L_PASS_9, L_SET_2, L_REG_1, L_PASS_11);
+					$send = send_email(L_PASS_9." [".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]", L_SET_2, L_REG_1, L_PASS_11, 1);
 					if (!$send) $Error = sprintf(L_EMAIL_VAL_Err,$Sender_email,$Sender_email);
 					if (!isset($Error) || $Error == "")
 					{
@@ -146,7 +157,7 @@ if (!isset($FontName)) $FontName = "";
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
-<TITLE><?php echo((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME) ?></TITLE>
+<TITLE><?php echo(L_PASS_0." - ". APP_NAME) ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
 <!--
@@ -193,7 +204,7 @@ function get_focus()
 <BODY onLoad="if (window.focus) get_focus();">
 <CENTER>
 <br />
-<FORM ACTION="pass_reset.php" METHOD="POST" AUTOCOMPLETE="OFF" NAME="PassParams">
+<FORM ACTION="pass_reset.php" METHOD="POST" AUTOCOMPLETE="ON" NAME="PassParams">
 <P></P>
 <?php
 if(isset($Error))
@@ -264,7 +275,7 @@ if(isset($Error))
 </FORM>
 </CENTER>
 <P align="right"><div align="right"><span dir="LTR" style="font-weight: 600; color:#FFD700; font-size: 7pt">
-&copy; 2007<?php echo((date(Y)>"2007") ? "-".date(Y) : ""); ?> - by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo (($L!="turkish") ? sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR) : sprintf(L_CLICKS,L_AUTHOR,L_LINKS_6)); ?>.'; return true;" title="<?php echo (($L!="turkish") ? sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR) : sprintf(L_CLICKS,L_AUTHOR,L_LINKS_6)); ?>" target=_blank>Ciprian Murariu</a></span></div></P>
+&copy; 2007<?php echo((date('Y')>"2007") ? "-".date('Y') : ""); ?> - by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>.'; return true;" title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>" target=_blank>Ciprian Murariu</a></span></div>
 </P>
 </BODY>
 </HTML>

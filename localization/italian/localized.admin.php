@@ -1,5 +1,5 @@
 <?php
-// File : italian/localized.admin.php - plus version (25.09.2007 - rev.10)
+// File : italian/localized.admin.php - plus version (20.05.2008 - rev.12)
 // Original translation by Andrea D’Alessandro <andrea@abol.it> & Massimo Fubini <massimo@tomato.it>
 //	& Giuliano Yurij Beccaria <yurij@e-pages.it> & Marco Borrini <borrini@tradimento.it>
 // & Bartolotta Gioachino <developers@rockitalia.com> & Silvia M. Carrassi <silvia@ladysilvia.net>
@@ -15,7 +15,9 @@ $FontSize = 10;
 // Top frame
 define("A_MENU_0", "Amministrazione per %s");
 define("A_MENU_1", "Utenti registrati");
+define("A_MENU_11", "Utente registrato");
 define("A_MENU_2", "Utenti espulsi");
+define("A_MENU_21", "Utente espulso");
 define("A_MENU_3", "Pulisci stanze");
 define("A_MENU_4", "Invia e-mails");
 define("A_MENU_5", "Configurazione");
@@ -35,7 +37,7 @@ define("A_SHEET1_6", "Rimuovi i profili contrassegnati");
 define("A_SHEET1_7", "Cambia");
 define("A_SHEET1_8", "Non ci sono utenti registrati eccetto te stesso.");
 define("A_SHEET1_9", "Espelli profili selezionati");
-define("A_SHEET1_10", "Adesso devi andare sullo schedario degli utenti banditi per raffinare le tue scelte.");
+define("A_SHEET1_10", "Adesso devi andare sullo schedario degli ’".A_MENU_2."’ per raffinare le tue scelte.");
 define("A_SHEET1_11", "Ultima connessione");
 define("A_SHEET1_12", "Motivo Espulsione (opzionale)");
 define("A_USER", "Utente");
@@ -62,7 +64,7 @@ define("A_SHEET3_3", "Svuota le stanze selezionate");
 define("A_SHEET3_4", "Non ci sono stanze da svuotare.");
 
 // Frame for sending mails
-define("A_SHEET4_0", "Non hai impostato l’indirizzo email dell’amministratore nella tabella di configurazione.");
+define("A_SHEET4_0", "Non hai impostato l’indirizzo email dell’amministratore nella tabella di ’".A_MENU_5."’.");
 define("A_SHEET4_1", "Invia e-mail:");
 define("A_SHEET4_2", "A:");
 define("A_SHEET4_3", "Seleziona tutto");
@@ -77,7 +79,7 @@ define("A_SHEET4_11", "Firma");
 define("A_SHEET4_12", "Deseleziona tutto");
 
 // Frame for configuration
-define("A_SHEET5_0", "La versione installata della tua phpMyChat-Plus e %s");
+define("A_SHEET5_0", "La tua versione installata è %s");
 define("A_SHEET5_1", "C’e una nuova versione realizzata (%s)!");
 
 //Chat Extras
@@ -85,7 +87,7 @@ define("A_EXTR_DSBL", "Extra chat disabilitati") ;
 define("A_REFRESH_MSG", "Aggiorna messaggi") ;
 define("A_MSG_DEL", "Elimina") ;
 define("A_POST_TIME", "Inviato da") ;
-define("A_FROM_TO", "Da  a") ;
+define("A_FROM_TO", "Da › A") ;
 define("A_FROM", "Da") ;
 define("A_CHTEX_ROOM", "Stanza") ;
 define("A_CHTEX_MSG", "Messaggio") ;
@@ -114,6 +116,12 @@ define("A_CHAT_LOGS_20", "Visualizza l’archivio completo della sessione della 
 define("A_CHAT_LOGS_21", "Torna all’inizio");
 define("A_CHAT_LOGS_22", "Archivio Log");
 define("A_CHAT_LOGS_23", "Generato il %s");
+define("A_CHAT_LOGS_24", "Comprimi tutti i %s registri nell’archivio zip"); // date
+define("A_CHAT_LOGS_25", "Questo costruirà un file zip con tutti i registri\\nmemorizzati nella cartella %s!\\n"); // month/year
+define("A_CHAT_LOGS_26", "\\nSei sicuro?");
+define("A_CHAT_LOGS_27", "Archivi zip");
+define("A_CHAT_LOGS_28", "Scarica %s");
+define("A_CHAT_LOGS_29", "Cancella questo zip");
 
 //Admin Search Page
 define("A_SEARCH_1", "Pagine di ricerca stanze");
@@ -126,8 +134,8 @@ define("A_SEARCH_7", "Genere");
 define("A_SEARCH_8", "Descrizione");
 define("A_SEARCH_9", "Links");
 define("A_SEARCH_10", "Cerca");
-define("A_SEARCH_11", "Per categoria permesssi, le opzioni sono <b>ad</b>, <b>mod</b> o <b>u</b>.");
-define("A_SEARCH_12", "Per categoria genere, le opzioni sono <b>0</b> se non specificati, <b>1</b> per maschi, o <b>2</b> per femmine.");
+define("A_SEARCH_11", "Per categoria Permesssi, le opzioni sono <b>ad</b>, <b>mod</b> o <b>u</b>.");
+define("A_SEARCH_12", "Per categoria Genere, le opzioni sono <b>0</b> se non specificati, <b>1</b> per maschi, <b>2</b> per femmine, o <b>3</b> per coppia.");
 define("A_SEARCH_13", "Utente");
 define("A_SEARCH_14", "Nmae");
 define("A_SEARCH_15", "Cognome");
@@ -138,6 +146,10 @@ define("A_SEARCH_20", "Genere");
 define("A_SEARCH_21", "Termini di ricerca");
 define("A_SEARCH_22", "Cerca per");
 define("A_SEARCH_23", "Prego provvedi alla ricerca per termini e riprova di nuovo!");
+define("A_SEARCH_24", "Il tuo criterio di ricerca non ha dato risultati. Ridefinisci la tu ricerca.");
+define("A_SEARCH_25", "Modera questo utente");
+define("A_SEARCH_24", "La tua ricerca non ha dato risultati. Ridefinisci la tua ricerca, prego.");
+define("A_SEARCH_25", "Modera questo utente");
 
 // Connected users Page
 define("A_LURKING_1", "Utenti e Osservatori connessi") ;

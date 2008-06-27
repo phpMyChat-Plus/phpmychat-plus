@@ -1,12 +1,12 @@
 <?php
 
 // Ensure a moderator have such a status for the current room
-function room_in($what, $in)
+function room_in($what, $in, $Charset)
 {
 	$rooms = (is_array($in) ? $in : explode(",",$in));
 	for (reset($rooms); $room_name=current($rooms); next($rooms))
 	{
-		if (strcasecmp($what, $room_name) == 0) return true;
+		if (strcasecmp(mb_convert_case($what,MB_CASE_LOWER,$Charset), mb_convert_case($room_name,MB_CASE_LOWER,$Charset)) == 0) return true;
 	};
 	return false;
 };
@@ -20,6 +20,14 @@ function mysql_to_ts($mysql_time)
 	}
 	return mktime($matches[4], $matches[5], $matches[6], $matches[2], $matches[3], $matches[1]);
 }
+if (!function_exists("utf_conv"))
+{
+	function utf_conv($iso,$Charset,$what)
+	{
+	if (function_exists('iconv')) $what = iconv($iso, $Charset, $what);
+	return $what;
+	};
+};
 
 $DbLink = new DB;
 
@@ -48,7 +56,7 @@ if ($sheet < 3)
 // Remove some var from the url query
 $URLQueryBody = "What=Body&L=$L&sheet=$sheet";
 $URLQueryBody_Links = "From=$From&".$URLQueryBody."&pmc_username=".urlencode($pmc_username)."&pmc_password=$pmc_password";
-if ($sheet < 6)
+if ($sheet < 3)
 {
 		// Define the lower bound to be displayed for registered users table
 		$URLQueryBody_SortLinks = $URLQueryBody_Links."&startReg=$startReg";

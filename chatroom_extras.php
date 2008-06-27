@@ -7,15 +7,14 @@
 // 2nd Option Usage: use a link to open this page in a popup window.
 // 2a. Save this file with a different name like chatroom2_extras.php to use a second link for the second room, and so on)
 // <a href="path_to_this_file/chatroom_extras.php" target=_blank"">Open the Tests ChatRoom Extras</a>
-// 2b. To use the same file /chatroom_extras.php for multiple displays, use links like this (replace 'Tests' with your room names for std version or ROOM1-9 for plus and also commnet the lines bellow with $R = 'RoomName'):
+// 2b. To use the same file /chatroom_extras.php for multiple displays, use links like this (replace 'Tests' with your room names for std version or ROOM1-9 for plus and also commnet the lines below with $R = 'RoomName'):
 // <a href="path_to_this_file/chatroom_extras.php?R='Tests'" target=_blank"">Open the Tests ChatRoom Extras</a>
 // <a href="path_to_this_file/chatroom_extras.php?R='Main Room'" target=_blank"">Open the Main Room ChatRoom Extras</a>
 
 // Recommended output window size: 800x550
 
-
 // Set these variables:
-$ChatPath = "./";		//For being called from pages on server's root path (on standard versions, ./test/chat/ might be more apropriate)
+$ChatPath = "";		//For being called from pages on server's root path (on standard versions, ./test/chat/ might be more apropriate)
 													//To call it from subfolders (eg www.website.com/somefolder - other than chat) use ../test and so on (../../test - for 2 levels deep subfolders)
 if (!isset($N)) $N = 30;									//Set the last number of messages to be displayed
 //require("${ChatPath}config/config.lib.php"); //don't touch this line - it is here to return Plus version room names - required in both versions!
@@ -29,22 +28,33 @@ $Type = " AND type='1'";	//This is to display only the public rooms
 //$Type = "";							//This is to display either public or private rooms
 
 if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
-if (!isset($R)) $skin == "style1";	//you can use any style in your pluschat/config folder (style1, style2, ..., style7)
 
-if (!isset($L) && isset($_COOKIE["CookieLang"])) $L = $_COOKIE["CookieLang"];
+// Fix some security holes
+if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
+if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) exit();
+if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
-// Fix a security hole
-if (isset($L) && !is_dir("${ChatPath}localization/".$L)) exit();
+require("./${ChatPath}config/config.lib.php");
+require("./${ChatPath}localization/languages.lib.php");
+require("./${ChatPath}localization/".$L."/localized.chat.php");
+require("./${ChatPath}lib/database/".C_DB_TYPE.".lib.php");
+require("./${ChatPath}lib/release.lib.php");
 
-require("${ChatPath}config/config.lib.php");
-require("${ChatPath}lib/release.lib.php");
-if (!isset($L) || $L == "") $L = C_LANGUAGE;
-require("${ChatPath}localization/".$L."/localized.chat.php");
-require("${ChatPath}lib/database/".C_DB_TYPE.".lib.php");
-//require("${ChatPath}/lib/clean.lib.php");
+// Special cache instructions for IE5+
+header("Cache-Control: public");
+header("Content-Type: text/html; charset=${Charset}");
 
-// Avoid server configuration for magic quotes
+// avoid server configuration for magic quotes
 set_magic_quotes_runtime(0);
+// Can't turn off magic quotes gpc so just redo what it did if it is on.
+if (get_magic_quotes_gpc()) {
+	foreach($_GET as $k=>$v)
+		$_GET[$k] = stripslashes($v);
+	foreach($_POST as $k=>$v)
+		$_POST[$k] = stripslashes($v);
+	foreach($_COOKIE as $k=>$v)
+		$_COOKIE[$k] = stripslashes($v);
+}
 
 // Translate to html special characters, and entities if message was sent with a latin 1 charset
 $Latin1 = ($Charset != "utf-8");
@@ -57,30 +67,97 @@ function special_char($str,$lang)
 
 // Define the SQL query (depends on values for ignored users list and on whether to display
 // notification messages or not
+$DbLink = new DB;
 
 $CondForQuery	= "(address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3')))";
 
-$DbLink1 = new DB;
-$DbLink1->query("SELECT m_time, room, username, latin1, address, message FROM ".C_MSG_TBL." WHERE ".$CondForQuery.$RoomFilter.$Type." ORDER BY m_time DESC LIMIT $N");
+$DbLink->query("SELECT m_time, room, username, latin1, address, message FROM ".C_MSG_TBL." WHERE ".$CondForQuery.$RoomFilter.$Type." ORDER BY m_time DESC LIMIT $N");
 
 // Format and display new messages
-if($DbLink1->num_rows() > 0)
+if($DbLink->num_rows() > 0)
 {
 	$MessagesString = "";
-	while(list($Time, $Room, $User, $Latin1, $Dest, $Message) = $DbLink1->next_record())
+	while(list($Time, $Room, $User, $Latin1, $Dest, $Message) = $DbLink->next_record())
 	{
 		$Message = stripslashes($Message);
+		$Message = eregi_replace("L_DEL_BYE",L_DEL_BYE,$Message);
+		$Message = eregi_replace("L_REG_BRB",L_REG_BRB,$Message);
+		$Message = eregi_replace("L_HELP_MR",L_HELP_MR,$Message);
+		$Message = eregi_replace("L_HELP_MS",L_HELP_MS,$Message);
 		if ($Room == '*') $Room = L_ROOM_ALL;
-		if ($L!="turkish") $Message = eregi_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$Message);
-		else $Message = eregi_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_1,L_LINKS_15).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_1,L_LINKS_15).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_1,L_LINKS_15).'</a>',$Message);
+		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
+		{
+			$Message = eregi_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$Message);
+		}
+		else $Message = eregi_replace('target="_blank">','title="'.sprintf(L_CLICK,L_LINKS_3).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_LINKS_3).'.\'; return true" target="_blank">',$Message);
+
 		$Message = eregi_replace('alt="Send email">','title="'.sprintf(L_CLICK,L_EMAIL_1).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_EMAIL_1).'.\'; return true">',$Message);
+		if(COLOR_NAMES)
+		{
+			$colorname_tag = "";
+			$colorname_endtag = "";
+			$colornamedest_tag = "";
+			$colornamedest_endtag = "";
+			$DbColor = new DB;
+			if (isset($User))
+			{
+				$DbColor->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '$User'");
+				list($perms_user,$colorname) = $DbColor->next_record();
+				$DbColor->clean_results();
+			}
+			if (isset($Dest))
+			{
+				$DbColor->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '$Dest'");
+				list($perms_dest,$colornamedest) = $DbColor->next_record();
+				$DbColor->clean_results();
+			}
+			if(isset($colorname) && $colorname != "")
+			{
+				$colorname_tag = "<FONT color=".$colorname.">";
+				unset($colorname);
+			}
+			elseif(C_ITALICIZE_POWERS)
+			{
+				if (($perms_user == "admin" && $User != C_BOT_NAME) || $perms_user == "topmod") $colorname_tag = "<FONT color=".COLOR_CA.">";
+				elseif ($perms_user == "moderator") $colorname_tag = "<FONT color=".COLOR_CM.">";
+				else $colorname_tag = "<FONT color=".COLOR_CD.">";
+			}
+			else
+			{
+				$colorname_tag = "<FONT color=".COLOR_CD.">";
+			}
+			if(isset($colornamedest) && $colornamedest != "")
+			{
+				$colornamedest_tag = "<FONT color=".$colornamedest.">";
+				unset($colornamedest);
+			}
+			elseif (C_ITALICIZE_POWERS)
+			{
+				if (($perms_dest == "admin" && $Dest != C_BOT_NAME) || $perms_dest == "topmod") $colornamedest_tag = "<FONT color=".COLOR_CA.">";
+				elseif ($perms_dest == "moderator") $colornamedest_tag = "<FONT color=".COLOR_CM.">";
+				else $colornamedest_tag = "<FONT color=".COLOR_CD.">";
+			}
+			else
+			{
+				$colornamedest_tag = "<FONT color=".COLOR_CD.">";
+			}
+			$colorname_endtag = "</FONT>";
+			$colornamedest_endtag = "</FONT>";
+		}
+		else
+		{
+			$colorname_tag = "";
+			$colornamedest_tag = "";
+			$colorname_endtag = "";
+			$colornamedest_endtag = "";
+		}
 		$NewMsg = "<tr align=texttop valign=top>";
 		$NewMsg .= "<td width=1% nowrap=\"nowrap\">".date("d-M, H:i:s", $Time + C_TMZ_OFFSET*60*60)."</td><td width=1% nowrap=\"nowrap\">".$Room."</td>";
 		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS topic" && $User != "SYS topic reset" && substr($User,0,8) != "SYS dice")
 		{
-			$User = special_char($User,$Latin1);
-			if ($Dest != "") $Dest = "]>[".htmlspecialchars(stripslashes($Dest));
-			$NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>[${User}${Dest}]</B></td><td>$Message</td>";
+			$User = $colorname_tag."[".special_char($User,$Latin1)."]".$colorname_endtag;
+			if ($Dest != "") $Dest = ">".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]".$colornamedest_endtag;
+			$NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>${User}${Dest}</B></td><td>$Message</td>";
 		}
 		if ($User == "SYS image")
 		{
@@ -111,34 +188,28 @@ if($DbLink1->num_rows() > 0)
 		// Separator between messages sent before today and other ones
 		if (!isset($day_separator) && date("j", $Time +  C_TMZ_OFFSET*60*60) != date("j", time() +  C_TMZ_OFFSET*60*60))
 		{
-			$day_separator = "<td valign=top colspan=4 align=center style=\"background-color:yellow;\"><SPAN CLASS=\"notify\">--------- ".(!$O ? L_TODAY_UP : L_TODAY_DWN)." ---------</SPAN></td>";
+			$day_separator = "<tr align=texttop valign=top><td valign=top colspan=4 align=center style=\"background-color:yellow;\"><SPAN CLASS=\"notify\">--------- ".(!$O ? L_TODAY_UP : L_TODAY_DWN)." ---------</SPAN></td>";
 		};
 
-			$MessagesString .= ((isset($day_separator) && $day_separator != "") ? $day_separator."" : "").$NewMsg."</tr>";
+			$MessagesString .= ((isset($day_separator) && $day_separator != "") ? "</tr>".$day_separator : "").$NewMsg."</tr>";
 			if (isset($day_separator)) $day_separator = "";		// Today separator already printed
 	};
 }
 else
 {
-	$MessagesString = "<td valign=top colspan=4 align=center style=\"background-color:yellow;\"><SPAN CLASS=\"notify\">".L_NO_MSG."</SPAN></td>";
+	$MessagesString = "<tr align=texttop valign=top><td valign=top colspan=4 align=center style=\"background-color:yellow;\"><SPAN CLASS=\"notify\">".L_NO_MSG."</SPAN></td></tr>";
 };
 
-
-$DbLink1->clean_results();
-$DbLink1->close();
+$DbLink->clean_results();
+$DbLink->close();
 $CleanUsrTbl = 1;
 
-if (isset($MessagesString) && $MessagesString != "")
-{
-// Special cache instructions for IE5+
-header("Cache-Control: public");
-header("Content-Type: text/html; charset=${Charset}");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 <HEAD>
 <META HTTP-EQUIV="Refresh" CONTENT="10" CHARSET=<?php echo($Charset); ?>">
-<TITLE><?php echo(((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)." - Last ".$N." messages ".($Room != "" ? "in ".stripslashes($R)." room" : "")." - ".date("r")); ?></TITLE>
+<TITLE><?php echo("Last ".$N." messages ".($Room != "" ? "in ".stripslashes($R)." room" : "")." - ".date('r')." - ".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo("${ChatPath}".$skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 </HEAD>
 	<BODY>
@@ -150,18 +221,14 @@ header("Content-Type: text/html; charset=${Charset}");
 <td VALIGN=CENTER ALIGN=CENTER><b>".L_PRIV_MSG5."</b></td>
 <td VALIGN=CENTER ALIGN=CENTER><b>".L_PRIV_MSG2."</b></td>
 <td VALIGN=CENTER ALIGN=CENTER><b>".L_PRIV_MSG1."</b></td>
-<td VALIGN=CENTER ALIGN=CENTER><b>".L_PRIV_MSG4."</b></td>
-</tr>");
+<td VALIGN=CENTER ALIGN=CENTER><b>".L_PRIV_MSG4."</b></td></tr>");
 	echo($MessagesString."</table>");
 	unset($MessagesString);
 	?>
 </CENTER>
 <P align="right"><div align="right"><span dir="LTR" style="font-weight: 600; color:#FFD700; font-size: 7pt">
-&copy; 2006-<?php echo(date(Y)); ?> - by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo (($L!="turkish") ? sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR) : sprintf(L_CLICKS,L_AUTHOR,L_LINKS_6)); ?>.'; return true;" title="<?php echo (($L!="turkish") ? sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR) : sprintf(L_CLICKS,L_AUTHOR,L_LINKS_6)); ?>" target=_blank>Ciprian Murariu</a></span></div></P>
-</P>
+&copy; 2006-<?php echo(date('Y')); ?> - by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>.'; return true;" title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>" target=_blank>Ciprian Murariu</a></span></div>
 	</BODY>
 	</HTML>
 	<?php
-	exit;
-}
 ?>

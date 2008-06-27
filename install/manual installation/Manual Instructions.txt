@@ -1,7 +1,35 @@
 Instructions for a NEW installation (or an UPGRADE) of the Plus version you just downloaded.
-Note: This version needs a manual install. (not running the setup.php as the base version does)
 
 1. Extract plus.zip
+If you want to run a NEW install, skip to step 2
+
+UPGRADE ONLY -> Safe Procedures - IMPORTANT!
+1a. Backup your chat database, just in case something goes wrong; 
+1b. Backup (make a copy on your local pc) of the following files/folders:
+- acount/pages folder to keep the all time counter, otherwise it would be reset to 0;
+- config/config.lib.php file;
+- logs & logsadmin folders - it will keep your saved archive (you can also let it untouched on your ftp server);
+P - any file you have modified in your current chat version (styles, usersH/L, banner, index, index.lib, localization, etc.);
+1c. Optionally, you can delete now the old content of the chat folder;
+1d. Upload the new provided folders and files extracted from the plus.zip distribution (choose "Overwrite all" if the old content has not been deleted at the previous step);
+After uploading the new chat  put back ONLY the following backed up files (in the according folders):
+- acount/pages/chat_index.txt;
+- config/config.lib.php (or just put in the new file the DB data mentioned at step 2 bellow);
+- entire logs folder content (only if you first deleted it from ftp);
+- entire logsadmin folder content (only if you first deleted it from ftp);
+1e. With every new released version, several files are drastically changed, while some more have just small fixes. To make sure you include the latest fixes/additions and provide the best functionality, you need to make sure all the latest code is added to your ftp folder.
+If you want to keep the actual changes/modifications/personalizations you might have made to the old version of your chat (like personal links, personal styles, extra frames, search boxes and so on), you will need to compare the personal files you backed up on step 1bP with the similar ones provided in the new release and hunt for the changes, then apply/update the files accordingly. If you are in this situation, it means you already know html/php, therefore I won't tell you how to do this, but I do give you a few hints about how I am doing this process on my own site (not just for chat but for any upgraded software like phpatm, 4images gallery, phpbb forum, net2ftp, and others):
+Hint1:
+phpMyChat documentation doesn't provide an explicit list of the file changes/file history. I'm sorry about this, but I don't have time to document this. Instead, you can:
+a. check yourself for the latest modified files, by sorting the folder/subfolder in Explorer (Total Commander, etc.) by "Last Modified" date column and check the dates;
+b. do the same in your ftp chat folder/subfolder (most ftp managers do that sort easily, so I would do this with the ftp manager for both remote and local files, having the panes tilled vertically);
+c. compare the last modified date of the new release with the last modified date of your similar file on your site. If your file is more recently modified than the new one, it means you should definitely check for changes in that file!
+Hint2:
+I don't want to advertise, but I'll tell you how I do file comparisions: I use UltraCompare (from http://www.ultracompare.com). This also come as a plugin for UltraEdit/UltraStudio (powerful files/text&code editors) from the same publisher (http://www.idmcomp.com). With UltraCompare I highlight all the differences between 2 (or 3) files (a red cut = in the menu bar).
+From this point, I could use "Merge" but I never do that (hehe, maybe old habits, or just the fact that I don't trust the results). In an old fashioned way, I still copy&paste the codes/lines/paragraphs I need, but it always works, sometimes by checking twice.
+From now on, you are on your own!
+If you're still in trouble or just need a hand, you can ask for support at my email address (last line in this document), but make sure you have the backups saved as per steps 1a & 1b!
+Now go to next step...
 
 2. Edit this file:
 - config/config.lib.php - only the database details (first 3 lines at the begining of the file):
@@ -20,20 +48,19 @@ define("C_DB_HOST", 'localhost');
 While "localhost" works in most cases, sometime it is necessary to refer to the full address of your database. Your service provider will normally tell you if this is the case!
 
 3. Upload the plus directory into your public_html folder.
-Note: index.php must be in the plus folder, not plus/chat/ as for the previous versions.
-The file index1.php is the index file with the full page filled. Choose the one you want and keep it as index.php.
+Note: index.php must be in the plus folder, not plus/chat/ as for the standard versions (< 0.15.0).
 
 4. Optionally, rename plus folder to whatever you'd like (chat, mychat).
 
-5. Change Attributes for these files/folders (chmod):
+5. Change Attributes/Permissions for these files/folders (chmod by ftp):
 plus/acount/pages/ - to 777
 plus/acount/pages/bak/ - to 777
 plus/acount/pages/chat_index.txt - to 666
-plus/acount/pages/chat_ip_logs.txt - to 666
-plus/acount/pages/ip.txt - to 666
+plus/acount/pages/chat_ip_logs.htm - to 666
 plus/acount/pages/ip.txt - to 666
 plus/bot/subs.inc - to 777
 plus/botfb/ - to 777
+plus/images/cache/ - to 777
 plus/logs/ - to 777
 plus/logsadmin/ - to 777
 
@@ -42,8 +69,8 @@ Don't change any data there. You will be able to customize your chat later, from
 
 Note: (you better skip this note if you don't know phpmyadmin: if you'd like to change the admin name to the one you'll use, this is a good opportunity, but let the password untouched.
 By default, the admin account is admin/admin.
-Go to line 291:
-INSERT INTO c_reg_users VALUES ('', '', 'admin', '1', '21232f297a57a5a743894a0e4a801fc3', '', '', '', '', '', 0, 'admin', '', '', '', 0, 1, '', '', '', '', '', 'red', 'images/avatars/def_avatar.gif', '0', '');
+Go to line 291 (this might come changed in the newer releases):
+INSERT INTO c_reg_users VALUES ('', '', 'admin', '1', '21232f297a57a5a743894a0e4a801fc3', '', '', '', '', '', 0, 'admin', '', '', '', 0, 1, '', '', '', '', '', 'red', 'images/avatars/def_avatar.gif', '0', '', '', '');
 and replace the first "admin" word with your desired username. The password will still be "admin", being easy to change it later using edituser.php.
 If you preffer to change the password as well, you can use this link http://ciprianmp.com/scripts/hash.php to generate the md5 hash of your desired password, then copy it and replace "21232f297a57a5a743894a0e4a801fc3" (don't touch the leading/ending 's)
 DO NOT change any data on the next line (it is regarding the bot and quotes - two virtual users that bring some fun to your chat)!
@@ -62,7 +89,7 @@ Note: steps 6b-6d will also work by importing the coresponding .txt file into yo
 
 10. Open the Administration menu/link (Admin Panel) and customize your chat (do not rename your bot yet).
 
-11. Rename your logsadmin folder on both admin config panel and ftp folder to a hardly to guess name.
+11. Rename your logsadmin folder on both admin config panel and ftp folder to a hardly to guess name (to prevent anauthorized access, because it contains all the chat posts/events).
 
 That's it! It should fly!
 
@@ -82,16 +109,14 @@ A6. To shut the bot up type "bye plusbot"
 A7. To stop the bot and make him quit the room, type /bot stop in the room it's running into.
 A8. To talk privately to the bot (less annoying) use /to or /wisp, like with all the other users.
 Bot successfully loaded Test: make sure the bot is able to answer you in the chat. If his message is empty, then something went wrong.
-Contact me on ciprianmp@yahoo.com for support (only initial loading support, not customizing the replies)
+Contact me for support at my email address (last line in this document) - only for initial loading support, not customizing the replies.
 If the bot posts coherent answers, then you can go to admin panel and change bot name (using the same rules for registered usernames: no spaces, commas, backslashes or other banned characters, otherwise it will break your chat's functionality)
 
-Note1: If you don't intend to use the bot, edit the quick menu in admin config panel to eliminate the bot commands from the quick list.
-If bot answers you (posts any content) then you can change it's name in Admin Panel now - it's safe.
+Note: If you don't intend to use the bot, edit the quick menu in admin config panel to eliminate the bot commands from the quick list.
+If the bot answers you (posts any content) then you can change it's name in Admin Panel now - it's safe.
 This version comes only with the English and German files.
-To add other languages by yourself, edit all the other languages you want but english from the standard pack and add them in chat/localization/.
-Insert, modify and translate according to the new lines added in english version (use a text compare software).
 
-Note2: If you get into troubles with bot, you need to uninstall and reinstall it to make it work again:
+B: If you get into troubles with bot, you need to uninstall and reinstall it to make it work again:
 B1. Stop the bot in chat rooms it is started in, using the /bot stop command (if it doesn't work, just delete the bot records in c_users table - with phpmyadmin - and botfb folder).
 B2. Rename the bot to "plusbot" in Admin panel.
 B3. Use phpmyadmin to "empty" the following tables: bot_bot, bot_bots, bot_patterns and bot_templates.
@@ -100,13 +125,19 @@ B5. Make sure all the original distributed files are in the aiml folder (startup
 B6. Make sure the plus/bot/subs.inc file is chmoded to 777 (step 5 in this tutorial).
 B7. Reinstall the bot following the steps described in paragraph A. (A1-A8)
 
-C. This chat comes with 10 different skins (config/style1-10.css.php) Play with them and decide which ones fits best your site style. To do that, use a temporary/backup folder where you can rename them one by one to style1.css.php then upload them (again, one by one) into the config folder. Login to first default room, take a look, when you're done, logout and do the same with the next style. And so on. At the end, reupload the original style1.css.php.
-After you discovered how all the skins look like, just rename them to match the room number (1-5 are for the first 5 public rooms, in order; 6-9 are the first 4 private rooms, in order - all 9 are defined and enabled by default in admin panel; 10th skin is unused by default)
+C: To add other chat languages by yourself, download and edit the existing language files from the standard pack and add the new folder into /localization/ Plus folder. (well, the best way is to contact me and get the latest templates in a Word format...)
+Please note that there is a new approach to Plus, each language folder including an /images/ folder with it's own images (flag.gif - 3D, flag0.gif - 2D, exitdoor.gif, exitdoorRoll.gif, helpOn.gif and helpOff.gif). Required are only the correspondent flag images for your language (2D could be also copied from the standard version and just renamed to flag0.gif). If not added, the help and door images will be automatically be shown from english.
+Insert, modify and translate according to the modified/new lines added in the english Plus version (use a Text Compare software). To be compatible with Plus, the new files should be encoded into "UTF8 without BOM" (just a few text editors can convert and keep this format - I personally preffer Notepad++ - anyway, you should never use the Windows Notepad or Wordpad). If everything goes fine, you can make your translation available to other users by contacting me.
+
+D. This chat comes with several different skins (skins/styleXX.css.php).
+You can build your own styles (do not modify the provided ones!).
+One single style is composed of two files: stylex.css.php (main style) and stylex.php (skin settings). Copy these two files and rename them by increasing the overall number (e.g. if style12.php is the biggest number, rename to  style13.css.php and style13.php) then start customize them to match your needs. Don't forget to give it a name in style13.php and test it. The new skin will automatically become available in the Admin Panel/Configuration/Menu/Rooms & Colors, as well as in the Skins Preview popup.
 
 For more instructions (e.g. how to upgrade the c_reg_users table) read the Plus FAQ.txt in the "docs/plus docs" folder. Actually, read also the Fixes readme.txt which might give you some more hints about new features/fixes and other stuff.
 That's all for now! Have a nice one and let me know how it goes!
 
-Do you need some more tries of different configurations before applying to your chat server? Don't hesitate to use the Demo/Try me server at http://plus.gamedogs.com (use admin/admin or moderator/moderator as login for different powers - not registration required)
+Do you need some more tries of different configurations before applying to your chat server? Don't hesitate to use the Demo/Try me server at http://ciprianmp.com/latest/ (use admin/admin or moderator/moderator as login for different powers - no registration required)
 
 My best regards,
 Ciprian Murariu
+ciprianmp at yahoo dot com

@@ -1,32 +1,32 @@
 Requests / Suggestions
+-speech/voice chat plugin
 -add Private channels popup - separate private conversations - mirc like - based on Volkan Övün idea.
+-allow power users whispers when pm is disabled - based on Peter Petrov idea.
 -boot/kick from admin panel
--posting links without a leading space hangs the input frame/chat - Alex?
--runCMD - to return the old M content after using a click command - Ciprian
+-runCMD - to return the old M content after using a click (command) - Ciprian
 -Statistics mod - Mei Yung - ?
--members page/profiles - Ciprian
+-add the members page/profiles - Ciprian
 -credits page - Ciprian
--/ghost command: put the user into a ghost state (the ghost user and his posts cannot be seen in the room, he won’t know about this, so he gives up and leave the chat - works when banning has no effect on a specific user; it also allows an admin/moder to go invisible in the chat); - second part is done for power users.
+-/ghost command: put the user into a ghost state (the ghost user and his posts cannot be seen in the room, he won’t know about this, so he gives up and leave the chat - works when banning has no effect on a specific user; it also allows an admin/moder to go invisible in the chat); - Ciprian
 -commands table & archiving/logging the commands used in chat as well - Ciprian
--allow admins/moders to go invisible in the chat from panel - Ciprian
 -add link for offline pms? - Ciprian
--add the members page - Ciprian
--add the gallery feature - Ciprian (not sure if useful/reliable, as the hosting space/size is variable and can be limited for many users)
 -cookie handler - to delete the old cookies automatically on new installs/upgrades and to remove the old room names on panel changes - Ciprian
 -automatically delete cookies after upgrade on each client machine - Ciprian (not sure yet how to do this - how can we check if a user is first time loading the page?)
 -fix the enable/disable sound command and add the option in the right menu in chat, not just in users_popup - Ciprian
--add colornames in users_popup list - Ciprian
--coming back from avatar picker loses the previous values in profile - parsing - Ciprian
--update the localizations - Ciprian - ongoing
+-coming back from avatar picker loses the previous values in profile - parsing - I think of changing the avatar page into a simple select list, with image preview - Ciprian
+-upgrade as many localizations from std - Ciprian - ongoing
+-add the gallery feature (not sure if useful/reliable, as the hosting space/size is variable and can be limited for many users) - Ciprian
+-cell right align in chat (for right-to-left languages); also some display order fixes needed - I will adjust all these as it goes, but mainly when a right-to-left language will be translated - Ciprian
 
 I want to allow permissions for certain rooms without them having to "sign in"  and keep people out of them that aren’t supposed to be there.  Is that possible? Say I want to make room three where only certain people can get in it, I don’t want them to have to have a special password, but just be approved for there.  It would be something I would have to "allow" as an admin.
 Could we write a code in the styles, like "get permission" for a certain room? Where it would show up on the admin cp?
 
 
 Done:
+- the bot will dissapear from userlists when chat rooms clean.lib or logs.lib are in action - Ciprian - done
+-allow admins/moders to go invisible in the chat from panel - Ciprian - done
 -room names check for invalid chars in admin panel - urgent - Ciprian - done
--add the mod admin permissions (to moderate moders as well, but cannot admin/kick the admin) (based on Luke’s idea & Cissy’s request) - Ciprian - done - Top Moderator power (topmod)
--cell align right in chat (for right-to-left languages); also some display order fixes needed - I will adjust all these as it goes, but mainly when a right-to-left language will be translated - Ciprian
+-add the mod admin permissions (to moderate moders as well, but cannot admin/kick the admin) (based on Luke’s idea & Cissy’s request) - Ciprian - done - Top Moderator power ("topmod", "t")
 -change the update feature to @fsock - no improvement, so changed to fsockopen; also added the disable option in panel. - Ciprian - done
 -Log archive - Ciprian - done
 -img width in config - Ciprian -done
@@ -62,3 +62,5 @@ Done:
 -add the iplogs feature (log_IP.lib.php) - Ciprian - done
 -installer/setup - Ciprian - done by Thomas
 -add chat title to display it on titles and index - Ciprian - done
+-posting links without a leading space hangs the input frame/chat - Alex? - Ciprian - done
+-add colornames in users_popup list - Ciprian - done - only power colors possible.

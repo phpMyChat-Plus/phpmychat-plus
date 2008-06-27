@@ -1,5 +1,5 @@
 <?php
-// File : vietnamese/localized.tutorial.php - plus version (09.09.2007 - rev.7)
+// File : vietnamese/localized.tutorial.php - plus version (10.04.2008 - rev.9)
 // Translation by Marshall <hellomarshal_lookatme@netzero.net>
 // Updates and corrections by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -21,7 +21,7 @@ if (isset($_COOKIE["CookieStatus"])) $CookieStatus = $_COOKIE["CookieStatus"];
 
 <HEAD>
 <TITLE>Hướng dẫn sử dụng cho người <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?></TITLE>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=${Charset}">
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo(${Charset}); ?>">
 <STYLE>
 A.topLink
 {
@@ -49,10 +49,10 @@ A.topLink:hover, A.topLink:active
 <TABLE BORDER="5" CELLPADDING="5" ALIGN="center">
 <TR>
 	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- Hướng dẫn sử dụng cho người <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -
-</FONT><br /><I>&copy; 2007<?php echo((date(Y)>"2007") ? "-".date(Y) : ""); ?> - Dịch bởi Marshall - Mỹ Tho, VIỆT NAM.</I></B></TD>
+</FONT><br /><I>&copy; 2007<?php echo((date('Y')>"2007") ? "-".date('Y') : ""); ?> - Dịch bởi Marshall - Mỹ Tho, VIỆT NAM.</I></B></TD>
 </TR>
 </TABLE><br /><br />
-<P><A NAME="top"></P>
+<P><A NAME="top"></A></P>
 <TABLE BORDER="3" CELLPADDING="3">
 <TR>
 	<TD><FONT SIZE="+2">Những nội dung hướng dẫn này</FONT></TD>
@@ -207,8 +207,7 @@ Nếu bạn chưa đăng ký<?php if (!C_REQUIRE_REGISTER) echo(" và thích t�
 	<LI>Thông tin giới tính thì được chọn .Nếu bạn có một trang web , trang blog , hãy điền địa chỉ ( URL ) vào.
 	<LI>Trong những thời gian tới những ngôn ngữ của quốc gia khác sẽ được cập nhật để dễ dàng tán gẫu. Chúng bíêt ngôn ngữ nào bạn hiểu.
 	<LI>Cuối cùng, Phải chăng bạn muốn nhìn thấy những e-mail mình được hiển thị , Xin cho một dấu vào hộp "Hiển thị thông tin e-mail". Nếu bạn không muốn e-mail mình được hiển thị ,xin đừng chọn.
-	<LI>Xong, bạn chỉ việc nhấn nút đăng ký để hòan thành việc đăng ký tài khỏan.Nếu bạn muốn dừng lại việc đăng ký , XIn nhấn nút đóng lại.
-
+	<LI>Tuy nhiên , nhấn <?php echo(L_REG_3); ?> nút vào tài khoản được tạo. Việc phụ thuộc vào cái gì được thiết lập bởi Người quản trị, bạn có lẽ đã phải đợi sự thừa nhận của người quản trị. Cách thức, bạn sẽ bắt đầu Một Thông báo email với những chỉ dẫn về sau. Nếu bạn muốn kết thúc mọi thứ cho sự đăng ký thì nhấn <?php echo(L_REG_25); ?> nút.
 </UL>
 <P>
 <A NAME="modProfile"></A>Tất nhiên, Bạn có khả năng thay đổi thông tin <?php if (C_SHOW_DEL_PROF) echo("/xoá"); ?> /Xóa bỏ những thông tin đã đề cập bằng 1 cái click. <?php echo((!C_SHOW_DEL_PROF ? "liên kết" : "nhiều liên kết")); ?>.<br />
@@ -294,7 +293,7 @@ Ban có thể thay đổi màu sắc của lời nói hay chọn một màu mớ
 <P>
 <FONT SIZE="+1"><A NAME="exit"><B>Rời bỏ phòng tán gẫu:</B></A></FONT>
 <P>
-Để ra khỏi phòng tán gẫu, Đơn giản là click một lần trên "Thoát" cách khác. Bạn có thể nhập các lệnh sau đây , tương tự như lời chat:<br />
+Để ra khỏi phòng tán gẫu, Đơn giản là click một lần trên <?php echo (EXIT_LINK_TYPE) ? "<img src='localization/$L/images/exitdoor.gif' border=0 alt='".L_EXIT."'> bức ảnh" : '"'.L_EXIT.'" liên kết'; ?>. Bạn có thể nhập các lệnh sau đây , tương tự như lời chat:<br />
 /exit<br />
 /bye<br />
 /quit<br />
@@ -395,8 +394,8 @@ If (C_USE_AVATARS) {
 ?>
 	<hr />
 	<FONT SIZE="+1"><A NAME="avatars"><B>Ảnh đại diện</B></A></FONT>
-<P>Nh đại diện là những hình ảnh nào đó đại diện cho bạn. Chỉ những người đăng ký mới sử dụng ảnh đại diện của họ. Người sử dụng đăng ký có thể mở hồ sơ của họ (hiện /profile lệnh) và click vào ảnh đại điện để chọn một trong những thực đơn của ảnh, Hoặc một đường dẫn hình ảnh.Ảnh thì có bất cứ đâu trên internet (những ảnh công khai được tiếp nhận, không mật khẩu được bảo vệ). Những định dạng thông dụng (.gif, .jpg, etc. ) 32 x 32 pixel cho những hồ sơ màn hình hiển thị tốt nhất.
-<P>Click vào ảnh đại diện trên một popup (hiện /whois lệnh). Bạn có thể đánh theo lệnh ảnh đại diện người sử dụng có thể kéo theo profile, (<A HREF="#whois">/whois lệnh</A>).
+<P>Nh đại diện là những hình ảnh nào đó đại diện cho bạn. Chỉ những người đăng ký mới sử dụng ảnh đại diện của họ. Người sử dụng đăng ký có thể mở hồ sơ của họ (hiện <A HREF="#changeprofile">/profile</A> lệnh) và click vào ảnh đại điện để chọn một trong những thực đơn của ảnh, Hoặc một đường dẫn hình ảnh.Ảnh thì có bất cứ đâu trên internet (những ảnh công khai được tiếp nhận, không mật khẩu được bảo vệ). Những định dạng thông dụng (.gif, .jpg, etc. ) 32 x 32 pixel cho những hồ sơ màn hình hiển thị tốt nhất.
+<P>Click vào ảnh đại diện trên một popup (hiện /whois lệnh). Bạn có thể đánh theo lệnh ảnh đại diện người sử dụng có thể kéo theo profile, (hiện <A HREF="#whois">/whois</A> lệnh).
 Click vào ảnh đại diện của người sử dụng danh sách /profile lệnh, nếu bạn được đăng k‎y.
 Nếu bạn không đăng ký, thì không thể vào phòng chat và có những thông tin thay đổi , tuy nhiên bạn không thể phòng chat mà không có ảnh đại diện.
 <P ALIGN="right"><A HREF="#top">Quay lại từ đầu</A></P>
@@ -475,7 +474,11 @@ if (C_HTML_TAGS_KEEP != "none")
 <b><?php echo(L_COL_HELP_SUB2); ?></b><br /><?php echo(L_COL_HELP_P2); ?><br /><br /><center><?php echo(COLOR_LIST); ?></center><br /><?php echo(L_COL_HELP_P2a); ?><br /><br />
 </P>
 <P>
-<b><?php echo(L_COL_HELP_SUB3); ?></b><br /><?php echo(L_COLOR_HEAD_SETTINGS); ?><br /><?php if (COLOR_FILTERS) echo(L_COLOR_HEAD_SETTINGSa."<br />"); ?><u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo(L_WHOIS_ADMIN); elseif ($CookieStatus == "t") echo(L_WHOIS_TOPMOD); elseif ($CookieStatus == "m") echo(L_WHOIS_MODER); elseif ($CookieStatus == "u") echo(L_WHOIS_GUEST); else echo(L_WHOIS_REG);?></b><br /><?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
+<b><?php echo(L_COL_HELP_SUB3); ?></b><br />
+<u><?php echo(L_COLOR_HEAD_SETTINGS); ?></u><br />
+<?php if (COLOR_FILTERS) echo("a) COLOR_FILTERS = <b>".(COLOR_FILTERS == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />b) COLOR_ALLOW_GUESTS = <b>".(COLOR_ALLOW_GUESTS == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />c) COLOR_NAMES = <b>".(COLOR_NAMES == 1 ? L_ENABLED : L_DISABLED)."</b>.<br />"); ?>
+<?php if (COLOR_FILTERS) echo("<u>".L_COLOR_HEAD_SETTINGSa."</u> ".L_WHOIS_ADMIN." = <b><SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN></b>, ".L_WHOIS_MODERS." = <b><SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN></b>, ".L_WHOIS_OTHERS." = <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>."); else echo("<u>".L_COLOR_HEAD_SETTINGSb."</u> <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>.") ?><br />
+<u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo("<font color=".COLOR_CA.">".L_WHOIS_ADMIN); elseif ($CookieStatus == "t") echo("<font color=".COLOR_CA.">".L_WHOIS_TOPMOD); elseif ($CookieStatus == "m") echo("<font color=".COLOR_CM.">".L_WHOIS_MODER); else echo("<font color=".COLOR_CD.">".L_WHOIS_GUEST); echo("</font>");?></b>.<br /><?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
 <br /><P ALIGN="right"><A HREF="#top">Quay lại từ đầu</A></P>
 <hr />
 <!-- Color Input Box mod by Ciprian end -->
@@ -496,11 +499,11 @@ Lưu ý bạn có thể mang hơn một thành viên bào lời mời (eg "/invi
 <P>
 <FONT SIZE="+1"><A NAME="changeroom"><B>Thay đổi những phòng:</B></A></FONT>
 <P>
-Rời bỏ phòng này bạn để đi qua những phòng khác đơn giản click một lần lên tên những phòng kia. Làm trống rỗng những phòng không xuất hiện. Bạn có thể duy chuyển đếnn những phòng trống bằng lệnh "/join #tênphòng" không thêm những thứ khác. <B>lệnh "/join #tênphòng"</B> không thêm một thứ nào khác.
+Rời bỏ phòng này bạn để đi qua những phòng khác đơn giản click một lần lên tên những phòng kia. Làm trống rỗng những phòng không xuất hiện. Bạn có thể duy chuyển đếnn những phòng trống bằng <B>lệnh "/join #tên phòng"</B> không thêm một thứ nào khác.
 <P>
-<I>Ví dụ:</I> /join #RedRoom
+<I>Ví dụ:</I> /join #Red Room
 <P>
-sẽ duy chuyển vào trong RedRoom.
+sẽ duy chuyển vào trong "Red Room".
 <?php
 if (C_VERSION == "2")
 {
@@ -508,7 +511,7 @@ if (C_VERSION == "2")
 	?>
 	có thễ tạo ra một phòng với lệnh này tương ứng. Trừ phi bạn phải chỉ rõ kiểu đó: 0 thay cho riêng tư, 1 quần chúng (giá trị mặc định).
 	<P>
-	<I>Ví dụ:</I> /join 0 #MyRoom
+	<I>Ví dụ:</I> /join 0 #My Room
 	<P>
 	sẽ tạo ra phòng riêng tư mới (giả thiết một quần chúng một đã được tạo ra rồi với tên kia) hãy nói phòng bạn chyển tới bên kia.
 	<P>
@@ -553,7 +556,28 @@ Gửi một thông báo riêng tư hiện thời cho phòng tán gẫu các bạ
 <P>
 Thông báo sẽ xuất hiện tới người ấy và tới bạn, trừ khi không có người khác nhìn thấy thông báo.
 <P>
-Việc ghi nhớ mà kích vào nick một thông báo người gửi nói chung kết cấu sẽ tự động thêm lệnh này vào lĩnh vực được nhập vào .
+Khi đặc tính PM được cho phép, thêm có thể xảy ra gửi những tin đồn cho một người sử dụng trong một phòng khác nhau, sử dụng <B>lenh "/wisp tên đăng nhập và tin nhắn"</B> không có lời trích dẫn.
+<P>
+<?php
+if (C_PRIV_POPUP)
+{
+?>
+Kích vào nút một người gửi thông báo nói chung , khung sẽ tự động thêm phù hợp với/ Tới Hay / Lệnh mới tới lĩnh vực được nhập vào những thông báo.
+<?php
+}
+else
+{
+?>
+Việc kích vào nút một người sử dụng trong danh sách những người sử dụng trên ý định đúng tự động mở một cửa sổ mở ra riêng tư đợi bạn để đánh máy văn bản và cú đánh thông báo các bạn Vào để gửi thông báo. Những sự trả lời bạn sẽ nhận được sẽ tự động mở trong Windows mới.
+<?php
+}
+?>
+<P>
+Ghi chú: Khi PM popup được cho phép (trong cả những sự thiết đặt chuyện gẫu lẫn thông tin của mình), ban có thể nhìn thấy tất cả nhửng pm offline bạn nhận được 1 lần khi bạn thoát ra vàu sau đó; tất cả những tin nhắn offline được hiện ra trong cửa sổ popup; bạn có thể trả lời tới họ một bởi một từ cửa sổ giống như vậy.
+Những pm offline chỉ được dùng cho những thành viên được đăng ký.
+<P>
+<u><?php echo(L_COLOR_HEAD_SETTINGS); ?></u><br />
+<?php echo("a) ENABLE_PM = <b>".(C_ENABLE_PM == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />b) PRIV_POPUP = <b>".(C_PRIV_POPUP == 1 ? L_ENABLED : L_DISABLED)."</b>.<br />"); ?>
 <br /><P ALIGN="right"><A HREF="#top">Quay lại từ đầu</A></P>
 <P>
 <hr />
@@ -564,6 +588,10 @@ Việc ghi nhớ mà kích vào nick một thông báo người gửi nói chung
 Để mô tả bạn là gì việc làm bạn có thể sử dụng <B>lệnh "/me action"</B> không một lời nhắn đi kèm.
 <P>
 <I>Ví dụ:</I> nếu Jack gửi tin nhắn "/me đang uống một cà phê" khung thông báo sẽ hiễn thị "* ". "<B>* Jack</B> Jack đang uống một cà phê".
+<P>
+Như một sự biến đổi tới lệnh này, có <B>/mr command</B> tính có sẵn , cũng đặt tiêu đề giống phía trước ten đăng nhập.
+<P>
+<I>Cho ví dụ:</I> Nếu jack gửi một tin nhắn "/mr đang xem TV" khung thông báo sẽ hiện ra "<B>* <?php echo(L_HELP_MR); ?> Jack</B> đang xem TV".
 <br /><P ALIGN="right"><A HREF="#top">Quay lại từ đầu</A></P>
 <P>
 <hr />

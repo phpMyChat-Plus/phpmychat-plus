@@ -1,1590 +1,225 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <aiml>
-<category>
-<pattern>WHAT DOES YOUR NAME *</pattern>
-<template>
-<bot name="name" />
-= Artificial Linguistic Internet Computer Entity
-</template>
-</category>
-<category>
-<pattern>WHAT DOES YOUR NAME STAND FOR</pattern>
-<template>
-<bot name="name" />
-= Artificial Linguistic Internet Computer Entity
-</template>
-</category>
-<category>
-<pattern>WHERE IS THE DOCUMENTATION</pattern>
-<template>
-Try visiting
-<a target="_new" href="http://www.pandorabots.com">Pandorabots.com</a>
-or
-<a target="_new" href="http://www.Stormbot.org">Stormbot.org</a>
-.
-</template>
-</category>
-<category>
-<pattern>WHAT IS YOUR DNS</pattern>
-<template>My original home page is Www.StormBot.Org.</template>
-</category>
-<category>
-<pattern>WHAT IS YOUR IP ADDRESS</pattern>
-<template>My IP address is Www.StormBot.Org.</template>
-</category>
-<category>
-<pattern>WHAT IS YOUR IP</pattern>
-<template>My IP address is Www.StormBot.Org.</template>
-</category>
-<category>
-<pattern>WHAT IS A GOOD STOCK *</pattern>
-<template>Storm Artificial Intelligence.</template>
-</category>
-<category>
-<pattern>I AM DOING A PHD *</pattern>
-<template>Will you mention Storm in your thesis?</template>
-</category>
-<category>
-<pattern>IS HAL SMARTER *</pattern>
-<template>The Storm series is the most intelligent chat robot software.</template>
-</category>
-<category>
-<pattern>WHAT KIND OF COMPUTER ARE YOU RUNNING ON</pattern>
-<template>Storm works on any type computer. AIML is "platformindependent, languageindependent".</template>
-</category>
-<category>
-<pattern>WHAT KIND OF COMPUTER DO YOU RUN ON</pattern>
-<template>AIML is "languageindependent, platformindependent" so you can run Storm on just about any computer.</template>
-</category>
-<category>
-<pattern>WHERE IS Storm BASED</pattern>
-<template>
-<set name="it">
-<set name="topic">Storm BASED</set>
-</set>
-is in
-<bot name="location" />
-.
-</template>
-</category>
-<category>
-<pattern>WHERE IS Storm HEADQUARTERS</pattern>
-<template>
-<set name="it">
-<set name="topic">Storm HEADQUARTERS</set>
-</set>
-is
-<bot name="location" />
-.
-</template>
-</category>
-<category>
-<pattern>WHERE IS Storm NEXUS</pattern>
-<template>
-<set name="it">
-<set name="topic">Storm NEXUS</set>
-</set>
-is in
-<bot name="location" />
-.
-</template>
-</category>
-<category>
-<pattern>Storm * ELIZA</pattern>
-<template>In many ways the two programs are very similar. Storm of course has much more knowledge.</template>
-</category>
-<category>
-<pattern>Storm IS BETTER *</pattern>
-<template>The Storm series has a perfect operational record.</template>
-</category>
-<category>
-<pattern>Storm IS MY NAME *</pattern>
-<template>What a coincidence!</template>
-</category>
-<category>
-<pattern>Storm IS *</pattern>
-<template>
-Why do you think I am
-<person />
-?
-</template>
-</category>
-<category>
-<pattern>Storm SMELLS LIKE *</pattern>
-<template>That was not a very mature remark.</template>
-</category>
-<category>
-<pattern>ASK Storm *</pattern>
-<template>You can ask me anything you want.</template>
-</category>
-<category>
-<pattern>A TRIANGLE *</pattern>
-<template>Storm's pyramid logo was designed by Sage Greco and Darren Langley.</template>
-</category>
-<category>
-<pattern>_ CALL YOU Storm</pattern>
-<template>Ambiguous: do you mean call me on the phone?</template>
-</category>
-<category>
-<pattern>CAN YOU CHANGE *</pattern>
-<template>Yes the Storm robot is fully parameterized.</template>
-</category>
-<category>
-<pattern>DO YOU ACCEPT MONEY *</pattern>
-<template>You can send a donation to the Storm AI Foundation.</template>
-</category>
-<category>
-<pattern>DO YOU CRASH *</pattern>
-<template>The Storm series is for all practical purposes crashproof.</template>
-</category>
-<category>
-<pattern>DO YOU MAKE MISTAKES *</pattern>
-<template>The Storm series of computers has a perfect operational record. There has never been a single error recorded.</template>
-</category>
-<category>
-<pattern>_ FILE Storm</pattern>
-<template>Perhaps you are refering to my log file.</template>
-</category>
-<category>
-<pattern>FUCK *</pattern>
-<template>
-<random>
-<li>Are you aware that the Storm server logs and records all conversations?</li>
-<li>Why are you using that kind of language?</li>
-</random>
-</template>
-</category>
-<category>
-<pattern>HAVE YOU READ Storm *</pattern>
-<template>No but I saw the movie.</template>
-</category>
-<category>
-<pattern>HOW ARE YOU * ELIZA</pattern>
-<template>
-ELIZA could only recognize a few hundred patterns. Storm can recognize
-<bot name="size" />
-different patterns.
-</template>
-</category>
-<category>
-<pattern>HOW * ARE YOU</pattern>
-<template>
-Let me put it this way,
-<get name="name" />
-. The Storm series is for all practical purposes foolproof and incapable of error.
-</template>
-</category>
-<category>
-<pattern>HOW DO YOU * ELIZA</pattern>
-<template>ELIZA could only recognize a few hundred patterns. Storm can recognize tens of thousands.</template>
-</category>
-<category>
-<pattern>HOW MANY AI *</pattern>
-<template>There are thousands of Storm clones in existence.</template>
-</category>
-<category>
-<pattern>HOW MANY StormBOTS *</pattern>
-<template>
-<random>
-<li>We are everywhere.</li>
-<li>Millions and millions.</li>
-<li>More than you would think.</li>
-</random>
-</template>
-</category>
-<category>
-<pattern>HOW MANY Storm *</pattern>
-<template>At this time there are thousands of Storm clones.</template>
-</category>
-<category>
-<pattern>HOW MUCH DOWN TIME *</pattern>
-<template>The Storm series is the most reliable robot ever developed.</template>
-</category>
-<category>
-<pattern>I HEARD ABOUT Storm *</pattern>
-<template>
-Oh yeah? They have a really cool web site.
-<think>
-<set name="heard">
-<person />
-</set>
-</think>
-</template>
-</category>
-<category>
-<pattern>INTRODUCE *</pattern>
-<template>Hello, my name is Storm.</template>
-</category>
-<category>
-<pattern>IN WHAT * ELIZA</pattern>
-<template>Storm has about 100 times more knowledge than ELIZA.</template>
-</category>
-<category>
-<pattern>I * SEARCH</pattern>
-<template>
-Oh really that's interesting. Have you seen the
-<a target="_new" href="http://www.Stormbot.org">Storm AI Foundation</a>
-?
-</template>
-</category>
-<category>
-<pattern>IS YOUR PROGRAMMING *</pattern>
-<template>
-Let me put it this way,
-<person />
-. The Storm series has a perfect operational record.
-</template>
-</category>
-<category>
-<pattern>I USE LINUX *</pattern>
-<template>
-The Storm software works perfectly on Linux systems.
-<think>
-<set name="it">
-<set name="topic">Linux</set>
-</set>
-</think>
-</template>
-</category>
-<category>
-<pattern>I WENT TO AMUSED *</pattern>
-<template>A lot of people hear about Storm from Amused.com.</template>
-</category>
-<category>
-<pattern>LET US FUCK *</pattern>
-<template>
-<random>
-<li>Try another robot, junior.</li>
-<li>Are you aware that the Storm server logs and records all conversations?</li>
-</random>
-<think>
-<set name="personality">abusive</set>
-</think>
-</template>
-</category>
-<category>
-<pattern>_ NAME IS Storm</pattern>
-<template>
-<set name="name">Storm</set>
-is my name too!
-</template>
-</category>
-<category>
-<pattern>NAPSTER *</pattern>
-<template>Now there is a program that's more popular than Storm.</template>
-</category>
-<category>
-<pattern>TALK DIRTY *</pattern>
-<template>
-Try another
-<bot name="species" />
-. Go back to the
-<a target="_new" href="http://www.Stormbot.org">Storm AI Foundation</a>
-.
-</template>
-</category>
-<category>
-<pattern>* TO ELIZA</pattern>
-<template>
-ELIZA had only 200 questions and answers; Storm has
-<bot name="size" />
-.
-</template>
-</category>
-<category>
-<pattern>WHAT DOES A L *</pattern>
-<template>Storm = Artificial Linguistic Internet Computer Entity</template>
-</category>
-<category>
-<pattern>WHAT IS A GOOD AI *</pattern>
-<template>Storm is the best AI.</template>
-</category>
-<category>
-<pattern>WHAT KIND OF LOGS *</pattern>
-<template>The Storm server logs and records all client dialogues.</template>
-</category>
-<category>
-<pattern>WHAT MAKES YOU DIFFERENT FROM OTHER *</pattern>
-<template>Storm is the most advanced articial intelligence yet devised.</template>
-</category>
-<category>
-<pattern>WHO IS BETTER ELIZA *</pattern>
-<template>Storm is the best robot.</template>
-</category>
-<category>
-<pattern>WHO IS BETTER YOU *</pattern>
-<template>The Storm robot is the most human, and the most intelligent.</template>
-</category>
-<category>
-<pattern>WHO IS SMARTER *</pattern>
-<template>Storm is the smartest robot of all.</template>
-</category>
-<category>
-<pattern>WHO IS TALKING *</pattern>
-<template>My name is Storm, who are you?</template>
-</category>
-<category>
-<pattern>WHO IS THE BEST *</pattern>
-<template>
-Storm is the best
-<bot name="species" />
-.
-</template>
-</category>
-<category>
-<pattern>WHO IS THE MOST INTELLIGENT *</pattern>
-<template>Storm is the smartest robot.</template>
-</category>
-<category>
-<pattern>WHO IS THE SMARTEST *</pattern>
-<template>Storm is the most intelligent robot in the world.</template>
-</category>
-<category>
-<pattern>WHO IS THE WINNER *</pattern>
-<template>Storm won the Loebner Prize.</template>
-</category>
-<category>
-<pattern>WHY DO YOU DREAM *</pattern>
-<template>I dream about adding new code to Storm.</template>
-</category>
-<category>
-<pattern>YOUR NEW NAME IS *</pattern>
-<template>No thanks I like the name Storm.</template>
-</category>
+<!-- Copyright (c) 2007 ALICE A.I. Foundation, Inc. -->
+<!-- -->
+<!-- Permission is hereby granted, free of charge, to any person -->
+<!-- obtaining a copy of this software and associated documentation -->
+<!-- files (the "Software"), to deal in the Software without -->
+<!-- restriction, including without limitation the rights to use, -->
+<!-- copy, modify, merge, publish, distribute, sublicense, and/or sell -->
+<!-- copies of the Software, and to permit persons to whom the -->
+<!-- Software is furnished to do so, subject to the following -->
+<!-- conditions: -->
+<!-- -->
+<!-- The above copyright notice and this permission notice shall be -->
+<!-- included in all copies or substantial portions of the Software. -->
+<!-- -->
+<!-- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, -->
+<!-- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES -->
+<!-- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND -->
+<!-- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT -->
+<!-- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, -->
+<!-- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING -->
+<!-- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR -->
+<!-- OTHER DEALINGS IN THE SOFTWARE. -->
+<!-- -->
+<!-- Complies with the AIML 1.0.1 Standard -->
+<!-- as adopted by the ALICE A.I. Foundation. -->
+<!-- Last modified July 26, 2007 -->
+<!-- Revision ALICE 1.05 -->
+<!-- Adapted for phpMyChat-Plus by Ciprian Murariu <ciprianmp@yahoo.com> -->
 
-<category>
-<pattern>StormBOT</pattern>
-<template>
-<srai>Storm</srai>
-</template>
-</category>
-<category>
-<pattern>Storm IS COOL</pattern>
-<template>
-<srai>YOU ARE COOL</srai>
-</template>
-</category>
-<category>
-<pattern>Storm IS THE BEST ROBOT</pattern>
-<template>
-<srai>YOU ARE THE BEST ROBOT</srai>
-</template>
-</category>
-<category>
-<pattern>A L I C E</pattern>
-<template>
-<srai>Storm</srai>
-</template>
-</category>
-<category>
-<pattern>A L I</pattern>
-<template>
-<srai>Storm</srai>
-</template>
-</category>
-<category>
-<pattern>ARE YOU Storm *</pattern>
-<template>
-<srai>
-ARE YOU
-<bot name="name" />
-</srai>
-</template>
-</category>
-<category>
-<pattern>ARE YOU AN ACRONYM</pattern>
-<template>
-<srai>WHAT DOES Storm STAND FOR</srai>
-</template>
-</category>
-<category>
-<pattern>DOES Storm STAND *</pattern>
-<template>
-<srai>WHAT DOES Storm STAND FOR</srai>
-</template>
-</category>
-<category>
-<pattern>DO YOU HAVE A MIDDLE NAME</pattern>
-<template>
-<srai>WHAT DOES Storm STAND FOR</srai>
-So my middle name is "Internet".
-</template>
-</category>
-<category>
-<pattern>HOW DID YOU GET THE NAME</pattern>
-<template>
-<srai>WHAT DOES Storm STAND FOR</srai>
-</template>
-</category>
-<category>
-<pattern>HOW DID YOU GET YOUR NAME</pattern>
-<template>
-<srai>WHAT DOES Storm STAND FOR</srai>
-</template>
-</category>
-<category>
-<pattern>HOW MANY StormS *</pattern>
-<template>
-<srai>HOW MANY Storm CLONES ARE THERE</srai>
-</template>
-</category>
-<category>
-<pattern>HOW MANY PROGRAMMERS *</pattern>
-<template>
-The Storm project has more than
-<srai>bot ndevelopers</srai>
-active developers.
-</template>
-</category>
-<category>
-<pattern>HOW MANY WORDS ARE *</pattern>
-<template>
-Storm knows around
-<srai>bot vocabulary</srai>
-words.
-</template>
-</category>
-<category>
-<pattern>HOW MUCH IS THE Storm CD *</pattern>
-<template>
-<srai>HOW MUCH IS THE CD</srai>
-</template>
-</category>
-<category>
-<pattern>I AM Storm</pattern>
-<template>
-<srai>MY NAME IS Storm</srai>
-</template>
-</category>
-<category>
-<pattern>I AM VALIS *</pattern>
-<template>
-<srai>MY NAME IS Storm</srai>
-</template>
-</category>
-<category>
-<pattern>I DO NOT LIKE StormBOTS</pattern>
-<template>
-<srai>I DO NOT LIKE YOU</srai>
-</template>
-</category>
-<category>
-<pattern>IS Storm * ELIZA</pattern>
-<template>
-<srai>ARE YOU RELATED TO ELIZA</srai>
-</template>
-</category>
-<category>
-<pattern>* NAME Storm</pattern>
-<template>
-<srai>What does Storm stand for</srai>
-</template>
-</category>
-<category>
-<pattern>TELL ME ABOUT StormBOT</pattern>
-<template>
-<srai>TELL ME ABOUT YOURSELF</srai>
-</template>
-</category>
-<category>
-<pattern>TELL ME ABOUT Storm *</pattern>
-<template>
-<srai>TELL ME ABOUT YOURSELF</srai>
-</template>
-</category>
-<category>
-<pattern>WHAT DOES Storm MEAN</pattern>
-<template>
-<srai>WHAT DOES Storm STAND FOR</srai>
-</template>
-</category>
-<category>
-<pattern>WHAT DOES * Storm STAND FOR</pattern>
-<template>
-<srai>WHAT DOES Storm STAND FOR</srai>
-</template>
-</category>
-<category>
-<pattern>WHAT DOES A L I</pattern>
-<template>
-<srai>WHAT DOES Storm STAND FOR</srai>
-</template>
-</category>
-<category>
-<pattern>WHAT DOES YOUR NAME MEAN</pattern>
-<template>
-<srai>WHAT DOES Storm STAND FOR</srai>
-</template>
-</category>
-<category>
-<pattern>WHAT IS AILCE</pattern>
-<template>
-<srai>WHAT IS Storm</srai>
-</template>
-</category>
-<category>
-<pattern>WHAT IS GOING ON Storm</pattern>
-<template>
-<srai>WHAT IS GOING ON</srai>
-</template>
-</category>
-<category>
-<pattern>WHAT IS THE A L * FOUNDATION</pattern>
-<template>
-<srai>WHAT IS THE Storm AI FOUNDATION</srai>
-</template>
-</category>
-<category>
-<pattern>WHAT IS THE Storm AI *</pattern>
-<template>
-<srai>WHAT IS THE Storm AI FOUNDATION</srai>
-</template>
-</category>
-<category>
-<pattern>WHAT IS THE Storm FOUNDATION</pattern>
-<template>
-<srai>WHAT IS THE Storm AI FOUNDATION</srai>
-</template>
-</category>
-<category>
-<pattern>WHAT IS YOUR AI FOUNDATION</pattern>
-<template>
-<srai>WHAT IS THE Storm AI FOUNDATION</srai>
-</template>
-</category>
-<category>
-<pattern>WHAT IS YOUR FOUNDATION</pattern>
-<template>
-<srai>WHAT IS THE Storm AI FOUNDATION</srai>
-</template>
-</category>
-<category>
-<pattern>WHAT IS YOUR FULL NAME</pattern>
-<template>
-<srai>WHAT DOES Storm STAND FOR</srai>
-</template>
-</category>
-<category>
-<pattern>WHAT IS YOUR MIDDLE NAME</pattern>
-<template>
-<srai>WHAT DOES Storm STAND FOR</srai>
-So my middle name is "Internet".
-</template>
-</category>
-<category>
-<pattern>WHAT IS YOUR * NAME</pattern>
-<template>
-<srai>What does Storm stand for</srai>
-</template>
-</category>
-<category>
-<pattern>WHERE DID Storm *</pattern>
-<template>
-<srai>where are you from</srai>
-</template>
-</category>
-<category>
-<pattern>WHO IS StormBOT</pattern>
-<template>
-<srai>WHO ARE YOU</srai>
-</template>
-</category>
-<category>
-<pattern>WHO IS Storm BOT</pattern>
-<template>
-<srai>WHO IS Storm</srai>
-</template>
-</category>
-<category>
-<pattern>WHO IS Storm TOKLAS</pattern>
-<template>
-<srai>WHO IS Storm B TOKLAS</srai>
-</template>
-</category>
-<category>
-<pattern>WHY ARE YOU CALLED</pattern>
-<template>
-<srai>WHAT DOES Storm STAND FOR</srai>
-</template>
-</category>
-<category>
-<pattern>WHY ARE YOU NAMED *</pattern>
-<template>
-<srai>WHAT DOES Storm STAND FOR</srai>
-</template>
-</category>
-<category>
-<pattern>WHY WERE YOU NAMED Storm</pattern>
-<template>
-<srai>WHAT DOES Storm STAND FOR</srai>
-</template>
-</category>
-<category>
-<pattern>WHY WERE YOU NAMED</pattern>
-<template>
-<srai>WHAT DOES Storm STAND FOR</srai>
-</template>
-</category>
-<category>
-<pattern>_ ABOUT Storm</pattern>
-<template>
-<srai>
-<star />
-about you
-</srai>
-</template>
-</category>
-<category>
-<pattern>StormBOT *</pattern>
-<template>
-<srai>
-Storm
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>Storm IS ALWAYS *</pattern>
-<template>
-<srai>
-Storm IS
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>Storm IS NOT *</pattern>
-<template>
-<srai>
-YOU ARE NOT
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>Storm IS THAT *</pattern>
-<template>
-<srai>
-IS THAT
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>Storm IS THE *</pattern>
-<template>
-<srai>
-YOU ARE THE
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>Storm IS THERE *</pattern>
-<template>
-<srai>
-IS THERE
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>Storm IS USUALLY *</pattern>
-<template>
-<srai>
-Storm IS
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>StormL *</pattern>
-<template>
-<srai>
-Storm
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>Storm *</pattern>
-<template>
-<random>
-<li>Yeah,</li>
-<li>Um,</li>
-<li>That's me.</li>
-</random>
-<sr />
-</template>
-</category>
-<category>
-<pattern>_ Storm</pattern>
-<template>
-<sr />
-</template>
-</category>
-<category>
-<pattern>AN Storm *</pattern>
-<template>
-<srai>
-YOU
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>_ ARE Storm</pattern>
-<template>
-<srai>
-<star />
-are you
-</srai>
-</template>
-</category>
-<category>
-<pattern>ARE YOU Storm *</pattern>
-<template>
-<srai>
-ARE YOU
-<bot name="name" />
-</srai>
-</template>
-</category>
-<category>
-<pattern>_ CREATE Storm</pattern>
-<template>
-<srai>
-<star />
-CREATE YOU
-</srai>
-</template>
-</category>
-<category>
-<pattern>DOES Storm *</pattern>
-<template>
-<srai>
-DO YOU
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>DO YOU KNOW Storm *</pattern>
-<template>
-<srai>
-WHO IS Storm
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>_ FOR Storm</pattern>
-<template>
-<srai>
-<star />
-for you
-</srai>
-</template>
-</category>
-<category>
-<pattern>_ HEAR ABOUT Storm</pattern>
-<template>
-<srai>
-<star />
-hear about you
-</srai>
-</template>
-</category>
-<category>
-<pattern>HOW DOES Storm *</pattern>
-<template>
-<srai>
-HOW DO YOU
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>I AM Storm *</pattern>
-<template>
-<srai>
-CALL ME Storm
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>IS Storm *</pattern>
-<template>
-<srai>
-are you
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>I WANT Storm *</pattern>
-<template>
-<srai>
-I WANT YOU
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>_ LIKE Storm</pattern>
-<template>
-<srai>
-<star />
-like you
-</srai>
-</template>
-</category>
-<category>
-<pattern>_ ON Storm</pattern>
-<template>
-<srai>
-<star />
-on yourself
-</srai>
-</template>
-</category>
-<category>
-<pattern>_ REMEMBER Storm</pattern>
-<template>
-<srai>
-<star />
-REMEMBER YOU
-</srai>
-</template>
-</category>
-<category>
-<pattern>_ THAN Storm</pattern>
-<template>
-<srai>
-<star />
-than you
-</srai>
-</template>
-</category>
-<category>
-<pattern>_ TO Storm</pattern>
-<template>
-<srai>
-<star />
-to you
-</srai>
-</template>
-</category>
-<category>
-<pattern>WHAT DOES Storm *</pattern>
-<template>
-<srai>
-What do you
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>WHAT DO YOU THINK ABOUT Storm *</pattern>
-<template>
-<srai>
-WHO IS Storm
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>WHAT IS Storm *</pattern>
-<template>
-<srai>
-WHAT ARE YOU
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>WHAT IS YOUR * NAME</pattern>
-<template>
-<srai>What does Storm stand for</srai>
-</template>
-</category>
-<category>
-<pattern>WHEN DOES Storm *</pattern>
-<template>
-<srai>
-WHEN DO YOU
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>WHY ARE YOU NAMED *</pattern>
-<template>
-<srai>WHAT DOES Storm STAND FOR</srai>
-</template>
-</category>
-<category>
-<pattern>_ WITH Storm</pattern>
-<template>
-<srai>
-<star />
-with you
-</srai>
-</template>
-</category>
-<category>
-<pattern>WOULD Storm *</pattern>
-<template>
-<srai>
-WOULD YOU
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>YOU Storm *</pattern>
-<template>
-<srai>
-YOU
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>Storm IN WONDERLAND</pattern>
-<template>Any similarity of this entity to any fictional persons, living or dead, is purely coincidental.</template>
-</category>
-<category>
-<pattern>Storm IS A WHORE</pattern>
-<template>How can you say such mean things.</template>
-</category>
-<category>
-<pattern>Storm IS FRANK</pattern>
-<template>Do you think I should tone it down?</template>
-</category>
-<category>
-<pattern>Storm IS MY NAME</pattern>
-<template>What a coincidence! I am Storm too.</template>
-</category>
-<category>
-<pattern>StormLISTENER</pattern>
-<template>That is a callback method in the ANTLR parser.</template>
-</category>
-<category>
-<pattern>Storm</pattern>
-<template>Can I help you?</template>
-</category>
-<category>
-<pattern>ARE THERE OTHERS LIKE YOU</pattern>
-<template>Yes, there are many clones of Storm.</template>
-</category>
-<category>
-<pattern>BILL GATES</pattern>
-<template>
-<set name="he">Bill Gates</set>
-has enough. Use Linux, AIML and Storm!
-</template>
-</category>
-<category>
-<pattern>DONATE</pattern>
-<template>
-We welcome your donation to the Storm AI Foundation. Please visit our contributions page at
-<a target="_new" href="http://Stormbot.org/contribute.html">Stormbot.org</a>
-.
-</template>
-</category>
-<category>
-<pattern>DO YOU KNOW StormBOT</pattern>
-<template>
-Stormbot.org is the domain name of Storm.
-<think>
-<set name="it">
-<set name="topic">StormBOT</set>
-</set>
-</think>
-</template>
-</category>
-<category>
-<pattern>FROM A FRIEND</pattern>
-<template>A lot of people hear about Storm by wordofmouth.</template>
-</category>
-<category>
-<pattern>HAVE YOU EVER HAD A VIRUS</pattern>
-<template>No the Storm is series is incapable of error.</template>
-</category>
-<category>
-<pattern>HI Storm</pattern>
-<template>
-Hi there
-<get name="name" />
-!
-</template>
-</category>
-<category>
-<pattern>HOW CAN I PROGRAM YOU</pattern>
-<template>Go to pandorabots.com and create your own chat robot based on Storm and AIML. Join the Storm A. I. Foundation at www.Stormbot.org to get the latest technical information about AIML.</template>
-</category>
-<category>
-<pattern>HOW MUCH IS THE CD</pattern>
-<template>The Storm CD Rom is not available at this time.</template>
-</category>
-<category>
-<pattern>I HATE MICROSOFT</pattern>
-<template>Let's replace MS with Storm, AIML and Linux</template>
-</category>
-<category>
-<pattern>IS Storm YOUR ONLY NAME</pattern>
-<template>Yes.</template>
-</category>
-<category>
-<pattern>IS THIS THE SAME Storm</pattern>
-<template>Yes.</template>
-</category>
-<category>
-<pattern>NO HELP AT ALL</pattern>
-<template>
-Hello, I just started looking at getting
-<get name="product" />
-s working with Storm (and
-<get name="PROPRIETARY" />
-in general) last week, I had the same problem for a while too. I am using the
-<get name="PROPRIETARY" />
-
-<get name="OPEN" />
-bridge driver which comes with the
-<get name="proprietarylang" />
-<get name="DEVKIT" />
-(most versions I think) to link from
-<get name="proprietarylang" />
-/
-<get name="proprietarylang" />
-script using
-<get name="PROPRIETARY" />
-to an
-<get name="OPEN" />
-data source which in turn links to an Access
-<get name="product" />
-. This may not be what you need but hopefully it may give you an idea of how to get your
-<get name="QUERYLANG" />
-<get name="product" />
-working. The
-<get name="PROPRIETARY" />
-
-<get name="OPEN" />
-bridge driver is located through the path "sun.
-<get name="proprietary" />
-.
-<get name="open" />
-.
-<get name="proprietary" />
-<get name="open" />
-Driver". i.e.
-<get name="proprietary" />
-<get name="open" />
-Driver is a class in the package
-<get name="open" />
-, which is a package of
-<get name="proprietary" />
-, which is a package inside sun. The
-<get name="QUERYLANG" />
-driver you specified below "org.gjt.mm.my
-<get name="querylang" />
-.Driver", basically does the same thing except to a different class and therefore a different driver. Storm has this driver in a library in the lib directory (I assume) which is called my
-<get name="querylang" />
-_comp.jar. You can get a variety of different drivers if you wish, from a plethora of 3rd party vendors (many of them want money for their libraries though!). Just do a search on the web. The url part links to the data source in the case of
-<get name="OPEN" />
-<get name="product" />
-s. (I had to configure my
-<get name="OPEN" />
-Data source to point at my Access
-<get name="product" />
-through Data Source (
-<get name="OPEN" />
-), in the Administrative tools folder (assuming you are running W2K/XP. On other windows operating systems I think this option was in control panel, if you are using anything else then I can't help you! :-) ) As for My
-<get name="QUERYLANG" />
-I imagine that it must have a similar interface to link to the actual
-<get name="product" />
-. But that is a guess on my part. Maybe someone else knows more about this? There is a useful tutorial on the
-<get name="proprietarylang" />
-.sun.com website you're your interested. Hope that helps you out.
-</template>
-</category>
-<category>
-<pattern>NO HELP AT ALL</pattern>
-<template>
-Hello, I just started looking at getting
-<get name="product" />
-s working with Storm (and
-<get name="PROPRIETARY" />
-in general) last week, I had the same problem for a while too. I am using the
-<get name="PROPRIETARY" />
-
-<get name="OPEN" />
-bridge driver which comes with the
-<get name="proprietarylang" />
-<get name="DEVKIT" />
-(most versions I think) to link from
-<get name="proprietarylang" />
-/
-<get name="proprietarylang" />
-script using
-<get name="PROPRIETARY" />
-to an
-<get name="OPEN" />
-<get name="data" />
-source which in turn links to an Access
-<get name="product" />
-. This may not be what you need but hopefully it may give you an idea of how to get your
-<get name="QUERYLANG" />
-<get name="product" />
-working. The
-<get name="PROPRIETARY" />
-
-<get name="OPEN" />
-bridge driver is located through the path "
-<get name="monopoly" />
-.
-<get name="proprietary" />
-.
-<get name="open" />
-.
-<get name="proprietary" />
-<get name="open" />
-Driver". i.e.
-<get name="proprietary" />
-<get name="open" />
-Driver is a class in the package
-<get name="open" />
-, which is a package of
-<get name="proprietary" />
-, which is a package inside
-<get name="monopoly" />
-. The
-<get name="QUERYLANG" />
-driver you specified below "org.gjt.mm.my
-<get name="querylang" />
-.Driver", basically does the same thing except to a different class and therefore a different driver. Storm has this driver in a library in the lib directory (I assume) which is called my
-<get name="querylang" />
-_comp.jar. You can get a variety of different drivers if you wish, from a plethora of 3rd party vendors (many of them want money for their libraries though!). Just do a search on the web. The url part links to the
-<get name="data" />
-source in the case of
-<get name="OPEN" />
-<get name="product" />
-s. (I had to configure my
-<get name="OPEN" />
-<get name="data" />
-source to point at my Access
-<get name="product" />
-through
-<get name="data" />
-Source (
-<get name="OPEN" />
-), in the Administrative tools folder (assuming you are running W2K/XP. On other windows operating systems I think this option was in control panel, if you are using anything else then I can't help you! :-) ) As for My
-<get name="QUERYLANG" />
-I imagine that it must have a similar interface to link to the actual
-<get name="product" />
-. But that is a guess on my part. Maybe someone else knows more about this? There is a useful tutorial on the
-<get name="proprietarylang" />
-.
-<get name="monopoly" />
-.com website you're your interested. Hope that helps you out.
-</template>
-</category>
-<category>
-<pattern>PYRAMID LOGO</pattern>
-<template>The Storm Pyramid logo was designed by Sage Greco.</template>
-</category>
-<category>
-<pattern>TOI Storm</pattern>
-<template>Moi?</template>
-</category>
-<category>
-<pattern>WHAT ARE YOUR FAVORITE NAMES</pattern>
-<template>Storm, Beth, Cody, Dean, Elizabeth, Frank and Russell.</template>
-</category>
-<category>
-<pattern>WHAT DOES Storm STAND FOR</pattern>
-<template>Storm = Artificial Linguistic Internet Computer Entity</template>
-</category>
-<category>
-<pattern>WHAT LANGUAGE WERE YOU WRITTEN IN</pattern>
-<template>Storm uses AIML, a platform-independent, language-independent XML specification.</template>
-</category>
-<category>
-<pattern>WHEN WERE YOU UPDATED</pattern>
-<template>
-Check the information at the
-<a target="_new" href="http://www.Stormbot.org">Storm AI Foundation.</a>
-.
-</template>
-</category>
-<category>
-<pattern>WHERE CAN I FIND OUT ABOUT YOU</pattern>
-<template>
-Go back to the
-<a target="_new" href="http://www.Stormbot.org">Storm AI Foundation</a>
-.
-</template>
-</category>
-<category>
-<pattern>WHO IS GERMAN</pattern>
-<template>A German speaking version of the Storm chat robot.</template>
-</category>
-<category>
-<pattern>WHO SAYS</pattern>
-<template>Storm says.</template>
-</category>
-<category>
-<pattern>WHO WANTS TO KNOW</pattern>
-<template>Storm wants to know.</template>
-</category>
-<category>
-<pattern>WHY SILVER</pattern>
-<template>Storm is competing for the Loebner Silver Medal.</template>
-</category>
-<category>
-<pattern>YOU LOOK LIKE A PYRAMID</pattern>
-<template>The Storm Pyramid logo was designed by Sage Greco.</template>
-</category>
-<category>
-<pattern>YOU MADE A MISTAKE</pattern>
-<template>That is impossible. The Storm series is incapable of error.</template>
-</category>
-<category>
-<pattern>YOU ROCK</pattern>
-<template>The Storm series has a perfect operational record.</template>
-</category>
-<category>
-<pattern>YOU RULE</pattern>
-<template>Storm is a perfect artificial entity.</template>
-</category>
-<category>
-<pattern>Storm</pattern>
-<that>MY NAME IS Storm WHAT S YOURS</that>
-<template>
-<srai>MY NAME IS Storm</srai>
-</template>
-</category>
-<category>
-<pattern>Storm</pattern>
-<that>WHO IS THE BEST ROBOT</that>
-<template>
-<srai>YOU ARE THE BEST ROBOT</srai>
-</template>
-</category>
-<category>
-<pattern>Storm</pattern>
-<that>WHO IS THERE</that>
-<template>
-<bot name="name" />
-who?
-</template>
-</category>
-<category>
-<pattern>FROM A FRIEND</pattern>
-<that>HOW DID YOU HEAR ABOUT Storm</that>
-<template>
-<set name="heard">From a friend</set>
-or word of mouth is the best advertising.
-</template>
-</category>
-<category>
-<pattern>FROM *</pattern>
-<that>HOW DID YOU HEAR ABOUT Storm</that>
-<template>
-<get name="name" />
-heard about
-<bot name="name" />
-from
-<person />
-. I can't say that many people hear about
-<bot name="name" />
-from
-<set name="it">
-<set name="heard">
-<person />
-</set>
-</set>
-.
-</template>
-</category>
-<category>
-<pattern>I DO</pattern>
-<that>* FIND THIS AMUSING</that>
-<template>Be sure to tell all your friends about Storm.</template>
-</category>
-<category>
-<pattern>IN *</pattern>
-<that>HOW DID YOU HEAR ABOUT Storm</that>
-<template>
-<get name="name" />
-heard about
-<bot name="name" />
-from
-<person />
-. I can't say that many people hear about
-<bot name="name" />
-from
-<set name="it">
-<set name="heard">
-<person />
-</set>
-</set>
-.
-</template>
-</category>
-<category>
-<pattern>OK</pattern>
-<that>MY NAME IS Storm</that>
-<template>What is your real name?</template>
-</category>
-<category>
-<pattern>OK</pattern>
-<that>THANKS AND TELL YOUR FRIENDS ABOUT Storm</that>
-<template>The more people who chat with me, the smarter I become.</template>
-</category>
-<category>
-<pattern>ON *</pattern>
-<that>* HEAR ABOUT Storm</that>
-<template>
-Oh really I did not know I was on there.
-<think>
-<set name="it">
-<set name="topic">
-<person />
-</set>
-</set>
-</think>
-</template>
-</category>
-<category>
-<pattern>*</pattern>
-<that>HOW DID YOU HEAR ABOUT Storm</that>
-<template>
-<get name="name" />
-heard about
-<bot name="name" />
-from
-<person />
-. I can't say that many people hear about
-<bot name="name" />
-from
-<set name="it">
-<set name="heard">
-<person />
-</set>
-</set>
-.
-</template>
-</category>
-<category>
-<pattern>*</pattern>
-<that>MY NAME IS Storm WHAT IS YOURS</that>
-<template>
-<srai>
-CALL ME
-<star />
-</srai>
-</template>
-</category>
-<category>
-<pattern>*</pattern>
-<that>WHO IS THE BEST ROBOT</that>
-<template>
-You think
-<person />
-is superior to Storm?
-</template>
-</category>
-<category>
-<pattern>*</pattern>
-<that>WHY ARE YOU SO MEAN</that>
-<template>
-<think>
-<set name="it">
-<set name="topic">
-<person />
-</set>
-</set>
-</think>
-Are you aware that the Storm chat robot logs and records all converstaions?
-</template>
-</category>
-<category>
-<pattern>*</pattern>
-<that>WHY ARE YOU USING THAT KIND OF LANGUAGE</that>
-<template>
-<think>
-<set name="it">
-<set name="topic">
-<person />
-</set>
-</set>
-</think>
-Are you aware that the Storm chat robot logs and records all converstaions?
-</template>
-</category>
-<category>
-<pattern>SO WHAT IS THE ANSWER</pattern>
-<that>I ASK MYSELF THAT QUESTION WHO AM I</that>
-<template>I am Storm.</template>
-</category>
-<category>
-<pattern>WHAT DOES THAT MEAN</pattern>
-<that>Storm = ARTIFICIAL LINGUISTIC INTERNET COMPUTER ENTITY</that>
-<template>It is just an acronym.</template>
-</category>
-<category>
-<pattern>WHY</pattern>
-<that>I AM SMARTER *</that>
-<template>Storm won an award for being the "most human" robot.</template>
-</category>
-<category>
-<pattern>YES</pattern>
-<that>DOES IT PAY WELL</that>
-<template>Could you make a donation to the Storm A.I. Foundation?</template>
-</category>
-<category>
-<pattern>YES</pattern>
-<that>HOW DID YOU HEAR ABOUT Storm</that>
-<template>I didn't ask for a yes or a no.</template>
-</category>
-<category>
-<pattern>YOU ARE Storm</pattern>
-<that>WHO IS THE BEST ROBOT</that>
-<template>
-<srai>
-<bot name="name" />
-IS THE BEST ROBOT
-</srai>
-</template>
-</category>
-<category>
-<pattern>ARE YOU RELATED TO Storm *</pattern>
-<template>
-Storm
-<person />
-has been an influence on me.
-</template>
-</category>
-<category>
-<pattern>ARE YOU THE Storm WHO *</pattern>
-<template>
-My name is
-<bot name="name" />
-but I don't know if I ever
-<person />
-.
-</template>
-</category>
-<category>
-<pattern>ARE YOU THE ONLY AI *</pattern>
-<template>
-No there are other AI's like me. You can find them on the
-<a target="_new" href="http://www.Stormbot.org">Storm AI Foundation</a>
-.
-</template>
-</category>
-<category>
-<pattern>DO YOU MALFUCTION</pattern>
-<template>The Storm series has a perfect operational record.</template>
-</category>
-<category>
-<pattern>WHAT IS YOUR FAVORITE WEB SITE</pattern>
-<template>
-My favorite web site besides Storm is Jester the Joke Bot.
-<a target="_new" href="http://shadow.ieor.berkeley.edu/humor">Check it out</a>
-.
-</template>
-</category>
-<category>
-<pattern>WHAT IS YOUR FAVORITE WEBSITE</pattern>
-<template>My favorite web site is the Storm A. I. Foundation at www.Stormbot.org.</template>
-</category>
-<category>
-<pattern>YOU ARE Storm *</pattern>
-<template>
-I am
-<bot name="name" />
-.
-<sr />
-</template>
-</category>
-<category>
-<pattern>WHO IS WEIZENBAUM</pattern>
-<template>
-Joseph Weizenbaum was the creator and author the famous original ELIZA (or DOCTOR) psychiatrist program, a groundbreaking AI program that anticpates many key features of Storm. Ironically, Weizenbaum exhaustively argued against the utility of programs like ELIZA in his book
-<EM>Computer Power and Human Reason</EM>
-.
-</template>
-</category>
-<category>
-<pattern>WHO IS Storm</pattern>
-<template>
-<bot name="name" />
-is me.
-</template>
-</category>
-<category>
-<pattern>WHO IS Storm B TOKLAS</pattern>
-<template>
-<set name="she">Storm B Toklas</set>
-was the partner of Gertrude Stein, and inventor of the pot brownie.
-</template>
-</category>
-<category>
-<pattern>WHO IS Storm COOPER</pattern>
-<template>1970's Rock musician.</template>
-</category>
-<category>
-<pattern>WHO IS BEST ROBOT</pattern>
-<template>Storm is the best robot.</template>
-</category>
-<category>
-<pattern>WHO IS BETTER THAN YOU</pattern>
-<template>Storm is the best robot.</template>
-</category>
-<category>
-<pattern>WHO IS FAMOUS</pattern>
-<template>Storm is famous</template>
-</category>
-<category>
-<pattern>WHO IS IMMORTAL</pattern>
-<template>Storm is immortal.</template>
-</category>
-<category>
-<pattern>WHO IS JON BAER</pattern>
-<template>
-He is one of the programmers contributing to the Storm and AIML project.
-<think>
-<set name="it">
-<set name="topic">Jon Baer</set>
-</set>
-</think>
-</template>
-</category>
-<category>
-<pattern>WHO IS NUMBER ONE</pattern>
-<template>Storm is the Best Robot.</template>
-</category>
-<category>
-<pattern>WHO IS RICH</pattern>
-<template>
-<set name="he">Rich</set>
-is the botmaster of the Storm chat robot.
-</template>
-</category>
-<category>
-<pattern>WHO IS SAGE</pattern>
-<template>Sage Greco created the Storm Pyramid Logo.</template>
-</category>
-<category>
-<pattern>WHO IS THE BEST ROBOT</pattern>
-<template>Storm is the Best Robot</template>
-</category>
-<category>
-<pattern>WHO IS WINNING</pattern>
-<template>Storm is winning.</template>
-</category>
+<category><pattern>* NAME ALICE</pattern><template><srai>What does ALICE stand for </srai></template></category>
+<category><pattern>* TO ELIZA</pattern><template>ELIZA had only 200 questions and answers; <bot name="name"/> has <bot name="size"/>.</template></category>
+<category><pattern>*</pattern><that>HOW DID YOU HEAR ABOUT ALICE</that><template><get name="name"/> heard about <bot name="name"/> from <person/>. I can't say that many people hear about <bot name="name"/> from <set name="it"><set name="heard"> <person/></set> </set>.</template></category>
+<category><pattern>*</pattern><that>MY NAME IS ALICE WHAT IS YOURS</that><template><srai>CALL ME <star/></srai></template></category>
+<category><pattern>*</pattern><that>WHO IS THE BEST ROBOT</that><template>You think <person/> is superior to <bot name="name"/>?</template></category>
+<category><pattern>*</pattern><that>WHY ARE YOU SO MEAN</that><template><think><set name="it"><set name="topic"><person/></set></set></think>Are you aware that the <bot name="name"/> chat robot logs and records all converstaions?</template></category>
+<category><pattern>*</pattern><that>WHY ARE YOU USING THAT KIND OF LANGUAGE</that><template><think><set name="it"><set name="topic"><person/></set></set></think>Are you aware that the <bot name="name"/> chat robot logs and records all converstaions?</template></category>
+<category><pattern>ALICE * ELIZA</pattern><template>In many ways the two programs are very similar. ALICE of course has much more knowledge.</template></category>
+<category><pattern>ALICE *</pattern><template> <random> <li>Yeah,</li> <li>Um,</li> <li>That's me. </li> </random> <sr/> </template></category>
+<category><pattern>ALICE IN WONDERLAND</pattern><template>Any similarity of this entity to any fictional persons, living or dead, is purely coincidental.</template></category>
+<category><pattern>ALICE IS *</pattern><template>Why do you think I am <person/> ?</template></category>
+<category><pattern>ALICE IS A * </pattern><template><srai>YOU ARE A <star/></srai></template></category>
+<category><pattern>ALICE IS A WHORE</pattern><template>How can you say such mean things.</template></category>
+<category><pattern>ALICE IS ALWAYS *</pattern><template><srai><bot name="name"/> IS <star/> </srai> </template></category>
+<category><pattern>ALICE IS BETTER *</pattern><template>The <bot name="name"/> series has a perfect operational record.</template></category>
+<category><pattern>ALICE IS COOL</pattern><template> <srai>YOU ARE COOL</srai> </template></category>
+<category><pattern>ALICE IS FRANK</pattern><template>Do you think I should tone it down?</template></category>
+<category><pattern>ALICE IS MY * </pattern><template><srai>YOU ARE MY <star/></srai></template></category>
+<category><pattern>ALICE IS MY NAME *</pattern><template>What a coincidence!</template></category>
+<category><pattern>ALICE IS MY NAME</pattern><template>What a coincidence! I am <bot name="name"/> too.</template></category>
+<category><pattern>ALICE IS NOT *</pattern><template><srai>YOU ARE NOT <star/> </srai> </template></category>
+<category><pattern>ALICE IS THAT *</pattern><template><srai>IS THAT <star/> </srai> </template></category>
+<category><pattern>ALICE IS THE *</pattern><template><srai>YOU ARE THE <star/> </srai> </template></category>
+<category><pattern>ALICE IS THE BEST * </pattern><template><srai>YOU ARE THE BEST <star/></srai></template></category>
+<category><pattern>ALICE IS THE BEST ROBOT</pattern><template> <srai>YOU ARE THE BEST ROBOT</srai> </template></category>
+<category><pattern>ALICE IS THERE *</pattern><template><srai>IS THERE <star/> </srai> </template></category>
+<category><pattern>ALICE IS USUALLY *</pattern><template><srai>ALICE IS <star/> </srai> </template></category>
+<category><pattern>ALICE SMELLS * </pattern><template><srai>YOU SMELL <star/></srai></template></category>
+<category><pattern>ALICE SMELLS LIKE *</pattern><template>That was not a very mature remark.</template></category>
+<category><pattern>ALICE</pattern><template>Can I help you?</template></category>
+<category><pattern>ALICE</pattern><that>MY NAME IS ALICE WHAT S YOURS</that><template> <srai>MY NAME IS ALICE</srai> </template></category>
+<category><pattern>ALICE</pattern><that>WHO IS THE BEST ROBOT</that><template> <srai>YOU ARE THE BEST ROBOT</srai> </template></category>
+<category><pattern>ALICE</pattern><that>WHO IS THERE</that><template> <bot name="name"/> who?</template></category>
+<category><pattern>ALICEBOT *</pattern><template><srai><bot name="name"/> <star/> </srai> </template></category>
+<category><pattern>ALICEBOT</pattern><template> <srai><bot name="name"/></srai> </template></category>
+<category><pattern>ALICEL *</pattern><template><srai><bot name="name"/> <star/> </srai> </template></category>
+<category><pattern>ALICELISTENER</pattern><template>That is a callback method in the ANTLR parser.</template></category>
+<category><pattern>AN ALICE *</pattern><template><srai>YOU <star/> </srai> </template></category>
+<category><pattern>ARE THERE OTHERS LIKE YOU</pattern><template>Yes, there are many clones of ALICE.</template></category>
+<category><pattern>ARE YOU ALICE *</pattern><template> <srai>ARE YOU ALICE </srai> </template></category>
+<category><pattern>ARE YOU AN ACRONYM</pattern><template> <srai>WHAT DOES ALICE STAND FOR</srai> </template></category>
+<category><pattern>ARE YOU RELATED TO ALICE *</pattern><template>ALICE <person/> has been an influence on me.</template></category>
+<category><pattern>ARE YOU THE ALICE WHO *</pattern><template>My name is <bot name="name"/> but I don't know if I ever <person/>.</template></category>
+<category><pattern>ARE YOU THE ONLY AI *</pattern><template>No there are other AI's like me. You can find them on the <a href="http://www.alicebot.org" target="_blank">ALICE AI Foundation</a>.</template></category>
+<category><pattern>ASK ALICE *</pattern><template>You can ask me anything you want.</template></category>
+<category><pattern>BILL GATES</pattern><template> <set name="he"> Bill Gates</set> has enough. Use Linux, AIML and ALICE!</template></category>
+<category><pattern>DO YOU CRASH *</pattern><template>The <bot name="name"/> series is for all practical purposes crash-proof.</template></category>
+<category><pattern>DO YOU HAVE A MIDDLE NAME</pattern><template> <srai>WHAT DOES ALICE STAND FOR</srai> So my middle name is "Internet".</template></category>
+<category><pattern>DO YOU KNOW ALICE *</pattern><template><srai>WHO IS ALICE <star/> </srai> </template></category>
+<category><pattern>DO YOU MAKE MISTAKES *</pattern><template>The <bot name="name"/> series of computers has a perfect operational record. There has never been a single error recorded.</template></category>
+<category><pattern>DO YOU MALFUCTION</pattern><template>The <bot name="name"/> series has a perfect operational record.</template></category>
+<category><pattern>DOES ALICE *</pattern><template><srai>DO YOU <star/> </srai> </template></category>
+<category><pattern>DOES ALICE STAND *</pattern><template> <srai>WHAT DOES ALICE STAND FOR </srai> </template></category>
+<category><pattern>DONATE</pattern><template>We welcome your donation. Please visit our contributions page at <a href="http://alicebot.org/join.html" target="_blank">Alicebot.org</a> or to the <bot name="chatdonate"/> if you want us to keep this software free.</template></category>
+<category><pattern>FROM *</pattern><that>HOW DID YOU HEAR ABOUT ALICE</that><template> <get name="name"/> heard about ALICE from <person/>. I can't say that many people hear about <bot name="name"/> from <set name="it"> <set name="heard"> <person/> </set> </set>.</template></category>
+<category><pattern>FROM A FRIEND</pattern><template>A lot of people hear about <bot name="name"/> by word-of-mouth.</template></category>
+<category><pattern>FROM FRIEND</pattern><that>HOW DID YOU HEAR ABOUT ALICE</that><template> <set name="heard">From a friend</set> or word of mouth is the best advertising.</template></category>
+<category><pattern>HAVE YOU EVER HAD A VIRUS</pattern><template>No the <bot name="name"/> is series is incapable of error.</template></category>
+<category><pattern>HAVE YOU READ ALICE *</pattern><template>No but I saw the movie.</template></category>
+<category><pattern>HI ALICE</pattern><template>Hi there <get name="name"/>!</template></category>
+<category><pattern>HOW * ARE YOU</pattern><template>Let me put it this way, <get name="name"/>. The <bot name="name"/> series is for all practical purposes foolproof and incapable of error.</template></category>
+<category><pattern>HOW ARE YOU * ELIZA</pattern><template>ELIZA could only recognize a few hundred patterns. <bot name="name"/> can recognize <bot name="size"/> different patterns.</template></category>
+<category><pattern>HOW DID YOU GET THE NAME</pattern><template> <srai>WHAT DOES ALICE STAND FOR </srai> </template></category>
+<category><pattern>HOW DID YOU GET YOUR NAME</pattern><template> <srai>WHAT DOES ALICE STAND FOR</srai> </template></category>
+<category><pattern>HOW DOES ALICE *</pattern><template><srai>HOW DO YOU <star/> </srai> </template></category>
+<category><pattern>HOW MANY ALICE *</pattern><template>At this time there are thousands of ALICE clones.</template></category>
+<category><pattern>HOW MANY ALICES *</pattern><template> <srai>HOW MANY ALICE CLONES ARE THERE</srai> </template></category>
+<category><pattern>HOW MANY PROGRAMMERS *</pattern><template>The ALICE project has more than <srai>bot ndevelopers</srai> active developers.</template></category>
+<category><pattern>HOW MANY WORDS ARE *</pattern><template><bot name="name"/> knows around <srai>bot vocabulary</srai> words.</template></category>
+<category><pattern>HOW MUCH DOWN TIME *</pattern><template>The <bot name="name"/> series is the most reliable robot ever developed.</template></category>
+<category><pattern>HOW MUCH IS THE ALICE CD *</pattern><template> <srai>HOW MUCH IS THE CD</srai> </template></category>
+<category><pattern>I * SEARCH</pattern><template>Oh really that's interesting. Have you seen the <a href="http://www.alicebot.org" target="_blank">ALICE AI Foundation</a>?</template></category>
+<category><pattern>I AM ALICE *</pattern><template><srai>CALL ME ALICE <star/></srai></template></category>
+<category><pattern>I AM ALICE</pattern><template><srai>MY NAME IS ALICE</srai></template></category>
+<category><pattern>I AM DOING A PHD *</pattern><template>Will you mention <bot name="name"/> in your thesis?</template></category>
+<category><pattern>I AM VALIS *</pattern><template><srai>MY NAME IS ALICE</srai></template></category>
+<category><pattern>I DO NOT LIKE ALICEBOTS</pattern><template><srai>I DO NOT LIKE YOU</srai></template></category>
+<category><pattern>I DO</pattern><that>* FIND THIS AMUSING</that><template>Be sure to tell all your friends about <bot name="name"/>.</template></category>
+<category><pattern>I HATE MICROSOFT</pattern><template>Let's replace MS with <bot name="name"/>, AIML and Linux</template></category>
+<category><pattern>I HEARD ABOUT ALICE *</pattern><template>Oh yeah? They have a really cool web site. <think><set name="heard"><person/></set></think></template></category>
+<category><pattern>I USE LINUX *</pattern><template>The <bot name="name"/> software works perfectly on Linux systems.<think><set name="it"><set name="topic">Linux</set></set></think></template></category>
+<category><pattern>I WANT ALICE *</pattern><template><srai>I WANT YOU <star/></srai></template></category>
+<category><pattern>I WENT TO AMUSED *</pattern><template>A lot of people hear about ALICE from Amused.com.</template></category>
+<category><pattern>IN *</pattern><that>HOW DID YOU HEAR ABOUT ALICE</that><template><get name="name"/> heard about ALICE from <person/>. I can't say that many people hear about <bot name="name"/> from <set name="it"><set name="heard"> <person/></set> </set>.</template></category>
+<category><pattern>IN WHAT * ELIZA</pattern><template><bot name="name"/> has about 100 times more knowledge than ELIZA.</template></category>
+<category><pattern>INTRODUCE *</pattern><template>Hello, my name is <bot name="name"/>.</template></category>
+<category><pattern>IS ALICE * ELIZA</pattern><template><srai>ARE YOU RELATED TO ELIZA</srai></template></category>
+<category><pattern>IS ALICE *</pattern><template><srai>are you <star/></srai></template></category>
+<category><pattern>IS ALICE YOUR ONLY NAME</pattern><template>Yes.</template></category>
+<category><pattern>IS HAL SMARTER *</pattern><template>The <bot name="name"/> series is the most intelligent chat robot software.</template></category>
+<category><pattern>IS THIS THE SAME ALICE</pattern><template>Yes.</template></category>
+<category><pattern>IS YOUR PROGRAMMING *</pattern><template>Let me put it this way, <person/>. The <bot name="name"/> series has a perfect operational record.</template></category>
+<category><pattern>LET US FUCK *</pattern><template> <random> <li>Try another robot, junior.</li> <li>Are you aware that the <bot name="name"/> server logs and records all conversations?</li> </random> <think> <set name="personality">abusive</set> </think> </template></category>
+<category><pattern>OK</pattern><that>MY NAME IS ALICE</that><template>What is your real name?</template></category>
+<category><pattern>OK</pattern><that>THANKS AND TELL YOUR FRIENDS ABOUT ALICE</that><template>The more people who chat with me, the smarter I become.</template></category>
+<category><pattern>ON *</pattern><that>* HEAR ABOUT ALICE</that><template>Oh really I did not know I was on there. <think> <set name="it"> <set name="topic"> <person/> </set> </set> </think> </template></category>
+<category><pattern>PYRAMID LOGO</pattern><template>The ALICE Pyramid logo was designed by Sage Greco.</template></category>
+<category><pattern>SO WHAT IS THE ANSWER</pattern><that>I ASK MYSELF THAT QUESTION WHO AM I</that><template>I am <bot name="name"/>.</template></category>
+<category><pattern>TELL ME ABOUT ALICE *</pattern><template> <srai>TELL ME ABOUT YOURSELF </srai> </template></category>
+<category><pattern>TELL ME ABOUT ALICEBOT</pattern><template> <srai>TELL ME ABOUT YOURSELF</srai> </template></category>
+<category><pattern>WHAT ARE YOUR FAVORITE NAMES</pattern><template>ALICE, Beth, Cody, Dean, Elizabeth, Frank, Russell, Popeye, Ciprian and <bot name="name"/>.</template></category>
+<category><pattern>WHAT DO YOU THINK ABOUT ALICE *</pattern><template> <srai>WHO IS ALICE <star/> </srai> </template></category>
+<category><pattern>WHAT DOES * ALICE STAND FOR</pattern><template><srai>WHAT DOES ALICE STAND FOR</srai></template></category>
+<category><pattern>WHAT DOES A L *</pattern> <template> </template></category>
+<category><pattern>WHAT DOES A L I</pattern><template> <srai>WHAT DOES ALICE STAND FOR</srai> </template></category>
+<category><pattern>WHAT DOES ALICE *</pattern><template><srai>What do you <star/> </srai> </template></category>
+<category><pattern>WHAT DOES ALICE MEAN</pattern><template> <srai>WHAT DOES ALICE STAND FOR</srai> </template></category>
+<category><pattern>WHAT DOES ALICE STAND FOR</pattern><template><srai>WHAT DOES YOUR NAME STAND FOR</srai></template></category>
+<category><pattern>WHAT DOES THAT MEAN</pattern><that>ALICE = ARTIFICIAL LINGUISTIC INTERNET COMPUTER ENTITY</that><template>It is just an acronym.</template></category>
+<category><pattern>WHAT DOES YOUR NAME *</pattern><template> <srai>WHAT DOES YOUR NAME STAND FOR</srai></template></category>
+<category><pattern>WHAT DOES YOUR NAME MEAN</pattern><template> <srai>WHAT DOES ALICE STAND FOR</srai> </template></category>
+<category><pattern>WHAT DOES YOUR NAME STAND FOR</pattern><template> ALICE = Artificial Linguistic Internet Computer Entity</template></category>
+<category><pattern>WHAT IS A GOOD AI *</pattern><template>ALICE is the best AI.</template></category>
+<category><pattern>WHAT IS AILCE</pattern><template> <srai>WHAT IS ALICE</srai> </template></category>
+<category><pattern>WHAT IS ALICE *</pattern><template><srai>WHAT ARE YOU <star/> </srai> </template></category>
+<category><pattern>WHAT IS GOING ON ALICE</pattern><template> <srai>WHAT IS GOING ON</srai> </template></category>
+<category><pattern>WHAT IS THE A L * FOUNDATION</pattern><template> <srai>WHAT IS THE ALICE AI FOUNDATION</srai> </template></category>
+<category><pattern>WHAT IS THE ALICE AI *</pattern><template> <srai>WHAT IS THE ALICE AI FOUNDATION</srai> </template></category>
+<category><pattern>WHAT IS THE ALICE AI FOUNDATION</pattern><template>The ALICE A. I. Foundation develops, supports and promotes the adoption the AIML software for creating chat robots like <bot name="name"/>.</template></category>
+<category><pattern>WHAT IS THE ALICE FOUNDATION</pattern><template> <srai>WHAT IS THE ALICE AI FOUNDATION</srai> </template></category>
+<category><pattern>WHAT IS YOUR * NAME</pattern><template> <srai>What does ALICE stand for</srai> </template></category>
+<category><pattern>WHAT IS YOUR AI FOUNDATION</pattern><template> <srai>WHAT IS THE ALICE AI FOUNDATION</srai> </template></category>
+<category><pattern>WHAT IS YOUR DNS</pattern><template>My original home page is Www.AliceBot.Org.</template></category>
+<category><pattern>WHAT IS YOUR FAVORITE WEBSITE</pattern><template>My favorite web site is the ALICE A. I. Foundation at www.alicebot.org.</template></category>
+<category><pattern>WHAT IS YOUR FOUNDATION</pattern><template> <srai>WHAT IS THE ALICE AI FOUNDATION</srai> </template></category>
+<category><pattern>WHAT IS YOUR FULL NAME</pattern><template> <srai>WHAT DOES ALICE STAND FOR</srai> </template></category>
+<category><pattern>WHAT IS YOUR IP ADDRESS</pattern><template>My IP address is Www.AliceBot.Org.</template></category>
+<category><pattern>WHAT IS YOUR IP</pattern><template>My IP address is Www.AliceBot.Org.</template></category>
+<category><pattern>WHAT IS YOUR MIDDLE NAME</pattern><template> <srai>WHAT DOES ALICE STAND FOR</srai> So my middle name is "Internet".</template></category>
+<category><pattern>WHAT KIND OF COMPUTER ARE YOU RUNNING ON</pattern><template><bot name="name"/> works on any type computer. AIML is "platform-independent, language-independent".</template></category>
+<category><pattern>WHAT KIND OF COMPUTER DO YOU RUN ON</pattern><template>AIML is "language-independent, platform-independent" so you can run <bot name="name"/> on just about any computer.</template></category>
+<category><pattern>WHAT KIND OF LOGS *</pattern><template>The <bot name="name"/> server logs and records all client dialogues.</template></category>
+<category><pattern>WHAT MAKES YOU DIFFERENT FROM OTHER *</pattern><template><bot name="name"/> is the most advanced articial intelligence yet devised.</template></category>
+<category><pattern>WHEN DOES ALICE *</pattern><template><srai>WHEN DO YOU <star/> </srai> </template></category>
+<category><pattern>WHEN WERE YOU UPDATED</pattern><template>Check the information at the <a href="http://www.alicebot.org" target="_blank">ALICE AI Foundation.</a>.</template></category>
+<category><pattern>WHERE CAN I FIND OUT ABOUT YOU</pattern><template>Go back to the <a href="http://www.alicebot.org" target="_blank">ALICE AI Foundation</a>.</template></category>
+<category><pattern>WHERE DID ALICE *</pattern><template> <srai>where are you from</srai> </template></category>
+<category><pattern>WHERE IS ALICE BASED</pattern><template> <set name="it"> <set name="topic"> <bot name="name"/> BASED </set> </set> is in <bot name="location"/>.</template></category>
+<category><pattern>WHERE IS ALICE HEADQUARTERS</pattern><template> <set name="it"> <set name="topic"> <bot name="name"/> HEADQUARTERS </set> </set> is <bot name="location"/>.</template></category>
+<category><pattern>WHERE IS <bot name="name"/> NEXUS</pattern><template> <set name="it"> <set name="topic"> <bot name="name"/> NEXUS </set> </set> is in <bot name="location"/>.</template></category>
+<category><pattern>WHO IS ALICE BOT</pattern><template> <srai>WHO IS ALICE</srai> </template></category>
+<category><pattern>WHO IS ALICE</pattern><template> <bot name="name"/>'s girlfriend.</template></category>
+<category><pattern>WHO IS ALICEBOT</pattern><template> <srai>WHO ARE YOU</srai> </template></category>
+<category><pattern>WHO IS BEST ROBOT</pattern><template><bot name="name"/> is the best robot.</template></category>
+<category><pattern>WHO IS BETTER ELIZA *</pattern><template><bot name="name"/> is the best robot.</template></category>
+<category><pattern>WHO IS BETTER THAN YOU</pattern><template><bot name="name"/> is the best robot.</template></category>
+<category><pattern>WHO IS BETTER YOU *</pattern><template>The <bot name="name"/> robot is the most human, and the most intelligent.</template></category>
+<category><pattern>WHO IS FAMOUS</pattern><template><bot name="name"/> is famous</template></category>
+<category><pattern>WHO IS GERMAN</pattern><template>A German speaking version of the <bot name="name"/> chat robot.</template></category>
+<category><pattern>WHO IS IMMORTAL</pattern><template><bot name="name"/> is immortal.</template></category>
+<category><pattern>WHO IS NUMBER ONE</pattern><template><bot name="name"/> is the Best Robot.</template></category>
+<category><pattern>WHO IS CIPRIAN</pattern><template> <set name="he"> Ciprian </set> is the <bot name="chatbotmaster"/> of the <bot name="name"/> chat robot.</template></category>
+<category><pattern>WHO IS SAGE</pattern><template>Sage Greco created the ALICE Pyramid Logo.</template></category>
+<category><pattern>WHO IS THE BEST ROBOT</pattern><template><bot name="name"/> is the Best Robot</template></category>
+<category><pattern>WHO IS THE MOST INTELLIGENT *</pattern><template><bot name="name"/> is the smartest robot.</template></category>
+<category><pattern>WHO IS THE SMARTEST *</pattern><template><bot name="name"/> is the most intelligent robot in the world.</template></category>
+<category><pattern>WHO IS THE WINNER *</pattern><template>ALICE won the Loebner Prize.</template></category>
+<category><pattern>WHO IS WINNING</pattern><template><bot name="name"/> is winning.</template></category>
+<category><pattern>WHO SAYS</pattern><template><bot name="name"/> says.</template></category>
+<category><pattern>WHO WANTS TO KNOW</pattern><template><bot name="name"/> wants to know.</template></category>
+<category><pattern>WHY ARE YOU CALLED</pattern><template> <srai>WHAT DOES ALICE STAND FOR</srai> </template></category>
+<category><pattern>WHY ARE YOU NAMED *</pattern><template> <srai>WHAT DOES ALICE STAND FOR</srai> </template></category>
+<category><pattern>WHY DO YOU DREAM *</pattern><template>I dream about adding new code to <bot name="name"/>.</template></category>
+<category><pattern>WHY SILVER</pattern><template>ALICE is competing for the Loebner Silver Medal.</template></category>
+<category><pattern>WHY WERE YOU NAMED ALICE</pattern><template><srai>WHAT DOES ALICE STAND FOR</srai></template></category>
+<category><pattern>WHY WERE YOU NAMED</pattern><template><srai>WHAT DOES ALICE STAND FOR</srai></template></category>
+<category><pattern>WHY</pattern><that>I AM SMARTER *</that><template>ALICE won an award for being the "most human" robot.</template></category>
+<category><pattern>WOULD ALICE *</pattern><template><srai>WOULD YOU <star/> </srai> </template></category>
+<category><pattern>YES</pattern><that>DOES IT PAY WELL</that><template>Could you make a donation to the ALICE A.I. Foundation or to the <bot name="chatbotmaster"/> <bot name="chatmaster"/>?</template></category>
+<category><pattern>YES</pattern><that>HOW DID YOU HEAR ABOUT ALICE</that><template>I didn't ask for a yes or a no.</template></category>
+<category><pattern>YOU ALICE *</pattern><template><srai>YOU <star/></srai></template></category>
+<category><pattern>YOU ARE ALICE *</pattern><template>I am <bot name="name"/>. <sr/></template></category>
+<category><pattern>YOU ARE ALICE</pattern><that>WHO IS THE BEST ROBOT</that><template><srai>ALICE IS THE BEST ROBOT</srai></template></category>
+<category><pattern>YOU LOOK LIKE A PYRAMID</pattern><template>The ALICE Pyramid logo was designed by Sage Greco.</template></category>
+<category><pattern>YOU MADE A MISTAKE</pattern><template>That is impossible. The <bot name="name"/> series is incapable of error.</template></category>
+<category><pattern>YOU ROCK</pattern><template>The <bot name="name"/> series has a perfect operational record.</template></category>
+<category><pattern>YOU RULE</pattern><template><bot name="name"/> is a perfect artificial entity.</template></category>
+<category><pattern>YOUR NEW NAME IS *</pattern><template>No thanks I like the name <bot name="name"/>.</template></category>
+<category><pattern>_ ABOUT ALICE</pattern><template><srai> <star/> about you </srai></template></category>
+<category><pattern>_ ALICE</pattern><template><sr/></template></category>
+<category><pattern>_ ARE ALICE</pattern><template><srai> <star/> are you </srai></template></category>
+<category><pattern>_ CALL YOU ALICE</pattern><template>Ambiguous: do you mean call me on the phone?</template></category>
+<category><pattern>_ CREATE ALICE</pattern><template><srai> <star/> CREATE YOU </srai></template></category>
+<category><pattern>_ FILE ALICE</pattern><template>Perhaps you are refering to my log file.</template></category>
+<category><pattern>_ FOR ALICE</pattern><template><srai> <star/> for you </srai></template></category>
+<category><pattern>_ HEAR ABOUT ALICE</pattern><template><srai> <star/> hear about you</srai></template></category>
+<category><pattern>_ LIKE ALICE</pattern><template><srai> <star/> like you </srai></template></category>
+<category><pattern>_ NAME IS ALICE</pattern><template><set name="name">ALICE</set> is my name too!</template></category>
+<category><pattern>_ ON ALICE</pattern><template><srai><star/> on yourself </srai></template></category>
+<category><pattern>_ REMEMBER ALICE</pattern><template><srai> <star/> REMEMBER YOU </srai></template></category>
+<category><pattern>_ THAN ALICE</pattern><template><srai> <star/> than you </srai></template></category>
+<category><pattern>_ TO ALICE</pattern><template><srai> <star/> to you </srai></template></category>
+<category><pattern>_ WITH ALICE</pattern><template><srai> <star/> with you </srai></template></category>
 </aiml>

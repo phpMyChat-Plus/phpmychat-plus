@@ -19,6 +19,18 @@ require("./localization/".$L."/localized.chat.php");
 
 header("Content-Type: text/html; charset=${Charset}");
 
+// avoid server configuration for magic quotes
+set_magic_quotes_runtime(0);
+// Can't turn off magic quotes gpc so just redo what it did if it is on.
+if (get_magic_quotes_gpc()) {
+	foreach($_GET as $k=>$v)
+		$_GET[$k] = stripslashes($v);
+	foreach($_POST as $k=>$v)
+		$_POST[$k] = stripslashes($v);
+	foreach($_COOKIE as $k=>$v)
+		$_COOKIE[$k] = stripslashes($v);
+}
+
 // For translations with an explicit charset (not the 'x-user-defined' one)
 if (!isset($FontName)) $FontName = "";
 ?>
@@ -64,7 +76,7 @@ else
 </CENTER>
 
 <?php
-// The form bellow allows to check whether the popup unloads because ignored users list
+// The form below allows to check whether the popup unloads because ignored users list
 // has been modified, because the user reduced/closed it or because the user exit the
 // chat
 ?>

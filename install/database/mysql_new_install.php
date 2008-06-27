@@ -197,11 +197,11 @@ CREATE TABLE ".$t_config." (
  SHOW_TUT enum('0','1') NOT NULL default '1',
  SHOW_INFO enum('0','1') NOT NULL default '1',
  SET_CMDS enum('0','1') NOT NULL default '1',
- CMDS varchar(255) NOT NULL default '<br />/away /buzz /demote /dice /dice2 /dice3 /high /img /mr<br />/room /size /sort /topic /wisp',
+ CMDS varchar(255) NOT NULL default '/away /buzz /demote /dice /dice2 /dice3 /high /img /mr<br />/room /size /sort /topic /wisp',
  SET_MODS enum('0','1') NOT NULL default '1',
- MODS varchar(255) NOT NULL default '<br />Advanced Admin, Avatars, Smilies Popup, Color Drop Box, Private Popup,<br />Quick Menu, Logs Archive, Lurking, Color names, WorldTime, UTF-8',
+ MODS varchar(255) NOT NULL default 'Advanced Admin, Avatars, Smilies Popup, Color Drop Box, Private Popup,<br />Quick Menu, Logs Archive, Lurking, Color names, WorldTime, UTF-8',
  SET_BOT enum('0','1') NOT NULL default '1',
- ROOM_SAYS varchar(25) NOT NULL default 'Attention Room:',
+ ROOM_SAYS varchar(255) NOT NULL default 'Attention Room:',
  DEMOTE_MOD enum('0','1') NOT NULL default '0',
  PRIV_POPUP enum('0','1') NOT NULL default '1',
  SHOW_ETIQ_IN_HELP enum('0','1') NOT NULL default '1',
@@ -231,15 +231,15 @@ CREATE TABLE ".$t_config." (
  SWEAR4 varchar(25) NOT NULL default '',
  COLOR_FILTERS enum('0','1') NOT NULL default '1',
  COLOR_ALLOW_GUESTS enum('0','1') NOT NULL default '1',
- COLOR_CD1 varchar(25) NOT NULL default 'black',
- COLOR_CD2 varchar(25) NOT NULL default 'tomato',
- COLOR_CD3 varchar(25) NOT NULL default 'dimgray',
- COLOR_CD4 varchar(25) NOT NULL default 'indigo',
- COLOR_CD5 varchar(25) NOT NULL default 'green',
- COLOR_CD6 varchar(25) NOT NULL default 'maroon',
- COLOR_CD7 varchar(25) NOT NULL default 'white',
- COLOR_CD8 varchar(25) NOT NULL default 'magenta',
- COLOR_CD9 varchar(25) NOT NULL default 'blueviolet',
+ ROOM_SKIN1 tinyint(1) NOT NULL default '1',
+ ROOM_SKIN2 tinyint(1) NOT NULL default '2',
+ ROOM_SKIN3 tinyint(1) NOT NULL default '3',
+ ROOM_SKIN4 tinyint(1) NOT NULL default '4',
+ ROOM_SKIN5 tinyint(1) NOT NULL default '5',
+ ROOM_SKIN6 tinyint(1) NOT NULL default '6',
+ ROOM_SKIN7 tinyint(1) NOT NULL default '7',
+ ROOM_SKIN8 tinyint(1) NOT NULL default '8',
+ ROOM_SKIN9 tinyint(1) NOT NULL default '9',
  COLOR_CA varchar(25) NOT NULL default 'red',
  COLOR_CA1 varchar(25) NOT NULL default 'crimson',
  COLOR_CA2 varchar(25) NOT NULL default 'orangered',
@@ -268,7 +268,7 @@ CREATE TABLE ".$t_config." (
  CHAT_LURKING enum('0','1') NOT NULL default '1',
  SHOW_LURK_USR enum('0','1') NOT NULL default '1',
  BAN_IP enum('0','1') NOT NULL default '0',
- REG_CHARS_ALLOWED varchar(50) NOT NULL default 'a-zA-Z0-9_.-@#$%^&*()=<>?~|:',
+ REG_CHARS_ALLOWED varchar(50) NOT NULL default 'a-zA-Z0-9_.-@#$%^&*()=<>?~{}|`:',
  EXIT_LINK_TYPE enum('0','1') NOT NULL default '1',
  CHAT_EXTRAS enum('0','1') NOT NULL default '1',
  EMAIL_USER enum('0','1') NOT NULL default '1',
@@ -303,6 +303,23 @@ CREATE TABLE ".$t_config." (
  ENGLISH_FORMAT enum('UK','US') NOT NULL default 'UK',
  FLAGS_3D enum('0','1') NOT NULL default '1',
  ALLOW_REGISTER enum('0','1') NOT NULL default '1',
+ DISP_GENDER enum('0','1') NOT NULL default '0',
+ SPECIAL_GHOSTS varchar(255) NOT NULL default '',
+ FILLED_LOGIN enum('0','1') NOT NULL default '0',
+ BACKGR_IMG enum('0','1') NOT NULL default '0',
+ BACKGR_IMG_PATH varchar(255) NOT NULL default '',
+ POPUP_LINKS enum('0','1') NOT NULL default '0',
+ ITALICIZE_POWERS enum('0','1') NOT NULL default '1',
+ MAIL_GREETING varchar(255) NOT NULL default 'Best regards,',
+ PM_KEEP_DAYS tinyint(1) NOT NULL default '30',
+ ALLOW_PM_DEL enum('0','1') NOT NULL default '1',
+ LOGIN_COUNTER enum('0','1','60','1440','10080') NOT NULL default '60',
+ ALLOW_GRAVATARS enum('0','1','2') NOT NULL default '1',
+ GRAVATARS_CACHE enum('0','1') NOT NULL default '1',
+ GRAVATARS_CACHE_EXPIRE tinyint(1) NOT NULL default '7',
+ GRAVATARS_RATING enum('G','PG','R','X','ANY') NOT NULL default 'G',
+ GRAVATARS_DYNAMIC_DEF enum('identicon','monsterid','wavatar') default 'monsterid',
+ GRAVATARS_DYNAMIC_DEF_FORCE enum('0','1') NOT NULL default '0',
  PRIMARY KEY (ID)
 ) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
@@ -319,6 +336,7 @@ CREATE TABLE ".$t_lurkers." (
  browser varchar(255) NOT NULL default '',
  file varchar(50) NOT NULL default '',
  username varchar(30) NOT NULL default '',
+ status varchar(1) NOT NULL default '',
  PRIMARY KEY (time),
  KEY ip (ip),
  KEY file (file)
@@ -348,7 +366,7 @@ CREATE TABLE ".$t_reg_users." (
  id int(11) NOT NULL default '0',
  cid int(11) NOT NULL auto_increment,
  username varchar(30) NOT NULL default '',
- latin1 tinyint(1) NOT NULL default '1',
+ latin1 tinyint(1) NOT NULL default '0',
  password varchar(32) NOT NULL default '',
  firstname varchar(64) NOT NULL default '',
  lastname varchar(64) NOT NULL default '',
@@ -371,15 +389,18 @@ CREATE TABLE ".$t_reg_users." (
  avatar varchar(255) NOT NULL default 'images/avatars/def_avatar.gif',
  s_question enum('0','1','2','3','4') NOT NULL default '0',
  s_answer varchar(64) NOT NULL default '',
+ last_login int(11) NOT NULL default '0',
+ login_counter bigint(20) NOT NULL default '0',
+ use_gravatar enum('0','1') NOT NULL default '0',
  PRIMARY KEY (cid),
  UNIQUE KEY username (username)
 ) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
 mysql_query("
-INSERT INTO ".$t_reg_users." VALUES ('', '', 'plusbot', '1', '3901e4a6c3d27909afef4c22f8337da8', 'Bot', 'phpMyChat - Plus', 'WorldWideWeb', '', 'bot@bot.com', '0', 'admin', '', 1130763311, '-No tracking IP-', '1', '0', 'images/alice.gif', 'I am a Robot originally called Alice. I am proud to be the first Artificial Intelligence on the net! Please test my capabilities as you wish! To start a public conversation with me just type \"hello myname\" in the room I am active in, to stop the conversation type \"bye myname\" or \"myname> bye\". But we can also talk in private - just click on my name whenever you need a shoulder to cry on :p Ohhh... I wish to express my gratitude to Roy, Popeye and Ciprian for making me available for chatting in here. :)', 'http://www.alicebot.org/documentation/', 'http://sourceforge.net/forum/?group_id=43190', 'English, German', 'olive', 'images/avatars/bot_avatar.gif', '0', '' );
+INSERT INTO ".$t_reg_users." VALUES ('', '', 'plusbot', '0', '3901e4a6c3d27909afef4c22f8337da8', 'Bot', 'phpMyChat - Plus', 'WorldWideWeb', '', 'bot@bot.com', '0', 'admin', '', 1130763311, '-No tracking IP-', '1', '0', 'images/alice.gif', 'I am a Robot originally called <a href=http://www.alicebot.org/documentation/ target=_blank>Alice</a>.  I am proud to be the first Artificial Intelligence on the net! Please test my capabilities as you wish! To start a public conversation with me just type \"hello myname\" in the room I am active in, to stop the conversation type \"bye myname\" or \"myname> bye\". But we can also talk in private - just click on my name whenever you need a shoulder to cry on :p Ohhh... I wish to express my gratitude to Roy, Popeye and <a href=http://www.ciprianmp.com/plus/ target=_blank>Ciprian</a> for making me available for chatting in here. :)', 'http://www.alicebot.org/documentation/', 'http://sourceforge.net/forum/?group_id=43190', 'English, German', 'olive', 'images/avatars/bot_avatar.gif', '0', '', '', '');
 ", $conn);
 mysql_query("
-INSERT INTO ".$t_reg_users." VALUES ('', '', 'Random_Quote', '1', 'ef93e0948b007826a1a7a49a17b72a59', 'Random Quote', 'phpMyChat - Plus', 'WorldWideWeb', '', 'quote@quote.com', '0', 'admin', '', 1130763311, '-No tracking IP-', '1', '0', 'images/avatars/avatar56.gif', 'I am a virtual user, added here to post random quotes at my admin’s will. Ohhh... I wish to express my gratitude to Ciprian for making me available for enlighting you in here. :)', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', 'English (any actually)', 'limegreen', 'images/avatars/quote_avatar.gif', '0', '' );
+INSERT INTO ".$t_reg_users." VALUES ('', '', 'Random_Quote', '0', 'ef93e0948b007826a1a7a49a17b72a59', 'Random Quote', 'phpMyChat - Plus', 'WorldWideWeb', '', 'quote@quote.com', '0', 'admin', '', 1130763311, '-No tracking IP-', '1', '0', 'images/avatars/avatar56.gif', 'I am a virtual user, added here to post random quotes at my admin’s will. Ohhh... I wish to express my gratitude to <a href=http://www.ciprianmp.com/plus/ target=_blank>Ciprian</a> for making me available for enlighting you in here. :)', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', 'English (any actually)', 'limegreen', 'images/avatars/quote_avatar.gif', '0', '', '', '');
 ", $conn);
 mysql_query("
 DROP TABLE IF EXISTS ".$t_users.";

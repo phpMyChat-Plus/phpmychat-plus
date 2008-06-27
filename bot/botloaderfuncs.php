@@ -1,5 +1,5 @@
 <?php
-$bot=1;
+//$bot=1;
 /*
     Program E
     Copyright 2002, Paul Rydell
@@ -74,8 +74,6 @@ function deletebot($bot)
     $e = mysql_query($q);
     if ($e){
     }
-
-
 }
 
 /**
@@ -105,7 +103,6 @@ function deletejustbot($bot){
     $e = mysql_query($q);
     if ($e){
     }
-
 }
 
 /**
@@ -155,11 +152,8 @@ function upperkeysarray($testa)
 */
 function addtosubs($string)
 {
-
     global $fp;
-
     fwrite($fp,$string);
-
 }
 
 /**
@@ -175,11 +169,8 @@ function addtosubs($string)
 */
 function createsubfile()
 {
-
     global $fp;
-
     $fp = fopen("subs.inc", "w+");
-
 }
 
 /**
@@ -198,7 +189,6 @@ function createsubfile()
 */
 function findwordid($word,$parent)
 {
-
     $word=addslashes($word);
     $query="select id,isend from bot_patterns where word='$word' and parent=$parent";
 
@@ -213,7 +203,6 @@ function findwordid($word,$parent)
                 if ($q[1]==1){
                     setnotend($q[0]);
                 }
-
                 return $q[0];
             }
         }
@@ -413,8 +402,10 @@ function insertmysentence($mybigsentence)
 */
 function insertwordpattern($qadd)
 {
+	global $patternsinserted;
 
     $qcode=mysql_query("insert into bot_patterns(bot,id,word,ordera,parent,isend) values $qadd");
+    $patternsinserted++;
 
 	if ($qcode){
 
@@ -457,7 +448,6 @@ function insertmytemplate($idused,$template)
         if ($qcode){
         }
     }
-
 }
 
 /**
@@ -970,29 +960,21 @@ function loadstartupinc($fileid){
 	$totalcounter=1;
 
 	foreach ($allbots as $bot){
-
-		# print "<font size='3'><b>Loading bot: $bot<br /></b></font>\n";
+		print "<font size='3' color='BLUE'><b>Loaded bot: $bot<br /></b></font>\n";
 
 	    $single_learnfiles = $learnfiles[$bot];
 		$single_learnfiles = array_unique($single_learnfiles);
 
 		foreach ($single_learnfiles as $file) {
-
 			$selectbot=$bot;
-
 			if ($totalcounter==$fileid){
 				learn($file);
 				return 0;
 			}
-
 			$totalcounter++;
-
 		}
 	}
-
 	return 1;
-
-
 }
 
 /**
@@ -1028,7 +1010,6 @@ function loadstartup()
     print "<font size='3'>Loading startup.xml<br /></font>\n";
     $learnfiles = array(); // This array will hold the files to LEARN
 
-
     $file = $rootdir . "startup.xml";
     $xml_parser = xml_parser_create();
     xml_parser_set_option($xml_parser,XML_OPTION_CASE_FOLDING,0);
@@ -1045,10 +1026,9 @@ function loadstartup()
         }
     }
     xml_parser_free($xml_parser);
-
 	# For each of the bots learn all of the files
 	foreach ($allbots as $bot){
-		print "<font size='3'><b>Loading bot: $bot<br /></b></font>\n";
+		print "<font size='3' color='BLUE'><b>Loaded bot: $bot<br /></b></font>\n";
 	    $single_learnfiles = $learnfiles[$bot];
 		$single_learnfiles = array_unique($single_learnfiles);
 		foreach ($single_learnfiles as $file) {
@@ -1079,11 +1059,10 @@ function learnallfiles($curbot)
     while ($file = readdir($dir)) {
 
         if (substr($file,strpos($file,"."))==".aiml"){
-
             $learnfiles[$curbot][]=$file;
         }
     }
-
+	natsort($learnfiles[$curbot]);
     closedir($dir);
 }
 
@@ -1142,7 +1121,7 @@ function learn($file)
     xml_parser_set_option($xml_parser,XML_OPTION_CASE_FOLDING,0);
     xml_set_element_handler($xml_parser, "startElement", "endElement");
     xml_set_character_data_handler ($xml_parser, "handleme");
-    print "<font size='3'>Loading data aiml file: $file<br /></font>\n";
+    print "<font size='3'>Loading data from aiml file: <b><i>$file</i></b><br /></font>\n";
     flush();
 
     if (strtoupper(substr($file,0,7))=="HTTP://"){
@@ -1326,18 +1305,12 @@ function loadaimlstring($aimlstring,$botid)
 */
 function loadaimlcategory($aimlstring,$botid)
 {
-
 	global $selectbot;
 
 	$selectbot=$botid;
-
 	$aimlstring="<?xml version=\"1.0\" encoding=\"ISO-8859-1\"" . "?" . "><aiml version=\"1.0\">" . $aimlstring . "</aiml>";
-
-
 	flushcache();
-
 	learnstring($aimlstring);
-
 }
 
 
@@ -1450,7 +1423,7 @@ function makesubscode()
     $splitterphp = makesplitterphp($splitterarray);
 
     createsubfile();
-    addtosubs("<?\n");
+    addtosubs("<?php\n");
     addtosubs($genderphp);
     addtosubs($personphp);
     addtosubs($person2php);

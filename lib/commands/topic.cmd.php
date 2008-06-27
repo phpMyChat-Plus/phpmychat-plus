@@ -1,11 +1,22 @@
 <?php
+// Added for php4 support of mb functions
+if (!function_exists('mb_convert_case'))
+{
+	function mb_convert_case($str,$type,$Charset)
+	{
+		if (eregi("TITLE",$type)) $str = ucwords($str);
+		elseif (eregi("LOWER",$type)) $str = strtolower($str);
+		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+		return $str;
+	}
+};
 
-function room_in($what, $in)
+function room_in($what, $in, $Charset)
 {
 	$rooms = explode(",",$in);
 	for (reset($rooms); $room_name=current($rooms); next($rooms))
 	{
-		if (strcasecmp($what, $room_name) == 0) return true;
+		if (strcasecmp(mb_convert_case($what,MB_CASE_LOWER,$Charset), mb_convert_case($room_name,MB_CASE_LOWER,$Charset)) == 0) return true;
 	}
 	return false;
 }
@@ -20,7 +31,7 @@ function room_in($what, $in)
 	}
 	list($password,$perms,$rooms) = $DbLink->next_record();
 	$DbLink->clean_results();
-	if (($password != $PWD_Hash) || (($perms != "moderator") && ($perms != "admin") && ($perms != "topmod")) || (($perms == "moderator") && (!room_in(stripslashes($R), $rooms) && !room_in("*", $rooms))))
+	if (($password != $PWD_Hash) || (($perms != "moderator") && ($perms != "admin") && ($perms != "topmod")) || (($perms == "moderator") && (!room_in(stripslashes($R), $rooms, $Charset) && !room_in("*", $rooms, $Charset))))
 	{
 		$Error = L_NO_MODERATOR;
 	}
@@ -57,13 +68,13 @@ function room_in($what, $in)
 						if (C_NO_SWEAR && $R != C_NO_SWEAR_ROOM1 && $R != C_NO_SWEAR_ROOM2 && $R != C_NO_SWEAR_ROOM3 && $R != C_NO_SWEAR_ROOM4)
 						{
 							include("./lib/swearing.lib.php");
-							$Cmd[3] = checkwords($Cmd[3], false);
-							$Cmd[2] = checkwords($Cmd[2], false);
+							$Cmd[3] = checkwords($Cmd[3], false, $Charset);
+							$Cmd[2] = checkwords($Cmd[2], false, $Charset);
 						}
 						global $Top;
 						if (trim($Cmd[2]) != "*") $Top = trim($Cmd[2])." ".trim($Cmd[3]);
 						else $Top = trim($Cmd[3]);
-						if (strcasecmp($Top, "top reset") == 0)
+						if (strcasecmp(mb_convert_case($Top,MB_CASE_LOWER,$Charset), "top reset") == 0)
 						{
 							if (trim($Cmd[2]) != "*")
 							{
@@ -103,13 +114,16 @@ function room_in($what, $in)
 	$Top = eregi_replace('([[:space:]]|^)(www)', '\\1http://\\2', $Top); // no prefix (www.myurl.ext)
 	$prefix = '(http|https|ftp|telnet|news|gopher|file|wais)://';
     $pureUrl = '([[:alnum:]/\n+-=%&:_.~?]+[#[:alnum:]+-_~]*)';
-       $purl="";
-       for ($x=0; $x<count($pmatch[0]); $x++)
-       {
-				$purl .= "||".$pmatch[0][$x];
-       }
-
+    $purl="";
+if (C_POPUP_LINKS)
+{
+    for ($x=0; $x<count($pmatch[0]); $x++)
+    {
+		$purl .= "||".$pmatch[0][$x];
+    }
     $Top = eregi_replace($prefix.$pureUrl, '<a href="links.php?link='.urlencode($purl).'" target="_blank"></a>', $Top);
+}
+else $Top = eregi_replace($prefix.$pureUrl, '<a href="\\1://\\2" target="_blank">\\1://\\2</a>', $Top);
 
 	// e-mail addresses
 	$Top = eregi_replace('([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](fo|g|l|m|mes|o|op|pa|ro|seum|t|u|v|z)?)', '<a href="mailto:\\1" alt="Send email">\\1</a>', $Top);
@@ -122,7 +136,7 @@ function room_in($what, $in)
 								}
 								clearstatcache () ;
 								$fp = fopen($toppath, "a") ;                // file will be writen.
-								fputs($fp, stripslashes($Top));                // and will include the topic to be listed on banner.
+								fputs($fp, stripslashes($Top));                // and will include the topic to be listed on topic frame.
 								fclose($fp) ;
 								$DbLink = new DB;
 								$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS topic', '', ".time().", '$U', '$Top', '', '')");
@@ -135,7 +149,7 @@ function room_in($what, $in)
 								}
 								clearstatcache () ;
 								$fp = fopen($topgpath, "a") ;                // file will be writen.
-								fputs($fp, stripslashes($Top));                // and will include the topic to be listed on banner.
+								fputs($fp, stripslashes($Top));                // and will include the topic to be listed on topic frame.
 								fclose($fp) ;
 								$DbLink = new DB;
 								$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS topic', '', ".time().", '$U', '$Top', '', '')");

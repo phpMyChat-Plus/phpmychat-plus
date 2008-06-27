@@ -19,6 +19,15 @@ require("lib/clean.lib.php");
 
 // Avoid server configuration for magic quotes
 set_magic_quotes_runtime(0);
+// Can't turn off magic quotes gpc so just redo what it did if it is on.
+if (get_magic_quotes_gpc()) {
+	foreach($_GET as $k=>$v)
+		$_GET[$k] = stripslashes($v);
+	foreach($_POST as $k=>$v)
+		$_POST[$k] = stripslashes($v);
+	foreach($_COOKIE as $k=>$v)
+		$_COOKIE[$k] = stripslashes($v);
+}
 
 // Get IP address and check for hackers
 require("./lib/get_IP.lib.php");
@@ -105,7 +114,7 @@ if (isset($MessagesString) && $MessagesString != "")
 	<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 	<HEAD>
 		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=<?php echo($Charset); ?>">
-		<TITLE><?php echo(((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)." - ".htmlspecialchars(stripslashes($R))." - ".date("F j, Y")); ?></TITLE>
+		<TITLE><?php echo(htmlspecialchars(stripslashes($R))." - ".date("F j, Y")." - ".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 
 	<BODY CLASS="mainframe">

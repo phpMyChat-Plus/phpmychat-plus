@@ -8,18 +8,18 @@ if (isset($_GET))
 	};
 };
 
-if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
-if (!isset($L) && isset($_COOKIE["CookieLang"])) $L = $_COOKIE["CookieLang"];
-//if no language detected set default one
-if (!isset($L) || $L == "") $L = C_LANGUAGE;
-// Fix a security hole
-if (isset($L) && !is_dir("./localization/".$L)) exit();
+// Fix some security holes
+if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
+if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) exit();
 if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
-require("./config/config.lib.php");
-require("./localization/".$L."/localized.chat.php");
-require("./lib/database/".C_DB_TYPE.".lib.php");
-require("./lib/clean.lib.php");
+if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
+
+require("./${ChatPath}config/config.lib.php");
+require("./${ChatPath}localization/languages.lib.php");
+require("./${ChatPath}localization/".$L."/localized.chat.php");
+require("./${ChatPath}lib/database/".C_DB_TYPE.".lib.php");
+require("./${ChatPath}lib/clean.lib.php");
 
 if (!isset($sort_order)) $sort_order = isset($CookieUserSort) ? $CookieUserSort : C_USERS_SORT_ORD;
 // Special cache instructions for IE5+
@@ -33,8 +33,42 @@ header("Cache-Control: no-cache, must-revalidate".$CachePlus);
 header("Pragma: no-cache");
 header("Content-Type: text/html; charset=${Charset}");
 
-$DbLink = new DB;
+// avoid server configuration for magic quotes
+set_magic_quotes_runtime(0);
+// Can't turn off magic quotes gpc so just redo what it did if it is on.
+if (get_magic_quotes_gpc()) {
+	foreach($_GET as $k=>$v)
+		$_GET[$k] = stripslashes($v);
+	foreach($_POST as $k=>$v)
+		$_POST[$k] = stripslashes($v);
+	foreach($_COOKIE as $k=>$v)
+		$_COOKIE[$k] = stripslashes($v);
+}
 
+// Added for php4 support of mb functions
+if (!function_exists('mb_convert_case'))
+{
+	function mb_convert_case($str,$type,$Charset)
+	{
+		if (eregi("TITLE",$type)) $str = ucwords($str);
+		elseif (eregi("LOWER",$type)) $str = strtolower($str);
+		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+		return $str;
+	};
+};
+
+// Ghost Control mod by Ciprian
+function ghosts_in($what, $in, $Charset)
+{
+	$ghosts = explode(",",$in);
+	for (reset($ghosts); $ghost_name=current($ghosts); next($ghosts))
+	{
+		if (strcasecmp(mb_convert_case($what,MB_CASE_LOWER,$Charset), mb_convert_case($ghost_name,MB_CASE_LOWER,$Charset)) == 0) return true;
+	}
+	return false;
+};
+
+$DbLink = new DB;
 
 // ** Check for user entrance to beep **
 // Initialize some vars if necessary and put beep on/off in a cookie
@@ -80,10 +114,38 @@ if (!isset($FontName)) $FontName = "";
 <?php
 function special_char($str,$lang,$type)
 {
-	$tag_open = (($type == 'a' || $type == 't' || $type == 'm') ? "<I>":"");
+	$tag_open = (((($type == 'a' && $str != C_BOT_NAME) || $type == 't' || $type == 'm') && C_ITALICIZE_POWERS) ? "<I>":"");
 	$tag_close = ($tag_open != "" ? "</I>":"");
 	return $tag_open.($lang ? htmlentities($str) : htmlspecialchars($str)).$tag_close;
 }
+
+// Special classes for usernames depending on users status (other users)
+function userClass($type,$name)
+{
+		if (C_ITALICIZE_POWERS)
+		{
+			$class = ((($type == 'a' && $name != C_BOT_NAME) || $type == 't') ? "Class=\"admin\"":($type == 'm' ? "Class=\"mod\"":"Class=\"user\""));
+		}
+		else
+		{
+			$class = "Class=\"user\"";
+		}
+	return $class;
+}
+
+// Ghost Control mod by Ciprian
+$Hide = "";
+if (C_HIDE_ADMINS) $Hide .= " AND (u.status != 'a' OR u.username = '".C_BOT_NAME."') AND u.status != 't'";
+if (C_HIDE_MODERS) $Hide .=  " AND u.status !='m'";
+if (C_SPECIAL_GHOSTS != "")
+{
+	$sghosts = eregi_replace("username","u.username",C_SPECIAL_GHOSTS);
+	$Hide .= " AND u.username != ".$sghosts."";
+}
+
+// Sort order by Ciprian
+if ($sort_order == "1")	$ordquery = "u.username";
+else $ordquery = "u.r_time";
 
 // ** count rooms **
 $DbLink->query("SELECT DISTINCT u.room FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room AND m.type = 1");
@@ -93,11 +155,6 @@ $DbLink->clean_results();
 if ($NbRooms > 0)
 {
 	// ** count users **
-	if ($sort_order == "1")	$ordquery = "username";
-	else $ordquery = "r_time";
-	// Ghost Control mod by Ciprian
-	$Hide = (C_HIDE_ADMINS) ? " AND ((u.status != 'a' AND u.status != 't') OR u.email = 'bot@bot.com')" : "";
-	$Hide .= (C_HIDE_MODERS ? " AND u.status !='m'" : "");
 	$DbLink->query("SELECT DISTINCT u.username, u.latin1, u.r_time FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room AND m.type = 1".$Hide." ORDER BY ".$ordquery."");
 	$NbUsers = $DbLink->num_rows();
 	if($NbUsers > 3)
@@ -140,9 +197,16 @@ ver4 = (NS4 || IE4) ? 1 : 0;
 <CENTER>
 	<?php echo(LOGIN_LINK); ?><?php echo(L_CHAT); ?></A>
 	<P>
+<?php
+if (!eregi("firefox", $_SERVER['HTTP_USER_AGENT']))
+{
+	?>
 		<A HREF="#" onClick="expandAll(); return false" onMouseOver="window.status='<?php echo(L_EXPCOL_ALL); ?>.'; return true;" title="<?php echo(L_EXPCOL_ALL); ?>">
 		<IMG NAME="imEx_big" SRC="images/closed_big.gif" WIDTH=13 HEIGHT=13 ALIGN="MIDDLE" BORDER=0 ALT="<?php echo(L_EXPCOL_ALL); ?>"></A>
 		&nbsp;
+<?php
+}
+?>
 		<A HREF="users_popupH.php?<?php echo($ChangeBeeps_Reload); ?>" onMouseOver="window.status='<?php echo(L_BEEP); ?>.'; return true;" title="<?php echo(L_BEEP); ?>"><IMG SRC="images/<?php if ($B == "0") echo("no"); ?>sound.gif" WIDTH=13 HEIGHT=13 ALIGN="MIDDLE" BORDER=0 ALT="<?php echo(L_BEEP); ?>"></A>
 	</P>
 </CENTER>
@@ -162,20 +226,18 @@ if(isset($NbUsers) && $NbUsers > 0)
 			$Users = new DB;
 			while(list($Other) = $DbLink->next_record())
 			{
-				if ($sort_order == "1")	$ordquery = "username";
-				else $ordquery = "r_time";
-				// Ghost Control mod by Ciprian
-				$Hide = (C_HIDE_ADMINS) ? " AND ((status != 'a' AND status != 't') OR email = 'bot@bot.com')" : "";
-				$Hide .= (C_HIDE_MODERS ? " AND status !='m'" : "");
-				if($Users->query("SELECT username, latin1, status, r_time FROM ".C_USR_TBL." WHERE room = '".addslashes($Other)."'".$Hide." ORDER BY ".$ordquery.""))
+				if($Users->query("SELECT u.username, u.latin1, u.status, u.r_time FROM ".C_USR_TBL." u WHERE u.room = '".addslashes($Other)."'".$Hide." ORDER BY ".$ordquery.""))
 				{
 					if($Users->num_rows() > 0)
 					{
 						$i++;
 						$id = "room".$i;
-						echo("<DIV ID=\"${id}Parent\" CLASS=\"parent\" STYLE=\"margin-top: 5px; CURSOR: hand\">");
-						echo("<A HREF=\"#\" onClick=\"expandIt('${id}'); return false\" onMouseOver=\"window.status='".L_EXPCOL."'; return true;\" title=\"<?php echo(L_EXPCOL); ?>\">");
+						echo("<DIV ID=\"${id}Parent\" CLASS=\"parent\" STYLE=\"margin-top: 5px;\">");
+if (!eregi("firefox", $_SERVER['HTTP_USER_AGENT']))
+{
+						echo("<A HREF=\"#\" onClick=\"expandIt('${id}'); return false\" onMouseOver=\"window.status='".L_EXPCOL."'; return true;\" title=\"".L_EXPCOL."\">");
 						echo("<IMG NAME=\"imEx\" SRC=\"images/closed.gif\" WIDTH=9 HEIGHT=9 BORDER=0 ALT=\"".L_EXPCOL."\"></A>");
+}
 						echo("&nbsp;<B>".htmlspecialchars($Other)."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$Users->num_rows().")</SPAN><br />");
 						echo("</DIV>");
 						echo("<DIV ID=\"${id}Child\" CLASS=\"child\" STYLE=\"margin-left: 12px\">");
@@ -184,8 +246,7 @@ if(isset($NbUsers) && $NbUsers > 0)
 						{
 							$j++;
 							$room_time = date("d-M, H:i:s", $room_time + C_TMZ_OFFSET*60*60);
-							if ($Username != C_BOT_NAME) echo("-&nbsp;".special_char($Username,$Latin1,$status)." <font size=1>".special_char("(".$room_time.")",$Latin1,$status)."</font><br />");
-							else echo("-&nbsp;".special_char($Username,$Latin1,"")." <font size=1>".special_char("(".$room_time.")",$Latin1,"")."</font><br />");
+							echo("-&nbsp;<a ".userClass($status,$Username).";>".special_char($Username,$Latin1,$status)."</a> <font size=1>".special_char("(".$room_time.")",$Latin1,"")."</font><br />");
 						};
 						echo("</DIV>");
 						$ChildNb[$id] = $j;

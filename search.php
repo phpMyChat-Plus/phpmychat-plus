@@ -19,6 +19,24 @@ switch($L)
 	$L_G_HL = "es";
 	}
 		break;
+	case "bulgarian":
+	{
+	$L_G_EXT = "bg";
+	$L_G_SBI = "Унесите изразе за тражење";
+	$L_G_SBB = "Проследи образац претраге";
+	$L_G_SA = "Търсене";
+	$L_G_HL = "bg";
+	}
+		break;
+	case "danish":
+	{
+	$L_G_EXT = "dk";
+	$L_G_SBI = "Indtast dine søgetermer";
+	$L_G_SBB = "Indsend søgeformular";
+	$L_G_SA = "Søg";
+	$L_G_HL = "da";
+	}
+		break;
 	case "dutch":
 	{
 	$L_G_EXT = "nl";
@@ -37,6 +55,15 @@ switch($L)
 	$L_G_HL = "fr";
 	}
 		break;
+	case "georgian":
+	{
+	$L_G_EXT = "ge";
+	$L_G_SBI = "";
+	$L_G_SBB = "";
+	$L_G_SA = "მოძებნა";
+	$L_G_HL = "ka";
+	}
+		break;
 	case "german":
 	{
 	$L_G_EXT = "de";
@@ -44,6 +71,24 @@ switch($L)
 	$L_G_SBB = "Suchformular senden";
 	$L_G_SA = "Suchen";
 	$L_G_HL = "de";
+	}
+		break;
+	case "greek":
+	{
+	$L_G_EXT = "gr";
+	$L_G_SBI = "";
+	$L_G_SBB = "";
+	$L_G_SA = "Αναζήτηση";
+	$L_G_HL = "el";
+	}
+		break;
+	case "hungarian":
+	{
+	$L_G_EXT = "hu";
+	$L_G_SBI = "Írja be a keresett kifjezéseket";
+	$L_G_SBB = "Keresőűrlap elküldése";
+	$L_G_SA = "Keresés";
+	$L_G_HL = "hu";
 	}
 		break;
 	case "italian":
@@ -54,7 +99,6 @@ switch($L)
 	$L_G_SA = "Cerca";
 	$L_G_HL = "it";
 	}
-		break;
 	case "romanian":
 	{
 	$L_G_EXT = "ro";
@@ -62,6 +106,25 @@ switch($L)
 	$L_G_SBB = "Trimiteţi formularul de căutare";
 	$L_G_SA = "Căutare";
 	$L_G_HL = "ro";
+	}
+		break;
+	case "serbian_latin":
+	{
+	$L_G_EXT = "com";
+	$L_G_SBI = "Unesite izraze za traženje";
+	$L_G_SBB = "Prosledi obrazac pretrage";
+//	$L_G_SA = "Potraži";
+	$L_G_SA = "Потражи";
+	$L_G_HL = "sr";
+	}
+		break;
+	case "serbian_cyrillic":
+	{
+	$L_G_EXT = "com";
+	$L_G_SBI = "Унесите изразе за тражење";
+	$L_G_SBB = "Проследи образац претраге";
+	$L_G_SA = "Потражи";
+	$L_G_HL = "sr";
 	}
 		break;
 	case "spanish":
@@ -87,7 +150,7 @@ switch($L)
 	$L_G_EXT = "com.tr";
 	$L_G_SBI = "Arama terimlerinizi girin";
 	$L_G_SBB = "Arama formu gönder";
-	$L_G_SA = "Arama";
+	$L_G_SA = "Ara";
 	$L_G_HL = "tr";
 	}
 		break;
@@ -113,24 +176,16 @@ switch($L)
 ?>
 <?php
 $search = "
-<form method=\"get\" name=\"search\" action=\"http://www.google.$L_G_EXT/custom\" target=\"google_window\">
-<table ALIGN=\"center\" bgcolor=\"#ffffff\">
-<center>
-<tr><td nowrap=\"nowrap\" valign=\"top\" align=\"left\" height=\"32\">
-<a href=\"http://www.google.com/\">
-<img src=\"http://www.google.com/logos/Logo_25wht.gif\" border=\"0\" alt=\"Google\" align=\"middle\"></img></a>
-<label for=\"sbi\" style=\"display: none\">$L_G_SBI</label>
-<input type=\"text\" name=\"q\" size=\"25\" maxlength=\"255\" value=\"\" id=\"sbi\"></input>
-<label for=\"sbb\" style=\"display: none\">$L_G_SBB</label>
-<input type=\"submit\" name=\"sa\" value=\"$L_G_SA\" id=\"sbb\"></input>
-<input type=\"hidden\" name=\"client\" value=\"pub-9362782527650497\"></input>
-<input type=\"hidden\" name=\"forid\" value=\"1\"></input>
-<input type=\"hidden\" name=\"channel\" value=\"3495742875\"></input>
-<input type=\"hidden\" name=\"ie\" value=\"UTF-8\"></input>
-<input type=\"hidden\" name=\"oe\" value=\"UTF-8\"></input>
-<input type=\"hidden\" name=\"cof\" value=\"GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;FORID:1\"></input>
-<input type=\"hidden\" name=\"hl\" value=\"$L_G_HL\"></input>
-</td></tr></center>
-</table>
-</form>";
+<table align=\"center\">
+<tr valign=\"middle\">
+<td align=\"center\">
+	<form action=\"http://www.google.$L_G_EXT/cse\" id=\"cse-search-box\" target=\"_blank\">
+			<input type=\"hidden\" name=\"cx\" value=\"partner-pub-9362782527650497:81f9y9u8fdj\" />
+			<input type=\"text\" name=\"q\" size=\"40\" />
+			<input type=\"submit\" name=\"sa\" value=\"$L_G_SA\" />
+	</form>
+<script type=\"text/javascript\" src=\"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=$L_G_HL\"></script>
+</td>
+</tr>
+</table>";
 ?>

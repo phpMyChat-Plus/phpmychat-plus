@@ -1,4 +1,4 @@
-<?
+<?php
 /* ------------------------------------------------------------------
 	This library allows to transform text codes to graphical smilies.
 	It is called by 'plus/input.php'.
@@ -60,7 +60,7 @@ $SmiliesTbl = Array(
 	":clps" => array("smile39.gif", "20", "30"),
 	":disco" => array("smile40.gif", "36", "23"),
 	":clap"	=> array("smile41.gif", "19", "16"),
-	":yea"	=> array("smile42.gif", "27", "16"),
+	":yah"	=> array("smile42.gif", "27", "16"),
 	":splat"	=> array("smile43.gif", "15", "15"),
 	":uch"	=> array("smile44.gif", "33", "26"),
 	":cryn"	=> array("smile45.gif", "21", "16"),

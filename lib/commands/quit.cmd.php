@@ -6,9 +6,9 @@ if (trim($Cmd[3]) != "")
 	if (C_NO_SWEAR)
 	{
 		include("./lib/swearing.lib.php");
-		$Cmd[3] = checkwords($Cmd[3], false);
+		$Cmd[3] = checkwords($Cmd[3], false, $Charset);
 	}
-	AddMessage(stripslashes($Cmd[3]), $T, $R, $U, $C, '', '', '');
+	AddMessage(stripslashes($Cmd[3]), $T, $R, $U, $C, '', '', '', $Charset);
 }
 $IsCommand = true;
 ?>

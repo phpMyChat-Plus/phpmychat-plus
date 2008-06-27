@@ -1,7 +1,8 @@
 <?php
-// File : english/localized.admin.php - plus version (25.09.2007 - rev.10)
+// File : english/localized.admin.php - plus version (20.05.2008 - rev.12)
 // Original file by Loďc Chapeaux <lolo@phpheaven.net> & Dean Collins <joelford@pacbell.net>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
+// Do not use ' ; use ’ instead (utf-8 edit bug)
 
 // extra header for charset
 $Charset = "utf-8";
@@ -12,7 +13,9 @@ $FontSize = 10;
 // Top frame
 define("A_MENU_0", "Administration for %s");
 define("A_MENU_1", "Registered users");
+define("A_MENU_11", "Registered user");
 define("A_MENU_2", "Banished users");
+define("A_MENU_21", "Banished user");
 define("A_MENU_3", "Clean rooms");
 define("A_MENU_4", "Send mails");
 define("A_MENU_5", "Configuration");
@@ -32,7 +35,7 @@ define("A_SHEET1_6", "Remove checked profiles");
 define("A_SHEET1_7", "Change");
 define("A_SHEET1_8", "There are no registered users except yourself.");
 define("A_SHEET1_9", "Banish checked profiles");
-define("A_SHEET1_10", "Now you have to move to the banished users sheet to refine your choices.");
+define("A_SHEET1_10", "Now you have to move to the ’".A_MENU_2."’ sheet to refine your choices.");
 define("A_SHEET1_11", "Last connected");
 define("A_SHEET1_12", "Banishment reason (optional)");
 define("A_USER", "User");
@@ -59,7 +62,7 @@ define("A_SHEET3_3", "Clean selected rooms");
 define("A_SHEET3_4", "There are no rooms to clean.");
 
 // Frame for sending mails
-define("A_SHEET4_0", "You haven’t set the admin email in Configuration tab.");
+define("A_SHEET4_0", "You haven’t set the admin email in the ’".A_MENU_5."’ tab.");
 define("A_SHEET4_1", "Send e-mails");
 define("A_SHEET4_2", "To:");
 define("A_SHEET4_3", "Select all");
@@ -74,7 +77,7 @@ define("A_SHEET4_11", "Signature");
 define("A_SHEET4_12", "Unselect all");
 
 // Frame for configuration
-define("A_SHEET5_0", "Your phpMyChat-Plus installed version is %s");
+define("A_SHEET5_0", "Your currently installed version is %s");
 define("A_SHEET5_1", "There is a new version released (%s)!");
 
 //Chat Extras
@@ -82,7 +85,7 @@ define("A_EXTR_DSBL", "Chat Extras disabled") ;
 define("A_REFRESH_MSG", "Refresh Messages") ;
 define("A_MSG_DEL", "Del") ;
 define("A_POST_TIME", "Posted on") ;
-define("A_FROM_TO", "From  To") ;
+define("A_FROM_TO", "From › To") ;
 define("A_FROM", "From") ;
 define("A_CHTEX_ROOM", "Room") ;
 define("A_CHTEX_MSG", "Message") ;
@@ -111,6 +114,12 @@ define("A_CHAT_LOGS_20", "Show the full chat archive section");
 define("A_CHAT_LOGS_21", "Go to top");
 define("A_CHAT_LOGS_22", "Archived Log File");
 define("A_CHAT_LOGS_23", "Generated on %s"); // Generated on "date"
+define("A_CHAT_LOGS_24", "Compress all %s logs into a zip archive"); // date
+define("A_CHAT_LOGS_25", "This will build a zip with all the logs\\nstored in the %s folder!\\n"); // month/year
+define("A_CHAT_LOGS_26", "\\nAre you sure?");
+define("A_CHAT_LOGS_27", "Zip archives");
+define("A_CHAT_LOGS_28", "Download %s");
+define("A_CHAT_LOGS_29", "Delete this zip");
 
 //Admin Search Page
 define("A_SEARCH_1", "Chatroom Search Page");
@@ -124,7 +133,7 @@ define("A_SEARCH_8", "Description");
 define("A_SEARCH_9", "Links");
 define("A_SEARCH_10", "Search");
 define("A_SEARCH_11", "For Permissions Category, options are <b>ad</b>, <b>mod</b> or <b>u</b>.");
-define("A_SEARCH_12", "For Gender Category, options are <b>0</b> for Unspecified, <b>1</b> for Male, or <b>2</b> for Female.");
+define("A_SEARCH_12", "For Gender Category, options are: <b>0</b> for Unspecified, <b>1</b> for Male, <b>2</b> for Female or <b>3</b> for Couple.");
 define("A_SEARCH_13", "Username");
 define("A_SEARCH_14", "First Name");
 define("A_SEARCH_15", "Last Name");
@@ -134,7 +143,9 @@ define("A_SEARCH_19", "IP");
 define("A_SEARCH_20", "Gender");
 define("A_SEARCH_21", "Search Term");
 define("A_SEARCH_22", "Search by");
-define("A_SEARCH_23", "Please Provide a Search Term and Try Again");
+define("A_SEARCH_23", "Please Provide a Search Term and Try Again!");
+define("A_SEARCH_24", "There is no data to match your criteria. Please refine your search.");
+define("A_SEARCH_25", "Moderate this user");
 
 // Connected users Page
 define("A_LURKING_1", "Connected users and Lurking") ;

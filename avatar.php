@@ -26,6 +26,19 @@ require("./lib/release.lib.php");
 require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
 header("Content-Type: text/html; charset=${Charset}");
+
+// avoid server configuration for magic quotes
+set_magic_quotes_runtime(0);
+// Can't turn off magic quotes gpc so just redo what it did if it is on.
+if (get_magic_quotes_gpc()) {
+	foreach($_GET as $k=>$v)
+		$_GET[$k] = stripslashes($v);
+	foreach($_POST as $k=>$v)
+		$_POST[$k] = stripslashes($v);
+	foreach($_COOKIE as $k=>$v)
+		$_COOKIE[$k] = stripslashes($v);
+}
+
 $DbAva = new DB;
 
 // it's a URL string, perhaps.
@@ -33,28 +46,29 @@ $DbAva = new DB;
 // parse a avatar image from input url
 if (isset($url)) {
     $isok = false;
-    if (strncasecmp($url,"HTTP://",7) == false) {  // it's a URL string, perhaps.
+    if (strncasecmp($url,"http://",7) == 0) {  // it's a URL string, perhaps.
        // find out if there is a real computer in the URL:
        $isok = true;
 
     }
     if ($isok) {
       $avatar = $url;
+      $avamsg = "&nbsp";
     } else {
       $avamsg = "<br />Error: ".L_ERR_AV."<br />";
     }
 }
 
 // for display of all the avatars:
-If (empty($From)) $From="avatar.php";
+if (!isset($From)) $From="avatar.php";
 
-If (!empty($avatar)) {
+if (isset($avatar)) {
   $typeit = L_CHG_AV;
  } else {
   $query = "SELECT avatar FROM ".C_REG_TBL." WHERE username='".$User."'";
   $DbAva->query($query);
   list ($avatar) = $DbAva->next_record();
-  if ((strncasecmp($avatar,"HTTP://",7) == false) AND (empty($url))) {  // it's a URL string, perhaps.
+  if ((strncasecmp($avatar,"http://",7) == 0) && (!isset($url))) {  // it's a URL string, perhaps.
     $url = $avatar;
   }
   $typeit = "";
@@ -62,47 +76,48 @@ If (!empty($avatar)) {
 
 $DbAva->close();
 
-If (!empty($ORIGAVATAR)) {
+if (!isset($ORIGAVATAR)) {
     $avatar=$ORIGAVATAR;
-    if (strncasecmp($avatar,"HTTP://",7) == false) {  // it's a URL string, perhaps.
+    if (strncasecmp($avatar,"http://",7) == 0) {  // it's a URL string, perhaps.
       $url = $avatar;
     }
 }
 
 // For translations with an explicit charset (not the 'x-user-defined' one)
-if (!isset($FontName)) $FontName = "Arial";
+if (!isset($FontName)) $FontName = "";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
-<TITLE><?php echo($User." - ".L_AVATAR) ?></TITLE>
+<TITLE><?php echo(($User != "") ? $User." - ".L_AVATAR : L_AVATAR) ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 </HEAD>
 <body onLoad="if (window.focus) window.focus();" CLASS="frame">
 <table rows="3" width="90%" align="center" BORDER="0" CELLPADDING="2" CLASS="table">
 <TR>
 <TH COLSPAN=2 CLASS="tabtitle">
-<center><?php echo(L_TITLE_AV); ?><img border="0" <?php echo(" width=\"".C_AVA_WIDTH."\" height=\"".C_AVA_HEIGHT."\"");
-print(" src=\"$avatar\">");
+<center><?php echo(L_TITLE_AV); ?><img border="0" <?php echo("width=\"".C_AVA_WIDTH."\" height=\"".C_AVA_HEIGHT."\" src=\"".$avatar."\">");
 ?>
 </TH>
-</TR><tr align=center><td>
+</TR><tr align="center"><td>
 <H5><u><font color="ltblue"><?php echo(L_SEL_NEW_AV); ?></font></u></H5>
 <?php
 $avatarmatch = $avatar;
+    if (strncasecmp($avatar,"http://",7) == 0) {  // it's a URL string, perhaps.
+      $url = $avatar;
+    }
 ?>
 
-<form action="<?php echo($From);?>" METHOD="GET" AUTOCOMPLETE="" TARGET="_self">
-<font size="2" color="blue">(example: http://mysite/images/mypic.gif)</font>
-<center><font size="2"><?php echo(L_URL_AV); ?></font><input type="text" name="url" size="30" limit="254" VALUE="<?php echo($url); ?>">&nbsp;<?php echo($avamsg); ?>
+<form action="<?php echo($From."?avatar=$avatarmatch&User=$User&U=$User&L=$L&FORM_SEND=0&LIMIT=$LIMIT&pmc_password=$pmc_password&pmc_username=$User&Link=1");?>" METHOD="GET" AUTOCOMPLETE="" TARGET="_self">
+<font size="2" color="blue">(<?php echo(L_EX_AV); ?>: http://mysite/images/mypic.gif)</font>
+<center><font size="2"><?php echo(L_URL_AV); ?></font><input type="text" name="url" size="30" limit="255" VALUE="<?php echo($url); ?>">
+<?php echo($avamsg); ?>
 <br /><font size="1"><i><?php echo(L_EXPL_AV); ?></i></font></center>
-<!-- <input type="hidden" name="avatar" value="<?php echo($avatar); ?>"> -->
 <input type="hidden" name="User" value="<?php echo($User); ?>">
-<input type="hidden" name="Link" value="1">
 <input type="hidden" name="L" value="<?php echo($L); ?>">
 <input type="hidden" name="Link" value="<?php echo($Link); ?>">
-<input type="hidden" name="pmc_password" value="<?php echo(stripslashes(($_GET[pmc_password]))); ?>">
+<input type="hidden" name="pmc_password" value="<?php echo(stripslashes(($_GET['pmc_password']))); ?>">
 <input type="hidden" name="pmc_username" value="<?php echo($User); ?>">
 </form></td></tr><tr><td>
 <?php
@@ -115,33 +130,26 @@ For ($i=0; $i <= C_NUM_AVATARS; $i++) {
   }
   $title1=str_replace(C_AVA_RELPATH,"",$avatar);
   $title1=str_replace(".gif","",$title1);
-
+  if ($avatar == $avatarmatch) $title1.=" (".L_SELECTED.")";
   ?>
   &nbsp;&nbsp;
   <a href="<?php
   print "$From?avatar=$avatar&ORIGAVATAR=$ORIGAVATAR&User=$User&U=$User&L=$L&FORM_SEND=0&pmc_password=$pmc_password&pmc_username=$User&Link=1\"";
-  ?>
-  onMouseOver="window.status='<?php echo(L_SEL_NEW_AV); ?>.'; return true;" title="Select <?php echo($title1); ?>" target="_self">
+  ?> onMouseOver="window.status='<?php echo(L_SEL_NEW_AV); ?>.'; return true;" title="<?php echo($title1); ?>" target="_self">
   <img src="<?php echo("$avatar");
   echo("\" width=\"".C_AVA_WIDTH."\" height=\"".C_AVA_HEIGHT."\"");
-  ?> border=\"<?php
-  if ($avatar == $avatarmatch) {
-    print "1";
-  } else {
-    print "0";
-  }
- ?>"></a>
+  ?> border="<?php echo(($avatar == $avatarmatch) ? "2" : "0"); ?>"></a>
 
 <?php
 }
 ?>
-</center></td></tr><tr><td>
-<?php echo("<br /><center><font size=\"-1\">$typeit</font></center>"); ?>
+</center></td></tr><tr align="center"><td>
+<?php echo("<br /><font size=\"-1\">$typeit</font>"); ?>
 </td>
 </tr></table>
 <center>
 <?php
-echo("<a href=\"$From?User=$User&U=$User&L=$L&FORM_SEND=0&LIMIT=$LIMIT&pmc_password=$pmc_password&pmc_username=$User&Link=1\" onMouseOver=\"window.status='".L_REG_10."'; return true;\" ><br />".L_REG_10."</a>");
+echo("<a href=\"$From?avatar=$avatarmatch&User=$User&U=$User&L=$L&FORM_SEND=0&LIMIT=$LIMIT&pmc_password=$pmc_password&pmc_username=$User&Link=1\" onMouseOver=\"window.status='".L_REG_10."'; return true;\" ><br />".L_REG_10."</a>");
 ?>
 </center>
 </body>

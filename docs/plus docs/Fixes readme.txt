@@ -1,15 +1,114 @@
 Note: if you’ve already modded your own files, please compare and edit the changes from those included in this log to identify the changes made for the fix. If not, just replace them in the according folders.
 This log includes all the previously released fixes.
-Client browsers - tested with: IE > 6.0SP2, Mozilla Firefox > 1.6.0.0, Mozilla Firefox > 2.0, Mozilla Firebird 0.7, Netscape > 8.1, Opera 9.0 build 8502, AvantBrowser 10.2 build 52.
-Server environment - tested env: Apache/1.3.34 (Unix), php > v.4.3.11 (non-safe-mode, but also a safe mode server has been tested and worked fine), MySQL > v4.1.19, exif support enabled (gif/jpeg processing), GD2 support enabled (gif/jpeg processing).
+Client browsers - tested with: IE > 6.0SP2 (including > 7.0 & > 8.0-beta), Mozilla Firefox > 1.6.0.0 (including < 3.0), Mozilla Firebird 0.7, Netscape > 8.1, Opera 9.0 build 8502, AvantBrowser 10.2 build 52, Flock 1.2.1, Apple Safari 3.1.
+Server environment - tested env:
+	- Apache < 2.2.8 (Unix and Windows 2k/XP<SP3);
+	- php < 5.2.6 (non-safe-mode, but also a safe mode server has been tested and worked fine);
+	- MySQL < v5.0.51b;
+	- exif support enabled (gif/jpeg processing);
+	- GD2 support enabled (gif/jpeg processing);
+	- mail function support (optional).
+
 Known issues (read also the FAQ):
-- configurations cannot be saved from admin panel on servers having magic_quotes set "on"; this also happen if the c_config table structure has been altered somehow and it doesn’t follow exactly the admin5.php field definitions;
-- when a username uses utf8 chars like ã î â , php cannot recognize a name with small caps as being similar with caps (Îrban is different than îrban) so please make sure you use the name in PMs and commands exacly as the one logged in.
+- configurations cannot be saved from admin panel on servers having magic_quotes set "on"; this also happen if the c_config table structure has been altered somehow and it doesn’t exactly follow the admin5.php field definitions; another identified reason would be the use of single quote ’ in field values (like Room’s Names or such) - never use single quotes - use the utf-8 ’ instead (you can copy it from here when you need it)
+- when a username uses utf-8 chars like ã î â , php cannot recognize a name with small caps as being similar with caps (Îrban is different than îrban) so please make sure you use the name in PMs and commands exacly as the one of the desired username (this is working fine on php > 5 servers, due to the added mb_* functions support);
+- on IE7, registered users don’t always actually leave chat after clicking the Exit door or Exit link - the loader frame doesn’t actually close but keep showing that user to the users’ lists until the user closes that specific browser window.
 
 Important: everytime you upgrade/reinstall a phpmychat server or change sensitive data in Admin panel (like default room names), the old cookies must be deleted from the clients’ machines - so let your users know! (also cache clearing might be a good idea)
-When you install Firefox2 and/or QuickTime (RealPlayer), a QuickTime plugin will break the WMP plugin in IE, necesary for playing .wav sounds, therefore, you won’t get sounds in IE anymore. I fixed it by playing with enabling/disabling these plugins in IE, but not sure what exactly does the fix. I also added a small script (reg file) as a link in Extra Options in chat.
+When you install Firefox2 and/or QuickTime (RealPlayer), a QuickTime plugin will break the WMP plugin in IE, necesary for playing .wav sounds, therefore, you won’t get sounds in IE anymore. I fixed it by playing with enabling WMP/disabling QuickTime plugins in IE; re-associating the "wav" files in Media Player/Tools/Options/File Types also fixes this.
+On some pcs a restart might be necessary.
+We also added a small script (reg file) as a link in Extra Options in chat.
 
 Fixes History:
+10.06.2008 - 1.93-RC2:
+- banner.php filename is changed now to topic.php as well as all it’s old references; the AdBlock and AdBlock Plus plugins in Firefos were blocking it because the previous filename stands for advertisments; (functionality related)
+- the bot will not dissapear anymore from userlists when clean.lib or logs.lib are in action; (functionality related)
+- phpMyChat-Plus becomes the First Gravatarized LiveChat system in the world!!! (functionality extension)
+	- added option to display Gravatars as users’ avatars in chat (more details on gravatar.com);
+- added image preview for all the images fields/options in registration/edit user and admin panel; (functionality extension)
+- fixed the option for registered users to hide/undisclose their gender; (functionality related)
+- some archive improvements - all the off-line/unread pms will be kept in the database for a period of time set in admin panel -before, any pm would have been deleted together with the regular messages deletion; (functionality related)
+- added PM popup manager - each user can see all his received PMs and, if allowed from Admin panel, can delete the ones he chooses - to avoid saving to logs; (functionality extension)
+20.05.2008 - 1.93-RC1:
+- improved the installer;
+- send mail improvements for registration/edit profiles, as well as in Admin Panel:
+	- utf-8 compatibility;
+	- added Cc (sender admin) and Bcc (chat owner) for email sent from Send email sheet (it helps when there are more than 1 admins of a chat);
+- stripped more redundant codes from several files;
+- added users visits counter to profiles;
+15.04.2008 - 1.93-beta8:
+- connected ip logs page improved; (functionality related)
+- removed the config.lib.php inclusion from exported logs; (security related)
+- worldtime improvements and fixes: (functionality extension)
+	- the time is now correctly displayed for servers on negative meridians;
+	- the meridians/cities are now editable (the number is restricted to 6, although 5 is the best number of cities to be displayed, due to status bar size limit); (instructions included in both admin panel and lib/worldtime.lib.php)
+	- UTC is always displayed (to let the users from other meridians figure out the offset);
+	- added a clock box into the Input frame; (useful for users with hidden status bar in their browsers, so they can see the current server time)
+- user related links (edit profile, delete profile, administration and other) - moved from Input frame into the Extra Options menu in the right frame in chatrooms; (functionality related)
+- added power colors to usernames in users_popup lists (only if italicized is enabled); (functionality extension)
+- Expand/Colapse rooms fix; (functionality related)
+- Cc and Bcc added for sending emails from admin panel - for more spam control (if someone is accessing Admin panel and start using the send email sheet, the Owner will get copies so he can take counter-measures); (security & functionality extensions)
+30.03.2008 - 1.93-beta7:
+- several tutorial fixes - thanks to Peter’s suggestions; (translation related)
+- registration control have been added, so an admin can now review and approve who gets registered and who gets to chat; - there is a hint added in admin panel with usage instructions - (functionality extension)
+- sending mail functions have been improved to completely support utf-8 encoded emails. - (functionality related)
+- Bulgarian has been added - thanks to Peter; (localization related)
+19.03.2008 - 1.93-beta6:
+- lots of bot adaptations to phpmychat: (bot functionality extensions)
+	- ProgramE fix for date/time formats handling (this bug was fixed by Ciprian and posted to the alicebot.org as well);
+	- bot aimls updated to the latest set edition (1.0.1) from alicebot.org;
+	- bot knows now each user name he is talking to;
+	- links changed to clickable in bot posts;
+	- several loader improvements;
+	- added math, jokes, history, religion (Protestant), author knowledge and an excellent calendar made by SquarBear in 2002 and improved by Ciprian in 2008 (this will display a month/year layout calendar for any year between 18th-23rd centuries);
+	- added phpmychat help, commands, etiquette and tutorial answers, so bot can provide help for chat now!!!;
+	- added some general info about phpMyChat-Plus project, documentation & download pages, developer and others, so bot can provide answers about phpmychat project now;
+- aiml bot set upgraded to version aaa 1.0.1 from alicebot.org; (functionality related)
+- added option in Admin panel to choose your own greeting in emails sent from Send mail sheet; (functionality extension)
+- more improvements for php5/windows systems compatibility; (functionality related)
+05.03.2008 - 1.93-beta4:
+- added option in Admin panel to show/hide italicized names and power colors for admins and moderators; (functionality extension)
+- several improvements of IP logging (acounter.php); (functionality related)
+- different finetunes of language specific expressions, order, singular/plural, gender, etc; (localization & functionality related)
+- lots of utf-8 extensions, mostly for php5 full compatibility (multibyte functions added); (functionality extension)
+- important fixes for php servers which have "short_open_tag = Off" - all short tags have been converted to long tags; (functionality related)
+- chat has been changed to fully working on windows servers; (functionality extension)
+18.02.2008 - 1.93-beta2:
+- Admin panel and profile forms (edit and register) are displaying now the images of the picture selections (flags, flag types, genders, doorroll, aso); (display related)
+- several logs exporting/handling changes/improvements; (functionality related)
+- windows utf-8 encoding fixes - date names are now correctly decoded on Windows enviroments; (localization & functionality related)
+- chat booting, clean.lib and superghost mode improvements; (functionality related)
+- lurking page also displays the status of the connected users (in Admin panel/Connected users, it also shows ghosts and superghosts status); (functionality related)
+- Hungarian has been added - thanks to Zsuzsi; (localization related)
+- Serbian - Latin has been added - thanks to Vedran; (localization related)
+01.02.2008 - 1.93-beta1:
+- pagination improvement in Admin panel/Registered users and Baned users, and Styles preview, respectivey - added a page selector for easier navigation through pages; (functionality extension)
+- Admin panel/Search tab improvement: the results of a search can now directly be banned/deleted from the same sheet, without having to look for the user in the Registered users sheet; (functionality extension)
+- added option in Admin panel to display a color filled and/or an image background index (login) page; (functionality extension)
+- added option in Admin panel to enable/disable Links popup - some users requested the old links behavior in chat; (functionality extension)
+- clickable links can now be posted in topics banner; (functionality extension)
+- important skin mod changes: (functionality extension)
+	- all the config/styleX.css.php files have been changed - if you edited/created your own skin, this should be backed up and upgraded;
+	- the database fields which used to store the filter colors for each style are now changed to specify the style  for each room;
+	- skins are now easily selectable in Admin panel/Configuration, under each room name;
+	- there is also a Skin Preview page available (opening from Admin panel);
+	- Note: to add new skins, read explanations in install/Instructions.txt; 
+- important Ghost Mode changes: (functionality extension)
+	- new approach to hiding users;
+	- added a new field in Admin panel to enter user names you want to be hiden (Admins and TopModers in this hiden mode are called Special Ghosts due to their Extra abilities to watch all the activities in chat rooms - very useful for parental control);
+- Several language improvements to help with the new translations; (localization & functionality related)
+- French and Swedish translations have been updated and added - thanks to Pierre and Anon; (localization related)
+- Danish has been added - thanks to Dit; (localization related)
+- Some dice usage improvements; (functionality related)
+- Banner/topic improvement - the default topic stays now in the file called "localization/_owner/owner.php" - which replaces localized.owner.php; (functionality related)
+- config/config.lib.php changed (replaced "localized.owner" with "owner"); (functionality related)
+- buzz_popup fix, to hide the .txt files in the sounds folder (some user also uploaded the redme.txt provided in the extrasounds archive); (functionality related)
+- ghost mode fix - the conected_users number was still showing the hiden users; (functionality related)
+- counter fix - counter won’t increase for one hour per each visitator - before, it was counting each time the user loaded/reloaded the login page; (functionality related)
+- new gender added (couple); (functionality extension)
+- added an option to display both avatars and gender icons, only one of them or neither one; (functionality extension)
+- one more field added to the c_config table in the database.
+
 After 1.92 release fixes (f means the released fix):
 02.01.2008 - f7:
 - sorting users fix in all the lists;

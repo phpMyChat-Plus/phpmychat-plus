@@ -24,7 +24,22 @@ include ( $ChatPath."localization/languages.lib.php" );
 include ( $ChatPath."localization/".$L."/localized.install.php" );
 include ( $ChatPath."localization/".$L."/localized.chat.php" );
 
-  // chmod patch for both php4 and php5
+header("Content-Type: text/html; charset=${Charset}");
+
+// avoid server configuration for magic quotes
+set_magic_quotes_runtime(0);
+// Can't turn off magic quotes gpc so just redo what it did if it is on.
+if (get_magic_quotes_gpc()) {
+	foreach($_GET as $k=>$v)
+		$_GET[$k] = stripslashes($v);
+	foreach($_POST as $k=>$v)
+		$_POST[$k] = stripslashes($v);
+	foreach($_COOKIE as $k=>$v)
+		$_COOKIE[$k] = stripslashes($v);
+}
+
+
+// chmod patch for both php4 and php5
 if (!function_exists('ftp_chmod')) {
    function ftp_chmod($ftpstream,$chmod,$file)
    {
@@ -36,6 +51,17 @@ if (!function_exists('ftp_chmod')) {
    }
 }
 
+// Added for php4 support of mb functions
+if (!function_exists('mb_convert_case'))
+{
+	function mb_convert_case($str,$type,$Charset)
+	{
+		if (eregi("TITLE",$type)) $str = ucwords($str);
+		elseif (eregi("LOWER",$type)) $str = strtolower($str);
+		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+		return $str;
+	}
+};
 // Sessions handler
 // from page 1 (available from page 2)
 if ( $_SESSION['ftphost'] != "" ) $ftphost = $_SESSION['ftphost'];
@@ -154,6 +180,12 @@ if ( $p == 2 )
 		{
 		switch (APP_VERSION)
 		{
+			case "1.92":
+			{
+				if (APP_MINOR != "") $kind = "192-beta";
+				else $kind = "192";
+			}
+			break;
 			case "1.90":
 			{
 				$kind = "190";
@@ -178,6 +210,8 @@ if ( $p == 2 )
 		}
 	}
   // set up basic connection
+  if (!$skip)
+  {
   	if ($ftpuname != "") $ftppath = eregi_replace($ftpuname, "", $ftppath);
   	if (!isset($ftpuname) || $ftpuname == "") $error3 .= L_FTP_NAME."<br />\n";
   	if (!isset($ftppass) || $ftppass == "") $error3 .= L_FTP_PASS."<br />\n";
@@ -187,33 +221,35 @@ if ( $p == 2 )
 	if (@ftp_connect($ftphost) !== false)
 	{
 	$conn_id = @ftp_connect($ftphost);
-  // login with username and password
-  if (@ftp_login($conn_id, $ftpuname, $ftppass))
-  {
-  // try to make the files and folders modifications
-	if (!file_exists($ChatPath."config/color.lib.php"))
+	// login with username and password
+	if (@ftp_login($conn_id, $ftpuname, $ftppass))
 	{
-		ftp_chmod($conn_id, 777, $ftppath."config");
-		copy($ChatPath."install/old/color.lib.php",$ChatPath."config/color.lib.php");
-		ftp_chmod($conn_id, 755, $ftppath."config");
+		// try to make the files and folders modifications
+		if (!file_exists($ChatPath."config/color.lib.php"))
+		{
+			ftp_chmod($conn_id, 777, $ftppath."config");
+			copy($ChatPath."install/old/color.lib.php",$ChatPath."config/color.lib.php");
+			ftp_chmod($conn_id, 755, $ftppath."config");
+		}
+		if (ftp_chmod($conn_id, 666, $ftppath."config/config.lib.php") !== false) { } else { $error3 .= L_FILE_ERROR1." &quot;/config/config.php&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/chat_index.txt") !== false) { } else { $error3 .= L_FILE_ERROR1." &quot;/acount/pages/chat_index.txt&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/chat_ip_logs.htm") !== false) { } else { $error3 .= L_FILE_ERROR1." &quot;acount/pages/chat_ip_logs.htm&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/ip.txt") !== false) { } else { $error3 .= L_FILE_ERROR1." &quot;/acount/pages/ip.txt&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 777, $ftppath."acount/pages") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/acount/pages&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 777, $ftppath."acount/pages/bak") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/acount/pages/bak&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 777, $ftppath."bot/subs.inc") !== false) { } else { $error3 .= L_FILE_ERROR1." &quot;/bot/subs.inc&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 777, $ftppath."botfb") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/botfb&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 777, $ftppath."images/cache") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/images/cache&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 777, $ftppath."logs") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/logs&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 777, $ftppath."logsadmin") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/logsadmin&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+//  if (is_dir($ChatPath.$logdir)) { if (ftp_chmod($conn_id, 777, $ftppath.$logdir) !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;".$logdir."&quot; ".L_FOLD_ERROR2."<br /><br />\n"; } }
+		// close the connection
+		@ftp_close($conn_id);
 	}
-  if (ftp_chmod($conn_id, 666, $ftppath."config/config.lib.php") !== false) { } else { $error3 .= L_FILE_ERROR1." &quot;/config/config.php&quot; ".L_FILE_ERROR2."<br><br>\n"; }
-  if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/chat_index.txt") !== false) { } else { $error3 .= L_FILE_ERROR1." &quot;/acount/pages/chat_index.txt&quot; ".L_FILE_ERROR2."<br><br>\n"; }
-  if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/chat_ip_logs.txt") !== false) { } else { $error3 .= L_FILE_ERROR1." &quot;acount/pages/chat_ip_logs.txt&quot; ".L_FILE_ERROR2."<br><br>\n"; }
-  if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/ip.txt") !== false) { } else { $error3 .= L_FILE_ERROR1." &quot;/acount/pages/ip.txt&quot; ".L_FILE_ERROR2."<br><br>\n"; }
-  if (ftp_chmod($conn_id, 777, $ftppath."acount/pages") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/botfb&quot; ".L_FOLD_ERROR2."<br><br>\n"; }
-  if (ftp_chmod($conn_id, 777, $ftppath."acount/pages/bak") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/botfb&quot; ".L_FOLD_ERROR2."<br><br>\n"; }
-  if (ftp_chmod($conn_id, 777, $ftppath."bot/subs.inc") !== false) { } else { $error3 .= L_FILE_ERROR1." &quot;/bot/subs.inc&quot; ".L_FILE_ERROR2."<br><br>\n"; }
-  if (ftp_chmod($conn_id, 777, $ftppath."botfb") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/botfb&quot; ".L_FOLD_ERROR2."<br><br>\n"; }
-  if (ftp_chmod($conn_id, 777, $ftppath."logs") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/logs&quot; ".L_FOLD_ERROR2."<br><br>\n"; }
-  if (ftp_chmod($conn_id, 777, $ftppath."logsadmin") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/logsadmin&quot; ".L_FOLD_ERROR2."<br><br>\n"; }
-//  if (is_dir($ChatPath.$logdir)) { if (ftp_chmod($conn_id, 777, $ftppath.$logdir) !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;".$logdir."&quot; ".L_FOLD_ERROR2."<br><br>\n"; } }
-  	// close the connection
-	@ftp_close($conn_id);
-}
-  else { $error3 .= L_LOGIN_ERROR."<br />\n"; }
-  }
-  else { $error3 .= L_CONN_ERROR."<br />\n"; }
+	else { $error3 .= L_LOGIN_ERROR."<br />\n"; }
+	}
+	else { $error3 .= L_CONN_ERROR."<br />\n"; }
+	}
   }
 }
 if ( $p == 3 )
@@ -261,6 +297,8 @@ if ( $p == 4 )
   if ( $adminemail == "" ) $adminemail = "your@email.com";
   if ( $chaturl == "" || $chaturl == "C_CHAT_URL" ) $chaturl = "http://".eregi_replace("install/install.php", "", $_SERVER["HTTP_HOST"].$_SERVER["PHP_SELF"]);
 	$conn = @mysql_connect ( $dbhost, $dbuname, $dbpass ) OR $error = L_DB_NOCONNECT;
+	@mysql_query("SET CHARACTER SET utf8");
+	mysql_query("SET NAMES 'utf8'");
 	if ( $conn != false )
 	{
 		$myconn = mysql_select_db ( $dbname, $conn );
@@ -270,7 +308,7 @@ if ( $p == 4 )
 			$cr_db = mysql_query ( "CREATE DATABASE $dbname DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_unicode_ci IF NOT EXISTS;", $conn );
 			if ( $cr_db == false )
 			{
-				$error = L_DB_HINT1." ".$dbname." ".L_DB_HINT2;
+				$error = sprintf(L_DB_HINT1,$dbname);
 			}
 		}
 	}
@@ -281,6 +319,14 @@ if ( $p == 4 )
   	{
   		include ( "database/mysql_new_install.php" );
 		mysql_query ( "UPDATE $t_config SET LANGUAGE = '$L', ADMIN_NAME = '$adminname', ADMIN_EMAIL = '$adminemail', CHAT_URL = '$chaturl', CHAT_NAME = '$chatname'".$LOG_DIR_N." WHERE ID='0';" );
+  	} elseif ( $kind == "192-beta" )
+  	{
+  		include ( "database/mysql_upgrade_plus_1.92-beta.php" );
+		mysql_query ( $LOG_DIR_NN );
+  	} elseif ( $kind == "192" )
+  	{
+  		include ( "database/mysql_upgrade_plus_1.92.php" );
+		mysql_query ( $LOG_DIR_NN );
   	} elseif ( $kind == "190" )
   	{
   		include ( "database/mysql_utf8_convert.php" );
@@ -313,16 +359,30 @@ if ( $p == 4 )
     {
   		include ( "database/mysql_upgrade_std_0.12.php" );
 		mysql_query ( "UPDATE $t_config SET LANGUAGE = '$L', ADMIN_NAME = '$adminname', ADMIN_EMAIL = '$adminemail', CHAT_URL = '$chaturl', CHAT_NAME = '$chatname'".$LOG_DIR_N." WHERE ID='0';" );
+    } elseif ( $kind == "no" )
+    {
 	}
 	$conn_id = @ftp_connect($ftphost);
 	if (@ftp_login($conn_id, $ftpuname, $ftppass))
 	{
 	if (logdir != $logdirnew)
 	{
-		if (@ftp_rename($conn_id, $ftppath.$logdir, $ftppath.$logdirnew) !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/".$logdirnew."&quot; ".L_FOLD_ERROR2."<br><br>\n"; }
+		if (@ftp_rename($conn_id, $ftppath.$logdir, $ftppath.$logdirnew) !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/".$logdirnew."&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
     }
 	if ($kind != "new")
 	{
+/*		if (file_exists($ChatPath."config/start_page.css.php")) ftp_delete($conn_id, $ftppath."config/start_page.css.php");
+		if (file_exists($ChatPath."config/style.css.php")) ftp_delete($conn_id, $ftppath."config/style.css.php");
+		if (file_exists($ChatPath."config/style2.css.php")) ftp_delete($conn_id, $ftppath."config/style2.css.php");
+		if (file_exists($ChatPath."config/style3.css.php")) ftp_delete($conn_id, $ftppath."config/style3.css.php");
+		if (file_exists($ChatPath."config/style4.css.php")) ftp_delete($conn_id, $ftppath."config/style4.css.php");
+		if (file_exists($ChatPath."config/style5.css.php")) ftp_delete($conn_id, $ftppath."config/style5.css.php");
+		if (file_exists($ChatPath."config/style6.css.php")) ftp_delete($conn_id, $ftppath."config/style6.css.php");
+		if (file_exists($ChatPath."config/style7.css.php")) ftp_delete($conn_id, $ftppath."config/style7.css.php");
+		if (file_exists($ChatPath."config/style8.css.php")) ftp_delete($conn_id, $ftppath."config/style8.css.php");
+		if (file_exists($ChatPath."config/style9.css.php")) ftp_delete($conn_id, $ftppath."config/style9.css.php");
+		if (file_exists($ChatPath."config/style10.css.php")) ftp_delete($conn_id, $ftppath."config/style10.css.php");
+*/
 		if (file_exists($ChatPath."docs/plus docs/Instructions.txt")) ftp_delete($conn_id, $ftppath."docs/plus docs/Instructions.txt");
 		if (file_exists($ChatPath."extra/.htaccess")) ftp_delete($conn_id, $ftppath."extra/.htaccess");
 		if (file_exists($ChatPath."lib/welcome.lib.php")) ftp_delete($conn_id, $ftppath."lib/welcome.lib.php");
@@ -338,25 +398,41 @@ if ( $p == 4 )
 		if (file_exists($ChatPath."images/nums6.gif")) ftp_delete($conn_id, $ftppath."images/nums6.gif");
 		if (file_exists($ChatPath."images/exitdoorRoll.gif")) ftp_delete($conn_id, $ftppath."images/exitdoorRoll.gif");
 		if (file_exists($ChatPath."images/exitdoor.gif")) ftp_delete($conn_id, $ftppath."images/exitdoor.gif");
+		if (file_exists($ChatPath."localization/_owner/localized.owner.php")) ftp_delete($conn_id, $ftppath."localization/_owner/localized.owner.php");
 		if (file_exists($ChatPath."localization/argentinian_spanish/flag.gif")) ftp_delete($conn_id, $ftppath."localization/argentinian_spanish/flag.gif");
 		if (file_exists($ChatPath."localization/argentinian_spanish/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/argentinian_spanish/flag0.gif");
+		if (file_exists($ChatPath."localization/argentinian_spanish/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/argentinian_spanish/localized.topic.php");
 		if (file_exists($ChatPath."localization/dutch/flag.gif")) ftp_delete($conn_id, $ftppath."localization/dutch/flag.gif");
 		if (file_exists($ChatPath."localization/dutch/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/dutch/flag0.gif");
+		if (file_exists($ChatPath."localization/dutch/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/dutch/localized.topic.php");
 		if (file_exists($ChatPath."localization/english/flag.gif")) ftp_delete($conn_id, $ftppath."localization/english/flag.gif");
 		if (file_exists($ChatPath."localization/english/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/english/flag0.gif");
 		if (file_exists($ChatPath."localization/english/flagUS.gif")) ftp_delete($conn_id, $ftppath."localization/english/flagUS.gif");
+		if (file_exists($ChatPath."localization/english/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/english/localized.topic.php");
+		if (file_exists($ChatPath."localization/french/flag.gif")) ftp_delete($conn_id, $ftppath."localization/french/flag.gif");
+		if (file_exists($ChatPath."localization/french/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/french/flag0.gif");
+		if (file_exists($ChatPath."localization/french/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/french/localized.topic.php");
+		if (file_exists($ChatPath."localization/german/flag.gif")) ftp_delete($conn_id, $ftppath."localization/german/flag.gif");
+		if (file_exists($ChatPath."localization/german/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/german/flag0.gif");
+		if (file_exists($ChatPath."localization/german/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/german/localized.topic.php");
 		if (file_exists($ChatPath."localization/italian/flag.gif")) ftp_delete($conn_id, $ftppath."localization/italian/flag.gif");
 		if (file_exists($ChatPath."localization/italian/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/italian/flag0.gif");
+		if (file_exists($ChatPath."localization/italian/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/italian/localized.topic.php");
 		if (file_exists($ChatPath."localization/romanian/flag.gif")) ftp_delete($conn_id, $ftppath."localization/romanian/flag.gif");
 		if (file_exists($ChatPath."localization/romanian/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/romanian/flag0.gif");
+		if (file_exists($ChatPath."localization/romanian/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/romanian/localized.topic.php");
 		if (file_exists($ChatPath."localization/spanish/flag.gif")) ftp_delete($conn_id, $ftppath."localization/spanish/flag.gif");
 		if (file_exists($ChatPath."localization/spanish/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/spanish/flag0.gif");
+		if (file_exists($ChatPath."localization/spanish/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/spanish/localized.topic.php");
 		if (file_exists($ChatPath."localization/swedish/flag.gif")) ftp_delete($conn_id, $ftppath."localization/swedish/flag.gif");
 		if (file_exists($ChatPath."localization/swedish/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/swedish/flag0.gif");
+		if (file_exists($ChatPath."localization/swedish/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/swedish/localized.topic.php");
 		if (file_exists($ChatPath."localization/turkish/flag.gif")) ftp_delete($conn_id, $ftppath."localization/turkish/flag.gif");
 		if (file_exists($ChatPath."localization/turkish/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/turkish/flag0.gif");
+		if (file_exists($ChatPath."localization/turkish/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/turkish/localized.topic.php");
 		if (file_exists($ChatPath."localization/vietnamese/flag.gif")) ftp_delete($conn_id, $ftppath."localization/vietnamese/flag.gif");
 		if (file_exists($ChatPath."localization/vietnamese/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/vietnamese/flag0.gif");
+		if (file_exists($ChatPath."localization/vietnamese/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/vietnamese/localized.topic.php");
 	}
 	// close the connection
 	@ftp_close($conn_id);
@@ -372,7 +448,8 @@ if ( $p == 5 )
 		if ( $_POST['admin'] == "" )
 		{
 			$error4 = L_PASS_ERROR1;
-		} else
+		}
+		else
 		{
 			if ( ( $_POST['pass1'] == "" ) || ( $_POST['pass2'] == "" ) )
 			{
@@ -386,8 +463,10 @@ if ( $p == 5 )
 				{
 					$pass_crypt = MD5 ( $_POST['pass1'] );
 					mysql_connect ( $dbhost, $dbuname, $dbpass );
+					@mysql_query("SET CHARACTER SET utf8");
+					mysql_query("SET NAMES 'utf8'");
 					mysql_select_db ( $dbname );
-					mysql_query ( "INSERT INTO c_reg_users VALUES ('', '', '$admin', '1', '$pass_crypt', '', '', '', '', '', 0, 'admin', '', '', '', 0, 1, '', '', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', '', 'red', 'images/avatars/def_avatar.gif', '0', '');" );
+					mysql_query ( "INSERT INTO $t_reg_users VALUES ('', '', '$admin', '1', '$pass_crypt', '', '', '', '$chaturl', '', 0, 'admin', '', '', '', 0, 1, '', '', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', '', 'red', 'images/avatars/def_avatar.gif', '0', '', '', '');" );
 				}
 			}
 		}
@@ -410,17 +489,25 @@ if ( $p == 5 )
 ?>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=${Charset}">
-<LINK REL="stylesheet" HREF="<?php echo $ChatPath ?>config/style1.css.php" TYPE="text/css">
-<title><?php echo ($L != "turkish") ? L_INST_FOR." ".APP_NAME : APP_NAME." ".L_INST_FOR ?></title>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo(${Charset}); ?>">
+<LINK REL="stylesheet" HREF="<?php echo($ChatPath."skins/style1.css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
+<title><?php echo (sprintf(L_INST_FOR,APP_NAME)); ?></title>
+<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
+<!--
+function instructions_popup()
+{
+	instructions_popup=window.open("ins_popup.php","instructions","width=640,height=640,scrollbars=yes,status=yes,location=no");
+}
+// -->
+</SCRIPT>
 </head>
-<body class="frame">
+<body class="frame" onLoad="instructions_popup(); return false">
 <center>
 <table align="center" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-left-width:0; border-right-width:0" bordercolor="#111111" width="450" id="AutoNumber1">
 <form action="install.php?p=<?php echo $p_next."&L=".$L ?>" method="post">
   <tr>
     <td width="100%" style="border-left: 1px solid #111111; border-right-color: #111111; border-right-width: 1">
-    <p align="center"><b><font face="Tahoma" size="5"><?php echo ($L != "turkish") ? L_INST_FOR." ".APP_NAME : APP_NAME." ".L_INST_FOR ?></font></b></p>
+    <p align="center"><b><font face="Tahoma" size="5"><?php echo (sprintf(L_INST_FOR,APP_NAME)); ?></font></b></p>
     <p align="center"><i><b><font size="4" face="Tahoma"><?php echo L_INST_VER." ".APP_VERSION.APP_MINOR ?></font></b></i></td>
   </tr>
   <tr>
@@ -438,18 +525,33 @@ while(list($key, $name) = each($AvailableLanguages))
 {
 	$i++;
 		$flag = "flag.gif";
-		if ($name == "argentinian_spanish") $FLAG_NAME = L_LANG_AR;
-		elseif ($name == "dutch") $FLAG_NAME = L_LANG_NL;
-		elseif ($name == "english") $FLAG_NAME = L_LANG_ENUK;
-		elseif ($name == "french") $FLAG_NAME = L_LANG_FR;
-		elseif ($name == "german") $FLAG_NAME = L_LANG_DE;
-		elseif ($name == "italian") $FLAG_NAME = L_LANG_IT;
-		elseif ($name == "romanian") $FLAG_NAME = L_LANG_RO;
-		elseif ($name == "spanish") $FLAG_NAME = L_LANG_ES;
-		elseif ($name == "swedish") $FLAG_NAME = L_LANG_SV;
-		elseif ($name == "turkish") $FLAG_NAME = L_LANG_TR;
-		elseif ($name == "vietnamese") $FLAG_NAME = L_LANG_VI;
-		else $FLAG_NAME = ucwords(str_replace("_"," ",$name));
+		if ($name == "argentinian_spanish" && L_LANG_AR != "L_LANG_AR") $FLAG_NAME = L_LANG_AR;
+		elseif ($name == "bulgarian" && L_LANG_BG != "L_LANG_BG") $FLAG_NAME = L_LANG_BG;
+		elseif ($name == "brazilian_portuguese" && L_LANG_BR != "L_LANG_BR") $FLAG_NAME = L_LANG_BR;
+		elseif ($name == "danish" && L_LANG_DA != "L_LANG_DA") $FLAG_NAME = L_LANG_DA;
+		elseif ($name == "dutch" && L_LANG_NL != "L_LANG_NL") $FLAG_NAME = L_LANG_NL;
+		elseif ($name == "english" && L_LANG_EN != "L_LANG_EN") $FLAG_NAME = L_LANG_EN;
+		elseif ($name == "french" && L_LANG_FR != "L_LANG_FR") $FLAG_NAME = L_LANG_FR;
+		elseif ($name == "georgian" && L_LANG_KA != "L_LANG_KA") $FLAG_NAME = L_LANG_KA;
+		elseif ($name == "german" && L_LANG_DE != "L_LANG_DE") $FLAG_NAME = L_LANG_DE;
+		elseif ($name == "greek" && L_LANG_GR != "L_LANG_GR") $FLAG_NAME = L_LANG_GR;
+		elseif ($name == "hindi" && L_LANG_HI != "L_LANG_HI") $FLAG_NAME = L_LANG_HI;
+		elseif ($name == "italian" && L_LANG_IT != "L_LANG_IT") $FLAG_NAME = L_LANG_IT;
+		elseif ($name == "hungarian" && L_LANG_HU != "L_LANG_HU") $FLAG_NAME = L_LANG_HU;
+		elseif ($name == "romanian" && L_LANG_RO != "L_LANG_RO") $FLAG_NAME = L_LANG_RO;
+		elseif ($name == "serbian_latin" && L_LANG_SRL != "L_LANG_SRL") $FLAG_NAME = L_LANG_SRL;
+		elseif ($name == "serbian_cyrillic" && L_LANG_SRC != "L_LANG_SRC") $FLAG_NAME = L_LANG_SRC;
+		elseif ($name == "slovak" && L_LANG_SK != "L_LANG_SK") $FLAG_NAME = L_LANG_SK;
+		elseif ($name == "spanish" && L_LANG_ES != "L_LANG_ES") $FLAG_NAME = L_LANG_ES;
+		elseif ($name == "swedish" && L_LANG_SV != "L_LANG_SV") $FLAG_NAME = L_LANG_SV;
+		elseif ($name == "turkish" && L_LANG_TR != "L_LANG_TR") $FLAG_NAME = L_LANG_TR;
+		elseif ($name == "urdu" && L_LANG_UR != "L_LANG_UR") $FLAG_NAME = L_LANG_UR;
+		elseif ($name == "vietnamese" && L_LANG_VI != "L_LANG_VI") $FLAG_NAME = L_LANG_VI;
+		else
+		{
+			$FLAG_NAME = str_replace("_"," ",$name);
+			$FLAG_NAME = mb_convert_case($FLAG_NAME,MB_CASE_TITLE,$Charset);
+		}
 		if ($name == $L)
 		{
 			$FLAG_OVER = $FLAG_NAME." (".L_SELECTED.")";
@@ -486,13 +588,13 @@ while(list($key, $name) = each($AvailableLanguages))
     <td width="100%" style="border-left-color: #111111; border-left-width: 1; border-right-color: #111111; border-right-width: 1">
     <p align="justify"><font face="Tahoma" size="2">
 <?php if ( $p == 1 ) { ?>
-<?php echo  ($L == "turkish") ? APP_NAME." ".APP_VERSION.APP_MINOR." ".L_P0_HINT1 : L_P0_HINT1." ".APP_NAME." ".APP_VERSION.APP_MINOR.".<br />".L_P0_HINT2 ?>
+<?php echo (sprintf(L_P0_HINT1,APP_NAME." ".APP_VERSION.APP_MINOR)."<br />".L_P0_HINT2); ?>
 <?php } // END OF PAGE 1  ?>
 <?php if ( $p == 2 ) { ?>
 <?php if ( $error3 == "" ) { ?>
-<?php echo L_P1_HINT1."<BR /><BR />".L_P1_HINT2?>
+<?php echo L_P1_HINT1."<br /><br />".L_P1_HINT2?>
 <?php } else { ?>
-<?php echo L_P1_HINT3."<BR /><BR />".$error3 ?>
+<?php echo L_P1_HINT3."<br /><br />".$error3 ?>
 <?php } ?>
 <?php } // END OF PAGE 2
 elseif ( $p == 3 ) { ?>
@@ -521,7 +623,7 @@ if ( $value == false ) { ?>
 <?php } // END OF kind=NEW?>
 </font></b><p align="left"><font face="Tahoma" size="2"><?php L_P3_HINT4 ?>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type=button value="<?php echo L_P3_BTN1 ?>" onclick="javascript:this.form.source.focus();this.form.source.select();"><br>
+    <input type=button value="<?php echo L_P3_BTN1 ?>" onclick="javascript:this.form.source.focus();this.form.source.select();"><br />
     </font>&nbsp;<textarea rows="20" name="source" cols="46">&lt;?php
 
 // ------ THESE SETTINGS MUST BE COMPLETED ------
@@ -530,7 +632,7 @@ if ( $value == false ) { ?>
 define("C_DB_NAME", '<?php echo $dbname ?>');						// Logical database name on that server (most common like: cpanelusername_databasename)
 define("C_DB_USER", '<?php echo $dbuname ?>');				// Database username (most common like: cpanelusername_username)
 define("C_DB_PASS", '<?php echo $dbpass ?>');				// Database user's password
-// We recommend you keep the names bellow
+// We recommend you keep the names below
 define("C_DB_HOST", '<?php echo $dbhost ?>');				// Hostname of your MySQL server (most common "localhost", but sometimes "mysql.domain.com")
 define("C_DB_TYPE", '<?php echo $dbtype ?>');						// SQL server type ("mysql", "pgsql" or "odbc")
 define("C_MSG_TBL", '<?php echo $t_messages ?>');			// Name of the table where messages are stored
@@ -543,11 +645,12 @@ define("C_LRK_TBL", '<?php echo $t_lurkers ?>'); 			// Name of the table where d
 // ------ THESE SETTINGS MUST NOT BE CHANGED ------
 
 $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
+@mysql_query("SET CHARACTER SET utf8");
+mysql_query("SET NAMES 'utf8'");
 mysql_select_db(C_DB_NAME);
 $query = "SELECT * FROM ".C_CFG_TBL."";
 $result = mysql_query($query);
 $row = mysql_fetch_row($result);
-define("C_SUPPORT_PAID", "");
 
 $MSG_DEL        			= $row[1];
 $USR_DEL		          = $row[2];
@@ -623,15 +726,15 @@ $SWEAR3	 							= $row[71];
 $SWEAR4	 							= $row[72];
 $COLOR_FILTERS				= $row[73];
 $COLOR_ALLOW_GUESTS		= $row[74];
-$COLOR_CD1						= $row[75];
-$COLOR_CD2						= $row[76];
-$COLOR_CD3						= $row[77];
-$COLOR_CD4						= $row[78];
-$COLOR_CD5						= $row[79];
-$COLOR_CD6						= $row[80];
-$COLOR_CD7						= $row[81];
-$COLOR_CD8						= $row[82];
-$COLOR_CD9						= $row[83];
+$ROOM_SKIN1						= $row[75];
+$ROOM_SKIN2						= $row[76];
+$ROOM_SKIN3						= $row[77];
+$ROOM_SKIN4						= $row[78];
+$ROOM_SKIN5						= $row[79];
+$ROOM_SKIN6						= $row[80];
+$ROOM_SKIN7						= $row[81];
+$ROOM_SKIN8						= $row[82];
+$ROOM_SKIN9						= $row[83];
 $COLOR_CA							= $row[84];
 $COLOR_CA1						= $row[85];
 $COLOR_CA2						= $row[86];
@@ -695,6 +798,22 @@ $CHAT_NAME	     = $row[143];
 $ENGLISH_FORMAT	     = $row[144];
 $FLAGS_3D	     = $row[145];
 $ALLOW_REGISTER    = $row[146];
+$DISP_GENDER    = $row[147];
+$SPECIAL_GHOSTS			= $row[148];
+$FILLED_LOGIN			= $row[149];
+$BACKGR_IMG				= $row[150];
+$BACKGR_IMG_PATH		= $row[151];
+$POPUP_LINKS			= $row[152];
+$ITALICIZE_POWERS		= $row[153];
+$MAIL_GREETING			= $row[154];
+$PM_KEEP_DAYS			= $row[155];
+$ALLOW_PM_DEL			= $row[156];
+$LOGIN_COUNTER			= $row[157];
+$ALLOW_GRAVATARS		= $row[158];
+$GRAVATARS_CACHE		= $row[159];
+$GRAVATARS_CACHE_EXPIRE	= $row[160];
+$GRAVATARS_RATING		= $row[161];
+$GRAVATARS_DYNAMIC_DEF	= $row[162];
 
 $query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.com'";
 $result_bot = mysql_query($query_bot);
@@ -703,6 +822,8 @@ list($BOT_NAME, $BOT_AVATAR, $BOT_FONT_COLOR) = mysql_fetch_row($result_bot);
 $query_quote = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='quote@quote.com'";
 $result_quote = mysql_query($query_quote);
 list($QUOTE_NAME, $QUOTE_AVATAR, $QUOTE_FONT_COLOR) = mysql_fetch_row($result_quote);
+@mysql_close($conn);
+define("C_SUPPORT_PAID", "");
 
 // Cleaning settings for messages and usernames
 define("C_MSG_DEL", $MSG_DEL);
@@ -726,7 +847,7 @@ define("C_PASS_LENGTH", $PASS_LENGTH);
 define("C_ADMIN_NOTIFY", $ADMIN_NOTIFY);
 define("C_ADMIN_NAME", $ADMIN_NAME);
 define("C_ADMIN_EMAIL", $ADMIN_EMAIL);
-define("C_CHAT_URL", $CHAT_URL);
+define("C_CHAT_URL", eregi("http://",$CHAT_URL) ? $CHAT_URL : "./");
 
 // Security and restrictions
 define("C_SHOW_ADMIN", $SHOW_ADMIN);
@@ -820,7 +941,7 @@ define("BUZZ_SOUND", $BUZZ_SOUND);
 if (ALLOW_BUZZ_SOUND && BUZZ_SOUND) define("L_BUZZ_SND", "<EMBED SRC=".$BUZZ_SOUND." HIDDEN=true AUTOSTART=true LOOP=false NAME=Buzz MASTERSOUND><NOEMBED><BGSOUND SRC=".$BUZZ_SOUND." LOOP=1></NOEMBED></EMBED>");
 else define("L_BUZZ_SND", "");
 
-// Enable different Topics for each room, defined in banner.php.
+// Enable different Topics for each room, defined in topic.php.
 // If set to 0, it will use the global topic defined there.
 define ("TOPIC_DIFF", $TOPIC_DIFF);
 
@@ -915,68 +1036,69 @@ if (strcasecmp(ucfirst(stripslashes($R)), ROOM9) == 0) $Room = ROOM9;
 	{
 		default:
 		{
-			$skin = 'config/style1';
-			define("COLOR_CD", $COLOR_CD1);
+			$skin = "${ChatPath}skins/style".$ROOM_SKIN1."";
+			include("${ChatPath}skins/style".$ROOM_SKIN1.".php");
 		}
-	break;
+		break;
 		case ROOM2:
 		{
-			$skin = "config/style2";
-			define("COLOR_CD", $COLOR_CD2);
+			$skin = "${ChatPath}skins/style".$ROOM_SKIN2."";
+			include("${ChatPath}skins/style".$ROOM_SKIN2.".php");
 		}
-	break;
+		break;
 		case ROOM3:
 		{
-			$skin = 'config/style3';
-			define("COLOR_CD", $COLOR_CD3);
+			$skin = "${ChatPath}skins/style".$ROOM_SKIN3."";
+			include("${ChatPath}skins/style".$ROOM_SKIN3.".php");
 		}
-	break;
+		break;
 		case ROOM4:
 		{
-			$skin = 'config/style4';
-			define("COLOR_CD", $COLOR_CD4);
+			$skin = "${ChatPath}skins/style".$ROOM_SKIN4."";
+			include("${ChatPath}skins/style".$ROOM_SKIN4.".php");
 		}
-	break;
+		break;
 		case ROOM5:
 		{
-			$skin = 'config/style5';
-			define("COLOR_CD", $COLOR_CD5);
+			$skin = "${ChatPath}skins/style".$ROOM_SKIN5."";
+			include("${ChatPath}skins/style".$ROOM_SKIN5.".php");
 		}
-	break;
+		break;
 		case ROOM6:
 		{
-			$skin = 'config/style6';
-			define("COLOR_CD", $COLOR_CD6);
+			$skin = "${ChatPath}skins/style".$ROOM_SKIN6."";
+			include("${ChatPath}skins/style".$ROOM_SKIN6.".php");
 		}
-	break;
+		break;
 		case ROOM7:
 		{
-			$skin = 'config/style7';
-			define("COLOR_CD", $COLOR_CD7);
+			$skin = "${ChatPath}skins/style".$ROOM_SKIN7."";
+			include("${ChatPath}skins/style".$ROOM_SKIN7.".php");
 		}
-	break;
+		break;
 		case ROOM8:
 		{
-			$skin = 'config/style8';
-			define("COLOR_CD", $COLOR_CD8);
+			$skin = "${ChatPath}skins/style".$ROOM_SKIN8."";
+			include("${ChatPath}skins/style".$ROOM_SKIN8.".php");
 		}
-	break;
+		break;
 		case ROOM9:
 		{
-			$skin = 'config/style9';
-			define("COLOR_CD", $COLOR_CD9);
+			$skin = "${ChatPath}skins/style".$ROOM_SKIN9."";
+			include("${ChatPath}skins/style".$ROOM_SKIN9.".php");
 		}
-	break;
+		break;
 	}
 }
 else						//default style if Room Skin mod is disabled
 {
-		$skin = 'config/style1';
-		define("COLOR_CD", $COLOR_CD1);
+	if ($ROOM_SKIN1 == "") $ROOM_SKIN1 = "1";
+	$skin = "${ChatPath}skins/style".$ROOM_SKIN1."";
+	include("${ChatPath}skins/style".$ROOM_SKIN1.".php");
 }
 
 // For Bob Dickow's QuickNotes modification
-// Comment the lines bellow to disable the quick menu for any of those mentioned
+// Comment the lines below to disable the quick menu for any of those mentioned
 $dropdownmsga = explode("|",$QUICKA);	//administrators
 $dropdownmsgm = explode("|",$QUICKM);	//moderators
 $dropdownmsg = explode("|",$QUICKU);	//users
@@ -1067,13 +1189,53 @@ define("C_CHAT_SYSTEM", $CHAT_SYSTEM);
 define("C_NUKE_BB_PATH", $NUKE_BB_PATH);
 
 // Added for owner personalizations to all the languages by Ciprian
-if(is_dir('./'.$ChatPath.'localization/_owner/') && file_exists('./'.$ChatPath.'localization/_owner/localized.owner.php')) include("./${ChatPath}localization/_owner/localized.owner.php");
+if(is_dir('./'.$ChatPath.'localization/_owner/') && file_exists('./'.$ChatPath.'localization/_owner/owner.php')) include("./${ChatPath}localization/_owner/owner.php");
 
 //Check for php server version
 $phpversion = phpversion();
 
 // Public Name of your chat server as you wish to be known on the web - by Ciprian
 define("C_CHAT_NAME", $CHAT_NAME);
+
+// Display genders - by Ciprian
+define("C_DISP_GENDER", $DISP_GENDER);
+
+// Ghost usernames - by Ciprian
+$SPECIALGHOSTS = eregi_replace(",","','",$SPECIAL_GHOSTS);
+$SPECIALGHOSTS = eregi_replace(","," AND username != ",$SPECIALGHOSTS);
+define("C_SPECIAL_GHOSTS", "'".$SPECIALGHOSTS."'");
+
+// Index page body layout - by Ciprian
+define("C_FILLED_LOGIN", $FILLED_LOGIN);
+
+// Background image on login page - by Ciprian
+define("C_BACKGR_IMG", $BACKGR_IMG);
+define("C_BACKGR_IMG_PATH", $BACKGR_IMG_PATH);
+
+// Popup posted links protection - by Alex & Ciprian
+define("C_POPUP_LINKS", $POPUP_LINKS);
+
+// Italicize power usernames - by Ciprian
+define("C_ITALICIZE_POWERS", $ITALICIZE_POWERS);
+
+// Email greeting closure in Admin4 sheet - by Ciprian
+define("C_MAIL_GREETING", $MAIL_GREETING);
+
+// Days to keep unread PMs in the database - by Ciprian
+define("C_PM_KEEP_DAYS", $PM_KEEP_DAYS);
+
+// Allow users to delete their own PMs from the database - by Ciprian
+define("C_ALLOW_PM_DEL", $ALLOW_PM_DEL);
+
+// It counts logins of registered users to chat (returning users) - by Ciprian
+define("C_LOGIN_COUNTER", $LOGIN_COUNTER);
+
+// Gravatars system - by Ciprian (details on www.gravatars.com)
+define("ALLOW_GRAVATARS", $ALLOW_GRAVATARS);
+define("GRAVATARS_CACHE", $GRAVATARS_CACHE);
+define("GRAVATARS_CACHE_EXPIRE", $GRAVATARS_CACHE_EXPIRE);
+define("GRAVATARS_RATING", $GRAVATARS_RATING);
+define("GRAVATARS_DYNAMIC_DEF", $GRAVATARS_DYNAMIC_DEF);
 ?&gt;</textarea></p>
 <?php } // END OF IS NOT WRITEABLE
 else {
@@ -1096,7 +1258,7 @@ else {
   	fputs ( $fh, 'define("C_DB_NAME", \''.$dbname.'\');						// Logical database name on that server (most common like: cpanelusername_databasename)'.$lfeed );
   	fputs ( $fh, 'define("C_DB_USER", \''.$dbuname.'\');				// Database username (most common like: cpanelusername_username)'.$lfeed );
   	fputs ( $fh, 'define("C_DB_PASS", \''.$dbpass.'\');				// Database user\'s password'.$lfeed );
-  	fputs ( $fh, '// We recommend you keep the names bellow'.$lfeed );
+  	fputs ( $fh, '// We recommend you keep the names below'.$lfeed );
   	fputs ( $fh, 'define("C_DB_HOST", \''.$dbhost.'\');				// Hostname of your MySQL server (most common "localhost", but sometimes "mysql.domain.com")'.$lfeed );
   	fputs ( $fh, 'define("C_DB_TYPE", \''.$dbtype.'\');						// SQL server type ("mysql", "pgsql" or "odbc")'.$lfeed );
   	fputs ( $fh, 'define("C_MSG_TBL", \''.$t_messages.'\');			// Name of the table where messages are stored'.$lfeed );
@@ -1109,11 +1271,12 @@ else {
   	fputs ( $fh, '// ------ THESE SETTINGS MUST NOT BE CHANGED ------'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '$conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die (\'<center>Error: Could Not Connect To Database\');'.$lfeed );
+  	fputs ( $fh, '@mysql_query("SET CHARACTER SET utf8");'.$lfeed );
+  	fputs ( $fh, 'mysql_query("SET NAMES \'utf8\'");'.$lfeed );
   	fputs ( $fh, 'mysql_select_db(C_DB_NAME);'.$lfeed );
   	fputs ( $fh, '$query = "SELECT * FROM ".C_CFG_TBL."";'.$lfeed );
   	fputs ( $fh, '$result = mysql_query($query);'.$lfeed );
   	fputs ( $fh, '$row = mysql_fetch_row($result);'.$lfeed );
-  	fputs ( $fh, 'define("C_SUPPORT_PAID", "");'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '$MSG_DEL        			= $row[1];'.$lfeed );
   	fputs ( $fh, '$USR_DEL		          = $row[2];'.$lfeed );
@@ -1189,15 +1352,15 @@ else {
   	fputs ( $fh, '$SWEAR4	 							= $row[72];'.$lfeed );
   	fputs ( $fh, '$COLOR_FILTERS				= $row[73];'.$lfeed );
   	fputs ( $fh, '$COLOR_ALLOW_GUESTS		= $row[74];'.$lfeed );
-  	fputs ( $fh, '$COLOR_CD1						= $row[75];'.$lfeed );
-  	fputs ( $fh, '$COLOR_CD2						= $row[76];'.$lfeed );
-  	fputs ( $fh, '$COLOR_CD3						= $row[77];'.$lfeed );
-  	fputs ( $fh, '$COLOR_CD4						= $row[78];'.$lfeed );
-  	fputs ( $fh, '$COLOR_CD5						= $row[79];'.$lfeed );
-  	fputs ( $fh, '$COLOR_CD6						= $row[80];'.$lfeed );
-  	fputs ( $fh, '$COLOR_CD7						= $row[81];'.$lfeed );
-  	fputs ( $fh, '$COLOR_CD8						= $row[82];'.$lfeed );
-  	fputs ( $fh, '$COLOR_CD9						= $row[83];'.$lfeed );
+  	fputs ( $fh, '$ROOM_SKIN1						= $row[75];'.$lfeed );
+  	fputs ( $fh, '$ROOM_SKIN2						= $row[76];'.$lfeed );
+  	fputs ( $fh, '$ROOM_SKIN3						= $row[77];'.$lfeed );
+  	fputs ( $fh, '$ROOM_SKIN4						= $row[78];'.$lfeed );
+  	fputs ( $fh, '$ROOM_SKIN5						= $row[79];'.$lfeed );
+  	fputs ( $fh, '$ROOM_SKIN6						= $row[80];'.$lfeed );
+  	fputs ( $fh, '$ROOM_SKIN7						= $row[81];'.$lfeed );
+  	fputs ( $fh, '$ROOM_SKIN8						= $row[82];'.$lfeed );
+  	fputs ( $fh, '$ROOM_SKIN9						= $row[83];'.$lfeed );
   	fputs ( $fh, '$COLOR_CA							= $row[84];'.$lfeed );
   	fputs ( $fh, '$COLOR_CA1						= $row[85];'.$lfeed );
   	fputs ( $fh, '$COLOR_CA2						= $row[86];'.$lfeed );
@@ -1261,6 +1424,22 @@ else {
   	fputs ( $fh, '$ENGLISH_FORMAT		= $row[144];'.$lfeed );
   	fputs ( $fh, '$FLAGS_3D				= $row[145];'.$lfeed );
   	fputs ( $fh, '$ALLOW_REGISTER		= $row[146];'.$lfeed );
+  	fputs ( $fh, '$DISP_GENDER		= $row[147];'.$lfeed );
+  	fputs ( $fh, '$SPECIAL_GHOSTS		= $row[148];'.$lfeed );
+  	fputs ( $fh, '$FILLED_LOGIN		= $row[149];'.$lfeed );
+  	fputs ( $fh, '$BACKGR_IMG			= $row[150];'.$lfeed );
+  	fputs ( $fh, '$BACKGR_IMG_PATH		= $row[151];'.$lfeed );
+  	fputs ( $fh, '$POPUP_LINKS			= $row[152];'.$lfeed );
+  	fputs ( $fh, '$ITALICIZE_POWERS		= $row[153];'.$lfeed );
+  	fputs ( $fh, '$MAIL_GREETING			= $row[154];'.$lfeed );
+  	fputs ( $fh, '$PM_KEEP_DAYS			= $row[155];'.$lfeed );
+  	fputs ( $fh, '$ALLOW_PM_DEL			= $row[156];'.$lfeed );
+  	fputs ( $fh, '$LOGIN_COUNTER			= $row[157];'.$lfeed );
+  	fputs ( $fh, '$ALLOW_GRAVATARS		= $row[158];'.$lfeed );
+  	fputs ( $fh, '$GRAVATARS_CACHE		= $row[159];'.$lfeed );
+  	fputs ( $fh, '$GRAVATARS_CACHE_EXPIRE	= $row[160];'.$lfeed );
+  	fputs ( $fh, '$GRAVATARS_RATING		= $row[161];'.$lfeed );
+  	fputs ( $fh, '$GRAVATARS_DYNAMIC_DEF	= $row[162];'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '$query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email=\'bot@bot.com\'";'.$lfeed );
   	fputs ( $fh, '$result_bot = mysql_query($query_bot);'.$lfeed );
@@ -1269,6 +1448,8 @@ else {
   	fputs ( $fh, '$query_quote = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email=\'quote@quote.com\'";'.$lfeed );
   	fputs ( $fh, '$result_quote = mysql_query($query_quote);'.$lfeed );
   	fputs ( $fh, 'list($QUOTE_NAME, $QUOTE_AVATAR, $QUOTE_FONT_COLOR) = mysql_fetch_row($result_quote);'.$lfeed );
+  	fputs ( $fh, '@mysql_close($conn);'.$lfeed );
+  	fputs ( $fh, 'define("C_SUPPORT_PAID", "");'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// Cleaning settings for messages and usernames'.$lfeed );
   	fputs ( $fh, 'define("C_MSG_DEL", $MSG_DEL);'.$lfeed );
@@ -1292,7 +1473,7 @@ else {
   	fputs ( $fh, 'define("C_ADMIN_NOTIFY", $ADMIN_NOTIFY);'.$lfeed );
   	fputs ( $fh, 'define("C_ADMIN_NAME", $ADMIN_NAME);'.$lfeed );
   	fputs ( $fh, 'define("C_ADMIN_EMAIL", $ADMIN_EMAIL);'.$lfeed );
-  	fputs ( $fh, 'define("C_CHAT_URL", $CHAT_URL);'.$lfeed );
+  	fputs ( $fh, 'define("C_CHAT_URL", eregi("http://",$CHAT_URL) ? $CHAT_URL : "./");'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// Security and restrictions'.$lfeed );
   	fputs ( $fh, 'define("C_SHOW_ADMIN", $SHOW_ADMIN);'.$lfeed );
@@ -1386,7 +1567,7 @@ else {
   	fputs ( $fh, 'if (ALLOW_BUZZ_SOUND && BUZZ_SOUND) define("L_BUZZ_SND", "<EMBED SRC=".$BUZZ_SOUND." HIDDEN=true AUTOSTART=true LOOP=false NAME=Buzz MASTERSOUND><NOEMBED><BGSOUND SRC=".$BUZZ_SOUND." LOOP=1></NOEMBED></EMBED>");'.$lfeed );
   	fputs ( $fh, 'else define("L_BUZZ_SND", "");'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
-  	fputs ( $fh, '// Enable different Topics for each room, defined in banner.php.'.$lfeed );
+  	fputs ( $fh, '// Enable different Topics for each room, defined in topic.php.'.$lfeed );
   	fputs ( $fh, '// If set to 0, it will use the global topic defined there.'.$lfeed );
   	fputs ( $fh, 'define ("TOPIC_DIFF", $TOPIC_DIFF);'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
@@ -1481,68 +1662,69 @@ else {
   	fputs ( $fh, '	{'.$lfeed );
   	fputs ( $fh, '		default:'.$lfeed );
   	fputs ( $fh, '		{'.$lfeed );
-  	fputs ( $fh, '			$skin = \'config/style1\';'.$lfeed );
-  	fputs ( $fh, '			define("COLOR_CD", $COLOR_CD1);'.$lfeed );
+  	fputs ( $fh, '			$skin = "${ChatPath}skins/style".$ROOM_SKIN1."";'.$lfeed );
+  	fputs ( $fh, '			include("${ChatPath}skins/style".$ROOM_SKIN1.".php");'.$lfeed );
   	fputs ( $fh, '		}'.$lfeed );
-  	fputs ( $fh, '	break;'.$lfeed );
+  	fputs ( $fh, '		break;'.$lfeed );
   	fputs ( $fh, '		case ROOM2:'.$lfeed );
   	fputs ( $fh, '		{'.$lfeed );
-  	fputs ( $fh, '			$skin = "config/style2";'.$lfeed );
-  	fputs ( $fh, '			define("COLOR_CD", $COLOR_CD2);'.$lfeed );
+  	fputs ( $fh, '			$skin = "${ChatPath}skins/style".$ROOM_SKIN2."";'.$lfeed );
+  	fputs ( $fh, '			include("${ChatPath}skins/style".$ROOM_SKIN2.".php");'.$lfeed );
   	fputs ( $fh, '		}'.$lfeed );
-  	fputs ( $fh, '	break;'.$lfeed );
+  	fputs ( $fh, '		break;'.$lfeed );
   	fputs ( $fh, '		case ROOM3:'.$lfeed );
   	fputs ( $fh, '		{'.$lfeed );
-  	fputs ( $fh, '			$skin = \'config/style3\';'.$lfeed );
-  	fputs ( $fh, '			define("COLOR_CD", $COLOR_CD3);'.$lfeed );
+  	fputs ( $fh, '			$skin = "${ChatPath}skins/style".$ROOM_SKIN3."";'.$lfeed );
+  	fputs ( $fh, '			include("${ChatPath}skins/style".$ROOM_SKIN3.".php");'.$lfeed );
   	fputs ( $fh, '		}'.$lfeed );
-  	fputs ( $fh, '	break;'.$lfeed );
+  	fputs ( $fh, '		break;'.$lfeed );
   	fputs ( $fh, '		case ROOM4:'.$lfeed );
   	fputs ( $fh, '		{'.$lfeed );
-  	fputs ( $fh, '			$skin = \'config/style4\';'.$lfeed );
-  	fputs ( $fh, '			define("COLOR_CD", $COLOR_CD4);'.$lfeed );
+  	fputs ( $fh, '			$skin = "${ChatPath}skins/style".$ROOM_SKIN4."";'.$lfeed );
+  	fputs ( $fh, '			include("${ChatPath}skins/style".$ROOM_SKIN4.".php");'.$lfeed );
   	fputs ( $fh, '		}'.$lfeed );
-  	fputs ( $fh, '	break;'.$lfeed );
+  	fputs ( $fh, '		break;'.$lfeed );
   	fputs ( $fh, '		case ROOM5:'.$lfeed );
   	fputs ( $fh, '		{'.$lfeed );
-  	fputs ( $fh, '			$skin = \'config/style5\';'.$lfeed );
-  	fputs ( $fh, '			define("COLOR_CD", $COLOR_CD5);'.$lfeed );
+  	fputs ( $fh, '			$skin = "${ChatPath}skins/style".$ROOM_SKIN5."";'.$lfeed );
+  	fputs ( $fh, '			include("${ChatPath}skins/style".$ROOM_SKIN5.".php");'.$lfeed );
   	fputs ( $fh, '		}'.$lfeed );
-  	fputs ( $fh, '	break;'.$lfeed );
+  	fputs ( $fh, '		break;'.$lfeed );
   	fputs ( $fh, '		case ROOM6:'.$lfeed );
   	fputs ( $fh, '		{'.$lfeed );
-  	fputs ( $fh, '			$skin = \'config/style6\';'.$lfeed );
-  	fputs ( $fh, '			define("COLOR_CD", $COLOR_CD6);'.$lfeed );
+  	fputs ( $fh, '			$skin = "${ChatPath}skins/style".$ROOM_SKIN6."";'.$lfeed );
+  	fputs ( $fh, '			include("${ChatPath}skins/style".$ROOM_SKIN6.".php");'.$lfeed );
   	fputs ( $fh, '		}'.$lfeed );
-  	fputs ( $fh, '	break;'.$lfeed );
+  	fputs ( $fh, '		break;'.$lfeed );
   	fputs ( $fh, '		case ROOM7:'.$lfeed );
   	fputs ( $fh, '		{'.$lfeed );
-  	fputs ( $fh, '			$skin = \'config/style7\';'.$lfeed );
-  	fputs ( $fh, '			define("COLOR_CD", $COLOR_CD7);'.$lfeed );
+  	fputs ( $fh, '			$skin = "${ChatPath}skins/style".$ROOM_SKIN7."";'.$lfeed );
+  	fputs ( $fh, '			include("${ChatPath}skins/style".$ROOM_SKIN7.".php");'.$lfeed );
   	fputs ( $fh, '		}'.$lfeed );
-  	fputs ( $fh, '	break;'.$lfeed );
+  	fputs ( $fh, '		break;'.$lfeed );
   	fputs ( $fh, '		case ROOM8:'.$lfeed );
   	fputs ( $fh, '		{'.$lfeed );
-  	fputs ( $fh, '			$skin = \'config/style8\';'.$lfeed );
-  	fputs ( $fh, '			define("COLOR_CD", $COLOR_CD8);'.$lfeed );
+  	fputs ( $fh, '			$skin = "${ChatPath}skins/style".$ROOM_SKIN8."";'.$lfeed );
+  	fputs ( $fh, '			include("${ChatPath}skins/style".$ROOM_SKIN8.".php");'.$lfeed );
   	fputs ( $fh, '		}'.$lfeed );
-  	fputs ( $fh, '	break;'.$lfeed );
+  	fputs ( $fh, '		break;'.$lfeed );
   	fputs ( $fh, '		case ROOM9:'.$lfeed );
   	fputs ( $fh, '		{'.$lfeed );
-  	fputs ( $fh, '			$skin = \'config/style9\';'.$lfeed );
-  	fputs ( $fh, '			define("COLOR_CD", $COLOR_CD9);'.$lfeed );
+  	fputs ( $fh, '			$skin = "${ChatPath}skins/style".$ROOM_SKIN9."";'.$lfeed );
+  	fputs ( $fh, '			include("${ChatPath}skins/style".$ROOM_SKIN9.".php");'.$lfeed );
   	fputs ( $fh, '		}'.$lfeed );
-  	fputs ( $fh, '	break;'.$lfeed );
+  	fputs ( $fh, '		break;'.$lfeed );
   	fputs ( $fh, '	}'.$lfeed );
   	fputs ( $fh, '}'.$lfeed );
   	fputs ( $fh, 'else						//default style if Room Skin mod is disabled'.$lfeed );
   	fputs ( $fh, '{'.$lfeed );
-  	fputs ( $fh, '		$skin = \'config/style1\';'.$lfeed );
-  	fputs ( $fh, '		define("COLOR_CD", $COLOR_CD1);'.$lfeed );
+  	fputs ( $fh, '	if ($ROOM_SKIN1 == "") $ROOM_SKIN1 = "1";'.$lfeed );
+  	fputs ( $fh, '	$skin = "${ChatPath}skins/style".$ROOM_SKIN1."";'.$lfeed );
+  	fputs ( $fh, '	include("${ChatPath}skins/style".$ROOM_SKIN1.".php");'.$lfeed );
   	fputs ( $fh, '}'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// For Bob Dickow\'s QuickNotes modification'.$lfeed );
-  	fputs ( $fh, '// Comment the lines bellow to disable the quick menu for any of those mentioned'.$lfeed );
+  	fputs ( $fh, '// Comment the lines below to disable the quick menu for any of those mentioned'.$lfeed );
   	fputs ( $fh, '$dropdownmsga = explode("|",$QUICKA);	//administrators'.$lfeed );
   	fputs ( $fh, '$dropdownmsgm = explode("|",$QUICKM);	//moderators'.$lfeed );
   	fputs ( $fh, '$dropdownmsg = explode("|",$QUICKU);	//users'.$lfeed );
@@ -1633,13 +1815,53 @@ else {
   	fputs ( $fh, 'define("C_NUKE_BB_PATH", $NUKE_BB_PATH);'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// Added for owner personalizations to all the languages by Ciprian'.$lfeed );
-  	fputs ( $fh, 'if(is_dir(\'./\'.$ChatPath.\'localization/_owner/\') && file_exists(\'./\'.$ChatPath.\'localization/_owner/localized.owner.php\')) include("./${ChatPath}localization/_owner/localized.owner.php");'.$lfeed );
+  	fputs ( $fh, 'if(is_dir(\'./\'.$ChatPath.\'localization/_owner/\') && file_exists(\'./\'.$ChatPath.\'localization/_owner/owner.php\')) include("./${ChatPath}localization/_owner/owner.php");'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '//Check for php server version'.$lfeed );
   	fputs ( $fh, '$phpversion = phpversion();'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// Public Name of your chat server as you wish to be known on the web - by Ciprian'.$lfeed );
   	fputs ( $fh, 'define("C_CHAT_NAME", $CHAT_NAME);'.$lfeed );
+  	fputs ( $fh, ''.$lfeed );
+  	fputs ( $fh, '// Display genders - by Ciprian'.$lfeed );
+  	fputs ( $fh, 'define("C_DISP_GENDER", $DISP_GENDER);'.$lfeed );
+  	fputs ( $fh, ''.$lfeed );
+  	fputs ( $fh, '// Ghost usernames - by Ciprian'.$lfeed );
+  	fputs ( $fh, '$SPECIALGHOSTS = eregi_replace(",","\',\'",$SPECIAL_GHOSTS);'.$lfeed );
+  	fputs ( $fh, '$SPECIALGHOSTS = eregi_replace(","," AND username != ",$SPECIALGHOSTS);'.$lfeed );
+  	fputs ( $fh, 'define("C_SPECIAL_GHOSTS", "\'".$SPECIALGHOSTS."\'");'.$lfeed );
+  	fputs ( $fh, ''.$lfeed );
+  	fputs ( $fh, '// Index page body layout - by Ciprian'.$lfeed );
+  	fputs ( $fh, 'define("C_FILLED_LOGIN", $FILLED_LOGIN);'.$lfeed );
+  	fputs ( $fh, ''.$lfeed );
+  	fputs ( $fh, '// Background image on login page - by Ciprian'.$lfeed );
+  	fputs ( $fh, 'define("C_BACKGR_IMG", $BACKGR_IMG);'.$lfeed );
+  	fputs ( $fh, 'define("C_BACKGR_IMG_PATH", $BACKGR_IMG_PATH);'.$lfeed );
+  	fputs ( $fh, ''.$lfeed );
+  	fputs ( $fh, '// Popup posted links protection - by Alex & Ciprian'.$lfeed );
+  	fputs ( $fh, 'define("C_POPUP_LINKS", $POPUP_LINKS);'.$lfeed );
+  	fputs ( $fh, ''.$lfeed );
+  	fputs ( $fh, '// Italicize power usernames - by Ciprian'.$lfeed );
+  	fputs ( $fh, 'define("C_ITALICIZE_POWERS", $ITALICIZE_POWERS);'.$lfeed );
+  	fputs ( $fh, ''.$lfeed );
+  	fputs ( $fh, '// Email greeting closure in Admin4 sheet - by Ciprian'.$lfeed );
+  	fputs ( $fh, 'define("C_MAIL_GREETING", $MAIL_GREETING);'.$lfeed );
+  	fputs ( $fh, ''.$lfeed );
+  	fputs ( $fh, '// Days to keep unread PMs in the database - by Ciprian'.$lfeed );
+  	fputs ( $fh, 'define("C_PM_KEEP_DAYS", $PM_KEEP_DAYS);'.$lfeed );
+  	fputs ( $fh, ''.$lfeed );
+  	fputs ( $fh, '// Allow users to delete their own PMs from the database - by Ciprian'.$lfeed );
+  	fputs ( $fh, 'define("C_ALLOW_PM_DEL", $ALLOW_PM_DEL);'.$lfeed );
+  	fputs ( $fh, ''.$lfeed );
+  	fputs ( $fh, '// It counts logins of registered users to chat (returning users) - by Ciprian'.$lfeed );
+  	fputs ( $fh, 'define("C_LOGIN_COUNTER", $LOGIN_COUNTER);'.$lfeed );
+  	fputs ( $fh, ''.$lfeed );
+  	fputs ( $fh, '// Gravatars system - by Ciprian (details on www.gravatars.com)'.$lfeed );
+  	fputs ( $fh, 'define("ALLOW_GRAVATARS", $ALLOW_GRAVATARS);'.$lfeed );
+  	fputs ( $fh, 'define("GRAVATARS_CACHE", $GRAVATARS_CACHE);'.$lfeed );
+  	fputs ( $fh, 'define("GRAVATARS_CACHE_EXPIRE", $GRAVATARS_CACHE_EXPIRE);'.$lfeed );
+  	fputs ( $fh, 'define("GRAVATARS_RATING", $GRAVATARS_RATING);'.$lfeed );
+  	fputs ( $fh, 'define("GRAVATARS_DYNAMIC_DEF", $GRAVATARS_DYNAMIC_DEF);'.$lfeed );
   	fputs ( $fh, '?>' );
   } // END OF WRITE INTO config.lib.php
   fclose ( $fh );
@@ -1728,13 +1950,16 @@ elseif ($p == 5 ) { ?>
     <p align="center">
   <select size="1" name="kind">
   <option value="new"<?php if ($kind=="new") echo " selected" ?>><?php echo L_P1_OP01 ?></option>
-  <option value="190"<?php if ($kind=="190") echo " selected" ?>><?php echo L_P1_OP02 ?></option>
-  <option value="18"<?php if ($kind=="18") echo " selected" ?>><?php echo L_P1_OP03 ?></option>
-  <option value="17"<?php if ($kind=="17") echo " selected" ?>><?php echo L_P1_OP04 ?></option>
-  <option value="1016"<?php if ($kind=="1016") echo " selected" ?>><?php echo L_P1_OP05 ?></option>
-  <option value="014015"<?php if ($kind=="014015") echo " selected" ?>><?php echo L_P1_OP06 ?></option>
-  <option value="013"<?php if ($kind=="013") echo " selected" ?>><?php echo L_P1_OP07 ?></option>
-  <option value="012"<?php if ($kind=="012") echo " selected" ?>><?php echo L_P1_OP08 ?></option>
+  <option value="192-beta"<?php if ($kind=="192-beta") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus 1.92-beta") ?></option>
+  <option value="192"<?php if ($kind=="192") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus 1.92") ?></option>
+  <option value="190"<?php if ($kind=="190") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus 1.90") ?></option>
+  <option value="18"<?php if ($kind=="18") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus v1.8") ?></option>
+  <option value="17"<?php if ($kind=="17") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus v1.7") ?></option>
+  <option value="1016"<?php if ($kind=="1016") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus v1.0-v1.6") ?></option>
+  <option value="014015"<?php if ($kind=="014015") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Standard 0.14-0.15") ?></option>
+  <option value="013"<?php if ($kind=="013") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Standard 0.13") ?></option>
+  <option value="012"<?php if ($kind=="012") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Standard < 0.12") ?></option>
+  <option value="no"<?php if ($kind=="no") echo " selected" ?>><?php echo L_P1_OP03 ?></option>
   </select>
 <?php } ?>
 <?php } elseif ( $p == 3 ) { ?>
@@ -1918,6 +2143,7 @@ elseif ( $p == 5 ) { ?>
   <p align="right">
 <?php if ( $p == 1 ) { ?>
 <input type="button" value="<?php echo L_BTN2 ?>" name="B2" onClick="window.open('','_parent','');window.close();">&nbsp;&nbsp;&nbsp;
+<input type="button" value="<?php echo L_BTN6 ?>" onClick="location.href='install.php?p=<?php echo $p_next."&L=".$L."&skip=1" ?>';" name="B3">&nbsp;&nbsp;&nbsp;
 <input type="submit" value="<?php echo L_BTN1 ?> &gt;" name="B1">
 <?php } elseif ( $p == 2 ) { ?>
 <input type="button" value="<?php echo L_BTN2 ?>" name="B2" onClick="window.open('','_parent','');window.close();">&nbsp;&nbsp;&nbsp;
@@ -1943,13 +2169,12 @@ elseif ( $p == 5 ) { ?>
 <input type="button" value="<?php echo L_BTN5 ?>" name="B1" onClick="location.href='<?php echo $ChatPath; ?>';">
 <?php } ?>
 <?php } ?>
-</p>
     </td>
   </tr>
 </form>
 </table><br />
 <P align="right"><div align="right"><span dir="LTR" style="font-weight: 600; color:#FFD700; font-size: 7pt">
-&copy; 2007<?php echo((date(Y)>"2007") ? "-".date(Y) : ""); ?> - Plus installer by <a href="mailto:tpsde1970@aol.com?subject=phpMychat%20Plus%20Installer%20feedback" Title="<?php echo(sprintf(L_CLICK,L_LINKS_9)); ?>" CLASS="ChatLink" onMouseOver="window.status='<?php echo(($L!="turkish") ? sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR) : sprintf(L_CLICKS,L_AUTHOR,L_LINKS_6)); ?>.'; return true;">Thomas Pschernig</a> and <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Installer%20feedback" Title="<?php echo(sprintf(L_CLICK,L_LINKS_9,"")); ?>" CLASS="ChatLink" onMouseOver="window.status='<?php echo(($L!="turkish") ? sprintf(L_CLICKS,L_LINKS_6,L_DEVELOPER) : sprintf(L_CLICKS,L_DEVELOPER,L_LINKS_6)); ?>.'; return true;">Ciprian Murariu</a></span><div></p>
+&copy; 2007<?php echo((date(Y)>"2007") ? "-".date(Y) : ""); ?> - Plus installer by <a href="mailto:tpsde1970@aol.com?subject=phpMychat%20Plus%20Installer%20feedback" Title="<?php echo(sprintf(L_CLICK,L_LINKS_9)); ?>" CLASS="ChatLink" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>.'; return true;">Thomas Pschernig</a> and <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Installer%20feedback" Title="<?php echo(sprintf(L_CLICK,L_LINKS_9,"")); ?>" CLASS="ChatLink" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_DEVELOPER)); ?>.'; return true;">Ciprian Murariu</a></span><div>
 </body>
 </html>
 <?php

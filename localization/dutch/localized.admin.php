@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.admin.php - plus version (25.09.2007 - rev.10)
+// File : dutch/localized.admin.php - plus version (20.05.2008 - rev.12)
 // Original translation by Corbesir <rock@jascrc.com>
 // Updates, corrections and additions for the Plus version by DJE Amesz & Romanesko  Genieusdanny@gmail.com and Bert Moorlag <berbia@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -13,7 +13,9 @@ $FontSize = 10;
 // Top frame
 define("A_MENU_0", "Administratie voor %s");
 define("A_MENU_1", "Geregistreerde gebruikers");
-define("A_MENU_2", "Verbannen gebruikers ");
+define("A_MENU_11", "Geregistreerde gebruiker");
+define("A_MENU_2", "Verbannen gebruikers");
+define("A_MENU_21", "Verbannen gebruiker");
 define("A_MENU_3", "Leeg ruimtes");
 define("A_MENU_4", "Verstuur E-mails");
 define("A_MENU_5", "Configuratie");
@@ -24,7 +26,7 @@ define("A_MENU_9", "Log archief");
 define("A_LOGOUT", "Uitloggen");
 
 // Frame for registered users
-define("A_SHEET1_1", "lijst van geregistreerde gebruikers en hun rechten");
+define("A_SHEET1_1", "Lijst van geregistreerde gebruikers en hun rechten");
 define("A_SHEET1_2", "Gebruikersnaam");
 define("A_SHEET1_3", "Rechten");
 define("A_SHEET1_4", "Gemodereerde ruimtes");
@@ -33,7 +35,7 @@ define("A_SHEET1_6", "Verwijder aangevinkte namen");
 define("A_SHEET1_7", "Veranderen");
 define("A_SHEET1_8", "Er zijn geen geregistreerde gebruikers behalve jezelf.");
 define("A_SHEET1_9", "Verban gevinkte namen");
-define("A_SHEET1_10", "Ga nu naar de verbannen gebruikers tab om je keuzes te bekijken.");
+define("A_SHEET1_10", "Ga nu naar de ’".A_MENU_2."’ tab om je keuzes te bekijken.");
 define("A_SHEET1_11", "Laatst online");
 define("A_SHEET1_12", "Reden van de verbaning (optioneel)");
 define("A_USER", "Gebruikers");
@@ -60,7 +62,7 @@ define("A_SHEET3_3", "Maak geselecteerde ruimtes schoon");
 define("A_SHEET3_4", "Er zijn geen ruimtes om te legen.");
 
 // Frame for sending mails
-define("A_SHEET4_0", "Je hebt nog niet de admin email ingevuld in de Configuratie.");
+define("A_SHEET4_0", "Je hebt nog niet de admin email ingevuld in de ’".A_MENU_5."’.");
 define("A_SHEET4_1", "Verstuur e-mails");
 define("A_SHEET4_2", "Aan:");
 define("A_SHEET4_3", "Alles selecteren");
@@ -75,14 +77,14 @@ define("A_SHEET4_11", "Handtekening");
 define("A_SHEET4_12", "Deselecteer Alles");
 
 // Frame for configuration
-define("A_SHEET5_0", "Uw geinstaleerde phpMyChat-Plus versie is %s");
+define("A_SHEET5_0", "Uw geïnstalleerden versie is %s");
 define("A_SHEET5_1", "Er is een nieuwe versie te krijgen (%s)!");
 //Chat Extras
 define("A_EXTR_DSBL", "Chat Extras staat uit") ;
 define("A_REFRESH_MSG", "Ververs Berichten") ;
 define("A_MSG_DEL", "Verwijder") ;
 define("A_POST_TIME", "Gepost op") ;
-define("A_FROM_TO", "Van  Naar") ;
+define("A_FROM_TO", "Van › Naar") ;
 define("A_FROM", "Van") ;
 define("A_CHTEX_ROOM", "Kamer") ;
 define("A_CHTEX_MSG", "Bericht") ;
@@ -111,6 +113,12 @@ define("A_CHAT_LOGS_20", "Laat de volledige chat archief sectie zien");
 define("A_CHAT_LOGS_21", "Naar boven");
 define("A_CHAT_LOGS_22", "Gearchiveerde Log File");
 define("A_CHAT_LOGS_23", "Gemaakt op %s");
+define("A_CHAT_LOGS_24", "Verklein alle %s log file’s in een zip bestand"); // date
+define("A_CHAT_LOGS_25", "Dit zal een zip bestand maken met alle logs\\nen opgeslagen in %s map!\\n"); // month/year
+define("A_CHAT_LOGS_26", "\\nWeet je het zeker?");
+define("A_CHAT_LOGS_27", "Zip archieven");
+define("A_CHAT_LOGS_28", "Download %s");
+define("A_CHAT_LOGS_29", "Verwijder deze zip bestand");
 
 //Admin Search Page
 define("A_SEARCH_1", "Chatroom Zoek Pagina");
@@ -124,7 +132,7 @@ define("A_SEARCH_8", "Omschrijving");
 define("A_SEARCH_9", "Links");
 define("A_SEARCH_10", "Zoeken");
 define("A_SEARCH_11", "Voor Permissie Category, zijn de optie´s  <b>ad</b>, <b>mod</b> or <b>u</b>.");
-define("A_SEARCH_12", "Voor het Geslacht Category, zijn de optie´s <b>0</b> voor Niet Invullen, <b>1</b> voor Man, of <b>2</b> voor Vrouw.");
+define("A_SEARCH_12", "Voor het Geslacht Category, zijn de optie´s <b>0</b> voor Niet Invullen, <b>1</b> voor Man, <b>2</b> voor Vrouw, of <b>3</b> voor Stellen.");
 define("A_SEARCH_13", "Gebruikersnaam");
 define("A_SEARCH_14", "Voornaam");
 define("A_SEARCH_15", "Achternaam");
@@ -135,6 +143,8 @@ define("A_SEARCH_20", "Geslacht");
 define("A_SEARCH_21", "Zoek Term");
 define("A_SEARCH_22", "Zoeken op");
 define("A_SEARCH_23", "Vul een andere zoekterm in en probeer opnieuw!");
+define("A_SEARCH_24", "Geen data die voldoet aan jou criteria. Verfijn je zoekopdracht a.u.b.");
+define("A_SEARCH_25", "Modereer deze gebruiker");
 
 // Connected users Page
 define("A_LURKING_1", "Ingelogde gebruikers en gluurders") ;

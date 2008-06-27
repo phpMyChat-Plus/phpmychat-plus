@@ -5,10 +5,6 @@
 // Credit for this goes to Pete Soheil <webmaster@digioz.com>
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
 
-// If form is submitted update values in the database
-
-if (isset($FORM_SEND) && $FORM_SEND == 7)
-{
   while(list($name,$value) = each($_GET))
   {
            $$name = $value;
@@ -18,99 +14,281 @@ if (isset($FORM_SEND) && $FORM_SEND == 7)
            $$name = $value;
   };
 
+?>
+<SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
+<!--
+// Function to dinamically switch pages
+function browse_user($a_username)
+{
+	document.location = '<?php echo($From."?What=Body&L=".$L."&sheet=1&pmc_username=".urlencode($pmc_username)."&pmc_password=$pmc_password&sortBy=username&sortOrder=ASC&startReg="); ?>'+$a_username;
+}
+// -->
+</SCRIPT>
+<?php
+?>
+<P CLASS=title><?php echo (A_SEARCH_1) ; ?></P>
+<center>
+<?php
+// Remove profiles of users that have not been chatting for a time > C_REG_DEL
+if (!isset($FORM_SEND) && C_REG_DEL != 0) $DbLink->query("DELETE FROM ".C_REG_TBL." WHERE reg_time < ".(time() - C_REG_DEL * 60 * 60 * 24)." AND perms != 'admin' AND perms != 'topmod' AND perms != 'moderator'");
+
+// The admin has required an action to be done
+if (isset($FORM_SEND) && ($FORM_SEND == 1 || $FORM_SEND == 7))
+{
+?>
+<P>
+<TABLE ALIGN=CENTER BORDER=0 CELLPADDING=3 CLASS="table">
+<TR>
+	<TD ALIGN=CENTER>
+		<FORM ACTION="<?php echo("$From?$URLQueryBody"); ?>" METHOD="POST" AUTOCOMPLETE="" NAME="Form1">
+		<INPUT TYPE=hidden NAME="From" value="<?php echo($From); ?>">
+		<INPUT TYPE=hidden NAME="pmc_username" value="<?php echo(htmlspecialchars(stripslashes($pmc_username))); ?>">
+		<INPUT TYPE=hidden NAME="pmc_password" value="<?php echo($pmc_password); ?>">
+		<INPUT TYPE=hidden NAME="FORM_SEND" value="1">
+<?php
+	// A registred user have to be deleted or banished?
+	$DELETE_MODE = (stripslashes($submit_type) == A_SHEET1_6)? 1:0;
+	$BANISH_MODE = (stripslashes($submit_type) == A_SHEET1_9)? 1:0;
+
+	// Get the list of the users
+	$DbLink->query("SELECT username FROM ".C_REG_TBL." WHERE email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%' AND username != '$pmc_username'");
+	$users = Array();
+	while (list($username) = $DbLink->next_record())
+	{
+		$users[] = $username;
+	}
+	$DbLink->clean_results();
+
+	for (reset($users); $username=current($users); next($users))
+	{
+		$usrHash = md5($username);
+		$VarName = "user_".$usrHash;
+	if (!isset($$VarName)) continue;
+		// Delete a profile after having sent a message to the user if he is connected
+		if ($DELETE_MODE)
+		{
+			$VarName = "selected_".$usrHash;
+			if (isset($$VarName))
+			{
+				$uuu = addslashes($username);
+				$DbLink->query("DELETE FROM ".C_REG_TBL." WHERE username='$uuu'");
+				$DbLink->query("SELECT room FROM ".C_USR_TBL." WHERE username='$uuu' LIMIT 1");
+				$in_room = ($DbLink->num_rows() != 0);
+				if ($in_room)
+				{
+					list($room) = $DbLink->next_record();
+					$DbLink->clean_results();
+					$DbLink->query("SELECT type FROM ".C_MSG_TBL." WHERE room='".addslashes($room)."' LIMIT 1");
+					list($type) = $DbLink->next_record();
+					$DbLink->clean_results();
+					$DbLink->query("UPDATE ".C_USR_TBL." SET status='u' WHERE username='$uuu'");
+					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS delreg', '', ".time().", '$uuu', 'L_ADM_2', '', '')");
+				};
+				// Optimize the registered users table when a MySQL DB is used
+				$DbLink->optimize(C_REG_TBL);
+			};
+		}
+		// Banish an user
+		elseif ($BANISH_MODE)
+		{
+			$VarName = "reason";
+			$reason = $$VarName;
+			$VarName = "selected_".$usrHash;
+			if (isset($$VarName))
+			{
+				$uuu = addslashes($username);
+				$DbLink->query("SELECT latin1,ip FROM ".C_REG_TBL." WHERE username='$uuu' LIMIT 1");
+				list($Latin1, $IP) = $DbLink->next_record();
+				$DbLink->clean_results();
+				$DbLink->query("SELECT count(*) FROM ".C_BAN_TBL." WHERE username='$uuu' LIMIT 1");
+				list($Nb) = $DbLink->next_record();
+				$DbLink->clean_results();
+				if ($Nb == "0")
+				{
+					$Until = time() + round(C_BANISH * 60 * 60 * 24);
+					if ($Until > 2222222222) $Until = "2222222222";
+					$DbLink->query("INSERT INTO ".C_BAN_TBL." VALUES ('$uuu','$Latin1','$IP','*','$Until','$reason')");
+				}
+				elseif ($reason != "")
+				{
+					$DbLink->query("UPDATE ".C_BAN_TBL." SET reason = '$reason' where username='$uuu'");
+				}
+				$Success = A_SHEET1_10;
+			};
+		};
+	};
+};
+if (isset($Success) && $Success != "") echo("<P CLASS=\"success\">$Success</SPAN></P>\n");
+
+// If form is submitted update values in the database
+if (isset($FORM_SEND) && $FORM_SEND == 7)
+{
   $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database.');
+  @mysql_query("SET CHARACTER SET utf8");
+  mysql_query("SET NAMES 'utf8'"); 
   mysql_select_db(C_DB_NAME)or die('Could Not Connect To Database.');
 
   if($searchCategory == 1 && $searchTerm != "")
   {
     // create query for 1
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM c_reg_users WHERE (username LIKE '%".$searchTerm."%' OR firstname LIKE '%".$searchTerm."%' OR lastname LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM ".C_REG_TBL." WHERE (username LIKE '%".$searchTerm."%' OR firstname LIKE '%".$searchTerm."%' OR lastname LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
     //echo $query;
   }
   elseif($searchCategory == 2 && $searchTerm != "")
   {
     // create query for 2
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM c_reg_users WHERE ip LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM ".C_REG_TBL." WHERE ip LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   elseif($searchCategory == 3 && $searchTerm != "")
   {
     // create query for 3
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM c_reg_users WHERE perms LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM ".C_REG_TBL." WHERE perms LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   elseif($searchCategory == 4 && $searchTerm != "")
   {
     // create query for 4
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM c_reg_users WHERE email LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM ".C_REG_TBL." WHERE email LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   elseif($searchCategory == 5 && $searchTerm != "")
   {
     // create query for 5
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM c_reg_users WHERE gender='".$searchTerm."' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM ".C_REG_TBL." WHERE gender='".$searchTerm."' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   elseif($searchCategory == 6 && $searchTerm != "")
   {
     // create query for 6
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM c_reg_users WHERE description LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM ".C_REG_TBL." WHERE description LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   elseif($searchCategory == 7 && $searchTerm != "")
   {
     // create query for 7
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM c_reg_users WHERE (favlink LIKE '%".$searchTerm."%' OR favlink1 LIKE '%".$searchTerm."%' OR website LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM ".C_REG_TBL." WHERE (favlink LIKE '%".$searchTerm."%' OR favlink1 LIKE '%".$searchTerm."%' OR website LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   elseif($searchCategory == 8 && $searchTerm != "")
   {
     // create query for 8
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM c_reg_users WHERE (username LIKE '%".$searchTerm."%' OR firstname LIKE '%".$searchTerm."%' OR lastname LIKE '%".$searchTerm."%' OR country LIKE '%".$searchTerm."%' OR website LIKE '%".$searchTerm."%' OR ip LIKE '%".$searchTerm."%' OR perms LIKE '%".$searchTerm."%' OR email LIKE '%".$searchTerm."%' OR slang LIKE '%".$searchTerm."%' OR description LIKE '%".$searchTerm."%' OR favlink LIKE '%".$searchTerm."%' OR favlink1 LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM ".C_REG_TBL." WHERE (username LIKE '%".$searchTerm."%' OR firstname LIKE '%".$searchTerm."%' OR lastname LIKE '%".$searchTerm."%' OR country LIKE '%".$searchTerm."%' OR website LIKE '%".$searchTerm."%' OR ip LIKE '%".$searchTerm."%' OR perms LIKE '%".$searchTerm."%' OR email LIKE '%".$searchTerm."%' OR slang LIKE '%".$searchTerm."%' OR description LIKE '%".$searchTerm."%' OR favlink LIKE '%".$searchTerm."%' OR favlink1 LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   else
   {
     // Means forgot to specify a search term
-    echo "<table bgcolor=white align=center border=0><tr><td><b>".A_SEARCH_23."!</b></td></tr></table>";
+	$Warning = A_SEARCH_23;
+	if (isset($Warning) && $Warning != "") echo("<P CLASS=\"error\">$Warning</SPAN></P>\n");
     exit;
   }
 
    //echo $query;
    $query = mysql_query($sql) or die("Cannot query the database.<br />" . mysql_error());
    //mysql_query($query)or die("Could not execute search query!");
-
+	if (mysql_numrows($query) == 0) $Warning = A_SEARCH_24;
    // Display search result on screen
-   echo "<table align=center border=\"1\" cellpadding=\"1\" cellspacing=\"0\" width=\"800\" bordercolor=\"#C0C0C0\" CLASS=table>";
-   echo "<tr align=\"center\"><td><b>".A_SEARCH_13."</b></td><td><b>".A_SEARCH_14."</b></td><td><b>".A_SEARCH_15."</b></td><td><b>".A_SEARCH_16."</b></td><td><b>".A_SEARCH_6."</b></td><td><b>".A_SEARCH_18."</b></td><td><b>".A_SEARCH_19."</b></td><td><b>".A_SEARCH_20."</b></td></tr>";
 
+if (isset($Warning) && $Warning != "") echo("<P CLASS=\"error\">$Warning</SPAN></P>\n");
+else
+{
+   echo "<table align=center border=\"1\" cellpadding=\"1\" cellspacing=\"0\" width=\"800\" CLASS=table>";
+   echo "<tr align=\"center\" class=\"tabtitle\"><td>&nbsp;</td><td><b>".A_SEARCH_13."</b></td><td><b>".A_SEARCH_14."</b></td><td><b>".A_SEARCH_15."</b></td><td><b>".A_SEARCH_16."</b></td><td><b>".A_SEARCH_6."</b></td><td><b>".A_SEARCH_18."</b></td><td><b>".A_SEARCH_19."</b></td><td><b>".A_SEARCH_20."</b></td></tr>";
+
+	$DbLink->query("SELECT username FROM ".C_REG_TBL." WHERE email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%' AND username != '$pmc_username' ORDER BY username ASC");
+	$users = Array();
+	while (list($usernames) = $DbLink->next_record())
+	{
+		$users[] = $usernames;
+	}
+	$DbLink->clean_results();
+// Find the position of the username in the sorted table
+	function pos_array($needle,$haystack)
+	{
+		for($i=0;$i<count($haystack) && $haystack[$i] != $needle;$i++);
+		return ($i);
+	};
+       $s_username = "&nbsp;";
+       $s_firstname = "&nbsp;";
+       $s_lastname = "&nbsp;";
+       $s_country = "&nbsp;";
+       $s_email = "&nbsp;";
+       $s_perms = "&nbsp;";
+       $s_ip = "&nbsp;";
+       $s_gender = "&nbsp;";
+       $bannished_user = "";
+       $bannished_ip = "";
    while($result = mysql_fetch_array($query))
    {
        $s_username = stripslashes($result["username"]);
+	   $DbLink->query("SELECT username,reason FROM ".C_BAN_TBL." WHERE username='$s_username' LIMIT 1");
+	   list($Nb,$reason) = $DbLink->next_record();
+	   $DbLink->clean_results();
+	   if ($reason != "") $reason = " (".L_HELP_REASON.": ".$reason.")";
+	   if ($Nb) $bannished_user = "&nbsp;<img src=images/bannished.gif alt='".A_MENU_21.$reason."' title='".A_MENU_21.$reason."'>";
+	   $usrHash = md5($s_username);
+	   $a_username = pos_array($s_username,$users);
+	   if ($s_username != $pmc_username) $s_username = "<a onClick=\"browse_user($a_username);\" target=\"_self\" title=\"".A_SEARCH_25."\">$s_username</a>";
        $s_firstname = stripslashes($result["firstname"]);
        $s_lastname = stripslashes($result["lastname"]);
        $s_country = stripslashes($result["country"]);
        $s_email = stripslashes($result["email"]);
        $s_perms = stripslashes($result["perms"]);
        $s_ip = stripslashes($result["ip"]);
+	   $DbLink->query("SELECT ip,reason FROM ".C_BAN_TBL." WHERE ip='$s_ip' LIMIT 1");
+	   list($NbIP,$reasonIP) = $DbLink->next_record();
+	   $DbLink->clean_results();
+	   if ($reasonIP != "") $reasonIP = " (".L_HELP_REASON.": ".$reasonIP.")";
+	   if ($NbIP) $bannished_ip = "&nbsp;<img src=images/bannished.gif alt='".A_MENU_21.$reasonIP."' title='".A_MENU_21.$reasonIP."'>";
        $s_gender = stripslashes($result["gender"]);
-
        if($s_gender == "1")
        {
-         $s_gender = "M";
+         $s_gender = "<img src=images/gender_boy.gif alt='".L_REG_46."' title='".L_REG_46."'>";
        }
        elseif($s_gender == "2")
        {
-         $s_gender = "F";
+         $s_gender = "<img src=images/gender_girl.gif alt='".L_REG_47."' title='".L_REG_47."'>";
+       }
+       elseif($s_gender == "3")
+       {
+         $s_gender = "<img src=images/gender_couple.gif alt='".L_REG_44."' title='".L_REG_44."'>";
        }
        elseif($s_gender == "0")
        {
-         $s_gender = "U";
+         $s_gender = "<img src=images/gender_undefined.gif alt='".L_REG_48."' title='".L_REG_48."'>";
        }
-
-       echo "<tr align=\"center\" bgcolor=\"#FFFFFF\"><td width=100>$s_username</td><td>$s_firstname</td><td>$s_lastname</td><td>$s_country</td><td><a href=\"mailto:$s_email\">$s_email</a></td><td>$s_perms</td><td>$s_ip</td><td align=center>$s_gender</td></tr>";
+       if (empty($s_username)) $s_username = "&nbsp;";
+       if (empty($s_firstname)) $s_firstname = "&nbsp;";
+       if (empty($s_lastname)) $s_lastname = "&nbsp;";
+       if (empty($s_country)) $s_country = "&nbsp;";
+       if (empty($s_email)) $s_email = "&nbsp;";
+       if (empty($s_perms)) $s_perms = "&nbsp;";
+       if (empty($s_ip)) $s_ip = "&nbsp;";
+       if (empty($s_gender)) $s_gender = "&nbsp;";
+		$checkbox = ($s_username == $pmc_username) ? "&nbsp;" : "<INPUT type=checkbox name=\"selected_$usrHash\" value=\"1\">";
+       echo "<tr align=\"center\">\n<INPUT TYPE=\"hidden\" NAME=\"user_$usrHash\" VALUE=\"1\">\n<TD VALIGN=CENTER ALIGN=CENTER>\n$checkbox\n</td>\n<td width=100>$s_username$bannished_user</td>\n<td>$s_firstname</td>\n<td>$s_lastname</td>\n<td>$s_country</td>\n<td><a href=\"mailto:$s_email\" target=_blank>$s_email</a></td>\n<td>$s_perms</td>\n<td>$s_ip$bannished_ip</td>\n<td align=center>$s_gender</td>\n</tr>";
+       $bannished_user = "";
+       $bannished_ip = "";
    }
-
 echo "</table><br />";
-}
-
 ?>
-
-<P CLASS=title><?php echo (A_SEARCH_1) ; ?></P>
-
+			</TD>
+		</TR>
+		<TR>
+			<TD VALIGN=CENTER ALIGN=CENTER COLSPAN=5>
+				<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(A_SHEET1_6); ?>">
+			</TD>
+		</TR>
+		<TR>
+			<TD VALIGN=CENTER ALIGN=CENTER COLSPAN=5>
+				<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(A_SHEET1_9); ?>"><br />
+				<?php echo(A_SHEET1_12); ?>: <INPUT TYPE="text" NAME="reason" VALUE="">
+			</TD>
+		</TR>
+		</TABLE>
+		</FORM>
+	</P>
+<?php
+	}
+}
+?>
+<TABLE ALIGN=CENTER BORDER=0 CELLPADDING=3 CLASS="table">
+<TR>
+	<TD ALIGN=CENTER>
 <FORM ACTION="<?php echo("$From?$URLQueryBody"); ?>" METHOD="POST" AUTOCOMPLETE="" NAME="Form7">
 		<INPUT TYPE=hidden NAME="From" value="<?php echo($From); ?>">
 		<INPUT TYPE=hidden NAME="pmc_username" value="<?php echo(htmlspecialchars(stripslashes($pmc_username))); ?>">
@@ -142,12 +320,12 @@ echo "</table><br />";
 </table>
 </form>
 
-<table align="center" width="500" CLASS=table>
+<table align="center" CLASS=table>
 <tr>
     <td>
     <b>*</b> <?php echo (A_SEARCH_11) ; ?><br />
     <b>*</b> <?php echo (A_SEARCH_12) ; ?><br />
 </tr>
 </table>
-<?php
-?>
+</center>
+</P>

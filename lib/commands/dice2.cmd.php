@@ -69,8 +69,10 @@ if ($Cmd[1]<=MAX_DICES)
 		   }
 
      	// Alter the html tags in the line below to format your text as you want.
-			$M = "<font size = -2 color = blue>".addslashes($nums);
-			$M .= " (sum = ".$sum.", rolls = ".$Cmd[1].")</font></b>&nbsp;<img src=images/tick.gif>";
+			$temp = ($Cmd[3]*$Cmd[1])*6;
+			$temp1 = ($Cmd[3]!=MAX_ROLLS) ? $Cmd[3] : "";
+			$M = "<b><font size = -2 color = green>".addslashes($nums)." </font>";
+			$M .= "<img src=images/arrowr.gif> <font color = red>".$sum."</font><font size = -2 color = green> ($Cmd[1] * $Cmd[3] * 6 sided dice = max ".$temp."; command used: <font color = blue>/$Cmd[1]d".$temp1."</font>)</font></b>&nbsp;<img src=images/tick.gif>";
 			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS dice2', '', '".time()."', '$U', '".stripslashes($M)."', '', '')");
    	}
 	}

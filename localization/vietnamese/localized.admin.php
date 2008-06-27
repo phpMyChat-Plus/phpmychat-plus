@@ -1,5 +1,5 @@
 <?php
-// File : vietnamese/localized.admin.php - plus version (25.09.2007 - rev.10)
+// File : vietnamese/localized.admin.php - plus version (20.05.2008 - rev.12)
 // Translation by Marshall <hellomarshal_lookatme@netzero.net>
 // Updates and corrections by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -12,7 +12,9 @@ $FontSize = 10;
 // Top frame
 define("A_MENU_0", "Quản trị bởi %s");
 define("A_MENU_1", "Đăng ký acc để tán gẫu");
+define("A_MENU_11", "Đăng ký acc để tán gẫu");
 define("A_MENU_2", "Trục xuất thành viên");
+define("A_MENU_21", "Trục xuất thành viên");
 define("A_MENU_3", "Những phòng sạch");
 define("A_MENU_4", "Gửi thư");
 define("A_MENU_5", "Cấu hình");
@@ -74,7 +76,7 @@ define("A_SHEET4_11", "Chữ ký");
 define("A_SHEET4_12", "Không chọn lọc Mọi thứ");
 
 // Frame for configuration
-define("A_SHEET5_0", "Bạn đang cài đặt phpMyChat-Plus phiên bản %s");
+define("A_SHEET5_0", "Bạn đang cài đặt phiên bản %s");
 define("A_SHEET5_1", "Có một phiên bản mới tự do cho (%s)!");
 
 //Chat Extras
@@ -82,7 +84,7 @@ define("A_EXTR_DSBL", "Tán gẫu bị ngắt") ;
 define("A_REFRESH_MSG", "Làm mới tin") ;
 define("A_MSG_DEL", "Xoa") ;
 define("A_POST_TIME", "Gửi lên") ;
-define("A_FROM_TO", "Tu  Toi") ;
+define("A_FROM_TO", "Tu › Toi") ;
 define("A_FROM", "Tu") ;
 define("A_CHTEX_ROOM", "Phong") ;
 define("A_CHTEX_MSG", "Tin Nhắn") ;
@@ -106,11 +108,17 @@ define("A_CHAT_LOGS_15", "Xoa ghi nhận");
 define("A_CHAT_LOGS_16", "Đọc ghi nhận %s"); // day month year
 define("A_CHAT_LOGS_17", "Hiện tài liệu lưu trữ ghi lại");
 define("A_CHAT_LOGS_18", "(chỉ là một hiễn thị)");
-define("A_CHAT_LOGS_19", "\\nĐây không có thể đảo ngược...\\nBạn thìchắc chắn?");
+define("A_CHAT_LOGS_19", "\\nĐây không có thể đảo ngược...\\nBạn thì chắc chắn?");
 define("A_CHAT_LOGS_20", "Cho thấy mục tán gẫu lưu trữ đầy đủ");
 define("A_CHAT_LOGS_21", "Đi đến đỉnh");
 define("A_CHAT_LOGS_22", "Lưu trữ Hồ sơ");
 define("A_CHAT_LOGS_23", "Tiếp tục sinh ra %s");
+define("A_CHAT_LOGS_24", "Ghi tất cả %s vào file zip nén lại"); // date
+define("A_CHAT_LOGS_25", "Tất cả xây dựng logs và nén zip\\nlưu trữ ở %s thư mục!\\n"); //  month/year
+define("A_CHAT_LOGS_26", "\\nBạn thì chắc chắn?");
+define("A_CHAT_LOGS_27", "Zip file nén");
+define("A_CHAT_LOGS_28", "Tải xuống %s");
+define("A_CHAT_LOGS_29", "Xóa file zip");
 
 //Admin Search Page
 define("A_SEARCH_1", "Trang Tìm kiếm Chatroom");
@@ -124,7 +132,7 @@ define("A_SEARCH_8", "Sự Mô tả");
 define("A_SEARCH_9", "Liên kết");
 define("A_SEARCH_10", "Tìm kiếm");
 define("A_SEARCH_11", "Phạm trù những cho phép, những tùy chọn <b>ad</b>, <b>mod</b> or <b>u</b>.");
-define("A_SEARCH_12", "Cho phạm trù giới tính, những tùy chọn <b>0</b> cho Không chỉ rõ, <b>1</b> Cho con trai, or <b>2</b> Cho con gái.");
+define("A_SEARCH_12", "Cho phạm vi giới tính , những tùy chọn <b>0</b> Không chỉ rõ, <b>1</b> Cho Đàn Ông, <b>2</b> Cho Phụ Nữ, or <b>3</b> Cho Đôi.");
 define("A_SEARCH_13", "Tên đăng nhập");
 define("A_SEARCH_14", "Họ");
 define("A_SEARCH_15", "Ten");
@@ -135,6 +143,8 @@ define("A_SEARCH_20", "Giới tính");
 define("A_SEARCH_21", "Thuật ngữ Tìm kiếm ");
 define("A_SEARCH_22", "Sự Tìm kiếm gần ");
 define("A_SEARCH_23", "Mời Cung cấp một Thuật ngữ Tìm kiếm và sự Thử lần nữa!");
+define("A_SEARCH_24", "Ở đó không có là dữ liệu để phù hợp với mục đích các bạn. Xin sàng lọc sự tìm kiếm các bạn .");
+define("A_SEARCH_25", "Làm Dịu xuống người sử dụng này");
 
 // Connected users Page
 define("A_LURKING_1", "Được nối cho những người sử dụng và Bí mật") ;

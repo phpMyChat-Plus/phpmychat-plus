@@ -1,5 +1,5 @@
 <?php
-// File : italian/localized.tutorial.php - plus version (09.09.2007 - rev.7)
+// File : italian/localized.tutorial.php - plus version (08.03.2008 - rev.8)
 // Original translation by Marco Borrini <marco.borrini@tradimento.it> & Bartolotta Gioachino <developers@rockitalia.com> & Silvia M. Carrassi <silvia@ladysilvia.net> & Daniele <danybec@tin.it>
 // Updates, corrections and additions for the Plus version by Mike Mikius <mikiusss@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -22,7 +22,7 @@ if (isset($_COOKIE["CookieStatus"])) $CookieStatus = $_COOKIE["CookieStatus"];
 
 <HEAD>
 <TITLE>Guida in italiano per <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?></TITLE>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=${Charset}">
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo(${Charset}); ?>">
 <STYLE>
 A.topLink
 {
@@ -49,10 +49,10 @@ A.topLink:hover, A.topLink:active
 <P></P>
 <TABLE BORDER="5" CELLPADDING="5" ALIGN="center">
 <TR>
-	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- Guida in italiano per <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -</FONT><br /><I>&copy; 2007<?php echo((date(Y)>"2007") ? "-".date(Y) : ""); ?> - Traduzione di <a href="mailto:rinodeniro@hotmail.com?subject=Italian%20phpMyChat%20Plus%20translation" onMouseOver="window.status='<?php echo (sprintf(L_CLICKS,L_LINKS_6,L_TRANSLATOR)); ?>.'; return true;" title="<?php echo (sprintf(L_CLICKS,L_LINKS_6,L_TRANSLATOR)); ?>" target=_blank>Michele Ferro</a> - Foggia, Italia.</I></B></TD>
+	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- Guida in italiano per <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -</FONT><br /><I>&copy; 2007<?php echo((date('Y')>"2007") ? "-".date('Y') : ""); ?> - Traduzione di <a href="mailto:rinodeniro@hotmail.com?subject=Italian%20phpMyChat%20Plus%20translation" onMouseOver="window.status='<?php echo (sprintf(L_CLICKS,L_LINKS_6,L_TRANSLATOR)); ?>.'; return true;" title="<?php echo (sprintf(L_CLICKS,L_LINKS_6,L_TRANSLATOR)); ?>" target=_blank>Michele Ferro</a> - Foggia, Italia.</I></B></TD>
 </TR>
 </TABLE><br /><br />
-<P><A NAME="top"></P>
+<P><A NAME="top"></A></P>
 <TABLE BORDER="3" CELLPADDING="3">
 <TR>
 	<TD><FONT SIZE="+2">Contenuti di questa Guida</FONT></TD>
@@ -206,7 +206,7 @@ Se non siete ancora registrati<?php if (!C_REQUIRE_REGISTER) echo(" e volete far
 	<LI>Il campo della lingua può aiutare altri utenti in future discussioni: essi sapranno quale lingue voi potere capire.
 	<LI>Infine, se volete permettere che la vostra email sia visibile dagli altri partecipanti della stanza di chat, potete spuntare la casellina di fianco a "mostra l’email nelle informazioni pubbliche". Se non
 desiderate che sia visibile il vostro indirizzo email, lasciate la casella non spuntata.
-	<LI>Dopo, premete il bottone Registrati e verrà creato il vostro account. Se volete interrompere la registrazione in qualunque momento, premete il tasto Chiudi.
+	<LI>Dopo, premi il tasto <?php echo(L_REG_3); ?> ed il tuo account sarà creato. Dipendentemente come l’amministratore ha settato i parametric, potresti attendere l’approvazione dall’amministrazione. Comunque riceverai una mail di notifica con le istruzioni da seguire. Se vorresti fermare in qualsiasi momento senza registrarti, premi il tasto <?php echo(L_REG_25); ?>.
 </UL>
 <P>
 <A NAME="modProfile"></A>Ovviamente, gli utenti registrati saranno in grado di modificare<?php if (C_SHOW_DEL_PROF) echo("/cancellare"); ?> il proprio profilo personale cliccando sugli appropriati <?php echo((C_SHOW_DEL_PROF == "0" ? "link" : "links")); ?>.<br />
@@ -292,7 +292,7 @@ Potete cambiare il colore del testo del vostro messaggio scegliendo un nuovo col
 <P>
 <FONT SIZE="+1"><A NAME="exit"><B>Uscire dall’area di chat:</B></A></FONT>
 <P>
-Per uscire dalla chat, cliccate semplicemente su "Esci". Oppure potete inserire uno dei seguenti comandi nel vostra casella di testo:<br />
+Per uscire dalla chat, cliccate semplicemente su <?php echo (EXIT_LINK_TYPE) ? "<img src='localization/$L/images/exitdoor.gif' border=0 alt='".L_EXIT."'> immagine" : '"'.L_EXIT.'" link'; ?>. Oppure potete inserire uno dei seguenti comandi nel vostra casella di testo:<br />
 /exit<br />
 /bye<br />
 /quit<br />
@@ -395,7 +395,7 @@ If (C_USE_AVATARS) {
 ?>
 	<hr />
 	<FONT SIZE="+1"><A NAME="avatars"><B>Avatars:</B></A></FONT>
-<P>Avatars sono icone di immagini grafiche che rappresentano gli utenti. Solo utenti registrati possono cambiare il loro avatar. Gli utenti registrati possono aprire il loro profilo (vedi il comando /profile ) e clickare sull’immagine dell’avatar per selezionarlo da un menu di immagini, oppure immetterlo da un URL che punta su un’immagine grafica idonea in qualsiasi posto della rete (solo immagini con accesso pubblico, siti senza protezione password). Le immagini dovrebbero essere visibili dai browser (.gif, .jpg, etc. ) con formato 32 x 32 pixel per la migliroe visualizzazione.
+<P>Avatars sono icone di immagini grafiche che rappresentano gli utenti. Solo utenti registrati possono cambiare il loro avatar. Gli utenti registrati possono aprire il loro profilo (vedi il comando <A HREF="#changeprofile">/profile</A>) e clickare sull’immagine dell’avatar per selezionarlo da un menu di immagini, oppure immetterlo da un URL che punta su un’immagine grafica idonea in qualsiasi posto della rete (solo immagini con accesso pubblico, siti senza protezione password). Le immagini dovrebbero essere visibili dai browser (.gif, .jpg, etc. ) con formato 32 x 32 pixel per la migliroe visualizzazione.
 <P>Clickando sull’avatar di una persona nella sezione dei messaggi, aprirà una finestra pop up con il profilo della persona (vedi il comando <A HREF="#whois">/whois</A>).
 Clickando sul proprio avatar nella lista utenti richiamerà il comando /profile , se sei registrato.
 Se non sei registrato, clickando sul proprio avatar (è di default), aprirà un avviso per incoraggiarti a registrarti.
@@ -473,7 +473,11 @@ if (C_HTML_TAGS_KEEP != "none")
 <b><?php echo(L_COL_HELP_SUB2); ?></b><br /><?php echo(L_COL_HELP_P2); ?><br /><br /><center><?php echo(COLOR_LIST); ?></center><br /><?php echo(L_COL_HELP_P2a); ?><br /><br />
 </P>
 <P>
-<b><?php echo(L_COL_HELP_SUB3); ?></b><br /><?php echo(L_COLOR_HEAD_SETTINGS); ?><br /><?php if (COLOR_FILTERS) echo(L_COLOR_HEAD_SETTINGSa."<br />"); ?><u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo(L_WHOIS_ADMIN); elseif ($CookieStatus == "t") echo(L_WHOIS_TOPMOD); elseif ($CookieStatus == "m") echo(L_WHOIS_MODER); elseif ($CookieStatus == "u") echo(L_WHOIS_GUEST); else echo(L_WHOIS_REG);?></b><br /><?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
+<b><?php echo(L_COL_HELP_SUB3); ?></b><br />
+<u><?php echo(L_COLOR_HEAD_SETTINGS); ?></u><br />
+<?php if (COLOR_FILTERS) echo("a) COLOR_FILTERS = <b>".(COLOR_FILTERS == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />b) COLOR_ALLOW_GUESTS = <b>".(COLOR_ALLOW_GUESTS == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />c) COLOR_NAMES = <b>".(COLOR_NAMES == 1 ? L_ENABLED : L_DISABLED)."</b>.<br />"); ?>
+<?php if (COLOR_FILTERS) echo("<u>".L_COLOR_HEAD_SETTINGSa."</u> ".L_WHOIS_ADMIN." = <b><SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN></b>, ".L_WHOIS_MODERS." = <b><SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN></b>, ".L_WHOIS_OTHERS." = <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>."); else echo("<u>".L_COLOR_HEAD_SETTINGSb."</u> <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>.") ?><br />
+<u><?php echo(L_COL_HELP_USER_STATUS); ?></u> = <b><?php if ($CookieStatus == "a") echo("<font color=".COLOR_CA.">".L_WHOIS_ADMIN); elseif ($CookieStatus == "t") echo("<font color=".COLOR_CA.">".L_WHOIS_TOPMOD); elseif ($CookieStatus == "m") echo("<font color=".COLOR_CM.">".L_WHOIS_MODER); else echo("<font color=".COLOR_CD.">".L_WHOIS_GUEST); echo("</font>");?></b>.<br /><?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?>
 <br /><P ALIGN="right"><A HREF="#top">Torna all’inizio</A></P>
 <hr />
 <!-- Color Input Box mod by Ciprian end -->
@@ -494,11 +498,11 @@ Notate che potete inserire più di un nomeutente nel comando /invite (per es. "/
 <P>
 <FONT SIZE="+1"><A NAME="changeroom"><B>Cambiare da una stanza chat ad un’altra:</B></A></FONT>
 <P>
-L’elenco sulla destra dello schermo fornisce una lista delle stanze di chat e gli utenti che stanno correntemente in quella stanza. Per lasciare una stanza per spostarsi in una di queste, cliccate semplicemente sul nome di quella stanza. Le stanze vuote non appaiono sulal lista. Potete anche spostarvi in una stanza vuota digitando <B>comando "/join #nomestanza"</B> senza virgolette.
+L’elenco sulla destra dello schermo fornisce una lista delle stanze di chat e gli utenti che stanno correntemente in quella stanza. Per lasciare una stanza per spostarsi in una di queste, cliccate semplicemente sul nome di quella stanza. Le stanze vuote non appaiono sulal lista. Potete anche spostarvi in una stanza vuota digitando <B>comando "/join #nome stanza"</B> senza virgolette.
 <P>
-<I>Per esempio:</I> /join #RedRoom
+<I>Per esempio:</I> /join #Red Room
 <P>
-vi porterà in RedRoom.
+vi porterà in "Red Room".
 <?php
 if (C_VERSION == 2)
 {
@@ -506,9 +510,9 @@ if (C_VERSION == 2)
 	?>
 	 potete anche creare una nuova stanza con lo stesso commando. Ma dopo dovrete specificarne il tipo: 0 sta per privata,1 per pubblica (valore di norma).
 	<P>
-	<I>Per esempio:</I> /join 0 #MiaStanza
+	<I>Per esempio:</I> /join 0 #Mia Stanza
 	<P>
-	creerà una nuova stanza privata (dando per scontato che una pubblica con lo stesso nome non sia già stata creata) chiamata MiaStanza e vi porterà all’interno di essa.
+	creerà una nuova stanza privata (dando per scontato che una pubblica con lo stesso nome non sia già stata creata) chiamata "Mia Stanza" e vi porterà all’interno di essa.
 	<P>
 	I nomi di stanze non possono contenere spazi o backslash (\).<?php if (C_NO_SWEAR) echo(" Non può contenere parole vietate."); ?>
 	<?php
@@ -545,13 +549,33 @@ Cliccando una volta sul nome di un utente nella vostra stanza chat (alla destra 
 <P>
 <FONT SIZE="+1"><A NAME="private"><B>Messaggi privati:</B></A></FONT>
 <P>
-Per inviare un messaggio privato ad un altro utente nella vostra stanza, digitate il <B>comando "/msg nomeutente testomessaggio" oppure "/to nomeutente testomessaggio"</B> senza apici.
+Per inviare un messaggio privato ad un altro utente nella vostra stanza, digitate il <B>comando "/msg nomeutente testo messaggio" oppure "/to nomeutente testo messaggio"</B> senza apici.
 <P>
 <I>Per esempio, dove Jack è il nome utente:</I> /msg Jack Io sono qua, come stai?
 <P>
 Il messaggio apparirà a Jack e a voi stessi, ma nessun altro utente lo vedrà.
 <P>
-Osservate che cliccando su un nick di qualcuno che ha scritto nel frame principale, verrà aggiunto automaticamente questo comando nel campo invio messaggi.
+Quando il servizio dei PM è disabilitato, è anche possible inviare whispers ad un utente in una stanza differente, usando il <B>comando "/wisp nomeutente testo messaggio"</B> senza virgolette.
+<P>
+<?php
+if (C_PRIV_POPUP)
+{
+?>
+Cliccando sul nome del mittente di un messaggio nella finestra principale aggiungerà automaticamente il comando /to o /wisp nel campo di inserimento messaggi.
+<?php
+}
+else
+{
+?>
+Cliccando sul nome di un utente nella lista utenti sulla destra, automaticamente si aprirà un finestra pop-up che ti attende per scrivere il tuo messaggio di testo e premi INVIO per inviare il messaggio. La risposta che riceverai aprirà automaticamente in una nuova finestra.
+<?php
+}
+?>
+<P>
+Nota: Quando le PM pop-ups sono abilitate (sia in ambiente chat che nel tuo profilo), sarai abilitato a rivedere tutti i PMs off-line che hai ricevuto dall’ultima volta che ti sei connesso nella chat o finchè sei "away"; tutti i nuovi PMs a te indirizzati appariranno in una finestra pop-up; puoi rispondere una alla volta dalla stessa finestra. Questi servizi PM off-line sono disponibili solo per utenti registrati.
+<P>
+<u><?php echo(L_COLOR_HEAD_SETTINGS); ?></u><br />
+<?php echo("a) ENABLE_PM = <b>".(C_ENABLE_PM == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />b) PRIV_POPUP = <b>".(C_PRIV_POPUP == 1 ? L_ENABLED : L_DISABLED)."</b>.<br />"); ?>
 <br /><P ALIGN="right"><A HREF="#top">Torna all’inizio</A></P>
 <P>
 <hr />
@@ -562,6 +586,10 @@ Osservate che cliccando su un nick di qualcuno che ha scritto nel frame principa
 Per descrivere cosa stai facendo potete usare il <B>comando "/me action"</B> senza virgolette.
 <P>
 <I>Per esempio:</I> Se Jack manda il messaggio "/me sta bevendo una tazza di caffè" il messaggio che comparirà sarà "<B>* Jack</B> sta bevendo una tazza di caffè".
+<P>
+Come una variazione a questo comando, c’è disponibile il <B>comando /mr</B>, che mette anche il genere davante al nome utente.
+<P>
+<I>Per esempio:</I> Se Jack invia il messaggio "/mr sta guardando la TV" la finestra del messaggio mostrerà: "<B>* <?php echo(L_HELP_MR); ?> Jack</B> sta guardando la TV".
 <br /><P ALIGN="right"><A HREF="#top">Torna all’inizio</A></P>
 <P>
 <hr />

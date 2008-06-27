@@ -43,6 +43,15 @@ header("Content-Type: text/html; charset=${Charset}");
 
 // avoid server configuration for magic quotes
 set_magic_quotes_runtime(0);
+// Can't turn off magic quotes gpc so just redo what it did if it is on.
+if (get_magic_quotes_gpc()) {
+	foreach($_GET as $k=>$v)
+		$_GET[$k] = stripslashes($v);
+	foreach($_POST as $k=>$v)
+		$_POST[$k] = stripslashes($v);
+	foreach($_COOKIE as $k=>$v)
+		$_COOKIE[$k] = stripslashes($v);
+}
 
 $DbLink = new DB;
 
@@ -58,7 +67,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 	{
 		$Error = L_ERR_USR_16a;
 	}
-	else if(C_NO_SWEAR && checkwords($U, true))
+	else if(C_NO_SWEAR && checkwords($U, true, $Charset))
 	{
 		$Error = L_ERR_USR_18;
 	}
@@ -90,7 +99,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 	{
 		$Error = L_ERR_USR_26;
 	}
-	else	if ($SECRET_QUESTION == 0 || $SECRET_ANSWER == "")
+	else if ($SECRET_QUESTION == 0 || $SECRET_ANSWER == "")
 	{
 		$Error = L_ERR_PASS_5;
 	}
@@ -106,49 +115,40 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 		else
 		{
 			$Latin1 = ($Charset != "utf-8");
-			if (!isset($GENDER)) $GENDER = "";
+			if (!isset($GENDER)) $GENDER = 0;
 			$showemail = (isset($SHOWEMAIL) && $SHOWEMAIL)? 1:0;
 			$allowpopup = 1;
 			include("./lib/get_IP.lib.php");		// Set the $IP var
 
-			if (C_EMAIL_PASWD)		// Define the password
+			// Send e-mail
+			if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "")
 			{
 				$pmc_password = gen_password();
-			};
-			$PWD_Hash = md5(stripslashes($pmc_password));
-			// Send e-mail
-			if (C_EMAIL_PASWD)
-			{
-				$send = send_email("[".((C_CHAT_NAME != "") ? C_CHAT_NAME." - ".APP_NAME : APP_NAME)."] ".L_EMAIL_VAL_1, L_SET_2, L_REG_1, L_EMAIL_VAL_2);
+				$send = send_email(sprintf(L_EMAIL_VAL_3,"[".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]"), L_SET_2, L_EMAIL_VAL_PENDING_Done."\r\n".L_EMAIL_VAL_PENDING_Done1, "", 0);
 				if (!$send) $Error = sprintf(L_EMAIL_VAL_Err,$Sender_email,$Sender_email);
-			};
+			}
+			elseif (C_EMAIL_PASWD)
+			{
+				$pmc_password = gen_password();
+				$send = send_email(L_EMAIL_VAL_1." [".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]", L_SET_2, L_REG_1, L_EMAIL_VAL_2, 1);
+				if (!$send) $Error = sprintf(L_EMAIL_VAL_Err,$Sender_email,$Sender_email);
+			}
+			$PWD_Hash = md5(stripslashes($pmc_password));
 			if (!isset($Error) || $Error == "")
 			{
-				$DbLink->query("INSERT INTO ".C_REG_TBL." VALUES ('', '', '$U', '$Latin1', '$PWD_Hash', '$FIRSTNAME', '$LASTNAME', '$COUNTRY', '$WEBSITE', '$EMAIL', $showemail, 'user', '',".time().", '$IP', '$GENDER', '$allowpopup', '$PICTURE', '$DESCRIPTION', '$FAVLINK', '$FAVLINK1', '$SLANG', '$COLORNAME', '$AVATARURL', '$SECRET_QUESTION', '$SECRET_ANSWER')");
-				$Message = L_REG_9;
+				$DbLink->query("INSERT INTO ".C_REG_TBL." VALUES ('', '', '$U', '$Latin1', '$PWD_Hash', '$FIRSTNAME', '$LASTNAME', '$COUNTRY', '$WEBSITE', '$EMAIL', $showemail, 'user', '',".time().", '$IP', '$GENDER', '$allowpopup', '$PICTURE', '$DESCRIPTION', '$FAVLINK', '$FAVLINK1', '$SLANG', '$COLORNAME', '$AVATARURL', '$SECRET_QUESTION', '$SECRET_ANSWER', '', '', '$USE_GRAV')");
+				if (C_EMAIL_PASWD && !C_EMAIL_USER && (C_ADMIN_EMAIL != "")) $Message = ""; else $Message = L_REG_9;
 // Patch for sending an email to the Administrator upon new user registration to the chat system.
 // by Bob Dickow, April 28, 2003
-     if (($GENDER & 3) == 1) {
-       $sex = " male";
-     } elseif (($GENDER & 3) == 2 ) {
-       $sex = " female";
-     } else {
-       $sex = " unspecified";
-     }
-     if ($showemail) {
-       $shweml = " yes";
-     } else {
-       $shweml = " no";
-     }
      $tm = getdate();
      $dt = $tm[weekday].", ".$tm[mday]." ".$tm[month]." ".$tm[year];
-     $tm = sprintf("%02.u:%02.u:%02.u",$tm[hours],$tm[minutes],$tm[seconds]);
+     $ti = sprintf("%02.u:%02.u:%02.u",$tm[hours],$tm[minutes],$tm[seconds]);
 
-		if 	($SECRET_QUESTION==0) $secret_question = L_PASS_12; 
-		if 	($SECRET_QUESTION==1) $secret_question = L_PASS_2; 
-		if 	($SECRET_QUESTION==2) $secret_question = L_PASS_3; 
-		if 	($SECRET_QUESTION==3) $secret_question = L_PASS_4; 
-		if 	($SECRET_QUESTION==4) $secret_question = L_PASS_5; 
+		if 	($SECRET_QUESTION==0) $secret_question = L_PASS_12;
+		if 	($SECRET_QUESTION==1) $secret_question = L_PASS_2;
+		if 	($SECRET_QUESTION==2) $secret_question = L_PASS_3;
+		if 	($SECRET_QUESTION==3) $secret_question = L_PASS_4;
+		if 	($SECRET_QUESTION==4) $secret_question = L_PASS_5;
 
 		if (isset($COLORNAME))
 		{
@@ -156,91 +156,140 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 			setcookie("CookieColor", $C, time() + 60*60*24*365);        // cookie expires in one year
 		}
 
-	if (C_ADMIN_NOTIFY && (C_ADMIN_EMAIL != ""))
-	{
-     $emailMessage = "New user registration notification for "
-     . ((C_CHAT_NAME != "") ? C_CHAT_NAME." - ".APP_NAME : APP_NAME) ." at ". C_CHAT_URL." :\n\n"
-     . "----------------------------------------------\n"
-     . "Username: ".stripslashes($U)."\n"
-#    . "Password: ".stripslashes($pmc_password)."\n"
-     . "Password: (Not enabled by default, for privacy concerns!)\n"
-     . "----------------------------------------------\n\n"
-#    . "Secret question: ".stripslashes($secret_question)."\n"
-#    . "Secret answer: ".stripslashes($SECRET_ANSWER)."\n"
-	  . "Secret question: (Not enabled by default for privacy concerns!)\n"
-	  . "Secret answer: (Not enabled by default for privacy concerns!)\n"
-     . "Email: $EMAIL\n"
-     . "First name: ".stripslashes($FIRSTNAME)."\n"
-     . "Last name: ".stripslashes($LASTNAME)."\n"
-     . "Gender: $sex\n"
-     . "Country: ".stripslashes($COUNTRY)."\n"
-     . "WWW: ".stripslashes($WEBSITE)."\n"
-     . "Display email address: $shweml\n"
-     . "Spoken languages: ".stripslashes($SLANG)."\n"
-     . "Description: ".stripslashes($DESCRIPTION)."\n"
-     . "Favorite link 1: ".stripslashes($FAVLINK)."\n"
-     . "Favorite link 2: ".stripslashes($FAVLINK1)."\n"
-     . "Picture: ".stripslashes($PICTURE)."\n"
-     . "Color name/text: ".stripslashes($C)."\n"
-     . "Date of registration: $dt\n"
-     . "Time of registration: $tm\n"
-     . "IP address: $IP (".gethostbyaddr($IP).")\n"
-     . "----------------------------------------------";
-		$Headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
-		$Headers .= "X-Sender: <${Sender_email}> \r\n";
-		$Headers .= "X-Mailer: PHP/".phpversion()." \r\n";
-		$Headers .= "Return-Path: <${Sender_email}> \r\n";
-		$Headers .= "Date: ${mail_date} \r\n";
-		$Headers .= "Mime-Version: 1.0 \r\n";
-		$Headers .= "Content-Type: text/plain; charset=${Charset} \r\n";
-		$Headers .= "Content-Transfer-Encoding: 8bit \r\n";
-     mail(C_ADMIN_EMAIL,"[".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."] "
-     . "New User - ".stripslashes($U)." - Registration notification", $emailMessage, $Headers);
-// end of patch to send an email to the Admin at the time of new user registration.
-	};
-
 // Patch to send an email to the User after registration.
 // by Ciprian using Bob Dickow's one above.
-	if (C_EMAIL_USER)
+	if (C_EMAIL_USER || (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@")))
 	{
-     $emailMessage = "You have just registered this account for "
-     . ((C_CHAT_NAME != "") ? C_CHAT_NAME." - ".APP_NAME : APP_NAME) ." at ". C_CHAT_URL." :\n\n"
-     . "----------------------------------------------\n"
-     . "Username: ".stripslashes($U)."\n"
-	  . "Password: ".stripslashes($pmc_password)."\n"
-     . "----------------------------------------------\n\n"
-     . "Secret question: ".stripslashes($secret_question)."\n"
-     . "Secret answer: ".stripslashes($SECRET_ANSWER)."\n"
-     . "Email: $EMAIL\n"
-     . "First name: ".stripslashes($FIRSTNAME)."\n"
-     . "Last name: ".stripslashes($LASTNAME)."\n"
-     . "Gender: $sex\n"
-     . "Country: ".stripslashes($COUNTRY)."\n"
-     . "WWW: ".stripslashes($WEBSITE)."\n"
-     . "Display email address: $shweml\n"
-     . "Spoken languages: ".stripslashes($SLANG)."\n"
-     . "Description: ".stripslashes($DESCRIPTION)."\n"
-     . "Favorite link 1: ".stripslashes($FAVLINK)."\n"
-     . "Favorite link 2: ".stripslashes($FAVLINK1)."\n"
-     . "Picture: ".stripslashes($PICTURE)."\n"
-     . "Color name/text: ".stripslashes($C)."\n"
-     . "Date of registration: $dt\n"
-     . "Time of registration: $tm\n"
-     . "----------------------------------------------\n"
-     . "Please save this email for your usage.\n"
-     . "Thank you for joining!";
+   	if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@")) $emailMessage = L_EMAIL_VAL_31."\r\n\r\n".sprintf(L_EMAIL_VAL_32,((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME),$Chat_URL)." \r\n\r\n";
+    else $emailMessage = sprintf(L_EMAIL_VAL_4,((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME),$Chat_URL)." \r\n\r\n";
+		 if ($GENDER == 1) $sex = L_REG_46;
+		 elseif ($GENDER == 2) $sex = L_REG_47;
+		 elseif ($GENDER == 3) $sex = L_REG_44;
+		 elseif ($GENDER == 4) $sex = L_REG_43;
+		 else $sex = L_REG_48;
+
+     if ($showemail) {
+       $shweml = L_REG_20;
+     } else {
+       $shweml = L_REG_22;
+     }
+     if ($USE_GRAV) {
+       $usegrav = L_REG_20;
+     } else {
+       $usegrav = L_REG_22;
+     }
+     $emailMessage .= ""
+     . "----------------------------------------------\r\n"
+     . "".L_SET_2.": ".$U."\r\n"
+	 . "".L_REG_1.": ".$pmc_password."\r\n"
+     . "----------------------------------------------\r\n\r\n"
+     . "".L_PASS_1.": ".$secret_question."\r\n"
+     . "".L_PASS_6.": ".$SECRET_ANSWER."\r\n"
+     . "".L_REG_8.": ".$EMAIL."\r\n"
+     . "".L_REG_30.": ".($FIRSTNAME ? $FIRSTNAME : L_NOT_SELECTED)."\r\n"
+     . "".L_REG_31.": ".($LASTNAME ? $LASTNAME : L_NOT_SELECTED)."\r\n"
+     . "".L_REG_45.": ".$sex."\r\n"
+     . "".L_REG_36.": ".($COUNTRY ? $COUNTRY : L_NOT_SELECTED)."\r\n"
+     . "".L_REG_32.": ".($WEBSITE ? $WEBSITE : L_NOT_SELECTED)."\r\n"
+     . "".L_PRO_1.": ".($SLANG ? $SLANG : L_NOT_SELECTED)."\r\n"
+     . "".L_PRO_2.": ".($FAVLINK ? $FAVLINK : L_NOT_SELECTED)."\r\n"
+     . "".L_PRO_3.": ".($FAVLINK1 ? $FAVLINK1 : L_NOT_SELECTED)."\r\n"
+     . "".L_PRO_4.": ".($DESCRIPTION ? $DESCRIPTION : L_NOT_SELECTED)."\r\n"
+     . "".L_PRO_5.": ".($PICTURE ? $PICTURE : L_NOT_SELECTED)."\r\n"
+	 . "".L_PRO_6.": ".($C ? $C : L_NOT_SELECTED)." (".(COLOR_NAMES ? L_ENABLED : L_DISABLED).")\r\n"
+     . "".L_REG_33.": ".$shweml."\r\n"
+	 . "".L_GRAV_USE.": ".$usegrav." (".(!ALLOW_GRAVATARS ? L_DISABLED : L_ENABLED).")\r\n"
+     . "----------------------------------------------\r\n"
+	 . "".sprintf(L_EMAIL_VAL_6,strftime(L_LONG_DATETIME,time()))."\r\n"
+     . "----------------------------------------------\r\n\r\n"
+     . "".L_EMAIL_VAL_8."\r\n\r\n"
+     .  $Mail_Greeting."\r\n".$Sender_Name1."\r\n".$Chat_URL;
 		$Headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
-		$Headers .= "X-Sender: <${Sender_email}> \r\n";
+		$Headers .= "X-Sender: ${Sender_email} \r\n";
 		$Headers .= "X-Mailer: PHP/".phpversion()." \r\n";
-		$Headers .= "Return-Path: <${Sender_email}> \r\n";
+		$Headers .= "Return-Path: ${Sender_email} \r\n";
 		$Headers .= "Date: ${mail_date} \r\n";
 		$Headers .= "Mime-Version: 1.0 \r\n";
-		$Headers .= "Content-Type: text/plain; charset=${Charset} \r\n";
+		$Headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed \r\n";
 		$Headers .= "Content-Transfer-Encoding: 8bit \r\n";
-     mail($EMAIL,"[".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."] "
-     . "Your - ".stripslashes($U)." - account details", $emailMessage, $Headers);
+		$emailMessage = stripslashes($emailMessage);
+		if (C_EMAIL_PASWD && !C_EMAIL_USER && (C_ADMIN_EMAIL != ""))
+		{
+			$Subject = sprintf(L_EMAIL_VAL_5,$U,"[".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]");
+			$Subject = quote_printable($Subject,$Charset);
+			@mail(C_ADMIN_EMAIL, $Subject, $emailMessage, $Headers);
+		}
+	   else
+		{
+			$Subject1 = sprintf(L_EMAIL_VAL_5,$U,"[".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]");
+			$Subject1 = quote_printable($Subject1,$Charset);
+			@mail($EMAIL, $Subject1, $emailMessage, $Headers);
+		}
   	};
 // End of patch to send an email to the User after registration.
+
+	if (C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@"))
+	{
+		if ($GENDER == 1) $sex = "male";
+		elseif ($GENDER == 2) $sex = "female";
+		elseif ($GENDER == 3) $sex = "couple";
+		elseif ($GENDER == 4) $sex = "undisclosed";
+		else $sex = "unspecified";
+
+		if ($showemail) {
+			$shweml = "yes";
+		} else {
+			$shweml = "no";
+		}
+		if ($USE_GRAV) {
+		   $usegrav = "yes";
+		} else {
+		   $usegrav = "no";
+		}
+     $emailMessage = "New user registration notification for "
+     . ((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME) ." at ". $Chat_URL." :\r\n\r\n"
+     . "----------------------------------------------\r\n"
+     . "Username: ".$U."\r\n"
+	 . "Password: ".$pmc_password."\r\n"
+     . "----------------------------------------------\r\n\r\n"
+     . "Secret question: ".$SECRET_QUESTION."\r\n"
+     . "Secret answer: ".$SECRET_ANSWER."\r\n"
+     . "Email: ".$EMAIL."\r\n"
+     . "First name: ".$FIRSTNAME."\r\n"
+     . "Last name: ".$LASTNAME."\r\n"
+     . "Gender: ".$sex."\r\n"
+     . "Country: ".$COUNTRY."\r\n"
+     . "WWW: ".$WEBSITE."\r\n"
+     . "Spoken languages: ".$SLANG."\r\n"
+     . "Favorite link 1: ".$FAVLINK."\r\n"
+     . "Favorite link 2: ".$FAVLINK1."\r\n"
+     . "Description: ".$DESCRIPTION."\r\n"
+     . "Picture: ".$PICTURE."\r\n"
+     . "Color name/text: ".$C." (".(COLOR_NAMES ? "Enabled" : "Disabled").")\r\n"
+	 . "Display email address on public info: ".$shweml."\r\n"
+	 . "Use the Gravatar: ".$usegrav." (".(!ALLOW_GRAVATARS ? "Disabled" : "Enabled").")\r\n"
+     . "----------------------------------------------\r\n"
+     . "Preffered language: ".$L."\r\n"
+     . "Registered on: $dt $ti\r\n"
+     . "IP address: $IP (".gethostbyaddr($IP).")\r\n\r\n"
+	 . "----------------------------------------------\r\n\r\n"
+	 . "Please note that some data should be disabled from this copy for privacy concerns!\r\n"
+	 . "Save this email for your further reference.\r\n"
+	 . "Enjoy!";
+		$Headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
+		$Headers .= "X-Sender: ${Sender_email} \r\n";
+		$Headers .= "X-Mailer: PHP/".phpversion()." \r\n";
+		$Headers .= "Return-Path: ${Sender_email} \r\n";
+		$Headers .= "Date: ${mail_date} \r\n";
+		$Headers .= "Mime-Version: 1.0 \r\n";
+		$Headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed \r\n";
+		$Headers .= "Content-Transfer-Encoding: 8bit \r\n";
+		$Subject = "New User - ".$U." - Registration notification for [".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]";
+		$Subject = quote_printable($Subject,$Charset);
+		$emailMessage = stripslashes($emailMessage);
+		@mail($Sender_email, $Subject, $emailMessage, $Headers);
+// end of patch to send an email to the Admin at the time of new user registration.
+	};
 			};
 		}
 	}
@@ -249,7 +298,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 $DbLink->close();
 
 // Registration has been done ?
-$done = (isset($Message) && $Message == L_REG_9);
+$done = (isset($Message) && ($Message == L_REG_9 || $Message == ""));
 
 // For translations with an explicit charset (not the 'x-user-defined' one)
 if (!isset($FontName)) $FontName = "";
@@ -258,7 +307,7 @@ if (!isset($FontName)) $FontName = "";
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
-<TITLE><?php echo((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME); ?></TITLE>
+<TITLE><?php echo(L_REG_6." - ".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
 <!--
@@ -298,6 +347,17 @@ function get_focus()
 			document.forms['RegParams'].elements['U'].focus();
 		}
 }
+function swapImage(img,imgid) {
+	var image = document.getElementById(imgid);
+	var dropd = document.getElementById(img);
+	var path = '<?php echo("./".$ChatPath."/images/gender_"); ?>';
+	if (dropd.value == "0") var gender = "none.gif";
+	else if (dropd.value == "1") var gender = "boy.gif";
+	else if (dropd.value == "2") var gender = "girl.gif";
+	else if (dropd.value == "3") var gender = "couple.gif";
+	else if (dropd.value == "4") var gender = "undefined.gif";
+	image.src = path + gender;
+}
 // -->
 </SCRIPT>
 </HEAD>
@@ -323,7 +383,7 @@ if(isset($Error))
 			<TH COLSPAN=2 CLASS="tabtitle"><?php echo($done ? $Message : L_REG_6); ?></TH>
 		</TR>
 		<TR>
-			<TH COLSPAN=2><?php if (!$done) echo(L_REG_37); elseif (C_EMAIL_PASWD) echo(L_EMAIL_VAL_Done); ?></TH>
+			<TH COLSPAN=2><?php if (!$done) echo(L_REG_37); elseif (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "") echo(L_EMAIL_VAL_PENDING_Done."<br />".L_EMAIL_VAL_PENDING_Done1); elseif (C_EMAIL_PASWD && C_EMAIL_USER) echo(L_EMAIL_VAL_Done); ?></TH>
 		</TR>
 		<TR><TD>&nbsp;</TD></TR>
 		<TR>
@@ -335,26 +395,50 @@ if(isset($Error))
  			<TD VALIGN="TOP">
 			<!-- Avatar System Start. Splits above original line and inserts the following: -->
                         <?php
+					               if (!empty($avatar))
+					               {
+					                 $AVATARURL = $avatar;
+					               }
+					               elseif (!empty($url))
+					               {
+					               		$AVATARURL = $url;
+					               }
                         if (empty($avatar)) {
                           if (empty($AVATARURL)) $AVATARURL = C_AVA_RELPATH . C_DEF_AVATAR;
                           $avatar = $AVATARURL;
                         }
                         ?>
-  		                <a href="avatar.php?User=<?php echo($AUTH_USERNAME);?>&L=<?php echo($L); ?>&avatar=<?php echo($AVATARURL); ?>&From=register.php&Link=$Link" onMouseOver="window.status='<?php echo(L_SEL_NEW_AV) ?>.'; return true;" title="<?php echo(L_SEL_NEW_AV); ?>" target="_self">
-                      	        <img src="<?php echo($avatar); ?>" align="center" border="0" width="<?php echo(C_AVA_WIDTH);?>" height="<?php echo(C_AVA_HEIGHT);?>" alt="<?php echo(L_SEL_NEW_AV); ?>"></a>&nbsp;
-							<INPUT type="hidden" name="AVATARURL" value="<? echo($avatar);?>">
-                       <input type="hidden" name="avatar" value="<?php echo($avatar); ?>">
+							<a href="<?php echo("avatar.php?User=$U&L=$L&avatar=$avatar&ORIGAVATAR=$avatar&From=register.php&Link=$Link"); ?>" onClick="return confirm('<?php echo(L_SEL_NEW_AV_CONFIRM) ?>');" onMouseOver="window.status='<?php echo(L_SEL_NEW_AV) ?>.'; return true;" title="<?php echo(L_SEL_NEW_AV); ?>" target="_self">
+                      	<img src="<?php echo($avatar); ?>" align="center" border="0" width="<?php echo(C_AVA_WIDTH);?>" height="<?php echo(C_AVA_HEIGHT);?>" alt="<?php echo(L_SEL_NEW_AV); ?>"></a>&nbsp;
+							<input type="hidden" name="ORIGAVATAR" value="<?php echo($avatar);?>">
+							<input type="hidden" name="avatar" value="<?php echo($avatar); ?>">
 			</TD>
 		</TR>
-                        <?php
+<?php
+				// Gravatars initialization
+				if (isset($EMAIL) && $EMAIL != "") $email = $EMAIL;
+				if (isset($U) && $U != "" && isset($email)) $User = $U;
+				if (eregi(C_AVA_RELPATH, $avatar)) $local_avatar = 1;
+				else $local_avatar = 0;
+				require("plugins/gravatars/get_gravatar.php");
+				?>
+				<TR>
+					<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP">Gravatar :</TD>
+				 	<TD VALIGN="TOP">
+				<?php
+					echo("<a href=\"http://en.gravatar.com/site/login/\" title=\"".sprintf(L_CLICK,L_LINKS_19)."\" target=\"_blank\">".$gravatarTag."</a>");
+				?>
+				&nbsp;<INPUT type="checkbox" name="USE_GRAV" value="1" <?php if(isset($USE_GRAV) && $USE_GRAV) echo("checked"); ?><?php if ($done|| $ALLOW_GRAVATARS != 1) echo(" READONLY"); ?>>&nbsp;<?php echo(L_GRAV_USE); ?>
+					</TD>
+				</TR>
+				<?php
                         }
                         ?>
 <!-- Avatar System End  -->
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_SET_2); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="U" SIZE=15 MAXLENGTH=15 VALUE="<?php if (isset($U)) echo(htmlspecialchars(stripslashes($U))); ?>"<?php if ($done) echo(" READONLY"); ?>>
-				<?php if (!$done) { ?><SPAN CLASS=error>*</SPAN><?php }; ?>
+				<INPUT TYPE="text" NAME="U" SIZE=15 MAXLENGTH=15 VALUE="<?php if (isset($U)) echo(htmlspecialchars(stripslashes($U))); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
 			</TD>
 		</TR>
 		<?php
@@ -364,8 +448,7 @@ if(isset($Error))
 			<TR>
 				<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_1); ?> :</TD>
 				<TD VALIGN="TOP">
-					<INPUT TYPE="password" NAME="pmc_password" AUTOCOMPLETE="OFF" SIZE=15 MAXLENGTH=15 VALUE="<?php if (isset($pmc_password)) echo(htmlspecialchars(stripslashes($pmc_password))); ?>"<?php if ($done) echo(" READONLY"); ?>>
-					<?php if (!$done) { ?><SPAN CLASS=error>*</SPAN><?php }; ?>
+					<INPUT TYPE="password" NAME="pmc_password" AUTOCOMPLETE="OFF" SIZE=15 MAXLENGTH=15 VALUE="<?php if (isset($pmc_password)) echo(htmlspecialchars(stripslashes($pmc_password))); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
 				</TD>
 			</TR>
 			<?php
@@ -374,8 +457,7 @@ if(isset($Error))
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_8); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="EMAIL" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($EMAIL)) echo(stripslashes($EMAIL)); ?>"<?php if ($done) echo(" READONLY"); ?>>
-				<?php if (!$done) { ?><SPAN CLASS="error">*</SPAN><?php }; ?>
+				<INPUT TYPE="text" NAME="EMAIL" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($EMAIL)) echo(stripslashes($EMAIL)); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
 			</TD>
 		</TR>
 		<TR>
@@ -387,69 +469,42 @@ if(isset($Error))
 				<OPTION value="2" <?php if ($SECRET_QUESTION==2) echo ("selected=\"selected\"")?>><?php echo(L_PASS_3)?></OPTION>
 				<OPTION value="3" <?php if ($SECRET_QUESTION==3) echo ("selected=\"selected\"")?>><?php echo(L_PASS_4)?></OPTION>
 				<OPTION value="4" <?php if ($SECRET_QUESTION==4) echo ("selected=\"selected\"")?>><?php echo(L_PASS_5)?></OPTION>
-				</SELECT>
-				<?php if (!$done) { ?><SPAN CLASS="error">*</SPAN><?php }; ?>
+				</SELECT>&nbsp;<?php if (!$done) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
 			</TD>
 		</TR>
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PASS_6); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="SECRET_ANSWER" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($SECRET_ANSWER)) echo(stripslashes($SECRET_ANSWER)); ?>"<?php if ($done) echo(" READONLY"); ?>>
-				<?php if (!$done) { ?><SPAN CLASS="error">*</SPAN><?php }; ?>
+				<INPUT TYPE="text" NAME="SECRET_ANSWER" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($SECRET_ANSWER)) echo(stripslashes($SECRET_ANSWER)); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
 			</TD>
 		</TR>
-<?php
-if (C_REQUIRE_NAMES)
-{
-?>
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_30); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="FIRSTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($FIRSTNAME)) echo(stripslashes($FIRSTNAME)); ?>"<?php if ($done) echo(" READONLY"); ?>>
-				<?php if (!$done) { ?><SPAN CLASS=error>*</SPAN><?php }; ?>
+				<INPUT TYPE="text" NAME="FIRSTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($FIRSTNAME)) echo(stripslashes($FIRSTNAME)); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done && C_REQUIRE_NAMES) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
 			</TD>
 		</TR>
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_31); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="LASTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($LASTNAME)) echo(stripslashes($LASTNAME)); ?>"<?php if ($done) echo(" READONLY"); ?>>
-				<?php if (!$done) { ?><SPAN CLASS=error>*</SPAN><?php }; ?>
+				<INPUT TYPE="text" NAME="LASTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($LASTNAME)) echo(stripslashes($LASTNAME)); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done && C_REQUIRE_NAMES) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
 			</TD>
 		</TR>
-<?php
-}
-else
-{
-?>
-		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_30); ?> :</TD>
-			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="FIRSTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($FIRSTNAME)) echo(stripslashes($FIRSTNAME)); ?>"<?php if ($done) echo(" READONLY"); ?>>
-			</TD>
-		</TR>
-		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_31); ?> :</TD>
-			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="LASTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($LASTNAME)) echo(stripslashes($LASTNAME)); ?>"<?php if ($done) echo(" READONLY"); ?>>
-			</TD>
-		</TR>
-<?php
-};
-?>
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_45); ?> :</TD>
 			<TD VALIGN="TOP">
-				<SELECT name="GENDER">
-				<OPTION value="1" <?php if ($GENDER==1) echo ("selected=\"selected\"")?>><?php echo(L_REG_46)?></OPTION>
-				<OPTION value="2" <?php if ($GENDER==2) echo ("selected=\"selected\"")?>><?php echo(L_REG_47)?></OPTION>
-				<OPTION value="0" <?php if ($GENDER==0 || $GENDER=="") echo ("selected=\"selected\"")?>><?php echo(L_REG_48)?></OPTION>
-				</SELECT>
+				<SELECT name="GENDER" id="gender" onChange="swapImage('gender','genderToSwap')">
+				<OPTION value="0" <?php if ($GENDER==0) { echo ("selected=\"selected\""); $genselected = "none.gif"; }?>><?php echo(L_SET_7)?></OPTION>
+				<OPTION value="1" <?php if ($GENDER==1) { echo ("selected=\"selected\""); $genselected = "boy.gif"; }?>><?php echo(L_REG_46)?></OPTION>
+				<OPTION value="2" <?php if ($GENDER==2) { echo ("selected=\"selected\""); $genselected = "girl.gif"; }?>><?php echo(L_REG_47)?></OPTION>
+				<OPTION value="3" <?php if ($GENDER==3) { echo ("selected=\"selected\""); $genselected = "couple.gif"; }?>><?php echo(L_REG_44)?></OPTION>
+				<OPTION value="4" <?php if ($GENDER==4) { echo ("selected=\"selected\""); $genselected = "undefined.gif"; }?>><?php echo(L_REG_43)?></OPTION>
+				</SELECT>&nbsp;<img id="genderToSwap" src="<?php echo("./".$ChatPath."images/gender_".$genselected.""); ?>" <?php echo("BORDER=0 ALT=\"".L_GEN_ICON."\" Title=\"".L_GEN_ICON."\""); ?> />
 			</TD>
 		</TR>
 		<TR>
 			<TD COLSPAN=2 ALIGN="center">
-				<INPUT type="checkbox" name="SHOWEMAIL" value="1" <?php if (isset($SHOWEMAIL) && $SHOWEMAIL) echo("CHECKED"); ?><?php if ($done) echo(" READONLY"); ?>>
-				&nbsp;<?php echo(L_REG_33); ?>
+				<INPUT type="checkbox" name="SHOWEMAIL" value="1" <?php if (isset($SHOWEMAIL) && $SHOWEMAIL) echo("CHECKED"); ?><?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_REG_33); ?>
 			</TD>
 		</TR>
 		<TR>
@@ -485,13 +540,21 @@ else
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_4); ?> :</TD>
 			<TD VALIGN="TOP">
-				<TEXTAREA NAME="DESCRIPTION" COLS=27 ROWS=5 WRAP=ON<?php if ($done) echo(" READONLY"); ?>><?php if (isset($DESCRIPTION)) echo(stripslashes($DESCRIPTION)); ?></TEXTAREA>
+				<TEXTAREA NAME="DESCRIPTION" COLS=27 ROWS=3 WRAP=ON<?php if ($done) echo(" READONLY"); ?>><?php if (isset($DESCRIPTION)) echo(stripslashes($DESCRIPTION)); ?></TEXTAREA>
 			</TD>
 		</TR>
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_5); ?> :</TD>
 			<TD VALIGN="TOP">
 				<INPUT TYPE="text" NAME="PICTURE" SIZE=25 MAXLENGTH=255 VALUE="<?php if (isset($PICTURE)) echo(stripslashes($PICTURE)); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<?php
+				if (isset($PICTURE) && stripslashes($PICTURE) != "" && file(stripslashes($PICTURE)))
+				{
+				?>
+					<IMG src="<?php echo(stripslashes($PICTURE)); ?>" width = "<?php echo(C_AVA_WIDTH); ?>" ALT="<?php echo(L_PRO_5); ?>" />
+				<?php
+				}
+				?>
 			</TD>
 		</TR>
 <?php
@@ -507,35 +570,27 @@ if (COLOR_NAME)
 $ColorList = COLORLIST;
 if (COLOR_FILTERS)
 {
-	if ($status != "a" && $status != "t" && $status != "m")
-	{
 		if (COLOR_CA != "") $ColorList = eregi_replace('"'.COLOR_CA.'",', "", $ColorList);
 		if (COLOR_CA1 != "") $ColorList = eregi_replace('"'.COLOR_CA1.'",', "", $ColorList);
 		if (COLOR_CA2 != "") $ColorList = eregi_replace('"'.COLOR_CA2.'",', "", $ColorList);
 		if (COLOR_CM != "") $ColorList = eregi_replace('"'.COLOR_CM.'",', "", $ColorList);
 		if (COLOR_CM1 != "") $ColorList = eregi_replace('"'.COLOR_CM1.'",', "", $ColorList);
 		if (COLOR_CM2 != "") $ColorList = eregi_replace('"'.COLOR_CM2.'",', "", $ColorList);
-	}
-	elseif ($status == "m")
-	{
-		if (COLOR_CA != "") $ColorList = eregi_replace('"'.COLOR_CA.'",', "", $ColorList);
-		if (COLOR_CA1 != "") $ColorList = eregi_replace('"'.COLOR_CA1.'",', "", $ColorList);
-		if (COLOR_CA2 != "") $ColorList = eregi_replace('"'.COLOR_CA2.'",', "", $ColorList);
-	}
 }
 $ColorList = eregi_replace('"', "", $ColorList);
 $CC = explode(",", $ColorList);
+$selected = ((L_SELECTED_F != "") ? L_SELECTED_F : L_SELECTED);
+$not_selected = ((L_NOT_SELECTED_F != "") ? L_NOT_SELECTED_F : L_NOT_SELECTED);
+$null = ((L_NULL_F != "") ? L_NULL_F : L_NULL);
+$selected = " (".$selected.")";
+$not_selected = " ".$null." (".$not_selected.")";
 			echo("<SELECT NAME=\"COLORNAME\">\n");
 			while(list($ColorNumber1, $ColorCode) = each($CC))
 			{
 				// Red color is reserved to the admin or a moderator for the current room
 				echo("<OPTION style=\"background-color:".$ColorCode."; color:".COLOR_CD."\" VALUE=\"".$ColorCode."\"");
-				if ($COLORNAME == $ColorCode) echo(" SELECTED");
-				if ($ColorCode != "" && $ColorCode != $COLORNAME && $ColorCode != COLOR_CA && $ColorCode != COLOR_CM) echo(">".$ColorCode."</OPTION>");
-				elseif ($ColorCode == $COLORNAME && $ColorCode != "") echo(">".$ColorCode." (selected)</OPTION>");
-				elseif ($ColorCode == COLOR_CA) echo(COLOR_FILTERS ? ">".$ColorCode." (admin's)</OPTION>" : ">".$ColorCode."</OPTION>");
-				elseif ($ColorCode == COLOR_CM) echo(COLOR_FILTERS ? ">".$ColorCode." (moder's)</OPTION>" : ">".$ColorCode."</OPTION>");
-				elseif ($ColorCode == "") echo(">Null (not selected)</OPTION>");
+				if ($ColorCode != "") echo(">".$ColorCode."</OPTION>");
+				elseif ($ColorCode == "") echo(">".$not_selected."</OPTION>");
 			}
 			echo("\n</SELECT>&nbsp;\n");
 ?>

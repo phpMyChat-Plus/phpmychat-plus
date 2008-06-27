@@ -14,30 +14,49 @@ function RecursiveMkdir($path)
 }
 
 $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
+@mysql_query("SET CHARACTER SET utf8");
+mysql_query("SET NAMES 'utf8'");
 mysql_select_db(C_DB_NAME);
 
-$sql = "SELECT * FROM ".C_MSG_TBL." WHERE (m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."' AND pm_read != 'New' AND pm_read != 'Neww') ORDER BY m_time DESC";
+$sql = "SELECT * FROM ".C_MSG_TBL." WHERE (m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."' AND username != 'SYS welcome' AND pm_read NOT LIKE 'New%' AND !(username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"%')) ORDER BY m_time DESC";
 $query = mysql_query($sql) or die("Cannot query the database.<br />" . mysql_error());
 // Collect and store new messages
 $Messages = Array();
 $i = 1;
 while($result = mysql_fetch_array($query))
 {
+$type = stripslashes($result["type"]);
+if ($type) $type = '<?php echo(L_SET_10); ?>'; else $type = '<?php echo(L_SET_11); ?>';
+$room = htmlspecialchars(stripslashes($result["room"]));
+$room = $room." (".$type.")";
+$roomfrom = htmlspecialchars(stripslashes($result["room_from"]));
+if ($roomfrom != "" && $roomfrom != $room) $room = $roomfrom."><br />".$room;
 $m_time = stripslashes($result["m_time"]);
 $time_posted = date('H:i:s (d)', $m_time + C_TMZ_OFFSET*60*60);
-$room = htmlspecialchars(stripslashes($result["room"]));
-if ($room == '*') $room = '<?php echo(L_ROOM_ALL); ?>';
-$roomfrom = htmlspecialchars(stripslashes($result["room_from"]));
-if ($roomfrom != "" && $roomfrom != $room) $room = $room."<br /> ".$roomfrom;
 $username = htmlspecialchars(stripslashes($result["username"]));
 $address = htmlspecialchars(stripslashes($result["address"]));
 if ($address != "" && $address != " *" && $username != "SYS welcome" && $username != "SYS topic" && $username != "SYS topic reset" && substr($username,0,8) != "SYS dice" && $username != "SYS image" && $username != "SYS room" && $username != $address) $toaddress = " to <b>".$address."</b>";
 $address = "<b>".$address."</b>";
 if ($username == "SYS welcome") $username = $address;
+if ($room == '*' || ($address == '<b> *</b>' && $username == "SYS announce")) $room = '<?php echo(L_ROOM_ALL); ?>';
 $message = stripslashes($result["message"]);
-$message = eregi_replace("src=images","src=./../../../images",$message);
 $message = eregi_replace("<!-- UPDTUSRS //-->","",$message);
-if (eregi("stripslashes",$message) || eregi("sprintf",$message) || eregi("L_",$message))
+$message = eregi_replace("src=images","src=./../../../images",$message);
+$message = eregi_replace("src=\"images","src=\"./../../../images",$message);
+$message = eregi_replace("src=localization/","src=./../../../localization/",$message);
+$message = eregi_replace("src=\"localization/","src=\"./../../../localization/",$message);
+$message = eregi_replace("tutorial_popup.php","./../../../tutorial_popup.php",$message);
+$message = eregi_replace("help_popup.php","./../../../help_popup.php",$message);
+$message = str_replace("  "," ",$message);
+$message = str_replace("L_DEL_BYE","<?php echo(L_DEL_BYE); ?>",$message);
+$message = str_replace("L_REG_BRB","<?php echo(L_REG_BRB); ?>",$message);
+$message = str_replace("L_HELP_MR","<?php echo(L_HELP_MR); ?>",$message);
+$message = str_replace("L_HELP_MS","<?php echo(L_HELP_MS); ?>",$message);
+$message = eregi_replace('class="table"','bgcolor="lightgrey"',$message);
+$message = eregi_replace('class="tabtitle"><td colspan="7">','bgcolor="blue"><td colspan="7">',$message);
+$message = eregi_replace('class="tabtitle"><td>','bgcolor="gray"><td>',$message);
+$message = eregi_replace('class="tabtitle"><td colspan="4">','bgcolor="blue"><td colspan="4">',$message);
+if ((ereg("stripslashes",$message) || ereg("sprintf",$message) || ereg("L_",$message)) && !ereg("php echo",$message))
 {
 	$message = "<?php echo(".$message."); ?>";
 }
@@ -45,7 +64,7 @@ $message = urldecode($message);
 $message = str_replace("links.php?link=||","",$message);
 $message = eregi_replace("target=\"_blank\"></a>","target=\"_blank\">Click here</a>",$message);
 $message = eregi_replace('alt="Send email"','target="_blank" title="<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>"',$message);
-$NewMsg = "\r\n<tr>\r\n<td valign=top nowrap=\"nowrap\">".$time_posted."</td>\r\n<td valign=top nowrap=\"nowrap\">";
+$NewMsg = "\r\n<tr align=texttop valign=top>\r\n<td valign=top nowrap=\"nowrap\">".$time_posted."</td>\r\n<td valign=top nowrap=\"nowrap\">";
 $NewMsg .= $room."</td>\r\n<td valign=top nowrap=\"nowrap\">";
 $NewMsg .= "<b>".$username."</b>";
 $NewMsg .= $toaddress."</td>\r\n<td valign=top>";
@@ -75,7 +94,7 @@ elseif ($username == "SYS announce")
 }
 elseif ($username == "SYS room")
 {
-	$NewMsg .= '<b><?php echo(ROOM_SAYS); ?> </b>';
+	$NewMsg .= '<b>'.ROOM_SAYS.' </b>';
 	$NewMsg .= $message;
 }
 elseif (substr($username,0,8) == "SYS dice")
@@ -97,7 +116,7 @@ $i++;
 if ($i > 1)
 {
 $today = date('d-m-y H:i:s', time() + C_TMZ_OFFSET*60*60);
-$lastsql = "SELECT * FROM ".C_MSG_TBL." WHERE (m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."') ORDER BY m_time DESC LIMIT 1";
+$lastsql = "SELECT * FROM ".C_MSG_TBL." WHERE (m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."' AND username != 'SYS welcome' AND pm_read NOT LIKE 'New%' AND !(username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"%')) ORDER BY m_time DESC LIMIT 1";
 $lastquery = mysql_query($lastsql) or die("Cannot query the database.<br />" . mysql_error());
 while($lastresult = mysql_fetch_array($lastquery))
 {
@@ -122,11 +141,31 @@ $logpath = "./".C_LOG_DIR."/".$year."/".$month."/".$year.$month.$day.".php"  ;
 
 	if (!file_exists($logpath))
 	{
-		@copy("./".C_LOG_DIR."/header.html",$logpath);
+		@copy("./config/index/header.html",$logpath);
 		$fp = fopen($logpath, "a") ;
+		$chatSaved = '$chatSaved';
 		@flock($fp, LOCK_EX);    // Lock file in exclusive mode
-		@fwrite($fp, sprintf("\r\n<div align=\"left\"><span dir=\"LTR\" style=\"font-weight: 800; color:#00008B; font-family: helvetica, arial, geneva, sans-serif; font-size: 12pt\"><?php echo(sprintf(A_CHAT_LOGS_23,strftime(L_LONG_DATETIME,".$mess_time."))); ?></span></div>\r\n</center>\r\n"));
-		@fwrite($fp, sprintf("\r\n<!-- MESSAGES TABLE STARTS BELLOW -->\r\n\r\n<table border=1 cellspacing=0 cellpading=1>\r\n<tr style=\"font-weight:bold; color:blue; background-color=yellow\" align=\"center\">\r\n<td nowrap=\"nowrap\"><?php echo (A_POST_TIME); ?></td>\r\n<td nowrap=\"nowrap\"><?php echo (A_CHTEX_ROOM); ?></td>\r\n<td nowrap=\"nowrap\"><?php echo (A_FROM_TO); ?></td>\r\n<td><?php echo (A_CHTEX_MSG); ?></td>\r\n</tr>"));
+		@fwrite($fp, sprintf("\r\n<?php\r\n"));
+		@fwrite($fp, sprintf("$chatSaved = strftime(L_LONG_DATETIME,$mess_time);\r\n"));
+		if (eregi("win", PHP_OS))
+		{
+			@fwrite($fp, sprintf('if (!function_exists("utf_conv"))'));
+			@fwrite($fp, sprintf("\r\n"));
+			@fwrite($fp, sprintf("{\r\n"));
+			@fwrite($fp, sprintf('function utf_conv($iso,$Charset,$what)'));
+			@fwrite($fp, sprintf("\r\n"));
+			@fwrite($fp, sprintf("{\r\n"));
+			@fwrite($fp, sprintf('if (function_exists(\'iconv\')) $what = iconv($iso, $Charset, $what);'));
+			@fwrite($fp, sprintf("\r\n"));
+			@fwrite($fp, sprintf('return $what;'));
+			@fwrite($fp, sprintf("\r\n"));
+			@fwrite($fp, sprintf("};\r\n"));
+			@fwrite($fp, sprintf("};\r\n"));
+			@fwrite($fp, sprintf("if (eregi(\"win\", PHP_OS) && function_exists(\"iconv\")) $chatSaved = iconv(WIN_DEFAULT,\"utf-8\",$chatSaved);\r\n"));
+		}
+		@fwrite($fp, sprintf("?>\r\n"));
+		@fwrite($fp, sprintf("<div align=\"left\"><span dir=\"LTR\" style=\"font-weight: 800; color:#00008B; font-family: helvetica, arial, geneva, sans-serif; font-size: 12pt\"><?php echo(sprintf(A_CHAT_LOGS_23,$chatSaved)); ?></span></div>\r\n</center>\r\n"));
+		@fwrite($fp, sprintf("\r\n<!-- MESSAGES TABLE STARTS BELOW -->\r\n\r\n<table border=1 cellspacing=0 cellpading=1>\r\n<tr style=\"font-weight:bold; color:blue; background-color=yellow\" align=\"center\">\r\n<td nowrap=\"nowrap\"><?php echo (A_POST_TIME); ?></td>\r\n<td nowrap=\"nowrap\"><?php echo (A_CHTEX_ROOM); ?></td>\r\n<td nowrap=\"nowrap\"><?php echo (A_FROM_TO); ?></td>\r\n<td><?php echo (A_CHTEX_MSG); ?></td>\r\n</tr>"));
 	}
 	else
 	{
@@ -144,7 +183,7 @@ $done = 1;
 $i = 0;
 }
 
-$CondForQuery	= "(m_time < ".(time() - C_MSG_DEL*60*60)." AND (address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3'))) AND pm_read != 'New' AND pm_read != 'Neww')";
+$CondForQuery	= "(m_time<".(time() - C_MSG_DEL*60*60)." AND (address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3'))))";
 $sqlu = "SELECT * FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC";
 $queryu = mysql_query($sqlu) or die("Cannot query the database.<br />" . mysql_error());
 // Collect and store new messages
@@ -155,16 +194,30 @@ while($resultu = mysql_fetch_array($queryu))
 $m_timeu = stripslashes($resultu["m_time"]);
 $time_postedu = date('H:i:s (d)', $m_timeu + C_TMZ_OFFSET*60*60);
 $roomu = htmlspecialchars(stripslashes($resultu["room"]));
-if ($roomu == '*') $roomu = '<?php echo(L_ROOM_ALL); ?>';
 $usernameu = htmlspecialchars(stripslashes($resultu["username"]));
 $addressu = htmlspecialchars(stripslashes($resultu["address"]));
 if ($addressu != "" && $addressu != " *" && $usernameu != "SYS welcome" && $usernameu != "SYS topic" && $usernameu != "SYS topic reset" && substr($usernameu,0,8) != "SYS dice" && $usernameu != "SYS image" && $usernameu != "SYS room" && $usernameu != $addressu) $toaddressu = " to <b>".$addressu."</b>";
 $addressu = "<b>".$addressu."</b>";
 if ($usernameu == "SYS welcome") $usernameu = $addressu;
+if ($roomu == '*' || ($addressu == '<b> *</b>' && $usernameu == "SYS announce")) $roomu = '<?php echo(L_ROOM_ALL); ?>';
 $messageu = stripslashes($resultu["message"]);
-$messageu = eregi_replace("src=images","src=./../../../images",$messageu);
 $messageu = eregi_replace("<!-- UPDTUSRS //-->","",$messageu);
-if (eregi("stripslashes",$messageu) || eregi("sprintf",$messageu) || eregi("L_",$messageu))
+$messageu = eregi_replace("src=images","src=./../../../images",$messageu);
+$messageu = eregi_replace("src=\"images","src=\"./../../../images",$messageu);
+$messageu = eregi_replace("src=localization/","src=./../../../localization/",$messageu);
+$messageu = eregi_replace("src=\"localization/","src=\"./../../../localization/",$messageu);
+$messageu = eregi_replace("tutorial_popup.php","./../../../tutorial_popup.php",$messageu);
+$messageu = eregi_replace("help_popup.php","./../../../help_popup.php",$messageu);
+$messageu = str_replace("  "," ",$messageu);
+$messageu = str_replace("L_DEL_BYE","<?php echo(L_DEL_BYE); ?>",$messageu);
+$messageu = str_replace("L_REG_BRB","<?php echo(L_REG_BRB); ?>",$messageu);
+$messageu = str_replace("L_HELP_MR","<?php echo(L_HELP_MR); ?>",$messageu);
+$messageu = str_replace("L_HELP_MS","<?php echo(L_HELP_MS); ?>",$messageu);
+$messageu = eregi_replace('class="table"','bgcolor="lightgrey"',$messageu);
+$messageu = eregi_replace('class="tabtitle"><td colspan="7">','bgcolor="blue"><td colspan="7">',$messageu);
+$messageu = eregi_replace('class="tabtitle"><td>','bgcolor="gray"><td>',$messageu);
+$messageu = eregi_replace('class="tabtitle"><td colspan="4">','bgcolor="blue"><td colspan="4">',$messageu);
+if ((ereg("stripslashes",$messageu) || ereg("sprintf",$messageu) || ereg("L_",$messageu)) && !ereg("php echo",$messageu))
 {
 	$messageu = '<?php echo('.$messageu.'); ?>';
 }
@@ -172,7 +225,7 @@ $messageu = urldecode($messageu);
 $messageu = str_replace("links.php?link=||","",$messageu);
 $messageu = eregi_replace("target=\"_blank\"></a>","target=\"_blank\">Click here</a>",$messageu);
 $messageu = eregi_replace('alt="Send email"','target="_blank" title="<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>"',$messageu);
-$NewMsgu = "\r\n<tr>\r\n<td valign=top nowrap=\"nowrap\">".$time_postedu."</td>\r\n<td valign=top nowrap=\"nowrap\">";
+$NewMsgu = "\r\n<tr align=texttop valign=top>\r\n<td valign=top nowrap=\"nowrap\">".$time_postedu."</td>\r\n<td valign=top nowrap=\"nowrap\">";
 $NewMsgu .= $roomu."</td>\r\n<td valign=top nowrap=\"nowrap\">";
 $NewMsgu .= "<b>".$usernameu."</b>";
 $NewMsgu .= $toaddressu."</td>\r\n<td valign=top>";
@@ -203,7 +256,7 @@ elseif ($usernameu == "SYS announce")
 }
 elseif ($usernameu == "SYS room")
 {
-	$NewMsgu .= '<b><?php echo(ROOM_SAYS); ?> </b>';
+	$NewMsgu .= '<b>'.ROOM_SAYS.' </b>';
 	$NewMsgu .= $messageu;
 }
 elseif (substr($usernameu,0,8) == "SYS dice")
@@ -225,7 +278,7 @@ $iu++;
 if ($iu > 1)
 {
 $todayu = date('d-m-y H:i:s', time() + C_TMZ_OFFSET*60*60);
-$lastsqlu = "SELECT * FROM ".C_MSG_TBL." WHERE (m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."') ORDER BY m_time DESC LIMIT 1";
+$lastsqlu = "SELECT * FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC LIMIT 1";
 $lastqueryu = mysql_query($lastsqlu) or die("Cannot query the database.<br />" . mysql_error());
 while($lastresultu = mysql_fetch_array($lastqueryu))
 {
@@ -250,11 +303,31 @@ $logpathu = "./logs/".$yearu."/".$monthu."/".$yearu.$monthu.$dayu.".php"  ;
 
 	if (!file_exists($logpathu))
 	{
-		@copy("./".C_LOG_DIR."/header.html",$logpathu);
+		@copy("./config/index/header.html",$logpathu);
 		$fpu = fopen($logpathu, "a") ;
+		$chatSavedu = '$chatSavedu';
 		@flock($fpu, LOCK_EX);    // Lock file in exclusive mode
-		@fwrite($fpu, sprintf("\r\n<div align=\"left\"><span dir=\"LTR\" style=\"font-weight: 800; color:#00008B; font-family: helvetica, arial, geneva, sans-serif; font-size: 12pt\"><?php echo(sprintf(A_CHAT_LOGS_23,strftime(L_LONG_DATETIME,".$mess_timeu."))); ?></span></div>\r\n</center>\r\n"));
-		@fwrite($fpu, sprintf("\r\n<!-- MESSAGES TABLE STARTS BELLOW -->\r\n\r\n<table border=1 cellspacing=0 cellpading=1>\r\n<tr style=\"font-weight:bold; color:blue; background-color=yellow\" align=\"center\">\r\n<td nowrap=\"nowrap\"><?php echo (A_POST_TIME); ?></td>\r\n<td nowrap=\"nowrap\"><?php echo (A_CHTEX_ROOM); ?></td>\r\n<td nowrap=\"nowrap\"><?php echo (A_FROM); ?></td>\r\n<td><?php echo (A_CHTEX_MSG); ?></td>\r\n</tr>"));
+		@fwrite($fpu, sprintf("\r\n<?php\r\n"));
+		@fwrite($fpu, sprintf("$chatSavedu = strftime(L_LONG_DATETIME,$mess_timeu);\r\n"));
+		if (eregi("win", PHP_OS))
+		{
+			@fwrite($fpu, sprintf('if (!function_exists("utf_conv"))'));
+			@fwrite($fpu, sprintf("\r\n"));
+			@fwrite($fpu, sprintf("{\r\n"));
+			@fwrite($fpu, sprintf('function utf_conv($iso,$Charset,$what)'));
+			@fwrite($fpu, sprintf("\r\n"));
+			@fwrite($fpu, sprintf("{\r\n"));
+			@fwrite($fpu, sprintf('if (function_exists(\'iconv\')) $what = iconv($iso, $Charset, $what);'));
+			@fwrite($fpu, sprintf("\r\n"));
+			@fwrite($fpu, sprintf('return $what;'));
+			@fwrite($fpu, sprintf("\r\n"));
+			@fwrite($fpu, sprintf("};\r\n"));
+			@fwrite($fpu, sprintf("};\r\n"));
+			@fwrite($fpu, sprintf("if (eregi(\"win\", PHP_OS) && function_exists(\"iconv\")) $chatSavedu = iconv(WIN_DEFAULT,\"utf-8\",$chatSavedu);\r\n"));
+		}
+		@fwrite($fpu, sprintf("?>\r\n"));
+		@fwrite($fpu, sprintf("<div align=\"left\"><span dir=\"LTR\" style=\"font-weight: 800; color:#00008B; font-family: helvetica, arial, geneva, sans-serif; font-size: 12pt\"><?php echo(sprintf(A_CHAT_LOGS_23,$chatSavedu)); ?></span></div>\r\n</center>\r\n"));
+		@fwrite($fpu, sprintf("\r\n<!-- MESSAGES TABLE STARTS BELOW -->\r\n\r\n<table border=1 cellspacing=0 cellpading=1>\r\n<tr style=\"font-weight:bold; color:blue; background-color=yellow\" align=\"center\">\r\n<td nowrap=\"nowrap\"><?php echo (A_POST_TIME); ?></td>\r\n<td nowrap=\"nowrap\"><?php echo (A_CHTEX_ROOM); ?></td>\r\n<td nowrap=\"nowrap\"><?php echo (A_FROM); ?></td>\r\n<td><?php echo (A_CHTEX_MSG); ?></td>\r\n</tr>"));
 	}
 	else
 	{
@@ -273,7 +346,8 @@ $iu = 0;
 }
 if ($done == 1 || $doneu == 1)
 {
-$delsql = "DELETE FROM ".C_MSG_TBL." WHERE m_time < ".(time() - C_MSG_DEL*60*60)." AND pm_read != 'New' AND pm_read != 'Neww'";
+// Delete the exported messages as well as the unread off-line pms older than 1 month
+$delsql = "DELETE FROM ".C_MSG_TBL." WHERE ((m_time < ".(time() - C_MSG_DEL * 60 * 60)." AND pm_read NOT LIKE 'New%') OR (m_time > ".(time() - ((C_MSG_DEL + (C_PM_KEEP_DAYS * 24)) * 60 * 60)).")) AND !(username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"%')";
 $delquery = mysql_query($delsql) or die("Cannot query the database.<br />" . mysql_error());
 }
 ?>

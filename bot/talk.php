@@ -37,47 +37,59 @@
 /**
 * Include the guts of the program.
 */
+session_start();
+$myuniqueid=session_id();
+?>
+	<html>
+	<head>
+	<title>Sample talk to Program E page</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<LINK REL="stylesheet" HREF="../skins/style1.css.php?Charset=uft-8&medium=10" TYPE="text/css">
+	</head>
+	<body class="frame" onload="document.forms['form1'].elements['input'].focus();">
+	<p align="left" class="title">Sample talk to Program E page</font></b></p>
+<?php
 include "respond_talk.php";
-
 if (isset($_POST['input'])){
 
 	$numselects=0;
 
 	// Start the session or get the existing session.
-	session_start();
-	$myuniqueid=session_id();
 
 	// Here is where we get the reply.
 	$botresponse=replybotname($_POST['input'],$myuniqueid,$_POST['botname']);
 
-	// Print the results.
-	print "<B>RESPONSE: " . $botresponse->response . "<br /></b>";
-	print "<br /><br />execution time: " . $botresponse->timer;
-	print "<br />numselects= $numselects";
-
-	//print_r($botresponse->inputs);
-	//print_r($botresponse->patternsmatched);
-
 	// Include a form so they can say more. Note the hidden part for people that do not have trans sid on but want non-cookie users to be able to use the system.
-
 	?>
-
-	<html>
-	<head>
-	<title>Sample talk to Program E page</title>
-	</head>
-	<body>
-	<form name="form1" method="post" action="talk.php">
-	<input type="hidden" name="<?=session_name()?>" value="<?=$uid?>">
-	<input type="hidden" name="botname" value="<?=$_POST['botname']?>">
-	  Input: <input type="text" name="input" size="55">
-
-	  <input type="submit" name="Submit" value="Submit">
+	<p><form name="form1" method="post" action="talk.php">
+	<input type="hidden" name="<?php echo(session_name()); ?>" value="<?php echo($uid); ?>">
+	<input type="hidden" name="botname" value="<?php echo($_POST['botname']); ?>">
+	<input type="hidden" name="debug" value="<?php echo($_POST['debug']); ?>">
+	<b>Talk to:</b> <select name="botname" disabled><option value="<?php echo($_POST['botname']); ?>"><?php echo($_POST['botname']); ?></option></select><br />
+		<b>Input:</b> <input type="text" name="input" size="55">
+		<input type="submit" name="Submit" value="Submit"><br /><br />
+		<b>Display debug data:</b> 
+		<input type="radio" name="debug" value="0" default <?php if(!$_POST['debug']) echo("checked=\"checked\""); ?>> Off <input type="radio" name="debug" value="1" <?php if($_POST['debug']) echo("checked=\"checked\""); ?>> On</p>
 	</form>
-	</body>
-	</html>
-
-<?
+<?php
+	// Print the results.
+	print("<p><table class=\"msg2\"><tr><td><b><font color=\"orange\">Your input:</font></b></td><td><b><font color=\"blue\"> ".$_POST['input']."</font></b></td></tr>");
+	print("<tr><td><b><font color=\"green\">".$_POST['botname']." response:</font></b></td><td><b><font color=\"red\"> ".$botresponse->response."</font></b></td></tr></table></p>");
+	print("<b><font color=\"yellow\">Execution time:</font> " . $botresponse->timer."<br /></b>");
+	if ($debug)
+	{
+		print("<b><font color=\"yellow\">Numselects:</font> ".$numselects);
+		print("<br /><font color=\"yellow\">Session:</font> ".$myuniqueid);
+		print("<br /><font color=\"yellow\">Inputs:</font> ");
+		print_r($botresponse->inputs);
+		print("<br /><font color=\"yellow\">Paterns:</font> ");
+		print_r($botresponse->patternsmatched);
+		if ($botresponse->errors)
+		{
+			print("<br /><font color=\"red\">Errors:</font> ");
+			print_r($botresponse->errors);
+		}
+	}
 }
 else {
 
@@ -99,34 +111,24 @@ else {
     }
 
 	?>
-
-	<html>
-	<head>
-	<title>Program E Tester</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-	</head>
-
-	<body bgcolor="#FFFFFF" text="#000000">
 	<form name="form1" method="post" action="talk.php">
-
-	Talk to: <select name="botname">
-	<?
+	<input type="hidden" name="debug" value="<?php echo($_POST['debug']); ?>">
+	<b>Talk to:</b> <select name="botname">
+	<?php
 	foreach ($availbots as $onebot){
 		print "<option value=\"$onebot\">$onebot</option>";
 	}
 	?>
 	</select><br />
-
-	  Input: <input type="text" name="input" size="55">
-
-	  <input type="submit" name="Submit" value="Submit">
+		<b>Input:</b> <input type="text" name="input" size="55">
+		<input type="submit" name="Submit" value="Submit"><br /><br />
+		<b>Display debug data:</b> 
+		<input type="radio" name="debug" value="0" default <?php if(!$_POST['debug']) echo("checked=\"checked\""); ?>> Off <input type="radio" name="debug" value="1" <?php if($_POST['debug']) echo("checked=\"checked\""); ?>> On
 	</form>
-
-	</body>
-	</html>
-
-	<?
-
+	<?php
 }
-
+?>
+</body>
+</html>
+<?php
 ?>

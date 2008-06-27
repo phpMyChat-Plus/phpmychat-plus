@@ -4,7 +4,7 @@
 
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
 
-if (isset($FORM_SEND) && $FORM_SEND == 3)
+if (isset($FORM_SEND) && $FORM_SEND == 3 && isset($DelRooms))
 {
 	for (reset($DelRooms); $room=current($DelRooms); next($DelRooms))
 	{
@@ -22,7 +22,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 3)
 			sleep(2);
 		}
 		// Remove permissions for that room when it's not a default one (define in config.lib.php)
-		if (!room_in(stripslashes($room), $DefaultChatRooms))
+		if (!room_in(stripslashes($room), $DefaultChatRooms, $Charset))
 		{
 			$UpdLink = new DB;
 			$DbLink->query("SELECT username,rooms FROM ".C_REG_TBL." WHERE perms='moderator'");
@@ -32,7 +32,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 3)
 				$roomTab = explode(",",$mod_rooms);
 				for ($i = 0; $i < count($roomTab); $i++)
 				{
-					if (strcasecmp(stripslashes($room), $roomTab[$i]) == 0)
+					if (strcasecmp(mb_convert_case(stripslashes($room),MB_CASE_LOWER,$Charset), mb_convert_case($roomTab[$i],MB_CASE_LOWER,$Charset)) == 0)
 					{
 						$roomTab[$i] = "";
 						$changed = true;

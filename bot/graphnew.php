@@ -257,7 +257,7 @@ function graphwalker($input,$parent,$timesthrough,$onwild,$parton,&$inputstarval
 
 		// If we found a result and our word was "" then we have reached the end of the pattern so we return the template associated.
 		if ($word==""){
-			debugger("Result not blank and word is. Returning the found temlate",2);
+			debugger("Result not blank and word is. Returning the found template",2);
 			#return findtemplate($whichresult[1]);
 			return $whichresult[1];
 		}
@@ -549,7 +549,7 @@ function addtostar($parton,$word,&$inputstarvals,&$thatstarvals,&$topicstarvals,
 *
 * @return string                          words to be saved by {@link addtostar()}
 */
-function fastforward($word,$ffremains){
+function fastforward($word,&$ffremains){
 
 	$starwords=$word;
 

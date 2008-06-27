@@ -10,24 +10,37 @@ if (isset($_GET))
 
 // Added for Skin mod
 if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
-
-if (!isset($L) && isset($_COOKIE["CookieLang"])) $L = $_COOKIE["CookieLang"]; 
 if (isset($_COOKIE["CookieUsername"])) $U = urldecode($_COOKIE["CookieUsername"]);
 
-// Fix a security hole
-if (isset($L) && !is_dir("./localization/".$L)) exit();
+// Fix some security holes
+if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
+if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) exit();
+if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
-require("./config/config.lib.php");
-require("./localization/".$L."/localized.chat.php");
-require("./lib/database/".C_DB_TYPE.".lib.php");
+require("./${ChatPath}config/config.lib.php");
+require("./${ChatPath}localization/languages.lib.php");
+require("./${ChatPath}localization/".$L."/localized.chat.php");
+require("./${ChatPath}lib/database/".C_DB_TYPE.".lib.php");
 
 header("Content-Type: text/html; charset=${Charset}");
+
+// avoid server configuration for magic quotes
+set_magic_quotes_runtime(0);
+// Can't turn off magic quotes gpc so just redo what it did if it is on.
+if (get_magic_quotes_gpc()) {
+	foreach($_GET as $k=>$v)
+		$_GET[$k] = stripslashes($v);
+	foreach($_POST as $k=>$v)
+		$_POST[$k] = stripslashes($v);
+	foreach($_COOKIE as $k=>$v)
+		$_COOKIE[$k] = stripslashes($v);
+}
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 <HEAD>
-	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=${Charset}">
+	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo(${Charset}); ?>">
 	<TITLE><?php echo(L_PRIV_POST_MSG); ?></TITLE>
 	<LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <SCRIPT TYPE="text/javascript" LANGUAGE="javascript1.2">
@@ -82,6 +95,6 @@ return true;
 </FORM>
 </CENTER>
 <P align="right"><div align="right"><span dir="LTR" style="font-weight: 600; color:#FFD700; font-size: 7pt">
-&copy; 2005-<?php echo(date(Y)); ?> - by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo (($L!="turkish") ? sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR) : sprintf(L_CLICKS,L_AUTHOR,L_LINKS_6)); ?>.'; return true;" title="<?php echo (($L!="turkish") ? sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR) : sprintf(L_CLICKS,L_AUTHOR,L_LINKS_6)); ?>" target=_blank>Ciprian Murariu</a></span></div></P>
+&copy; 2005-<?php echo(date('Y')); ?> - by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>.'; return true;" title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>" target=_blank>Ciprian Murariu</a></span></div>
 </BODY>
 </HTML>

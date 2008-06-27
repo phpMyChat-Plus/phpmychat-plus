@@ -8,7 +8,10 @@ if (isset($_GET))
 	};
 };
 
+// Sort order by Ciprian
 if (!isset($sort_order)) $sort_order = isset($CookieUserSort) ? $CookieUserSort : C_USERS_SORT_ORD;
+if ($sort_order == "1")	$ordquery = "u.username";
+else $ordquery = "u.r_time";
 
 // Fix a security holes
 if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
@@ -19,25 +22,35 @@ require("./${ChatPath}/lib/clean.lib.php");
 
 	if ($Private)
 	{
-		if ($sort_order == "1")	$ordquery = "username";
-		else $ordquery = "r_time";
 		// Ghost Control mod by Ciprian
-		$Hide = (C_HIDE_ADMINS && C_HIDE_MODERS) ? "WHERE ((status != 'a' AND status != 't') OR email = 'bot@bot.com') AND status != 'm'" : (C_HIDE_ADMINS ? "WHERE ((status != 'a' AND status != 't') OR email = 'bot@bot.com')" : (C_HIDE_MODERS ? "WHERE status !='m'" : ""));
-		$query = "SELECT DISTINCT username, latin1, room, r_time FROM ".C_USR_TBL." ORDER BY ".$ordquery."";
+		$Hide = "";
+		if (C_HIDE_ADMINS) $Hide .= ($Hide == "") ? " WHERE (u.status != 'a' OR u.username = '".C_BOT_NAME."') AND u.status != 't'" : " AND (u.status != 'a' OR u.username = '".C_BOT_NAME."') AND u.status != 't'";
+		if (C_HIDE_MODERS) $Hide .= ($Hide == "") ? " WHERE u.status != 'm'" : " AND u.status != 'm'";
+		if (C_SPECIAL_GHOSTS != "")
+		{
+			$sghosts = eregi_replace("username","u.username",C_SPECIAL_GHOSTS);
+			$Hide .= ($Hide == "") ? " WHERE u.username != ".$sghosts."" : " AND u.username != ".$sghosts."";
+		}
+		$query = "SELECT DISTINCT u.username, u.latin1, u.room, u.r_time FROM ".C_USR_TBL." u ".$Hide." ORDER BY ".$ordquery."";
 	}
 	else
 	{
-		if ($sort_order == "1")	$ordquery = "username";
-		else $ordquery = "r_time";
 		// Ghost Control mod by Ciprian
-		$Hide = (C_HIDE_ADMINS && C_HIDE_MODERS) ? "AND ((u.status != 'a' AND u.status != 't') OR u.email = 'bot@bot.com') AND u.status != 'm'" : (C_HIDE_ADMINS ? "AND ((u.status != 'a' AND u.status != 't') OR u.email = 'bot@bot.com')" : (C_HIDE_MODERS ? "AND u.status !='m'" : ""));
-		$query = "SELECT DISTINCT u.username, u.latin1, u.room, u.r_time FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room AND m.type = 1 ".$Hide." ORDER BY ".$ordquery."";
+		$Hide = "";
+		if (C_HIDE_ADMINS) $Hide .= " AND (u.status != 'a' OR u.username = '".C_BOT_NAME."') AND u.status != 't'";
+		if (C_HIDE_MODERS) $Hide .=  " AND u.status != 'm'";
+		if (C_SPECIAL_GHOSTS != "")
+		{
+			$sghosts = eregi_replace("username","u.username",C_SPECIAL_GHOSTS);
+			$Hide .= " AND u.username != ".$sghosts."";
+		}
+		$query = "SELECT DISTINCT u.username, u.latin1, u.room, u.r_time, u.status FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room AND m.type = 1 ".$Hide." ORDER BY ".$ordquery."";
 	}
 	$DbLink = new DB;
 	$DbLink->query($query);
 	$NbUsers = $DbLink->num_rows();
 
-function display_connected($Private,$Full,$NU,$String1,$String2,$DbLink)
+function display_connected($Private,$Full,$NU,$String1,$String2,$DbLink,$Charset)
 {
 	$List = "";
 
@@ -45,12 +58,13 @@ function display_connected($Private,$Full,$NU,$String1,$String2,$DbLink)
 	{
 		if ($Full)
 		{
-			echo($String1."<br />");
-			while(list($User,$Latin1,$Room,$RTime) = $DbLink->next_record())
+			echo($String1);
+			while(list($User,$Latin1,$Room,$RTime,$Status) = $DbLink->next_record())
 			{
 				if ($Latin1) $User = htmlentities($User);
+				$User = user_status($User,$Status);
 				$RTime = date("d-M, H:i:s", $RTime + C_TMZ_OFFSET*60*60);
-				$List .= ($List == "" ? "<tr><td nowrap=\"nowrap\">".$User."</td><td nowrap=\"nowrap\">".$Room."</td><td nowrap=\"nowrap\"> ".L_LURKING_4." ".$RTime."</td></tr>" : "<tr><td nowrap=\"nowrap\">".$User."</td><td nowrap=\"nowrap\">".$Room."</td><td align=center nowrap=\"nowrap\"> ".L_LURKING_4." ".$RTime."");
+				$List .= "<tr><td nowrap=\"nowrap\">".$User."</td><td nowrap=\"nowrap\">".$Room."</td><td nowrap=\"nowrap\">".L_LURKING_4." ".$RTime."";
 			}
 			echo($List);
 		}

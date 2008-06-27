@@ -1,4 +1,4 @@
-<?
+<?php
 // Get the names and values for vars sent to this script
 if (isset($_GET))
 {
@@ -8,7 +8,7 @@ if (isset($_GET))
 	};
 };
 
-// Get the names and values for vars posted from the form bellow
+// Get the names and values for vars posted from the form below
 if (isset($_POST))
 {
 	while(list($name,$value) = each($_POST))
@@ -41,6 +41,15 @@ header("Content-Type: text/html; charset={$Charset}");
 
 // avoid server configuration for magic quotes
 set_magic_quotes_runtime(0);
+// Can't turn off magic quotes gpc so just redo what it did if it is on.
+if (get_magic_quotes_gpc()) {
+	foreach($_GET as $k=>$v)
+		$_GET[$k] = stripslashes($v);
+	foreach($_POST as $k=>$v)
+		$_POST[$k] = stripslashes($v);
+	foreach($_COOKIE as $k=>$v)
+		$_COOKIE[$k] = stripslashes($v);
+}
 
 if ($perms == "admin" || $perms == "topmod") $Msg = L_ERR_USR_12;
 
@@ -58,34 +67,58 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_20)
 			  list($FIRSTNAME, $LASTNAME, $COUNTRY, $WEBSITE, $EMAIL, $SHOWEMAIL, $GENDER, $ALLOWPOPUP, $PICTURE, $DESCRIPTION, $FAVLINK, $FAVLINK1, $SLANG) = $DbLink->next_record();
 	}
      if (($GENDER & 3) == 1) {
-       $sex = " male";
+       $sex = "male";
      } elseif (($GENDER & 3) == 2 ) {
-       $sex = " female";
+       $sex = "female";
+     } elseif (($GENDER & 3) == 3 ) {
+       $sex = "couple";
      } else {
-       $sex = " unspecified";
+       $sex = "unspecified";
      }
+     if ($showemail) {
+       $shweml = "yes";
+     } else {
+       $shweml = "no";
+     }
+     if ($allowpopup) {
+       $allpopup = "yes";
+     } else {
+       $allpopup = "no";
+     }
+	 if ($USE_GRAV) {
+	   $usegrav = "yes";
+	 } else {
+	   $usegrav = "no";
+	 }
 	     $tm = getdate();
 	     $dt = $tm[mon]."/".$tm[mday]."/".$tm[year];
-	     $tm = sprintf("%02.u:%02.u:%02.u",$tm[hours],$tm[minutes],$tm[seconds]);
+	     $ti = sprintf("%02.u:%02.u:%02.u",$tm[hours],$tm[minutes],$tm[seconds]);
      $emailMessage = "User account deleted from "
-     . ((C_CHAT_NAME != "") ? C_CHAT_NAME." - ".APP_NAME : APP_NAME) ." at ". C_CHAT_URL." :\n\n"
+     . ((C_CHAT_NAME != "") ? C_CHAT_NAME." - ".APP_NAME : APP_NAME) ." at ". C_CHAT_URL." :\r\n\r\n"
      . "----------------------------------------------\n"
-     . "Username: ".stripslashes($pmc_username)."\n\n"
-     . "----------------------------------------------\n"
-     . "First name: ".stripslashes($FIRSTNAME)."\n"
-     . "Last name: ".stripslashes($LASTNAME)."\n"
-     . "Gender: $sex\n"
-     . "Email: $EMAIL\n"
-     . "Country: ".stripslashes($COUNTRY)."\n"
-     . "WWW: ".stripslashes($WEBSITE)."\n"
-     . "Spoken languages: ".stripslashes($SLANG)."\n"
-     . "Description: ".stripslashes($DESCRIPTION)."\n"
-     . "Favorite link 1: ".stripslashes($FAVLINK)."\n"
-     . "Favorite link 2: ".stripslashes($FAVLINK1)."\n"
-     . "Picture: ".stripslashes($PICTURE)."\n"
-     . "Date of deletion: $dt\n"
-     . "Time of deletion: $tm\n"
-     . "IP address: $IP (".gethostbyaddr($IP).")\n"
+     . "Deleted Username: ".$pmc_username."\r\n\r\n"
+     . "----------------------------------------------\r\n\r\n"
+     . "Secret question: ".$SECRET_QUESTION."\r\n"
+     . "Secret answer: ".$SECRET_ANSWER."\r\n"
+     . "Email: ".$EMAIL."\r\n"
+     . "First name: ".$FIRSTNAME."\r\n"
+     . "Last name: ".$LASTNAME."\r\n"
+     . "Gender: ".$sex."\r\n"
+     . "Country: ".$COUNTRY."\r\n"
+     . "WWW: ".$WEBSITE."\r\n"
+     . "Spoken languages: ".$SLANG."\r\n"
+     . "Description: ".$DESCRIPTION."\r\n"
+     . "Favorite link 1: ".$FAVLINK."\r\n"
+     . "Favorite link 2: ".$FAVLINK1."\r\n"
+     . "Picture: ".$PICTURE."\r\n"
+     . "Color name/text: ".$C." (".(COLOR_NAMES ? "Enabled" : "Disabled").")\r\n"
+     . "Display email address on public info: ".$shweml."\r\n"
+     . "Open popups on private message: ".$allpopup."\r\n"
+	 . "Use the Gravatar: ".$usegrav." (".(!ALLOW_GRAVATARS ? "Disabled" : "Enabled").")\r\n"
+	 . "----------------------------------------------\r\n"
+	 . "Preffered language: ".$L." \r\n"
+     . "Deletion on: $dt $ti\r\n"
+     . "IP address: $IP (".gethostbyaddr($IP).")\r\n"
      . "----------------------------------------------";
 		$Headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
 		$Headers .= "X-Sender: <${Sender_email}> \r\n";
@@ -93,10 +126,11 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_20)
 		$Headers .= "Return-Path: <${Sender_email}> \r\n";
 		$Headers .= "Date: ${mail_date} \r\n";
 		$Headers .= "Mime-Version: 1.0 \r\n";
-		$Headers .= "Content-Type: text/plain; charset=${Charset} \r\n";
+		$Headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed \r\n";
 		$Headers .= "Content-Transfer-Encoding: 8bit \r\n";
-     mail(C_ADMIN_EMAIL,"[".((C_CHAT_NAME != "") ? C_CHAT_NAME." - ".APP_NAME : APP_NAME)."] "
-     . stripslashes($pmc_username)." - User Account Deletion Notification",$emailMessage, $Headers);
+		$Subject = "User Account Deletion - ".$pmc_username." - from [".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]";
+		$Subject = quote_printable($Subject,$Charset);
+    @mail(C_ADMIN_EMAIL,$Subject,$emailMessage, $Headers);
 // end of patch to send an email to the Admin at the time of user account deletion.
 	}
 	$DbLink->query("DELETE FROM ".C_REG_TBL." WHERE username='$pmc_username'");
@@ -111,7 +145,7 @@ if (!isset($FontName)) $FontName = "";
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
-<TITLE><?php echo((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME); ?></TITLE>
+<TITLE><?php echo(L_REG_13." - ".(C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 </HEAD>
 
@@ -120,8 +154,8 @@ if (!isset($FontName)) $FontName = "";
 <br />
 <FORM ACTION="deluser.php" METHOD="POST" AUTOCOMPLETE="" NAME="DelUsrForm">
 <INPUT type="hidden" name="FORM_SEND" value="1">
-<INPUT type="hidden" name="pmc_username" value="<?echo(htmlspecialchars(stripslashes($pmc_username)))?>">
-<INPUT type="hidden" name="pmc_password" value="<?echo(htmlspecialchars(stripslashes($pmc_password)))?>">
+<INPUT type="hidden" name="pmc_username" value="<?php echo(htmlspecialchars(stripslashes($pmc_username))); ?>">
+<INPUT type="hidden" name="pmc_password" value="<?php echo(htmlspecialchars(stripslashes($pmc_password))); ?>">
 <?php
 if(isset($Error))
 {
@@ -142,7 +176,7 @@ if(isset($Error))
 			</TD>
 		</TR>
 		</TABLE>
-		<?if (!isset($Msg)) {?>
+		<?php if (!isset($Msg)) { ?>
 		<P>
 		<TABLE border=0>
 		<TR>
@@ -150,10 +184,10 @@ if(isset($Error))
 			<TD><INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(L_REG_22); ?>" onClick="self.close(); return false;"></TD>
 		</TR>
 		</TABLE>
-		<?} else {?>
+		<?php } else { ?>
 		<P>
 		<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(L_REG_25); ?>" onClick="self.close(); return false;">
-		<?}?>
+		<?php } ?>
 	</TD>
 </TR>
 </TABLE>

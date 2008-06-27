@@ -1,4 +1,4 @@
-<?
+<?php
 // This library allows to ensure the user who wants to enter in the chat is not a
 // banished one.
 // Additional credits for this lib go to Tomas Haluza (<thaluza@kiss.cz>),
@@ -31,7 +31,7 @@ if (C_BAN_IP) // ban only by IP
 }
 else // ban by both IP or username
 {
-	$DbLink->query("SELECT ip,rooms,reason FROM ".C_BAN_TBL." WHERE ip='$IP' or username='$U' LIMIT 1");
+	$DbLink->query("SELECT ip,rooms,reason FROM ".C_BAN_TBL." WHERE ip='$IP' and username='$U' LIMIT 1");
 }
 $Nb = $DbLink->num_rows();
 // Nick of the user is banished from some rooms
@@ -48,19 +48,19 @@ if ($Nb != "0")
 	}
 	elseif (isset($R3) && $R3 != "")
 	{
-		if (room_in($R3, $BanishedFromRooms)) $IsBanished = true;
+		if (room_in($R3, $BanishedFromRooms, $Charset)) $IsBanished = true;
 	}
 	elseif (isset($R2) && $R2 != "")
 	{
-		if (room_in($R2, $BanishedFromRooms)) $IsBanished = true;
+		if (room_in($R2, $BanishedFromRooms, $Charset)) $IsBanished = true;
 	}
 	elseif (isset($R1) && $R1 != "")
 	{
-		if (room_in($R1, $BanishedFromRooms)) $IsBanished = true;
+		if (room_in($R1, $BanishedFromRooms, $Charset)) $IsBanished = true;
 	}
 	elseif (isset($R0) && $R0 != "")
 	{
-		if (room_in($R0, $BanishedFromRooms)) $IsBanished = true;
+		if (room_in($R0, $BanishedFromRooms, $Charset)) $IsBanished = true;
 	};
 
 	// Update the IP of the user in the banished table when necessary
@@ -76,7 +76,7 @@ else
 	}
 	else // ban by both IP or username
 	{
-		$DbLink->query("SELECT rooms,ban_until,reason FROM ".C_BAN_TBL." WHERE ip='$IP' or username='$U' LIMIT 1");
+		$DbLink->query("SELECT rooms,ban_until,reason FROM ".C_BAN_TBL." WHERE ip='$IP' and username='$U' LIMIT 1");
 	}
 	$Nb = $DbLink->num_rows();
 	// IP is banished from some rooms
@@ -93,19 +93,19 @@ else
 		}
 		elseif (isset($R3) && $R3 != "")
 		{
-			if (room_in($R3, $BanishedFromRooms)) $IsBanished = true;
+			if (room_in($R3, $BanishedFromRooms, $Charset)) $IsBanished = true;
 		}
 		elseif (isset($R2) && $R2 != "")
 		{
-			if (room_in($R2, $BanishedFromRooms)) $IsBanished = true;
+			if (room_in($R2, $BanishedFromRooms, $Charset)) $IsBanished = true;
 		}
 		elseif (isset($R1) && $R1 != "")
 		{
-			if (room_in($R1, $BanishedFromRooms)) $IsBanished = true;
+			if (room_in($R1, $BanishedFromRooms, $Charset)) $IsBanished = true;
 		}
 		elseif (isset($R0) && $R0 != "")
 		{
-			if (room_in($R0, $BanishedFromRooms)) $IsBanished = true;
+			if (room_in($R0, $BanishedFromRooms, $Charset)) $IsBanished = true;
 		};
 
 		// Add the user to the banished table when necessary

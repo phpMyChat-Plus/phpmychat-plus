@@ -139,7 +139,7 @@ I cannot make any changes in the admin panel. It says it was successfully update
 10A.
 a. A reason could be if you use the ' character in a field, without commenting it out with a backslash \.
 Example:
-If a room name is called Men’s Room, you have to comment it out with \' like this: Men\'s Room.
+If a room name is called Men's Room, you have to comment it out with \' like this: Men\'s Room.
 But I strongly recommend you avoid ussage of the ' (use ’ instead) or \ chars in your chat setting values.
 b. There is something wrong in your database (c_config table) like the order of the fields or types/sizes of them.
 c. You’re using a wrong config/config.lib.php file - if you upgraded (make sure you replaced the old one with the new released one)
@@ -194,16 +194,17 @@ Now, to get rid of a dead bot in chat, you have to follow 2 steps:
 16Q.
 How do I add my own expressions in chat. Like "administrator" to be called "master", "moderator" to be called "operator" and so on?
 16A.
-There is a folder called plus/localization/_owner which contains the file localized.owner.php (starting with 1.91-beta5 only). Open that file and also open the specific language file you want to modify.
+There is a folder called plus/localization/_owner which contains the file owner.php (starting with 1.91-beta5 only). Open that file and also open the specific language file you want to modify.
 Search for the expression you want to modify. In this example, the lines would be:
 define("L_WHOIS_ADMIN", "Administrator");
 define("L_WHOIS_MODER", "Moderator");
-Paste the lines in the plus/localization/_owner/localized.owner.php file and change them to:
+Paste the lines in the plus/localization/_owner/owner.php file and change them to:
 define("L_WHOIS_ADMIN", "Master");
 define("L_WHOIS_MODER", "Operator");
 Save the file and upload it to ftp. That’s all!
-Important: never change directly the files provided in localization/"language"/ folder - if you do so, you will fail to upgrade your chat in the future without loosing your personalizations.
-Note: You can do the same with expressions from localized.admin.php and localized.tutorial.php - all should be redefined only in plus/localization/_owner/localized.owner.php
+Important: never change directly the files provided in localization/"language"/ folders - if you do so, you will fail to upgrade your chat in the future without loosing your personalizations.
+Note: You can do the same with expressions from localized.admin.php and localized.tutorial.php - all should be redefined only in plus/localization/_owner/owner.php. 
+Note2: The new expresions will be shown regardless the language selected by user (Turkish users won't see "Yonetici" anymore but "Master")
 
 17Q.
 As soon as the install is over it will not load phpMyChat.  I get the following error:

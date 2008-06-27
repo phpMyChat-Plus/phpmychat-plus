@@ -56,7 +56,7 @@ class Response
 /**
 * subs.inc has all of the substitution values and sentence splitter values
 */
-require_once "bot/subs.inc";
+require_once "${BotPath}subs.inc";
 
 // Initialize information for search replace routines
 $replacecounter=1;
@@ -83,7 +83,7 @@ function make_seed() {
 *
 * @uses make_seed()
 *
-* @return void        nothing, deletes database entires
+* @return void        nothing, deletes database entries
 */
 function cleanup(){
 
@@ -225,10 +225,22 @@ function getid(){
 * @return string          formated date string, Day name, Month name, day number month, time, time zone and year.
 *
 */
+/* Deprecated
 function getfdate(){
 
-	return date("D M j G:i:s T Y");
+	return date("l, d F Y H:i:s T");
 
+}
+*/
+function getfdate($date_format){
+// Set the US specific date/time format
+if (eregi("win", PHP_OS)) {
+setlocale(LC_TIME, "eng-usa.UTF-8", "eng-usa");
+} else {
+setlocale(LC_TIME, "en_US.UTF-8", "enu.UTF-8", "usa.UTF-8", "enu_enu.UTF-8", "English-usa.UTF-8");
+}
+	if ($date_format == "") $date_format = "%A, %d of %B %Y %H:%M:%S (%z)";
+	return strftime($date_format);
 }
 
 /**
@@ -462,8 +474,10 @@ function logconversation($input,$response){
 
 	global $uid, $selectbot;
 
-	$input=addslashes($input);
+  $input = addslashes($input);
 	$response=addslashes($response);
+  $input = str_replace("\\\'", "'", $input);
+  $input = str_replace("&#39;", "'", $input);
 
 	$query="insert into bot_conversationlog (uid,input,response,bot) values ('$uid','$input','$response',$selectbot)";
 	$selectcode = mysql_query($query);
@@ -561,7 +575,7 @@ function getinput($index){
 * Take the user input and do all substitutions and split it into sentences
 *
 * The matching process searches a match for every sentence and in the end combines all
-* those individual matches into one reply. This funtion splits the sentences of the user's
+* those individual matches into one reply. This function splits the sentences of the user's
 * input, replaces the words that need to be subtituted (found in startup.xml).
 *
 *

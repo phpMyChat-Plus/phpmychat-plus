@@ -1,5 +1,5 @@
 <?php
-// File : german/localized.admin.php - plus version (11.06.2007 - rev.9)
+// File : german/localized.admin.php - plus version (20.05.2008 - rev.12)
 // Original translation by Robert Schaller <robert@schaller.com> & Wolfgang Schneider <schneider@bibelcenter.de>
 //    & Martin Sander <Martin.Sander@touch-screen.de> & Bernard Piller <bernard@bmpsystems.com>
 //    & Reinhard Hofmann <e9625556@student.tuwien.ac.at> & Christian Hacker <c.hacker@dreamer-chat.de>
@@ -14,8 +14,10 @@ $FontSize = 10;
 
 // Top frame
 define("A_MENU_0", "Administration für %s");
-define("A_MENU_1", "Registrierte Benutzer");
-define("A_MENU_2", "Verbannte Benutzer");
+define("A_MENU_1", "Registrierten Benutzer");
+define("A_MENU_11", "Registrierte Benutzer");
+define("A_MENU_2", "Verbannten Benutzer");
+define("A_MENU_21", "Verbannte Benutzer");
 define("A_MENU_3", "Räume leeren");
 define("A_MENU_4", "E-Mails senden");
 define("A_MENU_5", "Konfiguration");
@@ -23,7 +25,7 @@ define("A_MENU_6", "Chat-Extras");
 define("A_MENU_7", "Suche");
 define("A_MENU_8", "Verbindungen");
 define("A_MENU_9", "Logarchiv");
-define("A_LOGOUT", "LogOff"); // de pus sus in primul frame
+define("A_LOGOUT", "LogOff");
 
 // Frame for registered users
 define("A_SHEET1_1", "Liste registrierter Benutzer und deren Rechte");
@@ -35,7 +37,7 @@ define("A_SHEET1_6", "Markierte entfernen");
 define("A_SHEET1_7", "Ändern");
 define("A_SHEET1_8", "Es existiert kein registrierter Benutzer außer Ihnen.");
 define("A_SHEET1_9", "Markierte Profile verbannen");
-define("A_SHEET1_10", "Jetzt müssen Sie Ihre Auswahl auf der Seite verbannte Benutzer verfeinern.");
+define("A_SHEET1_10", "Jetzt müssen Sie Ihre Auswahl auf der Seite ’".A_MENU_2."’ verfeinern.");
 define("A_SHEET1_11", "Zuletzt verbunden");
 define("A_SHEET1_12", "Verbannungsgrund (optional)");
 define("A_USER", "Benutzer");
@@ -57,12 +59,12 @@ define("A_SHEET2_9", "Grund (optional)");
 
 // Frame for cleaning rooms
 define("A_SHEET3_1", "Liste der bestehenden Räume.");
-define("A_SHEET3_2", "Das L&ouml;schen eines \"nicht-Default\" Raumes entfernt auch alle Moderator<br />Status dieses Raums.");
-define("A_SHEET3_3", "Gewählte Räume l&ouml;schen");
-define("A_SHEET3_4", "Es existiert kein Raum zum L&ouml;schen.");
+define("A_SHEET3_2", "Das Löschen eines \"nicht-Default\" Raumes entfernt auch alle Moderator<br />Status dieses Raums.");
+define("A_SHEET3_3", "Gewählte Räume löschen");
+define("A_SHEET3_4", "Es existiert kein Raum zum Löschen.");
 
 // Frame for sending mails
-define("A_SHEET4_0", "Sie haben die erforderlichen Variablen in 'chat/admin/mail4admin.php'<br />noch nicht angepasst.");
+define("A_SHEET4_0", "Sie haben nicht die admin e-mail im ’".A_MENU_5."’ feld.");
 define("A_SHEET4_1", "E-Mails versenden");
 define("A_SHEET4_2", "Empfänger:");
 define("A_SHEET4_3", "Alle auswählen");
@@ -77,15 +79,15 @@ define("A_SHEET4_11", "Signatur");
 define("A_SHEET4_12", "Markierung aufheben");
 
 // Frame for  configuration
-define("A_SHEET5_0", "Ihre installierte phpMyChat-Plus Version ist %s");
-define("A_SHEET5_1", "Es wurde eine neue/veränderte Version ver&ouml;ffentlicht (%s)!");
+define("A_SHEET5_0", "Ihre installierte Version ist %s");
+define("A_SHEET5_1", "Es wurde eine neue/veränderte Version veröffentlicht (%s)!");
 
 //Chat Extras
 define("A_EXTR_DSBL", "Chat Extras abgeschaltet") ;
 define("A_REFRESH_MSG", "Nachrichten erneuern") ;
 define("A_MSG_DEL", "Löschen") ;
 define("A_POST_TIME", "Geschrieben am") ;
-define("A_FROM_TO", "Von  An") ;
+define("A_FROM_TO", "Von › An") ;
 define("A_FROM", "Von") ;
 define("A_CHTEX_ROOM", "Raum") ;
 define("A_CHTEX_MSG", "Nachricht") ;
@@ -114,6 +116,13 @@ define("A_CHAT_LOGS_20", "Zeige den kompletten Chat-Archiv-Bereich");
 define("A_CHAT_LOGS_21", "Nach oben gehen");
 define("A_CHAT_LOGS_22", "Archivierte Log-Datei");
 define("A_CHAT_LOGS_23", "Erstellt am %s");
+define("A_CHAT_LOGS_24", "Komprimiere alle %s Logs in einem Zip-archive"); // date
+define("A_CHAT_LOGS_25", "Dies wird einen zip mit allen Logs\\nspeichern in %s ordner!\\n"); // month/year
+define("A_CHAT_LOGS_26", "\\nSind Sie sicher?");
+define("A_CHAT_LOGS_27", "Zip-Archive");
+define("A_CHAT_LOGS_28", "Herunterladen %s");
+define("A_CHAT_LOGS_29", "Löschen  diesen zip");
+
 //Admin Search Page
 define("A_SEARCH_1", "Suchseite der Chaträume");
 define("A_SEARCH_2", "Alle Kategorien");
@@ -126,7 +135,7 @@ define("A_SEARCH_8", "Beschreibung");
 define("A_SEARCH_9", "Links");
 define("A_SEARCH_10", "Suche");
 define("A_SEARCH_11", "Für die Rechte-Kategorie sind die Optionen <b>ad</b>, <b>mod</b> oder <b>u</b>.");
-define("A_SEARCH_12", "Für die Geschlechts-Kategorie sind die Optionen <b>0</b> für nicht bekannt, <b>1</b> für Männlich oder <b>2</b> für Weiblich.");
+define("A_SEARCH_12", "Für die Geschlechts-Kategorie sind die Optionen <b>0</b> für nicht bekannt, <b>1</b> für Männlich, <b>2</b> für Weiblich oder <b>3</b> für Paar.");
 define("A_SEARCH_13", "Mitgliedsname");
 define("A_SEARCH_14", "Vorname");
 define("A_SEARCH_15", "Nachname");
@@ -137,6 +146,8 @@ define("A_SEARCH_20", "Geschlecht");
 define("A_SEARCH_21", "Suchstring");
 define("A_SEARCH_22", "Suche nach");
 define("A_SEARCH_23", "Bitte geben Sie einen Suchstring ein und versuchen Sie es erneut!");
+define("A_SEARCH_24", "Es gibt keine Daten, die Ihren Suchkriterien entsprechen. Verfeinern Sie bitte Ihre Suche.");
+define("A_SEARCH_25", "Moderiere Benutzer");
 
 // Connected users Page
 define("A_LURKING_1", "Verbundene Mitglieder und Beobachter") ;

@@ -1,8 +1,9 @@
 <?php
-// File : argentinian_spanish/localized.chat.php - plus version (20.10.2007 - rev.29)
+// File : argentinian_spanish/localized.chat.php - plus version (20.05.2008 - rev.39)
 // Original translation in Spanish (for the Argentinian dialect usage) by Jorge Colaccini <jrc@informas.com>
 // Updates, corrections and additions for the Plus version by Matias Olivera <matiolivera@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
+// Do not use ' ; use ’ instead (utf-8 edit bug)
 
 // extra header for charset
 $Charset = "utf-8";
@@ -25,7 +26,7 @@ define("L_CUR_4", "usuarios en salones privados");
 define("L_CUR_5", "Usuarios sin participar<br />(solo mirando la página):");
 
 define("L_SET_1", "Por favor definí ...");
-define("L_SET_2", "tu nombre de usuario");
+define("L_SET_2", "Nombre de usuario");
 define("L_SET_3", "el número de mensajes a mostrar");
 define("L_SET_4", "el tiempo entre cada actualización");
 define("L_SET_5", "Seleccioná un salón de chat ...");
@@ -52,14 +53,14 @@ define("L_HOUR", "hora");
 define("L_HOURS", "horas");
 
 // registration stuff:
-define("L_REG_1", "tu contraseña");
+define("L_REG_1", "Contraseña");
 define("L_REG_2", "Administración de cuenta");
 define("L_REG_3", "Registrate");
 define("L_REG_4", "Editá tus datos");
 define("L_REG_5", "Date de baja");
 define("L_REG_6", "Registración de usuario");
 define("L_REG_7", "sólo si ya estás registrado/a");
-define("L_REG_8", "tu e-mail");
+define("L_REG_8", "E-mail");
 define("L_REG_9", "Has sido registrado/a satisfactoriamente.");
 define("L_REG_10", "Atrás");
 define("L_REG_11", "Editando");
@@ -82,9 +83,10 @@ define("L_REG_32", "WEB");
 define("L_REG_33", "mostrar públicamente tu e-mail");
 define("L_REG_34", "Editando datos del usuario");
 define("L_REG_35", "Administración");
-define("L_REG_36", "idiomas posibles");
+define("L_REG_36", "Idiomas posibles");
 define("L_REG_37", "Los campos con un <span class=\"error\">*</span> necesariamente deben ser completados.");
 define("L_REG_39", "El salón en el que te encontrabas ha sido removido por el administrador.");
+define("L_REG_44", "Pareja");
 define("L_REG_45", "Sexo");
 define("L_REG_46", "Masculino");
 define("L_REG_47", "Femenino");
@@ -96,7 +98,20 @@ define("L_REG_50", "Registración suspendida!");
 define("L_EMAIL_VAL_1", "Tus datos para ingresar al chat");
 define("L_EMAIL_VAL_2", "Bienvenido a nuestro servidor de chat.");
 define("L_EMAIL_VAL_Err", "Error interno, contactarse con el administrador a: <a href=\"mailto:%s\">%s</a>.");
-define("L_EMAIL_VAL_Done", "Tu contraseña ha sido enviada a la dirección de<br />e-mail.");
+define("L_EMAIL_VAL_Done", "Tu contraseña ha sido enviada a la dirección de e-mail.<br />Puedes cambiar tu password de logueo editando tu perfil.");
+define("L_EMAIL_VAL_PENDING_Done", "La formación de tu registro fue enviada a revisión.");
+define("L_EMAIL_VAL_PENDING_Done1", "Te enviaremos el password una vez que el administrador haya aprobado tu cuenta.");
+define("L_EMAIL_VAL_3", "Tu registro está pendiente por %s");
+define("L_EMAIL_VAL_31", "Felicitaciones! Tu registro fue revisado y aprobado!");
+define("L_EMAIL_VAL_32", "Esta es tu infromación de registro para %s en %s:"); //chat name at chaturl
+define("L_EMAIL_VAL_4", "Acabas de registrar esta cuenta para %s en %s:"); //chat name at chaturl
+define("L_EMAIL_VAL_41", "Acabas de cambiar información importante de la cuenta para %s en %s (cuenta modificada: %s)."); //chat name at chaturl (username)
+define("L_EMAIL_VAL_5", "Your - %s - account details for %s"); //username - chatname
+define("L_EMAIL_VAL_51", "Your - %s - account updated details for %s"); //username - chatname
+define("L_EMAIL_VAL_6", "Registrado en %s");
+define("L_EMAIL_VAL_61", "Acualizado el  %s");
+define("L_EMAIL_VAL_7", "Abajo está tu %s información actualizada de la cuenta:"); //username
+define("L_EMAIL_VAL_8", "Guarda este mail para futures referencias.\nPor favor hazlo con cuidado y no compartas esta información.\nGracias! Que lo disfrutes!");
 
 // admin stuff
 define("L_ADM_1", "%s no es un moderador para este salón.");
@@ -152,7 +167,7 @@ define("L_ROOM", "salón");
 define("L_ROOMS", "salones");
 define("L_EXPCOL", "Desplegar/Replegar este salón");
 define("L_BEEP", "Beep/no beep cuando el usuario ingresa");
-define("L_PROFILE", "mostrar perfil de usuario (datos)");
+define("L_PROFILE", "Mostrar perfil de usuario (datos)");
 define("L_NO_PROFILE", "No hay perfil de usuario (datos)");
 
 // input frame
@@ -189,12 +204,13 @@ define("L_HELP_FMT_1", "Puedes poner negritas, itálicas o texto subrayado en me
 define("L_HELP_FMT_2", "Para crear un hipervínculo (para e-mail o URL) en tu mensaje, simplemente escribe la correspondiente dirección sin <i>tag</i>. El hipervínculo será creado automáticamente.");
 define("L_HELP_TIT_3", "Comandos");
 define("L_HELP_NOTE", "Todos los comandos deben ser usados en Inglés");
-define("L_HELP_USR", "usuario");
 define("L_HELP_MSG", "mensaje");
 define("L_HELP_MSGS", "mensajes");
 define("L_HELP_ROOM", "salón");
 define("L_HELP_BUZZ", "~nombredelsonido");
 define("L_HELP_REASON", "motivo");
+define("L_HELP_MR", "Sr."); // El señor
+define("L_HELP_MS", "Sra."); // La señora
 define("L_HELP_CMD_0", "{} representa un dato requerido, [] uno opcional.");
 define("L_HELP_CMD_1a", "Establece el número de mensajes a mostrar. Mínimo y por defecto, son 5.");
 define("L_HELP_CMD_1b", "Recarga y muestra los n últimos mensajes. Mínimo y por defecto, son 5.");
@@ -227,19 +243,19 @@ define("L_HELP_CMD_26", "Esta es una versión más compleja del comando /dice.<b
 define("L_HELP_CMD_27", "Resalta los mensajes de un usuario en específico para poder leerlo facilmente entre la conversación.<br />Uso: /high {usuario} o presioná el cuadrado pequeño <img src=./images/highlightOff.gif> a la derecha del nombre del usuario (en la lista de salones/usuarios)");
 define("L_HELP_CMD_28", "Permite el posteo de <i>una sola imagen</i> como mensaje.<br />Uso: La imagen debe estar en internet y ser accesible por todos. No uses páginas donde necesitás loguearte.<br />Debes ingresar todo el link de la imagen! Ej.<b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Extensiones aceptadas: .jpg .bmp .gif .png. Respetá las mayúsculas y minúsculas!<br />Recomendación: escribí /img luego dejá un espacio y pegá la URL; para conseguir la URL de una imagen de una página, hacé click derecho sobre la imagen, andá a propiedades, seleccioná toda la dirección/URL (cuidado! aveces la dirección/URL ocupa más de un renglón) copiala y después pegala después de /img<br /> No uses imágenes de tu PC: cortará la conexión de tu ventana de chat!!!");
 define("L_HELP_CMD_29", "El segundo comando permitirá al administrador o moderador(es) del salón actual quitar el privilegio de moderador a un usuario registrado al que se le había dado previamente para el mismo salón.<br />La opción * le quitará los privilegios de moderador al usuario en todos los salones.");
-define("L_HELP_CMD_30", "El segundo comando hace lo mismo que /me pero mostrará tu género.<br />Ej. * El señor Alejandro está mirando TV o La señora Dana está felíz.");
+define("L_HELP_CMD_30", "El segundo comando hace lo mismo que /me pero mostrará tu género.<br />Ej. * ".L_HELP_MR." Alejandro está mirando TV o * ".L_HELP_MS." Dana está felíz.");
 define("L_HELP_CMD_31", "Cambia el orden de los usuarios en las listas: por orden de entrada o alfabéticamente.");
 define("L_HELP_CMD_32", "Esta es una tercera versión del juego de dados.<br />Uso: /d{n1}[tn2] or /d{n1};<br />n1 puede tomar cualquier valor <b>entre 1 and 100</b> (representa el número de giros por dado).<br />n2 puede tomar cualquier valor <b>entre 1 y %s</b> (representa el número de dados por tirada).");
 define("L_HELP_CMD_33", "Cambia el tamaño de fuente de los mensajes en el chat de acuerdo a la selección del usuario (valores permitidos para n: <b>entre 7 y 15</b>); el comando /size resetea el tamaño de fuente al valor por defecto (<b>".$FontSize."</b>).");
 define("L_HELP_ETIQ_1", "Lineamientos del Chat");
 define("L_HELP_ETIQ_2", "Quisieramos mantener a esta comunidad amigable y divertida, por eso te pedimos por favor que cumplas las siguientes reglas. En caso contrario uno de nuestros moderadores podría deshabilitarte del chat.<br /><br />Gracias,");
 define("L_HELP_ETIQ_3", "Lineamientos de nuestro Chat");
-define("L_HELP_ETIQ_4", "No hagas \"spam\" en el chat escribiendo frases o letras sin sentido.</li>
+define("L_HELP_ETIQ_4", "<li>No hagas \"spam\" en el chat escribiendo frases o letras sin sentido.</li>
 <li>No alternes MayúsCuLAs y MInúScUlas en las palabras.</li>
 <li>Usá lo menos posible palabras todas en mayúsculas.</li>
 <li>Recuerda que los usuarios de nuestro chat son de todo el mundo, y, seguramente, encontrarás gente con otras creencias. Por favor se amable y correcto con ellos.</li>
 <li>No insultes a otros usuarios. De hecho, trata de evitar el uso de palabras o frases insultantes.</li>
-<li>No llames a los otros usuarios por sus verdaderos nombres. Puede no agradarles. Usá sus nicknames.");
+<li>No llames a los otros usuarios por sus verdaderos nombres. Puede no agradarles. Usá sus nicknames.</li>");
 
 // messages frame
 define("L_NO_MSG", "En este momento no hay mensajes ...");
@@ -260,21 +276,26 @@ $TextColors = array(	"Negro" => "#000000",
 				"Naranja" => "#FF6600");
 
 // ignored popup
-define("L_IGNOR_TIT", "Ignorado");
+define("L_IGNOR_TIT", "Usuarios Ignorados");
 define("L_IGNOR_NON", "No hay usuarios ignorados");
 
 // whois popup
 define("L_WHOIS_ADMIN", "Administrador");
-define("L_WHOIS_MODER", "Moderador");
+define("L_WHOIS_OWNER", "Dueño");
 define("L_WHOIS_TOPMOD", "Moderador Principal");
+define("L_WHOIS_MODER", "Moderador");
+define("L_WHOIS_MODERS", "Moderadores");
+define("L_WHOIS_OTHERS", "Otros usuarios");
 define("L_WHOIS_USER", "Usuario");
 define("L_WHOIS_GUEST", "Invitado");
 define("L_WHOIS_REG", "Registrado");
+define("L_WHOIS_BOT", "Robot");
 
 // Notification messages of user entrance/exit
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", "%s ingresó a este salón" . L_ENTER_SND);
-else define("L_ENTER_ROM", "%s ingresó a este salón");
-define("L_ENTER_ROM_NOSOUND", "%s ingresó a este salón");
+define("ENTER_ROM", "%s ingresó a este salón");
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+else define("L_ENTER_ROM", ENTER_ROM);
+define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 define("L_EXIT_ROM", "%s salió de este salón");
 
 // Clean mod/fix by Ciprian
@@ -292,6 +313,9 @@ define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
 define("L_TOPIC", "ha cambiado la TEMATICA a:");
 define("L_TOPIC_RESET", "ha reseteado la TEMATICA");
 define("L_HELP_TOP", "la TEMATICA debe contener al menos dos palabras");
+define("L_BANNER_WELCOME", "Bienvenido a %s!"); // room name
+define("L_BANNER_TOPIC", "Tema:");
+define("L_DEFAULT_TOPIC_1", "Este es un tema genérico. Editá localization/_owner/owner.php para cambiarlo!");
 
 // Img cmd mod
 define("L_PIC", "Imagen posteada por");
@@ -304,9 +328,9 @@ define("L_IS_NO_MODERATOR", "%s no es moderador.");
 define("L_ERR_IS_ADMIN", "%s es el administrador!\\nNo podés cambiar sus permisos.");
 
 // Info mod by Ciprian - displays a list of all the features & mods, including Bot's name, on the welcome page
-define("INFO_CMDS", "<span style=\"color:orange\">Comandos Extra Disponibles:</span>".CMDS.".");
-define("INFO_MODS", "<span style=\"color:orange\">Utilidades/Modos Extra disponibles:</span>".MODS.".");
-define("INFO_BOT", "<span style=\"color:orange\">Nuestro robot disponible es: </span><u>".C_BOT_NAME."</u>.");
+define("INFO_CMDS", "Comandos Extra Disponibles:");
+define("INFO_MODS", "Utilidades/Modos Extra disponibles:");
+define("INFO_BOT", "Nuestro robot disponible es:");
 
 // Profile mod
 define("L_PRO_1", "Idiomas hablados");
@@ -314,18 +338,20 @@ define("L_PRO_2", "Link favorito 1");
 define("L_PRO_3", "Link favorito 2");
 define("L_PRO_4", "Descripción");
 define("L_PRO_5", "Imagen URL");
-define("L_PRO_6", "Tu color de nombre/texto");
+define("L_PRO_6", "Color de nombre/texto");
 
 // Avatar mod
 define("L_AVATAR", "Imagen");
 define("L_ERR_AV", "URL inválida o host inexistente.");
 define("L_TITLE_AV", "Tu imagen actual: ");
-define("L_CHG_AV", "Seleccioná ’".L_REG_16."’ en el formulario del Perfil <br />para guardar tu Imagen.");
+define("L_CHG_AV", "Seleccioná \"".L_REG_16."\" en el formulario del Perfil <br />para guardar tu Imagen.");
 define("L_SEL_NEW_AV", "Selecciona una nueva Imagen");
-define("L_EX_AV", "(Ejemplo: http://mysite/images/mypic.gif):");
+define("L_EX_AV", "ejemplo");
 define("L_URL_AV", "URL: ");
 define("L_EXPL_AV", "(Escribe la URL, luego presiona ENTER para verla)");
 define("L_CANCEL", "Cancelar");
+define("L_AVA_REG", "Debes estar registrado\\npara cambiar tu avatar");
+define("L_SEL_NEW_AV_CONFIRM", "Aún no has enviado el formulario..\\nSi vas a avatars perderás\\ntodos los cambios hechos!\\n\\nEstás seguro?");
 
 // PlusBot bot mod (based on Alice bot)
 define("BOT_TIPS", "TIPS: Nuestro robot esta públicamente activo aquí. Para hablarle escribe <b>hello ".C_BOT_NAME."</b>. Para finalizar la conversación, escribe: <b>bye ".C_BOT_NAME."</b>. (private: /to <b>".C_BOT_NAME."</b> Message)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
@@ -342,14 +368,12 @@ define("DICE2_WRONG", "El secundo valor no está entre 1 y ".MAX_ROLLS.".\\nDeja
 define("DICE2_WRONG1", "El primer valor no está entre 1 y ".MAX_DICES.".\\n(Ej. /".MAX_DICES."d o /".MAX_DICES."d".MAX_ROLLS.").");
 define("DICE3_WRONG", "El segundo valor no está entre 1 y ".MAX_ROLLS.".\\nDejalo vacío para usar todos los ".MAX_ROLLS." dados\\n(Ej. /d50 or /d100t".MAX_ROLLS.").");
 
-// Log mod by Ciprian
-define("L_ARCHIVE", "Abrir Archivo");
-
 // Private Message Popup mod by Ciprian
 define("L_REG_POPUP", "abrir popups en mensaje privado");
+define("L_REG_POPUP_NOTE", "Tu bloqueador de pop-up debe estar desactivado!");
 define("L_PRIV_POST_MSG", "Envía un mensaje privado!");
 define("L_PRIV_MSG", "Nuevo mensaje privado recibido!");
-define("L_PRIV_MSGS", "nuevo mensaje privado recibido!");
+define("L_PRIV_MSGS", "%s nuevo mensaje privado recibido!");
 define("L_PRIV_MSGSa", "Aquí están los 10 primeros mensajes!<br />Usá el link inferior para ver el resto.");
 define("L_PRIV_MSG1", "De:");
 define("L_PRIV_MSG2", "Salón:");
@@ -357,7 +381,7 @@ define("L_PRIV_MSG3", "A:");
 define("L_PRIV_MSG4", "Mensaje:");
 define("L_PRIV_MSG5", "Posteado:");
 define("L_PRIV_REPLY", "Contestar");
-define("L_PRIV_READ", "Presioná el botón Cerrar para marcar todos los mensajes como leídos!");
+define("L_PRIV_READ", "Presioná el botón ’".L_REG_25."’ para marcar todos los mensajes como leídos!");
 define("L_PRIV_POPUP", "Podés deshabilitar/re-habilitar esta utilidad de popup cuando quieras<br />editando tu");
 define("L_PRIV_POPUP1", "Perfil</a> (Solo usuarios registrados)");
 define("L_NOT_ONLINE", "%s no se encuentra conectado en este momento.");
@@ -368,14 +392,24 @@ define("PM_DISABLED_ERROR", "Susurrando (mensaje privado)\\nse ha deshabilitado 
 define("L_NEXT_PAGE", "Vé a la siguiente página");
 define("L_NEXT_READ", "Leé lo siguiente"); // message / 10 messages
 define("L_ROOM_ALL", "Todos los salones");
+define("L_PRIV_NO_MSGS", "No se han recibido mensajes privados");
+define("L_PRIV_READ_MSG", "1 mensaje privado recibido"); //singular
+define("L_PRIV_READ_MSGS", "%s mensajes privados recibidos"); //plural
+define("L_PRIV_MSGS_NEW", "Nuevo"); //singular form
+define("L_PRIV_MSGS_READ", "Leer"); //singular form
+define("L_PRIV_MSG6", "Estado:");
+define("L_PRIV_RELOAD", "Recargar página");
+define("L_PRIV_MARK_ALL", "Marcar todos como Leídos");
+define("L_PRIV_MARK_SEL", "Marcar los seleccionados como Leídos");
+define("L_PRIV_REMOVE", "Remover los PMs seleccionados"); // or selected
 
 // Color Input Box mod by Ciprian
-define("L_COLOR_HEAD_COLF_SETTINGS", "".COLOR_FILTERS == 1 ? "Activo" : "Inactivo"."");
-define("L_COLOR_HEAD_ALLG_SETTINGS", "".COLOR_ALLOW_GUESTS == 1 ? "Activo" : "Inactivo"."");
-define("L_COLOR_HEAD_SETTINGS", "<u>Configuración actual de este servidor</u>:<br />a) COLOR_FILTERS = <b>".L_COLOR_HEAD_COLF_SETTINGS."</b>;<br />b) COLOR_ALLOW_GUESTS = <b>".L_COLOR_HEAD_ALLG_SETTINGS."</b>.");
-define("L_COLOR_HEAD_SETTINGSa", "<u>Colores por defecto</u>: Administrador = <b><SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN></b>, Moderadores = <b><SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN></b>, Otros usuarios = <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>.");
-define("L_COLOR_HEAD_SETTINGSb", "<u>Color por defecto</u>: <b><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></b>.");
-define("L_COL_HELP_TITLE", "Selector de color");
+define("L_ENABLED", "Activo");
+define("L_DISABLED", "Inactivo");
+define("L_COLOR_HEAD_SETTINGS", "Configuración actual de este servidor:");
+define("L_COLOR_HEAD_SETTINGSa", "Colores por defecto:");
+define("L_COLOR_HEAD_SETTINGSb", "Color por defecto:");
+define("L_COL_HELP_TITLE", "Rango de color");
 define("L_COL_HELP_SUB1", "Uso:");
 define("L_COL_HELP_P1", "Podés seleccionar tu propio color por defecto editando tu perfil (el mismo color que tu color de usuario). Igualmente podrás usar cualquier otro color. Para regresar a tu color por defecto, debés seleccionar una vez el color por defecto (Null) - Es el primero de la lista.");
 define("L_COL_HELP_SUB2", "Sugerencias:");
@@ -386,6 +420,10 @@ define("L_COL_HELP_P3", "<u>Niveles de privilegios para el uso de colores</u>:<b
 define("L_COL_HELP_P3a", "El color por defecto es <u><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></u>.<br /><br /><u>Detalles Técnicos</u>: Esos colores han sido definidos por el Administrador en el Pandel de Administración.<br />Si hay algo que no te guste de los colores por defecto, puedes contactar al <b>Administrador</b> primero, no a los demás usuarios en el salón. :-)");
 define("L_COL_HELP_USER_STATUS", "Tu estado");
 define("L_COL_TUT", "Usando texto con color en el chat");
+define("L_NULL", "Vacío");
+define("L_NULL_F", ""); // feminine word, if it's the case
+define("L_ROOM_COLOR", "color del salón");
+define("L_PRO_COLOR", "color del perfil");
 
 // Alert messages on errors for Color Input Box mod by Ciprian
 define("COL_ERROR_BOX_MODA", "Solo el Administrador puede usar el color ".COLOR_CA."!\\n\\nTu color de texto será ".COLOR_CM."!\\n\\nPodés seleccionar cualquier otro color.");
@@ -393,9 +431,10 @@ define("COL_ERROR_BOX_USRA", "Solo el Administrador puede usar el color ".COLOR_
 define("COL_ERROR_BOX_USRM", "Debes ser Moderador para usar el color ".COLOR_CM."!\\n\\nNo intentes usar ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." o ".COLOR_CM1.".\\n\\nEstán reservados para usuarios con privilegios!\\n\\nTu color de texto será ".COLOR_CD."!\\n\\nPodés elegir cualquier otro color.");
 
 //Welcome message to be displayed on login
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", "Bienvenido a nuestro chat! Por favor mientras chatees seguí las reglas de la red: <I>ser amable y correcto</I>." . L_WELCOME_SND);
-else define("WELCOME_MSG", "Bienvenido a nuestro chat! Por favor mientras chatees seguí las reglas de la red: <I>ser amable y correcto</I>.");
-define("WELCOME_MSG_NOSOUND", "Bienvenido a nuestro chat! Por favor mientras chatees seguí las reglas de la red: <I>ser amable y correcto</I>.");
+define("L_WELCOME_MSG", "Bienvenido a nuestro chat! Por favor mientras chatees seguí las reglas de la red: <I>ser amable y correcto</I>.");
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
+else define("WELCOME_MSG", L_WELCOME_MSG);
+define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
 // Send alert to users in chat when important settings are changed in admin panel
 define("L_RELOAD_CHAT", "La configuración de este servidor ha sido modificada. Para prevenir mal funcionamientos, Por favor refrescá tu explorador (presioná F5 o salí y volvé a entrar al chat).");
@@ -414,15 +453,15 @@ define("L_SUN", "Domingo");
 
 // Password reset form by Ciprian
 define("L_PASS_0", "Formulario de reseteo de password");
-define("L_PASS_1", "Tu pregunta secreta");
+define("L_PASS_1", "Pregunta secreta");
 define("L_PASS_2", "Cuál fue tu primer auto?"); // Don't change this question! Just translate it!
 define("L_PASS_3", "Cuál era el nombre de tu primer mascota?"); // Don't change this question! Just translate it!
 define("L_PASS_4", "Cuál es tu bebida favorita?"); // Don't change this question! Just translate it!
 define("L_PASS_5", "Cuál es tu fecha de nacimiento?"); // Don't change this question! Just translate it!
-define("L_PASS_6", "Tu respuesta secreta");
+define("L_PASS_6", "Respuesta secreta");
 define("L_PASS_7", "Resetear password");
 define("L_PASS_8", "Tu password ha sido reseteado.");
-define("L_PASS_9", "Tu nuevo password para entrar al chat.");
+define("L_PASS_9", "Tu nuevo password para entrar al chat");
 define("L_PASS_11", "Bienvenido nuevamente a nuestro chat!");
 define("L_PASS_12", "Elige tu pregunta ...");
 define("L_ERR_PASS_1", "Nombre de usuario incorrecto. Elige el tuyo.");
@@ -465,18 +504,19 @@ define("L_LINKS_13", "para enviar este zumbido"); // Click to blablabla : it can
 define("L_LINKS_14", "para usar este comando");
 define("L_LINKS_15", "para abrir"); // to open/see Posted Links window
 define("L_LINKS_16", "Galeria de emoticones");
+define("L_LINKS_17", "para orden ascendente");
+define("L_LINKS_18", "para orden descendente");
 define("L_SWITCH", "Cambiar a"); // Switch to English (Country Flags over / Language switching)
 define("L_SELECTED", "seleccionado"); // French - selected (Country Flags mouseover / Language switching)
+define("L_SELECTED_F", ""); // feminine word, if it's the case
+define("L_NOT_SELECTED", "no seleccionado");
+define("L_NOT_SELECTED_F", ""); // feminine word, if it's the case
 define("L_EMAIL_1", "para enviar un email");
 define("L_FULLSIZE_PIC", "para abrir la imagen en tamaño completo");
 define("L_AUTHOR", "el autor");
 define("L_DEVELOPER", "el desarrollador de este chat");
 define("L_OWNER", "el dueño de este chat");
 define("L_TRANSLATOR", "el traductor");
-
-// Banner topics - the topics themselves are not multi-language!
-define("L_BANNER_WELCOME", "Bienvenido a %s!"); // room name
-define("L_BANNER_TOPIC", "Tema:");
 
 // Counter on login
 define("L_VISITOR_REPORT", "... visitantes desde %s"); // install date
@@ -489,6 +529,8 @@ define("L_WHSP", "Suspiro");
 define("L_SEND_WHSP", "Envía un Suspiro");
 define("L_SEND_PM_1", "Envía PM");
 define("L_SEND_PM_2", "Envía un menaje privado");
+define("L_HIGHLIGHT", "Resaltar/No-Resaltar");
+define("L_HIGHLIGHT_SB", "Resaltar/No-Resaltar los mensajes de este usuario");
 
 //Lurking frame popup
 define("L_LURKING_2", "Página de mirones");
@@ -498,9 +540,14 @@ define("L_LURKING_5", "Desconocido");
 
 // Extra options by Ciprian
 define("L_EXTRA_OPT", "Otras Opciones");
+define("L_ARCHIVE", "Abrir Archivo");
 define("L_LURKING_1", "Abrir la página de mirones");
 define("L_SOUNDFIX_IE_1", "Sonido fijo para IE");
 define("L_SOUNDFIX_IE_2", "Descargar un sonido fijo para IE");
+define("L_REG_BRB", "brb (Registrate primero)");
+define("L_DEL_BYE", "no me esperes...");
+define("L_EXTRA_PRIV1", "Leer PMs");
+define("L_EXTRA_PRIV2", "Nuevos PMs");
 
 // Months for Open Schedule by Ciprian
 define("L_JAN", "Enero");
@@ -517,30 +564,70 @@ define("L_NOV", "Noviembre");
 define("L_DEC", "Diciembre");
 
 // Localized date format
-setlocale(LC_TIME, "es_AR.UTF-8", "arg_arg.UTF-8");
+if (eregi("win", PHP_OS)) {
+setlocale(LC_ALL, "ESP_ARG.UTF-8", "ESP_ARG");
+} else {
+setlocale(LC_ALL, "es_AR.UTF-8", "esp_arg.UTF-8");
+}
+define("ISO_DEFAULT", "iso-8859-1");
+define("WIN_DEFAULT", "windows-1252");
 define("L_SHORT_DATE", "%d-%m-%Y"); //Change this to your local desired format (keep the short form)
 define("L_LONG_DATE", "%A %d %B %Y"); //Change this to your local desired format (keep the long form)
 define("L_SHORT_DATETIME", "%d-%m-%Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
 define("L_LONG_DATETIME", "%A %d %B %Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
 
 // Chat Activity displayed on remote web pages
-define("LOGIN_LINK", "<A HREF='".$CHAT_URL."?L=".$L."' TITLE='".sprintf(L_CLICK,L_LINKS_12)."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_12).".'; return true;\" TARGET=_blank>");
-define("NB_USERS_IN","usuarios están ".LOGIN_LINK." chateando</A> en este momento.</td></tr>");
-define("USERS_LOGIN","1 usuario está ".LOGIN_LINK." chateando</A> en este momento.</td></tr>");
-define("NO_USER","Nadie está ".LOGIN_LINK." cahteando</A> en este momento.</td></tr>");
+define("LOGIN_LINK", "<A HREF='".C_CHAT_URL."?L=".$L."' TITLE='".sprintf(L_CLICK,L_LINKS_12)."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_12).".'; return true;\" TARGET=_blank>");
+define("NB_USERS_IN","usuarios están ".LOGIN_LINK."chateando</A> en este momento.");
+define("USERS_LOGIN","1 usuario está ".LOGIN_LINK."chateando</A> en este momento.");
+define("NO_USER","Nadie está ".LOGIN_LINK."cahteando</A> en este momento.");
+define("L_PRIV_REPLY_LOGIN", "Loqueate al chat si quieres ".LOGIN_LINK."contestar</A> a cualquiera de los PMs listados debajo");
 
 // Language names
 define("L_LANG_AR", "Español Argentina");
-define("L_LANG_NL", "Holandés");
+define("L_LANG_BG", "Bulgaro – Cirílico");
+define("L_LANG_BR", "Brasilero Portugués");
+define("L_LANG_CZ", "Checo");
+define("L_LANG_DA", "Danés");
+define("L_LANG_DE", "Alemán");
 define("L_LANG_EN", "Inglés"); // for admin panel only
 define("L_LANG_ENUK", "Inglés UK"); // for UK formats and flags
 define("L_LANG_ENUS", "Inglés USA"); // for US formats and flags
-define("L_LANG_FR", "Frances");
-define("L_LANG_DE", "Alemán");
-define("L_LANG_IT", "Italiano");
-define("L_LANG_RO", "Rumano");
 define("L_LANG_ES", "Español");
+define("L_LANG_FR", "Frances");
+define("L_LANG_GR", "Griego");
+define("L_LANG_HI", "Indú");
+define("L_LANG_HU", "Húngaro");
+define("L_LANG_IT", "Italiano");
+define("L_LANG_KA", "Georgiano");
+define("L_LANG_NL", "Holandés");
+define("L_LANG_RO", "Rumano");
+define("L_LANG_SK", "Eslovaco");
+define("L_LANG_SRL", "Serbio - Latino");
+define("L_LANG_SRC", "Serbio – Cirílico");
 define("L_LANG_SV", "Sueco");
 define("L_LANG_TR", "Turco");
+define("L_LANG_UR", "Urdu");
 define("L_LANG_VI", "Vietnamita");
+
+// Skins preview page
+define("L_SKINS_TITLE", "Visualizar fondos");
+define("L_SKINS_TITLE1", "Fondos %s para %s visualizar"); // Skins 1 to 4 preview
+define("L_SKINS_AV", "Fondos disponibles");
+define("L_SKINS_NONAV", "No hay estilos definidos en la carpeta \"skins\"");
+
+// Swap image titles by Ciprian
+define("L_GEN_ICON", "Icono de género");
+
+// Ghost mode by Ciprian
+define("L_GHOST", "Fantasma");
+define("L_SUPER_GHOST", "Super Fantasma");
+define("L_NO_GHOST", "Visible");
+
+// Sorting options by Ciprian
+define("L_ASC", "Ascendiente");
+define("L_DESC", "Descendiente");
+
+// Returning visitors counter on profiles by Ciprian
+define("L_LOGIN_COUNT", "Total de visitas"); // number of logins (returning visits) to chat
 ?>

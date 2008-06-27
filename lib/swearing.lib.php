@@ -1,15 +1,28 @@
-<?
+<?php
 // This library allows to check for "swear words". Users cannot login or create a room with such words,
 // in messages they are replaced by the "@#$*!" string or the one you choose.
+
+// Added for php4 support of mb functions
+if (!function_exists('mb_convert_case'))
+{
+	function mb_convert_case($str,$type,$Charset)
+	{
+		if (eregi("TITLE",$type)) $str = ucwords($str);
+		elseif (eregi("LOWER",$type)) $str = strtolower($str);
+		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+		return $str;
+	}
+};
+
 // Credit for this lib goes to Gustavo Iwamoto <iwamoto@zaz.com.br> and Fabiano R. Prestes <zoso@post.com>
-function checkwords ($String, $TestOnly)
+function checkwords($String, $TestOnly, $Charset)
 {
 
-	// You can add the words you don't want users to use in the $BadWords array bellow. As an eregi
+	// You can add the words you don't want users to use in the $BadWords array below. As an eregi
 	// function is called to find them in strings, you may use valid POSIX 1003.2 regular expressions
 	// (see second line of the array for an example).
 	// Note that search is not case sensitive, except for special characters such as accentued ones.
-
+	
 	$BadWords = array (
 				"ahole",
 				"anus",
@@ -327,7 +340,9 @@ function checkwords ($String, $TestOnly)
 				"whore",
 				"xrated",
 				"xxx",
-				"merde",						//following are foreign words (GE,RO,FR)
+	//following are foreign words (GE,RO,FR)
+	# GE:
+				"merde",
 				"scheisse",
 				"arschloch",
 				"scheize",
@@ -344,36 +359,44 @@ function checkwords ($String, $TestOnly)
 				"yaro",
 				"merdo",
 				"anusulo",
+	# RO:
 				"belest",
+				"beleşt",
 				"boule",
 				"coaie",
 				"n cur",
 				"curva",
+				"curvă",
 				"curul",
 				"te fut",
 				"ti fut",
 				"futut",
+				"futuţ",
 				"futui",
 				"fututi",
 				"futu-te",
 				"futu-ti",
+				"futu-ţi",
 				"lindic",
 				"mortii ma",
+				"morţii mă",
 				"muie",
 				"muist",
 				"pizda",
+				"pizdă",
 				"pula",
+				"pulă",
 				"sugi "
 	);
 
 	$ReplaceString = C_SWEAR_EXPR;	// String that will replace "swear words"
 
-	// Don't modify lines bellow
+	// Don't modify lines below
 
 	$Found = false;
 	for (reset($BadWords); $ToFind = current($BadWords); next($BadWords))
 	{
-		$Found = eregi(addslashes($ToFind), $String);
+		$Found = eregi(mb_convert_case(addslashes($ToFind),MB_CASE_LOWER,$Charset), mb_convert_case($String,MB_CASE_LOWER,$Charset));
 		if ($Found)
 		{
 			if ($TestOnly)
@@ -382,7 +405,7 @@ function checkwords ($String, $TestOnly)
 			}
 			else
 			{
-				$String = eregi_replace(addslashes($ToFind), $ReplaceString, $String);
+				$String = eregi_replace(addslashes($ToFind), $ReplaceString, mb_convert_case($String,MB_CASE_LOWER,$Charset));
 			};
 		};
 	};

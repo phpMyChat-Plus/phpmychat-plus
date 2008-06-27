@@ -22,6 +22,15 @@ if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 // avoid server configuration for magic quotes
 set_magic_quotes_runtime(0);
+// Can't turn off magic quotes gpc so just redo what it did if it is on.
+if (get_magic_quotes_gpc()) {
+	foreach($_GET as $k=>$v)
+		$_GET[$k] = stripslashes($v);
+	foreach($_POST as $k=>$v)
+		$_POST[$k] = stripslashes($v);
+	foreach($_COOKIE as $k=>$v)
+		$_COOKIE[$k] = stripslashes($v);
+}
 
 // Var used in the login.lib.php script required below
 $MUST_BE_ADMIN = true;
@@ -53,6 +62,18 @@ if (isset($Charset_Sav))
 	$FontSize = $FontSize_Sav; unset($FontSize_Sav);
 };
 
+// Added for php4 support of mb functions
+if (!function_exists('mb_convert_case'))
+{
+	function mb_convert_case($str,$type,$Charset)
+	{
+		if (eregi("TITLE",$type)) $str = ucwords($str);
+		elseif (eregi("LOWER",$type)) $str = strtolower($str);
+		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+		return $str;
+	}
+};
+
 // Login stuff
 require("./lib/login.lib.php");
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
@@ -81,7 +102,7 @@ if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER["PHP_SELF"];
 $From = basename($PHP_SELF);
 
 // Define the sheet to open
-if (!isset($sheet)) $sheet = "5";
+if (!isset($sheet)) $sheet = "1";
 $ToOpen = "admin".$sheet.".php";
 
 // Set username of the admin to a convenient format
@@ -120,6 +141,16 @@ function logout()
 }
 // -->
 </SCRIPT>
+<?php
+if (!function_exists('utf_conv'))
+{
+	function utf_conv($iso,$Charset,$what)
+	{
+		if (function_exists('iconv')) $what = iconv($iso, $Charset, $what);
+		return $what;
+	};
+};
+?>
 </HEAD>
 
 <FRAMESET ROWS="50,*" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0" OnResize="if (document.layers) document.location = NNResize_URL + sortBy + sortOrder">

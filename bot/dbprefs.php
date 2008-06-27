@@ -50,12 +50,12 @@ if (get_magic_quotes_gpc()) {
 /**
 * The errormessage when a loop is detected.
 */
-define("LOOPINGERRORMSG", "Oops. I wasn't paying attention. Tell me again what is going on.");
+define("LOOPINGERRORMSG", "Oops. I wasn't paying attention. Tell me again what is going on. (loop exit)");
 
 /**
 * The number of times a loop may occur before the error is thrown. -1 equals to no limit.
 */
-define("LOOPINGLIMIT",150); // -1 for no limit
+define("LOOPINGLIMIT",250); // -1 for no limit
 
 /**
 * Has something to do with the random generator
@@ -92,8 +92,9 @@ define("PROGRAMEVERSION","v0.09");
 $rootdir="aiml/";
 
 $errors="";
-
 if (C_DB_HOST != 'localhost' || C_DB_HOST == '') include("./../config/config.lib.php");
 mysql_connect(C_DB_HOST,C_DB_USER,C_DB_PASS) or $errors = $errors . "Could not connect to database.\n";
+@mysql_query("SET CHARACTER SET utf8");
+mysql_query("SET NAMES 'utf8'");
 @mysql_select_db(C_DB_NAME) or $errors = $errors . "Unable to select database\n";
 ?>

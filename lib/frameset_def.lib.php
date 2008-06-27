@@ -62,8 +62,8 @@ else
 	}
 }
 ?>
-         		        <!-- chat/banner.php est le nom d'un fichier qui define la frame supérieuse. -->
-				<FRAME SRC="<?php echo($ChatPath); ?>banner.php?<?php echo("L=$L"); ?>" NAME="banner" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0" MARGINWIDTH="0" MARGINHEIGHT="0" SCROLLING="NO">
+         		        <!-- chat/topic.php est le nom d'un fichier qui define la frame supérieuse. -->
+				<FRAME SRC="<?php echo($ChatPath); ?>topic.php?<?php echo("L=$L&R=$R1"); ?>" NAME="topic" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0" MARGINWIDTH="0" MARGINHEIGHT="0" SCROLLING="NO">
 				<FRAME SRC="<?php echo($ChatPath); ?>blank.php?<?php echo("L=$L"); ?>" NAME="messages" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0" MARGINWIDTH="3" MARGINHEIGHT="3">
 				<FRAME SRC="<?php echo($ChatPath); ?>input.php?<?php echo("From=$From&L=$L&Ver=$Ver&U=$U1&R=$R1&T=$T&D=$D&N=$N&O=$O&ST=$ST&NT=$NT$AddPwd2Url"); ?>" NAME="input" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0" MARGINWIDTH=0 MARGINHEIGHT=0 SCROLLING="NO" NORESIZE>
 			</FRAMESET>
@@ -79,7 +79,7 @@ else
 		<FRAME SRC="<?php echo($ChatPath); ?>blank.php?<?php echo("L=$L"); ?>" NAME="input_sent" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0" MARGINHEIGHT="0" MARGINWIDTH="0" SCROLLING="NO">
 
 		<!-- Hidden frame for the loader -->
-		<FRAME SRC="<?php echo($ChatPath); ?>loader.php?<?php echo("From=$From&L=$L&Ver=$Ver&U=$U1&R=$R1&T=$T&D=$D&N=$N&ST=$ST&NT=$NT&First=1$AddPwd2Url"); ?>" NAME="loader" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0" MARGINHEIGHT="0" MARGINWIDTH="0" SCROLLING="NO">
+		<FRAME SRC="<?php echo($ChatPath); ?>loader.php?<?php echo("From=$From&L=$L&Ver=$Ver&U=$U1&R=$R1&T=$T&D=$D&N=$N&ST=$ST&NT=$NT$AddPwd2Url&First=1"); ?>" NAME="loader" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0" MARGINHEIGHT="0" MARGINWIDTH="0" SCROLLING="NO">
 	</FRAMESET>
 	<?php
 }
@@ -121,8 +121,8 @@ else
 	}
 }
 ?>
-         		        <!-- chat/banner.php est le nom d'un fichier qui define la frame supérieuse. -->
-      <FRAME SRC="<?php echo($ChatPath); ?>banner.php?<?php echo("L=$L"); ?>" NAME="banner" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0" MARGINWIDTH="0" MARGINHEIGHT="0" SCROLLING="NO">
+         		        <!-- chat/topic.php est le nom d'un fichier qui define la frame supérieuse. -->
+      <FRAME SRC="<?php echo($ChatPath); ?>topic.php?<?php echo("L=$L&R=$R1"); ?>" NAME="topic" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0" MARGINWIDTH="0" MARGINHEIGHT="0" SCROLLING="NO">
 			<FRAME SRC="<?php echo($ChatPath); ?>messagesL.php?<?php echo("From=$From&L=$L&Ver=$Ver&U=$U1&R=$R1&T=$T&D=$D&N=$N&O=$O&ST=$ST&NT=$NT$AddPwd2Url"); ?>" NAME="messages" MARGINWIDTH=3 MARGINHEIGHT=3>
 			<FRAME SRC="<?php echo($ChatPath); ?>input.php?<?php echo("From=$From&L=$L&Ver=$Ver&U=$U1&R=$R1&T=$T&D=$D&N=$N&O=$O&ST=$ST&NT=$NT$AddPwd2Url"); ?>" NAME="input" MARGINWIDTH=0 MARGINHEIGHT=0 SCROLLING="NO" NORESIZE>
 		</FRAMESET>
