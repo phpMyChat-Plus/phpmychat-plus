@@ -1,5 +1,5 @@
 <?php
-// File : danish/localized.chat.php - plus version (20.05.2008 - rev.39)
+// File : danish/localized.chat.php - plus version (18.06.2008 - rev.40)
 // Original translation by Jonas Koch Bentzen <post@jonaskochbentzen.dk> & Kenneth Kristiansen <kk@linuxfreak.adsl.dk>
 // Updates, corrections and additions for the Plus version by Bente Feldballe
 // Do not use ' but use  ’  instead (utf-8 edit bug)
@@ -85,7 +85,8 @@ define("L_REG_35", "Administration");
 define("L_REG_36", "Sted/Land");
 define("L_REG_37", "Felter markeret med en <span class=\"error\">*</span> skal udfyldes.");
 define("L_REG_39", "Det chatrum, du var i, er blevet lukket af administrator.");
-define("L_REG_44", "Par"); // henviser til køn som i et par "mand og kvinde" (ægtepar, par, familie)
+define("L_REG_43", "Fortroligt");
+define("L_REG_44", "Par");
 define("L_REG_45", "Køn");
 define("L_REG_46", "Mand");
 define("L_REG_47", "Kvinde");
@@ -504,8 +505,9 @@ define("L_LINKS_13", "for at afspille denne lydfil"); // can also be translated 
 define("L_LINKS_14", "for at anvende denne kommando");
 define("L_LINKS_15", "for at åbne");
 define("L_LINKS_16", "Smiley Galleriet");
-define("L_LINKS_17", "for sortere i stigende orden");
-define("L_LINKS_18", "for sortere i faldende orden");
+define("L_LINKS_17", "for at sortere i stigende orden");
+define("L_LINKS_18", "for at sortere i faldende orden");
+define("L_LINKS_19", "hvis du vil oprette/ændre dit Gravatar");
 define("L_SWITCH", "Skift til"); // E.g. "Skift til italiensk" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "er valgt"); // E.g. "Fransk - er valgt" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
@@ -631,4 +633,7 @@ define("L_DESC", "Faldende");
 
 // Returning visitors counter on profiles by Ciprian
 define("L_LOGIN_COUNT", "Samlet antal besøg"); // number of logins (returning visits) to chat
+
+// Gravatar from email mod by Ciprian
+define("L_GRAV_USE", "Brug Gravatar");
 ?>

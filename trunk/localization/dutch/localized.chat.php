@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.chat.php - plus version (20.05.2008 - rev.39)
+// File : dutch/localized.chat.php - plus version (18.06.2008 - rev.40)
 // Original translation by Hans Paijmans <paai@kub.nl>, Kasper Souren <guaka@industree.org> and Sander Corbesir <rock@jascrc.com>
 // Updates, corrections and additions for the Plus version by DJE.Amesz & Romanesko <Genieusdanny@gmail.com> and Bert Moorlag <berbia@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -86,6 +86,7 @@ define("L_REG_35", "Administratie");
 define("L_REG_36", "Lokatie/Land");
 define("L_REG_37", "Velden met: <span class=\"error\">*</span> moeten worden ingevuld.");
 define("L_REG_39", "De kamer waar je in ben geweest is verwijderd door administratie.");
+define("L_REG_43", "Vertrouwelijk");
 define("L_REG_44", "Stelletje");
 define("L_REG_45", "Geslacht");
 define("L_REG_46", "Man");
@@ -495,8 +496,9 @@ define("L_LINKS_13", "om geluid te verzenden"); // Click to blablabla : it can a
 define("L_LINKS_14", "om deze commando te gebruiken");
 define("L_LINKS_15", "om te openen"); // to open/see Posted Links window
 define("L_LINKS_16", "Smilie Gallerij");
-define("L_LINKS_17", "sorteer oplopend"); //Click here to ...
-define("L_LINKS_18", "sorter aflopend"); //Click here to ...
+define("L_LINKS_17", "om oplopend te sorteren");
+define("L_LINKS_18", "om aflopend te sorteren");
+define("L_LINKS_19", "om aan te passen/veranderen van jou Gravatar");
 define("L_SWITCH", "Schakel over naar");
 define("L_SELECTED", "selecteer");
 define("L_SELECTED_F", ""); // feminine word, if it's the case
@@ -621,4 +623,7 @@ define("L_DESC", "Aflopend");
 
 // Returning visitors counter on profiles by Ciprian
 define("L_LOGIN_COUNT", "Totaal bezocht");
+
+// Gravatar from email mod by Ciprian
+define("L_GRAV_USE", "gebruik de Gravatar");
 ?>

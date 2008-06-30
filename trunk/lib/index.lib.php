@@ -1357,11 +1357,7 @@ if (!isset($Ver)) $Ver = "L";
 		// Display flags if necessary
 		if (C_MULTI_LANG)
 		{
-		?>
-		<TR CLASS="ChatCell">
-			<TD COLSPAN=2 ALIGN="CENTER" CLASS="ChatCell">
-				<SPAN CLASS="ChatFlags">
-				<?php
+				$disp_flags = "";
 				$i = 0;
 				while(list($key, $name) = each($AvailableLanguages))
 				{
@@ -1415,13 +1411,19 @@ if (!isset($Ver)) $Ver = "L";
 						if ($L=="turkish") $FLAG_STATUS = $FLAG_NAME." ".L_SWITCH;
 						else $FLAG_STATUS = L_SWITCH." ".$FLAG_NAME;
 					}
-					if ($name != $L) echo("<A HREF=\"$Action?L=${name}\" onMouseOver=\"window.status='".$FLAG_STATUS.".'; return true;\" Title=\"".$FLAG_OVER."\">");
-					echo("<IMG SRC=\"${ChatPath}localization/${name}/images/".$flag."\" onMouseOver=\"window.status='".$FLAG_STATUS.".'; return true;\" BORDER=0 ALT=\"".$FLAG_OVER."\" Title=\"".$FLAG_OVER."\">");
-					if ($name != $L) echo("</A>");
-					echo("&nbsp;");
-					if ($i % 10 == 0) echo ("<br />");
+					if ($name != $L) $disp_flags .= "<A HREF=\"$Action?L=${name}\" onMouseOver=\"window.status='".$FLAG_STATUS.".'; return true;\" Title=\"".$FLAG_OVER."\">";
+					$disp_flags .= "<IMG SRC=\"${ChatPath}localization/${name}/images/".$flag."\" onMouseOver=\"window.status='".$FLAG_STATUS.".'; return true;\" BORDER=0 ALT=\"".$FLAG_OVER."\" Title=\"".$FLAG_OVER."\">";
+					if ($name != $L) $disp_flags .= "</A>";
+					if ($i % 10 == 0) $disp_flags .= "<br />";
+					else $disp_flags .= "&nbsp;";
 				};
 				unset($AvailableLanguages);
+				?>
+		<TR CLASS="ChatCell">
+			<TD COLSPAN=2 ALIGN="CENTER" CLASS="ChatCell">
+				<SPAN CLASS="ChatFlags">
+				<?php
+					echo rtrim($disp_flags, '&nbsp;');
 				?>
 				</SPAN>
 			</TD>
