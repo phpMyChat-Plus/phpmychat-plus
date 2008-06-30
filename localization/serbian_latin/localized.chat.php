@@ -1,5 +1,5 @@
 <?php
-// File : serbian_latin/localized.chat.php - plus version (20.05.2008 - rev.39)
+// File : serbian_latin/localized.chat.php - plus version (18.06.2008 - rev.40)
 // Original translation by Vedran Vučić <vedran.vucic@gnulinuxcentar.org>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -84,6 +84,7 @@ define("L_REG_35", "Administracija");
 define("L_REG_36", "Lokacija/Država");
 define("L_REG_37", "Polja sa <span class=\"error\">*</span> moraju biti uspunjena.");
 define("L_REG_39", "Administrator je uklonio sobu u kojoj ste bili.");
+define("L_REG_43", "Neprikazano");
 define("L_REG_44", "Par"); // refers to gender as a pair "man and woman" (couple, pair, family)
 define("L_REG_45", "Rod");
 define("L_REG_46", "Muško");
@@ -504,6 +505,7 @@ define("L_LINKS_15", "da otvorite");
 define("L_LINKS_16", "Smeško Galerija");
 define("L_LINKS_17", "da poredate uzlazno");
 define("L_LINKS_18", "da poredate silazno");
+define("L_LINKS_19", "da se postavi/modifikuje vaš Gravatar");
 define("L_SWITCH", "Prebacite na"); // E.g. "Prebacite na Talijanski" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "odabran"); // E.g. "Francuski - odabran" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", "odabrana"); // feminine word, if it's the case
@@ -629,4 +631,7 @@ define("L_DESC", "Silazno");
 
 // Returning visitors counter on profiles by Ciprian
 define("L_LOGIN_COUNT", "Ukupno poseta");
+
+// Gravatar from email mod by Ciprian
+define("L_GRAV_USE", "koristite Gravatar");
 ?>

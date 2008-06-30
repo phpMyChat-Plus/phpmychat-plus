@@ -12,7 +12,7 @@ UPGRADE ONLY -> Safe Procedures - IMPORTANT!
 P - any file you have modified in your current chat version (styles, usersH/L, banner, index, index.lib, localization, etc.);
 1c. Optionally, you can delete now the old content of the chat folder;
 1d. Upload the new provided folders and files extracted from the plus.zip distribution (choose "Overwrite all" if the old content has not been deleted at the previous step);
-After uploading the new chat  put back ONLY the following backed up files (in the according folders):
+After uploading the new chat put back ONLY the following backed up files (in the according folders):
 - acount/pages/chat_index.txt;
 - config/config.lib.php (or just put in the new file the DB data mentioned at step 2 bellow);
 - entire logs folder content (only if you first deleted it from ftp);
@@ -58,9 +58,10 @@ plus/acount/pages/bak/ - to 777
 plus/acount/pages/chat_index.txt - to 666
 plus/acount/pages/chat_ip_logs.htm - to 666
 plus/acount/pages/ip.txt - to 666
+plus/admin/backups/ - to 777
 plus/bot/subs.inc - to 777
 plus/botfb/ - to 777
-plus/images/cache/ - to 777
+plus/cache/ - to 777
 plus/logs/ - to 777
 plus/logsadmin/ - to 777
 

@@ -403,7 +403,7 @@ if(isset($Error))
 					<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP">Gravatar :</TD>
 				 	<TD VALIGN="TOP">
 				<?php
-					echo("<a href=\"http://en.gravatar.com/site/login/\" title=\"".sprintf(L_CLICK,L_LINKS_19)."\" target=\"_blank\">".$gravatarTag."</a>");
+					echo("<a href=\"http://www.gravatar.com\" title=\"".sprintf(L_CLICK,L_LINKS_19)."\" target=\"_blank\">".$gravatarTag."</a>");
 				?>
 				&nbsp;<INPUT type="checkbox" name="USE_GRAV" value="1" <?php if(isset($USE_GRAV) && $USE_GRAV) echo("checked"); ?><?php if ($done|| $ALLOW_GRAVATARS != 1) echo(" READONLY"); ?>>&nbsp;<?php echo(L_GRAV_USE); ?>
 					</TD>

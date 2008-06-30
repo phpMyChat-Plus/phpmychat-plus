@@ -1,5 +1,5 @@
 <?php
-// File : argentinian_spanish/localized.chat.php - plus version (20.05.2008 - rev.39)
+// File : argentinian_spanish/localized.chat.php - plus version (18.06.2008 - rev.40)
 // Original translation in Spanish (for the Argentinian dialect usage) by Jorge Colaccini <jrc@informas.com>
 // Updates, corrections and additions for the Plus version by Matias Olivera <matiolivera@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -86,6 +86,7 @@ define("L_REG_35", "Administración");
 define("L_REG_36", "Idiomas posibles");
 define("L_REG_37", "Los campos con un <span class=\"error\">*</span> necesariamente deben ser completados.");
 define("L_REG_39", "El salón en el que te encontrabas ha sido removido por el administrador.");
+define("L_REG_43", "Confidencial");
 define("L_REG_44", "Pareja");
 define("L_REG_45", "Sexo");
 define("L_REG_46", "Masculino");
@@ -506,6 +507,7 @@ define("L_LINKS_15", "para abrir"); // to open/see Posted Links window
 define("L_LINKS_16", "Galeria de emoticones");
 define("L_LINKS_17", "para orden ascendente");
 define("L_LINKS_18", "para orden descendente");
+define("L_LINKS_19", "para setear/modificar tu Gravatar");
 define("L_SWITCH", "Cambiar a"); // Switch to English (Country Flags over / Language switching)
 define("L_SELECTED", "seleccionado"); // French - selected (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
@@ -630,4 +632,7 @@ define("L_DESC", "Descendiente");
 
 // Returning visitors counter on profiles by Ciprian
 define("L_LOGIN_COUNT", "Total de visitas"); // number of logins (returning visits) to chat
+
+// Gravatar from email mod by Ciprian
+define("L_GRAV_USE", "usa el Gravatar");
 ?>
