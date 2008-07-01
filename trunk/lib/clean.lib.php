@@ -50,7 +50,7 @@ if(C_CHAT_LOGS)
 // Clean the old messages (without logs)
 else
 {
-	$ChatM->query("DELETE FROM ".C_MSG_TBL." WHERE ((m_time < ".(time() - C_MSG_DEL * 60 * 60)." AND pm_read NOT LIKE 'New%') OR (m_time < ".(time() - ((C_MSG_DEL + (C_PM_KEEP_DAYS * 24)) * 60 * 60)).")) AND !(username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"')");
+	$ChatM->query("DELETE FROM ".C_MSG_TBL." WHERE ((m_time < ".(time() - C_MSG_DEL * 60 * 60)." AND pm_read NOT LIKE 'New%') OR (m_time < ".(time() - ((C_MSG_DEL + (C_PM_KEEP_DAYS * 24)) * 60 * 60)).")) AND !(username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"%')");
 }
 
 // Clean the lurkers table
