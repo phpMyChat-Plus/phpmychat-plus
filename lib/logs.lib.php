@@ -18,7 +18,7 @@ $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: C
 mysql_query("SET NAMES 'utf8'");
 mysql_select_db(C_DB_NAME);
 
-$sql = "SELECT * FROM ".C_MSG_TBL." WHERE (m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."' AND username != 'SYS welcome' AND pm_read NOT LIKE 'New%' AND !(username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"%')) ORDER BY m_time DESC";
+$sql = "SELECT * FROM ".C_MSG_TBL." WHERE (m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."' AND username != 'SYS welcome' AND pm_read NOT LIKE 'New%' AND !(username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"')) ORDER BY m_time DESC";
 $query = mysql_query($sql) or die("Cannot query the database.<br />" . mysql_error());
 // Collect and store new messages
 $Messages = Array();
@@ -116,7 +116,7 @@ $i++;
 if ($i > 1)
 {
 $today = date('d-m-y H:i:s', time() + C_TMZ_OFFSET*60*60);
-$lastsql = "SELECT * FROM ".C_MSG_TBL." WHERE (m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."' AND username != 'SYS welcome' AND pm_read NOT LIKE 'New%' AND !(username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"%')) ORDER BY m_time DESC LIMIT 1";
+$lastsql = "SELECT * FROM ".C_MSG_TBL." WHERE (m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."' AND username != 'SYS welcome' AND pm_read NOT LIKE 'New%' AND !(username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"')) ORDER BY m_time DESC LIMIT 1";
 $lastquery = mysql_query($lastsql) or die("Cannot query the database.<br />" . mysql_error());
 while($lastresult = mysql_fetch_array($lastquery))
 {
@@ -347,7 +347,7 @@ $iu = 0;
 if ($done == 1 || $doneu == 1)
 {
 // Delete the exported messages as well as the unread off-line pms older than 1 month
-$delsql = "DELETE FROM ".C_MSG_TBL." WHERE ((m_time < ".(time() - C_MSG_DEL * 60 * 60)." AND pm_read NOT LIKE 'New%') OR (m_time > ".(time() - ((C_MSG_DEL + (C_PM_KEEP_DAYS * 24)) * 60 * 60)).")) AND !(username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"%')";
+$delsql = "DELETE FROM ".C_MSG_TBL." WHERE ((m_time < ".(time() - C_MSG_DEL * 60 * 60)." AND pm_read NOT LIKE 'New%') OR (m_time < ".(time() - ((C_MSG_DEL + (C_PM_KEEP_DAYS * 24)) * 60 * 60)).")) AND !(username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"')";
 $delquery = mysql_query($delsql) or die("Cannot query the database.<br />" . mysql_error());
 }
 ?>
