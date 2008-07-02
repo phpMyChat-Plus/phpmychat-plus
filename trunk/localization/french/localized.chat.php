@@ -1,5 +1,5 @@
 <?php
-// File : french/localized.chat.php - plus version (20.05.2008 - rev.39)
+// File : french/localized.chat.php - plus version (18.06.2008 - rev.40)
 // Translation for Plus version by Pierre Liget <sourceforge@pliget.freesurf.fr> 10.12.2007
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -85,6 +85,7 @@ define("L_REG_35", "Administration");
 define("L_REG_36", "Localisation/Pays");
 define("L_REG_37", "Les champs signalés par un <span class=\"error\">*</span> sont obligatoires.");
 define("L_REG_39", "Le salon où vous étiez a été supprimé par l’administrateur.");
+define("L_REG_43", "Confidentiel");
 define("L_REG_44", "Couple");
 define("L_REG_45", "Sexe");
 define("L_REG_46", "Homme");
@@ -505,6 +506,7 @@ define("L_LINKS_15", "pour ouvrir");
 define("L_LINKS_16", "Galerie de Smiley");
 define("L_LINKS_17", "pour trier par ordre croissant");
 define("L_LINKS_18", "pour trier par ordre décroissant");
+define("L_LINKS_19", "pour définir/modifier votre Gravatar");
 define("L_SWITCH", "Basculer en"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "sélectionné"); // E.g. "French - selected" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", "sélectionnée"); // feminine word, if it's the case
@@ -632,4 +634,7 @@ define("L_DESC", "Décroissant");
 
 // Returning visitors counter on profiles by Ciprian
 define("L_LOGIN_COUNT", "Nombre total de visites"); // number of logins (returning visits) to chat
+
+// Gravatar from email mod by Ciprian
+define("L_GRAV_USE", "utiliser le Gravatar");
 ?>
