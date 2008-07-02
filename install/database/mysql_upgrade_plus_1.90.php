@@ -65,7 +65,7 @@ mysql_query("
 UPDATE ".$t_config." SET
 			ENTRANCE_SOUND = 'sounds/chimeup.wav',
 			CMDS = '/away /buzz /demote /dice /dice2 /dice3 /high /img /mr<br />/room /size /sort /topic /wisp',
-			MODS = 'Advanced Admin, Avatars, Smilies Popup, Color Drop Box, Private Popup,<br />Quick Menu, Logs Archive, Lurking, Color names, WorldTime, UTF-8',
+			MODS = 'Advanced Admin, (GR)Avatars, Smilies Popup, Color Drop Box, Private Popup,<br />Quick Menu, Logs Archive, Lurking, Color names, WorldTime, UTF-8',
 			ROOM_SKIN1 = '1',
 			ROOM_SKIN2 = '2',
 			ROOM_SKIN3 = '3',
