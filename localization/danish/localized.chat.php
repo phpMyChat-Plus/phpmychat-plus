@@ -308,7 +308,7 @@ define("L_AWAY", "%s er fraværende");
 define("L_BACK", "%s er tilbage!");
 
 // Quick Menu mod
-define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***** Lynmenu *****");	//&nbsp; means one blank space. this will center align the title of the drop list.
+define("L_QUICK", "Lynmenu");
 
 // Topic Banner mod
 define("L_TOPIC", "har valgt EMNET:");

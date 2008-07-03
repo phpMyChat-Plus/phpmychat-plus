@@ -307,7 +307,7 @@ define("L_AWAY", "%s được đánh dấu ra khỏi");
 define("L_BACK", "%s ra khỏi!");
 
 // Quick Menu mod
-define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;***** Thực đơn Nhanh *****");	//&nbsp; means one blank space. this will center align the title of the drop list.
+define("L_QUICK", "Thực đơn Nhanh");
 
 // Topic Banner mod
 define("L_TOPIC", "đặt đề tài tới:");

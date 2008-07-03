@@ -309,7 +309,7 @@ define("L_AWAY", "%s är bort markerad");
 define("L_BACK", "%s är tillbaka!");
 
 // Quick Menu mod
-define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***** Snabb Meny *****");	//&nbsp; means one blank space. this will center align the title of the drop list.
+define("L_QUICK", "Snabb Meny");
 
 // Topic Banner mod
 define("L_TOPIC", "har sats som ÄMNE till:");

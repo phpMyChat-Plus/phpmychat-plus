@@ -310,7 +310,7 @@ define("L_AWAY", "Lo stato personale di %s è: Non al computer.");
 define("L_BACK", "Lo stato personale di %s è: Al computer.");
 
 // Quick Menu mod
-define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***** Menu Veloce *****");	//&nbsp; means one blank space. this will center align the title of the drop list.
+define("L_QUICK", "Menu Veloce");
 
 // Topic Banner mod
 define("L_TOPIC", "ha impostato l’argomento in:");

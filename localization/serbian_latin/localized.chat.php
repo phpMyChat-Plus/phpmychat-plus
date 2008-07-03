@@ -306,7 +306,7 @@ define("L_AWAY", "%s je označen kao odsutan");
 define("L_BACK", "%s se vratio!");
 
 // Quick Menu mod
-define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***** Brzi Meni *****");	//&nbsp; means one blank space. this will center align the title of the drop list.
+define("L_QUICK", "Brzi Meni");
 
 // Topic Banner mod
 define("L_TOPIC", "je postavio TEMU kao:");
