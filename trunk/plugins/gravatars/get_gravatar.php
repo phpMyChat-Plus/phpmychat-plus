@@ -1,13 +1,19 @@
 <?php
 	// Sets the username for the cache filename
-	if (isset($User) && $User != "") $user_name = $User."_";
-	elseif (isset($OtherUser) && $OtherUser != "") $user_name = $OtherUser."_";
-	else $user_name = 'def_';
-	if ((!isset($use_gravatar) || !$use_gravatar) && GRAVATARS_DYNAMIC_DEF == "") $user_name = 'def_';
-	if (eregi("win", PHP_OS) && stristr(urlencode($user_name), "%")) $user_name = "enc_";
+	if (isset($User) && $User != "") $user_name = $User;
+	elseif (isset($OtherUser) && $OtherUser != "") $user_name = $OtherUser;
+	else $user_name = 'def';
+	if ((!isset($use_gravatar) || !$use_gravatar) && GRAVATARS_DYNAMIC_DEF == "") $user_name = 'def';
+	if (eregi("win", PHP_OS) && stristr(urlencode($user_name), "%")) $user_name = "enc";
 
 	// Sets the email for the gravatar link
-	if ((!isset($email) || $email == "") && (isset($user_name) && $user_name != 'def_') && GRAVATARS_DYNAMIC_DEF != "") $email = $user_name."@".$user_name.".com";
+	$email_reset = 0;
+	if ((!isset($email) || $email == "") && (isset($user_name) && $user_name != 'def') && GRAVATARS_DYNAMIC_DEF != "")
+	{
+		$email_reset = 1;
+		$email = $user_name."@".$user_name.".com";
+	}
+	$user_name .= '_';
 
 	// Sets the default Dynamic Gravatar
 	if (ALLOW_GRAVATARS == 2 || (ALLOW_GRAVATARS == 1 && $local_avatar)) $dynamic_def = GRAVATARS_DYNAMIC_DEF;
@@ -37,4 +43,6 @@ if ($gravatar != "")
 	$avatar = $gravatar;
 	$gravatarTag = $pAvatar->getTag();
 }
+
+if ($email_reset) $email = "";
 ?>
