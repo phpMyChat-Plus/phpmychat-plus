@@ -89,7 +89,7 @@ function styles_files()
 				$i = 0;
 				while (false !== ($skinfile = readdir($skinfiles)))
 				{
-					if (!eregi('\.html',$skinfile) && !eregi('\.css',$skinfile) && !eregi('preview',$skinfile) && $skinfile!=='.' && $skinfile!=='..')
+					if (!eregi('\.html',$skinfile) && !eregi('\.css',$skinfile) && $skinfile!=='.' && $skinfile!=='..')
 					{
 						$skinsfile[]=$skinfile;
 			 		$i++;
