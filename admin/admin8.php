@@ -145,6 +145,7 @@ $DbLink->query("SELECT type, room, username, latin1, m_time, address, message, r
 // Format and display new messages
 if($DbLink->num_rows() > 0)
 {
+	$NBMessages = 1;
 	$MessagesString = "";
 	while(list($Type, $Room, $User, $Latin1, $Time, $Dest, $Message, $RoomFrom) = $DbLink->next_record())
 	{
@@ -265,6 +266,7 @@ if($DbLink->num_rows() > 0)
 }
 else
 {
+	$NBMessages = 0;
 	$MessagesString = "<tr align=texttop valign=top><td colspan=4 align=center style=\"background-color:yellow;\"><SPAN CLASS=\"notify\">".L_NO_MSG."</SPAN></td></tr>";
 };
 
@@ -353,12 +355,15 @@ while($data = @mysql_fetch_array($result))
 }
 }
 	echo("<center><hr />");
-	echo("<table ALIGN=CENTER BORDER=1 WIDTH=98% CELLSPACING=0 CELLPADDING=1 CLASS=table>");
-	echo("<tr>
-<td VALIGN=CENTER ALIGN=CENTER nowrap=\"nowrap\"><b>".A_POST_TIME."</b></td>
-<td VALIGN=CENTER ALIGN=CENTER nowrap=\"nowrap\"><b>".A_CHTEX_ROOM."</b></td>
-<td VALIGN=CENTER ALIGN=CENTER nowrap=\"nowrap\"><b>".A_FROM_TO."</b></td>
-<td VALIGN=CENTER ALIGN=CENTER nowrap=\"nowrap\"><b>".A_CHTEX_MSG."</b></td></tr>");
+	echo("<table BORDER=1 WIDTH=100% CELLSPACING=0 CELLPADDING=1 CLASS=table>");
+	if ($NBMessages)
+	{
+		echo("<tr>
+		<td VALIGN=CENTER ALIGN=CENTER nowrap=\"nowrap\"><b>".A_POST_TIME."</b></td>
+		<td VALIGN=CENTER ALIGN=CENTER nowrap=\"nowrap\"><b>".A_CHTEX_ROOM."</b></td>
+		<td VALIGN=CENTER ALIGN=CENTER nowrap=\"nowrap\"><b>".A_FROM_TO."</b></td>
+		<td VALIGN=CENTER ALIGN=CENTER nowrap=\"nowrap\"><b>".A_CHTEX_MSG."</b></td></tr>");
+	}
 	echo($MessagesString."</table><br />");
 	unset($MessagesString);
 ?>

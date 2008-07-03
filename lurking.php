@@ -101,6 +101,7 @@ $DbLink1->query("SELECT m_time, room, username, latin1, address, message FROM ".
 // Format and display new messages
 if($DbLink1->num_rows() > 0)
 {
+	$NBMessages = 1;
 	$MessagesString = "";
 	while(list($Time, $Room, $User, $Latin1, $Dest, $Message) = $DbLink1->next_record())
 	{
@@ -222,6 +223,7 @@ if($DbLink1->num_rows() > 0)
 }
 else
 {
+	$NBMessages = 0;
 	$MessagesString = "<tr align=texttop valign=top><td valign=top colspan=4 align=center style=\"background-color:yellow;\"><SPAN CLASS=\"notify\">".L_NO_MSG."</SPAN></td></tr>";
 };
 
@@ -270,12 +272,15 @@ if (C_WORLDTIME == 2)
 <?php
 	include("lib/useronline.lib.php");
 	echo("<hr />");
-	echo("<table BORDER=1 WIDTH=98% CELLSPACING=0 CELLPADDING=1 CLASS=table>");
-	echo("<tr>
-<td VALIGN=CENTER ALIGN=CENTER nowrap=\"nowrap\"><b>".L_PRIV_MSG5."</b></td>
-<td VALIGN=CENTER ALIGN=CENTER nowrap=\"nowrap\"><b>".L_PRIV_MSG2."</b></td>
-<td VALIGN=CENTER ALIGN=CENTER nowrap=\"nowrap\"><b>".L_PRIV_MSG1."</b></td>
-<td VALIGN=CENTER ALIGN=CENTER nowrap=\"nowrap\"><b>".L_PRIV_MSG4."</b></td></tr>");
+	echo("<table BORDER=1 WIDTH=100% CELLSPACING=0 CELLPADDING=1 CLASS=table>");
+	if ($NBMessages)
+	{
+		echo("<tr>
+		<td VALIGN=CENTER ALIGN=CENTER nowrap=\"nowrap\"><b>".L_PRIV_MSG5."</b></td>
+		<td VALIGN=CENTER ALIGN=CENTER nowrap=\"nowrap\"><b>".L_PRIV_MSG2."</b></td>
+		<td VALIGN=CENTER ALIGN=CENTER nowrap=\"nowrap\"><b>".L_PRIV_MSG1."</b></td>
+		<td VALIGN=CENTER ALIGN=CENTER nowrap=\"nowrap\"><b>".L_PRIV_MSG4."</b></td></tr>");
+	}
 	echo($MessagesString."</table>");
 	unset($MessagesString);
 	?>
