@@ -104,7 +104,7 @@ $y='./'.C_LOG_DIR.''; #define which year you want to read
 				echo("\n<tr>\n<td valign=top align=center nowrap=\"nowrap\"><font size=4 color=blue><b>".A_CHAT_LOGS_27."</b></font></td></tr>\n<tr>\n<td valign=top align=left nowrap=\"nowrap\">");
 					foreach ($ziparray as $zy)
 					{
-						echo ("\n<div style=\"background: white;\">\n<li><a href=\"$pstr&fdel=".$y."/".$zy."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_14.A_CHAT_LOGS_19,$zy)."')\" title='".A_CHAT_LOGS_29."'><font size=-2 color=red><b>x</b></font></a>&nbsp;<a href=$y/$zy title='".sprintf(A_CHAT_LOGS_28,$zy)."'>$zy</a>&nbsp;(".filesize($y."/".$zy)." bytes, ".strftime(L_SHORT_DATETIME, filemtime($y."/".$zy)).")\n</div>"); #print name of each file found
+						echo ("\n<li><a href=\"$pstr&fdel=".$y."/".$zy."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_14.A_CHAT_LOGS_19,$zy)."')\" title='".A_CHAT_LOGS_29."'><font size=-2 color=red><b>x</b></font></a>&nbsp;<a href=$y/$zy title='".sprintf(A_CHAT_LOGS_28,$zy)."'>$zy</a>&nbsp;(".filesize($y."/".$zy)." bytes, ".strftime(L_SHORT_DATETIME, filemtime($y."/".$zy)).")"); #print name of each file found
 						$i++;
 					}
 				}
@@ -196,7 +196,7 @@ else
 				$MONTHHU = $MONTH."i";
 				echo("\n</tr>\n<tr>\n<td valign=top align=left nowrap=\"nowrap\" colspan=6>\n<font size=4 color=green><b>$MONTH</b></font>\n - <a href=\"$pstr&mzip=".$yr."/".$monthdir."&path=$y&year=$yeardir&month=$monthdir\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_25.A_CHAT_LOGS_26,$yeardir."/".$monthdir)."')\" title='".sprintf(A_CHAT_LOGS_24,$yeardir."/".$monthdir)."'>\n<img src=\"images/archive.gif\" border=0 alt='".sprintf(A_CHAT_LOGS_24,$yeardir."/".$monthdir)."' />\n</a>\n - <a href=\"$pstr&mdel=".$yr."/".$monthdir."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_11.A_CHAT_LOGS_19,$yeardir."/".$monthdir)."')\" title='".sprintf(A_CHAT_LOGS_91,$MONTHHU)."'>\n<font size=-2 color=red><b>".A_CHAT_LOGS_13."</b>\n</font>\n</a>\n</td>"); #print name of each file found
 }
-				echo("\n</tr>\n<tr>\n<td valign=top align=left nowrap=\"nowrap\">\n<div style=\"background: white;\">");
+				echo("\n</tr>\n<tr>\n<td valign=top align=left nowrap=\"nowrap\">");
 				$d=$yr."/".$monthdir; #define which month you want to read
 				$day = opendir($d); #open directory
 				while (false !== ($dy = readdir($day)))
@@ -217,12 +217,12 @@ else
 						else $dyhtm=str_replace(".php","",$dy);
 						$dyhtm=str_replace($yeardir.$monthdir,"",$dyhtm);
 						echo ("\n<li><a href=\"$pstr&fdel=".$mt."/".$dy."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_14.A_CHAT_LOGS_19,$dy)."')\" title='".A_CHAT_LOGS_15."'><font size=-2 color=red><b>x</b></font></a>&nbsp;<a href=$d/$dy?L=$L title='".sprintf(A_CHAT_LOGS_16,$dyhtm." ".$MONTH)."' target=_self>$dyhtm</a>&nbsp;(".filesize($d."/".$dy)." bytes)"); #print name of each file found
-						if ($i % 5 == 0) echo ("\n</div>\n</td>\n<td valign=top align=left nowrap=\"nowrap\">\n<div style=\"background: white;\">");
+						if ($i % 5 == 0) echo ("\n</td>\n<td valign=top align=left nowrap=\"nowrap\">");
 						$i++;
 					}
 				}
 				unset($dayarray);
-				echo("\n</div>\n</td>");
+				echo("\n</td>");
 		}
 		echo("\n</tr>\n</table>\n<br />\n");
 }
@@ -248,7 +248,7 @@ $yu='./logs'; #define which year you want to read
 				echo("\n<tr>\n<td valign=top align=center nowrap=\"nowrap\"><font size=4 color=blue><b>".A_CHAT_LOGS_27." ".A_CHAT_LOGS_12."</b></font></td></tr>\n<tr>\n<td valign=top align=left nowrap=\"nowrap\">");
 					foreach ($ziparrayu as $zyu)
 					{
-						echo ("\n<div style=\"background: white;\">\n<li><a href=\"$pstr&fdel=".$yu."/".$zyu."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_14.A_CHAT_LOGS_12.A_CHAT_LOGS_19,$zyu)."')\" title='".A_CHAT_LOGS_29." ".A_CHAT_LOGS_12."'><font size=-2 color=red><b>x</b></font></a>&nbsp;<a href=$yu/$zyu title='".sprintf(A_CHAT_LOGS_28,$zyu)." ".A_CHAT_LOGS_12."'>$zyu</a>&nbsp;(".filesize($yu."/".$zyu)." bytes, ".strftime(L_SHORT_DATETIME, filemtime($yu."/".$zyu)).")\n</div>"); #print name of each file found
+						echo ("\n<li><a href=\"$pstr&fdel=".$yu."/".$zyu."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_14.A_CHAT_LOGS_12.A_CHAT_LOGS_19,$zyu)."')\" title='".A_CHAT_LOGS_29." ".A_CHAT_LOGS_12."'><font size=-2 color=red><b>x</b></font></a>&nbsp;<a href=$yu/$zyu title='".sprintf(A_CHAT_LOGS_28,$zyu)." ".A_CHAT_LOGS_12."'>$zyu</a>&nbsp;(".filesize($yu."/".$zyu)." bytes, ".strftime(L_SHORT_DATETIME, filemtime($yu."/".$zyu)).")"); #print name of each file found
 					}
 				}
 				unset($ziparrayu);
@@ -339,7 +339,7 @@ else
 				$MONTHUHU = $MONTHU."i";
 				echo("\n</tr>\n<tr>\n<td valign=top align=left nowrap=\"nowrap\" colspan=6>\n<font size=4 color=green><b>$MONTHU ".A_CHAT_LOGS_12."</b></font>\n - <a href=\"$pstr&mzip=".$yru."/".$monthdiru."&path=$yu&year=$yeardiru&month=$monthdiru\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_25.A_CHAT_LOGS_26,$yeardiru."/".$monthdiru)."')\" title='".sprintf(A_CHAT_LOGS_24,$yeardiru."/".$monthdiru)." ".A_CHAT_LOGS_12."'>\n<img src=\"images/archive.gif\" border=0 alt='".sprintf(A_CHAT_LOGS_24,$yeardiru."/".$monthdiru)." ".A_CHAT_LOGS_12."' />\n</a>\n - <a href=\"$pstr&mdel=".$yru."/".$monthdiru."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_11.A_CHAT_LOGS_12."\\n".A_CHAT_LOGS_19,$yeardiru."/".$monthdiru)."')\" title='".sprintf(A_CHAT_LOGS_91." ".A_CHAT_LOGS_12,$MONTHUHU)."'>\n<font size=-2 color=red><b>".A_CHAT_LOGS_13."</b></font>\n</a>\n</td>"); #print name of each file found
 }
-				echo("\n</tr>\n<tr>\n<td valign=top align=left nowrap=\"nowrap\">\n<div style=\"background: white;\">");
+				echo("\n</tr>\n<tr>\n<td valign=top align=left nowrap=\"nowrap\">");
 				$du=$yru."/".$monthdiru; #define which month you want to read
 				$dayu = opendir($du); #open directory
 				while (false !== ($dyu = readdir($dayu)))
@@ -360,12 +360,12 @@ else
 						else $dyhtmu=str_replace(".php","",$dyu);
 						$dyhtmu=str_replace($yeardiru.$monthdiru,"",$dyhtmu);
 						echo ("\n<li><a href=\"$pstr&fdel=".$mtu."/".$dyu."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_14.A_CHAT_LOGS_18."\\n".A_CHAT_LOGS_19,$dyu)."')\" title='".A_CHAT_LOGS_15."'><font size=-2 color=red><b>x</b></font></a>&nbsp;<a href=$du/$dyu?L=$L title='".sprintf(A_CHAT_LOGS_16." ".A_CHAT_LOGS_18,$dyhtmu." ".$MONTHU)."' target=_self>$dyhtmu</a>&nbsp;(".filesize($du."/".$dyu)." bytes)"); #print name of each file found
-						if ($j % 5 == 0) echo ("\n</div></td>\n<td valign=top align=left nowrap=\"nowrap\">\n<div style=\"background: white;\">");
+						if ($j % 5 == 0) echo ("\n</td>\n<td valign=top align=left nowrap=\"nowrap\">");
 						$j++;
 					}
 				}
 				unset($dayarrayu);
-				echo("\n</div>\n</td>");
+				echo("\n</td>");
 		}
 		echo("\n</tr>\n</table>\n<br />\n");
 }

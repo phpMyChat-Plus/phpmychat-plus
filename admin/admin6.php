@@ -57,7 +57,7 @@ $query = mysql_query($sql) or die("Cannot query the database.<br />" . mysql_err
 
 echo "<a href=\"$pstr&mdel=\"><b><font color=white>".A_REFRESH_MSG."</font></b></a></center><br />";
 echo "<table align=\"center\" border=\"0\" cellpadding=\"1\" cellspacing=\"1\" width=\"780\" CLASS=table>";
-echo "<tr CLASS=\"thumbIndex\">
+echo "<tr CLASS=\"tabtitle\">
 <td VALIGN=CENTER ALIGN=CENTER height=20 CLASS=tabtitle align=center><a href=\"$pstr&mord=T\"><b>".A_MSG_DEL."</b></a></td>
 <td VALIGN=CENTER ALIGN=CENTER height=20 CLASS=tabtitle align=center><a href=\"$pstr&mord=T\"><b>".A_POST_TIME."</b></a></td>
 <td VALIGN=CENTER ALIGN=CENTER height=20 CLASS=tabtitle align=center><a href=\"$pstr&mord=F\"><b>".A_FROM_TO."</b></a></td>
@@ -81,7 +81,7 @@ else $message = eregi_replace('target="_blank">','title="'.sprintf(L_CLICK,L_LIN
 $message = eregi_replace('alt="Send email">','title="'.sprintf(L_CLICK,L_EMAIL_1).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_EMAIL_1).'.\'; return true">',$message);
 $m_time = stripslashes($result["m_time"]);
 $time_posted = date("d-m-y H:i:s", $m_time);
-echo "<tr bgcolor=\"#FFFFFF\">
+echo "<tr class=\"msg2\">
 <td align=center><a href=\"$pstr&mord=$mord&mdel=".$m_time."\"><font size=-2 color=red><b>x</b></font></a></td>
 <td width=110 align=center>$time_posted</td>
 <td width=150><b>$username</b>$address</b>:</td>

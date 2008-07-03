@@ -206,7 +206,7 @@ INPUT, SELECT, TEXTAREA
 
 .table
 {
-	background-color: #D3D3D3;
+	background-color: #FFFFFF;
 	color: #000000;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
@@ -214,7 +214,7 @@ INPUT, SELECT, TEXTAREA
 
 .tabtitle
 {
-	background-color: #D3D3D3;
+	background-color: #FFFFFF;
 	color: #000000;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 800;
