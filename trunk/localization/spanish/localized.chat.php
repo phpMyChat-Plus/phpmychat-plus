@@ -295,7 +295,7 @@ define("L_AWAY", "%s está lejos");
 define("L_BACK", "¡%s ha regresado!");
 
 // Quick Menu mod
-define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***** Menu Rápido *****");	//&nbsp; means one blank space. this will center align the title of the drop list.
+define("L_QUICK", "Menu Rápido");
 
 // Topic Banner mod
 define("L_TOPIC", "ha puesto el TEMA a:");

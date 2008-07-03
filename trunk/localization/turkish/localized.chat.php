@@ -306,7 +306,7 @@ define("L_AWAY", "%s bilgisayar başından ayrıldı");
 define("L_BACK", "%s geri döndü!");
 
 // Quick Menu mod
-define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***** Pratik Menü *****");	//&nbsp; means one blank space. this will center align the title of the drop list.
+define("L_QUICK", "Pratik Menü");
 
 // Topic Banner mod
 define("L_TOPIC", "KONU adını şu şekilde ayarladı: - ");

@@ -647,14 +647,10 @@ function inputDropMsg()
 </SCRIPT>
 <?php
 $qnotelabel = L_QUICK;
-// use the following line for admins only to get a quicknote drop menu:
-// if (isset($dropdownmsg) && ($status == "a")) {
-// or use the following line version if you want moderators to get a drop menu too.
-// if (isset($dropdownmsg) && ($status == "a" || $status == "m")) {
-// or use the following line version if you want everybody to have access to it:
+// Change the numbers below (50 or 40) to fit the length of your Quick Menu title:
  if (isset($dropdownmsga) && ($status == "a" || $status == "t")) {
   print "<select name=\"quicknote\" onChange='inputDropMsg()'>";
-       print "<option value=\"\">&nbsp;&nbsp;".$qnotelabel."</option>\n";
+       print "<option value=\"\">".str_pad(" ".$qnotelabel." ", 50, "*", STR_PAD_BOTH)."</option>\n";
 	foreach ($dropdownmsga as $msg) {
 	$msg = stripslashes(sprintf($msg,$U));
         print "<option value=\"".$msg."\">".$msg."</option>\n";
@@ -662,7 +658,7 @@ $qnotelabel = L_QUICK;
 }
  elseif (isset($dropdownmsgm) && $status == "m") {
   print "<select name=\"quicknote\" onChange='inputDropMsg()'>";
-       print "<option value=\"\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$qnotelabel</option>\n";
+       print "<option value=\"\">".str_pad(" ".$qnotelabel." ", 50, "*", STR_PAD_BOTH)."</option>\n";
 	foreach ($dropdownmsgm as $msg) {
 	$msg = stripslashes(sprintf($msg,$U));
         print "<option value=\"".$msg."\">".$msg."</option>\n";
@@ -671,7 +667,7 @@ $qnotelabel = L_QUICK;
 else {
  if (isset($dropdownmsg)) {
   print "<select name=\"quicknote\" onChange='inputDropMsg()'>";
-       print "<option value=\"\">".$qnotelabel."</option>\n";
+       print "<option value=\"\">".str_pad(" ".$qnotelabel." ", 40, "*", STR_PAD_BOTH)."</option>\n";
 	foreach ($dropdownmsg as $msg) {
 	$msg = stripslashes(sprintf($msg,$U));
         print "<option value=\"".$msg."\">".$msg."</option>\n";

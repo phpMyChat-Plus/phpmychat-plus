@@ -307,7 +307,7 @@ define("L_AWAY", "%s е отбелязан като отсъстващ");
 define("L_BACK", "%s се върна!");
 
 // Quick Menu mod
-define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***** Бързо меню *****");	//&nbsp; means one blank space. this will center align the title of the drop list.
+define("L_QUICK", "Бързо меню");
 
 // Topic Banner mod
 define("L_TOPIC", "промени ТЕМАТА на:");

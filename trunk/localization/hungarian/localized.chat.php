@@ -307,7 +307,7 @@ define("L_AWAY", "%s nincs a gépnél.");
 define("L_BACK", "%s visszajött!");
 
 // Quick Menu mod
-define("L_QUICK", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***** Gyors Menü *****");	//&nbsp; means one blank space. this will center align the title of the drop list.
+define("L_QUICK", "Gyors Menü");
 
 // Topic Banner mod
 define("L_TOPIC", "módósította a TÉMÁT erre:");
