@@ -1,6 +1,16 @@
 Note: if you’ve already modded your own files, please compare and edit the changes from those included in this log to identify the changes made for the fix. If not, just replace them in the according folders.
 This log includes all the previously released fixes.
-Client browsers - tested with: IE > 6.0SP2 (including > 7.0 & > 8.0-beta), Mozilla Firefox > 1.6.0.0 (including < 3.0), Mozilla Firebird 0.7, Netscape > 8.1, Opera 9.0 build 8502, AvantBrowser 10.2 build 52, Flock 1.2.1, Apple Safari 3.1.
+Client browsers - tested with:
+	- IE < 5.5 = M;
+	- IE > 6.0SP2 (including > 7.0 & > 8.0-beta) = H;
+	- Mozilla Firefox > 1.6.0.0 (including < 3.0) = H;
+	- Mozilla Firefox > 3.0.1pre (also known as Gran Paradiso) = M;
+	- Mozilla Firebird 0.7 = L;
+	- Netscape > 8.1 = M;
+	- Opera 9.0 build 8502 = H;
+	- AvantBrowser 10.2 build 52 = H;
+	- Flock 1.2.1 = M;
+	- Apple Safari 3.1 = M.
 Server environment - tested env:
 	- Apache < 2.2.8 (Unix and Windows 2k/XP<SP3);
 	- php < 5.2.6 (non-safe-mode, but also a safe mode server has been tested and worked fine);
@@ -12,7 +22,7 @@ Server environment - tested env:
 Known issues (read also the FAQ):
 - configurations cannot be saved from admin panel on servers having magic_quotes set "on"; this also happen if the c_config table structure has been altered somehow and it doesn’t exactly follow the admin5.php field definitions; another identified reason would be the use of single quote ’ in field values (like Room’s Names or such) - never use single quotes - use the utf-8 ’ instead (you can copy it from here when you need it)
 - when a username uses utf-8 chars like ã î â , php cannot recognize a name with small caps as being similar with caps (Îrban is different than îrban) so please make sure you use the name in PMs and commands exacly as the one of the desired username (this is working fine on php > 5 servers, due to the added mb_* functions support);
-- on IE7, registered users don’t always actually leave chat after clicking the Exit door or Exit link - the loader frame doesn’t actually close but keep showing that user to the users’ lists until the user closes that specific browser window.
+- on IE7, registered users don’t always actually leave the chat after clicking the Exit door or Exit link - the loader frame doesn’t actually close but keep showing that user to the users’ lists until the user closes that specific browser window.
 
 Important: everytime you upgrade/reinstall a phpmychat server or change sensitive data in Admin panel (like default room names), the old cookies must be deleted from the clients’ machines - so let your users know! (also cache clearing might be a good idea)
 When you install Firefox2 and/or QuickTime (RealPlayer), a QuickTime plugin will break the WMP plugin in IE, necesary for playing .wav sounds, therefore, you won’t get sounds in IE anymore. I fixed it by playing with enabling WMP/disabling QuickTime plugins in IE; re-associating the "wav" files in Media Player/Tools/Options/File Types also fixes this.
@@ -21,7 +31,7 @@ We also added a small script (reg file) as a link in Extra Options in chat.
 
 Fixes History:
 10.06.2008 - 1.93-RC2:
-- banner.php filename is changed now to topic.php as well as all it’s old references; the AdBlock and AdBlock Plus plugins in Firefos were blocking it because the previous filename stands for advertisments; (functionality related)
+- banner.php filename is changed now to topic.php as well as all it’s old references; the AdBlock and AdBlock Plus plugins in Firefox were blocking it because the previous filename (banner.php) stands for advertisments; (functionality related)
 - the bot will not dissapear anymore from userlists when clean.lib or logs.lib are in action; (functionality related)
 - phpMyChat-Plus becomes the First Gravatarized LiveChat system in the world!!! (functionality extension)
 	- added option to display Gravatars as users’ avatars in chat (more details on gravatar.com);

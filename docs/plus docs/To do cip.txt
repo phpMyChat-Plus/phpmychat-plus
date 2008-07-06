@@ -9,7 +9,6 @@ Requests / Suggestions
 -credits page - Ciprian
 -/ghost command: put the user into a ghost state (the ghost user and his posts cannot be seen in the room, he won’t know about this, so he gives up and leave the chat - works when banning has no effect on a specific user; it also allows an admin/moder to go invisible in the chat); - Ciprian
 -commands table & archiving/logging the commands used in chat as well - Ciprian
--add link for offline pms? - Ciprian
 -cookie handler - to delete the old cookies automatically on new installs/upgrades and to remove the old room names on panel changes - Ciprian
 -automatically delete cookies after upgrade on each client machine - Ciprian (not sure yet how to do this - how can we check if a user is first time loading the page?)
 -fix the enable/disable sound command and add the option in the right menu in chat, not just in users_popup - Ciprian
@@ -23,7 +22,8 @@ Could we write a code in the styles, like "get permission" for a certain room? W
 
 
 Done:
-- the bot will dissapear from userlists when chat rooms clean.lib or logs.lib are in action - Ciprian - done
+-add a link for offline pms? - Ciprian - done - PM Popup Manager
+-the bot will dissapear from userlists when chat rooms clean.lib or logs.lib are in action - Ciprian - done
 -allow admins/moders to go invisible in the chat from panel - Ciprian - done
 -room names check for invalid chars in admin panel - urgent - Ciprian - done
 -add the mod admin permissions (to moderate moders as well, but cannot admin/kick the admin) (based on Luke’s idea & Cissy’s request) - Ciprian - done - Top Moderator power ("topmod", "t")
