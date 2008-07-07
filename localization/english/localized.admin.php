@@ -1,5 +1,5 @@
 <?php
-// File : english/localized.admin.php - plus version (20.05.2008 - rev.12)
+// File : english/localized.admin.php - plus version (07.07.2008 - rev.13)
 // Original file by Loďc Chapeaux <lolo@phpheaven.net> & Dean Collins <joelford@pacbell.net>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -93,9 +93,9 @@ define("A_CHTEX_MSG", "Message") ;
 //Save chat logs
 define("A_CHAT_LOGS_1", "Logs of IP Connections to %s");
 define("A_CHAT_LOGS_2", "Chat Archive has been disabled");
-define("A_CHAT_LOGS_3", "Open Chat IP logs page");
-define("A_CHAT_LOGS_4", "Delete Chat IP logs");
-define("A_CHAT_LOGS_5", "This will delete the IP logs file!\\n");
+define("A_CHAT_LOGS_3", "Open the Chat IP logs page");
+define("A_CHAT_LOGS_4", "Reset the Chat IP logs file");
+define("A_CHAT_LOGS_5", "This will archive and reset the Chat IP logs file!\\n");
 define("A_CHAT_LOGS_6", "Full Chat Logs Archive");
 define("A_CHAT_LOGS_7", "Show the public chat archive section");
 define("A_CHAT_LOGS_8", "This will delete all the files and folders\\nstored in the %s folder!\\n"); // year
@@ -120,6 +120,8 @@ define("A_CHAT_LOGS_26", "\\nAre you sure?");
 define("A_CHAT_LOGS_27", "Zip archives");
 define("A_CHAT_LOGS_28", "Download %s");
 define("A_CHAT_LOGS_29", "Delete this zip");
+define("A_CHAT_LOGS_30", "IP archives");
+define("A_CHAT_LOGS_31", "Total size %s %s");
 
 //Admin Search Page
 define("A_SEARCH_1", "Chatroom Search Page");

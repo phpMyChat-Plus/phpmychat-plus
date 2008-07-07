@@ -1,5 +1,5 @@
 <?php
-// File : hungarian/localized.admin.php - plus version (20.05.2008 - rev.12)
+// File : hungarian/localized.admin.php - plus version (07.07.2008 - rev.13)
 // Original file by Jácint Zsuzsanna <pycco8@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
@@ -92,10 +92,10 @@ define("A_CHTEX_MSG", "Üzenet") ;
 
 //Save chat logs
 define("A_CHAT_LOGS_1", "Az IP bejelentkezések archívuma a(z) %s-hoz");
-define("A_CHAT_LOGS_2", "A chat archívum ki van kapcsolva");
-define("A_CHAT_LOGS_3", "A chat IP log archívumának megnyitása");
-define("A_CHAT_LOGS_4", "A chat IP log archívumának törlése");
-define("A_CHAT_LOGS_5", "Ez törölni fogja az IP logs fájlt!\\n");
+define("A_CHAT_LOGS_2", "A Chat archívum ki van kapcsolva");
+define("A_CHAT_LOGS_3", "A Chat IP log archívumának megnyitása");
+define("A_CHAT_LOGS_4", "A Chat IP log-ok visszaállítása");
+define("A_CHAT_LOGS_5", "Ez archiválja és visszaállítja az IP log fájlokat!\\n");
 define("A_CHAT_LOGS_6", "Teljes Chat Log Archívum");
 define("A_CHAT_LOGS_7", "A publikus chat archívum mutatása");
 define("A_CHAT_LOGS_8", "Ez kitörli az összes %s nevű\\nmappában tárolt fájlt és mappát!\\n"); // year
@@ -116,11 +116,13 @@ define("A_CHAT_LOGS_21", "Vissza az oldal tetejére");
 define("A_CHAT_LOGS_22", "Archivált Log Fájl");
 define("A_CHAT_LOGS_23", "Létrehozás dátuma: %s"); // Generated on "date"
 define("A_CHAT_LOGS_24", "Tömörítsd az összes %s log-ot egy zip archívumba"); // date
-define("A_CHAT_LOGS_25", "Ez létrehoz egy tömörített mappát az összes log-gal\\na %s mappában tárolva.\\n"); // month/year
-define("A_CHAT_LOGS_26", "\\nBiztos vagy benne?");
+define("A_CHAT_LOGS_25", "Ez létrehoz egy tömörített mappát az összes\\nlog-gal a %s mappában tárolva.\\n"); // month/year
+define("A_CHAT_LOGS_26", "\\nBiztos vagy benne, hogy ezt akarod?");
 define("A_CHAT_LOGS_27", "Zip (tömörített mappa) archívum");
 define("A_CHAT_LOGS_28", "%s letöltése");
 define("A_CHAT_LOGS_29", "Zip (tömörített mappa) törlése");
+define("A_CHAT_LOGS_30", "IP archívumok");
+define("A_CHAT_LOGS_31", "Teljes méret %s %s");
 
 //Admin Search Page
 define("A_SEARCH_1", "Keresés a chat szobákban");

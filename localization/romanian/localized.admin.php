@@ -1,5 +1,5 @@
 <?php
-// File : romanian/localized.admin.php - plus version (20.05.2008 - rev.12)
+// File : romanian/localized.admin.php - plus version (07.07.2008 - rev.13)
 // Original translation started by Radu Swider <swidera@satline.ro>, first updated by Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro>
 // Corrected, finalized and updated to Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -93,8 +93,8 @@ define("A_CHTEX_MSG", "Mesajul") ;
 define("A_CHAT_LOGS_1", "Istoricul IP-urilor Connectate la %s");
 define("A_CHAT_LOGS_2", "Arhivarea mesajelor a fost dezactivată");
 define("A_CHAT_LOGS_3", "Deschide pagina cu istoricul IP-urilor");
-define("A_CHAT_LOGS_4", "Şterge istoricul IP-urilor");
-define("A_CHAT_LOGS_5", "Aceasta va şterge istoricul IP-urilor conectate!\\n");
+define("A_CHAT_LOGS_4", "Resetează istoricul IP-urilor");
+define("A_CHAT_LOGS_5", "Aceasta va salva şi reseta fişierul cu istoricul IP-urilor!\\n");
 define("A_CHAT_LOGS_6", "- Arhiva completă a mesajelor");
 define("A_CHAT_LOGS_7", "Arată numai arhiva publică");
 define("A_CHAT_LOGS_8", "Aceasta va şterge toate istoricele\\nsalvate în anul %s!\\n");
@@ -119,6 +119,8 @@ define("A_CHAT_LOGS_26", "\\nEşti sigur?");
 define("A_CHAT_LOGS_27", "Fişiere Zip Salvate");
 define("A_CHAT_LOGS_28", "Descarcă %s");
 define("A_CHAT_LOGS_29", "Şterge acest fişier zip");
+define("A_CHAT_LOGS_30", "Fişiere IP Salvate");
+define("A_CHAT_LOGS_31", "Mărime totală %s %s");
 
 //Admin Search Page
 define("A_SEARCH_1", "Pagina de căutare");
