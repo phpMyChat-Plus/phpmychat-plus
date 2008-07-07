@@ -1,5 +1,5 @@
 <?php
-// File : swedish/localized.admin.php - plus version (20.05.2008 - rev.12)
+// File : swedish/localized.admin.php - plus version (07.07.2008 - rev.13)
 // Original file by Martin Edelius <martin.edelius@spirex.se>
 // Updates, corrections and additions for the Plus version by Heikki <heikki@yttervik.be> & Fimpen Högström <fimpen@relative-work.se>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -95,8 +95,8 @@ define("A_CHTEX_MSG", "Meddelande");
 define("A_CHAT_LOGS_1", "Loggning av IP Connections till %s"); // phpMyChat (app name)
 define("A_CHAT_LOGS_2", "Chat Logg har blivit borttaget");
 define("A_CHAT_LOGS_3", "Öppna Chat IP logg sidan");
-define("A_CHAT_LOGS_4", "Radera Chat IP logg");
-define("A_CHAT_LOGS_5", "Detta kommer att radera IP loggfilen!\\n");
+define("A_CHAT_LOGS_4", "Nollställ Chat IP loggen");
+define("A_CHAT_LOGS_5", "Detta kommer arkivera och nollställa IP loggfilen!\\n");
 define("A_CHAT_LOGS_6", "Fullständigt Chat Logg");
 define("A_CHAT_LOGS_7", "Visa den öppna delen av användarnas loggarkiv");
 define("A_CHAT_LOGS_8", "Detta kommer att radera alla filer och\\nmappar sparade i %s mappen!\\n"); // year
@@ -121,6 +121,8 @@ define("A_CHAT_LOGS_26", "\\nÄr du säker?");
 define("A_CHAT_LOGS_27", "Zip arkiv");
 define("A_CHAT_LOGS_28", "Ladda hem %s");
 define("A_CHAT_LOGS_29", "Radera denna zipfil");
+define("A_CHAT_LOGS_30", "IP arkiv");
+define("A_CHAT_LOGS_31", "Total storlek %s %s");
 
 //Admin Search Page
 define("A_SEARCH_1", "Chatrums söksida");

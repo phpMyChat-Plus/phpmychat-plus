@@ -38,6 +38,19 @@ if (C_CHAT_LOGS && (C_SHOW_LOGS_USR || $statusu == "a" || $statusu == "t"))
 <P CLASS=title><?php echo(((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)." - ".A_CHAT_LOGS_17) ; ?></P>
 </CENTER>
 <?php
+function size_readable($size, $retstring = null) {
+       // adapted from code at http://aidanlister.com/repos/v/function.size_readable.php
+       $sizes = array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+       if ($retstring === null) { $retstring = '%01.1f %s'; }
+       $lastsizestring = end($sizes);
+       foreach ($sizes as $sizestring) {
+               if ($size < 1024) { break; }
+               if ($sizestring != $lastsizestring) { $size /= 1024; }
+       }
+       if ($sizestring == $sizes[0]) { $retstring = '%01d %s'; } // Bytes aren't normally fractional
+       return sprintf($retstring, $size, $sizestring);
+}
+
 // Credit for this goes to Ciprian Murariu <ciprianmp@yahoo.com>.
 $yu='./logs'; #define which year you want to read
 $yrsu = preg_find('/./', $yu, PREG_FIND_DIRONLY|PREG_FIND_SORTKEYS|PREG_FIND_SORTDESC);
@@ -116,7 +129,7 @@ foreach($yrsu as $yru)
 				}
 				$MONTHU .= " ".$yeardiru;
 					echo("<tr>");
-					echo ("<td valign=top align=left nowrap=\"nowrap\" colspan=6><font size=4 color=green><b>$MONTHU</b></font></td>"); #print name of each file found
+					echo ("<td valign=top align=left nowrap=\"nowrap\" colspan=7><font size=4 color=green><b>$MONTHU</b></font></td>"); #print name of each file found
 					echo ("<tr><td valign=top align=left nowrap=\"nowrap\">");
 			$du=$yru."/".$monthdiru; #define which month you want to read
 			$dayu = opendir($du); #open directory
@@ -137,7 +150,7 @@ foreach($yrsu as $yru)
 					if (eregi(".\htm",$dyu)) $dyhtmu=str_replace(".htm","",$dyu);
 					else $dyhtmu=str_replace(".php","",$dyu);
 					$dyhtmu=str_replace($yeardiru.$monthdiru,"",$dyhtmu);
-					echo ("<li><a href=$du/$dyu?L=$L onMouseOver=\"window.status='".sprintf(A_CHAT_LOGS_16,$dyhtmu." ".$MONTHU)."'; return true;\" title='".sprintf(A_CHAT_LOGS_16,$dyhtmu." ".$MONTHU)."'>$dyhtmu</a> (".filesize($du."/".$dyu)." bytes)<br />\n"); #print name of each file found
+					echo ("<li><a href=$du/$dyu?L=$L onMouseOver=\"window.status='".sprintf(A_CHAT_LOGS_16,$dyhtmu." ".$MONTHU)."'; return true;\" title='".sprintf(A_CHAT_LOGS_16,$dyhtmu." ".$MONTHU)."'>$dyhtmu</a> (".size_readable(filesize($du."/".$dyu)).")<br />\n"); #print name of each file found
 					if ($j % 5 == 0) echo ("<td valign=top align=left nowrap=\"nowrap\">");
 					$j++;
 				}

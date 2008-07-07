@@ -1,5 +1,5 @@
 <?php
-// File : german/localized.admin.php - plus version (20.05.2008 - rev.12)
+// File : german/localized.admin.php - plus version (07.07.2008 - rev.13)
 // Original translation by Robert Schaller <robert@schaller.com> & Wolfgang Schneider <schneider@bibelcenter.de>
 //    & Martin Sander <Martin.Sander@touch-screen.de> & Bernard Piller <bernard@bmpsystems.com>
 //    & Reinhard Hofmann <e9625556@student.tuwien.ac.at> & Christian Hacker <c.hacker@dreamer-chat.de>
@@ -96,8 +96,8 @@ define("A_CHTEX_MSG", "Nachricht") ;
 define("A_CHAT_LOGS_1", "Logs der IP Verbindungen zu %s"); // phpMyChat (app name)
 define("A_CHAT_LOGS_2", "Chat Wrchiv ist ausgeschaltet");
 define("A_CHAT_LOGS_3", "Chat IP Log - Seite öffnen");
-define("A_CHAT_LOGS_4", "Chat IP Logs löschen");
-define("A_CHAT_LOGS_5", "Die IP Log - Datei wird hierdurch gelöscht!\\n");
+define("A_CHAT_LOGS_4", "Lösche die Chat IP Log - Datei");
+define("A_CHAT_LOGS_5", "Das Archiviert und löscht die Chat IP Log - Datei!\\n");
 define("A_CHAT_LOGS_6", "Gesamtes Chat Log - Archiv");
 define("A_CHAT_LOGS_7", "Die Chat - Archive der Mitglieder anzeigen");
 define("A_CHAT_LOGS_8", "Es werden nun alle Dateien und Unterverzeichnisse\\ndes Verzeichnisses vom Jahr %s gelöscht!\\n"); // year
@@ -122,6 +122,8 @@ define("A_CHAT_LOGS_26", "\\nSind Sie sicher?");
 define("A_CHAT_LOGS_27", "Zip-Archive");
 define("A_CHAT_LOGS_28", "Herunterladen %s");
 define("A_CHAT_LOGS_29", "Löschen  diesen zip");
+define("A_CHAT_LOGS_30", "IP-Archive");
+define("A_CHAT_LOGS_31", "Gesammt Grösse %s %s");
 
 //Admin Search Page
 define("A_SEARCH_1", "Suchseite der Chaträume");

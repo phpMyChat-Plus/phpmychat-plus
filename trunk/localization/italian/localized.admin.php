@@ -1,5 +1,5 @@
 <?php
-// File : italian/localized.admin.php - plus version (20.05.2008 - rev.12)
+// File : italian/localized.admin.php - plus version (07.07.2008 - rev.13)
 // Original translation by Andrea D’Alessandro <andrea@abol.it> & Massimo Fubini <massimo@tomato.it>
 //	& Giuliano Yurij Beccaria <yurij@e-pages.it> & Marco Borrini <borrini@tradimento.it>
 // & Bartolotta Gioachino <developers@rockitalia.com> & Silvia M. Carrassi <silvia@ladysilvia.net>
@@ -96,8 +96,8 @@ define("A_CHTEX_MSG", "Messaggio") ;
 define("A_CHAT_LOGS_1", "Registro IP connessi a %s"); // phpMyChat (app name)
 define("A_CHAT_LOGS_2", "Archivio chat è stato disabilitato");
 define("A_CHAT_LOGS_3", "Apri pagina del registro connessioni della stanza");
-define("A_CHAT_LOGS_4", "Cancella registro connessioni della stanza");
-define("A_CHAT_LOGS_5", "Questo cancellerà il file registro IP!\\n");
+define("A_CHAT_LOGS_4", "Azzera il registro IP della chat");
+define("A_CHAT_LOGS_5", "Questo archivierà e azzererà il file registro IP della chat!\\n");
 define("A_CHAT_LOGS_6", "registro connessioni della stanza pieno");
 define("A_CHAT_LOGS_7", "Visualizza l’archivio della sesione chat degli utenti");
 define("A_CHAT_LOGS_8", "Ciò cancellerà tutte i files e cartelle\\ncaricati nella cartella %s!\\n");
@@ -122,6 +122,8 @@ define("A_CHAT_LOGS_26", "\\nSei sicuro?");
 define("A_CHAT_LOGS_27", "Archivi zip");
 define("A_CHAT_LOGS_28", "Scarica %s");
 define("A_CHAT_LOGS_29", "Cancella questo zip");
+define("A_CHAT_LOGS_30", "Archivio IP");
+define("A_CHAT_LOGS_31", "Dimensione totale %s %s");
 
 //Admin Search Page
 define("A_SEARCH_1", "Pagine di ricerca stanze");

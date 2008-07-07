@@ -1,5 +1,5 @@
 <?php
-// File : argentinian_spanish/localized.admin.php - plus version (20.05.2008 - rev.12)
+// File : argentinian_spanish/localized.admin.php - plus version (07.07.2008 - rev.13)
 // Original translation in Spanish (for the Argentinian dialect usage) by Jorge Colaccini <jrc@informas.com>
 // Updates, corrections and additions for the Plus version by Matias Olivera <matiolivera@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -94,8 +94,8 @@ define("A_CHTEX_MSG", "Mensaje") ;
 define("A_CHAT_LOGS_1", "Logs de conexiones IP a %s"); // phpMyChat (app name)
 define("A_CHAT_LOGS_2", "El archivo del Chat ha sido deshabilitado");
 define("A_CHAT_LOGS_3", "Abrir página de logs IP del Chat");
-define("A_CHAT_LOGS_4", "Borrar logs IP del Chat");
-define("A_CHAT_LOGS_5", "Se borrarán los logs IP del Chat!\\n");
+define("A_CHAT_LOGS_4", "Resetear página de logs IP del Chat");
+define("A_CHAT_LOGS_5", "Se reseteará y guardará el página de logs IP del Chat!\\n");
 define("A_CHAT_LOGS_6", "Archivo completo de logs del Chat");
 define("A_CHAT_LOGS_7", "Mostrar sección de archivación de los usuarios del chat");
 define("A_CHAT_LOGS_8", "Se borrarán todos los archivos y carpetas \\nguardados en la carpeta %s !\\n"); // year
@@ -120,6 +120,8 @@ define("A_CHAT_LOGS_26", "\\nEstás seguro?");
 define("A_CHAT_LOGS_27", "Archivos Zip");
 define("A_CHAT_LOGS_28", "Descargar %s");
 define("A_CHAT_LOGS_29", "Borrar este zip");
+define("A_CHAT_LOGS_30", "Archivos de IP");
+define("A_CHAT_LOGS_31", "Tamaño total %s %s");
 
 //Admin Search Page
 define("A_SEARCH_1", "Página de búsqueda del salón de chat");
