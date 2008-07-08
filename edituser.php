@@ -109,7 +109,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 	{
 		$Latin1 = ($Charset != "utf-8");
 		$PWD_Hash = md5(stripslashes($prev_PASSWORD));
-		if (!isset($GENDER)) $GENDER = 0;
+		if (!isset($GENDER) || $GENDER == !"") $GENDER = 0;
 		$showemail = (isset($SHOWEMAIL) && $SHOWEMAIL)? 1:0;
 		$allowpopup = (isset($ALLOWPOPUP) && $ALLOWPOPUP)? 1:0;
 		if (isset($COLORNAME))
@@ -329,7 +329,7 @@ function put_focus()
 function swapImage(img,imgid) {
 	var image = document.getElementById(imgid);
 	var dropd = document.getElementById(img);
-	var path = '<?php echo("./images/gender_"); ?>';
+	var path = '<?php echo("./${ChatPath}images/gender_"); ?>';
 	if (dropd.value == "0") var gender = "none.gif";
 	else if (dropd.value == "1") var gender = "boy.gif";
 	else if (dropd.value == "2") var gender = "girl.gif";
@@ -483,12 +483,12 @@ if(isset($Error))
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_45); ?> :</TD>
 			<TD VALIGN="TOP">
 				<SELECT name="GENDER" id="gender" onChange="swapImage('gender','genderToSwap')">
-				<OPTION value="0" <?php if ($GENDER==0) { echo ("selected=\"selected\""); $genselected = "none.gif"; }?>><?php echo(L_SET_7)?></OPTION>
+				<OPTION value="0" <?php if ($GENDER==0 || $GENDER=="") { echo ("selected=\"selected\""); $genselected = "none.gif"; }?>><?php echo(L_SET_7)?></OPTION>
 				<OPTION value="1" <?php if ($GENDER==1) { echo ("selected=\"selected\""); $genselected = "boy.gif"; }?>><?php echo(L_REG_46)?></OPTION>
 				<OPTION value="2" <?php if ($GENDER==2) { echo ("selected=\"selected\""); $genselected = "girl.gif"; }?>><?php echo(L_REG_47)?></OPTION>
 				<OPTION value="3" <?php if ($GENDER==3) { echo ("selected=\"selected\""); $genselected = "couple.gif"; }?>><?php echo(L_REG_44)?></OPTION>
 				<OPTION value="4" <?php if ($GENDER==4) { echo ("selected=\"selected\""); $genselected = "undefined.gif"; }?>><?php echo(L_REG_43)?></OPTION>
-				</SELECT>&nbsp;<img id="genderToSwap" src="<?php echo("./".$ChatPath."images/gender_".$genselected.""); ?>" <?php echo("BORDER=0 ALT=\"".L_GEN_ICON."\" Title=\"".L_GEN_ICON."\""); ?> />
+				</SELECT>&nbsp;<img id="genderToSwap" src="<?php echo("./${ChatPath}images/gender_".$genselected.""); ?>" <?php echo("BORDER=0 ALT=\"".L_GEN_ICON."\" Title=\"".L_GEN_ICON."\""); ?> />
 			</TD>
 		</TR>
 		<TR>
