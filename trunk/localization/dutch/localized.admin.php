@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.admin.php - plus version (20.05.2008 - rev.12)
+// File : dutch/localized.admin.php - plus version (07.07.2008 - rev.13)
 // Original translation by Corbesir <rock@jascrc.com>
 // Updates, corrections and additions for the Plus version by DJE Amesz & Romanesko  Genieusdanny@gmail.com and Bert Moorlag <berbia@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -93,8 +93,8 @@ define("A_CHTEX_MSG", "Bericht") ;
 define("A_CHAT_LOGS_1", "Logs van IP Connections naar %s"); // phpMyChat (app name)
 define("A_CHAT_LOGS_2", "Chat Archief staat uit");
 define("A_CHAT_LOGS_3", "Open Chat IP logs pagina");
-define("A_CHAT_LOGS_4", "Verwijder Chat IP logs");
-define("A_CHAT_LOGS_5", "Dit zal de IP logs file verwijderen!\\n");
+define("A_CHAT_LOGS_4", "Reset de Chat IP logs bestanden");
+define("A_CHAT_LOGS_5", "Archiveren en resetten van de Chat IP logs bestanden!\\n");
 define("A_CHAT_LOGS_6", "Volledige Chat Logs Archief");
 define("A_CHAT_LOGS_7", "Laat gebruikers zien’ chat archief sectie");
 define("A_CHAT_LOGS_8", "Dit zal alle files en mappen verwijderen\\ndie in de %s map staan!\\n"); // year
@@ -119,6 +119,8 @@ define("A_CHAT_LOGS_26", "\\nWeet je het zeker?");
 define("A_CHAT_LOGS_27", "Zip archieven");
 define("A_CHAT_LOGS_28", "Download %s");
 define("A_CHAT_LOGS_29", "Verwijder deze zip bestand");
+define("A_CHAT_LOGS_30", "IP archief");
+define("A_CHAT_LOGS_31", "Totale grootte %s %s");
 
 //Admin Search Page
 define("A_SEARCH_1", "Chatroom Zoek Pagina");

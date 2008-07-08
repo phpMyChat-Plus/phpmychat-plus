@@ -93,6 +93,11 @@ function close_popups()
 			is_ignored_popup.window.document.forms['IgnForm'].elements['Exit'].value = '1';
 			is_ignored_popup.close();
 		}
+		if (frames['loader'] && !frames['loader'].closed && leaveChat)
+		{
+			leaveChat = true;
+			frames['loader'].close();
+		}
 	}
 };
 function leave()
