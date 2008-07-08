@@ -122,7 +122,15 @@ define("A_CHAT_LOGS_28", "Descargar %s");
 define("A_CHAT_LOGS_29", "Borrar este zip");
 define("A_CHAT_LOGS_30", "Archivos de IP");
 define("A_CHAT_LOGS_31", "Tamaño total %s %s");
-
+define("A_CHAT_LOGS_32", "Archivo");
+define("A_CHAT_LOGS_33", "Directorio");
+define("A_CHAT_LOGS_34", "%s se ha borrado: %s");
+define("A_CHAT_LOGS_35", "%s se ha creado: %s");
+define("A_CHAT_LOGS_36", "%s no existe: %s");
+define("A_CHAT_LOGS_37", "%s no pudo ser eliminado: %s");
+define("A_CHAT_LOGS_38", "%s no pudo crearse: %s");
+define("A_CHAT_LOGS_39", "%s protegido para escritura: %s");
+define("A_CHAT_LOGS_40", "Hubieron errores al guardar el archivo: %s");
 //Admin Search Page
 define("A_SEARCH_1", "Página de búsqueda del salón de chat");
 define("A_SEARCH_2", "Todas las categorías");
