@@ -1,5 +1,5 @@
 <?php
-// File : serbian_latin/localized.admin.php - plus version (20.05.2008 - rev.12)
+// File : serbian_latin/localized.admin.php - plus version (07.07.2008 - rev.13)
 // Original translation by Vedran Vučić <vedran.vucic@gnulinuxcentar.org>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -93,8 +93,8 @@ define("A_CHTEX_MSG", "Poruka") ;
 define("A_CHAT_LOGS_1", "Logovi IP konekcija do %s");
 define("A_CHAT_LOGS_2", "Čet Arhiva je onemogućena");
 define("A_CHAT_LOGS_3", "Otvori Čet IP logovi stranu");
-define("A_CHAT_LOGS_4", "Izbriši IP logove");
-define("A_CHAT_LOGS_5", "Ovo će da izbriše IP log datoteku!\\n");
+define("A_CHAT_LOGS_4", "Resetuj IP log datoteku za Ćaskanje");
+define("A_CHAT_LOGS_5", "Ovo će arhivirati i resetovati IP log datoteku za Ćaskanje!\\n");
 define("A_CHAT_LOGS_6", "Puna Čet Log Arhiva");
 define("A_CHAT_LOGS_7", "Pokažisekciju javne čet arhive");
 define("A_CHAT_LOGS_8", "Ovo će izbrisati sve datoteke i fascikle\\nsmeštene u %s fascikli!\\n"); // year
@@ -119,6 +119,8 @@ define("A_CHAT_LOGS_26", "\\nDa li ste sigurni?");
 define("A_CHAT_LOGS_27", "Zip arhive");
 define("A_CHAT_LOGS_28", "Prevuci %s");
 define("A_CHAT_LOGS_29", "Izbriši ovaj zip");
+define("A_CHAT_LOGS_30", "IP arhive");
+define("A_CHAT_LOGS_31", "Ukupna veličina %s %s");
 
 //Admin Search Page
 define("A_SEARCH_1", "Strana za pretragu čet soba");
