@@ -1,5 +1,5 @@
 <?php
-// File : french/localized.admin.php - plus version (20.05.2008 - rev.12)
+// File : french/localized.admin.php - plus version (07.07.2008 - rev.13)
 // Original file by Loďc Chapeaux <lolo@phpheaven.net> & Dean Collins <joelford@pacbell.net>
 // Translation for Plus version by Pierre Liget <sourceforge@pliget.freesurf.fr> 10.12.2007
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -94,9 +94,9 @@ define("A_CHTEX_MSG", "Message") ;
 //Save chat logs
 define("A_CHAT_LOGS_1", "Logs des connexions IP de %s");
 define("A_CHAT_LOGS_2", "L’archivage du Chat a été désactivé");
-define("A_CHAT_LOGS_3", "Ouvrir le log des IP");
-define("A_CHAT_LOGS_4", "Effacer le log des IP");
-define("A_CHAT_LOGS_5", "Ceci va effacer les fichiers de log des IP!\\n");
+define("A_CHAT_LOGS_3", "Ouvrir le log des adresses IP du Chat");
+define("A_CHAT_LOGS_4", "Réinitialiser le fichier de logs des adresses IP du Chat");
+define("A_CHAT_LOGS_5", "Cela va archiver et réinitialiser le fichier de logs des adresses IP du Chat !\\n");
 define("A_CHAT_LOGS_6", "Archives complètes des logs du Chat");
 define("A_CHAT_LOGS_7", "Afficher la page des archives publiques du Chat");
 define("A_CHAT_LOGS_8", "Ceci va effacer tous les fichiers et les répertoires\\nprésents dans le répertoire %s!\\n"); // year
@@ -121,6 +121,8 @@ define("A_CHAT_LOGS_26", "\\nÊtes-vous sûr?");
 define("A_CHAT_LOGS_27", "Archives Zip");
 define("A_CHAT_LOGS_28", "Télécharger %s");
 define("A_CHAT_LOGS_29", "Supprimer cette archive Zip");
+define("A_CHAT_LOGS_30", "Archives des adresses IP");
+define("A_CHAT_LOGS_31", "Taille totale %s %s");
 
 //Admin Search Page
 define("A_SEARCH_1", "Rechercher sur le Chat");
