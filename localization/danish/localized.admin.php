@@ -1,5 +1,5 @@
 <?php
-// File : danish/localized.admin.php - plus version (20.05.2008 - rev.12)
+// File : danish/localized.admin.php - plus version (07.07.2008 - rev.13)
 // Original translation by Kenneth Kristiansen <kk@linuxfreak.adsl.dk>
 // Updates, corrections and additions for the Plus version by Bente Feldballe
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -94,8 +94,8 @@ define("A_CHTEX_MSG", "Meddelelse") ;
 define("A_CHAT_LOGS_1", "Logs over IP Forbindelser til %s");
 define("A_CHAT_LOGS_2", "Chat Arkiv er deaktiveret");
 define("A_CHAT_LOGS_3", "Åben siden Chat IP logs");
-define("A_CHAT_LOGS_4", "Slet Chat IP logs");
-define("A_CHAT_LOGS_5", "Denne handling sletter IP logs filen!\\n");
+define("A_CHAT_LOGS_4", "Nulstil Chattens IP log-fil");
+define("A_CHAT_LOGS_5", "Denne handling vil arkivere og nulstille Chattens IP log-fil!\\n");
 define("A_CHAT_LOGS_6", "Komplet Chat Log Arkiv");
 define("A_CHAT_LOGS_7", "Vis det offentlige chat arkiv");
 define("A_CHAT_LOGS_8", "Denne handling sletter alle filer og mapper\\ngemt i mappen %s !\\n"); // year
@@ -120,6 +120,17 @@ define("A_CHAT_LOGS_26", "\\nEr du sikker?");
 define("A_CHAT_LOGS_27", "Zip-arkiver");
 define("A_CHAT_LOGS_28", "Download %s");
 define("A_CHAT_LOGS_29", "Slet denne zip-fil");
+define("A_CHAT_LOGS_30", "IP-arkiver");
+define("A_CHAT_LOGS_31", "Samlet volumen %s %s");
+define("A_CHAT_LOGS_32", "Fil");
+define("A_CHAT_LOGS_33", "Mappe");
+define("A_CHAT_LOGS_34", "%s slettet: %s");
+define("A_CHAT_LOGS_35", "%s oprettet: %s");
+define("A_CHAT_LOGS_36", "%s eksisterer ikke: %s");
+define("A_CHAT_LOGS_37", "%s kunne ikke slettes: %s");
+define("A_CHAT_LOGS_38", "%s kunne ikke oprettes: %s");
+define("A_CHAT_LOGS_39", "%s skrivebeskyttet: %s");
+define("A_CHAT_LOGS_40", "Fejl under lagring af fil: %s"); // filename
 
 //Admin Search Page
 define("A_SEARCH_1", "Chatrum Søgeside");

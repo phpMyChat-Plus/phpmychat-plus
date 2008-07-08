@@ -123,6 +123,15 @@ define("A_CHAT_LOGS_28", "%s letöltése");
 define("A_CHAT_LOGS_29", "Zip (tömörített mappa) törlése");
 define("A_CHAT_LOGS_30", "IP archívumok");
 define("A_CHAT_LOGS_31", "Teljes méret %s %s");
+define("A_CHAT_LOGS_32", "Fájl");
+define("A_CHAT_LOGS_33", "Mappa");
+define("A_CHAT_LOGS_34", "%s sikeresen törölve: %s");
+define("A_CHAT_LOGS_35", "%s sikeresen létrehozva: %s");
+define("A_CHAT_LOGS_36", "%s nem létezik: %s");
+define("A_CHAT_LOGS_37", "%s nem lehet törölni: %s");
+define("A_CHAT_LOGS_38", "%s nem lehet létrehozni: %s");
+define("A_CHAT_LOGS_39", "%s írásvédett: %s");
+define("A_CHAT_LOGS_40", "Hiba lépett fel a fájl mentése közben: %s"); // filename
 
 //Admin Search Page
 define("A_SEARCH_1", "Keresés a chat szobákban");

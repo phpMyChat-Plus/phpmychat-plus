@@ -122,6 +122,15 @@ define("A_CHAT_LOGS_28", "Download %s");
 define("A_CHAT_LOGS_29", "Delete this zip");
 define("A_CHAT_LOGS_30", "IP archives");
 define("A_CHAT_LOGS_31", "Total size %s %s");
+define("A_CHAT_LOGS_32", "File");
+define("A_CHAT_LOGS_33", "Folder");
+define("A_CHAT_LOGS_34", "%s successfully deleted: %s");
+define("A_CHAT_LOGS_35", "%s successfully created: %s");
+define("A_CHAT_LOGS_36", "%s doesn’t exist: %s");
+define("A_CHAT_LOGS_37", "%s couldn’t be deleted: %s");
+define("A_CHAT_LOGS_38", "%s couldn’t be created: %s");
+define("A_CHAT_LOGS_39", "%s write protected: %s");
+define("A_CHAT_LOGS_40", "Errors occurred while saving file: %s"); // filename
 
 //Admin Search Page
 define("A_SEARCH_1", "Chatroom Search Page");

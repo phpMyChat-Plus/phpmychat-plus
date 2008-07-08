@@ -123,6 +123,15 @@ define("A_CHAT_LOGS_28", "Ladda hem %s");
 define("A_CHAT_LOGS_29", "Radera denna zipfil");
 define("A_CHAT_LOGS_30", "IP arkiv");
 define("A_CHAT_LOGS_31", "Total storlek %s %s");
+define("A_CHAT_LOGS_32", "Fil");
+define("A_CHAT_LOGS_33", "Mapp");
+define("A_CHAT_LOGS_34", "%s lyckosamt raderat: %s");
+define("A_CHAT_LOGS_35", "%s lyckosamt skapat: %s");
+define("A_CHAT_LOGS_36", "%s existerar inte: %s");
+define("A_CHAT_LOGS_37", "%s kan inte bli raderad: %s");
+define("A_CHAT_LOGS_38", "%s kan inte skapas: %s");
+define("A_CHAT_LOGS_39", "%s skrivskyddad: %s");
+define("A_CHAT_LOGS_40", "Fel uppstod vid sparande av filen: %s"); // filename
 
 //Admin Search Page
 define("A_SEARCH_1", "Chatrums söksida");

@@ -166,7 +166,7 @@ if (!eregi("0.0.0.0", $logIP)) //Replace this IP with yours (entire - if it's a 
 	$invoegen = "<tr valign=top><td nowrap=\"nowrap\">".$logDATE."</td><td>".$logIP."</td><td>".$logHOST."</td><td>".$logURI."</td><td>".$logPROXY."</td><td>".$logREF."</td></tr>\n";
 if (!file_exists("./acount/pages/chat_ip_logs.htm"))
 {
-	copy("./acount/pages/bak/chat_ip_logs.htm","./acount/pages/chat_ip_logs.htm");
+	copy("./config/index/chat_ip_logs.htm","./acount/pages/chat_ip_logs.htm");
 	chmod("./acount/pages/chat_ip_logs.htm", 0666);
 }
 	$fopen = fopen("./acount/pages/chat_ip_logs.htm", "a");
