@@ -20,7 +20,7 @@
 	
 	//  $pAvatar->setCacheLocation("temp/"); //optional
 	# php>=5 versions
-	if (version_compare(phpversion(),'4.4.0','>='))
+	if (version_compare(phpversion(),'5','>='))
 	{
 	 	include_once('PHPGravatar.class.php');
 	}
