@@ -776,7 +776,9 @@ if(!isset($Error) && (isset($N) && $N != ""))
 <?php
 // Display & remove the server time in the status bar
 	include_once("./${ChatPath}lib/worldtime.lib.php");
+	$CorrectedTime = mktime(date("G") + C_TMZ_OFFSET,date("i"),date("s"),date("m"),date("d"),date("Y"));
 ?>
+	gap = calc_gap("<?php echo(date("F d, Y H:i:s", $CorrectedTime)); ?>");
 	clock(gap);
 
 	// Automatically submit a command
