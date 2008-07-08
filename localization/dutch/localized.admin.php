@@ -119,7 +119,7 @@ define("A_CHAT_LOGS_26", "\\nWeet je het zeker?");
 define("A_CHAT_LOGS_27", "Zip archieven");
 define("A_CHAT_LOGS_28", "Download %s");
 define("A_CHAT_LOGS_29", "Verwijder deze zip bestand");
-define("A_CHAT_LOGS_30", "IP archief");
+define("A_CHAT_LOGS_30", "IP archieven");
 define("A_CHAT_LOGS_31", "Totale grootte %s %s");
 
 //Admin Search Page
