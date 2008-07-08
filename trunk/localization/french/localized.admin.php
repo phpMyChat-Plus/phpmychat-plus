@@ -96,7 +96,7 @@ define("A_CHAT_LOGS_1", "Logs des connexions IP de %s");
 define("A_CHAT_LOGS_2", "L’archivage du Chat a été désactivé");
 define("A_CHAT_LOGS_3", "Ouvrir le log des adresses IP du Chat");
 define("A_CHAT_LOGS_4", "Réinitialiser le fichier de logs des adresses IP du Chat");
-define("A_CHAT_LOGS_5", "Cela va archiver et réinitialiser le fichier de logs des adresses IP du Chat !\\n");
+define("A_CHAT_LOGS_5", "Cela va archiver et réinitialiser le fichier\\nde logs des adresses IP du Chat !\\n");
 define("A_CHAT_LOGS_6", "Archives complètes des logs du Chat");
 define("A_CHAT_LOGS_7", "Afficher la page des archives publiques du Chat");
 define("A_CHAT_LOGS_8", "Ceci va effacer tous les fichiers et les répertoires\\nprésents dans le répertoire %s!\\n"); // year
@@ -123,6 +123,15 @@ define("A_CHAT_LOGS_28", "Télécharger %s");
 define("A_CHAT_LOGS_29", "Supprimer cette archive Zip");
 define("A_CHAT_LOGS_30", "Archives des adresses IP");
 define("A_CHAT_LOGS_31", "Taille totale %s %s");
+define("A_CHAT_LOGS_32", "Fichier");
+define("A_CHAT_LOGS_33", "Dossier");
+define("A_CHAT_LOGS_34", "%s supprimé avec succès : %s");
+define("A_CHAT_LOGS_35", "%s créé avec succès : %s");
+define("A_CHAT_LOGS_36", "%s n’existe pas : %s");
+define("A_CHAT_LOGS_37", "%s n’a pas pu être supprimé : %s");
+define("A_CHAT_LOGS_38", "%s n’a pas pu être créé : %s");
+define("A_CHAT_LOGS_39", "%s protégé en écriture : %s");
+define("A_CHAT_LOGS_40", "Des erreurs se sont produites pendant la sauvegarde du fichier : %s"); // filename
 
 //Admin Search Page
 define("A_SEARCH_1", "Rechercher sur le Chat");

@@ -1,5 +1,5 @@
 <?php
-// File : bulgarian/localized.admin.php - plus version (20.05.2008 - rev.12)
+// File : bulgarian/localized.admin.php - plus version (07.07.2008 - rev.13)
 // Translation by Peter Petrov <peter.m.petrov@gmail.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -93,8 +93,8 @@ define("A_CHTEX_MSG", "Съобщение");
 define("A_CHAT_LOGS_1", "Дневник на IP влизанията в %s");
 define("A_CHAT_LOGS_2", "Архивът е забранен");
 define("A_CHAT_LOGS_3", "Виж IP логовете");
-define("A_CHAT_LOGS_4", "Изтрий IP логовете");
-define("A_CHAT_LOGS_5", "Това ще изтрие файла с IP логовете!\\n");
+define("A_CHAT_LOGS_4", "Опразване на чат IP лог файла");
+define("A_CHAT_LOGS_5", "Това ще архивира чат IP лог файла, след което ще го опразни!\\n");
 define("A_CHAT_LOGS_6", "Пълен архив на чат логовете");
 define("A_CHAT_LOGS_7", "Покажи архивите на общите стаи");
 define("A_CHAT_LOGS_8", "Това ще изтрие всички файлове и папки, \\n съхранени в папка %s!\\n"); // year
@@ -119,6 +119,8 @@ define("A_CHAT_LOGS_26", "\\nСигурни ли сте?");
 define("A_CHAT_LOGS_27", "Zip архиви");
 define("A_CHAT_LOGS_28", "Свалете %s");
 define("A_CHAT_LOGS_29", "Изтрийте този zip");
+define("A_CHAT_LOGS_30", "IP архиви");
+define("A_CHAT_LOGS_31", "Пълен размер %s %s");
 
 //Admin Search Page
 define("A_SEARCH_1", "Страница за търсене");

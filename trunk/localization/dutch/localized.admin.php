@@ -121,6 +121,16 @@ define("A_CHAT_LOGS_28", "Download %s");
 define("A_CHAT_LOGS_29", "Verwijder deze zip bestand");
 define("A_CHAT_LOGS_30", "IP archieven");
 define("A_CHAT_LOGS_31", "Totale grootte %s %s");
+define("A_CHAT_LOGS_32", "Bestand");
+define("A_CHAT_LOGS_33", "Map");
+define("A_CHAT_LOGS_34", "%s succesvol verwijderd: %s");
+define("A_CHAT_LOGS_35", "%s succes aangemaakt: %s");
+define("A_CHAT_LOGS_36", "%s bestaat niet: %s");
+define("A_CHAT_LOGS_37", "%s kan niet worden verwijdert: %s");
+define("A_CHAT_LOGS_38", "%s kan niet worden aangemaakt: %s");
+define("A_CHAT_LOGS_39", "%s tegen overschrijven beveiligd: %s");
+define("A_CHAT_LOGS_40", "Fout opgetreden tijden opslaan van het bestand: %s"); // filename
+
 
 //Admin Search Page
 define("A_SEARCH_1", "Chatroom Zoek Pagina");

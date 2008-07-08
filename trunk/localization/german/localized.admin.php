@@ -124,6 +124,15 @@ define("A_CHAT_LOGS_28", "Herunterladen %s");
 define("A_CHAT_LOGS_29", "Löschen  diesen zip");
 define("A_CHAT_LOGS_30", "IP-Archive");
 define("A_CHAT_LOGS_31", "Gesammt Grösse %s %s");
+define("A_CHAT_LOGS_32", "Datei");
+define("A_CHAT_LOGS_33", "Ordner");
+define("A_CHAT_LOGS_34", "%s erfolgreich gelöscht: %s");
+define("A_CHAT_LOGS_35", "%s erfolgreich erstellt: %s");
+define("A_CHAT_LOGS_36", "%s nicht vorhanden: %s");
+define("A_CHAT_LOGS_37", "%s konnte nicht gelöscht werden: %s");
+define("A_CHAT_LOGS_38", "%s konnte nicht erstellt werden: %s");
+define("A_CHAT_LOGS_39", "%s schreibgeschützt: %s");
+define("A_CHAT_LOGS_40", "Fehler beim speichern der datei: %s");
 
 //Admin Search Page
 define("A_SEARCH_1", "Suchseite der Chaträume");

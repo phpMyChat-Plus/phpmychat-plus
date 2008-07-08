@@ -124,6 +124,15 @@ define("A_CHAT_LOGS_28", "Scarica %s");
 define("A_CHAT_LOGS_29", "Cancella questo zip");
 define("A_CHAT_LOGS_30", "Archivio IP");
 define("A_CHAT_LOGS_31", "Dimensione totale %s %s");
+define("A_CHAT_LOGS_32", "File");
+define("A_CHAT_LOGS_33", "Cartella");
+define("A_CHAT_LOGS_34", "%s eliminati con successo: %s");
+define("A_CHAT_LOGS_35", "%s creati con successo: %s");
+define("A_CHAT_LOGS_36", "%s non esiste: %s");
+define("A_CHAT_LOGS_37", "%s non può essere eliminato: %s");
+define("A_CHAT_LOGS_38", "%s non può essere creato: %s");
+define("A_CHAT_LOGS_39", "%s protetto da scrittura: %s");
+define("A_CHAT_LOGS_40", "Ci sono stati errori nel salvataggio del file: %s"); // filename
 
 //Admin Search Page
 define("A_SEARCH_1", "Pagine di ricerca stanze");

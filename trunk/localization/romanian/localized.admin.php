@@ -121,6 +121,15 @@ define("A_CHAT_LOGS_28", "Descarcă %s");
 define("A_CHAT_LOGS_29", "Şterge acest fişier zip");
 define("A_CHAT_LOGS_30", "Fişiere IP Salvate");
 define("A_CHAT_LOGS_31", "Mărime totală %s %s");
+define("A_CHAT_LOGS_32", "Fişier");
+define("A_CHAT_LOGS_33", "Director");
+define("A_CHAT_LOGS_34", "%s şters cu succes: %s");
+define("A_CHAT_LOGS_35", "%s creat cu succes: %s");
+define("A_CHAT_LOGS_36", "%s nu există: %s");
+define("A_CHAT_LOGS_37", "%s nu poate fi şters: %s");
+define("A_CHAT_LOGS_38", "%s nu poate fi creat: %s");
+define("A_CHAT_LOGS_39", "%s protejat la scriere: %s");
+define("A_CHAT_LOGS_40", "Erori întâmpinate la salvarea fişierului: %s"); // filename
 
 //Admin Search Page
 define("A_SEARCH_1", "Pagina de căutare");
