@@ -214,8 +214,13 @@ overflow:auto;
 if ($action != "submit")
 {
 	//Cache for Gravatars check
-	if (version_compare(phpversion(),'4.4.0','>')) $cache_supported = 1;
+	if (version_compare(phpversion(),'5','>=') && ini_get("allow_url_fopen") && function_exists('file_get_contents')) $cache_supported = 1;
 	else $cache_supported = 0;
+	if (!@fsockopen("gravatar.com", 80, $errno, $errstr, 2))
+	{
+		$server_blocked = 1;
+		$cache_supported = 0;
+	}
 	// Get bot id
 	$bot_loaded = 0;
 	$DbLink->query("SELECT id FROM bot_bots WHERE id!='0'");
@@ -271,8 +276,9 @@ if (UPD_CHECK)
 	// Check for application update on main sites (ciprianmp.com & sourceforge) resources.
 	$updatepath1 = "http://ciprianmp.com/latest/lib/update.php";
 	$updatepath2 = "http://phpmychat.svn.sourceforge.net/viewvc/*checkout*/phpmychat/trunk/lib/update.php";
-	if (@fsockopen("ciprianmp.com", 80, $errno, $errstr, 12))
+	if (@fsockopen("ciprianmp.com", 80, $errno, $errstr, 2))
 	{
+		$upd_possible = 1;
 		if (isset($_GET['alv']) && isset($_GET['alm'])) {
 			define("APP_LAST_VERSION", $alv);
 			define("APP_LAST_MINOR", $alm);
@@ -285,8 +291,9 @@ if (UPD_CHECK)
 		  exit();
 		}
 	}
-	elseif (@fsockopen("phpmychat.svn.sourceforge.net", 80, $errno, $errstr, 12))
+	elseif (@fsockopen("phpmychat.svn.sourceforge.net", 80, $errno, $errstr, 2))
 	{
+		$upd_possible = 1;
 		if (isset($_GET['alv']) && isset($_GET['alm'])) {
 			define("APP_LAST_VERSION", $alv);
 			define("APP_LAST_MINOR", $alm);
@@ -302,6 +309,7 @@ if (UPD_CHECK)
 	else
 	{
 		settype($app_last_version = APP_VERSION, "double");
+		$upd_possible = 0;
 	}
 }
 ?>
@@ -359,7 +367,7 @@ if (UPD_CHECK)
 					<li><a href="http://tech.groups.yahoo.com/group/phpmychat/" target=_blank Title="Open <?php echo(APP_NAME); ?> Yahoo Support Group page" onMouseOver="window.status='Open <?php echo(APP_NAME); ?> Yahoo Support Group page.'; return true">Support Group page</a></li>
 					<li><a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Fixes readme.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_VERSION); ?>" target=_blank Title="Open <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> Release notes" onMouseOver="window.status='Open <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> Release notes.'; return true">Read <?php echo(APP_VERSION.APP_MINOR); ?> notes</a></li>
  <?php
-  if(UPD_CHECK && (($app_last_version > $app_version) || (($app_last_version == $app_version) && (eregi_replace("-ß","",APP_LAST_MINOR) > eregi_replace("-ß","",APP_MINOR) || eregi_replace("-f","",APP_LAST_MINOR) > eregi_replace("-f","",APP_MINOR)))))
+  if(UPD_CHECK && (($app_last_version > $app_version) || (($app_last_version == $app_version) && (eregi_replace("-ß","",APP_LAST_MINOR) > eregi_replace("-ß","",APP_MINOR) || eregi_replace("-f","",APP_LAST_MINOR) > eregi_replace("-f","",APP_MINOR) || eregi_replace("-RC","",APP_LAST_MINOR) > eregi_replace("-RC","",APP_MINOR)))))
  {
  	if (eregi("f",APP_LAST_MINOR) || eregi("ß",APP_LAST_MINOR)) $minor_dir = "/Fixes/";
  	else $minor_dir = "/";
@@ -388,7 +396,7 @@ if (UPD_CHECK)
 		?>
 <div><p><table align=center align=center border=0 cellpadding=0 class=menu style=background:white><tr><td class=success align=center><?php echo("<br />- ".sprintf(A_SHEET5_0, APP_NAME." - ".APP_VERSION.APP_MINOR)." -<br />"); ?>
 <?php
-		if (($app_last_version > $app_version) || (($app_last_version == $app_version) && (eregi_replace("-ß","",APP_LAST_MINOR) > eregi_replace("-ß","",APP_MINOR) || eregi_replace("-f","",APP_LAST_MINOR) > eregi_replace("-f","",APP_MINOR))))
+		if (($app_last_version > $app_version) || (($app_last_version == $app_version) && (eregi_replace("-ß","",APP_LAST_MINOR) > eregi_replace("-ß","",APP_MINOR) || eregi_replace("-f","",APP_LAST_MINOR) > eregi_replace("-f","",APP_MINOR) || eregi_replace("-RC","",APP_LAST_MINOR) > eregi_replace("-RC","",APP_MINOR))))
 		{
 		?>
 			<script type="text/javascript" language="javascript">
@@ -740,8 +748,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
     <td>
         <select name="vUPD_CHECK">
-	        <option value="0"<?php if($UPD_CHECK==0){ echo " selected"; } ?>>Disabled</option>
-	        <option value="1"<?php if($UPD_CHECK==1){ echo " selected"; } ?>>Enabled</option>
+	        <option value="0"<?php if($UPD_CHECK==0 || !$upd_possible){ echo " selected"; } ?>>Disabled</option>
+	        <option value="1"<?php if($UPD_CHECK==1 && $upd_possible){ echo " selected"; } ?>>Enabled</option>
         </select>
 	</td>
 </tr>
@@ -2237,14 +2245,17 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 <tr bgcolor="#B0C4DE">
     <td><b>GRAVATARS Cache Settings.</b><br />
 		<i>
-		Server Info:<br /><?php echo(!$cache_supported ? "<font color=red>Important: Cache not supported on this server!</font><br />" : ""); ?>
-		<font color=blue>Php server version: <b><?php echo(!$cache_supported ? "<font color=red>".phpversion()."</font>" : phpversion()); ?></b><br />
-		MySQL server version: <b><?php echo(mysql_get_server_info()); ?></b></font></i>
+		Server Info:<br /><?php echo((!$cache_supported || $server_blocked) ? "<font color=red>Important: Cache not supported on this server!</font><br />" : ""); ?>
+		<font color=blue>Hosting Server IP: <b><?php echo($_SERVER['SERVER_ADDR']); ?></b> <?php echo(!$server_blocked ? "" : "<b><font color=red>cannot get access to gravatar.com!</font></b>"); ?></font><br />
+		<font color=blue>Php server version: <b><?php echo((!$cache_supported && !$server_blocked) ? "<font color=red>".phpversion()."</font>" : phpversion()); ?></b></font><br />
+		<font color=blue>allow_url_fopen: <b><?php echo(!(ini_get("allow_url_fopen")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
+		<font color=blue>allow_url_include: <b><?php echo(!(ini_get("allow_url_include")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
+		<font color=blue>MySQL server version: <b><?php echo(mysql_get_server_info()); ?></b></font></i>
 	</td>
     <td>
-		<input type="radio" value="0" name="vGRAVATARS_CACHE" <?php if($GRAVATARS_CACHE==0 || !$cache_supported){ echo " checked"; }; ?>>&nbsp;Cache Disabled<br />
-		<input type="radio" value="1" name="vGRAVATARS_CACHE" <?php if($GRAVATARS_CACHE==1 && $cache_supported){ echo " checked"; }; if(!$cache_supported){ echo " disabled"; }; ?>>&nbsp;Cache Enabled<br />
-		Cache Age:<br /><input name="vGRAVATARS_CACHE_EXPIRE" type="text" size="7" maxlength="3" value="<?php echo $GRAVATARS_CACHE_EXPIRE; ?>"<?php if(!$cache_supported){ echo " readonly"; }; ?>> (days)
+		<input type="radio" value="0" name="vGRAVATARS_CACHE" <?php if($GRAVATARS_CACHE==0 || !$cache_supported || $server_blocked) { echo " checked"; }; ?>>&nbsp;Cache Disabled<br />
+		<input type="radio" value="1" name="vGRAVATARS_CACHE" <?php if($GRAVATARS_CACHE==1 && $cache_supported){ echo " checked"; }; if(!$cache_supported || $server_blocked){ echo " disabled"; }; ?>>&nbsp;Cache Enabled<br />
+		Cache Age:<br /><input name="vGRAVATARS_CACHE_EXPIRE" type="text" size="7" maxlength="3" value="<?php echo $GRAVATARS_CACHE_EXPIRE; ?>"<?php if(!$cache_supported || $server_blocked){ echo " readonly"; }; ?>> (days)
 	</td>
 </tr>
 <tr>
