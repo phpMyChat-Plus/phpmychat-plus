@@ -99,7 +99,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 	{
 		$Error = L_ERR_USR_26;
 	}
-	else if ($SECRET_QUESTION == 0 || $SECRET_ANSWER == "")
+	else if ($SECRET_QUESTION == "" || $SECRET_QUESTION == 0 || $SECRET_ANSWER == "")
 	{
 		$Error = L_ERR_PASS_5;
 	}
@@ -494,7 +494,7 @@ if(isset($Error))
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_45); ?> :</TD>
 			<TD VALIGN="TOP">
 				<SELECT name="GENDER" id="gender" onChange="swapImage('gender','genderToSwap')">
-				<OPTION value="0" <?php if ($GENDER==0 || $GENDER == "") { echo ("selected=\"selected\""); $genselected = "none.gif"; }?>><?php echo(L_SET_7)?></OPTION>
+				<OPTION value="0" <?php if ($GENDER==0 || $GENDER=="") { echo ("selected=\"selected\""); $genselected = "none.gif"; }?>><?php echo(L_SET_7)?></OPTION>
 				<OPTION value="1" <?php if ($GENDER==1) { echo ("selected=\"selected\""); $genselected = "boy.gif"; }?>><?php echo(L_REG_46)?></OPTION>
 				<OPTION value="2" <?php if ($GENDER==2) { echo ("selected=\"selected\""); $genselected = "girl.gif"; }?>><?php echo(L_REG_47)?></OPTION>
 				<OPTION value="3" <?php if ($GENDER==3) { echo ("selected=\"selected\""); $genselected = "couple.gif"; }?>><?php echo(L_REG_44)?></OPTION>
@@ -504,7 +504,7 @@ if(isset($Error))
 		</TR>
 		<TR>
 			<TD COLSPAN=2 ALIGN="center">
-				<INPUT type="checkbox" name="SHOWEMAIL" value="1" <?php if (isset($SHOWEMAIL) && $SHOWEMAIL) echo("CHECKED"); ?><?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_REG_33); ?>
+				<INPUT type="checkbox" name="SHOWEMAIL" value="1" <?php if (isset($SHOWEMAIL) && $SHOWEMAIL) echo("checked"); ?><?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_REG_33); ?>
 			</TD>
 		</TR>
 		<TR>
