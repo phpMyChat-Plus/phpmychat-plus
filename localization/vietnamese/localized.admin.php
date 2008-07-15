@@ -1,5 +1,5 @@
 <?php
-// File : vietnamese/localized.admin.php - plus version (20.05.2008 - rev.12)
+// File : vietnamese/localized.admin.php - plus version (07.07.2008 - rev.13)
 // Translation by Marshall <hellomarshal_lookatme@netzero.net>
 // Updates and corrections by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -93,8 +93,8 @@ define("A_CHTEX_MSG", "Tin Nhắn") ;
 define("A_CHAT_LOGS_1", "Ghi lại những IP kết nối %s"); // phpMyChat (app name)
 define("A_CHAT_LOGS_2", "Tài liệu lưu trữ Chuyện gẫu đã được vô hiệu hóa");
 define("A_CHAT_LOGS_3", "Mở ghi lại những IP kết nối");
-define("A_CHAT_LOGS_4", "Xoa chat IP chuyện gẫu");
-define("A_CHAT_LOGS_5", "Xóa những file IP hồ sơ!\\n");
+define("A_CHAT_LOGS_4", "Khôi phục lạI file ghi nhận IP khi chat");
+define("A_CHAT_LOGS_5", "Nó sẽ được lưu trữ và khôi phục file IP được ghi lại!\\n");
 define("A_CHAT_LOGS_6", "Ghi lại đầy đủ phần chat");
 define("A_CHAT_LOGS_7", "Cho thấy mục tài liệu chat cho người sữ dụng");
 define("A_CHAT_LOGS_8", "Cái này sẽ xóa tất cả những hồ sơ và những ngăn\\nstor Trong %s Ngăn!\\n"); // year
@@ -119,6 +119,17 @@ define("A_CHAT_LOGS_26", "\\nBạn thì chắc chắn?");
 define("A_CHAT_LOGS_27", "Zip file nén");
 define("A_CHAT_LOGS_28", "Tải xuống %s");
 define("A_CHAT_LOGS_29", "Xóa file zip");
+define("A_CHAT_LOGS_30", "IP lưu trữ");
+define("A_CHAT_LOGS_31", "tất cả dung lượng %s %s");
+define("A_CHAT_LOGS_32", "File");
+define("A_CHAT_LOGS_33", "Thư mục");
+define("A_CHAT_LOGS_34", "%s xóa hoàn thành: %s");
+define("A_CHAT_LOGS_35", "%s hoàn thành được tạo ra: %s");
+define("A_CHAT_LOGS_36", "%s không có thật: %s");
+define("A_CHAT_LOGS_37", "%s không thể xóa: %s");
+define("A_CHAT_LOGS_38", "%s không thể tạo ra: %s");
+define("A_CHAT_LOGS_39", "%s viết được bảo vệ");
+define("A_CHAT_LOGS_40", "Lỗi , không thể lưu trữ file: %s"); // filename
 
 //Admin Search Page
 define("A_SEARCH_1", "Trang Tìm kiếm Chatroom");

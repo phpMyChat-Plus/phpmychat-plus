@@ -1,5 +1,5 @@
 <?php
-// File : vietnamese/localized.chat.php - plus version (20.05.2008 - rev.39)
+// File : vietnamese/localized.chat.php - plus version (18.06.2008 - rev.40)
 // Translation by Marshall <hellomarshal_lookatme@netzero.net>
 // Updates and corrections by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -85,6 +85,7 @@ define("L_REG_35", "Người quản trị");
 define("L_REG_36", "Đất nước");
 define("L_REG_37", "Những lĩnh vực <span class=\"error\">*</span> Đã được bổ sung");
 define("L_REG_39", "Phòng này đã bị lọai bỏ bởi người quản trị.");
+define("L_REG_43", "Không bị tiết lộ");
 define("L_REG_44", "Đôi");
 define("L_REG_45", "Giới tính");
 define("L_REG_46", "Nam");
@@ -498,6 +499,7 @@ define("L_LINKS_15", "để mở"); // to open/see Posted Links window
 define("L_LINKS_16", "Phòng triển lãm tranh"); // to open/see Posted Links window
 define("L_LINKS_17", "để phân loại tăng lên");
 define("L_LINKS_18", "để phân loại đi xuống");
+define("L_LINKS_19", "để thiết lập/sửa chữa Gravatar");
 define("L_SWITCH", "Sự Chuyển đổi Tới");
 define("L_SELECTED", "chọn");
 define("L_SELECTED_F", ""); // feminine word, if it's the case
@@ -622,4 +624,7 @@ define("L_DESC", "Đi xuống");
 
 // Trở lại những người viếng thăm trên thông tin bởi  Ciprian
 define("L_LOGIN_COUNT", "Tất cả lượt ghé thăm");
+
+// Gravatar from email mod by Ciprian
+define("L_GRAV_USE", "sừ dụng nó Gravatar");
 ?>
