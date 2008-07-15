@@ -14,7 +14,7 @@ define("L_LOGIN_ERROR", "¡Autenticación del registro de usuario falló!<br />P
 define("L_FTP_NAME", "¡FTP nombre de usuario en blanco!");
 define("L_FTP_PASS", "¡FTP contraseña en blanco!");
 define("L_DB_NOCONNECT", "¡No se pudo conectar a la base de datos!");
-define("L_DB_HINT1", "¡Base de datos %s no existe y no se puede crear!");
+define("L_DB_HINT1", "¡Base de Datos %s no existe y no puede ser creada!");
 define("L_PASS_ERROR1", "No escogió un nombre administrador.<br />¡Por favor regrese y escoge un nombre para la cuenta de administrador!");
 define("L_PASS_ERROR2", "Hay que llenar los espacios de contraseñas.<br />¡Regrese y escriba una contraseña idéntica dos veces!");
 define("L_PASS_ERROR3", "La contraseña y la contraseña de verificación no corresponden.<br />¡Regrese y reescriba las contraseñas!");

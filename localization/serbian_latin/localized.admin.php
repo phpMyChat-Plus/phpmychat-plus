@@ -121,6 +121,16 @@ define("A_CHAT_LOGS_28", "Prevuci %s");
 define("A_CHAT_LOGS_29", "Izbriši ovaj zip");
 define("A_CHAT_LOGS_30", "IP arhive");
 define("A_CHAT_LOGS_31", "Ukupna veličina %s %s");
+define("A_CHAT_LOGS_32", "Datoteka");
+define("A_CHAT_LOGS_33", "Fascikla");
+define("A_CHAT_LOGS_34", "%s uspesno izbrisano: %s");
+define("A_CHAT_LOGS_35", "%s uspesno kreirano: %s");
+define("A_CHAT_LOGS_36", "%s ne postoji: %s");
+define("A_CHAT_LOGS_37", "%s nije se moglo izbrisati: %s");
+define("A_CHAT_LOGS_38", "%s nije se moglo kreirati: %s");
+define("A_CHAT_LOGS_39", "%s zasticeno od upisivanja: %s");
+define("A_CHAT_LOGS_40", "Pojavile su se greske prilikom snimanja datoteke: %s");
+
 
 //Admin Search Page
 define("A_SEARCH_1", "Strana za pretragu čet soba");

@@ -1,5 +1,5 @@
 <?php
-// File : spanish/localized.tutorial.php - plus version (08.03.2008 - rev.8)
+// File : spanish/localized.tutorial.php - plus version (10.04.2008 - rev.9)
 // Original translation by Josep Román <josep.roman@zuerich-see.ch> and León Del Río <leon@webmaster.com.mx>
 // Updates, corrections and additions for the Plus version by Roxana Castañeda <roxminu@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -208,7 +208,7 @@ Si todavía no se ha registrado<?php if (!C_REQUIRE_REGISTER) echo(" y te gustar
 	<LI>Si tiene una web, puede escribir la dirección en la casilla.
 	<LI>El campo del idioma puede ayudar a otros usuarios durante conversaciones futuras. Así sabrán que idioma(s) habla usted.
 	<LI>Finalmente, si desea permitir que todos puedan ver su dirección de correo electrónico (email), por favor seleccione la casilla al lado de donde dice "mostrar email en información pública". Si no desea que los demás usuarios vean su dirección de correo electrónico (email), entonces deje la casilla vacía.
-	<LI>Luego, presione el botón de Registrarse y su cuenta será creada. Si desea detenerse en cualquier momento sin registrarse, sólo presione el botón Cerrar.
+	<LI>Luego, presione el botón de <?php echo(L_REG_3); ?> y su cuenta será creada. Dependiendo de las preferencias establecidas por el Administrador, quizá tenga que esperar por su aprobación. De un modo u otro, recibirá un correo con instrucciones. Si desea detenerse en cualquier momento sin registrarse, sólo presione el botón <?php echo(L_REG_25); ?>.
 </UL>
 <P>
 <A NAME="modProfile"></A>Por supuesto, los usuarios registrados pueden modificar<?php if (C_SHOW_DEL_PROF) echo("/borrar"); ?>
@@ -580,7 +580,28 @@ Para enviar un mensaje privado a otro usuario que se encuentra en la misma sala 
 <P>
 El mensaje será visto por Jorge y usted, pero ningún otro usuario lo podrá ver.
 <P>
-Tenga presente que hacer clic en el alias del que envía un mensaje, en la ventana principal, automáticamente agrega este comando a la casilla de escritura de los mensajes.
+Cuando la opción PM está habilitada, también es posible enviar susurros a otro usuario en un cuarto diferente, usando el  <B>comando "/wisp nombredelusuario mensaje texto"</B> sin usar las comillas.
+<P>
+<?php
+if (C_PRIV_POPUP)
+{
+?>
+Haciendo clic en el nick o sobrenombre o alias del remitente de un mensaje en el marco principal automáticamente se añadirá el respectivo comando /para o /susurro al campo del mensaje.
+<?php
+}
+else
+{
+?>
+Haciendo clic en el nick o sobrenombre o alias de un usuario en la lista de usuarios al lado derecho abrirá automáticamente una ventana emergente privada para que usted escriba el texto de su mensaje y luego presione la tecla ENTER o Retorno para enviar el mensaje. Las respuestas que reciba se abrirán automáticamente en una ventana nueva.
+<?php
+}
+?>
+<P>
+Nota: Cuando las ventanas emergentes (pop-ups) PM están habilitadas (en ambas configuraciones, del chat y de su propio perfil), ud podrá revisar todos los PMs que recibió mientras no estaba en línea, desde el momento que cerró su sesión por última vez o desde que indicó que estaba “invisible”. Todos los nuevos mensajes PM que recibió mientras estaba fuera de línea abrirán en una nueva ventana emergente; puede responderlos uno por uno desde esa misma ventana.
+Esta característica PM fuera-de-linea está disponible sólo para usuarios registrados.
+<P>
+<u><?php echo(L_COLOR_HEAD_SETTINGS); ?></u><br />
+<?php echo("a) ENABLE_PM = <b>".(C_ENABLE_PM == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />b) PRIV_POPUP = <b>".(C_PRIV_POPUP == 1 ? L_ENABLED : L_DISABLED)."</b>.<br />"); ?>
 <br />
 <P ALIGN="right"><A HREF="#top">Subir</A></P>
 <P>
@@ -592,6 +613,10 @@ Tenga presente que hacer clic en el alias del que envía un mensaje, en la venta
 Para describir lo que está haciendo puede usar el <B>comando "/me acción"</B> sin comillas.
 <P>
 <I>Por ejemplo:</I> Si Jorge envía un mensaje "/me está fumando un cigarrillo" el mensaje mostrará en la ventana "<B>* Jorge</B> está fumando un cigarrillo".
+<P>
+Como una variación a este comando, existe este otro <B>/mr command</B>, el cual también inserta el título del género delante del nombre del usuario.
+<P>
+<I>Por ejemplo:</I> Si Jack envía este mensaje "/mr está viendo la TV" la ventana del mensaje mostrará "<B>* <?php echo(L_HELP_MR); ?> Jack</B> está viendo la TV".
 <br />
 <P ALIGN="right"><A HREF="#top">Subir</A></P>
 <P>

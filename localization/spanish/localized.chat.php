@@ -1,5 +1,5 @@
 <?php
-// File : spanish/localized.chat.php - plus version (08.03.2008 - rev.36)
+// File : spanish/localized.chat.php - plus version (18.06.2008 - rev.40)
 // Original translation by Josep Román <josep.roman@zuerich-see.ch> and León Del Río <leon@webmaster.com.mx>
 // Updates, corrections and additions for the Plus version by Roxana Castañeda <roxminu@yahoo.com> & Shelly Noyes <shelly.noyes@gmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -100,6 +100,19 @@ define("L_EMAIL_VAL_1", "Sus datos para ingresar al chat");
 define("L_EMAIL_VAL_2", "Bienvenido a nuestro servidor de chat.");
 define("L_EMAIL_VAL_Err", "Error interno, por favor contacte al administrador: <a href=\"mailto:%s\">%s</a>.");
 define("L_EMAIL_VAL_Done", "Su contraseña ha sido enviada a su dirección de correo electrónico.<br />Puede cambiar su contraseña en la página de ingreso en modificar su perfil.");
+define("L_EMAIL_VAL_PENDING_Done", "Los datos que registró han sido enviados para su revisión.");
+define("L_EMAIL_VAL_PENDING_Done1", "Recibirá su contraseña, después que su cuenta haya sido aprobada por el Administrador.");
+define("L_EMAIL_VAL_3", "Su registro está pendiente por %s");
+define("L_EMAIL_VAL_31", "¡Felicitaciones! Los datos que ingresó al registrarse han sido revisados y aprobados.");
+define("L_EMAIL_VAL_32", "Estos son sus datos de registro para %s al %s:"); //chat name at chaturl
+define("L_EMAIL_VAL_4", " Acaba de registrar esta cuenta para %s al %s:"); //chat name at chaturl
+define("L_EMAIL_VAL_41", "Acaba de hacer cambios importantes en la información de su cuenta para %s al %s (cuenta modificada: %s)."); //chat name at chaturl (username)
+define("L_EMAIL_VAL_5", "Los - %s – detalles de su cuenta para %s"); //username - chatname
+define("L_EMAIL_VAL_51", "Los - %s – detalles actualizados de su cuenta para %s"); //username - chatname
+define("L_EMAIL_VAL_6", "Registrado en %s");
+define("L_EMAIL_VAL_61", "Modificado en %s");
+define("L_EMAIL_VAL_7", "Debajo está la %s información actualizada de su cuenta:"); //username
+define("L_EMAIL_VAL_8", "Guarde este correo para referencias futuras.\nPor favor también guárdelo en un lugar seguro y no comparta esta información.\n¡Gracias por unirse! ¡Disfrute!");
 
 // admin stuff
 define("L_ADM_1", "%s ya no es el moderador de esta sala.");
@@ -197,8 +210,8 @@ define("L_HELP_MSGS", "mensajes");
 define("L_HELP_ROOM", "sala");
 define("L_HELP_BUZZ", "~nombredelsonido");
 define("L_HELP_REASON", "la razón");
-define("L_HELP_MR", "Sr");
-define("L_HELP_MS", "Sra");
+define("L_HELP_MR", "Sr."); // Mister (can be short or entire word)
+define("L_HELP_MS", "Srta."); // Mistress (- neutral of Miss, Mrs.)
 define("L_HELP_CMD_0", "{} representa una característica necesaria, [] una opcional.");
 define("L_HELP_CMD_1a", "Seleccione la cantidad de mensajes que se mostrarán. La cantidad mínima y la establecida por defecto es 5.");
 define("L_HELP_CMD_1b", "Refresque el marco con los mensajes y muestre los más recientes, la cantidad mínima y la establecida por defecto es 5.");
@@ -269,7 +282,7 @@ define("L_IGNOR_NON", "Usuario sin ignorar");
 
 // whois popup
 define("L_WHOIS_ADMIN", "Administrador");
-define("L_WHOIS_OWNER", "Dueńo");
+define("L_WHOIS_OWNER", "Dueño");
 define("L_WHOIS_TOPMOD", "Moderador Superior");
 define("L_WHOIS_MODER", "Moderador");
 define("L_WHOIS_MODERS", "Moderadores");
@@ -339,6 +352,7 @@ define("L_URL_AV", "URL: ");
 define("L_EXPL_AV", "(Escribir el URL, y luego presionar INTRO para ver)");
 define("L_CANCEL", "Cancelar");
 define("L_AVA_REG", "Debes estar registrado\\npara cambiar tu avatar");
+define("L_SEL_NEW_AV_CONFIRM", "Este formulario no fue enviado.\\n¡Si va ahora a los avatares perderá\\ntodos los cambios que hizo hasta el momento!\\n\\n¿Está seguro?");
 
 // PlusBot bot mod (based on Alice bot)
 define("BOT_TIPS", "CONSEJOS: Nuestro bot estamos aquí. Para hablar escriba <b>hello ".C_BOT_NAME."</b>. Para despedirse, escriba: <b>bye ".C_BOT_NAME."</b>. (private: /to <b>".C_BOT_NAME."</b> Mensaje)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
@@ -357,6 +371,7 @@ define("DICE3_WRONG", "El segundo valor debe ser entre 1 y ".MAX_ROLLS.".\\nDeja
 
 // Private Message Popup mod by Ciprian
 define("L_REG_POPUP", "abrir ventanas emergente para mensajes privados");
+define("L_REG_POPUP_NOTE", "¡Debe deshabilitar su bloqueador de ventanas emergentes!");
 define("L_PRIV_POST_MSG", "¡Envíe un mensaje privado!");
 define("L_PRIV_MSG", "¡Nuevo mensaje privado recibido!");
 define("L_PRIV_MSGS", "%s nuevo mensaje privado recibido!");
@@ -378,6 +393,16 @@ define("PM_DISABLED_ERROR", "Los Susurros (mensajes privados)\\nha sido desactiv
 define("L_NEXT_PAGE", "Vaya a la página siguiente");
 define("L_NEXT_READ", "Lea los %s mensajes siguientes");
 define("L_ROOM_ALL", "Todos salones");
+define("L_PRIV_NO_MSGS", "No se han recibido mensajes privados");
+define("L_PRIV_READ_MSG", "1 mensajes privados recibidos"); //singular
+define("L_PRIV_READ_MSGS", "%s mensajes privados recibidos "); //plural
+define("L_PRIV_MSGS_NEW", "Nuevo"); //singular form
+define("L_PRIV_MSGS_READ", "Leer"); //singular form
+define("L_PRIV_MSG6", "Estado:");
+define("L_PRIV_RELOAD", "Cargar página nuevamente");
+define("L_PRIV_MARK_ALL", "Marcar todos como Leídos");
+define("L_PRIV_MARK_SEL", "Marcar los seleccionados como Leídos");
+define("L_PRIV_REMOVE", "Eliminar los PMs marcados"); // o seleccionados
 
 // Color Input Box mod by Ciprian
 define("L_ENABLED", "Activado");
@@ -472,6 +497,8 @@ define("L_LINKS_13", "tocar este sonido");
 define("L_LINKS_14", "utilizar este mandato");
 define("L_LINKS_15", "abrir");
 define("L_LINKS_16", "Banque de smileys");
+define("L_LINKS_17", "para sortear en orden ascendente");
+define("L_LINKS_18", "para sortear en orden descendente");
 define("L_LINKS_19", "para agregar/modificar su Gravatar");
 define("L_SWITCH", "Cambiar a");
 define("L_SELECTED", "seleccionado");
@@ -512,6 +539,9 @@ define("L_LURKING_1", "Abrir la página de observadores");
 define("L_SOUNDFIX_IE_1", "Reparación sonido para IE");
 define("L_SOUNDFIX_IE_2", "Consiga el reparación sonido para IE");
 define("L_REG_BRB", "brb (Registrate primero)");
+define("L_DEL_BYE", "no me esperen");
+define("L_EXTRA_PRIV1", "Leer PMs");
+define("L_EXTRA_PRIV2", "Nuevo PMs");
 
 // Months for Open Schedule by Ciprian
 define("L_JAN", "enero");
@@ -545,28 +575,34 @@ define("LOGIN_LINK", "<A HREF='".C_CHAT_URL."?L=".$L."' TITLE='".sprintf(L_CLICK
 define("NB_USERS_IN","usuarios están ".LOGIN_LINK."chateando</A> en este momento.");
 define("USERS_LOGIN","1 usuario está ".LOGIN_LINK."chateando</A> en este momento.");
 define("NO_USER","Nadie está ".LOGIN_LINK."chateando</A> en este momento.");
+define("L_PRIV_REPLY_LOGIN", "Loguéese al chat si lo desea ".LOGIN_LINK."escribir una respuesta</A> para cualquiera de los Nuevos PMs listados arriba");
 
 // Language names
-define("L_LANG_AR", "espańol (la argentina)");
-define("L_LANG_BR", "brasilero portugués");
-define("L_LANG_DA", "danés");
-define("L_LANG_DE", "alemán");
-define("L_LANG_EN", "inglés"); // for Admin panel only
-define("L_LANG_ENUK", "inglés (reino unido) "); // for UK formats and flags (also known as British)
-define("L_LANG_ENUS", "inglés (americano)"); // for US formats and flags (also know as American English)
-define("L_LANG_ES", "espańol");
-define("L_LANG_FR", "francés");
-define("L_LANG_HI", "indú");
-define("L_LANG_HU", "húngaro");
-define("L_LANG_IT", "italiano");	// Note: Language names are not capitalized in Spanish
-define("L_LANG_KA", "georgiano");
-define("L_LANG_NL", "holandés");
-define("L_LANG_RO", "rumano");
-define("L_LANG_SRL", "serbio - latino");
-define("L_LANG_SRC", "serbio – cirílico");
-define("L_LANG_SV", "sueco");
-define("L_LANG_TR", "turco");
-define("L_LANG_VI", "vietnamita");
+define("L_LANG_AR", "Espańol (la Argentina)");
+define("L_LANG_BG", "Búlgaro");
+define("L_LANG_BR", "Brasilero Portugués");
+define("L_LANG_CZ", "Checo");
+define("L_LANG_DA", "Danés");
+define("L_LANG_DE", "Alemán");
+define("L_LANG_EN", "Inglés"); // for Admin panel only
+define("L_LANG_ENUK", "Inglés (Reino Unido) "); // for UK formats and flags (also known as British)
+define("L_LANG_ENUS", "Inglés (Americano)"); // for US formats and flags (also know as American English)
+define("L_LANG_ES", "Espańol");
+define("L_LANG_FR", "Francés");
+define("L_LANG_GR", "Griego");
+define("L_LANG_HI", "Indú");
+define("L_LANG_HU", "Húngaro");
+define("L_LANG_IT", "Italiano");	// Note: Language names are not capitalized in Spanish
+define("L_LANG_KA", "Georgiano");
+define("L_LANG_NL", "Holandés");
+define("L_LANG_RO", "Rumano");
+define("L_LANG_SK", "Eslovaco");
+define("L_LANG_SRL", "Serbio - latino");
+define("L_LANG_SRC", "Serbio – cirílico");
+define("L_LANG_SV", "Sueco");
+define("L_LANG_TR", "Turco");
+define("L_LANG_UR", "Urdu"); //spoken in Pakistan
+define("L_LANG_VI", "Vietnamita");
 
 // Skins preview page by Ciprian
 define("L_SKINS_TITLE", "Visualizar fondos");
@@ -581,6 +617,13 @@ define("L_GEN_ICON", "Icono de género");
 define("L_GHOST", "Fantasma");
 define("L_SUPER_GHOST", "Super Fantasma");
 define("L_NO_GHOST", "Visible");
+
+// Sorting options by Ciprian
+define("L_ASC", "Ascendente");
+define("L_DESC", "Descendente");
+
+// Returning visitors counter on profiles by Ciprian
+define("L_LOGIN_COUNT", "Visitas totales");
 
 // Gravatar from email mod by Ciprian
 define("L_GRAV_USE", "use el Gravatar");

@@ -1,5 +1,5 @@
 <?php
-// File : spanish/localized.admin.php - plus version (21.02.2008 - rev.11)
+// File : spanish/localized.admin.php - plus version (07.07.2008 - rev.13)
 // Original translation by Josep Román <josep.roman@zuerich-see.ch>
 // Updates, corrections and additions for the Plus version by Roxana Castañeda <roxminu@yahoo.com> & Shelly Noyes <shelly.noyes@gmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -93,11 +93,11 @@ define("A_CHTEX_MSG", "Mensaje");
 //Save chat logs
 define("A_CHAT_LOGS_1", "Registros de conecciones de IP para %s");
 define("A_CHAT_LOGS_2", "Archivo de Chat inutilizado");
-define("A_CHAT_LOGS_3", "Abrir la pagina de los registros de chat IP");
-define("A_CHAT_LOGS_4", "Borrar los registros de Chat IP");
-define("A_CHAT_LOGS_5", "¡Borrará el archivo de IP!\\n");
-define("A_CHAT_LOGS_6", "Archivo lleno de los registros de chat");
-define("A_CHAT_LOGS_7", "Mostrar la seccion del archivo de usuarios de chat");
+define("A_CHAT_LOGS_3", "Abrir la pagina de los registros de Chat IP");
+define("A_CHAT_LOGS_4", "Reiniciar el registro de los archivos de Chat IP");
+define("A_CHAT_LOGS_5", "¡Esto archivará y reiniciará el registro de archivos de Chat IP!\\n");
+define("A_CHAT_LOGS_6", "Archivo lleno de los registros de Chat");
+define("A_CHAT_LOGS_7", "Mostrar la seccion del archivo de usuarios de Chat");
 define("A_CHAT_LOGS_8", "¡Borrará todos los archivos y carpetas\\nguardados en la carpeta de %s!\\n");
 define("A_CHAT_LOGS_9", "Borrar todos los %s registros");
 define("A_CHAT_LOGS_10", "Borrar el ańo");
@@ -110,10 +110,27 @@ define("A_CHAT_LOGS_16", "Leer %s registro");
 define("A_CHAT_LOGS_17", "Públicos Chat Registros Archivo");
 define("A_CHAT_LOGS_18", "(solamente los que son públicos)");
 define("A_CHAT_LOGS_19", "\\nNo es reversible...\\n¿Esta seguro?");
-define("A_CHAT_LOGS_20", "Revele la sección completa de la archivo de chat.");
+define("A_CHAT_LOGS_20", "Revele la sección completa de la archivo de Chat.");
 define("A_CHAT_LOGS_21", "Vaya arriba");
 define("A_CHAT_LOGS_22", "Archivo ahorrado del registro");
 define("A_CHAT_LOGS_23", "Creado %s");
+define("A_CHAT_LOGS_24", "Comprimir todos %s los registros en un archivo zip"); // date
+define("A_CHAT_LOGS_25", "¡Esto hará un zip con todos los registros\\nguardados en la %s carpeta!\\n"); // month/year
+define("A_CHAT_LOGS_26", "\\n¿Está seguro?");
+define("A_CHAT_LOGS_27", "Archivos Zip");
+define("A_CHAT_LOGS_28", "Descargar %s");
+define("A_CHAT_LOGS_29", "Eliminar este zip");
+define("A_CHAT_LOGS_30", "archivos IP");
+define("A_CHAT_LOGS_31", "Tamaño total %s %s");
+define("A_CHAT_LOGS_32", "Archivo");
+define("A_CHAT_LOGS_33", "Carpeta");
+define("A_CHAT_LOGS_34", "%s eliminado exitosamente: %s");
+define("A_CHAT_LOGS_35", "%s creado exitosamente: %s");
+define("A_CHAT_LOGS_36", "%s no existe: %s");
+define("A_CHAT_LOGS_37", "%s no se pudo eliminar: %s");
+define("A_CHAT_LOGS_38", "%s no se pudo crear: %s");
+define("A_CHAT_LOGS_39", "%s escritura protegida: %s");
+define("A_CHAT_LOGS_40", "Errores ocurrieron mientras se guardaba este archivo: %s"); // filename
 
 //Admin Search Page
 define("A_SEARCH_1", "Pagina de Busca del Salón de Chat");
