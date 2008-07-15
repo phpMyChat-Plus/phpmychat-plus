@@ -100,7 +100,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 	{
 		$Error = L_ERR_USR_26;
 	}
-	else if ($SECRET_QUESTION == "" || $SECRET_ANSWER == "")
+	else if ($SECRET_QUESTION == "" || $SECRET_QUESTION == 0 || $SECRET_ANSWER == "")
 	{
 		$Error = L_ERR_PASS_5;
 	}
@@ -109,7 +109,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 	{
 		$Latin1 = ($Charset != "utf-8");
 		$PWD_Hash = md5(stripslashes($prev_PASSWORD));
-		if (!isset($GENDER) || $GENDER == !"") $GENDER = 0;
+		if (!isset($GENDER) || $GENDER == "") $GENDER = 0;
 		$showemail = (isset($SHOWEMAIL) && $SHOWEMAIL)? 1:0;
 		$allowpopup = (isset($ALLOWPOPUP) && $ALLOWPOPUP)? 1:0;
 		if (isset($COLORNAME))
@@ -272,7 +272,7 @@ else
 {
 	$U = $pmc_username;
 	$prev_PASSWORD = $pmc_password;
-	$DbLink->query("SELECT firstname,lastname,perms,country,website,email,showemail,gender,allowpopup,picture,description,favlink,favlink1,slang,colorname,avatar,s_question,s_answer, use_gravatar FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
+	$DbLink->query("SELECT firstname,lastname,perms,country,website,email,showemail,gender,allowpopup,picture,description,favlink,favlink1,slang,colorname,avatar,s_question,s_answer,use_gravatar FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	if ($DbLink->num_rows() != 0)
 	{
 			  list($FIRSTNAME, $LASTNAME, $PERMS, $COUNTRY, $WEBSITE, $EMAIL, $SHOWEMAIL, $GENDER, $ALLOWPOPUP, $PICTURE, $DESCRIPTION, $FAVLINK, $FAVLINK1, $SLANG, $COLORNAME, $AVATARURL, $SECRET_QUESTION, $SECRET_ANSWER, $USE_GRAV) = $DbLink->next_record();
@@ -502,7 +502,7 @@ if (C_PRIV_POPUP == 1)
 ?>
 		<TR>
 			<TD COLSPAN=2 ALIGN="center">
-				<INPUT type="checkbox" name="ALLOWPOPUP" value="1" <?php if(isset($ALLOWPOPUP) && $ALLOWPOPUP) echo("checked"); ?><?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_REG_POPUP."&nbsp;<SPAN CLASS=\"error\">**</SPAN>"); ?>
+				<INPUT type="checkbox" name="ALLOWPOPUP" value="1" <?php if(isset($ALLOWPOPUP) && $ALLOWPOPUP) echo("checked"); ?><?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_REG_POPUP.($done ? "" : "&nbsp;<SPAN CLASS=\"error\">**</SPAN>")); ?>
 			</TD>
 		</TR>
 <?php

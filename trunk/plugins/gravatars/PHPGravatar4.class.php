@@ -163,7 +163,7 @@ THE SOFTWARE.
 
               //Use php4 function "copy" to get the file and save the file.
               // It could complain sometime...
-              if (function_exists('file_put_contents') && file_get_contents($gravatar_url)) @file_put_contents($filename, file_get_contents($gravatar_url));
+              if(function_exists('file_put_contents') && file_get_contents($gravatar_url)) @file_put_contents($filename, file_get_contents($gravatar_url));
 			  elseif(file($gravatar_url)) @copy($gravatar_url, $filename);
 
               // If something went wrong, it will still give the URL.
