@@ -175,8 +175,8 @@ switch($L)
 }
 ?>
 <?php
-$search = "
-<table align=\"center\">
+$search = 
+"<table align=\"center\">
 <tr valign=\"middle\">
 <td align=\"center\">
 	<form action=\"http://www.google.$L_G_EXT/cse\" id=\"cse-search-box\" target=\"_blank\">
@@ -187,5 +187,5 @@ $search = "
 <script type=\"text/javascript\" src=\"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=$L_G_HL\"></script>
 </td>
 </tr>
-</table>";
+</table>\n";
 ?>
