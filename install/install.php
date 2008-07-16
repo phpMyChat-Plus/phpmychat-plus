@@ -237,7 +237,8 @@ if ( $p == 2 )
 		if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/ip.txt") !== false) { } else { $error3 .= L_FILE_ERROR1." &quot;/acount/pages/ip.txt&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
 		if (ftp_chmod($conn_id, 777, $ftppath."acount/pages") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/acount/pages&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
 		if (ftp_chmod($conn_id, 777, $ftppath."acount/pages/bak") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/acount/pages/bak&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 777, $ftppath."bot/subs.inc") !== false) { } else { $error3 .= L_FILE_ERROR1." &quot;/bot/subs.inc&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 777, $ftppath."admin/backups") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/admin/backups&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 666, $ftppath."bot/subs.inc") !== false) { } else { $error3 .= L_FILE_ERROR1." &quot;/bot/subs.inc&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
 		if (ftp_chmod($conn_id, 777, $ftppath."botfb") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/botfb&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
 		if (ftp_chmod($conn_id, 777, $ftppath."images/cache") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/images/cache&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
 		if (ftp_chmod($conn_id, 777, $ftppath."logs") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/logs&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
@@ -823,7 +824,8 @@ $query_quote = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email=
 $result_quote = mysql_query($query_quote);
 list($QUOTE_NAME, $QUOTE_AVATAR, $QUOTE_FONT_COLOR) = mysql_fetch_row($result_quote);
 @mysql_close($conn);
-define("C_SUPPORT_PAID", "");
+define("C_SUPPORT_PAID", 0);
+define("C_SEARCH_PAID", 0);
 
 // Cleaning settings for messages and usernames
 define("C_MSG_DEL", $MSG_DEL);
@@ -1449,7 +1451,8 @@ else {
   	fputs ( $fh, '$result_quote = mysql_query($query_quote);'.$lfeed );
   	fputs ( $fh, 'list($QUOTE_NAME, $QUOTE_AVATAR, $QUOTE_FONT_COLOR) = mysql_fetch_row($result_quote);'.$lfeed );
   	fputs ( $fh, '@mysql_close($conn);'.$lfeed );
-  	fputs ( $fh, 'define("C_SUPPORT_PAID", "");'.$lfeed );
+  	fputs ( $fh, 'define("C_SUPPORT_PAID", 0);'.$lfeed );
+  	fputs ( $fh, 'define("C_SEARCH_PAID", 0);'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// Cleaning settings for messages and usernames'.$lfeed );
   	fputs ( $fh, 'define("C_MSG_DEL", $MSG_DEL);'.$lfeed );
