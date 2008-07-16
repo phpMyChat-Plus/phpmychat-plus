@@ -77,12 +77,10 @@ $Status = (isset($CookieStatus) ? $CookieStatus : "");
 layout($Is_Error,$Username,$Room_name,$Room_type,$Color,$Status);
 
 // You can add php code here, or add html statements before the "</BODY>" tag.
-?>
-</CENTER>
-</BODY>
-</HTML>
-<?php
 // The following line is required
 $DbLink->close();
 }
 ?>
+</CENTER>
+</BODY>
+</HTML>

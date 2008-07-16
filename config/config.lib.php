@@ -3,9 +3,9 @@
 // ------ THESE SETTINGS MUST BE COMPLETED ------
 
 // Database settings
-define("C_DB_NAME", 'plus');						// Logical database name on that server (most common like: cpanelusername_databasename)
-define("C_DB_USER", 'username');				// Database username (most common like: cpanelusername_username)
-define("C_DB_PASS", 'password');				// Database user's password
+define("C_DB_NAME", 'pluschat');		// Logical database name on that server
+define("C_DB_USER", 'root');	// Database username
+define("C_DB_PASS", '');				// Database user's password
 // We recommend you keep the names below
 define("C_DB_HOST", 'localhost');				// Hostname of your MySQL server (most common "localhost", but sometimes "mysql.domain.com")
 define("C_DB_TYPE", 'mysql');						// SQL server type ("mysql", "pgsql" or "odbc")
@@ -198,7 +198,8 @@ $query_quote = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email=
 $result_quote = mysql_query($query_quote);
 list($QUOTE_NAME, $QUOTE_AVATAR, $QUOTE_FONT_COLOR) = mysql_fetch_row($result_quote);
 @mysql_close($conn);
-define("C_SUPPORT_PAID", "");
+define("C_SUPPORT_PAID", 0);
+define("C_SEARCH_PAID", 0);
 
 // Cleaning settings for messages and usernames
 define("C_MSG_DEL", $MSG_DEL);
