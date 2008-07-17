@@ -58,7 +58,7 @@ THE SOFTWARE.
           $this->size = 80;
           $this->rating = "g";
           // Can urls even be opened? Oh, the elegance.
-          $this->cache = (ini_get("allow_url_fopen") == 1 ? true : false);
+          $this->cache = ((ini_get("allow_url_fopen") == 1 && @fsockopen("gravatar.com", 80, $errno, $errstr, 2)) ? true : false);
       }
 
       /*
