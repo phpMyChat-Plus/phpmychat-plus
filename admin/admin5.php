@@ -2247,7 +2247,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<i>
 		Server Info:<br /><?php echo((!$cache_supported || $server_blocked) ? "<font color=red>Important: Cache not supported on this server!</font><br />" : ""); ?>
 		<font color=blue>Hosting Server IP: <b><?php echo($_SERVER['SERVER_ADDR']); ?></b> <?php echo(!$server_blocked ? "" : "<b><font color=red>cannot get access to gravatar.com!</font></b>"); ?></font><br />
-		<font color=blue>Php server version: <b><?php echo((!version_compare(phpversion(),'5','>=') ? "<font color=red>".phpversion()."</font>" : phpversion()); ?></b></font><br />
+		<font color=blue>Php server version: <b><?php echo(!version_compare(phpversion(),'5','>=') ? "<font color=red>".phpversion()."</font>" : phpversion()); ?></b></font><br />
 		<font color=blue>allow_url_fopen: <b><?php echo(!(ini_get("allow_url_fopen")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
 		<font color=blue>allow_url_include: <b><?php echo(!(ini_get("allow_url_include")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
 		<font color=blue>file_get_contents: <b><?php echo(!(function_exists("file_get_contents")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
