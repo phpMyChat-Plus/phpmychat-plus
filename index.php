@@ -77,6 +77,12 @@ $Status = (isset($CookieStatus) ? $CookieStatus : "");
 layout($Is_Error,$Username,$Room_name,$Room_type,$Color,$Status);
 
 // You can add php code here, or add html statements before the "</BODY>" tag.
+if ($S)
+{
+	$conn = @mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
+	echo("<TD><SPAN style=\"color:yellow; background-color:black;\"><b>Debug data:</b><br />Admin name: <b>".C_ADMIN_NAME."</b><br />Admin email: <b>".C_ADMIN_EMAIL."</b><br />App name: <b>".APP_NAME."</b><br />Chat name: <b>".C_CHAT_NAME."</b><br />App version: <b>".APP_VERSION.APP_MINOR."</b><br />Hosting Server IP: <b>".$_SERVER['SERVER_ADDR'].(@fsockopen("gravatar.com", 80, $errno, $errstr, 2) ? "</b>" : "<br /><font color=red>Cache not allowed - cannot get access to gravatar.com!</font></b>")."<br />Php server version: <b>".phpversion()."</b><br />allow_url_fopen: <b>".(!(ini_get("allow_url_fopen")) ? "<font color=red>".L_DISABLED." - Cache not allowed</font>" : L_ENABLED)."</b><br />allow_url_include: <b>".(!(ini_get("allow_url_include")) ? "<font color=red>".L_DISABLED." - Update checking not allowed</font>" : L_ENABLED)."</b><br />file_get_contents: <b>".(!(function_exists("file_get_contents")) ? "<font color=red>".L_DISABLED." - Cache not allowed</font>" : L_ENABLED)."</b><br />MySQL server version: <b>".mysql_get_server_info()."</b></SPAN></TD>");
+	@mysql_close($conn);
+}
 // The following line is required
 $DbLink->close();
 }
@@ -84,3 +90,5 @@ $DbLink->close();
 </CENTER>
 </BODY>
 </HTML>
+<?php
+?>
