@@ -125,13 +125,13 @@ define("A_CHAT_LOGS_30", "Archives des adresses IP");
 define("A_CHAT_LOGS_31", "Taille totale %s %s");
 define("A_CHAT_LOGS_32", "Fichier");
 define("A_CHAT_LOGS_33", "Dossier");
-define("A_CHAT_LOGS_34", "%s supprimé avec succès : %s");
-define("A_CHAT_LOGS_35", "%s créé avec succès : %s");
-define("A_CHAT_LOGS_36", "%s n’existe pas : %s");
-define("A_CHAT_LOGS_37", "%s n’a pas pu être supprimé : %s");
-define("A_CHAT_LOGS_38", "%s n’a pas pu être créé : %s");
-define("A_CHAT_LOGS_39", "%s protégé en écriture : %s");
-define("A_CHAT_LOGS_40", "Des erreurs se sont produites pendant la sauvegarde du fichier : %s"); // filename
+define("A_CHAT_LOGS_34", "%s supprimé avec succès: %s");
+define("A_CHAT_LOGS_35", "%s créé avec succès: %s");
+define("A_CHAT_LOGS_36", "%s n’existe pas: %s");
+define("A_CHAT_LOGS_37", "%s n’a pas pu être supprimé: %s");
+define("A_CHAT_LOGS_38", "%s n’a pas pu être créé: %s");
+define("A_CHAT_LOGS_39", "%s protégé en écriture: %s");
+define("A_CHAT_LOGS_40", "Des erreurs se sont produites pendant la sauvegarde du fichier: %s"); // filename
 
 //Admin Search Page
 define("A_SEARCH_1", "Rechercher sur le Chat");

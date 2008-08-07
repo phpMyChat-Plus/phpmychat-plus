@@ -465,7 +465,7 @@ define("L_PASS_7", "Glömt Lösenordet");
 define("L_PASS_8", "Ditt lösenord har framgångsrikt blivit nollställt.");
 define("L_PASS_9", "Ditt nya lösenord som skriver in chatten");
 define("L_PASS_11", "Välkomnande tillbaks sidan till vår chatten server!");
-define("L_PASS_12", "Välj ditt ifrågasätter ...");
+define("L_PASS_12", "Välj din hemliga fråga ...");
 define("L_ERR_PASS_1", "Fel användarname. Välj din.");
 define("L_ERR_PASS_2", "Fel e-post. Försök igen!");
 define("L_ERR_PASS_3", "Fel hemlig fråga.<br />Till det svar som du hänvisat till!");
