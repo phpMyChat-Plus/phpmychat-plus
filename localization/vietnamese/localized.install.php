@@ -1,5 +1,5 @@
-<?php
-// File : vietnamese/localized.install.php - plus version (23.04.2008 - rev.5)
+﻿<?php
+// File : vietnamese/localized.install.php - plus version (29.07.2008 - rev.6)
 // Translation by Marshall <hellomarshal_lookatme@netzero.net>
 // Do not use ' ; use ’ istead (utf-8 edit bug)
 
@@ -24,8 +24,8 @@ define("L_FOLD_ERROR1", "Không thể CHMOD Folderr");
 define("L_FOLD_ERROR2", "");
 define("L_INST_FOR", "Cài đặt cho %s");
 define("L_INST_VER", "Phien bản:");
-define("L_INST_PAG", "Cài đặt - trang");
-define("L_INST_OF", "của");
+define("L_INST_SETUP", "Cài đặt -");
+define("L_INST_PAG_OF", "Trang %s của %s");
 define("L_P0_HINT1", "Chào mừng bạn cài đặt cho %s.");
 define("L_P0_HINT2", "Làm ơn đánh vào FTP đăng nhập.");
 define("L_P1_HINT1", "Cài đặt này sẽ hướng dẫn bạn thông qua quá trình cài đặt.<br />Xin lựa chọn điều mà kiểu (của) sự cài đặt là điều này:");

@@ -1,5 +1,5 @@
-<?php
-// File : dutch/localized.install.php - plus version (23.04.2008 - rev.5)
+﻿<?php
+// File : dutch/localized.install.php - plus version (29.07.2008 - rev.6)
 // Translation by Bert Moorlag <berbia@hotmail.com>
 // Do not use ' ; use ’ istead (utf-8 edit bug)
 
@@ -24,8 +24,8 @@ define("L_FOLD_ERROR1", "Kan niet CHMOD de map");
 define("L_FOLD_ERROR2", "");
 define("L_INST_FOR", "Installer voor %s");
 define("L_INST_VER", "Versie:");
-define("L_INST_PAG", "Setup - Pagina");
-define("L_INST_OF", "van");
+define("L_INST_SETUP", "Setup -");
+define("L_INST_PAG_OF", "Pagina %s van %s");
 define("L_P0_HINT1", "Welkom bij onze installatie van %s.");
 define("L_P0_HINT2", "Vul je ftp login gegevens hieronder in.");
 define("L_P1_HINT1", "Deze setup zal je begeleiden tijdens de installatie.<br />Selecteer welke type installatie dit is:");

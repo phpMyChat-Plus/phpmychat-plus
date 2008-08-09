@@ -1,5 +1,5 @@
 <?php
-// File : turkish/localized.admin.php - plus version (20.05.2008 - rev.12)
+// File : turkish/localized.admin.php - plus version (18.06.2008 - rev.13)
 // Original translation in turkish by Volkan Övün <vovun@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -119,6 +119,7 @@ define("A_CHAT_LOGS_26", "\\Emin misiniz?");
 define("A_CHAT_LOGS_27", "Zip arşivleri");
 define("A_CHAT_LOGS_28", "İndir %s");
 define("A_CHAT_LOGS_29", "Bu zip dosyasını sil");
+define("A_CHAT_LOGS_30", "IP arşivleri");
 
 //Admin Search Page
 define("A_SEARCH_1", "Sohbet Odası Arama Sayfası");

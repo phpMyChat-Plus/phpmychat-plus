@@ -121,6 +121,17 @@ define("A_CHAT_LOGS_28", "Свалете %s");
 define("A_CHAT_LOGS_29", "Изтрийте този zip");
 define("A_CHAT_LOGS_30", "IP архиви");
 define("A_CHAT_LOGS_31", "Пълен размер %s %s");
+define("A_CHAT_LOGS_32", ""); // small Файл
+define("A_CHAT_LOGS_33", ""); // small папка
+define("A_CHAT_LOGS_32a", "файл"); // small Файл
+define("A_CHAT_LOGS_33b", "Папка"); // small папка
+define("A_CHAT_LOGS_34", "Успешно изтриване на %s%s");
+define("A_CHAT_LOGS_35", "Успешно създаване на %s%s");
+define("A_CHAT_LOGS_36", "%s%s не съществува");
+define("A_CHAT_LOGS_37", "Неуспешно изтриване на %s%s");
+define("A_CHAT_LOGS_38", "Неуспешно създаване на %s%s");
+define("A_CHAT_LOGS_39", "%s%s има защита срещу записване");
+define("A_CHAT_LOGS_40", "Грешки станали при записването на файла %s%s");
 
 //Admin Search Page
 define("A_SEARCH_1", "Страница за търсене");

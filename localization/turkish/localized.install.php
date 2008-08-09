@@ -1,5 +1,5 @@
-<?php
-// File : turkish/localized.install.php - plus version (23.04.2008 - rev.5)
+﻿<?php
+// File : turkish/localized.install.php - plus version (29.07.2008 - rev.6)
 //Translation by Volkan Övün <vovun@hotmail.com>
 // Do not use ' ; use ’ istead (utf-8 edit bug)
 
@@ -24,8 +24,8 @@ define("L_FOLD_ERROR1", "Dizin CHMOD yapılamıyor");
 define("L_FOLD_ERROR2","");
 define("L_INST_FOR", "%s kurucusu");
 define("L_INST_VER", "Sürüm:");
-define("L_INST_PAG", "Kurulum - Sayfası");
-define("L_INST_OF","");
+define("L_INST_SETUP", "Kurulum -");
+define("L_INST_PAG_OF","%s sayfadan %s . si");
 define("L_P0_HINT1", "%s kurucusuna hoşgeldiniz.");
 define("L_P0_HINT2", "Lütfen aşağıya FTP giriş bilgilerinizi yazınız.");
 define("L_P1_HINT1", "Bu kurulum rehberi, programı kurma esnasında sizi yönlendirecektir.<br />Lütfen kurulum tipini seçiniz:");

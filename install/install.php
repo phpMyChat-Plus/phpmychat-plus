@@ -580,7 +580,7 @@ while(list($key, $name) = each($AvailableLanguages))
 <?php } ?>
   <tr>
     <td width="100%" style="border-left-color: #111111; border-left-width: 1; border-right-color: #111111; border-right-width: 1">
-    <font face="Tahoma"><b><?php echo L_INST_PAG." ".$p." ".L_INST_OF." ".$p_all ?></b></font></td>
+    <font face="Tahoma"><b><?php echo L_INST_SETUP." ".sprintf(L_INST_PAG_OF,$p,$p_all) ?></b></font></td>
   </tr>
   <tr>
     <td width="100%" style="border-left: medium none #111111; border-right: medium none #111111">&nbsp;</td>

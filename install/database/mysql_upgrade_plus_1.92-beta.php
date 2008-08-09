@@ -50,7 +50,6 @@ UPDATE ".$t_config."
 ", $conn);
 mysql_query("
 ALTER TABLE ".$t_lurkers."
-			ADD username varchar(30) NOT NULL default '',
 			ADD status varchar(1) NOT NULL default '';
 ", $conn);
 mysql_query("

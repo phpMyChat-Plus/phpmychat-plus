@@ -1,5 +1,5 @@
-<?php
-// File : spanish/localized.install.php - plus version (23.04.2008 - rev.5)
+﻿<?php
+// File : spanish/localized.install.php - plus version (29.07.2008 - rev.6)
 // Translation by Shelly Noyes <shelly.noyes@gmail.com>
 // Do not use ' ; use ’ istead (utf-8 edit bug)
 
@@ -24,8 +24,8 @@ define("L_FOLD_ERROR1", "No se pudo CHMOD la carpeta");
 define("L_FOLD_ERROR2", "");
 define("L_INST_FOR", "Instalador para %s");
 define("L_INST_VER", "Versión:");
-define("L_INST_PAG", "Página de Instalación");
-define("L_INST_OF", "de");
+define("L_INST_SETUP", "Página de Instalación");
+define("L_INST_PAG_OF", "%s de %s");
 define("L_P0_HINT1", "Bienvenido al instalador para %s.");
 define("L_P0_HINT2", "Escriba los datos de información a la conexión FTP abajo.");
 define("L_P1_HINT1", "Esta configuración le guiará en el proceso de instalación. <br />Escoja su tipo de instalación abajo.");

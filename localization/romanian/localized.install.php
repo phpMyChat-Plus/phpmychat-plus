@@ -1,5 +1,5 @@
-<?php
-// File : romanian/localized.install.php - plus version (23.04.2008 - rev.5)
+﻿<?php
+// File : romanian/localized.install.php - plus version (29.07.2008 - rev.6)
 // Translation by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ istead (utf-8 edit bug)
 
@@ -24,8 +24,8 @@ define("L_FOLD_ERROR1", "Nu se pot modifica (CHMOD) permisiunile directorului");
 define("L_FOLD_ERROR2", "");
 define("L_INST_FOR", "Instalare pentru %s");
 define("L_INST_VER", "Versiune:");
-define("L_INST_PAG", "Instalare - Pagina");
-define("L_INST_OF", "din");
+define("L_INST_SETUP", "Instalare -");
+define("L_INST_PAG_OF", "Pagina %s din %s");
 define("L_P0_HINT1", "Bun venit în expertul de instalare pentru %s.");
 define("L_P0_HINT2", "Introduceţi mai jos datele pentru logarea FTP.");
 define("L_P1_HINT1", "Acest script vă va ghida pe parcursul instalării.<br />Alegeţi tipul de instalare din lista de mai jos.");

@@ -1,5 +1,5 @@
-<?php
-// File : french/localized.install.php - plus version (23.04.2008 - rev.5)
+﻿<?php
+// File : french/localized.install.php - plus version (29.07.2008 - rev.6)
 // Original translation for Plus version by Pierre Liget <sourceforge@pliget.freesurf.fr> 10.12.2007
 // Do not use ' ; use ’ instead (utf-8 edit bug)
 
@@ -24,8 +24,8 @@ define("L_FOLD_ERROR1", "Impossible de changer les attributs du répertoire (CHM
 define("L_FOLD_ERROR2", "");
 define("L_INST_FOR", "Programme d’installation pour %s");
 define("L_INST_VER", "Version:");
-define("L_INST_PAG", "Setup - Page");
-define("L_INST_OF", "de");
+define("L_INST_SETUP", "Setup -");
+define("L_INST_PAG_OF", "Page %s de %s");
 define("L_P0_HINT1", "Bienvenue sur notre programme d’installation pour %s.");
 define("L_P0_HINT2", "Veuillez saisir votre login FTP ci-dessous.");
 define("L_P1_HINT1", "Ce programme vous guidera tout au long du processus d’installation.<br />Veuillez sélectionner votre type d’installation.");

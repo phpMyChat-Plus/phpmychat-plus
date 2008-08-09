@@ -1,5 +1,5 @@
-<?php
-// File : bulgarian/localized.install.php - plus version (23.04.2008 - rev.5)
+﻿<?php
+// File : bulgarian/localized.install.php - plus version (29.07.2008 - rev.6)
 // Original translation by Peter Petrov<peter.m.petrov@gmail.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -24,8 +24,8 @@ define("L_FOLD_ERROR1", " Неуспешна смяна на правата (CHM
 define("L_FOLD_ERROR2", "");
 define("L_INST_FOR", "Инсталатор на %s");
 define("L_INST_VER", "Версия:");
-define("L_INST_PAG", "Инсталационна страница");
-define("L_INST_OF", "от");
+define("L_INST_SETUP", "Инсталационна");
+define("L_INST_PAG_OF", "Cтраница %s от %s");
 define("L_P0_HINT1", "Добре дошли в нашия инсталатор на %s.");
 define("L_P0_HINT2", "Моля въведете Вашите ftp login данни по-долу.");
 define("L_P1_HINT1", "Tази инструкция ще Ви води през инсталационния процес.<br />Моля изберете инсталационен тип по-долу.");

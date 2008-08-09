@@ -1,5 +1,5 @@
-<?php
-// File : german/localized.install.php - plus version (23.04.2008 - rev.5)
+﻿<?php
+// File : german/localized.install.php - plus version (29.07.2008 - rev.6)
 // Translation by Thomas Pschernig <tpsde1970@aol.com>
 // Do not use ' ; use ’ istead (utf-8 edit bug)
 
@@ -24,8 +24,8 @@ define("L_FOLD_ERROR1", "Kann die Dateirechte des Verzeichnisses");
 define("L_FOLD_ERROR2", "nicht ändern");
 define("L_INST_FOR", "Installation für %s");
 define("L_INST_VER", "Version:");
-define("L_INST_PAG", "Setup - Seite");
-define("L_INST_OF", "von");
+define("L_INST_SETUP", "Setup -");
+define("L_INST_PAG_OF", "Seite %s von %s");
 define("L_P0_HINT1", "Willkommen bei unserer Installation für %s.");
 define("L_P0_HINT2", "Geben Sie unten bitte Ihre FTP-Daten ein.");
 define("L_P1_HINT1", "Diese Installation wird Sie durch den Installationsprozess begleiten.<br />Wählen Sie bitte die Art der Installation unten aus.");
