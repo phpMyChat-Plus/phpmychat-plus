@@ -1739,16 +1739,16 @@ if (SET_BOT && C_BOT_CONTROL)
 <?php
 if (C_SHOW_COUNTER)
 {
+	echo("<P>");
 	include_once("./${ChatPath}acounter.php");
     $ani_counter = new acounter();
 	echo ($ani_counter->create_output("chat_index"));
 	$INSTALL_DATE = strftime(L_SHORT_DATE,strtotime(C_INSTALL_DATE));
 	if (eregi("win", PHP_OS)) $INSTALL_DATE = utf_conv(WIN_DEFAULT,$Charset,$INSTALL_DATE);
 ?>
-<P>
 <font face=Verdana color=yellow size=1><?php echo (sprintf(L_VISITOR_REPORT,$INSTALL_DATE)) ?>.</font>
-</P>
 <?php
+	echo("</P>");
 }
 ?>
 
