@@ -1,5 +1,5 @@
-<?php
-// File : danish/localized.install.php - plus version (23.04.2008 - rev.5)
+﻿<?php
+// File : danish/localized.install.php - plus version (29.07.2008 - rev.6)
 // Original translation by Bente Feldballe
 // Do not use ' ; use ’ istead (utf-8 edit bug)
 
@@ -24,8 +24,8 @@ define("L_FOLD_ERROR1", "Kunne ikke CHMOD mappen");
 define("L_FOLD_ERROR2", "");
 define("L_INST_FOR", "Auto-installer for %s");
 define("L_INST_VER", "Version:");
-define("L_INST_PAG", "Opsætning - Side");
-define("L_INST_OF", "af");
+define("L_INST_SETUP", "Opsætning -");
+define("L_INST_PAG_OF", "Side %s af %s");
 define("L_P0_HINT1", "Velkommen til auto-opsætning af %s.");
 define("L_P0_HINT2", "Indtast dine ftp log-in data herunder.");
 define("L_P1_HINT1", "Denne guide fører dig igennem installationsprocessen.<br />Vælg den ønskede type installation herunder.");

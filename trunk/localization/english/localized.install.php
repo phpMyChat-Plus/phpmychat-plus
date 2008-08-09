@@ -1,5 +1,5 @@
-<?php
-// File : english/localized.install.php - plus version (23.04.2008 - rev.5)
+﻿<?php
+// File : english/localized.install.php - plus version (29.07.2008 - rev.6)
 // Original file for Plus version by Thomas Pschernig <tpsde1970@aol.com> and Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ istead (utf-8 edit bug)
 
@@ -24,8 +24,8 @@ define("L_FOLD_ERROR1", "Could not CHMOD the folder");
 define("L_FOLD_ERROR2", "");
 define("L_INST_FOR", "Installer for %s");
 define("L_INST_VER", "Version:");
-define("L_INST_PAG", "Setup - Page");
-define("L_INST_OF", "of");
+define("L_INST_SETUP", "Setup -");
+define("L_INST_PAG_OF", "Page %s of %s");
 define("L_P0_HINT1", "Welcome to our installer for %s.");
 define("L_P0_HINT2", "Please enter your ftp login data below.");
 define("L_P1_HINT1", "This setup will guide you through the installation process.<br />Please select your installation type below.");

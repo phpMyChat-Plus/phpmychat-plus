@@ -1,5 +1,5 @@
-<?php
-// File : italian/localized.install.php - plus version (23.04.2008 - rev.5)
+﻿<?php
+// File : italian/localized.install.php - plus version (29.07.2008 - rev.6)
 // Translation by Mike Mikius <mikiusss@yahoo.com> and Luciano Cataldo <lucianocataldo@gmail.com>
 // Do not use ' ; use ’ istead (utf-8 edit bug)
 
@@ -24,8 +24,8 @@ define("L_FOLD_ERROR1", "Could not CHMOD the folder");
 define("L_FOLD_ERROR2", "");
 define("L_INST_FOR", "Installazione di %s");
 define("L_INST_VER", "Versione:");
-define("L_INST_PAG", "Setup - Pagina");
-define("L_INST_OF", "di");
+define("L_INST_SETUP", "Setup -");
+define("L_INST_PAG_OF", "Pagina %s di %s");
 define("L_P0_HINT1", "Benvenuto nell’installazione di %s.");
 define("L_P0_HINT2", "Per cortesia inserisci la tua connessione ftp sotto.");
 define("L_P1_HINT1", "Questo setup ti guiderà attraverso il processo di installazione.<br />Per cortesia seleziona quale tipo di installazione è questa:");

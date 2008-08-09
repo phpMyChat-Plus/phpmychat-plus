@@ -1,5 +1,5 @@
-<?php
-// File : serbian_latin/localized.install.php - plus version (23.04.2008 - rev.5)
+﻿<?php
+// File : serbian_latin/localized.install.php - plus version (29.07.2008 - rev.6)
 // Original translation by Vedran Vučić <vedran.vucic@gnulinuxcentar.org>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -24,8 +24,8 @@ define("L_FOLD_ERROR1", "Nemogu da CHMOD datoteku");
 define("L_FOLD_ERROR2", "");
 define("L_INST_FOR", "Instaler za %s");
 define("L_INST_VER", "Verzija:");
-define("L_INST_PAG", "Setup - Strana");
-define("L_INST_OF", "od");
+define("L_INST_SETUP", "Setup -");
+define("L_INST_PAG_OF", "Strana %s od %s");
 define("L_P0_HINT1", "Dobro došli na naš instaler za %s.");
 define("L_P0_HINT2", "Molimo vas da upišete vaše ftp login podatke.");
 define("L_P1_HINT1", "Ovaj program će vas voditi kroz proces instalacije.<br />Odaberite tip instalacije.");

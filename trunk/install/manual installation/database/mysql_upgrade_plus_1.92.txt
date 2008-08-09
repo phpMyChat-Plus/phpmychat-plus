@@ -48,7 +48,6 @@ UPDATE c_config SET
 	WHERE ID='0';
 
 ALTER TABLE c_lurkers
-			ADD username varchar(30) NOT NULL default '',
 			ADD status varchar(1) NOT NULL default '';
 			
 ALTER TABLE c_reg_users

@@ -1,5 +1,5 @@
-<?php
-// File : argentinian_spanish/localized.install.php - plus version (23.04.2008 - rev.5)
+﻿<?php
+// File : argentinian_spanish/localized.install.php - plus version (29.07.2008 - rev.6)
 // Translation by Matias Olivera <matiolivera@yahoo.com>
 // Do not use ' ; use ’ istead (utf-8 edit bug)
 
@@ -24,8 +24,8 @@ define("L_FOLD_ERROR1", "No se pudo hacer CHMOD de la carpeta");
 define("L_FOLD_ERROR2", "");
 define("L_INST_FOR", "Instalador para %s");
 define("L_INST_VER", "Versión:");
-define("L_INST_PAG", "Página de configuración");
-define("L_INST_OF", "de");
+define("L_INST_SETUP", "Página de configuración");
+define("L_INST_PAG_OF", "%s de %s");
 define("L_P0_HINT1", "Bienvenido a nuestro instalador para %s.");
 define("L_P0_HINT2", "Por favor ingresá tu login información de logueo ftp.");
 define("L_P1_HINT1", "Este programa te guiará en el proceso de instalación.<br />Por favor seleccioná qué tipo de instalación es:");

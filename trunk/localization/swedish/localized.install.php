@@ -1,6 +1,5 @@
-<?php
-// File : swedish/localized.install.php - plus version (23.04.2008 - rev.5)
-// Original file for Plus version by Thomas Pschernig <tpsde1970@aol.com> and Ciprian Murariu <ciprianmp@yahoo.com>
+﻿<?php
+// File : swedish/localized.install.php - plus version (29.07.2008 - rev.6)
 // Translated by Fimpen Högström <fimpen@relative-work.se>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -25,8 +24,8 @@ define("L_FOLD_ERROR1", "Kunde inte ändra skrivrättigheterna för mappar (CHMO
 define("L_FOLD_ERROR2", "");
 define("L_INST_FOR", "Installerare för %s");
 define("L_INST_VER", "Version:");
-define("L_INST_PAG", "Setup - Sida");
-define("L_INST_OF", "för");
+define("L_INST_SETUP", "Setup -");
+define("L_INST_PAG_OF", "Sida %s av %s");
 define("L_P0_HINT1", "Välkommen till vår installation för %s.");
 define("L_P0_HINT2", "Vänligen skriv in dina ftp logg in data nedan.");
 define("L_P1_HINT1", "Denna guiden kommer hjälpa dig genom installationsprocessen.<br />Vänligen välj typ av installation du vill göra nedan.");

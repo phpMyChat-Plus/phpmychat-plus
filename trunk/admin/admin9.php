@@ -16,68 +16,78 @@ $mzip = $_GET['mzip'];
 $path = $_GET['path'];
 
 function delDir($dirName) {
-   if(empty($dirName)) {
-       return;
-   }
+	if(empty($dirName)) {
+		return;
+	}
 	global $Message;
-   if(file_exists($dirName)) {
-       $dir = dir($dirName);
-       while(false !== ($file = $dir->read())) {
-           if($file != '.' && $file != '..') {
-               if(is_dir($dirName.'/'.$file)) {
-                   delDir($dirName.'/'.$file);
-       $Message = 'Folder '.str_replace("./","",$dirName).' deleted!';
-               } else {
-									@fclose($dirName.'/'.$file) ;
-                  @unlink($dirName.'/'.$file) or die('File '.str_replace("./","",$dirName).'/'.$file.' couldn\'t be deleted!');
-       $Message = 'File '.str_replace("./","",$dirName).'/'.$file.' deleted!';
-               }
-           }
-       }
-       @rmdir($dirName.'/'.$file) or die('Folder '.str_replace("./","",$dirName).'/'.$file.' couldn\'t be deleted!');
-       $Message = 'Folder '.str_replace("./","",$dirName).' deleted!';
-   } else {
-       $Message = 'Folder '.str_replace("./","",$dirName).' doesn\'t exist!';
-   }
+	if(file_exists($dirName)) {
+		$dir = dir($dirName);
+		while(false !== ($file = $dir->read())) {
+		if($file != '.' && $file != '..') {
+			if(is_dir($dirName.'/'.$file)) {
+	            delDir($dirName.'/'.$file);
+				$path_dir = "<span class=\"error\">".str_replace("./","",$dirName)."</span>";
+				$Message = sprintf(A_CHAT_LOGS_34,A_CHAT_LOGS_33,$path_dir);
+			} else {
+					$path_dir = "<span class=\"error\">".str_replace("./","",$dirName)."</span>";
+					$path_file = "<span class=\"error\">".str_replace("./","",$dirName.'/'.$file)."</span>";
+				@fclose($dirName.'/'.$file) ;
+	            @unlink($dirName.'/'.$file) or die(sprintf(A_CHAT_LOGS_37,A_CHAT_LOGS_32,$path_dir));
+				$Message = sprintf(A_CHAT_LOGS_34,A_CHAT_LOGS_32,$path_file);
+            }
+        }
+    }
+    @rmdir($dirName.'/'.$file) or die(sprintf(A_CHAT_LOGS_37,A_CHAT_LOGS_33,$path_dir));
+    $Message = sprintf(A_CHAT_LOGS_34,A_CHAT_LOGS_33,$path_dir);
+	} else {
+		$path_dir = "<span class=\"error\">".str_replace("./","",$dirName)."</span>";
+		$Message = sprintf(A_CHAT_LOGS_36,A_CHAT_LOGS_33,$path_dir);
+	}
 }
 
 function delFile($fileName) {
 	if(file_exists($fileName)) {
 		@fclose($fileName) ;
-	    @unlink($fileName) or die('File '.$fileName.' couldn\'t be deleted!');
+	    @unlink($fileName) or die(sprintf(A_CHAT_LOGS_37,A_CHAT_LOGS_32,str_replace("./","",$fileName)));
 		global $Message;
-	    if (isset($Message) && $Message != "") $Message .= '<br />File '.str_replace("./","",$fileName).' deleted!';
-	    else $Message = 'File '.str_replace("./","",$fileName).' deleted!';
+		$fileName = "<span class=\"error\">".str_replace("./","",$fileName)."</span>";
+	    if (isset($Message) && $Message != "") $Message .= '<br />'.sprintf(A_CHAT_LOGS_34,A_CHAT_LOGS_32,$fileName);
+	    else $Message = sprintf(A_CHAT_LOGS_34,A_CHAT_LOGS_32,$fileName);
 	}
 }
 
 function makeZip($dirName,$path,$year,$month) {
-global $done, $Message;
-if (isset($month) || isset($year))
-{
-	if (isset($month)) $zipfile = new zip_file($path = $path."/".$year."_".$month.".zip");
-	elseif (isset($year)) $zipfile = new zip_file($path = $path."/".$year.".zip");
-}
-else $zipfile = new zip_file($path = $path."/chat_ip_logs_".date('ymd').".zip");
-$zipfile->set_options(array('level' => 3, 'overwrite' => 1, 'method' => 1, 'inmemory' => 0, 'recurse' => (isset($month) ? 0 : 1), 'storepaths' => (isset($month) || isset($year)) ? 1 : 0, 'comment' => "Built on ".date('jS \of F Y, H:i:s').".\nDownloaded from [".C_CHAT_NAME."]\nat ".C_CHAT_URL.".\n© ".date('Y')." - ".C_ADMIN_NAME."."));
-$zipfile->add_files(array($dirName,$dirName."/*.htm",$dirName."/*.php",$dirName."/*.txt"));
-$zipfile->create_archive();
-if (count($zipfile->errors) > 0)
-	{ $Message = "Errors occurred while saving ".str_replace("./","",$path)." file!"; $done = 0; } // Process errors here
-else { $Message = "Zip file ".str_replace("./","",$path)." successfully created!"; $done = 1; } // Process errors here
+	global $done, $Message;
+	if (isset($month) || isset($year)) {
+		if (isset($month)) $zipfile = new zip_file($path = $path."/".$year."_".$month.".zip");
+		elseif (isset($year)) $zipfile = new zip_file($path = $path."/".$year.".zip");
+	}
+	else $zipfile = new zip_file($path = $path."/chat_ip_logs_".date('ymd').".zip");
+	$zipfile->set_options(array('level' => 3, 'overwrite' => 1, 'method' => 1, 'inmemory' => 0, 'recurse' => (isset($month) ? 0 : 1), 'storepaths' => (isset($month) || isset($year)) ? 1 : 0, 'comment' => "Built on ".date('jS \of F Y, H:i:s').".\nDownloaded from [".C_CHAT_NAME."]\nat ".C_CHAT_URL.".\n© ".date('Y')." - ".C_ADMIN_NAME."."));
+	$zipfile->add_files(array($dirName,$dirName."/*.htm",$dirName."/*.php",$dirName."/*.txt"));
+	$zipfile->create_archive();
+	$path = "<span class=\"error\">".str_replace("./","",$path)."</span>";
+	if (count($zipfile->errors) > 0) {
+		$Message = sprintf(A_CHAT_LOGS_40,A_CHAT_LOGS_32,$path);
+		$done = 0;
+	} // Process errors here
+	else {
+		$Message = sprintf(A_CHAT_LOGS_35,A_CHAT_LOGS_32,$path);
+		$done = 1;
+	} // successful saving
 }
 
 function size_readable($size, $retstring = null) {
-       // adapted from code at http://aidanlister.com/repos/v/function.size_readable.php
-       $sizes = array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-       if ($retstring === null) { $retstring = '%01.1f %s'; }
-       $lastsizestring = end($sizes);
-       foreach ($sizes as $sizestring) {
-               if ($size < 1024) { break; }
-               if ($sizestring != $lastsizestring) { $size /= 1024; }
-       }
-       if ($sizestring == $sizes[0]) { $retstring = '%01d %s'; } // Bytes aren't normally fractional
-       return sprintf($retstring, $size, $sizestring);
+    // adapted from code at http://aidanlister.com/repos/v/function.size_readable.php
+    $sizes = array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+    if ($retstring === null) { $retstring = '%01.1f %s'; }
+    $lastsizestring = end($sizes);
+    foreach ($sizes as $sizestring) {
+		if ($size < 1024) { break; }
+        if ($sizestring != $lastsizestring) { $size /= 1024; }
+    }
+    if ($sizestring == $sizes[0]) { $retstring = '%01d %s'; } // Bytes aren't normally fractional
+    return sprintf($retstring, $size, $sizestring);
 }
 
 if(isset($ydel) && $ydel != "") delDir($ydel);
@@ -87,7 +97,7 @@ if(isset($mzip) && $mzip != "") makeZip($mzip,$path,$year,$month);
 if(isset($ipdel) && $ipdel != "" && $done)
 {
 	delfile($ipdel);
-	copy("acount/pages/bak/chat_ip_logs.htm","acount/pages/chat_ip_logs.htm");
+	copy("config/index/chat_ip_logs.htm","acount/pages/chat_ip_logs.htm");
 	chmod("acount/pages/chat_ip_logs.htm", 0666);
 }
 ?>
@@ -95,7 +105,7 @@ if(isset($ipdel) && $ipdel != "" && $done)
 <?php
 if (isset($Message))
 {
-	echo "<div><p><table align=center border=0 cellpadding=3 class=menu style=background:white><tr><td class=error align=center><br /><h3>".$Message."</h3></td></tr></table></p></div>";
+	echo "<div><table align=center border=0 cellpadding=3 class=menu style=background:white><tr><td class=success align=center><br /><h4>".$Message."</h4></td></tr></table></div>";
 }
 if (file_exists("acount/pages/chat_ip_logs.htm"))
 {
@@ -107,7 +117,12 @@ echo ("<a href=\"acount/pages/chat_ip_logs.htm\" target=\"_blank\" title='".A_CH
 &nbsp;&nbsp;-&nbsp;&nbsp;
 <a href=\"$pstr&mzip=./acount/pages/chat_ip_logs.htm&path=./acount/pages/bak&ipdel=./acount/pages/chat_ip_logs.htm\" onclick=\"return confirm('".A_CHAT_LOGS_5.A_CHAT_LOGS_19."');\" title='".A_CHAT_LOGS_4."'><font size=-2 color=red><b>".A_CHAT_LOGS_4."</b></font></a>");
 }
-			$ipbak='./acount/pages/bak'; #define which year you want to read
+else
+{
+	copy("config/index/chat_ip_logs.htm","acount/pages/chat_ip_logs.htm");
+	chmod("acount/pages/chat_ip_logs.htm", 0666);
+}
+			$ipbak='./acount/pages/bak'; #define backup directory
 				$ipb = opendir($ipbak); #open directory
 				while (false !== ($ip = readdir($ipb)))
 				{
@@ -151,30 +166,6 @@ else
 		echo("\n<P ALIGN=right><A HREF=#user>".A_CHAT_LOGS_7."</A></P>\n");
 		$total_size = 0;
 		$y='./'.C_LOG_DIR.''; #define which year you want to read
-				$zip = opendir($y); #open directory
-				while (false !== ($zy = readdir($zip)))
-				{
-					if (eregi("\.zip",$zy))
-					{
-						$ziparray[]=$zy;
-			 		}
-			 	}
-				closedir($zip);
-				if ($ziparray)
-				{
-					sort($ziparray);
-					echo("\n<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table>");
-					echo("\n<tr>\n<td valign=top align=center nowrap=\"nowrap\"><font size=4 color=blue><b>".A_CHAT_LOGS_27."</b></font></td></tr>\n<tr>\n<td valign=top align=left nowrap=\"nowrap\">");
-					$zip_size = 0;
-					foreach ($ziparray as $zy)
-					{
-						echo ("\n<li><a href=\"$pstr&fdel=".$y."/".$zy."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_14.A_CHAT_LOGS_19,$zy)."')\" title='".A_CHAT_LOGS_29."'><font size=-2 color=red><b>x</b></font></a>&nbsp;<a href=$y/$zy title='".sprintf(A_CHAT_LOGS_28,$zy)."'>$zy</a>&nbsp;(".size_readable(filesize($y."/".$zy)).", ".strftime(L_SHORT_DATETIME, filemtime($y."/".$zy)).")"); #print name of each file found
-						$zip_size = $zip_size + filesize($y."/".$zy);
-					}
-					echo("\n</td>\n</tr>\n<td valign=top nowrap=\"nowrap\" class=\"notify\"><li>".sprintf(A_CHAT_LOGS_31," = ",size_readable($zip_size,'%01.2f %s'))."</td>\n</tr>\n</table>\n<br />\n");
-				}
-				unset($ziparray);
-		$total_size = $total_size + $zip_size;
 $yrs = preg_find('/./', $y, PREG_FIND_DIRONLY|PREG_FIND_SORTKEYS|PREG_FIND_SORTDESC);
 foreach($yrs as $yr)
 {
@@ -301,8 +292,32 @@ else
 		}
 		echo("\n</tr>\n<tr>\n<td valign=top align=left nowrap=\"nowrap\" class=\"notify\" colspan=7><li>".sprintf(A_CHAT_LOGS_31,$yeardir." = ",size_readable($year_size,'%01.2f %s'))."\n - <a href=\"$pstr&mzip=".$yr."&path=$y&year=$yeardir\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_25.A_CHAT_LOGS_26,$yeardir)."')\" title='".sprintf(A_CHAT_LOGS_24,$yeardir)."'>\n<img src=\"images/archive.gif\" border=0 alt='".sprintf(A_CHAT_LOGS_24,$yeardir)."' />\n</a>\n - <a href=\"$pstr&ydel=".$y."/".$yeardir."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_8.A_CHAT_LOGS_19,$yeardir)."')\" title='".sprintf(A_CHAT_LOGS_9,$yeardir)."'>\n<font size=-2 color=red><b>".A_CHAT_LOGS_10."</b></font>\n</a>\n</td>\n</tr>\n</table>\n<br />\n");
 		$total_size = $total_size + $year_size;
-		echo("\n<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table>\n<tr>\n<td valign=top align=\"center\" nowrap=\"nowrap\" class=\"notify\" colspan=7>".sprintf(A_CHAT_LOGS_31," = ",size_readable($total_size,'%01.2f %s'))."</td>\n</tr>\n</table>\n<br />\n");
 }
+				$zip = opendir($y); #open directory
+				while (false !== ($zy = readdir($zip)))
+				{
+					if (eregi("\.zip",$zy))
+					{
+						$ziparray[]=$zy;
+			 		}
+			 	}
+				closedir($zip);
+				if ($ziparray)
+				{
+					sort($ziparray);
+					echo("\n<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table>");
+					echo("\n<tr>\n<td valign=top align=center nowrap=\"nowrap\"><font size=4 color=blue><b>".A_CHAT_LOGS_27."</b></font></td></tr>\n<tr>\n<td valign=top align=left nowrap=\"nowrap\">");
+					$zip_size = 0;
+					foreach ($ziparray as $zy)
+					{
+						echo ("\n<li><a href=\"$pstr&fdel=".$y."/".$zy."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_14.A_CHAT_LOGS_19,$zy)."')\" title='".A_CHAT_LOGS_29."'><font size=-2 color=red><b>x</b></font></a>&nbsp;<a href=$y/$zy title='".sprintf(A_CHAT_LOGS_28,$zy)."'>$zy</a>&nbsp;(".size_readable(filesize($y."/".$zy)).", ".strftime(L_SHORT_DATETIME, filemtime($y."/".$zy)).")"); #print name of each file found
+						$zip_size = $zip_size + filesize($y."/".$zy);
+					}
+					echo("\n</td>\n</tr>\n<td valign=top nowrap=\"nowrap\" class=\"notify\"><li>".sprintf(A_CHAT_LOGS_31," = ",size_readable($zip_size,'%01.2f %s'))."</td>\n</tr>\n</table>\n<br />\n");
+				}
+				unset($ziparray);
+		$total_size = $total_size + $zip_size;
+		echo("\n<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table>\n<tr>\n<td valign=top align=\"center\" nowrap=\"nowrap\" class=\"notify\" colspan=7>".sprintf(A_CHAT_LOGS_31," = ",size_readable($total_size,'%01.2f %s'))."</td>\n</tr>\n</table>\n<br />\n");
 ?>
 <center>
 	<P CLASS=title><A NAME="user"></A><?php echo(APP_NAME." ".A_CHAT_LOGS_17) ?></P>
@@ -310,30 +325,6 @@ else
 <?php
 		$totalu_size = 0;
 		$yu='./logs'; #define which year you want to read
-		$zipu = opendir($yu); #open directory
-				while (false !== ($zyu = readdir($zipu)))
-				{
-					if (!eregi("\.html",$zyu) && !eregi("error",$zyu) && $zyu!='.' && $zyu!='..' && !is_dir($yu."/".$zyu))
-					{
-						$ziparrayu[]=$zyu;
-			 		}
-			 	}
-				closedir($zipu);
-				if ($ziparrayu)
-				{
-					sort($ziparrayu);
-				echo("\n<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table>");
-				echo("\n<tr>\n<td valign=top align=center nowrap=\"nowrap\"><font size=4 color=blue><b>".A_CHAT_LOGS_27." ".A_CHAT_LOGS_12."</b></font></td></tr>\n<tr>\n<td valign=top align=left nowrap=\"nowrap\">");
-					$zipu_size = 0;
-					foreach ($ziparrayu as $zyu)
-					{
-						echo ("\n<li><a href=\"$pstr&fdel=".$yu."/".$zyu."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_14.A_CHAT_LOGS_12.A_CHAT_LOGS_19,$zyu)."')\" title='".A_CHAT_LOGS_29." ".A_CHAT_LOGS_12."'><font size=-2 color=red><b>x</b></font></a>&nbsp;<a href=$yu/$zyu title='".sprintf(A_CHAT_LOGS_28,$zyu)." ".A_CHAT_LOGS_12."'>$zyu</a>&nbsp;(".size_readable(filesize($yu."/".$zyu))." / ".strftime(L_SHORT_DATETIME, filemtime($yu."/".$zyu)).")"); #print name of each file found
-						$zipu_size = $zipu_size + filesize($yu."/".$zyu);
-					}
-					echo("\n</td>\n</tr>\n<td valign=top nowrap=\"nowrap\" class=\"notify\"><li>".sprintf(A_CHAT_LOGS_31," = ",size_readable($zipu_size,'%01.2f %s'))."</td>\n</tr>\n</table>\n<br />\n");
-				}
-				unset($ziparrayu);
-		$totalu_size = $totalu_size + $zipu_size;
 $yrsu = preg_find('/./', $yu, PREG_FIND_DIRONLY|PREG_FIND_SORTKEYS|PREG_FIND_SORTDESC);
 foreach($yrsu as $yru)
 {
@@ -460,8 +451,32 @@ else
 		}
 		echo("\n</tr>\n<tr>\n<td valign=top align=left nowrap=\"nowrap\" class=\"notify\" colspan=7><li>".sprintf(A_CHAT_LOGS_31,$yeardiru." = ",size_readable($yearu_size,'%01.2f %s'))."\n - <a href=\"$pstr&mzip=".$yru."&path=$yu&year=$yeardiru\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_25.A_CHAT_LOGS_12.A_CHAT_LOGS_26,$yeardiru)."')\" title='".sprintf(A_CHAT_LOGS_24,$yeardiru)." ".A_CHAT_LOGS_12."'>\n<img src=\"images/archive.gif\" border=0 alt='".sprintf(A_CHAT_LOGS_24,$yeardiru)." ".A_CHAT_LOGS_12."' />\n</a>\n - <a href=\"$pstr&ydel=".$yu."/".$yeardiru."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_8.A_CHAT_LOGS_12."\\n".A_CHAT_LOGS_19,$yeardiru)."')\" title='".sprintf(A_CHAT_LOGS_9." ".A_CHAT_LOGS_12,$yeardiru)."'>\n<font size=-2 color=red><b>".A_CHAT_LOGS_10."</b></font>\n</a>\n</td>\n</tr>\n</table>\n<br />\n");
 		$totalu_size = $totalu_size + $yearu_size;
-		echo("\n<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table>\n<tr>\n<td valign=top align=center nowrap=\"nowrap\" class=\"notify\" colspan=7>".sprintf(A_CHAT_LOGS_31,A_CHAT_LOGS_12." = ",size_readable($totalu_size,'%01.2f %s'))."</td>\n</tr>\n</table>\n<br />\n");
 }
+		$zipu = opendir($yu); #open directory
+				while (false !== ($zyu = readdir($zipu)))
+				{
+					if (!eregi("\.html",$zyu) && !eregi("error",$zyu) && $zyu!='.' && $zyu!='..' && !is_dir($yu."/".$zyu))
+					{
+						$ziparrayu[]=$zyu;
+			 		}
+			 	}
+				closedir($zipu);
+				if ($ziparrayu)
+				{
+					sort($ziparrayu);
+				echo("\n<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table>");
+				echo("\n<tr>\n<td valign=top align=center nowrap=\"nowrap\"><font size=4 color=blue><b>".A_CHAT_LOGS_27." ".A_CHAT_LOGS_12."</b></font></td></tr>\n<tr>\n<td valign=top align=left nowrap=\"nowrap\">");
+					$zipu_size = 0;
+					foreach ($ziparrayu as $zyu)
+					{
+						echo ("\n<li><a href=\"$pstr&fdel=".$yu."/".$zyu."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_14.A_CHAT_LOGS_12.A_CHAT_LOGS_19,$zyu)."')\" title='".A_CHAT_LOGS_29." ".A_CHAT_LOGS_12."'><font size=-2 color=red><b>x</b></font></a>&nbsp;<a href=$yu/$zyu title='".sprintf(A_CHAT_LOGS_28,$zyu)." ".A_CHAT_LOGS_12."'>$zyu</a>&nbsp;(".size_readable(filesize($yu."/".$zyu))." / ".strftime(L_SHORT_DATETIME, filemtime($yu."/".$zyu)).")"); #print name of each file found
+						$zipu_size = $zipu_size + filesize($yu."/".$zyu);
+					}
+					echo("\n</td>\n</tr>\n<td valign=top nowrap=\"nowrap\" class=\"notify\"><li>".sprintf(A_CHAT_LOGS_31," = ",size_readable($zipu_size,'%01.2f %s'))."</td>\n</tr>\n</table>\n<br />\n");
+				}
+				unset($ziparrayu);
+		$totalu_size = $totalu_size + $zipu_size;
+		echo("\n<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table>\n<tr>\n<td valign=top align=center nowrap=\"nowrap\" class=\"notify\" colspan=7>".sprintf(A_CHAT_LOGS_31,A_CHAT_LOGS_12." = ",size_readable($totalu_size,'%01.2f %s'))."</td>\n</tr>\n</table>\n<br />\n");
 		echo("\n<P ALIGN=right><A HREF=#full>".A_CHAT_LOGS_20."</A>\n<br />\n<A HREF=#home>".A_CHAT_LOGS_21."</A></P><CENTER>");
 }
 ?>
