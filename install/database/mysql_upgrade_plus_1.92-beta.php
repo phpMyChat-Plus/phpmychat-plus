@@ -73,4 +73,7 @@ UPDATE ".$t_reg_users." SET latin1='0' WHERE email='bot@bot.com';
 mysql_query("
 UPDATE ".$t_reg_users." SET latin1='0' WHERE email='quote@quote.com';
 ", $conn);
+mysql_query("
+UPDATE ".$t_reg_users." SET latin1='0' WHERE latin1='1';
+", $conn);
 ?>
