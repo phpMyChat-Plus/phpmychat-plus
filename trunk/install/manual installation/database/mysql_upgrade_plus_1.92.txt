@@ -67,3 +67,5 @@ ALTER TABLE c_reg_users
 UPDATE c_reg_users SET latin1='0' WHERE email='bot@bot.com';
 
 UPDATE c_reg_users SET latin1='0' WHERE email='quote@quote.com';
+
+UPDATE c_reg_users SET latin1='0' WHERE latin1='1';
