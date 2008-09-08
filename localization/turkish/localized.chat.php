@@ -1,5 +1,5 @@
 <?php
-// File : turkish/localized.chat.php - plus version (20.05.2008 - rev.39)
+// File : turkish/localized.chat.php - plus version (11.08.2008 - rev.41)
 // Original translation in turkish by Volkan Övün <vovun@hotmail.com>
 // Finetunning by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -85,6 +85,7 @@ define("L_REG_35", "Yönetim");
 define("L_REG_36", "Şehir/ülke");
 define("L_REG_37", "<span class=\"error\">*</span> İşaretli alanların doldurulması zorunludur.");
 define("L_REG_39", "Bulunduğunuz oda Yönetici tarafından kaldırılmıştır.");
+define("L_REG_43", "Belirtilmedi");
 define("L_REG_44", "Evli çift");
 define("L_REG_45", "Cinsiyet");
 define("L_REG_46", "Bay");
@@ -111,6 +112,7 @@ define("L_EMAIL_VAL_6", "%s Tarihinde kayıt olundu");
 define("L_EMAIL_VAL_61", "%s Tarihinde güncellendi");
 define("L_EMAIL_VAL_7", "%s - Kullanıcı adınızın güncellenme bilgileri aşağıdadır:"); //username
 define("L_EMAIL_VAL_8", "Bu e-postayı gelecekte başvurmak üzere kaydediniz.\nLütfen güvenli bir yerde tutunuz ve bu bilgileri başkalarıyla paylaşmayınız.\nKatıldığınız için teşekkür ederiz! İyi eğlenceler.");
+define("L_EMAIL_VAL_81", "Giriş sayfasındaki Profilinizi denetleyin başlığı altında şifrenizi değiştirebilirsiniz.");
 
 // admin stuff
 define("L_ADM_1", "%s artık bu odanın denetleyicisi değil.");
@@ -291,18 +293,18 @@ define("L_WHOIS_REG", "Kayıtlı");
 define("L_WHOIS_BOT", "Robotumuz");
 
 // Notification messages of user entrance/exit
-define("ENTER_ROM", "%s bu odaya girdi");
-define("L_EXIT_ROM", "%s bu odadan çıktı");
+define("ENTER_ROM", "%s bu odaya girdi.");
+define("L_EXIT_ROM", "%s bu odadan çıktı.");
 if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
 // Clean mod/fix by Ciprian
-define("L_BOOT_ROM", "%s bir süredir aktif olmadığı için bu odadan otomatik olarak çıkarılmıştır");
-define("L_CLOSED_ROM", "%s tarayıcısını kapattı");
+define("L_BOOT_ROM", "%s bir süredir aktif olmadığı için bu odadan otomatik olarak çıkarılmıştır.");
+define("L_CLOSED_ROM", "%s tarayıcısını kapattı.");
 
 // Text for /away command notification string:
-define("L_AWAY", "%s bilgisayar başından ayrıldı");
+define("L_AWAY", "%s bilgisayar başından ayrıldı...");
 define("L_BACK", "%s geri döndü!");
 
 // Quick Menu mod
@@ -509,6 +511,7 @@ define("L_LINKS_17_T", "Eskiden yeniye sıralamak için"); // time: Oldest -> Re
 define("L_LINKS_18_T", "Yeniden eskiye sıralamak için"); // time: Recent -> Oldest
 define("L_LINKS_17_N", "Küçükten büyüğe sıralamak için"); // numeric acending
 define("L_LINKS_18_N", "Büyükten küçüğe sıralamak için"); // numeric descending
+define("L_LINKS_19", "Gravatarınızı ayarlamak/düzenlemek için");
 define("L_ASCa", "");
 define("L_DESCa", "");
 define("L_SWITCH", "Değiştir");
@@ -574,6 +577,7 @@ setlocale(LC_ALL, "turkish.UTF-8", "turkish");
 } else {
 setlocale(LC_ALL, "tr_TR.UTF-8", "turkish.UTF-8");
 }
+define("L_LANG", "tr_TR");
 define("ISO_DEFAULT", "iso-8859-9");
 define("WIN_DEFAULT", "windows-1254");
 define("L_SHORT_DATE", "%d-%m-%Y"); //Change this to your local desired format (keep the short form)
@@ -639,4 +643,7 @@ define("L_DESC_N", "Büyükten küçüğe"); // numeric descending
 
 // Returning visitors counter on profiles by Ciprian
 define("L_LOGIN_COUNT", "Ziyaretler toplamı"); // number of logins (returning visits) to chat
+
+// Gravatar from email mod by Ciprian - more info on http://www.gravatar.com
+define("L_GRAV_USE", "Gravatar kullanın");
 ?>

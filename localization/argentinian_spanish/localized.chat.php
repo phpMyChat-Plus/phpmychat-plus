@@ -1,5 +1,5 @@
 <?php
-// File : argentinian_spanish/localized.chat.php - plus version (18.06.2008 - rev.40)
+// File : argentinian_spanish/localized.chat.php - plus version (11.08.2008 - rev.41)
 // Original translation in Spanish (for the Argentinian dialect usage) by Jorge Colaccini <jrc@informas.com>
 // Updates, corrections and additions for the Plus version by Matias Olivera <matiolivera@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -113,6 +113,7 @@ define("L_EMAIL_VAL_6", "Registrado en %s");
 define("L_EMAIL_VAL_61", "Acualizado el  %s");
 define("L_EMAIL_VAL_7", "Abajo está tu %s información actualizada de la cuenta:"); //username
 define("L_EMAIL_VAL_8", "Guarda este mail para futures referencias.\nPor favor hazlo con cuidado y no compartas esta información.\nGracias! Que lo disfrutes!");
+define("L_EMAIL_VAL_81", "Puedes cambiar tu password de logueo editando tu perfil.");
 
 // admin stuff
 define("L_ADM_1", "%s no es un moderador para este salón.");
@@ -174,9 +175,9 @@ define("L_NO_PROFILE", "No hay perfil de usuario (datos)");
 // input frame
 define("L_HLP", "Ayuda");
 define("L_MODERATOR", "%s es ahora un moderador de este salón.");
-define("L_KICKED", "El usuario %s ha sido expulsado satisfactoriamente.");
+define("L_KICKED", "%s ha sido expulsado satisfactoriamente.");
 define("L_KICKED_REASON", "%s ha sido desonectado exitosamente. (Motivos: %s)");
-define("L_BANISHED", "El usuario %s ha sido bloqueado exitosamente.");
+define("L_BANISHED", "%s ha sido bloqueado exitosamente.");
 define("L_BANISHED_REASON", "%s ha sido bloqueado exitosamente. (Motivos: %s)");
 define("L_ANNOUNCE", "ANUNCIO");
 define("L_INVITE", "%s solicitud para que ingrese al usuario a <a href=\"#\" onClick=\"window.parent.runCmd('%s','%s')\">%s</a> salón.");
@@ -188,11 +189,11 @@ define("L_BAD_CMD", "Este no es un comando válido!");
 define("L_ADMIN", "%s ya es el administrador!");
 define("L_IS_MODERATOR", "%s ya es el moderador!");
 define("L_NO_MODERATOR", "Solo un moderador de este salón puede utilizar este comando.");
-define("L_NONEXIST_USER", "El usuario %s no está en este salón.");
-define("L_NONREG_USER", "El usuario %s no está registrado.");
+define("L_NONEXIST_USER", "%s no está en este salón.");
+define("L_NONREG_USER", "%s no está registrado.");
 define("L_NONREG_USER_IP", "Su dirección de IP es: %s.");
-define("L_NO_KICKED", "El usuario %s es un moderador o el administrador y no puede ser expulsado.");
-define("L_NO_BANISHED", "El usuario %s es un moderador o el administrador y no puede ser bloqueado.");
+define("L_NO_KICKED", "%s es un moderador o el administrador y no puede ser expulsado.");
+define("L_NO_BANISHED", "%s es un moderador o el administrador y no puede ser bloqueado.");
 define("L_SVR_TIME", "Hora del servidor: ");
 define("L_NO_SAVE", "No hay mensajes para guardar!");
 define("L_NO_ADMIN", "Solamente el administrador puede utilizar este comando.");
@@ -293,18 +294,18 @@ define("L_WHOIS_REG", "Registrado");
 define("L_WHOIS_BOT", "Robot");
 
 // Notification messages of user entrance/exit
-define("ENTER_ROM", "%s ingresó a este salón");
+define("ENTER_ROM", "%s ingresó a este salón.");
+define("L_EXIT_ROM", "%s salió de este salón.");
 if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
-define("L_EXIT_ROM", "%s salió de este salón");
 
 // Clean mod/fix by Ciprian
-define("L_BOOT_ROM", "%s ha sido automáticamente expulsado de este salón por inactividad");
-define("L_CLOSED_ROM", "%s ha cerrado su explorador");
+define("L_BOOT_ROM", "%s ha sido automáticamente expulsado de este salón por inactividad.");
+define("L_CLOSED_ROM", "%s ha cerrado su explorador.");
 
 // Text for /away command notification string:
-define("L_AWAY", "%s tiene estado ausente");
+define("L_AWAY", "%s tiene estado ausente...");
 define("L_BACK", "%s regresó!");
 
 // Quick Menu mod
@@ -571,6 +572,7 @@ setlocale(LC_ALL, "ESP_ARG.UTF-8", "ESP_ARG");
 } else {
 setlocale(LC_ALL, "es_AR.UTF-8", "esp_arg.UTF-8");
 }
+define("L_LANG", "es_AR");
 define("ISO_DEFAULT", "iso-8859-1");
 define("WIN_DEFAULT", "windows-1252");
 define("L_SHORT_DATE", "%d-%m-%Y"); //Change this to your local desired format (keep the short form)

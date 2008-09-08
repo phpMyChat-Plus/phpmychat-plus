@@ -1,5 +1,5 @@
 <?php
-// File : vietnamese/localized.tutorial.php - plus version (10.04.2008 - rev.9)
+// File : vietnamese/localized.tutorial.php - plus version (26.08.2008 - rev.10)
 // Translation by Marshall <hellomarshal_lookatme@netzero.net>
 // Updates and corrections by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -676,6 +676,8 @@ Có những thông báo khác như lệnh; người quản trị hay MOD trong m
 Những người điều tiết có thể đá một người sử dụng và người quản trị có thể đá một người sử dụng hay một người điều tiết với lệnh cú đá. Trừ người quản trị, người sử dụng thì được đá trong phòng hiện thời.
 <P>
 <I>Ví dụ</I>, nếu Jack là một người sử dụng đá ra khỏi: <I>/kick Jack</I> hoặc <I>/kick lý do đá</I>. Suy luận có thể là do ông ấy spam.
+<P>
+Nếu * tùy chọn được sử dụng (<I>/kick * <?php echo(L_HELP_REASON); ?></I>), lệnh sẽ đá ở ngoài từ chuyện gẫu tất cả những người sử dụng không có những sức mạnh (những khách và những người sử dụng được đăng ký duy nhất). Đây thì hữu ích khi kết nối người phục vụ đang có những vấn đề và tất cả người dân cần phải tái chất hàng chuyện gẫu của họ. Trong trường hợp thứ hai này, a <I><?php echo(L_HELP_REASON); ?></I> được khuyến cáo để để cho những người sử dụng biết tại sao họ là bình thường kick.
 <br /><P ALIGN="right"><A HREF="#top">Quay lại từ đầu</A></P>
 <P>
 <hr />

@@ -136,7 +136,15 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 			$PWD_Hash = md5(stripslashes($pmc_password));
 			if (!isset($Error) || $Error == "")
 			{
-				$DbLink->query("INSERT INTO ".C_REG_TBL." VALUES ('', '', '$U', '$Latin1', '$PWD_Hash', '$FIRSTNAME', '$LASTNAME', '$COUNTRY', '$WEBSITE', '$EMAIL', $showemail, 'user', '',".time().", '$IP', '$GENDER', '$allowpopup', '$PICTURE', '$DESCRIPTION', '$FAVLINK', '$FAVLINK1', '$SLANG', '$COLORNAME', '$AVATARURL', '$SECRET_QUESTION', '$SECRET_ANSWER', '', '', '$USE_GRAV')");
+			// Upload avatar mod addition - by Ciprian
+			// We try to keep the link between the usernames and uploaded avatars filenames,
+			// and also remove the uploaded avatar if exists and isn't needed anymore
+			$av_user_name = $U;
+			if (stristr(urlencode($av_user_name), "%")) $av_user_name = "encname_".str_replace("%","_",urlencode($av_user_name));
+			if (stristr($avatar,C_AVA_RELPATH . "uploaded/") && @rename($avatar, C_AVA_RELPATH . "uploaded/avatar_".$av_user_name.".gif")) $AVATARURL = C_AVA_RELPATH . "uploaded/avatar_".$av_user_name.".gif";
+			$av_done = 1;
+			// End of Upload avatar mod - by Ciprian
+			$DbLink->query("INSERT INTO ".C_REG_TBL." VALUES ('', '', '$U', '$Latin1', '$PWD_Hash', '$FIRSTNAME', '$LASTNAME', '$COUNTRY', '$WEBSITE', '$EMAIL', $showemail, 'user', '',".time().", '$IP', '$GENDER', '$allowpopup', '$PICTURE', '$DESCRIPTION', '$FAVLINK', '$FAVLINK1', '$SLANG', '$COLORNAME', '$AVATARURL', '$SECRET_QUESTION', '$SECRET_ANSWER', '', '', '$USE_GRAV', '')");
 				if (C_EMAIL_PASWD && !C_EMAIL_USER && (C_ADMIN_EMAIL != "")) $Message = ""; else $Message = L_REG_9;
 // Patch for sending an email to the Administrator upon new user registration to the chat system.
 // by Bob Dickow, April 28, 2003
@@ -182,6 +190,8 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      . "----------------------------------------------\r\n"
      . "".L_SET_2.": ".$U."\r\n"
 	 . "".L_REG_1.": ".$pmc_password."\r\n"
+     . "----------------------------------------------\r\n"
+	 . "".L_EMAIL_VAL_81." (".$Chat_URL.")\r\n"
      . "----------------------------------------------\r\n\r\n"
      . "".L_PASS_1.": ".$secret_question."\r\n"
      . "".L_PASS_6.": ".$SECRET_ANSWER."\r\n"

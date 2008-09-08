@@ -15,8 +15,13 @@ window.onload=show;
 // Open the Skins preview popup
 function styles_popup() {
 		window.focus();
-		styles_popupWin = window.open("<?php echo($ChatPath); ?>styles_popup.php?<?php echo("L=$L&startStyle=1"); ?>","styles_popup","width=780,height=740,resizable=no,scrollbars=no,toolbar=no,menubar=no,status=yes,location=no");
+		styles_popupWin = window.open("<?php echo($ChatPath); ?>styles_popup.php?<?php echo("L=$L&pmc_username=$pmc_username&pmc_password=$pmc_password&startStyle=1"); ?>","styles_popup","width=780,height=740,resizable=no,scrollbars=no,toolbar=no,menubar=no,status=yes,location=no");
 		styles_popupWin.focus();
+}
+function files_popup() {
+		window.focus();
+		files_popupWin = window.open("<?php echo($ChatPath); ?>files_popup.php?<?php echo("L=$L&pmc_username=$pmc_username&pmc_password=$pmc_password"); ?>","files_popup","width=800,height=620,resizable=no,scrollbars=yes,toolbar=no,menubar=no,status=yes,location=no");
+		files_popupWin.focus();
 }
 function swapImage(img,imgid) {
 	var image = document.getElementById(imgid);
@@ -161,13 +166,17 @@ z-index: 100;
 cursor: pointer;
 text-align: center;
 font-weight: bold;
-background: #ccc;
+background: #aaa;
 border: 1px solid gray;
 margin: 0px;
 }
+#menu dl.nav{
+float: left;
+width: 6em;
+z-index: 100;
+}
 #menu .save, #menu .save a, #menu .save a:hover, #menu .save a:focus {
-background: #fff;
-color: #00f;
+color: #f00;
 }
 #menu dd {
 display: none;
@@ -244,7 +253,7 @@ function skin_selection($no,$roomskin)
 				$i = 0;
 				while (false !== ($skinfile = readdir($skinfiles)))
 				{
-					if (!eregi('\.html',$skinfile) && !eregi('\.css',$skinfile) && !eregi('preview',$skinfile) && $skinfile!=='.' && $skinfile!=='..')
+					if (!eregi('\.html',$skinfile) && !eregi('\.css',$skinfile) && !is_dir($skinfile) && $skinfile!=='.' && $skinfile!=='..')
 					{
 						$skinsfile[]=$skinfile;
 			 		$i++;
@@ -336,6 +345,7 @@ if (UPD_CHECK)
 					<li><a href="#colors">Colors</a></li>
 					<li><a href="#sounds">Sound settings</a></li>
 					<li><a href="#profanity">Profanity</a></li>
+					<li><a href="files_popup.php?<?php echo("L=$L&pmc_username=$pmc_username&pmc_password=$pmc_password"); ?>" onClick="files_popup(); return false" target="_blank">Uploads Management</A></li>
 				</ul>
 			</dd>
 	</dl>
@@ -384,9 +394,11 @@ if (UPD_CHECK)
 				</ul>
 			</dd>
 	</dl>
-	<dl>
+	<dl class="nav">
 		<dt onmouseover="javascript:show();"><a href="#home" title="Scroll home">Home</a></dt>
-		<dt class="save" onmouseover="javascript:show();"><a href="#save_settings" title="Jump to save button">Save</a></dt>
+	</dl>
+	<dl class="nav">
+		<dt onmouseover="javascript:show();"><a class="save" href="#save_settings" title="Jump to save button">Save</a></dt>
 	</dl>
 </div>
 <div id="container">
@@ -439,6 +451,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
            $$name = $value;
   };
 
+  if($vNUM_AVATARS > $max_num_avatars) $vNUM_AVATARS = $max_num_avatars;
   $query = "UPDATE ".C_CFG_TBL." SET ".
 						"MSG_DEL = '$vMSG_DEL', ".
 						"USR_DEL = '$vUSR_DEL', ".
@@ -602,7 +615,13 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"GRAVATARS_CACHE_EXPIRE = '$vGRAVATARS_CACHE_EXPIRE', ".
 						"GRAVATARS_RATING = '$vGRAVATARS_RATING', ".
 						"GRAVATARS_DYNAMIC_DEF = '$vGRAVATARS_DYNAMIC_DEF', ".
-						"GRAVATARS_DYNAMIC_DEF_FORCE = '$vGRAVATARS_DYNAMIC_DEF_FORCE'".
+						"GRAVATARS_DYNAMIC_DEF_FORCE = '$vGRAVATARS_DYNAMIC_DEF_FORCE', ".
+						"ALLOW_UPLOADS = '$vALLOW_UPLOADS', ".
+						"RES_ROOM1 = '$vRES_ROOM1', ".
+						"RES_ROOM2 = '$vRES_ROOM2', ".
+						"RES_ROOM3 = '$vRES_ROOM3', ".
+						"RES_ROOM4 = '$vRES_ROOM4', ".
+						"RES_ROOM5 = '$vRES_ROOM5'".
 				" WHERE ID='0'";
 
 		$DbLink->query($query);
@@ -733,6 +752,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	?>
 <form action="<?php echo("$From?$URLQueryBody"); ?>" method="POST" autocomplete="" name="Form5">
 		<input type=hidden name="From" value="<?php echo($From); ?>">
+		<input type=hidden name="URLQueryBody" value="<?php echo($URLQueryBody); ?>">
 		<input type=hidden name="pmc_username" value="<?php echo(htmlspecialchars(stripslashes($pmc_username))); ?>">
 		<input type=hidden name="pmc_password" value="<?php echo($pmc_password); ?>">
 		<input type=hidden name="FORM_SEND" id="FORM_SEND" value="5">
@@ -1441,14 +1461,19 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><a name="roomnames"></a><b>1. First Public room name (also <u>default</u> if 0 is selected above).</b><br />
-    	<font color=red><i>Note: although disabling is possible, it should be enabled at all times.</i></font>
+    <td><a name="roomnames"></a><b>1. First Public room name (also <u>default</u> if 0 is selected above or there is no user selection from list).</b><br />
+    	<font color=red><i>Note: although disabling is possible, this first room should be enabled and unrestricted at all times. (this is also the default room for people not selecting one from login page.)</i></font><br />
+		<i>Hint (for all the public rooms): If restricted, although the room is public, only admins, topmoderators and users set in the Registered Users sheet will be able to join this room. Also the lurking page and public archives will not contain any of the posts submitted to restricted rooms.</i>
 	</td>
     <td>
 		<input name="vROOM1" type="text" size="25" maxlength="25" value="<?php echo $ROOM1; ?>"><br />
         <select name="vEN_ROOM1">
 	        <option value="0"<?php if($EN_ROOM1==0){ echo " selected"; } ?>>Disabled</option>
 	        <option value="1"<?php if($EN_ROOM1==1){ echo " selected"; } ?>>Enabled</option>
+        </select>&nbsp;
+        <select name="vRES_ROOM1">
+	        <option value="0"<?php if($RES_ROOM1==0){ echo " selected"; } ?>>Unrestricted</option>
+	        <option value="1"<?php if($RES_ROOM1==1){ echo " selected"; } ?>>Restricted</option>
         </select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN1\">\n");
@@ -1465,6 +1490,10 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         <select name="vEN_ROOM2">
 	        <option value="0"<?php if($EN_ROOM2==0){ echo " selected"; } ?>>Disabled</option>
 	        <option value="1"<?php if($EN_ROOM2==1){ echo " selected"; } ?>>Enabled</option>
+        </select>&nbsp;
+        <select name="vRES_ROOM2">
+	        <option value="0"<?php if($RES_ROOM2==0){ echo " selected"; } ?>>Unrestricted</option>
+	        <option value="1"<?php if($RES_ROOM2==1){ echo " selected"; } ?>>Restricted</option>
         </select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN2\">\n");
@@ -1481,6 +1510,10 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         <select name="vEN_ROOM3">
 	        <option value="0"<?php if($EN_ROOM3==0){ echo " selected"; } ?>>Disabled</option>
 	        <option value="1"<?php if($EN_ROOM3==1){ echo " selected"; } ?>>Enabled</option>
+        </select>&nbsp;
+        <select name="vRES_ROOM3">
+	        <option value="0"<?php if($RES_ROOM3==0){ echo " selected"; } ?>>Unrestricted</option>
+	        <option value="1"<?php if($RES_ROOM3==1){ echo " selected"; } ?>>Restricted</option>
         </select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN3\">\n");
@@ -1497,6 +1530,10 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         <select name="vEN_ROOM4">
 	        <option value="0"<?php if($EN_ROOM4==0){ echo " selected"; } ?>>Disabled</option>
 	        <option value="1"<?php if($EN_ROOM4==1){ echo " selected"; } ?>>Enabled</option>
+        </select>&nbsp;
+        <select name="vRES_ROOM4">
+	        <option value="0"<?php if($RES_ROOM4==0){ echo " selected"; } ?>>Unrestricted</option>
+	        <option value="1"<?php if($RES_ROOM4==1){ echo " selected"; } ?>>Restricted</option>
         </select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN4\">\n");
@@ -1513,6 +1550,10 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         <select name="vEN_ROOM5">
 	        <option value="0"<?php if($EN_ROOM5==0){ echo " selected"; } ?>>Disabled</option>
 	        <option value="1"<?php if($EN_ROOM5==1){ echo " selected"; } ?>>Enabled</option>
+        </select>&nbsp;
+        <select name="vRES_ROOM5">
+	        <option value="0"<?php if($RES_ROOM5==0){ echo " selected"; } ?>>Unrestricted</option>
+	        <option value="1"<?php if($RES_ROOM5==1){ echo " selected"; } ?>>Restricted</option>
         </select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN5\">\n");
@@ -2160,14 +2201,32 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     <td><b>The path to your avatar dir.</b>
 	</td>
     <td>
-		<input name="vAVA_RELPATH" type="text" size="25" maxlength="55" value="<?php echo $AVA_RELPATH; ?>">
+		<input name="vAVA_RELPATH" type="text" size="25" maxlength="55" value="<?php echo $AVA_RELPATH == "" ? "images/avatars/" : $AVA_RELPATH; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>Enter the number of avatars in your defined folder.</b>
+    <td><b>Enter the number of avatars to be shown from your defined folder.</b><br />
+	<i>Hint: only the first <?php echo($NUM_AVATARS); ?> avatars will be shown to the users</i>
 	</td>
     <td>
-		<input name="vNUM_AVATARS" type="text" size="7" maxlength="3" value="<?php echo $NUM_AVATARS; ?>">
+		<?php
+		$avatars=$AVA_RELPATH;
+		$avatarfiles = opendir($avatars); #open directory
+			$i = 0;
+			while (false !== ($avatarfile = readdir($avatarfiles)))
+			{
+				if (!eregi("\.html",$avatarfile) && !eregi("uploaded",$avatarfile) && !eregi("quote_avatar",$avatarfile) && !eregi("bot_avatar",$avatarfile) && $avatarfile!=='.' && $avatarfile!=='..')
+				{
+					$avatarsfile[]=$avatarfile;
+			 		$i++;
+				}
+			}
+			closedir($avatarfiles);
+			$max_num_avatars = $i-1;
+?>
+		<input name="vNUM_AVATARS" type="text" size="7" maxlength="3" value="<?php echo (($NUM_AVATARS > $max_num_avatars) ? $max_num_avatars : $NUM_AVATARS); ?>">
+		&nbsp;(max <?php echo($max_num_avatars); ?>)
+		<input name="max_num_avatars" type="hidden" value="<?php echo $max_num_avatars; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
@@ -2175,23 +2234,12 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
     <td>
 		<select name="vDEF_AVATAR" id="def_avatar" onChange="swapImage('def_avatar','def_avatarToSwap')">
-		<?php
-		$avatars=$AVA_RELPATH;
-		$avatarfiles = opendir($avatars); #open directory
-			$i = 0;
-			while (false !== ($avatarfile = readdir($avatarfiles)))
-			{
-				if (!eregi("\.html",$avatarfile) && !eregi("quote_avatar",$avatarfile) && !eregi("bot_avatar",$avatarfile) && $avatarfile!=='.' && $avatarfile!=='..')
-				{
-					$avatarsfile[]=$avatarfile;
-			 		$i++;
-				}
-			}
-			closedir($avatarfiles);
+<?php
 			if ($avatarsfile)
 			{
 			  	natsort($avatarsfile);
 			}
+			$j = 1;
 			foreach ($avatarsfile as $avatarname)
 			{
 				echo("<option value=\"".$avatarname."\"");
@@ -2214,6 +2262,17 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
+    <td><b>Allow users to upload Avatars from their machines.</b><br />
+	<i><font color=red>Important: make sure the "images/avatars" and "images/avatars/uploaded" folders exist and they have public write permissions (CHMOD 0777)!</font></i>
+	</td>
+    <td>
+        <select name="vALLOW_UPLOADS">
+	        <option value="0"<?php if($ALLOW_UPLOADS==0){ echo " selected"; } ?>>Disallow uploads</option>
+	        <option value="1"<?php if($ALLOW_UPLOADS==1){ echo " selected"; } ?>>Allow uploads</option>
+        </select>
+    </td>
+</tr>
+<tr>
     <td><b>Show gender icons beside avatars.</b>
 	</td>
     <td>
@@ -2223,7 +2282,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         </select>&nbsp;<img id="gendersToSwap" src="<?php echo(($DISP_GENDER==1) ? "./".$ChatPath."images/gender_couple.gif" : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 ALT=\"Genders\" Title=\"Genders\""); ?> />
     </td>
 </tr>
-<tr>
+<tr bgcolor="#B0C4DE">
     <td><a name="force"></a><b>Enable use of GRAVATARS.</b><br />
     	<i><font color=red>Important: <a href=#avatars>Avatar System</a> must also be enabled above!</font><br />
 		Hint: If enabled, all guests will have a default gravatar as avatar.</i>
@@ -2236,17 +2295,18 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         </select>&nbsp;<img id="gravatarsToSwap" src="<?php echo(($ALLOW_GRAVATARS) ? "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=".$AVA_WIDTH."&r=g&d=".$GRAVATARS_DYNAMIC_DEF : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 ALT=\"Gravatar\" Title=\"Gravatar\""); ?> />
     </td>
 </tr>
-<tr>
+<tr bgcolor="#B0C4DE">
 	<td colspan="2">
-    	<i><font color=blue>Definition:	(read more about Gravatars on <a href="http://www.gravatar.com" target="_blank">http://www.gravatar.com</a> site):</font><br />
-    	A gravatar, or <b>G</b>lobally <b>R</b>ecognized <b>A</b>vatar, is quite simply an avatar image that follows you from weblog to weblog appearing beside your name when you comment on gravatar enabled sites. Avatars help identify your posts on web forums, so why not on weblogs.<br />Signing up for a gravatar.com account is FREE, and all that's required is an email address. Once you've signed up you can upload your avatar image and soon after you'll start seeing it on gravatar enabled weblogs (including this chat)!</i>
+    	<i><font color=blue>Definition:</font><br />
+    	A gravatar, or <b>G</b>lobally <b>R</b>ecognized <b>A</b>vatar, is quite simply an avatar image that follows you from weblog to weblog appearing beside your name when you comment on gravatar enabled sites. Avatars help identify your posts on web forums, so why not on weblogs.<br />Signing up for a gravatar.com account is FREE, and all that's required is an email address. Once you've signed up you can upload your avatar image and soon after you'll start seeing it on gravatar enabled weblogs (including this chat)!<br />
+		<font color=blue>(read more about Gravatars on <a href="http://www.gravatar.com" target="_blank">http://www.gravatar.com</a> site)</font></i>
 	</td>
 </tr>
-<tr bgcolor="#B0C4DE">
+<tr>
     <td><b>GRAVATARS Cache Settings.</b><br />
-		<i>
-		Server Info:<br /><?php echo((!$cache_supported || $server_blocked) ? "<font color=red>Important: Cache not supported on this server!</font><br />" : ""); ?>
-		<font color=blue>Hosting Server IP: <b><?php echo($_SERVER['SERVER_ADDR']); ?></b> <?php echo(!$server_blocked ? "" : "<b><font color=red>cannot get access to gravatar.com!</font></b>"); ?></font><br />
+	<i>Server Info:<br /><font color=red>Important: if cache is enabled, make sure the "cache" folder exists in the chat root and it has public write permissions (CHMOD 0777)!<br />
+	<?php echo((!$cache_supported || $server_blocked) ? "<b>Cache not supported on this server!</b><br />" : ""); ?>
+		</font><font color=blue>Hosting Server IP: <b><?php echo($_SERVER['SERVER_ADDR']); ?></b> <?php echo(!$server_blocked ? "" : "<b><font color=red>cannot get access to gravatar.com!</font></b>"); ?></font><br />
 		<font color=blue>Php server version: <b><?php echo(!version_compare(phpversion(),'5','>=') ? "<font color=red>".phpversion()."</font>" : phpversion()); ?></b></font><br />
 		<font color=blue>allow_url_fopen: <b><?php echo(!(ini_get("allow_url_fopen")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
 		<font color=blue>allow_url_include: <b><?php echo(!(ini_get("allow_url_include")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
@@ -2259,7 +2319,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		Cache Age:<br /><input name="vGRAVATARS_CACHE_EXPIRE" type="text" size="7" maxlength="3" value="<?php echo $GRAVATARS_CACHE_EXPIRE; ?>"<?php if(!$cache_supported || $server_blocked){ echo " readonly"; }; ?>> (days)
 	</td>
 </tr>
-<tr>
+<tr bgcolor="#B0C4DE">
     <td><b>GRAVATARS Allowed Ratings.</b>
 	</td>
     <td>
@@ -2272,7 +2332,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         </select>
 	</td>
 </tr>
-<tr>
+<tr bgcolor="#B0C4DE">
     <td colspan=2>
 		<i>G rated gravatar is suitable for display on all websites with any audience type. <font color=blue>(recommended & default)</font><br />
 		PG rated gravatars may contain rude gestures, provocatively dressed individuals, the lesser swear words, or mild violence.<br />
@@ -2280,7 +2340,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		X rated gravatars may contain hardcore sexual imagery or extremely disturbing violence.</i>
 	</td>
 </tr>
-<tr bgcolor="#B0C4DE">
+<tr>
     <td><b>Dynamic Default GRAVATARS.</b><br />
 	<i>Hints: This will randomly return a dynamic image for each user who don't have a gravatar.com account for their email (chat guests and/or users without a registered gravatar.com account).<br />
 	<font color=red>You can force to display Random default Gravatars only if <a href="#force">Force Only Gravatars</a> is also enabled above!</font></i>
@@ -2467,6 +2527,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			{
 			  	natsort($quotesfile);
 			}
+			$j = 1;
 			foreach ($quotesfile as $quotename)
 			{
 				echo("<option value=\"".$quotes.$quotename."\"");

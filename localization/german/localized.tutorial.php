@@ -1,5 +1,5 @@
 <?php
-// File : german/localized.tutorial.php - to be updated to plus version (10.04.2008 - rev.9)
+// File : german/localized.tutorial.php - to be updated to plus version (26.08.2008 - rev.10)
 // Original translation by Michael Schoening <m.schoening@ticketboy.de> & Reinhard Hofmann <e9625556@student.tuwien.ac.at>
 // Updates, corrections and additions for the Plus version by Alexander Eisele <xaex@xaex.de> && Thomas Pschernig <tpsde1970@aol.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -661,6 +661,8 @@ Es gibt einen weiteren nützlichen Ansagebefehl; Der Administrator oder die Mode
 Moderatoren können Benutzer und der Administrator kann Nutzer oder Moderatoren mit dem <B>kick Befehl</B> rauswerfen. Moderatoren müssen dazu im selben Raum wie der rauszuwerfende Benutzer sein.
 <P>
 <I>Zum Beispiel</I>, wenn Jack der Name des Users ist, der gekickt werden sollte:  <I>/kick Jack</I> oder <I>/kick Jack Grund des Verweises</I> Der Grund des Rauswurfs könnte z.b. "wegen Spam" sein.!
+<P>
+Falls * Option gewählt wird (<I>/kick * <?php echo(L_HELP_REASON); ?></I>), wird dieser Befehl alle Mitglieder ohne Rechte entfernen (Ausnahme: Gäste und angemeldete Mitglieder). Dies ist wichtig, sollte der Server Probleme haben und alle Mitglieder sollten einen Reload durchführen. In diesem Falle, <I><?php echo(L_HELP_REASON); ?></I> sollte man die Mitglieder wissen lassen, warum sie entfernt wurden.
 <br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />

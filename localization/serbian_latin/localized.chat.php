@@ -1,5 +1,5 @@
 <?php
-// File : serbian_latin/localized.chat.php - plus version (18.06.2008 - rev.40)
+// File : serbian_latin/localized.chat.php - plus version (11.08.2008 - rev.41)
 // Original translation by Vedran Vučić <vedran.vucic@gnulinuxcentar.org>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -111,6 +111,7 @@ define("L_EMAIL_VAL_6", "Registrovano na %s");
 define("L_EMAIL_VAL_61", "Ažurirano na %s");
 define("L_EMAIL_VAL_7", "Ispod su vaše %s ažurirane informacije naloga:"); //username
 define("L_EMAIL_VAL_8", "Sačuvajte ovu poruku za buduće refrence.\n Molimo vas da ih čuvate na sigurnom i nemojte nikome da dajete ove podatke.\n Hvala što nam se se pridružili! Uživajte!");
+define("L_EMAIL_VAL_81", "Možete da promenite vašu lozinku na strani za prijavljivanje u uredi profil.");
 
 // admin stuff
 define("L_ADM_1", "%s nije više moderator za ovu sobu.");	// username/nickname
@@ -291,18 +292,18 @@ define("L_WHOIS_REG", "Registrovan");
 define("L_WHOIS_BOT", "Bot");
 
 // Notification messages of user entrance/exit
-define("ENTER_ROM", "%s ulazi u ovu sobu");
-define("L_EXIT_ROM", "%s izlazi iz ove sobe");
+define("ENTER_ROM", "%s ulazi u ovu sobu.");
+define("L_EXIT_ROM", "%s izlazi iz ove sobe.");
 if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
 // Clean mod/fix by Ciprian
-define("L_BOOT_ROM", "%s je automatski izbačen iz sobe zbog neaktivnosti");
-define("L_CLOSED_ROM", "%s je zatvorio brauzer");
+define("L_BOOT_ROM", "%s je automatski izbačen iz sobe zbog neaktivnosti.");
+define("L_CLOSED_ROM", "%s je zatvorio brauzer.");
 
 // Text for /away command notification string:
-define("L_AWAY", "%s je označen kao odsutan");
+define("L_AWAY", "%s je označen kao odsutan...");
 define("L_BACK", "%s se vratio!");
 
 // Quick Menu mod
@@ -404,7 +405,9 @@ define("L_PRIV_REMOVE", "Ukloni označene PM"); // or selected
 
 // Color Input Box mod by Ciprian
 define("L_ENABLED", "Omogućeno");
+define("L_ENABLED_INIT", "Om");
 define("L_DISABLED", "Onemogućeno");
+define("L_DISABLED_INIT", "On");
 define("L_COLOR_HEAD_SETTINGS", "Trenutna Podešavanja na ovom serveru:");
 define("L_COLOR_HEAD_SETTINGSa", "Pretpostavljene boje:");
 define("L_COLOR_HEAD_SETTINGSb", "Pretpostavljena boja:");
@@ -570,6 +573,7 @@ setlocale(LC_ALL, "serbian.UTF-8", "serbian");
 } else {
 setlocale(LC_ALL, "sr_CS.UTF-8", "sr.UTF-8", "serbian.UTF-8", "srl.UTF-8", "srp_srp.UTF-8"); // For SR formats
 }
+define("L_LANG", "sr_CS");
 define("ISO_DEFAULT", "iso-8859-2");
 define("WIN_DEFAULT", "windows-1250");
 define("L_SHORT_DATE", "%d.%m.%Y"); //Change this to your local desired format (keep the short form)

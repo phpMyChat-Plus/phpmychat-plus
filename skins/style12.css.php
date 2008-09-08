@@ -57,7 +57,7 @@ BODY
 BODY.frame
 {
 	background-image: url('./../images/avatars/avatar51.gif');
-	background-repeat: repeat;
+	background-attachment: fixed;
 	background-color: #191970;
 	color: #ccccff;
 	font-size: <?php echo($medium); ?>pt;
@@ -321,8 +321,6 @@ INPUT, SELECT, TEXTAREA
 
 .framePreview
 {
-	background-image: url('./../images/avatars/avatar51.gif');
-	background-repeat: repeat;
 	background-color: #191970;
 	color: <?php echo(COLOR_CD); ?>;
 }

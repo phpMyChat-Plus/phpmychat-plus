@@ -1,6 +1,5 @@
 <?php
-// Third private room skin ("Staff Only" as default)
-// "Pink & magenta" skin for phpMyChat plus - by Ciprian
+// "White & black" skin for phpMyChat plus - by Ciprian
 
 // Sends the appropriate header information (required to work with mozilla)
 header("Content-type: text/css");
@@ -39,55 +38,55 @@ include_once('style8.php');
 
 BODY
 {
-	background-color: <?php echo(COLOR_CD); ?>;
-	color: #FFFFFF;
-	font-size: <?php echo($medium); ?>pt;
-	font-weight: 400;
-	margin: 5px;
-	text-indent: 0;
-	scrollbar-3dlight-color: <?php echo(COLOR_CD); ?>;
-	scrollbar-arrow-color: #FFFFFF;
-	scrollbar-base-color: #FFE4E1;
-	scrollbar-track-color: #D766AC;
-	scrollbar-darkshadow-color: <?php echo(COLOR_CD); ?>;
-	scrollbar-face-color: <?php echo(COLOR_CD); ?>;
-	scrollbar-highlight-color: #FFFFFF;
-	scrollbar-shadow-color: #D766AC;
-}
-
-BODY.frame
-{
-	background-color: <?php echo(COLOR_CD); ?>;
-	color: #FFE4E1;
+	background-color: #FFFFFF;
+	color: <?php echo(COLOR_CD); ?>;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
 	margin: 5px;
 	text-indent: 0;
 	scrollbar-3dlight-color: #FFFFFF;
-	scrollbar-arrow-color: #FFFFFF;
-	scrollbar-base-color: #636363;
-	scrollbar-track-color: #333333;
-	scrollbar-darkshadow-color: #000000;
-	scrollbar-face-color: #000000;
-	scrollbar-highlight-color: #636363;
-	scrollbar-shadow-color: #333333;
+	scrollbar-arrow-color: #000000;
+	scrollbar-base-color: #808080;
+	scrollbar-track-color: #A9A9A9;
+	scrollbar-darkshadow-color: #FFFFFF;
+	scrollbar-face-color: #FFFFFF;
+	scrollbar-highlight-color: #000000;
+	scrollbar-shadow-color: #808080;
+}
+
+BODY.frame
+{
+	background-color: #FFFFFF;
+	color: #ccccff;
+	font-size: <?php echo($medium); ?>pt;
+	font-weight: 400;
+	margin: 5px;
+	text-indent: 0;
+	scrollbar-3dlight-color: #FFFFFF;
+	scrollbar-arrow-color: #000000;
+	scrollbar-base-color: #808080;
+	scrollbar-track-color: #A9A9A9;
+	scrollbar-darkshadow-color: #FFFFFF;
+	scrollbar-face-color: #FFFFFF;
+	scrollbar-highlight-color: #000000;
+	scrollbar-shadow-color: #808080;
 }
 
 BODY.mainframe
 {
-	background-color: #FFE4E1;
+	background-color: #FFFFFF;
 	color: <?php echo(COLOR_CD); ?>;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
 	margin: 5px;
-	scrollbar-3dlight-color: <?php echo(COLOR_CD); ?>;
-	scrollbar-arrow-color: #FFFFFF;
-	scrollbar-base-color: #FFE4E1;
-	scrollbar-track-color: #D766AC;
-	scrollbar-darkshadow-color: <?php echo(COLOR_CD); ?>;
-	scrollbar-face-color: <?php echo(COLOR_CD); ?>;
-	scrollbar-highlight-color: #FFFFFF;
-	scrollbar-shadow-color: #D766AC;
+	scrollbar-3dlight-color: #FFFFFF;
+	scrollbar-arrow-color: #000000;
+	scrollbar-base-color: #808080;
+	scrollbar-track-color: #A9A9A9;
+	scrollbar-darkshadow-color: #FFFFFF;
+	scrollbar-face-color: #FFFFFF;
+	scrollbar-highlight-color: #000000;
+	scrollbar-shadow-color: #808080;
 }
 
 TABLE, TR, TD, TH
@@ -105,7 +104,7 @@ IMG
 
 TD.whois, .whois
 {
-	color: #FFFFFF;
+	color: #CCCCFF;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 600;
 }
@@ -118,14 +117,14 @@ TH, B
 A
 {
 	text-decoration: none;
-	color: #FFFFFF;
+	color: <?php echo(COLOR_CD); ?>;
 	font-weight: 600;
 	cursor:pointer;
 }
 
 A:hover, A:active
 {
-	color: #800080;
+	color: #778899;
 	text-decoration: none;
 	cursor:pointer;
 }
@@ -133,8 +132,8 @@ A:hover, A:active
 A.user, A.user:active
 {
 	text-decoration: none;
-	color: #FFB6C1;
-	font-weight: 400;
+	color: <?php echo(COLOR_CD); ?>;
+	font-weight: 600;
 	cursor:pointer;
 }
 
@@ -164,7 +163,7 @@ A.sender, A.sender:active
 
 INPUT, SELECT, TEXTAREA
 {
-	background: #FFE4E1;
+	background: #D3D3D3;
 	color: <?php echo(COLOR_CD); ?>;
 }
 
@@ -179,8 +178,7 @@ INPUT, SELECT, TEXTAREA
 
 .msg2
 {
-	background: <?php echo(COLOR_CD); ?>;
-	color: #FFFAFA;
+	background: #D3D3D3;
 	margin-top: 0px;
 	margin-bottom: 0px;
 	margin-left: <?php #echo($Align == "right" ? "5" : "55"); ?>0px;
@@ -201,7 +199,7 @@ INPUT, SELECT, TEXTAREA
 
 .title
 {
-	color: #FFFFFF;
+	color: #696969;
 	font-size: <?php echo($large); ?>pt;
 	font-weight: 800;
 }
@@ -209,15 +207,15 @@ INPUT, SELECT, TEXTAREA
 .table
 {
 	background-color: #FFFFFF;
-	color: #800080;
+	color: #000000;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
 }
 
 .tabtitle
 {
-	background-color: <?php echo(COLOR_CD); ?>;
-	color: #FFFFFF;
+	background-color: #FFFFFF;
+	color: #000000;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 800;
 }
@@ -230,7 +228,7 @@ INPUT, SELECT, TEXTAREA
 
 .small
 {
-	color: #FFFFFF;
+	color: #000000;
 	font-size: <?php echo($small); ?>pt;
 }
 
@@ -242,7 +240,7 @@ INPUT, SELECT, TEXTAREA
 
 .notify
 {
-	color: #800080;
+	color: #696969;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 600;
 }
@@ -258,7 +256,7 @@ INPUT, SELECT, TEXTAREA
 {
 	<?php echo(isset($QUOTE_COLOR) ? "border: thin ridge ".$QUOTE_COLOR.";" : ""); ?>;
 	background: #FFFAFA;
-	color: #D2691E;
+	color: #696969;
 	text-align: left;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 600;
@@ -268,28 +266,28 @@ INPUT, SELECT, TEXTAREA
 {
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 600;
-	background-color:  <?php echo(COLOR_CD); ?>;
-	color: #FFFFFF;
-	border-bottom: 1pt solid #FFFFFF;
+	background-color: #FFFFFF;
+	color: #000000;
+	border-bottom: 1pt solid #000000;
 }
 
 .menuTitle
 {
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 600;
-	background-color:  <?php echo(COLOR_CD); ?>;
-	color: #FFFFFF;
+	background-color: #FFFFFF;
+	color: #000000;
 }
 
 .thumbIndex
 {
 	font-size: <?php echo($small); ?>pt;
 	font-weight: 600;
-	background-color: #9999CC;
+	background-color: #000000;
 	color: #FFFFFF;
-	border-top: 1pt solid #FFFFFF;
-	border-left: 1pt solid #FFFFFF;
-	border-right: 1pt solid #FFFFFF;
+	border-top: 1pt solid #000000;
+	border-left: 1pt solid #000000;
+	border-right: 1pt solid #000000;
 }
 
 .thumbIndex A
@@ -309,8 +307,8 @@ INPUT, SELECT, TEXTAREA
 .thumbIndex A:hover, .thumbIndex A:active
 {
 	text-decoration: none;
-	background:  <?php echo(COLOR_CD); ?>;
-	color: #800080;
+	background: #FFFFFF;
+	color: #DAA520;
 }
 
 .success
@@ -321,6 +319,6 @@ INPUT, SELECT, TEXTAREA
 
 .framePreview
 {
-	background-color: <?php echo(COLOR_CD); ?>;
-	color: #FFFFFF;
+	background-color: #FFFFFF;
+	color: <?php echo(COLOR_CD); ?>;
 }

@@ -1,5 +1,5 @@
 <?php
-// File : romanian/localized.admin.php - plus version (07.07.2008 - rev.13)
+// File : romanian/localized.admin.php - plus version (26.08.2008 - rev.14)
 // Original translation started by Radu Swider <swidera@satline.ro>, first updated by Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro>
 // Corrected, finalized and updated to Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -37,6 +37,10 @@ define("A_SHEET1_9", "Blochează utilizatorii selectaţi");
 define("A_SHEET1_10", "Va trebui să intri în secţiunea ’".A_MENU_2."’ pentru ajustări.");
 define("A_SHEET1_11", "Ultima conectare");
 define("A_SHEET1_12", "Motivul blocării (opţional)");
+define("A_SHEET1_13", "Acces la");
+define("A_SHEET1_14", "Toate NeRestricţionate");
+define("A_SHEET1_15", "Toate Restricţionate");
+define("A_SHEET1_16", "Restricţia camerei specificate trebuie deasemenea activată în tab-ul ’".A_MENU_5."’.");
 define("A_USER", "Utilizator");
 define("A_MODER", "Moderator");
 define("A_TOPMOD", "Top Moderator");

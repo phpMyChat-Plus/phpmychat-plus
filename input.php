@@ -536,7 +536,7 @@ document.onmousedown = window.parent.displayLocation;
 		$ValM = $IsM ? $M0 : "";
 		if (isset($Error) && !($IsCommand)) $ValM = $M1;
 		?>
-		<INPUT TYPE="text" NAME="M" SIZE="50" MAXLENGTH="299" VALUE="<?php echo(htmlspecialchars(stripslashes($ValM))); ?>">
+		<INPUT TYPE="text" NAME="M" SIZE="50" MAXLENGTH="299" VALUE="<?php echo(htmlspecialchars(stripslashes($ValM))); ?>"<?php echo((isset($C) && $C != "") ? " style=\"color: $C;\"" : ""); ?>>
 
 		<!-- Addressee that will be filled when the user click on a nick at the users frame -->
 		<INPUT TYPE="hidden" NAME="MsgTo" VALUE="">
@@ -650,7 +650,7 @@ $qnotelabel = L_QUICK;
 // Change the numbers below (50 or 40) to fit the length of your Quick Menu title:
  if (isset($dropdownmsga) && ($status == "a" || $status == "t")) {
   print "<select name=\"quicknote\" onChange='inputDropMsg()'>";
-       print "<option value=\"\">".str_pad(" ".$qnotelabel." ", 50, "*", STR_PAD_BOTH)."</option>\n";
+       print "<option value=\"\">".str_pad(" ".$qnotelabel." ", 45, "*", STR_PAD_BOTH)."</option>\n";
 	foreach ($dropdownmsga as $msg) {
 	$msg = stripslashes(sprintf($msg,$U));
         print "<option value=\"".$msg."\">".$msg."</option>\n";
@@ -658,7 +658,7 @@ $qnotelabel = L_QUICK;
 }
  elseif (isset($dropdownmsgm) && $status == "m") {
   print "<select name=\"quicknote\" onChange='inputDropMsg()'>";
-       print "<option value=\"\">".str_pad(" ".$qnotelabel." ", 50, "*", STR_PAD_BOTH)."</option>\n";
+       print "<option value=\"\">".str_pad(" ".$qnotelabel." ", 45, "*", STR_PAD_BOTH)."</option>\n";
 	foreach ($dropdownmsgm as $msg) {
 	$msg = stripslashes(sprintf($msg,$U));
         print "<option value=\"".$msg."\">".$msg."</option>\n";

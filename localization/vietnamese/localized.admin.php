@@ -1,5 +1,5 @@
 <?php
-// File : vietnamese/localized.admin.php - plus version (07.07.2008 - rev.13)
+// File : vietnamese/localized.admin.php - plus version (26.08.2008 - rev.14)
 // Translation by Marshall <hellomarshal_lookatme@netzero.net>
 // Updates and corrections by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -37,6 +37,10 @@ define("A_SHEET1_9", "Trục xuất những lựa chọn kiểm tra");
 define("A_SHEET1_10", "Bây giờ ban hãy di chuyển những người trục xuất trong bộ lọc của bạn.");
 define("A_SHEET1_11", "Sự cuối cùng kết nối");
 define("A_SHEET1_12", "Lý do trục xuất (để chọn)");
+define("A_SHEET1_13", "Những phòng được cho phép");
+define("A_SHEET1_14", "Mọi thứ Không giới hạn");
+define("A_SHEET1_15", "Mọi thứ hạn chế");
+define("A_SHEET1_16", "Phòng được chỉ rõ những sự hạn chế cần phải thêm được kích hoạt trong ’".A_MENU_5."’ tờ.");
 define("A_USER", "Người sử dụng");
 define("A_MODER", "Người điều hành");
 define("A_TOPMOD", "Top Người điều hành");

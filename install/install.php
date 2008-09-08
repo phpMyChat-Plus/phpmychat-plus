@@ -231,19 +231,25 @@ if ( $p == 2 )
 			copy($ChatPath."install/old/color.lib.php",$ChatPath."config/color.lib.php");
 			ftp_chmod($conn_id, 755, $ftppath."config");
 		}
-		if (ftp_chmod($conn_id, 666, $ftppath."config/config.lib.php") !== false) { } else { $error3 .= L_FILE_ERROR1." &quot;/config/config.php&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/chat_index.txt") !== false) { } else { $error3 .= L_FILE_ERROR1." &quot;/acount/pages/chat_index.txt&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/chat_ip_logs.htm") !== false) { } else { $error3 .= L_FILE_ERROR1." &quot;acount/pages/chat_ip_logs.htm&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/ip.txt") !== false) { } else { $error3 .= L_FILE_ERROR1." &quot;/acount/pages/ip.txt&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 777, $ftppath."acount/pages") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/acount/pages&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 777, $ftppath."acount/pages/bak") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/acount/pages/bak&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 777, $ftppath."admin/backups") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/admin/backups&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 666, $ftppath."bot/subs.inc") !== false) { } else { $error3 .= L_FILE_ERROR1." &quot;/bot/subs.inc&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 777, $ftppath."botfb") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/botfb&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 777, $ftppath."images/cache") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/images/cache&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 777, $ftppath."logs") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/logs&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 777, $ftppath."logsadmin") !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/logsadmin&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-//  if (is_dir($ChatPath.$logdir)) { if (ftp_chmod($conn_id, 777, $ftppath.$logdir) !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;".$logdir."&quot; ".L_FOLD_ERROR2."<br /><br />\n"; } }
+		if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/chat_index.txt") !== false) {} else { $error3 .= L_FILE_ERROR1." &quot;/acount/pages/chat_index.txt&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/chat_ip_logs.htm") !== false) {} else { $error3 .= L_FILE_ERROR1." &quot;acount/pages/chat_ip_logs.htm&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/ip.txt") !== false) {} else { $error3 .= L_FILE_ERROR1." &quot;/acount/pages/ip.txt&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 777, $ftppath."acount/pages") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/acount/pages&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 777, $ftppath."acount/pages/bak") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/acount/pages/bak&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 777, $ftppath."admin/backups") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/admin/backups&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 666, $ftppath."bot/subs.inc") !== false) {} else { $error3 .= L_FILE_ERROR1." &quot;/bot/subs.inc&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 777, $ftppath."botfb") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/botfb&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 777, $ftppath."cache") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/cache&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 666, $ftppath."config/config.lib.php") !== false) {} else { $error3 .= L_FILE_ERROR1." &quot;/config/config.php&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 777, $ftppath."images/avatars") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/images/avatars&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 777, $ftppath."images/avatars/uploaded") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/images/avatars/uploaded&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 777, $ftppath."images/smilies") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/images/smilies&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 666, $ftppath."images/smilies/smilies.php") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/images/smilies/smilies.php&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 777, $ftppath."logs") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/logs&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 777, $ftppath."logsadmin") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/logsadmin&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 777, $ftppath."skins/images") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/skins/images&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+		if (ftp_chmod($conn_id, 777, $ftppath."sounds") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/sounds&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+//  if (is_dir($ChatPath.$logdir)) { if (ftp_chmod($conn_id, 777, $ftppath.$logdir) !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;".$logdir."&quot; ".L_FOLD_ERROR2."<br /><br />\n"; } }
 		// close the connection
 		@ftp_close($conn_id);
 	}
@@ -368,7 +374,7 @@ if ( $p == 4 )
 	{
 	if (logdir != $logdirnew)
 	{
-		if (@ftp_rename($conn_id, $ftppath.$logdir, $ftppath.$logdirnew) !== false) { } else { $error3 .= L_FOLD_ERROR1." &quot;/".$logdirnew."&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+		if (@ftp_rename($conn_id, $ftppath.$logdir, $ftppath.$logdirnew) !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/".$logdirnew."&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
     }
 	if ($kind != "new")
 	{
@@ -815,6 +821,13 @@ $GRAVATARS_CACHE		= $row[159];
 $GRAVATARS_CACHE_EXPIRE	= $row[160];
 $GRAVATARS_RATING		= $row[161];
 $GRAVATARS_DYNAMIC_DEF	= $row[162];
+$GRAVATARS_DYNAMIC_DEF_FORCE	= $row[163];
+$ALLOW_UPLOADS			= $row[164];
+$RES_ROOM1						= $row[165];
+$RES_ROOM2						= $row[166];
+$RES_ROOM3						= $row[167];
+$RES_ROOM4						= $row[168];
+$RES_ROOM5						= $row[169];
 
 $query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.com'";
 $result_bot = mysql_query($query_bot);
@@ -888,19 +901,22 @@ define("ROOM7", $ROOM7);
 define("ROOM8", $ROOM8);
 define("ROOM9", $ROOM9);
 
-$PUBLIC_ROOMS = $EN_ROOM1 ? ROOM1.", " : "";
-$PUBLIC_ROOMS .= $EN_ROOM2 ? ROOM2.", " : "";
-$PUBLIC_ROOMS .= $EN_ROOM3 ? ROOM3.", " : "";
-$PUBLIC_ROOMS .= $EN_ROOM4 ? ROOM4.", " : "";
-$PUBLIC_ROOMS .= $EN_ROOM5 ? ROOM5.", " : "";
-$PUBLIC_ROOMS = trim($PUBLIC_ROOMS,", ");
+$PUBLIC_ROOMS = $EN_ROOM1 ? ($RES_ROOM1 ? ROOM1." [R], " : ROOM1.", ") : "";
+$PUBLIC_ROOMS .= $EN_ROOM2 ? ($RES_ROOM2 ? ROOM2." [R], " : ROOM2.", ") : "";
+$PUBLIC_ROOMS .= $EN_ROOM3 ? ($RES_ROOM3 ? ROOM3." [R], " : ROOM3.", ") : "";
+$PUBLIC_ROOMS .= $EN_ROOM4 ? ($RES_ROOM4 ? ROOM4." [R], " : ROOM4.", ") : "";
+$PUBLIC_ROOMS .= $EN_ROOM5 ? ($RES_ROOM5 ? ROOM5." [R], " : ROOM5.", ") : "";
+$PUBLIC_DISP_ROOMS = trim($PUBLIC_ROOMS,", ");
+$PUBLIC_ROOMS = trim(str_replace(" [R]","",$PUBLIC_ROOMS),", ");
 $PRIVATE_ROOMS = $EN_ROOM6 ? ROOM6.", " : "";
 $PRIVATE_ROOMS .= $EN_ROOM7 ? ROOM7.", " : "";
 $PRIVATE_ROOMS .= $EN_ROOM8 ? ROOM8.", " : "";
 $PRIVATE_ROOMS .= $EN_ROOM9 ? ROOM9.", " : "";
 $PRIVATE_ROOMS = trim($PRIVATE_ROOMS,", ");
 $DefaultChatRooms = explode(", ", $PUBLIC_ROOMS);
-$DefaultPrivateRooms = explode(", ", $PRIVATE_ROOMS);
+if ($PUBLIC_DISP_ROOMS != $PUBLIC_ROOMS) $DefaultDispChatRooms = explode(", ", $PUBLIC_DISP_ROOMS);
+if ($PRIVATE_ROOMS == "") $DefaultPrivateRooms = NULL;
+else $DefaultPrivateRooms = explode(", ", $PRIVATE_ROOMS);
 
 //	Profanity filter disabled for following rooms - by Ciprian
 define("C_NO_SWEAR_ROOM1", $SWEAR1);
@@ -1238,6 +1254,10 @@ define("GRAVATARS_CACHE", $GRAVATARS_CACHE);
 define("GRAVATARS_CACHE_EXPIRE", $GRAVATARS_CACHE_EXPIRE);
 define("GRAVATARS_RATING", $GRAVATARS_RATING);
 define("GRAVATARS_DYNAMIC_DEF", $GRAVATARS_DYNAMIC_DEF);
+define("GRAVATARS_DYNAMIC_DEF_FORCE", $GRAVATARS_DYNAMIC_DEF_FORCE);
+
+// Uploader mod - by Ciprian
+define("C_ALLOW_UPLOADS", $ALLOW_UPLOADS);
 ?&gt;</textarea></p>
 <?php } // END OF IS NOT WRITEABLE
 else {
@@ -1442,6 +1462,13 @@ else {
   	fputs ( $fh, '$GRAVATARS_CACHE_EXPIRE	= $row[160];'.$lfeed );
   	fputs ( $fh, '$GRAVATARS_RATING		= $row[161];'.$lfeed );
   	fputs ( $fh, '$GRAVATARS_DYNAMIC_DEF	= $row[162];'.$lfeed );
+  	fputs ( $fh, '$GRAVATARS_DYNAMIC_DEF_FORCE	= $row[163];'.$lfeed );
+  	fputs ( $fh, '$ALLOW_UPLOADS			= $row[164];'.$lfeed );
+  	fputs ( $fh, '$RES_ROOM1						= $row[165];'.$lfeed );
+  	fputs ( $fh, '$RES_ROOM2						= $row[166];'.$lfeed );
+  	fputs ( $fh, '$RES_ROOM3						= $row[167];'.$lfeed );
+  	fputs ( $fh, '$RES_ROOM4						= $row[168];'.$lfeed );
+  	fputs ( $fh, '$RES_ROOM5						= $row[169];'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '$query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email=\'bot@bot.com\'";'.$lfeed );
   	fputs ( $fh, '$result_bot = mysql_query($query_bot);'.$lfeed );
@@ -1515,19 +1542,22 @@ else {
   	fputs ( $fh, 'define("ROOM8", $ROOM8);'.$lfeed );
   	fputs ( $fh, 'define("ROOM9", $ROOM9);'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
-  	fputs ( $fh, '$PUBLIC_ROOMS = $EN_ROOM1 ? ROOM1.", " : "";'.$lfeed );
-  	fputs ( $fh, '$PUBLIC_ROOMS .= $EN_ROOM2 ? ROOM2.", " : "";'.$lfeed );
-  	fputs ( $fh, '$PUBLIC_ROOMS .= $EN_ROOM3 ? ROOM3.", " : "";'.$lfeed );
-  	fputs ( $fh, '$PUBLIC_ROOMS .= $EN_ROOM4 ? ROOM4.", " : "";'.$lfeed );
-  	fputs ( $fh, '$PUBLIC_ROOMS .= $EN_ROOM5 ? ROOM5.", " : "";'.$lfeed );
-  	fputs ( $fh, '$PUBLIC_ROOMS = trim($PUBLIC_ROOMS,", ");'.$lfeed );
+  	fputs ( $fh, '$PUBLIC_ROOMS = $EN_ROOM1 ? ($RES_ROOM1 ? ROOM1." [R], " : ROOM1.", ") : "";'.$lfeed );
+  	fputs ( $fh, '$PUBLIC_ROOMS .= $EN_ROOM2 ? ($RES_ROOM2 ? ROOM2." [R], " : ROOM2.", ") : "";'.$lfeed );
+  	fputs ( $fh, '$PUBLIC_ROOMS .= $EN_ROOM3 ? ($RES_ROOM3 ? ROOM3." [R], " : ROOM3.", ") : "";'.$lfeed );
+  	fputs ( $fh, '$PUBLIC_ROOMS .= $EN_ROOM4 ? ($RES_ROOM4 ? ROOM4." [R], " : ROOM4.", ") : "";'.$lfeed );
+  	fputs ( $fh, '$PUBLIC_ROOMS .= $EN_ROOM5 ? ($RES_ROOM5 ? ROOM5." [R], " : ROOM5.", ") : "";'.$lfeed );
+  	fputs ( $fh, '$PUBLIC_DISP_ROOMS = trim($PUBLIC_ROOMS,", ");'.$lfeed );
+  	fputs ( $fh, '$PUBLIC_ROOMS = trim(str_replace(" [R]","",$PUBLIC_ROOMS),", ");'.$lfeed );
   	fputs ( $fh, '$PRIVATE_ROOMS = $EN_ROOM6 ? ROOM6.", " : "";'.$lfeed );
   	fputs ( $fh, '$PRIVATE_ROOMS .= $EN_ROOM7 ? ROOM7.", " : "";'.$lfeed );
   	fputs ( $fh, '$PRIVATE_ROOMS .= $EN_ROOM8 ? ROOM8.", " : "";'.$lfeed );
   	fputs ( $fh, '$PRIVATE_ROOMS .= $EN_ROOM9 ? ROOM9.", " : "";'.$lfeed );
   	fputs ( $fh, '$PRIVATE_ROOMS = trim($PRIVATE_ROOMS,", ");'.$lfeed );
   	fputs ( $fh, '$DefaultChatRooms = explode(", ", $PUBLIC_ROOMS);'.$lfeed );
-  	fputs ( $fh, '$DefaultPrivateRooms = explode(", ", $PRIVATE_ROOMS);'.$lfeed );
+  	fputs ( $fh, 'if ($PUBLIC_DISP_ROOMS != $PUBLIC_ROOMS) $DefaultDispChatRooms = explode(", ", $PUBLIC_DISP_ROOMS);'.$lfeed );
+  	fputs ( $fh, 'if ($PRIVATE_ROOMS == "") $DefaultPrivateRooms = NULL;'.$lfeed );
+  	fputs ( $fh, 'else $DefaultPrivateRooms = explode(", ", $PRIVATE_ROOMS);'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '//	Profanity filter disabled for following rooms - by Ciprian'.$lfeed );
   	fputs ( $fh, 'define("C_NO_SWEAR_ROOM1", $SWEAR1);'.$lfeed );
@@ -1865,6 +1895,10 @@ else {
   	fputs ( $fh, 'define("GRAVATARS_CACHE_EXPIRE", $GRAVATARS_CACHE_EXPIRE);'.$lfeed );
   	fputs ( $fh, 'define("GRAVATARS_RATING", $GRAVATARS_RATING);'.$lfeed );
   	fputs ( $fh, 'define("GRAVATARS_DYNAMIC_DEF", $GRAVATARS_DYNAMIC_DEF);'.$lfeed );
+  	fputs ( $fh, 'define("GRAVATARS_DYNAMIC_DEF_FORCE", $GRAVATARS_DYNAMIC_DEF_FORCE);'.$lfeed );
+  	fputs ( $fh, ''.$lfeed );
+  	fputs ( $fh, '// Uploader mod - by Ciprian'.$lfeed );
+  	fputs ( $fh, 'define("C_ALLOW_UPLOADS", $ALLOW_UPLOADS);'.$lfeed );
   	fputs ( $fh, '?>' );
   } // END OF WRITE INTO config.lib.php
   fclose ( $fh );

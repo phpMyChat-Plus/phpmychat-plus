@@ -59,7 +59,13 @@ ALTER TABLE ".$t_config."
 			ADD GRAVATARS_CACHE_EXPIRE tinyint(1) NOT NULL default '7',
 			ADD GRAVATARS_RATING enum('G','PG','R','X','ANY') NOT NULL default 'G',
 			ADD GRAVATARS_DYNAMIC_DEF enum('identicon','monsterid','wavatar') default 'monsterid',
-			ADD GRAVATARS_DYNAMIC_DEF_FORCE enum('0','1') NOT NULL default '0';
+			ADD GRAVATARS_DYNAMIC_DEF_FORCE enum('0','1') NOT NULL default '0',
+			ADD ALLOW_UPLOADS enum('0','1') NOT NULL default '0',
+			ADD RES_ROOM1 enum('0','1') NOT NULL default '0',
+			ADD RES_ROOM2 enum('0','1') NOT NULL default '0',
+			ADD RES_ROOM3 enum('0','1') NOT NULL default '0',
+			ADD RES_ROOM4 enum('0','1') NOT NULL default '0',
+			ADD RES_ROOM5 enum('0','1') NOT NULL default '0';
 ", $conn);
 mysql_query("
 UPDATE ".$t_config." SET
@@ -129,6 +135,7 @@ ALTER TABLE ".$t_reg_users."
 			ADD last_login int(11) NOT NULL default '0',
 			ADD login_counter bigint(20) NOT NULL default '0',
 			ADD use_gravatar enum('0','1') NOT NULL default '0',
+			ADD join_room varchar(5) NOT NULL default '',
 			ADD PRIMARY KEY (cid),
 			ADD UNIQUE KEY username (username);
 ", $conn);

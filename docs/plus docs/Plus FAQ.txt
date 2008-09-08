@@ -223,15 +223,16 @@ My /img command doesn't seem to work - it returns no error, but it also doesn't 
 This happens on php servers which have the getimagesize() function disabled. Please contact your hosting or enable that function.
 
 19Q.
-What is admin/backup folder stands there for?
+a. How can I backup my database/files?
+b. What is admin/backup folder stands there for?
 19A.
-Well, in that directory (CHMOD to 777) one could choose to save a weekly backup of the chat files an database. But for that, Cpanel access is needed.
+Well, in that directory (admin/backup CHMODED to 777) one could choose to save a weekly backup of the chat files an database. But for that, Cpanel access is needed.
 I setup 3 separate cron jobs to backup my chat so here is what I use (don’t use the square brackets []):
-a. Every Monday at 0 midnight, the script search and deletes all the 6 days older files into the backup folder (except for the inde.html file)
+a. Every Monday at 0 midnight, the script search and deletes all the 6 days older files into the backup folder (except for the index.html file)
  0 0 * * 1 [find /home/cpanelname/public_html/chatdirectory/admin/backups -maxdepth 1 -type f -mtime +6 -not -name "index*" -exec rm -f {} \;]
 b. After 2 minutes, the script creates a tar .tgz archive with all the files in the chat directory and put it into the backup folder
  2 0 * * 1 date=`date -I` ; tar -zcf ./public_html/chatdirectory/admin/backups/file_backup_$date.tgz ./public_html/chatdirectory/;
-c. After 8 minutes (time for the previous 2 scripts to finish the jobs), the script creates a gzip .gz archive with all the database structure and data and put it into the backup folder
+c. After 8 minutes (enough time for the previous 2 scripts to finish the jobs), the script creates a gzip .gz archive with all the database structure and data and put it into the backup folder
 10 0 * * 1 date=`date -I` ; mysqldump -udb_username -pdb_password db_name | gzip > /home/cpanelname/public_html/chatdirectory/admin/backups/db_backup_$date.sql.gz;
 Whenever I need to restore something in my chat, I just use these files (they are only 6 days older).
 To use the cron jobs I sampled, don’t forget to replace "cpanelname", "chatdirectory", "db_username", "db_password" and "db_name"with yuor according data.

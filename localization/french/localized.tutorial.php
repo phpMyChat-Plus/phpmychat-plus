@@ -1,5 +1,5 @@
 <?php
-// File : french/localized.tutorial.php - plus version (10.04.2008 - rev.9)
+// File : french/localized.tutorial.php - plus version (26.08.2008 - rev.10)
 // Translation for Plus version by Pierre Liget <sourceforge@pliget.freesurf.fr> 10.12.2007
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -671,6 +671,8 @@ Il y a une autre commande d’annonce utile pour les forums de discussions dits 
 Les modérateurs peuvent éjecter un utilisateur et l’administrateur peut éjecter un utilisateur ou un modérateur avec la commande <B>kick</B>. Hormis pour l’administrateur, l’utilisateur à éjecter doit être dans le salon courant.
 <P>
 <I>Par exemple</I>, si Jack est le nom de l’utilisateur à éjecter du Chat : <I>/kick Jack</I> ou <I>/kick Jack raison de l’éjection</I>. La "raison de l’éjection" peut être n’importe quel texte, ex. "pour spam !"
+<P>
+Si l’option * est utilisée (<I>/kick * <?php echo(L_HELP_REASON); ?></I>), tous les utilisateurs sans pouvoirs seront éjectés.
 <br /><P ALIGN="right"><A HREF="#top">Retour en haut de la page</A></P>
 <P>
 <hr />

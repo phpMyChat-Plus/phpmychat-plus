@@ -1,5 +1,5 @@
 <?php
-// File : spanish/localized.chat.php - plus version (18.06.2008 - rev.40)
+// File : spanish/localized.chat.php - plus version (11.08.2008 - rev.41)
 // Original translation by Josep Román <josep.roman@zuerich-see.ch> and León Del Río <leon@webmaster.com.mx>
 // Updates, corrections and additions for the Plus version by Roxana Castañeda <roxminu@yahoo.com> & Shelly Noyes <shelly.noyes@gmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -113,6 +113,7 @@ define("L_EMAIL_VAL_6", "Registrado en %s");
 define("L_EMAIL_VAL_61", "Modificado en %s");
 define("L_EMAIL_VAL_7", "Debajo está la %s información actualizada de su cuenta:"); //username
 define("L_EMAIL_VAL_8", "Guarde este correo para referencias futuras.\nPor favor también guárdelo en un lugar seguro y no comparta esta información.\n¡Gracias por unirse! ¡Disfrute!");
+define("L_EMAIL_VAL_81", "Puede cambiar su contraseña en la página de ingreso en modificar su perfil.");
 
 // admin stuff
 define("L_ADM_1", "%s ya no es el moderador de esta sala.");
@@ -293,18 +294,18 @@ define("L_WHOIS_REG", "Registrado");
 define("L_WHOIS_BOT", "Bot");
 
 // Notification messages of user entrance/exit
-define("ENTER_ROM", "%s entra en esta sala");
-define("L_EXIT_ROM", "%s sale de esta sala");
+define("ENTER_ROM", "%s entra en esta sala.");
+define("L_EXIT_ROM", "%s sale de esta sala.");
 if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
 // Clean mod/fix by Ciprian
-define("L_BOOT_ROM", "%s ha sido desconectado automáticamente de esta sala debido a inactividad");
-define("L_CLOSED_ROM", "%s ha cerrado su navegador");
+define("L_BOOT_ROM", "%s ha sido desconectado automáticamente de esta sala debido a inactividad.");
+define("L_CLOSED_ROM", "%s ha cerrado su navegador.");
 
 // Text for /away command notification string:
-define("L_AWAY", "%s está lejos");
+define("L_AWAY", "%s está lejos...");
 define("L_BACK", "¡%s ha regresado!");
 
 // Quick Menu mod
@@ -395,7 +396,7 @@ define("L_NEXT_READ", "Lea los %s mensajes siguientes");
 define("L_ROOM_ALL", "Todos salones");
 define("L_PRIV_NO_MSGS", "No se han recibido mensajes privados");
 define("L_PRIV_READ_MSG", "1 mensajes privados recibidos"); //singular
-define("L_PRIV_READ_MSGS", "%s mensajes privados recibidos "); //plural
+define("L_PRIV_READ_MSGS", "%s mensajes privados recibidos"); //plural
 define("L_PRIV_MSGS_NEW", "Nuevo"); //singular form
 define("L_PRIV_MSGS_READ", "Leer"); //singular form
 define("L_PRIV_MSG6", "Estado:");
@@ -563,6 +564,7 @@ setlocale(LC_ALL, "esp_esp.UTF-8", "spanish.UTF-8", "spanish");
 } else {
 setlocale(LC_ALL, "es_ES.UTF-8", "es_ES.UTF-8@euro", "esp.UTF-8", "es.UTF-8", "esp_esp.UTF-8", "spanish.UTF-8");
 }
+define("L_LANG", "es_ES");
 define("ISO_DEFAULT", "iso-8859-1");
 define("WIN_DEFAULT", "windows-1252");
 define("L_SHORT_DATE", "%d-%m-%Y"); //Cambiar esto al formato de fecha local deseada (guarda la forma corta)

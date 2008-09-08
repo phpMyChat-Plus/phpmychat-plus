@@ -1,5 +1,5 @@
 <?php
-// File : bulgarian/localized.admin.php - plus version (07.07.2008 - rev.13)
+// File : bulgarian/localized.admin.php - plus version (26.08.2008 - rev.14)
 // Translation by Peter Petrov <peter.m.petrov@gmail.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -37,6 +37,10 @@ define("A_SHEET1_9", "Лиши от достъп избраните профил
 define("A_SHEET1_10", "Сега трябва да отидете в ’".A_MENU_2."’, за да прецизирате избора си.");
 define("A_SHEET1_11", "Последно влизане");
 define("A_SHEET1_12", "Причина за лишаване от достъп (не е задължително)");
+define("A_SHEET1_13", "Позволени стаи");
+define("A_SHEET1_14", "Всички неограничени");
+define("A_SHEET1_15", "Всички ограничени");
+define("A_SHEET1_16", "Специфицираното ограничение на стая трябва също да бъде активирано в ’".A_MENU_5."’ листа.");
 define("A_USER", "Потребител");
 define("A_MODER", "Модератор");
 define("A_TOPMOD", "Главен модератор");

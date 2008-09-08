@@ -88,7 +88,7 @@ else
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
-<TITLE><?php echo((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME); ?></TITLE>
+<TITLE><?php echo(L_REG_35." - ".(C_CHAT_NAME != "" ? C_CHAT_NAME." - ".APP_NAME : APP_NAME)); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <?php
 if ($sheet < 3)

@@ -158,6 +158,8 @@ function ghosts_in($what, $in, $Charset)
 /*********** PART I ***********/
 
 // Define the message to display if user comes here because he has been kicked
+$Reason = "";
+$Reason_all = "";
 $DbLink = new DB;
 $DbLink->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE 'sprintf(L_KICKED_REASON, \"".$U."\", %' AND m_time>".(time()-30)." LIMIT 1");
 	$kickeduser = (list($message) = $DbLink->next_record());
@@ -167,6 +169,15 @@ $DbLink->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE 'sprintf(L_
 {
 	$Reason = trim($message,"sprintf(L_KICKED_REASON, \".$U.\", ");
 	$Reason = trim($Reason,"\")");
+}
+$DbLink->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE 'sprintf(L_KICKED_ALL_REASON, \"%' AND m_time>".(time()-30)." LIMIT 1");
+	$kickeduser_all = (list($message) = $DbLink->next_record());
+	$DbLink->clean_results();
+	// The user has been kicked for a reason
+	if ($kickeduser_all)
+{
+	$Reason_all = trim(str_replace("sprintf(L_KICKED_ALL_REASON, \"", "", $message));
+	$Reason_all = trim($Reason_all,"\")");
 }
 $DbLink->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE 'sprintf(L_BANISHED_REASON, \"".$U."\", %' AND m_time>".(time()-30)." LIMIT 1");
 	$banisheduser = (list($message) = $DbLink->next_record());
@@ -182,8 +193,9 @@ if (isset($KK))
 	switch ($KK)
 	{
 		case '1':
-			if ($Reason == "") $Error = L_REG_18;
-			else $Error = sprintf(L_REG_18a, $Reason);
+			if ($Reason == "" && $Reason_all == "") $Error = L_REG_18;
+			elseif ($Reason != "") $Error = sprintf(L_REG_18a, $Reason);
+			elseif ($Reason_all != "") $Error = sprintf(L_REG_18a, $Reason_all);
 			break;
 		case '2':
 			$Error = L_REG_39;
@@ -333,9 +345,10 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 		{
 			list($room) = $DbLink->next_record();
 			$DbLink->clean_results();
-			$DbLink->query("SELECT password,perms,rooms,allowpopup,last_login,login_counter FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
+			$DbLink->query("SELECT password,perms,rooms,allowpopup,last_login,login_counter,join_room FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 			$reguser = ($DbLink->num_rows() != 0);
-			if ($reguser) list($user_password,$perms,$rooms,$allowpopupu,$last_login,$login_counter) = $DbLink->next_record();
+			if ($reguser) list($user_password,$perms,$rooms,$allowpopupu,$last_login,$login_counter,$join_room) = $DbLink->next_record();
+			else $join_room = "";
 			$DbLink->clean_results();
 
 			if (!(isset($E) && $E != ""))
@@ -353,7 +366,7 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 					}
 					if (!isset($Error))
 					{
-						// This will count only the registered user returns to chat
+						// This will count only the registered user returning to chat
 						if ((time() - $last_login > C_LOGIN_COUNTER * 60) || $last_login = "")
 						{
 							$login_counter = $login_counter + 1;
@@ -382,9 +395,9 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 // **	Get perms of the user if the script is called by a join command	**
 if (isset($Reload) && $Reload == "JoinCmd")
 {
-	$DbLink->query("SELECT perms,rooms,allowpopup FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
+	$DbLink->query("SELECT perms,rooms,allowpopup,join_room FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	$reguser = ($DbLink->num_rows() != 0);
-	if ($reguser) list($perms,$rooms,$allowpopupu) = $DbLink->next_record();
+	if ($reguser) list($perms,$rooms,$allowpopupu,$join_room) = $DbLink->next_record();
 	$DbLink->clean_results();
 };
 
@@ -430,7 +443,7 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 		else
 		{
 			// ...among reserved name for private/public (default) rooms
-			$ToCheck = ($T == "1" ? $DefaultPrivateRooms : $DefaultChatRooms);
+			$ToCheck = ($T ? $DefaultPrivateRooms : $DefaultChatRooms);
 			for ($i = 0; $i < count($ToCheck); $i++)
 			{
 				if (strcasecmp(mb_convert_case($R3,MB_CASE_LOWER,$Charset), mb_convert_case($ToCheck[$i],MB_CASE_LOWER,$Charset)) == "0")
@@ -461,7 +474,7 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 		// status will be 'user'. Skipped when the script is called by a join command.
 		if (!isset($Reload))
 		{
-			$ToCheck = ($T == "1" ? $DefaultChatRooms : $DefaultPrivateRooms);
+			$ToCheck = ($T ? $DefaultChatRooms : $DefaultPrivateRooms);
 			for ($i = 0; $i < count($ToCheck); $i++)
 			{
 				if (strcasecmp(mb_convert_case($R3,MB_CASE_LOWER,$Charset), mb_convert_case($ToCheck[$i],MB_CASE_LOWER,$Charset)) == "0") $register_room = false;
@@ -537,6 +550,7 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 		}
 	}
 }
+
 
 if(!isset($Error) && (isset($R2) && $R2 != ""))
 {
@@ -624,6 +638,24 @@ if(!isset($Error) && (isset($R2) && $R2 != ""))
 	}
 }
 
+
+// **	Ensures the user has no restrictions to the room he chooses to enter, create or join - Rooms Restriction mod by Ciprian
+if(!isset($Error) && ((isset($R0) && $R0 != "") || (isset($R1) && $R1 != "") || (isset($R2) && $R2 != "") || (isset($R3) && $R3 != "") || $RES))
+{
+	if ($join_room == "*" || $perms == "admin" || $perms == "topmod" || ($perms == "moderator" && (room_in(stripslashes(isset($R0) ? $R0 : (isset($R2) ? $R2 : (isset($R3) ? $R3 : $R1))), $rooms, $Charset) || room_in("*", $rooms, $Charset)))) $restriction = 0;
+	elseif ((isset($R0) ? $R0 : (isset($R2) ? $R2 : (isset($R3) ? $R3 : $R1))) == ROOM1 && $EN_ROOM1 && $RES_ROOM1 && $join_room != "ROOM1") $restriction = 1;
+	elseif ((isset($R0) ? $R0 : (isset($R2) ? $R2 : (isset($R3) ? $R3 : $R1))) == ROOM2 && $EN_ROOM2 && $RES_ROOM2 && $join_room != "ROOM2") $restriction = 1;
+	elseif ((isset($R0) ? $R0 : (isset($R2) ? $R2 : (isset($R3) ? $R3 : $R1))) == ROOM3 && $EN_ROOM3 && $RES_ROOM3 && $join_room != "ROOM3") $restriction = 1;
+	elseif ((isset($R0) ? $R0 : (isset($R2) ? $R2 : (isset($R3) ? $R3 : $R1))) == ROOM4 && $EN_ROOM4 && $RES_ROOM4 && $join_room != "ROOM4") $restriction = 1;
+	elseif ((isset($R0) ? $R0 : (isset($R2) ? $R2 : (isset($R3) ? $R3 : $R1))) == ROOM5 && $EN_ROOM5 && $RES_ROOM5 && $join_room != "ROOM5") $restriction = 1;
+	if ($restriction || $RES)
+	{
+		$Error = sprintf(L_ERR_USR_28,(isset($R0) ? $R0 : (isset($R2) ? $R2 : (isset($R3) ? $R3 : (isset($R1) ? $R1 : $E)))));
+		setcookie("CookieRoom", '', time());        // cookie expires in one year
+	}
+}
+
+
 // ** Enter the chat **
 if(!isset($Error) && (isset($N) && $N != ""))
 {
@@ -638,7 +670,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	elseif (!isset($R))		// $R is set when the frameset is reloaded because of the NN4+ resize bug.
 	{
 		$T = 1;
-		$R = (isset($R0) && $R0 != "")? $R0 : $R1;
+		$R = (isset($R0) && $R0 != "") ? $R0 : $R1;
 	};
 
 	$CookieRoom = urlencode(stripslashes($R));
@@ -1203,10 +1235,10 @@ function isCookieEnabled() {
 		if (C_VERSION == 2)
 		{
 			?>
-			document.forms['Params'].elements['R1'].options[0].selected = true;
-			document.forms['Params'].elements['R2'].options[0].selected = true;
-			document.forms['Params'].elements['T'].options[0].selected = true;
-			document.forms['Params'].elements['R3'].value = '';
+			if (document.forms['Params'].elements['R1']) document.forms['Params'].elements['R1'].options[0].selected = true;
+			if (document.forms['Params'].elements['R2']) document.forms['Params'].elements['R2'].options[0].selected = true;
+			if (document.forms['Params'].elements['T']) document.forms['Params'].elements['T'].options[0].selected = true;
+			if (document.forms['Params'].elements['R3']) document.forms['Params'].elements['R3'].value = '';
 			<?php
 		}
 		?>
@@ -1214,25 +1246,25 @@ function isCookieEnabled() {
 
 	function reset_R1()
 	{
-		document.forms['Params'].elements['R0'].options[0].selected = true;
-		document.forms['Params'].elements['R2'].options[0].selected = true;
-		document.forms['Params'].elements['T'].options[0].selected = true;
-		document.forms['Params'].elements['R3'].value = '';
+		if (document.forms['Params'].elements['R0']) document.forms['Params'].elements['R0'].options[0].selected = true;
+		if (document.forms['Params'].elements['R2']) document.forms['Params'].elements['R2'].options[0].selected = true;
+		if (document.forms['Params'].elements['T']) document.forms['Params'].elements['T'].options[0].selected = true;
+		if (document.forms['Params'].elements['R3']) document.forms['Params'].elements['R3'].value = '';
 	}
 
 	function reset_R2()
 	{
-		document.forms['Params'].elements['R0'].options[0].selected = true;
-		document.forms['Params'].elements['R1'].options[0].selected = true;
-		document.forms['Params'].elements['T'].options[1].selected = true;
-		document.forms['Params'].elements['R3'].value = '';
+		if (document.forms['Params'].elements['R0']) document.forms['Params'].elements['R0'].options[0].selected = true;
+		if (document.forms['Params'].elements['R1']) document.forms['Params'].elements['R1'].options[0].selected = true;
+		if (document.forms['Params'].elements['T']) document.forms['Params'].elements['T'].options[1].selected = true;
+		if (document.forms['Params'].elements['R3']) document.forms['Params'].elements['R3'].value = '';
 	}
 
 	function reset_R3()
 	{
-		document.forms['Params'].elements['R0'].options[0].selected = true;
-		document.forms['Params'].elements['R1'].options[0].selected = true;
-		document.forms['Params'].elements['R2'].options[0].selected = true;
+		if (document.forms['Params'].elements['R0']) document.forms['Params'].elements['R0'].options[0].selected = true;
+		if (document.forms['Params'].elements['R1']) document.forms['Params'].elements['R1'].options[0].selected = true;
+		if (document.forms['Params'].elements['R2']) document.forms['Params'].elements['R2'].options[0].selected = true;
 	}
 	// -->
 	</SCRIPT>
@@ -1256,10 +1288,10 @@ function isCookieEnabled() {
 function layout($Err, $U, $R, $T, $C, $status)
 {
 	global $DbLink;
-	global $ChatPath, $From, $Action, $L;
+	global $ChatPath, $From, $Action, $L, $RES;
 	global $Charset, $CellAlign, $Align, $DisplayFontMsg, $FontPack, $FontName;
 	global $AvailableLanguages;
-	global $DefaultChatRooms;
+	global $DefaultChatRooms, $DefaultDispChatRooms;
 	global $DefaultPrivateRooms;
 	if ($Err) global $Error;
 	require_once("./${ChatPath}search.php");
@@ -1524,11 +1556,19 @@ if (!isset($Ver)) $Ver = "L";
 						<?php
 						// Display default public rooms in the drop down list
 						$PrevRoom = "";
-						if($R != "") $PrevRoom = urldecode($R);
+						if($R != "" && !(isset($RES) && $RES)) $PrevRoom = urldecode($R);
 						$DefaultRoomsString = "";
 						for($i = 0; $i < count($DefaultChatRooms); $i++)
 						{
 							$tmpRoom = stripslashes($DefaultChatRooms[$i]);
+							$tmpDispRoom = $tmpRoom;
+							$disp_note = 0;
+							if (is_array($DefaultDispChatRooms) && in_array($tmpRoom." [R]",$DefaultDispChatRooms))
+							{
+								$res_init = utf8_substr(L_RESTRICTED, 0, 1);
+								$tmpDispRoom .= " [".$res_init."]";
+								$disp_note = 1;
+							}
 							$DefaultRoomsString .= ($DefaultRoomsString == "" ? "" : ",").$tmpRoom;
 							echo("<OPTION VALUE=\"".htmlspecialchars($tmpRoom)."\"");
 							if(strcasecmp(mb_convert_case($tmpRoom,MB_CASE_LOWER,$Charset), mb_convert_case($PrevRoom,MB_CASE_LOWER,$Charset)) == 0)
@@ -1536,7 +1576,7 @@ if (!isset($Ver)) $Ver = "L";
 								echo(" SELECTED");
 								$DefaultRoomFound = 1;
 							}
-							echo(">".$tmpRoom."</OPTION>");
+							echo(">".$tmpDispRoom."</OPTION>");
 						}
 						?>
 					</SELECT>
@@ -1546,6 +1586,25 @@ if (!isset($Ver)) $Ver = "L";
 		}
 		if (C_VERSION == 2)
 		{
+			$created_rooms = "";
+			// Display other public rooms in the drop down list
+			$DbLink->query("SELECT DISTINCT room FROM ".C_MSG_TBL." WHERE type = 1 AND room != 'Offline PMs' AND room != '*' AND username NOT LIKE 'SYS %' ORDER BY room");
+			while(list($Room) = $DbLink->next_record())
+			{
+				if (!room_in($Room, $DefaultRoomsString, $Charset))
+				{
+					$created_rooms .= "<OPTION VALUE=\"".htmlspecialchars($Room)."\"";
+					if(strcasecmp(mb_convert_case($Room,MB_CASE_LOWER,$Charset), mb_convert_case($PrevRoom,MB_CASE_LOWER,$Charset)) == 0 && !$DefaultRoomFound)
+					{
+						$created_rooms .= " SELECTED";
+						$DefaultRoomFound = 1;
+					}
+					$created_rooms .= ">${Room}</OPTION>";
+				}
+			}
+			$DbLink->clean_results();
+			if ($created_rooms != "")
+			{
 			?>
 			<TR CLASS="ChatCell">
 				<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_SET_8); ?> :</TD>
@@ -1553,140 +1612,128 @@ if (!isset($Ver)) $Ver = "L";
 					<SELECT NAME="R1" CLASS="ChatBox" onChange="reset_R1();">
 						<OPTION VALUE=""><?php echo(L_SET_7); ?></OPTION>
 						<?php
-						// Display other public rooms in the drop down list
-						$DbLink->query("SELECT DISTINCT room FROM ".C_MSG_TBL." WHERE type = 1 AND room != 'Offline PMs' AND room != '*' AND username NOT LIKE 'SYS %' ORDER BY room");
-						while(list($Room) = $DbLink->next_record())
-						{
-							if (!room_in($Room, $DefaultRoomsString, $Charset))
-							{
-								echo("<OPTION VALUE=\"".htmlspecialchars($Room)."\"");
-								if(strcasecmp(mb_convert_case($Room,MB_CASE_LOWER,$Charset), mb_convert_case($PrevRoom,MB_CASE_LOWER,$Charset)) == 0 && !$DefaultRoomFound)
-								{
-									echo(" SELECTED");
-									$DefaultRoomFound = 1;
-								}
-								echo(">${Room}</OPTION>");
-							}
-						}
-						$DbLink->clean_results();
+							echo($created_rooms);
 						?>
 					</SELECT>
 				</TD>
 			</TR>
 			<?php
+			}
 		}
 		if (C_VERSION > 0 && C_SHOW_PRIV)
 		{
 			$DefaultPrivateRoomFound = 0;
-			if($R != "") $PrevPrivateRoom = urldecode($R);
+			$PrevPrivateRoom = "";
+			if($R != "" && !(isset($RES) && $RES)) $PrevPrivateRoom = urldecode($R);
 			$DbLink->query("SELECT perms,rooms FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 			if ($DbLink->num_rows() != 0) $reguser = ($DbLink->num_rows() != 0);
 			else $nonreguser = 1;
 			if ($reguser) list($perms,$rooms) = $DbLink->next_record();
 			$DbLink->clean_results();
-			if ($perms == "admin" || $perms == "topmod")
+			if ($DefaultPrivateRooms != NULL)
 			{
-			?>
-			<TR CLASS="ChatCell">
-				<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_SET_15); ?> :</TD>
-				<TD VALIGN="TOP" CLASS="ChatCell">
-					<SELECT NAME="R2" CLASS="ChatBox" onChange="reset_R2();">
-						<OPTION VALUE=""><?php echo(L_SET_7); ?></OPTION>
-						<?php
-						// Display default private rooms in the drop down list
-						$PrevPrivateRoom = "";
-						$DefaultPrivateRoomsString = "";
-							for($i = 0; $i < count($DefaultPrivateRooms); $i++)
-						{
-							$tmpPrivateRoom = stripslashes($DefaultPrivateRooms[$i]);
-							$DefaultPrivateRoomsString .= ($DefaultPrivateRoomsString == "" ? "" : ",").$tmpPrivateRoom;
-							echo("<OPTION VALUE=\"".htmlspecialchars($tmpPrivateRoom)."\"");
-							if(strcasecmp(mb_convert_case($tmpPrivateRoom,MB_CASE_LOWER,$Charset), mb_convert_case($PrevPrivateRoom,MB_CASE_LOWER,$Charset)) == 0)
-							{
-								echo(" SELECTED");
-								$DefaultPrivateRoomFound = 1;
-							}
-							echo(">".$tmpPrivateRoom."</OPTION>");
-						}
-						?>
-					</SELECT>
-				</TD>
-			</TR>
-			<?php
-			}
-			elseif ($perms == "moderator" && C_SHOW_PRIV_MOD)
-			{
-			?>
-			<TR CLASS="ChatCell">
-				<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_SET_15); ?> :</TD>
-				<TD VALIGN="TOP" CLASS="ChatCell">
-					<SELECT NAME="R2" CLASS="ChatBox" onChange="reset_R2();">
-						<OPTION VALUE=""><?php echo(L_SET_7); ?></OPTION>
+				if ($perms == "admin" || $perms == "topmod")
+				{
+				?>
+				<TR CLASS="ChatCell">
+					<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_SET_15); ?> :</TD>
+					<TD VALIGN="TOP" CLASS="ChatCell">
+						<SELECT NAME="R2" CLASS="ChatBox" onChange="reset_R2();">
+							<OPTION VALUE=""><?php echo(L_SET_7); ?></OPTION>
 							<?php
-							echo("<OPTION VALUE=\"".htmlspecialchars(ROOM8)."\"");
-							if(strcasecmp(mb_convert_case(ROOM8,MB_CASE_LOWER,$Charset), mb_convert_case($PrevPrivateRoom,MB_CASE_LOWER,$Charset)) == 0)
+							// Display default private rooms in the drop down list
+							$DefaultPrivateRoomsString = "";
+								for($i = 0; $i < count($DefaultPrivateRooms); $i++)
 							{
-								echo(" SELECTED");
-								$DefaultPrivateRoomFound = 1;
+								$tmpPrivateRoom = stripslashes($DefaultPrivateRooms[$i]);
+								$DefaultPrivateRoomsString .= ($DefaultPrivateRoomsString == "" ? "" : ",").$tmpPrivateRoom;
+								echo("<OPTION VALUE=\"".htmlspecialchars($tmpPrivateRoom)."\"");
+								if(strcasecmp(mb_convert_case($tmpPrivateRoom,MB_CASE_LOWER,$Charset), mb_convert_case($PrevPrivateRoom,MB_CASE_LOWER,$Charset)) == 0)
+								{
+									echo(" SELECTED");
+									$DefaultPrivateRoomFound = 1;
+								}
+								echo(">".$tmpPrivateRoom."</OPTION>");
 							}
-							echo(">".ROOM8."</OPTION>");
-							echo("<OPTION VALUE=\"".htmlspecialchars(ROOM9)."\"");
-							if(strcasecmp(mb_convert_case(ROOM8,MB_CASE_LOWER,$Charset), mb_convert_case($PrevPrivateRoom,MB_CASE_LOWER,$Charset)) == 0)
-							{
-								echo(" SELECTED");
-								$DefaultPrivateRoomFound = 1;
-							}
-							echo(">".ROOM9."</OPTION>");
-						?>
-					</SELECT>
-				</TD>
-			</TR>
-			<?php
-			}
-			elseif (C_SHOW_PRIV_USR)
-			{
-			?>
-			<TR CLASS="ChatCell">
-				<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_SET_15); ?> :</TD>
-				<TD VALIGN="TOP" CLASS="ChatCell">
-					<SELECT NAME="R2" CLASS="ChatBox" onChange="reset_R2();">
-						<OPTION VALUE=""><?php echo(L_SET_7); ?></OPTION>
-						<?php
-							echo("<OPTION VALUE=\"".htmlspecialchars(ROOM9)."\"");
-							if(strcasecmp(ROOM9, $PrevPrivateRoom) == 0)
-							{
-								echo(" SELECTED");
-								$DefaultPrivateRoomFound = 1;
-							}
-							echo(">".ROOM9."</OPTION>");
-						?>
-					</SELECT>
-				</TD>
-			</TR>
-			<?php
+							?>
+						</SELECT>
+					</TD>
+				</TR>
+				<?php
+				}
+				elseif ($perms == "moderator" && C_SHOW_PRIV_MOD)
+				{
+				?>
+				<TR CLASS="ChatCell">
+					<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_SET_15); ?> :</TD>
+					<TD VALIGN="TOP" CLASS="ChatCell">
+						<SELECT NAME="R2" CLASS="ChatBox" onChange="reset_R2();">
+							<OPTION VALUE=""><?php echo(L_SET_7); ?></OPTION>
+								<?php
+								echo("<OPTION VALUE=\"".htmlspecialchars(ROOM8)."\"");
+								if(strcasecmp(mb_convert_case(ROOM8,MB_CASE_LOWER,$Charset), mb_convert_case($PrevPrivateRoom,MB_CASE_LOWER,$Charset)) == 0)
+								{
+									echo(" SELECTED");
+									$DefaultPrivateRoomFound = 1;
+								}
+								echo(">".ROOM8."</OPTION>");
+								echo("<OPTION VALUE=\"".htmlspecialchars(ROOM9)."\"");
+								if(strcasecmp(mb_convert_case(ROOM8,MB_CASE_LOWER,$Charset), mb_convert_case($PrevPrivateRoom,MB_CASE_LOWER,$Charset)) == 0)
+								{
+									echo(" SELECTED");
+									$DefaultPrivateRoomFound = 1;
+								}
+								echo(">".ROOM9."</OPTION>");
+							?>
+						</SELECT>
+					</TD>
+				</TR>
+				<?php
+				}
+				elseif (C_SHOW_PRIV_USR)
+				{
+				?>
+				<TR CLASS="ChatCell">
+					<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_SET_15); ?> :</TD>
+					<TD VALIGN="TOP" CLASS="ChatCell">
+						<SELECT NAME="R2" CLASS="ChatBox" onChange="reset_R2();">
+							<OPTION VALUE=""><?php echo(L_SET_7); ?></OPTION>
+							<?php
+								echo("<OPTION VALUE=\"".htmlspecialchars(ROOM9)."\"");
+								if(strcasecmp(ROOM9, $PrevPrivateRoom) == 0)
+								{
+									echo(" SELECTED");
+									$DefaultPrivateRoomFound = 1;
+								}
+								echo(">".ROOM9."</OPTION>");
+							?>
+						</SELECT>
+					</TD>
+				</TR>
+				<?php
+				}
 			}
 		}
 		if (C_VERSION == 2)
 		{
+			if((!$T && !$DefaultRoomFound) || (!$T && !$DefaultPrivateRoomFound)) $T = 1;
 			?>
 			<TR CLASS="ChatCell">
 				<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP">
 					<?php echo(L_SET_9." "); ?>
 					<SELECT NAME="T" CLASS="ChatBox">
-<?php
-if((!$T && !$DefaultRoomFound) || (!$T && !$DefaultPrivateRoomFound)) $T = 1;
-?>
 						<OPTION VALUE="1" <?php if($T && !$DefaultPrivateRoomFound) echo("SELECTED"); ?> <?php if(!$T && $DefaultPrivateRoomFound) echo("DISABLED"); ?>><?php echo(L_SET_10); ?></OPTION>
 						<OPTION VALUE="0" <?php if((!$T && !$DefaultRoomFound) || ($T && $DefaultPrivateRoomFound)) echo("SELECTED"); ?>><?php echo(L_SET_11); ?></OPTION>
 					</SELECT>
 					<?php echo(" ".L_SET_12." :"); ?>
 				</TD>
 				<TD VALIGN="TOP" CLASS="ChatCell">
-					<INPUT TYPE="text" NAME="R3" SIZE=11 MAXLENGTH=14 <?php if(!$DefaultRoomFound && !$DefaultPrivateRoomFound && $R != "") echo("VALUE=\"".htmlspecialchars(urldecode($R))."\""); ?> CLASS="ChatBox" onChange="reset_R3();">
+					<INPUT TYPE="text" NAME="R3" SIZE=11 MAXLENGTH=14 <?php if(!$DefaultRoomFound && !$DefaultPrivateRoomFound && $R != "" && !$RES) echo("VALUE=\"".htmlspecialchars(urldecode($R))."\""); ?> CLASS="ChatBox" onChange="reset_R3();">
 				</TD>
 			</TR>
 			<?php
 		}
+		if($disp_note) echo("<tr class=\"ChatError\"><td align=right colspan=2><font size=-2>[".$res_init."] = ".L_RESTRICTED.".</font></td></tr>");
 		if (C_VERSION == 1)
 		{
 			?>

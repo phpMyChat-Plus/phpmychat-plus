@@ -1,21 +1,19 @@
 <?php
-ini_set('session.use_trans_sid','1');
-ini_set('session.use_cookies', '1');
-session_start();
-session_register("adminlogged");
+if (is_array($_SESSION)) { }
+else
+{
+	ini_set('session.use_trans_sid', '1');
+	ini_set('session.use_cookies', '1');
+	session_start();
+//	session_register("adminlogged");
+}
 
 // Added for Skin mod
 if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 require("./config/config.lib.php");
 
 $DbLink4Login = new DB;
-/*
-	if (isset($_COOKIE["CookieUsername"]) && ($_COOKIE["CookieStatus"] == "a" || $_COOKIE["CookieStatus"] == "t"))
-	{
-		$pmc_username = urldecode($_COOKIE["CookieUsername"]);
-		$FOCUS = 1;
-	}
-*/
+
 if ((isset($pmc_username) && $pmc_username != "") && (isset($pmc_password) && $pmc_password != ""))
 {
 	// Ensure the password is a correct one

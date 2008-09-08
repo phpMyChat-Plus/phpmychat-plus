@@ -33,6 +33,9 @@ if (get_magic_quotes_gpc()) {
 		$_COOKIE[$k] = stripslashes($v);
 }
 
+// Text direction
+$textDirection = ($Align == "right") ? "RTL" : "LTR";
+
 // Translate to html special characters, and entities if message was sent with a latin 1 charset
 $Latin1 = ($Charset != "utf-8");
 function special_char($str,$lang,$slash_on)
@@ -67,14 +70,21 @@ if (!function_exists('utf_conv'))
 	};
 };
 
-// Text direction
-$textDirection = ($Align == "right") ? "RTL" : "LTR";
-
 function setImageSize($image_file,$maxSize) {
 
-$image_size = getimagesize($image_file);
-$width = $image_size[0];
-$height = $image_size[1];
+if (function_exists("getimagesize"))
+{
+	$image_size = getimagesize($image_file);
+	$width = $image_size[0];
+	$height = $image_size[1];
+	if (!$width || $width == "") $width = $maxSize;
+}
+else
+{
+	$width = $maxSize;
+	$height = "";
+}
+
 
 if($width > $maxSize || $height > $maxSize) {
 
@@ -110,10 +120,21 @@ function ghosts_in($what, $in, $Charset)
 	return false;
 }
 
+// Ensure a room ($what) is include in a rooms list ($in)
+function room_in($what, $in, $Charset)
+{
+	$rooms = explode(",",$in);
+	for (reset($rooms); $room_name=current($rooms); next($rooms))
+	{
+		if (strcasecmp(mb_convert_case($what,MB_CASE_LOWER,$Charset), mb_convert_case($room_name,MB_CASE_LOWER,$Charset)) == 0) return true;
+	};
+	return false;
+};
+
 $DbLink = new DB;
-	$DbLink->query("SELECT perms,rooms,allowpopup FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
+	$DbLink->query("SELECT perms,rooms,allowpopup,join_room FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	$reguser = ($DbLink->num_rows() != 0);
-	if ($reguser) list($perms, $rooms, $allowpopupu) = $DbLink->next_record();
+	if ($reguser) list($perms, $rooms, $allowpopupu, $join_room) = $DbLink->next_record();
 	$DbLink->clean_results();
 
 // Get IP address
@@ -213,9 +234,9 @@ else
 {
 	// User hasn't been found in the users table -> add a row if he is registered
 	$DbLink->clean_results();
-	$DbLink->query("SELECT perms,rooms,allowpopup FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
+	$DbLink->query("SELECT perms,rooms,allowpopup,join_room FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	$reguser = ($DbLink->num_rows() != 0);
-	if ($reguser) list($perms, $rooms, $allowpopupu) = $DbLink->next_record();
+	if ($reguser) list($perms, $rooms, $allowpopupu, $join_room) = $DbLink->next_record();
 	$DbLink->clean_results();
 	// Kick unreg users
 	if (!$reguser)
@@ -531,9 +552,9 @@ else
 				$imgSize = setImageSize($Message,MAX_PIC_SIZE);
 				$Pic = L_PIC;
 				if($imgSize[0] == MAX_PIC_SIZE || $imgSize[1] == MAX_PIC_SIZE)
-				$Resized = "<br \/>(".L_PIC_RESIZED." <B>".round($imgSize[0],-1)."<\/B> x <B>".round($imgSize[1],-1)."<\/B>)";
+				$Resized = "<br \/>(".L_PIC_RESIZED." <B>".round($imgSize[0],-1)."<\/B>".((isset($imgSize[1]) && $imgSize[1] != "") ? " x <B>".round($imgSize[1],-1)."<\/B>" : "").")";
 				else $Resized = '';
-        		$NewMsg .= "<font class=\"notify\">".$Pic." ".$Dest.":<\/font><\/td><td width=\"99%\" valign=\"top\"><a href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_FULLSIZE_PIC).".'; return true\" title='".sprintf(L_CLICK,L_FULLSIZE_PIC)."' target=_blank><img src=".$Message." width=".$imgSize[0]." height=".$imgSize[1]." border=0 alt='".sprintf(L_CLICK,L_FULLSIZE_PIC)."'><\/a>".$Resized."<\/td><\/tr><\/table>";
+        		$NewMsg .= "<font class=\"notify\">".$Pic." ".$Dest.":<\/font><\/td><td width=\"99%\" valign=\"top\"><a href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_FULLSIZE_PIC).".'; return true\" title='".sprintf(L_CLICK,L_FULLSIZE_PIC)."' target=_blank><img src=".$Message.((isset($imgSize[0]) && $imgSize[0] != "") ? " width=".$imgSize[0] : "").((isset($imgSize[1]) && $imgSize[1] != "") ? "  height=".$imgSize[1] : "")." border=0 alt='".sprintf(L_CLICK,L_FULLSIZE_PIC)."'><\/a>".$Resized."<\/td><\/tr><\/table>";
       		}
 			elseif ($User == "SYS room")
 			{
@@ -838,6 +859,32 @@ if(C_CHAT_BOOT)
 	exit();
 	}
 }
+// **	Ensures the user has no restrictions to the room he chooses to enter, create or join - Rooms Restriction mod by Ciprian
+	if ($join_room == "*" || $perms == "admin" || $perms == "topmod" || ($perms == "moderator" && (room_in(stripslashes($R), $rooms, $Charset) || room_in("*", $rooms, $Charset)))) $restriction = 0;
+	elseif ($R == ROOM1 && $EN_ROOM1 && $RES_ROOM1 && $join_room != "ROOM1") $restriction = 1;
+	elseif ($R == ROOM2 && $EN_ROOM2 && $RES_ROOM2 && $join_room != "ROOM2") $restriction = 1;
+	elseif ($R == ROOM3 && $EN_ROOM3 && $RES_ROOM3 && $join_room != "ROOM3") $restriction = 1;
+	elseif ($R == ROOM4 && $EN_ROOM4 && $RES_ROOM4 && $join_room != "ROOM4") $restriction = 1;
+	elseif ($R == ROOM5 && $EN_ROOM5 && $RES_ROOM5 && $join_room != "ROOM5") $restriction = 1;
+	if ($restriction)
+	{
+	$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('".$m_type."', '".$m_room."', 'SYS exit', '', ".time().", '', 'sprintf(L_RESTRICTED_ROM, \"$U\")', '', '')");
+	$DbLink->clean_results();
+	setcookie("CookieRoom", '', time());        // cookie expires in one year
+	?>
+	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
+	<!--
+		if (window.parent.frames['loader'] && !window.parent.frames['loader'].closed)
+		{
+			if (typeof(window.parent.leaveChat) != 'undefined') window.parent.leaveChat = true;
+			window.parent.frames['loader'].close();
+		};
+		window.parent.window.location = '<?php echo("$From?Ver=$Ver&L=$L&U=".urlencode(stripslashes($U))."&O=$O&ST=$ST&NT=$NT&E=".urlencode(stripslashes($R))."&EN=$T&RES=1"); ?>';
+	// -->
+	</SCRIPT>
+	<?php
+	exit();
+	}
 ?>
 </BODY>
 </HTML>

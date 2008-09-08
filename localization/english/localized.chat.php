@@ -1,5 +1,5 @@
 <?php
-// File : english/localized.chat.php - plus version (18.06.2008 - rev.40)
+// File : english/localized.chat.php - plus version (11.08.2008 - rev.41)
 // Original file by Nicolas Hoizey <nhoizey@phpheaven.net>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
@@ -98,7 +98,7 @@ define("L_REG_50", "Registration suspended!");
 define("L_EMAIL_VAL_1", "Your settings to enter the chat");
 define("L_EMAIL_VAL_2", "Welcome to our chat server.");
 define("L_EMAIL_VAL_Err", "Internal error, please contact the administrator: <a href=\"mailto:%s\">%s</a>.");
-define("L_EMAIL_VAL_Done", "Your password has been sent to your e-mail address.<br />You may change your password at the login page under ".L_REG_4.".");
+define("L_EMAIL_VAL_Done", "Your password has been sent to your e-mail address.<br />You may change your password at the login page under \"".L_REG_4."\".");
 define("L_EMAIL_VAL_PENDING_Done", "Your registered data has been submitted for review.");
 define("L_EMAIL_VAL_PENDING_Done1", "You will receive your password, after your account is approved by the Administrator.");
 define("L_EMAIL_VAL_3", "Your registration is pending for %s"); //chat name
@@ -112,6 +112,7 @@ define("L_EMAIL_VAL_6", "Registered on: %s");
 define("L_EMAIL_VAL_61", "Updated on: %s");
 define("L_EMAIL_VAL_7", "Below is your %s updated account info:"); //username
 define("L_EMAIL_VAL_8", "Save this email for your future reference.\nPlease also make it safe and don't share this data.\nThank you for joining! Enjoy!");
+define("L_EMAIL_VAL_81", "You may change your password at the login page under \"".L_REG_4."\".");
 
 // admin stuff
 define("L_ADM_1", "%s is no longer a moderator for this room.");
@@ -147,6 +148,7 @@ define("L_ERR_USR_24", "To create your own private room you must be registered."
 define("L_ERR_USR_25", "Only the administrator can use ".$COLORNAME." color!<br />Don’t try to use ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2.", ".COLOR_CM.", ".COLOR_CM1." or ".COLOR_CM2.".<br />These are reserved to power users!");
 define("L_ERR_USR_26", "Only admins and moderators can use ".$COLORNAME." color!<br />Don’t try to use ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2.", ".COLOR_CM.", ".COLOR_CM1." or ".COLOR_CM2.".<br />These are reserved to power users!");
 define("L_ERR_USR_27", "You cannot talk private to yourself.\\nDo that in your mind please...\\nNow choose a different username.");
+define("L_ERR_USR_28", "Your access to %s has been restricted!<br />Please choose a different room.");
 define("L_ERR_ROM_1", "Room’s name cannot contain commas or backslashes (\\).");
 define("L_ERR_ROM_2", "Banished word found in the room’s name you want to create.");
 define("L_ERR_ROM_3", "This room already exists as a public one.");
@@ -175,6 +177,8 @@ define("L_HLP", "Help");
 define("L_MODERATOR", "%s is now a moderator for this room.");
 define("L_KICKED", "%s has successfully been kicked away.");
 define("L_KICKED_REASON", "%s has successfully been kicked away. (Reason: %s)");
+define("L_KICKED_ALL", "All the users have successfully been kicked away.");
+define("L_KICKED_ALL_REASON", "All the users have successfully been kicked away. (Reason: %s)");
 define("L_BANISHED", "%s has successfully been banished.");
 define("L_BANISHED_REASON", "%s has successfully been banished. (Reason: %s)");
 define("L_ANNOUNCE", "ANNOUNCE");
@@ -222,7 +226,7 @@ define("L_HELP_CMD_5", "Leave the chat after displaying an optional message.");
 define("L_HELP_CMD_6", "Avoid displaying messages from a user if nick is specified.<br />Set ignoring off for a user when nick and \"-\" are both specified, for all users when \"-\" is but not nick.<br />With no option, this command pops up a window that shows all ignored nicks.");
 define("L_HELP_CMD_7", "Recall the previous text typed (command or message).");
 define("L_HELP_CMD_8", "Show/Hide time before messages.");
-define("L_HELP_CMD_9", "Kick away user from the chat. This command can only be used by a moderator of that room or an admin.<br />Optionally, [".L_HELP_REASON."] displays the reason of kicking (any desired text).");
+define("L_HELP_CMD_9", "Kick away user from the chat. This command can only be used by a moderator of that room or an admin.<br />Optionally, [".L_HELP_REASON."] displays the reason of kicking (any desired text).<br />If * option is used, the command will kick out from chat all the users without powers (only guests and registered users). This is useful when the server connection is having problems and all the people should reload their chat. In this second case, [".L_HELP_REASON."] is recommended to let users know why they’ve been kicked.");
 define("L_HELP_CMD_10", "Sends a private message to the specified user (other users won’t see it).");
 define("L_HELP_CMD_11", "Show information about specified user.");
 define("L_HELP_CMD_12", "Pop-up the window for editing user’s profile.");
@@ -292,18 +296,18 @@ define("L_WHOIS_REG", "Registered");
 define("L_WHOIS_BOT", "Bot");
 
 // Notification messages of user entrance/exit
-define("ENTER_ROM", "%s enters this room");
-define("L_EXIT_ROM", "%s exits from this room");
+define("ENTER_ROM", "%s enters this room.");
+define("L_EXIT_ROM", "%s exits from this room.");
 if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
 // Clean mod/fix by Ciprian
-define("L_BOOT_ROM", "%s has automatically been booted from this room for inactivity");
-define("L_CLOSED_ROM", "%s has closed the browser");
+define("L_BOOT_ROM", "%s has automatically been booted from this room for inactivity.");
+define("L_CLOSED_ROM", "%s has closed the browser.");
 
 // Text for /away command notification string:
-define("L_AWAY", "%s is marked away");
+define("L_AWAY", "%s is marked away...");
 define("L_BACK", "%s is back!");
 
 // Quick Menu mod
@@ -575,6 +579,7 @@ setlocale(LC_ALL, "en_GB.UTF-8", "en_GB.UTF-8@euro", "eng.UTF-8", "uk.UTF-8", "e
 }
 define("L_SHORT_DATE", "%d/%m/%Y"); //Change this to your local desired format (keep the short form)
 define("L_SHORT_DATETIME", "%d/%m/%Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
+define("L_LANG", "en_GB");
 }
 elseif (C_ENGLISH_FORMAT == "US")
 {
@@ -586,6 +591,7 @@ setlocale(LC_ALL, "en_US.UTF-8", "enu.UTF-8", "usa.UTF-8", "enu_enu.UTF-8", "Eng
 }
 define("L_SHORT_DATE", "%m/%d/%Y"); //Change this to your local desired format (keep the short form)
 define("L_SHORT_DATETIME", "%m/%d/%Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
+define("L_LANG", "en_US");
 }
 define("ISO_DEFAULT", "iso-8859-1");
 define("WIN_DEFAULT", "windows-1252");
@@ -631,6 +637,7 @@ define("L_SKINS_TITLE", "Skins Preview");
 define("L_SKINS_TITLE1", "Skins %s to %s preview"); // Skins 1 to 4 preview
 define("L_SKINS_AV", "Available skins");
 define("L_SKINS_NONAV", "There are no styles defined in the \"skins\" folder");
+define("L_SKINS_COPY", "&copy; %s Skin by %s");
 
 // Swap image titles by Ciprian
 define("L_GEN_ICON", "Gender icon");
@@ -649,4 +656,16 @@ define("L_LOGIN_COUNT", "Total visits");
 
 // Gravatar from email mod by Ciprian
 define("L_GRAV_USE", "use the Gravatar");
+
+// Uploader mod by Ciprian
+define("L_UPLOAD", "Upload %s");
+define("L_UPLOAD_IMG", "Image file");
+define("L_UPLOAD_SND", "Sound file");
+define("L_UPLOAD_FLS", "Files");
+define("L_UPLOAD_SUCCESS", "%s successfully uploaded as %s.");
+define("L_FILES_TITLE", "Uploads Management");
+
+// Room restriction mod by Ciprian
+define("L_RESTRICTED", "Restricted");
+define("L_RESTRICTED_ROM", "%s has successfully been restricted from this room.");
 ?>

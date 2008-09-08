@@ -1,6 +1,8 @@
 <?php
-// "Pink & magenta" skin for phpMyChat plus - by Ciprian
+// "White & black" skin for phpMyChat plus - by Ciprian
 
-define("COLOR_CD", "magenta"); //default messages color (also the filter color of this room)
-$SKIN_NAME = "Pink & magenta";
+$SKIN_NAME = "White & black";
+$SKIN_DATE = "2008".((date('Y')>"2008") ? "-".date('Y') : "");
+$SKIN_BY = "Ciprian";
+define("COLOR_CD", "black"); //default messages color (also the filter color of this room)
 ?>

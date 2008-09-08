@@ -1,5 +1,5 @@
 <?php
-// File : danish/localized.chat.php - plus version (18.06.2008 - rev.40)
+// File : danish/localized.chat.php - plus version (11.08.2008 - rev.41)
 // Original translation by Jonas Koch Bentzen <post@jonaskochbentzen.dk> & Kenneth Kristiansen <kk@linuxfreak.adsl.dk>
 // Updates, corrections and additions for the Plus version by Bente Feldballe
 // Do not use ' but use  ’  instead (utf-8 edit bug)
@@ -98,7 +98,7 @@ define("L_REG_50", "Brugerregistrering ophævet!");
 define("L_EMAIL_VAL_1", "Dine indstillinger til brug i chatten");
 define("L_EMAIL_VAL_2", "Velkommen til vor chatserver.");
 define("L_EMAIL_VAL_Err", "Intern fejl, kontakt venligst administrator: <a href=\"mailto:%s\">%s</a>.");
-define("L_EMAIL_VAL_Done", "Dit password er blevet sendt til din e-mail-adresse.<br />Du kan ændre dit password på login-siden under Redigér din profil.");
+define("L_EMAIL_VAL_Done", "Dit password er blevet sendt til din e-mail-adresse.<br />Du kan ændre dit password på login-siden under \"".L_REG_4."\.");
 define("L_EMAIL_VAL_PENDING_Done", "Dine registreringsdata er indsendt til vurdering.");
 define("L_EMAIL_VAL_PENDING_Done1", "Du modtager dit password, når kontoen er blevet godkendt af Administrator.");
 define("L_EMAIL_VAL_3", "Din registrering afventer %s");
@@ -112,7 +112,7 @@ define("L_EMAIL_VAL_6", "Registreret den %s");
 define("L_EMAIL_VAL_61", "Opdateret den %s");
 define("L_EMAIL_VAL_7", "Herunder finder du dine %s opdaterede oplysninger for brugerkonto:");
 define("L_EMAIL_VAL_8", "Gem denne e-mail, såfremt du får brug for den senere.\nGem dine oplysninger på et sikkert sted og lad ikke andre få adgang til dem.\nTak for din tilmelding! God fornøjelse!");
-
+define("L_EMAIL_VAL_81", "Du kan ændre dit password på login-siden under \"".L_REG_4."\.");
 
 // admin stuff
 define("L_ADM_1", "%s er ikke længere moderator for dette rum.");	// brugernavn/kælenavn
@@ -148,6 +148,7 @@ define("L_ERR_USR_24", "Hvis du vil oprette et privat chatrum, skal du være reg
 define("L_ERR_USR_25", "Kun administrator kan anvende ".$COLORNAME." farve!<br />Undlad at anvende ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1.".<br />Disse er reserveret powerbrugere!");
 define("L_ERR_USR_26", "Kun administrator og moderator kan anvende ".$COLORNAME." farve!<br /> Undlad at anvende ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1.".<br /> Disse er reserveret powerbrugere!");
 define("L_ERR_USR_27", "Du kan ikke sende en privat meddelelse til dig selv.\\nDet kan du gøre i dit eget hoved...\\nVælg et andet brugernavn.");
+define("L_ERR_USR_28", "Din adgang til %s er blevet inddraget!<br />Vælg venligst et andet rum."); // room name
 define("L_ERR_ROM_1", "Rummets navn kan ikke indeholde komma eller backslash (\\).");
 define("L_ERR_ROM_2", "Forbudt ord fundet i navnet på det chatrum, du vil oprette.");
 define("L_ERR_ROM_3", "Dette chatrum eksisterer allerede som offentligt chatrum.");
@@ -176,6 +177,8 @@ define("L_HLP", "Hjælp");
 define("L_MODERATOR", "%s er nu moderator i dette chatrum."); 	// brugernavn/kælenavn
 define("L_KICKED", "%s er nu blevet sparket ud."); 	// brugernavn/kælenavn
 define("L_KICKED_REASON", "%s er nu blevet sparket ud. (Begrundelse: %s)"); 	// brugernavn/kælenavn samt begrundelse
+define("L_KICKED_ALL", "Alle brugere er nu sparket ud.");
+define("L_KICKED_ALL_REASON", "Alle brugere er nu sparket ud. (Begrundelse: %s)");
 define("L_BANISHED", "%s er nu blevet forvist."); 	// brugernavn/kælenavn
 define("L_BANISHED_REASON", "%s er nu blevet forvist. (Begrundelse: %s)"); 	// brugernavn/kælenavn samt begrundelse
 define("L_ANNOUNCE", "ANNOUNCE");
@@ -223,7 +226,7 @@ define("L_HELP_CMD_5", "Forlad chatten efter, at du har vist en valgfri meddelel
 define("L_HELP_CMD_6", "Undlad at vise poster fra en bruger, hvis brugernavn er angivet.<br />Fjern ignorering af bruger, hvis brugernavn og - begge er angivet, for alle brugere hvis - er, men ikke brugernavn.<br />Hvis intet er angivet, åbner denne kommando et pop-up vindue, der viser alle brugernavne indstillet til at ignoreres.");
 define("L_HELP_CMD_7", "Genkald den foregående indtastede tekst (kommando eller meddelelse).");
 define("L_HELP_CMD_8", "Vis/Skjul tid før meddelelser.");
-define("L_HELP_CMD_9", "Spark brugeren ud af chatten. Denne kommando kan kun anvendes af en moderator for det pågældende chatrum eller af admin.<br />Valgfrit [".L_HELP_REASON."] kan vises begrundelsen for, at brugeren sparkes ud (tekst efter eget valg).");
+define("L_HELP_CMD_9", "Spark brugeren ud af chatten. Denne kommando kan kun anvendes af en moderator for det pågældende chatrum eller af admin.<br />Valgfrit [".L_HELP_REASON."] kan vises begrundelsen for, at brugeren sparkes ud (tekst efter eget valg).<br />Hvis du vælger mulighed *, vil kommandoen sparke alle brugere uden bemyndigelse ud af chatten (gælder kun gæster og registrerede brugere). Denne funktion er nyttig, hvis der er problemer med serverforbindelsen, og alle tilstedeværende skal genindlæse chatten. I dette andet tilfælde anbefales det at give en [".L_HELP_REASON."], således at brugerne ved, hvorfor de sparkes ud.");
 define("L_HELP_CMD_10", "Send en privat meddelelse til en bestemt bruger (andre brugere vil ikke kunne se denne meddelelse).");
 define("L_HELP_CMD_11", "Vis oplysninger om en bestemt bruger.");
 define("L_HELP_CMD_12", "Pop-up vindue til redigering af brugerprofil.");
@@ -293,18 +296,18 @@ define("L_WHOIS_REG", "Registreret");
 define("L_WHOIS_BOT", "Bot");
 
 // Notification messages of user entrance/exit
-define("ENTER_ROM", "%s er tiltrådt chatten");
-define("L_EXIT_ROM", "%s har afsluttet chatten");
+define("ENTER_ROM", "%s er tiltrådt chatten.");
+define("L_EXIT_ROM", "%s har afsluttet chatten.");
 if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
 // Clean mod/fix by Ciprian
-define("L_BOOT_ROM", "%s er automatisk sparket ud for inaktivitet");
-define("L_CLOSED_ROM", "%s har lukket browseren");
+define("L_BOOT_ROM", "%s er automatisk sparket ud for inaktivitet.");
+define("L_CLOSED_ROM", "%s har lukket browseren.");
 
 // Text for /away command notification string:
-define("L_AWAY", "%s er fraværende");
+define("L_AWAY", "%s er fraværende...");
 define("L_BACK", "%s er tilbage!");
 
 // Quick Menu mod
@@ -572,6 +575,7 @@ setlocale(LC_ALL, "danish.UTF-8", "danish"); // For DK formats
 } else {
 setlocale(LC_ALL, "da_DK.UTF-8", "da_DK.UTF-8@euro", "dnk.UTF-8", "dnk.UTF-8"); // For DK formats
 }
+define("L_LANG", "da_DK");
 define("ISO_DEFAULT", "iso-8859-1");
 define("WIN_DEFAULT", "windows-1252");
 define("L_SHORT_DATE", "%d-%m-%Y"); //Change this to your local desired format (keep the short form)
@@ -618,6 +622,7 @@ define("L_SKINS_TITLE", "Gennemse Skins");
 define("L_SKINS_TITLE1", "Skins %s til %s gennemsyn"); // Skins 1 to 4 preview
 define("L_SKINS_AV", "Tilgængelige skins");
 define("L_SKINS_NONAV", "Der er ingen styles defineret i mappen \"skins\"");
+define("L_SKINS_COPY", "&copy; %s Skin fra %s"); //© 2008 Skin by AuthorName
 
 // Swap image titles by Ciprian
 define("L_GEN_ICON", "Ikon for køn");
@@ -636,4 +641,16 @@ define("L_LOGIN_COUNT", "Samlet antal besøg"); // number of logins (returning v
 
 // Gravatar from email mod by Ciprian
 define("L_GRAV_USE", "Brug Gravatar");
+
+// Uploader mod by Ciprian
+define("L_UPLOAD", "Overførsel %s"); // Upload Image, Upload Sound or Upload File
+define("L_UPLOAD_IMG", "Billedfil"); // used to upload Avatars and /img command
+define("L_UPLOAD_SND", "Lydfil"); // used to upload Buzz sounds
+define("L_UPLOAD_FLS", "Filer"); // used to upload multiple files at once
+define("L_UPLOAD_SUCCESS", "%s overført som %s."); // original filename, destination filename
+define("L_FILES_TITLE", "Håndtering af Overførsler");
+
+// Room restriction mod by Ciprian
+define("L_RESTRICTED", "Adgang forbudt");
+define("L_RESTRICTED_ROM", "%s har ikke længere adgang til dette rum.");
 ?>

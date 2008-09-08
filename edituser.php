@@ -118,7 +118,19 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 			setcookie("CookieColor", $C, time() + 60*60*24*365);        // cookie expires in one year
 		}
 		include("./lib/get_IP.lib.php");		// Set the $IP var
-			$DbLink->query("UPDATE ".C_REG_TBL." SET username='$U', latin1='$Latin1', password='$PWD_Hash', firstname='$FIRSTNAME', lastname='$LASTNAME', country='$COUNTRY', website='$WEBSITE', email='$EMAIL', showemail=$showemail, allowpopup=$allowpopup, reg_time=".time().", ip='$IP', gender='$GENDER', picture='$PICTURE', description='$DESCRIPTION', favlink='$FAVLINK', favlink1='$FAVLINK1', slang='$SLANG', colorname='$COLORNAME', avatar='$AVATARURL', s_question='$SECRET_QUESTION', s_answer='$SECRET_ANSWER', use_gravatar='$USE_GRAV' WHERE username='$pmc_username'");
+		
+		// Upload avatar mod addition - by Ciprian
+		// We try to keep the link between the usernames and uploaded avatars filenames,
+		// and also remove the uploaded avatar if exists and isn't needed anymore
+		$av_user_name = $pmc_username;
+		$av_new_user_name = $U;
+		if (stristr(urlencode($av_user_name), "%")) $av_user_name = "encname_".str_replace("%","_",urlencode($av_user_name));
+		if (stristr(urlencode($av_new_user_name), "%")) $av_new_user_name = "encname_".str_replace("%","_",urlencode($av_new_user_name));
+		if (!stristr($AVATARURL,C_AVA_RELPATH . "uploaded/")) @unlink(C_AVA_RELPATH . "uploaded/avatar_".$av_user_name.".gif");
+		elseif ($pmc_username != $U && @rename(C_AVA_RELPATH . "uploaded/avatar_".$av_user_name.".gif", C_AVA_RELPATH . "uploaded/avatar_".$av_new_user_name.".gif")) $AVATARURL = C_AVA_RELPATH . "uploaded/avatar_".$av_new_user_name.".gif";
+		// End of Upload avatar mod - by Ciprian
+		
+		$DbLink->query("UPDATE ".C_REG_TBL." SET username='$U', latin1='$Latin1', password='$PWD_Hash', firstname='$FIRSTNAME', lastname='$LASTNAME', country='$COUNTRY', website='$WEBSITE', email='$EMAIL', showemail=$showemail, allowpopup=$allowpopup, reg_time=".time().", ip='$IP', gender='$GENDER', picture='$PICTURE', description='$DESCRIPTION', favlink='$FAVLINK', favlink1='$FAVLINK1', slang='$SLANG', colorname='$COLORNAME', avatar='$AVATARURL', s_question='$SECRET_QUESTION', s_answer='$SECRET_ANSWER', use_gravatar='$USE_GRAV' WHERE username='$pmc_username'");
 // Patch to send an email to the User and/or admin after changing username or password.
 // by Ciprian using Bob Dickow's registration patch.
 	if (($pmc_username != $U) || ($pmc_password != $prev_PASSWORD))
@@ -170,7 +182,9 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 	     . sprintf(L_EMAIL_VAL_7,$U)."\r\n\r\n"
 	     . "----------------------------------------------\r\n"
 	     . "".L_SET_2.": ".$U."\r\n"
-		   . "".L_REG_1.": ".$prev_PASSWORD."\r\n"
+		 . "".L_REG_1.": ".$prev_PASSWORD."\r\n"
+		 . "----------------------------------------------\r\n"
+		 . "".L_EMAIL_VAL_81." (".$Chat_URL.")\r\n"
 	     . "----------------------------------------------\r\n\r\n"
 	     . "".L_PASS_1.": ".$secret_question."\r\n"
 	     . "".L_PASS_6.": ".$SECRET_ANSWER."\r\n"

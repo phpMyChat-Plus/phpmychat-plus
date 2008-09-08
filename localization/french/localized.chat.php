@@ -1,5 +1,5 @@
 <?php
-// File : french/localized.chat.php - plus version (18.06.2008 - rev.40)
+// File : french/localized.chat.php - plus version (11.08.2008 - rev.41)
 // Translation for Plus version by Pierre Liget <sourceforge@pliget.freesurf.fr> 10.12.2007
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -98,7 +98,7 @@ define("L_REG_50", "Les inscriptions sont momentanément suspendues!");
 define("L_EMAIL_VAL_1", "Vos données d’authentification pour entrer sur le chat");
 define("L_EMAIL_VAL_2", "Bienvenue sur notre serveur de chat.");
 define("L_EMAIL_VAL_Err", "Erreur interne, merci de contacter l’administrateur: <a href=\"mailto:%s\">%s</a>.");
-define("L_EMAIL_VAL_Done", "Votre mot de passe vous a été envoyé à votre adresse e-mail.<br />Vous pouvez changer votre mot de passe sur la page de login dans la rubrique Editez votre profil.");
+define("L_EMAIL_VAL_Done", "Votre mot de passe vous a été envoyé à votre adresse e-mail.<br />Vous pouvez changer votre mot de passe sur la page de login dans la rubrique \"".L_REG_4."\.");
 define("L_EMAIL_VAL_PENDING_Done", "Vos données d’inscription ont été transmises pour vérification.");
 define("L_EMAIL_VAL_PENDING_Done1", "Vous allez recevoir votre mot de passe, une fois que votre inscription aura été validée par l’Administrateur.");
 define("L_EMAIL_VAL_3", "Votre inscription est en attente de validation pour %s");
@@ -112,6 +112,7 @@ define("L_EMAIL_VAL_6", "Inscrit le %s");
 define("L_EMAIL_VAL_61", "Mis à jour le %s");
 define("L_EMAIL_VAL_7", "Ci-dessous les informations de votre compte %s modifié:"); //username
 define("L_EMAIL_VAL_8", "Gardez cette adresse email pour de futurs échanges.\nVeuillez la conserver précieusement et ne la diffusez à personne.\nMerci de nous avoir rejoints! Amusez-vous bien!");
+define("L_EMAIL_VAL_81", "Vous pouvez changer votre mot de passe sur la page de login dans la rubrique \"".L_REG_4."\.");
 
 // admin stuff
 define("L_ADM_1", "%s n’est plus modérateur pour ce salon.");
@@ -147,6 +148,7 @@ define("L_ERR_USR_24", "Pour créer votre propre salon privé, vous devez être 
 define("L_ERR_USR_25", "Seul l’administrateur peut utiliser la couleur ".$COLORNAME."!<br />Vous ne pouvez pas utiliser les couleurs ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." ou ".COLOR_CM1.".<br />Elles sont réservées aux modérateurs ou administrateurs!");
 define("L_ERR_USR_26", "Seuls les administrateurs et les modérateurs peuvent utiliser les couleurs ".$COLORNAME."!<br />Vous ne pouvez pas utiliser les couleurs ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." ou ".COLOR_CM1.".<br />Elles sont réservées aux modérateurs ou administrateurs!");
 define("L_ERR_USR_27", "Vous ne pouvez pas discuter en privé avec vous-même.\\nFaites ça dans votre tête s’il vous plait...\\nOu sélectionnez un nom d’utilisateur différent.");
+define("L_ERR_USR_28", "Votre accès à salon %s a été limité!<br />Merci d’en choisir un autre.");
 define("L_ERR_ROM_1", "Le nom d’un salon ne peut pas comporter des virgules ou des anti-slash (\\).");
 define("L_ERR_ROM_2", "Un mot interdit a été détecté dans le nom du salon que vous voulez créer.");
 define("L_ERR_ROM_3", "Ce salon existe déjà en tant que salon public.");
@@ -175,6 +177,8 @@ define("L_HLP", "Aide");
 define("L_MODERATOR", "%s est maintenant modérateur pour ce salon.");
 define("L_KICKED", "%s a été éjecté avec succès.");
 define("L_KICKED_REASON", "%s a été éjecté avec succès. (Raison: %s)");
+define("L_KICKED_ALL", "Tous les été éjecté avec succès.");
+define("L_KICKED_ALL_REASON", "Tous les été éjecté avec succès. (Raison: %s)");
 define("L_BANISHED", "%s a été exclu avec succès.");
 define("L_BANISHED_REASON", "%s a été exclu avec succès. (Raison: %s)");
 define("L_ANNOUNCE", "ANNONCE");
@@ -222,7 +226,7 @@ define("L_HELP_CMD_5", "Quitte le chat en affichant un message optionnel.");
 define("L_HELP_CMD_6", "Ignore l’affichage des messages d’un utilisateur si le pseudo existe.<br />Autorise l’affichage des messages d’un utilisateur lorsque le pseudo et \"-\" sont spécifiés, pour tous les utilisateurs lorsque \"-\" est spécifié seul.<br />Sans option, cette commande affiche une fenêtre avec tous les utilisateurs ignorés.");
 define("L_HELP_CMD_7", "Rappelle le dernier texte posté (commande ou message).");
 define("L_HELP_CMD_8", "Affiche/Cache l’heure devant les messages.");
-define("L_HELP_CMD_9", "Ejecte un utilisateur du chat. Cette commande est réservée aux modérateurs du salon ou à un administrateur.<br />De façon optionnelle, [".L_HELP_REASON."] affiche la raison de la déconnexion (texte libre).");
+define("L_HELP_CMD_9", "Ejecte un utilisateur du chat. Cette commande est réservée aux modérateurs du salon ou à un administrateur.<br />De façon optionnelle, [".L_HELP_REASON."] affiche la raison de la déconnexion (texte libre).<br />Si l’option * est utilisée, tous les utilisateurs sans pouvoirs seront éjectés.");
 define("L_HELP_CMD_10", "Envoie un message privé à l’utilisateur spécifié (les autres utilisateurs ne le verront pas).");
 define("L_HELP_CMD_11", "Affiche les informations pour l’utilisateur spécifié.");
 define("L_HELP_CMD_12", "Affiche la fenêtre d’édition du profil de l’utilisateur.");
@@ -292,18 +296,18 @@ define("L_WHOIS_REG", "Inscrit");
 define("L_WHOIS_BOT", "Robot");
 
 // Notification messages of user entrance/exit
-define("ENTER_ROM", "%s entre dans ce salon");
-define("L_EXIT_ROM", "%s sort de ce salon");
+define("ENTER_ROM", "%s entre dans ce salon.");
+define("L_EXIT_ROM", "%s sort de ce salon.");
 if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
 // Clean mod/fix by Ciprian
-define("L_BOOT_ROM", "%s a été automatiquement déconnecté de ce salon pour cause d’inactivité");
-define("L_CLOSED_ROM", "%s a fermé son navigateur");
+define("L_BOOT_ROM", "%s a été automatiquement déconnecté de ce salon pour cause d’inactivité.");
+define("L_CLOSED_ROM", "%s a fermé son navigateur.");
 
 // Text for /away command notification string:
-define("L_AWAY", "%s s’est éloigné de son ordinateur");
+define("L_AWAY", "%s s’est éloigné de son ordinateur...");
 define("L_BACK", "%s est de retour!");
 
 // Quick Menu mod
@@ -570,6 +574,7 @@ setlocale(LC_ALL, "fra_fra.UTF-8", "french.UTF-8", "french");
 } else {
 setlocale(LC_ALL, "fr_FR.UTF-8", "fr.UTF-8", "fr_FR.UTF-8@euro"); // For French formats
 }
+define("L_LANG", "fr_FR");
 define("ISO_DEFAULT", "iso-8859-1");
 define("WIN_DEFAULT", "windows-1252");
 define("L_SHORT_DATE", "%Y-%m-%d"); //Change this to your local desired date only format (keep the short form)
@@ -619,6 +624,7 @@ define("L_SKINS_TITLE", "Prévisualisation des thèmes");
 define("L_SKINS_TITLE1", "Prévisualisation des thèmes %s à %s"); // Skins 1 to 4 preview
 define("L_SKINS_AV", "Thèmes disponibles");
 define("L_SKINS_NONAV", "Il n’y a aucun style défini dans le répertoire \"skins\"");
+define("L_SKINS_COPY", "&copy; %s Thème par %s");
 
 // Swap image titles by Ciprian
 define("L_GEN_ICON", "Icône du genre (masculin/féminin)");
@@ -637,4 +643,16 @@ define("L_LOGIN_COUNT", "Nombre total de visites"); // number of logins (returni
 
 // Gravatar from email mod by Ciprian
 define("L_GRAV_USE", "utiliser le Gravatar");
+
+// Uploader mod by Ciprian - 11.08.2008
+define("L_UPLOAD", "Téléchargements %s"); // Upload Image, Upload Sound or Upload File
+define("L_UPLOAD_IMG", "Image"); // used to upload Avatars and /img command
+define("L_UPLOAD_SND", "Son"); // used to upload Buzz sounds
+define("L_UPLOAD_FLS", "Fichiers"); // used to upload multiple files at once
+define("L_UPLOAD_SUCCESS", "Le fichier %s a été uploadé avec succès sous %s."); // original filename, destination filename
+define("L_FILES_TITLE", "Gestion des téléchargements");
+
+// Room restriction mod by Ciprian
+define("L_RESTRICTED", "Restreint");
+define ( "L_RESTRICTED_ROM", "%s a été limité à partir de cette salon avec succès.");
 ?>

@@ -13,6 +13,8 @@ function RecursiveMkdir($path)
        }
 }
 
+//Full logs
+$done = 0;
 $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
 @mysql_query("SET CHARACTER SET utf8");
 mysql_query("SET NAMES 'utf8'");
@@ -29,16 +31,16 @@ $type = stripslashes($result["type"]);
 if ($type) $type = '<?php echo(L_SET_10); ?>'; else $type = '<?php echo(L_SET_11); ?>';
 $room = htmlspecialchars(stripslashes($result["room"]));
 $room = $room." (".$type.")";
+$username = htmlspecialchars(stripslashes($result["username"]));
 $roomfrom = htmlspecialchars(stripslashes($result["room_from"]));
 if ($roomfrom != "" && $roomfrom != $room) $room = $roomfrom."><br />".$room;
 $m_time = stripslashes($result["m_time"]);
 $time_posted = date('H:i:s (d)', $m_time + C_TMZ_OFFSET*60*60);
-$username = htmlspecialchars(stripslashes($result["username"]));
 $address = htmlspecialchars(stripslashes($result["address"]));
 if ($address != "" && $address != " *" && $username != "SYS welcome" && $username != "SYS topic" && $username != "SYS topic reset" && substr($username,0,8) != "SYS dice" && $username != "SYS image" && $username != "SYS room" && $username != $address) $toaddress = " to <b>".$address."</b>";
 $address = "<b>".$address."</b>";
 if ($username == "SYS welcome") $username = $address;
-if ($room == '*' || ($address == '<b> *</b>' && $username == "SYS announce")) $room = '<?php echo(L_ROOM_ALL); ?>';
+if ($room == "*" || ($username == "SYS room" && $address == "*") || $username == "SYS announce") $room = '<?php echo(L_ROOM_ALL); ?>';
 $message = stripslashes($result["message"]);
 $message = eregi_replace("<!-- UPDTUSRS //-->","",$message);
 $message = eregi_replace("src=images","src=./../../../images",$message);
@@ -183,11 +185,13 @@ $done = 1;
 $i = 0;
 }
 
+//Public logs
+$doneu = 0;
 $CondForQuery	= "(m_time<".(time() - C_MSG_DEL*60*60)." AND (address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3'))))";
 $sqlu = "SELECT * FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC";
 $queryu = mysql_query($sqlu) or die("Cannot query the database.<br />" . mysql_error());
 // Collect and store new messages
-$Messages = Array();
+$Messagesu = Array();
 $iu = 1;
 while($resultu = mysql_fetch_array($queryu))
 {
@@ -196,10 +200,17 @@ $time_postedu = date('H:i:s (d)', $m_timeu + C_TMZ_OFFSET*60*60);
 $roomu = htmlspecialchars(stripslashes($resultu["room"]));
 $usernameu = htmlspecialchars(stripslashes($resultu["username"]));
 $addressu = htmlspecialchars(stripslashes($resultu["address"]));
+// Restricted rooms mod by Ciprian
+if (is_array($DefaultDispChatRooms) && in_array($roomu." [R]",$DefaultDispChatRooms))
+{
+	if ($usernameu == "SYS announce") {}
+	elseif ($usernameu == "SYS room" && $addressu == "*") {}
+	else continue;
+}
 if ($addressu != "" && $addressu != " *" && $usernameu != "SYS welcome" && $usernameu != "SYS topic" && $usernameu != "SYS topic reset" && substr($usernameu,0,8) != "SYS dice" && $usernameu != "SYS image" && $usernameu != "SYS room" && $usernameu != $addressu) $toaddressu = " to <b>".$addressu."</b>";
 $addressu = "<b>".$addressu."</b>";
 if ($usernameu == "SYS welcome") $usernameu = $addressu;
-if ($roomu == '*' || ($addressu == '<b> *</b>' && $usernameu == "SYS announce")) $roomu = '<?php echo(L_ROOM_ALL); ?>';
+if ($roomu == "*" || ($usernameu == "SYS room" && $addressu == "*") || $usernameu == "SYS announce") $roomu = '<?php echo(L_ROOM_ALL); ?>';
 $messageu = stripslashes($resultu["message"]);
 $messageu = eregi_replace("<!-- UPDTUSRS //-->","",$messageu);
 $messageu = eregi_replace("src=images","src=./../../../images",$messageu);
@@ -242,7 +253,6 @@ elseif ($usernameu == "SYS topic reset")
 }
 elseif ($usernameu == "SYS image")
 {
-	$NewMsgu .= '<?php echo(L_PIC); ?> ';
 	$NewMsgu .= '<?php echo(L_PIC); ?> ';
 	$NewMsgu .= $addressu.": <A href=\"".$messageu."\" onMouseOver=\"window.status='";
 	$NewMsgu .= '<?php echo(sprintf(L_CLICK,L_FULLSIZE_PIC)) ?>.\'; return true" title="';

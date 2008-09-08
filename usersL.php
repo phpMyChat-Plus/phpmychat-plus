@@ -108,6 +108,20 @@ if (!function_exists('mb_convert_case'))
 	}
 };
 
+if (!function_exists("utf8_substr"))
+{
+	function utf8_substr($str,$start)
+	{
+	   preg_match_all("/./su", $str, $ar);
+	   if(func_num_args() >= 3) {
+	       $end = func_get_arg(2);
+	       return join("",array_slice($ar[0],$start,$end));
+	   } else {
+	       return join("",array_slice($ar[0],$start));
+	   }
+	};
+};
+
 // Special colors for usernames depending on users choise and status
 function userColor($type,$colorname)
 {
@@ -194,6 +208,10 @@ if (C_ENABLE_PM && C_PRIV_POPUP && !isset($allowpopupu))
 unset($email);
 unset($use_gravatar);
 unset($avatar);
+
+// Restricted rooms mod by Ciprian
+$res_init = utf8_substr(L_RESTRICTED, 0, 1);
+
 //** Build users list for the current room **
 if (C_DB_TYPE == 'mysql')
 {
@@ -223,7 +241,12 @@ else
 }
 
 $DbLink->query($currentRoomQuery);
-echo("<B>".htmlspecialchars(stripslashes($R))."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$DbLink->num_rows().")</SPAN><br />\n");
+// Restricted rooms mod by Ciprian
+
+$tmpDispR = $R;
+if (is_array($DefaultDispChatRooms) && in_array($R." [R]",$DefaultDispChatRooms)) $tmpDispR .= " [".$res_init."]";
+
+echo("<B>".htmlspecialchars(stripslashes($tmpDispR))."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$DbLink->num_rows().")</SPAN><br />\n");
 while(list($User, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup, $colorname, $avatar, $email, $use_gravatar) = $DbLink->next_record())
 {
 	echo("<DIV STYLE=\"margin-top: 1px\">\n");
@@ -239,8 +262,8 @@ while(list($User, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup,
 		 	require("plugins/gravatars/get_gravatar.php");
 		}
 		$ava_none = $avatar;
-    $ava_width = C_AVA_WIDTH;
-    $ava_height = C_AVA_HEIGHT;
+	    $ava_width = C_AVA_WIDTH;
+	    $ava_height = C_AVA_HEIGHT;
 		$avatar = "<img src=\"$avatar\" width=\"$ava_width\" height=\"$ava_height\" border=\"0\" alt=\"$title1\" title=\"$title1\">";
 		$ava_none = "<img src=\"$ava_none\" width=\"$ava_width\" height=\"$ava_height\" border=\"0\" alt=\"".L_NO_PROFILE."\" title=\"".L_NO_PROFILE."\">&nbsp;";
 	}
@@ -494,8 +517,16 @@ if($DbLink->num_rows() > 0)
 		if($OthersUsers->num_rows() > 0)
 		{
 			$notEmptyRooms[$Other] = 1;
+			// Restricted rooms mod by Ciprian
+			$tmpDispOther = $Other;
+			$tmpDispOtherRes = "";
+			if (is_array($DefaultDispChatRooms) && in_array($Other." [R]",$DefaultDispChatRooms))
+			{
+				$tmpDispOther .= " [".$res_init."]";
+				$tmpDispOtherRes = " (".L_RESTRICTED.")";
+			}
 			echo("<DIV style=\"margin-top: 1px;\">");
-			echo("<a href=\"$From?Ver=L&L=$L&U=".urlencode(stripslashes($U))."$AddPwd2Link&R1=".urlencode($Other)."&T=1&D=$D&N=$N&E=".urlencode(stripslashes($R))."&EN=$T\" TARGET=\"_parent\" onMouseOver=\"window.status='".L_JOIN_ROOM."'; return true;\" window.status='".L_JOIN_ROOM."' title=\"".L_JOIN_ROOM."\">".htmlspecialchars($Other)."</a><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$OthersUsers->num_rows().")</SPAN><br />\n");
+			echo("<a href=\"$From?Ver=L&L=$L&U=".urlencode(stripslashes($U))."$AddPwd2Link&R1=".urlencode($Other)."&T=1&D=$D&N=$N&E=".urlencode(stripslashes($R))."&EN=$T\" TARGET=\"_parent\" onMouseOver=\"window.status='".L_JOIN_ROOM.$tmpDispOtherRes."'; return true;\" title=\"".L_JOIN_ROOM.$tmpDispOtherRes."\">".htmlspecialchars($tmpDispOther)."</a><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$OthersUsers->num_rows().")</SPAN><br />\n");
 			echo("</DIV>\n");
 			while(list($OtherUser, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup, $colorname, $avatar, $email, $use_gravatar) = $OthersUsers->next_record())
 			{
@@ -698,12 +729,20 @@ $DbLink->close();
 for($k = 0; $k < count($DefaultChatRooms); $k++)
 {
 	$tmpRoom = stripslashes($DefaultChatRooms[$k]);
+	$tmpDispRoom = $tmpRoom;
+	$tmpDispRes = "";
+	// Restricted rooms mod by Ciprian
+	if (is_array($DefaultDispChatRooms) && in_array($tmpRoom." [R]",$DefaultDispChatRooms))
+	{
+		$tmpDispRoom .= " [".$res_init."]";
+		$tmpDispRes = " (".L_RESTRICTED.")";
+	}
 
 	// Display this room name when it hadn't been displayed yet
 	if (strcasecmp(mb_convert_case($tmpRoom,MB_CASE_LOWER,$Charset), mb_convert_case(stripslashes($R),MB_CASE_LOWER,$Charset)) != 0 && (!isset($notEmptyRooms) || !isset($notEmptyRooms[$tmpRoom])))
 	{
 		echo("<DIV style=\"margin-top: 1px;\">");
-		echo("<a href=\"$From?Ver=L&L=$L&U=".urlencode(stripslashes($U))."$AddPwd2Link&R0=".urlencode($tmpRoom)."&T=1&D=$D&N=$N&E=".urlencode(stripslashes($R))."&EN=$T\" TARGET=\"_parent\" onMouseOver=\"window.status='".L_JOIN_ROOM."'; return true;\" window.status='".L_JOIN_ROOM."' title=\"".L_JOIN_ROOM."\">".htmlspecialchars($tmpRoom)."</a><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(0)</SPAN><br />\n");
+		echo("<a href=\"$From?Ver=L&L=$L&U=".urlencode(stripslashes($U))."$AddPwd2Link&R0=".urlencode($tmpRoom)."&T=1&D=$D&N=$N&E=".urlencode(stripslashes($R))."&EN=$T\" TARGET=\"_parent\" onMouseOver=\"window.status='".L_JOIN_ROOM."'; return true;\" title=\"".L_JOIN_ROOM.$tmpDispRes."\">".htmlspecialchars($tmpDispRoom)."</a><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(0)</SPAN><br />\n");
 		echo("</DIV>\n");
    }
 }

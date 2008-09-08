@@ -8,6 +8,17 @@ if (isset($_GET))
 	};
 };
 
+// Get the names and values for post vars
+if (isset($_POST))
+{
+	while(list($name,$value) = each($_POST))
+	{
+		$$name = $value;
+	};
+};
+
+if (!isset($ChatPath)) $ChatPath = "";
+
 // Fix some security holes
 if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
 if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) exit();
@@ -16,10 +27,19 @@ if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //adde
 if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 
 require("./${ChatPath}config/config.lib.php");
+require("./${ChatPath}lib/database/".C_DB_TYPE.".lib.php");
 require("./${ChatPath}localization/languages.lib.php");
 require("./${ChatPath}localization/".$L."/localized.admin.php");
 require("./${ChatPath}localization/".$L."/localized.chat.php");
 require("./${ChatPath}lib/release.lib.php");
+
+/*
+// Login stuff
+// Var used in the login.lib.php script required below
+$MUST_BE_ADMIN = true;
+if ($_SESSION["adminlogged"] != "1") require("./lib/login.lib.php");
+if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
+*/
 
 // Special cache instructions for IE5+
 $CachePlus	= "";
@@ -43,6 +63,11 @@ if (get_magic_quotes_gpc()) {
 	foreach($_COOKIE as $k=>$v)
 		$_COOKIE[$k] = stripslashes($v);
 }
+
+// Get the name of the current script;
+if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER["PHP_SELF"];
+//$From = basename($PHP_SELF)."?L=$L&pmc_username=$pmc_username&pmc_password=$PWD_Hash";
+$From = basename($PHP_SELF)."?L=$L";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
@@ -68,70 +93,70 @@ if (!function_exists('mb_convert_case'))
 
 function styles_count()
 {
-		$skins = 'skins/';
-		$skinfiles = opendir($skins); #open directory
-				$i = 0;
-				while (false !== ($skinfile = readdir($skinfiles)))
-				{
-					if (!eregi('\.html',$skinfile) && !eregi('\.css',$skinfile) && $skinfile!=='.' && $skinfile!=='..')
-					{
-			 		$i++;
-			 		}
-			 	}
-				closedir($skinfiles);
-				return $i;
+	$skins = 'skins/';
+	$skinfiles = opendir($skins); #open directory
+	$i = 0;
+	while (false !== ($skinfile = readdir($skinfiles)))
+	{
+		if (!eregi('\.html',$skinfile) && !eregi('\.css',$skinfile) && !is_dir($skinfile) && $skinfile!=='.' && $skinfile!=='..')
+		{
+			$i++;
+		}
+	}
+	closedir($skinfiles);
+	return $i;
 };
 
 function styles_files()
 {
-		$skins = 'skins/';
-		$skinfiles = opendir($skins); #open directory
-				$i = 0;
-				while (false !== ($skinfile = readdir($skinfiles)))
-				{
-					if (!eregi('\.html',$skinfile) && !eregi('\.css',$skinfile) && $skinfile!=='.' && $skinfile!=='..')
-					{
-						$skinsfile[]=$skinfile;
-			 		$i++;
-			 		}
-			 	}
-				closedir($skinfiles);
-				if ($skinsfile)
-				{
-				  	natsort($skinsfile);
-				}
-				return $skinsfile;
+	$skins = 'skins/';
+	$skinfiles = opendir($skins); #open directory
+	$i = 0;
+	while (false !== ($skinfile = readdir($skinfiles)))
+	{
+		if (!eregi('\.html',$skinfile) && !eregi('\.css',$skinfile) && !is_dir($skinfile) && $skinfile!=='.' && $skinfile!=='..')
+		{
+			$skinsfile[]=$skinfile;
+	 		$i++;
+			}
+	}
+	closedir($skinfiles);
+	if ($skinsfile)
+	{
+		natsort($skinsfile);
+	}
+	return $skinsfile;
 };
 
 function skin_preview($startStyle)
 {
-				$skinsfile = styles_files();
-				$j = 1;
-				$what = "";
-				foreach ($skinsfile as $skinname)
-				{
-					$skinno = "";
-					$skinno = eregi_replace("style","",$skinname);
-					$skinno = eregi_replace(".php","",$skinno);
-					if (($skinno >= $startStyle) && ($skinno < ($startStyle+4)))
-					{
-						if ($startStyle % 2 != 0)
-						{
-							if($j & 1) $what .= '<tr>';
-						}
-						elseif($j % 2 == 0) $what .= '<tr>';
-						$what .= "<td><iframe name=\"Skin".$skinno."\" id=\"Skin".$skinno."\" width=\"360\" height=\"295\" scroll=\"yes\" frameborder=\"yes\" src=\"styles_preview.php?no=".$skinno."\"></iframe></td>";
-						if ($startStyle % 2 != 0)
-						{
-							if($j % 2 == 0) $what .= '</tr>';
-						}
-						elseif($j & 1) $what .= '<tr>';
-					}
-					$j++;
-//					$j++;
-				}
-		unset($skinsfile);
-		echo($what);
+	global $L;
+	$skinsfile = styles_files();
+	$j = 1;
+	$what = "";
+	foreach ($skinsfile as $skinname)
+	{
+		$skinno = "";
+		$skinno = eregi_replace("style","",$skinname);
+		$skinno = eregi_replace(".php","",$skinno);
+		if (($skinno >= $startStyle) && ($skinno < ($startStyle+4)))
+		{
+			if ($startStyle % 2 != 0)
+			{
+				if($j & 1) $what .= '<tr>';
+			}
+			elseif($j % 2 == 0) $what .= '<tr>';
+			$what .= "<td><iframe name=\"Skin".$skinno."\" id=\"Skin".$skinno."\" width=\"360\" height=\"300\" scroll=\"yes\" frameborder=\"yes\" src=\"styles_preview.php?L=".$L."&no=".$skinno."\"></iframe></td>";
+			if ($startStyle % 2 != 0)
+			{
+				if($j % 2 == 0) $what .= '</tr>';
+			}
+			elseif($j & 1) $what .= '<tr>';
+		}
+		$j++;
+	}
+	unset($skinsfile);
+	return $what;
 };
 
 // Horizontal alignement for cells topic and gifs names
@@ -164,7 +189,7 @@ else
 	$startStyleBegin = $startStyle;
 	$startStyleNext = $startStyle + 3;
 	$startStyleText = sprintf(L_SKINS_TITLE1,$startStyleBegin,$startStyleNext);
-	}
+};
 ?>
 
 <SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
@@ -173,7 +198,7 @@ else
 function jump_Page()
 {
 valJump=(document.PageSelect.PageJump.options[document.PageSelect.PageJump.selectedIndex].text-1) * 4 + 1;
-document.location = '<?php echo("?L=$L&startStyle="); ?>'+valJump;
+document.location = '<?php echo($From."&startStyle="); ?>'+valJump;
 }
 // -->
 </SCRIPT>
@@ -185,9 +210,10 @@ if (is_numeric($styles_count) && $styles_count > 0)
 {
 ?>
 	<TABLE CLASS=title BORDER=0 CELLPADDING=5 CELLSPACING=10>
-<?php skin_preview($startStyle); ?>
+	<?php echo (skin_preview($startStyle)); ?>
 	</TABLE>
 		<!-- Navigation cells at the footer -->
+		<FORM name="PageSelect">
 		<TABLE BORDER=0 CELLPADDING=5 CELLSPACING=0 CLASS="tabtitle" WIDTH=100%>
 		<TR>
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN=CENTER WIDTH=70 HEIGHT=20 CLASS=tabtitle>
@@ -200,8 +226,8 @@ if (is_numeric($styles_count) && $styles_count > 0)
 				$downStyle = $startStyle - 4;
 				if ($downStyle <= 0) $downStyle = 1;
 				?>
-				&nbsp;<A HREF="<?php echo("?L=$L&startStyle=1"); ?>"><IMG SRC="images/admin/<?php echo($BeginGif); ?>" HEIGHT=20 WIDTH=21 BORDER=0></A>
-				&nbsp;&nbsp;&nbsp;<A HREF="<?php echo("?L=$L&startStyle=$downStyle"); ?>"><IMG SRC="images/admin/<?php echo($DownGif); ?>" HEIGHT=20 WIDTH=20 BORDER=0></A>
+				&nbsp;<A HREF="<?php echo($From."&startStyle=1"); ?>"><IMG SRC="images/admin/<?php echo($BeginGif); ?>" HEIGHT=20 WIDTH=21 BORDER=0></A>
+				&nbsp;&nbsp;&nbsp;<A HREF="<?php echo($From."&startStyle=$downStyle"); ?>"><IMG SRC="images/admin/<?php echo($DownGif); ?>" HEIGHT=20 WIDTH=20 BORDER=0></A>
 				<?php
 			}
 			else
@@ -222,19 +248,18 @@ if (is_numeric($styles_count) && $styles_count > 0)
 			{
 ?>
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN=CENTER WIDTH=30 HEIGHT=20 CLASS=tabtitle>
-			<?php
-			echo "<form name=\"PageSelect\">";
-			echo "<select name=\"PageJump\" onChange=\"jump_Page()\">";
-				$i=1;
-				while ($i <= $PagesCount)
-				{
-					echo "<option value=\"$i\"";
-					if ($i==$PageNum) echo " selected";
-					echo ">$i</option>";
-		        $i++;
-				}
-		        echo "</select></form>";
-?>
+					<select name="PageJump" onChange="jump_Page()">
+					<?php
+					$i=1;
+					while ($i <= $PagesCount)
+					{
+						echo "<option value=\"$i\"";
+						if ($i==$PageNum) echo " selected";
+						echo ">$i</option>";
+			        $i++;
+					}
+					?>
+			    </select>
 			</TD>
 <?php
 			}
@@ -245,8 +270,8 @@ if (is_numeric($styles_count) && $styles_count > 0)
 			{
 				$upStyle = $startStyle + 4;
 				?>
-				&nbsp;<A HREF="<?php echo("?L=$L&startStyle=$upStyle"); ?>"><IMG SRC="images/admin/<?php echo($UpGif); ?>" HEIGHT=20 WIDTH=20 BORDER=0></A>
-				&nbsp;&nbsp;&nbsp;<A HREF="<?php echo("?L=$L&startStyle=$lastPage_startStyle"); ?>"><IMG SRC="images/admin/<?php echo($EndGif); ?>" HEIGHT=20 WIDTH=21 BORDER=0></A>
+				&nbsp;<A HREF="<?php echo($From."&startStyle=$upStyle"); ?>"><IMG SRC="images/admin/<?php echo($UpGif); ?>" HEIGHT=20 WIDTH=20 BORDER=0></A>
+				&nbsp;&nbsp;&nbsp;<A HREF="<?php echo($From."&startStyle=$lastPage_startStyle"); ?>"><IMG SRC="images/admin/<?php echo($EndGif); ?>" HEIGHT=20 WIDTH=21 BORDER=0></A>
 				<?php
 			}
 			else
@@ -257,6 +282,7 @@ if (is_numeric($styles_count) && $styles_count > 0)
 			</TD>
 		</TR>
 		</TABLE>
+		</FORM>
 <?php
 }
 else
@@ -270,8 +296,8 @@ else
 <?php
 };
 ?>
-</center>
 <div align="right"><span dir="LTR" style="font-weight: 600; color:#FFD700; font-size: 7pt">
 &copy; 2008<?php echo((date('Y')>"2008") ? "-".date('Y') : ""); ?> - by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>.'; return true;" title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>" target=_blank>Ciprian Murariu</a></span></div>
+</center>
 </body>
 </html>

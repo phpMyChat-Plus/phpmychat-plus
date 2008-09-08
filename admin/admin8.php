@@ -16,6 +16,10 @@ if (!isset($sort_order)) $sort_order = isset($CookieUserSort) ? $CookieUserSort 
 if ($sort_order == "1")	$ordquery = "u.username";
 else $ordquery = "u.r_time";
 
+// Restricted room mod by Ciprian
+$res_init = utf8_substr(L_RESTRICTED, 0, 1);
+$disp_note = 0;
+
 function special_char($str,$lang)
 {
 	return ($lang ? htmlentities(stripslashes($str)) : htmlspecialchars(stripslashes($str)));
@@ -50,7 +54,7 @@ function user_status($name,$stat,$ghost,$superghost)
 function display_connected($Private,$Full,$String1,$String2,$Charset)
 {
 	$List = "";
-	global $ordquery;
+	global $ordquery, $DefaultDispChatRooms, $res_init, $disp_note;
 	if ($Private)
 	{
 		$query = "SELECT DISTINCT u.username, u.latin1, u.room, u.r_time, u.ip, u.status FROM ".C_USR_TBL." u ORDER BY $ordquery";
@@ -75,6 +79,11 @@ function display_connected($Private,$Full,$String1,$String2,$Charset)
 			echo($String1."<br />");
 			while(list($UserU,$Latin1U,$RoomU,$RTime,$IP,$Status) = $DbLink->next_record())
 			{
+				if (is_array($DefaultDispChatRooms) && in_array($RoomU." [R]",$DefaultDispChatRooms))
+				{
+					$RoomU .= " [".$res_init."]";
+					$disp_note = 1;
+				}
 				if ($Latin1) $UserU = htmlentities($UserU);
 				$ghost = 0;
 				$superghost = 0;
@@ -104,6 +113,11 @@ function display_connected($Private,$Full,$String1,$String2,$Charset)
 			echo($NbUsers." ".NB_USERS_IN."<br />");
 			while(list($UserU,$Latin1U,$RoomU,$RTime,$IP,$Status) = $DbLink->next_record())
 			{
+				if (is_array($DefaultDispChatRooms) && in_array($RoomU." [R]",$DefaultDispChatRooms))
+				{
+					$RoomU .= " [".$res_init."]";
+					$disp_note = 1;
+				}
 				if ($Latin1U) $UserU = htmlentities($UserU);
 				$ghost = 0;
 				$superghost = 0;
@@ -151,9 +165,22 @@ if($DbLink->num_rows() > 0)
 	{
 		$Message = stripslashes($Message);
 		if ($Type) $Type = L_SET_10; else $Type = L_SET_11;
-		$Room = $Room." (".$Type.")";
-		if ($Room == '*' || ($Dest == ' *' && $User == "SYS announce")) $Room = L_ROOM_ALL;
-		if ($RoomFrom != "" && $RoomFrom != $Room) $Room = $RoomFrom."><br />>".$Room;
+		if ($Room == '*' || ($User == "SYS room" && $Dest == '*') || $User == "SYS announce") $Room = L_ROOM_ALL;
+		else
+		{
+			if (is_array($DefaultDispChatRooms) && in_array($Room." [R]",$DefaultDispChatRooms))
+			{
+				$Room .= " [".$res_init."]";
+				$disp_note = 1;
+			}
+			$Room .= " (".$Type.")";
+		}
+		if (is_array($DefaultDispChatRooms) && in_array($RoomFrom." [R]",$DefaultDispChatRooms))
+		{
+			$RoomFrom .= " [".$res_init."]";
+			$disp_note = 1;
+		}
+		if ($RoomFrom != "" && $RoomFrom != $Room && $RoomFrom != $Room." [R]") $Room = $RoomFrom."><br />>".$Room;
 		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
 		{
 			$Message = eregi_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$Message);
@@ -311,7 +338,7 @@ $closetime = $time-15;
 //Database-Connect
 $handler = @mysql_connect(C_DB_HOST,C_DB_USER,C_DB_PASS);
 @mysql_query("SET CHARACTER SET utf8");
-mysql_query("SET NAMES 'utf8'"); 
+mysql_query("SET NAMES 'utf8'");
 @mysql_select_db(C_DB_NAME,$handler);
 
 //Database-Commands
@@ -364,6 +391,9 @@ while($data = @mysql_fetch_array($result))
 		<td VALIGN=CENTER ALIGN=CENTER nowrap=\"nowrap\"><b>".A_FROM_TO."</b></td>
 		<td VALIGN=CENTER ALIGN=CENTER nowrap=\"nowrap\"><b>".A_CHTEX_MSG."</b></td></tr>");
 	}
-	echo($MessagesString."</table><br />");
+	echo($MessagesString."</table>");
 	unset($MessagesString);
+	if($disp_note) echo("<table WIDTH=100%><tr valign=top><td colspan=4 align=left CLASS=small>[".$res_init."] = ".L_RESTRICTED.".</td></tr></table>");
 ?>
+<br /><P align="right"><div align="right"><span dir="LTR" style="font-weight: 600; color:#FFD700; font-size: 7pt">
+&copy; 2006-<?php echo(date('Y')); ?> - by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>.'; return true;" title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>" target=_blank>Ciprian Murariu</a></span></div>

@@ -1,5 +1,5 @@
 <?php
-// File : english/localized.tutorial.php - plus version (10.04.2008 - rev.9)
+// File : english/localized.tutorial.php - plus version (26.08.2008 - rev.10)
 // Original translation by Sharif Islam <mislam@students.uiuc.edu> & Jessica Gibson <oram@uiuc.edu> & Dean Collins <joelford@pacbell.net>
 // Original translation for Plus version by Pierre Liget <sourceforge@pliget.freesurf.fr> 10.12.2007
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -679,6 +679,8 @@ There is another useful announcement like command for role-playing chats; the ad
 Moderators can kick a user and the administrator can kick a user or a moderator with the <B>kick command</B>. Except for the administrator, the user to be kicked must be in the current room.
 <P>
 <I>For example</I>, if Jack is the name of the user to kick away: <I>/kick Jack</I> or <I>/kick Jack reason of kicking</I>. The "reason of kicking" can be any text e.g. "for spamming!"
+<P>
+If * option is used (<I>/kick * <?php echo(L_HELP_REASON); ?></I>), the command will kick out from chat all the users without powers (only guests and registered users). This is useful when the server connection is having problems and all the people should reload their chat. In this second case, <I><?php echo(L_HELP_REASON); ?></I> is recommended to let users know why they’ve been kicked.
 <br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 <P>
 <hr />

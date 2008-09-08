@@ -1,5 +1,5 @@
 <?php
-// File : swedish/localized.chat.php - plus version (18.06.2008 - rev.40)
+// File : swedish/localized.chat.php - plus version (11.08.2008 - rev.41)
 // Original file by Martin Edelius <martin.edelius@spirex.se>
 // Updates, corrections and additions for the Plus version by Heikki <heikki@yttervik.be> & Fimpen Högström <fimpen@relative-work.se>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -99,7 +99,7 @@ define("L_REG_50", "Registeringen upphört!");
 define("L_EMAIL_VAL_1", "Dina inställningar till chatten");
 define("L_EMAIL_VAL_2", "Välkommen till Chatten.");
 define("L_EMAIL_VAL_Err", "Server fel, kontakta Chatadmin: <a href=\"mailto:%s\">%s</a>.");
-define("L_EMAIL_VAL_Done", "Ditt lösenord har skickat till din e-post adress.<br />Du kan ändra ditt lösenord vid inloggnings sida under redigera din profil.");
+define("L_EMAIL_VAL_Done", "Ditt lösenord har skickat till din e-post adress.<br />Du kan ändra ditt lösenord vid inloggnings sida under \"".L_REG_4."\".");
 define("L_EMAIL_VAL_PENDING_Done", "Dina registrerade data är inlagda för kontroll.");
 define("L_EMAIL_VAL_PENDING_Done1", "Du kommer få ditt lösenord efter att ditt konto blivit godkänt av Administratören.");
 define("L_EMAIL_VAL_3", "Ditt konto ligger för godkänande %s");
@@ -113,7 +113,7 @@ define("L_EMAIL_VAL_6", "Registrerad hos %s");
 define("L_EMAIL_VAL_61", "Uppdaterat på %s");
 define("L_EMAIL_VAL_7", "Nedan är dina uppdaterade kontouppgifter för %s:"); //username
 define("L_EMAIL_VAL_8", "Spara detta mailet för framtida behov.\nViktigt är också att du ser till att de inte kommer på villovägar/eller att du delar ut dem.\nTack, för att du anslutit dig, lycka till!");
-
+define("L_EMAIL_VAL_81", "Du kan ändra ditt lösenord vid inloggnings sida under \"".L_REG_4."\".");
 
 // admin stuff
 define("L_ADM_1", "%s är inte längre moderator för detta rum.");
@@ -294,18 +294,18 @@ define("L_WHOIS_REG", "Registerad");
 define("L_WHOIS_BOT", "Bot");
 
 // Notification messages of user entrance/exit
-define("ENTER_ROM", "%s kom till rummet");
-define("L_EXIT_ROM", "%s lämnar rummet");
+define("ENTER_ROM", "%s kom till rummet.");
+define("L_EXIT_ROM", "%s lämnar rummet.");
 if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
 // Clean mod/fix by Ciprian
-define("L_BOOT_ROM", "%s har automatiskt blivit utslängd från detta rum för overksamhet");
-define("L_CLOSED_ROM", "%s har stängd webläsaren");
+define("L_BOOT_ROM", "%s har automatiskt blivit utslängd från detta rum för overksamhet.");
+define("L_CLOSED_ROM", "%s har stängd webläsaren.");
 
 // Text for /away command notification string:
-define("L_AWAY", "%s är bort markerad");
+define("L_AWAY", "%s är bort markerad...");
 define("L_BACK", "%s är tillbaka!");
 
 // Quick Menu mod
@@ -564,6 +564,7 @@ setlocale(LC_ALL, "sve.UTF-8", "swedish.UTF-8", "swedish");
 } else {
 setlocale(LC_ALL, "sv_SE.UTF-8", "sv_SE.UTF-8@euro", "swedish.UTF-8", "sve.UTF-8", "sv.UTF-8", "sve_sve.UTF-8");
 }
+define("L_LANG", "sv_SE");
 define("ISO_DEFAULT", "iso-8859-1");
 define("WIN_DEFAULT", "windows-1252");
 define("L_SHORT_DATE", "%Y-%m-%d"); //Change this to your local desired date only format (keep the short form)

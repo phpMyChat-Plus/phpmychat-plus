@@ -159,7 +159,7 @@ if ($count_BanUsers != 0)
 					<INPUT type=checkbox name="delete_<?php echo($usrHash)?>" value="1">
 				</TD>
 				<TD VALIGN=CENTER ALIGN="<?php echo($CellAlign); ?>">
-					<?php echo(special_char($username,$Latin1)); ?>
+					<B><?php echo(special_char($username,$Latin1)); ?></B>
 				</TD>
 				<TD VALIGN=CENTER ALIGN=CENTER>
 					<?php echo($ip); ?>
@@ -217,6 +217,7 @@ if ($count_BanUsers != 0)
 		</FORM>
 
 		<!-- Navigation cells at the footer -->
+		<FORM name="PageSelect">
 		<TABLE BORDER=0 CELLPADDING=5 CELLSPACING=0 CLASS="tabletitle" WIDTH=100%>
 		<TR>
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN=CENTER WIDTH=70 HEIGHT=20 CLASS=tabtitle>
@@ -252,7 +253,6 @@ if ($count_BanUsers != 0)
 			?>
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN=CENTER HEIGHT=20 CLASS=tabtitle>
 			<?php
-			print "<form name=\"PageSelect\">\n";
 			print "<select name=\"PageJump\" onChange=\"jump_Page()\">\n";
 				$i=1;
 				while ($i <= $PagesCount)
@@ -262,7 +262,7 @@ if ($count_BanUsers != 0)
 					print ">$i</option>\n";
 		        $i++;
 				}
-		        print "</select>\n</form>\n";
+		        print "</select>\n";
 			?>
 			</TD>
 			<?php
@@ -286,9 +286,9 @@ if ($count_BanUsers != 0)
 			</TD>
 		</TR>
 		</TABLE>
+		</FORM>
 	</TD>
 </TR>
-
 <?php
 }
 else
@@ -302,8 +302,6 @@ else
 <?php
 };
 ?>
-
 </TABLE>
-
 <?php
 ?>

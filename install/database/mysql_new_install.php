@@ -320,6 +320,12 @@ CREATE TABLE ".$t_config." (
  GRAVATARS_RATING enum('G','PG','R','X','ANY') NOT NULL default 'G',
  GRAVATARS_DYNAMIC_DEF enum('identicon','monsterid','wavatar') default 'monsterid',
  GRAVATARS_DYNAMIC_DEF_FORCE enum('0','1') NOT NULL default '0',
+ ALLOW_UPLOADS enum('0','1') NOT NULL default '0',
+ RES_ROOM1 enum('0','1') NOT NULL default '0',
+ RES_ROOM2 enum('0','1') NOT NULL default '0',
+ RES_ROOM3 enum('0','1') NOT NULL default '0',
+ RES_ROOM4 enum('0','1') NOT NULL default '0',
+ RES_ROOM5 enum('0','1') NOT NULL default '0',
  PRIMARY KEY (ID)
 ) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
@@ -392,6 +398,7 @@ CREATE TABLE ".$t_reg_users." (
  last_login int(11) NOT NULL default '0',
  login_counter bigint(20) NOT NULL default '0',
  use_gravatar enum('0','1') NOT NULL default '0',
+ join_room varchar(5) NOT NULL default '',
  PRIMARY KEY (cid),
  UNIQUE KEY username (username)
 ) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

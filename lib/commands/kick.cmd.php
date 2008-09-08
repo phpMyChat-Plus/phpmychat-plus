@@ -21,7 +21,8 @@ function room_in($what, $in, $Charset)
 	return false;
 }
 
-if ($Cmd[1] != "*") $UU = $Cmd[1];
+$UU = $Cmd[1];
+
 // Check for invalid characters
 if (ereg("[\, \']", stripslashes($UU)))
 {
@@ -46,7 +47,7 @@ else
 		}
 		else
 		{
-			if ($UU != "")
+			if ($UU != "*" && $UU != "")
 			{
 				// Define an additional condition for moderators so they can only kick an user from their current room
 				$Query4Moder = (($perms != "admin" && $perms != "topmod") ? "room='$R' AND " : "");
@@ -80,16 +81,23 @@ else
 						}
 						$IsCommand = true;
 						$RefreshMessages = true;
-						$CleanUsrTbl = 1;
 					}
 				}
 			}
-			else
+			elseif ($UU == "*")
 			{
 				$DbLink->query("UPDATE ".C_USR_TBL." SET u_time='".time()."', status='k' WHERE username!='$U'");
+				if ($Cmd[2] != "")
+				{
+					$Reason = trim($Cmd[2]);
+					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_KICKED_ALL_REASON, \"".$Reason."\")', '', '')");
+				}
+				else
+				{
+					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'L_KICKED_ALL', '', '')");
+				}
 				$IsCommand = true;
 				$RefreshMessages = true;
-				$CleanUsrTbl = 1;
 			};
 		};
 	};

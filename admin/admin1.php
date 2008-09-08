@@ -17,9 +17,9 @@ if (isset($FORM_SEND) && $FORM_SEND == 1)
 	$BANISH_MODE = (stripslashes($submit_type) == A_SHEET1_9)? 1:0;
 
 	// Get the list of the users
-	$DbLink->query("SELECT username,perms FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND username != '$pmc_username'");
+	$DbLink->query("SELECT username,perms,join_room FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND username != '$pmc_username'");
 	$users = Array();
-	while (list($username, $perms) = $DbLink->next_record())
+	while (list($username, $perms, $join_room) = $DbLink->next_record())
 	{
 		$users[] = $username;
 	}
@@ -86,11 +86,13 @@ if (isset($FORM_SEND) && $FORM_SEND == 1)
 		{
 			$VarName = "perms_".$usrHash; $ppp = $$VarName;
 			$VarName = "rooms_".$usrHash; $rrr = $$VarName;
+			$VarName = "join_room_".$usrHash; $join_rrr = $$VarName;
 			$VarName = "old_perms_".$usrHash; $old_ppp = $$VarName;
 			$VarName = "old_rooms_".$usrHash; $old_rrr = $$VarName;
-			if ($ppp == $old_ppp && $rrr == $old_rrr) continue;
+			$VarName = "old_join_room_".$usrHash; $old_join_rrr = $$VarName;
+			if ($ppp == $old_ppp && $rrr == $old_rrr && $join_rrr == $old_join_rrr) continue;
 			$uuu = addslashes($username);
-			$DbLink->query("UPDATE ".C_REG_TBL." SET perms='$ppp', rooms='$rrr' WHERE username='$uuu'");
+			$DbLink->query("UPDATE ".C_REG_TBL." SET perms='$ppp', rooms='$rrr', join_room='$join_rrr' WHERE username='$uuu'");
 			$DbLink->query("SELECT room FROM ".C_USR_TBL." WHERE username='$uuu' LIMIT 1");
 			$in_room = ($DbLink->num_rows() != 0);
 			if ($in_room)
@@ -209,15 +211,11 @@ document.location = '<?php echo("$From?$URLQueryBody_MoveLinks&startReg="); ?>'+
 }
 // -->
 </SCRIPT>
-
 <P CLASS=title><?php echo(A_SHEET1_1); ?></P>
-
 <?php
 if (isset($Warning) && $Warning != "") echo("<P CLASS=\"success\">$Warning</SPAN></P><br />\n");
 ?>
-
 <TABLE ALIGN=CENTER BORDER=0 CELLPADDING=3 CLASS="table">
-
 <?php
 // Ensure at least one registered user exist (except the logged in administrator) before displaying the modify status
 $DbLink->query("SELECT COUNT(*) FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND username != '$pmc_username' LIMIT 1");
@@ -260,6 +258,9 @@ if ($count_RegUsers != 0)
 			<TD VALIGN=CENTER ALIGN=CENTER CLASS=tabtitle>
 				<?php echo(A_SHEET1_4)?> *
 			</TD>
+			<TD VALIGN=CENTER ALIGN=CENTER CLASS=tabtitle>
+				<A HREF="<?php echo("$From?$URLQueryBody_SortLinks&sortBy=join_room"); if ($sortBy == "join_room") echo("&sortOrder=$New_sortOrder"); ?>"><?php echo(A_SHEET1_13); ?></A> **
+			</TD>
 		</TR>
 
 		<?php
@@ -274,11 +275,11 @@ if ($count_RegUsers != 0)
 		elseif (C_DB_TYPE == "pgsql") $limits = " LIMIT 10 OFFSET $startReg";
 		else $limits = "";
 
-		$DbLink->query("SELECT username,latin1,perms,rooms,reg_time,ip,login_counter FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND username != '$pmc_username' ORDER BY $sortBy $sortOrder".$limits);
+		$DbLink->query("SELECT username,latin1,perms,rooms,reg_time,ip,login_counter,join_room FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND username != '$pmc_username' ORDER BY $sortBy $sortOrder".$limits);
 		$bannished_user = "";
 		$bannished_ip = "";
 		$DbLinkban = new DB;
-		while (list($username,$Latin1,$perms,$rooms,$lastTime,$IP,$login_counter) = $DbLink->next_record())
+		while (list($username,$Latin1,$perms,$rooms,$lastTime,$IP,$login_counter,$join_room) = $DbLink->next_record())
 		{
 	   $DbLinkban->query("SELECT username,reason FROM ".C_BAN_TBL." WHERE username='$username' LIMIT 1");
 	   list($Nb,$reason) = $DbLinkban->next_record();
@@ -290,6 +291,10 @@ if ($count_RegUsers != 0)
 	   $DbLinkban->clean_results();
 	   if ($reasonIP != "") $reasonIP = " (".L_HELP_REASON.": ".$reasonIP.")";
 	   if ($NbIP) $bannished_ip = "&nbsp;<img src=images/bannished.gif alt='".A_MENU_21.$reasonIP."' title='".A_MENU_21.$reasonIP."'>";
+		// Restricted rooms mod by Ciprian
+		$enab_init = utf8_substr(L_ENABLED, 0, ($L == 'serbian_latin') ? '2' : '1');
+		$disab_init = utf8_substr(L_DISABLED, 0, ($L == 'serbian_latin') ? '2' : '1');
+		$res_init = utf8_substr(L_RESTRICTED, 0, 1);
 			$usrHash = md5($username);
 			?>
 			<TR>
@@ -298,16 +303,16 @@ if ($count_RegUsers != 0)
 					<INPUT type=checkbox name="selected_<?php echo($usrHash)?>" value="1">
 				</TD>
 				<TD VALIGN=CENTER ALIGN="<?php echo($CellAlign); ?>">
-					<?php echo(special_char($username,$Latin1)."".$bannished_user);?>
+					<B><?php echo(special_char($username,$Latin1)."".$bannished_user);?></B>
 				</TD>
 				<TD VALIGN=CENTER ALIGN=CENTER>
-					<?php echo($login_counter);?>
+					<FONT size=-2><?php echo($login_counter);?></FONT>
 				</TD>
 				<TD VALIGN=CENTER ALIGN="<?php echo($CellAlign); ?>">
-					<?php echo(date("M j, Y - h:i a",$lastTime + C_TMZ_OFFSET*60*60));?>
+					<FONT size=-2><?php echo(date("M j, Y - h:i a",$lastTime + C_TMZ_OFFSET*60*60));?></FONT>
 				</TD>
 				<TD VALIGN=CENTER ALIGN=CENTER>
-					<?php echo($IP."".$bannished_ip); ?>
+					<FONT size=-2><?php echo($IP."".$bannished_ip); ?></FONT>
 				</TD>
 				<TD VALIGN=CENTER ALIGN=CENTER>
 					<SELECT name="perms_<?php echo($usrHash)?>">
@@ -316,11 +321,23 @@ if ($count_RegUsers != 0)
 						<OPTION value="topmod"<?php if($perms=="topmod") echo(" SELECTED")?>><?php echo(A_TOPMOD)?></OPTION>
 						<OPTION value="admin"<?php if($perms=="admin") echo(" SELECTED")?>><?php echo(A_ADMIN)?></OPTION>
 					</SELECT>
-					<INPUT type="hidden" name="old_perms_<?php echo($usrHash)?>" value="<?echo($perms)?>">
+					<INPUT type="hidden" name="old_perms_<?php echo($usrHash)?>" value="<?php echo($perms)?>">
 				</TD>
 				<TD VALIGN=CENTER ALIGN=CENTER>
-					<INPUT type=text name="rooms_<?php echo($usrHash)?>" value="<?php echo(stripslashes(htmlspecialchars($rooms)))?>" SIZE="40" onChange="reset_perms('<?php echo($usrHash)?>');">
+					<INPUT type=text name="rooms_<?php echo($usrHash)?>" value="<?php echo(stripslashes(htmlspecialchars($rooms)))?>" SIZE="15" onChange="reset_perms('<?php echo($usrHash)?>');">
 					<INPUT type="hidden" name="old_rooms_<?php echo($usrHash)?>" value="<?php echo(htmlspecialchars($rooms))?>">
+				</TD>
+				<TD VALIGN=CENTER ALIGN=CENTER>
+					<SELECT name="join_room_<?php echo($usrHash)?>"<?php if($perms=="admin" || $perms=="topmod") echo(" DISABLED")?>>
+						<OPTION value=""<?php if($join_room=="") echo(" SELECTED")?>><?php echo(A_SHEET1_14)?></OPTION>
+						<OPTION value="*"<?php if($join_room=="*") echo(" SELECTED")?>><?php echo(A_SHEET1_15)?></OPTION>
+						<OPTION value="ROOM1"<?php if($join_room=="ROOM1") echo(" SELECTED")?>><?php echo(ROOM1.($EN_ROOM1 ? " [".$enab_init."]" : " [".$disab_init."]").($RES_ROOM1 ? " [".$res_init."]" : ""))?></OPTION>
+						<OPTION value="ROOM2"<?php if($join_room=="ROOM2") echo(" SELECTED")?>><?php echo(ROOM2.($EN_ROOM2 ? " [".$enab_init."]" : " [".$disab_init."]").($RES_ROOM2 ? " [".$res_init."]" : ""))?></OPTION>
+						<OPTION value="ROOM3"<?php if($join_room=="ROOM3") echo(" SELECTED")?>><?php echo(ROOM3.($EN_ROOM3 ? " [".$enab_init."]" : " [".$disab_init."]").($RES_ROOM3 ? " [".$res_init."]" : ""))?></OPTION>
+						<OPTION value="ROOM4"<?php if($join_room=="ROOM4") echo(" SELECTED")?>><?php echo(ROOM4.($EN_ROOM4 ? " [".$enab_init."]" : " [".$disab_init."]").($RES_ROOM4 ? " [".$res_init."]" : ""))?></OPTION>
+						<OPTION value="ROOM5"<?php if($join_room=="ROOM5") echo(" SELECTED")?>><?php echo(ROOM5.($EN_ROOM5 ? " [".$enab_init."]" : " [".$disab_init."]").($RES_ROOM5 ? " [".$res_init."]" : ""))?></OPTION>
+					</SELECT>
+					<INPUT type="hidden" name="old_join_room_<?php echo($usrHash)?>" value="<?php echo($join_room)?>">
 				</TD>
 			</TR>
 			<?php
@@ -330,13 +347,17 @@ if ($count_RegUsers != 0)
 		$DbLink->clean_results();
 		?>
 		<TR>
-			<TD VALIGN=CENTER ALIGN=CENTER COLSPAN=6>
-				<FONT size=-1>* <?php echo(A_SHEET1_5)?></FONT>
+			<TD VALIGN=CENTER ALIGN=CENTER COLSPAN=8>
+				<FONT size=-1>
+					* <?php echo(A_SHEET1_5)?><br />
+					** <?php echo(A_SHEET1_16)?><br />
+					[<?php echo($enab_init)?>] = <?php echo(L_ENABLED)?>; [<?php echo($disab_init)?>] = <?php echo(L_DISABLED)?>; [<?php echo($res_init)?>] = <?php echo(L_RESTRICTED)?>.
+				</FONT>
 			</TD>
 		</TR>
 		<TR><TD>&nbsp;</TD></TR>
 		<TR>
-			<TD VALIGN=CENTER ALIGN=CENTER COLSPAN=5>
+			<TD VALIGN=CENTER ALIGN=CENTER COLSPAN=6>
 				<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(A_SHEET1_6); ?>">
 				<br /><br />
 				<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(A_SHEET1_9); ?>"><br />
@@ -348,8 +369,8 @@ if ($count_RegUsers != 0)
 		</TR>
 		</TABLE>
 		</FORM>
-
 		<!-- Navigation cells at the footer -->
+		<FORM name="PageSelect">
 		<TABLE BORDER=0 CELLPADDING=5 CELLSPACING=0 CLASS="tabletitle" WIDTH=100%>
 		<TR>
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN=CENTER WIDTH=70 HEIGHT=20 CLASS=tabtitle>
@@ -385,7 +406,6 @@ if ($count_RegUsers != 0)
 			?>
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN=CENTER HEIGHT=20 CLASS=tabtitle>
 			<?php
-			print "<form name=\"PageSelect\">\n";
 			print "<select name=\"PageJump\" onChange=\"jump_Page()\">\n";
 				$i=1;
 				while ($i <= $PagesCount)
@@ -395,7 +415,7 @@ if ($count_RegUsers != 0)
 					print ">$i</option>\n";
 		        $i++;
 				}
-		        print "</select>\n</form>\n";
+		        print "</select>\n";
 			?>
 			</TD>
 			<?php
@@ -419,24 +439,20 @@ if ($count_RegUsers != 0)
 			</TD>
 		</TR>
 		</TABLE>
+		</FORM>
 	</TD>
 </TR>
-
 <?php
 }
 else
 {
 ?>
-
 <TR>
 	<TD ALIGN=CENTER CLASS=error><?php echo(A_SHEET1_8); ?></TD>
 </TR>
-
 <?php
 };
 ?>
-
 </TABLE>
-
 <?php
 ?>
