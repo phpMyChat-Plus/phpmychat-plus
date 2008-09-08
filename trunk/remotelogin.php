@@ -1,6 +1,5 @@
 <?php
-// This script is an example of display, in another page of your website,
-// the login frame to your chat
+// This script is an example of display, in another page of your website, the login frame to your chat
 
 /* Call this file in a iframe like this:
  <iframe name="Chat Login frame" id="Chat Login frame" height="175" scroll="no" frameborder="no" src="plus/remotelogin.php"></iframe>

@@ -1,11 +1,13 @@
 <?php
 
+//Connected users table settings
 $ShowPrivate = "0";     // 1 to display users even if they are in a private room, 0 else
 $DisplayUsers = "1";    // 0 to display only the number of connected users
                         // 1 to display a list of users
+//Messages table settings
 $N = 50;									//Set the last number of messages to be displayed
-$Type = " AND type='1'";	//This is to display only the public rooms
-//$Type = "";							//This is to display either public or private rooms
+$Type = " AND type='1'";	//This is to display only the public rooms (excluding the restricted ones)
+//$Type = "";							//This is to display either public (including the restricted ones) or private rooms
 
 if (isset($_COOKIE["CookieUsername"])) $U = urldecode($_COOKIE["CookieUsername"]);
 if (isset($_COOKIE["CookieStatus"])) $status = $_COOKIE["CookieStatus"];
@@ -49,6 +51,20 @@ if (!function_exists('mb_convert_case'))
 	};
 };
 
+if (!function_exists("utf8_substr"))
+{
+	function utf8_substr($str,$start)
+	{
+	   preg_match_all("/./su", $str, $ar);
+	   if(func_num_args() >= 3) {
+	       $end = func_get_arg(2);
+	       return join("",array_slice($ar[0],$start,$end));
+	   } else {
+	       return join("",array_slice($ar[0],$start));
+	   }
+	};
+};
+
 // Ghost Control mod by Ciprian
 if (!function_exists('ghosts_in'))
 {
@@ -62,6 +78,11 @@ if (!function_exists('ghosts_in'))
 		return false;
 	};
 };
+
+// Restricted room mod by Ciprian
+$res_init = utf8_substr(L_RESTRICTED, 0, 1);
+$disp_note = 0;
+
 require("lib/connected_users.lib.php");
 
 if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $status == "a" || $status == "t" || $status == "m"))
@@ -105,12 +126,35 @@ if($DbLink1->num_rows() > 0)
 	$MessagesString = "";
 	while(list($Time, $Room, $User, $Latin1, $Dest, $Message) = $DbLink1->next_record())
 	{
+		// Restricted rooms mod by Ciprian
+		if (is_array($DefaultDispChatRooms) && in_array($Room." [R]",$DefaultDispChatRooms) && $Type != "")
+		{
+			if ($User == "SYS announce") {}
+			elseif ($User == "SYS room" && $Dest == "*") {}
+			else
+			{
+				if ($MessagesString == "")
+				{
+					$NBMessages = 0;
+					$MessagesString = "<tr align=texttop valign=top><td valign=top colspan=4 align=center style=\"background-color:yellow;\"><SPAN CLASS=\"notify\">".L_NO_MSG."</SPAN></td></tr>";
+				}
+				continue;
+			}
+		};
 		$Message = stripslashes($Message);
 		$Message = eregi_replace("L_DEL_BYE",L_DEL_BYE,$Message);
 		$Message = eregi_replace("L_REG_BRB",L_REG_BRB,$Message);
 		$Message = eregi_replace("L_HELP_MR",L_HELP_MR,$Message);
 		$Message = eregi_replace("L_HELP_MS",L_HELP_MS,$Message);
-		if ($Room == '*' || ($Dest == ' *' && $User == "SYS announce")) $Room = L_ROOM_ALL;
+		if ($Room == '*' || ($User == "SYS room" && $Dest == '*') || $User == "SYS announce") $Room = L_ROOM_ALL;
+		else
+		{
+			if (is_array($DefaultDispChatRooms) && in_array($Room." [R]",$DefaultDispChatRooms))
+			{
+				$Room .= " [".$res_init."]";
+				$disp_note = 1;
+			}
+		}
 		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
 		{
 			$Message = eregi_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$Message);
@@ -283,8 +327,9 @@ if (C_WORLDTIME == 2)
 	}
 	echo($MessagesString."</table>");
 	unset($MessagesString);
+	if($disp_note) echo("<table WIDTH=100%><tr valign=top><td colspan=4 align=left CLASS=small>[".$res_init."] = ".L_RESTRICTED.".</td></tr></table>");
 	?>
-<P align="right"><div align="right"><span dir="LTR" style="font-weight: 600; color:#FFD700; font-size: 7pt">
+<br /><P align="right"><div align="right"><span dir="LTR" style="font-weight: 600; color:#FFD700; font-size: 7pt">
 &copy; 2006-<?php echo(date('Y')); ?> - by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>.'; return true;" title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>" target=_blank>Ciprian Murariu</a></span></div>
 	</BODY>
 	</HTML>

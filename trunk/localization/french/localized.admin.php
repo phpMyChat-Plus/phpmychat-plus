@@ -1,5 +1,5 @@
 <?php
-// File : french/localized.admin.php - plus version (07.07.2008 - rev.13)
+// File : french/localized.admin.php - plus version (26.08.2008 - rev.14)
 // Original file by Loďc Chapeaux <lolo@phpheaven.net> & Dean Collins <joelford@pacbell.net>
 // Translation for Plus version by Pierre Liget <sourceforge@pliget.freesurf.fr> 10.12.2007
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -39,6 +39,10 @@ define("A_SHEET1_9", "Exclure les profils utilisateur sélectionnés");
 define("A_SHEET1_10", "Allez maintenant sur la page des ’".A_MENU_2."’ pour affiner vos choix.");
 define("A_SHEET1_11", "Dernière connexion");
 define("A_SHEET1_12", "Raison de l’exclusion (facultatif)");
+define("A_SHEET1_13", "Salons autorisés");
+define("A_SHEET1_14", "Tous sans restriction");
+define("A_SHEET1_15", "Tous avec restriction");
+define("A_SHEET1_16", "Les restrictions du salon spécifié doivent également être activées dans le menu ’".A_MENU_5."’.");
 define("A_USER", "Utilisateur");
 define("A_MODER", "Modérateur");
 define("A_TOPMOD", "Modérateur avec pouvoir");

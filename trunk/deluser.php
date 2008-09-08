@@ -133,6 +133,18 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_20)
     @mail(C_ADMIN_EMAIL,$Subject,$emailMessage, $Headers);
 // end of patch to send an email to the Admin at the time of user account deletion.
 	}
+
+	// Upload avatar mod addition - by Ciprian
+	// We check and remove the uploaded avatar if exists
+	$DbLink->query("SELECT avatar FROM ".C_REG_TBL." WHERE username='$pmc_username' LIMIT 1");
+	if ($DbLink->num_rows() != 0)
+	{
+		list($AVATARURL) = $DbLink->next_record();
+		$av_user_name = $pmc_username;
+		if (stristr(urlencode($av_user_name), "%")) $av_user_name = "encname_".str_replace("%","_",urlencode($av_user_name));
+		if (stristr($AVATARURL,C_AVA_RELPATH . "uploaded/")) @unlink(C_AVA_RELPATH . "uploaded/avatar_".$av_user_name.".gif");
+	}
+	// End of Upload avatar mod - by Ciprian
 	$DbLink->query("DELETE FROM ".C_REG_TBL." WHERE username='$pmc_username'");
 	$Msg = L_REG_21;
 	$DbLink->close();

@@ -51,7 +51,6 @@ define("CITY6_DST", "SYD");
 ##	Don't alter the code below!!!	  ##
 ########################
 
-// Returns the days in the status bar
 if (!function_exists("utf8_substr"))
 {
 	function utf8_substr($str,$start)
@@ -66,6 +65,7 @@ if (!function_exists("utf8_substr"))
 	};
 };
 
+// Returns the days in the status bar
 function get_day($time,$plus)
 {
 		$monday = utf8_substr(L_MON, 0, ($L == 'vietnamese') ? '8' : '3');

@@ -4,7 +4,7 @@
 	elseif (isset($OtherUser) && $OtherUser != "") $user_name = $OtherUser;
 	else $user_name = 'def';
 	if ((!isset($use_gravatar) || !$use_gravatar) && GRAVATARS_DYNAMIC_DEF == "") $user_name = 'def';
-	if (eregi("win", PHP_OS) && stristr(urlencode($user_name), "%")) $user_name = "enc";
+	if (stristr(urlencode($user_name), "%")) $user_name = "encname".str_replace("%","_",urlencode($user_name));
 
 	// Sets the email for the gravatar link
 	$email_reset = 0;
@@ -17,7 +17,7 @@
 
 	// Sets the default Dynamic Gravatar
 	if (ALLOW_GRAVATARS == 2 || (ALLOW_GRAVATARS == 1 && $local_avatar)) $dynamic_def = GRAVATARS_DYNAMIC_DEF;
-	
+
 	//  $pAvatar->setCacheLocation("temp/"); //optional
 	# php>=5 versions
 	if (version_compare(phpversion(),'5','>='))

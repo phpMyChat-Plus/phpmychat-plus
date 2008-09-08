@@ -1,5 +1,5 @@
 <?php
-// File : german/localized.chat.php - plus version (18.06.2008 - rev.40)
+// File : german/localized.chat.php - plus version (11.08.2008 - rev.41)
 // Original translation by Robert Schaller <robert@schaller.com> & Wolfgang Schneider <schneider@bibelcenter.de>
 //    & Martin Sander <Martin.Sander@touch-screen.de> & Bernard Piller <bernard@bmpsystems.com>
 //    & Reinhard Hofmann <e9625556@student.tuwien.ac.at> & Christian Hacker <c.hacker@dreamer-chat.de>
@@ -101,7 +101,7 @@ define("L_REG_50", "Anmeldung ausgesetzt!");
 define("L_EMAIL_VAL_1", "Deine Einstellungen zum Einstieg in den Chat");
 define("L_EMAIL_VAL_2", "Willkommen auf unserem Chat-Server.");
 define("L_EMAIL_VAL_Err", "Interner Fehler, bitte kontaktiere den Administrator: <a href=\"mailto:%s\">%s</a>.");
-define("L_EMAIL_VAL_Done", "Das Passwort wurde an Ihre E-Mail-Adresse verschickt. <br /> Sie können das Passwort jederzeit auf der Login-Seite ändern.");
+define("L_EMAIL_VAL_Done", "Das Passwort wurde an Ihre E-Mail-Adresse verschickt.<br />Sie können das Passwort jederzeit auf der Login-Seite \"".L_REG_4."\.");
 define("L_EMAIL_VAL_PENDING_Done", "Ihre Registrierten Daten wurden zur Prüfung vorgelegt.");
 define("L_EMAIL_VAL_PENDING_Done1", "Ihr Kennwort erhalten Sie, nachdem der Administrator Sie freigeschaltet hat.");
 define("L_EMAIL_VAL_3", "Ihre Anmeldung ist anhängig für %s");
@@ -115,6 +115,7 @@ define("L_EMAIL_VAL_6", "Registriert am %s");
 define("L_EMAIL_VAL_61", "Aktualisiert am %s");
 define("L_EMAIL_VAL_7", "Unten ist Ihre %s aktualisierte Kontoinformation:");
 define("L_EMAIL_VAL_8", "Speichern Sie diese E-Mail für Ihre Zukunft auf.\nBewahren Sie es sicher auf und teilen diese Daten niemanden mit.\nVielen Dank für den Beitritt! Viel Spaß!");
+define("L_EMAIL_VAL_81", "Sie können das Passwort jederzeit auf der Login-Seite \"".L_REG_4."\.");
 
 // admin stuff
 define("L_ADM_1", "%s ist nicht mehr Moderator für diesen Raum.");
@@ -150,6 +151,7 @@ define("L_ERR_USR_24", "Sie müssen registriert sein um einen privaten Raum erst
 define("L_ERR_USR_25", "Nur ein Administrator kann ".$COLORNAME." Farbe nutzen!<br /> Versuchen Sie nicht Farben ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." oder ".COLOR_CM1." zu nutzen.<br /> Diese sind für Poweruser reserviert!");
 define("L_ERR_USR_26", "Nur Administratoren und Moderatoren können ".$COLORNAME." Farbe nutzen!<br /> Versuchen Sie nicht Farben ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." oder ".COLOR_CM1." zu nutzen.<br /> Diese sind für Poweruser reserviert!");
 define("L_ERR_USR_27", "Sie können sich nicht selber anschreiben.\\nWählen Sie einen anderen Usernamen.");
+define("L_ERR_USR_28", "Ihr Zugang zu %s Raum hat Beschränkungen!<br />Bitte wählen Sie einen anderen Raum.");
 define("L_ERR_ROM_1", "Der Name des Raums darf keine Kommata und Backslashes (\\) enthalten.");
 define("L_ERR_ROM_2", "Der Name des Raumes den Du anlegen willst enthält ein verbotenes Wort.");
 define("L_ERR_ROM_3", "Dieser Raum existiert schon als öffentlicher Raum.");
@@ -178,6 +180,8 @@ define("L_HLP", "Hilfe");
 define("L_MODERATOR", "%s ist nun Moderator für diesen Raum.");
 define("L_KICKED", "%s wurde erfolgreich gekickt.");
 define("L_KICKED_REASON", "%s wurde erfolgreich gekickt. (Grund: %s)");
+define("L_KICKED_ALL", "Alle Mitglieder sind erfolgreich entfernt worden.");
+define("L_KICKED_ALL_REASON", "Alle Mitglieder sind erfolgreich entfernt worden. (Grund: %s)");
 define("L_BANISHED", "%s wurde erfolgreich verbannt.");
 define("L_BANISHED_REASON", "%s wurde erfolgreich verbannt. (Grund: %s)");
 define("L_ANNOUNCE", "ANKÜNDIGUNG");
@@ -190,7 +194,7 @@ define("L_BAD_CMD", "Dies ist kein gültiger Befehl!");
 define("L_ADMIN", "%s ist bereits Administrator!");
 define("L_IS_MODERATOR", "%s ist bereits Moderator!");
 define("L_NO_MODERATOR", "Nur der Moderator dieses Raums darf diesen Befehl verwenden.");
-define("L_NONEXIST_USER", "%s ist nicht in diesem Raum");
+define("L_NONEXIST_USER", "%s ist nicht in diesem Raum.");
 define("L_NONREG_USER", "%s ist nicht angemeldet.");
 define("L_NONREG_USER_IP", "Seine IP ist: %s.");
 define("L_NO_KICKED", "%s ist Moderator oder Administrator und kann nicht gekickt werden.");
@@ -225,7 +229,7 @@ define("L_HELP_CMD_5", "Den Chat nach einer optionalen Mitteilung verlassen.");
 define("L_HELP_CMD_6", "Anzeige von Mitteilungen eines Benutzers ignorieren, wenn ein Benutzername angegeben ist.<br />Anzeige für alle Benutzer, wenn nur - ohne Benutzername angegeben wird.<br />Ohne Zusatz öffnet dieser Befehl ein Fenster, in dem alle ignorierten Namen angezeigt werden.");
 define("L_HELP_CMD_7", "Den zuletzt getippten Text wieder anzeigen (Befehl oder Mitteilung).");
 define("L_HELP_CMD_8", "Zeitangabe vor Mitteilungen ein/aus.");
-define("L_HELP_CMD_9", "Kickt User aus dem Chat. Diesen Befehl können nur Moderatoren des jeweiligen Raums und Administatoren nutzen. Optional, [".L_HELP_REASON."] der Grund des Verweises kann angezeigt werden. (irgendein Text).");
+define("L_HELP_CMD_9", "Kickt User aus dem Chat. Diesen Befehl können nur Moderatoren des jeweiligen Raums und Administatoren nutzen. Optional, [".L_HELP_REASON."] der Grund des Verweises kann angezeigt werden (irgendein Text).<br />Falls * Option gewählt wird, wird dieser Befehl alle Mitglieder ohne Rechte entfernen (Ausnahme: Gäste und angemeldete Mitglieder). Dies ist wichtig, sollte der Server Probleme haben und alle Mitglieder sollten einen Reload durchführen. In diesem Falle, [".L_HELP_REASON."] sollte man die Mitglieder wissen lassen, warum sie entfernt wurden.");
 define("L_HELP_CMD_10", "Eine private Nachricht an den angegebenen Benutzer schicken (andere Benutzer sehen diese Nachricht nicht).");
 define("L_HELP_CMD_11", "Informationen zu einem angegebenen Benutzer anzeigen.");
 define("L_HELP_CMD_12", "Popup Fenster zur Änderung des Benutzerprofils.");
@@ -295,18 +299,18 @@ define("L_WHOIS_REG", "Registriert");
 define("L_WHOIS_BOT", "Bot");
 
 // Notification messages of user entrance/exit
-define("ENTER_ROM", "%s betritt diesen Raum");
-define("L_EXIT_ROM", "%s verläßt den Raum");
+define("ENTER_ROM", "%s betritt diesen Raum.");
+define("L_EXIT_ROM", "%s verläßt den Raum.");
 if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
 // Clean mod/fix by Ciprian
 define("L_BOOT_ROM", "%s wurde wegen Inaktivität aus diesem Raum verwiesen.");
-define("L_CLOSED_ROM", "%s hat den Browser geschlossen");
+define("L_CLOSED_ROM", "%s hat den Browser geschlossen.");
 
 // Text for /away command notification string:
-define("L_AWAY", "%s ist abwesend");
+define("L_AWAY", "%s ist abwesend...");
 define("L_BACK", "%s ist zurück!");
 
 // Quick Menu mod
@@ -387,7 +391,7 @@ define("L_PRIV_REPLY", "Antwort");
 define("L_PRIV_READ", "Drücken Sie den ’".L_REG_25."’ Button um alle Posts als gelesen zu markieren!");
 define("L_PRIV_POPUP", "Sie können dieses Popup-Feature jederzeit de- oder reaktivieren<br />wenn Sie Ihr");
 define("L_PRIV_POPUP1", "Profil</a> editieren (nur für registrierte User)");
-define("L_NOT_ONLINE", "%s ist in diesem Augenblick nicht online .");
+define("L_NOT_ONLINE", "%s ist in diesem Augenblick nicht online.");
 define("L_PRIV_NOT_ONLINE", "%s ist momentan nicht online,\\nwird aber Ihre Nachricht nach dem Login erhalten.");
 define("L_PRIV_NOT_INROOM", "%s ist nicht in diesem Raum.\\nWenn Sie eine PN hinterlassen wollen,\\nnutzen Sie den Befehl: /wisp %s Nachricht.");
 define("L_PRIV_AWAY", "%s ist als abwesend markiert,\\nwird aber Ihre Nachricht erhalten\\nwenn Er/Sie wieder da ist.");
@@ -567,6 +571,7 @@ setlocale(LC_ALL, "deu_deu.UTF-8", "german.UTF-8", "german");
 } else {
 setlocale(LC_ALL, "de_DE.UTF-8", "deu_deu.UTF-8", "german.UTF-8");
 }
+define("L_LANG", "de_DE");
 define("ISO_DEFAULT", "iso-8859-1");
 define("WIN_DEFAULT", "windows-1252");
 define("L_SHORT_DATE", "%d.%m.%Y"); //Change this to your local desired date only format (keep the short form)
@@ -613,6 +618,7 @@ define("L_SKINS_TITLE", "Design Vorschau");
 define("L_SKINS_TITLE1", "Design %s bis %s Vorschau");
 define("L_SKINS_AV", "Verfügbare Designs");
 define("L_SKINS_NONAV", "Es gibt keine Stile in dem \"skins\" Verzeichnis");
+define("L_SKINS_COPY", "&copy; %s Thema von %s");
 
 // Swap image titles by Ciprian
 define("L_GEN_ICON", "Geschlechts-Symbol");
@@ -631,4 +637,16 @@ define("L_LOGIN_COUNT", "Alle besuche");
 
 // Gravatar from email mod by Ciprian
 define("L_GRAV_USE", "benutze den Gravatar"); // do not translate the word “Gravatar”!
+
+// Uploader mod by Ciprian
+define("L_UPLOAD", "Aufgeladen %s");
+define("L_UPLOAD_IMG", "Photo Datei");
+define("L_UPLOAD_SND", "Sound Datei");
+define("L_UPLOAD_FLS", "Dateien");
+define("L_UPLOAD_SUCCESS", "%s erfolgreich geladen %s.");
+define("L_FILES_TITLE", "Upload Verwaltung");
+
+// Room restriction mod by Ciprian
+define("L_RESTRICTED", "Verboten");
+define("L_RESTRICTED_ROM", "%s für diesen Raum wurden die Beschränkung erfolgreich ausgeführt.");
 ?>

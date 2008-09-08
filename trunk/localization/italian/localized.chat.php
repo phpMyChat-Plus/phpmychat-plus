@@ -1,5 +1,5 @@
 <?php
-// File : italian/localized.chat.php - plus version (18.06.2008 - rev.40)
+// File : italian/localized.chat.php - plus version (11.08.2008 - rev.41)
 // Original translation by Andrea D’Alessandro <andrea@abol.it> & Massimo Fubini <massimo@tomato.it>
 // & Giuliano Yurij Beccaria <yurij@e-pages.it> & Marco Borrini <borrini@tradimento.it>
 // & Bartolotta Gioachino <developers@rockitalia.com> & Silvia M. Carrassi <silvia@ladysilvia.net>
@@ -115,6 +115,7 @@ define("L_EMAIL_VAL_6", "Registrato il %s");
 define("L_EMAIL_VAL_61", "Inviato il %s");
 define("L_EMAIL_VAL_7", "Sotto sono le tue informazioni dell’account: %s");
 define("L_EMAIL_VAL_8", "Salva questa email per i riferimenti futuri.\nPer cortesia metti anche al sicuro e non condividere questi dati.\nGrazie per esserti iscritto! Divertiti!");
+define("L_EMAIL_VAL_81", "Puoi cambiare la tua password nella pagina Login impostando il tuo profilo.");
 
 // admin stuff
 define("L_ADM_1", "%s non è più il moderatore di questa chat.");
@@ -295,15 +296,15 @@ define("L_WHOIS_REG", "Registrato");
 define("L_WHOIS_BOT", "Bot");
 
 // Notification messages of user entrance/exit
-define("ENTER_ROM", "%s entra in questa stanza");
-define("L_EXIT_ROM", "%s esce da questa stanza");
+define("ENTER_ROM", "%s entra in questa stanza.");
+define("L_EXIT_ROM", "%s esce da questa stanza.");
 if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
 // Clean mod/fix by Ciprian
-define("L_BOOT_ROM", "%s è stato automaticamente buttato fuori dalla stanza per inattività");
-define("L_CLOSED_ROM", "%s ha chiuso il browser");
+define("L_BOOT_ROM", "%s è stato automaticamente buttato fuori dalla stanza per inattività.");
+define("L_CLOSED_ROM", "%s ha chiuso il browser.");
 
 // Text for /away command notification string:
 define("L_AWAY", "Lo stato personale di %s è: Non al computer.");
@@ -565,6 +566,7 @@ setlocale(LC_ALL, "ita_ITA.UTF-8", "italian.UTF-8", "italian");
 } else {
 setlocale(LC_ALL, "it_IT.UTF-8", "ita_ITA.UTF-8", "italian.UTF-8");
 }
+define("L_LANG", "it_IT");
 define("ISO_DEFAULT", "iso-8859-1");
 define("WIN_DEFAULT", "windows-1252");
 define("L_SHORT_DATE", "%d/%m/%Y"); //Change this to your local desired date only format (keep the short form)

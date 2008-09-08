@@ -1,5 +1,5 @@
 <?php
-// File : romanian/localized.tutorial.php - plus version (10.04.2008 - rev.9)
+// File : romanian/localized.tutorial.php - plus version (26.08.2008 - rev.10)
 //Translated and updated to Plus version by Ciprian Murariu <ciprianm@yahoo.com>
 
 // Get the names and values for vars sent by the script that called this one
@@ -417,7 +417,7 @@ if (C_USE_SMILIES)
 	<P ALIGN="center">
 	<TABLE BORDER=0 CELLPADDING=3 CELLSPACING=5>
 	<?php
-	$i = "0";
+	$i = 0;
 	$Nb = count($ResultTbl);
 	while($i < $Nb)
 	{
@@ -669,6 +669,8 @@ There is another useful announcement like command for role-playing chats; the ad
 Moderators can kick a user and the administrator can kick a user or a moderator with the <B>kick command</B>. Except for the administrator, the user to be kicked must be in the current room.
 <P>
 <I>For example</I>, if Jack is the name of the user to kick away:<I> /kick Jack</I> or <I>/kick Jack reason of kicking</I>. The "reason of kicking" can be any text e.g. "for spamming!"
+<P>
+Dacă este folosită opţiunea * (<I>/kick * <?php echo(L_HELP_REASON); ?></I>), aceasta va elimina din camera de chat toţi utilizatorii obişnuiţi (nu şi moderatorii sau adminii). Aceasta este util atunci când sunt probleme de conectare la server, fiind necesar ca toţi utilizatorii să reîncarce chat-ul prin relogare. În acest caz, se recomandă ca <I><?php echo(L_HELP_REASON); ?></I> să fie precizat, pentru ca utilizatorul să ştie de ce a fost eliminat din cameră.
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />

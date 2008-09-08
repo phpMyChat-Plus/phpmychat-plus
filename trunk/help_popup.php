@@ -165,7 +165,7 @@ if (C_HTML_TAGS_KEEP != "none")
   </TR>
 <!-- End away command doc -->
 	<?php
-	if (C_BANISH != "0")
+	if (C_BANISH)
 	{
 		?>
 		<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
@@ -267,7 +267,9 @@ if (C_HTML_TAGS_KEEP != "none")
 	{
 		?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/kick',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/kick {<?php echo(L_USER); ?>} [<?php echo(L_HELP_REASON); ?>]</A></TH></TR>
+	<A HREF="#" onClick="cmd2Input('/kick',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/kick {<?php echo(L_USER); ?>} [<?php echo(L_HELP_REASON); ?>]</A><br />
+	<A HREF="#" onClick="cmd2Input('/kick',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/kick {*} [<?php echo(L_HELP_REASON); ?>]</A>
+	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
 		<TD><?php echo(L_HELP_CMD_9); ?></TD>
@@ -354,7 +356,7 @@ if (C_ENABLE_PM)
 		<TD><?php echo(($Ver == "H" ? L_HELP_CMD_2b : L_HELP_CMD_2a)); ?></TD>
 	</TR>
 	<?php
-	if (C_SAVE != "0")
+	if (C_SAVE)
 	{
 		?>
 		<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
@@ -452,7 +454,7 @@ if (C_ENABLE_PM)
 <?php if (COLOR_FILTERS) echo("<br />".L_COL_HELP_P3."<br />"); ?><?php echo(L_COL_HELP_P3a); ?></TD></TR>
 <!-- Color Picker Text Input Box help end -->
 <?php
-if (C_USE_SMILIES == "1")
+if (C_USE_SMILIES)
 {
 	include("./lib/smilies.lib.php");
 	$Nb = count($SmiliesTbl);
@@ -466,7 +468,7 @@ if (C_USE_SMILIES == "1")
 		<TH CLASS="tabtitle" COLSPAN=<?php echo($Nb); ?>><?php echo(L_HELP_TIT_1); ?></TH>
 	</TR>
 	<?php
-	$i = "0";
+	$i = 0;
 	$Nb = count($ResultTbl);
 	while($i < $Nb)
 	{

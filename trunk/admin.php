@@ -32,29 +32,25 @@ if (get_magic_quotes_gpc()) {
 		$_COOKIE[$k] = stripslashes($v);
 }
 
-// Var used in the login.lib.php script required below
-$MUST_BE_ADMIN = true;
-
 require("./config/config.lib.php");
 require("./lib/release.lib.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
-include("./localization/${L}/localized.chat.php");
 
 // Check for administration language file
 if (!isset($What) || $What == "")
 {
-	if (!isset($L)) include("./localization/languages.lib.php");
-//	include("./localization/${L}/localized.chat.php");
+	if (!isset($L)) include_once("./localization/languages.lib.php");
 	if (!file_exists("./localization/${L}/localized.admin.php"))
 	{
 		unset($L);
 		$Charset_Sav = $Charset;
 		$FontName_Sav = (isset($FontName) ? $FontName : "");
 		$FontSize_Sav = $FontSize;
-		include("./localization/admin.lib.php");
+		include_once("./localization/english/admin.lib.php");
 	};
 };
-require("./localization/${L}/localized.admin.php");
+require_once("./localization/${L}/localized.admin.php");
+require_once("./localization/${L}/localized.chat.php");
 if (isset($Charset_Sav))
 {
 	$Charset = $Charset_Sav; unset($Charset_Sav);
@@ -74,7 +70,23 @@ if (!function_exists('mb_convert_case'))
 	}
 };
 
+if (!function_exists("utf8_substr"))
+{
+	function utf8_substr($str,$start)
+	{
+	   preg_match_all("/./su", $str, $ar);
+	   if(func_num_args() >= 3) {
+	       $end = func_get_arg(2);
+	       return join("",array_slice($ar[0],$start,$end));
+	   } else {
+	       return join("",array_slice($ar[0],$start));
+	   }
+	};
+};
+
 // Login stuff
+// Var used in the login.lib.php script required below
+$MUST_BE_ADMIN = true;
 require("./lib/login.lib.php");
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
 
@@ -120,7 +132,7 @@ $URLQueryBody = "From=$From&What=Body&L=$L&pmc_username=$pmc_username&pmc_passwo
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
-<TITLE><?php echo((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME); ?></TITLE>
+<TITLE><?php echo(L_REG_35." - ".(C_CHAT_NAME != "" ? C_CHAT_NAME." - ".APP_NAME : APP_NAME)); ?></TITLE>
 <SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript1.2">
 <!--
 // Define the URL for the fix for NN4+ resize bug
@@ -134,11 +146,14 @@ if (document.layers)
 
 function logout()
 {
-	<?php
-		session_destroy();
-		unset($_SESSION["adminlogged"]);
-	?>
-}
+<?php
+	$_SESSION["adminlogged"] = NULL;
+	unset($_SESSION["adminlogged"]);
+	$_SESSION = array();
+	session_unset();
+	session_destroy();
+?>
+};
 // -->
 </SCRIPT>
 <?php

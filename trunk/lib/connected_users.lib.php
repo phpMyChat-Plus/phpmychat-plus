@@ -19,8 +19,7 @@ if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
 require("./${ChatPath}/lib/database/".C_DB_TYPE.".lib.php");
 require("./${ChatPath}/lib/clean.lib.php");
 
-
-	if ($Private)
+	if ($ShowPrivate)
 	{
 		// Ghost Control mod by Ciprian
 		$Hide = "";
@@ -53,14 +52,20 @@ require("./${ChatPath}/lib/clean.lib.php");
 function display_connected($Private,$Full,$NU,$String1,$String2,$DbLink,$Charset)
 {
 	$List = "";
-
+	global $DefaultDispChatRooms, $res_init, $disp_note;
 	if ($NU > 0)
 	{
 		if ($Full)
 		{
 			echo($String1);
+			// Restricted rooms mod by Ciprian
 			while(list($User,$Latin1,$Room,$RTime,$Status) = $DbLink->next_record())
 			{
+				if (is_array($DefaultDispChatRooms) && in_array($Room." [R]",$DefaultDispChatRooms))
+				{
+					$Room .= " [".$res_init."]";
+					$disp_note = 1;
+				}
 				if ($Latin1) $User = htmlentities($User);
 				$User = user_status($User,$Status);
 				$RTime = date("d-M, H:i:s", $RTime + C_TMZ_OFFSET*60*60);

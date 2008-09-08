@@ -7,7 +7,8 @@ if (isset($_GET))
 		$$name = $value;
 	};
 };
-include_once("skins/style$no.php");
+include_once("./skins/style$no.php");
+require_once("./${ChatPath}localization/".$L."/localized.chat.php");
 ?>
 <html>
 <head>
@@ -34,7 +35,7 @@ include_once("skins/style$no.php");
 				<td class="framePreview"><a href=#>Room name sample</a></td>
 			</tr>
 			<tr>
-				<td><a href=# class="sender">User sample</a></td>
+				<td class="msg"><a href=# class="sender">User sample</a></td>
 				<td class="framePreview"><a href=# class="sender">Sender sample</a></td>
 			</tr>
 			<tr>
@@ -46,14 +47,16 @@ include_once("skins/style$no.php");
 				<td class="framePreview"><div class="small">Small text sample</div></td>
 			</tr>
 </table>
-</P>
+<div align="right" class="small"><span style="font-size: 5pt">&nbsp;</span></div>
 			<INPUT TYPE="text" SIZE="30" MAXLENGTH="30" VALUE="Input Box sample"><br />
 			<SELECT>
-				<OPTION style="color:<?php echo(COLOR_CD); ?>" VALUE="" selected>Select box sample</OPTION>
-				<OPTION style="color:<?php echo(COLOR_CD); ?>" VALUE="">Value 1 sample</OPTION>
-				<OPTION style="color:<?php echo(COLOR_CD); ?>" VALUE="">Value 2 sample</OPTION>
+				<OPTION VALUE="" selected>Select box sample</OPTION>
+				<OPTION VALUE="">Value 1 sample</OPTION>
+				<OPTION VALUE="">Value 2 sample</OPTION>
 				</SELECT><br />
-				<INPUT TYPE="submit" VALUE="Button sample"><P>
+			<INPUT TYPE="submit" VALUE="Button sample">
+<br /><div align="right" class="small"><?php echo(sprintf(L_SKINS_COPY,$SKIN_DATE,$SKIN_BY)); ?></div>
+<P>
 </center>
 </body>
 </html>

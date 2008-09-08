@@ -1,5 +1,5 @@
 <?php
-// File : romanian/localized.chat.php - plus version (18.06.2008 - rev.40)
+// File : romanian/localized.chat.php - plus version (11.08.2008 - rev.41)
 // Original translation started by Radu Swider <swidera@satline.ro>, first updated by Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro>
 // Corrected, finalized, diacritics addition and updated to Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -24,7 +24,7 @@ define("L_CUR_3", "Utilizatori aflaţi în camere de chat");
 define("L_CUR_4", "utilizatori în camere private");
 define("L_CUR_5", "Utilizatori care monitorizează<br />această pagină (spectatori):");
 
-define("L_SET_1", "Introdu-ţi datele ...");
+define("L_SET_1", "Introduceţi datele ...");
 define("L_SET_2", "Porecla");
 define("L_SET_3", "numărul de mesaje de afişat");
 define("L_SET_4", "timpul de actualizare");
@@ -40,7 +40,7 @@ define("L_SET_13", "Apoi intră pe");
 define("L_SET_14", "chat");
 define("L_SET_15", "Camere private disponibile");
 define("L_SET_16", "Camere private create de utilizatori");
-define("L_SET_17", "Alege-ţi un avatar");
+define("L_SET_17", "Alegeţi un avatar");
 define("L_SET_18", "Adaugă în Favorite: apasă \"CTRL +D\".");
 
 define("L_SRC", "este disponibil gratuit de la");
@@ -98,27 +98,28 @@ define("L_REG_50", "Înregistrare suspendată!");
 define("L_EMAIL_VAL_1", "Datele tale pentru a te loga la chat");
 define("L_EMAIL_VAL_2", "Bun venit pe serverul nostru de chat!");
 define("L_EMAIL_VAL_Err", "Eroare internă, te rugăm să contactezi administratorul: <a href=\"mailto:%s\">%s</a>.");
-define("L_EMAIL_VAL_Done", "Parola a fost trimisă la adresa de email aleasă.<br />Parola poate fi modificată în pagina de editare a profilului.");
+define("L_EMAIL_VAL_Done", "Parola a fost trimisă la adresa de email aleasă.<br />Parola poate fi modificată în \"".L_REG_4."\" de pe pagina de login.");
 define("L_EMAIL_VAL_PENDING_Done", "Datele de înregistrare au fost trimise pentru analiză.");
 define("L_EMAIL_VAL_PENDING_Done1", "Vei primi parola imediat ce contul va fi aprobat de către Administrator.");
 define("L_EMAIL_VAL_3", "Înregistrare în curs de verificare pentru %s");
 define("L_EMAIL_VAL_31", "Felicitări! Datele tale de înregistrare au fost revizuite şi aprobate!");
 define("L_EMAIL_VAL_32", "Acestea sunt datele de înregistrare pentru %s de la adresa %s:"); //chat name at chaturl
-define("L_EMAIL_VAL_4", "Tocmai ţi-ai înregistrat acest cont pentru %s de la adresa %s:"); //chat name at chaturl
-define("L_EMAIL_VAL_41", "Tocmai ţi-ai schimbat anumite date importante pentru %s de la adresa %s (cont afectat: %s)."); //chat name at chaturl (username)
+define("L_EMAIL_VAL_4", "Tocmai v-aţi înregistrat acest cont pentru %s de la adresa %s:"); //chat name at chaturl
+define("L_EMAIL_VAL_41", "Tocmai v-aţi schimbat anumite date importante pentru %s de la adresa %s (cont afectat: %s)."); //chat name at chaturl (username)
 define("L_EMAIL_VAL_5", "Detalii ale contului tău - %s - pentru %s"); //username
 define("L_EMAIL_VAL_51", "Detalii actualizate ale contului tău - %s - pentru %s"); //username
 define("L_EMAIL_VAL_6", "Înregistrat la data de: %s");
 define("L_EMAIL_VAL_61", "Actualizat la data de: %s");
 define("L_EMAIL_VAL_7", "Mai jos sunt infromaţiile actualizate ale contului %s:"); //username
 define("L_EMAIL_VAL_8", "Salvează acest email pentru consultarea ulterioară.\nAsigură-l şi nu divulga nimănui datele din acest email.\nMulţumim pentru înregistrare! Distracţie plăcută!");
+define("L_EMAIL_VAL_81", "Parola poate fi modificată în \"".L_REG_4."\" de pe pagina de login.");
 
 // admin stuff
 define("L_ADM_1", "%s nu mai este moderator al acestei camere.");
 define("L_ADM_2", "Nu mai eşti înregistrat.");
 
 //error messages
-define("L_ERR_USR_1", "Acest nume este folosit deja. Alege-ţi altul.");
+define("L_ERR_USR_1", "Acest nume este folosit deja. Alegeţi altul.");
 define("L_ERR_USR_2", "Trebuie să-ţi alegi un nume.");
 define("L_ERR_USR_3", "Acest nume este deja înregistrat.<br />Introdu parola sau alege o altă poreclă.");
 define("L_ERR_USR_4", "Ai ales o parolă incorectă.");
@@ -147,6 +148,7 @@ define("L_ERR_USR_24", "Trebuie să fii înregistrat înainte de a crea camere p
 define("L_ERR_USR_25", "Numai administratorul poate folosi culoarea ".$COLORNAME."!<br />Nu încerca să foloseşti ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." sau ".COLOR_CM1.".<br />Acestea sunt rezervate utilizatorilor speciali!");
 define("L_ERR_USR_26", "Numai administratorii sau moderatorii pot folosi culoarea ".$COLORNAME."!<br />Nu încerca să foloseşti ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1.".<br />Acestea sunt rezervate utilizatorilor speciali!");
 define("L_ERR_USR_27", "Nu-ţi poţi vorbi ţie însuţi în şoaptă.\\nFă asta în minte...\\nAlege un alt destinatar.");
+define("L_ERR_USR_28", "Accesul tău în camera %s a fost restricţionat!<br />Alegeţi o altă cameră.");
 define("L_ERR_ROM_1", "Numele camerei nu poate conţine virgule sau backslash (\\).");
 define("L_ERR_ROM_2", "Numele camerei pe care ai vrut s-o creezi conţine un cuvânt interzis. Reformulează.");
 define("L_ERR_ROM_3", "Exista deja o cameră publică cu acest nume.");
@@ -173,8 +175,10 @@ define("L_NO_PROFILE", "Fără profil");
 // input frame
 define("L_HLP", "Ajutor");
 define("L_MODERATOR", "%s a fost promovat moderator al acestei camere.");
-define("L_KICKED", "%s a fost dat afară!");
-define("L_KICKED_REASON", "%s a fost dat afară! (Motivul: %s)");
+define("L_KICKED", "%s a fost eliminat din această cameră!");
+define("L_KICKED_REASON", "%s a fost eliminat din această cameră! (Motivul: %s)");
+define("L_KICKED_ALL", "Toţi utilizatorii au fost eliminaţi din această cameră!");
+define("L_KICKED_ALL_REASON", "Toţi utilizatorii au fost eliminaţi din această cameră! (Motivul: %s)");
 define("L_BANISHED", "%s a fost blocat cu succes.");
 define("L_BANISHED_REASON", "%s a fost blocat cu succes. (Motivul: %s)");
 define("L_ANNOUNCE", "ANUNŢ");
@@ -222,7 +226,7 @@ define("L_HELP_CMD_5", "Părăseşte chat-ul după ce ai scris un mesaj opţiona
 define("L_HELP_CMD_6", "Ignoră mesaje de la utilizatorul a cărui poreclă este specificată.<br />Fără nici o opţiune, va apărea o fereastră care va afişa toţi utilizatorii ignoraţi de tine.");
 define("L_HELP_CMD_7", "Recheamă textul introdus anterior (comandă sau mesaj).");
 define("L_HELP_CMD_8", "Arată/Ascunde timpul din faţa mesajelor.");
-define("L_HELP_CMD_9", "Expulzează utilizatori din chat. Această comandă poate fi dată numai de un moderator al camerei sau de un administrator.<br />Opţional, [".L_HELP_REASON."] va arăta şi motivul eliminării (orice frază).");
+define("L_HELP_CMD_9", "Elimină utilizatori din chat. Această comandă poate fi dată numai de un moderator al camerei sau de un administrator.<br />Opţional, [".L_HELP_REASON."] va arăta şi motivul eliminării (orice frază).<br />Dacă este folosită opţiunea *, aceasta va elimina din camera de chat toţi utilizatorii obişnuiţi (nu şi moderatorii sau adminii). Aceasta este util atunci când sunt probleme de conectare la server, fiind necesar ca toţi utilizatorii să reîncarce chat-ul prin relogare. În acest caz, se recomandă ca [".L_HELP_REASON."] să fie precizat, pentru ca utilizatorul să ştie de ce a fost eliminat din cameră.");
 define("L_HELP_CMD_10", "Trimite un mesaj privat către utilizatorul specificat (alţi utilizatori nu vor vedea mesajul).");
 define("L_HELP_CMD_11", "Arată informaţii despre utilizatorul specificat.");
 define("L_HELP_CMD_12", "Afişează o fereastră pentru editarea profilului utilizatorului.");
@@ -292,15 +296,15 @@ define("L_WHOIS_REG", "Înregistrat");
 define("L_WHOIS_BOT", "RoBoţel");
 
 // Notification messages of user entrance/exit
-define("ENTER_ROM", "%s a intrat în cameră");
-define("L_EXIT_ROM", "%s a ieşit din cameră");
+define("ENTER_ROM", "%s a intrat în cameră.");
+define("L_EXIT_ROM", "%s a ieşit din cameră.");
 if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
 // Clean mod/fix by Ciprian
-define("L_BOOT_ROM", "%s a fost eliminat automat din cameră pentru inactivitate");
-define("L_CLOSED_ROM", "%s şi-a închis browser-ul");
+define("L_BOOT_ROM", "%s a fost eliminat automat din cameră pentru inactivitate.");
+define("L_CLOSED_ROM", "%s şi-a închis browser-ul.");
 
 // Text for /away command notification string:
 define("L_AWAY", "%s nu mai e lângă calculator...");
@@ -417,7 +421,7 @@ define("L_COL_HELP_P2", "<u>Spectrul de Culori</u><br />În funcţie de capabili
 define("L_COL_HELP_P2a", "Dacă un utilizator se plânge că nu poate vedea corect culoarea pe care ai selectat-o, înseamnă că probabil foloseşte un browser foarte vechi, care nu recunoaşte numele culorii tale.");
 define("L_COL_HELP_SUB3", "Culori implicite în acest chat:");
 define("L_COL_HELP_P3", "<u>Culori în funcţie de permisiunile utilizatorului</u>:<br />1. Administratorul poate folosi tot spectrul de culori.<br />Culoarea administratorului este <SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN>.<br />2. Moderatorii pot folosi orice culoare, în afară de <SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN> şi <SPAN style=\"color:".COLOR_CA1."\">".COLOR_CA1."</SPAN>.<br />Culoarea moderatorilor este <SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN>.<br />3. Toţi ceilalţi utilizatori vor putea folosi orice altă culoare, în afară de <SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN>, <SPAN style=\"color:".COLOR_CA1."\">".COLOR_CA1."</SPAN>, <SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN> şi <SPAN style=\"color:".COLOR_CM1."\">".COLOR_CM1."</SPAN>.");
-define("L_COL_HELP_P3a", "Culoarea implicită este <u><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></u>.<br /><br /><u>Informaţii tehnice</u>: Aceste culori au fost definite de către administrator în admin panel.<br />Dacă ceva nu e în regulă sau nu vă plac culorile implicite, <b>administratorul</b> este primul pe care ar trebui să-l contactaţi şi nu pe ceilalţi utilizatori de pe chat. :-)");
+define("L_COL_HELP_P3a", "Culoarea implicită este <u><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></u>.<br /><br /><u>Informaţii tehnice</u>: Aceste culori au fost definite de către administrator în admin panel.<br />Dacă ceva nu e în regulă sau nu vă plac culorile implicite, <b>administratorul</b> este primul pe care ar trebui să-l contactezi şi nu pe ceilalţi utilizatori de pe chat. :-)");
 define("L_COL_HELP_USER_STATUS", "Statutul tău");
 define("L_COL_TUT", "Folosirea culorilor în textul mesajelor");
 define("L_NULL", "Nul");
@@ -570,6 +574,7 @@ setlocale(LC_ALL, "ROU_ROU.UTF-8", "ROU_ROU", "romanian.UTF-8", "romanian"); // 
 } else {
 setlocale(LC_ALL, "ro_RO.UTF-8@euro", "ro_RO.UTF-8", "rou.UTF-8", "rou_rou.UTF-8"); // For Unix/FreeBSD servers
 }
+define("L_LANG", "ro_RO");
 define("ISO_DEFAULT", "iso-8859-2");
 define("WIN_DEFAULT", "windows-1250");
 define("L_SHORT_DATE", "%d.%m.%Y");
@@ -616,9 +621,10 @@ define("L_SKINS_TITLE", "Previzualizare Stiluri");
 define("L_SKINS_TITLE1", "Previzualizare Stiluri %s la %s"); // Skins 1 to 4 preview
 define("L_SKINS_AV", "Stiluri disponibile");
 define("L_SKINS_NONAV", "Nu există stiluri definite în directorul \"skins\"");
+define("L_SKINS_COPY", "&copy; %s - Stilul lui %s"); //year - author
 
 // Swap image titles by Ciprian
-define("L_GEN_ICON", "Icon-ul genului (m/f)");
+define("L_GEN_ICON", "Icon-ul sexului (M/F/C)");
 
 // Ghost mode by Ciprian
 define("L_GHOST", "Fantomă");
@@ -634,4 +640,15 @@ define("L_LOGIN_COUNT", "Total vizite");
 
 // Gravatar from email mod by Ciprian
 define("L_GRAV_USE", "utilizează Gravatar-ul");
+
+// Uploader mod by Ciprian
+define("L_UPLOAD", "Încarcă %s");
+define("L_UPLOAD_IMG", "Fişier Imagine");
+define("L_UPLOAD_SND", "Fişier Audio");
+define("L_UPLOAD_FLS", "Fişiere");
+define("L_UPLOAD_SUCCESS", "%s a fost încărcat cu succes ca %s."); //original filename, destination filename
+
+// Room restriction mod by Ciprian
+define("L_RESTRICTED", "Restricţionat");
+define("L_RESTRICTED_ROM", "%s a fost restricţionat din această cameră.");
 ?>

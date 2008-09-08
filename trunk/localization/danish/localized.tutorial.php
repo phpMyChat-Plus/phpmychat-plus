@@ -1,5 +1,5 @@
 <?php
-// File : danish/localized.tutorial.php - plus version (10.04.2008 - rev.9)
+// File : danish/localized.tutorial.php - plus version (26.08.2008 - rev.10)
 // Original translation by Kenneth Kristiansen <kk@linuxfreak.adsl.dk>
 // Updates, corrections and additions for the Plus version by Bente Feldballe
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -675,6 +675,8 @@ Der findes en anden nyttig kommando til udsendelse af bekendtgørelser i en roll
 En moderator kan sparke en anden bruger ud, og administrator kan sparke en bruger eller en moderator ud med <B>kommandoen kick</B>. Administrator kan sparke en bruger ud fra et hvilket som helst chatrum, en moderator skal være i samme chatrum som brugeren.
 <P>
 Hvis, <I>for eksempel</I>, Jack er navnet på den bruger, du vil sparke ud: <I>/kick Jack</I> eller <I>/kick Jack grunden til, at Jack sparkes ud </I>. "Grunden til, at Jack sparkes ud" kan være en tekst efter eget valg, f.eks. "for spam!"
+<P>
+Hvis du vælger mulighed * (<I>/kick * <?php echo(L_HELP_REASON); ?></I>), vil kommandoen sparke alle brugere uden bemyndigelse ud af chatten (gælder kun gæster og registrerede brugere). Denne funktion er nyttig, hvis der er problemer med serverforbindelsen, og alle tilstedeværende skal genindlæse chatten. I dette andet tilfælde anbefales det at give en <I><?php echo(L_HELP_REASON); ?></I>, således at brugerne ved, hvorfor de sparkes ud.
 <br /><P ALIGN="right"><A HREF="#top">Tilbage til toppen</A></P>
 <P>
 <hr />

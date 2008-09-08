@@ -1,5 +1,5 @@
 <?php
-// File : english/localized.admin.php - plus version (07.07.2008 - rev.13)
+// File : english/localized.admin.php - plus version (26.08.2008 - rev.14)
 // Original file by Loďc Chapeaux <lolo@phpheaven.net> & Dean Collins <joelford@pacbell.net>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -38,6 +38,10 @@ define("A_SHEET1_9", "Banish checked profiles");
 define("A_SHEET1_10", "Now you have to move to the ’".A_MENU_2."’ sheet to refine your choices.");
 define("A_SHEET1_11", "Last connected");
 define("A_SHEET1_12", "Banishment reason (optional)");
+define("A_SHEET1_13", "Rooms permitted");
+define("A_SHEET1_14", "All UnRestricted");
+define("A_SHEET1_15", "All Restricted");
+define("A_SHEET1_16", "The specified room’s restriction should be also activated in the ’".A_MENU_5."’ sheet.");
 define("A_USER", "User");
 define("A_MODER", "Moderator");
 define("A_TOPMOD", "Top Moderator");
@@ -62,7 +66,7 @@ define("A_SHEET3_3", "Clean selected rooms");
 define("A_SHEET3_4", "There are no rooms to clean.");
 
 // Frame for sending mails
-define("A_SHEET4_0", "You haven’t set the admin email in the ’".A_MENU_5."’ tab.");
+define("A_SHEET4_0", "You haven’t set the admin email in the ’".A_MENU_5."’ sheet.");
 define("A_SHEET4_1", "Send e-mails");
 define("A_SHEET4_2", "To:");
 define("A_SHEET4_3", "Select all");

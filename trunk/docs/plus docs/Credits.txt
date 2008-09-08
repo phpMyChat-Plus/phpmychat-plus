@@ -36,14 +36,21 @@ Localization of the Plus version
 """"""""""""""""""""""""""""""""
 
  Argentinian		: Matias Olivera <matiolivera@yahoo.com>
+ Bulgarian			: Peter Petrov <peter.m.petrov@gmail.com>
+ Danish				: Jonas Koch Bentzen <post@jonaskochbentzen.dk> & Kenneth Kristiansen <kk@linuxfreak.adsl.dk> &
+					  Bente Feldballe
  Dutch				: Danny <danny74@zonnet.nl> & Bert Moorlag <berbia@hotmail.com>
  English			: Nicolas Hoizey <nhoizey@phpheaven.net> & Ciprian Murariu <ciprianmp@yahoo.com>
- French				: Drazen McLukic - Leloup <leloup@le-loup.info> & Christophe Luke <christophe.lucsky@gmail.com>
+ French				: Drazen McLukic - Leloup <leloup@le-loup.info>, Christophe Luke <christophe.lucsky@gmail.com>
+					  - rewriten by Pierre Liget <sourceforge@pliget.freesurf.fr>
  German				: Alexander Eisele <xaex@xeax.de> & Thomas Pschernig <tpsde1970@aol.com>
+ Hungarian			: Jácint Zsuzsanna <pycco8@yahoo.com>
  Italian			: Mike Mikius <mikiusss@yahoo.com> & Luciano Cataldo <lucianocataldo@gmail.com>
- Romanian			: Radu Swider <swidera@satline.ro>, Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro> & Ciprian Murariu <ciprianmp@yahoo.com>
+ Romanian			: Radu Swider <swidera@satline.ro>, Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro> &
+					  Ciprian Murariu <ciprianmp@yahoo.com>
+ Serbian (latin)	: Vedran Vučić <vedran.vucic@gnulinuxcentar.org>
  Spanish			: Roxana Castañeda <roxminu@yahoo.com> & Shelly Noyes <shelly.noyes@gmail.com>
- Swedish			: Heikki <heikki@yttervik.be>
+ Swedish			: Heikki <heikki@yttervik.be> & Fimpen Högström <fimpen@relative-work.se>
  Turkish			: Volkan Övün <vovun@hotmail.com>
  Vietnamese			: Marshall <hellomarshal_lookatme@netzero.net>
 

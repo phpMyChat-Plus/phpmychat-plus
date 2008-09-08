@@ -3,7 +3,7 @@
 // ------ THESE SETTINGS MUST BE COMPLETED ------
 
 // Database settings
-define("C_DB_NAME", 'pluschat');		// Logical database name on that server
+define("C_DB_NAME", 'chat');		// Logical database name on that server
 define("C_DB_USER", 'root');	// Database username
 define("C_DB_PASS", '');				// Database user's password
 // We recommend you keep the names below
@@ -189,6 +189,12 @@ $GRAVATARS_CACHE_EXPIRE	= $row[160];
 $GRAVATARS_RATING		= $row[161];
 $GRAVATARS_DYNAMIC_DEF	= $row[162];
 $GRAVATARS_DYNAMIC_DEF_FORCE	= $row[163];
+$ALLOW_UPLOADS			= $row[164];
+$RES_ROOM1						= $row[165];
+$RES_ROOM2						= $row[166];
+$RES_ROOM3						= $row[167];
+$RES_ROOM4						= $row[168];
+$RES_ROOM5						= $row[169];
 
 $query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.com'";
 $result_bot = mysql_query($query_bot);
@@ -262,19 +268,22 @@ define("ROOM7", $ROOM7);
 define("ROOM8", $ROOM8);
 define("ROOM9", $ROOM9);
 
-$PUBLIC_ROOMS = $EN_ROOM1 ? ROOM1.", " : "";
-$PUBLIC_ROOMS .= $EN_ROOM2 ? ROOM2.", " : "";
-$PUBLIC_ROOMS .= $EN_ROOM3 ? ROOM3.", " : "";
-$PUBLIC_ROOMS .= $EN_ROOM4 ? ROOM4.", " : "";
-$PUBLIC_ROOMS .= $EN_ROOM5 ? ROOM5.", " : "";
-$PUBLIC_ROOMS = trim($PUBLIC_ROOMS,", ");
+$PUBLIC_ROOMS = $EN_ROOM1 ? ($RES_ROOM1 ? ROOM1." [R], " : ROOM1.", ") : "";
+$PUBLIC_ROOMS .= $EN_ROOM2 ? ($RES_ROOM2 ? ROOM2." [R], " : ROOM2.", ") : "";
+$PUBLIC_ROOMS .= $EN_ROOM3 ? ($RES_ROOM3 ? ROOM3." [R], " : ROOM3.", ") : "";
+$PUBLIC_ROOMS .= $EN_ROOM4 ? ($RES_ROOM4 ? ROOM4." [R], " : ROOM4.", ") : "";
+$PUBLIC_ROOMS .= $EN_ROOM5 ? ($RES_ROOM5 ? ROOM5." [R], " : ROOM5.", ") : "";
+$PUBLIC_DISP_ROOMS = trim($PUBLIC_ROOMS,", ");
+$PUBLIC_ROOMS = trim(str_replace(" [R]","",$PUBLIC_ROOMS),", ");
 $PRIVATE_ROOMS = $EN_ROOM6 ? ROOM6.", " : "";
 $PRIVATE_ROOMS .= $EN_ROOM7 ? ROOM7.", " : "";
 $PRIVATE_ROOMS .= $EN_ROOM8 ? ROOM8.", " : "";
 $PRIVATE_ROOMS .= $EN_ROOM9 ? ROOM9.", " : "";
 $PRIVATE_ROOMS = trim($PRIVATE_ROOMS,", ");
 $DefaultChatRooms = explode(", ", $PUBLIC_ROOMS);
-$DefaultPrivateRooms = explode(", ", $PRIVATE_ROOMS);
+if ($PUBLIC_DISP_ROOMS != $PUBLIC_ROOMS) $DefaultDispChatRooms = explode(", ", $PUBLIC_DISP_ROOMS);
+if ($PRIVATE_ROOMS == "") $DefaultPrivateRooms = NULL;
+else $DefaultPrivateRooms = explode(", ", $PRIVATE_ROOMS);
 
 //	Profanity filter disabled for following rooms - by Ciprian
 define("C_NO_SWEAR_ROOM1", $SWEAR1);
@@ -613,4 +622,7 @@ define("GRAVATARS_CACHE_EXPIRE", $GRAVATARS_CACHE_EXPIRE);
 define("GRAVATARS_RATING", $GRAVATARS_RATING);
 define("GRAVATARS_DYNAMIC_DEF", $GRAVATARS_DYNAMIC_DEF);
 define("GRAVATARS_DYNAMIC_DEF_FORCE", $GRAVATARS_DYNAMIC_DEF_FORCE);
+
+// Uploader mod - by Ciprian
+define("C_ALLOW_UPLOADS", $ALLOW_UPLOADS);
 ?>

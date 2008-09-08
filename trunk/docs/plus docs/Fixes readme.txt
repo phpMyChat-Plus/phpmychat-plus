@@ -4,13 +4,14 @@ Client browsers - tested with:
 	- IE < 5.5 = M;
 	- IE > 6.0SP2 (including > 7.0 & > 8.0-beta) = H;
 	- Mozilla Firefox > 1.6.0.0 (including < 3.0) = H;
-	- Mozilla Firefox > 3.0.1pre (also known as Gran Paradiso) = M;
+	- Mozilla Firefox > 3.1a.2 = M;
 	- Mozilla Firebird 0.7 = L;
 	- Netscape > 8.1 = M;
 	- Opera 9.0 build 8502 = H;
 	- AvantBrowser 10.2 build 52 = H;
 	- Flock 1.2.1 = M;
 	- Apple Safari 3.1 = M.
+	- Google Chrome 0.2 beta = M.
 Server environment - tested env:
 	- Apache < 2.2.8 (Unix and Windows 2k/XP<SP3);
 	- php < 5.2.6 (non-safe-mode, but also a safe mode server has been tested and worked fine);
@@ -27,10 +28,26 @@ Known issues (read also the FAQ):
 Important: everytime you upgrade/reinstall a phpmychat server or change sensitive data in Admin panel (like default room names), the old cookies must be deleted from the clients’ machines - so let your users know! (also cache clearing might be a good idea)
 When you install Firefox2 and/or QuickTime (RealPlayer), a QuickTime plugin will break the WMP plugin in IE, necesary for playing .wav sounds, therefore, you won’t get sounds in IE anymore. I fixed it by playing with enabling WMP/disabling QuickTime plugins in IE; re-associating the "wav" files in Media Player/Tools/Options/File Types also fixes this.
 On some pcs a restart might be necessary.
-We also added a small script (reg file) as a link in Extra Options in chat.
+We also added a small IE fixing script (reg file) as a link in Extra Options in chat.
 
 Fixes History:
+27.08.2008 - 1.93-RC4:
+- more styling changes: (functionality extension)
+	- added Skin name, author, date and copyright in the chatrooms and style preview page;
+	- normalized the css/php codes for easier skinning;
+	- added the skins/images folder for images backgrounds in skins;
+- Restricted rooms mod added: (functionality extension)
+	- admin can choose now to set any or all of the default public rooms to have restricted access, then he can set as per registered user settings (which user should have access to which room);
+	- admins, topmoders and moderators (for their moderated rooms) still have access to all the restricted rooms accordingly;
+	- if moderator status is demoted or accessible room becomes restricted, appropriate notifications are sent to the room/rooms and to the respective user, being rejected from the restricted room;
+- translation updates for all included languages; (localization related)
+11.08.2008 - 1.93-RC3:
+- kick command fix; (functionality related)
+- Multi local avatars & sounds/buzes upload by admins; (functionality extension) - work started
+- Local avatars upload by users in profile; (functionality extension)
+- translation updates for all included languages; (localization related)
 10.06.2008 - 1.93-RC2:
+- small installer pagination fixes; (localization related)
 - banner.php filename is changed now to topic.php as well as all it’s old references; the AdBlock and AdBlock Plus plugins in Firefox were blocking it because the previous filename (banner.php) stands for advertisments; (functionality related)
 - the bot will not dissapear anymore from userlists when clean.lib or logs.lib are in action; (functionality related)
 - phpMyChat-Plus becomes the First Gravatarized LiveChat system in the world!!! (functionality extension)
@@ -39,6 +56,7 @@ Fixes History:
 - fixed the option for registered users to hide/undisclose their gender; (functionality related)
 - some archive improvements - all the off-line/unread pms will be kept in the database for a period of time set in admin panel -before, any pm would have been deleted together with the regular messages deletion; (functionality related)
 - added PM popup manager - each user can see all his received PMs and, if allowed from Admin panel, can delete the ones he chooses - to avoid saving to logs; (functionality extension)
+- translation updates for all included languages; (localization related)
 20.05.2008 - 1.93-RC1:
 - improved the installer;
 - send mail improvements for registration/edit profiles, as well as in Admin Panel:
@@ -58,6 +76,7 @@ Fixes History:
 - added power colors to usernames in users_popup lists (only if italicized is enabled); (functionality extension)
 - Expand/Colapse rooms fix; (functionality related)
 - Cc and Bcc added for sending emails from admin panel - for more spam control (if someone is accessing Admin panel and start using the send email sheet, the Owner will get copies so he can take counter-measures); (security & functionality extensions)
+- translation updates for all included languages; (localization related)
 30.03.2008 - 1.93-beta7:
 - several tutorial fixes - thanks to Peter’s suggestions; (translation related)
 - registration control have been added, so an admin can now review and approve who gets registered and who gets to chat; - there is a hint added in admin panel with usage instructions - (functionality extension)
@@ -404,7 +423,7 @@ To do (other then To do Cip.txt):
 - extend the bannishment feature to be able to ban an ip either by using the command or from admin panel;
 
 31.07.2006 - v1.8:
-- The bot has been enhanced (thanks to Sally Linus for her ideas)! It acts now just like any other human user in the chat. It can be invoked private and he answers private. He can talk from different rooms (functionality extension)
+- The bot has been enhanced (thanks to Sally Linus for her ideas)! It acts now just like any other human user in the chat. It can be invoked privately and it'll answer privately. Bot can talk from different rooms. (functionality extension)
 - private messaging have been improved (mostly because of the bot improvements); it shows an user’s whisper also to him (in his room), not just to the receiver (in the destination room). It can extend the functionality in the future. (functionality related)
 - the code was cleaned up a bit in several files. (size related)
 - some more details in Installation/Instructions.txt for editing the config database details. (support related)

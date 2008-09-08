@@ -1,5 +1,5 @@
 <?php
-// File : danish/localized.admin.php - plus version (07.07.2008 - rev.13)
+// File : danish/localized.admin.php - plus version (26.08.2008 - rev.14)
 // Original translation by Kenneth Kristiansen <kk@linuxfreak.adsl.dk>
 // Updates, corrections and additions for the Plus version by Bente Feldballe
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -38,6 +38,10 @@ define("A_SHEET1_9", "Forvis markerede profiler");
 define("A_SHEET1_10", "Du skal nu gå til fanen ’".A_MENU_2."’ hvor du kan finpudse dine valg.");
 define("A_SHEET1_11", "Sidst tilsluttet");
 define("A_SHEET1_12", "Forvisningsgrund (valgfri)");
+define("A_SHEET1_13", "Rum med adgangstilladelse");
+define("A_SHEET1_14", "Adgang tilladt for alle");
+define("A_SHEET1_15", "Adgang forbudt for alle");
+define("A_SHEET1_16", "Adgangsinddragelser for rummet skal også aktiveres på fanen ’".A_MENU_5."’.");
 define("A_USER", "Bruger");
 define("A_MODER", "Moderator");
 define("A_TOPMOD", "Top Moderator");

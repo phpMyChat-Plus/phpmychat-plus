@@ -1,5 +1,5 @@
 <?php
-// File : hungarian/localized.chat.php - plus version (18.06.2008 - rev.40)
+// File : hungarian/localized.chat.php - plus version (11.08.2008 - rev.41)
 // Original file by Jácint Zsuzsanna <pycco8@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use  ’  instead (utf-8 edit bug)
@@ -98,7 +98,7 @@ define("L_REG_50", "A regisztráció felfüggesztve!");
 define("L_EMAIL_VAL_1", "A belépéshez szükséges beállítások");
 define("L_EMAIL_VAL_2", "Üdvözöl a chat szerver!");
 define("L_EMAIL_VAL_Err", "Belső hiba! Lépj kapcsolatba az adminisztrátorral: <a href=\"mailto:%s\">%s</a>.");
-define("L_EMAIL_VAL_Done", "A jelszavadat elküldtük az e-mail címedre.<br />A jelszavadat megváltoztathatod a belépési oldalon, a ".L_REG_4." menüpontban.");
+define("L_EMAIL_VAL_Done", "A jelszavadat elküldtük az e-mail címedre.<br />A jelszavadat megváltoztathatod a belépési oldalon, a \"".L_REG_4."\" menüpontban.");
 define("L_EMAIL_VAL_PENDING_Done", "A regisztrált adatod bírálatra vár.");
 define("L_EMAIL_VAL_PENDING_Done1", "Megkapod a jelszót, amint az adminisztrátor elfogadja a regisztrációdat.");
 define("L_EMAIL_VAL_3", "A regisztrációd fűggőben van %s");
@@ -112,6 +112,7 @@ define("L_EMAIL_VAL_6", "Regisztrálva: %s");
 define("L_EMAIL_VAL_61", "Frissítve: %s");
 define("L_EMAIL_VAL_7", "Alább láthatod a %s felhasználói fiókod frissített adatait:"); //username
 define("L_EMAIL_VAL_8", "Mentsd el ezt az e-mail-t, hogy a jövőben hivatkozni tudj rá!\nTartsd biztonságos helyen, és senkivel ne oszd meg az információkat!\nKöszönjük, hogy csatlakoztál! Jó szórakozást!");
+define("L_EMAIL_VAL_81", "A jelszavadat megváltoztathatod a belépési oldalon, a \"".L_REG_4."\" menüpontban.");
 
 // admin stuff
 define("L_ADM_1", "%s már nem moderátor ebben a szobában.");	// username/nickname
@@ -292,8 +293,8 @@ define("L_WHOIS_REG", "Regisztrált");
 define("L_WHOIS_BOT", "Bot"); // Robot
 
 // Notification messages of user entrance/exit
-define("ENTER_ROM", "%s belépett a szobába");
-define("L_EXIT_ROM", "%s kilépett a szobából");
+define("ENTER_ROM", "%s belépett a szobába.");
+define("L_EXIT_ROM", "%s kilépett a szobából.");
 if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM . L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
@@ -303,7 +304,7 @@ define("L_BOOT_ROM", "%s-t automatikusan kidobta a rendszer inaktivitás miatt."
 define("L_CLOSED_ROM", "%s bezárta a böngészőjét.");
 
 // Text for /away command notification string:
-define("L_AWAY", "%s nincs a gépnél.");
+define("L_AWAY", "%s nincs a gépnél...");
 define("L_BACK", "%s visszajött!");
 
 // Quick Menu mod
@@ -394,7 +395,7 @@ define("L_NEXT_READ", "A következő %s elolvasása"); // message / 10 messages
 define("L_ROOM_ALL", "Az összes szoba");
 define("L_PRIV_NO_MSGS", "Nincs új privát üzenet ");
 define("L_PRIV_READ_MSG", "1 új privát üzenet érkezett"); //singular
-define("L_PRIV_READ_MSGS", "%s új privát üzenet érkezett "); //plural
+define("L_PRIV_READ_MSGS", "%s új privát üzenet érkezett"); //plural
 define("L_PRIV_MSGS_NEW", "Új"); //singular form
 define("L_PRIV_MSGS_READ", "Olvasott"); //singular form
 define("L_PRIV_MSG6", "Státusz:");
@@ -571,6 +572,7 @@ setlocale(LC_ALL, "hun_hun.UTF-8", "hungarian.UTF-8", "hungarian");
 } else {
 setlocale(LC_ALL, "hu_HU.UTF-8", "hu_HU.UTF-8@euro", "hun_hun.UTF-8", "hungarian.UTF-8", "hun.UTF-8", "hu.UTF-8"); // For HU formats
 }
+define("L_LANG", "hu_HU");
 define("ISO_DEFAULT", "iso-8859-2");
 define("WIN_DEFAULT", "windows-1250");
 define("L_SHORT_DATE", "%Y. %m. %d."); //Change this to your local desired format (keep the short form)

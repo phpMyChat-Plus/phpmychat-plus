@@ -1,5 +1,5 @@
 <?php
-// File : vietnamese/localized.chat.php - plus version (18.06.2008 - rev.40)
+// File : vietnamese/localized.chat.php - plus version (11.08.2008 - rev.41)
 // Translation by Marshall <hellomarshal_lookatme@netzero.net>
 // Updates and corrections by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -112,10 +112,11 @@ define("L_EMAIL_VAL_6", "Đăng ký trên %s");
 define("L_EMAIL_VAL_61", "Cập nhật trên %s");
 define("L_EMAIL_VAL_7", "Sau khi bạn %s cập nhật thông tin tài khoản:");
 define("L_EMAIL_VAL_8", "Lưu vào email cho sự tham khảo khi cần thiết.\nLàm ơn xem nó như bảo mật và không chia sẽ cho bất kỳ ai.\nCảm ơn cho sự gặp nhau , quá tốt!");
+define("L_EMAIL_VAL_81", "Bạn có thể thay đổi mật khẩu của bạn trong trang cá nhân.");
 
 // admin stuff
-define("L_ADM_1", "%s không là người điều tiết trong phòng này");
-define("L_ADM_2", "Bạn không còn là một người sử dụng được đăng ký");
+define("L_ADM_1", "%s không là người điều tiết trong phòng này.");
+define("L_ADM_2", "Bạn không còn là một người sử dụng được đăng ký.");
 
 // error messages
 define("L_ERR_USR_1", "Tên đăng nhập này đã được sử dụng. Xin chọn tên khác.");
@@ -147,6 +148,7 @@ define("L_ERR_USR_24", "Để tạo được phòng riêng thì bạn phải đ�
 define("L_ERR_USR_25", "Chỉ người quản trị có thể sử dụng ".$COLORNAME." Màu sắc!<br />Không thử tới sự sử dụng ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1.".<br />Thành viên bắc đầu!");
 define("L_ERR_USR_26", "Admin là người duy nhất có thể sử dụng ".$COLORNAME." màu sắc!<br />Không thử cho việc sử dụng ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1.".<br />Sự dự trữ cho người sử dụng!");
 define("L_ERR_USR_27", "Bạn không thể tạo cuộc trò chuyện riêng tư đới với chính bạn//..tốt nhất...\\Bây giờ chọn một tên đăng nhập khác.");
+define("L_ERR_USR_28", "Sự truy cập tới %s đã được hạn chế!<br />Xin chọn một phòng khác nhau."); // room name
 define("L_ERR_ROM_1", "Phòng không chứa đựng dấu phẩy hay dấu sổ ngược (\\).");
 define("L_ERR_ROM_2", "Sự trục xuất được hiện rõ tại phòng bạn muốn tới.");
 define("L_ERR_ROM_3", "Phòng này được tồn tại như 1 cộng đồng");
@@ -172,11 +174,13 @@ define("L_NO_PROFILE", "Không có thông tin hiển thị");
 
 // input frame
 define("L_HLP", "Trợ giúp");
-define("L_MODERATOR", "%s người điều tiết trong phòng này");
-define("L_KICKED", "%s việc đá thành công");
-define("L_KICKED_REASON", "%s một cách thành công (Lý do: %s)");
-define("L_BANISHED", "%s có một cách thành công được trục xuất");
-define("L_BANISHED_REASON", "%s một cách thành công được trục xuất (Lý do: %s)");
+define("L_MODERATOR", "%s người điều tiết trong phòng này.");
+define("L_KICKED", "%s việc đá thành công.");
+define("L_KICKED_REASON", "%s một cách thành công. (Lý do: %s)");
+define("L_KICKED_ALL", "Tất cả những người sử dụng có một cách thành công được đá ra khỏi.");
+define("L_KICKED_ALL_REASON", "Tất cả những người sử dụng có một cách thành công được đá ra khỏi. (Lý do: %s)");
+define("L_BANISHED", "%s có một cách thành công được trục xuất.");
+define("L_BANISHED_REASON", "%s một cách thành công được trục xuất. (Lý do: %s)");
 define("L_ANNOUNCE", "THÔNG BÁO");
 define("L_INVITE", "%s những yêu cầu mà bạn ông/cô phải hòan thành <a href=\"#\" onClick=\"window.parent.runCmd('%s','%s')\">%s</a> phòng.");
 define("L_INVITE_REG", "Bạn phải đăng ký để vào phòng này.");
@@ -188,10 +192,10 @@ define("L_ADMIN", "%s đã là người quản trị!");
 define("L_IS_MODERATOR", "%s đã là MOD!");
 define("L_NO_MODERATOR", "Chỉ có người điều tiết phòng này mới có thể sử dụng lệnh này");
 define("L_NONEXIST_USER", "%s không trong phòng hiện thời.");
-define("L_NONREG_USER", "%s không đăng ký");
+define("L_NONREG_USER", "%s không đăng ký.");
 define("L_NONREG_USER_IP", "IP của anh ấy: %s.");
 define("L_NO_KICKED", "%s là một MOD hay quản trị thì không được đá ra khỏi.");
-define("L_NO_BANISHED", "%s là một MOD hay người quản trị thì không thể trục xuất");
+define("L_NO_BANISHED", "%s là một MOD hay người quản trị thì không thể trục xuất.");
 define("L_SVR_TIME", "Thời gian server: ");
 define("L_NO_SAVE", "Không tin nhắn đựơc cất giữ!");
 define("L_NO_ADMIN", "Chỉ người quản trị mới có thể sử dụng lệnh này");
@@ -222,7 +226,7 @@ define("L_HELP_CMD_5", "Để lại lời chat sau một thông báo");
 define("L_HELP_CMD_6", "Hãy tránh những thông báo từ người sử dụng nếu nó không được chỉ rõ<br />Làm lặn đi người sử dụng - cả hai được chỉ rõ, Cho tất cả người sử dụng khi - Trừ khi không phải.<br />Không hiển thị rõ , lờ đi trên mặt cắt.");
 define("L_HELP_CMD_7", "Xem lại những lời nói trước đây được đánh máy (Lệnh thông báo).");
 define("L_HELP_CMD_8", "Hiện/ẩn thời gian sau truyền tin");
-define("L_HELP_CMD_9", "Đá ra người sử dụng chuyện tán gẫu. Lệnh này có thể sử dụng bởi MOD room hay Admin<br />Để chọn, [".L_HELP_REASON."] Trình bày lý do cái đá (Bất kỳ văn bản mong muốn nào).");
+define("L_HELP_CMD_9", "Đá ra người sử dụng chuyện tán gẫu. Lệnh này có thể sử dụng bởi MOD room hay Admin<br />Để chọn, [".L_HELP_REASON."] Trình bày lý do cái đá (Bất kỳ văn bản mong muốn nào).<br />Nếu * tùy chọn được sử dụng, lệnh sẽ đá ở ngoài từ chuyện gẫu tất cả những người sử dụng không có những sức mạnh (những khách và những người sử dụng được đăng ký duy nhất). Đây thì hữu ích khi kết nối người phục vụ đang có những vấn đề và tất cả người dân cần phải tái chất hàng chuyện gẫu của họ. Trong trường hợp thứ hai này, a [".L_HELP_REASON."] được khuyến cáo để để cho những người sử dụng biết tại sao họ là bình thường kick.");
 define("L_HELP_CMD_10", "Gửi một thông báo riêng tư Tới người sử dụng được chỉ rõ (những người sử dụng khác sẽ không nhìn thấy nó).");
 define("L_HELP_CMD_11", "Cho thấy những thông tin người sử dụng được chỉ rõ.");
 define("L_HELP_CMD_12", "Popup windows được sọan thảo bởi thành viên");
@@ -293,18 +297,18 @@ define("L_WHOIS_REG", "Đăng ký");
 define("L_WHOIS_BOT", "Bot");
 
 // Notification messages of user entrance/exit
-define("ENTER_ROM", "%s vào phòng này");
-define("L_EXIT_ROM", "%s thóat ra khỏi phòng");
+define("ENTER_ROM", "%s vào phòng này.");
+define("L_EXIT_ROM", "%s thóat ra khỏi phòng.");
 if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
 // Clean mod/fix by Ciprian
-define("L_BOOT_ROM", "%s tự động khởi động phòng cho dù không họat động");
-define("L_CLOSED_ROM", "%s đóng trình duyệt");
+define("L_BOOT_ROM", "%s tự động khởi động phòng cho dù không họat động.");
+define("L_CLOSED_ROM", "%s đóng trình duyệt.");
 
 // Text for /away command notification string:
-define("L_AWAY", "%s được đánh dấu ra khỏi");
+define("L_AWAY", "%s được đánh dấu ra khỏi ...");
 define("L_BACK", "%s ra khỏi!");
 
 // Quick Menu mod
@@ -326,7 +330,7 @@ define("L_HELP_IMG", "ảnh đầy đủ được gửi");
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s không có mod trong phòng chat.");
 define("L_IS_NO_MODERATOR", "%s không là MOD.");
-define("L_ERR_IS_ADMIN", "%s là người quản trị!\\bạn không thể thay đổi sự cho phép");
+define("L_ERR_IS_ADMIN", "%s là người quản trị!\\bạn không thể thay đổi sự cho phép.");
 
 // Info mod by Ciprian - displays a list of all the features & mods, including Bot's name, on the welcome page
 define("INFO_CMDS", "Những lệnh thêm sẵn có:");
@@ -563,6 +567,7 @@ setlocale(LC_ALL, "viet nam.UTF-8", "viet nam");
 } else {
 setlocale(LC_ALL, "vi_VN.UTF-8", "vnd_vnd.UTF-8", "vie_vie.UTF-8");
 }
+define("L_LANG", "vi_VN");
 define("ISO_DEFAULT", "");
 define("WIN_DEFAULT", "windows-1258");
 define("L_SHORT_DATE", "%d %b %Y"); //Change this to your local desired date only format (keep the short form)
@@ -609,6 +614,7 @@ define("L_SKINS_TITLE", "Mẫu xem trước");
 define("L_SKINS_TITLE1", "Những Mẫu %s tới %s xem trước"); // Skins 1 to 4 preview
 define("L_SKINS_AV", "Những Mẫu có sẵn");
 define("L_SKINS_NONAV", "Không có những kiểu được định nghĩa Trong \"skins\" thư mục");
+define("L_SKINS_COPY", "&copy; %s Giao diện bởi %s");
 
 // Swap image titles by Ciprian
 define("L_GEN_ICON", "Biểu tượng giới tính");
@@ -627,4 +633,16 @@ define("L_LOGIN_COUNT", "Tất cả lượt ghé thăm");
 
 // Gravatar from email mod by Ciprian
 define("L_GRAV_USE", "sừ dụng nó Gravatar");
+
+// Uploader mod by Ciprian
+define("L_UPLOAD", "Upload %s"); // Upload Image, Upload Sound or Upload File
+define("L_UPLOAD_IMG", "Hồ sơ ảnh"); // used to upload Avatars and /img command
+define("L_UPLOAD_SND", "Hồ sơ Âm thanh"); // used to upload Buzz sounds
+define("L_UPLOAD_FLS", "Những hồ sơ"); // used to upload multiple files at once
+define("L_UPLOAD_SUCCESS", "%s một cách thành công nạp dữ liệu như %s."); // original filename, destination filename
+define("L_FILES_TITLE", "Quản lý những file upload");
+
+// Room restriction mod by Ciprian
+define("L_RESTRICTED", "Hạn chế");
+define("L_RESTRICTED_ROM", "%s một cách thành công được hạn chế từ phòng này.");
 ?>

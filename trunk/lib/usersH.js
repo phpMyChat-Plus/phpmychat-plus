@@ -98,7 +98,7 @@ function arrange()
 function big_icon()
 {
 	if (rooms_number == 0) return;
-	bigImg = (NS4 > 0) ? exitFrame.document.images['imEx_big'] : exitFrame.document.images.item('imEx_big');
+	bigImg = (NS4) ? exitFrame.document.images['imEx_big'] : exitFrame.document.images.item('imEx_big');
 	if (opened_rooms_number == rooms_number)
 	{
 		isExpanded = true;

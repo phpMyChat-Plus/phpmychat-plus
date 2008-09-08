@@ -150,6 +150,8 @@ function ghosts_in($what, $in, $Charset)
 /*********** PART I ***********/
 
 // Define the message to display if user comes here because he has been kicked
+$Reason = "";
+$Reason_all = "";
 $DbLink = new DB;
 $DbLink->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE 'sprintf(L_KICKED_REASON, \"".$U."\", %' AND m_time>".(time()-30)." LIMIT 1");
 	$kickeduser = (list($message) = $DbLink->next_record());
@@ -159,6 +161,15 @@ $DbLink->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE 'sprintf(L_
 {
 	$Reason = trim($message,"sprintf(L_KICKED_REASON, \".$U.\", ");
 	$Reason = trim($Reason,"\")");
+}
+$DbLink->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE 'sprintf(L_KICKED_ALL_REASON, \"%' AND m_time>".(time()-30)." LIMIT 1");
+	$kickeduser_all = (list($message) = $DbLink->next_record());
+	$DbLink->clean_results();
+	// The user has been kicked for a reason
+	if ($kickeduser_all)
+{
+	$Reason_all = trim(str_replace("sprintf(L_KICKED_ALL_REASON, \"", "", $message));
+	$Reason_all = trim($Reason_all,"\")");
 }
 $DbLink->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE 'sprintf(L_BANISHED_REASON, \"".$U."\", %' AND m_time>".(time()-30)." LIMIT 1");
 	$banisheduser = (list($message) = $DbLink->next_record());
@@ -174,8 +185,9 @@ if (isset($KK))
 	switch ($KK)
 	{
 		case '1':
-			if ($Reason == "") $Error = L_REG_18;
-			else $Error = sprintf(L_REG_18a, $Reason);
+			if ($Reason == "" && $Reason_all == "") $Error = L_REG_18;
+			elseif ($Reason != "") $Error = sprintf(L_REG_18a, $Reason);
+			elseif ($Reason_all != "") $Error = sprintf(L_REG_18a, $Reason_all);
 			break;
 		case '2':
 			$Error = L_REG_39;
@@ -325,9 +337,11 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 		{
 			list($room) = $DbLink->next_record();
 			$DbLink->clean_results();
-			$DbLink->query("SELECT password,perms,rooms,allowpopup FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
+			$DbLink->query("SELECT password,perms,rooms,allowpopup,last_login,login_counter,join_room FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 			$reguser = ($DbLink->num_rows() != 0);
-			if ($reguser) list($user_password,$perms,$rooms,$allowpopupu) = $DbLink->next_record();
+			if ($reguser) list($user_password,$perms,$rooms,$allowpopupu,$last_login,$login_counter,$join_room) = $DbLink->next_record();
+			else $join_room = "";
+
 			$DbLink->clean_results();
 
 			if (!(isset($E) && $E != ""))
@@ -343,7 +357,16 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 					{
 						if (md5(stripslashes($pmc_password)) != $user_password && (!isset($PWD_Hash) || $PWD_Hash != $user_password)) $Error = L_ERR_USR_4;
 					}
-					if (!isset($Error)) $DbLink->query("UPDATE ".C_REG_TBL." SET reg_time=".time()." WHERE username='$U'");
+					if (!isset($Error))
+					{
+						// This will count only the registered user returning to chat
+						if ((time() - $last_login > C_LOGIN_COUNTER * 60) || $last_login = "")
+						{
+							$login_counter = $login_counter + 1;
+							$DbLink->query("UPDATE ".C_REG_TBL." SET reg_time=".time().", last_login=".time().", login_counter=".$login_counter." WHERE username='$U'");
+						}
+						else $DbLink->query("UPDATE ".C_REG_TBL." SET reg_time=".time()." WHERE username='$U'");
+					}
 				}
 				// If users isn't a registered one and phpMyChat require registration deny access
 				else if (C_REQUIRE_REGISTER)
@@ -365,9 +388,9 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 // **	Get perms of the user if the script is called by a join command	**
 if (isset($Reload) && $Reload == "JoinCmd")
 {
-	$DbLink->query("SELECT perms,rooms,allowpopup FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
+	$DbLink->query("SELECT perms,rooms,allowpopup,join_room FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	$reguser = ($DbLink->num_rows() != 0);
-	if ($reguser) list($perms,$rooms,$allowpopupu) = $DbLink->next_record();
+	if ($reguser) list($perms,$rooms,$allowpopupu,$join_room) = $DbLink->next_record();
 	$DbLink->clean_results();
 };
 
@@ -606,6 +629,24 @@ if(!isset($Error) && (isset($R2) && $R2 != ""))
 		}
 	}
 }
+
+
+// **	Ensures the user has no restrictions to the room he chooses to enter, create or join - Rooms Restriction mod by Ciprian
+if(!isset($Error) && ((isset($R0) && $R0 != "") || (isset($R1) && $R1 != "") || (isset($R2) && $R2 != "") || (isset($R3) && $R3 != "") || $RES))
+{
+	if ($join_room == "*" || $perms == "admin" || $perms == "topmod" || ($perms == "moderator" && (room_in(stripslashes(isset($R0) ? $R0 : (isset($R2) ? $R2 : (isset($R3) ? $R3 : $R1))), $rooms, $Charset) || room_in("*", $rooms, $Charset)))) $restriction = 0;
+	elseif ((isset($R0) ? $R0 : (isset($R2) ? $R2 : (isset($R3) ? $R3 : $R1))) == ROOM1 && $EN_ROOM1 && $RES_ROOM1 && $join_room != "ROOM1") $restriction = 1;
+	elseif ((isset($R0) ? $R0 : (isset($R2) ? $R2 : (isset($R3) ? $R3 : $R1))) == ROOM2 && $EN_ROOM2 && $RES_ROOM2 && $join_room != "ROOM2") $restriction = 1;
+	elseif ((isset($R0) ? $R0 : (isset($R2) ? $R2 : (isset($R3) ? $R3 : $R1))) == ROOM3 && $EN_ROOM3 && $RES_ROOM3 && $join_room != "ROOM3") $restriction = 1;
+	elseif ((isset($R0) ? $R0 : (isset($R2) ? $R2 : (isset($R3) ? $R3 : $R1))) == ROOM4 && $EN_ROOM4 && $RES_ROOM4 && $join_room != "ROOM4") $restriction = 1;
+	elseif ((isset($R0) ? $R0 : (isset($R2) ? $R2 : (isset($R3) ? $R3 : $R1))) == ROOM5 && $EN_ROOM5 && $RES_ROOM5 && $join_room != "ROOM5") $restriction = 1;
+	if ($restriction || $RES)
+	{
+		$Error = sprintf(L_ERR_USR_28,(isset($R0) ? $R0 : (isset($R2) ? $R2 : (isset($R3) ? $R3 : (isset($R1) ? $R1 : $E)))));
+		setcookie("CookieRoom", '', time());        // cookie expires in one year
+	}
+}
+
 
 // ** Enter the chat **
 if(!isset($Error) && (isset($N) && $N != ""))

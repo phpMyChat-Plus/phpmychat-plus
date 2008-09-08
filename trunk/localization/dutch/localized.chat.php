@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.chat.php - plus version (18.06.2008 - rev.40)
+// File : dutch/localized.chat.php - plus version (11.08.2008 - rev.41)
 // Original translation by Hans Paijmans <paai@kub.nl>, Kasper Souren <guaka@industree.org> and Sander Corbesir <rock@jascrc.com>
 // Updates, corrections and additions for the Plus version by DJE.Amesz & Romanesko <Genieusdanny@gmail.com> and Bert Moorlag <berbia@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -113,6 +113,7 @@ define("L_EMAIL_VAL_6", "Geregistreerd op %s");
 define("L_EMAIL_VAL_61", "Updated op %s");
 define("L_EMAIL_VAL_7", "Hieronder zijn jou %s updated account info:"); //username
 define("L_EMAIL_VAL_8", "Bewaar deze mail als toekomstige referentie.\nMaak deze veilig en houd deze voor jezelf.\nDank u voor de inschrijving! Veel plezier!");
+define("L_EMAIL_VAL_81", "U kunt uw wachtwoord wijzigen op de inlogpagina, bij pas uw profiel aan.");
 
 // admin stuff
 define("L_ADM_1", "%s is geen moderator in deze ruimte.");
@@ -185,8 +186,8 @@ define("L_INVITE_DONE", "Uw uitnodiging is verzonden aan %s.");
 define("L_OK", "Verstuur");
 define("L_BUZZ", "Buzzes Gallerij");
 define("L_BAD_CMD", "Onjuiste opdracht!");
-define("L_ADMIN", "%s is al administrator !");
-define("L_IS_MODERATOR", "%s is al moderator !");
+define("L_ADMIN", "%s is al administrator!");
+define("L_IS_MODERATOR", "%s is al moderator!");
 define("L_NO_MODERATOR", "Alleen moderator van deze kamer kan die gebruiken.");
 define("L_NONEXIST_USER", "%s is niet in de kamer aanwezig.");
 define("L_NONREG_USER", "%s is niet geregisteerd.");
@@ -293,18 +294,18 @@ define("L_WHOIS_REG", "Geregistreerd");
 define("L_WHOIS_BOT", "Bot");
 
 // Notification messages of user entrance/exit
-define("ENTER_ROM", "%s komt binnen in deze ruimte");
-define("L_EXIT_ROM", "%s is uitlogd");
+define("ENTER_ROM", "%s komt binnen in deze ruimte.");
+define("L_EXIT_ROM", "%s is uitlogd.");
 if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
 // Clean mod/fix by Ciprian
-define("L_BOOT_ROM", "%s is uit de kamer verwijderd wegens het niet actief deelnemen in de chat");
-define("L_CLOSED_ROM", "%s heeft het chatvenster gesloten");
+define("L_BOOT_ROM", "%s is uit de kamer verwijderd wegens het niet actief deelnemen in de chat.");
+define("L_CLOSED_ROM", "%s heeft het chatvenster gesloten.");
 
 // Text for /away command notification string:
-define("L_AWAY", "%s is niet aan de toetsen");
+define("L_AWAY", "%s is niet aan de toetsen...");
 define("L_BACK", "%s is terug!");
 
 // Quick Menu mod
@@ -562,6 +563,7 @@ setlocale(LC_ALL, "dutch.UTF-8", "dutch");
 } else {
 setlocale(LC_ALL, "nl_NL.UTF-8", "nl_NL.UTF-8@euro", "nld_nld.UTF-8", "nld.UTF-8");
 }
+define("L_LANG", "nl_NL");
 define("ISO_DEFAULT", "iso-8859-1");
 define("WIN_DEFAULT", "windows-1252");
 define("L_SHORT_DATE", "%d-%m-%Y"); //Change this to your local desired date only format (keep the short form)

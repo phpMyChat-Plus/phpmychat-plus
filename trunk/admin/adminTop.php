@@ -10,7 +10,7 @@ $URLQueryTop = "L=$L&pmc_username=".urlencode($pmc_username)."&pmc_password=$pmc
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
-<TITLE><?php echo((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME); ?></TITLE>
+<TITLE><?php echo(L_REG_35." - ".(C_CHAT_NAME != "" ? C_CHAT_NAME." - ".APP_NAME : APP_NAME)); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 </HEAD>
 
@@ -53,7 +53,7 @@ $URLQueryTop = "L=$L&pmc_username=".urlencode($pmc_username)."&pmc_password=$pmc
 		&nbsp;<A HREF="<?php echo("$From?$URLQueryTop&sheet=5"); ?>" TARGET="_parent"<?php if ($sheet == "5") echo(" CLASS=\"selected\""); ?>><?php echo(A_MENU_5); ?></A>&nbsp;
 	</TD>
 	<TD ALIGN=CENTER NOWRAP="NOWRAP">
-		<IMG SRC="images/selColor.gif" WIDTH=5><a href="logout.php?mode=logout" onClick="top.close();"><?php echo (A_LOGOUT) ?></a>
+		<IMG SRC="images/selColor.gif" WIDTH=5><a href="logout.php" onClick="top.close();"><?php echo (A_LOGOUT) ?></a>
 		</TD>
         <TD WIDTH=1><IMG SRC="images/selColor.gif" WIDTH=1></TD>
 	<TD ALIGN=LEFT VALIGN=bottom WIDTH=1500 CLASS="menuTitle">

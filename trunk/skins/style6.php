@@ -1,6 +1,14 @@
 <?php
-// "DarkRed & maroon" skin for phpMyChat plus - by Ealdwulf
+// "DarkRed" skin for phpMyChat plus - by Ealdwulf
 
-define("COLOR_CD", "maroon"); //default messages color (also the filter color of this room)
-$SKIN_NAME = "DarkRed & maroon";
+$SKIN_NAME = "DarkRed";
+$SKIN_DATE = "2006-".(date('Y'));
+$SKIN_BY = "Ealdwulf";
+$COLOR_BK = "DarkRed"; //main background color
+$COLOR_BODY = "LavenderBlush"; //main body color
+$COLOR_TB = "LavenderBlush"; //main table color
+$COLOR_SCROLL_TRACK = "Firebrick"; //main table color
+$COLOR_LINK = "Ivory"; //main table color
+$COLOR_TOPIC = "Yellow"; //topic color
+define("COLOR_CD", "brown"); //default messages color (also the filter color of this room)
 ?>

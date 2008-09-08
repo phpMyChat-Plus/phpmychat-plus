@@ -1,5 +1,5 @@
 <?php
-// File : german/localized.admin.php - plus version (07.07.2008 - rev.13)
+// File : german/localized.admin.php - plus version (26.08.2008 - rev.14)
 // Original translation by Robert Schaller <robert@schaller.com> & Wolfgang Schneider <schneider@bibelcenter.de>
 //    & Martin Sander <Martin.Sander@touch-screen.de> & Bernard Piller <bernard@bmpsystems.com>
 //    & Reinhard Hofmann <e9625556@student.tuwien.ac.at> & Christian Hacker <c.hacker@dreamer-chat.de>
@@ -40,6 +40,10 @@ define("A_SHEET1_9", "Markierte Profile verbannen");
 define("A_SHEET1_10", "Jetzt müssen Sie Ihre Auswahl auf der Seite ’".A_MENU_2."’ verfeinern.");
 define("A_SHEET1_11", "Zuletzt verbunden");
 define("A_SHEET1_12", "Verbannungsgrund (optional)");
+define("A_SHEET1_13", "Erlaubte Räume");
+define("A_SHEET1_14", "Zutritt erlaubt");
+define("A_SHEET1_15", "Zutritt verboten");
+define("A_SHEET1_16", "Die erwähnten Raumbeschränkungen sollten auch erwähnt werden im ’".A_MENU_5."’ feld.");
 define("A_USER", "Benutzer");
 define("A_MODER", "Moderator");
 define("A_TOPMOD", "Top Moderator");

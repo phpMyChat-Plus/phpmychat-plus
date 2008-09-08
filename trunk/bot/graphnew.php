@@ -349,23 +349,20 @@ function graphwalker($input,$parent,$timesthrough,$onwild,$parton,&$inputstarval
 	}
 
 	// Else no match found...
-	if ((($whichresult[0]==-1)&&($whichresult[1]==-1)&&($whichresult[2]==-1))||($continuenode==1)) {
+	if ((($whichresult[0]==-1)&&($whichresult[1]==-1)&&($whichresult[2]==-1))||($continuenode==1)) { 
 		//If we were most recently on a wildcard (*,_) then we are still matching it.
-		if (($onwild==1)&&($word!="")&&($word!="<that>")&&($word!="<topic>")){
+		if (($onwild==1)&&($word!="")){
 			debugger("On wild and in *. keep going with graphwalker.",2);
-
 			addtostar($parton,$word,$inputstarvals,$thatstarvals,$topicstarvals,2);
-
 			return graphwalker($remains,$parent,1,1,$parton,$inputstarvals,$thatstarvals,$topicstarvals,$patternmatched);
 		}
 		else {
 			//We didn't find anything. We need to come back out
-			debugger("Result is blank from query in *. Returning blank",2);
+			$inputstarvals=array();
+			debugger("Result is blank from query in *. Returning blank",2); 
 			return "";
 		}
-
-	}
-
+	} 
 }
 
 /**

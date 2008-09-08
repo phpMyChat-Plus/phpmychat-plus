@@ -84,7 +84,7 @@ if($DbLink->num_rows() > 0)
 		$Message = eregi_replace("L_REG_BRB",L_REG_BRB,$Message);
 		$Message = eregi_replace("L_HELP_MR",L_HELP_MR,$Message);
 		$Message = eregi_replace("L_HELP_MS",L_HELP_MS,$Message);
-		if ($Room == '*') $Room = L_ROOM_ALL;
+		if ($Room == '*' || ($User == "SYS room" && $Dest == '*') || $User == "SYS announce") $Room = L_ROOM_ALL;
 		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
 		{
 			$Message = eregi_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$Message);

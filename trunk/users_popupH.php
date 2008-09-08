@@ -57,6 +57,20 @@ if (!function_exists('mb_convert_case'))
 	};
 };
 
+if (!function_exists("utf8_substr"))
+{
+	function utf8_substr($str,$start)
+	{
+	   preg_match_all("/./su", $str, $ar);
+	   if(func_num_args() >= 3) {
+	       $end = func_get_arg(2);
+	       return join("",array_slice($ar[0],$start,$end));
+	   } else {
+	       return join("",array_slice($ar[0],$start));
+	   }
+	};
+};
+
 // Ghost Control mod by Ciprian
 function ghosts_in($what, $in, $Charset)
 {
@@ -147,6 +161,10 @@ if (C_SPECIAL_GHOSTS != "")
 if ($sort_order == "1")	$ordquery = "u.username";
 else $ordquery = "u.r_time";
 
+// Restricted rooms mod by Ciprian
+$res_init = utf8_substr(L_RESTRICTED, 0, 1);
+$disp_note = 0;
+
 // ** count rooms **
 $DbLink->query("SELECT DISTINCT u.room FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room AND m.type = 1");
 $NbRooms = $DbLink->num_rows();
@@ -232,6 +250,12 @@ if(isset($NbUsers) && $NbUsers > 0)
 					{
 						$i++;
 						$id = "room".$i;
+						// Restricted rooms mod by Ciprian
+						if (is_array($DefaultDispChatRooms) && in_array($Other." [R]",$DefaultDispChatRooms))
+						{
+							$Other .= " [".$res_init."]";
+							$disp_note = 1;
+						}
 						echo("<DIV ID=\"${id}Parent\" CLASS=\"parent\" STYLE=\"margin-top: 5px;\">");
 if (!eregi("firefox", $_SERVER['HTTP_USER_AGENT']))
 {
@@ -256,6 +280,7 @@ if (!eregi("firefox", $_SERVER['HTTP_USER_AGENT']))
 			}
 		}
 	}
+	if($disp_note) echo("<P><table WIDTH=100%><tr valign=top><td colspan=4 align=left CLASS=small>[".$res_init."] = ".L_RESTRICTED.".</td></tr></table>");
 	$DbLink->clean_results();
 }
 else

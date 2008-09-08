@@ -1,4 +1,14 @@
 Requests / Suggestions
+
+I'd like to see some features from VooDoo chat (vochat.com) implemented in to phpmychat. (Jennifer Stuart)
+Some of those features are:
+--Point and Click through the GUI the Admin\Mod\User controls in chat instead of having to type IRC commands
+--Ability to upload and post pix in to chat from a users local hard drive
+--Ability to upload Avatars from the users puter and store them on the server in the users profile
+--Ability to embed just the login box and buttons on a custom page instead of the default so I can better match the Chat login page to my sites look & feel - Ciprian - done (Remote Login box)
+--Ability to easily add emoties & 'buzz' sounds through the Admin panel. 
+--Point and click status menu in Chat so the users can set their status.
+
 -speech/voice chat plugin
 -add Private channels popup - separate private conversations - mirc like - based on Volkan Övün idea.
 -allow power users whispers when pm is disabled - based on Peter Petrov idea.
@@ -53,14 +63,14 @@ Done:
 [11:02] lamer was kicked (reason: Spamming)
 -same for banishing - Ciprian - done (1.91)
 -archiving/logging/lurking the pictures links posted using the /img command - Ciprian - done
-- change the pm function to > / done (1.91)
-- fix the pmpopup script error - done?
+-change the pm function to > / done (1.91)
+-fix the pmpopup script error - done
 -Is there a way to tie your profile color to your chat text color, and not just the nick? (based on Auggy’s idea) - Ciprian - done
-- text cell valign top on messages (for smilies) - Ciprian - done
+-text cell valign top on messages (for smilies) - Ciprian - done
 -default color font stored in database not cookie - Ciprian ??? (too many connections - it will stay in cookie and database - no security issue) - done
 - is there any tool available or planned to reset user passwords? - Ciprian - done
 -add the iplogs feature (log_IP.lib.php) - Ciprian - done
--installer/setup - Ciprian - done by Thomas
+-installer/setup - done by Thomas
 -add chat title to display it on titles and index - Ciprian - done
 -posting links without a leading space hangs the input frame/chat - Alex? - Ciprian - done
 -add colornames in users_popup list - Ciprian - done - only power colors possible.

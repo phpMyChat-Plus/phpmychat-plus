@@ -1,5 +1,5 @@
 <?php
-// File : turkish/localized.admin.php - plus version (18.06.2008 - rev.13)
+// File : turkish/localized.admin.php - plus version (07.07.2008 - rev.13)
 // Original translation in turkish by Volkan Övün <vovun@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -93,8 +93,8 @@ define("A_CHTEX_MSG", "Mesaj") ;
 define("A_CHAT_LOGS_1", "%s ’a yapılan bağlantıların IP kayıtları");
 define("A_CHAT_LOGS_2", "Sohbetleri kaydetmek devre dışı bırakılmıştır");
 define("A_CHAT_LOGS_3", "Sohbet IP kayıtları sayfasını aç");
-define("A_CHAT_LOGS_4", "Sohbet IP kayıtlarını sil");
-define("A_CHAT_LOGS_5", "IP kayıtları dosyasını sileceksiniz!\\n");
+define("A_CHAT_LOGS_4", "Sohbet IP kayıtları dosyasını sıfırlayın");
+define("A_CHAT_LOGS_5", "Bu işlem Sohbet IP kayıtları dosyasını arşivledikten sonra sıfırlayacaktır!\\n");
 define("A_CHAT_LOGS_6", "Bütün Sohbet Kayıtları Arşivi");
 define("A_CHAT_LOGS_7", "Kullanıcıların sohbet arşivi bölümünü göster");
 define("A_CHAT_LOGS_8", "%s dizinindeki bütün dosya ve\\ndizinleri sileceksiniz!\\n");
@@ -120,6 +120,16 @@ define("A_CHAT_LOGS_27", "Zip arşivleri");
 define("A_CHAT_LOGS_28", "İndir %s");
 define("A_CHAT_LOGS_29", "Bu zip dosyasını sil");
 define("A_CHAT_LOGS_30", "IP arşivleri");
+define("A_CHAT_LOGS_31", "Toplam boyut %s %s");
+define("A_CHAT_LOGS_32", "Dosya");
+define("A_CHAT_LOGS_33", "Klasör");
+define("A_CHAT_LOGS_34", "%s başarıyla silindi: %s");
+define("A_CHAT_LOGS_35", "%s başarıyla oluşturuldu: %s");
+define("A_CHAT_LOGS_36", "%s mevcut değil: %s");
+define("A_CHAT_LOGS_37", "%s silinemedi: %s");
+define("A_CHAT_LOGS_38", "%s oluşturulamadı: %s");
+define("A_CHAT_LOGS_39", "%s yazım korumalı: %s");
+define("A_CHAT_LOGS_40", "Dosya kaydedilirken hata oluştu: %s"); // filename
 
 //Admin Search Page
 define("A_SEARCH_1", "Sohbet Odası Arama Sayfası");
