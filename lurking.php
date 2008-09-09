@@ -82,6 +82,7 @@ if (!function_exists('ghosts_in'))
 // Restricted room mod by Ciprian
 $res_init = utf8_substr(L_RESTRICTED, 0, 1);
 $disp_note = 0;
+$disp_note2 = 0;
 
 require("lib/connected_users.lib.php");
 
@@ -152,7 +153,7 @@ if($DbLink1->num_rows() > 0)
 			if (is_array($DefaultDispChatRooms) && in_array($Room." [R]",$DefaultDispChatRooms))
 			{
 				$Room .= " [".$res_init."]";
-				$disp_note = 1;
+				$disp_note2 = 1;
 			}
 		}
 		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
@@ -314,6 +315,7 @@ if (C_WORLDTIME == 2)
 </TR>
 </TABLE>
 <?php
+	if($disp_note) echo("<table WIDTH=100%><tr valign=top><td colspan=4 align=left CLASS=small>[".$res_init."] = ".L_RESTRICTED.".</td></tr></table>");
 	include("lib/useronline.lib.php");
 	echo("<hr />");
 	echo("<table BORDER=1 WIDTH=100% CELLSPACING=0 CELLPADDING=1 CLASS=table>");
@@ -327,7 +329,7 @@ if (C_WORLDTIME == 2)
 	}
 	echo($MessagesString."</table>");
 	unset($MessagesString);
-	if($disp_note) echo("<table WIDTH=100%><tr valign=top><td colspan=4 align=left CLASS=small>[".$res_init."] = ".L_RESTRICTED.".</td></tr></table>");
+	if($disp_note2) echo("<table WIDTH=100%><tr valign=top><td colspan=4 align=left CLASS=small>[".$res_init."] = ".L_RESTRICTED.".</td></tr></table>");
 	?>
 <br /><P align="right"><div align="right"><span dir="LTR" style="font-weight: 600; color:#FFD700; font-size: 7pt">
 &copy; 2006-<?php echo(date('Y')); ?> - by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>.'; return true;" title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>" target=_blank>Ciprian Murariu</a></span></div>

@@ -1,5 +1,5 @@
 <?php
-// File : italian/localized.admin.php - plus version (07.07.2008 - rev.13)
+// File : italian/localized.admin.php - plus version (26.08.2008 - rev.14)
 // Original translation by Andrea D’Alessandro <andrea@abol.it> & Massimo Fubini <massimo@tomato.it>
 //	& Giuliano Yurij Beccaria <yurij@e-pages.it> & Marco Borrini <borrini@tradimento.it>
 // & Bartolotta Gioachino <developers@rockitalia.com> & Silvia M. Carrassi <silvia@ladysilvia.net>
@@ -40,6 +40,10 @@ define("A_SHEET1_9", "Espelli profili selezionati");
 define("A_SHEET1_10", "Adesso devi andare sullo schedario degli ’".A_MENU_2."’ per raffinare le tue scelte.");
 define("A_SHEET1_11", "Ultima connessione");
 define("A_SHEET1_12", "Motivo Espulsione (opzionale)");
+define("A_SHEET1_13", "Stanze autorizzate");
+define("A_SHEET1_14", "Tutti Illimitati");
+define("A_SHEET1_15", "Tutti Limitati");
+define("A_SHEET1_16", "La limitazione della stanza specificata possono essere attivate anche nella tabella di ’".A_MENU_5."’.");
 define("A_USER", "Utente");
 define("A_MODER", "Moderatore");
 define("A_TOPMOD", "Top Moderatore");

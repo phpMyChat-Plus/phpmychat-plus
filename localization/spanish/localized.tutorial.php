@@ -1,5 +1,5 @@
 <?php
-// File : spanish/localized.tutorial.php - plus version (10.04.2008 - rev.9)
+// File : spanish/localized.tutorial.php - plus version (26.08.2008 - rev.10)
 // Original translation by Josep Román <josep.roman@zuerich-see.ch> and León Del Río <leon@webmaster.com.mx>
 // Updates, corrections and additions for the Plus version by Roxana Castañeda <roxminu@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -707,6 +707,8 @@ Hay otro anuncio de utilidad como el comando para representaciones chats; el adm
 Los moderadores pueden expulsar a un usuario y el administrador puede expulsar a un usuario o a un moderador con el <B>comando kick</B>. Excepto por el administrador, el usuario que será expulsado debe estar en la sala actual.
 <P>
 <I>Por ejemplo</I>, si Jorge es el nombre del usuario que será expulsado: <I>/kick Jorge</I> o <I>/kick Jorge razón de la expulsión.</I> La "razón de la expulsión" puede ser cualquier texto ej. "por hacer spam!"
+<P>
+Si la opción * es usada (<I>/kick * <?php echo(L_HELP_REASON); ?></I>), el comando expulse fuera de la sala a todos los usuarios sin poderes (visitants y usuarios registrados). Esto es útil cuando la conexión con el servidor tiene problemas y todas las personas deben reiniciar sus chats. En esta segunda alternativa, una <I><?php echo(L_HELP_REASON); ?></I> es recomendada para informar a los usuarios porque han sido expulsado del chat.
 <br />
 <P ALIGN="right"><A HREF="#top">Subir</A></P>
 <P>

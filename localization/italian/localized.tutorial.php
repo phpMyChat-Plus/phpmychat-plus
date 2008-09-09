@@ -1,5 +1,5 @@
 <?php
-// File : italian/localized.tutorial.php - plus version (08.03.2008 - rev.8)
+// File : italian/localized.tutorial.php - plus version (26.08.2008 - rev.10)
 // Original translation by Marco Borrini <marco.borrini@tradimento.it> & Bartolotta Gioachino <developers@rockitalia.com> & Silvia M. Carrassi <silvia@ladysilvia.net> & Daniele <danybec@tin.it>
 // Updates, corrections and additions for the Plus version by Mike Mikius <mikiusss@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -673,6 +673,8 @@ C’è un altro utile comando per annuncio da atteggiare nelle chat; l’amminis
 I moderatori possono cacciare un utente, mentre l’amministratore può cacciare un utente o un moderatore con il <B>comando kick</B>. A parte l’amministratore, l’utente da allontanare deve stare nella stanza corrente.
 <P>
 <I>Per esempio, se Jack è il nome dell’utente da cacciare via:</I> /kick Jack</I> o <I>/kick Jack motivo della scalciata</I>. Il "motivo della scalciata" può essere qualsiasi testo e.g. "per spamming".
+<P>
+Se l’opzione * è utilizzata (<I>/kick * <?php echo(L_HELP_REASON); ?></I>), il comando allontanerà dalla chat tutti gli utenti senza poteri (solo ospiti ed utenti registrati). Questo è utile quando la connessione al server sta avendo problemi e tutta la gente dovrebbe ricaricare la loro chat. In questo caso, <I><?php echo(L_HELP_REASON); ?></I> è raccomandato per portare a conoscenza degli utenti il motivo dell’allontanamento.
 <br /><P ALIGN="right"><A HREF="#top">Torna all’inizio</A></P>
 <P>
 <hr />

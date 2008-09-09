@@ -186,6 +186,7 @@ if (!is_numeric($styles_count) || !$styles_count > 0)
 }
 else
 {
+	if (!$startStyle || !(is_numeric($startStyle)) || $startStyle <= 0) $startStyle = 1;
 	$startStyleBegin = $startStyle;
 	$startStyleNext = $startStyle + 3;
 	$startStyleText = sprintf(L_SKINS_TITLE1,$startStyleBegin,$startStyleNext);

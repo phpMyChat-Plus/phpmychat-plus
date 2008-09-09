@@ -149,6 +149,7 @@ define("L_ERR_USR_24", "Para crear su propia sala privada debe registrarse.");
 define("L_ERR_USR_25", "¡Sólo el administrador puede usar el color ".$COLORNAME."!<br />No trate de usar ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." o ".COLOR_CM1.".<br />¡Estos están reservados para los usuarios de control!");
 define("L_ERR_USR_26", "¡Sólo los administradores y moderadores pueden usar este color ".$COLORNAME."!<br />No intente usar ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." o ".COLOR_CM1.".<br />¡Estos están reservados para los usuarios de control!");
 define("L_ERR_USR_27", "No puede hablar en privado con usted.\\nPor favor conserve eso en su mente...\\nAhora escoja otra nombre de usuario.");
+define("L_ERR_USR_28", "¡Su acceso a %s ha sido restringido!<br />Por favor elija una sala diferente."); // room name
 define("L_ERR_ROM_1", "Los nombres de las salas no pueden contener comas o barras invertidas (\\).");
 define("L_ERR_ROM_2", "Se ha encontrado una palabra no permitida en el nombre de la sala que desea crear.");
 define("L_ERR_ROM_3", "Esta sala ya existe como pública.");
@@ -177,6 +178,8 @@ define("L_HLP", "Ayuda");
 define("L_MODERATOR", "%s es ahora el moderador de esta sala.");
 define("L_KICKED", "%s ha sido expulsado exitosamente.");
 define("L_KICKED_REASON", "%s ha sido expulsado exitosamente. (Razón: %s)");
+define("L_KICKED_ALL", "Todos los usuarios han sido expulsado exitosamente.");
+define("L_KICKED_ALL_REASON", "Todos los usuarios han sido expulsado exitosamente. (Razón: %s)");
 define("L_BANISHED", "%s ha sido desterrado exitosamente.");
 define("L_BANISHED_REASON", "%s ha sido desterrado exitosamente. (Razón: %s)");
 define("L_ANNOUNCE", "ANUNCIO");
@@ -224,7 +227,7 @@ define("L_HELP_CMD_5", "Deje el chat después de mostrar un mensaje opcional.");
 define("L_HELP_CMD_6", "No muestra los mensajes de un usuario si su alias ha sido seleccionado.<br />Seleccione apagado off para ignorar a un usuario cuando el alias y - han sido especificados, para todos los usuarios cuando - es pero no el alias.<br />Si no selecciona ninguna opción, este comando abre una ventana emergente que muestra todos los alias ignorados o sin mostrar.");
 define("L_HELP_CMD_7", "Llame nuevamente al texto escrito recientemente (comando o mensaje).");
 define("L_HELP_CMD_8", "Mostrar/Esconder la hora antes de los mensajes.");
-define("L_HELP_CMD_9", "Expulse o destierre a un usuario del chat. Este comando sólo puede ser usado por el moderador de esa sala o el administrador.<br />Opcionalmente, [".L_HELP_REASON."] muestra la razón para la expulsión (cualquier texto deseado).");
+define("L_HELP_CMD_9", "Expulse o destierre a un usuario del chat. Este comando sólo puede ser usado por el moderador de esa sala o el administrador.<br />Opcionalmente, [".L_HELP_REASON."] muestra la razón para la expulsión (cualquier texto deseado).<br />Si la opción * es usada, el comando expulse fuera de la sala a todos los usuarios sin poderes (visitants y usuarios registrados). Esto es útil cuando la conexión con el servidor tiene problemas y todas las personas deben reiniciar sus chats. En esta segunda alternativa, una [".L_HELP_REASON."] es recomendada para informar a los usuarios porque han sido expulsado del chat.");
 define("L_HELP_CMD_10", "Enviar un mensaje privado al usuario seleccionado (los demás usuarios no lo verán).");
 define("L_HELP_CMD_11", "Muestra la información sobre el usuario seleccionado.");
 define("L_HELP_CMD_12", "Ventana emergente para modificar el perfil del usuario.");
@@ -611,6 +614,7 @@ define("L_SKINS_TITLE", "Visualizar fondos");
 define("L_SKINS_TITLE1", "Fondos %s para %s visualizar"); // Skins 1 to 4 preview
 define("L_SKINS_AV", "Fondos disponibles");
 define("L_SKINS_NONAV", "No hay estilos definidos en la carpeta \"skins\"");
+define("L_SKINS_COPY", "&copy; %s Máscara por %s"); //© 2008 Skin by AuthorName
 
 // Swap image titles by Ciprian
 define("L_GEN_ICON", "Icono de género");
@@ -629,4 +633,16 @@ define("L_LOGIN_COUNT", "Visitas totales");
 
 // Gravatar from email mod by Ciprian
 define("L_GRAV_USE", "use el Gravatar");
+
+// Uploader mod by Ciprian
+define("L_UPLOAD", "Subir %s"); // Upload Image, Upload Sound or Upload File
+define("L_UPLOAD_IMG", "Archivo de imagen"); // used to upload Avatars and /img command
+define("L_UPLOAD_SND", "Archivo de sonido"); // used to upload Buzz sounds
+define("L_UPLOAD_FLS", "Archivos"); // used to upload multiple files at once
+define("L_UPLOAD_SUCCESS", "%s subidos exitosamente  %s."); // original filename, destination filename
+define("L_FILES_TITLE", "Administrador de Subidas");
+
+// Room restriction mod by Ciprian
+define("L_RESTRICTED", "Restringido");
+define("L_RESTRICTED_ROM", "%s ha sido restringido exitosamente de esta sala.");
 ?>
