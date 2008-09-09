@@ -151,6 +151,7 @@ define("L_ERR_USR_24", "Per creare la tua stanza privata devi essere registrato.
 define("L_ERR_USR_25", "Solo l’amministratore può usare ".$COLORNAME." come colore!<br />Non provare ad usarlo".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." o ".COLOR_CM1.".<br />Questi sono riservati ai poteri degli utenti!");
 define("L_ERR_USR_26", "Solo l’amministratore può usare ".$COLORNAME." come colore!<br />Non provare ad usarlo ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." o ".COLOR_CM1.".<br />Questi sono riservati ai poteri degli utenti!");
 define("L_ERR_USR_27", "Non puoi parlare in privato con te stesso.\\nFallo con la mente per piacere...\\nOra scegli un username differente.");
+define("L_ERR_USR_28", "Il tuo accesso per la stanza %s è stato limitato!<br />Per cortesia scegli un’altra stanza."); // room name
 define("L_ERR_ROM_1", "Il nome delle chat non può contenere virgole o backslash (\\).");
 define("L_ERR_ROM_2", "Nel nome di chat è stata trovata una parola censurabile.");
 define("L_ERR_ROM_3", "Già esiste una stanza pubblica con questo nome.");
@@ -179,6 +180,8 @@ define("L_HLP", "Aiuto");
 define("L_MODERATOR", "%s è ora moderatore di questa chat.");
 define("L_KICKED", "%s è stato allontanato con successo.");
 define("L_KICKED_REASON", "%s è stato allontanato con successo. (Motivo: %s)");
+define("L_KICKED_ALL", "Tutti gli utenti sono stati allontanati con successo.");
+define("L_KICKED_ALL_REASON", "Tutti gli utenti sono stati allontanati con successo. (Motivo: %s)");
 define("L_BANISHED", "%s è stato espulso con successo.");
 define("L_BANISHED_REASON", "%s è stato espulso con successo. (Motivo: %s)");
 define("L_ANNOUNCE", "ANNUNCIO");
@@ -226,7 +229,7 @@ define("L_HELP_CMD_5", "Abbandona la chat dopo aver scritto il messaggio opziona
 define("L_HELP_CMD_6", "Ignora i messaggi di un utente se viene specificato il suo nick.<br />Per ripristinare la normale visualizzazione dei messaggi è sufficiente inserire un \"-\" e il nick, quando invece viene inserito solo il \"-\" viene ripristinata la visualizzazione di tutti gli utenti.<br />Senza alcuna opzione, questo comando mostra i nick attualmente ignorati.");
 define("L_HELP_CMD_7", "Richiama l’ultima linea inserita (comando o messaggio).");
 define("L_HELP_CMD_8", "Mostra/Nasconde l’orario prima dei messaggi.");
-define("L_HELP_CMD_9", "Allontana un utente dalla chat. Questo comando può essere usato solo dal moderatore<br />facoltativo, [".L_HELP_REASON."] visualizza il motivo dell’espulsione (qualsiasi testo desiderato).");
+define("L_HELP_CMD_9", "Allontana un utente dalla chat. Questo comando può essere usato solo dal moderatore<br />facoltativo, [".L_HELP_REASON."] visualizza il motivo dell’espulsione (qualsiasi testo desiderato).<br />Se l’opzione * è utilizzata, il comando allontanerà dalla chat tutti gli utenti senza poteri (solo ospiti ed utenti registrati). Questo è utile quando la connessione al server sta avendo problemi e tutta la gente dovrebbe ricaricare la loro chat. In questo caso, [".L_HELP_REASON."] è raccomandato per portare a conoscenza degli utenti il motivo dell’allontanamento.");
 define("L_HELP_CMD_10", "Invia un messaggio ad un utente specifico (gli altri utenti non lo vedranno).");
 define("L_HELP_CMD_11", "Mostra le informazioni su un utente specifico.");
 define("L_HELP_CMD_12", "Finestra Popup per modificare il profilo utente.");
@@ -613,6 +616,7 @@ define("L_SKINS_TITLE", "Anteprima aspetto");
 define("L_SKINS_TITLE1", "Aspetto %s a %s anteprima"); // Skins 1 to 4 preview
 define("L_SKINS_AV", "Aspetti disponibili");
 define("L_SKINS_NONAV", "Non ci sono stili definiti nella cartella \"skins\"");
+define("L_SKINS_COPY", "&copy; %s Stile di %s");
 
 // Swap image titles by Ciprian
 define("L_GEN_ICON", "Simbolo del genere");
@@ -631,4 +635,16 @@ define("L_LOGIN_COUNT", "Totale visite"); // number of logins (returning visits)
 
 // Gravatar from email mod by Ciprian
 define("L_GRAV_USE", "usa il Gravatar");
+
+// Uploader mod by Ciprian 
+define("L_UPLOAD", "Invia %s");
+define("L_UPLOAD_IMG", "File immagine");
+define("L_UPLOAD_SND", "File audio");
+define("L_UPLOAD_FLS", "Files");
+define("L_UPLOAD_SUCCESS", "%s è stato inviato con successo come %s.");
+define("L_FILES_TITLE", "Gestione Invii");
+
+// Room restriction mod by Ciprian
+define("L_RESTRICTED", "Limitato");
+define("L_RESTRICTED_ROM", " l’accesso di %s è stato limitato per questa stanza.");
 ?>

@@ -1558,11 +1558,11 @@ if (!isset($Ver)) $Ver = "L";
 						$PrevRoom = "";
 						if($R != "" && !(isset($RES) && $RES)) $PrevRoom = urldecode($R);
 						$DefaultRoomsString = "";
+						$disp_note = 0;
 						for($i = 0; $i < count($DefaultChatRooms); $i++)
 						{
 							$tmpRoom = stripslashes($DefaultChatRooms[$i]);
 							$tmpDispRoom = $tmpRoom;
-							$disp_note = 0;
 							if (is_array($DefaultDispChatRooms) && in_array($tmpRoom." [R]",$DefaultDispChatRooms))
 							{
 								$res_init = utf8_substr(L_RESTRICTED, 0, 1);
