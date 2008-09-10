@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // File : vietnamese/localized.install.php - plus version (29.07.2008 - rev.6)
 // Translation by Marshall <hellomarshal_lookatme@netzero.net>
 // Do not use ' ; use ’ istead (utf-8 edit bug)

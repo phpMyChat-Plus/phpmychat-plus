@@ -2,7 +2,9 @@
 $ChatPath = "../";
 
 //session variables
-ini_set('session.use_trans_sid','1');
+ini_set('session.bug_compat_42',0);
+ini_set('session.bug_compat_warn',0);
+ini_set('session.use_trans_sid',1);
 session_start();
 
 $p = $_REQUEST['p'];
@@ -213,6 +215,13 @@ if ( $p == 2 )
   if (!$skip)
   {
   	if ($ftpuname != "") $ftppath = eregi_replace($ftpuname, "", $ftppath);
+	if (eregi("@",$ftpuname))
+	{
+		$ftppath == "";
+		if ( $_SESSION['ftppath'] != "" ) $_SESSION['ftppath'] = $ftppath;
+		if ( $_POST['ftppath'] != "" ) $_POST['ftppath'] = $ftppath;
+		$_SESSION['ftppath'] = $ftppath;
+	}
   	if (!isset($ftpuname) || $ftpuname == "") $error3 .= L_FTP_NAME."<br />\n";
   	if (!isset($ftppass) || $ftppass == "") $error3 .= L_FTP_PASS."<br />\n";
 

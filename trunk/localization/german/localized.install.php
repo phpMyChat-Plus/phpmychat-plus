@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // File : german/localized.install.php - plus version (29.07.2008 - rev.6)
 // Translation by Thomas Pschernig <tpsde1970@aol.com>
 // Do not use ' ; use ’ istead (utf-8 edit bug)

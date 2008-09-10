@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // File : italian/localized.install.php - plus version (29.07.2008 - rev.6)
 // Translation by Mike Mikius <mikiusss@yahoo.com> and Luciano Cataldo <lucianocataldo@gmail.com>
 // Do not use ' ; use ’ istead (utf-8 edit bug)

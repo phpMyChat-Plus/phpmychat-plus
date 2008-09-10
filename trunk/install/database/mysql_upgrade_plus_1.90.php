@@ -87,6 +87,7 @@ UPDATE ".$t_config." SET
 			COLOR_CM = 'blue',
 			COLOR_CM1 = 'mediumblue',
 			COLOR_CM2 = 'royalblue',
+			NUM_AVATARS = '63',
 			REG_CHARS_ALLOWED = 'a-zA-Z0-9_.-@#$%^&*()=<>?~{}|`:',
 			WELCOME_SOUND = 'sounds/hello.wav',
 			QUOTE_COLOR = 'brown',

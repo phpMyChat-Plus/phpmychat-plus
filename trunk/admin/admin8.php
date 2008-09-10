@@ -165,6 +165,10 @@ if($DbLink->num_rows() > 0)
 	while(list($Type, $Room, $User, $Latin1, $Time, $Dest, $Message, $RoomFrom) = $DbLink->next_record())
 	{
 		$Message = stripslashes($Message);
+		$Message = eregi_replace("L_DEL_BYE",L_DEL_BYE,$Message);
+		$Message = eregi_replace("L_REG_BRB",L_REG_BRB,$Message);
+		$Message = eregi_replace("L_HELP_MR",L_HELP_MR,$Message);
+		$Message = eregi_replace("L_HELP_MS",L_HELP_MS,$Message);
 		if ($Type) $Type = L_SET_10; else $Type = L_SET_11;
 		if ($Room == '*' || ($User == "SYS room" && $Dest == '*') || $User == "SYS announce") $Room = L_ROOM_ALL;
 		else

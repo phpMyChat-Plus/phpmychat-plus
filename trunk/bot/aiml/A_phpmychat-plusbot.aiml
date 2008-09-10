@@ -4,7 +4,7 @@
 <category>
 <pattern>ANNOUNCE CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Announce command</b><br />
 <u>Format:</u> <b>/announce {message}</b><br />
@@ -23,7 +23,7 @@ Allow the administrator to send an announcement to all users in all chat rooms.<
 <category>
 <pattern>AWAY CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Away command</b><br />
 <u>Format:</u> <b>/away [message]</b><br />
@@ -42,7 +42,7 @@ Announces the room and the users who try to send you messages that you are away 
 <category>
 <pattern>BANISH CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Banish command</b><br />
 <u>Format:</u> <b>/ban [*] {user} [the reason]</b><br />
@@ -62,7 +62,7 @@ Optionally, [the reason] displays the reason of banishment (any desired text).<b
 <category>
 <pattern>BOT CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Bot command</b><br />
 <u>Format:</u> <b>/bot start</b> or <b>/bot stop</b><br />
@@ -83,7 +83,7 @@ Bot can also talk privatelly to each user (if allowed by the chat settings), thr
 <category>
 <pattern>BOT HOW</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Bot conversations</b><br />
 To start a public conversation with the bot, the user should just type it's name (E.g. "hi <bot/>"). The Bot can follow each conversation individually with each user. To end a conversation with the Bot or make him shut off, just type "<b>bye botname</b>" (E.g. "bye <bot name="name"/>").<br />
@@ -102,7 +102,7 @@ Bot can also talk privatelly to each user (if allowed by the chat settings), thr
 <category>
 <pattern>BUZZ CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Buzz command</b><br />
 <u>Format:</u> <b>/buzz [~soundname] [message]</b><br />
@@ -123,7 +123,7 @@ Sends a buzzer sound and optionally displays a message in the current room.<br /
 <category>
 <pattern>CHAT ETIQUETTE</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Chat Etiquette</b><br />
 Our site would like to keep its community friendly and fun, so please adhere to the following guidelines. If you fail to observe these rules, one of our chat moderators may boot you from the chat.<br />
@@ -142,7 +142,7 @@ Our site would like to keep its community friendly and fun, so please adhere to 
 <category>
 <pattern>CLEAR CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Clear command</b><br />
 <u>Format:</u> <b>/clear</b><br />
@@ -290,7 +290,7 @@ Clear the messages frame and show only the last 5 messages.</span>
 <category>
 <pattern>DICE CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Dice v.1 command</b><br />
 <u>Format:</u> <b>/dice [n]</b><br />
@@ -323,7 +323,7 @@ This is a third (role-playing) version of the dice rolling.<br />
 <category>
 <pattern>DICE1 CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Dice v.1 command</b><br />
 <u>Format:</u> <b>/dice [n]</b><br />
@@ -344,7 +344,7 @@ A dice game for random/hazardous numbers.<br />
 <category>
 <pattern>DICE2 CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Dice v.2 command</b><br />
 <u>Format:</u> <b>/{n1}d[n2]</b> (dice v.2)<br />
@@ -364,7 +364,7 @@ This is a more complex version of the /dice command.<br />
 <category>
 <pattern>DICE3 CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Dice v.3 command</b><br />
 <u>Format:</u> <b>/d{n1}[tn2]</b> (dice v.3)<br />
@@ -386,7 +386,7 @@ This is a third (role-playing) version of the dice rolling.<br />
 <template>
 <think><set name="topic">PHPMYCHATPLUS QUESTION</set></think>
 <span class="help"><b><bot name="chatname"/> Help</b><br />
-If you need help for <bot name="chatname"/>, you can read the <a href="help_popup.php?L=english" target="_blank">Help page</a> available, This conversation is also the right place to get it.<br />
+If you need help for <bot name="chatname"/>, you can read the <a href="help_popup.php" target="_blank">Help page</a> available, This conversation is also the right place to get it.<br />
 All you need to do is to type the word you're looking for, followed by a question mark. E.g. <b>commands?</b> will display all the available commands in chat. Please note that not all the listed commands shall be enabled in this specific chat server. There are several commands reserved only for <b>power users</b> (administrators and/or moderators).<br />
 For more information, type "<b>etiquette</b>", "<b>commands</b>" or "<b>tutorial</b>".&lt;li><srai>CHAT WEBSITE</srai>&lt;/li>&lt;li><srai>CHAT DOWNLOAD PAGE</srai>&lt;/li></span>
 <condition>
@@ -458,7 +458,7 @@ You are very welcome! I am always so excited to give you a hand...
 <category>
 <pattern>HOW TO USE COMMANDS</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Use of commands in <bot name="chatname"/></b><br />
 All the chat commands must be used in <b>English</b>.<br />The available commands are: announce, away, ban, bot, buzz, clear, demote, dice1, dice2, dice3, help (?), high, history (recall, !), ignore, img, invite, join, kick, me, mr, notify, order, profile, promote, quit, exit, bye, refresh, room, save, show (last), size, sort, timestamp, to (msg), topic, whois, wisp (whisp). To read about any command usage, type its word, followed by cmd. E.g. <b>invite cmd</b>.</span>
@@ -475,7 +475,7 @@ All the chat commands must be used in <b>English</b>.<br />The available command
 <category>
 <pattern>HIGHLIGHT CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Highlight command</b><br />
 <u>Format:</u> <b>/high {user}</b><br />
@@ -495,7 +495,7 @@ It highlights the messages of a specific user for an easier reading across the c
 <category>
 <pattern>IGNORE CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Ignore command</b><br />
 <u>Format:</u> <b>/ignore [-] [user[,user,...]]</b><br />
@@ -516,7 +516,7 @@ Set ignoring off for a user when nick and - are both specified, for all users wh
 <category>
 <pattern>IMAGE CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Image command</b><br />
 <u>Format:</u> <b>/img {full path to the image to be posted}</b><br />
@@ -537,7 +537,7 @@ It allows posting of one single image as message.<br />
 <category>
 <pattern>INVITE CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Invite command</b><br />
 <u>Format:</u> <b>/invite {user}</b><br />
@@ -556,7 +556,7 @@ Invite a user chatting in a different room to join the room you are in.<br />
 <category>
 <pattern>JOIN CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Join command</b><br />
 <u>Format:</u> <b>/join [n] {#room}</b><br />
@@ -576,7 +576,7 @@ Join another room, creating it if it doesn't exist and if you're allowed to.<br 
 <category>
 <pattern>KICK CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Kick command</b><br />
 <u>Format:</u> <b>/kick {user} [the reason]</b><br />
@@ -671,7 +671,7 @@ Sends a private message to the specified user (other users won't see it).<br />
 <category>
 <pattern>NOTIFY CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Notify command</b><br />
 <u>Format:</u> <b>/notify</b><br />
@@ -689,7 +689,7 @@ Toggles notifications of users' entrance/exit for the current room.</span>
 <category>
 <pattern>PROFILE CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Profile command</b><br />
 <u>Format:</u> <b>/profile</b><br />
@@ -708,7 +708,7 @@ Popup a separate window for changing personal profile.<br />
 <category>
 <pattern>PROMOTE CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Promote and Demote commands</b><br />
 <u>Format:</u> <b>/promote {user}</b> or the reverse: <b>/demote [*] {user}</b><br />
@@ -729,7 +729,7 @@ The second command will allow the administrator or moderator(s) of the curent ro
 <category>
 <pattern>QUIT CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Quit, Exit and Bye commands</b><br />
 <u>Format:</u> <b>/quit [message]</b> or <b>/exit [message]</b> or <b>/bye [message]</b><br />
@@ -747,7 +747,7 @@ They are actually one and the same command to leave the chat (after displaying a
 <category>
 <pattern>RECALL CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Recall (History) command</b><br />
 <u>Format:</u><b>/!</b><br />
@@ -765,7 +765,7 @@ Recall the previous text typed (command or message) and put it back into the mes
 <category>
 <pattern>REFRESH CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />To reload your chat, you either press F5 key on your keyboard or log out and come back. But if you're trying to set the refresh time of your browser, here is a command that might help:<br />
 <span class="help"><b>Refresh command</b><br />
 <u>Format:</u> <b>/refresh [n]</b><br />
@@ -785,7 +785,7 @@ Modify messages and users lists refresh delay (in seconds).<br />
 <category>
 <pattern>SAVE CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Save command</b><br />
 <u>Format:</u> <b>/save [n]</b><br />
@@ -805,7 +805,7 @@ Save the last n messages (notifications are excluded) to an HTML file.<br />
 <category>
 <pattern>SHOW CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Show and Last commands</b><br />
 <u>Format:</u> <b>/show [n]</b> or <b>/last [n]</b><br />
@@ -824,7 +824,7 @@ Reload the messages frame and display the latest n messages; minimum and default
 <category>
 <pattern>SIZE CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Size command</b><br />
 <u>Format:</u> <b>/size [n]</b><br />
@@ -842,7 +842,7 @@ Change the font size of the messages in chat to user choice. Allowed values for 
 <category>
 <pattern>SORT CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Sort command</b><br />
 <u>Format:</u> <b>/sort</b><br />
@@ -860,7 +860,7 @@ Change the order users are sorted in lists: by entrance time or alphabetically.<
 <category>
 <pattern>TIMESTAMP CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Timestamp command</b><br />
 <u>Format:</u> <b>/timestamp</b><br />
@@ -878,7 +878,7 @@ Show/Hide time in front of each message.</span>
 <category>
 <pattern>TOPIC CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Topic and Topic Reset commands</b><br />
 <u>Format:</u> <b>/topic [*] {at least two words as message}</b> or, the reset form <b>/topic [*] top reset</b><br />
@@ -900,7 +900,7 @@ Optionally, "/topic * { }" and "/topic * top reset" do exactly the same but in a
 <category>
 <pattern>WHOIS CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Whois command</b><br />
 <u>Format:</u> <b>/whois {user}</b><br />
@@ -919,7 +919,7 @@ Shows a profile (information about specified user).<br />
 <category>
 <pattern>WISP CMD</pattern>
 <template>
-<a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
+<a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:
 <br />
 <span class="help"><b>Wisp and Whisp (Whisper) commands</b><br />
 <u>Format:</u> <b>/wisp {user} {message}</b> or <b>/whisp {user} {message}</b><br />
@@ -981,7 +981,7 @@ Clicking on the &amp;lt;img src="images/sound.gif" width=13 height=13 border=0 a
 <a href="tutorial_popup.php?L=english" target="_blank"><bot name="chatname"/> Tutorial</a> paragraph follows:
 <br />
 <span class="help"><b>Help command</b><br />
-Once inside a chat room, you can launch a <a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> popup by clicking on the &amp;lt;img src="localization/english/images/helpOn.gif" width=30 width=20 border=0 alt="Help"/> image that sits just before the message box.<br />You can also type the "<b>/help</b>" or "<b>/?</b>" commands in the message box.</span>
+Once inside a chat room, you can launch a <a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> popup by clicking on the &amp;lt;img src="localization/english/images/helpOn.gif" width=30 width=20 border=0 alt="Help"/> image that sits just before the message box.<br />You can also type the "<b>/help</b>" or "<b>/?</b>" commands in the message box.</span>
 <condition>
 <li value="*">
 <srai><star/></srai>
@@ -1047,7 +1047,7 @@ The title of this window contains the usernames, if they are less than three, th
 Clicking on the &amp;lt;img src="images/sound.gif" width=13 height=13 border=0 alt="Beep/no beep at user entrance"/> icon at the top of this popup will enable/disable beeping sounds at user entrance.
 <br /><br />
 <b>Help command</b><br />
-Once inside a chat room, you can launch a <a href="help_popup.php?L=english" target="_blank"><bot name="chatname"/> Help</a> popup by clicking on the &amp;lt;img src="localization/english/images/helpOn.gif" width=30 width=20 border=0 alt="Help"/> image that sits just before the message box.<br />You can also type the "<b>/help</b>" or "<b>/?</b>" commands in the message box.
+Once inside a chat room, you can launch a <a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> popup by clicking on the &amp;lt;img src="localization/english/images/helpOn.gif" width=30 width=20 border=0 alt="Help"/> image that sits just before the message box.<br />You can also type the "<b>/help</b>" or "<b>/?</b>" commands in the message box.
 <br /><br />
 <b>Avatars in chat</b><br />
 Avatars are graphic image icons that represent chatters. Only registered users may change their avatar. Registered users may open their Profile (see "<b>/profile</b>" command) and click on the avatar image to select it from a menu of images, or to input a URL to a graphic image available anywhere on the internet (only images publicly accessible, not password protected sites). Images should be browser-viewable (.gif, .jpg, etc. ) 32 x 32 pixel graphic files for best display.

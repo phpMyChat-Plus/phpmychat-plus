@@ -49,6 +49,7 @@ UPDATE ".$t_config." SET
 			ROOM_SKIN7 = '7',
 			ROOM_SKIN8 = '8',
 			ROOM_SKIN9 = '9',
+			NUM_AVATARS = '63',
 			REG_CHARS_ALLOWED = 'a-zA-Z0-9_.-@#$%^&*()=<>?~{}|`:',
 			DISP_GENDER = '0',
 			FILLED_LOGIN = '0',
