@@ -213,7 +213,7 @@ define("L_HELP_MSG", "mensaje");
 define("L_HELP_MSGS", "mensajes");
 define("L_HELP_ROOM", "sala");
 define("L_HELP_BUZZ", "~nombredelsonido");
-define("L_HELP_REASON", "la razón");
+define("L_HELP_REASON", "razón");
 define("L_HELP_MR", "Sr."); // Mister (can be short or entire word)
 define("L_HELP_MS", "Srta."); // Mistress (- neutral of Miss, Mrs.)
 define("L_HELP_CMD_0", "{} representa una característica necesaria, [] una opcional.");

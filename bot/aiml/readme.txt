@@ -8,4 +8,4 @@ Remove the aiml sets you don't want your bot to learn (ex. Religion.aiml contain
 
 Of course, you can build your own aiml sets, using the tools available at http://www.alicebot.org
 
-For questions related to phpMyChat-Plus intergation and ProgramE, contact Cirian M. at ciprianmp@yahoo.com.
+For questions related to phpMyChat-Plus intergation and Program E, contact Ciprian M. at ciprianmp@yahoo.com.

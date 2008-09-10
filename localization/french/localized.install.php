@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // File : french/localized.install.php - plus version (29.07.2008 - rev.6)
 // Original translation for Plus version by Pierre Liget <sourceforge@pliget.freesurf.fr> 10.12.2007
 // Do not use ' ; use ’ instead (utf-8 edit bug)

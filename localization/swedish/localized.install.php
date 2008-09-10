@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // File : swedish/localized.install.php - plus version (29.07.2008 - rev.6)
 // Translated by Fimpen Högström <fimpen@relative-work.se>
 // Do not use ' but use ’ instead (utf-8 edit bug)

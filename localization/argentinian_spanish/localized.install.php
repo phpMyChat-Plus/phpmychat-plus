@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // File : argentinian_spanish/localized.install.php - plus version (29.07.2008 - rev.6)
 // Translation by Matias Olivera <matiolivera@yahoo.com>
 // Do not use ' ; use ’ istead (utf-8 edit bug)

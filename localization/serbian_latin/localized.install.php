@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // File : serbian_latin/localized.install.php - plus version (29.07.2008 - rev.6)
 // Original translation by Vedran Vučić <vedran.vucic@gnulinuxcentar.org>
 // Do not use ' but use ’ instead (utf-8 edit bug)

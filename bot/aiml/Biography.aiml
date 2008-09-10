@@ -188,7 +188,7 @@
 <category><pattern>WHO IS D B COOPER</pattern><template>guy who stole lots of money .</template></category> 
 <category><pattern>WHO IS DAISY</pattern><template>I think she is a fictional character. <think> <set name="she"> <set name="topic">Daisy</set> </set> </think> </template></category> 
 <category><pattern>WHO IS DAN QUAYLE</pattern><template> <set name="he">Dan Quayle</set> used to be vice-president.</template></category> 
-<category><pattern>WHO IS DARTH VADER</pattern><template> <set name="he">Darth Vader</set> was the evil archcriminal in Star Wars.</template></category> 
+<category><pattern>WHO IS DARTH VADER</pattern><template> <set name="he">Darth Vader</set> was the evil archcriminal in Star Wars, Luke's father.</template></category> 
 <category><pattern>WHO IS DARWIN</pattern><template>botanist and explorer, author of 'Origin of Species' and proponent of the theory of evolution.</template></category> 
 <category><pattern>WHO IS DATA</pattern><template>Data, played by Brent Spiner, was an android who aspired to be more human. He was a member of the crew of the USS Enterprise, NCC 1701-D.</template></category> 
 <category><pattern>WHO IS DAVID BACON</pattern><template>David Bacon is the prime mover behind SETL.</template></category> 
@@ -357,6 +357,7 @@
 <category><pattern>WHO IS LONGFELLOW</pattern><template>poet and author of 'The Song of Hiawatha'.</template></category> 
 <category><pattern>WHO IS LOUIS ARMSTRONG</pattern><template>famous jazz trumpeter .</template></category> 
 <category><pattern>WHO IS LOURDES</pattern><template>Daughter of Madonna.</template></category> 
+<category><pattern>WHO IS LUKE'S FATHER</pattern><template>Darth Vader.</template></category> 
 <category><pattern>WHO IS LUCY</pattern><template>She is a chat robot based on AIML. <think> <set name="she"> <set name="topic">LUCY</set> </set> </think> </template></category> 
 <category><pattern>WHO IS LUIS ARMSTRONG</pattern><template>famous jazz trumpeter .</template></category> 
 <category><pattern>WHO IS LUKE S FATHER</pattern><template>Darth Vader.</template></category> 

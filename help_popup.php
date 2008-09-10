@@ -1,5 +1,12 @@
 <?php
-if (isset($_GET["L"])) $L = $_GET["L"];
+// Get the names and values for vars sent by index.lib.php
+if (isset($_GET))
+{
+	while(list($name,$value) = each($_GET))
+	{
+		$$name = $value;
+	};
+};
 
 // Fix a security hole
 if (isset($L) && !is_dir("./localization/".$L)) exit();
@@ -11,6 +18,7 @@ if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 
 require("./config/config.lib.php");
 require("./lib/release.lib.php");
+require("./localization/languages.lib.php");
 require("./localization/".$L."/localized.chat.php");
 
 header("Content-Type: text/html; charset=${Charset}");

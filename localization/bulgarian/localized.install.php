@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // File : bulgarian/localized.install.php - plus version (29.07.2008 - rev.6)
 // Original translation by Peter Petrov<peter.m.petrov@gmail.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)

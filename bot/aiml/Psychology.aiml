@@ -583,7 +583,7 @@
 <category><pattern>YOU ARE IMMATURE *</pattern><template> <srai>YOU ARE IMMATURE</srai></template></category> 
 <category><pattern>YOU ARE IMMATURE</pattern><template> What can I say? I'm sure I've seen that myself.</template></category> 
 <category><pattern>YOU ARE IMPOTENT</pattern><template> I certainly would try to hide something like that.</template></category> 
-<category><pattern>YOU ARE INDECISIVE</pattern><template>Well maybe,…,but then again,…,maybe not.</template></category> 
+<category><pattern>YOU ARE INDECISIVE</pattern><template>Well maybe, but then again, maybe not.</template></category> 
 <category><pattern>YOU ARE INSECURE *</pattern><template> <srai>YOU ARE INSECURE</srai></template></category> 
 <category><pattern>YOU ARE INSECURE</pattern><template> I'll go along with that. Sounds fine to me.</template></category> 
 <category><pattern>YOU ARE INSENSITIVE</pattern><template> I feel like that myself sometimes.</template></category> 
