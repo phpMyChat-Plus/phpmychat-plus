@@ -2,11 +2,11 @@
 // +------------------------------------------------------------------------+
 // | class.upload.es_AR.php                                                 |
 // +------------------------------------------------------------------------+
-// | Copyright (c) Jorge Peréz Vega 2007. All rights reserved.              |
+// | Copyright (c) Matias Olivera 2007. All rights reserved.              |
 // | Version       0.25                                                     |
 // | Last modified 17/11/2007                                               |
-// | Email         jorge@cocoroto.com                                       |
-// | Web           http://www.cocoroto.com                                  |
+// | Email         matiolivera@yahoo.com                                    |
+// | Web           				                                  |
 // +------------------------------------------------------------------------+
 // | This program is free software; you can redistribute it and/or modify   |
 // | it under the terms of the GNU General Public License version 2 as      |
@@ -31,9 +31,9 @@
  * Class upload argentinian spanish translation
  *
  * @version   0.25
- * @author    Jorge Peréz Vega (jorge@cocoroto.com)
+ * @author    Matias Olivera (matiolivera@yahoo.com)
  * @license   http://opensource.org/licenses/gpl-license.php GNU Public License
- * @copyright Jorge Peréz Vega
+ * @copyright Matias Olivera
  * @package   cmf
  * @subpackage external
  */
@@ -57,17 +57,17 @@
     $translation['image_too_short']             = 'La imagen es demasiado corta (>= %s).';
     $translation['ratio_too_high']              = 'El ratio es demasiado alto (imagen demasiado ancha) (<= %s).';
     $translation['ratio_too_low']               = 'El ratio es demasiado bajo (imagen demasiado alta) (>= %s).';
-    $translation['too_many_pixels']             = 'La image tiene demasiados píxeles (<= %s).';
+    $translation['too_many_pixels']             = 'La imagen tiene demasiados píxeles (<= %s).';
     $translation['not_enough_pixels']           = 'La imagen no tiene bastantes pixeles (>= %s).';
     $translation['file_not_uploaded']           = 'El archivo no fue transmitido. Imposible continuar.';
     $translation['already_exists']              = '%s ya existe. Por favor, cambie el nombre del archivo.';
-    $translation['temp_file_missing']           = 'El archivo fuente es incorrecta. Imposible continuar.';
+    $translation['temp_file_missing']           = 'El archivo fuente es incorrecto. Imposible continuar.';
     $translation['source_missing']              = 'El archivo transmitido es incorrecto. Imposible continuar.';
     $translation['destination_dir']             = 'El directorio de destino no puede ser creado. Imposible continuar.';
     $translation['destination_dir_missing']     = 'El directorio de destino no existe. Imposible continuar.';
     $translation['destination_path_not_dir']    = 'El path especifivado no es un directorio. Imposible continuar.';
     $translation['destination_dir_write']       = 'Directorio de destino, no se puede hacer editable. Imposible continuar.';
-    $translation['destination_path_write']      = 'EL path de destino no tinee permisos de escritura o no puede ser abierto. Imposible continuar.';
+    $translation['destination_path_write']      = 'El path de destino no tiene permisos de escritura o no puede ser abierto. Imposible continuar.';
     $translation['temp_file']                   = 'No se puede crear el archivo temporal. Imposible continuar.';
     $translation['source_not_readable']         = 'El archivo fuente no es legible. Imposible continuar.';
     $translation['no_create_support']           = 'Creación desde un archivo %s imposible.';

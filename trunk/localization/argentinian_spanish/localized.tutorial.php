@@ -1,5 +1,5 @@
 <?php
-// File : argentinian_spanish/localized.tutorial.php - plus version (10.04.2008 - rev.9)
+// File : argentinian_spanish/localized.tutorial.php - plus version (26.08.2008 - rev.10)
 // Original translation in Spanish (for the Argentinian dialect usage) by Jorge Colaccini <jrc@informas.com>
 // Updates, corrections and additions for the Plus version by Matias Olivera <matiolivera@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -603,7 +603,7 @@ El mensaje les aparecerá a Matias y a vos, pero los demás usuarios no podrán 
 Cuando la utilidad PM está activa, también es posible enviar susurros a un usuario en otro salón de chat, usando: <B>comando "/wisp nombreusuario mensaje"</B> sin comillas.
 <P>
 <?php
-if (C_PRIV_POPUP)
+if (!C_PRIV_POPUP)
 {
 ?>
 Cliqueando en el nick de un mensaje enviado en la pantalla principal, agregará automáticamente el correspondiente comando /to o /wisp al campo de ingreso de texto de mensajes.
@@ -720,8 +720,10 @@ Hay otro comando útil para el envío de avisos a los salónes; el administrador
 <P>
 El administrador puede echar a un usuario o a un moderador, y un moderador puede echar a un usuario usando el <B>comando kick</B>. En el caso de que el moderador quiera echar a un usuario, este se debe encontrar en su salón.
 <P>
-<I>Por ejemplo</I>, si Matias es el nombre del usuario a echar: <I>/kick Matias</I> o <I>/kick Matias razon para echarlo</I> La "razon para
+<I>Por ejemplo</I>, si Matias es el nombre del usuario a echar: <I>/kick Matias</I> o <I>/kick Matias razón para echarlo</I> La "razón para
 echarlo" puede ser cualquier texto. Por ejemplo "por hacer SPAM en el chat!"
+<P>
+Si se utiliza la opción * (<I>/kick * <?php echo(L_HELP_REASON); ?></I>, el comando removerá del chat a todos los usuarios sin poderes (solo visitantes y usuarios restringidos). Esto es útil cuando la conexión con el servidor tiene problemas y toda la gente debe recargarse. En el segundo caso, se recomienda un <I><?php echo(L_HELP_REASON); ?></I> para dejar saber a los usuarios por qué han sido expulsados.
 <br /><P ALIGN="right"><A HREF="#top">Volver al comienzo</A></P>
 <P>
 <hr />

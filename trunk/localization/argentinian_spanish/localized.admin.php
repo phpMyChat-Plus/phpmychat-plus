@@ -1,5 +1,5 @@
 <?php
-// File : argentinian_spanish/localized.admin.php - plus version (07.07.2008 - rev.13)
+// File : argentinian_spanish/localized.admin.php - plus version (26.08.2008 - rev.14)
 // Original translation in Spanish (for the Argentinian dialect usage) by Jorge Colaccini <jrc@informas.com>
 // Updates, corrections and additions for the Plus version by Matias Olivera <matiolivera@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -38,6 +38,10 @@ define("A_SHEET1_9", "Bloquear los perfiles marcados");
 define("A_SHEET1_10", "Ahora tenés que ir a ’".A_MENU_2."’ para ajustar la lista.");
 define("A_SHEET1_11", "Ultima conexión");
 define("A_SHEET1_12", "Motivo de bloqueo (opcional)");
+define("A_SHEET1_13", "Salones permitidos");
+define("A_SHEET1_14", "Todos Permitidos");
+define("A_SHEET1_15", "Todos Restringidos");
+define("A_SHEET1_16", "La restricción especificada debe ser también activada en la sección de ’".A_MENU_5."’.");
 define("A_USER", "Usuario");
 define("A_MODER", "Moderador");
 define("A_TOPMOD", "Moderador Principal");
@@ -131,6 +135,7 @@ define("A_CHAT_LOGS_37", "%s no pudo ser eliminado: %s");
 define("A_CHAT_LOGS_38", "%s no pudo crearse: %s");
 define("A_CHAT_LOGS_39", "%s protegido para escritura: %s");
 define("A_CHAT_LOGS_40", "Hubieron errores al guardar el archivo: %s");
+
 //Admin Search Page
 define("A_SEARCH_1", "Página de búsqueda del salón de chat");
 define("A_SEARCH_2", "Todas las categorías");

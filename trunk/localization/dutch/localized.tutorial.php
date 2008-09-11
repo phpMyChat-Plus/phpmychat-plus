@@ -628,7 +628,6 @@ if (C_SAVE != "0")
 ?>
 <hr />
 
-
 <P>
 <FONT SIZE="+2"><A NAME="moderator"><B><U>Commando’s alleen voor adminstrator en/of moderators </U></B></A></FONT>
 <P>

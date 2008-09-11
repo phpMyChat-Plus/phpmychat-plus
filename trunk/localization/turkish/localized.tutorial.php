@@ -673,7 +673,7 @@ Bu mesaj sadece Mehmet ve size görünür, diğer kukullanıcılar göremezler.
 Eğer PM özelliği aktif edilmişse <B>"/wisp kullanıcı mesajı  komutu"</B> tırnaklar olmaksızın kullanılarak başka odadaki kullanıcıya fısıldamak mümkündür.
 <P>
 <?php
-if (C_PRIV_POPUP)
+if (!C_PRIV_POPUP)
 {
 ?>
 Ana pencerede, mesaj gönderen birinin kullanıcı adına tıklamak /to veya /wisp komutunu devreye sokarak mesaj yazmanız için pencere açar.

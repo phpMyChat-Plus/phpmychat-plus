@@ -173,7 +173,7 @@ if (C_HTML_TAGS_KEEP != "none")
   </TR>
 <!-- End away command doc -->
 	<?php
-	if (C_BANISH)
+	if (C_BANISH && ($CookieStatus == "a" || $CookieStatus == "t" || $CookieStatus == "m"))
 	{
 		?>
 		<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>

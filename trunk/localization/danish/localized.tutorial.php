@@ -559,7 +559,7 @@ Beskeden kan ses af Jack og af dig selv, men de andre brugere vil ikke kunne se 
 Når funktionen private meddelelser er slået til, er det også muligt at sende en privat besked til en bruger i et andet rum ved hjælp af <B>kommandoen "/wisp brugernavn tekstbesked"</B> uden anførselstegn.
 <P>
 <?php
-if (C_PRIV_POPUP)
+if (!C_PRIV_POPUP)
 {
 ?>
 Hvis du klikker på en brugers brugernavn i hovedvinduet, vil kommandoen /to eller /wisp automatisk blive indsat i begyndelsen af linjen i indtastningsfeltet.
