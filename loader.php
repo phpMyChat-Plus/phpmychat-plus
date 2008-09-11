@@ -363,6 +363,7 @@ if($DbLink->num_rows() > 0)
 			if($DbAvatar->num_rows()!=0) list($email, $avatar, $use_gravatar) = $DbAvatar->next_record();
 			if (empty($avatar) || $avatar == "") $avatar = C_AVA_RELPATH . C_DEF_AVATAR;
 			$DbAvatar->clean_results();
+			$DbAvatar->close();
 			// Gravatar mod added by Ciprian
 			if ((ALLOW_GRAVATARS == 2 || (ALLOW_GRAVATARS == 1 && (!isset($use_gravatar) || $use_gravatar))) && !ereg("SYS ", $User))
 			{
@@ -390,6 +391,7 @@ if($DbLink->num_rows() > 0)
 				list($perms_dest,$colornamedest) = $DbColor->next_record();
 				$DbColor->clean_results();
 			}
+			$DbColor->close();
 			if(isset($colorname) && $colorname != "")
 			{
 				$colorname_tag = "<FONT color=".$colorname.">";

@@ -559,7 +559,7 @@ Thông báo sẽ xuất hiện tới người ấy và tới bạn, trừ khi kh
 Khi đặc tính PM được cho phép, thêm có thể xảy ra gửi những tin đồn cho một người sử dụng trong một phòng khác nhau, sử dụng <B>lenh "/wisp tên đăng nhập và tin nhắn"</B> không có lời trích dẫn.
 <P>
 <?php
-if (C_PRIV_POPUP)
+if (!C_PRIV_POPUP)
 {
 ?>
 Kích vào nút một người gửi thông báo nói chung , khung sẽ tự động thêm phù hợp với/ Tới Hay / Lệnh mới tới lĩnh vực được nhập vào những thông báo.

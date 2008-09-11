@@ -557,7 +557,7 @@ Meddelande kommer att framträda till Jack och dig själv, men inga andra använ
 När “Privata meddelande” är påslaget så är det även möjligt att skicka en viskning till användare I rum annat än det du själv är genom att använda <B>Kommandot "/wisp användarnamn meddelande"</B> utan cituationstecken.
 <P>
 <?php
-if (C_PRIV_POPUP)
+if (!C_PRIV_POPUP)
 {
 ?>
 Klicka på namnet av en avsändare, I huvudrutan så kommer automatiskt kommandot /to eller /wisp att läggas till på textradens början.

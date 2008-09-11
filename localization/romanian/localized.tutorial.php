@@ -536,7 +536,7 @@ if (C_VERSION == "2")
 <P>
 <FONT SIZE="+1"><a name="respond"><B>Adresarea către un anumit utilizator în chat:</B></FONT>
 <P>
-Clicking once on the name of another user from the list (to the right of the screen) will cause their "username>" to appear in your text box. This feature allows you to easily direct a public message to a user, perhaps in response to something he or she has posted above.
+Apăsând pe numele unui utilizator din lista din dreapta ecranului, în căsuţa de mesaje va apărea automat "nume_utilizator>". Această facilitate îţi permite să te adresezi (public) cu uşurinţă unui anumit utilizator, spre exemplu ca un răspuns la ceva postat de acesta mai devreme.
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
@@ -544,30 +544,30 @@ Clicking once on the name of another user from the list (to the right of the scr
 <P>
 <FONT SIZE="+1"><A NAME="private"><B>Mesaje Private:</B></A></FONT>
 <P>
-To send a private message to another user currently in your chat room, type the <B>command "/msg username messagetext" or "/to username messagetext"</B> fără ghilimele.
+Pentu a trimite un mesaj privat către un utilizator din camera în care te afli, foloseşte <B>comanda "/msg nume_utilizator textul mesajului" sau "/to nume_utilizator textu mesajului"</B> fără ghilimele.
 <P>
-<I>For example, where Jack is the username:</I> /msg Jack Hi there, how are you?
+<I>De exemplu, dacă Jack este numele utilizatorului:</I> /msg Jack Salutare, ce mai faci?
 <P>
-The message will appear to Jack and yourself, but no other users will see the message.
+Mesajul va putea fi citit numai de către tine şi Jack şi niciun alt utilizator.
 <P>
-When PM feature is enabled, it is also possible to send whispers to a user in a different room, using the <B>command "/wisp username message text"</B> without quotes.
+Dacă opţiunea MP (Meagerie Privată) este activată, poţi de asemenea să trimiţi şoapte (whispers) către un utilizator aflat într-o altă cameră, folosind <B>comanda "/wisp nume_utilizator textul mesajului"</B> fără ghilimele.
 <P>
 <?php
-if (C_PRIV_POPUP)
+if (!C_PRIV_POPUP)
 {
 ?>
-Clicking on the nick of a message sender in the main frame will automatically add the according /to or /wisp command to the input field for messages.
+Apăsând pe numele unui utilizator în ecranul principal de mesaje, comanda corespunzătoare /to sau /wisp va fi adaugată în mod automat în căsuţa de scriere a mesajelor.
 <?php
 }
 else
 {
 ?>
-Clicking on the nick of a user in users list on the right will automatically open a private pop-up window waiting for you to type your message text and hit ENTER to send the message. The replies you'll receive will automatically open in new windows.
+Apăsând pe numele unui utilizator din lista din dreapta ecranului, se va deschide automat un fereastră pop-up în care vei putea scrie mesajul urmat de tasta ENTER pentru atrimite mesajul privat. Răspunsurile pe care le vei primi, se vor deschide de aseenea într-o fereastră separată.
 <?php
 }
 ?>
 <P>
-Note: When PM pop-ups are enabled (in both chat settings and your own profile), you'll be able to review all the off-line PMs you received since last time you logged in to chat or while you set "away"; all the new off-line PMs addressed to you will open in a pop-up window; you may reply to them one by one from the same window.
+Notă: When PM pop-ups are enabled (in both chat settings and your own profile), you'll be able to review all the off-line PMs you received since last time you logged in to chat or while you set "away"; all the new off-line PMs addressed to you will open in a pop-up window; you may reply to them one by one from the same window.
 This PM off-line feature is available only for registered users.
 <P>
 <u><?php echo(L_COLOR_HEAD_SETTINGS); ?></u><br />

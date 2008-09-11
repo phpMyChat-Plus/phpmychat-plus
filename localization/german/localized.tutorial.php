@@ -547,7 +547,7 @@ Die Nachricht erscheint bei Dir und Jack, aber nicht bei den anderen.
 Wenn PM-Funktion aktiviert ist, so ist es auch möglich einen Benutzer in einem anderen Raum anzuflüstern, indem man den <B>Befehl "/wisp Benutzername Nachrichtentext"</B> ohne Anführungszeichen benutzt.
 <P>
 <?php
-if (C_PRIV_POPUP)
+if (!C_PRIV_POPUP)
 {
 ?>
 Klickt man auf den Nick eines Nachrichtenabsenders im Hauptfenster, so wird automatisch /to oder /wisp in das Nachrichteneingabefeld hinzugefügt.

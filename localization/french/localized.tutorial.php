@@ -559,7 +559,7 @@ Le message apparaitra sur l’écran de Jack et le vôtre, mais aucun autre util
 Quand la fonction PM (Message Privé) est activée, il est aussi possible d’envoyer un message privé (ou murmure) à un utilisateur dans un autre salon, en utilisant la <B>commande "/wisp nomutilisateur message texte"</B> sans les double-quotes.
 <P>
 <?php
-if (C_PRIV_POPUP)
+if (!C_PRIV_POPUP)
 {
 ?>
 En cliquant sur le pseudo d’un utilsateur devant un message du cadre principal, vous ferez apparaître automatiquement la commande /to ou /wisp correspondante dans le champs de saisie des messages.

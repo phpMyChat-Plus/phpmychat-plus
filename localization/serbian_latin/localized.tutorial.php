@@ -558,7 +558,7 @@ Poruka će se pojaviti Goranu i vama, ali drugi korisnici neće videti tu poruku
 Kad se omogući PM svojstvo, moguće je poslati šaptanja korisniku u drugoj sobi koristeći <B>komandu "/wisp korisničko ime poruka tekst"</B> bez navodnika.
 <P>
 <?php
-if (C_PRIV_POPUP)
+if (!C_PRIV_POPUP)
 {
 ?>
 Klikom na nadimak pošiljaoca poruke u glavnom okviru automatski će da doda  /to ili /wisp komandu na mesto za unos za poruke. 

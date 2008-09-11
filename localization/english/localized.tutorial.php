@@ -564,7 +564,7 @@ The message will appear to Jack and yourself, but no other users will see the me
 When PM feature is enabled, it is also possible to send whispers to a user in a different room, using the <B>command "/wisp username message text"</B> without quotes.
 <P>
 <?php
-if (C_PRIV_POPUP)
+if (!C_PRIV_POPUP)
 {
 ?>
 Clicking on the nick of a message sender in the main frame will automatically add the according /to or /wisp command to the input field for messages.

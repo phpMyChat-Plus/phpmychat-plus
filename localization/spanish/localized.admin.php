@@ -39,7 +39,7 @@ define("A_SHEET1_10", "Ahora debe ir a su hoja de ’".A_MENU_2."’ para redefi
 define("A_SHEET1_11", "Ultima conexión");
 define("A_SHEET1_12", "Razón del destierro (opcional)");
 define("A_SHEET1_13", "Salass permitidas");
-define("A_SHEET1_14", "Todo Sin Restricciones");
+define("A_SHEET1_14", "Todo Permitidas");
 define("A_SHEET1_15", "Todo Restringido");
 define("A_SHEET1_16", "Las restricciones de la sala especificada también deben activarse en la ’".A_MENU_5."’ hoja.");
 define("A_USER", "Usuario");

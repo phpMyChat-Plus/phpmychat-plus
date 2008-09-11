@@ -558,7 +558,7 @@ Il messaggio apparirà a Jack e a voi stessi, ma nessun altro utente lo vedrà.
 Quando il servizio dei PM è disabilitato, è anche possible inviare whispers ad un utente in una stanza differente, usando il <B>comando "/wisp nomeutente testo messaggio"</B> senza virgolette.
 <P>
 <?php
-if (C_PRIV_POPUP)
+if (!C_PRIV_POPUP)
 {
 ?>
 Cliccando sul nome del mittente di un messaggio nella finestra principale aggiungerà automaticamente il comando /to o /wisp nel campo di inserimento messaggi.

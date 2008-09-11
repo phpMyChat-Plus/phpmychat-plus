@@ -583,7 +583,7 @@ El mensaje será visto por Jorge y usted, pero ningún otro usuario lo podrá ve
 Cuando la opción PM está habilitada, también es posible enviar susurros a otro usuario en un cuarto diferente, usando el  <B>comando "/wisp nombredelusuario mensaje texto"</B> sin usar las comillas.
 <P>
 <?php
-if (C_PRIV_POPUP)
+if (!C_PRIV_POPUP)
 {
 ?>
 Haciendo clic en el nick o sobrenombre o alias del remitente de un mensaje en el marco principal automáticamente se añadirá el respectivo comando /para o /susurro al campo del mensaje.
