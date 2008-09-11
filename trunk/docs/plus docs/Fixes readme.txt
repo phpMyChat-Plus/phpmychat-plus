@@ -32,6 +32,8 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 27.08.2008 - 1.93-RC4:
+- several minor warnings dismissed when the server sessions is disabled; (functionality related)
+- FAQ and Instructions updated with more solutions/explanations; (functionality extension)
 - more styling changes: (functionality extension)
 	- added Skin name, author, date and copyright in the chatrooms and style preview page;
 	- normalized the css/php codes for easier skinning;

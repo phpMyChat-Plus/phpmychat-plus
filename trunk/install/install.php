@@ -75,6 +75,13 @@ $_SESSION['ftpuname'] = $ftpuname;
 if ( $_SESSION['ftppass'] != "" ) $ftppass = $_SESSION['ftppass'];
 if ( $_POST['ftppass'] != "" ) $ftppass = $_POST['ftppass'];
 $_SESSION['ftppass'] = $ftppass;
+	if (eregi("@",$ftpuname))
+	{
+		$ftppath == "";
+		if ( $_SESSION['ftppath'] != "" ) $_SESSION['ftppath'] = $ftppath;
+		if ( $_POST['ftppath'] != "" ) $_POST['ftppath'] = $ftppath;
+		$_SESSION['ftppath'] = $ftppath;
+	}
 if ( $_SESSION['ftppath'] != "" ) $ftppath = $_SESSION['ftppath'];
 if ( $_POST['ftppath'] != "" ) $ftppath = $_POST['ftppath'];
 $_SESSION['ftppath'] = $ftppath;
@@ -215,13 +222,6 @@ if ( $p == 2 )
   if (!$skip)
   {
   	if ($ftpuname != "") $ftppath = eregi_replace($ftpuname, "", $ftppath);
-	if (eregi("@",$ftpuname))
-	{
-		$ftppath == "";
-		if ( $_SESSION['ftppath'] != "" ) $_SESSION['ftppath'] = $ftppath;
-		if ( $_POST['ftppath'] != "" ) $_POST['ftppath'] = $ftppath;
-		$_SESSION['ftppath'] = $ftppath;
-	}
   	if (!isset($ftpuname) || $ftpuname == "") $error3 .= L_FTP_NAME."<br />\n";
   	if (!isset($ftppass) || $ftppass == "") $error3 .= L_FTP_PASS."<br />\n";
 

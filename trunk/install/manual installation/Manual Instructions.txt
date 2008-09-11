@@ -12,7 +12,7 @@ UPGRADE ONLY -> Safe Procedures - IMPORTANT!
 P - any file you have modified in your current chat version (styles, usersH/L, banner, index, index.lib, localization, etc.);
 1c. Optionally, you can delete now the old content of the chat folder;
 1d. Upload the new provided folders and files extracted from the plus.zip distribution (choose "Overwrite all" if the old content has not been deleted at the previous step);
-After uploading the new chat put back ONLY the following backed up files (in the according folders):
+After uploading the new chat, put back ONLY the following backed up files (in the according folders):
 - acount/pages/chat_index.txt;
 - config/config.lib.php (or just put in the new file the DB data mentioned at step 2 bellow);
 - entire logs folder content (only if you first deleted it from ftp);
@@ -77,7 +77,7 @@ Don't change any data there. You will be able to customize your chat later, from
 Note: (you better skip this note if you don't know phpmyadmin: if you'd like to change the admin name to the one you'll use, this is a good opportunity, but let the password untouched.
 By default, the admin account is admin/admin.
 Go to line 291 (this might come changed in the newer releases):
-INSERT INTO c_reg_users VALUES ('', '', 'admin', '1', '21232f297a57a5a743894a0e4a801fc3', '', '', '', '', '', 0, 'admin', '', '', '', 0, 1, '', '', '', '', '', 'red', 'images/avatars/def_avatar.gif', '0', '', '', '');
+INSERT INTO c_reg_users VALUES ('', '', 'admin', '1', '21232f297a57a5a743894a0e4a801fc3', '', '', '', '', '', 0, 'admin', '', '', '', 0, 1, '', '', '', '', '', 'red', 'images/avatars/def_avatar.gif', '0', '', '', '', '', '');
 and replace the first "admin" word with your desired username. The password will still be "admin", being easy to change it later using edituser.php.
 If you preffer to change the password as well, you can use this link http://ciprianmp.com/scripts/hash.php to generate the md5 hash of your desired password, then copy it and replace "21232f297a57a5a743894a0e4a801fc3" (don't touch the leading/ending 's)
 DO NOT change any data on the next line (it is regarding the bot and quotes - two virtual users that bring some fun to your chat)!
@@ -92,7 +92,7 @@ Note: steps 6b-6d will also work by importing the coresponding .txt file into yo
 
 8. Register your desired administrator name and change its permissions to 'admin' in c_reg_users table. Check if your new name has become indeed an admin.
 
-9. Delete the admin user from the c_reg_users table
+9. Delete the admin user from the c_reg_users table.
 
 10. Open the Administration menu/link (Admin Panel) and customize your chat (do not rename your bot yet).
 
@@ -136,9 +136,10 @@ C: To add other chat languages by yourself, download and edit the existing langu
 Please note that there is a new approach to Plus, each language folder including an /images/ folder with it's own images (flag.gif - 3D, flag0.gif - 2D, exitdoor.gif, exitdoorRoll.gif, helpOn.gif and helpOff.gif). Required are only the correspondent flag images for your language (2D could be also copied from the standard version and just renamed to flag0.gif). If not added, the help and door images will be automatically be shown from english.
 Insert, modify and translate according to the modified/new lines added in the english Plus version (use a Text Compare software). To be compatible with Plus, the new files should be encoded into "UTF8 without BOM" (just a few text editors can convert and keep this format - I personally preffer Notepad++ - anyway, you should never use the Windows Notepad or Wordpad). If everything goes fine, you can make your translation available to other users by contacting me.
 
-D. This chat comes with several different skins (skins/styleXX.css.php).
-You can build your own styles (do not modify the provided ones!).
-One single style is composed of two files: stylex.css.php (main style) and stylex.php (skin settings). Copy these two files and rename them by increasing the overall number (e.g. if style12.php is the biggest number, rename to  style13.css.php and style13.php) then start customize them to match your needs. Don't forget to give it a name in style13.php and test it. The new skin will automatically become available in the Admin Panel/Configuration/Menu/Rooms & Colors, as well as in the Skins Preview popup.
+D. This chat comes with several different skins (skins/style1-NN.css.php).
+You can build your own styles. (please do not modify the provided ones!)
+One single style is composed of two files: styleN.css.php (main css style) and styleN.php (skin settings). Copy these two files and rename them by increasing the overall number (e.g. if style17.php is the biggest number, rename to style18.css.php and style18.php) then start customize them to match your needs. The main colors are in style18.php. Don't forget to give it a name and add your credits then test it. The new skin will automatically become available in the Admin Panel/Configuration/Menu/Rooms & Colors, as well as in the Skins Preview popup.
+Note: if you'd like to share the new skin, feel free to send it by email to Ciprian to be included in future versions.
 
 For more instructions (e.g. how to upgrade the c_reg_users table) read the Plus FAQ.txt in the "docs/plus docs" folder. Actually, read also the Fixes readme.txt which might give you some more hints about new features/fixes and other stuff.
 That's all for now! Have a nice one and let me know how it goes!

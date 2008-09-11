@@ -22,8 +22,8 @@ This error is related to the restrictions of your php server (register_globals =
 Check the settings using a phpinfo.php file, and check if either safe_mode is on or register_globals is off. Disable first and enable the second one.
 
 2Q.
-How do I migrate my registered users from phpmychat standard c_reg_users table to plus?
-2A.
+How do I migrate my registered users from phpmychat standard c_reg_users table to Plus?
+2A1.
 The table name is the same. Just follow thiese steps:
 1. Go to phpmyadmin and export your old c_reg_users table. Copy all the INSERT INTO lines to a text editor (I personally use UltraEdit32)
 2. Add this code before this end of the line ); on each line containing user data:
@@ -37,10 +37,12 @@ After addition:
 - for 1.90:
 INSERT INTO `c_reg_users` VALUES ('blabla', '', '47e014ee34869ded7e5236541246319d', 'FirstName', 'LastName', 'WorldWideWeb', '', 'bla@...', '0', 'user', '', 1130763311, '80.96.72.233', '1', 1, '', '', '', '', '', '', './images/avatars/def_avatar.gif');
 - for 1.92 (added two more empty fields at the beggining and at the end):
-INSERT INTO `c_reg_users` VALUES ('', '', 'blabla', '', '47e014ee34869ded7e5236541246319d', 'FirstName', 'LastName', 'WorldWideWeb', '', 'bla@...', '0', 'user', '', 1130763311, '80.96.72.233', '1', 1, '', '', '', '', '', '', './images/avatars/def_avatar.gif', '', '');
-For an upgrade from 1.90 to 1.92, only the first <'', '',> and last <, '', ''> should be added.
+INSERT INTO `c_reg_users` VALUES ('', '', 'blabla', '', '47e014ee34869ded7e5236541246319d', 'FirstName', 'LastName', 'WorldWideWeb', '', 'bla@...', '0', 'user', '', 1130763311, '80.96.72.233', '1', 1, '', '', '', '', '', '', './images/avatars/def_avatar.gif', '', '', '', '', '');
+For an upgrade from 1.90 to 1.92, only the first 2 <'', '',> and last 5 <, '', '', '', '', ''> should be added.
 3. Then copy all your new reg lines into plus/instalation/mysql.sql, in the according section of that file (there should be as many lines with INSERT INTO as your registered users number. If you migrate, you should delete the admin account line from mysql.sql, but let the plusbot account unaltered at this point!). It is also a good opportunity to promote your users to admin (just replace the value of desired user to be promoted, from 'moderator' or 'user' to 'admin')
 4. Then follow the plus/docs/plus docs/Instructions.txt
+2A2.
+To migrate c_reg_users table from an older Plus version to the latest release of Plus, check the database/mysql_new_install.txt latest file and look for the c_reg_users structure. Then add at the end of each user line described above the number of <, ''> as how many new/extra fields are added at the end of the new table (use the avatar field for reference).
 
 3Q.
 The installation process is so complicated for me...
@@ -237,5 +239,15 @@ c. After 8 minutes (enough time for the previous 2 scripts to finish the jobs), 
 Whenever I need to restore something in my chat, I just use these files (they are only 6 days older).
 To use the cron jobs I sampled, don’t forget to replace "cpanelname", "chatdirectory", "db_username", "db_password" and "db_name"with yuor according data.
 You should be done!
+
+20Q.
+After uploading the chat content and trying a first run, I get a "500 Internal server error encountered" message.
+20A.
+This happens on php servers which have the .htaccess files disabled. Delete the .htaccess file from the main directory.
+
+21Q.
+I'm on a shared server and I cannot login by ftp in the first page of the installer wizard.
+22A.
+If your ftp username looks like an email address, try with an empty/null "FTP root path (relative)". It worked for me on the Lunarpages servers (shared).
 
 More to come...
