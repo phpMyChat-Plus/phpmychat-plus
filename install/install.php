@@ -189,6 +189,11 @@ if ( $p == 2 )
 		{
 		switch (APP_VERSION)
 		{
+			case "1.93":
+			{
+				if (APP_MINOR != "") $kind = "193-beta";
+				else $kind = "193";
+			}
 			case "1.92":
 			{
 				if (APP_MINOR != "") $kind = "192-beta";
@@ -335,9 +340,9 @@ if ( $p == 4 )
   	{
   		include ( "database/mysql_new_install.php" );
 		mysql_query ( "UPDATE $t_config SET LANGUAGE = '$L', ADMIN_NAME = '$adminname', ADMIN_EMAIL = '$adminemail', CHAT_URL = '$chaturl', CHAT_NAME = '$chatname'".$LOG_DIR_N." WHERE ID='0';" );
-  	} elseif ( $kind == "192-beta" )
+  	} elseif ( $kind == "193-beta" )
   	{
-  		include ( "database/mysql_upgrade_plus_1.92-beta.php" );
+  		include ( "database/mysql_upgrade_plus_1.93-beta.php" );
 		mysql_query ( $LOG_DIR_NN );
   	} elseif ( $kind == "192" )
   	{
@@ -1996,7 +2001,7 @@ elseif ($p == 5 ) { ?>
     <p align="center">
   <select size="1" name="kind">
   <option value="new"<?php if ($kind=="new") echo " selected" ?>><?php echo L_P1_OP01 ?></option>
-  <option value="192-beta"<?php if ($kind=="192-beta") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus 1.92-beta") ?></option>
+  <option value="192-beta"<?php if ($kind=="192-beta") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus 1.93-beta") ?></option>
   <option value="192"<?php if ($kind=="192") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus 1.92") ?></option>
   <option value="190"<?php if ($kind=="190") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus 1.90") ?></option>
   <option value="18"<?php if ($kind=="18") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus v1.8") ?></option>
