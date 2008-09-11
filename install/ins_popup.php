@@ -17,6 +17,7 @@ Note: index.php must be in the plus folder, not plus/chat/ as for the previous v
 4. Open http://yoursiteurl.com/plus  (plus is the name you used in step 3.). The setup will load automatically.<br /><br />
 
 5. Pick up an available language and go through the installer (thanks to Thomas Pschernig and <a href=http://www.ciprianmp.com/plus/ target=_blank>Ciprian</a>).<br /><br />
+<i>Note: If your ftp username looks like an email address, try with an empty/null "FTP root path (relative)" in the first page of the installer wizard.</i><br /><br />
 
 6. Make sure the file install/install.php is deleted from your chat, otherwise you won't be able to open the chat login page.<br /><br />
 
@@ -46,9 +47,10 @@ C: To add other chat languages by yourself, download and edit the existing langu
 Please note that there is a new approach to Plus, each language folder including an /images/ folder with it's own images (flag.gif - 3D, flag0.gif - 2D, exitdoor.gif, exitdoorRoll.gif, helpOn.gif and helpOff.gif). Required are only the correspondent flag images for your language (2D could be also copied from the standard version and just renamed to flag0.gif). If not added, the help and door images will be automatically be shown from english.<br />
 Insert, modify and translate according to the modified/new lines added in the english Plus version (use a Text Compare software). To be compatible with Plus, the new files should be encoded into "UTF8 without BOM" (just a few text editors can convert and keep this format - I personally preffer Notepad++ (free and powerful!) - never use the Windows Notepad or Wordpad). If everything goes fine, you can make your translation available to other users by contacting me at my email address (last line in this document).<br /><br />
 
-D. This chat comes with 10 different skins (skins/style1-10.css.php).<br />
-You can build your own styles (do not modify the provided ones!).<br />
-One single style is composed of two files: style1.css.php (main style) and style1.php (skin settings). Copy these two files and rename them by increasing the overall number (e.g. style11.css.php and style11.php) then start customize them to match your needs. Don't forget to give it a name in style11.php and test it. The new skin will become available in the Admin Panel/Configuration/Menu/Rooms & Colors.<br /><br />
+D. This chat comes with several different skins (skins/style1-NN.css.php).<br />
+You can build your own styles. (please do not modify the provided ones!)<br />
+One single style is composed of two files: styleN.css.php (main css style) and styleN.php (skin settings). Copy these two files and rename them by increasing the overall number (e.g. if style17.php is the biggest number, rename to style18.css.php and style18.php) then start customize them to match your needs. The main colors are in style18.php. Don't forget to give it a name and add your credits then test it. The new skin will automatically become available in the Admin Panel/Configuration/Menu/Rooms & Colors, as well as in the Skins Preview popup.<br /><br />
+Note: if you'd like to share the new skin, feel free to send it by email to Ciprian to be included in future versions.<br /><br />
 
 For more instructions (e.g. how to upgrade the c_reg_users table) read the Plus FAQ.txt in the "docs/plus docs" folder. Actually, read also the Fixes readme.txt which might give you some more hints about new features/fixes and other stuff.<br />
 That's all for now! Have a nice one and let me know how it goes!<br /><br />
