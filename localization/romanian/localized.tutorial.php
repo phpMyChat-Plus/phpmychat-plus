@@ -550,7 +550,7 @@ Pentu a trimite un mesaj privat către un utilizator din camera în care te afli
 <P>
 Mesajul va putea fi citit numai de către tine şi Jack şi niciun alt utilizator.
 <P>
-Dacă opţiunea MP (Meagerie Privată) este activată, poţi de asemenea să trimiţi şoapte (whispers) către un utilizator aflat într-o altă cameră, folosind <B>comanda "/wisp nume_utilizator textul mesajului"</B> fără ghilimele.
+Dacă opţiunea MP (Mesagerie Privată) este activată, poţi de asemenea să trimiţi şoapte (whispers) către un utilizator aflat într-o altă cameră, folosind <B>comanda "/wisp nume_utilizator textul mesajului"</B> fără ghilimele.
 <P>
 <?php
 if (!C_PRIV_POPUP)
