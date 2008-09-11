@@ -299,7 +299,7 @@ INPUT, SELECT, TEXTAREA
 {
 	font-size: <?php echo($small); ?>pt;
 	font-weight: 600;
-	background-color: <?php echo($COLOR_SCROLL_TRACK); ?>;
+	background-color: <?php echo($COLOR_TB); ?>;
 	color: <?php echo($COLOR_BODY); ?>;
 	border-top: 1pt solid <?php echo($COLOR_BODY); ?>;
 	border-left: 1pt solid <?php echo($COLOR_BODY); ?>;
@@ -309,7 +309,7 @@ INPUT, SELECT, TEXTAREA
 .thumbIndex A
 {
 	text-decoration: none;
-	color: <?php echo($COLOR_BODY); ?>;
+	color: <?php echo($COLOR_BK); ?>;
 	font-weight: 600;
 }
 

@@ -2,10 +2,12 @@
 if (is_array($_SESSION)) { }
 else
 {
-	ini_set('session.use_trans_sid', '1');
-	ini_set('session.use_cookies', '1');
+	ini_set('session.bug_compat_42',0);
+	ini_set('session.bug_compat_warn',0);
+	ini_set('session.use_trans_sid',1);
+	ini_set('session.use_cookies',1);
 	session_start();
-//	session_register("adminlogged");
+	session_register("adminlogged");
 }
 
 // Added for Skin mod
