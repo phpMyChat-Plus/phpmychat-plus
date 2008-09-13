@@ -32,6 +32,8 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 27.08.2008 - 1.93-RC4:
+- added 15 more avatars; (display related)
+- fixed the Logs pages for servers in SAFE MODE; (functionality related)
 - several minor warnings dismissed when the server sessions is disabled; (functionality related)
 - FAQ and Instructions updated with more solutions/explanations; (functionality extension)
 - more styling changes: (functionality extension)
