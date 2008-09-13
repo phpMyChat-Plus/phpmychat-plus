@@ -55,14 +55,14 @@
     $translation['image_too_narrow']            = 'Bild zu schmal (>= %s).';
     $translation['image_too_high']              = 'Bild zu hoch (<= %s).';
     $translation['image_too_short']             = 'Bild zu kurz (>= %s).';
-    $translation['ratio_too_high']              = 'Bildverhältnis zu hoch (Bild zu breit) (<= %s).';
-    $translation['ratio_too_low']               = 'Bildverhältnis zu gering (Bild zu hoch) (>= %s).';
+    $translation['ratio_too_high']              = 'Bildverhältnis zu hoch (Bild zu Gross) (<= %s).';
+    $translation['ratio_too_low']               = 'Bildverhältnis zu gering (Bild zu klein) (>= %s).';
     $translation['too_many_pixels']             = 'Das Bild hat zu viele Pixel (<= %s).';
-    $translation['not_enough_pixels']           = 'Das Bild hat nicht genut Pixel (>= %s).';
+    $translation['not_enough_pixels']           = 'Das Bild hat nicht genug Pixel (>= %s).';
     $translation['file_not_uploaded']           = 'Datei nicht hochgeladen. Prozess nicht ausführbar.';
     $translation['already_exists']              = '%s existiert bereits. Bitte ändern Sie den Dateinamen.';
-    $translation['temp_file_missing']           = 'Keine korrekte temp Originaldatei. Prozess nicht ausführbar.';
-    $translation['source_missing']              = 'Keine korrekte Upload Originaldatei. Prozess nicht ausführbar.';
+    $translation['temp_file_missing']           = 'Temp datei existiert nicht. Prozess nicht ausführbar.';
+    $translation['source_missing']              = 'Upload datei existiert nicht. Prozess nicht ausführbar.';
     $translation['destination_dir']             = 'Zielverzeichnis kann nicht erstellt werden. Prozess nicht ausführbar.';
     $translation['destination_dir_missing']     = 'Zielverzeichnis existiert nicht. Prozess nicht ausführbar.';
     $translation['destination_path_not_dir']    = 'Zielpfad ist kein Verzeichnis. Prozess nicht ausführbar.';
@@ -79,7 +79,7 @@
     $translation['watermark_invalid']           = 'Unbekanntes Bildformat, Wasserzeichen nicht lesbar.';
     $translation['file_create']                 = 'Erstellung %s wird nicht unterstützt.';
     $translation['no_conversion_type']          = 'Kein Konvertierungstyp definiert.';
-    $translation['copy_failed']                 = 'Fehler beim Kopieren der Datei auf den Server. Kopiervorgang missglückt.';
+    $translation['copy_failed']                 = 'Fehler beim Kopieren der Datei auf den Server. Kopiervorgang fehlerhaft.';
     $translation['reading_failed']              = 'Fehler beim Lesen der Datei.';
 
 ?>
