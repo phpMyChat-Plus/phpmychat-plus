@@ -57,13 +57,17 @@ $yrsu = preg_find('/./', $yu, PREG_FIND_DIRONLY|PREG_FIND_SORTKEYS|PREG_FIND_SOR
 foreach($yrsu as $yru)
 {
 		$yeardiru = eregi_replace($yu."/",'',$yru);
+		if ($yeardiru > date('Y')) continue;
 		echo("<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table><tr>");
 		echo ("<td valign=top align=center nowrap=\"nowrap\" colspan=6><font size=4 color=red><b>$yeardiru</b></font></td>"); #print name of each file found
 		$mu=$yu."/".$yeardiru; #define which month you want to read
 		$mtsu = preg_find('/./', $mu, PREG_FIND_DIRONLY|PREG_FIND_RETURNASSOC|PREG_FIND_SORTMODIFIED|PREG_FIND_SORTKEYS|PREG_FIND_SORTDESC);
+		$dateu1 = mktime(0,0,0,date('m'),1,$yeardiru);
 		foreach($mtsu as $mtu => $stats)
 		{
 			$monthdiru = eregi_replace($mu."/",'',$mtu);
+			$dateu2 = strtotime("01 ".$monthdiru." ".$yeardiru);
+			if ($dateu1 < $dateu2) continue;
 				switch ($monthdiru)
 				{
 					case 'Jan':

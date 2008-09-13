@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.tutorial.php - plus version (08.03.2008 - rev.8)
+// File : dutch/localized.tutorial.php - plus version (08.03.2008 - rev.8 + rev.10)
 // Original translation for the Plus version by Bert Moorlag <berbia@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -645,15 +645,17 @@ Er is nog een nuttige bekendmaking als commando voor een beheer in kamer; de adm
 <P>
 <hr />
 
- <P>
- <FONT SIZE="+1"><A NAME="kick"><B>Een gebruiker kicken:</B></A></FONT>
- <P>
- Moderators kunnen een gebruiker kicken en de administrator kan een gebruiker en een moderator kicken met het commando <B>kick</B>. behalve voor de administrator, moet de gebruiker die wordt gekickt in dezelfde kamer zijn.
- <P>
- <I>Bijvoorbeeld</I>, Als Jack de gebruikersnaam is om te worden gekickt: <I>/kick Jack</I> of <I>/kick Jack reden voor kicking</I> de reden voor kicking kan je alles typen b.v. "for spamming!"
- <br /><P ALIGN="right"><A HREF="#top">Naar boven</A></P>
- <P>
- <hr />
+<P>
+<FONT SIZE="+1"><A NAME="kick"><B>Een gebruiker kicken:</B></A></FONT>
+<P>
+Moderators kunnen een gebruiker kicken en de administrator kan een gebruiker en een moderator kicken met het commando <B>kick</B>. behalve voor de administrator, moet de gebruiker die wordt gekickt in dezelfde kamer zijn.
+<P>
+<I>Bijvoorbeeld</I>, Als Jack de gebruikersnaam is om te worden gekickt: <I>/kick Jack</I> of <I>/kick Jack reden voor kicking</I> de reden voor kicking kan je alles typen b.v. "for spamming!"
+<P>
+Als * optie is gebruikt (<I>/kick * <?php echo(L_HELP_REASON); ?></I>), de commando zorgt ervoor dat alle gebruikers uit de chat worden verwijderd, die geen bepaalde power hebben (alleen gasten en ongeregistreerde gebruikers). Dit kan zinvol zijn als de server connective problemen ondervindt en alle gebruikers hun chat aan het verversen is. In de tweede plaats, een <I><?php echo(L_HELP_REASON); ?></I> is aanbevolen om de gebruikers te laten weten dat zij zijn verwijderd.
+<br /><P ALIGN="right"><A HREF="#top">Naar boven</A></P>
+<P>
+<hr />
 
 <?php
 if (C_BANISH != "0")

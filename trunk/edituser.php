@@ -563,10 +563,10 @@ if (C_PRIV_POPUP == 1)
 			<TD VALIGN="TOP">
 				<INPUT TYPE="text" NAME="PICTURE" SIZE=25 MAXLENGTH=255 VALUE="<?php echo(stripslashes($PICTURE)); ?>"<?php if ($done) echo(" READONLY"); ?>>
 				<?php
-				if (isset($PICTURE) && stripslashes($PICTURE) != "" && file(stripslashes($PICTURE)))
+				if (isset($PICTURE) && stripslashes($PICTURE) != "" && ini_get("allow_url_fopen") && file(stripslashes($PICTURE)))
 				{
 				?>
-					<IMG src="<?php echo(stripslashes($PICTURE)); ?>" width = "<?php echo(C_AVA_WIDTH); ?>" ALT="<?php echo(L_PRO_5); ?>" />
+					<IMG src="<?php echo(stripslashes($PICTURE)); ?>" width="<?php echo(C_AVA_WIDTH); ?>" ALT="<?php echo(L_PRO_5); ?>" />
 				<?php
 				}
 				?>

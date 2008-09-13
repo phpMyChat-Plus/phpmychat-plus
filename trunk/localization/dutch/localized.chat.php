@@ -149,6 +149,7 @@ define("L_ERR_USR_24", "Om een eigen ruimte te maken moet je jezelf registreren.
 define("L_ERR_USR_25", "Alleen een administrator of moderator kan de kleuren gebruiken ".$COLORNAME." !<br />gebruik geen ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1.".<br />deze zijn gereserveerd voor power users!");
 define("L_ERR_USR_26", "Alleen een administrator of moderator kan de kleuren gebruiken ".$COLORNAME." !<br />gebruik geen! ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1.".<br />deze zijn gereserveerd voor power users!");
 define("L_ERR_USR_27", "Je kunt niet privé tegen jezelf praten.\\nDoe dat in stilte...\\nKies een andere gebruikersnaam.");
+define("L_ERR_USR_28", "Jou toegang tot %s is beperkt!<br />Kies een andere kamer a.u.b."); // room name
 define("L_ERR_ROM_1", "Kamernaam kan niet met komma en backslash (\\).");
 define("L_ERR_ROM_2", "Verboden woord gevonden in de naam van de ruimte die je wil maken.");
 define("L_ERR_ROM_3", "Deze ruimte is al in gebruik als openbare ruimte.");
@@ -175,8 +176,10 @@ define("L_NO_PROFILE", "Geen profiel");
 // input frame
 define("L_HLP", "Help");
 define("L_MODERATOR", "%s is nu moderator van deze kamer.");
-define("L_KICKED", "%s is met succes weggestemd.");
+define("L_KICKED", "%s is succesvol verwijderd.");
 define("L_KICKED_REASON", "%s is succesvol verwijderd. (Reden: %s)");
+define("L_KICKED_ALL", "Alle gebruikers zijn succesvol verwijderd.");
+define("L_KICKED_ALL_REASON", "Alle gebruikers zijn succesvol verwijderd. (Reden: %s)");
 define("L_BANISHED", "%s is succesvol verbannen.");
 define("L_BANISHED_REASON", "%s is succesvol verbannen. (Reden: %s)");
 define("L_ANNOUNCE", "MEDEDELING");
@@ -224,7 +227,7 @@ define("L_HELP_CMD_5", "Verlaat het chatten, eventueel met achterlaten van een b
 define("L_HELP_CMD_6", "Vermijdt het tonen van de berichten van een gebruiker als de nickname is aangegeven.<br />Zet het negeren uit voor een gebruiker als nick en - beiden zijn aangegeven, voor alle gebruikers als - is aangegeven maar de nick niet.<br />Als geen optie is gegeven laat dit commando een venster zien met alle genegeerde nicks.");
 define("L_HELP_CMD_7", "Haal de vorige regel terug (commando of bericht).");
 define("L_HELP_CMD_8", "De tijd voor het bericht weglaten of laten zien.");
-define("L_HELP_CMD_9", "Schop een gebruiker van de chatbox. Deze commando kan alleen gebruikt worden door de administrator of moderator.<br />Met de optie , [".L_HELP_REASON."] een rede op te geven van de verwijdering (reden).");
+define("L_HELP_CMD_9", "Schop een gebruiker van de chatbox. Deze commando kan alleen gebruikt worden door de administrator of moderator.<br />Met de optie , [".L_HELP_REASON."] een rede op te geven van de verwijdering (reden).<br />Als * optie is gebruikt, de commando zorgt ervoor dat alle gebruikers uit de chat worden verwijderd, die geen bepaalde power hebben (alleen gasten en ongeregistreerde gebruikers). Dit kan zinvol zijn als de server connective problemen ondervindt en alle gebruikers hun chat aan het verversen is. In de tweede plaats, een [".L_HELP_REASON."] is aanbevolen om de gebruikers te laten weten dat zij zijn verwijderd.");
 define("L_HELP_CMD_10", "Stuur een privé bericht naar de gespecificeerde gebruiker (andere gebruikers krijgen het niet te zien).");
 define("L_HELP_CMD_11", "Laat de informatie zien van gekozen gebruiker.");
 define("L_HELP_CMD_12", "Popup venster om gebruikersprofiel aan te passen.");
@@ -610,6 +613,7 @@ define("L _SKINS_TITLE", "Voorbeeld bekijken");
 define("L _SKINS_TITLE1", "Voorbeelden %s om te %s bekijken"); // Skins 1 to 4 preview
 define("L _SKINS_AV", "Beschikbare skins");
 define("L _SKINS_NONAV", "Er zijn geen stijlen omschreven in de \"skins\" directorie");
+define("L_SKINS_COPY", "&copy; %s Skin by %s"); //© 2008 Skin by AuthorName
 
 // Swap image titles by Ciprian
 define("L_GEN_ICON", "Geslacht icoon");
@@ -628,4 +632,16 @@ define("L_LOGIN_COUNT", "Totaal bezocht");
 
 // Gravatar from email mod by Ciprian
 define("L_GRAV_USE", "gebruik de Gravatar");
+
+// Uploader mod by Ciprian
+define("L_UPLOAD", "Upload %s"); // Upload Image, Upload Sound or Upload File
+define("L_UPLOAD_IMG", "Foto bestand"); // used to upload Avatars and /img command
+define("L_UPLOAD_SND", "Geluids bestand"); // used to upload Buzz sounds
+define("L_UPLOAD_FLS", "Bestanden"); // used to upload multiple files at once
+define("L_UPLOAD_SUCCESS", "%s succesvol geupload als %s."); // original filename, destination filename
+define("L_FILES_TITLE", "Uploads Beheer");
+
+// Room restriction mod by Ciprian
+define("L_RESTRICTED", "Beperking");
+define("L_RESTRICTED_ROM", "%s is succeslvol een beperking opgelegd voor deze kamer.");
 ?>

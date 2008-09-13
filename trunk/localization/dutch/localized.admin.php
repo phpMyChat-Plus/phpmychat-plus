@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.admin.php - plus version (07.07.2008 - rev.13)
+// File : dutch/localized.admin.php - plus version (26.08.2008 - rev.14)
 // Original translation by Corbesir <rock@jascrc.com>
 // Updates, corrections and additions for the Plus version by DJE Amesz & Romanesko  Genieusdanny@gmail.com and Bert Moorlag <berbia@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -35,9 +35,13 @@ define("A_SHEET1_6", "Verwijder aangevinkte namen");
 define("A_SHEET1_7", "Veranderen");
 define("A_SHEET1_8", "Er zijn geen geregistreerde gebruikers behalve jezelf.");
 define("A_SHEET1_9", "Verban gevinkte namen");
-define("A_SHEET1_10", "Ga nu naar de ’".A_MENU_2."’ tab om je keuzes te bekijken.");
+define("A_SHEET1_10", "Ga nu naar de ’".A_MENU_2."’ pagina om je keuzes te bekijken.");
 define("A_SHEET1_11", "Laatst online");
 define("A_SHEET1_12", "Reden van de verbaning (optioneel)");
+define("A_SHEET1_13", "Toegestane kamers");
+define("A_SHEET1_14", "Alle Onbeperkt");
+define("A_SHEET1_15", "Alle Beperkt");
+define("A_SHEET1_16", "De aangegeven kamer beperking moet ook worden geactiveerd in de ’".A_MENU_5."’ pagina.");
 define("A_USER", "Gebruikers");
 define("A_MODER", "Moderator");
 define("A_TOPMOD", "Top Moderator");
@@ -62,7 +66,7 @@ define("A_SHEET3_3", "Maak geselecteerde ruimtes schoon");
 define("A_SHEET3_4", "Er zijn geen ruimtes om te legen.");
 
 // Frame for sending mails
-define("A_SHEET4_0", "Je hebt nog niet de admin email ingevuld in de ’".A_MENU_5."’.");
+define("A_SHEET4_0", "Je hebt nog niet de admin email ingevuld in de ’".A_MENU_5."’ pagina.");
 define("A_SHEET4_1", "Verstuur e-mails");
 define("A_SHEET4_2", "Aan:");
 define("A_SHEET4_3", "Alles selecteren");

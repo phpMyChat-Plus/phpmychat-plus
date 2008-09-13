@@ -171,16 +171,20 @@ foreach($yrs as $yr)
 {
 		$year_size = 0;
 		$yeardir = eregi_replace($y."/",'',$yr);
-				echo("\n<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table>");
-				echo ("\n<tr>\n<td valign=top align=center nowrap=\"nowrap\" colspan=7>\n<font size=4 color=red><b>$yeardir</b></font>\n</td>"); #print name of each file found
+		if ($yeardir > date('Y')) continue;
+			echo("\n<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table>");
+			echo ("\n<tr>\n<td valign=top align=center nowrap=\"nowrap\" colspan=7>\n<font size=4 color=red><b>$yeardir</b></font>\n</td>"); #print name of each year found
 		$m=$yr; #define which month you want to read
 		$mts = preg_find('/./', $yr, PREG_FIND_DIRONLY|PREG_FIND_RETURNASSOC|PREG_FIND_SORTMODIFIED|PREG_FIND_SORTKEYS|PREG_FIND_SORTDESC);
+		$date1 = mktime(0,0,0,date('m'),1,$yeardir);
 		foreach($mts as $mt => $stats)
 		{
-		$month_size = 0;
-				$monthdir = eregi_replace($yr."/",'',$mt);
-if($L == "hungarian") $MONTH = $yeardir.". ";
-else $MONTH = "";
+			$month_size = 0;
+			$monthdir = eregi_replace($yr."/",'',$mt);
+			$date2 = strtotime("01 ".$monthdir." ".$yeardir);
+			if ($date1 < $date2) continue;
+			if($L == "hungarian") $MONTH = $yeardir.". ";
+			else $MONTH = "";
 				switch ($monthdir)
 				{
 					case 'Jan':
@@ -244,14 +248,14 @@ else $MONTH = "";
 					}
 					break;
 				}
-if($L != "hungarian")
-{
+			if($L != "hungarian")
+			{
 				$MONTH .= " ".$yeardir;
-}
-else
-{
+			}
+			else
+			{
 				$MONTHHU = $MONTH."i";
-}
+			}
 				echo("\n</tr>\n<tr>\n<td valign=top align=left nowrap=\"nowrap\" colspan=7>\n<font size=4 color=green><b>$MONTH</b></font>\n</td>"); #print name of each file found
 				echo("\n</tr>\n<tr>\n<td valign=top align=left nowrap=\"nowrap\">");
 				$d=$yr."/".$monthdir; #define which month you want to read
@@ -330,16 +334,20 @@ foreach($yrsu as $yru)
 {
 		$yearu_size = 0;
 		$yeardiru = eregi_replace($yu."/",'',$yru);
-				echo("\n<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table>");
-				echo ("\n<tr>\n<td valign=top align=center nowrap=\"nowrap\" colspan=7>\n<font size=4 color=red><b>$yeardiru ".A_CHAT_LOGS_12."</b></font>\n</td>"); #print name of each file found
+		if ($yeardiru > date('Y')) continue;
+			echo("\n<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table>");
+			echo ("\n<tr>\n<td valign=top align=center nowrap=\"nowrap\" colspan=7>\n<font size=4 color=red><b>$yeardiru ".A_CHAT_LOGS_12."</b></font>\n</td>"); #print name of each year found
 		$mu=$yru; #define which month you want to read
 		$mtsu = preg_find('/./', $yru, PREG_FIND_DIRONLY|PREG_FIND_RETURNASSOC|PREG_FIND_SORTMODIFIED|PREG_FIND_SORTKEYS|PREG_FIND_SORTDESC);
+		$dateu1 = mktime(0,0,0,date('m'),1,$yeardiru);
 		foreach($mtsu as $mtu => $stats)
 		{
-				$monthu_size = 0;
-				$monthdiru = eregi_replace($yru."/",'',$mtu);
-if($L == "hungarian") $MONTHU = $yeardiru.". ";
-else $MONTHU = "";
+			$monthu_size = 0;
+			$monthdiru = eregi_replace($yru."/",'',$mtu);
+			$dateu2 = strtotime("01 ".$monthdiru." ".$yeardiru);
+			if ($dateu1 < $dateu2) continue;
+			if($L == "hungarian") $MONTHU = $yeardiru.". ";
+			else $MONTHU = "";
 				switch ($monthdiru)
 				{
 					case 'Jan':
@@ -403,14 +411,14 @@ else $MONTHU = "";
 					}
 					break;
 				}
-if($L != "hungarian")
-{
+			if($L != "hungarian")
+			{
 				$MONTHU .= " ".$yeardiru;
-}
-else
-{
+			}
+			else
+			{
 				$MONTHUHU = $MONTHU."i";
-}
+			}
 				echo("\n</tr>\n<tr>\n<td valign=top align=left nowrap=\"nowrap\" colspan=7>\n<font size=4 color=green><b>$MONTHU ".A_CHAT_LOGS_12."</b></font>\n</td>"); #print name of each file found
 				echo("\n</tr>\n<tr>\n<td valign=top align=left nowrap=\"nowrap\">");
 				$du=$yru."/".$monthdiru; #define which month you want to read
