@@ -176,7 +176,7 @@ foreach($yrs as $yr)
 			echo ("\n<tr>\n<td valign=top align=center nowrap=\"nowrap\" colspan=7>\n<font size=4 color=red><b>$yeardir</b></font>\n</td>"); #print name of each year found
 		$m=$yr; #define which month you want to read
 		$mts = preg_find('/./', $yr, PREG_FIND_DIRONLY|PREG_FIND_RETURNASSOC|PREG_FIND_SORTMODIFIED|PREG_FIND_SORTKEYS|PREG_FIND_SORTDESC);
-		$date1 = mktime(0,0,0,date('m'),1,$yeardir);
+		$date1 = mktime(0,0,0,date('m'),1,date('Y'));
 		foreach($mts as $mt => $stats)
 		{
 			$month_size = 0;
@@ -339,7 +339,7 @@ foreach($yrsu as $yru)
 			echo ("\n<tr>\n<td valign=top align=center nowrap=\"nowrap\" colspan=7>\n<font size=4 color=red><b>$yeardiru ".A_CHAT_LOGS_12."</b></font>\n</td>"); #print name of each year found
 		$mu=$yru; #define which month you want to read
 		$mtsu = preg_find('/./', $yru, PREG_FIND_DIRONLY|PREG_FIND_RETURNASSOC|PREG_FIND_SORTMODIFIED|PREG_FIND_SORTKEYS|PREG_FIND_SORTDESC);
-		$dateu1 = mktime(0,0,0,date('m'),1,$yeardiru);
+		$dateu1 = mktime(0,0,0,date('m'),1,date('Y'));
 		foreach($mtsu as $mtu => $stats)
 		{
 			$monthu_size = 0;

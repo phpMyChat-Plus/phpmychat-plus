@@ -222,8 +222,12 @@ if (C_ALLOW_UPLOADS)
 ?>
 <tr align="center"><td valign="middle">
 <?php
-For ($i=0; $i <= C_NUM_AVATARS; $i++) {
-  if ($i == 0) {
+if (C_DEF_AVATAR != "no_avatar.gif") $j = -1;
+else $j = 0;
+For ($i=$j; $i <= C_NUM_AVATARS; $i++) {
+  if ($i == -1) {
+    $avatar = C_AVA_RELPATH . "no_avatar.gif";
+  } elseif ($i == 0) {
     $avatar = C_AVA_RELPATH . C_DEF_AVATAR;
   } else {
     $avatar = C_AVA_RELPATH . "avatar".$i.".gif";
