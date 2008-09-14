@@ -29,6 +29,7 @@
 
 /**
  * Class upload swedish translation
+ * Textkorrigerad av Fimpen Högström, Fimpen@Relative-Work.se
  *
  * @version   0.25
  * @author    Mikael Andersson (mikael@familjenmartinsson.com)
@@ -41,28 +42,28 @@
     $translation = array();
     $translation['file_error']                  = 'Fil fel. Försök igen.';
     $translation['local_file_missing']          = 'Lokal fil hittades inte.';
-    $translation['local_file_not_readable']     = 'Gick inte att skriva till lokal fil.';
+    $translation['local_file_not_readable']     = 'Gick inte att läsa skriva till lokal fil.';
     $translation['uploaded_too_big_ini']        = 'Uppladdningsfel (Den uppladdade filen överskrider upload_max_filesize direktivet i php.ini - %s).';
     $translation['uploaded_too_big_html']       = 'Uppladdningsfel (Den uppladdade filen överskrider MAX_FILE_SIZE direktivet specificerat i html formuläret - %s).';
     $translation['uploaded_partial']            = 'Uppladdningsfel (Filen blev bara delvis uppladdad).';
     $translation['uploaded_missing']            = 'Uppladdningsfel (Ingen fil blev uppladdad).';
     $translation['uploaded_unknown']            = 'Uppladdningsfel (Okänt fel).';
     $translation['try_again']                   = 'Uppladdningsfel. Försök igen.';
-    $translation['file_too_big']                = 'Filen är förstor (%s).';
+    $translation['file_too_big']                = 'Filen är för stor (%s).';
     $translation['no_mime']                     = 'MIME typen kan inte hittas.';
     $translation['incorrect_file']              = 'Inkorrekt fil typ.';
     $translation['image_too_wide']              = 'Bilden är för bred (<= %s).';
     $translation['image_too_narrow']            = 'Bilden är för smal (>= %s).';
     $translation['image_too_high']              = 'Bilden är för hög (<= %s).';
-    $translation['image_too_short']             = 'Bilden är för liten (>= %s).';
+    $translation['image_too_short']             = 'Bilden är för låg liten (>= %s).';
     $translation['ratio_too_high']              = 'Bild förhållandet är för stort (Bilden är för bred) (<= %s).';
     $translation['ratio_too_low']               = 'Bild förhållandet är för litet (Bilden är för hög) (>= %s).';
     $translation['too_many_pixels']             = 'Bilden har för många pixlar (<= %s).';
     $translation['not_enough_pixels']           = 'Bilden har inte tillräckligt med pixlar (>= %s).';
     $translation['file_not_uploaded']           = 'Bilden är inte uppladdad kan inte fortsätta förloppet.';
     $translation['already_exists']              = '%s finns redan. Ändra filnamnet.';
-    $translation['temp_file_missing']           = 'Fel temporär kälfil. Kan inte fortsätta förloppet.';
-    $translation['source_missing']              = 'Fel uppladdad temporär kälfil. Kan inte fortsätta förloppet.';
+    $translation['temp_file_missing']           = 'Fel temporär källfil. Kan inte fortsätta förloppet.';
+    $translation['source_missing']              = 'Källfil saknas. Fel uppladdad temporär källfil. Kan inte fortsätta förloppet.';
     $translation['destination_dir']             = 'Mål katalogen kan inte skapas. Kan inte fortsätta förloppet.';
     $translation['destination_dir_missing']     = 'Mål katalogen finns inte. Kan inte fortsätta förloppet.';
     $translation['destination_dir_write']       = 'Mål katalogen kan inte göras skrivbar. Kan inte fortsätta förloppet.';
