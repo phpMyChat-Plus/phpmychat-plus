@@ -1,5 +1,5 @@
 <?php
-// File : swedish/localized.admin.php - plus version (07.07.2008 - rev.13)
+// File : swedish/localized.admin.php - plus version (26.08.2008 - rev.14)
 // Original file by Martin Edelius <martin.edelius@spirex.se>
 // Updates, corrections and additions for the Plus version by Heikki <heikki@yttervik.be> & Fimpen Högström <fimpen@relative-work.se>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -39,6 +39,10 @@ define("A_SHEET1_9", "Stäng av markerade användare");
 define("A_SHEET1_10", "Och nu måste du byta till ’".A_MENU_2."’ för att finjustera dina val.");
 define("A_SHEET1_11", "Senaste anslutningstillfälle");
 define("A_SHEET1_12", "Förvisnings orsak (valfri)");
+define("A_SHEET1_13", "Tillåtna rum");
+define("A_SHEET1_14", "Alla rum tillåtna");
+define("A_SHEET1_15", "Alla rum");
+define("A_SHEET1_16", "Följande rums inskränkningar skall aktiveras i ’".A_MENU_5."’ formuläret.");
 define("A_USER", "Användare");
 define("A_MODER", "Moderator");
 define("A_TOPMOD", "ChefsModerator");

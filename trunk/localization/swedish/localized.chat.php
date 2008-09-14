@@ -177,6 +177,8 @@ define("L_HLP", "Hjälp");
 define("L_MODERATOR", "%s är nu moderator för det här rummet.");
 define("L_KICKED", "%s blev utslängd ok.");
 define("L_KICKED_REASON", "%s har framgångsrikt blivit utslängd. (Orsak: %s)");
+define("L_KICKED_ALL", "Alla användare har lyckosamt blivit utslängda.");
+define("L_KICKED_ALL_REASON", "Alla användare har lyckosamt blivit utslängda. (Orsak: %s)");
 define("L_BANISHED", "%s har blivit bannlyst.");
 define("L_BANISHED_REASON", "%s har framgångsrikt blivit bannlyst. (Orsak: %s)");
 define("L_ANNOUNCE", "VIKTIGT MEDDELANDE!!");
@@ -224,7 +226,7 @@ define("L_HELP_CMD_5", "Lämna chatten efter att du lämnar ett frivillig meddel
 define("L_HELP_CMD_6", "Ignorera meddelanden från den användare du anger.<br />Sluta ignorera specifik användare när du anger både - och användarnamn eller sluta ignorera alla användare när enbart - anges.<br />Utan alternativ så poppar ett fönster upp med en lista över alla ignorerade användare.");
 define("L_HELP_CMD_7", "Upprepa föregående text (kommando eller meddelande).");
 define("L_HELP_CMD_8", "Visa/Dölj tid före meddelanden.");
-define("L_HELP_CMD_9", "Slänger ut användare från ett rum. Kan endast användas av moderator.<br />Valfri, [".L_HELP_REASON."] visar orsak av kicking (några önskar en förklaringt).");
+define("L_HELP_CMD_9", "Slänger ut användare från ett rum. Kan endast användas av moderator.<br />Valfri, [".L_HELP_REASON."] visar orsak av kicking (några önskar en förklaringt).<br />Om * används så kommer kommandot att kicka ut alla användare utan Admin och Moderatorstatus (endast gäster och registrerade användare alltså). Detta är användbart om servern har kopplingssvårigheter till databasen och alla användare behöver logga in igen. I det andra fallet så är [".L_HELP_REASON."] att rekomendera så användarna förstår varför de blivit utslängda.");
 define("L_HELP_CMD_10", "Skicka ett privat meddelande till specificerad användare (ingen annan ser det).");
 define("L_HELP_CMD_11", "Visa information om specificerad användare.");
 define("L_HELP_CMD_12", "Poppar upp ett fönster för redigering av dina användaruppgifter.");
@@ -611,6 +613,7 @@ define("L_SKINS_TITLE", "Förhandsgranska färgkombinationer");
 define("L_SKINS_TITLE1", "Förhandsgrandska färgpalett % till %"); // Skins 1 to 4 preview
 define("L_SKINS_AV", "Tillgängliga färgpaletter");
 define("L_SKINS_NONAV", "Det finns ingen färgpalett definierad i \"skins\" mappen");
+define("L_SKINS_COPY", "&copy; %s Temat gjort av %s"); //© 2008 Skin by AuthorName
 
 // Swap image titles by Ciprian
 define("L_GEN_ICON", "Könsikon");
@@ -629,4 +632,17 @@ define("L_LOGIN_COUNT", "Totalt antal besök"); // number of logins (returning v
 
 // Gravatar from email mod by Ciprian
 define("L_GRAV_USE", "använd Gravatar"); // do not translate the word “Gravatar”!
+
+// Uploader mod by Ciprian - 11.08.2008
+define("L_UPLOAD", "Ladda upp %s"); // Upload Image, Upload Sound or Upload File
+define("L_UPLOAD_IMG", "Bildfil"); // used to upload Avatars and /img command
+define("L_UPLOAD_SND", "Ljudfil"); // used to upload Buzz sounds
+define("L_UPLOAD_FLS", "Filer"); // used to upload multiple files at once
+define("L_UPLOAD_SUCCESS", "%s Lyckosamt uppladdat som %s."); // original filename, destination filename
+define("L_FILES_TITLE", "Uppladningshanterande");
+
+// Room restriction mod by Ciprian
+define("L_ERR_USR_28", "Din behörighet till %s har blivit inskränkt!<br />Vänligen välj ett annat rum."); // room name
+define("L_RESTRICTED", "Inskränkt");
+define("L_RESTRICTED_ROM", "%s har lyckosamt blivit inskränkt från detta rum.");
 ?>
