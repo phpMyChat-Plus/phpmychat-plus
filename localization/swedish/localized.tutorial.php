@@ -672,7 +672,7 @@ Moderatorer kan sparka en användare och administratörer kan sparka en använda
 <P>
 <I>Som exempel</I>, om Jack är namnet på användaren som skall sparkas ut:</I> /kick Jack</I>.
 <P>
-Om * används (<I>/kick * <?php echo(L_HELP_REASON); ?></I>) så kommer kommandot att kicka ut alla användare utan Admin och Moderatorstatus (endast gäster och registrerade användare alltså). Detta är användbart om servern har kopplingssvårigheter till databasen och alla användare behöver logga in igen. I det andra fallet så är <I><?php echo(L_HELP_REASON); ?></I> att rekomendera så användarna förstår varför de blivit utslängda.
+Om * används så kommer kommandot (<I>/kick * <?php echo(L_HELP_REASON); ?></I>) att kicka ut alla användare utan Admin och Moderatorstatus (endast gäster och registrerade användare alltså). Detta är användbart om servern har kopplingssvårigheter till databasen och alla användare behöver logga in igen. I det andra fallet så är <I><?php echo(L_HELP_REASON); ?></I> att rekomendera så användarna förstår varför de blivit utslängda.
 <br /><P ALIGN="right"><A HREF="#top">Tillbaka till topp</A></P>
 <P>
 <hr />
