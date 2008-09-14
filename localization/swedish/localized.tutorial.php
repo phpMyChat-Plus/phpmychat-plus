@@ -1,5 +1,5 @@
 <?php
-// File : swedish/localized.tutorial.php - plus version (08.03.2008 - rev.8)
+// File : swedish/localized.tutorial.php - plus version (26.08.2008 - rev.10)
 // Original translation for Plus version by Heikki <heikki@yttervik.be>
 // Additions and corrections by Fimpen Högström <fimpen@relative-work.se>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -354,7 +354,7 @@ Där finns många olika vägar för att finjustera utseendet av chatt rummet. F�
 	if ($Ver == "L")
 	{
 		?>
- <LI> <B>Show kommandot</B> tillåter dig att justera antalet meddelanden som visas på din bildskärm. För att ändra default nummer/antal, skriv "/show n" utan citationstecken där n är nummer/antal av visningsbara meddelanden (vilket innebär att du kan se meddelande skrivna till och med innan du ens loggade in).
+ <LI><B>Show kommandot</B> tillåter dig att justera antalet meddelanden som visas på din bildskärm. För att ändra default nummer/antal, skriv "/show n" utan citationstecken där n är nummer/antal av visningsbara meddelanden (vilket innebär att du kan se meddelande skrivna till och med innan du ens loggade in).
 		<P>
 		<I>Som exempel:</I> /show 50
 		<P>
@@ -364,7 +364,7 @@ Där finns många olika vägar för att finjustera utseendet av chatt rummet. F�
 	else
 	{
 		?>
-		<LI> <B>Show och Last kommandona</B> tillåter dig rensa bildskärmen och visa de senast skrivna <I>n</I> meddelanden som sänts till din bildskärm. Skriv "/show n" eller "/last n" utan citationstecken där n är antalet visningsbara meddelanden.
+		<LI><B>Show och Last kommandona</B> tillåter dig rensa bildskärmen och visa de senast skrivna <I>n</I> meddelanden som sänts till din bildskärm. Skriv "/show n" eller "/last n" utan citationstecken där n är antalet visningsbara meddelanden.
 		<P>
 		<I>Som exempel:</I> /show 50 or /last 50
 		<P>
@@ -587,7 +587,8 @@ För att beskriva vad du håller på med du kan använda <B>kommandot "/me "</B>
 <P>
 <I>Som example:</I> Om Jack sänder meddelandet "/me är och dricker kaffe" så kommer i chattfönstret visas "<B>* Jack</B> är och driker kaffe".
 <P>
-En variant på detta kommando är <B>/mr kommando</B> vilket gör att du får med använarens kön med kommandot framför använarnamnet.<P>
+En variant på detta kommando är <B>/mr kommando</B> vilket gör att du får med använarens kön med kommandot framför använarnamnet.
+<P>
 <I>Som exempel:</I> Om Jack skickar ett meddelande "/mr tittar på TV" meddelanderutan kommer att visa "<B>* <?php echo(L_HELP_MR); ?> Jack</B> tittar på TV".
 <br /><P ALIGN="right"><A HREF="#top">Tillbaka till topp</A></P>
 <P>
@@ -648,7 +649,6 @@ if (C_SAVE != "0")
 ?>
 <hr />
 
-
 <P>
 <FONT SIZE="+2"><A NAME="moderator"><B><U>Kommandon som bara är för adminstratörer och moderatorer </U></B></A></FONT>
 <P>
@@ -657,7 +657,6 @@ if (C_SAVE != "0")
 Administratören/er kan/får göra system utrop till alla rum och nå alla för närvarande inloggad användare med <B>announce kommandon</B>.
 <P>
 <I>Som exempel: /announce Chatt systemet kommer att gå ner för skötsel ikväll vid 20:00 (man kan dessutom ge utropet ett fast namn som Viktigt Meddelande!! T ex).</I>
-<br /><P ALIGN="right"><A HREF="#top">Tillbaka till topp</A></P>
 <P>
 Ett annat användbart utropskommando för olika syften som är för både administratörer och moderatorer i ett eller flera rum är <B>room kommandot</B>.
 <P>
@@ -672,6 +671,8 @@ Ett annat användbart utropskommando för olika syften som är för både admini
 Moderatorer kan sparka en användare och administratörer kan sparka en användare och/eller en moderator med <B>kick kommandot</B>. Administratörer går inte att kicka ut, användaren som ska sparkas måste vara i nuvarande rum.
 <P>
 <I>Som exempel</I>, om Jack är namnet på användaren som skall sparkas ut:</I> /kick Jack</I>.
+<P>
+Om * används (<I>/kick * <?php echo(L_HELP_REASON); ?></I>) så kommer kommandot att kicka ut alla användare utan Admin och Moderatorstatus (endast gäster och registrerade användare alltså). Detta är användbart om servern har kopplingssvårigheter till databasen och alla användare behöver logga in igen. I det andra fallet så är <I><?php echo(L_HELP_REASON); ?></I> att rekomendera så användarna förstår varför de blivit utslängda.
 <br /><P ALIGN="right"><A HREF="#top">Tillbaka till topp</A></P>
 <P>
 <hr />

@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.tutorial.php - plus version (08.03.2008 - rev.8 + rev.10)
+// File : dutch/localized.tutorial.php - plus version (26.08.2008 - rev.10)
 // Original translation for the Plus version by Bert Moorlag <berbia@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -554,7 +554,28 @@ Om een privé bericht te verzenden naar een gebruiker in jou chatroom, typ het c
 <P>
 het bericht zal alleen zichtbaar zijn voor Jack en jij, en niet voor de andere gebruikers.
 <P>
-Merk op dat wanneer je op een nick klikt of een bericht in het hoofdscherm, dat de privé commando automatisch wordt toegepast.
+Wanneer de functie voor een PM is uitgezet, is het toch mogelijk om andere gebruikers een fluister bericht te zenden. Dit in een andere kamer, gebruik het  <B>commando "/wisp username message text"</B> zonder de aanhalingstekens.
+<P>
+<?php
+if (!C_PRIV_POPUP)
+{
+?>
+Door in het hoofdvenster op een naam te klikken, of op de zender van een bericht, zal automatisch het commando /to or /wisp oproepen in het veld berichten.
+<?php
+}
+else
+{
+?>
+Door op de naam te klikken in de gebruikerslijst aan de rechterkant, opent automatisch een popup venster en kan je een bericht schrijven en enter om dit bericht te versturen. De ontvangen berichten opent automatisch in een nieuw venster.
+<?php
+}
+?>
+<P>
+Let op: Als de PM functie uit gezet is (in beide chat instellingen van jou profiel), kan je toch alle off line berichten bekijken die je hebt ontvangen, sinds de laatste keer dat je was ingelogd of dat je op afwezig stond. De off line berichten verschijnen in een popup venster. Deze kan je apart beantwoorden in hetzelfde venster.
+Deze off line functie is alleen beschikbaar voor geregistreerde gebruikers.
+<P>
+<u><?php echo(L_COLOR_HEAD_SETTINGS); ?></u><br />
+<?php echo("a) ENABLE_PM = <b>".(C_ENABLE_PM == 1 ? L_ENABLED : L_DISABLED)."</b>;<br />b) PRIV_POPUP = <b>".(C_PRIV_POPUP == 1 ? L_ENABLED : L_DISABLED)."</b>.<br />"); ?>
 <br /><P ALIGN="right"><A HREF="#top">Naar boven</A></P>
 <P>
 <hr />
@@ -636,7 +657,6 @@ if (C_SAVE != "0")
 De administrator kan een algemene bericht maken voor alle kamers, waardoor alle gebruikers, die ingelogd zijn, bereikt worden met de <B>announce commando</B>.
 <P>
 <I>Bijvoorbeeld: /announce De chat is wegens onderhoud, tot 19.00 uur niet beschikbaar.</I>
-<br /><P ALIGN="right"><A HREF="#top">Naar boven</A></P>
 <P>
 Er is nog een nuttige bekendmaking als commando voor een beheer in kamer; de administrator of moderators in een kamer kunnen ook een bekendmaking naar alle gebruikers in dezelfde kamer versturen, met het commando <B>room</B>.
 <P>

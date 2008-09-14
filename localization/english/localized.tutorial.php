@@ -656,7 +656,6 @@ if (C_SAVE != "0")
 ?>
 <hr />
 
-
 <P>
 <FONT SIZE="+2"><A NAME="moderator"><B><U>Commands for the administrator and/or moderators only</U></B></A></FONT>
 <P>

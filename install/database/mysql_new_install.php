@@ -251,7 +251,7 @@ CREATE TABLE ".$t_config." (
  QUICKU longtext NOT NULL,
  COLOR_NAMES enum('0','1') NOT NULL default '1',
  USE_AVATARS enum('0','1') NOT NULL default '1',
- NUM_AVATARS smallint(1) NOT NULL default '63',
+ NUM_AVATARS smallint(1) NOT NULL default '80',
  AVA_RELPATH varchar(255) NOT NULL default 'images/avatars/',
  DEF_AVATAR varchar(255) NOT NULL default 'def_avatar.gif',
  AVA_WIDTH tinyint(1) NOT NULL default '30',
