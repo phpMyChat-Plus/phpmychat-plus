@@ -2222,7 +2222,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 				}
 			}
 			closedir($avatarfiles);
-			$max_num_avatars = $i-1;
+			$max_num_avatars = $i-2;
 ?>
 		<input name="vNUM_AVATARS" type="text" size="7" maxlength="3" value="<?php echo (($NUM_AVATARS > $max_num_avatars) ? $max_num_avatars : $NUM_AVATARS); ?>">
 		&nbsp;(max <?php echo($max_num_avatars); ?>)
