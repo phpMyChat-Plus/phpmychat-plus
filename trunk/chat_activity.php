@@ -48,6 +48,47 @@ if (get_magic_quotes_gpc()) {
 	foreach($_COOKIE as $k=>$v)
 		$_COOKIE[$k] = stripslashes($v);
 }
+
+if (!function_exists("utf8_substr"))
+{
+	function utf8_substr($str,$start)
+	{
+	   preg_match_all("/./su", $str, $ar);
+	   if(func_num_args() >= 3) {
+	       $end = func_get_arg(2);
+	       return join("",array_slice($ar[0],$start,$end));
+	   } else {
+	       return join("",array_slice($ar[0],$start));
+	   }
+	};
+};
+
+// Ghost Control mod by Ciprian
+if (!function_exists('ghosts_in'))
+{
+	function ghosts_in($what, $in, $Charset)
+	{
+		$ghosts = explode(",",$in);
+		for (reset($ghosts); $ghost_name=current($ghosts); next($ghosts))
+		{
+			if (strcasecmp(mb_convert_case($what,MB_CASE_LOWER,$Charset), mb_convert_case($ghost_name,MB_CASE_LOWER,$Charset)) == 0) return true;
+		}
+		return false;
+	};
+};
+
+function user_status($name,$stat)
+{
+	$newname = $name;
+	if ($stat == 'a') $newname .= ($name == C_BOT_NAME) ? "</td><td nowrap=\"nowrap\">".L_WHOIS_BOT."</td>" : ((C_ITALICIZE_POWERS) ? "</td><td nowrap=\"nowrap\">".L_WHOIS_ADMIN."</td>" : "</td><td nowrap=\"nowrap\">".L_WHOIS_REG."</td>");
+	elseif ($stat == 't') $newname .= (C_ITALICIZE_POWERS) ? "</td><td nowrap=\"nowrap\">".L_WHOIS_TOPMOD."</td>" : "</td><td nowrap=\"nowrap\">".L_WHOIS_REG."</td>";
+	elseif ($stat == 'm') $newname .= (C_ITALICIZE_POWERS) ? "</td><td nowrap=\"nowrap\">".L_WHOIS_MODER."</td>" : "</td><td nowrap=\"nowrap\">".L_WHOIS_REG."</td>";
+	elseif ($stat == 'r') $newname .= "</td><td nowrap=\"nowrap\">".L_WHOIS_REG."</td>";
+	elseif ($name == C_BOT_NAME) $newname .= "</td><td nowrap=\"nowrap\">".L_WHOIS_BOT."</td>";
+	else $newname .= "</td><td nowrap=\"nowrap\">".L_WHOIS_GUEST."</td>";
+	return $newname;
+}
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
@@ -59,17 +100,23 @@ if (get_magic_quotes_gpc()) {
 <LINK REL="stylesheet" HREF="<?php echo("${ChatPath}".$skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 </HEAD>
 <BODY CLASS="frame">
-	<CENTER>
+<CENTER>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=0 CLASS="table">
 <TR>
-	<TD ALIGN=CENTER colspan=3>
+	<TD ALIGN=CENTER colspan=<?php echo($DisplayUsers ? "4" : "3"); ?>>
 		<?php
+		// Restricted room mod by Ciprian
+		$res_init = utf8_substr(L_RESTRICTED, 0, 1);
+		$disp_note = 0;
 		require("./${ChatPath}/lib/connected_users.lib.php");
 		display_connected($ShowPrivate,$DisplayUsers,$NbUsers,($NbUsers != 1 ? $NbUsers." ".NB_USERS_IN : USERS_LOGIN),NO_USER,$DbLink,$Charset);
 		?>
 	</TD>
 </TR>
 </TABLE>
+<?php
+		if($disp_note) echo("<table WIDTH=100%><tr valign=top><td colspan=4 align=left CLASS=small>[".$res_init."] = ".L_RESTRICTED.".</td></tr></table>");
+?>
 </CENTER>
 </BODY>
 </HTML>
