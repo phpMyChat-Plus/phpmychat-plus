@@ -6,15 +6,15 @@ If you want to run a NEW install, skip to step 2
 UPGRADE ONLY -> Safe Procedures - IMPORTANT!
 1a. Backup your chat database, just in case something goes wrong; 
 1b. Backup (make a copy on your local pc) of the following files/folders:
-- acount/pages folder to keep the all time counter, otherwise it would be reset to 0;
+- acount/pages folder - to keep the all time counter, otherwise it would be reset to 0;
 - config/config.lib.php file;
-- logs & logsadmin folders - it will keep your saved archive (you can also let it untouched on your ftp server);
+- logs & logsadmin folders - it will keep your saved archive (you can also leave it untouched on your ftp server);
 P - any file you have modified in your current chat version (styles, usersH/L, banner, index, index.lib, localization, etc.);
-1c. Optionally, you can delete now the old content of the chat folder;
+1c. Optionally, you can now (after backup) delete the old content of the chat folder;
 1d. Upload the new provided folders and files extracted from the plus.zip distribution (choose "Overwrite all" if the old content has not been deleted at the previous step);
 After uploading the new chat, put back ONLY the following backed up files (in the according folders):
 - acount/pages/chat_index.txt;
-- config/config.lib.php (or just put in the new file the DB data mentioned at step 2 bellow);
+- config/config.lib.php (or just put in the new file the DB data mentioned at step 2 below);
 - entire logs folder content (only if you first deleted it from ftp);
 - entire logsadmin folder content (only if you first deleted it from ftp);
 1e. With every new released version, several files are drastically changed, while some more have just small fixes. To make sure you include the latest fixes/additions and provide the best functionality, you need to make sure all the latest code is added to your ftp folder.
@@ -25,7 +25,7 @@ a. check yourself for the latest modified files, by sorting the folder/subfolder
 b. do the same in your ftp chat folder/subfolder (most ftp managers do that sort easily, so I would do this with the ftp manager for both remote and local files, having the panes tilled vertically);
 c. compare the last modified date of the new release with the last modified date of your similar file on your site. If your file is more recently modified than the new one, it means you should definitely check for changes in that file!
 Hint2:
-I don't want to advertise, but I'll tell you how I do file comparisions: I use UltraCompare (from http://www.ultracompare.com). This also come as a plugin for UltraEdit/UltraStudio (powerful files/text&code editors) from the same publisher (http://www.idmcomp.com). With UltraCompare I highlight all the differences between 2 (or 3) files (a red cut = in the menu bar).
+I don't want to advertise, but I'll tell you how I do file comparisions: I use UltraCompare (from http://www.ultracompare.com). This also comes as a plugin for UltraEdit/UltraStudio (powerful files/text&code editors) from the same publisher (http://www.idmcomp.com). With UltraCompare I highlight all the differences between 2 (or 3) files (a red cut = in the menu bar).
 From this point, I could use "Merge" but I never do that (hehe, maybe old habits, or just the fact that I don't trust the results). In an old fashioned way, I still copy&paste the codes/lines/paragraphs I need, but it always works, sometimes by checking twice.
 From now on, you are on your own!
 If you're still in trouble or just need a hand, you can ask for support at my email address (last line in this document), but make sure you have the backups saved as per steps 1a & 1b!
@@ -35,13 +35,13 @@ Now go to next step...
 - config/config.lib.php - only the database details (first 3 lines at the begining of the file):
 // Database settings
 define("C_DB_NAME", 'plus');						// Logical database name on that server (most of the times like: cpanelusername_databasename)
-define("C_DB_USER", 'username');				// Database username (most of the times like: cpanelusername_username)
-define("C_DB_PASS", 'password');				// Database user's password
+define("C_DB_USER", 'username');			    	// Database username (most of the times like: cpanelusername_username)
+define("C_DB_PASS", 'password');				    // Database user's password
 Example:
 My server cpanel username is "ciprianmp". My lines look like:
-define("C_DB_NAME", 'ciprianmp_plus');						// Logical database name on that server (most of the times like: cpanelusername_databasename)
-define("C_DB_USER", 'ciprianmp_myname');				// Database username (most of the times like: cpanelusername_username)
-define("C_DB_PASS", 'password');				// Database user's password
+define("C_DB_NAME", 'ciprianmp_plus');				// Logical database name on that server (most of the times like: cpanelusername_databasename)
+define("C_DB_USER", 'ciprianmp_myname');			// Database username (most of the times like: cpanelusername_username)
+define("C_DB_PASS", 'password');				    // Database user's password
 
 In certain cases, this line must be edited as well:
 define("C_DB_HOST", 'localhost');
@@ -72,31 +72,31 @@ plus/skins/images/ - to 777
 plus/sounds/ - to 777
 
 6. Go to "plus/install/manual installation/database" folder on your drive and open mysql_new_install.txt (or the corresponding upgrade) file.
-Don't change any data there. You will be able to customize your chat later, from the config page (Clicking Administration link on your index page)
+Don't change any data there. You will be able to customize your chat later, from the config page (Clicking the Administration link on your index page)
 
 Note: (you better skip this note if you don't know phpmyadmin: if you'd like to change the admin name to the one you'll use, this is a good opportunity, but let the password untouched.
 By default, the admin account is admin/admin.
 Go to line 291 (this might come changed in the newer releases):
 INSERT INTO c_reg_users VALUES ('', '', 'admin', '1', '21232f297a57a5a743894a0e4a801fc3', '', '', '', '', '', 0, 'admin', '', '', '', 0, 1, '', '', '', '', '', 'red', 'images/avatars/def_avatar.gif', '0', '', '', '', '', '');
 and replace the first "admin" word with your desired username. The password will still be "admin", being easy to change it later using edituser.php.
-If you preffer to change the password as well, you can use this link http://ciprianmp.com/scripts/hash.php to generate the md5 hash of your desired password, then copy it and replace "21232f297a57a5a743894a0e4a801fc3" (don't touch the leading/ending 's)
+If you prefer to change the password as well, you can use this link http://ciprianmp.com/scripts/hash.php to generate the md5 hash of your desired password, then copy it and replace "21232f297a57a5a743894a0e4a801fc3" (don't touch the leading/ending 's)
 DO NOT change any data on the next line (it is regarding the bot and quotes - two virtual users that bring some fun to your chat)!
 
 6a. Open your phpmyadmin link and browse to your desired database (if you haven't created one, you'll need to do so in Cpanel);
 6b. In the desired database (the same added to your config/config.lib.php) click on SQL. This will show a window waiting for some code to be added;
 6c. Copy the content of the text file opened at 6th step and paste it in the SQL frame/window, then click OK.
 6d. Make sure it says "Your SQL statement has been executed successfully" or something like that. In the left frame, you can see/check the tables added.
-Note: steps 6b-6d will also work by importing the coresponding .txt file into your mysql database (import file operation)
+Note: steps 6b-6d will also work by importing the corresponding .txt file into your mysql database (import file operation)
 
 7. Test your site functionality by opening http://yoursiteurl.com/plus (plus is the name you used in step 4.) in your browser. Note that there is only one admin right now: admin, password admin (or the modified username on step 6).
 
-8. Register your desired administrator name and change its permissions to 'admin' in c_reg_users table. Check if your new name has become indeed an admin.
+8. Register your desired administrator name and change its permissions to 'admin' in c_reg_users table. Check if your new name has indeed become an admin.
 
 9. Delete the admin user from the c_reg_users table.
 
 10. Open the Administration menu/link (Admin Panel) and customize your chat (do not rename your bot yet).
 
-11. Rename your logsadmin folder on both admin config panel and ftp folder to a hardly to guess name (to prevent anauthorized access, because it contains all the chat posts/events).
+11. Rename your logsadmin folder on both admin config panel and ftp folder to a hard to guess name (to prevent unauthorized access, because it contains all the chat posts/events).
 
 That's it! It should fly!
 
@@ -104,9 +104,9 @@ That's it! It should fly!
 Optional Steps
 
 A. If you want to use the bot follow these instructions:
-- Very important: Don't change bot's name (in admin panel) before the next 8 steps (and change it only if successful). Also read again the last line of paragraph 6!
+- Very important: Don't change the bot's name (in the admin panel) before the next 8 steps (and change it only if successful). Also read again the last line of paragraph 6!
 A1. Open your browser and type: http://yoursiteurl.com/plus/bot/botloader.php
-A2. Wait for the loader to finish the import operation. It might look like being frozen - it means it works in the background,
+A2. Wait for the loader to finish the import operation. It might look like it has frozen - it means it is working in the background,
 so don't close the browser! At the end, you can test the bot following the instructions on the bottom of that page.
 Important: rename or remove the files botloader.php and botloaderinc.php from bot folder (reinstall prevention)
 A3. If it works from talk.php, it should work now in your chat as well.
@@ -114,37 +114,37 @@ A4. To start the bot in a room, type: /bot start
 A5. To talk to the bot, just mention his name "plusbot" in a message (same room)
 A6. To shut the bot up type "bye plusbot"
 A7. To stop the bot and make him quit the room, type /bot stop in the room it's running into.
-A8. To talk privately to the bot (less annoying) use /to or /wisp, like with all the other users.
+A8. To talk privately to the bot (less annoying) use /to or /wisp, as with all the other users.
 Bot successfully loaded Test: make sure the bot is able to answer you in the chat. If his message is empty, then something went wrong.
 Contact me for support at my email address (last line in this document) - only for initial loading support, not customizing the replies.
-If the bot posts coherent answers, then you can go to admin panel and change bot name (using the same rules for registered usernames: no spaces, commas, backslashes or other banned characters, otherwise it will break your chat's functionality)
+If the bot posts coherent answers, then you can go to the admin panel and change the bot name (using the same rules for registered usernames: no spaces, commas, backslashes or other banned characters, otherwise it will break your chat's functionality)
 
-Note: If you don't intend to use the bot, edit the quick menu in admin config panel to eliminate the bot commands from the quick list.
-If the bot answers you (posts any content) then you can change it's name in Admin Panel now - it's safe.
+Note: If you don't intend to use the bot, edit the quick menu in the admin config panel to eliminate the bot commands from the quick list.
+If the bot answers you (posts any content) then you can change it's name in the Admin Panel now - it's safe.
 This version comes only with the English and German files.
 
-B: If you get into troubles with bot, you need to uninstall and reinstall it to make it work again:
-B1. Stop the bot in chat rooms it is started in, using the /bot stop command (if it doesn't work, just delete the bot records in c_users table - with phpmyadmin - and botfb folder).
+B: If you get into troubles with the bot, you need to uninstall and reinstall it to make it work again:
+B1. Stop the bot in the chat rooms it is started in, using the /bot stop command (if it doesn't work, just delete the bot records in c_users table - with phpmyadmin - and botfb folder).
 B2. Rename the bot to "plusbot" in Admin panel.
 B3. Use phpmyadmin to "empty" the following tables: bot_bot, bot_bots, bot_patterns and bot_templates.
-B4. Reupload back (restore) the file called botloader.php (or botloadrinc.php, if first frozes).
+B4. Reupload back (restore) the file called botloader.php (or botloadrinc.php, if the first feezes).
 B5. Make sure all the original distributed files are in the aiml folder (startup.xml and *.aiml files).
-B6. Make sure the plus/bot/subs.inc file is chmoded to 777 (step 5 in this tutorial).
+B6. Make sure the plus/bot/subs.inc file is CHMODed to 777 (step 5 in this tutorial).
 B7. Reinstall the bot following the steps described in paragraph A. (A1-A8)
 
 C: To add other chat languages by yourself, download and edit the existing language files from the standard pack and add the new folder into /localization/ Plus folder. (well, the best way is to contact me and get the latest templates in a Word format...)
-Please note that there is a new approach to Plus, each language folder including an /images/ folder with it's own images (flag.gif - 3D, flag0.gif - 2D, exitdoor.gif, exitdoorRoll.gif, helpOn.gif and helpOff.gif). Required are only the correspondent flag images for your language (2D could be also copied from the standard version and just renamed to flag0.gif). If not added, the help and door images will be automatically be shown from english.
-Insert, modify and translate according to the modified/new lines added in the english Plus version (use a Text Compare software). To be compatible with Plus, the new files should be encoded into "UTF8 without BOM" (just a few text editors can convert and keep this format - I personally preffer Notepad++ - anyway, you should never use the Windows Notepad or Wordpad). If everything goes fine, you can make your translation available to other users by contacting me.
+Please note that there is a new approach to Plus, each language folder includes an /images/ folder with it's own images (flag.gif - 3D, flag0.gif - 2D, exitdoor.gif, exitdoorRoll.gif, helpOn.gif and helpOff.gif). Required only are the correspondent flag images for your language (2D could be also copied from the standard version and just renamed to flag0.gif). If not added, the help and door images will be automatically be shown from the English.
+Insert, modify and translate according to the modified/new lines added in the English Plus version (use a Text Compare software). To be compatible with Plus, the new files should be encoded into "UTF8 without BOM" (just a few text editors can convert and keep this format - I personally prefer Notepad++ - anyway, you should never use the Windows Notepad or Wordpad). If everything goes fine, you can make your translation available to other users by contacting me.
 
 D. This chat comes with several different skins (skins/style1-NN.css.php).
 You can build your own styles. (please do not modify the provided ones!)
-One single style is composed of two files: styleN.css.php (main css style) and styleN.php (skin settings). Copy these two files and rename them by increasing the overall number (e.g. if style17.php is the biggest number, rename to style18.css.php and style18.php) then start customize them to match your needs. The main colors are in style18.php. Don't forget to give it a name and add your credits then test it. The new skin will automatically become available in the Admin Panel/Configuration/Menu/Rooms & Colors, as well as in the Skins Preview popup.
+One single style is composed of two files: styleN.css.php (main css style) and styleN.php (skin settings). Copy these two files and rename them by increasing the overall number (e.g. if style17.php is the biggest number, rename to style18.css.php and style18.php) then start to customize them to match your needs. The main colors are in style18.php. Don't forget to give it a name and add your credits then test it. The new skin will automatically become available in the Admin Panel/Configuration/Menu/Rooms & Colors, as well as in the Skins Preview popup.
 Note: if you'd like to share the new skin, feel free to send it by email to Ciprian to be included in future versions.
 
-For more instructions (e.g. how to upgrade the c_reg_users table) read the Plus FAQ.txt in the "docs/plus docs" folder. Actually, read also the Fixes readme.txt which might give you some more hints about new features/fixes and other stuff.
+For more instructions (e.g. how to upgrade the c_reg_users table) read the Plus FAQ.txt in the "docs/plus docs" folder. Actually, also read the Fixes readme.txt which might give you some more hints about new features/fixes and other stuff.
 That's all for now! Have a nice one and let me know how it goes!
 
-Do you need some more tries of different configurations before applying to your chat server? Don't hesitate to use the Demo/Try me server at http://ciprianmp.com/latest/ (use admin/admin or moderator/moderator as login for different powers - no registration required)
+Do you need some more tries at different configurations before applying to your chat server? Don't hesitate to use the Demo/Try me server at http://ciprianmp.com/latest/ (use admin/admin or moderator/moderator as login for different powers - no registration required)
 
 My best regards,
 Ciprian Murariu

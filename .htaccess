@@ -1,7 +1,6 @@
 <Files ~ "^.(htaccess|htpasswd)$">
 deny from all
 </Files>
-DirectoryIndex index.php
 AddCharset UTF-8 .utf8
 AddDefaultCharset UTF-8
 php_value allow_url_include on
