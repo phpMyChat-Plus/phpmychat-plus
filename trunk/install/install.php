@@ -157,6 +157,13 @@ $_SESSION['domain'] = $domain;
 
 if ( $p == 1 )
 {
+?>
+<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
+<!--
+instructions_popup=window.open("ins_popup.php","instructions","width=640,height=640,scrollbars=yes,status=yes,location=no");
+// -->
+</SCRIPT>
+<?php
   if ( $ftphost == "" )
   {
    if (eregi("public_html", $_SERVER["SCRIPT_FILENAME"])) $ftphost = eregi_replace("www", "ftp", $domain);
@@ -194,10 +201,10 @@ if ( $p == 2 )
 				if (APP_MINOR != "") $kind = "193-beta";
 				else $kind = "193";
 			}
+			break;
 			case "1.92":
 			{
-				if (APP_MINOR != "") $kind = "192-beta";
-				else $kind = "192";
+				$kind = "192";
 			}
 			break;
 			case "1.90":
@@ -239,12 +246,6 @@ if ( $p == 2 )
 	if (@ftp_login($conn_id, $ftpuname, $ftppass))
 	{
 		// try to make the files and folders modifications
-		if (!file_exists($ChatPath."config/color.lib.php"))
-		{
-			ftp_chmod($conn_id, 777, $ftppath."config");
-			copy($ChatPath."install/old/color.lib.php",$ChatPath."config/color.lib.php");
-			ftp_chmod($conn_id, 755, $ftppath."config");
-		}
 		if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/chat_index.txt") !== false) {} else { $error3 .= L_FILE_ERROR1." &quot;/acount/pages/chat_index.txt&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
 		if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/chat_ip_logs.htm") !== false) {} else { $error3 .= L_FILE_ERROR1." &quot;acount/pages/chat_ip_logs.htm&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
 		if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/ip.txt") !== false) {} else { $error3 .= L_FILE_ERROR1." &quot;/acount/pages/ip.txt&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
@@ -498,7 +499,7 @@ if ( $p == 5 )
 		if (@ftp_login($conn_id, $ftpuname, $ftppass))
 		{
 		ftp_chmod($conn_id, 644, $ftppath."config/config.lib.php");
-		ftp_delete($conn_id, $ftppath."config/color.lib.php");
+		if (file_exists($ChatPath."config/color.lib.php")) ftp_delete($conn_id, $ftppath."config/color.lib.php");
 		ftp_delete($conn_id, $ftppath."install/install.php");
 
 		// close the connection
@@ -513,18 +514,11 @@ if ( $p == 5 )
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo(${Charset}); ?>">
 <LINK REL="stylesheet" HREF="<?php echo($ChatPath."skins/style1.css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <title><?php echo (sprintf(L_INST_FOR,APP_NAME)); ?></title>
-<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
-<!--
-function instructions_popup()
-{
-	instructions_popup=window.open("ins_popup.php","instructions","width=640,height=640,scrollbars=yes,status=yes,location=no");
-}
-// -->
-</SCRIPT>
 </head>
-<body class="frame" onLoad="instructions_popup(); return false">
+<body class="frame">
 <center>
-<table align="center" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-left-width:0; border-right-width:0" bordercolor="#111111" width="450" id="AutoNumber1">
+<br />
+		<table class="table" align="center" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-left-width:0; border-right-width:0" bordercolor="#111111" width="450" id="AutoNumber1">
 <form action="install.php?p=<?php echo $p_next."&L=".$L ?>" method="post">
   <tr>
     <td width="100%" style="border-left: 1px solid #111111; border-right-color: #111111; border-right-width: 1">
@@ -613,13 +607,13 @@ while(list($key, $name) = each($AvailableLanguages))
 <?php } // END OF PAGE 1  ?>
 <?php if ( $p == 2 ) { ?>
 <?php if ( $error3 == "" ) { ?>
-<?php echo L_P1_HINT1."<br /><br />".L_P1_HINT2?>
+<?php echo (L_P1_HINT1."<br /><br />".L_P1_HINT2); ?>
 <?php } else { ?>
-<?php echo L_P1_HINT3."<br /><br />".$error3 ?>
+<?php echo (L_P1_HINT3."<br /><br />".$error3); ?>
 <?php } ?>
 <?php } // END OF PAGE 2
 elseif ( $p == 3 ) { ?>
-    <p align="justify"><font face="Tahoma" size="2"><?php echo L_P2_HINT1 ?></font></p>
+    <p align="justify"><font face="Tahoma" size="2"><?php echo (L_P2_HINT1); ?></font></p>
 <?php
 $value = is_writable ($ChatPath."config/config.lib.php");
 if ( $value == false ) { ?>
@@ -2001,7 +1995,7 @@ elseif ($p == 5 ) { ?>
     <p align="center">
   <select size="1" name="kind">
   <option value="new"<?php if ($kind=="new") echo " selected" ?>><?php echo L_P1_OP01 ?></option>
-  <option value="192-beta"<?php if ($kind=="192-beta") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus 1.93-beta") ?></option>
+  <option value="193-beta"<?php if ($kind=="193-beta") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus 1.93-beta") ?></option>
   <option value="192"<?php if ($kind=="192") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus 1.92") ?></option>
   <option value="190"<?php if ($kind=="190") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus 1.90") ?></option>
   <option value="18"<?php if ($kind=="18") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus v1.8") ?></option>
