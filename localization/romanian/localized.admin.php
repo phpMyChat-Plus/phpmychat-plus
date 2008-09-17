@@ -63,6 +63,7 @@ define("A_SHEET3_1", "Lista camerelor care ar trebui curăţate");
 define("A_SHEET3_2", "Curăţarea unei camere \"non-default\" va elimina şi statutul de moderatori pentru camera respectivă.");
 define("A_SHEET3_3", "Curăţă camerele selectate");
 define("A_SHEET3_4", "Nu sunt camere de curăţat.");
+define("A_SHEET3_5", "Nu ai selectat nimic. Selectează cel puţin o cameră din lista de mai jos.");
 
 // Frame for sending mails
 define("A_SHEET4_0", "Nu ai setat corect adresa de email a administratorului in tab-ul ’".A_MENU_5."’.");

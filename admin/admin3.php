@@ -4,53 +4,66 @@
 
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
 
-if (isset($FORM_SEND) && $FORM_SEND == 3 && isset($DelRooms))
+if (isset($FORM_SEND) && $FORM_SEND == 3)
 {
-	for (reset($DelRooms); $room=current($DelRooms); next($DelRooms))
+	if (!isset($DelRooms) || $DelRooms == NULL)
 	{
-		// Kicks users that are in the room
-		$DbLink->query("UPDATE ".C_USR_TBL." SET status='d' WHERE room='$room'");
-		$DbLink->query("SELECT COUNT(*) FROM ".C_USR_TBL." WHERE room='$room'");
-		list($anybody) = $DbLink->next_record();
-		$DbLink->clean_results();
-		$i = time() + 20;	// let the time to users to be 'kicked' (max=20 sec)
-		while ($anybody != 0 && time() < $i)
+?>
+		<TABLE ALIGN=CENTER BORDER=0 CELLPADDING=3 CLASS=table>
+			<TR>
+				<TD ALIGN=CENTER CLASS=error><?php echo(A_SHEET3_5); ?></TD>
+			</TR>
+		</TABLE>
+<?php
+	}
+	else
+	{
+	for (reset($DelRooms); $room=current($DelRooms); next($DelRooms))
 		{
+			// Kicks users that are in the room
+			$DbLink->query("UPDATE ".C_USR_TBL." SET status='d' WHERE room='$room'");
 			$DbLink->query("SELECT COUNT(*) FROM ".C_USR_TBL." WHERE room='$room'");
 			list($anybody) = $DbLink->next_record();
 			$DbLink->clean_results();
-			sleep(2);
-		}
-		// Remove permissions for that room when it's not a default one (define in config.lib.php)
-		if (!room_in(stripslashes($room), $DefaultChatRooms, $Charset))
-		{
-			$UpdLink = new DB;
-			$DbLink->query("SELECT username,rooms FROM ".C_REG_TBL." WHERE perms='moderator'");
-			while (list($mod_un,$mod_rooms) = $DbLink->next_record())
+			$i = time() + 20;	// let the time to users to be 'kicked' (max=20 sec)
+			while ($anybody != 0 && time() < $i)
 			{
-				$changed = false;
-				$roomTab = explode(",",$mod_rooms);
-				for ($i = 0; $i < count($roomTab); $i++)
+				$DbLink->query("SELECT COUNT(*) FROM ".C_USR_TBL." WHERE room='$room'");
+				list($anybody) = $DbLink->next_record();
+				$DbLink->clean_results();
+				sleep(2);
+			}
+			// Remove permissions for that room when it's not a default one (define in config.lib.php)
+			if (!room_in(stripslashes($room), $DefaultChatRooms, $Charset))
+			{
+				$UpdLink = new DB;
+				$DbLink->query("SELECT username,rooms FROM ".C_REG_TBL." WHERE perms='moderator'");
+				while (list($mod_un,$mod_rooms) = $DbLink->next_record())
 				{
-					if (strcasecmp(mb_convert_case(stripslashes($room),MB_CASE_LOWER,$Charset), mb_convert_case($roomTab[$i],MB_CASE_LOWER,$Charset)) == 0)
+					$changed = false;
+					$roomTab = explode(",",$mod_rooms);
+					for ($i = 0; $i < count($roomTab); $i++)
 					{
-						$roomTab[$i] = "";
-						$changed = true;
-						break;
+						if (strcasecmp(mb_convert_case(stripslashes($room),MB_CASE_LOWER,$Charset), mb_convert_case($roomTab[$i],MB_CASE_LOWER,$Charset)) == 0)
+						{
+							$roomTab[$i] = "";
+							$changed = true;
+							break;
+						};
 					};
+					if ($changed)
+					{
+						$mod_rooms = str_replace(",,",",",ereg_replace("^,|,$","",implode(",",$roomTab)));
+						$UpdLink->query("UPDATE ".C_REG_TBL." SET rooms='".addslashes($mod_rooms)."' WHERE username='".addslashes($mod_un)."'");
+					};
+					unset($roomTab);
 				};
-				if ($changed)
-				{
-					$mod_rooms = str_replace(",,",",",ereg_replace("^,|,$","",implode(",",$roomTab)));
-					$UpdLink->query("UPDATE ".C_REG_TBL." SET rooms='".addslashes($mod_rooms)."' WHERE username='".addslashes($mod_un)."'");
-				};
-				unset($roomTab);
+				$DbLink->clean_results();
 			};
-			$DbLink->clean_results();
+			// Clean the room;
+			$DbLink->query("DELETE FROM ".C_USR_TBL." WHERE room='$room' AND username!='".C_BOT_NAME."'");
+			$DbLink->query("DELETE FROM ".C_MSG_TBL." WHERE room='$room'");
 		};
-		// Clean the room;
-		$DbLink->query("DELETE FROM ".C_USR_TBL." WHERE room='$room' AND username!='".C_BOT_NAME."'");
-		$DbLink->query("DELETE FROM ".C_MSG_TBL." WHERE room='$room'");
 	};
 	// Optimize the messages table when a MySQL DB is used
 	$DbLink->optimize(C_MSG_TBL);
@@ -69,7 +82,6 @@ $DbLink->clean_results();
 if ($count_Rooms != 0)
 {
 ?>
-
 <!-- Form to clean rooms -->
 <TR>
 	<TD ALIGN=CENTER>

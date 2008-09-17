@@ -64,6 +64,7 @@ define("A_SHEET3_1", "Liste over eksisterende chatrum");
 define("A_SHEET3_2", "Rydning af et \"non-default\" chatrum vil også slette status for alle moderatorer<br />for dette rum.");
 define("A_SHEET3_3", "Ryd markerede chatrum");
 define("A_SHEET3_4", "Der er ingen chatrum at rydde.");
+define("A_SHEET3_5", "Du har ikke foretaget nogen udvælgelse. Vælg mindst en plads på listen nedenfor.");
 
 // Frame for sending mails
 define("A_SHEET4_0", "Du har ikke sendt admin e-mailen i Konfigurationstabellen.");

@@ -66,6 +66,7 @@ define("A_SHEET3_1", "Liste der bestehenden Räume.");
 define("A_SHEET3_2", "Das Löschen eines \"nicht-Default\" Raumes entfernt auch alle Moderator<br />Status dieses Raums.");
 define("A_SHEET3_3", "Gewählte Räume löschen");
 define("A_SHEET3_4", "Es existiert kein Raum zum Löschen.");
+define("A_SHEET3_5", "Sie haben keine Auswahl. Bitte wählen Sie mindestens ein Zimmer aus der untenstehenden Liste aus.");
 
 // Frame for sending mails
 define("A_SHEET4_0", "Sie haben nicht die admin e-mail im ’".A_MENU_5."’ feld.");

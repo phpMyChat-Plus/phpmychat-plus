@@ -65,6 +65,7 @@ define("A_SHEET3_1", "Lista över existerande rum");
 define("A_SHEET3_2", "Rensa \"Icke-Standard\" rummet blir borttagen av all moderator<br />status för detta rum.");
 define("A_SHEET3_3", "Rensa markerad rum");
 define("A_SHEET3_4", "Det finns inga rum för Rensning.");
+define("A_SHEET3_5", "Du har inte gjort något urval. Välj minst en plats i listan nedan.");
 
 // Frame for sending mails
 define("A_SHEET4_0", "Du har inte ställt in admin epost i inställningarna.");
