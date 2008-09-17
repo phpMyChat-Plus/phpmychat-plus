@@ -63,6 +63,7 @@ define("A_SHEET3_1", "Danh sách những phòng hiện hữu");
 define("A_SHEET3_2", "Làm sạch \"non-default\" phòng cũng sẽ del tất cả người điều tiết<br />Tình trạng phòng này.");
 define("A_SHEET3_3", "Những phòng được lựa chọn sạch");
 define("A_SHEET3_4", "Không có những phòng để làm sạch");
+define("A_SHEET3_5", "Bạn không làm bất kỳ sự chọn lựa nào. Xin lựa chọn ít nhất một phòng từ danh sách ở dưới.");
 
 // Frame for sending mails
 define("A_SHEET4_0", "Bạn không đặt e-mail admin trong bảng.");
