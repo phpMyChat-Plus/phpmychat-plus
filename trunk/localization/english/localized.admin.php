@@ -64,6 +64,7 @@ define("A_SHEET3_1", "List of existing rooms");
 define("A_SHEET3_2", "Clean a \"non-default\" room will also remove all moderator<br />status for this room.");
 define("A_SHEET3_3", "Clean selected rooms");
 define("A_SHEET3_4", "There are no rooms to clean.");
+define("A_SHEET3_5", "You haven’t made any selection. Please select at least one room from the list below.");
 
 // Frame for sending mails
 define("A_SHEET4_0", "You haven’t set the admin email in the ’".A_MENU_5."’ sheet.");

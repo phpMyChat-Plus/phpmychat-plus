@@ -26,22 +26,33 @@ De file index1.php is de index file met een volledige pagina. Kies degene die ji
 4. Optioneel, hernoem de plus folder naar wat jij leuk vindt(chat, mychat).
 
 5. Verander kenmerk van de volgende files/mappen naar 777/666(chmod):
+
 plus/acount/pages/ - to 777
 plus/acount/pages/bak/ - to 777
 plus/acount/pages/chat_index.txt - to 666
 plus/acount/pages/chat_ip_logs.htm - to 666
 plus/acount/pages/ip.txt - to 666
+
 plus/admin/backups/ - to 777
+
 plus/bot/subs.inc - to 777
+
 plus/botfb/ - to 777
+
 plus/cache/ - to 777
+
 plus/images/avatars/ - to 777
 plus/images/avatars/uploaded/ - to 777
+
 plus/images/smilies/ - to 777
 plus/images/smilies/smilies.php - to 666
+
 plus/logs/ - to 777
+
 plus/logsadmin/ - to 777
+
 plus/skins/images/ - to 777
+
 plus/sounds/ - to 777
 
 6. Ga naar de map plus/install/ folder op jij disk en open mysql_new_install.txt (of de corresponderende upgrade) file.

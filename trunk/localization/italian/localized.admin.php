@@ -66,6 +66,7 @@ define("A_SHEET3_1", "Elenco delle stanze esistenti");
 define("A_SHEET3_2", "Svuotare una stanza \"non-default\" rimuovera anche tutti i moderatori<br />della chat stessa.");
 define("A_SHEET3_3", "Svuota le stanze selezionate");
 define("A_SHEET3_4", "Non ci sono stanze da svuotare.");
+define("A_SHEET3_5", "Lei non ha fatto alcuna selezione. Si prega di selezionare almeno una stanza dalla lista qui sotto.");
 
 // Frame for sending mails
 define("A_SHEET4_0", "Non hai impostato l’indirizzo email dell’amministratore nella tabella di ’".A_MENU_5."’.");
