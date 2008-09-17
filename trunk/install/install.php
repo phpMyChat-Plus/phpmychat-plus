@@ -518,7 +518,7 @@ if ( $p == 5 )
 <body class="frame">
 <center>
 <br />
-		<table class="table" align="center" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-left-width:0; border-right-width:0" bordercolor="#111111" width="450" id="AutoNumber1">
+<table class="table" align="center" border="3" cellpadding="0" cellspacing="1" style="border-spacing: 3px; border-style: groove; border-color: blue; border-collapse: separate; border-left-width:3; border-right-width:3" bordercolor="#111111" width="500" id="AutoNumber1">
 <form action="install.php?p=<?php echo $p_next."&L=".$L ?>" method="post">
   <tr>
     <td width="100%" style="border-left: 1px solid #111111; border-right-color: #111111; border-right-width: 1">
@@ -594,12 +594,12 @@ while(list($key, $name) = each($AvailableLanguages))
 <?php } ?>
   <tr>
     <td width="100%" style="border-left-color: #111111; border-left-width: 1; border-right-color: #111111; border-right-width: 1">
-    <font face="Tahoma"><b><?php echo L_INST_SETUP." ".sprintf(L_INST_PAG_OF,$p,$p_all) ?></b></font></td>
+    <center><font face="Tahoma"><b><?php echo L_INST_SETUP." ".sprintf(L_INST_PAG_OF,$p,$p_all) ?></b></font></center></td>
   </tr>
   <tr>
     <td width="100%" style="border-left: medium none #111111; border-right: medium none #111111">&nbsp;</td>
   </tr>
-  <tr>
+  <tr<?php echo ( $p == 1 ? ' align=\"center\"' : '' )?>>
     <td width="100%" style="border-left-color: #111111; border-left-width: 1; border-right-color: #111111; border-right-width: 1">
     <p align="justify"><font face="Tahoma" size="2">
 <?php if ( $p == 1 ) { ?>

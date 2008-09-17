@@ -39,7 +39,7 @@ B1. Stop the bot in the chat rooms it is started in, using the "/bot stop" comma
 B2. Rename the bot to "plusbot" in Admin panel.<br />
 B3. Use phpmyadmin to "empty" the following tables: bot_bot, bot_bots, bot_patterns and bot_templates.<br />
 B4. Reupload back (restore) the file called botloader.php (or botloaderinc.php, if the first freezes).<br />
-B5. Make sure all the original distributed files are in the aiml folder (startup.xml and *.aiml files).<br />
+B5. Make sure all the original distributed files are in the bot/aiml/ folder (startup.xml and *.aiml files).<br />
 B6. Make sure the plus/bot/subs.inc file is CHMODed to 777.<br />
 B7. Reinstall the bot following the steps described in paragraph A. (A1-A8)<br /><br />
 

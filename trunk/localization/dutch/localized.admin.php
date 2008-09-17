@@ -64,7 +64,7 @@ define("A_SHEET3_1", "Lijst met alle beschikbare kamers");
 define("A_SHEET3_2", "Maak een \"niet standaard\" kamer leeg zal ook de moderator verwijderen.");
 define("A_SHEET3_3", "Maak geselecteerde ruimtes schoon");
 define("A_SHEET3_4", "Er zijn geen ruimtes om te legen.");
-define("A_SHEET3_5", "Je hebt geen keuze. Selecteer minimaal een kamer uit de lijst hieronder.");
+define("A_SHEET3_5", "Je hebt nog geen keuze gemaakt. Selecteer a.u.b. tenminste één kamer in de lijst hier beneden.");
 
 // Frame for sending mails
 define("A_SHEET4_0", "Je hebt nog niet de admin email ingevuld in de ’".A_MENU_5."’ pagina.");

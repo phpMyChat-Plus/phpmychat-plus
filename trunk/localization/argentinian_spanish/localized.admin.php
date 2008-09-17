@@ -64,7 +64,7 @@ define("A_SHEET3_1", "Listado de salones existentes");
 define("A_SHEET3_2", "Al limpiar cualquier salón que no sea el \"predeterminado\" se removerá también<br />la condición de moderador para cualquier usuario asignado al mismo como tal.");
 define("A_SHEET3_3", "Limpiar salones seleccionados");
 define("A_SHEET3_4", "No hay salones para limpiar.");
-define("A_SHEET3_5", "Usted no ha hecho ninguna selección. Por favor, seleccione al menos un cuarto de la lista de abajo.");
+define("A_SHEET3_5", "No hiciste ninguna selección. Por favor selecciona al menos un salón de la lista de abajo.");
 
 // Frame for sending mails
 define("A_SHEET4_0", "No haz seteado el email de admin en la pestana de ’".A_MENU_5."’.");

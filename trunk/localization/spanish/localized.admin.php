@@ -64,7 +64,7 @@ define("A_SHEET3_1", "Lista de salas existentes");
 define("A_SHEET3_2", "Al limpiar una \"non-default\" sala también eliminarán al moderador<br /> de esta sala.");
 define("A_SHEET3_3", "Limpiar salas seleccionadas");
 define("A_SHEET3_4", "No hay salas para limpiar.");
-define("A_SHEET3_5", "Usted no ha hecho ninguna selección. Por favor, seleccione al menos un cuarto de la lista de abajo.");
+define("A_SHEET3_5", "No has seleccionado nada. Por favor selecciona por lo menos una sala de la siguiente lista.");
 
 // Frame for sending mails
 define("A_SHEET4_0", "Falta ingresar el correo electrónico de admin en la lengueta de ’".A_MENU_5."’.");
