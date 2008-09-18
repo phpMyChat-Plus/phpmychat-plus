@@ -65,7 +65,7 @@ define("A_SHEET3_1", "Liste des salons existants");
 define("A_SHEET3_2", "Purger un salon qui n’est pas le salon par défaut supprime les privilèges modérateur pour ce salon.");
 define("A_SHEET3_3", "Purger les salons sélectionnés");
 define("A_SHEET3_4", "Il n’y pas de salon à purger.");
-define("A_SHEET3_5", "Vous n’avez pas fait de sélection. S’il vous plaît choisir au moins une chambre à partir de la liste ci-dessous.");
+define("A_SHEET3_5", "Vous n’avez fait aucune sélection. Veuillez sélectionner au moins un salon dans la liste ci-dessous.");
 
 // Frame for sending mails
 define("A_SHEET4_0", "Vous n’avez pas saisi d’e-mail pour l’administrateur dans l’onglet de ’".A_MENU_5."’.");
