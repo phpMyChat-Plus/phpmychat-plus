@@ -593,15 +593,15 @@ while(list($key, $name) = each($AvailableLanguages))
   </tr>
 <?php } ?>
   <tr>
-    <td width="100%" style="border-left-color: #111111; border-left-width: 1; border-right-color: #111111; border-right-width: 1">
-    <center><font face="Tahoma"><b><?php echo L_INST_SETUP." ".sprintf(L_INST_PAG_OF,$p,$p_all) ?></b></font></center></td>
+    <td width="100%" align="center" style="border-left-color: #111111; border-left-width: 1; border-right-color: #111111; border-right-width: 1">
+    <font face="Tahoma"><b><?php echo L_INST_SETUP." ".sprintf(L_INST_PAG_OF,$p,$p_all) ?></b></font></td>
   </tr>
   <tr>
     <td width="100%" style="border-left: medium none #111111; border-right: medium none #111111">&nbsp;</td>
   </tr>
-  <tr<?php echo ( $p == 1 ? ' align=\"center\"' : '' )?>>
+  <tr>
     <td width="100%" style="border-left-color: #111111; border-left-width: 1; border-right-color: #111111; border-right-width: 1">
-    <p align="justify"><font face="Tahoma" size="2">
+    <p align="<?php echo ( $p != 1 ? "justify" : "center");  ?>"><font face="Tahoma" size="2">
 <?php if ( $p == 1 ) { ?>
 <?php echo (sprintf(L_P0_HINT1,APP_NAME." ".APP_VERSION.APP_MINOR)."<br />".L_P0_HINT2); ?>
 <?php } // END OF PAGE 1  ?>
