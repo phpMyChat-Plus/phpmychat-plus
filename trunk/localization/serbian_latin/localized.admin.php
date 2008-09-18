@@ -59,6 +59,8 @@ define("A_SHEET3_1", "Lista postojećih soba");
 define("A_SHEET3_2", "Brisanjem \"nepretpostavljene\" sobe ćete da očistite sve moderatoske<br />statuse za ovu sobu.");
 define("A_SHEET3_3", "Briši odabrane sobe");
 define("A_SHEET3_4", "Nema soba za brisanje.");
+define("A_SHEET3_5", "Niste još izvršili odabir.<br />Molimo vas da oadeberet barem jednu sobu iz liste soba.");
+
 
 // Frame for sending mails
 define("A_SHEET4_0", "Niste upisali administratorski email u ’".A_MENU_5."’ tabu.");
