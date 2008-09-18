@@ -45,7 +45,7 @@
     $translation['local_file_not_readable']     = 'Le fichier local ne peut être ouvert en lecture.';
     $translation['uploaded_too_big_ini']        = 'Le fichier transmis dépasse la taille autorisée dans la configuration php.ini - %s.';
     $translation['uploaded_too_big_html']       = 'Le fichier transmis dépasse la taille autorisée dans le formulaire - %s.';
-    $translation['uploaded_partial']            = 'Le fichier n’été que partiellement transmis.';
+    $translation['uploaded_partial']            = 'Le fichier n’a été que partiellement transmis.';
     $translation['uploaded_missing']            = 'Le serveur n’a pas reçu de fichier.';
     $translation['uploaded_unknown']            = 'Erreur inconnue.';
     $translation['try_again']                   = 'Erreur de transmission. Essayez encore.';
@@ -69,7 +69,7 @@
     $translation['destination_path_not_dir']    = 'Le chemin de destination n’est pas un répertoire. Impossible de continuer.';
     $translation['destination_dir_write']       = 'Le répertoire de destination ne peut être ouvert en écriture. Impossible de continuer.';
     $translation['destination_path_write']      = 'Le chemin de destination ne peut être ouvert en écriture. Impossible de continuer.';
-    $translation['temp_file']                   = 'Le fichier temporaire ne peut être crée. Impossible de continuer.';
+    $translation['temp_file']                   = 'Le fichier temporaire ne peut être créé. Impossible de continuer.';
     $translation['source_not_readable']         = 'Le fichier source ne peut être lu. Impossible de continuer.';
     $translation['no_create_support']           = 'Création depuis un fichier %s impossible.';
     $translation['create_error']                = 'Erreur lors de la création de l’image %s depuis le fichier source.';

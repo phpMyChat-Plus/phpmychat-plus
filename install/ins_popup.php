@@ -17,7 +17,7 @@ Note: index.php must be in the plus folder, not plus/chat/ as for the previous v
 4. Open http://yoursiteurl.com/plus  (plus is the name you used in step 3.). The setup will load automatically.<br /><br />
 
 5. Pick up an available language and go through the installer (thanks to Thomas Pschernig and <a href=http://www.ciprianmp.com/plus/ target=_blank>Ciprian</a>).<br /><br />
-<i>Note: If your ftp username looks like an email address, try with an empty/null "FTP root path (relative)" in the first page of the installer wizard.</i><br /><br />
+<i>Note: If your FTP username looks like an email address (specific to hosting on shared servers), try with an empty/null "FTP root path (relative)" field on the first page of the installer wizard.</i><br /><br />
 
 6. Make sure the file install/install.php is deleted from your chat, otherwise you won't be able to open the chat login page.<br /><br />
 
@@ -39,7 +39,7 @@ B1. Stop the bot in the chat rooms it is started in, using the "/bot stop" comma
 B2. Rename the bot to "plusbot" in Admin panel.<br />
 B3. Use phpmyadmin to "empty" the following tables: bot_bot, bot_bots, bot_patterns and bot_templates.<br />
 B4. Reupload back (restore) the file called botloader.php (or botloaderinc.php, if the first freezes).<br />
-B5. Make sure all the original distributed files are in the bot/aiml/ folder (startup.xml and *.aiml files).<br />
+B5. Make sure all the original distributed AIMLs are in the bot/aiml/ folder (startup.xml and *.aiml files).<br />
 B6. Make sure the plus/bot/subs.inc file is CHMODed to 777.<br />
 B7. Reinstall the bot following the steps described in paragraph A. (A1-A8)<br /><br />
 
