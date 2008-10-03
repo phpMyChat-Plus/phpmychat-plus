@@ -175,6 +175,8 @@ define("L_HLP", "Pomoć");
 define("L_MODERATOR", "%s je sada moderator ove sobe."); 	// username/nickname
 define("L_KICKED", "%s je uspešno izbačen."); 	// username/nickname
 define("L_KICKED_REASON", "%s je uspešno izbačen. (Razlog: %s)"); 	// username/nickname and reason
+define("L_KICKED_ALL", "Svi korisnici su uspešno izbačeni.");
+define("L_KICKED_ALL_REASON", "Svi korisnici su uspešno izbačeni. (Razlog: %s)");
 define("L_BANISHED", "%s je uspešno zabranjen."); 	// username/nickname
 define("L_BANISHED_REASON", "%s jen uspešno zabranjen. (Razlog: %s)"); 	// username/nickname and reason
 define("L_ANNOUNCE", "OBAVEŠTENJE");
@@ -222,7 +224,7 @@ define("L_HELP_CMD_5", "Napustite čet nakon prikazivanja opcione poruke.");
 define("L_HELP_CMD_6", "Izbegnite prikazivanje poruka korisnika ako mu nije određen nadimak.<br />Isključite ignorisanje za korisnika kad su ime i nadimak određeni, za sve korisnike kad nije odrežen nadimak.<br />Bez opcije, ova komanda iskače prozor koji prikazuje sve ignorisane nadimke.");
 define("L_HELP_CMD_7", "Pozovi prethodno upisan tekst (komandu ili poruku).");
 define("L_HELP_CMD_8", "Pokaži/Sakrij vreme pre poruka.");
-define("L_HELP_CMD_9", "Izbaci korisnika iz četa. Ovu komandu može da koristi samo moderator sobe ili administrator.<br />Opciono, [".L_HELP_REASON."] prikazuje razlog izbacivanja (bilo koji željeni tekst).");
+define("L_HELP_CMD_9", "Izbaci korisnika iz četa. Ovu komandu može da koristi samo moderator sobe ili administrator.<br />Opciono, [".L_HELP_REASON."] prikazuje razlog izbacivanja (bilo koji željeni tekst).).<br />Ako se * opcija upotrebi, komanda će da izbaci iz ćaskanja sve korisnike bez moći (samo gosti i registrovani korisnici). Ovo je veoma korisno kada konekcija servera ima probleme i kad svi korisnici trebaju da ponovo učitaju svoje ćaskanje. U drugom slučaju, [".L_HELP_REASON."] se preporučuje da se korisnicma objasni zašto su bili izbačeni.");
 define("L_HELP_CMD_10", "Pošaljite privatnu poruku određenom korisniku (drugi korisnici je neće videti).");
 define("L_HELP_CMD_11", "Pokazuje informaciju o određenom korisniku.");
 define("L_HELP_CMD_12", "Iskačući prozor za uređivanje korisnikovog profila.");
@@ -620,6 +622,7 @@ define("L_SKINS_TITLE", "Pregled skinova");
 define("L_SKINS_TITLE1", "Skinovi %s do %s za pregled"); // Skins 1 to 4 preview
 define("L_SKINS_AV", "Dostupni skinovi");
 define("L_SKINS_NONAV", "Nema definisanih stilova u \"skin\" fascikli");
+define("L_SKINS_COPY", "&copy; %s Skin kreirao-la %s"); //© 2008 Skin by AuthorName
 
 // Swap image titles / by Ciprian
 define("L_GEN_ICON", "Slika roda");
@@ -638,4 +641,17 @@ define("L_LOGIN_COUNT", "Ukupno poseta");
 
 // Gravatar from email mod by Ciprian
 define("L_GRAV_USE", "koristite Gravatar");
+
+// Uploader mod by Ciprian - 11.08.2008
+define("L_UPLOAD", "Nadodaj %s"); // Upload Image, Upload Sound or Upload File
+define("L_UPLOAD_IMG", "Datoteka slike"); // used to upload Avatars and /img command
+define("L_UPLOAD_SND", "Zvučna datoteka"); // used to upload Buzz sounds
+define("L_UPLOAD_FLS", "Datoteke"); // used to upload multiple files at once
+define("L_UPLOAD_SUCCESS", "%s uspešno nadodato kao %s."); // original filename, destination filename
+define("L_FILES_TITLE", "Upravljanje dodatim datotekama");
+
+// Room restriction mod by Ciprian
+define("L_ERR_USR_28", "Vaš pristup %s je ograničen!<br />Molimo vas da odaberete drugu sobu."); // room name
+define("L_RESTRICTED", "Ograničen pristup");
+define("L_RESTRICTED_ROM", "%s je uspešno sprečen da uđe u sobu.");
 ?>
