@@ -176,6 +176,8 @@ define("L_HLP", "Súgó");
 define("L_MODERATOR", "%s most már moderator ebben a szobában."); 	// username/nickname
 define("L_KICKED", "%s sikeresen kidobva."); 	// username/nickname
 define("L_KICKED_REASON", "%s sikeresen kidobva. (Indok: %s)"); 	// username/nickname and reason
+define("L_KICKED_ALL", "Minden felhasználó sikeresen kiléptetve.");
+define("L_KICKED_ALL_REASON", "Minden felhasználó sikeresen kiléptetve. (Indok: %s)");
 define("L_BANISHED", "%s sikeresen letiltva."); 	// username/nickname
 define("L_BANISHED_REASON", "%s sikeresen letiltva. (Indok: %s)"); 	// username/nickname and reason
 define("L_ANNOUNCE", "FELHÍVÁS");
@@ -223,7 +225,7 @@ define("L_HELP_CMD_5", "Kilépés a chatből egy választható üzenet megjelen�
 define("L_HELP_CMD_6", "Adott felhasználó üzeneteinek mellőzése, ha a felhasználói név meg van adva.<br />Adott felhasználó üzenetinek mellőzése, ha a felhasználó neve és a - együtt van megadva, illetve minden felhasználó üzenetinek mellőzése, ha a - van megadva felhasználói név nélkül.<br />Ha nincs megadva kapcsoló, akkor ez a parancs egy ablakban megjeleníti az összes mellőzött felhasználót.");
 define("L_HELP_CMD_7", "Az előzőleg beírt szöveg ismételt megjelenítése (parancs vagy üzenet).");
 define("L_HELP_CMD_8", "Az idő megjelenítése/elrejtése az üzenetek előtt.");
-define("L_HELP_CMD_9", "Felhasználó kidobása a szobából. Ezt a parancsot csak az adott szoba moderátora vagy egy admin használhatja.<br />Kérésre a [".L_HELP_REASON."] megmutatja a kidobás okát (bármilyen szöveg).");
+define("L_HELP_CMD_9", "Felhasználó kidobása a szobából. Ezt a parancsot csak az adott szoba moderátora vagy egy admin használhatja.<br />Kérésre a [".L_HELP_REASON."] megmutatja a kidobás okát (bármilyen szöveg).<br />Ha a *-os opció van kiválasztva, a parancs kidob a szobából minden vendéget és regisztrált felhasználót (moderátorokat és adminisztrátorokat nem). Ez hasznos, amikor a szerver kapcsolatnak problémái vannak, és minden embernek frissítenie kéne a chat oldalt. Más esetben egy [".L_HELP_REASON."] ajánlott, hogy a felhasználók tudják, miért lettek kidobva.");
 define("L_HELP_CMD_10", "Privát üzenet küldése a megadott felhasználónak (a többi felhasználónak nem jelenik meg).");
 define("L_HELP_CMD_11", "Információk megjelenítése egy adott felhasználóról.");
 define("L_HELP_CMD_12", "Felhasználói profil-szerkesztő felugró ablak.");
@@ -619,6 +621,7 @@ define("L_SKINS_TITLE", "Stílus előnézet");
 define("L_SKINS_TITLE1", "%s-%s stílus előnézet"); // Skins 1 to 4 preview
 define("L_SKINS_AV", "Elérhető stílus");
 define("L_SKINS_NONAV", "Nincs stílus meghatározva a \"skins\" tárban");
+define("L_SKINS_COPY", "&copy; %s Stílus készítő: %s"); //© 2008 Skin by AuthorName
 
 // Swap image titles by Ciprian
 define("L_GEN_ICON", "Nem ikon");
@@ -637,4 +640,17 @@ define("L_LOGIN_COUNT", "Összes látogatás"); // number of logins (returning v
 
 // Gravatar from email mod by Ciprian
 define("L_GRAV_USE", "Gravatar használata");
+
+// Uploader mod by Ciprian - 11.08.2008
+define("L_UPLOAD", "%s feltöltése"); // Upload Image, Upload Sound or Upload File
+define("L_UPLOAD_IMG", "Kép fájl"); // used to upload Avatars and /img command
+define("L_UPLOAD_SND", "Hang fájl"); // used to upload Buzz sounds
+define("L_UPLOAD_FLS", "Fájlok"); // used to upload multiple files at once
+define("L_UPLOAD_SUCCESS", "%s sikeresen feltöltve, mint %s."); // original filename, destination filename
+define("L_FILES_TITLE", "Feltöltés Vezérlő");
+
+// Room restriction mod by Ciprian
+define("L_ERR_USR_28", "A belépésed a(z) %s szobába megtagadva.<br />Kérlek, válassz egy másik szobát!"); // room name
+define("L_RESTRICTED", "Megtagadva");
+define("L_RESTRICTED_ROM", "%s sikeresen kitiltva a szobából.");
 ?>

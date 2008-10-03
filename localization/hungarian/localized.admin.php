@@ -1,5 +1,5 @@
 <?php
-// File : hungarian/localized.admin.php - plus version (07.07.2008 - rev.13)
+// File : hungarian/localized.admin.php - plus version (26.08.2008 - rev.14)
 // Original file by Jácint Zsuzsanna <pycco8@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
@@ -38,6 +38,10 @@ define("A_SHEET1_9", "Az kijelölt felhasználók tiltása");
 define("A_SHEET1_10", "Most menj ’".A_MENU_2."’ lapjára, hogy finomítsd a beállításaidat.");
 define("A_SHEET1_11", "Utolsó bejelentkezés");
 define("A_SHEET1_12", "A tiltás oka (tetszőleges)");
+define("A_SHEET1_13", "Engedélyezett szobák");
+define("A_SHEET1_14", "Összes nem-tiltott");
+define("A_SHEET1_15", "Összes tiltott");
+define("A_SHEET1_16", "A megadott szoba tiltását a ’".A_MENU_5."’ oldalon is aktiválni kell.");
 define("A_USER", "Felhasználó");
 define("A_MODER", "Moderátor");
 define("A_TOPMOD", "Top Moderátor");
@@ -60,6 +64,7 @@ define("A_SHEET3_1", "A létező szobák listája");
 define("A_SHEET3_2", "Egy \"nem-alapértelmezett\" szoba üzeneteinek törlése<br />a moderátori státuszokat is törölni fogja az adott szobában.");
 define("A_SHEET3_3", "A kijelölt szobá(k) üzeneteinek törlése");
 define("A_SHEET3_4", "Nincs törölni való szoba.");
+define("A_SHEET3_5", "Nem választottál ki semmit. Kérlek, válassz ki legalább egy szobát az alábbi listáról.");
 
 // Frame for sending mails
 define("A_SHEET4_0", "Nem adtad meg az admin email címét a ’".A_MENU_5."’ lapján.");

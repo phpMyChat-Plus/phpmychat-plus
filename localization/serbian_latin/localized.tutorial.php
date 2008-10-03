@@ -1,5 +1,5 @@
 <?php
-// File : serbian_latin/localized.tutorial.php - plus version (10.04.2008 - rev.9)
+// File : serbian_latin/localized.tutorial.php - plus version (26.08.2008 - rev.10)
 // Original translation by Vedran Vučić <vedran.vucic@gnulinuxcentar.org>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -673,6 +673,8 @@ Postoji joše jedna korisna komanda koja liči na komandu za obaveštenja, koja 
 Moderatori mogu izbaciti korisnika, a administrator može da izbaci korisnika ili moderatoa <B>kick komandom</B>. Sa izuzetkom administratora, korisnik koji treba d abude izbačen mora biti u sobi iz koje ga se želi izbaciti.
 <P>
 <I>Na primer</I>, ako je ime korisnika kojeg treba izbaciti Stevan: <I>/kick Stevan</I> ili <I>/kick Stevan razlog izbacivanja</I>. "razlog izbacivanja" može biti bilo koji tekst npr. "zbog spamovanja!"
+<P>
+Ako se * opcija upotrebi (<I>/kick * <?php echo(L_HELP_REASON); ?></I>), komanda će da izbaci iz ćaskanja sve korisnike bez moći (samo gosti i registrovani korisnici). Ovo je veoma korisno kada konekcija servera ima probleme i kad svi korisnici trebaju da ponovo učitaju svoje ćaskanje. U drugom slučaju, <I><?php echo(L_HELP_REASON); ?></I> se preporučuje da se korisnicma objasni zašto su bili izbačeni.
 <br /><P ALIGN="right"><A HREF="#top">Povratak na vrh</A></P>
 <P>
 <hr />

@@ -1,5 +1,5 @@
 <?php
-// File : serbian_latin/localized.admin.php - plus version (07.07.2008 - rev.13)
+// File : serbian_latin/localized.admin.php - plus version (26.08.2008 - rev.14)
 // Original translation by Vedran Vučić <vedran.vucic@gnulinuxcentar.org>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -37,6 +37,10 @@ define("A_SHEET1_9", "Zabrani označene profile");
 define("A_SHEET1_10", "Sada treba da pređete na ’".A_MENU_2."’ tabelu da označite vaš izbor.");
 define("A_SHEET1_11", "Poslednji konektovani");
 define("A_SHEET1_12", "Razlog zabrane (opciono)");
+define("A_SHEET1_13", "Dozvoljene sobe");
+define("A_SHEET1_14", "Sve dozvoljene");
+define("A_SHEET1_15", "Sve nedozvoljene");
+define("A_SHEET1_16", "Određena restrikcija za ovu sobu treba takođe da se aktivira u ’".A_MENU_5."’ strani.");
 define("A_USER", "Korisnik");
 define("A_MODER", "Moderator");
 define("A_TOPMOD", "Najviši moderator");
@@ -60,7 +64,7 @@ define("A_SHEET3_2", "Brisanjem \"nepretpostavljene\" sobe ćete da očistite sv
 define("A_SHEET3_3", "Briši odabrane sobe");
 define("A_SHEET3_4", "Nema soba za brisanje.");
 define("A_SHEET3_5", "Niste još izvršili odabir.<br />Molimo vas da oadeberet barem jednu sobu iz liste soba.");
-
+define("A_SHEET3_5", "Niste napravili odabir. Molimo vas da odaberete jednu sobu iz donje liste.");
 
 // Frame for sending mails
 define("A_SHEET4_0", "Niste upisali administratorski email u ’".A_MENU_5."’ tabu.");
