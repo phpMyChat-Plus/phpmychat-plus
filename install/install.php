@@ -21,6 +21,36 @@ if ( $L == "" )
 	else $L = "english";
 }
 
+// Disable ftp functions on Windows servers
+if (!eregi("win", PHP_OS))
+{
+	$do_ftp = 1;
+	// chmod patch for both php4 and php5
+	if (!function_exists('ftp_chmod')) {
+	   function ftp_chmod($ftpstream,$chmod,$file)
+	   {
+	       $old=error_reporting();//save old
+	       error_reporting(0);//set to none
+	       $result=ftp_site($ftpstream, "CHMOD ".intval($chmod, 8)." ".$file);
+	       error_reporting($old);//reset to old
+	       return $result;//will result TRUE or FALSE
+	   }
+	}
+}
+else $do_ftp = 0;
+
+// Added for php4 support of mb functions
+if (!function_exists('mb_convert_case'))
+{
+	function mb_convert_case($str,$type,$Charset)
+	{
+		if (eregi("TITLE",$type)) $str = ucwords($str);
+		elseif (eregi("LOWER",$type)) $str = strtolower($str);
+		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+		return $str;
+	}
+};
+
 include ( $ChatPath."lib/release.lib.php" );
 include ( $ChatPath."localization/languages.lib.php" );
 include ( $ChatPath."localization/".$L."/localized.install.php" );
@@ -40,32 +70,10 @@ if (get_magic_quotes_gpc()) {
 		$_COOKIE[$k] = stripslashes($v);
 }
 
-
-// chmod patch for both php4 and php5
-if (!function_exists('ftp_chmod')) {
-   function ftp_chmod($ftpstream,$chmod,$file)
-   {
-       $old=error_reporting();//save old
-       error_reporting(0);//set to none
-       $result=ftp_site($ftpstream, "CHMOD ".intval($chmod, 8)." ".$file);
-       error_reporting($old);//reset to old
-       return $result;//will result TRUE or FALSE
-   }
-}
-
-// Added for php4 support of mb functions
-if (!function_exists('mb_convert_case'))
-{
-	function mb_convert_case($str,$type,$Charset)
-	{
-		if (eregi("TITLE",$type)) $str = ucwords($str);
-		elseif (eregi("LOWER",$type)) $str = strtolower($str);
-		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
-		return $str;
-	}
-};
 // Sessions handler
 // from page 1 (available from page 2)
+if ($do_ftp)
+{
 if ( $_SESSION['ftphost'] != "" ) $ftphost = $_SESSION['ftphost'];
 if ( $_POST['ftphost'] != "" ) $ftphost = $_POST['ftphost'];
 $_SESSION['ftphost'] = $ftphost;
@@ -85,6 +93,7 @@ $_SESSION['ftppass'] = $ftppass;
 if ( $_SESSION['ftppath'] != "" ) $ftppath = $_SESSION['ftppath'];
 if ( $_POST['ftppath'] != "" ) $ftppath = $_POST['ftppath'];
 $_SESSION['ftppath'] = $ftppath;
+}
 // from page 2 (available from page 3)
 if ( $_SESSION['kind'] != "" ) $kind = $_SESSION['kind'];
 if ( $_POST['kind'] != "" ) $kind = $_POST['kind'];
@@ -164,23 +173,26 @@ instructions_popup=window.open("ins_popup.php","instructions","width=640,height=
 // -->
 </SCRIPT>
 <?php
-  if ( $ftphost == "" )
-  {
-   if (eregi("public_html", $_SERVER["SCRIPT_FILENAME"])) $ftphost = eregi_replace("www", "ftp", $domain);
-   else  $ftphost = $domain;
-	}
-  if ( $ftppath == "" )
-  {
-   $ftppath = eregi_replace("install/install.php", "", $_SERVER["SCRIPT_FILENAME"]);
-   $ftppath = eregi_replace("/home/", "", $ftppath);
-   $ftppath = eregi_replace("/srv/www/vhosts/", "", $ftppath);
-	if (!isset($ftpuname) || $ftpuname == "")
+	if ($do_ftp)
 	{
-	$shortstring = substr($ftppath, 0, 400);
-   $ftpsubpath = substr($shortstring, 0, strcspn($shortstring, "/"));
-	}
-   if ($ftppath != "" && $ftpsubpath != "") $ftppath = eregi_replace($ftpsubpath, "", $ftppath);
-   if (eregi("public_html", $_SERVER["SCRIPT_FILENAME"])) $ftpuname = $ftpsubpath;
+		if ( $ftphost == "" )
+		{
+			if (eregi("public_html", $_SERVER["SCRIPT_FILENAME"])) $ftphost = eregi_replace("www", "ftp", $domain);
+			else  $ftphost = $domain;
+		}
+		if ( $ftppath == "" )
+		{
+			$ftppath = eregi_replace("install/install.php", "", $_SERVER["SCRIPT_FILENAME"]);
+			$ftppath = eregi_replace("/home/", "", $ftppath);
+			$ftppath = eregi_replace("/srv/www/vhosts/", "", $ftppath);
+			if (!isset($ftpuname) || $ftpuname == "")
+			{
+				$shortstring = substr($ftppath, 0, 400);
+				$ftpsubpath = substr($shortstring, 0, strcspn($shortstring, "/"));
+			}
+			if ($ftppath != "" && $ftpsubpath != "") $ftppath = eregi_replace($ftpsubpath, "", $ftppath);
+			if (eregi("public_html", $_SERVER["SCRIPT_FILENAME"])) $ftpuname = $ftpsubpath;
+		}
 	}
 }
 if ( $p == 2 )
@@ -231,7 +243,7 @@ if ( $p == 2 )
 		}
 	}
   // set up basic connection
-  if (!$skip)
+  if (!$skip && $do_ftp)
   {
   	if ($ftpuname != "") $ftppath = eregi_replace($ftpuname, "", $ftppath);
   	if (!isset($ftpuname) || $ftpuname == "") $error3 .= L_FTP_NAME."<br />\n";
@@ -264,7 +276,8 @@ if ( $p == 2 )
 		if (ftp_chmod($conn_id, 777, $ftppath."logsadmin") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/logsadmin&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
 		if (ftp_chmod($conn_id, 777, $ftppath."skins/images") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/skins/images&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
 		if (ftp_chmod($conn_id, 777, $ftppath."sounds") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/sounds&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-//  if (is_dir($ChatPath.$logdir)) { if (ftp_chmod($conn_id, 777, $ftppath.$logdir) !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;".$logdir."&quot; ".L_FOLD_ERROR2."<br /><br />\n"; } }
+//		if (is_dir($ChatPath.$logdir)) { if (ftp_chmod($conn_id, 777, $ftppath.$logdir) !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/".$logdir."&quot; ".L_FOLD_ERROR2."<br /><br />\n"; } }
+//		if (is_dir($ChatPath.$logdirnew)) { if (ftp_chmod($conn_id, 777, $ftppath.$logdirnew) !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/".$logdirnew."&quot; ".L_FOLD_ERROR2."<br /><br />\n"; } }
 		// close the connection
 		@ftp_close($conn_id);
 	}
@@ -384,81 +397,147 @@ if ( $p == 4 )
     } elseif ( $kind == "no" )
     {
 	}
-	$conn_id = @ftp_connect($ftphost);
-	if (@ftp_login($conn_id, $ftpuname, $ftppass))
+	if ($do_ftp)
 	{
-	if (logdir != $logdirnew)
-	{
-		if (@ftp_rename($conn_id, $ftppath.$logdir, $ftppath.$logdirnew) !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/".$logdirnew."&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-    }
+		$conn_id = @ftp_connect($ftphost);
+		if (@ftp_login($conn_id, $ftpuname, $ftppass))
+		{
+			if ($kind != "new")
+			{
+	/*		if (file_exists($ChatPath."config/start_page.css.php")) ftp_delete($conn_id, $ftppath."config/start_page.css.php");
+				if (file_exists($ChatPath."config/style.css.php")) ftp_delete($conn_id, $ftppath."config/style.css.php");
+				if (file_exists($ChatPath."config/style2.css.php")) ftp_delete($conn_id, $ftppath."config/style2.css.php");
+				if (file_exists($ChatPath."config/style3.css.php")) ftp_delete($conn_id, $ftppath."config/style3.css.php");
+				if (file_exists($ChatPath."config/style4.css.php")) ftp_delete($conn_id, $ftppath."config/style4.css.php");
+				if (file_exists($ChatPath."config/style5.css.php")) ftp_delete($conn_id, $ftppath."config/style5.css.php");
+				if (file_exists($ChatPath."config/style6.css.php")) ftp_delete($conn_id, $ftppath."config/style6.css.php");
+				if (file_exists($ChatPath."config/style7.css.php")) ftp_delete($conn_id, $ftppath."config/style7.css.php");
+				if (file_exists($ChatPath."config/style8.css.php")) ftp_delete($conn_id, $ftppath."config/style8.css.php");
+				if (file_exists($ChatPath."config/style9.css.php")) ftp_delete($conn_id, $ftppath."config/style9.css.php");
+				if (file_exists($ChatPath."config/style10.css.php")) ftp_delete($conn_id, $ftppath."config/style10.css.php");
+	*/
+				if (file_exists($ChatPath."docs/plus docs/Instructions.txt")) ftp_delete($conn_id, $ftppath."docs/plus docs/Instructions.txt");
+				if (file_exists($ChatPath."extra/.htaccess")) ftp_delete($conn_id, $ftppath."extra/.htaccess");
+				if (file_exists($ChatPath."lib/welcome.lib.php")) ftp_delete($conn_id, $ftppath."lib/welcome.lib.php");
+				if (file_exists($ChatPath."lib/update.lib.php")) ftp_delete($conn_id, $ftppath."lib/update.lib.php");
+				if (file_exists($ChatPath."lib/update.txt")) ftp_delete($conn_id, $ftppath."lib/update.txt");
+				if (file_exists($ChatPath."images/helpOff.gif")) ftp_delete($conn_id, $ftppath."images/helpOff.gif");
+				if (file_exists($ChatPath."images/helpOn.gif")) ftp_delete($conn_id, $ftppath."images/helpOn.gif");
+				if (file_exists($ChatPath."images/nums1.gif")) ftp_delete($conn_id, $ftppath."images/nums1.gif");
+				if (file_exists($ChatPath."images/nums2.gif")) ftp_delete($conn_id, $ftppath."images/nums2.gif");
+				if (file_exists($ChatPath."images/nums3.gif")) ftp_delete($conn_id, $ftppath."images/nums3.gif");
+				if (file_exists($ChatPath."images/nums4.gif")) ftp_delete($conn_id, $ftppath."images/nums4.gif");
+				if (file_exists($ChatPath."images/nums5.gif")) ftp_delete($conn_id, $ftppath."images/nums5.gif");
+				if (file_exists($ChatPath."images/nums6.gif")) ftp_delete($conn_id, $ftppath."images/nums6.gif");
+				if (file_exists($ChatPath."images/exitdoorRoll.gif")) ftp_delete($conn_id, $ftppath."images/exitdoorRoll.gif");
+				if (file_exists($ChatPath."images/exitdoor.gif")) ftp_delete($conn_id, $ftppath."images/exitdoor.gif");
+				if (file_exists($ChatPath."localization/_owner/localized.owner.php")) ftp_delete($conn_id, $ftppath."localization/_owner/localized.owner.php");
+				if (file_exists($ChatPath."localization/argentinian_spanish/flag.gif")) ftp_delete($conn_id, $ftppath."localization/argentinian_spanish/flag.gif");
+				if (file_exists($ChatPath."localization/argentinian_spanish/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/argentinian_spanish/flag0.gif");
+				if (file_exists($ChatPath."localization/argentinian_spanish/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/argentinian_spanish/localized.topic.php");
+				if (file_exists($ChatPath."localization/dutch/flag.gif")) ftp_delete($conn_id, $ftppath."localization/dutch/flag.gif");
+				if (file_exists($ChatPath."localization/dutch/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/dutch/flag0.gif");
+				if (file_exists($ChatPath."localization/dutch/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/dutch/localized.topic.php");
+				if (file_exists($ChatPath."localization/english/flag.gif")) ftp_delete($conn_id, $ftppath."localization/english/flag.gif");
+				if (file_exists($ChatPath."localization/english/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/english/flag0.gif");
+				if (file_exists($ChatPath."localization/english/flagUS.gif")) ftp_delete($conn_id, $ftppath."localization/english/flagUS.gif");
+				if (file_exists($ChatPath."localization/english/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/english/localized.topic.php");
+				if (file_exists($ChatPath."localization/french/flag.gif")) ftp_delete($conn_id, $ftppath."localization/french/flag.gif");
+				if (file_exists($ChatPath."localization/french/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/french/flag0.gif");
+				if (file_exists($ChatPath."localization/french/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/french/localized.topic.php");
+				if (file_exists($ChatPath."localization/german/flag.gif")) ftp_delete($conn_id, $ftppath."localization/german/flag.gif");
+				if (file_exists($ChatPath."localization/german/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/german/flag0.gif");
+				if (file_exists($ChatPath."localization/german/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/german/localized.topic.php");
+				if (file_exists($ChatPath."localization/italian/flag.gif")) ftp_delete($conn_id, $ftppath."localization/italian/flag.gif");
+				if (file_exists($ChatPath."localization/italian/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/italian/flag0.gif");
+				if (file_exists($ChatPath."localization/italian/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/italian/localized.topic.php");
+				if (file_exists($ChatPath."localization/romanian/flag.gif")) ftp_delete($conn_id, $ftppath."localization/romanian/flag.gif");
+				if (file_exists($ChatPath."localization/romanian/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/romanian/flag0.gif");
+				if (file_exists($ChatPath."localization/romanian/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/romanian/localized.topic.php");
+				if (file_exists($ChatPath."localization/spanish/flag.gif")) ftp_delete($conn_id, $ftppath."localization/spanish/flag.gif");
+				if (file_exists($ChatPath."localization/spanish/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/spanish/flag0.gif");
+				if (file_exists($ChatPath."localization/spanish/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/spanish/localized.topic.php");
+				if (file_exists($ChatPath."localization/swedish/flag.gif")) ftp_delete($conn_id, $ftppath."localization/swedish/flag.gif");
+				if (file_exists($ChatPath."localization/swedish/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/swedish/flag0.gif");
+				if (file_exists($ChatPath."localization/swedish/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/swedish/localized.topic.php");
+				if (file_exists($ChatPath."localization/turkish/flag.gif")) ftp_delete($conn_id, $ftppath."localization/turkish/flag.gif");
+				if (file_exists($ChatPath."localization/turkish/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/turkish/flag0.gif");
+				if (file_exists($ChatPath."localization/turkish/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/turkish/localized.topic.php");
+				if (file_exists($ChatPath."localization/vietnamese/flag.gif")) ftp_delete($conn_id, $ftppath."localization/vietnamese/flag.gif");
+				if (file_exists($ChatPath."localization/vietnamese/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/vietnamese/flag0.gif");
+				if (file_exists($ChatPath."localization/vietnamese/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/vietnamese/localized.topic.php");
+			}
+		// close the connection
+		@ftp_close($conn_id);
+		}
+	}
+  }
+  else
+  {
 	if ($kind != "new")
 	{
-/*		if (file_exists($ChatPath."config/start_page.css.php")) ftp_delete($conn_id, $ftppath."config/start_page.css.php");
-		if (file_exists($ChatPath."config/style.css.php")) ftp_delete($conn_id, $ftppath."config/style.css.php");
-		if (file_exists($ChatPath."config/style2.css.php")) ftp_delete($conn_id, $ftppath."config/style2.css.php");
-		if (file_exists($ChatPath."config/style3.css.php")) ftp_delete($conn_id, $ftppath."config/style3.css.php");
-		if (file_exists($ChatPath."config/style4.css.php")) ftp_delete($conn_id, $ftppath."config/style4.css.php");
-		if (file_exists($ChatPath."config/style5.css.php")) ftp_delete($conn_id, $ftppath."config/style5.css.php");
-		if (file_exists($ChatPath."config/style6.css.php")) ftp_delete($conn_id, $ftppath."config/style6.css.php");
-		if (file_exists($ChatPath."config/style7.css.php")) ftp_delete($conn_id, $ftppath."config/style7.css.php");
-		if (file_exists($ChatPath."config/style8.css.php")) ftp_delete($conn_id, $ftppath."config/style8.css.php");
-		if (file_exists($ChatPath."config/style9.css.php")) ftp_delete($conn_id, $ftppath."config/style9.css.php");
-		if (file_exists($ChatPath."config/style10.css.php")) ftp_delete($conn_id, $ftppath."config/style10.css.php");
-*/
-		if (file_exists($ChatPath."docs/plus docs/Instructions.txt")) ftp_delete($conn_id, $ftppath."docs/plus docs/Instructions.txt");
-		if (file_exists($ChatPath."extra/.htaccess")) ftp_delete($conn_id, $ftppath."extra/.htaccess");
-		if (file_exists($ChatPath."lib/welcome.lib.php")) ftp_delete($conn_id, $ftppath."lib/welcome.lib.php");
-		if (file_exists($ChatPath."lib/update.lib.php")) ftp_delete($conn_id, $ftppath."lib/update.lib.php");
-		if (file_exists($ChatPath."lib/update.txt")) ftp_delete($conn_id, $ftppath."lib/update.txt");
-		if (file_exists($ChatPath."images/helpOff.gif")) ftp_delete($conn_id, $ftppath."images/helpOff.gif");
-		if (file_exists($ChatPath."images/helpOn.gif")) ftp_delete($conn_id, $ftppath."images/helpOn.gif");
-		if (file_exists($ChatPath."images/nums1.gif")) ftp_delete($conn_id, $ftppath."images/nums1.gif");
-		if (file_exists($ChatPath."images/nums2.gif")) ftp_delete($conn_id, $ftppath."images/nums2.gif");
-		if (file_exists($ChatPath."images/nums3.gif")) ftp_delete($conn_id, $ftppath."images/nums3.gif");
-		if (file_exists($ChatPath."images/nums4.gif")) ftp_delete($conn_id, $ftppath."images/nums4.gif");
-		if (file_exists($ChatPath."images/nums5.gif")) ftp_delete($conn_id, $ftppath."images/nums5.gif");
-		if (file_exists($ChatPath."images/nums6.gif")) ftp_delete($conn_id, $ftppath."images/nums6.gif");
-		if (file_exists($ChatPath."images/exitdoorRoll.gif")) ftp_delete($conn_id, $ftppath."images/exitdoorRoll.gif");
-		if (file_exists($ChatPath."images/exitdoor.gif")) ftp_delete($conn_id, $ftppath."images/exitdoor.gif");
-		if (file_exists($ChatPath."localization/_owner/localized.owner.php")) ftp_delete($conn_id, $ftppath."localization/_owner/localized.owner.php");
-		if (file_exists($ChatPath."localization/argentinian_spanish/flag.gif")) ftp_delete($conn_id, $ftppath."localization/argentinian_spanish/flag.gif");
-		if (file_exists($ChatPath."localization/argentinian_spanish/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/argentinian_spanish/flag0.gif");
-		if (file_exists($ChatPath."localization/argentinian_spanish/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/argentinian_spanish/localized.topic.php");
-		if (file_exists($ChatPath."localization/dutch/flag.gif")) ftp_delete($conn_id, $ftppath."localization/dutch/flag.gif");
-		if (file_exists($ChatPath."localization/dutch/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/dutch/flag0.gif");
-		if (file_exists($ChatPath."localization/dutch/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/dutch/localized.topic.php");
-		if (file_exists($ChatPath."localization/english/flag.gif")) ftp_delete($conn_id, $ftppath."localization/english/flag.gif");
-		if (file_exists($ChatPath."localization/english/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/english/flag0.gif");
-		if (file_exists($ChatPath."localization/english/flagUS.gif")) ftp_delete($conn_id, $ftppath."localization/english/flagUS.gif");
-		if (file_exists($ChatPath."localization/english/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/english/localized.topic.php");
-		if (file_exists($ChatPath."localization/french/flag.gif")) ftp_delete($conn_id, $ftppath."localization/french/flag.gif");
-		if (file_exists($ChatPath."localization/french/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/french/flag0.gif");
-		if (file_exists($ChatPath."localization/french/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/french/localized.topic.php");
-		if (file_exists($ChatPath."localization/german/flag.gif")) ftp_delete($conn_id, $ftppath."localization/german/flag.gif");
-		if (file_exists($ChatPath."localization/german/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/german/flag0.gif");
-		if (file_exists($ChatPath."localization/german/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/german/localized.topic.php");
-		if (file_exists($ChatPath."localization/italian/flag.gif")) ftp_delete($conn_id, $ftppath."localization/italian/flag.gif");
-		if (file_exists($ChatPath."localization/italian/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/italian/flag0.gif");
-		if (file_exists($ChatPath."localization/italian/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/italian/localized.topic.php");
-		if (file_exists($ChatPath."localization/romanian/flag.gif")) ftp_delete($conn_id, $ftppath."localization/romanian/flag.gif");
-		if (file_exists($ChatPath."localization/romanian/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/romanian/flag0.gif");
-		if (file_exists($ChatPath."localization/romanian/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/romanian/localized.topic.php");
-		if (file_exists($ChatPath."localization/spanish/flag.gif")) ftp_delete($conn_id, $ftppath."localization/spanish/flag.gif");
-		if (file_exists($ChatPath."localization/spanish/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/spanish/flag0.gif");
-		if (file_exists($ChatPath."localization/spanish/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/spanish/localized.topic.php");
-		if (file_exists($ChatPath."localization/swedish/flag.gif")) ftp_delete($conn_id, $ftppath."localization/swedish/flag.gif");
-		if (file_exists($ChatPath."localization/swedish/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/swedish/flag0.gif");
-		if (file_exists($ChatPath."localization/swedish/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/swedish/localized.topic.php");
-		if (file_exists($ChatPath."localization/turkish/flag.gif")) ftp_delete($conn_id, $ftppath."localization/turkish/flag.gif");
-		if (file_exists($ChatPath."localization/turkish/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/turkish/flag0.gif");
-		if (file_exists($ChatPath."localization/turkish/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/turkish/localized.topic.php");
-		if (file_exists($ChatPath."localization/vietnamese/flag.gif")) ftp_delete($conn_id, $ftppath."localization/vietnamese/flag.gif");
-		if (file_exists($ChatPath."localization/vietnamese/flag0.gif")) ftp_delete($conn_id, $ftppath."localization/vietnamese/flag0.gif");
-		if (file_exists($ChatPath."localization/vietnamese/localized.topic.php")) ftp_delete($conn_id, $ftppath."localization/vietnamese/localized.topic.php");
-	}
-	// close the connection
-	@ftp_close($conn_id);
-	}
+				if (file_exists($ChatPath."config/start_page.css.php")) unlink($ChatPath."config/start_page.css.php");
+				if (file_exists($ChatPath."config/style.css.php")) unlink($ChatPath."config/style.css.php");
+				if (file_exists($ChatPath."config/style2.css.php")) unlink($ChatPath."config/style2.css.php");
+				if (file_exists($ChatPath."config/style3.css.php")) unlink($ChatPath."config/style3.css.php");
+				if (file_exists($ChatPath."config/style4.css.php")) unlink($ChatPath."config/style4.css.php");
+				if (file_exists($ChatPath."config/style5.css.php")) unlink($ChatPath."config/style5.css.php");
+				if (file_exists($ChatPath."config/style6.css.php")) unlink($ChatPath."config/style6.css.php");
+				if (file_exists($ChatPath."config/style7.css.php")) unlink($ChatPath."config/style7.css.php");
+				if (file_exists($ChatPath."config/style8.css.php")) unlink($ChatPath."config/style8.css.php");
+				if (file_exists($ChatPath."config/style9.css.php")) unlink($ChatPath."config/style9.css.php");
+				if (file_exists($ChatPath."config/style10.css.php")) unlink($ChatPath."config/style10.css.php");
+				if (file_exists($ChatPath."docs/plus docs/Instructions.txt")) unlink($ChatPath."docs/plus docs/Instructions.txt");
+				if (file_exists($ChatPath."extra/.htaccess")) unlink($ChatPath."extra/.htaccess");
+				if (file_exists($ChatPath."lib/welcome.lib.php")) unlink($ChatPath."lib/welcome.lib.php");
+				if (file_exists($ChatPath."lib/update.lib.php")) unlink($ChatPath."lib/update.lib.php");
+				if (file_exists($ChatPath."lib/update.txt")) unlink($ChatPath."lib/update.txt");
+				if (file_exists($ChatPath."images/helpOff.gif")) unlink($ChatPath."images/helpOff.gif");
+				if (file_exists($ChatPath."images/helpOn.gif")) unlink($ChatPath."images/helpOn.gif");
+				if (file_exists($ChatPath."images/nums1.gif")) unlink($ChatPath."images/nums1.gif");
+				if (file_exists($ChatPath."images/nums2.gif")) unlink($ChatPath."images/nums2.gif");
+				if (file_exists($ChatPath."images/nums3.gif")) unlink($ChatPath."images/nums3.gif");
+				if (file_exists($ChatPath."images/nums4.gif")) unlink($ChatPath."images/nums4.gif");
+				if (file_exists($ChatPath."images/nums5.gif")) unlink($ChatPath."images/nums5.gif");
+				if (file_exists($ChatPath."images/nums6.gif")) unlink($ChatPath."images/nums6.gif");
+				if (file_exists($ChatPath."images/exitdoorRoll.gif")) unlink($ChatPath."images/exitdoorRoll.gif");
+				if (file_exists($ChatPath."images/exitdoor.gif")) unlink($ChatPath."images/exitdoor.gif");
+				if (file_exists($ChatPath."localization/_owner/localized.owner.php")) unlink($ChatPath."localization/_owner/localized.owner.php");
+				if (file_exists($ChatPath."localization/argentinian_spanish/flag.gif")) unlink($ChatPath."localization/argentinian_spanish/flag.gif");
+				if (file_exists($ChatPath."localization/argentinian_spanish/flag0.gif")) unlink($ChatPath."localization/argentinian_spanish/flag0.gif");
+				if (file_exists($ChatPath."localization/argentinian_spanish/localized.topic.php")) unlink($ChatPath."localization/argentinian_spanish/localized.topic.php");
+				if (file_exists($ChatPath."localization/dutch/flag.gif")) unlink($ChatPath."localization/dutch/flag.gif");
+				if (file_exists($ChatPath."localization/dutch/flag0.gif")) unlink($ChatPath."localization/dutch/flag0.gif");
+				if (file_exists($ChatPath."localization/dutch/localized.topic.php")) unlink($ChatPath."localization/dutch/localized.topic.php");
+				if (file_exists($ChatPath."localization/english/flag.gif")) unlink($ChatPath."localization/english/flag.gif");
+				if (file_exists($ChatPath."localization/english/flag0.gif")) unlink($ChatPath."localization/english/flag0.gif");
+				if (file_exists($ChatPath."localization/english/flagUS.gif")) unlink($ChatPath."localization/english/flagUS.gif");
+				if (file_exists($ChatPath."localization/english/localized.topic.php")) unlink($ChatPath."localization/english/localized.topic.php");
+				if (file_exists($ChatPath."localization/french/flag.gif")) unlink($ChatPath."localization/french/flag.gif");
+				if (file_exists($ChatPath."localization/french/flag0.gif")) unlink($ChatPath."localization/french/flag0.gif");
+				if (file_exists($ChatPath."localization/french/localized.topic.php")) unlink($ChatPath."localization/french/localized.topic.php");
+				if (file_exists($ChatPath."localization/german/flag.gif")) unlink($ChatPath."localization/german/flag.gif");
+				if (file_exists($ChatPath."localization/german/flag0.gif")) unlink($ChatPath."localization/german/flag0.gif");
+				if (file_exists($ChatPath."localization/german/localized.topic.php")) unlink($ChatPath."localization/german/localized.topic.php");
+				if (file_exists($ChatPath."localization/italian/flag.gif")) unlink($ChatPath."localization/italian/flag.gif");
+				if (file_exists($ChatPath."localization/italian/flag0.gif")) unlink($ChatPath."localization/italian/flag0.gif");
+				if (file_exists($ChatPath."localization/italian/localized.topic.php")) unlink($ChatPath."localization/italian/localized.topic.php");
+				if (file_exists($ChatPath."localization/romanian/flag.gif")) unlink($ChatPath."localization/romanian/flag.gif");
+				if (file_exists($ChatPath."localization/romanian/flag0.gif")) unlink($ChatPath."localization/romanian/flag0.gif");
+				if (file_exists($ChatPath."localization/romanian/localized.topic.php")) unlink($ChatPath."localization/romanian/localized.topic.php");
+				if (file_exists($ChatPath."localization/spanish/flag.gif")) unlink($ChatPath."localization/spanish/flag.gif");
+				if (file_exists($ChatPath."localization/spanish/flag0.gif")) unlink($ChatPath."localization/spanish/flag0.gif");
+				if (file_exists($ChatPath."localization/spanish/localized.topic.php")) unlink($ChatPath."localization/spanish/localized.topic.php");
+				if (file_exists($ChatPath."localization/swedish/flag.gif")) unlink($ChatPath."localization/swedish/flag.gif");
+				if (file_exists($ChatPath."localization/swedish/flag0.gif")) unlink($ChatPath."localization/swedish/flag0.gif");
+				if (file_exists($ChatPath."localization/swedish/localized.topic.php")) unlink($ChatPath."localization/swedish/localized.topic.php");
+				if (file_exists($ChatPath."localization/turkish/flag.gif")) unlink($ChatPath."localization/turkish/flag.gif");
+				if (file_exists($ChatPath."localization/turkish/flag0.gif")) unlink($ChatPath."localization/turkish/flag0.gif");
+				if (file_exists($ChatPath."localization/turkish/localized.topic.php")) unlink($ChatPath."localization/turkish/localized.topic.php");
+				if (file_exists($ChatPath."localization/vietnamese/flag.gif")) unlink($ChatPath."localization/vietnamese/flag.gif");
+				if (file_exists($ChatPath."localization/vietnamese/flag0.gif")) unlink($ChatPath."localization/vietnamese/flag0.gif");
+				if (file_exists($ChatPath."localization/vietnamese/localized.topic.php")) unlink($ChatPath."localization/vietnamese/localized.topic.php");
+			}
   }
 }
 
@@ -495,15 +574,30 @@ if ( $p == 5 )
 	}
 	if ($error4 == "")
 	{
-		$conn_id = @ftp_connect($ftphost);
-		if (@ftp_login($conn_id, $ftpuname, $ftppass))
+		if ($do_ftp)
 		{
-		ftp_chmod($conn_id, 644, $ftppath."config/config.lib.php");
-		if (file_exists($ChatPath."config/color.lib.php")) ftp_delete($conn_id, $ftppath."config/color.lib.php");
-		ftp_delete($conn_id, $ftppath."install/install.php");
-
-		// close the connection
-		@ftp_close($conn_id);
+			$conn_id = @ftp_connect($ftphost);
+			if (@ftp_login($conn_id, $ftpuname, $ftppass))
+			{
+				ftp_chmod($conn_id, 644, $ftppath."config/config.lib.php");
+				if (file_exists($ChatPath."config/color.lib.php")) ftp_delete($conn_id, $ftppath."config/color.lib.php");
+				ftp_delete($conn_id, $ftppath."install/install.php");
+				if ($logdir != $logdirnew)
+				{
+					if (@ftp_rename($conn_id, $ftppath.$logdir, $ftppath.$logdirnew) !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/".$logdirnew."&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+			    }
+				// close the connection
+				@ftp_close($conn_id);
+			}
+		}
+		else
+		{
+			if (file_exists($ChatPath."config/color.lib.php")) unlink($ChatPath."config/color.lib.php");
+			unlink($ChatPath."install/install.php");
+			if ($logdir != $logdirnew)
+			{
+				rename($ChatPath.$logdir, $ChatPath.$logdirnew);
+			}
 		}
 	}
 }
@@ -603,7 +697,8 @@ while(list($key, $name) = each($AvailableLanguages))
     <td width="100%" style="border-left-color: #111111; border-left-width: 1; border-right-color: #111111; border-right-width: 1">
     <p align="<?php echo ( $p != 1 ? "justify" : "center");  ?>"><font face="Tahoma" size="2">
 <?php if ( $p == 1 ) { ?>
-<?php echo (sprintf(L_P0_HINT1,APP_NAME." ".APP_VERSION.APP_MINOR)."<br />".L_P0_HINT2); ?>
+<?php echo (sprintf(L_P0_HINT1,APP_NAME." ".APP_VERSION.APP_MINOR)); ?>
+<?php echo ($do_ftp ? "<br />".L_P0_HINT2 : ""); ?>
 <?php } // END OF PAGE 1  ?>
 <?php if ( $p == 2 ) { ?>
 <?php if ( $error3 == "" ) { ?>
@@ -1960,7 +2055,7 @@ elseif ($p == 5 ) { ?>
     <td width="100%" style="border-left-color: #111111; border-left-width: 1; border-right-color: #111111; border-right-width: 1">
 <?php } // END IF page=3 AND kind = NEW ?>
 <?php } // END OF ERROR == "" ?>
-<?php if ( $p == 1 ) { ?>
+<?php if ( $p == 1  && $do_ftp) { ?>
     <table align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="398" id="AutoNumber2">
       <tr>
         <td width="221"><font face="Tahoma" size="2"><?php echo L_P0_FORM1 ?></font></td>
@@ -2088,7 +2183,9 @@ elseif ($p == 5 ) { ?>
       <tr>
         <td width="221"><font face="Tahoma" size="2"><?php echo L_P2_FORM12 ?></font></td>
         <td>
-          <input type="text" name="logdirnew" size="20" value="<?php echo ($logdir != $logdirnew && $logdirnew != "") ? $logdirnew : $logdir ?>"> <font color="#FF0000">**</font></td>
+          <input type="hidden" name="logdir" value="<?php echo((C_LOG_DIR != "C_LOG_DIR" && C_LOG_DIR != "") ? C_LOG_DIR : "logsadmin"); ?>">
+          <input type="text" name="logdirnew" size="20" value="<?php echo ($logdir != $logdirnew && $logdirnew != "") ? $logdirnew : $logdir ?>"> <font color="#FF0000">**</font>
+		  </td>
       </tr>
       <tr>
         <td><font face="Tahoma" size="2"><?php echo L_P2_FORM15 ?></font></td>
@@ -2159,7 +2256,7 @@ elseif ($p == 5 ) { ?>
 <?php } // END OF PAGE 4
 elseif ( $p == 5 ) { ?>
 <?php if ( $error4 == "" ) { ?>
-  <p align="justify"><font face="Tahoma" size="2"><?php echo L_P4_FORM2 ?></p><p align="center"><b><a href="<?php echo $ChatPath ?>bot/botloader<? echo (($ftphost == "" && $_POST['ftphost'] != "") ? "inc" : "") ?>.php" target="_blank"><?php echo L_P4_FORM3 ?></a></font></b></p></td></tr>
+  <p align="justify"><font face="Tahoma" size="2"><?php echo L_P4_FORM2 ?></p><p align="center"><b><a href="<?php echo $ChatPath ?>bot/botloader<?php echo (($ftphost == "" && $_POST['ftphost'] != "") ? "inc.php" : ".php") ?>" target="_blank"><?php echo L_P4_FORM3 ?></a></font></b></p></td></tr>
     </tr>
   <tr>
     <td width="100%" style="border-left: medium none #111111; border-right: medium none #111111">&nbsp;</td>
@@ -2188,7 +2285,9 @@ elseif ( $p == 5 ) { ?>
   <p align="right">
 <?php if ( $p == 1 ) { ?>
 <input type="button" value="<?php echo L_BTN2 ?>" name="B2" onClick="window.open('','_parent','');window.close();">&nbsp;&nbsp;&nbsp;
+<?php if ( $do_ftp ) { ?>
 <input type="button" value="<?php echo L_BTN6 ?>" onClick="location.href='install.php?p=<?php echo $p_next."&L=".$L."&skip=1" ?>';" name="B3">&nbsp;&nbsp;&nbsp;
+<?php } ?>
 <input type="submit" value="<?php echo L_BTN1 ?> &gt;" name="B1">
 <?php } elseif ( $p == 2 ) { ?>
 <input type="button" value="<?php echo L_BTN2 ?>" name="B2" onClick="window.open('','_parent','');window.close();">&nbsp;&nbsp;&nbsp;
