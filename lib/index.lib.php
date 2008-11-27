@@ -1714,6 +1714,7 @@ if (!isset($Ver)) $Ver = "L";
 				}
 			}
 		}
+		if($disp_note) echo("<tr class=\"ChatError\"><td align=right colspan=2><font size=-2>[".$res_init."] = ".L_RESTRICTED.".</font></td></tr>");
 		if (C_VERSION == 2)
 		{
 			if((!$T && !$DefaultRoomFound) || (!$T && !$DefaultPrivateRoomFound)) $T = 1;
@@ -1733,7 +1734,6 @@ if (!isset($Ver)) $Ver = "L";
 			</TR>
 			<?php
 		}
-		if($disp_note) echo("<tr class=\"ChatError\"><td align=right colspan=2><font size=-2>[".$res_init."] = ".L_RESTRICTED.".</font></td></tr>");
 		if (C_VERSION == 1)
 		{
 			?>
@@ -1742,7 +1742,6 @@ if (!isset($Ver)) $Ver = "L";
 		}
 		?>
 		</TABLE>
-		<br /><?php echo(L_SET_18); ?><br />
 		<TR CLASS="ChatP2"><TD align="center">
 <?php
 if (C_REQUIRE_REGISTER)
@@ -1754,6 +1753,7 @@ if (C_REQUIRE_REGISTER)
 ?>
 		<?php echo(L_SET_13." "); ?>
 		<INPUT TYPE="submit" VALUE="<?php echo(L_SET_14); ?>" CLASS="ChatBox"> ...
+		<br /><br /><FONT SIZE=-1><?php echo(L_SET_18); ?></FONT><br />
 		</TD></TR>
 	</TD>
 </TR>

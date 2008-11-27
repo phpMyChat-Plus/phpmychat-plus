@@ -41,7 +41,7 @@ define("L_SET_14", "Belépés");
 define("L_SET_15", "Alapértelmezett privát szobák");
 define("L_SET_16", "Felhasználók által létrehozott privát szobák");
 define("L_SET_17", "Válaszd ki az avatar-odat");
-define("L_SET_18", "Tedd a Kedvencek közé: \"CTRL +D\".");
+define("L_SET_18", "Tedd a Kedvencek közé: \"Ctrl+D\".");
 
 define("L_SRC", "szabadon letölthető a következő helyről");
 

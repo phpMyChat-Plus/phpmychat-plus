@@ -44,7 +44,7 @@ define("L_SET_14", "chat");
 define("L_SET_15", "Stanze private di default");
 define("L_SET_16", "Stanze private create dagi utenti");
 define("L_SET_17", "Scegli il tuo avatar");
-define("L_SET_18", "Aggiungi ai Preferiti: premi \"CTRL +D\".");
+define("L_SET_18", "Aggiungi ai Preferiti: premi \"Ctrl+D\".");
 
 define("L_SRC", "è disponibile gratuitamente");
 

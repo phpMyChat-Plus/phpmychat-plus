@@ -1,5 +1,5 @@
 <?php
-// File : turkish/localized.tutorial.php - plus version (10.04.2008 - rev.9)
+// File : turkish/localized.tutorial.php - plus version (26.08.2008 - rev.10)
 // Original translation by Volkan Övün <vovun@hotmail.com>
 
 // Get the names and values for vars sent by the script that called this one
@@ -814,15 +814,12 @@ duyurunun bütün odalara iletilmesini sağlar.<br /><P ALIGN="right"><A HREF="#
 <A NAME="kick">
 <FONT SIZE="+1"><B>Bir kullanıcıyı odadan atmak:</B></FONT>
 <P>
-Moderatorler kullanıcıyı, Yönetici ise kullanıcıyı veya Moderatörü <b>"/kick"
-komutunu</b> kullanarak odadan dışarı atabilirler. Yönetici odadan atılamaz.
-Atılacak olan kullanıcı, o anki mevcut odada olmalıdır. Başka odadaki kullanıcı
-veya Moderatör atılamaz.<P>
-<i>Örneğin</i>, Mehmetin odadan atılacak kullanıcının rumuzu olduğunu
-varsayalım: <I>/kick Mehmet</I> veya: <I>/kick Mehmet (atma sebebi)</I>. "Atma
-sebebi" herhangi bir yazı olabilir mesela "küfrettiği için!"
-<br /><P ALIGN="right"><FONT SIZE="+2" COLOR="GREEN"><A HREF="#top">Sayfa başına
-dön</A></font></P>
+Moderatorler kullanıcıyı, Yönetici ise kullanıcıyı veya Moderatörü <b>"/kick" komutunu</b> kullanarak odadan dışarı atabilirler. Yönetici odadan atılamaz. Atılacak olan kullanıcı, o anki mevcut odada olmalıdır. Başka odadaki kullanıcı veya Moderatör atılamaz.
+<P>
+<i>Örneğin</i>, Mehmetin odadan atılacak kullanıcının rumuzu olduğunu varsayalım: <I>/kick Mehmet</I> veya: <I>/kick Mehmet (atma sebebi)</I>. "Atma sebebi" herhangi bir yazı olabilir mesela "küfrettiği için!"
+<P>
+Eğer * seçeneği kullanılırsa (<I>/kick * <?php echo(L_HELP_REASON); ?></I>), komut odada yetkisiz olan bütün kullanıcıları (misafirler ve kayıtlı kullanıcılar) sohbetten atar. Bu, sunucunun bağlantı sorunları olması ve o anda sohbet edenlerin sohbeti yeniden yüklemesi gereken hallerde kullanışlıdır. Bu durumda bir <I><?php echo(L_HELP_REASON); ?></I> kullanıcılara neden atıldıkları hakkında bilgi verir.
+<br /><P ALIGN="right"><FONT SIZE="+2" COLOR="GREEN"><A HREF="#top">Sayfa başına dön</A></font></P>
 <P>
 <hr />
 

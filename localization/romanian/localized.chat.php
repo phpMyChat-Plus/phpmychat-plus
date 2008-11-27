@@ -41,7 +41,7 @@ define("L_SET_14", "chat");
 define("L_SET_15", "Camere private disponibile");
 define("L_SET_16", "Camere private create de utilizatori");
 define("L_SET_17", "Alegeţi un avatar");
-define("L_SET_18", "Adaugă în Favorite: apasă \"CTRL +D\".");
+define("L_SET_18", "Adaugă în Favorite: apasă \"Ctrl+D\".");
 
 define("L_SRC", "este disponibil gratuit de la");
 
