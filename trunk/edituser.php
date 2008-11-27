@@ -262,7 +262,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 	     . "Open popups on private message: ".$allpopup."\r\n"
 	     . "Use the Gravatar: ".$usegrav." (".(!ALLOW_GRAVATARS ? "Disabled" : "Enabled").")\r\n"
 		 . "----------------------------------------------\r\n"
-		 . "Preffered language: ".$L."\r\n"
+		 . "Prefered language: ".$L."\r\n"
 	     . "Updated on: $dt $ti\r\n"
 	     . "IP address: $IP (".gethostbyaddr($IP).")\r\n"
 	     . "----------------------------------------------\r\n\r\n"

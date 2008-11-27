@@ -42,7 +42,7 @@ define("L_SET_14", "chatee");
 define("L_SET_15", "Salas privadas por defecto");
 define("L_SET_16", "Salas privadas creadas por usuarios");
 define("L_SET_17", "Elija su avatar");
-define("L_SET_18", "Agregar a sus Favoritos: presione \"CTRL +D\".");
+define("L_SET_18", "Agregar a sus Favoritos: presione \"Ctrl+D\".");
 
 define("L_SRC", "se puede conseguir y usar gratis");
 

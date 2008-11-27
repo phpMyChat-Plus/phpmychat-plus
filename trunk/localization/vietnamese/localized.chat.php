@@ -41,7 +41,7 @@ define("L_SET_14", "Tán gẫu");
 define("L_SET_15", "Phòng riêng mặc định");
 define("L_SET_16", "Những phòng riêng tư tạo bởi người sử dụng");
 define("L_SET_17", "Chọn ảnh đại diện");
-define("L_SET_18", "Bookmark this page: Chọn \"CTRL +D\".");
+define("L_SET_18", "Bookmark this page: Chọn \"Ctrl+D\".");
 
 define("L_SRC", "tùy biến có sẵn trên");
 

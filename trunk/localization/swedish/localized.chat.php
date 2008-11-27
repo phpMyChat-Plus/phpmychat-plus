@@ -42,7 +42,7 @@ define("L_SET_14", "chatt");
 define("L_SET_15", "Tillgängliga rum");
 define("L_SET_16", "Användarens Privata rum");
 define("L_SET_17", "Välj din Alias bild");
-define("L_SET_18", "Gör denna sida till ditt favorit: tryck \"CTRL +D\".");
+define("L_SET_18", "Gör denna sida till ditt favorit: tryck \"Ctrl+D\".");
 
 define("L_SRC", "kan hämtas gratis från");
 

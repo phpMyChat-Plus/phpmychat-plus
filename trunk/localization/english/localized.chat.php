@@ -41,7 +41,7 @@ define("L_SET_14", "chat");
 define("L_SET_15", "Default private rooms");
 define("L_SET_16", "Private rooms created by users");
 define("L_SET_17", "Choose your avatar");
-define("L_SET_18", "Bookmark this page: press \"CTRL +D\".");
+define("L_SET_18", "Bookmark this page: press \"Ctrl+D\".");
 
 define("L_SRC", "is freely available on");
 

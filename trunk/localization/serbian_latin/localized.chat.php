@@ -40,7 +40,7 @@ define("L_SET_14", "četujte");
 define("L_SET_15", "Pretpostavljene privatne sobe");
 define("L_SET_16", "Privatne sobe koje su kreirali korisnici");
 define("L_SET_17", "Odaberite vašu sličicu");
-define("L_SET_18", "Bukmarkuj ovu stranu: pritisni \"CTRL +D\".");
+define("L_SET_18", "Bukmarkuj ovu stranu: pritisni \"Ctrl+D\".");
 
 define("L_SRC", "je slobodno dostupan na");
 

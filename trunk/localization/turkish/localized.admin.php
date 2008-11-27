@@ -1,5 +1,5 @@
 <?php
-// File : turkish/localized.admin.php - plus version (07.07.2008 - rev.13)
+// File : turkish/localized.admin.php - plus version (26.08.2008 - rev.14
 // Original translation in turkish by Volkan Övün <vovun@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -37,6 +37,10 @@ define("A_SHEET1_9", "İşaretli profilleri yasakla");
 define("A_SHEET1_10", "Şimdi, seçiminizi saflaştırmak için ’".A_MENU_2."’ sayfasını taşımalısınız.");
 define("A_SHEET1_11", "Son Bağlantı");
 define("A_SHEET1_12", "Yasaklama sebebi (tercihe bağlı)");
+define("A_SHEET1_13", "İzin verilen odalar");
+define("A_SHEET1_14", "Bütün Özel olmayanlar");
+define("A_SHEET1_15", "Bütün özel olanlar");
+define("A_SHEET1_16", "Belirtilen odaların özelleştirilmesi ’".A_MENU_5."’ sayfasından yapılmalıdır.");
 define("A_USER", "Kullanıcı");
 define("A_MODER", "Denetleyici");
 define("A_TOPMOD", "Şef Denetleyici");
@@ -59,6 +63,7 @@ define("A_SHEET3_1", "Mevcut odaların listesi");
 define("A_SHEET3_2", "\"var olmayan\" bir odayı temizlemek, bu odanın tüm yönetici<br>statülerini de kaldırır.");
 define("A_SHEET3_3", "Seçili odaları temizle");
 define("A_SHEET3_4", "Temizlenecek oda yok.");
+define("A_SHEET3_5", "Bir seçim yapmadınız. Lütfen aşağıdaki listeden en az bir oda seçiniz.");
 
 // Frame for sending mails
 define("A_SHEET4_0", "’".A_MENU_5."’ sekmesinde yönetici e-posta adresini belirtmediniz.");

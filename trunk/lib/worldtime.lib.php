@@ -87,6 +87,7 @@ function get_day($time,$plus)
 		if ($day == 0 || $day == 7) $is_day = $sunday;
 		return $is_day;
 }
+
 // Added for php4 support of mb functions
 if (!function_exists('mb_convert_case'))
 {
@@ -130,14 +131,15 @@ if (eregi("win", PHP_OS))
 	else $dayname_server = utf_conv(WIN_DEFAULT,$Charset,$dayname_server);
 }
 ?>
+
 // Returns the day names
 function get_day_strf(plus)
 {
 	is_day = "";
-if (plus == "0") is_day = " <?php echo($dayname);?>";
-else if (plus == "1") is_day = " <?php echo($dayname_plus);?>";
-else if (plus == "-1") is_day = " <?php echo($dayname_minus);?>";
-else if (plus == "2") is_day = " <?php echo($dayname_server);?>";
+	if (plus == "0") is_day = " <?php echo($dayname);?>";
+	else if (plus == "1") is_day = " <?php echo($dayname_plus);?>";
+	else if (plus == "-1") is_day = " <?php echo($dayname_minus);?>";
+	else if (plus == "2") is_day = " <?php echo($dayname_server);?>";
 	return is_day;
 };
 
@@ -172,6 +174,9 @@ function timedst_syd()
 // Parse the meridian data
 function meridian_time(city_name,city_gap,city_dst)
 {
+	cur_date = new Date();
+	calc_date = new Date(cur_date - gap);
+	calc_gap = 0 - calc_date.getTimezoneOffset()/60;
 	if (city_dst != "")
 	{
 		if (city_dst == "EU") cur_hoursdst = cur_hoursGMT_DST_EU;
@@ -183,15 +188,31 @@ function meridian_time(city_name,city_gap,city_dst)
 	cur_minutes = Math.abs(cur_minutes)+((city_gap-Math.floor(city_gap))*60);
 	if (cur_minutes >= 60) { cur_minutes = cur_minutes - 60; cur_hours = cur_hours + 1; }
 	day = "";
-	if (city_gap < 0)
+	if (calc_gap < 0)
 	{
-		if (cur_hours < 0) { cur_hours = 24 + cur_hours; if (cur_hoursGMT < cur_hours) day = get_day_strf("-1"); }
-		if (cur_hours > 23) { cur_hours = cur_hours - 24; if (cur_hours < cur_hoursGMT) day = get_day_strf("1"); }
+		if (city_gap < 0)
+		{
+			if (cur_hours < 0) { cur_hours = 24 + cur_hours; if (cur_hoursGMT < cur_hours) day = get_day_strf("-1"); }
+			if (cur_hours > 23) { cur_hours = cur_hours - 24; if (cur_hours > cur_hoursGMT) day = get_day_strf("1"); }
+		}
+		else
+		{
+			if (cur_hours < 0) { cur_hours = 24 + cur_hours; if (cur_hours < cur_hoursGMT) day = get_day_strf("1"); }
+			if (cur_hours > 23) { cur_hours = cur_hours - 24; }
+		}
 	}
 	else
 	{
-		if (cur_hours < 0) { cur_hours = 24 + cur_hours; }
-		if (cur_hours > 23) { cur_hours = cur_hours - 24; if (cur_hours < cur_hoursGMT) day = get_day_strf("1"); }
+		if (city_gap < 0)
+		{
+			if (cur_hours < 0) { cur_hours = 24 + cur_hours; if (cur_hoursGMT < cur_hours) day = get_day_strf("-1"); }
+			if (cur_hours > 23) { cur_hours = cur_hours - 24; if (cur_hours > cur_hoursGMT) day = get_day_strf("1"); }
+		}
+		else
+		{
+			if (cur_hours < 0) { cur_hours = 24 + cur_hours; }
+			if (cur_hours > 23) { cur_hours = cur_hours - 24; if (cur_hours < cur_hoursGMT) day = get_day_strf("1"); }
+		}
 	}
 	if (cur_hours < 10) cur_hours = "0" + cur_hours;
 	if (cur_minutes < 10) cur_minutes = "0" + cur_minutes;
@@ -243,8 +264,16 @@ else
 	cur_hoursUTC = cur_hoursGMT;
 	dayUTC = get_day_strf("0");
 	if (cur_minutes >= 60) { cur_minutesUTC = cur_minutes - 60; cur_hoursUTC = cur_hoursUTC + 1; }
-	if (cur_hoursUTC < 0) { cur_hoursUTC = 24 + cur_hoursUTC; dayUTC = get_day_strf("-1") }
-	else if (cur_hoursUTC > 23) { cur_hoursUTC = cur_hoursUTC - 24; dayUTC = get_day_strf("1"); }
+	if (calc_gap < 0)
+	{
+		if (cur_hoursUTC < 0) { cur_hoursUTC = 24 + cur_hoursUTC; dayUTC = get_day_strf("-1") }
+		else if (cur_hoursUTC > 23) { cur_hoursUTC = cur_hoursUTC - 24; dayUTC = get_day_strf("0"); }
+	}
+	else
+	{
+		if (cur_hoursUTC < 0) { cur_hoursUTC = 24 + cur_hoursUTC; dayUTC = get_day_strf("-1") }
+		else if (cur_hoursUTC > 23) { cur_hoursUTC = cur_hoursUTC - 24; dayUTC = get_day_strf("1"); }
+	}
 	if (cur_hoursUTC < 10) cur_hoursUTC = "0" + cur_hoursUTC;
 	if (cur_minutes < 10) cur_minutesUTC = "0" + cur_minutes;
 	else cur_minutesUTC = cur_minutes;

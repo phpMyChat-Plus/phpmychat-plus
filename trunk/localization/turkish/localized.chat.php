@@ -33,7 +33,7 @@ define("L_SET_6", "Mevcut genel odalar");
 define("L_SET_7", "Seçiminizi yapınız ...");
 define("L_SET_8", "Kullanıcılar tarafından oluşturulan genel odalar");
 define("L_SET_9", "Kendi");
-define("L_SET_10", "Genel");
+define("L_SET_10", "genel");
 define("L_SET_11", "özel");
 define("L_SET_12", "odanızı oluşturun");
 define("L_SET_13", "Sonra");
@@ -41,7 +41,7 @@ define("L_SET_14", "Sohbet Et");
 define("L_SET_15", "Mevcut özel odalar");
 define("L_SET_16", "Kullanıcılar tarafından oluşturulan özel odalar");
 define("L_SET_17", "Avatarınızı seçin");
-define("L_SET_18", "Bu sayfayı favorilerinize ekleyin: \"CTRL +D\" ye basın.");
+define("L_SET_18", "Bu sayfayı favorilerinize ekleyin: \"Ctrl+D\" ye basın.");
 
 define("L_SRC", "ücretsiz olarak var");
 
@@ -101,7 +101,7 @@ define("L_EMAIL_VAL_Err", "Yapısal hata! Lütfen Yönetici ile irtibata geçini
 define("L_EMAIL_VAL_Done", "Şifreniz eposta a-dresinize gönderilmiştir.<br />Giriş sayfasındaki Profilinizi denetleyin başlığı altında şifrenizi değiştirebilirsiniz.");
 define("L_EMAIL_VAL_PENDING_Done", "Kayıt bilgileriniz incelenmek üzere gönderildi.");
 define("L_EMAIL_VAL_PENDING_Done1", "Hesabını Yönetici tarafından onaylandıktan sonar şifrenizi alacaksınızi.");
-define("L_EMAIL_VAL_3", "Üyeliğiniz  %s için bekliyor.");
+define("L_EMAIL_VAL_3", "Üyeliğiniz %s için bekliyor.");
 define("L_EMAIL_VAL_31", "Tebrikler! Üyelik başvurunuz incelendi ve onaylandı!");
 define("L_EMAIL_VAL_32", "Bu, sizin %s adındaki %s adresindeki üyelik bilgilerinizdir.:"); //chat name at chaturl
 define("L_EMAIL_VAL_4", "%s adındaki %s adresine şu anda kaydoldunuz:"); //chat name at chaturl
@@ -175,7 +175,9 @@ define("L_NO_PROFILE", "Profil yok");
 define("L_HLP", "Yardım");
 define("L_MODERATOR", "Kullanıcı %s şu andan itibaren bu odanın denetleyicisi.");
 define("L_KICKED", "Kullanıcı %s başarıyla dışarı atıldı.");
+define("L_KICKED_ALL", "Bütün kullanıcılar başarıyla dışarı atıldı.");
 define("L_KICKED_REASON", "Kullanıcı %s başarıyla dışarı atıldı. (Sebep: %s)");
+define("L_KICKED_ALL_REASON", " Bütün kullanıcılar başarıyla dışarı atıldı. (Sebep: %s)");
 define("L_BANISHED", "Kullanıcı %s başarıyla yasaklandı.");
 define("L_BANISHED_REASON", "Kullanıcı %s başarıyla yasaklandı. (Sebep: %s)");
 define("L_ANNOUNCE", "DUYURU");
@@ -223,7 +225,7 @@ define("L_HELP_CMD_5", "Odayı terketmenizi sağlar. Tercihe bağlı olarak bir 
 define("L_HELP_CMD_6", "Kullanıcı adı belirtilen bir kullanıcıyı gözardı etmenizi sağlar. Gözardı edilen kullanıcının mesajları size görünmez.<br />Gözardı ettiğiniz kullanıcının mesajlarını tekrar görmek isterseniz, komutu kullanıcı adıyla birlikte - işaretini de kullanarak yazmalısınız. Eğer komutla beraber rumuz kullanmadan sadece - işareti yazarsanız, daha önce gözardı ettiğiniz bütün kullanıcıları normalr çevirirsiniz.<br />Kullanıcı adı veya bir işaret kullanmadan sadece komutu yazmak, gözardı edilenlerin listesini içeren bir pencere açar.");
 define("L_HELP_CMD_7", "Bir önce yazılan metni (komut veya mesaj) geri çağırır.");
 define("L_HELP_CMD_8", "Mesajlardan önünde zamanın gösterilmesini etkinleştirir/devre dışı bırakır.");
-define("L_HELP_CMD_9", "Kullanıcıyı sohbetten atar. Bu komut sadece Denetleyici tarafından kullanılabilir.");
+define("L_HELP_CMD_9", "Kullanıcıyı sohbetten atar. Bu komut sadece Denetleyici tarafından kullanılabilir.<br />Eğer * seçeneği kullanılırsa, komut odada yetkisiz olan bütün kullanıcıları (misafirler ve kayıtlı kullanıcılar) sohbetten atar. Bu, sunucunun bağlantı sorunları olması ve o anda sohbet edenlerin sohbeti yeniden yüklemesi gereken hallerde kullanışlıdır. Bu durumda bir [".L_HELP_REASON."] kullanıcılara neden atıldıkları hakkında bilgi verir.");
 define("L_HELP_CMD_10", "Belirlenen kullanıcıya özel mesaj gönderir. (Diğer kullanıcılar bunu göremezler).");
 define("L_HELP_CMD_11", "Belirlenen kullanıcının bilgilerini gösterir.");
 define("L_HELP_CMD_12", "Kullanıcılar profillerini düzenlerken ayrı pencere açar.");
@@ -590,7 +592,7 @@ define("LOGIN_LINK", "<A HREF='".C_CHAT_URL."?L=".$L."' TITLE='".sprintf(L_CLICK
 define("NB_USERS_IN","Şu anda ".LOGIN_LINK."kullanıcı</A> sohbet odasında.");
 define("USERS_LOGIN","Şu anda ".LOGIN_LINK."1 kullanıcı</A> sohbet odasında.");
 define("NO_USER","Şu anda ".LOGIN_LINK."sohbet eden</A> kimse yok.");
-define("L_PRIV_REPLY_LOGIN", LOGIN_LINK."Deki bir gönderiye cevap vermek için ve</A> yukarıda listelenen Ö.M’lardan birine cevap vermek için  sohbete giriş yapmalısınız");
+define("L_PRIV_REPLY_LOGIN", LOGIN_LINK."Deki bir gönderiye cevap vermek için ve</A> yukarıda listelenen Ö.M’lardan birine cevap vermek için sohbete giriş yapmalısınız");
 
 // Language names
 define("L_LANG_AR", "Arjantin İspanyolcası");
@@ -624,6 +626,7 @@ define("L_SKINS_TITLE", "Desen önizlemesi");
 define("L_SKINS_TITLE1", "%s den %s e kadar desenlerin önizlemesi"); // Skins 1 to 4 preview
 define("L_SKINS_AV", "Mevcut desenler");
 define("L_SKINS_NONAV", "\"skins\" klasöründe tanımlanmış bir stil bulunmuyor.");
+define("L_SKINS_COPY", "&copy; %s Desen %s"); //© 2008 Skin by AuthorName
 
 // Swap image titles by Ciprian
 define("L_GEN_ICON", "Cinsiyet ikonu");
@@ -646,4 +649,17 @@ define("L_LOGIN_COUNT", "Ziyaretler toplamı"); // number of logins (returning v
 
 // Gravatar from email mod by Ciprian - more info on http://www.gravatar.com
 define("L_GRAV_USE", "Gravatar kullanın");
+
+// Uploader mod by Ciprian - 11.08.2008
+define("L_UPLOAD", "Yükle %s"); // Upload Image, Upload Sound or Upload File
+define("L_UPLOAD_IMG", "Resim dosyası"); // used to upload Avatars and /img command
+define("L_UPLOAD_SND", "Ses dosyası"); // used to upload Buzz sounds
+define("L_UPLOAD_FLS", "Dosyalar"); // used to upload multiple files at once
+define("L_UPLOAD_SUCCESS", "%s dosyası, %s olarak başarıyla yüklendi."); // original filename, destination filename
+define("L_FILES_TITLE", "Dosya yükleme yönetimi ");
+
+// Room restriction mod by Ciprian
+define("L_ERR_USR_28", "%s ’e girişiniz reddedildi!<br />Lütfen başka bir oda seçiniz."); // room name
+define("L_RESTRICTED", "Özel");
+define("L_RESTRICTED_ROM", "%s bu odadan başarıyla çıkarıldı.");
 ?>

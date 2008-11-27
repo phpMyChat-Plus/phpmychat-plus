@@ -41,7 +41,7 @@ define("L_SET_14", "chatte");
 define("L_SET_15", "Standard private chatrum");
 define("L_SET_16", "Private rum oprettet af brugere");
 define("L_SET_17", "Vælg dit avatar");
-define("L_SET_18", "Føj denne side til dine favoritter: tryk på \"CTRL +D\".");
+define("L_SET_18", "Føj denne side til dine favoritter: tryk på \"Ctrl+D\".");
 
 define("L_SRC", "fås gratis på");
 

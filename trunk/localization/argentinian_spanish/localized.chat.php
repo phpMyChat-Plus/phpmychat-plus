@@ -42,7 +42,7 @@ define("L_SET_14", "chat");
 define("L_SET_15", "Salón privado por defecto");
 define("L_SET_16", "Salones privados creados por usuarios");
 define("L_SET_17", "Elige tu imagen");
-define("L_SET_18", "Dejar señalada esta página: presioná \"CTRL +D\".");
+define("L_SET_18", "Dejar señalada esta página: presioná \"Ctrl+D\".");
 
 define("L_SRC", "están habilitados");
 

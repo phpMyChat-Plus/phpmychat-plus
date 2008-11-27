@@ -41,7 +41,7 @@ define("L_SET_14", "chat");
 define("L_SET_15", "Salons privés par défaut");
 define("L_SET_16", "Salons privés créés par les utilisateurs");
 define("L_SET_17", "Sélectionnez votre avatar");
-define("L_SET_18", "Pour créer un raccourci de cette page: appuyez sur \"CTRL +D\".");
+define("L_SET_18", "Pour créer un raccourci de cette page: appuyez sur \"Ctrl+D\".");
 
 define("L_SRC", "est disponible gratuitement sur");
 

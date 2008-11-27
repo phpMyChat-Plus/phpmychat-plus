@@ -42,7 +42,7 @@ define("L_SET_14", "chatten");
 define("L_SET_15", "Standaard privé ruimtes");
 define("L_SET_16", "Privé ruimtes gemaakt door gebruikers ");
 define("L_SET_17", "Kies uw avatar");
-define("L_SET_18", "Markeer deze page: druk \"CTRL +D\".");
+define("L_SET_18", "Markeer deze page: druk \"Ctrl+D\".");
 
 define("L_SRC", "vrijelijk verkrijgbaar op");
 

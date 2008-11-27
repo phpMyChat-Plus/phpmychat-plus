@@ -44,7 +44,7 @@ define("L_SET_14", "Chat");
 define("L_SET_15", "Private Räume");
 define("L_SET_16", "Privater Raum erstellt durch User");
 define("L_SET_17", "Wählen Sie Ihren Avatar");
-define("L_SET_18", "Setzen Sie ein Lesezeichen: drücke \"STRG +D\".");
+define("L_SET_18", "Setzen Sie ein Lesezeichen: drücke \"Strg+D\".");
 
 define("L_SRC", "ist kostenlos verfügbar bei");
 
