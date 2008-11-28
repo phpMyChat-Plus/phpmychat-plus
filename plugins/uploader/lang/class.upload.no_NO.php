@@ -72,7 +72,7 @@
     $translation['source_not_readable']         = 'Kildefilen er ikke lesbar Videre "prosess" kan ikke utføres.';
     $translation['no_create_support']           = 'Oppretting av filen %s støttes ikke.';
     $translation['create_error']                = 'Det oppsto en feil ved oppretting av bildet %s fra kildefilen.';
-    $translation['source_invalid']              = 'Kan ikke lese bilde-data. Er filen et bilde?.';
+    $translation['source_invalid']              = 'Kan ikke lese bilde-data. Er filen et bilde?';
     $translation['gd_missing']                  = 'Finner ikke støtte for GD. Innstaler GD bibliotek (GD2 anbefales brukt).';
     $translation['watermark_no_create_support'] = 'Oppretting av filen %s støttes ikke. Vannmerket kan ikke leses.';
     $translation['watermark_create_error']      = 'Kan ikke lese filen %s. Vannmerket kan ikke opprettes.';
