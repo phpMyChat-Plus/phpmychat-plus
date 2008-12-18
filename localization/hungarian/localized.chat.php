@@ -621,7 +621,7 @@ define("L_SKINS_TITLE", "Stílus előnézet");
 define("L_SKINS_TITLE1", "%s-%s stílus előnézet"); // Skins 1 to 4 preview
 define("L_SKINS_AV", "Elérhető stílus");
 define("L_SKINS_NONAV", "Nincs stílus meghatározva a \"skins\" tárban");
-define("L_SKINS_COPY", "&copy; %s Stílus készítő: %s"); //© 2008 Skin by AuthorName
+define("L_SKINS_COPY", "&copy; %s Stílus: %s"); //© 2008 Skin by AuthorName
 
 // Swap image titles by Ciprian
 define("L_GEN_ICON", "Nem ikon");
