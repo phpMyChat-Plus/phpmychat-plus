@@ -12,4 +12,3 @@ Remote Login box mod - by Ciprian
 This mod allows you to add a login box (username, password and chat button) on any other pages of your site.
 The popup automatically login the user into the first/default public room available.
 Open plus/remote_login.php file and read the first lines for details about the exact usage.
-
