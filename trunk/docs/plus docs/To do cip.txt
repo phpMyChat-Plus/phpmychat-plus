@@ -10,14 +10,14 @@ Some of those features are:
 --Point and click status menu in Chat so the users can set their status.
 
 -speech/voice chat plugin
--add Private channels popup - separate private conversations - mirc like - based on Volkan Övün idea.
+-add Private channels popup - separate private conversations - mirc like - based on Volkan Ã–vÃ¼n idea.
 -allow power users whispers when pm is disabled - based on Peter Petrov idea.
 -boot/kick from admin panel
 -runCMD - to return the old M content after using a click (command) - Ciprian
 -Statistics mod - Mei Yung - ?
 -add the members page/profiles - Ciprian
 -credits page - Ciprian
--/ghost command: put the user into a ghost state (the ghost user and his posts cannot be seen in the room, he won’t know about this, so he gives up and leave the chat - works when banning has no effect on a specific user; it also allows an admin/moder to go invisible in the chat); - Ciprian
+-/ghost command: put the user into a ghost state (the ghost user and his posts cannot be seen in the room, he wonâ€™t know about this, so he gives up and leave the chat - works when banning has no effect on a specific user; it also allows an admin/moder to go invisible in the chat); - Ciprian
 -commands table & archiving/logging the commands used in chat as well - Ciprian
 -cookie handler - to delete the old cookies automatically on new installs/upgrades and to remove the old room names on panel changes - Ciprian
 -automatically delete cookies after upgrade on each client machine - Ciprian (not sure yet how to do this - how can we check if a user is first time loading the page?)
@@ -27,7 +27,7 @@ Some of those features are:
 -add the gallery feature (not sure if useful/reliable, as the hosting space/size is variable and can be limited for many users) - Ciprian
 -cell right align in chat (for right-to-left languages); also some display order fixes needed - I will adjust all these as it goes, but mainly when a right-to-left language will be translated - Ciprian
 
-I want to allow permissions for certain rooms without them having to "sign in"  and keep people out of them that aren’t supposed to be there.  Is that possible? Say I want to make room three where only certain people can get in it, I don’t want them to have to have a special password, but just be approved for there.  It would be something I would have to "allow" as an admin.
+I want to allow permissions for certain rooms without them having to "sign in"  and keep people out of them that arenâ€™t supposed to be there.  Is that possible? Say I want to make room three where only certain people can get in it, I donâ€™t want them to have to have a special password, but just be approved for there.  It would be something I would have to "allow" as an admin.
 Could we write a code in the styles, like "get permission" for a certain room? Where it would show up on the admin cp?
 
 
@@ -36,7 +36,7 @@ Done:
 -the bot will dissapear from userlists when chat rooms clean.lib or logs.lib are in action - Ciprian - done
 -allow admins/moders to go invisible in the chat from panel - Ciprian - done
 -room names check for invalid chars in admin panel - urgent - Ciprian - done
--add the mod admin permissions (to moderate moders as well, but cannot admin/kick the admin) (based on Luke’s idea & Cissy’s request) - Ciprian - done - Top Moderator power ("topmod", "t")
+-add the mod admin permissions (to moderate moders as well, but cannot admin/kick the admin) (based on Lukeâ€™s idea & Cissyâ€™s request) - Ciprian - done - Top Moderator power ("topmod", "t")
 -change the update feature to @fsock - no improvement, so changed to fsockopen; also added the disable option in panel. - Ciprian - done
 -Log archive - Ciprian - done
 -img width in config - Ciprian -done
@@ -54,10 +54,10 @@ Done:
 -dice3 addition - done
 -dices eval(messages) fixed in firefox - Ciprian - done
 -unspecified gender field in profiles - Ciprian - done
--conversation with the robot also private (based on Sally Linus Lucy’s idea) - Ciprian - done (1.90)
--option for admin to totally disable private messaging in chat (/to and /wisp) (based on bluntdog’s idea) - Ciprian - done (1.90)
--add the size command to dynamically change the font size in messages frame (based on Sally Makeham’s idea) - Ciprian - done (1.90)
--promote to moderator - not from private rooms (mods only by creating a non-default room shouldn’t have powers in any other rooms) - (based on bugs submitted on SourceForge.net) - Ciprian
+-conversation with the robot also private (based on Sally Linus Lucyâ€™s idea) - Ciprian - done (1.90)
+-option for admin to totally disable private messaging in chat (/to and /wisp) (based on bluntdogâ€™s idea) - Ciprian - done (1.90)
+-add the size command to dynamically change the font size in messages frame (based on Sally Makehamâ€™s idea) - Ciprian - done (1.90)
+-promote to moderator - not from private rooms (mods only by creating a non-default room shouldnâ€™t have powers in any other rooms) - (based on bugs submitted on SourceForge.net) - Ciprian
 -I would be pleased if it would be possible to insert reasons for kicking and banning (based on a Feature Request submited by miukumauku on SourceForge) - Ciprian - done (1.91)
 /kick lamer Spamming would print:
 [11:02] lamer was kicked (reason: Spamming)
@@ -65,7 +65,7 @@ Done:
 -archiving/logging/lurking the pictures links posted using the /img command - Ciprian - done
 -change the pm function to > / done (1.91)
 -fix the pmpopup script error - done
--Is there a way to tie your profile color to your chat text color, and not just the nick? (based on Auggy’s idea) - Ciprian - done
+-Is there a way to tie your profile color to your chat text color, and not just the nick? (based on Auggyâ€™s idea) - Ciprian - done
 -text cell valign top on messages (for smilies) - Ciprian - done
 -default color font stored in database not cookie - Ciprian ??? (too many connections - it will stay in cookie and database - no security issue) - done
 - is there any tool available or planned to reset user passwords? - Ciprian - done

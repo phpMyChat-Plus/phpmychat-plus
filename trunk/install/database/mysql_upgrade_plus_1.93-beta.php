@@ -36,7 +36,7 @@ ALTER TABLE ".$t_config."
 			ADD RES_ROOM5 enum('0','1') NOT NULL default '0';
 ", $conn);
 mysql_query("
-UPDATE ".$t_config."
+UPDATE ".$t_config." SET
 			CMDS = '/away /buzz /demote /dice /dice2 /dice3 /high /img /mr<br />/room /size /sort /topic /wisp',
 			MODS = 'Advanced Admin, (GR)Avatars, Smilies Popup, Color Drop Box, Private Popup,<br />Quick Menu, Logs Archive, Lurking, Color names, WorldTime, UTF-8',
 			ROOM_SKIN1 = '1',

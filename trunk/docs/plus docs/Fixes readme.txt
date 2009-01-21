@@ -1,4 +1,4 @@
-Note: if you’ve already modded your own files, please compare and edit the changes from those included in this log to identify the changes made for the fix. If not, just replace them in the according folders.
+Note: if youâ€™ve already modded your own files, please compare and edit the changes from those included in this log to identify the changes made for the fix. If not, just replace them in the according folders.
 This log includes all the previously released fixes.
 Client browsers - tested with:
 	- IE < 5.5 = M;
@@ -21,18 +21,19 @@ Server environment - tested env:
 	- mail function support (optional).
 
 Known issues (read also the FAQ):
-- configurations cannot be saved from admin panel on servers having magic_quotes set "on"; this also happen if the c_config table structure has been altered somehow and it doesn’t exactly follow the admin5.php field definitions; another identified reason would be the use of single quote ’ in field values (like Room’s Names or such) - never use single quotes - use the utf-8 ’ instead (you can copy it from here when you need it)
-- when a username uses utf-8 chars like ã î â , php cannot recognize a name with small caps as being similar with caps (Îrban is different than îrban) so please make sure you use the name in PMs and commands exacly as the one of the desired username (this is working fine on php > 5 servers, due to the added mb_* functions support);
-- on IE7, registered users don’t always actually leave the chat after clicking the Exit door or Exit link - the loader frame doesn’t actually close but keep showing that user to the users’ lists until the user closes that specific browser window.
+- configurations cannot be saved from admin panel on servers having magic_quotes set "on"; this also happen if the c_config table structure has been altered somehow and it doesnâ€™t exactly follow the admin5.php field definitions; another identified reason would be the use of single quote â€™ in field values (like Roomâ€™s Names or such) - never use single quotes - use the utf-8 â€™ instead (you can copy it from here when you need it)
+- when a username uses utf-8 chars like Äƒ Ã® Ã¢ , php cannot recognize a name with small caps as being similar with caps (ÃŽrban is different than Ã®rban) so please make sure you use the name in PMs and commands exacly as the one of the desired username (this is working fine on php > 5 servers, due to the added mb_* functions support);
+- on IE7, registered users donâ€™t always actually leave the chat after clicking the Exit door or Exit link - the loader frame doesnâ€™t actually close but keep showing that user to the usersâ€™ lists until the user closes that specific browser window.
 
-Important: everytime you upgrade/reinstall a phpmychat server or change sensitive data in Admin panel (like default room names), the old cookies must be deleted from the clients’ machines - so let your users know! (also cache clearing might be a good idea)
-When you install Firefox2 and/or QuickTime (RealPlayer), a QuickTime plugin will break the WMP plugin in IE, necesary for playing .wav sounds, therefore, you won’t get sounds in IE anymore. I fixed it by playing with enabling WMP/disabling QuickTime plugins in IE; re-associating the "wav" files in Media Player/Tools/Options/File Types also fixes this.
+Important: everytime you upgrade/reinstall a phpmychat server or change sensitive data in Admin panel (like default room names), the old cookies must be deleted from the clientsâ€™ machines - so let your users know! (also cache clearing might be a good idea)
+When you install Firefox2 and/or QuickTime (RealPlayer), a QuickTime plugin will break the WMP plugin in IE, necesary for playing .wav sounds, therefore, you wonâ€™t get sounds in IE anymore. I fixed it by playing with enabling WMP/disabling QuickTime plugins in IE; re-associating the "wav" files in Media Player/Tools/Options/File Types also fixes this.
 On some pcs a restart might be necessary.
 We also added a small IE fixing script (reg file) as a link in Extra Options in chat.
 
 Fixes History:
 27.08.2008 - 1.93-RC4:
 - fixed the installer to handle files on Windows-based servers; (functionality related)
+- replaced some avatar images to avoid copyright infringement (copyright related)
 - added 15 more avatars; (display related)
 - fixed the Logs pages for servers in SAFE MODE; (functionality related)
 - several minor warnings dismissed when the server sessions is disabled; (functionality related)
@@ -53,10 +54,10 @@ Fixes History:
 - translation updates for all included languages; (localization related)
 10.06.2008 - 1.93-RC2:
 - small installer pagination fixes; (localization related)
-- banner.php filename is changed now to topic.php as well as all it’s old references; the AdBlock and AdBlock Plus plugins in Firefox were blocking it because the previous filename (banner.php) stands for advertisments; (functionality related)
+- banner.php filename is changed now to topic.php as well as all itâ€™s old references; the AdBlock and AdBlock Plus plugins in Firefox were blocking it because the previous filename (banner.php) stands for advertisments; (functionality related)
 - the bot will not dissapear anymore from userlists when clean.lib or logs.lib are in action; (functionality related)
 - phpMyChat-Plus becomes the First Gravatarized LiveChat system in the world!!! (functionality extension)
-	- added option to display Gravatars as users’ avatars in chat (more details on gravatar.com);
+	- added option to display Gravatars as usersâ€™ avatars in chat (more details on gravatar.com);
 - added image preview for all the images fields/options in registration/edit user and admin panel; (functionality extension)
 - fixed the option for registered users to hide/undisclose their gender; (functionality related)
 - some archive improvements - all the off-line/unread pms will be kept in the database for a period of time set in admin panel -before, any pm would have been deleted together with the regular messages deletion; (functionality related)
@@ -83,7 +84,7 @@ Fixes History:
 - Cc and Bcc added for sending emails from admin panel - for more spam control (if someone is accessing Admin panel and start using the send email sheet, the Owner will get copies so he can take counter-measures); (security & functionality extensions)
 - translation updates for all included languages; (localization related)
 30.03.2008 - 1.93-beta7:
-- several tutorial fixes - thanks to Peter’s suggestions; (translation related)
+- several tutorial fixes - thanks to Peterâ€™s suggestions; (translation related)
 - registration control have been added, so an admin can now review and approve who gets registered and who gets to chat; - there is a hint added in admin panel with usage instructions - (functionality extension)
 - sending mail functions have been improved to completely support utf-8 encoded emails. - (functionality related)
 - Bulgarian has been added - thanks to Peter; (localization related)
@@ -138,7 +139,7 @@ Fixes History:
 - config/config.lib.php changed (replaced "localized.owner" with "owner"); (functionality related)
 - buzz_popup fix, to hide the .txt files in the sounds folder (some user also uploaded the redme.txt provided in the extrasounds archive); (functionality related)
 - ghost mode fix - the conected_users number was still showing the hiden users; (functionality related)
-- counter fix - counter won’t increase for one hour per each visitator - before, it was counting each time the user loaded/reloaded the login page; (functionality related)
+- counter fix - counter wonâ€™t increase for one hour per each visitator - before, it was counting each time the user loaded/reloaded the login page; (functionality related)
 - new gender added (couple); (functionality extension)
 - added an option to display both avatars and gender icons, only one of them or neither one; (functionality extension)
 - one more field added to the c_config table in the database.
@@ -181,12 +182,12 @@ After 1.92 release fixes (f means the released fix):
 - 1.92 final release get announced and available for download; (release)
 - Admin Config panel Menu is fully working now; also several explanations/hints adjusted; (functionality & administration related)
 - Random Quote mod settings improvements in Admin panel; (administration related)
-- lot of file changes and several database updates as per each 1.91-beta stage, but it isn’t worth to be mentioned here.
+- lot of file changes and several database updates as per each 1.91-beta stage, but it isnâ€™t worth to be mentioned here.
 
 26.10.2007 - 1.91-beta9:
 - added links and email addresses to topics!; (functionality related)
 - fixed urls and email parsing by /away command and logging; (functionality related)
-- IP logs fix for creating  new log after deleting it from Admin panel; actually, IP logs don’t get deleted but backed up into the acounter/pages/bak folder; (functionality related)
+- IP logs fix for creating  new log after deleting it from Admin panel; actually, IP logs donâ€™t get deleted but backed up into the acounter/pages/bak folder; (functionality related)
 - several logging improvements; (functionality related)
 - new PMs & whispers will not get cleaned up/archived until they get read; (functionality related)
 - Added multilangual PayPal buttons for desirable donations; (support & localization related)
@@ -194,13 +195,13 @@ After 1.92 release fixes (f means the released fix):
 20.10.2007 - 1.91-beta8:
 - fixed url/email parsing in private messaging popups; (functionality related)
 - Firefox select boxes color fixed - in both input frame and Config tab; (functionality related)
-- added a new option: to allow/suspend registrations; (based on GazB’s idea) (functionality related)
+- added a new option: to allow/suspend registrations; (based on GazBâ€™s idea) (functionality related)
 - added localized Google Adsearch on index. (support & localization related)
 
 10.10.2007 - 1.91-beta7:
 - some tutorial fixes/changes; (localization related)
 - Firefox center issue fixed - to align center tables/content in admin pages, exit frame and link frame; (functionality related)
-- added a new power to the chat users: "Top Moderator"; this has all the admin’s powers, except Admin panel access; (based on Luke’s idea & Cissy’s request) (functionality related)
+- added a new power to the chat users: "Top Moderator"; this has all the adminâ€™s powers, except Admin panel access; (based on Lukeâ€™s idea & Cissyâ€™s request) (functionality related)
 - language changes/updates to include the Turkish grammar needs for different order of words in sentences; (localization related)
 
 01.10.2007 - 1.91-beta6:
@@ -213,18 +214,18 @@ After 1.92 release fixes (f means the released fix):
 - language names translated in each lang; (localization related)
 - 2D/3D flags (including UK/US flags now) displaying option in admin panel; (display related)
 - utf-8 compatibility added for usernames and roomnames - specific language chars can now be used in user and room names - wow! (localization related)
-- Turkish language added - (localization project) - Thanks to Volkan Övün <vovun@hotmail.com>.
+- Turkish language added - (localization project) - Thanks to Volkan Ã–vÃ¼n <vovun@hotmail.com>.
 - The best phpMyChat Installer script finally added (also ftp chmod operations are done directly from the setup page); (installation related)
 
 Known issues (as of 1.91-beta6):
-- /img won’t work on php5 due to some deprecated image resizing function in this php version - still working on fixing this (it might be just a specific setting on the tested server - needs to be tested on a different php5 server too);
-- installer won’t work for 1.91-beta versions of phpMyChat Plus - as a support: export the current database structure to a file and send it to Ciprian at ciprianmp@yahoo.com, in order to get your specific db upgrade script; (note: the reason is I lost the track of how many beta minor versions of the database have been distributed in the last months, so the db structures differ now, even for the same beta version - sorry!)
+- /img wonâ€™t work on php5 due to some deprecated image resizing function in this php version - still working on fixing this (it might be just a specific setting on the tested server - needs to be tested on a different php5 server too);
+- installer wonâ€™t work for 1.91-beta versions of phpMyChat Plus - as a support: export the current database structure to a file and send it to Ciprian at ciprianmp@yahoo.com, in order to get your specific db upgrade script; (note: the reason is I lost the track of how many beta minor versions of the database have been distributed in the last months, so the db structures differ now, even for the same beta version - sorry!)
 
 28.08.2007 - 1.91-beta5:
 - Beta downloads available on ciprianmp.com/atm for testing purposes; (release candidates)
 - Worldtime fixes in the status bar (this feature should work fine without changes until 2012 - from the DST point of view - it also includes the latest changes for USA DST schedules); (functionality related)
 - Login/logout sessions start/destroy fixed now - no more error logs; (functionality related)
-- Language personalizations shouldn’t be carried out by changing the default language files included, but adding the desired definitions in the plus/localization/_owner/localized.owner.php file provided. Read FAQ for usage hints. (functionality extension)
+- Language personalizations shouldnâ€™t be carried out by changing the default language files included, but adding the desired definitions in the plus/localization/_owner/localized.owner.php file provided. Read FAQ for usage hints. (functionality extension)
 - /dice command is now configurable to show images and numbers, only numbers or just totals (this can be changed in lib/commands/dice.cmd.php file); (functionality extension)
 - /img links can now contain spaces; (functionality related)
 - Ghost Control mod added - Admin can set in Config panel to hide admins or/and moderators in chat; (functionality extension)
@@ -266,14 +267,14 @@ Known issues (as of 1.91-beta6):
 		The Reason field added in both Admin panels ("Registered Users" and "Banished Users") to add/edit the reason of banishment (the reson will be displayed to the banished user everytime he tries to login)
 - Changed the Help link image from ? to Help text. (functionality related)
 - Fixed the Archive/Log feature to display the right formated system messages: entrances/exits from chat, topic changes, announcements, aso. It is also multi-langual, according to the reader language (functionality related)
-- Fixed the /invite command to remove sender’s name from the invitation list (based on Matias Oliveira feedback, a user could have invited himself, in the same room, of course) (functionality related)
+- Fixed the /invite command to remove senderâ€™s name from the invitation list (based on Matias Oliveira feedback, a user could have invited himself, in the same room, of course) (functionality related)
 - /topic command improvements: (functionality related)
 		- Topic subject now stored in a file in botfb (keep it shown in banners even after messages clean-up);
 		- There are two types of topics now: global (for all rooms) and specific (for each room);
 		- /topic * and /topic * top reset are used to post global topics;
 		- Priority of topics (if multi-topics allowed in admin panel):
 			- 1. specific topics set with /topic command;
-			- 2. global topics set with /topic * command (if specific doesn’t exist);
+			- 2. global topics set with /topic * command (if specific doesnâ€™t exist);
 			- 3. local topics stored in banner.php (these will be moved to Admin panel as well soon)
 - Several security fixes and other mods by and thanks to Alexander Eisele <xaex@xeax.de>
 		- Links clean-up/popup mod; (security related)
@@ -302,10 +303,10 @@ Known issues (as of 1.91-beta6):
 - Changed the active links look and feel in the chat to overcome the scrolling bug when clicking a name/avatar in messages frame (functionality related)
 SQL updates:
 - Added five more fields in table c_config:
-		- [COLOR_CM2 VARCHAR(25) NOT NULL default ’’ AFTER COLOR_CM1];
-		- [CHAT_BOOT enum(’0’,’1’) NOT NULL default ’1’], [WELCOME_SOUND varchar(255) NOT NULL default ’’], [WORLDTIME enum(’0’,’1’,’2’) NOT NULL default ’2’] and [UPD_CHECK enum(’0’,’1’) NOT NULL default ’1’] at the end of table;
-- Added two more fields in table c_reg_users at the beginning of the table: [id int(11) NOT NULL default ’0’] and [cid int(11) NOT NULL auto_increment] - for further implementation of integrations with other cms (ModX, forums, etc.);
-- Changed the ALLOW_ENTRANCE_SOUND field type from enum(’0’,’1’) to enum(’0’,’1’,’2’,’3’) in c_config table;
+		- [COLOR_CM2 VARCHAR(25) NOT NULL default â€™â€™ AFTER COLOR_CM1];
+		- [CHAT_BOOT enum(â€™0â€™,â€™1â€™) NOT NULL default â€™1â€™], [WELCOME_SOUND varchar(255) NOT NULL default â€™â€™], [WORLDTIME enum(â€™0â€™,â€™1â€™,â€™2â€™) NOT NULL default â€™2â€™] and [UPD_CHECK enum(â€™0â€™,â€™1â€™) NOT NULL default â€™1â€™] at the end of table;
+- Added two more fields in table c_reg_users at the beginning of the table: [id int(11) NOT NULL default â€™0â€™] and [cid int(11) NOT NULL auto_increment] - for further implementation of integrations with other cms (ModX, forums, etc.);
+- Changed the ALLOW_ENTRANCE_SOUND field type from enum(â€™0â€™,â€™1â€™) to enum(â€™0â€™,â€™1â€™,â€™2â€™,â€™3â€™) in c_config table;
 - Changed the COLOR_CDC1 field name and type to COLOR_CD8 VARCHAR(25) in c_config table;
 - Changed the COLOR_CDC2 field name and type to COLOR_CD9 VARCHAR(25) in c_config table;
 - Changed the COLOR_CDC3 field name and type to COLOR_CA VARCHAR(25) in c_config table;
@@ -313,13 +314,13 @@ SQL updates:
 - Changed the COLOR_CDC5 field name and type to COLOR_CA2 VARCHAR(25) in c_config table;
 - Changed the COLOR_CDC6 field name and type to COLOR_CM VARCHAR(25) in c_config table;
 - Changed the COLOR_CDC7 field name and type to COLOR_CM1 VARCHAR(25) in c_config table;
-- Changed the values of the following fields in c_config table as follows: ENTRANCE_SOUND to ’sounds/beep.wav’, COLOR_CD2 to ’tomato’, COLOR_CD3 to ’dimgray’, COLOR_CD4 to ’indigo’, COLOR_CD7 to ’white’, COLOR_CD8 to ’magenta’, COLOR_CD9 to ’blueviolet’;
-- Changed the value of language field in c_reg_users table for bot: language = ’English, German’;
+- Changed the values of the following fields in c_config table as follows: ENTRANCE_SOUND to â€™sounds/beep.wavâ€™, COLOR_CD2 to â€™tomatoâ€™, COLOR_CD3 to â€™dimgrayâ€™, COLOR_CD4 to â€™indigoâ€™, COLOR_CD7 to â€™whiteâ€™, COLOR_CD8 to â€™magentaâ€™, COLOR_CD9 to â€™bluevioletâ€™;
+- Changed the value of language field in c_reg_users table for bot: language = â€™English, Germanâ€™;
 Files edited: too many to be listed
 Files removed:
 - plus/config/color.lib.php;
 - plus/lib/update.lib.php;
-- plus/extra/.htaccess; - should be removed when upgrading - very important (fixes.zip link won’t work)!
+- plus/extra/.htaccess; - should be removed when upgrading - very important (fixes.zip link wonâ€™t work)!
 Files moved:
 - plus/images/nums(1-6).gif to plus/images/dice/nums(1-6).gif;
 Files added:
@@ -339,7 +340,7 @@ Files updated:
 - plus/images/helpOff.gif;
 
 06.08.2006 - 1.90:
-- /size command added (changes the font size of the messages’ text in the rooms) (functionality extension)
+- /size command added (changes the font size of the messagesâ€™ text in the rooms) (functionality extension)
 - Help file udated to include the demote and size commands usage (support related)
 - Tutorial updated to include the demote and room command usage (on Promote and Announce sections) (support related)
 - Romanian language updated and included (localization related)
@@ -349,7 +350,7 @@ Files updated:
 - Bot can be enabled now in more than one room (before, it could talk only in the single room he was running; now, he can talk public to people in each room he is enabled in - at this point, the bot will have the same name in everyroom he is enabled - should we change that so he might have more names? umm...) (functionality extension)
 - Fixed the bot responses by removing some trailing expressions from the user input (like /to , /to Re: , Re: , and others) - that made bot answer very strange before on replies (Ummm... and non-senses) (functionality related)
 		- I have to admit, this was caused by my own mistakes (priv popup mod) not checking what is actually the user input to the bot in bot_conversationlog
-- Extra setting for bot: disable/enable public conversations - the bot can be running in chat but won’t talk to the public, only private (functionality related)
+- Extra setting for bot: disable/enable public conversations - the bot can be running in chat but wonâ€™t talk to the public, only private (functionality related)
 - Room says command improved (roleplaying useful): a narator can say something to all the rooms using the [/room * message to display] command (functionality extension)
 - Welcome messages moved to localization/[lang]/localized.chat.php - no need for lib/welcome.lib.php anymore (localization/optimization related)
 - Number of default rooms and which to be used/shown can now also be defined/configured in Admin Panel (no more file editting needed for that) (support related)
@@ -357,7 +358,7 @@ Files updated:
 - Changed the version format from vX.X to X.XX (v1.9 is called now 1.90)
 SQL updates:
 - CMDS, MODS, QUICKA, QUICKM and QUICKU fields of the c_config table have been updated to include the latest commands/mods (for the login page and Quick menu in the chat); //this step is not compulsory for upgrades from 1.7 or 1.8
-- Added two more fields [BOT_HELLO varchar(100) NOT NULL default ’’] and [BOT_BYE varchar(100) NOT NULL default ’’] at the end of table c_messages;
+- Added two more fields [BOT_HELLO varchar(100) NOT NULL default â€™â€™] and [BOT_BYE varchar(100) NOT NULL default â€™â€™] at the end of table c_messages;
 - IP and description fields values for the bot in c_reg_users have been updated to make more sense about how to use the bot;
 Files edited:
 - plus/avatar.php;
@@ -429,15 +430,15 @@ To do (other then To do Cip.txt):
 
 31.07.2006 - v1.8:
 - The bot has been enhanced (thanks to Sally Linus for her ideas)! It acts now just like any other human user in the chat. It can be invoked privately and it'll answer privately. Bot can talk from different rooms. (functionality extension)
-- private messaging have been improved (mostly because of the bot improvements); it shows an user’s whisper also to him (in his room), not just to the receiver (in the destination room). It can extend the functionality in the future. (functionality related)
+- private messaging have been improved (mostly because of the bot improvements); it shows an userâ€™s whisper also to him (in his room), not just to the receiver (in the destination room). It can extend the functionality in the future. (functionality related)
 - the code was cleaned up a bit in several files. (size related)
 - some more details in Installation/Instructions.txt for editing the config database details. (support related)
 - created mysql database upgrade files for different versions of phpmychat. (installation related)
 - added the docs/plus docs/Plus FAQ.txt. (support related)
 - NEW&COOL: the admin panel/configuration tab now checks the official website for new versions released and alert the admin of a new version published, then the admin can directly open the download page! (support related)
 SQL updates:
-- Added one more field [room_from varchar(’30’) NOT NULL default ’’] at the end of table c_messages
-Files edited = 41 - too many to mention here (most of the files because of the c_messages fields’ number modification);
+- Added one more field [room_from varchar(â€™30â€™) NOT NULL default â€™â€™] at the end of table c_messages
+Files edited = 41 - too many to mention here (most of the files because of the c_messages fieldsâ€™ number modification);
 Files moved:
 - Instructions.txt - from plus/docs/plus docs to plus/install/;
 Files added:
@@ -448,17 +449,17 @@ Files added:
 - plus/install/database/mysql_std_0.12.txt;		//I really hope no one use such an old version
 - plus/install/database/mysql_std_0.13.txt;		//I really hope no one use such an old version
 - plus/install/database/mysql_std_0.14-0.15.txt;
-- 111 aiml files for bot to be loaded (distributed as optional before) - you can remove the ones you don’t want, before loading them into the database (these are the most interesting I found over the internet 1 year ago. if anyone has time to check them out and optimize them, it would be appreciated)
+- 111 aiml files for bot to be loaded (distributed as optional before) - you can remove the ones you donâ€™t want, before loading them into the database (these are the most interesting I found over the internet 1 year ago. if anyone has time to check them out and optimize them, it would be appreciated)
 
-05.07.2006: - v1.7 - The Plus version is called now v1.7 and it’s mature enough to become a final release (New name: phpMyChat-Plus v1.7 - not "based on 0.15.4" anymore - this is not alpha nor beta, it is not preview nor starter edition - it is the mature version of phpMyChat - I hope Nick Hozey will agree with me, as well as the other contributors who might have tried the Plus version so far)
-- Main reason of this release: Firefox is now treated as an "H" browser due to Popeye’s flickering fix, so I wanted to improve its behavior a little bit.
+05.07.2006: - v1.7 - The Plus version is called now v1.7 and itâ€™s mature enough to become a final release (New name: phpMyChat-Plus v1.7 - not "based on 0.15.4" anymore - this is not alpha nor beta, it is not preview nor starter edition - it is the mature version of phpMyChat - I hope Nick Hozey will agree with me, as well as the other contributors who might have tried the Plus version so far)
+- Main reason of this release: Firefox is now treated as an "H" browser due to Popeyeâ€™s flickering fix, so I wanted to improve its behavior a little bit.
 - /buzz command improvements: (functionality related)
  - able to choose different sounds to be sent;
  - the buzz messages get deleted after 60 secs if they were sent like "/buzz" (if there is any text sent like "/buzz hello there", those messages remain in the database to be seen by the users in chat);
  - all the sounds embedded by the buzz command get removed after 10 seconds:
   - only admins and moderators can use it by default (reg users could use it before) - this can be changed in the buzz.cmd.php file
   - the sound is only played once - this makes it usable in Firefox as well;
-  - users logged into chat after buzz commands have been sent, won’t hear any old sounds;
+  - users logged into chat after buzz commands have been sent, wonâ€™t hear any old sounds;
  - Usage (read the help for more details):
   - old usage: "/buzz" or "/buzz message to be shown" - this plays the default sound for buzz defined in Admin panel;
   - extended usage: "/buzz ~newsound" or "/buzz ~newsound message to be shown" - this plays the newsound.wav file from the plus/sounds folder; please note the sign "~" to be used at the beginning of the second word, which is the name of the sound file without the extension .wav (no other extensions can be used by default).
@@ -468,15 +469,15 @@ Files added:
 - Fixed the mouse over for the Help and Profile images in input frame (the washout effect) (display and functionality related)
 - Increased the users frame width form 150 to 180 in frameset_def.lib.php (to fit the longer usernames) (display related)
 - Added the .htaccess file by default in the config folder, to deny the config.lib.php access from all (security related)
-- Improved the lurking feature to use the lib/connected_users.lib.php. Also fixed the chat_activity.php file to display the current status of the chat in remote pages. (it hasn’t been working properly before: no correct output) (functionality related)
-- Fixed the login handling (previously, admins couldn’t change the username or password for other accounts he might had - it as my bad, I misunderstood the role of $LIMIT variable in login.lib.php) (functionality related)
+- Improved the lurking feature to use the lib/connected_users.lib.php. Also fixed the chat_activity.php file to display the current status of the chat in remote pages. (it hasnâ€™t been working properly before: no correct output) (functionality related)
+- Fixed the login handling (previously, admins couldnâ€™t change the username or password for other accounts he might had - it as my bad, I misunderstood the role of $LIMIT variable in login.lib.php) (functionality related)
 - Fixed the edit avatar feature (added variable LIMIT in the url to and from avatar.php). An user could change his name or password even though he was logged in the chat because the avatar.php was losing the LIMIT value. (functionality related)
-- Fixed some display issues for the private/whisper messages (sender couldn’t see hiw own whispers - at this point, unfortunately, sender will see his whispers massages in all the rooms - note that whispers are called the private messages sent by command /wisp or /whisp, not by /msg or /to) (functionality related)
-- Fixed the botname display: The Bot’s name will not be displayed as link anymore in users lists nor messages frame - no more PM’s to bot (he ignored private messaging anyway) (functionality related)
+- Fixed some display issues for the private/whisper messages (sender couldnâ€™t see hiw own whispers - at this point, unfortunately, sender will see his whispers massages in all the rooms - note that whispers are called the private messages sent by command /wisp or /whisp, not by /msg or /to) (functionality related)
+- Fixed the botname display: The Botâ€™s name will not be displayed as link anymore in users lists nor messages frame - no more PMâ€™s to bot (he ignored private messaging anyway) (functionality related)
 - Added new feature: "Send email to the new registered user" (enabled by default in admin panel: EMAIL_USER value) containing the account data, including the password, for further references; It is based on Bob Dickow hack (Send an email to admin on new user registration) (functionality extended)
 - Extended feature: "Send email to the user & admin after the user changed his name/password by editing the profile" (enabled by default in admin panel: EMAIL_USER value) containing the account data, including the password, for further references; It is based on Bob Dickow hack (Send an email to admin on new user registration) (functionality extended)
 SQL updates:
-- Added one field [EMAIL_USER enum(’0’,’1’) NOT NULL default ’1’] at the end of table c_config
+- Added one field [EMAIL_USER enum(â€™0â€™,â€™1â€™) NOT NULL default â€™1â€™] at the end of table c_config
 Files edited = 53 - too many to mention here:
 Files added (61 optional extra sounds) - available as a separate pack (thanks to bluntdog):
 - plus/sounds/name.wav; //please be aware that some of the provided sounds contain bad language - listen to them in Media Player and remove the inappropriate ones.
@@ -497,12 +498,12 @@ Files edited:
 - plus/admin/admin4.php;
 
 08.12.2005:
-- Bot avatar and font color couldn’t be changed from the admin panel (functionality related).
+- Bot avatar and font color couldnâ€™t be changed from the admin panel (functionality related).
 Files edited:
 - plus/admin/admin5.php;
 
 07.12.2005:
-- plus/images/dice added for dice3 command (I’m very sorry, I forgot that folder).
+- plus/images/dice added for dice3 command (Iâ€™m very sorry, I forgot that folder).
 Files added:
 - plus/images/dice/1-100.gif;
 - plus/images/dice/index.html.
@@ -510,9 +511,9 @@ Files added:
 06.12.2005:
 - Autoboot feature improved/fixed:
 	- SYS dice should have been SYS dice1 in plus/lib/clean.lib.php (to count time from the last dice thrown, if the user has done noother activities) (functionality related);
-	- Normal users couldn’t login if the welcome message has been disabled. (very important - functionality related);
+	- Normal users couldnâ€™t login if the welcome message has been disabled. (very important - functionality related);
 - plus/chat folder contains now two files called index.php and index.php3 to redirect the users who are trying to login using the old bookmarks. Users will automatically be redirected to the new chatpath, whatever the name of the folder will be (plus, chat, etc.). You can safely delete the old index.html in that folder. (functionality related)
-- topic and skin fix for rooms called like this: Dan’s room (containing quotes) - I strongly suggest you don’t use special chars in your chat rooms names. At this point, posting in those rooms is not possible. (functionality related)
+- topic and skin fix for rooms called like this: Danâ€™s room (containing quotes) - I strongly suggest you donâ€™t use special chars in your chat rooms names. At this point, posting in those rooms is not possible. (functionality related)
 - non-wanted slashes (05.12.2005 fix related) removed in lurking and archive as well.
 Files edited:
 - plus/admin/admin8.php;
@@ -551,7 +552,7 @@ Files edited:
 
 29.11.2005:
 - banner.php (which shows the topics) for some reasons was not returning the right room name, as well as the room style (only on some servers) (display & functionality related);
-- lurking.php and admin8.php chat text couldn’t be read on dark backgrounds (black text on black background).
+- lurking.php and admin8.php chat text couldnâ€™t be read on dark backgrounds (black text on black background).
 Files edited:
 - plus/admin/admin8.php;
 - plus/admin/admin9.php;
