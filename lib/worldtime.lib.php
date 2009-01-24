@@ -144,30 +144,30 @@ function get_day_strf(plus)
 };
 
 
-// Calculates the European Daylight savings from 2006 to 2011
+// Calculates the European Union Daylight savings from 2009 to 2018
 function timedst_eu()
 {
 	timedsteu = 0;
 	timenow = <?php echo(time()); ?>;
-	if ((timenow > 1174784400 && timenow < 1193533199) || (timenow > 1206838800 && timenow < 1224982799) || (timenow > 1238288400 && timenow < 1256432399) || (timenow > 1269997200 && timenow < 1288486799) || (timenow > 1301187600 && timenow < 1319936399)) timedsteu = 1;
+	if ((timenow > 1238288400 && timenow < 1256432399) || (timenow > 1269997200 && timenow < 1288486799) || (timenow > 1301187600 && timenow < 1319936399) || (timenow > 1332637200 && timenow < 1351385999) || (timenow > 1364691600 && timenow < 1382835599) || (timenow > 1396141200 && timenow < 1414285199) || (timenow > 1427590800 && timenow < 1445734799) || (timenow > 1459040400 && timenow < 1477789199) || (timenow > 1490490000 && timenow < 1509238799) || (timenow > 1521939600 && timenow < 1540688399)) timedsteu = 1;
 	return timedsteu;
 };
 
-// Calculates the US Daylight savings from 2006 to 2011
+// Calculates the US Daylight savings from 2009 to 2015
 function timedst_usa()
 {
 	timedstusa = 0;
 	timenow = <?php echo(time()); ?>;
-	if ((timenow > 1173578400 && timenow < 1194141599) || (timenow > 1205028000 && timenow < 1225591199) || (timenow > 1236477600 && timenow < 1257040799) || (timenow > 1268532000 && timenow < 1289095199) || (timenow > 1299981600 && timenow < 1320544799)) timedstusa = 1;
+	if ((timenow > 1236477600 && timenow < 1257040799) || (timenow > 1268532000 && timenow < 1289095199) || (timenow > 1299981600 && timenow < 1320544799) || (timenow > 1331431200 && timenow < 1351994399) || (timenow > 1362880800 && timenow < 1383443999) || (timenow > 1394330400 && timenow < 1414893599) || (timenow > 1425780000 && timenow < 1446343199)) timedstusa = 1;
 	return timedstusa;
 };
 
-// Calculates the Sydney Daylight savings from 2007 to 2010
+// Calculates the Sydney Daylight savings from 2008 to 2017
 function timedst_syd()
 {
 	timedstsyd = 0;
 	timenow = <?php echo(time()); ?>;
-	if ((timenow > 1193536799 && timenow < 1207450800) || (timenow > 1223171999 && timenow < 1238900400) || (timenow > 1254621599 && timenow < 1270341000)) timedstsyd = 1;
+	if ((timenow > 1224986400 && timenow < 1238295599) || (timenow > 1256436000 && timenow < 1269745199) || (timenow > 1288490400 && timenow < 1301194799) || (timenow > 1319940000 && timenow < 1332644399) || (timenow > 1351389600 && timenow < 1364698799) || (timenow > 1382839200 && timenow < 1396148399) || (timenow > 1414288800 && timenow < 1427597999) || (timenow > 1445738400 && timenow < 1459047599) || (timenow > 1477792800 && timenow < 1490497199)) timedstsyd = 1;
 	return timedstsyd;
 };
 
