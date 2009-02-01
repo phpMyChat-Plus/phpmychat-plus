@@ -1,4 +1,4 @@
-Plus FAQ and Ciprian’s answers:
+﻿Plus FAQ and Ciprian’s answers:
 
 1Q.
 After installing, I get this error:

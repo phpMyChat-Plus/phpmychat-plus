@@ -404,7 +404,7 @@ if (eregi("<script", $description) || !eregi("mysql", $description))
 
 if ($picture)
 {
-	$prefix = (strpos($picture,"://") ? "" : "http://");
+	$prefix = ((strpos($picture,"://") || $email == 'bot@bot.com' || $email == 'quote@quote.com') ? "" : "http://");
 	?>
 	<TR>
 		<TD CLASS="whois" nowrap="nowrap" colspan=2><center><IMG SRC="<?php echo($prefix.htmlspecialchars($picture)); ?>"></center></TD>
