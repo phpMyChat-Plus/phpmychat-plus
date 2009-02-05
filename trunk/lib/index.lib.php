@@ -1112,10 +1112,10 @@ function send_headers($title, $icon)
 	?>
 	<!--
 	The lines below are usefull for debugging purpose, please do not remove them!
-	Release: phpMyChat-Plus 1.93-RC1
-	© 2005-2008 Ciprian Murariu (ciprianmp@yahoo.com)
+	Release: phpMyChat-Plus 1.93-RC4
+	© 2005-2009 Ciprian Murariu (ciprianmp@yahoo.com)
 	Based on phpMyChat 0.14.6-dev (also called 0.15.0)
-	© 2000-2008 The phpHeaven Team (http://www.phpheaven.net/)
+	© 2000-2009 The phpHeaven Team (http://www.phpheaven.net/)
 	-->
 	<META NAME="description" CONTENT="phpMyChat">
 	<META NAME="keywords" CONTENT="phpMyChat, Plus">
