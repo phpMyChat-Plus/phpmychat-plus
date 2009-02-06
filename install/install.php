@@ -2286,7 +2286,7 @@ elseif ( $p == 5 ) { ?>
 <?php if ( $p == 1 ) { ?>
 <input type="button" value="<?php echo L_BTN2 ?>" name="B2" onClick="window.open('','_parent','');window.close();">&nbsp;&nbsp;&nbsp;
 <?php if ( $do_ftp ) { ?>
-<input type="button" value="<?php echo L_BTN6 ?>" onClick="location.href='install.php?p=<?php echo $p_next."&L=".$L."&skip=1" ?>';" name="B3">&nbsp;&nbsp;&nbsp;
+<input type="button" value="<?php echo L_BTN6 ?>" onClick="location.href='install.php?p=<?php echo ($p_next + 1)."&L=".$L."&skip=1" ?>';" name="B3">&nbsp;&nbsp;&nbsp;
 <?php } ?>
 <input type="submit" value="<?php echo L_BTN1 ?> &gt;" name="B1">
 <?php } elseif ( $p == 2 ) { ?>
