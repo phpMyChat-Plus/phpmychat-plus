@@ -1823,6 +1823,7 @@ if (strstr($Sender_email,"@") && ($Sender_email != ""))
 }
 else echo(C_ADMIN_NAME);
 ?>
+<br /><a HREF="privacy.html" TARGET=_blank CLASS="ChatLink" Title="Read Our Privacy Policy" onMouseOver="window.status='Read Our Privacy Policy.'; return true">Our Privacy Policy</a>
 </SPAN>
 <?php
 }
