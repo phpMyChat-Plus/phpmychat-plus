@@ -1813,15 +1813,16 @@ if (C_SHOW_OWNER)
 Owner of this chat server -
 <?php
 include_once("./admin/mail4admin.lib.php");
+if (!eregi("Your name",C_ADMIN_NAME) && C_ADMIN_NAME != "") { $Owner_name = C_ADMIN_NAME; }
+else { $Owner_name = L_LURKING_5; }
 if (strstr($Sender_email,"@") && ($Sender_email != ""))
 {
-	if (!eregi("your name",C_ADMIN_NAME) && C_ADMIN_NAME != "") { $Owner_name = C_ADMIN_NAME; $Owner_email = $Owner_name." <".$Sender_email.">"; }
-	else { $Owner_name = L_LURKING_5; $Owner_email = $Sender_email; }
+	$Owner_email = $Sender_email;
 ?>
 	<a href="mailto:<?php echo($Owner_email) ?>?subject=Contact%20from%20[<?php echo(C_CHAT_NAME != "" ? C_CHAT_NAME : APP_NAME) ?>]%20Login%20Page" CLASS="ChatLink" Title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_OWNER)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_OWNER)); ?>.'; return true"><?php echo($Owner_name); ?></A>
 <?php
 }
-else echo(C_ADMIN_NAME);
+else echo($Owner_name);
 ?>
 <br /><a HREF="privacy.html" TARGET=_blank CLASS="ChatLink" Title="Read Our Privacy Policy" onMouseOver="window.status='Read Our Privacy Policy.'; return true">Our Privacy Policy</a>
 </SPAN>
