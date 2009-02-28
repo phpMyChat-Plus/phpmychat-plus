@@ -131,6 +131,7 @@ if(isset($Error))
 {
 	echo("<P><SPAN CLASS=\"error\">$Error</SPAN></P>");
 }
+$CellAlign = ($Align == "right" ? "RIGHT" : "LEFT");
 ?>
 <INPUT TYPE="hidden" NAME="L" VALUE="<?php echo($L); ?>">
 <INPUT TYPE="hidden" NAME="Link" VALUE="<?php if (isset($Link)) echo($Link); ?>">
@@ -143,19 +144,19 @@ if(isset($Error))
 			<TH COLSPAN=2 CLASS="tabtitle"><?php echo(L_REG_14); ?></TH>
 		</TR>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_SET_2); ?> :</TD>
+			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_SET_2); ?> :</TD>
 			<TD VALIGN="TOP">
 				<INPUT TYPE="text" NAME="pmc_username" SIZE=11 MAXLENGTH=15 VALUE="<?php if (isset($pmc_username)) echo(htmlspecialchars(stripslashes($pmc_username))); ?>">
 			</TD>
 		</TR>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_1); ?> :	</TD>
+			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_1); ?> :</TD>
 			<TD VALIGN="TOP">
 				<INPUT TYPE="password" NAME="pmc_password" SIZE=11 MAXLENGTH=16 VALUE="<?php if (isset($pmc_password)) echo(htmlspecialchars(stripslashes($pmc_password))); ?>">
 				</TD>
 		</TR>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"></TD>
+			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" NOWRAP="NOWRAP"></TD>
 			<TD VALIGN="TOP">
 			<A HREF="<?php echo($ChatPath); ?>pass_reset.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('pass_reset'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_PASS_7); ?>.'; return true;"><?php echo(L_PASS_7); ?></A>
 				</TD>
