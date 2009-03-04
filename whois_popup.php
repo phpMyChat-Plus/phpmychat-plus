@@ -219,12 +219,12 @@ if (C_ITALICIZE_POWERS)
 		case "admin":
 			$color = userColor($perms,$colorname);
 			$perms = L_WHOIS_ADMIN;
-			if ($email == 'bot@bot.com' || $email == 'quote@quote.com') { $perms = L_WHOIS_BOT; $tag_open = ""; $tag_close = ""; }
 			if ($power == "medium") $power = "weak";
 			break;
 		case "topmod":
 			$color = userColor($perms,$colorname);
 			$perms = L_WHOIS_TOPMOD;
+			if ($email == 'bot@bot.com' || $email == 'quote@quote.com') { $perms = L_WHOIS_BOT; $tag_open = ""; $tag_close = ""; }
 			if ($power == "medium") $power = "weak";
 			break;
 		default:

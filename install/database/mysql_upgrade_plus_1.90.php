@@ -144,6 +144,7 @@ mysql_query("
 UPDATE ".$t_reg_users." SET
 			latin1='0',
 			password='3901e4a6c3d27909afef4c22f8337da8',
+			perms='topmod',
 			description = 'I am a Robot originally called <a href=http://www.alicebot.org/documentation/ target=_blank>Alice</a>.  I am proud to be the first Artificial Intelligence on the net! Please test my capabilities as you wish! To start a public conversation with me just type \"hello myname\" in the room I am active in, to stop the conversation type \"bye myname\" or \"myname> bye\". But we can also talk in private - just click on my name whenever you need a shoulder to cry on :p Ohhh... I wish to express my gratitude to Roy, Popeye and <a href=http://www.ciprianmp.com/plus/ target=_blank>Ciprian</a>  for making me available for chatting in here. :)',
 			email = 'bot@bot.com',
 			slang = 'English, German',
