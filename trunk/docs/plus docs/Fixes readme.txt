@@ -1,4 +1,4 @@
-Note: if you’ve already modded your own files, please compare and edit the changes from those included in this log to identify the changes made for the fix. If not, just replace them in the according folders.
+﻿Note: if you’ve already modded your own files, please compare and edit the changes from those included in this log to identify the changes made for the fix. If not, just replace them in the according folders.
 This log includes all the previously released fixes.
 Client browsers - tested with:
 	- IE < 5.5 = M;
@@ -15,6 +15,7 @@ Client browsers - tested with:
 Server environment - tested env:
 	- Apache < 2.2.8 (Unix and Windows 2k/XP<SP3);
 	- php < 5.2.6 (non-safe-mode, but also a safe mode server has been tested and worked fine);
+	- php 4.4.4 has an issue of not posting the messages ($M value is null)
 	- MySQL < v5.0.51b;
 	- exif support enabled (gif/jpeg processing);
 	- GD2 support enabled (gif/jpeg processing);
@@ -31,7 +32,10 @@ On some pcs a restart might be necessary.
 We also added a small IE fixing script (reg file) as a link in Extra Options in chat.
 
 Fixes History:
-27.08.2008 - 1.93-RC4:
+27.08.2008 (10.03.2009) - 1.93-RC4:
+- added the "background-color: transparent" property for the img class in css styles; (display related)
+- updated the donation buttons according to the latest PayPal release; (support related)
+- turned the plusbot and RandomQuote into "topmod" perms so no acces to the admin panel using those virtual accounts (having "admin" perms could become a security threat); (security related)
 - fixed the installer to handle files on Windows-based servers; (functionality related)
 - replaced some avatar images to avoid copyright infringement (copyright related)
 - added 15 more avatars; (display related)

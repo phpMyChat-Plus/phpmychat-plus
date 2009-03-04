@@ -105,6 +105,7 @@ TABLE, TR, TD, TH
 IMG
 {
 	vertical-align: top;
+	background-color: transparent;
 }
 
 TD.whois, .whois

@@ -71,10 +71,16 @@ ALTER TABLE ".$t_reg_users."
 			ADD join_room varchar(5) NOT NULL default '';
 ", $conn);
 mysql_query("
-UPDATE ".$t_reg_users." SET latin1='0' WHERE email='bot@bot.com';
+UPDATE ".$t_reg_users."	SET
+			latin1='0',
+			perms='topmod'
+	WHERE email='bot@bot.com';
 ", $conn);
 mysql_query("
-UPDATE ".$t_reg_users." SET latin1='0' WHERE email='quote@quote.com';
+UPDATE ".$t_reg_users." SET
+			latin1='0',
+			perms='topmod'
+	WHERE email='quote@quote.com';
 ", $conn);
 mysql_query("
 UPDATE ".$t_reg_users." SET latin1='0' WHERE latin1='1';

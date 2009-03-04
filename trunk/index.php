@@ -53,7 +53,7 @@ if (C_WORLDTIME == 2)
 send_headers(1,1);
 ?>
 </HEAD>
-<BODY<?php echo((C_FILLED_LOGIN) ? " CLASS=\"ChatBody\"" : ""); ?><?php echo((C_BACKGR_IMG && C_BACKGR_IMG_PATH != "") ? " background=\"".C_BACKGR_IMG_PATH."\"" : ""); ?>>
+<BODY<?php echo((C_FILLED_LOGIN) ? " CLASS=\"ChatBody\"" : ""); ?><?php echo((C_BACKGR_IMG && C_BACKGR_IMG_PATH != "") ? " style=\"background-image: url(".C_BACKGR_IMG_PATH.")\"" : ""); ?>>
 	<CENTER>
 <?php
 // You can put html statements right after the "<BODY>" tag or add php code here.
