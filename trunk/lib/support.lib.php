@@ -11,6 +11,31 @@ switch (L_LANG)
 		$ppbutton = ($pptype == "big") ? "3626398" : "3626431";
 		$ppexists = 0;
 		break;
+	case "hu_HU":
+		$ppbutton = ($pptype == "big") ? "3626529" : "3626553";
+		$ppexists = 0;
+		break;
+	case "ro_RO":
+		$ppbutton = ($pptype == "big") ? "3626613" : "3626645";
+		$ppalt = "PayPal - Calea cea mai sigură şi facilă de a efectua plăţi online.";
+		$ppexists = 0;
+		break;
+	case "sr_CS":
+		$ppbutton = ($pptype == "big") ? "3626707" : "3626691";
+		$ppexists = 0;
+		break;
+	case "sv_SE":
+		$ppbutton = ($pptype == "big") ? "3626744" : "3626768";
+		$ppexists = 0;
+		break;
+	case "tr_TR":
+		$ppbutton = ($pptype == "big") ? "3626822" : "3626800";
+		$ppexists = 0;
+		break;
+	case "vi_VN":
+		$ppbutton = ($pptype == "big") ? "3626846" : "3626856";
+		$ppexists = 0;
+		break;
 	case "de_DE":
 		$pplang .= "/DE";
 		$ppbutton = ($pptype == "big") ? "3625065" : "3625046";
@@ -43,10 +68,6 @@ switch (L_LANG)
 		$ppalt = "PayPal - la solution de paiement en ligne la plus simple et la plus sécurisée!";
 		$ppexists = 1;
 		break;
-	case "hu_HU":
-		$ppbutton = ($pptype == "big") ? "3626529" : "3626553";
-		$ppexists = 0;
-		break;
 	case "it_IT":
 		$pplang .= "/IT";
 		$ppbutton = ($pptype == "big") ? "3625096" : "3625114";
@@ -58,27 +79,6 @@ switch (L_LANG)
 		$ppbutton = ($pptype == "big") ? "3625332" : "3625148";
 		$ppalt = "PayPal, de veilige en complete manier van online betalen.";
 		$ppexists = 1;
-		break;
-	case "ro_RO":
-		$ppbutton = ($pptype == "big") ? "3626613" : "3626645";
-		$ppalt = "PayPal - Calea cea mai sigură şi facilă de a efectua plăţi online.";
-		$ppexists = 0;
-		break;
-	case "sr_CS":
-		$ppbutton = ($pptype == "big") ? "3626707" : "3626691";
-		$ppexists = 0;
-		break;
-	case "sv_SE":
-		$ppbutton = ($pptype == "big") ? "3626744" : "3626768";
-		$ppexists = 0;
-		break;
-	case "tr_TR":
-		$ppbutton = ($pptype == "big") ? "3626822" : "3626800";
-		$ppexists = 0;
-		break;
-	case "vi_VN":
-		$ppbutton = ($pptype == "big") ? "3626846" : "3626856";
-		$ppexists = 0;
 		break;
 	default:
 		$pplang = "en_US";
