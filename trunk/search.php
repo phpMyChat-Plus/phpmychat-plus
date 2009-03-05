@@ -184,7 +184,7 @@ $search =
 			<input type=\"text\" name=\"q\" size=\"40\" />
 			<input type=\"submit\" name=\"sa\" value=\"$L_G_SA\" />
 	</form>
-<script type=\"text/javascript\" src=\"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=$L_G_HL\"></script>
+<script type=\"text/javascript\" style=\"background-color:transparent;\" src=\"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=$L_G_HL\"></script>
 </td>
 </tr>
 </table>\n";
