@@ -8,169 +8,111 @@
 # If you have questions or comments about this, please contact the developer of this chat.
 # Thank you for your understanding. I appreciate it!
 
-switch($L)
+switch(L_LANG)
 {
-	case "argentinian_spanish":
-	{
-	$L_G_EXT = "com.ar";
-	$L_G_SBI = "Introduzca los términos de búsqueda";
-	$L_G_SBB = "Envíe el formulario de búsqueda";
-	$L_G_SA = "Buscar";
-	$L_G_HL = "es";
-	}
+	case "bg_BG":
+		$L_G_EXT = "bg";
+#		$L_G_SA = "Търсене";
+		$L_G_SA = "&#x0422;&#x044a;&#x0440;&#x0441;&#x0435;&#x043d;&#x0435;";
+		$L_G_HL = "bg";
+		$L_G_CX = "4ex2p3-7jrn";
 		break;
-	case "bulgarian":
-	{
-	$L_G_EXT = "bg";
-	$L_G_SBI = "Унесите изразе за тражење";
-	$L_G_SBB = "Проследи образац претраге";
-	$L_G_SA = "Търсене";
-	$L_G_HL = "bg";
-	}
+	case "da_DK":
+		$L_G_EXT = "dk";
+#		$L_G_SA = "Søg";
+		$L_G_SA = "S&#248;g";
+		$L_G_HL = "da";
+		$L_G_CX = "tqlzus-g838";
 		break;
-	case "danish":
-	{
-	$L_G_EXT = "dk";
-	$L_G_SBI = "Indtast dine søgetermer";
-	$L_G_SBB = "Indsend søgeformular";
-	$L_G_SA = "Søg";
-	$L_G_HL = "da";
-	}
+	case "es_AR":
+		$L_G_EXT = "com.ar";
+		$L_G_SA = "Buscar";
+		$L_G_HL = "es";
+		$L_G_CX = "sn00uj-w8oi";
 		break;
-	case "dutch":
-	{
-	$L_G_EXT = "nl";
-	$L_G_SBI = "Voer uw zoekwoorden in";
-	$L_G_SBB = "Zoekformulier verzenden";
-	$L_G_SA = "Zoeken";
-	$L_G_HL = "nl";
-	}
+	case "es_ES":
+		$L_G_EXT = "es";
+		$L_G_SA = "Buscar";
+		$L_G_HL = "es";
+		$L_G_CX = "pw7i8w-y4de";
 		break;
-	case "french":
-	{
-	$L_G_EXT = "fr";
-	$L_G_SBI = "Entrez les termes que vous recherchez";
-	$L_G_SBB = "Envoyer un formulaire de recherche";
-	$L_G_SA = "Rechercher";
-	$L_G_HL = "fr";
-	}
+	case "en_GB":
+		$L_G_EXT = "co.uk";
+		$L_G_SA = "Search";
+		$L_G_HL = "en";
+		$L_G_CX = "29rzcl-ytld";
 		break;
-	case "georgian":
-	{
-	$L_G_EXT = "ge";
-	$L_G_SBI = "";
-	$L_G_SBB = "";
-	$L_G_SA = "მოძებნა";
-	$L_G_HL = "ka";
-	}
+	case "de_DE":
+		$L_G_EXT = "de";
+		$L_G_SA = "Suche";
+		$L_G_HL = "de";
+		$L_G_CX = "nmp2xz-ibwi";
 		break;
-	case "german":
-	{
-	$L_G_EXT = "de";
-	$L_G_SBI = "Geben Sie Ihre Suchbegriffe ein";
-	$L_G_SBB = "Suchformular senden";
-	$L_G_SA = "Suchen";
-	$L_G_HL = "de";
-	}
+	case "fr_FR":
+		$L_G_EXT = "fr";
+		$L_G_SA = "Rechercher";
+		$L_G_HL = "fr";
+		$L_G_CX = "qu42zo-puy3";
 		break;
-	case "greek":
-	{
-	$L_G_EXT = "gr";
-	$L_G_SBI = "";
-	$L_G_SBB = "";
-	$L_G_SA = "Αναζήτηση";
-	$L_G_HL = "el";
-	}
+	case "hu_HU":
+		$L_G_EXT = "hu";
+#		$L_G_SA = "Keresés";
+		$L_G_SA = "Keres&#233;s";
+		$L_G_HL = "hu";
+		$L_G_CX = "9j8qgz-yag1";
 		break;
-	case "hungarian":
-	{
-	$L_G_EXT = "hu";
-	$L_G_SBI = "Írja be a keresett kifjezéseket";
-	$L_G_SBB = "Keresőűrlap elküldése";
-	$L_G_SA = "Keresés";
-	$L_G_HL = "hu";
-	}
+	case "it_IT":
+		$L_G_EXT = "it";
+		$L_G_SA = "Cerca";
+		$L_G_HL = "it";
+		$L_G_CX = "xcwimo-lord";
 		break;
-	case "italian":
-	{
-	$L_G_EXT = "it";
-	$L_G_SBI = "Inserisci i termini di ricerca";
-	$L_G_SBB = "Invia modulo di ricerca";
-	$L_G_SA = "Cerca";
-	$L_G_HL = "it";
-	}
-	case "romanian":
-	{
-	$L_G_EXT = "ro";
-	$L_G_SBI = "Introduceţi termenii de căutare";
-	$L_G_SBB = "Trimiteţi formularul de căutare";
-	$L_G_SA = "Căutare";
-	$L_G_HL = "ro";
-	}
+	case "nl_NL":
+		$L_G_EXT = "nl";
+		$L_G_SA = "Zoeken";
+		$L_G_HL = "nl";
+		$L_G_CX = "efn8u2-oedw";
 		break;
-	case "serbian_latin":
-	{
-	$L_G_EXT = "com";
-	$L_G_SBI = "Unesite izraze za traženje";
-	$L_G_SBB = "Prosledi obrazac pretrage";
-//	$L_G_SA = "Potraži";
-	$L_G_SA = "Потражи";
-	$L_G_HL = "sr";
-	}
+	case "ro_RO":
+		$L_G_EXT = "ro";
+		$L_G_SA = "Căutare";
+		$L_G_SA = "C&#x0103;utare";
+		$L_G_HL = "ro";
+		$L_G_CX = "cd8a0m-8lw3";
 		break;
-	case "serbian_cyrillic":
-	{
-	$L_G_EXT = "com";
-	$L_G_SBI = "Унесите изразе за тражење";
-	$L_G_SBB = "Проследи образац претраге";
-	$L_G_SA = "Потражи";
-	$L_G_HL = "sr";
-	}
+	case "sr_CS":
+		$L_G_EXT = "com";
+#		$L_G_SA = "Potraži";
+#		$L_G_SA = "Потражи";
+		$L_G_SA = "&#x041f;&#x043e;&#x0442;&#x0440;&#x0430;&#x0436;&#x0438;";
+		$L_G_HL = "sr";
+		$L_G_CX = "ilkhsc-ioa3";
 		break;
-	case "spanish":
-	{
-	$L_G_EXT = "es";
-	$L_G_SBI = "Introduzca los términos de búsqueda";
-	$L_G_SBB = "Envíe el formulario de búsqueda";
-	$L_G_SA = "Buscar";
-	$L_G_HL = "es";
-	}
+	case "sv_SE":
+		$L_G_EXT = "se";
+#		$L_G_SA = "Sök";
+		$L_G_SA = "S&#246;k";
+		$L_G_HL = "sv";
+		$L_G_CX = "wo9bxg-m0vo";
 		break;
-	case "swedish":
-	{
-	$L_G_EXT = "se";
-	$L_G_SBI = "Ange sökord";
-	$L_G_SBB = "Skicka sökformulär";
-	$L_G_SA = "Sök";
-	$L_G_HL = "sv";
-	}
+	case "tr_TR":
+		$L_G_EXT = "com.tr";
+		$L_G_SA = "Ara";
+		$L_G_HL = "tr";
+		$L_G_CX = "thmxut-u4sx";
 		break;
-	case "turkish":
-	{
-	$L_G_EXT = "com.tr";
-	$L_G_SBI = "Arama terimlerinizi girin";
-	$L_G_SBB = "Arama formu gönder";
-	$L_G_SA = "Ara";
-	$L_G_HL = "tr";
-	}
-		break;
-	case "vietnamese":
-	{
-	$L_G_EXT = "com.vn";
-	$L_G_SBI = "Nhập các thuật ngữ tìm kiếm của bạn";
-	$L_G_SBB = "Nộp mẫu đơn tìm kiếm";
-	$L_G_SA = "Tìm kiếm";
-	$L_G_HL = "vi";
-	}
+	case "vi_VN":
+		$L_G_EXT = "com.vn";
+#		$L_G_SA = "Tìm kiếm";
+		$L_G_SA = "Ti&#768;m ki&#234;&#769;m";
+		$L_G_HL = "vi";
+		$L_G_CX = "73gv6i-7nsh";
 		break;
 	default:
-	{
-	$L_G_EXT = "com";
-	$L_G_SBI = "Enter your search terms";
-	$L_G_SBB = "Submit search form";
-	$L_G_SA = "Search";
-	$L_G_HL = "en";
-	}
+		$L_G_EXT = "com";
+		$L_G_SA = "Search";
+		$L_G_HL = "en";
+		$L_G_CX = "v5m0ds-vk8w";
 		break;
 }
 ?>
@@ -180,11 +122,14 @@ $search =
 <tr valign=\"middle\">
 <td align=\"center\">
 	<form action=\"http://www.google.$L_G_EXT/cse\" id=\"cse-search-box\" target=\"_blank\">
-			<input type=\"hidden\" name=\"cx\" value=\"partner-pub-9362782527650497:81f9y9u8fdj\" />
+		<div>
+			<input type=\"hidden\" name=\"cx\" value=\"partner-pub-9362782527650497:$L_G_CX\" />
+			<input type=\"hidden\" name=\"ie\" value=\"UTF-8\" />
 			<input type=\"text\" name=\"q\" size=\"40\" />
 			<input type=\"submit\" name=\"sa\" value=\"$L_G_SA\" />
+		</div>
 	</form>
-<script type=\"text/javascript\" style=\"background-color:transparent;\" src=\"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=$L_G_HL\"></script>
+<script type=\"text/javascript\" style=\"background-color:transparent;\" src=\"http://www.google.$L_G_EXT/coop/cse/brand?form=cse-search-box&amp;lang=$L_G_HL\"></script>
 </td>
 </tr>
 </table>\n";
