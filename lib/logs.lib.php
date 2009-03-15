@@ -12,7 +12,7 @@ function RecursiveMkdir($path)
 					umask($old_umask);
        }
 }
-
+clearstatcache();
 //Full logs
 $done = 0;
 $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
@@ -127,18 +127,32 @@ while($lastresult = mysql_fetch_array($lastquery))
 $mess_time = $lastm_time + C_TMZ_OFFSET*60*60;
 $year = date("Y", $lastm_time);
 $month = date("M", $lastm_time);
+$prev_year = date("Y", $lastm_time - 31536000);
+$prev_month = date("M", $lastm_time - 2419200);
 $day = date("d", $lastm_time);
-	 if (!file_exists("./".C_LOG_DIR."/index.html")) copy("./config/index/index.html","./".C_LOG_DIR."/index.html");
-   if (!file_exists("./".C_LOG_DIR."/".$year.""))
-   {
-      RecursiveMkdir("./".C_LOG_DIR."/".$year."");
-			copy("./config/index/index/index.html","./".C_LOG_DIR."/".$year."/index.html");
-   }
-   if (!file_exists("./".C_LOG_DIR."/".$year."/".$month.""))
-   {
-      RecursiveMkdir("./".C_LOG_DIR."/".$year."/".$month."");
-			copy("./config/index/index/index/index.html","./".C_LOG_DIR."/".$year."/".$month."/index.html");
-   }
+	if (!file_exists("./".C_LOG_DIR."/index.html")) copy("./config/index/index.html","./".C_LOG_DIR."/index.html");
+	if (!file_exists("./".C_LOG_DIR."/".$year.""))
+	{
+		RecursiveMkdir("./".C_LOG_DIR."/".$year."");
+		copy("./config/index/index/index.html","./".C_LOG_DIR."/".$year."/index.html");
+		if (file_exists("./".C_LOG_DIR."/".$prev_year."") && substr(decoct(fileperms("./".C_LOG_DIR."/".$prev_year."")),1) == "0777")
+		{
+			chmod("./".C_LOG_DIR."/".$prev_year, 0755);
+		}
+	}
+	if (!file_exists("./".C_LOG_DIR."/".$year."/".$month.""))
+	{
+		RecursiveMkdir("./".C_LOG_DIR."/".$year."/".$month."");
+		copy("./config/index/index/index/index.html","./".C_LOG_DIR."/".$year."/".$month."/index.html");
+		if (file_exists("./".C_LOG_DIR."/".$prev_year."/".$prev_month."") && substr(decoct(fileperms("./".C_LOG_DIR."/".$prev_year."/".$prev_month."")),1) == "0777")
+		{
+			chmod("./".C_LOG_DIR."/".$prev_year."/".$prev_month, 0755);
+		}
+		if (file_exists("./".C_LOG_DIR."/".$year."/".$prev_month."") && substr(decoct(fileperms("./".C_LOG_DIR."/".$year."/".$prev_month."")),1) == "0777")
+		{
+			chmod("./".C_LOG_DIR."/".$year."/".$prev_month, 0755);
+		}
+	}
 $logpath = "./".C_LOG_DIR."/".$year."/".$month."/".$year.$month.$day.".php"  ;
 
 	if (!file_exists($logpath))
@@ -297,18 +311,32 @@ while($lastresultu = mysql_fetch_array($lastqueryu))
 $mess_timeu = $lastm_timeu + C_TMZ_OFFSET*60*60;
 $yearu = date("Y", $lastm_timeu);
 $monthu = date("M", $lastm_timeu);
+$prev_yearu = date("Y", $lastm_timeu - 31536000);
+$prev_monthu = date("M", $lastm_timeu - 2419200);
 $dayu = date("d", $lastm_timeu);
-	 if (file_exists("./logs") && !file_exists("./logs/index.html")) copy("./config/index/index.html","./logs/index.html");
-   if (!file_exists("./logs/".$yearu.""))
-   {
-      RecursiveMkdir("./logs/".$yearu."");
-			copy("./config/index/index/index.html","./logs/".$yearu."/index.html");
-   }
-   if (!file_exists("./logs/".$yearu."/".$monthu.""))
-   {
-      RecursiveMkdir("./logs/".$yearu."/".$monthu."");
-			copy("./config/index/index/index/index.html","./logs/".$yearu."/".$monthu."/index.html");
-   }
+	if (file_exists("./logs") && !file_exists("./logs/index.html")) copy("./config/index/index.html","./logs/index.html");
+	if (!file_exists("./logs/".$yearu.""))
+	{
+		RecursiveMkdir("./logs/".$yearu."");
+		copy("./config/index/index/index.html","./logs/".$yearu."/index.html");
+		if (file_exists("./".C_LOG_DIR."/".$prev_yearu."") && substr(decoct(fileperms("./".C_LOG_DIR."/".$prev_yearu."")),1) == "0777")
+		{
+			chmod("./".C_LOG_DIR."/".$prev_yearu, 0755);
+		}
+	}
+	if (!file_exists("./logs/".$yearu."/".$monthu.""))
+	{
+		RecursiveMkdir("./logs/".$yearu."/".$monthu."");
+		copy("./config/index/index/index/index.html","./logs/".$yearu."/".$monthu."/index.html");
+		if (file_exists("./".C_LOG_DIR."/".$prev_yearu."/".$prev_monthu."") && substr(decoct(fileperms("./".C_LOG_DIR."/".$prev_yearu."/".$prev_monthu."")),1) == "0777")
+		{
+			chmod("./".C_LOG_DIR."/".$prev_yearu."/".$prev_monthu, 0755);
+		}
+		if (file_exists("./".C_LOG_DIR."/".$yearu."/".$prev_monthu."") && substr(decoct(fileperms("./".C_LOG_DIR."/".$yearu."/".$prev_monthu."")),1) == "0777")
+		{
+			chmod("./".C_LOG_DIR."/".$yearu."/".$prev_monthu, 0755);
+		}
+	}
 $logpathu = "./logs/".$yearu."/".$monthu."/".$yearu.$monthu.$dayu.".php"  ;
 
 	if (!file_exists($logpathu))

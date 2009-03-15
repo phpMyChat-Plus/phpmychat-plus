@@ -1,4 +1,45 @@
-Requests / Suggestions
+﻿Requests / Suggestions
+
+phpMyChat Questions
+
+How to change smilie popup size
+Can we use the old color mod for the input
+How to display more rooms? I would like to see all of the rooms if possible.
+How to make the Random Quote background transparent
+Anything special needed to add the Admin link back to th einput.php
+
+
+
+Bugs
+
+Buzz doesn't work from the list and in IE7 when you click the sound it
+refreeshs the page and you end up with the index.
+When you PM a person in the room and their name appears in input.php
+text line, the cursor is at the front of the name instead of at the
+end of the name i.e., | /username
+UTC Clock at the bottom of the chat room appears to be fast by 1 hour
+Seems connection drops are more frequent
+
+
+
+Request for MODS
+
+Have it use Speech 2Text like MicroSoft's built in SAM to read the
+username when a person enters and instead of a chime, have it say,
+'Username has entered the room.'
+Add video
+Add voice chat
+Add ability to select file/image browse/upload from your computer in
+the admin on the image, avatar, etc.. you have to pre-know the address
+to the image.
+Allow Smilies to be aligned absmiddle so they show up in the middle of
+the text. It appears that the <TD> that it is nested in has the value
+of align=top when
+this is currently set to TOP, it will not allow the MOD of adding
+align=absmiddle to the image calls in the smilies.inc.php
+
+
+
 
 I'd like to see some features from VooDoo chat (vochat.com) implemented in to phpmychat. (Jennifer Stuart)
 Some of those features are:
