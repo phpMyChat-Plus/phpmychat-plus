@@ -127,8 +127,8 @@ while($lastresult = mysql_fetch_array($lastquery))
 $mess_time = $lastm_time + C_TMZ_OFFSET*60*60;
 $year = date("Y", $lastm_time);
 $month = date("M", $lastm_time);
-$prev_year = date("Y", $lastm_time - 31536000);
-$prev_month = date("M", $lastm_time - 2419200);
+$prev_year = date("Y", $lastm_time - 355*24*60*60);
+$prev_month = date("M", $lastm_time - 28*24*60*60);
 $day = date("d", $lastm_time);
 	if (!file_exists("./".C_LOG_DIR."/index.html")) copy("./config/index/index.html","./".C_LOG_DIR."/index.html");
 	if (!file_exists("./".C_LOG_DIR."/".$year.""))
@@ -311,8 +311,8 @@ while($lastresultu = mysql_fetch_array($lastqueryu))
 $mess_timeu = $lastm_timeu + C_TMZ_OFFSET*60*60;
 $yearu = date("Y", $lastm_timeu);
 $monthu = date("M", $lastm_timeu);
-$prev_yearu = date("Y", $lastm_timeu - 31536000);
-$prev_monthu = date("M", $lastm_timeu - 2419200);
+$prev_yearu = date("Y", $lastm_timeu - 355*24*60*60);
+$prev_monthu = date("M", $lastm_timeu - 28*24*60*60);
 $dayu = date("d", $lastm_timeu);
 	if (file_exists("./logs") && !file_exists("./logs/index.html")) copy("./config/index/index.html","./logs/index.html");
 	if (!file_exists("./logs/".$yearu.""))
