@@ -110,7 +110,7 @@ if (isset($What) && $What != "") include("./admin/admin".$What.".php");
 // ** Define url query **
 
 // Get the name of the current script;
-if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER["PHP_SELF"];
+if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER["SCRIPT_NAME"];
 $From = basename($PHP_SELF);
 
 // Define the sheet to open

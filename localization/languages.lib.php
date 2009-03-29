@@ -1,13 +1,13 @@
 <?php
 if (!isset($ChatPath)) $ChatPath = "";
-if (eregi("install.php", $_SERVER["PHP_SELF"])) $ChatPath = "../";
+if (eregi("install.php", $_SERVER["SCRIPT_NAME"])) $ChatPath = "../";
 
 // Available languages
 $AvailableLanguages = array();
 $languageDirectories = dir('./'.$ChatPath.'localization/');
 while($name = $languageDirectories->read())
 {
-if (ereg("install", $_SERVER["PHP_SELF"]))
+if (ereg("install", $_SERVER["SCRIPT_NAME"]))
 {
 		if(is_dir('./'.$ChatPath.'localization/'.$name)
 		&& file_exists('./'.$ChatPath.'localization/'.$name.'/regex.txt')

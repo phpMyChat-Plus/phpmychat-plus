@@ -121,7 +121,7 @@ function get_focus()
 <br />
 <?php
 // Get the name of the script that called the login library
-if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER["PHP_SELF"];
+if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER["SCRIPT_NAME"];
 $From = basename($PHP_SELF);
 ?>
 <FORM ACTION="<?php echo($From); ?>" METHOD="POST" AUTOCOMPLETE="" NAME="LoginForm">

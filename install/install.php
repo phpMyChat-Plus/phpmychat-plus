@@ -330,7 +330,7 @@ if ( $p == 4 )
   if ( $pass2 == "" ) $pass2 = "";
   if ( $adminname == "" ) $adminname = "Your Name";
   if ( $adminemail == "" ) $adminemail = "your@email.com";
-  if ( $chaturl == "" || $chaturl == "C_CHAT_URL" ) $chaturl = "http://".eregi_replace("install/install.php", "", $_SERVER["HTTP_HOST"].$_SERVER["PHP_SELF"]);
+  if ( $chaturl == "" || $chaturl == "C_CHAT_URL" ) $chaturl = "http://".eregi_replace("install/install.php", "", $_SERVER["HTTP_HOST"].$_SERVER["SCRIPT_NAME"]);
 	$conn = @mysql_connect ( $dbhost, $dbuname, $dbpass ) OR $error = L_DB_NOCONNECT;
 	@mysql_query("SET CHARACTER SET utf8");
 	mysql_query("SET NAMES 'utf8'");

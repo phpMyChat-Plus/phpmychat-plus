@@ -28,6 +28,9 @@ if (get_magic_quotes_gpc()) {
 		$_COOKIE[$k] = stripslashes($v);
 }
 
+// Get the name of the current script;
+if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER["SCRIPT_NAME"];
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">

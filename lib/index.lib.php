@@ -96,7 +96,7 @@ if (get_magic_quotes_gpc()) {
 }
 
 // Get the relative path to the script that called this one
-if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER["PHP_SELF"];
+if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER["SCRIPT_NAME"];
 $Action = basename($PHP_SELF);
 $From = urlencode(ereg_replace("[^/]+/","../",$ChatPath).$Action);
 
@@ -1833,12 +1833,12 @@ if ($show_donation)
 	$pptype = "big";
 	require("${ChatPath}lib/support.lib.php");
 ?>
-<br /><br />
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" name="support" target="_blank" onSubmit="return confirm('You have chosen to contribute to the free development of\n<?php echo(APP_NAME); ?> by making a donation to the developer.\nThank you for your support!\n\nNote: the recipient is not the owner of this chat.\nPlease enter the amount on the next page.\n\nContinue?');">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="<?php echo($ppbutton); ?>">
-<input type="image" style="background-color: transparent;" src="<?php echo($donate); ?>" border="0" name="submit" alt="<?php echo($ppalt); ?> Support with PayPal the development of <?php echo(APP_NAME); ?> - it's Fast, Free and Secure!" title="<?php echo($ppalt); ?> Support with PayPal the development of <?php echo(APP_NAME); ?> - it's Fast, Free and Secure!" onMouseOver="window.status='<?php echo($ppalt); ?>'; return true;">
-</form>
+	<br /><br />
+	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" name="support" target="_blank" onSubmit="return confirm('You have chosen to contribute to the free development of\n<?php echo(APP_NAME); ?> by making a donation to the developer.\nThank you for your support!\n\nNote: the recipient is not the owner of this chat.\nPlease enter the amount on the next page.\n\nContinue?');">
+	<input type="hidden" name="cmd" value="_s-xclick">
+	<input type="hidden" name="hosted_button_id" value="<?php echo($ppbutton); ?>">
+	<input type="image" style="background-color: transparent;" src="<?php echo($donate); ?>" border="0" name="submit" alt="<?php echo($ppalt); ?> Support with PayPal the development of <?php echo(APP_NAME); ?> - it's Fast, Free and Secure!" title="<?php echo($ppalt); ?> Support with PayPal the development of <?php echo(APP_NAME); ?> - it's Fast, Free and Secure!" onMouseOver="window.status='<?php echo($ppalt); ?>'; return true;">
+	</form>
 <?php
 //	if (!ereg("UTKaszeFZKiAVgEZHQ3FejZzBaNLsmHOHz7aGPc2o/u6wTcj/HXJOoiHhMqLSHUPvqWHO",$support) || !isset($support)) $copy_break = 1;
 }
