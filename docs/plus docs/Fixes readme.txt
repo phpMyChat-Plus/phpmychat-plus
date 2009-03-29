@@ -33,6 +33,7 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 27.08.2008 (10.03.2009) - 1.93-RC4:
+- PHP_SELF instances replaced with SCRIPT_NAME; (security related)
 - logs.lib.php - it will now set chmod back to 0755 for previous month/year; (security & fenuctionality related)
 - added the "background-color: transparent" property for the img class in css styles; (display related)
 - updated the donation buttons according to the latest PayPal release; (support related)
