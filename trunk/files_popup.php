@@ -63,7 +63,7 @@ if (get_magic_quotes_gpc()) {
 }
 
 // Get the name of the current script;
-if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER["PHP_SELF"];
+if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER["SCRIPT_NAME"];
 $From = basename($PHP_SELF)."?L=$L&pmc_username=$pmc_username&pmc_password=$PWD_Hash";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

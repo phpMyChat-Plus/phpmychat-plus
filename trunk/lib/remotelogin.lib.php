@@ -96,7 +96,7 @@ if (get_magic_quotes_gpc()) {
 }
 
 // Get the relative path to the script that called this one
-if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER["PHP_SELF"];
+if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER["SCRIPT_NAME"];
 $Action = basename($PHP_SELF);
 $From = urlencode(ereg_replace("[^/]+/","../",$ChatPath).$Action);
 
