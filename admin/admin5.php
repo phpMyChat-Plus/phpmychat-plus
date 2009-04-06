@@ -1292,7 +1292,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr>
     <td><b>Display a BACKGROUND image on index page.</b><br />
-		<i>Hint: to fill the rooms background with an image, you need to edit the desired style and add in BODY.frame and .framePreview the property "<b>background-image: path_to_the_image;</b>" (absolute or relative paths allowed) - e.g. http://path_to_the_image.jpg or ./../path_to_the_image.jpg - sample in style12.css.php. Optionally, BODY.mainframe can be used to display an image background to the messages frame (but this image has to be washed out, to make the posted text viewable).</i><br />
+		<i>Hint: to fill the rooms background with an image, you need to edit the desired style and add in BODY.frame and .framePreview the property "<b>background-image: url('path_to_the_image');</b>" (absolute or relative paths allowed) - e.g. http://path_to_the_image.jpg or ./../path_to_the_image.jpg - sample in style12.css.php. Optionally, BODY.mainframe can be used to display an image background to the messages frame (but this image has to be washed out, to make the posted text viewable).</i><br />
     	(path_to_the_image.jpg can be any image accessible on/from the web - .jpg, .gif, .bmp, .png)
 	</td>
     <td>
