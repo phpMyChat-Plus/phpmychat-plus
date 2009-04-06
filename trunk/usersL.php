@@ -379,11 +379,11 @@ while(list($User, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup,
 		$Cmd2Send = ($User == stripslashes($U) ? "'high',''" : "'high','".special_char2($User,$Latin1)."'");
 				if (COLOR_NAMES)
 				{
-					echo("<a onClick=\"window.parent.userClick('".special_char2($User,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$User)." title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME."'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($User,$Latin1,$status)."</span></a>&nbsp;");
+					echo("<a onClick=\"window.parent.userClick('".special_char2($User,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$User)." title='".L_USE_NAME." ($User)' onMouseOver=\"window.status='".L_USE_NAME." ($User)'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($User,$Latin1,$status)."</span></a>&nbsp;");
 				}
 				else
 				{
-					echo("<a onClick=\"window.parent.userClick('".special_char2($User,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$User)." title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME."'; return true\">".special_char($User,$Latin1,$status)."</a>&nbsp;");
+					echo("<a onClick=\"window.parent.userClick('".special_char2($User,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$User)." title='".L_USE_NAME." ($User)' onMouseOver=\"window.status='".L_USE_NAME." ($User)'; return true\">".special_char($User,$Latin1,$status)."</a>&nbsp;");
 				}
 			//------------------------------Begin HighLight command by R.Worley
 			global $contents ;
@@ -410,11 +410,11 @@ while(list($User, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup,
 		$Cmd2Send = ($User == stripslashes($U) ? "'high',''" : "'high','".special_char2($Usera,$Latin1)."'");
 				if (COLOR_NAMES)
 				{
-					echo("<a onClick=\"window.parent.userClick('".special_char2($Usera,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$Usera)." title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME."'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($User,$Latin1,$status)."</span></a>&nbsp;");
+					echo("<a onClick=\"window.parent.userClick('".special_char2($Usera,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$Usera)." title='".L_USE_NAME." $User' onMouseOver=\"window.status='".L_USE_NAME." $User'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($User,$Latin1,$status)."</span></a>&nbsp;");
 				}
 				else
 				{
-					echo("<a onClick=\"window.parent.userClick('".special_char2($Usera,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$Usera)." title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME."'; return true\">".special_char($User,$Latin1,$status)."</a>&nbsp;");
+					echo("<a onClick=\"window.parent.userClick('".special_char2($Usera,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$Usera)." title='".L_USE_NAME." $User' onMouseOver=\"window.status='".L_USE_NAME." $User'; return true\">".special_char($User,$Latin1,$status)."</a>&nbsp;");
 				}
 		//------------------------------Begin HighLight command by R.Worley
 		global $contents ;
@@ -443,11 +443,11 @@ while(list($User, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup,
 		$Cmd2Send = ($User != stripslashes($U) ? "'high',''" : "'high','".special_char2($User,$Latin1)."'");
 				if (COLOR_NAMES)
 				{
-					echo("<a onClick=\"window.parent.userClick('".special_char2($User,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$User)." title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME."'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($User,$Latin1,$status)."</span></a>&nbsp;");
+					echo("<a onClick=\"window.parent.userClick('".special_char2($User,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$User)." title='".L_USE_NAME." $User' onMouseOver=\"window.status='".L_USE_NAME." $User'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($User,$Latin1,$status)."</span></a>&nbsp;");
 				}
 				else
 				{
-					echo("<a onClick=\"window.parent.userClick('".special_char2($User,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$User)." title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME."'; return true\">".special_char($User,$Latin1,$status)."</a>&nbsp;");
+					echo("<a onClick=\"window.parent.userClick('".special_char2($User,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$User)." title='".L_USE_NAME." $User' onMouseOver=\"window.status='".L_USE_NAME." $User'; return true\">".special_char($User,$Latin1,$status)."</a>&nbsp;");
 				}
 		//------------------------------Begin HighLight command by R.Worley
 		global $contents ;
@@ -663,11 +663,11 @@ if($DbLink->num_rows() > 0)
 			{
 				if (COLOR_NAMES)
 				{
-					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUser,$Latin1)."',false);\" ".userClass($status,$OtherUser)." title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME."'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a><br />\n");
+					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUser,$Latin1)."',false);\" ".userClass($status,$OtherUser)." title='".L_USE_NAME." ($OtherUser)' onMouseOver=\"window.status='".L_USE_NAME." ($OtherUser)'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a><br />\n");
 				}
 				else
 				{
-					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUser,$Latin1)."',false);\" ".userClass($status,$OtherUser)." title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME."'; return true\">".special_char($OtherUser,$Latin1,$status)."</a><br />\n");
+					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUser,$Latin1)."',false);\" ".userClass($status,$OtherUser)." title='".L_USE_NAME." ($OtherUser)' onMouseOver=\"window.status='".L_USE_NAME." ($OtherUser)'; return true\">".special_char($OtherUser,$Latin1,$status)."</a><br />\n");
 				}
 			}
 		}
@@ -707,11 +707,11 @@ if($DbLink->num_rows() > 0)
 			{
 				if (COLOR_NAMES)
 				{
-					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUsera,$Latin1)."',false);\" ".userClass($status,$OtherUsera)." title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME."'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a><br />\n");
+					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUsera,$Latin1)."',false);\" ".userClass($status,$OtherUsera)." title='".L_USE_NAME." $OtherUser' onMouseOver=\"window.status='".L_USE_NAME." $OtherUser'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a><br />\n");
 				}
 				else
 				{
-					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUsera,$Latin1)."',false);\" ".userClass($status,$OtherUsera)." title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME."'; return true\">".special_char($OtherUser,$Latin1,$status)."</a><br />\n");
+					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUsera,$Latin1)."',false);\" ".userClass($status,$OtherUsera)." title='".L_USE_NAME." $OtherUser' onMouseOver=\"window.status='".L_USE_NAME." $OtherUser'; return true\">".special_char($OtherUser,$Latin1,$status)."</a><br />\n");
 				}
 			}
 		}
