@@ -12,7 +12,8 @@ function RecursiveMkdir($path)
 					umask($old_umask);
        }
 }
-clearstatcache();
+//clearstatcache(); - for chmod-ing old folders, but it doesn't save logs text anymore
+
 //Full logs
 $done = 0;
 $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');

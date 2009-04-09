@@ -68,6 +68,7 @@ if ($awaystat != 2) {
 	}
 	$xtra = eregi_replace('([[:space:]]|^)(www)', '\\1http://\\2', $xtra); // no prefix (www.myurl.ext)
 	$prefix = '(http|https|ftp|telnet|news|gopher|file|wais)://';
+  $pureUrl = '([[:alnum:]/\n+-=%&:_.~?]+[#[:alnum:]+-_~]*)';
 if (C_POPUP_LINKS)
 {
     $purl="";
