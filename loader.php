@@ -311,7 +311,7 @@ if ($First) $LastLoad = 0;
 $CondForQuery	= "";
 $IgnoreList	= "";
 if (isset($Ign)) $IgnoreList = "'".str_replace(",","','",addslashes(urldecode($Ign)))."'";
-if ($NT == "0") $IgnoreList .= ($IgnoreList != "" ? ",":"")."'SYS enter','SYS exit','SYS away'";
+if ($NT == "0") $IgnoreList .= ($IgnoreList != "" ? ",":"")."'SYS enter','SYS exit'";
 if ($IgnoreList != "") $CondForQuery = "username NOT IN (${IgnoreList}) AND ";
 // Ghost Control mod by Ciprian
 if (C_SPECIAL_GHOSTS != "")
