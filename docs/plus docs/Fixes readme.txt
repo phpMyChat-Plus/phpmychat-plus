@@ -14,9 +14,9 @@ Client browsers - tested with:
 	- Google Chrome 0.2 beta = M.
 Server environment - tested env:
 	- Apache < 2.2.8 (Unix and Windows 2k/XP<SP3);
-	- php < 5.2.6 (non-safe-mode, but also a safe mode server has been tested and worked fine);
+	- php < 5.2.9-2 (non-safe-mode, but also a safe mode server has been tested and worked fine);
 	- php 4.4.4 has an issue of not posting the messages ($M value is null)
-	- MySQL < v5.0.51b;
+	- MySQL < v5.1.34;
 	- exif support enabled (gif/jpeg processing);
 	- GD2 support enabled (gif/jpeg processing);
 	- mail function support (optional).
@@ -33,6 +33,7 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 27.08.2008 (10.03.2009) - 1.93-RC4:
+- logs header include paths fixed to avoid safe mode restrictions (access to relative paths to localization files); (functionality related)
 - fixed the away command notifications; (functionality related)
 - PHP_SELF instances replaced with SCRIPT_NAME; (security related)
 - logs.lib.php - it will now set chmod back to 0755 for previous month/year; (security & functionality related)
