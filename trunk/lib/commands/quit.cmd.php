@@ -1,5 +1,4 @@
 <?php
-
 // Check for swear words in the message to be sent if there is one
 if (trim($Cmd[3]) != "")
 {
@@ -7,6 +6,11 @@ if (trim($Cmd[3]) != "")
 	{
 		include("./lib/swearing.lib.php");
 		$Cmd[3] = checkwords($Cmd[3], false, $Charset);
+ 		if(C_EN_STATS && isset($Found) && $b>0)
+		{
+			$DbLink->query("UPDATE ".C_STS_TBL." SET swears_posted=swears_posted+$b WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+		}
+		unset($Found, $b);
 	}
 	AddMessage(stripslashes($Cmd[3]), $T, $R, $U, $C, '', '', '', $Charset);
 }
@@ -25,5 +29,4 @@ window.parent.window.location = '<?php echo("$From?Ver=$Ver&L=$L&U=".urlencode(s
 </SCRIPT>
 <?php
 exit;
-
 ?>

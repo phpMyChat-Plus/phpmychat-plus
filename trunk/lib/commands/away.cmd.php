@@ -8,15 +8,15 @@
    }
    $DbLink->clean_results();
 
-if ($awaystat != 2) {
+if ($awaystat < 2) {
 
-   if ($awaystat == '0') {
+   if ($awaystat == 0) {
      $msgstr = 'L_AWAY';
-     $awaystat = '1';
+     $awaystat = 1;
      $time = time() - 1;
    } else {
      $msgstr = 'L_BACK';
-     $awaystat = '0';
+     $awaystat = 0;
      $time = time() + 1;
    }
    $msg = "sprintf(".$msgstr.", \"".special_char($U,$Latin1)."\")";
@@ -87,8 +87,12 @@ else $xtra = eregi_replace($prefix.$pureUrl, '<a href="\\1://\\2" target="_blank
 	if (C_USE_SMILIES)
 	{
 		include("./lib/smilies.lib.php");
-		Check4Smilies($xtra,$SmiliesTbl);
-		unset($SmiliesTbl);
+		$ss = Check4Smilies($xtra,$SmiliesTbl);
+		if(C_EN_STATS && $ss > 0)
+		{
+			$DbLink->query("UPDATE ".C_STS_TBL." SET smilies_posted=smilies_posted+$ss WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+		}
+		unset($SmiliesTbl, $ss);
 	};
 
 	// transform ISO-8859-1 special characters
@@ -121,6 +125,17 @@ else $xtra = eregi_replace($prefix.$pureUrl, '<a href="\\1://\\2" target="_blank
 	}
    $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS away', '', '".time()."', '', '$msg', '', '')");
    $DbLink->query("UPDATE ".C_USR_TBL." SET awaystat='".$awaystat."' WHERE username='$U'");
+	if(C_EN_STATS && $awaystat < 2)
+	{
+		if($awaystat == 1)
+		{
+			$DbLink->query("UPDATE ".C_STS_TBL." SET last_away=".time().", times_away=times_away+1 WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+		}
+		else
+		{
+			$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+(".time()."-last_away), longest_away=IF(".time()."-last_away < longest_away, longest_away, ".time()."-last_away), last_away='' WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U' AND last_away!='0'");
+		}
+	}
 
    $IsCommand = true;
    $RefreshMessages = true;

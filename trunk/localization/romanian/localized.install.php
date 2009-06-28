@@ -1,5 +1,5 @@
 <?php
-// File : romanian/localized.install.php - plus version (29.07.2008 - rev.6)
+// File : romanian/localized.install.php - plus version (07.06.2009 - rev.7)
 // Translation by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ istead (utf-8 edit bug)
 
@@ -71,6 +71,7 @@ define("L_P2_FORM12", "Redenumiţi folderul pentru istorice");
 define("L_P2_FORM13", "Dacă intenţionaţi să folosiţi phpMyChat ca modul integrat pentru phpNuke sau phpBB, tabela de configurări trebuie să se numească \"c_config\", iar cea pentru utilizatori înregistraţi să se numească \"c_reg_users\"!");
 define("L_P2_FORM14", "Alegeţi un nume greu de ghicit!");
 define("L_P2_FORM15", "Alegeţi numele chat-ului");
+define("L_P2_FORM16", "Tabela pentru statistici");
 define("L_P3_FORM1", "Numele (porecla) contului de Administrator");
 define("L_P3_FORM2", "Parola contului de Administrator");
 define("L_P3_FORM3", "Verificare parolă");

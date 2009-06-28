@@ -1,5 +1,5 @@
 <?php
-// File : hungarian/localized.chat.php - plus version (11.08.2008 - rev.41)
+// File : hungarian/localized.chat.php - plus version (14.02.2009 - rev.42)
 // Original file by Jácint Zsuzsanna <pycco8@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use  ’  instead (utf-8 edit bug)
@@ -148,6 +148,7 @@ define("L_ERR_USR_24", "Saját szoba létrehozásához regisztrálnod kell.");
 define("L_ERR_USR_25", "Csak a adminisztrátorok használhatják ".$COLORNAME." ezt a színt!<br />Ne próbáld használni ezeket a színeket sem: ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2.", ".COLOR_CM.", ".COLOR_CM1." és ".COLOR_CM2.".<br />Ezek a jogosultságokkal rendelkező felhasználók számára vannak fenntartva.");
 define("L_ERR_USR_26", "Csak a adminisztrátorok és a moderátorok használhatják ".$COLORNAME." ezt a színt!<br />Ne próbáld használni ezeket a színeket sem: ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2.", ".COLOR_CM.", ".COLOR_CM1." és ".COLOR_CM2.".<br />Ezek a jogosultságokkal rendelkező felhasználók számára vannak fenntartva.");
 define("L_ERR_USR_27", "Nem beszélgethetsz magaddal magán üzenetben.\\Ezt tedd meg fejben, kérlek...\\nÉs most válassz szépen egy másik felhasználói nevet.");
+define("L_ERR_USR_28", "A belépésed a(z) %s szobába megtagadva.<br />Kérlek, válassz egy másik szobát!"); // room name
 define("L_ERR_ROM_1", "A szoba nevében nem lehet vessző vagy vissza per-jel (\\).");
 define("L_ERR_ROM_2", "Tiltott szó a létrehozni kívánt szoba nevében.");
 define("L_ERR_ROM_3", "Ez a szoba már létezik, és publikus.");
@@ -650,7 +651,10 @@ define("L_UPLOAD_SUCCESS", "%s sikeresen feltöltve, mint %s."); // original fil
 define("L_FILES_TITLE", "Feltöltés Vezérlő");
 
 // Room restriction mod by Ciprian
-define("L_ERR_USR_28", "A belépésed a(z) %s szobába megtagadva.<br />Kérlek, válassz egy másik szobát!"); // room name
 define("L_RESTRICTED", "Megtagadva");
 define("L_RESTRICTED_ROM", "%s sikeresen kitiltva a szobából.");
+
+// OpenID login mod by Ciprian
+define("L_OPID_SIGN", "Bejelentkezés OpenID-vel");
+define("L_OPID_REG", "OpenID profilban szereplő adatok használata");
 ?>

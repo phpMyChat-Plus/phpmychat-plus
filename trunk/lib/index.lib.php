@@ -290,6 +290,12 @@ if(isset($E) && $E != "")
 		elseif (isset($EN))
 		{
 			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($EN, '$E', 'SYS exit', '', ".time().", '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '', '')");
+			if(C_EN_STATS)
+			{
+				$curtime = time();
+				$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_in=seconds_in+($curtime-last_in), longest_in=IF($curtime-last_in < longest_in, longest_in, $curtime-last_in), last_in='' WHERE stat_date='".date("Y-m-d")."' AND room='$E' AND username='$U' AND last_in!='0'");
+				$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+($curtime-last_away), longest_away=IF($curtime-last_away < longest_away, longest_away, $curtime-last_away), last_away='' WHERE stat_date='".date("Y-m-d")."' AND room='$E' AND username='$U' AND last_away!='0'");
+			}
 		}
 	}
 }
@@ -307,6 +313,7 @@ if(isset($U) && (isset($N) && $N != ""))
 	$DbLink->optimize(C_BAN_TBL);
 	$DbLink->optimize(C_CFG_TBL);
 	$DbLink->optimize(C_LRK_TBL);
+	$DbLink->optimize(C_STS_TBL);
 }
 
 
@@ -753,6 +760,17 @@ if(!isset($Error) && (isset($N) && $N != ""))
 				$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS exit', '', '$current_time', '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '', '')");
 			// next line WELCOME SOUND feature altered for compatibility with /away command R Dickow:
 			  $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
+				if(C_EN_STATS)
+				{
+					$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_in=seconds_in+($current_time-last_in), longest_in=IF($current_time-last_in < longest_in, longest_in, $current_time-last_in), last_in='' WHERE stat_date='".date("Y-m-d")."' AND room='$room' AND username='$U' AND last_in!='0'");
+					$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+($current_time-last_away), longest_away=IF($current_time-last_away < longest_away, longest_away, $current_time-last_away), last_away='' WHERE stat_date='".date("Y-m-d")."' AND room='$room' AND username='$U' AND last_away!='0'");
+					$DbLink->query("SELECT room FROM ".C_STS_TBL." WHERE stat_date='".date("Y-m-d")."' AND username='$U' AND room='$R'");
+					if ($DbLink->num_rows() != 0)
+					{
+						$DbLink->query("UPDATE ".C_STS_TBL." SET logins=logins+1,last_in='$current_time' WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+					}
+					else $DbLink->query("INSERT INTO ".C_STS_TBL." VALUES ('".date("Y-m-d")."', '$R', '$U', '$reguser', '$current_time', '', '', '', '', '', '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '')");
+				}
 			}
 // modified by R Dickow for /away command:
 			$DbLink->query("UPDATE ".C_USR_TBL." SET room='$R',u_time='$current_time', status='$status', ip='$IP', awaystat='0' WHERE username='$U'");
@@ -793,6 +811,15 @@ if(!isset($Error) && (isset($N) && $N != ""))
 		{
 			// next line WELCOME SOUND feature altered for compatibility with /away command R Dickow:
 		  $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
+			if(C_EN_STATS)
+			{
+				$DbLink->query("SELECT room FROM ".C_STS_TBL." WHERE stat_date='".date("Y-m-d")."' AND username='$U' AND room='$R'");
+				if ($DbLink->num_rows() != 0)
+				{
+					$DbLink->query("UPDATE ".C_STS_TBL." SET logins=logins+1,last_in='$current_time' WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+				}
+				else $DbLink->query("INSERT INTO ".C_STS_TBL." VALUES ('".date("Y-m-d")."', '$R', '$U', '$reguser', '$current_time', '', '', '', '', '', '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '')");
+			}
 		}
 
 		if (C_WELCOME)
@@ -814,6 +841,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 		{
 			$DelLink->query("DELETE FROM ".C_MSG_TBL." WHERE m_time='$sent_time' AND (username='SYS inviteFrom' OR (username='SYS inviteTo' AND address='$U'))");
 		};
+		$DelLink->close;
 	};
 	?>
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
@@ -1297,9 +1325,8 @@ function layout($Err, $U, $R, $T, $C, $status)
 	require("${ChatPath}search.php");
 	$show_search = !C_SEARCH_PAID;
 	$show_donation = !C_SUPPORT_PAID;
-	if (!ereg("9362782527650497",$search) || !isset($search)) $copy_break = 1;
-?>
 
+?>
 <TABLE ALIGN="center" CELLPADDING=5 CLASS="ChatBody"><TR><TD CLASS="ChatBody">
 <CENTER>
 <FORM ACTION="<?php echo("$Action"); ?>" METHOD="POST" AUTOCOMPLETE="" NAME="Params" onSubmit="defineVerField(); return isCookieEnabled()">
@@ -1348,27 +1375,36 @@ if($DbLink->query("SELECT DISTINCT u.username FROM ".C_USR_TBL." u, ".C_MSG_TBL.
 	$Nb = $DbLink->num_rows();
 	$link = " <A HREF=\"${ChatPath}users_popupL.php?From=$From&L=$L\" CLASS=\"ChatLink\" onClick=\"users_popup(); return false\" TARGET=\"_blank\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_11).".'; return true;\" title='".sprintf(L_CLICK,L_LINKS_11)."'>";
 	echo("<P CLASS=\"ChatP1\">".L_CUR_1." ".($Nb != 1 ? L_CUR_1a." ".$link.$Nb." ".L_USERS."</A>" : L_CUR_1b." ".$link.$Nb." ".L_USER."</A>")." ".L_CUR_2.".");
+	$DbLink->clean_results();
 }
-$DbLink->clean_results();
 if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $status == "a" || $status == "t"))
 {
-$handler = @mysql_connect(C_DB_HOST,C_DB_USER,C_DB_PASS);
-@mysql_query("SET CHARACTER SET utf8");
-@mysql_query("SET NAMES 'utf8'");
-@mysql_select_db(C_DB_NAME,$handler);
-$timeout = "15";
-$closetime = $time-($timeout);
-// Ghost Control mod by Ciprian
-$Hide1 = "";
-if (C_HIDE_ADMINS) $Hide1 .= ($Hide1 == "") ? " WHERE status != 'a' AND status != 't'" : " AND status != 'a' AND status != 't'";
-if (C_HIDE_MODERS) $Hide1 .= ($Hide1 == "") ? " WHERE status != 'm'" : " AND status != 'm'";
-if (C_SPECIAL_GHOSTS != "") $Hide1 .= ($Hide1 == "") ?  " WHERE username != ".C_SPECIAL_GHOSTS."" : " AND username != ".C_SPECIAL_GHOSTS."";
-$delete = @mysql_query("DELETE FROM ".C_LRK_TBL." WHERE time<'$closetime'",$handler);
-$result = @mysql_query("SELECT DISTINCT ip,browser,username FROM ".C_LRK_TBL.$Hide1."",$handler);
-$online_users = @mysql_numrows($result);
-@mysql_close();
-$lurklink = " <A HREF=\"lurking.php?L=$L&D=10\" CLASS=\"ChatLink\" TARGET=\"_blank\" onMouseOver=\"window.status='".L_LURKING_1.".'; return true;\" title='".L_LURKING_1."'>";
-echo("<br />".L_CUR_1." ".($online_users != 1 ? L_CUR_1a.$lurklink.$online_users." ".L_LURKERS."</A>." : L_CUR_1b.$lurklink.$online_users." ".L_LURKER."</A>."));
+	$handler = @mysql_connect(C_DB_HOST,C_DB_USER,C_DB_PASS);
+	@mysql_query("SET CHARACTER SET utf8");
+	@mysql_query("SET NAMES 'utf8'");
+	@mysql_select_db(C_DB_NAME,$handler);
+	$timeout = "15";
+	$closetime = $time-($timeout);
+	// Ghost Control mod by Ciprian
+	$Hide1 = "";
+	if (C_HIDE_ADMINS) $Hide1 .= ($Hide1 == "") ? " WHERE status != 'a' AND status != 't'" : " AND status != 'a' AND status != 't'";
+	if (C_HIDE_MODERS) $Hide1 .= ($Hide1 == "") ? " WHERE status != 'm'" : " AND status != 'm'";
+	if (C_SPECIAL_GHOSTS != "") $Hide1 .= ($Hide1 == "") ?  " WHERE username != ".C_SPECIAL_GHOSTS."" : " AND username != ".C_SPECIAL_GHOSTS."";
+	$delete = @mysql_query("DELETE FROM ".C_LRK_TBL." WHERE time<'$closetime'",$handler);
+	$result = @mysql_query("SELECT DISTINCT ip,browser,username FROM ".C_LRK_TBL.$Hide1."",$handler);
+	$online_users = @mysql_numrows($result);
+	@mysql_close();
+	$lurklink = " <A HREF=\"lurking.php?L=$L&D=10\" CLASS=\"ChatLink\" TARGET=\"_blank\" onMouseOver=\"window.status='".L_LURKING_1.".'; return true;\" title='".L_LURKING_1."'>";
+	echo("<br />".L_CUR_1." ".($online_users != 1 ? L_CUR_1a.$lurklink.$online_users." ".L_LURKERS."</A>." : L_CUR_1b.$lurklink.$online_users." ".L_LURKER."</A>."));
+}
+
+$copy_break = 0;
+if (!ereg("9362782527650497",$search) || !isset($search)) $copy_break = 1;
+if ($show_donation)
+{
+	$pptype = "big";
+	require("${ChatPath}lib/support.lib.php");
+	if (intval($ppbutton) < 3620000 || intval($ppbutton) > 3627000) $copy_break = 1;
 }
 ?>
 </P>
@@ -1484,10 +1520,9 @@ if (!isset($Ver)) $Ver = "L";
 			<TD VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP">
 				<INPUT TYPE="password" NAME="pmc_password" SIZE=11 MAXLENGTH=16 CLASS="ChatBox">
 				<?php if (!C_REQUIRE_REGISTER) echo("&nbsp;(<U>".L_REG_7."</U>)"); ?>
-				<br/><A HREF="<?php echo($ChatPath); ?>pass_reset.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('pass_reset'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_PASS_7); ?>.'; return true;" title="<?php echo(L_PASS_7); ?>"><?php echo(L_PASS_7); ?></A>
+				<br /><A HREF="<?php echo($ChatPath); ?>pass_reset.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('pass_reset'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_PASS_7); ?>.'; return true;" title="<?php echo(L_PASS_7); ?>"><?php echo(L_PASS_7); ?></A>
 			</TD>
 		</TR>
-
 		<TR CLASS="ChatCell">
 			<TH COLSPAN=2 CLASS="ChatTabTitle"><?php echo(L_REG_2); ?></TH>
 		</TR>
@@ -1830,8 +1865,6 @@ else echo($Owner_name);
 }
 if ($show_donation)
 {
-	$pptype = "big";
-	require("${ChatPath}lib/support.lib.php");
 ?>
 	<br /><br />
 	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" name="support" target="_blank" onSubmit="return confirm('You have chosen to contribute to the free development of\n<?php echo(APP_NAME); ?> by making a donation to the developer.\nThank you for your support!\n\nNote: the recipient is not the owner of this chat.\nPlease enter the amount on the next page.\n\nContinue?');">
@@ -1840,7 +1873,6 @@ if ($show_donation)
 	<input type="image" style="background-color: transparent;" src="<?php echo($donate); ?>" border="0" name="submit" alt="<?php echo($ppalt); ?> Support with PayPal the development of <?php echo(APP_NAME); ?> - it's Fast, Free and Secure!" title="<?php echo($ppalt); ?> Support with PayPal the development of <?php echo(APP_NAME); ?> - it's Fast, Free and Secure!" onMouseOver="window.status='<?php echo($ppalt); ?>'; return true;">
 	</form>
 <?php
-//	if (!ereg("UTKaszeFZKiAVgEZHQ3FejZzBaNLsmHOHz7aGPc2o/u6wTcj/HXJOoiHhMqLSHUPvqWHO",$support) || !isset($support)) $copy_break = 1;
 }
 ?>
 </TD>
@@ -1859,5 +1891,5 @@ if ($copy_break)
 	</SCRIPT>
 <?php
 }
-} // end of the layout function
+}; // end of the layout function
 ?>

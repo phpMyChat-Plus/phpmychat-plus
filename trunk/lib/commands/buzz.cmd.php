@@ -12,19 +12,28 @@ if (($status == "m") || ($status == "t") || ($status == "a")) // use this to ena
 	if (trim($Cmd[2]) != "")
 	{
 		$Mess = SpecialSlash($Cmd[2]);
+/*
+		if (C_USE_SMILIES)
+		{
+			include("./lib/smilies.lib.php");
+			$ss = Check4Smilies($Mess,$SmiliesTbl);
+			if(C_EN_STATS && $ss > 0)
+			{
+				$DbLink->query("UPDATE ".C_STS_TBL." SET smilies_posted=smilies_posted+$ss WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+			}
+			unset($SmiliesTbl, $ss);
+		};
+*/
 		if (C_NO_SWEAR && $R != C_NO_SWEAR_ROOM1 && $R != C_NO_SWEAR_ROOM2 && $R != C_NO_SWEAR_ROOM3 && $R != C_NO_SWEAR_ROOM4)
 		{
-		include("./lib/swearing.lib.php");
-		$Mess = checkwords($Mess, false, $Charset);
+			include("./lib/swearing.lib.php");
+			$Mess = checkwords($Mess, false, $Charset);
+	 		if(C_EN_STATS && isset($Found) && $b>0)
+			{
+				$DbLink->query("UPDATE ".C_STS_TBL." SET swears_posted=swears_posted+$b WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+			}
+			unset($Found, $b);
 		}
-/*
-				if (C_USE_SMILIES)
-				{
-					include("./lib/smilies.lib.php");
-					Check4Smilies($Mess,$SmiliesTbl);
-					unset($SmiliesTbl);
-				};
-*/
 	}
 	if (eregi("~",$Cmd[1]))
 	{

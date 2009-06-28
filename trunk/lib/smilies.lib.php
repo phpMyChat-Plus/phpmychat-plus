@@ -47,8 +47,10 @@ function SpecialSlash(&$Str)
 // Replace smilies code by gif URLs in messages
 function Check4Smilies(&$string,&$Table)
 {
+
 	$tmp_tbl = split("<a href|</a>", " ".$string." ");
 	$i = 0;
+	$ss = 0;
 
 	for (reset($tmp_tbl); $substring=current($tmp_tbl); next($tmp_tbl))
 	{
@@ -61,6 +63,7 @@ function Check4Smilies(&$string,&$Table)
 		{
 			while(list($key, $prop) = each($Table))
 			{
+				if(ereg($key, $substring)) $ss++;
 				$substring = ereg_replace($key, " <IMG SRC=images/smilies/$prop ALT=\"".SpecialSlash($key)."\"> ", $substring);
 			};
 			$tmp_tbl[$i] = $substring;
@@ -74,6 +77,7 @@ function Check4Smilies(&$string,&$Table)
 	};
 	$string = trim(join("",$tmp_tbl));
 	unset($tmp_tbl);
+	return $ss;
 }
 
 // Bob Dickow modification Rev 2 for multiple smileys rows in help popup

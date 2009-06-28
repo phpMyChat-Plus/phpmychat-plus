@@ -1,5 +1,5 @@
 <?php
-// File : serbian_latin/localized.chat.php - plus version (11.08.2008 - rev.41)
+// File : serbian_latin/localized.chat.php - plus version (14.02.2009 - rev.42)
 // Original translation by Vedran Vučić <vedran.vucic@gnulinuxcentar.org>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -147,6 +147,7 @@ define("L_ERR_USR_24", "Da bi kreirali vašu vlastitu privatnu sobu morate pre t
 define("L_ERR_USR_25", "Samo administrator može da koristi ".$COLORNAME." boju!<br />Nemojte da pokušate da koristite ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." ili ".COLOR_CM1.".<br />One su rezervisane za moćne korisnike!");
 define("L_ERR_USR_26", "Samo administratori i moderatori mogu da koriste ".$COLORNAME." boje!<br />Nemojte da pokušate da koristite ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." ili ".COLOR_CM1.".<br />One su rezervisane za moćne morisnike.!");
 define("L_ERR_USR_27", "Nemožete privatno da govorite sami sa sobom.\\nČinite to u svom umu, molim...\\nSada, odaberite drugo ime.");
+define("L_ERR_USR_28", "Vaš pristup %s je ograničen!<br />Molimo vas da odaberete drugu sobu."); // room name
 define("L_ERR_ROM_1", "Ime sobe nemože da sadrži zapete i kose crte. (\\).");
 define("L_ERR_ROM_2", "Pronađena zabranjena reš u imenu sobe koju želite da kreirate.");
 define("L_ERR_ROM_3", "Ova soba već postoji kao javna soba.");
@@ -651,7 +652,10 @@ define("L_UPLOAD_SUCCESS", "%s uspešno nadodato kao %s."); // original filename
 define("L_FILES_TITLE", "Upravljanje dodatim datotekama");
 
 // Room restriction mod by Ciprian
-define("L_ERR_USR_28", "Vaš pristup %s je ograničen!<br />Molimo vas da odaberete drugu sobu."); // room name
 define("L_RESTRICTED", "Ograničen pristup");
 define("L_RESTRICTED_ROM", "%s je uspešno sprečen da uđe u sobu.");
+
+// OpenID login mod by Ciprian
+define("L_OPID_SIGN", "Prijavite se sa OpenID");
+define("L_OPID_REG", "Uvezite vaš OpenID profile");
 ?>

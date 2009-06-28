@@ -1,5 +1,5 @@
 <?php
-// File : argentinian_spanish/localized.chat.php - plus version (11.08.2008 - rev.41)
+// File : argentinian_spanish/localized.chat.php - plus version (14.02.2009 - rev.42)
 // Original translation in Spanish (for the Argentinian dialect usage) by Jorge Colaccini <jrc@informas.com>
 // Updates, corrections and additions for the Plus version by Matias Olivera <matiolivera@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -653,4 +653,8 @@ define("L_FILES_TITLE", "Administrador de Subida de archivos");
 // Room restriction mod by Ciprian
 define("L_RESTRICTED", "Restringido");
 define("L_RESTRICTED_ROM", "%s ha sido restringido/a exitosamente de este salón.");
+
+// OpenID login mod by Ciprian
+define("L_OPID_SIGN", "Logueate con un OpenID");
+define("L_OPID_REG", "Importá tu perfil de OpenID");
 ?>

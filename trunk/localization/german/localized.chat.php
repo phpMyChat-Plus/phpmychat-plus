@@ -1,5 +1,5 @@
 <?php
-// File : german/localized.chat.php - plus version (11.08.2008 - rev.41)
+// File : german/localized.chat.php - plus version (14.02.2009 - rev.42)
 // Original translation by Robert Schaller <robert@schaller.com> & Wolfgang Schneider <schneider@bibelcenter.de>
 //    & Martin Sander <Martin.Sander@touch-screen.de> & Bernard Piller <bernard@bmpsystems.com>
 //    & Reinhard Hofmann <e9625556@student.tuwien.ac.at> & Christian Hacker <c.hacker@dreamer-chat.de>
@@ -649,4 +649,8 @@ define("L_FILES_TITLE", "Upload Verwaltung");
 // Room restriction mod by Ciprian
 define("L_RESTRICTED", "Verboten");
 define("L_RESTRICTED_ROM", "%s für diesen Raum wurden die Beschränkung erfolgreich ausgeführt.");
+
+// OpenID login mod by Ciprian
+define("L_OPID_SIGN", "Einlgeloggt mit Benutzername OpenID");
+define("L_OPID_REG", "Importiere deine OpenID ins profile.");
 ?>

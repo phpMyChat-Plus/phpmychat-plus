@@ -9,3 +9,4 @@ php_flag session.bug_compat_42 0
 php_flag session.bug_compat_warn 0
 php_flag session.use_trans_sid 1
 php_flag session.use_cookies 1
+php_flag display_errors 0

@@ -82,6 +82,11 @@ if(C_CHAT_LURKING)
 		}
  		if (($sghosts != "" && ghosts_in($userclosed, $sghosts, $Charset)) || (C_HIDE_ADMINS && ($statusclosed == "a" || $statusclosed == "t")) || (C_HIDE_MODERS && $statusclosed == "m")) {}
 		else $ChatM->query("INSERT INTO ".C_MSG_TBL." VALUES ('".$usertype."', '".$userroom."', 'SYS exit', '', ".time().", '', 'sprintf(L_CLOSED_ROM, \"($when) $userclosed\")', '', '')");
+		if(C_EN_STATS)
+		{
+			$ChatM->query("UPDATE ".C_STS_TBL." SET seconds_in=seconds_in+($usertime-last_in), longest_in=IF($usertime-last_in < longest_in, longest_in, $usertime-last_in), last_in='' WHERE (stat_date='".date("Y-m-d",$usertime)."' OR stat_date='".date("Y-m-d",last_in)."') AND room='$userroom' AND username='$userclosed' AND last_in!='0'");
+			$ChatM->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+($usertime-last_away), longest_away=IF($usertime-last_away < longest_away, longest_away, $usertime-last_away), last_away='' WHERE (stat_date='".date("Y-m-d",$usertime)."' OR stat_date='".date("Y-m-d",last_away)."') AND room='$userroom' AND username='$userclosed' AND last_away!='0'");
+		}
 		$ChatM->query("DELETE FROM ".C_USR_TBL." WHERE username='".$userclosed."'");
 		$CleanUsrTbl = ($ChatM->affected_rows() > 0);
 		$highpath = "botfb/" .$userclosed;         // file is in DIR "botfb" and called "username"

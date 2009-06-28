@@ -19,7 +19,7 @@ Server environment - tested env:
 	- MySQL < v5.1.34;
 	- exif support enabled (gif/jpeg processing);
 	- GD2 support enabled (gif/jpeg processing);
-	- mail function support (optional).
+	- mail function support (optional but recommended).
 
 Known issues (read also the FAQ):
 - configurations cannot be saved from admin panel on servers having magic_quotes set "on"; this also happen if the c_config table structure has been altered somehow and it doesn’t exactly follow the admin5.php field definitions; another identified reason would be the use of single quote ’ in field values (like Room’s Names or such) - never use single quotes - use the utf-8 ’ instead (you can copy it from here when you need it)
@@ -32,7 +32,9 @@ On some pcs a restart might be necessary.
 We also added a small IE fixing script (reg file) as a link in Extra Options in chat.
 
 Fixes History:
-27.08.2008 (10.03.2009) - 1.93-RC4:
+10.06.2009 - 1.93-RC5:
+- added statistics table for admin analyses purposes (c_stats table added); (functionality extension)
+27.08.2008 - 1.93-RC4:
 - logs header include paths fixed to avoid safe mode restrictions (access to relative paths to localization files); (functionality related)
 - fixed the away command notifications; (functionality related)
 - PHP_SELF instances replaced with SCRIPT_NAME; (security related)

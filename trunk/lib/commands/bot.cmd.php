@@ -101,6 +101,7 @@ else
 					}
 				$IsCommand = true;
 				$RefreshMessages = true;
+				$CleanUsrTbl = 1;
 		       }
        }
 	  };

@@ -132,6 +132,9 @@ $_SESSION['t_config'] = $t_config;
 if ( $_SESSION['t_lurkers'] != "" ) $t_lurkers = $_SESSION['t_lurkers'];
 if ( $_POST['t_lurkers'] != "" ) $t_lurkers = $_POST['t_lurkers'];
 $_SESSION['t_lurkers'] = $t_lurkers;
+if ( $_SESSION['t_stats'] != "" ) $t_stats = $_SESSION['t_stats'];
+if ( $_POST['t_stats'] != "" ) $t_stats = $_POST['t_stats'];
+$_SESSION['t_stats'] = $t_stats;
 // from page 4 (available from page 5)
 if ( $_SESSION['admin'] != "" ) $admin = $_SESSION['admin'];
 if ( $_POST['admin'] != "" ) $admin = $_POST['admin'];
@@ -312,6 +315,8 @@ if ( $p == 3 )
 		else { $C_CFG_TBL = C_CFG_TBL; if ( $C_CFG_TBL == "C_CFG_TBL" ) $C_CFG_TBL = "c_config"; }
 	  if ( $_SESSION['t_lurkers'] != "" ) $C_LRK_TBL = $_SESSION['t_lurkers'];
 		else { $C_LRK_TBL = C_LRK_TBL; if ( $C_LRK_TBL == "C_LRK_TBL" ) $C_LRK_TBL = "c_lurkers"; }
+	  if ( $_SESSION['t_stats'] != "" ) $C_STS_TBL = $_SESSION['t_stats'];
+		else { $C_STS_TBL = C_STS_TBL; if ( $C_STS_TBL == "C_STS_TBL" ) $C_STS_TBL = "c_stats"; }
 	  if ( $_SESSION['logdir'] != "" ) $logdir = $_SESSION['logdir'];
 		else { $logdir = C_LOG_DIR; if ( $logdir == "" || $logdir == "C_LOG_DIR") $logdir = "logsadmin"; }
 	  if ( $_SESSION['logdirnew'] != "" ) $logdirnew = $_SESSION['logdirnew'];
@@ -751,6 +756,7 @@ define("C_REG_TBL", '<?php echo $t_reg_users ?>'); 		// Name of the table where 
 define("C_BAN_TBL", '<?php echo $t_ban_users ?>'); 		// Name of the table where banished users are stored
 define("C_CFG_TBL", '<?php echo $t_config ?>'); 				// Name of the table where configuration settings are stored (if enabled)
 define("C_LRK_TBL", '<?php echo $t_lurkers ?>'); 			// Name of the table where data about lurkers are stored (if enabled)
+define("C_STS_TBL", '<?php echo $t_stats ?>'); 			// Name of the table where statistics data is stored (if enabled)
 
 // ------ THESE SETTINGS MUST NOT BE CHANGED ------
 
@@ -931,6 +937,7 @@ $RES_ROOM2						= $row[166];
 $RES_ROOM3						= $row[167];
 $RES_ROOM4						= $row[168];
 $RES_ROOM5						= $row[169];
+$EN_STATS						= $row[170];
 
 $query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.com'";
 $result_bot = mysql_query($query_bot);
@@ -1361,6 +1368,9 @@ define("GRAVATARS_DYNAMIC_DEF_FORCE", $GRAVATARS_DYNAMIC_DEF_FORCE);
 
 // Uploader mod - by Ciprian
 define("C_ALLOW_UPLOADS", $ALLOW_UPLOADS);
+
+// Statistics mod - by Ciprian
+define("C_EN_STATS", $EN_STATS);
 ?&gt;</textarea></p>
 <?php } // END OF IS NOT WRITEABLE
 else {
@@ -1392,6 +1402,7 @@ else {
   	fputs ( $fh, 'define("C_BAN_TBL", \''.$t_ban_users.'\'); 		// Name of the table where banished users are stored'.$lfeed );
   	fputs ( $fh, 'define("C_CFG_TBL", \''.$t_config.'\'); 				// Name of the table where configuration settings are stored (if enabled)'.$lfeed );
   	fputs ( $fh, 'define("C_LRK_TBL", \''.$t_lurkers.'\'); 			// Name of the table where data about lurkers are stored (if enabled)'.$lfeed );
+  	fputs ( $fh, 'define("C_STS_TBL", \''.$t_stats.'\'); 			// Name of the table where statistics data is stored (if enabled)'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// ------ THESE SETTINGS MUST NOT BE CHANGED ------'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
@@ -1572,6 +1583,7 @@ else {
   	fputs ( $fh, '$RES_ROOM3						= $row[167];'.$lfeed );
   	fputs ( $fh, '$RES_ROOM4						= $row[168];'.$lfeed );
   	fputs ( $fh, '$RES_ROOM5						= $row[169];'.$lfeed );
+  	fputs ( $fh, '$EN_STATS						= $row[170];'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '$query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email=\'bot@bot.com\'";'.$lfeed );
   	fputs ( $fh, '$result_bot = mysql_query($query_bot);'.$lfeed );
@@ -2002,6 +2014,9 @@ else {
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// Uploader mod - by Ciprian'.$lfeed );
   	fputs ( $fh, 'define("C_ALLOW_UPLOADS", $ALLOW_UPLOADS);'.$lfeed );
+  	fputs ( $fh, ''.$lfeed );
+  	fputs ( $fh, '// Statistics mod - by Ciprian'.$lfeed );
+  	fputs ( $fh, 'define("C_EN_STATS", $EN_STATS);'.$lfeed );
   	fputs ( $fh, '?>' );
   } // END OF WRITE INTO config.lib.php
   fclose ( $fh );
@@ -2179,6 +2194,11 @@ elseif ($p == 5 ) { ?>
         <td width="221"><font face="Tahoma" size="2"><?php echo L_P2_FORM11 ?></font></td>
         <td width="177">
           <input type="text" name="t_lurkers" size="20" value="<?php echo $C_LRK_TBL ?>"></td>
+      </tr>
+      <tr>
+        <td width="221"><font face="Tahoma" size="2"><?php echo L_P2_FORM16 ?></font></td>
+        <td width="177">
+          <input type="text" name="t_stats" size="20" value="<?php echo $C_STS_TBL ?>"></td>
       </tr>
       <tr>
         <td width="221"><font face="Tahoma" size="2"><?php echo L_P2_FORM12 ?></font></td>

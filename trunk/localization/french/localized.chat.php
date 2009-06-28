@@ -1,5 +1,5 @@
 <?php
-// File : french/localized.chat.php - plus version (11.08.2008 - rev.41)
+// File : french/localized.chat.php - plus version (14.02.2009 - rev.42)
 // Translation for Plus version by Pierre Liget <sourceforge@pliget.freesurf.fr> 10.12.2007
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -655,4 +655,8 @@ define("L_FILES_TITLE", "Gestion des téléchargements");
 // Room restriction mod by Ciprian
 define("L_RESTRICTED", "Restreint");
 define ( "L_RESTRICTED_ROM", "%s a été limité à partir de cette salon avec succès.");
+
+// OpenID login mod by Ciprian
+define("L_OPID_SIGN", "Se connecter avec un identifiant OpenID");
+define("L_OPID_REG", "Importer son profil OpenID");
 ?>

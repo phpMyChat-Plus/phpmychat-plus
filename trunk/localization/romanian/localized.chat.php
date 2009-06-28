@@ -1,5 +1,5 @@
 <?php
-// File : romanian/localized.chat.php - plus version (11.08.2008 - rev.41)
+// File : romanian/localized.chat.php - plus version (14.02.2009 - rev.42)
 // Original translation started by Radu Swider <swidera@satline.ro>, first updated by Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro>
 // Corrected, finalized, diacritics addition and updated to Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -651,4 +651,8 @@ define("L_UPLOAD_SUCCESS", "%s a fost încărcat cu succes ca %s."); //original 
 // Room restriction mod by Ciprian
 define("L_RESTRICTED", "Restricţionat");
 define("L_RESTRICTED_ROM", "%s a fost restricţionat din această cameră.");
+
+// OpenID login mod by Ciprian
+define("L_OPID_SIGN", "Identificare folosind OpenID");
+define("L_OPID_REG", "Importă un profil OpenID");
 ?>

@@ -62,6 +62,11 @@ else
 				{
 					include("./lib/swearing.lib.php");
 					$Cmd[3] = checkwords($Cmd[3], false, $Charset);
+			 		if(C_EN_STATS && isset($Found) && $b>0)
+					{
+						$DbLink->query("UPDATE ".C_STS_TBL." SET swears_posted=swears_posted+$b WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+					}
+					unset($Found, $b);
 				}
 				// add this for /away command modification by R Dickow:
 			  $DbLink->query("SELECT awaystat FROM ".C_USR_TBL." WHERE username='$Cmd[2]'");
@@ -71,7 +76,7 @@ else
 			  	list($awaystat) = $DbLink->next_record();
 			  }
 			  $DbLink->clean_results();
-				if ($awaystat == '1') {
+				if ($awaystat == 1) {
 					$Read = "Neww";
 					AddMessage(stripslashes($Cmd[3]), $T, $UR, $U, $C, $Cmd[2], $Read, $R, $Charset);
 					$IsCommand = true;
@@ -98,6 +103,11 @@ else
 				if(C_PRIV_POPUP) $Error = sprintf(L_PRIV_NOT_ONLINE, special_char($Cmd[2],$Latin1));
 				else $Error = sprintf(L_NOT_ONLINE, special_char($Cmd[2],$Latin1));
 			};
+	 		if(C_EN_STATS)
+			{
+				$DbLink->query("UPDATE ".C_STS_TBL." SET pms_sent=pms_sent+1 WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+			}
+			unset($Found, $b);
 		};
 	};
 };

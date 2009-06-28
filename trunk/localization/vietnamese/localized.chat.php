@@ -1,5 +1,5 @@
 <?php
-// File : vietnamese/localized.chat.php - plus version (11.08.2008 - rev.41)
+// File : vietnamese/localized.chat.php - plus version (14.02.2009 - rev.42)
 // Translation by Marshall <hellomarshal_lookatme@netzero.net>
 // Updates and corrections by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -645,4 +645,8 @@ define("L_FILES_TITLE", "Quản lý những file upload");
 // Room restriction mod by Ciprian
 define("L_RESTRICTED", "Hạn chế");
 define("L_RESTRICTED_ROM", "%s một cách thành công được hạn chế từ phòng này.");
+
+// OpenID login mod by Ciprian
+define("L_OPID_SIGN", "Đăng nhập bởi OpenID");
+define("L_OPID_REG", "Nhập khẩu của bạn OpenID thông tin");
 ?>

@@ -69,7 +69,17 @@ function room_in($what, $in, $Charset)
 						{
 							include("./lib/swearing.lib.php");
 							$Cmd[3] = checkwords($Cmd[3], false, $Charset);
+					 		if(C_EN_STATS && isset($Found) && $b>0)
+							{
+								$DbLink->query("UPDATE ".C_STS_TBL." SET swears_posted=swears_posted+$b WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+							}
+							unset($Found, $b);
 							$Cmd[2] = checkwords($Cmd[2], false, $Charset);
+					 		if(C_EN_STATS && isset($Found) && $b>0)
+							{
+								$DbLink->query("UPDATE ".C_STS_TBL." SET swears_posted=swears_posted+$b WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+							}
+							unset($Found, $b);
 						}
 						global $Top;
 						if (trim($Cmd[2]) != "*") $Top = trim($Cmd[2])." ".trim($Cmd[3]);
@@ -100,8 +110,12 @@ function room_in($what, $in, $Charset)
 							if (C_USE_SMILIES)
 							{
 								include("./lib/smilies.lib.php");
-								Check4Smilies($Top,$SmiliesTbl);
-								unset($SmiliesTbl);
+								$ss = Check4Smilies($Top,$SmiliesTbl);
+								if(C_EN_STATS && $ss > 0)
+								{
+									$DbLink->query("UPDATE ".C_STS_TBL." SET smilies_posted=smilies_posted+$ss WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+								}
+								unset($SmiliesTbl, $ss);
 							};
 	// URL
 	$Top = eregi_replace('([[:space:]]|^)(www[.])', '\\1http://\\2', $Top); // no prefix (www.myurl.ext)

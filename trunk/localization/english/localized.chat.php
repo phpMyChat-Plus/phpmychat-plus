@@ -1,5 +1,5 @@
 <?php
-// File : english/localized.chat.php - plus version (11.08.2008 - rev.41)
+// File : english/localized.chat.php - plus version (14.02.2009 - rev.42)
 // Original file by Nicolas Hoizey <nhoizey@phpheaven.net>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
@@ -668,4 +668,8 @@ define("L_FILES_TITLE", "Uploads Management");
 // Room restriction mod by Ciprian
 define("L_RESTRICTED", "Restricted");
 define("L_RESTRICTED_ROM", "%s has successfully been restricted from this room.");
+
+// OpenID login mod by Ciprian
+define("L_OPID_SIGN", "Sign In with an OpenID");
+define("L_OPID_REG", "Import your OpenID profile");
 ?>

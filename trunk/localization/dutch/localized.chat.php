@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.chat.php - plus version (11.08.2008 - rev.41)
+// File : dutch/localized.chat.php - plus version (14.02.2008 - rev.42)
 // Original translation by Hans Paijmans <paai@kub.nl>, Kasper Souren <guaka@industree.org> and Sander Corbesir <rock@jascrc.com>
 // Updates, corrections and additions for the Plus version by DJE.Amesz & Romanesko <Genieusdanny@gmail.com> and Bert Moorlag <berbia@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -644,4 +644,8 @@ define("L_FILES_TITLE", "Uploads Beheer");
 // Room restriction mod by Ciprian
 define("L_RESTRICTED", "Beperking");
 define("L_RESTRICTED_ROM", "%s is succeslvol een beperking opgelegd voor deze kamer.");
+
+// OpenID login mod by Ciprian
+define("L_OPID_SIGN", "Inschrijven met een OpenID");
+define("L_OPID_REG", "Importeer jou OpenID profiel");
 ?>

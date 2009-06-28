@@ -48,22 +48,32 @@ else
 			// Check for swear words in the message to be sent if there is one
 			if (trim($Cmd[2]) != "")
 			{
+			$room_mess = $Cmd[2];
 				if (C_NO_SWEAR && $R != C_NO_SWEAR_ROOM1 && $R != C_NO_SWEAR_ROOM2 && $R != C_NO_SWEAR_ROOM3 && $R != C_NO_SWEAR_ROOM4)
 				{
-				include("./lib/swearing.lib.php");
-				$Cmd[2] = checkwords($Cmd[2], false, $Charset);
+					include("./lib/swearing.lib.php");
+					$room_mess = checkwords($room_mess, false, $Charset);
+			 		if(C_EN_STATS && isset($Found) && $b>0)
+					{
+						$DbLink->query("UPDATE ".C_STS_TBL." SET swears_posted=swears_posted+$b WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+					}
+					unset($Found, $b);
 				}
 				if (C_USE_SMILIES)
 				{
 					include("./lib/smilies.lib.php");
-					Check4Smilies($Cmd[2],$SmiliesTbl);
-					unset($SmiliesTbl);
+					$ss = Check4Smilies($room_mess,$SmiliesTbl);
+					if(C_EN_STATS && $ss > 0)
+					{
+						$DbLink->query("UPDATE ".C_STS_TBL." SET smilies_posted=smilies_posted+$ss WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+					}
+					unset($SmiliesTbl, $ss);
 				};
 			}
 		if (trim($Cmd[1]) == "*")
-		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS room', '$Latin1', ".time().", '$U', '".addslashes(stripslashes($Cmd[2]))."', '', '')");
+		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS room', '$Latin1', ".time().", '$U', '".addslashes(stripslashes($room_mess))."', '', '')");
 		else
-		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS room', '$Latin1', ".time().", '$U', '".addslashes(stripslashes($Cmd[2]))."', '', '')");
+		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS room', '$Latin1', ".time().", '$U', '".addslashes(stripslashes($room_mess))."', '', '')");
 		$IsCommand = true;
 		$RefreshMessages = true;
 		};

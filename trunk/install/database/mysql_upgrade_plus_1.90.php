@@ -65,7 +65,8 @@ ALTER TABLE ".$t_config."
 			ADD RES_ROOM2 enum('0','1') NOT NULL default '0',
 			ADD RES_ROOM3 enum('0','1') NOT NULL default '0',
 			ADD RES_ROOM4 enum('0','1') NOT NULL default '0',
-			ADD RES_ROOM5 enum('0','1') NOT NULL default '0';
+			ADD RES_ROOM5 enum('0','1') NOT NULL default '0',
+			ADD EN_STATS enum('0','1') NOT NULL default '1';
 ", $conn);
 mysql_query("
 UPDATE ".$t_config." SET
@@ -158,6 +159,36 @@ INSERT INTO ".$t_reg_users." VALUES ('', '', 'Random_Quote', '0', 'ef93e0948b007
 ", $conn);
 mysql_query("
 UPDATE ".$t_reg_users." SET latin1='0' WHERE latin1='1';
+", $conn);
+mysql_query("
+CREATE TABLE IF NOT EXISTS ".$t_stats." (
+  stat_date date NOT NULL,
+  room varchar(30) DEFAULT NULL,
+  username varchar(30) DEFAULT NULL,
+  reguser enum('0','1') NOT NULL DEFAULT '0',
+  last_in int(11) NOT NULL DEFAULT '0',
+  seconds_in int(11) NOT NULL DEFAULT '0',
+  longest_in int(11) NOT NULL DEFAULT '0',
+  last_away int(11) NOT NULL DEFAULT '0',
+  seconds_away int(11) NOT NULL DEFAULT '0',
+  longest_away int(11) NOT NULL DEFAULT '0',
+  times_away tinyint(4) NOT NULL DEFAULT '0',
+  logins smallint(5) NOT NULL DEFAULT '0',
+  posts_sent smallint(5) NOT NULL DEFAULT '0',
+  pms_sent smallint(5) NOT NULL DEFAULT '0',
+  cmds_used smallint(5) NOT NULL DEFAULT '0',
+  profile_viewed smallint(5) NOT NULL DEFAULT '0',
+  profiles_checked smallint(5) NOT NULL DEFAULT '0',
+  imgs_posted smallint(5) NOT NULL DEFAULT '0',
+  urls_posted smallint(5) NOT NULL DEFAULT '0',
+  emails_posted smallint(5) NOT NULL DEFAULT '0',
+  swears_posted smallint(5) NOT NULL DEFAULT '0',
+  smilies_posted smallint(5) NOT NULL DEFAULT '0',
+  bans_rcvd tinyint(4) NOT NULL DEFAULT '0',
+  bans_sent tinyint(4) NOT NULL DEFAULT '0',
+  kicks_rcvd tinyint(4) NOT NULL DEFAULT '0',
+  kicks_sent tinyint(4) NOT NULL DEFAULT '0'
+) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
 mysql_query("
 ALTER TABLE ".$t_users."

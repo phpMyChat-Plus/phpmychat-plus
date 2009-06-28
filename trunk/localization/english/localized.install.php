@@ -1,5 +1,5 @@
 <?php
-// File : english/localized.install.php - plus version (29.07.2008 - rev.6)
+// File : english/localized.install.php - plus version (07.06.2009 - rev.7)
 // Original file for Plus version by Thomas Pschernig <tpsde1970@aol.com> and Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ istead (utf-8 edit bug)
 
@@ -71,6 +71,7 @@ define("L_P2_FORM12", "Rename your admin logs folder");
 define("L_P2_FORM13", "If you intend to use phpMyChat as an integrated module for phpNuke or phpBB, the configuration table must be called \"c_config\" and the table for registered users must be called \"c_reg_users\"!");
 define("L_P2_FORM14", "Choose a hard to guess name!");
 define("L_P2_FORM15", "Name of your Chat server");
+define("L_P2_FORM16", "Table for statistics");
 define("L_P3_FORM1", "Administrator account name");
 define("L_P3_FORM2", "Administrator account password");
 define("L_P3_FORM3", "Verify password");

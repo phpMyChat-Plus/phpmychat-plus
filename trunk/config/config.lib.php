@@ -1,27 +1,28 @@
 <?php
-
 // ------ THESE SETTINGS MUST BE COMPLETED ------
 
 // Database settings
-define("C_DB_NAME", 'chat');		// Logical database name on that server
-define("C_DB_USER", 'root');	// Database username
-define("C_DB_PASS", '');				// Database user's password
+define("C_DB_NAME", 'cpanel_plus');						// Logical database name on that server (most common like: cpanelusername_databasename)
+define("C_DB_USER", 'cpanel_plus');				// Database username (most common like: cpanelusername_username)
+define("C_DB_PASS", 'plus');				// Database user's password
 // We recommend you keep the names below
-define("C_DB_HOST", 'localhost');				// Hostname of your MySQL server (most common "localhost", but sometimes "mysql.domain.com")
+define("C_DB_HOST", 'localhost');				// Hostname of your MySQL server (most common "localhost", but sometimes "mysqlX.domain.com")
 define("C_DB_TYPE", 'mysql');						// SQL server type ("mysql", "pgsql" or "odbc")
-define("C_MSG_TBL", 'c_messages');			// Name of the table where messages are stored
-define("C_USR_TBL", 'c_users');					// Name of the table where user names are stored
-define("C_REG_TBL", 'c_reg_users'); 		// Name of the table where registered users are stored
 define("C_BAN_TBL", 'c_ban_users'); 		// Name of the table where banished users are stored
 define("C_CFG_TBL", 'c_config'); 				// Name of the table where configuration settings are stored (if enabled)
 define("C_LRK_TBL", 'c_lurkers'); 			// Name of the table where data about lurkers are stored (if enabled)
+define("C_MSG_TBL", 'c_messages');			// Name of the table where messages are stored
+define("C_REG_TBL", 'c_reg_users'); 		// Name of the table where registered users are stored
+define("C_STS_TBL", 'c_stats'); 			// Name of the table where statistics data is stored (if enabled)
+define("C_USR_TBL", 'c_users');					// Name of the table where user names are stored
 
 // ------ THESE SETTINGS MUST NOT BE CHANGED ------
+error_reporting (E_ERROR | E_WARNING | E_PARSE);
 
 $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
 @mysql_query("SET CHARACTER SET utf8");
-mysql_query("SET NAMES 'utf8'");
-mysql_select_db(C_DB_NAME);
+@mysql_query("SET NAMES 'utf8'");
+@mysql_select_db(C_DB_NAME);
 $query = "SELECT * FROM ".C_CFG_TBL."";
 $result = mysql_query($query);
 $row = mysql_fetch_row($result);
@@ -98,8 +99,8 @@ $SWEAR1								= $row[69];
 $SWEAR2			 					= $row[70];
 $SWEAR3	 							= $row[71];
 $SWEAR4	 							= $row[72];
-$COLOR_FILTERS					= $row[73];
-$COLOR_ALLOW_GUESTS				= $row[74];
+$COLOR_FILTERS				= $row[73];
+$COLOR_ALLOW_GUESTS		= $row[74];
 $ROOM_SKIN1						= $row[75];
 $ROOM_SKIN2						= $row[76];
 $ROOM_SKIN3						= $row[77];
@@ -159,23 +160,23 @@ $WELCOME_SOUND				= $row[130];
 $WORLDTIME						= $row[131];
 $UPD_CHECK						= $row[132];
 $QUOTE						= $row[133];
-$QUOTE_TIME				= $row[134];
+$QUOTE_TIME			= $row[134];
 $QUOTE_COLOR			= $row[135];
-$QUOTE_PATH				= $row[136];
+$QUOTE_PATH			= $row[136];
 $HIDE_ADMINS			= $row[137];
 $HIDE_MODERS			= $row[138];
-$LAST_SAVED_ON			= $row[139];
-$LAST_SAVED_BY			= $row[140];
+$LAST_SAVED_ON		= $row[139];
+$LAST_SAVED_BY		= $row[140];
 $CHAT_SYSTEM			= $row[141];
 $NUKE_BB_PATH			= $row[142];
-$CHAT_NAME				= $row[143];
-$ENGLISH_FORMAT			= $row[144];
+$CHAT_NAME			= $row[143];
+$ENGLISH_FORMAT		= $row[144];
 $FLAGS_3D				= $row[145];
-$ALLOW_REGISTER			= $row[146];
-$DISP_GENDER			= $row[147];
-$SPECIAL_GHOSTS			= $row[148];
-$FILLED_LOGIN			= $row[149];
-$BACKGR_IMG				= $row[150];
+$ALLOW_REGISTER		= $row[146];
+$DISP_GENDER		= $row[147];
+$SPECIAL_GHOSTS		= $row[148];
+$FILLED_LOGIN		= $row[149];
+$BACKGR_IMG			= $row[150];
 $BACKGR_IMG_PATH		= $row[151];
 $POPUP_LINKS			= $row[152];
 $ITALICIZE_POWERS		= $row[153];
@@ -195,6 +196,7 @@ $RES_ROOM2						= $row[166];
 $RES_ROOM3						= $row[167];
 $RES_ROOM4						= $row[168];
 $RES_ROOM5						= $row[169];
+$EN_STATS						= $row[170];
 
 $query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.com'";
 $result_bot = mysql_query($query_bot);
@@ -326,7 +328,7 @@ define("BUZZ_SOUND", $BUZZ_SOUND);
 if (ALLOW_BUZZ_SOUND && BUZZ_SOUND) define("L_BUZZ_SND", "<EMBED SRC=".$BUZZ_SOUND." HIDDEN=true AUTOSTART=true LOOP=false NAME=Buzz MASTERSOUND><NOEMBED><BGSOUND SRC=".$BUZZ_SOUND." LOOP=1></NOEMBED></EMBED>");
 else define("L_BUZZ_SND", "");
 
-// Enable different Topics for each room, defined in banner.php.
+// Enable different Topics for each room, defined in topic.php.
 // If set to 0, it will use the global topic defined there.
 define ("TOPIC_DIFF", $TOPIC_DIFF);
 
@@ -625,4 +627,7 @@ define("GRAVATARS_DYNAMIC_DEF_FORCE", $GRAVATARS_DYNAMIC_DEF_FORCE);
 
 // Uploader mod - by Ciprian
 define("C_ALLOW_UPLOADS", $ALLOW_UPLOADS);
+
+// Statistics mod - by Ciprian
+define("C_EN_STATS", $EN_STATS);
 ?>
