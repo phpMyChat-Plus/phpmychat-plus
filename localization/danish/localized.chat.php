@@ -1,5 +1,5 @@
 <?php
-// File : danish/localized.chat.php - plus version (11.08.2008 - rev.41)
+// File : danish/localized.chat.php - plus version (14.02.2009 - rev.42)
 // Original translation by Jonas Koch Bentzen <post@jonaskochbentzen.dk> & Kenneth Kristiansen <kk@linuxfreak.adsl.dk>
 // Updates, corrections and additions for the Plus version by Bente Feldballe
 // Do not use ' but use  ’  instead (utf-8 edit bug)
@@ -653,4 +653,8 @@ define("L_FILES_TITLE", "Håndtering af Overførsler");
 // Room restriction mod by Ciprian
 define("L_RESTRICTED", "Adgang forbudt");
 define("L_RESTRICTED_ROM", "%s har ikke længere adgang til dette rum.");
+
+// OpenID login mod by Ciprian
+define("L_OPID_SIGN", "Log ind med OpenID");
+define("L_OPID_REG", "Importér din OpenID profil");
 ?>

@@ -18,7 +18,7 @@ function RecursiveMkdir($path)
 $done = 0;
 $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
 @mysql_query("SET CHARACTER SET utf8");
-mysql_query("SET NAMES 'utf8'");
+@mysql_query("SET NAMES 'utf8'");
 mysql_select_db(C_DB_NAME);
 
 $sql = "SELECT * FROM ".C_MSG_TBL." WHERE (m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."' AND username != 'SYS welcome' AND pm_read NOT LIKE 'New%' AND !(username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"%')) ORDER BY m_time DESC";
@@ -131,6 +131,9 @@ $month = date("M", $lastm_time);
 $prev_year = date("Y", $lastm_time - 355*24*60*60);
 $prev_month = date("M", $lastm_time - 28*24*60*60);
 $day = date("d", $lastm_time);
+$message_nb = count($Messages);
+if ($message_nb > 0)
+{
 	if (!file_exists("./".C_LOG_DIR."/index.html")) copy("./config/index/index.html","./".C_LOG_DIR."/index.html");
 	if (!file_exists("./".C_LOG_DIR."/".$year.""))
 	{
@@ -161,7 +164,15 @@ $logpath = "./".C_LOG_DIR."/".$year."/".$month."/".$year.$month.$day.".php"  ;
 		@copy("./config/index/header.html",$logpath);
 		$fp = fopen($logpath, "a") ;
 		$chatSaved = '$chatSaved';
-		@flock($fp, LOCK_EX);    // Lock file in exclusive mode
+		$retries = 0;
+        do { 
+            if ($retries > 0) { 
+                usleep(rand(1, 1000)); 
+            } 
+            $retries += 1; 
+        } while (!@flock($fp, LOCK_EX) and $retries <= 50); 
+
+//		@flock($fp, LOCK_EX);    // Lock file in exclusive mode
 		@fwrite($fp, sprintf("\r\n<?php\r\n"));
 		@fwrite($fp, sprintf("$chatSaved = strftime(L_LONG_DATETIME,$mess_time);\r\n"));
 		if (eregi("win", PHP_OS))
@@ -189,14 +200,14 @@ $logpath = "./".C_LOG_DIR."/".$year."/".$month."/".$year.$month.$day.".php"  ;
 		$fp = fopen($logpath, "a") ;
 		@flock($fp, LOCK_EX);
 	}
-$message_nb = count($Messages);
 for ($i = 0; $i < $message_nb; $i++)
 {
 	@fwrite($fp, sprintf($Messages[$message_nb-1-$i]));
 };
-@flock($fp, LOCK_UN);
+flock($fp, LOCK_UN);
 fclose($fp) ;
 $done = 1;
+}
 $i = 0;
 }
 
@@ -315,6 +326,9 @@ $monthu = date("M", $lastm_timeu);
 $prev_yearu = date("Y", $lastm_timeu - 355*24*60*60);
 $prev_monthu = date("M", $lastm_timeu - 28*24*60*60);
 $dayu = date("d", $lastm_timeu);
+$message_nbu = count($Messagesu);
+if ($message_nbu > 0)
+{
 	if (file_exists("./logs") && !file_exists("./logs/index.html")) copy("./config/index/index.html","./logs/index.html");
 	if (!file_exists("./logs/".$yearu.""))
 	{
@@ -345,7 +359,15 @@ $logpathu = "./logs/".$yearu."/".$monthu."/".$yearu.$monthu.$dayu.".php"  ;
 		@copy("./config/index/header.html",$logpathu);
 		$fpu = fopen($logpathu, "a") ;
 		$chatSavedu = '$chatSavedu';
-		@flock($fpu, LOCK_EX);    // Lock file in exclusive mode
+		$retriesu = 0;
+        do { 
+            if ($retriesu > 0) { 
+                usleep(rand(1, 1000)); 
+            } 
+            $retriesu += 1; 
+        } while (!@flock($fpu, LOCK_EX) and $retriesu <= 50); 
+
+//		@flock($fpu, LOCK_EX);    // Lock file in exclusive mode
 		@fwrite($fpu, sprintf("\r\n<?php\r\n"));
 		@fwrite($fpu, sprintf("$chatSavedu = strftime(L_LONG_DATETIME,$mess_timeu);\r\n"));
 		if (eregi("win", PHP_OS))
@@ -373,14 +395,14 @@ $logpathu = "./logs/".$yearu."/".$monthu."/".$yearu.$monthu.$dayu.".php"  ;
 		$fpu = fopen($logpathu, "a") ;
 		@flock($fpu, LOCK_EX);
 	}
-$message_nbu = count($Messagesu);
 for ($iu = 0; $iu < $message_nbu; $iu++)
 {
 	@fwrite($fpu, sprintf($Messagesu[$message_nbu-1-$iu]));
 };
-@flock($fpu, LOCK_UN);
+flock($fpu, LOCK_UN);
 fclose($fpu) ;
 $doneu = 1;
+}
 $iu = 0;
 }
 if ($done == 1 || $doneu == 1)

@@ -9,14 +9,13 @@
 # Thank you for your understanding. I appreciate it!
 
 // Fix some security holes
-if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
-if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) exit();
+if (isset($L) && !is_dir("./localization/".$L)) exit();
 if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 // Added for Skin mod
 if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 
-require("./${ChatPath}config/config.lib.php");
+require("./config/config.lib.php");
 if (!C_SUPPORT_PAID)
 {
 	require("./${ChatPath}localization/languages.lib.php");

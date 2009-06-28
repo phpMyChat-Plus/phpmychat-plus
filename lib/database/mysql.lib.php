@@ -85,6 +85,12 @@ class DB
 		$this->Query_ID = @mysql_query("OPTIMIZE TABLE $tbl_name",$this->Link_ID);
 	}
 
+	function repair($tbl_name)
+	{
+		$this->connect();
+		$this->Query_ID = @mysql_query("REPAIR TABLE $tbl_name",$this->Link_ID);
+	}
+
 	function clean_results()
 	{
 		if($this->Query_ID != 0) mysql_freeresult($this->Query_ID);

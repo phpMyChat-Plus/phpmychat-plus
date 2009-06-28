@@ -17,6 +17,7 @@ if (!function_exists('mb_convert_case'))
 // Credit for this lib goes to Gustavo Iwamoto <iwamoto@zaz.com.br> and Fabiano R. Prestes <zoso@post.com>
 function checkwords($String, $TestOnly, $Charset)
 {
+	global $Found, $b;
 
 	// You can add the words you don't want users to use in the $BadWords array below. As an eregi
 	// function is called to find them in strings, you may use valid POSIX 1003.2 regular expressions
@@ -29,19 +30,19 @@ function checkwords($String, $TestOnly, $Charset)
 				"ash0le",
 				"ash0les",
 				"asholes",
-				"ass$",
-				"ass monkey",
-				"assface",
+				"^ass$",
+				"^ass monkey",
+				"^assface",
 				"assh0le",
 				"assh0lez",
 				"asshole",
 				"assholes",
 				"assholz",
-				"asswipe",
+				"^asswipe",
 				"azzhole",
 				"ballz",
 				"my balls",
-				"badass",
+				"^badass",
 				"bassterds",
 				"bastard",
 				"bastards",
@@ -61,7 +62,7 @@ function checkwords($String, $TestOnly, $Charset)
 				"boffing",
 				"b00bs",
 				"boobs",
-				"breast([[:alpha:]]*)",
+#				"breast([[:alpha:]]*)",
 				"butt$",
 				"butthole",
 				"buttwipe",
@@ -157,7 +158,7 @@ function checkwords($String, $TestOnly, $Charset)
 				"^hit",
 				"hells",
 				"hoar",
-				"hoor",
+#				"hoor",
 				"hoore",
 				"hore",
 				"hump",
@@ -169,7 +170,7 @@ function checkwords($String, $TestOnly, $Charset)
 				"jap",
 				"japs",
 				"jerk-off",
-				"jesus christ",
+#				"jesus christ",
 				"jisim",
 				"jiss",
 				"jizm",
@@ -323,7 +324,7 @@ function checkwords($String, $TestOnly, $Charset)
 				"titts",
 				"titties",
 				"twat",
-				"turd",
+				"^turd",
 				"untampaxed",
 				"untampaxxxed",
 				"va1jina",
@@ -394,6 +395,7 @@ function checkwords($String, $TestOnly, $Charset)
 	// Don't modify lines below
 
 	$Found = false;
+	$b = 0;
 	for (reset($BadWords); $ToFind = current($BadWords); next($BadWords))
 	{
 		$Found = eregi(mb_convert_case(addslashes($ToFind),MB_CASE_LOWER,$Charset), mb_convert_case($String,MB_CASE_LOWER,$Charset));
@@ -406,6 +408,7 @@ function checkwords($String, $TestOnly, $Charset)
 			else
 			{
 				$String = eregi_replace(addslashes($ToFind), $ReplaceString, mb_convert_case($String,MB_CASE_LOWER,$Charset));
+				$b++;
 			};
 		};
 	};

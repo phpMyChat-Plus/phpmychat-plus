@@ -1,5 +1,5 @@
 <?php
-// File : italian/localized.chat.php - plus version (11.08.2008 - rev.41)
+// File : italian/localized.chat.php - plus version (14.02.2009 - rev.42)
 // Original translation by Andrea D’Alessandro <andrea@abol.it> & Massimo Fubini <massimo@tomato.it>
 // & Giuliano Yurij Beccaria <yurij@e-pages.it> & Marco Borrini <borrini@tradimento.it>
 // & Bartolotta Gioachino <developers@rockitalia.com> & Silvia M. Carrassi <silvia@ladysilvia.net>
@@ -647,4 +647,8 @@ define("L_FILES_TITLE", "Gestione Invii");
 // Room restriction mod by Ciprian
 define("L_RESTRICTED", "Limitato");
 define("L_RESTRICTED_ROM", " l’accesso di %s è stato limitato per questa stanza.");
+
+// OpenID login mod by Ciprian
+define("L_OPID_SIGN", "Accedi con un OpenID");
+define("L_OPID_REG", "Importa uno dei tuoi profili OpenID");
 ?>

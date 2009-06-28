@@ -17,9 +17,9 @@ if (isset($FORM_SEND) && $FORM_SEND == 1)
 	$BANISH_MODE = (stripslashes($submit_type) == A_SHEET1_9)? 1:0;
 
 	// Get the list of the users
-	$DbLink->query("SELECT username,perms,join_room FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND username != '$pmc_username'");
+	$DbLink->query("SELECT username FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND username != '$pmc_username'");
 	$users = Array();
-	while (list($username, $perms, $join_room) = $DbLink->next_record())
+	while (list($username) = $DbLink->next_record())
 	{
 		$users[] = $username;
 	}

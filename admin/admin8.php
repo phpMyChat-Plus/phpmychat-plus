@@ -154,7 +154,6 @@ function display_connected($Private,$Full,$String1,$String2,$Charset)
 
 $CondForQuery	= "(address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3')))";
 
-$DbLink = new DB;
 $DbLink->query("SELECT type, room, username, latin1, m_time, address, message, room_from FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC");
 
 // Format and display new messages

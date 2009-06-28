@@ -662,4 +662,8 @@ define("L_FILES_TITLE", "Dosya yükleme yönetimi ");
 define("L_ERR_USR_28", "%s ’e girişiniz reddedildi!<br />Lütfen başka bir oda seçiniz."); // room name
 define("L_RESTRICTED", "Özel");
 define("L_RESTRICTED_ROM", "%s bu odadan başarıyla çıkarıldı.");
+
+// OpenID login mod by Ciprian
+define("L_OPID_SIGN", "Bir OpenID ye kayıt yapın");
+define("L_OPID_REG", "OpenID profilinizi buraya aktarın");
 ?>

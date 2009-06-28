@@ -269,13 +269,22 @@ $botcontrol ="botfb/$R.txt";
 
 	// e-mail addresses
 	$M = eregi_replace('([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](fo|g|l|m|mes|o|op|pa|ro|seum|t|u|v|z)?)', '<a href="mailto:\\1" alt="Send email">\\1</a>', $M);
+	if(C_EN_STATS)
+	{
+		if(eregi('<a href="mailto',$M)) $DbLink->query("UPDATE ".C_STS_TBL." SET emails_posted=emails_posted+1 WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+		if(eregi('<a href="http',$M)) $DbLink->query("UPDATE ".C_STS_TBL." SET urls_posted=urls_posted+1 WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+	}
 
 	// Smilies
 	if (C_USE_SMILIES)
 	{
 		include("./lib/smilies.lib.php");
-		Check4Smilies($M,$SmiliesTbl);
-		unset($SmiliesTbl);
+		$ss = Check4Smilies($M,$SmiliesTbl);
+		if(C_EN_STATS && $ss > 0)
+		{
+			$DbLink->query("UPDATE ".C_STS_TBL." SET smilies_posted=smilies_posted+$ss WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+		}
+		unset($SmiliesTbl, $ss);
 	};
 
 	// transform ISO-8859-1 special characters
@@ -440,6 +449,11 @@ if (isset($M) && trim($M) != "" && (!isset($M0) || ($M != $M0)) && !($IsCommand 
 		include("./lib/swearing.lib.php");
 		if (checkwords($C, true, $Charset)) $C = '';		//if user is using a swear word (defined in swearing.lib.php), the font color will resets to default. this is to keep your database as well as our computer clean of swearing (no swear into your cookies on your local computer).
 		$M = checkwords($M, false, $Charset);
+ 		if(C_EN_STATS && isset($Found) && $b>0)
+		{
+			$DbLink->query("UPDATE ".C_STS_TBL." SET swears_posted=swears_posted+$b WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+		}
+		unset($Found, $b);
 	}
 // Bob Dickow Custom code for /away command modification - modified by Ciprian for Plus behaviour.:
 
@@ -451,16 +465,31 @@ if (isset($M) && trim($M) != "" && (!isset($M0) || ($M != $M0)) && !($IsCommand 
    }
    $DbLink->clean_results();
 
-   if ($awaystat == '1') {
+   if ($awaystat == 1) {
      $Msg = "sprintf(L_BACK, \"".special_char($U,$Latin1)."\")";
      $time_back = time() - 1;
-     $awaystat = '0';
+     $awaystat = 0;
      $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS away', '$Latin1', '$time_back', '', '".addslashes($Msg)."', '', '$RF')");
      $DbLink->query("UPDATE ".C_USR_TBL." SET awaystat='0' WHERE username='$U'");
+	if(C_EN_STATS)
+	{
+			$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+(".time()."-last_away), longest_away=IF(".time()."-last_away < longest_away, longest_away, ".time()."-last_away), last_away='' WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+	}
    }
    AddMessage(stripslashes($M), $T, $R, $U, $C, "", "", $RF, $Charset);
 // END Bob Dickow custom code for /away command modification - modified by Ciprian for Plus behaviour..
 	$RefreshMessages = true;
+	if(C_EN_STATS)
+	{
+		$DbLink->query("UPDATE ".C_STS_TBL." SET posts_sent=posts_sent+1 WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+	}
+}
+if(C_EN_STATS)
+{
+	if($IsCommand)
+	{
+		$DbLink->query("UPDATE ".C_STS_TBL." SET cmds_used=cmds_used+1 WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+	}
 }
 
 $DbLink->close();

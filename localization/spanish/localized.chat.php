@@ -1,5 +1,5 @@
 <?php
-// File : spanish/localized.chat.php - plus version (11.08.2008 - rev.41)
+// File : spanish/localized.chat.php - plus version (14.02.2009 - rev.42)
 // Original translation by Josep Román <josep.roman@zuerich-see.ch> and León Del Río <leon@webmaster.com.mx>
 // Updates, corrections and additions for the Plus version by Roxana Castañeda <roxminu@yahoo.com> & Shelly Noyes <shelly.noyes@gmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -645,4 +645,8 @@ define("L_FILES_TITLE", "Administrador de Subidas");
 // Room restriction mod by Ciprian
 define("L_RESTRICTED", "Restringido");
 define("L_RESTRICTED_ROM", "%s ha sido restringido exitosamente de esta sala.");
+
+// OpenID login mod by Ciprian
+define("L_OPID_SIGN", "Loguearse usando un OpenID");
+define("L_OPID_REG", "Importa tu perfil de OpenID");
 ?>

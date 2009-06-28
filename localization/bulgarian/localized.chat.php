@@ -1,5 +1,5 @@
 <?php
-// File : bulgarian/localized.chat.php - plus version (11.08.2008 - rev.41)
+// File : bulgarian/localized.chat.php - plus version (14.02.2009 - rev.42)
 // Translation by Peter Petrov <peter.m.petrov@gmail.com>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
@@ -654,4 +654,8 @@ define("L_FILES_TITLE", "Управление на качването");
 // Room restriction mod by Ciprian
 define("L_RESTRICTED", "Ограничен");
 define("L_RESTRICTED_ROM", "Достъпът на %s до тази стая бе ограничен успешно.");
+
+// OpenID login mod by Ciprian
+define("L_OPID_SIGN", "Влезте с OpenID");
+define("L_OPID_REG", "Внесете вашия OpenID профил");
 ?>

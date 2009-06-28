@@ -329,7 +329,7 @@ if (UPD_CHECK)
 		<dt onmouseover="javascript:show('smenu1');">General settings</dt>
 			<dd id="smenu1" onmouseover="javascript:show('smenu1');" onmouseout="javascript:show('');">
 				<ul>
-					<li><a href="#server">Server data</a></li>
+					<li><a href="#server">Chat Server data</a></li>
 					<li><a href="#languages">Languages</a></li>
 					<li><a href="#owner">Owner data</a></li>
 					<li><a href="#registration">Registration</a></li>
@@ -617,7 +617,8 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"RES_ROOM2 = '$vRES_ROOM2', ".
 						"RES_ROOM3 = '$vRES_ROOM3', ".
 						"RES_ROOM4 = '$vRES_ROOM4', ".
-						"RES_ROOM5 = '$vRES_ROOM5'".
+						"RES_ROOM5 = '$vRES_ROOM5', ".
+						"EN_STATS = '$vEN_STATS'".
 				" WHERE ID='0'";
 
 		$DbLink->query($query);
@@ -753,7 +754,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<input type=hidden name="pmc_password" value="<?php echo($pmc_password); ?>">
 		<input type=hidden name="FORM_SEND" id="FORM_SEND" value="5">
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="server"></a><b>Server data</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="server"></a><b>Chat Server data</b></td></tr>
 	<tr class=\"thumbIndex\">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
@@ -770,13 +771,24 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr>
+    <td><b>Enable Statistics in chat.</b><br />
+    	<i>Hint: If your server bandwidth is really limited or you notice overloading of your server, you shall disable this mod!</i>
+	</td>
+    <td>
+        <select name="vEN_STATS">
+	        <option value="0"<?php if($EN_STATS==0){ echo " selected"; } ?>>Disabled</option>
+	        <option value="1"<?php if($EN_STATS==1){ echo " selected"; } ?>>Enabled</option>
+        </select>
+	</td>
+</tr>
+<tr bgcolor="#B0C4DE">
     <td><b>Clean-up time for old messages.</b>
 	</td>
     <td>
 		<input name="vMSG_DEL" type="text" size="7" maxlength="3" value="<?php echo $MSG_DEL; ?>"> (hours)
 	</td>
 </tr>
-<tr bgcolor="#B0C4DE">
+<tr>
     <td><b>Autoboot time for inactive users in rooms.</b><br />
     	<i>Hint: This autoboot feature forces users to be active in rooms. If they want to be lurking, they should just use the lurking page. Admins, moderators and away users won't be booted</i>
 	</td>
@@ -788,7 +800,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     	<input name="vUSR_DEL" type="text" size="7" maxlength="2" value="<?php echo $USR_DEL; ?>"> (minutes)
 	</td>
 </tr>
-<tr>
+<tr bgcolor="#B0C4DE">
     <td><b>Delete registered users accounts not active in this interval (0 for never).</b>
     </td>
     <td>

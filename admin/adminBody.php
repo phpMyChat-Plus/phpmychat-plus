@@ -39,10 +39,22 @@ if (isset($First))
 	$DbLink->optimize(C_LRK_TBL);
 	$DbLink->optimize(C_MSG_TBL);
 	$DbLink->optimize(C_REG_TBL);
+	$DbLink->optimize(C_STS_TBL);
 	$DbLink->optimize(C_USR_TBL);
 };
 
-if ($sheet < 3)
+if (isset($Repair))
+{
+	$DbLink->repair(C_BAN_TBL);
+	$DbLink->repair(C_CFG_TBL);
+	$DbLink->repair(C_LRK_TBL);
+	$DbLink->repair(C_MSG_TBL);
+	$DbLink->repair(C_REG_TBL);
+	$DbLink->repair(C_STS_TBL);
+	$DbLink->repair(C_USR_TBL);
+};
+
+if ($sheet < 3 || ereg("a",$sheet))
 {
 	// Inverse sort order
 	if (!isset($sortBy)) $sortBy = "username";
@@ -56,7 +68,7 @@ if ($sheet < 3)
 // Remove some var from the url query
 $URLQueryBody = "What=Body&L=$L&sheet=$sheet";
 $URLQueryBody_Links = "From=$From&".$URLQueryBody."&pmc_username=".urlencode($pmc_username)."&pmc_password=$pmc_password";
-if ($sheet < 3)
+if ($sheet < 3 || ereg("a",$sheet))
 {
 		// Define the lower bound to be displayed for registered users table
 		$URLQueryBody_SortLinks = $URLQueryBody_Links."&startReg=$startReg";
@@ -91,16 +103,23 @@ else
 <TITLE><?php echo(L_REG_35." - ".(C_CHAT_NAME != "" ? C_CHAT_NAME." - ".APP_NAME : APP_NAME)); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <?php
-if ($sheet < 3)
+if ($sheet < 3 || ereg("a",$sheet))
 {
 	?>
 	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript1.2">
 	<!--
 	if (document.layers)
 	{
-		window.parent.sortBy = "<?php echo((isset($sortBy) && $sortBy != "") ? "&sortBy=$sortBy" : ""); ?>";
 		window.parent.sortOrder = "<?php echo((isset($sortOrder) && $sortOrder != "") ? "&sortOrder=$sortOrder" : ""); ?>";
-		window.parent.startReg = "<?php echo((isset($startReg) && $startReg != "") ? "&startReg=$startReg" : ""); ?>";
+		window.parent.sortBy = "<?php echo((isset($sortBy) && $sortBy != "") ? "&sortBy=$sortBy" : ""); ?>";
+		<?php
+		if(!ereg("a",$sheet))
+		{
+		?>
+			window.parent.startReg = "<?php echo((isset($startReg) && $startReg != "") ? "&startReg=$startReg" : ""); ?>";
+		<?php
+		}
+		?>
 	};
 	// -->
 	</SCRIPT>

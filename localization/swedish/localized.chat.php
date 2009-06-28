@@ -1,5 +1,5 @@
 <?php
-// File : swedish/localized.chat.php - plus version (11.08.2008 - rev.41)
+// File : swedish/localized.chat.php - plus version (14.02.2009 - rev.42)
 // Original file by Martin Edelius <martin.edelius@spirex.se>
 // Updates, corrections and additions for the Plus version by Heikki <heikki@yttervik.be> & Fimpen Högström <fimpen@relative-work.se>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -149,6 +149,7 @@ define("L_ERR_USR_24", "För att skapa ditt egna privata rum, du måste vara reg
 define("L_ERR_USR_25", "Endast administratör kan använda ".$COLORNAME." färg!<br />Försök inte använda ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." eller ".COLOR_CM1.".<br />Dessa är reserverade för konstruktörer!");
 define("L_ERR_USR_26", "Endast administratörer och moderator kan använda ".$COLORNAME." färg!<br />Försök inte använda ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." eller ".COLOR_CM1.".<br />Dessa är reserverade för konstruktörer!");
 define("L_ERR_USR_27", "Du kan inte chatta privat med dig själv.\\nVar God och...\\nVälj ett annat användarnamn.");
+define("L_ERR_USR_28", "Din behörighet till %s har blivit inskränkt!<br />Vänligen välj ett annat rum.");
 define("L_ERR_ROM_1", "Rummets namn får inte innehålla komma eller backslash (\\).");
 define("L_ERR_ROM_2", "Bannlysta ord hittades i rumsnamnet du vill skapa.");
 define("L_ERR_ROM_3", "Det finns redan ett publikt rum med det här namnet.");
@@ -642,7 +643,10 @@ define("L_UPLOAD_SUCCESS", "%s Lyckosamt uppladdat som %s."); // original filena
 define("L_FILES_TITLE", "Uppladningshanterande");
 
 // Room restriction mod by Ciprian
-define("L_ERR_USR_28", "Din behörighet till %s har blivit inskränkt!<br />Vänligen välj ett annat rum."); // room name
 define("L_RESTRICTED", "Inskränkt");
 define("L_RESTRICTED_ROM", "%s har lyckosamt blivit inskränkt från detta rum.");
+
+// OpenID login mod by Ciprian
+define("L_OPID_SIGN", "Logga in med ett OpenID");
+define("L_OPID_REG", "Importera din OpenID profil");
 ?>

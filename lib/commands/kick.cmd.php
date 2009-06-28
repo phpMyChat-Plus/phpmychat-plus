@@ -79,25 +79,54 @@ else
 						{
 							$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_KICKED, \"".special_char($UU,$Latin1)."\")', '', '')");
 						}
+						// Statistics mod by Ciprian
+				 		if(C_EN_STATS)
+						{
+							$curtime = time();
+							$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_in=seconds_in+($curtime-last_in), longest_in=IF($curtime-last_in < longest_in, longest_in, $curtime-last_in), last_in='', kicks_rcvd=kicks_rcvd+1 WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$UU' AND last_in!='0'");
+							$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+($curtime-last_away), longest_away=IF($curtime-last_away < longest_away, longest_away, $curtime-last_away), last_away='' WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$UU' AND last_away!='0'");
+							$DbLink->query("UPDATE ".C_STS_TBL." SET kicks_sent=kicks_sent+1 WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+						}
 						$IsCommand = true;
 						$RefreshMessages = true;
+						$CleanUsrTbl = 1;
 					}
 				}
 			}
 			elseif ($UU == "*")
 			{
-				$DbLink->query("UPDATE ".C_USR_TBL." SET u_time='".time()."', status='k' WHERE username!='$U'");
-				if ($Cmd[2] != "")
+				$DbLink->query("SELECT username FROM ".C_USR_TBL." WHERE username!='$U' AND room='$R'");
+				if($DbLink->num_rows() != 0)
 				{
-					$Reason = trim($Cmd[2]);
-					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_KICKED_ALL_REASON, \"".$Reason."\")', '', '')");
-				}
-				else
-				{
-					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'L_KICKED_ALL', '', '')");
-				}
-				$IsCommand = true;
-				$RefreshMessages = true;
+					$DelLink = new DB;
+					$DelLink->query("UPDATE ".C_USR_TBL." SET u_time='".time()."', status='k' WHERE username!='$U'");
+					$DelLink->close;
+					if(C_EN_STATS)
+					{
+						$curtime = time();
+						while(list($UUU) = $DbLink->next_record())
+						{
+							$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_in=seconds_in+($curtime-last_in), longest_in=IF($curtime-last_in < longest_in, longest_in, $curtime-last_in), last_in='', kicks_rcvd=kicks_rcvd+1 WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$UUU' AND last_in!='0'");
+							$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+($curtime-last_away), longest_away=IF($curtime-last_away < longest_away, longest_away, $curtime-last_away), last_away='' WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$UUU' AND last_away!='0'");
+						}
+						$DbLink->query("UPDATE ".C_STS_TBL." SET kicks_sent=kicks_sent+1 WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+					}
+					if ($Cmd[2] != "")
+					{
+						$Reason = trim($Cmd[2]);
+						$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_KICKED_ALL_REASON, \"".$Reason."\")', '', '')");
+					}
+					else
+					{
+						$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'L_KICKED_ALL', '', '')");
+					}
+
+					// Statistics mod by Ciprian
+					$IsCommand = true;
+					$RefreshMessages = true;
+					$CleanUsrTbl = 1;
+
+				};
 			};
 		};
 	};

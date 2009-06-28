@@ -30,6 +30,20 @@ require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
 include("./lib/mail_validation.lib.php");
 
+if (!function_exists("utf8_substr"))
+{
+	function utf8_substr($str,$start)
+	{
+	   preg_match_all("/./su", $str, $ar);
+	   if(func_num_args() >= 3) {
+	       $end = func_get_arg(2);
+	       return join("",array_slice($ar[0],$start,$end));
+	   } else {
+	       return join("",array_slice($ar[0],$start));
+	   }
+	};
+};
+
 // Special cache instructions for IE5+
 $CachePlus	= "";
 if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";

@@ -282,6 +282,12 @@ if(isset($E) && $E != "")
 		elseif (isset($EN))
 		{
 			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($EN, '$E', 'SYS exit', '', ".time().", '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '', '')");
+			if(C_EN_STATS)
+			{
+				$curtime = time();
+				$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_in=seconds_in+($curtime-last_in), longest_in=IF($curtime-last_in < longest_in, longest_in, $curtime-last_in), last_in='' WHERE stat_date='".date("Y-m-d")."' AND room='$E' AND username='$U' AND last_in!='0'");
+				$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+($curtime-last_away), longest_away=IF($curtime-last_away < longest_away, longest_away, $curtime-last_away), last_away='' WHERE stat_date='".date("Y-m-d")."' AND room='$E' AND username='$U' AND last_away!='0'");
+			}
 		}
 	}
 }
@@ -299,6 +305,7 @@ if(isset($U) && (isset($N) && $N != ""))
 	$DbLink->optimize(C_BAN_TBL);
 	$DbLink->optimize(C_CFG_TBL);
 	$DbLink->optimize(C_LRK_TBL);
+	$DbLink->optimize(C_STS_TBL);
 }
 
 
@@ -745,6 +752,17 @@ if(!isset($Error) && (isset($N) && $N != ""))
 				$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS exit', '', '$current_time', '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '', '')");
 				// next line WELCOME SOUND feature altered for compatibility with /away command R Dickow:
 			  $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
+				if(C_EN_STATS)
+				{
+					$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_in=seconds_in+($current_time-last_in), longest_in=IF($current_time-last_in < longest_in, longest_in, $current_time-last_in), last_in='' WHERE stat_date='".date("Y-m-d")."' AND room='$room' AND username='$U' AND last_in!='0'");
+					$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+($current_time-last_away), longest_away=IF($current_time-last_away < longest_away, longest_away, $current_time-last_away), last_away='' WHERE stat_date='".date("Y-m-d")."' AND room='$room' AND username='$U' AND last_away!='0'");
+					$DbLink->query("SELECT room FROM ".C_STS_TBL." WHERE stat_date='".date("Y-m-d")."' AND username='$U' AND room='$R'");
+					if ($DbLink->num_rows() != 0)
+					{
+						$DbLink->query("UPDATE ".C_STS_TBL." SET logins=logins+1,last_in='$current_time' WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+					}
+					else $DbLink->query("INSERT INTO ".C_STS_TBL." VALUES ('".date("Y-m-d")."', '$R', '$U', '$reguser', '$current_time', '', '', '', '', '', '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '')");
+				}
 			}
 // modified by R Dickow for /away command:
 			$DbLink->query("UPDATE ".C_USR_TBL." SET room='$R',u_time='$current_time', status='$status', ip='$IP', awaystat='0' WHERE username='$U'");
@@ -785,6 +803,15 @@ if(!isset($Error) && (isset($N) && $N != ""))
 		{
 			// next line WELCOME SOUND feature altered for compatibility with /away command R Dickow:
 		  $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
+			if(C_EN_STATS)
+			{
+				$DbLink->query("SELECT room FROM ".C_STS_TBL." WHERE stat_date='".date("Y-m-d")."' AND username='$U' AND room='$R'");
+				if ($DbLink->num_rows() != 0)
+				{
+					$DbLink->query("UPDATE ".C_STS_TBL." SET logins=logins+1,last_in='$current_time' WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+				}
+				else $DbLink->query("INSERT INTO ".C_STS_TBL." VALUES ('".date("Y-m-d")."', '$R', '$U', '$reguser', '$current_time', '', '', '', '', '', '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '')");
+			}
 		}
 
 		if (C_WELCOME)
@@ -806,6 +833,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 		{
 			$DelLink->query("DELETE FROM ".C_MSG_TBL." WHERE m_time='$sent_time' AND (username='SYS inviteFrom' OR (username='SYS inviteTo' AND address='$U'))");
 		};
+		$DelLink->close;
 	};
 	?>
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
