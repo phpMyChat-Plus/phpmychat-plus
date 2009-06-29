@@ -55,7 +55,7 @@ else
 					$room_mess = checkwords($room_mess, false, $Charset);
 			 		if(C_EN_STATS && isset($Found) && $b>0)
 					{
-						$DbLink->query("UPDATE ".C_STS_TBL." SET swears_posted=swears_posted+$b WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+						$DbLink->query("UPDATE ".C_STS_TBL." SET swears_posted=swears_posted+$b WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
 					}
 					unset($Found, $b);
 				}
@@ -65,7 +65,7 @@ else
 					$ss = Check4Smilies($room_mess,$SmiliesTbl);
 					if(C_EN_STATS && $ss > 0)
 					{
-						$DbLink->query("UPDATE ".C_STS_TBL." SET smilies_posted=smilies_posted+$ss WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+						$DbLink->query("UPDATE ".C_STS_TBL." SET smilies_posted=smilies_posted+$ss WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
 					}
 					unset($SmiliesTbl, $ss);
 				};

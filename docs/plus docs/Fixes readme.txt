@@ -33,7 +33,7 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 10.06.2009 - 1.93-RC5:
-- added statistics table for admin analyses purposes (c_stats table added); (functionality extension)
+- added statistics table for admin analyses purposes (c_stats table added and lots of testings and fine-tunings); (functionality extension)
 27.08.2008 - 1.93-RC4:
 - logs header include paths fixed to avoid safe mode restrictions (access to relative paths to localization files); (functionality related)
 - fixed the away command notifications; (functionality related)

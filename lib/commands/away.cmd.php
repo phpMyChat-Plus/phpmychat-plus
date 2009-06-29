@@ -90,7 +90,7 @@ else $xtra = eregi_replace($prefix.$pureUrl, '<a href="\\1://\\2" target="_blank
 		$ss = Check4Smilies($xtra,$SmiliesTbl);
 		if(C_EN_STATS && $ss > 0)
 		{
-			$DbLink->query("UPDATE ".C_STS_TBL." SET smilies_posted=smilies_posted+$ss WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+			$DbLink->query("UPDATE ".C_STS_TBL." SET smilies_posted=smilies_posted+$ss WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
 		}
 		unset($SmiliesTbl, $ss);
 	};
@@ -129,11 +129,11 @@ else $xtra = eregi_replace($prefix.$pureUrl, '<a href="\\1://\\2" target="_blank
 	{
 		if($awaystat == 1)
 		{
-			$DbLink->query("UPDATE ".C_STS_TBL." SET last_away=".time().", times_away=times_away+1 WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+			$DbLink->query("UPDATE ".C_STS_TBL." SET last_away=".time().", times_away=times_away+1 WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
 		}
 		else
 		{
-			$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+(".time()."-last_away), longest_away=IF(".time()."-last_away < longest_away, longest_away, ".time()."-last_away), last_away='' WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U' AND last_away!='0'");
+			$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+(".time()."-last_away), longest_away=IF(".time()."-last_away < longest_away, longest_away, ".time()."-last_away), last_away='' WHERE (stat_date=FROM_UNIXTIME(last_away,'%Y-%m-%d') OR stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d')) AND room='$R' AND username='$U' AND last_away!='0'");
 		}
 	}
 
