@@ -92,8 +92,8 @@ else
 		{
 			if ($U != $UU)
 			{
-				$DbLink->query("UPDATE ".C_STS_TBL." SET profile_viewed=profile_viewed+1 WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$UU' AND last_in!='0'");
-				$DbLink->query("UPDATE ".C_STS_TBL." SET profiles_checked=profiles_checked+1 WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U' AND last_in!='0'");
+				$DbLink->query("UPDATE ".C_STS_TBL." SET profile_viewed=profile_viewed+1 WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$UU' AND last_in!='0'");
+				$DbLink->query("UPDATE ".C_STS_TBL." SET profiles_checked=profiles_checked+1 WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U' AND last_in!='0'");
 			}
 		}
 	};

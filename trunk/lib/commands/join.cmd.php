@@ -146,7 +146,7 @@ if ($IsCommand)
 		if(C_EN_STATS)
 		{
 			$curtime = time();
-			$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_in=seconds_in+($curtime-last_in), longest_in=IF($curtime-last_in < longest_in, longest_in, $curtime-last_in), last_in='' WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
+			$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_in=seconds_in+($curtime-last_in), longest_in=IF($curtime-last_in < longest_in, longest_in, $curtime-last_in), last_in='' WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
 		}
 		?>
 		<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
