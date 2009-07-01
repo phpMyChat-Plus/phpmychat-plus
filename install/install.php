@@ -750,13 +750,13 @@ define("C_DB_PASS", '<?php echo $dbpass ?>');				// Database user's password
 // We recommend you keep the names below
 define("C_DB_HOST", '<?php echo $dbhost ?>');				// Hostname of your MySQL server (most common "localhost", but sometimes "mysql.domain.com")
 define("C_DB_TYPE", '<?php echo $dbtype ?>');						// SQL server type ("mysql", "pgsql" or "odbc")
-define("C_MSG_TBL", '<?php echo $t_messages ?>');			// Name of the table where messages are stored
-define("C_USR_TBL", '<?php echo $t_users ?>');					// Name of the table where user names are stored
-define("C_REG_TBL", '<?php echo $t_reg_users ?>'); 		// Name of the table where registered users are stored
 define("C_BAN_TBL", '<?php echo $t_ban_users ?>'); 		// Name of the table where banished users are stored
 define("C_CFG_TBL", '<?php echo $t_config ?>'); 				// Name of the table where configuration settings are stored (if enabled)
 define("C_LRK_TBL", '<?php echo $t_lurkers ?>'); 			// Name of the table where data about lurkers are stored (if enabled)
+define("C_MSG_TBL", '<?php echo $t_messages ?>');			// Name of the table where messages are stored
+define("C_REG_TBL", '<?php echo $t_reg_users ?>'); 		// Name of the table where registered users are stored
 define("C_STS_TBL", '<?php echo $t_stats ?>'); 			// Name of the table where statistics data is stored (if enabled)
+define("C_USR_TBL", '<?php echo $t_users ?>');					// Name of the table where user names are stored
 
 // ------ THESE SETTINGS MUST NOT BE CHANGED ------
 
@@ -1396,13 +1396,13 @@ else {
   	fputs ( $fh, '// We recommend you keep the names below'.$lfeed );
   	fputs ( $fh, 'define("C_DB_HOST", \''.$dbhost.'\');				// Hostname of your MySQL server (most common "localhost", but sometimes "mysql.domain.com")'.$lfeed );
   	fputs ( $fh, 'define("C_DB_TYPE", \''.$dbtype.'\');						// SQL server type ("mysql", "pgsql" or "odbc")'.$lfeed );
-  	fputs ( $fh, 'define("C_MSG_TBL", \''.$t_messages.'\');			// Name of the table where messages are stored'.$lfeed );
-  	fputs ( $fh, 'define("C_USR_TBL", \''.$t_users.'\');					// Name of the table where user names are stored'.$lfeed );
-  	fputs ( $fh, 'define("C_REG_TBL", \''.$t_reg_users.'\'); 		// Name of the table where registered users are stored'.$lfeed );
   	fputs ( $fh, 'define("C_BAN_TBL", \''.$t_ban_users.'\'); 		// Name of the table where banished users are stored'.$lfeed );
   	fputs ( $fh, 'define("C_CFG_TBL", \''.$t_config.'\'); 				// Name of the table where configuration settings are stored (if enabled)'.$lfeed );
   	fputs ( $fh, 'define("C_LRK_TBL", \''.$t_lurkers.'\'); 			// Name of the table where data about lurkers are stored (if enabled)'.$lfeed );
+  	fputs ( $fh, 'define("C_MSG_TBL", \''.$t_messages.'\');			// Name of the table where messages are stored'.$lfeed );
+  	fputs ( $fh, 'define("C_REG_TBL", \''.$t_reg_users.'\'); 		// Name of the table where registered users are stored'.$lfeed );
   	fputs ( $fh, 'define("C_STS_TBL", \''.$t_stats.'\'); 			// Name of the table where statistics data is stored (if enabled)'.$lfeed );
+  	fputs ( $fh, 'define("C_USR_TBL", \''.$t_users.'\');					// Name of the table where user names are stored'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// ------ THESE SETTINGS MUST NOT BE CHANGED ------'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
