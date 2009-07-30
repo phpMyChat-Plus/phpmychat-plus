@@ -1,5 +1,5 @@
 <?php
-// File : english/localized.chat.php - plus version (14.02.2009 - rev.42)
+// File : english/localized.chat.php - plus version (01.08.2009 - rev.43)
 // Original file by Nicolas Hoizey <nhoizey@phpheaven.net>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
@@ -518,6 +518,7 @@ define("L_NOT_SELECTED", "not selected");
 define("L_NOT_SELECTED_F", ""); // feminine word, if it's the case
 define("L_EMAIL_1", "to send email");
 define("L_FULLSIZE_PIC", "to open the full size picture");
+define("L_PRIVACY", "to read our Privacy Policy");
 define("L_AUTHOR", "the author"); //Phrase will look like this: L_CLICK." ".L_LINKS_6." ".L_AUTHOR == Click here - to contact - the author
 define("L_DEVELOPER", "the developer of this chat"); //same here
 define("L_OWNER", "the owner of this chat"); //same here
@@ -618,6 +619,7 @@ define("L_LANG_ENUS", "English US"); // for US formats and flags
 define("L_LANG_ES", "Spanish");
 define("L_LANG_FR", "French");
 define("L_LANG_GR", "Greek");
+define("L_LANG_HE", "Hebrew");
 define("L_LANG_HI", "Hindi");
 define("L_LANG_HU", "Hungarian");
 define("L_LANG_IT", "Italian");
@@ -672,4 +674,8 @@ define("L_RESTRICTED_ROM", "%s has successfully been restricted from this room."
 // OpenID login mod by Ciprian
 define("L_OPID_SIGN", "Sign In with an OpenID");
 define("L_OPID_REG", "Import your OpenID profile");
+
+// Support buttons
+define("L_DONATION_WARN", "You have chosen to contribute to the free development of\n<?php echo(APP_NAME); ?> by making a donation to the developer.\nThank you for your support!\n\nNote: the recipient is not the owner of this chat.\nPlease enter the amount on the next page.\n\nContinue?");
+define("L_DONATION_ALT", "Support with PayPal the development of <?php echo(APP_NAME); ?> - it's Fast, Free and Secure!");
 ?>

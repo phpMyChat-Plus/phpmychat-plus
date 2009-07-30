@@ -1,5 +1,5 @@
 <?php
-// File : english/localized.admin.php - plus version (26.08.2008 - rev.14)
+// File : english/localized.admin.php - plus version (01.08.2009 - rev.15)
 // Original file by Loďc Chapeaux <lolo@phpheaven.net> & Dean Collins <joelford@pacbell.net>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -23,7 +23,10 @@ define("A_MENU_6", "Chat extras");
 define("A_MENU_7", "Search");
 define("A_MENU_8", "Connections");
 define("A_MENU_9", "Log archive");
+define("A_MENU_1a", "Profiles");
+define("A_MENU_2a", "Statistics");
 define("A_LOGOUT", "Logout");
+define("A_MOD_DEV", "Mod under development");
 
 // Frame for registered users
 define("A_SHEET1_1", "List of registered users and their permissions");
@@ -165,5 +168,13 @@ define("A_SEARCH_25", "Moderate this user");
 
 // Connected users Page
 define("A_LURKING_1", "Connected users and Lurking") ;
-define("A_LURKING_2", "Lurking disabled.") ;
+define("A_LURKING_2", "Lurking disabled") ;
+
+// Statistics Page
+define("A_STATS_1", "Chat Statistics Page");
+define("A_STATS_2", "Data collection started on %s"); //date
+define("A_STATS_3", "Overall statistics (All times)");
+define("A_STATS_4", "Detailed statistics (Last %s days of activity)"); //number of days
+define("A_STATS_5", "Statistics disabled");
+define("A_STATS_6", "Top %s"); //Top 10 or Top 5
 ?>

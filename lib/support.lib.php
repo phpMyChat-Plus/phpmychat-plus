@@ -13,6 +13,9 @@ switch (L_LANG)
 	case "hu_HU":
 		$ppbutton = ($pptype == "big") ? "3626529" : "3626553";
 		break;
+	case "he_HE":
+		$ppbutton = ($pptype == "big") ? "7148858" : "7148805";
+		break;
 	case "ro_RO":
 		$ppbutton = ($pptype == "big") ? "3626613" : "3626645";
 		$ppalt = "PayPal - Calea cea mai sigură şi facilă de a efectua plăţi online.";

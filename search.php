@@ -54,6 +54,13 @@ switch(L_LANG)
 		$L_G_HL = "fr";
 		$L_G_CX = "qu42zo-puy3";
 		break;
+	case "he_IL":
+		$L_G_EXT = "co.il";
+		$L_G_SA = "חיפוש";
+#		$L_G_SA = "חפש";
+		$L_G_HL = "iw";
+		$L_G_CX = "6tiikj-wqp1";
+		break;
 	case "hu_HU":
 		$L_G_EXT = "hu";
 #		$L_G_SA = "Keresés";

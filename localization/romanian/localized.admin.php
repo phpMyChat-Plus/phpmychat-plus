@@ -1,5 +1,5 @@
 <?php
-// File : romanian/localized.admin.php - plus version (26.08.2008 - rev.14)
+// File : romanian/localized.admin.php - plus version (01.08.2009 - rev.15)
 // Original translation started by Radu Swider <swidera@satline.ro>, first updated by Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro>
 // Corrected, finalized and updated to Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -22,7 +22,10 @@ define("A_MENU_6", "Extras Chat");
 define("A_MENU_7", "Căutare");
 define("A_MENU_8", "Conectări");
 define("A_MENU_9", "Arhivă");
+define("A_MENU_1a", "Profiluri");
+define("A_MENU_2a", "Statistici");
 define("A_LOGOUT", "Deconectare");
+define("A_MOD_DEV", "Mod aflat în curs de dezvoltare");
 
 // Frame for registered users
 define("A_SHEET1_1", "Lista utilizatorilor înregistraţi şi permisiunile acestora");
@@ -166,5 +169,13 @@ define("A_SEARCH_25", "Moderează acest utilizator");
 
 // Connected users Page
 define("A_LURKING_1", "Utilizatori conectaţi şi monitorizare") ;
-define("A_LURKING_2", "Monitorizare dezactivată.") ;
+define("A_LURKING_2", "Monitorizare dezactivată") ;
+
+// Statistics Page
+define("A_STATS_1", "Pagina de statistici");
+define("A_STATS_2", "Date colectate începând cu data de %s"); //date
+define("A_STATS_3", "Statistici generale (Toate timpurile)");
+define("A_STATS_4", "Statistici detaliate (Ultimele %s zile de activitate)"); //number of days
+define("A_STATS_5", "Statisticile au fost dezactivate");
+define("A_STATS_6", "Top %s"); //Top 10 or Top 5
 ?>
