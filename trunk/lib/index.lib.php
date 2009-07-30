@@ -1404,7 +1404,7 @@ if ($show_donation)
 {
 	$pptype = "big";
 	require("${ChatPath}lib/support.lib.php");
-	if (intval($ppbutton) < 3620000 || intval($ppbutton) > 3627000) $copy_break = 1;
+	if (intval($ppbutton) < 3620000 || (intval($ppbutton) > 3627000 && intval($ppbutton) != 7148858 && intval($ppbutton) != 7148805)) $copy_break = 1;
 }
 ?>
 </P>

@@ -1,5 +1,5 @@
 <?php
-// File : romanian/localized.chat.php - plus version (14.02.2009 - rev.42)
+// File : romanian/localized.chat.php - plus version (01.08.2009 - rev.43)
 // Original translation started by Radu Swider <swidera@satline.ro>, first updated by Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro>
 // Corrected, finalized, diacritics addition and updated to Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -518,9 +518,10 @@ define("L_NOT_SELECTED", "neselectat");
 define("L_NOT_SELECTED_F", "neselectată");
 define("L_EMAIL_1", "pentru a trimite email");
 define("L_FULLSIZE_PIC", "pentru a deschide poza în mărime originală");
+define("L_PRIVACY", "pentru a citi Declaraţia noastră de Confidenţialitate");
 define("L_AUTHOR", "autorul");
 define("L_DEVELOPER", "dezvoltatorul acestui chat");
-define("L_OWNER", "proprietarul acestui chat");
+define("L_OWNER", "proprietarul acestui server de chat");
 define("L_TRANSLATOR", "translatorul");
 
 // Counter on login
@@ -602,6 +603,7 @@ define("L_LANG_ENUS", "Engleză Americană");
 define("L_LANG_ES", "Spaniolă");
 define("L_LANG_FR", "Franceză");
 define("L_LANG_GR", "Greacă");
+define("L_LANG_HE", "Ebraică");
 define("L_LANG_HI", "Indiană");
 define("L_LANG_HU", "Maghiară");
 define("L_LANG_IT", "Italiană");
@@ -655,4 +657,8 @@ define("L_RESTRICTED_ROM", "%s a fost restricţionat din această cameră.");
 // OpenID login mod by Ciprian
 define("L_OPID_SIGN", "Identificare folosind OpenID");
 define("L_OPID_REG", "Importă un profil OpenID");
+
+// Support buttons
+define("L_DONATION_WARN", "Aţi ales să contribuiţi la dezvoltarea aplicaţiei <?php echo(APP_NAME); ?>,\nprin trimiterea unei donaţii dezvoltatorului.\nVă mulţumim pentru încrederea şi sprijinul acordat!\n\nNotă: destinatarul acestei donaţii nu este una şi aceeaşi persoană\ncu proprietarul acestui server de chat.\nVă rugăm să introduceţi suma dorită în pagina următoare.\n\nContinuaţi?");
+define("L_DONATION_ALT", "Contribuiţi prin PayPal la dezvoltarea aplicaţiei <?php echo(APP_NAME); ?> - este cel mai Rapid, Gratuit şi Sigur!");
 ?>
