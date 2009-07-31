@@ -10,11 +10,12 @@ switch (L_LANG)
 	case "da_DK":
 		$ppbutton = ($pptype == "big") ? "3626398" : "3626431";
 		break;
+	case "he_IL":
+		$ppbutton = ($pptype == "big") ? "7148858" : "7148805";
+		$ppalt = "פייפאל - הדרך הבטוחה, הקלה לשלם באינטרנט.";
+		break;
 	case "hu_HU":
 		$ppbutton = ($pptype == "big") ? "3626529" : "3626553";
-		break;
-	case "he_HE":
-		$ppbutton = ($pptype == "big") ? "7148858" : "7148805";
 		break;
 	case "ro_RO":
 		$ppbutton = ($pptype == "big") ? "3626613" : "3626645";
