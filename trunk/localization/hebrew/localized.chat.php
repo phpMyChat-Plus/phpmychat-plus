@@ -16,8 +16,8 @@ $Align = "right";
 // welcome page
 define("L_TUTORIAL", "מדריך למשתמש");
 
-define("L_WEL_1", "%s %s הודעות נמחקות לאחר");
-define("L_WEL_2", "%s %s ומשתמשים לא-פעילים נמחקים לאחר");
+define("L_WEL_1", "הודעות נמחקות לאחר %s %s");
+define("L_WEL_2", "ומשתמשים לא-פעילים נמחקים לאחר %s %s");
 
 define("L_CUR_1", "יש");
 define("L_CUR_1a", "כרגע");
@@ -144,8 +144,8 @@ define("L_ERR_USR_18", "Banished word found in your username.");
 define("L_ERR_USR_19", "You cannot be in more than one room at the same time.");
 define("L_ERR_USR_20", "You have been banished from this room or from the chat.");
 define("L_ERR_USR_20a", "You have been banished from this room or from the chat.<br />Reason: %s");
-define("L_ERR_USR_21", "You have NOT been active for the last ".C_USR_DEL." ".((C_USR_DEL == "1") ? "".L_MIN."" : "".L_MINS."").",<br />therefore you’ve been booted from the room.");
-define("L_ERR_USR_22", "This command is not available for\\nthe browser you use (IE engine).");
+define("L_ERR_USR_21", "לא היית פעיל כבר ".C_USR_DEL." ".((C_USR_DEL == "1") ? "".L_MIN."" : "".L_MINS."").",<br />ולכן עפת מהחדר.");
+define("L_ERR_USR_22", "פקודה זו לא זמינה\\nבדפדפן שאתה משתמש בו (אקספלורר).");
 define("L_ERR_USR_23", "חובה להיות רשום כדי להצטרף לחדר פרטי");
 define("L_ERR_USR_24", "To create your own private room you must be registered.");
 define("L_ERR_USR_25", "Only the administrator can use ".$COLORNAME." color!<br />Don’t try to use ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2.", ".COLOR_CM.", ".COLOR_CM1." or ".COLOR_CM2.".<br />These are reserved to power users!");
@@ -461,22 +461,22 @@ define("L_SUN", "Sunday");
 // Password reset form by Ciprian
 define("L_PASS_0", "סיסמא איפוס");
 define("L_PASS_1", "שאלה סודית");
-define("L_PASS_2", "What make was your first car?"); // Don't change this question! Just translate it! And keep it short!
-define("L_PASS_3", "What was your first pet name?"); // Don't change this question! Just translate it! And keep it short!
-define("L_PASS_4", "What is your favorite drink?"); // Don't change this question! Just translate it! And keep it short!
-define("L_PASS_5", "What is your birth date?"); // Don't change this question! Just translate it! And keep it short!
+define("L_PASS_2", "איך קראו לתחש הראשון שלך"); // Don't change this question! Just translate it! And keep it short!
+define("L_PASS_3", "איך קראו לסבתא שלך"); // Don't change this question! Just translate it! And keep it short!
+define("L_PASS_4", "מה אתה מעדיף לשתות"); // Don't change this question! Just translate it! And keep it short!
+define("L_PASS_5", "מתי יום ההולדת שלך"); // Don't change this question! Just translate it! And keep it short!
 define("L_PASS_6", "תשובה סודית");
 define("L_PASS_7", "איפוס סיסמא");
-define("L_PASS_8", "Your סיסמא has successfully been reset.");
-define("L_PASS_9", "Your new סיסמא to enter the chat");
-define("L_PASS_11", "Welcome back to our chat server!");
+define("L_PASS_8", "איפוס הסיסמא הצליח");
+define("L_PASS_9", "ססימת הכניסה לצאט");
+define("L_PASS_11", "ברוכים השבים");
 define("L_PASS_12", "בחר שאלה סודית");
-define("L_ERR_PASS_1", "Wrong username. Choose yours.");
-define("L_ERR_PASS_2", "Wrong email. Try again!");
+define("L_ERR_PASS_1", "שם משתמש לא תקין. בחר שוב");
+define("L_ERR_PASS_2", "אימייל לא תקין. בחר שוב");
 define("L_ERR_PASS_3", "Wrong secret question.<br />Answer to the one shown below!");
-define("L_ERR_PASS_4", "Wrong secret answer. Try again!");
-define("L_ERR_PASS_5", "You haven’t set your private/secret data.");
-define("L_ERR_PASS_6", "You haven’t set your private/secret data yet.<br />You cannot use this form. Contact the admin!");
+define("L_ERR_PASS_4", "תשובה לא ממש מוצלחת. נסה שוב ");
+define("L_ERR_PASS_5", "לא נתת תשובה סודית/ מידע סודי לניחוש סיסמא.");
+define("L_ERR_PASS_6", "לא נתת תשובה סודית/ מידע סודי לניחוש סיסמא.<br />לכן לא תוכל להשתמש בטופס זה<br>קרא למנהל המערכת");
 
 // admin stuff - added for administrators promotions/demotions in admin panel - by Ciprian
 define("L_ADM_3", "%s has become an administrator of this chat.");
@@ -495,8 +495,8 @@ define("L_LINKS_1", "Posted links");
 define("L_LINKS_2", "Here you can access the posted links");
 
 // Javascript Status/title messages on links/images mouseover
-define("L_CLICKS", "Click here %s %s");
-define("L_CLICK", "Click here %s");
+define("L_CLICKS", "%s %s לחץ כאן");
+define("L_CLICK", "%s לחץ כאן");
 define("L_LINKS_3", "to open link");
 define("L_LINKS_4", "to open author’s site");
 define("L_LINKS_5", "to insert this smiley");

@@ -630,15 +630,23 @@ $not_selected = " ".$null." (".$not_selected.")";
 ?>
 		</TABLE>
 		<P>
-		<?php
-		if (!$done)
-		{
-			?>
-			<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(L_REG_16); ?>">
-			<?php
-		}
-		?>
-		<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(L_REG_25); ?>" onClick="if (window.opener && !window.opener.closed) put_focus(); self.close(); return false;">
+<?php
+if (!$done)
+{
+?>
+	<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(L_REG_16); ?>">
+<?php
+}
+else
+{
+?>
+	<SCRIPT LANGUAGE="JavaScript">
+	var x = setTimeout('window.close();', 6000);   // 6 seconds
+	</SCRIPT>
+<?php
+}
+?>
+	<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(L_REG_25); ?>" onClick="if (window.opener && !window.opener.closed) put_focus(); self.close(); return false;">
 	</TD>
 </TR>
 </TABLE>
