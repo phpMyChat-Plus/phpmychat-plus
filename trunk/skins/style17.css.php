@@ -269,7 +269,7 @@ INPUT, SELECT, TEXTAREA
 	border: thin ridge <?php echo($QUOTE_COLOR); ?>;
 	background: #8b4513;
 	color: #fffff0;
-	text-align: left;
+	text-align: justify;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
   border: solid;
