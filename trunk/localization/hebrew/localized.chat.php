@@ -656,7 +656,7 @@ define("L_UPLOAD_SUCCESS", "%s successfully uploaded as %s.");
 define("L_FILES_TITLE", "Uploads Management");
 
 // Room restriction mod by Ciprian
-define("L_RESTRICTED", "Restricted");
+define("L_RESTRICTED", "מוגבל");
 define("L_RESTRICTED_ROM", "%s has successfully been restricted from this room.");
 
 // OpenID login mod by Ciprian

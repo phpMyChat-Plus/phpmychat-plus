@@ -46,7 +46,7 @@ if (!isset($What) || $What == "")
 		$Charset_Sav = $Charset;
 		$FontName_Sav = (isset($FontName) ? $FontName : "");
 		$FontSize_Sav = $FontSize;
-		include_once("./localization/english/admin.lib.php");
+		include_once("./localization/admin.lib.php");
 	};
 };
 require_once("./localization/${L}/localized.chat.php");

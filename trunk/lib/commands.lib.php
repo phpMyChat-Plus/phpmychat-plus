@@ -143,5 +143,9 @@ elseif (eregi("^\/topic[[:space:]](\*)?([^[:space:]]{1,30})[[:space:]](.+)$", $M
 elseif (eregi("^\/(wisp|whisp)[[:space:]]([^[:space:]]{1,30})[[:space:]](.+)$", $M, $Cmd))
 {
 	include("./lib/commands/wisp.cmd.php");
+}
+elseif (eregi("^\/(rtl|ltr)[[:space:]](.+)?$", $M, $Cmd))
+{
+	include("./lib/commands/dir.cmd.php");
 };
 ?>

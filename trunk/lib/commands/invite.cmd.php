@@ -16,7 +16,7 @@ if ($Cmd[2] != "" && ereg("[\, \']", stripslashes($Cmd[2])))
 {
 	$Error = L_ERR_USR_16;
 }
-elseif (mb_convert_case($Cmd[2],MB_CASE_LOWER,$Charset) == mb_convert_case($U,MB_CASE_LOWER,$Charset)) || $Cmd[2] == $U)
+elseif ((mb_convert_case($Cmd[2],MB_CASE_LOWER,$Charset) == mb_convert_case($U,MB_CASE_LOWER,$Charset)) || $Cmd[2] == $U)
 {
 	$Error = L_ERR_USR_19;
 }
