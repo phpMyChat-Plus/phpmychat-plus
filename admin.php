@@ -49,8 +49,8 @@ if (!isset($What) || $What == "")
 		include_once("./localization/english/admin.lib.php");
 	};
 };
-require_once("./localization/${L}/localized.admin.php");
 require_once("./localization/${L}/localized.chat.php");
+require_once("./localization/${L}/localized.admin.php");
 if (isset($Charset_Sav))
 {
 	$Charset = $Charset_Sav; unset($Charset_Sav);
