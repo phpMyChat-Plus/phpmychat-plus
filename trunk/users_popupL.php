@@ -45,6 +45,8 @@ if (get_magic_quotes_gpc()) {
 		$_COOKIE[$k] = stripslashes($v);
 }
 
+$textDirection = ($Align == "right") ? "RTL" : "LTR";
+
 // Added for php4 support of mb functions
 if (!function_exists('mb_convert_case'))
 {
@@ -232,8 +234,9 @@ if(isset($NbUsers) && $NbUsers > 0)
 						echo("<B>".htmlspecialchars($Other)."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$Users->num_rows().")</SPAN><br />");
 						while(list($Username,$Latin1,$status,$room_time) = $Users->next_record())
 						{
-							$room_time = date("d-M, H:i:s", $room_time + C_TMZ_OFFSET*60*60);
-							echo("-&nbsp;<a ".userClass($status,$Username).";>".special_char($Username,$Latin1,$status)."</a> <font size=1>".special_char("(".$room_time.")",$Latin1,"")."</font><br />");
+							$room_time = $room_time + C_TMZ_OFFSET*60*60;
+							$room_time = strftime(L_SHORT_DATETIME,$room_time);
+							echo("-&nbsp;<a ".userClass($status,$Username).";>".special_char($Username,$Latin1,$status)."</a> <BDO dir=\"${textDirection}\"></BDO><font size=1>(".special_char($room_time,$Latin1,"").")</font><br />");
 						};
 					}
 				}
