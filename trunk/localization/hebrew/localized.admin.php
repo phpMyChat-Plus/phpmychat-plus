@@ -8,7 +8,7 @@
 $Charset = "utf-8";
 
 // -- hebrew / RTL specific
-$Align = "right";
+$Align = "left";
 
 // medium font size in pt.
 $FontSize = 10;
