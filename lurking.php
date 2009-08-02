@@ -223,7 +223,8 @@ if($DbLink1->num_rows() > 0)
 			$colornamedest_endtag = "";
 		}
 		$NewMsg = "<tr valign=top>";
-		$NewMsg .= "<td width=1% nowrap=\"nowrap\">".date("d-M, H:i:s", $Time + C_TMZ_OFFSET*60*60)."</td><td width=1% nowrap=\"nowrap\">".$Room."</td>";
+		$Time = $Time + C_TMZ_OFFSET*60*60;
+		$NewMsg .= "<td width=1% nowrap=\"nowrap\">".strftime(L_SHORT_DATETIME, $Time)."</td><td width=1% nowrap=\"nowrap\">".$Room."</td>";
 		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS topic" && $User != "SYS topic reset" && substr($User,0,8) != "SYS dice")
 		{
 			$User = $colorname_tag."[".special_char($User,$Latin1)."]".$colorname_endtag;

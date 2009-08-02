@@ -68,8 +68,8 @@ function display_connected($Private,$Full,$NU,$String1,$String2,$DbLink,$Charset
 				}
 				if ($Latin1) $User = htmlentities($User);
 				$User = user_status($User,$Status);
-				$RTime = date("d-M, H:i:s", $RTime + C_TMZ_OFFSET*60*60);
-				$List .= "<tr><td nowrap=\"nowrap\">".$User."</td><td nowrap=\"nowrap\">".$Room."</td><td nowrap=\"nowrap\">".L_LURKING_4." ".$RTime."";
+				$RTime = $RTime + C_TMZ_OFFSET*60*60;
+				$List .= "<tr><td nowrap=\"nowrap\">".$User."</td><td nowrap=\"nowrap\">".$Room."</td><td nowrap=\"nowrap\">".L_LURKING_4." ".strftime(L_SHORT_DATETIME, $RTime)."";
 			}
 			echo($List);
 		}
