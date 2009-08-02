@@ -45,8 +45,6 @@ if (get_magic_quotes_gpc()) {
 		$_COOKIE[$k] = stripslashes($v);
 }
 
-$textDirection = ($Align == "right") ? "RTL" : "LTR";
-
 // Added for php4 support of mb functions
 if (!function_exists('mb_convert_case'))
 {
