@@ -46,7 +46,7 @@ define("L_SET_16", "חדרים פרטיים שנוצרו עי משתמשים");
 define("L_SET_17", "בחר דמות");
 define("L_SET_18", "הכנס לסימניות: הקש קונטרול D");
 
-define("L_SRC", "is freely available on");
+define("L_SRC", "חופשי להורדה ב-");
 
 define("L_SECS", "שניות");
 define("L_MIN", "דקה");
@@ -81,7 +81,7 @@ define("L_REG_22", "לא");
 define("L_REG_25", "סגור");
 define("L_REG_30", "שם פרטי");
 define("L_REG_31", "שם משפחה");
-define("L_REG_32", "WEB");
+define("L_REG_32", "אתר אינטרנט");
 define("L_REG_33", "הצג את כתובת האימייל בדף הציבורי");
 define("L_REG_34", "עריכת פרופיל משתמש");
 define("L_REG_35", "ניהול");
@@ -124,16 +124,16 @@ define("L_ADM_2", "You are no longer a registered user.");
 // error messages
 define("L_ERR_USR_1", "שם משתמש כבר קייןם. בחר אחד אחר");
 define("L_ERR_USR_2", "חובה לבחור שם משתמש");
-define("L_ERR_USR_3", "This username is registered.<br />Please type your סיסמא or choose another username.");
+define("L_ERR_USR_3", "השם הזה כבר תפוס<br />הקש סיסמא או בחר שם משתמש אחר");
 define("L_ERR_USR_4", "סיסמא לא חוקית");
 define("L_ERR_USR_5", "חובה לרשום שם משתמש");
 define("L_ERR_USR_6", "חובה לרשום סיסמא.");
-define("L_ERR_USR_7", "חובה לרשום e-mail.");
+define("L_ERR_USR_7", "חובה לרשום אימייל.");
 define("L_ERR_USR_8", "כתובת האימייל לא תקינה");
 define("L_ERR_USR_9", "שם המשתמש הזה תפוס");
 define("L_ERR_USR_10", "שם משתמש או סיסמא לא נכונים");
 define("L_ERR_USR_11", "רק מנהל מערכת יכול לבצע פעולה זו");
-define("L_ERR_USR_12", "You are the administrator, so you cannot be removed.");
+define("L_ERR_USR_12", "אתה המנהל, ולכן אי אפשר להסיר אותך");
 define("L_ERR_USR_13", "כדי ליצור חדר פרטי, חובה להיות רשום למערכת");
 define("L_ERR_USR_14", "חובה להיות רשום כדי להשתתף בצ`אט");
 define("L_ERR_USR_15", "חובה לרשום שם מלא.");
@@ -150,7 +150,7 @@ define("L_ERR_USR_23", "חובה להיות רשום כדי להצטרף לחד�
 define("L_ERR_USR_24", "To create your own private room you must be registered.");
 define("L_ERR_USR_25", "Only the administrator can use ".$COLORNAME." color!<br />Don’t try to use ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2.", ".COLOR_CM.", ".COLOR_CM1." or ".COLOR_CM2.".<br />These are reserved to power users!");
 define("L_ERR_USR_26", "Only admins and moderators can use ".$COLORNAME." color!<br />Don’t try to use ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2.", ".COLOR_CM.", ".COLOR_CM1." or ".COLOR_CM2.".<br />These are reserved to power users!");
-define("L_ERR_USR_27", "You cannot talk private to yourself.\\nDo that in your mind please...\\nNow choose a different username.");
+define("L_ERR_USR_27", "אי אפשר לדבר עם עצמך.\\nבחר שם משתמש אחר");
 define("L_ERR_USR_28", "Your access to %s has been restricted!<br />Please choose a different room.");
 define("L_ERR_ROM_1", "Room’s name cannot contain commas or backslashes (\\).");
 define("L_ERR_ROM_2", "Banished word found in the room’s name you want to create.");
@@ -186,28 +186,28 @@ define("L_BANISHED", "%s has successfully been banished.");
 define("L_BANISHED_REASON", "%s has successfully been banished. (Reason: %s)");
 define("L_ANNOUNCE", "ANNOUNCE");
 define("L_INVITE", "%s requests that you join her/him into the <a href=\"#\" onClick=\"window.parent.runCmd('%s','%s')\">%s</a> room.");
-define("L_INVITE_REG", "You have to be registered to enter this room.");
-define("L_INVITE_DONE", "Your invitation has been sent to %s.");
-define("L_OK", "Send");
+define("L_INVITE_REG", "חובה להרשם למערכת כדי להכנס לחדר זה");
+define("L_INVITE_DONE", "%s ההזמנה נשלחה אל");
+define("L_OK", "שלח");
 define("L_BUZZ", "Buzzes Gallery");
-define("L_BAD_CMD", "This is not a valid command!");
+define("L_BAD_CMD", "נסיון לשלוח פקודה בלתי חוקית בעליל");
 define("L_ADMIN", "%s is already the administrator!");
 define("L_IS_MODERATOR", "%s is already a moderator!");
 define("L_NO_MODERATOR", "Only a moderator of this room can use this command.");
 define("L_NONEXIST_USER", "%s isn’t in the current room.");
-define("L_NONREG_USER", "%s isn’t registered.");
+define("L_NONREG_USER", "%s אינו רשום במערכת");
 define("L_NONREG_USER_IP", "His IP is: %s.");
 define("L_NO_KICKED", "%s is a moderator or the administrator and can’t be kicked away.");
 define("L_NO_BANISHED", "%s is a moderator or the administrator and can’t be banished.");
-define("L_SVR_TIME", "Server time: ");
-define("L_NO_SAVE", "No message to save!");
-define("L_NO_ADMIN", "Only the administrator can use this command.");
-define("L_NO_REG_USER", "You must be registered on this צ`אט to use this command.");
+define("L_SVR_TIME", "השעה במחשב הראשי");
+define("L_NO_SAVE", "אין הודעות");
+define("L_NO_ADMIN", "רק מנהל יכול להשתמש בפקודה זו");
+define("L_NO_REG_USER", "אתה חייב להיות רשום למערכת כדי להשתמש בפקודה זו.");
 
 // help popup
-define("L_HELP_TIT_1", "Smilies");
-define("L_HELP_TIT_2", "Text formating for messages");
-define("L_HELP_FMT_1", "You can put bold, italic or underlined text in messages by encasing the applicable sections of your text with either the &lt;B&gt; &lt;/B&gt;, &lt;I&gt; &lt;/I&gt; or &lt;U&gt; &lt;/U&gt; tags.<br />For example, &lt;B&gt;this text&lt;/B&gt; will produce <B>this text</B>.");
+define("L_HELP_TIT_1", "סמיילים");
+define("L_HELP_TIT_2", "עיצוב טקסט");
+define("L_HELP_FMT_1", "ניתן להשתמש בפקודות HTML בסיסיות כמו <b>הדגשה</b>, או <u>קו תחתון</u> למשל");
 define("L_HELP_FMT_2", "To create a hyperlink (for e-mail or URL) in your message, simply type the corresponding address without any tag. The hyperlink will be created automatically.");
 define("L_HELP_TIT_3", "Commands");
 define("L_HELP_NOTE", "All the commands must be used in English!");
@@ -215,7 +215,7 @@ define("L_HELP_MSG", "הודעה");
 define("L_HELP_MSGS", "הודעות");
 define("L_HELP_ROOM", "חדר");
 define("L_HELP_BUZZ", "~soundname");
-define("L_HELP_REASON", "the reason");
+define("L_HELP_REASON", "הסיבה");
 define("L_HELP_MR", "Mr.");
 define("L_HELP_MS", "Ms.");
 define("L_HELP_CMD_0", "{} represents a required setting, [] an optional one.");
@@ -270,37 +270,37 @@ define("L_TODAY_DWN", "The messages that have been sent today start below");
 define("L_TODAY_UP", "The messages that had been sent yesterday start below");
 
 // message colors
-$TextColors = array("Black" => "#000000",
-				"Red" => "#FF0000",
-				"Green" => "#009900",
-				"Blue" => "#0000FF",
-				"Purple" => "#9900FF",
-				"Dark red" => "#990000",
-				"Dark green" => "#006600",
-				"Dark blue" => "#000099",
-				"Maroon" => "#996633",
-				"Aqua blue" => "#006699",
-				"Carrot" => "#FF6600");
+$TextColors = array("שחור" => "#000000",
+				"אדום" => "#FF0000",
+				"ירוק" => "#009900",
+				"כחול" => "#0000FF",
+				"סגול" => "#9900FF",
+				"אדום חזק" => "#990000",
+				"ירוק כהה" => "#006600",
+				"כחול כהה" => "#000099",
+				"מארון" => "#996633",
+				"ים" => "#006699",
+				"גזר" => "#FF6600");
 
 // ignored popup
-define("L_IGNOR_TIT", "Ignored");
+define("L_IGNOR_TIT", "התעלמות");
 define("L_IGNOR_NON", "No ignored user");
 
 // whois popup
-define("L_WHOIS_ADMIN", "Administrator");
-define("L_WHOIS_OWNER", "Owner");
-define("L_WHOIS_TOPMOD", "Top Moderator");
-define("L_WHOIS_MODER", "Moderator");
-define("L_WHOIS_MODERS", "Moderators");
-define("L_WHOIS_OTHERS", "Other users");
-define("L_WHOIS_USER", "User");
-define("L_WHOIS_GUEST", "Guest");
-define("L_WHOIS_REG", "Registered");
-define("L_WHOIS_BOT", "Bot");
+define("L_WHOIS_ADMIN", "מנהל ראשי");
+define("L_WHOIS_OWNER", "בעלים");
+define("L_WHOIS_TOPMOD", "מנהל משנה בכיר");
+define("L_WHOIS_MODER", "מנהל משנה");
+define("L_WHOIS_MODERS", "מנהלי משנה");
+define("L_WHOIS_OTHERS", "משתמשים אחרים");
+define("L_WHOIS_USER", "משתמש");
+define("L_WHOIS_GUEST", "אורח");
+define("L_WHOIS_REG", "משתמש רשום");
+define("L_WHOIS_BOT", "רובוט");
 
 // Notification messages of user entrance/exit
-define("ENTER_ROM", "%s enters this room.");
-define("L_EXIT_ROM", "%s exits from this room.");
+define("ENTER_ROM", "נכנס לחדר %s");
+define("L_EXIT_ROM", "יצא מהחדר %s");
 if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
@@ -341,24 +341,24 @@ define("INFO_BOT", "Our available bot is:");
 
 // Profile mod
 define("L_PRO_1", "שפות מדוברות");
-define("L_PRO_2", "Favorite link 1");
-define("L_PRO_3", "Favorite link 2");
+define("L_PRO_2", "קישור נבחר 1");
+define("L_PRO_3", "קישור נבחר 2");
 define("L_PRO_4", "תאור");
-define("L_PRO_5", "Picture URL");
+define("L_PRO_5", "כתובת אינטרנט של תמונה");
 define("L_PRO_6", "שם/צבע טקסט");
 
 // Avatar mod
 define("L_AVATAR", "דמות");
-define("L_ERR_AV", "Invalid URL or non-existing host.");
+define("L_ERR_AV", "כתובת לא קיימת או שגויה");
 define("L_TITLE_AV", "הדמות הנוכחית שלך: ");
 define("L_CHG_AV", "Click \"".L_REG_16."\" in the Profile form<br />to store your Avatar.");
 define("L_SEL_NEW_AV", "בחר דמות חדשה");
 define("L_EX_AV", "דוגמא");
-define("L_URL_AV", "URL: ");
-define("L_EXPL_AV", "(Enter URL, then hit ENTER to view)");
+define("L_URL_AV", "קישור: ");
+define("L_EXPL_AV", "(הכנס את הקישור והקש אנטר)");
 define("L_CANCEL", "ביטול");
 define("L_AVA_REG", "צריך להיות רשום כדי\\nכדי לשנות את הדמות שלך");
-define("L_SEL_NEW_AV_CONFIRM", "This form was not submitted.\\nGoing now to avatars will make you loose\\nall the changes you made so far!\\n\\nAre you sure?");
+define("L_SEL_NEW_AV_CONFIRM", "הטופס לא נשלח!\\nGoing now to avatars will make you loose\\nall the changes you made so far!\\n\\nAre you sure?");
 
 // PlusBot bot mod (based on Alice bot)
 define("BOT_TIPS", "TIPS: Our bot is publicly active in this room. To start talking to the bot, type <b>hello ".C_BOT_NAME."</b>. To end conversation, type: <b>bye ".C_BOT_NAME."</b>. (private: /to <b>".C_BOT_NAME."</b> Message)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
@@ -369,57 +369,57 @@ define("BOT_START_ERROR", "Bot is already running in this room!");
 define("BOT_DISABLED_ERROR", "Bot has been disabled from Admin Panel!");
 
 // Dice v.1, v.2 and v.3 modes
-define("DICE_RESULTS", "rolls the dice, the results are:");
-define("DICE_WRONG", "You have to select how many dice you want to roll\\n(choose a number between 1 and ".MAX_ROLLS.").\\nJust type /dice to roll all ".MAX_ROLLS." dice.");
+define("DICE_RESULTS", "זרק קוביות. התוצאות הן:");
+define("DICE_WRONG", "צריך לבחור כמה קוביות לזרוק\\n(".MAX_ROLLS."בחר מספר בין 1 ל-).\\nכתוב /dice כדי לזרוק ".MAX_ROLLS." קוביות");
 define("DICE2_WRONG", "The second value has to be between 1 and ".MAX_ROLLS.".\\nLeave it empty to use all ".MAX_ROLLS." dice\\n(e.g. /".MAX_DICES."d or /".MAX_DICES."d".MAX_ROLLS.").");
 define("DICE2_WRONG1", "The first value has to be between 1 and ".MAX_DICES.".\\n(e.g. /".MAX_DICES."d or /".MAX_DICES."d".MAX_ROLLS.").");
 define("DICE3_WRONG", "The first (d) value has to be between 1 and 100.\\nThe second (t) value has to be between 1 and ".MAX_ROLLS.".\\nLeave it empty to use all ".MAX_ROLLS." dice\\n(e.g. /d50 or /d100t".MAX_ROLLS.").");
 
 // Private Message Popup mod by Ciprian
-define("L_REG_POPUP", "open pop-ups on private message");
-define("L_REG_POPUP_NOTE", "Your pop-up blocker should be disabled!");
-define("L_PRIV_POST_MSG", "Send a private message!");
-define("L_PRIV_MSG", "New private message received!");
-define("L_PRIV_MSGS", "%s new private messages received!");
-define("L_PRIV_MSGSa", "Here are the first 10 messages!<br />Use the bottom link to see the rest.");
-define("L_PRIV_MSG1", "From:");
-define("L_PRIV_MSG2", "Room:");
-define("L_PRIV_MSG3", "To:");
-define("L_PRIV_MSG4", "Message:");
-define("L_PRIV_MSG5", "Posted:");
-define("L_PRIV_REPLY", "Reply");
-define("L_PRIV_READ", "Press the ’".L_REG_25."’ button to mark all posts as read!");
-define("L_PRIV_POPUP", "You can disable/re-enable anytime this pop-up feature<br />by editing your");
-define("L_PRIV_POPUP1", "Profile</a> (only registered users)");
-define("L_NOT_ONLINE", "%s is not online right now.");
+define("L_REG_POPUP", "הקפץ חלון בקבלת מסר פרטי");
+define("L_REG_POPUP_NOTE", "צריך לאפשר חלונות קובצים לאתר הזה");
+define("L_PRIV_POST_MSG", "שלח הודעה פרטית");
+define("L_PRIV_MSG", "התקבלה הודעה חדשה");
+define("L_PRIV_MSGS", "התקבלו %s הודעות חדשות");
+define("L_PRIV_MSGSa", "10 ההודעות הראשונות");
+define("L_PRIV_MSG1", "מאת");
+define("L_PRIV_MSG2", "חדר");
+define("L_PRIV_MSG3", "אל");
+define("L_PRIV_MSG4", "הודעה");
+define("L_PRIV_MSG5", "נשלח ב");
+define("L_PRIV_REPLY", "תשובה");
+define("L_PRIV_READ", "לחץ על ’".L_REG_25."’ כדי להעביר את כל ההדועות לסטטוס -נקרא-");
+define("L_PRIV_POPUP", "ניתן לבטל/לאפשר את החלונית הזאת<br />באמצעות עריכת");
+define("L_PRIV_POPUP1", "הפרופיל שלך</a> (למשתמשים רשומים בלבד)");
+define("L_NOT_ONLINE", "לא מחובר כרגע %s");
 define("L_PRIV_NOT_ONLINE", "%s is not online right now,\\nbut will still receive your message after login.");
 define("L_PRIV_NOT_INROOM", "%s is not in this room.\\nIf you still want to pm this user,\\nuse the command: /wisp %s message.");
 define("L_PRIV_AWAY", "%s is marked away,\\nbut will still receive your message\\nwhen will be back.");
-define("PM_DISABLED_ERROR", "Whispering (private messaging)\\nhas been disabled in this chat.");
+define("PM_DISABLED_ERROR", "לחישה (הודעה פרטית(\\nלא אפשריות בצאט הזה");
 define("L_NEXT_PAGE", "עבור לעמוד הבא");
-define("L_NEXT_READ", "Read the next %s"); // message / 10 messages
+define("L_NEXT_READ", "ההודעות הבאות %s קרא את"); // message / 10 messages
 define("L_ROOM_ALL", "כל החדרים");
-define("L_PRIV_NO_MSGS", "No private messages received");
-define("L_PRIV_READ_MSG", "1 private message received"); //singular
-define("L_PRIV_READ_MSGS", "%s private messages received"); //plural
+define("L_PRIV_NO_MSGS", "לא התקבלו הודעות");
+define("L_PRIV_READ_MSG", "התקבלה הודעה אחת"); //singular
+define("L_PRIV_READ_MSGS", "הודעות %s התקבלו"); //plural
 define("L_PRIV_MSGS_NEW", "חדש");
 define("L_PRIV_MSGS_READ", "קרא");
-define("L_PRIV_MSG6", "סטטוס:");
+define("L_PRIV_MSG6", "סטטוס");
 define("L_PRIV_RELOAD", "טען את העמוד מחדש");
-define("L_PRIV_MARK_ALL", "Mark all as Read");
-define("L_PRIV_MARK_SEL", "Mark selected as Read");
-define("L_PRIV_REMOVE", "Remove checked PMs");
+define("L_PRIV_MARK_ALL", "קראתי את כל ההודעות");
+define("L_PRIV_MARK_SEL", "קראתי את ההודעות המסומנות");
+define("L_PRIV_REMOVE", "מחק הודעות מסומנות");
 
 // Color Input Box mod by Ciprian
-define("L_ENABLED", "Enabled");
-define("L_DISABLED", "Disabled");
-define("L_COLOR_HEAD_SETTINGS", "Current Settings on this server:");
-define("L_COLOR_HEAD_SETTINGSa", "Default colors:");
-define("L_COLOR_HEAD_SETTINGSb", "Default color:");
-define("L_COL_HELP_TITLE", "Color Picker");
-define("L_COL_HELP_SUB1", "Usage:");
-define("L_COL_HELP_P1", "You can select your own default color by editing your profile (the same color as your username color). You’ll still be able to use any other color. To change back to your default color from a random used one, you have to choose once the default color (Null) - it is the first one in the select list.");
-define("L_COL_HELP_SUB2", "Hints:");
+define("L_ENABLED", "אפשרי");
+define("L_DISABLED", "מבוטל");
+define("L_COLOR_HEAD_SETTINGS", "הגדרות נוכחיות");
+define("L_COLOR_HEAD_SETTINGSa", "צבעים ראשוניים");
+define("L_COLOR_HEAD_SETTINGSb", "צבע ראשוני");
+define("L_COL_HELP_TITLE", "בחירת צבעים");
+define("L_COL_HELP_SUB1", "שימוש");
+define("L_COL_HELP_P1", "ניתן לבחור צבע ראשוני בהגדרות הפרופיל שלך (אותו הצבע של שם המשתמש שלך). You’ll still be able to use any other color. To change back to your default color from a random used one, you have to choose once the default color (Null) - it is the first one in the select list.");
+define("L_COL_HELP_SUB2", "רמז");
 define("L_COL_HELP_P2", "<u>Color Range</u><br />Depending on your browser/OS capabilities, it is possible that some of the colors won’t be rendered. Only 16 color names are supported by the W3C HTML 4.0 standard:");
 define("L_COL_HELP_P2a", "If a user claims he cannot see your selected color it means he is probably using an older browser.");
 define("L_COL_HELP_SUB3", "Settings defined on this chat:");
@@ -427,7 +427,7 @@ define("L_COL_HELP_P3", "<u>Power levels of color usage</u>:<br />1. Administrat
 define("L_COL_HELP_P3a", "The default color is <u><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></u>.<br /><br /><u>Technical stuff</u>: These colors have been defined by the administrator in admin panel.<br />If anything goes wrong or if there is something you don’t like about the default colors, you should contact the <b>administrator</b> first, not the other users in your room. :-)");
 define("L_COL_HELP_USER_STATUS", "Your status");
 define("L_COL_TUT", "שימוש בצבעים בצ`אט");
-define("L_NULL", "Null");
+define("L_NULL", "לא קיים");
 define("L_NULL_F", ""); // feminine word, if it's the case
 define("L_ROOM_COLOR", "הצבע של החדר");
 define("L_PRO_COLOR", "הצבע של הפרופיל");
@@ -453,10 +453,10 @@ define("L_ERR_SIZE", "גודל האות יכולה להיות\\nnull (לאיפו
 define("L_MON", "שני");
 define("L_TUE", "יום שלישי");
 define("L_WED", "רביעי");
-define("L_THU", "Thursday");
+define("L_THU", "חמישי");
 define("L_FRI", "שישי");
-define("L_SAT", "Saturday");
-define("L_SUN", "Sunday");
+define("L_SAT", "שבת");
+define("L_SUN", "ראשון");
 
 // Password reset form by Ciprian
 define("L_PASS_0", "סיסמא איפוס");
@@ -473,10 +473,10 @@ define("L_PASS_11", "ברוכים השבים");
 define("L_PASS_12", "בחר שאלה סודית");
 define("L_ERR_PASS_1", "שם משתמש לא תקין. בחר שוב");
 define("L_ERR_PASS_2", "אימייל לא תקין. בחר שוב");
-define("L_ERR_PASS_3", "Wrong secret question.<br />Answer to the one shown below!");
-define("L_ERR_PASS_4", "תשובה לא ממש מוצלחת. נסה שוב ");
+define("L_ERR_PASS_3", "לא טוב! רשע.<br />Answer to the one shown below!");
+define("L_ERR_PASS_4", "תשובה לא ממש מוצלחת. נסה שוב");
 define("L_ERR_PASS_5", "לא נתת תשובה סודית/ מידע סודי לניחוש סיסמא.");
-define("L_ERR_PASS_6", "לא נתת תשובה סודית/ מידע סודי לניחוש סיסמא.<br />לכן לא תוכל להשתמש בטופס זה<br>קרא למנהל המערכת");
+define("L_ERR_PASS_6", "לא נתת תשובה סודית/ מידע סודי לניחוש סיסמא.<br />לכן לא תוכל להשתמש בטופס זה<br />קרא למנהל המערכת");
 
 // admin stuff - added for administrators promotions/demotions in admin panel - by Ciprian
 define("L_ADM_3", "%s has become an administrator of this chat.");
@@ -517,7 +517,7 @@ define("L_LINKS_19", "to set/modify your Gravatar");
 define("L_SWITCH", "Switch to"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "selected"); // E.g. "French - selected" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
-define("L_NOT_SELECTED", "not selected");
+define("L_NOT_SELECTED", "לא נבחר");
 define("L_NOT_SELECTED_F", ""); // feminine word, if it's the case
 define("L_EMAIL_1", "לשלוח אימייל");
 define("L_FULLSIZE_PIC", "to open the full size picture");
@@ -549,28 +549,28 @@ define("L_LURKING_5", "לא ידוע");
 
 // Extra options by Ciprian
 define("L_EXTRA_OPT", "אפשרויות נוספות");
-define("L_ARCHIVE", "Open Archive");
-define("L_SOUNDFIX_IE_1", "Sound fix for IE");
-define("L_SOUNDFIX_IE_2", "Download a sound fix for IE");
-define("L_LURKING_1", "Open the lurking page");
-define("L_REG_BRB", "brb (need to register first)");
-define("L_DEL_BYE", "don’t wait for me...");
-define("L_EXTRA_PRIV1", "Read PMs");
-define("L_EXTRA_PRIV2", "New PMs");
+define("L_ARCHIVE", "ארכיון");
+define("L_SOUNDFIX_IE_1", "תיקון לבעיית הסאונד לאקספלורר בלבד");
+define("L_SOUNDFIX_IE_2", "שמור את התיקון במחשב");
+define("L_LURKING_1", "רשימת הצופים שלא משתתפים");
+define("L_REG_BRB", "תיכף אשוב (קופץ להרשם)");
+define("L_DEL_BYE", "תמשיכו בלעדי...");
+define("L_EXTRA_PRIV1", "קרא הודעות");
+define("L_EXTRA_PRIV2", "הודעות חדשות!");
 
 // Months for Open Schedule by Ciprian
 define("L_JAN", "ינואר");
 define("L_FEB", "פברואר");
-define("L_MAR", "March");
-define("L_APR", "April");
-define("L_MAY", "May");
-define("L_JUN", "June");
-define("L_JUL", "July");
+define("L_MAR", "מרץ");
+define("L_APR", "אפריל");
+define("L_MAY", "מאי");
+define("L_JUN", "יוני");
+define("L_JUL", "יולי");
 define("L_AUG", "אוגוסט");
 define("L_SEP", "ספטמבר");
-define("L_OCT", "October");
-define("L_NOV", "November");
-define("L_DEC", "December");
+define("L_OCT", "אלול");
+define("L_NOV", "נובמבר");
+define("L_DEC", "דצמבר");
 
 // Localized date format
 // Set the HE specific date/time format
@@ -589,9 +589,9 @@ define("L_LONG_DATETIME", "%A - %e %B %Y %H:%M:%S"); //Change this to your local
 
 // Chat Activity displayed on remote web pages
 define("LOGIN_LINK", "<A HREF='".C_CHAT_URL."?L=".$L."' TITLE='".sprintf(L_CLICK,L_LINKS_12)."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_12).".'; return true;\" TARGET=_blank>");
-define("NB_USERS_IN","users are ".LOGIN_LINK."chatting</A> at this time.");
+define("NB_USERS_IN","משתמשים ".LOGIN_LINK."משוחחים</A> כרגע");
 define("USERS_LOGIN","1 user is ".LOGIN_LINK."chatting</A> at this time.");
-define("NO_USER","Nobody is ".LOGIN_LINK."chatting</A> at this time.");
+define("NO_USER","אף אחד ".LOGIN_LINK."לא משוחח</A> כרגע");
 define("L_PRIV_REPLY_LOGIN", "Login to chat if you wish to ".LOGIN_LINK."post a reply</A> to any of the unread PMs listed above");
 
 // Language names
@@ -649,18 +649,18 @@ define("L_GRAV_USE", "use the Gravatar");
 
 // Uploader mod by Ciprian
 define("L_UPLOAD", "Upload %s");
-define("L_UPLOAD_IMG", "Image file");
-define("L_UPLOAD_SND", "Sound file");
+define("L_UPLOAD_IMG", "קובץ תמונה");
+define("L_UPLOAD_SND", "קובץ קול");
 define("L_UPLOAD_FLS", "קבצים");
-define("L_UPLOAD_SUCCESS", "%s successfully uploaded as %s.");
-define("L_FILES_TITLE", "Uploads Management");
+define("L_UPLOAD_SUCCESS", "%s הועלה לשרת בהצלחה בתור %s.");
+define("L_FILES_TITLE", "ניהול העלאת קבצים");
 
 // Room restriction mod by Ciprian
 define("L_RESTRICTED", "מוגבל");
 define("L_RESTRICTED_ROM", "%s has successfully been restricted from this room.");
 
 // OpenID login mod by Ciprian
-define("L_OPID_SIGN", "Sign In with an OpenID");
+define("L_OPID_SIGN", "הכנס באמצעות OpenID");
 define("L_OPID_REG", "Import your OpenID profile");
 
 // Support buttons

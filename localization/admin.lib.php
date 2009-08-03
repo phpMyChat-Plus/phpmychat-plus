@@ -6,7 +6,8 @@ while($name = $languageDirectories->read())
 {
 	if(is_dir('./localization/'.$name)
 		&& file_exists('./localization/'.$name.'/regex.txt')
-		&& file_exists('./localization/'.$name.'/localized.admin.php'))
+		&& file_exists('./localization/'.$name.'/localized.admin.php')
+		&& $name != "hebrew")
 	{
 		list($key) = file('./localization/'.$name.'/regex.txt');
 		$AvailableAdmin[$key] = $name;
@@ -43,7 +44,8 @@ if (!isset($HTTP_USER_AGENT))
 
 if (isset($CookieLang)
 	&& is_dir('./localization/'.$CookieLang)
-	&& file_exists("./localization/$CookieLang/localized.admin.php"))
+	&& file_exists("./localization/$CookieLang/localized.admin.php")
+	&& $CookieLang != "hebrew")
 {
 	$L = $CookieLang;
 }

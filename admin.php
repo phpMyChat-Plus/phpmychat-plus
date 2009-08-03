@@ -40,7 +40,7 @@ require("./lib/database/".C_DB_TYPE.".lib.php");
 if (!isset($What) || $What == "")
 {
 	if (!isset($L)) include_once("./localization/languages.lib.php");
-	if (!file_exists("./localization/${L}/localized.admin.php"))
+	if (!file_exists("./localization/${L}/localized.admin.php") || ${L} == "hebrew")
 	{
 		unset($L);
 		$Charset_Sav = $Charset;
