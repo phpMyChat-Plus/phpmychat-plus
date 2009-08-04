@@ -1330,7 +1330,7 @@ function layout($Err, $U, $R, $T, $C, $status)
 <TABLE ALIGN="center" CELLPADDING=5 CLASS="ChatBody"><TR><TD CLASS="ChatBody">
 <CENTER>
 <FORM ACTION="<?php echo("$Action"); ?>" METHOD="POST" AUTOCOMPLETE="" NAME="Params" onSubmit="defineVerField(); return isCookieEnabled()">
-<SPAN CLASS="ChatTitle"><?php if (C_SHOW_LOGO) echo(APP_LOGO); ?><br /><?php  echo((C_CHAT_NAME != "") ? C_CHAT_NAME."<br /><SPAN CLASS=ChatP3>- ".APP_NAME." (".APP_VERSION.APP_MINOR.") -</SPAN>" : APP_NAME." (".APP_VERSION.APP_MINOR.")"); ?></SPAN>
+<SPAN CLASS="ChatTitle"><?php if (C_SHOW_LOGO) echo(APP_LOGO); ?><br /><?php echo((C_CHAT_NAME != "") ? C_CHAT_NAME."<br /><SPAN CLASS=ChatP3><SPAN dir=\"LTR\">- ".APP_NAME." (".APP_VERSION.APP_MINOR.") -</SPAN>" : "<SPAN dir=\"LTR\">".APP_NAME." (".APP_VERSION.APP_MINOR.")"); ?></SPAN></SPAN>
 <?php
 // Msg for translations with no real iso code
 if (isset($FontPack) && $FontPack != "" && file_exists($ChatPath."localization/${L}/${FontPack}"))
