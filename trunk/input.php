@@ -251,6 +251,10 @@ $botcontrol ="botfb/$R.txt";
 		}
 	}
 
+	// Text Direction for dir commands by Ciprian
+	if(ereg('^bdo_rtl',$M)) $M = ereg_replace('bdo_rtl', '<BDO dir="rtl">', $M)."</BDO>";
+	elseif(ereg('^bdo_ltr',$M)) $M = ereg_replace('bdo_ltr', '<BDO dir="ltr">', $M)."</BDO>";
+	
 	// URL
 	$M = eregi_replace('([[:space:]]|^)(www[.])', '\\1http://\\2', $M); // no prefix (www.myurl.ext)
 	$M = eregi_replace('([[:space:]]|^)(ftp[.])', '\\1ftp://\\2', $M); // no prefix (ftp.myurl.ext)
