@@ -76,9 +76,7 @@ if (C_BOT_PUBLIC)
      if (file_exists ($botpath))                            // checks to see if user .txt file exists.
       {                                                     // if it does continues to talk to bot
           clearstatcache () ;
-          global $M;
-          global $botmess;
-          global $Charset;
+          global $M,$botmess,$Charset;
           $botmess = eregi_replace(C_BOT_NAME, "", $M);
 //          $botmess = eregi_replace(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), " ", mb_convert_case($M,MB_CASE_LOWER,$Charset));
            bottalk(&$botmess, $R, 0);

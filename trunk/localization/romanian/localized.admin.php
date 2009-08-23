@@ -174,7 +174,7 @@ define("A_LURKING_2", "Monitorizare dezactivată") ;
 // Statistics Page
 define("A_STATS_1", "Pagina de statistici");
 define("A_STATS_2", "Date colectate începând cu data de %s"); //date
-define("A_STATS_3", "Statistici generale (Toate timpurile)");
+define("A_STATS_3", "Statistici generale (Complete)");
 define("A_STATS_4", "Statistici detaliate (Ultimele %s zile de activitate)"); //number of days
 define("A_STATS_5", "Statisticile au fost dezactivate");
 define("A_STATS_6", "Top %s"); //Top 10 or Top 5

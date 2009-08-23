@@ -33,6 +33,7 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 10.06.2009 - 1.93-RC5:
+- fixed a small bug in private popups replies; (functionality related)
 - small change in stylesheets to format the rtl quotes
 - dir comands added (/rtl and /ltr) - changes the posts text direction when needed ;(functionality extenssion)
 - admin.php and invite command fixes; (functionality related)

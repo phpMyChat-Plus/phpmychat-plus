@@ -496,11 +496,11 @@ else
 			}
 			elseif($User == stripslashes($U))
 			{
-				$User = "<a onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false); return false\" title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME1."'; return true\" CLASS=\"sender\">".$colorname_tag."[".special_char($User,$Latin1,0)."]".$colorname_endtag."<\/a>";
+				$User = "<a onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false,'".special_char($U,$Latin1,1)."'); return false\" title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME1."'; return true\" CLASS=\"sender\">".$colorname_tag."[".special_char($User,$Latin1,0)."]".$colorname_endtag."<\/a>";
 			}
 			elseif($User == $QUOTE_NAME)
 			{
-				$User = "<a onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false,'".special_char($U,$Latin1,1)."'); return false\" title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME1."'; return true\" CLASS=\"sender\">".$colorname_tag."[".special_char($User,$Latin1,0)."]".$colorname_endtag."<\/a>";
+				$User = "<a onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false); return false\" title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME1."'; return true\" CLASS=\"sender\">".$colorname_tag."[".special_char($User,$Latin1,0)."]".$colorname_endtag."<\/a>";
 			}
 			if($Dest != "" && $Dest != stripslashes($U) && $Dest != $QUOTE_NAME)
 			{
@@ -775,7 +775,7 @@ if (C_ENABLE_PM)
 	}
 	if (substr($User,0,4) != "SYS ")
 	{
-		$who = "$L&U=$U&R=$R";
+		$who = "$L&U=".urlencode(stripslashes($U))."&R=".urlencode(stripslashes($R));
 		$DbLink->query("SELECT username, address, room, pm_read FROM ".C_MSG_TBL." WHERE (room = '$R' OR room = 'Offline PMs') AND address = '$U' AND pm_read LIKE 'New%' ORDER BY username AND m_time DESC LIMIT 1");
 		if($DbLink->num_rows() > 0)
 		{
@@ -784,24 +784,24 @@ if (C_ENABLE_PM)
 			$DbLink->clean_results();
 			if (($Read == "New" && ($R = $Room || $Room == "Offline PMs") && $U = $Destin && $U != $Sender) || ($Read == "Neww" && ($R = $Room || $Room == "Offline PMs") && $U = $Destin && $U != $Sender))
 			{
-					// add this for /away command modification by R Dickow (adapted by Ciprian for priv popup):
-					$DbLink->query("SELECT awaystat FROM ".C_USR_TBL." WHERE username='$Destin' AND awaystat='0'");
-					if($DbLink->num_rows() == 1 && ($allowpopupu || $Room == "Offline PMs"))
-					{
-						$height = ($NewPMs == "1" ? 320 : 440);
-						?>
-								<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
-								<!--
-								if ((!window.parent.is_priv_popup || window.parent.is_priv_popup.closed) && (!window.parent.is_send_popup || window.parent.is_send_popup.closed))
-								{
-								if (window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].value == '') window.parent.is_priv_popup = window.open("priv_popup.php?L=<?php echo($who); ?>","priv_popup","width=430,height=<?php echo($height) ?>,scrollbars=yes,resizable=no,status=yes");
-								};
-								// -->
-								</SCRIPT>
-						<?php
-						$IsPopup = true;
-					    $DbLink->clean_results();
-					}
+				// add this for /away command modification by R Dickow (adapted by Ciprian for priv popup):
+				$DbLink->query("SELECT awaystat FROM ".C_USR_TBL." WHERE username='$Destin' AND awaystat='0'");
+				if($DbLink->num_rows() == 1 && ($allowpopupu || $Room == "Offline PMs"))
+				{
+					$height = ($NewPMs == "1" ? 320 : 440);
+					?>
+						<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
+						<!--
+						if ((!window.parent.is_priv_popup || window.parent.is_priv_popup.closed) && (!window.parent.is_send_popup || window.parent.is_send_popup.closed))
+						{
+							if (window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].value == '') window.parent.is_priv_popup = window.open("priv_popup.php?L=<?php echo($who); ?>","priv_popup","width=430,height=<?php echo($height) ?>,scrollbars=yes,resizable=no,status=yes");
+						};
+						// -->
+						</SCRIPT>
+					<?php
+					$IsPopup = true;
+				}
+				$DbLink->clean_results();
 			}
 		}
 	}
