@@ -29,7 +29,7 @@ else
 		{
 			$Error = L_ERR_USR_16;
 		}
-		elseif (eregi(mb_convert_case($U,MB_CASE_LOWER,$Charset), mb_convert_case(trim($Cmd[2]),MB_CASE_LOWER,$Charset)))
+		elseif (mb_convert_case($U,MB_CASE_LOWER,$Charset) == mb_convert_case(trim($Cmd[2]),MB_CASE_LOWER,$Charset))
 		{
 			$Error = L_ERR_USR_27;
 		}

@@ -2,7 +2,7 @@
   // Added for bot Roy Worley   17/01/04 9:59PM
   // UpDated for bot Roy Worley   7/7/05 1:24AM
 
-global $uid ;                   // WORKS  it is to keep the bot on a topic per user
+global $uid;                   // WORKS  it is to keep the bot on a topic per user
 
 // Added for php4 support of mb functions
 if (!function_exists('mb_convert_case'))
@@ -26,12 +26,11 @@ if (!function_exists('mb_convert_case'))
 }
 
   $numselects=0;	// This doesn't seem to work either
-  global $botpath;
-  global $Read;
+  global $botpath,$Read;
   $botpath = "botfb/".$U.".txt";	// Made this global so I can delete user file when they don't want to talk to bot anymore.
 
  // Include the guts of the program. respond.php at top of handle_inputH.php
-        function bottalk(&$botmess, $R, $UR, $Private, $Read)
+        function bottalk_priv(&$botmess, $R, $UR, $Private, $Read)
         {            // $botmess is phpMyChat $M
 
 				 // Start the session or get the existing session.
@@ -49,7 +48,7 @@ if (!function_exists('mb_convert_case'))
 				   mysql_query("SET NAMES 'utf8'");
            mysql_select_db(C_DB_NAME);
 
-	              $botresponse=replybotname(stripslashes($botmess), $myuniqueid, C_BOT_NAME);    // Get bot's response from respond.php
+	            $botresponse=replybotname(stripslashes($botmess), $myuniqueid, C_BOT_NAME);    // Get bot's response from respond.php
           		$BOT = C_BOT_NAME;
               //Format response for phpMyChat DB
               $D1 = ereg_replace("[\r]|[\n]|\t", " ",$botresponse->response);
@@ -105,13 +104,11 @@ if (C_PRIV_POPUP)
   if (eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)) || eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case($Private,MB_CASE_LOWER,$Charset)))
 	// Looks for "BOT NAME" in $M (typed in INPUT)  WORKS
 	{
-      global $M;
-      global $botmess;
-      global $Charset;
+      global $M,$botmess,$Charset;
       $botmess = eregi_replace(C_BOT_NAME, "", $M);
 //    $botmess = eregi_replace(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), " ", mb_convert_case($M,MB_CASE_LOWER,$Charset));
       if ($R == $UR) $UR = "";
-		  bottalk(&$botmess, $R, $UR, $Private, $Read);
+		  bottalk_priv(&$botmess, $R, $UR, $Private, $Read);
 		  if (bget("name") == "") bset("name",$uid);
 	}
    if (eregi(mb_convert_case("bye ".C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)) || eregi(mb_convert_case(C_BOT_NAME."> bye",MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)) || eregi(mb_convert_case(C_BOT_NAME."> bye</FONT>",MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)))

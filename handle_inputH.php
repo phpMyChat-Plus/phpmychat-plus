@@ -176,9 +176,10 @@ else
 	exit;
 };
 
+if (C_BOT_CONTROL) include("./bot/respond.php");
+
 // Extended two fields for Private Message Popup and room_from by Ciprian
 // ** Send formated messages to the message table **
-if (C_BOT_CONTROL) include("bot/respond.php");
 function AddMessage($M, $T, $R, $U, $C, $Private, $Read, $RF, $Charset)
 {
 if (C_BOT_CONTROL && C_BOT_PUBLIC && $Private == "")
@@ -190,7 +191,7 @@ $botcontrol ="botfb/$R.txt";
 	{
 		if (file_exists ($botpath) || eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)))
 		{
-			include "lib/bot.lib.php";
+			include("./lib/bot.lib.php");
 		}
 	}
 }
