@@ -3,20 +3,20 @@ This log includes all the previously released fixes.
 Client browsers - tested with:
 	- IE < 5.5 = M;
 	- IE > 6.0SP2 (including > 7.0 & > 8.0) = H;
-	- Mozilla Firefox > 1.6.0.0 (including < 3.0) = H;
+	- Mozilla Firefox > 1.6.0.0 (including < 3.5.3) = H;
 	- Mozilla Firefox > 3.1a.2 = M;
 	- Mozilla Firebird 0.7 = L;
 	- Netscape > 8.1 = M;
 	- Opera 9.0 build 8502 = H;
 	- AvantBrowser 10.2 build 52 = H;
 	- Flock 1.2.1 = M;
-	- Apple Safari 3.1 = M.
-	- Google Chrome 0.2 beta = M.
+	- Apple Safari 4.0.3 = M;
+	- Google Chrome 2.0.172.34 = M.
 Server environment - tested env:
-	- Apache < 2.2.8 (Unix and Windows 2k/XP<SP3);
+	- Apache < 2.2.11 (Unix and Windows 2k/XP<SP3);
 	- php < 5.2.9-2 (non-safe-mode, but also a safe mode server has been tested and worked fine);
 	- php 4.4.4 has an issue of not posting the messages ($M value is null)
-	- MySQL < v5.1.34;
+	- MySQL < v5.1.36;
 	- exif support enabled (gif/jpeg processing);
 	- GD2 support enabled (gif/jpeg processing);
 	- mail function support (optional but recommended).
@@ -34,7 +34,8 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 23.08.2009 - 1.93-RC6:
-- all the commands have been changed to support translations - optional though; (functionality extension)
+- more rtl/ltr orientation fixes; (display related)
+- all the commands have been changed to support translations - optional though; (functionality & translation extension)
 - changed and improved the dice commands; (functionality related)
 10.06.2009 - 1.93-RC5:
 - fixed a small bug in private popups replies; (functionality related)

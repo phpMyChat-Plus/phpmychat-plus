@@ -598,7 +598,7 @@ Kick away user from the chat. This command can only be used by a moderator of th
 <template>
 <random>
 <li>Did you know there is a command available for "<b>me</b>" in this chat? Here is how to use it:</li>
-<li>Did you know "<b>me</b>" is a command available in <bot name="chatname"/>? Read bellow about it:</li>
+<li>Did you know "<b>me</b>" is a command available in <bot name="chatname"/>? Read below about it:</li>
 <li>What about you? I don't think you wanna talk about yourself, so here is how we use "<b>me</b>" in this chat:</li>
 <li>Here is some help for <b>you</b> about how to use "<b>me</b>" in this chat:</li>
 </random>
@@ -624,7 +624,7 @@ E.g. * Mr Ciprian is watching TV or Mrs Dana is happy.<br />
 <template>
 <random>
 <li>Did you know "<b>mr</b>" is a command available in <bot name="chatname"/>? Here is how to use it:</li>
-<li>Did you know there is a command available for "<b>mr</b>" in this chat? Read bellow how to use it:</li>
+<li>Did you know there is a command available for "<b>mr</b>" in this chat? Read below how to use it:</li>
 <li>Mister is a form of respect, but there are other ways to use it. You can also use it as a command, so here is how we use "<b>mr</b>" in this chat:</li>
 </random>
 <br />
@@ -649,7 +649,7 @@ E.g. * Mr Ciprian is watching TV or Mrs Dana is happy.<br />
 <template>
 <random>
 <li>Did you know "<b>to</b>" is a command available in <bot name="chatname"/>? Here is how to use it:</li>
-<li>Ever wanted to say something privately <b>to</b> a friend? "<b>to</b>" is a command that let you do that in this chat? Read bellow how to use it:</li>
+<li>Ever wanted to say something privately <b>to</b> a friend? "<b>to</b>" is a command that let you do that in this chat? Read below how to use it:</li>
 <li>Here is how we use "<b>msg</b>" in this chat:</li>
 </random>
 <br />

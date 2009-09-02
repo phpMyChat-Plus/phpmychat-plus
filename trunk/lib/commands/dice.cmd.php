@@ -50,7 +50,7 @@ if (!isset($Error))
 {
 	$temp = ($Cmd[2]!=MAX_ROLLS) ? $Cmd[2] : "";
 	$What = "/dice".$temp." (".$MR."*".$sides." = ".$MR*$sides.")";
-	$M = "<b><font size=-2 color=green>".addslashes($nums)."</font><font color=red>".$sum."</font></b>&nbsp;<img src=images/tick.gif alt=\"".$What."\" title=\"".$What."\">";
+	$M = "<b><font size=-2 color=green>".addslashes($nums)."</font><font color=red>".$sum."</font></b>&nbsp;<bdo dir=ltr><img src=images/tick.gif alt=\"".$What."\" title=\"".$What."\"></bdo>";
 	$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS dice1', '', '".time()."', '$U', '".stripslashes($M)."', '', '')");
 }
 
