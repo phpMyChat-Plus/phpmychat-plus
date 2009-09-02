@@ -43,30 +43,32 @@ $address = "<b>".$address."</b>";
 if ($username == "SYS welcome") $username = $address;
 if ($room == "*" || ($username == "SYS room" && $address == "*") || $username == "SYS announce") $room = '<?php echo(L_ROOM_ALL); ?>';
 $message = stripslashes($result["message"]);
-$message = eregi_replace("<!-- UPDTUSRS //-->","",$message);
-$message = eregi_replace("src=images","src=./../../../images",$message);
-$message = eregi_replace("src=\"images","src=\"./../../../images",$message);
-$message = eregi_replace("src=localization/","src=./../../../localization/",$message);
-$message = eregi_replace("src=\"localization/","src=\"./../../../localization/",$message);
-$message = eregi_replace("tutorial_popup.php","./../../../tutorial_popup.php",$message);
-$message = eregi_replace("help_popup.php","./../../../help_popup.php",$message);
+$message = str_replace("<!-- UPDTUSRS //-->","",$message);
+$message = str_replace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"L_HELP_BUZZ1\" title=\"L_HELP_BUZZ1\">",$message);
+$message = str_replace("src=images","src=./../../../images",$message);
+$message = str_replace("src=\"images","src=\"./../../../images",$message);
+$message = str_replace("src=localization/","src=./../../../localization/",$message);
+$message = str_replace("src=\"localization/","src=\"./../../../localization/",$message);
+$message = str_replace("tutorial_popup.php","./../../../tutorial_popup.php",$message);
+$message = str_replace("help_popup.php","./../../../help_popup.php",$message);
 $message = str_replace("  "," ",$message);
 $message = str_replace("L_DEL_BYE","<?php echo(L_DEL_BYE); ?>",$message);
 $message = str_replace("L_REG_BRB","<?php echo(L_REG_BRB); ?>",$message);
 $message = str_replace("L_HELP_MR","<?php echo(L_HELP_MR); ?>",$message);
 $message = str_replace("L_HELP_MS","<?php echo(L_HELP_MS); ?>",$message);
-$message = eregi_replace('class="table"','bgcolor="lightgrey"',$message);
-$message = eregi_replace('class="tabtitle"><td colspan="7">','bgcolor="blue"><td colspan="7">',$message);
-$message = eregi_replace('class="tabtitle"><td>','bgcolor="gray"><td>',$message);
-$message = eregi_replace('class="tabtitle"><td colspan="4">','bgcolor="blue"><td colspan="4">',$message);
+$message = str_replace("L_HELP_BUZZ1","<?php echo(L_HELP_BUZZ1); ?>",$message);
+$message = str_replace('class="table"','bgcolor="lightgrey"',$message);
+$message = str_replace('class="tabtitle"><td colspan="7">','bgcolor="blue"><td colspan="7">',$message);
+$message = str_replace('class="tabtitle"><td>','bgcolor="gray"><td>',$message);
+$message = str_replace('class="tabtitle"><td colspan="4">','bgcolor="blue"><td colspan="4">',$message);
 if ((ereg("stripslashes",$message) || ereg("sprintf",$message) || ereg("L_",$message)) && !ereg("php echo",$message))
 {
 	$message = "<?php echo(".$message."); ?>";
 }
 $message = urldecode($message);
 $message = str_replace("links.php?link=||","",$message);
-$message = eregi_replace("target=\"_blank\"></a>","target=\"_blank\">Click here</a>",$message);
-$message = eregi_replace('alt="Send email"','target="_blank" title="<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>"',$message);
+$message = str_replace("target=\"_blank\"></a>","target=\"_blank\">Click here</a>",$message);
+$message = str_replace('alt="Send email"','target="_blank" title="<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>"',$message);
 $NewMsg = "\r\n<tr align=texttop valign=top>\r\n<td valign=top nowrap=\"nowrap\">".$time_posted."</td>\r\n<td valign=top nowrap=\"nowrap\">";
 $NewMsg .= $room."</td>\r\n<td valign=top nowrap=\"nowrap\">";
 $NewMsg .= "<b>".$username."</b>";
@@ -238,30 +240,32 @@ $addressu = "<b>".$addressu."</b>";
 if ($usernameu == "SYS welcome") $usernameu = $addressu;
 if ($roomu == "*" || ($usernameu == "SYS room" && $addressu == "*") || $usernameu == "SYS announce") $roomu = '<?php echo(L_ROOM_ALL); ?>';
 $messageu = stripslashes($resultu["message"]);
-$messageu = eregi_replace("<!-- UPDTUSRS //-->","",$messageu);
-$messageu = eregi_replace("src=images","src=./../../../images",$messageu);
-$messageu = eregi_replace("src=\"images","src=\"./../../../images",$messageu);
-$messageu = eregi_replace("src=localization/","src=./../../../localization/",$messageu);
-$messageu = eregi_replace("src=\"localization/","src=\"./../../../localization/",$messageu);
-$messageu = eregi_replace("tutorial_popup.php","./../../../tutorial_popup.php",$messageu);
-$messageu = eregi_replace("help_popup.php","./../../../help_popup.php",$messageu);
+$messageu = str_replace("<!-- UPDTUSRS //-->","",$messageu);
+$messageu = str_replace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"L_HELP_BUZZ1\" title=\"L_HELP_BUZZ1\">",$messageu);
+$messageu = str_replace("src=images","src=./../../../images",$messageu);
+$messageu = str_replace("src=\"images","src=\"./../../../images",$messageu);
+$messageu = str_replace("src=localization/","src=./../../../localization/",$messageu);
+$messageu = str_replace("src=\"localization/","src=\"./../../../localization/",$messageu);
+$messageu = str_replace("tutorial_popup.php","./../../../tutorial_popup.php",$messageu);
+$messageu = str_replace("help_popup.php","./../../../help_popup.php",$messageu);
 $messageu = str_replace("  "," ",$messageu);
 $messageu = str_replace("L_DEL_BYE","<?php echo(L_DEL_BYE); ?>",$messageu);
 $messageu = str_replace("L_REG_BRB","<?php echo(L_REG_BRB); ?>",$messageu);
 $messageu = str_replace("L_HELP_MR","<?php echo(L_HELP_MR); ?>",$messageu);
 $messageu = str_replace("L_HELP_MS","<?php echo(L_HELP_MS); ?>",$messageu);
-$messageu = eregi_replace('class="table"','bgcolor="lightgrey"',$messageu);
-$messageu = eregi_replace('class="tabtitle"><td colspan="7">','bgcolor="blue"><td colspan="7">',$messageu);
-$messageu = eregi_replace('class="tabtitle"><td>','bgcolor="gray"><td>',$messageu);
-$messageu = eregi_replace('class="tabtitle"><td colspan="4">','bgcolor="blue"><td colspan="4">',$messageu);
+$messageu = str_replace("L_HELP_BUZZ1","<?php echo(L_HELP_BUZZ1); ?>",$messageu);
+$messageu = str_replace('class="table"','bgcolor="lightgrey"',$messageu);
+$messageu = str_replace('class="tabtitle"><td colspan="7">','bgcolor="blue"><td colspan="7">',$messageu);
+$messageu = str_replace('class="tabtitle"><td>','bgcolor="gray"><td>',$messageu);
+$messageu = str_replace('class="tabtitle"><td colspan="4">','bgcolor="blue"><td colspan="4">',$messageu);
 if ((ereg("stripslashes",$messageu) || ereg("sprintf",$messageu) || ereg("L_",$messageu)) && !ereg("php echo",$messageu))
 {
 	$messageu = '<?php echo('.$messageu.'); ?>';
 }
 $messageu = urldecode($messageu);
 $messageu = str_replace("links.php?link=||","",$messageu);
-$messageu = eregi_replace("target=\"_blank\"></a>","target=\"_blank\">Click here</a>",$messageu);
-$messageu = eregi_replace('alt="Send email"','target="_blank" title="<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>"',$messageu);
+$messageu = str_replace("target=\"_blank\"></a>","target=\"_blank\">Click here</a>",$messageu);
+$messageu = str_replace('alt="Send email"','target="_blank" title="<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>"',$messageu);
 $NewMsgu = "\r\n<tr align=texttop valign=top>\r\n<td valign=top nowrap=\"nowrap\">".$time_postedu."</td>\r\n<td valign=top nowrap=\"nowrap\">";
 $NewMsgu .= $roomu."</td>\r\n<td valign=top nowrap=\"nowrap\">";
 $NewMsgu .= "<b>".$usernameu."</b>";
@@ -334,22 +338,22 @@ if ($message_nbu > 0)
 	{
 		RecursiveMkdir("./logs/".$yearu."");
 		copy("./config/index/index/index.html","./logs/".$yearu."/index.html");
-		if (file_exists("./".C_LOG_DIR."/".$prev_yearu."") && substr(decoct(fileperms("./".C_LOG_DIR."/".$prev_yearu."")),1) == "0777")
+		if (file_exists("./logs/".$prev_yearu."") && substr(decoct(fileperms("./logs/".$prev_yearu."")),1) == "0777")
 		{
-			chmod("./".C_LOG_DIR."/".$prev_yearu, 0755);
+			chmod("./logs/".$prev_yearu, 0755);
 		}
 	}
 	if (!file_exists("./logs/".$yearu."/".$monthu.""))
 	{
 		RecursiveMkdir("./logs/".$yearu."/".$monthu."");
 		copy("./config/index/index/index/index.html","./logs/".$yearu."/".$monthu."/index.html");
-		if (file_exists("./".C_LOG_DIR."/".$prev_yearu."/".$prev_monthu."") && substr(decoct(fileperms("./".C_LOG_DIR."/".$prev_yearu."/".$prev_monthu."")),1) == "0777")
+		if (file_exists("./logs/".$prev_yearu."/".$prev_monthu."") && substr(decoct(fileperms("./logs/".$prev_yearu."/".$prev_monthu."")),1) == "0777")
 		{
-			chmod("./".C_LOG_DIR."/".$prev_yearu."/".$prev_monthu, 0755);
+			chmod("./logs/".$prev_yearu."/".$prev_monthu, 0755);
 		}
-		if (file_exists("./".C_LOG_DIR."/".$yearu."/".$prev_monthu."") && substr(decoct(fileperms("./".C_LOG_DIR."/".$yearu."/".$prev_monthu."")),1) == "0777")
+		if (file_exists("./logs/".$yearu."/".$prev_monthu."") && substr(decoct(fileperms("./logs/".$yearu."/".$prev_monthu."")),1) == "0777")
 		{
-			chmod("./".C_LOG_DIR."/".$yearu."/".$prev_monthu, 0755);
+			chmod("./logs/".$yearu."/".$prev_monthu, 0755);
 		}
 	}
 $logpathu = "./logs/".$yearu."/".$monthu."/".$yearu.$monthu.$dayu.".php"  ;

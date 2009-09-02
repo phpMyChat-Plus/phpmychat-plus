@@ -2,7 +2,7 @@
 
 if ($status == "a" || $status == "t")
 {
-	AddMessage(stripslashes($Cmd[1]), $T, $R, 'SYS announce', '', ' *', '', '', $Charset);
+	AddMessage(stripslashes($Cmd[2]), $T, $R, 'SYS announce', '', ' *', '', '', $Charset);
 	$IsCommand = true;
 	$RefreshMessages = true;
 }

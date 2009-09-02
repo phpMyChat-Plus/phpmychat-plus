@@ -44,6 +44,17 @@
 // Get the names and values for vars sent to index.lib.php
 if (isset($_GET))
 {
+	// Prevent any possible XSS attacks via $_GET.
+	foreach ($_GET as $check_url) {
+		if ((eregi("<[^>]*script*\"?[^>]*>", $check_url)) || (eregi("<[^>]*object*\"?[^>]*>", $check_url)) ||
+			(eregi("<[^>]*iframe*\"?[^>]*>", $check_url)) || (eregi("<[^>]*applet*\"?[^>]*>", $check_url)) ||
+			(eregi("<[^>]*meta*\"?[^>]*>", $check_url)) || (eregi("<[^>]*style*\"?[^>]*>", $check_url)) ||
+			(eregi("<[^>]*form*\"?[^>]*>", $check_url)) || (eregi("\([^>]*\"?[^)]*\)", $check_url)) ||
+			(eregi("\"", $check_url))) {
+		die ();
+		}
+	}
+	unset($check_url);
 	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
@@ -53,6 +64,17 @@ if (isset($_GET))
 // Get the names and values for vars posted from the form below
 if (isset($_POST))
 {
+	// Prevent any possible XSS attacks via $_POST.
+	foreach ($_POST as $check_url) {
+		if ((eregi("<[^>]*script*\"?[^>]*>", $check_url)) || (eregi("<[^>]*object*\"?[^>]*>", $check_url)) ||
+			(eregi("<[^>]*iframe*\"?[^>]*>", $check_url)) || (eregi("<[^>]*applet*\"?[^>]*>", $check_url)) ||
+			(eregi("<[^>]*meta*\"?[^>]*>", $check_url)) || (eregi("<[^>]*style*\"?[^>]*>", $check_url)) ||
+			(eregi("<[^>]*form*\"?[^>]*>", $check_url)) || (eregi("\([^>]*\"?[^)]*\)", $check_url)) ||
+			(eregi("\"", $check_url))) {
+		die ();
+		}
+	}
+	unset($check_url);
 	while(list($name,$value) = each($_POST))
 	{
 		$$name = $value;
@@ -647,7 +669,7 @@ if(!isset($Error) && (isset($R2) && $R2 != ""))
 
 
 // **	Ensures the user has no restrictions to the room he chooses to enter, create or join - Rooms Restriction mod by Ciprian
-if(!isset($Error) && ((isset($R0) && $R0 != "") || (isset($R1) && $R1 != "") || (isset($R2) && $R2 != "") || (isset($R3) && $R3 != "") || $RES))
+if(!isset($Error) && ((isset($R0) && $R0 != "") || (isset($R1) && $R1 != "") || (isset($R2) && $R2 != "") || (isset($R3) && $R3 != "") || isset($RES)))
 {
 	if ($join_room == "*" || $perms == "admin" || $perms == "topmod" || ($perms == "moderator" && (room_in(stripslashes(isset($R0) ? $R0 : (isset($R2) ? $R2 : (isset($R3) ? $R3 : $R1))), $rooms, $Charset) || room_in("*", $rooms, $Charset)))) $restriction = 0;
 	elseif ((isset($R0) ? $R0 : (isset($R2) ? $R2 : (isset($R3) ? $R3 : $R1))) == ROOM1 && $EN_ROOM1 && $RES_ROOM1 && $join_room != "ROOM1") $restriction = 1;
@@ -1056,8 +1078,51 @@ if(!isset($Error) && (isset($N) && $N != ""))
 
 		// Submission looks like a command?
 		isCmd = ((inputFrameForm.elements['M'].value.substring(0,1) == '/') || (inputFrameForm.elements['M'].value.substring(0,2) == ': '));
+<?php
+if (file_exists("./localization/".$L."/localized.cmds.php")) require("./localization/".$L."/localized.cmds.php");
+
+// DO NOT ALTER THE LINE BELOW!
+$TrsCmds = 
+(L_CMD_ANNOUNCE != "" && L_CMD_ANNOUNCE != "L_CMD_ANNOUNCE" ? str_replace(","," .+|",L_CMD_ANNOUNCE)." .+|" : "").
+(L_CMD_BAN != "" && L_CMD_BAN != "L_CMD_BAN" ? str_replace(","," .+|",L_CMD_BAN)." .+|" : "").
+(L_CMD_CLEAR != "" && L_CMD_CLEAR != "L_CMD_CLEAR" ? str_replace(",","$|",L_CMD_CLEAR)."$|" : "").
+(L_CMD_HELP != "" && L_CMD_HELP != "L_CMD_HELP" ? str_replace(",","$|",L_CMD_HELP)."$|" : "").
+(L_CMD_IGNORE != "" && L_CMD_IGNORE != "L_CMD_IGNORE" ? str_replace(",","|",L_CMD_IGNORE)."|" : "").
+(L_CMD_INVITE != "" && L_CMD_INVITE != "L_CMD_INVITE" ? str_replace(","," .+|",L_CMD_INVITE)." .+|" : "").
+(L_CMD_JOIN != "" && L_CMD_JOIN != "L_CMD_JOIN" ? str_replace(","," .+|",L_CMD_JOIN)." .+|" : "").
+(L_CMD_KICK != "" && L_CMD_KICK != "L_CMD_KICK" ? str_replace(","," .+|",L_CMD_KICK)." .+|" : "").
+(L_CMD_ME != "" && L_CMD_ME != "L_CMD_ME" ? str_replace(","," .+|",L_CMD_ME)." .+|" : "").
+(L_CMD_MSG != "" && L_CMD_MSG != "L_CMD_MSG" ? str_replace(","," .+|",L_CMD_MSG)." .+|" : "").
+(L_CMD_NOTIFY != "" && L_CMD_NOTIFY != "L_CMD_NOTIFY" ? str_replace(",","$|",L_CMD_NOTIFY)."$|" : "").
+(L_CMD_ORDER != "" && L_CMD_ORDER != "L_CMD_ORDER" ? str_replace(",","$|",L_CMD_ORDER)."$|" : "").
+(L_CMD_SORT != "" && L_CMD_SORT != "L_CMD_SORT" ? str_replace(",","$|",L_CMD_SORT)."$|" : "").
+(L_CMD_PROFILE != "" && L_CMD_PROFILE != "L_CMD_PROFILE" ? str_replace(",","$|",L_CMD_PROFILE)."$|" : "").
+(L_CMD_PROMOTE != "" && L_CMD_PROMOTE != "L_CMD_PROMOTE" ? str_replace(",","|",L_CMD_PROMOTE)."|" : "").
+(L_CMD_QUIT != "" && L_CMD_QUIT != "L_CMD_QUIT" ? str_replace(",","|",L_CMD_QUIT)."|" : "").
+(L_CMD_REFRESH != "" && L_CMD_REFRESH != "L_CMD_REFRESH" ? str_replace(",","|",L_CMD_REFRESH)."|" : "").
+(L_CMD_SAVE != "" && L_CMD_SAVE != "L_CMD_SAVE" ? str_replace(",","|",L_CMD_SAVE)."|" : "").
+(L_CMD_SHOW != "" && L_CMD_SHOW != "L_CMD_SHOW" ? str_replace(",","|",L_CMD_SHOW)."|" : "").
+(L_CMD_SIZE != "" && L_CMD_SIZE != "L_CMD_SIZE" ? str_replace(",","|",L_CMD_SIZE)."|" : "").
+(L_CMD_TIMESTAMP != "" && L_CMD_TIMESTAMP != "L_CMD_TIMESTAMP" ? str_replace(",","$|",L_CMD_TIMESTAMP)."$|" : "").
+(L_CMD_WHOIS != "" && L_CMD_WHOIS != "L_CMD_WHOIS" ? str_replace(","," .+|",L_CMD_WHOIS)." .+|" : "").
+(L_CMD_DEMOTE != "" && L_CMD_DEMOTE != "L_CMD_DEMOTE" ? str_replace(","," .+|",L_CMD_MR)." .+|" : "").
+(L_CMD_AWAY != "" && L_CMD_AWAY != "L_CMD_AWAY" ? str_replace(",","|",L_CMD_AWAY)."|" : "").
+(L_CMD_DEMOTE != "" && L_CMD_DEMOTE != "L_CMD_DEMOTE" ? str_replace(","," .+|",L_CMD_DEMOTE)." .+|" : "").
+(L_CMD_HIGH != "" && L_CMD_HIGH != "L_CMD_HIGH" ? str_replace(",","|",L_CMD_HIGH)."|" : "").
+(L_CMD_IMG != "" && L_CMD_IMG != "L_CMD_IMG" ? str_replace(","," .+|",L_CMD_IMG)." .+|" : "").
+(L_CMD_ROOM != "" && L_CMD_ROOM != "L_CMD_ROOM" ? str_replace(","," .+|",L_CMD_ROOM)." .+|" : "").
+(L_CMD_TOPIC != "" && L_CMD_TOPIC != "L_CMD_TOPIC" ? str_replace(","," .+|",L_CMD_TOPIC)." .+|" : "").
+(L_CMD_WISP != "" && L_CMD_WISP != "L_CMD_WISP" ? str_replace(","," .+|",L_CMD_WISP)." .+|" : "").
+(L_CMD_BUZZ != "" && L_CMD_BUZZ != "L_CMD_BUZZ" ? str_replace(",","|",L_CMD_BUZZ)."|" : "").
+(L_CMD_BOT != "" && L_CMD_BOT != "L_CMD_BOT" ? str_replace(",","|",L_CMD_BOT)."|" : "").
+(L_CMD_LTR != "" && L_CMD_LTR != "L_CMD_LTR" ? str_replace(",","|",L_CMD_LTR)."|" : "").
+(L_CMD_RTL != "" && L_CMD_RTL != "L_CMD_RTL" ? str_replace(",","|",L_CMD_RTL)."|" : "").
+(L_CMD_DICE != "" && L_CMD_DICE != "L_CMD_DICE" ? str_replace(",","|",L_CMD_DICE)."|" : "");
+if ($TrsCmds != "") $TrsCmds = rtrim("|".$TrsCmds,"|");
+?>
+
 		// RegExp to quick check for valid commands
-		re = /^\/(!$|announce .+|ban .+|clear$|help$|\?$ .+|ignore|invite .+|join .+|kick .+|me .+|msg .+|to .+|notify$|order$|sort$|profile$|promote|quit|exit|bye|refresh|save|show|last|size|timestamp$|whois .+|mr .+|away|demote .+|high|img .+|room .+|topic .+|wisp .+|whisp .+|buzz|bot|rtl|ltr|dice|([1-9][0-9]?d)|([1-9][0-9]?d[1-9][0-9]?)|d([1-9][0-9]?[0-9]?)([t])([1-9][0-9]?)|d([1-9][0-9]?[0-9]?))/i;
+		re = /^\/(!$|announce .+|ban .+|clear$|help$|\?$|ignore|invite .+|join .+|kick .+|boot .+|me .+|msg .+|to .+|notify$|order$|sort$|profile$|promote|quit|exit|bye|refresh|reload|recall$|save|export|show|last|size|timestamp$|whois .+|about .+|mr .+|away|demote .+|high|img .+|room .+|topic .+|wisp .+|whisp .+|buzz|bot|rtl|ltr|dice|([1-9][0-9]?d)|([1-9][0-9]?d[1-9][0-9]?)|d([1-9][0-9]?[0-9]?)([t])([1-9][0-9]?)|d([1-9][0-9]?[0-9]?)<?php echo($TrsCmds != "" && $TrsCmds != "TrsCmds" ? $TrsCmds : ""); ?>)/i;
 		re1 = /^:( .+)/i;
 
 		// Ensure the message box isn't empty
@@ -1839,7 +1904,7 @@ if (C_SHOW_COUNTER)
 &copy; 2000-<?php echo(date('Y'))?> <a HREF="http://www.phpheaven.net/team" TARGET=_blank CLASS="ChatLink" Title="<?php echo(sprintf(L_CLICK,L_LINKS_7)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_LINKS_7)); ?>.'; return true">The phpHeaven Team</a><br />
 &copy; 2005-<?php echo(date('Y'))?> Plus development by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" Title="<?php echo(sprintf(L_CLICK,L_LINKS_9)); ?>" CLASS="ChatLink" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_DEVELOPER)); ?>.'; return true;">Ciprian M</a>.<br />
 Thanks to all the contributors in the <a href="http://groups.yahoo.com/subscribe/phpmychat" CLASS="ChatLink" title="<?php echo(sprintf(L_CLICK,L_LINKS_8)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_LINKS_8)); ?>.'; return true;" target=_blank>phpMyChat group</a> !<br />
-Download this full chat pack from <a href="https://sourceforge.net/project/showfiles.php?group_id=19371&package_id=199435" target=_blank title="<?php echo(APP_NAME." ".L_SRC." Sorceforge.net\n".sprintf(L_CLICK,L_LINKS_10)); ?>" onMouseOver="window.status='<?php echo(APP_NAME." ".L_SRC." Sorceforge.net! ".sprintf(L_CLICK,L_LINKS_10)); ?>.'; return true;" CLASS="ChatLink">here</a>
+Download this full chat pack from <a href="https://sourceforge.net/project/showfiles.php?group_id=19371&package_id=199435" target=_blank title="<?php echo(APP_NAME." ".L_SRC." Sorceforge.net\n".sprintf(L_CLICK,L_LINKS_10)); ?>" onMouseOver="window.status='<?php echo(APP_NAME." ".L_SRC." Sorceforge.net! ".sprintf(L_CLICK,L_LINKS_10)); ?>.'; return true;" CLASS="ChatLink"><?php echo(file("http://sflogo.sourceforge.net/sflogo.php?group_id=19371&type=10") ? "<img src=\"http://sflogo.sourceforge.net/sflogo.php?group_id=19371&type=10\" border=0 width=\"80\" height=\"15\" />" : "here"); ?></a>
 </SPAN>
 <?php
 if (C_SHOW_OWNER)

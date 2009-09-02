@@ -12,11 +12,11 @@ if (!function_exists('mb_convert_case'))
 };
 
 // Check for invalid characters in the user name
-if ($Cmd[2] != "" && ereg("[\, \']", stripslashes($Cmd[2])))
+if ($Cmd[3] != "" && ereg("[\ \']", stripslashes($Cmd[3])))
 {
 	$Error = L_ERR_USR_16;
 }
-elseif ((mb_convert_case($Cmd[2],MB_CASE_LOWER,$Charset) == mb_convert_case($U,MB_CASE_LOWER,$Charset)) || $Cmd[2] == $U)
+elseif ((mb_convert_case($Cmd[3],MB_CASE_LOWER,$Charset) == mb_convert_case($U,MB_CASE_LOWER,$Charset)) || $Cmd[3] == $U)
 {
 	$Error = L_ERR_USR_19;
 }
@@ -27,17 +27,17 @@ else
 	// Message to add if user need to be registered to enter the current room
 	$ReqRegist = (($T == "0" && !C_REQUIRE_REGISTER) ? ".\" \".L_INVITE_REG" : "");
 		// Don't send self-invitations - by Ciprian
-		if (eregi(mb_convert_case($U,MB_CASE_LOWER,$Charset),mb_convert_case($Cmd[2],MB_CASE_LOWER,$Charset)))
+		if (eregi(mb_convert_case($U,MB_CASE_LOWER,$Charset),mb_convert_case($Cmd[3],MB_CASE_LOWER,$Charset)))
 		{
-			$Cmd[21] = eregi_replace($U, '', $Cmd[2]);
-			$Cmd[21] = eregi_replace(',,', ',', $Cmd[21]);
-			$Cmd[21] = rtrim($Cmd[21], ',');
-			$Cmd[2] = ltrim($Cmd[21], ',');
+			$Cmd[31] = str_replace($U, '', $Cmd[3]);
+			$Cmd[31] = str_replace(',,', ',', $Cmd[31]);
+			$Cmd[31] = rtrim($Cmd[31], ',');
+			$Cmd[3] = ltrim($Cmd[31], ',');
 			$Error = L_ERR_USR_19;
 		}
 	// Get all addressee and insert a message for each one
 	$NotInvited = "";
-	$Invited = explode (",", $Cmd[2]);
+	$Invited = explode (",", $Cmd[3]);
 	for ($i = 0; $i < count($Invited); $i++)
 	{
 		$Invited[$i] = trim($Invited[$i]);
@@ -63,7 +63,7 @@ else
 			$Error = sprintf(L_NOT_ONLINE, special_char($NotInvited,$Latin1));
 		};
 	};
-	unset($Invited);
+	unset($Invited,$NotInvited);
 };
 
 ?>

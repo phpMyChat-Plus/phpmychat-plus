@@ -22,6 +22,7 @@ Server environment - tested env:
 	- mail function support (optional but recommended).
 
 Known issues (read also the FAQ):
+- NOT COMPATIBLE with php > 5.3.0! (due to the deprecation of ereg functions, which have been tremendously used until pmc+ 1.93; a separate version will be developed to replace ereg functions with preg class functions)
 - configurations cannot be saved from admin panel on servers having magic_quotes set "on"; this also happen if the c_config table structure has been altered somehow and it doesn’t exactly follow the admin5.php field definitions; another identified reason would be the use of single quote ’ in field values (like Room’s Names or such) - never use single quotes - use the utf-8 ’ instead (you can copy it from here when you need it)
 - when a username uses utf-8 chars like ă î â , php cannot recognize a name with small caps as being similar with caps (Îrban is different than îrban) so please make sure you use the name in PMs and commands exacly as the one of the desired username (this is working fine on php > 5 servers, due to the added mb_* functions support);
 - on IE7, registered users don’t always actually leave the chat after clicking the Exit door or Exit link - the loader frame doesn’t actually close but keep showing that user to the users’ lists until the user closes that specific browser window.
@@ -32,12 +33,15 @@ On some pcs a restart might be necessary.
 We also added a small IE fixing script (reg file) as a link in Extra Options in chat.
 
 Fixes History:
+23.08.2009 - 1.93-RC6:
+- all the commands have been changed to support translations - optional though; (functionality extension)
+- changed and improved the dice commands; (functionality related)
 10.06.2009 - 1.93-RC5:
 - fixed a small bug in private popups replies; (functionality related)
 - small change in stylesheets to format the rtl quotes
 - dir comands added (/rtl and /ltr) - changes the posts text direction when needed ;(functionality extenssion)
 - admin.php and invite command fixes; (functionality related)
-- Hebrew translation has been added - thank to Shula; (localization related)
+- Hebrew translation has been added - thanks to Shula; (localization related)
 - added statistics table for admin analyses purposes; (c_stats table added and lots of testings and fine-tunings); (functionality extension)
 27.08.2008 - 1.93-RC4:
 - logs header include paths fixed to avoid safe mode restrictions (access to relative paths to localization files); (functionality related)

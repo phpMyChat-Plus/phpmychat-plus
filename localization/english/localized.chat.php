@@ -212,11 +212,12 @@ define("L_HELP_MSG", "message");
 define("L_HELP_MSGS", "messages");
 define("L_HELP_ROOM", "room");
 define("L_HELP_BUZZ", "~soundname");
+define("L_HELP_BUZZ1", "Buzz...");
 define("L_HELP_REASON", "the reason");
 define("L_HELP_MR", "Mr.");
 define("L_HELP_MS", "Ms.");
 define("L_HELP_CMD_0", "{} represents a required setting, [] an optional one.");
-define("L_HELP_CMD_1a", "Set number of messages to show. Minimum and default are 5.");
+define("L_HELP_CMD_1a", "Set the number of messages to show. Minimum and default are 5.");
 define("L_HELP_CMD_1b", "Reload the messages frame and display the n latest messages, minimum and default are 5.");
 define("L_HELP_CMD_2a", "Modify messages list refresh delay (in seconds).<br />If n is not specified or less than 3, toggles between no refresh and 10s refresh.");
 define("L_HELP_CMD_2b", "Modify messages and users lists refresh delay (in seconds).<br />If n is not specified or less than 3, toggles between no refresh and 10s refresh.");
@@ -249,8 +250,10 @@ define("L_HELP_CMD_28", "It allows posting of <i>one single image</i> as message
 define("L_HELP_CMD_29", "The second command will allow the administrator or moderator(s) of the current room to demote another registered user previously promoted to moderator for the same room.<br />The * option will demote the user from all the rooms.");
 define("L_HELP_CMD_30", "The second command does the same as /me but it will show your respective title, according to your profile gender<br />E.g. * ".L_HELP_MR." Ciprian is watching TV or * ".L_HELP_MS." Dana is happy.");
 define("L_HELP_CMD_31", "Change the order users are sorted in lists: by entrance time or alphabetically.");
-define("L_HELP_CMD_32", "This is a third (role-playing) version of the dice rolling.<br />Usage: /d{n1}[tn2] or /d{n1};<br />n1 can take any value <b>between 1 and 100</b> (it represents the number of sides per die).<br />n2 can take any value <b>between 1 and %s</b> (it represents the number of rolling dice per throw).");
+define("L_HELP_CMD_32", "This is a third (role-playing) version of the dice rolling.<br />Usage: /d{n1}[tn2] or /d{n1};<br />n1 can take any value <b>between 1 and 100</b> (it represents the number of sides per die);<br />n2 can take any value <b>between 1 and %s</b> (it represents the number of rolling dice per throw).");
 define("L_HELP_CMD_33", "Change the font size of the messages in chat to user choice (allowed values for n: <b>between 7 and 15</b>); the /size command resets the font size to the default value (<b>".$FontSize."</b>).");
+define("L_HELP_CMD_34", "This will allow an user to specify the orientation of a text message (ltr = left-to-right, rtl = right-to-left).");
+define("L_HELP_CMD_VAR", "Synonyms (variants): %s"); // a list of English and/or translated alternatives for each command
 define("L_HELP_ETIQ_1", "Chat Etiquette");
 define("L_HELP_ETIQ_2", "Our site would like to keep its community friendly and fun, so please adhere to the following guidelines. If you fail to observe these rules, one of our chat moderators may boot you from the chat.<br /><br />Thank you,");
 define("L_HELP_ETIQ_3", "Our Chat Etiquette Guidelines");
@@ -325,6 +328,7 @@ define("L_DEFAULT_TOPIC_1", "This is a default topic. Edit localization/_owner/o
 define("L_PIC", "Picture posted by");
 define("L_PIC_RESIZED", "Resized to");
 define("L_HELP_IMG", "full path to the image to be posted");
+define("L_NO_IMAGE", "This is not a valid URL of a public remote image.\nTry again!");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s is no longer a moderator for any room of this chat.");
@@ -406,6 +410,8 @@ define("L_PRIV_RELOAD", "Reload page");
 define("L_PRIV_MARK_ALL", "Mark all as Read");
 define("L_PRIV_MARK_SEL", "Mark selected as Read");
 define("L_PRIV_REMOVE", "Remove checked PMs");
+define("L_PRIV_PM", "(private)");
+define("L_PRIV_WISP", "(whisper)");
 
 // Color Input Box mod by Ciprian
 define("L_ENABLED", "Enabled");

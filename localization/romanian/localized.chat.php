@@ -212,6 +212,7 @@ define("L_HELP_MSG", "mesaj");
 define("L_HELP_MSGS", "mesaje");
 define("L_HELP_ROOM", "cameră");
 define("L_HELP_BUZZ", "~numesunet");
+define("L_HELP_BUZZ1", "Alertă...");
 define("L_HELP_REASON", "motivul");
 define("L_HELP_MR", "Domnul");
 define("L_HELP_MS", "Doamna");
@@ -242,15 +243,17 @@ define("L_HELP_CMD_21", "Anunţă camera şi utilizatorii care vor să îţi tri
 define("L_HELP_CMD_22", "Trimite un semnal sonor tip Buzz pentru captarea atenţiei celorlalţi. Nu abuza de această comandă!<br />- Folosire:<br />- anterior: \"/buzz\" or \"/buzz mesaj de arătat\" - aceasta trimite sunetul implicit definit în Panoul Admin;<br />- extindere: \"/buzz ~numesunet\" sau \"/buzz ~numesunet mesaj de arătat\" - aceasta trimite sunetul fişierului numesunet.wav aflat în directorul plus/sounds; semnul \"~\" trebuie folosit înaintea celui de-al doilea cuvânt, care reprezintă numele fişierului sunetului, fără extensia .wav (numai extensiile .wav sunt permise).<br />Implicit, această comandă poate fi folosită numai de moderatori/administratori.");
 define("L_HELP_CMD_23", "Trimite un mesaj privat tip \"whisper\" (şoaptă). Mesajul va ajunge la destinatar, în orice cameră s-ar afla acesta. În cazul în care utilizatorul căutat nu este on-line, vei fi înştiinţat.");
 define("L_HELP_CMD_24", "Comanda schimbă topicul (tema de discuţii) camerei în care este folosită. Încercaţi să nu suprascrieţi temele altor utilizatori şi să folosiţi teme care merită afişate.<br />Folosind comanda \"/topic top reset\" tema curentă afişată va fi ştearsă şi resetată la tema implicită a camerei.<br />În mod implicit, această comandă poate fi folosită doar de moderatori.<br />Atenţie: tema de discuţii trebuie să conţină cel puţin 2 cuvinte.<br />Opţional, \"/topic * {}\" face aceleaşi lucruri dar pentru toate camerele simultan (temă globală şi resetare temă globală).");
-define("L_HELP_CMD_25", "Un joc cu zaruri pentru plictiseală sau trageri la sorţi.<br />Utilizare: /dice sau /dice [n]; n este opţional şi reprezintă numărul de zaruri din mană. Poate avea orice valoare între 1 şi numărul maxim de zaruri setat (6). Comanda fără n va arunca numărul maxim de zaruri (6).");
-define("L_HELP_CMD_26", "Versiunea mai dezvoltată a comenzii /dice.<br />Utilizare: /[n1]d[n2] sau /[n1]d;<br />n1 poate avea orice valoare <b>între 1 şi 9</b> (reprezintă numărul de aruncări);<br />n2 este o valoare între 1 şi numărul maxim de zaruri setat (6) (reprezintă numărul de zaruri aruncate). Comanda fără n2 va arunca la fiecare mână cu numărul maxim de zaruri (6).");
+define("L_HELP_CMD_25", "Un joc cu zaruri pentru plictiseală sau trageri la sorţi.<br />Utilizare: /dice sau /dice [n]; n este opţional şi reprezintă numărul de zaruri din mană. Poate avea orice valoare <b>între 1 şi %s</b>. Comanda fără n va arunca numărul maxim de zaruri.");
+define("L_HELP_CMD_26", "Aceasta este versiunea mai complexă a comenzii /dice.<br />Utilizare: /{n1}d[n2] sau /{n1}d;<br />n1 poate avea orice valoare <b>între 1 şi %s</b> (reprezintă numărul de zaruri la fiecare aruncare);<br />n2 este o valoare <b>între 1 şi %s</b> (reprezintă numărul de feţe ale fiecărui zar). Comanda fără n2 va arunca la fiecare mână cu numărul maxim de zaruri.");
 define("L_HELP_CMD_27", "Evidenţiază mesajele trimise de un anumit utilizator, pentru a-l distinge mai uşor în cadrul conversaţiilor.<br />Utilizare: /high {utilizator} sau apasă pe pătrăţelul alb/galben cu litera H din dreapta numelui, în lista de camere/utilizatori.");
 define("L_HELP_CMD_28", "Permite postarea <b>unei imagini</b> în loc de mesaj.<br />Utilizare: Introduceţi link-ul complet! (ex. <b>/img http://ciprianmp.com/images/CIPRIAN.jpg</b>). Extensii recunoscute şi acceptate: .jpg .bmp .gif. Atenţie la literele mari şi mici - contează.");
 define("L_HELP_CMD_29", "Cea de a doua comandă permite administratorului sau moderatorului(ilor) din camera curentă să destituie un alt moderator din cameră la statusul normal de utilizator înregistrat.<br />Opţiunea * va destitui respectivul utilizator din toate camerele.");
 define("L_HELP_CMD_30", "Cea de a doua comandă face acelaşi lucru ca şi /me, numai că va arata şi genul corespunzător<br />Exemplu * ".L_HELP_MR." Ciprian urmăreşte ştirile ProTV sau * ".L_HELP_MS." Dana este super fericită.");
 define("L_HELP_CMD_31", "Schimbă ordinea sortării utilizatorilor în liste: după momentul logării sau alfabetic.");
-define("L_HELP_CMD_32", "Aceasta este a treia versiune de joc de zaruri (roleplaying).<br />Utilizare: /d{n1}[tn2] sau /d{n1};<br />n1 poate avea orice valoare <b>între 1 şi 100</b> (reprezintă numărul de puncte ale fiecărui zar).<br />n2 poate avea orice valoare <b>între 1 şi %s</b> (reprezintă numărul de zaruri aruncate).");
+define("L_HELP_CMD_32", "Aceasta este a treia versiune de joc de zaruri (role-playing).<br />Utilizare: /d{n1}[tn2] sau /d{n1};<br />n1 poate avea orice valoare <b>între 1 şi 100</b> (reprezintă numărul de puncte ale fiecărui zar);<br />n2 poate avea orice valoare <b>între 1 şi %s</b> (reprezintă numărul de zaruri la fiecare aruncare).");
 define("L_HELP_CMD_33", "Schimbă dimensiunea textului mesajelor pe chat (valori permise pentru n: <b>între 7 şi 15</b>); comanda /size resetează dimensiunea fontului la valoarea implicită (<b>".$FontSize."</b>).");
+define("L_HELP_CMD_34", "Această comandă permite unui utilizator să specifice orientarea unui mesaj text (ltr = de la stânga la dreapta, rtl = de la dreapta la stânga).");
+define("L_HELP_CMD_VAR", "Sinonime (variante): %s");
 define("L_HELP_ETIQ_1", "Eticheta Chat-ului");
 define("L_HELP_ETIQ_2", "Site-ul nostru doreşte să păstreze o ambianţă plăcută şi prietenoasă, aşa că vă rugăm să aderaţi la următoarele reguli. Pentru nerespectarea acestor reguli, unul dintre moderatori ar putea să vă elimine din chat.<br /><br />Mulţumim,");
 define("L_HELP_ETIQ_3", "Regulile Etichetei acestui Chat");
@@ -325,6 +328,7 @@ define("L_DEFAULT_TOPIC_1", "Acesta este Subiectul-ul implicit. Pentru a-l schim
 define("L_PIC", "Imagine trimisă de");
 define("L_PIC_RESIZED", "Redimensionată la");
 define("L_HELP_IMG", "calea/link-ul către imaginea de postat");
+define("L_NO_IMAGE", "Aceasta nu este adresa URL a unei imagini on-line.\nÎncearcă din nou!");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s nu mai este moderator în nici una dintre camerele acestui chat.");
@@ -406,6 +410,8 @@ define("L_PRIV_RELOAD", "Reîncarcă pagina");
 define("L_PRIV_MARK_ALL", "Marchează toate mesajele ca Citite");
 define("L_PRIV_MARK_SEL", "Marchează mesajele selectate ca Citite");
 define("L_PRIV_REMOVE", "Şterge mesajele selectate");
+define("L_PRIV_PM", "(privat)");
+define("L_PRIV_WISP", "(şoaptă)");
 
 // Color Input Box mod by Ciprian
 define("L_ENABLED", "Activat");

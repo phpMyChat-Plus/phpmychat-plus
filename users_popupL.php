@@ -14,6 +14,13 @@ if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) exit();
 if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
+if (isset($_COOKIE["CookieBeep"])) $CookieBeep = $_COOKIE["CookieBeep"];
+
+// Sort order by Ciprian
+if (!isset($sort_order)) $sort_order = isset($_COOKIE["CookieUserSort"]) ? $_COOKIE["CookieUserSort"] : C_USERS_SORT_ORD;
+if ($sort_order) $ordquery = "u.username";
+else $ordquery = "u.r_time";
+
 
 require("./${ChatPath}config/config.lib.php");
 require("./${ChatPath}localization/languages.lib.php");
@@ -21,7 +28,6 @@ require("./${ChatPath}localization/".$L."/localized.chat.php");
 require("./${ChatPath}lib/database/".C_DB_TYPE.".lib.php");
 require("./${ChatPath}lib/clean.lib.php");
 
-if (!isset($sort_order)) $sort_order = isset($CookieUserSort) ? $CookieUserSort : C_USERS_SORT_ORD;
 // Special cache instructions for IE5+
 $CachePlus	= "";
 if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
@@ -86,7 +92,6 @@ $DbLink = new DB;
 
 // ** Check for user entrance to beep **
 // Initialize some vars if necessary and put beep on/off in a cookie
-if (isset($_COOKIE["CookieBeep"])) $CookieBeep = $_COOKIE["CookieBeep"];
 if (!isset($B)) $B = (isset($CookieBeep) ? $CookieBeep : "1");
 setcookie("CookieBeep", $B, time() + 60*60*24*365);		// cookie expires in one year
 $BeepRoom = "0";
@@ -156,10 +161,6 @@ if (C_SPECIAL_GHOSTS != "")
 	$sghosts = eregi_replace("username","u.username",C_SPECIAL_GHOSTS);
 	$Hide .= " AND u.username != ".$sghosts."";
 }
-
-// Sort order by Ciprian
-if ($sort_order == "1")	$ordquery = "u.username";
-else $ordquery = "u.r_time";
 
 // Restricted rooms mod by Ciprian
 $res_init = utf8_substr(L_RESTRICTED, 0, 1);
@@ -234,7 +235,7 @@ if(isset($NbUsers) && $NbUsers > 0)
 						{
 							$room_time = $room_time + C_TMZ_OFFSET*60*60;
 							$room_time = strftime(L_SHORT_DATETIME,$room_time);
-							echo("-&nbsp;<a ".userClass($status,$Username).";>".special_char($Username,$Latin1,$status)."</a> <BDO dir=\"${textDirection}\"></BDO><font size=1>(".special_char($room_time,$Latin1,"").")</font><br />");
+							echo("-&nbsp;<a ".userClass($status,$Username).";>".special_char($Username,$Latin1,$status)."</a><BDO dir=\"${textDirection}\"></BDO>&nbsp;<font size=1>(".special_char($room_time,$Latin1,"").")</font><br />");
 						};
 					}
 				}

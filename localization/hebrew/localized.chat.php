@@ -215,6 +215,7 @@ define("L_HELP_MSG", "הודעה");
 define("L_HELP_MSGS", "הודעות");
 define("L_HELP_ROOM", "חדר");
 define("L_HELP_BUZZ", "~soundname");
+define("L_HELP_BUZZ1", "Buzz..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "הסיבה");
 define("L_HELP_MR", "Mr.");
 define("L_HELP_MS", "Ms.");
@@ -254,6 +255,8 @@ define("L_HELP_CMD_30", "The second command does the same as /me but it will sho
 define("L_HELP_CMD_31", "Change the order users are sorted in lists: by entrance time or alphabetically.");
 define("L_HELP_CMD_32", "This is a third (role-playing) version of the dice rolling.<br />Usage: /d{n1}[tn2] or /d{n1};<br />n1 can take any value <b>between 1 and 100</b> (it represents the number of sides per die).<br />n2 can take any value <b>between 1 and %s</b> (it represents the number of rolling dice per throw).");
 define("L_HELP_CMD_33", "Change the font size of the messages in chat to user choice (allowed values for n: <b>between 7 and 15</b>); the /size command resets the font size to the default value (<b>".$FontSize."</b>).");
+define("L_HELP_CMD_34", "This will allow an user to specify the orientation of a text message (ltr = left-to-right, rtl = right-to-left).");
+define("L_HELP_CMD_VAR", "Synonyms (variants): %s"); // a list of English and/or translated alternatives for each command
 define("L_HELP_ETIQ_1", "כללי הצ`אט");
 define("L_HELP_ETIQ_2", "Our site would like to keep its community friendly and fun, so please adhere to the following guidelines. If you fail to observe these rules, one of our chat moderators may boot you from the chat.<br /><br />Thank you,");
 define("L_HELP_ETIQ_3", "קוים מנחים לכללי הצ`אט");
@@ -328,6 +331,7 @@ define("L_DEFAULT_TOPIC_1", "נושא ראשוני. ערוך את הקובץ loc
 define("L_PIC", "תמונה נשלחה על ידי");
 define("L_PIC_RESIZED", "שינוי גודל ל-");
 define("L_HELP_IMG", "full path to the image to be posted");
+define("L_NO_IMAGE", "This is not a valid URL of a public remote image.\nTry again!");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s is no longer a moderator for any room of this chat.");
@@ -409,6 +413,8 @@ define("L_PRIV_RELOAD", "טען את העמוד מחדש");
 define("L_PRIV_MARK_ALL", "קראתי את כל ההודעות");
 define("L_PRIV_MARK_SEL", "קראתי את ההודעות המסומנות");
 define("L_PRIV_REMOVE", "מחק הודעות מסומנות");
+define("L_PRIV_PM", "(private)");
+define("L_PRIV_WISP", "(whisper)");
 
 // Color Input Box mod by Ciprian
 define("L_ENABLED", "אפשרי");
@@ -418,9 +424,9 @@ define("L_COLOR_HEAD_SETTINGSa", "צבעים ראשוניים");
 define("L_COLOR_HEAD_SETTINGSb", "צבע ראשוני");
 define("L_COL_HELP_TITLE", "בחירת צבעים");
 define("L_COL_HELP_SUB1", "שימוש");
-define("L_COL_HELP_P1", "ניתן לבחור צבע ראשוני בהגדרות הפרופיל שלך (אותו הצבע של שם המשתמש שלך). You’ll still be able to use any other color. To change back to your default color from a random used one, you have to choose once the default color (Null) - it is the first one in the select list.");
+define("L_COL_HELP_P1", "ניתן לבחור צבע ראשוני בהגדרות הפרופיל שלך (אותו הצבע של שם המשתמש שלך). עדיין תוכל לבחור צבע אחר. To change back to your default color from a random used one, you have to choose once the default color (Null) - it is the first one in the select list.");
 define("L_COL_HELP_SUB2", "רמז");
-define("L_COL_HELP_P2", "<u>Color Range</u><br />Depending on your browser/OS capabilities, it is possible that some of the colors won’t be rendered. Only 16 color names are supported by the W3C HTML 4.0 standard:");
+define("L_COL_HELP_P2", "<u>טווח צבעים</u><br />Depending on your browser/OS capabilities, it is possible that some of the colors won’t be rendered. Only 16 color names are supported by the W3C HTML 4.0 standard:");
 define("L_COL_HELP_P2a", "If a user claims he cannot see your selected color it means he is probably using an older browser.");
 define("L_COL_HELP_SUB3", "Settings defined on this chat:");
 define("L_COL_HELP_P3", "<u>Power levels of color usage</u>:<br />1. Administrator can use any color.<br />The default color for the administrator is <SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN>.<br />2. Moderators can use any color but <SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN> and <SPAN style=\"color:".COLOR_CA1."\">".COLOR_CA1."</SPAN>.<br />The default color for moderators is <SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN>.<br />3. The other users can use any color but <SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN>, <SPAN style=\"color:".COLOR_CA1."\">".COLOR_CA1."</SPAN>, <SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN> and <SPAN style=\"color:".COLOR_CM1."\">".COLOR_CM1."</SPAN>.");
@@ -433,8 +439,8 @@ define("L_ROOM_COLOR", "הצבע של החדר");
 define("L_PRO_COLOR", "הצבע של הפרופיל");
 
 // Alert messages on errors for Color Input Box mod by Ciprian
-define("COL_ERROR_BOX_MODA", "Only the administrator can use ".COLOR_CA." color!\\n\\nYour text color resets to ".COLOR_CM."!\\n\\nPlease choose any other color.");
-define("COL_ERROR_BOX_USRA", "Only the administrator can use ".COLOR_CA." color!\\n\\nDon’t try to use ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1.".\\n\\nThese are reserved to power users!\\n\\nYour text color resets to ".COLOR_CD."!\\n\\nPlease choose any other color.");
+define("COL_ERROR_BOX_MODA", "רק המנהל יכול להשתמש בצבע ".COLOR_CA."!\\n\\nהצבע שלך מוחזר לצבע  ".COLOR_CM."!\\n\\nתבחר משהו אחאר.");
+define("COL_ERROR_BOX_USRA", "רק המנהל יכול להשתמש בצבע ".COLOR_CA."!\\n\\nאל תנסה להשתמש בצבע  ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1.".\\n\\nצבעים אלה שמורים למשתמשים מאגניבים!\\n\\nהצבע שלך חוזר להיות ".COLOR_CD."!\\n\\nתבחר משהו אחאר.");
 define("COL_ERROR_BOX_USRM", "You must be a moderator to use ".COLOR_CM." color!\\n\\nDon’t try to use ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1.".\\n\\nThese are reserved to power users!\\n\\nYour text color resets to ".COLOR_CD."!\\n\\nPlease choose any other color.");
 
 //Welcome message to be displayed on login
@@ -461,8 +467,8 @@ define("L_SUN", "ראשון");
 // Password reset form by Ciprian
 define("L_PASS_0", "סיסמא איפוס");
 define("L_PASS_1", "שאלה סודית");
-define("L_PASS_2", "איך קראו לתחש הראשון שלך"); // Don't change this question! Just translate it! And keep it short!
-define("L_PASS_3", "איך קראו לסבתא שלך"); // Don't change this question! Just translate it! And keep it short!
+define("L_PASS_2", "מאיזה תוצרת היתה המכונית הראשונה שלך?"); // Don't change this question! Just translate it! And keep it short! (answer ex. BMW, Toyota, Seat)
+define("L_PASS_3", "מה היה השם של חיית המחמד הראשונה שלך?"); // Don't change this question! Just translate it! And keep it short! (answer ex. Cookie, Lora, Roko)
 define("L_PASS_4", "מה אתה מעדיף לשתות"); // Don't change this question! Just translate it! And keep it short!
 define("L_PASS_5", "מתי יום ההולדת שלך"); // Don't change this question! Just translate it! And keep it short!
 define("L_PASS_6", "תשובה סודית");
@@ -491,40 +497,40 @@ define("L_OPEN_PUB", "פתוח לציבור");
 define("L_CLOSED_PUB", "סגור לציבור");
 
 // Links popup page by Alex
-define("L_LINKS_1", "Posted links");
+define("L_LINKS_1", "קישורים מודבקים");
 define("L_LINKS_2", "Here you can access the posted links");
 
 // Javascript Status/title messages on links/images mouseover
 define("L_CLICKS", "%s %s לחץ כאן");
 define("L_CLICK", "%s לחץ כאן");
-define("L_LINKS_3", "to open link");
+define("L_LINKS_3", "כדי לפתוח קישור");
 define("L_LINKS_4", "to open author’s site");
-define("L_LINKS_5", "to insert this smiley");
-define("L_LINKS_6", "to contact");
-define("L_LINKS_7", "to visit phpMyChat Homepage");
+define("L_LINKS_5", "כדי להכניס את הסמילי הזה");
+define("L_LINKS_6", "כדי ליצור קשר עם");
+define("L_LINKS_7", "לבקר את דף הבית של התוכנה");
 define("L_LINKS_8", "to join phpMyChat Group");
-define("L_LINKS_9", "to send your feedback");
-define("L_LINKS_10", "to download phpMyChat Plus");
-define("L_LINKS_11", "to check who is chatting");
-define("L_LINKS_12", "to open the Chat Login Page");
-define("L_LINKS_13", "to send this buzz"); // can also be translated as "to play this sound"
+define("L_LINKS_9", "לשלוח פידבק ליוצרי התוכנה");
+define("L_LINKS_10", "להורדת התוכנה");
+define("L_LINKS_11", "כדי לדעת מי נמצא בצאט");
+define("L_LINKS_12", "כדי לפתוח את דף הכניסה למערכת");
+define("L_LINKS_13", "כדי לצפצף"); // can also be translated as "to play this sound"
 define("L_LINKS_14", "to use this command");
-define("L_LINKS_15", "to open");
-define("L_LINKS_16", "Smiley Gallery");
-define("L_LINKS_17", "to sort ascending");
-define("L_LINKS_18", "to sort descending");
-define("L_LINKS_19", "to set/modify your Gravatar");
-define("L_SWITCH", "Switch to"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
-define("L_SELECTED", "selected"); // E.g. "French - selected" (Country Flags mouseover / Language switching)
+define("L_LINKS_15", "כדי לפתוח");
+define("L_LINKS_16", "גלריית סמיילים");
+define("L_LINKS_17", "למיון בסדר עולה");
+define("L_LINKS_18", "למיון בסדר יורד");
+define("L_LINKS_19", "לשמור את הגרווטר שלך");
+define("L_SWITCH", "מעבר אל"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
+define("L_SELECTED", "נבחרה"); // E.g. "French - selected" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
 define("L_NOT_SELECTED", "לא נבחר");
 define("L_NOT_SELECTED_F", ""); // feminine word, if it's the case
 define("L_EMAIL_1", "לשלוח אימייל");
-define("L_FULLSIZE_PIC", "to open the full size picture");
-define("L_PRIVACY", "to read our Privacy Policy"); //Click here to…
+define("L_FULLSIZE_PIC", "תמונה בגודל מלא");
+define("L_PRIVACY", "לקרוא את תנאי הפרטיות"); //Click here to…
 define("L_AUTHOR", "the author"); //Phrase will look like this: L_CLICK." ".L_LINKS_6." ".L_AUTHOR == Click here - to contact - the author
-define("L_DEVELOPER", "the developer of this chat"); //same here
-define("L_OWNER", "the owner of this chat"); //same here
+define("L_DEVELOPER", "המפתח של התוכנה הזאת"); //same here
+define("L_OWNER", "בעלי הצאט"); //same here
 define("L_TRANSLATOR", "המתרגם"); //same here
 
 // Counter on login
@@ -532,14 +538,14 @@ define("L_VISITOR_REPORT", "... מבקרים מאז %s");
 
 // Status bar messages
 define("L_JOIN_ROOM", "הצטרף לחדר זה");
-define("L_USE_NAME", "Use this username");
-define("L_USE_NAME1", "Address to this username");
+define("L_USE_NAME", "השתמש בשם המשתמש הזה");
+define("L_USE_NAME1", "כתובת לשם המשתמש הזה");
 define("L_WHSP", "לחישה");
 define("L_SEND_WHSP", "שלח לחישה");
 define("L_SEND_PM_1", "שלח הודעה");
 define("L_SEND_PM_2", "שלח הודעה פרטית");
-define("L_HIGHLIGHT", "Highlight/Un-Highlight");
-define("L_HIGHLIGHT_SB", "Highlight/Un-Highlight this user’s posts");
+define("L_HIGHLIGHT", "הדגשה / ביטול הדגשה");
+define("L_HIGHLIGHT_SB", "הדגשה / ביטול הדגשה this user’s posts");
 
 //Lurking frame popup
 define("L_LURKING_2", "צופים בדף");
@@ -645,7 +651,7 @@ define("L_DESC", "סדר יורד");
 define("L_LOGIN_COUNT", "סהכ ביקורים");
 
 // Gravatar from email mod by Ciprian
-define("L_GRAV_USE", "use the Gravatar");
+define("L_GRAV_USE", "השתמש בגראווטר הזה");
 
 // Uploader mod by Ciprian
 define("L_UPLOAD", "Upload %s");

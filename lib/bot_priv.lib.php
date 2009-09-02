@@ -2,6 +2,11 @@
   // Added for bot Roy Worley   17/01/04 9:59PM
   // UpDated for bot Roy Worley   7/7/05 1:24AM
 
+if (!function_exists('replybotname'))
+{
+	include("bot/respond.php");
+}
+
 global $uid;                   // WORKS  it is to keep the bot on a topic per user
 
 // Added for php4 support of mb functions

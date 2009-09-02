@@ -8,11 +8,16 @@ if (isset($_GET))
 	};
 };
 
-if (isset($_COOKIE["CookieStatus"])) $statusu = $_COOKIE["CookieStatus"];
-
 // Fix a security hole
 if (isset($L) && !is_dir("./localization/".$L)) exit();
 if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
+
+if (isset($_COOKIE["CookieStatus"])) $statusu = $_COOKIE["CookieStatus"];
+
+// Sort order by Ciprian
+if (!isset($sort_order)) $sort_order = isset($_COOKIE["CookieUserSort"]) ? $_COOKIE["CookieUserSort"] : C_USERS_SORT_ORD;
+if ($sort_order) $ordquery = "usr.username";
+else $ordquery = "usr.r_time";
 
 require("./config/config.lib.php");
 require("./lib/release.lib.php");
@@ -20,7 +25,6 @@ require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
 require("./lib/clean.lib.php");
 
-if (!isset($sort_order)) $sort_order = isset($CookieUserSort) ? $CookieUserSort : C_USERS_SORT_ORD;
 // Special cache instructions for IE5+
 $CachePlus	= "";
 if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
@@ -225,6 +229,7 @@ if (C_ENABLE_PM && C_PRIV_POPUP && !isset($allowpopupu))
 	else $allowpopupu = 0;
 	$DbLink->clean_results();
 }
+
 // Gravatars initialization
 unset($email);
 unset($use_gravatar);
@@ -240,7 +245,7 @@ if (C_DB_TYPE == 'mysql')
   $currentRoomQuery = 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar, reg.email, reg.use_gravatar '
 						. 'FROM ' . C_USR_TBL . ' usr LEFT JOIN ' . C_REG_TBL . ' reg ON usr.username = reg.username '
 						. 'WHERE usr.room = \'' . $R . '\'' . $Hide . ' '
-						. 'ORDER BY ' . ($sort_order ? "username" : "r_time") . '';
+						. 'ORDER BY ' . $ordquery . '';
 }
 else if (C_DB_TYPE == 'pgsql')
 {
@@ -251,14 +256,14 @@ else if (C_DB_TYPE == 'pgsql')
 						. 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time,  NULL AS gender '
 						. 'FROM ' . C_USR_TBL . ' usr '
 						. 'WHERE usr.username NOT IN (SELECT reg.username FROM ' . C_REG_TBL . ' reg) AND usr.room = \'' . $R . '\'' . $Hide . ' '
-						. 'ORDER BY ' . ($sort_order ? "username" : "r_time") . '';
+						. 'ORDER BY ' . $ordquery . '';
 }
 else
 {
 	$currentRoomQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar, reg.email, reg.use_gravatar NULL AS gender '
 						. 'FROM ' . C_USR_TBL . ' usr, ' . C_REG_TBL . ' reg '
 						. 'WHERE usr.room = \'' . $R . '\'' . $Hide . ' '
-						. 'ORDER BY ' . ($sort_order ? "username" : "r_time") . '';
+						. 'ORDER BY ' . $ordquery . '';
 }
 
 $DbLink->query($currentRoomQuery);
@@ -513,7 +518,7 @@ if($DbLink->num_rows() > 0)
 			$otherRoomsQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar, reg.email, reg.use_gravatar '
 								. 'FROM ' . C_USR_TBL . ' usr LEFT JOIN ' . C_REG_TBL . ' reg ON usr.username = reg.username '
 								. 'WHERE usr.room = \'' . addslashes($Other) . '\'' . $Hide . ' '
-								. 'ORDER BY ' . ($sort_order ? "username" : "r_time") . '';
+								. 'ORDER BY ' . $ordquery . '';
 		}
 		else if (C_DB_TYPE == 'pgsql')
 		{
@@ -524,14 +529,14 @@ if($DbLink->num_rows() > 0)
 								. 'SELECT usr.username, usr.latin1, usr.status, usr.r_time, NULL AS gender '
 								. 'FROM ' . C_USR_TBL . ' usr '
 								. 'WHERE usr.username NOT IN (SELECT reg.username FROM ' . C_REG_TBL . ' reg) AND usr.room = \'' . addslashes($Other) . '\'' . $Hide . ' '
-								. 'ORDER BY ' . ($sort_order ? "username" : "r_time") . '';
+								. 'ORDER BY ' . $ordquery . '';
 		}
 		else
 		{
 			$otherRoomsQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar, reg.email, reg.use_gravatar NULL AS gender '
 								. 'FROM ' . C_USR_TBL . ' usr, ' . C_REG_TBL . ' reg '
 								. 'WHERE usr.room = \'' . addslashes($Other) . '\'' . $Hide . ' '
-								. 'ORDER BY ' . ($sort_order ? "username" : "r_time") . '';
+								. 'ORDER BY ' . $ordquery . '';
 		}
 		$OthersUsers->query($otherRoomsQuery);
 		if($OthersUsers->num_rows() > 0)

@@ -39,11 +39,13 @@ $MaxHeight = 55;
 // ---- DO NOT MODIFY BELOW ----
 
 // Slashes ' and " characters
-function SpecialSlash(&$Str)
+if (!function_exists('SpecialSlash'))
 {
-	return str_replace("\"","&quot;",str_replace("'","\\'",$Str));
+	function SpecialSlash(&$Str)
+	{
+		return str_replace("\"","&quot;",str_replace("'","\\'",$Str));
+	}
 }
-
 // Replace smilies code by gif URLs in messages
 function Check4Smilies(&$string,&$Table)
 {

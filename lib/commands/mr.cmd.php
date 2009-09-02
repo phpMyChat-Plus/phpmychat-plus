@@ -3,7 +3,7 @@
 if (C_NO_SWEAR)
 {
 	include("./lib/swearing.lib.php");
-	$Cmd[1] = checkwords($Cmd[1], false, $Charset);
+	$Cmd[2] = checkwords($Cmd[2], false, $Charset);
  	if(C_EN_STATS && isset($Found) && $b>0)
 	{
 		$DbLink->query("UPDATE ".C_STS_TBL." SET swears_posted=swears_posted+$b WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
@@ -19,7 +19,7 @@ if ($gender == 2) $salutation = "L_HELP_MS";
 elseif ($gender == 1) $salutation = "L_HELP_MR";
 else $salutation = "* *";
 
-$M = "<B>* ".$salutation." ".$U."</B> ".stripslashes($Cmd[1]);
+$M = "<B>* ".$salutation." ".$U."</B> ".stripslashes($Cmd[2]);
 AddMessage($M, $T, $R, $U, $C, '', '', '', $Charset);
 
 $IsCommand = true;

@@ -1,5 +1,4 @@
 <?php
-
 // ** Check for messages to be saved **
 
 // Define the SQL query (depends on values for ignored users list and on whether to display
@@ -19,8 +18,8 @@ if ($Count != "0")
 {
 	$IsCommand = true;
 	$Save_URL_Query = isset($Ign) ? "&Ign=".urlencode(stripslashes($Ign)) : "";
-	if (C_SAVE != "*" && ($Cmd[2] > C_SAVE || $Cmd[2] == "")) $Cmd[2] = C_SAVE;
-	if ($Cmd[2] != "") $Save_URL_Query .= "&Limit=$Cmd[2]";
+	if (C_SAVE != "*" && ($Cmd[3] > C_SAVE || $Cmd[3] == "")) $Cmd[3] = C_SAVE;
+	if ($Cmd[3] != "") $Save_URL_Query .= "&Limit=$Cmd[3]";
 
 	// Define a table that contains JavaScript instructions to be ran
 	$jsTbl = array(

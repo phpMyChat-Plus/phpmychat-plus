@@ -68,6 +68,7 @@ if (!function_exists("utf8_substr"))
 // Returns the days in the status bar
 function get_day($time,$plus)
 {
+global $L;
 		$monday = utf8_substr(L_MON, 0, ($L == 'vietnamese') ? '8' : '3');
 		$tuesday = utf8_substr(L_TUE, 0, ($L == 'vietnamese') ? '8' : '3');
 		$wednesday = utf8_substr(L_WED, 0, ($L == 'vietnamese') ? '8' : '3');

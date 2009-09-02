@@ -23,14 +23,14 @@ function is_user_ignored($who, $userlist, $Charset)
 }
 
 // Check for invalid characters in the name of the user to be ignored
-if ($Cmd[3] != "" && ereg("[\, \']", stripslashes($Cmd[3])))
+if ($Cmd[4] != "" && ereg("[\ \']", stripslashes($Cmd[4])))
 {
 	$Error = L_ERR_USR_16;
 }
-elseif ($Cmd[1] == "")
+elseif ($Cmd[2] == "")
 {
 	// Launch the ignored popup
-	if ($Cmd[3] == "")
+	if ($Cmd[4] == "")
 	{
 		$IsCommand = true;
 		$IsPopup = true;
@@ -56,7 +56,7 @@ elseif ($Cmd[1] == "")
 	else
 	{
 		if (!isset($Ign)) $Ign="";
-		$Ignore = explode (",", stripslashes($Cmd[3]));
+		$Ignore = explode (",", stripslashes($Cmd[4]));
 		for ($i = 0; $i < count($Ignore); $i++)
 		{
 			$Ignore[$i] = trim($Ignore[$i]);
@@ -74,7 +74,7 @@ elseif ($Cmd[1] == "")
 else
 {
 	// Unset ignored list
-	if ($Cmd[3] == "")
+	if ($Cmd[4] == "")
 	{
 		$IsCommand = true;
 		if (isset($Ign) && $Ign != "")
@@ -89,7 +89,7 @@ else
 		$IsCommand = true;
 		if (isset($Ign) && $Ign != "")
 		{
-			$Ignore = explode (",", stripslashes($Cmd[3]));
+			$Ignore = explode (",", stripslashes($Cmd[4]));
 			for ($i = 0; $i < count($Ignore); $i++)
 			{
 				$Ignore[$i] = trim($Ignore[$i]);

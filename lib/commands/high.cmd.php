@@ -1,10 +1,9 @@
 <?php
-
 // Check for swear words in the message if necessary
 if (C_NO_SWEAR)
 {
 	include("./lib/swearing.lib.php");
-	$Cmd[1] = checkwords($Cmd[1], false, $Charset);
+	$Cmd[2] = checkwords($Cmd[2], false, $Charset);
 };
 
  global $highpath;
@@ -20,7 +19,7 @@ else {	                                              // if it does NOT write it.
        clearstatcache () ;
 
           $fp = fopen($highpath, "a") ;                // file will be writen.
-             fputs($fp, stripslashes($Cmd[1]));                // and will include the userName to HighLight.
+             fputs($fp, stripslashes($Cmd[2]));                // and will include the userName to HighLight.
           fclose($fp) ;
      };
 
