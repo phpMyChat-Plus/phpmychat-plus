@@ -84,6 +84,8 @@ if($DbLink->num_rows() > 0)
 		$Message = eregi_replace("L_REG_BRB",L_REG_BRB,$Message);
 		$Message = eregi_replace("L_HELP_MR",L_HELP_MR,$Message);
 		$Message = eregi_replace("L_HELP_MS",L_HELP_MS,$Message);
+		$Message = eregi_replace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"".L_HELP_BUZZ1."\" title=\"".L_HELP_BUZZ1."\">",$Message);
+		if ($Align == "right") $Message = eregi_replace("arrowr","arrowl",$Message);
 		if ($Room == '*' || ($User == "SYS room" && $Dest == '*') || $User == "SYS announce") $Room = L_ROOM_ALL;
 		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
 		{
@@ -182,6 +184,7 @@ if($DbLink->num_rows() > 0)
 		}
 		if (substr($User,0,8) == "SYS dice")
 		{
+//			eval("\$Message = \"$Message\";");
  			$NewMsg .= "<td colspan=2 valign=\"top\"><FONT class=\"notify\">".$Dest." ".DICE_RESULTS."</FONT> ".$Message."</td>";
 		}
 

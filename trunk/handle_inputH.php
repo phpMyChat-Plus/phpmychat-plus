@@ -443,7 +443,12 @@ $RefreshMessages = false;
 $IsPopup = false;
 $IsM = false;
 
-if (isset($M) && trim($M) != "" && (ereg("^\/", $M) || ereg("^: ", $M))) include("./lib/commands.lib.php");
+#if (isset($M) && trim($M) != "" && (ereg("^\/", $M) || ereg("^: ", $M))) include("./lib/commands.lib.php");
+if (isset($M) && trim($M) != "" && (ereg("^\/", $M) || ereg("^: ", $M)))
+{
+	if (file_exists("./${ChatPath}localization/${L}/localized.cmds.php")) require("./${ChatPath}localization/${L}/localized.cmds.php");
+	include("./lib/commands.lib.php");
+}
 
 if (isset($M) && (ereg("^\/", $M) || ereg("^: ", $M)) && !($IsCommand) && !isset($Error)) $Error = L_BAD_CMD;
 

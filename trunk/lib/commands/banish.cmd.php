@@ -34,7 +34,7 @@ function room_not_in($what, $in, $Charset)
 	return count($rooms);
 };
 
-$UU = stripslashes($Cmd[2]);
+$UU = stripslashes($Cmd[3]);
 // Check for invalid characters
 if (ereg("[\, \']", $UU))
 {
@@ -79,11 +79,11 @@ else
 				}
 				else
 				{
-					if ($Cmd[1] == "* " && $perms != "admin" && $perms != "topmod") $Cmd[1] = "";
-					$Reason = trim($Cmd[3]);
+					if ($Cmd[2] == "* " && $perms != "admin" && $perms != "topmod") $Cmd[2] = "";
+					$Reason = trim($Cmd[4]);
 
 					// Define the duration of the banishment
-					$Until = ($Cmd[1] == "* ") ? "2222222222" : time() + round(C_BANISH * 60 * 60 * 24);
+					$Until = ($Cmd[2] == "* ") ? "2222222222" : time() + round(C_BANISH * 60 * 60 * 24);
 					if ($Until > 2222222222) $Until = "2222222222";
 
 					$DbLink->query("SELECT ip,rooms FROM ".C_BAN_TBL." WHERE username='$UU' LIMIT 1");
@@ -94,7 +94,7 @@ else
 						$DbLink->clean_results();
 						// Define rooms that the user will be banished from (if they are more
 						// than 3, user will be banished from the whole chat)
-						if ($Cmd[1] == "* ") $New_ban_rooms = "*";
+						if ($Cmd[2] == "* ") $New_ban_rooms = "*";
 						else
 						{
 							$UURoom = addslashes($UURoom);
@@ -111,7 +111,7 @@ else
 					else
 					{
 						$DbLink->clean_results();
-						$New_ban_rooms = ($Cmd[1] == "* ") ? "*" : addslashes($UURoom);
+						$New_ban_rooms = ($Cmd[2] == "* ") ? "*" : addslashes($UURoom);
 						$DbLink->query("INSERT INTO ".C_BAN_TBL." VALUES ('$UU', '$UULatin1', '$IP', '$New_ban_rooms', '$Until', '$Reason')");
 					};
 

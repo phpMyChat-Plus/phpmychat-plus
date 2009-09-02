@@ -109,7 +109,7 @@ class acounter {
         $ani_digits = sprintf("%0"."".$this->config['pad'].""."d",$this->counter+1);
 */
         $ani_digits = $this->counter+1;
-        $html_output = "<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr align=\"center\">\n";
+        $html_output = "<BDO dir=ltr><table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr align=\"center\">\n";
 		$INSTALL_DATE = strftime(L_SHORT_DATE,strtotime(C_INSTALL_DATE));
 		if (eregi("win", PHP_OS)) $INSTALL_DATE = utf_conv(WIN_DEFAULT,$Charset,$INSTALL_DATE);
 		$visitors = sprintf(L_VISITOR_REPORT,$INSTALL_DATE);
@@ -123,7 +123,7 @@ class acounter {
             }
             $html_output .= " width=\"".$this->config['width']."\" height=\"".$this->config['height']."\"></td>\n";
         }
-        $html_output .= "</tr></table>\n";
+        $html_output .= "</tr></table></BDO>\n";
         return $html_output;
     }
 

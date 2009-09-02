@@ -24,7 +24,7 @@ function room_in($what, $in, $Charset)
 	return false;
 }
 
-$UU = $Cmd[2];
+$UU = $Cmd[3];
 
 // Check for invalid characters
 if (ereg("[\, \']", stripslashes($UU)))
@@ -69,7 +69,7 @@ else
 					$Error = sprintf(L_ERR_IS_ADMIN, stripslashes($UU));
 				}
 				// Have been demoted from all rooms?
-				elseif (($perms == "moderator")&&($Cmd[1] == "* "))
+				elseif (($perms == "moderator")&&($Cmd[2] == "* "))
 				{
 					$DbLink->query("UPDATE ".C_REG_TBL." SET perms='user', rooms='' WHERE username='$UU'");
 					$DbLink->query("UPDATE ".C_USR_TBL." SET status='r' WHERE username='$UU'");
@@ -77,8 +77,8 @@ else
 				}
 				elseif (($perms == "moderator") && (room_in($R,addslashes($rooms), $Charset) || room_in("*",addslashes($rooms), $Charset)))
 				{
-					$rooms_new .= ($Cmd[1] == "* ") ? $rooms = "" : str_replace($R, "", $rooms);
-					if ($rooms_new == "" ||$Cmd[1] == "* ")
+					$rooms_new .= ($Cmd[2] == "* ") ? $rooms = "" : str_replace($R, "", $rooms);
+					if ($rooms_new == "" ||$Cmd[2] == "* ")
 					{
 						$DbLink->query("UPDATE ".C_REG_TBL." SET perms='user', rooms='".addslashes($rooms_new)."' WHERE username='$UU'");
 					}
@@ -124,7 +124,7 @@ else
 					$Error = sprintf(L_ERR_IS_ADMIN, stripslashes($UU));
 				}
 				// Have been demoted from all rooms?
-				elseif (($perms == "moderator")&&($Cmd[1] == "* "))
+				elseif (($perms == "moderator")&&($Cmd[2] == "* "))
 				{
 					$DbLink->query("UPDATE ".C_REG_TBL." SET perms='user', rooms='' WHERE username='$UU'");
 					$DbLink->query("UPDATE ".C_USR_TBL." SET status='r' WHERE username='$UU'");
@@ -135,8 +135,8 @@ else
 				}
 				elseif (($perms == "moderator") && (room_in($R,addslashes($rooms), $Charset) || room_in("*",addslashes($rooms), $Charset)))
 				{
-					$rooms_new .= ($Cmd[1] == "* ") ? $rooms = "" : str_replace($R, "", $rooms);
-					if ($rooms_new == "" ||$Cmd[1] == "* ")
+					$rooms_new .= ($Cmd[2] == "* ") ? $rooms = "" : str_replace($R, "", $rooms);
+					if ($rooms_new == "" ||$Cmd[2] == "* ")
 					{
 						$DbLink->query("UPDATE ".C_REG_TBL." SET perms='user', rooms='".addslashes($rooms_new)."' WHERE username='$UU'");
 					}

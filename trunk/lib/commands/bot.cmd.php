@@ -29,7 +29,7 @@ function room_in($what, $in, $Charset)
 	return false;
 }
 
-$UU = $Cmd[1];
+$UU = $Cmd[2];
 
 // Check for invalid characters
 if (ereg("[\, \']", stripslashes($UU)))
@@ -57,7 +57,7 @@ else
 		{
 		$currentbot_time = time() + 2;
 		$botuser = C_BOT_NAME;
-		  if($Cmd[1] == "stop")
+		  if($Cmd[2] == "stop")
 		  {
 		       if (file_exists($botcontrol))
 		       {
@@ -74,7 +74,7 @@ else
 		       	  $Error = BOT_STOP_ERROR;
 		       }
 		  }
-	    elseif($Cmd[1] == "start")
+	    elseif($Cmd[2] == "start")
 		  {
 		       if (file_exists ($botcontrol))
 		       {
@@ -96,7 +96,7 @@ else
 						}
 						$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '$botuser', '$Latin1', '$currentbot_time', '$Private', '<FONT color=\"".C_BOT_FONT_COLOR."\">".C_BOT_HELLO."</FONT> <img src=images/smilies/smile30.gif>".C_UPDTUSRS."', '', '')");
 			            $fp = fopen($botcontrol, "a") ;               // file will be writen to if user types a trigger word
-		                fputs($fp, $Cmd[1]);                      // BUT only the existence of file (or not) is used.
+		                fputs($fp, $Cmd[2]);                      // BUT only the existence of file (or not) is used.
 		                fclose($fp) ;
 					}
 				$IsCommand = true;

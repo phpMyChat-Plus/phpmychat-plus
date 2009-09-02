@@ -58,23 +58,23 @@ function room_in($what, $in, $Charset)
 					$toppath = "botfb/" .$R ;         // file is in DIR "botfb" and called "roomname"
 					$topgpath = "botfb/Global topic" ;         // file is in DIR "botfb" and called "Global topic"
 					// Check for invalid characters in the addressee name
-					if (ereg("[\, \']", stripslashes($Cmd[2])))
+					if (ereg("[\, \']", stripslashes($Cmd[3])))
 					{
 						$Error = L_ERR_USR_16;
 					}
-					elseif (trim($Cmd[2]) != "" && trim($Cmd[3]) != "")
+					elseif (trim($Cmd[3]) != "" && trim($Cmd[4]) != "")
 					{
 						// Check for swear words in the message if necessary
 						if (C_NO_SWEAR && $R != C_NO_SWEAR_ROOM1 && $R != C_NO_SWEAR_ROOM2 && $R != C_NO_SWEAR_ROOM3 && $R != C_NO_SWEAR_ROOM4)
 						{
 							include("./lib/swearing.lib.php");
-							$Cmd[3] = checkwords($Cmd[3], false, $Charset);
+							$Cmd[4] = checkwords($Cmd[4], false, $Charset);
 					 		if(C_EN_STATS && isset($Found) && $b>0)
 							{
 								$DbLink->query("UPDATE ".C_STS_TBL." SET swears_posted=swears_posted+$b WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
 							}
 							unset($Found, $b);
-							$Cmd[2] = checkwords($Cmd[2], false, $Charset);
+							$Cmd[3] = checkwords($Cmd[3], false, $Charset);
 					 		if(C_EN_STATS && isset($Found) && $b>0)
 							{
 								$DbLink->query("UPDATE ".C_STS_TBL." SET swears_posted=swears_posted+$b WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
@@ -82,11 +82,11 @@ function room_in($what, $in, $Charset)
 							unset($Found, $b);
 						}
 						global $Top;
-						if (trim($Cmd[2]) != "*") $Top = trim($Cmd[2])." ".trim($Cmd[3]);
-						else $Top = trim($Cmd[3]);
+						if (trim($Cmd[3]) != "*") $Top = trim($Cmd[3])." ".trim($Cmd[4]);
+						else $Top = trim($Cmd[4]);
 						if (strcasecmp(mb_convert_case($Top,MB_CASE_LOWER,$Charset), "top reset") == 0)
 						{
-							if (trim($Cmd[2]) != "*")
+							if (trim($Cmd[3]) != "*")
 							{
 								if (file_exists ($toppath))                            // checks to see if room file exists.
 								{
@@ -142,7 +142,7 @@ else $Top = eregi_replace($prefix.$pureUrl, '<a href="\\1://\\2" target="_blank"
 	// e-mail addresses
 	$Top = eregi_replace('([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](fo|g|l|m|mes|o|op|pa|ro|seum|t|u|v|z)?)', '<a href="mailto:\\1" alt="Send email">\\1</a>', $Top);
 	
-							if (trim($Cmd[2]) != "*")
+							if (trim($Cmd[3]) != "*")
 							{
 								if (file_exists ($toppath))                            // checks to see if room file exists.
 								{

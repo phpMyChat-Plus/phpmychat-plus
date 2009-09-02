@@ -21,7 +21,7 @@ function room_in($what, $in, $Charset)
 	return false;
 }
 
-$UU = $Cmd[1];
+$UU = $Cmd[2];
 
 // Check for invalid characters
 if (ereg("[\, \']", stripslashes($UU)))

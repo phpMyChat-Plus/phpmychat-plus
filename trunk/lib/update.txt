@@ -1,4 +1,4 @@
 <?php
 define("APP_LAST_VERSION", '1.93');	// The latest version number published on sourceforge.net
-define("APP_LAST_MINOR", '-RC5');	// The latest minor version number published on sourceforge.net; Sample -ß4
+define("APP_LAST_MINOR", '-RC6');	// The latest minor version number published on sourceforge.net; Sample -ß4
 ?>

@@ -21,7 +21,7 @@ function room_in($what, $in, $Charset)
 	return false;
 }
 
-$UU = $Cmd[1];
+$UU = $Cmd[2];
 
 // Check for invalid characters
 if (ereg("[\, \']", stripslashes($UU)))
@@ -70,9 +70,9 @@ else
 					else
 					{
 						$DbLink->query("UPDATE ".C_USR_TBL." SET u_time='".time()."', status='k' WHERE ".$Query4Moder."username='$UU'");
-						if ($Cmd[2] != "")
+						if ($Cmd[3] != "")
 						{
-							$Reason = trim($Cmd[2]);
+							$Reason = trim($Cmd[3]);
 							$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_KICKED_REASON, \"".special_char($UU,$Latin1)."\", \"".$Reason."\")', '', '')");
 						}
 						else
@@ -111,9 +111,9 @@ else
 						}
 						$DbLink->query("UPDATE ".C_STS_TBL." SET kicks_sent=kicks_sent+1 WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
 					}
-					if ($Cmd[2] != "")
+					if ($Cmd[3] != "")
 					{
-						$Reason = trim($Cmd[2]);
+						$Reason = trim($Cmd[3]);
 						$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_KICKED_ALL_REASON, \"".$Reason."\")', '', '')");
 					}
 					else

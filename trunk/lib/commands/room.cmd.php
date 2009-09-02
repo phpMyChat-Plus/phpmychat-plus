@@ -46,9 +46,9 @@ else
 		else
 		{
 			// Check for swear words in the message to be sent if there is one
-			if (trim($Cmd[2]) != "")
+			if (trim($Cmd[3]) != "")
 			{
-			$room_mess = $Cmd[2];
+			$room_mess = $Cmd[3];
 				if (C_NO_SWEAR && $R != C_NO_SWEAR_ROOM1 && $R != C_NO_SWEAR_ROOM2 && $R != C_NO_SWEAR_ROOM3 && $R != C_NO_SWEAR_ROOM4)
 				{
 					include("./lib/swearing.lib.php");
@@ -70,7 +70,7 @@ else
 					unset($SmiliesTbl, $ss);
 				};
 			}
-		if (trim($Cmd[1]) == "*")
+		if (trim($Cmd[2]) == "*")
 		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS room', '$Latin1', ".time().", '$U', '".addslashes(stripslashes($room_mess))."', '', '')");
 		else
 		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS room', '$Latin1', ".time().", '$U', '".addslashes(stripslashes($room_mess))."', '', '')");

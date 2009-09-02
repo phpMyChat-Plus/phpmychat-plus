@@ -187,8 +187,8 @@ if($DbLink->num_rows() != 0)
 	if (C_SPECIAL_GHOSTS != "")
 	{
 			$sghosts = "";
-			$sghosts = eregi_replace("'","",C_SPECIAL_GHOSTS);
-			$sghosts = eregi_replace(" AND username != ",",",$sghosts);
+			$sghosts = str_replace("'","",C_SPECIAL_GHOSTS);
+			$sghosts = str_replace(" AND username != ",",",$sghosts);
 	}
 	if (($sghosts != "" && ghosts_in(stripslashes($U), $sghosts, $Charset)) || (C_HIDE_ADMINS && ($status == "a" || $status == "t")) || (C_HIDE_MODERS && $status == "m"))
 	{
@@ -333,8 +333,8 @@ if ($IgnoreList != "") $CondForQuery = "username NOT IN (${IgnoreList}) AND ";
 if (C_SPECIAL_GHOSTS != "")
 {
 	$sghosts = "";
-	$sghosts = eregi_replace("'","",C_SPECIAL_GHOSTS);
-	$sghosts = eregi_replace(" AND username != ",",",$sghosts);
+	$sghosts = str_replace("'","",C_SPECIAL_GHOSTS);
+	$sghosts = str_replace(" AND username != ",",",$sghosts);
 }
 if ($sghosts != "" && ghosts_in(stripslashes($U), $sghosts, $Charset) && ($status == "a" || $status == "t"))
 {
@@ -357,17 +357,19 @@ if($DbLink->num_rows() > 0)
 	while(list($Time, $User, $Latin1, $Dest, $Message) = $DbLink->next_record())
 	{
 		$Message = stripslashes($Message);
-		$Message = eregi_replace("L_DEL_BYE",L_DEL_BYE,$Message);
-		$Message = eregi_replace("L_REG_BRB",L_REG_BRB,$Message);
-		$Message = eregi_replace("L_HELP_MR",L_HELP_MR,$Message);
-		$Message = eregi_replace("L_HELP_MS",L_HELP_MS,$Message);
+		$Message = str_replace("L_DEL_BYE",L_DEL_BYE,$Message);
+		$Message = str_replace("L_REG_BRB",L_REG_BRB,$Message);
+		$Message = str_replace("L_HELP_MR",L_HELP_MR,$Message);
+		$Message = str_replace("L_HELP_MS",L_HELP_MS,$Message);
+		$Message = str_replace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"".L_HELP_BUZZ1."\" title=\"".L_HELP_BUZZ1."\">",$Message);
+		if ($Align == "right") $Message = str_replace("arrowr","arrowl",$Message);
 		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
 		{
-			$Message = eregi_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$Message);
+			$Message = str_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$Message);
 		}
-		else $Message = eregi_replace('target="_blank">','title="'.sprintf(L_CLICK,L_LINKS_3).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_LINKS_3).'.\'; return true" target="_blank">',$Message);
+		else $Message = str_replace('target="_blank">','title="'.sprintf(L_CLICK,L_LINKS_3).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_LINKS_3).'.\'; return true" target="_blank">',$Message);
 
-		$Message = eregi_replace('alt="Send email">','title="'.sprintf(L_CLICK,L_EMAIL_1).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_EMAIL_1).'.\'; return true">',$Message);
+		$Message = str_replace('alt="Send email">','title="'.sprintf(L_CLICK,L_EMAIL_1).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_EMAIL_1).'.\'; return true">',$Message);
 		if (C_USE_AVATARS)
 		{
 			// Gravatars initialization
@@ -522,19 +524,19 @@ else
 			{
 				$Dest = "<a onClick=\"window.parent.userClick('".special_char($Dest,$Latin1,1)."',false,'".special_char($U,$Latin1,1)."'); return false\" title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME1."'; return true\" CLASS=\"sender\">".$colornamedest_tag."[".special_char($Dest,$Latin1,0)."]".$colornamedest_endtag."<\/a>";
 			}
-			if ($Dest != "") $Dest = "<BDO dir=\"${textDirection}\"><\/BDO>".$colorname_endtag."<\/B><\/td><td valign=\"top\"><B>><\/B><\/td><td valign=\"top\"><B>".$colornamedest_tag."".$Dest;
+			if ($Dest != "") $Dest = "<\/B><BDO dir=\"${textDirection}\"><\/BDO><\/td><td valign=\"top\"><B>><\/B><\/td><td valign=\"top\"><B>".$colornamedest_tag."".$Dest;
 			$Message = str_replace("</FONT>","<\\/FONT>",$Message);	// slashes the closing HTML font tag
  // Avatar System Start:
 		    if (C_USE_AVATARS)
 		    {
 	       		$avatar = "<a onClick=\"window.parent.runCmd('whois','".special_char2(stripslashes($Userx),$Latin1)."'); return false\" onMouseOver=\"window.status='".L_PROFILE.".'; return true\" title=\"".L_PROFILE."\"><img align=\"center\" src=\"$avatar\" width=".C_AVA_WIDTH." height=".C_AVA_HEIGHT." alt=\"".L_PROFILE."\" border=0><\/a>";
-				if ($ST != 1) $NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\">".$avatar."<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."${User}${Dest}".$colornamedest_endtag."<BDO dir=\"${textDirection}\"><\/BDO><\/B><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
-	   			else $NewMsg .= $avatar."<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."${User}${Dest}".$colornamedest_endtag."<BDO dir=\"${textDirection}\"><\/BDO><\/B><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
+				if ($ST != 1) $NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\">".$avatar."<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."${User}${Dest}".$colornamedest_endtag."<\/B><BDO dir=\"${textDirection}\"><\/BDO><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
+	   			else $NewMsg .= $avatar."<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."${User}${Dest}".$colornamedest_endtag."<\/B><BDO dir=\"${textDirection}\"><\/BDO><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
 			}
 			else
 			{
-						if ($ST != 1) $NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>${User}${Dest}<BDO dir=\"${textDirection}\"><\/BDO><\/B><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
-						else $NewMsg .= "<B>${User}${Dest}<BDO dir=\"${textDirection}\"><\/BDO><\/B><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
+						if ($ST != 1) $NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>${User}${Dest}<\/B><BDO dir=\"${textDirection}\"><\/BDO><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
+						else $NewMsg .= "<B>${User}${Dest}<\/B><BDO dir=\"${textDirection}\"><\/BDO><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
 			}
 	    }
 // Avatar System end.
@@ -555,7 +557,7 @@ else
 			}
 			elseif ($User == "SYS topic")
 			{
-				$Message = "<nobr>".$Dest."&nbsp;".L_TOPIC."<BDO dir=\"${textDirection}\"><\/BDO><\/nobr><\/td><td CLASS=\"notify\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
+				$Message = "<nobr>".$Dest."&nbsp;".L_TOPIC."<\/nobr><BDO dir=\"${textDirection}\"><\/BDO><\/td><td CLASS=\"notify\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
 				$noteclass = "notify";
 			}
 			elseif ($User == "SYS topic reset")
@@ -579,7 +581,7 @@ else
       		}
 			elseif (substr($User,0,8) != "SYS dice")
 			{
-				if ($Dest != "") $NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]<BDO dir=\"${textDirection}\"><\/BDO>".$colornamedest_endtag."><\/B> ";
+				if ($Dest != "") $NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]".$colornamedest_endtag."><\/B><BDO dir=\"${textDirection}\"><\/BDO> ";
 				$Message = str_replace("$","\\$",$Message);	// avoid '$' chars in nick to be parsed below
 				eval("\$Message = $Message;");
 				$noteclass = "notify";
@@ -588,6 +590,7 @@ else
 		    {
 				if(substr($User,0,8) == "SYS dice")
 				{
+//					eval("\$Message = \"$Message\";");
 					$NewMsg .="<\/td><td nowrap=\"nowrap\" valign=\"top\"><FONT class=\"notify\">".$Dest." ".DICE_RESULTS."<\/FONT><\/td><td nowrap=\"nowrap\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
 				}
 			    else
@@ -849,8 +852,8 @@ if(C_CHAT_BOOT)
 		if (C_SPECIAL_GHOSTS != "")
 		{
 			$sghosts = "";
-			$sghosts = eregi_replace("'","",C_SPECIAL_GHOSTS);
-			$sghosts = eregi_replace(" AND username != ",",",$sghosts);
+			$sghosts = str_replace("'","",C_SPECIAL_GHOSTS);
+			$sghosts = str_replace(" AND username != ",",",$sghosts);
 		}
 	 	if (($sghosts != "" && ghosts_in(stripslashes($U), $sghosts, $Charset)) || (C_HIDE_ADMINS && ($status == "a" || $status == "t")) || (C_HIDE_MODERS && $status == "m")) {}
 		else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('".$m_type."', '".$m_room."', 'SYS exit', '', ".time().", '', 'sprintf(L_BOOT_ROM, \"$U\")', '', '')");

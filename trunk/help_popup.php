@@ -20,6 +20,7 @@ require("./config/config.lib.php");
 require("./lib/release.lib.php");
 require("./localization/languages.lib.php");
 require("./localization/".$L."/localized.chat.php");
+if (file_exists("./localization/".$L."/localized.cmds.php")) require("./localization/".$L."/localized.cmds.php");
 
 header("Content-Type: text/html; charset=${Charset}");
 
@@ -146,30 +147,33 @@ if (C_HTML_TAGS_KEEP != "none")
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2><I><?php echo(L_HELP_NOTE); ?></I></TH></TR>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2><I><?php echo(L_HELP_CMD_0); ?></I></TH></TR>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/!',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/!</A></TH></TR>
+		<A HREF="#" onClick="cmd2Input('/!',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/!</A>
+	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
-		<TD><?php echo(L_HELP_CMD_7); ?></TD>
+		<TD><?php echo(L_HELP_CMD_7."<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/recall".(L_CMD_RECALL != "" && L_CMD_RECALL != "L_CMD_RECALL" ? " /".str_replace(","," /",L_CMD_RECALL) : "")."</span>")); ?></TD>
 	</TR>
 	<?php
 	if ($CookieStatus == "a" || $CookieStatus == "t")
 	{
 		?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/announce',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/announce {<?php echo(L_HELP_MSG); ?>}</A></TH></TR>
+		<A HREF="#" onClick="cmd2Input('/announce',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/announce {<?php echo(L_HELP_MSG); ?>}</A>
+	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
-		<TD><?php echo(L_HELP_CMD_17); ?></TD>
+		<TD><?php echo(L_HELP_CMD_17.(L_CMD_ANNOUNCE != "" && L_CMD_ANNOUNCE != "L_CMD_ANNOUNCE" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_ANNOUNCE)."</span>") : "")); ?></TD>
 	</TR>
 	<?php
 		};
 	?>
 <!-- The away command doc -->
-  <TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-  <A HREF="#" onClick="cmd2Input('/away', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/away [<?php echo(L_HELP_MSG); ?>]</A></TH></TR>
-  <TR>
+	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
+		<A HREF="#" onClick="cmd2Input('/away', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/away [<?php echo(L_HELP_MSG); ?>]</A>
+	</TH></TR>
+	<TR>
     <TD WIDTH=10>&nbsp;</TD>
-    <TD><?php echo(L_HELP_CMD_21); ?></TD>
+    <TD><?php echo(L_HELP_CMD_21.(L_CMD_AWAY != "" && L_CMD_AWAY != "L_CMD_AWAY" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_AWAY)."</span>") : "")); ?></TD>
   </TR>
 <!-- End away command doc -->
 	<?php
@@ -177,10 +181,11 @@ if (C_HTML_TAGS_KEEP != "none")
 	{
 		?>
 		<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-		<A HREF="#" onClick="cmd2Input('/ban',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/ban <BDO dir="<?php echo($TextDir); ?>">[*]</BDO> {<?php echo(L_USER); ?>} [<?php echo(L_HELP_REASON); ?>]</A></TH></TR>
+			<A HREF="#" onClick="cmd2Input('/ban',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/ban <BDO dir="<?php echo($TextDir); ?>">[*]</BDO> {<?php echo(L_USER); ?>} [<?php echo(L_HELP_REASON); ?>]</A>
+		</TH></TR>
 		<TR>
 			<TD WIDTH=10>&nbsp;</TD>
-			<TD><?php echo(L_HELP_CMD_19); ?></TD>
+			<TD><?php echo(L_HELP_CMD_19.(L_CMD_BAN != "" && L_CMD_BAN != "L_CMD_BAN" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_BAN)."</span>") : "")); ?></TD>
 		</TR>
 		<?php
 	};
@@ -188,10 +193,11 @@ if (C_HTML_TAGS_KEEP != "none")
 	{
 		?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/buzz',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/buzz [<?php echo(L_HELP_BUZZ); ?>] [<?php echo(L_HELP_MSG); ?>]</A></TH></TR>
+		<A HREF="#" onClick="cmd2Input('/buzz',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/buzz [<?php echo(L_HELP_BUZZ); ?>] [<?php echo(L_HELP_MSG); ?>]</A>
+	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
-		<TD><?php echo(L_HELP_CMD_22); ?></TD>
+		<TD><?php echo(L_HELP_CMD_22.(L_CMD_BUZZ != "" && L_CMD_BUZZ != "L_CMD_BUZZ" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_BUZZ)."</span>") : "")); ?></TD>
 	</TR>
 	<?php
 		};
@@ -200,10 +206,11 @@ if (C_HTML_TAGS_KEEP != "none")
 	{
 		?>
 		<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-		<A HREF="#" onClick="cmd2Input('/clear',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/clear</A></TH></TR>
+			<A HREF="#" onClick="cmd2Input('/clear',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/clear</A>
+		</TH></TR>
 		<TR>
 			<TD WIDTH=10>&nbsp;</TD>
-			<TD><?php echo(L_HELP_CMD_15); ?></TD>
+			<TD><?php echo(L_HELP_CMD_15.(L_CMD_CLEAR != "" && L_CMD_CLEAR != "L_CMD_CLEAR" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_CLEAR)."</span>") : "")); ?></TD>
 		</TR>
 		<?php
 	};
@@ -211,19 +218,22 @@ if (C_HTML_TAGS_KEEP != "none")
 	{
 		?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/dice',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/dice [n]</A> (dice v.1)</TH></TR>
+		<A HREF="#" onClick="cmd2Input('/dice',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/dice [n]</A> <BDO></BDO>(dice v.1)
+	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
-		<TD><?php echo(sprintf(L_HELP_CMD_25,MAX_ROLLS)); ?></TD>
+		<TD><?php echo(sprintf(L_HELP_CMD_25,MAX_ROLLS).(L_CMD_DICE != "" && L_CMD_DICE != "L_CMD_DICE" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_DICE)."</span>") : "")); ?></TD>
 	</TR>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/2d',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/{n1}d[n2]</A> (dice v.2)</TH></TR>
+		<A HREF="#" onClick="cmd2Input('/2d',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/{n1}d[n2]</A> <BDO></BDO>(dice v.2)
+	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
 		<TD><?php echo(sprintf(L_HELP_CMD_26,MAX_DICES,MAX_ROLLS)); ?></TD>
 	</TR>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/d50',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/d{n1}[tn2]</A> (dice v.3)</TH></TR>
+		<A HREF="#" onClick="cmd2Input('/d50',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/d{n1}[tn2]</A> <BDO></BDO>(dice v.3)
+	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
 		<TD><?php echo(sprintf(L_HELP_CMD_32,MAX_ROLLS)); ?></TD>
@@ -233,41 +243,46 @@ if (C_HTML_TAGS_KEEP != "none")
 ?>
 <!-- The high command doc -->
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/high', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/high {<?php echo(L_USER); ?>}</A></TH></TR>
+		<A HREF="#" onClick="cmd2Input('/high', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/high {<?php echo(L_USER); ?>}</A>
+	</TH></TR>
   <TR>
     <TD WIDTH=10>&nbsp;</TD>
-    <TD><?php echo(L_HELP_CMD_27); ?></TD>
+    <TD><?php echo(L_HELP_CMD_27.(L_CMD_HIGH != "" && L_CMD_HIGH != "L_CMD_HIGH" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_HIGH)."</span>") : "")); ?></TD>
   </TR>
 <!-- End high command doc -->
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/ignore',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/ignore <BDO dir="<?php echo($TextDir); ?>">[-]</BDO> <?php echo("[".L_USER."[,".L_USER."...]]"); ?></A></TH></TR>
+		<A HREF="#" onClick="cmd2Input('/ignore',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/ignore <BDO dir="<?php echo($TextDir); ?>">[-]</BDO> <?php echo("[".L_USER."[,".L_USER."...]]"); ?></A>
+	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
-		<TD><?php echo(L_HELP_CMD_6); ?></TD>
+		<TD><?php echo(L_HELP_CMD_6.(L_CMD_IGNORE != "" && L_CMD_IGNORE != "L_CMD_IGNORE" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_IGNORE)."</span>") : "")); ?></TD>
 	</TR>
 	<!-- The img command doc -->
-  <TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-  <A HREF="#" onClick="cmd2Input('/img', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/img {<?php echo(L_HELP_IMG); ?>}</A></TH></TR>
+	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
+		<A HREF="#" onClick="cmd2Input('/img',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/img {<?php echo(L_HELP_IMG); ?>}</A>
+	</TH></TR>
   <TR>
     <TD WIDTH=10>&nbsp;</TD>
-    <TD><?php echo(L_HELP_CMD_28); ?></TD>
+    <TD><?php echo(L_HELP_CMD_28.(L_CMD_IMG != "" && L_CMD_IMG != "L_CMD_IMG" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_IMG)."</span>") : "")); ?></TD>
   </TR>
 <!-- End img command doc -->
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/invite',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/invite {<?php echo(L_USER); ?>}</A></TH></TR>
+		<A HREF="#" onClick="cmd2Input('/invite',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/invite {<?php echo(L_USER); ?>}</A>
+	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
-		<TD><?php echo(L_HELP_CMD_18); ?></TD>
+		<TD><?php echo(L_HELP_CMD_18.(L_CMD_INVITE != "" && L_CMD_INVITE != "L_CMD_INVITE" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_INVITE)."</span>") : "")); ?></TD>
 	</TR>
 	<?php
 	if (C_VERSION > 0)
 	{
 		?>
 		<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-		<A HREF="#" onClick="cmd2Input('/join',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/join <BDO dir="<?php echo($TextDir); ?>">[n]</BDO> {#<?php echo(L_HELP_ROOM); ?>}</A></TH></TR>
+			<A HREF="#" onClick="cmd2Input('/join',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/join <BDO dir="<?php echo($TextDir); ?>">[n]</BDO> {#<?php echo(L_HELP_ROOM); ?>}</A>
+		</TH></TR>
 		<TR>
 			<TD WIDTH=10>&nbsp;</TD>
-			<TD><?php echo(L_HELP_CMD_4); ?></TD>
+			<TD><?php echo(L_HELP_CMD_4.(L_CMD_JOIN != "" && L_CMD_JOIN != "L_CMD_JOIN" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_JOIN)."</span>") : "")); ?></TD>
 		</TR>
 		<?php
 	}
@@ -275,103 +290,112 @@ if (C_HTML_TAGS_KEEP != "none")
 	{
 		?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/kick',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/kick {<?php echo(L_USER); ?>} [<?php echo(L_HELP_REASON); ?>]</A><br />
-	<A HREF="#" onClick="cmd2Input('/kick',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/kick {*} [<?php echo(L_HELP_REASON); ?>]</A>
+		<A HREF="#" onClick="cmd2Input('/kick',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/kick {<?php echo(L_USER); ?>} [<?php echo(L_HELP_REASON); ?>]</A><br />
+		<A HREF="#" onClick="cmd2Input('/kick',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/kick <BDO dir="<?php echo($TextDir); ?>">{*} </BDO>[<?php echo(L_HELP_REASON); ?>]</A>
 	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
-		<TD><?php echo(L_HELP_CMD_9); ?></TD>
+		<TD><?php echo(L_HELP_CMD_9."<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/boot".(L_CMD_KICK != "" && L_CMD_KICK != "L_CMD_KICK" ? " /".str_replace(","," /",L_CMD_KICK) : "")."</span>")); ?></TD>
 	</TR>
 		<?php
 	}
 	?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/me',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/me {<?php echo(L_HELP_MSG); ?>}</A><br />
-	<A HREF="#" onClick="cmd2Input('/mr',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/mr {<?php echo(L_HELP_MSG); ?>}</A>
+		<A HREF="#" onClick="cmd2Input('/ltr',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/ltr [<?php echo(L_HELP_MSG); ?>]</A><br />
+		<A HREF="#" onClick="cmd2Input('/rtl',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/rtl [<?php echo(L_HELP_MSG); ?>]</A>
 	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
-		<TD><?php echo(L_HELP_CMD_20); ?><br /><?php echo(L_HELP_CMD_30); ?></TD>
+		<TD><?php echo(L_HELP_CMD_34.((L_CMD_LTR != "" && L_CMD_LTR != "L_CMD_LTR") || (L_CMD_RTL != "" && L_CMD_RTL != "L_CMD_RTL") ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>".(L_CMD_LTR != "" && L_CMD_LTR != "L_CMD_LTR" ? "/".str_replace(","," /",L_CMD_LTR)." " : "").(L_CMD_RTL != "" && L_CMD_RTL != "L_CMD_RTL" ? "/".str_replace(","," /",L_CMD_RTL) : "")."</span>") : "")); ?></TD>
+	</TR>
+	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
+		<A HREF="#" onClick="cmd2Input('/me',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/me {<?php echo(L_HELP_MSG); ?>}</A><br />
+		<A HREF="#" onClick="cmd2Input(':',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">: {<?php echo(L_HELP_MSG); ?>}</A><br />
+		<A HREF="#" onClick="cmd2Input('/mr',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/mr {<?php echo(L_HELP_MSG); ?>}</A>
+	</TH></TR>
+	<TR>
+		<TD WIDTH=10>&nbsp;</TD>
+		<TD><?php echo(L_HELP_CMD_20.(L_CMD_ME != "" && L_CMD_ME != "L_CMD_ME" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_ME)."</span>") : "")); ?><br /><?php echo(L_HELP_CMD_30.(L_CMD_MR != "" && L_CMD_MR != "L_CMD_MR" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_MR)."</span>") : "")); ?></TD>
 	</TR>
 <?php
 if (C_ENABLE_PM)
 {
 ?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-		<A HREF="#" onClick="cmd2Input('/msg',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/msg <?php echo("{".L_USER."} {".L_HELP_MSG."}"); ?></A><br />
-		<A HREF="#" onClick="cmd2Input('/to',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/to <?php echo("{".L_USER."} {".L_HELP_MSG."}"); ?></A>
+		<A HREF="#" onClick="cmd2Input('/msg',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/msg <?php echo("{".L_USER."} {".L_HELP_MSG."}"); ?></A>
 	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
-		<TD><?php echo(L_HELP_CMD_10); ?></TD>
+		<TD><?php echo(L_HELP_CMD_10."<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/to".(L_CMD_MSG != "" && L_CMD_MSG != "L_CMD_MSG" ? " /".str_replace(","," /",L_CMD_MSG) : "")."</span>")); ?></TD>
 	</TR>
 <?php
 }
 ?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/notify',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/notify</A></TH></TR>
+		<A HREF="#" onClick="cmd2Input('/notify',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/notify</A>
+		</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
-		<TD><?php echo(L_HELP_CMD_13); ?></TD>
+		<TD><?php echo(L_HELP_CMD_13.(L_CMD_NOTIFY != "" && L_CMD_NOTIFY != "L_CMD_NOTIFY" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_NOTIFY)."</span>") : "")); ?></TD>
 	</TR>
 	<?php
 	if ($Ver != "H")
 	{
 		?>
 		<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-		<A HREF="#" onClick="cmd2Input('/order',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/order</A></TH></TR>
+			<A HREF="#" onClick="cmd2Input('/order',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/order</A></TH></TR>
 		<TR>
 			<TD WIDTH=10>&nbsp;</TD>
-			<TD><?php echo(L_HELP_CMD_3); ?></TD>
+			<TD><?php echo(L_HELP_CMD_3.(L_CMD_ORDER != "" && L_CMD_ORDER != "L_CMD_ORDER" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_ORDER)."</span>") : "")); ?></TD>
 		</TR>
 		<?php
 	}
 	?>
-<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-<A HREF="#" onClick="cmd2Input('/profile',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/profile</A></TH></TR>
+	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
+		<A HREF="#" onClick="cmd2Input('/profile',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/profile</A></TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
-		<TD><?php echo(L_HELP_CMD_12); ?></TD>
+		<TD><?php echo(L_HELP_CMD_12.(L_CMD_PROFILE != "" && L_CMD_PROFILE != "L_CMD_PROFILE" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_PROFILE)."</span>") : "")); ?></TD>
 	</TR>
 	<?php
 	if ($CookieStatus == "a" || $CookieStatus == "t")
 	{
 		?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/promote',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/promote {<?php echo(L_USER); ?>}</A><br />
-	<A HREF="#" onClick="cmd2Input('/demote',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/demote [*] {<?php echo(L_USER); ?>}</A>
+		<A HREF="#" onClick="cmd2Input('/promote',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/promote {<?php echo(L_USER); ?>}</A><br />
+		<A HREF="#" onClick="cmd2Input('/demote',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/demote <BDO dir="<?php echo($TextDir); ?>">[*]</BDO> {<?php echo(L_USER); ?>}</A>
 	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
-		<TD><?php echo(L_HELP_CMD_14); ?><br /><?php echo(L_HELP_CMD_29); ?></TD>
+		<TD><?php echo(L_HELP_CMD_14.(L_CMD_PROMOTE != "" && L_CMD_PROMOTE != "L_CMD_PROMOTE" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_PROMOTE)."</span>") : "")); ?><br /><?php echo(L_HELP_CMD_29.(L_CMD_DEMOTE != "" && L_CMD_DEMOTE != "L_CMD_DEMOTE" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_DEMOTE)."</span>") : "")); ?></TD>
 	</TR>
 <?php
 };
 ?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-		<A HREF="#" onClick="cmd2Input('/quit',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/quit [<?php echo(L_HELP_MSG); ?>]</A><br />
-		<A HREF="#" onClick="cmd2Input('/exit',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/exit [<?php echo(L_HELP_MSG); ?>]</A><br />
-		<A HREF="#" onClick="cmd2Input('/bye',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/bye [<?php echo(L_HELP_MSG); ?>]</A>
+		<A HREF="#" onClick="cmd2Input('/quit',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/quit [<?php echo(L_HELP_MSG); ?>]</A>
 	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
-		<TD><?php echo(L_HELP_CMD_5); ?></TD>
+		<TD><?php echo(L_HELP_CMD_5."<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/bye /exit".(L_CMD_QUIT != "" && L_CMD_QUIT != "L_CMD_QUIT" ? " /".str_replace(","," /",L_CMD_QUIT) : "")."</span>")); ?></TD>
 	</TR>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/refresh',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/refresh <BDO dir="<?php echo($TextDir); ?>">[n]</BDO></A></TH></TR>
+		<A HREF="#" onClick="cmd2Input('/refresh',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/refresh <BDO dir="<?php echo($TextDir); ?>">[n]</BDO></A>
+	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
-		<TD><?php echo(($Ver == "H" ? L_HELP_CMD_2b : L_HELP_CMD_2a)); ?></TD>
+		<TD><?php echo(($Ver == "H" ? L_HELP_CMD_2b : L_HELP_CMD_2a)."<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/reload".(L_CMD_REFRESH != "" && L_CMD_REFRESH != "L_CMD_REFRESH" ? " /".str_replace(","," /",L_CMD_REFRESH) : "")."</span>")); ?></TD>
 	</TR>
 	<?php
 	if (C_SAVE)
 	{
 		?>
 		<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-		<A HREF="#" onClick="cmd2Input('/save',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/save <BDO dir="<?php echo($TextDir); ?>">[n]</BDO></A></TH></TR>
+			<A HREF="#" onClick="cmd2Input('/save',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/save <BDO dir="<?php echo($TextDir); ?>">[n]</BDO></A>
+		</TH></TR>
 		<TR>
 			<TD WIDTH=10>&nbsp;</TD>
-			<TD><?php echo(L_HELP_CMD_16); ?></TD>
+			<TD><?php echo(L_HELP_CMD_16."<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/export".(L_CMD_SAVE != "" && L_CMD_SAVE != "L_CMD_SAVE" ? " /".str_replace(","," /",L_CMD_SAVE) : "")."</span>")); ?></TD>
 		</TR>
 		<?php
 	}
@@ -389,25 +413,28 @@ if (C_ENABLE_PM)
 	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
-		<TD><?php echo(($Ver == "H") ? L_HELP_CMD_1b : L_HELP_CMD_1a); ?></TD>
+		<TD><?php echo(($Ver == "H" ? L_HELP_CMD_1b : L_HELP_CMD_1a).(L_CMD_SHOW != "" && L_CMD_SHOW != "L_CMD_SHOW" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_SHOW)."</span>") : "")); ?></TD>
 	</TR>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/size',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/size <BDO dir="<?php echo($TextDir); ?>">[n]</BDO></A></TH></TR>
+		<A HREF="#" onClick="cmd2Input('/size',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/size <BDO dir="<?php echo($TextDir); ?>">[n]</BDO></A>
+	</TH></TR>
 		<TR>
 			<TD WIDTH=10>&nbsp;</TD>
-			<TD><?php echo(L_HELP_CMD_33); ?></TD>
+			<TD><?php echo(L_HELP_CMD_33.(L_CMD_SIZE != "" && L_CMD_SIZE != "L_CMD_SIZE" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_SIZE)."</span>") : "")); ?></TD>
 		</TR>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/sort',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/sort</A></TH></TR>
+		<A HREF="#" onClick="cmd2Input('/sort',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/sort</A>
+	</TH></TR>
 		<TR>
 			<TD WIDTH=10>&nbsp;</TD>
-			<TD><?php echo(L_HELP_CMD_31); ?></TD>
+			<TD><?php echo(L_HELP_CMD_31.(L_CMD_SORT != "" && L_CMD_SORT != "L_CMD_SORT" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_SORT)."</span>") : "")); ?></TD>
 		</TR>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/timestamp',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/timestamp</A></TH></TR>
+		<A HREF="#" onClick="cmd2Input('/timestamp',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/timestamp</A>
+	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
-		<TD><?php echo(L_HELP_CMD_8); ?></TD>
+		<TD><?php echo(L_HELP_CMD_8.(L_CMD_TIMESTAMP != "" && L_CMD_TIMESTAMP != "L_CMD_TIMESTAMP" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_TIMESTAMP)."</span>") : "")); ?></TD>
 	</TR>
 <?php
 	if ($CookieStatus == "a" || $CookieStatus == "t" || $CookieStatus == "m")
@@ -415,22 +442,23 @@ if (C_ENABLE_PM)
 		?>
 	<!-- The topic command doc -->
   <TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-  	<A HREF="#" onClick="cmd2Input('/topic', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/topic [*] {<?php echo(L_HELP_TOP); ?>}</A><br />
-  	<A HREF="#" onClick="cmd2Input('/topic top reset', false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/topic [*] top reset</A>
+  	<A HREF="#" onClick="cmd2Input('/topic', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/topic <BDO dir="<?php echo($TextDir); ?>">[*]</BDO> {<?php echo(L_HELP_TOP); ?>}</A><br />
+  	<A HREF="#" onClick="cmd2Input('/topic top reset', false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/topic <BDO dir="<?php echo($TextDir); ?>">[*]</BDO> top reset</A>
   </TH></TR>
   <TR>
     <TD WIDTH=10>&nbsp;</TD>
-    <TD><?php echo(L_HELP_CMD_24); ?></TD>
+    <TD><?php echo(L_HELP_CMD_24.(L_CMD_TOPIC != "" && L_CMD_TOPIC != "L_CMD_TOPIC" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_TOPIC)."</span>") : "")); ?></TD>
   </TR>
 <!-- End topic command doc -->
 <?php
 };
 ?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-	<A HREF="#" onClick="cmd2Input('/whois',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/whois {<?php echo(L_USER); ?>}</A></TH></TR>
+		<A HREF="#" onClick="cmd2Input('/whois',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/whois {<?php echo(L_USER); ?>}</A>
+	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
-		<TD><?php echo(L_HELP_CMD_11); ?></TD>
+		<TD><?php echo(L_HELP_CMD_11."<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/about".(L_CMD_WHOIS != "" && L_CMD_WHOIS != "L_CMD_WHOIS" ? " /".str_replace(","," /",L_CMD_WHOIS) : "")."</span>")); ?></TD>
 	</TR>
 <!-- The wisp command doc -->
 <?php
@@ -438,12 +466,11 @@ if (C_ENABLE_PM)
 {
 ?>
   <TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
-  	<A HREF="#" onClick="cmd2Input('/wisp', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/wisp <?php echo("{".L_USER."} {".L_HELP_MSG."}"); ?></A><br />
-  	<A HREF="#" onClick="cmd2Input('/whisp', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/whisp <?php echo("{".L_USER."} {".L_HELP_MSG."}"); ?></A>
+	  	<A HREF="#" onClick="cmd2Input('/wisp', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/wisp <?php echo("{".L_USER."} {".L_HELP_MSG."}"); ?></A>
 	</TH></TR>
   <TR>
     <TD WIDTH=10>&nbsp;</TD>
-    <TD><?php echo(L_HELP_CMD_23); ?></TD>
+    <TD><?php echo(L_HELP_CMD_23."<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/whisp".(L_CMD_WISP != "" && L_CMD_WISP != "L_CMD_WISP" ? " /".str_replace(","," /",L_CMD_WISP) : "")."</span>")); ?></TD>
   </TR>
 <!-- End wisp command doc -->
 <?php

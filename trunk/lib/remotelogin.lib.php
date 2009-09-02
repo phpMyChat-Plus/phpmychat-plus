@@ -1047,8 +1047,51 @@ if(!isset($Error) && (isset($N) && $N != ""))
 
 		// Submission looks like a command?
 		isCmd = ((inputFrameForm.elements['M'].value.substring(0,1) == '/') || (inputFrameForm.elements['M'].value.substring(0,2) == ': '));
+<?php
+if (file_exists("./localization/".$L."/localized.cmds.php")) require("./localization/".$L."/localized.cmds.php");
+
+// DO NOT ALTER THE LINE BELOW!
+$TrsCmds = 
+(L_CMD_ANNOUNCE != "" && L_CMD_ANNOUNCE != "L_CMD_ANNOUNCE" ? str_replace(","," .+|",L_CMD_ANNOUNCE)." .+|" : "").
+(L_CMD_BAN != "" && L_CMD_BAN != "L_CMD_BAN" ? str_replace(","," .+|",L_CMD_BAN)." .+|" : "").
+(L_CMD_CLEAR != "" && L_CMD_CLEAR != "L_CMD_CLEAR" ? str_replace(",","$|",L_CMD_CLEAR)."$|" : "").
+(L_CMD_HELP != "" && L_CMD_HELP != "L_CMD_HELP" ? str_replace(",","$|",L_CMD_HELP)."$|" : "").
+(L_CMD_IGNORE != "" && L_CMD_IGNORE != "L_CMD_IGNORE" ? str_replace(",","|",L_CMD_IGNORE)."|" : "").
+(L_CMD_INVITE != "" && L_CMD_INVITE != "L_CMD_INVITE" ? str_replace(","," .+|",L_CMD_INVITE)." .+|" : "").
+(L_CMD_JOIN != "" && L_CMD_JOIN != "L_CMD_JOIN" ? str_replace(","," .+|",L_CMD_JOIN)." .+|" : "").
+(L_CMD_KICK != "" && L_CMD_KICK != "L_CMD_KICK" ? str_replace(","," .+|",L_CMD_KICK)." .+|" : "").
+(L_CMD_ME != "" && L_CMD_ME != "L_CMD_ME" ? str_replace(","," .+|",L_CMD_ME)." .+|" : "").
+(L_CMD_MSG != "" && L_CMD_MSG != "L_CMD_MSG" ? str_replace(","," .+|",L_CMD_MSG)." .+|" : "").
+(L_CMD_NOTIFY != "" && L_CMD_NOTIFY != "L_CMD_NOTIFY" ? str_replace(",","$|",L_CMD_NOTIFY)."$|" : "").
+(L_CMD_ORDER != "" && L_CMD_ORDER != "L_CMD_ORDER" ? str_replace(",","$|",L_CMD_ORDER)."$|" : "").
+(L_CMD_SORT != "" && L_CMD_SORT != "L_CMD_SORT" ? str_replace(",","$|",L_CMD_SORT)."$|" : "").
+(L_CMD_PROFILE != "" && L_CMD_PROFILE != "L_CMD_PROFILE" ? str_replace(",","$|",L_CMD_PROFILE)."$|" : "").
+(L_CMD_PROMOTE != "" && L_CMD_PROMOTE != "L_CMD_PROMOTE" ? str_replace(",","|",L_CMD_PROMOTE)."|" : "").
+(L_CMD_QUIT != "" && L_CMD_QUIT != "L_CMD_QUIT" ? str_replace(",","|",L_CMD_QUIT)."|" : "").
+(L_CMD_REFRESH != "" && L_CMD_REFRESH != "L_CMD_REFRESH" ? str_replace(",","|",L_CMD_REFRESH)."|" : "").
+(L_CMD_SAVE != "" && L_CMD_SAVE != "L_CMD_SAVE" ? str_replace(",","|",L_CMD_SAVE)."|" : "").
+(L_CMD_SHOW != "" && L_CMD_SHOW != "L_CMD_SHOW" ? str_replace(",","|",L_CMD_SHOW)."|" : "").
+(L_CMD_SIZE != "" && L_CMD_SIZE != "L_CMD_SIZE" ? str_replace(",","|",L_CMD_SIZE)."|" : "").
+(L_CMD_TIMESTAMP != "" && L_CMD_TIMESTAMP != "L_CMD_TIMESTAMP" ? str_replace(",","$|",L_CMD_TIMESTAMP)."$|" : "").
+(L_CMD_WHOIS != "" && L_CMD_WHOIS != "L_CMD_WHOIS" ? str_replace(","," .+|",L_CMD_WHOIS)." .+|" : "").
+(L_CMD_DEMOTE != "" && L_CMD_DEMOTE != "L_CMD_DEMOTE" ? str_replace(","," .+|",L_CMD_MR)." .+|" : "").
+(L_CMD_AWAY != "" && L_CMD_AWAY != "L_CMD_AWAY" ? str_replace(",","|",L_CMD_AWAY)."|" : "").
+(L_CMD_DEMOTE != "" && L_CMD_DEMOTE != "L_CMD_DEMOTE" ? str_replace(","," .+|",L_CMD_DEMOTE)." .+|" : "").
+(L_CMD_HIGH != "" && L_CMD_HIGH != "L_CMD_HIGH" ? str_replace(",","|",L_CMD_HIGH)."|" : "").
+(L_CMD_IMG != "" && L_CMD_IMG != "L_CMD_IMG" ? str_replace(","," .+|",L_CMD_IMG)." .+|" : "").
+(L_CMD_ROOM != "" && L_CMD_ROOM != "L_CMD_ROOM" ? str_replace(","," .+|",L_CMD_ROOM)." .+|" : "").
+(L_CMD_TOPIC != "" && L_CMD_TOPIC != "L_CMD_TOPIC" ? str_replace(","," .+|",L_CMD_TOPIC)." .+|" : "").
+(L_CMD_WISP != "" && L_CMD_WISP != "L_CMD_WISP" ? str_replace(","," .+|",L_CMD_WISP)." .+|" : "").
+(L_CMD_BUZZ != "" && L_CMD_BUZZ != "L_CMD_BUZZ" ? str_replace(",","|",L_CMD_BUZZ)."|" : "").
+(L_CMD_BOT != "" && L_CMD_BOT != "L_CMD_BOT" ? str_replace(",","|",L_CMD_BOT)."|" : "").
+(L_CMD_LTR != "" && L_CMD_LTR != "L_CMD_LTR" ? str_replace(",","|",L_CMD_LTR)."|" : "").
+(L_CMD_RTL != "" && L_CMD_RTL != "L_CMD_RTL" ? str_replace(",","|",L_CMD_RTL)."|" : "").
+(L_CMD_DICE != "" && L_CMD_DICE != "L_CMD_DICE" ? str_replace(",","|",L_CMD_DICE)."|" : "");
+if ($TrsCmds != "") $TrsCmds = rtrim("|".$TrsCmds,"|");
+?>
+
 		// RegExp to quick check for valid commands
-		re = /^\/(!$|announce .+|ban .+|clear$|help$|\?$ .+|ignore|invite .+|join .+|kick .+|me .+|msg .+|to .+|notify$|order$|sort$|profile$|promote|quit|exit|bye|refresh|save|show|last|size|timestamp$|whois .+|mr .+|away|demote .+|high|img .+|room .+|topic .+|wisp .+|whisp .+|buzz|bot|dice|([1-9][0-9]?d)|([1-9][0-9]?d[1-9][0-9]?)|d([1-9][0-9]?[0-9]?)([t])([1-9][0-9]?)|d([1-9][0-9]?[0-9]?))/i;
+		re = /^\/(!$|announce .+|ban .+|clear$|help$|\?$|ignore|invite .+|join .+|kick .+|boot .+|me .+|msg .+|to .+|notify$|order$|sort$|profile$|promote|quit|exit|bye|refresh|reload|recall$|save|export|show|last|size|timestamp$|whois .+|about .+|mr .+|away|demote .+|high|img .+|room .+|topic .+|wisp .+|whisp .+|buzz|bot|rtl|ltr|dice|([1-9][0-9]?d)|([1-9][0-9]?d[1-9][0-9]?)|d([1-9][0-9]?[0-9]?)([t])([1-9][0-9]?)|d([1-9][0-9]?[0-9]?)<?php echo($TrsCmds != "" && $TrsCmds != "TrsCmds" ? $TrsCmds : ""); ?>)/i;
 		re1 = /^:( .+)/i;
 
 		// Ensure the message box isn't empty

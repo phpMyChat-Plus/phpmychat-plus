@@ -28,8 +28,8 @@ if (!function_exists("room_in"))
 
 if (C_NO_SWEAR) include("./lib/swearing.lib.php");
 
-$new_room_type = ($Cmd[2] != "" ? $Cmd[2]:1);
-$new_room = $Cmd[3];
+$new_room_type = ($Cmd[3] != "" ? $Cmd[3] : 1);
+$new_room = $Cmd[4];
 
 if (C_VERSION == 1)
 {
