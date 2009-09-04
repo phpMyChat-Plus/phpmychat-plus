@@ -47,6 +47,9 @@
     $translation['uploaded_too_big_html']       = 'Eroare upload fişier (mărimea fişierului încărcat depăşeşte %s - valoarea limitei MAX_FILE_SIZE stabilită pentru upload).';
     $translation['uploaded_partial']            = 'Eroare upload fişier (fişierul încărcat a fost uploadat doar parţial).';
     $translation['uploaded_missing']            = 'Eroare upload fişier (niciun fişier nu a fost specificat).';
+    $translation['uploaded_no_tmp_dir']         = 'Eroare upload fişier (directorul temporar nu există).';
+    $translation['uploaded_cant_write']         = 'Eroare upload fişier (scrierea fişierului pe disc a eşuat).';
+    $translation['uploaded_err_extension']      = 'Eroare upload fişier (extensia a stopat upload-ul fişierului).';
     $translation['uploaded_unknown']            = 'Eroare upload fişier (cod eroare necunoscut).';
     $translation['try_again']                   = 'Eroare upload fişier. Reîncercaţi.';
     $translation['file_too_big']                = 'Mărimea fişierului este prea mare (%s).';

@@ -981,7 +981,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	{
 		if ((!is_send_popup || is_send_popup.closed) && (!is_priv_popup || is_priv_popup.closed))
 		{
-			is_send_popup = window.open("send_popup.php?L=<?php echo($L); ?>","send_popup","width=430,height=140,scrollbars=yes,resizable=no,status=yes,toolbar=no,menubar=no,directories=no,location=no");
+			is_send_popup = window.open("send_popup.php?<?php echo("L=$L"); ?>","send_popup","width=430,height=140,scrollbars=yes,resizable=no,status=yes,toolbar=no,menubar=no,directories=no,location=no");
 			var msgbox = window.frames['input'].window.document.forms['MsgForm'].elements['M'];
 				var oldStr = msgbox.value;
 				if (oldStr == "" || oldStr.substring(0,1) != " ") oldStr = " " + oldStr;
@@ -1297,7 +1297,7 @@ function isCookieEnabled() {
 	function tutorial_popup()
 	{
 		window.focus();
-		tutorial_popupWin = window.open("<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L"); ?>","tutorial_popup","width=700,height=800,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,directories=yes,status=yes,location=yes");
+		tutorial_popupWin = window.open("<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L&Ver="); ?>"+ver4,"tutorial_popup","width=700,height=800,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,directories=yes,status=yes,location=yes");
 		tutorial_popupWin.focus();
 	}
 
@@ -1381,7 +1381,7 @@ function isCookieEnabled() {
 function layout($Err, $U, $R, $T, $C, $status)
 {
 	global $DbLink;
-	global $ChatPath, $From, $Action, $L, $RES;
+	global $ChatPath, $From, $Action, $L, $RES, $Ver;
 	global $Charset, $CellAlign, $Align, $DisplayFontMsg, $FontPack, $FontName;
 	global $AvailableLanguages;
 	global $DefaultChatRooms, $DefaultDispChatRooms;
@@ -1390,6 +1390,7 @@ function layout($Err, $U, $R, $T, $C, $status)
 	require("${ChatPath}search.php");
 	$show_search = !C_SEARCH_PAID;
 	$show_donation = !C_SUPPORT_PAID;
+	if (!isset($Ver) || $Ver == "") $Ver = "H";
 
 ?>
 <TABLE ALIGN="center" CELLPADDING=5 CLASS="ChatBody"><TR><TD CLASS="ChatBody">
@@ -1406,7 +1407,7 @@ if (C_SHOW_TUT)
 {
 ?>
 <P>
-<A HREF="<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L"); ?>" onClick="tutorial_popup(); return false" CLASS="ChatLink" TARGET="_blank" onMouseOver="window.status='<?php echo(L_TUTORIAL); ?>.'; return true;" title="<?php echo(L_TUTORIAL); ?>"><?php echo(L_TUTORIAL); ?></A>
+<A HREF="<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>" onClick="tutorial_popup(); return false" CLASS="ChatLink" TARGET="_blank" onMouseOver="window.status='<?php echo(L_TUTORIAL); ?>.'; return true;" title="<?php echo(L_TUTORIAL); ?>"><?php echo(L_TUTORIAL); ?></A>
 </P>
 <?php
 }
@@ -1469,7 +1470,7 @@ if ($show_donation)
 {
 	$pptype = "big";
 	require("${ChatPath}lib/support.lib.php");
-	if (intval($ppbutton) < 3620000 || (intval($ppbutton) > 3627000 && intval($ppbutton) != 7148858 && intval($ppbutton) != 7148805)) $copy_break = 1;
+	if (intval($ppbutton) < 3620000 || (intval($ppbutton) > 3627000 && intval($ppbutton) != 7148858 && intval($ppbutton) != 7148805 && (intval($ppbutton) < 7988359 || intval($ppbutton) > 7988406))) $copy_break = 1;
 }
 ?>
 </P>
@@ -1478,7 +1479,6 @@ if(isset($Error))
 {
 	echo("<P CLASS=\"ChatError\">$Error</P>");
 }
-if (!isset($Ver)) $Ver = "L";
 ?>
 <INPUT TYPE="hidden" NAME="Ver" VALUE="<?php echo($Ver); ?>">
 <INPUT TYPE="hidden" NAME="Form_Send" VALUE="1">
@@ -1522,6 +1522,7 @@ if (!isset($Ver)) $Ver = "L";
 						elseif ($name == "hebrew" && L_LANG_HE != "L_LANG_HE") $FLAG_NAME = L_LANG_HE;
 						elseif ($name == "hindi" && L_LANG_HI != "L_LANG_HI") $FLAG_NAME = L_LANG_HI;
 						elseif ($name == "hungarian" && L_LANG_HU != "L_LANG_HU") $FLAG_NAME = L_LANG_HU;
+						elseif ($name == "indonesian" && L_LANG_ID != "L_LANG_ID") $FLAG_NAME = L_LANG_ID;
 						elseif ($name == "italian" && L_LANG_IT != "L_LANG_IT") $FLAG_NAME = L_LANG_IT;
 						elseif ($name == "romanian" && L_LANG_RO != "L_LANG_RO") $FLAG_NAME = L_LANG_RO;
 						elseif ($name == "serbian_latin" && L_LANG_SRL != "L_LANG_SRL") $FLAG_NAME = L_LANG_SRL;
@@ -1904,7 +1905,7 @@ if (C_SHOW_COUNTER)
 &copy; 2000-<?php echo(date('Y'))?> <a HREF="http://www.phpheaven.net/team" TARGET=_blank CLASS="ChatLink" Title="<?php echo(sprintf(L_CLICK,L_LINKS_7)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_LINKS_7)); ?>.'; return true">The phpHeaven Team</a><br />
 &copy; 2005-<?php echo(date('Y'))?> Plus development by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" Title="<?php echo(sprintf(L_CLICK,L_LINKS_9)); ?>" CLASS="ChatLink" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_DEVELOPER)); ?>.'; return true;">Ciprian M</a>.<br />
 Thanks to all the contributors in the <a href="http://groups.yahoo.com/subscribe/phpmychat" CLASS="ChatLink" title="<?php echo(sprintf(L_CLICK,L_LINKS_8)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_LINKS_8)); ?>.'; return true;" target=_blank>phpMyChat group</a> !<br />
-Download this full chat pack from <a href="https://sourceforge.net/project/showfiles.php?group_id=19371&package_id=199435" target=_blank title="<?php echo(APP_NAME." ".L_SRC." Sorceforge.net\n".sprintf(L_CLICK,L_LINKS_10)); ?>" onMouseOver="window.status='<?php echo(APP_NAME." ".L_SRC." Sorceforge.net! ".sprintf(L_CLICK,L_LINKS_10)); ?>.'; return true;" CLASS="ChatLink"><?php echo(file("http://sflogo.sourceforge.net/sflogo.php?group_id=19371&type=10") ? "<img src=\"http://sflogo.sourceforge.net/sflogo.php?group_id=19371&type=10\" border=0 width=\"80\" height=\"15\" />" : "here"); ?></a>
+Download this full chat pack from <a href="https://sourceforge.net/project/showfiles.php?group_id=19371&package_id=199435" target=_blank title="<?php echo(APP_NAME." ".L_SRC." Sorceforge.net!\n".sprintf(L_CLICK,L_LINKS_10)); ?>" onMouseOver="window.status='<?php echo(APP_NAME." ".L_SRC." Sorceforge.net!"); ?>'; return true;" CLASS="ChatLink"><?php echo(file("http://sflogo.sourceforge.net/sflogo.php?group_id=19371&type=10") ? "<img src=\"http://sflogo.sourceforge.net/sflogo.php?group_id=19371&type=10\" border=0 width=\"80\" height=\"15\" />" : "here"); ?></a>
 </SPAN>
 <?php
 if (C_SHOW_OWNER)
@@ -1925,7 +1926,7 @@ if (strstr($Sender_email,"@") && ($Sender_email != ""))
 }
 else echo($Owner_name);
 ?>
-<br /><a HREF="privacy.html" TARGET=_blank CLASS="ChatLink" Title="Read Our Privacy Policy" onMouseOver="window.status='Read Our Privacy Policy.'; return true">Our Privacy Policy</a>
+<br /><a HREF="privacy.html" TARGET=_blank CLASS="ChatLink" Title="<?php echo(sprintf(L_CLICK,L_PRIVACY)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_PRIVACY)); ?>'; return true">Our Privacy Policy</a>
 </SPAN>
 <?php
 }
@@ -1933,10 +1934,10 @@ if ($show_donation)
 {
 ?>
 	<br /><br />
-	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" name="support" target="_blank" onSubmit="return confirm('You have chosen to contribute to the free development of\n<?php echo(APP_NAME); ?> by making a donation to the developer.\nThank you for your support!\n\nNote: the recipient is not the owner of this chat.\nPlease enter the amount on the next page.\n\nContinue?');">
+	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" name="support" target="_blank" onSubmit="return confirm('<?php echo(L_SUPP_WARN); ?>');">
 	<input type="hidden" name="cmd" value="_s-xclick">
 	<input type="hidden" name="hosted_button_id" value="<?php echo($ppbutton); ?>">
-	<input type="image" style="background-color: transparent;" src="<?php echo($donate); ?>" border="0" name="submit" alt="<?php echo($ppalt); ?> Support with PayPal the development of <?php echo(APP_NAME); ?> - it's Fast, Free and Secure!" title="<?php echo($ppalt); ?> Support with PayPal the development of <?php echo(APP_NAME); ?> - it's Fast, Free and Secure!" onMouseOver="window.status='<?php echo($ppalt); ?>'; return true;">
+	<input type="image" style="background-color: transparent;" src="<?php echo($donate); ?>" border="0" name="submit" alt="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" title="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" onMouseOver="window.status='<?php echo($ppalt); ?>'; return true;">
 	</form>
 <?php
 }

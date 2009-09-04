@@ -1,4 +1,5 @@
 <?php
+
 // Match a string in a list
 function cmd_in($what, $in, $Charset)
 {
@@ -16,5 +17,8 @@ if (trim($Cmd[1]) != "")
 	$opentag = trim($Cmd[1]) == "rtl" || cmd_in(trim($Cmd[1]),L_CMD_RTL,$Charset) ? "bdo_rtl" : (trim($Cmd[1]) == "ltr" || cmd_in(trim($Cmd[1]),L_CMD_LTR,$Charset) ? "bdo_ltr" : "");
 	AddMessage($opentag.stripslashes($Cmd[2]), $T, $R, $U, $C, '', '', '', $Charset);
 }
+
+$M1 = $Cmd[0];
 $IsCommand = true;
+
 ?>

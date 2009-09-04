@@ -1,5 +1,5 @@
 <?php
-// File : serbian_latin/localized.install.php - plus version (29.07.2008 - rev.6)
+// File : serbian_latin/localized.install.php - plus version (07.06.2009 - rev.7)
 // Original translation by Vedran Vučić <vedran.vucic@gnulinuxcentar.org>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -71,6 +71,7 @@ define("L_P2_FORM12", "Promenite ime za vaš admin log folder");
 define("L_P2_FORM13", "Ako nameravate da koristite phpMyChat kao integrisani modul za phpNuke ili phpBB, konfiguraciona tabela mora da se nazove \"c_config\" a tabela za registrovane korisnike mora biti nazvana \"c_reg_users\"!");
 define("L_P2_FORM14", "Odaberite teško za pogađanje imena!");
 define("L_P2_FORM15", "Ime vašeg čet servera");
+define("L_P2_FORM16", "Tabela za statistiku");
 define("L_P3_FORM1", "Ime administratorskog naloga");
 define("L_P3_FORM2", "Lozinka administratorskog naloga");
 define("L_P3_FORM3", "Potvrdite lozinku");

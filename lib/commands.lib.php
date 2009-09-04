@@ -130,7 +130,7 @@ elseif (eregi("^\/(high".(L_CMD_HIGH != "" && L_CMD_HIGH != "L_CMD_HIGH" ? "|".s
 }
 elseif (eregi("^\/(img".(L_CMD_IMG != "" && L_CMD_IMG != "L_CMD_IMG" ? "|".str_replace(",","|",L_CMD_IMG) : "").")[[:space:]](.+)?$", $M, $Cmd))
 {
-  include("./lib/commands/img.cmd.php");
+	include("./lib/commands/img.cmd.php");
 }
 elseif (eregi("^\/(room".(L_CMD_ROOM != "" && L_CMD_ROOM != "L_CMD_ROOM" ? "|".str_replace(",","|",L_CMD_ROOM) : "").")([[:space:]]\*)?([[:space:]].+)$", $M, $Cmd))
 {

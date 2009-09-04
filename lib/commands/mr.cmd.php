@@ -19,9 +19,10 @@ if ($gender == 2) $salutation = "L_HELP_MS";
 elseif ($gender == 1) $salutation = "L_HELP_MR";
 else $salutation = "* *";
 
-$M = "<B>* ".$salutation." ".$U."</B> ".stripslashes($Cmd[2]);
-AddMessage($M, $T, $R, $U, $C, '', '', '', $Charset);
+$post = "<B>* ".$salutation." ".$U."</B> ".stripslashes($Cmd[2]);
+AddMessage($post, $T, $R, $U, $C, '', '', '', $Charset);
 
+$M1 = $Cmd[0];
 $IsCommand = true;
 $RefreshMessages = true;
 ?>

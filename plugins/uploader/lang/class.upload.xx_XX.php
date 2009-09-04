@@ -47,6 +47,9 @@
     $translation['uploaded_too_big_html']       = 'File upload error (the uploaded file exceeds %s - the MAX_FILE_SIZE limit specified in the upload form).';
     $translation['uploaded_partial']            = 'File upload error (the uploaded file was only partially uploaded).';
     $translation['uploaded_missing']            = 'File upload error (no file was specified).';
+    $translation['uploaded_no_tmp_dir']         = 'File upload error (missing a temporary folder).';
+    $translation['uploaded_cant_write']         = 'File upload error (failed to write file to disk).';
+    $translation['uploaded_err_extension']      = 'File upload error (file upload stopped by extension).';
     $translation['uploaded_unknown']            = 'File upload error (unknown error code).';
     $translation['try_again']                   = 'File upload error. Please try again.';
     $translation['file_too_big']                = 'File too big (%s).';

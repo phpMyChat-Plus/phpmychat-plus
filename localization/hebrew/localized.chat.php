@@ -199,7 +199,7 @@ define("L_NONREG_USER", "%s אינו רשום במערכת");
 define("L_NONREG_USER_IP", "His IP is: %s.");
 define("L_NO_KICKED", "%s is a moderator or the administrator and can’t be kicked away.");
 define("L_NO_BANISHED", "%s is a moderator or the administrator and can’t be banished.");
-define("L_SVR_TIME", "השעה במחשב הראשי");
+define("L_SVR_TIME", "השעה במחשב הראשי ");
 define("L_NO_SAVE", "אין הודעות");
 define("L_NO_ADMIN", "רק מנהל יכול להשתמש בפקודה זו");
 define("L_NO_REG_USER", "אתה חייב להיות רשום למערכת כדי להשתמש בפקודה זו.");
@@ -616,6 +616,7 @@ define("L_LANG_GR", "Greek");
 define("L_LANG_HE", "עברית");
 define("L_LANG_HI", "Hindi");
 define("L_LANG_HU", "Hungarian");
+define("L_LANG_ID", "Indonesian");
 define("L_LANG_IT", "Italian");
 define("L_LANG_KA", "גרוזינית");
 define("L_LANG_NL", "הולנדית");
@@ -670,7 +671,7 @@ define("L_OPID_SIGN", "הכנס באמצעות OpenID");
 define("L_OPID_REG", "Import your OpenID profile");
 
 // Support buttons
-define("L_DONATION_WARN", "You have chosen to contribute to the free development of\n<?php echo(APP_NAME); ?> by making a donation to the developer.\nThank you for your support!\n\nNote: the recipient is not the owner of this chat.\nPlease enter the amount on the next page.\n\nContinue?");
-define("L_DONATION_ALT", "Support with PayPal the development of <?php echo(APP_NAME); ?> - it's Fast, Free and Secure!");
+define("L_SUPP_WARN", "You have chosen to contribute to the free development of\\n".APP_NAME." by making a donation to the developer.\\nThank you for your support!\\n\\nNote: the recipient is not the owner of this chat.\\nPlease enter the amount on the next page.\\n\\nContinue?");
+define("L_SUPP_ALT", "Support with PayPal the development of ".APP_NAME." - it's Fast, Free and Secure!");
 define("L_PAYPAL", "PayPal - The safer, easier way to pay online.");
 ?>

@@ -1,5 +1,5 @@
 <?php
-// File : serbian_latin/localized.admin.php - plus version (26.08.2008 - rev.14)
+// File : serbian_latin/localized.admin.php - plus version (07.06.2009 - rev.15)
 // Original translation by Vedran Vučić <vedran.vucic@gnulinuxcentar.org>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -22,7 +22,10 @@ define("A_MENU_6", "Čet dodaci");
 define("A_MENU_7", "Pretraga");
 define("A_MENU_8", "Konekcije");
 define("A_MENU_9", "Log arhive");
+define("A_MENU_1a", "Profili");
+define("A_MENU_2a", "Statistika");
 define("A_LOGOUT", "Odjava");
+define("A_MOD_DEV", "Modul u razvoju");
 
 // Frame for registered users
 define("A_SHEET1_1", "Lista registrovanih korisnika i njihove dozvole");
@@ -167,4 +170,12 @@ define("A_SEARCH_25", "Moderirajte ovog korisnika");
 // Connected users Page
 define("A_LURKING_1", "Konektovani korisnici i Posmatrači") ;
 define("A_LURKING_2", "Posmatranje je onemogućeno.") ;
+
+// Statistics Page
+define("A_STATS_1", "Strana za statistiku četa");
+define("A_STATS_2", "Prikupljanje podataka započeto %s"); //date
+define("A_STATS_3", "Ukupna statistika (Sva vremena)");
+define("A_STATS_4", "Detaljna statistika (Poslednjih %s dana aktivnosti)"); //number of days
+define("A_STATS_5", "Statistika onemogućena");
+define("A_STATS_6", "Poslednjih %s"); //Top 10 or Top 5
 ?>

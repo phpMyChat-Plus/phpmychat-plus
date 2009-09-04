@@ -1,5 +1,5 @@
 <?php
-// File : serbian_latin/localized.chat.php - plus version (14.02.2009 - rev.42)
+// File : serbian_latin/localized.chat.php - plus version (01.08.2009 - rev.43)
 // Original translation by Vedran Vučić <vedran.vucic@gnulinuxcentar.org>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -98,7 +98,7 @@ define("L_EMAIL_VAL_1", "Vaša podešavanja za ulazak u čet");
 define("L_EMAIL_VAL_2", "Sobro došli na naš čet server.");
 define("L_EMAIL_VAL_Err", "Interna greška, molim vas kontaktirajte administratora: <a href=\"mailto:%s\">%s</a>.");
 define("L_EMAIL_VAL_Done", "Vaša lozinka je poslata na vašu e-mail addresu.<br />Možete da promenite vašu lozinku na strani za prijavljivanje u uredi profil.");
-define("L_EMAIL_VAL_PENDING_Done", " Vaši registrovani podaci su podneseni na pregled.");
+define("L_EMAIL_VAL_PENDING_Done", "Vaši registrovani podaci su podneseni na pregled.");
 define("L_EMAIL_VAL_PENDING_Done1", "Dobit ćete vašu lozinku nakon što administrator odobri vaš nalog.");
 define("L_EMAIL_VAL_3", "Vaša registracija čeka %s");
 define("L_EMAIL_VAL_31", "Čestitamo! Vaši podaci registracije su pregledani i odobreni!");
@@ -211,6 +211,7 @@ define("L_HELP_MSG", "poruka");
 define("L_HELP_MSGS", "poruke");
 define("L_HELP_ROOM", "soba");
 define("L_HELP_BUZZ", "~imezvuka");
+define("L_HELP_BUZZ1", "Buzz..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "razlog");
 define("L_HELP_MR", "Gdin."); // Gospodin (Mr. - can be short or entire word)
 define("L_HELP_MS", "Gdja."); //Gospođa (Mrs. - neutral of Miss, Mrs.)
@@ -250,6 +251,8 @@ define("L_HELP_CMD_30", "Druga komanda čini isto kao /me ali će pokazati i pri
 define("L_HELP_CMD_31", "Menja redosled korisnika u listama:po vremenu ulaska ili po abecedi.");
 define("L_HELP_CMD_32", "Ovo je treća (igranje uloga) verzija bacanja kocke.<br />Upotreba: /d{n1}[tn2] ili /d{n1};<br />n1 može uzeti bilo koju vrednost <b>između 1 i 100</b> (on predstavlja broj kotrljanja po kocki ).<br />n2 može uzeti bilo koju vrednost <b>između 1 i %s</b> (on predstavlja broj kotrljanja kocki po bacanju).");
 define("L_HELP_CMD_33", "Promeni veličinu slova u porukama u četu prema izboru korisnika (dozvoljene vrednosti za n: <b>između 7 i 15</b>); /size komanda resetuje veličinu slova na pretpostavljenu vrednost (<b>".$FontSize."</b>).");
+define("L_HELP_CMD_34", "ovo će pomoći korisniku da odredi orijentaciju tekstualne poruke (ltr = s leva u desno, rtl = s desna u levo).");
+define("L_HELP_CMD_VAR", "Sinonimi (varijante): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Čet Etiketa");
 define("L_HELP_ETIQ_2", "Naš sajt bi hteo da održava zajednicu prijateljskom i zabavnom, pa vas molimo da se pridržavate sledećih upustava. Ako se ne budete pridržavali ovih pravila, jedan od čet moderatora može da vas izbaci iz četa.<br /><br />Hvala vam,");
 define("L_HELP_ETIQ_3", "Naša uputstva za Čet Etiketu");
@@ -324,6 +327,7 @@ define("L_DEFAULT_TOPIC_1", "Ovo je pretpostavljena tema. Uredite localization/_
 define("L_PIC", "Slika koju je postavio-la");
 define("L_PIC_RESIZED", "Promenjena veličina na");
 define("L_HELP_IMG", "puna putanja do slike koju ćete postaviti");
+define("L_NO_IMAGE", "Ovo nije važeća URL adresa javne udaljene slike.\\nPokušajte ponovo!");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s nije više moderator u bilo kojoj sobi u ovom četu.");
@@ -405,6 +409,8 @@ define("L_PRIV_RELOAD", "Osveži stranu");
 define("L_PRIV_MARK_ALL", "Sve označi kao Pročitano");
 define("L_PRIV_MARK_SEL", "Označi odabrane kao Pročitano");
 define("L_PRIV_REMOVE", "Ukloni označene PM"); // or selected
+define("L_PRIV_PM", "(privatno)");
+define("L_PRIV_WISP", "(šaputanje)");
 
 // Color Input Box mod by Ciprian
 define("L_ENABLED", "Omogućeno");
@@ -519,6 +525,7 @@ define("L_NOT_SELECTED", "nije odabran");
 define("L_NOT_SELECTED_F", "nije odabrana"); // feminine word, if it's the case
 define("L_EMAIL_1", "da pošaljete email");
 define("L_FULLSIZE_PIC", "da otvorite sliku u punoj veličini");
+define("L_PRIVACY", "pročitate našu Politiku Privatnosti"); //Click here to…
 define("L_AUTHOR", "autor"); //Phrase will look like this: L_CLICK." ".L_LINKS_6." ".L_AUTHOR == Click here - to contact - the author
 define("L_DEVELOPER", "programer ovog četa"); //same here
 define("L_OWNER", "vlasnik ovog četa"); //same here
@@ -604,6 +611,7 @@ define("L_LANG_ENUS", "Engleski US"); // for US formats and flags
 define("L_LANG_ES", "Španski");
 define("L_LANG_FR", "Francuski");
 define("L_LANG_GR", "Grčki");
+define("L_LANG_HE", "Hebrejski");
 define("L_LANG_HI", "Hindu");
 define("L_LANG_HU", "Mađarski");
 define("L_LANG_IT", "Talijanski");
@@ -658,4 +666,8 @@ define("L_RESTRICTED_ROM", "%s je uspešno sprečen da uđe u sobu.");
 // OpenID login mod by Ciprian
 define("L_OPID_SIGN", "Prijavite se sa OpenID");
 define("L_OPID_REG", "Uvezite vaš OpenID profile");
+
+// Support buttons
+define("L_SUPP_WARN", "Izabrali ste da doprinesete slobodnom razvoju\\n".APP_NAME." donacijom programeru.\\nHvala za vašu podršku!\\n\\nBeleška: primalac nije vlasnik ovog četa.\\nMolimo vas da unesete iznos na sledećoj strani.\\n\\nNastavite?");
+define("L_SUPP_ALT", "Podržiet razvoj pomoću PayPal ".APP_NAME." - Besplatno je, Slobodno i Bezbedno!");
 ?>
