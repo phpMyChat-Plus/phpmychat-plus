@@ -22,10 +22,10 @@ if($Cmd[1]<=100 && ($Cmd[3]<=MAX_ROLLS || $Cmd[3] == ''))
 	}
 	$temp1 = ($Cmd[3] != MAX_ROLLS) ? "t".$Cmd[3] : "";
 	$What = "/d".$Cmd[1].$temp1." (".$Cmd[3]."*".$Cmd[1]." = max ".$Cmd[3]*$Cmd[1].")"; 
-	$M = addslashes($nums)."<img src=images/arrowr.gif>&nbsp;<b><font color=red>".$sum."</font></b>&nbsp;<bdo dir=ltr><img src=images/tick.gif alt=\"".$What."\" title=\"".$What."\"></bdo>";
+	$post = addslashes($nums)."<img src=images/arrowr.gif>&nbsp;<b><font color=red>".$sum."</font></b>&nbsp;<bdo dir=ltr><img src=images/tick.gif alt=\"".$What."\" title=\"".$What."\"></bdo>";
 
 	//add the command HTML into the messages table
-  $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS dice3', '', '".time()."', '$U', '".stripslashes($M)."', '', '')");
+  $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS dice3', '', '".time()."', '$U', '".stripslashes($post)."', '', '')");
 }
 else
 {

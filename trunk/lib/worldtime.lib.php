@@ -68,7 +68,7 @@ if (!function_exists("utf8_substr"))
 // Returns the days in the status bar
 function get_day($time,$plus)
 {
-global $L;
+	global $L;
 		$monday = utf8_substr(L_MON, 0, ($L == 'vietnamese') ? '8' : '3');
 		$tuesday = utf8_substr(L_TUE, 0, ($L == 'vietnamese') ? '8' : '3');
 		$wednesday = utf8_substr(L_WED, 0, ($L == 'vietnamese') ? '8' : '3');
@@ -114,10 +114,20 @@ $dayname_plus = "";
 $dayname_minus = "";
 $dayname_server = "";
 // Get daynames set by setlocale
-$dayname = mb_convert_case(strftime("%a", time() + C_TMZ_OFFSET*60*60),MB_CASE_TITLE,$Charset);
-$dayname_plus = mb_convert_case(strftime("%a", time() + 86400 + C_TMZ_OFFSET*60*60),MB_CASE_TITLE,$Charset);
-$dayname_minus = mb_convert_case(strftime("%a", time() - 86400 + C_TMZ_OFFSET*60*60),MB_CASE_TITLE,$Charset);
-$dayname_server = mb_convert_case(strftime("%a", time() + C_TMZ_OFFSET*60*60),MB_CASE_TITLE,$Charset);
+if (eregi("win", PHP_OS))
+{
+	$dayname = mb_convert_case(utf8_substr(strftime("%a", time() + C_TMZ_OFFSET*60*60), 0, ($L == 'vietnamese') ? '8' : '3'),MB_CASE_TITLE,$Charset);
+	$dayname_plus = mb_convert_case(utf8_substr(strftime("%a", time() + 86400 + C_TMZ_OFFSET*60*60), 0, ($L == 'vietnamese') ? '8' : '3'),MB_CASE_TITLE,$Charset);
+	$dayname_minus = mb_convert_case(utf8_substr(strftime("%a", time() - 86400 + C_TMZ_OFFSET*60*60), 0, ($L == 'vietnamese') ? '8' : '3'),MB_CASE_TITLE,$Charset);
+	$dayname_server = mb_convert_case(utf8_substr(strftime("%a", time() + C_TMZ_OFFSET*60*60), 0, ($L == 'vietnamese') ? '8' : '3'),MB_CASE_TITLE,$Charset);
+}
+else
+{
+	$dayname = mb_convert_case(strftime("%a", time() + C_TMZ_OFFSET*60*60),MB_CASE_TITLE,$Charset);
+	$dayname_plus = mb_convert_case(strftime("%a", time() + 86400 + C_TMZ_OFFSET*60*60),MB_CASE_TITLE,$Charset);
+	$dayname_minus = mb_convert_case(strftime("%a", time() - 86400 + C_TMZ_OFFSET*60*60),MB_CASE_TITLE,$Charset);
+	$dayname_server = mb_convert_case(strftime("%a", time() + C_TMZ_OFFSET*60*60),MB_CASE_TITLE,$Charset);
+}
 if (eregi("win", PHP_OS))
 {
 // Get daynames set by localization when setlocale fails

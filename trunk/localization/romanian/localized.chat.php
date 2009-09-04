@@ -328,7 +328,7 @@ define("L_DEFAULT_TOPIC_1", "Acesta este Subiectul-ul implicit. Pentru a-l schim
 define("L_PIC", "Imagine trimisă de");
 define("L_PIC_RESIZED", "Redimensionată la");
 define("L_HELP_IMG", "calea/link-ul către imaginea de postat");
-define("L_NO_IMAGE", "Aceasta nu este adresa URL a unei imagini on-line.\nÎncearcă din nou!");
+define("L_NO_IMAGE", "Aceasta nu este o adresă URL validă\\na unei imagini afişate public on-line.\\nCorectează adresa!");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s nu mai este moderator în nici una dintre camerele acestui chat.");
@@ -610,8 +610,9 @@ define("L_LANG_ES", "Spaniolă");
 define("L_LANG_FR", "Franceză");
 define("L_LANG_GR", "Greacă");
 define("L_LANG_HE", "Ebraică");
-define("L_LANG_HI", "Indiană");
+define("L_LANG_HI", "Hindusă");
 define("L_LANG_HU", "Maghiară");
+define("L_LANG_ID", "Indoneziană");
 define("L_LANG_IT", "Italiană");
 define("L_LANG_KA", "Georgiană");
 define("L_LANG_NL", "Olandeză");
@@ -665,6 +666,6 @@ define("L_OPID_SIGN", "Identificare folosind OpenID");
 define("L_OPID_REG", "Importă un profil OpenID");
 
 // Support buttons
-define("L_DONATION_WARN", "Aţi ales să contribuiţi la dezvoltarea aplicaţiei <?php echo(APP_NAME); ?>,\nprin trimiterea unei donaţii dezvoltatorului.\nVă mulţumim pentru încrederea şi sprijinul acordat!\n\nNotă: destinatarul acestei donaţii nu este una şi aceeaşi persoană\ncu proprietarul acestui server de chat.\nVă rugăm să introduceţi suma dorită în pagina următoare.\n\nContinuaţi?");
-define("L_DONATION_ALT", "Contribuiţi prin PayPal la dezvoltarea aplicaţiei <?php echo(APP_NAME); ?> - este cel mai Rapid, Gratuit şi Sigur!");
+define("L_SUPP_WARN", "Aţi ales să contribuiţi la dezvoltarea aplicaţiei ".APP_NAME.",\\nprin trimiterea unei donaţii dezvoltatorului.\\nVă mulţumim pentru încrederea şi sprijinul acordat!\\n\\nNotă: destinatarul acestei donaţii nu este una şi aceeaşi persoană\\ncu proprietarul acestui server de chat.\\nVă rugăm să introduceţi suma dorită în pagina următoare.\\n\\nContinuaţi?");
+define("L_SUPP_ALT", "Contribuiţi prin PayPal la dezvoltarea aplicaţiei ".APP_NAME." - este cel mai Rapid, Gratuit şi Sigur!");
 ?>

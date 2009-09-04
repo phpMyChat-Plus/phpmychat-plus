@@ -78,20 +78,20 @@ else
 			if($DbLink->num_rows() != 0)
 			{
 			// add this for /away command modification by R Dickow:
-	    $DbLink->query("SELECT awaystat FROM ".C_USR_TBL." WHERE username='$Cmd[2]'");
+		    $DbLink->query("SELECT awaystat FROM ".C_USR_TBL." WHERE username='$Cmd[2]'");
 
-	    if ($DbLink->num_rows() != 0)
-	    {
-	    	list($awaystat) = $DbLink->next_record();
-	    }
-	    $DbLink->clean_results();
-		  if ($awaystat == 1) {
+		    if ($DbLink->num_rows() != 0)
+		    {
+		    	list($awaystat) = $DbLink->next_record();
+		    }
+		    $DbLink->clean_results();
+			if ($awaystat == 1) {
 				$Read = "New";
 				AddMessage(stripslashes($Cmd[3]), $T, $R, $U, $C, $Cmd[2], $Read, '', $Charset);
 				$IsCommand = true;
 				$RefreshMessages = true;
 				if(C_PRIV_POPUP) $Error = sprintf(L_PRIV_AWAY, special_char($Cmd[2],$Latin1));
-	    } else {
+		    } else {
 			// end R Dickow /away command modification addition.
 		 	AddMessage(stripslashes($Cmd[3]), $T, $R, $U, $C, $Cmd[2], $Read, '', $Charset);
 			if (eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case(trim($Cmd[2]),MB_CASE_LOWER,$Charset))) include "lib/bot_priv.lib.php";
@@ -117,6 +117,7 @@ else
 				$DbLink->query("UPDATE ".C_STS_TBL." SET pms_sent=pms_sent+1 WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
 			}
 			unset($Found, $b);
+			$M1 = $Cmd[0];
 		};
 	};
 };

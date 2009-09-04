@@ -12,6 +12,7 @@ if (isset($_GET))
 }
 
 require("./lib/index.lib.php");
+if (file_exists("./localization/".$L."/localized.cmds.php")) require("./localization/".$L."/localized.cmds.php");
 if (isset($_COOKIE["CookieStatus"])) $CookieStatus = $_COOKIE["CookieStatus"];
 
 ?>
@@ -293,6 +294,8 @@ Pentru a părăsi camera, fă click pe <?php echo (EXIT_LINK_TYPE) ? "imaginea <
 /exit<br />
 /bye<br />
 /quit<br />
+<?php echo(L_CMD_QUIT != "" && L_CMD_QUIT != "L_CMD_QUIT" ? "* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_QUIT)."</span>")."<br />" : ""); ?>
+
 Oricare dintre aceste comenzi pot fi completate cu un mesaj pe care doriţi să îl trimiteţi înaintea ieşirii din cameră.
 <I>Exemplu :</I> /quit La revedere!
 <P>
@@ -326,6 +329,7 @@ Sunt mai multe moduri de a personaliza aspectul cmerei de Chat. Pentru a schimba
 	{
 		?>
 		<LI><B>Comanda Clear</B> îţi permite să cureţi ecranul de mesaje şi să vezi numai ultimele 5.<br />Scrie "/clear" fără ghilimele.
+<?php echo(L_CMD_CLEAR != "" && L_CMD_CLEAR != "L_CMD_CLEAR" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_CLEAR)."</span>") : ""); ?>
 		<P>
 		<?php
 	}
@@ -333,19 +337,23 @@ Sunt mai multe moduri de a personaliza aspectul cmerei de Chat. Pentru a schimba
 	{
 		?>
 		<LI><B>Comanda Order</B> > îţi permite să afişezi mesajele noi în partea de sus sau în partea de jos a ecranului.<br />Scrie "/order" fără ghilimele.
+<?php echo(L_CMD_ORDER != "" && L_CMD_ORDER != "L_CMD_ORDER" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_ORDER)."</span>") : ""); ?>
 		<P>
 		<?php
 	}
 	?>
 	<LI><B>Comanda Notify</B> îţi permite să activezi sau să dezactivezi opţiunea de a-ţi fi afişate mesajele referitoare la intrarea sau ieşirea celorlalţi utilizatori din cameră. Implicit, această opţiune este <?php echo(C_NOTIFY ? "activată" : "dezactivată"); ?> iar anunţurile respective <?php echo(C_NOTIFY ? "" : "nu"); ?> vor fi afişate.<br />Scrie "/notify" fără ghilimele.
+<?php echo(L_CMD_NOTIFY != "" && L_CMD_NOTIFY != "L_CMD_NOTIFY" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_NOTIFY)."</span>") : ""); ?>
 	<P>
 	<LI><B>Comanda Timestamp</B> îţi permite să activezi sau să dezactivezi opţiunea de a-ţi fi afişat ora la care un mesaj a fost postat (în faţa mesajului respectiv) şi timpul pe server în bara de stare. Implicit, această opţiune este <?php echo(C_SHOW_TIMESTAMP ? "activată" : "dezactivată"); ?>.<br />Scrie "/timestamp" fără ghilimele.
+<?php echo(L_CMD_TIMESTAMP != "" && L_CMD_TIMESTAMP != "L_CMD_TIMESTAMP" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_TIMESTAMP)."</span>") : ""); ?>
 	<P>
-	<LI><B>Comanda Refresh</B> îţi permite să ajustezi rata de reîncărcare (reîmprospătare) pe ecran a mesajelor postate. Rata implicită este setată la <?php echo(C_MSG_REFRESH); ?> secunde. Pentru a o schimba, scrie "/refresh n" fără ghilimele, unde n este timpul în secunde al noii rate de reîncărcare.
+	<LI><B>Comanda Refresh sau Reload</B> îţi permite să ajustezi rata de reîncărcare (reîmprospătare) pe ecran a mesajelor postate. Rata implicită este setată la <?php echo(C_MSG_REFRESH); ?> secunde. Pentru a o schimba, scrie "/refresh n" sau "/reload n" fără ghilimele, unde n este timpul în secunde al noii rate de reîncărcare.
 	<P>
 	<I>De exemplu:</I> /refresh 5
 	<P>
 	va schimba rata de reîncărcare la 5 secunde. *Atenţie, dacă n este setat la mai puţin de 3, reîncărcarea va fi oprită complet (ar putea fi util atunci când vrei să citeşti foarte multe mesaje vechi, fără a fi întrerupt de reîncărcarea paginii)!*
+<?php echo(L_CMD_REFRESH != "" && L_CMD_REFRESH != "L_CMD_REFRESH" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_REFRESH)."</span>") : ""); ?>
 	<P>
 	<?php
 	if ($Ver == "L")
@@ -356,6 +364,7 @@ Sunt mai multe moduri de a personaliza aspectul cmerei de Chat. Pentru a schimba
 		<I>De exemplu:</I> /show 50
 		<P>
 		îţi va afişa pe ecran ultimele 50 de mesaje. Dacă nu toate mesajele încap în fereastra de pe ecran, o bară verticală de navigare va apărea în partea dreapta a ferestrei.</UL>
+<?php echo(L_CMD_SHOW != "" && L_CMD_SHOW != "L_CMD_SHOW" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_SHOW)."</span>") : ""); ?>
 		<?php
 	}
 	else
@@ -365,13 +374,13 @@ Sunt mai multe moduri de a personaliza aspectul cmerei de Chat. Pentru a schimba
 		<P>
 		<I>De exemplu:</I> /show 50 sau /last 50
 		<P>
-		vor curăţa ecranul şi vor afişa numai ultimele 50 de mesaje. Dacă nu toate mesajele încap în fereastra de pe ecran, o bară verticală de navigare va apărea în partea dreapta a ferestrei.</UL>
+		vor curăţa ecranul şi vor afişa numai ultimele 50 de mesaje. Dacă nu toate mesajele încap în fereastra de pe ecran, o bară verticală de navigare va apărea în partea dreapta a ferestrei.
+<?php echo(L_CMD_SHOW != "" && L_CMD_SHOW != "L_CMD_SHOW" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_SHOW)."</span>") : ""); ?></UL>
 		<?php
 	}
 	?>
 	<br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 	<hr />
-
 
 <P>
 <FONT SIZE="+2"><A NAME="commands"><B><U>Opţiuni şi Comenzi</U></B></A></FONT>
@@ -380,6 +389,7 @@ Sunt mai multe moduri de a personaliza aspectul cmerei de Chat. Pentru a schimba
 <FONT SIZE="+1"><A NAME="help"><B>Comanda Ajutor:</B></A></FONT>
 <P>
 Odată intrat în camera de chat, poţi deschide o pagină de ajutor apăsând pe imaginea <IMG SRC="localization/<?php echo($L); ?>/images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="<?php echo(L_HLP); ?>" TITLE="<?php echo(L_HLP); ?>"> ce se găseşte chiar înainte de căsuţa de mesaje. Acelaşi lucru se poate face şi folosind comenzile <B>"/help" sau "/?"</B> în căsuţa de mesaje.
+<?php echo(L_CMD_HELP != "" && L_CMD_HELP != "L_CMD_HELP" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_HELP)."</span>") : ""); ?>
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <P>
@@ -485,6 +495,7 @@ Poţi folosi <B>comanda invite</B> pentru a invita un utilizator să intre în c
 va trimite lui Jack un mesaj privat, sugerându-i să vină şi el în camera ta de chat. Acest mesaj va conţine numele camerei ţintă şi va fi formatat ca un link.This message contains the name of the target room and this name appears as a link.
 <P>
 Ţine cont că poţi adăuga mai multe nume prin această comandă, invitând mai mulţi utilizatori în camera ta (ex: "/invite Jack,Helen,Alf"). Numele trebuie despărţite prin virgulă (,) fără spaţii.
+<?php echo(L_CMD_INVITE != "" && L_CMD_INVITE != "L_CMD_INVITE" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_INVITE)."</span>") : ""); ?>
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
@@ -497,12 +508,11 @@ Lista din zona din dreapta oferă o listă a tuturor camerelor disponibile, prec
 <I>De exemplu:</I> /join #Camera Roşie
 <P>
 te va muta în "Camera Roşie".
-<br /><P>Totodată,
 <?php
 if (C_VERSION == "2")
 {
-	echo(!C_REQUIRE_REGISTER ? " dacă eşti înregistrat, " : " ");
 	?>
+<br /><P>Totodată,<?PHP	echo(!C_REQUIRE_REGISTER ? " dacă eşti înregistrat, " : " "); ?>
 	poţi să creezi o nouă cameră folosind aceeaşi comandă. Pentru aceasta, va trebui să specifici tipul camerei: 0 pentru cameră privată, 1 pentru cameră publică (valoarea implicită dacă nu se specifică tipul).
 	<P>
 	<I>De exemplu:</I> /join 0 #Camera Mea
@@ -513,6 +523,7 @@ if (C_VERSION == "2")
 	<?php
 }
 ?>
+<?php echo(L_CMD_JOIN != "" && L_CMD_JOIN != "L_CMD_JOIN" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_JOIN)."</span>") : ""); ?>
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
@@ -521,6 +532,7 @@ if (C_VERSION == "2")
 <FONT SIZE="+1"><a name="changeprofile"><B>Modificarea profilului propriu:</B></FONT>
 <P>
 <B>Comanda Profile</B> va deschide o fereastră separată (pop-up) în care vei putea să-ţi modifici profilul de utilizator, cu excepţia numelui (poreclei) şi parolei (acestea pot fi modificate numai folosind link-ul din pagina de start - fără a fi logat pe chat).<br />Scrie "/profile" fără ghilimele.
+<?php echo(L_CMD_PROFILE != "" && L_CMD_PROFILE != "L_CMD_PROFILE" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_PROFILE)."</span>") : ""); ?>
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
@@ -528,7 +540,8 @@ if (C_VERSION == "2")
 <P>
 <FONT SIZE="+1"><a name="recall"><B>Reutilizarea ultimei comenzi sau ultimului mesaj transmis:</B></FONT>
 <P>
-<B>Comanda !</B> va readuce în căsuţa de mesaje ultimul mesaj trimis sau ultima comandă folosită.<br />Scrie "/!" fără ghilimele.
+<B>Comanda ! sau Recall</B> va readuce în căsuţa de mesaje ultimul mesaj trimis sau ultima comandă folosită.<br />Scrie "/!" sau "/recall" fără ghilimele.
+<?php echo(L_CMD_RECALL != "" && L_CMD_RECALL != "L_CMD_RECALL" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_RECALL)."</span>") : ""); ?>
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
@@ -549,8 +562,9 @@ Pentu a trimite un mesaj privat către un utilizator din camera în care te afli
 <I>De exemplu, dacă Jack este numele utilizatorului:</I> /msg Jack Salutare, ce mai faci?
 <P>
 Mesajul va putea fi citit numai de către tine şi Jack şi niciun alt utilizator.
+<?php echo(L_CMD_MSG != "" && L_CMD_MSG != "L_CMD_MSG" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_MSG)."</span>") : ""); ?>
 <P>
-Dacă opţiunea MP (Mesagerie Privată) este activată, poţi de asemenea să trimiţi şoapte (whispers) către un utilizator aflat într-o altă cameră, folosind <B>comanda "/wisp nume_utilizator textul mesajului"</B> fără ghilimele.
+Dacă opţiunea MP (Mesagerie Privată) este activată, poţi de asemenea să trimiţi şoapte (whispers) către un utilizator aflat într-o altă cameră, folosind <B>comanda "/wisp nume_utilizator textul mesajului"</B> fără ghilimele.<?php echo(L_CMD_WISP != "" && L_CMD_WISP != "L_CMD_WISP" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_WISP)."</span>") : ""); ?>
 <P>
 <?php
 if (!C_PRIV_POPUP)
@@ -582,10 +596,12 @@ This PM off-line feature is available only for registered users.
 To describe what you're doing you can use the <B>command "/me action"</B> fără ghilimele.
 <P>
 <I>For example:</I> If Jack sends the message "/me is drinking a coffee" the message frame will show "<B>* Jack</B> is drinking a coffee".
+<?php echo(L_CMD_ME != "" && L_CMD_ME != "L_CMD_ME" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_ME)."</span>") : ""); ?>
 <P>
 As a variation to this command, there is the <B>/mr command</B> available, which will also put the gender title in front of the username.
 <P>
 <I>For example:</I> If Jack sends the message "/mr is watching TV" the message frame will show "<B>* <?php echo(L_HELP_MR); ?> Jack</B> is watching TV".
+<?php echo(L_CMD_MR != "" && L_CMD_MR != "L_CMD_MR" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_MR)."</span>") : ""); ?>
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
@@ -609,10 +625,10 @@ Now all the messages by Jack posted during the current chat session will be disp
 If you don't specify a username after the hyphen, your "ignored list" will be cleaned.
 <P>
 Note that you can put more than one username in the ignore command (eg "/ignore Jack,Helen,Alf" or "/ignore - Jack,Alf"). They must be splitted by comma (,) without spaces.
+<?php echo(L_CMD_IGNORE != "" && L_CMD_IGNORE != "L_CMD_IGNORE" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_IGNORE)."</span>") : ""); ?>
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
-
 <P>
 <FONT SIZE="+1"><A NAME="whois"><B>Aflarea datelor publice ale Utilizatorilor:</B></A></FONT>
 <P>
@@ -621,6 +637,7 @@ To see public information about a user, type the <B>command "/whois username"</B
 <I>For Example:</I> /whois Jack
 <P>
 where ’Jack’ is the username. This command will create a separate pop-up window that will display the publicly available information about that user. Use your own name to check out how your profile info is displayed to other users using the same command.
+<?php echo(L_CMD_WHOIS != "" && L_CMD_WHOIS != "L_CMD_WHOIS" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_WHOIS)."</span>") : ""); ?>
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
@@ -632,11 +649,12 @@ if (C_SAVE != "0")
 	<P>
 	<FONT SIZE="+1"><A NAME="save"><B>Salvarea mesajelor:</B></A></FONT>
 	<P>
-	To export messages (notification ones excluded) to a local HTML file, type the <B>command "/save n"</B> fără ghilimele.
+	To export messages (notification ones excluded) to a local HTML file, type the <B>command "/save n"</B> or <B>"/export n"</B>fără ghilimele.
 	<P>
 	<I>For Example:</I> /save 5
 	<P>
 	where ’5’ is the number of messages to save. If n is not specified, all available messages sent to the current room will be taken into account.
+<?php echo(L_CMD_SAVE != "" && L_CMD_SAVE != "L_CMD_SAVE" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_SAVE)."</span>") : ""); ?>
 	<br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 	<P>
 	<hr />
@@ -655,22 +673,24 @@ if (C_SAVE != "0")
 The administrator may make a system wide announcement to all the rooms and reach all the users currently login with the <B>announce command</B>.
 <P>
 <I>For example: /announce The chat system is going down for maintenance tonight at 8pm.</I>
+<?php echo(L_CMD_ANNOUNCE != "" && L_CMD_ANNOUNCE != "L_CMD_ANNOUNCE" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_ANNOUNCE)."</span>") : ""); ?>
 <P>
 There is another useful announcement like command for role-playing chats; the administrator or moderators in a room may also send an announcement to all users in current room or all the rooms with the <B>room command</B>.
 <P>
 <I>For example: /room The meeting starts at 15 pm.</I> or <I>/room * The meeting starts at 15 pm in the Staff room.</I>
+<?php echo(L_CMD_ROOM != "" && L_CMD_ROOM != "L_CMD_ROOM" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_ROOM)."</span>") : ""); ?>
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
-
 <P>
 <FONT SIZE="+1"><A NAME="kick"><B>Eliminarea unui Utilizator:</B></FONT>
 <P>
-Moderators can kick a user and the administrator can kick a user or a moderator with the <B>kick command</B>. Except for the administrator, the user to be kicked must be in the current room.
+Moderators can kick a user and the administrator can kick a user or a moderator with the <B>kick</B> or <B>boot command</B>. Except for the administrator, the user to be kicked must be in the current room.
 <P>
 <I>For example</I>, if Jack is the name of the user to kick away:<I> /kick Jack</I> or <I>/kick Jack reason of kicking</I>. The "reason of kicking" can be any text e.g. "for spamming!"
 <P>
 Dacă este folosită opţiunea * (<I>/kick * <?php echo(L_HELP_REASON); ?></I>), aceasta va elimina din camera de chat toţi utilizatorii obişnuiţi (nu şi moderatorii sau adminii). Aceasta este util atunci când sunt probleme de conectare la server, fiind necesar ca toţi utilizatorii să reîncarce chat-ul prin relogare. În acest caz, se recomandă ca <I><?php echo(L_HELP_REASON); ?></I> să fie precizat, pentru ca utilizatorul să ştie de ce a fost eliminat din cameră.
+<?php echo(L_CMD_KICK != "" && L_CMD_KICK != "L_CMD_KICK" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_KICK)."</span>") : ""); ?>
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
@@ -686,6 +706,7 @@ if (C_BANISH != "0")
 	The administrator can banish a user from another room than the one he is chatting into. He can also banish a user forever and from the chat as a whole with the ’<B>*</B>’ setting that must be inserted before the nick of the user to be banished.
 	<P>
 	<I>For example</I>, if Jack is the name of the user to banish: <I>/ban Jack</I>, <I>/ban * Jack</I>, <I>/ban Jack reason of banning</I> or <I>/ban * Jack reason of banning</I>. The "reason of banning" can be any text e.g. "for spamming!"
+<?php echo(L_CMD_BAN != "" && L_CMD_BAN != "L_CMD_BAN" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_BAN)."</span>") : ""); ?>
 	<br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 	<P>
 	<hr />
@@ -699,10 +720,12 @@ if (C_BANISH != "0")
 Moderators and the administrator can promote an other user to moderator with the <B>promote command</B>.
 <P>
 <I>For example</I>, if Jack is the name of the user to promote: <I>/promote Jack</I>
+<?php echo(L_CMD_PROMOTE != "" && L_CMD_PROMOTE != "L_CMD_PROMOTE" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_PROMOTE)."</span>") : ""); ?>
 <P>
 Only the administrator can access the opposite feature (reduce a moderator to simple user) using the <B>demote command</B>.
 <P>
 <I>For example</I>, if Jack is the name of the moderator to demote: <I>/demote Jack</I> or <I>/demote * Jack</I> (will demote him from current or all the rooms).
+<?php echo(L_CMD_DEMOTE != "" && L_CMD_DEMOTE != "L_CMD_DEMOTE" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_DEMOTE)."</span>") : ""); ?>
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 </BODY>

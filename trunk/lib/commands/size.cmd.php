@@ -18,6 +18,6 @@ if ($Cmd[2] =="" || ($Cmd[2]> 6 && $Cmd[2] < 16))
 }
 else
 {
-$Error = L_ERR_SIZE;
+	$Error = L_ERR_SIZE;
 }
 ?>

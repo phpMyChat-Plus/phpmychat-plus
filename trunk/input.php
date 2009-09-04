@@ -209,7 +209,7 @@ $botcontrol ="botfb/$R.txt";
 	global $Read;
 	global $M1;
 
-	$M1 = $M;
+	if (!isset($M1)) $M1 = $M;
 	$M = str_replace("\"", "&quot;", $M);
 	$M = str_replace("'", "&#39;", $M);
 	// Text formating tags

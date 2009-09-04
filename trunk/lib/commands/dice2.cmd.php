@@ -40,8 +40,8 @@ if ($Cmd[1]<=MAX_DICES)
 			$temp = ($Cmd[3]*$Cmd[1])*$sides;
 			$temp1 = ($Cmd[3] != MAX_ROLLS) ? $Cmd[3] : "";
 			$What = "/".$Cmd[1]."d".$temp1." (".$Cmd[1]."*".$Cmd[3]."*".$sides." = max ".$temp.")"; 
-			$M = "<b><font size=-2 color=blue>".addslashes($nums)."</font>&nbsp;<img src=images/arrowr.gif>&nbsp;<font color=red>".$sum."</font></b>&nbsp;<bdo dir=ltr><img src=images/tick.gif alt=\"".$What."\" title=\"".$What."\"></bdo>";
-			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS dice2', '', '".time()."', '$U', '".stripslashes($M)."', '', '')");
+			$post = "<b><font size=-2 color=blue>".addslashes($nums)."</font>&nbsp;<img src=images/arrowr.gif>&nbsp;<font color=red>".$sum."</font></b>&nbsp;<bdo dir=ltr><img src=images/tick.gif alt=\"".$What."\" title=\"".$What."\"></bdo>";
+			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS dice2', '', '".time()."', '$U', '".stripslashes($post)."', '', '')");
 		}
 		else
 		{
@@ -74,8 +74,8 @@ if ($Cmd[1]<=MAX_DICES)
 			$temp = ($Cmd[3]*$Cmd[1])*$sides;
 			$temp1 = ($Cmd[3] != MAX_ROLLS) ? $Cmd[3] : "";
 			$What = "/".$Cmd[1]."d".$temp1." (".$Cmd[1]."*".$Cmd[3]."*".$sides." = max ".$temp.")"; 
-			$M = "<b><font size=-2 color=blue>".addslashes($nums)."</font><img src=images/arrowr.gif>&nbsp;<font color=red>".$sum."</font></b>&nbsp;<bdo dir=ltr><img src=images/tick.gif alt=\"".$What."\" title=\"".$What."\"></bdo>";
-			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS dice2', '', '".time()."', '$U', '".stripslashes($M)."', '', '')");
+			$post = "<b><font size=-2 color=blue>".addslashes($nums)."</font><img src=images/arrowr.gif>&nbsp;<font color=red>".$sum."</font></b>&nbsp;<bdo dir=ltr><img src=images/tick.gif alt=\"".$What."\" title=\"".$What."\"></bdo>";
+			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS dice2', '', '".time()."', '$U', '".stripslashes($post)."', '', '')");
 		}
 	}
 	else
@@ -87,6 +87,8 @@ else
 {
 	$Error = DICE2_WRONG1;
 }
+
+//$Cmd = "/".$Cmd[1]."d".$Cmd[3];
 $IsCommand = true;
 $RefreshMessages = true;
 ?>

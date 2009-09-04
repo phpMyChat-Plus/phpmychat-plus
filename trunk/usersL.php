@@ -61,7 +61,7 @@ if (!isset($FontName)) $FontName = "";
 	function tutorial_popup()
 	{
 		window.focus();
-		tutorial_popupWin = window.open('<?php echo("./${ChatPath}tutorial_popup.php?L=$L"); ?>','tutorial_popup','width=700,height=800,resizable=yes,scrollbars=yes,toolbar=yes,menubar=yes,status=yes');
+		tutorial_popupWin = window.open('<?php echo("./${ChatPath}tutorial_popup.php?L=$L&Ver=$Ver"); ?>','tutorial_popup','width=700,height=800,resizable=yes,scrollbars=yes,toolbar=yes,menubar=yes,status=yes');
 		tutorial_popupWin.focus();
 	}
 
@@ -835,7 +835,7 @@ if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $statusu == "a" || $statusu == "t"))
 	$CleanUsrTbl = 1;
 }
 ?>
-<br /><a href="<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L"); ?>" onClick="tutorial_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_TUTORIAL); ?>.'; return true;" title="<?php echo(L_TUTORIAL); ?>"><?php echo(L_TUTORIAL); ?></a>
+<br /><a href="<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>" onClick="tutorial_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_TUTORIAL); ?>.'; return true;" title="<?php echo(L_TUTORIAL); ?>"><?php echo(L_TUTORIAL); ?></a>
 <br /><a href="<?php echo($ChatPath); ?>extra/fixes/fixes.zip" TARGET="_blank" onMouseOver="window.status='<?php echo (L_SOUNDFIX_IE_2) ?>'; return true;" title="<?php echo (L_SOUNDFIX_IE_2) ?>"><?php echo (L_SOUNDFIX_IE_1) ?></a>
 </BODY>
 

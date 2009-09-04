@@ -46,12 +46,12 @@ else
 			}
 			if (C_PRIV_POPUP)
 			{
-					 if ($allowpopupu || eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case(trim($Cmd[2]),MB_CASE_LOWER,$Charset))) $Read = "Neww";
-					 else $Read = "Oldw";
+				if ($allowpopupu || eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case(trim($Cmd[2]),MB_CASE_LOWER,$Charset))) $Read = "Neww";
+				else $Read = "Oldw";
 			}
 			else
 			{
-					$Read = "Oldw";
+				$Read = "Oldw";
 			}
 			$DbLink->query("SELECT room FROM ".C_USR_TBL." WHERE username='$Cmd[2]'");
 			list($UR) = $DbLink->next_record();
@@ -108,6 +108,7 @@ else
 				$DbLink->query("UPDATE ".C_STS_TBL." SET pms_sent=pms_sent+1 WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
 			}
 			unset($Found, $b);
+			$M1 = $Cmd[0];
 		};
 	};
 };

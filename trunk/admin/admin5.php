@@ -858,6 +858,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 				elseif ($name == "hebrew" && L_LANG_HE != "L_LANG_HE") $FLAG_NAME = L_LANG_HE;
 				elseif ($name == "hindi" && L_LANG_HI != "L_LANG_HI") $FLAG_NAME = L_LANG_HI;
 				elseif ($name == "hungarian" && L_LANG_HU != "L_LANG_HU") $FLAG_NAME = L_LANG_HU;
+				elseif ($name == "indonesian" && L_LANG_ID != "L_LANG_ID") $FLAG_NAME = L_LANG_ID;
 				elseif ($name == "italian" && L_LANG_IT != "L_LANG_IT") $FLAG_NAME = L_LANG_IT;
 				elseif ($name == "romanian" && L_LANG_RO != "L_LANG_RO") $FLAG_NAME = L_LANG_RO;
 				elseif ($name == "serbian_latin" && L_LANG_SRL != "L_LANG_SRL") $FLAG_NAME = L_LANG_SRL;

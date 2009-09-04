@@ -11,10 +11,11 @@ if (C_NO_SWEAR)
 	unset($Found, $b);
 };
 
-$M = "<B>* ".$U."</B> ".stripslashes($Cmd[2]);
+$post = "<B>* ".$U."</B> ".stripslashes($Cmd[2]);
 
-AddMessage($M, $T, $R, $U, $C, '', '', '', $Charset);
+AddMessage($post, $T, $R, $U, $C, '', '', '', $Charset);
 
+$M1 = $Cmd[0];
 $IsCommand = true;
 $RefreshMessages = true;
 ?>

@@ -9,7 +9,7 @@ if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT']))
 }
 else
 {
-		$Error = L_ERR_USR_22;
+	$Error = L_ERR_USR_22;
 }
 
 ?>

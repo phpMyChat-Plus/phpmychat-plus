@@ -14,6 +14,7 @@ if (trim($Cmd[3]) != "")
 	}
 	AddMessage(stripslashes($Cmd[3]), $T, $R, $U, $C, '', '', '', $Charset);
 }
+$M1 = $Cmd[0];
 $IsCommand = true;
 ?>
 <SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">

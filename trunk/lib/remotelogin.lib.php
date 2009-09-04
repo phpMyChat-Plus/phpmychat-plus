@@ -1266,7 +1266,7 @@ function isCookieEnabled() {
 	function tutorial_popup()
 	{
 		window.focus();
-		tutorial_popupWin = window.open("<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L"); ?>","tutorial_popup","width=700,height=800,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,directories=yes,status=yes,location=yes");
+		tutorial_popupWin = window.open("<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L&Ver="); ?>"+ver4,"tutorial_popup","width=700,height=800,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,directories=yes,status=yes,location=yes");
 		tutorial_popupWin.focus();
 	}
 
@@ -1350,12 +1350,13 @@ function isCookieEnabled() {
 function layout($Err, $U, $R, $T, $C, $status)
 {
 	global $DbLink;
-	global $ChatPath, $From, $Action, $L;
+	global $ChatPath, $From, $Action, $L, $RES, $Ver;
 	global $Charset, $CellAlign, $Align, $DisplayFontMsg, $FontPack, $FontName;
 	global $AvailableLanguages;
-	global $DefaultChatRooms;
+	global $DefaultChatRooms, $DefaultDispChatRooms;
 	global $DefaultPrivateRooms;
 	if ($Err) global $Error;
+	if (!isset($Ver) || $Ver == "") $Ver = "H";
 	?>
 
 <TABLE ALIGN="center" CELLPADDING=0 CLASS="ChatBody"><TR><TD CLASS="ChatBody">
@@ -1372,7 +1373,6 @@ if(isset($Error))
 {
 	echo("<P CLASS=\"ChatError\">$Error</P>");
 }
-	if (!isset($Ver)) $Ver = "H";
 ?>
 
 <INPUT TYPE="hidden" NAME="Ver" VALUE="<?php echo($Ver); ?>">

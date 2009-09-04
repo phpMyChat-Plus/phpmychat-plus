@@ -1,6 +1,6 @@
 <?php
-// File : english/localized.chat.php - plus version (01.08.2009 - rev.43)
-// Original file by Nicolas Hoizey <nhoizey@phpheaven.net>
+// File : indonesian/localized.chat.php - plus version (01.08.2009 - rev.43)
+// Original translation by Hendriyo Kustrianjaya <hendriyo@gmail.com>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -13,8 +13,8 @@ $FontSize = 10;
 // welcome page
 define("L_TUTORIAL", "Tutorial");
 
-define("L_WEL_1", "Messages are deleted after %s %s");
-define("L_WEL_2", "and inactive users after %s %s");
+define("L_WEL_1", "Messages are deleted after %s %s"); // 96 hours (1 hour)
+define("L_WEL_2", "and inactive users after %s %s"); // 10 minutes (1 minute)
 
 define("L_CUR_1", "There");
 define("L_CUR_1a", "are currently");
@@ -576,34 +576,18 @@ define("L_NOV", "November");
 define("L_DEC", "December");
 
 // Localized date format
-if (C_ENGLISH_FORMAT == "UK")
-{
-// Set the UK specific date/time format
 if (eregi("win", PHP_OS)) {
-setlocale(LC_ALL, "eng-eng.UTF-8", "eng-eng");
+setlocale(LC_ALL, "IND_IND.UTF-8", "IND_IND", "indonesian.UTF-8", "indonesian"); // For Windows servers
 } else {
-setlocale(LC_ALL, "en_GB.UTF-8", "en_GB.UTF-8@euro", "eng.UTF-8", "uk.UTF-8", "eng_eng.UTF-8", "English-uk.UTF-8"); // For UK formats
+setlocale(LC_ALL, "id_ID.UTF-8", "id_ID", "ind.UTF-8", "ind_ind.UTF-8"); // For Unix/FreeBSD servers
 }
-define("L_SHORT_DATE", "%d/%m/%Y"); //Change this to your local desired format (keep the short form)
-define("L_SHORT_DATETIME", "%d/%m/%Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
-define("L_LANG", "en_GB");
-}
-elseif (C_ENGLISH_FORMAT == "US")
-{
-// Set the US specific date/time format
-if (eregi("win", PHP_OS)) {
-setlocale(LC_ALL, "eng-usa.UTF-8", "eng-usa");
-} else {
-setlocale(LC_ALL, "en_US.UTF-8", "enu.UTF-8", "usa.UTF-8", "enu_enu.UTF-8", "English-usa.UTF-8"); // For American formats
-}
-define("L_SHORT_DATE", "%m/%d/%Y"); //Change this to your local desired format (keep the short form)
-define("L_SHORT_DATETIME", "%m/%d/%Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
-define("L_LANG", "en_US");
-}
+define("L_LANG", "id_ID");
 define("ISO_DEFAULT", "iso-8859-1");
 define("WIN_DEFAULT", "windows-1252");
-define("L_LONG_DATE", "%A, %d of %B %Y"); //Change this to your local desired format (keep the long form)
-define("L_LONG_DATETIME", "%A, %d of %B %Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
+define("L_SHORT_DATE", "%d/%m/%Y");
+define("L_LONG_DATE", "%A, %d %B %Y"); //Change this to your local desired format (keep the short form)
+define("L_SHORT_DATETIME", "%d/%m/%Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
+define("L_LONG_DATETIME", "%A, %d %B %Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
 
 // Chat Activity displayed on remote web pages
 define("LOGIN_LINK", "<A HREF='".C_CHAT_URL."?L=".$L."' TITLE='".sprintf(L_CLICK,L_LINKS_12)."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_12).".'; return true;\" TARGET=_blank>");

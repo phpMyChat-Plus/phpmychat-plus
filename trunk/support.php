@@ -18,6 +18,7 @@ if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 require("./config/config.lib.php");
 if (!C_SUPPORT_PAID)
 {
+	require("./${ChatPath}lib/release.lib.php");
 	require("./${ChatPath}localization/languages.lib.php");
 	require("./${ChatPath}localization/".$L."/localized.chat.php");
 	$pptype = "small";
@@ -40,12 +41,11 @@ if ($Ver != "H")
 <table align="center"><tr><td align="center">
 	<?php
 }
-require("./${ChatPath}lib/release.lib.php");
 ?>
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" name="support" target="_blank" onSubmit="return confirm('You have chosen to contribute to the free development of\n<?php echo(APP_NAME); ?> by making a donation to the developer.\nThank you for your support!\n\nNote: the recipient is not the owner of this chat.\nPlease enter the amount on the next page.\n\nContinue?');">
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" name="support" target="_blank" onSubmit="return confirm('<?php echo(L_SUPP_WARN); ?>');">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="<?php echo($ppbutton); ?>">
-<input type="image" style="background-color: transparent;" src="<?php echo($donate); ?>" border="0" name="submit" alt="<?php echo($ppalt); ?> Support with PayPal the development of <?php echo(APP_NAME); ?> - it's Fast, Free and Secure!" title="<?php echo($ppalt); ?> Support with PayPal the development of <?php echo(APP_NAME); ?> - it's Fast, Free and Secure!" onMouseOver="window.status='<?php echo($ppalt); ?>'; return true;">
+<input type="image" style="background-color: transparent;" src="<?php echo($donate); ?>" border="0" name="submit" alt="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" title="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" onMouseOver="window.status='<?php echo($ppalt); ?>'; return true;">
 </form>
 <?php
 if ($Ver != "H")
