@@ -34,15 +34,18 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 23.08.2009 - 1.93-RC6:
+- updated the class.upload to v0.28; (functionality related)
+- Indonesian translation started; (localization project) - Thanks to Hendriyo Kustrianjaya <hendriyo@gmail.com>
+- fixed recalling previous commands in the input box, not only the previous posts; (functionality extension)
 - more rtl/ltr orientation fixes; (display related)
 - all the commands have been changed to support translations - optional though; (functionality & translation extension)
 - changed and improved the dice commands; (functionality related)
 10.06.2009 - 1.93-RC5:
 - fixed a small bug in private popups replies; (functionality related)
 - small change in stylesheets to format the rtl quotes
-- dir comands added (/rtl and /ltr) - changes the posts text direction when needed ;(functionality extenssion)
+- dir comands added (/rtl and /ltr) - changes the posts text direction when needed ;(functionality extension)
 - admin.php and invite command fixes; (functionality related)
-- Hebrew translation has been added - thanks to Shula; (localization related)
+- Hebrew translation added; (localization project) - Thanks to Shula
 - added statistics table for admin analyses purposes; (c_stats table added and lots of testings and fine-tunings); (functionality extension)
 27.08.2008 - 1.93-RC4:
 - logs header include paths fixed to avoid safe mode restrictions (access to relative paths to localization files); (functionality related)
@@ -135,7 +138,7 @@ Fixes History:
 - chat booting, clean.lib and superghost mode improvements; (functionality related)
 - lurking page also displays the status of the connected users (in Admin panel/Connected users, it also shows ghosts and superghosts status); (functionality related)
 - Hungarian has been added - thanks to Zsuzsi; (localization related)
-- Serbian - Latin has been added - thanks to Vedran; (localization related)
+- Serbian - Latin has been added (localization project) - Thanks to Vedran;
 01.02.2008 - 1.93-beta1:
 - pagination improvement in Admin panel/Registered users and Baned users, and Styles preview, respectivey - added a page selector for easier navigation through pages; (functionality extension)
 - Admin panel/Search tab improvement: the results of a search can now directly be banned/deleted from the same sheet, without having to look for the user in the Registered users sheet; (functionality extension)
@@ -234,7 +237,7 @@ After 1.92 release fixes (f means the released fix):
 - language names translated in each lang; (localization related)
 - 2D/3D flags (including UK/US flags now) displaying option in admin panel; (display related)
 - utf-8 compatibility added for usernames and roomnames - specific language chars can now be used in user and room names - wow! (localization related)
-- Turkish language added - (localization project) - Thanks to Volkan Övün <vovun@hotmail.com>.
+- Turkish language added (localization project) - Thanks to Volkan Övün <vovun@hotmail.com>.
 - The best phpMyChat Installer script finally added (also ftp chmod operations are done directly from the setup page); (installation related)
 
 Known issues (as of 1.91-beta6):

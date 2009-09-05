@@ -1,5 +1,5 @@
 <?php
-// File : bulgarian/localized.admin.php - plus version (26.08.2008 - rev.14)
+// File : bulgarian/localized.admin.php - plus version (07.06.2009 - rev.15)
 // Translation by Peter Petrov <peter.m.petrov@gmail.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -22,6 +22,9 @@ define("A_MENU_6", "Екстри");
 define("A_MENU_7", "Търсене");
 define("A_MENU_8", "Дневник");
 define("A_MENU_9", "Архив");
+define("A_MENU_1a", "Профили");
+define("A_MENU_2a", "Статистика");
+define("A_MOD_DEV", "Модул в процес на разработка");
 define("A_LOGOUT", "Изход");
 
 // Frame for registered users
@@ -167,4 +170,12 @@ define("A_SEARCH_25", "Модерирай този потребител");
 // Connected users Page
 define("A_LURKING_1", "Участници и зяпачи");
 define("A_LURKING_2", "Зяпането - забранено");
+
+// Statistics Page
+define("A_STATS_1", "Страница за чат статистика");
+define("A_STATS_2", "Начало на събирането на данни: %s"); //date
+define("A_STATS_3", "Обща статистика (за всички времена)");
+define("A_STATS_4", "Детайлна статистика (последни %s дни активност)"); //number of days
+define("A_STATS_5", "Статистиката - забранена");
+define("A_STATS_6", "Първи %s"); //Top 10 or Top 5
 ?>
