@@ -3,7 +3,7 @@
 // | class.upload.xx_XX.php                                                 |
 // +------------------------------------------------------------------------+
 // | Copyright (c) xxxxxx 200x. All rights reserved.                        |
-// | Version       0.25                                                     |
+// | Version       0.28                                                     |
 // | Last modified xx/xx/200x                                               |
 // | Email         xxx@xxx.xxx                                              |
 // | Web           http://www.xxxx.xxx                                      |
@@ -30,7 +30,7 @@
 /**
  * Class upload xxxxxx translation
  *
- * @version   0.25
+ * @version   0.28
  * @author    xxxxxxxx (xxx@xxx.xxx)
  * @license   http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright xxxxxxxx
