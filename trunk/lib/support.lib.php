@@ -19,6 +19,7 @@ switch (L_LANG)
 		break;
 	case "id_ID":
 		$ppbutton = ($pptype == "big") ? "7988359" : "7988406";
+		$ppalt = "Paypal – Lebih aman dan mudah untuk pembayaran online.";
 		break;
 	case "ro_RO":
 		$ppbutton = ($pptype == "big") ? "3626613" : "3626645";
