@@ -1,5 +1,5 @@
 <?php
-// File : bulgarian/localized.install.php - plus version (29.07.2008 - rev.6)
+// File : bulgarian/localized.install.php - plus version (07.06.2009 - rev.7)
 // Original translation by Peter Petrov<peter.m.petrov@gmail.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -71,6 +71,7 @@ define("L_P2_FORM12", "Преименувайте папката на Вашит
 define("L_P2_FORM13", "Ако възнамерявате да използвате phpMyChat като един интегриран модул за phpNuke или phpBB, конфигурационната таблица трябва да се нарече \"c_config\", а таблицата за регистрираните потребители - \"c_reg_users\"!");
 define("L_P2_FORM14", "Изберете трудно за досещане име!");
 define("L_P2_FORM15", "Име на Вашия чат сървър");
+define("L_P2_FORM16", "Таблица за статистика");
 define("L_P3_FORM1", "Име на администраторския акаунт");
 define("L_P3_FORM2", "Парола на администраторския акаунт");
 define("L_P3_FORM3", "Провери паролата");

@@ -6,6 +6,7 @@ switch (L_LANG)
 {
 	case "bg_BG":
 		$ppbutton = ($pptype == "big") ? "3626487" : "3626473";
+		$ppalt = "PayPal – Сигурният и лесен начин да платите онлайн.";
 		break;
 	case "da_DK":
 		$ppbutton = ($pptype == "big") ? "3626398" : "3626431";
