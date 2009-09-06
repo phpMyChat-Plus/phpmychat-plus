@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.install.php - plus version (29.07.2008 - rev.6)
+// File : dutch/localized.install.php - plus version (07.06.2009 - rev.7)
 // Translation by Bert Moorlag <berbia@hotmail.com>
 // Do not use ' ; use ’ istead (utf-8 edit bug)
 
@@ -71,6 +71,7 @@ define("L_P2_FORM12", "Hernoem je beheerders logs map");
 define("L_P2_FORM13", "mocht je phpMyChat willen gebruiken als een geintegreerde module voor phpNuke of phpBB, moet de configuratie tabel m \"c_config\" heten en de tabel voor geregistreerde gebruikers \"c_reg_users\"!");
 define("L_P2_FORM14", "kies een moeilijk te raden naam!");
 define("L_P2_FORM15", "Naam van jou Chat server");
+define("L_P2_FORM16", "Tabel voor statistieken");
 define("L_P3_FORM1", "Beheerders account naam");
 define("L_P3_FORM2", "Beheerders account wachtwoord");
 define("L_P3_FORM3", "Verifieer wachtwoord");

@@ -3,7 +3,7 @@
 // | class.upload.de_DE.php                                                 |
 // +------------------------------------------------------------------------+
 // | Copyright (c) Felix Kuschnick 2007. All rights reserved.               |
-// | Version       0.25                                                     |
+// | Version       0.28                                                    |
 // | Last modified 27/11/2007                                               |
 // | Email         felix@paranoiaparadise.com                               |
 // | Web           http://www.paranoiaparadise.com                          |
@@ -30,7 +30,7 @@
 /**
  * Class upload german translation
  *
- * @version   0.25
+ * @version   0.28
  * @author    Felix Kuschnick (felix@paranoiaparadise.com)
  * @license   http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright Felix Kuschnick
@@ -46,6 +46,9 @@
     $translation['uploaded_too_big_html']       = 'Datei Ladefehler (die hochgeladene Datei überschreitet die MAX_FILE_SIZE Anweisung, die im html Formular definiert wurde - %s).';
     $translation['uploaded_partial']            = 'Datei Ladefehler (die hochgeladene Datei wurde nur teilweise hochgeladen).';
     $translation['uploaded_missing']            = 'Datei Ladefehler (es wurde keine Datei hochgeladen).';
+	$translation['uploaded_no_tmp_dir']         = 'Datei Ladefehler (temp ordner fehlt).';
+	$translation['uploaded_cant_write']         = 'Datei Ladefehler (fehler beim schreiben der datei).';
+	$translation['uploaded_err_extension']      = 'Datei Ladefehler (hochladen gestoppt wegen erweiterung).';    
     $translation['uploaded_unknown']            = 'Datei Ladefehler (unbekannter Fehler Code).';
     $translation['try_again']                   = 'Datei Ladefehler. Bitte versuchen Sie es erneut.';
     $translation['file_too_big']                = 'Die Datei ist zu groß (%s).';

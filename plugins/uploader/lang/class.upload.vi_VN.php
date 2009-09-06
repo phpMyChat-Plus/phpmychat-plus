@@ -3,7 +3,7 @@
 // | class.upload.vi_VN.php                                                 |
 // +------------------------------------------------------------------------+
 // | Copyright (c) Marshall 200x. All rights reserved.                        |
-// | Version       0.25                                                     |
+// | Version       0.28                                                     |
 // | Last modified 14/09/2008                                               |
 // | Email         hellomarshal_lookatme@netzero.net               |
 // | Web           http://www.amnhacchiase.net                                      |
@@ -30,7 +30,7 @@
 /**
  * Class upload Vietnamese translation
  *
- * @version   0.25
+ * @version   0.28
  * @author    Marshall (hellomarshal_lookatme@netzero.net)
  * @license   http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright Marshall
@@ -43,12 +43,15 @@
     $translation['file_error']                  = 'File lỗi, xin thử lại lần nữa.';
     $translation['local_file_missing']          = 'File không tồn tại.';
     $translation['local_file_not_readable']     = 'File không đọc được.';
-    $translation['uploaded_too_big_ini']        = 'File tải lên lỗi (file tải lên vượt mức %s – dung lượng file upload vượt mức được chỉnh tại php.ini).';
-    $translation['uploaded_too_big_html']       = 'File tải lên lỗi (file tãi lên vượt hơn %s - cái MAX_FILE_SIZE bị giới hạn trong phiên bản upload lên).';
-    $translation['uploaded_partial']            = 'File tải lên lỗi (hồ sơ được nạp dữ liệu quá tải).';
-    $translation['uploaded_missing']            = 'File tải lên lỗi (không file được chỉ rõ).';
-    $translation['uploaded_unknown']            = 'File tải lên lỗi (mã lỗi không được biết).';
-    $translation['try_again']                   = 'File tải lên lỗi. xin thử lại.';
+    $translation['uploaded_too_big_ini']        = 'File tập tin tải lên lỗi (file tải lên vượt mức %s – dung lượng file upload vượt mức được chỉnh tại php.ini).';
+    $translation['uploaded_too_big_html']       = 'File tập tin tải lên lỗi (file tãi lên vượt hơn %s - cái MAX_FILE_SIZE bị giới hạn trong phiên bản upload lên).';
+    $translation['uploaded_partial']            = 'File tập tin tải lên lỗi (hồ sơ được nạp dữ liệu quá tải).';
+    $translation['uploaded_missing']            = 'File tập tin tải lên lỗi (không file được chỉ rõ).';
+	$translation['uploaded_no_tmp_dir']         = 'File tập tin tải lên lỗi (mất một ngăn tạm thời).';
+	$translation['uploaded_cant_write']         = 'File tập tin tải lên lỗi (không thể ghi tập tin lên đĩa).';
+	$translation['uploaded_err_extension']      = 'File tập tin tải lên lỗi (tập tin tải lên dừng lại bởi mở rộng).';
+    $translation['uploaded_unknown']            = 'File tập tin tải lên lỗi (mã lỗi không được biết).';
+    $translation['try_again']                   = 'File tập tin tải lên lỗi. Xin thử lại.';
     $translation['file_too_big']                = 'File cũng lớn như vậy (%s).';
     $translation['no_mime']                     = 'File type không thể xóa.';
     $translation['incorrect_file']              = 'Sai định dạng file.';

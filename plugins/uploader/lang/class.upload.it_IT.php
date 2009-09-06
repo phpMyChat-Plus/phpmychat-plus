@@ -3,8 +3,8 @@
 // | class.upload.it_IT.php                                                 |
 // +------------------------------------------------------------------------+
 // | Copyright (c) Paolo Iulita 200x. All rights reserved.                  |
-// | Version       0.25                                                     |
-// | Last modified 25/11/2007                                               |
+// | Version       0.28                                                     |
+// | Last modified 05/09/2009                                              |
 // | Email         paolo.iulita@gmail.com                                   |
 // | Web           http://www.paoloiulita.it                                |
 // +------------------------------------------------------------------------+
@@ -30,7 +30,7 @@
 /**
  * Class upload italian translation
  *
- * @version    0.25
+ * @version    0.28
  * @author     Paolo Iulita (paolo.iulita@gmail.com)
  * @license    http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright  Paolo Iulita
@@ -46,6 +46,9 @@
     $translation['uploaded_too_big_html']       = 'Errore nell’upload del file (il file caricato ha una dimensione maggiore della direttiva MAX_FILE_SIZE specificata nel form HTML - %s).';
     $translation['uploaded_partial']            = 'Errore nell’upload del file (il file e stato caricato solo parzialmente).';
     $translation['uploaded_missing']            = 'Errore nell’upload del file (non e stato caricato nessun file).';
+	$translation['uploaded_no_tmp_dir']         = 'Errore nell’upload del file (manca una parte).';
+	$translation['uploaded_cant_write']         = 'Errore nell’upload del file (scrittura file nel disco fallita).';
+	$translation['uploaded_err_extension']      = 'Errore nell’upload del file (invio file fermato dall’estensione).';    
     $translation['uploaded_unknown']            = 'Errore nell’upload del file (codice di errore sconosciuto).';
     $translation['try_again']                   = 'Errore nell’upload del file. Riprovare.';
     $translation['file_too_big']                = 'Il file ha dimensioni eccessive (%s).';

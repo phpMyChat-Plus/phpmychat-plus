@@ -1,9 +1,9 @@
 <?php
-// File : italian/localized.admin.php - plus version (26.08.2008 - rev.14)
+// File : italian/localized.admin.php - plus version (07.06.2009 - rev.15)
 // Original translation by Andrea D’Alessandro <andrea@abol.it> & Massimo Fubini <massimo@tomato.it>
 //	& Giuliano Yurij Beccaria <yurij@e-pages.it> & Marco Borrini <borrini@tradimento.it>
 // & Bartolotta Gioachino <developers@rockitalia.com> & Silvia M. Carrassi <silvia@ladysilvia.net>
-// Updates, corrections and additions for the Plus version by Mike Mikius <mikiusss@yahoo.com> & Luciano Cataldo <lucianocataldo@gmail.com>
+// Updates, corrections and additions for the Plus version by Michele Ferro <specialmikius@yahoo.com> & Luciano Cataldo <lucianocataldo@gmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 
 // extra header for charset
@@ -25,6 +25,9 @@ define("A_MENU_6", "Extra chat");
 define("A_MENU_7", "Cerca");
 define("A_MENU_8", "Connessioni");
 define("A_MENU_9", "Archivio registro");
+define("A_MENU_1a", "Profili");
+define("A_MENU_2a", "Statistiche");
+define("A_MOD_DEV", "Mod sotto sviluppo");
 define("A_LOGOUT", "Sconnetti"); 
 
 // Frame for registered users
@@ -170,4 +173,12 @@ define("A_SEARCH_25", "Modera questo utente");
 // Connected users Page
 define("A_LURKING_1", "Utenti e Osservatori connessi") ;
 define("A_LURKING_2", "Osservatori disabilitati.") ;
+
+// Statistics Page
+define("A_STATS_1", "Pagina statistiche Chat");
+define("A_STATS_2", "Data collection è iniziato dal %s"); //date
+define("A_STATS_3", "Statistiche complessive (Ogni volta)");
+define("A_STATS_4", "Dettaglio statistiche (Ultimi %s giorni di attività)"); //number of days
+define("A_STATS_5", "Statistiche disabilitate");
+define("A_STATS_6", "Record %s"); //Top 10 or Top 5
 ?>

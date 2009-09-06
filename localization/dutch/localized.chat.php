@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.chat.php - plus version (14.02.2008 - rev.42)
+// File : dutch/localized.chat.php - plus version (01.08.2009 - rev.43)
 // Original translation by Hans Paijmans <paai@kub.nl>, Kasper Souren <guaka@industree.org> and Sander Corbesir <rock@jascrc.com>
 // Updates, corrections and additions for the Plus version by DJE.Amesz & Romanesko <Genieusdanny@gmail.com> and Bert Moorlag <berbia@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -213,6 +213,7 @@ define("L_HELP_MSG", "bericht");
 define("L_HELP_MSGS", "berichten");
 define("L_HELP_ROOM", "kamer");
 define("L_HELP_BUZZ", "~geluidsnaam");
+define("L_HELP_BUZZ1", "Buzz..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "de reden");
 define("L_HELP_MR", "Dhr."); // Mister (can be short or entire word)
 define("L_HELP_MS", "Mvr."); // Mistress (- neutral of Miss, Mrs.)
@@ -252,6 +253,8 @@ define("L_HELP_CMD_30", "Het tweede commando doet hetzelfde als het /me commando
 define("L_HELP_CMD_31", "Verander de volgorde van de gebruikers in een ruimte: op binnenkomst of naam.");
 define("L_HELP_CMD_32", "Dit is de derde versie van de dobbelstenen.<br />Gebruik: /d{n1}[tn2] of /d{n1};<br />n1 kan elke waarde zijn <b>tussen 1 en 100</b> (het geeft aan hoeveel beurten per dobbelsteen).<br />n2 kan elke waarde zijn <b>tussen 1 en %s</b> (dit geeft aan het antal dobbelstenen).");
 define("L_HELP_CMD_33", "Veranderd de grote van de letters door de gebruikers gekozen grote (toegestane waardes n: <b>tussen 7 en 15</b>); het /size commando resets alles weer na de standard waardes (<b>".$FontSize."</b>).");
+define("L_HELP_CMD_34", "Dit maakt het mogelijk om de tekst te specificeren] (ltr = links naar rechts, rtl = rechts naar links).");
+define("L_HELP_CMD_VAR", "Synoniemen: %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Chat regels");
 define("L_HELP_ETIQ_2", "We willen deze site leuk en netjes houden, dus graag de volgende regels volgen. als je je niet aan de regels kunt houden loop je kans door een moderator of administrator eruit gegooid te worden of zelfs geband.<br /><br />Dank u wel,");
 define("L_HELP_ETIQ_3", "Onze chat regels");
@@ -326,6 +329,7 @@ define("L_DEFAULT_TOPIC_1", "Dit is de standaard topic. Open localization/_owner
 define("L_PIC", "Plaatje geplaatst door");
 define("L_PIC_RESIZED", "Grootte aangepast aan");
 define("L_HELP_IMG", "volledige url adres van de foto/plaatje");
+define("L_NO_IMAGE", "Dit is geen juist URL of een publieke plaatje.\\nProbeer opnieuw!");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s is geen moderator meer voor de kamers van deze chatbox.");
@@ -406,6 +410,8 @@ define("L_PRIV_RELOAD", "Pagina verversen");
 define("L_PRIV_MARK_ALL", "Markeer als Gelezen");
 define("L_PRIV_MARK_SEL", "Markeer Gelezen berichten");
 define("L_PRIV_REMOVE", "Verwijder Gelezen berichten"); // or selected
+define("L_PRIV_PM", "(privé)");
+define("L_PRIV_WISP", "(fluister)");
 
 // Color Input Box mod by Ciprian
 define("L_ENABLED", "Aan");
@@ -493,7 +499,7 @@ define("L_LINKS_6", "om contact");
 define("L_LINKS_7", "om phpMyChat Homepagina te bezoeken");
 define("L_LINKS_8", "om lid te worden bij phpMyChat Group");
 define("L_LINKS_9", "om je feedback te sturen");
-define("L_LINKS_10", "om phpMyChat Plus te downloaden");
+define("L_LINKS_10", "om phpMyChat-Plus te downloaden");
 define("L_LINKS_11", "voor controle wie aan het chatten is");
 define("L_LINKS_12", "om de Chat Login Pagina te openen");
 define("L_LINKS_13", "om geluid te verzenden"); // Click to blablabla : it can also be translated as "to play this sound", if buzz has no translation.
@@ -510,6 +516,7 @@ define("L_NOT_SELECTED", "niet geselecteerd");
 define("L_NOT_SELECTED_F", ""); // feminine word, if it's the case
 define("L_EMAIL_1", "om een email te versturen");
 define("L_FULLSIZE_PIC", "om het plaatje op ware grootte te zien");
+define("L_PRIVACY", "om lees de Voorwaarden"); //Click here to…
 define("L_AUTHOR", "de auteur");
 define("L_DEVELOPER", "de ontwikkelaar van deze chat");
 define("L_OWNER", "de eigenaar van deze chat");
@@ -594,8 +601,10 @@ define("L_LANG_ENUK", "Engels UK");
 define("L_LANG_ENUS", "Engels US");
 define("L_LANG_FR", "Frans");
 define("L_LANG_GR", "Grieks");
+define("L_LANG_HE", "Hebreeuws");
 define("L_LANG_HI", "Hindi");
 define("L_LANG_HU", "Hongaars");
+define("L_LANG_ID", "Indonesch");
 define("L_LANG_IT", "Italiaans");
 define("L_LANG_KA", "Georgië");
 define("L_LANG_NL", "Nederlands");
@@ -648,4 +657,8 @@ define("L_RESTRICTED_ROM", "%s is succeslvol een beperking opgelegd voor deze ka
 // OpenID login mod by Ciprian
 define("L_OPID_SIGN", "Inschrijven met een OpenID");
 define("L_OPID_REG", "Importeer jou OpenID profiel");
+
+// Support buttons
+define("L_SUPP_WARN", "Je hebt gekozen om een donatie te schenken\\n".APP_NAME." aan de maker van dit programma.\\nDank u voor uw steun!\\n\\nLet op: de ontvanger is niet de eigenaar van deze chat.\\nVul nu uw gift in op de volgende pagina.\\n\\nDoorgaan?");
+define("L_SUPP_ALT", "Ondersteuning d.m.v. van PayPal voor ".APP_NAME." - dit is Snel, Gratis en Veilig!");
 ?>

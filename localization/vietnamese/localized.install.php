@@ -1,5 +1,5 @@
 <?php
-// File : vietnamese/localized.install.php - plus version (29.07.2008 - rev.6)
+// File : vietnamese/localized.install.php - plus version (07.06.2009 - rev.7)
 // Translation by Marshall <hellomarshal_lookatme@netzero.net>
 // Do not use ' ; use ’ istead (utf-8 edit bug)
 
@@ -71,6 +71,7 @@ define("L_P2_FORM12", "Đổi tên những ngăn admin folder");
 define("L_P2_FORM13", "Nếu bạn định sử dụng phpMyChat như một mô đun tổng hợp (cho) phpNuke hay phpBB, bảng cấu hình phải được gọi là \"c_config\" và bảng cho những người sử dụng được đăng ký phải được gọi là \"c_reg_users\"!");
 define("L_P2_FORM14", "Chọn một để khó khăn đoán tên!");
 define("L_P2_FORM15", "Tên Người Phục Vụ");
+define("L_P2_FORM16", "Bảng cho thống kê");
 define("L_P3_FORM1", "Tên tài khoản Người quản trị");
 define("L_P3_FORM2", "Mật khẩu tài khoản Người quản trị");
 define("L_P3_FORM3", "Xác minh mật khẩu");

@@ -32,7 +32,7 @@ $URLQueryTop = "L=$L&pmc_username=".urlencode($pmc_username)."&pmc_password=$pmc
 	</TD>
 	<TD WIDTH=1><IMG SRC="images/selColor.gif" WIDTH=1></TD>
 	<TD ALIGN=CENTER NOWRAP="NOWRAP" CLASS="thumbIndex">
-		&nbsp;<A HREF="<?php echo("$From?$URLQueryTop&sheet=a1"); ?>" TARGET="_parent"<?php if ($sheet == "a1") echo(" CLASS=\"selected\""); ?>><?php echo("Profiles"); ?></A>&nbsp;
+		&nbsp;<A HREF="<?php echo("$From?$URLQueryTop&sheet=a1"); ?>" TARGET="_parent"<?php if ($sheet == "a1") echo(" CLASS=\"selected\""); ?>><?php echo(A_MENU_1a); ?></A>&nbsp;
 	</TD>
 	<TD WIDTH=1><IMG SRC="images/selColor.gif" WIDTH=1></TD>
 	<TD ALIGN=CENTER NOWRAP="NOWRAP" CLASS="thumbIndex">
@@ -73,7 +73,7 @@ $URLQueryTop = "L=$L&pmc_username=".urlencode($pmc_username)."&pmc_password=$pmc
 	</TD>
 	<TD WIDTH=1><IMG SRC="images/selColor.gif" WIDTH=1></TD>
 	<TD ALIGN=CENTER NOWRAP="NOWRAP" CLASS="thumbIndex">
-		&nbsp;<A HREF="<?php echo("$From?$URLQueryTop&sheet=a2"); ?>" TARGET="_parent"<?php if ($sheet == "a2") echo(" CLASS=\"selected\""); ?>><?php echo("Statistics"); ?></A>&nbsp;
+		&nbsp;<A HREF="<?php echo("$From?$URLQueryTop&sheet=a2"); ?>" TARGET="_parent"<?php if ($sheet == "a2") echo(" CLASS=\"selected\""); ?>><?php echo(A_MENU_2a); ?></A>&nbsp;
 	</TD>
 	<TD WIDTH=1><IMG SRC="images/selColor.gif" WIDTH=1></TD>
     <TD ALIGN=CENTER NOWRAP="NOWRAP" CLASS="thumbIndex">

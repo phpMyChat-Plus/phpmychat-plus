@@ -32,8 +32,8 @@
  *
  * @version   0.28
  * @author Cristian Datculescu (cristian.datculescu@gmail.com) - v.0.25
-  * @updater Ciprian Murariu (siprianmp@yahoo.com) - added utf-8 & diacritics support
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @updater Ciprian Murariu (siprianmp@yahoo.com) - added utf-8 & diacritics support
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright Cristian Datculescu & Ciprian Murariu
  * @package cmf
  * @subpackage external

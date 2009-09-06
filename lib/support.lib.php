@@ -38,6 +38,7 @@ switch (L_LANG)
 		break;
 	case "vi_VN":
 		$ppbutton = ($pptype == "big") ? "3626846" : "3626856";
+		$ppalt = "PayPal - Cách an toàn hơn, dễ dàng hơn để thanh toán trực tuyến.";
 		break;
 	case "de_DE":
 		$pplang .= "/DE";
@@ -74,7 +75,7 @@ switch (L_LANG)
 	case "it_IT":
 		$pplang .= "/IT";
 		$ppbutton = ($pptype == "big") ? "3625096" : "3625114";
-		$ppalt = "PayPal - Il sistema di pagamento online più facile e sicuro!";
+		$ppalt = "PayPal - La più sicura, facile strada per pagare online";
 		$ppexists = 1;
 		break;
 	case "nl_NL":

@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.admin.php - plus version (26.08.2008 - rev.14)
+// File : dutch/localized.admin.php - plus version (07.06.2009 - rev.15)
 // Original translation by Corbesir <rock@jascrc.com>
 // Updates, corrections and additions for the Plus version by DJE Amesz & Romanesko  Genieusdanny@gmail.com and Bert Moorlag <berbia@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -23,6 +23,9 @@ define("A_MENU_6", "Chat extraás");
 define("A_MENU_7", "Zoek");
 define("A_MENU_8", "Verbindingen");
 define("A_MENU_9", "Log archief");
+define("A_MENU_1a", "Profielen");
+define("A_MENU_2a", "Statistieken");
+define("A_MOD_DEV", "Mod in ontwikkeling");
 define("A_LOGOUT", "Uitloggen");
 
 // Frame for registered users
@@ -136,7 +139,6 @@ define("A_CHAT_LOGS_38", "%s kan niet worden aangemaakt: %s");
 define("A_CHAT_LOGS_39", "%s tegen overschrijven beveiligd: %s");
 define("A_CHAT_LOGS_40", "Fout opgetreden tijden opslaan van het bestand: %s"); // filename
 
-
 //Admin Search Page
 define("A_SEARCH_1", "Chatroom Zoek Pagina");
 define("A_SEARCH_2", "Alle categoriën");
@@ -166,4 +168,12 @@ define("A_SEARCH_25", "Modereer deze gebruiker");
 // Connected users Page
 define("A_LURKING_1", "Ingelogde gebruikers en gluurders") ;
 define("A_LURKING_2", "Gluren uitgezet.") ;
+
+// Statistics Page
+define("A_STATS_1", "Chat Statistieken Pagina");
+define("A_STATS_2", "Data collective gestart op %s"); //date
+define("A_STATS_3", "Alle statistieken (Alle Tijden)");
+define("A_STATS_4", "Gedetaileerde statistiekens (Laatste %s dagen van activiteit)"); //number of days
+define("A_STATS_5", "Statistieken uitzetten");
+define("A_STATS_6", "Top %s"); //Top 10 or Top 5
 ?>
