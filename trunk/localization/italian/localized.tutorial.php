@@ -1,7 +1,7 @@
 <?php
 // File : italian/localized.tutorial.php - plus version (26.08.2008 - rev.10)
 // Original translation by Marco Borrini <marco.borrini@tradimento.it> & Bartolotta Gioachino <developers@rockitalia.com> & Silvia M. Carrassi <silvia@ladysilvia.net> & Daniele <danybec@tin.it>
-// Updates, corrections and additions for the Plus version by Mike Mikius <mikiusss@yahoo.com>
+// Updates, corrections and additions for the Plus version by Michele Ferro <specialmikius@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 
 // Get the names and values for vars sent by the script that called this one

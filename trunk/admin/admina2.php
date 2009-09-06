@@ -112,17 +112,17 @@ while(list($stat_date,$room,$username,$reguser,$last_in,$seconds_in,$longest_in,
 	$xkicks_rcvd = $xkicks_rcvd + $kicks_rcvd;
 $d++;
 }
-$subtotal = "<TR><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=5>Last 3 days of activity:".$tdt.$xlogins."</TD><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=3>".time_transform($xseconds_in).$tdt.$xtimes_away."</TD><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=3>".time_transform($xseconds_away).$tdt.$xposts_sent.$tdt.$xpms_sent.$tdt.$xcmds_used."</TD><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=2>".$xprofiles_checked.$tdt.$ximgs_posted.$tdt.$xurls_posted.$tdt.$xemails_posted.$tdt.$xswears_posted.$tdt.$xsmilies_posted."</TD><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=2>".$xbans_rcvd."</TD><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=2>".$xkicks_rcvd.$tr_et;
+$subtotal = "<TR><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=5>".sprintf(A_STATS_4,3).":".$tdt.$xlogins."</TD><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=3>".time_transform($xseconds_in).$tdt.$xtimes_away."</TD><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=3>".time_transform($xseconds_away).$tdt.$xposts_sent.$tdt.$xpms_sent.$tdt.$xcmds_used."</TD><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=2>".$xprofiles_checked.$tdt.$ximgs_posted.$tdt.$xurls_posted.$tdt.$xemails_posted.$tdt.$xswears_posted.$tdt.$xsmilies_posted."</TD><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=2>".$xbans_rcvd."</TD><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=2>".$xkicks_rcvd.$tr_et;
 
 #reset($stat_date,$room,$username,$reguser,$last_in,$seconds_in,$longest_in,$last_away,$seconds_away,$longest_away,$times_away,$logins,$posts_sent,$pms_sent,$cmds_used,$profile_viewed,$profiles_checked,$imgs_posted,$urls_posted,$emails_posted,$swears_posted,$smilies_posted,$bans_rcvd,$bans_sent,$kicks_rcvd,$kicks_sent,$xlogins,$xseconds_in,$xseconds_away,$xtimes_away,$xposts_sent,$xpms_sent,$xcmds_used,$xprofiles_checked,$ximgs_posted,$xurls_posted,$xemails_posted,$xswears_posted,$xsmilies_posted,$xbans_rcvd,$xbans_sent,$xkicks_rcvd,$xkicks_sent);
 $DbLink->clean_results();
 }
 
 ?>
-<P CLASS=title><?php echo("Chat Statistics Page"); ?></P>
+<P CLASS=title><?php echo(A_STATS_1); ?></P>
 <TABLE ALIGN=CENTER BORDER=0 CELLPADDING=3 CLASS="table">
 <TR>
-	<TD ALIGN=CENTER CLASS=menuTitle><?php echo("Overall statistics (All times) - Data collection started on ".strftime(L_SHORT_DATE,strtotime($start_date))); ?>
+	<TD ALIGN=CENTER CLASS=menuTitle><?php echo(A_STATS_3." - ".sprintf(A_STATS_2,strftime(L_SHORT_DATE,strtotime($start_date)))); ?>
 		<TABLE BORDER=1 CELLPADDING=5 CELLSPACING=1 WIDTH=100% CLASS="table">
 			<TR CLASS=tabtitle>
 				<TD VALIGN=CENTER ALIGN="CENTER" CLASS="small">#</TD>
@@ -147,7 +147,7 @@ $DbLink->clean_results();
 <P>
 <TABLE ALIGN=CENTER BORDER=0 CELLPADDING=3 CLASS="table">
 <TR>
-	<TD ALIGN=<?php echo($CellAlign); ?> CLASS=menuTitle><?php echo("Last 3 days of activity - Detailed statistics"); ?>
+	<TD ALIGN=<?php echo($CellAlign); ?> CLASS=menuTitle><?php echo(sprintf(A_STATS_4,3)); ?>
 		<TABLE BORDER=1 CELLPADDING=5 CELLSPACING=1 WIDTH=100% CLASS="table">
 			<TR CLASS=tabtitle>
 				<TD VALIGN=CENTER ALIGN="CENTER" CLASS="small">#</TD>
@@ -213,7 +213,7 @@ $DbLink->clean_results();
 else
 {
 ?>
-<P CLASS=title><?php echo("Statistics disabled!") ; ?></P>
+<P CLASS=title><?php echo(A_STATS_5) ; ?></P>
 <?php
 }
 ?>

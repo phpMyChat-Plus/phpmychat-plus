@@ -3,7 +3,7 @@
 // | class.upload.nl_NL.php                                                 |
 // +------------------------------------------------------------------------+
 // | Copyright (c) Alfons Knaapen 2007. All rights reserved.                |
-// | Version       0.25                                                     |
+// | Version       0.28                                                     |
 // | Last modified 17/11/2007                                               |
 // | Email         Alfons Knaapen                                           |
 // +------------------------------------------------------------------------+
@@ -29,7 +29,7 @@
 /**
  * Class upload dutch translation
  *
- * @version   0.25
+ * @version   0.28
  * @author    Alfons Knaapen
  * @license   http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright Alfons Knaapen
@@ -45,6 +45,9 @@
     $translation['uploaded_too_big_html']       = 'Upload fout (de grootte van het bestand is meer dan is toegestaan door de MAX_FILE_SIZE parameter in het html formulier - %s).';
     $translation['uploaded_partial']            = 'Upload fout (het bestand is slechts gedeeltelijk ge-upload).';
     $translation['uploaded_missing']            = 'Upload fout (er is geen bestand ge-upload).';
+	$translation['uploaded_no_tmp_dir']         = 'Upload fout (er mist een tijdelijke map).';
+	$translation['uploaded_cant_write']         = 'Upload fout (schrijven naar disk is mislukt).';
+	$translation['uploaded_err_extension']      = 'Upload fout (verkeerde bestandstype).';    
     $translation['uploaded_unknown']            = 'Upload fout (onbekende foutcode).';
     $translation['try_again']                   = 'Upload fout. Probeer het opnieuw svp.';
     $translation['file_too_big']                = 'Het bestand is te groot (%s).';

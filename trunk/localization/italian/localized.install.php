@@ -1,6 +1,6 @@
 <?php
-// File : italian/localized.install.php - plus version (29.07.2008 - rev.6)
-// Translation by Mike Mikius <mikiusss@yahoo.com> and Luciano Cataldo <lucianocataldo@gmail.com>
+// File : italian/localized.install.php - plus version (07.06.2009 - rev.7)
+// Translation by Michele Ferro <specialmikius@yahoo.com> and Luciano Cataldo <lucianocataldo@gmail.com>
 // Do not use ' ; use ’ istead (utf-8 edit bug)
 
 define("L_BTN1", "Avanti");
@@ -71,6 +71,7 @@ define("L_P2_FORM12", "Rinomina la cartella delle tue connessioni da amministrat
 define("L_P2_FORM13", "Se intendi usare phpMyChat come un modulo integrato per phpNuke o phpBB, la tabelle di configurazione deve essere chiamata \"c_config\" e la tabella per utenti registrati deve essere chiamata \"c_reg_users\"!");
 define("L_P2_FORM14", "Scegli un nome difficile da indovinare!");
 define("L_P2_FORM15", "Nome della Chat");
+define("L_P2_FORM16", "Tabella delle statistiche");
 define("L_P3_FORM1", "Nome account Amministratore");
 define("L_P3_FORM2", "Password account Amministratore");
 define("L_P3_FORM3", "Verifica password");

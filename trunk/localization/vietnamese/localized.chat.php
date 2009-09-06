@@ -1,5 +1,5 @@
 <?php
-// File : vietnamese/localized.chat.php - plus version (14.02.2009 - rev.42)
+// File : vietnamese/localized.chat.php - plus version (01.08.2009 - rev.43)
 // Translation by Marshall <hellomarshal_lookatme@netzero.net>
 // Updates and corrections by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -53,7 +53,7 @@ define("L_HOURS", "giờ");
 
 // registration stuff:
 define("L_REG_1", "Pass đăng nhập");
-define("L_REG_2", "Quản lý tài khỏan ");
+define("L_REG_2", "Quản lý tài khỏan");
 define("L_REG_3", "Đăng ký");
 define("L_REG_4", "Sửa đổi hồ sơ");
 define("L_REG_5", "Xóa thành viên");
@@ -79,7 +79,7 @@ define("L_REG_25", "Đóng lại");
 define("L_REG_30", "Tên");
 define("L_REG_31", "Họ");
 define("L_REG_32", "WEB");
-define("L_REG_33", "Hiện e-mail ");
+define("L_REG_33", "Hiện e-mail");
 define("L_REG_34", "Dạng người dùng sọan thảo");
 define("L_REG_35", "Người quản trị");
 define("L_REG_36", "Đất nước");
@@ -126,7 +126,7 @@ define("L_ERR_USR_4", "Mật khẩu xác nhận không chính xác");
 define("L_ERR_USR_5", "Xin nhập tên đăng nhập");
 define("L_ERR_USR_6", "Bạn phải đánh máy mật khẩu của bạn");
 define("L_ERR_USR_7", "Bạn phải đánh máy thư điện tử của bạn");
-define("L_ERR_USR_8", "Bạn phải ghi e-mail vào ");
+define("L_ERR_USR_8", "Bạn phải ghi e-mail vào");
 define("L_ERR_USR_9", "Tên đăng nhập đang sử dụng");
 define("L_ERR_USR_10", "Sai tên đăng nhập hay mật khẩu");
 define("L_ERR_USR_11", "Bạn phải là người quản trị.");
@@ -202,7 +202,7 @@ define("L_NO_ADMIN", "Chỉ người quản trị mới có thể sử dụng l�
 define("L_NO_REG_USER", "Bạn phải đăng ký chat để có thể sử dụng lệnh này");
 
 // help popup
-define("L_HELP_TIT_1", "Cười");
+define("L_HELP_TIT_1", "Trợ giúp");
 define("L_HELP_TIT_2", "Văn bản chuẩn những thông báo");
 define("L_HELP_FMT_1", "Những thông báo gạch nghiên hay gạch ngang &lt;B&gt; &lt;/B&gt;, &lt;I&gt; &lt;/I&gt; or &lt;U&gt; &lt;/U&gt; tags.<br />Ví dụ, &lt;B&gt;văn bản này&lt;/B&gt; Sẽ sản xúât <B>văn bản này</B>.");
 define("L_HELP_FMT_2", "Để tạo một link liên kết (for e-mail or URL) Trong thông báo của các bạn, đơn giản đánh máy tương ứng không trùng hợp cái này. Link liên kết sẽ được tạo ra tự động");
@@ -212,6 +212,7 @@ define("L_HELP_MSG", "tin nhắn");
 define("L_HELP_MSGS", "tin nhắn");
 define("L_HELP_ROOM", "phòng");
 define("L_HELP_BUZZ", "~tênâmthanh");
+define("L_HELP_BUZZ1", "Đánh động..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "lý do");
 define("L_HELP_MR", "Ông");
 define("L_HELP_MS", "Bà");
@@ -230,9 +231,9 @@ define("L_HELP_CMD_9", "Đá ra người sử dụng chuyện tán gẫu. Lệnh
 define("L_HELP_CMD_10", "Gửi một thông báo riêng tư Tới người sử dụng được chỉ rõ (những người sử dụng khác sẽ không nhìn thấy nó).");
 define("L_HELP_CMD_11", "Cho thấy những thông tin người sử dụng được chỉ rõ.");
 define("L_HELP_CMD_12", "Popup windows được sọan thảo bởi thành viên");
-define("L_HELP_CMD_13", "Những thông báo người sử dụng tại phòng hiện thời ");
+define("L_HELP_CMD_13", "Những thông báo người sử dụng tại phòng hiện thời");
 define("L_HELP_CMD_14", "Cho phép người quản trị hay người điều tiết (s)thúc đẩy người sử dụng đăng ký với sự điều tiết của MOD.");
-define("L_HELP_CMD_15", "Làm sạch những thông báo và cho thấy 5 thông báo trước ");
+define("L_HELP_CMD_15", "Làm sạch những thông báo và cho thấy 5 thông báo trước");
 define("L_HELP_CMD_16", "Cất giữ sau cùng những thông báo (những thông báo lọai trừ) Tới một hồ sơ HTML nếu nó không được chỉ rõ tất cả những thông báo sẵn có sẽ được gửi đến");
 define("L_HELP_CMD_17", "Cho phép người quản trị gửi một thông báo cho tất cả thành viên thuộc tất cả phòng của hệ thống.");
 define("L_HELP_CMD_18", "Mời một thành viên đang chat sang phòng mình hay phòng khác");
@@ -251,6 +252,8 @@ define("L_HELP_CMD_30", "Đâylàm giống như vậy như /me nhưng có thể 
 define("L_HELP_CMD_31", "Thay đổi những người sử dụng mệnh lệnh Được phân loại trong những danh sách: bởi thời gian hay thứ tự abc");
 define("L_HELP_CMD_32", "Đây là phiên bản thứ 3 hên xui.<br />Usage: /d{n1}[tn2] or /d{n1};<br />n1 có thể chọn bất kỳ giá trị <b>từ 1 đến 100</b> (nó đại diện cho số lượng cuộn trên xúc xắc).<br />n2 có thể cầm lấy bất kỳ giá trị nào <b>giữa số 1 và %s</b> (đại diện những con xúc xắc trên trục tung).");
 define("L_HELP_CMD_33", "Thay đổi số font khi chat với các thành viên khác (cho phép những giá trị cho n: <b>từ 7 đến 15</b>); the /size đây là lệnh cơ bản để chat(<b>".$FontSize."</b>).");
+define("L_HELP_CMD_34", "Điều này sẽ làm cho thành viên hướng rõ đến thông điệp (ltr = Trái tới phải, rtl = Phải tới trái).");
+define("L_HELP_CMD_VAR", "Đồng nghĩa (Phương án): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Phép xã giao chuyện tán gẫu");
 define("L_HELP_ETIQ_2", "Chỗ của Chúng ta muốn giữ những IT cộng đồng thân thiện và ngộ nghĩnh, vì thế xin dính chặt vào những hướng dẫn sau đây. Nếu bạn không quan sát những quy tắc này, một trong số những người điều tiết chuyện gẫu của chúng ta có thể khởi động bạn từ chuyện gẫu.<br /><br />Thank you,");
 define("L_HELP_ETIQ_3", "Những hướng dẫn trong khi chat");
@@ -316,7 +319,7 @@ define("L_QUICK", "Thực đơn Nhanh");
 
 // Topic Banner mod
 define("L_TOPIC", "đặt đề tài tới:");
-define("L_TOPIC_RESET", "đặt lại đề tài ");
+define("L_TOPIC_RESET", "đặt lại đề tài");
 define("L_HELP_TOP", "ít nhất hai từ như đề tài");
 define("L_BANNER_WELCOME", "Chao mừng tới %s!"); // room name
 define("L_BANNER_TOPIC", "Đề tài:");
@@ -326,6 +329,7 @@ define("L_DEFAULT_TOPIC_1", "Đây là một đề tài mặc định. Soạn th
 define("L_PIC", "Bức ảnh bố trí bởi");
 define("L_PIC_RESIZED", "Thay đổi kích thước tới");
 define("L_HELP_IMG", "ảnh đầy đủ được gửi");
+define("L_NO_IMAGE", "Đây không phải là một URL hợp lệ khi kiểm tra hình ảnh.\\nThử lại!");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s không có mod trong phòng chat.");
@@ -348,11 +352,11 @@ define("L_PRO_6", "Tên bạn/chữ màu");
 // Avatar mod
 define("L_AVATAR", "Ẩnh đại diện (Avatar)");
 define("L_ERR_AV", "Link dẫn sai hay host không có thật.");
-define("L_TITLE_AV", "Ẩnh đại diện hiện thời : ");
+define("L_TITLE_AV", "Ẩnh đại diện hiện thời:");
 define("L_CHG_AV", "Click \"".L_REG_16."\" để thay đổi thông tin <br />để cất giữ ảnh đại diện của bạn.");
 define("L_SEL_NEW_AV", "Chọn ảnh đại diện mới");
 define("L_EX_AV", "ví dụ");
-define("L_URL_AV", "Link dẫn: ");
+define("L_URL_AV", "Link dẫn:");
 define("L_EXPL_AV", "(vào url rồi enter)");
 define("L_CANCEL", "Hủy bỏ");
 define("L_AVA_REG", "Bạn phải được đăng ký\\nthay avatar của các bạn");
@@ -406,7 +410,9 @@ define("L_PRIV_MSG6", "Trạng thái:");
 define("L_PRIV_RELOAD", "Làm mới trang");
 define("L_PRIV_MARK_ALL", "Chọn tất cả đã đọc");
 define("L_PRIV_MARK_SEL", "Chọn những sự lựa chọn là đọc rồi");
-define("L_PRIV_REMOVE", "Xóa các tin nhắn chọn ");
+define("L_PRIV_REMOVE", "Xóa các tin nhắn chọn");
+define("L_PRIV_PM", "(riêng tư)");
+define("L_PRIV_WISP", "(Nói thầm)");
 
 // Color Input Box mod by Ciprian
 define("L_ENABLED", "Mở");
@@ -494,13 +500,13 @@ define("L_LINKS_6", "tới sự tiếp xúc");
 define("L_LINKS_7", "để thăm phpMyChat trang chủ");
 define("L_LINKS_8", "để nối nhóm phpMyChat");
 define("L_LINKS_9", "để gửi sự phản hồi của các bạn");
-define("L_LINKS_10", "để tải xuống phpMyChat Plus");
+define("L_LINKS_10", "để tải xuống phpMyChat-Plus");
 define("L_LINKS_11", "để kiểm tra người đang tán gẫu");
 define("L_LINKS_12", "để mở Trang Đăng nhập Chuyện gẫu");
 define("L_LINKS_13", "gửi tiếng buzz"); // Click to blablabla : it can also be translated as "to play this sound", if buzz has no translation.
 define("L_LINKS_14", "để sử dụng lệnh này");
 define("L_LINKS_15", "để mở"); // to open/see Posted Links window
-define("L_LINKS_16", "Phòng triển lãm tranh"); // to open/see Posted Links window
+define("L_LINKS_16", "phòng triển lãm tranh"); // to open/see Posted Links window
 define("L_LINKS_17", "để phân loại tăng lên");
 define("L_LINKS_18", "để phân loại đi xuống");
 define("L_LINKS_19", "để thiết lập/sửa chữa Gravatar");
@@ -511,6 +517,7 @@ define("L_NOT_SELECTED", "không chọn");
 define("L_NOT_SELECTED_F", ""); // feminine word, if it's the case
 define("L_EMAIL_1", "để mở gửi E-mail");
 define("L_FULLSIZE_PIC", "để mở toàn bộ bức tranh");
+define("L_PRIVACY", "để đọc quy định riêng tư"); //Click here to…
 define("L_AUTHOR", "tác giả");
 define("L_DEVELOPER", "người phát triển chuyện gẫu này");
 define("L_OWNER", "chủ nhân của phòng chat");
@@ -595,8 +602,10 @@ define("L_LANG_ENUS", "Tiếng Anh US");
 define("L_LANG_ES", "Tây ban nha");
 define("L_LANG_FR", "Tiếng Pháp");
 define("L_LANG_GR", "Tiếng Hy Lạp");
+define("L_LANG_HE", "Tiếng Do Thái");
 define("L_LANG_HI", "Tiếng ấn độ");
 define("L_LANG_HU", "Hunggari");
+define("L_LANG_ID", "Tiếng Inđônêxia");
 define("L_LANG_IT", "Tiếng ý");
 define("L_LANG_KA", "Georgian");
 define("L_LANG_NL", "Hà lan");
@@ -649,4 +658,8 @@ define("L_RESTRICTED_ROM", "%s một cách thành công được hạn chế t�
 // OpenID login mod by Ciprian
 define("L_OPID_SIGN", "Đăng nhập bởi OpenID");
 define("L_OPID_REG", "Nhập khẩu của bạn OpenID thông tin");
+
+// Support buttons
+define("L_SUPP_WARN", "Bạn đã chọn lựa để đóng góp đến sự phát triển của\\n".APP_NAME." bởi việc đóng góp cho người phát triển.\\nCảm ơn vì đã hỗ trợ!\\n\\nGhi chú: Người nhận không phải là người chủ của việc tán gẫu này.\\nXin điền vào số lượng trên trang kế tiếp.\\n\\nTiếp tục?");
+define("L_SUPP_ALT", "Hỗ trợ với PayPal sự phát triển của ".APP_NAME." - Nó nhanh , miễn phí và bảo mật!");
 ?>

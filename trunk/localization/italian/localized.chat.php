@@ -1,9 +1,9 @@
 <?php
-// File : italian/localized.chat.php - plus version (14.02.2009 - rev.42)
+// File : italian/localized.chat.php - plus version (01.08.2009 - rev.43)
 // Original translation by Andrea D’Alessandro <andrea@abol.it> & Massimo Fubini <massimo@tomato.it>
 // & Giuliano Yurij Beccaria <yurij@e-pages.it> & Marco Borrini <borrini@tradimento.it>
 // & Bartolotta Gioachino <developers@rockitalia.com> & Silvia M. Carrassi <silvia@ladysilvia.net>
-// Updates, corrections and additions for the Plus version by Mike Mikius <mikiusss@yahoo.com> and Luciano Cataldo <lucianocataldo@gmail.com>
+// Updates, corrections and additions for the Plus version by Michele Ferro <specialmikius@yahoo.com> and Luciano Cataldo <lucianocataldo@gmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
 
@@ -215,6 +215,7 @@ define("L_HELP_MSG", "messaggio");
 define("L_HELP_MSGS", "messaggi");
 define("L_HELP_ROOM", "stanza");
 define("L_HELP_BUZZ", "~nomesuono");
+define("L_HELP_BUZZ1", "Buzz..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "il motivo");
 define("L_HELP_MR", "Sig."); // Signor
 define("L_HELP_MS", "Sig.ra"); // Signora
@@ -254,6 +255,8 @@ define("L_HELP_CMD_30", "Il secondo comando da la stessa cosa come /me ma mostre
 define("L_HELP_CMD_31", "Cambia l’ordine degli utenti ordinati nelle liste: per ora di entrata o alfabetico.");
 define("L_HELP_CMD_32", "Questa è una terza versione dei giri dei dadi (roleplaying).<br />Uso: /d{n1}[tn2] o /d{n1};<br />n1 può prendere qualsiasi valore<b>tra 1 è 100</b> (rappresenta il numero dei giri per dado).<br />n2 può prendere qualsiasi valore <b>tra 1 è %s</b> (rappresenta il numero di giri dei dadi per lancio).");
 define("L_HELP_CMD_33", "Cambia la misura dei caratteri dei messaggi nella chat ad un utente scelto (valori ammessi n: <b>tra 7 e 15</b>); il comando /size reimposta il valore di default della grandezza dei caratteri.");
+define("L_HELP_CMD_34", "Permette all’utente di specificare l’orientamento del messaggio (ltr = da sinistra a destra, rtl = da destra a sinistra).");
+define("L_HELP_CMD_VAR", "Sinonimi (varianti): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Netiquette della Chat");
 define("L_HELP_ETIQ_2", "Nella nostra chat si auspica un incontro amichevole e simpatico, quindi ti preghiamo di aderire alle seguenti direttive. Se verrai meno all’osservanza di queste regole, i moderatori potrebbero espellerti dalla chat.<br /><br />Grazie!");
 define("L_HELP_ETIQ_3", "Direttive della nostra chat");
@@ -328,6 +331,7 @@ define("L_DEFAULT_TOPIC_1", "Questo è l’argomento di default. Edita localizat
 define("L_PIC", "Immagine inserita da");
 define("L_PIC_RESIZED", "Ridimensionata a");
 define("L_HELP_IMG", "percorso completo dell’immagine inserita");
+define("L_NO_IMAGE", "Non è un indirizzo valido di un’immagine pubblica remota.\\nRirpova di nuovo!");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s non è moderatore per qualsiasi stanza della chat.");
@@ -409,6 +413,8 @@ define("L_PRIV_RELOAD", "Aggiorna la pagina");
 define("L_PRIV_MARK_ALL", "Segna tutti come già Letti");
 define("L_PRIV_MARK_SEL", "Segna il selezionato come già Letto");
 define("L_PRIV_REMOVE", "Cancella PMs selezionati"); // or selected
+define("L_PRIV_PM", "(privato)");
+define("L_PRIV_WISP", "(bisbiglia)");
 
 // Color Input Box mod by Ciprian
 define("L_ENABLED", "Abilitato");
@@ -493,10 +499,10 @@ define("L_LINKS_3", "per aprire il link");
 define("L_LINKS_4", "per aprire il sito dell’autore");
 define("L_LINKS_5", "per inserire questo smiley");
 define("L_LINKS_6", "per contatto");
-define("L_LINKS_7", "per visitare l’Homepage di phpMyChat ");
+define("L_LINKS_7", "per visitare l’Homepage di phpMyChat");
 define("L_LINKS_8", "per entrare nel gruppo di phpMyChat");
 define("L_LINKS_9", "per inviare il tuo feedback");
-define("L_LINKS_10", "per il download phpMyChat Plus");
+define("L_LINKS_10", "per il download phpMyChat-Plus");
 define("L_LINKS_11", "controllochi sta chattando");
 define("L_LINKS_12", "per aprire la pagina di Login");
 define("L_LINKS_13", "invia questo buzz"); // Click to blablabla : it can also be translated as "to play this sound", if buzz has no translation.
@@ -513,6 +519,7 @@ define("L_NOT_SELECTED", "non selezionato");
 define("L_NOT_SELECTED_F", ""); // feminine word, if it's the case
 define("L_EMAIL_1", "per inviare e-mail");
 define("L_FULLSIZE_PIC", "per dimensioni reali dell’immagine");
+define("L_PRIVACY", "leggere le norme sulla Privacy"); //Click here to…
 define("L_AUTHOR", "l’autore");
 define("L_DEVELOPER", "lo sviluppatore di questa chat");
 define("L_OWNER", "il proprietario di questa chat");
@@ -651,4 +658,8 @@ define("L_RESTRICTED_ROM", " l’accesso di %s è stato limitato per questa stan
 // OpenID login mod by Ciprian
 define("L_OPID_SIGN", "Accedi con un OpenID");
 define("L_OPID_REG", "Importa uno dei tuoi profili OpenID");
+
+// Support buttons
+define("L_SUPP_WARN", "Hai scelto di contribuire al libero sviluppo di\\n".APP_NAME." facendo una donazione allo sviluppatore.\\nGrazie per il tuo supporto!\\n\\nNota: il contenitore non è il titolare di questa chat.\\nPer cortesia inserisci il tuo contributo nella pagina successiva.\\n\\nContinua?");
+define("L_SUPP_ALT", "Supporta con PayPal lo svilujppo del ".APP_NAME." - E’ Veloce, Libero e Sicuro!");
 ?>

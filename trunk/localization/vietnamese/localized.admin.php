@@ -1,5 +1,5 @@
 <?php
-// File : vietnamese/localized.admin.php - plus version (26.08.2008 - rev.14)
+// File : vietnamese/localized.admin.php - plus version (07.06.2009 - rev.15)
 // Translation by Marshall <hellomarshal_lookatme@netzero.net>
 // Updates and corrections by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -22,6 +22,9 @@ define("A_MENU_6", "Lời chat lưu lại");
 define("A_MENU_7", "Tìm kiếm");
 define("A_MENU_8", "Kết nối");
 define("A_MENU_9", "Tài liệu");
+define("A_MENU_1a", "Tiểu sữ");
+define("A_MENU_2a", "Thống kê");
+define("A_MOD_DEV", "Mod dưới sự phát triển");
 define("A_LOGOUT", "Thoát ra");
 
 // Frame for registered users
@@ -165,4 +168,12 @@ define("A_SEARCH_25", "Làm Dịu xuống người sử dụng này");
 // Connected users Page
 define("A_LURKING_1", "Được nối cho những người sử dụng và Bí mật") ;
 define("A_LURKING_2", "Bí mật bị ngắt.") ;
+
+// Statistics Page
+define("A_STATS_1", "Trang thống kê việc tán gẫu");
+define("A_STATS_2", "Thu thập dữ liệu tiếp tục bắt đầu %s"); //date
+define("A_STATS_3", "Thống kê Toàn bộ (Tất cả các lần)");
+define("A_STATS_4", "Thống kê Chi tiết (Cuối cùng %s những ngày hoạt động)"); //number of days
+define("A_STATS_5", "Thống kê bị ngắt");
+define("A_STATS_6", "Đỉnh %s"); //Top 10 or Top 5
 ?>

@@ -601,6 +601,7 @@ define("L_LANG_FR", "Französisch");
 define("L_LANG_GR", "Griechisch");
 define("L_LANG_HI", "Indien");
 define("L_LANG_HU", "Ungarisch");
+define("L_LANG_ID", "Indonesien");
 define("L_LANG_IT", "Italienisch");
 define("L_LANG_KA", "Georgien");
 define("L_LANG_NL", "Niederländisch");
