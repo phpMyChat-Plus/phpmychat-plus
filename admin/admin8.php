@@ -75,8 +75,8 @@ function display_connected($Private,$Full,$String1,$String2,$Charset)
 		if ($Full)
 		{
 			$sghosts = "";
-			$sghosts = eregi_replace("'","",C_SPECIAL_GHOSTS);
-			$sghosts = eregi_replace(" AND username != ",",",$sghosts);
+			$sghosts = str_replace("'","",C_SPECIAL_GHOSTS);
+			$sghosts = str_replace(" AND username != ",",",$sghosts);
 			echo($String1."<br />");
 			while(list($UserU,$Latin1U,$RoomU,$RTime,$IP,$Status) = $DbLink->next_record())
 			{
@@ -109,8 +109,8 @@ function display_connected($Private,$Full,$String1,$String2,$Charset)
 		if ($Full)
 		{
 			$sghosts = "";
-			$sghosts = eregi_replace("'","",C_SPECIAL_GHOSTS);
-			$sghosts = eregi_replace(" AND username != ",",",$sghosts);
+			$sghosts = str_replace("'","",C_SPECIAL_GHOSTS);
+			$sghosts = str_replace(" AND username != ",",",$sghosts);
 			echo($NbUsers." ".NB_USERS_IN."<br />");
 			while(list($UserU,$Latin1U,$RoomU,$RTime,$IP,$Status) = $DbLink->next_record())
 			{
@@ -164,10 +164,14 @@ if($DbLink->num_rows() > 0)
 	while(list($Type, $Room, $User, $Latin1, $Time, $Dest, $Message, $RoomFrom) = $DbLink->next_record())
 	{
 		$Message = stripslashes($Message);
-		$Message = eregi_replace("L_DEL_BYE",L_DEL_BYE,$Message);
-		$Message = eregi_replace("L_REG_BRB",L_REG_BRB,$Message);
-		$Message = eregi_replace("L_HELP_MR",L_HELP_MR,$Message);
-		$Message = eregi_replace("L_HELP_MS",L_HELP_MS,$Message);
+		$Message = str_replace("L_DEL_BYE",L_DEL_BYE,$Message);
+		$Message = str_replace("L_REG_BRB",L_REG_BRB,$Message);
+		$Message = str_replace("L_HELP_MR",L_HELP_MR,$Message);
+		$Message = str_replace("L_HELP_MS",L_HELP_MS,$Message);
+		$Message = str_replace("L_PRIV_PM",L_PRIV_PM,$Message);
+		$Message = str_replace("L_PRIV_WISP",L_PRIV_WISP,$Message);
+		$Message = str_replace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"".L_HELP_BUZZ1."\" title=\"".L_HELP_BUZZ1."\">",$Message);
+		if ($Align == "right") $Message = str_replace("arrowr","arrowl",$Message);
 		if ($Type) $Type = L_SET_10; else $Type = L_SET_11;
 		if ($Room == '*' || ($User == "SYS room" && $Dest == '*') || $User == "SYS announce") $Room = L_ROOM_ALL;
 		else
@@ -187,11 +191,11 @@ if($DbLink->num_rows() > 0)
 		if ($RoomFrom != "" && $RoomFrom != $Room && $RoomFrom != $Room." [R]") $Room = $RoomFrom."><br />>".$Room;
 		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
 		{
-			$Message = eregi_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$Message);
+			$Message = str_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$Message);
 		}
-		else $Message = eregi_replace('target="_blank">','title="'.sprintf(L_CLICK,L_LINKS_3).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_LINKS_3).'.\'; return true" target="_blank">',$Message);
+		else $Message = str_replace('target="_blank">','title="'.sprintf(L_CLICK,L_LINKS_3).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_LINKS_3).'.\'; return true" target="_blank">',$Message);
 
-		$Message = eregi_replace('alt="Send email">','title="'.sprintf(L_CLICK,L_EMAIL_1).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_EMAIL_1).'.\'; return true">',$Message);
+		$Message = str_replace('alt="Send email">','title="'.sprintf(L_CLICK,L_EMAIL_1).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_EMAIL_1).'.\'; return true">',$Message);
 		if(COLOR_NAMES)
 		{
 			$colorname_tag = "";
@@ -364,8 +368,8 @@ if ($online_users)
 <table border=1 width=98% cellspacing=0 cellpadding=1 class="table">
 <?php
 $sghosts = "";
-$sghosts = eregi_replace("'","",C_SPECIAL_GHOSTS);
-$sghosts = eregi_replace(" AND username != ",",",$sghosts);
+$sghosts = str_replace("'","",C_SPECIAL_GHOSTS);
+$sghosts = str_replace(" AND username != ",",",$sghosts);
 while($data = @mysql_fetch_array($result))
 {
 	if ($data[username] == "Guest") $data[username] = L_LURKING_5;

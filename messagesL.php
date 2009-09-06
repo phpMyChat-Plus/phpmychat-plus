@@ -374,6 +374,8 @@ if($DbLink->num_rows() > 0)
 		$Message = str_replace("L_REG_BRB",L_REG_BRB,$Message);
 		$Message = str_replace("L_HELP_MR",L_HELP_MR,$Message);
 		$Message = str_replace("L_HELP_MS",L_HELP_MS,$Message);
+		$Message = str_replace("L_PRIV_PM",L_PRIV_PM,$Message);
+		$Message = str_replace("L_PRIV_WISP",L_PRIV_WISP,$Message);
 		$Message = str_replace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"".L_HELP_BUZZ1."\" title=\"".L_HELP_BUZZ1."\">",$Message);
 		if ($Align == "right") $Message = str_replace("arrowr","arrowl",$Message);
 		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
@@ -687,8 +689,8 @@ if (C_QUOTE)
 		$quotetext .= $quotes[$quote];
 		if($quotecolor != "") $quotetext .= "</font>";
 		$quotetext .= "</div>";
-		$quotetext = ereg_replace("\r", "", $quotetext);
-		$quotetext = ereg_replace("\n", "", $quotetext);
+		$quotetext = str_replace("\r", "", $quotetext);
+		$quotetext = str_replace("\n", "", $quotetext);
 		if ($R != "1")
 		{
 		$DbLink->query("SELECT m_time FROM ".C_MSG_TBL." WHERE username='$QUOTE_NAME' AND room = '$R' AND m_time > ".(time() - $quotetime)." ORDER BY m_time DESC LIMIT 1");

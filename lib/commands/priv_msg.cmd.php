@@ -56,7 +56,7 @@ else
 				}
 				unset($Found, $b);
 			}
-			$Cmd[3] = "(private) ".$Cmd[3];
+			$Cmd[3] = "L_PRIV_PM ".$Cmd[3];
 			if (C_PRIV_POPUP && !isset($allowpopupu))
 			{
 				$DbLink = new DB;
