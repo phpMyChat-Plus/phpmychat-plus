@@ -440,13 +440,15 @@ $Time = date("d-M, H:i:s", $T + C_TMZ_OFFSET*60*60);
 if ($Read == "New") $ReplyTo = "/to ".$User." ";
 elseif ($Read == "Neww") $ReplyTo = "/wisp ".$User." ";
 $M = stripslashes($M);
+$M = str_replace("L_PRIV_PM",L_PRIV_PM,$M);
+$M = str_replace("L_PRIV_WISP",L_PRIV_WISP,$M);
 if (C_POPUP_LINKS || eregi('target="_blank"></a>',$M))
 {
-	$M = eregi_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$M);
+	$M = str_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$M);
 }
-else $M = eregi_replace('target="_blank">','title="'.sprintf(L_CLICK,L_LINKS_3).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_LINKS_3).'.\'; return true" target="_blank">',$M);
+else $M = str_replace('target="_blank">','title="'.sprintf(L_CLICK,L_LINKS_3).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_LINKS_3).'.\'; return true" target="_blank">',$M);
 
-$M = eregi_replace('alt="Send email">','title="'.sprintf(L_CLICK,L_EMAIL_1).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_EMAIL_1).'.\'; return true">',$M);
+$M = str_replace('alt="Send email">','title="'.sprintf(L_CLICK,L_EMAIL_1).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_EMAIL_1).'.\'; return true">',$M);
 ?>
 <TABLE BORDER=1 CELLPADDING=1 WIDTH=400 CLASS="table">
 	<TR><TD width="100%" ALIGN="CENTER" CLASS="tabtitle"><?php echo(L_PRIV_MSG); ?></TD></TR>
@@ -525,8 +527,15 @@ $Time = date("d-M, H:i:s", $T + C_TMZ_OFFSET*60*60);
 if ($Read == "New") $ReplyTo = "/to ".$User." ";
 elseif ($Read == "Neww") $ReplyTo = "/wisp ".$User." ";
 $M = stripslashes($M);
-$M = eregi_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$M);
-$M = eregi_replace('alt="Send email">','title="'.sprintf(L_CLICK,L_EMAIL_1).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_EMAIL_1).'.\'; return true">',$M);
+$M = str_replace("L_PRIV_PM",L_PRIV_PM,$M);
+$M = str_replace("L_PRIV_WISP",L_PRIV_WISP,$M);
+if (C_POPUP_LINKS || eregi('target="_blank"></a>',$M))
+{
+	$M = str_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$M);
+}
+else $M = str_replace('target="_blank">','title="'.sprintf(L_CLICK,L_LINKS_3).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_LINKS_3).'.\'; return true" target="_blank">',$M);
+
+$M = str_replace('alt="Send email">','title="'.sprintf(L_CLICK,L_EMAIL_1).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_EMAIL_1).'.\'; return true">',$M);
 ?>
 	<TR><TD width="73%"><B><?php echo($i.". "); ?><U><?php echo(L_PRIV_MSG1); ?></U>&nbsp;<?php echo($colorname_tag.$User.$colorname_endtag); ?></B>&nbsp;(<B><U><?php echo(L_PRIV_MSG2); ?></U></B>&nbsp;<I><?php echo(($RF != "" && $RF != $Room) ? $RF : $Room); ?></I>)</TD><TD align="right"><I><U><?php echo(L_PRIV_MSG5); ?></U><br /><?php echo($Time); ?></I></TD></TR>
 	<TR><TD width="100%" colspan="2"><I><?php echo($M) ?></I></TD></TR>

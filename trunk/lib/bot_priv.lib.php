@@ -72,13 +72,13 @@ if (C_PRIV_POPUP)
 	{
 		if ($Read == "New" || $Read == "Old")
 		{
-			$D1 = "<FONT COLOR=\"".C_BOT_FONT_COLOR."\"><I>(private) " . $D1 . "</I></FONT>" ;
+			$D1 = "<FONT COLOR=\"".C_BOT_FONT_COLOR."\"><I>L_PRIV_PM " . $D1 . "</I></FONT>" ;
 		  mysql_query("UPDATE ".C_MSG_TBL." SET pm_read='".date("Y-m-d H:i:s")."' WHERE pm_read='New' AND address='$BOT' AND username='$myuniqueid'") ;
 			$Readu = "New";
 		}
 		elseif ($Read == "Neww" || $Read == "Oldw")
 		{
-			$D1 = "<FONT COLOR=\"".C_BOT_FONT_COLOR."\"><I>(whisper) " . $D1 . "</I></FONT>" ;
+			$D1 = "<FONT COLOR=\"".C_BOT_FONT_COLOR."\"><I>L_PRIV_WISP " . $D1 . "</I></FONT>" ;
 			mysql_query("UPDATE ".C_MSG_TBL." SET pm_read='".date("Y-m-d H:i:s")."' WHERE pm_read='Neww' AND address='$BOT' AND username='$myuniqueid'") ;
 			$Readu = "Neww";
 		}
@@ -87,13 +87,13 @@ if (C_PRIV_POPUP)
 	{
 		if ($Read == "New" || $Read == "Old")
 		{
-			$D1 = "<FONT COLOR=\"".C_BOT_FONT_COLOR."\"><I>(private) " . $D1 . "</I></FONT>" ;
+			$D1 = "<FONT COLOR=\"".C_BOT_FONT_COLOR."\"><I>L_PRIV_PM " . $D1 . "</I></FONT>" ;
 		  mysql_query("UPDATE ".C_MSG_TBL." SET pm_read='".date("Y-m-d H:i:s")."' WHERE pm_read='New' AND address='$BOT' AND username='$myuniqueid'") ;
 			$Readu = date("Y-m-d H:i:s");
 		}
 		elseif ($Read == "Neww" || $Read == "Oldw")
 		{
-			$D1 = "<FONT COLOR=\"".C_BOT_FONT_COLOR."\"><I>(whisper) " . $D1 . "</I></FONT>" ;
+			$D1 = "<FONT COLOR=\"".C_BOT_FONT_COLOR."\"><I>L_PRIV_WISP " . $D1 . "</I></FONT>" ;
 			mysql_query("UPDATE ".C_MSG_TBL." SET pm_read='".date("Y-m-d H:i:s")."' WHERE pm_read='Neww' AND address='$BOT' AND username='$myuniqueid'") ;
 			$Readu = date("Y-m-d H:i:s");
 		}

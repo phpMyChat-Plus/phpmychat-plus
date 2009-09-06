@@ -35,7 +35,7 @@ else
 		}
 		elseif (trim($Cmd[2]) != "" && trim($Cmd[3]) != "")
 		{
-			$Cmd[3] = "(whisper) ".$Cmd[3];
+			$Cmd[3] = "L_PRIV_WISP ".$Cmd[3];
 			if (C_PRIV_POPUP && !isset($allowpopupu))
 			{
 				$DbLink = new DB;

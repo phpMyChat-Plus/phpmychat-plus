@@ -72,10 +72,10 @@ require_once "plugins/customtags.php";
 * @return string                    The bot's reply.
 */
 function replybotname($userinput,$uniqueid,$botname){
-  $userinput = eregi_replace("^\/to  (private)", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
-  $userinput = eregi_replace("^\/msg  (private)", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
-  $userinput = eregi_replace("^\/wisp  (whisper)", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
-  $userinput = eregi_replace("^\/whisp  (whisper)", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
+  $userinput = eregi_replace("^\/to L_PRIV_PM", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
+  $userinput = eregi_replace("^\/msg L_PRIV_PM", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
+  $userinput = eregi_replace("^\/wisp L_PRIV_WISP", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
+  $userinput = eregi_replace("^\/whisp L_PRIV_WISP", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
   $userinput = eregi_replace("^\/to  Re: ", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
   $userinput = eregi_replace("^\/msg  Re: ", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
   $userinput = eregi_replace("^\/wisp  Re: ", "", $userinput);      // removes not necessary chars from the input of private messages helps the bot to make sense?
