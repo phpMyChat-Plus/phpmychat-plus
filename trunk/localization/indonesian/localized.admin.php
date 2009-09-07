@@ -1,6 +1,6 @@
 <?php
 // File : indonesian/localized.admin.php - plus version (01.08.2009 - rev.15)
-// Translation by Hendriyo Kustrianjaya<hendriyo@gmail.com>
+// Translation by Hendriyo Kustrianjaya <hendriyo@gmail.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
 // extra header for charset
@@ -24,8 +24,8 @@ define("A_MENU_8", "Koneksi");
 define("A_MENU_9", "Arsip");
 define("A_MENU_1a", "Biodata");
 define("A_MENU_2a", "Statistik");
-define("A_LOGOUT", "Keluar");
 define("A_MOD_DEV", "Sedang dalam pengembangan Mod");
+define("A_LOGOUT", "Keluar");
 
 // Frame for registered users
 define("A_SHEET1_1", "Daftar para pengguna resmi dan juga ijinnya");
