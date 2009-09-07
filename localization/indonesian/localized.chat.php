@@ -1,127 +1,128 @@
 <?php
 // File : indonesian/localized.chat.php - plus version (01.08.2009 - rev.43)
-// Original translation by Hendriyo Kustrianjaya <hendriyo@gmail.com>
+// Translation by Hendriyo <hendriyo@gmail.com>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
 // extra header for Charset
 $Charset = "utf-8";
+# $Align = "right"; // Only for right-to-left languages (Arabic, Hebrew, aso)
 
 // medium font size in pt.
 $FontSize = 10;
 
 // welcome page
-define("L_TUTORIAL", "Tutorial");
+define("L_TUTORIAL", "Pengajaran");
 
-define("L_WEL_1", "Messages are deleted after %s %s"); // 96 hours (1 hour)
-define("L_WEL_2", "and inactive users after %s %s"); // 10 minutes (1 minute)
+define("L_WEL_1", "Pesan-pesan akan dihapus setelah %s %s");	// X hours/hour
+define("L_WEL_2", "dan pengguna tidak aktif setelah %s %s");	// Y minutes/minute
 
-define("L_CUR_1", "There");
-define("L_CUR_1a", "are currently");
-define("L_CUR_1b", "is currently");
-define("L_CUR_2", "in the chat");
-define("L_CUR_3", "Users currently in the chat rooms");
-define("L_CUR_4", "users in private rooms");
-define("L_CUR_5", "Users currently lurking<br />(monitoring this page):");
+define("L_CUR_1", "Saat ini");
+define("L_CUR_1a", "ada");
+define("L_CUR_1b", "ada");
+define("L_CUR_2", "sedang mengobrol");
+define("L_CUR_3", "Pengguna berada di kamar obrol");
+define("L_CUR_4", "Pengguna yang berada di kamar pribadi");
+define("L_CUR_5", "Para pengguna yang sedang bersembunyi<br />(Memantau halaman ini):");	// means break (next row)
 
-define("L_SET_1", "Please set ...");
-define("L_SET_2", "Username");
-define("L_SET_3", "the number of messages to display");
-define("L_SET_4", "the timeout between each update");
-define("L_SET_5", "Select a chat room ...");
-define("L_SET_6", "Default public rooms");
-define("L_SET_7", "Make your choice ...");
-define("L_SET_8", "Public rooms created by users");
-define("L_SET_9", "Create your own");
-define("L_SET_10", "public");
-define("L_SET_11", "private");
-define("L_SET_12", "room");
-define("L_SET_13", "Then, just");
-define("L_SET_14", "chat");
-define("L_SET_15", "Default private rooms");
-define("L_SET_16", "Private rooms created by users");
-define("L_SET_17", "Choose your avatar");
-define("L_SET_18", "Bookmark this page: press \"Ctrl+D\".");
+define("L_SET_1", "Mohon masukan");
+define("L_SET_2", "Nama pengguna");
+define("L_SET_3", "Jumlah pesan yang ditampilkan");
+define("L_SET_4", "Waktu beristirahat diantara setiap pembaruan");
+define("L_SET_5", "Pilih kamar obrol …");
+define("L_SET_6", "Kamar umum");
+define("L_SET_7", "Tentukan pilihan Anda …");
+define("L_SET_8", "Kamar umum yang dibuat oleh para pengguna");
+define("L_SET_9", "Membuat milik Anda sendiri");
+define("L_SET_10", "umum");
+define("L_SET_11", "pribadi");
+define("L_SET_12", "Kamar");
+define("L_SET_13", "Lalu, mulai untuk");
+define("L_SET_14", "obrol");
+define("L_SET_15", "Kamar pribadi standar");
+define("L_SET_16", "Kamar pribadi yang dibuat oleh para pengguna");
+define("L_SET_17", "Pilih avatar Anda");
+define("L_SET_18", "Bookmark halaman ini: tekan \"Ctrl+D\".");
 
-define("L_SRC", "is freely available on");
+define("L_SRC", "tersedia dengan gratis di");
 
-define("L_SECS", "seconds");
-define("L_MIN", "minute");
-define("L_MINS", "minutes");
-define("L_HOUR", "hour");
-define("L_HOURS", "hours");
+define("L_SECS", "detik");
+define("L_MIN", "menit");
+define("L_MINS", "menit");
+define("L_HOUR", "jam");
+define("L_HOURS", "jam");
 
 // registration stuff:
-define("L_REG_1", "Password");
-define("L_REG_2", "Account management");
-define("L_REG_3", "Register");
-define("L_REG_4", "Edit your profile");
-define("L_REG_5", "Delete user");
-define("L_REG_6", "User registration");
-define("L_REG_7", "only if you are registered");
+define("L_REG_1", "Kata sandi");
+define("L_REG_2", "Pengaturan account");
+define("L_REG_3", "Mendaftar");
+define("L_REG_4", "Mengubah biodata Anda");
+define("L_REG_5", "Menghapus pengguna");
+define("L_REG_6", "Daftar pengguna");
+define("L_REG_7", "hanya untuk para pengguna yang terdaftar");
 define("L_REG_8", "E-mail");
-define("L_REG_9", "You have successfully registered.");
-define("L_REG_10", "Back");
-define("L_REG_11", "Editing");
-define("L_REG_12", "Modifying user’s information");
-define("L_REG_13", "Deleting user");
-define("L_REG_14", "Login");
-define("L_REG_15", "Log In");
-define("L_REG_16", "Change");
-define("L_REG_17", "Your profile was successfully updated.");
-define("L_REG_18", "You have been kicked out of the room by a moderator of this room.");
-define("L_REG_18a", "You have been kicked out of the room by a moderator of this room.<br />Reason: %s");
-define("L_REG_19", "Do you really want to be removed?");
-define("L_REG_20", "Yes");
-define("L_REG_21", "You have been successfully removed.");
-define("L_REG_22", "No");
-define("L_REG_25", "Close");
-define("L_REG_30", "Firstname");
-define("L_REG_31", "Lastname");
-define("L_REG_32", "WEB");
-define("L_REG_33", "show e-mail in public information");
-define("L_REG_34", "Editing user profile");
-define("L_REG_35", "Administration");
-define("L_REG_36", "Location/Country");
-define("L_REG_37", "Fields with a <span class=\"error\">*</span> must be completed.");
-define("L_REG_39", "The room you were in has been removed by the administrator.");
-define("L_REG_43", "Undisclosed");
-define("L_REG_44", "Couple");
-define("L_REG_45", "Gender");
-define("L_REG_46", "Male");
-define("L_REG_47", "Female");
-define("L_REG_48", "Unspecified");
-define("L_REG_49", "Registration required!");
-define("L_REG_50", "Registration suspended!");
+define("L_REG_9", "Anda sudah sukses terdaftar");
+define("L_REG_10", "Kembali");
+define("L_REG_11", "Mengubah");
+define("L_REG_12", "Memodifikasi biodata pengguna");
+define("L_REG_13", "Menghapus pengguna");
+define("L_REG_14", "Daftar masuk");
+define("L_REG_15", "Masuk");
+define("L_REG_16", "Mengganti");
+define("L_REG_17", "Biodata Anda sudah diganti dengan sempurna");
+define("L_REG_18", "Anda disingkirkan oleh moderator di kamar ini.");
+define("L_REG_18a", "Anda disingkirkan oleh moderator di kamar ini.<br />Alasannya: %s");	// %s is the actual reason (e.g. "for spamming")
+define("L_REG_19", "Yakinkah Anda mau dihapus?");
+define("L_REG_20", "Ya");
+define("L_REG_21", "Anda sudah dihapus secara sempurna");
+define("L_REG_22", "Tidak");
+define("L_REG_25", "Tutup");
+define("L_REG_30", "Nama depan");
+define("L_REG_31", "Nama akhir");
+define("L_REG_32", "Website");
+define("L_REG_33", "Perlihatkan alamat email pada umum");
+define("L_REG_34", "Mengubah biodata pengguna");
+define("L_REG_35", "Administrasi");
+define("L_REG_36", "Lokasi/Negara");
+define("L_REG_37", "Yang ada tanda <span class=\"error\">*</span> harus diisi dengan benar");
+define("L_REG_39", "Kamar yang Anda masukin tadi, sudah dihapus pihak administrasi");
+define("L_REG_43", "Rahasia"); // Confidential, Secret, Not telling
+define("L_REG_44", "Pasangan"); // refers to gender as a pair "man and woman" (couple, pair, family)
+define("L_REG_45", "Jenis kelamin");
+define("L_REG_46", "Laki-laki");
+define("L_REG_47", "Perempuan");
+define("L_REG_48", "Tidak spesifik");
+define("L_REG_49", "Pendaftaran diharuskan!");
+define("L_REG_50", "Pendaftaran ditunda!");
 
 // e-mail validation stuff
-define("L_EMAIL_VAL_1", "Your settings to enter the chat");
-define("L_EMAIL_VAL_2", "Welcome to our chat server.");
-define("L_EMAIL_VAL_Err", "Internal error, please contact the administrator: <a href=\"mailto:%s\">%s</a>.");
-define("L_EMAIL_VAL_Done", "Your password has been sent to your e-mail address.<br />You may change your password at the login page under \"".L_REG_4."\".");
-define("L_EMAIL_VAL_PENDING_Done", "Your registered data has been submitted for review.");
-define("L_EMAIL_VAL_PENDING_Done1", "You will receive your password, after your account is approved by the Administrator.");
-define("L_EMAIL_VAL_3", "Your registration is pending for %s"); //chat name
-define("L_EMAIL_VAL_31", "Congratulations! Your registration data have been reviewed and approved!");
-define("L_EMAIL_VAL_32", "This is your registration data for %s at %s:"); //chat name at chaturl
-define("L_EMAIL_VAL_4", "You have just registered this account for %s at %s:"); //chat name at chaturl
-define("L_EMAIL_VAL_41", "You have just changed important account info for %s at %s (account affected: %s)."); //chat name at chaturl (username)
-define("L_EMAIL_VAL_5", "Your - %s - account details for %s"); //username - chatname
-define("L_EMAIL_VAL_51", "Your - %s - account updated details for %s"); //username - chatname
-define("L_EMAIL_VAL_6", "Registered on: %s");
-define("L_EMAIL_VAL_61", "Updated on: %s");
-define("L_EMAIL_VAL_7", "Below is your %s updated account info:"); //username
-define("L_EMAIL_VAL_8", "Save this email for your future reference.\nPlease also make it safe and don’t share this data.\nThank you for joining! Enjoy!");
-define("L_EMAIL_VAL_81", "You may change your password at the login page under \"".L_REG_4."\".");
+define("L_EMAIL_VAL_1", "Settingan Anda untuk mengobrol");
+define("L_EMAIL_VAL_2", "Selamat datang di server obrol kami!");
+define("L_EMAIL_VAL_Err", "Kesalahan pada sistem, mohon hubungi pihak administrasi: <a href=\"mailto:%s\">%s</a>.");
+define("L_EMAIL_VAL_Done", "Kata sandi sudah dikirim ke alamat email Anda.<br />Anda dapat mengganti kata sandi saat berada di halaman untuk masuk \"".L_REG_4."\".");
+define("L_EMAIL_VAL_PENDING_Done", "Data yang Anda daftar sudah dikirim untuk ditinjau");
+define("L_EMAIL_VAL_PENDING_Done1", "Anda akan mendapatkan kata sandi milik Anda, setelah ada persetujuan dari pihak Administrasi");
+define("L_EMAIL_VAL_3", "Pendaftaran Anda sedang dalam penangguhan untuk %s");
+define("L_EMAIL_VAL_31", "Selamat! Pendaftaran Anda sudah ditinjau dan disetujui oleh pihak Administrasi!");
+define("L_EMAIL_VAL_32", "Ini adalah data pendaftaran untuk %s di %s:"); //chat name at chaturl
+define("L_EMAIL_VAL_4", "Anda sudah mendaftarkan Account untuk %s di %s:"); //chat name at chaturl
+define("L_EMAIL_VAL_41", "Anda telah mengganti biodata penting Anda untuk %s di %s (account yang terpengaruh: %s)."); //chat name at chaturl (username)
+define("L_EMAIL_VAL_5", "Anda - %s - spesifik account untuk %s"); //username - chatname
+define("L_EMAIL_VAL_51", "Anda - %s – Pembaharuan spesifik account untuk %s"); //username - chatname
+define("L_EMAIL_VAL_6", "Terdaftar di %s");
+define("L_EMAIL_VAL_61", "Diperbaharui di %s");
+define("L_EMAIL_VAL_7", "Dibawah Anda ini adalah %s pengubahan informasi account:"); //username
+define("L_EMAIL_VAL_8", "Simpan email ini untuk referensi dimasa yang akan datang.\nTolong simpan baik-baik, jangan sembarang berbagi data ini.\nTerima-kasih untuk bergabung! Nikmatilah!");
+define("L_EMAIL_VAL_81", "Anda dapat mengganti kata sandi dihalaman untuk mendaftar masuk \"".L_REG_4."\".");
 
 // admin stuff
-define("L_ADM_1", "%s is no longer a moderator for this room.");
-define("L_ADM_2", "You are no longer a registered user.");
+define("L_ADM_1", "%s tidak ada moderator dikamar ini");	// username/nickname
+define("L_ADM_2", "Saat ini Anda bukan sebagai pengguna yang terdaftar");
 
 // error messages
-define("L_ERR_USR_1", "This username is already in use. Please choose another.");
-define("L_ERR_USR_2", "You must choose a username.");
-define("L_ERR_USR_3", "This username is registered.<br />Please type your password or choose another username.");
+define("L_ERR_USR_1", "Nama pengguna ini sudah terpakai. Mohon diganti dengan yang lain.");
+define("L_ERR_USR_2", "Anda harus memilih nama pengguna Anda.");
+define("L_ERR_USR_3", "Nama pengguna ini sudah terdaftar.<br />Mohon ketikkan kata sandi Anda atau mengganti dengan nama pengguna lainnya.");
 define("L_ERR_USR_4", "You typed an incorrect password.");
 define("L_ERR_USR_5", "You must type your username.");
 define("L_ERR_USR_6", "You must type your password.");
@@ -134,22 +135,22 @@ define("L_ERR_USR_12", "You are the administrator, so you cannot be removed.");
 define("L_ERR_USR_13", "To create your own room you must be registered.");
 define("L_ERR_USR_14", "You must be registered before chatting.");
 define("L_ERR_USR_15", "You must type your full name.");
-define("L_ERR_USR_16", "Only these extra-characters allowed:\\n".$REG_CHARS_ALLOWED."\\nSpaces, commas or backslashes (\\) not allowed.\\nCheck the syntax.");
-define("L_ERR_USR_16a", "Only these extra-characters allowed:<br />".$REG_CHARS_ALLOWED."<br />Spaces, commas or backslashes (\\) not allowed. Check the syntax.");
+define("L_ERR_USR_16", "Hanya karakter ekstra ini yang dibolehkan:\\n".$REG_CHARS_ALLOWED."\\nSpasi, koma, tanda miring terbalik (\\) tidak dibolehkan.\\nCek kalimatnya.");
+define("L_ERR_USR_16a", "Hanya karakter ekstra ini yang dibolehkan:<br />".$REG_CHARS_ALLOWED."<br />Spasi, koma, atau tanda-miring terbalik (\\) tidak diperkankan. Cek kalimatnya.");
 define("L_ERR_USR_17", "This room doesn’t exist, and you are not allowed to create one.");
 define("L_ERR_USR_18", "Banished word found in your username.");
 define("L_ERR_USR_19", "You cannot be in more than one room at the same time.");
 define("L_ERR_USR_20", "You have been banished from this room or from the chat.");
-define("L_ERR_USR_20a", "You have been banished from this room or from the chat.<br />Reason: %s");
-define("L_ERR_USR_21", "You have NOT been active for the last ".C_USR_DEL." ".((C_USR_DEL == "1") ? "".L_MIN."" : "".L_MINS."").",<br />therefore you’ve been booted from the room.");
-define("L_ERR_USR_22", "This command is not available for\\nthe browser you use (IE engine).");
+define("L_ERR_USR_20a", "Anda sudah dikucilkan dari kamar ini atau dari obrolan.<br />Alasannya: %s");
+define("L_ERR_USR_21", "Anda sudah TIDAK aktif selama ".C_USR_DEL." menit,<br />Jadi Anda dianggap telah keluar dari kamar.");
+define("L_ERR_USR_22", "Perintah ini tersedia untuk\\nbrowser yang Anda gunakan (mesin IE).");
 define("L_ERR_USR_23", "To join a private room you must be registered.");
 define("L_ERR_USR_24", "To create your own private room you must be registered.");
-define("L_ERR_USR_25", "Only the administrator can use ".$COLORNAME." color!<br />Don’t try to use ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2.", ".COLOR_CM.", ".COLOR_CM1." or ".COLOR_CM2.".<br />These are reserved to power users!");
-define("L_ERR_USR_26", "Only admins and moderators can use ".$COLORNAME." color!<br />Don’t try to use ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2.", ".COLOR_CM.", ".COLOR_CM1." or ".COLOR_CM2.".<br />These are reserved to power users!");
-define("L_ERR_USR_27", "You cannot talk private to yourself.\\nDo that in your mind please...\\nNow choose a different username.");
-define("L_ERR_USR_28", "Your access to %s has been restricted!<br />Please choose a different room.");
-define("L_ERR_ROM_1", "Room’s name cannot contain commas or backslashes (\\).");
+define("L_ERR_USR_25", "Hanya pihak Administrasi yang bisa ".$COLORNAME." warna!<br />Jangan mencoba untuk memakai  ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2.", ".COLOR_CM.", ".COLOR_CM1." or ".COLOR_CM2.".<br />Hanya power users yang berhak!");
+define("L_ERR_USR_26", "Only admins and moderators can use ".$COLORNAME." color!<br /> Jangan mencoba untuk memakai ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2.", ".COLOR_CM.", ".COLOR_CM1." atau ".COLOR_CM2.".<br /> Hanya power users yang berhak!");
+define("L_ERR_USR_27", "Anda tidak dapat berbicara terhadap Anda sendiri.\\nMohon lakukan hal itu pada pikiran Anda sendiri…\\nSekarang, pilih nama pengguna lainnya.");
+define("L_ERR_USR_28", "Akses Anda untuk %s sudah sangat terbatas!<br />Mohon ganti kamar."); // room name
+define("L_ERR_ROM_1", "Nama Kamar tidak boleh ada tanda koma atau tanda-miring terbalik (\\).");
 define("L_ERR_ROM_2", "Banished word found in the room’s name you want to create.");
 define("L_ERR_ROM_3", "This room already exists as a public one.");
 define("L_ERR_ROM_4", "Invalid room name.");
@@ -174,28 +175,28 @@ define("L_NO_PROFILE", "No profile");
 
 // input frame
 define("L_HLP", "Help");
-define("L_MODERATOR", "%s is now a moderator for this room.");
-define("L_KICKED", "%s has successfully been kicked away.");
-define("L_KICKED_REASON", "%s has successfully been kicked away. (Reason: %s)");
-define("L_KICKED_ALL", "All the users have successfully been kicked away.");
-define("L_KICKED_ALL_REASON", "All the users have successfully been kicked away. (Reason: %s)");
-define("L_BANISHED", "%s has successfully been banished.");
-define("L_BANISHED_REASON", "%s has successfully been banished. (Reason: %s)");
+define("L_MODERATOR", "%s adalah moderator pada kamar saat ini."); 	// username/nickname
+define("L_KICKED", "%s sudah sukses dikeluarkan."); 	// username/nickname
+define("L_KICKED_REASON", "%s sudah sukses dikeluarkan. (Alasannya: %s)"); 	// username/nickname and reason
+define("L_KICKED_ALL", "Semua pengguna sudah dikeluarkan dengan sempurna.");
+define("L_KICKED_ALL_REASON", "Semua pengguna sudah dikeluarkan dengan sempurna. (Alasannya: %s)");
+define("L_BANISHED", "%s sudah diberi hukuman dilarang masuk."); 	// username/nickname
+define("L_BANISHED_REASON", "%s sudah diberi hukuman dilarang masuk. (Alasannya: %s)"); 	// username/nickname and reason
 define("L_ANNOUNCE", "ANNOUNCE");
-define("L_INVITE", "%s requests that you join her/him into the <a href=\"#\" onClick=\"window.parent.runCmd('%s','%s')\">%s</a> room.");
+define("L_INVITE", "%s permohonan Anda untuk memasukan dia ke <a href=\"#\" onClick=\"window.parent.runCmd('%s','%s')\">%s</a> kamar."); 	// username/nickname and room name as invitation link
 define("L_INVITE_REG", "You have to be registered to enter this room.");
-define("L_INVITE_DONE", "Your invitation has been sent to %s.");
+define("L_INVITE_DONE", "Undangan Anda sudah dikirim ke %s."); 	// username/nickname
 define("L_OK", "Send");
 define("L_BUZZ", "Buzzes Gallery");
 define("L_BAD_CMD", "This is not a valid command!");
-define("L_ADMIN", "%s is already the administrator!");
-define("L_IS_MODERATOR", "%s is already a moderator!");
+define("L_ADMIN", "%s sudah menjadi pihak administrasi!"); 	// username/nickname
+define("L_IS_MODERATOR", "%s sudah menjadi pihak moderator!"); 	// username/nickname
 define("L_NO_MODERATOR", "Only a moderator of this room can use this command.");
-define("L_NONEXIST_USER", "%s isn’t in the current room.");
-define("L_NONREG_USER", "%s isn’t registered.");
-define("L_NONREG_USER_IP", "His IP is: %s.");
-define("L_NO_KICKED", "%s is a moderator or the administrator and can’t be kicked away.");
-define("L_NO_BANISHED", "%s is a moderator or the administrator and can’t be banished.");
+define("L_NONEXIST_USER", "%s tidak berada dikamar ini."); 	// username/nickname
+define("L_NONREG_USER", "%s belum terdaftar."); 	// username/nickname
+define("L_NONREG_USER_IP", "IPnya dia adalah: %s."); 	// IP address
+define("L_NO_KICKED", "%s adalah moderator atau administrasi dan tidak dapat dikeluarkan."); 	// username/nickname
+define("L_NO_BANISHED", "%s adalah moderator atau administrasi dan tidak dapat dilarang masuk."); 	// username/nickname
 define("L_SVR_TIME", "Server time: ");
 define("L_NO_SAVE", "No message to save!");
 define("L_NO_ADMIN", "Only the administrator can use this command.");
@@ -204,30 +205,30 @@ define("L_NO_REG_USER", "You must be registered on this chat to use this command
 // help popup
 define("L_HELP_TIT_1", "Smilies");
 define("L_HELP_TIT_2", "Text formating for messages");
-define("L_HELP_FMT_1", "You can put bold, italic or underlined text in messages by encasing the applicable sections of your text with either the &lt;B&gt; &lt;/B&gt;, &lt;I&gt; &lt;/I&gt; or &lt;U&gt; &lt;/U&gt; tags.<br />For example, &lt;B&gt;this text&lt;/B&gt; will produce <B>this text</B>.");
+define("L_HELP_FMT_1", "Anda dapat membuat pesan anda menjadi berkarakter tebal, miring atau bergaris bawah, dengan cara mengaplikasikan sebuah kata anda dengan &lt;B&gt; &lt;/B&gt;, &lt;I&gt; &lt;/I&gt; atau &lt;U&gt; &lt;/U&gt; tags.<br />Untuk contoh, &lt;B&gt;tulisan ini&lt;/B&gt; akan menghasilkan <B>tulisan ini</B>.");
 define("L_HELP_FMT_2", "To create a hyperlink (for e-mail or URL) in your message, simply type the corresponding address without any tag. The hyperlink will be created automatically.");
 define("L_HELP_TIT_3", "Commands");
 define("L_HELP_NOTE", "All the commands must be used in English!");
 define("L_HELP_MSG", "message");
 define("L_HELP_MSGS", "messages");
 define("L_HELP_ROOM", "room");
-define("L_HELP_BUZZ", "~soundname");
-define("L_HELP_BUZZ1", "Buzz...");
+define("L_HELP_BUZZ", "~namasuara"); //one word
+define("L_HELP_BUZZ1", "Dengung..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "the reason");
 define("L_HELP_MR", "Mr.");
 define("L_HELP_MS", "Ms.");
-define("L_HELP_CMD_0", "{} represents a required setting, [] an optional one.");
-define("L_HELP_CMD_1a", "Set the number of messages to show. Minimum and default are 5.");
+define("L_HELP_CMD_0", "{} perlu pengaturan untuk penampilan, [] salah satu pilihan.");
+define("L_HELP_CMD_1a", "Set number of messages to show. Minimum and default are 5.");
 define("L_HELP_CMD_1b", "Reload the messages frame and display the n latest messages, minimum and default are 5.");
-define("L_HELP_CMD_2a", "Modify messages list refresh delay (in seconds).<br />If n is not specified or less than 3, toggles between no refresh and 10s refresh.");
-define("L_HELP_CMD_2b", "Modify messages and users lists refresh delay (in seconds).<br />If n is not specified or less than 3, toggles between no refresh and 10s refresh.");
+define("L_HELP_CMD_2a", "Memodifikasi daftar pesan-pesan dengan jeda waktu penampilan data terbaru (dalam detik).<br />Jika n tidak ditulis atau kurang dari 3, lakukan penampilan data terbaru jika diantara tidak dan 10 detik jeda.");
+define("L_HELP_CMD_2b", "Memodifikasi daftar pesan-pesan dan daftar pengguna dengan jeda waktu penampilan data terbaru (dalam detik).<br /> Jika n tidak ditulis atau kurang dari 3, lakukan penampilan data terbaru jika diantara tidak dan 10 detik jeda.");
 define("L_HELP_CMD_3", "Inverts messages order (not in all browsers).");
 define("L_HELP_CMD_4", "Join another room, creating it if it doesn’t exist and if you’re allowed to.<br />n equals 0 for private and 1 for public, default to 1 if not specified.");
 define("L_HELP_CMD_5", "Leave the chat after displaying an optional message.");
 define("L_HELP_CMD_6", "Avoid displaying messages from a user if nick is specified.<br />Set ignoring off for a user when nick and \"-\" are both specified, for all users when \"-\" is but not nick.<br />With no option, this command pops up a window that shows all ignored nicks.");
 define("L_HELP_CMD_7", "Recall the previous text typed (command or message).");
 define("L_HELP_CMD_8", "Show/Hide time before messages.");
-define("L_HELP_CMD_9", "Kick away user from the chat. This command can only be used by a moderator of that room or an admin.<br />Optionally, [".L_HELP_REASON."] displays the reason of kicking (any desired text).<br />If * option is used, the command will kick out from chat all the users without powers (only guests and registered users). This is useful when the server connection is having problems and all the people should reload their chat. In this second case, [".L_HELP_REASON."] is recommended to let users know why they’ve been kicked.");
+define("L_HELP_CMD_9", "Mengeluarkan orang dalam obrolan. Perintah ini hanya bisa digunakan oleh moderator atau admin kamar itu.<br />Pilihan bebas, [".L_HELP_REASON."] tampilkan alasan dari tindakan pengeluaran (apapun alasannya). <br />Jika * dipilih, maka perintah akan mengeluarkan seseorang yang belum ada statusnya (hanya tamu dan pengguna yang terdaftar). Ini sangat penting ketika koneksi dengan server dalam masalah dan semua orang harus mengulang obrolannya. Dalam kasus kedua, [".L_HELP_REASON."] diharapkan kepada para pengguna untuk dapat mengetahui kenapa mereka dikeluarkan.");
 define("L_HELP_CMD_10", "Sends a private message to the specified user (other users won’t see it).");
 define("L_HELP_CMD_11", "Show information about specified user.");
 define("L_HELP_CMD_12", "Pop-up the window for editing user’s profile.");
@@ -237,12 +238,12 @@ define("L_HELP_CMD_15", "Clear the messages frame and show only the last 5 messa
 define("L_HELP_CMD_16", "Save the last n messages (notifications ones excluded) to an HTML file. If n is not specified, all available messages will be taken into account.");
 define("L_HELP_CMD_17", "Allow the administrator to send an announcement to all users in all chat rooms.");
 define("L_HELP_CMD_18", "Invite a user chatting in an other room join the one you are in.");
-define("L_HELP_CMD_19", "Allow the moderator(s) of a room or the administrator to \"banish\" a user from the room for a time defined by the administrator.<br />The later can banish a user chatting in an other room than the one he is into and use the * setting to banish \"forever\" a user from the chat as the whole.<br />Optionally, [".L_HELP_REASON."] displays the reason of banishment (any desired text).");
+define("L_HELP_CMD_19", "Membolehkan moderator atau administrator untuk \"mengeluarkan\" pengguna dari kamar, dengan waktu yang ditentukan oleh administrasi. <br />Nanti dapat melarang pengguna yang sedang ngobrol dikamar lainnya dan dimana dia akan ngobrol dan menggunakan * pengaturan untuk pelarangan \"selamanya\" pengguna dari semua tempat ngobrol.<br />Piliahannya, [".L_HELP_REASON."] tampilkan alasan pelarangan (alasan apapun).");
 define("L_HELP_CMD_20", "Describe what you’re doing without refer yourself.");
 define("L_HELP_CMD_21", "Announces the room and the users who try to send you messages<br />that you are away from the computer. If you want to be back to chat, just start typing.");
-define("L_HELP_CMD_22", "Sends a buzzer sound and optionally displays a message in the current room.<br />Usage:<br />- old usage: \"/buzz\" or \"/buzz message to be shown\" - this plays the default sound for buzz defined in Admin panel;<br />- extended usage: \"/buzz ~soundname\" or \"/buzz ~soundname message to be shown\" - this plays the soundname.wav file from the plus/sounds folder; please note the sign \"~\" to be used at the beginning of the second word, which is the name of the sound file, without the extension .wav (only .wav extensions allowed).<br />By default, this is a moderator/admin command.");
-define("L_HELP_CMD_23", "Sends a <i>whisper</i> (private message). The message will reach the destination, no matter which room the user is in. If the user is not on-line or has set away, you will be notified about it.");
-define("L_HELP_CMD_24", "Usage: the topic has to contain at least 2 words.<br />This command changes the topic of the current room. Try not to override other users’ topics. Use important topics.<br />By default, this is a moderator/admin command.<br />Using \"/topic top reset\" command the current topic will be deleted and reset to default one of the room.<br />Optionally, \"/topic * {}\" and \"/topic * top reset\" do exactly the same but in all the rooms (global topic and global topic reset).");
+define("L_HELP_CMD_22", "Kirim suara dengung dan tampilkan pilihannya di kamar ini.<br />- Pemakaian:<br />- pemakaian lalu: \"/buzz\" atau \"/buzz pesan yang ditampilkan\" - ini akan memainkan suara dengung standar yang ada di panel Admin;<br />- perpanjang pemakaian: \"/buzz ~namasuara\" or \"/buzz ~namasuara pesan yang ditampilkan\" - ini memainkan namasuara.wav file dari plus/sounds arsip; mohon beri tanda \"~\" dipergunakan diawal kata file suara, tanpa menggunakan akhiran .wav (hanya .wav yang boleh).<br />Ini adalah standarnya perintah moderator/admin.");
+define("L_HELP_CMD_23", "kirim <i>bisikan</i> (pesan pribadi). Pesan ini akan sampai ditujuan, walaupun beda kamar. Jika pengguna tidak online atau dia sedang keluar, Anda akan diberitahu.");
+define("L_HELP_CMD_24", "Penggunaan: topik harus menggunakan lebih dari 2 kata.<br />Perintah ini untuk penggantian topik di kamar bersangkutan. Coba untuk tidak menulis ulang topik pengguna lainnya’ topik. Gunakan topik yang penting.<br /> Ini adalah standarnya perintah moderator/admin.<br />Menggunakan \"/topic top reset\" perintah untuk menghapus topik atau mengeset ulang kestandar.<br />Pilihannya, \"/topic * {}\" dan \"/topic * top reset\" lakuakan dengan persis sama tapi disemua ruangan (topik umum dan menghapus topik umum).");
 define("L_HELP_CMD_25", "A dice game for random/hazardous numbers.<br />Usage: /dice or /dice [n];<br />n can take any value <b>between 1 and %s</b> (it represents the number of dice). If no number is entered, the default maximum dice will be used.");
 define("L_HELP_CMD_26", "This is a more complex version of the /dice command.<br />Usage: /{n1}d[n2] or /{n1}d;<br />n1 can take any value <b>between 1 and %s</b> (it represents the number of dice per throws).<br />n2 can take any value <b>between 1 and %s</b> (it represents the number of sides per die).");
 define("L_HELP_CMD_27", "It highlights the messages of a specific user for an easier reading across the conversations.<br />Usage: /high {user} or press the small <img src=./images/highlightOff.gif> square on the right of the username (in the rooms/users list)");
@@ -250,14 +251,14 @@ define("L_HELP_CMD_28", "It allows posting of <i>one single image</i> as message
 define("L_HELP_CMD_29", "The second command will allow the administrator or moderator(s) of the current room to demote another registered user previously promoted to moderator for the same room.<br />The * option will demote the user from all the rooms.");
 define("L_HELP_CMD_30", "The second command does the same as /me but it will show your respective title, according to your profile gender<br />E.g. * ".L_HELP_MR." Ciprian is watching TV or * ".L_HELP_MS." Dana is happy.");
 define("L_HELP_CMD_31", "Change the order users are sorted in lists: by entrance time or alphabetically.");
-define("L_HELP_CMD_32", "This is a third (role-playing) version of the dice rolling.<br />Usage: /d{n1}[tn2] or /d{n1};<br />n1 can take any value <b>between 1 and 100</b> (it represents the number of sides per die);<br />n2 can take any value <b>between 1 and %s</b> (it represents the number of rolling dice per throw).");
+define("L_HELP_CMD_32", "This is a third (role-playing) version of the dice rolling.<br />Usage: /d{n1}[tn2] or /d{n1};<br />n1 can take any value <b>between 1 and 100</b> (it represents the number of sides per die).<br />n2 can take any value <b>between 1 and %s</b> (it represents the number of rolling dice per throw).");
 define("L_HELP_CMD_33", "Change the font size of the messages in chat to user choice (allowed values for n: <b>between 7 and 15</b>); the /size command resets the font size to the default value (<b>".$FontSize."</b>).");
 define("L_HELP_CMD_34", "This will allow an user to specify the orientation of a text message (ltr = left-to-right, rtl = right-to-left).");
-define("L_HELP_CMD_VAR", "Synonyms (variants): %s"); // a list of English and/or translated alternatives for each command
+define("L_HELP_CMD_VAR", "Sinonim (beragam): %s"); // a list of English and/or translated alternatives for each command
 define("L_HELP_ETIQ_1", "Chat Etiquette");
 define("L_HELP_ETIQ_2", "Our site would like to keep its community friendly and fun, so please adhere to the following guidelines. If you fail to observe these rules, one of our chat moderators may boot you from the chat.<br /><br />Thank you,");
 define("L_HELP_ETIQ_3", "Our Chat Etiquette Guidelines");
-define("L_HELP_ETIQ_4", "<li>Do not \"spam\" the chat by typing nonsense or random letters.</li>
+define("L_HELP_ETIQ_4", "Do not \"spam\" the chat by typing nonsense or random letters.</li>
 <li>Do not use aLtErnAtiNg characters.</li>
 <li>Keep ALL CAPS use to a minimum, as it is considered yelling.</li>
 <li>Keep in mind that our chat users are from all over the world, and, most likely, you will encounter people of different beliefs. Please be kind and polite to these people.</li>
@@ -296,11 +297,11 @@ define("L_WHOIS_OTHERS", "Other users");
 define("L_WHOIS_USER", "User");
 define("L_WHOIS_GUEST", "Guest");
 define("L_WHOIS_REG", "Registered");
-define("L_WHOIS_BOT", "Bot");
+define("L_WHOIS_BOT", "Bot"); //Robot
 
 // Notification messages of user entrance/exit
-define("ENTER_ROM", "%s enters this room.");
-define("L_EXIT_ROM", "%s exits from this room.");
+define("ENTER_ROM", "%s masuk ke kamar ini.");
+define("L_EXIT_ROM", "%s keluar dari kamar ini.");
 if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
@@ -314,7 +315,7 @@ define("L_AWAY", "%s is marked away...");
 define("L_BACK", "%s is back!");
 
 // Quick Menu mod
-define("L_QUICK", "Quick Menu");
+define("L_QUICK", "Menu singkat");
 
 // Topic Banner mod
 define("L_TOPIC", "has set the TOPIC to:");
@@ -322,13 +323,13 @@ define("L_TOPIC_RESET", "has reset the TOPIC");
 define("L_HELP_TOP", "at least two words as topic");
 define("L_BANNER_WELCOME", "Welcome to %s!");
 define("L_BANNER_TOPIC", "Topic:");
-define("L_DEFAULT_TOPIC_1", "This is a default topic. Edit localization/_owner/owner.php to change it!");
+define("L_DEFAULT_TOPIC_1", "Ini ada topik standarnya. Ubah localization/_owner/owner.php untuk mengubahnya!");
 
 // Img cmd mod
 define("L_PIC", "Picture posted by");
 define("L_PIC_RESIZED", "Resized to");
 define("L_HELP_IMG", "full path to the image to be posted");
-define("L_NO_IMAGE", "This is not a valid URL of a public remote image.\nTry again!");
+define("L_NO_IMAGE", "Ini bukan URL yang tepat dari public remote image.\nCoba lagi!");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s is no longer a moderator for any room of this chat.");
@@ -347,6 +348,7 @@ define("L_PRO_3", "Favorite link 2");
 define("L_PRO_4", "Description");
 define("L_PRO_5", "Picture URL");
 define("L_PRO_6", "Name/Text color");
+define("L_PRO_7", "E-mail");
 
 // Avatar mod
 define("L_AVATAR", "Avatar");
@@ -359,7 +361,7 @@ define("L_URL_AV", "URL: ");
 define("L_EXPL_AV", "(Enter URL, then hit ENTER to view)");
 define("L_CANCEL", "Cancel");
 define("L_AVA_REG", "You must be registered\\nto change your avatar icon");
-define("L_SEL_NEW_AV_CONFIRM", "This form was not submitted.\\nGoing now to avatars will make you loose\\nall the changes you made so far!\\n\\nAre you sure?");
+define("L_SEL_NEW_AV_CONFIRM", "Bentuk ini belum dikirim.\\nSekarang menuju ke avatar akan membuat kalian tersesat\\nperubahan yang sudah Anda lakukan!\\n\\nApakah Anda yakin?");
 
 // PlusBot bot mod (based on Alice bot)
 define("BOT_TIPS", "TIPS: Our bot is publicly active in this room. To start talking to the bot, type <b>hello ".C_BOT_NAME."</b>. To end conversation, type: <b>bye ".C_BOT_NAME."</b>. (private: /to <b>".C_BOT_NAME."</b> Message)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
@@ -400,18 +402,18 @@ define("PM_DISABLED_ERROR", "Whispering (private messaging)\\nhas been disabled 
 define("L_NEXT_PAGE", "Go to the next page");
 define("L_NEXT_READ", "Read the next %s"); // message / 10 messages
 define("L_ROOM_ALL", "All rooms");
-define("L_PRIV_NO_MSGS", "No private messages received");
-define("L_PRIV_READ_MSG", "1 private message received"); //singular
-define("L_PRIV_READ_MSGS", "%s private messages received"); //plural
-define("L_PRIV_MSGS_NEW", "New");
-define("L_PRIV_MSGS_READ", "Read");
+define("L_PRIV_NO_MSGS", "Tidak ada pesan pribadi");
+define("L_PRIV_READ_MSG", "1 pesan pribadi diterima"); //singular
+define("L_PRIV_READ_MSGS", "%s pesan pribadi diterima"); //plural
+define("L_PRIV_MSGS_NEW", "Baru"); //singular form
+define("L_PRIV_MSGS_READ", "Baca"); //singular form
 define("L_PRIV_MSG6", "Status:");
-define("L_PRIV_RELOAD", "Reload page");
-define("L_PRIV_MARK_ALL", "Mark all as Read");
-define("L_PRIV_MARK_SEL", "Mark selected as Read");
-define("L_PRIV_REMOVE", "Remove checked PMs");
-define("L_PRIV_PM", "(private)");
-define("L_PRIV_WISP", "(whisper)");
+define("L_PRIV_RELOAD", "Halaman ditampilkan ulang");
+define("L_PRIV_MARK_ALL", "Tandai semua pesan sudah dibaca");
+define("L_PRIV_MARK_SEL", "Yang dipilih diberi tanda sudah dibaca");
+define("L_PRIV_REMOVE", "Hapus semua yang pesan yang dipilih"); // or selected
+define("L_PRIV_PM", "(pribadi)");
+define("L_PRIV_WISP", "(bisikan)");
 
 // Color Input Box mod by Ciprian
 define("L_ENABLED", "Enabled");
@@ -431,9 +433,9 @@ define("L_COL_HELP_P3a", "The default color is <u><SPAN style=\"color:".COLOR_CD
 define("L_COL_HELP_USER_STATUS", "Your status");
 define("L_COL_TUT", "Using colored text in chat");
 define("L_NULL", "Null");
-define("L_NULL_F", ""); // feminine word, if it's the case
-define("L_ROOM_COLOR", "room’s color");
-define("L_PRO_COLOR", "profile’s color");
+define("L_NULL_F", "Null"); // feminine word, if it's the case
+define("L_ROOM_COLOR", "warna kamar");
+define("L_PRO_COLOR", "warna biodata");
 
 // Alert messages on errors for Color Input Box mod by Ciprian
 define("COL_ERROR_BOX_MODA", "Only the administrator can use ".COLOR_CA." color!\\n\\nYour text color resets to ".COLOR_CM."!\\n\\nPlease choose any other color.");
@@ -441,8 +443,8 @@ define("COL_ERROR_BOX_USRA", "Only the administrator can use ".COLOR_CA." color!
 define("COL_ERROR_BOX_USRM", "You must be a moderator to use ".COLOR_CM." color!\\n\\nDon’t try to use ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1.".\\n\\nThese are reserved to power users!\\n\\nYour text color resets to ".COLOR_CD."!\\n\\nPlease choose any other color.");
 
 //Welcome message to be displayed on login
-define("L_WELCOME_MSG", "Welcome to our chat. Please obey the net etiquette while chatting: <I>try to be pleasant and polite</I>.");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
+define("L_WELCOME_MSG", "Selamat datang di tempat obrol kami. Mohon untuk menjaga tata-krama ketika ngobrol: <I>coba untuk tetap sopan dan santun</I>.");
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG . L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
@@ -452,7 +454,7 @@ define("L_RELOAD_CHAT", "The settings of this server have just been changed. To 
 //Size command error by Ciprian
 define("L_ERR_SIZE", "The font size value can only be\\nnull (for reset) or between 7 and 15");
 
-// Week days for Status Worldtime and Open Schedule by Ciprian
+// Week days for Status World time and Open Schedule by Ciprian
 define("L_MON", "Monday");
 define("L_TUE", "Tuesday");
 define("L_WED", "Wednesday");
@@ -514,17 +516,17 @@ define("L_LINKS_13", "to send this buzz"); // can also be translated as "to play
 define("L_LINKS_14", "to use this command");
 define("L_LINKS_15", "to open");
 define("L_LINKS_16", "Smiley Gallery");
-define("L_LINKS_17", "to sort ascending");
-define("L_LINKS_18", "to sort descending");
-define("L_LINKS_19", "to set/modify your Gravatar");
+define("L_LINKS_17", "urut dari atas ke bawah");
+define("L_LINKS_18", "urut dari bawah ke atas");
+define("L_LINKS_19", "untuk memodifikasi Gravatar"); // do not translate the word "Gravatar"!
 define("L_SWITCH", "Switch to"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
-define("L_SELECTED", "selected"); // E.g. "French - selected" (Country Flags mouseover / Language switching)
-define("L_SELECTED_F", ""); // feminine word, if it's the case
+define("L_SELECTED", "selected"); // E.g. "French (selected)" (Country Flags mouseover / Language switching)
+define("L_SELECTED_F", "selected"); // feminine word, if it's the case
 define("L_NOT_SELECTED", "not selected");
-define("L_NOT_SELECTED_F", ""); // feminine word, if it's the case
+define("L_NOT_SELECTED_F", "not selected"); // feminine word, if it's the case
 define("L_EMAIL_1", "to send email");
 define("L_FULLSIZE_PIC", "to open the full size picture");
-define("L_PRIVACY", "to read our Privacy Policy");
+define("L_PRIVACY", "untuk membaca Kebijakan Pribadi kita"); //Click here to…
 define("L_AUTHOR", "the author"); //Phrase will look like this: L_CLICK." ".L_LINKS_6." ".L_AUTHOR == Click here - to contact - the author
 define("L_DEVELOPER", "the developer of this chat"); //same here
 define("L_OWNER", "the owner of this chat"); //same here
@@ -550,16 +552,16 @@ define("L_LURKING_3", "is lurking");
 define("L_LURKING_4", "joined on");
 define("L_LURKING_5", "Unknown");
 
-// Extra options by Ciprian
+// Extra options by Ciprian // keep all these lines as short as possible. they have to fit into the Users frame width!
 define("L_EXTRA_OPT", "Extra Options");
 define("L_ARCHIVE", "Open Archive");
 define("L_SOUNDFIX_IE_1", "Sound fix for IE");
 define("L_SOUNDFIX_IE_2", "Download a sound fix for IE");
 define("L_LURKING_1", "Open the lurking page");
 define("L_REG_BRB", "brb (need to register first)");
-define("L_DEL_BYE", "don’t wait for me...");
-define("L_EXTRA_PRIV1", "Read PMs");
-define("L_EXTRA_PRIV2", "New PMs");
+define("L_DEL_BYE", "don’t wait for me");
+define("L_EXTRA_PRIV1", "Read PMs"); // means: "Read your PMs" - link to open the pm manager if there are any old/read pms.
+define("L_EXTRA_PRIV2", "New PMs"); // link to open the pm manager if there are new pms
 
 // Months for Open Schedule by Ciprian
 define("L_JAN", "January");
@@ -576,6 +578,7 @@ define("L_NOV", "November");
 define("L_DEC", "December");
 
 // Localized date format
+# Nothing to translate here – skip this paragraph, Ciprian will adjust it for you! This is just a sample.
 if (eregi("win", PHP_OS)) {
 setlocale(LC_ALL, "IND_IND.UTF-8", "IND_IND", "indonesian.UTF-8", "indonesian"); // For Windows servers
 } else {
@@ -591,17 +594,17 @@ define("L_LONG_DATETIME", "%A, %d %B %Y %H:%M:%S"); //Change this to your local 
 
 // Chat Activity displayed on remote web pages
 define("LOGIN_LINK", "<A HREF='".C_CHAT_URL."?L=".$L."' TITLE='".sprintf(L_CLICK,L_LINKS_12)."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_12).".'; return true;\" TARGET=_blank>");
-define("NB_USERS_IN","users are ".LOGIN_LINK."chatting</A> at this time.");
-define("USERS_LOGIN","1 user is ".LOGIN_LINK."chatting</A> at this time.");
-define("NO_USER","Nobody is ".LOGIN_LINK."chatting</A> at this time.");
-define("L_PRIV_REPLY_LOGIN", "Login to chat if you wish to ".LOGIN_LINK."post a reply</A> to any of the unread PMs listed above");
+define("NB_USERS_IN", "penggunanya sedang ".LOGIN_LINK."mengobrol</A> saat ini.");
+define("USERS_LOGIN", "1 pengguna sedang ".LOGIN_LINK."mengobrol</A> saat ini.");
+define("NO_USER", "Tidak ada yang sedang ".LOGIN_LINK."mengobrol</A> saat ini.");
+define("L_PRIV_REPLY_LOGIN", "Masuk ke tempat ngobrol jika Anda ingin ".LOGIN_LINK."membalas pesan</A> ke semua pesan-pesan terbaru yang terdaftar diatas");
 
 // Language names
 define("L_LANG_AR", "Argentinean Spanish");
-define("L_LANG_BG", "Bulgarian - Cyrillic");
+define("L_LANG_BG", "Bulgarian");
 define("L_LANG_BR", "Brazilian Portuguese");
 define("L_LANG_CZ", "Czech");
-define("L_LANG_DA", "Danish");
+define("L_LANG_DA", "Danish"); // Danemark
 define("L_LANG_DE", "German");
 define("L_LANG_EN", "English"); // for admin panel only
 define("L_LANG_ENUK", "English UK"); // for UK formats and flags
@@ -609,64 +612,64 @@ define("L_LANG_ENUS", "English US"); // for US formats and flags
 define("L_LANG_ES", "Spanish");
 define("L_LANG_FR", "French");
 define("L_LANG_GR", "Greek");
-define("L_LANG_HE", "Hebrew");
-define("L_LANG_HI", "Hindi");
+define("L_LANG_HE", "Hebrew"); // Israel
+define("L_LANG_HI", "Hindi"); // India
 define("L_LANG_HU", "Hungarian");
 define("L_LANG_ID", "Indonesian");
 define("L_LANG_IT", "Italian");
 define("L_LANG_KA", "Georgian");
-define("L_LANG_NL", "Dutch");
-define("L_LANG_RO", "Romanian");
+define("L_LANG_NL", "Dutch"); // Nederlands
+define("L_LANG_RO", "Romanian"); // Romania
 define("L_LANG_SK", "Slovak");
 define("L_LANG_SRC", "Serbian - Cyrillic");
 define("L_LANG_SRL", "Serbian - Latin");
-define("L_LANG_SV", "Swedish");
+define("L_LANG_SV", "Swedish"); // Sweeden
 define("L_LANG_TR", "Turkish");
-define("L_LANG_UR", "Urdu");
+define("L_LANG_UR", "Urdu"); // Pakistan
 define("L_LANG_VI", "Vietnamese");
 
-// Skins preview page
-define("L_SKINS_TITLE", "Skins Preview");
-define("L_SKINS_TITLE1", "Skins %s to %s preview"); // Skins 1 to 4 preview
-define("L_SKINS_AV", "Available skins");
-define("L_SKINS_NONAV", "There are no styles defined in the \"skins\" folder");
-define("L_SKINS_COPY", "&copy; %s Skin by %s");
+//Skins preview page
+define("L_SKINS_TITLE", "Melihat penampilan");
+define("L_SKINS_TITLE1", "Penampilan %s untuk %s dicoba"); // Skins 1 to 4 preview
+define("L_SKINS_AV", "Penampilan yang tersedia");
+define("L_SKINS_NONAV", "Tidak ada gaya yang ada di \"skins\" arsip");
+define("L_SKINS_COPY", "&copy; %s Penampilan oleh %s"); //year - author
 
 // Swap image titles by Ciprian
-define("L_GEN_ICON", "Gender icon");
+define("L_GEN_ICON", "Ikon jenis kelamin");
 
 // Ghost mode by Ciprian
-define("L_GHOST", "Ghost");
-define("L_SUPER_GHOST", "Super Ghost");
-define("L_NO_GHOST", "Visible");
+define("L_GHOST", "Hantu");
+define("L_SUPER_GHOST", "Super Hantu");
+define("L_NO_GHOST", "Nampak");
 
 // Sorting options by Ciprian
-define("L_ASC", "Ascending");
-define("L_DESC", "Descending");
+define("L_ASC", "Mengurut dari atas");
+define("L_DESC", "Mengurut dari bawah");
 
 // Returning visitors counter on profiles by Ciprian
-define("L_LOGIN_COUNT", "Total visits");
+define("L_LOGIN_COUNT", "Jumlah pengunjung");
 
 // Gravatar from email mod by Ciprian
-define("L_GRAV_USE", "use the Gravatar");
+define("L_GRAV_USE", "menggunakan Gravatar"); // do not translate the word "Gravatar"!
 
 // Uploader mod by Ciprian
-define("L_UPLOAD", "Upload %s");
-define("L_UPLOAD_IMG", "Image file");
-define("L_UPLOAD_SND", "Sound file");
-define("L_UPLOAD_FLS", "Files");
-define("L_UPLOAD_SUCCESS", "%s successfully uploaded as %s.");
-define("L_FILES_TITLE", "Uploads Management");
+define("L_UPLOAD", "Mengupload %s");
+define("L_UPLOAD_IMG", "file gambar");
+define("L_UPLOAD_SND", "file suara");
+define("L_UPLOAD_FLS", "File-file");
+define("L_UPLOAD_SUCCESS", "%s sudah sukses diupload %s.");
+define("L_FILES_TITLE", "Pengaturan pengupload");
 
 // Room restriction mod by Ciprian
-define("L_RESTRICTED", "Restricted");
-define("L_RESTRICTED_ROM", "%s has successfully been restricted from this room.");
+define("L_RESTRICTED", "Pembatasan");
+define("L_RESTRICTED_ROM", "%s sudah sukses dibatasi dari kamar ini.");
 
 // OpenID login mod by Ciprian
-define("L_OPID_SIGN", "Sign In with an OpenID");
-define("L_OPID_REG", "Import your OpenID profile");
+define("L_OPID_SIGN", "Masuk dengan OpenID");
+define("L_OPID_REG", "Impor ID biodata OpenID anda");
 
 // Support buttons
-define("L_SUPP_WARN", "You have chosen to contribute to the free development of\\n".APP_NAME." by making a donation to the developer.\\nThank you for your support!\\n\\nNote: the recipient is not the owner of this chat.\\nPlease enter the amount on the next page.\\n\\nContinue?");
-define("L_SUPP_ALT", "Support with PayPal the development of ".APP_NAME." - it's Fast, Free and Secure!");
+define("L_SUPP_WARN", "Anda terpilih untuk menjadi pengembang sukarela dari\\n".APP_NAME." dengan menyumbangkan sejumlah donasi bagi pengembang.\\nTerima kasih atas dukungan Anda!\\n\\nCatatan: penerima bukan sebagai pemilik tempat obrol ini.\\nMohon masukan jumlah donasi di halaman berikutnya.\\n\\nLanjutkan?");
+define("L_SUPP_ALT", "Pakai PayPal untuk pengembangan ".APP_NAME." - Ini Cepat, Gratis, dan Aman!");
 ?>
