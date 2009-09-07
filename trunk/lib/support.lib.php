@@ -20,7 +20,7 @@ switch (L_LANG)
 		break;
 	case "id_ID":
 		$ppbutton = ($pptype == "big") ? "7988359" : "7988406";
-		$ppalt = "Paypal – Lebih aman dan mudah untuk pembayaran online.";
+		$ppalt = "Paypal - Lebih aman dan mudah untuk pembayaran online.";
 		break;
 	case "ro_RO":
 		$ppbutton = ($pptype == "big") ? "3626613" : "3626645";
@@ -106,48 +106,48 @@ switch ($pptype)
 
 if($ppexists == 1)
 {
-	function remote_file_exists ($url) 
-	{ 
+	function remote_file_exists ($url)
+	{
 	/*
 		Return error codes:
 		1 = Invalid URL host
 		2 = Unable to connect to remote host
-	*/	
-		$head = ""; 
-		$url_p = parse_url ($url); 
-		
-		if (isset ($url_p["host"])) 
-		{ $host = $url_p["host"]; } 
-		else 
-		{ return 1; } 
-		
-		if (isset ($url_p["path"])) 
-		{ $path = $url_p["path"]; } 
-		else 
-		{ $path = ""; } 
-		
-		$fp = fsockopen ($host, 80, $errno, $errstr, 20); 
-		if (!$fp) 
-		{ return 2; } 
-		else 
-		{ 
-			$parse = parse_url($url); 
-			$host = $parse['host']; 
-			
-			fputs($fp, "HEAD ".$url." HTTP/1.1\r\n"); 
-			fputs($fp, "HOST: ".$host."\r\n"); 
-			fputs($fp, "Connection: close\r\n\r\n"); 
-			$headers = ""; 
-			while (!feof ($fp)) 
-			{ $headers .= fgets ($fp, 128); } 
-		} 
-		fclose ($fp); 
-		$arr_headers = explode("\n", $headers); 
-		$return = false; 
-		if (isset ($arr_headers[0])) 
-		{ $return = strpos ($arr_headers[0], "404") === false; } 
-		return $return; 
-	} 
+	*/
+		$head = "";
+		$url_p = parse_url ($url);
+
+		if (isset ($url_p["host"]))
+		{ $host = $url_p["host"]; }
+		else
+		{ return 1; }
+
+		if (isset ($url_p["path"]))
+		{ $path = $url_p["path"]; }
+		else
+		{ $path = ""; }
+
+		$fp = fsockopen ($host, 80, $errno, $errstr, 20);
+		if (!$fp)
+		{ return 2; }
+		else
+		{
+			$parse = parse_url($url);
+			$host = $parse['host'];
+
+			fputs($fp, "HEAD ".$url." HTTP/1.1\r\n");
+			fputs($fp, "HOST: ".$host."\r\n");
+			fputs($fp, "Connection: close\r\n\r\n");
+			$headers = "";
+			while (!feof ($fp))
+			{ $headers .= fgets ($fp, 128); }
+		}
+		fclose ($fp);
+		$arr_headers = explode("\n", $headers);
+		$return = false;
+		if (isset ($arr_headers[0]))
+		{ $return = strpos ($arr_headers[0], "404") === false; }
+		return $return;
+	}
 
 	if (remote_file_exists($ppimage) === true || is_file($ppimage) || file_exists($ppimage)) {}
 	else $ppexists = 0;

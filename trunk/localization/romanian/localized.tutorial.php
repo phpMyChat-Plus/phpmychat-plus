@@ -458,6 +458,10 @@ if (C_HTML_TAGS_KEEP != "none")
 	<P>
 	<I>De exemplu</I>, &LT;B&GT;acest text&LT;/B&GT; va produce <B>acest text</B>.
 	<P>
+	<B>Comanda /ltr sau /rtl</B>: <?php echo(L_HELP_CMD_34.((L_CMD_LTR != "" && L_CMD_LTR != "L_CMD_LTR") || (L_CMD_RTL != "" && L_CMD_RTL != "L_CMD_RTL") ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>".(L_CMD_LTR != "" && L_CMD_LTR != "L_CMD_LTR" ? "/".str_replace(","," /",L_CMD_LTR)." " : "").(L_CMD_RTL != "" && L_CMD_RTL != "L_CMD_RTL" ? "/".str_replace(","," /",L_CMD_RTL) : "")."</span>") : "")); ?>
+	<P>
+	<I>De exemplu</I>, /ltr acest text va produce "<BDO dir="ltr">acest text</BDO>", iar /rtl acest text va produce "<BDO dir="rtl">acest text</BDO>".
+	<P>
 	Pentru a crea o hyper-legătură (link) pentru o adresă de email sau adresă WEB, pur şi simplu tastează adresa (fără nici un tag HTML). Hyper-legătura va fi creată în mod automat.
 	<br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 	<P>

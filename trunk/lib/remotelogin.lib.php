@@ -44,6 +44,17 @@
 // Get the names and values for vars sent to index.lib.php
 if (isset($_GET))
 {
+	// Prevent any possible XSS attacks via $_GET.
+	foreach ($_GET as $check_url) {
+		if ((eregi("<[^>]*script*\"?[^>]*>", $check_url)) || (eregi("<[^>]*object*\"?[^>]*>", $check_url)) ||
+			(eregi("<[^>]*iframe*\"?[^>]*>", $check_url)) || (eregi("<[^>]*applet*\"?[^>]*>", $check_url)) ||
+			(eregi("<[^>]*meta*\"?[^>]*>", $check_url)) || (eregi("<[^>]*style*\"?[^>]*>", $check_url)) ||
+			(eregi("<[^>]*form*\"?[^>]*>", $check_url)) || (eregi("\([^>]*\"?[^)]*\)", $check_url)) ||
+			(eregi("\"", $check_url))) {
+		die ();
+		}
+	}
+	unset($check_url);
 	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
@@ -53,6 +64,17 @@ if (isset($_GET))
 // Get the names and values for vars posted from the form below
 if (isset($_POST))
 {
+	// Prevent any possible XSS attacks via $_POST.
+	foreach ($_POST as $check_url) {
+		if ((eregi("<[^>]*script*\"?[^>]*>", $check_url)) || (eregi("<[^>]*object*\"?[^>]*>", $check_url)) ||
+			(eregi("<[^>]*iframe*\"?[^>]*>", $check_url)) || (eregi("<[^>]*applet*\"?[^>]*>", $check_url)) ||
+			(eregi("<[^>]*meta*\"?[^>]*>", $check_url)) || (eregi("<[^>]*style*\"?[^>]*>", $check_url)) ||
+			(eregi("<[^>]*form*\"?[^>]*>", $check_url)) || (eregi("\([^>]*\"?[^)]*\)", $check_url)) ||
+			(eregi("\"", $check_url))) {
+		die ();
+		}
+	}
+	unset($check_url);
 	while(list($name,$value) = each($_POST))
 	{
 		$$name = $value;
@@ -121,6 +143,15 @@ if (!function_exists('mb_convert_case'))
 		elseif (eregi("LOWER",$type)) $str = strtolower($str);
 		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
 		return $str;
+	};
+};
+
+if (!function_exists('utf_conv'))
+{
+	function utf_conv($iso,$Charset,$what)
+	{
+		if (function_exists('iconv')) $what = iconv($iso, $Charset, $what);
+		return $what;
 	};
 };
 
@@ -348,7 +379,6 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 			$reguser = ($DbLink->num_rows() != 0);
 			if ($reguser) list($user_password,$perms,$rooms,$allowpopupu,$last_login,$login_counter,$join_room) = $DbLink->next_record();
 			else $join_room = "";
-
 			$DbLink->clean_results();
 
 			if (!(isset($E) && $E != ""))
@@ -443,7 +473,7 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 		else
 		{
 			// ...among reserved name for private/public (default) rooms
-			$ToCheck = ($T == "1" ? $DefaultPrivateRooms : $DefaultChatRooms);
+			$ToCheck = ($T ? $DefaultPrivateRooms : $DefaultChatRooms);
 			for ($i = 0; $i < count($ToCheck); $i++)
 			{
 				if (strcasecmp(mb_convert_case($R3,MB_CASE_LOWER,$Charset), mb_convert_case($ToCheck[$i],MB_CASE_LOWER,$Charset)) == "0")
@@ -474,7 +504,7 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 		// status will be 'user'. Skipped when the script is called by a join command.
 		if (!isset($Reload))
 		{
-			$ToCheck = ($T == "1" ? $DefaultChatRooms : $DefaultPrivateRooms);
+			$ToCheck = ($T ? $DefaultChatRooms : $DefaultPrivateRooms);
 			for ($i = 0; $i < count($ToCheck); $i++)
 			{
 				if (strcasecmp(mb_convert_case($R3,MB_CASE_LOWER,$Charset), mb_convert_case($ToCheck[$i],MB_CASE_LOWER,$Charset)) == "0") $register_room = false;
@@ -637,9 +667,8 @@ if(!isset($Error) && (isset($R2) && $R2 != ""))
 	}
 }
 
-
 // **	Ensures the user has no restrictions to the room he chooses to enter, create or join - Rooms Restriction mod by Ciprian
-if(!isset($Error) && ((isset($R0) && $R0 != "") || (isset($R1) && $R1 != "") || (isset($R2) && $R2 != "") || (isset($R3) && $R3 != "") || $RES))
+if(!isset($Error) && ((isset($R0) && $R0 != "") || (isset($R1) && $R1 != "") || (isset($R2) && $R2 != "") || (isset($R3) && $R3 != "") || isset($RES)))
 {
 	if ($join_room == "*" || $perms == "admin" || $perms == "topmod" || ($perms == "moderator" && (room_in(stripslashes(isset($R0) ? $R0 : (isset($R2) ? $R2 : (isset($R3) ? $R3 : $R1))), $rooms, $Charset) || room_in("*", $rooms, $Charset)))) $restriction = 0;
 	elseif ((isset($R0) ? $R0 : (isset($R2) ? $R2 : (isset($R3) ? $R3 : $R1))) == ROOM1 && $EN_ROOM1 && $RES_ROOM1 && $join_room != "ROOM1") $restriction = 1;
@@ -715,7 +744,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	// Color Input Box mod by Ciprian - it will add the status to the curent cookie for the color_popup
 	setcookie("CookieStatus", $status, time() + 60*60*24*365);        // cookie expires in one year
 
-	// Udpates the IP address and the last log. time of the user in the regsistered users table if necessary
+	// Udpates the IP address and the last log. time of the user in the registered users table if necessary
 	if (isset($reguser) && $reguser) $DbLink->query("UPDATE ".C_REG_TBL." SET reg_time='".time()."', ip='$IP' WHERE username='$U'");
 
 	// In the case of a registered user that logs again...
@@ -840,6 +869,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	<HTML>
 	<HEAD>
 	<TITLE><?php echo((C_CHAT_NAME != "") ? C_CHAT_NAME." - ".APP_NAME : APP_NAME); ?></TITLE>
+	<LINK REL="SHORTCUT ICON" HREF="<?php echo($ChatPath); ?>favicon.ico">
 	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
 	<!--
 <?php
@@ -1051,7 +1081,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 if (file_exists("./localization/".$L."/localized.cmds.php")) require("./localization/".$L."/localized.cmds.php");
 
 // DO NOT ALTER THE LINE BELOW!
-$TrsCmds = 
+$TrsCmds =
 (L_CMD_ANNOUNCE != "" && L_CMD_ANNOUNCE != "L_CMD_ANNOUNCE" ? str_replace(","," .+|",L_CMD_ANNOUNCE)." .+|" : "").
 (L_CMD_BAN != "" && L_CMD_BAN != "L_CMD_BAN" ? str_replace(","," .+|",L_CMD_BAN)." .+|" : "").
 (L_CMD_CLEAR != "" && L_CMD_CLEAR != "L_CMD_CLEAR" ? str_replace(",","$|",L_CMD_CLEAR)."$|" : "").
@@ -1174,13 +1204,13 @@ function send_headers($title, $icon)
 	?>
 	<!--
 	The lines below are usefull for debugging purpose, please do not remove them!
-	Release: phpMyChat-Plus 1.93-b5
-	© 2005-2008 Ciprian Murariu (ciprianmp@yahoo.com)
+	Release: phpMyChat-Plus 1.93-RC6
+	© 2005-2009 Ciprian Murariu (ciprianmp@yahoo.com)
 	Based on phpMyChat 0.14.6-dev (also called 0.15.0)
-	© 2000-2008 The phpHeaven Team (http://www.phpheaven.net/)
+	© 2000-2005 The phpHeaven Team (http://www.phpheaven.net/)
 	-->
 	<META NAME="description" CONTENT="phpMyChat">
-	<META NAME="keywords" CONTENT="phpMyChat">
+	<META NAME="keywords" CONTENT="phpMyChat, Plus">
 	<?php
 	if ($icon) echo("<LINK REL=\"SHORTCUT ICON\" HREF=\"${ChatPath}favicon.ico\">\n");
 
@@ -1297,10 +1327,10 @@ function isCookieEnabled() {
 		if (C_VERSION == 2)
 		{
 			?>
-			document.forms['Params'].elements['R1'].options[0].selected = true;
-			document.forms['Params'].elements['R2'].options[0].selected = true;
-			document.forms['Params'].elements['T'].options[0].selected = true;
-			document.forms['Params'].elements['R3'].value = '';
+			if (document.forms['Params'].elements['R1']) document.forms['Params'].elements['R1'].options[0].selected = true;
+			if (document.forms['Params'].elements['R2']) document.forms['Params'].elements['R2'].options[0].selected = true;
+			if (document.forms['Params'].elements['T']) document.forms['Params'].elements['T'].options[0].selected = true;
+			if (document.forms['Params'].elements['R3']) document.forms['Params'].elements['R3'].value = '';
 			<?php
 		}
 		?>
@@ -1308,25 +1338,25 @@ function isCookieEnabled() {
 
 	function reset_R1()
 	{
-		document.forms['Params'].elements['R0'].options[0].selected = true;
-		document.forms['Params'].elements['R2'].options[0].selected = true;
-		document.forms['Params'].elements['T'].options[0].selected = true;
-		document.forms['Params'].elements['R3'].value = '';
+		if (document.forms['Params'].elements['R0']) document.forms['Params'].elements['R0'].options[0].selected = true;
+		if (document.forms['Params'].elements['R2']) document.forms['Params'].elements['R2'].options[0].selected = true;
+		if (document.forms['Params'].elements['T']) document.forms['Params'].elements['T'].options[0].selected = true;
+		if (document.forms['Params'].elements['R3']) document.forms['Params'].elements['R3'].value = '';
 	}
 
 	function reset_R2()
 	{
-		document.forms['Params'].elements['R0'].options[0].selected = true;
-		document.forms['Params'].elements['R1'].options[0].selected = true;
-		document.forms['Params'].elements['T'].options[1].selected = true;
-		document.forms['Params'].elements['R3'].value = '';
+		if (document.forms['Params'].elements['R0']) document.forms['Params'].elements['R0'].options[0].selected = true;
+		if (document.forms['Params'].elements['R1']) document.forms['Params'].elements['R1'].options[0].selected = true;
+		if (document.forms['Params'].elements['T']) document.forms['Params'].elements['T'].options[1].selected = true;
+		if (document.forms['Params'].elements['R3']) document.forms['Params'].elements['R3'].value = '';
 	}
 
 	function reset_R3()
 	{
-		document.forms['Params'].elements['R0'].options[0].selected = true;
-		document.forms['Params'].elements['R1'].options[0].selected = true;
-		document.forms['Params'].elements['R2'].options[0].selected = true;
+		if (document.forms['Params'].elements['R0']) document.forms['Params'].elements['R0'].options[0].selected = true;
+		if (document.forms['Params'].elements['R1']) document.forms['Params'].elements['R1'].options[0].selected = true;
+		if (document.forms['Params'].elements['R2']) document.forms['Params'].elements['R2'].options[0].selected = true;
 	}
 	// -->
 	</SCRIPT>
@@ -1356,6 +1386,9 @@ function layout($Err, $U, $R, $T, $C, $status)
 	global $DefaultChatRooms, $DefaultDispChatRooms;
 	global $DefaultPrivateRooms;
 	if ($Err) global $Error;
+	require("${ChatPath}search.php");
+	$show_search = !C_SEARCH_PAID;
+	$show_donation = !C_SUPPORT_PAID;
 	if (!isset($Ver) || $Ver == "") $Ver = "H";
 	?>
 
@@ -1373,8 +1406,15 @@ if(isset($Error))
 {
 	echo("<P CLASS=\"ChatError\">$Error</P>");
 }
+$copy_break = 0;
+if (!ereg("9362782527650497",$search) || !isset($search)) $copy_break = 1;
+if ($show_donation)
+{
+	$pptype = "big";
+	require("${ChatPath}lib/support.lib.php");
+	if (intval($ppbutton) < 3620000 || (intval($ppbutton) > 3627000 && intval($ppbutton) != 7148858 && intval($ppbutton) != 7148805 && (intval($ppbutton) < 7988359 || intval($ppbutton) > 7988406))) $copy_break = 1;
+}
 ?>
-
 <INPUT TYPE="hidden" NAME="Ver" VALUE="<?php echo($Ver); ?>">
 <INPUT TYPE="hidden" NAME="Form_Send" VALUE="1">
 <INPUT TYPE="hidden" NAME="L" VALUE="<?php echo($L); ?>">
@@ -1427,8 +1467,35 @@ if (C_REQUIRE_REGISTER)
 			</TD>
 		</TR>
 </FORM>
+	<?php
+	if ($show_donation)
+	{
+	?>
+	<TR>
+		<TD ALIGN="CENTER">
+		<br /><form action="https://www.paypal.com/cgi-bin/webscr" method="post" name="support" target="_blank" onSubmit="return confirm('<?php echo(L_SUPP_WARN); ?>');">
+		<input type="hidden" name="cmd" value="_s-xclick">
+		<input type="hidden" name="hosted_button_id" value="<?php echo($ppbutton); ?>">
+		<input type="image" style="background-color: transparent;" src="<?php echo($donate); ?>" border="0" name="submit" alt="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" title="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" onMouseOver="window.status='<?php echo($ppalt); ?>'; return true;">
+		</form>
+	</TD>
+	</TR>
+	<?php
+	}
+	?>
 </CENTER>
 </TABLE>
-<?php
-} // end of the layout function
+	<?php
+	if ($copy_break)
+	{
+		?>
+		<SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
+		<!--
+			alert('This phpMyChat-Plus server (<?php echo($_SERVER['SERVER_ADDR']); ?>) has been hacked by the owner (<?php echo(C_ADMIN_NAME." - ".C_ADMIN_EMAIL); ?>).\n\nAll the Chat functions and features have been disabled due to Copyright Infringement!\n\nThis work is licensed under the\n"Creative Commons Attribution-Noncommercial-No Derivative Works 3.0 Unported License".\n\nPlease contact the developer at "ciprianmp at yahoo dot com" in order to make it legal!');
+			window.location.replace("http://creativecommons.org/licenses/by-nc-nd/3.0/");
+		// -->
+		</SCRIPT>
+	<?php
+	}
+}; // end of the layout function
 ?>

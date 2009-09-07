@@ -580,7 +580,6 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 	}
 }
 
-
 if(!isset($Error) && (isset($R2) && $R2 != ""))
 {
 	// Skipped when the script is called by a join command.
@@ -666,7 +665,6 @@ if(!isset($Error) && (isset($R2) && $R2 != ""))
 		}
 	}
 }
-
 
 // **	Ensures the user has no restrictions to the room he chooses to enter, create or join - Rooms Restriction mod by Ciprian
 if(!isset($Error) && ((isset($R0) && $R0 != "") || (isset($R1) && $R1 != "") || (isset($R2) && $R2 != "") || (isset($R3) && $R3 != "") || isset($RES)))
@@ -981,7 +979,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	{
 		if ((!is_send_popup || is_send_popup.closed) && (!is_priv_popup || is_priv_popup.closed))
 		{
-			is_send_popup = window.open("send_popup.php?<?php echo("L=$L"); ?>","send_popup","width=430,height=140,scrollbars=yes,resizable=no,status=yes,toolbar=no,menubar=no,directories=no,location=no");
+			is_send_popup = window.open("send_popup.php?L=<?php echo($L); ?>","send_popup","width=430,height=140,scrollbars=yes,resizable=no,status=yes,toolbar=no,menubar=no,directories=no,location=no");
 			var msgbox = window.frames['input'].window.document.forms['MsgForm'].elements['M'];
 				var oldStr = msgbox.value;
 				if (oldStr == "" || oldStr.substring(0,1) != " ") oldStr = " " + oldStr;
@@ -1082,7 +1080,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 if (file_exists("./localization/".$L."/localized.cmds.php")) require("./localization/".$L."/localized.cmds.php");
 
 // DO NOT ALTER THE LINE BELOW!
-$TrsCmds = 
+$TrsCmds =
 (L_CMD_ANNOUNCE != "" && L_CMD_ANNOUNCE != "L_CMD_ANNOUNCE" ? str_replace(","," .+|",L_CMD_ANNOUNCE)." .+|" : "").
 (L_CMD_BAN != "" && L_CMD_BAN != "L_CMD_BAN" ? str_replace(","," .+|",L_CMD_BAN)." .+|" : "").
 (L_CMD_CLEAR != "" && L_CMD_CLEAR != "L_CMD_CLEAR" ? str_replace(",","$|",L_CMD_CLEAR)."$|" : "").
@@ -1205,10 +1203,10 @@ function send_headers($title, $icon)
 	?>
 	<!--
 	The lines below are usefull for debugging purpose, please do not remove them!
-	Release: phpMyChat-Plus 1.93-RC4
+	Release: phpMyChat-Plus 1.93-RC6
 	© 2005-2009 Ciprian Murariu (ciprianmp@yahoo.com)
 	Based on phpMyChat 0.14.6-dev (also called 0.15.0)
-	© 2000-2009 The phpHeaven Team (http://www.phpheaven.net/)
+	© 2000-2005 The phpHeaven Team (http://www.phpheaven.net/)
 	-->
 	<META NAME="description" CONTENT="phpMyChat">
 	<META NAME="keywords" CONTENT="phpMyChat, Plus">
@@ -1930,33 +1928,33 @@ else echo($Owner_name);
 </SPAN>
 <?php
 }
-if ($show_donation)
-{
-?>
-	<br /><br />
-	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" name="support" target="_blank" onSubmit="return confirm('<?php echo(L_SUPP_WARN); ?>');">
-	<input type="hidden" name="cmd" value="_s-xclick">
-	<input type="hidden" name="hosted_button_id" value="<?php echo($ppbutton); ?>">
-	<input type="image" style="background-color: transparent;" src="<?php echo($donate); ?>" border="0" name="submit" alt="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" title="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" onMouseOver="window.status='<?php echo($ppalt); ?>'; return true;">
-	</form>
-<?php
-}
-?>
+	if ($show_donation)
+	{
+	?>
+		<br /><br />
+		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" name="support" target="_blank" onSubmit="return confirm('<?php echo(L_SUPP_WARN); ?>');">
+		<input type="hidden" name="cmd" value="_s-xclick">
+		<input type="hidden" name="hosted_button_id" value="<?php echo($ppbutton); ?>">
+		<input type="image" style="background-color: transparent;" src="<?php echo($donate); ?>" border="0" name="submit" alt="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" title="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" onMouseOver="window.status='<?php echo($ppalt); ?>'; return true;">
+		</form>
+	<?php
+	}
+	?>
 </TD>
 </TR>
 </TABLE>
 <?php
-if ($show_search) echo($search);
-if ($copy_break)
-{
-	?>
-	<SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
-	<!--
-		alert('This phpMyChat-Plus server (<?php echo($_SERVER['SERVER_ADDR']); ?>) has been hacked by the owner (<?php echo(C_ADMIN_NAME." - ".C_ADMIN_EMAIL); ?>).\n\nAll the Chat functions and features have been disabled due to Copyright Infringement!\n\nThis work is licensed under the\n"Creative Commons Attribution-Noncommercial-No Derivative Works 3.0 Unported License".\n\nPlease contact the developer at "ciprianmp at yahoo dot com" in order to make it legal!');
-		window.location.replace("http://creativecommons.org/licenses/by-nc-nd/3.0/");
-	// -->
-	</SCRIPT>
-<?php
-}
+	if ($show_search) echo($search);
+	if ($copy_break)
+	{
+		?>
+		<SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
+		<!--
+			alert('This phpMyChat-Plus server (<?php echo($_SERVER['SERVER_ADDR']); ?>) has been hacked by the owner (<?php echo(C_ADMIN_NAME." - ".C_ADMIN_EMAIL); ?>).\n\nAll the Chat functions and features have been disabled due to Copyright Infringement!\n\nThis work is licensed under the\n"Creative Commons Attribution-Noncommercial-No Derivative Works 3.0 Unported License".\n\nPlease contact the developer at "ciprianmp at yahoo dot com" in order to make it legal!');
+			window.location.replace("http://creativecommons.org/licenses/by-nc-nd/3.0/");
+		// -->
+		</SCRIPT>
+	<?php
+	}
 }; // end of the layout function
 ?>
