@@ -2066,6 +2066,7 @@ class upload {
                                "application/x-shockwave-flash",
                                "application/x-troff-msvideo",
                                "application/x-zip-compressed",
+							   "application/x-zip",
                                "application/xml",
                                "application/zip",
                                "application/msword",
