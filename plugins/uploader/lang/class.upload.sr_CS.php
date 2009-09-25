@@ -3,7 +3,7 @@
 // | class.upload.sr_CS.php                                                 |
 // +------------------------------------------------------------------------+
 // | Copyright (c) Vedran Vucic 2008. All rights reserved.                        |
-// | Version       0.25                                                     |
+// | Version       0.28                                                     |
 // | Last modified 19/09/2008                                               |
 // | Email         vedran.vucic@gnulinuxcentar.org               |
 // +------------------------------------------------------------------------+
@@ -29,7 +29,7 @@
 /**
  * Class upload Serbian - Latin translation
  *
- * @version   0.25
+ * @version   0.28
  * @author    Vedran Vucic (vedran.vucic@gnulinuxcentar.org)
  * @license   http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright Vedran Vucic FDL
@@ -46,6 +46,9 @@
     $translation['uploaded_too_big_html']       = 'Greška kod nadodavanja datoteke (nadodana datoteka prelazi %s - MAX_FILE_SIZE granicu definisanu u formularu za nadodavanje).';
     $translation['uploaded_partial']            = 'Greška kod nadodavanja datoteke (datoteka je samo delimično dodata).';
     $translation['uploaded_missing']            = 'Greška kod nadodavanja datoteke (datoteka nije dodata).';
+	$translation['uploaded_no_tmp_dir']         = 'Greška kod ndodavanju datoteke (nedostaje privremena facikla).';
+	$translation['uploaded_cant_write']         = 'Greška kod nodavanju datoteke (greška u upisivanju na disk).';
+	$translation['uploaded_err_extension']      = 'Greška kod nodavanju datoteke  (dodavanje zaustavljeno zbog nedozvoljenog nastavkau imenu).';    
     $translation['uploaded_unknown']            = 'Greška kod nadodavanja datoteke (nepoznata šifra za datoteku).';
     $translation['try_again']                   = 'Greška kod nadodavanja datoteke. Molimo pokušajte ponovo.';
     $translation['file_too_big']                = 'Datoteka je prevelika (%s).';

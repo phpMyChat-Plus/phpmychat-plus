@@ -614,6 +614,7 @@ define("L_LANG_GR", "Grčki");
 define("L_LANG_HE", "Hebrejski");
 define("L_LANG_HI", "Hindu");
 define("L_LANG_HU", "Mađarski");
+define("L_LANG_ID", "Indonezijski");
 define("L_LANG_IT", "Talijanski");
 define("L_LANG_KA", "Gruzijski");
 define("L_LANG_NL", "Holandski");

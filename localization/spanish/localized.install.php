@@ -1,5 +1,5 @@
 <?php
-// File : spanish/localized.install.php - plus version (29.07.2008 - rev.6)
+// File : spanish/localized.install.php - plus version (07.06.2009 - rev.7)
 // Translation by Shelly Noyes <shelly.noyes@gmail.com>
 // Do not use ' ; use ’ istead (utf-8 edit bug)
 
@@ -71,6 +71,7 @@ define("L_P2_FORM12", "Renombre sus carpetas de administración");
 define("L_P2_FORM13", "¡Si piensa utilizar phpMyChat como un módulo integrado para phpNuke o phpBB, tiene que llamar la tabla de configuración \"c_config\" y tiene que llamar la tabla para usuarios registrados \"c_reg_users\"!");
 define("L_P2_FORM14", "¡Escoja un nombre que sea difícil de adivinar!");
 define("L_P2_FORM15", "Nombre de su servidor de chat");
+define("L_P2_FORM16", "Tabla para estadísticas");
 define("L_P3_FORM1", "Administrador cuenta nombre");
 define("L_P3_FORM2", "Administrador cuenta contraseña");
 define("L_P3_FORM3", "Reintroduzca contraseña");
