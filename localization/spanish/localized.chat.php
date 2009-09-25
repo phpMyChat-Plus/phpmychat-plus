@@ -598,8 +598,10 @@ define("L_LANG_ENUS", "Inglés (Americano)"); // for US formats and flags (also 
 define("L_LANG_ES", "Espańol");
 define("L_LANG_FR", "Francés");
 define("L_LANG_GR", "Griego");
+define("L_LANG_HE", "Hebreo");
 define("L_LANG_HI", "Indú");
 define("L_LANG_HU", "Húngaro");
+define("L_LANG_ID", "Indonesio");
 define("L_LANG_IT", "Italiano");	// Note: Language names are not capitalized in Spanish
 define("L_LANG_KA", "Georgiano");
 define("L_LANG_NL", "Holandés");
