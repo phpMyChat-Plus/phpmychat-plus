@@ -605,6 +605,7 @@ define("L_LANG_FR", "francia");
 define("L_LANG_GR", "görög");
 define("L_LANG_HI", "hindi");
 define("L_LANG_HU", "magyar");
+define("L_LANG_ID", "indonéziai");
 define("L_LANG_IT", "olasz");
 define("L_LANG_KA", "grúz");
 define("L_LANG_NL", "holland");

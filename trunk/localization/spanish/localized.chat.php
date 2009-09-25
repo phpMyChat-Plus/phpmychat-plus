@@ -1,5 +1,5 @@
 <?php
-// File : spanish/localized.chat.php - plus version (14.02.2009 - rev.42)
+// File : spanish/localized.chat.php - plus version (01.08.2009 - rev.43)
 // Original translation by Josep Román <josep.roman@zuerich-see.ch> and León Del Río <leon@webmaster.com.mx>
 // Updates, corrections and additions for the Plus version by Roxana Castañeda <roxminu@yahoo.com> & Shelly Noyes <shelly.noyes@gmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -326,6 +326,7 @@ define("L_DEFAULT_TOPIC_1", "Este es un tópico por defecto. ¡Edite localizatio
 define("L_PIC", "Imagen colocada por");
 define("L_PIC_RESIZED", "Escalar a");
 define("L_HELP_IMG", "dirección completa de la imagen que se mostrará");
+define("L_NO_IMAGE", "Esta no es una URL valida de una imagen pública remota.\\nInténtalo de nuevo!");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s ya no es un moderador en ninguna sala de este chat.");
@@ -407,6 +408,8 @@ define("L_PRIV_RELOAD", "Cargar página nuevamente");
 define("L_PRIV_MARK_ALL", "Marcar todos como Leídos");
 define("L_PRIV_MARK_SEL", "Marcar los seleccionados como Leídos");
 define("L_PRIV_REMOVE", "Eliminar los PMs marcados"); // o seleccionados
+define("L_PRIV_PM", "(privado)");
+define("L_PRIV_WISP", "(susurro)");
 
 // Color Input Box mod by Ciprian
 define("L_ENABLED", "Activado");
@@ -649,4 +652,9 @@ define("L_RESTRICTED_ROM", "%s ha sido restringido exitosamente de esta sala.");
 // OpenID login mod by Ciprian
 define("L_OPID_SIGN", "Loguearse usando un OpenID");
 define("L_OPID_REG", "Importa tu perfil de OpenID");
+
+// Support buttons
+define("L_DONATION_WARN", "Has escogido contribuir con el Desarrollo gratuito de\\n".APP_NAME." al hacer una donación al programador.\\nGracias por tu apoyo!\\n\\nNota: el recipiente no es el dueño de este chat.\\nPor favor pon la cantidad en la siguiente página.\\n\\nContinuar?");
+define("L_DONATION_ALT", "Usa PayPal para apoyar el desarrollo de ".APP_NAME." - es Rápido, Gratis y Seguro!");
+define("L_PRIVACY", "para leer nuestra Política de Privacidad");
 ?>
