@@ -3,7 +3,7 @@
 // | class.upload.es_AR.php                                                 |
 // +------------------------------------------------------------------------+
 // | Copyright (c) Matias Olivera 2007. All rights reserved.              |
-// | Version       0.25                                                     |
+// | Version       0.28                                                     |
 // | Last modified 17/11/2007                                               |
 // | Email         matiolivera@yahoo.com                                    |
 // | Web           				                                  |
@@ -30,7 +30,7 @@
 /**
  * Class upload argentinian spanish translation
  *
- * @version   0.25
+ * @version   0.28
  * @author    Matias Olivera (matiolivera@yahoo.com)
  * @license   http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright Matias Olivera
@@ -46,6 +46,9 @@
     $translation['uploaded_too_big_html']       = 'Error al cargar el archivo (el archivo cargado excede la directiva MAX_FILE_SIZE que se especificó en el formulario html - %s).';
     $translation['uploaded_partial']            = 'Error al cargar el archivo (el archivo sólo fue cargado parcialmente).';
     $translation['uploaded_missing']            = 'Error al cargar el archivo (el archivo no se ha cargado).';
+	$translation['uploaded_no_tmp_dir']         = 'Error al cargar el archivo (no hay una carpeta temporal).';
+	$translation['uploaded_cant_write']         = 'Error al cargar el archivo (no se pudo grabar el archive en el disco).';
+	$translation['uploaded_err_extension']      = 'Error al cargar el archivo (se detuvo la subida del archivo por extensión).';    
     $translation['uploaded_unknown']            = 'Error al cargar el archivo (código de error desconocido).';
     $translation['try_again']                   = 'Error al cargar el archivo. Por favor, inténtalo de nuevo.';
     $translation['file_too_big']                = 'Archivo demasiado grande (%s).';
