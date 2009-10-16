@@ -11,10 +11,10 @@ $FontSize = 10;
 
 // Top frame
 define("A_MENU_0", "Administrasi untuk %s");
-define("A_MENU_1", "Para pengguna yang terdaftar");	//plural
-define("A_MENU_11", "Para pengguna yang terdaftar");		//singular
-define("A_MENU_2", "Para pengguna yang dilarang masuk");	//plural
-define("A_MENU_21", "Para pengguna yang dilarang masuk");		//singular
+define("A_MENU_1", "Para pemakai resmi"); //plural
+define("A_MENU_11", "Pemakai resmi");  //singular
+define("A_MENU_2", "Pemakai yang dilarang"); //plural
+define("A_MENU_21", "Pemakai yang dilarang");  //singular
 define("A_MENU_3", "Bersihkan kamar");
 define("A_MENU_4", "Mengirim surat");
 define("A_MENU_5", "Susunan");

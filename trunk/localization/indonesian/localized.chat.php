@@ -6,7 +6,6 @@
 
 // extra header for Charset
 $Charset = "utf-8";
-# $Align = "right"; // Only for right-to-left languages (Arabic, Hebrew, aso)
 
 // medium font size in pt.
 $FontSize = 10;
@@ -17,7 +16,7 @@ define("L_TUTORIAL", "Pengajaran");
 define("L_WEL_1", "Pesan-pesan akan dihapus setelah%s %s");	// X hours/hour
 define("L_WEL_2", "dan pengguna tidak aktif setelah %s %s");	// Y minutes/minute
 
-define("L_CUR_1", "Saat ini ");
+define("L_CUR_1", "Saat ini");
 define("L_CUR_1a", "ada");
 define("L_CUR_1b", "ada");
 define("L_CUR_2", "sedang mengobrol");
@@ -146,7 +145,7 @@ define("L_ERR_USR_21", "Anda sudah TIDAK aktif selama ".C_USR_DEL." menit,<br />
 define("L_ERR_USR_22", "Perintah ini tersedia untuk\\nbrowser yang Anda gunakan (mesin IE).");
 define("L_ERR_USR_23", "Untuk bergabung dikamar pribadi, Anda harus terdaftar dahulu.");
 define("L_ERR_USR_24", "Untuk membuat kamar pribadi sendiri, Anda harus terdaftar dahulu.");
-define("L_ERR_USR_25", "Hanya pihak Administrasi yang bisa ".$COLORNAME." warna!<br />Jangan mencoba untuk memakai  ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2.", ".COLOR_CM.", ".COLOR_CM1." or ".COLOR_CM2.".<br />Hanya power users yang berhak!");
+define("L_ERR_USR_25", "Hanya pihak Administrasi yang bisa ".$COLORNAME." warna!<br />Jangan mencoba untuk memakai ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2.", ".COLOR_CM.", ".COLOR_CM1." or ".COLOR_CM2.".<br />Hanya power users yang berhak!");
 define("L_ERR_USR_26", "Hanya admin dan moderator yang bisa pakai ".$COLORNAME." color!<br /> Jangan mencoba untuk memakai ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2.", ".COLOR_CM.", ".COLOR_CM1." atau ".COLOR_CM2.".<br /> Hanya power users yang berhak!");
 define("L_ERR_USR_27", "Anda tidak dapat berbicara terhadap Anda sendiri.\\nMohon lakukan hal itu pada pikiran Anda sendiri…\\nSekarang, pilih nama pengguna lainnya.");
 define("L_ERR_USR_28", "Akses Anda untuk %s sudah sangat terbatas!<br />Mohon ganti kamar."); // room name
@@ -182,7 +181,7 @@ define("L_KICKED_ALL", "Semua pengguna sudah dikeluarkan dengan sempurna.");
 define("L_KICKED_ALL_REASON", "Semua pengguna sudah dikeluarkan dengan sempurna. (Alasannya: %s)");
 define("L_BANISHED", "%s sudah diberi hukuman dilarang masuk."); 	// username/nickname
 define("L_BANISHED_REASON", "%s sudah diberi hukuman dilarang masuk. (Alasannya: %s)"); 	// username/nickname and reason
-define("L_ANNOUNCE", "ANNOUNCE");
+define("L_ANNOUNCE", "MENGUMUMKAN");
 define("L_INVITE", "%s permohonan Anda untuk memasukan dia ke <a href=\"#\" onClick=\"window.parent.runCmd('%s','%s')\">%s</a> kamar."); 	// username/nickname and room name as invitation link
 define("L_INVITE_REG", "Anda sudah terdaftar untuk masuk dikamar ini.");
 define("L_INVITE_DONE", "Undangan Anda sudah dikirim ke %s."); 	// username/nickname
@@ -197,7 +196,7 @@ define("L_NONREG_USER", "%s belum terdaftar."); 	// username/nickname
 define("L_NONREG_USER_IP", "IPnya dia adalah: %s."); 	// IP address
 define("L_NO_KICKED", "%s adalah moderator atau administrasi dan tidak dapat dikeluarkan."); 	// username/nickname
 define("L_NO_BANISHED", "%s adalah moderator atau administrasi dan tidak dapat dilarang masuk."); 	// username/nickname
-define("L_SVR_TIME", "Waktu Server : ");
+define("L_SVR_TIME", "Waktu Server: ");
 define("L_NO_SAVE", "Tidak ada pesan yang disimpan!");
 define("L_NO_ADMIN", "Hanya administrator yang dapat menggunakan perintah ini.");
 define("L_NO_REG_USER", "Anda harus terdaftar diobrolan untuk menggunakan perintah ini.");
@@ -215,8 +214,8 @@ define("L_HELP_ROOM", "kamar");
 define("L_HELP_BUZZ", "~namasuara"); //one word
 define("L_HELP_BUZZ1", "Dengung..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "Alasannya");
-define("L_HELP_MR", "Saudara");
-define("L_HELP_MS", "Saudari");
+define("L_HELP_MR", "Sdr");
+define("L_HELP_MS", "Sdri");
 define("L_HELP_CMD_0", "{} perlu pengaturan untuk penampilan, [] salah satu pilihan.");
 define("L_HELP_CMD_1a", "Tentukan jumlah pesan yang akan ditampilkan. Angka minimal dan standarnya adalah 5.");
 define("L_HELP_CMD_1b", "Tampilkan ulang pesannya, dan tampilkan juga pesan terbaru. Dengan angka minimal dan standar adalah 5.");
@@ -376,7 +375,7 @@ define("DICE_RESULTS", "Lempar dadu, dan hasilnya adalah:");
 define("DICE_WRONG", "Anda harus memilih berapa banyak dadu yang akan Anda lemparkan\\n(Pilih nilai diantara 1 dan ".MAX_ROLLS.").\\nJust type /dice to roll all ".MAX_ROLLS." dice.");
 define("DICE2_WRONG", "Nilai kedua, harus diantara 1 dan ".MAX_ROLLS.".\\nLeave it empty to use all ".MAX_ROLLS." dice\\n(e.g. /".MAX_DICES."d or /".MAX_DICES."d".MAX_ROLLS.").");
 define("DICE2_WRONG1", "Nilai pertama harus diantara angka 1 dan ".MAX_DICES.".\\n(e.g. /".MAX_DICES."d or /".MAX_DICES."d".MAX_ROLLS.").");
-define("DICE3_WRONG", "Nilai pertama (d) harus diantara nilai 1 dan 100.\\nKedua (t) nilainya harus diantara 1 dan nilai MAX  ".MAX_ROLLS.".\\nLeave it empty to use all ".MAX_ROLLS." dice\\n(e.g. /d50 or /d100t".MAX_ROLLS.").");
+define("DICE3_WRONG", "Nilai pertama (d) harus diantara nilai 1 dan 100.\\nKedua (t) nilainya harus diantara 1 dan nilai MAX ".MAX_ROLLS.".\\nLeave it empty to use all ".MAX_ROLLS." dice\\n(e.g. /d50 or /d100t".MAX_ROLLS.").");
 
 // Private Message Popup mod by Ciprian
 define("L_REG_POPUP", "Buka pop-up didalam pesan pribadi");
@@ -428,8 +427,8 @@ define("L_COL_HELP_SUB2", "Trik:");
 define("L_COL_HELP_P2", "<u>Warna daerah</u><br />Tergantung dari kemampuan browser/system operasi Anda. Sangat mungkin terjadi jika beberapa bagian warna tidak ditampilkan. Hanya 16 warna yang didukung oleh standar W3C HTML 4.0:");
 define("L_COL_HELP_P2a", "Jika beberapa pengguna berkomentar bahwa dia tidak dapat melihat warna yang dipilih, itu berarti dia sedang menggunakan browser versi yang lebih lama.");
 define("L_COL_HELP_SUB3", "Pengaturan didefinisikan ditempat obrol ini:");
-define("L_COL_HELP_P3", "<u>Pewarnaan sesuai dengan tingkatan</u>:<br />1. Administrator dapat memilih semua warnar.<br />Warna asal dari administrator adalah <SPAN style=\"warna:".COLOR_CA."\">".COLOR_CA."</SPAN>.<br />2. Moderator dapat memilih semua warna, akan tetapi <SPAN style=\"warna:".COLOR_CA."\">".COLOR_CA."</SPAN> dan <SPAN style=\"warna:".COLOR_CA1."\">".COLOR_CA1."</SPAN>.<br />warna asal moderator adalah <SPAN style=\"warna:".COLOR_CM."\">".COLOR_CM."</SPAN>.<br />3. Pengguna lainnya dapat menggunakan semua warna, tapi  <SPAN style=\"warna:".COLOR_CA."\">".COLOR_CA."</SPAN>, <SPAN style=\"warna:".COLOR_CA1."\">".COLOR_CA1."</SPAN>, <SPAN style=\"warna:".COLOR_CM."\">".COLOR_CM."</SPAN> dan <SPAN style=\"warna:".COLOR_CM1."\">".COLOR_CM1."</SPAN>.");
-define("L_COL_HELP_P3a", "Warna asalnya adalah <u><SPAN style=\"warna:".COLOR_CD."\">".COLOR_CD."</SPAN></u>.<br /><br /><u>Bagian Teknik</u>: Warna-warna ini sudah ditentukan oleh pihak administrator di admin panel.<br />Jika sesuatu terjadi kesalahan atau jika sesuatu yang Anda tidak sukai tentang warnanya, Anda diharapkan untuk mengontak <b>administrator</b> terlebih dahulu, tidal dengan pengguna lainnya yang ada dikamar Anda :D ");
+define("L_COL_HELP_P3", "<u>Pewarnaan sesuai dengan tingkatan</u>:<br />1. Administrator dapat memilih semua warnar.<br />Warna asal dari administrator adalah <SPAN style=\"warna:".COLOR_CA."\">".COLOR_CA."</SPAN>.<br />2. Moderator dapat memilih semua warna, akan tetapi <SPAN style=\"warna:".COLOR_CA."\">".COLOR_CA."</SPAN> dan <SPAN style=\"warna:".COLOR_CA1."\">".COLOR_CA1."</SPAN>.<br />warna asal moderator adalah <SPAN style=\"warna:".COLOR_CM."\">".COLOR_CM."</SPAN>.<br />3. Pengguna lainnya dapat menggunakan semua warna, tapi <SPAN style=\"warna:".COLOR_CA."\">".COLOR_CA."</SPAN>, <SPAN style=\"warna:".COLOR_CA1."\">".COLOR_CA1."</SPAN>, <SPAN style=\"warna:".COLOR_CM."\">".COLOR_CM."</SPAN> dan <SPAN style=\"warna:".COLOR_CM1."\">".COLOR_CM1."</SPAN>.");
+define("L_COL_HELP_P3a", "Warna asalnya adalah <u><SPAN style=\"warna:".COLOR_CD."\">".COLOR_CD."</SPAN></u>.<br /><br /><u>Bagian Teknik</u>: Warna-warna ini sudah ditentukan oleh pihak administrator di admin panel.<br />Jika sesuatu terjadi kesalahan atau jika sesuatu yang Anda tidak sukai tentang warnanya, Anda diharapkan untuk mengontak <b>administrator</b> terlebih dahulu, tidal dengan pengguna lainnya yang ada dikamar Anda :D");
 define("L_COL_HELP_USER_STATUS", "status Anda");
 define("L_COL_TUT", "Menggunakan teks berwarna didalam tempat obrol");
 define("L_NULL", "Batal");
@@ -440,13 +439,13 @@ define("L_PRO_COLOR", "warna biodata");
 // Alert messages on errors for Color Input Box mod by Ciprian
 define("COL_ERROR_BOX_MODA", "Hanya administrator yang dapat menggunakan ".COLOR_CA." warna!\\n\\nWarna teks Anda dikembalikan ke ".COLOR_CM."!\\n\\nMohon pilih warna lainnya.");
 define("COL_ERROR_BOX_USRA", "Hanya administrator yang dapat menggunakan ".COLOR_CA." warna!\\n\\nJangan mencoba warna ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." atau ".COLOR_CM1.".\\n\\nWarna ini sudah milik pengguna tinggat tinggi!\\n\\nWarna teks Anda telah diganti ke warna ".COLOR_CD."!\\n\\n Mohon pilih warna lainnya.");
-define("COL_ERROR_BOX_USRM", "Anda harus sebagai moderator untuk menggunakan warna ".COLOR_CM."!\\n\\nJangan coba untuk menggunakannya ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." atau ".COLOR_CM1.".\\n\\nWarna ini hanya diperuntukan kepada pengguna dengan tingkat atas!\\n\\nWarna teks Anda telah dikembalikan ke warna  ".COLOR_CD."!\\n\\n Mohon pilih warna lainnya.");
+define("COL_ERROR_BOX_USRM", "Anda harus sebagai moderator untuk menggunakan warna ".COLOR_CM."!\\n\\nJangan coba untuk menggunakannya ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." atau ".COLOR_CM1.".\\n\\nWarna ini hanya diperuntukan kepada pengguna dengan tingkat atas!\\n\\nWarna teks Anda telah dikembalikan ke warna ".COLOR_CD."!\\n\\n Mohon pilih warna lainnya.");
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "Selamat datang di tempat obrol kami. Mohon untuk menjaga tata-krama ketika ngobrol: <I>coba untuk tetap sopan dan santun</I>.");
 if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG . L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
-define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG); 
+define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
 // Send alert to users in chat when important settings are changed in admin panel
 define("L_RELOAD_CHAT", "Pengaturan diserver ini barusan diubah. Untuk menghidari kegagalan system, mohon buka ulang browser Anda (Tekan F5 atau exit dan masuk lagi ke tempat ngobrol).");
@@ -504,18 +503,18 @@ define("L_CLICKS", "Klik disini %s %s");
 define("L_CLICK", "Klik disini %s");
 define("L_LINKS_3", "untuk membuka linknya");
 define("L_LINKS_4", "untuk membuka tempat dari pemilik/authornya");
-define("L_LINKS_5", "untuk memasukan tanda smiley ini");
+define("L_LINKS_5", "untuk memasukan tanda senyum ini");
 define("L_LINKS_6", "menuju ke kontak");
 define("L_LINKS_7", "menuju ke phpMyChat Homepage");
 define("L_LINKS_8", "menuju ke phpMyChat Group");
 define("L_LINKS_9", "untuk mengirim saran Anda");
-define("L_LINKS_10", "untuk mengunduh phpMyChat Plus");
+define("L_LINKS_10", "untuk mengunduh phpMyChat-Plus");
 define("L_LINKS_11", "untuk melihat siapa yang mengobrol");
 define("L_LINKS_12", "untuk membuka Chat Login Page");
 define("L_LINKS_13", "untuk memutar suara ini"); // can also be translated as "to play this sound"
 define("L_LINKS_14", "untuk menggunakan perintah ini");
 define("L_LINKS_15", "untuk membuka");
-define("L_LINKS_16", "Kumpulan gambar smiley");
+define("L_LINKS_16", "Kumpulan gambar Senyuman");
 define("L_LINKS_17", "urut dari atas ke bawah");
 define("L_LINKS_18", "urut dari bawah ke atas");
 define("L_LINKS_19", "untuk memodifikasi Gravatar"); // do not translate the word "Gravatar"!
@@ -628,7 +627,7 @@ define("L_LANG_TR", "Turki");
 define("L_LANG_UR", "Urdu");
 define("L_LANG_VI", "Vietnam");
 
-//Skins preview page
+// Skins preview page
 define("L_SKINS_TITLE", "Melihat penampilan");
 define("L_SKINS_TITLE1", "Penampilan %s untuk %s dicoba"); // Skins 1 to 4 preview
 define("L_SKINS_AV", "Penampilan yang tersedia");
