@@ -129,8 +129,8 @@ define("L_ERR_USR_7", "Anda harus memasukan email Anda.");
 define("L_ERR_USR_8", "Anda harus memasukan email Anda dengan benar.");
 define("L_ERR_USR_9", "Nama pengguna ini sudah terpakai");
 define("L_ERR_USR_10", "Nama pengguna dan kata sandi Anda salah.");
-define("L_ERR_USR_11", "Anda harus sebagai Administrator.");
-define("L_ERR_USR_12", "Anda sebagai administrator, jadi Anda tidak dapat menghapusnya.");
+define("L_ERR_USR_11", "Anda harus sebagai Administrasi.");
+define("L_ERR_USR_12", "Anda sebagai administrasi, jadi Anda tidak dapat menghapusnya.");
 define("L_ERR_USR_13", "Untuk membuat kamar Anda sendiri, Anda harus terdaftar.");
 define("L_ERR_USR_14", "Anda harus terdaftar sebelum mengobrol.");
 define("L_ERR_USR_15", "Anda harus memasukan nama lengkap Anda.");
@@ -198,7 +198,7 @@ define("L_NO_KICKED", "%s adalah moderator atau administrasi dan tidak dapat dik
 define("L_NO_BANISHED", "%s adalah moderator atau administrasi dan tidak dapat dilarang masuk."); 	// username/nickname
 define("L_SVR_TIME", "Waktu Server: ");
 define("L_NO_SAVE", "Tidak ada pesan yang disimpan!");
-define("L_NO_ADMIN", "Hanya administrator yang dapat menggunakan perintah ini.");
+define("L_NO_ADMIN", "Hanya administrasi yang dapat menggunakan perintah ini.");
 define("L_NO_REG_USER", "Anda harus terdaftar diobrolan untuk menggunakan perintah ini.");
 
 // help popup
@@ -232,12 +232,12 @@ define("L_HELP_CMD_10", "Kirim pesan pribadi kepada seorang pengguna (pengguna l
 define("L_HELP_CMD_11", "Tampilkan informasi tentang seorang pengguna.");
 define("L_HELP_CMD_12", "Keluarkan window popup untuk merubah isi profil pengguna.");
 define("L_HELP_CMD_13", "Tanda saat pengguna masuk/keluar dikamar yang digunakan sekarang.");
-define("L_HELP_CMD_14", "Mempersilahkan administrator atau moderator dari kamar yang digunakan sekarang untuk mempromosikan seorang pengguna menjadi moderator dikamar yang sama.");
+define("L_HELP_CMD_14", "Mempersilahkan administrasi atau moderator dari kamar yang digunakan sekarang untuk mempromosikan seorang pengguna menjadi moderator dikamar yang sama.");
 define("L_HELP_CMD_15", "Menghapus bingkai pesan-pesan dan tampilkan hanya 5 pesan terakhir.");
 define("L_HELP_CMD_16", "Simpan pesan-pesan terakhir (pengecualian untuk pengumuman) ke file HTML. Jika n tidak jelas, semua pesan akan diambil ke dalam accountnya.");
-define("L_HELP_CMD_17", "Mengijinkan administrator untuk mengirim pengumuman kepada semua pengguna disemua kamar obrolan.");
+define("L_HELP_CMD_17", "Mengijinkan administrasi untuk mengirim pengumuman kepada semua pengguna disemua kamar obrolan.");
 define("L_HELP_CMD_18", "Undang semua pengguna yang ada dikamar lain untuk bergabung dikamar yang Anda tempati.");
-define("L_HELP_CMD_19", "Membolehkan moderator atau administrator untuk \"mengeluarkan\" pengguna dari kamar, dengan waktu yang ditentukan oleh administrasi. <br />Nanti dapat melarang pengguna yang sedang ngobrol dikamar lainnya dan dimana dia akan ngobrol dan menggunakan * pengaturan untuk pelarangan \"selamanya\" pengguna dari semua tempat ngobrol.<br />Piliahannya, [".L_HELP_REASON."] tampilkan alasan pelarangan (alasan apapun).");
+define("L_HELP_CMD_19", "Membolehkan moderator atau administrasi untuk \"mengeluarkan\" pengguna dari kamar, dengan waktu yang ditentukan oleh administrasi. <br />Nanti dapat melarang pengguna yang sedang ngobrol dikamar lainnya dan dimana dia akan ngobrol dan menggunakan * pengaturan untuk pelarangan \"selamanya\" pengguna dari semua tempat ngobrol.<br />Piliahannya, [".L_HELP_REASON."] tampilkan alasan pelarangan (alasan apapun).");
 define("L_HELP_CMD_20", "Terangkan apa yang Anda kerjakan.");
 define("L_HELP_CMD_21", "Umumkan kepada semua pengguna yang akan mengirim pesan ke Anda<br />bahwa Anda sedang tidak didepan komputer. Jika Anda ingin kembali untuk ngobrol, langsung ketik saja.");
 define("L_HELP_CMD_22", "Kirim suara dengung dan tampilkan pilihannya di kamar ini.<br />- Pemakaian:<br />- pemakaian lalu: \"/buzz\" atau \"/buzz pesan yang ditampilkan\" - ini akan memainkan suara dengung standar yang ada di panel Admin;<br />- perpanjang pemakaian: \"/buzz ~namasuara\" or \"/buzz ~namasuara pesan yang ditampilkan\" - ini memainkan namasuara.wav file dari plus/sounds arsip; mohon beri tanda \"~\" dipergunakan diawal kata file suara, tanpa menggunakan akhiran .wav (hanya .wav yang boleh).<br />Ini adalah standarnya perintah moderator/admin.");
@@ -247,7 +247,7 @@ define("L_HELP_CMD_25", "Permainan dadu untuk mendapatkan angka secara acak.<br 
 define("L_HELP_CMD_26", "Hal ini adalah versi yang lebih rumit dari perintah /dice.<br />Pakai: /{n1}d[n2] atau /{n1}d;<br />n1 dapat mengambil semua nilai <b>diantara 1 dan %s</b> (Itu menunjukan nomor dari dadu tiap kali lemparan).<br />n2 dapat mengambil semua nilai <b>diantara 1 dan %s</b> (itu menunjukan nomor dari bagian sisi per dadu).");
 define("L_HELP_CMD_27", "Itu menjelaskan mengenai pesan dari suatu pengguna untuk mempermudah membaca disekitar percakapan.<br />Pakai: /tinggi {pengguna} atau tekan kotak <img src=./images/highlightOff.gif> kecil disamping kanan nama pengguna (di kamar/daftar pengguna)");
 define("L_HELP_CMD_28", "Ini mempersilahkan memposting dari <i>satu file gambar</i> sebagai suatu pesan.<br />Pakai: Gambar harus berasal dari internet dan bisa diakses oleh semua orang. Jangan menggunakan yang pakai suatu login.<br />alamat lengkap dari gambar harus diketikan! contoh<b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />extension yang diperbolehkan: .jpg .bmp .gif .png. Link ini case sensitive!<br />TRIK: ketik /img kemudian spasi dan kopikan URL kedalam box; untuk mendapatkan URL gambar dari webpage, ketika Anda klik kanan digambar tersebut, lalu ke properties, lalu blok seluruh alamat URL tersebut (kadangkala perlu discroll kebawah sedikit) dan salin/kopikan setelah tanda /img<br />Jangan menggunakan gambar yang ada dikomputer Anda: ini akan menghentikan window obrolan!!!");
-define("L_HELP_CMD_29", "Perintah kedua akan mengijinkan administrator atau moderator dari kamar ini untuk melepas anggotanya dari status administrator atau moderator yang sebelumnya dipromosi dikamar yang sama.<br />Pilihan * ini akan melepas promosi dari semua kamar obrolan.");
+define("L_HELP_CMD_29", "Perintah kedua akan mengijinkan administrasi atau moderator dari kamar ini untuk melepas anggotanya dari status administrasi atau moderator yang sebelumnya dipromosi dikamar yang sama.<br />Pilihan * ini akan melepas promosi dari semua kamar obrolan.");
 define("L_HELP_CMD_30", "Perintah kedua sama dengan /me tapi itu akan menampilkan secara berurutan sesuai dengan jenis kelamin diprofilnya<br />E.g. * ".L_HELP_MR." Ciprian sedang menonton TV or * ".L_HELP_MS." Dana gembira.");
 define("L_HELP_CMD_31", "Ubah pengurutan daftar pengguna: dari waktu saat masuk atau secara alfabet.");
 define("L_HELP_CMD_32", "Ini adalah kali ketiga permainan dadu.<br />Pakai: /d{n1}[tn2] atau /d{n1};<br />n1 dapat mengambil semua angka <b>diantara 1 and 100</b> (itu menunjukan nomor dari bagian sisi per dadu).<br />n2 dapat mengambil semua nilai <b>diantara 1 dan %s</b> (itu menunjukan nomor dari jumlah putaran tiap kali lemparan).");
@@ -287,9 +287,9 @@ define("L_IGNOR_TIT", "Hiraukan");
 define("L_IGNOR_NON", "Pengguna tidak dihiraukan");
 
 // whois popup
-define("L_WHOIS_ADMIN", "Administrator");
+define("L_WHOIS_ADMIN", "Administrasi");
 define("L_WHOIS_OWNER", "Pemilik");
-define("L_WHOIS_TOPMOD", "Top Moderator");
+define("L_WHOIS_TOPMOD", "Moderator tingkat atas");
 define("L_WHOIS_MODER", "Moderator");
 define("L_WHOIS_MODERS", "Moderators");
 define("L_WHOIS_OTHERS", "Pengguna lainnya");
@@ -333,7 +333,7 @@ define("L_NO_IMAGE", "Ini bukan URL yang tepat dari public remote image.\nCoba l
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s tidak dapat menjadi moderator lagi disemua kamar obrol.");
 define("L_IS_NO_MODERATOR", "%s bukan sebagai moderator.");
-define("L_ERR_IS_ADMIN", "%s adalah administrator!\\nAnda tidak dapat mengubah ijin ini.");
+define("L_ERR_IS_ADMIN", "%s adalah administrasi!\\nAnda tidak dapat mengubah ijin ini.");
 
 // Info mod by Ciprian - displays a list of all the features & mods, including Bot's name, on the welcome page
 define("INFO_CMDS", "Perintah tambahan tersedia:");
@@ -427,8 +427,8 @@ define("L_COL_HELP_SUB2", "Trik:");
 define("L_COL_HELP_P2", "<u>Warna daerah</u><br />Tergantung dari kemampuan browser/system operasi Anda. Sangat mungkin terjadi jika beberapa bagian warna tidak ditampilkan. Hanya 16 warna yang didukung oleh standar W3C HTML 4.0:");
 define("L_COL_HELP_P2a", "Jika beberapa pengguna berkomentar bahwa dia tidak dapat melihat warna yang dipilih, itu berarti dia sedang menggunakan browser versi yang lebih lama.");
 define("L_COL_HELP_SUB3", "Pengaturan didefinisikan ditempat obrol ini:");
-define("L_COL_HELP_P3", "<u>Pewarnaan sesuai dengan tingkatan</u>:<br />1. Administrator dapat memilih semua warnar.<br />Warna asal dari administrator adalah <SPAN style=\"warna:".COLOR_CA."\">".COLOR_CA."</SPAN>.<br />2. Moderator dapat memilih semua warna, akan tetapi <SPAN style=\"warna:".COLOR_CA."\">".COLOR_CA."</SPAN> dan <SPAN style=\"warna:".COLOR_CA1."\">".COLOR_CA1."</SPAN>.<br />warna asal moderator adalah <SPAN style=\"warna:".COLOR_CM."\">".COLOR_CM."</SPAN>.<br />3. Pengguna lainnya dapat menggunakan semua warna, tapi <SPAN style=\"warna:".COLOR_CA."\">".COLOR_CA."</SPAN>, <SPAN style=\"warna:".COLOR_CA1."\">".COLOR_CA1."</SPAN>, <SPAN style=\"warna:".COLOR_CM."\">".COLOR_CM."</SPAN> dan <SPAN style=\"warna:".COLOR_CM1."\">".COLOR_CM1."</SPAN>.");
-define("L_COL_HELP_P3a", "Warna asalnya adalah <u><SPAN style=\"warna:".COLOR_CD."\">".COLOR_CD."</SPAN></u>.<br /><br /><u>Bagian Teknik</u>: Warna-warna ini sudah ditentukan oleh pihak administrator di admin panel.<br />Jika sesuatu terjadi kesalahan atau jika sesuatu yang Anda tidak sukai tentang warnanya, Anda diharapkan untuk mengontak <b>administrator</b> terlebih dahulu, tidal dengan pengguna lainnya yang ada dikamar Anda :D");
+define("L_COL_HELP_P3", "<u>Pewarnaan sesuai dengan tingkatan</u>:<br />1. Administrasi dapat memilih semua warnar.<br />Warna asal dari administrasi adalah <SPAN style=\"warna:".COLOR_CA."\">".COLOR_CA."</SPAN>.<br />2. Moderator dapat memilih semua warna, akan tetapi <SPAN style=\"warna:".COLOR_CA."\">".COLOR_CA."</SPAN> dan <SPAN style=\"warna:".COLOR_CA1."\">".COLOR_CA1."</SPAN>.<br />warna asal moderator adalah <SPAN style=\"warna:".COLOR_CM."\">".COLOR_CM."</SPAN>.<br />3. Pengguna lainnya dapat menggunakan semua warna, tapi <SPAN style=\"warna:".COLOR_CA."\">".COLOR_CA."</SPAN>, <SPAN style=\"warna:".COLOR_CA1."\">".COLOR_CA1."</SPAN>, <SPAN style=\"warna:".COLOR_CM."\">".COLOR_CM."</SPAN> dan <SPAN style=\"warna:".COLOR_CM1."\">".COLOR_CM1."</SPAN>.");
+define("L_COL_HELP_P3a", "Warna asalnya adalah <u><SPAN style=\"warna:".COLOR_CD."\">".COLOR_CD."</SPAN></u>.<br /><br /><u>Bagian Teknik</u>: Warna-warna ini sudah ditentukan oleh pihak administrasi di admin panel.<br />Jika sesuatu terjadi kesalahan atau jika sesuatu yang Anda tidak sukai tentang warnanya, Anda diharapkan untuk mengontak <b>administrasi</b> terlebih dahulu, tidal dengan pengguna lainnya yang ada dikamar Anda :D");
 define("L_COL_HELP_USER_STATUS", "status Anda");
 define("L_COL_TUT", "Menggunakan teks berwarna didalam tempat obrol");
 define("L_NULL", "Batal");
@@ -437,8 +437,8 @@ define("L_ROOM_COLOR", "warna kamar");
 define("L_PRO_COLOR", "warna biodata");
 
 // Alert messages on errors for Color Input Box mod by Ciprian
-define("COL_ERROR_BOX_MODA", "Hanya administrator yang dapat menggunakan ".COLOR_CA." warna!\\n\\nWarna teks Anda dikembalikan ke ".COLOR_CM."!\\n\\nMohon pilih warna lainnya.");
-define("COL_ERROR_BOX_USRA", "Hanya administrator yang dapat menggunakan ".COLOR_CA." warna!\\n\\nJangan mencoba warna ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." atau ".COLOR_CM1.".\\n\\nWarna ini sudah milik pengguna tinggat tinggi!\\n\\nWarna teks Anda telah diganti ke warna ".COLOR_CD."!\\n\\n Mohon pilih warna lainnya.");
+define("COL_ERROR_BOX_MODA", "Hanya administrasi yang dapat menggunakan ".COLOR_CA." warna!\\n\\nWarna teks Anda dikembalikan ke ".COLOR_CM."!\\n\\nMohon pilih warna lainnya.");
+define("COL_ERROR_BOX_USRA", "Hanya administrasi yang dapat menggunakan ".COLOR_CA." warna!\\n\\nJangan mencoba warna ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." atau ".COLOR_CM1.".\\n\\nWarna ini sudah milik pengguna tinggat tinggi!\\n\\nWarna teks Anda telah diganti ke warna ".COLOR_CD."!\\n\\n Mohon pilih warna lainnya.");
 define("COL_ERROR_BOX_USRM", "Anda harus sebagai moderator untuk menggunakan warna ".COLOR_CM."!\\n\\nJangan coba untuk menggunakannya ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." atau ".COLOR_CM1.".\\n\\nWarna ini hanya diperuntukan kepada pengguna dengan tingkat atas!\\n\\nWarna teks Anda telah dikembalikan ke warna ".COLOR_CD."!\\n\\n Mohon pilih warna lainnya.");
 
 //Welcome message to be displayed on login
@@ -483,8 +483,8 @@ define("L_ERR_PASS_5", "Anda belum membuat berkas rahasia Anda sendiri.");
 define("L_ERR_PASS_6", "Anda belum membuat berkas rahasia Anda sendiri.<br />Anda tidak dapat menggunakan formulir ini. Hubungi bagian Admin!");
 
 // admin stuff - added for administrators promotions/demotions in admin panel - by Ciprian
-define("L_ADM_3", "%s telah menjadi administrator ditempat obrol ini.");
-define("L_ADM_4", "%s sudah tidak menjadi administrator lagi.");
+define("L_ADM_3", "%s telah menjadi administrasi ditempat obrol ini.");
+define("L_ADM_4", "%s sudah tidak menjadi administrasi lagi.");
 
 // Open Schedule by Ciprian
 define("L_DAILY", "harian");
