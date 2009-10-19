@@ -612,7 +612,7 @@ define("L_LANG_GR", "Greacă");
 define("L_LANG_HE", "Ebraică");
 define("L_LANG_HI", "Hindusă");
 define("L_LANG_HU", "Maghiară");
-define("L_LANG_ID", "Indoneziană");
+define("L_LANG_ID", "Indoneziană (Bahasa)");
 define("L_LANG_IT", "Italiană");
 define("L_LANG_KA", "Georgiană");
 define("L_LANG_NL", "Olandeză");
