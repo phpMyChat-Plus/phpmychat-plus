@@ -213,6 +213,7 @@ define("L_HELP_MSG", "mensaje");
 define("L_HELP_MSGS", "mensajes");
 define("L_HELP_ROOM", "sala");
 define("L_HELP_BUZZ", "~nombredelsonido");
+define("L_HELP_BUZZ1", "Alerta..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "razón");
 define("L_HELP_MR", "Sr."); // Mister (can be short or entire word)
 define("L_HELP_MS", "Srta."); // Mistress (- neutral of Miss, Mrs.)
@@ -252,6 +253,8 @@ define("L_HELP_CMD_30", "El segundo comando hace lo mismo que /me pero mostrará
 define("L_HELP_CMD_31", "Cambia el orden en que los usuarios se muestran en las listas: por hora de ingreso o alfabéticamente.");
 define("L_HELP_CMD_32", "Este tercero (representación/roleplaying) versión de tirar los dados.<br />Uso: /d{n1}[tn2] o /d{n1};<br />n1 puede tomar cualquier valor <b>entre 1 y 100</b> (representa el número de tiradas por dado).<br />n2 puede tomar cualquier valor <b>entre 1 y %s</b> (representa el número de dados por tirada).");
 define("L_HELP_CMD_33", "Cambia el tamaño de la fuente de los mensajes en el chat por el que elija el usuario (valores permitidos para n: <b>entre 7 y 15</b>); el comando /size vuelve el tamaño de la fuente al valor por defecto (<b>".$FontSize."</b>).");
+define("L_HELP_CMD_34", "Esto permitirá que el usuario especifique la orientación del mensaje de texto (ltr,iad = izquierda-a-derecha; rtl,dai = derecha-a-izquierda).");
+define("L_HELP_CMD_VAR", "Sinónimos (variantes): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Etiqueta del Chat");
 define("L_HELP_ETIQ_2", "Nuestro sitio desea mantener su comunidad amigable y divertida, así que por favor siga las siguientes políticas. Si no sigue estas reglas, uno de los moderadores del chat probablemente lo expulse/destierre del chat.<br /><br />Gracias,");
 define("L_HELP_ETIQ_3", "Políticas de Etiqueta de nuestro Chat");
@@ -514,6 +517,7 @@ define("L_NOT_SELECTED", "no seleccionado");
 define("L_NOT_SELECTED_F", ""); // feminine word, if it's the case
 define("L_EMAIL_1", "enviar correo electrónico");
 define("L_FULLSIZE_PIC", "abrir una pictura de tamańo natural");
+define("L_PRIVACY", "para leer nuestra Política de Privacidad");
 define("L_AUTHOR", "el autor");
 define("L_DEVELOPER", "el desarrollador de este chat");
 define("L_OWNER", "el dueńo de este chat");
@@ -658,5 +662,4 @@ define("L_OPID_REG", "Importa tu perfil de OpenID");
 // Support buttons
 define("L_DONATION_WARN", "Has escogido contribuir con el Desarrollo gratuito de\\n".APP_NAME." al hacer una donación al programador.\\nGracias por tu apoyo!\\n\\nNota: el recipiente no es el dueño de este chat.\\nPor favor pon la cantidad en la siguiente página.\\n\\nContinuar?");
 define("L_DONATION_ALT", "Usa PayPal para apoyar el desarrollo de ".APP_NAME." - es Rápido, Gratis y Seguro!");
-define("L_PRIVACY", "para leer nuestra Política de Privacidad");
 ?>
