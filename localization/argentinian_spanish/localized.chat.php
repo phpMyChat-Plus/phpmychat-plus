@@ -1,5 +1,5 @@
 <?php
-// File : argentinian_spanish/localized.chat.php - plus version (14.02.2009 - rev.42)
+// File : argentinian_spanish/localized.chat.php - plus version (01.08.2009 - rev.43)
 // Original translation in Spanish (for the Argentinian dialect usage) by Jorge Colaccini <jrc@informas.com>
 // Updates, corrections and additions for the Plus version by Matias Olivera <matiolivera@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -213,6 +213,7 @@ define("L_HELP_MSG", "mensaje");
 define("L_HELP_MSGS", "mensajes");
 define("L_HELP_ROOM", "salón");
 define("L_HELP_BUZZ", "~nombredelsonido");
+define("L_HELP_BUZZ1", "Alerta..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "motivo");
 define("L_HELP_MR", "Sr."); // El señor
 define("L_HELP_MS", "Sra."); // La señora
@@ -239,19 +240,21 @@ define("L_HELP_CMD_17", "Permite al administrador enviar un anuncio a todos los 
 define("L_HELP_CMD_18", "Invita a un usuario que está chateando a tu salón.");
 define("L_HELP_CMD_19", "Permite al(los) moderador(es) de un salón o al administrador a \"<b>bloquear</b>\" un usuario de un salón por un tiempo determinado por el administrador.<br />Este último puede banear a un usuario de otro salón adonde él no está y utilizar * seteo para ban \"para siempre\" y el usuario es eliminado de todo el chat.");
 define("L_HELP_CMD_20", "Describe que estás haciendo, sin refererirte a ti mismo.");
-define("L_HELP_CMD_21", "Avisa a los miembros del salón que intentan enviarte mensajes<br /> que en este momento no te encontrás en tu computadora. Si querés volver a chatear, simplemente empezá a escribir.");
+define("L_HELP_CMD_21", "Avisa a los miembros del salón que intentan enviarte mensajes<br />que en este momento no te encontrás en tu computadora. Si querés volver a chatear, simplemente empezá a escribir.");
 define("L_HELP_CMD_22", "Envía un sonido buzz y opcionalmente muestra un mensaje en el salón actual.<br />- Uso:<br />- viejo uso: \"/buzz\" o \"/buzz mensaje a ser mostrado\" - esto reproduce el sonido buzz por defecto definido en el panel de administración;<br />- uso extendido: \"/buzz ~nombredelsonido\" or \"/buzz ~nombredelsonido mensaje a mostrarse\" - esto reproduce el archivo nombredelsonido.wav del directorio plus/sounds; tomá en cuenta el signo \"~\" para ser usado al inicio de la segunda palabra, que es el nombre del archivo de sonido, sin la extensión .wav (solo se permiten extensiones .wav).<br />Por defecto, este es un comando para administradores o moderadores.");
 define("L_HELP_CMD_23", "Envía un <i>susurro</i> (mensaje privado). El mensaje llegará a destino no importa en qué salón este el usuario. Si el usuario no está conectado o está en estado ausente, recibirás un aviso notificándote.");
 define("L_HELP_CMD_24", "Uso: La temática del salón debe contener al menos dos palabras.<br />Este comando cambia la temática del salón actual. Intentá no repetir las temáticas de otros usuarios. Utilizá temáticas importantes.<br />Por defecto, este es un comando de moderador/administrador.<br />Usando el comando \"/topic top reset\" se borrará la temática actual y se reseteará a la temática por defecto que tenga el salón.<br />Opcional, \"/topic * {}\" Hace exactamente lo mismo pero en todos los salones (temática general y reseteo de temática general).");
 define("L_HELP_CMD_25", "Un juego de dados con números aleatorios.<br />Uso: /dice or /dice [n];<br />n puede tomar cualquier valor <b>entre 1 y %s</b> (representa a la cantidad de dados a usarse).Si no se ingresa un número, se utilizará el máximo por defecto.");
 define("L_HELP_CMD_26", "Esta es una versión más compleja del comando /dice.<br />Uso: /{n1}d[n2] or /{n1}d;<br />n1 puede tomar cualquier valor <b>entre 1 y %s</b> (representa el número de tiradas).<br />n2 Puede tomar cualquier valor <b>entre 1 y %s</b> (representa el número de dados a usarse por tirada).");
 define("L_HELP_CMD_27", "Resalta los mensajes de un usuario en específico para poder leerlo facilmente entre la conversación.<br />Uso: /high {usuario} o presioná el cuadrado pequeño <img src=./images/highlightOff.gif> a la derecha del nombre del usuario (en la lista de salones/usuarios)");
-define("L_HELP_CMD_28", "Permite el posteo de <i>una sola imagen</i> como mensaje.<br />Uso: La imagen debe estar en internet y ser accesible por todos. No uses páginas donde necesitás loguearte.<br />Debes ingresar todo el link de la imagen! Ej.<b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Extensiones aceptadas: .jpg .bmp .gif .png. Respetá las mayúsculas y minúsculas!<br />Recomendación: escribí /img luego dejá un espacio y pegá la URL; para conseguir la URL de una imagen de una página, hacé click derecho sobre la imagen, andá a propiedades, seleccioná toda la dirección/URL (cuidado! aveces la dirección/URL ocupa más de un renglón) copiala y después pegala después de /img<br /> No uses imágenes de tu PC: cortará la conexión de tu ventana de chat!!!");
+define("L_HELP_CMD_28", "Permite el posteo de <i>una sola imagen</i> como mensaje.<br />Uso: La imagen debe estar en internet y ser accesible por todos. No uses páginas donde necesitás loguearte.<br />Debes ingresar todo el link de la imagen! Ej. <b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Extensiones aceptadas: .jpg .bmp .gif .png. Respetá las mayúsculas y minúsculas!<br />Recomendación: escribí /img luego dejá un espacio y pegá la URL; para conseguir la URL de una imagen de una página, hacé click derecho sobre la imagen, andá a propiedades, seleccioná toda la dirección/URL (cuidado! aveces la dirección/URL ocupa más de un renglón) copiala y después pegala después de /img<br />No uses imágenes de tu PC: cortará la conexión de tu ventana de chat!!!");
 define("L_HELP_CMD_29", "El segundo comando permitirá al administrador o moderador(es) del salón actual quitar el privilegio de moderador a un usuario registrado al que se le había dado previamente para el mismo salón.<br />La opción * le quitará los privilegios de moderador al usuario en todos los salones.");
 define("L_HELP_CMD_30", "El segundo comando hace lo mismo que /me pero mostrará tu género.<br />Ej. * ".L_HELP_MR." Alejandro está mirando TV o * ".L_HELP_MS." Dana está felíz.");
 define("L_HELP_CMD_31", "Cambia el orden de los usuarios en las listas: por orden de entrada o alfabéticamente.");
 define("L_HELP_CMD_32", "Esta es una tercera versión del juego de dados.<br />Uso: /d{n1}[tn2] or /d{n1};<br />n1 puede tomar cualquier valor <b>entre 1 and 100</b> (representa el número de giros por dado).<br />n2 puede tomar cualquier valor <b>entre 1 y %s</b> (representa el número de dados por tirada).");
 define("L_HELP_CMD_33", "Cambia el tamaño de fuente de los mensajes en el chat de acuerdo a la selección del usuario (valores permitidos para n: <b>entre 7 y 15</b>); el comando /size resetea el tamaño de fuente al valor por defecto (<b>".$FontSize."</b>).");
+define("L_HELP_CMD_34", "Esto permitirá al usuario especificar la orientación del mensaje de texto (ltr,iad = izquierda-a-derecha; rtl,dai = derecha-a-izquierda).");
+define("L_HELP_CMD_VAR", "Sinónimos (variantes): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Lineamientos del Chat");
 define("L_HELP_ETIQ_2", "Quisieramos mantener a esta comunidad amigable y divertida, por eso te pedimos por favor que cumplas las siguientes reglas. En caso contrario uno de nuestros moderadores podría deshabilitarte del chat.<br /><br />Gracias,");
 define("L_HELP_ETIQ_3", "Lineamientos de nuestro Chat");
@@ -326,6 +329,7 @@ define("L_DEFAULT_TOPIC_1", "Este es un tema genérico. Editá localization/_own
 define("L_PIC", "Imagen posteada por");
 define("L_PIC_RESIZED", "Redimensionar a");
 define("L_HELP_IMG", "dirección URL completa de la imagen a ser posteada");
+define("L_NO_IMAGE", "Esta no es una URL valida de una imagen pública remota.\\nInténtalo de nuevo!");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s ya no es moderador de ningun salón.");
@@ -349,7 +353,7 @@ define("L_PRO_6", "Color de nombre/texto");
 define("L_AVATAR", "Imagen");
 define("L_ERR_AV", "URL inválida o host inexistente.");
 define("L_TITLE_AV", "Tu imagen actual: ");
-define("L_CHG_AV", "Seleccioná \"".L_REG_16."\" en el formulario del Perfil <br />para guardar tu Imagen.");
+define("L_CHG_AV", "Seleccioná \"".L_REG_16."\" en el formulario del Perfil<br />para guardar tu Imagen.");
 define("L_SEL_NEW_AV", "Selecciona una nueva Imagen");
 define("L_EX_AV", "ejemplo");
 define("L_URL_AV", "URL: ");
@@ -407,6 +411,8 @@ define("L_PRIV_RELOAD", "Recargar página");
 define("L_PRIV_MARK_ALL", "Marcar todos como Leídos");
 define("L_PRIV_MARK_SEL", "Marcar los seleccionados como Leídos");
 define("L_PRIV_REMOVE", "Remover los PMs seleccionados"); // or selected
+define("L_PRIV_PM", "(privado)");
+define("L_PRIV_WISP", "(susurro)");
 
 // Color Input Box mod by Ciprian
 define("L_ENABLED", "Activo");
@@ -519,6 +525,7 @@ define("L_NOT_SELECTED", "no seleccionado");
 define("L_NOT_SELECTED_F", ""); // feminine word, if it's the case
 define("L_EMAIL_1", "para enviar un email");
 define("L_FULLSIZE_PIC", "para abrir la imagen en tamaño completo");
+define("L_PRIVACY", "para leer nuestra Política de Privacidad");
 define("L_AUTHOR", "el autor");
 define("L_DEVELOPER", "el desarrollador de este chat");
 define("L_OWNER", "el dueño de este chat");
@@ -603,8 +610,10 @@ define("L_LANG_ENUS", "Inglés USA"); // for US formats and flags
 define("L_LANG_ES", "Español");
 define("L_LANG_FR", "Frances");
 define("L_LANG_GR", "Griego");
+define("L_LANG_HE", "Hebreo");
 define("L_LANG_HI", "Indú");
 define("L_LANG_HU", "Húngaro");
+define("L_LANG_ID", "Indonesio");
 define("L_LANG_IT", "Italiano");
 define("L_LANG_KA", "Georgiano");
 define("L_LANG_NL", "Holandés");
@@ -657,4 +666,8 @@ define("L_RESTRICTED_ROM", "%s ha sido restringido/a exitosamente de este salón
 // OpenID login mod by Ciprian
 define("L_OPID_SIGN", "Logueate con un OpenID");
 define("L_OPID_REG", "Importá tu perfil de OpenID");
+
+// Support buttons
+define("L_DONATION_WARN", "Has escogido contribuir con el Desarrollo gratuito de\\n".APP_NAME." al hacer una donación al programador.\\nGracias por tu apoyo!\\n\\nNota: el beneficiario no es el dueño de este chat.\\nPor favor pon la cantidad en la siguiente página.\\n\\nContinuar?");
+define("L_DONATION_ALT", "Usa PAYPAL para apoyar el desarrollo de ".APP_NAME." - es Rápido, Gratis y Seguro!");
 ?>

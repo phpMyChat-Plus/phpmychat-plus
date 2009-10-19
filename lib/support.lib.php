@@ -57,7 +57,7 @@ switch (L_LANG)
 	case "es_AR":
 		$pplang = "es_ES/ES";
 		$ppbutton = ($pptype == "big") ? "3626374" : "3626236";
-		$ppalt = "PayPal. La forma rápida y segura de pagar en Internet.";
+		$ppalt = "PayPal - La forma segura y fácil de pagar en línea.";
 		$ppexists = 1;
 		break;
 	case "es_ES":

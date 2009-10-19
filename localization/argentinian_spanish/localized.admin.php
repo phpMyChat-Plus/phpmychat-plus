@@ -1,5 +1,5 @@
 <?php
-// File : argentinian_spanish/localized.admin.php - plus version (26.08.2008 - rev.14)
+// File : argentinian_spanish/localized.admin.php - plus version (07.06.2009 - rev.15)
 // Original translation in Spanish (for the Argentinian dialect usage) by Jorge Colaccini <jrc@informas.com>
 // Updates, corrections and additions for the Plus version by Matias Olivera <matiolivera@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -23,6 +23,9 @@ define("A_MENU_6", "Extras del Chat");
 define("A_MENU_7", "Buscar");
 define("A_MENU_8", "Conexiones");
 define("A_MENU_9", "Archivo Log");
+define("A_MENU_1a", "Perfiles");
+define("A_MENU_2a", "Estadísticas");
+define("A_MOD_DEV", "Módulo en desarrollo");
 define("A_LOGOUT", "Logout");
 
 // Frame for registered users
@@ -166,4 +169,12 @@ define("A_SEARCH_25", "Moderar a este usuario");
 // Connected users Page
 define("A_LURKING_1", "Usuarios conectados y solo mirando") ;
 define("A_LURKING_2", "Mirones desactivados.") ;
+
+// Statistics Page
+define("A_STATS_1", "Página de Estadísticas del Chat");
+define("A_STATS_2", "La recolección de datos empezó el %s"); //date
+define("A_STATS_3", "Estadísticas Generales (Todos los horarios)");
+define("A_STATS_4", "Estadísticas Detalladas (Últimos %s días de actividad)"); //number of days
+define("A_STATS_5", "Estadísticas deshabilitadas");
+define("A_STATS_6", "Primera %s"); //Top 10 or Top 5
 ?>
