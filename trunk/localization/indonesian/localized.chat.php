@@ -614,7 +614,7 @@ define("L_LANG_GR", "Yunani");
 define("L_LANG_HE", "Hebrew");
 define("L_LANG_HI", "Hindi");
 define("L_LANG_HU", "Hongaria");
-define("L_LANG_ID", "Indonesia");
+define("L_LANG_ID", "Bahasa Indonesia");
 define("L_LANG_IT", "Itali");
 define("L_LANG_KA", "Georgia");
 define("L_LANG_NL", "Belanda");

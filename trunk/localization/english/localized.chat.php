@@ -628,7 +628,7 @@ define("L_LANG_GR", "Greek");
 define("L_LANG_HE", "Hebrew");
 define("L_LANG_HI", "Hindi");
 define("L_LANG_HU", "Hungarian");
-define("L_LANG_ID", "Indonesian");
+define("L_LANG_ID", "Indonesian (Bahasa)");
 define("L_LANG_IT", "Italian");
 define("L_LANG_KA", "Georgian");
 define("L_LANG_NL", "Dutch");
