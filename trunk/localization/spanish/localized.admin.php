@@ -175,6 +175,6 @@ define("A_STATS_1", "Página de Estadísticas del Chat");
 define("A_STATS_2", "La recolección de datos empezó el %s"); //date
 define("A_STATS_3", "Estadísticas Generales (Todos los horarios)");
 define("A_STATS_4", "Estadísticas Detalladas (Últimos %s días de actividad)"); //number of days
-define("A_STATS_5", "Estadísticas desabilitadas");
+define("A_STATS_5", "Estadísticas deshabilitadas");
 define("A_STATS_6", "Primera %s"); //Top 10 or Top 5
 ?>

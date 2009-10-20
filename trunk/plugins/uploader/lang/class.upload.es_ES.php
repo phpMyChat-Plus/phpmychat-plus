@@ -48,7 +48,7 @@
     $translation['uploaded_partial']            = 'Error al cargar el archivo (el archivo sólo fue cargado parcialmente).';
     $translation['uploaded_missing']            = 'Error al cargar el archivo (el archivo no se ha cargado).';
 	$translation['uploaded_no_tmp_dir']         = 'Error al cargar el archivo (no hay una carpeta temporal).';
-	$translation['uploaded_cant_write']         = 'Error al cargar el archivo (no se pudo grabar el archive en el disco).';
+	$translation['uploaded_cant_write']         = 'Error al cargar el archivo (no se pudo grabar el archivo en el disco).';
 	$translation['uploaded_err_extension']      = 'Error al cargar el archivo (se detuvo la subida del archivo por extensión).';    
     $translation['uploaded_unknown']            = 'Error al cargar el archivo (código de error desconocido).';
     $translation['try_again']                   = 'Error al cargar el archivo. Por favor, inténtalo de nuevo.';
