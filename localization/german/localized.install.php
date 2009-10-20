@@ -1,6 +1,6 @@
 <?php
-// File : german/localized.install.php - plus version (29.07.2008 - rev.6)
-// Translation by Thomas Pschernig <tpsde1970@aol.com>
+// File : german/localized.install.php - plus version (07.06.2009 - rev.7)
+// Translation by Thomas Pschernig <tpsde1970@aol.com> & Thomas Schorpp <thomas.schorpp@googlemail.com>
 // Do not use ' ; use ’ istead (utf-8 edit bug)
 
 define("L_BTN1", "Weiter");
@@ -71,6 +71,7 @@ define("L_P2_FORM12", "Bennen Sie Ihr Admin-Logs-Verzeichnis um");
 define("L_P2_FORM13", "Wenn Sie phpMyChat als einen integrierten Chat in PHPNuke oder PHPBB nutzen möchten, muss die Konfigurations-Tabelle \"c_config\" und die Tabelle der registrierten Mitglieder \"c_reg_users\" heißen!");
 define("L_P2_FORM14", "Wählen Sie einen Namen, der nicht leicht erraten werden kann!");
 define("L_P2_FORM15", "Name Ihres Chat-Servers");
+define("L_P2_FORM16", "Tabelle für Statistiken");
 define("L_P3_FORM1", "Name des Administrators");
 define("L_P3_FORM2", "Passwort des Administrators");
 define("L_P3_FORM3", "Passwort erneut eingeben");

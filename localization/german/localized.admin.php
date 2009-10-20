@@ -1,9 +1,9 @@
 <?php
-// File : german/localized.admin.php - plus version (26.08.2008 - rev.14)
+// File : german/localized.admin.php - plus version (07.06.2009 - rev.15)
 // Original translation by Robert Schaller <robert@schaller.com> & Wolfgang Schneider <schneider@bibelcenter.de>
 //    & Martin Sander <Martin.Sander@touch-screen.de> & Bernard Piller <bernard@bmpsystems.com>
 //    & Reinhard Hofmann <e9625556@student.tuwien.ac.at> & Christian Hacker <c.hacker@dreamer-chat.de>
-// Updates, corrections and additions for the Plus version by Alexander Eisele <xaex@xeax.de>  && Thomas Pschernig <tpsde1970@aol.com>
+// Updates, corrections and additions for the Plus version by Alexander Eisele <xaex@xeax.de>  && Thomas Pschernig <tpsde1970@aol.com> & Thomas Schorpp <thomas.schorpp@googlemail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 
 // extra header for charset
@@ -25,6 +25,9 @@ define("A_MENU_6", "Chat-Extras");
 define("A_MENU_7", "Suche");
 define("A_MENU_8", "Verbindungen");
 define("A_MENU_9", "Logarchiv");
+define("A_MENU_1a", "Profile");
+define("A_MENU_2a", "Statistiken");
+define("A_MOD_DEV", "Der Mod ist noch im Entwicklungsstand");
 define("A_LOGOUT", "LogOff");
 
 // Frame for registered users
@@ -168,4 +171,12 @@ define("A_SEARCH_25", "Moderiere Benutzer");
 // Connected users Page
 define("A_LURKING_1", "Verbundene Mitglieder und Beobachter") ;
 define("A_LURKING_2", "Beobachtung abgeschaltet.") ;
+
+// Statistics Page
+define("A_STATS_1", "Chat-Statistikenseite");
+define("A_STATS_2", "Datenerfassung gestartet am %s"); //date
+define("A_STATS_3", "Gesamtstatistiken (von Anbeginn)");
+define("A_STATS_4", "Detailierte Statistiken (Letzte %s Tage mit Aktivität)"); //number of days
+define("A_STATS_5", "Die Statistiken sind deaktiviert");
+define("A_STATS_6", "Spitzenwerte %s"); //Top 10 or Top 5
 ?>

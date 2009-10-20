@@ -1,9 +1,9 @@
 <?php
-// File : german/localized.chat.php - plus version (14.02.2009 - rev.42)
+// File : german/localized.chat.php - plus version (01.08.2009 - rev.43)
 // Original translation by Robert Schaller <robert@schaller.com> & Wolfgang Schneider <schneider@bibelcenter.de>
 //    & Martin Sander <Martin.Sander@touch-screen.de> & Bernard Piller <bernard@bmpsystems.com>
 //    & Reinhard Hofmann <e9625556@student.tuwien.ac.at> & Christian Hacker <c.hacker@dreamer-chat.de>
-// Updates, corrections and additions for the Plus version by Alexander Eisele <xaex@xeax.de> && Thomas Pschernig <tpsde1970@aol.com>
+// Updates, corrections and additions for the Plus version by Alexander Eisele <xaex@xeax.de> & Thomas Pschernig <tpsde1970@aol.com> & Thomas Schorpp <thomas.schorpp@googlemail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
 
@@ -215,6 +215,7 @@ define("L_HELP_MSG", "mitteilung");
 define("L_HELP_MSGS", "mitteilunge");
 define("L_HELP_ROOM", "Raum");
 define("L_HELP_BUZZ", "~soundname");
+define("L_HELP_BUZZ1", "Klingeln..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "der Grund");
 define("L_HELP_MR", "Herr");
 define("L_HELP_MS", "Frau");
@@ -254,6 +255,8 @@ define("L_HELP_CMD_30", "Der zweite Befehl ist ähnlich dem Befehl \"/me\" aber 
 define("L_HELP_CMD_31", "Sortiert die User nach alphabetischer Reihenfolge oder nach Eingangszeit.");
 define("L_HELP_CMD_32", "Das ist die dritte Version des Würfelspiels.<br />Anwendung: /d{n1}t[n2] oder /d{n1};<br />n1 kann eine Zahl zwischen <b>1 und 100</b> sein (es ist die Anzahl der Würfe pro Würfel).<br />n2 kann eine Zahl zwischen <b> 1 and %s</b> (es ist die Anzahl der Würfel.");
 define("L_HELP_CMD_33", "Ändert die Größe der Schriftart in den Nachrichten (erlaubt sind Werte für n zwischen <b>7 und 15</b>); Der Befehl \"/size\" setzt die Größe der Schriftart auf standard zurück (<b>".$FontSize."</b>).");
+define("L_HELP_CMD_34", "Dies gibt die Richtungsorientierung einer Textnachricht an (ltr = left-to-right, rtl = right-to-left).");
+define("L_HELP_CMD_VAR", "Funktionsgleiche Kommandos: %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Chat-Etikette");
 define("L_HELP_ETIQ_2", "Unsere Community sollte freundlich und lustig bleiben, also halten Sie sich bitte an folgende Richtlinien. Wenn Sie die Regeln nicht einhalten, werden Sie von unseren Moderatoren aus dem Chat verwiesen.<br /><br />Danke!");
 define("L_HELP_ETIQ_3", "Unsere Chat-Etikette-Richtlinien");
@@ -328,6 +331,7 @@ define("L_DEFAULT_TOPIC_1", "Dies ist die Standardüberschrift. Bearbeiten Sie l
 define("L_PIC", "Bild gepostet von");
 define("L_PIC_RESIZED", "Größe ändern auf");
 define("L_HELP_IMG", "gesamtpfad zum Bild");
+define("L_NO_IMAGE", "Ungültige oder nichtöffenliche URL zum Bild\\nBitte korrigieren!");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s ist nicht mehr Moderator für sämtliche Räume in diesem Chat.");
@@ -411,6 +415,8 @@ define("L_PRIV_RELOAD", "Seite neu laden");
 define("L_PRIV_MARK_ALL", "Alle als Gelesen markieren");
 define("L_PRIV_MARK_SEL", "Markierte als Gelesen markieren");
 define("L_PRIV_REMOVE", "Kontrollierte PMs Entfernen");
+define("L_PRIV_PM", "(Privatnachricht)");
+define("L_PRIV_WISP", "(Flüstern)");
 
 // Color Input Box mod by Ciprian
 define("L_ENABLED", "Aktiviert");
@@ -515,6 +521,7 @@ define("L_NOT_SELECTED", "nicht gewählt");
 define("L_NOT_SELECTED_F", ""); // feminine word, if it's the case
 define("L_EMAIL_1", "eine Mail zu senden");
 define("L_FULLSIZE_PIC", "um das Bild in der Orginalgröße zu öffnen");
+define("L_PRIVACY", "um unsere Datenschutzrichtlinie zu lesen"); //Click here to…
 define("L_AUTHOR", "zu kontaktieren");
 define("L_DEVELOPER", "den Programmierer des Chats");
 define("L_OWNER", "den Besitzer dieses Chats");
@@ -599,9 +606,10 @@ define("L_LANG_ENUS", "US Englisch"); // for US formats and flags (also know as 
 define("L_LANG_ES", "Spanisch");
 define("L_LANG_FR", "Französisch");
 define("L_LANG_GR", "Griechisch");
+define("L_LANG_HE", "Hebbräisch");
 define("L_LANG_HI", "Indien");
 define("L_LANG_HU", "Ungarisch");
-define("L_LANG_ID", "Indonesien");
+define("L_LANG_ID", "Indonesisch");
 define("L_LANG_IT", "Italienisch");
 define("L_LANG_KA", "Georgien");
 define("L_LANG_NL", "Niederländisch");
@@ -654,4 +662,8 @@ define("L_RESTRICTED_ROM", "%s für diesen Raum wurden die Beschränkung erfolgr
 // OpenID login mod by Ciprian
 define("L_OPID_SIGN", "Einlgeloggt mit Benutzername OpenID");
 define("L_OPID_REG", "Importiere deine OpenID ins profile.");
+
+// Support buttons
+define("L_SUPP_WARN", "Sie haben sich entschlossen, die nichtkommerzielle Entwicklung von\\n".APP_NAME." durch eine Geldspende an das Projekt zu unterstützen\\nHerzlichen Dank für Ihre Unterstützung!\\n\\nBitte beachten: Dies ist keine Spende an den Chatserverbetreiber!\\nBitte geben Sie den gewünschten Geldbetrag auf der nächsten Seite ein..\\n\\nFortfahren?");
+define("L_SUPP_ALT", "Unterstützen Sie die Weiterentwicklung und Sicherheitsbetreuung von ".APP_NAME." - es ist Schnell, Frei und Sicher!");
 ?>
