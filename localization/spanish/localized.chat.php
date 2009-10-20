@@ -660,6 +660,6 @@ define("L_OPID_SIGN", "Loguearse usando un OpenID");
 define("L_OPID_REG", "Importa tu perfil de OpenID");
 
 // Support buttons
-define("L_DONATION_WARN", "Has escogido contribuir con el Desarrollo gratuito de\\n".APP_NAME." al hacer una donación al programador.\\nGracias por tu apoyo!\\n\\nNota: el recipiente no es el dueño de este chat.\\nPor favor pon la cantidad en la siguiente página.\\n\\nContinuar?");
+define("L_DONATION_WARN", "Has escogido contribuir con el Desarrollo gratuito de\\n".APP_NAME." al hacer una donación al programador.\\nGracias por tu apoyo!\\n\\nNota: el beneficiario no es el dueño de este chat.\\nPor favor pon la cantidad en la siguiente página.\\n\\nContinuar?");
 define("L_DONATION_ALT", "Usa PayPal para apoyar el desarrollo de ".APP_NAME." - es Rápido, Gratis y Seguro!");
 ?>

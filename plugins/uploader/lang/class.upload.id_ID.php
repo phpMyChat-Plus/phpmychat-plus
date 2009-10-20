@@ -3,8 +3,8 @@
 // | class.upload.id_ID.php                                                 |
 // +------------------------------------------------------------------------+
 // | Copyright (c) Irwan Butar Butar 2008. All rights reserved.             |
-// | Version       0.1                                                      |
-// | Last modified 07/07/2008                                               |
+// | Version       0.28                                                     |
+// | Last modified 19/09/2009                                               |
 // | Email         irwansah.putra@gmail.com                                 |
 // | Web           http://www.kupluk.com                                    |
 // +------------------------------------------------------------------------+
@@ -31,7 +31,7 @@
  * Class upload Indonesian (Bahasa) translation.
  * Based on class.upload version 0.25
  *
- * @version   0.1 (2008-07-07)
+ * @version   0.28
  * @author    Irwan Butar Butar (irwansah.putra@gmail.com)
  * @license   http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright Irwan Butar Butar 2008. All rights reserved.
@@ -47,6 +47,9 @@
     $translation['uploaded_too_big_html']       = 'Pengunggahan tidak berhasil (ukuran berkas melebihi ukuran MAX_FILE_SIZE yang disebutkan dalam form di html - %s).';
     $translation['uploaded_partial']            = 'Pengunggahan tidak berhasil (berkas yang terunggah baru sebahagian saja).';
     $translation['uploaded_missing']            = 'Pengunggahan tidak berhasil (tidak ada berkas yang berhasil terunggah).';
+	$translation['uploaded_no_tmp_dir']         = 'Pengunggahan tidak berhasil (berkas sementaranya hilang).';
+	$translation['uploaded_cant_write']         = 'Pengunggahan tidak berhasil (gagal saat penulisan ke tempat penyimpanan).';
+	$translation['uploaded_err_extension']      = 'Pengunggahan tidak berhasil (pengiriman file dihentikan karena ekstensinya).';    
     $translation['uploaded_unknown']            = 'Pengunggahan tidak berhasil (kode kesalahan tidak dikenali).';
     $translation['try_again']                   = 'Pengunggahan tidak berhasil. Mohon coba lagi.';
     $translation['file_too_big']                = 'Ukuran berkas terlalu besar (%s).';
