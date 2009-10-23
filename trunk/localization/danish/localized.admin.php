@@ -1,5 +1,5 @@
 <?php
-// File : danish/localized.admin.php - plus version (26.08.2008 - rev.14)
+// File : danish/localized.admin.php - plus version (07.06.2009 - rev.14)
 // Original translation by Kenneth Kristiansen <kk@linuxfreak.adsl.dk>
 // Updates, corrections and additions for the Plus version by Bente Feldballe
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -23,6 +23,9 @@ define("A_MENU_6", "Chat extras");
 define("A_MENU_7", "Søg");
 define("A_MENU_8", "Oversigt");
 define("A_MENU_9", "Log arkiv");
+define("A_MENU_1a", "Profiler");
+define("A_MENU_2a", "Statistik");
+define("A_MOD_DEV", "Mod under udarbejdelse");
 define("A_LOGOUT", "Log ud");
 
 // Frame for registered users
@@ -166,4 +169,12 @@ define("A_SEARCH_25", "Moderér denne bruger");
 // Connected users Page
 define("A_LURKING_1", "Tilsluttede brugere og lurepassere");
 define("A_LURKING_2", "Lurepasning deaktiveret.");
+
+// Statistics Page
+define("A_STATS_1", "Chat statistik-oversigt");
+define("A_STATS_2", "Dataindsamling started den %s"); //date
+define("A_STATS_3", "Generel statistik (Altid)");
+define("A_STATS_4", "Detaljeret statistik (Sidste % dages aktivitet)"); //number of days
+define("A_STATS_5", "Statistik deaktiveret");
+define("A_STATS_6", "Top %s"); //Top 10 or Top 5
 ?>

@@ -329,7 +329,7 @@ define("L_DEFAULT_TOPIC_1", "Este es un tópico por defecto. ¡Edite localizatio
 define("L_PIC", "Imagen colocada por");
 define("L_PIC_RESIZED", "Escalar a");
 define("L_HELP_IMG", "dirección completa de la imagen que se mostrará");
-define("L_NO_IMAGE", "Esta no es una URL valida de una imagen pública remota.\\nInténtalo de nuevo!");
+define("L_NO_IMAGE", "Esta no es una URL valida de una imagen pública remota.\\n¡Inténtalo de nuevo!");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s ya no es un moderador en ninguna sala de este chat.");
@@ -660,6 +660,6 @@ define("L_OPID_SIGN", "Loguearse usando un OpenID");
 define("L_OPID_REG", "Importa tu perfil de OpenID");
 
 // Support buttons
-define("L_DONATION_WARN", "Has escogido contribuir con el Desarrollo gratuito de\\n".APP_NAME." al hacer una donación al programador.\\nGracias por tu apoyo!\\n\\nNota: el beneficiario no es el dueño de este chat.\\nPor favor pon la cantidad en la siguiente página.\\n\\nContinuar?");
-define("L_DONATION_ALT", "Usa PayPal para apoyar el desarrollo de ".APP_NAME." - es Rápido, Gratis y Seguro!");
+define("L_SUPP_WARN", "Has escogido contribuir con el Desarrollo gratuito de\\n".APP_NAME." al hacer una donación al programador.\\n¡Gracias por tu apoyo!\\n\\nNota: el beneficiario no es el dueño de este chat.\\nPor favor pon la cantidad en la siguiente página.\\n\\nContinuar?");
+define("L_SUPP_ALT", "¡Usa PayPal para apoyar el desarrollo de ".APP_NAME." - es Rápido, Gratis y Seguro!");
 ?>

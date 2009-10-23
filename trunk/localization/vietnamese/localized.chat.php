@@ -432,7 +432,7 @@ define("L_COL_HELP_P3a", "Màu mặc định là <u><SPAN style=\"color:".COLOR_
 define("L_COL_HELP_USER_STATUS", "Tình trạng của bạn");
 define("L_COL_TUT", "Sử dụng màu trong khi tán gẫu");
 define("L_NULL", "Rỗng");
-define("L_NULL_F", "");
+define("L_NULL_F", ""); // feminine word, if it's the case
 define("L_ROOM_COLOR", "màu phòng");
 define("L_PRO_COLOR", "màu của bạn");
 

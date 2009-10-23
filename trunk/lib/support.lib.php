@@ -10,6 +10,7 @@ switch (L_LANG)
 		break;
 	case "da_DK":
 		$ppbutton = ($pptype == "big") ? "3626398" : "3626431";
+		$ppalt = "PayPal - Den sikreste og nemmeste måde at overføre penge online.";
 		break;
 	case "he_IL":
 		$ppbutton = ($pptype == "big") ? "7148858" : "7148805";
