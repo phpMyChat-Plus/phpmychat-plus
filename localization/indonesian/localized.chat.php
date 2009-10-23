@@ -432,7 +432,7 @@ define("L_COL_HELP_P3a", "Warna asalnya adalah <u><SPAN style=\"warna:".COLOR_CD
 define("L_COL_HELP_USER_STATUS", "status Anda");
 define("L_COL_TUT", "Menggunakan teks berwarna didalam tempat obrol");
 define("L_NULL", "Batal");
-define("L_NULL_F", "Batal"); // feminine word, if it's the case
+define("L_NULL_F", ""); // feminine word, if it's the case
 define("L_ROOM_COLOR", "warna kamar");
 define("L_PRO_COLOR", "warna biodata");
 
@@ -520,9 +520,9 @@ define("L_LINKS_18", "urut dari bawah ke atas");
 define("L_LINKS_19", "untuk memodifikasi Gravatar"); // do not translate the word "Gravatar"!
 define("L_SWITCH", "Pindah ke"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "dipilih"); // E.g. "French (selected)" (Country Flags mouseover / Language switching)
-define("L_SELECTED_F", "dipilih"); // feminine word, if it's the case
+define("L_SELECTED_F", ""); // feminine word, if it's the case
 define("L_NOT_SELECTED", "tidak dipilih");
-define("L_NOT_SELECTED_F", "tidak dipilih"); // feminine word, if it's the case
+define("L_NOT_SELECTED_F", ""); // feminine word, if it's the case
 define("L_EMAIL_1", "untuk mengirimkan email");
 define("L_FULLSIZE_PIC", "untuk membuka gambar dengan ukuran penuh");
 define("L_PRIVACY", "untuk membaca Kebijakan Pribadi kita"); //Click here to…

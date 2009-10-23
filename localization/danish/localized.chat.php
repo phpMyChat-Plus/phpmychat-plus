@@ -1,5 +1,5 @@
 <?php
-// File : danish/localized.chat.php - plus version (14.02.2009 - rev.42)
+// File : danish/localized.chat.php - plus version (01.08.2009 - rev.43)
 // Original translation by Jonas Koch Bentzen <post@jonaskochbentzen.dk> & Kenneth Kristiansen <kk@linuxfreak.adsl.dk>
 // Updates, corrections and additions for the Plus version by Bente Feldballe
 // Do not use ' but use  ’  instead (utf-8 edit bug)
@@ -212,6 +212,7 @@ define("L_HELP_MSG", "meddelelse");
 define("L_HELP_MSGS", "meddelelser");
 define("L_HELP_ROOM", "rum");
 define("L_HELP_BUZZ", "~lydnavn");
+define("L_HELP_BUZZ1", "Buzz..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "grunden");
 define("L_HELP_MR", "Hr.");
 define("L_HELP_MS", "Fr.");
@@ -251,6 +252,8 @@ define("L_HELP_CMD_30", "Den anden kommando gør det samme som kommandoen /me, m
 define("L_HELP_CMD_31", "Ændrer den rækkefølge, som brugerne vises på listen: efter ankomsttid eller alfabetisk.");
 define("L_HELP_CMD_32", "Dette er den tredie (rollespils) version af terningespillet.<br />Sådan gør du: /d{n1}[tn2] eller /d{n1};<br />n1 kan have en hvilken som helst værdi <b>mellem 1 og 100</b> (tallet svarer til antallet af kast pr. terning).<br />n2 kan have en hvilken som helst værdi <b>mellem 1 og %s</b> (tallet svarer til antallet af terninger pr. kast).");
 define("L_HELP_CMD_33", "Du kan ændre fontstørrelsen på dine poster i chatten efter behag (tilladte værdier for n: <b>mellem 7 og 15</b>); kommandoen /size ændrer fontstørrelsen tilbage til standardværdien (<b>".$FontSize."</b>).");
+define("L_HELP_CMD_34", "Her kan en bruger angive tekstens justering (ltr = venstre-mod-højre, rtl = højre-mod-venstre).");
+define("L_HELP_CMD_VAR", "Synonymer (varianter): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Chat Etikette");
 define("L_HELP_ETIQ_2", "Vi ønsker at denne chat skal være venlig og sjov, og derfor bedes du følge nedenstående retningslinjer. Hvis du ikke overholder retningslinjerne, risikerer du, at en af chattens moderatorer sparker dig ud fra chatten.<br /><br />Tak,");
 define("L_HELP_ETIQ_3", "Retningslinjer for denne chat");
@@ -325,6 +328,7 @@ define("L_DEFAULT_TOPIC_1", "Dette er et standardemne. Redigér filen localizati
 define("L_PIC", "Billede postet af");
 define("L_PIC_RESIZED", "Resized til");
 define("L_HELP_IMG", "den fulde sti til det billede, du vil poste");
+define("L_NO_IMAGE", "Dette er ikke en gyldig URL for et offentligt remote image.\\nPrøv igen!");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s er ikke længere moderator for noget chatrum i denne chat.");
@@ -406,6 +410,8 @@ define("L_PRIV_RELOAD", "Opdatér side");
 define("L_PRIV_MARK_ALL", "Markér alle som Læst");
 define("L_PRIV_MARK_SEL", "Markér udvalgte som Læst");
 define("L_PRIV_REMOVE", "Slet markerede meddelelser"); // or selected
+define("L_PRIV_PM", "(privat)");
+define("L_PRIV_WISP", "(hvisk)");
 
 // Color Input Box mod by Ciprian
 define("L_ENABLED", "Til");
@@ -518,6 +524,7 @@ define("L_NOT_SELECTED", "ikke valgt");
 define("L_NOT_SELECTED_F", ""); // feminine word, if it's the case
 define("L_EMAIL_1", "for at sende en e-mail til");
 define("L_FULLSIZE_PIC", "for at åbne billedet i fuld størrelse");
+define("L_PRIVACY", "for at læse vores Politik om Privatliv"); //Click here to…
 define("L_AUTHOR", "forfatteren"); //Phrase will look like this: L_CLICK." ".L_LINKS_6." ".L_AUTHOR == Click here - to contact - the author
 define("L_DEVELOPER", "ophavsmanden til denne chat"); //same here
 define("L_OWNER", "ejeren af denne chat"); //same here
@@ -603,8 +610,10 @@ define("L_LANG_ENUS", "Amerikansk Engelsk"); // gælder amerikanske formater og 
 define("L_LANG_ES", "Spansk");
 define("L_LANG_FR", "Fransk");
 define("L_LANG_GR", "Græsk");
+define("L_LANG_HE", "Hebræisk");
 define("L_LANG_HI", "Hindi");
 define("L_LANG_HU", "Ungarsk");
+define("L_LANG_ID", "Indonesisk");
 define("L_LANG_IT", "Italiensk");
 define("L_LANG_KA", "Georgisk");
 define("L_LANG_NL", "Hollandsk");
@@ -657,4 +666,8 @@ define("L_RESTRICTED_ROM", "%s har ikke længere adgang til dette rum.");
 // OpenID login mod by Ciprian
 define("L_OPID_SIGN", "Log ind med OpenID");
 define("L_OPID_REG", "Importér din OpenID profil");
+
+// Support buttons
+define("L_SUPP_WARN", "Du har valgt at bidrage til udviklingen af det gratis program\\n".APP_NAME." ved at sende et bidrag til programudvikleren.\\nTak for din støtte!\\n\\nBemærk: modtageren er ikke ejeren af denne chat.\\nIndtast beløbsstørrelse på næste side.\\n\\nFortsæt?");
+define("L_SUPP_ALT", "Støt udviklingen af ".APP_NAME." med PayPal - det er Hurtigt, Gratis og Sikkert!");
 ?>
