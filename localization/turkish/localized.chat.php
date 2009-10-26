@@ -1,5 +1,5 @@
 <?php
-// File : turkish/localized.chat.php - plus version (11.08.2008 - rev.41)
+// File : turkish/localized.chat.php - plus version (01.08.2009 - rev.43)
 // Original translation in turkish by Volkan Övün <vovun@hotmail.com>
 // Finetunning by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -211,6 +211,7 @@ define("L_HELP_MSG", "mesaj");
 define("L_HELP_MSGS", "mesajı");
 define("L_HELP_ROOM", "oda");
 define("L_HELP_BUZZ", "~ses_adı");
+define("L_HELP_BUZZ1", "Biiip..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "sebep");
 define("L_HELP_MR", "Bay");
 define("L_HELP_MS", "Bayan");
@@ -250,6 +251,8 @@ define("L_HELP_CMD_30", "İkinci komut /me komutuyla aynıdır fakat cinsiyetini
 define("L_HELP_CMD_31", "Kullanıcıların listedeki sıralamasını giriş saatine göre veya alfabetik olarak değiştirir.");
 define("L_HELP_CMD_32", "Bu, zar atma oyununun üçüncü şeklidir.<br />Kullanımı: /d{n1}[tn2] yazın /d{n1} yazın;<br />n1 <b>1 ve 100</b> arasında herhangi bir değer alabilir.(zarların yuvarlanma sayısını ifade eder).<br />n2 <b>1 ve %s arasında</b> herhangi bir değer alabilir. (zarların her atılıştaki yuvarlanma sayısını ifade eder).");
 define("L_HELP_CMD_33", "Mesajdaki harflerin büyüklüğünü kullanıcının tercihine göre değiştirir. ( n için izin verilen değerler: <b>7 ve 15 arası</b>); /size komutu harf büyüklüğünü varsayılan değere geri çevirir (<b>".$FontSize."</b>).");
+define("L_HELP_CMD_34", "Bu, bir kullanıcının gönderdiği mesajın yazım yönünü belirlemesine izin (ltr = soldan-sağa, rtl = sağdan–sola).");
+define("L_HELP_CMD_VAR", "Eş anlamlılar: %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Sohbet Görgü Kuralları");
 define("L_HELP_ETIQ_2", "Sitemiz üyelerini arkadaşlık çerçevesi içinde tutmayı ve eğlendirmeyi hedeflemektedir, bu nedenle aşağıdaki kurallara titizlikle uyunuz. Eğer kuralları çiğnerseniz Sohbet Denetleyicilerimizden biri sizi sohbetten dışarı atabilir.<br /><br />Teşekkürler,");
 define("L_HELP_ETIQ_3", "Sohbet Görgü Kuralları");
@@ -324,6 +327,7 @@ define("L_DEFAULT_TOPIC_1", "Bu, varsayilan konudur. Degiştirmek için localiza
 define("L_PIC", "Resmi gönderen:");
 define("L_PIC_RESIZED", "Ayarlanan yeni boyut:");
 define("L_HELP_IMG", "gönderilen resme tam adres:");
+define("L_NO_IMAGE", "Bu, genel bir uzak-resim dosyası için geçerli URL değil.\\nTekrar deneyin!");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s artık bu sohbetteki hiçbir odada Denetleyici değil.");
@@ -395,6 +399,8 @@ define("PM_DISABLED_ERROR", "Fısıldamak (özel mesajlaşma)\\nbu sohbette etki
 define("L_NEXT_PAGE", "Sonraki sayfaya git");
 define("L_NEXT_READ", "Sonraki %s oku"); // message / 10 messages
 define("L_ROOM_ALL", "Bütün odalar");
+define("L_PRIV_PM", "(özel)");
+define("L_PRIV_WISP", "(fısılda)");
 
 // Color Input Box mod by Ciprian
 define("L_ENABLED", "Aktif");
@@ -523,6 +529,7 @@ define("L_NOT_SELECTED", "seçilmedi");
 define("L_NOT_SELECTED_F", ""); // feminine word, if it's the case
 define("L_EMAIL_1", "E-posta göndermek için");
 define("L_FULLSIZE_PIC", "Resmi büyültmek için");
+define("L_PRIVACY", "Gizlilik Politikamızı okuyun"); //Click here to…
 define("L_AUTHOR", "Yazarla"); //Phrase will look like this: L_AUTHOR." ".L_LINKS_6." "L_CLICKS. == The author - to contact - click here
 define("L_DEVELOPER", "Sohbetin geliştiricisiyle"); //same here
 define("L_OWNER", "Sohbetin sahibiyle"); //same here
@@ -607,8 +614,10 @@ define("L_LANG_ENUS", "Amerikan İngilizcesi");
 define("L_LANG_ES", "İspanyolca");
 define("L_LANG_FR", "Fransızca");
 define("L_LANG_GR", "Rumca");
+define("L_LANG_HE", "İbranice");
 define("L_LANG_HI", "Hintçe");
 define("L_LANG_HU", "Macarca");
+define("L_LANG_ID", "Endonezyaca");
 define("L_LANG_IT", "İtalyanca");
 define("L_LANG_KA", "Gürcüce");
 define("L_LANG_NL", "Flemenkçe");
@@ -666,4 +675,8 @@ define("L_RESTRICTED_ROM", "%s bu odadan başarıyla çıkarıldı.");
 // OpenID login mod by Ciprian
 define("L_OPID_SIGN", "Bir OpenID ye kayıt yapın");
 define("L_OPID_REG", "OpenID profilinizi buraya aktarın");
+
+// Support buttons
+define("L_SUPP_WARN", "Yazılımcıya bağış yaparak,\\n".APP_NAME."in ücretsiz olarak geliştirilmesine katkıda bulundunuz.\\n Desteğiniz için teşekkür ederiz!\\n\\nNot: bağışı alan bu sohbetin kurucusu değildir.\\nSonraki sayfada lütfen bağış miktarını yazınız.\\n\\nDevam etmek istiyor musunuz?");
+define("L_SUPP_ALT", APP_NAME." geiştirilmesini PayPal ile destekleyin. Bu yöntem hızlı, ücretsiz ve güvenli!");
 ?>

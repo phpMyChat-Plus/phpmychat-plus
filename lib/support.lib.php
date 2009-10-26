@@ -6,7 +6,7 @@ switch (L_LANG)
 {
 	case "bg_BG":
 		$ppbutton = ($pptype == "big") ? "3626487" : "3626473";
-		$ppalt = "PayPal – Сигурният и лесен начин да платите онлайн.";
+		$ppalt = "PayPal - Сигурният и лесен начин да платите онлайн.";
 		break;
 	case "da_DK":
 		$ppbutton = ($pptype == "big") ? "3626398" : "3626431";
@@ -29,13 +29,14 @@ switch (L_LANG)
 		break;
 	case "sr_CS":
 		$ppbutton = ($pptype == "big") ? "3626707" : "3626691";
-		$ppalt = "PayPal – Bezbedniji i lakši način za on-line plaćanje.";
+		$ppalt = "PayPal - Bezbedniji i lakši način za on-line plaćanje.";
 		break;
 	case "sv_SE":
 		$ppbutton = ($pptype == "big") ? "3626744" : "3626768";
 		break;
 	case "tr_TR":
 		$ppbutton = ($pptype == "big") ? "3626822" : "3626800";
+		$ppalt = "PayPal - çevrimiçi ödeme yapmanın en kolay ve güvenli yolu.";
 		break;
 	case "vi_VN":
 		$ppbutton = ($pptype == "big") ? "3626846" : "3626856";
@@ -44,7 +45,7 @@ switch (L_LANG)
 	case "de_DE":
 		$pplang .= "/DE";
 		$ppbutton = ($pptype == "big") ? "3625065" : "3625046";
-		$ppalt = "Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.";
+		$ppalt = "Jetzt einfach, schnell und sicher online bezahlen - mit PayPal.";
 		$ppexists = 1;
 		break;
 	case "en_GB":

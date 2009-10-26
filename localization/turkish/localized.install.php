@@ -1,5 +1,5 @@
 <?php
-// File : turkish/localized.install.php - plus version (29.07.2008 - rev.6)
+// File : turkish/localized.install.php - plus version (07.06.2009 - rev.7)
 //Translation by Volkan Övün <vovun@hotmail.com>
 // Do not use ' ; use ’ istead (utf-8 edit bug)
 
@@ -71,6 +71,7 @@ define("L_P2_FORM12", "logsadmin isimli dosyanın adını değiştirin");
 define("L_P2_FORM13", "Eğer phpMyChat’ı phpNuke veya phpBB’nin entegre modülü olarak kullanacaksanız, ayar tablosunun adı \"c_config\" ve kayıtlı kullanıcılar tablosunun adı \"c_reg_users\" olmalıdır!");
 define("L_P2_FORM14", "Tahmin edilmesi zor bir ad seçin!");
 define("L_P2_FORM15", "Sohbet sunucunuzun adı");
+define("L_P2_FORM16", "İstatistikler için tablo");
 define("L_P3_FORM1", "Yönetici hesabı için kullanıcı adı");
 define("L_P3_FORM2", "Yönetici hesabı için şifre");
 define("L_P3_FORM3", "Şifre onayı");

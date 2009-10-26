@@ -1,5 +1,5 @@
 <?php
-// File : turkish/localized.admin.php - plus version (26.08.2008 - rev.14
+// File : turkish/localized.admin.php - plus version (07.06.2009 - rev.15)
 // Original translation in turkish by Volkan Övün <vovun@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -22,6 +22,9 @@ define("A_MENU_6", "Sohbet ekstraları");
 define("A_MENU_7", "Ara");
 define("A_MENU_8", "Bağlantılar");
 define("A_MENU_9", "Sohbet kayıtlarını sakla");
+define("A_MENU_1a", "Profiller");
+define("A_MENU_2a", "İstatistikler");
+define("A_MOD_DEV", "Mod geliştiriliyor");
 define("A_LOGOUT", "Çıkış");
 
 // Frame for registered users
@@ -165,4 +168,12 @@ define("A_SEARCH_25", "Bu kullanıcıyı denetle");
 // Connected users Page
 define("A_LURKING_1", "Bağlı kullanıcılar ve gözlem yapanlar") ;
 define("A_LURKING_2", "Gözlemleme devre dışı bırakılmıştır.") ;
+
+// Statistics Page
+define("A_STATS_1", "Sohbet istatistikleri sayfası");
+define("A_STATS_2", "Veri kayıtları başlama tarihi: %s"); //date
+define("A_STATS_3", "Tüm zamanların istatistiği");
+define("A_STATS_4", "Detalı istatistikler (Son %s günün aktiviteleri)"); //number of days
+define("A_STATS_5", "İstatistikler devre dışı");
+define("A_STATS_6", "Son %s"); //Top 10 or Top 5
 ?>
