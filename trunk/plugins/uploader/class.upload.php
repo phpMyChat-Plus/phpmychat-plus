@@ -40,6 +40,10 @@
  */
 
 /**
+ * @phpMyChat Integrator    Ciprian Murariu <ciprianmp@yahoo.com>
+ */
+
+/**
  * Class upload
  *
  * <b>What does it do?</b>
@@ -2176,7 +2180,7 @@ class upload {
         $this->translation['uploaded_missing']            = 'File upload error (no file was uploaded).';
         $this->translation['uploaded_no_tmp_dir']         = 'File upload error (missing a temporary folder).';
         $this->translation['uploaded_cant_write']         = 'File upload error (failed to write file to disk).';
-        $this->translation['uploaded_err_extension']      = 'File upload error (file upload stopped by extension).';
+        $this->translation['uploaded_err_extension']      = 'File upload error (extension not allowed for upload).';
         $this->translation['uploaded_unknown']            = 'File upload error (unknown error code).';
         $this->translation['try_again']                   = 'File upload error. Please try again.';
         $this->translation['file_too_big']                = 'File too big (%s).';

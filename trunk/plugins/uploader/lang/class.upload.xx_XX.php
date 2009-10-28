@@ -49,7 +49,7 @@
     $translation['uploaded_missing']            = 'File upload error (no file was specified).';
     $translation['uploaded_no_tmp_dir']         = 'File upload error (missing a temporary folder).';
     $translation['uploaded_cant_write']         = 'File upload error (failed to write file to disk).';
-    $translation['uploaded_err_extension']      = 'File upload error (file upload stopped by extension).';
+	$translation['uploaded_err_extension']      = 'File upload error (extension not allowed for upload).';
     $translation['uploaded_unknown']            = 'File upload error (unknown error code).';
     $translation['try_again']                   = 'File upload error. Please try again.';
     $translation['file_too_big']                = 'File too big (%s).';

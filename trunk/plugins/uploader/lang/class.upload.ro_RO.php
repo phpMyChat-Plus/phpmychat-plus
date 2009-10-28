@@ -6,7 +6,6 @@
 // | Version       0.28                                                     |
 // | Email         cristian.datculescu@gmail.com                            |
 // | Last modified 25/09/2009                                               |
-// | Email         ciprianmp@yahoo.com                            |
 // +------------------------------------------------------------------------+
 // | This program is free software; you can redistribute it and/or modify   |
 // | it under the terms of the GNU General Public License version 2 as      |
@@ -32,7 +31,7 @@
  *
  * @version   0.28
  * @author Cristian Datculescu (cristian.datculescu@gmail.com) - v.0.25
- * @updater Ciprian Murariu (siprianmp@yahoo.com) - added utf-8 & diacritics support
+ * @updater Ciprian Murariu (ciprianmp@yahoo.com) - added utf-8 & diacritics support
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright Cristian Datculescu & Ciprian Murariu
  * @package cmf
@@ -49,7 +48,7 @@
     $translation['uploaded_missing']            = 'Eroare upload fişier (niciun fişier nu a fost specificat).';
     $translation['uploaded_no_tmp_dir']         = 'Eroare upload fişier (directorul temporar nu există).';
     $translation['uploaded_cant_write']         = 'Eroare upload fişier (scrierea fişierului pe disc a eşuat).';
-    $translation['uploaded_err_extension']      = 'Eroare upload fişier (extensia nu este permisa pentru upload).';
+    $translation['uploaded_err_extension']      = 'Eroare upload fişier (extensia nu este permisă pentru upload).';
     $translation['uploaded_unknown']            = 'Eroare upload fişier (cod eroare necunoscut).';
     $translation['try_again']                   = 'Eroare upload fişier. Reîncercaţi.';
     $translation['file_too_big']                = 'Mărimea fişierului este prea mare (%s).';
