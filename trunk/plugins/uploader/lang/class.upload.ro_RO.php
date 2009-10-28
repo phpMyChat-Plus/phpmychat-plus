@@ -5,7 +5,7 @@
 // | Copyright (c) Cristian Datculescu 2007 & Ciprian Murariu 2008. All rights reserved.           |
 // | Version       0.28                                                     |
 // | Email         cristian.datculescu@gmail.com                            |
-// | Last modified 12/08/2008                                               |
+// | Last modified 25/09/2009                                               |
 // | Email         ciprianmp@yahoo.com                            |
 // +------------------------------------------------------------------------+
 // | This program is free software; you can redistribute it and/or modify   |
