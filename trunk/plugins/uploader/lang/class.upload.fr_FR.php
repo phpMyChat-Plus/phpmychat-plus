@@ -3,8 +3,8 @@
 // | class.upload.fr_FR.php                                                 |
 // +------------------------------------------------------------------------+
 // | Copyright (c) Colin Verot 2003-2007. All rights reserved.              |
-// | Version       0.25                                                     |
-// | Last modified 17/11/2007                                               |
+// | Version       0.28                                                     |
+// | Last modified 28/10/2009                                               |
 // | Email         colin@verot.net                                          |
 // | Web           http://www.verot.net                                     |
 // +------------------------------------------------------------------------+
@@ -30,7 +30,7 @@
 /**
  * Class upload french translation
  *
- * @version   0.25
+ * @version   0.28
  * @author    Colin Verot <colin@verot.net>
  * @license   http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright Colin Verot
@@ -41,12 +41,15 @@
 
     $translation = array();
     $translation['file_error']                  = 'Erreur de transmission. Essayez encore.';
-    $translation['local_file_missing']          = 'Le fichier local n’existe pas.';
-    $translation['local_file_not_readable']     = 'Le fichier local ne peut être ouvert en lecture.';
-    $translation['uploaded_too_big_ini']        = 'Le fichier transmis dépasse la taille autorisée dans la configuration php.ini - %s.';
-    $translation['uploaded_too_big_html']       = 'Le fichier transmis dépasse la taille autorisée dans le formulaire - %s.';
-    $translation['uploaded_partial']            = 'Le fichier n’a été que partiellement transmis.';
-    $translation['uploaded_missing']            = 'Le serveur n’a pas reçu de fichier.';
+    $translation['local_file_missing']          = 'Erreur de chargement de fichier (le fichier local n’existe pas).';
+    $translation['local_file_not_readable']     = 'Erreur de chargement de fichier (le fichier local ne peut être ouvert en lecture).';
+    $translation['uploaded_too_big_ini']        = 'Erreur de chargement de fichier (le fichier transmis dépasse la taille autorisée dans la configuration php.ini - %s).';
+    $translation['uploaded_too_big_html']       = 'Erreur de chargement de fichier (le fichier transmis dépasse la taille autorisée dans le formulaire - %s).';
+    $translation['uploaded_partial']            = 'Erreur de chargement de fichier (le fichier n’a été que partiellement transmis).';
+    $translation['uploaded_missing']            = 'Erreur de chargement de fichier (le serveur n’a pas reçu de fichier).';
+	$translation['uploaded_no_tmp_dir']         = 'Erreur de chargement de fichier (répertoire temporaire manquant).';
+	$translation['uploaded_cant_write']         = 'Erreur de chargement de fichier (écriture du fichier sur disque impossible).';
+	$translation['uploaded_err_extension']      = 'Erreur de chargement de fichier (chargement du fichier interrompu par l’extension).';
     $translation['uploaded_unknown']            = 'Erreur inconnue.';
     $translation['try_again']                   = 'Erreur de transmission. Essayez encore.';
     $translation['file_too_big']                = 'Fichier trop gros (%s).';

@@ -1,5 +1,5 @@
 <?php
-// File : french/localized.chat.php - plus version (14.02.2009 - rev.42)
+// File : french/localized.chat.php - plus version (01.08.2009 - rev.43)
 // Translation for Plus version by Pierre Liget <sourceforge@pliget.freesurf.fr> 10.12.2007
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -211,7 +211,8 @@ define("L_HELP_NOTE", "Toutes les commandes doivent être utilisées en anglais!
 define("L_HELP_MSG", "message");
 define("L_HELP_MSGS", "messages");
 define("L_HELP_ROOM", "salon");
-define("L_HELP_BUZZ", "~soundname");
+define("L_HELP_BUZZ", "~sonnom");
+define("L_HELP_BUZZ1", "Dring..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "la raison");
 define("L_HELP_MR", "M.");
 define("L_HELP_MS", "Mme");
@@ -251,6 +252,8 @@ define("L_HELP_CMD_30", "La deuxième commande fait la même chose que /me mais 
 define("L_HELP_CMD_31", "Change l’ordre de tri de la liste des utilisateurs: par heure de connexion au chat ou par ordre alphabétique.");
 define("L_HELP_CMD_32", "C’est une troisième version du jeu de dés.<br />Usage: /d{n1}[tn2] ou /d{n1};<br />n1 peut prendre n’importe quelle valeur <b>entre 1 et 100</b> (représente le nombre de faces par dé).<br />n2 peut prendre n’importe quelle valeur <b>entre 1 et %s</b> (représente le nombre de dés par lancer).");
 define("L_HELP_CMD_33", "Modifie la taille des caractères des messages du chat (valeurs autorisées pour n: <b>entre 7 et 15</b>); la commande /size remet la taille par défaut (<b>".$FontSize."</b>).");
+define("L_HELP_CMD_34", "Permet à un utilisateur de spécifier l’orientation du texte d’un message (ltr,gàd = de gauche à droite; rtl,dàg = de droite à gauche).");
+define("L_HELP_CMD_VAR", "Synonymes (variantes): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Etiquette du Chat");
 define("L_HELP_ETIQ_2", "Notre chat aimerait conserver sa communauté conviviale et amusante, merci de respecter les directives suivantes. Si vous n’observez pas ces règles, l’un de nos modérateurs vous exclura du chat.<br /><br />Merci,");
 define("L_HELP_ETIQ_3", "Directives de l’Etiquette de notre Chat");
@@ -325,6 +328,7 @@ define("L_DEFAULT_TOPIC_1", "Sujet par défaut. Editer localization/_owner/owner
 define("L_PIC", "Image postée par");
 define("L_PIC_RESIZED", "Redimensionnée à");
 define("L_HELP_IMG", "chemin complet de l’image qui doit être postée");
+define("L_NO_IMAGE", "Ce n’est pas une adresse valide pour une image publique distante.\\nVeuillez réessayer!");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s n’est plus modérateur pour tous les salons de ce chat.");
@@ -406,6 +410,8 @@ define("L_PRIV_RELOAD", "Actualiser");
 define("L_PRIV_MARK_ALL", "Marquer comme Lu");
 define("L_PRIV_MARK_SEL", "Marquer la sélection comme Lu");
 define("L_PRIV_REMOVE", "Supprimer les messages sélectionnés"); // or selected
+define("L_PRIV_PM", "(privé)");
+define("L_PRIV_WISP", "(murmure)");
 
 // Color Input Box mod by Ciprian
 define("L_ENABLED", "Activé");
@@ -518,6 +524,7 @@ define("L_NOT_SELECTED", "non sélectionné");
 define("L_NOT_SELECTED_F", "non sélectionnée"); // feminine word, if it's the case
 define("L_EMAIL_1", "pour envoyer un e-mail");
 define("L_FULLSIZE_PIC", "pour ouvrir cette image dans sa taille originale");
+define("L_PRIVACY", "pour lire notre Politique de Confidentialité"); //Click here to…
 define("L_AUTHOR", "l’auteur"); //Phrase will look like this: L_CLICK." ".L_LINKS_6." ".L_AUTHOR == Click here - to contact - the author
 define("L_DEVELOPER", "le développeur de ce chat"); //same here
 define("L_OWNER", "le propriétaire de ce chat"); //same here
@@ -602,8 +609,10 @@ define("L_LANG_FR", "Français");
 define("L_LANG_KA", "Géorgien");
 define("L_LANG_DE", "Allemand");
 define("L_LANG_GR", "Grec");
+define("L_LANG_HE", "Hébreu");
 define("L_LANG_HI", "Hindi");
 define("L_LANG_HU", "Hongrois");
+define("L_LANG_ID", "Indonésien");
 define("L_LANG_IT", "Italien");
 define("L_LANG_RO", "Roumain");
 define("L_LANG_SRL", "Serbe - Latin");
@@ -659,4 +668,8 @@ define ( "L_RESTRICTED_ROM", "%s a été limité à partir de cette salon avec s
 // OpenID login mod by Ciprian
 define("L_OPID_SIGN", "Se connecter avec un identifiant OpenID");
 define("L_OPID_REG", "Importer son profil OpenID");
+
+// Support buttons
+define("L_SUPP_WARN", "Vous avez choisi de contribuer au développement libre de\\n".APP_NAME." en faisant un don à l’auteur.\\nMerci pour votre encouragement!\\n\\nNote: le bénéficiaire n’est pas le propriétaire de ce chat.\\nVeuillez saisir le montant sur la page suivante.\\n\\nContinuer?");
+define("L_SUPP_ALT", "Encouragez grâce à PayPal le développement de  ".APP_NAME." - c’est Rapide, Gratuit et Sécurisé!");
 ?>
