@@ -40,18 +40,17 @@
  */
 
     $translation = array();
-    $translation['file_error']                  = 'Dosya hatasý. Lütfen tekrar deneyin.';
+    $translation['file_error']                  = 'Dosya hatası. Lütfen tekrar deneyin.';
     $translation['local_file_missing']          = 'Yerel dosya mevcut deđil.';
     $translation['local_file_not_readable']     = 'Yerel dosya okunamýyor.';
-    $translation['uploaded_too_big_ini']        = 'Dosya yükleme hatasý (yüklenen dosya, server üzerindeki php.ini ayarlarýnda belirtilen %s boyutunu aţýyor).';
-    $translation['uploaded_too_big_html']       = 'Dosya yükleme hatasý (yüklenen dosya, yükleme formunda belirtilen %s boyutunu aţýyor).';
-    $translation['uploaded_partial']            = 'Dosya yükleme hatasý (dosyanýn sadece bir bölümü yüklenebildi).';
-    $translation['uploaded_missing']            = 'Dosya yükleme hatasý (yüklenecek dosya belirtilmedi).';
-    $translation['uploaded_no_tmp_dir']         = 'Dosya yükleme hatasý (geçici klasör bulunamıyor).';
-	$translation['uploaded_cant_write']         = 'Dosya yükleme hatasý (dosyanın diske yazılımı başarısız oldu).';
-	$translation['uploaded_err_extension']      = 'Dosya yükleme hatasý (dosya yüklenmesi uzantı tarafından durduruldu.).';    
-	$translation['uploaded_unknown']            = 'Dosya yükleme hatasý (tanýmlanamayan hata kodu).';
-    $translation['try_again']                   = 'Dosya yükleme hatasý. Lütfen tekrar deneyin.';
+    $translation['uploaded_too_big_ini']        = 'Dosya yükleme hatası (yüklenen dosya, server üzerindeki php.ini ayarlarýnda belirtilen %s boyutunu aţýyor).';
+    $translation['uploaded_too_big_html']       = 'Dosya yükleme hatası (yüklenen dosya, yükleme formunda belirtilen %s boyutunu aţýyor).';
+    $translation['uploaded_partial']            = 'Dosya yükleme hatası (dosyanýn sadece bir bölümü yüklenebildi).';
+    $translation['uploaded_missing']            = 'Dosya yükleme hatası (yüklenecek dosya belirtilmedi).';
+    $translation['uploaded_no_tmp_dir']         = 'Dosya yükleme hatası (dosyanın diske yazılımı başarısız oldu).';
+	$translation['uploaded_err_extension']      = 'Dosya yükleme hatası (dosya yüklenmesi uzantı tarafından durduruldu.).';    
+	$translation['uploaded_unknown']            = 'Dosya yükleme hatası (tanýmlanamayan hata kodu).';
+    $translation['try_again']                   = 'Dosya yükleme hatası. Lütfen tekrar deneyin.';
     $translation['file_too_big']                = 'Dosya çok büyük (%s).';
     $translation['no_mime']                     = 'MIME tipi belirlenemedi.';
     $translation['incorrect_file']              = 'Yanlýţ dosya tipi.';
@@ -84,6 +83,6 @@
     $translation['file_create']                 = '%s oluţturma desteklenmiyor.';
     $translation['no_conversion_type']          = 'Dönüţüm tipi tanýmlanmadý.';
     $translation['copy_failed']                 = 'Sunucuya kopyalama sýrasýnda hata oluţtu. copy() komutu gerçekleţtirilemedi.';
-    $translation['reading_failed']              = 'Dosya okuma hatasý.';
+    $translation['reading_failed']              = 'Dosya okuma hatası.';
 
 ?>

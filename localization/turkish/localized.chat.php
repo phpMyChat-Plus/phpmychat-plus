@@ -251,7 +251,7 @@ define("L_HELP_CMD_30", "İkinci komut /me komutuyla aynıdır fakat cinsiyetini
 define("L_HELP_CMD_31", "Kullanıcıların listedeki sıralamasını giriş saatine göre veya alfabetik olarak değiştirir.");
 define("L_HELP_CMD_32", "Bu, zar atma oyununun üçüncü şeklidir.<br />Kullanımı: /d{n1}[tn2] yazın /d{n1} yazın;<br />n1 <b>1 ve 100</b> arasında herhangi bir değer alabilir.(zarların yuvarlanma sayısını ifade eder).<br />n2 <b>1 ve %s arasında</b> herhangi bir değer alabilir. (zarların her atılıştaki yuvarlanma sayısını ifade eder).");
 define("L_HELP_CMD_33", "Mesajdaki harflerin büyüklüğünü kullanıcının tercihine göre değiştirir. ( n için izin verilen değerler: <b>7 ve 15 arası</b>); /size komutu harf büyüklüğünü varsayılan değere geri çevirir (<b>".$FontSize."</b>).");
-define("L_HELP_CMD_34", "Bu, bir kullanıcının gönderdiği mesajın yazım yönünü belirlemesine izin (ltr = soldan-sağa, rtl = sağdan–sola).");
+define("L_HELP_CMD_34", "Bu, bir kullanıcının gönderdiği mesajın yazım yönünü belirlemesine izin (ltr = soldan-sağa, rtl = sağdan-sola).");
 define("L_HELP_CMD_VAR", "Eş anlamlılar: %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Sohbet Görgü Kuralları");
 define("L_HELP_ETIQ_2", "Sitemiz üyelerini arkadaşlık çerçevesi içinde tutmayı ve eğlendirmeyi hedeflemektedir, bu nedenle aşağıdaki kurallara titizlikle uyunuz. Eğer kuralları çiğnerseniz Sohbet Denetleyicilerimizden biri sizi sohbetten dışarı atabilir.<br /><br />Teşekkürler,");
@@ -677,6 +677,6 @@ define("L_OPID_SIGN", "Bir OpenID ye kayıt yapın");
 define("L_OPID_REG", "OpenID profilinizi buraya aktarın");
 
 // Support buttons
-define("L_SUPP_WARN", "Yazılımcıya bağış yaparak,\\n".APP_NAME."in ücretsiz olarak geliştirilmesine katkıda bulundunuz.\\n Desteğiniz için teşekkür ederiz!\\n\\nNot: bağışı alan bu sohbetin kurucusu değildir.\\nSonraki sayfada lütfen bağış miktarını yazınız.\\n\\nDevam etmek istiyor musunuz?");
+define("L_SUPP_WARN", "Yazılımcıya bağış yaparak, ".APP_NAME." in\\nücretsiz olarak geliştirilmesine katkıda bulundunuz.\\nDesteğiniz için teşekkür ederiz!\\n\\nNot: bağışı alan bu sohbetin kurucusu değildir.\\nSonraki sayfada lütfen bağış miktarını yazınız.\\n\\nDevam etmek istiyor musunuz?");
 define("L_SUPP_ALT", APP_NAME." geiştirilmesini PayPal ile destekleyin. Bu yöntem hızlı, ücretsiz ve güvenli!");
 ?>
