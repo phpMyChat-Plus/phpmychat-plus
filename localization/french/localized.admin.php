@@ -1,5 +1,5 @@
 <?php
-// File : french/localized.admin.php - plus version (26.08.2008 - rev.14)
+// File : french/localized.admin.php - plus version (07.06.2009 - rev.15)
 // Original file by Loďc Chapeaux <lolo@phpheaven.net> & Dean Collins <joelford@pacbell.net>
 // Translation for Plus version by Pierre Liget <sourceforge@pliget.freesurf.fr> 10.12.2007
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -24,6 +24,9 @@ define("A_MENU_6", "Chat extras");
 define("A_MENU_7", "Rechercher");
 define("A_MENU_8", "Connexions");
 define("A_MENU_9", "Log archive");
+define("A_MENU_1a", "Profils");
+define("A_MENU_2a", "Statistiques");
+define("A_MOD_DEV", "Mode en cours de développement");
 define("A_LOGOUT", "Quitter");
 
 // Frame for registered users
@@ -167,4 +170,12 @@ define("A_SEARCH_25", "Modérer cet utilisateur");
 // Connected users Page
 define("A_LURKING_1", "Utilisateurs connectés et \"rôdeurs\" (Lurking)") ;
 define("A_LURKING_2", "Lurking désactivé.") ;
+
+// Statistics Page
+define("A_STATS_1", "Page de Statistiques du Chat ");
+define("A_STATS_2", "Collecte des données démarrée le %s"); //date
+define("A_STATS_3", "Statistiques globales (All times)");
+define("A_STATS_4", "Statistiques détaillées (les %s derniers jours d’activité)"); //number of days
+define("A_STATS_5", "Statistiques désactivées");
+define("A_STATS_6", "Top %s"); //Top 10 or Top 5
 ?>
