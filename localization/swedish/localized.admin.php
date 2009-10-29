@@ -1,5 +1,5 @@
 <?php
-// File : swedish/localized.admin.php - plus version (26.08.2008 - rev.14)
+// File : swedish/localized.admin.php - plus version (07.06.2009 - rev.15)
 // Original file by Martin Edelius <martin.edelius@spirex.se>
 // Updates, corrections and additions for the Plus version by Heikki <heikki@yttervik.be> & Fimpen Högström <fimpen@relative-work.se>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -24,6 +24,9 @@ define("A_MENU_6", "Chatt Extras");
 define("A_MENU_7", "Sök");
 define("A_MENU_8", "Anslutningar");
 define("A_MENU_9", "Log Arkiv");
+define("A_MENU_1a", "Profiler");
+define("A_MENU_2a", "Statistik");
+define("A_MOD_DEV", "Under utveckling");
 define("A_LOGOUT", "Logga ut");
 
 // Frame for registered users
@@ -167,4 +170,12 @@ define("A_SEARCH_25", "Ändra denna användaren");
 // Connected users Page
 define("A_LURKING_1", "Inloggade användare och Lurkare");
 define("A_LURKING_2", "Lurkning satt ur funktion.");
+
+// Statistics Page
+define("A_STATS_1", "Chatt statistik sida ");
+define("A_STATS_2", "Data insamling startade den %s"); //date
+define("A_STATS_3", "All statistik (hela tiden)");
+define("A_STATS_4", "Detaljerad statistik (Senaste %s dagarna av aktivitet)"); //number of days
+define("A_STATS_5", "Statistik urkopplat");
+define("A_STATS_6", "%s I Top"); //Top 10 or Top 5
 ?>

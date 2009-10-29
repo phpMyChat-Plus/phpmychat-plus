@@ -1,5 +1,5 @@
 <?php
-// File : swedish/localized.install.php - plus version (29.07.2008 - rev.6)
+// File : swedish/localized.install.php - plus version (07.06.2009 - rev.7)
 // Translated by Fimpen Högström <fimpen@relative-work.se>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -71,6 +71,7 @@ define("L_P2_FORM12", "Döp om admin logg mappen");
 define("L_P2_FORM13", "Om du har för avsikt att använda phpMyChat som en integrerad module för phpNuke eller phpBB, då måste konfigurationstabellen heta \"c_config\" och tabellen för registrerade användare måste heta \"c_reg_users\"!");
 define("L_P2_FORM14", "Välj ett svårgissat namn!");
 define("L_P2_FORM15", "Namn på din Chat server");
+define("L_P2_FORM16", "Tabell för statistik");
 define("L_P3_FORM1", "Administratörs konto namn");
 define("L_P3_FORM2", "Administratörs kontots lösenord");
 define("L_P3_FORM3", "Verifiera lösenordet");

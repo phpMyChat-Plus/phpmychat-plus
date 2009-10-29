@@ -3,7 +3,7 @@
 // | class.upload.sv_SE.php                                                 |
 // +------------------------------------------------------------------------+
 // | Copyright (c) Mikael Andersson 2007. All rights reserved.              |
-// | Version       0.25                                                     |
+// | Version       0.28                                                     |
 // | Last modified 24/11/2007                                               |
 // | Email         mikael@familjenmartinsson.com                            |
 // | Web           http://www.familjenmartinsson.com                        |
@@ -31,7 +31,7 @@
  * Class upload swedish translation
  * Textkorrigerad av Fimpen Högström, Fimpen@Relative-Work.se
  *
- * @version   0.25
+ * @version   0.28
  * @author    Mikael Andersson (mikael@familjenmartinsson.com)
  * @license   http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright Mikael Andersson
@@ -47,6 +47,9 @@
     $translation['uploaded_too_big_html']       = 'Uppladdningsfel (Den uppladdade filen överskrider MAX_FILE_SIZE direktivet specificerat i html formuläret - %s).';
     $translation['uploaded_partial']            = 'Uppladdningsfel (Filen blev bara delvis uppladdad).';
     $translation['uploaded_missing']            = 'Uppladdningsfel (Ingen fil blev uppladdad).';
+	$translation['uploaded_no_tmp_dir']         = 'Uppladdningsfel (Tempmappen saknas).';
+	$translation['uploaded_cant_write']         = 'Uppladdningsfel (Misslyckades att skriva fil till disk).';
+	$translation['uploaded_err_extension']      = 'Uppladdningsfel (Filuppladdning stoppad på grund av ändelse).';    
     $translation['uploaded_unknown']            = 'Uppladdningsfel (Okänt fel).';
     $translation['try_again']                   = 'Uppladdningsfel. Försök igen.';
     $translation['file_too_big']                = 'Filen är för stor (%s).';

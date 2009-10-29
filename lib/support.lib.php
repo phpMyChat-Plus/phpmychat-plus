@@ -33,6 +33,7 @@ switch (L_LANG)
 		break;
 	case "sv_SE":
 		$ppbutton = ($pptype == "big") ? "3626744" : "3626768";
+		$ppalt = "PayPal - Det säkra, enkla sättet att betala online.";
 		break;
 	case "tr_TR":
 		$ppbutton = ($pptype == "big") ? "3626822" : "3626800";
