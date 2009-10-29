@@ -1,5 +1,5 @@
 <?php
-// File : swedish/localized.chat.php - plus version (14.02.2009 - rev.42)
+// File : swedish/localized.chat.php - plus version (01.08.2009 - rev.43)
 // Original file by Martin Edelius <martin.edelius@spirex.se>
 // Updates, corrections and additions for the Plus version by Heikki <heikki@yttervik.be> & Fimpen Högström <fimpen@relative-work.se>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -213,6 +213,7 @@ define("L_HELP_MSG", "meddelande");
 define("L_HELP_MSGS", "meddelanden");
 define("L_HELP_ROOM", "rum");
 define("L_HELP_BUZZ", "~signalnamn");
+define("L_HELP_BUZZ1", "Ljudeffekt…"); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "orsak");
 define("L_HELP_MR", "Herr");
 define("L_HELP_MS", "Fröken");
@@ -252,6 +253,8 @@ define("L_HELP_CMD_30", "Andra kommando gör detsamma som /me men den kommer att
 define("L_HELP_CMD_31", "Ändra hur användare är sorterad i listan: sorteringsordning, tid eller alfabetiskt.");
 define("L_HELP_CMD_32", "Detta är en tredje (roleplaying) version av tärningsspelet.<br />Användande: /d{n1}[tn2] or /d{n1};<br />n1 kan ta alla värde <b>mellan 1 och 100</b> (det representerar antalet rullning per tärning).<br />n2 kan ta alla värden <b>mellan 1 och %s</b> (det representerar antalet rullande tärningar per kast).");
 define("L_HELP_CMD_33", "Ändra teckensnitts storlek på meddelanden i chatten till användare, val (tillåtna värden för n: <b>mellan 7 och 15</b>); /size kommando återställer teckensnitt storlek till standar värde (<b>".$FontSize."</b>).");
+define("L_HELP_CMD_34", "Detta kommando låter användaren specificera textens orientering (ltr,vth = vänster till höger; rtl,htv = höger till vänster).");
+define("L_HELP_CMD_VAR", "Synonymer (varianter): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Chat Netikett");
 define("L_HELP_ETIQ_2", "För att vår plats skall kunna behålla dess ställning/gemenskap för oss alla vänligt och kul, Så vänligen stå fast vid till följande riktlinjer. Om du avviker från dessa regler, kan någon av våra chatts moderator (kan och får) sparka ut dig från chatten.<br /><br />Tack,");
 define("L_HELP_ETIQ_3", "Vår Chatts Netikett, Riktlinjer");
@@ -326,6 +329,7 @@ define("L_DEFAULT_TOPIC_1", "Detta är ämnet för detta rum. Ändra localizatio
 define("L_PIC", "Bild insänd av");
 define("L_PIC_RESIZED", "Ändrad till");
 define("L_HELP_IMG", "full/hel sökväg att sända bild till");
+define("L_NO_IMAGE", "Detta är inte en giltig URL (internetadress) för en public.\\nFörsök igen!");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s är inte längre orningsman för någon rum i detta chatt.");
@@ -407,6 +411,8 @@ define("L_PRIV_RELOAD", "Uppdatera sidan");
 define("L_PRIV_MARK_ALL", "Markera alla som Lästa.");
 define("L_PRIV_MARK_SEL", "Markera valda meddelande som Lästa.");
 define("L_PRIV_REMOVE", "Ta bort markerade PM´s"); // or selected
+define("L_PRIV_PM", "(privat)");
+define("L_PRIV_WISP", "(viska)");
 
 // Color Input Box mod by Ciprian
 define("L_ENABLED", "Aktiv");
@@ -511,6 +517,7 @@ define("L_NOT_SELECTED", "inget valt");
 define("L_NOT_SELECTED_F", ""); // feminine word, if it's the case
 define("L_EMAIL_1", "skicka email");
 define("L_FULLSIZE_PIC", "för att öppna bild I fullstorlek");
+define("L_PRIVACY", "för att öppna Policy om Personuppgifter"); //Click here to…
 define("L_AUTHOR", "till utvecklaren");
 define("L_DEVELOPER", "utvecklaren av denna chatten");
 define("L_OWNER", "ägaren till denna chat");
@@ -595,8 +602,10 @@ define("L_LANG_ENUS", "Amrikanska US"); // for US formats and flags
 define("L_LANG_ES", "Spanska");
 define("L_LANG_FR", "Franska");
 define("L_LANG_GR", "Grekiska");
+define("L_LANG_HE", "Hebreiska");
 define("L_LANG_HI", "Hindi");
 define("L_LANG_HU", "Ungerska");
+define("L_LANG_ID", "Indonesiska");
 define("L_LANG_IT", "Italienska");
 define("L_LANG_KA", "Georgiska");
 define("L_LANG_NL", "Holländska");
@@ -639,7 +648,7 @@ define("L_UPLOAD", "Ladda upp %s"); // Upload Image, Upload Sound or Upload File
 define("L_UPLOAD_IMG", "Bildfil"); // used to upload Avatars and /img command
 define("L_UPLOAD_SND", "Ljudfil"); // used to upload Buzz sounds
 define("L_UPLOAD_FLS", "Filer"); // used to upload multiple files at once
-define("L_UPLOAD_SUCCESS", "%s Lyckosamt uppladdat som %s."); // original filename, destination filename
+define("L_UPLOAD_SUCCESS", "%s lyckosamt uppladdat som %s."); // original filename, destination filename
 define("L_FILES_TITLE", "Uppladningshanterande");
 
 // Room restriction mod by Ciprian
@@ -649,4 +658,8 @@ define("L_RESTRICTED_ROM", "%s har lyckosamt blivit inskränkt från detta rum."
 // OpenID login mod by Ciprian
 define("L_OPID_SIGN", "Logga in med ett OpenID");
 define("L_OPID_REG", "Importera din OpenID profil");
+
+// Support buttons
+define("L_SUPP_WARN", "Du har valt att bidra till den fria utvecklingen av\\n".APP_NAME." genom att donera till utvecklaren.\\nTack för ditt bidrag!\\n\\nNotera att mottagaren inte är ägaren av denna chatten.\\nVänligen skriv in det belopp du vill donera på nästa sida.\\n\\nFortsätt?");
+define("L_SUPP_ALT", "Använd PayPal för att bidra till ".APP_NAME." - det är Snabbt, Gratis och Säkert!");
 ?>
