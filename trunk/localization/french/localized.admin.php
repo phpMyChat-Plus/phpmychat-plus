@@ -26,7 +26,7 @@ define("A_MENU_8", "Connexions");
 define("A_MENU_9", "Log archive");
 define("A_MENU_1a", "Profils");
 define("A_MENU_2a", "Statistiques");
-define("A_MOD_DEV", "Mode en cours de développement");
+define("A_MOD_DEV", "Module en cours de développement");
 define("A_LOGOUT", "Quitter");
 
 // Frame for registered users

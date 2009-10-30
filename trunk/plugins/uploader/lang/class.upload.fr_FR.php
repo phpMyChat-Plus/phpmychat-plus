@@ -49,7 +49,7 @@
     $translation['uploaded_missing']            = 'Erreur de chargement de fichier (le serveur n’a pas reçu de fichier).';
 	$translation['uploaded_no_tmp_dir']         = 'Erreur de chargement de fichier (répertoire temporaire manquant).';
 	$translation['uploaded_cant_write']         = 'Erreur de chargement de fichier (écriture du fichier sur disque impossible).';
-	$translation['uploaded_err_extension']      = 'Erreur de chargement de fichier (chargement du fichier interrompu par l’extension).';
+	$translation['uploaded_err_extension']      = 'Erreur de chargement de fichier (extension de fichier non autorisée en upload).';
     $translation['uploaded_unknown']            = 'Erreur inconnue.';
     $translation['try_again']                   = 'Erreur de transmission. Essayez encore.';
     $translation['file_too_big']                = 'Fichier trop gros (%s).';
