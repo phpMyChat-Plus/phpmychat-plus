@@ -116,7 +116,7 @@ As an exemple, if I want to increase the size of the input frame, I would change
 Please note that for this last c. instructions, you need to keep the proportions accordigly (I increased with 10 lines the input frame in all 8 lines, no matter the conditions)
 
 8Q.
-How do I change the name of the Rooms in my phpmychat plus?
+How do I change the name of the Rooms in my phpMyChat-Plus?
 8A.
 Only in Admin panel. Read it all to understand the power of the Configuration tab in the plus version...
 

@@ -1,5 +1,5 @@
 Instructions for a NEW installation (or an UPGRADE) of the Plus version you just downloaded.
-Note: This version comes with a fully automated wizard to help you install phpMyChat Plus on your site.
+Note: This version comes with a fully automated wizard to help you install phpMyChat-Plus on your site.
 Alternatively there is a manual install folder which contains more instructions for a manual install.
 If you fail to successfully run the automated install or if you choose the manual installation, please read the step 6 then go to manual install folder and follow those instructions (step 2a bellow)..
 

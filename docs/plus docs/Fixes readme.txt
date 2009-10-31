@@ -244,7 +244,7 @@ After 1.92 release fixes (f means the released fix):
 
 Known issues (as of 1.91-beta6):
 - /img won’t work on php5 due to some deprecated image resizing function in this php version - still working on fixing this (it might be just a specific setting on the tested server - needs to be tested on a different php5 server too);
-- installer won’t work for 1.91-beta versions of phpMyChat Plus - as a support: export the current database structure to a file and send it to Ciprian at ciprianmp@yahoo.com, in order to get your specific db upgrade script; (note: the reason is I lost the track of how many beta minor versions of the database have been distributed in the last months, so the db structures differ now, even for the same beta version - sorry!)
+- installer won’t work for 1.91-beta versions of phpMyChat-Plus - as a support: export the current database structure to a file and send it to Ciprian at ciprianmp@yahoo.com, in order to get your specific db upgrade script; (note: the reason is I lost the track of how many beta minor versions of the database have been distributed in the last months, so the db structures differ now, even for the same beta version - sorry!)
 
 28.08.2007 - 1.91-beta5:
 - Beta downloads available on ciprianmp.com/atm for testing purposes; (release candidates)

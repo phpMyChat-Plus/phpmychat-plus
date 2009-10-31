@@ -114,7 +114,7 @@ UPDATE ".$t_config." SET
 ", $conn);
 mysql_query("
 UPDATE ".$t_config." SET
-			LOGO_ALT = 'MyChat based on phpMyChat plus'
+			LOGO_ALT = 'MyChat based on phpMyChat-Plus'
 	WHERE ID='0' AND LOGO_ALT = '''MyChat based on phpMyChat plus''';
 ", $conn);
 mysql_query("

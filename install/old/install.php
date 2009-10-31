@@ -2107,12 +2107,12 @@ elseif ($p == 5 ) { ?>
     <p align="center">
   <select size="1" name="kind">
   <option value="new"<?php if ($kind=="new") echo " selected" ?>><?php echo L_P1_OP01 ?></option>
-  <option value="193-beta"<?php if ($kind=="193-beta") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus 1.93-beta") ?></option>
-  <option value="192"<?php if ($kind=="192") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus 1.92") ?></option>
-  <option value="190"<?php if ($kind=="190") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus 1.90") ?></option>
-  <option value="18"<?php if ($kind=="18") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus v1.8") ?></option>
-  <option value="17"<?php if ($kind=="17") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus v1.7") ?></option>
-  <option value="1016"<?php if ($kind=="1016") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Plus v1.0-v1.6") ?></option>
+  <option value="193-beta"<?php if ($kind=="193-beta") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat-Plus 1.93-beta") ?></option>
+  <option value="192"<?php if ($kind=="192") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat-Plus 1.92") ?></option>
+  <option value="190"<?php if ($kind=="190") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat-Plus 1.90") ?></option>
+  <option value="18"<?php if ($kind=="18") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat-Plus v1.8") ?></option>
+  <option value="17"<?php if ($kind=="17") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat-Plus v1.7") ?></option>
+  <option value="1016"<?php if ($kind=="1016") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat-Plus v1.0-v1.6") ?></option>
   <option value="014015"<?php if ($kind=="014015") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Standard 0.14-0.15") ?></option>
   <option value="013"<?php if ($kind=="013") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Standard 0.13") ?></option>
   <option value="012"<?php if ($kind=="012") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat Standard < 0.12") ?></option>

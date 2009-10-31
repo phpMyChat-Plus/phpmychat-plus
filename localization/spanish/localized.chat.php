@@ -500,7 +500,7 @@ define("L_LINKS_6", "para contactar");
 define("L_LINKS_7", "para visitar la página principal de phpMyChat");
 define("L_LINKS_8", "para unirse con el grupo de phpMyChat");
 define("L_LINKS_9", "para enviar sus comentarios");
-define("L_LINKS_10", "para cargar phpMyChat Plus");
+define("L_LINKS_10", "para cargar phpMyChat-Plus");
 define("L_LINKS_11", "para comprobar quién está charlando");
 define("L_LINKS_12", "para abrir la página principal");
 define("L_LINKS_13", "tocar este sonido");

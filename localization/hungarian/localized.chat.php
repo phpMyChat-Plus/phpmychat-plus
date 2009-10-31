@@ -501,7 +501,7 @@ define("L_LINKS_6", ", hogy felvedd vele a kapcsolatot");
 define("L_LINKS_7", " a phpMyChat Homepage megnyitásához");
 define("L_LINKS_8", ", hogy csatlakozz a phpMyChat Group-hoz");
 define("L_LINKS_9", " a visszajelzésed elküldéséhez");
-define("L_LINKS_10", " a phpMyChat Plus letöltéséhez");
+define("L_LINKS_10", " a phpMyChat-Plus letöltéséhez");
 define("L_LINKS_11", ", hogy megnézd ki beszélget");
 define("L_LINKS_12", " a chat bejelentkezési oldalának megnyitásához");
 define("L_LINKS_13", " a figyelmeztető hang lejátszásához"); // can also be translated as "to play this sound"

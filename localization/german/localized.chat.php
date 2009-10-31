@@ -504,7 +504,7 @@ define("L_LINKS_6", "um den Autor"); // Click here + to contact + author -> tran
 define("L_LINKS_7", "um die Homepage von phpMyChat zu besuchen");
 define("L_LINKS_8", "um der phpMyChat - Gruppe beizutreten");
 define("L_LINKS_9", "um Ihr Feedback zu senden");
-define("L_LINKS_10", "um phpMyChat Plus herunterzuladen");
+define("L_LINKS_10", "um phpMyChat-Plus herunterzuladen");
 define("L_LINKS_11", "um zu sehen, wer gerade chattet");
 define("L_LINKS_12", "um die Chat-Login-Seite zu öffnen");
 define("L_LINKS_13", "um diesen ’buzz’ zu senden"); // can also be translated as "to play this sound"

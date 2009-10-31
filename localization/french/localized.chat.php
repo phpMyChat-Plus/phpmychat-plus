@@ -507,7 +507,7 @@ define("L_LINKS_6", "pour contacter");
 define("L_LINKS_7", "pour visiter le site phpMyChat");
 define("L_LINKS_8", "pour vous joindre au Groupe phpMyChat");
 define("L_LINKS_9", "pour envoyer votre retour sur phpMyChat");
-define("L_LINKS_10", "pour télécharger phpMyChat Plus");
+define("L_LINKS_10", "pour télécharger phpMyChat-Plus");
 define("L_LINKS_11", "pour voir qui est présent actuellement sur le chat");
 define("L_LINKS_12", "pour aller à la page de connexion du Chat");
 define("L_LINKS_13", "pour jouer ce son"); // can also be translated as "to play this sound"

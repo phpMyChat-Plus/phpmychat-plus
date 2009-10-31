@@ -500,7 +500,7 @@ define("L_LINKS_6", "för kontakt");
 define("L_LINKS_7", "besök phpMyChat Hemsida");
 define("L_LINKS_8", "bli medlem phpMyChat Group");
 define("L_LINKS_9", "för att sända din feedback");
-define("L_LINKS_10", "för att ladda ner phpMyChat Plus");
+define("L_LINKS_10", "för att ladda ner phpMyChat-Plus");
 define("L_LINKS_11", "för att se vilka som chattar");
 define("L_LINKS_12", "för att öppna denna chattens loginfönster");
 define("L_LINKS_13", "för att sända denna buzz");
