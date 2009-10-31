@@ -508,7 +508,7 @@ define("L_LINKS_6", "para contactar a");
 define("L_LINKS_7", "para visitar phpMyChat Homepage");
 define("L_LINKS_8", "para unirte a phpMyChat Group");
 define("L_LINKS_9", "para enviar tus comentarios");
-define("L_LINKS_10", "para descargar phpMyChat Plus");
+define("L_LINKS_10", "para descargar phpMyChat-Plus");
 define("L_LINKS_11", "para ver quién esta chateando");
 define("L_LINKS_12", "para abrir la página de logueo");
 define("L_LINKS_13", "para enviar este zumbido"); // Click to blablabla : it can also be translated as "to play this sound", if buzz has no translation.

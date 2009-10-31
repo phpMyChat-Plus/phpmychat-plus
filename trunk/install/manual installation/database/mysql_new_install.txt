@@ -168,7 +168,7 @@ CREATE TABLE c_config (
  SHOW_LOGO enum('0','1') NOT NULL default '1',
  LOGO_IMG varchar(255) NOT NULL default 'images/icon.gif',
  LOGO_OPEN varchar(255) NOT NULL default './',
- LOGO_ALT varchar(255) NOT NULL default 'My Chat based on phpMyChat plus',
+ LOGO_ALT varchar(255) NOT NULL default 'My Chat based on phpMyChat-Plus',
  SHOW_OWNER enum('0','1') NOT NULL default '1',
  SHOW_PRIV enum('0','1') NOT NULL default '1',
  SHOW_PRIV_MOD enum('0','1') NOT NULL default '1',

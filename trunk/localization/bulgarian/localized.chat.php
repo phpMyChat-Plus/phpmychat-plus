@@ -509,7 +509,7 @@ define("L_LINKS_6", "за да се свържете с");
 define("L_LINKS_7", "за да посетите phpMyChat Cайта");
 define("L_LINKS_8", "за да се присъедините към phpMyChat Групата");
 define("L_LINKS_9", "за да изпратите Вашия отзив");
-define("L_LINKS_10", "за да свалите phpMyChat Plus");
+define("L_LINKS_10", "за да свалите phpMyChat-Plus");
 define("L_LINKS_11", "за да провериш кой е в чата");
 define("L_LINKS_12", "за да отвориш входната страница на чата");
 define("L_LINKS_13", "за да пуснете този звук"); // can also be translated as "to play this sound"

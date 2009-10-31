@@ -506,7 +506,7 @@ define("L_LINKS_6", "Irtibata geçmek için");
 define("L_LINKS_7", "phpMyChat Ana Sayfasını ziyaret etmek için");
 define("L_LINKS_8", "phpMyChat Grubuna katılmak için");
 define("L_LINKS_9", "Düşüncelerinizi göndermek için");
-define("L_LINKS_10", "phpMyChat Plus indirmek için");
+define("L_LINKS_10", "phpMyChat-Plus indirmek için");
 define("L_LINKS_11", "Kimin sohbet ettiğini görmek için");
 define("L_LINKS_12", "Sohbet Giriş Sayfasını açmak için");
 define("L_LINKS_13", "Bu sesi çalmak için"); // Click to blablabla : it can also be translated as "to play this sound", if buzz has no translation.

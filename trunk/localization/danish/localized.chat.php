@@ -252,7 +252,7 @@ define("L_HELP_CMD_30", "Den anden kommando gør det samme som kommandoen /me, m
 define("L_HELP_CMD_31", "Ændrer den rækkefølge, som brugerne vises på listen: efter ankomsttid eller alfabetisk.");
 define("L_HELP_CMD_32", "Dette er den tredie (rollespils) version af terningespillet.<br />Sådan gør du: /d{n1}[tn2] eller /d{n1};<br />n1 kan have en hvilken som helst værdi <b>mellem 1 og 100</b> (tallet svarer til antallet af kast pr. terning).<br />n2 kan have en hvilken som helst værdi <b>mellem 1 og %s</b> (tallet svarer til antallet af terninger pr. kast).");
 define("L_HELP_CMD_33", "Du kan ændre fontstørrelsen på dine poster i chatten efter behag (tilladte værdier for n: <b>mellem 7 og 15</b>); kommandoen /size ændrer fontstørrelsen tilbage til standardværdien (<b>".$FontSize."</b>).");
-define("L_HELP_CMD_34", "Her kan en bruger angive tekstens justering (ltr = venstre-mod-højre, rtl = højre-mod-venstre).");
+define("L_HELP_CMD_34", "Her kan en bruger angive tekstens justering (ltr,vmh = venstre-mod-højre; rtl,hmv = højre-mod-venstre).");
 define("L_HELP_CMD_VAR", "Synonymer (varianter): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Chat Etikette");
 define("L_HELP_ETIQ_2", "Vi ønsker at denne chat skal være venlig og sjov, og derfor bedes du følge nedenstående retningslinjer. Hvis du ikke overholder retningslinjerne, risikerer du, at en af chattens moderatorer sparker dig ud fra chatten.<br /><br />Tak,");
@@ -507,7 +507,7 @@ define("L_LINKS_6", "for at kontakte");
 define("L_LINKS_7", "for at besøge hjemmesiden phpMyChat");
 define("L_LINKS_8", "for at blive medlem af phpMyChat Group");
 define("L_LINKS_9", "for at sende feedback");
-define("L_LINKS_10", "for at downloade phpMyChat Plus");
+define("L_LINKS_10", "for at downloade phpMyChat-Plus");
 define("L_LINKS_11", "for at se, hvem der chatter");
 define("L_LINKS_12", "for at åbne siden Chat Login");
 define("L_LINKS_13", "for at afspille denne lydfil"); // can also be translated as "to play this sound"

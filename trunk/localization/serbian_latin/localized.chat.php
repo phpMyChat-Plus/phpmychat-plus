@@ -508,7 +508,7 @@ define("L_LINKS_6", "da kontaktirate");
 define("L_LINKS_7", "da posetite phpMyChat sajt");
 define("L_LINKS_8", "da se pridužite phpMyChat Grupi");
 define("L_LINKS_9", "da pošaljete vašu povratnu informaciju");
-define("L_LINKS_10", "da prevučete phpMyChat Plus");
+define("L_LINKS_10", "da prevučete phpMyChat-Plus");
 define("L_LINKS_11", "da proverite ko četuje");
 define("L_LINKS_12", "da otvorite Chat Login Stranu");
 define("L_LINKS_13", "da svirate ovaj zvuk"); // can also be translated as "to play this sound"
