@@ -1,6 +1,6 @@
 <?php
-// File : hungarian/localized.install.php - plus version (29.07.2008 - rev.6)
-// Original translation by Jácint Zsuzsanna <pycco8@yahoo.com>
+// File : hungarian/localized.install.php - plus version (07.06.2009 - rev.7)
+// Original translation by Jácint Zsuzsanna <jacint.zsuzsanna@yahoo.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
 define("L_BTN1", "Következő");
@@ -62,8 +62,8 @@ define("L_P2_FORM03", "Adatbázis-Jelszó a phpMyChat-hez");
 define("L_P2_FORM04", "Adatbázis-Név a phpMyChat-hez");
 define("L_P2_FORM05", "Adatbázis típusa");
 define("L_P2_FORM06", "Tábla az üzeneteknek");
-define("L_P2_FORM07", "Tábla a chat felhasználóinak");
-define("L_P2_FORM08", "Tábla a regisztrált felhasnálóknak");
+define("L_P2_FORM07", "Tábla a chat felhasználóknak");
+define("L_P2_FORM08", "Tábla a regisztrált felhasználóknak");
 define("L_P2_FORM09", "Tábla a tiltott felhasználóknak");
 define("L_P2_FORM10", "Tábla a konfigurációhoz");
 define("L_P2_FORM11", "Tábla a leskelődőknek");
@@ -71,6 +71,7 @@ define("L_P2_FORM12", "Nevezd át az admin logs mappát");
 define("L_P2_FORM13", "Ha a phpMyChat-et beépített modulként használod a phpNuke vagy phpBB programokban, a konfigurációs táblának \"c_config\" a regisztrált felhasználók táblájának pedig a \"c_reg_users\" nevet kell adni!");
 define("L_P2_FORM14", "Válassz egy nehezen kitalálható nevet!");
 define("L_P2_FORM15", "A Chat szerver neve");
+define("L_P2_FORM16", "Tábla a statisztikákhoz");
 define("L_P3_FORM1", "Administrator felhasználói fiók név");
 define("L_P3_FORM2", "Administrator felhasználói fiók jelszó");
 define("L_P3_FORM3", "Jelszó megerősítés");
