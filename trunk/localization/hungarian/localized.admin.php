@@ -1,6 +1,6 @@
 <?php
-// File : hungarian/localized.admin.php - plus version (26.08.2008 - rev.14)
-// Original file by Jácint Zsuzsanna <pycco8@yahoo.com>
+// File : hungarian/localized.admin.php - plus version (07.06.2009 - rev.15)
+// Original file by Jácint Zsuzsanna <jacint.zsuzsanna@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -23,6 +23,9 @@ define("A_MENU_6", "Chat extrák");
 define("A_MENU_7", "Keresés");
 define("A_MENU_8", "Kapcsolódások");
 define("A_MENU_9", "Log archívum");
+define("A_MENU_1a", "Profilok");
+define("A_MENU_2a", "Statisztika");
+define("A_MOD_DEV", "Mod fejlesztés alatt");
 define("A_LOGOUT", "Kilépés");
 
 // Frame for registered users
@@ -167,4 +170,12 @@ define("A_SEARCH_25", "Moderálni ezt a felhasználót");
 // Connected users Page
 define("A_LURKING_1", "Bejelentkezett felhasználók és a Leskelődők") ;
 define("A_LURKING_2", "Leskelődés kikapcsolva.") ;
+
+// Statistics Page
+define("A_STATS_1", "Chat Statisztika");
+define("A_STATS_2", "Az adatgyűjtés kezdete: %s"); //date
+define("A_STATS_3", "Összes statisztika (mindenkori)");
+define("A_STATS_4", "Részletes statisztika (az utolsó %s aktív nap)"); //number of days
+define("A_STATS_5", "Nincs statisztika");
+define("A_STATS_6", "Top %s"); //Top 10 or Top 5
 ?>

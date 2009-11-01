@@ -18,6 +18,7 @@ switch (L_LANG)
 		break;
 	case "hu_HU":
 		$ppbutton = ($pptype == "big") ? "3626529" : "3626553";
+		$ppalt = "PayPal - Biztonságosabb és egyszerűbb módja az internetes fizetésnek.";
 		break;
 	case "id_ID":
 		$ppbutton = ($pptype == "big") ? "7988359" : "7988406";

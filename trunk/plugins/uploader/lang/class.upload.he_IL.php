@@ -39,7 +39,6 @@
  */
 
     $translation = array();
-    $translation = array();
     $translation['file_error']                  = 'שגיעה בקובץ. נסה שנית';
     $translation['local_file_missing']          = 'הקובץ אינו קיים';
     $translation['local_file_not_readable']     = 'לא ניתן לקרוא את הקובץ';
@@ -78,9 +77,9 @@
     $translation['watermark_no_create_support'] = 'הקובץ %s אינו תומך בתכונה זו, לא ניתן לקרוא את הווטרמרק';
     $translation['watermark_create_error']      = 'לא ניתן לקרוא את %s , לא ניתן ליצור את הווטרמרק';
     $translation['watermark_invalid']           = 'סוג קובץ לא מזוהה. לא ניתן לקרוא את הווטרמרק';
-    $translation['file_create']                 = 'לא ניתן ליצור את  %s ';
+    $translation['file_create']                 = 'לא ניתן ליצור את %s ';
     $translation['no_conversion_type']          = 'לא הוגדר סוג קובץ להמרה';
     $translation['copy_failed']                 = 'שגיעה בהעתקת הקובץ לשרת';
     $translation['reading_failed']              = 'שגיעה בקריאת הקובץ';
-        
+
 ?>

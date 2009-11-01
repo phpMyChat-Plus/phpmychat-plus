@@ -1,6 +1,6 @@
 <?php
 // File : hungarian/localized.chat.php - plus version (14.02.2009 - rev.42)
-// Original file by Jácint Zsuzsanna <pycco8@yahoo.com>
+// Original file by Jácint Zsuzsanna <jacint.zsuzsanna@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use  ’  instead (utf-8 edit bug)
 
@@ -212,6 +212,7 @@ define("L_HELP_MSG", "üzenet");
 define("L_HELP_MSGS", "üzenet");
 define("L_HELP_ROOM", "szoba");
 define("L_HELP_BUZZ", "~hangnév");
+define("L_HELP_BUZZ1", "Buzz..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "oka");
 define("L_HELP_MR", "Mr.");
 define("L_HELP_MS", "Ms.");
@@ -240,7 +241,7 @@ define("L_HELP_CMD_19", "A szoba moderátora vagy az adminisztrátor ezzel a par
 define("L_HELP_CMD_20", "Leírja, hogy éppen mit csinálsz.");
 define("L_HELP_CMD_21", "Bejelenti szobának, és azoknak a felhasználóknak, akik üzenetet próbálnak küldeni neked,<br />hogy nem vagy a számítógépnél. Ha meg akarod mutatni, hogy visszajöttél, csak gépelj be valamit.");
 define("L_HELP_CMD_22", "Figyelmeztető hang küldése és egy üzenet megmutatása az adott szobában.<br />- Használat:<br />- régi használat: \"/buzz\" vagy \"/buzz megjelenítendő üzenet\" – ez lejátsza az alapértelmezett hangot amit az Admin panelben megadtak;<br />- kibővített használat: \"/buzz ~hangnév\" or \"/buzz ~hangnév megjelenítendő üzenet\" – ez lejátsza a hangnév.wav fájlt a plus/sounds mappából; figyelj oda, hogy a \"~\" jelet a második szó elején használd, ami a hang fájl neve kiterjesztés nélkül .wav (csak .wav kiterjesztés megengedett).<br />Alapbeállítás esetén, ez moderátori/admin parancs.");
-define("L_HELP_CMD_23", "<i>Whisper</i> (privát üzenet) küldése. Az üzenet eléri a címzettet, nem számít, hogy a felhasználó melyik szobában van. Ha a fehasználó nem elérhető vagy nincs gépnél, értesítést kapsz róla.");
+define("L_HELP_CMD_23", "<i>Whisper</i> (privát üzenet) küldése. Az üzenet eléri a címzettet, nem számít, hogy a felhasználó melyik szobában van. Ha a felhasználó nem elérhető vagy nincs gépnél, értesítést kapsz róla.");
 define("L_HELP_CMD_24", "Használat: a témának legalább 2 szóból kell állnia.<br />Ez a parancs megváltoztatja a jelenlegi szoba témáját. Próbáld meg figyelembe venni a többi felhasználó témáját is. Jelölj meg fontos témákat!<br />Alapbeállítás esetén, ez moderátori/admin parancs.<br />Ha a \"/topic top reset\" parancsot használod, az éppen használt téma törlődik, és visszaáll a szoba alapértelmezett témájára.<br />Bizonyos esetekben a \"/topic * {}\" és \"/topic * top reset\" pontosan ugyanazt csinálják, de az összes szobában (global topic és global topic reset).");
 define("L_HELP_CMD_25", "Egy kockajáték véletlenszerű számokkal.<br />Használat: /dice vagy /dice [n];<br />n bármilyen érték lehet <b>1 és %s között</b> (megmutatja a kockák számát). Ha nincs megadva szám, akkor az alapértelmezett-maximum kockák száma fog szerepelni.");
 define("L_HELP_CMD_26", "Ez egy összetettebb változata a /dice parancsnak.<br />Használat: /{n1}d[n2] or /{n1}d;<br />n1 bármilyen érték lehet <b>1 és %s között</b> (megmutatja kockák számát dobásonként).<br />n2 bármilyen érték lehet <b>1 és %s között</b> (megmutatja a kockánkénti oldalak számát).");
@@ -251,6 +252,8 @@ define("L_HELP_CMD_30", "A második parancs ugyanazt csinálja, mint a /me de mu
 define("L_HELP_CMD_31", "Megválaszthatod a felhasználók sorrendjét a listákon: belépési idő vagy ábécé sorrend.");
 define("L_HELP_CMD_32", "Ez a harmadik (szerepjáték) változata a kockázásnak.<br />Használat: /d{n1}[tn2] vagy /d{n1};<br />n1 bármilyen érték lehet <b>1 és 100 között</b> (megmutatja a kockánkénti oldalak számát).<br />n2 bármilyen érték lehet <b>1 és %s között</b> (megmutatja a kockák számát dobásonként).");
 define("L_HELP_CMD_33", "Megváltoztathatod a betűméretet a felhasználók kívánsága szerint (a megengedett értékek n-re: <b>7 és 15 között</b>); a /size parancs visszaállítja a betűméretet az alapértelmezett értékre (<b>".$FontSize."</b>).");
+define("L_HELP_CMD_34", "A felhasználó megadhatja az üzenet szövegének irányát (ltr = balról-jobbra, rtl = jobbról-balra).");
+define("L_HELP_CMD_VAR", "Szinonímák (variációk): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Chat Etikett");
 define("L_HELP_ETIQ_2", "A honlapunk szeretné megőrizni a barátságos és vidám közösségét, így kérlek tartsd be az útmutatóban közölt szabályainkat. Ha nem tartod be a szabályokat, a moderátorok közül valaki kidobhat a chat-ből.<br /><br />Köszönjük,");
 define("L_HELP_ETIQ_3", "Chat Etikett Útmutatók");
@@ -325,6 +328,7 @@ define("L_DEFAULT_TOPIC_1", "Ez egy alapértelmezett téma. Szerkeszd ezt a fáj
 define("L_PIC", "A kép küldője:");
 define("L_PIC_RESIZED", "Méret módosítása erre:");
 define("L_HELP_IMG", "az elküldött kép teljes elérési útja");
+define("L_NO_IMAGE", "Érvénytelen a kép URL címe.\\nPróbáld újra!");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s már egyik szobában sem moderátor.");
@@ -406,6 +410,8 @@ define("L_PRIV_RELOAD", "Oldal újratöltése");
 define("L_PRIV_MARK_ALL", "Az összes olvasottként jelölése");
 define("L_PRIV_MARK_SEL", "A kiválasztottak olvasottként jelölése");
 define("L_PRIV_REMOVE", "A kiválasztott PM-ek törlése"); // or selected
+define("L_PRIV_PM", "(privát)");
+define("L_PRIV_WISP", "(suttogás)");
 
 // Color Input Box mod by Ciprian
 define("L_ENABLED", "Engedélyezett");
@@ -518,6 +524,7 @@ define("L_NOT_SELECTED", "nincs kiválasztva");
 define("L_NOT_SELECTED_F", "");
 define("L_EMAIL_1", " e-mail küldéséhez");
 define("L_FULLSIZE_PIC", " a teljes méretű kép megnyitásához");
+define("L_PRIVACY", " az Adatvédelmi Nyilatkozat elolvasásához"); //Click here to…
 define("L_AUTHOR", "a szerzővel"); //Phrase will look like this: L_CLICK." ".L_LINKS_6." ".L_AUTHOR == Click here - to contact - the author
 define("L_DEVELOPER", "a chat fejlesztőjével"); //same here
 define("L_OWNER", "a chat tulajdonosával"); //same here
@@ -603,6 +610,7 @@ define("L_LANG_ENUS", "amerikai angol"); // for US formats and flags
 define("L_LANG_ES", "spanyol");
 define("L_LANG_FR", "francia");
 define("L_LANG_GR", "görög");
+define("L_LANG_HE", "héber");
 define("L_LANG_HI", "hindi");
 define("L_LANG_HU", "magyar");
 define("L_LANG_ID", "indonéziai");
@@ -658,4 +666,8 @@ define("L_RESTRICTED_ROM", "%s sikeresen kitiltva a szobából.");
 // OpenID login mod by Ciprian
 define("L_OPID_SIGN", "Bejelentkezés OpenID-vel");
 define("L_OPID_REG", "OpenID profilban szereplő adatok használata");
+
+// Support buttons
+define("L_SUPP_WARN", "Örülünk, hogy adományoddal hozzájárulsz a\\n".APP_NAME." ingyenes fejlesztéséhez.\\nKöszönjük a támogatásod!\\n\\nFigyelem: a fogadó személy nem a chat tulajdonosa.\\nKérlek, írd be az összeget a következő oldalon.\\n\\nFolytatod?");
+define("L_SUPP_ALT", "Támogasd PayPal-lal a ".APP_NAME." fejlesztését - Gyors, Ingyenes és Biztonságos!");
 ?>
