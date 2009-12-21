@@ -82,7 +82,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 		$Error = L_ERR_USR_7;
 	}
 //	else if (!eregi("^([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](fo|g|l|m|mes|o|op|pa|ro|seum|t|u|v|z)?)$", $EMAIL))
-// Added the new top-level domains (mail, asia, travel, aso)
+	// Added the new top-level domains (mail, asia, travel, aso)
 	else if (!eregi("^([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](avel|bi|bs|fo|g|ia|l|m|me|mes|o|op|pa|ro|seum|t|to|u|v|z)?)$", $EMAIL))
 	{
 		$Error = L_ERR_USR_8;

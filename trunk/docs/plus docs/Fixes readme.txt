@@ -34,6 +34,7 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 23.08.2009 - 1.93-RC6:
+- email domains for registration (register.php & edituser.php) and for domain check-up - updated to the latest top-level list: asia, travel, name, aso; (functionality related)
 - new stats mod translation added to admin panel; (localization project)
 - translation of words (private) and (whisper) added to all pages; (localization project)
 - updated the class.upload to v0.28; (functionality related)
