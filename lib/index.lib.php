@@ -1471,7 +1471,7 @@ if ($show_donation)
 {
 	$pptype = "big";
 	require("${ChatPath}lib/support.lib.php");
-	if (intval($ppbutton) < 3620000 || (intval($ppbutton) > 3627000 && intval($ppbutton) != 7148858 && intval($ppbutton) != 7148805 && (intval($ppbutton) < 7988359 || intval($ppbutton) > 7988406))) $copy_break = 1;
+	if ((intval($ppbutton) < 3620000 || (intval($ppbutton) > 3627000 && intval($ppbutton) != 7148858 && intval($ppbutton) != 7148805 && (intval($ppbutton) < 7988359 || intval($ppbutton) > 7988406))) && $ppbutton != "KYVK6TQWY4MXJ" && $ppbutton != "QN9TYKJ49BM7S") $copy_break = 1;
 }
 ?>
 </P>
@@ -1525,6 +1525,7 @@ if(isset($Error))
 						elseif ($name == "hungarian" && L_LANG_HU != "L_LANG_HU") $FLAG_NAME = L_LANG_HU;
 						elseif ($name == "indonesian" && L_LANG_ID != "L_LANG_ID") $FLAG_NAME = L_LANG_ID;
 						elseif ($name == "italian" && L_LANG_IT != "L_LANG_IT") $FLAG_NAME = L_LANG_IT;
+						elseif ($name == "nepali" && L_LANG_ID != "L_LANG_ID") $FLAG_NAME = L_LANG_ID;
 						elseif ($name == "romanian" && L_LANG_RO != "L_LANG_RO") $FLAG_NAME = L_LANG_RO;
 						elseif ($name == "serbian_latin" && L_LANG_SRL != "L_LANG_SRL") $FLAG_NAME = L_LANG_SRL;
 						elseif ($name == "serbian_cyrillic" && L_LANG_SRC != "L_LANG_SRC") $FLAG_NAME = L_LANG_SRC;

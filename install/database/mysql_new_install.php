@@ -326,7 +326,7 @@ CREATE TABLE ".$t_config." (
  RES_ROOM3 enum('0','1') NOT NULL default '0',
  RES_ROOM4 enum('0','1') NOT NULL default '0',
  RES_ROOM5 enum('0','1') NOT NULL default '0',
- EN_STATS enum('0','1') NOT NULL default '1',
+ EN_STATS enum('0','1') NOT NULL default '0',
  PRIMARY KEY (ID)
 ) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
