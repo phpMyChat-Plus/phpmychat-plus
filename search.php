@@ -87,7 +87,7 @@ switch(L_LANG)
 		break;
 	case "ne_NP":
 		$L_G_EXT = "com.np";
-#		$L_G_SA = "Search";
+		$L_G_SA = "खोज";
 		$L_G_HL = "ne";
 		$L_G_CX = "k8a94ofz5fo";
 		break;
