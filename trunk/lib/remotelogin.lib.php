@@ -1412,7 +1412,7 @@ if ($show_donation)
 {
 	$pptype = "big";
 	require("${ChatPath}lib/support.lib.php");
-	if (intval($ppbutton) < 3620000 || (intval($ppbutton) > 3627000 && intval($ppbutton) != 7148858 && intval($ppbutton) != 7148805 && (intval($ppbutton) < 7988359 || intval($ppbutton) > 7988406))) $copy_break = 1;
+	if ((intval($ppbutton) < 3620000 || (intval($ppbutton) > 3627000 && intval($ppbutton) != 7148858 && intval($ppbutton) != 7148805 && (intval($ppbutton) < 7988359 || intval($ppbutton) > 7988406))) && $ppbutton != "KYVK6TQWY4MXJ" && $ppbutton != "QN9TYKJ49BM7S") $copy_break = 1;
 }
 ?>
 <INPUT TYPE="hidden" NAME="Ver" VALUE="<?php echo($Ver); ?>">

@@ -34,11 +34,13 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 23.08.2009 - 1.93-RC6:
+- Nepali translation started; (localization project) - Thanks to Niroj Manandhar <mailnirose@yahoo.com>
+- changed the stats mod to disabled by default; (functionality related)
 - email domains for registration (register.php & edituser.php) and for domain check-up - updated to the latest top-level list: asia, travel, name, aso; (functionality related)
 - new stats mod translation added to admin panel; (localization project)
 - translation of words (private) and (whisper) added to all pages; (localization project)
 - updated the class.upload to v0.28; (functionality related)
-- Indonesian translation started; (localization project) - Thanks to Hendriyo Kustrianjaya <hendriyo@gmail.com>
+- Indonesian translation added; (localization project) - Thanks to Hendriyo Kustrianjaya <hendriyo@gmail.com>
 - fixed recalling previous commands in the input box, not only the previous posts; (functionality extension)
 - more rtl/ltr orientation fixes; (display related)
 - all the commands have been changed to support translations - optional though; (functionality & translation extension)

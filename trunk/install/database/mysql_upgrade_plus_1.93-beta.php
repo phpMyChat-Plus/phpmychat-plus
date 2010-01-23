@@ -34,7 +34,7 @@ ALTER TABLE ".$t_config."
 			ADD RES_ROOM3 enum('0','1') NOT NULL default '0',
 			ADD RES_ROOM4 enum('0','1') NOT NULL default '0',
 			ADD RES_ROOM5 enum('0','1') NOT NULL default '0',
-			ADD EN_STATS enum('0','1') NOT NULL default '1';
+			ADD EN_STATS enum('0','1') NOT NULL default '0';
 ", $conn);
 mysql_query("
 UPDATE ".$t_config." SET

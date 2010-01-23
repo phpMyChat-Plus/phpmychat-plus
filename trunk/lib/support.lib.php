@@ -24,6 +24,9 @@ switch (L_LANG)
 		$ppbutton = ($pptype == "big") ? "7988359" : "7988406";
 		$ppalt = "Paypal - Lebih aman dan mudah untuk pembayaran online.";
 		break;
+	case "ne_NP":
+		$ppbutton = ($pptype == "big") ? "KYVK6TQWY4MXJ" : "QN9TYKJ49BM7S";
+		break;
 	case "ro_RO":
 		$ppbutton = ($pptype == "big") ? "3626613" : "3626645";
 		$ppalt = "PayPal - Calea cea mai sigură şi facilă de a efectua plăţi online.";

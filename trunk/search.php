@@ -8,6 +8,11 @@
 # If you have questions or comments about this, please contact the developer of this chat.
 # Thank you for your understanding. I appreciate it!
 
+$L_G_EXT = "com";
+$L_G_SA = "Search";
+$L_G_HL = "en";
+$L_G_CX = "v5m0ds-vk8w";
+
 switch(L_LANG)
 {
 	case "bg_BG":
@@ -38,8 +43,8 @@ switch(L_LANG)
 		break;
 	case "en_GB":
 		$L_G_EXT = "co.uk";
-		$L_G_SA = "Search";
-		$L_G_HL = "en";
+#		$L_G_SA = "Search";
+#		$L_G_HL = "en";
 		$L_G_CX = "29rzcl-ytld";
 		break;
 	case "de_DE":
@@ -68,11 +73,23 @@ switch(L_LANG)
 		$L_G_HL = "hu";
 		$L_G_CX = "9j8qgz-yag1";
 		break;
+	case "id_ID":
+		$L_G_EXT = "co.id";
+		$L_G_SA = "Telusuri";
+		$L_G_HL = "in";
+		$L_G_CX = "x1y7l-c2cmr";
+		break;
 	case "it_IT":
 		$L_G_EXT = "it";
 		$L_G_SA = "Cerca";
 		$L_G_HL = "it";
 		$L_G_CX = "xcwimo-lord";
+		break;
+	case "ne_NP":
+		$L_G_EXT = "com.np";
+#		$L_G_SA = "Search";
+		$L_G_HL = "ne";
+		$L_G_CX = "k8a94ofz5fo";
 		break;
 	case "nl_NL":
 		$L_G_EXT = "nl";
@@ -136,7 +153,7 @@ $search =
 			<input type=\"submit\" name=\"sa\" value=\"$L_G_SA\" />
 		</div>
 	</form>
-<script type=\"text/javascript\" style=\"background-color:transparent;\" src=\"http://www.google.$L_G_EXT/coop/cse/brand?form=cse-search-box&amp;lang=$L_G_HL\"></script>
+<script type=\"text/javascript\" style=\"background-color:transparent;\" src=\"http://www.google.$L_G_EXT/cse/brand?form=cse-search-box&amp;lang=$L_G_HL\"></script>
 </td>
 </tr>
 </table>\n";
