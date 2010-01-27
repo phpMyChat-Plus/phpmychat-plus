@@ -142,7 +142,6 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 		 $dt = $tm[weekday].", ".$tm[mday]." ".$tm[month]." ".$tm[year];
 	     $ti = sprintf("%02.u:%02.u:%02.u",$tm[hours],$tm[minutes],$tm[seconds]);
 
-		if ($SECRET_QUESTION==0) $secret_question = L_PASS_12;
 		if ($SECRET_QUESTION==1) $secret_question = L_PASS_2;
 		if ($SECRET_QUESTION==2) $secret_question = L_PASS_3;
 		if ($SECRET_QUESTION==3) $secret_question = L_PASS_4;
@@ -218,7 +217,12 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 
 		if (C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@"))
 		{
-	     if ($GENDER == 1) $sex = "male";
+		if 	($SECRET_QUESTION==1) $secret_questiona = "What make was your first car?";
+		if 	($SECRET_QUESTION==2) $secret_questiona = "What was your first pet name?";
+		if 	($SECRET_QUESTION==3) $secret_questiona = "What is your favorite drink?";
+		if 	($SECRET_QUESTION==4) $secret_questiona = "What is your birth date?";
+
+		if ($GENDER == 1) $sex = "male";
 	     elseif ($GENDER == 2)$sex = "female";
 	     elseif ($GENDER == 3) $sex = "couple";
 			 elseif ($GENDER == 4) $sex = "undisclosed";
@@ -246,7 +250,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 	     . "New Username: ".$U."\r\n"
 		 . "New Password: ".$prev_PASSWORD."\r\n"
 	     . "----------------------------------------------\r\n\r\n"
-	     . "Secret question: ".$SECRET_QUESTION."\r\n"
+	     . "Secret question: ".$secret_questiona."\r\n"
 	     . "Secret answer: ".$SECRET_ANSWER."\r\n"
 	     . "Email: ".$EMAIL."\r\n"
 	     . "First name: ".$FIRSTNAME."\r\n"
