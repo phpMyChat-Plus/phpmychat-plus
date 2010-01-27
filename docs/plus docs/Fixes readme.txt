@@ -34,6 +34,7 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 23.08.2009 - 1.93-RC6:
+- Registration link added to the Remote login box; (functionality related)
 - Nepali translation started; (localization project) - Thanks to Niroj Manandhar <mailnirose@yahoo.com>
 - changed the stats mod to disabled by default; (functionality related)
 - email domains for registration (register.php & edituser.php) and for domain check-up - updated to the latest top-level list: asia, travel, name, aso; (functionality related)
