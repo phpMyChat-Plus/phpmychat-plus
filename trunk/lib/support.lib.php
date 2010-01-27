@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $pplang = L_LANG;
 $ppalt = "PayPal - The safer, easier way to pay online.";
 $ppexists = 0;
@@ -26,6 +26,7 @@ switch (L_LANG)
 		break;
 	case "ne_NP":
 		$ppbutton = ($pptype == "big") ? "KYVK6TQWY4MXJ" : "QN9TYKJ49BM7S";
+		$ppalt = "Paypal - ईन्टनेटबाट पैसा तिर्ने सजिलो र सुरक्षित माध्यम.";
 		break;
 	case "ro_RO":
 		$ppbutton = ($pptype == "big") ? "3626613" : "3626645";

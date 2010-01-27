@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 # Google AdSense for Search freeware add-on
 # This file is intended to keep this software freeware and is not part of the open-source code of this software.
 # It comes as a plugin which should bring a few cents to the developer of this Plus version of phpMyChat,  as a reward for his work.
