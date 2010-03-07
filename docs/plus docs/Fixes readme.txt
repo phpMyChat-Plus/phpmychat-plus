@@ -13,17 +13,17 @@ Client browsers - tested with:
 	- Apple Safari 4.0.3 = M;
 	- Google Chrome 2.0.172.34 = M.
 Server environment - tested env:
-	- Apache < 2.2.11 (Unix and Windows 2k/XP<SP3);
-	- php < 5.2.9-2 (non-safe-mode, but also a safe mode server has been tested and worked fine);
+	- Apache < 2.2.14 (Unix and Windows 2k/XP<SP3);
+	- php < 5.2.11 (non-safe-mode, but also a safe mode server has been tested and worked fine);
 	- php 4.4.4 has an issue of not posting the messages ($M value is null)
-	- MySQL < v5.1.36;
+	- MySQL < v5.1.41;
 	- exif support enabled (gif/jpeg processing);
 	- GD2 support enabled (gif/jpeg processing);
 	- mail function support (optional but recommended).
 
 Known issues (read also the FAQ):
-- NOT COMPATIBLE with php > 5.3.0! (due to the deprecation of ereg functions, which have been tremendously used until pmc+ 1.93; a separate version will be developed to replace ereg functions with preg class functions)
-- configurations cannot be saved from admin panel on servers having magic_quotes set "on"; this also happen if the c_config table structure has been altered somehow and it doesn’t exactly follow the admin5.php field definitions; another identified reason would be the use of single quote ’ in field values (like Room’s Names or such) - never use single quotes - use the utf-8 ’ instead (you can copy it from here when you need it)
+- NOT COMPATIBLE with php >= 5.3.0! (due to the deprecation of ereg functions, which have been tremendously used until pmc+ 1.93; a separate version will be developed to replace ereg functions with preg class functions)
+- configurations cannot be saved from admin panel on servers having magic_quotes set "on"; this also happens if the c_config table structure has been altered somehow and it doesn’t exactly follow the admin5.php field definitions; another identified reason would be the use of single quote ’ in field values (like Room’s Names or such) - never use single quotes - use the utf-8 ’ instead (you can copy it from here when you need it)
 - when a username uses utf-8 chars like ă î â , php cannot recognize a name with small caps as being similar with caps (Îrban is different than îrban) so please make sure you use the name in PMs and commands exacly as the one of the desired username (this is working fine on php > 5 servers, due to the added mb_* functions support);
 - on IE7, registered users don’t always actually leave the chat after clicking the Exit door or Exit link - the loader frame doesn’t actually close but keep showing that user to the users’ lists until the user closes that specific browser window.
 
@@ -33,7 +33,10 @@ On some pcs a restart might be necessary.
 We also added a small IE fixing script (reg file) as a link in Extra Options in chat.
 
 Fixes History:
+07.03.2010 - 1.93:
+- the new php versions deprecated too many functions in the old pmc+ versions therefore it calls for a decision for a Final Release; (version release)
 23.08.2009 - 1.93-RC6:
+- two minor changes in the registration and edit_profile pages; (functionality related)
 - Registration link added to the Remote login box; (functionality related)
 - Nepali translation started; (localization project) - Thanks to Niroj Manandhar <mailnirose@yahoo.com>
 - changed the stats mod to disabled by default; (functionality related)

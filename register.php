@@ -137,7 +137,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 			include("./lib/get_IP.lib.php");		// Set the $IP var
 
 			// Send e-mail
-			if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "")
+			if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@"))
 			{
 				$pmc_password = gen_password();
 				$send = send_email(sprintf(L_EMAIL_VAL_3,"[".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]"), L_SET_2, L_EMAIL_VAL_PENDING_Done."\r\n".L_EMAIL_VAL_PENDING_Done1, "", 0);
@@ -161,7 +161,8 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 			$av_done = 1;
 			// End of Upload avatar mod - by Ciprian
 			$DbLink->query("INSERT INTO ".C_REG_TBL." VALUES ('', '', '$U', '$Latin1', '$PWD_Hash', '$FIRSTNAME', '$LASTNAME', '$COUNTRY', '$WEBSITE', '$EMAIL', $showemail, 'user', '',".time().", '$IP', '$GENDER', '$allowpopup', '$PICTURE', '$DESCRIPTION', '$FAVLINK', '$FAVLINK1', '$SLANG', '$COLORNAME', '$AVATARURL', '$SECRET_QUESTION', '$SECRET_ANSWER', '', '', '$USE_GRAV', '')");
-				if (C_EMAIL_PASWD && !C_EMAIL_USER && (C_ADMIN_EMAIL != "")) $Message = ""; else $Message = L_REG_9;
+			if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@")) $Message = "";
+			else $Message = L_REG_9;
 // Patch for sending an email to the Administrator upon new user registration to the chat system.
 // by Bob Dickow, April 28, 2003
      $tm = getdate();
@@ -181,6 +182,14 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 
 // Patch to send an email to the User after registration.
 // by Ciprian using Bob Dickow's one above.
+	$Headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
+	$Headers .= "X-Sender: ${Sender_email} \r\n";
+	$Headers .= "X-Mailer: PHP/".phpversion()." \r\n";
+	$Headers .= "Return-Path: ${Sender_email} \r\n";
+	$Headers .= "Date: ${mail_date} \r\n";
+	$Headers .= "Mime-Version: 1.0 \r\n";
+	$Headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed \r\n";
+	$Headers .= "Content-Transfer-Encoding: 8bit \r\n";
 	if (C_EMAIL_USER || (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@")))
 	{
    	if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@")) $emailMessage = L_EMAIL_VAL_31."\r\n\r\n".sprintf(L_EMAIL_VAL_32,((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME),$Chat_URL)." \r\n\r\n";
@@ -229,26 +238,16 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      . "----------------------------------------------\r\n\r\n"
      . "".L_EMAIL_VAL_8."\r\n\r\n"
      .  $Mail_Greeting."\r\n".$Sender_Name1."\r\n".$Chat_URL;
-		$Headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
-		$Headers .= "X-Sender: ${Sender_email} \r\n";
-		$Headers .= "X-Mailer: PHP/".phpversion()." \r\n";
-		$Headers .= "Return-Path: ${Sender_email} \r\n";
-		$Headers .= "Date: ${mail_date} \r\n";
-		$Headers .= "Mime-Version: 1.0 \r\n";
-		$Headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed \r\n";
-		$Headers .= "Content-Transfer-Encoding: 8bit \r\n";
 		$emailMessage = stripslashes($emailMessage);
-		if (C_EMAIL_PASWD && !C_EMAIL_USER && (C_ADMIN_EMAIL != ""))
+		$Subject = sprintf(L_EMAIL_VAL_5,$U,"[".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]");
+		$Subject = quote_printable($Subject,$Charset);
+		if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@"))
 		{
-			$Subject = sprintf(L_EMAIL_VAL_5,$U,"[".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]");
-			$Subject = quote_printable($Subject,$Charset);
-			@mail(C_ADMIN_EMAIL, $Subject, $emailMessage, $Headers);
+			@mail($Sender_email, $Subject, $emailMessage, $Headers);
 		}
 	   else
 		{
-			$Subject1 = sprintf(L_EMAIL_VAL_5,$U,"[".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]");
-			$Subject1 = quote_printable($Subject1,$Charset);
-			@mail($EMAIL, $Subject1, $emailMessage, $Headers);
+			@mail($EMAIL, $Subject, $emailMessage, $Headers);
 		}
   	};
 // End of patch to send an email to the User after registration.
@@ -306,14 +305,6 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 	 . "Please note that some data should be disabled from this copy for privacy concerns!\r\n"
 	 . "Save this email for your further reference.\r\n"
 	 . "Enjoy!";
-		$Headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
-		$Headers .= "X-Sender: ${Sender_email} \r\n";
-		$Headers .= "X-Mailer: PHP/".phpversion()." \r\n";
-		$Headers .= "Return-Path: ${Sender_email} \r\n";
-		$Headers .= "Date: ${mail_date} \r\n";
-		$Headers .= "Mime-Version: 1.0 \r\n";
-		$Headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed \r\n";
-		$Headers .= "Content-Transfer-Encoding: 8bit \r\n";
 		$Subject = "New User - ".$U." - Registration notification for [".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]";
 		$Subject = quote_printable($Subject,$Charset);
 		$emailMessage = stripslashes($emailMessage);
@@ -632,18 +623,18 @@ $not_selected = " ".$null." (".$not_selected.")";
 		</TABLE>
 		<P>
 <?php
-if (!$done)
-{
-?>
-	<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(L_REG_3); ?>">
-<?php
-}
-else
+if(isset($done) && $done)
 {
 ?>
 	<SCRIPT LANGUAGE="JavaScript">
 	var x = setTimeout('window.close();', 6000);   // 6 seconds
 	</SCRIPT>
+<?php
+}
+else
+{
+?>
+	<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(L_REG_3); ?>">
 <?php
 }
 ?>
@@ -653,18 +644,7 @@ else
 </TABLE>
 </FORM>
 </CENTER>
-<?php
-if(isset($done) && $done)
-{
-?>
-	<SCRIPT LANGUAGE="JavaScript">
-	var x = setTimeout('window.close();', 6000);   // 6 seconds
-	</SCRIPT>
-<?php
-}
-?>
 </BODY>
 </HTML>
 <?php
-
 ?>

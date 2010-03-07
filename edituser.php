@@ -637,18 +637,18 @@ $not_selected = " ".$null." (".$not_selected.")";
 		</TABLE>
 		<P>
 <?php
-if (!$done)
-{
-?>
-	<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(L_REG_16); ?>">
-<?php
-}
-else
+if(isset($done) && $done)
 {
 ?>
 	<SCRIPT LANGUAGE="JavaScript">
 	var x = setTimeout('window.close();', 6000);   // 6 seconds
 	</SCRIPT>
+<?php
+}
+else
+{
+?>
+	<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(L_REG_16); ?>">
 <?php
 }
 ?>

@@ -9,7 +9,7 @@
 // -- SETTINGS BELOW MUST BE COMPLETED IN ADMIN PANEL --
 
 $Paswd_Length = C_PASS_LENGTH;					// Length of the password to be generated
-$Sender_Name = eregi("your name",C_ADMIN_NAME) ? "" : C_ADMIN_NAME;		// May also be the name of your site
+$Sender_Name = eregi("your name",C_ADMIN_NAME) ? "Chat Admin" : C_ADMIN_NAME;		// May also be the name of your site
 $Sender_Name1 = $Sender_Name;		// unformated
 $Sender_email = C_ADMIN_EMAIL;			// For the reply address
 $Mail_Greeting = C_MAIL_GREETING;	// To be send as a signature
