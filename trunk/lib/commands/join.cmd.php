@@ -57,7 +57,7 @@ else
 	$ToCheck = ($new_room_type == "1" ? $DefaultPrivateRooms : $DefaultChatRooms);
 	for ($i = 0; $i < count($ToCheck); $i++)
 	{
-		if (strcasecmp(mb_convert_case($new_room,MB_CASE_LOWER,$Charset), mb_convert_case($ToCheck[$i],MB_CASE_LOWER,$Charset)) == "0")
+		if (strcasecmp(mb_convert_case($new_room,MB_CASE_LOWER,$Charset), mb_convert_case($ToCheck[$i],MB_CASE_LOWER,$Charset)) == 0)
 		{
 			$Error = ($new_room_type == 0 ? L_ERR_ROM_3:L_ERR_ROM_4);
 			break;
