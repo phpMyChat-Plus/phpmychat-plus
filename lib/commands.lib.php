@@ -27,7 +27,7 @@ elseif (eregi("^\/(timestamp".(L_CMD_TIMESTAMP != "" && L_CMD_TIMESTAMP != "L_CM
 {
 	include("./lib/commands/timestamp.cmd.php");
 }
-elseif (C_VERSION > 0 && eregi("^\/(join".(L_CMD_JOIN != "" && L_CMD_JOIN != "L_CMD_JOIN" ? "|".str_replace(",","|",L_CMD_JOIN) : "").")[[:space:]](0|1[[:space:]])?#(.{1,30})$", $M, $Cmd))
+elseif (C_VERSION > 0 && eregi("^\/(join".(L_CMD_JOIN != "" && L_CMD_JOIN != "L_CMD_JOIN" ? "|".str_replace(",","|",L_CMD_JOIN) : "").")[[:space:]]((0|1)[[:space:]])?#(.{1,30})$", $M, $Cmd))
 {
 	include("./lib/commands/join.cmd.php");
 }
