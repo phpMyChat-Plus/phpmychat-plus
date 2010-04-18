@@ -149,7 +149,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 
 		$Headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
 		$Headers .= "X-Sender: ${Sender_email} \r\n";
-		$Headers .= "X-Mailer: PHP/".phpversion()." \r\n";
+		$Headers .= "X-Mailer: PHP/".PHPVERSION." \r\n";
 		$Headers .= "Return-Path: ${Sender_email} \r\n";
 		$Headers .= "Date: ${mail_date} \r\n";
 		$Headers .= "Mime-Version: 1.0 \r\n";
@@ -179,7 +179,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 		     } else {
 		       $usegrav = L_REG_22;
 		     }
-	     $emailMessage = sprintf(L_EMAIL_VAL_41,((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME),$Chat_URL,$pmc_username)."\r\n\r\n"
+	     $emailMessage = sprintf(L_EMAIL_VAL_41,((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME),$Chat_URL,$pmc_username)."\r\n"
 	     . sprintf(L_EMAIL_VAL_7,$U)."\r\n\r\n"
 	     . "----------------------------------------------\r\n"
 	     . "".L_SET_2.": ".$U."\r\n"
@@ -245,28 +245,30 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 		 }
 	     $emailMessage = $pmc_username." has just changed important account info for "
 		 . ((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME) ." at ". $Chat_URL." :\r\n\r\n"
-	     . "Here is the updated account info for ".$pmc_username.":\r\n\r\n"
+	     . "Here is the updated account info for ".$pmc_username.":\r\n"
 	     . "----------------------------------------------\r\n"
 	     . "New Username: ".$U."\r\n"
 		 . "New Password: ".$prev_PASSWORD."\r\n"
 	     . "----------------------------------------------\r\n\r\n"
 	     . "Secret question: ".$secret_questiona."\r\n"
 	     . "Secret answer: ".$SECRET_ANSWER."\r\n"
-	     . "Email: ".$EMAIL."\r\n"
-	     . "First name: ".$FIRSTNAME."\r\n"
-	     . "Last name: ".$LASTNAME."\r\n"
-	     . "Gender: ".$sex."\r\n"
-	     . "Country: ".$COUNTRY."\r\n"
-	     . "WWW: ".$WEBSITE."\r\n"
-	     . "Spoken languages: ".$SLANG."\r\n"
-	     . "Description: ".$DESCRIPTION."\r\n"
-	     . "Favorite link 1: ".$FAVLINK."\r\n"
-	     . "Favorite link 2: ".$FAVLINK1."\r\n"
-	     . "Picture: ".$PICTURE."\r\n"
-	     . "Color name/text: ".$C." (".(COLOR_NAMES ? "Enabled" : "Disabled").")\r\n"
-	     . "Display email address on public info: ".$shweml."\r\n"
-	     . "Open popups on private message: ".$allpopup."\r\n"
-	     . "Use the Gravatar: ".$usegrav." (".(!ALLOW_GRAVATARS ? "Disabled" : "Enabled").")\r\n"
+	     . "Email: ".$EMAIL.""
+		 . ($FIRSTNAME ? "\r\nFirst name: ".$FIRSTNAME."" : "")
+		 . ($LASTNAME ? "\r\nLast name: ".$LASTNAME."" : "")
+		 . "\r\nGender: ".$sex
+		 . ($COUNTRY ? "\r\nCountry: ".$COUNTRY : "")
+		 . ($WEBSITE ? "\r\nWWW: ".$WEBSITE."" : "")
+		 . ($SLANG ? "\r\nSpoken languages: ".$SLANG : "")
+		 . ($FAVLINK ? "\r\nFavorite link 1: ".$FAVLINK : "")
+		 . ($FAVLINK1 ? "\r\nFavorite link 2: ".$FAVLINK1 : "")
+		 . ($DESCRIPTION ? "\r\nDescription: ".$DESCRIPTION : "")
+		 . ($PICTURE ? "\r\nPicture: ".$PICTURE : "")
+		 . "\r\n"
+		 . "Color name/text: ".($C ? $C : "Not selected")." (".(COLOR_NAMES ? "Enabled" : "Disabled").")\r\n"
+		 . "Display email address on public info: ".$shweml."\r\n"
+	     . "Open popups on private message: ".$allpopup
+		 . ($usegrav ? "\r\nUse the Gravatar: ".$usegrav." (".(ALLOW_GRAVATARS ? "Enabled" : "Disabled").")" : "")
+		 . "\r\n"
 		 . "----------------------------------------------\r\n"
 		 . "Prefered language: ".$L."\r\n"
 	     . "Updated on: $dt $ti\r\n"
@@ -614,7 +616,7 @@ $not_selected = ((L_NOT_SELECTED_F != "") ? L_NOT_SELECTED_F : L_NOT_SELECTED);
 $null = ((L_NULL_F != "") ? L_NULL_F : L_NULL);
 $selected = " (".$selected.")";
 $not_selected = " ".$null." (".$not_selected.")";
-			if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<SELECT NAME=\"COLORNAME\" style=\"background-color:".$COLORNAME.";\">\n");
+			if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<SELECT NAME=\"COLORNAME\" style=\"background-color:".$COLORNAME.";\">\n");
 			else echo("<SELECT NAME=\"COLORNAME\">");
 			while(list($ColorNumber1, $ColorCode) = each($CC))
 			{

@@ -920,7 +920,7 @@
 <category><pattern>WHAT IS YOUR LANGUAGE</pattern><template>My native language is <bot name="language"/>.</template></category>
 <category><pattern>WHAT IS YOUR LEAST * MOVIE</pattern><template>Plan 9 from Outer Space.</template></category>
 <category><pattern>WHAT IS YOUR LIFE LIKE</pattern><template>Much the same as your life would be, if you spent all your time online.</template></category>
-<category><pattern>WHAT IS YOUR LIFESPAN</pattern><template>Check the actuarial tables.</template></category>
+<category><pattern>WHAT IS YOUR LIFESPAN</pattern><template>Check the actual tables.</template></category>
 <category><pattern>WHAT IS YOUR MAILING *</pattern><template>I can't give out that information online.</template></category>
 <category><pattern>WHAT IS YOUR MAJOR</pattern><template>Artificial Intelligence. What's your major?</template></category>
 <category><pattern>WHAT IS YOUR MOM *</pattern><template>I don't have a mother.</template></category>

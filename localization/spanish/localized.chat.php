@@ -215,8 +215,8 @@ define("L_HELP_ROOM", "sala");
 define("L_HELP_BUZZ", "~nombredelsonido");
 define("L_HELP_BUZZ1", "Alerta..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "razón");
-define("L_HELP_MR", "Sr."); // Mister (can be short or entire word)
-define("L_HELP_MS", "Srta."); // Mistress (- neutral of Miss, Mrs.)
+define("L_HELP_MR", "Sr. %s"); // Mister (can be short or entire word)
+define("L_HELP_MS", "Srta. %s"); // Mistress (- neutral of Miss, Mrs.)
 define("L_HELP_CMD_0", "{} representa una característica necesaria, [] una opcional.");
 define("L_HELP_CMD_1a", "Seleccione la cantidad de mensajes que se mostrarán. La cantidad mínima y la establecida por defecto es 5.");
 define("L_HELP_CMD_1b", "Refresque el marco con los mensajes y muestre los más recientes, la cantidad mínima y la establecida por defecto es 5.");
@@ -243,13 +243,13 @@ define("L_HELP_CMD_20", "Describe lo que usted está haciendo sin referirse a us
 define("L_HELP_CMD_21", "Anuncia la sala y los usuarios que intenta comunicarse<br /> que usted se encuentra lejos de su computadora. Si desea regresar al chat, sólo empiece a escribir.");
 define("L_HELP_CMD_22", "Envia un sonido buzz y opcionalmente muestra un mensaje en la sala actual.<br />- Uso:<br />- uso previo: \"/buzz\" o \"/buzz mensaje que debe mostrarse\" - esto toca el sonido por defecto para buzz definido en el panel de Administracion;<br />- uso avanzado: \"/buzz ~nombredelsonido\" o \"/buzz ~nombredelsonido mensaje para mostrar\" - esto toca el archivo nombredelsonido.wav de la carpeta plus/sounds folder; por favor note el signo \"~\" que debe ser usado al principio de la segunda palabra, la cual es el nombre del archivo de sonido, sin la extensión .wav (sólo las extensiones .wav están permitidas).<br />Por defecto este es un comando del moderador/administrador.");
 define("L_HELP_CMD_23", "Enviar un<i>whisper</i> (mensaje privado). Este mensaje llegará al destinatario, sin importar en que sala esté en ese momento. Si el usuario no está en línea on-line o se encuentra lejos de su computadora, usted será notificado.");
-define("L_HELP_CMD_24", "Uso: el tema debe contener por lo menos 2 palabras.<br />Este comando cambia el tema de la sala actual. Trate de no borrar los temas de otros usuarios. Use temas importantes.<br />Por defecto, este es un comando del moderador/administrador.<br />Usando el comando \"/topic top reset\" el tema actual será borrado y se volverá al tema por defecto de la sala.<br />Opcional, \"/topic * {}\" hace exáctamente lo mismo pero en todas las salas (tema global y resetear tema global).");
+define("L_HELP_CMD_24", "Este comando cambia el tema de la sala actual. Trate de no borrar los temas de otros usuarios. Use temas importantes.<br />Por defecto, este es un comando del moderador/administrador.<br />Usando el comando \"/topic reset\" el tema actual será borrado y se volverá al tema por defecto de la sala.<br />Opcional, \"/topic * {}\" y \"/topic * reset\" hace exáctamente lo mismo pero en todas las salas (tema global y resetear tema global).");
 define("L_HELP_CMD_25", "Un juego de dados para números al azar/peligrosos.<br />Uso: /dice o /dice [n];<br />n pueden usar cualquier valor <b>entre 1 y %s</b> (representa el número de dados arrojados). Si no se indica ningún número, por defecto se usará el máximo arrojado.");
 define("L_HELP_CMD_26", "Esta es una versión más compleja del comando /dados.<br />Uso: /{n1}d[n2] o /{n1}d;<br />n1 puede ser cualquier valor <b>entre 1 y %s</b> (representa el número de dados arrojados).<br />n2 puede ser cualquier valor <b>entre 1 y %s</b> (representa el número de dados arrojados por cada tirada).");
 define("L_HELP_CMD_27", "Destaca los mensajes de un usuario específico para una lectura más fácil a través de las conversaciones.<br />Uso: /high {usuario} o presionar el pequeño <img src=./images/highlightOff.gif> cuadrado a la derecha del nombre del usuario (en la lista de salas/usuarios)");
 define("L_HELP_CMD_28", "Permite poner <i>una sola imagen</i> como mensaje.<br />Uso: La imagen tiene que estar en la internet y su acceso tiene que ser libre para todos. No use páginas que requieran loguearse.<br />¡Se debe escribir el vínculo completo de la imagen! Ej.<b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Extensiones permitidas: .jpg .bmp .gif .png. El vínculo es sensible. ¡Escriba las mayúsculas y minúsculas que correspondan!<br />SUGERENCIAS: escriba /img luego un espacio y pegue el URL en la casilla; para conseguir el URL de una imagen en una página web, dele clic derecho en la imagen, vaya a propiedades, luego seleccione la dirección completa/URL (a veces necesita desplazarse hacia abajo) y copie/pegue después de /img<br />¡¡¡No use imágenes de su computadora/pc: causará problemas en la ventana del chat!!!");
 define("L_HELP_CMD_29", "El segundo comando permitirá al administrador o moderador(es) de la sala actual degradar a un usuario registrado previamente promovido a moderador para esa misma sala.<br />La opción * degradará al usuario en todas las salas.");
-define("L_HELP_CMD_30", "El segundo comando hace lo mismo que /me pero mostrará su género<br />Ej. * ".L_HELP_MR." Ciprian está viendo la TV o * ".L_HELP_MS." Dana está feliz.");
+define("L_HELP_CMD_30", "El segundo comando hace lo mismo que /me pero mostrará su género<br />Ej. * ".sprintf(L_HELP_MR, "Ciprian")." está viendo la TV o * ".sprintf(L_HELP_MS, "Dana")." está feliz.");
 define("L_HELP_CMD_31", "Cambia el orden en que los usuarios se muestran en las listas: por hora de ingreso o alfabéticamente.");
 define("L_HELP_CMD_32", "Este tercero (representación/roleplaying) versión de tirar los dados.<br />Uso: /d{n1}[tn2] o /d{n1};<br />n1 puede tomar cualquier valor <b>entre 1 y 100</b> (representa el número de tiradas por dado).<br />n2 puede tomar cualquier valor <b>entre 1 y %s</b> (representa el número de dados por tirada).");
 define("L_HELP_CMD_33", "Cambia el tamaño de la fuente de los mensajes en el chat por el que elija el usuario (valores permitidos para n: <b>entre 7 y 15</b>); el comando /size vuelve el tamaño de la fuente al valor por defecto (<b>".$FontSize."</b>).");
@@ -500,7 +500,7 @@ define("L_LINKS_6", "para contactar");
 define("L_LINKS_7", "para visitar la página principal de phpMyChat");
 define("L_LINKS_8", "para unirse con el grupo de phpMyChat");
 define("L_LINKS_9", "para enviar sus comentarios");
-define("L_LINKS_10", "para cargar phpMyChat-Plus");
+define("L_LINKS_10", "para cargar phpMyChat Plus");
 define("L_LINKS_11", "para comprobar quién está charlando");
 define("L_LINKS_12", "para abrir la página principal");
 define("L_LINKS_13", "tocar este sonido");

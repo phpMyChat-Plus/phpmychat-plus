@@ -38,31 +38,31 @@ if ($roomfrom != "" && $roomfrom != $room) $room = $roomfrom."><br />".$room;
 $m_time = stripslashes($result["m_time"]);
 $time_posted = date('H:i:s (d)', $m_time + C_TMZ_OFFSET*60*60);
 $address = htmlspecialchars(stripslashes($result["address"]));
-if ($address != "" && $address != " *" && $username != "SYS welcome" && $username != "SYS topic" && $username != "SYS topic reset" && substr($username,0,8) != "SYS dice" && $username != "SYS image" && $username != "SYS room" && $username != $address) $toaddress = " to <b>".$address."</b>";
+if ($address != "" && $address != " *" && $username != "SYS welcome" && $username != "SYS topic" && $username != "SYS topic reset" && substr($username,0,8) != "SYS dice" && $username != "SYS image" && $username != "SYS video" && $username != "SYS utube" && $username != "SYS room" && $username != $address) $toaddress = " to <b>".$address."</b>";
 $address = "<b>".$address."</b>";
 if ($username == "SYS welcome") $username = $address;
 if ($room == "*" || ($username == "SYS room" && $address == "*") || $username == "SYS announce") $room = '<?php echo(L_ROOM_ALL); ?>';
 $message = stripslashes($result["message"]);
 $message = str_replace("<!-- UPDTUSRS //-->","",$message);
-$message = str_replace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"L_HELP_BUZZ1\" title=\"L_HELP_BUZZ1\">",$message);
-$message = str_replace("src=images","src=./../../../images",$message);
-$message = str_replace("src=\"images","src=\"./../../../images",$message);
-$message = str_replace("src=localization/","src=./../../../localization/",$message);
-$message = str_replace("src=\"localization/","src=\"./../../../localization/",$message);
+$message = str_replace("...BUZZER...","<img src=\"./../../../images/buzz.gif\" alt=\"L_HELP_BUZZ1\" title=\"L_HELP_BUZZ1\">",$message);
+$message = str_ireplace("SRC=images/","src=./../../../images/",$message);
+$message = str_ireplace("SRC=\"images/","src=\"./../../../images/",$message);
+$message = str_ireplace("src=localization/","src=./../../../localization/",$message);
+$message = str_ireplace("src=\"localization/","src=\"./../../../localization/",$message);
 $message = str_replace("tutorial_popup.php","./../../../tutorial_popup.php",$message);
 $message = str_replace("help_popup.php","./../../../help_popup.php",$message);
 $message = str_replace("  "," ",$message);
 $message = str_replace("L_DEL_BYE","<?php echo(L_DEL_BYE); ?>",$message);
 $message = str_replace("L_REG_BRB","<?php echo(L_REG_BRB); ?>",$message);
-$message = str_replace("L_HELP_MR","<?php echo(L_HELP_MR); ?>",$message);
-$message = str_replace("L_HELP_MS","<?php echo(L_HELP_MS); ?>",$message);
+$message = str_replace("L_HELP_MR","<?php echo(sprintf(L_HELP_MR,".$username."); ?>",$message);
+$message = str_replace("L_HELP_MS","<?php echo(sprintf(L_HELP_MS,".$username."); ?>",$message);
 $message = str_replace("L_PRIV_PM","<?php echo(L_PRIV_PM); ?>",$message);
 $message = str_replace("L_PRIV_WISP","<?php echo(L_PRIV_WISP);?>",$message);
 $message = str_replace("L_HELP_BUZZ1","<?php echo(L_HELP_BUZZ1); ?>",$message);
-$message = str_replace('class="table"','bgcolor="lightgrey"',$message);
-$message = str_replace('class="tabtitle"><td colspan="7">','bgcolor="blue"><td colspan="7">',$message);
-$message = str_replace('class="tabtitle"><td>','bgcolor="gray"><td>',$message);
-$message = str_replace('class="tabtitle"><td colspan="4">','bgcolor="blue"><td colspan="4">',$message);
+$message = str_ireplace('class="table"','bgcolor="lightgrey"',$message);
+$message = str_ireplace('class="tabtitle"><td colspan="7">','bgcolor="blue"><td colspan="7">',$message);
+$message = str_ireplace('class="tabtitle"><td>','bgcolor="gray"><td>',$message);
+$message = str_ireplace('class="tabtitle"><td colspan="4">','bgcolor="blue"><td colspan="4">',$message);
 if ((ereg("stripslashes",$message) || ereg("sprintf",$message) || ereg("L_",$message)) && !ereg("php echo",$message))
 {
 	$message = "<?php echo(".$message."); ?>";
@@ -92,6 +92,36 @@ elseif ($username == "SYS image")
 	$NewMsg .= $address.": <A href=\"".$message."\" onMouseOver=\"window.status='";
 	$NewMsg .= '<?php echo(sprintf(L_CLICK,L_FULLSIZE_PIC)) ?>.\'; return true" title="';
 	$NewMsg .= '<?php echo(sprintf(L_CLICK,L_FULLSIZE_PIC)) ?>" target=_blank>';
+	$NewMsg .= $message."</A>";
+}
+elseif ($username == "SYS video")
+{
+	//require EmbeVi Class
+	include_once('plugins/video/embevi.class.php');
+	//instantiate EmbeVi class
+	$embevi = new EmbeVi();
+	$embevi->setAcceptShortUrl();
+	$embevi->setProviderIconLocal();
+	$embevi->setProviderIconUrl('images/icons/');
+	$embevi->setAcceptExtendedSupport();
+	if($embevi->parseUrl($message))
+	{
+#		$eicon = $embevi->getProviderIcon();
+		$ealt = $embevi->getEmbeddedInfo();
+		$eicon = $embevi->getProviderImageIdentifier();
+		$NewMsg .= '<img src="./../../../'.$eicon.'" border=0 width="16" alt="&copy; '.$ealt.'" title="&copy; '.$ealt.'">&nbsp;<?php echo(L_VIDEO); ?> ';
+		$NewMsg .= $address.": <A href=\"".$message."\" onMouseOver=\"window.status='";
+		$NewMsg .= '<?php echo(sprintf(L_CLICK,L_ORIG_VIDEO)) ?>.\'; return true" title="';
+		$NewMsg .= '<?php echo(sprintf(L_CLICK,L_ORIG_VIDEO)) ?>" target=_blank>';
+		$NewMsg .= $message."</A>";
+	}
+}
+elseif ($username == "SYS utube")
+{
+	$NewMsg .= '<img src="./../../../images/icons/youtube.png" border=0 alt="YouTube">&nbsp;<?php echo(L_VIDEO); ?> ';
+	$NewMsg .= $address.": <A href=\"".$message."\" onMouseOver=\"window.status='";
+	$NewMsg .= '<?php echo(sprintf(L_CLICK,L_ORIG_VIDEO)) ?>.\'; return true" title="';
+	$NewMsg .= '<?php echo(sprintf(L_CLICK,L_ORIG_VIDEO)) ?>" target=_blank>';
 	$NewMsg .= $message."</A>";
 }
 elseif ($username == "SYS announce")
@@ -217,7 +247,7 @@ $i = 0;
 
 //Public logs
 $doneu = 0;
-$CondForQuery	= "(m_time<".(time() - C_MSG_DEL*60*60)." AND (address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3'))))";
+$CondForQuery	= "(m_time<".(time() - C_MSG_DEL*60*60)." AND (address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username = 'SYS video' OR username = 'SYS utube' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3'))))";
 $sqlu = "SELECT * FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC";
 $queryu = mysql_query($sqlu) or die("Cannot query the database.<br />" . mysql_error());
 // Collect and store new messages
@@ -237,31 +267,31 @@ if (is_array($DefaultDispChatRooms) && in_array($roomu." [R]",$DefaultDispChatRo
 	elseif ($usernameu == "SYS room" && $addressu == "*") {}
 	else continue;
 }
-if ($addressu != "" && $addressu != " *" && $usernameu != "SYS welcome" && $usernameu != "SYS topic" && $usernameu != "SYS topic reset" && substr($usernameu,0,8) != "SYS dice" && $usernameu != "SYS image" && $usernameu != "SYS room" && $usernameu != $addressu) $toaddressu = " to <b>".$addressu."</b>";
+if ($addressu != "" && $addressu != " *" && $usernameu != "SYS welcome" && $usernameu != "SYS topic" && $usernameu != "SYS topic reset" && substr($usernameu,0,8) != "SYS dice" && $usernameu != "SYS image" && $usernameu != "SYS video" && $usernameu != "SYS utube" && $usernameu != "SYS room" && $usernameu != $addressu) $toaddressu = " to <b>".$addressu."</b>";
 $addressu = "<b>".$addressu."</b>";
 if ($usernameu == "SYS welcome") $usernameu = $addressu;
 if ($roomu == "*" || ($usernameu == "SYS room" && $addressu == "*") || $usernameu == "SYS announce") $roomu = '<?php echo(L_ROOM_ALL); ?>';
 $messageu = stripslashes($resultu["message"]);
 $messageu = str_replace("<!-- UPDTUSRS //-->","",$messageu);
-$messageu = str_replace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"L_HELP_BUZZ1\" title=\"L_HELP_BUZZ1\">",$messageu);
-$messageu = str_replace("src=images","src=./../../../images",$messageu);
-$messageu = str_replace("src=\"images","src=\"./../../../images",$messageu);
-$messageu = str_replace("src=localization/","src=./../../../localization/",$messageu);
-$messageu = str_replace("src=\"localization/","src=\"./../../../localization/",$messageu);
+$messageu = str_replace("...BUZZER...","<img src=\"./../../../images/buzz.gif\" alt=\"L_HELP_BUZZ1\" title=\"L_HELP_BUZZ1\">",$messageu);
+$messageu = str_ireplace("SRC=images/","src=./../../../images/",$messageu);
+$messageu = str_ireplace("SRC=\"images/","src=\"./../../../images/",$messageu);
+$messageu = str_ireplace("src=localization/","src=./../../../localization/",$messageu);
+$messageu = str_ireplace("src=\"localization/","src=\"./../../../localization/",$messageu);
 $messageu = str_replace("tutorial_popup.php","./../../../tutorial_popup.php",$messageu);
 $messageu = str_replace("help_popup.php","./../../../help_popup.php",$messageu);
 $messageu = str_replace("  "," ",$messageu);
 $messageu = str_replace("L_DEL_BYE","<?php echo(L_DEL_BYE); ?>",$messageu);
 $messageu = str_replace("L_REG_BRB","<?php echo(L_REG_BRB); ?>",$messageu);
-$messageu = str_replace("L_HELP_MR","<?php echo(L_HELP_MR); ?>",$messageu);
-$messageu = str_replace("L_HELP_MS","<?php echo(L_HELP_MS); ?>",$messageu);
+$messageu = str_replace("L_HELP_MR","<?php echo(sprintf(L_HELP_MR,".$usernameu."); ?>",$messageu);
+$messageu = str_replace("L_HELP_MS","<?php echo(sprintf(L_HELP_MS,".$usernameu."); ?>",$messageu);
 $messageu = str_replace("L_PRIV_PM","<?php echo(L_PRIV_PM); ?>",$messageu);
 $messageu = str_replace("L_PRIV_WISP","<?php echo(L_PRIV_WISP);?>",$messageu);
 $messageu = str_replace("L_HELP_BUZZ1","<?php echo(L_HELP_BUZZ1); ?>",$messageu);
-$messageu = str_replace('class="table"','bgcolor="lightgrey"',$messageu);
-$messageu = str_replace('class="tabtitle"><td colspan="7">','bgcolor="blue"><td colspan="7">',$messageu);
-$messageu = str_replace('class="tabtitle"><td>','bgcolor="gray"><td>',$messageu);
-$messageu = str_replace('class="tabtitle"><td colspan="4">','bgcolor="blue"><td colspan="4">',$messageu);
+$messageu = str_ireplace('class="table"','bgcolor="lightgrey"',$messageu);
+$messageu = str_ireplace('class="tabtitle"><td colspan="7">','bgcolor="blue"><td colspan="7">',$messageu);
+$messageu = str_ireplace('class="tabtitle"><td>','bgcolor="gray"><td>',$messageu);
+$messageu = str_ireplace('class="tabtitle"><td colspan="4">','bgcolor="blue"><td colspan="4">',$messageu);
 if ((ereg("stripslashes",$messageu) || ereg("sprintf",$messageu) || ereg("L_",$messageu)) && !ereg("php echo",$messageu))
 {
 	$messageu = '<?php echo('.$messageu.'); ?>';
@@ -291,6 +321,36 @@ elseif ($usernameu == "SYS image")
 	$NewMsgu .= $addressu.": <A href=\"".$messageu."\" onMouseOver=\"window.status='";
 	$NewMsgu .= '<?php echo(sprintf(L_CLICK,L_FULLSIZE_PIC)) ?>.\'; return true" title="';
 	$NewMsgu .= '<?php echo(sprintf(L_CLICK,L_FULLSIZE_PIC)) ?>" target=_blank>';
+	$NewMsgu .= $messageu."</A>";
+}
+elseif ($usernameu == "SYS video")
+{
+	//require EmbeVi Class
+	include_once('plugins/video/embevi.class.php');
+	//instantiate EmbeVi class
+	$embeviu = new EmbeVi();
+	$embeviu->setAcceptShortUrl();
+	$embeviu->setProviderIconLocal();
+	$embeviu->setProviderIconUrl('images/icons/');
+	$embeviu->setAcceptExtendedSupport();
+	if($embeviu->parseUrl($messageu))
+	{
+#		$eiconu = $embevi->getProviderIcon();
+		$ealtu = $embeviu->getEmbeddedInfo();
+		$eiconu = $embeviu->getProviderImageIdentifier();
+		$NewMsgu .= '<img src="./../../../'.$eiconu.'" border=0 width= "16" alt="&copy; '.$ealtu.'" title="&copy; '.$ealtu.'">&nbsp;<?php echo(L_VIDEO); ?> ';
+		$NewMsgu .= $addressu.": <A href=\"".$messageu."\" onMouseOver=\"window.status='";
+		$NewMsgu .= '<?php echo(sprintf(L_CLICK,L_ORIG_VIDEO)) ?>.\'; return true" title="';
+		$NewMsgu .= '<?php echo(sprintf(L_CLICK,L_ORIG_VIDEO)) ?>" target=_blank>';
+		$NewMsgu .= $messageu."</A>";
+	}
+}
+elseif ($usernameu == "SYS utube")
+{
+	$NewMsgu .= '<img src="./../../../images/icons/youtube.png" border=0 alt="YouTube">&nbsp;<?php echo(L_VIDEO); ?> ';
+	$NewMsgu .= $addressu.": <A href=\"".$messageu."\" onMouseOver=\"window.status='";
+	$NewMsgu .= '<?php echo(sprintf(L_CLICK,L_ORIG_VIDEO)) ?>.\'; return true" title="';
+	$NewMsgu .= '<?php echo(sprintf(L_CLICK,L_ORIG_VIDEO)) ?>" target=_blank>';
 	$NewMsgu .= $messageu."</A>";
 }
 elseif ($usernameu == "SYS announce")

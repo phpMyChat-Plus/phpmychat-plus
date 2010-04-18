@@ -342,7 +342,7 @@ if ($sghosts != "" && ghosts_in(stripslashes($U), $sghosts, $Charset) && ($statu
 }
 else
 {
-	$CondForQuery .= "(address = ' *' OR ((address = '$U' OR username = '$U') AND (room = '$R' OR room_from='$R' OR room = 'Offline PMs' OR username = 'SYS inviteTo')) OR ((room = '$R' OR room = 'Offline PMs') AND (address = '' OR username = '$U')) OR room = '*' OR (room = '$R' AND (username = 'SYS room' OR username = 'SYS image' OR username LIKE 'SYS top%' OR username='SYS dice1' OR username='SYS dice2' OR username='SYS dice3')))";
+	$CondForQuery .= "(address = ' *' OR ((address = '$U' OR username = '$U') AND (room = '$R' OR room_from='$R' OR room = 'Offline PMs' OR username = 'SYS inviteTo')) OR ((room = '$R' OR room = 'Offline PMs') AND (address = '' OR username = '$U')) OR room = '*' OR (room = '$R' AND (username = 'SYS room' OR username = 'SYS image' OR username = 'SYS video' OR username = 'SYS utube' OR username LIKE 'SYS top%' OR username='SYS dice1' OR username='SYS dice2' OR username='SYS dice3')))";
 }
 $LimitForQuery = ($First ? " LIMIT $N" : "");
 
@@ -359,8 +359,8 @@ if($DbLink->num_rows() > 0)
 		$Message = stripslashes($Message);
 		$Message = str_replace("L_DEL_BYE",L_DEL_BYE,$Message);
 		$Message = str_replace("L_REG_BRB",L_REG_BRB,$Message);
-		$Message = str_replace("L_HELP_MR",L_HELP_MR,$Message);
-		$Message = str_replace("L_HELP_MS",L_HELP_MS,$Message);
+		$Message = str_replace("L_HELP_MR",sprintf(L_HELP_MR,$User),$Message);
+		$Message = str_replace("L_HELP_MS",sprintf(L_HELP_MS,$User),$Message);
 		$Message = str_replace("L_PRIV_PM",L_PRIV_PM,$Message);
 		$Message = str_replace("L_PRIV_WISP",L_PRIV_WISP,$Message);
 		$Message = str_replace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"".L_HELP_BUZZ1."\" title=\"".L_HELP_BUZZ1."\">",$Message);
@@ -570,11 +570,42 @@ else
 			elseif ($User == "SYS image")
 			{
 				$imgSize = setImageSize($Message,MAX_PIC_SIZE);
-				$Pic = L_PIC;
 				if($imgSize[0] == MAX_PIC_SIZE || $imgSize[1] == MAX_PIC_SIZE)
 				$Resized = "<br \/>(".L_PIC_RESIZED." <B>".round($imgSize[0],-1)."<\/B>".((isset($imgSize[1]) && $imgSize[1] != "") ? " x <B>".round($imgSize[1],-1)."<\/B>" : "").")";
 				else $Resized = '';
-        		$NewMsg .= "<font class=\"notify\">".$Pic." ".$Dest.":<\/font><\/td><td width=\"99%\" valign=\"top\"><a href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_FULLSIZE_PIC).".'; return true\" title='".sprintf(L_CLICK,L_FULLSIZE_PIC)."' target=_blank><img src=".$Message.((isset($imgSize[0]) && $imgSize[0] != "") ? " width=".$imgSize[0] : "").((isset($imgSize[1]) && $imgSize[1] != "") ? "  height=".$imgSize[1] : "")." border=0 alt='".sprintf(L_CLICK,L_FULLSIZE_PIC)."'><\/a>".$Resized."<\/td><\/tr><\/table>";
+        		$NewMsg .= "<font class=\"notify\"><a href='".$Message."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_FULLSIZE_PIC).".'; return true\" title='".sprintf(L_CLICK,L_FULLSIZE_PIC)."' target=_blank>".L_PIC."<\/a> ".$Dest.":<\/font><\/td><td width=\"99%\" valign=\"top\"><a href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_FULLSIZE_PIC).".'; return true\" title='".sprintf(L_CLICK,L_FULLSIZE_PIC)."' target=_blank><img src=".$Message.((isset($imgSize[0]) && $imgSize[0] != "") ? " width=".$imgSize[0] : "").((isset($imgSize[1]) && $imgSize[1] != "") ? " height=".$imgSize[1] : "")." border=0 alt='".sprintf(L_CLICK,L_FULLSIZE_PIC)."'><\/a>".$Resized."<\/td><\/tr><\/table>";
+      		}
+			elseif ($User == "SYS utube")
+			{
+				include_once('./plugins/video/youtube.class.php');
+				$jutjub = new YouTube();
+				$youtube = $jutjub->EmbedVideo($Message,C_VIDEO_WIDTH,C_VIDEO_HEIGHT);
+        		$NewMsg .= "<font class=\"notify\"><img src=\"images/icons/youtube.png\" border=0 alt='YouTube' title='YouTube'>&nbsp;<a href='".$Message."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_ORIG_VIDEO).".'; return true\" title='".sprintf(L_CLICK,L_ORIG_VIDEO)."' target=_blank>".L_VIDEO."<\/a> ".$Dest.":<\/font><\/td><td width=\"99%\" valign=\"top\">".$youtube."<\/td><\/tr><\/table>";
+      		}
+			elseif ($User == "SYS video")
+			{
+				//require EmbeVi Class
+				include_once('plugins/video/embevi.class.php');
+				//instantiate EmbeVi class
+				$embevi = new EmbeVi();
+				$embevi->setAcceptShortUrl();
+				$embevi->setProviderIconLocal();
+				$embevi->setProviderIconUrl('images/icons/');
+				$embevi->setAcceptExtendedSupport();
+				if($embevi->parseUrl($Message))
+				{
+					//set embeded width
+					$embevi->setWidth(C_VIDEO_WIDTH);
+					//set embeded height
+					$embevi->setHeight(C_VIDEO_HEIGHT);
+					//get the icon from the provider info
+					$ealt = $embevi->getEmbeddedInfo();
+#					$eicon = $embevi->getEmbeddedIcon();
+					$eicon = $embevi->getProviderImageIdentifier();
+					//display video and embeded code
+					$video = $embevi->getCode();
+					$NewMsg .= "<font class=\"notify\"><img src=\"".$eicon."\" border=0 width='16' alt='&copy; ".$ealt."' title='&copy; ".$ealt."'>&nbsp;<a href='".$Message."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_ORIG_VIDEO).".'; return true\" title='".sprintf(L_CLICK,L_ORIG_VIDEO)."' target=_blank>".L_VIDEO."<\/a> ".$Dest.":<\/font><\/td><td width=\"99%\" valign=\"top\">".$video."<\/td><\/tr><\/table>";
+				}
       		}
 			elseif ($User == "SYS room")
 			{
@@ -588,7 +619,7 @@ else
 				eval("\$Message = $Message;");
 				$noteclass = "notify";
 			};
-		    if ($User != "SYS image")
+		    if ($User != "SYS image" && $User != "SYS video" && $User != "SYS utube")
 		    {
 				if(substr($User,0,8) == "SYS dice")
 				{
@@ -841,7 +872,7 @@ if (C_QUOTE)
 }
 if(C_CHAT_BOOT)
 {
-	$CondForQueryM = "(username='$U' OR message='stripslashes(sprintf(L_ENTER_ROM, \"".$U."\"))' OR message='stripslashes(sprintf(L_ENTER_ROM_NOSOUND, \"".$U."\"))' OR ((username='SYS welcome' OR username LIKE 'SYS top%' OR username='SYS room' OR username='SYS image' OR username='SYS dice1' OR username='SYS dice2' OR username='SYS dice3' OR username='SYS away') AND address='$U'))";
+	$CondForQueryM = "(username='$U' OR message='stripslashes(sprintf(L_ENTER_ROM, \"".$U."\"))' OR message='stripslashes(sprintf(L_ENTER_ROM_NOSOUND, \"".$U."\"))' OR ((username='SYS welcome' OR username LIKE 'SYS top%' OR username='SYS room' OR username='SYS image' OR username='SYS video' OR username='SYS utube' OR username='SYS dice1' OR username='SYS dice2' OR username='SYS dice3' OR username='SYS away') AND address='$U'))";
 	$DbLink->query("SELECT type,m_time,room FROM ".C_MSG_TBL." WHERE ".$CondForQueryM." ORDER BY m_time DESC LIMIT 1");
 	list($m_type, $m_time, $m_room) = $DbLink->next_record();
 	$DbLink->clean_results();

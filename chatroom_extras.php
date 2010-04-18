@@ -69,7 +69,7 @@ function special_char($str,$lang)
 // notification messages or not
 $DbLink = new DB;
 
-$CondForQuery	= "(address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3')))";
+$CondForQuery	= "(address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username = 'SYS video' OR username = 'SYS utube' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3')))";
 
 $DbLink->query("SELECT m_time, room, username, latin1, address, message FROM ".C_MSG_TBL." WHERE ".$CondForQuery.$RoomFilter.$Type." ORDER BY m_time DESC LIMIT $N");
 
@@ -82,8 +82,8 @@ if($DbLink->num_rows() > 0)
 		$Message = stripslashes($Message);
 		$Message = str_replace("L_DEL_BYE",L_DEL_BYE,$Message);
 		$Message = str_replace("L_REG_BRB",L_REG_BRB,$Message);
-		$Message = str_replace("L_HELP_MR",L_HELP_MR,$Message);
-		$Message = str_replace("L_HELP_MS",L_HELP_MS,$Message);
+		$Message = str_replace("L_HELP_MR",sprintf(L_HELP_MR,$User),$Message);
+		$Message = str_replace("L_HELP_MS",sprintf(L_HELP_MS,$User),$Message);
 		$Message = str_replace("L_PRIV_PM",L_PRIV_PM,$Message);
 		$Message = str_replace("L_PRIV_WISP",L_PRIV_WISP,$Message);
 		$Message = str_replace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"".L_HELP_BUZZ1."\" title=\"".L_HELP_BUZZ1."\">",$Message);
@@ -157,7 +157,7 @@ if($DbLink->num_rows() > 0)
 		}
 		$NewMsg = "<tr align=texttop valign=top>";
 		$NewMsg .= "<td width=1% nowrap=\"nowrap\">".date("d-M, H:i:s", $Time + C_TMZ_OFFSET*60*60)."</td><td width=1% nowrap=\"nowrap\">".$Room."</td>";
-		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS topic" && $User != "SYS topic reset" && substr($User,0,8) != "SYS dice")
+		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS video" && $User != "SYS utube" && $User != "SYS topic" && $User != "SYS topic reset" && substr($User,0,8) != "SYS dice")
 		{
 			$User = $colorname_tag."[".special_char($User,$Latin1)."]".$colorname_endtag;
 			if ($Dest != "") $Dest = ">".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]".$colornamedest_endtag;
@@ -166,7 +166,11 @@ if($DbLink->num_rows() > 0)
 		if ($User == "SYS image")
 		{
    		$NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>[${Dest}]</B></td><td>".L_PIC." ${Dest}: <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_FULLSIZE_PIC).".'; return true\" title=\"".sprintf(L_CLICK,L_FULLSIZE_PIC)."\" target=_blank>".$Message."</A></td>";
-    }
+		}
+		if ($User == "SYS video" || $User == "SYS utube")
+		{
+   		$NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>[${Dest}]</B></td><td>".L_VIDEO." ${Dest}: <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_ORIG_VIDEO).".'; return true\" title=\"".sprintf(L_CLICK,L_ORIG_VIDEO)."\" target=_blank>".$Message."</A></td>";
+		}
 		if ($User == "SYS announce")
 		{
 			if ($Message == 'L_RELOAD_CHAT') $Message = L_RELOAD_CHAT;

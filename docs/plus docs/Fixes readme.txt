@@ -9,9 +9,9 @@ Client browsers - tested with:
 	- Netscape > 8.1 = M;
 	- Opera 9.0 build 8502 = H;
 	- AvantBrowser 10.2 build 52 = H;
-	- Flock 1.2.1 = M;
-	- Apple Safari 4.0.3 = M;
-	- Google Chrome 2.0.172.34 = M.
+	- Flock 1.2.1 = H;
+	- Apple Safari > 4.0.3 = H;
+	- Google Chrome > 2.0.172.34 = H.
 Server environment - tested env:
 	- Apache < 2.2.14 (Unix and Windows 2k/XP<SP3);
 	- php < 5.2.11 (non-safe-mode, but also a safe mode server has been tested and worked fine);
@@ -33,8 +33,22 @@ On some pcs a restart might be necessary.
 We also added a small IE fixing script (reg file) as a link in Extra Options in chat.
 
 Fixes History:
+19.04.2010 - 1.94-beta2:
+- some important changes in the video posting approach; (functionality extension)
+- changed the /mr command approach to allow the title position to be displayed correctly in any language - after/before names; (formating related)
+- changed the /topic command to accept "one word" topics, due to the Japanese requirements; also the reset was changed to "/topic reset" or "/topic * reset" only (before it needed 2 words "/topic top reset") - (functionality related)
+10.03.2010 - 1.94-beta1:
+- some code changed to improve the Japanese text format to display correctly - (formating related)
+- Japanese translation added; (localization project) - Thanks to Dendeke <konchakka211@yahoo.co.jp>
+- fixed a small glitch that made /join command to fail; (bug related)
+- changed Chrome, Opera and Safari browsers to H type detection, in order to eliminate the flickering/page reloading in these browsers; (browser compatibility)
+- some log exporter fixes to display the smilies and other images in the log files correctly; (functionality related)
+- added the /video command which let an user post a video file from more than 200 video&audio hosting sites (including several audio/radio broadcasting sources) - works only on php5 servers - thanks to Paul Comanici for his Embevi class; (functionality extension)
+- added the /youtube command which let an user post a video file from youtube - works on both php4&5 servers - thanks to Nemanja Avramovic for his YouTube class; (functionality extension)
+
 07.03.2010 - 1.93:
 - the new php versions deprecated too many functions in the old pmc+ versions therefore it calls for a decision for a Final Release; (version release)
+
 23.08.2009 - 1.93-RC6:
 - two minor changes in the registration and edit_profile pages; (functionality related)
 - Registration link added to the Remote login box; (functionality related)
@@ -49,6 +63,7 @@ Fixes History:
 - more rtl/ltr orientation fixes; (display related)
 - all the commands have been changed to support translations - optional though; (functionality & translation extension)
 - changed and improved the dice commands; (functionality related)
+
 10.06.2009 - 1.93-RC5:
 - fixed a small bug in private popups replies; (functionality related)
 - small change in stylesheets to format the rtl quotes
@@ -56,6 +71,7 @@ Fixes History:
 - admin.php and invite command fixes; (functionality related)
 - Hebrew translation added; (localization project) - Thanks to Shula
 - added statistics table for admin analyses purposes; (c_stats table added and lots of testings and fine-tunings); (functionality extension)
+
 27.08.2008 - 1.93-RC4:
 - logs header include paths fixed to avoid safe mode restrictions (access to relative paths to localization files); (functionality related)
 - fixed the away command notifications; (functionality related)
@@ -79,11 +95,13 @@ Fixes History:
 	- admins, topmoders and moderators (for their moderated rooms) still have access to all the restricted rooms accordingly;
 	- if moderator status is demoted or accessible room becomes restricted, appropriate notifications are sent to the room/rooms and to the respective user, being rejected from the restricted room;
 - translation updates for all included languages; (localization related)
+
 11.08.2008 - 1.93-RC3:
 - kick command fix; (functionality related)
 - Multi local avatars & sounds/buzes upload by admins; (functionality extension) - work started
 - Local avatars upload by users in profile; (functionality extension)
 - translation updates for all included languages; (localization related)
+
 10.06.2008 - 1.93-RC2:
 - small installer pagination fixes; (localization related)
 - banner.php filename is changed now to topic.php as well as all it’s old references; the AdBlock and AdBlock Plus plugins in Firefox were blocking it because the previous filename (banner.php) stands for advertisments; (functionality related)
@@ -95,6 +113,7 @@ Fixes History:
 - some archive improvements - all the off-line/unread pms will be kept in the database for a period of time set in admin panel -before, any pm would have been deleted together with the regular messages deletion; (functionality related)
 - added PM popup manager - each user can see all his received PMs and, if allowed from Admin panel, can delete the ones he chooses - to avoid saving to logs; (functionality extension)
 - translation updates for all included languages; (localization related)
+
 20.05.2008 - 1.93-RC1:
 - improved the installer;
 - send mail improvements for registration/edit profiles, as well as in Admin Panel:
@@ -102,6 +121,7 @@ Fixes History:
 	- added Cc (sender admin) and Bcc (chat owner) for email sent from Send email sheet (it helps when there are more than 1 admins of a chat);
 - stripped more redundant codes from several files;
 - added users visits counter to profiles;
+
 15.04.2008 - 1.93-beta8:
 - connected ip logs page improved; (functionality related)
 - removed the config.lib.php inclusion from exported logs; (security related)
@@ -115,11 +135,13 @@ Fixes History:
 - Expand/Colapse rooms fix; (functionality related)
 - Cc and Bcc added for sending emails from admin panel - for more spam control (if someone is accessing Admin panel and start using the send email sheet, the Owner will get copies so he can take counter-measures); (security & functionality extensions)
 - translation updates for all included languages; (localization related)
+
 30.03.2008 - 1.93-beta7:
 - several tutorial fixes - thanks to Peter’s suggestions; (translation related)
 - registration control have been added, so an admin can now review and approve who gets registered and who gets to chat; - there is a hint added in admin panel with usage instructions - (functionality extension)
 - sending mail functions have been improved to completely support utf-8 encoded emails. - (functionality related)
 - Bulgarian has been added - thanks to Peter; (localization related)
+
 19.03.2008 - 1.93-beta6:
 - lots of bot adaptations to phpmychat: (bot functionality extensions)
 	- ProgramE fix for date/time formats handling (this bug was fixed by Ciprian and posted to the alicebot.org as well);
@@ -133,6 +155,7 @@ Fixes History:
 - aiml bot set upgraded to version aaa 1.0.1 from alicebot.org; (functionality related)
 - added option in Admin panel to choose your own greeting in emails sent from Send mail sheet; (functionality extension)
 - more improvements for php5/windows systems compatibility; (functionality related)
+
 05.03.2008 - 1.93-beta4:
 - added option in Admin panel to show/hide italicized names and power colors for admins and moderators; (functionality extension)
 - several improvements of IP logging (acounter.php); (functionality related)
@@ -140,6 +163,7 @@ Fixes History:
 - lots of utf-8 extensions, mostly for php5 full compatibility (multibyte functions added); (functionality extension)
 - important fixes for php servers which have "short_open_tag = Off" - all short tags have been converted to long tags; (functionality related)
 - chat has been changed to fully working on windows servers; (functionality extension)
+
 18.02.2008 - 1.93-beta2:
 - Admin panel and profile forms (edit and register) are displaying now the images of the picture selections (flags, flag types, genders, doorroll, aso); (display related)
 - several logs exporting/handling changes/improvements; (functionality related)
@@ -148,6 +172,7 @@ Fixes History:
 - lurking page also displays the status of the connected users (in Admin panel/Connected users, it also shows ghosts and superghosts status); (functionality related)
 - Hungarian has been added - thanks to Zsuzsi; (localization related)
 - Serbian - Latin has been added (localization project) - Thanks to Vedran;
+
 01.02.2008 - 1.93-beta1:
 - pagination improvement in Admin panel/Registered users and Baned users, and Styles preview, respectivey - added a page selector for easier navigation through pages; (functionality extension)
 - Admin panel/Search tab improvement: the results of a search can now directly be banned/deleted from the same sheet, without having to look for the user in the Registered users sheet; (functionality extension)
@@ -159,7 +184,7 @@ Fixes History:
 	- the database fields which used to store the filter colors for each style are now changed to specify the style  for each room;
 	- skins are now easily selectable in Admin panel/Configuration, under each room name;
 	- there is also a Skin Preview page available (opening from Admin panel);
-	- Note: to add new skins, read explanations in install/Instructions.txt; 
+	- Note: to add new skins, read explanations in install/Instructions.txt;
 - important Ghost Mode changes: (functionality extension)
 	- new approach to hiding users;
 	- added a new field in Admin panel to enter user names you want to be hiden (Admins and TopModers in this hiden mode are called Special Ghosts due to their Extra abilities to watch all the activities in chat rooms - very useful for parental control);
@@ -181,8 +206,10 @@ After 1.92 release fixes (f means the released fix):
 - sorting users fix in all the lists;
 - admin5.php - download folder for fixes added in the Admin Panel drop menu;
 - bot/respond.php, util.php and lib/clean.lib.php - some relative paths fixed for servers running on safe mode;
+
 16.12.2007 - f6:
 - lib/logs.lib.php - Private logs fix;
+
 24.11.2007 - f5:
 - deluser.php - added the header of the email notification on user deletion to show the right originator data;
 - admin5.php - backup update link check up fix;
@@ -196,13 +223,17 @@ After 1.92 release fixes (f means the released fix):
 - config/style1-10.css.php - default text color fix for pictures posted and other system messages;
 - lurking.php - small picture posted text fix;
 - links.php - small security fix;
+
 19.11.2007 - f4:
 - admin/admin5.php - added a new minor format "-fn" to help admins get the new fixes right from the panel;
 - lib/logs.php - important fix for posted links;
+
 12.11.2007 - f3:
 - install/install.php - important fix (installer should work fine now);
+
 09.11.2007 - f2:
 - lib/logs.lib.php - a small fix for messages storage;
+
 06.11.2007 - f1:
 - input.php - a small fix for Top administrators Quick menu;
 - lib/logs.lib.php - a small fix for smilies;

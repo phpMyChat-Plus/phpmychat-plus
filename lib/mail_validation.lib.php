@@ -116,7 +116,7 @@ function send_email($subject,$userString,$pswdString,$welcomeString,$reset)
 	$headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
 	$headers .= "Bcc: ${Sender_email} \r\n";
 	$headers .= "X-Sender: ${Sender_email} \r\n";
-	$headers .= "X-Mailer: PHP/".phpversion()." \r\n";
+	$headers .= "X-Mailer: PHP/".PHPVERSION." \r\n";
 	$headers .= "Return-Path: ${Sender_email} \r\n";
 	$headers .= "Date: ${mail_date} \r\n";
 	$headers .= "Mime-Version: 1.0 \r\n";

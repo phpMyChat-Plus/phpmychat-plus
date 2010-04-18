@@ -214,8 +214,8 @@ define("L_HELP_ROOM", "kamar");
 define("L_HELP_BUZZ", "~namasuara"); //one word
 define("L_HELP_BUZZ1", "Dengung..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "Alasannya");
-define("L_HELP_MR", "Sdr");
-define("L_HELP_MS", "Sdri");
+define("L_HELP_MR", "Sdr %s");
+define("L_HELP_MS", "Sdri %s");
 define("L_HELP_CMD_0", "{} perlu pengaturan untuk penampilan, [] salah satu pilihan.");
 define("L_HELP_CMD_1a", "Tentukan jumlah pesan yang akan ditampilkan. Angka minimal dan standarnya adalah 5.");
 define("L_HELP_CMD_1b", "Tampilkan ulang pesannya, dan tampilkan juga pesan terbaru. Dengan angka minimal dan standar adalah 5.");
@@ -242,13 +242,13 @@ define("L_HELP_CMD_20", "Terangkan apa yang Anda kerjakan.");
 define("L_HELP_CMD_21", "Umumkan kepada semua pengguna yang akan mengirim pesan ke Anda<br />bahwa Anda sedang tidak didepan komputer. Jika Anda ingin kembali untuk ngobrol, langsung ketik saja.");
 define("L_HELP_CMD_22", "Kirim suara dengung dan tampilkan pilihannya di kamar ini.<br />- Pemakaian:<br />- pemakaian lalu: \"/buzz\" atau \"/buzz pesan yang ditampilkan\" - ini akan memainkan suara dengung standar yang ada di panel Admin;<br />- perpanjang pemakaian: \"/buzz ~namasuara\" or \"/buzz ~namasuara pesan yang ditampilkan\" - ini memainkan namasuara.wav file dari plus/sounds arsip; mohon beri tanda \"~\" dipergunakan diawal kata file suara, tanpa menggunakan akhiran .wav (hanya .wav yang boleh).<br />Ini adalah standarnya perintah moderator/admin.");
 define("L_HELP_CMD_23", "kirim <i>bisikan</i> (pesan pribadi). Pesan ini akan sampai ditujuan, walaupun beda kamar. Jika pengguna tidak online atau dia sedang keluar, Anda akan diberitahu.");
-define("L_HELP_CMD_24", "Penggunaan: topik harus menggunakan lebih dari 2 kata.<br />Perintah ini untuk penggantian topik di kamar bersangkutan. Coba untuk tidak menulis ulang topik pengguna lainnya’ topik. Gunakan topik yang penting.<br /> Ini adalah standarnya perintah moderator/admin.<br />Menggunakan \"/topic top reset\" perintah untuk menghapus topik atau mengeset ulang kestandar.<br />Pilihannya, \"/topic * {}\" dan \"/topic * top reset\" lakuakan dengan persis sama tapi disemua ruangan (topik umum dan menghapus topik umum).");
+define("L_HELP_CMD_24", "Perintah ini untuk penggantian topik di kamar bersangkutan. Coba untuk tidak menulis ulang topik pengguna lainnya’ topik. Gunakan topik yang penting.<br /> Ini adalah standarnya perintah moderator/admin.<br />Menggunakan \"/topic reset\" perintah untuk menghapus topik atau mengeset ulang kestandar.<br />Pilihannya, \"/topic * {}\" dan \"/topic * reset\" lakuakan dengan persis sama tapi disemua ruangan (topik umum dan menghapus topik umum).");
 define("L_HELP_CMD_25", "Permainan dadu untuk mendapatkan angka secara acak.<br />Pakai: /dadu atau /dadu [n];<br />n dapat mendapatkan semua nilai <b>diantara 1 dan %s</b> (Itu menampilkan angka dari dadu tersebut). Jika tidak memasukan angka, angka tertinggi dari dadu akan digunakan.");
 define("L_HELP_CMD_26", "Hal ini adalah versi yang lebih rumit dari perintah /dice.<br />Pakai: /{n1}d[n2] atau /{n1}d;<br />n1 dapat mengambil semua nilai <b>diantara 1 dan %s</b> (Itu menunjukan nomor dari dadu tiap kali lemparan).<br />n2 dapat mengambil semua nilai <b>diantara 1 dan %s</b> (itu menunjukan nomor dari bagian sisi per dadu).");
 define("L_HELP_CMD_27", "Itu menjelaskan mengenai pesan dari suatu pengguna untuk mempermudah membaca disekitar percakapan.<br />Pakai: /tinggi {pengguna} atau tekan kotak <img src=./images/highlightOff.gif> kecil disamping kanan nama pengguna (di kamar/daftar pengguna)");
 define("L_HELP_CMD_28", "Ini mempersilahkan memposting dari <i>satu file gambar</i> sebagai suatu pesan.<br />Pakai: Gambar harus berasal dari internet dan bisa diakses oleh semua orang. Jangan menggunakan yang pakai suatu login.<br />alamat lengkap dari gambar harus diketikan! contoh<b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />extension yang diperbolehkan: .jpg .bmp .gif .png. Link ini case sensitive!<br />TRIK: ketik /img kemudian spasi dan kopikan URL kedalam box; untuk mendapatkan URL gambar dari webpage, ketika Anda klik kanan digambar tersebut, lalu ke properties, lalu blok seluruh alamat URL tersebut (kadangkala perlu discroll kebawah sedikit) dan salin/kopikan setelah tanda /img<br />Jangan menggunakan gambar yang ada dikomputer Anda: ini akan menghentikan window obrolan!!!");
 define("L_HELP_CMD_29", "Perintah kedua akan mengijinkan administrasi atau moderator dari kamar ini untuk melepas anggotanya dari status administrasi atau moderator yang sebelumnya dipromosi dikamar yang sama.<br />Pilihan * ini akan melepas promosi dari semua kamar obrolan.");
-define("L_HELP_CMD_30", "Perintah kedua sama dengan /me tapi itu akan menampilkan secara berurutan sesuai dengan jenis kelamin diprofilnya<br />E.g. * ".L_HELP_MR." Ciprian sedang menonton TV or * ".L_HELP_MS." Dana gembira.");
+define("L_HELP_CMD_30", "Perintah kedua sama dengan /me tapi itu akan menampilkan secara berurutan sesuai dengan jenis kelamin diprofilnya<br />E.g. * ".sprintf(L_HELP_MR, "Ciprian")." sedang menonton TV or * ".sprintf(L_HELP_MS, "Dana")." gembira.");
 define("L_HELP_CMD_31", "Ubah pengurutan daftar pengguna: dari waktu saat masuk atau secara alfabet.");
 define("L_HELP_CMD_32", "Ini adalah kali ketiga permainan dadu.<br />Pakai: /d{n1}[tn2] atau /d{n1};<br />n1 dapat mengambil semua angka <b>diantara 1 and 100</b> (itu menunjukan nomor dari bagian sisi per dadu).<br />n2 dapat mengambil semua nilai <b>diantara 1 dan %s</b> (itu menunjukan nomor dari jumlah putaran tiap kali lemparan).");
 define("L_HELP_CMD_33", "Ubah ukuran font dari isi pesan-pesan ditempat obrolan yang dipilih oleh penggunanya (diperbolehkan jika nilai n: <b>diantara 7 dan 15</b>); Ini /size adalah perintah reset ukuran font kembali ke ukuran asalnya, ke nilai (<b>".$FontSize."</b>).");
@@ -328,7 +328,7 @@ define("L_DEFAULT_TOPIC_1", "Ini ada topik standarnya. Ubah localization/_owner/
 define("L_PIC", "Gambar diposting oleh");
 define("L_PIC_RESIZED", "Diubah ukurannya menjadi");
 define("L_HELP_IMG", "alamat lengkap untuk gambar yang diposting");
-define("L_NO_IMAGE", "Ini bukan URL yang tepat dari public remote image.\nCoba lagi!");
+define("L_NO_IMAGE", "Ini bukan URL yang tepat dari public remote image.\\nCoba lagi!");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s tidak dapat menjadi moderator lagi disemua kamar obrol.");

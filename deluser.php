@@ -122,7 +122,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_20)
      . "----------------------------------------------";
 		$Headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
 		$Headers .= "X-Sender: <${Sender_email}> \r\n";
-		$Headers .= "X-Mailer: PHP/".phpversion()." \r\n";
+		$Headers .= "X-Mailer: PHP/".PHPVERSION." \r\n";
 		$Headers .= "Return-Path: <${Sender_email}> \r\n";
 		$Headers .= "Date: ${mail_date} \r\n";
 		$Headers .= "Mime-Version: 1.0 \r\n";

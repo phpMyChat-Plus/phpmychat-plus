@@ -215,7 +215,7 @@ ver4 = (NS4 || IE4) ? 1 : 0;
 	<?php echo(LOGIN_LINK); ?><?php echo(L_CHAT); ?></A>
 	<P>
 <?php
-if (!eregi("firefox", $_SERVER['HTTP_USER_AGENT']))
+if (eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
 {
 	?>
 		<A HREF="#" onClick="expandAll(); return false" onMouseOver="window.status='<?php echo(L_EXPCOL_ALL); ?>.'; return true;" title="<?php echo(L_EXPCOL_ALL); ?>">
@@ -256,7 +256,7 @@ if(isset($NbUsers) && $NbUsers > 0)
 							$disp_note = 1;
 						}
 						echo("<DIV ID=\"${id}Parent\" CLASS=\"parent\" STYLE=\"margin-top: 5px;\">");
-if (!eregi("firefox", $_SERVER['HTTP_USER_AGENT']))
+if (eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
 {
 						echo("<A HREF=\"#\" onClick=\"expandIt('${id}'); return false\" onMouseOver=\"window.status='".L_EXPCOL."'; return true;\" title=\"".L_EXPCOL."\">");
 						echo("<IMG NAME=\"imEx\" SRC=\"images/closed.gif\" WIDTH=9 HEIGHT=9 BORDER=0 ALT=\"".L_EXPCOL."\"></A>");

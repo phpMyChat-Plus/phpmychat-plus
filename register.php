@@ -184,7 +184,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 // by Ciprian using Bob Dickow's one above.
 	$Headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
 	$Headers .= "X-Sender: ${Sender_email} \r\n";
-	$Headers .= "X-Mailer: PHP/".phpversion()." \r\n";
+	$Headers .= "X-Mailer: PHP/".PHPVERSION." \r\n";
 	$Headers .= "Return-Path: ${Sender_email} \r\n";
 	$Headers .= "Date: ${mail_date} \r\n";
 	$Headers .= "Mime-Version: 1.0 \r\n";
@@ -283,24 +283,26 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      . "----------------------------------------------\r\n\r\n"
      . "Secret question: ".$secret_questiona."\r\n"
      . "Secret answer: ".$SECRET_ANSWER."\r\n"
-     . "Email: ".$EMAIL."\r\n"
-     . "First name: ".$FIRSTNAME."\r\n"
-     . "Last name: ".$LASTNAME."\r\n"
-     . "Gender: ".$sex."\r\n"
-     . "Country: ".$COUNTRY."\r\n"
-     . "WWW: ".$WEBSITE."\r\n"
-     . "Spoken languages: ".$SLANG."\r\n"
-     . "Favorite link 1: ".$FAVLINK."\r\n"
-     . "Favorite link 2: ".$FAVLINK1."\r\n"
-     . "Description: ".$DESCRIPTION."\r\n"
-     . "Picture: ".$PICTURE."\r\n"
-     . "Color name/text: ".$C." (".(COLOR_NAMES ? "Enabled" : "Disabled").")\r\n"
-	 . "Display email address on public info: ".$shweml."\r\n"
-	 . "Use the Gravatar: ".$usegrav." (".(!ALLOW_GRAVATARS ? "Disabled" : "Enabled").")\r\n"
-     . "----------------------------------------------\r\n"
+     . "Email: ".$EMAIL
+     . ($FIRSTNAME ? "\r\nFirst name: ".$FIRSTNAME."" : "")
+     . ($LASTNAME ? "\r\nLast name: ".$LASTNAME."" : "")
+     . "\r\nGender: ".$sex
+     . ($COUNTRY ? "\r\nCountry: ".$COUNTRY : "")
+     . ($WEBSITE ? "\r\nWWW: ".$WEBSITE."" : "")
+     . ($SLANG ? "\r\nSpoken languages: ".$SLANG : "")
+     . ($FAVLINK ? "\r\nFavorite link 1: ".$FAVLINK : "")
+     . ($FAVLINK1 ? "\r\nFavorite link 2: ".$FAVLINK1 : "")
+     . ($DESCRIPTION ? "\r\nDescription: ".$DESCRIPTION : "")
+     . ($PICTURE ? "\r\nPicture: ".$PICTURE : "")
+     . "\r\n"
+	 . "Color name/text: ".($C ? $C : "Not selected")." (".(COLOR_NAMES ? "Enabled" : "Disabled").")\r\n"
+	 . "Display email address on public info: ".$shweml
+	 . ($usegrav ? "\r\nUse the Gravatar: ".$usegrav." (".(ALLOW_GRAVATARS ? "Enabled" : "Disabled").")" : "")
+     . "\r\n"
+	 . "----------------------------------------------\r\n"
      . "Prefered language: ".$L."\r\n"
      . "Registered on: $dt $ti\r\n"
-     . "IP address: $IP (".gethostbyaddr($IP).")\r\n\r\n"
+     . "From IP address: $IP (".gethostbyaddr($IP).")\r\n"
 	 . "----------------------------------------------\r\n\r\n"
 	 . "Please note that some data should be disabled from this copy for privacy concerns!\r\n"
 	 . "Save this email for your further reference.\r\n"
@@ -605,7 +607,8 @@ $not_selected = ((L_NOT_SELECTED_F != "") ? L_NOT_SELECTED_F : L_NOT_SELECTED);
 $null = ((L_NULL_F != "") ? L_NULL_F : L_NULL);
 $selected = " (".$selected.")";
 $not_selected = " ".$null." (".$not_selected.")";
-			echo("<SELECT NAME=\"COLORNAME\">\n");
+			if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<SELECT NAME=\"COLORNAME\" style=\"background-color:".$COLORNAME.";\">\n");
+			else echo("<SELECT NAME=\"COLORNAME\">");
 			while(list($ColorNumber1, $ColorCode) = each($CC))
 			{
 				// Red color is reserved to the admin or a moderator for the current room

@@ -213,8 +213,8 @@ define("L_HELP_ROOM", "soba");
 define("L_HELP_BUZZ", "~imezvuka");
 define("L_HELP_BUZZ1", "Buzz..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "razlog");
-define("L_HELP_MR", "Gdin."); // Gospodin (Mr. - can be short or entire word)
-define("L_HELP_MS", "Gdja."); //Gospođa (Mrs. - neutral of Miss, Mrs.)
+define("L_HELP_MR", "Gdin. %s"); // Gospodin (Mr. - can be short or entire word)
+define("L_HELP_MS", "Gdja. %s"); //Gospođa (Mrs. - neutral of Miss, Mrs.)
 define("L_HELP_CMD_0", "{} predstavlja zahtevano podešavanje, [] opciono podešavanje.");
 define("L_HELP_CMD_1a", "Postavi broj poruka za prikaz. Minimum i pretpostavljeni je 5.");
 define("L_HELP_CMD_1b", "Ponovo učitaj okvir za poruke i prikaži n poslednjih poruka, minimum i pretpostavljeni je 5.");
@@ -241,13 +241,13 @@ define("L_HELP_CMD_20", "Opisuje šta radite bez referisanja samog sebe.");
 define("L_HELP_CMD_21", "Obaveštava sobu i korisnike koji žele da vam pošalju poruke<br />da niste prisutni. Ako želite da se vratite i nastavite čet dovoljno je da samo započnete pisanje.");
 define("L_HELP_CMD_22", "Šalje zvuk zujanja i opciono prikazuje poruku u trenutnoj sobi.<br />- Korišćenje:<br />- staro korišćenje: \"/buzz\" ili \"/buzz poruka koja će da se prikaže\" - ovo svira pretpostavljeni zvuk za zujalicu definisanu u Admin panelu;<br />- prošireno korišćenje: \"/buzz ~imezvuka\" ili \"/buzz ~imezvuka poruka koja će da se prikaže\" - ovo svira imezvuka.wav datoteku iz plus/sounds foldera; obratite pažnju na znak \"~\" koji se koristi na početku druge reči, koja je ime zvučne datoteke, bez proširenja.wav (samo .wav proširenje je dozvoljeno).<br />Pretpostavljeno je da je ovo moderator/admin komanda.");
 define("L_HELP_CMD_23", "Šalje <i>šapat</i> (privatna poruka). Poruka će doći do odredišta bez obzira u kojoj sobi j ekorisnik. Ako korisnik nije onlajn ili je postavio da je odsutan vi ćete biti obavešteni o tome.");
-define("L_HELP_CMD_24", "Korišćenje:tema treba da sadrži najmanje 2 reči.<br />Ova komanda menja temu ove sobe. Nastojte da njom ne pregazite teme drugih korisnika. Koristite važne teme.<br />Ovo je moderator/admin komanda.<br />Koristeći \"/topic top reset\" komandu trenutna tema će biti izbrisana i postavljena na pretpostavljenu vrednost za sobu.<br />Opciono, \"/topic * {}\" i \"/topic * top reset\" čine potpuno isto ali za sve sobe (globalna tema i globalno resetovanje teme).");
+define("L_HELP_CMD_24", "Ova komanda menja temu ove sobe. Nastojte da njom ne pregazite teme drugih korisnika. Koristite važne teme.<br />Ovo je moderator/admin komanda.<br />Koristeći \"/topic reset\" komandu trenutna tema će biti izbrisana i postavljena na pretpostavljenu vrednost za sobu.<br />Opciono, \"/topic * {}\" i \"/topic * reset\" čine potpuno isto ali za sve sobe (globalna tema i globalno resetovanje teme).");
 define("L_HELP_CMD_25", "Igra kockom za slučajne/hazardne brojeve.<br />Upotreba: /dice ili /dice [n];<br />n može uzeti bilo koju vrednost <b>između 1 i %s</b> (ona predstavlja broj kotrljajuće kocke). Ako nije unesen neki broj, pretpostavljeni maksimalan broj kotrljanja će biti upotrebljen.");
 define("L_HELP_CMD_26", "Ovo je kompleksnija verzija /dice komande.<br />Upotreba: /{n1}d[n2] ili /{n1}d;<br />n1 može uzeti bilo koju vrednost <b>između 1 i %s</b> (predstavlja broj bacanja).<br />n2 može uzeti bilo koju vrednost <b>između 1 i %s</b> (predstavlja broj kotrljajućih kocki po bacanju).");
 define("L_HELP_CMD_27", "Naglašava poruke posebnog korisnika za lakše čitanje u raznim konverzacijama.<br />Upotreba: /high {user} ili pritisnite mali <img src=./images/highlightOff.gif> četverougaonik desno od korisničkog imena (u listi soba/korisnika)");
 define("L_HELP_CMD_28", "Dozvoljava postovanje <i>jedne slike</i> kao poruke.<br />Upotreba: Slika treba da bude na Internetu i slobodno dostupna svima. Nemojte da koristite strane koje traže prijavljivane.<br />Puna adresa za sliku mora biti upisana! npr.<b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Dozvoljena proširenja: .jpg .bmp .gif .png. Veza je osetljiva na mala i velika slova! <br />NAPOMENE: upišite /img a onda razmak i zalepite URL u kutiju; da bi dobili URL slike sa web strane, kliknite desnim dugmetom miša, otidjite na Svojstva-properties, a onda odaberite celu adresu/URL (ponekad je potrebno da se malo povuče na dole) i kopirajte/zalepite nakon /img<br />Ne koristite slike iz vašeg kompjutera: polomit će čet prozor!!!");
 define("L_HELP_CMD_29", "Druga komanda će dozvoliti administratoru ili moderator(ima) ove sobe da degradira drugog registrovanog korisnika koji je prethodno bio promovisan u moderatora za istu sobu.<br />Ova * opcija će degradirati korisnika iz svih soba.");
-define("L_HELP_CMD_30", "Druga komanda čini isto kao /me ali će pokazati i pripadajući rod<br />Npr. * ".L_HELP_MR." Ciprian gleda TV ili * ".L_HELP_MS." Dana je srećna.");
+define("L_HELP_CMD_30", "Druga komanda čini isto kao /me ali će pokazati i pripadajući rod<br />Npr. * ".sprintf(L_HELP_MR, "Ciprian")." gleda TV ili * ".sprintf(L_HELP_MS, "Dana")." je srećna.");
 define("L_HELP_CMD_31", "Menja redosled korisnika u listama:po vremenu ulaska ili po abecedi.");
 define("L_HELP_CMD_32", "Ovo je treća (igranje uloga) verzija bacanja kocke.<br />Upotreba: /d{n1}[tn2] ili /d{n1};<br />n1 može uzeti bilo koju vrednost <b>između 1 i 100</b> (on predstavlja broj kotrljanja po kocki ).<br />n2 može uzeti bilo koju vrednost <b>između 1 i %s</b> (on predstavlja broj kotrljanja kocki po bacanju).");
 define("L_HELP_CMD_33", "Promeni veličinu slova u porukama u četu prema izboru korisnika (dozvoljene vrednosti za n: <b>između 7 i 15</b>); /size komanda resetuje veličinu slova na pretpostavljenu vrednost (<b>".$FontSize."</b>).");
@@ -508,7 +508,7 @@ define("L_LINKS_6", "da kontaktirate");
 define("L_LINKS_7", "da posetite phpMyChat sajt");
 define("L_LINKS_8", "da se pridužite phpMyChat Grupi");
 define("L_LINKS_9", "da pošaljete vašu povratnu informaciju");
-define("L_LINKS_10", "da prevučete phpMyChat-Plus");
+define("L_LINKS_10", "da prevučete phpMyChat Plus");
 define("L_LINKS_11", "da proverite ko četuje");
 define("L_LINKS_12", "da otvorite Chat Login Stranu");
 define("L_LINKS_13", "da svirate ovaj zvuk"); // can also be translated as "to play this sound"

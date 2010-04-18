@@ -68,7 +68,7 @@ if (isset($MailFunctionOn))
 		$Headers .= "Bcc: <${Sender_email}> \r\n";
 		$Headers .= "Reply-To: ${pmc_username} <${pmc_email}> \r\n";
 		$Headers .= "X-Sender: ${Sender_email} \r\n";
-		$Headers .= "X-Mailer: PHP/".phpversion()." \r\n";
+		$Headers .= "X-Mailer: PHP/".PHPVERSION." \r\n";
 		$Headers .= "Return-Path: ${Sender_email} \r\n";
 		$Headers .= "Date: ${mail_date} \r\n";
 		$Headers .= "Mime-Version: 1.0 \r\n";

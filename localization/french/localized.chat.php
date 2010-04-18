@@ -214,8 +214,8 @@ define("L_HELP_ROOM", "salon");
 define("L_HELP_BUZZ", "~sonnom");
 define("L_HELP_BUZZ1", "Dring..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "la raison");
-define("L_HELP_MR", "M.");
-define("L_HELP_MS", "Mme");
+define("L_HELP_MR", "M. %s");
+define("L_HELP_MS", "Mme %s");
 define("L_HELP_CMD_0", "{} représente un paramètre obligatoire, [] un paramètre optionnel.");
 define("L_HELP_CMD_1a", "Définit le nombre de messages à afficher. Par défaut et au minimum, il y en a 5.");
 define("L_HELP_CMD_1b", "Actualise le cadre des messages et affiche les n derniers messages. Par défaut et au minimum, il y en a 5.");
@@ -242,13 +242,13 @@ define("L_HELP_CMD_20", "Utilisez cette commande pour indiquer ce que vous faite
 define("L_HELP_CMD_21", "Affiche dans le salon et aux utilisateurs qui vous envoient des messages<br /> que vous vous êtes éloigné de l’ordinateur. Pour indiquer que vous êtes de retour sur le chat, postez simplement un nouveau message.");
 define("L_HELP_CMD_22", "Envoie un bip sonore sur le salon courant avec un message optionnel.<br />- Usage:<br />- ancien usage: \"/buzz\" ou \"/buzz message à afficher\" - joue le son par défaut défini dans le panneau d’administration;<br />- usage étendu: \"/buzz ~fichier_son\" ou \"/buzz ~fichier_son message à afficher\" - joue le fichier de son fichier_son.wav dans le répertoire plus/sounds; n’oubliez pas le caractère \"~\" devant le début du premier paramètre qui est le nom du fichier son sans l’extension .wav (seules les extensions .wav sont prises en compte).<br />Par défaut, c’est une commande réservée aux modérateurs et à l’administrateur.");
 define("L_HELP_CMD_23", "Envoie un <i>murmure</i> (message privé) à un utilisateur donné. Le message sera reçu par le destinataire quelque soit le salon où il se trouve. Si l’utilisateur destinataire n’est pas connecté ou s’est déclaré \"éloigné\" (away), vous serez averti.");
-define("L_HELP_CMD_24", "Usage: le sujet doit contenir au moins 2 mots.<br />Cette commande modifie le sujet du salon courant. Essayez de ne pas choisir un sujet déjà utilisé. Choisissez des sujets pertinents.<br />Par défaut, cette commande est réservée aux modérateurs et à l’administrateur.<br />La commande \"/topic top reset\" modifie le sujet du salon à sa valeur par défaut.<br />La commande \"/topic * {}\" a le même effet mais sur l’ensemble des salons (assignation d’un nouveau sujet ou réinitialisation à la valeur par défaut).");
+define("L_HELP_CMD_24", "Cette commande modifie le sujet du salon courant. Essayez de ne pas choisir un sujet déjà utilisé. Choisissez des sujets pertinents.<br />Par défaut, cette commande est réservée aux modérateurs et à l’administrateur.<br />La commande \"/topic reset\" modifie le sujet du salon à sa valeur par défaut.<br />La commande \"/topic * {}\" et \"/topic * reset\" a le même effet mais sur l’ensemble des salons (assignation d’un nouveau sujet ou réinitialisation à la valeur par défaut).");
 define("L_HELP_CMD_25", "Un jeu de dés à tirage aléatoire.<br />Usage: /dice ou /dice [n];<br />n peut prendre n’importe quelle valeur <b>entre 1 et %s</b> (représente le nombre de dés). Si aucun nombre n’est précisé, le nombre maximum par défaut de dés est utilisé.");
 define("L_HELP_CMD_26", "Version plus évoluée de la commande /dice.<br />Usage: /{n1}d[n2] ou /{n1}d;<br />n1 peut prendre n’importe quelle valeur <b>entre 1 et %s</b> (représente le nombre de dés par lancer).<br />n2 peut prendre n’importe quelle valeur <b>entre 1 et %s</b> (représente le nombre de faces par dé).");
 define("L_HELP_CMD_27", "Surligne les messages de utilisateur spécifié pour faciliter la lecture de messages dans la conversation.<br />Usage: /high {utilisateur} ou cliquez sur le petit <img src=./images/highlightOff.gif> carré sur la droite du nom d’utilisateur (dans la liste des salons/utilisateurs)");
 define("L_HELP_CMD_28", "Permet de poster une <i>image</i> dans un message.<br />Usage: l’image doit être présente sur internet et accessible librement par n’importe qui. N’utilisez pas d’URL dont l’accès nécessite une authentification.<br />L’intégralité du lien doit être saisi! Ex: <b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Extensions reconnues: .jpg .bmp .gif .png. Le lien est sensible à la casse!<br />CONSEIL: tapez /img suivi d’un espace et collez l’URL dans la boîte de dialogue qui apparait; pour récupérer l’URL d’une image dans une page web, faites un clic-droit sur l’image, allez dans les propriétés, puis sélectionnez toute l’URL (parfois il faut actionner un peu la barre de défilement) et copiez/collez après la commande /img<br />N’utilisez pas d’images présentes sur votre ordinateur: elles n’apparaitraient pas sur le chat!!!");
 define("L_HELP_CMD_29", "La deuxième commande permet à l’administrateur ou aux modérateurs du salon courant de révoquer un utilisateur qui avait été précédemment promu modérateur pour ce même salon.<br />L’option * révoque l’utilisateur de tous les salons.");
-define("L_HELP_CMD_30", "La deuxième commande fait la même chose que /me mais en affichant en plus votre sexe<br />E.g. * ".L_HELP_MR." Ciprian regarde la télé ou * ".L_HELP_MS." Dana est contente.");
+define("L_HELP_CMD_30", "La deuxième commande fait la même chose que /me mais en affichant en plus votre sexe<br />E.g. * ".sprintf(L_HELP_MR, "Ciprian")." regarde la télé ou * ".sprintf(L_HELP_MS, "Dana")." est contente.");
 define("L_HELP_CMD_31", "Change l’ordre de tri de la liste des utilisateurs: par heure de connexion au chat ou par ordre alphabétique.");
 define("L_HELP_CMD_32", "C’est une troisième version du jeu de dés.<br />Usage: /d{n1}[tn2] ou /d{n1};<br />n1 peut prendre n’importe quelle valeur <b>entre 1 et 100</b> (représente le nombre de faces par dé).<br />n2 peut prendre n’importe quelle valeur <b>entre 1 et %s</b> (représente le nombre de dés par lancer).");
 define("L_HELP_CMD_33", "Modifie la taille des caractères des messages du chat (valeurs autorisées pour n: <b>entre 7 et 15</b>); la commande /size remet la taille par défaut (<b>".$FontSize."</b>).");
@@ -507,7 +507,7 @@ define("L_LINKS_6", "pour contacter");
 define("L_LINKS_7", "pour visiter le site phpMyChat");
 define("L_LINKS_8", "pour vous joindre au Groupe phpMyChat");
 define("L_LINKS_9", "pour envoyer votre retour sur phpMyChat");
-define("L_LINKS_10", "pour télécharger phpMyChat-Plus");
+define("L_LINKS_10", "pour télécharger phpMyChat Plus");
 define("L_LINKS_11", "pour voir qui est présent actuellement sur le chat");
 define("L_LINKS_12", "pour aller à la page de connexion du Chat");
 define("L_LINKS_13", "pour jouer ce son"); // can also be translated as "to play this sound"

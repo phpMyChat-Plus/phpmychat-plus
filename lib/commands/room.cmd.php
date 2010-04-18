@@ -22,12 +22,6 @@ function room_in($what, $in, $Charset)
 	return false;
 };
 
-if (ereg("[\, \']", stripslashes($U)))
-{
-	$Error = L_ERR_USR_16;
-}
-else
-{
 	// Ensure the current user is moderator for the current room or admin.
 	$DbLink->query("SELECT password,perms,rooms FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	if ($DbLink->num_rows() == 0)
@@ -78,5 +72,4 @@ else
 		$RefreshMessages = true;
 		};
 	};
-};
 ?>

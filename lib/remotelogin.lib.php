@@ -790,7 +790,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 					{
 						$DbLink->query("UPDATE ".C_STS_TBL." SET logins=logins+1,last_in='$current_time' WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
 					}
-					else $DbLink->query("INSERT INTO ".C_STS_TBL." VALUES ('".date("Y-m-d")."', '$R', '$U', '$reguser', '$current_time', '', '', '', '', '', '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '')");
+					else $DbLink->query("INSERT INTO ".C_STS_TBL." VALUES ('".date("Y-m-d")."', '$R', '$U', '$reguser', '$current_time', '', '', '', '', '', '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')");
 				}
 			}
 // modified by R Dickow for /away command:
@@ -839,7 +839,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 				{
 					$DbLink->query("UPDATE ".C_STS_TBL." SET logins=logins+1,last_in='$current_time' WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
 				}
-				else $DbLink->query("INSERT INTO ".C_STS_TBL." VALUES ('".date("Y-m-d")."', '$R', '$U', '$reguser', '$current_time', '', '', '', '', '', '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '')");
+				else $DbLink->query("INSERT INTO ".C_STS_TBL." VALUES ('".date("Y-m-d")."', '$R', '$U', '$reguser', '$current_time', '', '', '', '', '', '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')");
 			}
 		}
 
@@ -1117,11 +1117,13 @@ $TrsCmds =
 (L_CMD_LTR != "" && L_CMD_LTR != "L_CMD_LTR" ? str_replace(",","|",L_CMD_LTR)."|" : "").
 (L_CMD_RTL != "" && L_CMD_RTL != "L_CMD_RTL" ? str_replace(",","|",L_CMD_RTL)."|" : "").
 (L_CMD_DICE != "" && L_CMD_DICE != "L_CMD_DICE" ? str_replace(",","|",L_CMD_DICE)."|" : "");
+(L_CMD_VIDEO != "" && L_CMD_VIDEO != "L_CMD_VIDEO" ? str_replace(","," .+|",L_CMD_VIDEO)." .+|" : "");
+(L_CMD_UTUBE != "" && L_CMD_UTUBE != "L_CMD_UTUBE" ? str_replace(","," .+|",L_CMD_UTUBE)." .+|" : "");
 if ($TrsCmds != "") $TrsCmds = rtrim("|".$TrsCmds,"|");
 ?>
 
 		// RegExp to quick check for valid commands
-		re = /^\/(!$|announce .+|ban .+|clear$|help$|\?$|ignore|invite .+|join .+|kick .+|boot .+|me .+|msg .+|to .+|notify$|order$|sort$|profile$|promote|quit|exit|bye|refresh|reload|recall$|save|export|show|last|size|timestamp$|whois .+|about .+|mr .+|away|demote .+|high|img .+|room .+|topic .+|wisp .+|whisp .+|buzz|bot|rtl|ltr|dice|([1-9][0-9]?d)|([1-9][0-9]?d[1-9][0-9]?)|d([1-9][0-9]?[0-9]?)([t])([1-9][0-9]?)|d([1-9][0-9]?[0-9]?)<?php echo($TrsCmds != "" && $TrsCmds != "TrsCmds" ? $TrsCmds : ""); ?>)/i;
+		re = /^\/(!$|announce .+|ban .+|clear$|help$|\?$|ignore|invite .+|join .+|kick .+|boot .+|me .+|msg .+|to .+|notify$|order$|sort$|profile$|promote|quit|exit|bye|refresh|reload|recall$|save|export|show|last|size|timestamp$|whois .+|about .+|mr .+|away|demote .+|high|img .+|room .+|topic .+|wisp .+|whisp .+|vid .+|video .+|play .+|tube .+|utube .+|youtube .+|buzz|bot|rtl|ltr|dice|([1-9][0-9]?d)|([1-9][0-9]?d[1-9][0-9]?)|d([1-9][0-9]?[0-9]?)([t])([1-9][0-9]?)|d([1-9][0-9]?[0-9]?)<?php echo($TrsCmds != "" && $TrsCmds != "TrsCmds" ? $TrsCmds : ""); ?>)/i;
 		re1 = /^:( .+)/i;
 
 		// Ensure the message box isn't empty
@@ -1204,7 +1206,7 @@ function send_headers($title, $icon)
 	?>
 	<!--
 	The lines below are usefull for debugging purpose, please do not remove them!
-	Release: phpMyChat-Plus 1.93-RC6
+	Release: phpMyChat-Plus 1.93-f1
 	© 2005-2009 Ciprian Murariu (ciprianmp@yahoo.com)
 	Based on phpMyChat 0.14.6-dev (also called 0.15.0)
 	© 2000-2005 The phpHeaven Team (http://www.phpheaven.net/)
@@ -1221,7 +1223,7 @@ function send_headers($title, $icon)
 	<SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
 	<!--
          <?php
-	if (eregi("firefox", $_SERVER['HTTP_USER_AGENT'])){ ?>
+	if (eregi("MSIE|firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT'])){ ?>
 		var NS4 = 1;
 		var IE4 = 1;
 		var ver4 = "H";
@@ -1412,7 +1414,7 @@ if ($show_donation)
 {
 	$pptype = "big";
 	require("${ChatPath}lib/support.lib.php");
-	if ((intval($ppbutton) < 3620000 || (intval($ppbutton) > 3627000 && intval($ppbutton) != 7148858 && intval($ppbutton) != 7148805 && (intval($ppbutton) < 7988359 || intval($ppbutton) > 7988406))) && $ppbutton != "KYVK6TQWY4MXJ" && $ppbutton != "QN9TYKJ49BM7S") $copy_break = 1;
+	if ((intval($ppbutton) < 3620000 || (intval($ppbutton) > 3627000 && intval($ppbutton) != 7148858 && intval($ppbutton) != 7148805 && (intval($ppbutton) < 7988359 || intval($ppbutton) > 7988406))) && $ppbutton != "KYVK6TQWY4MXJ" && $ppbutton != "QN9TYKJ49BM7S" && $ppbutton != "RJK6MGRQVAJY2" && $ppbutton != "ZCXGTP265VU6S") $copy_break = 1;
 }
 ?>
 <INPUT TYPE="hidden" NAME="Ver" VALUE="<?php echo($Ver); ?>">

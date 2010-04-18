@@ -115,7 +115,7 @@ function special_char($str,$lang)
 
 // Define the SQL query (depends on values for ignored users list and on whether to display
 // notification messages or not
-$CondForQuery	= "(address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3')))";
+$CondForQuery	= "(address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username = 'SYS video' OR username = 'SYS utube' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3')))";
 
 $DbLink1 = new DB;
 $DbLink1->query("SELECT m_time, room, username, latin1, address, message FROM ".C_MSG_TBL." WHERE ".$CondForQuery.$Type." ORDER BY m_time DESC LIMIT $N");
@@ -142,11 +142,12 @@ if($DbLink1->num_rows() > 0)
 				continue;
 			}
 		};
+//			preg_match('@^http://example.com/pages/([^/]+)', $s, $matches); 
 		$Message = stripslashes($Message);
 		$Message = str_replace("L_DEL_BYE",L_DEL_BYE,$Message);
 		$Message = str_replace("L_REG_BRB",L_REG_BRB,$Message);
-		$Message = str_replace("L_HELP_MR",L_HELP_MR,$Message);
-		$Message = str_replace("L_HELP_MS",L_HELP_MS,$Message);
+		$Message = str_replace("L_HELP_MR",sprintf(L_HELP_MR,$User),$Message);
+		$Message = str_replace("L_HELP_MS",sprintf(L_HELP_MS,$User),$Message);
 		$Message = str_replace("L_PRIV_PM",L_PRIV_PM,$Message);
 		$Message = str_replace("L_PRIV_WISP",L_PRIV_WISP,$Message);
 		$Message = str_replace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"".L_HELP_BUZZ1."\" title=\"".L_HELP_BUZZ1."\">",$Message);
@@ -229,7 +230,7 @@ if($DbLink1->num_rows() > 0)
 		$NewMsg = "<tr valign=top>";
 		$Time = $Time + C_TMZ_OFFSET*60*60;
 		$NewMsg .= "<td width=1% nowrap=\"nowrap\">".strftime(L_SHORT_DATETIME, $Time)."</td><td width=1% nowrap=\"nowrap\">".$Room."</td>";
-		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS topic" && $User != "SYS topic reset" && substr($User,0,8) != "SYS dice")
+		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS video" && $User != "SYS utube" && $User != "SYS topic" && $User != "SYS topic reset" && substr($User,0,8) != "SYS dice")
 		{
 			$User = $colorname_tag."[".special_char($User,$Latin1)."]".$colorname_endtag;
 			if ($Dest != "") $Dest = ">".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]".$colornamedest_endtag;
@@ -238,6 +239,28 @@ if($DbLink1->num_rows() > 0)
 		if ($User == "SYS image")
 		{
       $NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>".$colornamedest_tag."[${Dest}]".$colornamedest_endtag."</B></td><td><FONT class=\"notify\">".L_PIC." ${Dest}:</FONT> <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_FULLSIZE_PIC).".'; return true\" title=\"".sprintf(L_CLICK,L_FULLSIZE_PIC)."\" target=_blank>".$Message."</A></td>";
+		}
+		if ($User == "SYS video")
+		{
+			//require EmbeVi Class
+			include_once('plugins/video/embevi.class.php');
+			//instantiate EmbeVi class
+			$embevi = new EmbeVi();
+			$embevi->setAcceptShortUrl();
+			$embevi->setProviderIconLocal();
+			$embevi->setProviderIconUrl('images/icons/');
+			$embevi->setAcceptExtendedSupport();
+			if($embevi->parseUrl($Message))
+			{
+#				$eicon = $embevi->getProviderIcon();
+				$ealt = $embevi->getEmbeddedInfo();
+				$eicon = $embevi->getProviderImageIdentifier();
+				$NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>".$colornamedest_tag."[${Dest}]".$colornamedest_endtag."</B></td><td><FONT class=\"notify\"><img src=\"".$eicon."\" width='16' border=0 alt='&copy; ".$ealt."' title='&copy; ".$ealt."'>&nbsp;".L_VIDEO." ${Dest}:</FONT> <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_ORIG_VIDEO).".'; return true\" title=\"".sprintf(L_CLICK,L_ORIG_VIDEO)."\" target=_blank>".$Message."</A></td>";
+			}
+		}
+		if ($User == "SYS utube")
+		{
+      $NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>".$colornamedest_tag."[${Dest}]".$colornamedest_endtag."</B></td><td><FONT class=\"notify\"><img src=\"images/icons/youtube.png\" border=0 alt='YouTube' title='YouTube'>&nbsp;".L_VIDEO." ${Dest}:</FONT> <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_ORIG_VIDEO).".'; return true\" title=\"".sprintf(L_CLICK,L_ORIG_VIDEO)."\" target=_blank>".$Message."</A></td>";
 		}
 		if ($User == "SYS announce")
 		{

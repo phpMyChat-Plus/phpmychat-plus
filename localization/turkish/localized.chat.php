@@ -213,8 +213,8 @@ define("L_HELP_ROOM", "oda");
 define("L_HELP_BUZZ", "~ses_adı");
 define("L_HELP_BUZZ1", "Biiip..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "sebep");
-define("L_HELP_MR", "Bay");
-define("L_HELP_MS", "Bayan");
+define("L_HELP_MR", "Bay %s");
+define("L_HELP_MS", "Bayan %s");
 define("L_HELP_CMD_0", "{} işaretleri zorunlu olan, [] ise tercihe bağlı ayarları ifade eder.");
 define("L_HELP_CMD_1a", "Gösterilmesini istediğiniz mesaj sayısını yazınız. Geçerli olan ve en az 5 tir.");
 define("L_HELP_CMD_1b", "Mesaj çerçevesini tekrar yenileyerek son n mesajı gösterir. En az 5 mesaj.");
@@ -241,13 +241,13 @@ define("L_HELP_CMD_20", "Kim olduğunuzu belirtmeden ne yaptığınızı odaya b
 define("L_HELP_CMD_21", "Odaya ve size mesaj göndermeye çalışan kullanıcılara,<br /> bilgisayar başından geçici bir süre ayrıldığınızı bildirir. Sohbete geri dönmek istediğiniz zaman, sadece mesaj yazmanız yeterlidir.");
 define("L_HELP_CMD_22", "Mevcut odaya bir ikaz sesi ve opsiyonel olarak bir mesaj gönderir.<br /><u>Kullanılışı:</u><br />- Eski kullanım şekli: \"/buzz\" yazın veya \"/buzz [gösterilmesini istediğiniz mesaj]\" yazın - Bu işlem, Yönetici Panelinde belirlenmiş bir uyarı sesini çalar;<br />- Geliştirilmiş kullanım şekli: \"/buzz [~ses_adı]\" veya \"/buzz [~ses_adı] [gösterilmesini istediğiniz mesaj]\" - bu işlem, plus/sounds dizinindeki adını yazdığınız ses_adı.wav ses dosyasını çalar; lütfen \"~\" işaretinin yazıldığı yere dikkat ediniz. (sadece .wav uzantılı dosyalara izin verilir).<br />Varsayılan, bu bir Yönetici/Denetleyici komutu olarak ayarlanmıştır.");
 define("L_HELP_CMD_23", "<i>Fısıltı</i> (özel mesaj gönderimi). Mesaj, gönderilen kullanıcının hangi odada olduğu hiç farketmeksizin hedefine ulaşacaktır. Eğer kullanıcı çevrimiçi değilse, bu konuda bilgilendirileceğiniz bir mesaj alırsınız.");
-define("L_HELP_CMD_24", "Kullanım şekli: Konu adı en az 2 kelime içermelidir.<br />Bu komut mevcut odanın konu adını değiştirir. Diğer kullanıcıların konu adlarını değiştirmeye çalışmayın. Konu adı olarak önemli şeyleri kullanın.<br />Geçerli ayarlarda bu bir Denetleyici/Yönetici komutudur.<br />\"/topic top reset\" komutunun kullanılmasıyla o andaki geçerli konu adı silinecek ve yeniden odanın varsayılan konu adına dönüşecektir.<br />Tercihe bağlı olarak, \"/topic * {}\" komutu tam olarak aynı işi yapar fakat bir farkla ki, bu komut bütün odaları etkiler (genel konu adı ve genel konu adı düzenlemesi).");
+define("L_HELP_CMD_24", "Bu komut mevcut odanın konu adını değiştirir. Diğer kullanıcıların konu adlarını değiştirmeye çalışmayın. Konu adı olarak önemli şeyleri kullanın.<br />Geçerli ayarlarda bu bir Denetleyici/Yönetici komutudur.<br />\"/topic reset\" komutunun kullanılmasıyla o andaki geçerli konu adı silinecek ve yeniden odanın varsayılan konu adına dönüşecektir.<br />Tercihe bağlı olarak, \"/topic * {}\" ve \"/topic * reset\" komutu tam olarak aynı işi yapar fakat bir farkla ki, bu komut bütün odaları etkiler (genel konu adı ve genel konu adı düzenlemesi).");
 define("L_HELP_CMD_25", "Rasgele şans numaraları olan bir zar oyunu.<br />Kullanımı: /dice veya /dice [n] yazın;<br />n <b>1 ve %s arasında </b> herhangi bir değer alabilir. (zarların yuvarlanma sayısını ifade eder). Eğer numara yazılmazsa, varsayılan maksimum yuvarlanma sayısı kullanılır.");
 define("L_HELP_CMD_26", "Bu, /dice komutunun daha karmaşık bir şeklidir.<br />Kullanımı: /{n1}d[n2] yazın veya /{n1}d;<br />n1 <b>1 ve %s arasında</b> herhangi bir değer alabilir. (zarların atılış sayısını ifade eder).<br />n2 <b>1 ve %s arasında</b> herhangi bir değer alabilir (zarların her atılıştaki yuvarlanma sayısını ifade eder).");
 define("L_HELP_CMD_27", "Sohbet boyunca belirli bir kullanıcının mesajlarını daha rahat takip edebilmek için üzerine renkli bant çekerek işaretler.<br />Kullanımı: /high {user} yazın veya kullanıcı adının sağındaki küçük <img src=./images/highlightOff.gif> şeklindeki kareye tıklayın (odalarda/kullanıcılar listesinde)");
 define("L_HELP_CMD_28", "<i>Tek bir resmin</i> mesaj olarak gönderilmesine izin verir.<br />Kullanımı: Gönderilecek fotoğraf internette ve herkesin erişimine açık bir yerde olmalıdır. Giriş izni gerektiren sayfa adreslerini kullanmayınız.<br />Fotoğrafın tam adresi yazılmalıdır! Örnek: <b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Desteklenen foto dosyası türleri: .jpg .bmp .gif .png. <br />İPUCU: /img yazın, sonra bir boşluk bırakarak fotoğrafın URL adresini kutuya kopyala-yapıştır yapın; bir web sayfasındaki fotoğrafın URL adresini kopyalamak için üzerine sağ tıklayın, Özelliklerine tıklayın sonra fare ile bütün URL adresini kopyalayın daha sonra da yazdığınız /img komutunun ardına yapıştırın.<br />Bilgisayarınızdaki bir resmi adreslemeyin, bu işlem sohbet penceresinin durmasına neden olur!!!");
 define("L_HELP_CMD_29", "İkinci komut, mevcut odadaki Yöneticiye veya Denetleyici(ler)e, daha önce aynı odaya denetleyici olarak atanmış kayıtlı kullanıcının atamasını (denetleyici haklarını)geri almalarına izin verir.<br />* seçeneği kullanıcının bütün odalardaki denetleyici haklarını iptal eder.");
-define("L_HELP_CMD_30", "İkinci komut /me komutuyla aynıdır fakat cinsiyetinize bağlı olarak kullanıcı adınızın önüne hitap için kısaltma ekler.<br />Örneğin, * ".L_HELP_MR." Ahmet TV seyrediyor * ".L_HELP_MS." Fatma mutlu.");
+define("L_HELP_CMD_30", "İkinci komut /me komutuyla aynıdır fakat cinsiyetinize bağlı olarak kullanıcı adınızın önüne hitap için kısaltma ekler.<br />Örneğin, * ".sprintf(L_HELP_MR, "Ahmet")." TV seyrediyor * ".sprintf(L_HELP_MS, "Fatma")." mutlu.");
 define("L_HELP_CMD_31", "Kullanıcıların listedeki sıralamasını giriş saatine göre veya alfabetik olarak değiştirir.");
 define("L_HELP_CMD_32", "Bu, zar atma oyununun üçüncü şeklidir.<br />Kullanımı: /d{n1}[tn2] yazın /d{n1} yazın;<br />n1 <b>1 ve 100</b> arasında herhangi bir değer alabilir.(zarların yuvarlanma sayısını ifade eder).<br />n2 <b>1 ve %s arasında</b> herhangi bir değer alabilir. (zarların her atılıştaki yuvarlanma sayısını ifade eder).");
 define("L_HELP_CMD_33", "Mesajdaki harflerin büyüklüğünü kullanıcının tercihine göre değiştirir. ( n için izin verilen değerler: <b>7 ve 15 arası</b>); /size komutu harf büyüklüğünü varsayılan değere geri çevirir (<b>".$FontSize."</b>).");
@@ -506,7 +506,7 @@ define("L_LINKS_6", "Irtibata geçmek için");
 define("L_LINKS_7", "phpMyChat Ana Sayfasını ziyaret etmek için");
 define("L_LINKS_8", "phpMyChat Grubuna katılmak için");
 define("L_LINKS_9", "Düşüncelerinizi göndermek için");
-define("L_LINKS_10", "phpMyChat-Plus indirmek için");
+define("L_LINKS_10", "phpMyChat Plus indirmek için");
 define("L_LINKS_11", "Kimin sohbet ettiğini görmek için");
 define("L_LINKS_12", "Sohbet Giriş Sayfasını açmak için");
 define("L_LINKS_13", "Bu sesi çalmak için"); // Click to blablabla : it can also be translated as "to play this sound", if buzz has no translation.

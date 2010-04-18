@@ -1,5 +1,5 @@
 <?php
-// File : romanian/localized.cmds.php (23.08.2009 - rev.1)
+// File : romanian/localized.cmds.php (16.03.2010 - rev.2)
 // Original file by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -38,6 +38,8 @@ define("L_CMD_SHOW", "arata,arată,doar,numai");
 define("L_CMD_SORT", "sortez,nume");
 define("L_CMD_TIMESTAMP", "timp,ora,oră");
 define("L_CMD_TOPIC", "sub,subiect,tema,temă");
+define("L_CMD_UTUBE", "");
+define("L_CMD_VIDEO", "film");
 define("L_CMD_WISP", "pst,soapta,şoaptă,barfa,bârfă");
 define("L_CMD_WHOIS", "despre,cine");
 ?>

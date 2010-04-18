@@ -11,9 +11,22 @@ if (C_NO_SWEAR)
 	unset($Found, $b);
 };
 
-$post = "<B>* ".$U."</B> ".stripslashes($Cmd[2]);
+//if(strstr("mr",$Cmd[1]))
+if(stristr("(mr".(L_CMD_MR != "" && L_CMD_MR != "L_CMD_MR" ? "|".str_replace(",","|",L_CMD_MR) : "").")", $Cmd[1]))
+{
+	$DbLink->query("SELECT gender FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 
-AddMessage($post, $T, $R, $U, $C, '', '', '', $Charset);
+	list($gender) = $DbLink->next_record();
+	$DbLink->clean_results();
+	if ($gender == 1) $salutation = 'L_HELP_MR';
+	elseif ($gender == 2) $salutation = 'L_HELP_MS';
+	else $salutation = "* *".$U;
+}
+else $salutation = $U;
+
+$post = "<B>* ".$salutation."</B> ".stripslashes($Cmd[2]);
+
+AddMessage($post, $T, $R, $U, $C, $Private, '', '', $Charset);
 
 $M1 = $Cmd[0];
 $IsCommand = true;

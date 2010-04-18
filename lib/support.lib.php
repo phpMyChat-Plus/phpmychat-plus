@@ -24,6 +24,12 @@ switch (L_LANG)
 		$ppbutton = ($pptype == "big") ? "7988359" : "7988406";
 		$ppalt = "Paypal - Lebih aman dan mudah untuk pembayaran online.";
 		break;
+	case "ja_JP":
+		$pplang .= "/JP";
+		$ppbutton = ($pptype == "big") ? "RJK6MGRQVAJY2" : "ZCXGTP265VU6S";
+		$ppalt = "PayPal－オンラインで安全、簡単にお支払い。";
+		$ppexists = 1;
+		break;
 	case "ne_NP":
 		$ppbutton = ($pptype == "big") ? "KYVK6TQWY4MXJ" : "QN9TYKJ49BM7S";
 		$ppalt = "Paypal - ईन्टनेटबाट पैसा तिर्ने सजिलो र सुरक्षित माध्यम.";
