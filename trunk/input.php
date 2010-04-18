@@ -259,11 +259,13 @@ $botcontrol ="botfb/$R.txt";
 	// URL
 	$M = eregi_replace('([[:space:]]|^)(www[.])', '\\1http://\\2', $M); // no prefix (www.myurl.ext)
 	$M = eregi_replace('([[:space:]]|^)(ftp[.])', '\\1ftp://\\2', $M); // no prefix (ftp.myurl.ext)
-	// Word wrap fix by Alexander Eisele <xaex@xaex.de>
+	// Word wrap fix by Alexander Eisele <xaex@xaex.de> - deprecated by Ciprian due to japanese (2-bytes undesired trimming)
+/*
 	if (!preg_match_all("((http://|https://|ftp://|mailto:)[^ ]+)", $M, $pmatch))
 	{
 		$M = wordwrap($M, 40, " ", 1);
 	}
+*/
 	$prefix = '(http|https|ftp|telnet|news|gopher|file|wais)://';
 	$pureUrl = '([[:alnum:]/\n+-=%&:_.~?]+[#[:alnum:]+-_~]*)';
 	if (C_POPUP_LINKS)
@@ -617,7 +619,7 @@ else
 }
 $ColorList = eregi_replace('"', "", $ColorList);
 $CC = explode(",", $ColorList);
-if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<SELECT NAME=\"C\" style=\"background-color:".$C.";\">\n");
+if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<SELECT NAME=\"C\" style=\"background-color:".$C.";\">\n");
 else echo("<SELECT NAME=\"C\">\n");
 $not_selected = ((L_NOT_SELECTED_F != "") ? L_NOT_SELECTED_F : L_NOT_SELECTED);
 $null = ((L_NULL_F != "") ? L_NULL_F : L_NULL);

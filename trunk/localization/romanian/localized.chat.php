@@ -1,5 +1,5 @@
 <?php
-// File : romanian/localized.chat.php - plus version (01.08.2009 - rev.43)
+// File : romanian/localized.chat.php - plus version (20.03.2010 - rev.44)
 // Original translation started by Radu Swider <swidera@satline.ro>, first updated by Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro>
 // Corrected, finalized, diacritics addition and updated to Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -110,7 +110,7 @@ define("L_EMAIL_VAL_5", "Detalii ale contului tău - %s - pentru %s"); //usernam
 define("L_EMAIL_VAL_51", "Detalii actualizate ale contului tău - %s - pentru %s"); //username
 define("L_EMAIL_VAL_6", "Înregistrat la data de: %s");
 define("L_EMAIL_VAL_61", "Actualizat la data de: %s");
-define("L_EMAIL_VAL_7", "Mai jos sunt infromaţiile actualizate ale contului %s:"); //username
+define("L_EMAIL_VAL_7", "Mai jos sunt informaţiile actualizate ale contului %s:"); //username
 define("L_EMAIL_VAL_8", "Salvează acest email pentru consultarea ulterioară.\nAsigură-l şi nu divulga nimănui datele din acest email.\nMulţumim pentru înregistrare! Distracţie plăcută!");
 define("L_EMAIL_VAL_81", "Parola poate fi modificată în \"".L_REG_4."\" de pe pagina de login.");
 
@@ -214,8 +214,8 @@ define("L_HELP_ROOM", "cameră");
 define("L_HELP_BUZZ", "~numesunet");
 define("L_HELP_BUZZ1", "Alertă...");
 define("L_HELP_REASON", "motivul");
-define("L_HELP_MR", "Domnul");
-define("L_HELP_MS", "Doamna");
+define("L_HELP_MR", "Domnul %s");
+define("L_HELP_MS", "Doamna %s");
 define("L_HELP_CMD_0", "{} obligatoriu, [] opţional.");
 define("L_HELP_CMD_1a", "Stabileşte câte mesaje să fie arătate (minim 5).");
 define("L_HELP_CMD_1b", "Reîncarcă fereastra cu mesaje şi afişează ultimele n mesaje (implicit sunt minim 5).");
@@ -242,13 +242,13 @@ define("L_HELP_CMD_20", "Descrie cu ce te ocupi, ca un anunţ în cameră (ex. P
 define("L_HELP_CMD_21", "Anunţă camera şi utilizatorii care vor să îţi trimită mesaje<br />că nu mai eşti lângă calculator. Ca să te întorci la chat, începe doar să scrii. Opţional, poţi lăsa şi un mesaj cu motivul plecării de la calculator");
 define("L_HELP_CMD_22", "Trimite un semnal sonor tip Buzz pentru captarea atenţiei celorlalţi. Nu abuza de această comandă!<br />- Folosire:<br />- anterior: \"/buzz\" or \"/buzz mesaj de arătat\" - aceasta trimite sunetul implicit definit în Panoul Admin;<br />- extindere: \"/buzz ~numesunet\" sau \"/buzz ~numesunet mesaj de arătat\" - aceasta trimite sunetul fişierului numesunet.wav aflat în directorul plus/sounds; semnul \"~\" trebuie folosit înaintea celui de-al doilea cuvânt, care reprezintă numele fişierului sunetului, fără extensia .wav (numai extensiile .wav sunt permise).<br />Implicit, această comandă poate fi folosită numai de moderatori/administratori.");
 define("L_HELP_CMD_23", "Trimite un mesaj privat tip \"whisper\" (şoaptă). Mesajul va ajunge la destinatar, în orice cameră s-ar afla acesta. În cazul în care utilizatorul căutat nu este on-line, vei fi înştiinţat.");
-define("L_HELP_CMD_24", "Comanda schimbă topicul (tema de discuţii) camerei în care este folosită. Încercaţi să nu suprascrieţi temele altor utilizatori şi să folosiţi teme care merită afişate.<br />Folosind comanda \"/topic top reset\" tema curentă afişată va fi ştearsă şi resetată la tema implicită a camerei.<br />În mod implicit, această comandă poate fi folosită doar de moderatori.<br />Atenţie: tema de discuţii trebuie să conţină cel puţin 2 cuvinte.<br />Opţional, \"/topic * {}\" face aceleaşi lucruri dar pentru toate camerele simultan (temă globală şi resetare temă globală).");
+define("L_HELP_CMD_24", "Comanda schimbă topicul (tema de discuţii) camerei în care este folosită. Încercaţi să nu suprascrieţi temele altor utilizatori şi să folosiţi teme care merită afişate.<br />Folosind comanda \"/topic reset\" tema curentă afişată va fi ştearsă şi resetată la tema implicită a camerei.<br />În mod implicit, această comandă poate fi folosită doar de moderatori.<br />Opţional, \"/topic * {}\" şi \"/topic * reset\" fac aceleaşi lucruri dar pentru toate camerele simultan (temă globală şi resetare temă globală).");
 define("L_HELP_CMD_25", "Un joc cu zaruri pentru plictiseală sau trageri la sorţi.<br />Utilizare: /dice sau /dice [n]; n este opţional şi reprezintă numărul de zaruri din mană. Poate avea orice valoare <b>între 1 şi %s</b>. Comanda fără n va arunca numărul maxim de zaruri.");
 define("L_HELP_CMD_26", "Aceasta este versiunea mai complexă a comenzii /dice.<br />Utilizare: /{n1}d[n2] sau /{n1}d;<br />n1 poate avea orice valoare <b>între 1 şi %s</b> (reprezintă numărul de zaruri la fiecare aruncare);<br />n2 este o valoare <b>între 1 şi %s</b> (reprezintă numărul de feţe ale fiecărui zar). Comanda fără n2 va arunca la fiecare mână cu numărul maxim de zaruri.");
 define("L_HELP_CMD_27", "Evidenţiază mesajele trimise de un anumit utilizator, pentru a-l distinge mai uşor în cadrul conversaţiilor.<br />Utilizare: /high {utilizator} sau apasă pe pătrăţelul alb/galben cu litera H din dreapta numelui, în lista de camere/utilizatori.");
-define("L_HELP_CMD_28", "Permite postarea <b>unei imagini</b> în loc de mesaj.<br />Utilizare: Introduceţi link-ul complet! (ex. <b>/img http://ciprianmp.com/images/CIPRIAN.jpg</b>). Extensii recunoscute şi acceptate: .jpg .bmp .gif. Atenţie la literele mari şi mici - contează.");
+define("L_HELP_CMD_28", "Permite postarea <i>unei imagini</i> în loc de mesaj.<br />Utilizare: Introduceţi link-ul complet! (ex. <b>/img http://ciprianmp.com/images/CIPRIAN.jpg</b>). Extensii recunoscute şi acceptate: .jpg .bmp .gif. Atenţie la literele mari şi mici - contează.");
 define("L_HELP_CMD_29", "Cea de a doua comandă permite administratorului sau moderatorului(ilor) din camera curentă să destituie un alt moderator din cameră la statusul normal de utilizator înregistrat.<br />Opţiunea * va destitui respectivul utilizator din toate camerele.");
-define("L_HELP_CMD_30", "Cea de a doua comandă face acelaşi lucru ca şi /me, numai că va arata şi genul corespunzător<br />Exemplu * ".L_HELP_MR." Ciprian urmăreşte ştirile ProTV sau * ".L_HELP_MS." Dana este super fericită.");
+define("L_HELP_CMD_30", "Cea de a doua comandă face acelaşi lucru ca şi /me, numai că va arata şi genul corespunzător<br />Exemplu * ".sprintf(L_HELP_MR, "Ciprian")." urmăreşte ştirile ProTV sau * ".sprintf(L_HELP_MS, "Dana")." este super fericită.");
 define("L_HELP_CMD_31", "Schimbă ordinea sortării utilizatorilor în liste: după momentul logării sau alfabetic.");
 define("L_HELP_CMD_32", "Aceasta este a treia versiune de joc de zaruri (role-playing).<br />Utilizare: /d{n1}[tn2] sau /d{n1};<br />n1 poate avea orice valoare <b>între 1 şi 100</b> (reprezintă numărul de puncte ale fiecărui zar);<br />n2 poate avea orice valoare <b>între 1 şi %s</b> (reprezintă numărul de zaruri la fiecare aruncare).");
 define("L_HELP_CMD_33", "Schimbă dimensiunea textului mesajelor pe chat (valori permise pentru n: <b>între 7 şi 15</b>); comanda /size resetează dimensiunea fontului la valoarea implicită (<b>".$FontSize."</b>).");
@@ -607,6 +607,7 @@ define("L_LANG_EN", "Engleză");
 define("L_LANG_ENUK", "Engleză Britanică");
 define("L_LANG_ENUS", "Engleză Americană");
 define("L_LANG_ES", "Spaniolă");
+define("L_LANG_FA", "Persană (Farsi)");
 define("L_LANG_FR", "Franceză");
 define("L_LANG_GR", "Greacă");
 define("L_LANG_HE", "Ebraică");
@@ -614,7 +615,9 @@ define("L_LANG_HI", "Hindusă");
 define("L_LANG_HU", "Maghiară");
 define("L_LANG_ID", "Indoneziană (Bahasa)");
 define("L_LANG_IT", "Italiană");
+define("L_LANG_JA", "Japoneză");
 define("L_LANG_KA", "Georgiană");
+define("L_LANG_NE", "Nepaleză");
 define("L_LANG_NL", "Olandeză");
 define("L_LANG_RO", "Română");
 define("L_LANG_SK", "Slovacă");
@@ -668,4 +671,14 @@ define("L_OPID_REG", "Importă un profil OpenID");
 // Support buttons
 define("L_SUPP_WARN", "Aţi ales să contribuiţi la dezvoltarea aplicaţiei ".APP_NAME.",\\nprin trimiterea unei donaţii dezvoltatorului.\\nVă mulţumim pentru încrederea şi sprijinul acordat!\\n\\nNotă: destinatarul acestei donaţii nu este una şi aceeaşi persoană\\ncu proprietarul acestui server de chat.\\nVă rugăm să introduceţi suma dorită în pagina următoare.\\n\\nContinuaţi?");
 define("L_SUPP_ALT", "Contribuiţi prin PayPal la dezvoltarea aplicaţiei ".APP_NAME." - este cel mai Rapid, Gratuit şi Sigur!");
+
+// Video & Audio & Youtube cmds (Embevi & YouTube player class)
+define("L_AUDIO", "Fișier audio trimis de");
+define("L_VIDEO", "Film video trimis de");
+define("L_HELP_VIDEO", "calea/link-ul către filmul video sau fișierul audio de postat");
+define("L_NO_VIDEO", "Aceasta nu este o adresă URL validă\\na unui film video sau fișier audio acceptat.\\nCorectează adresa!");
+define("L_ORIG_VIDEO", "pentru a deschide pagina site-ului original");
+define("L_HELP_CMD_35", "Permite postarea <i>unui film video</i> sau a <i>unui fișier audio</i> în loc de mesaj, folosind un mini Flash Player integrat.<br />Utilizare: Nu trebuie decât să pastaţi adresa la care se află filmul! Exemplu <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Trebuie să aveţi Shockwave Flash Player instalat pe calculator. Atenţie la literele mari şi mici - contează.<br />SFAT: tastaţi /video urmat de un spaţiu şi apoi pastaţi adresa URL.");
+define("L_HELP_CMD_35a", "Cea de-a doua comandă funcţionează numai cu youtube.com ca sursă video.<br />Exemplu <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
+define("L_HELP_CMD_36", "Permite postarea <i>unui film video youtube</i> în loc de mesaj, folosind un mini Flash Player integrat.<br />Utilizare: Nu trebuie decât să pastaţi adresa la care se află filmul! Exemplu <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Trebuie să aveţi Shockwave Flash Player instalat pe calculator. Atenţie la literele mari şi mici - contează.<br />SFAT: tastaţi /tube urmat de un spaţiu şi apoi pastaţi adresa URL.");
 ?>

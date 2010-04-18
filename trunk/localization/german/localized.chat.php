@@ -217,8 +217,8 @@ define("L_HELP_ROOM", "Raum");
 define("L_HELP_BUZZ", "~soundname");
 define("L_HELP_BUZZ1", "Klingeln..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "der Grund");
-define("L_HELP_MR", "Herr");
-define("L_HELP_MS", "Frau");
+define("L_HELP_MR", "Herr %s");
+define("L_HELP_MS", "Frau %s");
 define("L_HELP_CMD_0", "{} steht für eine erforderliche Einstellung, [] für eine optionale.");
 define("L_HELP_CMD_1a", "Einstellung der Anzahl angezeigter Mitteilungen, mindestens 5.");
 define("L_HELP_CMD_1b", "Nachrichten neu laden und die letzten n Nachrichten anzeigen, mindestens 5.");
@@ -245,13 +245,13 @@ define("L_HELP_CMD_20", "Beschreiben, was du grade tust, ohne Dich selbst zu erw
 define("L_HELP_CMD_21", "Verkündet in dem Raum und an die User, die versuchen Sie anzuschreiben, dass Sie grade abwesend sind. <br /> Sie verlassen den Abwesenheitsmodus indem Sie anfangen mit schreiben.");
 define("L_HELP_CMD_22", "Sendet einen Summerton und zeigt eine Nachricht im gegenwärtigen Raum.<br />- Anwendung: \"/buzz\" oder \"/buzz Ihre Nachricht\" - spielt einen voreingestellten Sound ab;<br />- erweiterte Anwendung: \"/buzz ~soundname\" oder \"/buzz ~soundname Ihre Nachricht\" - spielt die soundname.wav Datei aus dem Verzeichnis /sounds im Chat; Bitte das Zeichen \"~\" vor dem Dateinamen nicht vergessen. Es sind nur Dateierweiterungen im Format .wav erlaubt.<br /> Standardmäßig ist es ein Moderator/Admin-Befehl.");
 define("L_HELP_CMD_23", "Sendet <i>whisper</i> (eine private Nachricht). Die Nachricht wird den Bestimmungsort erreichen, ganz gleich in welchem Raum der Benutzer ist. Wenn der Benutzer nicht online ist oder im Abwesenheitsmodus ist, werden Sie darüber benachrichtigt.");
-define("L_HELP_CMD_24", "Anwendung: Das Thema muss mindestens 2 Worte enthalten.<br />Dieser Befehl ändert das Thema des gegenwärtigen Raums. Versuchen Sie, andere Benutzerthemen nicht zu überschreiben. Verwenden Sie nur wichtige Themen.<br />Standardmäßig ist es ein Moderator/Admin-Befehl.<br />Durch den \"/topic top reset\" Befehl wird das aktuelle Topic gelöscht und durch Standardtopic ersetzt.<br />Optional, \"/topic * {}\" ist der gleiche Befehl, löscht aber die Themen in allen Räumen (global topic und global topic reset).");
+define("L_HELP_CMD_24", "Dieser Befehl ändert das Thema des gegenwärtigen Raums. Versuchen Sie, andere Benutzerthemen nicht zu überschreiben. Verwenden Sie nur wichtige Themen.<br />Standardmäßig ist es ein Moderator/Admin-Befehl.<br />Durch den \"/topic reset\" Befehl wird das aktuelle Topic gelöscht und durch Standardtopic ersetzt.<br />Optional, \"/topic * {}\" und \"/topic * reset\" ist der gleiche Befehl, löscht aber die Themen in allen Räumen (global topic und global topic reset).");
 define("L_HELP_CMD_25", "Ein Würfelspiel.<br />Anwendung: /dice or /dice [n];<br />n kann eine Zahl zwischen <b>1 und %s</b> sein. (es ist die Anzahl der Würfel). Wenn keine Zahl angegeben wurde, wird die voreingestellte größte Zahl genommen.");
 define("L_HELP_CMD_26", "Das ist eine kompliziertere Version des Würfelspiels (/dice).<br />Anwendung: /{n1}d[n2] oder /{n1}d;<br />n1 kann eine Zahl zwischen <b>1 und %s</b> sein (es ist die Anzahl der Würfe).<br />n2 kann eine Zahl zwischen <b>1 und %s</b> sein (es ist die Anzahl der Würfel).");
 define("L_HELP_CMD_27", "Dieser Befehl hebt die Nachrichten eines ausgewählten Users hervor um das Lesen zu erleichtern. <br />Anwendung: /high {user} oder drücke auf das kleine <img src=./images/highlightOff.gif> Quadrat rechts neben dem Namen des Users (in der Raum/User-Liste)");
 define("L_HELP_CMD_28", "Dieser Befehl erlaubt ein <i>einzelnes</i> Bild in Ihre Nachricht einzufügen. <br />Anwendung: das Bild muss im Internet und für jeden zugänglich sein. Bitte keine Seiten angeben, die Login erfordern. <br /> Es muss der komplette Pfad angegeben werden. Bsp: <b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Erlaubte Erweiterungen: .jpg .bmp .gif .png. <br />Hinweis: schreibe zuerst \"/img\" Leerzeichen und dann die URL zum Bild einfügen. <br />Bitte keine Bilder, die auf Ihrem PC abgelegt sind, wählen. Das Bild ist für keinen sichtbar!!!");
 define("L_HELP_CMD_29", "Der zweite Befehl erlaubt dem Administrator oder dem Moderator des gegenwärtigen Raums Users zu degradieren die vorher zum Moderator im gleichen Raum ernannt wurden.<br />Die * Option degradiert den User in allen Räumen.");
-define("L_HELP_CMD_30", "Der zweite Befehl ist ähnlich dem Befehl \"/me\" aber er zeigt noch zusätzlich das Geschlecht an. <br />Bsp: * ".L_HELP_MR." Ciprian schaut TV oder * ".L_HELP_MS." Dana ist glücklich.");
+define("L_HELP_CMD_30", "Der zweite Befehl ist ähnlich dem Befehl \"/me\" aber er zeigt noch zusätzlich das Geschlecht an. <br />Bsp: * ".sprintf(L_HELP_MR, "Ciprian")." schaut TV oder * ".sprintf(L_HELP_MS, "Dana")." ist glücklich.");
 define("L_HELP_CMD_31", "Sortiert die User nach alphabetischer Reihenfolge oder nach Eingangszeit.");
 define("L_HELP_CMD_32", "Das ist die dritte Version des Würfelspiels.<br />Anwendung: /d{n1}t[n2] oder /d{n1};<br />n1 kann eine Zahl zwischen <b>1 und 100</b> sein (es ist die Anzahl der Würfe pro Würfel).<br />n2 kann eine Zahl zwischen <b> 1 and %s</b> (es ist die Anzahl der Würfel.");
 define("L_HELP_CMD_33", "Ändert die Größe der Schriftart in den Nachrichten (erlaubt sind Werte für n zwischen <b>7 und 15</b>); Der Befehl \"/size\" setzt die Größe der Schriftart auf standard zurück (<b>".$FontSize."</b>).");
@@ -504,7 +504,7 @@ define("L_LINKS_6", "um den Autor"); // Click here + to contact + author -> tran
 define("L_LINKS_7", "um die Homepage von phpMyChat zu besuchen");
 define("L_LINKS_8", "um der phpMyChat - Gruppe beizutreten");
 define("L_LINKS_9", "um Ihr Feedback zu senden");
-define("L_LINKS_10", "um phpMyChat-Plus herunterzuladen");
+define("L_LINKS_10", "um phpMyChat Plus herunterzuladen");
 define("L_LINKS_11", "um zu sehen, wer gerade chattet");
 define("L_LINKS_12", "um die Chat-Login-Seite zu öffnen");
 define("L_LINKS_13", "um diesen ’buzz’ zu senden"); // can also be translated as "to play this sound"
@@ -664,6 +664,6 @@ define("L_OPID_SIGN", "Einlgeloggt mit Benutzername OpenID");
 define("L_OPID_REG", "Importiere deine OpenID ins profile.");
 
 // Support buttons
-define("L_SUPP_WARN", "Sie haben sich entschlossen, die nichtkommerzielle Entwicklung von\\n".APP_NAME." durch eine Geldspende an das Projekt zu unterstützen\\nHerzlichen Dank für Ihre Unterstützung!\\n\\nBitte beachten: Dies ist keine Spende an den Chatserverbetreiber!\\nBitte geben Sie den gewünschten Geldbetrag auf der nächsten Seite ein.\\n\\nFortfahren?");
+define("L_SUPP_WARN", "Sie haben sich entschlossen, die nichtkommerzielle Entwicklung von\\n".APP_NAME." durch eine Geldspende an das Projekt zu unterstützen\\nHerzlichen Dank für Ihre Unterstützung!\\n\\nBitte beachten: Dies ist keine Spende an den Chatserverbetreiber!\\nBitte geben Sie den gewünschten Geldbetrag auf der nächsten Seite ein..\\n\\nFortfahren?");
 define("L_SUPP_ALT", "Unterstützen Sie die Weiterentwicklung und Sicherheitsbetreuung von ".APP_NAME." - es ist Schnell, Frei und Sicher!");
 ?>

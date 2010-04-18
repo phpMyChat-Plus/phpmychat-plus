@@ -211,6 +211,12 @@ if ( $p == 2 )
 		{
 		switch (APP_VERSION)
 		{
+			case "1.94":
+			{
+				if (APP_MINOR != "") $kind = "194-beta";
+				else $kind = "194";
+			}
+			break;
 			case "1.93":
 			{
 				if (APP_MINOR != "") $kind = "193-beta";
@@ -359,6 +365,10 @@ if ( $p == 4 )
   	{
   		include ( "database/mysql_new_install.php" );
 		mysql_query ( "UPDATE $t_config SET LANGUAGE = '$L', ADMIN_NAME = '$adminname', ADMIN_EMAIL = '$adminemail', CHAT_URL = '$chaturl', CHAT_NAME = '$chatname'".$LOG_DIR_N." WHERE ID='0';" );
+  	} elseif ( $kind == "193" )
+  	{
+  		include ( "database/mysql_upgrade_plus_1.93.php" );
+		mysql_query ( $LOG_DIR_NN );
   	} elseif ( $kind == "193-beta" )
   	{
   		include ( "database/mysql_upgrade_plus_1.93-beta.php" );
@@ -654,7 +664,9 @@ while(list($key, $name) = each($AvailableLanguages))
 		elseif ($name == "hungarian" && L_LANG_HU != "L_LANG_HU") $FLAG_NAME = L_LANG_HU;
 		elseif ($name == "indonesian" && L_LANG_ID != "L_LANG_ID") $FLAG_NAME = L_LANG_ID;
 		elseif ($name == "italian" && L_LANG_IT != "L_LANG_IT") $FLAG_NAME = L_LANG_IT;
+		elseif ($name == "japanese" && L_LANG_JA != "L_LANG_JA") $FLAG_NAME = L_LANG_JA;
 		elseif ($name == "nepali" && L_LANG_NE != "L_LANG_NE") $FLAG_NAME = L_LANG_NE;
+		elseif ($name == "persian" && L_LANG_FA != "L_LANG_FA") $FLAG_NAME = L_LANG_FA;
 		elseif ($name == "romanian" && L_LANG_RO != "L_LANG_RO") $FLAG_NAME = L_LANG_RO;
 		elseif ($name == "serbian_latin" && L_LANG_SRL != "L_LANG_SRL") $FLAG_NAME = L_LANG_SRL;
 		elseif ($name == "serbian_cyrillic" && L_LANG_SRC != "L_LANG_SRC") $FLAG_NAME = L_LANG_SRC;
@@ -941,6 +953,9 @@ $RES_ROOM3						= $row[167];
 $RES_ROOM4						= $row[168];
 $RES_ROOM5						= $row[169];
 $EN_STATS						= $row[170];
+$ALLOW_VIDEO					= $row[171];
+$VIDEO_WIDTH					= $row[172];
+$VIDEO_HEIGHT					= $row[173];
 
 $query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.com'";
 $result_bot = mysql_query($query_bot);
@@ -1323,7 +1338,7 @@ define("C_NUKE_BB_PATH", $NUKE_BB_PATH);
 if(is_dir('./'.$ChatPath.'localization/_owner/') && file_exists('./'.$ChatPath.'localization/_owner/owner.php')) include("./${ChatPath}localization/_owner/owner.php");
 
 //Check for php server version
-$phpversion = phpversion();
+define("PHPVERSION", phpversion());
 
 // Public Name of your chat server as you wish to be known on the web - by Ciprian
 define("C_CHAT_NAME", $CHAT_NAME);
@@ -1374,6 +1389,11 @@ define("C_ALLOW_UPLOADS", $ALLOW_UPLOADS);
 
 // Statistics mod - by Ciprian
 define("C_EN_STATS", $EN_STATS);
+
+// Video posting mod - by Ciprian
+define("C_ALLOW_VIDEO", $ALLOW_VIDEO);
+define("C_VIDEO_WIDTH", $VIDEO_WIDTH);
+define("C_VIDEO_HEIGHT", $VIDEO_HEIGHT);
 ?&gt;</textarea></p>
 <?php } // END OF IS NOT WRITEABLE
 else {
@@ -1587,6 +1607,9 @@ else {
   	fputs ( $fh, '$RES_ROOM4						= $row[168];'.$lfeed );
   	fputs ( $fh, '$RES_ROOM5						= $row[169];'.$lfeed );
   	fputs ( $fh, '$EN_STATS						= $row[170];'.$lfeed );
+  	fputs ( $fh, '$ALLOW_VIDEO					= $row[171];'.$lfeed );
+  	fputs ( $fh, '$VIDEO_WIDTH					= $row[172];'.$lfeed );
+  	fputs ( $fh, '$VIDEO_HEIGHT					= $row[173];'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '$query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email=\'bot@bot.com\'";'.$lfeed );
   	fputs ( $fh, '$result_bot = mysql_query($query_bot);'.$lfeed );
@@ -1969,7 +1992,7 @@ else {
   	fputs ( $fh, 'if(is_dir(\'./\'.$ChatPath.\'localization/_owner/\') && file_exists(\'./\'.$ChatPath.\'localization/_owner/owner.php\')) include("./${ChatPath}localization/_owner/owner.php");'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '//Check for php server version'.$lfeed );
-  	fputs ( $fh, '$phpversion = phpversion();'.$lfeed );
+  	fputs ( $fh, 'define("PHPVERSION", phpversion());'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// Public Name of your chat server as you wish to be known on the web - by Ciprian'.$lfeed );
   	fputs ( $fh, 'define("C_CHAT_NAME", $CHAT_NAME);'.$lfeed );
@@ -2020,6 +2043,11 @@ else {
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// Statistics mod - by Ciprian'.$lfeed );
   	fputs ( $fh, 'define("C_EN_STATS", $EN_STATS);'.$lfeed );
+  	fputs ( $fh, ''.$lfeed );
+  	fputs ( $fh, '// Video posting mod - by Ciprian'.$lfeed );
+  	fputs ( $fh, 'define("C_ALLOW_VIDEO", $ALLOW_VIDEO);'.$lfeed );
+  	fputs ( $fh, 'define("C_VIDEO_WIDTH", $VIDEO_WIDTH);'.$lfeed );
+  	fputs ( $fh, 'define("C_VIDEO_HEIGHT", $VIDEO_HEIGHT);'.$lfeed );
   	fputs ( $fh, '?>' );
   } // END OF WRITE INTO config.lib.php
   fclose ( $fh );

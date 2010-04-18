@@ -553,7 +553,7 @@ if($DbLink->num_rows() > 0)
 			}
 			if ($i == 1) $FirstOtherRoom = "Parent".$id;
 			echo("<DIV ID=\"Parent${id}\" CLASS=\"parent\" style=\"margin-top: 1px;\">");
-if (!eregi("firefox", $_SERVER['HTTP_USER_AGENT']))
+if (eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
 {
 			echo("<a href=\"#\" onClick=\"window.parent.expandIt('${id}'); return false\" onMouseOver=\"window.status='".L_EXPCOL."'; return true;\" title=\"".L_EXPCOL."\">");
 			echo("<IMG NAME=\"imEx\" SRC=\"images/closed.gif\" WIDTH=9 HEIGHT=9 BORDER=0 ALT=\"".L_EXPCOL."\"></a>");
@@ -872,7 +872,7 @@ if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $statusu == "a" || $statusu == "t"))
 ?>
 <br /><a href="<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>" onClick="tutorial_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_TUTORIAL); ?>.'; return true;" title="<?php echo(L_TUTORIAL); ?>"><?php echo(L_TUTORIAL); ?></a>
 <?php
-if (!eregi("firefox", $_SERVER['HTTP_USER_AGENT']))
+if (eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
 {
 ?>
 <br /><a href="<?php echo($ChatPath); ?>extra/fixes/fixes.zip" TARGET="_blank" onMouseOver="window.status='<?php echo (L_SOUNDFIX_IE_2) ?>'; return true;" title="<?php echo (L_SOUNDFIX_IE_2) ?>"><?php echo (L_SOUNDFIX_IE_1) ?></a>

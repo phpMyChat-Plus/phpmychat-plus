@@ -215,8 +215,8 @@ define("L_HELP_ROOM", "salón");
 define("L_HELP_BUZZ", "~nombredelsonido");
 define("L_HELP_BUZZ1", "Alerta..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "motivo");
-define("L_HELP_MR", "Sr."); // El señor
-define("L_HELP_MS", "Sra."); // La señora
+define("L_HELP_MR", "Sr. %s"); // El señor
+define("L_HELP_MS", "Sra. %s"); // La señora
 define("L_HELP_CMD_0", "{} representa un dato requerido, [] uno opcional.");
 define("L_HELP_CMD_1a", "Establece el número de mensajes a mostrar. Mínimo y por defecto, son 5.");
 define("L_HELP_CMD_1b", "Recarga y muestra los n últimos mensajes. Mínimo y por defecto, son 5.");
@@ -243,13 +243,13 @@ define("L_HELP_CMD_20", "Describe que estás haciendo, sin refererirte a ti mism
 define("L_HELP_CMD_21", "Avisa a los miembros del salón que intentan enviarte mensajes<br />que en este momento no te encontrás en tu computadora. Si querés volver a chatear, simplemente empezá a escribir.");
 define("L_HELP_CMD_22", "Envía un sonido buzz y opcionalmente muestra un mensaje en el salón actual.<br />- Uso:<br />- viejo uso: \"/buzz\" o \"/buzz mensaje a ser mostrado\" - esto reproduce el sonido buzz por defecto definido en el panel de administración;<br />- uso extendido: \"/buzz ~nombredelsonido\" or \"/buzz ~nombredelsonido mensaje a mostrarse\" - esto reproduce el archivo nombredelsonido.wav del directorio plus/sounds; tomá en cuenta el signo \"~\" para ser usado al inicio de la segunda palabra, que es el nombre del archivo de sonido, sin la extensión .wav (solo se permiten extensiones .wav).<br />Por defecto, este es un comando para administradores o moderadores.");
 define("L_HELP_CMD_23", "Envía un <i>susurro</i> (mensaje privado). El mensaje llegará a destino no importa en qué salón este el usuario. Si el usuario no está conectado o está en estado ausente, recibirás un aviso notificándote.");
-define("L_HELP_CMD_24", "Uso: La temática del salón debe contener al menos dos palabras.<br />Este comando cambia la temática del salón actual. Intentá no repetir las temáticas de otros usuarios. Utilizá temáticas importantes.<br />Por defecto, este es un comando de moderador/administrador.<br />Usando el comando \"/topic top reset\" se borrará la temática actual y se reseteará a la temática por defecto que tenga el salón.<br />Opcional, \"/topic * {}\" Hace exactamente lo mismo pero en todos los salones (temática general y reseteo de temática general).");
-define("L_HELP_CMD_25", "Un juego de dados con números aleatorios.<br />Uso: /dice or /dice [n];<br />n puede tomar cualquier valor <b>entre 1 y %s</b> (representa a la cantidad de dados a usarse).Si no se ingresa un número, se utilizará el máximo por defecto.");
+define("L_HELP_CMD_24", "Este comando cambia la temática del salón actual. Intentá no repetir las temáticas de otros usuarios. Utilizá temáticas importantes.<br />Por defecto, este es un comando de moderador/administrador.<br />Usando el comando \"/topic reset\" se borrará la temática actual y se reseteará a la temática por defecto que tenga el salón.<br />Opcional, \"/topic * {}\" y \"/topic * reset\" Hace exactamente lo mismo pero en todos los salones (temática general y reseteo de temática general).");
+define("L_HELP_CMD_25", "Un juego de dados con números aleatorios.<br />Uso: /dice or /dice [n];<br />n puede tomar cualquier valor <b>entre 1 y %s</b> (representa a la cantidad de dados a usarse). Si no se ingresa un número, se utilizará el máximo por defecto.");
 define("L_HELP_CMD_26", "Esta es una versión más compleja del comando /dice.<br />Uso: /{n1}d[n2] or /{n1}d;<br />n1 puede tomar cualquier valor <b>entre 1 y %s</b> (representa el número de tiradas).<br />n2 Puede tomar cualquier valor <b>entre 1 y %s</b> (representa el número de dados a usarse por tirada).");
 define("L_HELP_CMD_27", "Resalta los mensajes de un usuario en específico para poder leerlo facilmente entre la conversación.<br />Uso: /high {usuario} o presioná el cuadrado pequeño <img src=./images/highlightOff.gif> a la derecha del nombre del usuario (en la lista de salones/usuarios)");
 define("L_HELP_CMD_28", "Permite el posteo de <i>una sola imagen</i> como mensaje.<br />Uso: La imagen debe estar en internet y ser accesible por todos. No uses páginas donde necesitás loguearte.<br />Debes ingresar todo el link de la imagen! Ej. <b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Extensiones aceptadas: .jpg .bmp .gif .png. Respetá las mayúsculas y minúsculas!<br />Recomendación: escribí /img luego dejá un espacio y pegá la URL; para conseguir la URL de una imagen de una página, hacé click derecho sobre la imagen, andá a propiedades, seleccioná toda la dirección/URL (cuidado! aveces la dirección/URL ocupa más de un renglón) copiala y después pegala después de /img<br />No uses imágenes de tu PC: cortará la conexión de tu ventana de chat!!!");
 define("L_HELP_CMD_29", "El segundo comando permitirá al administrador o moderador(es) del salón actual quitar el privilegio de moderador a un usuario registrado al que se le había dado previamente para el mismo salón.<br />La opción * le quitará los privilegios de moderador al usuario en todos los salones.");
-define("L_HELP_CMD_30", "El segundo comando hace lo mismo que /me pero mostrará tu género.<br />Ej. * ".L_HELP_MR." Alejandro está mirando TV o * ".L_HELP_MS." Dana está felíz.");
+define("L_HELP_CMD_30", "El segundo comando hace lo mismo que /me pero mostrará tu género.<br />Ej. * ".sprintf(L_HELP_MR, "Alejandro")." está mirando TV o * ".sprintf(L_HELP_MS, "Dana")." está felíz.");
 define("L_HELP_CMD_31", "Cambia el orden de los usuarios en las listas: por orden de entrada o alfabéticamente.");
 define("L_HELP_CMD_32", "Esta es una tercera versión del juego de dados.<br />Uso: /d{n1}[tn2] or /d{n1};<br />n1 puede tomar cualquier valor <b>entre 1 and 100</b> (representa el número de giros por dado).<br />n2 puede tomar cualquier valor <b>entre 1 y %s</b> (representa el número de dados por tirada).");
 define("L_HELP_CMD_33", "Cambia el tamaño de fuente de los mensajes en el chat de acuerdo a la selección del usuario (valores permitidos para n: <b>entre 7 y 15</b>); el comando /size resetea el tamaño de fuente al valor por defecto (<b>".$FontSize."</b>).");
@@ -508,7 +508,7 @@ define("L_LINKS_6", "para contactar a");
 define("L_LINKS_7", "para visitar phpMyChat Homepage");
 define("L_LINKS_8", "para unirte a phpMyChat Group");
 define("L_LINKS_9", "para enviar tus comentarios");
-define("L_LINKS_10", "para descargar phpMyChat-Plus");
+define("L_LINKS_10", "para descargar phpMyChat Plus");
 define("L_LINKS_11", "para ver quién esta chateando");
 define("L_LINKS_12", "para abrir la página de logueo");
 define("L_LINKS_13", "para enviar este zumbido"); // Click to blablabla : it can also be translated as "to play this sound", if buzz has no translation.

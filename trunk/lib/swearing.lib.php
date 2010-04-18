@@ -341,7 +341,7 @@ function checkwords($String, $TestOnly, $Charset)
 				"whore",
 				"xrated",
 				"xxx",
-	//following are foreign words (GE,RO,FR)
+	//following are foreign words (GE,RO,FR,JA)
 	# GE:
 				"merde",
 				"scheisse",
@@ -387,7 +387,18 @@ function checkwords($String, $TestOnly, $Charset)
 				"pizdă",
 				"pula",
 				"pulă",
-				"sugi "
+				"sugi ",
+	# JA:
+				"バカ",
+				"馬鹿",
+				"死ね",
+				"セックス",
+				"ファック",
+				"チンポ",
+				"チンコ",
+				"マンコ",
+				"クソ",
+				"糞"
 	);
 
 	$ReplaceString = C_SWEAR_EXPR;	// String that will replace "swear words"

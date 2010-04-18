@@ -367,7 +367,9 @@ if (C_ENABLE_PM)
 	</TH></TR>
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
-		<TD><?php echo(L_HELP_CMD_14.(L_CMD_PROMOTE != "" && L_CMD_PROMOTE != "L_CMD_PROMOTE" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_PROMOTE)."</span>") : "")); ?><br /><?php echo(L_HELP_CMD_29.(L_CMD_DEMOTE != "" && L_CMD_DEMOTE != "L_CMD_DEMOTE" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_DEMOTE)."</span>") : "")); ?></TD>
+		<TD><?php echo(L_HELP_CMD_14.(L_CMD_PROMOTE != "" && L_CMD_PROMOTE != "L_CMD_PROMOTE" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_PROMOTE)."</span>") : "")); ?>
+		<br />
+		<?php echo(L_HELP_CMD_29.(L_CMD_DEMOTE != "" && L_CMD_DEMOTE != "L_CMD_DEMOTE" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_DEMOTE)."</span>") : "")); ?></TD>
 	</TR>
 <?php
 };
@@ -443,7 +445,7 @@ if (C_ENABLE_PM)
 	<!-- The topic command doc -->
   <TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
   	<A HREF="#" onClick="cmd2Input('/topic', true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/topic <BDO dir="<?php echo($TextDir); ?>">[*]</BDO> {<?php echo(L_HELP_TOP); ?>}</A><br />
-  	<A HREF="#" onClick="cmd2Input('/topic top reset', false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/topic <BDO dir="<?php echo($TextDir); ?>">[*]</BDO> top reset</A>
+  	<A HREF="#" onClick="cmd2Input('/topic reset', false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/topic <BDO dir="<?php echo($TextDir); ?>">[*]</BDO> reset</A>
   </TH></TR>
   <TR>
     <TD WIDTH=10>&nbsp;</TD>
@@ -451,7 +453,42 @@ if (C_ENABLE_PM)
   </TR>
 <!-- End topic command doc -->
 <?php
-};
+	};
+?>
+	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
+<?php
+	if (version_compare(PHPVERSION,'5','>='))
+	{
+?>
+		<A HREF="#" onClick="cmd2Input('/vid',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/vid</A>
+		<br /><A HREF="#" onClick="cmd2Input('/tube',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/tube</A>
+<?php
+	}
+	else
+	{
+?>
+		<A HREF="#" onClick="cmd2Input('/tube',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/tube</A>
+<?php
+	}
+?>
+	</TH></TR>
+	<TR>
+		<TD WIDTH=10>&nbsp;</TD>
+<?php
+	if (version_compare(PHPVERSION,'5','>='))
+	{
+?>
+			<TD><?php echo(L_HELP_CMD_35."<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/video /play".(L_CMD_VIDEO != "" && L_CMD_VIDEO != "L_CMD_VIDEO" ? " /".str_replace(","," /",L_CMD_VIDEO) : "")."</span>")); ?>
+			<br /><?php echo(L_HELP_CMD_35a."<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/utube /youtube".(L_CMD_UTUBE != "" && L_CMD_UTUBE != "L_CMD_UTUBE" ? " /".str_replace(","," /",L_CMD_UTUBE) : "")."</span>")); ?></TD>
+<?php
+	}
+	else
+	{
+?>
+			<TD><?php echo(L_HELP_CMD_36."<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/utube /youtube".(L_CMD_UTUBE != "" && L_CMD_UTUBE != "L_CMD_UTUBE" ? " /".str_replace(","," /",L_CMD_UTUBE) : "")."</span>")); ?></TD>
+		</TR>
+<?php
+	};
 ?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
 		<A HREF="#" onClick="cmd2Input('/whois',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/whois {<?php echo(L_USER); ?>}</A>

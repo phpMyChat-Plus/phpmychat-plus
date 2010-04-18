@@ -225,7 +225,7 @@ overflow:auto;
 if ($action != "submit")
 {
 	//Cache for Gravatars check
-	if (version_compare(phpversion(),'5','>=') && ini_get("allow_url_fopen") && function_exists('file_get_contents')) $cache_supported = 1;
+	if (version_compare(PHPVERSION,'5','>=') && ini_get("allow_url_fopen") && function_exists('file_get_contents')) $cache_supported = 1;
 	else $cache_supported = 0;
 	if (!@fsockopen("gravatar.com", 80, $errno, $errstr, 2))
 	{
@@ -618,7 +618,10 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"RES_ROOM3 = '$vRES_ROOM3', ".
 						"RES_ROOM4 = '$vRES_ROOM4', ".
 						"RES_ROOM5 = '$vRES_ROOM5', ".
-						"EN_STATS = '$vEN_STATS'".
+						"EN_STATS = '$vEN_STATS', ".
+						"ALLOW_VIDEO = '$vALLOW_VIDEO', ".
+						"VIDEO_WIDTH = '$vVIDEO_WIDTH', ".
+						"VIDEO_HEIGHT = '$vVIDEO_HEIGHT'".
 				" WHERE ID='0'";
 
 		$DbLink->query($query);
@@ -860,7 +863,9 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 				elseif ($name == "hungarian" && L_LANG_HU != "L_LANG_HU") $FLAG_NAME = L_LANG_HU;
 				elseif ($name == "indonesian" && L_LANG_ID != "L_LANG_ID") $FLAG_NAME = L_LANG_ID;
 				elseif ($name == "italian" && L_LANG_IT != "L_LANG_IT") $FLAG_NAME = L_LANG_IT;
+				elseif ($name == "japanese" && L_LANG_JA != "L_LANG_JA") $FLAG_NAME = L_LANG_JA;
 				elseif ($name == "nepali" && L_LANG_NE != "L_LANG_NE") $FLAG_NAME = L_LANG_NE;
+				elseif ($name == "persian" && L_LANG_FA != "L_LANG_FA") $FLAG_NAME = L_LANG_FA;
 				elseif ($name == "romanian" && L_LANG_RO != "L_LANG_RO") $FLAG_NAME = L_LANG_RO;
 				elseif ($name == "serbian_latin" && L_LANG_SRL != "L_LANG_SRL") $FLAG_NAME = L_LANG_SRL;
 				elseif ($name == "serbian_cyrillic" && L_LANG_SRC != "L_LANG_SRC") $FLAG_NAME = L_LANG_SRC;
@@ -1725,7 +1730,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     	<i>Hint: This applies to the posted messages' colors mainly, but if Colored Names are enabled above, it will also apply to the names colors.</i>
 	</td>
     <td>
-		<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<select name=\"vCOLOR_CA\" style=\"background-color:".$COLOR_CA.";\">\n");
+		<?php if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CA\" style=\"background-color:".$COLOR_CA.";\">\n");
 		else echo("<select name=\"vCOLOR_CA\">");
 			$CCA = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CCA))
@@ -1738,7 +1743,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			}
 			?>
 		</select><br />
-		<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<select name=\"vCOLOR_CA1\" style=\"background-color:".$COLOR_CA1.";\">\n");
+		<?php if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CA1\" style=\"background-color:".$COLOR_CA1.";\">\n");
 		else echo("<select name=\"vCOLOR_CA1\">");
 			$CCA1 = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CCA1))
@@ -1751,7 +1756,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			}
 			?>
 		</select><br />
-		<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<select name=\"vCOLOR_CA2\" style=\"background-color:".$COLOR_CA2.";\">\n");
+		<?php if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CA2\" style=\"background-color:".$COLOR_CA2.";\">\n");
 		else echo("<select name=\"vCOLOR_CA2\">");
 			$CCA2 = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CCA2))
@@ -1771,7 +1776,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     	<i>Hint. This applies to the posted messages' colors mainly, but if Colored Names are enabled above, it will also apply to names colors.<br />Admins will also be able to use these colors, but no other users.</i>
     </td>
     <td>
-		<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<select name=\"vCOLOR_CM\" style=\"background-color:".$COLOR_CM.";\">\n");
+		<?php if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CM\" style=\"background-color:".$COLOR_CM.";\">\n");
 		else echo("<select name=\"vCOLOR_CM\">");
 			$CCM = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CCM))
@@ -1784,7 +1789,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			}
 			?>
 		</select><br />
-		<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<select name=\"vCOLOR_CM1\" style=\"background-color:".$COLOR_CM1.";\">\n");
+		<?php if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CM1\" style=\"background-color:".$COLOR_CM1.";\">\n");
 		else echo("<select name=\"vCOLOR_CM1\">");
 			$CCM1 = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CCM1))
@@ -1797,7 +1802,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			}
 			?>
 		</select><br />
-		<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<select name=\"vCOLOR_CM2\" style=\"background-color:".$COLOR_CM2.";\">\n");
+		<?php if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CM2\" style=\"background-color:".$COLOR_CM2.";\">\n");
 		else echo("<select name=\"vCOLOR_CM2\">");
 			$CCM2 = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CCM2))
@@ -2028,7 +2033,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     <td><b>Enter the color of the BOT response messages.</b>
 	</td>
     <td>
-		<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<select name=\"vBOT_FONT_COLOR\" style=\"background-color:".$BOT_FONT_COLOR.";\">\n");
+		<?php if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vBOT_FONT_COLOR\" style=\"background-color:".$BOT_FONT_COLOR.";\">\n");
 		else echo("<select name=\"vBOT_FONT_COLOR\">");
 			$BOTF = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($BOTF))
@@ -2112,7 +2117,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
     <td>
         <select name="vDEMOTE_MOD">
-	        <option value="0"<?php if($DEMOTE_MOD==0){ echo " selected"; } ?>>Only admins and topmoders</option>
+	        <option value="0"<?php if($DEMOTE_MOD==0){ echo " selected"; } ?>>Only admins</option>
 	        <option value="1"<?php if($DEMOTE_MOD==1){ echo " selected"; } ?>>Moderators & admins</option>
         </select>
     </td>
@@ -2138,6 +2143,26 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
     <td>
 		<input name="vMAX_PIC_SIZE" type="text" size="7" maxlength="3" value="<?php echo $MAX_PIC_SIZE; ?>">
+	</td>
+</tr>
+<tr>
+    <td><b>Enable posting videos (e.g. YouTube) by using the /video command</b>
+    	<i>Hints: If disabled, only the links to the original video source will be posted in chat; if enabled, any user can post a video that can be watched directly in chat by all users; setting to admins only will only show videos posted by admins and topmoders, rest of the users posting only links to the original video source.</i>
+	</td>
+    <td>
+        <select name="vALLOW_VIDEO">
+	        <option value="0"<?php if($ALLOW_VIDEO==0){ echo " selected"; } ?>>Disabled</option>
+	        <option value="1"<?php if($ALLOW_VIDEO==1){ echo " selected"; } ?>>Enabled</option>
+	        <option value="2"<?php if($ALLOW_VIDEO==2){ echo " selected"; } ?>>From admins only</option>
+        </select>
+	</td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Set the width and height of the Video Player</b>
+	</td>
+    <td>
+		W: <input name="vVIDEO_WIDTH" type="text" size="4" maxlength="3" value="<?php echo $VIDEO_WIDTH; ?>">&nbsp;
+		H: <input name="vVIDEO_HEIGHT" type="text" size="4" maxlength="3" value="<?php echo $VIDEO_HEIGHT; ?>">
 	</td>
 </tr>
 <tr>
@@ -2320,7 +2345,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	<i>Server Info:<br /><font color=red>Important: if cache is enabled, make sure the "cache" folder exists in the chat root and it has public write permissions (CHMOD 0777)!<br />
 	<?php echo((!$cache_supported || $server_blocked) ? "<b>Cache not supported on this server!</b><br />" : ""); ?>
 		</font><font color=blue>Hosting Server IP: <b><?php echo($_SERVER['SERVER_ADDR']); ?></b> <?php echo(!$server_blocked ? "" : "<b><font color=red>cannot get access to gravatar.com!</font></b>"); ?></font><br />
-		<font color=blue>Php server version: <b><?php echo(!version_compare(phpversion(),'5','>=') ? "<font color=red>".phpversion()."</font>" : phpversion()); ?></b></font><br />
+		<font color=blue>Php server version: <b><?php echo(!version_compare(PHPVERSION,'5','>=') ? "<font color=red>".PHPVERSION."</font>" : PHPVERSION); ?></b></font><br />
 		<font color=blue>allow_url_fopen: <b><?php echo(!(ini_get("allow_url_fopen")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
 		<font color=blue>allow_url_include: <b><?php echo(!(ini_get("allow_url_include")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
 		<font color=blue>file_get_contents: <b><?php echo(!(function_exists("file_get_contents")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
@@ -2492,7 +2517,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	<td><b>Quote Name color:</b>
 	</td>
 	<td>
-		<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<select name=\"vQUOTE_FONT_COLOR\" style=\"background-color:".$QUOTE_FONT_COLOR.";\">\n");
+		<?php if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vQUOTE_FONT_COLOR\" style=\"background-color:".$QUOTE_FONT_COLOR.";\">\n");
 		else echo("<select name=\"vQUOTE_FONT_COLOR\">");
 			$CQ = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CQ))
@@ -2564,7 +2589,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	<td><b>Quote Background color:</b>
 	</td>
 	<td>
-		<?php if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT'])) echo("<select name=\"vQUOTE_COLOR\" style=\"background-color:".$QUOTE_COLOR.";\">\n");
+		<?php if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vQUOTE_COLOR\" style=\"background-color:".$QUOTE_COLOR.";\">\n");
 		else echo("<select name=\"vQUOTE_COLOR\">");
 			$CQP = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CQP))

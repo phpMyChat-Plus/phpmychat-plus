@@ -43,7 +43,6 @@ if (get_magic_quotes_gpc()) {
 
 
 if (C_ALLOW_UPLOADS && $_POST['action'] == 'image') {
-//error_reporting(E_ALL);
 // we first include the upload class, as we will need it here to deal with the uploaded file
 include('plugins/uploader/class.upload.php');
 function size_readable($size, $retstring = null) {

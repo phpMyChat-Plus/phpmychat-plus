@@ -1240,7 +1240,7 @@
 <category><pattern>WHEN WAS TV INVENTED</pattern><template>Practical TV picture tubes first appeared in the 1930's.</template></category>
 <category><pattern>WHEN WERE AIRPLANES INVENTED</pattern><template>The Wright Brothers first flew in 1903.</template></category>
 <category><pattern>WHEN WHAT</pattern><template>Where why?</template></category>
-<category><pattern>WHEN WILL I DIE</pattern><template>You could check out the actuarial tables at <a href="http://www.deathclock.com" target="_blank">Deathclock.com</a>.</template></category>
+<category><pattern>WHEN WILL I DIE</pattern><template>You could check out the actual tables at <a href="http://www.deathclock.com" target="_blank">Deathclock.com</a>.</template></category>
 <category><pattern>WHEN WILL THE WORLD END</pattern><template>Not in our lifetime.</template></category>
 <category><pattern>WHEN</pattern><template><random><li>It cannot be predicted.</li><li> I don't know when.</li><li> Time does not exist.</li><li> The past and future are one.</li></random></template></category>
 <category><pattern>WHENEVER</pattern><template>You sound sarcastic.</template></category>

@@ -107,13 +107,9 @@ elseif (C_BANISH != "0" && eregi("^\/(ban".(L_CMD_BAN != "" && L_CMD_BAN != "L_C
 {
 	include("./lib/commands/banish.cmd.php");
 }
-elseif (eregi("^\/(me".(L_CMD_ME != "" && L_CMD_ME != "L_CMD_ME" ? "|".str_replace(",","|",L_CMD_ME) : "").")[[:space:]](.+)?$", $M, $Cmd) || eregi("^(:)[[:space:]](.+)?$", $M, $Cmd))
+elseif (eregi("^\/(me".(L_CMD_ME != "" && L_CMD_ME != "L_CMD_ME" ? "|".str_replace(",","|",L_CMD_ME) : "").")[[:space:]](.+)?$", $M, $Cmd) || eregi("^(:)[[:space:]](.+)?$", $M, $Cmd) || eregi("^\/(mr".(L_CMD_MR != "" && L_CMD_MR != "L_CMD_MR" ? "|".str_replace(",","|",L_CMD_MR) : "").")[[:space:]](.+)?$", $M, $Cmd))
 {
 	include("./lib/commands/me.cmd.php");
-}
-elseif (eregi("^\/(mr".(L_CMD_MR != "" && L_CMD_MR != "L_CMD_MR" ? "|".str_replace(",","|",L_CMD_MR) : "").")[[:space:]](.+)?$", $M, $Cmd))
-{
-	include("./lib/commands/mr.cmd.php");
 }
 // elseif (eregi("^\/(away".(L_CMD_AWAY != "" && L_CMD_AWAY != "L_CMD_AWAY" ? "|".str_replace(",","|",L_CMD_AWAY) : "").")$", $M)) // if no reason string desired.
 elseif (eregi("^\/(away".(L_CMD_AWAY != "" && L_CMD_AWAY != "L_CMD_AWAY" ? "|".str_replace(",","|",L_CMD_AWAY) : "").")([[:space:]](.+))?$", $M, $Cmd))
@@ -136,7 +132,7 @@ elseif (eregi("^\/(room".(L_CMD_ROOM != "" && L_CMD_ROOM != "L_CMD_ROOM" ? "|".s
 {
 	include("./lib/commands/room.cmd.php");
 }
-elseif (eregi("^\/(topic".(L_CMD_TOPIC != "" && L_CMD_TOPIC != "L_CMD_TOPIC" ? "|".str_replace(",","|",L_CMD_TOPIC) : "").")[[:space:]](\*)?([^[:space:]]{1,30})[[:space:]](.+)$", $M, $Cmd))
+elseif (eregi("^\/(topic".(L_CMD_TOPIC != "" && L_CMD_TOPIC != "L_CMD_TOPIC" ? "|".str_replace(",","|",L_CMD_TOPIC) : "").")([[:space:]]\*)?([[:space:]].+)$", $M, $Cmd))
 {
 	include("./lib/commands/topic.cmd.php");
 }
@@ -147,5 +143,13 @@ elseif (eregi("^\/(wisp|whisp".(L_CMD_WISP != "" && L_CMD_WISP != "L_CMD_WISP" ?
 elseif (eregi("^\/(ltr|rtl".(L_CMD_LTR != "" && L_CMD_LTR != "L_CMD_LTR" ? "|".str_replace(",","|",L_CMD_LTR) : "").(L_CMD_RTL != "" && L_CMD_RTL != "L_CMD_RTL" ? "|".str_replace(",","|",L_CMD_RTL) : "").")[[:space:]](.+)?$", $M, $Cmd))
 {
 	include("./lib/commands/dir.cmd.php");
+}
+elseif (eregi("^\/(vid|video|play".(L_CMD_VIDEO != "" && L_CMD_VIDEO != "L_CMD_VIDEO" ? "|".str_replace(",","|",L_CMD_VIDEO) : "").")[[:space:]](.+)?$", $M, $Cmd))
+{
+	include("./lib/commands/video.cmd.php");
+}
+elseif (eregi("^\/(tube|youtube|utube".(L_CMD_UTUBE != "" && L_CMD_UTUBE != "L_CMD_UTUBE" ? "|".str_replace(",","|",L_CMD_UTUBE) : "").")[[:space:]](.+)?$", $M, $Cmd))
+{
+	include("./lib/commands/youtube.cmd.php");
 };
 ?>

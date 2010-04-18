@@ -6,7 +6,7 @@ define("C_DB_NAME", 'cpanel_plus');						// Logical database name on that server
 define("C_DB_USER", 'cpanel_plus');				// Database username (most common like: cpanelusername_username)
 define("C_DB_PASS", 'plus');				// Database user's password
 // We recommend you keep the names below
-define("C_DB_HOST", 'localhost');				// Hostname of your MySQL server (most common "localhost", but sometimes "mysqlX.domain.com")
+define("C_DB_HOST", 'localhost');				// Hostname of your MySQL server (most common "localhost", but sometimes "mysql.domain.com")
 define("C_DB_TYPE", 'mysql');						// SQL server type ("mysql", "pgsql" or "odbc")
 define("C_BAN_TBL", 'c_ban_users'); 		// Name of the table where banished users are stored
 define("C_CFG_TBL", 'c_config'); 				// Name of the table where configuration settings are stored (if enabled)
@@ -18,11 +18,12 @@ define("C_USR_TBL", 'c_users');					// Name of the table where user names are st
 
 // ------ THESE SETTINGS MUST NOT BE CHANGED ------
 error_reporting (E_ERROR | E_WARNING | E_PARSE);
+#error_reporting (E_ALL); //for debugging purposes only!
 
 $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
 @mysql_query("SET CHARACTER SET utf8");
-@mysql_query("SET NAMES 'utf8'");
-@mysql_select_db(C_DB_NAME);
+mysql_query("SET NAMES 'utf8'");
+mysql_select_db(C_DB_NAME);
 $query = "SELECT * FROM ".C_CFG_TBL."";
 $result = mysql_query($query);
 $row = mysql_fetch_row($result);
@@ -197,6 +198,9 @@ $RES_ROOM3						= $row[167];
 $RES_ROOM4						= $row[168];
 $RES_ROOM5						= $row[169];
 $EN_STATS						= $row[170];
+$ALLOW_VIDEO					= $row[171];
+$VIDEO_WIDTH					= $row[172];
+$VIDEO_HEIGHT					= $row[173];
 
 $query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.com'";
 $result_bot = mysql_query($query_bot);
@@ -579,7 +583,7 @@ define("C_NUKE_BB_PATH", $NUKE_BB_PATH);
 if(is_dir('./'.$ChatPath.'localization/_owner/') && file_exists('./'.$ChatPath.'localization/_owner/owner.php')) include("./${ChatPath}localization/_owner/owner.php");
 
 //Check for php server version
-$phpversion = phpversion();
+define("PHPVERSION", phpversion());
 
 // Public Name of your chat server as you wish to be known on the web - by Ciprian
 define("C_CHAT_NAME", $CHAT_NAME);
@@ -630,4 +634,9 @@ define("C_ALLOW_UPLOADS", $ALLOW_UPLOADS);
 
 // Statistics mod - by Ciprian
 define("C_EN_STATS", $EN_STATS);
+
+// Video posting mod - by Ciprian
+define("C_ALLOW_VIDEO", $ALLOW_VIDEO);
+define("C_VIDEO_WIDTH", $VIDEO_WIDTH);
+define("C_VIDEO_HEIGHT", $VIDEO_HEIGHT);
 ?>

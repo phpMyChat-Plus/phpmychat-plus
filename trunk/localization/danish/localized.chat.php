@@ -214,8 +214,8 @@ define("L_HELP_ROOM", "rum");
 define("L_HELP_BUZZ", "~lydnavn");
 define("L_HELP_BUZZ1", "Buzz..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "grunden");
-define("L_HELP_MR", "Hr.");
-define("L_HELP_MS", "Fr.");
+define("L_HELP_MR", "Hr. %s");
+define("L_HELP_MS", "Fr. %s");
 define("L_HELP_CMD_0", "{} angiver en påkrævet indstilling, [] som er valgfri.");
 define("L_HELP_CMD_1a", "Indsæt antal poster, der skal vises. Minimum og standardindstilling er 5.");
 define("L_HELP_CMD_1b", "Opdatér chatvinduet og vis de seneste n poster. Minimum og standardindstilling er 5.");
@@ -242,17 +242,17 @@ define("L_HELP_CMD_20", "Beskriv hvad du laver uden at indlede sætningen med \"
 define("L_HELP_CMD_21", "Lader andre brugere i chatten, der prøver at sende dig meddelelser, vide <br />at du er væk fra computeren. Når du kommer tilbage, skal du blot begynde at chatte igen.");
 define("L_HELP_CMD_22", "Sender et buzzersignal og viser en valgfri meddelelse i det aktuelle chatrum.<br />- Brug:<br />- gl. brug: \"/buzz\" eller \"/buzz meddelelse, der skal vises\" - dette afspiller standard buzzersignalet, som er defineret i Admin panelet;<br />- udvidet brug: \"/buzz ~lydnavn\" or \"/buzz ~lydnavn meddelelse, der skal vises\" - dette afspiller lydfilen med det valgte lydnavn i formatet.wav fra mappen plus/sounds; vær opmærksom på, at tegnet \"~\" skal indsættes i begyndelsen af det andet ord, der er navnet på lydfilen, men uden anvendelse af filendelsen .wav (kun filer med filendelsen .wav er tilladt).<br />Som standard er dette en kommando reserveret for moderator/admin.");
 define("L_HELP_CMD_23", "Sender en <i>hvisken</i> (privat meddelelse). Meddelelsen når modtageren, uanset hvilket rum, brugeren befinder sig i. Hvis modtageren ikke er online, eller hvis modtageren holder pause, får du besked om det.");
-define("L_HELP_CMD_24", "Brug: emnet skal som minimum indeholde 2 ord.<br />This kommando ændrer emnet for det aktuelle chatrum. Undgå så vidt muligt at ignorere andre brugeres emner. Anvend vigtige emner.<br /> Som standard er dette en kommando reserveret for moderator/admin.<br />Hvis du anvender kommandoen \"/topic top reset\" vil det aktuelle emne blive slettet og erstattet af det emne, der er indsat som standard for det pågældende chatrum.<br />Valgfrit \"/topic * {}\" og \"/topic * top reset\" udfør samme handling, men i alle chatrum (globalt emne og nulstilling af globalt emne).");
+define("L_HELP_CMD_24", "This kommando ændrer emnet for det aktuelle chatrum. Undgå så vidt muligt at ignorere andre brugeres emner. Anvend vigtige emner.<br /> Som standard er dette en kommando reserveret for moderator/admin.<br />Hvis du anvender kommandoen \"/topic reset\" vil det aktuelle emne blive slettet og erstattet af det emne, der er indsat som standard for det pågældende chatrum.<br />Valgfrit \"/topic * {}\" og \"/topic * reset\" udfør samme handling, men i alle chatrum (globalt emne og nulstilling af globalt emne).");
 define("L_HELP_CMD_25", "Et spil terning med tilfældige tai.<br />Sådan spiller du: /dice eller /dice [n];<br />n kan have en hvilken som helst værdi <b>mellem 1 og %s</b> (tallene svarer til antallet af øjne på den kastede terning). Hvis der ikke indtastes noget tal, anvendes den højeste standardværdi for antal kast.");
 define("L_HELP_CMD_26", "Dette er en udvidet version af kommandoen /dice.<br /> Sådan spiller du: /{n1}d[n2] eller /{n1}d;<br />n1 kan have en hvilken som helst værdi <b> mellem 1 og %s</b> (tallet angiver antallet af kast).<br />n2 kan have en hvilken som helst værdi <b> mellem 1 og %s</b> (tallet angiver antallet af øjne pr. terningekast).");
 define("L_HELP_CMD_27", "Denne funktion markerer posterne fra den valgte bruger, således at det er nemmere at følge med i, hvad brugeren siger, hvis der er flere andre der chatter samtidig.<br />Sådan gør du: /high {user} eller tryk på den lille knap <img src=./images/highlightOff.gif> til højre for brugernavnet (i listen over brugere i chatten)");
 define("L_HELP_CMD_28", "Gør det muligt at poste <i>en enkelt fotofil</i> som en chatpost.<br />Sådan gør du: Billedfilen skal være på internettet og frit tilgængelig for alle. Link ikke til sider, der kræver log-in.<br />Den fulde sti til billedfilen skal indtastes! F.eks.<b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Tilladte filendelser: .jpg .bmp .gif .png. Linket er case sensitive!<br />TIPS: tast /img og dernæst et mellemrum og klip-og-kopier URL'en ind i boksen; hvis du vil kopiere URL'en for en billedfil fra en hjemmeside, kan du højreklikke på billedet, vælge Egenskaber og dernæst markere hele adressen/URL'en (af og til er det nødvendigt at scrolle et stykke ned). Herefter kopierer du det, der står efter /img og sætter det ind<br />Forsøg ikke at linke til billedfiler, der ligger på din egen PC: Hvis du gør det, vil chatvinduet lukke ned!!!");
 define("L_HELP_CMD_29", "Den anden kommando sætter administrator eller moderator(er) for det aktuelle rum i stand til at degradere en anden registreret bruger, der tidligere var blevet forfremmet til moderator for det samme chatrum.<br />Markeringen * vil degradere brugeren fra alle chatrum.");
-define("L_HELP_CMD_30", "Den anden kommando gør det samme som kommandoen /me, men viser om du er mand eller kvinde ved at tilføje kønsdeterminator i overensstemmelse med de angivelser, du har foretaget i din profil <br />F.eks. * ".L_HELP_HR." Ciprian ser TV eller * ".L_HELP_FR." Dana er glad.");
+define("L_HELP_CMD_30", "Den anden kommando gør det samme som kommandoen /me, men viser om du er mand eller kvinde ved at tilføje kønsdeterminator i overensstemmelse med de angivelser, du har foretaget i din profil <br />F.eks. * ".sprintf(L_HELP_MR, "Ciprian")." ser TV eller * ".sprintf(L_HELP_MS, "Dana")." er glad.");
 define("L_HELP_CMD_31", "Ændrer den rækkefølge, som brugerne vises på listen: efter ankomsttid eller alfabetisk.");
 define("L_HELP_CMD_32", "Dette er den tredie (rollespils) version af terningespillet.<br />Sådan gør du: /d{n1}[tn2] eller /d{n1};<br />n1 kan have en hvilken som helst værdi <b>mellem 1 og 100</b> (tallet svarer til antallet af kast pr. terning).<br />n2 kan have en hvilken som helst værdi <b>mellem 1 og %s</b> (tallet svarer til antallet af terninger pr. kast).");
 define("L_HELP_CMD_33", "Du kan ændre fontstørrelsen på dine poster i chatten efter behag (tilladte værdier for n: <b>mellem 7 og 15</b>); kommandoen /size ændrer fontstørrelsen tilbage til standardværdien (<b>".$FontSize."</b>).");
-define("L_HELP_CMD_34", "Her kan en bruger angive tekstens justering (ltr,vmh = venstre-mod-højre; rtl,hmv = højre-mod-venstre).");
+define("L_HELP_CMD_34", "Her kan en bruger angive tekstens justering (ltr = venstre-mod-højre, rtl = højre-mod-venstre).");
 define("L_HELP_CMD_VAR", "Synonymer (varianter): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Chat Etikette");
 define("L_HELP_ETIQ_2", "Vi ønsker at denne chat skal være venlig og sjov, og derfor bedes du følge nedenstående retningslinjer. Hvis du ikke overholder retningslinjerne, risikerer du, at en af chattens moderatorer sparker dig ud fra chatten.<br /><br />Tak,");
@@ -507,7 +507,7 @@ define("L_LINKS_6", "for at kontakte");
 define("L_LINKS_7", "for at besøge hjemmesiden phpMyChat");
 define("L_LINKS_8", "for at blive medlem af phpMyChat Group");
 define("L_LINKS_9", "for at sende feedback");
-define("L_LINKS_10", "for at downloade phpMyChat-Plus");
+define("L_LINKS_10", "for at downloade phpMyChat Plus");
 define("L_LINKS_11", "for at se, hvem der chatter");
 define("L_LINKS_12", "for at åbne siden Chat Login");
 define("L_LINKS_13", "for at afspille denne lydfil"); // can also be translated as "to play this sound"

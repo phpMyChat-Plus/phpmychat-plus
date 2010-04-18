@@ -102,7 +102,7 @@ img
 <BODY class="frame">
 	<div>
 			<div style="float:<?php echo($CellAlign); ?>;">
-			<FONT size="2"><I><B><?php echo(sprintf(L_BANNER_WELCOME,$Room)."</B></I> ".L_BANNER_TOPIC); ?></FONT>
+			<FONT size="2"><B><?php echo(sprintf(L_BANNER_WELCOME,$Room)."</B> ".L_BANNER_TOPIC); ?></FONT>
 <!--			Switch the comment between the two lines below to make the banner scrolable - as for longer topics -->
 			<span class="topic"><?php echo ($UR);?></span>
 <!--			<MARQUEE><FONT color="yellow"><B><?php //echo ($UR);?></B></FONT></MARQUEE> -->
@@ -110,7 +110,7 @@ img
 			if ($Ex)
 			{
 			?>
-				<br /><span class="tips"><I><?php echo ($Ex);?></I></span>
+				<br /><span class="tips"><?php echo ($Ex);?></span>
 			<?php
 			}
 			?>

@@ -62,10 +62,12 @@ if ($awaystat < 2) {
 	$xtra = eregi_replace('([[:space:]]|^)(www[.])', '\\1http://\\2', $xtra); // no prefix (www.myurl.ext)
 	$xtra = eregi_replace('([[:space:]]|^)(ftp[.])', '\\1ftp://\\2', $xtra); // no prefix (ftp.myurl.ext)
 	// Word wrap fix by Alexander Eisele <xaex@xaex.de>
+/*
 	if (!preg_match_all("((http://|https://|ftp://|mailto:)[^ ]+)", $xtra, $pmatch))
 	{
 		$xtra = wordwrap($xtra, 40, " ", 1);
 	}
+*/
 	$xtra = eregi_replace('([[:space:]]|^)(www)', '\\1http://\\2', $xtra); // no prefix (www.myurl.ext)
 	$prefix = '(http|https|ftp|telnet|news|gopher|file|wais)://';
   $pureUrl = '([[:alnum:]/\n+-=%&:_.~?]+[#[:alnum:]+-_~]*)';

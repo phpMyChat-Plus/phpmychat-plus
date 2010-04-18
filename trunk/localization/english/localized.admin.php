@@ -25,8 +25,8 @@ define("A_MENU_8", "Connections");
 define("A_MENU_9", "Log archive");
 define("A_MENU_1a", "Profiles");
 define("A_MENU_2a", "Statistics");
-define("A_LOGOUT", "Logout");
 define("A_MOD_DEV", "Mod under development");
+define("A_LOGOUT", "Logout");
 
 // Frame for registered users
 define("A_SHEET1_1", "List of registered users and their permissions");

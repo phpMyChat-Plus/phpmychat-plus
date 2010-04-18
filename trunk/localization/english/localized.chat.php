@@ -1,5 +1,5 @@
 <?php
-// File : english/localized.chat.php - plus version (01.08.2009 - rev.43)
+// File : english/localized.chat.php - plus version (20.03.2010 - rev.44)
 // Original file by Nicolas Hoizey <nhoizey@phpheaven.net>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
@@ -214,8 +214,8 @@ define("L_HELP_ROOM", "room");
 define("L_HELP_BUZZ", "~soundname");
 define("L_HELP_BUZZ1", "Buzz...");
 define("L_HELP_REASON", "the reason");
-define("L_HELP_MR", "Mr.");
-define("L_HELP_MS", "Ms.");
+define("L_HELP_MR", "Mr. %s");
+define("L_HELP_MS", "Ms. %s");
 define("L_HELP_CMD_0", "{} represents a required setting, [] an optional one.");
 define("L_HELP_CMD_1a", "Set the number of messages to show. Minimum and default are 5.");
 define("L_HELP_CMD_1b", "Reload the messages frame and display the n latest messages, minimum and default are 5.");
@@ -242,13 +242,13 @@ define("L_HELP_CMD_20", "Describe what you’re doing without refer yourself.");
 define("L_HELP_CMD_21", "Announces the room and the users who try to send you messages<br />that you are away from the computer. If you want to be back to chat, just start typing.");
 define("L_HELP_CMD_22", "Sends a buzzer sound and optionally displays a message in the current room.<br />Usage:<br />- old usage: \"/buzz\" or \"/buzz message to be shown\" - this plays the default sound for buzz defined in Admin panel;<br />- extended usage: \"/buzz ~soundname\" or \"/buzz ~soundname message to be shown\" - this plays the soundname.wav file from the plus/sounds folder; please note the sign \"~\" to be used at the beginning of the second word, which is the name of the sound file, without the extension .wav (only .wav extensions allowed).<br />By default, this is a moderator/admin command.");
 define("L_HELP_CMD_23", "Sends a <i>whisper</i> (private message). The message will reach the destination, no matter which room the user is in. If the user is not on-line or has set away, you will be notified about it.");
-define("L_HELP_CMD_24", "Usage: the topic has to contain at least 2 words.<br />This command changes the topic of the current room. Try not to override other users’ topics. Use important topics.<br />By default, this is a moderator/admin command.<br />Using \"/topic top reset\" command the current topic will be deleted and reset to default one of the room.<br />Optionally, \"/topic * {}\" and \"/topic * top reset\" do exactly the same but in all the rooms (global topic and global topic reset).");
+define("L_HELP_CMD_24", "This command changes the topic of the current room. Try not to override other users’ topics. Use important topics.<br />By default, this is a moderator/admin command.<br />Using \"/topic reset\" command the current topic will be deleted and reset to default one of the room.<br />Optionally, \"/topic * {}\" and \"/topic * reset\" do exactly the same but in all the rooms (global topic and global topic reset).");
 define("L_HELP_CMD_25", "A dice game for random/hazardous numbers.<br />Usage: /dice or /dice [n];<br />n can take any value <b>between 1 and %s</b> (it represents the number of dice). If no number is entered, the default maximum dice will be used.");
 define("L_HELP_CMD_26", "This is a more complex version of the /dice command.<br />Usage: /{n1}d[n2] or /{n1}d;<br />n1 can take any value <b>between 1 and %s</b> (it represents the number of dice per throws).<br />n2 can take any value <b>between 1 and %s</b> (it represents the number of sides per die).");
 define("L_HELP_CMD_27", "It highlights the messages of a specific user for an easier reading across the conversations.<br />Usage: /high {user} or press the small <img src=./images/highlightOff.gif> square on the right of the username (in the rooms/users list)");
-define("L_HELP_CMD_28", "It allows posting of <i>one single image</i> as message.<br />Usage: The picture has to be on the internet and free accessible by anyone. Don’t use pages that need login.<br />Full image link must be typed! E.g.<b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Allowed extensions: .jpg .bmp .gif .png. The link is case sensitive!<br />HINTS: type /img then a space and paste the URL into the box; to get the URL of an image from a webpage, when you right-click on the image, go to properties, then highlight the whole address/URL (sometimes needs to scroll down a bit) and copy/paste after the /img<br />Don’t use pictures from your pc: it will just break the chat window!!!");
+define("L_HELP_CMD_28", "It allows posting of <i>one single image</i> as message.<br />Usage: The picture has to be on the internet and free accessible by anyone. Don’t use pages that need login.<br />Full image link must be typed! E.g. <b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Allowed extensions: .jpg .bmp .gif .png. The link is case sensitive!<br />HINTS: type /img then a space and paste the URL into the box; to get the URL of an image from a webpage, when you right-click on the image, go to properties, then highlight the whole address/URL (sometimes needs to scroll down a bit) and copy/paste after the /img<br />Don’t use pictures from your pc: it will just break the chat window!!!");
 define("L_HELP_CMD_29", "The second command will allow the administrator or moderator(s) of the current room to demote another registered user previously promoted to moderator for the same room.<br />The * option will demote the user from all the rooms.");
-define("L_HELP_CMD_30", "The second command does the same as /me but it will show your respective title, according to your profile gender<br />E.g. * ".L_HELP_MR." Ciprian is watching TV or * ".L_HELP_MS." Dana is happy.");
+define("L_HELP_CMD_30", "The second command does the same as /me but it will show your respective title, according to your profile gender<br />E.g. * ".sprintf(L_HELP_MR, "Ciprian")." is watching TV or * ".sprintf(L_HELP_MS, "Dana")." is happy.");
 define("L_HELP_CMD_31", "Change the order users are sorted in lists: by entrance time or alphabetically.");
 define("L_HELP_CMD_32", "This is a third (role-playing) version of the dice rolling.<br />Usage: /d{n1}[tn2] or /d{n1};<br />n1 can take any value <b>between 1 and 100</b> (it represents the number of sides per die);<br />n2 can take any value <b>between 1 and %s</b> (it represents the number of rolling dice per throw).");
 define("L_HELP_CMD_33", "Change the font size of the messages in chat to user choice (allowed values for n: <b>between 7 and 15</b>); the /size command resets the font size to the default value (<b>".$FontSize."</b>).");
@@ -300,7 +300,7 @@ define("L_WHOIS_BOT", "Bot");
 
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "%s enters this room.");
-define("L_EXIT_ROM", "%s exits from this room.");
+define("L_EXIT_ROM", "%s exits this room.");
 if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
@@ -328,7 +328,7 @@ define("L_DEFAULT_TOPIC_1", "This is a default topic. Edit localization/_owner/o
 define("L_PIC", "Picture posted by");
 define("L_PIC_RESIZED", "Resized to");
 define("L_HELP_IMG", "full path to the image to be posted");
-define("L_NO_IMAGE", "This is not a valid URL of a public remote image.\nTry again!");
+define("L_NO_IMAGE", "This is not a valid URL of a public remote image.\\nTry again!");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s is no longer a moderator for any room of this chat.");
@@ -623,6 +623,7 @@ define("L_LANG_EN", "English"); // for admin panel only
 define("L_LANG_ENUK", "English UK"); // for UK formats and flags
 define("L_LANG_ENUS", "English US"); // for US formats and flags
 define("L_LANG_ES", "Spanish");
+define("L_LANG_FA", "Persian (Farsi)");
 define("L_LANG_FR", "French");
 define("L_LANG_GR", "Greek");
 define("L_LANG_HE", "Hebrew");
@@ -630,7 +631,9 @@ define("L_LANG_HI", "Hindi");
 define("L_LANG_HU", "Hungarian");
 define("L_LANG_ID", "Indonesian (Bahasa)");
 define("L_LANG_IT", "Italian");
+define("L_LANG_JA", "Japanese (Kanji)");
 define("L_LANG_KA", "Georgian");
+define("L_LANG_NE", "Nepali");
 define("L_LANG_NL", "Dutch");
 define("L_LANG_RO", "Romanian");
 define("L_LANG_SK", "Slovak");
@@ -685,4 +688,14 @@ define("L_OPID_REG", "Import your OpenID profile");
 // Support buttons
 define("L_SUPP_WARN", "You have chosen to contribute to the free development of\\n".APP_NAME." by making a donation to the developer.\\nThank you for your support!\\n\\nNote: the recipient is not the owner of this chat.\\nPlease enter the amount on the next page.\\n\\nContinue?");
 define("L_SUPP_ALT", "Support with PayPal the development of ".APP_NAME." - it's Fast, Free and Secure!");
+
+// Video & Audio & Youtube cmds (Embevi & YouTube player class)
+define("L_AUDIO", "Audio file posted by");
+define("L_VIDEO", "Video posted by");
+define("L_HELP_VIDEO", "full path to the video or audio source to be posted");
+define("L_NO_VIDEO", "The URL cannot be embedded.\\nThis is not a valid URL of an accepted public video or audio source.\\nTry again!");
+define("L_ORIG_VIDEO", "to open the original site");
+define("L_HELP_CMD_35", "It allows posting of <i>one video</i> or <i>one audio file</i> in a small Flash player at a time.<br />Usage: Just paste the url of the source to be posted! E.g. <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />You need Shockwave Flash Player installed on your system. The link is case sensitive!<br />HINTS: type /video followed by a space and paste the URL into the box.");
+define("L_HELP_CMD_35a", "The second command only works with youtube.com as video source.<br />E.g. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
+define("L_HELP_CMD_36", "It allows posting of <i>one youtube video</i> in a small Flash player at a time.<br />Usage: Just paste the url of the source to be posted! E.g. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />You need Shockwave Flash Player installed on your system. The link is case sensitive!<br />HINTS: type /tube followed by a space and paste the URL into the box.");
 ?>

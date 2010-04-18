@@ -217,8 +217,8 @@ define("L_HELP_ROOM", "חדר");
 define("L_HELP_BUZZ", "~soundname");
 define("L_HELP_BUZZ1", "Buzz..."); //alert, sound alert, ring, whirr
 define("L_HELP_REASON", "הסיבה");
-define("L_HELP_MR", "Mr.");
-define("L_HELP_MS", "Ms.");
+define("L_HELP_MR", "Mr. %s");
+define("L_HELP_MS", "Ms. %s");
 define("L_HELP_CMD_0", "{} represents a required setting, [] an optional one.");
 define("L_HELP_CMD_1a", "Set number of messages to show. Minimum and default are 5.");
 define("L_HELP_CMD_1b", "Reload the messages frame and display the n latest messages, minimum and default are 5.");
@@ -245,13 +245,13 @@ define("L_HELP_CMD_20", "Describe what you’re doing without refer yourself.");
 define("L_HELP_CMD_21", "Announces the room and the users who try to send you messages<br />that you are away from the computer. If you want to be back to האם אתה רוצה להסיר את עצמך?, just start typing.");
 define("L_HELP_CMD_22", "Sends a buzzer sound and optionally displays a message in the current room.<br />Usage:<br />- old usage: \"/buzz\" or \"/buzz message to be shown\" - this plays the default sound for buzz defined in Admin panel;<br />- extended usage: \"/buzz ~soundname\" or \"/buzz ~soundname message to be shown\" - this plays the soundname.wav file from the plus/sounds folder; please note the sign \"~\" to be used at the beginning of the second word, which is the name of the sound file, without the extension .wav (only .wav extensions allowed).<br />By default, this is a moderator/admin command.");
 define("L_HELP_CMD_23", "Sends a <i>whisper</i> (private message). The message will reach the destination, no matter which room the user is in. If the user is not on-line or has set away, you will be notified about it.");
-define("L_HELP_CMD_24", "Usage: the topic has to contain at least 2 words.<br />This command changes the topic of the current room. Try not to override other users’ topics. Use important topics.<br />By default, this is a moderator/admin command.<br />Using \"/topic top reset\" command the current topic will be deleted and reset to default one מהחדר.<br />Optionally, \"/topic * {}\" and \"/topic * top reset\" do exactly the same but in all החדרים (global topic and global topic reset).");
+define("L_HELP_CMD_24", "This command changes the topic of the current room. Try not to override other users’ topics. Use important topics.<br />By default, this is a moderator/admin command.<br />Using \"/topic reset\" command the current topic will be deleted and reset to default one מהחדר.<br />Optionally, \"/topic * {}\" and \"/topic * reset\" do exactly the same but in all החדרים (global topic and global topic reset).");
 define("L_HELP_CMD_25", "A dice game for random/hazardous numbers.<br />Usage: /dice or /dice [n];<br />n can take any value <b>between 1 and %s</b> (it represents the number of dice). If no number is entered, the default maximum dice will be used.");
 define("L_HELP_CMD_26", "This is a more complex version of the /dice command.<br />Usage: /{n1}d[n2] or /{n1}d;<br />n1 can take any value <b>between 1 and %s</b> (it represents the number of dice per throws).<br />n2 can take any value <b>between 1 and %s</b> (it represents the number of sides per die).");
 define("L_HELP_CMD_27", "It highlights the messages of a specific user for an easier reading across the conversations.<br />Usage: /high {user} or press the small <img src=./images/highlightOff.gif> square on the right of the username (in החדרים/users list)");
 define("L_HELP_CMD_28", "It allows posting of <i>one single image</i> as message.<br />Usage: The picture has to be on the internet and free accessible by anyone. Don’t use pages that need login.<br />Full image link must be typed! E.g.<b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Allowed extensions: .jpg .bmp .gif .png. The link is case sensitive!<br />HINTS: type /img then a space and paste the URL into the box; to get the URL of an image from a webpage, when you right-click on the image, go to properties, then highlight the whole address/URL (sometimes needs to scroll down a bit) and copy/paste after the /img<br />Don’t use pictures from your pc: it will just break the האם אתה רוצה להסיר את עצמך? window!!!");
 define("L_HELP_CMD_29", "The second command will allow the administrator or moderator(s) of the current room to demote another registered user previously promoted to moderator for the same room.<br />The * option will demote the user from all החדרים.");
-define("L_HELP_CMD_30", "The second command does the same as /me but it will show your respective title, according to your profile gender<br />E.g. * ".L_HELP_MR." Ciprian is watching TV or * ".L_HELP_MS." Dana is happy.");
+define("L_HELP_CMD_30", "The second command does the same as /me but it will show your respective title, according to your profile gender<br />E.g. * ".sprintf(L_HELP_MR, "Ciprian")." is watching TV or * ".sprintf(L_HELP_MS, "Dana")." is happy.");
 define("L_HELP_CMD_31", "Change the order users are sorted in lists: by entrance time or alphabetically.");
 define("L_HELP_CMD_32", "This is a third (role-playing) version of the dice rolling.<br />Usage: /d{n1}[tn2] or /d{n1};<br />n1 can take any value <b>between 1 and 100</b> (it represents the number of sides per die).<br />n2 can take any value <b>between 1 and %s</b> (it represents the number of rolling dice per throw).");
 define("L_HELP_CMD_33", "Change the font size of the messages in chat to user choice (allowed values for n: <b>between 7 and 15</b>); the /size command resets the font size to the default value (<b>".$FontSize."</b>).");
@@ -331,7 +331,7 @@ define("L_DEFAULT_TOPIC_1", "נושא ראשוני. ערוך את הקובץ loc
 define("L_PIC", "תמונה נשלחה על ידי");
 define("L_PIC_RESIZED", "שינוי גודל ל-");
 define("L_HELP_IMG", "full path to the image to be posted");
-define("L_NO_IMAGE", "This is not a valid URL of a public remote image.\nTry again!");
+define("L_NO_IMAGE", "This is not a valid URL of a public remote image.\\nTry again!");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s is no longer a moderator for any room of this chat.");

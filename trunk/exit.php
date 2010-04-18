@@ -61,8 +61,8 @@ function delete_files()
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
-
 <HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=<?php echo($Charset); ?>">
 <TITLE>Exit frame</TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
@@ -141,7 +141,7 @@ if (EXIT_LINK_TYPE)
 <BODY CLASS="frame" onLoad="MM_preloadImages('localization/<?php echo ($L); ?>/images/exitdoorRoll.gif')" onUnload="leave();">
 <CENTER>
 <?php
-if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT']))
+if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT'])))
 {
 	?>
 <table align="center"><tr><td align="center">
@@ -157,7 +157,7 @@ else
 <BODY CLASS="frame" onUnload="close_popups();">
 <CENTER>
 <?php
-if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT']))
+if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT'])))
 {
 	?>
 <table align="center"><tr><td align="center">
@@ -171,7 +171,7 @@ if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT']))
 <br />
 <?php
 if ($FontSize < 10) echo("<br />");
-if ($Ver == "H")
+if ($Ver == "H" && eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
 {
 	?>
 	<!-- Display the big + clickable icon used to expand/collapse all rooms // -->
@@ -192,7 +192,7 @@ if ($Ver == "H")
 	<IMG NAME="ConState" SRC="images/connectOff.gif" WIDTH=13 HEIGHT=13 ALIGN="MIDDLE" BORDER=0 ALT="<?php echo(L_CONN_STATE); ?>"></A>
 	<?php
 }
-if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT']))
+if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT'])))
 {
 	?>
 </td></tr></table>

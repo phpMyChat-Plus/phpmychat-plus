@@ -32,7 +32,7 @@ define("L_CMD_RECALL", "herhaall"); // !,recall (recalls last sent message in th
 define("L_CMD_REFRESH", "ververs,herlaad"); // refresh,reload (modify/reset the time between browser refreshes/reloads)
 define("L_CMD_ROOM", "kamer"); // room (send an announcement/warning to the current room)
 define("L_CMD_RTL", "rnl"); // rtl (post a right-to-left text)
-define("L_CMD_SAVE", "bewaar"); // save,export (open the last N posts to be exported)
+define("L_CMD_SAVE", "bewaar,export"); // save,export (open the last N posts to be exported)
 define("L_CMD_SHOW", "laatste"); // show,last (reset the messages frame to show the last 5 / N posts only)
 define("L_CMD_SIZE", "grootte"); //size (change/reset the size of the font in chat)
 define("L_CMD_SORT", "rangschik"); // sort (sort - ascending the usernames in the lists, alphabetically or by the time they joined chat)

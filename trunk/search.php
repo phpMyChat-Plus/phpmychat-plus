@@ -43,8 +43,6 @@ switch(L_LANG)
 		break;
 	case "en_GB":
 		$L_G_EXT = "co.uk";
-#		$L_G_SA = "Search";
-#		$L_G_HL = "en";
 		$L_G_CX = "29rzcl-ytld";
 		break;
 	case "de_DE":
@@ -62,7 +60,6 @@ switch(L_LANG)
 	case "he_IL":
 		$L_G_EXT = "co.il";
 		$L_G_SA = "חיפוש";
-#		$L_G_SA = "חפש";
 		$L_G_HL = "iw";
 		$L_G_CX = "6tiikj-wqp1";
 		break;
@@ -85,6 +82,13 @@ switch(L_LANG)
 		$L_G_HL = "it";
 		$L_G_CX = "xcwimo-lord";
 		break;
+	case "ja_JP":
+		$L_G_EXT = "co.jp";
+#		$L_G_SA = "検索"; 
+		$L_G_SA = "&#x691c;&#x7d22;"; 
+		$L_G_HL = "ja";
+		$L_G_CX = "yuvabuwpfok";
+		break;
 	case "ne_NP":
 		$L_G_EXT = "com.np";
 		$L_G_SA = "खोज";
@@ -99,7 +103,7 @@ switch(L_LANG)
 		break;
 	case "ro_RO":
 		$L_G_EXT = "ro";
-		$L_G_SA = "Căutare";
+#		$L_G_SA = "Căutare";
 		$L_G_SA = "C&#x0103;utare";
 		$L_G_HL = "ro";
 		$L_G_CX = "cd8a0m-8lw3";
@@ -134,8 +138,6 @@ switch(L_LANG)
 		break;
 	default:
 		$L_G_EXT = "com";
-		$L_G_SA = "Search";
-		$L_G_HL = "en";
 		$L_G_CX = "v5m0ds-vk8w";
 		break;
 }

@@ -1,6 +1,6 @@
 <?php
 
-if ($Ver != "H" || eregi("firefox", $_SERVER['HTTP_USER_AGENT']))
+if ($Ver != "H")
 {
 	$O = 1 - $O;
 	setcookie("CookieMsgOrder", $O, time() + 60*60*24*365);		// cookie expires in one year
