@@ -1131,8 +1131,8 @@ if (file_exists("./localization/".$L."/localized.cmds.php"))
 	(L_CMD_BOT != "" && L_CMD_BOT != "L_CMD_BOT" ? str_replace(",","|",L_CMD_BOT)."|" : "").
 	(L_CMD_LTR != "" && L_CMD_LTR != "L_CMD_LTR" ? str_replace(",","|",L_CMD_LTR)."|" : "").
 	(L_CMD_RTL != "" && L_CMD_RTL != "L_CMD_RTL" ? str_replace(",","|",L_CMD_RTL)."|" : "").
-	(L_CMD_DICE != "" && L_CMD_DICE != "L_CMD_DICE" ? str_replace(",","|",L_CMD_DICE)."|" : "");
-	(L_CMD_VIDEO != "" && L_CMD_VIDEO != "L_CMD_VIDEO" ? str_replace(","," .+|",L_CMD_VIDEO)." .+|" : "");
+	(L_CMD_DICE != "" && L_CMD_DICE != "L_CMD_DICE" ? str_replace(",","|",L_CMD_DICE)."|" : "").
+	(L_CMD_VIDEO != "" && L_CMD_VIDEO != "L_CMD_VIDEO" ? str_replace(","," .+|",L_CMD_VIDEO)." .+|" : "").
 	(L_CMD_UTUBE != "" && L_CMD_UTUBE != "L_CMD_UTUBE" ? str_replace(","," .+|",L_CMD_UTUBE)." .+|" : "");
 	if ($TrsCmds != "") $TrsCmds = rtrim("|".$TrsCmds,"|");
 }
