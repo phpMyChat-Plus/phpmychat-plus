@@ -34,6 +34,7 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 19.04.2010 - 1.94-beta2:
+- provided Privacy policy updated; (privacy related)
 - some important changes in the video posting approach; (functionality extension)
 - changed the /mr command approach to allow the title position to be displayed correctly in any language - after/before names; (formating related)
 - changed the /topic command to accept "one word" topics, due to the Japanese requirements; also the reset was changed to "/topic reset" or "/topic * reset" only (before it needed 2 words "/topic top reset") - (functionality related)
