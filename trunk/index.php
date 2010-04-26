@@ -67,14 +67,16 @@ if (isset($_COOKIE))
 	if (isset($_COOKIE["CookieRoomType"])) $CookieRoomType = $_COOKIE["CookieRoomType"];
 	if (isset($_COOKIE["CookieColor"])) $CookieColor = $_COOKIE["CookieColor"];
 	if (isset($_COOKIE["CookieStatus"])) $CookieStatus = $_COOKIE["CookieStatus"];
+	if (isset($_COOKIE["CookieHash"])) $RemMe = $_COOKIE["CookieHash"];
 };
 $Username = (isset($CookieUsername) ? $CookieUsername : "");
 $Room_name = (isset($CookieRoom) ? $CookieRoom : "");
 $Room_type = (isset($CookieRoomType) ? $CookieRoomType : "");
 $Color = (isset($CookieColor) ? $CookieColor : "");
 $Status = (isset($CookieStatus) ? $CookieStatus : "");
+$RemMe = (isset($RemMe) ? $RemMe : "");
 
-layout($Is_Error,$Username,$Room_name,$Room_type,$Color,$Status);
+layout($Is_Error,$Username,$Room_name,$Room_type,$Color,$Status,$RemMe);
 
 // You can add php code here, or add html statements before the "</BODY>" tag.
 if ($S)

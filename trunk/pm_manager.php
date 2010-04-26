@@ -113,15 +113,19 @@ if($DbLink->num_rows() > 0)
 		$Message = stripslashes($Message);
 		if ($Type) $Type = L_SET_10; else $Type = L_SET_11;
 		$RF = ($RF != "" ? $RF : $Room)." (".$Type.")";
+		$Message = stripslashes($Message);
+		$Message = str_replace("L_PRIV_PM",L_PRIV_PM,$Message);
+		$Message = str_replace("L_PRIV_WISP",L_PRIV_WISP,$Message);
+		$Message = str_replace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"".L_HELP_BUZZ1."\" title=\"".L_HELP_BUZZ1."\">",$Message);
+		if ($Align == "right") $Message = str_replace("arrowr","arrowl",$Message);
+		if ($Room == '*' || ($User == "SYS room" && $Dest == '*') || $User == "SYS announce") $Room = L_ROOM_ALL;
 		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
 		{
-			$Message = eregi_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$Message);
+			$Message = str_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$Message);
 		}
-		else $Message = eregi_replace('target="_blank">','title="'.sprintf(L_CLICK,L_LINKS_3).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_LINKS_3).'.\'; return true" target="_blank">',$Message);
+		else $Message = str_replace('target="_blank">','title="'.sprintf(L_CLICK,L_LINKS_3).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_LINKS_3).'.\'; return true" target="_blank">',$Message);
 
-		$Message = eregi_replace('alt="Send email">','title="'.sprintf(L_CLICK,L_EMAIL_1).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_EMAIL_1).'.\'; return true">',$Message);
-		$Message = eregi_replace("\(private\) ","",$Message);
-		$Message = eregi_replace("\(whisper\) ","",$Message);
+		$Message = str_replace('alt="Send email">','title="'.sprintf(L_CLICK,L_EMAIL_1).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_EMAIL_1).'.\'; return true">',$Message);
 		if(COLOR_NAMES)
 		{
 			$colorname_tag = "";

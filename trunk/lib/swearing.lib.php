@@ -155,7 +155,7 @@ function checkwords($String, $TestOnly, $Charset)
 				"h00r",
 				"h0ar",
 				"h0re",
-				"^hit",
+#				"^hit",
 				"hells",
 				"hoar",
 #				"hoor",

@@ -12,6 +12,7 @@ else
 
 // Added for Skin mod
 if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
+if (isset($_COOKIE["CookieHash"])) $RemMe = $_COOKIE["CookieHash"];
 require("./config/config.lib.php");
 
 $DbLink4Login = new DB;
@@ -24,7 +25,7 @@ if ((isset($pmc_username) && $pmc_username != "") && (isset($pmc_password) && $p
 	if ($DbLink4Login->num_rows() != 0)
 	{
 		list($PWD_Hash, $perms) = $DbLink4Login->next_record();
-		if ($PWD_Hash == md5($pmc_password) || $PWD_Hash == $pmc_password)
+		if ($PWD_Hash == md5(stripslashes($pmc_password)) || $PWD_Hash == $pmc_password)
 		{
 			// Ensure the one who lauch the admin.php script is really admin
 			if (isset($MUST_BE_ADMIN) && $perms != "admin")
@@ -78,7 +79,7 @@ if (isset($login_form))
 	if (!isset($Error)) $Error = L_ERR_USR_10;
 	unset($pmc_password);
 	unset($pmc_username);
-					$LIMIT = 0;
+	$LIMIT = 0;
 }
 
 // If this script is lauch by a profile command, put focus to the password field
@@ -105,8 +106,12 @@ function get_focus()
 	// Open popups for registration stuff
 	function reg_popup(name)
 	{
+	if (name == "register") var u_name = "&U=";
+	else var u_name = "&pmc_username=";
+	if (name == "admin") var link = "&Link=1";
+	else var link = "";
 		window.focus();
-		url = "<?php echo($ChatPath); ?>" + name + ".php?L=<?php echo($L); ?>&Link=1";
+		url = '<?php echo("${ChatPath}"); ?>' + name + '<?php echo(".php?L=$L"); ?>' + u_name + '<?php echo(urlencode(stripslashes($pmc_username))."&LIMIT=1"); ?>' + link;
 		pop_width = 450;
 		pop_height = 260;
 		param = "width=" + pop_width + ",height=" + pop_height + ",resizable=yes,scrollbars=yes";
@@ -152,7 +157,7 @@ $CellAlign = ($Align == "right" ? "RIGHT" : "LEFT");
 		<TR>
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_1); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="password" NAME="pmc_password" SIZE=11 MAXLENGTH=16 VALUE="<?php if (isset($pmc_password)) echo(htmlspecialchars(stripslashes($pmc_password))); ?>">
+				<INPUT TYPE="password" NAME="pmc_password" SIZE=11 MAXLENGTH=16 VALUE="<?php echo($RemMe ? $RemMe : ((isset($pmc_password)) ? htmlspecialchars(stripslashes($pmc_password)) : "")); ?>">
 				</TD>
 		</TR>
 		<TR>

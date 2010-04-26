@@ -110,7 +110,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 	if (!isset($Error) || $Error == "")
 	{
 		$Latin1 = ($Charset != "utf-8");
-		$PWD_Hash = md5(stripslashes($prev_PASSWORD));
+		$PWD_Hash = ($pmc_password == $prev_PASSWORD || md5(stripslashes($pmc_password)) == $prev_PASSWORD) ? $prev_PASSWORD : md5(stripslashes($prev_PASSWORD));
 		if (!isset($GENDER) || $GENDER == "") $GENDER = 0;
 		$showemail = (isset($SHOWEMAIL) && $SHOWEMAIL)? 1:0;
 		$allowpopup = (isset($ALLOWPOPUP) && $ALLOWPOPUP)? 1:0;
@@ -285,7 +285,11 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
   };
 // End of patch to send an email to the User and/or admin after registration.
 		if ($pmc_username != $U) $pmc_username = $U;
-		if ($pmc_password != $prev_PASSWORD) $pmc_password = $prev_PASSWORD;
+		if ($pmc_password != $prev_PASSWORD)
+		{
+			$pmc_password = $prev_PASSWORD;
+			setcookie("CookieHash", '', time());        // cookie expires now
+		}
 		$Message = L_REG_17;
 	}
 }
