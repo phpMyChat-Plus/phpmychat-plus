@@ -85,6 +85,9 @@ if (isset($_POST))
 if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
 if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) exit();
 if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
+if (isset($_COOKIE["CookieHash"])) $RemMe = $_COOKIE["CookieHash"];
+else unset($RemMe);
+if (isset($RemMe) && isset($_COOKIE["CookieUsername"]) && $_COOKIE["CookieUsername"] != urlencode(stripslashes($U))) unset($RemMe);
 
 require("./${ChatPath}config/config.lib.php");
 require("./${ChatPath}lib/release.lib.php");
@@ -267,7 +270,7 @@ if (isset($Reload))
 		$DbLink->query("SELECT password FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 		list($user_password) = $DbLink->next_record();
 		$DbLink->clean_results();
-		if (!empty($user_password) && (empty($PWD_Hash) || $PWD_Hash != $user_password))
+		if (!empty($user_password) &&  $RemMe != $user_password && (empty($PWD_Hash) || $PWD_Hash != $user_password))
 			$isHacking = true;
 		unset($user_password);
 	}
@@ -284,6 +287,8 @@ if (isset($Reload))
 		if (isset($R2)) unset($R2);
 		if (isset($R3)) unset($R3);
 		if (isset($E)) unset($E);
+		if (isset($RemMe)) unset($RemMe);
+		if (isset($RM)) unset($RM);
 		$Error = L_ERR_USR_10;
 	}
 }
@@ -352,7 +357,6 @@ if(isset($U) && (isset($N) && $N != ""))
 	$DbLink->optimize(C_STS_TBL);
 }
 
-
 //**	Ensures the nick is a valid one except if the frameset is reloaded because of the
 //		NN4+ resize bug or because the user runs a join command.	**
 if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
@@ -379,7 +383,7 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 		$DbLink->query("SELECT room FROM ".C_USR_TBL." WHERE username='$U' LIMIT 1");
 		$Nb = $DbLink->num_rows();
 		// If the same nick is already in use and the user is not registered deny access
-		if($Nb != 0 && $pmc_password == "" && !isset($PWD_Hash))
+		if($Nb != 0 && $pmc_password == "" && $RemMe != $pmc_password && !isset($PWD_Hash))
 		{
 			$Error = L_ERR_USR_1;
 			$DbLink->clean_results();
@@ -405,7 +409,7 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 					}
 					else
 					{
-						if (md5(stripslashes($pmc_password)) != $user_password && (!isset($PWD_Hash) || $PWD_Hash != $user_password)) $Error = L_ERR_USR_4;
+						if (md5(stripslashes($pmc_password)) != $user_password && $RemMe != $user_password && (!isset($PWD_Hash) || $PWD_Hash != $user_password)) $Error = L_ERR_USR_4;
 					}
 					if (!isset($Error))
 					{
@@ -416,12 +420,24 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 							$DbLink->query("UPDATE ".C_REG_TBL." SET reg_time=".time().", last_login=".time().", login_counter=".$login_counter." WHERE username='$U'");
 						}
 						else $DbLink->query("UPDATE ".C_REG_TBL." SET reg_time=".time()." WHERE username='$U'");
+						if(isset($remember) && $pmc_password != $user_password && $RemMe != md5(stripslashes($pmc_password)) && $pmc_password != "")
+						{
+							setcookie("CookieHash", md5(stripslashes($pmc_password)), time() + 60*60*24*365);	// cookie expires in one year
+						}
+						elseif(!isset($remember) && !isset($RM))
+						{
+							setcookie("CookieHash", '', time());        // cookie expires now
+						}
 					}
 				}
 				// If users isn't a registered one and phpMyChat require registration deny access
 				else if (C_REQUIRE_REGISTER)
 				{
 					$Error = L_ERR_USR_14;
+				}
+				elseif(isset($remember))
+				{
+					setcookie("CookieHash", '', time());        // cookie expires now
 				}
 			}
 
@@ -727,8 +743,8 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	if (!isset($O)) $O = isset($CookieMsgOrder) ? $CookieMsgOrder : C_MSG_ORDER;
 	if (!isset($ST)) $ST = isset($CookieShowTimestamp) ? $CookieShowTimestamp : C_SHOW_TIMESTAMP;
 	if (!isset($NT)) $NT = isset($CookieNotify) ? $CookieNotify : C_NOTIFY;
-	if (!isset($PWD_Hash)) $PWD_Hash = (isset($reguser) && $reguser ?  md5(stripslashes($pmc_password)) : "");
 	if (!isset($sort_order)) $sort_order = isset($CookieUserSort) ? $CookieUserSort : C_USERS_SORT_ORD;
+	if (!isset($PWD_Hash)) $PWD_Hash = (isset($reguser) && $reguser ? (isset($RemMe) ? $RemMe : md5(stripslashes($pmc_password))) : "");
 
 	// Define the user status to be put in the users table if necessary. Skipped when the
 	// frameset is reloaded because of the NN4+ resize bug.
@@ -1222,8 +1238,8 @@ function send_headers($title, $icon)
 	?>
 	<!--
 	The lines below are usefull for debugging purpose, please do not remove them!
-	Release: phpMyChat-Plus 1.93-f1
-	© 2005-2009 Ciprian Murariu (ciprianmp@yahoo.com)
+	Release: phpMyChat-Plus 1.94-b3
+	© 2005-2010 Ciprian Murariu (ciprianmp@yahoo.com)
 	Based on phpMyChat 0.14.6-dev (also called 0.15.0)
 	© 2000-2005 The phpHeaven Team (http://www.phpheaven.net/)
 	-->
@@ -1250,8 +1266,8 @@ function send_headers($title, $icon)
 		var IE4 = ((document.all) && (parseInt(navigator.appVersion)>=4)) ? 1 : 0;
 		var ver4 = (NS4 || IE4) ? "H" : "L";
 	<?php
-}
-?>
+	}
+	?>
 
 	// Will update the "Ver" field in the form below according to the javascript abilities of
 	// the browser the users surf with
@@ -1327,10 +1343,14 @@ function isCookieEnabled() {
 	}
 
 	// Open popups for registration stuff
-	function reg_popup(name)
+	function reg_popup(name,uname)
 	{
+		if (name == "register") var u_name = "&U=";
+		else var u_name = "&pmc_username=";
+		if (name == "admin") var link = "&Link=1";
+		else var link = "";
 		window.focus();
-		url = "<?php echo($ChatPath); ?>" + name + ".php?L=<?php echo($L); ?>&Link=1";
+		url = '<?php echo("${ChatPath}"); ?>' + name + '<?php echo(".php?L=$L"); ?>' + u_name + uname + link;
 		pop_width = (name != 'admin'? 450:820);
 		pop_height = ((name != 'deluser' && name != 'pass_reset') ? (name != 'admin'? 640:550):260);
 		param = "width=" + pop_width + ",height=" + pop_height + ",resizable=yes,scrollbars=yes";
@@ -1395,7 +1415,7 @@ function isCookieEnabled() {
     	messages colors in the chat/input.php script - Color Input Box mod by Ciprian.
    ---------------------------------------------------------------------------------- */
 
-function layout($Err, $U, $R, $T, $C, $status)
+function layout($Err, $U, $R, $T, $C, $status, $RemMe)
 {
 	global $DbLink;
 	global $ChatPath, $From, $Action, $L, $RES, $Ver;
@@ -1599,15 +1619,16 @@ if(isset($Error))
 		<TR CLASS="ChatCell">
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_SET_2); ?> :</TD>
 			<TD VALIGN="TOP" CLASS="ChatCell">
-				<INPUT TYPE="text" NAME="U" SIZE=11 MAXLENGTH=15 VALUE="<?php echo(htmlspecialchars(urldecode($U))); ?>" CLASS="ChatBox">
+				<INPUT TYPE="text" NAME="U" SIZE=11 MAXLENGTH=15 VALUE="<?php echo(htmlspecialchars(stripslashes($U))); ?>" CLASS="ChatBox">
 			</TD>
 		</TR>
 		<TR CLASS="ChatCell">
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_REG_1); ?> :</TD>
 			<TD VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP">
-				<INPUT TYPE="password" NAME="pmc_password" SIZE=11 MAXLENGTH=16 CLASS="ChatBox">
+				<INPUT TYPE="password" NAME="pmc_password" SIZE=11 MAXLENGTH=16 VALUE="<?php echo($RemMe ? $RemMe : ""); ?>" CLASS="ChatBox">
+				<INPUT TYPE="checkbox" NAME="remember" alt="<?php echo(L_SET_19); ?>" title="<?php echo(L_SET_19); ?>"<?php echo($RemMe ? "checked" : "")?>>
 				<?php if (!C_REQUIRE_REGISTER) echo("&nbsp;(<U>".L_REG_7."</U>)"); ?>
-				<br /><A HREF="<?php echo($ChatPath); ?>pass_reset.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('pass_reset'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_PASS_7); ?>.'; return true;" title="<?php echo(L_PASS_7); ?>"><?php echo(L_PASS_7); ?></A>
+				<br /><A HREF="<?php echo($ChatPath); ?>pass_reset.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('pass_reset','<?php echo(urlencode(stripslashes($U))); ?>'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_PASS_7); ?>.'; return true;" title="<?php echo(L_PASS_7); ?>"><?php echo(L_PASS_7); ?></A>
 			</TD>
 		</TR>
 		<TR CLASS="ChatCell">
@@ -1627,7 +1648,7 @@ if(isset($Error))
 				if (C_ALLOW_REGISTER)
 				{ ?>
 				<br />
-					<A HREF="<?php echo($ChatPath); ?>register.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('register'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_3); ?>.'; return true;" title="<?php echo(L_REG_3); ?>"><?php echo(L_REG_3); ?></A>
+					<A HREF="<?php echo($ChatPath); ?>register.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('register','<?php echo(urlencode(stripslashes($U))); ?>'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_3); ?>.'; return true;" title="<?php echo(L_REG_3); ?>"><?php echo(L_REG_3); ?></A>
 					|
 				<?php
 				}
@@ -1641,18 +1662,18 @@ if(isset($Error))
 				<?php
 				}
 				?>
-				<A HREF="<?php echo($ChatPath); ?>edituser.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('edituser'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_4); ?>.'; return true;" title="<?php echo(L_REG_4); ?>"><?php echo(L_REG_4); ?></A>
+				<A HREF="<?php echo($ChatPath); ?>edituser.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('edituser','<?php echo(urlencode(stripslashes($U))); ?>'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_4); ?>.'; return true;" title="<?php echo(L_REG_4); ?>"><?php echo(L_REG_4); ?></A>
 				<?php
 				if (C_SHOW_DEL_PROF != 0)
 				{
 					?>
-					| <A HREF="<?php echo($ChatPath); ?>deluser.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('deluser'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_5); ?>.'; return true;" title="<?php echo(L_REG_5); ?>"><?php echo(L_REG_5); ?></A>
+					| <A HREF="<?php echo($ChatPath); ?>deluser.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('deluser','<?php echo(urlencode(stripslashes($U))); ?>'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_5); ?>.'; return true;" title="<?php echo(L_REG_5); ?>"><?php echo(L_REG_5); ?></A>
 					<?php
 				}
 				if (C_SHOW_ADMIN != 0)
 				{
 					?>
-					| <A HREF="<?php echo($ChatPath); ?>admin.php?L=<?php echo($L); ?>&Link=1" CLASS="ChatReg" onClick="reg_popup('admin'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_35); ?>.'; return true;" title="<?php echo(L_REG_35); ?>"><?php echo(L_REG_35); ?></A>
+					| <A HREF="<?php echo($ChatPath); ?>admin.php?L=<?php echo($L); ?>&Link=1" CLASS="ChatReg" onClick="reg_popup('admin','<?php echo(urlencode(stripslashes($U))); ?>'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_35); ?>.'; return true;" title="<?php echo(L_REG_35); ?>"><?php echo(L_REG_35); ?></A>
 					<?php
 				}
 				?>

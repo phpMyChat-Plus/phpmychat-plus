@@ -148,7 +148,7 @@ if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGE
 	<?php
 }
 ?>
-<a href="<?php echo("$From?Ver=$Ver&L=$L&U=".urlencode(stripslashes($U))."&E=".urlencode(stripslashes($R))."&EN=$T"); ?>" onClick="close_popups();" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image4','','localization/<?php echo ($L); ?>/images/exitdoorRoll.gif',1); window.status='<?php echo(L_EXIT); ?>.'; return true;" title="<?php echo(L_EXIT); ?>" target="_parent"><img name="Image4" border="0" alt="<?php echo(L_EXIT); ?>" src="localization/<?php echo ($L); ?>/images/exitdoor.gif"></a>
+<a href="<?php echo("$From?Ver=$Ver&L=$L&U=".stripslashes($U)."&E=".urlencode(stripslashes($R))."&EN=$T"); ?>" onClick="close_popups();" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image4','','localization/<?php echo ($L); ?>/images/exitdoorRoll.gif',1); window.status='<?php echo(L_EXIT); ?>.'; return true;" title="<?php echo(L_EXIT); ?>" target="_parent"><img name="Image4" border="0" alt="<?php echo(L_EXIT); ?>" src="localization/<?php echo ($L); ?>/images/exitdoor.gif"></a>
 <?php
 }
 else
@@ -164,7 +164,7 @@ if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGE
 	<?php
 }
 ?>
-	<A HREF="<?php echo("$From?Ver=$Ver&L=$L&U=".urlencode(stripslashes($U))."&E=".urlencode(stripslashes($R))."&EN=$T"); ?>"  title="<?php echo(L_EXIT); ?>" onMouseOver="window.status='<?php echo(L_EXIT); ?>.'; return true;" title="<?php echo(L_EXIT); ?>" TARGET="_parent"><?php echo(L_EXIT); ?></A>
+	<A HREF="<?php echo("$From?Ver=$Ver&L=$L&U=".stripslashes($U)."&E=".urlencode(stripslashes($R))."&EN=$T"); ?>"  title="<?php echo(L_EXIT); ?>" onMouseOver="window.status='<?php echo(L_EXIT); ?>.'; return true;" title="<?php echo(L_EXIT); ?>" TARGET="_parent"><?php echo(L_EXIT); ?></A>
 <?php
 }
 ?>

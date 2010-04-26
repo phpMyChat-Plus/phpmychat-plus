@@ -176,7 +176,7 @@ if ($done)
 	if (!C_EMAIL_PASWD)
 	{
 		?>
-	windowHandle.document.forms['Params'].elements['pmc_password'].value = "<?php echo($pmc_password); ?>";
+		windowHandle.document.forms['Params'].elements['pmc_password'].value = "<?php echo($pmc_password); ?>";
 		<?php
 	}
 };
@@ -186,7 +186,7 @@ if ($done)
 // Put focus to the username field of the form at the starter page
 function get_focus()
 {
-	var username = "<?php echo($U); ?>";
+	var username = "<?php echo(urldecode(stripslashes($pmc_username))); ?>";
 	window.focus();
 	if (username != "")
 	{
@@ -194,9 +194,9 @@ function get_focus()
 		document.forms['PassParams'].elements['EMAIL'].focus();
 	}
 	else
-		{
-			document.forms['PassParams'].elements['U'].focus();
-		}
+	{
+		document.forms['PassParams'].elements['U'].focus();
+	}
 }
 // -->
 </SCRIPT>
@@ -228,7 +228,7 @@ if(isset($Error))
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_SET_2); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="U" SIZE=25 MAXLENGTH=15 VALUE="<?php if (isset($U)) echo(htmlspecialchars(stripslashes($U))); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<INPUT TYPE="text" NAME="U" SIZE=25 MAXLENGTH=15 VALUE="<?php echo(isset($pmc_username) ? urlencode(stripslashes($pmc_username)) : $U); ?>"<?php if ($done) echo(" READONLY"); ?>>
 				<?php if (!$done) { ?><SPAN CLASS=error>*</SPAN><?php }; ?>
 			</TD>
 		</TR>

@@ -33,6 +33,8 @@ On some pcs a restart might be necessary.
 We also added a small IE fixing script (reg file) as a link in Extra Options in chat.
 
 Fixes History:
+25.04.2010 - 1.94-beta3:
+- added the Remember me checkbox to remember login data; (privacy & login related)
 19.04.2010 - 1.94-beta2:
 - provided Privacy policy updated; (privacy related)
 - some important changes in the video posting approach; (functionality extension)

@@ -332,7 +332,7 @@ class EmbeVi{
      */
     $this->objectAttr = array(
       'classid' => 'clsid:D27CDB6E-AE6D-11cf-96B8-444553540000',
-      'codebase' => 'http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0',
+      'codebase' => 'http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0',
       'type' => 'application/x-shockwave-flash',
       'width' => $this->embeviWidth,
       'height' => $this->embeviHeight,
@@ -2028,6 +2028,16 @@ class EmbeVi{
       'src' => 'http://flvr.pandora.tv/flv2pan/flvmovie.dll/userid=~to_replace1~&amp;prgid=~to_replace2~&amp;skin=1&countryChk=en',
       'matchExpr' => 'channel\\.pandora\\.tv\\/channel\\/(?:.*)?ch_userid=([a-z0-9_]+)(?:.*)?prgid=([a-z0-9_]+)',
     ),
+    array(
+      'provider' => array('http://www.upload-fest.ru/'),
+      'providerName' => 'upload-fest',
+      'providerIcon' => 'none',
+      'info' => 'upload-fest.ru video',
+      'width' => 342,
+      'height' => 279,
+      'src' => 'http://www.upload-fest.ru/player1.swf?w=~to_replace1~~to_replace2~',
+      'matchExpr' => 'upload-fest\\.ru\\/([a-z])(?:.*)?w=([a-z0-9_=]+)',
+    ),
   );
 
   /**
@@ -2314,7 +2324,7 @@ class EmbeVi{
       'matchExpr' => 'id=([a-z0-9_\-=:]+)',
     ),
     array(
-      'provider' => array('http://http://www.wat.tv/'),
+      'provider' => array('http://www.wat.tv/'),
       'providerName' => 'wat',
       'info' => 'wat.tv video',
       'width' => 470,

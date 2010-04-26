@@ -13,6 +13,7 @@ if (isset($L) && !is_dir("./localization/".$L)) exit();
 if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 if (isset($_COOKIE["CookieStatus"])) $statusu = $_COOKIE["CookieStatus"];
+if (isset($_COOKIE["CookieHash"])) $RemMe = $_COOKIE["CookieHash"];
 
 // Sort order by Ciprian
 if (!isset($sort_order)) $sort_order = isset($_COOKIE["CookieUserSort"]) ? $_COOKIE["CookieUserSort"] : C_USERS_SORT_ORD;
@@ -92,12 +93,12 @@ function GetY()
 	// Open popups from users frame
 	function reg_popup(name)
 	{
-	if (name == "register") var u_name = "U";
-	else var u_name = "pmc_username";
+	if (name == "register") var u_name = "&U=";
+	else var u_name = "&pmc_username=";
 	if (name == "admin") var link = "&Link=1";
 	else var link = "";
 		window.focus();
-		url = '<?php echo("./${ChatPath}"); ?>' + name + '<?php echo(".php?L=$L&"); ?>' + u_name + '<?php echo("=$U&LIMIT=1"); ?>' + link;
+		url = '<?php echo("${ChatPath}"); ?>' + name + '<?php echo(".php?L=$L"); ?>' + u_name + '<?php echo(urlencode(stripslashes($U))."&LIMIT=1"); ?>' + link;
 		pop_width = ((name != 'admin' && name != 'pm_manager') ? 450:820);
 		pop_height = ((name != 'deluser' && name != 'pass_reset') ? ((name != 'admin' && name != 'pm_manager') ? 640:550):260);
 		param = "width=" + pop_width + ",height=" + pop_height + ",resizable=yes,scrollbars=yes";
@@ -558,7 +559,7 @@ if (eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
 			echo("<a href=\"#\" onClick=\"window.parent.expandIt('${id}'); return false\" onMouseOver=\"window.status='".L_EXPCOL."'; return true;\" title=\"".L_EXPCOL."\">");
 			echo("<IMG NAME=\"imEx\" SRC=\"images/closed.gif\" WIDTH=9 HEIGHT=9 BORDER=0 ALT=\"".L_EXPCOL."\"></a>");
 }
-			echo("&nbsp;<a href=\"$From?Ver=H&L=$L&U=".urlencode(stripslashes($U))."$AddPwd2Link&R1=".urlencode($Other)."&T=1&D=$D&N=$N&E=".urlencode(stripslashes($R))."&EN=$T\" TARGET=\"_parent\" onMouseOver=\"window.status='".L_JOIN_ROOM.$tmpDispOtherRes."'; return true;\" title='".L_JOIN_ROOM.$tmpDispOtherRes."'>".htmlspecialchars($tmpDispOther)."</a><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$OthersUsers->num_rows().")</SPAN><br />\n");
+			echo("&nbsp;<a href=\"$From?Ver=H&L=$L&U=".stripslashes($U)."$AddPwd2Link&R1=".urlencode(stripslashes($Other))."&T=1&D=$D&N=$N&E=".urlencode(stripslashes($R))."&EN=$T".(isset($RemMe) ? "&RM=1" : "")."\" TARGET=\"_parent\" onMouseOver=\"window.status='".L_JOIN_ROOM.$tmpDispOtherRes."'; return true;\" title='".L_JOIN_ROOM.$tmpDispOtherRes."'>".htmlspecialchars($tmpDispOther)."</a><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$OthersUsers->num_rows().")</SPAN><br />\n");
 			echo("</DIV>\n");
 			echo("<DIV ID=\"Child${id}\" CLASS=\"child\" style=\"margin-top: 1px;\">\n");
 			$j = 0;
@@ -781,7 +782,7 @@ for($k = 0; $k < count($DefaultChatRooms); $k++)
 		if (!isset($FirstOtherRoom))
 				$FirstOtherRoom = "Parent".$id;
         echo("<DIV ID=\"Parent${id}\" CLASS=\"parent\" style=\"margin-top: 1px;\">");
-        echo("<a href=\"$From?Ver=H&L=$L&U=".urlencode(stripslashes($U))."$AddPwd2Link&R0=".urlencode($tmpRoom)."&T=1&D=$D&N=$N&E=".urlencode(stripslashes($R))."&EN=$T\" TARGET=\"_parent\" onMouseOver=\"window.status='".L_JOIN_ROOM.$tmpDispRes."'; return true;\" title='".L_JOIN_ROOM.$tmpDispRes."'>".htmlspecialchars($tmpDispRoom)."</a><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(0)</SPAN>\n");
+        echo("<a href=\"$From?Ver=H&L=$L&U=".stripslashes($U)."$AddPwd2Link&R0=".urlencode(stripslashes($tmpRoom))."&T=1&D=$D&N=$N&E=".urlencode(stripslashes($R))."&EN=$T".(isset($RemMe) ? "&RM=1" : "")."\" TARGET=\"_parent\" onMouseOver=\"window.status='".L_JOIN_ROOM.$tmpDispRes."'; return true;\" title='".L_JOIN_ROOM.$tmpDispRes."'>".htmlspecialchars($tmpDispRoom)."</a><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(0)</SPAN>\n");
         echo("</DIV>\n");
    }
 }
