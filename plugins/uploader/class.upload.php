@@ -3,8 +3,8 @@
 // | class.upload.php                                                       |
 // +------------------------------------------------------------------------+
 // | Copyright (c) Colin Verot 2003-2009. All rights reserved.              |
-// | Version       0.28                                                     |
-// | Last modified 10/08/2009                                               |
+// | Version       0.29                                                     |
+// | Last modified 03/02/2010                                               |
 // | Email         colin@verot.net                                          |
 // | Web           http://www.verot.net                                     |
 // +------------------------------------------------------------------------+
@@ -31,7 +31,7 @@
 /**
  * Class upload
  *
- * @version   0.28
+ * @version   0.29
  * @author    Colin Verot <colin@verot.net>
  * @license   http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright Colin Verot
@@ -179,14 +179,6 @@
  *  <pre>$handle->file_max_size = '1024'; // 1KB</pre></li>
  *  <li><b>mime_check</b> sets if the class check the MIME against the {@link allowed} list (default: true)<br>
  *  <pre>$handle->mime_check = true;</pre></li>
- *  <li><b>mime_fileinfo</b> activates MIME detection with Fileinfo PECL extension if true (or a string to set the path to the magic database file); false to deactivate (default: true)<br>
- *  <pre>$handle->mime_fileinfo = '/usr/share/file/magic';</pre></li>
- *  <li><b>mime_file</b> activates MIME detection with UNIX file() command if true; false to deactivate (default: true)<br>
- *  <pre>$handle->mime_file = false;</pre></li>
- *  <li><b>mime_magic</b> activates MIME detection with mime_magic (mime_content_type()) if true; false to deactivate (default: true)<br>
- *  <pre>$handle->mime_magic = false;</pre></li>
- *  <li><b>mime_getimagesize</b> activates MIME detection with getimagesize() if true; false to deactivate (default: true)<br>
- *  <pre>$handle->mime_getimagesize = false;</pre></li>
  *  <li><b>no_script</b> sets if the class turns scripts into text files (default: true)<br>
  *  <pre>$handle->no_script = false;</pre></li>
  *  <li><b>allowed</b> array of allowed mime-types. wildcard accepted, as in image/* (default: check {@link Init})<br>
@@ -396,6 +388,15 @@
  *
  * <b>Changelog</b>
  * <ul>
+ *  <li><b>v 0.29</b> 03/02/2010<br>
+ *   - added protection against malicious images<br>
+ *   - added zip and torrent MIME type<br>
+ *   - replaced split() with explode()<br>
+ *   - initialise image_dst_x/y with image_src_x/y<br>
+ *   - removed {@link mime_fileinfo}, {@link mime_file}, {@link mime_magic} and {@link mime_getimagesize} from the docs since they are used before {@link process}<br>
+ *   - added more extensions and MIME types<br>
+ *   - improved MIME type validation<br>
+ *   - improved logging</li>
  *  <li><b>v 0.28</b> 10/08/2009<br>
  *   - replaced ereg functions to be compatible with PHP 5.3<br>
  *   - added flv MIME type<br>
@@ -2043,19 +2044,62 @@ class upload {
         $this->image_frame_colors       = '#FFFFFF #999999 #666666 #000000';
 
         $this->forbidden = array();
-        $this->allowed = array("application/rar",
-                               "application/x-rar-compressed",
-                               "application/arj",
+        $this->allowed = array("application/arj",
                                "application/excel",
                                "application/gnutar",
+                               "application/mspowerpoint",
+                               "application/msword",
                                "application/octet-stream",
+                               "application/onenote",
                                "application/pdf",
-                               "application/powerpoint",
-                               "application/postscript",
                                "application/plain",
+                               "application/postscript",
+                               "application/powerpoint",
+                               "application/rar",
                                "application/rtf",
+                               "application/vnd.ms-excel",
+                               "application/vnd.ms-excel.addin.macroEnabled.12",
+                               "application/vnd.ms-excel.sheet.binary.macroEnabled.12",
+                               "application/vnd.ms-excel.sheet.macroEnabled.12",
+                               "application/vnd.ms-excel.template.macroEnabled.12",
+                               "application/vnd.ms-office",
+                               "application/vnd.ms-officetheme",
+                               "application/vnd.ms-powerpoint",
+                               "application/vnd.ms-powerpoint.addin.macroEnabled.12",
+                               "application/vnd.ms-powerpoint.presentation.macroEnabled.12",
+                               "application/vnd.ms-powerpoint.slide.macroEnabled.12",
+                               "application/vnd.ms-powerpoint.slideshow.macroEnabled.12",
+                               "application/vnd.ms-powerpoint.template.macroEnabled.12",
+                               "application/vnd.ms-word",
+                               "application/vnd.ms-word.document.macroEnabled.12",
+                               "application/vnd.ms-word.template.macroEnabled.12",
+                               "application/vnd.oasis.opendocument.chart",
+                               "application/vnd.oasis.opendocument.database",
+                               "application/vnd.oasis.opendocument.formula",
+                               "application/vnd.oasis.opendocument.graphics",
+                               "application/vnd.oasis.opendocument.graphics-template",
+                               "application/vnd.oasis.opendocument.image",
+                               "application/vnd.oasis.opendocument.presentation",
+                               "application/vnd.oasis.opendocument.presentation-template",
+                               "application/vnd.oasis.opendocument.spreadsheet",
+                               "application/vnd.oasis.opendocument.spreadsheet-template",
+                               "application/vnd.oasis.opendocument.text",
+                               "application/vnd.oasis.opendocument.text-master",
+                               "application/vnd.oasis.opendocument.text-template",
+                               "application/vnd.oasis.opendocument.text-web",
+                               "application/vnd.openofficeorg.extension",
+                               "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+                               "application/vnd.openxmlformats-officedocument.presentationml.slide",
+                               "application/vnd.openxmlformats-officedocument.presentationml.slideshow",
+                               "application/vnd.openxmlformats-officedocument.presentationml.template",
+                               "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                               "application/vnd.openxmlformats-officedocument.spreadsheetml.template",
+                               "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                               "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                               "application/vnd.openxmlformats-officedocument.wordprocessingml.template",
                                "application/vocaltec-media-file",
                                "application/wordperfect",
+                               "application/x-bittorrent",
                                "application/x-bzip",
                                "application/x-bzip2",
                                "application/x-compressed",
@@ -2063,47 +2107,25 @@ class upload {
                                "application/x-gzip",
                                "application/x-latex",
                                "application/x-midi",
+                               "application/xml",
                                "application/x-msexcel",
+                               "application/x-rar-compressed",
                                "application/x-rtf",
+                               "application/x-shockwave-flash",
                                "application/x-sit",
                                "application/x-stuffit",
-                               "application/x-shockwave-flash",
                                "application/x-troff-msvideo",
+                               "application/x-zip",
                                "application/x-zip-compressed",
-							   "application/x-zip",
-                               "application/xml",
                                "application/zip",
-                               "application/msword",
-                               "application/mspowerpoint",
-                               "application/vnd.ms-excel",
-                               "application/vnd.ms-powerpoint",
-                               "application/vnd.ms-word",
-                               "application/vnd.ms-word.document.macroEnabled.12",
-                               "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                               "application/vnd.ms-word.template.macroEnabled.12",
-                               "application/vnd.openxmlformats-officedocument.wordprocessingml.template",
-                               "application/vnd.ms-powerpoint.template.macroEnabled.12",
-                               "application/vnd.openxmlformats-officedocument.presentationml.template",
-                               "application/vnd.ms-powerpoint.addin.macroEnabled.12",
-                               "application/vnd.ms-powerpoint.slideshow.macroEnabled.12",
-                               "application/vnd.openxmlformats-officedocument.presentationml.slideshow",
-                               "application/vnd.ms-powerpoint.presentation.macroEnabled.12",
-                               "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-                               "application/vnd.ms-excel.addin.macroEnabled.12",
-                               "application/vnd.ms-excel.sheet.binary.macroEnabled.12",
-                               "application/vnd.ms-excel.sheet.macroEnabled.12",
-                               "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                               "application/vnd.ms-excel.template.macroEnabled.12",
-                               "application/vnd.openxmlformats-officedocument.spreadsheetml.template",
                                "audio/*",
                                "image/*",
-                               "video/*",
-                               "multipart/x-zip",
                                "multipart/x-gzip",
-                               "text/richtext",
+                               "multipart/x-zip",
                                "text/plain",
-                               "text/xml");
-
+                               "text/richtext",
+                               "text/xml",
+                               "video/*");
     }
 
     /**
@@ -2132,7 +2154,7 @@ class upload {
      */
     function upload($file, $lang = 'en_GB') {
 
-        $this->version            = '0.28';
+        $this->version            = '0.29';
 
         $this->file_src_name      = '';
         $this->file_src_name_body = '';
@@ -2174,8 +2196,8 @@ class upload {
         $this->translation['file_error']                  = 'File error. Please try again.';
         $this->translation['local_file_missing']          = 'Local file doesn\'t exist.';
         $this->translation['local_file_not_readable']     = 'Local file is not readable.';
-	    $this->translation['uploaded_too_big_ini']        = 'File upload error (the uploaded file exceeds %s - the upload_max_filesize server directive set in php.ini).';
-	    $this->translation['uploaded_too_big_html']       = 'File upload error (the uploaded file exceeds %s - the MAX_FILE_SIZE limit specified in the upload form).';
+		$this->translation['uploaded_too_big_ini']        = 'File upload error (the uploaded file exceeds %s - the upload_max_filesize server directive set in php.ini).';
+		$this->translation['uploaded_too_big_html']       = 'File upload error (the uploaded file exceeds %s - the MAX_FILE_SIZE limit specified in the upload form).';
         $this->translation['uploaded_partial']            = 'File upload error (the uploaded file was only partially uploaded).';
         $this->translation['uploaded_missing']            = 'File upload error (no file was uploaded).';
         $this->translation['uploaded_no_tmp_dir']         = 'File upload error (missing a temporary folder).';
@@ -2219,9 +2241,9 @@ class upload {
 
         // determines the language
         $this->lang               = $lang;
-        if ($this->lang != 'en_GB' && file_exists('plugins/uploader/lang/class.upload.' . $lang . '.php')) {
+        if ($this->lang != 'en_GB' && file_exists(dirname(__FILE__).'/lang') && file_exists(dirname(__FILE__).'/lang/class.upload.' . $lang . '.php')) {
             $translation = null;
-            include('plugins/uploader/lang/class.upload.' . $lang . '.php');
+            include(dirname(__FILE__).'/lang/class.upload.' . $lang . '.php');
             if (is_array($translation)) {
                 $this->translation = array_merge($this->translation, $translation);
             } else {
@@ -2260,6 +2282,8 @@ class upload {
             $gd           = $this->gdversion() ? $this->gdversion(true) : 'GD not present';
             $supported    = trim((in_array('png', $this->image_supported) ? 'png' : '') . ' ' . (in_array('jpg', $this->image_supported) ? 'jpg' : '') . ' ' . (in_array('gif', $this->image_supported) ? 'gif' : '') . ' ' . (in_array('bmp', $this->image_supported) ? 'bmp' : ''));
             $this->log .= '-&nbsp;class version           : ' . $this->version . '<br />';
+            $this->log .= '-&nbsp;operating system        : ' . PHP_OS . '<br />';
+            $this->log .= '-&nbsp;PHP version             : ' . PHP_VERSION . '<br />';
             $this->log .= '-&nbsp;GD version              : ' . $gd . '<br />';
             $this->log .= '-&nbsp;supported image types   : ' . (!empty($supported) ? $supported : 'none') . '<br />';
             $this->log .= '-&nbsp;open_basedir            : ' . (!empty($open_basedir) ? $open_basedir : 'no restriction') . '<br />';
@@ -2296,7 +2320,7 @@ class upload {
                     $this->file_src_name       = basename($file);
                     $this->log .= '- local file name OK<br />';
                     preg_match('/\.([^\.]*$)/', $this->file_src_name, $extension);
-                    if (is_array($extension)) {
+                    if (is_array($extension) && sizeof($extension) > 0) {
                         $this->file_src_name_ext      = strtolower($extension[1]);
                         $this->file_src_name_body     = substr($this->file_src_name, 0, ((strlen($this->file_src_name) - strlen($this->file_src_name_ext)))-1);
                     } else {
@@ -2363,7 +2387,7 @@ class upload {
             if ($this->uploaded) {
                 $this->log .= '- file name OK<br />';
                 preg_match('/\.([^\.]*$)/', $this->file_src_name, $extension);
-                if (is_array($extension)) {
+                if (is_array($extension) && sizeof($extension) > 0) {
                     $this->file_src_name_ext      = strtolower($extension[1]);
                     $this->file_src_name_body     = substr($this->file_src_name, 0, ((strlen($this->file_src_name) - strlen($this->file_src_name_ext)))-1);
                 } else {
@@ -2410,6 +2434,12 @@ class upload {
                             finfo_close($f);
                             $this->file_src_mime = $mime;
                             $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;MIME type detected as ' . $this->file_src_mime . ' by Fileinfo PECL extension<br />';
+                            if (preg_match("/^([\.-\w]+)\/([\.-\w]+)(.*)$/i", $this->file_src_mime)) {
+                                $this->file_src_mime = preg_replace("/^([\.-\w]+)\/([\.-\w]+)(.*)$/i", '$1/$2', $this->file_src_mime);
+                                $this->log .= '-&nbsp;MIME validated as ' . $this->file_src_mime . '<br />';
+                            } else {
+                                $this->file_src_mime = null;
+                            }
                         } else {
                             $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;Fileinfo PECL extension failed (finfo_open)<br />';
                         }
@@ -2418,6 +2448,12 @@ class upload {
                         if ($f) {
                             $this->file_src_mime = $f->file(realpath($this->file_src_pathname));
                             $this->log .= '- MIME type detected as ' . $this->file_src_mime . ' by Fileinfo PECL extension<br />';
+                            if (preg_match("/^([\.-\w]+)\/([\.-\w]+)(.*)$/i", $this->file_src_mime)) {
+                                $this->file_src_mime = preg_replace("/^([\.-\w]+)\/([\.-\w]+)(.*)$/i", '$1/$2', $this->file_src_mime);
+                                $this->log .= '-&nbsp;MIME validated as ' . $this->file_src_mime . '<br />';
+                            } else {
+                                $this->file_src_mime = null;
+                            }
                         } else {
                             $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;Fileinfo PECL extension failed (finfo)<br />';
                         }
@@ -2436,17 +2472,14 @@ class upload {
                     $this->log .= '- Checking MIME type with UNIX file() command<br />';
                     if (substr(PHP_OS, 0, 3) != 'WIN') {
                         if (strlen($mime = @exec("file -bi ".escapeshellarg($this->file_src_pathname))) != 0) {
-                            $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;MIME returned as ' . $mime . '<br />';
-                            if (strpos($mime, ';') !== FALSE) {
-                                $temp = split(';', $mime);
-                                $this->file_src_mime = $temp[0];
-                            } else if (strpos($mime, ' ') !== FALSE) {
-                                $temp = split(' ', $mime);
-                                $this->file_src_mime = $temp[0];
-                            } else {
-                                $this->file_src_mime = trim($mime);
-                            }
+                            $this->file_src_mime = trim($mime);
                             $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;MIME type detected as ' . $this->file_src_mime . ' by UNIX file() command<br />';
+                            if (preg_match("/^([\.-\w]+)\/([\.-\w]+)(.*)$/i", $this->file_src_mime)) {
+                                $this->file_src_mime = preg_replace("/^([\.-\w]+)\/([\.-\w]+)(.*)$/i", '$1/$2', $this->file_src_mime);
+                                $this->log .= '-&nbsp;MIME validated as ' . $this->file_src_mime . '<br />';
+                            } else {
+                                $this->file_src_mime = null;
+                            }
                         } else {
                             $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;UNIX file() command failed<br />';
                         }
@@ -2465,6 +2498,12 @@ class upload {
                     if (function_exists('mime_content_type')) {
                         $this->file_src_mime = mime_content_type($this->file_src_pathname);
                         $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;MIME type detected as ' . $this->file_src_mime . ' by mime_content_type()<br />';
+                        if (preg_match("/^([\.-\w]+)\/([\.-\w]+)(.*)$/i", $this->file_src_mime)) {
+                            $this->file_src_mime = preg_replace("/^([\.-\w]+)\/([\.-\w]+)(.*)$/i", '$1/$2', $this->file_src_mime);
+                            $this->log .= '-&nbsp;MIME validated as ' . $this->file_src_mime . '<br />';
+                        } else {
+                            $this->file_src_mime = null;
+                        }
                     } else {
                         $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;mime_content_type() is not available<br />';
                     }
@@ -2486,6 +2525,12 @@ class upload {
                             $this->file_src_mime = ($mime==IMAGETYPE_GIF ? 'image/gif' : ($mime==IMAGETYPE_JPEG ? 'image/jpeg' : ($mime==IMAGETYPE_PNG ? 'image/png' : ($mime==IMAGETYPE_BMP ? 'image/bmp' : null))));
                         }
                         $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;MIME type detected as ' . $this->file_src_mime . ' by PHP getimagesize() function<br />';
+                        if (preg_match("/^([\.-\w]+)\/([\.-\w]+)(.*)$/i", $this->file_src_mime)) {
+                            $this->file_src_mime = preg_replace("/^([\.-\w]+)\/([\.-\w]+)(.*)$/i", '$1/$2', $this->file_src_mime);
+                            $this->log .= '-&nbsp;MIME validated as ' . $this->file_src_mime . '<br />';
+                        } else {
+                            $this->file_src_mime = null;
+                        }
                     } else {
                         $this->log .= '&nbsp;&nbsp;&nbsp;&nbsp;getimagesize() failed<br />';
                     }
@@ -2498,6 +2543,12 @@ class upload {
             if (!empty($mime_from_browser) && !$this->file_src_mime || !is_string($this->file_src_mime) || empty($this->file_src_mime)) {
                 $this->file_src_mime =$mime_from_browser;
                 $this->log .= '- MIME type detected as ' . $this->file_src_mime . ' by browser<br />';
+                if (preg_match("/^([\.-\w]+)\/([\.-\w]+)(.*)$/i", $this->file_src_mime)) {
+                    $this->file_src_mime = preg_replace("/^([\.-\w]+)\/([\.-\w]+)(.*)$/i", '$1/$2', $this->file_src_mime);
+                    $this->log .= '-&nbsp;MIME validated as ' . $this->file_src_mime . '<br />';
+                } else {
+                    $this->file_src_mime = null;
+                }
             }
 
             // we need to work some magic if we upload via Flash
@@ -2602,6 +2653,117 @@ class upload {
                     case 'swf' :
                         $this->file_src_mime = 'application/x-shockwave-flash';
                         break;
+                    case 'odt':
+                        $this->file_src_mime = 'application/vnd.oasis.opendocument.text';
+                        break;
+                    case 'ott':
+                        $this->file_src_mime = 'application/vnd.oasis.opendocument.text-template';
+                        break;
+                    case 'oth':
+                        $this->file_src_mime = 'application/vnd.oasis.opendocument.text-web';
+                        break;
+                    case 'odm':
+                        $this->file_src_mime = 'application/vnd.oasis.opendocument.text-master';
+                        break;
+                    case 'odg':
+                        $this->file_src_mime = 'application/vnd.oasis.opendocument.graphics';
+                        break;
+                    case 'otg':
+                        $this->file_src_mime = 'application/vnd.oasis.opendocument.graphics-template';
+                        break;
+                    case 'odp':
+                        $this->file_src_mime = 'application/vnd.oasis.opendocument.presentation';
+                        break;
+                    case 'otp':
+                        $this->file_src_mime = 'application/vnd.oasis.opendocument.presentation-template';
+                        break;
+                    case 'ods':
+                        $this->file_src_mime = 'application/vnd.oasis.opendocument.spreadsheet';
+                        break;
+                    case 'ots':
+                        $this->file_src_mime = 'application/vnd.oasis.opendocument.spreadsheet-template';
+                        break;
+                    case 'odc':
+                        $this->file_src_mime = 'application/vnd.oasis.opendocument.chart';
+                        break;
+                    case 'odf':
+                        $this->file_src_mime = 'application/vnd.oasis.opendocument.formula';
+                        break;
+                    case 'odb':
+                        $this->file_src_mime = 'application/vnd.oasis.opendocument.database';
+                        break;
+                    case 'odi':
+                        $this->file_src_mime = 'application/vnd.oasis.opendocument.image';
+                        break;
+                    case 'oxt':
+                        $this->file_src_mime = 'application/vnd.openofficeorg.extension';
+                        break;
+                    case 'docx':
+                        $this->file_src_mime = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+                        break;
+                    case 'docm':
+                        $this->file_src_mime = 'application/vnd.ms-word.document.macroEnabled.12';
+                        break;
+                    case 'dotx':
+                        $this->file_src_mime = 'application/vnd.openxmlformats-officedocument.wordprocessingml.template';
+                        break;
+                    case 'dotm':
+                        $this->file_src_mime = 'application/vnd.ms-word.template.macroEnabled.12';
+                        break;
+                    case 'xlsx':
+                        $this->file_src_mime = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+                        break;
+                    case 'xlsm':
+                        $this->file_src_mime = 'application/vnd.ms-excel.sheet.macroEnabled.12';
+                        break;
+                    case 'xltx':
+                        $this->file_src_mime = 'application/vnd.openxmlformats-officedocument.spreadsheetml.template';
+                        break;
+                    case 'xltm':
+                        $this->file_src_mime = 'application/vnd.ms-excel.template.macroEnabled.12';
+                        break;
+                    case 'xlsb':
+                        $this->file_src_mime = 'application/vnd.ms-excel.sheet.binary.macroEnabled.12';
+                        break;
+                    case 'xlam':
+                        $this->file_src_mime = 'application/vnd.ms-excel.addin.macroEnabled.12';
+                        break;
+                    case 'pptx':
+                        $this->file_src_mime = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
+                        break;
+                    case 'pptm':
+                        $this->file_src_mime = 'application/vnd.ms-powerpoint.presentation.macroEnabled.12';
+                        break;
+                    case 'ppsx':
+                        $this->file_src_mime = 'application/vnd.openxmlformats-officedocument.presentationml.slideshow';
+                        break;
+                    case 'ppsm':
+                        $this->file_src_mime = 'application/vnd.ms-powerpoint.slideshow.macroEnabled.12';
+                        break;
+                    case 'potx':
+                        $this->file_src_mime = 'application/vnd.openxmlformats-officedocument.presentationml.template';
+                        break;
+                    case 'potm':
+                        $this->file_src_mime = 'application/vnd.ms-powerpoint.template.macroEnabled.12';
+                        break;
+                    case 'ppam':
+                        $this->file_src_mime = 'application/vnd.ms-powerpoint.addin.macroEnabled.12';
+                        break;
+                    case 'sldx':
+                        $this->file_src_mime = 'application/vnd.openxmlformats-officedocument.presentationml.slide';
+                        break;
+                    case 'sldm':
+                        $this->file_src_mime = 'application/vnd.ms-powerpoint.slide.macroEnabled.12';
+                        break;
+                    case 'thmx':
+                        $this->file_src_mime = 'application/vnd.ms-officetheme';
+                        break;
+                    case 'onetoc':
+                    case 'onetoc2':
+                    case 'onetmp':
+                    case 'onepkg':
+                        $this->file_src_mime = 'application/onenote';
+                        break;
                 }
                 if ($this->file_src_mime == 'application/octet-stream') {
                     $this->log .= 'doesn\'t look like anything known<br />';
@@ -2620,18 +2782,28 @@ class upload {
                 $this->image_src_type = $this->image_supported[$this->file_src_mime];
             }
 
-		        // if the file is an image, we gather some useful data
-		        if ($this->file_is_image) {
-		            $info = @getimagesize($this->file_src_pathname);
-		            if (is_array($info)) {
-		                $this->image_src_x    = $info[0];
-		                $this->image_src_y    = $info[1];
-		                $this->image_src_pixels = $this->image_src_x * $this->image_src_y;
-		                $this->image_src_bits = array_key_exists('bits', $info) ? $info['bits'] : null;
-		            } else {
-		                $this->log .= '- can\'t retrieve image information. open_basedir restriction in place?<br />';
-		            }
-		        }
+            // if the file is an image, we gather some useful data
+            if ($this->file_is_image) {
+                if ($h = fopen($this->file_src_pathname, 'r')) {
+                    fclose($h);
+                    $info = getimagesize($this->file_src_pathname);
+                    if (is_array($info)) {
+                        $this->image_src_x    = $info[0];
+                        $this->image_src_y    = $info[1];
+                        $this->image_dst_x    = $this->image_src_x;
+                        $this->image_dst_y    = $this->image_src_y;
+                        $this->image_src_pixels = $this->image_src_x * $this->image_src_y;
+                        $this->image_src_bits = array_key_exists('bits', $info) ? $info['bits'] : null;
+                    } else {
+                        $this->file_is_image = false;
+                        $this->uploaded = false;
+                        $this->log .= '- can\'t retrieve image information, image may have been tampered with<br />';
+                        $this->error = $this->translate('incorrect_file');
+                    }
+                } else {
+                    $this->log .= '- can\'t read source file directly. open_basedir restriction in place?<br />';
+                }
+            }
 
             $this->log .= '<b>source variables</b><br />';
             $this->log .= '- You can use all these before calling process()<br />';
