@@ -452,15 +452,6 @@ define("L_RELOAD_CHAT", "サーバの設定が変更されました。新しい�
 //Size command error by Ciprian
 define("L_ERR_SIZE", "フォントサイズの設定は、\\n空白（リセット用）または7から15までの間のみ有効です。");
 
-// Week days for Status Worldtime and Open Schedule by Ciprian
-define("L_MON", "月");
-define("L_TUE", "火");
-define("L_WED", "水");
-define("L_THU", "木");
-define("L_FRI", "金");
-define("L_SAT", "土");
-define("L_SUN", "日");
-
 // Password reset form by Ciprian
 define("L_PASS_0", "パスワードリセットフォーム");
 define("L_PASS_1", "秘密の質問");
@@ -472,6 +463,7 @@ define("L_PASS_6", "秘密の答え");
 define("L_PASS_7", "パスワードのリセット");
 define("L_PASS_8", "パスワードをリセットしました。");
 define("L_PASS_9", "新しいパスワード");
+define("L_PASS_10", "新しいパスワード: %s");
 define("L_PASS_11", "おかえりなさい！");
 define("L_PASS_12", "質問を選んでください...");
 define("L_ERR_PASS_1", "ユーザ名が違います。もう一度お試しください。");
@@ -561,7 +553,10 @@ define("L_DEL_BYE", "待たなくていいです...");
 define("L_EXTRA_PRIV1", "PMを読む");
 define("L_EXTRA_PRIV2", "新しいPM");
 
-// Months for Open Schedule by Ciprian
+// Set the first day of the week in your language (0 for Sunday, 1 for Monday)
+define("FIRST_DAY", "0");
+
+// Months Long Names
 define("L_JAN", "1月");
 define("L_FEB", "2月");
 define("L_MAR", "3月");
@@ -574,16 +569,46 @@ define("L_SEP", "9月");
 define("L_OCT", "10月");
 define("L_NOV", "11月");
 define("L_DEC", "12月");
+// Months Short Names
+define("L_S_JAN", "1月");
+define("L_S_FEB", "2月");
+define("L_S_MAR", "3月");
+define("L_S_APR", "4月");
+define("L_S_MAY", "5月");
+define("L_S_JUN", "6月");
+define("L_S_JUL", "7月");
+define("L_S_AUG", "8月");
+define("L_S_SEP", "9月");
+define("L_S_OCT", "10月");
+define("L_S_NOV", "11月");
+define("L_S_DEC", "12月");
+// Week days Long Names
+define("L_MON", "月");
+define("L_TUE", "火");
+define("L_WED", "水");
+define("L_THU", "木");
+define("L_FRI", "金");
+define("L_SAT", "土");
+define("L_SUN", "日");
+// Week days Short Names
+define("L_S_MON", "月");
+define("L_S_TUE", "火");
+define("L_S_WED", "水");
+define("L_S_THU", "木");
+define("L_S_FRI", "金");
+define("L_S_SAT", "土");
+define("L_S_SUN", "日");
 
 // Localized date format - read the parameters here: http://www.php.net/manual/en/function.strftime.php
-if (eregi("win", PHP_OS)) {
+if (stristr(PHP_OS,'win')) {
 setlocale(LC_ALL, "japanese.UTF-8", "japanese", "ja_JP.UTF-8");
 } else {
 setlocale(LC_ALL, "ja_JP.utf8", "ja_JP.UTF-8", "ja_JP", "ja", "japanese", "jpn");
 }
 define("L_LANG", "ja_JP");
 define("ISO_DEFAULT", "iso-20220-jp");
-define("WIN_DEFAULT", "windows-31j");
+define("WIN_DEFAULT", "Shift_JIS");
+//define("WIN_DEFAULT", "windows-31j");
 define("L_SHORT_DATE", "%Y/%m/%d"); //Change this to your local desired date only format (keep the short form)
 define("L_LONG_DATE", "%Y年%B%d日(%A)"); //Change this to your local desired date only format (keep the long form)
 define("L_SHORT_DATETIME", "%Y/%m/%d %H:%M:%S"); //Change this to your local desired date&time format (keep the short form)
@@ -682,4 +707,11 @@ define("L_ORIG_VIDEO", "オリジナルのサイトを開く"); //Click here to 
 define("L_HELP_CMD_35", "<i>動画</i>や<i>音声ファイル</i>を小さなフラッシュプレイヤーに貼り付けられるようにします。<br />使用法：貼り付けるファイルのURLをペーストするだけです！例：<b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />コンピュータにフラッシュプレイヤーがインストールされている必要があります。URLは大小文字を区別します！<br />ヒント：/videoコマンドに続き、半角スペースを打ってからURLを入力します。");
 define("L_HELP_CMD_35a", "2番目のコマンドは、ビデオファイルに対してyoutube.comの場合にのみ有効です。<br />例：<b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
 define("L_HELP_CMD_36", "小さなフラッシュプレイヤーに<i>youtubeビデオ</i>を貼り付けることができます。<br />使用法：貼り付けるファイルのURLをペーストするだけです！例：<b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />コンピュータにフラッシュプレイヤーがインストールされている必要があります。URLは大小文字を区別します！<br />ヒント：/tubeコマンドに続き、半角スペースを打ってからURLを入力します。");
+
+// Birthday mod - by Ciprian
+define("L_PRO_7", "Date of birth");
+define("L_PRO_8", "show birthday on public info");
+define("L_PRO_9", "show age on public info");
+define("L_PRO_10", "Age");
+define("L_PRO_11", "%d years, %d months and %d days");
 ?>

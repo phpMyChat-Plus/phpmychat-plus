@@ -452,15 +452,6 @@ define("L_RELOAD_CHAT", "A chat szerver beállításait megváltoztatták. A hib
 //Size command error by Ciprian
 define("L_ERR_SIZE", "A betűméret csak\\nnull lehet (visszaállításhoz) vagy pedig 7 és 15 között");
 
-// Week days for Status Worldtime and Open Schedule by Ciprian
-define("L_MON", "hétfő");
-define("L_TUE", "kedd");
-define("L_WED", "szerda");
-define("L_THU", "csütörtök");
-define("L_FRI", "péntek");
-define("L_SAT", "szombat");
-define("L_SUN", "vasárnap");
-
 // Password reset form by Ciprian
 define("L_PASS_0", "Jelszó módosító űrlap");
 define("L_PASS_1", "Titkos kérdés");
@@ -561,7 +552,10 @@ define("L_DEL_BYE", "ne várj rám");
 define("L_EXTRA_PRIV1", "Olvasott PM");
 define("L_EXTRA_PRIV2", "Új PM");
 
-// Months for Open Schedule by Ciprian
+// Set the first day of the week in your language (0 for Sunday, 1 for Monday)
+define("FIRST_DAY", "1");
+
+// Months Long Names
 define("L_JAN", "január");
 define("L_FEB", "február");
 define("L_MAR", "március");
@@ -574,10 +568,39 @@ define("L_SEP", "szeptember");
 define("L_OCT", "október");
 define("L_NOV", "november");
 define("L_DEC", "december");
+// Months Short Names
+define("L_S_JAN", "jan.");
+define("L_S_FEB", "febr.");
+define("L_S_MAR", "márc.");
+define("L_S_APR", "ápr.");
+define("L_S_MAY", "máj.");
+define("L_S_JUN", "jún.");
+define("L_S_JUL", "júl.");
+define("L_S_AUG", "aug.");
+define("L_S_SEP", "szept.");
+define("L_S_OCT", "okt.");
+define("L_S_NOV", "nov.");
+define("L_S_DEC", "dec.");
+// Week days Long Names
+define("L_MON", "hétfő");
+define("L_TUE", "kedd");
+define("L_WED", "szerda");
+define("L_THU", "csütörtök");
+define("L_FRI", "péntek");
+define("L_SAT", "szombat");
+define("L_SUN", "vasárnap");
+// Week days Short Names
+define("L_S_MON", "H");
+define("L_S_TUE", "K");
+define("L_S_WED", "Sze");
+define("L_S_THU", "Cs");
+define("L_S_FRI", "P");
+define("L_S_SAT", "Szo");
+define("L_S_SUN", "V");
 
 // Localized date format
 // Set the HU specific date/time format
-if (eregi("win", PHP_OS)) {
+if (stristr(PHP_OS,'win')) {
 setlocale(LC_ALL, "hun_hun.UTF-8", "hungarian.UTF-8", "hungarian");
 } else {
 setlocale(LC_ALL, "hu_HU.UTF-8", "hu_HU.UTF-8@euro", "hun_hun.UTF-8", "hungarian.UTF-8", "hun.UTF-8", "hu.UTF-8"); // For HU formats

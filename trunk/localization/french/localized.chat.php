@@ -452,15 +452,6 @@ define("L_RELOAD_CHAT", "Les paramètres de ce chat viennent d’être modifiés
 //Size command error by Ciprian
 define("L_ERR_SIZE", "Les valeurs possibles de la taille de caractère sont \\n\"null\" (pour réinitialiser à la valeur par défaut) ou entre 7 et 15");
 
-// Week days for Status Worldtime and Open Schedule by Ciprian
-define("L_MON", "Lundi");
-define("L_TUE", "Mardi");
-define("L_WED", "Mercredi");
-define("L_THU", "Jeudi");
-define("L_FRI", "Vendredi");
-define("L_SAT", "Samedi");
-define("L_SUN", "Dimanche");
-
 // Password reset form by Ciprian
 define("L_PASS_0", "Changer votre mot de passe");
 define("L_PASS_1", "Question secrète");
@@ -561,7 +552,10 @@ define("L_DEL_BYE", "ne m’attendez pas");
 define("L_EXTRA_PRIV1", "Messages lus"); // keep it short
 define("L_EXTRA_PRIV2", "Nouveaux messages"); // keep it short
 
-// Months for Open Schedule by Ciprian
+// Set the first day of the week in your language (0 for Sunday, 1 for Monday)
+define("FIRST_DAY", "1");
+
+// Months Long Names
 define("L_JAN", "Janvier");
 define("L_FEB", "Février");
 define("L_MAR", "Mars");
@@ -574,9 +568,38 @@ define("L_SEP", "Septembre");
 define("L_OCT", "Octobre");
 define("L_NOV", "Novembre");
 define("L_DEC", "Décembre");
+// Months Short Names
+define("L_S_JAN", "Janv.");
+define("L_S_FEB", "Févr.");
+define("L_S_MAR", "Mars");
+define("L_S_APR", "Avr.");
+define("L_S_MAY", "Mai");
+define("L_S_JUN", "Juin");
+define("L_S_JUL", "Juil.");
+define("L_S_AUG", "Août");
+define("L_S_SEP", "Sept.");
+define("L_S_OCT", "Oct.");
+define("L_S_NOV", "Nov.");
+define("L_S_DEC", "Déc.");
+// Week days Long Names
+define("L_MON", "Lundi");
+define("L_TUE", "Mardi");
+define("L_WED", "Mercredi");
+define("L_THU", "Jeudi");
+define("L_FRI", "Vendredi");
+define("L_SAT", "Samedi");
+define("L_SUN", "Dimanche");
+// Week days Short Names
+define("L_S_MON", "Lun.");
+define("L_S_TUE", "Mar.");
+define("L_S_WED", "Mer.");
+define("L_S_THU", "Jeu.");
+define("L_S_FRI", "Ven.");
+define("L_S_SAT", "Sam.");
+define("L_S_SUN", "Dim.");
 
 // Localized date format
-if (eregi("win", PHP_OS)) {
+if (stristr(PHP_OS,'win')) {
 setlocale(LC_ALL, "fra_fra.UTF-8", "french.UTF-8", "french");
 } else {
 setlocale(LC_ALL, "fr_FR.UTF-8", "fr.UTF-8", "fr_FR.UTF-8@euro"); // For French formats

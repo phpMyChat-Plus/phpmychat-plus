@@ -1,6 +1,6 @@
 <?php
 // File : vietnamese/localized.chat.php - plus version (01.08.2009 - rev.43)
-// Translation by Marshall <hellomarshal_lookatme@netzero.net>
+// Translation by Marshall <hellomarshall_lookatme@yahoo.com.vn>
 // Updates and corrections by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
 
@@ -453,15 +453,6 @@ define("L_RELOAD_CHAT", "Nếu server có thay đổi xin làm mới hay khởi 
 //Size command error by Ciprian
 define("L_ERR_SIZE", "Giá trị kích thước có thể chỉ là\\nsự khởi động lại_ hay giữa 7 và 15");
 
-// Week days for Status Worldtime and Open Schedule by Ciprian
-define("L_MON", "Thứ hai");
-define("L_TUE", "Thứ ba");
-define("L_WED", "Thứ bốn");
-define("L_THU", "Thứ năm");
-define("L_FRI", "Thứ sáu");
-define("L_SAT", "Thứ bảy");
-define("L_SUN", "Chủ nhật");
-
 // Password reset form by Ciprian - to use unicodes!
 define("L_PASS_0", "Điền mật khẩu bạn vào");
 define("L_PASS_1", "Câu hỏi bí mật của bạn:");
@@ -554,22 +545,54 @@ define("L_DEL_BYE", "đừng chờ đợi cho tôi");
 define("L_EXTRA_PRIV1", "Đọc PMs");
 define("L_EXTRA_PRIV2", "Mới PMs");
 
-// Months for Open Schedule by Ciprian
+// Set the first day of the week in your language (0 for Sunday, 1 for Monday)
+define("FIRST_DAY", "1");
+
+// Months Long Names
 define("L_JAN", "Tháng 1");
-define("L_FEB", "Thang 2");
-define("L_MAR", "Thang 3");
-define("L_APR", "Thang 4");
-define("L_MAY", "Thang 5");
-define("L_JUN", "Thang 6");
-define("L_JUL", "Thang 7");
-define("L_AUG", "Thang 8");
-define("L_SEP", "Thang 9");
-define("L_OCT", "Thang 10");
-define("L_NOV", "Thang 11");
-define("L_DEC", "Thang 12");
+define("L_FEB", "Tháng 2");
+define("L_MAR", "Tháng 3");
+define("L_APR", "Tháng 4");
+define("L_MAY", "Tháng 5");
+define("L_JUN", "Tháng 6");
+define("L_JUL", "Tháng 7");
+define("L_AUG", "Tháng 8");
+define("L_SEP", "Tháng 9");
+define("L_OCT", "Tháng 10");
+define("L_NOV", "Tháng 11");
+define("L_DEC", "Tháng 12");
+// Months Short Names
+define("L_S_JAN", "Tháng 1");
+define("L_S_FEB", "Tháng 2");
+define("L_S_MAR", "Tháng 3");
+define("L_S_APR", "Tháng 4");
+define("L_S_MAY", "Tháng 5");
+define("L_S_JUN", "Tháng 6");
+define("L_S_JUL", "Tháng 7");
+define("L_S_AUG", "Tháng 8");
+define("L_S_SEP", "Tháng 9");
+define("L_S_OCT", "Tháng 10");
+define("L_S_NOV", "Tháng 11");
+define("L_S_DEC", "Tháng 12");
+// Week days Long Names
+define("L_MON", "Thứ hai");
+define("L_TUE", "Thứ ba");
+define("L_WED", "Thứ tư");
+define("L_THU", "Thứ năm");
+define("L_FRI", "Thứ sáu");
+define("L_SAT", "Thứ bảy");
+define("L_SUN", "Chủ nhật");
+// Week days Short Names
+define("L_S_MON", "Hai");
+define("L_S_TUE", "Ba");
+define("L_S_WED", "Tư");
+define("L_S_THU", "Năm");
+define("L_S_FRI", "Sáu");
+define("L_S_SAT", "Bảy");
+define("L_S_SUN", "CN");
 
 // Localized date format - read the parameters here: http://www.php.net/manual/en/function.strftime.php
-if (eregi("win", PHP_OS)) {
+if (stristr(PHP_OS,'win')) {
 setlocale(LC_ALL, "viet nam.UTF-8", "viet nam");
 } else {
 setlocale(LC_ALL, "vi_VN.UTF-8", "vnd_vnd.UTF-8", "vie_vie.UTF-8");

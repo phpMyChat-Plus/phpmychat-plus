@@ -453,15 +453,6 @@ define("L_RELOAD_CHAT", "Las preferencias acaban de ser cambiadas. Para evitar p
 //Size command error by Ciprian
 define("L_ERR_SIZE", "El valor tamańo de la fuente puede ser sólo \\nnulo (para resetear) o entre 7 y 15");
 
-// Week days for status worldtime by Ciprian
-define("L_MON", "Lunes");
-define("L_TUE", "Martes");
-define("L_WED", "Miércoles");
-define("L_THU", "Jueves");
-define("L_FRI", "Viernes");
-define("L_SAT", "Sábado");
-define("L_SUN", "Domingo");
-
 // Password reset form by Ciprian
 define("L_PASS_0", "Reiniciando contraseña");
 define("L_PASS_1", "Pregunta secreta");
@@ -554,7 +545,10 @@ define("L_DEL_BYE", "no me esperen");
 define("L_EXTRA_PRIV1", "Leer PMs");
 define("L_EXTRA_PRIV2", "Nuevo PMs");
 
-// Months for Open Schedule by Ciprian
+// Set the first day of the week in your language
+define("FIRST_DAY", "1"); // 1 for Monday, 0 for Sunday
+
+// Months Long Names
 define("L_JAN", "enero");
 define("L_FEB", "febrero");
 define("L_MAR", "marzo");
@@ -567,9 +561,38 @@ define("L_SEP", "septiembre");
 define("L_OCT", "octubre");
 define("L_NOV", "noviembre");
 define("L_DEC", "diciembre");
+// Months Short Names
+define("L_S_JAN", "ene");
+define("L_S_FEB", "feb");
+define("L_S_MAR", "mar");
+define("L_S_APR", "abr");
+define("L_S_MAY", "may");
+define("L_S_JUN", "jun");
+define("L_S_JUL", "jul");
+define("L_S_AUG", "ago");
+define("L_S_SEP", "sep");
+define("L_S_OCT", "oct");
+define("L_S_NOV", "nov");
+define("L_S_DEC", "dic");
+// Week days Long Names
+define("L_MON", "lunes");
+define("L_TUE", "martes");
+define("L_WED", "miércoles");
+define("L_THU", "jueves");
+define("L_FRI", "viernes");
+define("L_SAT", "sábado");
+define("L_SUN", "domingo");
+// Week days Short Names
+define("L_S_MON", "lun");
+define("L_S_TUE", "mar");
+define("L_S_WED", "mié");
+define("L_S_THU", "jue");
+define("L_S_FRI", "vie");
+define("L_S_SAT", "sáb");
+define("L_S_SUN", "dom");
 
 // Localized date format - read the parameters here: http://www.php.net/manual/en/function.strftime.php
-if (eregi("win", PHP_OS)) {
+if (stristr(PHP_OS,'win')) {
 setlocale(LC_ALL, "esp_esp.UTF-8", "spanish.UTF-8", "spanish");
 } else {
 setlocale(LC_ALL, "es_ES.UTF-8", "es_ES.UTF-8@euro", "esp.UTF-8", "es.UTF-8", "esp_esp.UTF-8", "spanish.UTF-8");

@@ -452,15 +452,6 @@ define("L_RELOAD_CHAT", "De instellingen van deze chatserver zijn zojuist verand
 //Size command error by Ciprian
 define("L_ERR_SIZE", "De grote van de letters kunnen alleen\\nnul (zijn voor een reset) of tussen 7 en 15");
 
-// Week days for Status Worldtime and Open Schedule by Ciprian
-define("L_MON", "Maandag");
-define("L_TUE", "Dinsdag");
-define("L_WED", "Woensdag");
-define("L_THU", "Donderdag");
-define("L_FRI", "Vrijdag");
-define("L_SAT", "Zaterdag");
-define("L_SUN", "Zondag");
-
 // Password reset form by Ciprian
 define("L_PASS_0", "Forumulier verander paswoord");
 define("L_PASS_1", "Geheime vraag");
@@ -553,7 +544,10 @@ define("L_DEL_BYE", "wacht niet op mij");
 define("L_EXTRA_PRIV1", "Lees PMs"); // keep it short
 define("L_EXTRA_PRIV2", "Nieuwe PMs"); // keep it short
 
-// Months for Open Schedule by Ciprian
+// Set the first day of the week in your language (0 for Sunday, 1 for Monday)
+define("FIRST_DAY", "1");
+
+// Months Long Names
 define("L_JAN", "Januari");
 define("L_FEB", "Februari");
 define("L_MAR", "Maart");
@@ -566,9 +560,38 @@ define("L_SEP", "September");
 define("L_OCT", "Oktober");
 define("L_NOV", "November");
 define("L_DEC", "December");
+// Months Short Names
+define("L_S_JAN", "Jan");
+define("L_S_FEB", "Feb");
+define("L_S_MAR", "Mrt");
+define("L_S_APR", "Apr");
+define("L_S_MAY", "Mei");
+define("L_S_JUN", "Jun");
+define("L_S_JUL", "Jul");
+define("L_S_AUG", "Aug");
+define("L_S_SEP", "Sep");
+define("L_S_OCT", "Okt");
+define("L_S_NOV", "Nov");
+define("L_S_DEC", "Dec");
+// Week days Long Names
+define("L_MON", "Maandag");
+define("L_TUE", "Dinsdag");
+define("L_WED", "Woensdag");
+define("L_THU", "Donderdag");
+define("L_FRI", "Vrijdag");
+define("L_SAT", "Zaterdag");
+define("L_SUN", "Zondag");
+// Week days Short Names
+define("L_S_MON", "Ma");
+define("L_S_TUE", "Di");
+define("L_S_WED", "Wo");
+define("L_S_THU", "Do");
+define("L_S_FRI", "Vr");
+define("L_S_SAT", "Za");
+define("L_S_SUN", "Zo");
 
 // Localized date format - read the parameters here: http://www.php.net/manual/en/function.strftime.php
-if (eregi("win", PHP_OS)) {
+if (stristr(PHP_OS,'win')) {
 setlocale(LC_ALL, "dutch.UTF-8", "dutch");
 } else {
 setlocale(LC_ALL, "nl_NL.UTF-8", "nl_NL.UTF-8@euro", "nld_nld.UTF-8", "nld.UTF-8");

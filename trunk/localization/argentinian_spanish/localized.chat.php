@@ -453,15 +453,6 @@ define("L_RELOAD_CHAT", "La configuración de este servidor ha sido modificada. 
 //Size command error by Ciprian
 define("L_ERR_SIZE", "El tamańo de fuente solo puede ser \\nnull (para resetearlo) o estar entre 7 y 15");
 
-// Week days for Status Worldtime and Open Schedule by Ciprian
-define("L_MON", "Lunes");
-define("L_TUE", "Martes");
-define("L_WED", "Miércoles");
-define("L_THU", "Jueves");
-define("L_FRI", "Viernes");
-define("L_SAT", "Sábado");
-define("L_SUN", "Domingo");
-
 // Password reset form by Ciprian
 define("L_PASS_0", "Formulario de reseteo de password");
 define("L_PASS_1", "Pregunta secreta");
@@ -562,7 +553,10 @@ define("L_DEL_BYE", "no me esperes...");
 define("L_EXTRA_PRIV1", "Leer PMs");
 define("L_EXTRA_PRIV2", "Nuevos PMs");
 
-// Months for Open Schedule by Ciprian
+// Set the first day of the week in your language
+define("FIRST_DAY", "0"); // 1 for Monday, 0 for Sunday
+
+// Months Long Names
 define("L_JAN", "Enero");
 define("L_FEB", "Febrero");
 define("L_MAR", "Marzo");
@@ -575,9 +569,38 @@ define("L_SEP", "Septiembre");
 define("L_OCT", "Octubre");
 define("L_NOV", "Noviembre");
 define("L_DEC", "Diciembre");
+// Months Short Names
+define("L_S_JAN", "Ene");
+define("L_S_FEB", "Feb");
+define("L_S_MAR", "Mar");
+define("L_S_APR", "Abr");
+define("L_S_MAY", "May");
+define("L_S_JUN", "Jun");
+define("L_S_JUL", "Jul");
+define("L_S_AUG", "Ago");
+define("L_S_SEP", "Sep");
+define("L_S_OCT", "Oct");
+define("L_S_NOV", "Nov");
+define("L_S_DEC", "Dic");
+// Week days Long Names
+define("L_MON", "Lunes");
+define("L_TUE", "Martes");
+define("L_WED", "Miércoles");
+define("L_THU", "Jueves");
+define("L_FRI", "Viernes");
+define("L_SAT", "Sábado");
+define("L_SUN", "Domingo");
+// Week days Short Names
+define("L_S_MON", "Lun");
+define("L_S_TUE", "Mar");
+define("L_S_WED", "Mié");
+define("L_S_THU", "Jue");
+define("L_S_FRI", "Vie");
+define("L_S_SAT", "Sáb");
+define("L_S_SUN", "Dom");
 
 // Localized date format
-if (eregi("win", PHP_OS)) {
+if (stristr(PHP_OS,'win')) {
 setlocale(LC_ALL, "ESP_ARG.UTF-8", "ESP_ARG");
 } else {
 setlocale(LC_ALL, "es_AR.UTF-8", "esp_arg.UTF-8");

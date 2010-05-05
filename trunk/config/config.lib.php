@@ -201,6 +201,11 @@ $EN_STATS						= $row[170];
 $ALLOW_VIDEO					= $row[171];
 $VIDEO_WIDTH					= $row[172];
 $VIDEO_HEIGHT					= $row[173];
+$REQUIRE_BDAY					= $row[174];
+$SEND_BDAY_EMAIL				= $row[175];
+$SEND_BDAY_TIME					= $row[176];
+$SEND_BDAY_INTVAL				= $row[177];
+$SEND_BDAY_PATH					= $row[178];
 
 $query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.com'";
 $result_bot = mysql_query($query_bot);
@@ -639,4 +644,11 @@ define("C_EN_STATS", $EN_STATS);
 define("C_ALLOW_VIDEO", $ALLOW_VIDEO);
 define("C_VIDEO_WIDTH", $VIDEO_WIDTH);
 define("C_VIDEO_HEIGHT", $VIDEO_HEIGHT);
+
+// Birthday mod - by Ciprian
+define("C_REQUIRE_BDAY", $REQUIRE_BDAY);
+define("C_SEND_BDAY_EMAIL", $SEND_BDAY_EMAIL);
+define("C_SEND_BDAY_TIME", $SEND_BDAY_TIME);
+define("C_SEND_BDAY_INTVAL", $SEND_BDAY_INTVAL);
+define("C_SEND_BDAY_PATH", $SEND_BDAY_PATH);
 ?>

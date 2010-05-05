@@ -65,7 +65,7 @@ if (!function_exists('utf_conv'))
 {
 	function utf_conv($iso,$Charset,$what)
 	{
-		if (function_exists('iconv')) $what = iconv($iso, $Charset, $what);
+		if (stristr(PHP_OS,'win') && function_exists('iconv')) $what = iconv($iso, $Charset, $what);
 		return $what;
 	};
 };
@@ -142,8 +142,9 @@ $DbLink = new DB;
 	{
 		$power = "weak";
 	};
-$DbLink->query("SELECT latin1,firstname,lastname,country,website,email,showemail,perms,rooms,ip,gender,picture,description,favlink,favlink1,slang,colorname,avatar,reg_time,last_login,login_counter,use_gravatar FROM ".C_REG_TBL." WHERE username='$User' LIMIT 1");
-list($Latin1,$firstname,$lastname,$country,$website,$email,$showemail,$perms,$rooms,$ip,$gender,$picture,$description,$favlink,$favlink1,$slang,$colorname,$avatar,$reg_time,$last_login,$login_counter,$use_gravatar) = $DbLink->next_record();
+$DbLink->query("SELECT latin1,firstname,lastname,country,website,email,showemail,perms,rooms,ip,gender,picture,description,favlink,favlink1,slang,colorname,avatar,reg_time,last_login,login_counter,use_gravatar,birthday,show_bday,show_age FROM ".C_REG_TBL." WHERE username='$User' LIMIT 1");
+list($Latin1,$firstname,$lastname,$country,$website,$email,$showemail,$perms,$rooms,$ip,$gender,$picture,$description,$favlink,$favlink1,$slang,$colorname,$avatar,$reg_time,$last_login,$login_counter,$use_gravatar,$birthday,$show_bday,$show_age) = $DbLink->next_record();
+$my_dobtime = strtotime($birthday);
 $DbLink->clean_results();
 $DbLink->close();
 
@@ -288,18 +289,57 @@ if (C_USE_AVATARS)
 </P>
 <TABLE BORDER="0" align="center">
 <?php
-if ($firstname != "" || $lastname !="")
+if ($firstname != "")
 {
 ?>
 <TR>
 	<TD CLASS="whois" nowrap="nowrap"><?php echo(L_REG_30); ?>: </TD>
 	<TD CLASS="whois" nowrap="nowrap"><?php echo(special_char($firstname,$Latin1)); ?></TD>
 </TR>
+<?php
+}
+if ($lastname != "")
+{
+?>
 <TR>
 	<TD CLASS="whois" nowrap="nowrap"><?php echo(L_REG_31); ?>: </TD>
 	<TD CLASS="whois" nowrap="nowrap"><?php echo(special_char($lastname,$Latin1)); ?></TD>
 </TR>
 <?php
+}
+if ($show_bday)
+{
+	$dob_format = $show_age ? L_LONG_DATE : trim(str_replace(array("%Y.","%Y","(%A)","%A",",","-","年","den"),"",str_replace("  "," ",L_LONG_DATE)));
+	$my_dob_time = utf_conv(WIN_DEFAULT,'utf-8',strftime($dob_format, $my_dobtime));
+	?>
+	<TR>
+		<TD CLASS="whois" nowrap="nowrap"><?php echo(L_PRO_7); ?>: </TD>
+		<TD CLASS="whois" nowrap="nowrap"><?php echo($my_dob_time); ?></TD>
+	</TR>
+	<?php
+}
+if ($show_age)
+{
+	include_once('plugins/birthday/age.class.php');
+	$my_dob = new DateOfBirth();
+	$my_dob->birth_num_year = date('Y',$my_dobtime);
+	$my_dob->birth_num_month = date('n',$my_dobtime);
+	$my_dob->birth_num_day = date('j',$my_dobtime);
+	$my_dob->calculate_age();
+	$age = $my_dob->age;
+//	echo $my_dob->yy;
+	$age_details = sprintf(L_PRO_11,$my_dob->yy,$my_dob->mm,$my_dob->dd);
+	$html_age_output = "";
+	for ($i=0; $i<strlen($age); $i++) {
+		$digit_age_pos = substr($age,$i,1);
+		$html_age_output .= "<img src=\"acount/digits/"."$digit_age_pos.gif\" alt=\"".$age_details."\" title=\"".$age_details."\">";
+	}
+	?>
+	<TR>
+		<TD CLASS="whois" nowrap="nowrap"><?php echo(L_PRO_10); ?>: </TD>
+		<TD CLASS="whois" nowrap="nowrap"><?php echo($html_age_output); ?></TD>
+	</TR>
+	<?php
 }
 	if($gender == 4) $gender1 = 'undefined';
 	elseif($gender == 1) $gender1 = 'boy';
@@ -417,7 +457,7 @@ if ($login_counter && C_LOGIN_COUNTER)
 {
         $html_output = "";
 		for ($i=0; $i<strlen($login_counter); $i++) {
-            $digit_pos = substr("$login_counter",$i,1);
+            $digit_pos = substr($login_counter,$i,1);
             $html_output .= "<img src=\"acount/digits/"."$digit_pos.gif\" alt=\"".$login_counter."\" title=\"".$login_counter."\">";
         }
 ?>
@@ -429,7 +469,7 @@ if ($login_counter && C_LOGIN_COUNTER)
 }
 	if ($User == C_BOT_NAME) $last_visit = strftime(L_LONG_DATETIME,$last_login);
 	else $last_visit = strftime(L_LONG_DATETIME,$reg_time);
-	if (eregi("win", PHP_OS)) $last_visit = utf_conv(WIN_DEFAULT,$Charset,$last_visit);
+	$last_visit = utf_conv(WIN_DEFAULT,$Charset,$last_visit);
 ?>
 	<TR>
 		<TD CLASS="whois" nowrap="nowrap"><?php echo(A_SHEET1_11); ?>: </TD>

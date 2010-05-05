@@ -209,7 +209,7 @@ $logpath = "./".C_LOG_DIR."/".$year."/".$month."/".$year.$month.$day.".php"  ;
 //		@flock($fp, LOCK_EX);    // Lock file in exclusive mode
 		@fwrite($fp, sprintf("\r\n<?php\r\n"));
 		@fwrite($fp, sprintf("$chatSaved = strftime(L_LONG_DATETIME,$mess_time);\r\n"));
-		if (eregi("win", PHP_OS))
+		if (stristr(PHP_OS,'win'))
 		{
 			@fwrite($fp, sprintf('if (!function_exists("utf_conv"))'));
 			@fwrite($fp, sprintf("\r\n"));
@@ -217,7 +217,7 @@ $logpath = "./".C_LOG_DIR."/".$year."/".$month."/".$year.$month.$day.".php"  ;
 			@fwrite($fp, sprintf('function utf_conv($iso,$Charset,$what)'));
 			@fwrite($fp, sprintf("\r\n"));
 			@fwrite($fp, sprintf("{\r\n"));
-			@fwrite($fp, sprintf('if (function_exists(\'iconv\')) $what = iconv($iso, $Charset, $what);'));
+			@fwrite($fp, sprintf('if (stristr(PHP_OS,\'win\') && function_exists(\'iconv\')) $what = iconv($iso, $Charset, $what);'));
 			@fwrite($fp, sprintf("\r\n"));
 			@fwrite($fp, sprintf('return $what;'));
 			@fwrite($fp, sprintf("\r\n"));
@@ -438,7 +438,7 @@ $logpathu = "./logs/".$yearu."/".$monthu."/".$yearu.$monthu.$dayu.".php"  ;
 //		@flock($fpu, LOCK_EX);    // Lock file in exclusive mode
 		@fwrite($fpu, sprintf("\r\n<?php\r\n"));
 		@fwrite($fpu, sprintf("$chatSavedu = strftime(L_LONG_DATETIME,$mess_timeu);\r\n"));
-		if (eregi("win", PHP_OS))
+		if (stristr(PHP_OS,'win'))
 		{
 			@fwrite($fpu, sprintf('if (!function_exists("utf_conv"))'));
 			@fwrite($fpu, sprintf("\r\n"));
@@ -446,7 +446,7 @@ $logpathu = "./logs/".$yearu."/".$monthu."/".$yearu.$monthu.$dayu.".php"  ;
 			@fwrite($fpu, sprintf('function utf_conv($iso,$Charset,$what)'));
 			@fwrite($fpu, sprintf("\r\n"));
 			@fwrite($fpu, sprintf("{\r\n"));
-			@fwrite($fpu, sprintf('if (function_exists(\'iconv\')) $what = iconv($iso, $Charset, $what);'));
+			@fwrite($fpu, sprintf('if (stristr(PHP_OS,\'win\') && function_exists(\'iconv\')) $what = iconv($iso, $Charset, $what);'));
 			@fwrite($fpu, sprintf("\r\n"));
 			@fwrite($fpu, sprintf('return $what;'));
 			@fwrite($fpu, sprintf("\r\n"));

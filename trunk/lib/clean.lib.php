@@ -68,8 +68,7 @@ if(C_CHAT_LURKING)
 	{
 //		$when = date('r', $usertime + C_TMZ_OFFSET*60*60);
 		$when = $usertime + C_TMZ_OFFSET*60*60;
-		if (eregi("win", PHP_OS)) $when = '\".utf_conv(WIN_DEFAULT,$Charset,strftime(L_SHORT_DATETIME,'.$when.')).\"';
-		else $when = "\".strftime(L_LONG_DATETIME,".$when.").\"";
+		$when = '\".utf_conv(WIN_DEFAULT,$Charset,strftime(L_SHORT_DATETIME,'.$when.')).\"';
 		$userclosed = addslashes($userclosed);
 		$ChatM->query("SELECT type FROM ".C_MSG_TBL." WHERE username = '$userclosed' AND room = '$userroom' ORDER BY m_time DESC LIMIT 1");
 		list($usertype) = $ChatM->next_record();

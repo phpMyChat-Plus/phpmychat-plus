@@ -452,15 +452,6 @@ define("L_RELOAD_CHAT", "Indstillingerne for denne server er blevet ændret. Und
 //Size command error by Ciprian
 define("L_ERR_SIZE", "Du kan kun vælge fontstørrelsen\\nnull (ved nulstilling) eller mellem 7 og 15");
 
-// Week days for Status Worldtime and Open Schedule by Ciprian
-define("L_MON", "Mandag");
-define("L_TUE", "Tirsdag");
-define("L_WED", "Onsdag");
-define("L_THU", "Torsdag");
-define("L_FRI", "Fredag");
-define("L_SAT", "Lørdag");
-define("L_SUN", "Søndag");
-
 // Password reset form by Ciprian
 define("L_PASS_0", "Formular til ændring af password");
 define("L_PASS_1", "Hemmelige spørgsmål");
@@ -561,7 +552,10 @@ define("L_DEL_BYE", "vent ikke på mig");
 define("L_EXTRA_PRIV1", "Læs meddelelser");
 define("L_EXTRA_PRIV2", "Nye meddelelser");
 
-// Months for Open Schedule by Ciprian
+// Set the first day of the week in your language
+define("FIRST_DAY", "1"); // 1 for Monday, 0 for Sunday
+
+// Months Long Names
 define("L_JAN", "Januar");
 define("L_FEB", "Februar");
 define("L_MAR", "Marts");
@@ -574,10 +568,39 @@ define("L_SEP", "September");
 define("L_OCT", "Oktober");
 define("L_NOV", "November");
 define("L_DEC", "December");
+// Months Short Names
+define("L_S_JAN", "Jan.");
+define("L_S_FEB", "Feb.");
+define("L_S_MAR", "Mrs.");
+define("L_S_APR", "Apr.");
+define("L_S_MAY", "Maj");
+define("L_S_JUN", "Juni");
+define("L_S_JUL", "Juli");
+define("L_S_AUG", "Aug.");
+define("L_S_SEP", "Sept.");
+define("L_S_OCT", "Okt.");
+define("L_S_NOV", "Nov.");
+define("L_S_DEC", "Dec.");
+// Week days Long Names
+define("L_MON", "Mandag");
+define("L_TUE", "Tirsdag");
+define("L_WED", "Onsdag");
+define("L_THU", "Torsdag");
+define("L_FRI", "Fredag");
+define("L_SAT", "Lørdag");
+define("L_SUN", "Søndag");
+// Week days Short Names
+define("L_S_MON", "Ma");
+define("L_S_TUE", "Ti");
+define("L_S_WED", "On");
+define("L_S_THU", "To");
+define("L_S_FRI", "Fr");
+define("L_S_SAT", "Lø");
+define("L_S_SUN", "Sø");
 
 // Localized date format – nothing to translate – skip this paragraph, Ciprian will adjust it for you! Actually, together 
 // Set the DK specific date/time format
-if (eregi("win", PHP_OS)) {
+if (stristr(PHP_OS,'win')) {
 setlocale(LC_ALL, "danish.UTF-8", "danish"); // For DK formats
 } else {
 setlocale(LC_ALL, "da_DK.UTF-8", "da_DK.UTF-8@euro", "dnk.UTF-8", "dnk.UTF-8"); // For DK formats

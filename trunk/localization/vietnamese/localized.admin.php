@@ -1,6 +1,6 @@
 <?php
 // File : vietnamese/localized.admin.php - plus version (07.06.2009 - rev.15)
-// Translation by Marshall <hellomarshal_lookatme@netzero.net>
+// Translation by Marshall <hellomarshall_lookatme@yahoo.com.vn>
 // Updates and corrections by Ciprian Murariu <ciprianmp@yahoo.com>
 
 // extra header for charset

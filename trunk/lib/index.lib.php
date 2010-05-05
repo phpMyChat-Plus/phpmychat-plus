@@ -153,7 +153,7 @@ if (!function_exists('utf_conv'))
 {
 	function utf_conv($iso,$Charset,$what)
 	{
-		if (function_exists('iconv')) $what = iconv($iso, $Charset, $what);
+		if (stristr(PHP_OS,'win') && function_exists('iconv')) $what = iconv($iso, $Charset, $what);
 		return $what;
 	};
 };
@@ -1863,15 +1863,13 @@ if(isset($Error))
 			if((!$T && !$DefaultRoomFound) || (!$T && !$DefaultPrivateRoomFound)) $T = 1;
 			?>
 			<TR CLASS="ChatCell">
-				<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP">
+				<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP" COLSPAN=2>
 					<?php echo(L_SET_9." "); ?>
 					<SELECT NAME="T" CLASS="ChatBox">
 						<OPTION VALUE="1" <?php if($T && !$DefaultPrivateRoomFound) echo("SELECTED"); ?> <?php if(!$T && $DefaultPrivateRoomFound) echo("DISABLED"); ?>><?php echo(L_SET_10); ?></OPTION>
 						<OPTION VALUE="0" <?php if((!$T && !$DefaultRoomFound) || ($T && $DefaultPrivateRoomFound)) echo("SELECTED"); ?>><?php echo(L_SET_11); ?></OPTION>
 					</SELECT>
-					<?php echo(" ".L_SET_12." :"); ?>
-				</TD>
-				<TD VALIGN="TOP" CLASS="ChatCell">
+					<?php echo(L_SET_12.":"); ?>
 					<INPUT TYPE="text" NAME="R3" SIZE=11 MAXLENGTH=14 <?php if(!$DefaultRoomFound && !$DefaultPrivateRoomFound && $R != "" && !$RES) echo("VALUE=\"".htmlspecialchars(urldecode($R))."\""); ?> CLASS="ChatBox" onChange="reset_R3();">
 				</TD>
 			</TR>
@@ -1934,7 +1932,7 @@ if (C_SHOW_COUNTER)
     $ani_counter = new acounter();
 	echo ($ani_counter->create_output("chat_index"));
 	$INSTALL_DATE = strftime(L_SHORT_DATE,strtotime(C_INSTALL_DATE));
-	if (eregi("win", PHP_OS)) $INSTALL_DATE = utf_conv(WIN_DEFAULT,$Charset,$INSTALL_DATE);
+	$INSTALL_DATE = utf_conv(WIN_DEFAULT,$Charset,$INSTALL_DATE);
 ?>
 <font face=Verdana color=yellow size=1><?php echo (sprintf(L_VISITOR_REPORT,$INSTALL_DATE)) ?>.</font>
 <?php

@@ -1,6 +1,6 @@
 <?php
 // File : vietnamese/localized.install.php - plus version (07.06.2009 - rev.7)
-// Translation by Marshall <hellomarshal_lookatme@netzero.net>
+// Translation by Marshall <hellomarshall_lookatme@yahoo.com.vn>
 // Do not use ' ; use ’ istead (utf-8 edit bug)
 
 define("L_BTN1", "Tiếp");

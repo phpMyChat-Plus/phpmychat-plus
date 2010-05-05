@@ -69,13 +69,13 @@ if (!function_exists("utf8_substr"))
 function get_day($time,$plus)
 {
 	global $L;
-		$monday = utf8_substr(L_MON, 0, ($L == 'vietnamese') ? '8' : '3');
-		$tuesday = utf8_substr(L_TUE, 0, ($L == 'vietnamese') ? '8' : '3');
-		$wednesday = utf8_substr(L_WED, 0, ($L == 'vietnamese') ? '8' : '3');
-		$thursday = utf8_substr(L_THU, 0, ($L == 'vietnamese') ? '8' : '3');
-		$friday = utf8_substr(L_FRI, 0, ($L == 'vietnamese') ? '8' : '3');
-		$saturday = utf8_substr(L_SAT, 0, ($L == 'vietnamese') ? '8' : '3');
-		$sunday = utf8_substr(L_SUN, 0, ($L == 'vietnamese') ? '8' : '3');
+		$monday = L_S_MON;
+		$tuesday = L_S_TUE;
+		$wednesday = L_S_WED;
+		$thursday = L_S_THU;
+		$friday = L_S_FRI;
+		$saturday = L_S_SAT;
+		$sunday = L_S_SUN;
 		$dayN = date("w",$time);
 		$day = $dayN + $plus;
 		$is_day = "";
@@ -104,43 +104,16 @@ if (!function_exists('utf_conv'))
 {
 	function utf_conv($iso,$Charset,$what)
 	{
-		if (function_exists('iconv')) $what = iconv($iso, $Charset, $what);
+		if (stristr(PHP_OS,'win') && function_exists('iconv')) $what = iconv($iso, $Charset, $what);
 		return $what;
 	};
 };
-// Initialize vars
-$dayname = "";
-$dayname_plus = "";
-$dayname_minus = "";
-$dayname_server = "";
-// Get daynames set by setlocale
-if (eregi("win", PHP_OS))
-{
-	$dayname = mb_convert_case(utf8_substr(strftime("%a", time() + C_TMZ_OFFSET*60*60), 0, ($L == 'vietnamese') ? '8' : '3'),MB_CASE_TITLE,$Charset);
-	$dayname_plus = mb_convert_case(utf8_substr(strftime("%a", time() + 86400 + C_TMZ_OFFSET*60*60), 0, ($L == 'vietnamese') ? '8' : '3'),MB_CASE_TITLE,$Charset);
-	$dayname_minus = mb_convert_case(utf8_substr(strftime("%a", time() - 86400 + C_TMZ_OFFSET*60*60), 0, ($L == 'vietnamese') ? '8' : '3'),MB_CASE_TITLE,$Charset);
-	$dayname_server = mb_convert_case(utf8_substr(strftime("%a", time() + C_TMZ_OFFSET*60*60), 0, ($L == 'vietnamese') ? '8' : '3'),MB_CASE_TITLE,$Charset);
-}
-else
-{
-	$dayname = mb_convert_case(strftime("%a", time() + C_TMZ_OFFSET*60*60),MB_CASE_TITLE,$Charset);
-	$dayname_plus = mb_convert_case(strftime("%a", time() + 86400 + C_TMZ_OFFSET*60*60),MB_CASE_TITLE,$Charset);
-	$dayname_minus = mb_convert_case(strftime("%a", time() - 86400 + C_TMZ_OFFSET*60*60),MB_CASE_TITLE,$Charset);
-	$dayname_server = mb_convert_case(strftime("%a", time() + C_TMZ_OFFSET*60*60),MB_CASE_TITLE,$Charset);
-}
-if (eregi("win", PHP_OS))
-{
 // Get daynames set by localization when setlocale fails
-	if ($dayname == "") $dayname = mb_convert_case(get_day(time() + C_TMZ_OFFSET*60*60,0),MB_CASE_TITLE,$Charset);
+	$dayname = mb_convert_case(get_day(time() + C_TMZ_OFFSET*60*60,0),MB_CASE_TITLE,$Charset);
 // Convert daynames set by setlocale
-	else $dayname = utf_conv(WIN_DEFAULT,$Charset,$dayname);
-	if ($dayname_plus == "") $dayname_plus = mb_convert_case(get_day(time() + C_TMZ_OFFSET*60*60,1),MB_CASE_TITLE,$Charset);
-	else $dayname_plus = utf_conv(WIN_DEFAULT,$Charset,$dayname_plus);
-	if ($dayname_minus == "") $dayname_minus = mb_convert_case(get_day(time() + C_TMZ_OFFSET*60*60,-1),MB_CASE_TITLE,$Charset);
-	else $dayname_minus = utf_conv(WIN_DEFAULT,$Charset,$dayname_minus);
-	if ($dayname_server == "") $dayname_server = mb_convert_case(get_day(time() + C_TMZ_OFFSET*60*60,0),MB_CASE_TITLE,$Charset);
-	else $dayname_server = utf_conv(WIN_DEFAULT,$Charset,$dayname_server);
-}
+	$dayname_plus = mb_convert_case(get_day(time() + C_TMZ_OFFSET*60*60,1),MB_CASE_TITLE,$Charset);
+	$dayname_minus = mb_convert_case(get_day(time() + C_TMZ_OFFSET*60*60,-1),MB_CASE_TITLE,$Charset);
+	$dayname_server = mb_convert_case(get_day(time() + C_TMZ_OFFSET*60*60,0),MB_CASE_TITLE,$Charset);
 ?>
 
 // Returns the day names

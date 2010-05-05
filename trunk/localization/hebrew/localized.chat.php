@@ -455,15 +455,6 @@ define("L_RELOAD_CHAT", "The settings of this server have just been changed. To 
 //Size command error by Ciprian
 define("L_ERR_SIZE", "גודל האות יכולה להיות\\nnull (לאיפוס) אוו בין 7 ל-15");
 
-// Week days for Status Worldtime and Open Schedule by Ciprian
-define("L_MON", "שני");
-define("L_TUE", "יום שלישי");
-define("L_WED", "רביעי");
-define("L_THU", "חמישי");
-define("L_FRI", "שישי");
-define("L_SAT", "שבת");
-define("L_SUN", "ראשון");
-
 // Password reset form by Ciprian
 define("L_PASS_0", "סיסמא איפוס");
 define("L_PASS_1", "שאלה סודית");
@@ -564,7 +555,10 @@ define("L_DEL_BYE", "תמשיכו בלעדי...");
 define("L_EXTRA_PRIV1", "קרא הודעות");
 define("L_EXTRA_PRIV2", "הודעות חדשות!");
 
-// Months for Open Schedule by Ciprian
+// Set the first day of the week in your language (0 for Sunday, 1 for Monday)
+define("FIRST_DAY", "0");
+
+// Months Long Names
 define("L_JAN", "ינואר");
 define("L_FEB", "פברואר");
 define("L_MAR", "מרץ");
@@ -577,10 +571,39 @@ define("L_SEP", "ספטמבר");
 define("L_OCT", "אלול");
 define("L_NOV", "נובמבר");
 define("L_DEC", "דצמבר");
+// Months Short Names
+define("L_S_JAN", "ינואר");
+define("L_S_FEB", "פבואר");
+define("L_S_MAR", "מרץ");
+define("L_S_APR", "אפריל");
+define("L_S_MAY", "מאי");
+define("L_S_JUN", "יוני");
+define("L_S_JUL", "יולי");
+define("L_S_AUG", "אוגוסט");
+define("L_S_SEP", "ספטמבר");
+define("L_S_OCT", "אלול");
+define("L_S_NOV", "נובמבר");
+define("L_S_DEC", "דצמבר");
+// Week days Long Names
+define("L_MON", "שני");
+define("L_TUE", "יום שלישי");
+define("L_WED", "רביעי");
+define("L_THU", "חמישי");
+define("L_FRI", "שישי");
+define("L_SAT", "שבת");
+define("L_SUN", "ראשון");
+// Week days Short Names
+define("L_S_MON", "ב");
+define("L_S_TUE", "ג");
+define("L_S_WED", "ד");
+define("L_S_THU", "ה");
+define("L_S_FRI", "ו");
+define("L_S_SAT", "ש");
+define("L_S_SUN", "א");
 
 // Localized date format
 // Set the HE specific date/time format
-if (eregi("win", PHP_OS)) {
+if (stristr(PHP_OS,'win')) {
 setlocale(LC_ALL, "heb-heb.UTF-8", "heb-heb", "hebrew.UTF-8", "hebrew");
 } else {
 setlocale(LC_ALL, "he_IL.UTF-8", "heb.UTF-8", "he.UTF-8", "iw_IL.UTF-8", "iw.UTF-8", "heb_heb.UTF-8", "Hebrew-he.UTF-8"); // For HE formats
