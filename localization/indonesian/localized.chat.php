@@ -453,15 +453,6 @@ define("L_RELOAD_CHAT", "Pengaturan diserver ini barusan diubah. Untuk menghidar
 //Size command error by Ciprian
 define("L_ERR_SIZE", "Ukuran dari tulisannya yang diperbolehkan adalah\\nnull (untuk menghapus) atau diantara 7 dan 15");
 
-// Week days for Status World time and Open Schedule by Ciprian
-define("L_MON", "Senin");
-define("L_TUE", "Selasa");
-define("L_WED", "Rabu");
-define("L_THU", "Kamis");
-define("L_FRI", "Jumat");
-define("L_SAT", "Sabtu");
-define("L_SUN", "Minggu");
-
 // Password reset form by Ciprian
 define("L_PASS_0", "Formulir untuk menghapus kata sandi");
 define("L_PASS_1", "Pertanyaan rahasia");
@@ -562,7 +553,10 @@ define("L_DEL_BYE", "Jangan menunggu saya");
 define("L_EXTRA_PRIV1", "Baca PMs"); // means: "Read your PMs" - link to open the pm manager if there are any old/read pms.
 define("L_EXTRA_PRIV2", "PM baru"); // link to open the pm manager if there are new pms
 
-// Months for Open Schedule by Ciprian
+// Set the first day of the week in your language (0 for Sunday, 1 for Monday)
+define("FIRST_DAY", "1");
+
+// Months Long Names
 define("L_JAN", "Januari");
 define("L_FEB", "Februari");
 define("L_MAR", "Maret");
@@ -573,12 +567,40 @@ define("L_JUL", "Juli");
 define("L_AUG", "Agustus");
 define("L_SEP", "September");
 define("L_OCT", "Oktober");
-define("L_NOV", "Nopember");
+define("L_NOV", "November");
 define("L_DEC", "Desember");
+// Months Short Names
+define("L_S_JAN", "Jan");
+define("L_S_FEB", "Feb");
+define("L_S_MAR", "Mar");
+define("L_S_APR", "Apr");
+define("L_S_MAY", "Mei");
+define("L_S_JUL", "Jul");
+define("L_S_AUG", "Agust");
+define("L_S_SEP", "Sep");
+define("L_S_OCT", "Okt");
+define("L_S_NOV", "Nov");
+define("L_S_DEC", "Des");
+// Week days Long Names
+define("L_MON", "Senin");
+define("L_TUE", "Selasa");
+define("L_WED", "Rabu");
+define("L_THU", "Kamis");
+define("L_FRI", "Jumat");
+define("L_SAT", "Sabtu");
+define("L_SUN", "Minggu");
+// Week days Short Names
+define("L_S_MON", "Sen");
+define("L_S_TUE", "Sel");
+define("L_S_WED", "Rabu");
+define("L_S_THU", "Kamis");
+define("L_S_FRI", "Jumat");
+define("L_S_SAT", "Sabtu");
+define("L_S_SUN", "Minggu");
 
 // Localized date format
 # Nothing to translate here – skip this paragraph, Ciprian will adjust it for you! This is just a sample.
-if (eregi("win", PHP_OS)) {
+if (stristr(PHP_OS,'win')) {
 setlocale(LC_ALL, "IND_IND.UTF-8", "IND_IND", "indonesian.UTF-8", "indonesian"); // For Windows servers
 } else {
 setlocale(LC_ALL, "id_ID.UTF-8", "id_ID", "ind.UTF-8", "ind_ind.UTF-8"); // For Unix/FreeBSD servers
@@ -666,7 +688,7 @@ define("L_RESTRICTED_ROM", "%s sudah sukses dibatasi dari kamar ini.");
 
 // OpenID login mod by Ciprian
 define("L_OPID_SIGN", "Masuk dengan OpenID");
-define("L_OPID_REG", "Impor ID biodata OpenID anda");
+define("L_OPID_REG", "Impor ID biodata OpenID Anda");
 
 // Support buttons
 define("L_SUPP_WARN", "Anda terpilih untuk menjadi pengembang sukarela dari\\n".APP_NAME." dengan menyumbangkan sejumlah donasi bagi pengembang.\\nTerima kasih atas dukungan Anda!\\n\\nCatatan: penerima bukan sebagai pemilik tempat obrol ini.\\nMohon masukan jumlah donasi di halaman berikutnya.\\n\\nLanjutkan?");

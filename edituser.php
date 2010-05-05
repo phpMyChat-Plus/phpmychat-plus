@@ -19,7 +19,15 @@ if (isset($_POST))
 
 // Fix a security hole
 if (isset($L) && !is_dir("./localization/".$L)) exit();
+
 if (isset($_COOKIE["CookieStatus"])) $status = $_COOKIE["CookieStatus"];
+if (isset($_COOKIE["CookieHash"])) $RemMe = $_COOKIE["CookieHash"];
+$mydate = isset($_REQUEST["date5"]) ? $_REQUEST["date5"] : "";
+if($mydate != "")
+{
+	$BIRTHDAY = $mydate;
+	$format_birth_day = strftime(L_SHORT_DATE,strtotime($BIRTHDAY));
+}
 
 require("./config/config.lib.php");
 require("./lib/release.lib.php");
@@ -27,6 +35,7 @@ require("./localization/languages.lib.php");
 require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
 require("./lib/login.lib.php");
+require("./plugins/calendar/tc_calendar.php");
 
 // Special cache instructions for IE5+
 $CachePlus	= "";
@@ -110,7 +119,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 	if (!isset($Error) || $Error == "")
 	{
 		$Latin1 = ($Charset != "utf-8");
-		$PWD_Hash = ($pmc_password == $prev_PASSWORD || md5(stripslashes($pmc_password)) == $prev_PASSWORD) ? $prev_PASSWORD : md5(stripslashes($prev_PASSWORD));
+		$PWD_Hash = (isset($RemMe) && $RemMe == $prev_PASSWORD) ? $prev_PASSWORD : md5(stripslashes($prev_PASSWORD));
 		if (!isset($GENDER) || $GENDER == "") $GENDER = 0;
 		$showemail = (isset($SHOWEMAIL) && $SHOWEMAIL)? 1:0;
 		$allowpopup = (isset($ALLOWPOPUP) && $ALLOWPOPUP)? 1:0;
@@ -132,7 +141,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 		elseif ($pmc_username != $U && @rename(C_AVA_RELPATH . "uploaded/avatar_".$av_user_name.".gif", C_AVA_RELPATH . "uploaded/avatar_".$av_new_user_name.".gif")) $AVATARURL = C_AVA_RELPATH . "uploaded/avatar_".$av_new_user_name.".gif";
 		// End of Upload avatar mod - by Ciprian
 		
-		$DbLink->query("UPDATE ".C_REG_TBL." SET username='$U', latin1='$Latin1', password='$PWD_Hash', firstname='$FIRSTNAME', lastname='$LASTNAME', country='$COUNTRY', website='$WEBSITE', email='$EMAIL', showemail=$showemail, allowpopup=$allowpopup, reg_time=".time().", ip='$IP', gender='$GENDER', picture='$PICTURE', description='$DESCRIPTION', favlink='$FAVLINK', favlink1='$FAVLINK1', slang='$SLANG', colorname='$COLORNAME', avatar='$AVATARURL', s_question='$SECRET_QUESTION', s_answer='$SECRET_ANSWER', use_gravatar='$USE_GRAV' WHERE username='$pmc_username'");
+		$DbLink->query("UPDATE ".C_REG_TBL." SET username='$U', latin1='$Latin1', password='$PWD_Hash', firstname='$FIRSTNAME', lastname='$LASTNAME', country='$COUNTRY', website='$WEBSITE', email='$EMAIL', showemail=$showemail, allowpopup=$allowpopup, reg_time=".time().", ip='$IP', gender='$GENDER', picture='$PICTURE', description='$DESCRIPTION', favlink='$FAVLINK', favlink1='$FAVLINK1', slang='$SLANG', colorname='$COLORNAME', avatar='$AVATARURL', s_question='$SECRET_QUESTION', s_answer='$SECRET_ANSWER', use_gravatar='$USE_GRAV', birthday='$BIRTHDAY', show_bday='$SHOW_BDAY', show_age='$SHOW_AGE' WHERE username='$pmc_username'");
 // Patch to send an email to the User and/or admin after changing username or password.
 // by Ciprian using Bob Dickow's registration patch.
 	if (($pmc_username != $U) || ($pmc_password != $prev_PASSWORD))
@@ -174,11 +183,21 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 	     } else {
 	       $allpopup = L_REG_22;
 	     }
-		     if ($USE_GRAV) {
-		       $usegrav = L_REG_20;
-		     } else {
-		       $usegrav = L_REG_22;
-		     }
+		 if ($USE_GRAV) {
+		   $usegrav = L_REG_20;
+		 } else {
+		   $usegrav = L_REG_22;
+		 }
+		 if ($SHOW_BDAY) {
+		   $shwbday = L_REG_20;
+		 } else {
+		   $shwbday = L_REG_22;
+		 }
+		 if ($SHOW_AGE) {
+		   $shwage = L_REG_20;
+		 } else {
+		   $shwage = L_REG_22;
+		 }
 	     $emailMessage = sprintf(L_EMAIL_VAL_41,((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME),$Chat_URL,$pmc_username)."\r\n"
 	     . sprintf(L_EMAIL_VAL_7,$U)."\r\n\r\n"
 	     . "----------------------------------------------\r\n"
@@ -192,6 +211,9 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 	     . "".L_REG_8.": ".$EMAIL."\r\n"
 	     . "".L_REG_30.": ".($FIRSTNAME ? $FIRSTNAME : L_NOT_SELECTED)."\r\n"
 	     . "".L_REG_31.": ".($LASTNAME ? $LASTNAME : L_NOT_SELECTED)."\r\n"
+		 . "".L_PRO_7.": ".($BIRTHDAY != "" ? $format_birth_day : L_NOT_SELECTED)."\r\n"
+		 . "".L_PRO_8.": ".$shwbday."\r\n"
+		 . "".L_PRO_9.": ".$shwage."\r\n"
 	     . "".L_REG_45.": ".$sex."\r\n"
 	     . "".L_REG_36.": ".($COUNTRY ? $COUNTRY : L_NOT_SELECTED)."\r\n"
 	     . "".L_REG_32.": ".($WEBSITE ? $WEBSITE : L_NOT_SELECTED)."\r\n"
@@ -243,6 +265,16 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 		 } else {
 		   $usegrav = "no";
 		 }
+		 if ($SHOW_BDAY) {
+		   $shwbday = "yes";
+		 } else {
+		   $shwbday = "no";
+		 }
+		 if ($SHOW_AGE) {
+		   $shwage = "yes";
+		 } else {
+		   $shwage = "no";
+		 }
 	     $emailMessage = $pmc_username." has just changed important account info for "
 		 . ((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME) ." at ". $Chat_URL." :\r\n\r\n"
 	     . "Here is the updated account info for ".$pmc_username.":\r\n"
@@ -253,11 +285,14 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 	     . "Secret question: ".$secret_questiona."\r\n"
 	     . "Secret answer: ".$SECRET_ANSWER."\r\n"
 	     . "Email: ".$EMAIL.""
-		 . ($FIRSTNAME ? "\r\nFirst name: ".$FIRSTNAME."" : "")
-		 . ($LASTNAME ? "\r\nLast name: ".$LASTNAME."" : "")
+		 . ($FIRSTNAME ? "\r\nFirst name: ".$FIRSTNAME : "")
+		 . ($LASTNAME ? "\r\nLast name: ".$LASTNAME : "")
+		 . ($BIRTHDAY != "" ? "\r\nDate of birth: ".$BIRTHDAY : "")
+		 . ($BIRTHDAY != "" ? "\r\nDisplay birthday on public info: ".$shwbday : "")
+		 . ($BIRTHDAY != "" ? "\r\nDisplay age on public info: ".$shwage : "")
 		 . "\r\nGender: ".$sex
 		 . ($COUNTRY ? "\r\nCountry: ".$COUNTRY : "")
-		 . ($WEBSITE ? "\r\nWWW: ".$WEBSITE."" : "")
+		 . ($WEBSITE ? "\r\nWWW: ".$WEBSITE : "")
 		 . ($SLANG ? "\r\nSpoken languages: ".$SLANG : "")
 		 . ($FAVLINK ? "\r\nFavorite link 1: ".$FAVLINK : "")
 		 . ($FAVLINK1 ? "\r\nFavorite link 2: ".$FAVLINK1 : "")
@@ -288,7 +323,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 		if ($pmc_password != $prev_PASSWORD)
 		{
 			$pmc_password = $prev_PASSWORD;
-			setcookie("CookieHash", '', time());        // cookie expires now
+			if($pmc_password != $PWD_Hash) setcookie("CookieHash", '', time());        // cookie expires now
 		}
 		$Message = L_REG_17;
 	}
@@ -298,10 +333,10 @@ else
 {
 	$U = $pmc_username;
 	$prev_PASSWORD = $pmc_password;
-	$DbLink->query("SELECT firstname,lastname,perms,country,website,email,showemail,gender,allowpopup,picture,description,favlink,favlink1,slang,colorname,avatar,s_question,s_answer,use_gravatar FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
+	$DbLink->query("SELECT firstname,lastname,perms,country,website,email,showemail,gender,allowpopup,picture,description,favlink,favlink1,slang,colorname,avatar,s_question,s_answer,use_gravatar,birthday,show_bday,show_age FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	if ($DbLink->num_rows() != 0)
 	{
-			  list($FIRSTNAME, $LASTNAME, $PERMS, $COUNTRY, $WEBSITE, $EMAIL, $SHOWEMAIL, $GENDER, $ALLOWPOPUP, $PICTURE, $DESCRIPTION, $FAVLINK, $FAVLINK1, $SLANG, $COLORNAME, $AVATARURL, $SECRET_QUESTION, $SECRET_ANSWER, $USE_GRAV) = $DbLink->next_record();
+			  list($FIRSTNAME, $LASTNAME, $PERMS, $COUNTRY, $WEBSITE, $EMAIL, $SHOWEMAIL, $GENDER, $ALLOWPOPUP, $PICTURE, $DESCRIPTION, $FAVLINK, $FAVLINK1, $SLANG, $COLORNAME, $AVATARURL, $SECRET_QUESTION, $SECRET_ANSWER, $USE_GRAV, $BIRTHDAY, $SHOW_BDAY, $SHOW_AGE) = $DbLink->next_record();
                if (!isset($ORIGAVATAR)) $ORIGAVATAR = $AVATARURL;
                if (!empty($avatar))
                {
@@ -405,7 +440,7 @@ if(isset($Error))
                           if ($FORM_SEND != 1) {
 
                             ?>
-			            <a href="<?php echo("avatar.php?User=$pmc_username&LIMIT=$LIMIT&L=$L&avatar=$AVATARURL&ORIGAVATAR=$ORIGAVATAR&From=edituser.php&pmc_password=$pmc_password"); ?>" onClick="return confirm('<?php echo(L_SEL_NEW_AV_CONFIRM) ?>');" onMouseOver="window.status='<?php echo(L_SEL_NEW_AV) ?>.'; return true;" title="<?php echo(L_SEL_NEW_AV); ?>" target="_self">
+			            <a href="<?php echo("avatar.php?User=$pmc_username&LIMIT=$LIMIT&L=$L&avatar=$AVATARURL&ORIGAVATAR=$ORIGAVATAR&From=edituser.php&pmc_password=$PWD_Hash"); ?>" onClick="return confirm('<?php echo(L_SEL_NEW_AV_CONFIRM) ?>');" onMouseOver="window.status='<?php echo(L_SEL_NEW_AV) ?>.'; return true;" title="<?php echo(L_SEL_NEW_AV); ?>" target="_self">
                       	            <img src="<?php echo($AVATARURL); ?>" align="center" border="0" width="<?php echo(C_AVA_WIDTH);?>" height="<?php echo(C_AVA_HEIGHT);?>" alt="<?php echo(L_SEL_NEW_AV); ?>"></a>&nbsp;
                             <?php
                             } else {
@@ -442,12 +477,12 @@ if(isset($Error))
 		  <TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_SET_2); ?> :</TD>
 			<TD VALIGN="TOP">
 				<!-- Nick can not be modified via the profile command -->
-				<INPUT TYPE="text" NAME="U" SIZE=15 MAXLENGTH=15 VALUE="<?php echo(htmlspecialchars(stripslashes($U))); ?>"<?php if ($done) echo(" READONLY"); if (isset($LIMIT) && $LIMIT) echo(" DISABLED"); ?>>
+				<INPUT TYPE="text" NAME="U" SIZE=15 MAXLENGTH=15 VALUE="<?php echo(htmlspecialchars(stripslashes($U))); ?>"<?php if ($done) echo(" READONLY"); if (isset($LIMIT) && $LIMIT) echo(" DISABLED"); ?>>&nbsp;<?php if (!$done) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
 				<?php
 				if (isset($LIMIT) && $LIMIT)
 				{
 					?>
-					<INPUT TYPE="hidden" NAME="U" VALUE="<?php echo(htmlspecialchars(stripslashes($U))); ?>">&nbsp;<?php if (!$done) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
+					<INPUT TYPE="hidden" NAME="U" VALUE="<?php echo(htmlspecialchars(stripslashes($U))); ?>">
 					<?php
 				};
 				?>
@@ -458,12 +493,12 @@ if(isset($Error))
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_1); ?> :</TD>
 			<TD VALIGN="TOP">
 				<!-- Password can not be modified via the profile command -->
-				<INPUT TYPE="password" NAME="prev_PASSWORD" AUTOCOMPLETE="OFF" SIZE=15 MAXLENGTH=15 VALUE="<?php echo(htmlspecialchars(stripslashes($prev_PASSWORD))); ?>"<?php if ($done) echo(" READONLY"); if (isset($LIMIT) && $LIMIT) echo(" DISABLED"); ?>>
+				<INPUT TYPE="password" NAME="prev_PASSWORD" AUTOCOMPLETE="OFF" SIZE=15 MAXLENGTH=15 VALUE="<?php echo(htmlspecialchars(stripslashes($prev_PASSWORD))); ?>"<?php if ($done) echo(" READONLY"); if (isset($LIMIT) && $LIMIT) echo(" DISABLED"); ?>>&nbsp;<?php if (!$done) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
 				<?php
 				if (isset($LIMIT) && $LIMIT)
 				{
 					?>
-					<INPUT TYPE="hidden" NAME="prev_PASSWORD" VALUE="<?php echo(htmlspecialchars(stripslashes($prev_PASSWORD))); ?>">&nbsp;<?php if (!$done) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
+					<INPUT TYPE="hidden" NAME="prev_PASSWORD" VALUE="<?php echo(htmlspecialchars(stripslashes($prev_PASSWORD))); ?>">
 					<?php
 				};
 				?>
@@ -506,6 +541,27 @@ if(isset($Error))
 			</TD>
 		</TR>
 		<TR>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_7); ?> :</TD>
+			<TD VALIGN="TOP" CLASS=success>
+			<?php
+			  $myCalendar = new tc_calendar("date5", true, false);
+			  $myCalendar->setPicture('plugins/calendar/images/iconCalendar.gif');
+			  if(isset($BIRTHDAY))
+			  {
+			    $birth_day = strtotime($BIRTHDAY);
+				$myCalendar->setDate(date('d',$birth_day), date('m',$birth_day), date('Y',$birth_day));
+			  }
+			  $myCalendar->setPath("plugins/calendar/");
+			  $myCalendar->setYearSelect(1935, date('Y'));
+			  $myCalendar->dateAllow('1935-01-01', date('Y-m-d'));
+			  $myCalendar->setDateFormat('j F Y');
+			  $myCalendar->writeScript();
+			?>
+				&nbsp;<?php if (!$done && C_REQUIRE_BDAY) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
+				<INPUT TYPE="hidden" NAME="BIRTHDAY" VALUE="<?php echo($BIRTHDAY); ?>">
+			</TD>
+		</TR>
+		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_45); ?> :</TD>
 			<TD VALIGN="TOP">
 				<SELECT name="GENDER" id="gender" onChange="swapImage('gender','genderToSwap')">
@@ -520,6 +576,16 @@ if(isset($Error))
 		<TR>
 			<TD COLSPAN=2 ALIGN="center">
 				<INPUT type="checkbox" name="SHOWEMAIL" value="1" <?php if(isset($SHOWEMAIL) && $SHOWEMAIL) echo("checked"); ?><?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_REG_33); ?>
+			</TD>
+		</TR>
+		<TR>
+			<TD COLSPAN=2 ALIGN="center">
+				<INPUT type="checkbox" name="SHOW_BDAY" value="1" <?php if (isset($SHOW_BDAY) && $SHOW_BDAY) echo("checked"); ?><?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_PRO_8); ?>
+			</TD>
+		</TR>
+		<TR>
+			<TD COLSPAN=2 ALIGN="center">
+				<INPUT type="checkbox" name="SHOW_AGE" value="1" <?php if (isset($SHOW_AGE) && $SHOW_AGE) echo("checked"); ?><?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_PRO_9); ?>
 			</TD>
 		</TR>
 <?php

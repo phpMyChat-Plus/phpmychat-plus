@@ -134,7 +134,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_PASS_7)
 					if (!isset($Error) || $Error == "")
 					{
 						$DbLink->query("UPDATE ".C_REG_TBL." SET password='$PWD_Hash', ip='$IP' WHERE username='$U' AND email='$EMAIL' AND s_question='$SECRET_QUESTION' AND s_answer='$SECRET_ANSWER'");
-						$Message = L_PASS_8;
+						$Message = L_PASS_8."<br />".sprintf(L_PASS_10,$pmc_password);
 					};
 				}
 			}
@@ -149,7 +149,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_PASS_7)
 $DbLink->close();
 
 // Password has reset successfully ?
-$done = (isset($Message) && $Message == L_PASS_8);
+$done = (isset($Message) && $Message != "");
 
 // For translations with an explicit charset (not the 'x-user-defined' one)
 if (!isset($FontName)) $FontName = "";

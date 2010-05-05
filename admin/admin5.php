@@ -5,10 +5,13 @@
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
 
 if (!isset($ChatPath)) $ChatPath = "";
+$mydate = isset($_REQUEST["date5"]) ? $_REQUEST["date5"] : "";
+if($mydate != "") $INSTALL_DATE = $mydate;
 
 if (C_NO_SWEAR) include("./lib/swearing.lib.php");
 $pptype = "big";
 require_once("./lib/support.lib.php");
+require("./plugins/calendar/tc_calendar.php");
 ?>
 
 <script type="text/javascript" language="javascript">
@@ -364,6 +367,7 @@ if (UPD_CHECK)
 					<li><a href="#lurking">Lurking Mod</a></li>
 					<li><a href="#quote">Random Quote</a></li>
 					<li><a href="#ghost">Ghost Control</a></li>
+					<li><a href="#bday">Birthday Mod</a></li>
 				</ul>
 			</dd>
 	</dl>
@@ -621,7 +625,12 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"EN_STATS = '$vEN_STATS', ".
 						"ALLOW_VIDEO = '$vALLOW_VIDEO', ".
 						"VIDEO_WIDTH = '$vVIDEO_WIDTH', ".
-						"VIDEO_HEIGHT = '$vVIDEO_HEIGHT'".
+						"VIDEO_HEIGHT = '$vVIDEO_HEIGHT', ".
+						"REQUIRE_BDAY = '$vREQUIRE_BDAY', ".
+						"SEND_BDAY_EMAIL = '$vSEND_BDAY_EMAIL', ".
+						"SEND_BDAY_TIME = '$vSEND_BDAY_TIME', ".
+						"SEND_BDAY_INTVAL = '$vSEND_BDAY_INTVAL', ".
+						"SEND_BDAY_PATH = '$vSEND_BDAY_PATH'".
 				" WHERE ID='0'";
 
 		$DbLink->query($query);
@@ -740,8 +749,7 @@ if (C_LAST_SAVED_ON)
 	settype($last_saved_on = mysql_to_ts(C_LAST_SAVED_ON), "integer");
 	if (C_TMZ_OFFSET) settype($tmz_offset = C_TMZ_OFFSET, "integer");
 	$Last_Saved_On = $last_saved_on + $tmz_offset*60*60;
-	$Last_Saved_On = strftime(L_LONG_DATETIME,$Last_Saved_On);
-	if (eregi("win", PHP_OS)) $Last_Saved_On = utf_conv(WIN_DEFAULT,$Charset,$Last_Saved_On);
+	$Last_Saved_On = utf_conv(WIN_DEFAULT,$Charset,strftime(L_LONG_DATETIME,$Last_Saved_On));
 }
 if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 {
@@ -1440,8 +1448,22 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     <td><b>Edit the installation date of your chat.</b><br />
 		(the date since the counter had been supposed to start - keep the format to YYYY-MM-DD)
     </td>
-    <td>
-		<input name="vINSTALL_DATE" type="text" size="7" maxlength="10" value="<?php echo $INSTALL_DATE; ?>">
+    <td class=success>
+		<?php
+		  $myCalendar = new tc_calendar("date5", true, false);
+		  $myCalendar->setPicture('./plugins/calendar/images/iconCalendar.gif');
+		  if(isset($INSTALL_DATE) && $INSTALL_DATE != "")
+		  {
+		    $installdate = strtotime($INSTALL_DATE);
+			$myCalendar->setDate(date('d',$installdate), date('m',$installdate), date('Y',$installdate));
+		  }
+		  $myCalendar->setPath("./plugins/calendar/");
+		  $myCalendar->setYearSelect(2000, date('Y'));
+		  $myCalendar->dateAllow('2000-01-01', date('Y-m-d'));
+		  $myCalendar->setDateFormat('j F Y');
+		  $myCalendar->writeScript();
+		?>
+		<input name="vINSTALL_DATE" type="hidden" value="<?php echo $INSTALL_DATE; ?>">
 	</td>
 </tr>
 </table>
@@ -2650,6 +2672,88 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 -->
+</table>
+<table align="center" width="780" class=table>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="bday"></a><b>Birthday Mod</b></td></tr>
+	<tr class=\"thumbIndex\">
+		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+	</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Birthdays required on registration and profiles.</b>
+	</td>
+    <td>
+        <select name="vREQUIRE_BDAY">
+	        <option value="0"<?php if($REQUIRE_BDAY==0){ echo " selected"; } ?>>Optional</option>
+	        <option value="1"<?php if($REQUIRE_BDAY==1){ echo " selected"; } ?>>Required</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td><b>Send automatic Greetings by email to users on their Birthdays.</b><br />
+    	<i><font color=red>Important: if enabled, the script will work only if the chat page will be visited/loaded in the sending interval (default = 7 days). After that interval, the email draft will be dropped off!</font></i>
+	</td>
+    <td>
+		<select name="vSEND_BDAY_EMAIL">
+	        <option value="0"<?php if($SEND_BDAY_EMAIL==0){ echo " selected"; } ?>>Don't send</option>
+	        <option value="1"<?php if($SEND_BDAY_EMAIL==1){ echo " selected"; } ?>>Send Greetings</option>
+        </select>
+	</td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Set the time from midnight you want Greetings to be triggered for sending.</b><br />
+    	<i>Hint: Positive or negative values allowed (0 = midnight).<br />
+		Please note that this setting is taking in consideration the server time, not the user's time, therefore it's possible that the email will be send within a (+-)timezone deviation</i>
+	</td>
+    <td>
+			<input name="vSEND_BDAY_TIME" type="text" size="7" maxlength="2" value="<?php echo $SEND_BDAY_TIME; ?>"> (mins)
+    </td>
+</tr>
+<tr>
+    <td><b>How many days the Greetings will be up for sending.</b><br />
+    	<i>Hint: If there is no one in the chat nor visiting the chat page within this interval, the Greeting will not be send anymore, as the effect on Celebrated user would not be the same.</i>
+	</td>
+    <td>
+			<input name="vSEND_BDAY_INTVAL" type="text" size="7" maxlength="2" value="<?php echo $SEND_BDAY_INTVAL; ?>"> (days)
+    </td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Set the time from midnight you want Greetings to be triggered for sending.</b><br />
+    	<i>Hint: Positive or negative values allowed (0 = midnight).<br />
+		Please note that this setting is taking in consideration the server time, not the user's time, therefore it's possible that the email will be send within a (+-)timezone deviation</i>
+	</td>
+	<td>
+		<?php
+		$bdays='files/birthday/';
+		$bdayfiles = opendir($bdays); #open directory
+		echo ("<select name=\"vSEND_BDAY_PATH\">");
+			$i = 0;
+			while (false !== ($bdayfile = readdir($bdayfiles)))
+			{
+				if (!eregi("\.html",$bdayfile) && $bdayfile!=='.' && $bdayfile!=='..')
+				{
+					$bdaysfile[]=$bdayfile;
+			 		$i++;
+				}
+			}
+			closedir($bdayfiles);
+			if ($bdaysfile)
+			{
+			  	natsort($bdaysfile);
+			}
+			$j = 1;
+			foreach ($bdaysfile as $bdayname)
+			{
+				echo("<option value=\"".$bdays.$bdayname."\"");
+				if($SEND_BDAY_PATH == $bdays.$bdayname) echo(" selected");
+				echo(">".$bdayname."</option>");
+			$j++;
+			}
+		unset($bdaysfile);
+		?>
+		</select>
+	</td>
+</tr>
 </table>
 <br />
 <tr>

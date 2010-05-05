@@ -453,15 +453,6 @@ define("L_RELOAD_CHAT", "Setările serverului de chat tocmai au fost modificate.
 //Size command error by Ciprian
 define("L_ERR_SIZE", "Dimensiunea fontului poate fi doar\\nnulă (pentru resetare) sau cuprinsă între 7 şi 15");
 
-// Week days for Status Worldtime and Open Schedule by Ciprian
-define("L_MON", "Luni");
-define("L_TUE", "Marţi");
-define("L_WED", "Miercuri");
-define("L_THU", "Joi");
-define("L_FRI", "Vineri");
-define("L_SAT", "Sâmbătă");
-define("L_SUN", "Duminică");
-
 // Password reset form by Ciprian
 define("L_PASS_0", "Formular pentru resetarea parolei");
 define("L_PASS_1", "Întrebarea secretă");
@@ -473,6 +464,7 @@ define("L_PASS_6", "Răspunsul corect");
 define("L_PASS_7", "Resetează parola");
 define("L_PASS_8", "Parola a fost resetată cu succes.");
 define("L_PASS_9", "Noua ta parolă pentru a intra pe chat");
+define("L_PASS_10", "Noua ta parolă pentru a intra pe chat: %s");
 define("L_PASS_11", "Bine ai revenit pe serverul nostru de chat");
 define("L_PASS_12", "Alegeţi întrebarea ...");
 define("L_ERR_PASS_1", "Poreclă greşită. Alege-o pe-a ta!");
@@ -562,7 +554,10 @@ define("L_DEL_BYE", "nu mă mai aşteptaţi...");
 define("L_EXTRA_PRIV1", "Citeşte PM-uri");
 define("L_EXTRA_PRIV2", "PM-uri Noi");
 
-// Months for Open Schedule by Ciprian
+// Set the first day of the week in your language (0 for Sunday, 1 for Monday)
+define("FIRST_DAY", "1");
+
+// Months Long Names
 define("L_JAN", "Ianuarie");
 define("L_FEB", "Februarie");
 define("L_MAR", "Martie");
@@ -575,9 +570,38 @@ define("L_SEP", "Septembrie");
 define("L_OCT", "Octombrie");
 define("L_NOV", "Noiembrie");
 define("L_DEC", "Decembrie");
+// Months Short Names
+define("L_S_JAN", "Ian");
+define("L_S_FEB", "Feb");
+define("L_S_MAR", "Mar");
+define("L_S_APR", "Apr");
+define("L_S_MAY", "Mai");
+define("L_S_JUN", "Iun");
+define("L_S_JUL", "Iul");
+define("L_S_AUG", "Aug");
+define("L_S_SEP", "Sept");
+define("L_S_OCT", "Oct");
+define("L_S_NOV", "Nov");
+define("L_S_DEC", "Dec");
+// Week days Long Names
+define("L_MON", "Luni");
+define("L_TUE", "Marţi");
+define("L_WED", "Miercuri");
+define("L_THU", "Joi");
+define("L_FRI", "Vineri");
+define("L_SAT", "Sâmbătă");
+define("L_SUN", "Duminică");
+// Week days Short Names
+define("L_S_MON", "L");
+define("L_S_TUE", "Ma");
+define("L_S_WED", "Mi");
+define("L_S_THU", "J");
+define("L_S_FRI", "V");
+define("L_S_SAT", "S");
+define("L_S_SUN", "D");
 
 // Localized date format - read the parameters here: http://www.php.net/manual/en/function.strftime.php
-if (eregi("win", PHP_OS)) {
+if (stristr(PHP_OS,'win')) {
 setlocale(LC_ALL, "ROU_ROU.UTF-8", "ROU_ROU", "romanian.UTF-8", "romanian"); // For Windows servers
 } else {
 setlocale(LC_ALL, "ro_RO.UTF-8@euro", "ro_RO.UTF-8", "rou.UTF-8", "rou_rou.UTF-8"); // For Unix/FreeBSD servers
@@ -682,4 +706,11 @@ define("L_ORIG_VIDEO", "pentru a deschide pagina site-ului original");
 define("L_HELP_CMD_35", "Permite postarea <i>unui film video</i> sau a <i>unui fișier audio</i> în loc de mesaj, folosind un mini Flash Player integrat.<br />Utilizare: Nu trebuie decât să pastaţi adresa la care se află filmul! Exemplu <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Trebuie să aveţi Shockwave Flash Player instalat pe calculator. Atenţie la literele mari şi mici - contează.<br />SFAT: tastaţi /video urmat de un spaţiu şi apoi pastaţi adresa URL.");
 define("L_HELP_CMD_35a", "Cea de-a doua comandă funcţionează numai cu youtube.com ca sursă video.<br />Exemplu <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
 define("L_HELP_CMD_36", "Permite postarea <i>unui film video youtube</i> în loc de mesaj, folosind un mini Flash Player integrat.<br />Utilizare: Nu trebuie decât să pastaţi adresa la care se află filmul! Exemplu <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Trebuie să aveţi Shockwave Flash Player instalat pe calculator. Atenţie la literele mari şi mici - contează.<br />SFAT: tastaţi /tube urmat de un spaţiu şi apoi pastaţi adresa URL.");
+
+// Birthday mod - by Ciprian
+define("L_PRO_7", "Data naşterii");
+define("L_PRO_8", "arată data naşterii în profilul public");
+define("L_PRO_9", "arată vârsta în profilul public");
+define("L_PRO_10", "Vârsta");
+define("L_PRO_11", "%d ani, %d luni şi %d zile");
 ?>

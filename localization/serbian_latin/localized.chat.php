@@ -453,15 +453,6 @@ define("L_RELOAD_CHAT", "Upravo su promenjena podešavanja ovog servera. Da bi s
 //Size command error by Ciprian
 define("L_ERR_SIZE", "Veličina slova može biti samo \\nnull (za reset) ili između 7 i 15");
 
-// Week days for Status Worldtime and Open Schedule by Ciprian
-define("L_MON", "Ponedeljak");
-define("L_TUE", "Utorak");
-define("L_WED", "Sreda");
-define("L_THU", "Četvrtak");
-define("L_FRI", "Petak");
-define("L_SAT", "Subota");
-define("L_SUN", "Nedelja");
-
 // Password reset form by Ciprian
 define("L_PASS_0", "Obrazac podešavanja lozinke");
 define("L_PASS_1", "Tajno pitanje");
@@ -562,7 +553,10 @@ define("L_DEL_BYE", "ne čekajte me");
 define("L_EXTRA_PRIV1", "Pročitane PM"); // keep it short
 define("L_EXTRA_PRIV2", "Nove PM"); // keep it short
 
-// Months for Open Schedule by Ciprian
+// Set the first day of the week in your language (0 for Sunday, 1 for Monday)
+define("FIRST_DAY", "1");
+
+// Months Long Names
 define("L_JAN", "Januar");
 define("L_FEB", "Februar");
 define("L_MAR", "Mart");
@@ -575,10 +569,39 @@ define("L_SEP", "Septembar");
 define("L_OCT", "Oktobar");
 define("L_NOV", "Novembar");
 define("L_DEC", "Decembar");
+// Months Short Names
+define("L_S_JAN", "Jan");
+define("L_S_FEB", "Feb");
+define("L_S_MAR", "Mar");
+define("L_S_APR", "Apr");
+define("L_S_MAY", "Maj");
+define("L_S_JUN", "Jun");
+define("L_S_JUL", "Jul");
+define("L_S_AUG", "Avg");
+define("L_S_SEP", "Sep");
+define("L_S_OCT", "Okt");
+define("L_S_NOV", "Nov");
+define("L_S_DEC", "Dec");
+// Week days Long Names
+define("L_MON", "Ponedeljak");
+define("L_TUE", "Utorak");
+define("L_WED", "Srijeda");
+define("L_THU", "Četvrtak");
+define("L_FRI", "Petak");
+define("L_SAT", "Subota");
+define("L_SUN", "Nedelja");
+// Week days Short Names
+define("L_S_MON", "Pon");
+define("L_S_TUE", "Uto");
+define("L_S_WED", "Sri");
+define("L_S_THU", "Čet");
+define("L_S_FRI", "Pet");
+define("L_S_SAT", "Sub");
+define("L_S_SUN", "Ned");
 
 // Localized date format
 // Set the SR specific date/time format
-if (eregi("win", PHP_OS)) {
+if (stristr(PHP_OS,'win')) {
 setlocale(LC_ALL, "serbian.UTF-8", "serbian");
 } else {
 setlocale(LC_ALL, "sr_CS.UTF-8", "sr.UTF-8", "serbian.UTF-8", "srl.UTF-8", "srp_srp.UTF-8"); // For SR formats

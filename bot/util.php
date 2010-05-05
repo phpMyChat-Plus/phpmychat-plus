@@ -234,7 +234,7 @@ function getfdate(){
 */
 function getfdate($date_format){
 // Set the US specific date/time format
-if (eregi("win", PHP_OS)) {
+if (stristr(PHP_OS,'win')) {
 setlocale(LC_TIME, "eng-usa.UTF-8", "eng-usa");
 } else {
 setlocale(LC_TIME, "en_US.UTF-8", "enu.UTF-8", "usa.UTF-8", "enu_enu.UTF-8", "English-usa.UTF-8");

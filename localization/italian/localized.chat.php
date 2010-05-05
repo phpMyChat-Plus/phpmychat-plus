@@ -455,15 +455,6 @@ define("L_RELOAD_CHAT", "Le impostazioni per questo server sono state modificate
 //Size command error by Ciprian
 define("L_ERR_SIZE", "La dimensione del carattere può essere solo\\nnull (per reimpostare) o tra 7 e 15");
 
-// Week days for Status Worldtime and Open Schedule by Ciprian
-define("L_MON", "Lunedi");
-define("L_TUE", "Martedi");
-define("L_WED", "Mercoledi");
-define("L_THU", "Giovedi");
-define("L_FRI", "Venerdi");
-define("L_SAT", "Sabato");
-define("L_SUN", "Domenica");
-
 // Password reset form by Ciprian
 define("L_PASS_0", "Procedura per il ripristino della password");
 define("L_PASS_1", "Domanda segreta");
@@ -556,7 +547,10 @@ define("L_DEL_BYE", "non attendere per me");
 define("L_EXTRA_PRIV1", "Leggi PMs");
 define("L_EXTRA_PRIV2", "Nuovi Pms");
 
-// Months for Open Schedule by Ciprian
+// Set the first day of the week in your language (0 for Sunday, 1 for Monday)
+define("FIRST_DAY", "1");
+
+// Months Long Names
 define("L_JAN", "gennaio");
 define("L_FEB", "febbraio");
 define("L_MAR", "marzo");
@@ -569,9 +563,38 @@ define("L_SEP", "settembre");
 define("L_OCT", "ottobre");
 define("L_NOV", "novembre");
 define("L_DEC", "dicembre");
+// Months Short Names
+define("L_S_JAN", "gen");
+define("L_S_FEB", "feb");
+define("L_S_MAR", "mar");
+define("L_S_APR", "apr");
+define("L_S_MAY", "mag");
+define("L_S_JUN", "giu");
+define("L_S_JUL", "lug");
+define("L_S_AUG", "ago");
+define("L_S_SEP", "set");
+define("L_S_OCT", "ott");
+define("L_S_NOV", "nov");
+define("L_S_DEC", "dic");
+// Week days Long Names
+define("L_MON", "lunedì");
+define("L_TUE", "martedì");
+define("L_WED", "mercoledì");
+define("L_THU", "giovedì");
+define("L_FRI", "venerdì");
+define("L_SAT", "sabato");
+define("L_SUN", "domenica");
+// Week days Short Names
+define("L_S_MON", "lun");
+define("L_S_TUE", "mar");
+define("L_S_WED", "mer");
+define("L_S_THU", "gio");
+define("L_S_FRI", "ven");
+define("L_S_SAT", "sab");
+define("L_S_SUN", "dom");
 
 // Localized date format - read the parameters here: http://www.php.net/manual/en/function.strftime.php
-if (eregi("win", PHP_OS)) {
+if (stristr(PHP_OS,'win')) {
 setlocale(LC_ALL, "ita_ITA.UTF-8", "italian.UTF-8", "italian");
 } else {
 setlocale(LC_ALL, "it_IT.UTF-8", "ita_ITA.UTF-8", "italian.UTF-8");

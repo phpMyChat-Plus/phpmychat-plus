@@ -1,6 +1,6 @@
 <?php
 // File : vietnamese/localized.cmds.php (23.08.2009 - rev.1)
-// Translation by Marshall <hellomarshal_lookatme@netzero.net>
+// Translation by Marshall <hellomarshall_lookatme@yahoo.com.vn>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
 // You can use more than one word (synonyms, abbreviations) as commands in your language. Multiple words must be separated by commas, without spaces! You have the original English strings/commands as examples below (no need to add the English words here)

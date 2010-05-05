@@ -23,12 +23,20 @@ if (isset($_POST))
 // Fix a security hole
 if (isset($L) && !is_dir("./localization/".$L)) exit();
 
+$mydate = isset($_REQUEST["date5"]) ? $_REQUEST["date5"] : "";
+if($mydate != "")
+{
+	$BIRTHDAY = $mydate;
+	$format_birth_day = strftime(L_SHORT_DATE,strtotime($BIRTHDAY));
+}
+
 require("./config/config.lib.php");
 require("./lib/release.lib.php");
 require("./localization/languages.lib.php");
 require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
 include("./lib/mail_validation.lib.php");
+require("./plugins/calendar/tc_calendar.php");
 
 if (!function_exists("utf8_substr"))
 {
@@ -160,7 +168,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 			if (stristr($avatar,C_AVA_RELPATH . "uploaded/") && @rename($avatar, C_AVA_RELPATH . "uploaded/avatar_".$av_user_name.".gif")) $AVATARURL = C_AVA_RELPATH . "uploaded/avatar_".$av_user_name.".gif";
 			$av_done = 1;
 			// End of Upload avatar mod - by Ciprian
-			$DbLink->query("INSERT INTO ".C_REG_TBL." VALUES ('', '', '$U', '$Latin1', '$PWD_Hash', '$FIRSTNAME', '$LASTNAME', '$COUNTRY', '$WEBSITE', '$EMAIL', $showemail, 'user', '',".time().", '$IP', '$GENDER', '$allowpopup', '$PICTURE', '$DESCRIPTION', '$FAVLINK', '$FAVLINK1', '$SLANG', '$COLORNAME', '$AVATARURL', '$SECRET_QUESTION', '$SECRET_ANSWER', '', '', '$USE_GRAV', '')");
+			$DbLink->query("INSERT INTO ".C_REG_TBL." VALUES ('', '', '$U', '$Latin1', '$PWD_Hash', '$FIRSTNAME', '$LASTNAME', '$COUNTRY', '$WEBSITE', '$EMAIL', $showemail, 'user', '',".time().", '$IP', '$GENDER', '$allowpopup', '$PICTURE', '$DESCRIPTION', '$FAVLINK', '$FAVLINK1', '$SLANG', '$COLORNAME', '$AVATARURL', '$SECRET_QUESTION', '$SECRET_ANSWER', '', '', '$USE_GRAV', '', '$BIRTHDAY', '$SHOW_BDAY', '$SHOW_AGE', '')");
 			if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@")) $Message = "";
 			else $Message = L_REG_9;
 // Patch for sending an email to the Administrator upon new user registration to the chat system.
@@ -210,6 +218,16 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      } else {
        $usegrav = L_REG_22;
      }
+     if ($SHOW_BDAY) {
+       $shwbday = L_REG_20;
+     } else {
+       $shwbday = L_REG_22;
+     }
+     if ($SHOW_AGE) {
+       $shwage = L_REG_20;
+     } else {
+       $shwage = L_REG_22;
+     }
      $emailMessage .= ""
      . "----------------------------------------------\r\n"
      . "".L_SET_2.": ".$U."\r\n"
@@ -222,6 +240,9 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      . "".L_REG_8.": ".$EMAIL."\r\n"
      . "".L_REG_30.": ".($FIRSTNAME ? $FIRSTNAME : L_NOT_SELECTED)."\r\n"
      . "".L_REG_31.": ".($LASTNAME ? $LASTNAME : L_NOT_SELECTED)."\r\n"
+	 . "".L_PRO_7.": ".($BIRTHDAY != "" ? $format_birth_day : L_NOT_SELECTED)."\r\n"
+     . "".L_PRO_8.": ".$shwbday."\r\n"
+     . "".L_PRO_9.": ".$shwage."\r\n"
      . "".L_REG_45.": ".$sex."\r\n"
      . "".L_REG_36.": ".($COUNTRY ? $COUNTRY : L_NOT_SELECTED)."\r\n"
      . "".L_REG_32.": ".($WEBSITE ? $WEBSITE : L_NOT_SELECTED)."\r\n"
@@ -275,6 +296,16 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 		} else {
 		   $usegrav = "no";
 		}
+		if ($SHOW_BDAY) {
+		  $shwbday = "yes";
+		} else {
+		  $shwbday = "no";
+		}
+		if ($SHOW_AGE) {
+		  $shwage = "yes";
+		} else {
+		  $shwage = "no";
+		}
      $emailMessage = "New user registration notification for "
      . ((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME) ." at ". $Chat_URL." :\r\n\r\n"
      . "----------------------------------------------\r\n"
@@ -284,8 +315,11 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      . "Secret question: ".$secret_questiona."\r\n"
      . "Secret answer: ".$SECRET_ANSWER."\r\n"
      . "Email: ".$EMAIL
-     . ($FIRSTNAME ? "\r\nFirst name: ".$FIRSTNAME."" : "")
-     . ($LASTNAME ? "\r\nLast name: ".$LASTNAME."" : "")
+     . ($FIRSTNAME ? "\r\nFirst name: ".$FIRSTNAME : "")
+     . ($LASTNAME ? "\r\nLast name: ".$LASTNAME : "")
+     . ($BIRTHDAY != "" ? "\r\nDate of birth: ".$BIRTHDAY : "")
+     . ($BIRTHDAY != "" ? "\r\nDisplay birthday on public info: ".$shwbday : "")
+     . ($BIRTHDAY != "" ? "\r\nDisplay age on public info: ".$shwage : "")
      . "\r\nGender: ".$sex
      . ($COUNTRY ? "\r\nCountry: ".$COUNTRY : "")
      . ($WEBSITE ? "\r\nWWW: ".$WEBSITE."" : "")
@@ -514,6 +548,27 @@ if(isset($Error))
 			</TD>
 		</TR>
 		<TR>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_7); ?> :</TD>
+			<TD VALIGN="TOP" CLASS=success>
+			<?php
+			  $myCalendar = new tc_calendar("date5", true, false);
+			  $myCalendar->setPicture('plugins/calendar/images/iconCalendar.gif');
+			  if(isset($BIRTHDAY))
+			  {
+			    $birth_day = strtotime($BIRTHDAY);
+				$myCalendar->setDate(date('d',$birth_day), date('m',$birth_day), date('Y',$birth_day));
+			  }
+			  $myCalendar->setPath("plugins/calendar/");
+			  $myCalendar->setYearSelect(1935, date('Y'));
+			  $myCalendar->dateAllow('1935-01-01', date('Y-m-d'));
+			  $myCalendar->setDateFormat('j F Y');
+			  $myCalendar->writeScript();
+			?>
+				&nbsp;<?php if (!$done && C_REQUIRE_BDAY) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
+				<INPUT TYPE="hidden" NAME="BIRTHDAY" VALUE="<?php echo($BIRTHDAY); ?>">
+			</TD>
+		</TR>
+		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_45); ?> :</TD>
 			<TD VALIGN="TOP">
 				<SELECT name="GENDER" id="gender" onChange="swapImage('gender','genderToSwap')">
@@ -527,7 +582,17 @@ if(isset($Error))
 		</TR>
 		<TR>
 			<TD COLSPAN=2 ALIGN="center">
-				<INPUT type="checkbox" name="SHOWEMAIL" value="1" <?php if (isset($SHOWEMAIL) && $SHOWEMAIL) echo("checked"); ?><?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_REG_33); ?>
+				<INPUT type="checkbox" name="SHOWEMAIL" value="1" <?php if ((isset($SHOWEMAIL) && $SHOWEMAIL) || !isset($SHOWEMAIL)) echo("checked"); ?><?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_REG_33); ?>
+			</TD>
+		</TR>
+		<TR>
+			<TD COLSPAN=2 ALIGN="center">
+				<INPUT type="checkbox" name="SHOW_BDAY" value="1" <?php if ((isset($SHOW_BDAY) && $SHOW_BDAY) || !isset($SHOW_BDAY)) echo("checked"); ?><?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_PRO_8); ?>
+			</TD>
+		</TR>
+		<TR>
+			<TD COLSPAN=2 ALIGN="center">
+				<INPUT type="checkbox" name="SHOW_AGE" value="1" <?php if ((isset($SHOW_AGE) && $SHOW_AGE) || !isset($SHOW_AGE)) echo("checked"); ?><?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_PRO_9); ?>
 			</TD>
 		</TR>
 		<TR>

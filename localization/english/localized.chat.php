@@ -80,7 +80,7 @@ define("L_REG_25", "Close");
 define("L_REG_30", "Firstname");
 define("L_REG_31", "Lastname");
 define("L_REG_32", "WEB");
-define("L_REG_33", "show e-mail in public information");
+define("L_REG_33", "show e-mail address on public info");
 define("L_REG_34", "Editing user profile");
 define("L_REG_35", "Administration");
 define("L_REG_36", "Location/Country");
@@ -453,15 +453,6 @@ define("L_RELOAD_CHAT", "The settings of this server have just been changed. To 
 //Size command error by Ciprian
 define("L_ERR_SIZE", "The font size value can only be\\nnull (for reset) or between 7 and 15");
 
-// Week days for Status Worldtime and Open Schedule by Ciprian
-define("L_MON", "Monday");
-define("L_TUE", "Tuesday");
-define("L_WED", "Wednesday");
-define("L_THU", "Thursday");
-define("L_FRI", "Friday");
-define("L_SAT", "Saturday");
-define("L_SUN", "Sunday");
-
 // Password reset form by Ciprian
 define("L_PASS_0", "Password Resetting form");
 define("L_PASS_1", "Secret question");
@@ -473,6 +464,7 @@ define("L_PASS_6", "Secret answer");
 define("L_PASS_7", "Reset password");
 define("L_PASS_8", "Your password has successfully been reset.");
 define("L_PASS_9", "Your new password to enter the chat");
+define("L_PASS_10", "Your new password to enter the chat: %s");
 define("L_PASS_11", "Welcome back to our chat server!");
 define("L_PASS_12", "Choose your question ...");
 define("L_ERR_PASS_1", "Wrong username. Choose yours.");
@@ -562,7 +554,7 @@ define("L_DEL_BYE", "don’t wait for me...");
 define("L_EXTRA_PRIV1", "Read PMs");
 define("L_EXTRA_PRIV2", "New PMs");
 
-// Months for Open Schedule by Ciprian
+// Months Long Names
 define("L_JAN", "January");
 define("L_FEB", "February");
 define("L_MAR", "March");
@@ -575,12 +567,41 @@ define("L_SEP", "September");
 define("L_OCT", "October");
 define("L_NOV", "November");
 define("L_DEC", "December");
+// Months Short Names
+define("L_S_JAN", "Jan");
+define("L_S_FEB", "Feb");
+define("L_S_MAR", "Mar");
+define("L_S_APR", "Apr");
+define("L_S_MAY", "May");
+define("L_S_JUN", "Jun");
+define("L_S_JUL", "Jul");
+define("L_S_AUG", "Aug");
+define("L_S_SEP", "Sep");
+define("L_S_OCT", "Oct");
+define("L_S_NOV", "Nov");
+define("L_S_DEC", "Dec");
+// Week days Long Names
+define("L_MON", "Monday");
+define("L_TUE", "Tuesday");
+define("L_WED", "Wednesday");
+define("L_THU", "Thursday");
+define("L_FRI", "Friday");
+define("L_SAT", "Saturday");
+define("L_SUN", "Sunday");
+// Week days Short Names
+define("L_S_MON", "Mon");
+define("L_S_TUE", "Tue");
+define("L_S_WED", "Wed");
+define("L_S_THU", "Thu");
+define("L_S_FRI", "Fri");
+define("L_S_SAT", "Sat");
+define("L_S_SUN", "Sun");
 
 // Localized date format
 if (C_ENGLISH_FORMAT == "UK")
 {
 // Set the UK specific date/time format
-if (eregi("win", PHP_OS)) {
+if (stristr(PHP_OS,'win')) {
 setlocale(LC_ALL, "eng-eng.UTF-8", "eng-eng");
 } else {
 setlocale(LC_ALL, "en_GB.UTF-8", "en_GB.UTF-8@euro", "eng.UTF-8", "uk.UTF-8", "eng_eng.UTF-8", "English-uk.UTF-8"); // For UK formats
@@ -588,11 +609,13 @@ setlocale(LC_ALL, "en_GB.UTF-8", "en_GB.UTF-8@euro", "eng.UTF-8", "uk.UTF-8", "e
 define("L_SHORT_DATE", "%d/%m/%Y"); //Change this to your local desired format (keep the short form)
 define("L_SHORT_DATETIME", "%d/%m/%Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
 define("L_LANG", "en_GB");
+// Set the first day of the week in your language (0 for Sunday, 1 for Monday)
+define("FIRST_DAY", "1");
 }
 elseif (C_ENGLISH_FORMAT == "US")
 {
 // Set the US specific date/time format
-if (eregi("win", PHP_OS)) {
+if (stristr(PHP_OS,'win')) {
 setlocale(LC_ALL, "eng-usa.UTF-8", "eng-usa");
 } else {
 setlocale(LC_ALL, "en_US.UTF-8", "enu.UTF-8", "usa.UTF-8", "enu_enu.UTF-8", "English-usa.UTF-8"); // For American formats
@@ -600,6 +623,8 @@ setlocale(LC_ALL, "en_US.UTF-8", "enu.UTF-8", "usa.UTF-8", "enu_enu.UTF-8", "Eng
 define("L_SHORT_DATE", "%m/%d/%Y"); //Change this to your local desired format (keep the short form)
 define("L_SHORT_DATETIME", "%m/%d/%Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
 define("L_LANG", "en_US");
+// Set the first day of the week in your language (0 for Sunday, 1 for Monday)
+define("FIRST_DAY", "0");
 }
 define("ISO_DEFAULT", "iso-8859-1");
 define("WIN_DEFAULT", "windows-1252");
@@ -699,4 +724,11 @@ define("L_ORIG_VIDEO", "to open the original site");
 define("L_HELP_CMD_35", "It allows posting of <i>one video</i> or <i>one audio file</i> in a small Flash player at a time.<br />Usage: Just paste the url of the source to be posted! E.g. <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />You need Shockwave Flash Player installed on your system. The link is case sensitive!<br />HINTS: type /video followed by a space and paste the URL into the box.");
 define("L_HELP_CMD_35a", "The second command only works with youtube.com as video source.<br />E.g. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
 define("L_HELP_CMD_36", "It allows posting of <i>one youtube video</i> in a small Flash player at a time.<br />Usage: Just paste the url of the source to be posted! E.g. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />You need Shockwave Flash Player installed on your system. The link is case sensitive!<br />HINTS: type /tube followed by a space and paste the URL into the box.");
+
+// Birthday mod - by Ciprian
+define("L_PRO_7", "Date of birth");
+define("L_PRO_8", "show birthday on public info");
+define("L_PRO_9", "show age on public info");
+define("L_PRO_10", "Age");
+define("L_PRO_11", "%d years, %d months and %d days");
 ?>

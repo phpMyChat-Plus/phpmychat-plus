@@ -451,15 +451,6 @@ define("L_RELOAD_CHAT", "Bu sunucunun ayarları şu anda değiştirildi. Hatayla
 //Size command error by Ciprian
 define("L_ERR_SIZE", "Yazı boyutu değeri sadece \\nsıfır (reset için) veya 7-15 arası olabilir.");
 
-// Week days for Status Worldtime and Open Schedule by Ciprian
-define("L_MON", "Pazartesi");
-define("L_TUE", "Salı");
-define("L_WED", "Çarşamba");
-define("L_THU", "Perşembe");
-define("L_FRI", "Cuma");
-define("L_SAT", "Cumartesi");
-define("L_SUN", "Pazar");
-
 // Password reset form by Ciprian
 define("L_PASS_0", "Şifre yenileme formu");
 define("L_PASS_1", "Gizli sorunuz");
@@ -566,7 +557,10 @@ define("L_DEL_BYE", "beni bekleme");
 define("L_EXTRA_PRIV1", "Ö.M’ları oku");
 define("L_EXTRA_PRIV2", "Yeni Ö.M’lar");
 
-// Months for Open Schedule by Ciprian
+// Set the first day of the week in your language (0 for Sunday, 1 for Monday)
+define("FIRST_DAY", "1");
+
+// Months Long Names
 define("L_JAN", "Ocak");
 define("L_FEB", "Şubat");
 define("L_MAR", "Mart");
@@ -579,9 +573,38 @@ define("L_SEP", "Eylül");
 define("L_OCT", "Ekim");
 define("L_NOV", "Kasım");
 define("L_DEC", "Aralık");
+// Months Short Names
+define("L_S_JAN", "Oca");
+define("L_S_FEB", "Şub");
+define("L_S_MAR", "Mar");
+define("L_S_APR", "Nis");
+define("L_S_MAY", "May");
+define("L_S_JUN", "Haz");
+define("L_S_JUL", "Tem");
+define("L_S_AUG", "Ağu");
+define("L_S_SEP", "Eyl");
+define("L_S_OCT", "Eki");
+define("L_S_NOV", "Kas");
+define("L_S_DEC", "Ara");
+// Week days Long Names
+define("L_MON", "Pazartesi");
+define("L_TUE", "Salı");
+define("L_WED", "Çarşamba");
+define("L_THU", "Perşembe");
+define("L_FRI", "Cuma");
+define("L_SAT", "Cumartesi");
+define("L_SUN", "Pazar");
+// Week days Short Names
+define("L_S_MON", "Pzt");
+define("L_S_TUE", "Salı");
+define("L_S_WED", "Çar");
+define("L_S_THU", "Per");
+define("L_S_FRI", "Cum");
+define("L_S_SAT", "Cmt");
+define("L_S_SUN", "Paz");
 
 // Localized date format
-if (eregi("win", PHP_OS)) {
+if (stristr(PHP_OS,'win')) {
 setlocale(LC_ALL, "turkish.UTF-8", "turkish");
 } else {
 setlocale(LC_ALL, "tr_TR.UTF-8", "turkish.UTF-8");

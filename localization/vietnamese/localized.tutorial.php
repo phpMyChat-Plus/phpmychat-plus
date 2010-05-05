@@ -1,6 +1,6 @@
 <?php
 // File : vietnamese/localized.tutorial.php - plus version (26.08.2008 - rev.10)
-// Translation by Marshall <hellomarshal_lookatme@netzero.net>
+// Translation by Marshall <hellomarshall_lookatme@yahoo.com.vn>
 // Updates and corrections by Ciprian Murariu <ciprianmp@yahoo.com>
 
 // Get the names and values for vars sent by the script that called this one

@@ -454,15 +454,6 @@ define("L_RELOAD_CHAT", "Настройките на този сървър бя�
 //Size command error by Ciprian
 define("L_ERR_SIZE", "Стойността за размер на шрифта може да е само \\nнула (за възстановяване на основната) или между 7 и 15");
 
-// Week days for Status World time and Open Schedule by Ciprian
-define("L_MON", "понеделник");
-define("L_TUE", "вторник");
-define("L_WED", "сряда");
-define("L_THU", "четвъртък");
-define("L_FRI", "петък");
-define("L_SAT", "събота");
-define("L_SUN", "неделя");
-
 // Password reset form by Ciprian
 define("L_PASS_0", "Форма за смяна на парола");
 define("L_PASS_1", "Tаен въпрос");
@@ -563,7 +554,10 @@ define("L_DEL_BYE", "не ме чакай");
 define("L_EXTRA_PRIV1", "Прочетени ЧС");
 define("L_EXTRA_PRIV2", "Нови ЧС");
 
-// Months for Open Schedule by Ciprian
+// Set the first day of the week in your language
+define("FIRST_DAY", "1"); // 1 for Monday, 0 for Sunday
+
+// Months Long Names
 define("L_JAN", "януари");
 define("L_FEB", "февруари");
 define("L_MAR", "март");
@@ -576,10 +570,39 @@ define("L_SEP", "септември");
 define("L_OCT", "октомври");
 define("L_NOV", "ноември");
 define("L_DEC", "декември");
+// Months Short Names
+define("L_S_JAN", "ян.");
+define("L_S_FEB", "фев.");
+define("L_S_MAR", "март");
+define("L_S_APR", "апр.");
+define("L_S_MAY", "май");
+define("L_S_JUN", "юни");
+define("L_S_JUL", "юли");
+define("L_S_AUG", "авг.");
+define("L_S_SEP", "сеп.");
+define("L_S_OCT", "окт.");
+define("L_S_NOV", "ное.");
+define("L_S_DEC", "дек.");
+// Week days Long Names
+define("L_MON", "понеделник");
+define("L_TUE", "вторник");
+define("L_WED", "сряда");
+define("L_THU", "четвъртък");
+define("L_FRI", "петък");
+define("L_SAT", "събота");
+define("L_SUN", "неделя");
+// Week days Short Names
+define("L_S_MON", "пон");
+define("L_S_TUE", "вт");
+define("L_S_WED", "ср");
+define("L_S_THU", "четв");
+define("L_S_FRI", "пет");
+define("L_S_SAT", "съб");
+define("L_S_SUN", "нед");
 
 // Localized date format
 // Set the BG specific date/time format
-if (eregi("win", PHP_OS)) {
+if (stristr(PHP_OS,'win')) {
 setlocale(LC_ALL, "bulgarian.UTF-8", "bulgarian.UTF-8@euro", "bul_bul.UTF-8", "bul.UTF-8", "bgr.UTF-8", "bulgarian");
 } else {
 setlocale(LC_ALL, "bg_BG.UTF-8", "bg_BG.UTF-8@euro", "bul_bul.UTF-8", "bul.UTF-8", "bgr_BGR.UTF-8", "bgr.UTF-8", "bulgarian.UTF-8"); // For BG formats
