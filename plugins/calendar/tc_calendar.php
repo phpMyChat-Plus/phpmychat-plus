@@ -185,7 +185,7 @@ class tc_calendar{
 			if($this->show_input){
 				if($this->lang){
 					$to_replace = array("%"," ",".","年","日");
-					$order = str_replace($to_replace,"",L_FORMAT);
+					$order = str_replace($to_replace,"",L_CAL_FORMAT);
 					if(strpos($order,"d") == 0) $this->writeDay();
 					elseif(strpos($order,"B") == 0) $this->writeMonth();
 					elseif(strpos($order,"Y") == 0) $this->writeYear();
@@ -410,7 +410,7 @@ class tc_calendar{
 	function writeDateContainer(){
 		if($this->day && $this->month && $this->year){
 			$dd = date($this->date_format, mktime(0,0,0,$this->month,$this->day,$this->year));
-			if($this->lang) $dd = utf_conv(WIN_DEFAULT,'utf-8',strftime(L_FORMAT, strtotime($dd)));
+			if($this->lang) $dd = utf_conv(WIN_DEFAULT,'utf-8',strftime(L_CAL_FORMAT, strtotime($dd)));
 		}
 		else $dd = L_SEL_DATE;
 

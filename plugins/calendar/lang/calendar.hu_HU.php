@@ -68,7 +68,7 @@ define("L_S_SUN", "V");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1252");
-define("L_FORMAT", "%Y. %B %d.");
+define("L_CAL_FORMAT", "%Y. %B %d.");
 
 // Set the HU specific date/time format
 if (stristr(PHP_OS,"win")) {
