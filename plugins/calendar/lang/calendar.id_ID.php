@@ -11,13 +11,14 @@ define("L_DAY", "Hari");
 define("L_MONTH", "Bulan");
 define("L_YEAR", "Tahun");
 define("L_PREV", "Sebelumnya");
-define("L_NEXT", "Lanjutan");
-define("L_REF_CAL", "Refreshing Kalender...");
+define("L_NEXT", "Selanjutnya");
+define("L_REF_CAL", "Menyegarkan Kalender...");
+define("L_CHK_VAL", "Periksa Nilainya");
 define("L_SEL_LANG", "Pilih Bahasa");
 define("L_SEL_ICON", "Pilih Ikon");
 define("L_SEL_DATE", "Pilih Tanggal");
-define("L_ERR_SEL", "Pilihan Anda tidak valid");
-define("L_NOT_ALLOWED", "Tanggal ini tidak boleh dipilih");
+define("L_ERR_SEL", "Pilihan yang ada pilih salah");
+define("L_NOT_ALLOWED", "Tanggal ini tidak dijinkan untuk dipilih");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

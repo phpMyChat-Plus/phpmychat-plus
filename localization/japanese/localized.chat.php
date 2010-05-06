@@ -709,9 +709,9 @@ define("L_HELP_CMD_35a", "2番目のコマンドは、ビデオファイルに�
 define("L_HELP_CMD_36", "小さなフラッシュプレイヤーに<i>youtubeビデオ</i>を貼り付けることができます。<br />使用法：貼り付けるファイルのURLをペーストするだけです！例：<b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />コンピュータにフラッシュプレイヤーがインストールされている必要があります。URLは大小文字を区別します！<br />ヒント：/tubeコマンドに続き、半角スペースを打ってからURLを入力します。");
 
 // Birthday mod - by Ciprian
-define("L_PRO_7", "Date of birth");
-define("L_PRO_8", "show birthday on public info");
-define("L_PRO_9", "show age on public info");
-define("L_PRO_10", "Age");
-define("L_PRO_11", "%d years, %d months and %d days");
+define("L_PRO_7", "誕生日");
+define("L_PRO_8", "誕生日を公開する");
+define("L_PRO_9", "年齢を公開する");
+define("L_PRO_10", "年齢");
+define("L_PRO_11", "%d年%d月%d日");
 ?>

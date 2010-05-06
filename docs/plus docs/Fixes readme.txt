@@ -34,6 +34,7 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 25.04.2010 - 1.94-beta3:
+- Birthday mod added - for profiles; (functionality extensions)
 - upload class updated to latest 0.29 version; (functionality related)
 - added the Remember me checkbox to remember login data; (privacy & login related)
 19.04.2010 - 1.94-beta2:
