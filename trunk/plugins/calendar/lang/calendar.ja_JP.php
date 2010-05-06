@@ -67,7 +67,7 @@ define("L_S_SAT", "土");
 define("L_S_SUN", "日");
 
 define("WIN_DEFAULT", "Shift_JIS");
-define("L_FORMAT", "%Y年%B%d日");
+define("L_CAL_FORMAT", "%Y年%B%d日");
 
 // Set the JP specific date/time format
 if (stristr(PHP_OS,"win")) {

@@ -73,7 +73,7 @@ if(!defined("L_S_SUN")) define("L_S_SUN", "Sun");
 
 // Windows encoding
 if(!defined("WIN_DEFAULT")) define("WIN_DEFAULT", "windows-1252");
-if(!defined("L_FORMAT")) define("L_FORMAT", "%d %B %Y");
+if(!defined("L_CAL_FORMAT")) define("L_CAL_FORMAT", "%d %B %Y");
 
 //	Long Month Names translation tool
 	define("l_january", defined('L_JAN') ? L_JAN : utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1199145600')));

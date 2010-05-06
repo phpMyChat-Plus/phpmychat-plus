@@ -2,10 +2,14 @@
 
 //Request selected language - by Ciprian
 $lang = (isset($_REQUEST["lang"])) ? $_REQUEST["lang"] : false;
-include_once("lang/calendar.".(isset($lang) ? $lang : L_LANG).".php");
+if(isset($lang) && $lang != "en_US") $language = $lang;
+elseif(defined("L_LANG") && L_LANG != "en_US") $language = L_LANG;
+if(isset($language)){
+include_once("lang/calendar.".$language.".php");
+}
 require('tc_calendar.php');
 
-$thispage = $_SERVER['PHP_SELF']."?lang=".$lang;
+$thispage = $_SERVER['PHP_SELF'].(isset($language) ? "?lang=".$language : "");
 
 $sld = (isset($_REQUEST["selected_day"])) ? $_REQUEST["selected_day"] : 0;
 $slm = (isset($_REQUEST["selected_month"])) ? (int)$_REQUEST["selected_month"] : 0;
@@ -97,6 +101,14 @@ if($startMonday)
 else
 	$startwrite = $total_lastmonth - ($startdate - 1);
 
+if($cobj->lang){
+	$to_replace = array("d","%"," ",".","年","日");
+	$order = str_replace($to_replace,"",L_CAL_FORMAT);
+	if(strpos($order,"B") == 0) $first_input = "B";
+	elseif(strpos($order,"Y") == 0) $first_input = "Y";
+	if(strpos($order,"B") == 1) $second_input = "B";
+	elseif(strpos($order,"Y") == 1) $second_input = "Y";
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -242,6 +254,9 @@ window.onload = function(){ adjustContainer(); };
         <form id="calendarform" name="calendarform" method="post" action="<?php echo($thispage);?>" style="margin: 0px;">
           <table border="0" cellspacing="0" cellpadding="1">
             <tr>
+			<?php
+			if ($first_input == "B"){
+			?>
               <td width="50%" align="left"><select name="m" onchange="javascript:submitCalendar();">
               <?php
               $monthnames = $cobj->getMonthNames();
@@ -251,6 +266,63 @@ window.onload = function(){ adjustContainer(); };
               }
               ?>
               </select>          </td>
+			<?php
+			}
+			elseif ($first_input == "Y"){
+			?>
+              <td width="50%" align="left"><select name="y" onchange="javascript:submitCalendar();">
+              <?php
+              $thisyear = date('Y');
+
+              //check year to be select in case of date_allow is set
+              if(!$show_not_allow && ($date_allow1 || $date_allow2)){
+                if($date_allow1 && $date_allow2){
+                    $da1Time = strtotime($date_allow1);
+                    $da2Time = strtotime($date_allow2);
+
+                    if($da1Time < $da2Time){
+                        $year_start = date('Y', $da1Time);
+                        $year_end = date('Y', $da2Time);
+                    }else{
+                        $year_start = date('Y', $da2Time);
+                        $year_end = date('Y', $da1Time);
+                    }
+                }elseif($date_allow1){
+                    //only date 1 specified
+                    $da1Time = strtotime($date_allow1);
+                    $year_start = date('Y', $da1Time);
+                }elseif($date_allow2){
+                    //only date 2 specified
+                    $da2Time = strtotime($date_allow2);
+                    $year_end = date('Y', $da2Time);
+                }
+              }
+
+              //write year options
+              for($year=$year_start; $year<=$year_end; $year++){
+                $selected = ($year == $y) ? " selected" : "";
+                echo("<option value=\"$year\"$selected>$year</option>");
+              }
+              ?>
+              </select>
+			  </td>
+			<?php
+			}
+			if ($second_input == "B"){
+			?>
+              <td width="50%" align="right"><select name="m" onchange="javascript:submitCalendar();">
+              <?php
+              $monthnames = $cobj->getMonthNames();
+              for($f=1; $f<=sizeof($monthnames); $f++){
+                $selected = ($f == (int)$m) ? " selected" : "";
+                echo("<option value=\"".str_pad($f, 2, "0", STR_PAD_LEFT)."\"$selected>".$monthnames[$f-1]."</option>");
+              }
+              ?>
+              </select>          </td>
+			<?php
+			}
+			elseif ($second_input == "Y"){
+			?>
               <td width="50%" align="right"><select name="y" onchange="javascript:submitCalendar();">
               <?php
               $thisyear = date('Y');
@@ -287,6 +359,9 @@ window.onload = function(){ adjustContainer(); };
               ?>
               </select>
 			  </td>
+			<?php
+			}
+			?>
             </tr>
           </table>
             <input name="selected_day" type="hidden" id="selected_day" value="<?php echo($sld);?>" />
@@ -450,14 +525,14 @@ window.onload = function(){ adjustContainer(); };
         ?>
         <div id="calendar-footer">
           <div class="btn">
-            <div style="float: left; width: 50%; text-align: left;">
+            <div style="float: left; width: 40%; text-align: center;">
             <?php
             if($previous_year >= $year_start && $show_previous){
             ?><a href="javascript:move('<?php echo(str_pad($previous_month, 2, "0", STR_PAD_LEFT));?>', '<?php echo($previous_year);?>');">&lt;&lt; <?php echo(L_PREV); ?></a><?php
             }else echo("&nbsp;");
             ?>
             </div>
-            <div style="float: right; width: 50%; text-align: right;">
+            <div style="float: right; width: 40%; text-align: center;">
             <?php
             if($next_year <= $year_end && $show_next){
             ?><a href="javascript:move('<?php echo(str_pad($next_month, 2, "0", STR_PAD_LEFT));?>', '<?php echo($next_year);?>');"><?php echo(L_NEXT); ?> &gt;&gt;</a><?php
