@@ -9,7 +9,7 @@
 // -- SETTINGS BELOW MUST BE COMPLETED IN ADMIN PANEL --
 
 $Paswd_Length = C_PASS_LENGTH;					// Length of the password to be generated
-$Sender_Name = eregi("your name",C_ADMIN_NAME) ? "Chat Admin" : C_ADMIN_NAME;		// May also be the name of your site
+$Sender_Name = stristr(C_ADMIN_NAME,"your name") ? "Chat Admin" : C_ADMIN_NAME;		// May also be the name of your site
 $Sender_Name1 = $Sender_Name;		// unformated
 $Sender_email = C_ADMIN_EMAIL;			// For the reply address
 $Mail_Greeting = C_MAIL_GREETING;	// To be send as a signature
@@ -60,38 +60,44 @@ function gen_password()
 
 // Credits for this function goes to fwancho <fwancho@whc.net>
 // It can be found at the URL: http://www.zend.com/codex.php?id=307&single=1
-function rfcDate()
+if (!function_exists("rfcDate"))
 {
-	// Translated from imap-4.7c/src/osdep/unix/env_unix.c
-	// env-unix.c is Copyright 2000 by the University of Washington
-	// localtime() not available in php...
-
-	$tn = time(0);
-	$zone = gmdate("H", $tn) * 60 + gmdate("i", $tn);
-	$julian = gmdate("z", $tn);
-	$t = getdate($tn);
-	$zone = $t["hours"] * 60 + $t["minutes"] - $zone;
-
-	// julian can be one of:
-	//  36x  local time is December 31, UTC is January 1, offset -24 hours
-	//    1  local time is 1 day ahead of UTC, offset +24 hours
-	//    0  local time is same day as UTC, no offset
-	//   -1  local time is 1 day behind UTC, offset -24 hours
-	// -36x  local time is January 1, UTC is December 31, offset +24 hours
-	if ($julian = $t["yday"] - $julian)
+	function rfcDate()
 	{
-		$zone += (($julian < 0) == (abs($julian) == 1)) ? -24*60 : 24*60;
-   	};
+		// Translated from imap-4.7c/src/osdep/unix/env_unix.c
+		// env-unix.c is Copyright 2000 by the University of Washington
+		// localtime() not available in php...
 
-	$zone_sign = ($zone > 0 ? "+" : "-");
+		$tn = time(0);
+		$zone = gmdate("H", $tn) * 60 + gmdate("i", $tn);
+		$julian = gmdate("z", $tn);
+		$t = getdate($tn);
+		$zone = $t["hours"] * 60 + $t["minutes"] - $zone;
 
-	return date('D, d M Y H:i:s ', $tn).$zone_sign.sprintf("%02d%02d", abs($zone)/60, abs($zone)%60)." (".strftime("%Z").")";
+		// julian can be one of:
+		//  36x  local time is December 31, UTC is January 1, offset -24 hours
+		//    1  local time is 1 day ahead of UTC, offset +24 hours
+		//    0  local time is same day as UTC, no offset
+		//   -1  local time is 1 day behind UTC, offset -24 hours
+		// -36x  local time is January 1, UTC is December 31, offset +24 hours
+		if ($julian = $t["yday"] - $julian)
+		{
+			$zone += (($julian < 0) == (abs($julian) == 1)) ? -24*60 : 24*60;
+		};
+
+		$zone_sign = ($zone > 0 ? "+" : "-");
+
+		return date('D, d M Y H:i:s ', $tn).$zone_sign.sprintf("%02d%02d", abs($zone)/60, abs($zone)%60)." (".strftime("%Z").")";
+	}
 }
 
-function quote_printable($str,$WithCharset)
+if (!function_exists("quote_printable"))
 {
-	$str = str_replace("%","=",rawurlencode($str));
-	return "=?${WithCharset}?Q?${str}?=";
+	function quote_printable($str,$WithCharset)
+	{
+		$str = str_replace("%","=",rawurlencode($str));
+		return "=?${WithCharset}?Q?${str}?=";
+	};
 };
 	if ($Sender_Name != "") $Sender_Name = quote_printable($Sender_Name,$Charset);
 	$mail_date = rfcDate();
@@ -99,8 +105,8 @@ function quote_printable($str,$WithCharset)
 function send_email($subject,$userString,$pswdString,$welcomeString,$reset)
 {
 	global $Charset;
-	global $EMAIL, $U, $pmc_password;
-	global $Mail_Greeting,$Chat_URL;
+	global $EMAIL, $U, $FIRSTNAME, $pmc_password;
+	global $Mail_Greeting, $Chat_URL;
 	global $Sender_Name, $Sender_Name1, $Sender_email;
 	global $mail_date;
 
@@ -123,6 +129,33 @@ function send_email($subject,$userString,$pswdString,$welcomeString,$reset)
 	$headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed \r\n";
 	$headers .= "Content-Transfer-Encoding: 8bit \r\n";
 
-	return @mail($EMAIL, $Subject, $body, $headers);
+	return @mail($FIRSTNAME != "" ? $FIRSTNAME : $U." <".$EMAIL.">", $Subject, $body, $headers);
 };
+
+function send_dob_email($dob_name,$dob_email,$dob_subject,$DOB_String)
+{
+	global $Charset;
+	global $Mail_Greeting, $Chat_URL;
+	global $Sender_Name, $Sender_Name1, $Sender_email;
+	global $mail_date, $dob1_subject, $dob_birthday;
+
+	$dob_subject = quote_printable($dob_subject,$Charset);
+
+	$dob_body = $DOB_String."\r\n";
+	$dob_body .= $dob1_subject."\r\n".$dob_birthday."\r\n\r\n".$Mail_Greeting."\r\n".$Sender_Name1."\r\n".$Chat_URL;
+	$dob_body = stripslashes($dob_body);
+
+	$dob_headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
+	$dob_headers .= "Bcc: ${Sender_email} \r\n";
+	$dob_headers .= "X-Sender: ${Sender_email} \r\n";
+	$dob_headers .= "X-Mailer: PHP/".PHPVERSION." \r\n";
+	$dob_headers .= "Return-Path: ${Sender_email} \r\n";
+	$dob_headers .= "Date: ${mail_date} \r\n";
+	$dob_headers .= "Mime-Version: 1.0 \r\n";
+	$dob_headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed \r\n";
+	$dob_headers .= "Content-Transfer-Encoding: 8bit \r\n";
+
+	return @mail($dob_name." <".$dob_email.">", $dob_subject, $dob_body, $dob_headers);
+};
+
 ?>

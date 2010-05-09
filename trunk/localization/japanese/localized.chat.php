@@ -713,5 +713,7 @@ define("L_PRO_7", "誕生日");
 define("L_PRO_8", "誕生日を公開する");
 define("L_PRO_9", "年齢を公開する");
 define("L_PRO_10", "年齢");
-define("L_PRO_11", "%d年%d月%d日");
+define("L_PRO_11", "%d年%dヶ月と%d日");
+define("L_DOB_SUBJ", "Happy Birthday %s!");
+define("L_DOB_TIT_1", "Birthdays list");
 ?>

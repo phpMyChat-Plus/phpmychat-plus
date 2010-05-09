@@ -253,7 +253,7 @@ class tc_calendar{
 				$img_height = 16;
 			}
 
-			$div_align = "top:".$img_height."px;left:0px;";
+			$div_align = "top:".$img_height."px;right:0px;";
 		}else{
 			$div_display = "visible";
 			$div_position = "relative";

@@ -303,7 +303,7 @@ else
 if (!empty($kicked))
 {
 	// Kick the user from the current room
-	$kickedUrl = "$From?L=$L&U=" . urlencode(stripslashes($U));
+	$kickedUrl = "$From?L=$L&U=" . stripslashes($U);
 	if ($kicked < 5) $kickedUrl .= "&E=$R&KK=$kicked";
 	?>
 	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
@@ -673,7 +673,7 @@ if (C_ENABLE_PM)
 	}
 	if (substr($User,0,4) != "SYS ")
 	{
-		$who = "$L&U=".urlencode(stripslashes($U))."&R=".urlencode(stripslashes($R));
+		$who = "$L&U=".stripslashes($U)."&R=".urlencode(stripslashes($R));
 		$DbLink->query("SELECT username, address, room, pm_read FROM ".C_MSG_TBL." WHERE (room = '$R' OR room = 'Offline PMs') AND address = '$U' AND pm_read LIKE 'New%' ORDER BY username AND m_time DESC LIMIT 1");
 		if($DbLink->num_rows() > 0)
 		{
@@ -771,7 +771,7 @@ if(C_CHAT_BOOT)
 			if (typeof(window.parent.leaveChat) != 'undefined') window.parent.leaveChat = true;
 			window.parent.frames['loader'].close();
 		};
-		window.parent.window.location = '<?php echo("$From?Ver=$Ver&L=$L&U=".urlencode(stripslashes($U))."&O=$O&ST=$ST&NT=$NT&E=".urlencode(stripslashes($R))."&EN=$T&BT=1"); ?>';
+		window.parent.window.location = '<?php echo("$From?Ver=$Ver&L=$L&U=".stripslashes($U)."&O=$O&ST=$ST&NT=$NT&E=".urlencode(stripslashes($R))."&EN=$T&BT=1"); ?>';
 	// -->
 	</SCRIPT>
 	<?php
@@ -803,7 +803,7 @@ if(C_CHAT_BOOT)
 			if (typeof(window.parent.leaveChat) != 'undefined') window.parent.leaveChat = true;
 			window.parent.frames['loader'].close();
 		};
-		window.parent.window.location = '<?php echo("$From?Ver=$Ver&L=$L&U=".urlencode(stripslashes($U))."&O=$O&ST=$ST&NT=$NT&E=".urlencode(stripslashes($R))."&EN=$T&RES=1"); ?>';
+		window.parent.window.location = '<?php echo("$From?Ver=$Ver&L=$L&U=".stripslashes($U)."&O=$O&ST=$ST&NT=$NT&E=".urlencode(stripslashes($R))."&EN=$T&RES=1"); ?>';
 	// -->
 	</SCRIPT>
 	<?php

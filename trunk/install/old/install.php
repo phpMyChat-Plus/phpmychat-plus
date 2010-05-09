@@ -582,7 +582,7 @@ if ( $p == 5 )
 					@mysql_query("SET CHARACTER SET utf8");
 					mysql_query("SET NAMES 'utf8'");
 					mysql_select_db ( $dbname );
-					mysql_query ( "INSERT INTO $t_reg_users VALUES ('', '', '$admin', '0', '$pass_crypt', '', '', '', '$chaturl', '', 0, 'admin', '', '', '', 0, 1, '', '', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', '', 'red', 'images/avatars/def_avatar.gif', '0', '', '', '', '', '');" );
+					mysql_query ( "INSERT INTO $t_reg_users VALUES ('', '', '$admin', '0', '$pass_crypt', '', '', '', '$chaturl', '', 0, 'admin', '', '', '', 0, 1, '', '', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', '', 'red', 'images/avatars/def_avatar.gif', '0', '', '', '', '', '', '', '', '', '');" );
 				}
 			}
 		}
@@ -2068,10 +2068,10 @@ else {
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// Birthday mod - by Ciprian'.$lfeed );
   	fputs ( $fh, 'define("C_REQUIRE_BDAY", $REQUIRE_BDAY);'.$lfeed );
-  	fputs ( $fh, 'define("C_SEND_BDAY_EMAIL", $SEND_BDAY_EMAIL);'.$lfeed );
-  	fputs ( $fh, 'define("C_SEND_BDAY_TIME", $SEND_BDAY_TIME);'.$lfeed );
-  	fputs ( $fh, 'define("C_SEND_BDAY_INTVAL", $SEND_BDAY_INTVAL);'.$lfeed );
-  	fputs ( $fh, 'define("C_SEND_BDAY_PATH", $SEND_BDAY_PATH);'.$lfeed );
+  	fputs ( $fh, 'define("C_BDAY_EMAIL", $SEND_BDAY_EMAIL);'.$lfeed );
+  	fputs ( $fh, 'define("C_BDAY_TIME", $SEND_BDAY_TIME);'.$lfeed );
+  	fputs ( $fh, 'define("C_BDAY_INTVAL", $SEND_BDAY_INTVAL);'.$lfeed );
+  	fputs ( $fh, 'define("C_BDAY_PATH", $SEND_BDAY_PATH);'.$lfeed );
   	fputs ( $fh, '?>' );
   } // END OF WRITE INTO config.lib.php
   fclose ( $fh );

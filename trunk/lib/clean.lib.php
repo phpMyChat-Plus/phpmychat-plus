@@ -10,60 +10,97 @@ if (isset($_GET))
 
 // Clean the buzz sounds after play
 $ChatS = new DB;
-$ChatS->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE '%...BUZZER...%' AND m_time<".(time()-10)." ORDER BY m_time DESC LIMIT 1");
+$ChatS->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE '%...BUZZER...%' AND m_time<'".(time()-10)."' ORDER BY m_time DESC LIMIT 1");
 if ($ChatS->num_rows() > 0)
 {
 	list($Buzz) = $ChatS->next_record();
 	$To_remove = strstr($Buzz, "<EMBED SRC=");
 	$Buzz_new = rtrim(str_replace($To_remove,"",$Buzz));
-	$ChatS->query("UPDATE ".C_MSG_TBL." SET message = '".$Buzz_new."' WHERE message='$Buzz' AND m_time<".(time()-10)." ORDER BY m_time DESC LIMIT 1");
+	$ChatS->query("UPDATE ".C_MSG_TBL." SET message = '".$Buzz_new."' WHERE message='$Buzz' AND m_time<'".(time()-10)."' ORDER BY m_time DESC LIMIT 1");
 	$RefreshMessages = true;
 }
 
 // Clean the entrance sounds after play
-$ChatS->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE 'stripslashes(sprintf(L_ENTER_ROM,%' AND m_time<".(time()-10)." ORDER BY m_time DESC LIMIT 1");
+$ChatS->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE 'stripslashes(sprintf(L_ENTER_ROM,%' AND m_time<'".(time()-10)."' ORDER BY m_time DESC LIMIT 1");
 if ($ChatS->num_rows() > 0)
 {
 	list($Hello) = $ChatS->next_record();
 	$Hello_new = rtrim(str_replace("L_ENTER_ROM","L_ENTER_ROM_NOSOUND",$Hello));
-	$ChatS->query("UPDATE ".C_MSG_TBL." SET message = '".$Hello_new."' WHERE message='$Hello' AND m_time<".(time()-10)." ORDER BY m_time DESC LIMIT 1");
+	$ChatS->query("UPDATE ".C_MSG_TBL." SET message = '".$Hello_new."' WHERE message='$Hello' AND m_time<'".(time()-10)."' ORDER BY m_time DESC LIMIT 1");
 	$RefreshMessages = true;
 }
 
 // Clean the welcome sounds after play
-$ChatS->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE 'sprintf(WELCOME_MSG)' AND m_time<".(time()-10)." ORDER BY m_time DESC LIMIT 1");
+$ChatS->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE 'sprintf(WELCOME_MSG)' AND m_time<'".(time()-10)."' ORDER BY m_time DESC LIMIT 1");
 if ($ChatS->num_rows() > 0)
 {
 	list($Welcome) = $ChatS->next_record();
 	$Welcome_new = rtrim(str_replace("WELCOME_MSG","WELCOME_MSG_NOSOUND",$Welcome));
-	$ChatS->query("UPDATE ".C_MSG_TBL." SET message='".$Welcome_new."' WHERE message='$Welcome' AND m_time<".(time()-10)." ORDER BY m_time DESC LIMIT 1");
+	$ChatS->query("UPDATE ".C_MSG_TBL." SET message='".$Welcome_new."' WHERE message='$Welcome' AND m_time<'".(time()-10)."' ORDER BY m_time DESC LIMIT 1");
 	$RefreshMessages = true;
 }
 $ChatS->close();
+
+// Clean the welcome sounds after play
+if(C_BDAY_EMAIL)
+{
+	$ChatB = new DB;
+	$today = strftime("%Y-%m-%d",(time() + C_BDAY_TIME * 60));
+	$email_intval = C_BDAY_TIME * 60 + C_BDAY_INTVAL * 24 *60 * 60;
+	$max_email_intval = time() - $email_intval;
+	$after_today = strftime("%Y-%m-%d",(time() + $email_intval));
+	$ChatB->query("SELECT username,firstname,lastname,email,birthday FROM ".C_REG_TBL." WHERE birthday IS NOT NULL AND CONCAT(YEAR(NOW()),'-',RIGHT(birthday,5)) BETWEEN '$today' AND '$after_today' AND bday_email_sent<'".$max_email_intval."' ORDER BY birthday ASC");
+	if ($ChatB->num_rows() > 0)
+	{
+		include_once("lib/mail_validation.lib.php");
+		if (C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@"))
+		{
+			if (isset($MailFunctionOn))
+			{
+				if(file_exists(C_BDAY_PATH)) $greets = file(C_BDAY_PATH);
+				while(list($dob_username,$dob_firstname,$dob_lastname,$dob_email,$dob_birthday) = $ChatB->next_record())
+				{
+					$dob_name = $dob_firstname != "" ? $dob_firstname : $dob_username;
+					$greet = rand(0, sizeof($greets)-1);
+					$greet_text = $greets[$greet];
+					$greet_text = str_replace("<br />","\r\n",$greet_text);
+					$dob1_subject = sprintf(L_DOB_SUBJ, $dob_name);
+					if(send_dob_email($dob_name, $dob_email, "[".(C_CHAT_NAME != "" ? C_CHAT_NAME : APP_NAME)."] ". $dob1_subject, $greet_text))
+					{
+						include("admin/mail4admin.lib.php");
+						send_email_admin($Sender_name." <".$Sender_email.">", "[".(C_CHAT_NAME != "" ? C_CHAT_NAME : APP_NAME)."] ".$dob1_subject." - copy", "This is a copy:\r\n\r\n".$greet_text."\r\n\r\n".$dob1_subject."\r\n".$dob_birthday);
+						$ChatB->query("UPDATE ".C_REG_TBL." SET bday_email_sent=".time()." WHERE username='$dob_username'");
+					}
+				}
+			}
+		}
+	}
+	$ChatB->close();
+}
 
 $ChatM = new DB;
 // Archive and Clean the old messages
 if(C_CHAT_LOGS)
 {
-	require("lib/logs.lib.php");
+	require("logs.lib.php");
 }
 // Clean the old messages (without logs)
 else
 {
-	$ChatM->query("DELETE FROM ".C_MSG_TBL." WHERE ((m_time < ".(time() - C_MSG_DEL * 60 * 60)." AND pm_read NOT LIKE 'New%') OR (m_time < ".(time() - ((C_MSG_DEL + (C_PM_KEEP_DAYS * 24)) * 60 * 60)).")) AND !(username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"%')");
+	$ChatM->query("DELETE FROM ".C_MSG_TBL." WHERE ((m_time<'".(time() - C_MSG_DEL * 60 * 60)."' AND pm_read NOT LIKE 'New%') OR (m_time<'".(time() - ((C_MSG_DEL + (C_PM_KEEP_DAYS * 24)) * 60 * 60))."')) AND !(username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"%')");
 }
 
 // Clean the lurkers table
 if(C_CHAT_LURKING)
 {
 	$ChatLurk = new DB;
-	$ChatLurk->query("DELETE FROM ".C_LRK_TBL." WHERE time<".(time() - 15)."");
+	$ChatLurk->query("DELETE FROM ".C_LRK_TBL." WHERE time<'".(time() - 15)."'");
 	$CleanUsrTbl = ($ChatLurk->affected_rows() > 0);
 	$ChatLurk->close();
 }
 
 	$Chat = new DB;
-	$Chat->query("SELECT room,username,u_time,status FROM ".C_USR_TBL." WHERE username != '".C_BOT_NAME."' AND (u_time < ".(time() - 60)." OR (status = 'k' AND u_time <  ".(time() - 20)."))");
+	$Chat->query("SELECT room,username,u_time,status FROM ".C_USR_TBL." WHERE username != '".C_BOT_NAME."' AND (u_time<'".(time() - 60)."' OR (status = 'k' AND u_time<'".(time() - 20)."'))");
 	while(list($userroom, $userclosed, $usertime, $statusclosed) = $Chat->next_record())
 	{
 //		$when = date('r', $usertime + C_TMZ_OFFSET*60*60);
@@ -80,7 +117,7 @@ if(C_CHAT_LURKING)
 			$sghosts = eregi_replace(" AND username != ",",",$sghosts);
 		}
  		if (($sghosts != "" && ghosts_in($userclosed, $sghosts, $Charset)) || (C_HIDE_ADMINS && ($statusclosed == "a" || $statusclosed == "t")) || (C_HIDE_MODERS && $statusclosed == "m")) {}
-		else $ChatM->query("INSERT INTO ".C_MSG_TBL." VALUES ('".$usertype."', '".$userroom."', 'SYS exit', '', ".time().", '', 'sprintf(L_CLOSED_ROM, \"($when) $userclosed\")', '', '')");
+		else $ChatM->query("INSERT INTO ".C_MSG_TBL." VALUES ('".$usertype."', '".$userroom."', 'SYS exit', '', '".time()."', '', 'sprintf(L_CLOSED_ROM, \"($when) $userclosed\")', '', '')");
 		if(C_EN_STATS)
 		{
 			$ChatM->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+($usertime-last_away), longest_away=IF($usertime-last_away < longest_away, longest_away, $usertime-last_away), last_away='' WHERE (stat_date=FROM_UNIXTIME(last_away,'%Y-%m-%d') OR stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d')) AND room='$userroom' AND username='$userclosed' AND last_away!='0'");
@@ -99,7 +136,7 @@ if(C_CHAT_LURKING)
 	// Clean users table of disconnected users if booting is disabled
 if(!C_CHAT_BOOT && !$CleanUsrTbl)
 {
-	$Chat->query("DELETE FROM ".C_USR_TBL." WHERE username != '".C_BOT_NAME."' AND (u_time<".(time() - C_USR_DEL * 60)." OR (status='k' AND u_time<".(time() - 20)."))");
+	$Chat->query("DELETE FROM ".C_USR_TBL." WHERE username != '".C_BOT_NAME."' AND (u_time<'".(time() - C_USR_DEL * 60)."' OR (status='k' AND u_time<'".(time() - 20)."'))");
 	$CleanUsrTbl = ($Chat->affected_rows() > 0);
 	$Chat->close();
 }

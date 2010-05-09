@@ -131,43 +131,48 @@ if (isset($FORM_SEND) && $FORM_SEND == 7)
   if($searchCategory == 1 && $searchTerm != "")
   {
     // create query for 1
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM ".C_REG_TBL." WHERE (username LIKE '%".$searchTerm."%' OR firstname LIKE '%".$searchTerm."%' OR lastname LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday FROM ".C_REG_TBL." WHERE (username LIKE '%".$searchTerm."%' OR firstname LIKE '%".$searchTerm."%' OR lastname LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
     //echo $query;
   }
   elseif($searchCategory == 2 && $searchTerm != "")
   {
     // create query for 2
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM ".C_REG_TBL." WHERE ip LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday FROM ".C_REG_TBL." WHERE ip LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   elseif($searchCategory == 3 && $searchTerm != "")
   {
     // create query for 3
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM ".C_REG_TBL." WHERE perms LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday FROM ".C_REG_TBL." WHERE perms LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   elseif($searchCategory == 4 && $searchTerm != "")
   {
     // create query for 4
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM ".C_REG_TBL." WHERE email LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday FROM ".C_REG_TBL." WHERE email LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   elseif($searchCategory == 5 && $searchTerm != "")
   {
     // create query for 5
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM ".C_REG_TBL." WHERE gender='".$searchTerm."' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday FROM ".C_REG_TBL." WHERE gender='".$searchTerm."' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   elseif($searchCategory == 6 && $searchTerm != "")
   {
     // create query for 6
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM ".C_REG_TBL." WHERE description LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday FROM ".C_REG_TBL." WHERE description LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   elseif($searchCategory == 7 && $searchTerm != "")
   {
     // create query for 7
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM ".C_REG_TBL." WHERE (favlink LIKE '%".$searchTerm."%' OR favlink1 LIKE '%".$searchTerm."%' OR website LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday FROM ".C_REG_TBL." WHERE (favlink LIKE '%".$searchTerm."%' OR favlink1 LIKE '%".$searchTerm."%' OR website LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   elseif($searchCategory == 8 && $searchTerm != "")
   {
     // create query for 8
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender FROM ".C_REG_TBL." WHERE (username LIKE '%".$searchTerm."%' OR firstname LIKE '%".$searchTerm."%' OR lastname LIKE '%".$searchTerm."%' OR country LIKE '%".$searchTerm."%' OR website LIKE '%".$searchTerm."%' OR ip LIKE '%".$searchTerm."%' OR perms LIKE '%".$searchTerm."%' OR email LIKE '%".$searchTerm."%' OR slang LIKE '%".$searchTerm."%' OR description LIKE '%".$searchTerm."%' OR favlink LIKE '%".$searchTerm."%' OR favlink1 LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday FROM ".C_REG_TBL." WHERE (birthday LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+  }
+  elseif($searchCategory == 9 && $searchTerm != "")
+  {
+    // create query for all categories 9
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday FROM ".C_REG_TBL." WHERE (username LIKE '%".$searchTerm."%' OR firstname LIKE '%".$searchTerm."%' OR lastname LIKE '%".$searchTerm."%' OR country LIKE '%".$searchTerm."%' OR website LIKE '%".$searchTerm."%' OR ip LIKE '%".$searchTerm."%' OR perms LIKE '%".$searchTerm."%' OR email LIKE '%".$searchTerm."%' OR slang LIKE '%".$searchTerm."%' OR description LIKE '%".$searchTerm."%' OR favlink LIKE '%".$searchTerm."%' OR favlink1 LIKE '%".$searchTerm."%' OR birthday LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   else
   {
@@ -187,7 +192,7 @@ if (isset($Warning) && $Warning != "") echo("<P CLASS=\"error\">$Warning</SPAN><
 else
 {
    echo "<table align=center border=\"1\" cellpadding=\"1\" cellspacing=\"0\" width=\"800\" CLASS=table>";
-   echo "<tr align=\"center\" class=\"tabtitle\"><td>&nbsp;</td><td><b>".A_SEARCH_13."</b></td><td><b>".A_SEARCH_14."</b></td><td><b>".A_SEARCH_15."</b></td><td><b>".A_SEARCH_16."</b></td><td><b>".A_SEARCH_6."</b></td><td><b>".A_SEARCH_18."</b></td><td><b>".A_SEARCH_19."</b></td><td><b>".A_SEARCH_20."</b></td></tr>";
+   echo "<tr align=\"center\" class=\"tabtitle\"><td>&nbsp;</td><td><b>".A_SEARCH_13."</b></td><td><b>".A_SEARCH_14."</b></td><td><b>".A_SEARCH_15."</b></td><td><b>".A_SEARCH_16."</b></td><td><b>".A_SEARCH_6."</b></td><td><b>".A_SEARCH_18."</b></td><td><b>".A_SEARCH_19."</b></td><td><b>".A_SEARCH_20."</b></td><td><b>".L_PRO_7."</b></td></tr>";
 
 	$DbLink->query("SELECT username FROM ".C_REG_TBL." WHERE email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%' AND username != '$pmc_username' ORDER BY username ASC");
 	$users = Array();
@@ -210,6 +215,7 @@ else
        $s_perms = "&nbsp;";
        $s_ip = "&nbsp;";
        $s_gender = "&nbsp;";
+       $s_birthday = "&nbsp;";
        $bannished_user = "";
        $bannished_ip = "";
    while($result = mysql_fetch_array($query))
@@ -251,6 +257,7 @@ else
        {
          $s_gender = "<img src=images/gender_undefined.gif alt='".L_REG_48."' title='".L_REG_48."'>";
        }
+       $s_birthday = stripslashes($result["birthday"]);
        if (empty($s_username)) $s_username = "&nbsp;";
        if (empty($s_firstname)) $s_firstname = "&nbsp;";
        if (empty($s_lastname)) $s_lastname = "&nbsp;";
@@ -259,8 +266,9 @@ else
        if (empty($s_perms)) $s_perms = "&nbsp;";
        if (empty($s_ip)) $s_ip = "&nbsp;";
        if (empty($s_gender)) $s_gender = "&nbsp;";
+       if (empty($s_birthday)) $s_birthday = "&nbsp;";
 		$checkbox = ($s_username == $pmc_username) ? "&nbsp;" : "<INPUT type=checkbox name=\"selected_$usrHash\" value=\"1\">";
-       echo "<tr align=\"center\">\n<INPUT TYPE=\"hidden\" NAME=\"user_$usrHash\" VALUE=\"1\">\n<TD VALIGN=CENTER ALIGN=CENTER>\n$checkbox\n</td>\n<td width=100>$s_username$bannished_user</td>\n<td>$s_firstname</td>\n<td>$s_lastname</td>\n<td>$s_country</td>\n<td><a href=\"mailto:$s_email\" target=_blank>$s_email</a></td>\n<td>$s_perms</td>\n<td>$s_ip$bannished_ip</td>\n<td align=center>$s_gender</td>\n</tr>";
+       echo "<tr align=\"center\">\n<INPUT TYPE=\"hidden\" NAME=\"user_$usrHash\" VALUE=\"1\">\n<TD VALIGN=CENTER ALIGN=CENTER>\n$checkbox\n</td>\n<td width=100>$s_username$bannished_user</td>\n<td>$s_firstname</td>\n<td>$s_lastname</td>\n<td>$s_country</td>\n<td><a href=\"mailto:$s_email\" target=_blank>$s_email</a></td>\n<td>$s_perms</td>\n<td>$s_ip$bannished_ip</td>\n<td align=center>$s_gender</td>\n<td align=center>$s_birthday</td>\n</tr>";
        $bannished_user = "";
        $bannished_ip = "";
    }
@@ -303,7 +311,7 @@ echo "</table><br />";
     <td bgcolor="#9B9DFF"><b><?php echo A_SEARCH_22; ?>:</b></td>
     <td bgcolor="#9B9DFF">
         <select name="searchCategory">
-                <option value="8"><?php echo (A_SEARCH_2) ; ?>
+                <option value="9"><?php echo (A_SEARCH_2) ; ?>
                 <option value="1"><?php echo (A_SEARCH_3) ; ?>
                 <option value="2"><?php echo (A_SEARCH_4) ; ?>
                 <option value="3"><?php echo (A_SEARCH_5) ; ?>
@@ -311,6 +319,7 @@ echo "</table><br />";
                 <option value="5"><?php echo (A_SEARCH_7) ; ?>
                 <option value="6"><?php echo (A_SEARCH_8) ; ?>
                 <option value="7"><?php echo (A_SEARCH_9) ; ?>
+                <option value="8"><?php echo (L_PRO_7) ; ?>
         </select>
 
     </td></tr>
