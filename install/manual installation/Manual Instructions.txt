@@ -88,7 +88,7 @@ Don't change any data there. You will be able to customize your chat later, from
 Note: (you better skip this note if you don't know phpmyadmin: if you'd like to change the admin name to the one you'll use, this is a good opportunity, but let the password untouched.
 By default, the admin account is admin/admin.
 Go to line 291 (this might come changed in the newer releases):
-INSERT INTO c_reg_users VALUES ('', '', 'admin', '1', '21232f297a57a5a743894a0e4a801fc3', '', '', '', '', '', 0, 'admin', '', '', '', 0, 1, '', '', '', '', '', 'red', 'images/avatars/def_avatar.gif', '0', '', '', '', '', '');
+INSERT INTO c_reg_users VALUES ('', '', 'admin', '1', '21232f297a57a5a743894a0e4a801fc3', '', '', '', '', '', 0, 'admin', '', '', '', 0, 1, '', '', '', '', '', 'red', 'images/avatars/def_avatar.gif', '0', '', '', '', '', '', '', '', '', '');
 and replace the first "admin" word with your desired username. The password will still be "admin", being easy to change it later using edituser.php.
 If you prefer to change the password as well, you can use this link http://ciprianmp.com/scripts/hash.php to generate the md5 hash of your desired password, then copy it and replace "21232f297a57a5a743894a0e4a801fc3" (don't touch the leading/ending 's)
 DO NOT change any data on the next line (it is regarding the bot and quotes - two virtual users that bring some fun to your chat)!

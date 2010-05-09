@@ -37,12 +37,17 @@ ALTER TABLE ".$t_config."
 			ADD EN_STATS enum('0','1') NOT NULL default '0',
 			ADD ALLOW_VIDEO enum('0','1','2') NOT NULL default '1',
 			ADD VIDEO_WIDTH smallint(1) NOT NULL default '425',
-			ADD VIDEO_HEIGHT smallint(1) NOT NULL default '344';
+			ADD VIDEO_HEIGHT smallint(1) NOT NULL default '344',
+			ADD REQUIRE_BDAY enum('0','1') NOT NULL default '0',
+			ADD SEND_BDAY_EMAIL enum('0','1') NOT NULL default '0',
+			ADD SEND_BDAY_TIME tinyint(1) NOT NULL default '0',
+			ADD SEND_BDAY_INTVAL tinyint(1) NOT NULL default '7',
+			ADD SEND_BDAY_PATH varchar(255) NOT NULL default 'files/birthday/bday_greetings.txt';
 ", $conn);
 mysql_query("
 UPDATE ".$t_config." SET
 			CMDS = '/away /buzz /demote /dice /dice2 /dice3 /high /img /mr<br />/room /size /sort /topic /utube /video /wisp',
-			MODS = 'Advanced Admin, (GR)Avatars, Smilies Popup, Color Drop Box, Private Popup,<br />Quick Menu, Logs Archive, Lurking, Color names, WorldTime, UTF-8',
+			MODS = 'Advanced Admin, (GR)Avatars, Smilies Popup, Color Drop Box, Private Popup,<br />Quick Menu, Logs Archive, Lurking, Color names, WorldTime, UTF-8, Birthdays',
 			ROOM_SKIN1 = '1',
 			ROOM_SKIN2 = '2',
 			ROOM_SKIN3 = '3',
@@ -72,7 +77,11 @@ ALTER TABLE ".$t_reg_users."
 			ADD last_login int(11) NOT NULL default '0',
 			ADD login_counter bigint(20) NOT NULL default '0',
 			ADD use_gravatar enum('0','1') NOT NULL default '0',
-			ADD join_room varchar(5) NOT NULL default '';
+			ADD join_room varchar(5) NOT NULL default '',
+			ADD birthday date default NULL,
+			ADD show_bday enum('0','1') NOT NULL default '1',
+			ADD show_age enum('0','1') NOT NULL default '1',
+			ADD bday_email_sent int(11) NOT NULL default '0';
 ", $conn);
 mysql_query("
 UPDATE ".$t_reg_users."	SET

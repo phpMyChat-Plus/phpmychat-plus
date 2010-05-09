@@ -80,7 +80,7 @@ define("L_REG_25", "Close");
 define("L_REG_30", "Firstname");
 define("L_REG_31", "Lastname");
 define("L_REG_32", "WEB");
-define("L_REG_33", "show e-mail address on public info");
+define("L_REG_33", "show e-mail address in public information");
 define("L_REG_34", "Editing user profile");
 define("L_REG_35", "Administration");
 define("L_REG_36", "Location/Country");
@@ -204,7 +204,7 @@ define("L_NO_REG_USER", "You must be registered on this chat to use this command
 
 // help popup
 define("L_HELP_TIT_1", "Smilies");
-define("L_HELP_TIT_2", "Text formating for messages");
+define("L_HELP_TIT_2", "Text formatting for messages");
 define("L_HELP_FMT_1", "You can put bold, italic or underlined text in messages by encasing the applicable sections of your text with either the &lt;B&gt; &lt;/B&gt;, &lt;I&gt; &lt;/I&gt; or &lt;U&gt; &lt;/U&gt; tags.<br />For example, &lt;B&gt;this text&lt;/B&gt; will produce <B>this text</B>.");
 define("L_HELP_FMT_2", "To create a hyperlink (for e-mail or URL) in your message, simply type the corresponding address without any tag. The hyperlink will be created automatically.");
 define("L_HELP_TIT_3", "Commands");
@@ -267,8 +267,8 @@ define("L_HELP_ETIQ_4", "<li>Do not \"spam\" the chat by typing nonsense or rand
 
 // messages frame
 define("L_NO_MSG", "There is currently no message ...");
-define("L_TODAY_DWN", "The messages that have been sent today start below");
-define("L_TODAY_UP", "The messages that had been sent yesterday start below");
+define("L_TODAY_DWN", "The messages sent today start below");
+define("L_TODAY_UP", "The messages sent yesterday start below");
 
 // message colors
 $TextColors = array("Black" => "#000000",
@@ -360,7 +360,7 @@ define("L_URL_AV", "URL: ");
 define("L_EXPL_AV", "(Enter URL, then hit ENTER to view)");
 define("L_CANCEL", "Cancel");
 define("L_AVA_REG", "You must be registered\\nto change your avatar icon");
-define("L_SEL_NEW_AV_CONFIRM", "This form was not submitted.\\nGoing now to avatars will make you loose\\nall the changes you made so far!\\n\\nAre you sure?");
+define("L_SEL_NEW_AV_CONFIRM", "This form was not submitted.\\nGoing now to avatars will make you lose\\nall the changes you made so far!\\n\\nAre you sure?");
 
 // PlusBot bot mod (based on Alice bot)
 define("BOT_TIPS", "TIPS: Our bot is publicly active in this room. To start talking to the bot, type <b>hello ".C_BOT_NAME."</b>. To end conversation, type: <b>bye ".C_BOT_NAME."</b>. (private: /to <b>".C_BOT_NAME."</b> Message)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
@@ -727,8 +727,10 @@ define("L_HELP_CMD_36", "It allows posting of <i>one youtube video</i> in a smal
 
 // Birthday mod - by Ciprian
 define("L_PRO_7", "Date of birth");
-define("L_PRO_8", "show birthday on public info");
-define("L_PRO_9", "show age on public info");
+define("L_PRO_8", "show birthday in public information");
+define("L_PRO_9", "show age in public information");
 define("L_PRO_10", "Age");
 define("L_PRO_11", "%d years, %d months and %d days");
+define("L_DOB_SUBJ", "Happy Birthday %s!");
+define("L_DOB_TIT_1", "Birthdays list");
 ?>

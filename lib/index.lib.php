@@ -1944,7 +1944,7 @@ if (C_SHOW_COUNTER)
 &copy; 2000-2005 <a HREF="http://sourceforge.net/projects/phpmychat/" TARGET=_blank CLASS="ChatLink" Title="<?php echo(sprintf(L_CLICK,L_LINKS_7)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_LINKS_7)); ?>.'; return true">The phpHeaven Team</a><br />
 &copy; 2005-<?php echo(date('Y'))?> Plus development by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" Title="<?php echo(sprintf(L_CLICK,L_LINKS_9)); ?>" CLASS="ChatLink" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_DEVELOPER)); ?>.'; return true;">Ciprian M</a>.<br />
 Thanks to all the contributors in the <a href="http://groups.yahoo.com/subscribe/phpmychat" CLASS="ChatLink" title="<?php echo(sprintf(L_CLICK,L_LINKS_8)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_LINKS_8)); ?>.'; return true;" target=_blank>phpMyChat group</a> !<br />
-Download this full chat pack from <a href="http://sourceforge.net/projects/phpmychat/files/phpMyChat_Plus/" target=_blank title="<?php echo(APP_NAME." ".L_SRC." Sorceforge.net!\n".sprintf(L_CLICK,L_LINKS_10)); ?>" onMouseOver="window.status='<?php echo(APP_NAME." ".L_SRC." Sorceforge.net!"); ?>'; return true;" CLASS="ChatLink"><?php echo(file("http://sflogo.sourceforge.net/sflogo.php?group_id=19371&type=10") ? "<img src=\"http://sflogo.sourceforge.net/sflogo.php?group_id=19371&type=10\" border=0 width=\"80\" height=\"15\" />" : "here"); ?></a>
+Download this full chat pack from <a href="http://sourceforge.net/projects/phpmychat/files/phpMyChat_Plus/" target=_blank title="<?php echo(APP_NAME." ".L_SRC." Sorceforge.net!\n".sprintf(L_CLICK,L_LINKS_10)); ?>" onMouseOver="window.status='<?php echo(APP_NAME." ".L_SRC." Sorceforge.net!"); ?>'; return true;" CLASS="ChatLink"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=19371&type=10" border=0 width="80" height="15" /></a>
 </SPAN>
 <?php
 if (C_SHOW_OWNER)
@@ -1953,9 +1953,9 @@ if (C_SHOW_OWNER)
 <br /><SPAN CLASS="ChatCopy" dir="LTR">
 Owner of this chat server -
 <?php
-include_once("./admin/mail4admin.lib.php");
-if (!eregi("Your name",C_ADMIN_NAME) && C_ADMIN_NAME != "") { $Owner_name = C_ADMIN_NAME; }
-else { $Owner_name = L_LURKING_5; }
+include_once("admin/mail4admin.lib.php");
+if (!eregi("Your name",C_ADMIN_NAME) && C_ADMIN_NAME != "") $Owner_name = C_ADMIN_NAME;
+else $Owner_name = L_LURKING_5;
 if (strstr($Sender_email,"@") && ($Sender_email != ""))
 {
 	$Owner_email = $Sender_email;
@@ -1964,11 +1964,11 @@ if (strstr($Sender_email,"@") && ($Sender_email != ""))
 <?php
 }
 else echo($Owner_name);
+}
 ?>
 <br /><a HREF="privacy.html" TARGET=_blank CLASS="ChatLink" Title="<?php echo(sprintf(L_CLICK,L_PRIVACY)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_PRIVACY)); ?>'; return true">Our Privacy Policy</a>
 </SPAN>
 <?php
-}
 	if ($show_donation)
 	{
 	?>

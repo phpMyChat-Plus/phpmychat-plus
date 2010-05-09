@@ -22,7 +22,7 @@ if ( $L == "" )
 }
 
 // Disable ftp functions on Windows servers
-if (!eregi("win", PHP_OS))
+if (stristr(PHP_OS,'win'))
 {
 	$do_ftp = 1;
 	// chmod patch for both php4 and php5
@@ -582,7 +582,7 @@ if ( $p == 5 )
 					@mysql_query("SET CHARACTER SET utf8");
 					mysql_query("SET NAMES 'utf8'");
 					mysql_select_db ( $dbname );
-					mysql_query ( "INSERT INTO $t_reg_users VALUES ('', '', '$admin', '0', '$pass_crypt', '', '', '', '$chaturl', '', 0, 'admin', '', '', '', 0, 1, '', '', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', '', 'red', 'images/avatars/def_avatar.gif', '0', '', '', '', '', '');" );
+					mysql_query ( "INSERT INTO $t_reg_users VALUES ('', '', '$admin', '0', '$pass_crypt', '', '', '', '$chaturl', '', 0, 'admin', '', '', '', 0, 1, '', '', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', '', 'red', 'images/avatars/def_avatar.gif', '0', '', '', '', '', '', '', '', '', '');" );
 				}
 			}
 		}
@@ -956,6 +956,11 @@ $EN_STATS						= $row[170];
 $ALLOW_VIDEO					= $row[171];
 $VIDEO_WIDTH					= $row[172];
 $VIDEO_HEIGHT					= $row[173];
+$REQUIRE_BDAY					= $row[174];
+$SEND_BDAY_EMAIL				= $row[175];
+$SEND_BDAY_TIME					= $row[176];
+$SEND_BDAY_INTVAL				= $row[177];
+$SEND_BDAY_PATH					= $row[178];
 
 $query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.com'";
 $result_bot = mysql_query($query_bot);
@@ -1394,6 +1399,13 @@ define("C_EN_STATS", $EN_STATS);
 define("C_ALLOW_VIDEO", $ALLOW_VIDEO);
 define("C_VIDEO_WIDTH", $VIDEO_WIDTH);
 define("C_VIDEO_HEIGHT", $VIDEO_HEIGHT);
+
+// Birthday mod - by Ciprian
+define("C_REQUIRE_BDAY", $REQUIRE_BDAY);
+define("C_SEND_BDAY_EMAIL", $SEND_BDAY_EMAIL);
+define("C_SEND_BDAY_TIME", $SEND_BDAY_TIME);
+define("C_SEND_BDAY_INTVAL", $SEND_BDAY_INTVAL);
+define("C_SEND_BDAY_PATH", $SEND_BDAY_PATH);
 ?&gt;</textarea></p>
 <?php } // END OF IS NOT WRITEABLE
 else {
@@ -1610,6 +1622,11 @@ else {
   	fputs ( $fh, '$ALLOW_VIDEO					= $row[171];'.$lfeed );
   	fputs ( $fh, '$VIDEO_WIDTH					= $row[172];'.$lfeed );
   	fputs ( $fh, '$VIDEO_HEIGHT					= $row[173];'.$lfeed );
+  	fputs ( $fh, '$REQUIRE_BDAY					= $row[174];'.$lfeed );
+  	fputs ( $fh, '$SEND_BDAY_EMAIL				= $row[175];'.$lfeed );
+  	fputs ( $fh, '$SEND_BDAY_TIME					= $row[176];'.$lfeed );
+  	fputs ( $fh, '$SEND_BDAY_INTVAL				= $row[177];'.$lfeed );
+  	fputs ( $fh, '$SEND_BDAY_PATH					= $row[178];'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '$query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email=\'bot@bot.com\'";'.$lfeed );
   	fputs ( $fh, '$result_bot = mysql_query($query_bot);'.$lfeed );
@@ -2048,6 +2065,13 @@ else {
   	fputs ( $fh, 'define("C_ALLOW_VIDEO", $ALLOW_VIDEO);'.$lfeed );
   	fputs ( $fh, 'define("C_VIDEO_WIDTH", $VIDEO_WIDTH);'.$lfeed );
   	fputs ( $fh, 'define("C_VIDEO_HEIGHT", $VIDEO_HEIGHT);'.$lfeed );
+  	fputs ( $fh, ''.$lfeed );
+  	fputs ( $fh, '// Birthday mod - by Ciprian'.$lfeed );
+  	fputs ( $fh, 'define("C_REQUIRE_BDAY", $REQUIRE_BDAY);'.$lfeed );
+  	fputs ( $fh, 'define("C_BDAY_EMAIL", $SEND_BDAY_EMAIL);'.$lfeed );
+  	fputs ( $fh, 'define("C_BDAY_TIME", $SEND_BDAY_TIME);'.$lfeed );
+  	fputs ( $fh, 'define("C_BDAY_INTVAL", $SEND_BDAY_INTVAL);'.$lfeed );
+  	fputs ( $fh, 'define("C_BDAY_PATH", $SEND_BDAY_PATH);'.$lfeed );
   	fputs ( $fh, '?>' );
   } // END OF WRITE INTO config.lib.php
   fclose ( $fh );

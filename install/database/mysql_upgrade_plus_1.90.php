@@ -69,13 +69,18 @@ ALTER TABLE ".$t_config."
 			ADD EN_STATS enum('0','1') NOT NULL default '0',
 			ADD ALLOW_VIDEO enum('0','1','2') NOT NULL default '1',
 			ADD VIDEO_WIDTH smallint(1) NOT NULL default '425',
-			ADD VIDEO_HEIGHT smallint(1) NOT NULL default '344';
+			ADD VIDEO_HEIGHT smallint(1) NOT NULL default '344',
+			ADD REQUIRE_BDAY enum('0','1') NOT NULL default '0',
+			ADD SEND_BDAY_EMAIL enum('0','1') NOT NULL default '0',
+			ADD SEND_BDAY_TIME tinyint(1) NOT NULL default '0',
+			ADD SEND_BDAY_INTVAL tinyint(1) NOT NULL default '7',
+			ADD SEND_BDAY_PATH varchar(255) NOT NULL default 'files/birthday/bday_greetings.txt';
 ", $conn);
 mysql_query("
 UPDATE ".$t_config." SET
 			ENTRANCE_SOUND = 'sounds/chimeup.wav',
 			CMDS = '/away /buzz /demote /dice /dice2 /dice3 /high /img /mr<br />/room /size /sort /topic /utube /video /wisp',
-			MODS = 'Advanced Admin, (GR)Avatars, Smilies Popup, Color Drop Box, Private Popup,<br />Quick Menu, Logs Archive, Lurking, Color names, WorldTime, UTF-8',
+			MODS = 'Advanced Admin, (GR)Avatars, Smilies Popup, Color Drop Box, Private Popup,<br />Quick Menu, Logs Archive, Lurking, Color names, WorldTime, UTF-8, Birthdays',
 			ROOM_SKIN1 = '1',
 			ROOM_SKIN2 = '2',
 			ROOM_SKIN3 = '3',
@@ -143,6 +148,10 @@ ALTER TABLE ".$t_reg_users."
 			ADD login_counter bigint(20) NOT NULL default '0',
 			ADD use_gravatar enum('0','1') NOT NULL default '0',
 			ADD join_room varchar(5) NOT NULL default '',
+			ADD birthday date default NULL,
+			ADD show_bday enum('0','1') NOT NULL default '1',
+			ADD show_age enum('0','1') NOT NULL default '1',
+			ADD bday_email_sent int(11) NOT NULL default '0',
 			ADD PRIMARY KEY (cid),
 			ADD UNIQUE KEY username (username);
 ", $conn);
@@ -160,7 +169,7 @@ UPDATE ".$t_reg_users." SET
 	WHERE email='bot@bot.bot.com';
 ", $conn);
 mysql_query("
-INSERT INTO ".$t_reg_users." VALUES ('', '', 'Random_Quote', '0', 'ef93e0948b007826a1a7a49a17b72a59', 'Random Quote', 'phpMyChat - Plus', 'WorldWideWeb', '', 'quote@quote.com', '0', 'admin', '', 1130763311, '-No tracking IP-', '1', '0', 'images/avatars/avatar56.gif', 'I am a virtual user, added here to post random quotes at my admin’s will. Ohhh... I wish to express my gratitude to <a href=http://www.ciprianmp.com/plus/ target=_blank>Ciprian</a> for making me available for enlighting you in here. :)', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', 'English (any actually)', 'limegreen', 'images/avatars/quote_avatar.gif', '0', '', '', '', '', '');
+INSERT INTO ".$t_reg_users." VALUES ('', '', 'Random_Quote', '0', 'ef93e0948b007826a1a7a49a17b72a59', 'Random Quote', 'phpMyChat - Plus', 'WorldWideWeb', '', 'quote@quote.com', '0', 'admin', '', 1130763311, '-No tracking IP-', '1', '0', 'images/avatars/avatar56.gif', 'I am a virtual user, added here to post random quotes at my admin’s will. Ohhh... I wish to express my gratitude to <a href=http://www.ciprianmp.com/plus/ target=_blank>Ciprian</a> for making me available for enlighting you in here. :)', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', 'English (any actually)', 'limegreen', 'images/avatars/quote_avatar.gif', '0', '', '', '', '', '', '', '', '', '');
 ", $conn);
 mysql_query("
 UPDATE ".$t_reg_users." SET latin1='0' WHERE latin1='1';

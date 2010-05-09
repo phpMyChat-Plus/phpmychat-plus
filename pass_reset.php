@@ -186,7 +186,7 @@ if ($done)
 // Put focus to the username field of the form at the starter page
 function get_focus()
 {
-	var username = "<?php echo(urldecode(stripslashes($pmc_username))); ?>";
+	var username = "<?php echo(stripslashes($pmc_username)); ?>";
 	window.focus();
 	if (username != "")
 	{
@@ -228,7 +228,7 @@ if(isset($Error))
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_SET_2); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="U" SIZE=25 MAXLENGTH=15 VALUE="<?php echo(isset($pmc_username) ? urlencode(stripslashes($pmc_username)) : $U); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<INPUT TYPE="text" NAME="U" SIZE=25 MAXLENGTH=15 VALUE="<?php echo(isset($pmc_username) ? stripslashes($pmc_username) : $U); ?>"<?php if ($done) echo(" READONLY"); ?>>
 				<?php if (!$done) { ?><SPAN CLASS=error>*</SPAN><?php }; ?>
 			</TD>
 		</TR>

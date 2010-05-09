@@ -24,12 +24,6 @@ if (isset($_POST))
 if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 $mydate = isset($_REQUEST["date5"]) ? $_REQUEST["date5"] : "";
-if($mydate != "")
-{
-	$BIRTHDAY = $mydate;
-	$format_birth_day = strftime(L_SHORT_DATE,strtotime($BIRTHDAY));
-}
-
 require("./config/config.lib.php");
 require("./lib/release.lib.php");
 require("./localization/languages.lib.php");
@@ -37,6 +31,12 @@ require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
 include("./lib/mail_validation.lib.php");
 require("./plugins/calendar/tc_calendar.php");
+
+if($mydate != "")
+{
+	$BIRTHDAY = $mydate;
+	$format_birth_day = strftime(L_SHORT_DATE,strtotime($BIRTHDAY));
+}
 
 if (!function_exists("utf8_substr"))
 {
@@ -241,6 +241,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      . "".L_REG_30.": ".($FIRSTNAME ? $FIRSTNAME : L_NOT_SELECTED)."\r\n"
      . "".L_REG_31.": ".($LASTNAME ? $LASTNAME : L_NOT_SELECTED)."\r\n"
 	 . "".L_PRO_7.": ".($BIRTHDAY != "" ? $format_birth_day : L_NOT_SELECTED)."\r\n"
+     . "".L_REG_33.": ".$shweml."\r\n"
      . "".L_PRO_8.": ".$shwbday."\r\n"
      . "".L_PRO_9.": ".$shwage."\r\n"
      . "".L_REG_45.": ".$sex."\r\n"
@@ -252,7 +253,6 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      . "".L_PRO_4.": ".($DESCRIPTION ? $DESCRIPTION : L_NOT_SELECTED)."\r\n"
      . "".L_PRO_5.": ".($PICTURE ? $PICTURE : L_NOT_SELECTED)."\r\n"
 	 . "".L_PRO_6.": ".($C ? $C : L_NOT_SELECTED)." (".(COLOR_NAMES ? L_ENABLED : L_DISABLED).")\r\n"
-     . "".L_REG_33.": ".$shweml."\r\n"
 	 . "".L_GRAV_USE.": ".$usegrav." (".(!ALLOW_GRAVATARS ? L_DISABLED : L_ENABLED).")\r\n"
      . "----------------------------------------------\r\n"
 	 . "".sprintf(L_EMAIL_VAL_6,strftime(L_LONG_DATETIME,time()))."\r\n"
@@ -264,11 +264,11 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 		$Subject = quote_printable($Subject,$Charset);
 		if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@"))
 		{
-			@mail($Sender_email, $Subject, $emailMessage, $Headers);
+			@mail($Sender_Name." <".$Sender_email.">", $Subject, $emailMessage, $Headers);
 		}
 	   else
 		{
-			@mail($EMAIL, $Subject, $emailMessage, $Headers);
+			@mail($FIRSTNAME ? $FIRSTNAME." <".$EMAIL.">" : $U." <".$EMAIL.">", $Subject, $emailMessage, $Headers);
 		}
   	};
 // End of patch to send an email to the User after registration.
@@ -315,11 +315,12 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      . "Secret question: ".$secret_questiona."\r\n"
      . "Secret answer: ".$SECRET_ANSWER."\r\n"
      . "Email: ".$EMAIL
+	 . "\r\nDisplay email address in public info: ".$shweml
      . ($FIRSTNAME ? "\r\nFirst name: ".$FIRSTNAME : "")
      . ($LASTNAME ? "\r\nLast name: ".$LASTNAME : "")
      . ($BIRTHDAY != "" ? "\r\nDate of birth: ".$BIRTHDAY : "")
-     . ($BIRTHDAY != "" ? "\r\nDisplay birthday on public info: ".$shwbday : "")
-     . ($BIRTHDAY != "" ? "\r\nDisplay age on public info: ".$shwage : "")
+     . ($BIRTHDAY != "" ? "\r\nDisplay birthday in public info: ".$shwbday : "")
+     . ($BIRTHDAY != "" ? "\r\nDisplay age in public info: ".$shwage : "")
      . "\r\nGender: ".$sex
      . ($COUNTRY ? "\r\nCountry: ".$COUNTRY : "")
      . ($WEBSITE ? "\r\nWWW: ".$WEBSITE."" : "")
@@ -328,9 +329,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      . ($FAVLINK1 ? "\r\nFavorite link 2: ".$FAVLINK1 : "")
      . ($DESCRIPTION ? "\r\nDescription: ".$DESCRIPTION : "")
      . ($PICTURE ? "\r\nPicture: ".$PICTURE : "")
-     . "\r\n"
-	 . "Color name/text: ".($C ? $C : "Not selected")." (".(COLOR_NAMES ? "Enabled" : "Disabled").")\r\n"
-	 . "Display email address on public info: ".$shweml
+	 . "\r\nColor name/text: ".($C ? $C : "Not selected")." (".(COLOR_NAMES ? "Enabled" : "Disabled").")\r\n"
 	 . ($usegrav ? "\r\nUse the Gravatar: ".$usegrav." (".(ALLOW_GRAVATARS ? "Enabled" : "Disabled").")" : "")
      . "\r\n"
 	 . "----------------------------------------------\r\n"
@@ -344,7 +343,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 		$Subject = "New User - ".$U." - Registration notification for [".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]";
 		$Subject = quote_printable($Subject,$Charset);
 		$emailMessage = stripslashes($emailMessage);
-		@mail($Sender_email, $Subject, $emailMessage, $Headers);
+		@mail($Sender_Name." <".$Sender_email.">", $Subject, $emailMessage, $Headers);
 // end of patch to send an email to the Admin at the time of new user registration.
 	};
 			};
@@ -485,7 +484,7 @@ if(isset($Error))
 				<?php
 					echo("<a href=\"http://www.gravatar.com\" title=\"".sprintf(L_CLICK,L_LINKS_19)."\" target=\"_blank\">".$gravatarTag."</a>");
 				?>
-				&nbsp;<INPUT type="checkbox" name="USE_GRAV" value="1" <?php if(isset($USE_GRAV) && $USE_GRAV) echo("checked"); ?><?php if ($done|| $ALLOW_GRAVATARS != 1) echo(" READONLY"); ?>>&nbsp;<?php echo(L_GRAV_USE); ?>
+				&nbsp;<INPUT type="checkbox" name="USE_GRAV" value="1" <?php if((isset($USE_GRAV) && $USE_GRAV) || !isset($USE_GRAV)) echo("checked"); ?><?php if ($done|| $ALLOW_GRAVATARS != 1) echo(" READONLY"); ?>>&nbsp;<?php echo(L_GRAV_USE); ?>
 					</TD>
 				</TR>
 				<?php
@@ -551,7 +550,7 @@ if(isset($Error))
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_7); ?> :</TD>
 			<TD VALIGN="TOP" CLASS=success>
 			<?php
-			  $myCalendar = new tc_calendar("date5", true, false);
+			  $myCalendar = new tc_calendar("date5", true, true);
 			  $myCalendar->setPicture('plugins/calendar/images/iconCalendar.gif');
 			  if(isset($BIRTHDAY))
 			  {
