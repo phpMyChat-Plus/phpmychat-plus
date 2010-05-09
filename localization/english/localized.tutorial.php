@@ -227,7 +227,7 @@ if (C_VERSION == "2")
 	<P>
 	<FONT SIZE="+1"><A NAME="create_room"><B>To create a room:</B></A></FONT>
 	<P>
-	Registered users can create rooms. Private ones can only be accessed by users who know their name and will never been displayed except for users that are in.<br />
+	Registered users can create rooms. Private ones can only be accessed by users who know their name and will never be displayed except for users that are in.<br />
 	<P>
 	Room’s name cannot contain comma or backslash (\).<?php if (C_NO_SWEAR) echo(" It cannot contain \"swear words\"."); ?>
 	<br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
