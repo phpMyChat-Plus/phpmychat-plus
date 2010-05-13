@@ -15,6 +15,15 @@ $Sender_email = C_ADMIN_EMAIL;			// For the reply address
 $Mail_Greeting = C_MAIL_GREETING;	// To be send as a signature
 $Chat_URL = (C_CHAT_URL == "./") ? "" : C_CHAT_URL;	// To be send as a signature
 
+# Is the OS Windows or Mac or Linux
+if (stristr(PHP_OS,'win')) {
+  $eol="\r\n";
+} elseif (stristr(PHP_OS,'mac')) {
+  $eol="\r";
+} else {
+  $eol="\n";
+}
+
 // -- FUNCTIONS --
 
 // Define in_array-like function for php
@@ -108,26 +117,26 @@ function send_email($subject,$userString,$pswdString,$welcomeString,$reset)
 	global $EMAIL, $U, $FIRSTNAME, $pmc_password;
 	global $Mail_Greeting, $Chat_URL;
 	global $Sender_Name, $Sender_Name1, $Sender_email;
-	global $mail_date;
+	global $mail_date, $eol;
 
 	$Subject = quote_printable($subject,$Charset);
 
-	$body =  $userString.": ".$U."\r\n";
-	if ($reset) $body .= $pswdString.": ".$pmc_password."\r\n\r\n";
-	elseif (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@")) $body .= $pswdString."\r\n\r\n";
-	$body .= $welcomeString."\r\n";
-	$body .= $Mail_Greeting."\r\n".$Sender_Name1."\r\n".$Chat_URL;
+	$body =  $userString.": ".$U.$eol;
+	if ($reset) $body .= $pswdString.": ".$pmc_password.$eol.$eol;
+	elseif (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@")) $body .= $pswdString.$eol.$eol;
+	$body .= $welcomeString.$eol;
+	$body .= $Mail_Greeting.$eol.$Sender_Name1.$eol.$Chat_URL;
 	$body = stripslashes($body);
 
-	$headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
-	$headers .= "Bcc: ${Sender_email} \r\n";
-	$headers .= "X-Sender: ${Sender_email} \r\n";
-	$headers .= "X-Mailer: PHP/".PHPVERSION." \r\n";
-	$headers .= "Return-Path: ${Sender_email} \r\n";
-	$headers .= "Date: ${mail_date} \r\n";
-	$headers .= "Mime-Version: 1.0 \r\n";
-	$headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed \r\n";
-	$headers .= "Content-Transfer-Encoding: 8bit \r\n";
+	$headers = "From: ${Sender_Name} <${Sender_email}>".$eol;
+	$headers .= "Bcc: ${Sender_email}".$eol;
+	$headers .= "X-Sender: ${Sender_email}".$eol;
+	$headers .= "X-Mailer: PHP/".PHPVERSION.$eol;
+	$headers .= "Return-Path: ${Sender_email}".$eol;
+	$headers .= "Date: ${mail_date}".$eol;
+	$headers .= "Mime-Version: 1.0".$eol;
+	$headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed".$eol;
+	$headers .= "Content-Transfer-Encoding: 8bit".$eol;
 
 	return @mail($FIRSTNAME != "" ? $FIRSTNAME : $U." <".$EMAIL.">", $Subject, $body, $headers);
 };
@@ -137,23 +146,23 @@ function send_dob_email($dob_name,$dob_email,$dob_subject,$DOB_String)
 	global $Charset;
 	global $Mail_Greeting, $Chat_URL;
 	global $Sender_Name, $Sender_Name1, $Sender_email;
-	global $mail_date, $dob1_subject, $dob_birthday;
+	global $mail_date, $dob1_subject, $dob_birthday, $eol;
 
 	$dob_subject = quote_printable($dob_subject,$Charset);
 
-	$dob_body = $DOB_String."\r\n";
-	$dob_body .= $dob1_subject."\r\n".$dob_birthday."\r\n\r\n".$Mail_Greeting."\r\n".$Sender_Name1."\r\n".$Chat_URL;
+	$dob_body = $DOB_String.$eol;
+	$dob_body .= $dob1_subject.$eol.$dob_birthday.$eol.$eol.$Mail_Greeting.$eol.$Sender_Name1.$eol.$Chat_URL;
 	$dob_body = stripslashes($dob_body);
 
-	$dob_headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
-	$dob_headers .= "Bcc: ${Sender_email} \r\n";
-	$dob_headers .= "X-Sender: ${Sender_email} \r\n";
-	$dob_headers .= "X-Mailer: PHP/".PHPVERSION." \r\n";
-	$dob_headers .= "Return-Path: ${Sender_email} \r\n";
-	$dob_headers .= "Date: ${mail_date} \r\n";
-	$dob_headers .= "Mime-Version: 1.0 \r\n";
-	$dob_headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed \r\n";
-	$dob_headers .= "Content-Transfer-Encoding: 8bit \r\n";
+	$dob_headers = "From: ${Sender_Name} <${Sender_email}>".$eol;
+	$dob_headers .= "Bcc: ${Sender_email}".$eol;
+	$dob_headers .= "X-Sender: ${Sender_email}".$eol;
+	$dob_headers .= "X-Mailer: PHP/".PHPVERSION.$eol;
+	$dob_headers .= "Return-Path: ${Sender_email}".$eol;
+	$dob_headers .= "Date: ${mail_date}".$eol;
+	$dob_headers .= "Mime-Version: 1.0".$eol;
+	$dob_headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed".$eol;
+	$dob_headers .= "Content-Transfer-Encoding: 8bit".$eol;
 
 	return @mail($dob_name." <".$dob_email.">", $dob_subject, $dob_body, $dob_headers);
 };

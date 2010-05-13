@@ -153,7 +153,7 @@ if (!function_exists('utf_conv'))
 {
 	function utf_conv($iso,$Charset,$what)
 	{
-		if (stristr(PHP_OS,'win') && function_exists('iconv')) $what = iconv($iso, $Charset, $what);
+		if(function_exists('iconv')) $what = iconv($iso, $Charset, $what);
 		return $what;
 	};
 };
@@ -1932,7 +1932,7 @@ if (C_SHOW_COUNTER)
     $ani_counter = new acounter();
 	echo ($ani_counter->create_output("chat_index"));
 	$INSTALL_DATE = strftime(L_SHORT_DATE,strtotime(C_INSTALL_DATE));
-	$INSTALL_DATE = utf_conv(WIN_DEFAULT,$Charset,$INSTALL_DATE);
+	if(stristr(PHP_OS,'win')) $INSTALL_DATE = utf_conv(WIN_DEFAULT,$Charset,$INSTALL_DATE);
 ?>
 <font face=Verdana color=yellow size=1><?php echo (sprintf(L_VISITOR_REPORT,$INSTALL_DATE)) ?>.</font>
 <?php

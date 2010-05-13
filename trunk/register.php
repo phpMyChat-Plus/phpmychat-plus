@@ -32,6 +32,15 @@ require("./lib/database/".C_DB_TYPE.".lib.php");
 include("./lib/mail_validation.lib.php");
 require("./plugins/calendar/tc_calendar.php");
 
+# Is the OS Windows or Mac or Linux
+if (stristr(PHP_OS,'win')) {
+  $eol="\r\n";
+} elseif (stristr(PHP_OS,'mac')) {
+  $eol="\r";
+} else {
+  $eol="\n";
+}
+
 if($mydate != "")
 {
 	$BIRTHDAY = $mydate;
@@ -148,7 +157,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 			if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@"))
 			{
 				$pmc_password = gen_password();
-				$send = send_email(sprintf(L_EMAIL_VAL_3,"[".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]"), L_SET_2, L_EMAIL_VAL_PENDING_Done."\r\n".L_EMAIL_VAL_PENDING_Done1, "", 0);
+				$send = send_email(sprintf(L_EMAIL_VAL_3,"[".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]"), L_SET_2, L_EMAIL_VAL_PENDING_Done.$eol.L_EMAIL_VAL_PENDING_Done1, "", 0);
 				if (!$send) $Error = sprintf(L_EMAIL_VAL_Err,$Sender_email,$Sender_email);
 			}
 			elseif (C_EMAIL_PASWD)
@@ -190,18 +199,18 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 
 // Patch to send an email to the User after registration.
 // by Ciprian using Bob Dickow's one above.
-	$Headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
-	$Headers .= "X-Sender: ${Sender_email} \r\n";
-	$Headers .= "X-Mailer: PHP/".PHPVERSION." \r\n";
-	$Headers .= "Return-Path: ${Sender_email} \r\n";
-	$Headers .= "Date: ${mail_date} \r\n";
-	$Headers .= "Mime-Version: 1.0 \r\n";
-	$Headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed \r\n";
-	$Headers .= "Content-Transfer-Encoding: 8bit \r\n";
+	$Headers = "From: ${Sender_Name} <${Sender_email}>".$eol;
+	$Headers .= "X-Sender: ${Sender_email}".$eol;
+	$Headers .= "X-Mailer: PHP/".PHPVERSION.$eol;
+	$Headers .= "Return-Path: ${Sender_email}".$eol;
+	$Headers .= "Date: ${mail_date}".$eol;
+	$Headers .= "Mime-Version: 1.0".$eol;
+	$Headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed".$eol;
+	$Headers .= "Content-Transfer-Encoding: 8bit".$eol;
 	if (C_EMAIL_USER || (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@")))
 	{
-   	if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@")) $emailMessage = L_EMAIL_VAL_31."\r\n\r\n".sprintf(L_EMAIL_VAL_32,((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME),$Chat_URL)." \r\n\r\n";
-    else $emailMessage = sprintf(L_EMAIL_VAL_4,((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME),$Chat_URL)." \r\n\r\n";
+   	if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@")) $emailMessage = L_EMAIL_VAL_31.$eol.$eol.sprintf(L_EMAIL_VAL_32,((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME),$Chat_URL).$eol.$eol;
+    else $emailMessage = sprintf(L_EMAIL_VAL_4,((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME),$Chat_URL).$eol.$eol;
 		 if ($GENDER == 1) $sex = L_REG_46;
 		 elseif ($GENDER == 2) $sex = L_REG_47;
 		 elseif ($GENDER == 3) $sex = L_REG_44;
@@ -229,36 +238,44 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
        $shwage = L_REG_22;
      }
      $emailMessage .= ""
-     . "----------------------------------------------\r\n"
-     . "".L_SET_2.": ".$U."\r\n"
-	 . "".L_REG_1.": ".$pmc_password."\r\n"
-     . "----------------------------------------------\r\n"
-	 . "".L_EMAIL_VAL_81." (".$Chat_URL.")\r\n"
-     . "----------------------------------------------\r\n\r\n"
-     . "".L_PASS_1.": ".$secret_question."\r\n"
-     . "".L_PASS_6.": ".$SECRET_ANSWER."\r\n"
-     . "".L_REG_8.": ".$EMAIL."\r\n"
-     . "".L_REG_30.": ".($FIRSTNAME ? $FIRSTNAME : L_NOT_SELECTED)."\r\n"
-     . "".L_REG_31.": ".($LASTNAME ? $LASTNAME : L_NOT_SELECTED)."\r\n"
-	 . "".L_PRO_7.": ".($BIRTHDAY != "" ? $format_birth_day : L_NOT_SELECTED)."\r\n"
-     . "".L_REG_33.": ".$shweml."\r\n"
-     . "".L_PRO_8.": ".$shwbday."\r\n"
-     . "".L_PRO_9.": ".$shwage."\r\n"
-     . "".L_REG_45.": ".$sex."\r\n"
-     . "".L_REG_36.": ".($COUNTRY ? $COUNTRY : L_NOT_SELECTED)."\r\n"
-     . "".L_REG_32.": ".($WEBSITE ? $WEBSITE : L_NOT_SELECTED)."\r\n"
-     . "".L_PRO_1.": ".($SLANG ? $SLANG : L_NOT_SELECTED)."\r\n"
-     . "".L_PRO_2.": ".($FAVLINK ? $FAVLINK : L_NOT_SELECTED)."\r\n"
-     . "".L_PRO_3.": ".($FAVLINK1 ? $FAVLINK1 : L_NOT_SELECTED)."\r\n"
-     . "".L_PRO_4.": ".($DESCRIPTION ? $DESCRIPTION : L_NOT_SELECTED)."\r\n"
-     . "".L_PRO_5.": ".($PICTURE ? $PICTURE : L_NOT_SELECTED)."\r\n"
-	 . "".L_PRO_6.": ".($C ? $C : L_NOT_SELECTED)." (".(COLOR_NAMES ? L_ENABLED : L_DISABLED).")\r\n"
-	 . "".L_GRAV_USE.": ".$usegrav." (".(!ALLOW_GRAVATARS ? L_DISABLED : L_ENABLED).")\r\n"
-     . "----------------------------------------------\r\n"
-	 . "".sprintf(L_EMAIL_VAL_6,strftime(L_LONG_DATETIME,time()))."\r\n"
-     . "----------------------------------------------\r\n\r\n"
-     . "".L_EMAIL_VAL_8."\r\n\r\n"
-     .  $Mail_Greeting."\r\n".$Sender_Name1."\r\n".$Chat_URL;
+     . "----------------------------------------------".$eol
+     . "".L_SET_2.": ".$U.$eol
+	 . "".L_REG_1.": ".$pmc_password.$eol
+     . "----------------------------------------------".$eol
+	 . "".L_EMAIL_VAL_81." (".$Chat_URL.")".$eol
+     . "----------------------------------------------".$eol.$eol
+     . "".L_PASS_1.": ".$secret_question.$eol
+     . "".L_PASS_6.": ".$SECRET_ANSWER.$eol
+     . "".L_REG_8.": ".$EMAIL.$eol;
+	 if(!(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")))
+	 {
+		$emailMessage .= "".L_REG_30.": ".($FIRSTNAME ? $FIRSTNAME : L_NOT_SELECTED).$eol
+		. "".L_REG_31.": ".($LASTNAME ? $LASTNAME : L_NOT_SELECTED).$eol;
+	 }
+	 else
+	 {
+		 $emailMessage .= L_REG_31.": ".($LASTNAME ? $LASTNAME : L_NOT_SELECTED).$eol
+		 . "".L_REG_30.": ".($FIRSTNAME ? $FIRSTNAME : L_NOT_SELECTED).$eol;
+	 }
+	 $emailMessage .= "".L_PRO_7.": ".($BIRTHDAY != "" ? $format_birth_day : L_NOT_SELECTED).$eol
+     . "".L_REG_33.": ".$shweml.$eol
+     . "".L_PRO_8.": ".$shwbday.$eol
+     . "".L_PRO_9.": ".$shwage.$eol
+     . "".L_REG_45.": ".$sex.$eol
+     . "".L_REG_36.": ".($COUNTRY ? $COUNTRY : L_NOT_SELECTED).$eol
+     . "".L_REG_32.": ".($WEBSITE ? $WEBSITE : L_NOT_SELECTED).$eol
+     . "".L_PRO_1.": ".($SLANG ? $SLANG : L_NOT_SELECTED).$eol
+     . "".L_PRO_2.": ".($FAVLINK ? $FAVLINK : L_NOT_SELECTED).$eol
+     . "".L_PRO_3.": ".($FAVLINK1 ? $FAVLINK1 : L_NOT_SELECTED).$eol
+     . "".L_PRO_4.": ".($DESCRIPTION ? $DESCRIPTION : L_NOT_SELECTED).$eol
+     . "".L_PRO_5.": ".($PICTURE ? $PICTURE : L_NOT_SELECTED).$eol
+	 . "".L_PRO_6.": ".($C ? $C : L_NOT_SELECTED)." (".(COLOR_NAMES ? L_ENABLED : L_DISABLED).")".$eol
+	 . "".L_GRAV_USE.": ".$usegrav." (".(!ALLOW_GRAVATARS ? L_DISABLED : L_ENABLED).")".$eol
+     . "----------------------------------------------".$eol
+	 . "".sprintf(L_EMAIL_VAL_6,strftime(L_LONG_DATETIME,time())).$eol
+     . "----------------------------------------------".$eol.$eol
+     . "".L_EMAIL_VAL_8.$eol.$eol
+     .  $Mail_Greeting.$eol.$Sender_Name1.$eol.$Chat_URL;
 		$emailMessage = stripslashes($emailMessage);
 		$Subject = sprintf(L_EMAIL_VAL_5,$U,"[".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]");
 		$Subject = quote_printable($Subject,$Charset);
@@ -306,39 +323,38 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 		} else {
 		  $shwage = "no";
 		}
-     $emailMessage = "New user registration notification for "
-     . ((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME) ." at ". $Chat_URL." :\r\n\r\n"
-     . "----------------------------------------------\r\n"
-     . "Username: ".$U."\r\n"
-	 . "Password: ".$pmc_password."\r\n"
-     . "----------------------------------------------\r\n\r\n"
-     . "Secret question: ".$secret_questiona."\r\n"
-     . "Secret answer: ".$SECRET_ANSWER."\r\n"
+     $emailMessage = "New user registration notification for ".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)." at ".$Chat_URL." :".$eol.$eol
+     . "----------------------------------------------".$eol
+     . "Username: ".$U.$eol
+	 . "Password: ".$pmc_password.$eol
+     . "----------------------------------------------".$eol.$eol
+     . "Secret question: ".$secret_questiona.$eol
+     . "Secret answer: ".$SECRET_ANSWER.$eol
      . "Email: ".$EMAIL
-	 . "\r\nDisplay email address in public info: ".$shweml
-     . ($FIRSTNAME ? "\r\nFirst name: ".$FIRSTNAME : "")
-     . ($LASTNAME ? "\r\nLast name: ".$LASTNAME : "")
-     . ($BIRTHDAY != "" ? "\r\nDate of birth: ".$BIRTHDAY : "")
-     . ($BIRTHDAY != "" ? "\r\nDisplay birthday in public info: ".$shwbday : "")
-     . ($BIRTHDAY != "" ? "\r\nDisplay age in public info: ".$shwage : "")
-     . "\r\nGender: ".$sex
-     . ($COUNTRY ? "\r\nCountry: ".$COUNTRY : "")
-     . ($WEBSITE ? "\r\nWWW: ".$WEBSITE."" : "")
-     . ($SLANG ? "\r\nSpoken languages: ".$SLANG : "")
-     . ($FAVLINK ? "\r\nFavorite link 1: ".$FAVLINK : "")
-     . ($FAVLINK1 ? "\r\nFavorite link 2: ".$FAVLINK1 : "")
-     . ($DESCRIPTION ? "\r\nDescription: ".$DESCRIPTION : "")
-     . ($PICTURE ? "\r\nPicture: ".$PICTURE : "")
-	 . "\r\nColor name/text: ".($C ? $C : "Not selected")." (".(COLOR_NAMES ? "Enabled" : "Disabled").")\r\n"
-	 . ($usegrav ? "\r\nUse the Gravatar: ".$usegrav." (".(ALLOW_GRAVATARS ? "Enabled" : "Disabled").")" : "")
-     . "\r\n"
-	 . "----------------------------------------------\r\n"
-     . "Prefered language: ".$L."\r\n"
-     . "Registered on: $dt $ti\r\n"
-     . "From IP address: $IP (".gethostbyaddr($IP).")\r\n"
-	 . "----------------------------------------------\r\n\r\n"
-	 . "Please note that some data should be disabled from this copy for privacy concerns!\r\n"
-	 . "Save this email for your further reference.\r\n"
+	 . $eol."Display email address in public info: ".$shweml
+     . ($FIRSTNAME ? $eol."First name: ".$FIRSTNAME : "")
+     . ($LASTNAME ? $eol."Last name: ".$LASTNAME : "")
+     . ($BIRTHDAY != "" ? $eol."Date of birth: ".$BIRTHDAY : "")
+     . ($BIRTHDAY != "" ? $eol."Display birthday in public info: ".$shwbday : "")
+     . ($BIRTHDAY != "" ? $eol."Display age in public info: ".$shwage : "")
+     . $eol."Gender: ".$sex
+     . ($COUNTRY ? $eol."Country: ".$COUNTRY : "")
+     . ($WEBSITE ? $eol."WWW: ".$WEBSITE."" : "")
+     . ($SLANG ? $eol.$eol."Spoken languages: ".$SLANG : "")
+     . ($FAVLINK ? $eol.$eol."Favorite link 1: ".$FAVLINK : "")
+     . ($FAVLINK1 ? $eol."Favorite link 2: ".$FAVLINK1 : "")
+     . ($DESCRIPTION ? $eol."Description: ".$DESCRIPTION : "")
+     . ($PICTURE ? $eol."Picture: ".$PICTURE : "")
+	 . $eol."Color name/text: ".($C ? $C : "Not selected")." (".(COLOR_NAMES ? "Enabled" : "Disabled").")"
+	 . ($usegrav ? $eol."Use the Gravatar: ".$usegrav." (".(ALLOW_GRAVATARS ? "Enabled" : "Disabled").")" : "")
+     . $eol
+	 . "----------------------------------------------".$eol
+     . "Prefered language: ".$L.$eol
+     . "Registered on: $dt $ti".$eol
+     . "From IP address: $IP (".gethostbyaddr($IP).")".$eol
+	 . "----------------------------------------------".$eol.$eol
+	 . "Please note that some data should be disabled from this copy for privacy concerns!".$eol
+	 . "Save this email for your further reference.".$eol
 	 . "Enjoy!";
 		$Subject = "New User - ".$U." - Registration notification for [".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]";
 		$Subject = quote_printable($Subject,$Charset);
@@ -534,18 +550,42 @@ if(isset($Error))
 				<INPUT TYPE="text" NAME="SECRET_ANSWER" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($SECRET_ANSWER)) echo(stripslashes($SECRET_ANSWER)); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
 			</TD>
 		</TR>
+<?php
+if(!(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")))
+{
+?>
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_30); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="FIRSTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($FIRSTNAME)) echo(stripslashes($FIRSTNAME)); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done && C_REQUIRE_NAMES) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
+				<INPUT TYPE="text" NAME="FIRSTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if(isset($FIRSTNAME)) echo(stripslashes($FIRSTNAME)); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done && C_REQUIRE_NAMES) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
 			</TD>
 		</TR>
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_31); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="LASTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($LASTNAME)) echo(stripslashes($LASTNAME)); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done && C_REQUIRE_NAMES) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
+				<INPUT TYPE="text" NAME="LASTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if(isset($LASTNAME)) echo(stripslashes($LASTNAME)); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done && C_REQUIRE_NAMES) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
 			</TD>
 		</TR>
+<?php
+}
+else
+{
+?>
+		<TR>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_31); ?> :</TD>
+			<TD VALIGN="TOP">
+				<INPUT TYPE="text" NAME="LASTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if(isset($LASTNAME)) echo(stripslashes($LASTNAME)); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done && C_REQUIRE_NAMES) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
+			</TD>
+		</TR>
+		<TR>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_30); ?> :</TD>
+			<TD VALIGN="TOP">
+				<INPUT TYPE="text" NAME="FIRSTNAME" SIZE=25 MAXLENGTH=64 VALUE="<?php if(isset($FIRSTNAME)) echo(stripslashes($FIRSTNAME)); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done && C_REQUIRE_NAMES) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
+			</TD>
+		</TR>
+<?php
+}
+?>
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_7); ?> :</TD>
 			<TD VALIGN="TOP" CLASS=success>

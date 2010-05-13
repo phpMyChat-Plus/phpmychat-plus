@@ -30,7 +30,7 @@ $form_name = (isset($_REQUEST["frm"])) ? $_REQUEST["frm"] : "";
 $target_url = (isset($_REQUEST["tar"])) ? $_REQUEST["tar"] : "";
 
 $show_input = (isset($_REQUEST["inp"])) ? $_REQUEST["inp"] : true;
-$date_format = (isset($_REQUEST["fmt"])) ? $_REQUEST["fmt"] : 'd-M-Y';
+$date_format = (isset($_REQUEST["fmt"])) ? $_REQUEST["fmt"] : 'd F Y';
 $lang = (isset($_REQUEST["lang"])) ? $_REQUEST["lang"] : 'en_US';
 
 //echo("date: $sly-$slm-$sld");

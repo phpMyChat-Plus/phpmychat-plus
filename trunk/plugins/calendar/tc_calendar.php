@@ -54,7 +54,7 @@
 //bug fixed: day combobox not update when select date from calendar
 //	- thanks ciprianmp
 //
-//add on: translation  implemented - default is english US
+//add on: translation  implemented - default is english en_US
 //	- thanks ciprianmp
 //
 //********************************************************
@@ -70,7 +70,7 @@ class tc_calendar{
 	var $icon;
 	var $objname;
 	var $txt = L_SEL_ICON; //display when no calendar icon found or set up
-	var $date_format = 'd-M-Y'; //format of date show in panel if $show_input is false
+	var $date_format = 'd F Y'; //format of date show in panel if $show_input is false
 	var $year_display_from_current = 30;
 
 	var $date_picker;
@@ -407,10 +407,16 @@ class tc_calendar{
 		$this->show_input = $flag;
 	}
 
+	function utf_conv($iso,$charset,$what)
+	{
+		if(function_exists('iconv')) $what = iconv($iso,$charset,$what);
+		return $what;
+	}
+	
 	function writeDateContainer(){
 		if($this->day && $this->month && $this->year){
 			$dd = date($this->date_format, mktime(0,0,0,$this->month,$this->day,$this->year));
-			if($this->lang) $dd = utf_conv(WIN_DEFAULT,'utf-8',strftime(L_CAL_FORMAT, strtotime($dd)));
+			if($this->lang) $dd = stristr(PHP_OS,"win") ? utf_conv(WIN_DEFAULT,'utf-8',strftime(L_CAL_FORMAT, strtotime($dd))) : strftime(L_CAL_FORMAT, strtotime($dd));
 		}
 		else $dd = L_SEL_DATE;
 

@@ -100,11 +100,12 @@ if (!function_exists('mb_convert_case'))
 		return $str;
 	};
 };
+
 if (!function_exists('utf_conv'))
 {
 	function utf_conv($iso,$Charset,$what)
 	{
-		if (stristr(PHP_OS,'win') && function_exists('iconv')) $what = iconv($iso, $Charset, $what);
+		if(function_exists('iconv')) $what = iconv($iso, $Charset, $what);
 		return $what;
 	};
 };
