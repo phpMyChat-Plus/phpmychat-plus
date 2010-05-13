@@ -749,7 +749,7 @@ if (C_LAST_SAVED_ON)
 	settype($last_saved_on = mysql_to_ts(C_LAST_SAVED_ON), "integer");
 	if (C_TMZ_OFFSET) settype($tmz_offset = C_TMZ_OFFSET, "integer");
 	$Last_Saved_On = $last_saved_on + $tmz_offset*60*60;
-	$Last_Saved_On = utf_conv(WIN_DEFAULT,$Charset,strftime(L_LONG_DATETIME,$Last_Saved_On));
+	$Last_Saved_On = stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,$Charset,strftime(L_LONG_DATETIME,$Last_Saved_On)) : strftime(L_LONG_DATETIME,$Last_Saved_On);
 }
 if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 {

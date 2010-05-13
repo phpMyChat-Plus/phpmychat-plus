@@ -20,12 +20,13 @@ function mysql_to_ts($mysql_time)
 	}
 	return mktime($matches[4], $matches[5], $matches[6], $matches[2], $matches[3], $matches[1]);
 }
+
 if (!function_exists("utf_conv"))
 {
 	function utf_conv($iso,$Charset,$what)
 	{
-	if (function_exists('iconv')) $what = iconv($iso, $Charset, $what);
-	return $what;
+		if(function_exists('iconv')) $what = iconv($iso, $Charset, $what);
+		return $what;
 	};
 };
 

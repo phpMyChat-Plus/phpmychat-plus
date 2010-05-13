@@ -65,7 +65,7 @@ if (!function_exists('utf_conv'))
 {
 	function utf_conv($iso,$Charset,$what)
 	{
-		if (stristr(PHP_OS,'win') && function_exists('iconv')) $what = iconv($iso, $Charset, $what);
+		if(function_exists('iconv')) $what = iconv($iso, $Charset, $what);
 		return $what;
 	};
 };
@@ -310,7 +310,7 @@ if ($lastname != "")
 if ($show_bday)
 {
 	$dob_format = $show_age ? L_LONG_DATE : trim(str_replace(array("%Y.","%Y","(%A)","%A",",","-","年","den"),"",str_replace("  "," ",L_LONG_DATE)));
-	$my_dob_time = utf_conv(WIN_DEFAULT,'utf-8',strftime($dob_format, $my_dobtime));
+	$my_dob_time = stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime($dob_format, $my_dobtime)) : strftime($dob_format, $my_dobtime);
 	?>
 	<TR>
 		<TD CLASS="whois" nowrap="nowrap"><?php echo(L_PRO_7); ?>: </TD>
@@ -469,7 +469,7 @@ if ($login_counter && C_LOGIN_COUNTER)
 }
 	if ($User == C_BOT_NAME) $last_visit = strftime(L_LONG_DATETIME,$last_login);
 	else $last_visit = strftime(L_LONG_DATETIME,$reg_time);
-	$last_visit = utf_conv(WIN_DEFAULT,$Charset,$last_visit);
+	if(stristr(PHP_OS,'win')) $last_visit = utf_conv(WIN_DEFAULT,$Charset,$last_visit);
 ?>
 	<TR>
 		<TD CLASS="whois" nowrap="nowrap"><?php echo(A_SHEET1_11); ?>: </TD>

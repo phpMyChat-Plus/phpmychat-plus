@@ -14,6 +14,15 @@ function RecursiveMkdir($path)
 }
 //clearstatcache(); - for chmod-ing old folders, but it doesn't save logs text anymore
 
+# Is the OS Windows or Mac or Linux
+if (stristr(PHP_OS,'win')) {
+  $eol="\r\n";
+} elseif (stristr(PHP_OS,'mac')) {
+  $eol="\r";
+} else {
+  $eol="\n";
+}
+
 //Full logs
 $done = 0;
 $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
@@ -71,10 +80,10 @@ $message = urldecode($message);
 $message = str_replace("links.php?link=||","",$message);
 $message = str_replace("target=\"_blank\"></a>","target=\"_blank\">Click here</a>",$message);
 $message = str_replace('alt="Send email"','target="_blank" title="<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>"',$message);
-$NewMsg = "\r\n<tr align=texttop valign=top>\r\n<td valign=top nowrap=\"nowrap\">".$time_posted."</td>\r\n<td valign=top nowrap=\"nowrap\">";
-$NewMsg .= $room."</td>\r\n<td valign=top nowrap=\"nowrap\">";
+$NewMsg = $eol."<tr align=texttop valign=top>$eol<td valign=top nowrap=\"nowrap\">".$time_posted."</td>$eol<td valign=top nowrap=\"nowrap\">";
+$NewMsg .= $room."</td>$eol<td valign=top nowrap=\"nowrap\">";
 $NewMsg .= "<b>".$username."</b>";
-$NewMsg .= $toaddress."</td>\r\n<td valign=top>";
+$NewMsg .= $toaddress."</td>$eol<td valign=top>";
 if ($username == "SYS topic")
 {
 	$NewMsg .= $address;
@@ -144,7 +153,7 @@ else
 {
 	$NewMsg .= $message;
 }
-$Messages[] = $NewMsg."</td>\r\n</tr>";
+$Messages[] = $NewMsg."</td>$eol</tr>";
 $toaddress = '';
 $i++;
 }
@@ -199,35 +208,28 @@ $logpath = "./".C_LOG_DIR."/".$year."/".$month."/".$year.$month.$day.".php"  ;
 		$fp = fopen($logpath, "a") ;
 		$chatSaved = '$chatSaved';
 		$retries = 0;
-        do { 
-            if ($retries > 0) { 
-                usleep(rand(1, 1000)); 
-            } 
-            $retries += 1; 
-        } while (!@flock($fp, LOCK_EX) and $retries <= 50); 
+        do {
+            if ($retries > 0) {
+                usleep(rand(1, 1000));
+            }
+            $retries += 1;
+        } while (!@flock($fp, LOCK_EX) and $retries <= 50);
 
 //		@flock($fp, LOCK_EX);    // Lock file in exclusive mode
-		@fwrite($fp, sprintf("\r\n<?php\r\n"));
-		@fwrite($fp, sprintf("$chatSaved = strftime(L_LONG_DATETIME,$mess_time);\r\n"));
-		if (stristr(PHP_OS,'win'))
-		{
-			@fwrite($fp, sprintf('if (!function_exists("utf_conv"))'));
-			@fwrite($fp, sprintf("\r\n"));
-			@fwrite($fp, sprintf("{\r\n"));
-			@fwrite($fp, sprintf('function utf_conv($iso,$Charset,$what)'));
-			@fwrite($fp, sprintf("\r\n"));
-			@fwrite($fp, sprintf("{\r\n"));
-			@fwrite($fp, sprintf('if (stristr(PHP_OS,\'win\') && function_exists(\'iconv\')) $what = iconv($iso, $Charset, $what);'));
-			@fwrite($fp, sprintf("\r\n"));
-			@fwrite($fp, sprintf('return $what;'));
-			@fwrite($fp, sprintf("\r\n"));
-			@fwrite($fp, sprintf("};\r\n"));
-			@fwrite($fp, sprintf("};\r\n"));
-			@fwrite($fp, sprintf("if (eregi(\"win\", PHP_OS) && function_exists(\"iconv\")) $chatSaved = iconv(WIN_DEFAULT,\"utf-8\",$chatSaved);\r\n"));
-		}
-		@fwrite($fp, sprintf("?>\r\n"));
-		@fwrite($fp, sprintf("<div align=\"left\"><span dir=\"LTR\" style=\"font-weight: 800; color:#00008B; font-family: helvetica, arial, geneva, sans-serif; font-size: 12pt\"><?php echo(sprintf(A_CHAT_LOGS_23,$chatSaved)); ?></span></div>\r\n</center>\r\n"));
-		@fwrite($fp, sprintf("\r\n<!-- MESSAGES TABLE STARTS BELOW -->\r\n\r\n<table border=1 cellspacing=0 cellpading=1>\r\n<tr style=\"font-weight:bold; color:blue; background-color=yellow\" align=\"center\">\r\n<td nowrap=\"nowrap\"><?php echo (A_POST_TIME); ?></td>\r\n<td nowrap=\"nowrap\"><?php echo (A_CHTEX_ROOM); ?></td>\r\n<td nowrap=\"nowrap\"><?php echo (A_FROM_TO); ?></td>\r\n<td><?php echo (A_CHTEX_MSG); ?></td>\r\n</tr>"));
+		@fwrite($fp, sprintf($eol."<?php".$eol));
+		@fwrite($fp, sprintf("$chatSaved = strftime(L_LONG_DATETIME,$mess_time);".$eol));
+		@fwrite($fp, sprintf('if (!function_exists("utf_conv"))'.$eol));
+		@fwrite($fp, sprintf("{".$eol));
+		@fwrite($fp, sprintf('function utf_conv($iso,$Charset,$what)'.$eol));
+		@fwrite($fp, sprintf("{".$eol));
+		@fwrite($fp, sprintf('if(function_exists(\'iconv\')) $what = iconv($iso, $Charset, $what);'.$eol));
+		@fwrite($fp, sprintf('return $what;'.$eol));
+		@fwrite($fp, sprintf("};".$eol));
+		@fwrite($fp, sprintf("};".$eol));
+		@fwrite($fp, sprintf("if(stristr(PHP_OS,'win')) $chatSaved = iconv(WIN_DEFAULT,\"utf-8\",$chatSaved);".$eol));
+		@fwrite($fp, sprintf("?>".$eol));
+		@fwrite($fp, sprintf("<div align=\"left\"><span dir=\"LTR\" style=\"font-weight: 800; color:#00008B; font-family: helvetica, arial, geneva, sans-serif; font-size: 12pt\"><?php echo(sprintf(A_CHAT_LOGS_23,$chatSaved)); ?></span></div>$eol</center>$eol"));
+		@fwrite($fp, sprintf($eol."<!-- MESSAGES TABLE STARTS BELOW -->$eol$eol<table border=1 cellspacing=0 cellpading=1>$eol<tr style=\"font-weight:bold; color:blue; background-color=yellow\" align=\"center\">$eol<td nowrap=\"nowrap\"><?php echo (A_POST_TIME); ?></td>$eol<td nowrap=\"nowrap\"><?php echo (A_CHTEX_ROOM); ?></td>$eol<td nowrap=\"nowrap\"><?php echo (A_FROM_TO); ?></td>$eol<td><?php echo (A_CHTEX_MSG); ?></td>$eol</tr>"));
 	}
 	else
 	{
@@ -300,10 +302,10 @@ $messageu = urldecode($messageu);
 $messageu = str_replace("links.php?link=||","",$messageu);
 $messageu = str_replace("target=\"_blank\"></a>","target=\"_blank\">Click here</a>",$messageu);
 $messageu = str_replace('alt="Send email"','target="_blank" title="<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>"',$messageu);
-$NewMsgu = "\r\n<tr align=texttop valign=top>\r\n<td valign=top nowrap=\"nowrap\">".$time_postedu."</td>\r\n<td valign=top nowrap=\"nowrap\">";
-$NewMsgu .= $roomu."</td>\r\n<td valign=top nowrap=\"nowrap\">";
+$NewMsgu = $eol."<tr align=texttop valign=top>$eol<td valign=top nowrap=\"nowrap\">".$time_postedu."</td>$eol<td valign=top nowrap=\"nowrap\">";
+$NewMsgu .= $roomu."</td>$eol<td valign=top nowrap=\"nowrap\">";
 $NewMsgu .= "<b>".$usernameu."</b>";
-$NewMsgu .= $toaddressu."</td>\r\n<td valign=top>";
+$NewMsgu .= $toaddressu."</td>$eol<td valign=top>";
 if ($usernameu == "SYS topic")
 {
 	$NewMsgu .= $addressu;
@@ -373,7 +375,7 @@ else
 {
 	$NewMsgu .= $messageu;
 }
-$Messagesu[] = $NewMsgu."</td>\r\n</tr>";
+$Messagesu[] = $NewMsgu."</td>$eol</tr>";
 $toaddressu = '';
 $iu++;
 }
@@ -428,35 +430,28 @@ $logpathu = "./logs/".$yearu."/".$monthu."/".$yearu.$monthu.$dayu.".php"  ;
 		$fpu = fopen($logpathu, "a") ;
 		$chatSavedu = '$chatSavedu';
 		$retriesu = 0;
-        do { 
-            if ($retriesu > 0) { 
-                usleep(rand(1, 1000)); 
-            } 
-            $retriesu += 1; 
-        } while (!@flock($fpu, LOCK_EX) and $retriesu <= 50); 
+        do {
+            if ($retriesu > 0) {
+                usleep(rand(1, 1000));
+            }
+            $retriesu += 1;
+        } while (!@flock($fpu, LOCK_EX) and $retriesu <= 50);
 
 //		@flock($fpu, LOCK_EX);    // Lock file in exclusive mode
-		@fwrite($fpu, sprintf("\r\n<?php\r\n"));
-		@fwrite($fpu, sprintf("$chatSavedu = strftime(L_LONG_DATETIME,$mess_timeu);\r\n"));
-		if (stristr(PHP_OS,'win'))
-		{
-			@fwrite($fpu, sprintf('if (!function_exists("utf_conv"))'));
-			@fwrite($fpu, sprintf("\r\n"));
-			@fwrite($fpu, sprintf("{\r\n"));
-			@fwrite($fpu, sprintf('function utf_conv($iso,$Charset,$what)'));
-			@fwrite($fpu, sprintf("\r\n"));
-			@fwrite($fpu, sprintf("{\r\n"));
-			@fwrite($fpu, sprintf('if (stristr(PHP_OS,\'win\') && function_exists(\'iconv\')) $what = iconv($iso, $Charset, $what);'));
-			@fwrite($fpu, sprintf("\r\n"));
-			@fwrite($fpu, sprintf('return $what;'));
-			@fwrite($fpu, sprintf("\r\n"));
-			@fwrite($fpu, sprintf("};\r\n"));
-			@fwrite($fpu, sprintf("};\r\n"));
-			@fwrite($fpu, sprintf("if (eregi(\"win\", PHP_OS) && function_exists(\"iconv\")) $chatSavedu = iconv(WIN_DEFAULT,\"utf-8\",$chatSavedu);\r\n"));
-		}
-		@fwrite($fpu, sprintf("?>\r\n"));
-		@fwrite($fpu, sprintf("<div align=\"left\"><span dir=\"LTR\" style=\"font-weight: 800; color:#00008B; font-family: helvetica, arial, geneva, sans-serif; font-size: 12pt\"><?php echo(sprintf(A_CHAT_LOGS_23,$chatSavedu)); ?></span></div>\r\n</center>\r\n"));
-		@fwrite($fpu, sprintf("\r\n<!-- MESSAGES TABLE STARTS BELOW -->\r\n\r\n<table border=1 cellspacing=0 cellpading=1>\r\n<tr style=\"font-weight:bold; color:blue; background-color=yellow\" align=\"center\">\r\n<td nowrap=\"nowrap\"><?php echo (A_POST_TIME); ?></td>\r\n<td nowrap=\"nowrap\"><?php echo (A_CHTEX_ROOM); ?></td>\r\n<td nowrap=\"nowrap\"><?php echo (A_FROM); ?></td>\r\n<td><?php echo (A_CHTEX_MSG); ?></td>\r\n</tr>"));
+		@fwrite($fpu, sprintf($eol."<?php".$eol));
+		@fwrite($fpu, sprintf("$chatSavedu = strftime(L_LONG_DATETIME,$mess_timeu);".$eol));
+		@fwrite($fpu, sprintf('if (!function_exists("utf_conv"))'.$eol));
+		@fwrite($fpu, sprintf("{".$eol));
+		@fwrite($fpu, sprintf('function utf_conv($iso,$Charset,$what)'.$eol));
+		@fwrite($fpu, sprintf("{".$eol));
+		@fwrite($fpu, sprintf('if(function_exists(\'iconv\')) $what = iconv($iso, $Charset, $what);'.$eol));
+		@fwrite($fpu, sprintf('return $what;'.$eol));
+		@fwrite($fpu, sprintf("};".$eol));
+		@fwrite($fpu, sprintf("};".$eol));
+		@fwrite($fpu, sprintf("if(stristr(PHP_OS,'win')) $chatSavedu = iconv(WIN_DEFAULT,\"utf-8\",$chatSavedu);".$eol));
+		@fwrite($fpu, sprintf("?>".$eol));
+		@fwrite($fpu, sprintf("<div align=\"left\"><span dir=\"LTR\" style=\"font-weight: 800; color:#00008B; font-family: helvetica, arial, geneva, sans-serif; font-size: 12pt\"><?php echo(sprintf(A_CHAT_LOGS_23,$chatSavedu)); ?></span></div>$eol</center>$eol"));
+		@fwrite($fpu, sprintf($eol."<!-- MESSAGES TABLE STARTS BELOW -->$eol$eol<table border=1 cellspacing=0 cellpading=1>$eol<tr style=\"font-weight:bold; color:blue; background-color=yellow\" align=\"center\">$eol<td nowrap=\"nowrap\"><?php echo (A_POST_TIME); ?></td>$eol<td nowrap=\"nowrap\"><?php echo (A_CHTEX_ROOM); ?></td>$eol<td nowrap=\"nowrap\"><?php echo (A_FROM); ?></td>$eol<td><?php echo (A_CHTEX_MSG); ?></td>$eol</tr>"));
 	}
 	else
 	{

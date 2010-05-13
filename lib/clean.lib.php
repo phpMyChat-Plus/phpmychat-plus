@@ -8,6 +8,15 @@ if (isset($_GET))
 	};
 };
 
+# Is the OS Windows or Mac or Linux
+if (stristr(PHP_OS,'win')) {
+  $eol="\r\n";
+} elseif (stristr(PHP_OS,'mac')) {
+  $eol="\r";
+} else {
+  $eol="\n";
+}
+
 // Clean the buzz sounds after play
 $ChatS = new DB;
 $ChatS->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE '%...BUZZER...%' AND m_time<'".(time()-10)."' ORDER BY m_time DESC LIMIT 1");
@@ -63,12 +72,12 @@ if(C_BDAY_EMAIL)
 					$dob_name = $dob_firstname != "" ? $dob_firstname : $dob_username;
 					$greet = rand(0, sizeof($greets)-1);
 					$greet_text = $greets[$greet];
-					$greet_text = str_replace("<br />","\r\n",$greet_text);
+					$greet_text = str_replace("<br />",$eol,$greet_text);
 					$dob1_subject = sprintf(L_DOB_SUBJ, $dob_name);
 					if(send_dob_email($dob_name, $dob_email, "[".(C_CHAT_NAME != "" ? C_CHAT_NAME : APP_NAME)."] ". $dob1_subject, $greet_text))
 					{
 						include("admin/mail4admin.lib.php");
-						send_email_admin($Sender_name." <".$Sender_email.">", "[".(C_CHAT_NAME != "" ? C_CHAT_NAME : APP_NAME)."] ".$dob1_subject." - copy", "This is a copy:\r\n\r\n".$greet_text."\r\n\r\n".$dob1_subject."\r\n".$dob_birthday);
+						send_email_admin($Sender_name." <".$Sender_email.">", "[".(C_CHAT_NAME != "" ? C_CHAT_NAME : APP_NAME)."] ".$dob1_subject." - copy", "This is a copy:".$eol.$eol.$greet_text.$eol.$eol.$dob1_subject.$eol.$dob_birthday);
 						$ChatB->query("UPDATE ".C_REG_TBL." SET bday_email_sent=".time()." WHERE username='$dob_username'");
 					}
 				}
@@ -105,7 +114,7 @@ if(C_CHAT_LURKING)
 	{
 //		$when = date('r', $usertime + C_TMZ_OFFSET*60*60);
 		$when = $usertime + C_TMZ_OFFSET*60*60;
-		$when = '\".utf_conv(WIN_DEFAULT,$Charset,strftime(L_SHORT_DATETIME,'.$when.')).\"';
+		$when = stristr(PHP_OS,'win') ? '\".utf_conv(WIN_DEFAULT,$Charset,strftime(L_SHORT_DATETIME,'.$when.')).\"' : '\".strftime(L_SHORT_DATETIME,'.$when.').\"';
 		$userclosed = addslashes($userclosed);
 		$ChatM->query("SELECT type FROM ".C_MSG_TBL." WHERE username = '$userclosed' AND room = '$userroom' ORDER BY m_time DESC LIMIT 1");
 		list($usertype) = $ChatM->next_record();

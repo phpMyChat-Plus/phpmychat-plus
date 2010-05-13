@@ -9,6 +9,15 @@ $Sender_Name = (eregi("your name",C_ADMIN_NAME) && C_ADMIN_NAME != "") ? "" : C_
 $Sender_Name1 = $Sender_Name;		// unformated
 $Chat_URL = (C_CHAT_URL == "./") ? "" : C_CHAT_URL;	// To be send as a signature
 
+# Is the OS Windows or Mac or Linux
+if (stristr(PHP_OS,'win')) {
+  $eol="\r\n";
+} elseif (stristr(PHP_OS,'mac')) {
+  $eol="\r";
+} else {
+  $eol="\n";
+}
+
 // The admin has required an action to be done
 if (isset($FORM_SEND) && $FORM_SEND == 4)
 {
@@ -19,7 +28,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 4)
 	if ($emails != "") $SendTo = array_merge($SendTo,$SendToExtra);
 	if (count($SendTo) > 0 && trim($subject) != "" && trim($message) != "")
 	{
-		if ($sign) $message .= "\r\n\r\n".$signature;
+		if ($sign) $message .= $eol.$signature;
 		include('mail4admin.lib.php');
 		$MultiSend = "";
 		for (reset($SendTo); $mailTo=current($SendTo); next($SendTo))
@@ -27,7 +36,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 4)
 			$MultiSend .= $mailTo.", ";
 			if ($MultiSend == "") break;
 		};
-		$Send = send_email_admin($MultiSend,$subject."\r\n\r\n",$message,$pmc_email);
+		$Send = send_email_admin($MultiSend,$subject,$message,$pmc_email);
 		if ($Ccopy) $MessCc = "<tr><td width=1% nowrap=\"nowrap\"><b>Cc:</b></td><td><b>".$pmc_username."</b> &lt;".$pmc_email."></td></tr>";
 		$Success = "<table border=1 width=70% class=\"msg2\"><tr><td width=1% nowrap=\"nowrap\"><b>From:</b></td><td><b>".$Sender_Name1."</b> &lt;".$Sender_email."></td></tr><tr><td width=1% nowrap=\"nowrap\" class=\"success\"><b>".A_SHEET4_2."</b></td><td><b>".str_replace(">,",">,<b>",str_replace("<","</b>&lt;",implode(", ",$SendTo)))."</td></tr>".$MessCc."<tr><td width=1% nowrap=\"nowrap\" class=\"error\"><b>Bcc:</b></td><td>".$Sender_email."</td></tr><tr><td width=1% nowrap=\"nowrap\"><b>".A_SHEET4_4."</b></td><td>".stripslashes($subject)."</td></tr><tr><td width=1% nowrap=\"nowrap\"><b>".A_SHEET4_5."</b></td><td>".stripslashes(str_replace("\n","<br />",$message))."</td></tr></table>";
 		$Message = ($Send ? A_SHEET4_7.$Success : A_SHEET4_8);
@@ -162,7 +171,7 @@ else
 					<TD VALIGN=MIDDLE ALIGN="<?php echo($InvCellAlign); ?>"><?php echo(A_SHEET4_11); ?>
 				&nbsp;<input type="checkbox" name="sign" value="1" checked></TD>
 				<TD VALIGN=MIDDLE ALIGN="<?php echo($CellAlign); ?>">
-				<TEXTAREA NAME="signature" WRAP="on" COLS="35" ROWS="4"><?php echo(C_MAIL_GREETING."\r\n".$Sender_Name1."\r\n".$Chat_URL); ?></TEXTAREA>
+				<TEXTAREA NAME="signature" WRAP="on" COLS="35" ROWS="4"><?php echo(C_MAIL_GREETING.$eol.$Sender_Name1.$eol.$Chat_URL); ?></TEXTAREA>
 					</TD>
 					<TD VALIGN=BOTTOM ALIGN="<?php echo($InvCellAlign); ?>">
 						<INPUT style="color:#ff0000; font-weight:800" TYPE="submit" NAME="submit_type" VALUE="<?php echo(A_SHEET4_6); ?>">

@@ -28,6 +28,15 @@ require("./lib/database/".C_DB_TYPE.".lib.php");
 require("./lib/login.lib.php");
 include("./lib/mail_validation.lib.php");
 
+# Is the OS Windows or Mac or Linux
+if (stristr(PHP_OS,'win')) {
+  $eol="\r\n";
+} elseif (stristr(PHP_OS,'mac')) {
+  $eol="\r";
+} else {
+  $eol="\n";
+}
+
 // Special cache instructions for IE5+
 $CachePlus	= "";
 if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
@@ -94,40 +103,40 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_20)
 	     $dt = $tm[mon]."/".$tm[mday]."/".$tm[year];
 	     $ti = sprintf("%02.u:%02.u:%02.u",$tm[hours],$tm[minutes],$tm[seconds]);
      $emailMessage = "User account deleted from "
-     . ((C_CHAT_NAME != "") ? C_CHAT_NAME." - ".APP_NAME : APP_NAME) ." at ". C_CHAT_URL." :\r\n\r\n"
-     . "----------------------------------------------\n"
-     . "Deleted Username: ".$pmc_username."\r\n\r\n"
-     . "----------------------------------------------\r\n\r\n"
-     . "Secret question: ".$SECRET_QUESTION."\r\n"
-     . "Secret answer: ".$SECRET_ANSWER."\r\n"
-     . "Email: ".$EMAIL."\r\n"
-     . "First name: ".$FIRSTNAME."\r\n"
-     . "Last name: ".$LASTNAME."\r\n"
-     . "Gender: ".$sex."\r\n"
-     . "Country: ".$COUNTRY."\r\n"
-     . "WWW: ".$WEBSITE."\r\n"
-     . "Spoken languages: ".$SLANG."\r\n"
-     . "Description: ".$DESCRIPTION."\r\n"
-     . "Favorite link 1: ".$FAVLINK."\r\n"
-     . "Favorite link 2: ".$FAVLINK1."\r\n"
-     . "Picture: ".$PICTURE."\r\n"
-     . "Color name/text: ".$C." (".(COLOR_NAMES ? "Enabled" : "Disabled").")\r\n"
-     . "Display email address on public info: ".$shweml."\r\n"
-     . "Open popups on private message: ".$allpopup."\r\n"
-	 . "Use the Gravatar: ".$usegrav." (".(!ALLOW_GRAVATARS ? "Disabled" : "Enabled").")\r\n"
-	 . "----------------------------------------------\r\n"
-	 . "Preffered language: ".$L." \r\n"
-     . "Deletion on: $dt $ti\r\n"
-     . "IP address: $IP (".gethostbyaddr($IP).")\r\n"
+     . ((C_CHAT_NAME != "") ? C_CHAT_NAME." - ".APP_NAME : APP_NAME) ." at ". C_CHAT_URL." :".$eol
+     . "----------------------------------------------".$eol
+     . "Deleted Username: ".$pmc_username.$eol
+     . "----------------------------------------------".$eol
+     . "Secret question: ".$SECRET_QUESTION.$eol
+     . "Secret answer: ".$SECRET_ANSWER.$eol
+     . "Email: ".$EMAIL.$eol
+     . "First name: ".$FIRSTNAME.$eol
+     . "Last name: ".$LASTNAME.$eol
+     . "Gender: ".$sex.$eol
+     . "Country: ".$COUNTRY.$eol
+     . "WWW: ".$WEBSITE.$eol
+     . "Spoken languages: ".$SLANG.$eol
+     . "Description: ".$DESCRIPTION.$eol
+     . "Favorite link 1: ".$FAVLINK.$eol
+     . "Favorite link 2: ".$FAVLINK1.$eol
+     . "Picture: ".$PICTURE.$eol
+     . "Color name/text: ".$C." (".(COLOR_NAMES ? "Enabled" : "Disabled").")".$eol
+     . "Display email address on public info: ".$shweml.$eol
+     . "Open popups on private message: ".$allpopup.$eol
+	 . "Use the Gravatar: ".$usegrav." (".(!ALLOW_GRAVATARS ? "Disabled" : "Enabled").")".$eol
+	 . "----------------------------------------------".$eol
+	 . "Preffered language: ".$L.$eol
+     . "Deletion on: $dt $ti".$eol
+     . "IP address: $IP (".gethostbyaddr($IP).")".$eol
      . "----------------------------------------------";
-		$Headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
-		$Headers .= "X-Sender: <${Sender_email}> \r\n";
-		$Headers .= "X-Mailer: PHP/".PHPVERSION." \r\n";
-		$Headers .= "Return-Path: <${Sender_email}> \r\n";
-		$Headers .= "Date: ${mail_date} \r\n";
-		$Headers .= "Mime-Version: 1.0 \r\n";
-		$Headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed \r\n";
-		$Headers .= "Content-Transfer-Encoding: 8bit \r\n";
+		$Headers = "From: ${Sender_Name} <${Sender_email}>".$eol;
+		$Headers .= "X-Sender: <${Sender_email}>".$eol;
+		$Headers .= "X-Mailer: PHP/".PHPVERSION.$eol;
+		$Headers .= "Return-Path: <${Sender_email}>".$eol;
+		$Headers .= "Date: ${mail_date}".$eol;
+		$Headers .= "Mime-Version: 1.0".$eol;
+		$Headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed".$eol;
+		$Headers .= "Content-Transfer-Encoding: 8bit".$eol;
 		$Subject = "User Account Deletion - ".$pmc_username." - from [".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]";
 		$Subject = quote_printable($Subject,$Charset);
     @mail(C_ADMIN_EMAIL,$Subject,$emailMessage, $Headers);

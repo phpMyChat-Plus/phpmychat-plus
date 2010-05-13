@@ -13,6 +13,15 @@ $Mail_Greeting = C_MAIL_GREETING;	// To be send as a signature
 // -- CORE FUNCTIONS - DO NOT MODIFY --
 $MailFunctionOn = (function_exists("mail"));
 
+# Is the OS Windows or Mac or Linux
+if (stristr(PHP_OS,'win')) {
+  $eol="\r\n";
+} elseif (stristr(PHP_OS,'mac')) {
+  $eol="\r";
+} else {
+  $eol="\n";
+}
+
 if (isset($MailFunctionOn))
 {
 	if (!function_exists("quote_printable"))
@@ -63,23 +72,22 @@ if (isset($MailFunctionOn))
 	{
 		global $Charset;
 		global $Sender_Name, $Sender_Name1, $Sender_email, $Chat_URL, $Ccopy, $pmc_username, $Mail_Greeting;
-		global $mail_date;
+		global $mail_date, $eol;
 
 		if ($Sender_Name != "") $Sender_Name = quote_printable($Sender_Name,$Charset);
 		$Subject = quote_printable($Subject,$Charset);
-
 		$Body = stripslashes($Body);
-		$Headers = "From: ${Sender_Name} <${Sender_email}> \r\n";
-		if ($Ccopy && ${pmc_email}) $Headers .= "Cc: ${pmc_username} <${pmc_email}> \r\n";
-		$Headers .= "Bcc: <${Sender_email}> \r\n";
-		if (${pmc_email}) $Headers .= "Reply-To: ${pmc_username} <${pmc_email}> \r\n";
-		$Headers .= "X-Sender: ${Sender_email} \r\n";
-		$Headers .= "X-Mailer: PHP/".PHPVERSION." \r\n";
-		$Headers .= "Return-Path: ${Sender_email} \r\n";
-		$Headers .= "Date: ${mail_date} \r\n";
-		$Headers .= "Mime-Version: 1.0 \r\n";
-		$Headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed \r\n";
-		$Headers .= "Content-Transfer-Encoding: 8bit \r\n";
+		$Headers = "From: ${Sender_Name} <${Sender_email}>".$eol;
+		if ($Ccopy && ${pmc_email}) $Headers .= "Cc: ${pmc_username} <${pmc_email}>".$eol;
+		$Headers .= "Bcc: <${Sender_email}>".$eol;
+		if (${pmc_email}) $Headers .= "Reply-To: ${pmc_username} <${pmc_email}>".$eol;
+		$Headers .= "X-Sender: ${Sender_email}".$eol;
+		$Headers .= "X-Mailer: PHP/".PHPVERSION.$eol;
+		$Headers .= "Return-Path: ${Sender_email}".$eol;
+		$Headers .= "Date: ${mail_date}".$eol;
+		$Headers .= "Mime-Version: 1.0".$eol;
+		$Headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed".$eol;
+		$Headers .= "Content-Transfer-Encoding: 8bit".$eol;
 
 		return @mail($To, $Subject, $Body, $Headers);
 		};
