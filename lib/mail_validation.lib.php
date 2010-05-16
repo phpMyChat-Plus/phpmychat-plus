@@ -15,6 +15,10 @@ $Sender_email = C_ADMIN_EMAIL;			// For the reply address
 $Mail_Greeting = C_MAIL_GREETING;	// To be send as a signature
 $Chat_URL = (C_CHAT_URL == "./") ? "" : C_CHAT_URL;	// To be send as a signature
 
+
+// -- CORE FUNCTIONS - DO NOT MODIFY --
+$MailFunctionOn = (function_exists("mail"));
+
 # Is the OS Windows or Mac or Linux
 if (stristr(PHP_OS,'win')) {
   $eol="\r\n";
@@ -23,8 +27,6 @@ if (stristr(PHP_OS,'win')) {
 } else {
   $eol="\n";
 }
-
-// -- FUNCTIONS --
 
 // Define in_array-like function for php
 if (!function_exists("in_array"))

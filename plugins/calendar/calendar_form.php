@@ -9,7 +9,7 @@ include_once("lang/calendar.".$language.".php");
 }
 require('tc_calendar.php');
 
-$thispage = $_SERVER['PHP_SELF'].(isset($language) ? "?lang=".$language : "");
+$thispage = $_SERVER['PHP_SELF'];
 
 $sld = (isset($_REQUEST["selected_day"])) ? $_REQUEST["selected_day"] : 0;
 $slm = (isset($_REQUEST["selected_month"])) ? (int)$_REQUEST["selected_month"] : 0;
