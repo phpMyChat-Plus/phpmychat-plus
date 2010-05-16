@@ -56,9 +56,9 @@ if(C_BDAY_EMAIL)
 	$ChatB = new DB;
 	$today = strftime("%Y-%m-%d",(time() + C_BDAY_TIME * 60));
 	$email_intval = C_BDAY_TIME * 60 + C_BDAY_INTVAL * 24 *60 * 60;
-	$max_email_intval = time() - $email_intval;
-	$after_today = strftime("%Y-%m-%d",(time() + $email_intval));
-	$ChatB->query("SELECT username,firstname,lastname,email,birthday FROM ".C_REG_TBL." WHERE birthday IS NOT NULL AND CONCAT(YEAR(NOW()),'-',RIGHT(birthday,5)) BETWEEN '$today' AND '$after_today' AND bday_email_sent<'".$max_email_intval."' ORDER BY birthday ASC");
+	$max_email_intval = time() - $email_intval - 24 *60 * 60;
+	$before_today = strftime("%Y-%m-%d",time() - $email_intval);
+	$ChatB->query("SELECT username,firstname,lastname,email,birthday FROM ".C_REG_TBL." WHERE birthday IS NOT NULL AND CONCAT(YEAR(NOW()),'-',RIGHT(birthday,5)) BETWEEN '$before_today' AND '$today' AND bday_email_sent<'".$max_email_intval."' ORDER BY birthday ASC");
 	if ($ChatB->num_rows() > 0)
 	{
 		include_once("lib/mail_validation.lib.php");

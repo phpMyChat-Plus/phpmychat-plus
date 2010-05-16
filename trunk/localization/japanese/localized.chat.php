@@ -613,6 +613,7 @@ define("L_SHORT_DATE", "%Y/%m/%d"); //Change this to your local desired date onl
 define("L_LONG_DATE", "%Y年%B%d日(%A)"); //Change this to your local desired date only format (keep the long form)
 define("L_SHORT_DATETIME", "%Y/%m/%d %H:%M:%S"); //Change this to your local desired date&time format (keep the short form)
 define("L_LONG_DATETIME", "%Y年%B%d日(%A) %H:%M:%S"); //Change this to your local desired date&time format (keep the long form)
+define("L_CAL_FORMAT", "%Y年%B%d日"); // Calendar format
 
 // Chat Activity displayed on remote web pages
 define("LOGIN_LINK", "<A HREF='".C_CHAT_URL."?L=".$L."' TITLE='".sprintf(L_CLICK,L_LINKS_12)."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_12).".'; return true;\" TARGET=_blank>");
