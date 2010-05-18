@@ -7,6 +7,7 @@
 // sets headers and cookies.
 $ChatPath = "";		// relative path to chat dir, empty value if this
 					// file is in the same dir than the chat;
+
 // Added for php4 support of mb functions
 if (!function_exists('mb_convert_case'))
 {
@@ -49,7 +50,7 @@ if (C_WORLDTIME == 2)
 send_headers(1,1);
 ?>
 </HEAD>
-<BODY<?php echo((C_FILLED_LOGIN) ? " CLASS=\"ChatBody\"" : ""); ?><?php echo((C_BACKGR_IMG && C_BACKGR_IMG_PATH != "") ? " background=\"".C_BACKGR_IMG_PATH."\"" : ""); ?>>
+<BODY<?php echo((C_FILLED_LOGIN) ? " CLASS=\"ChatBody\"" : ""); ?><?php echo((C_BACKGR_IMG && C_BACKGR_IMG_PATH != "") ? " style=\"background-image: url(".C_BACKGR_IMG_PATH.")\"" : ""); ?>>
 	<CENTER>
 <?php
 // You can put html statements right after the "<BODY>" tag or add php code here.
@@ -63,20 +64,32 @@ if (isset($_COOKIE))
 	if (isset($_COOKIE["CookieRoomType"])) $CookieRoomType = $_COOKIE["CookieRoomType"];
 	if (isset($_COOKIE["CookieColor"])) $CookieColor = $_COOKIE["CookieColor"];
 	if (isset($_COOKIE["CookieStatus"])) $CookieStatus = $_COOKIE["CookieStatus"];
+	if (isset($_COOKIE["CookieHash"])) $RemMe = $_COOKIE["CookieHash"];
 };
 $Username = (isset($CookieUsername) ? $CookieUsername : "");
 $Room_name = (isset($CookieRoom) ? $CookieRoom : "");
 $Room_type = (isset($CookieRoomType) ? $CookieRoomType : "");
 $Color = (isset($CookieColor) ? $CookieColor : "");
 $Status = (isset($CookieStatus) ? $CookieStatus : "");
+$RemMe = (isset($RemMe) ? $RemMe : "");
 
-layout($Is_Error,$Username,$Room_name,$Room_type,$Color,$Status);
+layout($Is_Error,$Username,$Room_name,$Room_type,$Color,$Status,$RemMe);
 
 // You can add php code here, or add html statements before the "</BODY>" tag.
-if ($S)
+if(isset($S) && $S)
 {
+	if(!function_exists('apache_get_version'))
+	{
+		function apache_get_version()
+		{
+		   $ver = split("[/ ]",$_SERVER['SERVER_SOFTWARE']);
+		   $apver = "$ver[1] $ver[2]";
+		   return $apver;
+		};
+	};
+
 	$conn = @mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
-	echo("<TD><SPAN style=\"color:blue; background-color:black;\"><b>Debug data:</b><SPAN style=\"color:yellow;\"><br />Admin name: <b><font color=green>".C_ADMIN_NAME."</font></b><br />Admin email: <b><font color=green>".C_ADMIN_EMAIL."</font></b><br />App name: <b><font color=green>".APP_NAME."</font></b><br />Chat name: <b><font color=green>".C_CHAT_NAME."</font></b><br />App version: <b><font color=green>".APP_VERSION.APP_MINOR."</font></b><br />Hosting Server IP: <b><font color=green>".$_SERVER['SERVER_ADDR']."</font></b>".(@fsockopen("gravatar.com", 80, $errno, $errstr, 2) ? "" : "<br /><b><font color=red>Cache not allowed - cannot get access to gravatar.com!</font>")."</b><br />Php server version: <b>".(!version_compare(PHPVERSION,'5','>=') ? "<font color=red>".PHPVERSION." - Cache not allowed</font>" : "<font color=green>".PHPVERSION."</font>")."</b><br />allow_url_fopen: <b>".(!(ini_get("allow_url_fopen")) ? "<font color=red>".L_DISABLED." - Cache not allowed</font>" : "<font color=green>".L_ENABLED."</font>")."</b><br />allow_url_include: <b>".(!(ini_get("allow_url_include")) ? "<font color=red>".L_DISABLED."</font>" : "<font color=green>".L_ENABLED."</font>")."</b><br />fsockopen: <b>".(!(@fsockopen("ciprianmp.com", 80, $errno, $errstr, 2) && @fsockopen("phpmychat.svn.sourceforge.net", 80, $errno, $errstr, 2)) ? "<font color=red>".L_DISABLED." - Update checking not allowed</font>" : "<font color=green>".L_ENABLED."</font>")."</b><br />file_get_contents: <b>".(!(function_exists("file_get_contents")) ? "<font color=red>".L_DISABLED." - Cache not allowed</font>" : "<font color=green>".L_ENABLED."</font>")."</b><br />MySQL server version: <b><font color=green>".mysql_get_server_info()."</font></b></SPAN></SPAN></TD>");
+	echo("<TD><SPAN style=\"color:blue; background-color:black;\"><b>Debug data:</b><SPAN style=\"color:yellow;\"><br />Admin name: <b><font color=green>".C_ADMIN_NAME."</font></b><br />Admin email: <b><font color=green>".C_ADMIN_EMAIL."</font></b><br />App name: <b><font color=green>".APP_NAME."</font></b><br />Chat name: <b><font color=green>".C_CHAT_NAME."</font></b><br />App version: <b><font color=green>".APP_VERSION.APP_MINOR."</font></b><br /><b>Hosting Server IP: <font color=green>".$_SERVER['SERVER_ADDR']."</font></b>".(@fsockopen("gravatar.com", 80, $errno, $errstr, 2) ? "" : "<br /><b><font color=red>Cache not allowed - cannot get access to gravatar.com!</font>")."</b><br /><b>Apache version: <font color=green>".apache_get_version()."</font><br />Php server version: <b>".(!version_compare(PHPVERSION,'5','>=') ? "<font color=red>".PHPVERSION." - Cache not allowed</font>" : "<font color=green>".PHPVERSION."</font>")."</b><br />allow_url_fopen: <b>".(!(ini_get("allow_url_fopen")) ? "<font color=red>".L_DISABLED." - Cache not allowed</font>" : "<font color=green>".L_ENABLED."</font>")."</b><br />allow_url_include: <b>".(!(ini_get("allow_url_include")) ? "<font color=red>".L_DISABLED."</font>" : "<font color=green>".L_ENABLED."</font>")."</b><br />fsockopen: <b>".(!(@fsockopen("ciprianmp.com", 80, $errno, $errstr, 2) && @fsockopen("phpmychat.svn.sourceforge.net", 80, $errno, $errstr, 2)) ? "<font color=red>".L_DISABLED." - Update checking not allowed</font>" : "<font color=green>".L_ENABLED."</font>")."</b><br />file_get_contents: <b>".(!(function_exists("file_get_contents")) ? "<font color=red>".L_DISABLED." - Cache not allowed</font>" : "<font color=green>".L_ENABLED."</font>")."</b><br />MySQL server version: <b><font color=green>".mysql_get_server_info()."</font></b></SPAN></SPAN></TD>");
 	@mysql_close($conn);
 }
 // The following line is required

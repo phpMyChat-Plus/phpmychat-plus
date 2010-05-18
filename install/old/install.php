@@ -774,6 +774,8 @@ define("C_STS_TBL", '<?php echo $t_stats ?>'); 			// Name of the table where sta
 define("C_USR_TBL", '<?php echo $t_users ?>');					// Name of the table where user names are stored
 
 // ------ THESE SETTINGS MUST NOT BE CHANGED ------
+error_reporting (E_ERROR | E_WARNING | E_PARSE);
+#error_reporting (E_ALL); //for debugging purposes only!
 
 $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
 @mysql_query("SET CHARACTER SET utf8");
@@ -1402,10 +1404,10 @@ define("C_VIDEO_HEIGHT", $VIDEO_HEIGHT);
 
 // Birthday mod - by Ciprian
 define("C_REQUIRE_BDAY", $REQUIRE_BDAY);
-define("C_SEND_BDAY_EMAIL", $SEND_BDAY_EMAIL);
-define("C_SEND_BDAY_TIME", $SEND_BDAY_TIME);
-define("C_SEND_BDAY_INTVAL", $SEND_BDAY_INTVAL);
-define("C_SEND_BDAY_PATH", $SEND_BDAY_PATH);
+define("C_BDAY_EMAIL", $SEND_BDAY_EMAIL);
+define("C_BDAY_TIME", $SEND_BDAY_TIME);
+define("C_BDAY_INTVAL", $SEND_BDAY_INTVAL);
+define("C_BDAY_PATH", $SEND_BDAY_PATH);
 ?&gt;</textarea></p>
 <?php } // END OF IS NOT WRITEABLE
 else {
@@ -1440,6 +1442,9 @@ else {
   	fputs ( $fh, 'define("C_USR_TBL", \''.$t_users.'\');					// Name of the table where user names are stored'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// ------ THESE SETTINGS MUST NOT BE CHANGED ------'.$lfeed );
+  	fputs ( $fh, ''.$lfeed );
+  	fputs ( $fh, 'error_reporting (E_ERROR | E_WARNING | E_PARSE);'.$lfeed );
+  	fputs ( $fh, '#error_reporting (E_ALL); //for debugging purposes only!'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '$conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die (\'<center>Error: Could Not Connect To Database\');'.$lfeed );
   	fputs ( $fh, '@mysql_query("SET CHARACTER SET utf8");'.$lfeed );
