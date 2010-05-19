@@ -223,6 +223,7 @@ Reply: As soon as I changed the permission of the plus folder (chat folder in my
 My /img command doesn't seem to work - it returns no error, but it also doesn't return any image.
 18A.
 This happens on php servers which have the getimagesize() function disabled. Please contact your hosting or enable that function.
+Update: this has been fixed as of 1.93
 
 19Q.
 a. How can I backup my database/files?

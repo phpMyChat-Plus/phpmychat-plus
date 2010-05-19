@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.chat.php - plus version (01.08.2009 - rev.43)
+// File : dutch/localized.chat.php - plus version (20.03.2010 - rev.44)
 // Original translation by Hans Paijmans <paai@kub.nl>, Kasper Souren <guaka@industree.org> and Sander Corbesir <rock@jascrc.com>
 // Updates, corrections and additions for the Plus version by DJE.Amesz & Romanesko <Genieusdanny@gmail.com> and Bert Moorlag <berbia@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -43,6 +43,7 @@ define("L_SET_15", "Standaard privé ruimtes");
 define("L_SET_16", "Privé ruimtes gemaakt door gebruikers ");
 define("L_SET_17", "Kies uw avatar");
 define("L_SET_18", "Markeer deze page: druk \"Ctrl+D\".");
+define("L_SET_19", "Houdt mij ingelogd.");
 
 define("L_SRC", "vrijelijk verkrijgbaar op");
 
@@ -254,6 +255,9 @@ define("L_HELP_CMD_31", "Verander de volgorde van de gebruikers in een ruimte: o
 define("L_HELP_CMD_32", "Dit is de derde versie van de dobbelstenen.<br />Gebruik: /d{n1}[tn2] of /d{n1};<br />n1 kan elke waarde zijn <b>tussen 1 en 100</b> (het geeft aan hoeveel beurten per dobbelsteen).<br />n2 kan elke waarde zijn <b>tussen 1 en %s</b> (dit geeft aan het antal dobbelstenen).");
 define("L_HELP_CMD_33", "Veranderd de grote van de letters door de gebruikers gekozen grote (toegestane waardes n: <b>tussen 7 en 15</b>); het /size commando resets alles weer na de standard waardes (<b>".$FontSize."</b>).");
 define("L_HELP_CMD_34", "Dit maakt het mogelijk om de tekst te specificeren] (ltr = links naar rechts, rtl = rechts naar links).");
+define("L_HELP_CMD_35", "Hiermee post je <i>&eacute;&eacute;n video</i> of <i>&eacute;&eacute;n audio bestand</i> in een kleine Flash player per keer.<br />Gebruik: Plak gewoon de URL van het te posten bestand! Bijv. <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Shockwave Flash Player moet op je systeem geinstalleerd zijn. De link is hoofdlettergevoelig!<br />TIP: type /video gevolgd door een spatie en plak de URL er achter.");
+define("L_HELP_CMD_35a", "De tweede opdracht werkt alleen met youtube.com als video bron.<br />Bijv. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
+define("L_HELP_CMD_36", "Hiermee post je <i>&eacute;&eacute;n youtube video</i> in een kleine Flash player per keer.<br />Gebruik: Plak gewoon de url van het te posten bestand! Bijv. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Shockwave Flash Player moet op je systeem geinstalleerd zijn. De link is hoofdlettergevoelig!<br />TIP: type /tube gevolgd door een spatie en plak de URL er achter.");
 define("L_HELP_CMD_VAR", "Synoniemen: %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Chat regels");
 define("L_HELP_ETIQ_2", "We willen deze site leuk en netjes houden, dus graag de volgende regels volgen. als je je niet aan de regels kunt houden loop je kans door een moderator of administrator eruit gegooid te worden of zelfs geband.<br /><br />Dank u wel,");
@@ -463,6 +467,7 @@ define("L_PASS_6", "Geheime antwoord");
 define("L_PASS_7", "Verander paswoord");
 define("L_PASS_8", "Je paswoord is succesvol veranderd.");
 define("L_PASS_9", "Jou nieuwe paswoord om de chat binnen te gaan");
+define("L_PASS_10", "Uw nieuwe wachtwoord voor deze chat: %s");
 define("L_PASS_11", "Welkom terug bij onze chat server!");
 define("L_PASS_12", "Kies je vraag ...");
 define("L_ERR_PASS_1", "Verkeerde gebruikersnaam. Kies die van jou.");
@@ -623,6 +628,7 @@ define("L_LANG_EN", "Engels");
 define("L_LANG_ES", "Spaans");
 define("L_LANG_ENUK", "Engels UK");
 define("L_LANG_ENUS", "Engels US");
+define("L_LANG_FA", "Farsi");
 define("L_LANG_FR", "Frans");
 define("L_LANG_GR", "Grieks");
 define("L_LANG_HE", "Hebreeuws");
@@ -630,7 +636,9 @@ define("L_LANG_HI", "Hindi");
 define("L_LANG_HU", "Hongaars");
 define("L_LANG_ID", "Indonesch");
 define("L_LANG_IT", "Italiaans");
+define("L_LANG_JA", "Japans (Kanji)");
 define("L_LANG_KA", "Georgië");
+define("L_LANG_NE", "Nepalees");
 define("L_LANG_NL", "Nederlands");
 define("L_LANG_RO", "Roemeens");
 define("L_LANG_SK", "Slovaaks");
@@ -685,4 +693,19 @@ define("L_OPID_REG", "Importeer jou OpenID profiel");
 // Support buttons
 define("L_SUPP_WARN", "Je hebt gekozen om een donatie te schenken\\n".APP_NAME." aan de maker van dit programma.\\nDank u voor uw steun!\\n\\nLet op: de ontvanger is niet de eigenaar van deze chat.\\nVul nu uw gift in op de volgende pagina.\\n\\nDoorgaan?");
 define("L_SUPP_ALT", "Ondersteuning d.m.v. van PayPal voor ".APP_NAME." - dit is Snel, Gratis en Veilig!");
+
+// Video & Audio & Youtube cmds (Embevi & YouTube player class) – same approach as in // Img cmd mod section!
+define("L_AUDIO", "Audio bestand gepost door");
+define("L_VIDEO", "Video gepost door");
+define("L_HELP_VIDEO", "volledig pad/URL naar de video of het audio bestand dat gepost wordt");
+define("L_NO_VIDEO", "De URL kan niet gebruikt worden voor embedden.\\nDit is niet een geldige URL voor een geaccepteerde bron van een publieke video of audio bestand.\\nProbeer opnieuw!");
+define("L_ORIG_VIDEO", "om dit bestand te openen in de oorspronkelijke site"); //it sounds like: Click here to open the…
+
+// Birthday mod - by Ciprian
+define("L_PRO_7", "Geboortedatum");
+define("L_PRO_8", "laat geboortedatum zien in publieke info");
+define("L_PRO_9", "laat leeftijd zien in publieke info");
+define("L_PRO_10", "Leeftijd");
+define("L_PRO_11", "%d jaren, %d maanden en %d dagen");	//you can also change the order here 
+define("L_DOB_SUBJ", "Gefeliciteerd met je verjaardag, %s!"); 
 ?>

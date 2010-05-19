@@ -307,7 +307,7 @@ if ($lastname != "")
 </TR>
 <?php
 }
-if ($show_bday)
+if ($show_bday && $my_dobtime)
 {
 	$dob_format = $show_age ? L_LONG_DATE : trim(str_replace(array("%Y.","%Y","(%A)","%A",",","-","年","den"),"",str_replace("  "," ",L_LONG_DATE)));
 	$my_dob_time = stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime($dob_format, $my_dobtime)) : strftime($dob_format, $my_dobtime);
@@ -318,7 +318,7 @@ if ($show_bday)
 	</TR>
 	<?php
 }
-if ($show_age)
+if ($show_age && $my_dobtime)
 {
 	include_once('plugins/birthday/age.class.php');
 	$my_dob = new DateOfBirth();

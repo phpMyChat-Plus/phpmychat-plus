@@ -140,7 +140,7 @@ if($ppexists == 1)
 		else
 		{ $path = ""; }
 
-		$fp = fsockopen ($host, 80, $errno, $errstr, 20);
+		$fp = @fsockopen ($host, 80, $errno, $errstr, 20);
 		if (!$fp)
 		{ return 2; }
 		else
@@ -148,14 +148,14 @@ if($ppexists == 1)
 			$parse = parse_url($url);
 			$host = $parse['host'];
 
-			fputs($fp, "HEAD ".$url." HTTP/1.1\r\n");
-			fputs($fp, "HOST: ".$host."\r\n");
-			fputs($fp, "Connection: close\r\n\r\n");
+			@fputs($fp, "HEAD ".$url." HTTP/1.1\r\n");
+			@fputs($fp, "HOST: ".$host."\r\n");
+			@fputs($fp, "Connection: close\r\n\r\n");
 			$headers = "";
 			while (!feof ($fp))
-			{ $headers .= fgets ($fp, 128); }
+			{ $headers .= @fgets ($fp, 128); }
 		}
-		fclose ($fp);
+		@fclose ($fp);
 		$arr_headers = explode("\n", $headers);
 		$return = false;
 		if (isset ($arr_headers[0]))
