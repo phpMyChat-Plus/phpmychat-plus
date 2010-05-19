@@ -713,7 +713,7 @@ define("L_PRO_7", "Data naşterii");
 define("L_PRO_8", "arată data naşterii în profilul public");
 define("L_PRO_9", "arată vârsta în profilul public");
 define("L_PRO_10", "Vârsta");
-define("L_PRO_11", "%d ani, %d luni şi %d zile");
+define("L_PRO_11", "%1\$d ani, %2\$d luni şi %3\$d zile");
 define("L_DOB_SUBJ", "La Mulţi Ani %s!");
 define("L_DOB_TIT_1", "Lista Aniversărilor");
 ?>

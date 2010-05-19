@@ -43,7 +43,7 @@ define("L_SET_15", "Standaard privé ruimtes");
 define("L_SET_16", "Privé ruimtes gemaakt door gebruikers ");
 define("L_SET_17", "Kies uw avatar");
 define("L_SET_18", "Markeer deze page: druk \"Ctrl+D\".");
-define("L_SET_19", "Houdt mij ingelogd.");
+define("L_SET_19", "Onthoud mijn login details");
 
 define("L_SRC", "vrijelijk verkrijgbaar op");
 
@@ -706,6 +706,6 @@ define("L_PRO_7", "Geboortedatum");
 define("L_PRO_8", "laat geboortedatum zien in publieke info");
 define("L_PRO_9", "laat leeftijd zien in publieke info");
 define("L_PRO_10", "Leeftijd");
-define("L_PRO_11", "%d jaren, %d maanden en %d dagen");	//you can also change the order here 
+define("L_PRO_11", "%1\$d jaren, %2\$d maanden en %3\$d dagen");	//you can also change the order here 
 define("L_DOB_SUBJ", "Gefeliciteerd met je verjaardag, %s!"); 
 ?>
