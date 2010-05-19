@@ -254,6 +254,9 @@ define("L_HELP_CMD_31", "Change the order users are sorted in lists: by entrance
 define("L_HELP_CMD_32", "This is a third (role-playing) version of the dice rolling.<br />Usage: /d{n1}[tn2] or /d{n1};<br />n1 can take any value <b>between 1 and 100</b> (it represents the number of sides per die);<br />n2 can take any value <b>between 1 and %s</b> (it represents the number of rolling dice per throw).");
 define("L_HELP_CMD_33", "Change the font size of the messages in chat to user choice (allowed values for n: <b>between 7 and 15</b>); the /size command resets the font size to the default value (<b>".$FontSize."</b>).");
 define("L_HELP_CMD_34", "This will allow an user to specify the orientation of a text message (ltr = left-to-right, rtl = right-to-left).");
+define("L_HELP_CMD_35", "It allows posting of <i>one video</i> or <i>one audio file</i> in a small Flash player at a time.<br />Usage: Just paste the url of the source to be posted! E.g. <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />You need Shockwave Flash Player installed on your system. The link is case sensitive!<br />HINTS: type /video followed by a space and paste the URL into the box.");
+define("L_HELP_CMD_35a", "The second command only works with youtube.com as video source.<br />E.g. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
+define("L_HELP_CMD_36", "It allows posting of <i>one youtube video</i> in a small Flash player at a time.<br />Usage: Just paste the url of the source to be posted! E.g. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />You need Shockwave Flash Player installed on your system. The link is case sensitive!<br />HINTS: type /tube followed by a space and paste the URL into the box.");
 define("L_HELP_CMD_VAR", "Synonyms (variants): %s"); // a list of English and/or translated alternatives for each command
 define("L_HELP_ETIQ_1", "Chat Etiquette");
 define("L_HELP_ETIQ_2", "Our site would like to keep its community friendly and fun, so please adhere to the following guidelines. If you fail to observe these rules, one of our chat moderators may boot you from the chat.<br /><br />Thank you,");
@@ -722,9 +725,6 @@ define("L_VIDEO", "Video posted by");
 define("L_HELP_VIDEO", "full path to the video or audio source to be posted");
 define("L_NO_VIDEO", "The URL cannot be embedded.\\nThis is not a valid URL of an accepted public video or audio source.\\nTry again!");
 define("L_ORIG_VIDEO", "to open the original site");
-define("L_HELP_CMD_35", "It allows posting of <i>one video</i> or <i>one audio file</i> in a small Flash player at a time.<br />Usage: Just paste the url of the source to be posted! E.g. <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />You need Shockwave Flash Player installed on your system. The link is case sensitive!<br />HINTS: type /video followed by a space and paste the URL into the box.");
-define("L_HELP_CMD_35a", "The second command only works with youtube.com as video source.<br />E.g. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
-define("L_HELP_CMD_36", "It allows posting of <i>one youtube video</i> in a small Flash player at a time.<br />Usage: Just paste the url of the source to be posted! E.g. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />You need Shockwave Flash Player installed on your system. The link is case sensitive!<br />HINTS: type /tube followed by a space and paste the URL into the box.");
 
 // Birthday mod - by Ciprian
 define("L_PRO_7", "Date of birth");
