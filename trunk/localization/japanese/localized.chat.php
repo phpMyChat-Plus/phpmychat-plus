@@ -714,7 +714,7 @@ define("L_PRO_7", "誕生日");
 define("L_PRO_8", "誕生日を公開する");
 define("L_PRO_9", "年齢を公開する");
 define("L_PRO_10", "年齢");
-define("L_PRO_11", "%d年%dヶ月と%d日");
+define("L_PRO_11", "%1\$d年%2\$dヶ月と%3\$d日");
 define("L_DOB_SUBJ", "%sさん、お誕生日おめでとう！"); // Firstname (if set) or Username
 define("L_DOB_TIT_1", "誕生日リスト"); // The list of birthdays in descending order
 ?>

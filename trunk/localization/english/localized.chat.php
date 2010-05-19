@@ -731,7 +731,7 @@ define("L_PRO_7", "Date of birth");
 define("L_PRO_8", "show birthday in public information");
 define("L_PRO_9", "show age in public information");
 define("L_PRO_10", "Age");
-define("L_PRO_11", "%d years, %d months and %d days");
+define("L_PRO_11", "%1\$d years, %2\$d months and %3\$d days");
 define("L_DOB_SUBJ", "Happy Birthday %s!");
 define("L_DOB_TIT_1", "Birthdays list");
 ?>
