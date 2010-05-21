@@ -76,6 +76,7 @@
 *  - esnips.com
 *  - pandora.tv
 *  - wat.tv
+*  - heeloo.ro
 *  
 */
 
@@ -2029,14 +2030,13 @@ class EmbeVi{
       'matchExpr' => 'channel\\.pandora\\.tv\\/channel\\/(?:.*)?ch_userid=([a-z0-9_]+)(?:.*)?prgid=([a-z0-9_]+)',
     ),
     array(
-      'provider' => array('http://www.upload-fest.ru/'),
-      'providerName' => 'upload-fest',
-      'providerIcon' => 'none',
-      'info' => 'upload-fest.ru video',
+      'provider' => array('http://tv.heeloo.ro/'),
+      'providerName' => 'heeloo',
+      'info' => 'heeloo.ro video/tv',
       'width' => 342,
       'height' => 279,
-      'src' => 'http://www.upload-fest.ru/player1.swf?w=~to_replace1~~to_replace2~',
-      'matchExpr' => 'upload-fest\\.ru\\/([a-z])(?:.*)?w=([a-z0-9_=]+)',
+      'src' => 'http://video.heeloo.ro/play/~to_replace1~',
+      'matchExpr' => 'heeloo\\.ro\\/([0-9]+)',
     ),
   );
 
