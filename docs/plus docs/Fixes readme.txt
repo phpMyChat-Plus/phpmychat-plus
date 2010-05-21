@@ -35,7 +35,8 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 08.05.2010 - 1.94-beta4:
-- Birthday mod added - for profiles; (functionality extensions)
+- enabled sending of html formatted emails from admin panel; (functionality extension)
+- Birthday mod added - for profiles; (functionality extension)
 25.04.2010 - 1.94-beta3:
 - upload class updated to latest 0.29 version; (functionality related)
 - added the Remember me checkbox to remember login data; (privacy & login related)

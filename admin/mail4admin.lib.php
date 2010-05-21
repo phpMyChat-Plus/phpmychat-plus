@@ -75,6 +75,9 @@ if (isset($MailFunctionOn))
 		global $mail_date, $eol;
 
 		if ($Sender_Name != "") $Sender_Name = quote_printable($Sender_Name,$Charset);
+		// Create a boundary so we know where to look for
+		// the start of the data
+		$boundary = uniqid("HTMLEMAIL");
 		$Subject = quote_printable($Subject,$Charset);
 		$Body = stripslashes($Body);
 		$Headers = "From: ${Sender_Name} <${Sender_email}>".$eol;
@@ -86,10 +89,21 @@ if (isset($MailFunctionOn))
 		$Headers .= "Return-Path: ${Sender_email}".$eol;
 		$Headers .= "Date: ${mail_date}".$eol;
 		$Headers .= "Mime-Version: 1.0".$eol;
+		// First we be nice and send a non-html version of our email
+		$Headers .= "Content-Type: multipart/alternative; boundary = ".$boundary.$eol.$eol;
+		$Headers .= "This is a MIME encoded message.".$eol.$eol;
+		$Headers .= "--$boundary".$eol;
 		$Headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed".$eol;
-		$Headers .= "Content-Transfer-Encoding: 8bit".$eol;
+		$Headers .= "Content-Transfer-Encoding: 8bit".$eol.$eol;
+		$Headers .= chunk_split(strip_tags($Body));
+		// Now we attach the HTML version
+		$Headers .= "--$boundary".$eol;
+		$Headers .= "Content-Type: text/html; charset=${Charset}; format=flowed".$eol;
+		$Headers .= "Content-Transfer-Encoding: 8bit".$eol.$eol;
+		$Headers .= str_replace($eol,"<br />",$Body);
 
-		return @mail($To, $Subject, $Body, $Headers);
+		// And then send the email ....
+		return @mail($To, $Subject, "", $Headers);
 		};
 
 };
