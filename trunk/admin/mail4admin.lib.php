@@ -89,22 +89,36 @@ if (isset($MailFunctionOn))
 		$Headers .= "Return-Path: ${Sender_email}".$eol;
 		$Headers .= "Date: ${mail_date}".$eol;
 		$Headers .= "Mime-Version: 1.0".$eol;
-		// First we be nice and send a non-html version of our email
-		$Headers .= "Content-Type: multipart/alternative; boundary = ".$boundary.$eol.$eol;
-		$Headers .= "This is a MIME encoded message.".$eol.$eol;
-		$Headers .= "--$boundary".$eol;
-		$Headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed".$eol;
-		$Headers .= "Content-Transfer-Encoding: 8bit".$eol.$eol;
-		$Headers .= chunk_split(strip_tags($Body));
-		// Now we attach the HTML version
-		$Headers .= "--$boundary".$eol;
-		$Headers .= "Content-Type: text/html; charset=${Charset}; format=flowed".$eol;
-		$Headers .= "Content-Transfer-Encoding: 8bit".$eol.$eol;
-		$Headers .= str_replace($eol,"<br />",$Body);
+		if (!stristr(PHP_OS,'win')) {
+			// First we be nice and send a non-html version of our email
+			$Headers .= "Content-Type: multipart/alternative; boundary = ".$boundary.$eol.$eol;
+			$Headers .= "This is a MIME encoded message.".$eol.$eol;
+			$Headers .= "--".$boundary.$eol;
+			$Headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed".$eol;
+	#		$Headers .= "Content-Transfer-Encoding: 8bit".$eol.$eol;
+	#		$Headers .= chunk_split(strip_tags($Body));
+			$Headers .= "Content-Transfer-Encoding: ".(function_exists("base64_encode") ? "base64" : "8bit").$eol.$eol;
+			$Headers .= function_exists("base64_encode") ? chunk_split(base64_encode(strip_tags($Body))) : chunk_split(strip_tags($Body));
+			// Now we attach the HTML version
+			$Headers .= "--".$boundary.$eol;
+			$Headers .= "Content-Type: text/html; charset=${Charset}; format=flowed".$eol;
+	#		$Headers .= "Content-Transfer-Encoding: 8bit".$eol.$eol;
+	#		$Headers .= chunk_split(str_replace($eol,"<br />",$Body));
+			$Headers .= "Content-Transfer-Encoding: ".(function_exists("base64_encode") ? "base64" : "8bit").$eol.$eol;
+			$Headers .= function_exists("base64_encode") ? chunk_split(base64_encode(str_replace($eol,"<br />",$Body))) : chunk_split(str_replace($eol,"<br />",$Body));
 
-		// And then send the email ....
-		return @mail($To, $Subject, "", $Headers);
+			// And then send the email ....
+			return @mail($To, $Subject, "", $Headers);
+		}
+		else {
+			$Headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed".$eol;
+			$Headers .= "Content-Transfer-Encoding: 8bit".$eol.$eol;
+			$Body .= chunk_split($Body);
+
+			// And then send the email ....
+			return @mail($To, $Subject, $Body, $Headers);
 		};
+	};
 
 };
 ?>
