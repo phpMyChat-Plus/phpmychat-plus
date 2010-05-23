@@ -88,15 +88,19 @@ if(C_BDAY_EMAIL)
 }
 
 $ChatM = new DB;
+# clean old bot entrances but keep the last one
 // Archive and Clean the old messages
+$ChatM->query("SELECT m_time FROM ".C_MSG_TBL." WHERE username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"%' ORDER BY m_time DESC LIMIT 1");
+if ($ChatM->num_rows() > 0) list($bot_time) = $ChatM->next_record();
 if(C_CHAT_LOGS)
 {
+	$ChatM->query("DELETE FROM ".C_MSG_TBL." WHERE username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"%' AND m_time != '".$bot_time."'");
 	require("logs.lib.php");
 }
 // Clean the old messages (without logs)
 else
 {
-	$ChatM->query("DELETE FROM ".C_MSG_TBL." WHERE ((m_time<'".(time() - C_MSG_DEL * 60 * 60)."' AND pm_read NOT LIKE 'New%') OR (m_time<'".(time() - ((C_MSG_DEL + (C_PM_KEEP_DAYS * 24)) * 60 * 60))."')) AND !(username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"%')");
+	$ChatM->query("DELETE FROM ".C_MSG_TBL." WHERE ((m_time<'".(time() - C_MSG_DEL * 60 * 60)."' AND pm_read NOT LIKE 'New%') OR (m_time<'".(time() - ((C_MSG_DEL + (C_PM_KEEP_DAYS * 24)) * 60 * 60))."')) AND !(username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"%' AND m_time != '".$bot_time."')");
 }
 
 // Clean the lurkers table
@@ -115,9 +119,9 @@ if(C_CHAT_LURKING)
 //		$when = date('r', $usertime + C_TMZ_OFFSET*60*60);
 		$when = $usertime + C_TMZ_OFFSET*60*60;
 		$when = stristr(PHP_OS,'win') ? '\".utf_conv(WIN_DEFAULT,$Charset,strftime(L_SHORT_DATETIME,'.$when.')).\"' : '\".strftime(L_SHORT_DATETIME,'.$when.').\"';
-		$userclosed = addslashes($userclosed);
 		$ChatM->query("SELECT type FROM ".C_MSG_TBL." WHERE username = '$userclosed' AND room = '$userroom' ORDER BY m_time DESC LIMIT 1");
 		list($usertype) = $ChatM->next_record();
+		$userclosed = addslashes($userclosed);
 		// Ghost Control mod by Ciprian
 		if (C_SPECIAL_GHOSTS != "")
 		{
@@ -126,7 +130,7 @@ if(C_CHAT_LURKING)
 			$sghosts = eregi_replace(" AND username != ",",",$sghosts);
 		}
  		if (($sghosts != "" && ghosts_in($userclosed, $sghosts, $Charset)) || (C_HIDE_ADMINS && ($statusclosed == "a" || $statusclosed == "t")) || (C_HIDE_MODERS && $statusclosed == "m")) {}
-		else $ChatM->query("INSERT INTO ".C_MSG_TBL." VALUES ('".$usertype."', '".$userroom."', 'SYS exit', '', '".time()."', '', 'sprintf(L_CLOSED_ROM, \"($when) $userclosed\")', '', '')");
+		else $ChatM->query("INSERT INTO ".C_MSG_TBL." VALUES ('".$usertype."', '".$userroom."', 'SYS exit', '', '".time()."', '', 'sprintf(L_CLOSED_ROM, \"(".$when.") ".$userclosed."\")', '', '')");
 		if(C_EN_STATS)
 		{
 			$ChatM->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+($usertime-last_away), longest_away=IF($usertime-last_away < longest_away, longest_away, $usertime-last_away), last_away='' WHERE (stat_date=FROM_UNIXTIME(last_away,'%Y-%m-%d') OR stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d')) AND room='$userroom' AND username='$userclosed' AND last_away!='0'");

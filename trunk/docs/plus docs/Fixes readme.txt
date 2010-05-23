@@ -35,6 +35,7 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 08.05.2010 - 1.94-beta4:
+- fixed a bot entrance issue; (functionality related)
 - enabled sending of html formatted emails from admin panel; (functionality extension)
 - Birthday mod added - for profiles; (functionality extension)
 25.04.2010 - 1.94-beta3:
