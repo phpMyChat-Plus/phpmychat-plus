@@ -30,7 +30,8 @@ $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: C
 @mysql_query("SET NAMES 'utf8'");
 mysql_select_db(C_DB_NAME);
 
-$sql = "SELECT * FROM ".C_MSG_TBL." WHERE (m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."' AND username != 'SYS welcome' AND pm_read NOT LIKE 'New%' AND !(username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"%')) ORDER BY m_time DESC";
+$CondForQuery = "(m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."' AND username != 'SYS welcome' AND pm_read NOT LIKE 'New%' AND !(username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"%'))";
+$sql = "SELECT * FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC";
 $query = mysql_query($sql) or die("Cannot query the database.<br />" . mysql_error());
 // Collect and store new messages
 $Messages = Array();
@@ -162,7 +163,7 @@ $i++;
 if ($i > 1)
 {
 $today = date('d-m-y H:i:s', time() + C_TMZ_OFFSET*60*60);
-$lastsql = "SELECT * FROM ".C_MSG_TBL." WHERE (m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."' AND username != 'SYS welcome' AND pm_read NOT LIKE 'New%' AND !(username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"%')) ORDER BY m_time DESC LIMIT 1";
+$lastsql = "SELECT * FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC LIMIT 1";
 $lastquery = mysql_query($lastsql) or die("Cannot query the database.<br />" . mysql_error());
 while($lastresult = mysql_fetch_array($lastquery))
 {
@@ -249,8 +250,8 @@ $i = 0;
 
 //Public logs
 $doneu = 0;
-$CondForQuery	= "(m_time<".(time() - C_MSG_DEL*60*60)." AND (address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username = 'SYS video' OR username = 'SYS utube' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3'))))";
-$sqlu = "SELECT * FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC";
+$CondForQueryu	= "(m_time<".(time() - C_MSG_DEL*60*60)." AND (address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username = 'SYS video' OR username = 'SYS utube' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3'))))";
+$sqlu = "SELECT * FROM ".C_MSG_TBL." WHERE ".$CondForQueryu." ORDER BY m_time DESC";
 $queryu = mysql_query($sqlu) or die("Cannot query the database.<br />" . mysql_error());
 // Collect and store new messages
 $Messagesu = Array();
@@ -384,7 +385,7 @@ $iu++;
 if ($iu > 1)
 {
 $todayu = date('d-m-y H:i:s', time() + C_TMZ_OFFSET*60*60);
-$lastsqlu = "SELECT * FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC LIMIT 1";
+$lastsqlu = "SELECT * FROM ".C_MSG_TBL." WHERE ".$CondForQueryu." ORDER BY m_time DESC LIMIT 1";
 $lastqueryu = mysql_query($lastsqlu) or die("Cannot query the database.<br />" . mysql_error());
 while($lastresultu = mysql_fetch_array($lastqueryu))
 {
