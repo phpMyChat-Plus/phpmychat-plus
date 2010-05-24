@@ -259,34 +259,57 @@ function isDateAllow(objname, strDay, strMonth, strYear){
 	var da1 = document.getElementById(objname+"_da1").value;
 	var da2 = document.getElementById(objname+"_da2").value;
 
-	if(parseInt(strDay)>0 && parseInt(strMonth)>0 && parseInt(strYear)>0){
+	strDay = parseInt(parseFloat(strDay));
+	strMonth = parseInt(parseFloat(strMonth));
+	strYear = parseInt(parseFloat(strYear));
+
+	if(strDay>0 && strMonth>0 && strYear>0){
 		if(da1 || da2){
 			var date2Set = new Date();
-			date2Set.setFullYear(parseInt(strYear), parseInt(strMonth), parseInt(strDay));
+			date2Set.setFullYear(strYear, strMonth-1, strDay);
 
 			if(da1 && da2){
+
 				var da1Arr = da1.split('-', 3);
 				var da2Arr = da2.split('-', 3);
 
+				da1Arr[0] = parseInt(parseFloat(da1Arr[0]));
+				da1Arr[1] = parseInt(parseFloat(da1Arr[1]));
+				da1Arr[2] = parseInt(parseFloat(da1Arr[2]));
+
+				da2Arr[0] = parseInt(parseFloat(da2Arr[0]));
+				da2Arr[1] = parseInt(parseFloat(da2Arr[1]));
+				da2Arr[2] = parseInt(parseFloat(da2Arr[2]));
+
 				var da1Date=new Date();
-				da1Date.setFullYear(parseInt(da1Arr[0]),parseInt(da1Arr[1]),parseInt(da1Arr[2]));
+				da1Date.setFullYear(da1Arr[0],da1Arr[1]-1,da1Arr[2]);
 
 				var da2Date=new Date();
-				da2Date.setFullYear(parseInt(da2Arr[0]),parseInt(da2Arr[1]),parseInt(da2Arr[2]));
+				da2Date.setFullYear(da2Arr[0],da2Arr[1]-1,da2Arr[2]);
 
 				return (date2Set>=da1Date && date2Set<=da2Date) ? true : false;
 			}else if(da1){
+
 				var da1Arr = da1.split('-', 3);
 
+				da1Arr[0] = parseInt(parseFloat(da1Arr[0]));
+				da1Arr[1] = parseInt(parseFloat(da1Arr[1]));
+				da1Arr[2] = parseInt(parseFloat(da1Arr[2]));
+
 				var da1Date=new Date();
-				da1Date.setFullYear(da1Arr[0],da1Arr[1],da1Arr[2]);
+				da1Date.setFullYear(da1Arr[0],da1Arr[1]-1,da1Arr[2]);
 
 				return (date2Set>=da1Date) ? true : false;
 			}else{
+
 				var da2Arr = da2.split('-', 3);
 
+				da2Arr[0] = parseInt(parseFloat(da2Arr[0]));
+				da2Arr[1] = parseInt(parseFloat(da2Arr[1]));
+				da2Arr[2] = parseInt(parseFloat(da2Arr[2]));
+
 				var da2Date=new Date();
-				da2Date.setFullYear(da2Arr[0],da2Arr[1],da2Arr[2]);
+				da2Date.setFullYear(da2Arr[0],da2Arr[1]-1,da2Arr[2]);
 
 				//alert(date2Set);
 				//alert(da2Date);
