@@ -209,7 +209,7 @@ function padString(stringToPad, padLength, padString) {
 }
 
 function loading(){
-	document.getElementById('calendar-container').innerHTML = "<div id=\"calendar-body\"><div style=\"padding: 10px 2px 2px 2px;\"><div align=\"center\" style=\"background-color: #ffffff; height: 50px; padding: 25px; 10px 10px 10px;\"><?php echo(L_REF_CAL); ?></div></div></div>";
+	document.getElementById('calendar-container').innerHTML = "<div id=\"calendar-body\"><div class=\"refresh\"><div align=\"center\" class=\"txt-container\"><?php echo(L_REF_CAL); ?></div></div></div>";
 	adjustContainer();
 }
 
@@ -240,7 +240,7 @@ function adjustContainer(){
 	}
 }
 
-window.onload = function(){ adjustContainer(); };
+window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1000); };
 //-->
 </script>
 </head>
@@ -252,7 +252,7 @@ window.onload = function(){ adjustContainer(); };
         <div align="right" class="closeme"><a href="javascript:closeMe();"><img src="images/close.gif" border="0" /></a></div>
         <?php } ?>
         <form id="calendarform" name="calendarform" method="post" action="<?php echo($thispage);?>" style="margin: 0px;">
-          <table border="0" cellspacing="0" cellpadding="1">
+          <table width="66%" border="0" align="center" cellpadding="1" cellspacing="0">
             <tr>
 			<?php
 			if ($first_input == "B"){
@@ -547,5 +547,6 @@ window.onload = function(){ adjustContainer(); };
           ?>
     </div>
 </div>
+<div style="clear: both;"></div>
 </body>
 </html>

@@ -281,7 +281,7 @@ class tc_calendar{
 
 	//write the select box of months
 	function writeMonth(){
-		echo("<select name=\"".$this->objname."_month\" id=\"".$this->objname."_month\" onChange=\"javascript:tc_setMonth('".$this->objname."', this[this.selectedIndex].value, '$this->path');\" class=\"tcmonth\">");
+		echo("<select name=\"".$this->objname."_month\" id=\"".$this->objname."_month\" onChange=\"javascript:tc_setMonth('".$this->objname."', this[this.selectedIndex].value, '".$this->path."');\" class=\"tcmonth\">");
 		echo("<option value=\"00\">".L_MONTH."</option>");
 
 		$monthnames = $this->getMonthNames();
@@ -295,7 +295,7 @@ class tc_calendar{
 	//write the year textbox
 	function writeYear(){
 		//echo("<input type=\"textbox\" name=\"".$this->objname."_year\" id=\"".$this->objname."_year\" value=\"$this->year\" maxlength=4 size=5 onBlur=\"javascript:tc_setYear('".$this->objname."', this.value, '$this->path');\" onKeyPress=\"javascript:if(yearEnter(event)){ tc_setYear('".$this->objname."', this.value, '$this->path'); return false; }\"> ");
-		echo("<select name=\"".$this->objname."_year\" id=\"".$this->objname."_year\" onChange=\"javascript:tc_setYear('".$this->objname."', this[this.selectedIndex].value, '$this->path');\" class=\"tcyear\">");
+		echo("<select name=\"".$this->objname."_year\" id=\"".$this->objname."_year\" onChange=\"javascript:tc_setYear('".$this->objname."', this[this.selectedIndex].value, '".$this->path."');\" class=\"tcyear\">");
 		echo("<option value=\"0000\">".L_YEAR."</option>");
 
 
@@ -412,7 +412,7 @@ class tc_calendar{
 		if(function_exists('iconv')) $what = iconv($iso,$charset,$what);
 		return $what;
 	}
-	
+
 	function writeDateContainer(){
 		if($this->day && $this->month && $this->year){
 			$dd = date($this->date_format, mktime(0,0,0,$this->month,$this->day,$this->year));
