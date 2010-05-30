@@ -68,6 +68,7 @@ define("L_S_SUN", "нед");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1251");
+if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "bg_BG");
 
 // Set the BG specific date/time format
 if (stristr(PHP_OS,"win")) {

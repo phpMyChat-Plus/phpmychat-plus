@@ -68,6 +68,7 @@ define("L_S_SUN", "Dom");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1252");
+if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "es_AR");
 
 // Set the AR specific date/time format
 if (stristr(PHP_OS,"win")) {

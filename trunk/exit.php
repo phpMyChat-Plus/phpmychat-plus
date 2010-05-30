@@ -199,8 +199,8 @@ if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGE
 	<?php
 }
 ?>
-</CENTER>
 <hr />
+</CENTER>
 </BODY>
 </HTML>
 <?php

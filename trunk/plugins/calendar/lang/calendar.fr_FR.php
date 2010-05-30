@@ -12,13 +12,14 @@ define("L_MONTH", "Mois");
 define("L_YEAR", "Année");
 define("L_PREV", "Précédent");
 define("L_NEXT", "Suivant");
-define("L_REF_CAL", "Rafraîchissant Calendrier...");
-define("L_SEL_LANG", "Sélectionnez la Langue");
-define("L_SEL_ICON", "Sélectionnez l'Icône");
-define("L_SEL_DATE", "Sélectionnez Date");
-define("L_ERR_SEL", "Votre sélection n’est pas valide");
-define("L_NOT_ALLOWED", "Cette date n’est pas autorisé à être sélectionné");
-
+define("L_REF_CAL", "Actualisation du calendrier en cours ...");
+define("L_CHK_VAL", "Vérifiez la valeur");
+define("L_SEL_LANG", "Sélection de la langue");
+define("L_SEL_ICON", "Sélection de l’icône");
+define("L_SEL_DATE", "Sélection de la date");
+define("L_ERR_SEL", "La sélection n’est pas valide");
+define("L_NOT_ALLOWED", "Cette date ne peut pas être sélectionnée");
+ 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
 
@@ -67,6 +68,7 @@ define("L_S_SUN", "Dim.");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1252");
+if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "fr_FR");
 
 // Set the FR specific date/time format
 if (stristr(PHP_OS,"win")) {

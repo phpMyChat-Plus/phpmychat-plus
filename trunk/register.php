@@ -30,7 +30,6 @@ require("./localization/languages.lib.php");
 require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
 include("./lib/mail_validation.lib.php");
-require("./plugins/calendar/tc_calendar.php");
 
 # Is the OS Windows or Mac or Linux
 if (stristr(PHP_OS,'win')) {
@@ -381,6 +380,9 @@ if (!isset($FontName)) $FontName = "";
 <HEAD>
 <TITLE><?php echo(L_REG_6." - ".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
+<?php
+require("./plugins/calendar/tc_calendar.php");
+?>
 <SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
 <!--
 // Insert login and password in fields of the starter page form

@@ -68,10 +68,11 @@ define("L_S_SUN", "日");
 
 define("WIN_DEFAULT", "Shift_JIS");
 define("L_CAL_FORMAT", "%Y年%B%d日");
+if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "ja_JP");
 
 // Set the JP specific date/time format
 if (stristr(PHP_OS,"win")) {
-setlocale(LC_ALL, "japanese.UTF-8", "japanese", "ja_JP.UTF-8");
+setlocale(LC_ALL, "jpn.utf8", "jpn.UTF-8", "japanese.UTF-8", "japanese", "ja_JP.UTF-8");
 } else {
 setlocale(LC_ALL, "ja_JP.utf8", "ja_JP.UTF-8", "ja_JP", "ja", "japanese", "jpn");
 }
