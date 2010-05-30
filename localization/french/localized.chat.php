@@ -1,5 +1,5 @@
 <?php
-// File : french/localized.chat.php - plus version (01.08.2009 - rev.43)
+// File : french/localized.chat.php - plus version (20.03.2009 - rev.44)
 // Translation for Plus version by Pierre Liget <sourceforge@pliget.freesurf.fr> 10.12.2007
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -42,6 +42,7 @@ define("L_SET_15", "Salons privés par défaut");
 define("L_SET_16", "Salons privés créés par les utilisateurs");
 define("L_SET_17", "Sélectionnez votre avatar");
 define("L_SET_18", "Pour créer un raccourci de cette page: appuyez sur \"Ctrl+D\".");
+define("L_SET_19", "Me rappeler");
 
 define("L_SRC", "est disponible gratuitement sur");
 
@@ -253,6 +254,9 @@ define("L_HELP_CMD_31", "Change l’ordre de tri de la liste des utilisateurs: p
 define("L_HELP_CMD_32", "C’est une troisième version du jeu de dés.<br />Usage: /d{n1}[tn2] ou /d{n1};<br />n1 peut prendre n’importe quelle valeur <b>entre 1 et 100</b> (représente le nombre de faces par dé).<br />n2 peut prendre n’importe quelle valeur <b>entre 1 et %s</b> (représente le nombre de dés par lancer).");
 define("L_HELP_CMD_33", "Modifie la taille des caractères des messages du chat (valeurs autorisées pour n: <b>entre 7 et 15</b>); la commande /size remet la taille par défaut (<b>".$FontSize."</b>).");
 define("L_HELP_CMD_34", "Permet à un utilisateur de spécifier l’orientation du texte d’un message (ltr,gàd = de gauche à droite; rtl,dàg = de droite à gauche).");
+define("L_HELP_CMD_35", "Cela permet de poster <i>un fichier vidéo</i> ou <i>audio</i> dans un petit lecteur  Flash.<br />Usage: coller l’URL de la source à poster! Ex. <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Vous devez avoir installé Shockwave Flash Player sur votre système. Attention, le lien est sensible à la casse des caractères!<br />Conseil: tapez /video suivi par un espace et collez l’URL dans le champ de saisie.");
+define("L_HELP_CMD_35a", "La seconde commande ne fonctionne qu’avec youtube.com en tant que source vidéo.<br />Ex. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
+define("L_HELP_CMD_36", "Cela permet de poster <i>une vidéo youtube</i> dans un petit lecteur Flash.<br />Usage: collez l’URL de la source à poster! Ex. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />.<b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Vous devez avoir installé Shockwave Flash Player sur votre système. Attention, le lien est sensible à la casse des caractères!<br />Conseil: tapez /tube suivi par un espace et collez l’URL dans le champ de saisie.");
 define("L_HELP_CMD_VAR", "Synonymes (variantes): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Etiquette du Chat");
 define("L_HELP_ETIQ_2", "Notre chat aimerait conserver sa communauté conviviale et amusante, merci de respecter les directives suivantes. Si vous n’observez pas ces règles, l’un de nos modérateurs vous exclura du chat.<br /><br />Merci,");
@@ -462,7 +466,8 @@ define("L_PASS_5", "Quelle est votre date de naissance?"); // Don't change this 
 define("L_PASS_6", "Réponse secrète");
 define("L_PASS_7", "Changer votre mot de passe");
 define("L_PASS_8", "Votre mot de passe a été changé avec succès.");
-define("L_PASS_9", "Votre nouveau mot de passe pour vous connecter au chat");
+define("L_PASS_9", "Votre nouveau mot de passe pour accéder au chat");
+define("L_PASS_10", "Votre nouveau mot de passe pour accéder au chat: %s");
 define("L_PASS_11", "Bienvenue de retour sur notre chat!");
 define("L_PASS_12", "Choisissez votre question ...");
 define("L_ERR_PASS_1", "Nom d’utilisateur incorrect. Utilisez le vôtre.");
@@ -625,24 +630,27 @@ define("L_LANG_BG", "Bulgare - Cyrillique");
 define("L_LANG_BR", "Portugais Brésilien");
 define("L_LANG_CZ", "Tchèque");
 define("L_LANG_DA", "Danois");
-define("L_LANG_NL", "Néerlandais");
 define("L_LANG_EN", "Anglais"); // for admin panel only
 define("L_LANG_ENUK", "Anglais UK"); // for UK formats and flags
 define("L_LANG_ENUS", "Anglais US"); // for US formats and flags
+define("L_LANG_ES", "Espagnol");
 define("L_LANG_FR", "Français");
-define("L_LANG_KA", "Géorgien");
 define("L_LANG_DE", "Allemand");
+define("L_LANG_FA", "Perse (Farsi)");
 define("L_LANG_GR", "Grec");
 define("L_LANG_HE", "Hébreu");
 define("L_LANG_HI", "Hindi");
 define("L_LANG_HU", "Hongrois");
 define("L_LANG_ID", "Indonésien");
 define("L_LANG_IT", "Italien");
+define("L_LANG_JA", "Japonais (Kanji)");
+define("L_LANG_KA", "Géorgien");
+define("L_LANG_NE", "Népalais");
+define("L_LANG_NL", "Néerlandais");
 define("L_LANG_RO", "Roumain");
 define("L_LANG_SRL", "Serbe - Latin");
 define("L_LANG_SRC", "Serbe - Cyrillique");
 define("L_LANG_SK", "Slovaque");
-define("L_LANG_ES", "Espagnol");
 define("L_LANG_SV", "Suédois");
 define("L_LANG_TR", "Turque");
 define("L_LANG_UR", "Ourdou"); //spoken in Pakistan
@@ -696,4 +704,20 @@ define("L_OPID_REG", "Importer son profil OpenID");
 // Support buttons
 define("L_SUPP_WARN", "Vous avez choisi de contribuer au développement libre de\\n".APP_NAME." en faisant un don à l’auteur.\\nMerci pour votre encouragement!\\n\\nNote: le bénéficiaire n’est pas le propriétaire de ce chat.\\nVeuillez saisir le montant sur la page suivante.\\n\\nContinuer?");
 define("L_SUPP_ALT", "Encouragez grâce à PayPal le développement de  ".APP_NAME." - c’est Rapide, Gratuit et Sécurisé!");
+
+// Video & Audio & Youtube cmds (Embevi & YouTube player class) – same approach as in // Img cmd mod section!
+define("L_AUDIO", "Fichier audio posté par");
+define("L_VIDEO", "Vidéo postée par");
+define("L_HELP_VIDEO", "chemin complet de la vidéo ou du son à poster");
+define("L_NO_VIDEO", "Cette URL ne peut pas être insérée.\\nCe n’est pas une URL valide d’une source publique d’une vidéo ou d’un son.\\nEssayez encore!");
+define("L_ORIG_VIDEO", "pour ouvrir le site de la source d’origine");
+	
+// Birthday mod - by Ciprian
+define("L_PRO_7", "Date de naissance");
+define("L_PRO_8", "publier la date de naissance en information publique");
+define("L_PRO_9", "montrer l’âge en information publique ");	
+define("L_PRO_10", "Age");
+define("L_PRO_11", "%1\$d ans, %2\$d mois et %3\$d jours"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
+define("L_DOB_SUBJ", "Bon Anniversaire %s!");
+define("L_DOB_TIT_1", "Liste des anniversaires");
 ?>

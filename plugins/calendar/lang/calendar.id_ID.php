@@ -67,6 +67,7 @@ define("L_S_SUN", "Minggu");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1252");
+if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "id_ID");
 
 // Set the ID specific date/time format
 if (stristr(PHP_OS,"win")) {

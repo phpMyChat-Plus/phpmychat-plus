@@ -872,14 +872,7 @@ if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $statusu == "a" || $statusu == "t"))
 }
 ?>
 <br /><a href="<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>" onClick="tutorial_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_TUTORIAL); ?>.'; return true;" title="<?php echo(L_TUTORIAL); ?>"><?php echo(L_TUTORIAL); ?></a>
-<?php
-if (eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
-{
-?>
-<br /><a href="<?php echo($ChatPath); ?>extra/fixes/fixes.zip" TARGET="_blank" onMouseOver="window.status='<?php echo (L_SOUNDFIX_IE_2) ?>'; return true;" title="<?php echo (L_SOUNDFIX_IE_2) ?>"><?php echo (L_SOUNDFIX_IE_1) ?></a>
-<?php
-}
-?>
+<br /><a href="<?php echo($ChatPath); ?>extra/fixes/fixes.zip" TARGET="_blank" onMouseOver="window.status='<?php echo (stristr($_SERVER['HTTP_USER_AGENT'],"MSIE") ? L_SOUNDFIX_IE_2 : str_replace("IE","FF",L_SOUNDFIX_IE_2)) ?>'; return true;" title="<?php echo (stristr($_SERVER['HTTP_USER_AGENT'],"MSIE") ? L_SOUNDFIX_IE_2 : str_replace("IE","FF",L_SOUNDFIX_IE_2)) ?>"><?php echo (stristr($_SERVER['HTTP_USER_AGENT'],"MSIE") ? L_SOUNDFIX_IE_1 : str_replace("IE","FF",L_SOUNDFIX_IE_1)) ?></a>
 <SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript1.2">
 <!--
 window.parent.rooms_number = <?php echo(isset($i) ? "$i" : "0"); ?>;

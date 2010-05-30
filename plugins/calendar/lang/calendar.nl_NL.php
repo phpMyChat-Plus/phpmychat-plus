@@ -68,10 +68,11 @@ define("L_S_SUN", "Zo");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1252");
+if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "nl_NL");
 
 // Set the NL specific date/time format
 if (stristr(PHP_OS,"win")) {
-setlocale(LC_ALL, "dutch.UTF-8", "dutch");
+setlocale(LC_ALL, "dutch.UTF-8", "nld_nld.UTF-8", "nld.UTF-8", "dutch");
 } else {
 setlocale(LC_ALL, "nl_NL.UTF-8", "nl_NL.UTF-8@euro", "nld_nld.UTF-8", "nld.UTF-8");
 }

@@ -68,6 +68,7 @@ define("L_S_SUN", "D");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1250");
+if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "ro_RO");
 
 // Set the RO specific date/time format
 if (stristr(PHP_OS,"win")) {

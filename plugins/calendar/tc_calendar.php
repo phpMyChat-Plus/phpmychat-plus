@@ -131,7 +131,6 @@ class tc_calendar{
 		return isset($headers[$day]) ? $headers[$day] : 0;
 	}
 
-
 	//get the day headers start from sunday till saturday
 	function getDayHeaders(){
 		if($this->startMonday){
@@ -415,8 +414,9 @@ class tc_calendar{
 
 	function writeDateContainer(){
 		if($this->day && $this->month && $this->year){
-			$dd = date($this->date_format, mktime(0,0,0,$this->month,$this->day,$this->year));
 //			if($this->lang) $dd = stristr(PHP_OS,"win") ? utf_conv(WIN_DEFAULT,'utf-8',strftime(L_CAL_FORMAT, strtotime($dd))) : strftime(L_CAL_FORMAT, strtotime($dd));
+			if($this->lang) $dd = stristr(PHP_OS,"win") ? utf_conv(WIN_DEFAULT,'utf-8',strftime(L_CAL_FORMAT, mktime(0,0,0,$this->month,$this->day,$this->year))) : strftime(L_CAL_FORMAT, mktime(0,0,0,$this->month,$this->day,$this->year));
+			else $dd = date($this->date_format, mktime(0,0,0,$this->month,$this->day,$this->year));
 		}
 		else $dd = L_SEL_DATE;
 

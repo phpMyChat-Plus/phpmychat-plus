@@ -67,6 +67,7 @@ define("L_S_SUN", "Sö");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1252");
+if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "sv_SE");
 
 // Set the SV specific date/time format
 if (stristr(PHP_OS,"win")) {

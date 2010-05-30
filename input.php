@@ -530,7 +530,7 @@ document.onmousedown = window.parent.displayLocation;
 </SCRIPT>
 </HEAD>
 
-<BODY CLASS="frame" <?php if (!$IsPopup) echo("onLoad=\"if (window.focus) window.parent.get_focus();\""); ?>>
+<BODY CLASS="frame" <?php if (!$IsPopup) echo("onLoad=\"if (window.focus) window.parent.get_focus(); window.document.forms['MsgForm'].elements['M'].focus();\""); ?>>
 <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
 <TR>
 	<!-- Input form  -->

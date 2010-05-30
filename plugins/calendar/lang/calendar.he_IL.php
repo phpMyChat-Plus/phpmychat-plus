@@ -6,6 +6,8 @@
 # Translator: Shula Amokshim <shula.amokshim @gmx.net>
 # Last file update: 01.05.2010
 
+$Align = "right";
+
 // Class strings localization
 define("L_DAY", "יום");
 define("L_MONTH", "חודש");
@@ -68,6 +70,7 @@ define("L_S_SUN", "א");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1255");
+if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "he_IL");
 
 // Set the HE specific date/time format
 if (stristr(PHP_OS,"win")) {
