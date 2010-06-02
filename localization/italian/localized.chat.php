@@ -1,5 +1,5 @@
 <?php
-// File : italian/localized.chat.php - plus version (01.08.2009 - rev.43)
+// File : italian/localized.chat.php - plus version (20.03.2010 - rev.44)
 // Original translation by Andrea D’Alessandro <andrea@abol.it> & Massimo Fubini <massimo@tomato.it>
 // & Giuliano Yurij Beccaria <yurij@e-pages.it> & Marco Borrini <borrini@tradimento.it>
 // & Bartolotta Gioachino <developers@rockitalia.com> & Silvia M. Carrassi <silvia@ladysilvia.net>
@@ -45,6 +45,7 @@ define("L_SET_15", "Stanze private di default");
 define("L_SET_16", "Stanze private create dagi utenti");
 define("L_SET_17", "Scegli il tuo avatar");
 define("L_SET_18", "Aggiungi ai Preferiti: premi \"Ctrl+D\".");
+define("L_SET_19", "Ricordami");
 
 define("L_SRC", "è disponibile gratuitamente");
 
@@ -82,7 +83,7 @@ define("L_REG_25", "Chiudi");
 define("L_REG_30", "Nome");
 define("L_REG_31", "Cognome");
 define("L_REG_32", "WEB");
-define("L_REG_33", "Mostra l’ e-mail nel profilo");
+define("L_REG_33", "mostra l’ e-mail nel profilo");
 define("L_REG_34", "Impostazione profilo utente");
 define("L_REG_35", "Amministrazione");
 define("L_REG_36", "Luogo/paese");
@@ -249,13 +250,16 @@ define("L_HELP_CMD_24", "Questo comando cambia l’argomento della stanza attual
 define("L_HELP_CMD_25", "Un gioco di dadi per casuale/azzardo numeri.<br />Uso: /dice o /dice [n];<br />può prendere qualsiasi valore <b>tra 1 e %s</b> (rappresenta il numero dei giri dei dadi). Se non è stato immesso nessun numero, il valore massimo di default dei giri sarà usato.");
 define("L_HELP_CMD_26", "Questo è una versione più complessa del comando /dice.<br />Uso: /{n1}d[n2] o /{n1}d;<br />n1 può prendere qualsiasi valore <b>tra 1 e %s</b> (rappresenta il numero dei lanci dei dadi).<br />n2 può prendere qualsiasi valore <b>tra 1 e %s</b> (rappresenta il numero dei giri dei dadi per lancio).");
 define("L_HELP_CMD_27", "Evidenza i messaggi di un utente specifico per una semplice lettura attraverso la conversazione.<br />Uso: /high {user} o premi il piccolo <img src=./images/highlightOff.gif> quadrato alla destra dell’utente (nella stanza/lista utenti)");
-define("L_HELP_CMD_28", "Permette di caricare <i>una singola immagine</i> come messaggio.<br />Uso: L’immagine deve essere in internet con libero accesso da tutti. Non usare pagine che utilizzano login.<br />Il link completo dell’immagine deve essere scritto! E.g.<b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Estensioni permesse: .jpg .bmp .gif .png. Il link è un caso sensibile!<br />CINSIGLIO: digita /img dopo uno spazio e incolla l’URL nel box; per prendere l’URL dell’immagine da una pagina internet, quando premi il tasto destro del mouse sull’immagine, vai nelle proprietà, dopo evidenzi l’indirizzo comleto/URL (spesso necessita scorrerlo in un pò in giù) e copia/incolla dopo /img<br />Non usare immagini dal tuo pc: darà solo una pausa alla finestra della chat!!!");
+define("L_HELP_CMD_28", "Permette di caricare <i>una singola immagine</i> come messaggio.<br />Uso: L’immagine deve essere in internet con libero accesso da tutti. Non usare pagine che utilizzano login.<br />Il link completo dell’immagine deve essere scritto! Es.<b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Estensioni permesse: .jpg .bmp .gif .png. Il link è un caso sensibile!<br />CINSIGLIO: digita /img dopo uno spazio e incolla l’URL nel box; per prendere l’URL dell’immagine da una pagina internet, quando premi il tasto destro del mouse sull’immagine, vai nelle proprietà, dopo evidenzi l’indirizzo comleto/URL (spesso necessita scorrerlo in un pò in giù) e copia/incolla dopo /img<br />Non usare immagini dal tuo pc: darà solo una pausa alla finestra della chat!!!");
 define("L_HELP_CMD_29", "Il secondo comando permetterà all’amministratore o moderatore della stanza corrente di degradare un’altro utente registrato precedentemente promosso moderatore per la stessa room.<br />l’opzione * option degrederà l’utente da tutte le stanze.");
-define("L_HELP_CMD_30", "Il secondo comando da la stessa cosa come /me ma mostrerà i tuo rispettivo genere<br />E.g. * il ".sprintf(L_HELP_MR, "Ciprian")." sta guardando la TV o * la ".sprintf(L_HELP_MS, "Dana")." è felice.");
+define("L_HELP_CMD_30", "Il secondo comando da la stessa cosa come /me ma mostrerà i tuo rispettivo genere<br />Es. * il ".sprintf(L_HELP_MR, "Ciprian")." sta guardando la TV o * la ".sprintf(L_HELP_MS, "Dana")." è felice.");
 define("L_HELP_CMD_31", "Cambia l’ordine degli utenti ordinati nelle liste: per ora di entrata o alfabetico.");
 define("L_HELP_CMD_32", "Questa è una terza versione dei giri dei dadi (roleplaying).<br />Uso: /d{n1}[tn2] o /d{n1};<br />n1 può prendere qualsiasi valore<b>tra 1 è 100</b> (rappresenta il numero dei giri per dado).<br />n2 può prendere qualsiasi valore <b>tra 1 è %s</b> (rappresenta il numero di giri dei dadi per lancio).");
 define("L_HELP_CMD_33", "Cambia la misura dei caratteri dei messaggi nella chat ad un utente scelto (valori ammessi n: <b>tra 7 e 15</b>); il comando /size reimposta il valore di default della grandezza dei caratteri.");
 define("L_HELP_CMD_34", "Permette all’utente di specificare l’orientamento del messaggio (ltr = da sinistra a destra, rtl = da destra a sinistra).");
+define("L_HELP_CMD_35", "Permette di inserire <i>un video</i> o <i>un file audio</i> in un piccolo Flash player per volta.<br />Uso: Incolla l’url di origine da inserire! Es. <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Hai bisogno di Shockwave Flash Player installato nel tuo sistema. Il link riconosce maiscole e minuscule!<br />HINT: scrivi /video seguito da uno spazio e incolla l’URL nel box.");
+define("L_HELP_CMD_35a", "Il secondo commando serve solo per i video  di origina da youtube.com.<br />Es. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
+define("L_HELP_CMD_36", "Permette di inserire <i>un video youtube</i> in un piccolo Flash player per volta.<br />Uso: Incolla l’url di origine da inserire! Es. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Hai bisogno di Shockwave Flash Player installato nel tuo sistema. Il link riconosce maiscole e minuscule!<br />HINTS: scrivi /tube seguito da uno spazio e incolla l’URL nel box.");
 define("L_HELP_CMD_VAR", "Sinonimi (varianti): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Netiquette della Chat");
 define("L_HELP_ETIQ_2", "Nella nostra chat si auspica un incontro amichevole e simpatico, quindi ti preghiamo di aderire alle seguenti direttive. Se verrai meno all’osservanza di queste regole, i moderatori potrebbero espellerti dalla chat.<br /><br />Grazie!");
@@ -375,9 +379,9 @@ define("BOT_DISABLED_ERROR", "Il Bot è stato disabilitato dal pannello di ammin
 // Dice v.1, v.2 and v.3 modes
 define("DICE_RESULTS", "gira il dado, i risultati sono:");
 define("DICE_WRONG", "Devi selezionare quanti dadi vuoi girare\\n(Scegli un numero tra 1 e ".MAX_ROLLS.").\\nScrivi solo /dice per girare ".MAX_ROLLS." dadi.");
-define("DICE2_WRONG", "Il secondo valore deve essere tra 1 e ".MAX_ROLLS.".\\nLascialo vuoto per usare tutti ".MAX_ROLLS." dadi\\n(e.g. /".MAX_DICES."d o /".MAX_DICES."d".MAX_ROLLS.").");
-define("DICE2_WRONG1", "Il primo valore deve essere tra 1 e".MAX_DICES.".\\n(e.g. /".MAX_DICES."d o /".MAX_DICES."d".MAX_ROLLS.").");
-define("DICE3_WRONG", "Il secondo valore deve essere tra 1 e".MAX_ROLLS.".\\nLascialo vuoto per usare tutti ".MAX_ROLLS." dadi\\n(e.g. /d50 o /d100t".MAX_ROLLS.").");
+define("DICE2_WRONG", "Il secondo valore deve essere tra 1 e ".MAX_ROLLS.".\\nLascialo vuoto per usare tutti ".MAX_ROLLS." dadi\\n(es. /".MAX_DICES."d o /".MAX_DICES."d".MAX_ROLLS.").");
+define("DICE2_WRONG1", "Il primo valore deve essere tra 1 e".MAX_DICES.".\\n(es. /".MAX_DICES."d o /".MAX_DICES."d".MAX_ROLLS.").");
+define("DICE3_WRONG", "Il secondo valore deve essere tra 1 e".MAX_ROLLS.".\\nLascialo vuoto per usare tutti ".MAX_ROLLS." dadi\\n(es. /d50 o /d100t".MAX_ROLLS.").");
 
 // Private Message Popup mod by Ciprian
 define("L_REG_POPUP", "apri popups per messaggio privato");
@@ -466,6 +470,7 @@ define("L_PASS_6", "Risposta segreta");
 define("L_PASS_7", "Ripristina password");
 define("L_PASS_8", "La tua password è stata ripristinata con successo.");
 define("L_PASS_9", "La tua nuova password per entrare in chat");
+define("L_PASS_10", "La tua nuova password per entrare in chat: %s");
 define("L_PASS_11", "Bentornato nella nostra chat!");
 define("L_PASS_12", "Scegli la tua domanda...");
 define("L_ERR_PASS_1", "Nome utente errato. Scegli il tuo.");
@@ -626,12 +631,15 @@ define("L_LANG_EN", "Inglese"); // for admin panel only
 define("L_LANG_ENUK", "Inglese UK"); // for UK formats and flags
 define("L_LANG_ENUS", "Inglese US"); // for US formats and flags
 define("L_LANG_ES", "Spagnolo");
+define("L_LANG_FA", "Persiano (Farsi)");
 define("L_LANG_FR", "Frencese");
 define("L_LANG_GR", "Greco");
 define("L_LANG_HI", "Indiano");
 define("L_LANG_HU", "Ungherese");
 define("L_LANG_IT", "Italiano");
+define("L_LANG_JA", "Giapponese (Kanji)");
 define("L_LANG_KA", "Georgiano");
+define("L_LANG_NE", "Nepalese");
 define("L_LANG_NL", "Olandese");
 define("L_LANG_RO", "Rumeno");
 define("L_LANG_SK", "Slovacco");
@@ -686,4 +694,20 @@ define("L_OPID_REG", "Importa uno dei tuoi profili OpenID");
 // Support buttons
 define("L_SUPP_WARN", "Hai scelto di contribuire al libero sviluppo di\\n".APP_NAME." facendo una donazione allo sviluppatore.\\nGrazie per il tuo supporto!\\n\\nNota: il contenitore non è il titolare di questa chat.\\nPer cortesia inserisci il tuo contributo nella pagina successiva.\\n\\nContinua?");
 define("L_SUPP_ALT", "Supporta con PayPal lo svilujppo del ".APP_NAME." - E’ Veloce, Libero e Sicuro!");
+
+// Video & Audio & Youtube cmds (Embevi & YouTube player class) – same approach as in // Img cmd mod section!
+define("L_AUDIO", "File audio inserito da");
+define("L_VIDEO", "Video inserito da");
+define("L_HELP_VIDEO", "Inserire l’intero percorso del video o dell’audio inserito");
+define("L_NO_VIDEO", "L’URL non può essere incorporato.\\nNon è un URL valido di un accettato video o audio pubblico.\\nRiprova di nuovo!");
+define("L_ORIG_VIDEO", "aprire l’originale dalla fonte"); //it sounds like: Click here to open the…
+
+// Birthday mod - by Ciprian
+define("L_PRO_7", "Data di nascita");
+define("L_PRO_8", "mostra la tua data di nascita");
+define("L_PRO_9", "mostra pubblica la tua età");
+define("L_PRO_10", "Età");
+define("L_PRO_11", "%1\$d anni, %2\$d mesi e %3\$d giorni"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
+define("L_DOB_SUBJ", "Buon compleanno %s!");
+define("L_DOB_TIT_1", "Lista compleanni");
 ?>

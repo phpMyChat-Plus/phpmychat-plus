@@ -1,5 +1,5 @@
 <?php
-// File : german/localized.chat.php - plus version (01.08.2009 - rev.43)
+// File : german/localized.chat.php - plus version (20.03.2010 - rev.44)
 // Original translation by Robert Schaller <robert@schaller.com> & Wolfgang Schneider <schneider@bibelcenter.de>
 //    & Martin Sander <Martin.Sander@touch-screen.de> & Bernard Piller <bernard@bmpsystems.com>
 //    & Reinhard Hofmann <e9625556@student.tuwien.ac.at> & Christian Hacker <c.hacker@dreamer-chat.de>
@@ -45,6 +45,7 @@ define("L_SET_15", "Private Räume");
 define("L_SET_16", "Privater Raum erstellt durch User");
 define("L_SET_17", "Wählen Sie Ihren Avatar");
 define("L_SET_18", "Setzen Sie ein Lesezeichen: drücke \"Strg+D\".");
+define("L_SET_19", "Vergiss mich nicht");
 
 define("L_SRC", "ist kostenlos verfügbar bei");
 
@@ -144,12 +145,12 @@ define("L_ERR_USR_18", "Dein Benutzername enthält ein verbotenes Wort.");
 define("L_ERR_USR_19", "Du kannst nicht in mehreren Räumen zugleich sein.");
 define("L_ERR_USR_20", "Du wurdest aus diesem Raum oder aus dem Chat verbannt.");
 define("L_ERR_USR_20a", "Sie wurden aus dem Raum oder aus dem Chat verbannt.<br />Grund: %s");
-define("L_ERR_USR_21", "Sie waren in den letzten ".C_USR_DEL." Minuten nicht aktiv,<br /> deswegen wurden Sie aus dem Raum verwiesen.");
+define("L_ERR_USR_21", "Sie waren in den letzten ".C_USR_DEL." Minuten nicht aktiv,<br />deswegen wurden Sie aus dem Raum verwiesen.");
 define("L_ERR_USR_22", "Dieser Befehl existiert nicht für \\nden Browser den Sie nutzen (IE engine).");
 define("L_ERR_USR_23", "Sie müssen registriert sein um einen privaten Raum betreten zu können.");
 define("L_ERR_USR_24", "Sie müssen registriert sein um einen privaten Raum erstellen zu können.");
-define("L_ERR_USR_25", "Nur ein Administrator kann ".$COLORNAME." Farbe nutzen!<br /> Versuchen Sie nicht Farben ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." oder ".COLOR_CM1." zu nutzen.<br /> Diese sind für Poweruser reserviert!");
-define("L_ERR_USR_26", "Nur Administratoren und Moderatoren können ".$COLORNAME." Farbe nutzen!<br /> Versuchen Sie nicht Farben ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." oder ".COLOR_CM1." zu nutzen.<br /> Diese sind für Poweruser reserviert!");
+define("L_ERR_USR_25", "Nur ein Administrator kann ".$COLORNAME." Farbe nutzen!<br />Versuchen Sie nicht Farben ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." oder ".COLOR_CM1." zu nutzen.<br />Diese sind für Poweruser reserviert!");
+define("L_ERR_USR_26", "Nur Administratoren und Moderatoren können ".$COLORNAME." Farbe nutzen!<br />Versuchen Sie nicht Farben ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." oder ".COLOR_CM1." zu nutzen.<br />Diese sind für Poweruser reserviert!");
 define("L_ERR_USR_27", "Sie können sich nicht selber anschreiben.\\nWählen Sie einen anderen Usernamen.");
 define("L_ERR_USR_28", "Ihr Zugang zu %s Raum hat Beschränkungen!<br />Bitte wählen Sie einen anderen Raum.");
 define("L_ERR_ROM_1", "Der Name des Raums darf keine Kommata und Backslashes (\\) enthalten.");
@@ -242,20 +243,23 @@ define("L_HELP_CMD_17", "Erlaubt dem Administrator Ankündigungen an alle Benutz
 define("L_HELP_CMD_18", "Einem Benutzer eines anderen Raumes vorschlagen, in den eigenen zu wechseln.");
 define("L_HELP_CMD_19", "Erlaubt den Moderatoren/Administrator einen Benutzer für eine vom Administrator bestimmte Zeit aus dem Raum zu \"verbannen\".<br />Der Administrator kann auch Benutzer anderer Räume verbannen und die Einstellung * verwenden um Benutzer \"für immer\" aus dem gesamten Chat zu verbannen.");
 define("L_HELP_CMD_20", "Beschreiben, was du grade tust, ohne Dich selbst zu erwähnen.");
-define("L_HELP_CMD_21", "Verkündet in dem Raum und an die User, die versuchen Sie anzuschreiben, dass Sie grade abwesend sind. <br /> Sie verlassen den Abwesenheitsmodus indem Sie anfangen mit schreiben.");
-define("L_HELP_CMD_22", "Sendet einen Summerton und zeigt eine Nachricht im gegenwärtigen Raum.<br />- Anwendung: \"/buzz\" oder \"/buzz Ihre Nachricht\" - spielt einen voreingestellten Sound ab;<br />- erweiterte Anwendung: \"/buzz ~soundname\" oder \"/buzz ~soundname Ihre Nachricht\" - spielt die soundname.wav Datei aus dem Verzeichnis /sounds im Chat; Bitte das Zeichen \"~\" vor dem Dateinamen nicht vergessen. Es sind nur Dateierweiterungen im Format .wav erlaubt.<br /> Standardmäßig ist es ein Moderator/Admin-Befehl.");
+define("L_HELP_CMD_21", "Verkündet in dem Raum und an die User, die versuchen Sie anzuschreiben, dass Sie grade abwesend sind.<br />Sie verlassen den Abwesenheitsmodus indem Sie anfangen mit schreiben.");
+define("L_HELP_CMD_22", "Sendet einen Summerton und zeigt eine Nachricht im gegenwärtigen Raum.<br />- Anwendung: \"/buzz\" oder \"/buzz Ihre Nachricht\" - spielt einen voreingestellten Sound ab;<br />- erweiterte Anwendung: \"/buzz ~soundname\" oder \"/buzz ~soundname Ihre Nachricht\" - spielt die soundname.wav Datei aus dem Verzeichnis /sounds im Chat; Bitte das Zeichen \"~\" vor dem Dateinamen nicht vergessen. Es sind nur Dateierweiterungen im Format .wav erlaubt.<br />Standardmäßig ist es ein Moderator/Admin-Befehl.");
 define("L_HELP_CMD_23", "Sendet <i>whisper</i> (eine private Nachricht). Die Nachricht wird den Bestimmungsort erreichen, ganz gleich in welchem Raum der Benutzer ist. Wenn der Benutzer nicht online ist oder im Abwesenheitsmodus ist, werden Sie darüber benachrichtigt.");
 define("L_HELP_CMD_24", "Dieser Befehl ändert das Thema des gegenwärtigen Raums. Versuchen Sie, andere Benutzerthemen nicht zu überschreiben. Verwenden Sie nur wichtige Themen.<br />Standardmäßig ist es ein Moderator/Admin-Befehl.<br />Durch den \"/topic reset\" Befehl wird das aktuelle Topic gelöscht und durch Standardtopic ersetzt.<br />Optional, \"/topic * {}\" und \"/topic * reset\" ist der gleiche Befehl, löscht aber die Themen in allen Räumen (global topic und global topic reset).");
 define("L_HELP_CMD_25", "Ein Würfelspiel.<br />Anwendung: /dice or /dice [n];<br />n kann eine Zahl zwischen <b>1 und %s</b> sein. (es ist die Anzahl der Würfel). Wenn keine Zahl angegeben wurde, wird die voreingestellte größte Zahl genommen.");
 define("L_HELP_CMD_26", "Das ist eine kompliziertere Version des Würfelspiels (/dice).<br />Anwendung: /{n1}d[n2] oder /{n1}d;<br />n1 kann eine Zahl zwischen <b>1 und %s</b> sein (es ist die Anzahl der Würfe).<br />n2 kann eine Zahl zwischen <b>1 und %s</b> sein (es ist die Anzahl der Würfel).");
-define("L_HELP_CMD_27", "Dieser Befehl hebt die Nachrichten eines ausgewählten Users hervor um das Lesen zu erleichtern. <br />Anwendung: /high {user} oder drücke auf das kleine <img src=./images/highlightOff.gif> Quadrat rechts neben dem Namen des Users (in der Raum/User-Liste)");
-define("L_HELP_CMD_28", "Dieser Befehl erlaubt ein <i>einzelnes</i> Bild in Ihre Nachricht einzufügen. <br />Anwendung: das Bild muss im Internet und für jeden zugänglich sein. Bitte keine Seiten angeben, die Login erfordern. <br /> Es muss der komplette Pfad angegeben werden. Bsp: <b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Erlaubte Erweiterungen: .jpg .bmp .gif .png. <br />Hinweis: schreibe zuerst \"/img\" Leerzeichen und dann die URL zum Bild einfügen. <br />Bitte keine Bilder, die auf Ihrem PC abgelegt sind, wählen. Das Bild ist für keinen sichtbar!!!");
+define("L_HELP_CMD_27", "Dieser Befehl hebt die Nachrichten eines ausgewählten Users hervor um das Lesen zu erleichtern.<br />Anwendung: /high {user} oder drücke auf das kleine <img src=./images/highlightOff.gif> Quadrat rechts neben dem Namen des Users (in der Raum/User-Liste)");
+define("L_HELP_CMD_28", "Dieser Befehl erlaubt ein <i>einzelnes</i> Bild in Ihre Nachricht einzufügen.<br />Anwendung: das Bild muss im Internet und für jeden zugänglich sein. Bitte keine Seiten angeben, die Login erfordern.<br />Es muss der komplette Pfad angegeben werden. Bsp: <b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Erlaubte Erweiterungen: .jpg .bmp .gif .png.<br />Hinweis: schreibe zuerst \"/img\" Leerzeichen und dann die URL zum Bild einfügen.<br />Bitte keine Bilder, die auf Ihrem PC abgelegt sind, wählen. Das Bild ist für keinen sichtbar!!!");
 define("L_HELP_CMD_29", "Der zweite Befehl erlaubt dem Administrator oder dem Moderator des gegenwärtigen Raums Users zu degradieren die vorher zum Moderator im gleichen Raum ernannt wurden.<br />Die * Option degradiert den User in allen Räumen.");
-define("L_HELP_CMD_30", "Der zweite Befehl ist ähnlich dem Befehl \"/me\" aber er zeigt noch zusätzlich das Geschlecht an. <br />Bsp: * ".sprintf(L_HELP_MR, "Ciprian")." schaut TV oder * ".sprintf(L_HELP_MS, "Dana")." ist glücklich.");
+define("L_HELP_CMD_30", "Der zweite Befehl ist ähnlich dem Befehl \"/me\" aber er zeigt noch zusätzlich das Geschlecht an.<br />Bsp: * ".sprintf(L_HELP_MR, "Ciprian")." schaut TV oder * ".sprintf(L_HELP_MS, "Dana")." ist glücklich.");
 define("L_HELP_CMD_31", "Sortiert die User nach alphabetischer Reihenfolge oder nach Eingangszeit.");
 define("L_HELP_CMD_32", "Das ist die dritte Version des Würfelspiels.<br />Anwendung: /d{n1}t[n2] oder /d{n1};<br />n1 kann eine Zahl zwischen <b>1 und 100</b> sein (es ist die Anzahl der Würfe pro Würfel).<br />n2 kann eine Zahl zwischen <b> 1 and %s</b> (es ist die Anzahl der Würfel.");
 define("L_HELP_CMD_33", "Ändert die Größe der Schriftart in den Nachrichten (erlaubt sind Werte für n zwischen <b>7 und 15</b>); Der Befehl \"/size\" setzt die Größe der Schriftart auf standard zurück (<b>".$FontSize."</b>).");
 define("L_HELP_CMD_34", "Dies gibt die Richtungsorientierung einer Textnachricht an (ltr = left-to-right, rtl = right-to-left).");
+define("L_HELP_CMD_35", "Es erlaubt die entsendung von <i>ein Video</i> oder <i>ein Audiodatei</i>in einem kleinen Flash Player eins hinter ein ander.<br />Gebrauch: Fügen sie einfach die URL  der Quelle ein das gepostet sollte! Z.B <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Sie benötigen den Shockwave Flash Player auf ihrem System installiert. Der Link ist fall bedingt sensitive!<br />Hinweis:gib ein /video gefolgt von einem Leerzeichen und fügensie die URL in das Feld ein.");
+define("L_HELP_CMD_35a", "Der zweite Befehl funktioniert nur mit youtube.com als Videoquelle.<br />Z.B <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
+define("L_HELP_CMD_36", "Es erlaubt posten von<i>ein youtube Video</i> ein Audiodatei</i>in einem kleinen Flash Player eins hinter ein ander<br />Gebrauch: Fügen sie einfach die URL  der Quelle ein das gepostet sollte! Z.B <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Sie benötigen den Shockwave Flash Player auf ihrem System installiert. Der Link ist fall bedingt sensitive!<br />Hinweis:gib ein /tube gefolgt von einem Leerzeichen und fügensie die URL in das Feld ein.");
 define("L_HELP_CMD_VAR", "Funktionsgleiche Kommandos: %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Chat-Etikette");
 define("L_HELP_ETIQ_2", "Unsere Community sollte freundlich und lustig bleiben, also halten Sie sich bitte an folgende Richtlinien. Wenn Sie die Regeln nicht einhalten, werden Sie von unseren Moderatoren aus dem Chat verwiesen.<br /><br />Danke!");
@@ -355,7 +359,7 @@ define("L_PRO_6", "Ihre Namens-/Textfarbe");
 define("L_AVATAR", "Avatar");
 define("L_ERR_AV", "Falsche URL oder Host existiert nicht.");
 define("L_TITLE_AV", "Ihr gegenwärtiger Avatar: ");
-define("L_CHG_AV", "Klicke auf \"".L_REG_16."\" im Profil-Menü<br /> um Ihr Avatar zu speichern.");
+define("L_CHG_AV", "Klicke auf \"".L_REG_16."\" im Profil-Menü<br />um Ihr Avatar zu speichern.");
 define("L_SEL_NEW_AV", "Wählen Sie einen neuen Avatar aus");
 define("L_EX_AV", "beispiel");
 define("L_URL_AV", "URL: ");
@@ -432,7 +436,7 @@ define("L_COL_HELP_P2", "<u>Farbenreihe</u><br />Abhängig von dem verwendeten B
 define("L_COL_HELP_P2a", "Wenn ein Benutzer behauptet, dass er Ihre ausgewählte Farbe nicht sehen kann, bedeutet es, dass er wahrscheinlich einen älteren Browser verwendet.");
 define("L_COL_HELP_SUB3", "Definierte Einstellungen in diesem Chat:");
 define("L_COL_HELP_P3", "<u>Farbnutzberechtigung</u>:<br />1. Administrator kann jede Farbe nutzen.<br />Die voreingestellte Farbe für Administratoren ist <SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN>.<br />2. Moderatoren können jede Farbe nutzen, ausser <SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN> und <SPAN style=\"color:".COLOR_CA1."\">".COLOR_CA1."</SPAN>.<br />Die voreingestellte Farbe für Moderatoren ist <SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN>.<br />3. Alle anderen User können alle Farben nutzen, ausser <SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN>, <SPAN style=\"color:".COLOR_CA1."\">".COLOR_CA1."</SPAN>, <SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN> und <SPAN style=\"color:".COLOR_CM1."\">".COLOR_CM1."</SPAN>.");
-define("L_COL_HELP_P3a", "Die voreingestellte Farbe ist <u><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></u>.<br /><br /><u>Technisches Zeug</u>: Diese Farben wurden durch Administrator in dem Adminbereich festgelegt.<br /> Wenn etwas nicht stimmt oder Ihnen gefällt die vordefinierte Farbe nicht, bitte wenden Sie sich an den <b>Administrator</b> und nicht an andere User im Chat. :-)");
+define("L_COL_HELP_P3a", "Die voreingestellte Farbe ist <u><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></u>.<br /><br /><u>Technisches Zeug</u>: Diese Farben wurden durch Administrator in dem Adminbereich festgelegt.<br />Wenn etwas nicht stimmt oder Ihnen gefällt die vordefinierte Farbe nicht, bitte wenden Sie sich an den <b>Administrator</b> und nicht an andere User im Chat. :-)");
 define("L_COL_HELP_USER_STATUS", "Ihr Status");
 define("L_COL_TUT", "Verwenden des farbigen Textes im Chat");
 define("L_NULL", "Null");
@@ -468,6 +472,7 @@ define("L_PASS_6", "Geheime Antwort");
 define("L_PASS_7", "Passwort zurücksetzen");
 define("L_PASS_8", "Dein Passwort wurde erfolgreich zurückgesetzt.");
 define("L_PASS_9", "Dein neues Passwort un den Chat zu betreten");
+define("L_PASS_10", "Dein neues Passwort un den Chat zu betreten: %s");
 define("L_PASS_11", "Willkommen zurück auf unseren Chat-Server!");
 define("L_PASS_12", "Wähle Deine Frage ...");
 define("L_ERR_PASS_1", "Falscher Username! Benutze deinen.");
@@ -628,6 +633,7 @@ define("L_LANG_EN", "Englisch"); // for Admin panel only
 define("L_LANG_ENUK", "UK Englisch"); // for UK formats and flags (also known as British)
 define("L_LANG_ENUS", "US Englisch"); // for US formats and flags (also know as American English)
 define("L_LANG_ES", "Spanisch");
+define("L_LANG_FA", "Persisch (Farsi)");
 define("L_LANG_FR", "Französisch");
 define("L_LANG_GR", "Griechisch");
 define("L_LANG_HE", "Hebbräisch");
@@ -635,7 +641,9 @@ define("L_LANG_HI", "Indien");
 define("L_LANG_HU", "Ungarisch");
 define("L_LANG_ID", "Indonesisch");
 define("L_LANG_IT", "Italienisch");
+define("L_LANG_JA", "Japanisch (Kanji)");
 define("L_LANG_KA", "Georgien");
+define("L_LANG_NE", "Nepali");
 define("L_LANG_NL", "Niederländisch");
 define("L_LANG_RO", "Rumänisch");
 define("L_LANG_SK", "Slowakisch");
@@ -690,4 +698,20 @@ define("L_OPID_REG", "Importiere deine OpenID ins profile.");
 // Support buttons
 define("L_SUPP_WARN", "Sie haben sich entschlossen, die nichtkommerzielle Entwicklung von\\n".APP_NAME." durch eine Geldspende an das Projekt zu unterstützen\\nHerzlichen Dank für Ihre Unterstützung!\\n\\nBitte beachten: Dies ist keine Spende an den Chatserverbetreiber!\\nBitte geben Sie den gewünschten Geldbetrag auf der nächsten Seite ein..\\n\\nFortfahren?");
 define("L_SUPP_ALT", "Unterstützen Sie die Weiterentwicklung und Sicherheitsbetreuung von ".APP_NAME." - es ist Schnell, Frei und Sicher!");
+
+// Video & Audio & Youtube cmds (Embevi & YouTube player class) – same approach as in // Img cmd mod section!
+define("L_AUDIO", "Audiodatei gepostet von ");
+define("L_VIDEO", "Video gepostet von");
+define("L_HELP_VIDEO", "gesampters pfad zum Video und audio wird gepostet");
+define("L_NO_VIDEO", "die URL kann nicht eingebettet.\\nDies ist keine gültige URL eines akzeptierten\\noffentlichen Video oder Audio quelle.\\nVersuch nochmal!");
+define("L_ORIG_VIDEO", "um die ursprüngliche quelle zu öffnen"); //it sounds like: Click here to open the…
+
+// Birthday mod - by Ciprian
+define("L_PRO_7", "Geburts Datum");
+define("L_PRO_8", "zeige Geburts Tag in Öffentlich Info");
+define("L_PRO_9", "zeige Alte in Öffentlich Info");
+define("L_PRO_10", "Alte");
+define("L_PRO_11", "%1\$d Jahre, %2\$d Monate und %3\$d Tagen"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
+define("L_DOB_SUBJ", "Herzlichen Glückwunsch zum Geburtstag %s!");
+define("L_DOB_TIT_1", "Geburts Tag List");
 ?>

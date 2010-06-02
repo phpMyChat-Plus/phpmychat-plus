@@ -7,17 +7,18 @@
 # Last file update: 01.05.2010
 
 // Class strings localization
-define("L_DAY", "Day");
-define("L_MONTH", "Month");
-define("L_YEAR", "Year");
-define("L_PREV", "Previous");
+define("L_DAY", "Dan");
+define("L_MONTH", "Mesec");
+define("L_YEAR", "Godina");
+define("L_PREV", "Prethodni");
 define("L_NEXT", "Sledeći");
-define("L_REF_CAL", "Refreshing Calendar...");
-define("L_SEL_LANG", "Select Language");
-define("L_SEL_ICON", "Select Icon");
-define("L_SEL_DATE", "Select Date");
-define("L_ERR_SEL", "Your selection is not valid");
-define("L_NOT_ALLOWED", "This date is not allowed to be selected");
+define("L_REF_CAL", "Ponovo učitavam Kalendar...");
+define("L_CHK_VAL", "Proveri vrednost");
+define("L_SEL_LANG", "Odaberi jezik");
+define("L_SEL_ICON", "Odaberi sliku");
+define("L_SEL_DATE", "Odaberi datum");
+define("L_ERR_SEL", "Vaš izbor nije ispravan");
+define("L_NOT_ALLOWED", "Ovaj datum nemože biti odabran");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

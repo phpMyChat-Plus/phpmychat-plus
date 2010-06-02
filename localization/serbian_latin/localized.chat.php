@@ -1,5 +1,5 @@
 <?php
-// File : serbian_latin/localized.chat.php - plus version (01.08.2009 - rev.43)
+// File : serbian_latin/localized.chat.php - plus version (20.03.2010 - rev.44)
 // Original translation by Vedran Vučić <vedran.vucic@gnulinuxcentar.org>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -41,6 +41,7 @@ define("L_SET_15", "Pretpostavljene privatne sobe");
 define("L_SET_16", "Privatne sobe koje su kreirali korisnici");
 define("L_SET_17", "Odaberite vašu sličicu");
 define("L_SET_18", "Bukmarkuj ovu stranu: pritisni \"Ctrl+D\".");
+define("L_SET_19", "Zapamti me");
 
 define("L_SRC", "je slobodno dostupan na");
 
@@ -252,6 +253,9 @@ define("L_HELP_CMD_31", "Menja redosled korisnika u listama:po vremenu ulaska il
 define("L_HELP_CMD_32", "Ovo je treća (igranje uloga) verzija bacanja kocke.<br />Upotreba: /d{n1}[tn2] ili /d{n1};<br />n1 može uzeti bilo koju vrednost <b>između 1 i 100</b> (on predstavlja broj kotrljanja po kocki ).<br />n2 može uzeti bilo koju vrednost <b>između 1 i %s</b> (on predstavlja broj kotrljanja kocki po bacanju).");
 define("L_HELP_CMD_33", "Promeni veličinu slova u porukama u četu prema izboru korisnika (dozvoljene vrednosti za n: <b>između 7 i 15</b>); /size komanda resetuje veličinu slova na pretpostavljenu vrednost (<b>".$FontSize."</b>).");
 define("L_HELP_CMD_34", "ovo će pomoći korisniku da odredi orijentaciju tekstualne poruke (ltr = s leva u desno, rtl = s desna u levo).");
+define("L_HELP_CMD_35", "Dozvoljava da se postavi <i>jedna video</i> ili <i>jedna audio datoteka</i> u mali Flash plejer u isto vreme.<br />Upotreba: Samo zalepite url adresu izvora koji treba da se postavi! <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Potreban vam je Shockwave Flash plejer instaliran u vaš sistem. Pazite na velika i mala slova u adresi!<br />Primer: napišite /video nakon toga ide jedan prazan prostor, a onda zalepite URL u polje.");
+define("L_HELP_CMD_35a", "Druga komanda radi samo sa youtube.com kao video izvorom<br /> <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
+define("L_HELP_CMD_36", "Dozvoljeno je postaviti <i>jedan youtube video</i> u mali Flash plejer u isto vreme.<br />Upotreba: Samo zalepite url adresu izvora koji treba da se postavi! <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Potreban vam je Shockwave Flash plejer instaliran u vaš sistem. Pazite na velika i mala slova u adresi! <br />Primer: napišite /tube nakon toga ide jedan prazan prostor, a onda zalepite URL u polje.");
 define("L_HELP_CMD_VAR", "Sinonimi (varijante): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Čet Etiketa");
 define("L_HELP_ETIQ_2", "Naš sajt bi hteo da održava zajednicu prijateljskom i zabavnom, pa vas molimo da se pridržavate sledećih upustava. Ako se ne budete pridržavali ovih pravila, jedan od čet moderatora može da vas izbaci iz četa.<br /><br />Hvala vam,");
@@ -464,6 +468,8 @@ define("L_PASS_6", "Tajni odgovor");
 define("L_PASS_7", "Resetuj lozinku");
 define("L_PASS_8", "Vaša lozinka je uspešno resetovana.");
 define("L_PASS_9", "Vaša nova lozinka da bi ušli u čet");
+define("L_PASS_10", "Vaša nova lozinka da bi ušli u čet: %s");
+
 define("L_PASS_11", "Dobro došli na naš čet server!");
 define("L_PASS_12", "Odaberite vaše pitanje ...");
 define("L_ERR_PASS_1", "Pogrešno korisničko ime. Odaberite vaše.");
@@ -633,6 +639,7 @@ define("L_LANG_EN", "Engleski"); // for admin panel only
 define("L_LANG_ENUK", "Engleski UK"); // for UK formats and flags
 define("L_LANG_ENUS", "Engleski US"); // for US formats and flags
 define("L_LANG_ES", "Španski");
+define("L_LANG_FA", "Perzijski (Farsi)");
 define("L_LANG_FR", "Francuski");
 define("L_LANG_GR", "Grčki");
 define("L_LANG_HE", "Hebrejski");
@@ -640,8 +647,10 @@ define("L_LANG_HI", "Hindu");
 define("L_LANG_HU", "Mađarski");
 define("L_LANG_ID", "Indonezijski");
 define("L_LANG_IT", "Talijanski");
+define("L_LANG_JA", "Japanski (Kanji)");
 define("L_LANG_KA", "Gruzijski");
 define("L_LANG_NL", "Holandski");
+define("L_LANG_NE", "Nepalski");
 define("L_LANG_RO", "Rumunski");
 define("L_LANG_SK", "Slovački");
 define("L_LANG_SRL", "Srpski - Latinica");
@@ -695,4 +704,20 @@ define("L_OPID_REG", "Uvezite vaš OpenID profile");
 // Support buttons
 define("L_SUPP_WARN", "Izabrali ste da doprinesete slobodnom razvoju\\n".APP_NAME." donacijom programeru.\\nHvala za vašu podršku!\\n\\nBeleška: primalac nije vlasnik ovog četa.\\nMolimo vas da unesete iznos na sledećoj strani.\\n\\nNastavite?");
 define("L_SUPP_ALT", "Podržiet razvoj pomoću PayPal ".APP_NAME." - Besplatno je, Slobodno i Bezbedno!");
+
+// Video & Audio & Youtube cmds (Embevi & YouTube player class) – same approach as in // Img cmd mod section!
+define("L_AUDIO", "Audio datoteku postavio-la");
+define("L_VIDEO", "Video datoteku postavio-la");
+define("L_HELP_VIDEO", "cela putanja za video ili audio datoteku koja treba da se postavi");
+define("L_NO_VIDEO", "URL adresa nemo-e biti umetnuta.\\nOvo nije ispravna URL adresa za prihvaćenu javnuvideo ili audio datoteku.\\nPokušajte ponovo!");
+define("L_ORIG_VIDEO", "da se otvori originalan izvorni sajt"); //it sounds like: Click here to open the…
+
+// Birthday mod - by Ciprian
+define("L_PRO_7", "Datum rođenja");
+define("L_PRO_8", "pokaži rođendan u javnim informacijama");
+define("L_PRO_9", "pokaži starosnu dob u javnim informacijama");
+define("L_PRO_10", "Starosna dob");
+define("L_PRO_11", "%1\$d godina, %2\$d meseci i %3\$d dana"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
+define("L_DOB_SUBJ", "Srećan Rođendan %s!");
+define("L_DOB_TIT_1", "Lista Rođendana");
 ?>
