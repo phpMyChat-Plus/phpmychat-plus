@@ -74,7 +74,9 @@ ALTER TABLE ".$t_config."
 			ADD SEND_BDAY_EMAIL enum('0','1') NOT NULL default '0',
 			ADD SEND_BDAY_TIME tinyint(1) NOT NULL default '0',
 			ADD SEND_BDAY_INTVAL tinyint(1) NOT NULL default '7',
-			ADD SEND_BDAY_PATH varchar(255) NOT NULL default 'files/birthday/bday_greetings.txt';
+			ADD SEND_BDAY_PATH varchar(255) NOT NULL default 'files/birthday/bday_greetings.txt',
+			ADD EN_WMPLAYER enum('0','1','2') NOT NULL default '0',
+			ADD WMP_STREAM varchar(255) default NULL;
 ", $conn);
 mysql_query("
 UPDATE ".$t_config." SET

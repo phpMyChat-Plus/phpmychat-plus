@@ -34,6 +34,8 @@ On some pcs a restart might be necessary.
 We also added a small IE fixing script (reg file) as a link in Extra Options in chat.
 
 Fixes History:
+02.06.2010 - 1.94-beta5:
+- added the MediaPlayer plugin mod for video/audio stream embeding; admins can set the streaming source in Admin panel; (functionality extension)
 08.05.2010 - 1.94-beta4:
 - fixed a bot entrance issue; (functionality related)
 - enabled sending of html formatted emails from admin panel; (functionality extension)

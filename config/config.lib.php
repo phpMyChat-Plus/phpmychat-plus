@@ -206,6 +206,8 @@ $SEND_BDAY_EMAIL				= $row[175];
 $SEND_BDAY_TIME					= $row[176];
 $SEND_BDAY_INTVAL				= $row[177];
 $SEND_BDAY_PATH					= $row[178];
+$EN_WMPLAYER					= $row[179];
+$WMP_STREAM						= $row[180];
 
 $query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.com'";
 $result_bot = mysql_query($query_bot);
@@ -651,4 +653,8 @@ define("C_BDAY_EMAIL", $SEND_BDAY_EMAIL);
 define("C_BDAY_TIME", $SEND_BDAY_TIME);
 define("C_BDAY_INTVAL", $SEND_BDAY_INTVAL);
 define("C_BDAY_PATH", $SEND_BDAY_PATH);
+
+// MediaPlayer add-on by Ciprian
+define("C_EN_WMPLAYER", $EN_WMPLAYER);
+define("C_WMP_STREAM", $WMP_STREAM);
 ?>

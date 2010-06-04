@@ -73,7 +73,8 @@ if(C_BDAY_EMAIL)
 					$greet = rand(0, sizeof($greets)-1);
 					$greet_text = $greets[$greet];
 					$greet_text = str_replace("<br />",$eol,$greet_text);
-					$dob1_subject = sprintf(L_DOB_SUBJ, $dob_name);
+//					$dob1_subject = sprintf(L_DOB_SUBJ, $dob_name);
+					$dob1_subject = sprintf("Happy Birthday %s", $dob_name);
 					if(send_dob_email($dob_name, $dob_email, "[".(C_CHAT_NAME != "" ? C_CHAT_NAME : APP_NAME)."] ". $dob1_subject, $greet_text))
 					{
 						include("admin/mail4admin.lib.php");
