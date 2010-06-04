@@ -67,10 +67,23 @@ else
 				<FRAME SRC="<?php echo($ChatPath); ?>blank.php?<?php echo("L=$L"); ?>" NAME="messages" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0" MARGINWIDTH="3" MARGINHEIGHT="3">
 				<FRAME SRC="<?php echo($ChatPath); ?>input.php?<?php echo("From=$From&L=$L&Ver=$Ver&U=$U1&R=$R1&T=$T&D=$D&N=$N&O=$O&ST=$ST&NT=$NT$AddPwd2Url"); ?>" NAME="input" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0" MARGINWIDTH=0 MARGINHEIGHT=0 SCROLLING="NO" NORESIZE>
 			</FRAMESET>
-			<FRAMESET ROWS="80,*,30,55" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0">
+			<FRAMESET ROWS="80,*<?php echo(C_WMP_STREAM == "" || !C_EN_WMPLAYER ? "" : (C_EN_WMPLAYER == 2 ? ",200" : ",70"))?><?php echo(C_SUPPORT_PAID ? ",30" : "")?>,55" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0">
 				<FRAME SRC="<?php echo($ChatPath); ?>exit.php?<?php echo("From=$From&L=$L&Ver=$Ver&U=$U1&R=$R1&T=$T"); ?>" NAME="exit" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0" MARGINWIDTH=3 MARGINHEIGHT=3 SCROLLING="NO">
 				<FRAME SRC="<?php echo($ChatPath); ?>usersH.php?<?php echo("From=$From&L=$L&Ver=$Ver&U=$U1&R=$R1&T=$T&D=$D&N=$N$AddPwd2Url"); ?>" NAME="users" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0" MARGINWIDTH=3 MARGINHEIGHT=3 NORESIZE>
+<?php
+if (C_EN_WMPLAYER && C_WMP_STREAM != "")
+{
+?>
+				<FRAME SRC="<?php echo($ChatPath); ?>player.php" NAME="streaming" MARGINWIDTH=0 MARGINHEIGHT=0 SCROLLING="NO">
+<?php
+}
+if (C_SUPPORT_PAID)
+{
+?>
 				<FRAME SRC="<?php echo($ChatPath); ?>support.php?<?php echo("R=$R1&L=$L"); ?>" NAME="support" FRAMESPACING="0" MARGINWIDTH=0 MARGINHEIGHT=0 SCROLLING="NO">
+<?php
+}
+?>
 				<FRAME SRC="<?php echo($ChatPath); ?>link.php?<?php echo("R=$R1&L=$L"); ?>" NAME="link" FRAMEBORDER="0" BORDER="0" FRAMESPACING="0" MARGINWIDTH=0 MARGINHEIGHT=0 SCROLLING="NO">
 			</FRAMESET>
 		</FRAMESET>
@@ -126,14 +139,25 @@ else
 			<FRAME SRC="<?php echo($ChatPath); ?>messagesL.php?<?php echo("From=$From&L=$L&Ver=$Ver&U=$U1&R=$R1&T=$T&D=$D&N=$N&O=$O&ST=$ST&NT=$NT$AddPwd2Url"); ?>" NAME="messages" MARGINWIDTH=3 MARGINHEIGHT=3>
 			<FRAME SRC="<?php echo($ChatPath); ?>input.php?<?php echo("From=$From&L=$L&Ver=$Ver&U=$U1&R=$R1&T=$T&D=$D&N=$N&O=$O&ST=$ST&NT=$NT$AddPwd2Url"); ?>" NAME="input" MARGINWIDTH=0 MARGINHEIGHT=0 SCROLLING="NO" NORESIZE>
 		</FRAMESET>
-		<FRAMESET ROWS="80,*,30,60" BORDER=0>
+		<FRAMESET ROWS="80,*<?php echo(C_WMP_STREAM == "" || !C_EN_WMPLAYER ? "" : (C_EN_WMPLAYER == 2 ? ",200" : ",70"))?><?php echo(C_SUPPORT_PAID ? ",30" : "")?>,60" BORDER=0>
 			<FRAME SRC="<?php echo($ChatPath); ?>exit.php?<?php echo("From=$From&L=$L&Ver=$Ver&U=$U1&R=$R1&T=$T"); ?>" NAME="exit" MARGINWIDTH=3 MARGINHEIGHT=3 SCROLLING="NO">
 			<FRAME SRC="<?php echo($ChatPath); ?>usersL.php?<?php echo("From=$From&L=$L&Ver=$Ver&U=$U1&R=$R1&T=$T&D=$D&N=$N$AddPwd2Url"); ?>" NAME="users" MARGINWIDTH=3 MARGINHEIGHT=3 NORESIZE>
+<?php
+if (C_EN_WMPLAYER && C_WMP_STREAM != "")
+{
+?>
+				<FRAME SRC="<?php echo($ChatPath); ?>player.php" NAME="streaming" MARGINWIDTH=0 MARGINHEIGHT=0 SCROLLING="NO">
+<?php
+}
+if (C_SUPPORT_PAID)
+{
+?>
 			<FRAME SRC="<?php echo($ChatPath); ?>support.php?<?php echo("R=$R1&L=$L"); ?>" NAME="support" MARGINWIDTH=0 MARGINHEIGHT=0 SCROLLING="NO">
-			<FRAME SRC="<?php echo($ChatPath); ?>link.php?<?php echo("R=$R1&L=$L"); ?>" NAME="link" MARGINWIDTH=0 MARGINHEIGHT=0 SCROLLING="NO">
+<?php
+}
+?>			<FRAME SRC="<?php echo($ChatPath); ?>link.php?<?php echo("R=$R1&L=$L"); ?>" NAME="link" MARGINWIDTH=0 MARGINHEIGHT=0 SCROLLING="NO">
 		</FRAMESET>
 	</FRAMESET>
 	<?php
 }
-
 ?>

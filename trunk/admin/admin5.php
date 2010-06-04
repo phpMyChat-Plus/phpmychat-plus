@@ -361,6 +361,7 @@ if (UPD_CHECK)
 					<li><a href="#pm">Private messaging</a></li>
 					<li><a href="#bot">Bot settings</a></li>
 					<li><a href="#commands">Commands</a></li>
+					<li><a href="#mmedia">Multimedia</a></li>
 					<li><a href="#quick">Quick Menus</a></li>
 					<li><a href="#avatars">Avatars & Gravatars</a></li>
 					<li><a href="#logging">Logging Mod</a></li>
@@ -630,7 +631,9 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"SEND_BDAY_EMAIL = '$vSEND_BDAY_EMAIL', ".
 						"SEND_BDAY_TIME = '$vSEND_BDAY_TIME', ".
 						"SEND_BDAY_INTVAL = '$vSEND_BDAY_INTVAL', ".
-						"SEND_BDAY_PATH = '$vSEND_BDAY_PATH'".
+						"SEND_BDAY_PATH = '$vSEND_BDAY_PATH', ".
+						"EN_WMPLAYER = '$vEN_WMPLAYER', ".
+						"WMP_STREAM = '$vWMP_STREAM'".
 				" WHERE ID='0'";
 
 		$DbLink->query($query);
@@ -2146,7 +2149,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>Enter the max number of dice per throw.</b><br />
-    	<i><font color=red>Use a value smaller than 99.</font>
+    	<i><font color=red>Use a value smaller than 99.</font><br />
 		Hint: Needed ONLY for Dice v.2. Please note that increasing this value too much, will lead to a load of how many dice images you choose, which can return delays displaying the messages (drastically for non-IE browsers)</i>
     </td>
     <td>
@@ -2161,33 +2164,6 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Set the maximum size for resizing posted pictures using /img command</b>
-	</td>
-    <td>
-		<input name="vMAX_PIC_SIZE" type="text" size="7" maxlength="3" value="<?php echo $MAX_PIC_SIZE; ?>">
-	</td>
-</tr>
-<tr>
-    <td><b>Enable posting videos (e.g. YouTube) by using the /video command</b>
-    	<i>Hints: If disabled, only the links to the original video source will be posted in chat; if enabled, any user can post a video that can be watched directly in chat by all users; setting to admins only will only show videos posted by admins and topmoders, rest of the users posting only links to the original video source.</i>
-	</td>
-    <td>
-        <select name="vALLOW_VIDEO">
-	        <option value="0"<?php if($ALLOW_VIDEO==0){ echo " selected"; } ?>>Disabled</option>
-	        <option value="1"<?php if($ALLOW_VIDEO==1){ echo " selected"; } ?>>Enabled</option>
-	        <option value="2"<?php if($ALLOW_VIDEO==2){ echo " selected"; } ?>>From admins only</option>
-        </select>
-	</td>
-</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b>Set the width and height of the Video Player</b>
-	</td>
-    <td>
-		W: <input name="vVIDEO_WIDTH" type="text" size="4" maxlength="3" value="<?php echo $VIDEO_WIDTH; ?>">&nbsp;
-		H: <input name="vVIDEO_HEIGHT" type="text" size="4" maxlength="3" value="<?php echo $VIDEO_HEIGHT; ?>">
-	</td>
-</tr>
-<tr>
     <td><b>Default sort order in the users lists (/sort command).</b><br />
     	<i>Hint: users can also use the /sort command to change their sorting order</i>
     </td>
@@ -2197,6 +2173,60 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	        <option value="1"<?php if($USERS_SORT_ORD==1){ echo " selected"; } ?>>Alphabetically</option>
         </select>
     </td>
+</tr>
+<tr>
+    <td><b>Set the maximum size for resizing posted pictures using /img command</b>
+	</td>
+    <td>
+		<input name="vMAX_PIC_SIZE" type="text" size="7" maxlength="3" value="<?php echo $MAX_PIC_SIZE; ?>">
+	</td>
+</tr>
+</table>
+<table align="center" width="780" class=table>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="mmedia"></a><b>Multimedia</b></td></tr>
+	<tr class=\"thumbIndex\">
+		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+	</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Enable posting videos (e.g. YouTube) by using the /video command</b><br />
+		<i>Hints: If disabled, only the links to the original video source will be posted in chat; if enabled, any user can post a video that can be watched directly in chat by all users; setting to admins only will only show videos posted by admins and topmoders, rest of the users posting only links to the original video source.</i>
+	</td>
+    <td>
+        <select name="vALLOW_VIDEO">
+	        <option value="0"<?php if($ALLOW_VIDEO==0){ echo " selected"; } ?>>Disabled</option>
+	        <option value="1"<?php if($ALLOW_VIDEO==1){ echo " selected"; } ?>>Enabled</option>
+	        <option value="2"<?php if($ALLOW_VIDEO==2){ echo " selected"; } ?>>From admins only</option>
+        </select>
+	</td>
+</tr>
+<tr>
+    <td><b>Set the width and height of the Video Player</b>
+	</td>
+    <td>
+		W: <input name="vVIDEO_WIDTH" type="text" size="4" maxlength="3" value="<?php echo $VIDEO_WIDTH; ?>">&nbsp;
+		H: <input name="vVIDEO_HEIGHT" type="text" size="4" maxlength="3" value="<?php echo $VIDEO_HEIGHT; ?>">
+	</td>
+</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Enable the MediaPlayer add-on in chat</b><br />
+    	<i><font color=red>Choose the correct format as the frame will take the according size (audio < video).</font><br />
+    	<i>Hints: If enabled, a valid streaming URL must be also set in the next field. You can set either a static audio/video source or a radioplayer streaming server. E.g. http://playlist.yahoo.com/makeplaylist.dll?id=1369080&segment=149773 (NASA TV live station)</i>
+	</td>
+    <td>
+        <select name="vEN_WMPLAYER">
+	        <option value="0"<?php if($EN_WMPLAYER==0){ echo " selected"; } ?>>Disabled</option>
+	        <option value="1"<?php if($EN_WMPLAYER==1){ echo " selected"; } ?>>Audio/Radio</option>
+	        <option value="2"<?php if($EN_WMPLAYER==2){ echo " selected"; } ?>>Video/TV</option>
+        </select>
+	</td>
+</tr>
+<tr>
+    <td><b>The path to the streaming URL.</b>
+	</td>
+    <td>
+		<input name="vWMP_STREAM" type="text" size="25" maxlength="255" value="<?php echo $WMP_STREAM; ?>">
+	</td>
 </tr>
 </table>
 <table align="center" width="780" class=table>

@@ -308,6 +308,8 @@ CREATE TABLE ".$t_config." (
  SEND_BDAY_TIME tinyint(1) NOT NULL default '0',
  SEND_BDAY_INTVAL tinyint(1) NOT NULL default '7',
  SEND_BDAY_PATH varchar(255) NOT NULL default 'files/birthday/bday_greetings.txt',
+ EN_WMPLAYER enum('0','1','2') NOT NULL default '0',
+ WMP_STREAM varchar(255) default NULL,
  PRIMARY KEY (ID)
 ) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);

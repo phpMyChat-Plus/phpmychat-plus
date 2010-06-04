@@ -963,6 +963,8 @@ $SEND_BDAY_EMAIL				= $row[175];
 $SEND_BDAY_TIME					= $row[176];
 $SEND_BDAY_INTVAL				= $row[177];
 $SEND_BDAY_PATH					= $row[178];
+$EN_WMPLAYER					= $row[179];
+$WMP_STREAM						= $row[180];
 
 $query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.com'";
 $result_bot = mysql_query($query_bot);
@@ -1408,6 +1410,10 @@ define("C_BDAY_EMAIL", $SEND_BDAY_EMAIL);
 define("C_BDAY_TIME", $SEND_BDAY_TIME);
 define("C_BDAY_INTVAL", $SEND_BDAY_INTVAL);
 define("C_BDAY_PATH", $SEND_BDAY_PATH);
+
+// MediaPlayer add-on by Ciprian
+define("C_EN_WMPLAYER", $EN_WMPLAYER);
+define("C_WMP_STREAM", $WMP_STREAM);
 ?&gt;</textarea></p>
 <?php } // END OF IS NOT WRITEABLE
 else {
@@ -1632,6 +1638,8 @@ else {
   	fputs ( $fh, '$SEND_BDAY_TIME					= $row[176];'.$lfeed );
   	fputs ( $fh, '$SEND_BDAY_INTVAL				= $row[177];'.$lfeed );
   	fputs ( $fh, '$SEND_BDAY_PATH					= $row[178];'.$lfeed );
+  	fputs ( $fh, '$EN_WMPLAYER					= $row[179];'.$lfeed );
+  	fputs ( $fh, '$WMP_STREAM						= $row[180];'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '$query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email=\'bot@bot.com\'";'.$lfeed );
   	fputs ( $fh, '$result_bot = mysql_query($query_bot);'.$lfeed );
@@ -2077,6 +2085,10 @@ else {
   	fputs ( $fh, 'define("C_BDAY_TIME", $SEND_BDAY_TIME);'.$lfeed );
   	fputs ( $fh, 'define("C_BDAY_INTVAL", $SEND_BDAY_INTVAL);'.$lfeed );
   	fputs ( $fh, 'define("C_BDAY_PATH", $SEND_BDAY_PATH);'.$lfeed );
+  	fputs ( $fh, ''.$lfeed );
+  	fputs ( $fh, '// MediaPlayer add-on by Ciprian'.$lfeed );
+  	fputs ( $fh, 'define("C_EN_WMPLAYER", $EN_WMPLAYER);'.$lfeed );
+  	fputs ( $fh, 'define("C_WMP_STREAM", $WMP_STREAM);'.$lfeed );
   	fputs ( $fh, '?>' );
   } // END OF WRITE INTO config.lib.php
   fclose ( $fh );
