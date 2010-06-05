@@ -509,7 +509,7 @@ define("L_LINKS_16", "Galleria Smilie"); // to open/see Posted Links window
 define("L_LINKS_17", "per ordinare in modo ascendente"); //Click here to ...
 define("L_LINKS_18", "per ordinare in modo discendente"); //Click here to ...
 define("L_LINKS_19", "per impostare/modificare il tuo Gravatar");
-define("L_SWITCH", "Cambia in"); // Switch to Language
+define("L_SWITCH", "Cambia in %s"); // Switch to Language
 define("L_SELECTED", "selezionato"); // E.g. "French - selected" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
 define("L_NOT_SELECTED", "non selezionato");

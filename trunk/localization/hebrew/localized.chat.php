@@ -512,7 +512,7 @@ define("L_LINKS_16", "גלריית סמיילים");
 define("L_LINKS_17", "למיון בסדר עולה");
 define("L_LINKS_18", "למיון בסדר יורד");
 define("L_LINKS_19", "לשמור את הגרווטר שלך");
-define("L_SWITCH", "מעבר אל"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
+define("L_SWITCH", "%s מעבר אל"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "נבחרה"); // E.g. "French - selected" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
 define("L_NOT_SELECTED", "לא נבחר");

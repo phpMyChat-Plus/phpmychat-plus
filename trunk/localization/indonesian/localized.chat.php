@@ -510,7 +510,7 @@ define("L_LINKS_16", "Kumpulan gambar Senyuman");
 define("L_LINKS_17", "urut dari atas ke bawah");
 define("L_LINKS_18", "urut dari bawah ke atas");
 define("L_LINKS_19", "untuk memodifikasi Gravatar"); // do not translate the word "Gravatar"!
-define("L_SWITCH", "Pindah ke"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
+define("L_SWITCH", "Pindah ke %s"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "dipilih"); // E.g. "French (selected)" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
 define("L_NOT_SELECTED", "tidak dipilih");

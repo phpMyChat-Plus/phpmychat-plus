@@ -509,7 +509,7 @@ define("L_LINKS_16", "Smiley Galleriet");
 define("L_LINKS_17", "for at sortere i stigende orden");
 define("L_LINKS_18", "for at sortere i faldende orden");
 define("L_LINKS_19", "hvis du vil oprette/ændre dit Gravatar");
-define("L_SWITCH", "Skift til"); // E.g. "Skift til italiensk" (Country Flags mouseover / Language switching)
+define("L_SWITCH", "Skift til %s"); // E.g. "Skift til italiensk" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "er valgt"); // E.g. "Fransk - er valgt" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
 define("L_NOT_SELECTED", "ikke valgt");

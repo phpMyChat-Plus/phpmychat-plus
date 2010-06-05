@@ -513,7 +513,7 @@ define("L_LINKS_16", "スマイリーギャラリー");
 define("L_LINKS_17", "昇順にする");
 define("L_LINKS_18", "降順にする");
 define("L_LINKS_19", "Gravatarを設定／修正する");
-define("L_SWITCH", "次の言語に切り替える："); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
+define("L_SWITCH", "次の言語に切り替える:%s"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "現設定"); // E.g. "French - selected" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
 define("L_NOT_SELECTED", "未選択");
@@ -717,5 +717,5 @@ define("L_PRO_9", "年齢を公開する");
 define("L_PRO_10", "年齢");
 define("L_PRO_11", "%1\$d年%2\$dヶ月と%3\$d日");
 define("L_DOB_TIT_1", "誕生日リスト"); // The list of birthdays in descending order
-$L_DOB_SUBJ = "%sさん、お誕生日おめでとう！"); // Firstname (if set) or Username
+$L_DOB_SUBJ = "%sさん、お誕生日おめでとう！"; // Firstname (if set) or Username
 ?>

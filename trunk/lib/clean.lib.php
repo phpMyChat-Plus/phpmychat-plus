@@ -61,7 +61,7 @@ if(C_BDAY_EMAIL)
 	$ChatB->query("SELECT username,firstname,lastname,email,birthday,slang FROM ".C_REG_TBL." WHERE birthday IS NOT NULL AND CONCAT(YEAR(NOW()),'-',RIGHT(birthday,5)) BETWEEN '$before_today' AND '$today' AND (bday_email_sent<'".$max_email_intval."' OR bday_email_sent is NULL OR bday_email_sent='') ORDER BY birthday ASC");
 	if ($ChatB->num_rows() > 0)
 	{
-		include("lib/mail_validation.lib.php");
+		include_once("lib/mail_validation.lib.php");
 		if (C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@"))
 		{
 			if (isset($MailFunctionOn))

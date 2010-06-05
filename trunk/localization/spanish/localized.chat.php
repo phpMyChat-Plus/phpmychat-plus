@@ -502,7 +502,7 @@ define("L_LINKS_16", "Banque de smileys");
 define("L_LINKS_17", "para sortear en orden ascendente");
 define("L_LINKS_18", "para sortear en orden descendente");
 define("L_LINKS_19", "para agregar/modificar su Gravatar");
-define("L_SWITCH", "Cambiar a");
+define("L_SWITCH", "Cambiar a %s");
 define("L_SELECTED", "seleccionado");
 define("L_SELECTED_F", ""); // feminine word, if it's the case
 define("L_NOT_SELECTED", "no seleccionado");

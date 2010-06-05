@@ -509,7 +509,7 @@ define("L_LINKS_16", "Smiley Galéria");
 define("L_LINKS_17", " a növekvő sorrendhez");
 define("L_LINKS_18", " a csökkenő sorrendhez");
 define("L_LINKS_19", " a beállítani/módosítani a Gravatar-od");
-define("L_SWITCH", "Váltás erre"); // E.g. "Váltás olaszra" (Country Flags mouseover / Language switching)
+define("L_SWITCH", "Váltás erre %s"); // E.g. "Váltás olaszra" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "kiválasztva"); // E.g. "francia - kiválasztva" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine form
 define("L_NOT_SELECTED", "nincs kiválasztva");

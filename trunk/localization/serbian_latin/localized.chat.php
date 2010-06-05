@@ -516,7 +516,7 @@ define("L_LINKS_16", "Smeško Galerija");
 define("L_LINKS_17", "da poredate uzlazno");
 define("L_LINKS_18", "da poredate silazno");
 define("L_LINKS_19", "da se postavi/modifikuje vaš Gravatar");
-define("L_SWITCH", "Prebacite na"); // E.g. "Prebacite na Talijanski" (Country Flags mouseover / Language switching)
+define("L_SWITCH", "Prebacite na %s"); // E.g. "Prebacite na Talijanski" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "odabran"); // E.g. "Francuski - odabran" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", "odabrana"); // feminine word, if it's the case
 define("L_NOT_SELECTED", "nije odabran");

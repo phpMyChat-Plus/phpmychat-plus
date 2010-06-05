@@ -511,7 +511,7 @@ define("L_LINKS_16", "Галерия Усмивки");
 define("L_LINKS_17", "за да сортирате възхоодящо");
 define("L_LINKS_18", "за да сортирате низходящо");
 define("L_LINKS_19", "за да нагласите/промените Вашия Gravatar");
-define("L_SWITCH", "Превключете на"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
+define("L_SWITCH", "Превключете на %s"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "избран"); // E.g. "French (selected)" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
 define("L_NOT_SELECTED", "неизбран");
