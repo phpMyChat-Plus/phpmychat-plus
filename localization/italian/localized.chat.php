@@ -349,6 +349,7 @@ define("INFO_BOT", "Il nostro bot disponibile è:");
 
 // Profile mod
 define("L_PRO_1", "Linguaggio parlato");
+define("L_PRO_1a", "Lingua");
 define("L_PRO_2", "Link favorito 1");
 define("L_PRO_3", "Link favorito 2");
 define("L_PRO_4", "Descrizione");
@@ -708,6 +709,6 @@ define("L_PRO_8", "mostra la tua data di nascita");
 define("L_PRO_9", "mostra pubblica la tua età");
 define("L_PRO_10", "Età");
 define("L_PRO_11", "%1\$d anni, %2\$d mesi e %3\$d giorni"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
-define("L_DOB_SUBJ", "Buon compleanno %s!");
 define("L_DOB_TIT_1", "Lista compleanni");
+$L_DOB_SUBJ = "Buon compleanno %s!";
 ?>

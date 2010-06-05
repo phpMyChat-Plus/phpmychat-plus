@@ -343,6 +343,7 @@ define("INFO_BOT", "Bot có sẵn của chúng ta:");
 
 // Profile mod
 define("L_PRO_1", "Những ngôn ngữ được nói");
+define("L_PRO_1a", "Ngôn ngư");
 define("L_PRO_2", "Mối liên kết ưu thích 1");
 define("L_PRO_3", "Mối liên kết ưu thích 2");
 define("L_PRO_4", "Sự mô tả");

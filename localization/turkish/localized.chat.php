@@ -341,6 +341,7 @@ define("INFO_BOT", "Geçerli robotumuz:");
 
 // Profile mod
 define("L_PRO_1", "Diller");
+define("L_PRO_1a", "Dil");
 define("L_PRO_2", "Favori bağlantı 1");
 define("L_PRO_3", "Favori bağlantı 2");
 define("L_PRO_4", "Açıklama");

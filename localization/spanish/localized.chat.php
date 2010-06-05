@@ -343,6 +343,7 @@ define("INFO_BOT", "Nuestro bot disponible es:");
 
 // Profile mod
 define("L_PRO_1", "Idiomas que habla");
+define("L_PRO_1a", "Idioma");
 define("L_PRO_2", "Vínculo favorito 1");
 define("L_PRO_3", "Vínculo favorito 2");
 define("L_PRO_4", "Descripción");

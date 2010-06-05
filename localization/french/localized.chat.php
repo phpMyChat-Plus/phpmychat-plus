@@ -346,6 +346,7 @@ define("INFO_BOT", "Notre robot disponible est:");
 
 // Profile mod
 define("L_PRO_1", "Langues parlées");
+define("L_PRO_1a", "Langue");
 define("L_PRO_2", "URL favorite 1");
 define("L_PRO_3", "URL favorite 2");
 define("L_PRO_4", "Description");
@@ -718,6 +719,6 @@ define("L_PRO_8", "publier la date de naissance en information publique");
 define("L_PRO_9", "montrer l’âge en information publique ");	
 define("L_PRO_10", "Age");
 define("L_PRO_11", "%1\$d ans, %2\$d mois et %3\$d jours"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
-define("L_DOB_SUBJ", "Bon Anniversaire %s!");
 define("L_DOB_TIT_1", "Liste des anniversaires");
+$L_DOB_SUBJ = "Bon Anniversaire %s!";
 ?>

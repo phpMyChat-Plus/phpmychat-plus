@@ -35,6 +35,8 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 02.06.2010 - 1.94-beta5:
+- fixed some Birthday email related localized output; the wishes will be received in the user specific language or default language of the chat (functionality related)
+- changed "Spoken languages" profile field to "Language", selectable from the available chat languages; the purpose is to support localized emails from chat; (functionality related)
 - added the MediaPlayer plugin mod for video/audio stream embeding; admins can set the streaming source in Admin panel; (functionality extension)
 08.05.2010 - 1.94-beta4:
 - fixed a bot entrance issue; (functionality related)

@@ -58,29 +58,31 @@ if(C_BDAY_EMAIL)
 	$email_intval = C_BDAY_TIME * 60 + C_BDAY_INTVAL * 24 *60 * 60;
 	$max_email_intval = time() - $email_intval - 24 *60 * 60;
 	$before_today = strftime("%Y-%m-%d",time() - $email_intval);
-	$ChatB->query("SELECT username,firstname,lastname,email,birthday FROM ".C_REG_TBL." WHERE birthday IS NOT NULL AND CONCAT(YEAR(NOW()),'-',RIGHT(birthday,5)) BETWEEN '$before_today' AND '$today' AND bday_email_sent<'".$max_email_intval."' ORDER BY birthday ASC");
+	$ChatB->query("SELECT username,firstname,lastname,email,birthday,slang FROM ".C_REG_TBL." WHERE birthday IS NOT NULL AND CONCAT(YEAR(NOW()),'-',RIGHT(birthday,5)) BETWEEN '$before_today' AND '$today' AND (bday_email_sent<'".$max_email_intval."' OR bday_email_sent is NULL OR bday_email_sent='') ORDER BY birthday ASC");
 	if ($ChatB->num_rows() > 0)
 	{
-		include_once("lib/mail_validation.lib.php");
+		include("lib/mail_validation.lib.php");
 		if (C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@"))
 		{
 			if (isset($MailFunctionOn))
 			{
 				if(file_exists(C_BDAY_PATH)) $greets = file(C_BDAY_PATH);
-				while(list($dob_username,$dob_firstname,$dob_lastname,$dob_email,$dob_birthday) = $ChatB->next_record())
+				while(list($dob_username,$dob_firstname,$dob_lastname,$dob_email,$dob_birthday,$dob_lang) = $ChatB->next_record())
 				{
 					$dob_name = $dob_firstname != "" ? $dob_firstname : $dob_username;
 					$greet = rand(0, sizeof($greets)-1);
 					$greet_text = $greets[$greet];
 					$greet_text = str_replace("<br />",$eol,$greet_text);
-//					$dob1_subject = sprintf(L_DOB_SUBJ, $dob_name);
-					$dob1_subject = sprintf("Happy Birthday %s", $dob_name);
+					if($dob_lang && file_exists("localization/".$dob_lang."/localized.chat.php")) include_once("localization/".$dob_lang."/localized.chat.php");
+					else include_once("localization/".C_LANGUAGE."/localized.chat.php");
+					$dob1_subject = sprintf($L_DOB_SUBJ, $dob_name);
 					if(send_dob_email($dob_name, $dob_email, "[".(C_CHAT_NAME != "" ? C_CHAT_NAME : APP_NAME)."] ". $dob1_subject, $greet_text))
 					{
 						include("admin/mail4admin.lib.php");
 						send_email_admin($Sender_name." <".$Sender_email.">", "[".(C_CHAT_NAME != "" ? C_CHAT_NAME : APP_NAME)."] ".$dob1_subject." - copy", "This is a copy:".$eol.$eol.$greet_text.$eol.$eol.$dob1_subject.$eol.$dob_birthday);
-						$ChatB->query("UPDATE ".C_REG_TBL." SET bday_email_sent=".time()." WHERE username='$dob_username'");
+						$ChatB->query("UPDATE ".C_REG_TBL." SET bday_email_sent=".time()." WHERE username='".$dob_username."'");
 					}
+					unset($dob_username,$dob_firstname,$dob_lastname,$dob_name,$dob_email,$dob_birthday,$dob_lang,$dob1_subject);
 				}
 			}
 		}

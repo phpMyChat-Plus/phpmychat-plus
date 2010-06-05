@@ -349,6 +349,7 @@ define("INFO_BOT", "Unser Bot ist:");
 
 // Profile mod
 define("L_PRO_1", "Sprachen");
+define("L_PRO_1a", "Sprache");
 define("L_PRO_2", "Favoriten Link 1");
 define("L_PRO_3", "Favoriten Link 2");
 define("L_PRO_4", "Beschreibung");
@@ -712,6 +713,6 @@ define("L_PRO_8", "zeige Geburts Tag in Öffentlich Info");
 define("L_PRO_9", "zeige Alte in Öffentlich Info");
 define("L_PRO_10", "Alte");
 define("L_PRO_11", "%1\$d Jahre, %2\$d Monate und %3\$d Tagen"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
-define("L_DOB_SUBJ", "Herzlichen Glückwunsch zum Geburtstag %s!");
 define("L_DOB_TIT_1", "Geburts Tag List");
+$L_DOB_SUBJ = "Herzlichen Glückwunsch zum Geburtstag %s!";
 ?>

@@ -343,6 +343,7 @@ define("INFO_BOT", "Vår tillgängliga bot är:");
 
 //profile mod
 define("L_PRO_1", "Talar språk");
+define("L_PRO_1a", "Språk");
 define("L_PRO_2", "Favorit länk 1");
 define("L_PRO_3", "Favorit länk 2");
 define("L_PRO_4", "Beskrivning");

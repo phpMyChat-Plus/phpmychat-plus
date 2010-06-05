@@ -345,6 +345,7 @@ define("INFO_BOT", "Our available bot is:");
 
 // Profile mod
 define("L_PRO_1", "שפות מדוברות");
+define("L_PRO_1a", "שפה");
 define("L_PRO_2", "קישור נבחר 1");
 define("L_PRO_3", "קישור נבחר 2");
 define("L_PRO_4", "תאור");
@@ -697,5 +698,4 @@ define("L_OPID_REG", "Import your OpenID profile");
 // Support buttons
 define("L_SUPP_WARN", "You have chosen to contribute to the free development of\\n".APP_NAME." by making a donation to the developer.\\nThank you for your support!\\n\\nNote: the recipient is not the owner of this chat.\\nPlease enter the amount on the next page.\\n\\nContinue?");
 define("L_SUPP_ALT", "Support with PayPal the development of ".APP_NAME." - it's Fast, Free and Secure!");
-define("L_PAYPAL", "PayPal - The safer, easier way to pay online.");
 ?>
