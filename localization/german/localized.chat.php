@@ -511,7 +511,7 @@ define("L_LINKS_16", "Smilie Gallerie"); // to open/see Posted Links window
 define("L_LINKS_17", "um aufsteigend sortieren");
 define("L_LINKS_18", "um absteigend sortieren");
 define("L_LINKS_19", "um deinen Gravatar zu bearbeiten");
-define("L_SWITCH", "Wechseln zu"); // Switch to English (Country Flags over / Language switching)
+define("L_SWITCH", "Wechseln zu %s"); // Switch to English (Country Flags over / Language switching)
 define("L_SELECTED", "gewählt"); // French - selected (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
 define("L_NOT_SELECTED", "nicht gewählt");

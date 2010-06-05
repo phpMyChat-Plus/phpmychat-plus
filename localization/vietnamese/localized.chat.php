@@ -502,7 +502,7 @@ define("L_LINKS_16", "phòng triển lãm tranh"); // to open/see Posted Links w
 define("L_LINKS_17", "để phân loại tăng lên");
 define("L_LINKS_18", "để phân loại đi xuống");
 define("L_LINKS_19", "để thiết lập/sửa chữa Gravatar");
-define("L_SWITCH", "Sự Chuyển đổi Tới");
+define("L_SWITCH", "Sự Chuyển đổi Tới %s");
 define("L_SELECTED", "chọn");
 define("L_SELECTED_F", ""); // feminine word, if it's the case
 define("L_NOT_SELECTED", "không chọn");

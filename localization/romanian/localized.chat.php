@@ -514,7 +514,7 @@ define("L_LINKS_16", "Galerie Zâmbete");
 define("L_LINKS_17", "pentru a sorta crescător");
 define("L_LINKS_18", "pentru a sorta descrescător");
 define("L_LINKS_19", "pentru a seta/modifica Gravatar-ul");
-define("L_SWITCH", "Schimbă în");
+define("L_SWITCH", "Schimbă în %s");
 define("L_SELECTED", "selectat");
 define("L_SELECTED_F", "selectată");
 define("L_NOT_SELECTED", "neselectat");

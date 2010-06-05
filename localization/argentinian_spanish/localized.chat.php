@@ -510,7 +510,7 @@ define("L_LINKS_16", "Galeria de emoticones");
 define("L_LINKS_17", "para orden ascendente");
 define("L_LINKS_18", "para orden descendente");
 define("L_LINKS_19", "para setear/modificar tu Gravatar");
-define("L_SWITCH", "Cambiar a"); // Switch to English (Country Flags over / Language switching)
+define("L_SWITCH", "Cambiar a %s"); // Switch to English (Country Flags over / Language switching)
 define("L_SELECTED", "seleccionado"); // French - selected (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
 define("L_NOT_SELECTED", "no seleccionado");

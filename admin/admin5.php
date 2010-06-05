@@ -34,8 +34,19 @@ function swapImage(img,imgid) {
 	if (imgid == "flagToSwap")
 	{
 		var path = '<?php echo("./".$ChatPath."localization/"); ?>';
-		if(document.getElementById('3Dflag').value == "1") var flagtype = '/images/flag.gif';
-		else var flagtype = '/images/flag0.gif';
+		var dropd = document.getElementById(img);
+		var type = document.getElementById('3Dflag').value;
+		var enfmt = document.getElementById('ENflag').value;
+		if(type == "1")
+		{
+			if(enfmt == "US" && dropd.value == "english") var flagtype = '/images/flag_us.gif';
+			else var flagtype = '/images/flag.gif';
+		}
+		else
+		{
+			if(enfmt == "US" && dropd.value == "english") var flagtype = '/images/flag_us0.gif';
+			else var flagtype = '/images/flag0.gif';
+		}
 		image.src = path + dropd.value + flagtype;
 	}
 	if (imgid == "ENToSwap")
@@ -897,14 +908,24 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 					<?php
 			};
 			unset($AvailableLanguages);
+			if($namesel == "english" && C_ENGLISH_FORMAT == "US")
+			{
+				$flagsel_3d = "flag_us.gif";
+				$flagsel = "flag_us0.gif";
+			}
+			else
+			{
+				$flagsel_3d = "flag.gif";
+				$flagsel = "flag0.gif";
+			}
 			?>
-	    </select>&nbsp;<img style="vertical-align:middle" id="flagToSwap" src="<?php echo("./".$ChatPath."localization/".$namesel."/images/".($FLAGS_3D ? "flag.gif" : "flag0.gif")); ?>" <?php echo("border=0 ALT=\"Language Flag selector\" Title=\"Language Flag selector\""); ?> />
+	    </select>&nbsp;<img style="vertical-align:middle" id="flagToSwap" src="<?php echo("./".$ChatPath."localization/".$namesel."/images/".($FLAGS_3D ? $flagsel_3d : $flagsel)); ?>" <?php echo("border=0 ALT=\"Language Flag selector\" Title=\"Language Flag selector\""); ?> />
     </td>
 </tr>
 <tr>
     <td><b>English format (for flags and date&time formats).</b>
 	</td>
-    <td><select name="vENGLISH_FORMAT" id="ENflag" onChange="swapImage('ENflag','ENToSwap')">
+    <td><select name="vENGLISH_FORMAT" id="ENflag" onChange="swapImage('ENflag','ENToSwap'); swapImage('3Dflag','3DToSwap'); swapImage('flags','flagToSwap')">
 	        <option value="UK"<?php if($ENGLISH_FORMAT=="UK"){ echo " selected"; $ENsel = ($FLAGS_3D) ? "flag.gif" : "flag0.gif"; } ?>><?php echo(L_LANG_ENUK); ?></option>
 	        <option value="US"<?php if($ENGLISH_FORMAT=="US"){ echo " selected"; $ENsel = ($FLAGS_3D) ? "flag_us.gif" : "flag_us0.gif"; } ?>><?php echo(L_LANG_ENUS); ?></option>
         </select>&nbsp;<img style="vertical-align:middle" id="ENToSwap" src="<?php echo(($FLAGS_3D) ? "./".$ChatPath."localization/english/images/".$ENsel."" : "./".$ChatPath."localization/english/images/".$ENsel.""); ?>" <?php echo("border=0 ALT=\"English locale formats\" Title=\"English locale formats\""); ?> />
@@ -923,7 +944,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 <tr>
     <td><b>Flags images type.</b>
 	</td>
-    <td><select name="vFLAGS_3D" id="3Dflag" onChange="swapImage('3Dflag','3DToSwap')">
+    <td><select name="vFLAGS_3D" id="3Dflag" onChange="swapImage('3Dflag','3DToSwap'); swapImage('ENflag','ENToSwap'); swapImage('flags','flagToSwap')">
 	        <option value="0"<?php if($FLAGS_3D==0){ echo " selected"; } ?>>2D (std)</option>
 	        <option value="1"<?php if($FLAGS_3D==1){ echo " selected"; } ?>>3D (new)</option>
         </select>&nbsp;<img style="vertical-align:middle" id="3DToSwap" src="<?php echo(($FLAGS_3D) ? "./".$ChatPath."localization/english/images/flag.gif" : "./".$ChatPath."localization/english/images/flag0.gif"); ?>" <?php echo("border=0 ALT=\"Flags format\" Title=\"Flags format\""); ?> />

@@ -689,8 +689,7 @@ while(list($key, $name) = each($AvailableLanguages))
 		else
 		{
 			$FLAG_OVER = $FLAG_NAME;
-			if ($L=="turkish") $FLAG_STATUS = $FLAG_NAME." ".L_SWITCH;
-			else $FLAG_STATUS = L_SWITCH." ".$FLAG_NAME;
+			$FLAG_STATUS = sprintf(L_SWITCH,$FLAG_NAME);
 		}
 		if ($name != $L) echo("<A HREF=\"$Action?L=${name}\" onMouseOver=\"window.status='".$FLAG_STATUS.".'; return true;\" Title=\"".$FLAG_OVER."\">");
 		echo("<IMG SRC=\"${ChatPath}localization/${name}/images/".$flag."\" onMouseOver=\"window.status='".$FLAG_STATUS.".'; return true;\" BORDER=0 ALT=\"".$FLAG_OVER."\" Title=\"".$FLAG_OVER."\">");

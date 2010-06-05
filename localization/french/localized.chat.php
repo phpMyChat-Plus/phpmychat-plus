@@ -514,7 +514,7 @@ define("L_LINKS_16", "Galerie de Smiley");
 define("L_LINKS_17", "pour trier par ordre croissant");
 define("L_LINKS_18", "pour trier par ordre décroissant");
 define("L_LINKS_19", "pour définir/modifier votre Gravatar");
-define("L_SWITCH", "Basculer en"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
+define("L_SWITCH", "Basculer en %s"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "sélectionné"); // E.g. "French - selected" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", "sélectionnée"); // feminine word, if it's the case
 define("L_NOT_SELECTED", "non sélectionné");

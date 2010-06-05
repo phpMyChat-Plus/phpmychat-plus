@@ -412,8 +412,17 @@ function swapImage(img,imgid) {
 	{
 		var path = '<?php echo("./".$ChatPath."localization/"); ?>';
 		var type = '<?php echo(C_FLAGS_3D); ?>';
-		if(type == "1") var flagtype = '/images/flag.gif';
-		else var flagtype = '/images/flag0.gif';
+		var enfmt = '<?php echo(C_ENGLISH_FORMAT); ?>';
+		if(type == "1")
+		{
+			if(enfmt == "US" && dropd.value == "english") var flagtype = '/images/flag_us.gif';
+			else var flagtype = '/images/flag.gif';
+		}
+		else
+		{
+			if(enfmt == "US" && dropd.value == "english") var flagtype = '/images/flag_us0.gif';
+			else var flagtype = '/images/flag0.gif';
+		}
 		image.src = path + dropd.value + flagtype;
 	}
 	if (imgid == "genderToSwap")
@@ -734,8 +743,18 @@ if (C_PRIV_POPUP == 1)
 					<?php
 			};
 			unset($AvailableLanguages);
+			if($namesel == "english" && C_ENGLISH_FORMAT == "US")
+			{
+				$flagsel_3d = "flag_us.gif";
+				$flagsel = "flag_us0.gif";
+			}
+			else
+			{
+				$flagsel_3d = "flag.gif";
+				$flagsel = "flag0.gif";
+			}
 			?>
-	    </SELECT>&nbsp;<img style="vertical-align:middle" id="flagToSwap" src="<?php echo("./".$ChatPath."localization/".$namesel."/images/".(C_FLAGS_3D ? "flag.gif" : "flag0.gif")); ?>" <?php echo("border=0 ALT=\"".$namesel."\" Title=\"".$namesel."\""); ?> /><?php if (!$done && $SLANG != $L) echo("&nbsp;<SPAN CLASS=\"error\">*</SPAN>"); ?>
+	    </SELECT>&nbsp;<img style="vertical-align:middle" id="flagToSwap" src="<?php echo("./".$ChatPath."localization/".$namesel."/images/".(C_FLAGS_3D ? $flagsel_3d : $flagsel)); ?>" /><?php if (!$done && $SLANG != $L) echo("&nbsp;<SPAN CLASS=\"error\">*</SPAN>"); ?>
 			</TD>
 		</TR>
 		<TR>

@@ -506,7 +506,7 @@ define("L_LINKS_16", "Smilie Gallerij");
 define("L_LINKS_17", "om oplopend te sorteren");
 define("L_LINKS_18", "om aflopend te sorteren");
 define("L_LINKS_19", "om aan te passen/veranderen van jou Gravatar");
-define("L_SWITCH", "Schakel over naar");
+define("L_SWITCH", "Schakel over naar %s");
 define("L_SELECTED", "selecteer");
 define("L_SELECTED_F", ""); // feminine word, if it's the case
 define("L_NOT_SELECTED", "niet geselecteerd");

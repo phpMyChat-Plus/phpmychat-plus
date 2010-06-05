@@ -514,7 +514,7 @@ define("L_LINKS_18_N", "Büyükten küçüğe sıralamak için"); // numeric des
 define("L_LINKS_19", "Gravatarınızı ayarlamak/düzenlemek için");
 define("L_ASCa", "");
 define("L_DESCa", "");
-define("L_SWITCH", "Değiştir");
+define("L_SWITCH", "%s Değiştir");
 define("L_SELECTED", "seçildi");
 define("L_SELECTED_F", ""); // feminine word, if it's the case
 define("L_NOT_SELECTED", "seçilmedi");

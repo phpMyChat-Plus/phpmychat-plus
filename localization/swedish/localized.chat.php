@@ -502,7 +502,7 @@ define("L_LINKS_16", "Smilie Galleri");
 define("L_LINKS_17", "för att sortera stigande");
 define("L_LINKS_18", "för att sortera fallande");
 define("L_LINKS_19", "för att ställa in/ändra din Gravatar");
-define("L_SWITCH", "Ändra språk");
+define("L_SWITCH", "Ändra språk %s");
 define("L_SELECTED", "valt");
 define("L_SELECTED_F", ""); // feminine word, if it's the case
 define("L_NOT_SELECTED", "inget valt");
