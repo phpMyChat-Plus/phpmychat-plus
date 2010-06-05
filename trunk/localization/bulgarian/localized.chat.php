@@ -343,6 +343,7 @@ define("INFO_BOT", "Наличният ни бот е:");
 
 // Profile mod
 define("L_PRO_1", "Говорими езици");
+define("L_PRO_1a", "Език");
 define("L_PRO_2", "Любим линк 1");
 define("L_PRO_3", "Любим линк 2");
 define("L_PRO_4", "Oписание");

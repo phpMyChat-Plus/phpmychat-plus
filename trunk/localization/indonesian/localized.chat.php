@@ -342,6 +342,7 @@ define("INFO_BOT", "Robot kami yang tersedia yaitu:");
 
 // Profile mod
 define("L_PRO_1", "Bahasa sehari-hari");
+define("L_PRO_1a", "Bahasa");
 define("L_PRO_2", "Link favorit 1");
 define("L_PRO_3", "Link favorit 2");
 define("L_PRO_4", "Keterangan");

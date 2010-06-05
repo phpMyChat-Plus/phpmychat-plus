@@ -347,6 +347,7 @@ define("INFO_BOT", "Onze beschikbare bot is:");
 
 // Profile mod
 define("L_PRO_1", "Moedertaal");
+define("L_PRO_1a", "Taal");
 define("L_PRO_2", "Favoriete link 1");
 define("L_PRO_3", "Favoriete link 2");
 define("L_PRO_4", "Omschrijving");
@@ -707,5 +708,6 @@ define("L_PRO_8", "laat geboortedatum zien in publieke info");
 define("L_PRO_9", "laat leeftijd zien in publieke info");
 define("L_PRO_10", "Leeftijd");
 define("L_PRO_11", "%1\$d jaren, %2\$d maanden en %3\$d dagen");	//you can also change the order here 
-define("L_DOB_SUBJ", "Gefeliciteerd met je verjaardag, %s!"); 
+define("L_DOB_TIT_1", "Verjaardagenlijst");
+$L_DOB_SUBJ = "Gefeliciteerd met je verjaardag, %s!"; 
 ?>

@@ -342,6 +342,7 @@ define("INFO_BOT", "Denne chats bot hedder:");
 
 // Profile mod
 define("L_PRO_1", "Talte sprog");
+define("L_PRO_1a", "Sprog");
 define("L_PRO_2", "Favorit link 1");
 define("L_PRO_3", "Favorit link 2");
 define("L_PRO_4", "Beskrivelse");

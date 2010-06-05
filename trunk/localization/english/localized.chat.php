@@ -346,6 +346,7 @@ define("INFO_BOT", "Our available bot is:");
 
 // Profile mod
 define("L_PRO_1", "Spoken languages");
+define("L_PRO_1a", "Language");
 define("L_PRO_2", "Favorite link 1");
 define("L_PRO_3", "Favorite link 2");
 define("L_PRO_4", "Description");
@@ -724,7 +725,7 @@ define("L_AUDIO", "Audio file posted by");
 define("L_VIDEO", "Video posted by");
 define("L_HELP_VIDEO", "full path to the video or audio source to be posted");
 define("L_NO_VIDEO", "The URL cannot be embedded.\\nThis is not a valid URL of an accepted public video or audio source.\\nTry again!");
-define("L_ORIG_VIDEO", "to open the original site");
+define("L_ORIG_VIDEO", "to open the original source site");
 
 // Birthday mod - by Ciprian
 define("L_PRO_7", "Date of birth");
@@ -732,6 +733,6 @@ define("L_PRO_8", "show birthday in public information");
 define("L_PRO_9", "show age in public information");
 define("L_PRO_10", "Age");
 define("L_PRO_11", "%1\$d years, %2\$d months and %3\$d days");
-define("L_DOB_SUBJ", "Happy Birthday %s!");
 define("L_DOB_TIT_1", "Birthdays list");
+$L_DOB_SUBJ = "Happy Birthday %s!";
 ?>

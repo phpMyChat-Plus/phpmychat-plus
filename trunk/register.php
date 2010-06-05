@@ -263,7 +263,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      . "".L_REG_45.": ".$sex.$eol
      . "".L_REG_36.": ".($COUNTRY ? $COUNTRY : L_NOT_SELECTED).$eol
      . "".L_REG_32.": ".($WEBSITE ? $WEBSITE : L_NOT_SELECTED).$eol
-     . "".L_PRO_1.": ".($SLANG ? $SLANG : L_NOT_SELECTED).$eol
+     . "".L_PRO_1a.": ".($SLANG ? $SLANG : L_NOT_SELECTED).$eol
      . "".L_PRO_2.": ".($FAVLINK ? $FAVLINK : L_NOT_SELECTED).$eol
      . "".L_PRO_3.": ".($FAVLINK1 ? $FAVLINK1 : L_NOT_SELECTED).$eol
      . "".L_PRO_4.": ".($DESCRIPTION ? $DESCRIPTION : L_NOT_SELECTED).$eol
@@ -339,7 +339,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      . $eol."Gender: ".$sex
      . ($COUNTRY ? $eol."Country: ".$COUNTRY : "")
      . ($WEBSITE ? $eol."WWW: ".$WEBSITE."" : "")
-     . ($SLANG ? $eol.$eol."Spoken languages: ".$SLANG : "")
+     . ($SLANG ? $eol.$eol."Language: ".$SLANG : "")
      . ($FAVLINK ? $eol.$eol."Favorite link 1: ".$FAVLINK : "")
      . ($FAVLINK1 ? $eol."Favorite link 2: ".$FAVLINK1 : "")
      . ($DESCRIPTION ? $eol."Description: ".$DESCRIPTION : "")
@@ -424,13 +424,24 @@ function get_focus()
 function swapImage(img,imgid) {
 	var image = document.getElementById(imgid);
 	var dropd = document.getElementById(img);
-	var path = '<?php echo("./${ChatPath}images/gender_"); ?>';
-	if (dropd.value == "0") var gender = "none.gif";
-	else if (dropd.value == "1") var gender = "boy.gif";
-	else if (dropd.value == "2") var gender = "girl.gif";
-	else if (dropd.value == "3") var gender = "couple.gif";
-	else if (dropd.value == "4") var gender = "undefined.gif";
-	image.src = path + gender;
+	if (imgid == "flagToSwap")
+	{
+		var path = '<?php echo("./".$ChatPath."localization/"); ?>';
+		var type = '<?php echo(C_FLAGS_3D); ?>';
+		if(type == "1") var flagtype = '/images/flag.gif';
+		else var flagtype = '/images/flag0.gif';
+		image.src = path + dropd.value + flagtype;
+	}
+	if (imgid == "genderToSwap")
+	{
+		var path = '<?php echo("./${ChatPath}images/gender_"); ?>';
+		if (dropd.value == "0") var gender = "none.gif";
+		else if (dropd.value == "1") var gender = "boy.gif";
+		else if (dropd.value == "2") var gender = "girl.gif";
+		else if (dropd.value == "3") var gender = "couple.gif";
+		else if (dropd.value == "4") var gender = "undefined.gif";
+		image.src = path + gender;
+	}
 }
 // -->
 </SCRIPT>
@@ -619,7 +630,7 @@ else
 				<OPTION value="2" <?php if ($GENDER==2) { echo ("selected=\"selected\""); $genselected = "girl.gif"; }?>><?php echo(L_REG_47)?></OPTION>
 				<OPTION value="3" <?php if ($GENDER==3) { echo ("selected=\"selected\""); $genselected = "couple.gif"; }?>><?php echo(L_REG_44)?></OPTION>
 				<OPTION value="4" <?php if ($GENDER==4) { echo ("selected=\"selected\""); $genselected = "undefined.gif"; }?>><?php echo(L_REG_43)?></OPTION>
-				</SELECT>&nbsp;<img id="genderToSwap" src="<?php echo("./${ChatPath}images/gender_".$genselected.""); ?>" <?php echo("BORDER=0 ALT=\"".L_GEN_ICON."\" Title=\"".L_GEN_ICON."\""); ?> />
+				</SELECT>&nbsp;<img style="vertical-align:middle" id="genderToSwap" src="<?php echo("./${ChatPath}images/gender_".$genselected.""); ?>" <?php echo("BORDER=0 ALT=\"".L_GEN_ICON."\" Title=\"".L_GEN_ICON."\""); ?> />
 			</TD>
 		</TR>
 		<TR>
@@ -650,9 +661,75 @@ else
 			</TD>
 		</TR>
 		<TR>
-			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_1); ?> :</TD>
+			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_1a); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="SLANG" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($SLANG)) echo(stripslashes($SLANG)); ?>"<?php if ($done) echo(" READONLY"); ?>>
+		<?php
+			// Available languages
+			$AvailableLanguages = array();
+			$languageDirectories = dir('./'.$ChatPath.'localization/');
+			while($name = $languageDirectories->read())
+			{
+				if(is_dir('./'.$ChatPath.'localization/'.$name)
+					&& file_exists('./'.$ChatPath.'localization/'.$name.'/regex.txt')
+					&& file_exists('./'.$ChatPath.'localization/'.$name.'/localized.chat.php')
+					&& file_exists('./'.$ChatPath.'localization/'.$name.'/images/flag.gif'))
+				{
+					list($key) = file('./'.$ChatPath.'localization/'.$name.'/regex.txt');
+					$AvailableLanguages[$key] = $name;
+				};
+			};
+			$languageDirectories->close();
+			if (!function_exists("krsort")) include("./${ChatPath}localization/sort_languages.php");
+			krsort($AvailableLanguages);
+			asort($AvailableLanguages);
+			reset($AvailableLanguages);
+		?>
+		    <SELECT NAME="SLANG" id="flags" onChange="swapImage('flags','flagToSwap')">
+		<?php
+			$i = 0;
+			while(list($key, $name) = each($AvailableLanguages))
+			{
+				if ($name == "argentinian_spanish" && L_LANG_AR != "L_LANG_AR") $FLAG_NAME = L_LANG_AR;
+				elseif ($name == "bulgarian" && L_LANG_BG != "L_LANG_BG") $FLAG_NAME = L_LANG_BG;
+				elseif ($name == "brazilian_portuguese" && L_LANG_BR != "L_LANG_BR") $FLAG_NAME = L_LANG_BR;
+				elseif ($name == "czech" && L_LANG_CZ != "L_LANG_CZ") $FLAG_NAME = L_LANG_CZ;
+				elseif ($name == "danish" && L_LANG_DA != "L_LANG_DA") $FLAG_NAME = L_LANG_DA;
+				elseif ($name == "dutch" && L_LANG_NL != "L_LANG_NL") $FLAG_NAME = L_LANG_NL;
+				elseif ($name == "english" && L_LANG_EN != "L_LANG_EN") $FLAG_NAME = L_LANG_EN;
+				elseif ($name == "french" && L_LANG_FR != "L_LANG_FR") $FLAG_NAME = L_LANG_FR;
+				elseif ($name == "georgian" && L_LANG_KA != "L_LANG_KA") $FLAG_NAME = L_LANG_KA;
+				elseif ($name == "german" && L_LANG_DE != "L_LANG_DE") $FLAG_NAME = L_LANG_DE;
+				elseif ($name == "greek" && L_LANG_GR != "L_LANG_GR") $FLAG_NAME = L_LANG_GR;
+				elseif ($name == "hebrew" && L_LANG_HE != "L_LANG_HE") $FLAG_NAME = L_LANG_HE;
+				elseif ($name == "hindi" && L_LANG_HI != "L_LANG_HI") $FLAG_NAME = L_LANG_HI;
+				elseif ($name == "hungarian" && L_LANG_HU != "L_LANG_HU") $FLAG_NAME = L_LANG_HU;
+				elseif ($name == "indonesian" && L_LANG_ID != "L_LANG_ID") $FLAG_NAME = L_LANG_ID;
+				elseif ($name == "italian" && L_LANG_IT != "L_LANG_IT") $FLAG_NAME = L_LANG_IT;
+				elseif ($name == "japanese" && L_LANG_JA != "L_LANG_JA") $FLAG_NAME = L_LANG_JA;
+				elseif ($name == "nepali" && L_LANG_NE != "L_LANG_NE") $FLAG_NAME = L_LANG_NE;
+				elseif ($name == "persian" && L_LANG_FA != "L_LANG_FA") $FLAG_NAME = L_LANG_FA;
+				elseif ($name == "romanian" && L_LANG_RO != "L_LANG_RO") $FLAG_NAME = L_LANG_RO;
+				elseif ($name == "serbian_latin" && L_LANG_SRL != "L_LANG_SRL") $FLAG_NAME = L_LANG_SRL;
+				elseif ($name == "serbian_cyrillic" && L_LANG_SRC != "L_LANG_SRC") $FLAG_NAME = L_LANG_SRC;
+				elseif ($name == "slovak" && L_LANG_SK != "L_LANG_SK") $FLAG_NAME = L_LANG_SK;
+				elseif ($name == "spanish" && L_LANG_ES != "L_LANG_ES") $FLAG_NAME = L_LANG_ES;
+				elseif ($name == "swedish" && L_LANG_SV != "L_LANG_SV") $FLAG_NAME = L_LANG_SV;
+				elseif ($name == "turkish" && L_LANG_TR != "L_LANG_TR") $FLAG_NAME = L_LANG_TR;
+				elseif ($name == "urdu" && L_LANG_UR != "L_LANG_UR") $FLAG_NAME = L_LANG_UR;
+				elseif ($name == "vietnamese" && L_LANG_VI != "L_LANG_VI") $FLAG_NAME = L_LANG_VI;
+				else
+				{
+					$FLAG_NAME = str_replace("_"," ",$name);
+					$FLAG_NAME = mb_convert_case($FLAG_NAME,MB_CASE_TITLE,$Charset);
+				}
+				$i++;
+				?>
+				<OPTION VALUE="<?php echo $name ?>" <?php if($SLANG==$name || $L==$name){ echo " selected"; $namesel = $name; } ?>><?php echo ($FLAG_NAME); ?></OPTION>
+					<?php
+			};
+			unset($AvailableLanguages);
+			?>
+	    </SELECT>&nbsp;<img style="vertical-align:middle" id="flagToSwap" src="<?php echo("./".$ChatPath."localization/".$namesel."/images/".(C_FLAGS_3D ? "flag.gif" : "flag0.gif")); ?>" <?php echo("border=0 ALT=\"".$namesel."\" Title=\"".$namesel."\""); ?> />
 			</TD>
 		</TR>
 		<TR>

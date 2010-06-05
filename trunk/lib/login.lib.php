@@ -16,6 +16,11 @@ if (isset($_COOKIE["CookieHash"])) $RemMe = $_COOKIE["CookieHash"];
 require("./config/config.lib.php");
 
 $DbLink4Login = new DB;
+if (isset($_COOKIE["CookieUsername"]))
+{
+//	$pmc_username = urldecode($_COOKIE["CookieUsername"]);
+	$FOCUS = 1;
+}
 
 if ((isset($pmc_username) && $pmc_username != "") && (isset($pmc_password) && $pmc_password != ""))
 {

@@ -157,10 +157,10 @@ z-index: 100;
 #menu {
 position: absolute; /* Menu position that can be changed at will */
 top: 0;
-left: auto;
+left: 0;
 z-index: 100;
 width: 100%; /* precision for Opera */
-margin-left:5px;
+margin-left: 5px;
 }
 #menu dl {
 float: left;
@@ -898,7 +898,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			};
 			unset($AvailableLanguages);
 			?>
-	    </select>&nbsp;<img id="flagToSwap" src="<?php echo(($FLAGS_3D) ? "./".$ChatPath."localization/".$namesel."/images/flag.gif" : "./".$ChatPath."localization/".$namesel."/images/flag0.gif"); ?>" <?php echo("border=0 ALT=\"Language Flag selector\" Title=\"Language Flag selector\""); ?> />
+	    </select>&nbsp;<img style="vertical-align:middle" id="flagToSwap" src="<?php echo("./".$ChatPath."localization/".$namesel."/images/".($FLAGS_3D ? "flag.gif" : "flag0.gif")); ?>" <?php echo("border=0 ALT=\"Language Flag selector\" Title=\"Language Flag selector\""); ?> />
     </td>
 </tr>
 <tr>
@@ -907,7 +907,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     <td><select name="vENGLISH_FORMAT" id="ENflag" onChange="swapImage('ENflag','ENToSwap')">
 	        <option value="UK"<?php if($ENGLISH_FORMAT=="UK"){ echo " selected"; $ENsel = ($FLAGS_3D) ? "flag.gif" : "flag0.gif"; } ?>><?php echo(L_LANG_ENUK); ?></option>
 	        <option value="US"<?php if($ENGLISH_FORMAT=="US"){ echo " selected"; $ENsel = ($FLAGS_3D) ? "flag_us.gif" : "flag_us0.gif"; } ?>><?php echo(L_LANG_ENUS); ?></option>
-        </select>&nbsp;<img id="ENToSwap" src="<?php echo(($FLAGS_3D) ? "./".$ChatPath."localization/english/images/".$ENsel."" : "./".$ChatPath."localization/english/images/".$ENsel.""); ?>" <?php echo("border=0 ALT=\"English locale formats\" Title=\"English locale formats\""); ?> />
+        </select>&nbsp;<img style="vertical-align:middle" id="ENToSwap" src="<?php echo(($FLAGS_3D) ? "./".$ChatPath."localization/english/images/".$ENsel."" : "./".$ChatPath."localization/english/images/".$ENsel.""); ?>" <?php echo("border=0 ALT=\"English locale formats\" Title=\"English locale formats\""); ?> />
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
@@ -926,7 +926,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     <td><select name="vFLAGS_3D" id="3Dflag" onChange="swapImage('3Dflag','3DToSwap')">
 	        <option value="0"<?php if($FLAGS_3D==0){ echo " selected"; } ?>>2D (std)</option>
 	        <option value="1"<?php if($FLAGS_3D==1){ echo " selected"; } ?>>3D (new)</option>
-        </select>&nbsp;<img id="3DToSwap" src="<?php echo(($FLAGS_3D) ? "./".$ChatPath."localization/english/images/flag.gif" : "./".$ChatPath."localization/english/images/flag0.gif"); ?>" <?php echo("border=0 ALT=\"Flags format\" Title=\"Flags format\""); ?> />
+        </select>&nbsp;<img style="vertical-align:middle" id="3DToSwap" src="<?php echo(($FLAGS_3D) ? "./".$ChatPath."localization/english/images/flag.gif" : "./".$ChatPath."localization/english/images/flag0.gif"); ?>" <?php echo("border=0 ALT=\"Flags format\" Title=\"Flags format\""); ?> />
     </td>
 </tr>
 </table>
@@ -1448,8 +1448,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>Edit the installation date of your chat.</b><br />
-		(the date since the counter had been supposed to start - keep the format to YYYY-MM-DD)
+    <td><b>Edit the installation date of your chat.</b>
     </td>
     <td class=success>
 		<?php
@@ -2369,7 +2368,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         <select name="vDISP_GENDER" id="genders" onChange="swapImage('genders','gendersToSwap')">
 	        <option value="0"<?php if($DISP_GENDER==0){ echo " selected"; } ?>>Hide Gender icons</option>
 	        <option value="1"<?php if($DISP_GENDER==1){ echo " selected"; } ?>>Show Gender icons</option>
-        </select>&nbsp;<img id="gendersToSwap" src="<?php echo(($DISP_GENDER==1) ? "./".$ChatPath."images/gender_couple.gif" : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 ALT=\"Genders\" Title=\"Genders\""); ?> />
+        </select>&nbsp;<img style="vertical-align:middle" id="gendersToSwap" src="<?php echo(($DISP_GENDER==1) ? "./".$ChatPath."images/gender_couple.gif" : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 ALT=\"Genders\" Title=\"Genders\""); ?> />
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
@@ -2592,7 +2591,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 	<td>
 		<input name="vQUOTE_AVATAR" type="text" size="20" maxlength="255" value="<?php echo $QUOTE_AVATAR; ?>">
-    <?php echo(($QUOTE_AVATAR != "") ? "&nbsp;<img id=\"quotet_avatarToSwap\" src=\"".$QUOTE_AVATAR."\" border=0 width=".$AVA_WIDTH." height=".$AVA_HEIGHT." ALT=\"Quote Avatar\" Title=\"Quote Avatar\" />" : ""); ?>
+    <?php echo(($QUOTE_AVATAR != "") ? "&nbsp;<img id=\"quote_avatarToSwap\" src=\"".$QUOTE_AVATAR."\" border=0 width=".$AVA_WIDTH." height=".$AVA_HEIGHT." ALT=\"Quote Avatar\" Title=\"Quote Avatar\" />" : ""); ?>
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">

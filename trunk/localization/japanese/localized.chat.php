@@ -255,6 +255,9 @@ define("L_HELP_CMD_31", "リストに表示するユーザの順序を変更し�
 define("L_HELP_CMD_32", "サイコロゲームの第3（ロールプレイング）バージョンです。<br />使用法：/d{n1}[tn2]または/d{n1}<br />n1には<b>1から100まで</b>の数値を入れます（サイコロの側面の数になります）<br />n2には<b>1から%sまで</b>の数値を入れます（使用するサイコロの数になります）。");
 define("L_HELP_CMD_33", "指定したフォントサイズに変更します（nに指定可能な数値：<b>7から15まで</b>)。/sizeコマンドはデフォルトのサイズ（<b>".$FontSize."</b>）にリセットします。");
 define("L_HELP_CMD_34", "発言内容の向きを指定します（ltr＝左から右、rtl＝右から左）。");
+define("L_HELP_CMD_35", "<i>動画</i>や<i>音声ファイル</i>を小さなフラッシュプレイヤーに貼り付けられるようにします。<br />使用法：貼り付けるファイルのURLをペーストするだけです！例：<b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />コンピュータにフラッシュプレイヤーがインストールされている必要があります。URLは大小文字を区別します！<br />ヒント：/videoコマンドに続き、半角スペースを打ってからURLを入力します。");
+define("L_HELP_CMD_35a", "2番目のコマンドは、ビデオファイルに対してyoutube.comの場合にのみ有効です。<br />例：<b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
+define("L_HELP_CMD_36", "小さなフラッシュプレイヤーに<i>youtubeビデオ</i>を貼り付けることができます。<br />使用法：貼り付けるファイルのURLをペーストするだけです！例：<b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />コンピュータにフラッシュプレイヤーがインストールされている必要があります。URLは大小文字を区別します！<br />ヒント：/tubeコマンドに続き、半角スペースを打ってからURLを入力します。");
 define("L_HELP_CMD_VAR", "同義（類義）：%s"); // a list of English and/or translated alternatives for each command
 define("L_HELP_ETIQ_1", "チャットエチケット");
 define("L_HELP_ETIQ_2", "参加する誰もが楽しめるように、次のガイドラインに従ってください。ルールに従えない場合、モデレータによってチャットから退室させられる場合があります。<br /><br />敬具");
@@ -342,6 +345,7 @@ define("INFO_BOT", "利用可能なロボット：");
 
 // Profile mod
 define("L_PRO_1", "使用言語");
+define("L_PRO_1a", "言語");
 define("L_PRO_2", "好きなリンクその1");
 define("L_PRO_3", "好きなリンクその2");
 define("L_PRO_4", "説明");
@@ -705,9 +709,6 @@ define("L_VIDEO", "ビデオの投稿者：");
 define("L_HELP_VIDEO", "投稿するビデオまたは音声ファイルまでのフルパス");
 define("L_NO_VIDEO", "URLを埋め込めません。\\n公開可能な動画や音声ファイルの正しいURLではありません。\\nもう一度お試しください！");
 define("L_ORIG_VIDEO", "オリジナルのサイトを開く"); //Click here to open...
-define("L_HELP_CMD_35", "<i>動画</i>や<i>音声ファイル</i>を小さなフラッシュプレイヤーに貼り付けられるようにします。<br />使用法：貼り付けるファイルのURLをペーストするだけです！例：<b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />コンピュータにフラッシュプレイヤーがインストールされている必要があります。URLは大小文字を区別します！<br />ヒント：/videoコマンドに続き、半角スペースを打ってからURLを入力します。");
-define("L_HELP_CMD_35a", "2番目のコマンドは、ビデオファイルに対してyoutube.comの場合にのみ有効です。<br />例：<b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
-define("L_HELP_CMD_36", "小さなフラッシュプレイヤーに<i>youtubeビデオ</i>を貼り付けることができます。<br />使用法：貼り付けるファイルのURLをペーストするだけです！例：<b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />コンピュータにフラッシュプレイヤーがインストールされている必要があります。URLは大小文字を区別します！<br />ヒント：/tubeコマンドに続き、半角スペースを打ってからURLを入力します。");
 
 // Birthday mod - by Ciprian
 define("L_PRO_7", "誕生日");
@@ -715,6 +716,6 @@ define("L_PRO_8", "誕生日を公開する");
 define("L_PRO_9", "年齢を公開する");
 define("L_PRO_10", "年齢");
 define("L_PRO_11", "%1\$d年%2\$dヶ月と%3\$d日");
-define("L_DOB_SUBJ", "%sさん、お誕生日おめでとう！"); // Firstname (if set) or Username
 define("L_DOB_TIT_1", "誕生日リスト"); // The list of birthdays in descending order
+$L_DOB_SUBJ = "%sさん、お誕生日おめでとう！"); // Firstname (if set) or Username
 ?>

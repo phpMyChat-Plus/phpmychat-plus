@@ -342,6 +342,7 @@ define("INFO_BOT", "Az elérhető bot:");
 
 // Profile mod
 define("L_PRO_1", "Beszélt nyelvek");
+define("L_PRO_1a", "Nyelv");
 define("L_PRO_2", "Kedvenc link 1");
 define("L_PRO_3", "Kedvenc link 2");
 define("L_PRO_4", "Bemutatkozás");

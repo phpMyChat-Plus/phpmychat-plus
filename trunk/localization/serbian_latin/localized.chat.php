@@ -345,6 +345,7 @@ define("INFO_BOT", "Naš bot je:");
 
 // Profile mod
 define("L_PRO_1", "Jezici koje govorimo");
+define("L_PRO_1a", "Jezic");
 define("L_PRO_2", "Omiljeni link 1");
 define("L_PRO_3", "Omiljeni link 2");
 define("L_PRO_4", "Opis");

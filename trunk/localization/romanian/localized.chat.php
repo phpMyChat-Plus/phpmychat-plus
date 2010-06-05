@@ -254,6 +254,9 @@ define("L_HELP_CMD_31", "Schimbă ordinea sortării utilizatorilor în liste: du
 define("L_HELP_CMD_32", "Aceasta este a treia versiune de joc de zaruri (role-playing).<br />Utilizare: /d{n1}[tn2] sau /d{n1};<br />n1 poate avea orice valoare <b>între 1 şi 100</b> (reprezintă numărul de puncte ale fiecărui zar);<br />n2 poate avea orice valoare <b>între 1 şi %s</b> (reprezintă numărul de zaruri la fiecare aruncare).");
 define("L_HELP_CMD_33", "Schimbă dimensiunea textului mesajelor pe chat (valori permise pentru n: <b>între 7 şi 15</b>); comanda /size resetează dimensiunea fontului la valoarea implicită (<b>".$FontSize."</b>).");
 define("L_HELP_CMD_34", "Această comandă permite unui utilizator să specifice orientarea unui mesaj text (ltr = de la stânga la dreapta, rtl = de la dreapta la stânga).");
+define("L_HELP_CMD_35", "Permite postarea <i>unui film video</i> sau a <i>unui fișier audio</i> în loc de mesaj, folosind un mini Flash Player integrat.<br />Utilizare: Nu trebuie decât să pastaţi adresa la care se află filmul! Exemplu <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Trebuie să aveţi Shockwave Flash Player instalat pe calculator. Atenţie la literele mari şi mici - contează.<br />SFAT: tastaţi /video urmat de un spaţiu şi apoi pastaţi adresa URL.");
+define("L_HELP_CMD_35a", "Cea de-a doua comandă funcţionează numai cu youtube.com ca sursă video.<br />Exemplu <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
+define("L_HELP_CMD_36", "Permite postarea <i>unui film video youtube</i> în loc de mesaj, folosind un mini Flash Player integrat.<br />Utilizare: Nu trebuie decât să pastaţi adresa la care se află filmul! Exemplu <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Trebuie să aveţi Shockwave Flash Player instalat pe calculator. Atenţie la literele mari şi mici - contează.<br />SFAT: tastaţi /tube urmat de un spaţiu şi apoi pastaţi adresa URL.");
 define("L_HELP_CMD_VAR", "Sinonime (variante): %s");
 define("L_HELP_ETIQ_1", "Eticheta Chat-ului");
 define("L_HELP_ETIQ_2", "Site-ul nostru doreşte să păstreze o ambianţă plăcută şi prietenoasă, aşa că vă rugăm să aderaţi la următoarele reguli. Pentru nerespectarea acestor reguli, unul dintre moderatori ar putea să vă elimine din chat.<br /><br />Mulţumim,");
@@ -343,6 +346,7 @@ define("INFO_BOT", "RoBoţelul nostru este:");
 
 // Profile mod
 define("L_PRO_1", "Limbi folosite");
+define("L_PRO_1a", "Limba");
 define("L_PRO_2", "Link Favorit 1");
 define("L_PRO_3", "Link Favorit 2");
 define("L_PRO_4", "Descriere");
@@ -704,9 +708,6 @@ define("L_VIDEO", "Film video trimis de");
 define("L_HELP_VIDEO", "calea/link-ul către filmul video sau fișierul audio de postat");
 define("L_NO_VIDEO", "Aceasta nu este o adresă URL validă\\na unui film video sau fișier audio acceptat.\\nCorectează adresa!");
 define("L_ORIG_VIDEO", "pentru a deschide pagina site-ului original");
-define("L_HELP_CMD_35", "Permite postarea <i>unui film video</i> sau a <i>unui fișier audio</i> în loc de mesaj, folosind un mini Flash Player integrat.<br />Utilizare: Nu trebuie decât să pastaţi adresa la care se află filmul! Exemplu <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Trebuie să aveţi Shockwave Flash Player instalat pe calculator. Atenţie la literele mari şi mici - contează.<br />SFAT: tastaţi /video urmat de un spaţiu şi apoi pastaţi adresa URL.");
-define("L_HELP_CMD_35a", "Cea de-a doua comandă funcţionează numai cu youtube.com ca sursă video.<br />Exemplu <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
-define("L_HELP_CMD_36", "Permite postarea <i>unui film video youtube</i> în loc de mesaj, folosind un mini Flash Player integrat.<br />Utilizare: Nu trebuie decât să pastaţi adresa la care se află filmul! Exemplu <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Trebuie să aveţi Shockwave Flash Player instalat pe calculator. Atenţie la literele mari şi mici - contează.<br />SFAT: tastaţi /tube urmat de un spaţiu şi apoi pastaţi adresa URL.");
 
 // Birthday mod - by Ciprian
 define("L_PRO_7", "Data naşterii");
@@ -714,6 +715,6 @@ define("L_PRO_8", "arată data naşterii în profilul public");
 define("L_PRO_9", "arată vârsta în profilul public");
 define("L_PRO_10", "Vârsta");
 define("L_PRO_11", "%1\$d ani, %2\$d luni şi %3\$d zile");
-define("L_DOB_SUBJ", "La Mulţi Ani %s!");
 define("L_DOB_TIT_1", "Lista Aniversărilor");
+$L_DOB_SUBJ = "La Mulţi Ani %s!";
 ?>
