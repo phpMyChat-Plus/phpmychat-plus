@@ -615,7 +615,7 @@ define("NO_USER","Nadie está ".LOGIN_LINK."chateando</A> en este momento.");
 define("L_PRIV_REPLY_LOGIN", "Loguéese al chat si lo desea ".LOGIN_LINK."escribir una respuesta</A> para cualquiera de los Nuevos PMs listados arriba");
 
 // Language names
-define("L_LANG_AR", "Espańol (la Argentina)");
+define("L_LANG_AR", "Español (la Argentina)");
 define("L_LANG_BG", "Búlgaro");
 define("L_LANG_BR", "Brasilero Portugués");
 define("L_LANG_CZ", "Checo");
@@ -624,7 +624,7 @@ define("L_LANG_DE", "Alemán");
 define("L_LANG_EN", "Inglés"); // for Admin panel only
 define("L_LANG_ENUK", "Inglés (Reino Unido) "); // for UK formats and flags (also known as British)
 define("L_LANG_ENUS", "Inglés (Americano)"); // for US formats and flags (also know as American English)
-define("L_LANG_ES", "Espańol");
+define("L_LANG_ES", "Español");
 define("L_LANG_FR", "Francés");
 define("L_LANG_GR", "Griego");
 define("L_LANG_HE", "Hebreo");

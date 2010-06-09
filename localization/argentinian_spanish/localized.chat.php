@@ -624,7 +624,7 @@ define("L_PRIV_REPLY_LOGIN", "Loqueate al chat si quieres ".LOGIN_LINK."contesta
 
 // Language names
 define("L_LANG_AR", "Español Argentina");
-define("L_LANG_BG", "Bulgaro – Cirílico");
+define("L_LANG_BG", "Bulgaro - Cirílico");
 define("L_LANG_BR", "Brasilero Portugués");
 define("L_LANG_CZ", "Checo");
 define("L_LANG_DA", "Danés");
@@ -645,7 +645,7 @@ define("L_LANG_NL", "Holandés");
 define("L_LANG_RO", "Rumano");
 define("L_LANG_SK", "Eslovaco");
 define("L_LANG_SRL", "Serbio - Latino");
-define("L_LANG_SRC", "Serbio – Cirílico");
+define("L_LANG_SRC", "Serbio - Cirílico");
 define("L_LANG_SV", "Sueco");
 define("L_LANG_TR", "Turco");
 define("L_LANG_UR", "Urdu");

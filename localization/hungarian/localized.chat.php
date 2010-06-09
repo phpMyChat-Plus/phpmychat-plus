@@ -1,8 +1,8 @@
 <?php
-// File : hungarian/localized.chat.php - plus version (14.02.2009 - rev.42)
+// File : hungarian/localized.chat.php - plus version (23.03.2010 - rev.43)
 // Original file by Jácint Zsuzsanna <jacint.zsuzsanna@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
-// Do not use ' but use  ’  instead (utf-8 edit bug)
+// Do not use ' but use ’ instead (utf-8 edit bug)
 
 // extra header for Charset
 $Charset = "utf-8";
@@ -42,6 +42,7 @@ define("L_SET_15", "Alapértelmezett privát szobák");
 define("L_SET_16", "Felhasználók által létrehozott privát szobák");
 define("L_SET_17", "Válaszd ki az avatar-odat");
 define("L_SET_18", "Tedd a Kedvencek közé: \"Ctrl+D\".");
+define("L_SET_19", "Emlékezz rám");
 
 define("L_SRC", "szabadon letölthető a következő helyről");
 
@@ -253,6 +254,9 @@ define("L_HELP_CMD_31", "Megválaszthatod a felhasználók sorrendjét a listák
 define("L_HELP_CMD_32", "Ez a harmadik (szerepjáték) változata a kockázásnak.<br />Használat: /d{n1}[tn2] vagy /d{n1};<br />n1 bármilyen érték lehet <b>1 és 100 között</b> (megmutatja a kockánkénti oldalak számát).<br />n2 bármilyen érték lehet <b>1 és %s között</b> (megmutatja a kockák számát dobásonként).");
 define("L_HELP_CMD_33", "Megváltoztathatod a betűméretet a felhasználók kívánsága szerint (a megengedett értékek n-re: <b>7 és 15 között</b>); a /size parancs visszaállítja a betűméretet az alapértelmezett értékre (<b>".$FontSize."</b>).");
 define("L_HELP_CMD_34", "A felhasználó megadhatja az üzenet szövegének irányát (ltr = balról-jobbra, rtl = jobbról-balra).");
+define("L_HELP_CMD_35", "Egyszerre csak <i>egy videót</i> vagy <i>egy audio fájlt</i> küldhetsz a kis Flash playerben.<br />Használat: Csak másold be a linket. Pl. <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Telepítened kell a számítógépeden a Shockwave Flash Player-t. A linkben a kis- és nagybetűk különböznek.<br />TIPP: gépeld be a /video parancsot a szövegmezőbe, majd egy szóköz után másold be a linket!");
+define("L_HELP_CMD_35a", "A második parancs csak a youtube.com-on lévő videókkal működik.<br />Pl. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
+define("L_HELP_CMD_36", "Egyszerre csak <i>egy youtube videót</i> küldhetsz a kis Flash playerben.<br />Használat: Csak másold be a linket. Pl. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Telepítened kell a számítógépeden a Shockwave Flash Player-t. A linkben a kis- és nagybetűk különböznek.<br />TIPP: gépeld be a /tube parancsot a szövegmezőbe, majd egy szóköz után másold be a linket!");
 define("L_HELP_CMD_VAR", "Szinonímák (variációk): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Chat Etikett");
 define("L_HELP_ETIQ_2", "A honlapunk szeretné megőrizni a barátságos és vidám közösségét, így kérlek tartsd be az útmutatóban közölt szabályainkat. Ha nem tartod be a szabályokat, a moderátorok közül valaki kidobhat a chat-ből.<br /><br />Köszönjük,");
@@ -464,6 +468,7 @@ define("L_PASS_6", "Titkos válasz");
 define("L_PASS_7", "Jelszó módosítása");
 define("L_PASS_8", "A jelszavad sikeresen módosítva lett.");
 define("L_PASS_9", "Az új jelszavad a chat-be való belépéshez");
+define("L_PASS_10", "Az új jelszavad: %s");
 define("L_PASS_11", "Üdvözlünk újra a chat szerveren!");
 define("L_PASS_12", "Válaszd ki a titkos kérdésed...");
 define("L_ERR_PASS_1", "Hibás felhasználói név. Válaszd ki a sajátodat!");
@@ -471,7 +476,7 @@ define("L_ERR_PASS_2", "Hibás e-mail cím. Próbáld újra!");
 define("L_ERR_PASS_3", "Hibás titkos kérdés.<br />Válaszolj az alábbi feltett kérdésre!");
 define("L_ERR_PASS_4", "Hibás titkos válasz. Próbáld újra!");
 define("L_ERR_PASS_5", "Nem állítottad be a privát/titkos adataidat.");
-define("L_ERR_PASS_6", "Még nem állítottad be a privát/titkos adataidat.<br />Nem használhatod ezt a  formát. Lépj kapcsolatba az adminisztrátorral!");
+define("L_ERR_PASS_6", "Még nem állítottad be a privát/titkos adataidat.<br />Nem használhatod ezt a formát. Lépj kapcsolatba az adminisztrátorral!");
 
 // admin stuff - added for administrators promotions/demotions in admin panel - by Ciprian
 define("L_ADM_3", "%s adminisztrátorrá vált.");
@@ -633,6 +638,7 @@ define("L_LANG_EN", "angol"); // for admin panel only
 define("L_LANG_ENUK", "brit angol"); // for UK formats and flags
 define("L_LANG_ENUS", "amerikai angol"); // for US formats and flags
 define("L_LANG_ES", "spanyol");
+define("L_LANG_FA", "perzsa (farsi)");
 define("L_LANG_FR", "francia");
 define("L_LANG_GR", "görög");
 define("L_LANG_HE", "héber");
@@ -640,7 +646,9 @@ define("L_LANG_HI", "hindi");
 define("L_LANG_HU", "magyar");
 define("L_LANG_ID", "indonéziai");
 define("L_LANG_IT", "olasz");
+define("L_LANG_JA", "japán (kanji)");
 define("L_LANG_KA", "grúz");
+define("L_LANG_NE", "nepáli");
 define("L_LANG_NL", "holland");
 define("L_LANG_RO", "román");
 define("L_LANG_SK", "szlovák");
@@ -695,4 +703,20 @@ define("L_OPID_REG", "OpenID profilban szereplő adatok használata");
 // Support buttons
 define("L_SUPP_WARN", "Örülünk, hogy adományoddal hozzájárulsz a\\n".APP_NAME." ingyenes fejlesztéséhez.\\nKöszönjük a támogatásod!\\n\\nFigyelem: a fogadó személy nem a chat tulajdonosa.\\nKérlek, írd be az összeget a következő oldalon.\\n\\nFolytatod?");
 define("L_SUPP_ALT", "Támogasd PayPal-lal a ".APP_NAME." fejlesztését - Gyors, Ingyenes és Biztonságos!");
+
+// Video & Audio & Youtube cmds (Embevi & YouTube player class) – same approach as in // Img cmd mod section!
+define("L_AUDIO", "Audio fájlt küldött:");
+define("L_VIDEO", "Videót küldött: ");
+define("L_HELP_VIDEO", "az elküldendő videó vagy audio fájl teljes elérési útja");
+define("L_NO_VIDEO", "Ezt az URL-t nem lehet beilleszteni.\\nNem érvényes URL.\\nPróbáld újra!");
+define("L_ORIG_VIDEO", "az eredeti oldal megnyitásához"); //it sounds like: Click here to open the…
+
+// Birthday mod - by Ciprian
+define("L_PRO_7", "Születési dátum");
+define("L_PRO_8", "születésnap mutatása a publikus infóban");
+define("L_PRO_9", "életkor mutatása a publikus infóban");
+define("L_PRO_10", "Kor");
+define("L_PRO_11", "%1\$d év, %2\$d hónap és %3\$d nap"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
+define("L_DOB_TIT_1", "Születésnap-lista");
+$L_DOB_SUBJ = "Boldog születésnapot, %s!";
 ?>

@@ -2,8 +2,8 @@
 
 //Request selected language - by Ciprian
 $lang = (isset($_REQUEST["lang"])) ? $_REQUEST["lang"] : false;
-if(isset($lang) && $lang != "en_US") $language = $lang;
-elseif(defined("L_LANG") && L_LANG != "en_US") $language = L_LANG;
+if(isset($lang) && $lang != "en_US" && $lang != "L_LANG") $language = $lang;
+elseif(defined("L_LANG") && L_LANG != "en_US" && L_LANG != "L_LANG") $language = L_LANG;
 if(isset($language)){
 include_once("lang/calendar.".$language.".php");
 }
@@ -525,14 +525,14 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
         ?>
         <div id="calendar-footer">
           <div class="btn">
-            <div style="float: left; width: 40%; text-align: center;">
+            <div style="float: left; text-align: center;">
             <?php
             if($previous_year >= $year_start && $show_previous){
             ?><a href="javascript:move('<?php echo(str_pad($previous_month, 2, "0", STR_PAD_LEFT));?>', '<?php echo($previous_year);?>');">&lt;&lt; <?php echo(L_PREV); ?></a><?php
             }else echo("&nbsp;");
             ?>
             </div>
-            <div style="float: right; width: 40%; text-align: center;">
+            <div style="float: right; text-align: center;">
             <?php
             if($next_year <= $year_end && $show_next){
             ?><a href="javascript:move('<?php echo(str_pad($next_month, 2, "0", STR_PAD_LEFT));?>', '<?php echo($next_year);?>');"><?php echo(L_NEXT); ?> &gt;&gt;</a><?php
