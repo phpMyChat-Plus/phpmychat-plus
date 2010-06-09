@@ -59,7 +59,7 @@
 //
 //********************************************************
 
-include_once("lang/calendar.".(isset($lang) ? $lang : L_LANG).".php");
+if((defined("L_LANG") && L_LANG != "en_US" && L_LANG != "L_LANG") || isset($lang) && $lang != "en_US") include_once("lang/calendar.".(isset($lang) ? $lang : L_LANG).".php");
 include_once("lang/localization.lib.php");
 
 ?>

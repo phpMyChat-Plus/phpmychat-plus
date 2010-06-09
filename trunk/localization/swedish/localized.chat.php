@@ -1,5 +1,5 @@
 <?php
-// File : swedish/localized.chat.php - plus version (01.08.2009 - rev.43)
+// File : swedish/localized.chat.php - plus version (20.03.2010 - rev.44)
 // Original file by Martin Edelius <martin.edelius@spirex.se>
 // Updates, corrections and additions for the Plus version by Heikki <heikki@yttervik.be> & Fimpen Högström <fimpen@relative-work.se>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -43,6 +43,7 @@ define("L_SET_15", "Tillgängliga rum");
 define("L_SET_16", "Användarens Privata rum");
 define("L_SET_17", "Välj din Alias bild");
 define("L_SET_18", "Gör denna sida till ditt favorit: tryck \"Ctrl+D\".");
+define("L_SET_19", "Kom ihåg mig");
 
 define("L_SRC", "kan hämtas gratis från");
 
@@ -254,6 +255,9 @@ define("L_HELP_CMD_31", "Ändra hur användare är sorterad i listan: sorterings
 define("L_HELP_CMD_32", "Detta är en tredje (roleplaying) version av tärningsspelet.<br />Användande: /d{n1}[tn2] or /d{n1};<br />n1 kan ta alla värde <b>mellan 1 och 100</b> (det representerar antalet rullning per tärning).<br />n2 kan ta alla värden <b>mellan 1 och %s</b> (det representerar antalet rullande tärningar per kast).");
 define("L_HELP_CMD_33", "Ändra teckensnitts storlek på meddelanden i chatten till användare, val (tillåtna värden för n: <b>mellan 7 och 15</b>); /size kommando återställer teckensnitt storlek till standar värde (<b>".$FontSize."</b>).");
 define("L_HELP_CMD_34", "Detta kommando låter användaren specificera textens orientering (ltr,vth = vänster till höger; rtl,htv = höger till vänster).");
+define("L_HELP_CMD_35", "Detta låter dig länka till <i>en video</i> eller <i>en ljudfil</i> för uppspelande i en flashspelare i taget.<br />Tillvägagångssätt: Klistra bara in URLsökvägen för vad du vill infoga!<br />T ex <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Du behöver Shockwave Flash Player installerad på din dator. Länken är skiftlägeskänsligt!<br />TIPS: skriv /video följt av ett mellanslag klistra därefter in URLsökvägen i rutan.");
+define("L_HELP_CMD_35a", "Det andra kommandot fungerar bara med youtube.com som källa.<br />T ex <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
+define("L_HELP_CMD_36", "Det låter dig infoga <i>en youtubevideo</i> för uppspelande i en flashspelare i taget.<br />Tillvägagångssätt: Klistra bara in URLsökvägen för vad du vill infoga.<br />T ex <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Du behöver Shockwave Flash Player installerad på din dator. Länken är  skiftlägeskänsligt!<br />TIPS: skriv /tube följt av ett mellanslag klistra därefter in URLsökvägen i rutan.");
 define("L_HELP_CMD_VAR", "Synonymer (varianter): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Chat Netikett");
 define("L_HELP_ETIQ_2", "För att vår plats skall kunna behålla dess ställning/gemenskap för oss alla vänligt och kul, Så vänligen stå fast vid till följande riktlinjer. Om du avviker från dessa regler, kan någon av våra chatts moderator (kan och får) sparka ut dig från chatten.<br /><br />Tack,");
@@ -465,6 +469,7 @@ define("L_PASS_6", "Hemliga svaret");
 define("L_PASS_7", "Glömt Lösenordet");
 define("L_PASS_8", "Ditt lösenord har framgångsrikt blivit nollställt.");
 define("L_PASS_9", "Ditt nya lösenord som skriver in chatten");
+define("L_PASS_10", "Skriv ditt nya lösenord %s<br />för att komma in i chatten");
 define("L_PASS_11", "Välkomnande tillbaks sidan till vår chatten server!");
 define("L_PASS_12", "Välj din hemliga fråga ...");
 define("L_ERR_PASS_1", "Fel användarname. Välj din.");
@@ -625,6 +630,7 @@ define("L_LANG_EN", "Engelska"); // for admin panel only
 define("L_LANG_ENUK", "Engelska UK"); // for UK formats and flags
 define("L_LANG_ENUS", "Amrikanska US"); // for US formats and flags
 define("L_LANG_ES", "Spanska");
+define("L_LANG_FA", "Persiska");
 define("L_LANG_FR", "Franska");
 define("L_LANG_GR", "Grekiska");
 define("L_LANG_HE", "Hebreiska");
@@ -632,7 +638,9 @@ define("L_LANG_HI", "Hindi");
 define("L_LANG_HU", "Ungerska");
 define("L_LANG_ID", "Indonesiska");
 define("L_LANG_IT", "Italienska");
+define("L_LANG_JA", "Japanska");
 define("L_LANG_KA", "Georgiska");
+define("L_LANG_NE", "Nepalesiska");
 define("L_LANG_NL", "Holländska");
 define("L_LANG_RO", "Rumänska");
 define("L_LANG_SK", "Slovakien");
@@ -687,4 +695,20 @@ define("L_OPID_REG", "Importera din OpenID profil");
 // Support buttons
 define("L_SUPP_WARN", "Du har valt att bidra till den fria utvecklingen av\\n".APP_NAME." genom att donera till utvecklaren.\\nTack för ditt bidrag!\\n\\nNotera att mottagaren inte är ägaren av denna chatten.\\nVänligen skriv in det belopp du vill donera på nästa sida.\\n\\nFortsätt?");
 define("L_SUPP_ALT", "Använd PayPal för att bidra till ".APP_NAME." - det är Snabbt, Gratis och Säkert!");
+
+// Video & Audio & Youtube cmds (Embevi & YouTube player class) – same approach as in // Img cmd mod section!
+define("L_AUDIO", "Ljudfil infogad av");
+define("L_VIDEO", "Videofilm infogad av");
+define("L_HELP_VIDEO", "fullständig sökväg till videofil eller ljudfil som du vill infoga");
+define("L_NO_VIDEO", "URLsökvägen kan inte inbäddas.\\nDetta är inte korrekt URLsökväg till en allmänt erkänd publik film eller ljudfil.\\nFörsök igen!");
+define("L_ORIG_VIDEO", "för att öppna orginalplatsen där filmen ligger");
+
+// Birthday mod - by Ciprian
+define("L_PRO_7", "Födelsedatum");
+define("L_PRO_8", "låt andra se min födelsedag");
+define("L_PRO_9", "visa ålder på min publika information");
+define("L_PRO_10", "Ålder");
+define("L_PRO_11", "%1\$d år, %2\$d månad/månader och %3\$d dag/dagar"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
+define("L_DOB_TIT_1", "Födelsedagslista");
+$L_DOB_SUBJ = "Grattis på födelsedagen %s!";
 ?>

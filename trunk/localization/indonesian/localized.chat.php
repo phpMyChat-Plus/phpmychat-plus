@@ -1,5 +1,5 @@
 <?php
-// File : indonesian/localized.chat.php - plus version (01.08.2009 - rev.43)
+// File : indonesian/localized.chat.php - plus version (20.03.2010 - rev.44)
 // Translation by Hendriyo <hendriyo@gmail.com>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
@@ -28,9 +28,9 @@ define("L_SET_1", "Mohon masukan");
 define("L_SET_2", "Nama pengguna");
 define("L_SET_3", "Jumlah pesan yang ditampilkan");
 define("L_SET_4", "Waktu beristirahat diantara setiap pembaruan");
-define("L_SET_5", "Pilih kamar obrol …");
+define("L_SET_5", "Pilih kamar obrol...");
 define("L_SET_6", "Kamar umum");
-define("L_SET_7", "Tentukan pilihan Anda …");
+define("L_SET_7", "Tentukan pilihan Anda...");
 define("L_SET_8", "Kamar umum yang dibuat oleh para pengguna");
 define("L_SET_9", "Membuat milik Anda sendiri");
 define("L_SET_10", "umum");
@@ -42,6 +42,7 @@ define("L_SET_15", "Kamar pribadi standar");
 define("L_SET_16", "Kamar pribadi yang dibuat oleh para pengguna");
 define("L_SET_17", "Pilih avatar Anda");
 define("L_SET_18", "Bookmark halaman ini: tekan \"Ctrl+D\".");
+define("L_SET_19", "Ingatkan saya");
 
 define("L_SRC", "tersedia dengan gratis di");
 
@@ -253,6 +254,9 @@ define("L_HELP_CMD_31", "Ubah pengurutan daftar pengguna: dari waktu saat masuk 
 define("L_HELP_CMD_32", "Ini adalah kali ketiga permainan dadu.<br />Pakai: /d{n1}[tn2] atau /d{n1};<br />n1 dapat mengambil semua angka <b>diantara 1 and 100</b> (itu menunjukan nomor dari bagian sisi per dadu).<br />n2 dapat mengambil semua nilai <b>diantara 1 dan %s</b> (itu menunjukan nomor dari jumlah putaran tiap kali lemparan).");
 define("L_HELP_CMD_33", "Ubah ukuran font dari isi pesan-pesan ditempat obrolan yang dipilih oleh penggunanya (diperbolehkan jika nilai n: <b>diantara 7 dan 15</b>); Ini /size adalah perintah reset ukuran font kembali ke ukuran asalnya, ke nilai (<b>".$FontSize."</b>).");
 define("L_HELP_CMD_34", "Ini akan mengijinkan pengguna untuk mengubah arah penulisan pesan (ltr = kiri-ke-kanan, rtl = kanan-ke-kiri).");
+define("L_HELP_CMD_35", "Diperbolehkan untuk memposting <i>satu file video</i> atau <i>satu file audio</i> dalam bentuk flash player kecil.<br />Penggunaannya: Letakan sumber URLnya! Contoh <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Anda memerlukan software Shockwave Flash Player yang sudah terinstall dikomputer Anda. Linknya adalah case sensitive!<br />TIPS: ketik /video diikuti tanda spasi dan letakan URL di kotaknya.");
+define("L_HELP_CMD_35a", "Perintah kedua, hanya dapat bekerja di youtube.com sebagai sumber dari videonya.<br />Contoh <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
+define("L_HELP_CMD_36", "Dapat diperkenankan untuk posting <i>satu video youtube</i> dalam bentuk file Flash player yang kecil<br />Penggunaannya: Langsung letakan sumber URL! Seperti <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Anda membutuhkan Shockwave Flash Player yang terinstall disystem Anda. Linknya case sensitive!<br />TIPS: ketik /tube diikuti tanda spasi dan letakan URLnya didalam kotak tersebut.");
 define("L_HELP_CMD_VAR", "Persamaan (beragam): %s"); // a list of English and/or translated alternatives for each command
 define("L_HELP_ETIQ_1", "Etika mengobrol");
 define("L_HELP_ETIQ_2", "Tempat kami ingin membuat komunitas yang bersahabat dan menyenangkan, jadi tolong ikuti anjuran yang tertera dibawah ini. Jika tidak, maka seseorang moderator akan menghentikan aktifitas Anda dari tempat obrolan.<br /><br />Terima-kasih,");
@@ -465,6 +469,7 @@ define("L_PASS_6", "Jawaban rahasia");
 define("L_PASS_7", "Menghapus ulang kata sandi");
 define("L_PASS_8", "Kata sandi Anda telah sukses dihapus ulang.");
 define("L_PASS_9", "Kata sandi terbaru Anda untuk masuk ke tempat ngobrol");
+define("L_PASS_10", "Kata sandi terbaru Anda untuk masuk ke tempat ngobrol: %s");
 define("L_PASS_11", "Selamat datang kembali diserver obrol kami!");
 define("L_PASS_12", "Pilih pertanyaan Anda ...");
 define("L_ERR_PASS_1", "Nama pengguna salah. Pilih yang punya Anda.");
@@ -633,6 +638,7 @@ define("L_LANG_EN", "Inggris"); // for admin panel only
 define("L_LANG_ENUK", "Inggris UK"); // for UK formats and flags
 define("L_LANG_ENUS", "Inggris US"); // for US formats and flags
 define("L_LANG_ES", "Spanyol");
+define("L_LANG_FA", "Persia (Farsi)");
 define("L_LANG_FR", "Prancis");
 define("L_LANG_GR", "Yunani");
 define("L_LANG_HE", "Hebrew");
@@ -640,7 +646,9 @@ define("L_LANG_HI", "Hindi");
 define("L_LANG_HU", "Hongaria");
 define("L_LANG_ID", "Bahasa Indonesia");
 define("L_LANG_IT", "Itali");
+define("L_LANG_JA", "Jepang (Kanji)");
 define("L_LANG_KA", "Georgia");
+define("L_LANG_NE", "Nepal");
 define("L_LANG_NL", "Belanda");
 define("L_LANG_RO", "Rumania");
 define("L_LANG_SK", "Slovakia");
@@ -695,4 +703,20 @@ define("L_OPID_REG", "Impor ID biodata OpenID Anda");
 // Support buttons
 define("L_SUPP_WARN", "Anda terpilih untuk menjadi pengembang sukarela dari\\n".APP_NAME." dengan menyumbangkan sejumlah donasi bagi pengembang.\\nTerima kasih atas dukungan Anda!\\n\\nCatatan: penerima bukan sebagai pemilik tempat obrol ini.\\nMohon masukan jumlah donasi di halaman berikutnya.\\n\\nLanjutkan?");
 define("L_SUPP_ALT", "Pakai PayPal untuk pengembangan ".APP_NAME." - Ini Cepat, Gratis, dan Aman!");
+
+// Video & Audio & Youtube cmds (Embevi & YouTube player class) – same approach as in // Img cmd mod section!
+define("L_AUDIO", "File audio diposting oleh");
+define("L_VIDEO", "File video diposting oleh");
+define("L_HELP_VIDEO", "Alamat penuh dari sumber video atau audio yang diposting");
+define("L_NO_VIDEO", "URL tidak bisa diembedded.\\nIni bukan URL yang benar untuk sumber video atau audio.\\nCoba lagi!");
+define("L_ORIG_VIDEO", "untuk membuka alamat aslinya"); //it sounds like: Click here to open the…
+
+// Birthday mod - by Ciprian
+define("L_PRO_7", "Tanggal lahir");
+define("L_PRO_8", "Tampilkan tanda lahir ke publik");
+define("L_PRO_9", "Tampilkan umur ke publik");
+define("L_PRO_10", "Umur");
+define("L_PRO_11", "%1\$d tahun, %2\$d bulan dan %3\$d hari"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
+define("L_DOB_TIT_1", "Daftar yang Ulang Tahun");
+$L_DOB_SUBJ = "Selamat Ulang Tahun %s!";
 ?>

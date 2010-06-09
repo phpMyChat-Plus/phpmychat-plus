@@ -10,14 +10,15 @@
 define("L_DAY", "Dag");
 define("L_MONTH", "Månad");
 define("L_YEAR", "År");
-define("L_PREV", "Föregående");
+define("L_PREV", "Tidigare");
 define("L_NEXT", "Nästa");
-define("L_REF_CAL", "Uppfriskande Kalender...");
+define("L_REF_CAL", "Uppdatera Kalendern...");
+define("L_CHK_VAL", "Kolla värdet");
 define("L_SEL_LANG", "Välj språk");
-define("L_SEL_ICON", "Välj ikon");
+define("L_SEL_ICON", "Välj icon");
 define("L_SEL_DATE", "Välj datum");
 define("L_ERR_SEL", "Ditt val är inte giltig");
-define("L_NOT_ALLOWED", "Detta datum får inte väljas");
+define("L_NOT_ALLOWED", "Detta datum är inte tillåtet att välja");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
