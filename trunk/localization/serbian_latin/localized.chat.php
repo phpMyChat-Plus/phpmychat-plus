@@ -719,6 +719,6 @@ define("L_PRO_8", "pokaži rođendan u javnim informacijama");
 define("L_PRO_9", "pokaži starosnu dob u javnim informacijama");
 define("L_PRO_10", "Starosna dob");
 define("L_PRO_11", "%1\$d godina, %2\$d meseci i %3\$d dana"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
-define("L_DOB_SUBJ", "Srećan Rođendan %s!");
 define("L_DOB_TIT_1", "Lista Rođendana");
+$L_DOB_SUBJ = "Srećan Rođendan %s!";
 ?>

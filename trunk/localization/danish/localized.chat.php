@@ -1,5 +1,5 @@
 <?php
-// File : danish/localized.chat.php - plus version (01.08.2009 - rev.43)
+// File : danish/localized.chat.php - plus version (20.03.2010 - rev.44)
 // Original translation by Jonas Koch Bentzen <post@jonaskochbentzen.dk> & Kenneth Kristiansen <kk@linuxfreak.adsl.dk>
 // Updates, corrections and additions for the Plus version by Bente Feldballe
 // Do not use ' but use  ’  instead (utf-8 edit bug)
@@ -42,6 +42,7 @@ define("L_SET_15", "Standard private chatrum");
 define("L_SET_16", "Private rum oprettet af brugere");
 define("L_SET_17", "Vælg dit avatar");
 define("L_SET_18", "Føj denne side til dine favoritter: tryk på \"Ctrl+D\".");
+define("L_SET_19", "Husk mig");
 
 define("L_SRC", "fås gratis på");
 
@@ -253,6 +254,9 @@ define("L_HELP_CMD_31", "Ændrer den rækkefølge, som brugerne vises på listen
 define("L_HELP_CMD_32", "Dette er den tredie (rollespils) version af terningespillet.<br />Sådan gør du: /d{n1}[tn2] eller /d{n1};<br />n1 kan have en hvilken som helst værdi <b>mellem 1 og 100</b> (tallet svarer til antallet af kast pr. terning).<br />n2 kan have en hvilken som helst værdi <b>mellem 1 og %s</b> (tallet svarer til antallet af terninger pr. kast).");
 define("L_HELP_CMD_33", "Du kan ændre fontstørrelsen på dine poster i chatten efter behag (tilladte værdier for n: <b>mellem 7 og 15</b>); kommandoen /size ændrer fontstørrelsen tilbage til standardværdien (<b>".$FontSize."</b>).");
 define("L_HELP_CMD_34", "Her kan en bruger angive tekstens justering (ltr = venstre-mod-højre, rtl = højre-mod-venstre).");
+define("L_HELP_CMD_35", "Du kan poste <i>én video</i> eller <i>én audiofil</i> ad gangen i en lille Flash-afspiller.<br />Fremgangsmåde: indsæt adressen på den kilde, du vil poste! F.eks. <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Du skal have Shockwave Flash Player installeret på din maskine. Linket er versalfølsomt!<br />TIP: tast /video fulgt af mellemrum og indsæt linket i boksen.");
+define("L_HELP_CMD_35a", "Den anden kommando fungerer kun med youtube.com som videokilde.<br />F.eks. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
+define("L_HELP_CMD_36", "Du kan poste <i>én youtube video</i> ad gangen i en lille Flash-afspiller.<br />Fremgangsmåde: indsæt adressen på den kilde, du vil poste! F.eks. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Du skal have Shockwave Flash Player installeret på din maskine. Linket er versalfølsomt!<br />TIP: tast /tube fulgt af mellemrum og indsæt linket i boksen.");
 define("L_HELP_CMD_VAR", "Synonymer (varianter): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Chat Etikette");
 define("L_HELP_ETIQ_2", "Vi ønsker at denne chat skal være venlig og sjov, og derfor bedes du følge nedenstående retningslinjer. Hvis du ikke overholder retningslinjerne, risikerer du, at en af chattens moderatorer sparker dig ud fra chatten.<br /><br />Tak,");
@@ -464,6 +468,7 @@ define("L_PASS_6", "Hemmelige svar");
 define("L_PASS_7", "Skift password");
 define("L_PASS_8", "Dit password er blevet ændret.");
 define("L_PASS_9", "Dit nye password til chatten");
+define("L_PASS_10", "Dit nye password til chatten: %s");
 define("L_PASS_11", "Velkommen tilbage til chatten!");
 define("L_PASS_12", "Vælg dit spørgsmål ...");
 define("L_ERR_PASS_1", "Forkert brugernavn. Vælg dit eget.");
@@ -633,6 +638,7 @@ define("L_LANG_EN", "Engelsk"); // gælder kun admin panelet
 define("L_LANG_ENUK", "Britisk Engelsk"); // gælder britiske formater og flag
 define("L_LANG_ENUS", "Amerikansk Engelsk"); // gælder amerikanske formater og flag
 define("L_LANG_ES", "Spansk");
+define("L_LANG_FA", "Persisk (Farsi)");
 define("L_LANG_FR", "Fransk");
 define("L_LANG_GR", "Græsk");
 define("L_LANG_HE", "Hebræisk");
@@ -640,7 +646,9 @@ define("L_LANG_HI", "Hindi");
 define("L_LANG_HU", "Ungarsk");
 define("L_LANG_ID", "Indonesisk");
 define("L_LANG_IT", "Italiensk");
+define("L_LANG_JA", "Japansk (Kanji)");
 define("L_LANG_KA", "Georgisk");
+define("L_LANG_NE", "Nepalesisk");
 define("L_LANG_NL", "Hollandsk");
 define("L_LANG_RO", "Rumænsk");
 define("L_LANG_SK", "Slovakisk");
@@ -695,4 +703,20 @@ define("L_OPID_REG", "Importér din OpenID profil");
 // Support buttons
 define("L_SUPP_WARN", "Du har valgt at bidrage til udviklingen af det gratis program\\n".APP_NAME." ved at sende et bidrag til programudvikleren.\\nTak for din støtte!\\n\\nBemærk: modtageren er ikke ejeren af denne chat.\\nIndtast beløbsstørrelse på næste side.\\n\\nFortsæt?");
 define("L_SUPP_ALT", "Støt udviklingen af ".APP_NAME." med PayPal - det er Hurtigt, Gratis og Sikkert!");
+
+// Video & Audio & Youtube cmds (Embevi & YouTube player class) – same approach as in // Img cmd mod section!
+define("L_AUDIO", "Audiofil postet af");
+define("L_VIDEO", "Video postet af");
+define("L_HELP_VIDEO", "fuld sti til video- eller audiokilde, du vil poste");
+define("L_NO_VIDEO", "URL kan ikke embeddes.\\nDette er ikke en gyldig URL for en godkendt offentlig video- eller audiokilde.\\nPrøv igen!");
+define("L_ORIG_VIDEO", "for at åbne den originale kilde"); //it sounds like: Click here to open the…
+
+// Birthday mod - by Ciprian
+define("L_PRO_7", "Fødselsdato");
+define("L_PRO_8", "Vis fødselsdato i offentlige oplysninger");
+define("L_PRO_9", "Vis alder i offentlige oplysninger");
+define("L_PRO_10", "Alder");
+define("L_PRO_11", "%1\$d år, %2\$d måneder og %3\$d dage"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
+define("L_DOB_TIT_1", "Fødselsdagsliste");
+$L_DOB_SUBJ = "Tillykke med Fødselsdagen %s!";
 ?>
