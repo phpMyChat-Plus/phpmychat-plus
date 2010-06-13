@@ -1,5 +1,5 @@
 <?php
-// File : french/localized.chat.php - plus version (20.03.2009 - rev.44)
+// File : french/localized.chat.php - plus version (20.03.2010 - rev.44)
 // Translation for Plus version by Pierre Liget <sourceforge@pliget.freesurf.fr> 10.12.2007
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)

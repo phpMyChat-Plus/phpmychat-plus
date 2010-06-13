@@ -78,11 +78,11 @@ if(C_BDAY_EMAIL)
 					$dob1_subject = sprintf($L_DOB_SUBJ, $dob_name);
 					if(send_dob_email($dob_name, $dob_email, "[".(C_CHAT_NAME != "" ? C_CHAT_NAME : APP_NAME)."] ". $dob1_subject, $greet_text))
 					{
-						include("admin/mail4admin.lib.php");
+						include_once("admin/mail4admin.lib.php");
 						send_email_admin($Sender_name." <".$Sender_email.">", "[".(C_CHAT_NAME != "" ? C_CHAT_NAME : APP_NAME)."] ".$dob1_subject." - copy", "This is a copy:".$eol.$eol.$greet_text.$eol.$eol.$dob1_subject.$eol.$dob_birthday);
 						$ChatB->query("UPDATE ".C_REG_TBL." SET bday_email_sent=".time()." WHERE username='".$dob_username."'");
 					}
-					unset($dob_username,$dob_firstname,$dob_lastname,$dob_name,$dob_email,$dob_birthday,$dob_lang,$dob1_subject);
+					unset($dob_username,$dob_firstname,$dob_lastname,$dob_name,$dob_email,$dob_birthday,$dob_lang,$dob1_subject,$greet_text);
 				}
 			}
 		}
