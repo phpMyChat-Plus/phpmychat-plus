@@ -1,5 +1,5 @@
 <?php
-// File : argentinian_spanish/localized.chat.php - plus version (01.08.2009 - rev.43)
+// File : argentinian_spanish/localized.chat.php - plus version (20.03.2010 - rev.44)
 // Original translation in Spanish (for the Argentinian dialect usage) by Jorge Colaccini <jrc@informas.com>
 // Updates, corrections and additions for the Plus version by Matias Olivera <matiolivera@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -43,6 +43,7 @@ define("L_SET_15", "Salón privado por defecto");
 define("L_SET_16", "Salones privados creados por usuarios");
 define("L_SET_17", "Elige tu imagen");
 define("L_SET_18", "Dejar señalada esta página: presioná \"Ctrl+D\".");
+define("L_SET_19", "Recordarme");
 
 define("L_SRC", "están habilitados");
 
@@ -99,9 +100,9 @@ define("L_REG_50", "Registración suspendida!");
 define("L_EMAIL_VAL_1", "Tus datos para ingresar al chat");
 define("L_EMAIL_VAL_2", "Bienvenido a nuestro servidor de chat.");
 define("L_EMAIL_VAL_Err", "Error interno, contactarse con el administrador a: <a href=\"mailto:%s\">%s</a>.");
-define("L_EMAIL_VAL_Done", "Tu contraseña ha sido enviada a la dirección de e-mail.<br />Puedes cambiar tu password de logueo editando tu perfil.");
+define("L_EMAIL_VAL_Done", "Tu contraseña ha sido enviada a la dirección de e-mail.<br />Puedes cambiar tu contraseña de logueo editando tu perfil.");
 define("L_EMAIL_VAL_PENDING_Done", "La formación de tu registro fue enviada a revisión.");
-define("L_EMAIL_VAL_PENDING_Done1", "Te enviaremos el password una vez que el administrador haya aprobado tu cuenta.");
+define("L_EMAIL_VAL_PENDING_Done1", "Te enviaremos el contraseña una vez que el administrador haya aprobado tu cuenta.");
 define("L_EMAIL_VAL_3", "Tu registro está pendiente por %s");
 define("L_EMAIL_VAL_31", "Felicitaciones! Tu registro fue revisado y aprobado!");
 define("L_EMAIL_VAL_32", "Esta es tu infromación de registro para %s en %s:"); //chat name at chaturl
@@ -113,7 +114,7 @@ define("L_EMAIL_VAL_6", "Registrado en %s");
 define("L_EMAIL_VAL_61", "Acualizado el  %s");
 define("L_EMAIL_VAL_7", "Abajo está tu %s información actualizada de la cuenta:"); //username
 define("L_EMAIL_VAL_8", "Guarda este mail para futures referencias.\nPor favor hazlo con cuidado y no compartas esta información.\nGracias! Que lo disfrutes!");
-define("L_EMAIL_VAL_81", "Puedes cambiar tu password de logueo editando tu perfil.");
+define("L_EMAIL_VAL_81", "Puedes cambiar tu contraseña de logueo editando tu perfil.");
 
 // admin stuff
 define("L_ADM_1", "%s no es un moderador para este salón.");
@@ -254,6 +255,9 @@ define("L_HELP_CMD_31", "Cambia el orden de los usuarios en las listas: por orde
 define("L_HELP_CMD_32", "Esta es una tercera versión del juego de dados.<br />Uso: /d{n1}[tn2] or /d{n1};<br />n1 puede tomar cualquier valor <b>entre 1 and 100</b> (representa el número de giros por dado).<br />n2 puede tomar cualquier valor <b>entre 1 y %s</b> (representa el número de dados por tirada).");
 define("L_HELP_CMD_33", "Cambia el tamaño de fuente de los mensajes en el chat de acuerdo a la selección del usuario (valores permitidos para n: <b>entre 7 y 15</b>); el comando /size resetea el tamaño de fuente al valor por defecto (<b>".$FontSize."</b>).");
 define("L_HELP_CMD_34", "Esto permitirá al usuario especificar la orientación del mensaje de texto (ltr,iad = izquierda-a-derecha; rtl,dai = derecha-a-izquierda).");
+define("L_HELP_CMD_35", "Permite la publicación de <i>un video</i> o <i>un archivo de audio</i> en un pequeño reproductor Flash a la vez.<br />Como usar: Simplemente pega la URL de origen de lo que quieres publicar! Ej. <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Necesitarás Shockwave Flash Player Instalado en tu sistema. El enlace diferencia entre mayúsculas y minúsculas!<br />Sugerencia: escribe /video seguido por un espacio y pega la URL en el cuadro de texto.");
+define("L_HELP_CMD_35a", "El segundo comando solo funciona con videos provenientes de youtube.com.<br />Ej. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
+define("L_HELP_CMD_36", "Permite publicar <i>un video de youtube</i> en un pequeño reproductor Flash a la vez.<br />Como usar: Simplemente pega la URL de origen de lo que quieres publicar! Ej. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Necesitarás Shockwave Flash Player Instalado en tu sistema. El enlace diferencia entre mayúsculas y minúsculas!<br />Sugerencia: escribe /tube seguido por un espacio y pega la URL en el cuadro de texto.");
 define("L_HELP_CMD_VAR", "Sinónimos (variantes): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Lineamientos del Chat");
 define("L_HELP_ETIQ_2", "Quisieramos mantener a esta comunidad amigable y divertida, por eso te pedimos por favor que cumplas las siguientes reglas. En caso contrario uno de nuestros moderadores podría deshabilitarte del chat.<br /><br />Gracias,");
@@ -455,16 +459,17 @@ define("L_RELOAD_CHAT", "La configuración de este servidor ha sido modificada. 
 define("L_ERR_SIZE", "El tamańo de fuente solo puede ser \\nnull (para resetearlo) o estar entre 7 y 15");
 
 // Password reset form by Ciprian
-define("L_PASS_0", "Formulario de reseteo de password");
+define("L_PASS_0", "Formulario de reseteo de contraseña");
 define("L_PASS_1", "Pregunta secreta");
 define("L_PASS_2", "Cuál fue tu primer auto?"); // Don't change this question! Just translate it!
 define("L_PASS_3", "Cuál era el nombre de tu primer mascota?"); // Don't change this question! Just translate it!
 define("L_PASS_4", "Cuál es tu bebida favorita?"); // Don't change this question! Just translate it!
 define("L_PASS_5", "Cuál es tu fecha de nacimiento?"); // Don't change this question! Just translate it!
 define("L_PASS_6", "Respuesta secreta");
-define("L_PASS_7", "Resetear password");
-define("L_PASS_8", "Tu password ha sido reseteado.");
-define("L_PASS_9", "Tu nuevo password para entrar al chat");
+define("L_PASS_7", "Resetear contraseña");
+define("L_PASS_8", "Tu contraseña ha sido reseteado.");
+define("L_PASS_9", "Tu nuevo contraseña para entrar al chat");
+define("L_PASS_10", "Tu nueva contraseña para entrar en el chat: %s"); 
 define("L_PASS_11", "Bienvenido nuevamente a nuestro chat!");
 define("L_PASS_12", "Elige tu pregunta ...");
 define("L_ERR_PASS_1", "Nombre de usuario incorrecto. Elige el tuyo.");
@@ -633,6 +638,7 @@ define("L_LANG_EN", "Inglés"); // for admin panel only
 define("L_LANG_ENUK", "Inglés UK"); // for UK formats and flags
 define("L_LANG_ENUS", "Inglés USA"); // for US formats and flags
 define("L_LANG_ES", "Español");
+define("L_LANG_FA", "Persa (Farsi)");
 define("L_LANG_FR", "Frances");
 define("L_LANG_GR", "Griego");
 define("L_LANG_HE", "Hebreo");
@@ -640,7 +646,9 @@ define("L_LANG_HI", "Indú");
 define("L_LANG_HU", "Húngaro");
 define("L_LANG_ID", "Indonesio");
 define("L_LANG_IT", "Italiano");
+define("L_LANG_JA", "Japonés (Kanji)");
 define("L_LANG_KA", "Georgiano");
+define("L_LANG_NE", "Nepalés");
 define("L_LANG_NL", "Holandés");
 define("L_LANG_RO", "Rumano");
 define("L_LANG_SK", "Eslovaco");
@@ -695,4 +703,20 @@ define("L_OPID_REG", "Importá tu perfil de OpenID");
 // Support buttons
 define("L_SUPP_WARN", "Has escogido contribuir con el Desarrollo gratuito de\\n".APP_NAME." al hacer una donación al programador.\\nGracias por tu apoyo!\\n\\nNota: el beneficiario no es el dueño de este chat.\\nPor favor pon la cantidad en la siguiente página.\\n\\nContinuar?");
 define("L_SUPP_ALT", "Usa PAYPAL para apoyar el desarrollo de ".APP_NAME." - es Rápido, Gratis y Seguro!");
+
+// Video & Audio & Youtube cmds (Embevi & YouTube player class) – same approach as in // Img cmd mod section!
+define("L_AUDIO", "Archivo de audio publicado por");
+define("L_VIDEO", "Video publicado por");
+define("L_HELP_VIDEO", "ruta completa al video o audio a ser publicado");
+define("L_NO_VIDEO", "La URL no puede ser embebida.\\nNo es una URL válida a un video o audio público.\\nIntentá nuevamente!");
+define("L_ORIG_VIDEO", "para abrir el sitio original"); //it sounds like: Click here to open the…
+
+// Birthday mod - by Ciprian
+define("L_PRO_7", "Fecha de nacimiento");
+define("L_PRO_8", "mostrar fecha de nacimiento en tu información pública");
+define("L_PRO_9", "mostrar edad en información pública");
+define("L_PRO_10", "Edad");
+define("L_PRO_11", "%1\$d años, %2\$d meses y %3\$d días"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
+define("L_DOB_TIT_1", "Lista de cumpleaños");
+$L_DOB_SUBJ = "Feliz cumpleaños %s!";
 ?>
