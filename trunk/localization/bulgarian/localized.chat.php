@@ -1,5 +1,5 @@
 <?php
-// File : bulgarian/localized.chat.php - plus version (01.08.2009 - rev.43)
+// File : bulgarian/localized.chat.php - plus version (20.03.2010 - rev.44)
 // Translation by Peter Petrov <peter.m.petrov@gmail.com>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
@@ -42,6 +42,7 @@ define("L_SET_15", "Основни частни стаи");
 define("L_SET_16", "Потребителски частни стаи");
 define("L_SET_17", "Изберете си аватар");
 define("L_SET_18", "Запишете си тази страница: натиснете \"Ctrl+D\".");
+define("L_SET_19", "Запомни ме");
 
 define("L_SRC", "е наличен безплатно на");
 
@@ -253,6 +254,9 @@ define("L_HELP_CMD_31", "Променя подреждането на участ
 define("L_HELP_CMD_32", "Това е третата версия на хвърляне на зарове.<br />Употреба: /d{n1}[tn2] или /d{n1};<br />n1 може да бъде всяко цяло число <b>между 1 и 100</b> и представлява броя на страните на едно зарче.<br />n2 може да бъде всяко цяло число <b>между 1 и %s</b> и представлява броя на хвърляните зарчета.");
 define("L_HELP_CMD_33", "Променя размера на шрифта на съобщенията в чата (допустими стойности за n: <b>между 7 и 15</b>). Командата /size връща подразбиращата се стойност за размер на шрифта (<b>".$FontSize."</b>).");
 define("L_HELP_CMD_34", "Това ще позволи на потребителя да определи ориентацията на едно съобщение  (ltr = от ляво на дясно, rtl = от дясно на ляво).");
+define("L_HELP_CMD_35", "Позволява публикуването на <i>един видео</i> или <i>един аудио файл</i> в малък Flash плейър в даден момент.<br />Използване: Просто направете paste на url-а на източника, който ще се публикува! Например <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Необходим ви е Shockwave Flash Player инсталиран на вашата система. Линкът е чувствителен към главни букви!<br />СЪВЕТ: напишете /video последвано от интервал и лепнете URL-а в полето.");
+define("L_HELP_CMD_35a", "Втората команда работи само с youtube.com като видео източник.<br />Например <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
+define("L_HELP_CMD_36", "Позволява публикуване на <i>едно YouTube видео</i> в малък Flash плейър в даден момент.<br />Използване: Просто направете paste на url-а на източника, който трябва да се публикува! Например <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br /> Необходим ви е Shockwave Flash Player инсталиран на вашата система. Линкът е чувствителен към главни букви!<br />СЪВЕТ: напишете /tube последвано от интервал и лепнете URL-а в полето.");
 define("L_HELP_CMD_VAR", "Синоними (варианти): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Чат етикет");
 define("L_HELP_ETIQ_2", "Нашият сайт би желал да поддържа приятелска и забавна общност. Ето защо Ви умоляваме да спазвате следните указания. Ако подминете тези правила нашите модератори може да ви изхвърлят от чата.<br /><br />Благодарим Ви,");
@@ -466,6 +470,7 @@ define("L_PASS_6", "Tаен отговор");
 define("L_PASS_7", "Смени паролата");
 define("L_PASS_8", "Вашата парола бе сменена успешно.");
 define("L_PASS_9", "Вашата нова парола за влизане в чата");
+define("L_PASS_10", "Вашата нова парола за влизане в чата: %s");
 define("L_PASS_11", "Добре дошли отново на нашия чат сървър!");
 define("L_PASS_12", "Изберете въпрос...");
 define("L_ERR_PASS_1", "Грешен псевдоним. Въведете Вашия.");
@@ -636,13 +641,16 @@ define("L_LANG_ENUK", "Английски UK"); // for UK formats and flags
 define("L_LANG_ENUS", "Английски US"); // for US formats and flags
 define("L_LANG_ES", "Испански");
 define("L_LANG_GR", "Гръцки");
+define("L_LANG_FA", "Персийски (Фарси)");
 define("L_LANG_FR", "Френски");
 define("L_LANG_HE", "Български");
 define("L_LANG_HI", "Хинди");
 define("L_LANG_HU", "Унгарски");
 define("L_LANG_ID", "Индонезийски");
 define("L_LANG_IT", "Италиански");
+define("L_LANG_JA", "Японски (Канджи)");
 define("L_LANG_KA", "Грузински");
+define("L_LANG_NE", "Непалски");
 define("L_LANG_NL", "Холандски");
 define("L_LANG_RO", "Румънски");
 define("L_LANG_SK", "Словашки");
@@ -697,4 +705,20 @@ define("L_OPID_REG", "Внесете вашия OpenID профил");
 // Support buttons
 define("L_SUPP_WARN", "Избрахте да помогнете за безплатното развитие на\\n".APP_NAME." с дарение за разработчика.\\nБлагодарим Ви за подкрепата!\\n\\nЗаб.: Получателят не е собственик на този чат.\\nМоля въведете размера на сумата на следващата страница.\\n\\nПродължавате?");
 define("L_SUPP_ALT", "Подкрепата за разработването на ".APP_NAME." чрез PayPal - бързо, безплатно и сигурно!");
+
+// Video & Audio & Youtube cmds (Embevi & YouTube player class) – same approach as in // Img cmd mod section!
+define("L_AUDIO", "Аудио файл публикуван от");
+define("L_VIDEO", "Видео публикувано от");
+define("L_HELP_VIDEO", "пълен път до видео или аудио източника, който ще се публикува");
+define("L_NO_VIDEO", "URL-ът не може да се прикрепи.\\nТова не е валиден URL на приет публичен видео или аудио източник.\\nОпитайте отново!");
+define("L_ORIG_VIDEO", "за да отворите сайта на оригиналния източник"); //it sounds like: Click here to open the…
+
+// Birthday mod - by Ciprian
+define("L_PRO_7", "Дата на раждане");
+define("L_PRO_8", "Покажи  рождената дата в публичната информация");
+define("L_PRO_9", "Покажи възрастта в публичната информация");
+define("L_PRO_10", "Възраст");
+define("L_PRO_11", "%1\$d години, %2\$d месеци и дни %3\$d дни"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
+define("L_DOB_TIT_1", "Списък на рождените дни");
+$L_DOB_SUBJ = "Честит рожден ден %s!";
 ?>
