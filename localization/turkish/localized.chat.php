@@ -1,5 +1,5 @@
 <?php
-// File : turkish/localized.chat.php - plus version (01.08.2009 - rev.43)
+// File : turkish/localized.chat.php - plus version (20.03.2010 - rev.44)
 // Original translation in turkish by Volkan Övün <vovun@hotmail.com>
 // Finetunning by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -42,6 +42,7 @@ define("L_SET_15", "Mevcut özel odalar");
 define("L_SET_16", "Kullanıcılar tarafından oluşturulan özel odalar");
 define("L_SET_17", "Avatarınızı seçin");
 define("L_SET_18", "Bu sayfayı favorilerinize ekleyin: \"Ctrl+D\" ye basın.");
+define("L_SET_19", "Beni hatırla");
 
 define("L_SRC", "ücretsiz olarak var");
 
@@ -252,6 +253,9 @@ define("L_HELP_CMD_31", "Kullanıcıların listedeki sıralamasını giriş saat
 define("L_HELP_CMD_32", "Bu, zar atma oyununun üçüncü şeklidir.<br />Kullanımı: /d{n1}[tn2] yazın /d{n1} yazın;<br />n1 <b>1 ve 100</b> arasında herhangi bir değer alabilir.(zarların yuvarlanma sayısını ifade eder).<br />n2 <b>1 ve %s arasında</b> herhangi bir değer alabilir. (zarların her atılıştaki yuvarlanma sayısını ifade eder).");
 define("L_HELP_CMD_33", "Mesajdaki harflerin büyüklüğünü kullanıcının tercihine göre değiştirir. ( n için izin verilen değerler: <b>7 ve 15 arası</b>); /size komutu harf büyüklüğünü varsayılan değere geri çevirir (<b>".$FontSize."</b>).");
 define("L_HELP_CMD_34", "Bu, bir kullanıcının gönderdiği mesajın yazım yönünü belirlemesine izin (ltr = soldan-sağa, rtl = sağdan-sola).");
+define("L_HELP_CMD_35", "Bir defada küçük Flash oynatıcıya <i>bir video</i> veya <i>bir ses dosyasıe</i> göndermenize izin verir.<br />Kullanımı: Göndfermek istediğiniz kaynağın URL adresini yapıştırın! Örnek <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Sisteminizde Shockwave Flash Player yüklü olması gerekir. Bağlantı, büyük küçük harflere duyarlıdır!<br />İPUCU: /video yazın ve URL yi kutu içine kopyala yapıştır yapın.");
+define("L_HELP_CMD_35a", "İkinci komut sadece youtube.com da çalışır.<br />Örnek <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
+define("L_HELP_CMD_36", "Bir defada küçük Flash oynatıcıya <i>bir youtube video</i> göndermenize izin verir.<br />Kullanımı: Göndfermek istediğiniz kaynağın URL adresini yapıştırın! Örnek <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Sisteminizde Shockwave Flash Player yüklü olması gerekir. Bağlantı, büyük küçük harflere duyarlıdır!<br />İPUCU: /tube yazın ve URL yi kutu içine kopyala yapıştır yapın.");
 define("L_HELP_CMD_VAR", "Eş anlamlılar: %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Sohbet Görgü Kuralları");
 define("L_HELP_ETIQ_2", "Sitemiz üyelerini arkadaşlık çerçevesi içinde tutmayı ve eğlendirmeyi hedeflemektedir, bu nedenle aşağıdaki kurallara titizlikle uyunuz. Eğer kuralları çiğnerseniz Sohbet Denetleyicilerimizden biri sizi sohbetten dışarı atabilir.<br /><br />Teşekkürler,");
@@ -463,6 +467,7 @@ define("L_PASS_6", "Gizli cevabınız");
 define("L_PASS_7", "Şifreyi yenile");
 define("L_PASS_8", "Şifreniz başarıyla yenilendi.");
 define("L_PASS_9", "Sohbete girmek için yeni şifreniz");
+define("L_PASS_10", "Sohbete giriş için yeni şifreniz : %s");
 define("L_PASS_11", "Sohbet sunucumuza tekrar hoşgeldiniz!");
 define("L_PASS_12", "Sorunuzu seçin ...");
 define("L_ERR_PASS_1", "Yanlış kullanıcı adı. Kendinizinkini kullanın.");
@@ -637,6 +642,7 @@ define("L_LANG_EN", "İngilizce");
 define("L_LANG_ENUK", "İngiliz İngilizcesi");
 define("L_LANG_ENUS", "Amerikan İngilizcesi");
 define("L_LANG_ES", "İspanyolca");
+define("L_LANG_FA", "Farsça");
 define("L_LANG_FR", "Fransızca");
 define("L_LANG_GR", "Rumca");
 define("L_LANG_HE", "İbranice");
@@ -644,7 +650,9 @@ define("L_LANG_HI", "Hintçe");
 define("L_LANG_HU", "Macarca");
 define("L_LANG_ID", "Endonezyaca");
 define("L_LANG_IT", "İtalyanca");
+define("L_LANG_JA", "Japonca");
 define("L_LANG_KA", "Gürcüce");
+define("L_LANG_NE", "Nepalce");
 define("L_LANG_NL", "Flemenkçe");
 define("L_LANG_RO", "Romence");
 define("L_LANG_SK", "Slovakça");
@@ -704,4 +712,20 @@ define("L_OPID_REG", "OpenID profilinizi buraya aktarın");
 // Support buttons
 define("L_SUPP_WARN", "Yazılımcıya bağış yaparak, ".APP_NAME." in\\nücretsiz olarak geliştirilmesine katkıda bulundunuz.\\nDesteğiniz için teşekkür ederiz!\\n\\nNot: bağışı alan bu sohbetin kurucusu değildir.\\nSonraki sayfada lütfen bağış miktarını yazınız.\\n\\nDevam etmek istiyor musunuz?");
 define("L_SUPP_ALT", APP_NAME." geiştirilmesini PayPal ile destekleyin. Bu yöntem hızlı, ücretsiz ve güvenli!");
+
+// Video & Audio & Youtube cmds (Embevi & YouTube player class) – same approach as in // Img cmd mod section!
+define("L_AUDIO", "Ses dosyasını gönderen");
+define("L_VIDEO", "Video dosyasını gönderen");
+define("L_HELP_VIDEO", "gönderilen ses veya video dosyasının tam adresi");
+define("L_NO_VIDEO", " URL eklenemez.\\nKabul edilebilir genel video veya ses dosyası için geçerli URL değil.\\nTekrar deneyin!");
+define("L_ORIG_VIDEO", "Orjinal kaynak siteyi açmak için"); //it sounds like: Click here to open the…
+
+// Birthday mod - by Ciprian
+define("L_PRO_7", "Doğum tarihi");
+define("L_PRO_8", "Doğum tarihini genel bilgilerde göster");
+define("L_PRO_9", "Yaş bilgisini genel bilgilerde göster");
+define("L_PRO_10", "Yaş");
+define("L_PRO_11", "%1\$d yıl, %2\$d ay ve %3\$d gün"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
+define("L_DOB_TIT_1", "Doğum günü listesi");
+$L_DOB_SUBJ = "Doğum gününüz kutlu olsun %s!";
 ?>
