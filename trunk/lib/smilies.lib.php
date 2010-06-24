@@ -66,7 +66,7 @@ function Check4Smilies(&$string,&$Table)
 			while(list($key, $prop) = each($Table))
 			{
 				if(ereg($key, $substring)) $ss++;
-				$substring = ereg_replace($key, " <IMG SRC=images/smilies/$prop ALT=\"".SpecialSlash($key)."\"> ", $substring);
+				$substring = ereg_replace($key, " <IMG SRC=\"images/smilies/$prop\" ALT=\"".SpecialSlash($key)."\"> ", $substring);
 			};
 			$tmp_tbl[$i] = $substring;
 		}
@@ -109,13 +109,13 @@ function DisplaySmilies(&$ToDisplay,&$Table,&$TblSize,$Target)
 		{
 		if (($Target == "help") || ($Target == "input")) {
 			$Str1 .= "\t\t<TD ALIGN=\"CENTER\" NOWRAP=\"NOWRAP\">".stripslashes($key)."</TD>\n";
-		  	$Str2 .= "\t\t<TD ALIGN=\"CENTER\" VALIGN=\"TOP\"><A HREF=\"#\" onClick=\"smiley2Input('".SpecialSlash($key)."'); return false\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_5).".'; return true\" title=\"".str_replace("\"","&quot;", stripslashes($key))."\"><IMG SRC=images/smilies/$prop BORDER=0 ALT=\"".str_replace("\"","&quot;", stripslashes($key))."\"></A></TD>\n";
+		  	$Str2 .= "\t\t<TD ALIGN=\"CENTER\" VALIGN=\"TOP\"><A HREF=\"#\" onClick=\"smiley2Input('".SpecialSlash($key)."'); return false\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_5).".'; return true\" title=\"".str_replace("\"","&quot;", stripslashes($key))."\"><IMG SRC=\"images/smilies/$prop\" BORDER=0 ALT=\"".str_replace("\"","&quot;", stripslashes($key))."\"></A></TD>\n";
 		} elseif ($Target == "popup") {
-		  	$Str1 .= "\t\t<TD ALIGN=\"CENTER\" VALIGN=\"TOP\"><A HREF=\"#\" onClick=\"smiley2Input('".SpecialSlash($key)."'); return false\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_5).".'; return true\" title=\"".str_replace("\"","&quot;", stripslashes($key))."\"><IMG SRC=images/smilies/$prop BORDER=0 ALT=\"".str_replace("\"","&quot;", stripslashes($key))."\"></A></TD>\n";
+		  	$Str1 .= "\t\t<TD ALIGN=\"CENTER\" VALIGN=\"TOP\"><A HREF=\"#\" onClick=\"smiley2Input('".SpecialSlash($key)."'); return false\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_5).".'; return true\" title=\"".str_replace("\"","&quot;", stripslashes($key))."\"><IMG SRC=\"images/smilies/$prop\" BORDER=0 ALT=\"".str_replace("\"","&quot;", stripslashes($key))."\"></A></TD>\n";
 		} else {
 			// Automatic smilie files info for uploader handling - by Ciprian
 				$Str1 .= "\t\t<TD ALIGN=\"CENTER\" NOWRAP=\"NOWRAP\">".stripslashes($key)."</TD>\n";
-				$Str2 .= "\t\t<TD ALIGN=CENTER VALIGN=\"TOP\" WIDTH=$MaxWidth HEIGHT=$MaxHeight><IMG SRC=images/smilies/$prop BORDER=0 ALT=\"".str_replace("\"","&quot;", stripslashes($key))."\"></TD>\n";
+				$Str2 .= "\t\t<TD ALIGN=CENTER VALIGN=\"TOP\" WIDTH=$MaxWidth HEIGHT=$MaxHeight><IMG SRC=\"images/smilies/$prop\" BORDER=0 ALT=\"".str_replace("\"","&quot;", stripslashes($key))."\"></TD>\n";
 		};
 		}
 		//   Set SMILEY_COLS in config.lib.php.

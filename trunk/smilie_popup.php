@@ -101,11 +101,14 @@ function smiley2Input(code)
 		if ($i > 0) echo("\t");
 		echo("<TR VALIGN=\"BOTTOM\">\n");
 		echo("$ResultTbl[$i]");
-		echo("\t</TR>\n\t<TR>\n");
+		echo("\t</TR>\n\t<TR VALIGN=\"BOTTOM\">\n");
 		$i++;
-		echo("$ResultTbl[$i]");
-		echo("\t</TR>\n");
-		$i++;
+		if ($i < $Nb)
+		{
+			echo("$ResultTbl[$i]");
+			echo("\t</TR>\n");
+			$i++;
+		}
 	};
 	unset($ResultTbl);
 	?>
