@@ -1930,9 +1930,9 @@ if (SET_BOT && C_BOT_CONTROL)
 }
 ?>
 <?php
+echo("<P>");
 if (C_SHOW_COUNTER)
 {
-	echo("<P>");
 	include_once("./${ChatPath}acounter.php");
     $ani_counter = new acounter();
 	echo ($ani_counter->create_output("chat_index"));
@@ -1941,10 +1941,9 @@ if (C_SHOW_COUNTER)
 ?>
 <font face=Verdana color=yellow size=1><?php echo (sprintf(L_VISITOR_REPORT,$INSTALL_DATE)) ?>.</font>
 <?php
-	echo("</P>");
+echo("</P>");
 }
 ?>
-
 <SPAN CLASS="ChatCopy" dir="LTR">
 &copy; 2000-2005 <a HREF="http://sourceforge.net/projects/phpmychat/" TARGET=_blank CLASS="ChatLink" Title="<?php echo(sprintf(L_CLICK,L_LINKS_7)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_LINKS_7)); ?>.'; return true">The phpHeaven Team</a><br />
 &copy; 2005-<?php echo(date('Y'))?> Plus development by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" Title="<?php echo(sprintf(L_CLICK,L_LINKS_9)); ?>" CLASS="ChatLink" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_DEVELOPER)); ?>.'; return true;">Ciprian M</a>.<br />
