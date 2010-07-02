@@ -119,7 +119,7 @@ UPDATE c_config SET
 			WELCOME_SOUND = 'sounds/hello.wav',
 			QUOTE_COLOR = 'brown',
 			QUOTE_PATH = 'files/quotes/quotes.txt',
-			LAST_SAVED_ON = NOW()
+			LAST_SAVED_ON = NOW(),
 			CHAT_SYSTEM = 'standalone',
 			CHAT_NAME = 'My WonderfulWorldWide Chat',
 			DISP_GENDER = '0',

@@ -5,8 +5,8 @@
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
 
 if (!isset($ChatPath)) $ChatPath = "";
-$mydate = isset($_REQUEST["date5"]) ? $_REQUEST["date5"] : "";
-if($mydate != "") $INSTALL_DATE = $mydate;
+$mydate = isset($_REQUEST["date5"]) ? $_REQUEST["date5"] : $INSTALL_DATE;
+if($mydate != "") $_POST['vINSTALL_DATE'] = $mydate;
 
 if (C_NO_SWEAR) include("./lib/swearing.lib.php");
 $pptype = "big";
@@ -1485,7 +1485,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		  $myCalendar->setDateFormat('j F Y');
 		  $myCalendar->writeScript();
 		?>
-		<input name="vINSTALL_DATE" type="hidden" value="<?php echo $INSTALL_DATE; ?>">
+		<input name="vINSTALL_DATE" type="hidden" value="<?php echo $mydate; ?>">
 	</td>
 </tr>
 </table>
