@@ -340,8 +340,16 @@ INPUT, SELECT, TEXTAREA
 	font-weight: 400;
 }
 
+.mesframePreview
+{
+	background-color: <?php echo($COLOR_BK); ?>;
+	color: <?php echo(COLOR_CD); ?>;
+}
+
 .framePreview
 {
 	background-color: <?php echo($COLOR_BK); ?>;
+	background-image: url("images/de.gif");
+	background-attachment: fixed;
 	color: <?php echo(COLOR_CD); ?>;
 }

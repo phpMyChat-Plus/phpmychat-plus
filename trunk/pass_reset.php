@@ -129,7 +129,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_PASS_7)
 					$pmc_password = gen_password();
 					$PWD_Hash = md5(stripslashes($pmc_password));
 					// Send e-mail
-					$send = send_email(L_PASS_9." [".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]", L_SET_2, L_REG_1, L_PASS_11, 1);
+					$send = send_email(L_PASS_9." [".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]", L_SET_2, L_REG_1, L_PASS_11, TRUE);
 					if (!$send) $Error = sprintf(L_EMAIL_VAL_Err,$Sender_email,$Sender_email);
 					if (!isset($Error) || $Error == "")
 					{
@@ -165,21 +165,16 @@ if (!isset($FontName)) $FontName = "";
 // Insert login and password in fields of the starter page form
 function LoginToIndex()
 {
-<?php
-if ($done)
-{
+	<?php
+	if ($done)
+	{
 	?>
 	var passform = document.forms['PassParams'];
 	var windowHandle = window.open('','login');
 	windowHandle.document.forms['Params'].elements['U'].value = passform.elements['U'].value;
+	windowHandle.document.forms['Params'].elements['pmc_password'].value = "<?php echo($pmc_password); ?>";
 	<?php
-	if (!C_EMAIL_PASWD)
-	{
-		?>
-		windowHandle.document.forms['Params'].elements['pmc_password'].value = "<?php echo($pmc_password); ?>";
-		<?php
-	}
-};
+	};
 	?>
 };
 

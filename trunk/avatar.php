@@ -235,7 +235,7 @@ For ($i=$j; $i <= C_NUM_AVATARS; $i++) {
   $title1=str_replace(".gif","",$title1);
   if ($avatar == $avatarmatch) $title1.=" (".L_SELECTED.")";
   echo "&nbsp;";
-?><a href="<?php echo "$From?avatar=$avatar&ORIGAVATAR=$ORIGAVATAR&User=$User&U=$User&L=$L&FORM_SEND=0&pmc_password=$pmc_password&pmc_username=$User&Link=1\""; ?> onMouseOver="window.status='<?php echo(L_SEL_NEW_AV); ?>.'; return true;" title="<?php echo($title1); ?>" target="_self"><img src="<?php echo("$avatar"); echo("\" width=\"".C_AVA_WIDTH."\" height=\"".C_AVA_HEIGHT."\""); ?> border="<?php echo(($avatar == $avatarmatch) ? "2" : "0"); ?>"> </a><?php echo " ";
+?><a href="<?php echo "$From?avatar=$avatar&ORIGAVATAR=$ORIGAVATAR&User=$User&U=$User&L=$L&FORM_SEND=0&LIMIT=$LIMIT&pmc_password=$pmc_password&pmc_username=$User\""; ?> onMouseOver="window.status='<?php echo(L_SEL_NEW_AV); ?>.'; return true;" title="<?php echo($title1); ?>" target="_self"><img src="<?php echo("$avatar"); echo("\" width=\"".C_AVA_WIDTH."\" height=\"".C_AVA_HEIGHT."\""); ?> border="<?php echo(($avatar == $avatarmatch) ? "2" : "0"); ?>"> </a><?php echo " ";
 }
 ?>
 </td></tr>
@@ -244,7 +244,7 @@ For ($i=$j; $i <= C_NUM_AVATARS; $i++) {
 </td>
 </tr></table>
 <?php
-echo("<a href=\"$From?avatar=$avatarmatch&User=$User&U=$User&L=$L&FORM_SEND=0&LIMIT=$LIMIT&pmc_password=$pmc_password&pmc_username=$User&Link=1\" onMouseOver=\"window.status='".L_REG_10."'; return true;\" ><br />".L_REG_10."</a>");
+echo("<a href=\"$From?avatar=$avatarmatch&User=$User&U=$User&L=$L&FORM_SEND=0&LIMIT=$LIMIT&pmc_password=$pmc_password&pmc_username=$User\" onMouseOver=\"window.status='".L_REG_10."'; return true;\" ><br />".L_REG_10."</a>");
 ?>
 </center>
 </BODY>

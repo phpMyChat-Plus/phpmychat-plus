@@ -295,6 +295,12 @@ INPUT, SELECT, TEXTAREA
 	color: #0000FF;
 }
 
+.mesframePreview
+{
+	background-color: #CCCCFF;
+	color: <?php echo(COLOR_CD); ?>;
+}
+
 .framePreview
 {
 	background-color: #6A5ACD;

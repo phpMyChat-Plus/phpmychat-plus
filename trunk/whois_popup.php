@@ -144,7 +144,8 @@ $DbLink = new DB;
 	};
 $DbLink->query("SELECT latin1,firstname,lastname,country,website,email,showemail,perms,rooms,ip,gender,picture,description,favlink,favlink1,slang,colorname,avatar,reg_time,last_login,login_counter,use_gravatar,birthday,show_bday,show_age FROM ".C_REG_TBL." WHERE username='$User' LIMIT 1");
 list($Latin1,$firstname,$lastname,$country,$website,$email,$showemail,$perms,$rooms,$ip,$gender,$picture,$description,$favlink,$favlink1,$slang,$colorname,$avatar,$reg_time,$last_login,$login_counter,$use_gravatar,$birthday,$show_bday,$show_age) = $DbLink->next_record();
-$my_dobtime = strtotime($birthday);
+if($birthday && $birthday != "" && $birthday != "0000-00-00") $my_dobtime = strtotime($birthday);
+else $my_dobtime = 0;
 $DbLink->clean_results();
 $DbLink->close();
 

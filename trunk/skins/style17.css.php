@@ -42,8 +42,8 @@ include_once('style17.php');
 
 BODY
 {
-	background-color: #8b4513;
-	color: #fffff0;
+	background-color: <?php echo($COLOR_BK); ?>;
+	color: <?php echo(COLOR_CD); ?>;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 200;
 	margin: 5px;
@@ -60,10 +60,10 @@ BODY
 
 BODY.frame
 {
-	background-color: #8b4513;
+	background-color: <?php echo($COLOR_BK); ?>;
 	background-image: url("images/wood.jpg");
 	background-attachment: fixed;
-	color: #fffff0;
+	color: <?php echo(COLOR_CD); ?>;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 300;
 	margin: 5px;
@@ -80,13 +80,13 @@ BODY.frame
 
 BODY.mainframe
 {
-	background-color: #8b4513;
+	background-color: <?php echo($COLOR_BK); ?>;
 	color: <?php echo($CD); ?>;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 300;
-  border: solid;
-  border-color: #fffff0;
-  border-width: 1pt;
+	border: solid;
+	border-color: <?php echo(COLOR_CD); ?>;
+	border-width: 1pt;
 	margin: 5px;
 	scrollbar-3dlight-color: <?php echo(COLOR_CD); ?>;
 	scrollbar-arrow-color: <?php echo(COLOR_CD); ?>;
@@ -114,7 +114,7 @@ IMG
 
 TD.whois, .whois
 {
-	color: #fffff0;
+	color: <?php echo(COLOR_CD); ?>;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 300;
 }
@@ -122,13 +122,13 @@ TD.whois, .whois
 TH, B
 {
 	font-weight: 800;
-	color: #fffff0;
+	color: <?php echo(COLOR_CD); ?>;
 }
 
 A
 {
 	text-decoration: none;
-	color: #fffff0;
+	color: <?php echo(COLOR_CD); ?>;
 	font-weight: 300;
 	cursor:pointer;
 }
@@ -143,7 +143,7 @@ A:hover, A:active
 A.user, A.user:active
 {
 	text-decoration: none;
-	color: #fffff0;
+	color: <?php echo(COLOR_CD); ?>;
 	font-weight: 300;
 	cursor:pointer;
 	}
@@ -151,7 +151,7 @@ A.user, A.user:active
 A.admin, A.admin:active
 {
 	text-decoration: none;
-	color: #fffff0;
+	color: <?php echo(COLOR_CD); ?>;
 	font-weight: 300;
 	cursor:pointer;
 }
@@ -159,7 +159,7 @@ A.admin, A.admin:active
 A.mod, A.mod:active
 {
 	text-decoration: none;
-	color: #fffff0;
+	color: <?php echo(COLOR_CD); ?>;
 	font-weight: 300;
 	cursor:pointer;
  }
@@ -174,8 +174,8 @@ A.sender, A.sender:active
 
 INPUT, SELECT, TEXTAREA
 {
-	background: #8b4513;
-	color: #fffff0;
+	background: <?php echo($COLOR_BK); ?>;
+	color: <?php echo(COLOR_CD); ?>;
 	font-weight: 500;
 }
 
@@ -190,7 +190,7 @@ INPUT, SELECT, TEXTAREA
 
 .msg2
 {
-	background: #8b4513;
+	background: <?php echo($COLOR_BK); ?>;
 	margin-top: 0px;
 	margin-bottom: 0px;
 	margin-left: <?php #echo($Align == "right" ? "5" : "55"); ?>0px;
@@ -200,23 +200,23 @@ INPUT, SELECT, TEXTAREA
 
 .title
 {
-	color: #fffff0;
+	color: <?php echo(COLOR_CD); ?>;
 	font-size: <?php echo($large); ?>pt;
 	font-weight: 800;
 }
 
 .table
 {
-	background-color: #8b4513;
-	color: #fffff0;
+	background-color: <?php echo($COLOR_BK); ?>;
+	color: <?php echo(COLOR_CD); ?>;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 300;
 }
 
 .tabtitle
 {
-	background-color: #8b4513;
-	color: #fffff0;
+	background-color: <?php echo($COLOR_BK); ?>;
+	color: <?php echo(COLOR_CD); ?>;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 800;
 }
@@ -229,7 +229,7 @@ INPUT, SELECT, TEXTAREA
 
 .small
 {
-	color: #fffff0;
+	color: <?php echo(COLOR_CD); ?>;
 	font-size: <?php echo($small); ?>pt;
 }
 
@@ -252,14 +252,14 @@ INPUT, SELECT, TEXTAREA
 
 .notify
 {
-	color: #fffff0;
+	color: <?php echo(COLOR_CD); ?>;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 500;
 }
 
 .notify2
 {
-	color: #fffff0;
+	color: <?php echo(COLOR_CD); ?>;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 500;
 }
@@ -267,13 +267,13 @@ INPUT, SELECT, TEXTAREA
 .quote
 {
 	border: thin ridge <?php echo($QUOTE_COLOR); ?>;
-	background: #8b4513;
-	color: #fffff0;
+	background: <?php echo($COLOR_BK); ?>;
+	color: <?php echo(COLOR_CD); ?>;
 	text-align: justify;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
   border: solid;
-  border-color: #fffff0;
+  border-color: <?php echo(COLOR_CD); ?>;
   border-width: 1pt;
 }
 
@@ -281,16 +281,16 @@ INPUT, SELECT, TEXTAREA
 {
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
-	background-color: #8b4513;
+	background-color: <?php echo($COLOR_BK); ?>;
 	color: #b0c4de;
-	border-bottom: 1pt solid #8b4513;
+	border-bottom: 1pt solid <?php echo($COLOR_BK); ?>;
 }
 
 .menuTitle
 {
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 350;
-	background-color: #8b4513;
+	background-color: <?php echo($COLOR_BK); ?>;
 	color: #b0c4de;
 }
 
@@ -298,32 +298,32 @@ INPUT, SELECT, TEXTAREA
 {
 	font-size: <?php echo($small); ?>pt;
 	font-weight: 300;
-	background-color: #8b4513;
-	color: #fffff0;
-	border-top: 1pt solid #fffff0;
-	border-left: 1pt solid #fffff0;
-	border-right: 1pt solid #fffff0;
+	background-color: <?php echo($COLOR_BK); ?>;
+	color: <?php echo(COLOR_CD); ?>;
+	border-top: 1pt solid <?php echo(COLOR_CD); ?>;
+	border-left: 1pt solid <?php echo(COLOR_CD); ?>;
+	border-right: 1pt solid <?php echo(COLOR_CD); ?>;
 }
 
 .thumbIndex A
 {
 	text-decoration: none;
-	color: #fffff0;
+	color: <?php echo(COLOR_CD); ?>;
 	font-weight: 350;
 }
 
 .thumbIndex A.selected
 {
 	text-decoration: none;
-	color: #fffff0;
+	color: <?php echo(COLOR_CD); ?>;
 	font-weight: 350;
 }
 
 .thumbIndex A:hover, .thumbIndex A:active
 {
 	text-decoration: none;
-	background: #8b4513;
-	color: #fffff0;
+	background: <?php echo($COLOR_BK); ?>;
+	color: <?php echo(COLOR_CD); ?>;
 }
 
 .success
@@ -332,9 +332,16 @@ INPUT, SELECT, TEXTAREA
 	color: #0000FF;
 }
 
+.mesframePreview
+{
+	background-color: <?php echo($COLOR_BK); ?>;
+	color: <?php echo(COLOR_CD); ?>;
+}
 
 .framePreview
 {
 	background-color: <?php echo($COLOR_BK); ?>;
+	background-image: url("images/wood.jpg");
+	background-attachment: fixed;
 	color: <?php echo(COLOR_CD); ?>;
 }

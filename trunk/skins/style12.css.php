@@ -56,9 +56,9 @@ BODY
 
 BODY.frame
 {
+	background-color: #191970;
 	background-image: url('./../images/avatars/avatar51.gif');
 	background-attachment: fixed;
-	background-color: #191970;
 	color: #ccccff;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
@@ -320,8 +320,16 @@ INPUT, SELECT, TEXTAREA
 	color: #0000FF;
 }
 
-.framePreview
+.mesframePreview
 {
 	background-color: #191970;
 	color: <?php echo(COLOR_CD); ?>;
+}
+
+.framePreview
+{
+	background-color: #191970;
+	background-image: url('./../images/avatars/avatar51.gif');
+	background-attachment: fixed;
+	color: #ccccff;
 }
