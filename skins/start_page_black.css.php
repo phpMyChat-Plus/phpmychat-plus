@@ -5,6 +5,20 @@ header("Content-type: text/css");
 // Get the names and values for vars sent by the script that called this one
 if (isset($_GET))
 {
+	// Prevent any possible XSS attacks via $_GET.
+	foreach ($_GET as $check_url) {
+		if (!is_array($check_url)) {
+			$check_url = str_replace("\"", "", $check_url);
+			if ((preg_match("/<[^>]*script*\"?[^>]*>/i", $check_url)) || (preg_match("/<[^>]*object*\"?[^>]*>/i", $check_url)) ||
+				(preg_match("/<[^>]*iframe*\"?[^>]*>/i", $check_url)) || (preg_match("/<[^>]*applet*\"?[^>]*>/i", $check_url)) ||
+				(preg_match("/<[^>]*meta*\"?[^>]*>/i", $check_url)) || (preg_match("/<[^>]*style*\"?[^>]*>/i", $check_url)) ||
+				(preg_match("/<[^>]*form*\"?[^>]*>/i", $check_url)) || (preg_match("/\([^>]*\"?[^)]*\)/i", $check_url)) ||
+				(preg_match("/\"/i", $check_url))) {
+			die ();
+			}
+		}
+	}
+	unset($check_url);
 	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;

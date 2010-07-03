@@ -19,10 +19,9 @@ if (isset($_POST))
 
 // Fix a security hole
 if (isset($L) && !is_dir("./localization/".$L)) exit();
-
 if (isset($_COOKIE["CookieStatus"])) $status = $_COOKIE["CookieStatus"];
-if (isset($_COOKIE["CookieHash"])) $RemMe = $_COOKIE["CookieHash"];
 $mydate = isset($_REQUEST["date5"]) ? $_REQUEST["date5"] : "";
+
 require("./config/config.lib.php");
 require("./lib/release.lib.php");
 require("./localization/languages.lib.php");
@@ -127,7 +126,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 	if (!isset($Error) || $Error == "")
 	{
 		$Latin1 = ($Charset != "utf-8");
-		$PWD_Hash = (isset($RemMe) && $RemMe == $prev_PASSWORD) ? $prev_PASSWORD : md5(stripslashes($prev_PASSWORD));
+		$PWD_Hash = md5(stripslashes($prev_PASSWORD));
 		if (!isset($GENDER) || $GENDER == "") $GENDER = 0;
 		$showemail = (isset($SHOWEMAIL) && $SHOWEMAIL)? 1:0;
 		$allowpopup = (isset($ALLOWPOPUP) && $ALLOWPOPUP)? 1:0;
@@ -149,10 +148,10 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 		elseif ($pmc_username != $U && @rename(C_AVA_RELPATH . "uploaded/avatar_".$av_user_name.".gif", C_AVA_RELPATH . "uploaded/avatar_".$av_new_user_name.".gif")) $AVATARURL = C_AVA_RELPATH . "uploaded/avatar_".$av_new_user_name.".gif";
 		// End of Upload avatar mod - by Ciprian
 
-		$DbLink->query("UPDATE ".C_REG_TBL." SET username='$U', latin1='$Latin1', password='$PWD_Hash', firstname='$FIRSTNAME', lastname='$LASTNAME', country='$COUNTRY', website='$WEBSITE', email='$EMAIL', showemail=$showemail, allowpopup=$allowpopup, reg_time=".time().", ip='$IP', gender='$GENDER', picture='$PICTURE', description='$DESCRIPTION', favlink='$FAVLINK', favlink1='$FAVLINK1', slang='$SLANG', colorname='$COLORNAME', avatar='$AVATARURL', s_question='$SECRET_QUESTION', s_answer='$SECRET_ANSWER', use_gravatar='$USE_GRAV', birthday='$BIRTHDAY', show_bday='$SHOW_BDAY', show_age='$SHOW_AGE' WHERE username='$pmc_username'");
+		$DbLink->query("UPDATE ".C_REG_TBL." SET username='$U', latin1='$Latin1', ".($prev_PASSWORD != $SAVEDHASH ? "password='$PWD_Hash', " : "")."firstname='$FIRSTNAME', lastname='$LASTNAME', country='$COUNTRY', website='$WEBSITE', email='$EMAIL', showemail=$showemail, allowpopup=$allowpopup, reg_time=".time().", ip='$IP', gender='$GENDER', picture='$PICTURE', description='$DESCRIPTION', favlink='$FAVLINK', favlink1='$FAVLINK1', slang='$SLANG', colorname='$COLORNAME', avatar='$AVATARURL', s_question='$SECRET_QUESTION', s_answer='$SECRET_ANSWER', use_gravatar='$USE_GRAV', birthday='$BIRTHDAY', show_bday='$SHOW_BDAY', show_age='$SHOW_AGE' WHERE username='$pmc_username'");
 // Patch to send an email to the User and/or admin after changing username or password.
 // by Ciprian using Bob Dickow's registration patch.
-	if (($pmc_username != $U) || ($pmc_password != $prev_PASSWORD))
+	if (($pmc_username != $U) || ($pmc_password != $prev_PASSWORD && $prev_PASSWORD != $SAVEDHASH))
 	{
 		include("./lib/mail_validation.lib.php");
 	     $tm = getdate();
@@ -335,11 +334,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
   };
 // End of patch to send an email to the User and/or admin after registration.
 		if ($pmc_username != $U) $pmc_username = $U;
-		if ($pmc_password != $prev_PASSWORD)
-		{
-			$pmc_password = $prev_PASSWORD;
-			if($pmc_password != $PWD_Hash) setcookie("CookieHash", '', time());        // cookie expires now
-		}
+		if ($pmc_password != $prev_PASSWORD && $prev_PASSWORD != $SAVEDHASH) $pmc_password = $prev_PASSWORD;
 		$Message = L_REG_17;
 	}
 }
@@ -348,10 +343,10 @@ else
 {
 	$U = $pmc_username;
 	$prev_PASSWORD = $pmc_password;
-	$DbLink->query("SELECT firstname,lastname,perms,country,website,email,showemail,gender,allowpopup,picture,description,favlink,favlink1,slang,colorname,avatar,s_question,s_answer,use_gravatar,birthday,show_bday,show_age FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
+	$DbLink->query("SELECT password,firstname,lastname,perms,country,website,email,showemail,gender,allowpopup,picture,description,favlink,favlink1,slang,colorname,avatar,s_question,s_answer,use_gravatar,birthday,show_bday,show_age FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	if ($DbLink->num_rows() != 0)
 	{
-			  list($FIRSTNAME, $LASTNAME, $PERMS, $COUNTRY, $WEBSITE, $EMAIL, $SHOWEMAIL, $GENDER, $ALLOWPOPUP, $PICTURE, $DESCRIPTION, $FAVLINK, $FAVLINK1, $SLANG, $COLORNAME, $AVATARURL, $SECRET_QUESTION, $SECRET_ANSWER, $USE_GRAV, $BIRTHDAY, $SHOW_BDAY, $SHOW_AGE) = $DbLink->next_record();
+			  list($SAVEDHASH, $FIRSTNAME, $LASTNAME, $PERMS, $COUNTRY, $WEBSITE, $EMAIL, $SHOWEMAIL, $GENDER, $ALLOWPOPUP, $PICTURE, $DESCRIPTION, $FAVLINK, $FAVLINK1, $SLANG, $COLORNAME, $AVATARURL, $SECRET_QUESTION, $SECRET_ANSWER, $USE_GRAV, $BIRTHDAY, $SHOW_BDAY, $SHOW_AGE) = $DbLink->next_record();
                if (!isset($ORIGAVATAR)) $ORIGAVATAR = $AVATARURL;
                if (!empty($avatar))
                {
@@ -478,7 +473,7 @@ if(isset($Error))
                           if ($FORM_SEND != 1) {
 
                             ?>
-			            <a href="<?php echo("avatar.php?User=$pmc_username&LIMIT=$LIMIT&L=$L&avatar=$AVATARURL&ORIGAVATAR=$ORIGAVATAR&From=edituser.php&pmc_password=$PWD_Hash"); ?>" onClick="return confirm('<?php echo(L_SEL_NEW_AV_CONFIRM) ?>');" onMouseOver="window.status='<?php echo(L_SEL_NEW_AV) ?>.'; return true;" title="<?php echo(L_SEL_NEW_AV); ?>" target="_self">
+			            <a href="<?php echo("avatar.php?User=$pmc_username&LIMIT=$LIMIT&L=$L&avatar=$AVATARURL&ORIGAVATAR=$ORIGAVATAR&From=edituser.php&pmc_password=$pmc_password"); ?>" onClick="return confirm('<?php echo(L_SEL_NEW_AV_CONFIRM) ?>');" onMouseOver="window.status='<?php echo(L_SEL_NEW_AV) ?>.'; return true;" title="<?php echo(L_SEL_NEW_AV); ?>" target="_self">
                       	            <img src="<?php echo($AVATARURL); ?>" align="center" border="0" width="<?php echo(C_AVA_WIDTH);?>" height="<?php echo(C_AVA_HEIGHT);?>" alt="<?php echo(L_SEL_NEW_AV); ?>"></a>&nbsp;
                             <?php
                             } else {
