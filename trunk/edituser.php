@@ -20,6 +20,7 @@ if (isset($_POST))
 // Fix a security hole
 if (isset($L) && !is_dir("./localization/".$L)) exit();
 if (isset($_COOKIE["CookieStatus"])) $status = $_COOKIE["CookieStatus"];
+if (isset($_COOKIE["CookieHash"])) $RemMe = $_COOKIE["CookieHash"];
 $mydate = isset($_REQUEST["date5"]) ? $_REQUEST["date5"] : "";
 
 require("./config/config.lib.php");
@@ -148,10 +149,10 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 		elseif ($pmc_username != $U && @rename(C_AVA_RELPATH . "uploaded/avatar_".$av_user_name.".gif", C_AVA_RELPATH . "uploaded/avatar_".$av_new_user_name.".gif")) $AVATARURL = C_AVA_RELPATH . "uploaded/avatar_".$av_new_user_name.".gif";
 		// End of Upload avatar mod - by Ciprian
 
-		$DbLink->query("UPDATE ".C_REG_TBL." SET username='$U', latin1='$Latin1', ".($prev_PASSWORD != $SAVEDHASH ? "password='$PWD_Hash', " : "")."firstname='$FIRSTNAME', lastname='$LASTNAME', country='$COUNTRY', website='$WEBSITE', email='$EMAIL', showemail=$showemail, allowpopup=$allowpopup, reg_time=".time().", ip='$IP', gender='$GENDER', picture='$PICTURE', description='$DESCRIPTION', favlink='$FAVLINK', favlink1='$FAVLINK1', slang='$SLANG', colorname='$COLORNAME', avatar='$AVATARURL', s_question='$SECRET_QUESTION', s_answer='$SECRET_ANSWER', use_gravatar='$USE_GRAV', birthday='$BIRTHDAY', show_bday='$SHOW_BDAY', show_age='$SHOW_AGE' WHERE username='$pmc_username'");
+		$DbLink->query("UPDATE ".C_REG_TBL." SET username='$U', latin1='$Latin1', ".(!isset($RemMe) || (isset($RemMe) && $prev_PASSWORD != $RemMe && $PWD_hash != $RemMe) ? "password='$PWD_Hash', " : "")."firstname='$FIRSTNAME', lastname='$LASTNAME', country='$COUNTRY', website='$WEBSITE', email='$EMAIL', showemail=$showemail, allowpopup=$allowpopup, reg_time=".time().", ip='$IP', gender='$GENDER', picture='$PICTURE', description='$DESCRIPTION', favlink='$FAVLINK', favlink1='$FAVLINK1', slang='$SLANG', colorname='$COLORNAME', avatar='$AVATARURL', s_question='$SECRET_QUESTION', s_answer='$SECRET_ANSWER', use_gravatar='$USE_GRAV', birthday='$BIRTHDAY', show_bday='$SHOW_BDAY', show_age='$SHOW_AGE' WHERE username='$pmc_username'");
 // Patch to send an email to the User and/or admin after changing username or password.
 // by Ciprian using Bob Dickow's registration patch.
-	if (($pmc_username != $U) || ($pmc_password != $prev_PASSWORD && $prev_PASSWORD != $SAVEDHASH))
+	if ($pmc_username != $U || ($pmc_password != $prev_PASSWORD && (!isset($RemMe) || (isset($RemMe) && $PWD_hash != $RemMe && $prev_PASSWORD != $RemMe))))
 	{
 		include("./lib/mail_validation.lib.php");
 	     $tm = getdate();
@@ -334,7 +335,11 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
   };
 // End of patch to send an email to the User and/or admin after registration.
 		if ($pmc_username != $U) $pmc_username = $U;
-		if ($pmc_password != $prev_PASSWORD && $prev_PASSWORD != $SAVEDHASH) $pmc_password = $prev_PASSWORD;
+		if ($pmc_password != $prev_PASSWORD && (!isset($RemMe) || (isset($RemMe) && $PWD_hash != $RemMe && $prev_PASSWORD != $RemMe)))
+		{
+			$pmc_password = $prev_PASSWORD;
+			if(isset($RemMe) && $PWD_hash != $RemMe && $prev_PASSWORD != $RemMe) setcookie("CookieHash", $PWD_Hash, time() + 60*60*24*365);        // cookie expires in one year
+		}
 		$Message = L_REG_17;
 	}
 }
@@ -386,20 +391,33 @@ require("./plugins/calendar/tc_calendar.php");
 // Put the focus to the message box if the window has been called with the profile command
 function put_focus()
 {
-	if (window.opener.window.document.title == "Hidden Input frame")
-		targetFrame = window.opener.window.parent.frames['input'].window;
-	else
-		targetFrame = window.opener.window;
-
-	with (targetFrame)
+	if (window.opener && !window.opener.closed)
 	{
-		focus();
-		if (document.forms['MsgForm'] && document.forms['MsgForm'].elements['M'])
-			document.forms['MsgForm'].elements['M'].focus();
-		if (document.forms['Params'] && document.forms['Params'].elements['pmc_password'])
-			document.forms['Params'].elements['pmc_password'].focus();
+		if (window.opener.window.document.title == "Hidden Input frame")
+		{
+			targetFrame = window.opener.window.parent.frames['input'].window;
+			with (targetFrame)
+			{
+	//			focus();
+				if (document.forms['MsgForm'] && document.forms['MsgForm'].elements['M'])
+					document.forms['MsgForm'].elements['M'].focus();
+			}
+		}
+		else
+		{
+			targetFrame = window.opener.window;
+			with (targetFrame)
+			{
+	//			focus();
+				if (document.forms['Params'] && document.forms['Params'].elements['pmc_password'])
+				{
+					document.forms['Params'].elements['pmc_password'].value = <?php echo ($prev_PASSWORD); ?>;
+					document.forms['Params'].elements['submit'].focus();
+				}
+			}
+		}
 	};
-}
+};
 function swapImage(img,imgid) {
 	var image = document.getElementById(imgid);
 	var dropd = document.getElementById(img);
@@ -430,12 +448,12 @@ function swapImage(img,imgid) {
 		else if (dropd.value == "4") var gender = "undefined.gif";
 		image.src = path + gender;
 	}
-}
+};
 // -->
 </SCRIPT>
 </HEAD>
 
-<BODY>
+<BODY onUnload="if (window.opener && !window.opener.closed) put_focus(); return false;">
 <CENTER>
 <br />
 <FORM ACTION="edituser.php" METHOD="POST" AUTOCOMPLETE="" NAME="EditUsrForm">

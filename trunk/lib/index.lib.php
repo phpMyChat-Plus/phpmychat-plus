@@ -1631,7 +1631,7 @@ if(isset($Error))
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_REG_1); ?> :</TD>
 			<TD VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP">
 				<INPUT TYPE="password" NAME="pmc_password" SIZE=11 MAXLENGTH=16 VALUE="<?php echo($RemMe ? $RemMe : ""); ?>" CLASS="ChatBox">
-				<INPUT TYPE="checkbox" NAME="remember" alt="<?php echo(L_SET_19); ?>" title="<?php echo(L_SET_19); ?>"<?php echo($RemMe ? "checked" : "")?>>
+				<INPUT TYPE="checkbox" NAME="remember" alt="<?php echo(L_SET_19); ?>" title="<?php echo(L_SET_19); ?>"<?php echo($RemMe ? " checked" : "")?>>
 				<?php if (!C_REQUIRE_REGISTER) echo("&nbsp;(<U>".L_REG_7."</U>)"); ?>
 				<br /><A HREF="<?php echo($ChatPath); ?>pass_reset.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('pass_reset','<?php echo(urlencode(stripslashes($U))); ?>'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_PASS_7); ?>.'; return true;" title="<?php echo(L_PASS_7); ?>"><?php echo(L_PASS_7); ?></A>
 			</TD>
@@ -1898,7 +1898,7 @@ if (C_REQUIRE_REGISTER)
 }
 ?>
 		<?php echo(L_SET_13." "); ?>
-		<INPUT TYPE="submit" VALUE="<?php echo(L_SET_14); ?>" CLASS="ChatBox"> ...
+		<INPUT TYPE="submit" NAME="submit" VALUE="<?php echo(L_SET_14); ?>" CLASS="ChatBox"> ...
 		<br /><br /><FONT SIZE=-1><?php echo(L_SET_18); ?></FONT><br />
 		</TD></TR>
 	</TD>
@@ -1980,7 +1980,7 @@ else echo($Owner_name);
 		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" name="support" target="_blank" onSubmit="return confirm('<?php echo(L_SUPP_WARN); ?>');">
 		<input type="hidden" name="cmd" value="_s-xclick">
 		<input type="hidden" name="hosted_button_id" value="<?php echo($ppbutton); ?>">
-		<input type="image" style="background-color: transparent;" src="<?php echo($donate); ?>" border="0" name="submit" alt="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" title="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" onMouseOver="window.status='<?php echo($ppalt); ?>'; return true;">
+		<input type="image" style="background-color: transparent;" src="<?php echo($donate); ?>" border="0" name="donate" alt="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" title="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" onMouseOver="window.status='<?php echo($ppalt); ?>'; return true;">
 		</form>
 	<?php
 	}

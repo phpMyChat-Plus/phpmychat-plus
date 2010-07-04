@@ -1478,7 +1478,7 @@ if ($show_donation)
 			</TD>
 			<TD VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP">
 				<INPUT TYPE="password" NAME="pmc_password" SIZE=11 MAXLENGTH=16 VALUE="<?php echo($RemMe ? $RemMe : ""); ?>" CLASS="ChatBox">
-				<INPUT TYPE="checkbox" NAME="remember" alt="<?php echo(L_SET_19); ?>" title="<?php echo(L_SET_19); ?>"<?php echo($RemMe ? "checked" : "")?>>
+				<INPUT TYPE="checkbox" NAME="remember" alt="<?php echo(L_SET_19); ?>" title="<?php echo(L_SET_19); ?>"<?php echo($RemMe ? " checked" : "")?>>
 			</TD>
 		</TR>
 		<TR CLASS="ChatCell">
@@ -1506,7 +1506,7 @@ if (C_REQUIRE_REGISTER)
 }
 ?>
 		<?php echo(L_SET_13." "); ?>
-		<INPUT TYPE="submit" VALUE="<?php echo(L_SET_14); ?>" CLASS="ChatBox"> ...
+		<INPUT TYPE="submit" NAME="submit" VALUE="<?php echo(L_SET_14); ?>" CLASS="ChatBox"> ...
 			</TD>
 		</TR>
 </FORM>
@@ -1519,7 +1519,7 @@ if (C_REQUIRE_REGISTER)
 		<br /><form action="https://www.paypal.com/cgi-bin/webscr" method="post" name="support" target="_blank" onSubmit="return confirm('<?php echo(L_SUPP_WARN); ?>');">
 		<input type="hidden" name="cmd" value="_s-xclick">
 		<input type="hidden" name="hosted_button_id" value="<?php echo($ppbutton); ?>">
-		<input type="image" style="background-color: transparent;" src="<?php echo($donate); ?>" border="0" name="submit" alt="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" title="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" onMouseOver="window.status='<?php echo($ppalt); ?>'; return true;">
+		<input type="image" style="background-color: transparent;" src="<?php echo($donate); ?>" border="0" name="donate" alt="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" title="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" onMouseOver="window.status='<?php echo($ppalt); ?>'; return true;">
 		</form>
 	</TD>
 	</TR>
