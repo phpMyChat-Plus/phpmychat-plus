@@ -70,7 +70,7 @@ function delete_files()
 // Open the users popup
 function users_popup()
 {
-	window.focus();
+//	window.focus();
 	users_popupWin = window.open("users_popup<?php echo($Ver1); ?>.php?<?php echo("From=$From&L=$L"); ?>","users_popup_<?php echo(md5(uniqid(""))); ?>","width=230,height=300,resizable=yes,scrollbars=yes");
 	users_popupWin.focus();
 }
@@ -181,14 +181,14 @@ if ($Ver == "H" && eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
 	<?php
 }
 ?>
-<A HREF="users_popup<?php echo($Ver1); ?>.php?<?php echo("From=$From&L=$L"); ?>" onClick="users_popup(); return false" onMouseOver="window.status='<?php echo(L_DETACH); ?>.'; return true;" title="<?php echo(L_DETACH); ?>" TARGET="_blank"><IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 ALIGN="MIDDLE" BORDER=0 ALT="<?php echo(L_DETACH); ?>"></A>
+<A HREF="users_popup<?php echo($Ver1); ?>.php?<?php echo("From=$From&L=$L"); ?>" onClick="if (window.parent.frames['input'] && window.parent.frames['input'].window.document.forms['MsgForm'].elements['M']) window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].focus(); users_popup(); return false" onMouseOver="window.status='<?php echo(L_DETACH); ?>.'; return true;" title="<?php echo(L_DETACH); ?>" TARGET="_blank"><IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 ALIGN="MIDDLE" BORDER=0 ALT="<?php echo(L_DETACH); ?>"></A>
 <?php
 if ($Ver == "H")
 {
 	?>
 	<!-- Display the connection state icon // -->
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<A HREF="#"  onMouseOver="window.status='<?php echo(L_CONN_STATE); ?>.'; return true;" onClick="window.parent.reConnect(); if (window.parent.frames['input'] && window.parent.frames['input'].window.document.forms['MsgForm'].elements['M']) window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].focus(); return false" title="<?php echo(L_CONN_STATE); ?>">
+	<A HREF="#" onMouseOver="window.status='<?php echo(L_CONN_STATE); ?>.'; return true;" onClick="if (window.parent.frames['input'] && window.parent.frames['input'].window.document.forms['MsgForm'].elements['M']) window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].focus(); window.parent.reConnect(); return false" title="<?php echo(L_CONN_STATE); ?>">
 	<IMG NAME="ConState" SRC="images/connectOff.gif" WIDTH=13 HEIGHT=13 ALIGN="MIDDLE" BORDER=0 ALT="<?php echo(L_CONN_STATE); ?>"></A>
 	<?php
 }
