@@ -331,11 +331,7 @@ if ($D > 0)	echo('<meta HTTP-EQUIV="Refresh" CONTENT="' . $D . '; URL=messagesL.
 </HEAD>
 
 <BODY CLASS="mainframe" <?php if($O == 1) echo("onLoad=\"this.scrollTo(0,65000);\""); ?>>
-<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
-window.parent.frames['topic'].window.location.replace("topic.php?<?php echo( (isset($QUERY_STRING)) ? $QUERY_STRING : getenv("QUERY_STRING")); ?>");
-</SCRIPT>
 <?php
-
 // ** Get messages **
 
 // Define the SQL query (depends on values for ignored users list and on whether to display notification messages or not)

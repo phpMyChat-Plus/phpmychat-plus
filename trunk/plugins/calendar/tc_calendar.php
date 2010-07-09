@@ -3,7 +3,7 @@
 // The php calendar component
 // written by TJ @triconsole
 //
-// version 3.0 (28 April 2010)
+// version 3.1 (10 July 2010)
 
 
 //bug fixed: Incorrect next month display show on 'February 2008'
@@ -54,7 +54,10 @@
 //bug fixed: day combobox not update when select date from calendar
 //	- thanks ciprianmp
 //
-//add on: translation  implemented - default is english en_US
+//add on: disabledDay() function to let the calendar disabled on specified day
+//  - thanks Jim R.
+//
+//add on: translation  implemented - default is English en_US
 //	- thanks ciprianmp
 //
 //********************************************************
@@ -97,7 +100,8 @@ class tc_calendar{
 	var $target_url;
 
 	var $show_input = true;
-	var $lang = L_LANG;
+	var $dsb_days = array(); //collection of days to disabled
+	var $hl = L_LANG;
 
 	//calendar constructor
 	function tc_calendar($objname, $date_picker = false, $show_input = true){
@@ -182,7 +186,7 @@ class tc_calendar{
 			echo("<span style=\"position: relative;\">");
 
 			if($this->show_input){
-				if($this->lang){
+				if($this->hl){
 					$to_replace = array("%"," ",".","年","日");
 					$order = str_replace($to_replace,"",L_CAL_FORMAT);
 					if(strpos($order,"d") == 0) $this->writeDay();
@@ -237,7 +241,8 @@ class tc_calendar{
 
 		$params[] = "inp=".$this->show_input;
 		$params[] = "fmt=".$this->date_format;
-		$params[] = "lang=".$this->lang;
+		$params[] = "dis=".implode(",", $this->dsb_days);
+		$params[] = "hl=".$this->hl;
 
 		$paramStr = (sizeof($params)>0) ? "?".implode("&", $params) : "";
 
@@ -347,7 +352,8 @@ class tc_calendar{
 		echo("<input type=\"hidden\" name=\"".$this->objname."_tar\" id=\"".$this->objname."_tar\" value=\"".$this->target_url."\">");
 		echo("<input type=\"hidden\" name=\"".$this->objname."_inp\" id=\"".$this->objname."_inp\" value=\"".$this->show_input."\">");
 		echo("<input type=\"hidden\" name=\"".$this->objname."_fmt\" id=\"".$this->objname."_fmt\" value=\"".$this->date_format."\">");
-		echo("<input type=\"hidden\" name=\"".$this->objname."_lang\" id=\"".$this->objname."_lang\" value=\"".$this->lang."\">");
+		echo("<input type=\"hidden\" name=\"".$this->objname."_dis\" id=\"".$this->objname."_dis\" value=\"".implode(",", $this->dsb_days)."\">");
+		echo("<input type=\"hidden\" name=\"".$this->objname."_hl\" id=\"".$this->objname."_hl\" value=\"".$this->hl."\">");
 	}
 
 	//set width of calendar
@@ -414,13 +420,23 @@ class tc_calendar{
 
 	function writeDateContainer(){
 		if($this->day && $this->month && $this->year){
-//			if($this->lang) $dd = stristr(PHP_OS,"win") ? utf_conv(WIN_DEFAULT,'utf-8',strftime(L_CAL_FORMAT, strtotime($dd))) : strftime(L_CAL_FORMAT, strtotime($dd));
-			if($this->lang) $dd = stristr(PHP_OS,"win") ? utf_conv(WIN_DEFAULT,'utf-8',strftime(L_CAL_FORMAT, mktime(0,0,0,$this->month,$this->day,$this->year))) : strftime(L_CAL_FORMAT, mktime(0,0,0,$this->month,$this->day,$this->year));
+#			if($this->hl) $dd = strftime(L_CAL_FORMAT, mktime(0,0,0,$this->month,$this->day,$this->year));
+			if($this->hl) $dd = stristr(PHP_OS,"win") ? utf_conv(WIN_DEFAULT,'utf-8',strftime(L_CAL_FORMAT, mktime(0,0,0,$this->month,$this->day,$this->year))) : strftime(L_CAL_FORMAT, mktime(0,0,0,$this->month,$this->day,$this->year));
 			else $dd = date($this->date_format, mktime(0,0,0,$this->month,$this->day,$this->year));
 		}
 		else $dd = L_SEL_DATE;
 
 		echo("<span id=\"divCalendar_".$this->objname."_lbl\" class=\"date-tccontainer\">$dd</span>");
+	}
+
+	//------------------------------------------------------
+	// This function disable day column as specified value
+	// day values : Sun, Mon, Tue, Wed, Thu, Fri, Sat
+	//------------------------------------------------------
+	function disabledDay($day){
+		$day = strtolower($day); //make it not case-sensitive
+		if(in_array($day, $this->dsb_days) === false)
+			$this->dsb_days[] = $day;
 	}
 }
 ?>
