@@ -1,8 +1,8 @@
 <?php
 
 //Request selected language - by Ciprian
-$lang = (isset($_REQUEST["lang"])) ? $_REQUEST["lang"] : false;
-if(isset($lang) && $lang != "en_US" && $lang != "L_LANG") $language = $lang;
+$hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : false;
+if(isset($hl) && $hl != "en_US" && $hl != "L_LANG") $language = $hl;
 elseif(defined("L_LANG") && L_LANG != "en_US" && L_LANG != "L_LANG") $language = L_LANG;
 if(isset($language)){
 include_once("lang/calendar.".$language.".php");
@@ -31,7 +31,8 @@ $target_url = (isset($_REQUEST["tar"])) ? $_REQUEST["tar"] : "";
 
 $show_input = (isset($_REQUEST["inp"])) ? $_REQUEST["inp"] : true;
 $date_format = (isset($_REQUEST["fmt"])) ? $_REQUEST["fmt"] : 'd F Y';
-$lang = (isset($_REQUEST["lang"])) ? $_REQUEST["lang"] : 'en_US';
+$dsb_txt = (isset($_REQUEST["dis"])) ? $_REQUEST["dis"] : "";
+$hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : 'en_US';
 
 //echo("date: $sly-$slm-$sld");
 
@@ -62,6 +63,7 @@ $dp = (isset($_REQUEST["dp"])) ? $_REQUEST["dp"] : "";
 
 $cobj = new tc_calendar("");
 $cobj->startMonday($startMonday);
+$cobj->dsb_days = explode(",", $dsb_txt);
 
 if(!$year_start || !$year_end){
 	$year_start = $cobj->year_start; //get default value of year start
@@ -101,7 +103,7 @@ if($startMonday)
 else
 	$startwrite = $total_lastmonth - ($startdate - 1);
 
-if($cobj->lang){
+if($cobj->hl){
 	$to_replace = array("d","%"," ",".","年","日");
 	$order = str_replace($to_replace,"",L_CAL_FORMAT);
 	if(strpos($order,"B") == 0) $first_input = "B";
@@ -380,7 +382,8 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
             <input name="tar" type="hidden" id="tar" value="<?php echo($target_url);?>" />
             <input name="inp" type="hidden" id="inp" value="<?php echo($show_input);?>" />
             <input name="fmt" type="hidden" id="fmt" value="<?php echo($date_format);?>" />
-            <input name="lang" type="hidden" id="lang" value="<?php echo($lang);?>" />
+            <input name="dis" type="hidden" id="dis" value="<?php echo($dsb_txt);?>" />
+            <input name="hl" type="hidden" id="hl" value="<?php echo($hl);?>" />
       </form>
     </div>
     <div id="calendar-container">
@@ -427,6 +430,7 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
             for($day=1; $day<=$total_thismonth; $day++){
                 //$date_num = $cobj->getDayNum(date('D', strtotime($y."-".$m."-".$day)));
                 $date_num = date('w', strtotime($y."-".$m."-".$day));
+                $day_txt = date('D', strtotime($y."-".$m."-".$day));
 
                 $currentTime =  strtotime($y."-".$m."-".$day);
                 $htmlClass = array();
@@ -464,6 +468,15 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
                     //no date allow specified, assume show all
                     $dateLink = true;
                 }
+
+                if($dateLink){
+					//check for disable days
+                if(in_array(strtolower($day_txt), $cobj->dsb_days) !== false){
+						$dateLink = false;
+                	}
+                }
+
+				$htmlClass[] = " ".strtolower($day_txt);
 
                 if($dateLink){
                     //write date with link

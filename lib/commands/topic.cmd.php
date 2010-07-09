@@ -61,19 +61,20 @@ function room_in($what, $in, $Charset)
 					if (trim($Cmd[3]) != "")
 					{
 						global $Top;
-						$Top = trim($Cmd[3]);
+						$Top = trim(str_replace("\"", "&quot;", str_replace("'", "&#39;", $Cmd[3])));
+
 						// Check for swear words in the message if necessary
 						if (C_NO_SWEAR && $R != C_NO_SWEAR_ROOM1 && $R != C_NO_SWEAR_ROOM2 && $R != C_NO_SWEAR_ROOM3 && $R != C_NO_SWEAR_ROOM4)
 						{
 							include("./lib/swearing.lib.php");
-							$Cmd[3] = checkwords($Cmd[3], false, $Charset);
+							$Top = checkwords($Top, false, $Charset);
 					 		if(C_EN_STATS && isset($Found) && $b>0)
 							{
 								$DbLink->query("UPDATE ".C_STS_TBL." SET swears_posted=swears_posted+$b WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
 							}
 							unset($Found, $b);
 						}
-						if (strcasecmp(mb_convert_case($Top,MB_CASE_LOWER,$Charset), "reset") == 0)
+						if (strcasecmp(mb_convert_case($Top,MB_CASE_LOWER,$Charset), "reset") == 0 || strcasecmp(mb_convert_case($Top,MB_CASE_LOWER,$Charset), "top reset") == 0)
 						{
 							if (trim($Cmd[2]) != "*")
 							{
@@ -162,6 +163,13 @@ else $Top = eregi_replace($prefix.$pureUrl, '<a href="\\1://\\2" target="_blank"
 								$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS topic', '', ".time().", '$U', '$Top', '', '')");
 							}
 						}
+						?>
+						<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
+						<!--
+						window.parent.frames['topic'].window.location.replace("topic.php<?php echo ("?L=".$L."&R=".urlencode(stripslashes($R))); ?>");
+						// -->
+						</SCRIPT>
+						<?php
 						$IsCommand = true;
 						$RefreshMessages = true;
 					}

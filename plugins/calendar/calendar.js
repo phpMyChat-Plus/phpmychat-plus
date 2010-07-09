@@ -70,9 +70,10 @@ function tc_setDay(objname, dvalue, path){
 			var tar = document.getElementById(objname+'_tar').value;
 			var inp = document.getElementById(objname+'_inp').value;
 			var fmt = document.getElementById(objname+'_fmt').value;
-			var lang = document.getElementById(objname+'_lang').value;
+			var dis = document.getElementById(objname+'_dis').value;
+			var hl = document.getElementById(objname+'_hl').value;
 
-			obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+dvalue+"&selected_month="+date_array[1]+"&selected_year="+date_array[0]+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&mon="+smon+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&lang="+lang;
+			obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+dvalue+"&selected_month="+date_array[1]+"&selected_year="+date_array[0]+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&mon="+smon+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&hl="+hl;
 
 			obj.contentWindow.submitNow(dvalue, date_array[1], date_array[0]);
 
@@ -112,9 +113,10 @@ function tc_setMonth(objname, mvalue, path){
 			var tar = document.getElementById(objname+'_tar').value;
 			var inp = document.getElementById(objname+'_inp').value;
 			var fmt = document.getElementById(objname+'_fmt').value;
-			var lang = document.getElementById(objname+'_lang').value;
+			var dis = document.getElementById(objname+'_dis').value;
+			var hl = document.getElementById(objname+'_hl').value;
 
-			obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+date_array[2]+"&selected_month="+mvalue+"&selected_year="+date_array[0]+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&mon="+smon+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&lang="+lang;
+			obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+date_array[2]+"&selected_month="+mvalue+"&selected_year="+date_array[0]+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&mon="+smon+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&hl="+hl;
 
 			obj.contentWindow.submitNow(date_array[2], mvalue, date_array[0]);
 
@@ -154,9 +156,10 @@ function tc_setYear(objname, yvalue, path){
 			var tar = document.getElementById(objname+'_tar').value;
 			var inp = document.getElementById(objname+'_inp').value;
 			var fmt = document.getElementById(objname+'_fmt').value;
-			var lang = document.getElementById(objname+'_lang').value;
+			var dis = document.getElementById(objname+'_dis').value;
+			var hl = document.getElementById(objname+'_hl').value;
 
-			obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+date_array[2]+"&selected_month="+date_array[1]+"&selected_year="+yvalue+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&mon="+smon+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&lang="+lang;
+			obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+date_array[2]+"&selected_month="+date_array[1]+"&selected_year="+yvalue+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&mon="+smon+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&hl="+hl;
 
 			obj.contentWindow.submitNow(date_array[2], date_array[1], yvalue);
 

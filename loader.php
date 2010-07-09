@@ -757,7 +757,6 @@ if ($xxx > 1)
 	// slashes the quotes that should be displayed
 	$ToSend = str_replace("\"","\\\"",$ToSend);
 	?>
-	window.parent.frames['topic'].window.location.replace("topic.php?<?php echo( (isset($QUERY_STRING)) ? $QUERY_STRING : getenv("QUERY_STRING")); ?>");
 	window.parent.frames['messages'].window.document.write("<?php echo($ToSend); ?>\n");
 	<?php
 };

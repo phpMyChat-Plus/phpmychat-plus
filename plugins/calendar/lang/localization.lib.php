@@ -8,7 +8,8 @@ if (!function_exists('utf_conv'))
 	};
 };
 
-if(file_exists("calendar.".(isset($lang) ? $lang : L_LANG).".php")) require("calendar.".(isset($lang) ? $lang : L_LANG).".php");
+$hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : false;
+if(file_exists("calendar.".(isset($hl) ? $hl : L_LANG).".php")) require("calendar.".(isset($hl) ? $hl : L_LANG).".php");
 if(!defined("L_LANG")) define("L_LANG", "en_US");
 
 // English US format and localization - default strings when the specified translation is not available

@@ -525,45 +525,11 @@ if (!isset($FontName)) $FontName = "";
 	// Get the position for the help popup
 	if (window.parent.NS4) document.captureEvents(Event.MOUSEDOWN);
 	document.onmousedown = window.parent.displayLocation;
-
-	function postMess()
-	{
-		var indexform = window.parent.frames['input'].window.document.forms['MsgForm'];
-		indexform.elements['sent'].value = '1';
-//		if (document.all) indexform.elements['sendForm'].disabled = true;
-		indexform.submit();
-		indexform.elements['M'].focus();
-	};
-
-	function checkEnter(e) //e is event object passed from function invocation
-	{
-		var characterCode; //literal character code will be stored in this variable
-		if(e && e.which) //if which property of event object is supported (NN4)
-		{
-			e = e;
-			characterCode = e.which; //character code is contained in NN4's which property
-		}
-		else
-		{
-			e = event;
-			characterCode = e.keyCode; //character code is contained in IE's keyCode property
-		}
-		if(characterCode == 13) //if generated character code is equal to ascii 13 (if enter key)
-		{
-			postMess(); //submit the form
-			return false;
-		}
-		else
-		{
-			return true;
-		}
-	};
-
 // -->
 </SCRIPT>
 </HEAD>
 
-<BODY CLASS="frame" <?php if (!$IsPopup) echo("onLoad=\"if (window.focus) window.parent.get_focus(); window.document.forms['MsgForm'].elements['M'].focus();\""); ?> onKeyPress="checkEnter(event);">
+<BODY CLASS="frame"<?php if (!$IsPopup) echo(" onLoad=\"if (window.focus) window.parent.get_focus(); window.document.forms['MsgForm'].elements['M'].focus();\""); ?>>
 <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
 <TR>
 	<!-- Input form  -->
