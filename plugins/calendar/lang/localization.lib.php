@@ -9,8 +9,8 @@ if (!function_exists('utf_conv'))
 };
 
 $hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : false;
-if(file_exists("calendar.".(isset($hl) ? $hl : L_LANG).".php")) require("calendar.".(isset($hl) ? $hl : L_LANG).".php");
-if(!defined("L_LANG")) define("L_LANG", "en_US");
+if(file_exists("lang/calendar.".(isset($hl) ? $hl : L_LANG).".php")) include_once("lang/calendar.".(isset($hl) ? $hl : L_LANG).".php");
+if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "en_US");
 
 // English US format and localization - default strings when the specified translation is not available
 if(!defined("L_DAY")) define("L_DAY", "Day");
@@ -76,6 +76,8 @@ if(!defined("L_S_SUN")) define("L_S_SUN", "Sun");
 if(!defined("WIN_DEFAULT")) define("WIN_DEFAULT", "windows-1252");
 if(!defined("L_CAL_FORMAT")) define("L_CAL_FORMAT", "%d %B %Y");
 
+if(!defined("l_january"))
+{
 //	Long Month Names translation tool
 	define("l_january", defined('L_JAN') ? L_JAN : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1199145600')) : strftime('%B','1199145600')));
 	define("l_february", defined('L_FEB') ? L_FEB : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1201824000')) : strftime('%B','1201824000')));
@@ -168,3 +170,6 @@ if(!defined("L_CAL_FORMAT")) define("L_CAL_FORMAT", "%d %B %Y");
 	var s_sun = "<?php echo(defined('L_S_SUN') ? L_S_SUN : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%a','1270944000')) : strftime('%a','1270944000'))); ?>";
 // -->
 </SCRIPT>
+<?php
+}
+?>
