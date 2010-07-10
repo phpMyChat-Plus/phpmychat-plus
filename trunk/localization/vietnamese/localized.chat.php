@@ -1,5 +1,5 @@
 <?php
-// File : vietnamese/localized.chat.php - plus version (01.08.2009 - rev.43)
+// File : vietnamese/localized.chat.php - plus version (20.03.2010 - rev.44)
 // Translation by Marshall <hellomarshall_lookatme@yahoo.com.vn>
 // Updates and corrections by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -41,7 +41,8 @@ define("L_SET_14", "Tán gẫu");
 define("L_SET_15", "Phòng riêng mặc định");
 define("L_SET_16", "Những phòng riêng tư tạo bởi người sử dụng");
 define("L_SET_17", "Chọn ảnh đại diện");
-define("L_SET_18", "Bookmark this page: Chọn \"Ctrl+D\".");
+define("L_SET_18", "Đánh dấu trang này: Chọn \"Ctrl+D\".");
+define("L_SET_19", "Nhớ tôi");
 
 define("L_SRC", "tùy biến có sẵn trên");
 
@@ -204,7 +205,7 @@ define("L_NO_REG_USER", "Bạn phải đăng ký chat để có thể sử dụn
 // help popup
 define("L_HELP_TIT_1", "Trợ giúp");
 define("L_HELP_TIT_2", "Văn bản chuẩn những thông báo");
-define("L_HELP_FMT_1", "Những thông báo gạch nghiên hay gạch ngang &lt;B&gt; &lt;/B&gt;, &lt;I&gt; &lt;/I&gt; or &lt;U&gt; &lt;/U&gt; tags.<br />Ví dụ, &lt;B&gt;văn bản này&lt;/B&gt; Sẽ sản xúât <B>văn bản này</B>.");
+define("L_HELP_FMT_1", "Những thông báo gạch nghiên hay gạch ngang &lt;B&gt; &lt;/B&gt;, &lt;I&gt; &lt;/I&gt; or &lt;U&gt; &lt;/U&gt; tags.<br />Ví dụ &lt;B&gt;văn bản này&lt;/B&gt; Sẽ sản xúât <B>văn bản này</B>.");
 define("L_HELP_FMT_2", "Để tạo một link liên kết (for e-mail or URL) Trong thông báo của các bạn, đơn giản đánh máy tương ứng không trùng hợp cái này. Link liên kết sẽ được tạo ra tự động");
 define("L_HELP_TIT_3", "Những lệnh");
 define("L_HELP_NOTE", "Tất cả những lệnh sử dụng phải được sử dụng bằng tiếng anh!");
@@ -253,6 +254,9 @@ define("L_HELP_CMD_31", "Thay đổi những người sử dụng mệnh lệnh 
 define("L_HELP_CMD_32", "Đây là phiên bản thứ 3 hên xui.<br />Usage: /d{n1}[tn2] or /d{n1};<br />n1 có thể chọn bất kỳ giá trị <b>từ 1 đến 100</b> (nó đại diện cho số lượng cuộn trên xúc xắc).<br />n2 có thể cầm lấy bất kỳ giá trị nào <b>giữa số 1 và %s</b> (đại diện những con xúc xắc trên trục tung).");
 define("L_HELP_CMD_33", "Thay đổi số font khi chat với các thành viên khác (cho phép những giá trị cho n: <b>từ 7 đến 15</b>); the /size đây là lệnh cơ bản để chat(<b>".$FontSize."</b>).");
 define("L_HELP_CMD_34", "Điều này sẽ làm cho thành viên hướng rõ đến thông điệp (ltr = Trái tới phải, rtl = Phải tới trái).");
+define("L_HELP_CMD_35", "Được chấp nhận đăng lên bởi <i>một phim</i> hoặc <i>một hồ sơ âm thanh</i> ở chương trình chơi Flash nhỏ tại thời điểm.<br />Cách dùng: Chỉ bỏ địa chỉ của nguồn đã được đăng! Ví dụ <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Bạn cần Shockwave Flash Player được cài đặt trên hệ thống của bạn. Đường dẫn là trường hợp nhạy cảm!<br />Gợi ý: đánh /video theo bởi khoảng trống và bỏ đường dẫn vào hộp.");
+define("L_HELP_CMD_35a", "Lệnh thứ hai chỉ làm với youtube.com bởi nguồn video.<br />Ví dụ <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
+define("L_HELP_CMD_36", "Nó được chấp nhận để đăng lên bởi <i>một phim youtube</i> ở chương trình chơi Flash nhỏ tại thời điểm.<br />Cách dùng: Chỉ bỏ đường dẫn của nguồn được đăng lên! Ví dụ <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Bạn cần Shockwave Flash Player được cài đặt trên hệ thống của bạn. Đường dẫn là trường hợp nhạy cảm!<br />Gợi ý: đánh /tube theo bởi khoảng trống và bỏ đường dẫn vào hộp.");
 define("L_HELP_CMD_VAR", "Đồng nghĩa (Phương án): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Phép xã giao chuyện tán gẫu");
 define("L_HELP_ETIQ_2", "Chỗ của Chúng ta muốn giữ những IT cộng đồng thân thiện và ngộ nghĩnh, vì thế xin dính chặt vào những hướng dẫn sau đây. Nếu bạn không quan sát những quy tắc này, một trong số những người điều tiết chuyện gẫu của chúng ta có thể khởi động bạn từ chuyện gẫu.<br /><br />Thank you,");
@@ -361,7 +365,7 @@ define("L_URL_AV", "Link dẫn:");
 define("L_EXPL_AV", "(vào url rồi enter)");
 define("L_CANCEL", "Hủy bỏ");
 define("L_AVA_REG", "Bạn phải được đăng ký\\nthay avatar của các bạn");
-define("L_SEL_NEW_AV_CONFIRM", "Mẫu này không được chịu phụ thuộc.\\nViệc đi bây giờ tới hình\\nđại diện sẽ làm bạn tốt hơn\\nall những sự thay đổi bạn làm cho đến lúc này!\\n\\nBạn có chắc chắn?"); 
+define("L_SEL_NEW_AV_CONFIRM", "Mẫu này không được chịu phụ thuộc.\\nViệc đi bây giờ tới hình\\nđại diện sẽ làm bạn tốt hơn\\nall những sự thay đổi bạn làm cho đến lúc này!\\n\\nBạn có chắc chắn?");
 
 // PlusBot bot mod (based on Alice bot)
 define("BOT_TIPS", "Những mẹo nhỏ: bot thì họat động tích cực trong phòng. Để bắt đầu mói chuyện với bot, kiểu <b>xin chảo ".C_BOT_NAME.'</b>. tớicuộc nói chuyện kết thúc, kiểu: <b>tạm biệt '.C_BOT_NAME.'</b>. (riêng tư: /to <b>'.C_BOT_NAME.'</b> lời nói)'); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
@@ -465,6 +469,7 @@ define("L_PASS_6", "Câu trả lời bí mật");
 define("L_PASS_7", "Đặt lại mật khẩu");
 define("L_PASS_8", "Mật khẩu đã thành công khi cài lại.");
 define("L_PASS_9", "Mật khẩu mới để tán gẫu");
+define("L_PASS_10", "Mật khẩu của bạn để vào tán gẫu: %s");
 define("L_PASS_11", "Chảo mừng sự quay trở lại của chũ server!");
 define("L_PASS_12", "Chọn câu hỏi ...");
 define("L_ERR_PASS_1", "Sai tên đăng nhập. Của bạn.");
@@ -560,8 +565,8 @@ define("L_JUL", "Tháng Bảy");
 define("L_AUG", "Tháng Tám");
 define("L_SEP", "Tháng Chín");
 define("L_OCT", "Tháng Mười");
-define("L_NOV", "Tháng Mười một");
-define("L_DEC", "Tháng Chạp"); //Tháng Mười hai
+define("L_NOV", "Tháng Mười Một");
+define("L_DEC", "Tháng Mười Hai");
 // Months Short Names
 define("L_S_JAN", "Tháng 1");
 define("L_S_FEB", "Tháng 2");
@@ -625,6 +630,7 @@ define("L_LANG_EN", "Tiếng Anh");
 define("L_LANG_ENUK", "Tiếng Anh UK");
 define("L_LANG_ENUS", "Tiếng Anh US");
 define("L_LANG_ES", "Tây ban nha");
+define("L_LANG_FA", "Ba tư (Farsi)");
 define("L_LANG_FR", "Tiếng Pháp");
 define("L_LANG_GR", "Tiếng Hy Lạp");
 define("L_LANG_HE", "Tiếng Do Thái");
@@ -632,7 +638,9 @@ define("L_LANG_HI", "Tiếng ấn độ");
 define("L_LANG_HU", "Hunggari");
 define("L_LANG_ID", "Tiếng Inđônêxia");
 define("L_LANG_IT", "Tiếng ý");
+define("L_LANG_JA", "Người Nhật (Kanji)");
 define("L_LANG_KA", "Georgian");
+define("L_LANG_NE", "Người Nepal");
 define("L_LANG_NL", "Hà lan");
 define("L_LANG_RO", "Roma");
 define("L_LANG_SK", "Ngôn ngữ Slovak");
@@ -687,4 +695,20 @@ define("L_OPID_REG", "Nhập khẩu của bạn OpenID thông tin");
 // Support buttons
 define("L_SUPP_WARN", "Bạn đã chọn lựa để đóng góp đến sự phát triển của\\n".APP_NAME." bởi việc đóng góp cho người phát triển.\\nCảm ơn vì đã hỗ trợ!\\n\\nGhi chú: Người nhận không phải là người chủ của việc tán gẫu này.\\nXin điền vào số lượng trên trang kế tiếp.\\n\\nTiếp tục?");
 define("L_SUPP_ALT", "Hỗ trợ với PayPal sự phát triển của ".APP_NAME." - Nó nhanh , miễn phí và bảo mật!");
+
+// Video & Audio & Youtube cmds (Embevi & YouTube player class) – same approach as in // Img cmd mod section!
+define("L_AUDIO", "Hồ sơ âm thanh được đăng lên bởi");
+define("L_VIDEO", "Phim được đăng lên bởi");
+define("L_HELP_VIDEO", "Đường dẫn tới nguồn phim hoặc âm thanh được đăng lên");
+define("L_NO_VIDEO", "Địa chỉ không thể bỏ vào.\\nĐây không phải là đường dẫn đúng của nguồn phim hoặc âm thanh được chấp nhận phân bố rộng.\\nThử lại lần nữa!");
+define("L_ORIG_VIDEO", "để mỡ nguồn chính chỗ "); //it sounds like: Click here to open the…
+
+// Birthday mod - by Ciprian
+define("L_PRO_7", "Ngày sinh");
+define("L_PRO_8", "Hiện ngày sinh tại thông tin công bố");
+define("L_PRO_9", "Hiện tuổi tại thông tin công bố");
+define("L_PRO_10", "Tuổi");
+define("L_PRO_11", "%1\$d nhiều năm, %2\$d nhiều tháng và %3\$d nhiều ngày"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
+define("L_DOB_TIT_1", "Dòng sinh nhật");
+$L_DOB_SUBJ = "Chúc mừng sinh nhật %s!";
 ?>

@@ -10,14 +10,15 @@
 define("L_DAY", "Ngày");
 define("L_MONTH", "Tháng");
 define("L_YEAR", "Năm");
-define("L_PREV", "Trước");
-define("L_NEXT", "Tiếp");
-define("L_REF_CAL", "Refreshing Calendar...");
-define("L_SEL_LANG", "Chọn Ngôn Ngữ");
-define("L_SEL_ICON", "Chọn Icon");
-define("L_SEL_DATE", "Chọn Ngày");
-define("L_ERR_SEL", "Your selection is not valid");
-define("L_NOT_ALLOWED", "This date is not allowed to be selected");
+define("L_PREV", "Trước đây");
+define("L_NEXT", "Tiếp theo");
+define("L_REF_CAL", "Lịch làm mới...");
+define("L_CHK_VAL", "Kiểm tra giá trị");
+define("L_SEL_LANG", "Lựa chọn ngôn ngữ");
+define("L_SEL_ICON", "Lựa chọn biểu tượng");
+define("L_SEL_DATE", "Lựa chọn ngày");
+define("L_ERR_SEL", "Sự lựa chọn của bạn không hợp lệ");
+define("L_NOT_ALLOWED", "Ngày không được chấp nhận để chọn");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
@@ -33,8 +34,8 @@ define("L_JUL", "Tháng Bảy");
 define("L_AUG", "Tháng Tám");
 define("L_SEP", "Tháng Chín");
 define("L_OCT", "Tháng Mười");
-define("L_NOV", "Tháng Mười một");
-define("L_DEC", "Tháng Chạp"); //Tháng Mười hai
+define("L_NOV", "Tháng Mười Một");
+define("L_DEC", "Tháng Mười Hai");
 // Months Short Names
 define("L_S_JAN", "Tháng 1");
 define("L_S_FEB", "Tháng 2");

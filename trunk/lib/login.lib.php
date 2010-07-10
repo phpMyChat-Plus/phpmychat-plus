@@ -117,7 +117,7 @@ function get_focus()
 	else var link = "";
 		window.focus();
 		url = '<?php echo("${ChatPath}"); ?>' + name + '<?php echo(".php?L=$L"); ?>' + u_name + '<?php echo(urlencode(stripslashes($pmc_username))."&LIMIT=1"); ?>' + link;
-		pop_width = 450;
+		pop_width = 470;
 		pop_height = 260;
 		param = "width=" + pop_width + ",height=" + pop_height + ",resizable=yes,scrollbars=yes";
 		name += "_popup";

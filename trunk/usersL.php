@@ -75,7 +75,7 @@ if (!isset($FontName)) $FontName = "";
 	else var link = "";
 		window.focus();
 		url = '<?php echo("${ChatPath}"); ?>' + name + '<?php echo(".php?L=$L"); ?>' + u_name + '<?php echo(urlencode(stripslashes($U))."&LIMIT=1"); ?>' + link;
-		pop_width = ((name != 'admin' && name != 'pm_manager') ? 450:820);
+		pop_width = ((name != 'admin' && name != 'pm_manager') ? 470:820);
 		pop_height = ((name != 'deluser' && name != 'pass_reset') ? ((name != 'admin' && name != 'pm_manager') ? 640:550):260);
 		param = "width=" + pop_width + ",height=" + pop_height + ",resizable=yes,scrollbars=yes";
 		if (name == "pm_manager") param = param + ",status=yes";

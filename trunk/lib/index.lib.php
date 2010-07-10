@@ -1357,7 +1357,7 @@ function isCookieEnabled() {
 		else var link = "";
 		window.focus();
 		url = '<?php echo("${ChatPath}"); ?>' + name + '<?php echo(".php?L=$L"); ?>' + u_name + uname + link;
-		pop_width = (name != 'admin'? 450:820);
+		pop_width = (name != 'admin'? 470:820);
 		pop_height = ((name != 'deluser' && name != 'pass_reset') ? (name != 'admin'? 640:550):260);
 		param = "width=" + pop_width + ",height=" + pop_height + ",resizable=yes,scrollbars=yes";
 		name += "_popup";
