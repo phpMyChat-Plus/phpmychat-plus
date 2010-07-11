@@ -394,9 +394,9 @@ if (UPD_CHECK)
 					<li><a href="http://tech.groups.yahoo.com/group/phpmychat/" target=_blank Title="Open <?php echo(APP_NAME); ?> Yahoo Support Group page" onMouseOver="window.status='Open <?php echo(APP_NAME); ?> Yahoo Support Group page.'; return true">Support Group page</a></li>
 					<li><a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Fixes readme.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_VERSION); ?>" target=_blank Title="Open <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> Release notes" onMouseOver="window.status='Open <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> Release notes.'; return true">Read <?php echo(APP_VERSION.APP_MINOR); ?> notes</a></li>
  <?php
- if(UPD_CHECK && (($app_last_version > $app_version) || (($app_last_version == $app_version) && ((APP_LAST_MINOR == "" && (ereg("RC",APP_MINOR) || ereg("�",APP_MINOR))) || (ereg("f",APP_LAST_MINOR) && (ereg("RC",APP_MINOR) || ereg("�",APP_MINOR) || APP_MINOR == "")) || (ereg("RC",APP_LAST_MINOR) && ereg("�",APP_MINOR)) || (ereg("�",APP_LAST_MINOR) && ereg("�",APP_MINOR) && ereg_replace("-�","",APP_LAST_MINOR) > ereg_replace("-�","",APP_MINOR)) || (ereg("f",APP_LAST_MINOR) && ereg("f",APP_MINOR) && ereg_replace("-f","",APP_LAST_MINOR) > ereg_replace("-f","",APP_MINOR)) || (ereg("RC",APP_LAST_MINOR) && ereg("RC",APP_MINOR) && ereg_replace("-RC","",APP_LAST_MINOR) > ereg_replace("-RC","",APP_MINOR))))))
+ if(UPD_CHECK && (($app_last_version > $app_version) || (($app_last_version == $app_version) && ((APP_LAST_MINOR == "" && (ereg("RC",APP_MINOR) || ereg("ß",APP_MINOR))) || (ereg("f",APP_LAST_MINOR) && (ereg("RC",APP_MINOR) || ereg("ß",APP_MINOR) || APP_MINOR == "")) || (ereg("RC",APP_LAST_MINOR) && ereg("ß",APP_MINOR)) || (ereg("ß",APP_LAST_MINOR) && ereg("ß",APP_MINOR) && ereg_replace("-ß","",APP_LAST_MINOR) > ereg_replace("-ß","",APP_MINOR)) || (ereg("f",APP_LAST_MINOR) && ereg("f",APP_MINOR) && ereg_replace("-f","",APP_LAST_MINOR) > ereg_replace("-f","",APP_MINOR)) || (ereg("RC",APP_LAST_MINOR) && ereg("RC",APP_MINOR) && ereg_replace("-RC","",APP_LAST_MINOR) > ereg_replace("-RC","",APP_MINOR))))))
  {
- 	if (ereg("f",APP_LAST_MINOR) || ereg("�",APP_LAST_MINOR) || ereg("RC",APP_LAST_MINOR)) $minor_dir = "/Fixes/";
+ 	if (ereg("f",APP_LAST_MINOR) || ereg("ß",APP_LAST_MINOR) || ereg("RC",APP_LAST_MINOR)) $minor_dir = "/Fixes/";
  	else $minor_dir = "/";
  	?>
  						<li><a href="http://www.ciprianmp.com/atm/index.php?directory=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_LAST_VERSION.$minor_dir); ?>" target=_blank Title="Download the <?php echo(APP_NAME." - ".APP_LAST_VERSION.APP_LAST_MINOR); ?> Update" onMouseOver="window.status='Download <?php echo(APP_NAME." - ".APP_LAST_VERSION.APP_LAST_MINOR); ?> Update.'; return true">Download <?php echo(APP_LAST_VERSION.APP_LAST_MINOR); ?></a></li>
@@ -425,7 +425,7 @@ if (UPD_CHECK)
 		?>
 <div><p><table align=center align=center border=0 cellpadding=0 class=menu style=background:white><tr><td class=success align=center><?php echo("<br />- ".sprintf(A_SHEET5_0, APP_NAME." - ".APP_VERSION.APP_MINOR)." -<br />"); ?>
 <?php
-		if (($app_last_version > $app_version) || (($app_last_version == $app_version) && ((APP_LAST_MINOR == "" && (ereg("RC",APP_MINOR) || ereg("�",APP_MINOR))) || (ereg("f",APP_LAST_MINOR) && (ereg("RC",APP_MINOR) || ereg("�",APP_MINOR) || APP_MINOR == "")) || (ereg("RC",APP_LAST_MINOR) && ereg("�",APP_MINOR)) || (ereg("�",APP_LAST_MINOR) && ereg("�",APP_MINOR) && ereg_replace("-�","",APP_LAST_MINOR) > ereg_replace("-�","",APP_MINOR)) || (ereg("f",APP_LAST_MINOR) && ereg("f",APP_MINOR) && ereg_replace("-f","",APP_LAST_MINOR) > ereg_replace("-f","",APP_MINOR)) || (ereg("RC",APP_LAST_MINOR) && ereg("RC",APP_MINOR) && ereg_replace("-RC","",APP_LAST_MINOR) > ereg_replace("-RC","",APP_MINOR)))))
+		if (($app_last_version > $app_version) || (($app_last_version == $app_version) && ((APP_LAST_MINOR == "" && (ereg("RC",APP_MINOR) || ereg("ß",APP_MINOR))) || (ereg("f",APP_LAST_MINOR) && (ereg("RC",APP_MINOR) || ereg("ß",APP_MINOR) || APP_MINOR == "")) || (ereg("RC",APP_LAST_MINOR) && ereg("ß",APP_MINOR)) || (ereg("ß",APP_LAST_MINOR) && ereg("ß",APP_MINOR) && ereg_replace("-ß","",APP_LAST_MINOR) > ereg_replace("-ß","",APP_MINOR)) || (ereg("f",APP_LAST_MINOR) && ereg("f",APP_MINOR) && ereg_replace("-f","",APP_LAST_MINOR) > ereg_replace("-f","",APP_MINOR)) || (ereg("RC",APP_LAST_MINOR) && ereg("RC",APP_MINOR) && ereg_replace("-RC","",APP_LAST_MINOR) > ereg_replace("-RC","",APP_MINOR)))))
 		{
 		?>
 			<script type="text/javascript" language="javascript">
@@ -474,7 +474,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"EMAIL_PASWD = '$vEMAIL_PASWD', ".
 						"PASS_LENGTH = '$vPASS_LENGTH', ".
 						"ADMIN_NOTIFY = '$vADMIN_NOTIFY', ".
-						"ADMIN_NAME = '$vADMIN_NAME', ".
+						"ADMIN_NAME = '".str_replace("'", "’", $vADMIN_NAME)."', ".
 						"ADMIN_EMAIL = '$vADMIN_EMAIL', ".
 						"CHAT_URL = '$vCHAT_URL', ".
 						"SHOW_ADMIN = '$vSHOW_ADMIN', ".
@@ -508,14 +508,14 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"SET_MODS = '$vSET_MODS', ".
 						"MODS = '$vMODS', ".
 						"SET_BOT = '$vSET_BOT', ".
-						"ROOM_SAYS = '$vROOM_SAYS', ".
+						"ROOM_SAYS = '".str_replace("'", "’", $vROOM_SAYS)."', ".
 						"DEMOTE_MOD = '$vDEMOTE_MOD', ".
 						"PRIV_POPUP = '$vPRIV_POPUP', ".
 						"SHOW_ETIQ_IN_HELP = '$vSHOW_ETIQ_IN_HELP', ".
 						"SHOW_LOGO = '$vSHOW_LOGO', ".
 						"LOGO_IMG = '$vLOGO_IMG', ".
 						"LOGO_OPEN = '$vLOGO_OPEN', ".
-						"LOGO_ALT = '$vLOGO_ALT', ".
+						"LOGO_ALT = '".str_replace("'", "’", $vLOGO_ALT)."', ".
 						"SHOW_OWNER = '$vSHOW_OWNER', ".
 						"SHOW_PRIV = '$vSHOW_PRIV', ".
 						"SHOW_PRIV_MOD = '$vSHOW_PRIV_MOD', ".
@@ -523,19 +523,19 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"SHOW_COUNTER = '$vSHOW_COUNTER', ".
 						"INSTALL_DATE = '$vINSTALL_DATE', ".
 						"USE_SKIN = '$vUSE_SKIN', ".
-						"ROOM1 = '$vROOM1', ".
-						"ROOM2 = '$vROOM2', ".
-						"ROOM3 = '$vROOM3', ".
-						"ROOM4 = '$vROOM4', ".
-						"ROOM5 = '$vROOM5', ".
-						"ROOM6 = '$vROOM6', ".
-						"ROOM7 = '$vROOM7', ".
-						"ROOM8 = '$vROOM8', ".
-						"ROOM9 = '$vROOM9', ".
-						"SWEAR1 = '$vSWEAR1', ".
-						"SWEAR2 = '$vSWEAR2', ".
-						"SWEAR3 = '$vSWEAR3', ".
-						"SWEAR4 = '$vSWEAR4', ".
+						"ROOM1 = '".str_replace("'", "’", $vROOM1)."', ".
+						"ROOM2 = '".str_replace("'", "’", $vROOM2)."', ".
+						"ROOM3 = '".str_replace("'", "’", $vROOM3)."', ".
+						"ROOM4 = '".str_replace("'", "’", $vROOM4)."', ".
+						"ROOM5 = '".str_replace("'", "’", $vROOM5)."', ".
+						"ROOM6 = '".str_replace("'", "’", $vROOM6)."', ".
+						"ROOM7 = '".str_replace("'", "’", $vROOM7)."', ".
+						"ROOM8 = '".str_replace("'", "’", $vROOM8)."', ".
+						"ROOM9 = '".str_replace("'", "’", $vROOM9)."', ".
+						"SWEAR1 = '".str_replace("'", "’", $vSWEAR1)."', ".
+						"SWEAR2 = '".str_replace("'", "’", $vSWEAR2)."', ".
+						"SWEAR3 = '".str_replace("'", "’", $vSWEAR3)."', ".
+						"SWEAR4 = '".str_replace("'", "’", $vSWEAR4)."', ".
 						"COLOR_FILTERS = '$vCOLOR_FILTERS', ".
 						"COLOR_ALLOW_GUESTS = '$vCOLOR_ALLOW_GUESTS', ".
 						"ROOM_SKIN1 = '$vROOM_SKIN1', ".
@@ -553,9 +553,9 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"COLOR_CM = '$vCOLOR_CM', ".
 						"COLOR_CM1 = '$vCOLOR_CM1', ".
 						"COLOR_CM2 = '$vCOLOR_CM2', ".
-						"QUICKA = '".addslashes($vQUICKA)."', ".
-						"QUICKM = '".addslashes($vQUICKM)."', ".
-						"QUICKU = '".addslashes($vQUICKU)."', ".
+						"QUICKA = '".addslashes(str_replace("'", "’", $vQUICKA))."', ".
+						"QUICKM = '".addslashes(str_replace("'", "’", $vQUICKM))."', ".
+						"QUICKU = '".addslashes(str_replace("'", "’", $vQUICKU))."', ".
 						"COLOR_NAMES = '$vCOLOR_NAMES', ".
 						"USE_AVATARS = '$vUSE_AVATARS', ".
 						"NUM_AVATARS = '$vNUM_AVATARS', ".
@@ -579,8 +579,8 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"EXIT_LINK_TYPE = '$vEXIT_LINK_TYPE', ".
 						"CHAT_EXTRAS = '$vCHAT_EXTRAS', ".
 						"EMAIL_USER = '$vEMAIL_USER', ".
-						"BOT_HELLO = '$vBOT_HELLO', ".
-						"BOT_BYE = '$vBOT_BYE', ".
+						"BOT_HELLO = '".str_replace("'", "’", $vBOT_HELLO)."', ".
+						"BOT_BYE = '".str_replace("'", "’", $vBOT_BYE)."', ".
 						"BOT_PUBLIC = '$vBOT_PUBLIC', ".
 						"ENABLE_PM = '$vENABLE_PM', ".
 						"EN_ROOM1 = '$vEN_ROOM1', ".
@@ -606,7 +606,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"LAST_SAVED_BY = '$pmc_username', ".
 						"CHAT_SYSTEM = '$vCHAT_SYSTEM', ".
 						"NUKE_BB_PATH = '$vNUKE_BB_PATH', ".
-						"CHAT_NAME = '$vCHAT_NAME', ".
+						"CHAT_NAME = '".str_replace("'", "’", $vCHAT_NAME)."', ".
 						"ENGLISH_FORMAT = '$vENGLISH_FORMAT', ".
 						"FLAGS_3D = '$vFLAGS_3D', ".
 						"ALLOW_REGISTER = '$vALLOW_REGISTER', ".
@@ -617,7 +617,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"BACKGR_IMG_PATH = '$vBACKGR_IMG_PATH', ".
 						"POPUP_LINKS = '$vPOPUP_LINKS', ".
 						"ITALICIZE_POWERS = '$vITALICIZE_POWERS', ".
-						"MAIL_GREETING = '$vMAIL_GREETING', ".
+						"MAIL_GREETING = '".str_replace("'", "’", $vMAIL_GREETING)."', ".
 						"PM_KEEP_DAYS = '$vPM_KEEP_DAYS', ".
 						"ALLOW_PM_DEL = '$vALLOW_PM_DEL', ".
 						"LOGIN_COUNTER = '$vLOGIN_COUNTER', ".
