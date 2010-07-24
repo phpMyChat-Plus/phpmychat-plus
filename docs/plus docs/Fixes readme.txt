@@ -35,6 +35,8 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 02.06.2010 - 1.94-beta5:
+- decription field in profiles is now right aligned and will display the according line breaks; (functionality related)
+- fixed the profile description field input where single quotes couldn't be used; (functionality related)
 - updated Calendar class to v.3.1; (functionality extension)
 - fixed some Birthday email related localized output; the wishes will be received in the user specific language or default language of the chat (functionality related)
 - changed "Spoken languages" profile field to "Language", selectable from the available chat languages; the purpose is to support localized emails from chat; (functionality related)

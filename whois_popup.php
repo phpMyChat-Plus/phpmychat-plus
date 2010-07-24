@@ -429,13 +429,10 @@ if ($description)
 	?>
 	<TR>
 		<TD CLASS="whois" nowrap="nowrap"><?php echo(L_PRO_4); ?>: </TD>
-	</TR>
-	<TR>
 <?php
 if (eregi("<script", $description) || !eregi("mysql", $description))
 {
-	$description = eregi_replace("javascript", "", $description);
-	$description = eregi_replace("mysql", "", $description);
+	$description = eregi_replace("javascript", "", eregi_replace("mysql", "", ereg_replace("\n", "<br />", $description)));
 }
 	echo("<TD CLASS=\"whois\" colspan=2>".$description."</TD>");
 ?>
