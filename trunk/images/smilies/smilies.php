@@ -30,6 +30,8 @@
 :kiss | smile24.gif
 :\* | smile24.gif
 :-\* | smile24.gif
+:x | smile24.gif
+:-x | smile24.gif
 :heart | smile25.gif
 :bang | smile26.gif
 :type | smile27.gif
@@ -76,4 +78,4 @@
 :back | smile68.gif
 
 ## NOTE: keep at least one blank line above!
-## NOTE: format is: "code" + "one single tab" + "|" + "one single tab" + "imagefile" + Hit Return
+## NOTE: format is: "code" + "space" + "|" + "space" + "imagefile" + Hit Return
