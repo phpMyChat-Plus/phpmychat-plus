@@ -15,6 +15,7 @@ require("./config/config.lib.php");
 require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
 require("./lib/clean.lib.php");
+if (C_USE_SMILIES) require("./lib/smilies.lib.php");
 
 // Size command by Ciprian
 if (isset($_COOKIE["CookieFontSize"])) $FontSize = $_COOKIE["CookieFontSize"];
@@ -357,6 +358,28 @@ if($DbLink->num_rows() > 0)
 	while(list($Time, $User, $Latin1, $Dest, $Message) = $DbLink->next_record())
 	{
 		$Message = stripslashes($Message);
+
+		// Starts Smilies checkup
+		if (C_USE_SMILIES)
+		{
+			$SmilieResult = array();
+			$val = array();
+			if (preg_match_all('/<IMG SRC="images\\/smilies\\/([^>]*)" BORDER=0 ALT="([^>]*)">/', $Message, $SmilieResult, PREG_SET_ORDER))
+			{
+				if (count($SmilieResult))
+				{
+					foreach ($SmilieResult as $val)
+					{
+						if (in_array($val[2], array_keys($codes)))
+						{
+							$Message = str_replace($val[0], "<A HREF=\"#\" onClick=\"window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].value += '".$val[2]."'; window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].focus(); return false\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_5).".'; return true\" title=\"".$val[2]."\">".$val[0]."</A>", $Message);
+						}
+					}
+				}
+			}
+		}
+		// Ends Smilies checkup
+
 		$Message = str_replace("L_DEL_BYE",L_DEL_BYE,$Message);
 		$Message = str_replace("L_REG_BRB",L_REG_BRB,$Message);
 		$Message = str_replace("L_HELP_MR",sprintf(L_HELP_MR,$User),$Message);
@@ -653,7 +676,6 @@ else
 {
 	$Refresh = ereg_replace("&LastLoad=([0-9]+)&LastCheck=([0-9]+)","&LastLoad=".$LastLoad."&LastCheck=".$LastCheck, (isset($QUERY_STRING)) ? $QUERY_STRING : getenv("QUERY_STRING"));
 };
-
 
 // Special cache instructions for IE5+
 $CachePlus	= "";
