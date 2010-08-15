@@ -35,6 +35,7 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 02.06.2010 - 1.94-beta5:
+- fixed a bug that caused page titles with space at the end to break the popups/openers; (functionality related)
 - posted smilies can now be reused by clicking on them; (functionality extension)
 - decription field in profiles is now right aligned and will display the according line breaks; (functionality related)
 - fixed the profile description field input where single quotes couldn't be used; (functionality related)
