@@ -1968,9 +1968,12 @@ if (strstr($Sender_email,"@") && ($Sender_email != ""))
 <?php
 }
 else echo($Owner_name);
+?>
+</SPAN>
+<?php
 }
 ?>
-<br /><a HREF="privacy.html" TARGET=_blank CLASS="ChatLink" Title="<?php echo(sprintf(L_CLICK,L_PRIVACY)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_PRIVACY)); ?>'; return true">Our Privacy Policy</a>
+<br /><SPAN CLASS="ChatCopy" dir="LTR"><a HREF="privacy.html" TARGET=_blank CLASS="ChatLink" Title="<?php echo(sprintf(L_CLICK,L_PRIVACY)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_PRIVACY)); ?>'; return true">Our Privacy Policy</a>
 </SPAN>
 <?php
 	if ($show_donation)
