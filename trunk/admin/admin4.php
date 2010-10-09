@@ -95,16 +95,24 @@ else
 	<?php
 	if ($count_RegUsers != 0)
 	{
+		$DbLink->query("SELECT COUNT(*) FROM ".C_BAN_TBL);
+		list($count_BanUsers) = $DbLink->next_record();
 	?>
 				<TR>
 					<TD ALIGN=CENTER><?php echo(A_SHEET4_2." ".A_MENU_1); ?></TD>
 				</TR>
 				<TR>
 					<TD ALIGN=CENTER>
-						<SELECT NAME="SendTo[]" MULTIPLE SIZE=9>
+						<SELECT NAME="SendTo[]" MULTIPLE SIZE=<?php echo($count_BanUsers ? 9 : 15); ?>>
 						<?php
-//						$DbLink->query("SELECT username,email FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND email != '' ORDER BY username");
-						$DbLink->query("SELECT reg.username,reg.email FROM ".C_REG_TBL." reg RIGHT JOIN ".C_BAN_TBL." ban ON reg.username != ban.username WHERE reg.email != 'bot@bot.com' AND reg.email != 'quote@quote.com' AND reg.email != '' ORDER BY reg.username");
+						if($count_BanUsers)
+						{
+							$DbLink->query("SELECT reg.username,reg.email FROM ".C_REG_TBL." reg RIGHT JOIN ".C_BAN_TBL." ban ON reg.username != ban.username WHERE reg.email != 'bot@bot.com' AND reg.email != 'quote@quote.com' AND reg.email != '' ORDER BY reg.username");
+						}
+						else
+						{
+							$DbLink->query("SELECT username,email FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND email != '' ORDER BY username");
+						}
 						while (list($U,$EMail) = $DbLink->next_record())
 						{
 							if ($U != $pmc_username) echo("<OPTION VALUE=\"".$U." <".$EMail.">\">".$U." (".$EMail.")</OPTION>");
@@ -114,6 +122,10 @@ else
 						?>
 					</TD>
 				</TR>
+			<?php
+			if($count_BanUsers)
+			{
+			?>
 				<TR>
 					<TD ALIGN=CENTER>
 						<INPUT TYPE=button VALUE="<?php echo(A_SHEET4_3); ?>" onClick="for (var i = 0; i < document.forms['MailForm'].elements['SendTo[]'].options.length; i++) {document.forms['MailForm'].elements['SendTo[]'].options[i].selected=true;}">
@@ -139,6 +151,9 @@ else
 						?>
 					</TD>
 				</TR>
+				<?php
+				}
+				?>
 				<TR>
 					<TD ALIGN=CENTER>
 						<INPUT TYPE=button VALUE="<?php echo(A_SHEET4_3); ?>" onClick="for (var i = 0; i < document.forms['MailForm'].elements['SendToBan[]'].options.length; i++) {document.forms['MailForm'].elements['SendToBan[]'].options[i].selected=true;}">
