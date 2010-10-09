@@ -23,6 +23,8 @@ if (isset($FORM_SEND) && $FORM_SEND == 4)
 {
 	// Sending the mails when at least an user has been selected and subject and message have been filled
 	if (count($SendTo) == 0) $SendTo = array();
+	if (count($SendToBan) == 0) $SendToBan = array();
+	$SendTo = array_merge($SendTo,$SendToBan);
 	$SendToExtra = array();
 	if (isset($emails) && $emails != "") $SendToExtra = explode(",",$emails);
 	if ($emails != "") $SendTo = array_merge($SendTo,$SendToExtra);
@@ -95,13 +97,14 @@ else
 	{
 	?>
 				<TR>
-					<TD ALIGN=CENTER><?php echo(A_SHEET4_2); ?></TD>
+					<TD ALIGN=CENTER><?php echo(A_SHEET4_2." ".A_MENU_1); ?></TD>
 				</TR>
 				<TR>
 					<TD ALIGN=CENTER>
-						<SELECT NAME="SendTo[]" MULTIPLE SIZE=15>
+						<SELECT NAME="SendTo[]" MULTIPLE SIZE=9>
 						<?php
-						$DbLink->query("SELECT username,email FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND email != '' ORDER BY username");
+//						$DbLink->query("SELECT username,email FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND email != '' ORDER BY username");
+						$DbLink->query("SELECT reg.username,reg.email FROM ".C_REG_TBL." reg RIGHT JOIN ".C_BAN_TBL." ban ON reg.username != ban.username WHERE reg.email != 'bot@bot.com' AND reg.email != 'quote@quote.com' AND reg.email != '' ORDER BY reg.username");
 						while (list($U,$EMail) = $DbLink->next_record())
 						{
 							if ($U != $pmc_username) echo("<OPTION VALUE=\"".$U." <".$EMail.">\">".$U." (".$EMail.")</OPTION>");
@@ -115,6 +118,31 @@ else
 					<TD ALIGN=CENTER>
 						<INPUT TYPE=button VALUE="<?php echo(A_SHEET4_3); ?>" onClick="for (var i = 0; i < document.forms['MailForm'].elements['SendTo[]'].options.length; i++) {document.forms['MailForm'].elements['SendTo[]'].options[i].selected=true;}">
 						&nbsp;<INPUT TYPE=button VALUE="<?php echo(A_SHEET4_12); ?>" onClick="for (var i = 0; i < document.forms['MailForm'].elements['SendTo[]'].options.length; i++) {document.forms['MailForm'].elements['SendTo[]'].options[i].selected=false;}">
+						</SELECT>
+						<INPUT TYPE=hidden NAME=pmc_email VALUE="<?php echo($pmc_email); ?>">
+					</TD>
+				</TR>
+				<TR>
+					<TD ALIGN=CENTER><?php echo(A_SHEET4_2." ".A_MENU_2); ?></TD>
+				</TR>
+				<TR>
+					<TD ALIGN=CENTER>
+						<SELECT NAME="SendToBan[]" MULTIPLE SIZE=3>
+						<?php
+						$DbLink->query("SELECT reg.username,reg.email FROM ".C_REG_TBL." reg RIGHT JOIN ".C_BAN_TBL." ban ON reg.username = ban.username WHERE reg.email != 'bot@bot.com' AND reg.email != 'quote@quote.com' AND reg.email != '' ORDER BY reg.username");
+						while (list($UB,$EMailB) = $DbLink->next_record())
+						{
+							if ($UB != $pmc_username) echo("<OPTION VALUE=\"".$UB." <".$EMailB.">\">".$UB." (".$EMailB.")</OPTION>");
+							else $pmc_email = $EMailB;
+						}
+						$DbLink->clean_results();
+						?>
+					</TD>
+				</TR>
+				<TR>
+					<TD ALIGN=CENTER>
+						<INPUT TYPE=button VALUE="<?php echo(A_SHEET4_3); ?>" onClick="for (var i = 0; i < document.forms['MailForm'].elements['SendToBan[]'].options.length; i++) {document.forms['MailForm'].elements['SendToBan[]'].options[i].selected=true;}">
+						&nbsp;<INPUT TYPE=button VALUE="<?php echo(A_SHEET4_12); ?>" onClick="for (var i = 0; i < document.forms['MailForm'].elements['SendToBan[]'].options.length; i++) {document.forms['MailForm'].elements['SendToBan[]'].options[i].selected=false;}">
 						</SELECT>
 						<INPUT TYPE=hidden NAME=pmc_email VALUE="<?php echo($pmc_email); ?>">
 					</TD>

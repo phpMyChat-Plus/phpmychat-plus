@@ -29,7 +29,7 @@ if (C_BAN_IP) // ban only by IP
 {
 	$DbLink->query("SELECT ip,rooms,reason FROM ".C_BAN_TBL." WHERE ip='$IP' LIMIT 1");
 }
-else // ban by both IP or username
+else // ban by both IP and username
 {
 	$DbLink->query("SELECT ip,rooms,reason FROM ".C_BAN_TBL." WHERE ip='$IP' and username='$U' LIMIT 1");
 }
