@@ -35,10 +35,11 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 02.06.2010 - 1.94-beta5:
+- separated banished users from the reg ones in the send email tab in admin panel, so they don’t get selected by mistake to receive unwanted emails from admins; (functionality extention)
 - fixed a bug that caused page titles with space at the end to break the popups/openers; (functionality related)
 - posted smilies can now be reused by clicking on them; (functionality extension)
 - decription field in profiles is now right aligned and will display the according line breaks; (functionality related)
-- fixed the profile description field input where single quotes couldn't be used; (functionality related)
+- fixed the profile description field input where single quotes couldn’t be used; (functionality related)
 - updated Calendar class to v.3.1; (functionality extension)
 - fixed some Birthday email related localized output; the wishes will be received in the user specific language or default language of the chat (functionality related)
 - changed "Spoken languages" profile field to "Language", selectable from the available chat languages; the purpose is to support localized emails from chat; (functionality related)
@@ -510,7 +511,7 @@ To do (other then To do Cip.txt):
 - extend the bannishment feature to be able to ban an ip either by using the command or from admin panel;
 
 31.07.2006 - v1.8:
-- The bot has been enhanced (thanks to Sally Linus for her ideas)! It acts now just like any other human user in the chat. It can be invoked privately and it'll answer privately. Bot can talk from different rooms. (functionality extension)
+- The bot has been enhanced (thanks to Sally Linus for her ideas)! It acts now just like any other human user in the chat. It can be invoked privately and it’ll answer privately. Bot can talk from different rooms. (functionality extension)
 - private messaging have been improved (mostly because of the bot improvements); it shows an user’s whisper also to him (in his room), not just to the receiver (in the destination room). It can extend the functionality in the future. (functionality related)
 - the code was cleaned up a bit in several files. (size related)
 - some more details in Installation/Instructions.txt for editing the config database details. (support related)
