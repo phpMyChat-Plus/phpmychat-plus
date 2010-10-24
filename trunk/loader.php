@@ -86,7 +86,6 @@ else
 	$height = "";
 }
 
-
 if($width > $maxSize || $height > $maxSize) {
 
 if($width > $height) {
@@ -775,6 +774,7 @@ if ($xxx > 1)
 };
 // end Bob Dickow mod for buzzes and hellos.
 	// doubles backslashes except the ones for closing HTML tags
+#	$ToSend = str_replace("([^<]+)[\]","\\1\\\\",$Messages[$message_nb-1-$i]);	// correction mb_ereg_replace error
 	$ToSend = ereg_replace("([^<]+)[\]","\\1\\\\",$Messages[$message_nb-1-$i]);
 	// slashes the quotes that should be displayed
 	$ToSend = str_replace("\"","\\\"",$ToSend);
