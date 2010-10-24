@@ -95,10 +95,6 @@ else
 	$height = "";
 }
 
-$image_size = getimagesize($image_file);
-$width = $image_size[0];
-$height = $image_size[1];
-
 if($width > $maxSize || $height > $maxSize) {
 
 if($width > $height) {
@@ -388,7 +384,7 @@ if($DbLink->num_rows() > 0)
 			}
 		}
 		// Ends Smilies checkup
-		
+
 		$Message = str_replace("L_DEL_BYE",L_DEL_BYE,$Message);
 		$Message = str_replace("L_REG_BRB",L_REG_BRB,$Message);
 		$Message = str_replace("L_HELP_MR",sprintf(L_HELP_MR,$User),$Message);
