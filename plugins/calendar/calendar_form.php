@@ -2,7 +2,7 @@
 
 //Request selected language - by Ciprian
 $hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : false;
-if(isset($hl) && $hl != "en_US" && $hl != "L_LANG") $language = $hl;
+if($hl && $hl != "en_US" && $hl != "L_LANG") $language = $hl;
 elseif(defined("L_LANG") && L_LANG != "en_US" && L_LANG != "L_LANG") $language = L_LANG;
 if(isset($language)){
 include_once("lang/calendar.".$language.".php");
@@ -34,14 +34,54 @@ $date_format = (isset($_REQUEST["fmt"])) ? $_REQUEST["fmt"] : 'd F Y';
 $dsb_txt = (isset($_REQUEST["dis"])) ? $_REQUEST["dis"] : "";
 $hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : 'en_US';
 
-//echo("date: $sly-$slm-$sld");
+//check year to be select in case of date_allow is set
+if(!$show_not_allow && ($date_allow1 || $date_allow2)){
+	if($date_allow1 && $date_allow2){
+		$da1Time = strtotime($date_allow1);
+		$da2Time = strtotime($date_allow2);
+
+		if($da1Time < $da2Time){
+			$year_start = date('Y', $da1Time);
+			$year_end = date('Y', $da2Time);
+		}else{
+			$year_start = date('Y', $da2Time);
+			$year_end = date('Y', $da1Time);
+		}
+	}elseif($date_allow1){
+		//only date 1 specified
+		$da1Time = strtotime($date_allow1);
+		$year_start = date('Y', $da1Time);
+	}elseif($date_allow2){
+		//only date 2 specified
+		$da2Time = strtotime($date_allow2);
+		$year_end = date('Y', $da2Time);
+	}
+}
 
 if(isset($_REQUEST["m"]))
 	$m = $_REQUEST["m"];
-else
-	$m = ($slm) ? $slm : date('m');
-
-//echo("m: ".$m);
+else{
+	if($slm){
+		$m = $slm;
+	}else{
+		$time_allow2 = strtotime($date_allow2);
+		if($time_allow2 > 0 && $year_end > 0){
+			//compare which one is more
+			$year_allow2 = date('Y', $time_allow2);
+			if($year_allow2 >= $year_end){
+				//use time_allow2
+				$m = ($time_allow2 > time()) ? date('m') : date('m', $time_allow2);
+			}else{
+				//use year_end
+				$m = ($year_end > date('Y')) ? date('m') : 12;
+			}
+		}elseif($time_allow2 > 0){
+			$m = ($time_allow2 > time()) ? date('m') : date('m', $time_allow2);
+		}elseif($year_end > 0){
+			$m = ($year_end > date('Y')) ? date('m') : 12;
+		}else $m = date('m');
+	}
+}
 
 if($m < 1 && $m > 12) $m = date('m');
 
@@ -54,9 +94,11 @@ if(isset($_REQUEST["y"]))
 else
 	$y = ($cyr) ? $sly : date('Y');
 
-//echo("<br>y: ".$y);
-
 if($y <= 0) $y = date('Y');
+
+//set startup calendar
+if($y >= $year_end) $y = $year_end;
+if($y <= $year_start) $y = $year_start;
 
 $objname = (isset($_REQUEST["objname"])) ? $_REQUEST["objname"] : "";
 $dp = (isset($_REQUEST["dp"])) ? $_REQUEST["dp"] : "";
@@ -276,32 +318,9 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
               <?php
               $thisyear = date('Y');
 
-              //check year to be select in case of date_allow is set
-              if(!$show_not_allow && ($date_allow1 || $date_allow2)){
-                if($date_allow1 && $date_allow2){
-                    $da1Time = strtotime($date_allow1);
-                    $da2Time = strtotime($date_allow2);
-
-                    if($da1Time < $da2Time){
-                        $year_start = date('Y', $da1Time);
-                        $year_end = date('Y', $da2Time);
-                    }else{
-                        $year_start = date('Y', $da2Time);
-                        $year_end = date('Y', $da1Time);
-                    }
-                }elseif($date_allow1){
-                    //only date 1 specified
-                    $da1Time = strtotime($date_allow1);
-                    $year_start = date('Y', $da1Time);
-                }elseif($date_allow2){
-                    //only date 2 specified
-                    $da2Time = strtotime($date_allow2);
-                    $year_end = date('Y', $da2Time);
-                }
-              }
-
               //write year options
-              for($year=$year_start; $year<=$year_end; $year++){
+//              for($year=$year_start; $year<=$year_end; $year++){
+              for($year=$year_end; $year>=$year_start; $year--){
                 $selected = ($year == $y) ? " selected" : "";
                 echo("<option value=\"$year\"$selected>$year</option>");
               }
@@ -329,32 +348,9 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
               <?php
               $thisyear = date('Y');
 
-              //check year to be select in case of date_allow is set
-              if(!$show_not_allow && ($date_allow1 || $date_allow2)){
-                if($date_allow1 && $date_allow2){
-                    $da1Time = strtotime($date_allow1);
-                    $da2Time = strtotime($date_allow2);
-
-                    if($da1Time < $da2Time){
-                        $year_start = date('Y', $da1Time);
-                        $year_end = date('Y', $da2Time);
-                    }else{
-                        $year_start = date('Y', $da2Time);
-                        $year_end = date('Y', $da1Time);
-                    }
-                }elseif($date_allow1){
-                    //only date 1 specified
-                    $da1Time = strtotime($date_allow1);
-                    $year_start = date('Y', $da1Time);
-                }elseif($date_allow2){
-                    //only date 2 specified
-                    $da2Time = strtotime($date_allow2);
-                    $year_end = date('Y', $da2Time);
-                }
-              }
-
               //write year options
-              for($year=$year_start; $year<=$year_end; $year++){
+//              for($year=$year_start; $year<=$year_end; $year++){
+              for($year=$year_end; $year>=$year_start; $year--){
                 $selected = ($year == $y) ? " selected" : "";
                 echo("<option value=\"$year\"$selected>$year</option>");
               }

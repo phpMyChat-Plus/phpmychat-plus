@@ -3,7 +3,7 @@
 // The php calendar component
 // written by TJ @triconsole
 //
-// version 3.1 (10 July 2010)
+// version 3.2-loc (13 August 2010)
 
 
 //bug fixed: Incorrect next month display show on 'February 2008'
@@ -101,6 +101,9 @@ class tc_calendar{
 
 	var $show_input = true;
 	var $dsb_days = array(); //collection of days to disabled
+
+	var $zindex = 1;
+
 	var $hl = L_LANG;
 
 	//calendar constructor
@@ -171,6 +174,13 @@ class tc_calendar{
 		$this->year = $year;
 	}
 
+	function setDateYMD($date){
+		list($year, $month, $day) = explode("-", $date, 3);
+		$this->day = $day;
+		$this->month = $month;
+		$this->year = $year;
+	}
+
 	//specified location of the calendar_form.php
 	function setPath($path){
 		$last_char = substr($path, strlen($path)-1, strlen($path));
@@ -183,7 +193,7 @@ class tc_calendar{
 
 		//check whether it is a date picker
 		if($this->date_picker){
-			echo("<span style=\"position: relative;\">");
+			echo("<span style=\"position: relative; z-index: $this->zindex;\">");
 
 			if($this->show_input){
 				if($this->hl){
@@ -258,6 +268,7 @@ class tc_calendar{
 			}
 
 			$div_align = "top:".$img_height."px;right:0px;";
+			//$div_align = "bottom:".$img_height."px;right:0px;";
 		}else{
 			$div_display = "visible";
 			$div_position = "relative";
@@ -265,8 +276,10 @@ class tc_calendar{
 		}
 
 		//write the calendar container
-		echo("<div id=\"div_".$this->objname."\" style=\"position:".$div_position.";visibility:".$div_display.";z-index:10000;".$div_align."\" class=\"div_calendar calendar-border\">");
-		echo("<IFRAME id=\"".$this->objname."_frame\" src=\"".$this->path."calendar_form.php".$paramStr."\" frameBorder=\"0\" scrolling=\"no\" allowtransparency=\"true\" width=\"100%\" height=\"100%\"></IFRAME>");
+//		echo("<div id=\"div_".$this->objname."\" style=\"position:".$div_position.";visibility:".$div_display.";z-index:10000;".$div_align."\" class=\"div_calendar calendar-border\">");
+//		echo("<IFRAME id=\"".$this->objname."_frame\" src=\"".$this->path."calendar_form.php".$paramStr."\" frameBorder=\"0\" scrolling=\"no\" allowtransparency=\"true\" width=\"100%\" height=\"100%\"></IFRAME>");
+		echo("<div id=\"div_".$this->objname."\" style=\"position:".$div_position.";visibility:".$div_display.";z-index:100;".$div_align."\" class=\"div_calendar calendar-border\">");
+		echo("<IFRAME id=\"".$this->objname."_frame\" src=\"".$this->path."calendar_form.php".$paramStr."\" frameBorder=\"0\" scrolling=\"no\" allowtransparency=\"true\" width=\"100%\" height=\"100%\" style=\"z-index: 100;\"></IFRAME>");
 
 		echo("</div>");
 
@@ -330,7 +343,8 @@ class tc_calendar{
 			}
 		  }
 
-		for($i=$year_start; $i<=$year_end; $i++){
+//		for($i=$year_start; $i<=$year_end; $i++){ // current year bottom
+		for($i=$year_end; $i>=$year_start; $i--){ // current year up
 			$selected = ((int)$this->year == $i) ? " selected" : "";
 			echo("<option value=\"$i\"$selected>$i</option>");
 		}
@@ -375,13 +389,23 @@ class tc_calendar{
 	}
 
 	function setYearInterval($start, $end){
-		$this->year_start = $start;
-		$this->year_end = $end;
+		if($start < $end){
+			$this->year_start = $start;
+			$this->year_end = $end;
+		}else{
+			$this->year_start = $end;
+			$this->year_end = $start;
+		}
 	}
 
 	function setYearSelect($a, $b){
-		$this->year_start = $a;
-		$this->year_end = $b;
+		if($a < $b){
+			$this->year_start = $a;
+			$this->year_end = $b;
+		}else{
+			$this->year_start = $b;
+			$this->year_end = $a;
+		}
 	}
 
 	function getMonthNames(){
@@ -393,8 +417,56 @@ class tc_calendar{
 	}
 
 	function dateAllow($from = "", $to = "", $show_not_allow = true){
-		$this->date_allow1 = $from;
-		$this->date_allow2 = $to;
+		$time_from = strtotime($from);
+		$time_to = strtotime($to);
+
+		if($time_from > 0 && $time_to > 0){
+			//both set
+			if($time_from <= $time_to){
+				$this->date_allow1 = $from;
+				$this->date_allow2 = $to;
+
+				//get years from allow date
+				$year_allow1 = date('Y', $time_from);
+				$year_allow2 = date('Y', $time_to);
+			}else{
+				$this->date_allow1 = $to;
+				$this->date_allow2 = $from;
+
+				//get years from allow date
+				$year_allow1 = date('Y', $time_to);
+				$year_allow2 = date('Y', $time_from);
+			}
+
+			//setup year_start and year_end, display in dropdown
+			if($this->year_start && $year_allow1 < $this->year_start) $this->year_start = $year_allow1;
+			if($this->year_end && $year_allow2 < $this->year_end) $this->year_end = $year_allow2;
+
+		}elseif($time_from > 0){
+			$this->date_allow1 = $from;
+
+			//get year from allow date
+			$year_allow1 = date('Y', $time_from);
+
+			//setup year start, display in dropdown
+			if($this->year_start && $year_allow1 < $this->year_start) $this->year_start = $year_allow1;
+
+			//setup year end from year start
+			if(!$this->year_end) $this->year_end = $this->year_start + $this->year_display_from_current;
+
+		}elseif($time_to > 0){
+			$this->date_allow2 = $to;
+
+			//get year from allow date
+			$year_allow2 = date('Y', $time_to);
+
+			//setup year end, display in dropdown
+			if($this->year_end && $year_allow2 < $this->year_end) $this->year_end = $year_allow2;
+
+			//setup year start from year end
+			if(!$this->year_start) $this->year_start = $this->year_end - $this->year_display_from_current;
+		}
+
 		$this->show_not_allow = $show_not_allow;
 	}
 
