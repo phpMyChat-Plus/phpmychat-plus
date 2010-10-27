@@ -35,6 +35,7 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 02.06.2010 - 1.94-beta5:
+- updated Calendar class to v3.2 and fixed a few small js bugs; (functionality related)
 - separated banished users from the reg ones in the send email tab in admin panel, so they don’t get selected by mistake to receive unwanted emails from admins; (functionality extention)
 - fixed a bug that caused page titles with space at the end to break the popups/openers; (functionality related)
 - posted smilies can now be reused by clicking on them; (functionality extension)

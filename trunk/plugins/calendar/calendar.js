@@ -31,7 +31,7 @@ function setValue(objname, d){
 
 				var myDate = new Date();
 				myDate.setFullYear(date_array[0],(date_array[1]-1),date_array[2]);
-				var dateFormat = document.getElementById(objname+"_fmt").value
+				var dateFormat = document.getElementById(objname+"_fmt").value;
 
 				var dateTxt = myDate.format(dateFormat);
 			}else var dateTxt = l_sel_date;
@@ -224,7 +224,7 @@ function daysInMonth(month, year){
 
 function DaysArray(n) {
 	for (var i = 1; i <= n; i++) {
-		this[i] = 31
+		this[i] = 31;
 		if (i==4 || i==6 || i==9 || i==11) {this[i] = 30}
 		if (i==2) {this[i] = 29}
    }

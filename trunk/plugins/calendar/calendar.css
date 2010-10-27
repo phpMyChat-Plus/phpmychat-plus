@@ -49,9 +49,9 @@ input, select, textarea {
 #calendar-header, #calendar-body, #calendar-footer { padding-left: 1px; padding-right: 1px; }
 #calendar-container { background-color: #6699CC; }
 
-.tcday, .tcmonth, .tcyear { font-size: 11px; }
+.tcday, .tcmonth, .tcyear { font-size: 11px; z-index: 10; }
 
-.date-tccontainer { border: 1px solid #cccccc; background-color: #efefef; padding: 2px; }
+.date-tccontainer { border: 1px solid #cccccc; background-color: #efefef; padding: 2px; float: left; margin-right: 2px; text-align: center; }
 
 #calendar-page { float: left; }
 .div_calendar { width: 150px; height: 200px; }

@@ -9,8 +9,20 @@ if (!function_exists('utf_conv'))
 };
 
 $hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : false;
-if(file_exists("lang/calendar.".(isset($hl) ? $hl : L_LANG).".php")) include_once("lang/calendar.".(isset($hl) ? $hl : L_LANG).".php");
-if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "en_US");
+if(file_exists("lang/calendar.".($hl ? $hl : L_LANG).".php")) include_once("lang/calendar.".($hl ? $hl : L_LANG).".php");
+else
+{
+	if(!defined("L_LANG") || L_LANG == "L_LANG")
+	{
+		define("L_LANG", "en_US");
+		// Set the US specific date/time format
+		if (stristr(PHP_OS,"win")) {
+		setlocale(LC_ALL, "eng-usa.UTF-8", "eng-usa");
+		} else {
+		setlocale(LC_ALL, "en_US.UTF-8", "enu.UTF-8", "usa.UTF-8", "enu_enu.UTF-8", "English-usa.UTF-8");
+		}
+	}
+};
 
 // English US format and localization - default strings when the specified translation is not available
 if(!defined("L_DAY")) define("L_DAY", "Day");
