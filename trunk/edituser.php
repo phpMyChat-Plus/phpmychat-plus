@@ -619,14 +619,15 @@ else
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_7); ?> :</TD>
 			<TD VALIGN="TOP" CLASS=success>
 			<?php
-			  $myCalendar = new tc_calendar("date5", true, true);
-			  $myCalendar->setPicture('plugins/calendar/images/iconCalendar.gif');
+			  $myCalendar = new tc_calendar("date1", true, true);
+			  $myCalendar->zindex = 150; //default 1
+			  $myCalendar->setPicture("plugins/calendar/images/iconCalendar.gif");
+			  $myCalendar->setPath("plugins/calendar/");
 			  if(isset($BIRTHDAY))
 			  {
 			    $birth_day = strtotime($BIRTHDAY);
 				$myCalendar->setDate(date('d',$birth_day), date('m',$birth_day), date('Y',$birth_day));
 			  }
-			  $myCalendar->setPath("plugins/calendar/");
 			  $myCalendar->setYearSelect(1935, date('Y'));
 			  $myCalendar->dateAllow('1935-01-01', date('Y-m-d'));
 			  $myCalendar->setDateFormat(str_replace("%","",str_replace("B","F",str_replace("d","j",L_CAL_FORMAT))));

@@ -1472,14 +1472,15 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
     <td class=success>
 		<?php
-		  $myCalendar = new tc_calendar("date5", true, false);
-		  $myCalendar->setPicture('./plugins/calendar/images/iconCalendar.gif');
-		  if(isset($INSTALL_DATE) && $INSTALL_DATE != "")
+		  $myCalendar = new tc_calendar("date1", true, false);
+		  $myCalendar->zindex = 150; //default 1
+		  $myCalendar->setPicture("./plugins/calendar/images/iconCalendar.gif");
+		  $myCalendar->setPath("./plugins/calendar/");
+		  if($INSTALL_DATE && $INSTALL_DATE != "")
 		  {
 		    $installdate = strtotime($INSTALL_DATE);
 			$myCalendar->setDate(date('d',$installdate), date('m',$installdate), date('Y',$installdate));
 		  }
-		  $myCalendar->setPath("./plugins/calendar/");
 		  $myCalendar->setYearSelect(2000, date('Y'));
 		  $myCalendar->dateAllow('2000-01-01', date('Y-m-d'));
 		  $myCalendar->setDateFormat('j F Y');
