@@ -63,7 +63,7 @@ function makeZip($dirName,$path,$year,$month) {
 		elseif (isset($year)) $zipfile = new zip_file($path = $path."/".$year.".zip");
 	}
 	else $zipfile = new zip_file($path = $path."/chat_ip_logs_".date('ymd').".zip");
-	$zipfile->set_options(array('level' => 3, 'overwrite' => 1, 'method' => 1, 'inmemory' => 0, 'recurse' => (isset($month) ? 0 : 1), 'storepaths' => (isset($month) || isset($year)) ? 1 : 0, 'comment' => "Built on ".date('jS \of F Y, H:i:s').".\nDownloaded from [".C_CHAT_NAME."]\nat ".C_CHAT_URL.".\n© ".date('Y')." - ".C_ADMIN_NAME."."));
+	$zipfile->set_options(array('level' => 3, 'overwrite' => 1, 'method' => 1, 'inmemory' => 0, 'recurse' => (isset($month) ? 0 : 1), 'storepaths' => (isset($month) || isset($year)) ? 1 : 0, 'comment' => "Archive Class © 2005 - Devin Doucette (class programmer).\nModule © 2008".((date('Y')>"2008") ? "-".date('Y') : "")." - ".PLUS_DEVELOPER." (phpMyChat-Plus developer).\n\nFile built on ".date('jS \of F Y, H:i:s').".\nDownloaded from [".C_CHAT_NAME."]\nat ".C_CHAT_URL.".\nContent © ".date('Y')." - ".C_ADMIN_NAME." (chat site owner)."));
 	$zipfile->add_files(array($dirName,$dirName."/*.htm",$dirName."/*.php",$dirName."/*.txt"));
 	$zipfile->create_archive();
 	$path = "<span class=\"error\">".str_replace("./","",$path)."</span>";

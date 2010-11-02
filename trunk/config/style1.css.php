@@ -37,7 +37,7 @@ $small = round(0.8 * $medium);
 /*	Color Input Box mod by Ciprian
 Here you can customize the default color for messages window general look
 the font for text messages, colors, some popup windows' text color, aso)
-The variable color: <?php echo($CD); ?>  will make time, sender and message color have the same default color defined bellow.*/
+The variable color: <?php echo($CD); ?>  will make time, sender and message color have the same default color defined below.*/
 
 	$CD = "black";			//default messages color (this color should be chosen in the Admin panel tab, filter color of this rooms' skin)
 
