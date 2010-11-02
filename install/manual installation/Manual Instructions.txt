@@ -53,33 +53,22 @@ Note: index.php must be in the plus folder, not plus/chat/ as for the standard v
 4. Optionally, rename plus folder to whatever you'd like (chat, mychat).
 
 5. Change Attributes/Permissions for these files/folders (CHMOD by ftp):
-
 plus/acount/pages/ - to 777
 plus/acount/pages/bak/ - to 777
 plus/acount/pages/chat_index.txt - to 666
 plus/acount/pages/chat_ip_logs.htm - to 666
 plus/acount/pages/ip.txt - to 666
-
 plus/admin/backups/ - to 777
-
 plus/bot/subs.inc - to 777
-
 plus/botfb/ - to 777
-
 plus/cache/ - to 777
-
 plus/images/avatars/ - to 777
 plus/images/avatars/uploaded/ - to 777
-
 plus/images/smilies/ - to 777
 plus/images/smilies/smilies.php - to 666
-
 plus/logs/ - to 777
-
 plus/logsadmin/ - to 777
-
 plus/skins/images/ - to 777
-
 plus/sounds/ - to 777
 
 6. Go to "plus/install/manual installation/database" folder on your drive and open mysql_new_install.txt (or the corresponding upgrade) file.
