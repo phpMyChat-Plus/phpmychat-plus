@@ -97,29 +97,29 @@ function buzz2Input(code)
 		$buzzfiles = opendir($sounds); #open directory
 		echo("<tr>");
 		echo ("<td valign=top align=$CellAlign nowrap=\"nowrap\">");
-				$i = 1;
-				while (false !== ($buzzfile = readdir($buzzfiles)))
+			$i = 1;
+			while (false !== ($buzzfile = readdir($buzzfiles)))
+			{
+				if (!eregi("\.html",$buzzfile) && !eregi("\.txt",$buzzfile) && $buzzfile!=='.' && $buzzfile!=='..')
 				{
-					if (!eregi("\.html",$buzzfile) && !eregi("\.txt",$buzzfile) && $buzzfile!=='.' && $buzzfile!=='..')
-					{
-						$buzzsounds[]=$buzzfile;
-			 		$i++;
-			 		}
-			 	}
-				closedir($buzzfiles);
-			  if ($buzzsounds)
-			  {
-			  		sort($buzzsounds);
+					$buzzsounds[]=$buzzfile;
+					$i++;
 				}
-				$i = ($i - ($i % 5)) / 5;
-			  $j = 1;
-			  foreach ($buzzsounds as $buzzname)
-			  {
-					$buzzname=str_replace(".wav","",$buzzname);
-					echo ("<a href=\"\" onClick=\"buzz2Input('".$buzzname."',0); return false\"  onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_13).".'; return true\" title=\"".sprintf(L_CLICK,L_LINKS_13)."\">".$buzzname."</a><br />"); #print name of each file found
-					if ($j == $i || $j == $i*2 || $j == $i*3 || $j == $i*4 || $j == $i*5) echo ("</td><td valign=top align=$CellAlign nowrap=\"nowrap\">");
-					$j++;
-				}
+			}
+			closedir($buzzfiles);
+			if ($buzzsounds)
+			{
+				sort($buzzsounds);
+			}
+			$i = ($i - ($i % 5)) / 5;
+			$j = 1;
+			foreach ($buzzsounds as $buzzname)
+			{
+				$buzzname=str_replace(".wav","",$buzzname);
+				echo ("<a href=\"\" onClick=\"buzz2Input('".$buzzname."',0); return false\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_13).".'; return true\" title=\"".sprintf(L_CLICK,L_LINKS_13)."\">".$buzzname."</a><br />"); #print name of each file found
+				if ($j == $i || $j == $i*2 || $j == $i*3 || $j == $i*4 || $j == $i*5) echo ("</td><td valign=top align=$CellAlign nowrap=\"nowrap\">");
+				$j++;
+			}
 		unset($buzzsounds);
 		echo("</tr>");
 		echo("</td></tr></table></TABLE>");

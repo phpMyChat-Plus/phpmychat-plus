@@ -217,9 +217,9 @@ class tc_calendar{
 				$this->writeDateContainer();
 			}
 
-			echo(" <a href=\"javascript:toggleCalendar('".$this->objname."');\">");
+			echo(" <a href=\"javascript:toggleCalendar('".$this->objname."');\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_15).".'; return true\" title=\"".sprintf(L_CLICK,L_LINKS_15)."\">");
 			if(is_file($this->icon)){
-				echo("<img src=\"".$this->icon."\" id=\"tcbtn_".$this->objname."\" name=\"tcbtn_".$this->objname."\" border=\"0\" align=\"absmiddle\" />");
+				echo("<img src=\"".$this->icon."\" id=\"tcbtn_".$this->objname."\" name=\"tcbtn_".$this->objname."\" border=\"0\" align=\"absmiddle\" alt=\"".sprintf(L_CLICK,L_LINKS_15)."\"/>");
 			}else echo($this->txt);
 			echo("</a>");
 
