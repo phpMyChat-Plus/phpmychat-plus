@@ -112,13 +112,16 @@ if(SHOW_ETIQ_IN_HELP == "1")
 		<SPAN CLASS="ChatCopy" dir="LTR">
 <?php
 include_once("./admin/mail4admin.lib.php");
-if ($Sender_email)
+if (!eregi("Your name",C_ADMIN_NAME) && C_ADMIN_NAME != "") $Owner_name = C_ADMIN_NAME;
+else $Owner_name = L_WHOIS_ADMIN;
+if (strstr($Sender_email,"@") && ($Sender_email != ""))
 {
+	$Owner_email = $Sender_email;
 ?>
-<a href=mailto:<?php echo($Sender_email) ?> CLASS="ChatLink" Title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_OWNER)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_OWNER)); ?>.'; return true"><?php echo(C_ADMIN_NAME) ?></A>
+<a href="mailto:<?php echo($Owner_email) ?> CLASS="ChatLink" Title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_OWNER)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_OWNER)); ?>.'; return true"><?php echo($Owner_name); ?></A>
 <?php
 }
-else echo(C_ADMIN_NAME);
+else echo($Owner_name);
 ?>
 </SPAN>
 </TD></TR>
