@@ -5,8 +5,8 @@
 
 // Lines below must be at the top of your file because 'index.lib.php'
 // sets headers and cookies.
-$ChatPath = "";		// relative path to chat dir, empty value if this
-					// file is in the same dir than the chat;
+if (!isset($ChatPath)) $ChatPath = "";		// relative path to chat dir, empty value if this
+											// file is in the same dir than the chat;
 
 // Added for php4 support of mb functions
 if (!function_exists('mb_convert_case'))

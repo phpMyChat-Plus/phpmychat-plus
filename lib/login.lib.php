@@ -168,7 +168,7 @@ $CellAlign = ($Align == "right" ? "RIGHT" : "LEFT");
 		<TR>
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" NOWRAP="NOWRAP"></TD>
 			<TD VALIGN="TOP">
-			<A HREF="<?php echo($ChatPath); ?>pass_reset.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('pass_reset'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_PASS_7); ?>.'; return true;"><?php echo(L_PASS_7); ?></A>
+			<A HREF="<?php echo(${ChatPath}); ?>pass_reset.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('pass_reset'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_PASS_7); ?>.'; return true;"><?php echo(L_PASS_7); ?></A>
 				</TD>
 		</TR>
 		</TABLE>
