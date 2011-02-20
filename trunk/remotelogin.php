@@ -10,11 +10,12 @@
 // Considering /plus/ is in a path like http://www.website.com/plus/ (/public_html/plus/)
 // Note:	./ = current directory = /plus/;
 //				../ = parent directory = /folders/ (one folder up);
+if (!isset($ChatPath)){
 //$ChatPath = "../../plus/";	//use it if the output page is in a path like this: http://www.website.com/private/phpbb (/public_html/private/phpbb/)
 //$ChatPath = "../plus/";	//use it if the output page is in a path like this: http://www.website.com/phpbb/ (/public_html/phpbb/)
 //$ChatPath = "plus/";	//(most often) use it if the output page is in a path like this: http://www.website.com/ (root, /public_html/)
 $ChatPath = "";	//use it if the output page is in the same directory with /plus/
-
+}
 // Added for php4 support of mb functions
 if (!function_exists('mb_convert_case'))
 {

@@ -6,7 +6,8 @@
    -------------------------------------------------------------------------------- */
 
 // Fix some security holes
-if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
+if (!isset($ChatPath)) $ChatPath = "";
+if (!is_dir('./'.substr(${ChatPath}, 0, -1))) exit();
 
 require("./config/config.lib.php");
 

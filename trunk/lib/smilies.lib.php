@@ -65,8 +65,8 @@ function Check4Smilies(&$string,&$Table)
 		{
 			while(list($key, $prop) = each($Table))
 			{
-				if(ereg($key, $substring)) $ss++;
-				$substring = str_replace($key, " <IMG SRC=\"images/smilies/$prop\" BORDER=0 ALT=\"".SpecialSlash($key)."\"> ", $substring);
+				if(strstr($substring, $key)) $ss++;
+				$substring = ereg_replace($key, " <IMG SRC=\"images/smilies/$prop\" BORDER=0 ALT=\"".SpecialSlash($key)."\"> ", $substring);
 			};
 			$tmp_tbl[$i] = $substring;
 		}

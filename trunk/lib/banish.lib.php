@@ -11,18 +11,10 @@ $Reason = "";
 $DbLink->query("DELETE FROM ".C_BAN_TBL." WHERE ban_until < ".time());
 
 // Get the IP of the user
-if (!isset($ChatPath))
-{
-	$ChatPath = "";
-}
+if (!isset($ChatPath)) $ChatPath = "";
 // Fix a security holes
-else if (!is_dir('./'.substr($ChatPath, 0, -1)))
-{
-	exit();
-}
-
+else if (!is_dir('./'.substr(${ChatPath}, 0, -1))) exit();
 if (!isset($IP) || $IP == "") include("./${ChatPath}lib/get_IP.lib.php");
-
 
 // Seek for a banished nick
 if (C_BAN_IP) // ban only by IP

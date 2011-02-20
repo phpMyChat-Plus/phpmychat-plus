@@ -88,7 +88,8 @@ if (isset($_POST))
 };
 
 // Fix some security holes
-if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
+if (!isset($ChatPath)) $ChatPath = "";
+if (!is_dir('./'.substr(${ChatPath}, 0, -1))) exit();
 if (isset($L) && !is_dir("${ChatPath}localization/".$L)) exit();
 if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 if (isset($_COOKIE["CookieHash"])) $RemMe = $_COOKIE["CookieHash"];

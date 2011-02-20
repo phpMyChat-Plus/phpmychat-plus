@@ -13,7 +13,8 @@ if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 if (isset($_COOKIE["CookieUsername"])) $U = urldecode($_COOKIE["CookieUsername"]);
 
 // Fix some security holes
-if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
+if (!isset($ChatPath)) $ChatPath = "";
+if (!is_dir('./'.substr(${ChatPath}, 0, -1))) exit();
 if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) exit();
 if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 

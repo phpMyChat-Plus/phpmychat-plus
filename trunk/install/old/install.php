@@ -1,5 +1,5 @@
 <?php
-$ChatPath = "../";
+if (!isset($ChatPath)) $ChatPath = "";
 
 //session variables
 ini_set('session.bug_compat_42',0);
