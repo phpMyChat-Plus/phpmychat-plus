@@ -29,7 +29,7 @@ require("./${ChatPath}/lib/clean.lib.php");
 		if (C_HIDE_MODERS) $Hide .= ($Hide == "") ? " WHERE u.status != 'm'" : " AND u.status != 'm'";
 		if (C_SPECIAL_GHOSTS != "")
 		{
-			$sghosts = eregi_replace("username","u.username",C_SPECIAL_GHOSTS);
+			$sghosts = str_replace("username","u.username",C_SPECIAL_GHOSTS);
 			$Hide .= ($Hide == "") ? " WHERE u.username != ".$sghosts."" : " AND u.username != ".$sghosts."";
 		}
 		$query = "SELECT DISTINCT u.username, u.latin1, u.room, u.r_time FROM ".C_USR_TBL." u ".$Hide." ORDER BY ".$ordquery."";
@@ -42,7 +42,7 @@ require("./${ChatPath}/lib/clean.lib.php");
 		if (C_HIDE_MODERS) $Hide .=  " AND u.status != 'm'";
 		if (C_SPECIAL_GHOSTS != "")
 		{
-			$sghosts = eregi_replace("username","u.username",C_SPECIAL_GHOSTS);
+			$sghosts = str_replace("username","u.username",C_SPECIAL_GHOSTS);
 			$Hide .= " AND u.username != ".$sghosts."";
 		}
 		$query = "SELECT DISTINCT u.username, u.latin1, u.room, u.r_time, u.status FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room AND m.type = 1 ".$Hide." ORDER BY ".$ordquery."";

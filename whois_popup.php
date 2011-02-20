@@ -255,7 +255,7 @@ if (C_QUOTE)
 		$quotetext .= $quotes[$quote];
 		if($quotecolor != "") $quotetext .= "</font>";
 		$quotetext .= "</div>";
-		$quotetext = ereg_replace("\r\n", "", $quotetext);
+		$quotetext = str_replace("\r\n", "", $quotetext);
 }
 ?>
 <P CLASS="title">
@@ -432,7 +432,7 @@ if ($description)
 <?php
 if (eregi("<script", $description) || !eregi("mysql", $description))
 {
-	$description = eregi_replace("javascript", "", eregi_replace("mysql", "", ereg_replace("\n", "<br />", $description)));
+	$description = str_replace("javascript", "", str_replace("mysql", "", str_replace("\n", "<br />", $description)));
 }
 	echo("<TD CLASS=\"whois\" colspan=2>".$description."</TD>");
 ?>

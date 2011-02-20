@@ -216,7 +216,7 @@ if (C_HIDE_ADMINS) $Hide .= " AND (usr.status != 'a' OR usr.username = '".C_BOT_
 if (C_HIDE_MODERS) $Hide .=  " AND usr.status !='m'";
 if (C_SPECIAL_GHOSTS != "")
 {
-	$sghosts = eregi_replace("username","usr.username",C_SPECIAL_GHOSTS);
+	$sghosts = str_replace("username","usr.username",C_SPECIAL_GHOSTS);
 	$Hide .= " AND usr.username != ".$sghosts."";
 }
 
@@ -390,7 +390,7 @@ while(list($User, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup,
     if (C_USE_AVATARS && ($User == stripslashes($U)))
     {
 			$script = " onClick=\"alert('".L_AVA_REG.".'); return false;\">&nbsp;<img src=";
-			echo(eregi_replace('>&nbsp;<img src=',$script,$ava_none));
+			echo(str_replace('>&nbsp;<img src=',$script,$ava_none));
     }
     else
     {

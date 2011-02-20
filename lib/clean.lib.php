@@ -129,8 +129,8 @@ if(C_CHAT_LURKING)
 		if (C_SPECIAL_GHOSTS != "")
 		{
 			$sghosts = "";
-			$sghosts = eregi_replace("'","",C_SPECIAL_GHOSTS);
-			$sghosts = eregi_replace(" AND username != ",",",$sghosts);
+			$sghosts = str_replace("'","",C_SPECIAL_GHOSTS);
+			$sghosts = str_replace(" AND username != ",",",$sghosts);
 		}
  		if (($sghosts != "" && ghosts_in($userclosed, $sghosts, $Charset)) || (C_HIDE_ADMINS && ($statusclosed == "a" || $statusclosed == "t")) || (C_HIDE_MODERS && $statusclosed == "m")) {}
 		else $ChatM->query("INSERT INTO ".C_MSG_TBL." VALUES ('".$usertype."', '".$userroom."', 'SYS exit', '', '".time()."', '', 'sprintf(L_CLOSED_ROM, \"(".$when.") ".$userclosed."\")', '', '')");

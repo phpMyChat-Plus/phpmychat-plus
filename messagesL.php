@@ -735,8 +735,8 @@ if (C_QUOTE)
 		$quotetext .= $quotes[$quote];
 		if($quotecolor != "") $quotetext .= "</font>";
 		$quotetext .= "</div>";
-		$quotetext = ereg_replace("\r", "", $quotetext);
-		$quotetext = ereg_replace("\n", "", $quotetext);
+		$quotetext = str_replace("\r", "", $quotetext);
+		$quotetext = str_replace("\n", "", $quotetext);
 		if ($R != "1")
 		{
 		$DbLink->query("SELECT m_time FROM ".C_MSG_TBL." WHERE username='$QUOTE_NAME' AND room = '$R' AND m_time > ".(time() - $quotetime)." ORDER BY m_time DESC LIMIT 1");

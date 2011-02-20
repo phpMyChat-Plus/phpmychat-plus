@@ -170,7 +170,7 @@ $yrs = preg_find('/./', $y, PREG_FIND_DIRONLY|PREG_FIND_SORTKEYS|PREG_FIND_SORTD
 foreach($yrs as $yr)
 {
 		$year_size = 0;
-		$yeardir = eregi_replace($y."/",'',$yr);
+		$yeardir = str_replace($y."/",'',$yr);
 		if ($yeardir > date('Y')) continue;
 			echo("\n<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table>");
 			echo ("\n<tr>\n<td valign=top align=center nowrap=\"nowrap\" colspan=7>\n<font size=4 color=red><b>$yeardir</b></font>\n</td>"); #print name of each year found
@@ -180,7 +180,7 @@ foreach($yrs as $yr)
 		foreach($mts as $mt => $stats)
 		{
 			$month_size = 0;
-			$monthdir = eregi_replace($yr."/",'',$mt);
+			$monthdir = str_replace($yr."/",'',$mt);
 			$date2 = strtotime("01 ".$monthdir." ".$yeardir);
 			if ($date1 < $date2) continue;
 			if($L == "hungarian") $MONTH = $yeardir.". ";
@@ -333,7 +333,7 @@ $yrsu = preg_find('/./', $yu, PREG_FIND_DIRONLY|PREG_FIND_SORTKEYS|PREG_FIND_SOR
 foreach($yrsu as $yru)
 {
 		$yearu_size = 0;
-		$yeardiru = eregi_replace($yu."/",'',$yru);
+		$yeardiru = str_replace($yu."/",'',$yru);
 		if ($yeardiru > date('Y')) continue;
 			echo("\n<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table>");
 			echo ("\n<tr>\n<td valign=top align=center nowrap=\"nowrap\" colspan=7>\n<font size=4 color=red><b>$yeardiru ".A_CHAT_LOGS_12."</b></font>\n</td>"); #print name of each year found
@@ -343,7 +343,7 @@ foreach($yrsu as $yru)
 		foreach($mtsu as $mtu => $stats)
 		{
 			$monthu_size = 0;
-			$monthdiru = eregi_replace($yru."/",'',$mtu);
+			$monthdiru = str_replace($yru."/",'',$mtu);
 			$dateu2 = strtotime("01 ".$monthdiru." ".$yeardiru);
 			if ($dateu1 < $dateu2) continue;
 			if($L == "hungarian") $MONTHU = $yeardiru.". ";

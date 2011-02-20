@@ -34,6 +34,8 @@ On some pcs a restart might be necessary.
 We also added a small IE fixing script (reg file) as a link in Extra Options in chat.
 
 Fixes History:
+20.02.2011 - 1.94-beta6:
+- several ereg/eregi_replace functions replaced by str_replace - steps for php5.3 compatibility; (compatibility related)
 02.06.2010 - 1.94-beta5:
 - download link updated in all occurences in chat; (functionality related)
 - updated Calendar class to v3.3; (functionality related)

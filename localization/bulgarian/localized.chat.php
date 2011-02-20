@@ -352,7 +352,7 @@ define("L_PRO_2", "Любим линк 1");
 define("L_PRO_3", "Любим линк 2");
 define("L_PRO_4", "Oписание");
 define("L_PRO_5", "Aдрес (URL) на снимка");
-define("L_PRO_6", "Цвят на псевдонима/писаното");
+define("L_PRO_6", "Цвят на псевдонима/<br />писаното");
 
 // Avatar mod
 define("L_AVATAR", "Аватар");

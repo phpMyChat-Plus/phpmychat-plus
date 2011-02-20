@@ -242,7 +242,7 @@ define("C_PASS_LENGTH", $PASS_LENGTH);
 define("C_ADMIN_NOTIFY", $ADMIN_NOTIFY);
 define("C_ADMIN_NAME", $ADMIN_NAME);
 define("C_ADMIN_EMAIL", $ADMIN_EMAIL);
-define("C_CHAT_URL", eregi("http://",$CHAT_URL) ? $CHAT_URL : "./");
+define("C_CHAT_URL", strstr($CHAT_URL,"http://") ? $CHAT_URL : "./");
 
 // Security and restrictions
 define("C_SHOW_ADMIN", $SHOW_ADMIN);
@@ -599,8 +599,8 @@ define("C_CHAT_NAME", $CHAT_NAME);
 define("C_DISP_GENDER", $DISP_GENDER);
 
 // Ghost usernames - by Ciprian
-$SPECIALGHOSTS = eregi_replace(",","','",$SPECIAL_GHOSTS);
-$SPECIALGHOSTS = eregi_replace(","," AND username != ",$SPECIALGHOSTS);
+$SPECIALGHOSTS = str_replace(",","','",$SPECIAL_GHOSTS);
+$SPECIALGHOSTS = str_replace(","," AND username != ",$SPECIALGHOSTS);
 define("C_SPECIAL_GHOSTS", "'".$SPECIALGHOSTS."'");
 
 // Index page body layout - by Ciprian
