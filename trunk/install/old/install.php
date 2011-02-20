@@ -182,20 +182,20 @@ instructions_popup=window.open("ins_popup.php","instructions","width=640,height=
 	{
 		if ( $ftphost == "" )
 		{
-			if (eregi("public_html", $_SERVER["SCRIPT_FILENAME"])) $ftphost = eregi_replace("www", "ftp", $domain);
+			if (eregi("public_html", $_SERVER["SCRIPT_FILENAME"])) $ftphost = str_replace("www", "ftp", $domain);
 			else  $ftphost = $domain;
 		}
 		if ( $ftppath == "" )
 		{
-			$ftppath = eregi_replace("install/install.php", "", $_SERVER["SCRIPT_FILENAME"]);
-			$ftppath = eregi_replace("/home/", "", $ftppath);
-			$ftppath = eregi_replace("/srv/www/vhosts/", "", $ftppath);
+			$ftppath = str_replace("install/install.php", "", $_SERVER["SCRIPT_FILENAME"]);
+			$ftppath = str_replace("/home/", "", $ftppath);
+			$ftppath = str_replace("/srv/www/vhosts/", "", $ftppath);
 			if (!isset($ftpuname) || $ftpuname == "")
 			{
 				$shortstring = substr($ftppath, 0, 400);
 				$ftpsubpath = substr($shortstring, 0, strcspn($shortstring, "/"));
 			}
-			if ($ftppath != "" && $ftpsubpath != "") $ftppath = eregi_replace($ftpsubpath, "", $ftppath);
+			if ($ftppath != "" && $ftpsubpath != "") $ftppath = str_replace($ftpsubpath, "", $ftppath);
 			if (eregi("public_html", $_SERVER["SCRIPT_FILENAME"])) $ftpuname = $ftpsubpath;
 		}
 	}
@@ -205,7 +205,7 @@ if ( $p == 2 )
 	// set up basic connection
 	if (!$skip && $do_ftp)
 	{
-		if ($ftpuname != "") $ftppath = eregi_replace($ftpuname, "", $ftppath);
+		if ($ftpuname != "") $ftppath = str_replace($ftpuname, "", $ftppath);
 		if (!isset($ftpuname) || $ftpuname == "") $error3 .= L_FTP_NAME."<br />\n";
 		if (!isset($ftppass) || $ftppass == "") $error3 .= L_FTP_PASS."<br />\n";
 
@@ -346,7 +346,7 @@ if ( $p == 4 )
   if ( $pass2 == "" ) $pass2 = "";
   if ( $adminname == "" ) $adminname = "Your Name";
   if ( $adminemail == "" ) $adminemail = "your@email.com";
-  if ( $chaturl == "" || $chaturl == "C_CHAT_URL" ) $chaturl = "http://".eregi_replace("install/install.php", "", $_SERVER["HTTP_HOST"].$_SERVER["SCRIPT_NAME"]);
+  if ( $chaturl == "" || $chaturl == "C_CHAT_URL" ) $chaturl = "http://".str_replace("install/install.php", "", $_SERVER["HTTP_HOST"].$_SERVER["SCRIPT_NAME"]);
 	$conn = @mysql_connect ( $dbhost, $dbuname, $dbpass ) OR $error = L_DB_NOCONNECT;
 	@mysql_query("SET CHARACTER SET utf8");
 	mysql_query("SET NAMES 'utf8'");
@@ -1368,8 +1368,8 @@ define("C_CHAT_NAME", $CHAT_NAME);
 define("C_DISP_GENDER", $DISP_GENDER);
 
 // Ghost usernames - by Ciprian
-$SPECIALGHOSTS = eregi_replace(",","','",$SPECIAL_GHOSTS);
-$SPECIALGHOSTS = eregi_replace(","," AND username != ",$SPECIALGHOSTS);
+$SPECIALGHOSTS = str_replace(",","','",$SPECIAL_GHOSTS);
+$SPECIALGHOSTS = str_replace(","," AND username != ",$SPECIALGHOSTS);
 define("C_SPECIAL_GHOSTS", "'".$SPECIALGHOSTS."'");
 
 // Index page body layout - by Ciprian
@@ -2043,8 +2043,8 @@ else {
   	fputs ( $fh, 'define("C_DISP_GENDER", $DISP_GENDER);'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// Ghost usernames - by Ciprian'.$lfeed );
-  	fputs ( $fh, '$SPECIALGHOSTS = eregi_replace(",","\',\'",$SPECIAL_GHOSTS);'.$lfeed );
-  	fputs ( $fh, '$SPECIALGHOSTS = eregi_replace(","," AND username != ",$SPECIALGHOSTS);'.$lfeed );
+  	fputs ( $fh, '$SPECIALGHOSTS = str_replace(",","\',\'",$SPECIAL_GHOSTS);'.$lfeed );
+  	fputs ( $fh, '$SPECIALGHOSTS = str_replace(","," AND username != ",$SPECIALGHOSTS);'.$lfeed );
   	fputs ( $fh, 'define("C_SPECIAL_GHOSTS", "\'".$SPECIALGHOSTS."\'");'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// Index page body layout - by Ciprian'.$lfeed );

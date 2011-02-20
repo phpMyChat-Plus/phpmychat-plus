@@ -110,8 +110,8 @@ if (C_PRIV_POPUP)
 	// Looks for "BOT NAME" in $M (typed in INPUT)  WORKS
 	{
       global $M,$botmess,$Charset;
-      $botmess = eregi_replace(C_BOT_NAME, "", $M);
-//    $botmess = eregi_replace(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), " ", mb_convert_case($M,MB_CASE_LOWER,$Charset));
+      $botmess = str_replace(C_BOT_NAME, "", $M);
+//    $botmess = str_replace(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), " ", mb_convert_case($M,MB_CASE_LOWER,$Charset));
       if ($R == $UR) $UR = "";
 		  bottalk_priv(&$botmess, $R, $UR, $Private, $Read);
 		  if (bget("name") == "") bset("name",$uid);

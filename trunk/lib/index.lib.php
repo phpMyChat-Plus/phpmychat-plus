@@ -328,8 +328,8 @@ if(isset($E) && $E != "")
 		if (C_SPECIAL_GHOSTS != "")
 		{
 			$sghosts = "";
-			$sghosts = eregi_replace("'","",C_SPECIAL_GHOSTS);
-			$sghosts = eregi_replace(" AND username != ",",",$sghosts);
+			$sghosts = str_replace("'","",C_SPECIAL_GHOSTS);
+			$sghosts = str_replace(" AND username != ",",",$sghosts);
 		}
 		if (($sghosts != "" && ghosts_in(stripslashes($U), $sghosts, $Charset)) || (C_HIDE_ADMINS && ($statusu == "a" || $statusu == "t")) || (C_HIDE_MODERS && $statusu == "m"))
 		{
@@ -805,8 +805,8 @@ if(!isset($Error) && (isset($N) && $N != ""))
 			if (C_SPECIAL_GHOSTS != "")
 			{
 				$sghosts = "";
-				$sghosts = eregi_replace("'","",C_SPECIAL_GHOSTS);
-				$sghosts = eregi_replace(" AND username != ",",",$sghosts);
+				$sghosts = str_replace("'","",C_SPECIAL_GHOSTS);
+				$sghosts = str_replace(" AND username != ",",",$sghosts);
 			}
 			if (($sghosts != "" && ghosts_in(stripslashes($U), $sghosts, $Charset)) || (C_HIDE_ADMINS && ($status == "a" || $status == "t")) || (C_HIDE_MODERS && $status == "m"))
 			{
@@ -857,8 +857,8 @@ if(!isset($Error) && (isset($N) && $N != ""))
 		if (C_SPECIAL_GHOSTS != "")
 		{
 			$sghosts = "";
-			$sghosts = eregi_replace("'","",C_SPECIAL_GHOSTS);
-			$sghosts = eregi_replace(" AND username != ",",",$sghosts);
+			$sghosts = str_replace("'","",C_SPECIAL_GHOSTS);
+			$sghosts = str_replace(" AND username != ",",",$sghosts);
 		}
 		if (($sghosts != "" && ghosts_in(stripslashes($U), $sghosts, $Charset)) || (C_HIDE_ADMINS && ($status == "a" || $status == "t")) || (C_HIDE_MODERS && $status == "m"))
 		{
@@ -1475,7 +1475,7 @@ if (C_HIDE_ADMINS) $Hide .= " AND (u.status != 'a' OR u.username = '".C_BOT_NAME
 if (C_HIDE_MODERS) $Hide .=  " AND u.status !='m'";
 if (C_SPECIAL_GHOSTS != "")
 {
-	$sghosts = eregi_replace("username","u.username",C_SPECIAL_GHOSTS);
+	$sghosts = str_replace("username","u.username",C_SPECIAL_GHOSTS);
 	$Hide .= " AND u.username != ".$sghosts."";
 }
 

@@ -821,21 +821,21 @@ if (COLOR_FILTERS)
 {
 	if ($status != "a" && $status != "t" && $status != "m" && $PERMS != "admin" && $PERMS != "topmod" && $PERMS != "moderator")
 	{
-		if (COLOR_CA != "") $ColorList = eregi_replace('"'.COLOR_CA.'",', "", $ColorList);
-		if (COLOR_CA1 != "") $ColorList = eregi_replace('"'.COLOR_CA1.'",', "", $ColorList);
-		if (COLOR_CA2 != "") $ColorList = eregi_replace('"'.COLOR_CA2.'",', "", $ColorList);
-		if (COLOR_CM != "") $ColorList = eregi_replace('"'.COLOR_CM.'",', "", $ColorList);
-		if (COLOR_CM1 != "") $ColorList = eregi_replace('"'.COLOR_CM1.'",', "", $ColorList);
-		if (COLOR_CM2 != "") $ColorList = eregi_replace('"'.COLOR_CM2.'",', "", $ColorList);
+		if (COLOR_CA != "") $ColorList = str_replace('"'.COLOR_CA.'",', "", $ColorList);
+		if (COLOR_CA1 != "") $ColorList = str_replace('"'.COLOR_CA1.'",', "", $ColorList);
+		if (COLOR_CA2 != "") $ColorList = str_replace('"'.COLOR_CA2.'",', "", $ColorList);
+		if (COLOR_CM != "") $ColorList = str_replace('"'.COLOR_CM.'",', "", $ColorList);
+		if (COLOR_CM1 != "") $ColorList = str_replace('"'.COLOR_CM1.'",', "", $ColorList);
+		if (COLOR_CM2 != "") $ColorList = str_replace('"'.COLOR_CM2.'",', "", $ColorList);
 	}
 	elseif ($status == "m" || $PERMS == "moderator")
 	{
-		if (COLOR_CA != "") $ColorList = eregi_replace('"'.COLOR_CA.'",', "", $ColorList);
-		if (COLOR_CA1 != "") $ColorList = eregi_replace('"'.COLOR_CA1.'",', "", $ColorList);
-		if (COLOR_CA2 != "") $ColorList = eregi_replace('"'.COLOR_CA2.'",', "", $ColorList);
+		if (COLOR_CA != "") $ColorList = str_replace('"'.COLOR_CA.'",', "", $ColorList);
+		if (COLOR_CA1 != "") $ColorList = str_replace('"'.COLOR_CA1.'",', "", $ColorList);
+		if (COLOR_CA2 != "") $ColorList = str_replace('"'.COLOR_CA2.'",', "", $ColorList);
 	}
 }
-$ColorList = eregi_replace('"', "", $ColorList);
+$ColorList = str_replace('"', "", $ColorList);
 $CC = explode(",", $ColorList);
 $selected = ((L_SELECTED_F != "") ? L_SELECTED_F : L_SELECTED);
 $not_selected = ((L_NOT_SELECTED_F != "") ? L_NOT_SELECTED_F : L_NOT_SELECTED);

@@ -157,7 +157,7 @@ if (C_HIDE_ADMINS) $Hide .= " AND (u.status != 'a' OR u.username = '".C_BOT_NAME
 if (C_HIDE_MODERS) $Hide .=  " AND u.status !='m'";
 if (C_SPECIAL_GHOSTS != "")
 {
-	$sghosts = eregi_replace("username","u.username",C_SPECIAL_GHOSTS);
+	$sghosts = str_replace("username","u.username",C_SPECIAL_GHOSTS);
 	$Hide .= " AND u.username != ".$sghosts."";
 }
 

@@ -253,8 +253,8 @@ $botcontrol ="botfb/$R.txt";
 	}
 
 	// Text Direction for dir commands by Ciprian
-	if(ereg('^bdo_rtl',$M)) $M = ereg_replace('bdo_rtl', '<BDO dir="rtl">', $M)."</BDO>";
-	elseif(ereg('^bdo_ltr',$M)) $M = ereg_replace('bdo_ltr', '<BDO dir="ltr">', $M)."</BDO>";
+	if(ereg('^bdo_rtl',$M)) $M = str_replace('bdo_rtl', '<BDO dir="rtl">', $M)."</BDO>";
+	elseif(ereg('^bdo_ltr',$M)) $M = str_replace('bdo_ltr', '<BDO dir="ltr">', $M)."</BDO>";
 	
 	// URL
 	$M = eregi_replace('([[:space:]]|^)(www[.])', '\\1http://\\2', $M); // no prefix (www.myurl.ext)
@@ -597,18 +597,18 @@ if (COLOR_FILTERS)
 	}
 	elseif (COLOR_ALLOW_GUESTS && $status != "a" && $status != "t" && $status != "m")
 	{
-		if (COLOR_CA != "") $ColorList = eregi_replace('"'.COLOR_CA.'",', "", $ColorList);
-		if (COLOR_CA1 != "") $ColorList = eregi_replace('"'.COLOR_CA1.'",', "", $ColorList);
-		if (COLOR_CA2 != "") $ColorList = eregi_replace('"'.COLOR_CA2.'",', "", $ColorList);
-		if (COLOR_CM != "") $ColorList = eregi_replace('"'.COLOR_CM.'",', "", $ColorList);
-		if (COLOR_CM1 != "") $ColorList = eregi_replace('"'.COLOR_CM1.'",', "", $ColorList);
-		if (COLOR_CM2 != "") $ColorList = eregi_replace('"'.COLOR_CM2.'",', "", $ColorList);
+		if (COLOR_CA != "") $ColorList = str_replace('"'.COLOR_CA.'",', "", $ColorList);
+		if (COLOR_CA1 != "") $ColorList = str_replace('"'.COLOR_CA1.'",', "", $ColorList);
+		if (COLOR_CA2 != "") $ColorList = str_replace('"'.COLOR_CA2.'",', "", $ColorList);
+		if (COLOR_CM != "") $ColorList = str_replace('"'.COLOR_CM.'",', "", $ColorList);
+		if (COLOR_CM1 != "") $ColorList = str_replace('"'.COLOR_CM1.'",', "", $ColorList);
+		if (COLOR_CM2 != "") $ColorList = str_replace('"'.COLOR_CM2.'",', "", $ColorList);
 	}
 	elseif ($status == "m")
 	{
-		if (COLOR_CA != "") $ColorList = eregi_replace('"'.COLOR_CA.'",', "", $ColorList);
-		if (COLOR_CA1 != "") $ColorList = eregi_replace('"'.COLOR_CA1.'",', "", $ColorList);
-		if (COLOR_CA2 != "") $ColorList = eregi_replace('"'.COLOR_CA2.'",', "", $ColorList);
+		if (COLOR_CA != "") $ColorList = str_replace('"'.COLOR_CA.'",', "", $ColorList);
+		if (COLOR_CA1 != "") $ColorList = str_replace('"'.COLOR_CA1.'",', "", $ColorList);
+		if (COLOR_CA2 != "") $ColorList = str_replace('"'.COLOR_CA2.'",', "", $ColorList);
 	}
 }
 else
@@ -618,7 +618,7 @@ else
 		$ColorList = '"",'.COLOR_CD.'';
 	}
 }
-$ColorList = eregi_replace('"', "", $ColorList);
+$ColorList = str_replace('"', "", $ColorList);
 $CC = explode(",", $ColorList);
 if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<SELECT NAME=\"C\" style=\"background-color:".$C.";\">\n");
 else echo("<SELECT NAME=\"C\">\n");
@@ -646,8 +646,8 @@ $not_selected = " ".$null." (".$not_selected.")";
 	if ($SPECIAL_GHOSTS != "")
 	{
 			$sghosts = "";
-			$sghosts = eregi_replace("'","",C_SPECIAL_GHOSTS);
-			$sghosts = eregi_replace(" AND username != ",",",$sghosts);
+			$sghosts = str_replace("'","",C_SPECIAL_GHOSTS);
+			$sghosts = str_replace(" AND username != ",",",$sghosts);
 	}
 	if (($sghosts != "" && ghosts_in(stripslashes($U), $sghosts, $Charset)) || (C_HIDE_MODERS && $status == "m") || (C_HIDE_ADMINS && ($status == "a" || $status == "t")))
 	{

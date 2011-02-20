@@ -77,8 +77,8 @@ if (C_BOT_PUBLIC)
       {                                                     // if it does continues to talk to bot
           clearstatcache () ;
           global $M,$botmess,$Charset;
-          $botmess = eregi_replace(C_BOT_NAME, "", $M);
-//          $botmess = eregi_replace(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), " ", mb_convert_case($M,MB_CASE_LOWER,$Charset));
+          $botmess = str_replace(C_BOT_NAME, "", $M);
+//          $botmess = str_replace(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), " ", mb_convert_case($M,MB_CASE_LOWER,$Charset));
            bottalk(&$botmess, $R, 0);
       }
      elseif (eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)))
@@ -86,9 +86,9 @@ if (C_BOT_PUBLIC)
 	 {
           if (!file_exists ($botpath)) botmemory($U);                                     // starts conversation with BOT if none already.
           global $M,$botmess,$Charset;
-          $botmess = eregi_replace(C_BOT_NAME, "", $M);
-//          $botmess = "My name is ".trim($U)." ".eregi_replace(C_BOT_NAME, "", $M);
-//          $botmess = "My name is ".trim($U)." ".eregi_replace(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), " ", mb_convert_case($M,MB_CASE_LOWER,$Charset));
+          $botmess = str_replace(C_BOT_NAME, "", $M);
+//          $botmess = "My name is ".trim($U)." ".str_replace(C_BOT_NAME, "", $M);
+//          $botmess = "My name is ".trim($U)." ".str_replace(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), " ", mb_convert_case($M,MB_CASE_LOWER,$Charset));
           bottalk(&$botmess, $R);
 		  if (bget("name") == "") bset("name",$uid);
 	 }

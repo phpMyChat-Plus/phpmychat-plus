@@ -137,8 +137,8 @@ function skin_preview($startStyle)
 	foreach ($skinsfile as $skinname)
 	{
 		$skinno = "";
-		$skinno = eregi_replace("style","",$skinname);
-		$skinno = eregi_replace(".php","",$skinno);
+		$skinno = str_replace("style","",$skinname);
+		$skinno = str_replace(".php","",$skinno);
 		if (($skinno >= $startStyle) && ($skinno < ($startStyle+4)))
 		{
 			if ($startStyle % 2 != 0)
