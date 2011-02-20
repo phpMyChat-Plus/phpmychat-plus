@@ -1,4 +1,4 @@
-﻿Note: if you’ve already modded your own files, please compare and edit the changes from those included in this log to identify the changes made for the fix. If not, just replace them in the according folders.
+Note: if you’ve already modded your own files, please compare and edit the changes from those included in this log to identify the changes made for the fix. If not, just replace them in the according folders.
 This log includes all the previously released fixes.
 Client browsers - tested with:
 	- IE < 5.5 = M;
@@ -35,6 +35,15 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 02.06.2010 - 1.94-beta5:
+- download link updated in all occurences in chat; (functionality related)
+- updated Calendar class to v3.3; (functionality related)
+- Czech translation started; (localization project) - Thanks to Chenzee <chenzee@email.cz>
+- Yoruba (Nigeria) translation started; (localization project) - Thanks to Samson Ameh <philanthropist4eva@gmail.com>
+- uploader class updated to version 0.30; (functionality related)
+- important installer fixes - the skip button and ftp process were broken in 1.93; (functionality related)
+- addressess called bye "username>" will now stay in the input box for the entire addressed conversation, until removed by user; (functionality extension)
+- Ukrainian translation started; (localization project) - Thanks to Viktor <vikt81@mail.ru>
+- Russian translation added; (localization project) - Thanks to Viktor <vikt81@mail.ru>
 - updated Calendar class to v3.2 and fixed a few small js bugs; (functionality related)
 - separated banished users from the reg ones in the send email tab in admin panel, so they don’t get selected by mistake to receive unwanted emails from admins; (functionality extention)
 - fixed a bug that caused page titles with space at the end to break the popups/openers; (functionality related)

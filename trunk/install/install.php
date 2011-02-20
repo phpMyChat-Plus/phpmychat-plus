@@ -8,6 +8,7 @@ ini_set('session.use_trans_sid',1);
 session_start();
 
 $p = $_REQUEST['p'];
+$skip = $_REQUEST['skip'];
 if ( $p == "" ) $p = 1;
 $p_next = $p + 1;
 $p_prev = $p - 1;
@@ -24,7 +25,7 @@ if ( $L == "" )
 // Disable ftp functions on Windows servers
 if (stristr(PHP_OS,'win'))
 {
-	$do_ftp = 1;
+	$do_ftp = 0;
 	// chmod patch for both php4 and php5
 	if (!function_exists('ftp_chmod')) {
 	   function ftp_chmod($ftpstream,$chmod,$file)
@@ -37,7 +38,7 @@ if (stristr(PHP_OS,'win'))
 	   }
 	}
 }
-else $do_ftp = 0;
+else $do_ftp = 1;
 
 // Added for php4 support of mb functions
 if (!function_exists('mb_convert_case'))
@@ -53,6 +54,7 @@ if (!function_exists('mb_convert_case'))
 
 include ( $ChatPath."lib/release.lib.php" );
 include ( $ChatPath."localization/languages.lib.php" );
+include ( $ChatPath."localization/_owner/owner.php");
 include ( $ChatPath."localization/".$L."/localized.install.php" );
 include ( $ChatPath."localization/".$L."/localized.chat.php" );
 
@@ -200,101 +202,104 @@ instructions_popup=window.open("ins_popup.php","instructions","width=640,height=
 }
 if ( $p == 2 )
 {
-	include ( $ChatPath."lib/release.lib.php" );
-	if (APP_VERSION != "")
+	// set up basic connection
+	if (!$skip && $do_ftp)
 	{
-		if (eregi("$(v1.[0-6])",APP_VERSION)) $kind == "1016";
-		elseif (eregi("^(0.1[4-5](.[0-9])?)",APP_VERSION)) $kind == "014015";
-		elseif (eregi("^(0.1[2-3](.[0-9])?)",APP_VERSION)) $kind == "013";
-		elseif (eregi("^(0.1[1-2](.[0-9])?)",APP_VERSION)) $kind == "012";
-		else
-		{
-		switch (APP_VERSION)
-		{
-			case "1.94":
-			{
-				if (APP_MINOR != "") $kind = "194-beta";
-				else $kind = "194";
-			}
-			break;
-			case "1.93":
-			{
-				if (APP_MINOR != "") $kind = "193-beta";
-				else $kind = "193";
-			}
-			break;
-			case "1.92":
-			{
-				$kind = "192";
-			}
-			break;
-			case "1.90":
-			{
-				$kind = "190";
-			}
-			break;
-			case "v1.8":
-			{
-				$kind = "18";
-			}
-			break;
-			case "v1.7":
-			{
-				$kind = "17";
-			}
-			break;
-			default:
-			{
-				$kind = "new";
-			}
-			break;
-		}
-		}
-	}
-  // set up basic connection
-  if (!$skip && $do_ftp)
-  {
-  	if ($ftpuname != "") $ftppath = eregi_replace($ftpuname, "", $ftppath);
-  	if (!isset($ftpuname) || $ftpuname == "") $error3 .= L_FTP_NAME."<br />\n";
-  	if (!isset($ftppass) || $ftppass == "") $error3 .= L_FTP_PASS."<br />\n";
+		if ($ftpuname != "") $ftppath = eregi_replace($ftpuname, "", $ftppath);
+		if (!isset($ftpuname) || $ftpuname == "") $error3 .= L_FTP_NAME."<br />\n";
+		if (!isset($ftppass) || $ftppass == "") $error3 .= L_FTP_PASS."<br />\n";
 
-  	if ($ftpuname != "" && $ftppass != "")
-  	{
-	if (@ftp_connect($ftphost) !== false)
+		if ($ftpuname != "" && $ftppass != "")
+		{
+			if (@ftp_connect($ftphost) !== false)
+			{
+				$conn_id = @ftp_connect($ftphost);
+				// login with username and password
+				if (@ftp_login($conn_id, $ftpuname, $ftppass))
+				{
+					// try to make the files and folders modifications
+					if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/chat_index.txt") !== false) {} else { $error3 .= L_FILE_ERROR1." &quot;/acount/pages/chat_index.txt&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
+					if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/chat_ip_logs.htm") !== false) {} else { $error3 .= L_FILE_ERROR1." &quot;acount/pages/chat_ip_logs.htm&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
+					if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/ip.txt") !== false) {} else { $error3 .= L_FILE_ERROR1." &quot;/acount/pages/ip.txt&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
+					if (ftp_chmod($conn_id, 777, $ftppath."acount/pages") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/acount/pages&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+					if (ftp_chmod($conn_id, 777, $ftppath."acount/pages/bak") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/acount/pages/bak&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+					if (ftp_chmod($conn_id, 777, $ftppath."admin/backups") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/admin/backups&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+					if (ftp_chmod($conn_id, 666, $ftppath."bot/subs.inc") !== false) {} else { $error3 .= L_FILE_ERROR1." &quot;/bot/subs.inc&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
+					if (ftp_chmod($conn_id, 777, $ftppath."botfb") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/botfb&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+					if (ftp_chmod($conn_id, 777, $ftppath."cache") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/cache&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+					if (ftp_chmod($conn_id, 666, $ftppath."config/config.lib.php") !== false) {} else { $error3 .= L_FILE_ERROR1." &quot;/config/config.php&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
+					if (ftp_chmod($conn_id, 777, $ftppath."images/avatars") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/images/avatars&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+					if (ftp_chmod($conn_id, 777, $ftppath."images/avatars/uploaded") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/images/avatars/uploaded&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+					if (ftp_chmod($conn_id, 777, $ftppath."images/smilies") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/images/smilies&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+					if (ftp_chmod($conn_id, 666, $ftppath."images/smilies/smilies.php") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/images/smilies/smilies.php&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+					if (ftp_chmod($conn_id, 777, $ftppath."logs") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/logs&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+					if (ftp_chmod($conn_id, 777, $ftppath."logsadmin") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/logsadmin&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+					if (ftp_chmod($conn_id, 777, $ftppath."skins/images") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/skins/images&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+					if (ftp_chmod($conn_id, 777, $ftppath."sounds") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/sounds&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
+			//		if (is_dir($ChatPath.$logdir)) { if (ftp_chmod($conn_id, 777, $ftppath.$logdir) !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/".$logdir."&quot; ".L_FOLD_ERROR2."<br /><br />\n"; } }
+			//		if (is_dir($ChatPath.$logdirnew)) { if (ftp_chmod($conn_id, 777, $ftppath.$logdirnew) !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/".$logdirnew."&quot; ".L_FOLD_ERROR2."<br /><br />\n"; } }
+					// close the connection
+					@ftp_close($conn_id);
+				}
+				else { $error3 .= L_LOGIN_ERROR."<br />\n"; }
+			}
+			else { $error3 .= L_CONN_ERROR."<br />\n"; }
+		}
+	}
+	elseif($skip || !$do_ftp)
 	{
-	$conn_id = @ftp_connect($ftphost);
-	// login with username and password
-	if (@ftp_login($conn_id, $ftpuname, $ftppass))
-	{
-		// try to make the files and folders modifications
-		if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/chat_index.txt") !== false) {} else { $error3 .= L_FILE_ERROR1." &quot;/acount/pages/chat_index.txt&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/chat_ip_logs.htm") !== false) {} else { $error3 .= L_FILE_ERROR1." &quot;acount/pages/chat_ip_logs.htm&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 666, $ftppath."acount/pages/ip.txt") !== false) {} else { $error3 .= L_FILE_ERROR1." &quot;/acount/pages/ip.txt&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 777, $ftppath."acount/pages") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/acount/pages&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 777, $ftppath."acount/pages/bak") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/acount/pages/bak&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 777, $ftppath."admin/backups") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/admin/backups&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 666, $ftppath."bot/subs.inc") !== false) {} else { $error3 .= L_FILE_ERROR1." &quot;/bot/subs.inc&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 777, $ftppath."botfb") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/botfb&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 777, $ftppath."cache") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/cache&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 666, $ftppath."config/config.lib.php") !== false) {} else { $error3 .= L_FILE_ERROR1." &quot;/config/config.php&quot; ".L_FILE_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 777, $ftppath."images/avatars") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/images/avatars&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 777, $ftppath."images/avatars/uploaded") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/images/avatars/uploaded&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 777, $ftppath."images/smilies") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/images/smilies&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 666, $ftppath."images/smilies/smilies.php") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/images/smilies/smilies.php&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 777, $ftppath."logs") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/logs&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 777, $ftppath."logsadmin") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/logsadmin&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 777, $ftppath."skins/images") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/skins/images&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-		if (ftp_chmod($conn_id, 777, $ftppath."sounds") !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/sounds&quot; ".L_FOLD_ERROR2."<br /><br />\n"; }
-//		if (is_dir($ChatPath.$logdir)) { if (ftp_chmod($conn_id, 777, $ftppath.$logdir) !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/".$logdir."&quot; ".L_FOLD_ERROR2."<br /><br />\n"; } }
-//		if (is_dir($ChatPath.$logdirnew)) { if (ftp_chmod($conn_id, 777, $ftppath.$logdirnew) !== false) {} else { $error3 .= L_FOLD_ERROR1." &quot;/".$logdirnew."&quot; ".L_FOLD_ERROR2."<br /><br />\n"; } }
-		// close the connection
-		@ftp_close($conn_id);
+		include ( $ChatPath."lib/release.lib.php" );
+		if (APP_VERSION != "")
+		{
+			if (eregi("$(v1.[0-6])",APP_VERSION)) $kind == "1016";
+			elseif (eregi("^(0.1[4-5](.[0-9])?)",APP_VERSION)) $kind == "014015";
+			elseif (eregi("^(0.1[2-3](.[0-9])?)",APP_VERSION)) $kind == "013";
+			elseif (eregi("^(0.1[1-2](.[0-9])?)",APP_VERSION)) $kind == "012";
+			else
+			{
+				switch (APP_VERSION)
+				{
+					case "1.94":
+					{
+						if (APP_MINOR != "") $kind = "194-beta";
+						else $kind = "194";
+					}
+					break;
+					case "1.93":
+					{
+						if (APP_MINOR != "") $kind = "193-beta";
+						else $kind = "193";
+					}
+					break;
+					case "1.92":
+					{
+						$kind = "192";
+					}
+					break;
+					case "1.90":
+					{
+						$kind = "190";
+					}
+					break;
+					case "v1.8":
+					{
+						$kind = "18";
+					}
+					break;
+					case "v1.7":
+					{
+						$kind = "17";
+					}
+					break;
+					default:
+					{
+						$kind = "new";
+					}
+					break;
+				}
+			}
+		}
 	}
-	else { $error3 .= L_LOGIN_ERROR."<br />\n"; }
-	}
-	else { $error3 .= L_CONN_ERROR."<br />\n"; }
-	}
-  }
 }
 if ( $p == 3 )
 {
@@ -365,6 +370,10 @@ if ( $p == 4 )
   	{
   		include ( "database/mysql_new_install.php" );
 		mysql_query ( "UPDATE $t_config SET LANGUAGE = '$L', ADMIN_NAME = '$adminname', ADMIN_EMAIL = '$adminemail', CHAT_URL = '$chaturl', CHAT_NAME = '$chatname'".$LOG_DIR_N." WHERE ID='0';" );
+  	} elseif ( $kind == "194-beta" )
+  	{
+  		include ( "database/mysql_upgrade_plus_1.94-beta.php" );
+		mysql_query ( $LOG_DIR_NN );
   	} elseif ( $kind == "193" )
   	{
   		include ( "database/mysql_upgrade_plus_1.93.php" );
@@ -649,33 +658,37 @@ while(list($key, $name) = each($AvailableLanguages))
 {
 	$i++;
 		$flag = "flag.gif";
-		if ($name == "argentinian_spanish" && L_LANG_AR != "L_LANG_AR") $FLAG_NAME = L_LANG_AR;
-		elseif ($name == "bulgarian" && L_LANG_BG != "L_LANG_BG") $FLAG_NAME = L_LANG_BG;
-		elseif ($name == "brazilian_portuguese" && L_LANG_BR != "L_LANG_BR") $FLAG_NAME = L_LANG_BR;
-		elseif ($name == "danish" && L_LANG_DA != "L_LANG_DA") $FLAG_NAME = L_LANG_DA;
-		elseif ($name == "dutch" && L_LANG_NL != "L_LANG_NL") $FLAG_NAME = L_LANG_NL;
-		elseif ($name == "english" && L_LANG_EN != "L_LANG_EN") $FLAG_NAME = L_LANG_EN;
-		elseif ($name == "french" && L_LANG_FR != "L_LANG_FR") $FLAG_NAME = L_LANG_FR;
-		elseif ($name == "georgian" && L_LANG_KA != "L_LANG_KA") $FLAG_NAME = L_LANG_KA;
-		elseif ($name == "german" && L_LANG_DE != "L_LANG_DE") $FLAG_NAME = L_LANG_DE;
-		elseif ($name == "greek" && L_LANG_GR != "L_LANG_GR") $FLAG_NAME = L_LANG_GR;
-		elseif ($name == "hebrew" && L_LANG_HE != "L_LANG_HE") $FLAG_NAME = L_LANG_HE;
-		elseif ($name == "hindi" && L_LANG_HI != "L_LANG_HI") $FLAG_NAME = L_LANG_HI;
-		elseif ($name == "hungarian" && L_LANG_HU != "L_LANG_HU") $FLAG_NAME = L_LANG_HU;
-		elseif ($name == "indonesian" && L_LANG_ID != "L_LANG_ID") $FLAG_NAME = L_LANG_ID;
-		elseif ($name == "italian" && L_LANG_IT != "L_LANG_IT") $FLAG_NAME = L_LANG_IT;
-		elseif ($name == "japanese" && L_LANG_JA != "L_LANG_JA") $FLAG_NAME = L_LANG_JA;
-		elseif ($name == "nepali" && L_LANG_NE != "L_LANG_NE") $FLAG_NAME = L_LANG_NE;
-		elseif ($name == "persian" && L_LANG_FA != "L_LANG_FA") $FLAG_NAME = L_LANG_FA;
-		elseif ($name == "romanian" && L_LANG_RO != "L_LANG_RO") $FLAG_NAME = L_LANG_RO;
-		elseif ($name == "serbian_latin" && L_LANG_SRL != "L_LANG_SRL") $FLAG_NAME = L_LANG_SRL;
-		elseif ($name == "serbian_cyrillic" && L_LANG_SRC != "L_LANG_SRC") $FLAG_NAME = L_LANG_SRC;
-		elseif ($name == "slovak" && L_LANG_SK != "L_LANG_SK") $FLAG_NAME = L_LANG_SK;
-		elseif ($name == "spanish" && L_LANG_ES != "L_LANG_ES") $FLAG_NAME = L_LANG_ES;
-		elseif ($name == "swedish" && L_LANG_SV != "L_LANG_SV") $FLAG_NAME = L_LANG_SV;
-		elseif ($name == "turkish" && L_LANG_TR != "L_LANG_TR") $FLAG_NAME = L_LANG_TR;
-		elseif ($name == "urdu" && L_LANG_UR != "L_LANG_UR") $FLAG_NAME = L_LANG_UR;
-		elseif ($name == "vietnamese" && L_LANG_VI != "L_LANG_VI") $FLAG_NAME = L_LANG_VI;
+		if ($name == "argentinian_spanish" && L_ORIG_LANG_AR != "L_ORIG_LANG_AR") $FLAG_NAME = L_ORIG_LANG_AR.(L_LANG_AR != "L_LANG_AR" ? "/".L_LANG_AR : "");
+		elseif ($name == "bulgarian" && L_ORIG_LANG_BG != "L_ORIG_LANG_BG") $FLAG_NAME = L_ORIG_LANG_BG.(L_LANG_BG != "L_LANG_BG" ? "/".L_LANG_BG : "");
+		elseif ($name == "brazilian_portuguese" && L_ORIG_LANG_BR != "L_ORIG_LANG_BR") $FLAG_NAME = L_ORIG_LANG_BR.(L_LANG_BR != "L_LANG_BR" ? "/".L_LANG_BR : "");
+		elseif ($name == "czech" && L_ORIG_LANG_CZ != "L_ORIG_LANG_CZ") $FLAG_NAME = L_ORIG_LANG_CZ.(L_LANG_CZ != "L_LANG_CZ" ? "/".L_LANG_CZ : "");
+		elseif ($name == "danish" && L_ORIG_LANG_DA != "L_ORIG_LANG_DA") $FLAG_NAME = L_ORIG_LANG_DA.(L_LANG_DA != "L_LANG_DA" ? "/".L_LANG_DA : "");
+		elseif ($name == "dutch" && L_ORIG_LANG_NL != "L_ORIG_LANG_NL") $FLAG_NAME = L_ORIG_LANG_NL.(L_LANG_NL != "L_LANG_NL" ? "/".L_LANG_NL : "");
+		elseif ($name == "english" && L_ORIG_LANG_EN != "L_ORIG_LANG_EN") $FLAG_NAME = L_ORIG_LANG_EN.(L_LANG_EN != "L_LANG_EN" ? "/".L_LANG_EN : "");
+		elseif ($name == "french" && L_ORIG_LANG_FR != "L_ORIG_LANG_FR") $FLAG_NAME = L_ORIG_LANG_FR.(L_LANG_FR != "L_LANG_FR" ? "/".L_LANG_FR : "");
+		elseif ($name == "georgian" && L_ORIG_LANG_KA != "L_ORIG_LANG_KA") $FLAG_NAME = L_ORIG_LANG_KA.(L_LANG_KA != "L_LANG_KA" ? "/".L_LANG_KA : "");
+		elseif ($name == "german" && L_ORIG_LANG_DE != "L_ORIG_LANG_DE") $FLAG_NAME = L_ORIG_LANG_DE.(L_LANG_DE != "L_LANG_DE" ? "/".L_LANG_DE : "");
+		elseif ($name == "greek" && L_ORIG_LANG_GR != "L_ORIG_LANG_GR") $FLAG_NAME = L_ORIG_LANG_GR.(L_LANG_GR != "L_LANG_GR" ? "/".L_LANG_GR : "");
+		elseif ($name == "hebrew" && L_ORIG_LANG_HE != "L_ORIG_LANG_HE") $FLAG_NAME = L_ORIG_LANG_HE.(L_LANG_HE != "L_LANG_HE" ? "/".L_LANG_HE : "");
+		elseif ($name == "hindi" && L_ORIG_LANG_HI != "L_ORIG_LANG_HI") $FLAG_NAME = L_ORIG_LANG_HI.(L_LANG_HI != "L_LANG_HI" ? "/".L_LANG_HI : "");
+		elseif ($name == "hungarian" && L_ORIG_LANG_HU != "L_ORIG_LANG_HU") $FLAG_NAME = L_ORIG_LANG_HU.(L_LANG_HU != "L_LANG_HU" ? "/".L_LANG_HU : "");
+		elseif ($name == "indonesian" && L_ORIG_LANG_ID != "L_ORIG_LANG_ID") $FLAG_NAME = L_ORIG_LANG_ID.(L_LANG_ID != "L_LANG_ID" ? "/".L_LANG_ID : "");
+		elseif ($name == "italian" && L_ORIG_LANG_IT != "L_ORIG_LANG_IT") $FLAG_NAME = L_ORIG_LANG_IT.(L_LANG_IT != "L_LANG_IT" ? "/".L_LANG_IT : "");
+		elseif ($name == "japanese" && L_ORIG_LANG_JA != "L_ORIG_LANG_JA") $FLAG_NAME = L_ORIG_LANG_JA.(L_LANG_JA != "L_LANG_JA" ? "/".L_LANG_JA : "");
+		elseif ($name == "nepali" && L_ORIG_LANG_NE != "L_ORIG_LANG_NE") $FLAG_NAME = L_ORIG_LANG_NE.(L_LANG_NE != "L_LANG_NE" ? "/".L_LANG_NE : "");
+		elseif ($name == "persian" && L_ORIG_LANG_FA != "L_ORIG_LANG_FA") $FLAG_NAME = L_ORIG_LANG_FA.(L_LANG_FA != "L_LANG_FA" ? "/".L_LANG_FA : "");
+		elseif ($name == "romanian" && L_ORIG_LANG_RO != "L_ORIG_LANG_RO") $FLAG_NAME = L_ORIG_LANG_RO.(L_LANG_RO != "L_LANG_RO" ? "/".L_LANG_RO : "");
+		elseif ($name == "russian" && L_ORIG_LANG_RU != "L_ORIG_LANG_RU") $FLAG_NAME = L_ORIG_LANG_RU.(L_LANG_RU != "L_LANG_RU" ? "/".L_LANG_RU : "");
+		elseif ($name == "serbian_latin" && L_ORIG_LANG_SRL != "L_ORIG_LANG_SRL") $FLAG_NAME = L_ORIG_LANG_SRL.(L_LANG_SRL != "L_LANG_SRL" ? "/".L_LANG_SRL : "");
+		elseif ($name == "serbian_cyrillic" && L_ORIG_LANG_SRC != "L_ORIG_LANG_SRC") $FLAG_NAME = L_ORIG_LANG_SRC.(L_LANG_SRC != "L_LANG_SRC" ? "/".L_LANG_SRC : "");
+		elseif ($name == "slovak" && L_ORIG_LANG_SK != "L_ORIG_LANG_SK") $FLAG_NAME = L_ORIG_LANG_SK.(L_LANG_SK != "L_LANG_SK" ? "/".L_LANG_SK : "");
+		elseif ($name == "spanish" && L_ORIG_LANG_ES != "L_ORIG_LANG_ES") $FLAG_NAME = L_ORIG_LANG_ES.(L_LANG_ES != "L_LANG_ES" ? "/".L_LANG_ES : "");
+		elseif ($name == "swedish" && L_ORIG_LANG_SV != "L_ORIG_LANG_SV") $FLAG_NAME = L_ORIG_LANG_SV.(L_LANG_SV != "L_LANG_SV" ? "/".L_LANG_SV : "");
+		elseif ($name == "turkish" && L_ORIG_LANG_TR != "L_ORIG_LANG_TR") $FLAG_NAME = L_ORIG_LANG_TR.(L_LANG_TR != "L_LANG_TR" ? "/".L_LANG_TR : "");
+		elseif ($name == "ukrainian" && L_ORIG_LANG_UK != "L_ORIG_LANG_UK") $FLAG_NAME = L_ORIG_LANG_UK.(L_LANG_UK != "L_LANG_UK" ? "/".L_LANG_UK : "");
+		elseif ($name == "urdu" && L_ORIG_LANG_UR != "L_ORIG_LANG_UR") $FLAG_NAME = L_ORIG_LANG_UR.(L_LANG_UR != "L_LANG_UR" ? "/".L_LANG_UR : "");
+		elseif ($name == "vietnamese" && L_ORIG_LANG_VI != "L_ORIG_LANG_VI") $FLAG_NAME = L_ORIG_LANG_VI.(L_LANG_VI != "L_LANG_VI" ? "/".L_LANG_VI : "");
+		elseif ($name == "yoruba" && L_ORIG_LANG_YO != "L_ORIG_LANG_YO") $FLAG_NAME = L_ORIG_LANG_YO.(L_LANG_YO != "L_LANG_YO" ? "/".L_LANG_YO : "");
 		else
 		{
 			$FLAG_NAME = str_replace("_"," ",$name);
@@ -695,7 +708,7 @@ while(list($key, $name) = each($AvailableLanguages))
 		echo("<IMG SRC=\"${ChatPath}localization/${name}/images/".$flag."\" onMouseOver=\"window.status='".$FLAG_STATUS.".'; return true;\" BORDER=0 ALT=\"".$FLAG_OVER."\" Title=\"".$FLAG_OVER."\">");
 		if ($name != $L) echo("</A>");
 		echo("&nbsp;");
-	if ($i % 15 == 0) echo ("<br />");
+	if ($i % 20 == 0) echo ("<br />");
 }
 ?>
     	</span>
@@ -2176,6 +2189,8 @@ elseif ($p == 5 ) { ?>
     <p align="center">
   <select size="1" name="kind">
   <option value="new"<?php if ($kind=="new") echo " selected" ?>><?php echo L_P1_OP01 ?></option>
+  <option value="194-beta"<?php if ($kind=="194-beta") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat-Plus 1.94-beta") ?></option>
+  <option value="193"<?php if ($kind=="193") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat-Plus 1.93") ?></option>
   <option value="193-beta"<?php if ($kind=="193-beta") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat-Plus 1.93-beta") ?></option>
   <option value="192"<?php if ($kind=="192") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat-Plus 1.92") ?></option>
   <option value="190"<?php if ($kind=="190") echo " selected" ?>><?php echo sprintf(L_P1_OP02,"phpMyChat-Plus 1.90") ?></option>
@@ -2377,29 +2392,29 @@ elseif ( $p == 5 ) { ?>
 <?php if ( $p == 1 ) { ?>
 <input type="button" value="<?php echo L_BTN2 ?>" name="B2" onClick="window.open('','_parent','');window.close();">&nbsp;&nbsp;&nbsp;
 <?php if ( $do_ftp ) { ?>
-<input type="button" value="<?php echo L_BTN6 ?>" onClick="location.href='install.php?p=<?php echo ($p_next + 1)."&L=".$L."&skip=1" ?>';" name="B3">&nbsp;&nbsp;&nbsp;
+<input type="button" value="<?php echo L_BTN6 ?>" onClick="location.href='install.php?p=<?php echo ($p_next)."&L=".$L."&skip=1"; ?>';" name="B3">&nbsp;&nbsp;&nbsp;
 <?php } ?>
 <input type="submit" value="<?php echo L_BTN1 ?> &gt;" name="B1">
 <?php } elseif ( $p == 2 ) { ?>
 <input type="button" value="<?php echo L_BTN2 ?>" name="B2" onClick="window.open('','_parent','');window.close();">&nbsp;&nbsp;&nbsp;
-<input type="button" value="&lt; <?php echo L_BTN3 ?>" onClick="location.href='install.php?p=<?php echo $p_prev."&L=".$L ?>';" name="B3">
+<input type="button" value="&lt; <?php echo L_BTN3 ?>" onClick="location.href='install.php?p=<?php echo $p_prev."&L=".$L; ?>';" name="B3">
 <?php if ( $error3 == "" ) { ?>
 &nbsp;&nbsp;&nbsp;<input type="submit" value="<?php echo L_BTN1 ?> &gt;" name="B1">
 <?php } ?>
 <?php } elseif ( $p == 3 ) { ?>
 <input type="button" value="<?php echo L_BTN2 ?>" name="B2" onClick="window.open('','_parent','');window.close();">&nbsp;&nbsp;&nbsp;
-<input type="button" value="&lt; <?php echo L_BTN3 ?>" name="B3" onClick="location.href='install.php?p=<?php echo $p_prev."&L=".$L ?>';">&nbsp;&nbsp;&nbsp;
-<input type="button" value="<?php echo L_BTN4 ?>" name="B4" onClick="location.href='install.php?p=<?php echo $p."&L=".$L ?>';">&nbsp;&nbsp;&nbsp;
+<input type="button" value="&lt; <?php echo L_BTN3 ?>" name="B3" onClick="location.href='install.php?p=<?php echo $p_prev."&L=".$L."&skip=".$skip; ?>';">&nbsp;&nbsp;&nbsp;
+<input type="button" value="<?php echo L_BTN4 ?>" name="B4" onClick="location.href='install.php?p=<?php echo $p."&L=".$L; ?>';">&nbsp;&nbsp;&nbsp;
 <input type="submit" value="<?php echo L_BTN1 ?> &gt;" name="B1">
 <?php } elseif ( $p == 4 ) { ?>
 <input type="button" value="<?php echo L_BTN2 ?>" onClick="window.open('','_parent','');window.close();" name="B2">&nbsp;&nbsp;&nbsp;
-<input type="button" value="&lt; <?php echo L_BTN3 ?>" onClick="location.href='install.php?p=<?php echo $p_prev."&L=".$L ?>';" name="B3">
+<input type="button" value="&lt; <?php echo L_BTN3 ?>" onClick="location.href='install.php?p=<?php echo $p_prev."&L=".$L; ?>';" name="B3">
 <?php if ( $error == "" ) { ?>
 &nbsp;&nbsp;&nbsp;<input type="submit" value="<?php echo L_BTN1 ?> &gt;" name="B1">
 <?php } ?>
 <?php } elseif ( $p == 5 ) { ?>
 <?php if ( $error4 != "" ) { ?>
-<input type="button" value="&lt; <?php echo L_BTN3 ?>" name="B1" onClick="location.href='install.php?p=<?php echo $p_prev."&L=".$L ?>';">
+<input type="button" value="&lt; <?php echo L_BTN3 ?>" name="B1" onClick="location.href='install.php?p=<?php echo $p_prev."&L=".$L; ?>';">
 <?php } else { ?>
 <input type="button" value="<?php echo L_BTN5 ?>" name="B1" onClick="location.href='<?php echo $ChatPath; ?>';">
 <?php } ?>

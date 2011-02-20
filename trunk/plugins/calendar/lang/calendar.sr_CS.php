@@ -24,47 +24,47 @@ define("L_NOT_ALLOWED", "Ovaj datum nemože biti odabran");
 define("FIRST_DAY", "1");
 
 // Months Long Names
-define("L_JAN", "Januar");
-define("L_FEB", "Februar");
-define("L_MAR", "Mart");
-define("L_APR", "April");
-define("L_MAY", "Maj");
-define("L_JUN", "Jun");
-define("L_JUL", "Jul");
-define("L_AUG", "Avgust");
-define("L_SEP", "Septembar");
-define("L_OCT", "Oktobar");
-define("L_NOV", "Novembar");
-define("L_DEC", "Decembar");
+define("L_JAN", "januar");
+define("L_FEB", "februar");
+define("L_MAR", "mart");
+define("L_APR", "april");
+define("L_MAY", "maj");
+define("L_JUN", "jun");
+define("L_JUL", "jul");
+define("L_AUG", "avgust");
+define("L_SEP", "septembar");
+define("L_OCT", "oktobar");
+define("L_NOV", "novembar");
+define("L_DEC", "decembar");
 // Months Short Names
-define("L_S_JAN", "Jan");
-define("L_S_FEB", "Feb");
-define("L_S_MAR", "Mar");
-define("L_S_APR", "Apr");
-define("L_S_MAY", "Maj");
-define("L_S_JUN", "Jun");
-define("L_S_JUL", "Jul");
-define("L_S_AUG", "Avg");
-define("L_S_SEP", "Sep");
-define("L_S_OCT", "Okt");
-define("L_S_NOV", "Nov");
-define("L_S_DEC", "Dec");
+define("L_S_JAN", "jan");
+define("L_S_FEB", "feb");
+define("L_S_MAR", "mar");
+define("L_S_APR", "apr");
+define("L_S_MAY", "maj");
+define("L_S_JUN", "jun");
+define("L_S_JUL", "jul");
+define("L_S_AUG", "avg");
+define("L_S_SEP", "sep");
+define("L_S_OCT", "okt");
+define("L_S_NOV", "nov");
+define("L_S_DEC", "dec");
 // Week days Long Names
-define("L_MON", "Ponedeljak");
-define("L_TUE", "Utorak");
-define("L_WED", "Srijeda");
-define("L_THU", "Četvrtak");
-define("L_FRI", "Petak");
-define("L_SAT", "Subota");
-define("L_SUN", "Nedelja");
+define("L_MON", "ponedeljak");
+define("L_TUE", "utorak");
+define("L_WED", "srijeda");
+define("L_THU", "četvrtak");
+define("L_FRI", "petak");
+define("L_SAT", "subota");
+define("L_SUN", "nedelja");
 // Week days Short Names
-define("L_S_MON", "Pon");
-define("L_S_TUE", "Uto");
-define("L_S_WED", "Sri");
-define("L_S_THU", "Čet");
-define("L_S_FRI", "Pet");
-define("L_S_SAT", "Sub");
-define("L_S_SUN", "Ned");
+define("L_S_MON", "pon");
+define("L_S_TUE", "uto");
+define("L_S_WED", "sri");
+define("L_S_THU", "čet");
+define("L_S_FRI", "pet");
+define("L_S_SAT", "sub");
+define("L_S_SUN", "ned");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1250");
@@ -73,8 +73,8 @@ if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "sr_CS");
 
 // Set the SR specific date/time format
 if (stristr(PHP_OS,"win")) {
-setlocale(LC_ALL, "serbian.UTF-8", "serbian");
+setlocale(LC_ALL, "serbian (latin).UTF-8", "serbian (latin)");
 } else {
-setlocale(LC_ALL, "sr_CS.UTF-8", "sr.UTF-8", "serbian.UTF-8", "srl.UTF-8", "srp_srp.UTF-8"); // For SR formats
+setlocale(LC_ALL, "sr_RS@latin", "sr_CS.UTF-8", "srl.UTF-8", "srp_srp.UTF-8", "sr.UTF-8", "serbian.UTF-8"); // For SR formats
 }
 ?>

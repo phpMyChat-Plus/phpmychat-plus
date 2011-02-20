@@ -41,7 +41,7 @@ B3. Use phpmyadmin to "empty" the following tables: bot_bot, bot_bots, bot_patte
 B4. Reupload back (restore) the file called botloader.php (or botloaderinc.php, if the first freezes).<br />
 B5. Make sure all the original distributed AIMLs are in the bot/aiml/ folder (startup.xml and *.aiml files).<br />
 B6. Make sure the plus/bot/subs.inc file is CHMODed to 777.<br />
-B7. Reinstall the bot following the steps described in paragraph A. (A1-A8)<br /><br />
+B7. Reinstall the bot following the steps described in paragraph A from the Manual Instructions.txt. (A1-A8)<br /><br />
 
 C: To add other chat languages by yourself, download and edit the existing language files from the standard pack and add the new folder into /localization/ Plus folder. (well, the best way is to contact me and get the latest templates in a Word format...)<br />
 Please note that there is a new approach to Plus, each language folder includes an /images/ folder with it's own images (flag.gif - 3D, flag0.gif - 2D, exitdoor.gif, exitdoorRoll.gif, helpOn.gif and helpOff.gif). Required only are the corresponding flag images for your language (2D could be also copied from the standard version and just renamed to flag0.gif). If not added, the help and door images will be automatically shown from the English.<br />

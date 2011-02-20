@@ -563,47 +563,47 @@ define("L_EXTRA_PRIV2", "Nuevos PMs");
 define("FIRST_DAY", "0"); // 1 for Monday, 0 for Sunday
 
 // Months Long Names
-define("L_JAN", "Enero");
-define("L_FEB", "Febrero");
-define("L_MAR", "Marzo");
-define("L_APR", "Abril");
-define("L_MAY", "Mayo");
-define("L_JUN", "Junio");
-define("L_JUL", "Julio");
-define("L_AUG", "Agosto");
-define("L_SEP", "Septiembre");
-define("L_OCT", "Octubre");
-define("L_NOV", "Noviembre");
-define("L_DEC", "Diciembre");
+define("L_JAN", "enero");
+define("L_FEB", "febrero");
+define("L_MAR", "marzo");
+define("L_APR", "abril");
+define("L_MAY", "mayo");
+define("L_JUN", "junio");
+define("L_JUL", "julio");
+define("L_AUG", "agosto");
+define("L_SEP", "septiembre");
+define("L_OCT", "octubre");
+define("L_NOV", "noviembre");
+define("L_DEC", "diciembre");
 // Months Short Names
-define("L_S_JAN", "Ene");
-define("L_S_FEB", "Feb");
-define("L_S_MAR", "Mar");
-define("L_S_APR", "Abr");
-define("L_S_MAY", "May");
-define("L_S_JUN", "Jun");
-define("L_S_JUL", "Jul");
-define("L_S_AUG", "Ago");
-define("L_S_SEP", "Sep");
-define("L_S_OCT", "Oct");
-define("L_S_NOV", "Nov");
-define("L_S_DEC", "Dic");
+define("L_S_JAN", "ene");
+define("L_S_FEB", "feb");
+define("L_S_MAR", "mar");
+define("L_S_APR", "abr");
+define("L_S_MAY", "may");
+define("L_S_JUN", "jun");
+define("L_S_JUL", "jul");
+define("L_S_AUG", "ago");
+define("L_S_SEP", "sep");
+define("L_S_OCT", "oct");
+define("L_S_NOV", "nov");
+define("L_S_DEC", "dic");
 // Week days Long Names
-define("L_MON", "Lunes");
-define("L_TUE", "Martes");
-define("L_WED", "Miércoles");
-define("L_THU", "Jueves");
-define("L_FRI", "Viernes");
-define("L_SAT", "Sábado");
-define("L_SUN", "Domingo");
+define("L_MON", "lunes");
+define("L_TUE", "martes");
+define("L_WED", "miércoles");
+define("L_THU", "jueves");
+define("L_FRI", "viernes");
+define("L_SAT", "sábado");
+define("L_SUN", "domingo");
 // Week days Short Names
-define("L_S_MON", "Lun");
-define("L_S_TUE", "Mar");
-define("L_S_WED", "Mié");
-define("L_S_THU", "Jue");
-define("L_S_FRI", "Vie");
-define("L_S_SAT", "Sáb");
-define("L_S_SUN", "Dom");
+define("L_S_MON", "lu");
+define("L_S_TUE", "ma");
+define("L_S_WED", "mi");
+define("L_S_THU", "ju");
+define("L_S_FRI", "vi");
+define("L_S_SAT", "sá");
+define("L_S_SUN", "do");
 
 // Localized date format
 if (stristr(PHP_OS,'win')) {
@@ -628,36 +628,36 @@ define("NO_USER","Nadie está ".LOGIN_LINK."cahteando</A> en este momento.");
 define("L_PRIV_REPLY_LOGIN", "Loqueate al chat si quieres ".LOGIN_LINK."contestar</A> a cualquiera de los PMs listados debajo");
 
 // Language names
-define("L_LANG_AR", "Español Argentina");
-define("L_LANG_BG", "Bulgaro - Cirílico");
-define("L_LANG_BR", "Brasilero Portugués");
-define("L_LANG_CZ", "Checo");
-define("L_LANG_DA", "Danés");
-define("L_LANG_DE", "Alemán");
-define("L_LANG_EN", "Inglés"); // for admin panel only
-define("L_LANG_ENUK", "Inglés UK"); // for UK formats and flags
-define("L_LANG_ENUS", "Inglés USA"); // for US formats and flags
-define("L_LANG_ES", "Español");
-define("L_LANG_FA", "Persa (Farsi)");
-define("L_LANG_FR", "Frances");
-define("L_LANG_GR", "Griego");
-define("L_LANG_HE", "Hebreo");
-define("L_LANG_HI", "Indú");
-define("L_LANG_HU", "Húngaro");
-define("L_LANG_ID", "Indonesio");
-define("L_LANG_IT", "Italiano");
-define("L_LANG_JA", "Japonés (Kanji)");
-define("L_LANG_KA", "Georgiano");
-define("L_LANG_NE", "Nepalés");
-define("L_LANG_NL", "Holandés");
-define("L_LANG_RO", "Rumano");
-define("L_LANG_SK", "Eslovaco");
-define("L_LANG_SRL", "Serbio - Latino");
-define("L_LANG_SRC", "Serbio - Cirílico");
-define("L_LANG_SV", "Sueco");
-define("L_LANG_TR", "Turco");
-define("L_LANG_UR", "Urdu");
-define("L_LANG_VI", "Vietnamita");
+define("L_LANG_AR", "español Argentina");
+define("L_LANG_BG", "bulgaro - cirílico");
+define("L_LANG_BR", "brasilero portugués");
+define("L_LANG_CZ", "checo");
+define("L_LANG_DA", "danés");
+define("L_LANG_DE", "alemán");
+define("L_LANG_EN", "inglés"); // for admin panel only
+define("L_LANG_ENUK", "inglés UK"); // for UK formats and flags
+define("L_LANG_ENUS", "inglés USA"); // for US formats and flags
+define("L_LANG_ES", "español");
+define("L_LANG_FA", "persa (farsi)");
+define("L_LANG_FR", "frances");
+define("L_LANG_GR", "griego");
+define("L_LANG_HE", "hebreo");
+define("L_LANG_HI", "indú");
+define("L_LANG_HU", "húngaro");
+define("L_LANG_ID", "indonesio");
+define("L_LANG_IT", "italiano");
+define("L_LANG_JA", "japonés (Kanji)");
+define("L_LANG_KA", "georgiano");
+define("L_LANG_NE", "nepalés");
+define("L_LANG_NL", "holandés");
+define("L_LANG_RO", "rumano");
+define("L_LANG_SK", "eslovaco");
+define("L_LANG_SRL", "serbio - latino");
+define("L_LANG_SRC", "serbio - cirílico");
+define("L_LANG_SV", "sueco");
+define("L_LANG_TR", "turco");
+define("L_LANG_UR", "urdu");
+define("L_LANG_VI", "vietnamita");
 
 // Skins preview page
 define("L_SKINS_TITLE", "Visualizar fondos");

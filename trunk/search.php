@@ -22,6 +22,13 @@ switch(L_LANG)
 		$L_G_HL = "bg";
 		$L_G_CX = "4ex2p3-7jrn";
 		break;
+	case "cs_CZ":
+		$L_G_EXT = "cz";
+		$L_G_SA = "Hledat";
+#		$L_G_SA = "Vyhledávání";
+		$L_G_HL = "cs";
+		$L_G_CX = "huge9ky4l6w";
+		break;
 	case "da_DK":
 		$L_G_EXT = "dk";
 #		$L_G_SA = "Søg";
@@ -108,6 +115,13 @@ switch(L_LANG)
 		$L_G_HL = "ro";
 		$L_G_CX = "cd8a0m-8lw3";
 		break;
+	case "ru_RU":
+		$L_G_EXT = "ru";
+#		$L_G_SA = "Поиск";
+		$L_G_SA = "&#x041f;&#x043e;&#x0438;&#x0441;&#x043a;";
+		$L_G_HL = "ru";
+		$L_G_CX = "ecctr8-efb8";
+		break;
 	case "sr_CS":
 		$L_G_EXT = "com";
 #		$L_G_SA = "Potraži";
@@ -129,12 +143,26 @@ switch(L_LANG)
 		$L_G_HL = "tr";
 		$L_G_CX = "thmxut-u4sx";
 		break;
+	case "uk_UA":
+		$L_G_EXT = "com.ua";
+#		$L_G_SA = "Пошук";
+		$L_G_SA = "&#x041f;&#x043e;&#x0448;&#x0443;&#x043a;";
+		$L_G_HL = "uk";
+		$L_G_CX = "48usx9-69nc";
+		break;
 	case "vi_VN":
 		$L_G_EXT = "com.vn";
 #		$L_G_SA = "Tìm kiếm";
 		$L_G_SA = "Ti&#768;m ki&#234;&#769;m";
 		$L_G_HL = "vi";
 		$L_G_CX = "73gv6i-7nsh";
+		break;
+	case "yo_NG":
+		$L_G_EXT = "com.ng";
+#		$L_G_SA = "Àwárí";
+		$L_G_SA = "&#192;w&#225;r&#237;";
+		$L_G_HL = "yo";
+		$L_G_CX = "x2nop2-xvsd";
 		break;
 	default:
 		$L_G_EXT = "com";

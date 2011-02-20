@@ -2,7 +2,7 @@
 # ro_RO translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 2.30
-# Language: Romanian
+# Language: Romanian / Română
 # Translator: Ciprian Murariu <ciprianmp@yahoo.com>
 # Last file update: 01.05.2010
 
@@ -24,47 +24,47 @@ define("L_NOT_ALLOWED", "Nu este permisă selectarea acestei date");
 define("FIRST_DAY", "1");
 
 // Months Long Names
-define("L_JAN", "Ianuarie");
-define("L_FEB", "Februarie");
-define("L_MAR", "Martie");
-define("L_APR", "Aprilie");
-define("L_MAY", "Mai");
-define("L_JUN", "Iunie");
-define("L_JUL", "Iulie");
-define("L_AUG", "August");
-define("L_SEP", "Septembrie");
-define("L_OCT", "Octombrie");
-define("L_NOV", "Noiembrie");
-define("L_DEC", "Decembrie");
+define("L_JAN", "ianuarie");
+define("L_FEB", "februarie");
+define("L_MAR", "martie");
+define("L_APR", "aprilie");
+define("L_MAY", "mai");
+define("L_JUN", "iunie");
+define("L_JUL", "iulie");
+define("L_AUG", "august");
+define("L_SEP", "septembrie");
+define("L_OCT", "octombrie");
+define("L_NOV", "noiembrie");
+define("L_DEC", "decembrie");
 // Months Short Names
-define("L_S_JAN", "Ian");
-define("L_S_FEB", "Feb");
-define("L_S_MAR", "Mar");
-define("L_S_APR", "Apr");
-define("L_S_MAY", "Mai");
-define("L_S_JUN", "Iun");
-define("L_S_JUL", "Iul");
-define("L_S_AUG", "Aug");
-define("L_S_SEP", "Sept");
-define("L_S_OCT", "Oct");
-define("L_S_NOV", "Nov");
-define("L_S_DEC", "Dec");
+define("L_S_JAN", "ian");
+define("L_S_FEB", "feb");
+define("L_S_MAR", "mar");
+define("L_S_APR", "apr");
+define("L_S_MAY", "mai");
+define("L_S_JUN", "iun");
+define("L_S_JUL", "iul");
+define("L_S_AUG", "aug");
+define("L_S_SEP", "sept");
+define("L_S_OCT", "oct");
+define("L_S_NOV", "nov");
+define("L_S_DEC", "dec");
 // Week days Long Names
-define("L_MON", "Luni");
-define("L_TUE", "Marţi");
-define("L_WED", "Miercuri");
-define("L_THU", "Joi");
-define("L_FRI", "Vineri");
-define("L_SAT", "Sâmbătă");
-define("L_SUN", "Duminică");
+define("L_MON", "luni");
+define("L_TUE", "marţi");
+define("L_WED", "miercuri");
+define("L_THU", "joi");
+define("L_FRI", "vineri");
+define("L_SAT", "sâmbătă");
+define("L_SUN", "duminică");
 // Week days Short Names
-define("L_S_MON", "L");
-define("L_S_TUE", "Ma");
-define("L_S_WED", "Mi");
-define("L_S_THU", "J");
-define("L_S_FRI", "V");
-define("L_S_SAT", "S");
-define("L_S_SUN", "D");
+define("L_S_MON", "l");
+define("L_S_TUE", "ma");
+define("L_S_WED", "mi");
+define("L_S_THU", "j");
+define("L_S_FRI", "v");
+define("L_S_SAT", "s");
+define("L_S_SUN", "d");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1250");

@@ -139,7 +139,7 @@ foreach($yrsu as $yru)
 			$dayu = opendir($du); #open directory
 			while (false !== ($dyu = readdir($dayu)))
 			{
-				if (!eregi("\.html",$dyu) && !eregi("error",$dyu) && $dyu!=='.' && $dyu!=='..')
+				if (!eregi("\.html",$dyu) && !eregi("_vti_conf",$dyu) && !eregi("error",$dyu) && $dyu!=='.' && $dyu!=='..')
 				{
 					$dayarrayu[]=$dyu;
 		 		}

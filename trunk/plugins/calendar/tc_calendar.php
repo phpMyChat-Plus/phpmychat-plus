@@ -3,8 +3,10 @@
 // The php calendar component
 // written by TJ @triconsole
 //
-// version 3.2-loc (13 August 2010)
-
+// add on: translation  implemented - default is English en_US
+//	- thanks ciprianmp
+//
+// version 3.3-loc (13 February 2011)
 
 //bug fixed: Incorrect next month display show on 'February 2008'
 //	- thanks Neeraj Jain for bug report
@@ -57,8 +59,8 @@
 //add on: disabledDay() function to let the calendar disabled on specified day
 //  - thanks Jim R.
 //
-//add on: translation  implemented - default is English en_US
-//	- thanks ciprianmp
+//bug fixed: total number of days startup incorrect
+//  - thanks Francois du Toit, ciprianmp
 //
 //********************************************************
 
@@ -129,7 +131,9 @@ class tc_calendar{
 	//get the total day of each month in year
     function total_days($month,$year){
     	$days = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
-    	return ($month == 2 && $this->is_leapYear($year)) ? 29 : $days[$month-1];
+		if($month > 0 && $year > 0){
+	    	return ($month == 2 && $this->is_leapYear($year)) ? 29 : $days[$month-1];
+		}else return 31;
     }
 
 	//Deprecate since v1.6
@@ -193,7 +197,8 @@ class tc_calendar{
 
 		//check whether it is a date picker
 		if($this->date_picker){
-			echo("<span style=\"position: relative; z-index: $this->zindex;\">");
+//			echo("<span style=\"position: relative; z-index: $this->zindex;\">");
+			echo("<div style=\"position: relative; z-index: $this->zindex; float: left;\">");
 
 			if($this->show_input){
 				if($this->hl){
@@ -225,7 +230,8 @@ class tc_calendar{
 
 			$this->writeCalendarContainer();
 
-			echo("</span>");
+//			echo("</span>");
+			echo("</div>");
 		}else{
 			$this->writeCalendarContainer();
 		}
@@ -287,9 +293,11 @@ class tc_calendar{
 
 	//write the select box of days
 	function writeDay(){
+		$total_days = $this->total_days($this->month, $this->year);
+
 		echo("<select name=\"".$this->objname."_day\" id=\"".$this->objname."_day\" onChange=\"javascript:tc_setDay('".$this->objname."', this[this.selectedIndex].value, '".$this->path."');\" class=\"tcday\">");
 		echo("<option value=\"00\">".L_DAY."</option>");
-		for($i=1; $i<=31; $i++){
+		for($i=1; $i<=$total_days; $i++){
 			$selected = ((int)$this->day == $i) ? " selected" : "";
 			echo("<option value=\"".str_pad($i, 2 , "0", STR_PAD_LEFT)."\"$selected>$i</option>");
 		}

@@ -1,4 +1,4 @@
-﻿Plus FAQ and Ciprian’s answers:
+Plus FAQ and Ciprian’s answers:
 
 1Q.
 After installing, I get this error:
@@ -19,7 +19,7 @@ After installing, I get this errors:
 - The font on the index page is with serifs, not the Arial or Verdana.
 1aA.
 This error is related to the restrictions of your php server (register_globals = off).
-Check the settings using a phpinfo.php file, and check if either safe_mode is on or register_globals is off. Disable first and enable the second one.
+Check the settings using a phpinfo.php file and check if either safe_mode is on or register_globals is off. Disable first and enable the second one.
 
 2Q.
 How do I migrate my registered users from phpmychat standard c_reg_users table to Plus?
@@ -134,7 +134,7 @@ Fatal error: main(): Failed opening required
 9A.
 That’s because the Deutch language isn’t installed. It really shouldn’t happen. I’ll check on that for the next version...
 The reason is: you have to delete the chat cookie after upgrade (clean the cookies). So tell that your users.
-Quick solution: type in the address bar this url: http://yourwebsite/ plus/index. php?L=english (for the first time only)
+Quick solution: type in the address bar this url: http://yourwebsite/plus/index.php?L=english (for the first time only)
 
 10Q.
 I cannot make any changes in the admin panel. It says it was successfully updated, but when I check back, nothing changed.
@@ -157,7 +157,7 @@ I want to log in in multiple windows with different usernames - what is the best
 12A.
 The best practice is to use a different type of browser for each user, otherwise, the cookie handling will expose your chat to security breaches
 (like turning a private room into public), as well as malfunctions on your side.
-I recommend IE7 + Firefox / Netscape / Opera
+I recommend IE7 + Firefox / Netscape / Opera / Chrome
 
 13Q.
 One problem that I see is that there are no ways when I change a rooms Name that it keeps that Name, it always go back to the default as Public, etc.
@@ -229,7 +229,7 @@ Update: this has been fixed as of 1.93
 a. How can I backup my database/files?
 b. What is admin/backup folder stands there for?
 19A.
-Well, in that directory (admin/backup CHMODED to 777) one could choose to save a weekly backup of the chat files an database. But for that, Cpanel access is needed.
+Well, in that directory (admin/backup CHMODED to 777) one could choose to save a weekly backup of the chat files and database. But for that, Cpanel access is needed.
 I setup 3 separate cron jobs to backup my chat so here is what I use (don’t use the square brackets []):
 a. Every Monday at 0 midnight, the script search and deletes all the 6 days older files into the backup folder (except for the index.html file)
  0 0 * * 1 [find /home/cpanelname/public_html/chatdirectory/admin/backups -maxdepth 1 -type f -mtime +6 -not -name "index*" -exec rm -f {} \;]
@@ -238,7 +238,7 @@ b. After 2 minutes, the script creates a tar .tgz archive with all the files in 
 c. After 8 minutes (enough time for the previous 2 scripts to finish the jobs), the script creates a gzip .gz archive with all the database structure and data and put it into the backup folder
 10 0 * * 1 date=`date -I` ; mysqldump -udb_username -pdb_password db_name | gzip > /home/cpanelname/public_html/chatdirectory/admin/backups/db_backup_$date.sql.gz;
 Whenever I need to restore something in my chat, I just use these files (they are only 6 days older).
-To use the cron jobs I sampled, don’t forget to replace "cpanelname", "chatdirectory", "db_username", "db_password" and "db_name"with yuor according data.
+To use the cron jobs I sampled, don’t forget to replace "cpanelname", "chatdirectory", "db_username", "db_password" and "db_name"with your according data.
 You should be done!
 
 20Q.

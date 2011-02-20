@@ -1,8 +1,8 @@
 ﻿<?php
 # xx_YY translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 2.30
-# Language: Lang_name
+# Version: 3.2
+# Language: Lang_name / Orig_name (in your lang) // ex: Romanian / Română
 # Translator: YourName <email@...>
 # Last file update: xx.xx.201x
 
@@ -71,9 +71,9 @@ define("WIN_DEFAULT", "windows-1252");
 define("L_CAL_FORMAT", "%d %B %Y");
 if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "xx_XX"); // en_US format of your language
 
-// Set the US specific date/time format
+// Set the XX specific date/time format
 if (stristr(PHP_OS,"win")) {
-setlocale(LC_ALL, "eng-usa.UTF-8", "eng-usa");
+setlocale(LC_ALL, "eng-usa.UTF-8", "eng-usa", "English-usa.UTF-8");
 } else {
 setlocale(LC_ALL, "en_US.UTF-8", "enu.UTF-8", "usa.UTF-8", "enu_enu.UTF-8", "English-usa.UTF-8");
 }

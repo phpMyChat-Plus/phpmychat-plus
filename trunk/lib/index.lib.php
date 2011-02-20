@@ -1513,7 +1513,7 @@ if ($show_donation)
 {
 	$pptype = "big";
 	require("${ChatPath}lib/support.lib.php");
-	if ((intval($ppbutton) < 3620000 || (intval($ppbutton) > 3627000 && intval($ppbutton) != 7148858 && intval($ppbutton) != 7148805 && (intval($ppbutton) < 7988359 || intval($ppbutton) > 7988406))) && $ppbutton != "KYVK6TQWY4MXJ" && $ppbutton != "QN9TYKJ49BM7S" && $ppbutton != "RJK6MGRQVAJY2" && $ppbutton != "ZCXGTP265VU6S") $copy_break = 1;
+	if ((intval($ppbutton) < 3620000 || (intval($ppbutton) > 3627000 && intval($ppbutton) != 7148858 && intval($ppbutton) != 7148805 && (intval($ppbutton) < 7988359 || intval($ppbutton) > 7988406))) && $ppbutton != "KYVK6TQWY4MXJ" && $ppbutton != "QN9TYKJ49BM7S" && $ppbutton != "RJK6MGRQVAJY2" && $ppbutton != "ZCXGTP265VU6S" && $ppbutton != "MGBHACRT5F4RE" && $ppbutton != "6HRWUGAN73NPS" && $ppbutton != "WDA8GUU9GGSTS" && $ppbutton != "T9MP68SK7HBKQ" && $ppbutton != "DBH7XN4YA7A2J" && $ppbutton != "BTHKH33JLGLTN") $copy_break = 1;
 }
 ?>
 </P>
@@ -1546,39 +1546,43 @@ if(isset($Error))
 					{
 						if(C_FLAGS_3D) $flag = "flag_us.gif";
 						else $flag = "flag_us0.gif";
-						if(L_LANG_ENUS != "L_LANG_ENUS") $FLAG_NAME = L_LANG_ENUS;
+						if(L_ORIG_LANG_ENUS != "L_ORIG_LANG_ENUS") $FLAG_NAME = L_ORIG_LANG_ENUS.($name != $L && L_LANG_ENUS != "L_LANG_ENUS" ? "/".L_LANG_ENUS : "");
 					}
 					else
 					{
 						if(C_FLAGS_3D) $flag = "flag.gif";
 						else $flag = "flag0.gif";
-						if ($name == "argentinian_spanish" && L_LANG_AR != "L_LANG_AR") $FLAG_NAME = L_LANG_AR;
-						elseif ($name == "bulgarian" && L_LANG_BG != "L_LANG_BG") $FLAG_NAME = L_LANG_BG;
-						elseif ($name == "brazilian_portuguese" && L_LANG_BR != "L_LANG_BR") $FLAG_NAME = L_LANG_BR;
-						elseif ($name == "danish" && L_LANG_DA != "L_LANG_DA") $FLAG_NAME = L_LANG_DA;
-						elseif ($name == "dutch" && L_LANG_NL != "L_LANG_NL") $FLAG_NAME = L_LANG_NL;
-						elseif ($name == "english" && L_LANG_ENUK != "L_LANG_ENUK") $FLAG_NAME = L_LANG_ENUK;
-						elseif ($name == "french" && L_LANG_FR != "L_LANG_FR") $FLAG_NAME = L_LANG_FR;
-						elseif ($name == "georgian" && L_LANG_KA != "L_LANG_KA") $FLAG_NAME = L_LANG_KA;
-						elseif ($name == "german" && L_LANG_DE != "L_LANG_DE") $FLAG_NAME = L_LANG_DE;
-						elseif ($name == "greek" && L_LANG_GR != "L_LANG_GR") $FLAG_NAME = L_LANG_GR;
-						elseif ($name == "hebrew" && L_LANG_HE != "L_LANG_HE") $FLAG_NAME = L_LANG_HE;
-						elseif ($name == "hindi" && L_LANG_HI != "L_LANG_HI") $FLAG_NAME = L_LANG_HI;
-						elseif ($name == "hungarian" && L_LANG_HU != "L_LANG_HU") $FLAG_NAME = L_LANG_HU;
-						elseif ($name == "indonesian" && L_LANG_ID != "L_LANG_ID") $FLAG_NAME = L_LANG_ID;
-						elseif ($name == "italian" && L_LANG_IT != "L_LANG_IT") $FLAG_NAME = L_LANG_IT;
-						elseif ($name == "japanese" && L_LANG_JA != "L_LANG_JA") $FLAG_NAME = L_LANG_JA;
-						elseif ($name == "nepali" && L_LANG_NE != "L_LANG_NE") $FLAG_NAME = L_LANG_NE;
-						elseif ($name == "persian" && L_LANG_FA != "L_LANG_FA") $FLAG_NAME = L_LANG_FA;
-						elseif ($name == "romanian" && L_LANG_RO != "L_LANG_RO") $FLAG_NAME = L_LANG_RO;
-						elseif ($name == "serbian_latin" && L_LANG_SRL != "L_LANG_SRL") $FLAG_NAME = L_LANG_SRL;
-						elseif ($name == "serbian_cyrillic" && L_LANG_SRC != "L_LANG_SRC") $FLAG_NAME = L_LANG_SRC;
-						elseif ($name == "slovak" && L_LANG_SK != "L_LANG_SK") $FLAG_NAME = L_LANG_SK;
-						elseif ($name == "spanish" && L_LANG_ES != "L_LANG_ES") $FLAG_NAME = L_LANG_ES;
-						elseif ($name == "swedish" && L_LANG_SV != "L_LANG_SV") $FLAG_NAME = L_LANG_SV;
-						elseif ($name == "turkish" && L_LANG_TR != "L_LANG_TR") $FLAG_NAME = L_LANG_TR;
-						elseif ($name == "urdu" && L_LANG_UR != "L_LANG_UR") $FLAG_NAME = L_LANG_UR;
-						elseif ($name == "vietnamese" && L_LANG_VI != "L_LANG_VI") $FLAG_NAME = L_LANG_VI;
+						if ($name == "argentinian_spanish" && L_ORIG_LANG_AR != "L_ORIG_LANG_AR") $FLAG_NAME = L_ORIG_LANG_AR.($name != $L && L_LANG_AR != "L_LANG_AR" ? "/".L_LANG_AR : "");
+						elseif ($name == "bulgarian" && L_ORIG_LANG_BG != "L_ORIG_LANG_BG") $FLAG_NAME = L_ORIG_LANG_BG.($name != $L && L_LANG_BG != "L_LANG_BG" ? "/".L_LANG_BG : "");
+						elseif ($name == "brazilian_portuguese" && L_ORIG_LANG_BR != "L_ORIG_LANG_BR") $FLAG_NAME = L_ORIG_LANG_BR.($name != $L && L_LANG_BR != "L_LANG_BR" ? "/".L_LANG_BR : "");
+						elseif ($name == "czech" && L_ORIG_LANG_CZ != "L_ORIG_LANG_CZ") $FLAG_NAME = L_ORIG_LANG_CZ.($name != $L && L_LANG_CZ != "L_LANG_CZ" ? "/".L_LANG_CZ : "");
+						elseif ($name == "danish" && L_ORIG_LANG_DA != "L_ORIG_LANG_DA") $FLAG_NAME = L_ORIG_LANG_DA.($name != $L && L_LANG_DA != "L_LANG_DA" ? "/".L_LANG_DA : "");
+						elseif ($name == "dutch" && L_ORIG_LANG_NL != "L_ORIG_LANG_NL") $FLAG_NAME = L_ORIG_LANG_NL.($name != $L && L_LANG_NL != "L_LANG_NL" ? "/".L_LANG_NL : "");
+						elseif ($name == "english" && L_ORIG_LANG_ENUK != "L_ORIG_LANG_ENUK") $FLAG_NAME = L_ORIG_LANG_ENUK.($name != $L && L_LANG_ENUK != "L_LANG_ENUK" ? "/".L_LANG_ENUK : "");
+						elseif ($name == "french" && L_ORIG_LANG_FR != "L_ORIG_LANG_FR") $FLAG_NAME = L_ORIG_LANG_FR.($name != $L && L_LANG_FR != "L_LANG_FR" ? "/".L_LANG_FR : "");
+						elseif ($name == "georgian" && L_ORIG_LANG_KA != "L_ORIG_LANG_KA") $FLAG_NAME = L_ORIG_LANG_KA.($name != $L && L_LANG_KA != "L_LANG_KA" ? "/".L_LANG_KA : "");
+						elseif ($name == "german" && L_ORIG_LANG_DE != "L_ORIG_LANG_DE") $FLAG_NAME = L_ORIG_LANG_DE.($name != $L && L_LANG_DE != "L_LANG_DE" ? "/".L_LANG_DE : "");
+						elseif ($name == "greek" && L_ORIG_LANG_GR != "L_ORIG_LANG_GR") $FLAG_NAME = L_ORIG_LANG_GR.($name != $L && L_LANG_GR != "L_LANG_GR" ? "/".L_LANG_GR : "");
+						elseif ($name == "hebrew" && L_ORIG_LANG_HE != "L_ORIG_LANG_HE") $FLAG_NAME = L_ORIG_LANG_HE.($name != $L && L_LANG_HE != "L_LANG_HE" ? "/".L_LANG_HE : "");
+						elseif ($name == "hindi" && L_ORIG_LANG_HI != "L_ORIG_LANG_HI") $FLAG_NAME = L_ORIG_LANG_HI.($name != $L && L_LANG_HI != "L_LANG_HI" ? "/".L_LANG_HI : "");
+						elseif ($name == "hungarian" && L_ORIG_LANG_HU != "L_ORIG_LANG_HU") $FLAG_NAME = L_ORIG_LANG_HU.($name != $L && L_LANG_HU != "L_LANG_HU" ? "/".L_LANG_HU : "");
+						elseif ($name == "indonesian" && L_ORIG_LANG_ID != "L_ORIG_LANG_ID") $FLAG_NAME = L_ORIG_LANG_ID.($name != $L && L_LANG_ID != "L_LANG_ID" ? "/".L_LANG_ID : "");
+						elseif ($name == "italian" && L_ORIG_LANG_IT != "L_ORIG_LANG_IT") $FLAG_NAME = L_ORIG_LANG_IT.($name != $L && L_LANG_IT != "L_LANG_IT" ? "/".L_LANG_IT : "");
+						elseif ($name == "japanese" && L_ORIG_LANG_JA != "L_ORIG_LANG_JA") $FLAG_NAME = L_ORIG_LANG_JA.($name != $L && L_LANG_JA != "L_LANG_JA" ? "/".L_LANG_JA : "");
+						elseif ($name == "nepali" && L_ORIG_LANG_NE != "L_ORIG_LANG_NE") $FLAG_NAME = L_ORIG_LANG_NE.($name != $L && L_LANG_NE != "L_LANG_NE" ? "/".L_LANG_NE : "");
+						elseif ($name == "persian" && L_ORIG_LANG_FA != "L_ORIG_LANG_FA") $FLAG_NAME = L_ORIG_LANG_FA.($name != $L && L_LANG_FA != "L_LANG_FA" ? "/".L_LANG_FA : "");
+						elseif ($name == "romanian" && L_ORIG_LANG_RO != "L_ORIG_LANG_RO") $FLAG_NAME = L_ORIG_LANG_RO.($name != $L && L_LANG_RO != "L_LANG_RO" ? "/".L_LANG_RO : "");
+						elseif ($name == "russian" && L_ORIG_LANG_RU != "L_ORIG_LANG_RU") $FLAG_NAME = L_ORIG_LANG_RU.($name != $L && L_LANG_RU != "L_LANG_RU" ? "/".L_LANG_RU : "");
+						elseif ($name == "serbian_latin" && L_ORIG_LANG_SRL != "L_ORIG_LANG_SRL") $FLAG_NAME = L_ORIG_LANG_SRL.($name != $L && L_LANG_SRL != "L_LANG_SRL" ? "/".L_LANG_SRL : "");
+						elseif ($name == "serbian_cyrillic" && L_ORIG_LANG_SRC != "L_ORIG_LANG_SRC") $FLAG_NAME = L_ORIG_LANG_SRC.($name != $L && L_LANG_SRC != "L_LANG_SRC" ? "/".L_LANG_SRC : "");
+						elseif ($name == "slovak" && L_ORIG_LANG_SK != "L_ORIG_LANG_SK") $FLAG_NAME = L_ORIG_LANG_SK.($name != $L && L_LANG_SK != "L_LANG_SK" ? "/".L_LANG_SK : "");
+						elseif ($name == "spanish" && L_ORIG_LANG_ES != "L_ORIG_LANG_ES") $FLAG_NAME = L_ORIG_LANG_ES.($name != $L && L_LANG_ES != "L_LANG_ES" ? "/".L_LANG_ES : "");
+						elseif ($name == "swedish" && L_ORIG_LANG_SV != "L_ORIG_LANG_SV") $FLAG_NAME = L_ORIG_LANG_SV.($name != $L && L_LANG_SV != "L_LANG_SV" ? "/".L_LANG_SV : "");
+						elseif ($name == "turkish" && L_ORIG_LANG_TR != "L_ORIG_LANG_TR") $FLAG_NAME = L_ORIG_LANG_TR.($name != $L && L_LANG_TR != "L_LANG_TR" ? "/".L_LANG_TR : "");
+						elseif ($name == "ukrainian" && L_ORIG_LANG_UK != "L_ORIG_LANG_UK") $FLAG_NAME = L_ORIG_LANG_UK.($name != $L && L_LANG_UK != "L_LANG_UK" ? "/".L_LANG_UK : "");
+						elseif ($name == "urdu" && L_ORIG_LANG_UR != "L_ORIG_LANG_UR") $FLAG_NAME = L_ORIG_LANG_UR.($name != $L && L_LANG_UR != "L_LANG_UR" ? "/".L_LANG_UR : "");
+						elseif ($name == "vietnamese" && L_ORIG_LANG_VI != "L_ORIG_LANG_VI") $FLAG_NAME = L_ORIG_LANG_VI.($name != $L && L_LANG_VI != "L_LANG_VI" ? "/".L_LANG_VI : "");
+						elseif ($name == "yoruba" && L_ORIG_LANG_YO != "L_ORIG_LANG_YO") $FLAG_NAME = L_ORIG_LANG_YO.($name != $L && L_LANG_YO != "L_LANG_YO" ? "/".L_LANG_YO : "");
 						else
 						{
 							$FLAG_NAME = str_replace("_"," ",$name);
@@ -1598,7 +1602,7 @@ if(isset($Error))
 					if ($name != $L) $disp_flags .= "<A HREF=\"$Action?L=${name}\" onMouseOver=\"window.status='".$FLAG_STATUS.".'; return true;\" Title=\"".$FLAG_OVER."\">";
 					$disp_flags .= "<IMG SRC=\"${ChatPath}localization/${name}/images/".$flag."\" onMouseOver=\"window.status='".$FLAG_STATUS.".'; return true;\" BORDER=0 ALT=\"".$FLAG_OVER."\" Title=\"".$FLAG_OVER."\">";
 					if ($name != $L) $disp_flags .= "</A>";
-					if ($i % 10 == 0) $disp_flags .= "<br />";
+					if ($i % 11 == 0) $disp_flags .= "<br />";
 					else $disp_flags .= "&nbsp;";
 				};
 				unset($AvailableLanguages);
@@ -1983,7 +1987,7 @@ else echo($Owner_name);
 		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" name="support" target="_blank" onSubmit="return confirm('<?php echo(L_SUPP_WARN); ?>');">
 		<input type="hidden" name="cmd" value="_s-xclick">
 		<input type="hidden" name="hosted_button_id" value="<?php echo($ppbutton); ?>">
-		<input type="image" style="background-color: transparent;" src="<?php echo($donate); ?>" border="0" name="donate" alt="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" title="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" onMouseOver="window.status='<?php echo($ppalt); ?>'; return true;">
+		<input type="image" style="background-color: transparent;" src="<?php echo($donate); ?>" border="0" name="donate" alt="<?php echo($ppalt."\n ".L_SUPP_ALT); ?>" title="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" onMouseOver="window.status='<?php echo($ppalt); ?>'; return true;">
 		</form>
 	<?php
 	}

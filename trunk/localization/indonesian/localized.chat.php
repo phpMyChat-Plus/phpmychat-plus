@@ -352,7 +352,6 @@ define("L_PRO_3", "Link favorit 2");
 define("L_PRO_4", "Keterangan");
 define("L_PRO_5", "URL Gambar");
 define("L_PRO_6", "Nama/warna teks");
-define("L_PRO_7", "E-mail");
 
 // Avatar mod
 define("L_AVATAR", "Avatar");
