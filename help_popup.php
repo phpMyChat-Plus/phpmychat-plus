@@ -118,7 +118,7 @@ if (strstr($Sender_email,"@") && ($Sender_email != ""))
 {
 	$Owner_email = $Sender_email;
 ?>
-<a href="mailto:<?php echo($Owner_email) ?> CLASS="ChatLink" Title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_OWNER)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_OWNER)); ?>.'; return true"><?php echo($Owner_name); ?></A>
+<a href="mailto:<?php echo($Owner_email) ?>" CLASS="ChatLink" Title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_OWNER)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_OWNER)); ?>.'; return true"><?php echo($Owner_name); ?></A>
 <?php
 }
 else echo($Owner_name);

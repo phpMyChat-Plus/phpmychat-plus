@@ -35,6 +35,7 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 20.02.2011 - 1.94-beta6:
+- Help popup email mailto fix; (functionality related)
 - several ereg/eregi_replace functions replaced by str_replace - steps for php5.3 compatibility; (compatibility related)
 02.06.2010 - 1.94-beta5:
 - download link updated in all occurences in chat; (functionality related)
