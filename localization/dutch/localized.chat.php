@@ -554,47 +554,47 @@ define("L_EXTRA_PRIV2", "Nieuwe PMs"); // keep it short
 define("FIRST_DAY", "1");
 
 // Months Long Names
-define("L_JAN", "Januari");
-define("L_FEB", "Februari");
-define("L_MAR", "Maart");
-define("L_APR", "April");
-define("L_MAY", "Mei");
-define("L_JUN", "Juni");
-define("L_JUL", "Juli");
-define("L_AUG", "Augustus");
-define("L_SEP", "September");
-define("L_OCT", "Oktober");
-define("L_NOV", "November");
-define("L_DEC", "December");
+define("L_JAN", "januari");
+define("L_FEB", "februari");
+define("L_MAR", "maart");
+define("L_APR", "april");
+define("L_MAY", "mei");
+define("L_JUN", "juni");
+define("L_JUL", "juli");
+define("L_AUG", "augustus");
+define("L_SEP", "september");
+define("L_OCT", "oktober");
+define("L_NOV", "november");
+define("L_DEC", "december");
 // Months Short Names
-define("L_S_JAN", "Jan");
-define("L_S_FEB", "Feb");
-define("L_S_MAR", "Mrt");
-define("L_S_APR", "Apr");
-define("L_S_MAY", "Mei");
-define("L_S_JUN", "Jun");
-define("L_S_JUL", "Jul");
-define("L_S_AUG", "Aug");
-define("L_S_SEP", "Sep");
-define("L_S_OCT", "Okt");
-define("L_S_NOV", "Nov");
-define("L_S_DEC", "Dec");
+define("L_S_JAN", "jan");
+define("L_S_FEB", "feb");
+define("L_S_MAR", "mrt");
+define("L_S_APR", "apr");
+define("L_S_MAY", "mei");
+define("L_S_JUN", "jun");
+define("L_S_JUL", "jul");
+define("L_S_AUG", "aug");
+define("L_S_SEP", "sep");
+define("L_S_OCT", "okt");
+define("L_S_NOV", "nov");
+define("L_S_DEC", "dec");
 // Week days Long Names
-define("L_MON", "Maandag");
-define("L_TUE", "Dinsdag");
-define("L_WED", "Woensdag");
-define("L_THU", "Donderdag");
-define("L_FRI", "Vrijdag");
-define("L_SAT", "Zaterdag");
-define("L_SUN", "Zondag");
+define("L_MON", "maandag");
+define("L_TUE", "dinsdag");
+define("L_WED", "woensdag");
+define("L_THU", "donderdag");
+define("L_FRI", "vrijdag");
+define("L_SAT", "zaterdag");
+define("L_SUN", "zondag");
 // Week days Short Names
-define("L_S_MON", "Ma");
-define("L_S_TUE", "Di");
-define("L_S_WED", "Wo");
-define("L_S_THU", "Do");
-define("L_S_FRI", "Vr");
-define("L_S_SAT", "Za");
-define("L_S_SUN", "Zo");
+define("L_S_MON", "ma");
+define("L_S_TUE", "di");
+define("L_S_WED", "wo");
+define("L_S_THU", "do");
+define("L_S_FRI", "vr");
+define("L_S_SAT", "za");
+define("L_S_SUN", "zo");
 
 // Localized date format - read the parameters here: http://www.php.net/manual/en/function.strftime.php
 if (stristr(PHP_OS,'win')) {

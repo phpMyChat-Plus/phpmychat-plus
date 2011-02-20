@@ -615,33 +615,33 @@ define("NO_USER","Nadie está ".LOGIN_LINK."chateando</A> en este momento.");
 define("L_PRIV_REPLY_LOGIN", "Loguéese al chat si lo desea ".LOGIN_LINK."escribir una respuesta</A> para cualquiera de los Nuevos PMs listados arriba");
 
 // Language names
-define("L_LANG_AR", "Español (la Argentina)");
-define("L_LANG_BG", "Búlgaro");
-define("L_LANG_BR", "Brasilero Portugués");
-define("L_LANG_CZ", "Checo");
-define("L_LANG_DA", "Danés");
-define("L_LANG_DE", "Alemán");
-define("L_LANG_EN", "Inglés"); // for Admin panel only
-define("L_LANG_ENUK", "Inglés (Reino Unido) "); // for UK formats and flags (also known as British)
-define("L_LANG_ENUS", "Inglés (Americano)"); // for US formats and flags (also know as American English)
-define("L_LANG_ES", "Español");
-define("L_LANG_FR", "Francés");
-define("L_LANG_GR", "Griego");
-define("L_LANG_HE", "Hebreo");
-define("L_LANG_HI", "Indú");
-define("L_LANG_HU", "Húngaro");
-define("L_LANG_ID", "Indonesio");
-define("L_LANG_IT", "Italiano");	// Note: Language names are not capitalized in Spanish
-define("L_LANG_KA", "Georgiano");
-define("L_LANG_NL", "Holandés");
-define("L_LANG_RO", "Rumano");
-define("L_LANG_SK", "Eslovaco");
-define("L_LANG_SRL", "Serbio - latino");
-define("L_LANG_SRC", "Serbio – cirílico");
-define("L_LANG_SV", "Sueco");
-define("L_LANG_TR", "Turco");
-define("L_LANG_UR", "Urdu"); //spoken in Pakistan
-define("L_LANG_VI", "Vietnamita");
+define("L_LANG_AR", "español (la Argentina)");
+define("L_LANG_BG", "búlgaro – cirílico");
+define("L_LANG_BR", "brasilero portugués");
+define("L_LANG_CZ", "checo");
+define("L_LANG_DA", "danés");
+define("L_LANG_DE", "alemán");
+define("L_LANG_EN", "inglés"); // for Admin panel only
+define("L_LANG_ENUK", "inglés (Reino Unido) "); // for UK formats and flags (also known as British)
+define("L_LANG_ENUS", "inglés (Americano)"); // for US formats and flags (also know as American English)
+define("L_LANG_ES", "español");
+define("L_LANG_FR", "francés");
+define("L_LANG_GR", "griego");
+define("L_LANG_HE", "hebreo");
+define("L_LANG_HI", "indú");
+define("L_LANG_HU", "húngaro");
+define("L_LANG_ID", "indonesio");
+define("L_LANG_IT", "italiano");	// Note: Language names are not capitalized in Spanish
+define("L_LANG_KA", "georgiano");
+define("L_LANG_NL", "holandés");
+define("L_LANG_RO", "rumano");
+define("L_LANG_SK", "eslovaco");
+define("L_LANG_SRL", "serbio - latino");
+define("L_LANG_SRC", "serbio – cirílico");
+define("L_LANG_SV", "sueco");
+define("L_LANG_TR", "turco");
+define("L_LANG_UR", "urdu"); //spoken in Pakistan
+define("L_LANG_VI", "vietnamita");
 
 // Skins preview page by Ciprian
 define("L_SKINS_TITLE", "Visualizar fondos");

@@ -630,36 +630,36 @@ define("NO_USER","Няма никой в този момент.");
 define("L_PRIV_REPLY_LOGIN", "Влезте в чата, ако искате да ".LOGIN_LINK."изпратите отговор</A> на някое от новите частни съобщения от горния списък");
 
 // Language names
-define("L_LANG_AR", "Аржентински испански");
-define("L_LANG_BG", "Български - кирилица");
-define("L_LANG_BR", "Бразилски португалски");
-define("L_LANG_CZ", "Чешки");
-define("L_LANG_DA", "Датски");
-define("L_LANG_DE", "Немски");
-define("L_LANG_EN", "Английски"); // for admin panel only
-define("L_LANG_ENUK", "Английски UK"); // for UK formats and flags
-define("L_LANG_ENUS", "Английски US"); // for US formats and flags
-define("L_LANG_ES", "Испански");
-define("L_LANG_GR", "Гръцки");
-define("L_LANG_FA", "Персийски (Фарси)");
-define("L_LANG_FR", "Френски");
-define("L_LANG_HE", "Български");
-define("L_LANG_HI", "Хинди");
-define("L_LANG_HU", "Унгарски");
-define("L_LANG_ID", "Индонезийски");
-define("L_LANG_IT", "Италиански");
-define("L_LANG_JA", "Японски (Канджи)");
-define("L_LANG_KA", "Грузински");
-define("L_LANG_NE", "Непалски");
-define("L_LANG_NL", "Холандски");
-define("L_LANG_RO", "Румънски");
-define("L_LANG_SK", "Словашки");
-define("L_LANG_SRC", "Сръбски - кирилица");
-define("L_LANG_SRL", "Сръбски - латиница");
-define("L_LANG_SV", "Шведски");
-define("L_LANG_TR", "Турски");
-define("L_LANG_UR", "Урду");
-define("L_LANG_VI", "Виетнамски");
+define("L_LANG_AR", "аржентински испански");
+define("L_LANG_BG", "български - кирилица");
+define("L_LANG_BR", "бразилски португалски");
+define("L_LANG_CZ", "чешки");
+define("L_LANG_DA", "датски");
+define("L_LANG_DE", "немски");
+define("L_LANG_EN", "английски"); // for admin panel only
+define("L_LANG_ENUK", "английски UK"); // for UK formats and flags
+define("L_LANG_ENUS", "английски US"); // for US formats and flags
+define("L_LANG_ES", "испански");
+define("L_LANG_GR", "гръцки");
+define("L_LANG_FA", "персийски (Фарси)");
+define("L_LANG_FR", "френски");
+define("L_LANG_HE", "иврит");
+define("L_LANG_HI", "хинди");
+define("L_LANG_HU", "унгарски");
+define("L_LANG_ID", "индонезийски");
+define("L_LANG_IT", "италиански");
+define("L_LANG_JA", "японски (канджи)");
+define("L_LANG_KA", "грузински");
+define("L_LANG_NE", "непалски");
+define("L_LANG_NL", "холандски");
+define("L_LANG_RO", "румънски");
+define("L_LANG_SK", "словашки");
+define("L_LANG_SRC", "сръбски - кирилица");
+define("L_LANG_SRL", "сръбски - латиница");
+define("L_LANG_SV", "шведски");
+define("L_LANG_TR", "турски");
+define("L_LANG_UR", "урду");
+define("L_LANG_VI", "виетнамски");
 
 //Skins preview page
 define("L_SKINS_TITLE", "Преглед на обвивките");

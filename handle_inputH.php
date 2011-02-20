@@ -309,10 +309,10 @@ $botcontrol ="botfb/$R.txt";
 				if (($i != 1 && $i != 4) || $Regs[$i] == "") continue;
 				$part = $Regs[$i];
 				$part = htmlentities($part);
-				$part = str_replace("&lt;", "<", $part);
-				$part = str_replace("&gt;", ">", $part);
 				$part = str_replace("&amp;lt;", "&lt;", $part);
 				$part = str_replace("&amp;gt;", "&gt;", $part);
+				$part = str_replace("&lt;", "<", $part);
+				$part = str_replace("&gt;", ">", $part);
 				$part = str_replace("&quot;","\"", $part);
 				$part = ereg_replace("&amp;(#[[:digit:]]{2,5};)", "&\\1", $part);
 				$Regs[$i] = $part;
@@ -528,23 +528,26 @@ if (typeof(window.parent.frames['input']) != 'undefined'
 		elements['O'].value = "<?php echo($O); ?>";
 		elements['ST'].value = "<?php echo($ST); ?>";
 		elements['NT'].value = "<?php echo($NT); ?>";
-		elements['Ign'].value = "<?php echo(isset($Ign) ? htmlspecialchars(stripslashes($Ign)) : ""); ?>";
-		elements['M0'].value = "<?php echo(isset($M1) ? htmlspecialchars(stripslashes($M1)) : (isset($M) ?  htmlspecialchars(stripslashes($M)) : "")); ?>";
+		elements['Ign'].value = "<?php echo(isset($Ign) ? stripslashes($Ign) : ""); ?>";
+		elements['M0'].value = "<?php echo(isset($M1) ? stripslashes($M1) : (isset($M) ? stripslashes($M) : "")); ?>";
 
 		// Get the value to put in the message box : previous M0 field value for /! command,
 		// previous entry if it was an erroneous command, else nothing;
 		<?php
+		preg_match("/^[\w?(\Q".REG_CHARS_ALLOWED."\E)?\w]*\>/",$M,$add);
 		$M0 = stripslashes($M0);
 		$M0 = str_replace("&#39;", "'", $M0);
-		$ValM = $IsM ? $M0 : "";
+		$ValM = $IsM ? $M0 : (strstr($add[0],">") ? $add[0]." " : "");
 		if (isset($Error) && !($IsCommand)) $ValM = $M1;
+//		unset($M0);
 		?>
-		elements['M'].value = "<?php echo(htmlspecialchars(stripslashes($ValM))); ?>";
+		elements['M'].value = "<?php echo(stripslashes($ValM)); ?>";
 		elements['C'].value = "<?php echo($C); ?>";
 		elements['MsgTo'].value = "";
 		elements['sent'].value = "0";
 
 		if (document.all) elements['sendForm'].disabled = false;
+		elements['M'].focus();
 	};
 
 	<?php

@@ -555,47 +555,47 @@ define("L_EXTRA_PRIV2", "Nya PM´s");
 define("FIRST_DAY", "1");
 
 // Months Long Names
-define("L_JAN", "Januari");
-define("L_FEB", "Februari");
-define("L_MAR", "Mars");
-define("L_APR", "April");
-define("L_MAY", "Maj");
-define("L_JUN", "Juni");
-define("L_JUL", "Juli");
-define("L_AUG", "Augusti");
-define("L_SEP", "September");
-define("L_OCT", "Oktober");
-define("L_NOV", "November");
-define("L_DEC", "December");
+define("L_JAN", "januari");
+define("L_FEB", "februari");
+define("L_MAR", "mars");
+define("L_APR", "april");
+define("L_MAY", "maj");
+define("L_JUN", "juni");
+define("L_JUL", "juli");
+define("L_AUG", "augusti");
+define("L_SEP", "september");
+define("L_OCT", "oktober");
+define("L_NOV", "november");
+define("L_DEC", "december");
 // Months Short Names
-define("L_S_JAN", "Jan");
-define("L_S_FEB", "Feb");
-define("L_S_MAR", "Mar");
-define("L_S_APR", "Apr");
-define("L_S_MAY", "Maj");
-define("L_S_JUN", "Jun");
-define("L_S_JUL", "Jul");
-define("L_S_AUG", "Aug");
-define("L_S_SEP", "Sep");
-define("L_S_OCT", "Okt");
-define("L_S_NOV", "Nov");
-define("L_S_DEC", "Dec");
+define("L_S_JAN", "jan");
+define("L_S_FEB", "feb");
+define("L_S_MAR", "mar");
+define("L_S_APR", "apr");
+define("L_S_MAY", "maj");
+define("L_S_JUN", "jun");
+define("L_S_JUL", "jul");
+define("L_S_AUG", "aug");
+define("L_S_SEP", "sep");
+define("L_S_OCT", "okt");
+define("L_S_NOV", "nov");
+define("L_S_DEC", "dec");
 // Week days Long Names
-define("L_MON", "Måndag");
-define("L_TUE", "Tisdag");
-define("L_WED", "Onsdag");
-define("L_THU", "Torsdag");
-define("L_FRI", "Fredag");
-define("L_SAT", "Lördag");
-define("L_SUN", "Söndag");
+define("L_MON", "måndag");
+define("L_TUE", "tisdag");
+define("L_WED", "onsdag");
+define("L_THU", "torsdag");
+define("L_FRI", "fredag");
+define("L_SAT", "lördag");
+define("L_SUN", "söndag");
 // Week days Short Names
-define("L_S_MON", "Må");
-define("L_S_TUE", "Ti");
-define("L_S_WED", "On");
-define("L_S_THU", "To");
-define("L_S_FRI", "Fr");
-define("L_S_SAT", "Lö");
-define("L_S_SUN", "Sö");
+define("L_S_MON", "må");
+define("L_S_TUE", "ti");
+define("L_S_WED", "on");
+define("L_S_THU", "to");
+define("L_S_FRI", "fr");
+define("L_S_SAT", "lö");
+define("L_S_SUN", "sö");
 
 // Localized date format - read the parameters here: http://www.php.net/manual/en/function.strftime.php
 if (stristr(PHP_OS,'win')) {
@@ -620,36 +620,36 @@ define("NO_USER","Ingen är ".LOGIN_LINK."chatting</A> just nu.");
 define("L_PRIV_REPLY_LOGIN", "Logga in i chatten om du vill ".LOGIN_LINK."svara på meddelande</A> se/läsa något av de Nya meddelande ovan");
 
 // Language names
-define("L_LANG_AR", "Argentinska Spanska");
-define("L_LANG_BG", "Bulgarien - Kyrilliska");
-define("L_LANG_BR", "Brasilianska Portugisiska");
-define("L_LANG_CZ", "Tjecken");
-define("L_LANG_DA", "Danska");
-define("L_LANG_DE", "Tyska");
-define("L_LANG_EN", "Engelska"); // for admin panel only
-define("L_LANG_ENUK", "Engelska UK"); // for UK formats and flags
-define("L_LANG_ENUS", "Amrikanska US"); // for US formats and flags
-define("L_LANG_ES", "Spanska");
-define("L_LANG_FA", "Persiska");
-define("L_LANG_FR", "Franska");
-define("L_LANG_GR", "Grekiska");
-define("L_LANG_HE", "Hebreiska");
-define("L_LANG_HI", "Hindi");
-define("L_LANG_HU", "Ungerska");
-define("L_LANG_ID", "Indonesiska");
-define("L_LANG_IT", "Italienska");
-define("L_LANG_JA", "Japanska");
-define("L_LANG_KA", "Georgiska");
-define("L_LANG_NE", "Nepalesiska");
-define("L_LANG_NL", "Holländska");
-define("L_LANG_RO", "Rumänska");
-define("L_LANG_SK", "Slovakien");
-define("L_LANG_SRC", "Serbiska - Kyrilliska");
-define("L_LANG_SRL", "Serbiska - Latin");
-define("L_LANG_SV", "Svenska");
-define("L_LANG_TR", "Turkiska");
-define("L_LANG_UR", "Urdu");
-define("L_LANG_VI", "Vietnamesiska");
+define("L_LANG_AR", "argentinska spanska");
+define("L_LANG_BG", "bulgarien - kyrilliska");
+define("L_LANG_BR", "brasilianska portugisiska");
+define("L_LANG_CZ", "tjecken");
+define("L_LANG_DA", "danska");
+define("L_LANG_DE", "tyska");
+define("L_LANG_EN", "engelska"); // for admin panel only
+define("L_LANG_ENUK", "engelska UK"); // for UK formats and flags
+define("L_LANG_ENUS", "amrikanska US"); // for US formats and flags
+define("L_LANG_ES", "spanska");
+define("L_LANG_FA", "persiska");
+define("L_LANG_FR", "franska");
+define("L_LANG_GR", "grekiska");
+define("L_LANG_HE", "hebreiska");
+define("L_LANG_HI", "hindi");
+define("L_LANG_HU", "ungerska");
+define("L_LANG_ID", "indonesiska");
+define("L_LANG_IT", "italienska");
+define("L_LANG_JA", "japanska");
+define("L_LANG_KA", "georgiska");
+define("L_LANG_NE", "nepalesiska");
+define("L_LANG_NL", "holländska");
+define("L_LANG_RO", "rumänska");
+define("L_LANG_SK", "slovakien");
+define("L_LANG_SRC", "serbiska - kyrilliska");
+define("L_LANG_SRL", "serbiska - latin");
+define("L_LANG_SV", "svenska");
+define("L_LANG_TR", "turkiska");
+define("L_LANG_UR", "urdu");
+define("L_LANG_VI", "vietnamesiska");
 
 // Skins preview page
 define("L_SKINS_TITLE", "Förhandsgranska färgkombinationer");

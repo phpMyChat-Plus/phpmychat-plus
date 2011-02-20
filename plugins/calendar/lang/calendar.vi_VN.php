@@ -1,7 +1,7 @@
 <?php
 # vi_VN translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 2.30
+# Version: 3.2
 # Language: Vietnamese
 # Translator: Marshall <hellomarshal_lookatme@yahoo.com.vn>
 # Last file update: 01.05.2010
@@ -34,8 +34,8 @@ define("L_JUL", "Tháng Bảy");
 define("L_AUG", "Tháng Tám");
 define("L_SEP", "Tháng Chín");
 define("L_OCT", "Tháng Mười");
-define("L_NOV", "Tháng Mười Một");
-define("L_DEC", "Tháng Mười Hai");
+define("L_NOV", "Tháng Mười một");
+define("L_DEC", "Tháng Chạp"); //Tháng Mười hai
 // Months Short Names
 define("L_S_JAN", "Tháng 1");
 define("L_S_FEB", "Tháng 2");
@@ -72,7 +72,7 @@ if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "vi_VN");
 
 // Set the VN specific date/time format
 if (stristr(PHP_OS,"win")) {
-setlocale(LC_ALL, "viet nam.UTF-8", "viet nam");
+setlocale(LC_ALL, "vietnamese", "vietnamese.UTF-8", "viet nam.UTF-8", "viet nam");
 } else {
 setlocale(LC_ALL, "vi_VN.UTF-8", "vnd_vnd.UTF-8", "vie_vie.UTF-8");
 }

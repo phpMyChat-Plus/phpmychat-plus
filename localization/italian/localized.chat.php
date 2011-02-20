@@ -622,34 +622,35 @@ define("NO_USER","Nessuno sta ".LOGIN_LINK."chattando</A> in questo momento.");
 define("L_PRIV_REPLY_LOGIN", "Login in chat se vorresti ".LOGIN_LINK."rispondere ad un messaggio</A> di qualche Nuovo PMs di seguito elencati");
 
 // Language names
-define("L_LANG_AR", "Spagnolo Argentino");
-define("L_LANG_BG", "Bulgaro - Cyrillic");
-define("L_LANG_BR", "Brasiliano Portoghese");
-define("L_LANG_CZ", "Ceco");
-define("L_LANG_DA", "Danese");
-define("L_LANG_DE", "Tedesco");
-define("L_LANG_EN", "Inglese"); // for admin panel only
-define("L_LANG_ENUK", "Inglese UK"); // for UK formats and flags
-define("L_LANG_ENUS", "Inglese US"); // for US formats and flags
-define("L_LANG_ES", "Spagnolo");
-define("L_LANG_FA", "Persiano (Farsi)");
-define("L_LANG_FR", "Frencese");
-define("L_LANG_GR", "Greco");
-define("L_LANG_HI", "Indiano");
-define("L_LANG_HU", "Ungherese");
-define("L_LANG_IT", "Italiano");
-define("L_LANG_JA", "Giapponese (Kanji)");
-define("L_LANG_KA", "Georgiano");
-define("L_LANG_NE", "Nepalese");
-define("L_LANG_NL", "Olandese");
-define("L_LANG_RO", "Rumeno");
-define("L_LANG_SK", "Slovacco");
-define("L_LANG_SRC", "Serbo - Cyrillic");
-define("L_LANG_SRL", "Serbo - Latin");
-define("L_LANG_SV", "Svedese");
-define("L_LANG_TR", "Turco");
-define("L_LANG_UR", "Pakistano Urdu");
-define("L_LANG_VI", "Vietnamita");
+define("L_LANG_AR", "spagnolo argentino");
+define("L_LANG_BG", "bulgaro - cyrillic");
+define("L_LANG_BR", "brasiliano portoghese");
+define("L_LANG_CZ", "ceco");
+define("L_LANG_DA", "danese");
+define("L_LANG_DE", "tedesco");
+define("L_LANG_EN", "inglese"); // for admin panel only
+define("L_LANG_ENUK", "inglese UK"); // for UK formats and flags
+define("L_LANG_ENUS", "inglese US"); // for US formats and flags
+define("L_LANG_ES", "spagnolo");
+define("L_LANG_FA", "persiano (farsi)");
+define("L_LANG_FR", "frencese");
+define("L_LANG_GR", "greco");
+define("L_LANG_HI", "indiano");
+define("L_LANG_HU", "ungherese");
+define("L_LANG_ID", "indonesiano");
+define("L_LANG_IT", "italiano");
+define("L_LANG_JA", "giapponese (kanji)");
+define("L_LANG_KA", "georgiano");
+define("L_LANG_NE", "nepalese");
+define("L_LANG_NL", "olandese");
+define("L_LANG_RO", "rumeno");
+define("L_LANG_SK", "slovacco");
+define("L_LANG_SRC", "serbo - cyrillic");
+define("L_LANG_SRL", "serbo - latin");
+define("L_LANG_SV", "svedese");
+define("L_LANG_TR", "turco");
+define("L_LANG_UR", "pakistano urdu");
+define("L_LANG_VI", "vietnamita");
 
 // Skins preview page
 define("L_SKINS_TITLE", "Anteprima aspetto");

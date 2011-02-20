@@ -24,47 +24,47 @@ define("L_NOT_ALLOWED", "Este día no puede ser seleccionado");
 define("FIRST_DAY", "0"); // 1 for Monday, 0 for Sunday
 
 // Months Long Names
-define("L_JAN", "Enero");
-define("L_FEB", "Febrero");
-define("L_MAR", "Marzo");
-define("L_APR", "Abril");
-define("L_MAY", "Mayo");
-define("L_JUN", "Junio");
-define("L_JUL", "Julio");
-define("L_AUG", "Agosto");
-define("L_SEP", "Septiembre");
-define("L_OCT", "Octubre");
-define("L_NOV", "Noviembre");
-define("L_DEC", "Diciembre");
+define("L_JAN", "enero");
+define("L_FEB", "febrero");
+define("L_MAR", "marzo");
+define("L_APR", "abril");
+define("L_MAY", "mayo");
+define("L_JUN", "junio");
+define("L_JUL", "julio");
+define("L_AUG", "agosto");
+define("L_SEP", "septiembre");
+define("L_OCT", "octubre");
+define("L_NOV", "noviembre");
+define("L_DEC", "diciembre");
 // Months Short Names
-define("L_S_JAN", "Ene");
-define("L_S_FEB", "Feb");
-define("L_S_MAR", "Mar");
-define("L_S_APR", "Abr");
-define("L_S_MAY", "May");
-define("L_S_JUN", "Jun");
-define("L_S_JUL", "Jul");
-define("L_S_AUG", "Ago");
-define("L_S_SEP", "Sep");
-define("L_S_OCT", "Oct");
-define("L_S_NOV", "Nov");
-define("L_S_DEC", "Dic");
+define("L_S_JAN", "ene");
+define("L_S_FEB", "feb");
+define("L_S_MAR", "mar");
+define("L_S_APR", "abr");
+define("L_S_MAY", "may");
+define("L_S_JUN", "jun");
+define("L_S_JUL", "jul");
+define("L_S_AUG", "ago");
+define("L_S_SEP", "sep");
+define("L_S_OCT", "oct");
+define("L_S_NOV", "nov");
+define("L_S_DEC", "dic");
 // Week days Long Names
-define("L_MON", "Lunes");
-define("L_TUE", "Martes");
-define("L_WED", "Miércoles");
-define("L_THU", "Jueves");
-define("L_FRI", "Viernes");
-define("L_SAT", "Sábado");
-define("L_SUN", "Domingo");
+define("L_MON", "lunes");
+define("L_TUE", "martes");
+define("L_WED", "miércoles");
+define("L_THU", "jueves");
+define("L_FRI", "viernes");
+define("L_SAT", "sábado");
+define("L_SUN", "domingo");
 // Week days Short Names
-define("L_S_MON", "Lun");
-define("L_S_TUE", "Mar");
-define("L_S_WED", "Mié");
-define("L_S_THU", "Jue");
-define("L_S_FRI", "Vie");
-define("L_S_SAT", "Sáb");
-define("L_S_SUN", "Dom");
+define("L_S_MON", "lu");
+define("L_S_TUE", "ma");
+define("L_S_WED", "mi");
+define("L_S_THU", "ju");
+define("L_S_FRI", "vi");
+define("L_S_SAT", "sá");
+define("L_S_SUN", "do");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1252");

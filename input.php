@@ -314,10 +314,10 @@ $botcontrol ="botfb/$R.txt";
 				if (($i != 1 && $i != 4) || $Regs[$i] == "") continue;
 				$part = $Regs[$i];
 				$part = htmlentities($part);
-				$part = str_replace("&lt;", "<", $part);
-				$part = str_replace("&gt;", ">", $part);
 				$part = str_replace("&amp;lt;", "&lt;", $part);
 				$part = str_replace("&amp;gt;", "&gt;", $part);
+				$part = str_replace("&lt;", "<", $part);
+				$part = str_replace("&gt;", ">", $part);
 				$part = str_replace("&quot;","\"", $part);
 				$part = ereg_replace("&amp;(#[[:digit:]]{2,5};)", "&\\1", $part);
 				$Regs[$i] = $part;
@@ -563,22 +563,24 @@ if (!isset($FontName)) $FontName = "";
 		<INPUT TYPE="hidden" NAME="PWD_Hash" VALUE="<?php echo(isset($PWD_Hash) ? $PWD_Hash : ''); ?>">
 
 		<!-- Ignored users list -->
-		<INPUT TYPE="hidden" NAME="Ign" VALUE="<?php echo(isset($Ign) ? htmlspecialchars(stripslashes($Ign)) : ""); ?>">
+		<INPUT TYPE="hidden" NAME="Ign" VALUE="<?php echo(isset($Ign) ? stripslashes($Ign) : ""); ?>">
 
 		<!-- Last sent message or command (will be used for the '/!' command) -->
-		<INPUT TYPE="hidden" NAME="M0" VALUE="<?php echo(isset($M1) ? htmlspecialchars(stripslashes($M1)) : (isset($M) ?  htmlspecialchars(stripslashes($M)) : "")); ?>">
+		<INPUT TYPE="hidden" NAME="M0" VALUE="<?php echo(isset($M1) ? stripslashes($M1) : (isset($M) ? stripslashes($M) : "")); ?>">
 
 		<A HREF="help_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>" onClick="window.parent.help_popup(); return false" TARGET="_blank" onmouseover="document.images['helpImg'].src = window.parent.imgHelpOn.src" onmouseout="document.images['helpImg'].src = window.parent.imgHelpOff.src" title="<?php echo(L_HLP); ?>"><IMG NAME="helpImg" SRC="localization/<?php echo($L); ?>/images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="<?php echo(L_HLP); ?>" onMouseOver="window.status='<?php echo(L_HLP); ?>.'; return true" onClick="document.forms['MsgForm'].elements['M'].focus();"></A>&nbsp;
 
 		<?php
 		// Get the value to put in the message box : preceding M0 field value for /! command,
 		// preceding entry if it was an erroneous command, else nothing;
+		preg_match("/^[\w?(\Q".REG_CHARS_ALLOWED."\E)?\w]*\>/",$M,$add);
 		$M0 = stripslashes($M0);
 		$M0 = str_replace("&#39;", "'", $M0);
-		$ValM = $IsM ? $M0 : "";
+		$ValM = $IsM ? $M0 : (strstr($add[0],">") ? $add[0]." " : "");
 		if (isset($Error) && !($IsCommand)) $ValM = $M1;
+//		unset($M0);
 		?>
-		<INPUT TYPE="text" NAME="M" SIZE="50" MAXLENGTH="299" VALUE="<?php echo(htmlspecialchars(stripslashes($ValM))); ?>"<?php echo((isset($C) && $C != "") ? " style=\"color: $C;\"" : ""); ?>>
+		<INPUT TYPE="text" NAME="M" SIZE="50" MAXLENGTH="299" VALUE="<?php echo(stripslashes($ValM)); ?>"<?php echo((isset($C) && $C != "") ? " style=\"color: $C;\"" : ""); ?>>
 
 		<!-- Addressee that will be filled when the user click on a nick at the users frame -->
 		<INPUT TYPE="hidden" NAME="MsgTo" VALUE="">

@@ -208,7 +208,7 @@ define("L_HELP_TIT_2", "Văn bản chuẩn những thông báo");
 define("L_HELP_FMT_1", "Những thông báo gạch nghiên hay gạch ngang &lt;B&gt; &lt;/B&gt;, &lt;I&gt; &lt;/I&gt; or &lt;U&gt; &lt;/U&gt; tags.<br />Ví dụ &lt;B&gt;văn bản này&lt;/B&gt; Sẽ sản xúât <B>văn bản này</B>.");
 define("L_HELP_FMT_2", "Để tạo một link liên kết (for e-mail or URL) Trong thông báo của các bạn, đơn giản đánh máy tương ứng không trùng hợp cái này. Link liên kết sẽ được tạo ra tự động");
 define("L_HELP_TIT_3", "Những lệnh");
-define("L_HELP_NOTE", "Tất cả những lệnh sử dụng phải được sử dụng bằng tiếng anh!");
+define("L_HELP_NOTE", "Tất cả những lệnh sử dụng phải được sử dụng bằng tiếng Anh!");
 define("L_HELP_MSG", "tin nhắn");
 define("L_HELP_MSGS", "tin nhắn");
 define("L_HELP_ROOM", "phòng");
@@ -599,7 +599,7 @@ define("L_S_SUN", "CN");
 
 // Localized date format - read the parameters here: http://www.php.net/manual/en/function.strftime.php
 if (stristr(PHP_OS,'win')) {
-setlocale(LC_ALL, "viet nam.UTF-8", "viet nam");
+setlocale(LC_ALL, "vietnamese.UTF-8", "viet nam.UTF-8", "viet nam");
 } else {
 setlocale(LC_ALL, "vi_VN.UTF-8", "vnd_vnd.UTF-8", "vie_vie.UTF-8");
 }
@@ -644,12 +644,12 @@ define("L_LANG_NE", "Người Nepal");
 define("L_LANG_NL", "Hà lan");
 define("L_LANG_RO", "Roma");
 define("L_LANG_SK", "Ngôn ngữ Slovak");
-define("L_LANG_SRL", "Tiếng Nga - Tiếng La Tinh");
+define("L_LANG_SRL", "Tiếng Nga - Tiếng Latinh");
 define("L_LANG_SRC", "Tiếng Nga");
 define("L_LANG_SV", "Thụy Điển");
 define("L_LANG_TR", "Thổ nhĩ kỳ");
 define("L_LANG_UR", "Pakistan Urdu");
-define("L_LANG_VI", "Việt nam");
+define("L_LANG_VI", "Tiếng Việt");
 
 // Skins preview page
 define("L_SKINS_TITLE", "Mẫu xem trước");

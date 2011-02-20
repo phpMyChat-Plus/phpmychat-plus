@@ -262,7 +262,7 @@ foreach($yrs as $yr)
 				$day = opendir($d); #open directory
 				while (false !== ($dy = readdir($day)))
 				{
-					if (!eregi("\.html",$dy) && !eregi("error",$dy) && $dy!='.' && $dy!='..')
+					if (!eregi("\.html",$dy) && !eregi("_vti_conf",$dy) && !eregi("error",$dy) && $dy!='.' && $dy!='..')
 					{
 						$dayarray[]=$dy;
 			 		}
@@ -425,7 +425,7 @@ foreach($yrsu as $yru)
 				$dayu = opendir($du); #open directory
 				while (false !== ($dyu = readdir($dayu)))
 				{
-					if (!eregi("\.html",$dyu) && !eregi("error",$dyu) && $dyu!='.' && $dyu!='..')
+					if (!eregi("\.html",$dyu) && !eregi("_vti_conf",$dyu) && !eregi("error",$dyu) && $dyu!='.' && $dyu!='..')
 					{
 						$dayarrayu[]=$dyu;
 			 		}

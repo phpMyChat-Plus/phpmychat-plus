@@ -562,47 +562,47 @@ define("L_EXTRA_PRIV2", "Nouveaux messages"); // keep it short
 define("FIRST_DAY", "1");
 
 // Months Long Names
-define("L_JAN", "Janvier");
-define("L_FEB", "Février");
-define("L_MAR", "Mars");
-define("L_APR", "Avril");
-define("L_MAY", "Mai");
-define("L_JUN", "Juin");
-define("L_JUL", "Juillet");
-define("L_AUG", "Août");
-define("L_SEP", "Septembre");
-define("L_OCT", "Octobre");
-define("L_NOV", "Novembre");
-define("L_DEC", "Décembre");
+define("L_JAN", "janvier");
+define("L_FEB", "février");
+define("L_MAR", "mars");
+define("L_APR", "avril");
+define("L_MAY", "mai");
+define("L_JUN", "juin");
+define("L_JUL", "juillet");
+define("L_AUG", "août");
+define("L_SEP", "septembre");
+define("L_OCT", "octobre");
+define("L_NOV", "novembre");
+define("L_DEC", "décembre");
 // Months Short Names
-define("L_S_JAN", "Janv.");
-define("L_S_FEB", "Févr.");
-define("L_S_MAR", "Mars");
-define("L_S_APR", "Avr.");
-define("L_S_MAY", "Mai");
-define("L_S_JUN", "Juin");
-define("L_S_JUL", "Juil.");
-define("L_S_AUG", "Août");
-define("L_S_SEP", "Sept.");
-define("L_S_OCT", "Oct.");
-define("L_S_NOV", "Nov.");
-define("L_S_DEC", "Déc.");
+define("L_S_JAN", "janv.");
+define("L_S_FEB", "févr.");
+define("L_S_MAR", "mars");
+define("L_S_APR", "avr.");
+define("L_S_MAY", "mai");
+define("L_S_JUN", "juin");
+define("L_S_JUL", "juil.");
+define("L_S_AUG", "août");
+define("L_S_SEP", "sept.");
+define("L_S_OCT", "oct.");
+define("L_S_NOV", "nov.");
+define("L_S_DEC", "déc.");
 // Week days Long Names
-define("L_MON", "Lundi");
-define("L_TUE", "Mardi");
-define("L_WED", "Mercredi");
-define("L_THU", "Jeudi");
-define("L_FRI", "Vendredi");
-define("L_SAT", "Samedi");
-define("L_SUN", "Dimanche");
+define("L_MON", "lundi");
+define("L_TUE", "mardi");
+define("L_WED", "mercredi");
+define("L_THU", "jeudi");
+define("L_FRI", "vendredi");
+define("L_SAT", "samedi");
+define("L_SUN", "dimanche");
 // Week days Short Names
-define("L_S_MON", "Lun.");
-define("L_S_TUE", "Mar.");
-define("L_S_WED", "Mer.");
-define("L_S_THU", "Jeu.");
-define("L_S_FRI", "Ven.");
-define("L_S_SAT", "Sam.");
-define("L_S_SUN", "Dim.");
+define("L_S_MON", "lun.");
+define("L_S_TUE", "mar.");
+define("L_S_WED", "mer.");
+define("L_S_THU", "jeu.");
+define("L_S_FRI", "ven.");
+define("L_S_SAT", "sam.");
+define("L_S_SUN", "dim.");
 
 // Localized date format
 if (stristr(PHP_OS,'win')) {
@@ -626,36 +626,36 @@ define("USERS_LOGIN", "1 utilisateur est sur le ".LOGIN_LINK."chat</A> actuellem
 define("NO_USER", "Personne sur le ".LOGIN_LINK."chat</A> actuellement.");
 define("L_PRIV_REPLY_LOGIN", "Connectez-vous au chat si vous voulez ".LOGIN_LINK."poster une réponse</A> à l’un des nouveaux messages privés ci-dessous");
 // Language names
-define("L_LANG_AR", "Espagnol Argentin");
-define("L_LANG_BG", "Bulgare - Cyrillique");
-define("L_LANG_BR", "Portugais Brésilien");
-define("L_LANG_CZ", "Tchèque");
-define("L_LANG_DA", "Danois");
-define("L_LANG_EN", "Anglais"); // for admin panel only
-define("L_LANG_ENUK", "Anglais UK"); // for UK formats and flags
-define("L_LANG_ENUS", "Anglais US"); // for US formats and flags
-define("L_LANG_ES", "Espagnol");
-define("L_LANG_FR", "Français");
-define("L_LANG_DE", "Allemand");
-define("L_LANG_FA", "Perse (Farsi)");
-define("L_LANG_GR", "Grec");
-define("L_LANG_HE", "Hébreu");
-define("L_LANG_HI", "Hindi");
-define("L_LANG_HU", "Hongrois");
-define("L_LANG_ID", "Indonésien");
-define("L_LANG_IT", "Italien");
-define("L_LANG_JA", "Japonais (Kanji)");
-define("L_LANG_KA", "Géorgien");
-define("L_LANG_NE", "Népalais");
-define("L_LANG_NL", "Néerlandais");
-define("L_LANG_RO", "Roumain");
-define("L_LANG_SRL", "Serbe - Latin");
-define("L_LANG_SRC", "Serbe - Cyrillique");
-define("L_LANG_SK", "Slovaque");
-define("L_LANG_SV", "Suédois");
-define("L_LANG_TR", "Turque");
-define("L_LANG_UR", "Ourdou"); //spoken in Pakistan
-define("L_LANG_VI", "Vietnamien");
+define("L_LANG_AR", "espagnol argentin");
+define("L_LANG_BG", "bulgare - cyrillique");
+define("L_LANG_BR", "portugais brésilien");
+define("L_LANG_CZ", "tchèque");
+define("L_LANG_DA", "danois");
+define("L_LANG_DE", "allemand");
+define("L_LANG_EN", "anglais"); // for admin panel only
+define("L_LANG_ENUK", "anglais UK"); // for UK formats and flags
+define("L_LANG_ENUS", "anglais US"); // for US formats and flags
+define("L_LANG_ES", "espagnol");
+define("L_LANG_FR", "français");
+define("L_LANG_FA", "perse (farsi)");
+define("L_LANG_GR", "grec");
+define("L_LANG_HE", "hébreu");
+define("L_LANG_HI", "hindi");
+define("L_LANG_HU", "hongrois");
+define("L_LANG_ID", "indonésien");
+define("L_LANG_IT", "italien");
+define("L_LANG_JA", "japonais (kanji)");
+define("L_LANG_KA", "géorgien");
+define("L_LANG_NE", "népalais");
+define("L_LANG_NL", "néerlandais");
+define("L_LANG_RO", "roumain");
+define("L_LANG_SRL", "serbe - latin");
+define("L_LANG_SRC", "serbe - cyrillique");
+define("L_LANG_SK", "slovaque");
+define("L_LANG_SV", "suédois");
+define("L_LANG_TR", "turque");
+define("L_LANG_UR", "ourdou"); //spoken in Pakistan
+define("L_LANG_VI", "vietnamien");
 
 // Ghost mode by Ciprian
 define("L_GHOST", "Fantôme");

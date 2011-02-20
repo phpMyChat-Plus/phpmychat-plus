@@ -1,5 +1,5 @@
 <?php
-// File : english/localized.chat.php - plus version (20.03.2010 - rev.44)
+// File : english/localized.chat.php - plus version (02.01.2011 - rev.45)
 // Original file by Nicolas Hoizey <nhoizey@phpheaven.net>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
@@ -666,12 +666,15 @@ define("L_LANG_JA", "Japanese (Kanji)");
 define("L_LANG_KA", "Georgian");
 define("L_LANG_NE", "Nepali");
 define("L_LANG_NL", "Dutch");
+define("L_LANG_PL", "Polish");
 define("L_LANG_RO", "Romanian");
+define("L_LANG_RU", "Russian");
 define("L_LANG_SK", "Slovak");
 define("L_LANG_SRC", "Serbian - Cyrillic");
 define("L_LANG_SRL", "Serbian - Latin");
 define("L_LANG_SV", "Swedish");
 define("L_LANG_TR", "Turkish");
+define("L_LANG_UK", "Ukrainian");
 define("L_LANG_UR", "Urdu");
 define("L_LANG_VI", "Vietnamese");
 

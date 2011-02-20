@@ -1,5 +1,5 @@
 <?php
-// File : romanian/localized.chat.php - plus version (20.03.2010 - rev.44)
+// File : romanian/localized.chat.php - plus version (02.01.2011 - rev.45)
 // Original translation started by Radu Swider <swidera@satline.ro>, first updated by Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro>
 // Corrected, finalized, diacritics addition and updated to Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -562,47 +562,47 @@ define("L_EXTRA_PRIV2", "PM-uri Noi");
 define("FIRST_DAY", "1");
 
 // Months Long Names
-define("L_JAN", "Ianuarie");
-define("L_FEB", "Februarie");
-define("L_MAR", "Martie");
-define("L_APR", "Aprilie");
-define("L_MAY", "Mai");
-define("L_JUN", "Iunie");
-define("L_JUL", "Iulie");
-define("L_AUG", "August");
-define("L_SEP", "Septembrie");
-define("L_OCT", "Octombrie");
-define("L_NOV", "Noiembrie");
-define("L_DEC", "Decembrie");
+define("L_JAN", "ianuarie");
+define("L_FEB", "februarie");
+define("L_MAR", "martie");
+define("L_APR", "aprilie");
+define("L_MAY", "mai");
+define("L_JUN", "iunie");
+define("L_JUL", "iulie");
+define("L_AUG", "august");
+define("L_SEP", "septembrie");
+define("L_OCT", "octombrie");
+define("L_NOV", "noiembrie");
+define("L_DEC", "decembrie");
 // Months Short Names
-define("L_S_JAN", "Ian");
-define("L_S_FEB", "Feb");
-define("L_S_MAR", "Mar");
-define("L_S_APR", "Apr");
-define("L_S_MAY", "Mai");
-define("L_S_JUN", "Iun");
-define("L_S_JUL", "Iul");
-define("L_S_AUG", "Aug");
-define("L_S_SEP", "Sept");
-define("L_S_OCT", "Oct");
-define("L_S_NOV", "Nov");
-define("L_S_DEC", "Dec");
+define("L_S_JAN", "ian");
+define("L_S_FEB", "feb");
+define("L_S_MAR", "mar");
+define("L_S_APR", "apr");
+define("L_S_MAY", "mai");
+define("L_S_JUN", "iun");
+define("L_S_JUL", "iul");
+define("L_S_AUG", "aug");
+define("L_S_SEP", "sept");
+define("L_S_OCT", "oct");
+define("L_S_NOV", "nov");
+define("L_S_DEC", "dec");
 // Week days Long Names
-define("L_MON", "Luni");
-define("L_TUE", "Marţi");
-define("L_WED", "Miercuri");
-define("L_THU", "Joi");
-define("L_FRI", "Vineri");
-define("L_SAT", "Sâmbătă");
-define("L_SUN", "Duminică");
+define("L_MON", "luni");
+define("L_TUE", "marţi");
+define("L_WED", "miercuri");
+define("L_THU", "joi");
+define("L_FRI", "vineri");
+define("L_SAT", "sâmbătă");
+define("L_SUN", "duminică");
 // Week days Short Names
-define("L_S_MON", "L");
-define("L_S_TUE", "Ma");
-define("L_S_WED", "Mi");
-define("L_S_THU", "J");
-define("L_S_FRI", "V");
-define("L_S_SAT", "S");
-define("L_S_SUN", "D");
+define("L_S_MON", "l");
+define("L_S_TUE", "ma");
+define("L_S_WED", "mi");
+define("L_S_THU", "j");
+define("L_S_FRI", "v");
+define("L_S_SAT", "s");
+define("L_S_SUN", "d");
 
 // Localized date format - read the parameters here: http://www.php.net/manual/en/function.strftime.php
 if (stristr(PHP_OS,'win')) {
@@ -627,36 +627,40 @@ define("NO_USER","Nimeni nu este ".LOGIN_LINK."pe chat</A>");
 define("L_PRIV_REPLY_LOGIN", "Loghează-te la chat pentru a ".LOGIN_LINK."răspunde</A> oricărui PM necitit de mai sus");
 
 // Language names
-define("L_LANG_AR", "Spaniolă Argentiniană");
-define("L_LANG_BG", "Bulgară - Chirilică");
-define("L_LANG_BR", "Portugheză Braziliană");
-define("L_LANG_CZ", "Cehă");
-define("L_LANG_DA", "Daneză");
-define("L_LANG_DE", "Germană");
-define("L_LANG_EN", "Engleză");
-define("L_LANG_ENUK", "Engleză Britanică");
-define("L_LANG_ENUS", "Engleză Americană");
-define("L_LANG_ES", "Spaniolă");
-define("L_LANG_FA", "Persană (Farsi)");
-define("L_LANG_FR", "Franceză");
-define("L_LANG_GR", "Greacă");
-define("L_LANG_HE", "Ebraică");
-define("L_LANG_HI", "Hindusă");
-define("L_LANG_HU", "Maghiară");
-define("L_LANG_ID", "Indoneziană (Bahasa)");
-define("L_LANG_IT", "Italiană");
-define("L_LANG_JA", "Japoneză");
-define("L_LANG_KA", "Georgiană");
-define("L_LANG_NE", "Nepaleză");
-define("L_LANG_NL", "Olandeză");
-define("L_LANG_RO", "Română");
-define("L_LANG_SK", "Slovacă");
-define("L_LANG_SRC", "Sârbă - Chirilică");
-define("L_LANG_SRL", "Sârbă - Latină");
-define("L_LANG_SV", "Suedeză");
-define("L_LANG_TR", "Turcă");
-define("L_LANG_UR", "Urdu - Pakistaneză");
-define("L_LANG_VI", "Vietnameză");
+define("L_LANG_AR", "spaniolă argentiniană");
+define("L_LANG_BG", "bulgară - chirilică");
+define("L_LANG_BR", "portugheză braziliană");
+define("L_LANG_CZ", "cehă");
+define("L_LANG_DA", "daneză");
+define("L_LANG_DE", "germană");
+define("L_LANG_EN", "engleză");
+define("L_LANG_ENUK", "engleză britanică");
+define("L_LANG_ENUS", "engleză americană");
+define("L_LANG_ES", "spaniolă");
+define("L_LANG_FA", "persană (farsi)");
+define("L_LANG_FR", "franceză");
+define("L_LANG_GR", "greacă");
+define("L_LANG_HE", "ebraică");
+define("L_LANG_HI", "hindusă");
+define("L_LANG_HU", "maghiară");
+define("L_LANG_ID", "indoneziană (bahasa)");
+define("L_LANG_IT", "italiană");
+define("L_LANG_JA", "japoneză (kanji)");
+define("L_LANG_KA", "georgiană");
+define("L_LANG_NE", "nepaleză");
+define("L_LANG_NL", "olandeză");
+define("L_LANG_PL", "poloneză");
+define("L_LANG_RO", "română");
+define("L_LANG_RU", "rusă - chirilică");
+define("L_LANG_SK", "slovacă");
+define("L_LANG_SRC", "sârbă - chirilică");
+define("L_LANG_SRL", "sârbă - latină");
+define("L_LANG_SV", "suedeză");
+define("L_LANG_TR", "turcă");
+define("L_LANG_UK", "ucraineană - chirilică");
+define("L_LANG_UR", "urdu - pakistaneză");
+define("L_LANG_VI", "vietnameză");
+define("L_LANG_YO", "nigeriană (yoruba)");
 
 // Skins preview page
 define("L_SKINS_TITLE", "Previzualizare Stiluri");

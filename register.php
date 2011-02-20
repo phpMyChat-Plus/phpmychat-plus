@@ -23,7 +23,7 @@ if (isset($_POST))
 // Fix a security hole
 if (isset($L) && !is_dir("./localization/".$L)) exit();
 
-$mydate = isset($_REQUEST["date5"]) ? $_REQUEST["date5"] : "";
+$mydate = isset($_REQUEST["date1"]) ? $_REQUEST["date1"] : "";
 require("./config/config.lib.php");
 require("./lib/release.lib.php");
 require("./localization/languages.lib.php");
@@ -256,7 +256,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 		 $emailMessage .= L_REG_31.": ".($LASTNAME ? $LASTNAME : L_NOT_SELECTED).$eol
 		 . "".L_REG_30.": ".($FIRSTNAME ? $FIRSTNAME : L_NOT_SELECTED).$eol;
 	 }
-	 $emailMessage .= "".L_PRO_7.": ".($BIRTHDAY != "" ? $format_birth_day : L_NOT_SELECTED).$eol
+	 $emailMessage .= "".L_PRO_7.": ".($BIRTHDAY != "0000-00-00" && $BIRTHDAY != "" ? $format_birth_day : L_NOT_SELECTED).$eol
      . "".L_REG_33.": ".$shweml.$eol
      . "".L_PRO_8.": ".$shwbday.$eol
      . "".L_PRO_9.": ".$shwage.$eol
@@ -699,34 +699,37 @@ else
 			$i = 0;
 			while(list($key, $name) = each($AvailableLanguages))
 			{
-				if ($name == "argentinian_spanish" && L_LANG_AR != "L_LANG_AR") $FLAG_NAME = L_LANG_AR;
-				elseif ($name == "bulgarian" && L_LANG_BG != "L_LANG_BG") $FLAG_NAME = L_LANG_BG;
-				elseif ($name == "brazilian_portuguese" && L_LANG_BR != "L_LANG_BR") $FLAG_NAME = L_LANG_BR;
-				elseif ($name == "czech" && L_LANG_CZ != "L_LANG_CZ") $FLAG_NAME = L_LANG_CZ;
-				elseif ($name == "danish" && L_LANG_DA != "L_LANG_DA") $FLAG_NAME = L_LANG_DA;
-				elseif ($name == "dutch" && L_LANG_NL != "L_LANG_NL") $FLAG_NAME = L_LANG_NL;
-				elseif ($name == "english" && L_LANG_EN != "L_LANG_EN") $FLAG_NAME = L_LANG_EN;
-				elseif ($name == "french" && L_LANG_FR != "L_LANG_FR") $FLAG_NAME = L_LANG_FR;
-				elseif ($name == "georgian" && L_LANG_KA != "L_LANG_KA") $FLAG_NAME = L_LANG_KA;
-				elseif ($name == "german" && L_LANG_DE != "L_LANG_DE") $FLAG_NAME = L_LANG_DE;
-				elseif ($name == "greek" && L_LANG_GR != "L_LANG_GR") $FLAG_NAME = L_LANG_GR;
-				elseif ($name == "hebrew" && L_LANG_HE != "L_LANG_HE") $FLAG_NAME = L_LANG_HE;
-				elseif ($name == "hindi" && L_LANG_HI != "L_LANG_HI") $FLAG_NAME = L_LANG_HI;
-				elseif ($name == "hungarian" && L_LANG_HU != "L_LANG_HU") $FLAG_NAME = L_LANG_HU;
-				elseif ($name == "indonesian" && L_LANG_ID != "L_LANG_ID") $FLAG_NAME = L_LANG_ID;
-				elseif ($name == "italian" && L_LANG_IT != "L_LANG_IT") $FLAG_NAME = L_LANG_IT;
-				elseif ($name == "japanese" && L_LANG_JA != "L_LANG_JA") $FLAG_NAME = L_LANG_JA;
-				elseif ($name == "nepali" && L_LANG_NE != "L_LANG_NE") $FLAG_NAME = L_LANG_NE;
-				elseif ($name == "persian" && L_LANG_FA != "L_LANG_FA") $FLAG_NAME = L_LANG_FA;
-				elseif ($name == "romanian" && L_LANG_RO != "L_LANG_RO") $FLAG_NAME = L_LANG_RO;
-				elseif ($name == "serbian_latin" && L_LANG_SRL != "L_LANG_SRL") $FLAG_NAME = L_LANG_SRL;
-				elseif ($name == "serbian_cyrillic" && L_LANG_SRC != "L_LANG_SRC") $FLAG_NAME = L_LANG_SRC;
-				elseif ($name == "slovak" && L_LANG_SK != "L_LANG_SK") $FLAG_NAME = L_LANG_SK;
-				elseif ($name == "spanish" && L_LANG_ES != "L_LANG_ES") $FLAG_NAME = L_LANG_ES;
-				elseif ($name == "swedish" && L_LANG_SV != "L_LANG_SV") $FLAG_NAME = L_LANG_SV;
-				elseif ($name == "turkish" && L_LANG_TR != "L_LANG_TR") $FLAG_NAME = L_LANG_TR;
-				elseif ($name == "urdu" && L_LANG_UR != "L_LANG_UR") $FLAG_NAME = L_LANG_UR;
-				elseif ($name == "vietnamese" && L_LANG_VI != "L_LANG_VI") $FLAG_NAME = L_LANG_VI;
+				if ($name == "argentinian_spanish" && L_ORIG_LANG_AR != "L_ORIG_LANG_AR") $FLAG_NAME = L_ORIG_LANG_AR;
+				elseif ($name == "bulgarian" && L_ORIG_LANG_BG != "L_ORIG_LANG_BG") $FLAG_NAME = L_ORIG_LANG_BG;
+				elseif ($name == "brazilian_portuguese" && L_ORIG_LANG_BR != "L_ORIG_LANG_BR") $FLAG_NAME = L_ORIG_LANG_BR;
+				elseif ($name == "czech" && L_ORIG_LANG_CZ != "L_ORIG_LANG_CZ") $FLAG_NAME = L_ORIG_LANG_CZ;
+				elseif ($name == "danish" && L_ORIG_LANG_DA != "L_ORIG_LANG_DA") $FLAG_NAME = L_ORIG_LANG_DA;
+				elseif ($name == "dutch" && L_ORIG_LANG_NL != "L_ORIG_LANG_NL") $FLAG_NAME = L_ORIG_LANG_NL;
+				elseif ($name == "english" && L_ORIG_LANG_EN != "L_ORIG_LANG_EN") $FLAG_NAME = L_ORIG_LANG_EN;
+				elseif ($name == "french" && L_ORIG_LANG_FR != "L_ORIG_LANG_FR") $FLAG_NAME = L_ORIG_LANG_FR;
+				elseif ($name == "georgian" && L_ORIG_LANG_KA != "L_ORIG_LANG_KA") $FLAG_NAME = L_ORIG_LANG_KA;
+				elseif ($name == "german" && L_ORIG_LANG_DE != "L_ORIG_LANG_DE") $FLAG_NAME = L_ORIG_LANG_DE;
+				elseif ($name == "greek" && L_ORIG_LANG_GR != "L_ORIG_LANG_GR") $FLAG_NAME = L_ORIG_LANG_GR;
+				elseif ($name == "hebrew" && L_ORIG_LANG_HE != "L_ORIG_LANG_HE") $FLAG_NAME = L_ORIG_LANG_HE;
+				elseif ($name == "hindi" && L_ORIG_LANG_HI != "L_ORIG_LANG_HI") $FLAG_NAME = L_ORIG_LANG_HI;
+				elseif ($name == "hungarian" && L_ORIG_LANG_HU != "L_ORIG_LANG_HU") $FLAG_NAME = L_ORIG_LANG_HU;
+				elseif ($name == "indonesian" && L_ORIG_LANG_ID != "L_ORIG_LANG_ID") $FLAG_NAME = L_ORIG_LANG_ID;
+				elseif ($name == "italian" && L_ORIG_LANG_IT != "L_ORIG_LANG_IT") $FLAG_NAME = L_ORIG_LANG_IT;
+				elseif ($name == "japanese" && L_ORIG_LANG_JA != "L_ORIG_LANG_JA") $FLAG_NAME = L_ORIG_LANG_JA;
+				elseif ($name == "nepali" && L_ORIG_LANG_NE != "L_ORIG_LANG_NE") $FLAG_NAME = L_ORIG_LANG_NE;
+				elseif ($name == "persian" && L_ORIG_LANG_FA != "L_ORIG_LANG_FA") $FLAG_NAME = L_ORIG_LANG_FA;
+				elseif ($name == "romanian" && L_ORIG_LANG_RO != "L_ORIG_LANG_RO") $FLAG_NAME = L_ORIG_LANG_RO;
+				elseif ($name == "russian" && L_ORIG_LANG_RU != "L_ORIG_LANG_RU") $FLAG_NAME = L_ORIG_LANG_RU;
+				elseif ($name == "serbian_latin" && L_ORIG_LANG_SRL != "L_ORIG_LANG_SRL") $FLAG_NAME = L_ORIG_LANG_SRL;
+				elseif ($name == "serbian_cyrillic" && L_ORIG_LANG_SRC != "L_ORIG_LANG_SRC") $FLAG_NAME = L_ORIG_LANG_SRC;
+				elseif ($name == "slovak" && L_ORIG_LANG_SK != "L_ORIG_LANG_SK") $FLAG_NAME = L_ORIG_LANG_SK;
+				elseif ($name == "spanish" && L_ORIG_LANG_ES != "L_ORIG_LANG_ES") $FLAG_NAME = L_ORIG_LANG_ES;
+				elseif ($name == "swedish" && L_ORIG_LANG_SV != "L_ORIG_LANG_SV") $FLAG_NAME = L_ORIG_LANG_SV;
+				elseif ($name == "turkish" && L_ORIG_LANG_TR != "L_ORIG_LANG_TR") $FLAG_NAME = L_ORIG_LANG_TR;
+				elseif ($name == "ukrainian" && L_ORIG_LANG_UK != "L_ORIG_LANG_UK") $FLAG_NAME = L_ORIG_LANG_UK;
+				elseif ($name == "urdu" && L_ORIG_LANG_UR != "L_ORIG_LANG_UR") $FLAG_NAME = L_ORIG_LANG_UR;
+				elseif ($name == "vietnamese" && L_ORIG_LANG_VI != "L_ORIG_LANG_VI") $FLAG_NAME = L_ORIG_LANG_VI;
+				elseif ($name == "yoruba" && L_ORIG_LANG_YO != "L_ORIG_LANG_YO") $FLAG_NAME = L_ORIG_LANG_YO;
 				else
 				{
 					$FLAG_NAME = str_replace("_"," ",$name);

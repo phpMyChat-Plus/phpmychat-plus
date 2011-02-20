@@ -80,7 +80,7 @@ Be sure to set properties BEFORE loading AIML files. -->
  <property name="chatmasteremail" value='&lt;a href="mailto:ciprianmp@yahoo.com" target="_blank" alt="Send email"&gt;ciprianmp at yahoo dot com&lt;/a&gt;'/>
  <property name="chatname" value="phpMyChat-Plus"/>
  <property name="chatproject" value='&lt;a href="http://sourceforge.net/projects/phpmychat" target="_blank"&gt;http://sourceforge.net/projects/phpmychat&lt;/a&gt;'/>
- <property name="chatdownload" value='&lt;a href="http://sourceforge.net/project/showfiles.php?group_id=19371&amp;package_id=199435" target="_blank"&gt;http://sourceforge.net/project/showfiles.php?group_id=19371&amp;package_id=199435&lt;/a&gt;'/>
+ <property name="chatdownload" value='&lt;a href="http://sourceforge.net/projects/phpmychat/files/phpMyChat_Plus/" target="_blank"&gt;http://sourceforge.net/projects/phpmychat/files/phpMyChat_Plus/&lt;/a&gt;'/>
  <property name="chatdonate" value='&lt;a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&amp;business=ciprianmp%40hotmail%2ecom&amp;item_name=Support%20for%20phpMyChat%20Plus%20development&amp;no_shipping=1&amp;cn=Optional%20Thoughts&amp;tax=0&amp;currency_code=USD&amp;lc=US&amp;bn=PP%2dDonationsBF&amp;charset=UTF%2d8" target="_blank"&gt;phpMyChat-Plus project&lt;/a&gt;'/>
 
 <!-- You may enumerate each file you want the bot to load, or use the "*"

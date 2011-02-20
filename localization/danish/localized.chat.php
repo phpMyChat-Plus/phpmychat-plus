@@ -562,47 +562,47 @@ define("L_EXTRA_PRIV2", "Nye meddelelser");
 define("FIRST_DAY", "1"); // 1 for Monday, 0 for Sunday
 
 // Months Long Names
-define("L_JAN", "Januar");
-define("L_FEB", "Februar");
-define("L_MAR", "Marts");
-define("L_APR", "April");
-define("L_MAY", "Maj");
-define("L_JUN", "Juni");
-define("L_JUL", "Juli");
-define("L_AUG", "August");
-define("L_SEP", "September");
-define("L_OCT", "Oktober");
-define("L_NOV", "November");
-define("L_DEC", "December");
+define("L_JAN", "januar");
+define("L_FEB", "februar");
+define("L_MAR", "marts");
+define("L_APR", "april");
+define("L_MAY", "maj");
+define("L_JUN", "juni");
+define("L_JUL", "juli");
+define("L_AUG", "august");
+define("L_SEP", "september");
+define("L_OCT", "oktober");
+define("L_NOV", "november");
+define("L_DEC", "december");
 // Months Short Names
-define("L_S_JAN", "Jan.");
-define("L_S_FEB", "Feb.");
-define("L_S_MAR", "Mrs.");
-define("L_S_APR", "Apr.");
-define("L_S_MAY", "Maj");
-define("L_S_JUN", "Juni");
-define("L_S_JUL", "Juli");
-define("L_S_AUG", "Aug.");
-define("L_S_SEP", "Sept.");
-define("L_S_OCT", "Okt.");
-define("L_S_NOV", "Nov.");
-define("L_S_DEC", "Dec.");
+define("L_S_JAN", "jan.");
+define("L_S_FEB", "feb.");
+define("L_S_MAR", "mrs.");
+define("L_S_APR", "apr.");
+define("L_S_MAY", "maj");
+define("L_S_JUN", "juni");
+define("L_S_JUL", "juli");
+define("L_S_AUG", "aug.");
+define("L_S_SEP", "sept.");
+define("L_S_OCT", "okt.");
+define("L_S_NOV", "nov.");
+define("L_S_DEC", "dec.");
 // Week days Long Names
-define("L_MON", "Mandag");
-define("L_TUE", "Tirsdag");
-define("L_WED", "Onsdag");
-define("L_THU", "Torsdag");
-define("L_FRI", "Fredag");
-define("L_SAT", "Lørdag");
-define("L_SUN", "Søndag");
+define("L_MON", "mandag");
+define("L_TUE", "tirsdag");
+define("L_WED", "onsdag");
+define("L_THU", "torsdag");
+define("L_FRI", "fredag");
+define("L_SAT", "lørdag");
+define("L_SUN", "søndag");
 // Week days Short Names
-define("L_S_MON", "Ma");
-define("L_S_TUE", "Ti");
-define("L_S_WED", "On");
-define("L_S_THU", "To");
-define("L_S_FRI", "Fr");
-define("L_S_SAT", "Lø");
-define("L_S_SUN", "Sø");
+define("L_S_MON", "ma");
+define("L_S_TUE", "ti");
+define("L_S_WED", "on");
+define("L_S_THU", "to");
+define("L_S_FRI", "fr");
+define("L_S_SAT", "lø");
+define("L_S_SUN", "sø");
 
 // Localized date format – nothing to translate – skip this paragraph, Ciprian will adjust it for you! Actually, together 
 // Set the DK specific date/time format
@@ -628,36 +628,36 @@ define("NO_USER","Ingen brugere ".LOGIN_LINK."chatter</A> i øjeblikket.");
 define("L_PRIV_REPLY_LOGIN", "Log ind på chatten, hvis du vil ".LOGIN_LINK."sende et svar</A> på en af de nye meddelelser på listen herover");
 
 // Language names
-define("L_LANG_AR", "Argentinsk Spansk");
-define("L_LANG_BR", "Brasiliansk Portugisisk");
-define("L_LANG_BG", "Bulgarsk - Kyrillisk");
-define("L_LANG_CZ", "Tjekkisk");
-define("L_LANG_DA", "Dansk");
-define("L_LANG_DE", "Tysk");
-define("L_LANG_EN", "Engelsk"); // gælder kun admin panelet
-define("L_LANG_ENUK", "Britisk Engelsk"); // gælder britiske formater og flag
-define("L_LANG_ENUS", "Amerikansk Engelsk"); // gælder amerikanske formater og flag
-define("L_LANG_ES", "Spansk");
-define("L_LANG_FA", "Persisk (Farsi)");
-define("L_LANG_FR", "Fransk");
-define("L_LANG_GR", "Græsk");
-define("L_LANG_HE", "Hebræisk");
-define("L_LANG_HI", "Hindi");
-define("L_LANG_HU", "Ungarsk");
-define("L_LANG_ID", "Indonesisk");
-define("L_LANG_IT", "Italiensk");
-define("L_LANG_JA", "Japansk (Kanji)");
-define("L_LANG_KA", "Georgisk");
-define("L_LANG_NE", "Nepalesisk");
-define("L_LANG_NL", "Hollandsk");
-define("L_LANG_RO", "Rumænsk");
-define("L_LANG_SK", "Slovakisk");
-define("L_LANG_SRL", "Serbisk - Latinsk");
-define("L_LANG_SRC", "Serbisk - Kyrillisk");
-define("L_LANG_SV", "Svensk");
-define("L_LANG_TR", "Tyrkisk");
-define("L_LANG_UR", "Urdu");
-define("L_LANG_VI", "Vietnamesisk");
+define("L_LANG_AR", "argentinsk spansk");
+define("L_LANG_BR", "brasiliansk portugisisk");
+define("L_LANG_BG", "bulgarsk - kyrillisk");
+define("L_LANG_CZ", "tjekkisk");
+define("L_LANG_DA", "dansk");
+define("L_LANG_DE", "tysk");
+define("L_LANG_EN", "engelsk"); // gælder kun admin panelet
+define("L_LANG_ENUK", "britisk engelsk"); // gælder britiske formater og flag
+define("L_LANG_ENUS", "amerikansk engelsk"); // gælder amerikanske formater og flag
+define("L_LANG_ES", "spansk");
+define("L_LANG_FA", "persisk (farsi)");
+define("L_LANG_FR", "fransk");
+define("L_LANG_GR", "græsk");
+define("L_LANG_HE", "hebræisk");
+define("L_LANG_HI", "hindi");
+define("L_LANG_HU", "ungarsk");
+define("L_LANG_ID", "indonesisk");
+define("L_LANG_IT", "italiensk");
+define("L_LANG_JA", "japansk (kanji)");
+define("L_LANG_KA", "georgisk");
+define("L_LANG_NE", "nepalesisk");
+define("L_LANG_NL", "hollandsk");
+define("L_LANG_RO", "rumænsk");
+define("L_LANG_SK", "slovakisk");
+define("L_LANG_SRL", "serbisk - latinsk");
+define("L_LANG_SRC", "serbisk - kyrillisk");
+define("L_LANG_SV", "svensk");
+define("L_LANG_TR", "tyrkisk");
+define("L_LANG_UR", "urdu");
+define("L_LANG_VI", "vietnamesisk");
 
 // Skins preview page
 define("L_SKINS_TITLE", "Gennemse Skins");
