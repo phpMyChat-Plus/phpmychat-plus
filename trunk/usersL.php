@@ -16,11 +16,11 @@ if (isset($_COOKIE["CookieStatus"])) $statusu = $_COOKIE["CookieStatus"];
 if (isset($_COOKIE["CookieHash"])) $RemMe = $_COOKIE["CookieHash"];
 
 // Sort order by Ciprian
+require("./config/config.lib.php");
 if (!isset($sort_order)) $sort_order = isset($_COOKIE["CookieUserSort"]) ? $_COOKIE["CookieUserSort"] : C_USERS_SORT_ORD;
 if ($sort_order) $ordquery = "usr.username";
 else $ordquery = "usr.r_time";
 
-require("./config/config.lib.php");
 require("./lib/release.lib.php");
 require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
