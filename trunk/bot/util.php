@@ -232,13 +232,33 @@ function getfdate(){
 
 }
 */
+if (!function_exists('utf_conv'))
+{
+	function utf_conv($iso,$Charset,$what)
+	{
+		if(function_exists('iconv')) $what = iconv($iso, $Charset, $what);
+		return $what;
+	};
+};
+
 function getfdate($date_format){
-// Set the US specific date/time format
-if (stristr(PHP_OS,'win')) {
-setlocale(LC_TIME, "eng-usa.UTF-8", "eng-usa");
-} else {
-setlocale(LC_TIME, "en_US.UTF-8", "enu.UTF-8", "usa.UTF-8", "enu_enu.UTF-8", "English-usa.UTF-8");
-}
+/*
+	global $L,$Charset;
+	if(file_exists("./localization/$L/localized.chat.php")) include_once("./localization/$L/localized.chat.php");
+	else
+	{
+*/
+		// Set the US specific date/time format
+		if (stristr(PHP_OS,'win')) {
+		setlocale(LC_TIME, "English_United States", "eng-usa.UTF-8", "eng-usa");
+		} else {
+		setlocale(LC_TIME, "en_US.UTF-8", "enu.UTF-8", "usa.UTF-8", "enu_enu.UTF-8", "English-usa.UTF-8");
+		}
+/*
+	}
+	if(stristr(PHP_OS,'win')) return utf_conv(WIN_DEFAULT,$Charset,strftime($date_format));
+	else return strftime($date_format);
+*/
 	if ($date_format == "") $date_format = "%A, %d of %B %Y %H:%M:%S (%z)";
 	return strftime($date_format);
 }

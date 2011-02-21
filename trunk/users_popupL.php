@@ -10,7 +10,7 @@ if (isset($_GET))
 
 // Fix some security holes
 if (!isset($ChatPath)) $ChatPath = "";
-if (!is_dir('./'.substr(${ChatPath}, 0, -1))) exit();
+if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
 if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) exit();
 if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
@@ -18,12 +18,11 @@ if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 if (isset($_COOKIE["CookieBeep"])) $CookieBeep = $_COOKIE["CookieBeep"];
 
 // Sort order by Ciprian
+require("./${ChatPath}config/config.lib.php");
 if (!isset($sort_order)) $sort_order = isset($_COOKIE["CookieUserSort"]) ? $_COOKIE["CookieUserSort"] : C_USERS_SORT_ORD;
 if ($sort_order) $ordquery = "u.username";
 else $ordquery = "u.r_time";
 
-
-require("./${ChatPath}config/config.lib.php");
 require("./${ChatPath}localization/languages.lib.php");
 require("./${ChatPath}localization/".$L."/localized.chat.php");
 require("./${ChatPath}lib/database/".C_DB_TYPE.".lib.php");

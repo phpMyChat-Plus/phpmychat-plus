@@ -390,7 +390,7 @@ if (trim($C)!="")
 		}
 		else
 		{
-				setcookie("CookieColor", '', time());        // cookie expires in one year
+			setcookie("CookieColor", '', time());        // cookie expires in one year
 		}
 	$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', ".time().", '$Private', '".addslashes($M)."', '$Read', '$RF')");
 };

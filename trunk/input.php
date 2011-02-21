@@ -395,7 +395,7 @@ if (trim($C)!="")
 		}
 		else
 		{
-				setcookie("CookieColor", '', time());        // cookie expires in one year
+			setcookie("CookieColor", '', time());        // cookie expires in one year
 		}
 	$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', ".time().", '$Private', '".addslashes($M)."', '$Read', '$RF')");
 };
@@ -725,7 +725,7 @@ else {
 if (C_USE_SMILIES)
 {
 ?>
-		<A HREF="<?php echo(${ChatPath}); ?>smilie_popup.php?L=<?php echo($L); ?>" onClick="window.parent.smilie_popup(); return false" TARGET="_blank" onClick="document.forms['MsgForm'].elements['M'].focus();" onMouseOver="window.status='<?php echo(L_LINKS_16); ?>.'; return true" title="<?php echo(L_LINKS_16); ?>"><img src="images/smilies/smile42.gif" border=0 alt="<?php echo(L_LINKS_16); ?>"></A>&nbsp;
+		<A HREF="<?php echo("${ChatPath}smilie_popup.php?L=$L"); ?>" onClick="window.parent.smilie_popup(); return false" TARGET="_blank" onClick="document.forms['MsgForm'].elements['M'].focus();" onMouseOver="window.status='<?php echo(L_LINKS_16); ?>.'; return true" title="<?php echo(L_LINKS_16); ?>"><img src="images/smilies/smile42.gif" border=0 alt="<?php echo(L_LINKS_16); ?>"></A>&nbsp;
 <?php
 }
 // Settings below should be the same as in lib/commands/buzz.php.
@@ -734,7 +734,7 @@ if (($status == "m") || ($status == "t") || ($status == "a")) // use this to sho
 //if (($status == "m") || ($status == "a") || ($status == "t") || ($status == "r")) // use this to show buzz list to admins, moderators and registered users. Guests can't use it.
 {
 ?>
-		<A HREF="<?php echo(${ChatPath}); ?>buzz_popup.php?L=<?php echo($L); ?>" onClick="window.parent.buzz_popup(); return false" CLASS="ChatReg" onClick="document.forms['MsgForm'].elements['M'].focus();" onMouseOver="window.status='<?php echo(L_BUZZ); ?>.'; return true" TARGET="_blank" title="<?php echo(L_BUZZ); ?>"><img src="images/buzz.gif" border=0 alt="<?php echo(L_BUZZ); ?>"></A>
+		<A HREF="<?php echo("${ChatPath}buzz_popup.php?L=$L"); ?>" onClick="window.parent.buzz_popup(); return false" CLASS="ChatReg" onClick="document.forms['MsgForm'].elements['M'].focus();" onMouseOver="window.status='<?php echo(L_BUZZ); ?>.'; return true" TARGET="_blank" title="<?php echo(L_BUZZ); ?>"><img src="images/buzz.gif" border=0 alt="<?php echo(L_BUZZ); ?>"></A>
 <?php
 }
 ?>
