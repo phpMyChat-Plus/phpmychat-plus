@@ -89,7 +89,7 @@ if (isset($_POST))
 
 // Fix some security holes
 if (!isset($ChatPath)) $ChatPath = "";
-if (!is_dir('./'.substr(${ChatPath}, 0, -1))) exit();
+if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
 if (isset($L) && !is_dir("${ChatPath}localization/".$L)) exit();
 if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 if (isset($_COOKIE["CookieHash"])) $RemMe = $_COOKIE["CookieHash"];
@@ -1436,7 +1436,7 @@ if(isset($Error))
 	echo("<P CLASS=\"ChatError\">$Error</P>");
 }
 $copy_break = 0;
-if (!ereg("9362782527650497",$search) || !isset($search)) $copy_break = 1;
+if (!strstr($search,"9362782527650497") || !isset($search)) $copy_break = 1;
 if ($show_donation)
 {
 	$pptype = "big";

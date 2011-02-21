@@ -16,7 +16,7 @@ if (!function_exists('mb_convert_case'))
 	}
 };
 
- function botmemory($U)                             // This writes a file to the HD to keep bot talking to different users.
+function botmemory($U)                             // This writes a file to the HD to keep bot talking to different users.
        {
        	 $usrname =" : " .$U ;
          $botpath = "botfb/" .$U. ".txt"  ;         // file is in DIR "botfb" and called "usersname.txt"
@@ -47,7 +47,6 @@ if (!function_exists('mb_convert_case'))
 				   @mysql_query("SET CHARACTER SET utf8");
 				   mysql_query("SET NAMES 'utf8'"); 
            mysql_select_db(C_DB_NAME);
-
               $botresponse=replybotname(stripslashes($botmess), $myuniqueid, C_BOT_NAME);    // Get bot's response from respond.php
           		$BOT = C_BOT_NAME;
               //Format response for phpMyChat DB
@@ -79,7 +78,7 @@ if (C_BOT_PUBLIC)
           global $M,$botmess,$Charset;
           $botmess = str_replace(C_BOT_NAME, "", $M);
 //          $botmess = str_replace(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), " ", mb_convert_case($M,MB_CASE_LOWER,$Charset));
-           bottalk(&$botmess, $R, 0);
+          bottalk(&$botmess, $R, 0);
       }
      elseif (eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)))
 	 // Looks for "BOT NAME" in $M (typed in INPUT)  WORKS

@@ -606,7 +606,7 @@ if (C_ENGLISH_FORMAT == "UK")
 {
 // Set the UK specific date/time format
 if (stristr(PHP_OS,'win')) {
-setlocale(LC_ALL, "eng-eng.UTF-8", "eng-eng");
+setlocale(LC_ALL, "English_United Kingdom", "eng-eng.UTF-8", "eng-eng");
 } else {
 setlocale(LC_ALL, "en_GB.UTF-8", "en_GB.UTF-8@euro", "eng.UTF-8", "uk.UTF-8", "eng_eng.UTF-8", "English-uk.UTF-8"); // For UK formats
 }
@@ -620,7 +620,7 @@ elseif (C_ENGLISH_FORMAT == "US")
 {
 // Set the US specific date/time format
 if (stristr(PHP_OS,'win')) {
-setlocale(LC_ALL, "eng-usa.UTF-8", "eng-usa");
+setlocale(LC_ALL, "English_United States", "eng-usa.UTF-8", "eng-usa");
 } else {
 setlocale(LC_ALL, "en_US.UTF-8", "enu.UTF-8", "usa.UTF-8", "enu_enu.UTF-8", "English-usa.UTF-8"); // For American formats
 }
