@@ -647,6 +647,7 @@ define("L_PRIV_REPLY_LOGIN", "Login to chat if you wish to ".LOGIN_LINK."post a 
 define("L_LANG_AR", "Argentinean Spanish");
 define("L_LANG_BG", "Bulgarian - Cyrillic");
 define("L_LANG_BR", "Brazilian Portuguese");
+define("L_LANG_CA", "Catalan");
 define("L_LANG_CZ", "Czech");
 define("L_LANG_DA", "Danish");
 define("L_LANG_DE", "German");
@@ -677,6 +678,7 @@ define("L_LANG_TR", "Turkish");
 define("L_LANG_UK", "Ukrainian");
 define("L_LANG_UR", "Urdu");
 define("L_LANG_VI", "Vietnamese");
+define("L_LANG_YO", "Yoruba"); // Nigeria&Congo language
 
 // Skins preview page
 define("L_SKINS_TITLE", "Skins Preview");

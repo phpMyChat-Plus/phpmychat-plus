@@ -9,7 +9,7 @@ if (isset($_GET))
 };
 
 
-if (isset($HTTP_COOKIE_VARS["CookieLang"])) $L = urldecode($HTTP_COOKIE_VARS["CookieLang"]);
+if (isset($_COOKIE["CookieLang"])) $L = urldecode($_COOKIE["CookieLang"]);
 require("./config/config.lib.php");
 if (!isset($L) || $L == "") $L = C_LANGUAGE;
 require("./localization/".$L."/localized.chat.php");
