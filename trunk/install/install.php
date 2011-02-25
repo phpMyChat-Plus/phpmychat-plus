@@ -661,6 +661,7 @@ while(list($key, $name) = each($AvailableLanguages))
 		if ($name == "argentinian_spanish" && L_ORIG_LANG_AR != "L_ORIG_LANG_AR") $FLAG_NAME = L_ORIG_LANG_AR.(L_LANG_AR != "L_LANG_AR" ? "/".L_LANG_AR : "");
 		elseif ($name == "bulgarian" && L_ORIG_LANG_BG != "L_ORIG_LANG_BG") $FLAG_NAME = L_ORIG_LANG_BG.(L_LANG_BG != "L_LANG_BG" ? "/".L_LANG_BG : "");
 		elseif ($name == "brazilian_portuguese" && L_ORIG_LANG_BR != "L_ORIG_LANG_BR") $FLAG_NAME = L_ORIG_LANG_BR.(L_LANG_BR != "L_LANG_BR" ? "/".L_LANG_BR : "");
+		elseif ($name == "catalan" && L_ORIG_LANG_CA != "L_ORIG_LANG_CA") $FLAG_NAME = L_ORIG_LANG_CA.(L_LANG_CA != "L_LANG_CA" ? "/".L_LANG_CA : "");
 		elseif ($name == "czech" && L_ORIG_LANG_CZ != "L_ORIG_LANG_CZ") $FLAG_NAME = L_ORIG_LANG_CZ.(L_LANG_CZ != "L_LANG_CZ" ? "/".L_LANG_CZ : "");
 		elseif ($name == "danish" && L_ORIG_LANG_DA != "L_ORIG_LANG_DA") $FLAG_NAME = L_ORIG_LANG_DA.(L_LANG_DA != "L_LANG_DA" ? "/".L_LANG_DA : "");
 		elseif ($name == "dutch" && L_ORIG_LANG_NL != "L_ORIG_LANG_NL") $FLAG_NAME = L_ORIG_LANG_NL.(L_LANG_NL != "L_LANG_NL" ? "/".L_LANG_NL : "");
@@ -677,6 +678,7 @@ while(list($key, $name) = each($AvailableLanguages))
 		elseif ($name == "japanese" && L_ORIG_LANG_JA != "L_ORIG_LANG_JA") $FLAG_NAME = L_ORIG_LANG_JA.(L_LANG_JA != "L_LANG_JA" ? "/".L_LANG_JA : "");
 		elseif ($name == "nepali" && L_ORIG_LANG_NE != "L_ORIG_LANG_NE") $FLAG_NAME = L_ORIG_LANG_NE.(L_LANG_NE != "L_LANG_NE" ? "/".L_LANG_NE : "");
 		elseif ($name == "persian" && L_ORIG_LANG_FA != "L_ORIG_LANG_FA") $FLAG_NAME = L_ORIG_LANG_FA.(L_LANG_FA != "L_LANG_FA" ? "/".L_LANG_FA : "");
+		elseif ($name == "polish" && L_ORIG_LANG_PL != "L_ORIG_LANG_PL") $FLAG_NAME = L_ORIG_LANG_PL.(L_LANG_PL != "L_LANG_PL" ? "/".L_LANG_PL : "");
 		elseif ($name == "romanian" && L_ORIG_LANG_RO != "L_ORIG_LANG_RO") $FLAG_NAME = L_ORIG_LANG_RO.(L_LANG_RO != "L_LANG_RO" ? "/".L_LANG_RO : "");
 		elseif ($name == "russian" && L_ORIG_LANG_RU != "L_ORIG_LANG_RU") $FLAG_NAME = L_ORIG_LANG_RU.(L_LANG_RU != "L_LANG_RU" ? "/".L_LANG_RU : "");
 		elseif ($name == "serbian_latin" && L_ORIG_LANG_SRL != "L_ORIG_LANG_SRL") $FLAG_NAME = L_ORIG_LANG_SRL.(L_LANG_SRL != "L_LANG_SRL" ? "/".L_LANG_SRL : "");

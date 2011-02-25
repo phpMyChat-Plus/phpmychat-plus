@@ -20,6 +20,7 @@ define("L_DEFAULT_TOPIC", ""); // Example: "This is the best Chat Online"
 // Do not change these lines:
 define("L_ORIG_LANG_AR", "español Argentina");
 define("L_ORIG_LANG_BG", "български");
+define("L_ORIG_LANG_CA", "català");
 define("L_ORIG_LANG_CZ", "čeština");
 define("L_ORIG_LANG_DA", "dansk");
 define("L_ORIG_LANG_EN", "English");

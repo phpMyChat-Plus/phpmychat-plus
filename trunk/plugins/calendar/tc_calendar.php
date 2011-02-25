@@ -67,9 +67,18 @@
 if((defined("L_LANG") && L_LANG != "en_US" && L_LANG != "L_LANG") || isset($lang) && $lang != "en_US") include_once("lang/calendar.".(isset($lang) ? $lang : L_LANG).".php");
 include_once("lang/localization.lib.php");
 
+if(file_exists("plugins/calendar/calendar.js"))
+{
 ?>
 <script language="javascript" src="plugins/calendar/calendar.js"></script>
 <?php
+}
+elseif(file_exists("calendar.js"))
+{
+?>
+<script language="javascript" src="calendar.js"></script>
+<?php
+}
 
 class tc_calendar{
 	var $icon;

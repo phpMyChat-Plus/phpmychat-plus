@@ -1,6 +1,6 @@
 ﻿<?php
 $pplang = L_LANG;
-$ppalt = "PayPal - The safer, easier way to pay online.";
+$ppalt = "PayPal - The safer, easier way to pay online!";
 $ppexists = 0;
 switch (L_LANG)
 {
@@ -78,6 +78,12 @@ switch (L_LANG)
 		break;
 	case "en_US":
 		$ppbutton = ($pptype == "big") ? "3624700" : "3624768";
+		$ppexists = 1;
+		break;
+	case "ca_ES":
+		$pplang = "es_ES/ES";
+		$ppbutton = ($pptype == "big") ? "3620198" : "3624872";
+		$ppalt = "PayPal - La manera més segur, més fàcil de pagar en línia!";
 		$ppexists = 1;
 		break;
 	case "es_AR":

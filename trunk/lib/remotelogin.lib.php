@@ -95,6 +95,7 @@ if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //adde
 if (isset($_COOKIE["CookieHash"])) $RemMe = $_COOKIE["CookieHash"];
 else unset($RemMe);
 if (isset($RemMe) && isset($_COOKIE["CookieUsername"]) && $_COOKIE["CookieUsername"] != urlencode(stripslashes($U))) unset($RemMe);
+if (isset($_COOKIE["CookieBeep"])) $CookieBeep = $_COOKIE["CookieBeep"];
 
 require("./${ChatPath}config/config.lib.php");
 require("./${ChatPath}lib/release.lib.php");
@@ -804,7 +805,8 @@ if(!isset($Error) && (isset($N) && $N != ""))
 			{
 				$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS exit', '', '$current_time', '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '', '')");
 				// next line WELCOME SOUND feature altered for compatibility with /away command R Dickow:
-			  $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
+				if(isset($CookieBeep) && $CookieBeep) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
+				else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM_NOSOUND, \"".special_char($U,$Latin1)."\"))', '', '')");
 				if(C_EN_STATS)
 				{
 					$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+($current_time-last_away), longest_away=IF($current_time-last_away < longest_away, longest_away, $current_time-last_away), last_away='' WHERE (stat_date=FROM_UNIXTIME(last_away,'%Y-%m-%d') OR stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d')) AND room='$room' AND username='$U' AND last_away!='0'");
@@ -827,7 +829,8 @@ if(!isset($Error) && (isset($N) && $N != ""))
 				$DbLink->query("DELETE FROM ".C_MSG_TBL." WHERE username LIKE 'SYS welcome' AND address = '$U'");
 				// Insert a new welcome message in the messages table
 				$current_time_plus = $current_time + 1;	// ensures the welcome msg is the last one
-				$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '', '$current_time_plus', '$U', 'sprintf(WELCOME_MSG)', '', '')");
+				if(isset($CookieBeep) && $CookieBeep) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '', '$current_time_plus', '$U', 'sprintf(WELCOME_MSG)', '', '')");
+				else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '', '$current_time_plus', '$U', 'sprintf(WELCOME_MSG_NOSOUND)', '', '')");
 			};
 		};
 	}
@@ -855,7 +858,8 @@ if(!isset($Error) && (isset($N) && $N != ""))
 		else
 		{
 			// next line WELCOME SOUND feature altered for compatibility with /away command R Dickow:
-		  $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
+			if(isset($CookieBeep) && $CookieBeep) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
+			else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM_NOSOUND, \"".special_char($U,$Latin1)."\"))', '', '')");
 			if(C_EN_STATS)
 			{
 				$DbLink->query("SELECT room FROM ".C_STS_TBL." WHERE stat_date='".date("Y-m-d")."' AND username='$U' AND room='$R'");
@@ -873,7 +877,8 @@ if(!isset($Error) && (isset($N) && $N != ""))
 			$DbLink->query("DELETE FROM ".C_MSG_TBL." WHERE username LIKE 'SYS welcome' AND address = '$U'");
 			// Insert a new welcome message in the messages table
 			$current_time_plus = $current_time + 1;	// ensures the welcome msg is the last one
-			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '', '$current_time_plus', '$U', 'sprintf(WELCOME_MSG)', '', '')");
+			if(isset($CookieBeep) && $CookieBeep) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '', '$current_time_plus', '$U', 'sprintf(WELCOME_MSG)', '', '')");
+			else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '', '$current_time_plus', '$U', 'sprintf(WELCOME_MSG_NOSOUND)', '', '')");
 		};
 	};
 
@@ -1011,7 +1016,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 				msgbox.value = user + oldStr;
 		};
 	};
-// -->
+	// -->
 	</SCRIPT>
 	<SCRIPT TYPE="text/javascript" LANGUAGE="javascript1.1">
 	<!--
@@ -1422,6 +1427,32 @@ function layout($Err, $U, $R, $T, $C, $status, $RemMe)
 	if (!isset($Ver) || $Ver == "") $Ver = "H";
 	?>
 
+	<SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
+	<!--
+	function swapImage(img,imgid) {
+		var image = document.getElementById(imgid);
+		var dropd = document.getElementById(img);
+		if (imgid == "flagToSwap")
+		{
+			var path = '<?php echo("./".$ChatPath."localization/"); ?>';
+			var type = '<?php echo(C_FLAGS_3D); ?>';
+			var enfmt = '<?php echo(C_ENGLISH_FORMAT); ?>';
+			if(type == "1")
+			{
+				if(enfmt == "US" && dropd.value == "english") var flagtype = '/images/flag_us.gif';
+				else var flagtype = '/images/flag.gif';
+			}
+			else
+			{
+				if(enfmt == "US" && dropd.value == "english") var flagtype = '/images/flag_us0.gif';
+				else var flagtype = '/images/flag0.gif';
+			}
+			image.src = path + dropd.value + flagtype;
+		};
+	};
+	// -->
+	</SCRIPT>
+
 <TABLE ALIGN="center" CELLPADDING=0 CLASS="ChatBody"><TR><TD CLASS="ChatBody">
 <CENTER>
 <FORM ACTION="<?php echo("$Action"); ?>" METHOD="POST" AUTOCOMPLETE="" NAME="Params" onSubmit="this.target='_blank';" onSubmit="defineVerField(); return isCookieEnabled();">
@@ -1467,6 +1498,91 @@ if ($show_donation)
 		?>
 		<TR CLASS="ChatCell">
 			<TH COLSPAN=2 CLASS="ChatTabTitle"><?php echo(L_SET_1); ?></TH>
+		</TR>
+		<TR CLASS="ChatCell">
+			<TD COLSPAN=2 ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_1a); ?> :
+		<?php
+			// Available languages
+			$AvailableLanguages = array();
+			$languageDirectories = dir('./'.$ChatPath.'localization/');
+			while($name = $languageDirectories->read())
+			{
+				if(is_dir('./'.$ChatPath.'localization/'.$name)
+					&& file_exists('./'.$ChatPath.'localization/'.$name.'/regex.txt')
+					&& file_exists('./'.$ChatPath.'localization/'.$name.'/localized.chat.php')
+					&& file_exists('./'.$ChatPath.'localization/'.$name.'/images/flag.gif'))
+				{
+					list($key) = file('./'.$ChatPath.'localization/'.$name.'/regex.txt');
+					$AvailableLanguages[$key] = $name;
+				};
+			};
+			$languageDirectories->close();
+			if (!function_exists("krsort")) include("./${ChatPath}localization/sort_languages.php");
+			krsort($AvailableLanguages);
+			asort($AvailableLanguages);
+			reset($AvailableLanguages);
+		?>
+		    <SELECT NAME="L" id="flags" onChange="window.location.href='<?php echo $_SERVER["SCRIPT_NAME"]; ?>?L='+this.options[this.selectedIndex].value;" onChange="swapImage('flags','flagToSwap')" CLASS="ChatBox">
+		<?php
+			$i = 0;
+			while(list($key, $name) = each($AvailableLanguages))
+			{
+				if ($name == "argentinian_spanish" && L_ORIG_LANG_AR != "L_ORIG_LANG_AR") $FLAG_NAME = L_ORIG_LANG_AR;
+				elseif ($name == "bulgarian" && L_ORIG_LANG_BG != "L_ORIG_LANG_BG") $FLAG_NAME = L_ORIG_LANG_BG;
+				elseif ($name == "brazilian_portuguese" && L_ORIG_LANG_BR != "L_ORIG_LANG_BR") $FLAG_NAME = L_ORIG_LANG_BR;
+				elseif ($name == "catalan" && L_ORIG_LANG_CA != "L_ORIG_LANG_CA") $FLAG_NAME = L_ORIG_LANG_CA;
+				elseif ($name == "czech" && L_ORIG_LANG_CZ != "L_ORIG_LANG_CZ") $FLAG_NAME = L_ORIG_LANG_CZ;
+				elseif ($name == "danish" && L_ORIG_LANG_DA != "L_ORIG_LANG_DA") $FLAG_NAME = L_ORIG_LANG_DA;
+				elseif ($name == "dutch" && L_ORIG_LANG_NL != "L_ORIG_LANG_NL") $FLAG_NAME = L_ORIG_LANG_NL;
+				elseif ($name == "english" && L_ORIG_LANG_EN != "L_ORIG_LANG_EN") $FLAG_NAME = L_ORIG_LANG_EN;
+				elseif ($name == "french" && L_ORIG_LANG_FR != "L_ORIG_LANG_FR") $FLAG_NAME = L_ORIG_LANG_FR;
+				elseif ($name == "georgian" && L_ORIG_LANG_KA != "L_ORIG_LANG_KA") $FLAG_NAME = L_ORIG_LANG_KA;
+				elseif ($name == "german" && L_ORIG_LANG_DE != "L_ORIG_LANG_DE") $FLAG_NAME = L_ORIG_LANG_DE;
+				elseif ($name == "greek" && L_ORIG_LANG_GR != "L_ORIG_LANG_GR") $FLAG_NAME = L_ORIG_LANG_GR;
+				elseif ($name == "hebrew" && L_ORIG_LANG_HE != "L_ORIG_LANG_HE") $FLAG_NAME = L_ORIG_LANG_HE;
+				elseif ($name == "hindi" && L_ORIG_LANG_HI != "L_ORIG_LANG_HI") $FLAG_NAME = L_ORIG_LANG_HI;
+				elseif ($name == "hungarian" && L_ORIG_LANG_HU != "L_ORIG_LANG_HU") $FLAG_NAME = L_ORIG_LANG_HU;
+				elseif ($name == "indonesian" && L_ORIG_LANG_ID != "L_ORIG_LANG_ID") $FLAG_NAME = L_ORIG_LANG_ID;
+				elseif ($name == "italian" && L_ORIG_LANG_IT != "L_ORIG_LANG_IT") $FLAG_NAME = L_ORIG_LANG_IT;
+				elseif ($name == "japanese" && L_ORIG_LANG_JA != "L_ORIG_LANG_JA") $FLAG_NAME = L_ORIG_LANG_JA;
+				elseif ($name == "nepali" && L_ORIG_LANG_NE != "L_ORIG_LANG_NE") $FLAG_NAME = L_ORIG_LANG_NE;
+				elseif ($name == "persian" && L_ORIG_LANG_FA != "L_ORIG_LANG_FA") $FLAG_NAME = L_ORIG_LANG_FA;
+				elseif ($name == "romanian" && L_ORIG_LANG_RO != "L_ORIG_LANG_RO") $FLAG_NAME = L_ORIG_LANG_RO;
+				elseif ($name == "russian" && L_ORIG_LANG_RU != "L_ORIG_LANG_RU") $FLAG_NAME = L_ORIG_LANG_RU;
+				elseif ($name == "serbian_latin" && L_ORIG_LANG_SRL != "L_ORIG_LANG_SRL") $FLAG_NAME = L_ORIG_LANG_SRL;
+				elseif ($name == "serbian_cyrillic" && L_ORIG_LANG_SRC != "L_ORIG_LANG_SRC") $FLAG_NAME = L_ORIG_LANG_SRC;
+				elseif ($name == "slovak" && L_ORIG_LANG_SK != "L_ORIG_LANG_SK") $FLAG_NAME = L_ORIG_LANG_SK;
+				elseif ($name == "spanish" && L_ORIG_LANG_ES != "L_ORIG_LANG_ES") $FLAG_NAME = L_ORIG_LANG_ES;
+				elseif ($name == "swedish" && L_ORIG_LANG_SV != "L_ORIG_LANG_SV") $FLAG_NAME = L_ORIG_LANG_SV;
+				elseif ($name == "turkish" && L_ORIG_LANG_TR != "L_ORIG_LANG_TR") $FLAG_NAME = L_ORIG_LANG_TR;
+				elseif ($name == "ukrainian" && L_ORIG_LANG_UK != "L_ORIG_LANG_UK") $FLAG_NAME = L_ORIG_LANG_UK;
+				elseif ($name == "urdu" && L_ORIG_LANG_UR != "L_ORIG_LANG_UR") $FLAG_NAME = L_ORIG_LANG_UR;
+				elseif ($name == "vietnamese" && L_ORIG_LANG_VI != "L_ORIG_LANG_VI") $FLAG_NAME = L_ORIG_LANG_VI;
+				elseif ($name == "yoruba" && L_ORIG_LANG_YO != "L_ORIG_LANG_YO") $FLAG_NAME = L_ORIG_LANG_YO;
+				else
+				{
+					$FLAG_NAME = str_replace("_"," ",$name);
+					$FLAG_NAME = mb_convert_case($FLAG_NAME,MB_CASE_TITLE,$Charset);
+				}
+				$i++;
+				?>
+				<OPTION VALUE="<?php echo $name ?>" <?php if($SLANG==$name || $L==$name){ echo " selected"; $namesel = $name; } ?>><?php echo ($FLAG_NAME); ?></OPTION>
+					<?php
+			};
+			unset($AvailableLanguages);
+			if($namesel == "english" && C_ENGLISH_FORMAT == "US")
+			{
+				$flagsel_3d = "flag_us.gif";
+				$flagsel = "flag_us0.gif";
+			}
+			else
+			{
+				$flagsel_3d = "flag.gif";
+				$flagsel = "flag0.gif";
+			}
+			?>
+	    </SELECT>&nbsp;<img style="vertical-align:middle" id="flagToSwap" src="<?php echo("./".$ChatPath."localization/".$namesel."/images/".(C_FLAGS_3D ? $flagsel_3d : $flagsel)); ?>" />
+			</TD>
 		</TR>
 		<TR CLASS="ChatCell">
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_SET_2); ?> :</TD>

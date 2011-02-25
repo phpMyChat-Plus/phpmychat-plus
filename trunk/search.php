@@ -36,6 +36,12 @@ switch(L_LANG)
 		$L_G_HL = "da";
 		$L_G_CX = "tqlzus-g838";
 		break;
+	case "ca_ES":
+		$L_G_EXT = "es";
+		$L_G_SA = "Cerca";
+		$L_G_HL = "ca";
+		$L_G_CX = "pw7i8w-y4de";
+		break;
 	case "es_AR":
 		$L_G_EXT = "com.ar";
 		$L_G_SA = "Buscar";

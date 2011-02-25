@@ -35,6 +35,10 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 20.02.2011 - 1.94-beta6:
+- language selection added to the remote login box; (functionality related)
+- important sound fix - users can not set sound on/off for notifications in chat (except for buzzes sent by power users); (functionality related)
+- Catalan translation started; (localization project) - Thanks to Jordi Babot <jordibabot@gmail.com>
+- important BOT fix for Windows servers, when answering with date formated string (locale stays in English now); (functionality related)
 - Help popup - admin email link (mailto) fix; (functionality related)
 - several ereg/eregi_replace functions replaced by str_replace - steps for php5.3 compatibility; (compatibility related)
 02.06.2010 - 1.94-beta5:

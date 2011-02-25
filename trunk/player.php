@@ -1,8 +1,8 @@
 <?php
 // Get the names and values for vars sent by index.lib.php
-if (isset($HTTP_GET_VARS))
+if (isset($_GET))
 {
-	while(list($name,$value) = each($HTTP_GET_VARS))
+	while(list($name,$value) = each($_GET))
 	{
 		$$name = $value;
 	};

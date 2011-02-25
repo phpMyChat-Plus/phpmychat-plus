@@ -92,17 +92,16 @@ $DbLink = new DB;
 
 // ** Check for user entrance to beep **
 // Initialize some vars if necessary and put beep on/off in a cookie
-if (!isset($B)) $B = (isset($CookieBeep) ? $CookieBeep : "1");
+if (!isset($B)) $B = (isset($CookieBeep) ? $CookieBeep : 1);
 setcookie("CookieBeep", $B, time() + 60*60*24*365);		// cookie expires in one year
-$BeepRoom = "0";
-if (!isset($LastCheck) || $B == "0") $LastCheck = time();
-
-if ($B > 0)
+//$BeepRoom = 0;
+if (!isset($LastCheck) || $B == 0) $LastCheck = time();
+if ($B == 1)
 {
 	$DbLink->query("SELECT m_time FROM ".C_MSG_TBL." WHERE m_time > '$LastCheck' AND username = 'SYS enter' AND type = 1 ORDER BY m_time DESC LIMIT 1");
 	if ($DbLink->num_rows() > 0)
 	{
-		$BeepRoom = "1";
+		$BeepRoom = 1;
 		list($LastCheck) = $DbLink->next_record();
 	};
 	$DbLink->clean_results();
@@ -116,11 +115,11 @@ if (!ereg("LastCheck", $URL_Query))
 }
 else
 {
-	$Refresh = ereg_replace("LastCheck=([0-9]+)","LastCheck=".$LastCheck, $URL_Query);
+	$Refresh = ereg_replace("LastCheck=([0-9]+)","LastCheck=${LastCheck}", $URL_Query);
 }
 
 // ** Compute the beeps/nobeeps reload query used when the sound icon is clicked **
-$B1 =  ($B > 0 ? "0" : "1");
+$B1 = ($B == 1 ? 0 : 1);
 $ChangeBeeps_Reload = ereg_replace("&B=([0-2])","&B=${B1}",$Refresh);
 
 // For translations with an explicit charset (not the 'x-user-defined' one)
@@ -225,7 +224,7 @@ if (eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
 <?php
 }
 ?>
-		<A HREF="users_popupH.php?<?php echo($ChangeBeeps_Reload); ?>" onMouseOver="window.status='<?php echo(L_BEEP); ?>.'; return true;" title="<?php echo(L_BEEP); ?>"><IMG SRC="images/<?php if ($B == "0") echo("no"); ?>sound.gif" WIDTH=13 HEIGHT=13 ALIGN="MIDDLE" BORDER=0 ALT="<?php echo(L_BEEP); ?>"></A>
+		<A HREF="users_popupH.php?<?php echo($ChangeBeeps_Reload); ?>" onMouseOver="window.status='<?php echo(L_BEEP); ?>.'; return true;" title="<?php echo(L_BEEP); ?>"><IMG SRC="images/<?php if ($B == 0) echo("no"); ?>sound.gif" WIDTH=13 HEIGHT=13 ALIGN="MIDDLE" BORDER=0 ALT="<?php echo(L_BEEP); ?>"></A>
 	</P>
 </CENTER>
 
@@ -295,7 +294,7 @@ $DbLink->close();
 
 <SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript1.2">
 <!--
-rooms_number = <?php echo(isset($i) ? "$i" : "0"); ?>;
+rooms_number = <?php echo(isset($i) ? $i : 0); ?>;
 
 <?php
 if (isset($ChildNb) && count($ChildNb) > 0)
@@ -337,7 +336,7 @@ if (NS4)
 
 <?php
 // ** Beeps if necessary **
-if ($B > 0 && $BeepRoom)
+if ($B == 1 && $BeepRoom)
 {
 		?>
 		<!-- Sound for user entrance -->
