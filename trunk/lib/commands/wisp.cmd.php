@@ -46,7 +46,7 @@ else
 			}
 			if (C_PRIV_POPUP)
 			{
-				if ($allowpopupu || eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case(trim($Cmd[2]),MB_CASE_LOWER,$Charset))) $Read = "Neww";
+				if ($allowpopupu || stristr(mb_convert_case(trim($Cmd[2]),MB_CASE_LOWER,$Charset), mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset))) $Read = "Neww";
 				else $Read = "Oldw";
 			}
 			else
@@ -69,28 +69,28 @@ else
 					unset($Found, $b);
 				}
 				// add this for /away command modification by R Dickow:
-			  $DbLink->query("SELECT awaystat FROM ".C_USR_TBL." WHERE username='$Cmd[2]'");
+				$DbLink->query("SELECT awaystat FROM ".C_USR_TBL." WHERE username='$Cmd[2]'");
 
-			  if ($DbLink->num_rows() != 0)
-			  {
-			  	list($awaystat) = $DbLink->next_record();
-			  }
-			  $DbLink->clean_results();
+				if ($DbLink->num_rows() != 0)
+				{
+					list($awaystat) = $DbLink->next_record();
+				}
+				$DbLink->clean_results();
 				if ($awaystat == 1) {
 					$Read = "Neww";
 					AddMessage(stripslashes($Cmd[3]), $T, $UR, $U, $C, $Cmd[2], $Read, $R, $Charset);
 					$IsCommand = true;
 					$RefreshMessages = true;
 				  if(C_PRIV_POPUP) $Error = sprintf(L_PRIV_AWAY, special_char($Cmd[2],$Latin1));
-			  } else {
+				} else {
 				// end R Dickow /away command modification addition.
 			 	AddMessage(stripslashes($Cmd[3]), $T, $UR, $U, $C, $Cmd[2], $Read, $R, $Charset);
-				if (eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case(trim($Cmd[2]),MB_CASE_LOWER,$Charset))) include "lib/bot_priv.lib.php";
+				if (stristr(mb_convert_case(trim($Cmd[2]),MB_CASE_LOWER,$Charset), mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset))) include "lib/bot_priv.lib.php";
 				$IsCommand = true;
 				$RefreshMessages = true;
-							 }
+				}
 			}
-			elseif(eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case(trim($Cmd[2]),MB_CASE_LOWER,$Charset)))
+			elseif(stristr(mb_convert_case(trim($Cmd[2]),MB_CASE_LOWER,$Charset), mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset)))
 			{
 				$Error = sprintf(L_NOT_ONLINE, special_char($Cmd[2],$Latin1));
 			}

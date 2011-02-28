@@ -21,7 +21,7 @@ Server environment - tested env:
 	- mail function support (optional but recommended).
 
 Known issues (read also the FAQ):
-- NOT COMPATIBLE with php >= 5.3.0! (due to the deprecation of ereg functions, which have been tremendously used until pmc+ 1.93; a separate version will be developed to replace ereg functions with preg class functions);
+- NOT COMPATIBLE YET with php >= 5.3.0! (due to the deprecation of ereg functions, which have been tremendously used until pmc+ 1.93; a separate version will be developed to replace ereg functions with preg/str class functions);
 - php 5.1.6 will not allow joining chat or/and changing settings or saving data into database (due to several bugs in 5.1.6 release);
 - php 4.4.4 has an issue of not posting the messages ($M value is null);
 - configurations cannot be saved from admin panel on servers having magic_quotes set "on"; this also happens if the c_config table structure has been altered somehow and it doesn’t exactly follow the admin5.php field definitions; another identified reason would be the use of single quote ’ in field values (like Room’s Names or such) - never use single quotes - use the utf-8 ’ instead (you can copy it from here when you need it);
@@ -35,6 +35,7 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 20.02.2011 - 1.94-beta6:
+- banish fix; (security/functionality related)
 - language selection added to the remote login box; (functionality related)
 - important sound fix - users can not set sound on/off for notifications in chat (except for buzzes sent by power users); (functionality related)
 - Catalan translation started; (localization project) - Thanks to Jordi Babot <jordibabot@gmail.com>

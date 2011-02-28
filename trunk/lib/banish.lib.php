@@ -23,7 +23,7 @@ if (C_BAN_IP) // ban only by IP
 }
 else // ban by both IP and username
 {
-	$DbLink->query("SELECT ip,rooms,reason FROM ".C_BAN_TBL." WHERE ip='$IP' and username='$U' LIMIT 1");
+	$DbLink->query("SELECT ip,rooms,reason FROM ".C_BAN_TBL." WHERE ip='$IP' or username='$U' LIMIT 1");
 }
 $Nb = $DbLink->num_rows();
 // Nick of the user is banished from some rooms
@@ -68,7 +68,7 @@ else
 	}
 	else // ban by both IP or username
 	{
-		$DbLink->query("SELECT rooms,ban_until,reason FROM ".C_BAN_TBL." WHERE ip='$IP' and username='$U' LIMIT 1");
+		$DbLink->query("SELECT rooms,ban_until,reason FROM ".C_BAN_TBL." WHERE ip='$IP' or username='$U' LIMIT 1");
 	}
 	$Nb = $DbLink->num_rows();
 	// IP is banished from some rooms
