@@ -38,7 +38,7 @@ switch(L_LANG)
 		break;
 	case "ca_ES":
 		$L_G_EXT = "es";
-		$L_G_SA = "Cerca";
+		$L_G_SA = "Busca";
 		$L_G_HL = "ca";
 		$L_G_CX = "pw7i8w-y4de";
 		break;
