@@ -8,6 +8,13 @@ input, select, textarea {
 	font-size: 11px;
 }
 
+A, A:hover, A:active, A:visited {
+	text-decoration: none;
+	font-family: tahoma;
+	color: #000000;
+	cursor:pointer;
+}
+
 #calendar-header { background-color: #6699CC; padding-top: 2px; margin: auto; width: 100%; }
 #calendar-header .closeme { padding: 0px 3px 2px 0px; }
 
