@@ -376,7 +376,7 @@ if ($slang)
 {
 	?>
 	<TR>
-		<TD CLASS="whois" nowrap="nowrap"><?php echo(L_PRO_1); ?>: </TD>
+		<TD CLASS="whois" nowrap="nowrap"><?php echo(L_PRO_1a); ?>: </TD>
 		<TD CLASS="whois" nowrap="nowrap"><?php echo(special_char($slang,$Latin1)); ?></TD>
 	</TR>
 	<?php

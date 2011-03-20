@@ -168,6 +168,7 @@ INPUT.ChatBox, SELECT.ChatBox, TEXTAREA.ChatBox
 .ChatError
 {
 	<?php if (isset($FontFace)) echo($FontFace); ?>
+	background-color: #FFF4E6;
 	color: #FF0000;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 800;
