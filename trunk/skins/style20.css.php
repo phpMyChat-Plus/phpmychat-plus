@@ -65,11 +65,11 @@ BODY
 	text-indent: 0;
 	scrollbar-3dlight-color: #00ffff;
 	scrollbar-arrow-color: #ffff00;
-	scrollbar-base-color: <?php echo($COLOR_SCROLL_TRACK); ?>;
-	scrollbar-track-color: <?php echo($COLOR_SCROLL_TRACK); ?>;
+	scrollbar-base-color: <?php echo($COLOR_TB); ?>;
+	scrollbar-track-color: <?php echo($COLOR_TB); ?>;
 	scrollbar-darkshadow-color: #0000ff;
-	scrollbar-face-color: brown;
-	scrollbar-highlight-color: maroon;
+	scrollbar-face-color: maroon;
+	scrollbar-highlight-color: brown;
 	scrollbar-shadow-color: #808080;
 }
 
@@ -83,11 +83,11 @@ BODY.frame
 	text-indent: 0;
 	scrollbar-3dlight-color: #00ffff;
 	scrollbar-arrow-color: #ffff00;
-	scrollbar-base-color: <?php echo($COLOR_SCROLL_TRACK); ?>;
-	scrollbar-track-color: <?php echo($COLOR_SCROLL_TRACK); ?>;
+	scrollbar-base-color: <?php echo($COLOR_TB); ?>;
+	scrollbar-track-color: <?php echo($COLOR_TB); ?>;
 	scrollbar-darkshadow-color: #0000ff;
-	scrollbar-face-color: brown;
-	scrollbar-highlight-color: maroon;
+	scrollbar-face-color: maroon;
+	scrollbar-highlight-color: brown;
 	scrollbar-shadow-color: #808080;
 }
 
@@ -100,11 +100,11 @@ BODY.mainframe
 	margin: 5px;
 	scrollbar-3dlight-color: #00ffff;
 	scrollbar-arrow-color: #ffff00;
-	scrollbar-base-color: <?php echo($COLOR_SCROLL_TRACK); ?>;
-	scrollbar-track-color: <?php echo($COLOR_SCROLL_TRACK); ?>;
+	scrollbar-base-color: <?php echo($COLOR_TB); ?>;
+	scrollbar-track-color: <?php echo($COLOR_TB); ?>;
 	scrollbar-darkshadow-color: #0000ff;
-	scrollbar-face-color: brown;
-	scrollbar-highlight-color: maroon;
+	scrollbar-face-color: maroon;
+	scrollbar-highlight-color: brown;
 	scrollbar-shadow-color: #808080;
 }
 
@@ -144,7 +144,7 @@ A
 
 A:hover, A:active
 {
-	color: <?php echo($COLOR_BODY); ?>;
+	color: <?php echo($COLOR_TB); ?>;
 	text-decoration: none;
 	cursor:pointer;
 }
@@ -299,7 +299,7 @@ INPUT, SELECT, TEXTAREA
 	font-weight: 600;
 	background-color: <?php echo($COLOR_BK); ?>;
 	color: <?php echo($COLOR_BODY); ?>;
-	border-bottom: 1pt solid <?php echo($COLOR_BODY); ?>;
+	border-bottom: 1pt solid <?php echo($COLOR_TOPIC); ?>;
 }
 
 .menuTitle
@@ -316,9 +316,9 @@ INPUT, SELECT, TEXTAREA
 	font-weight: 600;
 	background-color: <?php echo($COLOR_TB); ?>;
 	color: <?php echo($COLOR_BODY); ?>;
-	border-top: 1pt solid <?php echo($COLOR_BODY); ?>;
-	border-left: 1pt solid <?php echo($COLOR_BODY); ?>;
-	border-right: 1pt solid <?php echo($COLOR_BODY); ?>;
+	border-top: 1pt solid <?php echo($COLOR_TOPIC); ?>;
+	border-left: 1pt solid <?php echo($COLOR_TOPIC); ?>;
+	border-right: 1pt solid <?php echo($COLOR_TOPIC); ?>;
 }
 
 .thumbIndex A

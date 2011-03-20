@@ -33,6 +33,10 @@ else
 		{
 			$Error = L_ERR_USR_27;
 		}
+		elseif (mb_convert_case(trim($Cmd[2]),MB_CASE_LOWER,$Charset) == mb_convert_case(C_QUOTE_NAME,MB_CASE_LOWER,$Charset))
+		{
+			$Error = L_ERR_USR_1;
+		}
 		elseif (trim($Cmd[2]) != "" && trim($Cmd[3]) != "")
 		{
 			$Cmd[3] = "L_PRIV_WISP ".$Cmd[3];
