@@ -5,7 +5,7 @@
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
 
 if (!isset($ChatPath)) $ChatPath = "";
-$mydate = isset($_REQUEST["date1"]) ? $_REQUEST["date1"] : $INSTALL_DATE;
+$mydate = isset($_POST["date1"]) ? $_POST["date1"] : $INSTALL_DATE;
 if($mydate != "") $_POST['vINSTALL_DATE'] = $mydate;
 
 if (C_NO_SWEAR) include("./lib/swearing.lib.php");

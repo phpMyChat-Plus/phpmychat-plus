@@ -55,7 +55,7 @@ while($data = @mysql_fetch_array($result))
 {
 	if ($data[username] == "Guest") $data[username] = L_LURKING_5;
 	$User = user_status($data[username],$data[status]);
-	echo("<tr><td>".$User."");
+	echo("<tr><td>".$User."</td>");
 	echo("<td>".$data[ip]."</td>");
 	echo("<td>".$data[browser]."</td></tr>");
 }

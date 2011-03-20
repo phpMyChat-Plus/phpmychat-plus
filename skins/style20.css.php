@@ -52,7 +52,7 @@ $small = round(0.8 * $medium);
 $smaller = $small-1;
 $smallest = $small-2;
 
-include_once('style19.php');
+include_once('style20.php');
 ?>
 
 BODY
@@ -65,11 +65,11 @@ BODY
 	text-indent: 0;
 	scrollbar-3dlight-color: #00ffff;
 	scrollbar-arrow-color: #ffff00;
-	scrollbar-base-color: <?php echo($COLOR_BODY); ?>;
+	scrollbar-base-color: <?php echo($COLOR_SCROLL_TRACK); ?>;
 	scrollbar-track-color: <?php echo($COLOR_SCROLL_TRACK); ?>;
 	scrollbar-darkshadow-color: #0000ff;
-	scrollbar-face-color: #37658d;
-	scrollbar-highlight-color: #ffff00;
+	scrollbar-face-color: brown;
+	scrollbar-highlight-color: maroon;
 	scrollbar-shadow-color: #808080;
 }
 
@@ -83,30 +83,28 @@ BODY.frame
 	text-indent: 0;
 	scrollbar-3dlight-color: #00ffff;
 	scrollbar-arrow-color: #ffff00;
-	scrollbar-base-color: <?php echo($COLOR_BODY); ?>;
+	scrollbar-base-color: <?php echo($COLOR_SCROLL_TRACK); ?>;
 	scrollbar-track-color: <?php echo($COLOR_SCROLL_TRACK); ?>;
 	scrollbar-darkshadow-color: #0000ff;
-	scrollbar-face-color: #37658d;
-	scrollbar-highlight-color: #ffff00;
+	scrollbar-face-color: brown;
+	scrollbar-highlight-color: maroon;
 	scrollbar-shadow-color: #808080;
 }
 
 BODY.mainframe
 {
 	background-color: <?php echo($COLOR_TB); ?>;
-	background-image: url("images/bacmain.gif");
-	background-attachment: fixed;
 	color: <?php echo(COLOR_CD); ?>;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
 	margin: 5px;
 	scrollbar-3dlight-color: #00ffff;
 	scrollbar-arrow-color: #ffff00;
-	scrollbar-base-color: <?php echo($COLOR_BODY); ?>;
+	scrollbar-base-color: <?php echo($COLOR_SCROLL_TRACK); ?>;
 	scrollbar-track-color: <?php echo($COLOR_SCROLL_TRACK); ?>;
 	scrollbar-darkshadow-color: #0000ff;
-	scrollbar-face-color: #37658d;
-	scrollbar-highlight-color: #ffff00;
+	scrollbar-face-color: brown;
+	scrollbar-highlight-color: maroon;
 	scrollbar-shadow-color: #808080;
 }
 
@@ -146,7 +144,7 @@ A
 
 A:hover, A:active
 {
-	color: #FF9900;
+	color: <?php echo($COLOR_BODY); ?>;
 	text-decoration: none;
 	cursor:pointer;
 }
@@ -162,7 +160,7 @@ A.user, A.user:active
 A.admin, A.admin:active
 {
 	text-decoration: none;
-	color: #FF0000;
+	color: <?php echo($COLOR_TB); ?>;
 	font-weight: 600;
 	cursor:pointer;
 }
@@ -170,7 +168,7 @@ A.admin, A.admin:active
 A.mod, A.mod:active
 {
 	text-decoration: none;
-	color: #0000FF;
+	color: <?php echo($COLOR_TB); ?>;
 	font-weight: 600;
 	cursor:pointer;
 }
@@ -273,7 +271,7 @@ INPUT, SELECT, TEXTAREA
 
 .notify
 {
-	color: <?php echo($COLOR_BK); ?>;
+	color: <?php echo($COLOR_TOPIC); ?>;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 600;
 }
@@ -289,7 +287,7 @@ INPUT, SELECT, TEXTAREA
 {
 	<?php echo(isset($QUOTE_COLOR) ? "border: thin ridge ".$QUOTE_COLOR.";" : ""); ?>;
 	background: #FFFAFA;
-	color: #D2691E;
+	color: <?php echo($QUOTE_COLOR); ?>;
 	text-align: justify;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
@@ -341,7 +339,7 @@ INPUT, SELECT, TEXTAREA
 {
 	text-decoration: none;
 	background: <?php echo($COLOR_BK); ?>;
-	color: #FF9933;
+	color: maroon;
 }
 
 .success
@@ -353,8 +351,6 @@ INPUT, SELECT, TEXTAREA
 .mesframePreview
 {
 	background-color: <?php echo($COLOR_BK); ?>;
-	background-image: url("images/bacmain.gif");
-	background-attachment: fixed;
 	color: <?php echo(COLOR_CD); ?>;
 }
 

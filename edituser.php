@@ -21,7 +21,7 @@ if (isset($_POST))
 if (isset($L) && !is_dir("./localization/".$L)) exit();
 if (isset($_COOKIE["CookieStatus"])) $status = $_COOKIE["CookieStatus"];
 if (isset($_COOKIE["CookieHash"])) $RemMe = $_COOKIE["CookieHash"];
-$mydate = isset($_REQUEST["date1"]) ? $_REQUEST["date1"] : "";
+$mydate = isset($_POST["date1"]) ? $_POST["date1"] : "";
 
 require("./config/config.lib.php");
 require("./lib/release.lib.php");
@@ -455,7 +455,6 @@ function swapImage(img,imgid) {
 
 <BODY onUnload="if (window.opener && !window.opener.closed) put_focus(); return false;">
 <CENTER>
-<br />
 <FORM ACTION="edituser.php" METHOD="POST" AUTOCOMPLETE="" NAME="EditUsrForm">
 <INPUT type="hidden" name="AVATARURL" value="<?php echo($AVATARURL);?>">
 <INPUT type="hidden" name="FORM_SEND" value="1">
@@ -808,7 +807,7 @@ if (C_PRIV_POPUP == 1)
 			</TD>
 		</TR>
 <?php
-if (COLOR_NAME)
+if (COLOR_NAMES)
 {
 ?>
 		<TR>

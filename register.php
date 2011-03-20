@@ -23,7 +23,7 @@ if (isset($_POST))
 // Fix a security hole
 if (isset($L) && !is_dir("./localization/".$L)) exit();
 
-$mydate = isset($_REQUEST["date1"]) ? $_REQUEST["date1"] : "";
+$mydate = isset($_POST["date1"]) ? $_POST["date1"] : "";
 require("./config/config.lib.php");
 require("./lib/release.lib.php");
 require("./localization/languages.lib.php");
@@ -458,7 +458,6 @@ function swapImage(img,imgid) {
 
 <BODY onLoad="if (window.focus) get_focus();">
 <CENTER>
-<br />
 <FORM ACTION="register.php" METHOD="POST" AUTOCOMPLETE="" NAME="RegParams">
 <P></P>
 <?php
@@ -789,7 +788,7 @@ else
 			</TD>
 		</TR>
 <?php
-if (COLOR_NAME)
+if (COLOR_NAMES)
 {
 ?>
 		<TR>

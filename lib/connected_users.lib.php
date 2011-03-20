@@ -58,9 +58,9 @@ function display_connected($Private,$Full,$NU,$String1,$String2,$DbLink,$Charset
 	global $DefaultDispChatRooms, $res_init, $disp_note;
 	if ($NU > 0)
 	{
+		echo($String1);
 		if ($Full)
 		{
-			echo($String1);
 			// Restricted rooms mod by Ciprian
 			while(list($User,$Latin1,$Room,$RTime,$Status) = $DbLink->next_record())
 			{
@@ -75,10 +75,6 @@ function display_connected($Private,$Full,$NU,$String1,$String2,$DbLink,$Charset
 				$List .= "<tr><td nowrap=\"nowrap\">".$User."</td><td nowrap=\"nowrap\">".$Room."</td><td nowrap=\"nowrap\">".L_LURKING_4." ".strftime(L_SHORT_DATETIME, $RTime)."";
 			}
 			echo($List);
-		}
-		else
-		{
-			echo($String1);
 		}
 	}
 	else
