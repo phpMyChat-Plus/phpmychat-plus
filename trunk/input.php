@@ -212,6 +212,8 @@ $botcontrol ="botfb/$R.txt";
 	if (!isset($M1)) $M1 = $M;
 	$M = str_replace("\"", "&quot;", $M);
 	$M = str_replace("'", "&#39;", $M);
+	$M = str_ireplace("<applet", "", $M);
+	$M = str_ireplace("<javascript", "", $M);
 	// Text formating tags
 	if(C_HTML_TAGS_KEEP == "none")
 	{

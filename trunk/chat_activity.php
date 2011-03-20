@@ -92,7 +92,6 @@ function user_status($name,$stat)
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
-
 <HEAD>
 <META HTTP-EQUIV="Refresh" CONTENT="10">
 <TITLE>Integration of chat activity into your own web page</TITLE>
@@ -115,7 +114,7 @@ function user_status($name,$stat)
 </TR>
 </TABLE>
 <?php
-		if($disp_note) echo("<table WIDTH=100%><tr valign=top><td colspan=4 align=left CLASS=small>[".$res_init."] = ".L_RESTRICTED.".</td></tr></table>");
+	if($disp_note) echo("<table WIDTH=100%><tr valign=top><td colspan=".($DisplayUsers ? "4" : "3")." align=left CLASS=small>[".$res_init."] = ".L_RESTRICTED."</td></tr></table>");
 ?>
 </CENTER>
 </BODY>

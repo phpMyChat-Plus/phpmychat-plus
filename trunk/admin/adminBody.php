@@ -55,7 +55,7 @@ if (isset($Repair))
 	$DbLink->repair(C_USR_TBL);
 };
 
-if ($sheet < 3 || ereg("a",$sheet))
+if ($sheet < 3 || strstr($sheet,"a"))
 {
 	// Inverse sort order
 	if (!isset($sortBy)) $sortBy = "username";
@@ -69,7 +69,7 @@ if ($sheet < 3 || ereg("a",$sheet))
 // Remove some var from the url query
 $URLQueryBody = "What=Body&L=$L&sheet=$sheet";
 $URLQueryBody_Links = "From=$From&".$URLQueryBody."&pmc_username=".urlencode($pmc_username)."&pmc_password=$pmc_password";
-if ($sheet < 3 || ereg("a",$sheet))
+if ($sheet < 3 || strstr($sheet,"a"))
 {
 		// Define the lower bound to be displayed for registered users table
 		$URLQueryBody_SortLinks = $URLQueryBody_Links."&startReg=$startReg";
@@ -104,7 +104,7 @@ else
 <TITLE><?php echo(L_REG_35." - ".(C_CHAT_NAME != "" ? C_CHAT_NAME." - ".APP_NAME : APP_NAME)); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <?php
-if ($sheet < 3 || ereg("a",$sheet))
+if ($sheet < 3 || strstr($sheet,"a"))
 {
 	?>
 	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript1.2">
@@ -114,7 +114,7 @@ if ($sheet < 3 || ereg("a",$sheet))
 		window.parent.sortOrder = "<?php echo((isset($sortOrder) && $sortOrder != "") ? "&sortOrder=$sortOrder" : ""); ?>";
 		window.parent.sortBy = "<?php echo((isset($sortBy) && $sortBy != "") ? "&sortBy=$sortBy" : ""); ?>";
 		<?php
-		if(!ereg("a",$sheet))
+		if(!strstr($sheet,"a"))
 		{
 		?>
 			window.parent.startReg = "<?php echo((isset($startReg) && $startReg != "") ? "&startReg=$startReg" : ""); ?>";

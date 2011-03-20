@@ -188,7 +188,6 @@ function ghosts_in($what, $in, $Charset)
 	return false;
 };
 
-
 /*********** PART I ***********/
 
 // Define the message to display if user comes here because he has been kicked
@@ -244,7 +243,6 @@ if (isset($KK))
 		default:
 	};
 };
-
 
 // Fix some security issues
 if (isset($Reload))
@@ -351,7 +349,6 @@ if(isset($U) && (isset($N) && $N != ""))
 	$DbLink->optimize(C_LRK_TBL);
 	$DbLink->optimize(C_STS_TBL);
 }
-
 
 //**	Ensures the nick is a valid one except if the frameset is reloaded because of the
 //		NN4+ resize bug or because the user runs a join command.	**
@@ -470,7 +467,6 @@ if(!isset($Error) && (isset($N) && $N != "") && !isset($Reload))
 		}
 	};
 };
-
 
 // **	Ensures the user can create a room and the room name is a valid one (bypassed test
 //		when the frameset is reloaded because of the NN4+ resize bug).	**
@@ -707,7 +703,6 @@ if(!isset($Error) && ((isset($R0) && $R0 != "") || (isset($R1) && $R1 != "") || 
 		setcookie("CookieRoom", '', time());        // cookie expires in one year
 	}
 }
-
 
 // ** Enter the chat **
 if(!isset($Error) && (isset($N) && $N != ""))
@@ -1393,13 +1388,33 @@ function isCookieEnabled() {
 		if (document.forms['Params'].elements['R1']) document.forms['Params'].elements['R1'].options[0].selected = true;
 		if (document.forms['Params'].elements['R2']) document.forms['Params'].elements['R2'].options[0].selected = true;
 	}
+
+	function swapImage(img,imgid) {
+		var image = document.getElementById(imgid);
+		var dropd = document.getElementById(img);
+		if (imgid == "flagToSwap")
+		{
+			var path = '<?php echo("./".$ChatPath."localization/"); ?>';
+			var type = '<?php echo(C_FLAGS_3D); ?>';
+			var enfmt = '<?php echo(C_ENGLISH_FORMAT); ?>';
+			if(type == "1")
+			{
+				if(enfmt == "US" && dropd.value == "english") var flagtype = '/images/flag_us.gif';
+				else var flagtype = '/images/flag.gif';
+			}
+			else
+			{
+				if(enfmt == "US" && dropd.value == "english") var flagtype = '/images/flag_us0.gif';
+				else var flagtype = '/images/flag0.gif';
+			}
+			image.src = path + dropd.value + flagtype;
+		};
+	};
 	// -->
 	</SCRIPT>
 	<?php
 
 } // end of send_headers function;
-
-
 
 /*********** 'layout' FUNCTION ***********/
 
@@ -1426,34 +1441,9 @@ function layout($Err, $U, $R, $T, $C, $status, $RemMe)
 	$show_donation = !C_SUPPORT_PAID;
 	if (!isset($Ver) || $Ver == "") $Ver = "H";
 	?>
-
-	<SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
-	<!--
-	function swapImage(img,imgid) {
-		var image = document.getElementById(imgid);
-		var dropd = document.getElementById(img);
-		if (imgid == "flagToSwap")
-		{
-			var path = '<?php echo("./".$ChatPath."localization/"); ?>';
-			var type = '<?php echo(C_FLAGS_3D); ?>';
-			var enfmt = '<?php echo(C_ENGLISH_FORMAT); ?>';
-			if(type == "1")
-			{
-				if(enfmt == "US" && dropd.value == "english") var flagtype = '/images/flag_us.gif';
-				else var flagtype = '/images/flag.gif';
-			}
-			else
-			{
-				if(enfmt == "US" && dropd.value == "english") var flagtype = '/images/flag_us0.gif';
-				else var flagtype = '/images/flag0.gif';
-			}
-			image.src = path + dropd.value + flagtype;
-		};
-	};
-	// -->
-	</SCRIPT>
-
-<TABLE ALIGN="center" CELLPADDING=0 CLASS="ChatBody"><TR><TD CLASS="ChatBody">
+<TABLE ALIGN="center" CELLPADDING=0 CLASS="ChatBody">
+<TR>
+<TD CLASS="ChatBody">
 <CENTER>
 <FORM ACTION="<?php echo("$Action"); ?>" METHOD="POST" AUTOCOMPLETE="" NAME="Params" onSubmit="this.target='_blank';" onSubmit="defineVerField(); return isCookieEnabled();">
 <?php
@@ -1499,6 +1489,11 @@ if ($show_donation)
 		<TR CLASS="ChatCell">
 			<TH COLSPAN=2 CLASS="ChatTabTitle"><?php echo(L_SET_1); ?></TH>
 		</TR>
+		<?php
+		// Display flags if necessary
+		if (C_MULTI_LANG)
+		{
+		?>
 		<TR CLASS="ChatCell">
 			<TD COLSPAN=2 ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_1a); ?> :
 		<?php
@@ -1584,6 +1579,9 @@ if ($show_donation)
 	    </SELECT>&nbsp;<img style="vertical-align:middle" id="flagToSwap" src="<?php echo("./".$ChatPath."localization/".$namesel."/images/".(C_FLAGS_3D ? $flagsel_3d : $flagsel)); ?>" />
 			</TD>
 		</TR>
+		<?php
+		}
+		?>
 		<TR CLASS="ChatCell">
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_SET_2); ?> :</TD>
 			<TD VALIGN="TOP" CLASS="ChatCell">
@@ -1601,7 +1599,7 @@ if ($show_donation)
 		<TR CLASS="ChatCell">
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP">
 				<?php
-				if (C_ALLOW_REGISTER)
+				if (C_REQUIRE_REGISTER && C_ALLOW_REGISTER)
 				{
 				?>
 					<A HREF="<?php echo($ChatPath); ?>register.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('register','<?php echo(urlencode(stripslashes($U))); ?>'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_3); ?>.'; return true;" title="<?php echo(L_REG_3); ?>"><?php echo(L_REG_3); ?></A>
@@ -1645,6 +1643,8 @@ if (C_REQUIRE_REGISTER)
 	?>
 </TABLE>
 </CENTER>
+</TD>
+</TR>
 </TABLE>
 	<?php
 	if ($copy_break)

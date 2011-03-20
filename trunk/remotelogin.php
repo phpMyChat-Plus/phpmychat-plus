@@ -32,7 +32,6 @@ require("./${ChatPath}/lib/remotelogin.lib.php");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
-
 <HEAD>
 <SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
 <!--
@@ -41,13 +40,12 @@ window.name="login";
 </SCRIPT>
 <?php
 // You can put html head statements right after the "<HEAD>" tag.
-
 // Both values are boolean. See explanations in 'remotelogin.lib.php' file.
 send_headers(1,1);
 ?>
 </HEAD>
-<BODY<?php echo((C_FILLED_LOGIN) ? " CLASS=\"ChatBody\"" : ""); ?><?php echo((C_BACKGR_IMG && C_BACKGR_IMG_PATH != "") ? " style=\"background-image: url(".C_BACKGR_IMG_PATH.")\"" : ""); ?>>
-	<CENTER>
+<BODY<?php echo((C_FILLED_LOGIN) ? " CLASS=\"ChatBody\"" : ""); ?><?php echo((C_BACKGR_IMG && C_BACKGR_IMG_PATH != "") ? " style=\"background-image: url(".C_BACKGR_IMG_PATH."); background-attachment: fixed;\"" : ""); ?>>
+<CENTER>
 <?php
 // You can put html statements right after the "<BODY>" tag or add php code here.
 
@@ -70,12 +68,11 @@ $Status = (isset($CookieStatus) ? $CookieStatus : "");
 $RemMe = (isset($CookieHash) ? $CookieHash : "");
 
 layout($Is_Error,$Username,$Room_name,$Room_type,$Color,$Status,$RemMe);
-
 // The following line is required
-$DbLink->close();
 ?>
 </CENTER>
 </BODY>
 </HTML>
 <?php
+$DbLink->close();
 ?>
