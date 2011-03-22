@@ -1,6 +1,5 @@
 <?php
 // File : russian/localized.admin.php - plus version (01.08.2009 - rev.15)
-// Russian translation by Viktor <vikt81@mail.ru>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
 
 // extra header for charset

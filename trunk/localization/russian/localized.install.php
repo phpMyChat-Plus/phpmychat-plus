@@ -1,6 +1,5 @@
 <?php
 // File : russian/localized.install.php - plus version (07.06.2009 - rev.7)
-// Russian translation by Viktor <vikt81@mail.ru>
 // Do not use ' ; use ’ istead (utf-8 edit bug)
 
 define("L_BTN1", "Далее");

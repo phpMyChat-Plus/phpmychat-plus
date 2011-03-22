@@ -216,7 +216,7 @@ Optional:
 When I look at my errorlog I see the following message:
 [25-Nov-2007 06:42:08] PHP Warning:  Unknown(): Your script possibly relies on a session side-effect which existed until PHP 4.2.3. Please be advised that the session extension does not consider global variables as a source of data, unless register_globals is enabled. You can disable this functionality and this warning by setting session.bug_compat_42 or session.bug_compat_warn to off, respectively. in Unknown on line 0
 17A.
-Check if the permissions of your "plus" (chat name) and "config" folders are 777. If so, change them to 755 (chmod). Sometimes, due to different servers configurtion, they remain 777 after the installing process.
+Check if the permissions of your "plus" (chat name) and "config" folders are 777. If so, change them to 755 (chmod). Sometimes, due to different servers configuration, they remain 777 after the installing process.
 Reply: As soon as I changed the permission of the plus folder (chat folder in my case) it worked.
 
 18Q.

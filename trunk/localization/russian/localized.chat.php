@@ -1,6 +1,5 @@
 <?php
 // File : russian/localized.chat.php - plus version (02.01.2011 - rev.45)
-// Russian translation by Viktor <vikt81@mail.ru>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
 // extra header for Charset

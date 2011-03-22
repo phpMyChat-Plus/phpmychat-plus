@@ -50,8 +50,8 @@ Fixes History:
 - uploader class updated to version 0.30; (functionality related)
 - important installer fixes - the skip button and ftp process were broken in 1.93; (functionality related)
 - addressess called bye "username>" will now stay in the input box for the entire addressed conversation, until removed by user; (functionality extension)
-- Ukrainian translation started; (localization project) - Thanks to Viktor <vikt81@mail.ru>
-- Russian translation added; (localization project) - Thanks to Viktor <vikt81@mail.ru>
+- Ukrainian translation started; (localization project)
+- Russian translation added; (localization project)
 - updated Calendar class to v3.2 and fixed a few small js bugs; (functionality related)
 - separated banished users from the reg ones in the send email tab in admin panel, so they don’t get selected by mistake to receive unwanted emails from admins; (functionality extention)
 - fixed a bug that caused page titles with space at the end to break the popups/openers; (functionality related)

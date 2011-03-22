@@ -65,10 +65,10 @@ BODY
 	text-indent: 0;
 	scrollbar-3dlight-color: #00ffff;
 	scrollbar-arrow-color: #ffff00;
-	scrollbar-base-color: <?php echo($COLOR_TB); ?>;
+	scrollbar-base-color: <?php echo($COLOR_BODY); ?>;
 	scrollbar-track-color: <?php echo($COLOR_TB); ?>;
-	scrollbar-darkshadow-color: #0000ff;
-	scrollbar-face-color: maroon;
+	scrollbar-darkshadow-color: maroon;
+	scrollbar-face-color: darkorange;
 	scrollbar-highlight-color: brown;
 	scrollbar-shadow-color: #808080;
 }
@@ -83,10 +83,10 @@ BODY.frame
 	text-indent: 0;
 	scrollbar-3dlight-color: #00ffff;
 	scrollbar-arrow-color: #ffff00;
-	scrollbar-base-color: <?php echo($COLOR_TB); ?>;
+	scrollbar-base-color: <?php echo($COLOR_BODY); ?>;
 	scrollbar-track-color: <?php echo($COLOR_TB); ?>;
-	scrollbar-darkshadow-color: #0000ff;
-	scrollbar-face-color: maroon;
+	scrollbar-darkshadow-color: maroon;
+	scrollbar-face-color: darkorange;
 	scrollbar-highlight-color: brown;
 	scrollbar-shadow-color: #808080;
 }
@@ -100,10 +100,10 @@ BODY.mainframe
 	margin: 5px;
 	scrollbar-3dlight-color: #00ffff;
 	scrollbar-arrow-color: #ffff00;
-	scrollbar-base-color: <?php echo($COLOR_TB); ?>;
+	scrollbar-base-color: <?php echo($COLOR_BODY); ?>;
 	scrollbar-track-color: <?php echo($COLOR_TB); ?>;
-	scrollbar-darkshadow-color: #0000ff;
-	scrollbar-face-color: maroon;
+	scrollbar-darkshadow-color: maroon;
+	scrollbar-face-color: darkorange;
 	scrollbar-highlight-color: brown;
 	scrollbar-shadow-color: #808080;
 }
