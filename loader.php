@@ -406,7 +406,7 @@ if($DbLink->num_rows() > 0)
 			if (empty($avatar) || $avatar == "") $avatar = C_AVA_RELPATH . C_DEF_AVATAR;
 			$DbAvatar->clean_results();
 			// Gravatar mod added by Ciprian
-			if ((ALLOW_GRAVATARS == 2 || (ALLOW_GRAVATARS == 1 && (!isset($use_gravatar) || $use_gravatar))) && !ereg("SYS ", $User))
+			if ((ALLOW_GRAVATARS == 2 || (ALLOW_GRAVATARS == 1 && (!isset($use_gravatar) || $use_gravatar))) && !strstr($User,"SYS "))
 			{
 				if (eregi(C_AVA_RELPATH, $avatar)) $local_avatar = 1;
 				else $local_avatar = 0;
@@ -505,7 +505,7 @@ else
 		if (substr($User,0,4) != "SYS ")
 		{
 			$Userx = $User;  // Avatar System insered only.
-			if($User != stripslashes($U) && $User != $QUOTE_NAME)
+			if($User != stripslashes($U) && $User != C_QUOTE_NAME)
 			{
 				if (C_ENABLE_PM && C_PRIV_POPUP && $allowpopupu)
 				{
@@ -524,11 +524,11 @@ else
 			{
 				$User = "<a onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false,'".special_char($U,$Latin1,1)."'); return false\" title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME1."'; return true\" CLASS=\"sender\">".$colorname_tag."[".special_char($User,$Latin1,0)."]".$colorname_endtag."<\/a>";
 			}
-			elseif($User == $QUOTE_NAME)
+			elseif($User == C_QUOTE_NAME)
 			{
 				$User = "<a onClick=\"window.parent.userClick('".special_char($User,$Latin1,1)."',false); return false\" title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME1."'; return true\" CLASS=\"sender\">".$colorname_tag."[".special_char($User,$Latin1,0)."]".$colorname_endtag."<\/a>";
 			}
-			if($Dest != "" && $Dest != stripslashes($U) && $Dest != $QUOTE_NAME)
+			if($Dest != "" && $Dest != stripslashes($U) && $Dest != C_QUOTE_NAME)
 			{
 				$Dest = htmlspecialchars(stripslashes($Dest));
 				if (C_ENABLE_PM && C_PRIV_POPUP && $allowpopupu)
@@ -883,10 +883,10 @@ if (C_QUOTE)
 		$quotetext = str_replace("\n", "", $quotetext);
 		if ($R != "1")
 		{
-		$DbLink->query("SELECT m_time FROM ".C_MSG_TBL." WHERE username='$QUOTE_NAME' AND room = '$R' AND m_time > ".(time() - $quotetime)." ORDER BY m_time DESC LIMIT 1");
+		$DbLink->query("SELECT m_time FROM ".C_MSG_TBL." WHERE username='".C_QUOTE_NAME."' AND room = '$R' AND m_time > ".(time() - $quotetime)." ORDER BY m_time DESC LIMIT 1");
 			if ($DbLink->num_rows() == 0)
 			{
-				$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '$QUOTE_NAME', '', ".time().", '', '$quotetext', '', '')");
+				$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".C_QUOTE_NAME."', '', ".time().", '', '$quotetext', '', '')");
 			}
 		}
 	}

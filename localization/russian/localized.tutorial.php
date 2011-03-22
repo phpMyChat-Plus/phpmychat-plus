@@ -1,6 +1,5 @@
 <?php
 // File : russian/localized.tutorial.php - plus version (26.08.2008 - rev.10)
-// Russian translation by Viktor <vikt81@mail.ru>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
 
 // Get the names and values for vars sent by the script that called this one
