@@ -2066,19 +2066,26 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
     <td>
 			<input name="vBOT_NAME" type="text" size="25" maxlength="25" value="<?php echo $BOT_NAME; ?>">
+	</td>
+</tr>
+<tr>
+    <td><b>BOT status & maintainance.</b><br />
+    	<?php if ($bot_id <> 1) echo ("<i><font color=red>Important: If your bot is not responding properly (posts empty messages) and/or the Bot ID <> 1, you might need to reload your bot. This operation will empty the bot tables in the database and reload the entire script.</i></font>"); ?>
+    </td>
+    <td>
 			<?php
 			if (!$bot_loaded)
 			{
-				echo("<br /><font color=red>Your Bot is not loaded to the DB.</font>".((file_exists("bot/aiml/startup.xml") && file_exists("bot/botloader.php")) ? "<br />Click <a href=\"./bot/botloader.php\" target=\"_blank\">here</a> to load it now!": ""));
+				echo("<font color=red>Your Bot is not loaded to the DB.</font>".((file_exists("bot/aiml/startup.xml") && file_exists("bot/botloader.php")) ? "<br />Click <a href=\"./bot/botloader.php\" target=\"_blank\">here</a> to load it now!": ""));
 			}
 			elseif ($bot_id)
 			{
-				echo((($bot_id == 1) ? "<br /><font color=green>Bot ID:</font>" : "<br /><font color=red>Bot ID:</font>")." <input name=\"BotId\" type=\"number\" size=\"7\" maxlength=\"3\" value=\"$bot_id\" DISABLED READONLY>");
+				echo(($bot_id == 1) ? "<font color=green>Bot ID:</font><input name=\"BotId\" type=\"text\" size=\"7\" maxlength=\"2\" value=\"$bot_id\" DISABLED READONLY>" : "<font color=red>Bot ID:</font><input name=\"BotId\" type=\"text\" size=\"7\" maxlength=\"2\" value=\"$bot_id\" DISABLED READONLY><br />Click <a href=\"./bot/botloader.php\" target=\"_blank\" class=\"error\">here</a> to reload bot");
 			}
 			?>
 		</td>
 </tr>
-<tr>
+<tr bgcolor="#B0C4DE">
     <td><b>Enter the color of the BOT response messages.</b>
 	</td>
     <td>
@@ -2100,7 +2107,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		</select>
     </td>
 </tr>
-<tr bgcolor="#B0C4DE">
+<tr>
     <td><b>Enter the avatar of the BOT.</b><br />
     	<i>Hint: It will be shown only if the avatar system is enabled</i>
     </td>
@@ -2109,7 +2116,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<?php echo(($BOT_AVATAR != "") ? "&nbsp;<img id=\"bot_avatarToSwap\" src=\"".$BOT_AVATAR."\" border=0 width=".$AVA_WIDTH." height=".$AVA_HEIGHT." ALT=\"Bot Avatar\" Title=\"Bot Avatar\" />" : ""); ?>
 	</td>
 </tr>
-<tr>
+<tr bgcolor="#B0C4DE">
     <td><b>Enter the message to be posted by BOT on start.</b><br />
     	<i>Hint: Avoid special characters or the settings will not be saved</i>
     </td>
@@ -2117,7 +2124,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<input name="vBOT_HELLO" type="text" size="25" maxlength="100" value="<?php echo $BOT_HELLO; ?>">
 	</td>
 </tr>
-<tr bgcolor="#B0C4DE">
+<tr>
     <td><b>Enter the message to be posted by BOT on stop.</b><br />
     	<i>Hint: Avoid special characters or the settings will not be saved</i>
     </td>
