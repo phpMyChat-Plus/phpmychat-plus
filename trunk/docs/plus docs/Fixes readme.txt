@@ -38,19 +38,19 @@ Fixes History:
 - banish fix; (security/functionality related)
 - language selection added to the remote login box; (functionality related)
 - important sound fix - users can not set sound on/off for notifications in chat (except for buzzes sent by power users); (functionality related)
-- Catalan translation started; (localization project) - Thanks to Jordi Babot <jordibabot@gmail.com>
+- Catalan translation started; (localization project) - Thanks to Jordi Babot <jordibabot@gmail.com> - suspended
 - important BOT fix for Windows servers, when answering with date formated string (locale stays in English now); (functionality related)
 - Help popup - admin email link (mailto) fix; (functionality related)
 - several ereg/eregi_replace functions replaced by str_replace - steps for php5.3 compatibility; (compatibility related)
 02.06.2010 - 1.94-beta5:
 - download link updated in all occurences in chat; (functionality related)
 - updated Calendar class to v3.3; (functionality related)
-- Czech translation started; (localization project) - Thanks to Chenzee <chenzee@email.cz>
-- Yoruba (Nigeria) translation started; (localization project) - Thanks to Samson Ameh <philanthropist4eva@gmail.com>
+- Czech translation started; (localization project) - Thanks to Chenzee <chenzee@email.cz> - suspended
+- Yoruba (Nigeria) translation started; (localization project) - Thanks to Samson Ameh <philanthropist4eva@gmail.com> - suspended
 - uploader class updated to version 0.30; (functionality related)
 - important installer fixes - the skip button and ftp process were broken in 1.93; (functionality related)
 - addressess called bye "username>" will now stay in the input box for the entire addressed conversation, until removed by user; (functionality extension)
-- Ukrainian translation started; (localization project)
+- Ukrainian translation started; (localization project) - suspended
 - Russian translation added; (localization project)
 - updated Calendar class to v3.2 and fixed a few small js bugs; (functionality related)
 - separated banished users from the reg ones in the send email tab in admin panel, so they don’t get selected by mistake to receive unwanted emails from admins; (functionality extention)

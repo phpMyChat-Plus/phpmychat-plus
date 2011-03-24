@@ -49,6 +49,7 @@ require_once("${BotPath}dbprefs.php");
 require_once("${BotPath}botloaderfuncs.php");
 
 ss_timing_start("all");
+empty_tables();
 
 print "<b><font size='3' color='black'>This script is loading your AIML files one at a time to prevent the script from timing out.<br />\nAfter last file is loaded, you should see \"<font color='red'>DONE LOADING</font>\".</b><br />\n
 <font color='green'><b>Note:</b> Only use this script if your PHP is running in safe mode. If you are still experiencing timeouts then you need to edit your AIML files into smaller files (keep the AIML header and footer in all the splitted pieces).</font><br />\n

@@ -42,10 +42,9 @@ if (isset($First))
 	$DbLink->optimize(C_REG_TBL);
 	$DbLink->optimize(C_STS_TBL);
 	$DbLink->optimize(C_USR_TBL);
-};
-
-if (isset($Repair))
-{
+#};
+#if (isset($Repair))
+#{
 	$DbLink->repair(C_BAN_TBL);
 	$DbLink->repair(C_CFG_TBL);
 	$DbLink->repair(C_LRK_TBL);

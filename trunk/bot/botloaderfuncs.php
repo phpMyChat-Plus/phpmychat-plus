@@ -51,6 +51,35 @@ global $selectbot, $annesID;
 *
 * @return void
 */
+function empty_tables()
+{
+
+	$q1="TRUNCATE TABLE bot_bot";
+    $e1 = mysql_query($q1);
+    if ($e1){
+    }
+	$q2="TRUNCATE TABLE bot_bots";
+    $e2 = mysql_query($q2);
+    if ($e2){
+    }
+	$q3="TRUNCATE TABLE bot_patterns";
+    $e3 = mysql_query($q3);
+    if ($e3){
+    }
+	$q4="TRUNCATE TABLE bot_templates";
+    $e4 = mysql_query($q4);
+    if ($e4){
+    }
+	$q5="TRUNCATE TABLE bot_thatindex";
+    $e5 = mysql_query($q5);
+    if ($e5){
+    }
+	$q6="TRUNCATE TABLE bot_thatstack";
+    $e6 = mysql_query($q6);
+    if ($e6){
+    }
+}
+
 function deletebot($bot)
 {
 
