@@ -294,12 +294,12 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
         <div align="right" class="closeme"><a href="javascript:closeMe();"><img src="images/close.gif" border="0" /></a></div>
         <?php } ?>
         <form id="calendarform" name="calendarform" method="post" action="<?php echo($thispage);?>" style="margin: 0px;">
-          <table width="99%" border="0" align="center" cellpadding="1" cellspacing="0">
+          <table border="0" align="center" cellpadding="1" cellspacing="0">
             <tr>
 			<?php
 			if ($first_input == "B"){
 			?>
-              <td width="50%" align="left"><select name="m" onchange="javascript:submitCalendar();">
+              <td align="left"><select name="m" onchange="javascript:submitCalendar();">
               <?php
               $monthnames = $cobj->getMonthNames();
               for($f=1; $f<=sizeof($monthnames); $f++){
@@ -307,12 +307,13 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
                 echo("<option value=\"".str_pad($f, 2, "0", STR_PAD_LEFT)."\"$selected>".$monthnames[$f-1]."</option>");
               }
               ?>
-              </select>          </td>
+              </select>
+			  </td>
 			<?php
 			}
 			elseif ($first_input == "Y"){
 			?>
-              <td width="50%" align="left"><select name="y" onchange="javascript:submitCalendar();">
+              <td align="left"><select name="y" onchange="javascript:submitCalendar();">
               <?php
               $thisyear = date('Y');
 
@@ -329,7 +330,7 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
 			}
 			if ($second_input == "B"){
 			?>
-              <td width="50%" align="right"><select name="m" onchange="javascript:submitCalendar();">
+              <td align="right"><select name="m" onchange="javascript:submitCalendar();">
               <?php
               $monthnames = $cobj->getMonthNames();
               for($f=1; $f<=sizeof($monthnames); $f++){
@@ -337,12 +338,13 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
                 echo("<option value=\"".str_pad($f, 2, "0", STR_PAD_LEFT)."\"$selected>".$monthnames[$f-1]."</option>");
               }
               ?>
-              </select>          </td>
+              </select>
+			  </td>
 			<?php
 			}
 			elseif ($second_input == "Y"){
 			?>
-              <td width="50%" align="right"><select name="y" onchange="javascript:submitCalendar();">
+              <td align="right"><select name="y" onchange="javascript:submitCalendar();">
               <?php
               $thisyear = date('Y');
 
