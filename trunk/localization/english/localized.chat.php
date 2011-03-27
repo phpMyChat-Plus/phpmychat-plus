@@ -593,13 +593,13 @@ define("L_FRI", "Friday");
 define("L_SAT", "Saturday");
 define("L_SUN", "Sunday");
 // Week days Short Names
-define("L_S_MON", "Mon");
-define("L_S_TUE", "Tue");
-define("L_S_WED", "Wed");
-define("L_S_THU", "Thu");
-define("L_S_FRI", "Fri");
-define("L_S_SAT", "Sat");
-define("L_S_SUN", "Sun");
+define("L_S_MON", "Mo");
+define("L_S_TUE", "Tu");
+define("L_S_WED", "We");
+define("L_S_THU", "Th");
+define("L_S_FRI", "Fr");
+define("L_S_SAT", "Sa");
+define("L_S_SUN", "Su");
 
 // Localized date format
 if (C_ENGLISH_FORMAT == "UK")
