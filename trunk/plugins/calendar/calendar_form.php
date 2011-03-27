@@ -14,24 +14,22 @@ $thispage = $_SERVER['PHP_SELF'];
 $sld = (isset($_REQUEST["selected_day"])) ? $_REQUEST["selected_day"] : 0;
 $slm = (isset($_REQUEST["selected_month"])) ? (int)$_REQUEST["selected_month"] : 0;
 $sly = (isset($_REQUEST["selected_year"])) ? (int)$_REQUEST["selected_year"] : 0;
-
 $year_start = (isset($_REQUEST["year_start"])) ? $_REQUEST["year_start"] : 0;
 $year_end = (isset($_REQUEST["year_end"])) ? $_REQUEST["year_end"] : 0;
-
 $startMonday = (isset($_REQUEST["mon"])) ? $_REQUEST["mon"] : 0;
-
 $date_allow1 = (isset($_REQUEST["da1"])) ? $_REQUEST["da1"] : "";
 $date_allow2 = (isset($_REQUEST["da2"])) ? $_REQUEST["da2"] : "";
-
 $show_not_allow = (isset($_REQUEST["sna"])) ? $_REQUEST["sna"] : true;
-
 $auto_submit = (isset($_REQUEST["aut"])) ? $_REQUEST["aut"] : false;
 $form_name = (isset($_REQUEST["frm"])) ? $_REQUEST["frm"] : "";
 $target_url = (isset($_REQUEST["tar"])) ? $_REQUEST["tar"] : "";
-
 $show_input = (isset($_REQUEST["inp"])) ? $_REQUEST["inp"] : true;
 $date_format = (isset($_REQUEST["fmt"])) ? $_REQUEST["fmt"] : 'd F Y';
 $dsb_txt = (isset($_REQUEST["dis"])) ? $_REQUEST["dis"] : "";
+$date_pair1 = (isset($_REQUEST["pr1"])) ? $_REQUEST["pr1"] : "";
+$date_pair2 = (isset($_REQUEST["pr2"])) ? $_REQUEST["pr2"] : "";
+$date_pair_value = (isset($_REQUEST["prv"])) ? $_REQUEST["prv"] : "";
+$path = (isset($_REQUEST["pth"])) ? $_REQUEST["pth"] : "";
 $hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : 'en_US';
 
 //check year to be select in case of date_allow is set
@@ -284,6 +282,13 @@ function adjustContainer(){
 	}
 }
 
+function refreshCalendar(d){
+	var f = document.calendarform;
+	
+	this.loading();
+	f.submit();
+}
+
 window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1000); };
 //-->
 </script>
@@ -379,19 +384,23 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
             <input name="inp" type="hidden" id="inp" value="<?php echo($show_input);?>" />
             <input name="fmt" type="hidden" id="fmt" value="<?php echo($date_format);?>" />
             <input name="dis" type="hidden" id="dis" value="<?php echo($dsb_txt);?>" />
+            <input name="pr1" type="hidden" id="pr1" value="<?php echo($date_pair1);?>" />
+            <input name="pr2" type="hidden" id="pr2" value="<?php echo($date_pair2);?>" />
+            <input name="prv" type="hidden" id="prv" value="<?php echo($date_pair_value);?>" />
+            <input name="pth" type="hidden" id="pth" value="<?php echo($path);?>" />
             <input name="hl" type="hidden" id="hl" value="<?php echo($hl);?>" />
       </form>
     </div>
     <div id="calendar-container">
         <div id="calendar-body">
-        <table border="0" cellspacing="1" cellpadding="3" align="center" class="bg">
+        <table border="0" cellspacing="1" cellpadding="0" align="center" class="bg">
             <?php
             $day_headers = array_values($cobj->getDayHeaders());
 
             echo("<tr>");
             //write calendar day header
             foreach($day_headers as $dh){
-                echo("<td align=\"center\" class=\"header\">".$dh."</td>");
+                echo("<td align=\"center\" class=\"header\"><div>".$dh."</div></td>");
             }
             echo("</tr>");
 
@@ -402,7 +411,7 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
 
             //write previous month
             for($day=$startwrite; $day<=$total_lastmonth; $day++){
-                echo("<td align=\"center\" class=\"othermonth\">$day</td>");
+                echo("<td align=\"center\" class=\"othermonth\"><div>$day</div></td>");
                 $dayinweek_counter++;
             }
 
@@ -421,6 +430,8 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
                 echo("</tr><tr>");
                 $row_count++;
             }
+
+			$dp_time = ($date_pair_value) ? strtotime($date_pair_value) : 0;
 
             //write current month
             for($day=1; $day<=$total_thismonth; $day++){
@@ -472,6 +483,15 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
                 	}
                 }
 
+				//check date_pair1 &  2 and disabled date
+				if($date_pair1 && $dp_time > 0 && $currentTime < $dp_time){ //set date only after date_pair1
+					$dateLink = false;						
+				}
+				
+				if($date_pair2 && $dp_time > 0 && $currentTime > $dp_time){ //set date only before date_pair2
+					$dateLink = false;
+				}
+
 				$htmlClass[] = " ".strtolower($day_txt);
 
                 if($dateLink){
@@ -479,7 +499,7 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
                     $class = implode(" ", $htmlClass);
                     if($class) $class = " class=\"$class\"";
 
-                    echo("<td align=\"center\"$class><a href=\"javascript:selectDay('".str_pad($day, 2, "0", STR_PAD_LEFT)."');\">$day</a></td>");
+                    echo("<td align=\"center\"$class><a href=\"javascript:selectDay('".str_pad($day, 2, "0", STR_PAD_LEFT)."');\"><div>$day</div></a></td>");
                 }else{
                     $htmlClass[] = "disabledate";
 
@@ -487,7 +507,7 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
                     if($class) $class = " class=\"$class\"";
 
                     //write date without link
-                    echo("<td align=\"center\"$class>$day</td>");
+                    echo("<td align=\"center\"$class><div>$day</div></td>");
                 }
                 if((!$startMonday && $date_num == 6) || ($startMonday && $date_num == 0)){
                     echo("</tr>");
@@ -502,7 +522,7 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
             $write_end_days = (6-$dayinweek_counter)+1;
             if($write_end_days > 0){
                 for($day=1; $day<=$write_end_days; $day++){
-                    echo("<td class=\"othermonth\" align=\"center\">$day</td>");
+                    echo("<td class=\"othermonth\" align=\"center\"><div>$day</div></td>");
                 }
                  echo("</tr>");
                  $row_count++;
@@ -513,7 +533,7 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
                 echo("<tr>");
                 $tmpday = $write_end_days+1;
                 for($f=$tmpday; $f<=($tmpday+6); $f++){
-                    echo("<td class=\"othermonth\" align=\"center\">$f</td>");
+                    echo("<td class=\"othermonth\" align=\"center\"><div>$f</div></td>");
                 }
                 $write_end_days += 6;
                 echo("</tr>");
@@ -537,14 +557,14 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
             <div style="float: left; text-align: center;">
             <?php
             if($previous_year >= $year_start && $show_previous){
-            ?><a href="javascript:move('<?php echo(str_pad($previous_month, 2, "0", STR_PAD_LEFT));?>', '<?php echo($previous_year);?>');">&lt;&lt; <?php echo(L_PREV); ?></a><?php
+            ?><a href="javascript:move('<?php echo(str_pad($previous_month, 2, "0", STR_PAD_LEFT));?>', '<?php echo($previous_year);?>');">&lt;&nbsp;<?php echo(L_PREV); ?></a><?php
             }else echo("&nbsp;");
             ?>
             </div>
             <div style="float: right; text-align: center;">
             <?php
             if($next_year <= $year_end && $show_next){
-            ?><a href="javascript:move('<?php echo(str_pad($next_month, 2, "0", STR_PAD_LEFT));?>', '<?php echo($next_year);?>');"><?php echo(L_NEXT); ?> &gt;&gt;</a><?php
+            ?><a href="javascript:move('<?php echo(str_pad($next_month, 2, "0", STR_PAD_LEFT));?>', '<?php echo($next_year);?>');"><?php echo(L_NEXT); ?>&nbsp;&gt;</a><?php
             }else echo("&nbsp;");
             ?>
             </div>

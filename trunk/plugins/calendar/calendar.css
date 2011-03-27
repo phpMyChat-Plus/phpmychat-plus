@@ -24,14 +24,16 @@ A, A:hover, A:active, A:visited {
 #calendar-body .header { background-color: #6699CC; color: #FFFFFF; font-size: 11px; }
 #calendar-body .today { background-color: #FFFFCC; }
 #calendar-body td { font-size: 11px; }
+#calendar-body td div { padding: 3px; width: 15px; }
 #calendar-body .bg { background-color: #6699CC; }
 #calendar-body .select { background-color: #FFCC99; }
 #calendar-body .othermonth a:link { text-decoration : none; font-family: tahoma; color: #CCFFCC; }
 #calendar-body .othermonth a:visited { text-decoration : none; font-family: tahoma; color: #CCFFCC; }
 #calendar-body .othermonth a:hover { text-decoration : underline; font-family: tahoma; color: #FFFFFF; }
+#calendar-body a { display: block; }
 #calendar-body a:link { text-decoration : none; font-family: tahoma; color: #000000; }
 #calendar-body a:visited { text-decoration : none; font-family: tahoma; color: #000000; }
-#calendar-body a:hover { text-decoration : underline; font-family: tahoma; color: #FF0000; }
+#calendar-body a:hover { text-decoration : underline; font-family: tahoma; color: #FF0000;  background-color: #FFFFCC; }
 #calendar-body .disabledate { color: #669999; }
 
 #calendar-body .refresh { color: #FFFFFF; padding: 10px 3px 3px; }
