@@ -6,7 +6,7 @@
 // add on: translation  implemented - default is English en_US
 //	- thanks ciprianmp
 //
-// version 3.4-loc (26 March 2011)
+// version 3.41-loc (27 March 2011)
 
 //bug fixed: Incorrect next month display show on 'February 2008'
 //	- thanks Neeraj Jain for bug report
@@ -61,6 +61,12 @@
 //
 //bug fixed: total number of days startup incorrect
 //  - thanks Francois du Toit, ciprianmp
+//
+//add on: setAlignment() and setDatePair() function
+//  - thanks for ciprianmp and many guys guiding this :)
+//
+//bug fixed: the header of calendar look tight when day's header more then 2 characters, this can be adjusted by increasing width on calendar.css [#calendar-body td div { width: 15px; }]
+//	- thanks ciprianmp
 //
 //********************************************************
 
@@ -303,8 +309,6 @@ class tc_calendar{
 					
 			}
 			
-			//$div_align = "top:".$img_height."px;right:0px;";
-			//$div_align = "bottom:".$img_height."px;right:0px;";
 		}else{
 			$div_display = "visible";
 			$div_position = "relative";

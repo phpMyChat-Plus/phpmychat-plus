@@ -76,13 +76,13 @@ if(!defined("L_FRI")) define("L_FRI", "Friday");
 if(!defined("L_SAT")) define("L_SAT", "Saturday");
 if(!defined("L_SUN")) define("L_SUN", "Sunday");
 // Week days Short Names
-if(!defined("L_S_MON")) define("L_S_MON", "Mon");
-if(!defined("L_S_TUE")) define("L_S_TUE", "Tue");
-if(!defined("L_S_WED")) define("L_S_WED", "Wed");
-if(!defined("L_S_THU")) define("L_S_THU", "Thu");
-if(!defined("L_S_FRI")) define("L_S_FRI", "Fri");
-if(!defined("L_S_SAT")) define("L_S_SAT", "Sat");
-if(!defined("L_S_SUN")) define("L_S_SUN", "Sun");
+if(!defined("L_S_MON")) define("L_S_MON", "Mo");
+if(!defined("L_S_TUE")) define("L_S_TUE", "Tu");
+if(!defined("L_S_WED")) define("L_S_WED", "We");
+if(!defined("L_S_THU")) define("L_S_THU", "Th");
+if(!defined("L_S_FRI")) define("L_S_FRI", "Fr");
+if(!defined("L_S_SAT")) define("L_S_SAT", "Sa");
+if(!defined("L_S_SUN")) define("L_S_SUN", "Su");
 
 // Windows encoding
 if(!defined("WIN_DEFAULT")) define("WIN_DEFAULT", "windows-1252");

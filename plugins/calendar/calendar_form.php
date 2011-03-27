@@ -282,13 +282,6 @@ function adjustContainer(){
 	}
 }
 
-function refreshCalendar(d){
-	var f = document.calendarform;
-	
-	this.loading();
-	f.submit();
-}
-
 window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1000); };
 //-->
 </script>
@@ -301,7 +294,7 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
         <div align="right" class="closeme"><a href="javascript:closeMe();"><img src="images/close.gif" border="0" /></a></div>
         <?php } ?>
         <form id="calendarform" name="calendarform" method="post" action="<?php echo($thispage);?>" style="margin: 0px;">
-          <table width="66%" border="0" align="center" cellpadding="1" cellspacing="0">
+          <table width="99%" border="0" align="center" cellpadding="1" cellspacing="0">
             <tr>
 			<?php
 			if ($first_input == "B"){

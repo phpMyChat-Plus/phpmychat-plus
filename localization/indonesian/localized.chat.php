@@ -597,11 +597,11 @@ define("L_SUN", "Minggu");
 // Week days Short Names
 define("L_S_MON", "Sen");
 define("L_S_TUE", "Sel");
-define("L_S_WED", "Rabu");
-define("L_S_THU", "Kamis");
-define("L_S_FRI", "Jumat");
-define("L_S_SAT", "Sabtu");
-define("L_S_SUN", "Minggu");
+define("L_S_WED", "Rab");
+define("L_S_THU", "Kam");
+define("L_S_FRI", "Jum");
+define("L_S_SAT", "Sab");
+define("L_S_SUN", "Min");
 
 // Localized date format
 # Nothing to translate here – skip this paragraph, Ciprian will adjust it for you! This is just a sample.
