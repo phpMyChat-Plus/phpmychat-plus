@@ -38,6 +38,7 @@ function setValue(objname, d){
 
 			document.getElementById("divCalendar_"+objname+"_lbl").innerHTML = dateTxt;
 		}
+
 		toggleCalendar(objname);
 	}
 	checkPairValue(objname, d);
