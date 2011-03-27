@@ -6,7 +6,7 @@
 // add on: translation  implemented - default is English en_US
 //	- thanks ciprianmp
 //
-// version 3.3-loc (13 February 2011)
+// version 3.4-loc (26 March 2011)
 
 //bug fixed: Incorrect next month display show on 'February 2008'
 //	- thanks Neeraj Jain for bug report
@@ -86,35 +86,31 @@ class tc_calendar{
 	var $txt = L_SEL_ICON; //display when no calendar icon found or set up
 	var $date_format = 'd F Y'; //format of date show in panel if $show_input is false
 	var $year_display_from_current = 30;
-
 	var $date_picker;
 	var $path = '';
-
 	var $day = 00;
 	var $month = 00;
 	var $year = 0000;
-
 	var $width = 150;
 	var $height = 205;
-
 	var $year_start;
 	var $year_end;
-
 	var $startMonday = FIRST_DAY;
-
 	var $date_allow1;
 	var $date_allow2;
 	var $show_not_allow = false;
-
 	var $auto_submit = false;
 	var $form_container;
 	var $target_url;
-
 	var $show_input = true;
 	var $dsb_days = array(); //collection of days to disabled
-
 	var $zindex = 1;
-
+	var $v_align = "bottom";
+	var $h_align = "right";
+	var $line_height = 18; //for vertical align offset
+	var $date_pair1 = "";
+	var $date_pair2 = "";
+	var $date_pair_value = "";
 	var $hl = L_LANG;
 
 	//calendar constructor
@@ -261,14 +257,16 @@ class tc_calendar{
 		$params[] = "da1=".$this->date_allow1;
 		$params[] = "da2=".$this->date_allow2;
 		$params[] = "sna=".$this->show_not_allow;
-
 		$params[] = "aut=".$this->auto_submit;
 		$params[] = "frm=".$this->form_container;
 		$params[] = "tar=".$this->target_url;
-
 		$params[] = "inp=".$this->show_input;
 		$params[] = "fmt=".$this->date_format;
 		$params[] = "dis=".implode(",", $this->dsb_days);
+		$params[] = "pr1=".$this->date_pair1;
+		$params[] = "pr2=".$this->date_pair2;
+		$params[] = "prv=".$this->date_pair_value;
+		$params[] = "pth=".$this->path;
 		$params[] = "hl=".$this->hl;
 
 		$paramStr = (sizeof($params)>0) ? "?".implode("&", $params) : "";
@@ -279,12 +277,33 @@ class tc_calendar{
 
 			if(is_file($this->icon)){
 				$img_attribs = getimagesize($this->icon);
-				$img_height = $img_attribs[1];
-			}else{
-				$img_height = 16;
+				$line_height = $img_attribs[1]+2;
 			}
-
-			$div_align = "top:".$img_height."px;right:0px;";
+			
+			$div_align = "";
+			
+			//adjust alignment
+			switch($this->v_align){
+				case "top":
+					$div_align .= "bottom:".$line_height."px;";
+					break;
+				case "bottom":
+				default:
+					$div_align .= "top:".$line_height."px;";
+					
+			}
+			
+			switch($this->h_align){
+				case "left":
+					$div_align .= "left:0px;";
+					break;
+				case "right":
+				default:
+					$div_align .= "right:0px;";
+					
+			}
+			
+			//$div_align = "top:".$img_height."px;right:0px;";
 			//$div_align = "bottom:".$img_height."px;right:0px;";
 		}else{
 			$div_display = "visible";
@@ -306,7 +325,7 @@ class tc_calendar{
 	function writeDay(){
 		$total_days = $this->total_days($this->month, $this->year);
 
-		echo("<select name=\"".$this->objname."_day\" id=\"".$this->objname."_day\" onChange=\"javascript:tc_setDay('".$this->objname."', this[this.selectedIndex].value, '".$this->path."');\" class=\"tcday\">");
+		echo("<select name=\"".$this->objname."_day\" id=\"".$this->objname."_day\" onChange=\"javascript:tc_setDay('".$this->objname."', this[this.selectedIndex].value);\" class=\"tcday\">");
 		echo("<option value=\"00\">".L_DAY."</option>");
 		for($i=1; $i<=$total_days; $i++){
 			$selected = ((int)$this->day == $i) ? " selected" : "";
@@ -317,7 +336,7 @@ class tc_calendar{
 
 	//write the select box of months
 	function writeMonth(){
-		echo("<select name=\"".$this->objname."_month\" id=\"".$this->objname."_month\" onChange=\"javascript:tc_setMonth('".$this->objname."', this[this.selectedIndex].value, '".$this->path."');\" class=\"tcmonth\">");
+		echo("<select name=\"".$this->objname."_month\" id=\"".$this->objname."_month\" onChange=\"javascript:tc_setMonth('".$this->objname."', this[this.selectedIndex].value);\" class=\"tcmonth\">");
 		echo("<option value=\"00\">".L_MONTH."</option>");
 
 		$monthnames = $this->getMonthNames();
@@ -331,7 +350,7 @@ class tc_calendar{
 	//write the year textbox
 	function writeYear(){
 		//echo("<input type=\"textbox\" name=\"".$this->objname."_year\" id=\"".$this->objname."_year\" value=\"$this->year\" maxlength=4 size=5 onBlur=\"javascript:tc_setYear('".$this->objname."', this.value, '$this->path');\" onKeyPress=\"javascript:if(yearEnter(event)){ tc_setYear('".$this->objname."', this.value, '$this->path'); return false; }\"> ");
-		echo("<select name=\"".$this->objname."_year\" id=\"".$this->objname."_year\" onChange=\"javascript:tc_setYear('".$this->objname."', this[this.selectedIndex].value, '".$this->path."');\" class=\"tcyear\">");
+		echo("<select name=\"".$this->objname."_year\" id=\"".$this->objname."_year\" onChange=\"javascript:tc_setYear('".$this->objname."', this[this.selectedIndex].value);\" class=\"tcyear\">");
 		echo("<option value=\"0000\">".L_YEAR."</option>");
 
 
@@ -386,6 +405,10 @@ class tc_calendar{
 		echo("<input type=\"hidden\" name=\"".$this->objname."_inp\" id=\"".$this->objname."_inp\" value=\"".$this->show_input."\">");
 		echo("<input type=\"hidden\" name=\"".$this->objname."_fmt\" id=\"".$this->objname."_fmt\" value=\"".$this->date_format."\">");
 		echo("<input type=\"hidden\" name=\"".$this->objname."_dis\" id=\"".$this->objname."_dis\" value=\"".implode(",", $this->dsb_days)."\">");
+		echo("<input type=\"hidden\" name=\"".$this->objname."_pr1\" id=\"".$this->objname."_pr1\" value=\"".$this->date_pair1."\">");
+		echo("<input type=\"hidden\" name=\"".$this->objname."_pr2\" id=\"".$this->objname."_pr2\" value=\"".$this->date_pair2."\">");
+		echo("<input type=\"hidden\" name=\"".$this->objname."_prv\" id=\"".$this->objname."_prv\" value=\"".$this->date_pair_value."\">");
+		echo("<input type=\"hidden\" name=\"".$this->objname."_pth\" id=\"".$this->objname."_pth\" value=\"".$this->path."\">");
 		echo("<input type=\"hidden\" name=\"".$this->objname."_hl\" id=\"".$this->objname."_hl\" value=\"".$this->hl."\">");
 	}
 
@@ -529,5 +552,23 @@ class tc_calendar{
 		if(in_array($day, $this->dsb_days) === false)
 			$this->dsb_days[] = $day;
 	}
+	
+	function setAlignment($h_align, $v_align){
+		$this->h_align = $h_align;
+		$this->v_align = $v_align;
+	}
+	
+	function setDatePair($calendar_name1, $calendar_name2, $pair_value = "0000-00-00 00:00:00"){
+		if($calendar_name1 != $this->objname){
+			$this->date_pair1 = $calendar_name1;
+			if($pair_value != "0000-00-00 00:00:00")
+				$this->date_pair_value = $pair_value;
+		}elseif($calendar_name2 != $this->objname){
+			$this->date_pair2 = $calendar_name2;
+			if($pair_value != "0000-00-00 00:00:00")
+				$this->date_pair_value = $pair_value;
+		}
+	}
+
 }
 ?>

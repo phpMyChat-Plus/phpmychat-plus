@@ -296,7 +296,7 @@ if($DbLink->num_rows() > 0)
 		}
 		if ($User == "SYS room")
 		{
- 			$NewMsg .= "<td  width=1% nowrap=\"nowrap\"><B>".$colornamedest_tag."[${Dest}]".$colornamedest_endtag."</B></td><td><SPAN class=\"notify2\"><I>".ROOM_SAYS."</SPAN><SPAN class=\"notify\">".$Message."</SPAN></I></td>";
+ 			$NewMsg .= "<td  width=1% nowrap=\"nowrap\"><B>".$colornamedest_tag."[${Dest}]".$colornamedest_endtag."</B></td><td><SPAN class=\"notify2\"><I>".ROOM_SAYS."&nbsp;</SPAN><SPAN class=\"notify\">".$Message."</SPAN></I></td>";
     }
 		if ($User == "SYS topic")
 		{
