@@ -2,7 +2,7 @@
 # es_ES translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 2.30
-# Language: Spanish
+# Language: Spanish / español
 # Translator: Roxana Castañeda <roxminu@yahoo.com>
 # Last file update: 01.05.2010
 

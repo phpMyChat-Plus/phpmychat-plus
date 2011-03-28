@@ -2,7 +2,7 @@
 # he_IL translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 2.30
-# Language: Hebrew
+# Language: Hebrew / עברית
 # Translator: Shula Amokshim <shula.amokshim @gmx.net>
 # Last file update: 01.05.2010
 

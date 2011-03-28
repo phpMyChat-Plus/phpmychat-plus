@@ -1,4 +1,11 @@
 <?php
+# en_US - this file includes the specific strings for both en_GB/en_US
+# PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
+# Version: 3.41
+# Language: American English / English US
+# Translator: Ciprian Murariu <ciprianmp@yahoo.com>
+# Last file update: 29.03.2011
+
 if (!function_exists('utf_conv'))
 {
 	function utf_conv($iso,$charset,$what)

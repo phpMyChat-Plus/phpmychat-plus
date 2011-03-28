@@ -2,7 +2,7 @@
 # ja_JP translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 2.30
-# Language: Japanese
+# Language: Japanese / 日本語
 # Translator:  Dendeke <konchakka211@yahoo.co.jp>
 # Last file update: 01.05.2010
 

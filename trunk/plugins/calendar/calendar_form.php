@@ -552,14 +552,14 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
             <div style="float: left; text-align: center;">
             <?php
             if($previous_year >= $year_start && $show_previous){
-            ?><a href="javascript:move('<?php echo(str_pad($previous_month, 2, "0", STR_PAD_LEFT));?>', '<?php echo($previous_year);?>');">&lt;&nbsp;<?php echo(L_PREV); ?></a><?php
+            ?><a href="javascript:move('<?php echo(str_pad($previous_month, 2, "0", STR_PAD_LEFT));?>', '<?php echo($previous_year);?>');">&laquo;&nbsp;<?php echo(L_PREV); ?></a><?php
             }else echo("&nbsp;");
             ?>
             </div>
             <div style="float: right; text-align: center;">
             <?php
             if($next_year <= $year_end && $show_next){
-            ?><a href="javascript:move('<?php echo(str_pad($next_month, 2, "0", STR_PAD_LEFT));?>', '<?php echo($next_year);?>');"><?php echo(L_NEXT); ?>&nbsp;&gt;</a><?php
+            ?><a href="javascript:move('<?php echo(str_pad($next_month, 2, "0", STR_PAD_LEFT));?>', '<?php echo($next_year);?>');"><?php echo(L_NEXT); ?>&nbsp;&raquo;</a><?php
             }else echo("&nbsp;");
             ?>
             </div>

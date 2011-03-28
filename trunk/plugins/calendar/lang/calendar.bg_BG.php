@@ -2,7 +2,7 @@
 # bg_BG translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 2.30
-# Language: Bulgarian
+# Language: Bulgarian / български
 # Translator: Peter Petrov <peter.m.petrov@gmail.com>
 # Last file update: 01.05.2010
 
@@ -58,13 +58,13 @@ define("L_FRI", "петък");
 define("L_SAT", "събота");
 define("L_SUN", "неделя");
 // Week days Short Names
-define("L_S_MON", "пон");
+define("L_S_MON", "по");
 define("L_S_TUE", "вт");
 define("L_S_WED", "ср");
-define("L_S_THU", "четв");
-define("L_S_FRI", "пет");
-define("L_S_SAT", "съб");
-define("L_S_SUN", "нед");
+define("L_S_THU", "че");
+define("L_S_FRI", "пе");
+define("L_S_SAT", "съ");
+define("L_S_SUN", "не");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1251");

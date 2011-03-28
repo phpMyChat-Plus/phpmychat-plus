@@ -2,7 +2,7 @@
 # id_ID translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 2.30
-# Language: Indonesian - Bahasa
+# Language: Indonesian - Bahasa / Bahasa Indonesia
 # Translator: Hendriyo <hendriyo@gmail.com>
 # Last file update: 01.05.2010
 

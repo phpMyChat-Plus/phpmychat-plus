@@ -2,7 +2,7 @@
 # de_DE translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 2.30
-# Language: German
+# Language: German / Deutsch
 # Translator: Thomas Pschernig <tpsde1970@aol.com>
 # Last file update: 01.05.2010
 

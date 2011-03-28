@@ -598,13 +598,13 @@ define("L_FRI", "петък");
 define("L_SAT", "събота");
 define("L_SUN", "неделя");
 // Week days Short Names
-define("L_S_MON", "пон");
+define("L_S_MON", "по");
 define("L_S_TUE", "вт");
 define("L_S_WED", "ср");
-define("L_S_THU", "четв");
-define("L_S_FRI", "пет");
-define("L_S_SAT", "съб");
-define("L_S_SUN", "нед");
+define("L_S_THU", "че");
+define("L_S_FRI", "пе");
+define("L_S_SAT", "съ");
+define("L_S_SUN", "не");
 
 // Localized date format
 // Set the BG specific date/time format
