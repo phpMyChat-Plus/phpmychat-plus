@@ -3,7 +3,7 @@
 # the specific strings are already included as default en_GB/en_US in localization.lib.php
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 2.30
-# Language: British
+# Language: British / English UK
 # Translator: Ciprian Murariu <ciprianmp@yahoo.com>
 # Last file update: 01.05.2010
 

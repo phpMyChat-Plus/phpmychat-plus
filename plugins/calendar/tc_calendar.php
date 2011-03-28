@@ -281,6 +281,8 @@ class tc_calendar{
 			$div_display = "hidden";
 			$div_position = "absolute";
 
+			$line_height = $this->line_height;
+
 			if(is_file($this->icon)){
 				$img_attribs = getimagesize($this->icon);
 				$line_height = $img_attribs[1]+2;
@@ -320,9 +322,7 @@ class tc_calendar{
 //		echo("<IFRAME id=\"".$this->objname."_frame\" src=\"".$this->path."calendar_form.php".$paramStr."\" frameBorder=\"0\" scrolling=\"no\" allowtransparency=\"true\" width=\"100%\" height=\"100%\"></IFRAME>");
 		echo("<div id=\"div_".$this->objname."\" style=\"position:".$div_position.";visibility:".$div_display.";z-index:100;".$div_align."\" class=\"div_calendar calendar-border\">");
 		echo("<IFRAME id=\"".$this->objname."_frame\" src=\"".$this->path."calendar_form.php".$paramStr."\" frameBorder=\"0\" scrolling=\"no\" allowtransparency=\"true\" width=\"100%\" height=\"100%\" style=\"z-index: 100;\"></IFRAME>");
-
 		echo("</div>");
-
 	}
 
 	//write the select box of days

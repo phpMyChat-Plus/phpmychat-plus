@@ -2,7 +2,7 @@
 # hu_HU translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 2.30
-# Language: Hungarian
+# Language: Hungarian / magyar
 # Translator: Jácint Zsuzsanna <jacint.zsuzsanna@yahoo.com>
 # Last file update: 01.05.2010
 

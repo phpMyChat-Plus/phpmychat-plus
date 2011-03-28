@@ -2,7 +2,7 @@
 # pl_PL translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 2.30
-# Language: Polish
+# Language: Polish / polska
 # Translator: Adam Królikowski <goldunube@gmail.com>
 # Last file update: 02.01.2011
 

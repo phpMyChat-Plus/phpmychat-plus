@@ -2,7 +2,7 @@
 # it_IT translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 2.30
-# Language: Italian
+# Language: Italian / italiano
 # Translator:  Michele Ferro <specialmikius@yahoo.com>
 # Last file update: 01.05.2010
 

@@ -1,6 +1,6 @@
 <?php
 // File : hebrew/localized.chat.php - plus version (01.08.2009 - rev.43)
-// Hebrew translation by Shula Amokshim <shula.amokshim @gmx.net>
+// Hebrew translation by Shula Amokshim <shula.amokshim@gmx.net>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -45,6 +45,7 @@ define("L_SET_15", "חדרים פרטיים קבועים");
 define("L_SET_16", "חדרים פרטיים שנוצרו עי משתמשים");
 define("L_SET_17", "בחר דמות");
 define("L_SET_18", "הכנס לסימניות: הקש קונטרול D");
+define("L_SET_19", "זכור אותי");
 
 define("L_SRC", "חופשי להורדה ב-");
 
@@ -98,28 +99,28 @@ define("L_REG_49", "נדרשת הרשמה");
 define("L_REG_50", "הרשמה נדחית");
 
 // e-mail validation stuff
-define("L_EMAIL_VAL_1", "Your settings to enter the chat");
+define("L_EMAIL_VAL_1", "ההגדרות שלך בשביל להיכנס לצאט");
 define("L_EMAIL_VAL_2", "ברוכים הבאים לשרת הצא`ט");
 define("L_EMAIL_VAL_Err", "שגיאה פנימית - נא לפנות למנהל הראשי <a href=\"mailto:%s\">%s</a>.");
 define("L_EMAIL_VAL_Done", "הסיסמא שלך נשלחה לכתובת האימייל שלך.<br />ניתן לשנות את הסיסמא בדף הכניסה - \"".L_REG_4."\".");
-define("L_EMAIL_VAL_PENDING_Done", "Your registered data has been submitted for review.");
+define("L_EMAIL_VAL_PENDING_Done", "המידע שלך נרשם ונשלח לביקורת.");
 define("L_EMAIL_VAL_PENDING_Done1", "תקבל את הסיסמא אחרי שהחשבון יקבל אישור מהמנהלים");
-define("L_EMAIL_VAL_3", "Your registration is pending for %s"); //chat name
+define("L_EMAIL_VAL_3", "-באיבחון %sההרשמה שלך ל-"); //chat name we put %s meaning chat name in the proper position of the sentence
 define("L_EMAIL_VAL_31", "מזל טוב! ההרשמה שלך קיבלה אישור!");
-define("L_EMAIL_VAL_32", "This is your registration data for %s at %s:"); //chat name at chaturl
-define("L_EMAIL_VAL_4", "You have just registered this account for %s at %s:"); //chat name at chaturl
-define("L_EMAIL_VAL_41", "You have just changed important account info for %s at %s (account affected: %s)."); //chat name at chaturl (username)
-define("L_EMAIL_VAL_5", "Your - %s - account details for %s"); //username - chatname
-define("L_EMAIL_VAL_51", "Your - %s - account updated details for %s"); //username - chatname
+define("L_EMAIL_VAL_32", ".%s ב- %s זהו המידה של ההרשמה שלך בשביל:"); //chat name at chaturl
+define("L_EMAIL_VAL_4", ".%s ב- %s חשבון זה נרשם בשביל:"); //chat name at chaturl
+define("L_EMAIL_VAL_41", ".(החשבון ששונה: %s) %s ב- %s מידע חשוב על חשבונך כרגע שונה בשביל."); //chat name at chaturl (username)
+define("L_EMAIL_VAL_5", ".%s – שונו בשביל %s פרטי  החשבון של"); //username - chatname
+define("L_EMAIL_VAL_51", "%s – בשביל %s פרטי החשבון של"); //username - chatname
 define("L_EMAIL_VAL_6", "%s נרשם ב-");
 define("L_EMAIL_VAL_61", "%s עודכן לאחרונה ב-");
-define("L_EMAIL_VAL_7", "Below is your %s updated account info:"); //username
-define("L_EMAIL_VAL_8", "Save this email for your future reference.\nPlease also make it safe and don’t share this data.\nתודה שהצטרפת. תהנה.");
+define("L_EMAIL_VAL_7", "%s למטה נמצעים פרטי החשבון שלך:"); //username
+define("L_EMAIL_VAL_8", ".שמור על אי מייל זה בשביל תזכורת לעתיד.\n תשמור בבקשה במקום בטוח ואל תשתפ\  אף אחד במידע זה   .\nתודה שהצטרפת. תהנה.");
 define("L_EMAIL_VAL_81", "ניתן לשנות את הסיסמא בדף הכניסה \"".L_REG_4."\".");
 
 // admin stuff
-define("L_ADM_1", "%s is no longer a moderator for this room.");
-define("L_ADM_2", "You are no longer a registered user.");
+define("L_ADM_1", "כבר לא מטווח בחדר זה %s."); //username
+define("L_ADM_2", "לך יותר שם משתמש.");
 
 // error messages
 define("L_ERR_USR_1", "שם משתמש כבר קייןם. בחר אחד אחר");
@@ -138,7 +139,7 @@ define("L_ERR_USR_13", "כדי ליצור חדר פרטי, חובה להיות �
 define("L_ERR_USR_14", "חובה להיות רשום כדי להשתתף בצ`אט");
 define("L_ERR_USR_15", "חובה לרשום שם מלא.");
 define("L_ERR_USR_16", "רק האותיות הבאות חוקיות:\\n".$REG_CHARS_ALLOWED."\\nאי אפשר להשתמש ברווחים, פסיקים או אלכסונים. \\nבדוק את מה שכתבת ונסה שוב");
-define("L_ERR_USR_16a", "Only these extra-characters allowed:<br />".$REG_CHARS_ALLOWED."<br />nאי אפשר להשתמש ברווחים, פסיקים או אלכסונים. \\nבדוק את מה שכתבת ונסה שוב.");
+define("L_ERR_USR_16a", "רק האותיות הבאות חוקיות:<br />".$REG_CHARS_ALLOWED."<br />nאי אפשר להשתמש ברווחים, פסיקים או אלכסונים. \\nבדוק את מה שכתבת ונסה שוב.");
 define("L_ERR_USR_17", "This room doesn’t exist, and you are not allowed to create one.");
 define("L_ERR_USR_18", "Banished word found in your username.");
 define("L_ERR_USR_19", "You cannot be in more than one room at the same time.");
@@ -160,17 +161,17 @@ define("L_ERR_ROM_4", "שם חדר לא חוקי");
 // users frame or popup
 define("L_EXIT", "צא מהצ`אט");
 define("L_DETACH", "הפרד את רשימת המשתמשים");
-define("L_EXPCOL_ALL", "Expand/Collapse All");
+define("L_EXPCOL_ALL", "להגדיל/להקטין הכל");
 define("L_CONN_STATE", "רענן מצב קישור");
 define("L_CHAT", "צ`אט");
 define("L_USER", "משתמש");
 define("L_USERS", "משתמשים");
 define("L_LURKER", "צופה");
 define("L_LURKERS", "צופים");
-define("L_NO_USER", "No user");
+define("L_NO_USER", "אין משתמש");
 define("L_ROOM", "חדר");
 define("L_ROOMS", "חדרים");
-define("L_EXPCOL", "Expand/Collapse room");
+define("L_EXPCOL", "להגדיל/להקטין חדר");
 define("L_BEEP", "האם לצפצף כשמשתמש נכנס לצ`אט");
 define("L_PROFILE", "הצג פרופיל");
 define("L_NO_PROFILE", "ללא פרופיל");
@@ -256,6 +257,9 @@ define("L_HELP_CMD_31", "Change the order users are sorted in lists: by entrance
 define("L_HELP_CMD_32", "This is a third (role-playing) version of the dice rolling.<br />Usage: /d{n1}[tn2] or /d{n1};<br />n1 can take any value <b>between 1 and 100</b> (it represents the number of sides per die).<br />n2 can take any value <b>between 1 and %s</b> (it represents the number of rolling dice per throw).");
 define("L_HELP_CMD_33", "Change the font size of the messages in chat to user choice (allowed values for n: <b>between 7 and 15</b>); the /size command resets the font size to the default value (<b>".$FontSize."</b>).");
 define("L_HELP_CMD_34", "This will allow an user to specify the orientation of a text message (ltr = left-to-right, rtl = right-to-left).");
+define("L_HELP_CMD_35", "It allows posting of <i>one video</i> or <i>one audio file</i> in a small Flash player at a time.<br />Usage: Just paste the url of the source to be posted! E.g. <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />You need Shockwave Flash Player installed on your system. The link is case sensitive!<br />HINTS: type /video followed by a space and paste the URL into the box.");
+define("L_HELP_CMD_35a", "The second command only works with youtube.com as video source.<br />E.g. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
+define("L_HELP_CMD_36", "It allows posting of <i>one youtube video</i> in a small Flash player at a time.<br />Usage: Just paste the url of the source to be posted! E.g. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />You need Shockwave Flash Player installed on your system. The link is case sensitive!<br />HINTS: type /tube followed by a space and paste the URL into the box.");
 define("L_HELP_CMD_VAR", "Synonyms (variants): %s"); // a list of English and/or translated alternatives for each command
 define("L_HELP_ETIQ_1", "כללי הצ`אט");
 define("L_HELP_ETIQ_2", "Our site would like to keep its community friendly and fun, so please adhere to the following guidelines. If you fail to observe these rules, one of our chat moderators may boot you from the chat.<br /><br />Thank you,");
@@ -467,6 +471,7 @@ define("L_PASS_6", "תשובה סודית");
 define("L_PASS_7", "איפוס סיסמא");
 define("L_PASS_8", "איפוס הסיסמא הצליח");
 define("L_PASS_9", "ססימת הכניסה לצאט");
+define("L_PASS_10", "ססימת הכניסה לצאט: %s"); // put %s in the right position of your translated string
 define("L_PASS_11", "ברוכים השבים");
 define("L_PASS_12", "בחר שאלה סודית");
 define("L_ERR_PASS_1", "שם משתמש לא תקין. בחר שוב");
@@ -643,16 +648,22 @@ define("L_LANG_HI", "Hindi");
 define("L_LANG_HU", "Hungarian");
 define("L_LANG_ID", "Indonesian");
 define("L_LANG_IT", "Italian");
+define("L_LANG_JA", "Japanese (Kanji)");
 define("L_LANG_KA", "גרוזינית");
+define("L_LANG_NE", "Nepali");
 define("L_LANG_NL", "הולנדית");
+define("L_LANG_PL", "Polish");
 define("L_LANG_RO", "רומנית");
+define("L_LANG_RU", "Russian");
 define("L_LANG_SK", "Slovak");
 define("L_LANG_SRC", "Serbian - Cyrillic");
 define("L_LANG_SRL", "Serbian - Latin");
 define("L_LANG_SV", "Swedish");
 define("L_LANG_TR", "Turkish");
+define("L_LANG_UK", "Ukrainian");
 define("L_LANG_UR", "Urdu");
 define("L_LANG_VI", "Vietnamese");
+define("L_LANG_YO", "Yoruba"); // Nigeria&Congo language
 
 // Skins preview page
 define("L_SKINS_TITLE", "Skins Preview");
@@ -698,4 +709,20 @@ define("L_OPID_REG", "Import your OpenID profile");
 // Support buttons
 define("L_SUPP_WARN", "You have chosen to contribute to the free development of\\n".APP_NAME." by making a donation to the developer.\\nThank you for your support!\\n\\nNote: the recipient is not the owner of this chat.\\nPlease enter the amount on the next page.\\n\\nContinue?");
 define("L_SUPP_ALT", "Support with PayPal the development of ".APP_NAME." - it's Fast, Free and Secure!");
+
+// Video & Audio & Youtube cmds (Embevi & YouTube player class)
+define("L_AUDIO", "Audio file posted by");
+define("L_VIDEO", "Video posted by");
+define("L_HELP_VIDEO", "full path to the video or audio source to be posted");
+define("L_NO_VIDEO", "The URL cannot be embedded.\\nThis is not a valid URL of an accepted public video or audio source.\\nTry again!");
+define("L_ORIG_VIDEO", "to open the original source site"); //it sounds like: Click here to open the…
+
+// Birthday mod - by Ciprian
+define("L_PRO_7", "Date of birth");
+define("L_PRO_8", "show birthday in public information");
+define("L_PRO_9", "show age in public information");
+define("L_PRO_10", "Age");
+define("L_PRO_11", "%1\$d years, %2\$d months and %3\$d days");
+define("L_DOB_TIT_1", "Birthdays list");
+$L_DOB_SUBJ = "Happy Birthday %s!";
 ?>

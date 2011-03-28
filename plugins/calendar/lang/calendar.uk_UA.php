@@ -2,8 +2,8 @@
 # uk_UA translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 2.30
-# Language: Ukrainian
-# Translator: Viktor <vikt81@mail.ru>
+# Language: Ukrainian / Українське
+# Translator:
 # Last file update: 23.12.2010
 
 // Class strings localization

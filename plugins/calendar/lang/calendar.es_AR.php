@@ -2,7 +2,7 @@
 # es_AR translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 2.30
-# Language: Argentinian Spanish
+# Language: Argentinian Spanish / español Argentina
 # Translator: Matias Olivera <matiolivera@yahoo.com>
 # Last file update: 01.05.2010
 

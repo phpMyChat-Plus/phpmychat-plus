@@ -2,7 +2,7 @@
 # fr_FR translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 2.30
-# Language: French
+# Language: French / français
 # Translator: Pierre Liget <sourceforge@pliget.freesurf.fr>
 # Last file update: 01.05.2010
 

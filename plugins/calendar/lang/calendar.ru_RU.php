@@ -2,8 +2,8 @@
 # ru_RU translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 2.30
-# Language: Russian
-# Translator: Viktor <vikt81@mail.ru>
+# Language: Russian / Русский
+# Translator:
 # Last file update: 17.12.2010
 
 // Class strings localization

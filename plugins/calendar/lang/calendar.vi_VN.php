@@ -2,7 +2,7 @@
 # vi_VN translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 3.2
-# Language: Vietnamese
+# Language: Vietnamese / Tiếng Việt
 # Translator: Marshall <hellomarshal_lookatme@yahoo.com.vn>
 # Last file update: 01.05.2010
 
