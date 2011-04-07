@@ -48,7 +48,7 @@ A.topLink:hover, A.topLink:active
 <P></P>
 <TABLE BORDER="5" CELLPADDING="5" ALIGN="center">
 <TR>
-	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- Русский учебник <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -</FONT><br /><I>&copy; 2010<?php echo((date('Y')>"2010") ? "-".date('Y') : ""); ?> - Переведено <a href="mailto:vikt81@mail.ru?subject=phpMyChat%20Plus%20translation" onMouseOver="window.status='<?php echo (sprintf(L_CLICKS,L_LINKS_6,L_TRANSLATOR)); ?>.'; return true;" title="<?php echo (sprintf(L_CLICKS,L_LINKS_6,L_TRANSLATOR)); ?>" target=_blank>Viktor</a> - Kiev, Ukraine.</I></B></TD>
+	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- Русский учебник <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -</FONT></B></TD>
 </TR>
 </TABLE><br /><br />
 <P><A NAME="top"></A></P>
