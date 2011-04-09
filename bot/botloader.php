@@ -45,13 +45,12 @@ require_once("${BotPath}dbprefs.php");
 */
 require_once("${BotPath}botloaderfuncs.php");
 
-ss_timing_start("all");
-empty_tables();
-
 print "<b><font size='3' color='black'>When this script is done running you should see \"<font color='red'>DONE LOADING</font>\".</b><br />\n
 <font color='green'><b>Note:</b> If the script times out it is probably because your PHP is running in safe mode. If this is the case use the file <a href=\"botloaderinc.php\">botloaderinc.php</a> to load your AIML files one by one.<br />\n
 Another reason might be that your timeout php setting is set too low. In this case, you sould split the aiml files in smaller pieces (keep the AIML header and footer in all the splitted pieces).</font><br />\n
 <font color='red'><b>Important:</b> If you need to run/reload this file again, you must empty/truncate all the tables starting with \"bot_\" in your database, otherwise the bot will be broken.</font><br />\n<br />\n<b><font color='blue'>Process started! </font><font color='red'>Please wait...</font></b></font><br />\n";
+
+ss_timing_start("all");
 
 $fp = "";
 

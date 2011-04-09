@@ -170,6 +170,7 @@ if($DbLink->num_rows() > 0)
 		$Message = str_replace("L_HELP_MS",sprintf(L_HELP_MS,$User),$Message);
 		$Message = str_replace("L_PRIV_PM",L_PRIV_PM,$Message);
 		$Message = str_replace("L_PRIV_WISP",L_PRIV_WISP,$Message);
+		$Message = str_ireplace(" COLOR=\"".$COLOR_TB."\"", " COLOR=\"".COLOR_CD."\"",$Message);
 		$Message = str_replace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"".L_HELP_BUZZ1."\" title=\"".L_HELP_BUZZ1."\">",$Message);
 		if ($Align == "right") $Message = str_replace("arrowr","arrowl",$Message);
 		if ($Type) $Type = L_SET_10; else $Type = L_SET_11;
@@ -202,6 +203,7 @@ if($DbLink->num_rows() > 0)
 			$colorname_endtag = "";
 			$colornamedest_tag = "";
 			$colornamedest_endtag = "";
+			global $COLOR_TB;
 			$DbColor = new DB;
 			if (isset($User))
 			{
@@ -215,7 +217,7 @@ if($DbLink->num_rows() > 0)
 				list($perms_dest,$colornamedest) = $DbColor->next_record();
 				$DbColor->clean_results();
 			}
-			if(isset($colorname) && $colorname != "")
+			if(isset($colorname) && $colorname != "" && strcasecmp($colorname, $COLOR_TB) != 0)
 			{
 				$colorname_tag = "<FONT color=".$colorname.">";
 				unset($colorname);
@@ -230,7 +232,7 @@ if($DbLink->num_rows() > 0)
 			{
 				$colorname_tag = "<FONT color=".COLOR_CD.">";
 			}
-			if(isset($colornamedest) && $colornamedest != "")
+			if(isset($colornamedest) && $colornamedest != "" && strcasecmp($colorname, $COLOR_TB) != 0)
 			{
 				$colornamedest_tag = "<FONT color=".$colornamedest.">";
 				unset($colornamedest);

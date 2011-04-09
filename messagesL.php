@@ -15,6 +15,7 @@ require("./config/config.lib.php");
 require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
 require("./lib/clean.lib.php");
+require($skin.".php");
 if (C_USE_SMILIES) require("./lib/smilies.lib.php");
 
 // Size command by Ciprian
@@ -438,7 +439,7 @@ if($DbLink->num_rows() > 0)
 				list($perms_dest,$colornamedest) = $DbColor->next_record();
 				$DbColor->clean_results();
 			}
-			if(isset($colorname) && $colorname != "")
+			if(isset($colorname) && $colorname != "" && strcasecmp($colorname, $COLOR_TB) != 0)
 			{
 				$colorname_tag = "<FONT color=".$colorname.">";
 				unset($colorname);
@@ -453,7 +454,7 @@ if($DbLink->num_rows() > 0)
 			{
 				$colorname_tag = "<FONT color=".COLOR_CD.">";
 			}
-			if(isset($colornamedest) && $colornamedest != "")
+			if(isset($colornamedest) && $colornamedest != "" && strcasecmp($colornamedest, $COLOR_TB) != 0)
 			{
 				$colornamedest_tag = "<FONT color=".$colornamedest.">";
 				unset($colornamedest);

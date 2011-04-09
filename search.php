@@ -70,6 +70,12 @@ switch(L_LANG)
 		$L_G_HL = "fr";
 		$L_G_CX = "qu42zo-puy3";
 		break;
+	case "el_GR":
+		$L_G_EXT = "gr";
+		$L_G_SA = "&#x0391;&#x03bd;&#x03b1;&#x03b6;&#x03ae;&#x03c4;&#x03b7;&#x03c3;&#x03b7;";
+		$L_G_HL = "el";
+		$L_G_CX = "q4w1tmnxnp7";
+		break;
 	case "he_IL":
 		$L_G_EXT = "co.il";
 		$L_G_SA = "חיפוש";
