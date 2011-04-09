@@ -130,41 +130,36 @@ if (!function_exists("utf8_substr"))
 // Special colors for usernames depending on users choise and status
 function userColor($type,$colorname)
 {
+	global $COLOR_BK;
 	if (C_ITALICIZE_POWERS)
 	{
 		if (COLOR_FILTERS)
 		{
 			if (COLOR_NAMES)
 			{
-				$color = ($colorname != '' ? $colorname:(($type == 'a' || $type == 't') ? COLOR_CA:($type == 'm' ? COLOR_CM:COLOR_CD)));
-				return $color;
+				return $color = ($colorname != '' && strcasecmp($colorname, $COLOR_BK) != 0 ? $colorname:(($type == 'a' || $type == 't') ? COLOR_CA:($type == 'm' ? COLOR_CM:COLOR_CD)));
 			}
 			else
 			{
-				$color = (($type == 'a' || $type == 't') ? COLOR_CA:($type == 'm' ? COLOR_CM:""));
-				return $color;
+				return $color = (($type == 'a' || $type == 't') ? COLOR_CA:($type == 'm' ? COLOR_CM:""));
 			};
 		}
 		elseif (COLOR_NAMES)
 		{
-			$color = ($colorname != '' ? $colorname:COLOR_CD);
-			return $color;
+			return $color = ($colorname != '' && strcasecmp($colorname, $COLOR_BK) != 0 ? $colorname:COLOR_CD);
 		}
 		else
 		{
-			$color = "";
-			return $color;
+			return $color = "";
 		}
 	}
 	elseif (COLOR_NAMES)
 	{
-		$color = ($colorname != '' ? $colorname:COLOR_CD);
-		return $color;
+		return $color = ($colorname != '' && strcasecmp($colorname, $COLOR_BK) != 0 ? $colorname:COLOR_CD);
 	}
 	else
 	{
-		$color = "";
-		return $color;
+		return $color = "";
 	}
 };
 

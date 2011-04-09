@@ -203,11 +203,7 @@ $botcontrol ="botfb/$R.txt";
 	}
 }
 //---End Bot Control
-	global $DbLink;
-	global $Latin1;
-	global $status;
-	global $Read;
-	global $M1;
+	global $DbLink, $Latin1, $status, $Read, $M1, $COLOR_TB;
 
 	if (!isset($M1)) $M1 = $M;
 	$M = str_replace("\"", "&quot;", $M);
@@ -346,7 +342,7 @@ if (trim($C)!="")
 }
 
 	//Color's Power Filter Mod by Ciprian
-	if (isset($_COOKIE["CookieColor"]) && (!isset($C))) $C = $_COOKIE["CookieColor"];
+	if (isset($_COOKIE["CookieColor"]) && (!isset($C))) $C = strcasecmp($_COOKIE["CookieColor"], $COLOR_TB) != 0 ? $_COOKIE["CookieColor"] : '';
 	//Registered colorname to use for text color by Ciprian
 	else
 	{
@@ -383,19 +379,20 @@ if (trim($C)!="")
 			{
 				$C = '';	//default color
 			}
+			elseif (strcasecmp($C, $COLOR_TB) == 0)
+			{
+				$C = '';
+			}
 		}
 	};
 		include_once("./lib/swearing.lib.php");
 		if (checkwords($C, true, $Charset)) $C = '';		//if user is using a swear word (defined in swearing.lib.php), the font color will resets to default. this is to keep your database as well as our computer clean of swearing (no swear into your cookies on your local computer).
-		if (isset($C) && $C != '')
+		if (isset($C) && $C != '' && strcasecmp($C, COLOR_CD) != 0)
 		{
-			if (strcasecmp($C, COLOR_CD) != 0)
-			{
-				$M = "<FONT COLOR=\"".$C."\">".$M."</FONT>";
-				setcookie("CookieColor", $C, time() + 60*60*24*365);        // cookie expires in one year
-			}
+			$M = "<FONT COLOR=\"".$C."\">".$M."</FONT>";
+			setcookie("CookieColor", $C, time() + 60*60*24*365);        // cookie expires in one year
 		}
-		else
+		elseif(isset($_COOKIE["CookieColor"]))
 		{
 			setcookie("CookieColor", '', time());        // cookie expires in one year
 		}
@@ -409,9 +406,9 @@ if (trim($C)!="")
 		{
 	    list($colorname) = $DbLink->next_record();
 		}
-	if (isset($_COOKIE["CookieColor"]) && (!isset($C))) $C = $_COOKIE["CookieColor"];
+	if (isset($_COOKIE["CookieColor"]) && (!isset($C))) $C = strcasecmp($_COOKIE["CookieColor"], $COLOR_TB) != 0 ? $_COOKIE["CookieColor"] : '';
 	//Registered colorname to use for text color by Ciprian
-	elseif (isset($colorname) && (!isset($C))) $C = $colorname;
+	elseif (isset($colorname) && (!isset($C))) $C = strcasecmp($colorname, $COLOR_TB) != 0 ? $colorname : '';
 	if (!COLOR_ALLOW_GUESTS && $status == "u") $C = '';
 	if (COLOR_FILTERS)
 	{
@@ -441,9 +438,21 @@ if (trim($C)!="")
 			// Blue colors are reserved to a moderator for the current room
 			elseif ((strcasecmp($C, COLOR_CM) == 0 || strcasecmp($C, COLOR_CM1) == 0 || strcasecmp($C, COLOR_CM2) == 0) && $C != "" && $status != "a" && $status != "t" && $status != "m")
 			{
-					$ErrorC = COL_ERROR_BOX_USRM;
-					setcookie("CookieColor", "", time());        // delete power color cookie
-					$C = '';	//default color
+				$ErrorC = COL_ERROR_BOX_USRM;
+				setcookie("CookieColor", "", time());        // delete power color cookie
+				$C = '';	//default color
+			}
+			elseif (strcasecmp($C, $COLOR_TB) == 0)
+			{
+				setcookie("CookieColor", "", time());        // delete power color cookie
+				$C = '';
+				?>
+				<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript1.2">
+				<!--
+					window.parent.frames['input'].window.location.reload();
+				// -->
+				</SCRIPT>
+				<?php
 			}
 		}
 	};
@@ -620,6 +629,7 @@ else
 		$ColorList = '"",'.COLOR_CD.'';
 	}
 }
+$ColorList = str_ireplace($COLOR_TB.'","',"",COLORLIST);
 $ColorList = str_replace('"', "", $ColorList);
 $CC = explode(",", $ColorList);
 if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<SELECT NAME=\"C\" style=\"background-color:".$C.";\">\n");
