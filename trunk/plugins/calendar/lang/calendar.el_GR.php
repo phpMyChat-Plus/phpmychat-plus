@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 # el_GR translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 3.3
@@ -71,7 +71,7 @@ define("WIN_DEFAULT", "windows-1253");
 define("L_CAL_FORMAT", "%d %B %Y");
 if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "el_GR"); // en_US format of your language
 
-// Set the XX specific date/time format; ENGLISH EXAMPLE:
+// Set the EL specific date/time format;
 if (stristr(PHP_OS,"win")) {
 setlocale(LC_ALL, "ell-ath.UTF-8", "ell-ath", "Greek-athens.UTF-8", "Greek.UTF-8", "Greek");
 } else {

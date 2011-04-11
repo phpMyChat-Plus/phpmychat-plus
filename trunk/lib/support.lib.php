@@ -16,6 +16,9 @@ switch (L_LANG)
 		$ppbutton = ($pptype == "big") ? "3626398" : "3626431";
 		$ppalt = "PayPal - Den sikreste og nemmeste måde at overføre penge online!";
 		break;
+	case "el_GR":
+		$ppbutton = ($pptype == "big") ? "6JNU4L83BSTN2" : "JW4A2MMTLXYSU";
+		break;
 	case "he_IL":
 		$ppbutton = ($pptype == "big") ? "7148858" : "7148805";
 		$ppalt = "פייפאל - הדרך הבטוחה, הקלה לשלם באינטרנט.";
@@ -82,8 +85,8 @@ switch (L_LANG)
 		break;
 	case "ca_ES":
 		$pplang = "es_ES/ES";
-		$ppbutton = ($pptype == "big") ? "3620198" : "3624872";
-		$ppalt = "PayPal - La manera més segur, més fàcil de pagar en línia!";
+		$ppbutton = ($pptype == "big") ? "9HQJX5TAPJ33A" : "YJD5RVSDH55GA";
+		$ppalt = "PayPal – La millor manera i la més fàcil de pagar en línia!";
 		$ppexists = 1;
 		break;
 	case "es_AR":
@@ -116,6 +119,12 @@ switch (L_LANG)
 		$ppalt = "PayPal, de veilige en complete manier van online betalen.";
 		$ppexists = 1;
 		break;
+	case "pt_BR":
+		$pplang .= "/BR";
+		$ppbutton = ($pptype == "big") ? "KLSRD9WFZH984" : "2K6JTW959U66A";
+		$ppalt = "PayPal - A maneira mais fácil e segura de efetuar pagamentos on-line!";
+		$ppexists = 1;
+		break;
 	default:
 		$pplang = "en_US";
 		$ppbutton = ($pptype == "big") ? "3625361" : "3625382";
@@ -130,7 +139,7 @@ switch ($pptype)
 		$defpmcimage = "./localization/english/images/paypal_donate.gif";
 		break;
 	case "small":
-		$ppimage = "https://www.paypal.com/$pplang/i/btn/btn_donate_SM.gif";
+		$ppimage = "https://www.paypal.com/".(L_LANG == "pt_BR" ? L_LANG : $pplang)."/i/btn/btn_donate_SM.gif";
 		$pmcimage = "./localization/".$L."/images/make_a_donation.gif";
 		$defpmcimage = "./localization/english/images/make_a_donation.gif";
 		break;

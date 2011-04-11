@@ -1462,7 +1462,7 @@ if ($show_donation)
 {
 	$pptype = "big";
 	require("${ChatPath}lib/support.lib.php");
-	if ((intval($ppbutton) < 3620000 || (intval($ppbutton) > 3627000 && intval($ppbutton) != 7148858 && intval($ppbutton) != 7148805 && (intval($ppbutton) < 7988359 || intval($ppbutton) > 7988406))) && $ppbutton != "KYVK6TQWY4MXJ" && $ppbutton != "QN9TYKJ49BM7S" && $ppbutton != "RJK6MGRQVAJY2" && $ppbutton != "ZCXGTP265VU6S" && $ppbutton != "MGBHACRT5F4RE" && $ppbutton != "6HRWUGAN73NPS" && $ppbutton != "WDA8GUU9GGSTS" && $ppbutton != "T9MP68SK7HBKQ" && $ppbutton != "DBH7XN4YA7A2J" && $ppbutton != "BTHKH33JLGLTN" && $ppbutton != "9HQJX5TAPJ33A" && $ppbutton != "YJD5RVSDH55GA") $copy_break = 1;
+	if ((intval($ppbutton) < 3620000 || (intval($ppbutton) > 3627000 && intval($ppbutton) != 7148858 && intval($ppbutton) != 7148805 && (intval($ppbutton) < 7988359 || intval($ppbutton) > 7988406))) && $ppbutton != "KYVK6TQWY4MXJ" && $ppbutton != "QN9TYKJ49BM7S" && $ppbutton != "RJK6MGRQVAJY2" && $ppbutton != "ZCXGTP265VU6S" && $ppbutton != "MGBHACRT5F4RE" && $ppbutton != "6HRWUGAN73NPS" && $ppbutton != "WDA8GUU9GGSTS" && $ppbutton != "T9MP68SK7HBKQ" && $ppbutton != "DBH7XN4YA7A2J" && $ppbutton != "BTHKH33JLGLTN" && $ppbutton != "9HQJX5TAPJ33A" && $ppbutton != "YJD5RVSDH55GA" && $ppbutton != "KLSRD9WFZH984" && $ppbutton != "2K6JTW959U66A" && $ppbutton != "6JNU4L83BSTN2" && $ppbutton != "JW4A2MMTLXYSU") $copy_break = 1;
 }
 ?>
 <INPUT TYPE="hidden" NAME="Ver" VALUE="<?php echo($Ver); ?>">

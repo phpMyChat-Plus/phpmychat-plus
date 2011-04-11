@@ -29,6 +29,12 @@ switch(L_LANG)
 		$L_G_HL = "cs";
 		$L_G_CX = "huge9ky4l6w";
 		break;
+	case "ca_ES":
+		$L_G_EXT = "es";
+		$L_G_SA = "Busca";
+		$L_G_HL = "ca";
+		$L_G_CX = "pw7i8w-y4de";
+		break;
 	case "da_DK":
 		$L_G_EXT = "dk";
 #		$L_G_SA = "Søg";
@@ -36,11 +42,21 @@ switch(L_LANG)
 		$L_G_HL = "da";
 		$L_G_CX = "tqlzus-g838";
 		break;
-	case "ca_ES":
-		$L_G_EXT = "es";
-		$L_G_SA = "Busca";
-		$L_G_HL = "ca";
-		$L_G_CX = "pw7i8w-y4de";
+	case "de_DE":
+		$L_G_EXT = "de";
+		$L_G_SA = "Suche";
+		$L_G_HL = "de";
+		$L_G_CX = "nmp2xz-ibwi";
+		break;
+	case "el_GR":
+		$L_G_EXT = "gr";
+		$L_G_SA = "&#x0391;&#x03bd;&#x03b1;&#x03b6;&#x03ae;&#x03c4;&#x03b7;&#x03c3;&#x03b7;";
+		$L_G_HL = "el";
+		$L_G_CX = "q4w1tmnxnp7";
+		break;
+	case "en_GB":
+		$L_G_EXT = "co.uk";
+		$L_G_CX = "29rzcl-ytld";
 		break;
 	case "es_AR":
 		$L_G_EXT = "com.ar";
@@ -54,27 +70,11 @@ switch(L_LANG)
 		$L_G_HL = "es";
 		$L_G_CX = "pw7i8w-y4de";
 		break;
-	case "en_GB":
-		$L_G_EXT = "co.uk";
-		$L_G_CX = "29rzcl-ytld";
-		break;
-	case "de_DE":
-		$L_G_EXT = "de";
-		$L_G_SA = "Suche";
-		$L_G_HL = "de";
-		$L_G_CX = "nmp2xz-ibwi";
-		break;
 	case "fr_FR":
 		$L_G_EXT = "fr";
 		$L_G_SA = "Rechercher";
 		$L_G_HL = "fr";
 		$L_G_CX = "qu42zo-puy3";
-		break;
-	case "el_GR":
-		$L_G_EXT = "gr";
-		$L_G_SA = "&#x0391;&#x03bd;&#x03b1;&#x03b6;&#x03ae;&#x03c4;&#x03b7;&#x03c3;&#x03b7;";
-		$L_G_HL = "el";
-		$L_G_CX = "q4w1tmnxnp7";
 		break;
 	case "he_IL":
 		$L_G_EXT = "co.il";
@@ -119,6 +119,12 @@ switch(L_LANG)
 		$L_G_SA = "Zoeken";
 		$L_G_HL = "nl";
 		$L_G_CX = "efn8u2-oedw";
+		break;
+	case "pt_BR":
+		$L_G_EXT = "com.br";
+		$L_G_SA = "Pesquisar";
+		$L_G_HL = "pt";
+		$L_G_CX = "hkfpiwnsszl";
 		break;
 	case "ro_RO":
 		$L_G_EXT = "ro";
