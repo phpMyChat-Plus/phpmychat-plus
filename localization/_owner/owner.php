@@ -20,15 +20,17 @@ define("L_DEFAULT_TOPIC", ""); // Example: "This is the best Chat Online"
 // Do not change these lines:
 define("L_ORIG_LANG_AR", "español Argentina");
 define("L_ORIG_LANG_BG", "български");
+define("L_ORIG_LANG_BR", "português brasileiro");
 define("L_ORIG_LANG_CA", "català");
 define("L_ORIG_LANG_CZ", "čeština");
 define("L_ORIG_LANG_DA", "dansk");
+define("L_ORIG_LANG_DE", "Deutsch");
 define("L_ORIG_LANG_EN", "English");
 define("L_ORIG_LANG_ENUK", "English UK");
 define("L_ORIG_LANG_ENUS", "English US");
 define("L_ORIG_LANG_ES", "español");
 define("L_ORIG_LANG_FR", "français");
-define("L_ORIG_LANG_DE", "Deutsch");
+define("L_ORIG_LANG_GR", "Ελληνικά");
 define("L_ORIG_LANG_HE", "עברית");
 define("L_ORIG_LANG_HU", "magyar");
 define("L_ORIG_LANG_ID", "Bahasa Indonesia");

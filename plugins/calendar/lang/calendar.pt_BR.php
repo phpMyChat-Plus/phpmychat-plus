@@ -2,7 +2,7 @@
 # pt_BR translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 2.30
-# Language: Brazilian Portuguese / Português (Brasil)
+# Language: Brazilian Portuguese / português brasileiro
 # Translator: Jaime Dias ( jaime@jotadias.com.br)
 # Last file update: 29.07.2010
 
