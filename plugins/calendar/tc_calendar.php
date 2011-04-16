@@ -6,23 +6,23 @@
 // add on: translation  implemented - default is English en_US
 //	- thanks ciprianmp
 //
-// version 3.41-loc (27 March 2011)
+// version 3.53-loc (16 April 2011)
 
-//bug fixed: Incorrect next month display show on 'February 2008'
+//fixed: Incorrect next month display show on 'February 2008'
 //	- thanks Neeraj Jain for bug report
 //
-//bug fixed: Incorrect month comparable on calendar_form.php line 113
+//fixed: Incorrect month comparable on calendar_form.php line 113
 // - thanks Djenan Ganic, Ian Parsons, Jesse Davis for bug report
 //
 //add on: date on calendar form change upon textbox in datepicker mode
 //add on: validate date enter from dropdown and textbox
 //
-//bug fixed: Calendar path not valid when select date from dropdown
+//fixed: Calendar path not valid when select date from dropdown
 // - thanks yamba for bug report
 //
 //adjust: add new function setWidth and deprecate getDayNum function
 //
-//bug fixed: year combo box display not correct when extend its value
+//fixed: year combo box display not correct when extend its value
 //	- thanks Luiz Augusto for bug report
 //
 //fixed on date and month value return that is not leading by '0'
@@ -36,13 +36,13 @@
 //add on: button close on datepicker on the top-right corner of calendar
 //  - thanks denis
 //
-//bug fixed: hide javascript alert when default date not defined
+//fixed: hide javascript alert when default date not defined
 //	- thanks jon-b
 //
-//bug fixed: incorrect layout when select part of date
+//fixed: incorrect layout when select part of date
 //	- thanks simonzebu (I just got what you said  :) )
 //
-//bug fixed: not support date('N') for php version lower 5.0.1 so change to date('w') instead
+//fixed: not support date('N') for php version lower 5.0.1 so change to date('w') instead
 //  - thanks simonzebu, Kamil, greensilver for bug report
 //  - thanks Paul for the solution
 //
@@ -51,22 +51,37 @@
 //
 //add on: startMonday() function to set calendar display first day of week on Monday
 //
-//bug fixed: don't display year when not in year interval
+//fixed: don't display year when not in year interval
 //
-//bug fixed: day combobox not update when select date from calendar
+//fixed: day combobox not update when select date from calendar
 //	- thanks ciprianmp
 //
 //add on: disabledDay() function to let the calendar disabled on specified day
 //  - thanks Jim R.
 //
-//bug fixed: total number of days startup incorrect
+//fixed: total number of days startup incorrect
 //  - thanks Francois du Toit, ciprianmp
 //
 //add on: setAlignment() and setDatePair() function
-//  - thanks for ciprianmp and many guys guiding this :)
+//  - thanks ciprianmp and many guys guiding this :)
 //
-//bug fixed: the header of calendar look tight when day's header more then 2 characters, this can be adjusted by increasing width on calendar.css [#calendar-body td div { width: 15px; }]
+//fixed: the header of calendar looks tight when day's header more then 2 characters, this can be adjusted by increasing width on calendar.css [#calendar-body td div { width: 15px; }]
 //	- thanks ciprianmp
+//
+//add on: setSpecificDate() to enable or disable specific date
+//	- thanks ciprianmp, phillip, and Steve to suggest this
+//
+//utilizing and cleaning up some codes on tc_calendar.php, calendar_form.php, and calendar.js
+//	- thanks Peter
+//
+//added: 2 functions for php version that does not support json
+//	- thanks Steve
+//
+//fixed: javascript error on datepair function on v3.50 and 3.51
+//	- thanks ciprianmp
+//
+//fixed: writeYear bug from $date_allow1 & 2 must be changed to $time_allow1 & 2
+//	- thanks ciprianmp again :(
 //
 //********************************************************
 
@@ -90,7 +105,7 @@ class tc_calendar{
 	var $icon;
 	var $objname;
 	var $txt = L_SEL_ICON; //display when no calendar icon found or set up
-	var $date_format = 'd F Y'; //format of date show in panel if $show_input is false
+	var $date_format = DATE_FORMAT; //format of date show in panel if $show_input is false
 	var $year_display_from_current = 30;
 	var $date_picker;
 	var $path = '';
@@ -102,8 +117,8 @@ class tc_calendar{
 	var $year_start;
 	var $year_end;
 	var $startMonday = FIRST_DAY;
-	var $date_allow1;
-	var $date_allow2;
+	var $time_allow1 = false;
+	var $time_allow2 = false;
 	var $show_not_allow = false;
 	var $auto_submit = false;
 	var $form_container;
@@ -118,6 +133,9 @@ class tc_calendar{
 	var $date_pair2 = "";
 	var $date_pair_value = "";
 	var $hl = L_LANG;
+	var $sp_dates = array();
+	var $sp_type = 0; //0=disabled specify date, 1=enabled only specify date
+	var $sp_recursive = ''; //''(blank) = no recursive, 'month'=recursive on month, or 'year'=recursive on year
 
 	//calendar constructor
 	function tc_calendar($objname, $date_picker = false, $show_input = true){
@@ -156,9 +174,9 @@ class tc_calendar{
 	//get the day headers start from sunday till saturday
 	function getDayHeaders(){
 		if($this->startMonday){
-			return array("1"=>s_mon, "2"=>s_tue, "3"=>s_wed, "4"=>s_thu, "5"=>s_fri, "6"=>s_sat, "7"=>s_sun);
+			return array("1"=>L_S_MON, "2"=>L_S_TUE, "3"=>L_S_WED, "4"=>L_S_THU, "5"=>L_S_FRI, "6"=>L_S_SAT, "7"=>L_S_SUN);
 		}else{
-			return array("7"=>s_sun, "1"=>s_mon, "2"=>s_tue, "3"=>s_wed, "4"=>s_thu, "5"=>s_fri, "6"=>s_sat);
+			return array("7"=>L_S_SUN, "1"=>L_S_MON, "2"=>L_S_TUE, "3"=>L_S_WED, "4"=>L_S_THU, "5"=>L_S_FRI, "6"=>L_S_SAT);
 		}
 	}
 
@@ -204,6 +222,14 @@ class tc_calendar{
 	}
 
 	function writeScript(){
+		//check valid default date
+		if(!$this->checkDefaultDateValid()){
+			//unset default date
+			$this->day = 0;
+			$this->month = 0;
+			$this->year = 0;
+		}		
+
 		$this->writeHidden();
 
 		//check whether it is a date picker
@@ -237,7 +263,7 @@ class tc_calendar{
 
 			echo(" <a href=\"javascript:toggleCalendar('".$this->objname."');\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_15).".'; return true\" title=\"".sprintf(L_CLICK,L_LINKS_15)."\">");
 			if(is_file($this->icon)){
-				echo("<img src=\"".$this->icon."\" id=\"tcbtn_".$this->objname."\" name=\"tcbtn_".$this->objname."\" border=\"0\" align=\"absmiddle\" alt=\"".sprintf(L_CLICK,L_LINKS_15)."\"/>");
+				echo("<img src=\"".$this->icon."\" id=\"tcbtn_".$this->objname."\" name=\"tcbtn_".$this->objname."\" border=\"0\" align=\"absmiddle\" alt=\"".sprintf(L_CLICK,L_LINKS_15)."\" />");
 			}else echo($this->txt);
 			echo("</a>");
 
@@ -260,8 +286,8 @@ class tc_calendar{
 		$params[] = "year_end=".$this->year_end;
 		$params[] = "dp=".(($this->date_picker) ? 1 : 0);
 		$params[] = "mon=".$this->startMonday;
-		$params[] = "da1=".$this->date_allow1;
-		$params[] = "da2=".$this->date_allow2;
+		$params[] = "da1=".$this->time_allow1;
+		$params[] = "da2=".$this->time_allow2;
 		$params[] = "sna=".$this->show_not_allow;
 		$params[] = "aut=".$this->auto_submit;
 		$params[] = "frm=".$this->form_container;
@@ -274,6 +300,9 @@ class tc_calendar{
 		$params[] = "prv=".$this->date_pair_value;
 		$params[] = "pth=".$this->path;
 		$params[] = "hl=".$this->hl;
+		$params[] = "spd=".$this->check_json_encode($this->sp_dates);
+		$params[] = "spt=".$this->sp_type;
+		$params[] = "spr=".$this->sp_recursive;
 
 		$paramStr = (sizeof($params)>0) ? "?".implode("&", $params) : "";
 
@@ -318,8 +347,6 @@ class tc_calendar{
 		}
 
 		//write the calendar container
-//		echo("<div id=\"div_".$this->objname."\" style=\"position:".$div_position.";visibility:".$div_display.";z-index:10000;".$div_align."\" class=\"div_calendar calendar-border\">");
-//		echo("<IFRAME id=\"".$this->objname."_frame\" src=\"".$this->path."calendar_form.php".$paramStr."\" frameBorder=\"0\" scrolling=\"no\" allowtransparency=\"true\" width=\"100%\" height=\"100%\"></IFRAME>");
 		echo("<div id=\"div_".$this->objname."\" style=\"position:".$div_position.";visibility:".$div_display.";z-index:100;".$div_align."\" class=\"div_calendar calendar-border\">");
 		echo("<IFRAME id=\"".$this->objname."_frame\" src=\"".$this->path."calendar_form.php".$paramStr."\" frameBorder=\"0\" scrolling=\"no\" allowtransparency=\"true\" width=\"100%\" height=\"100%\" style=\"z-index: 100;\"></IFRAME>");
 		echo("</div>");
@@ -361,11 +388,11 @@ class tc_calendar{
 		$year_start = $this->year_start;
 		$year_end = $this->year_end;
 
-		//check year to be select in case of date_allow is set
-		  if(!$this->show_not_allow && ($this->date_allow1 || $this->date_allow2)){
-			if($this->date_allow1 && $this->date_allow2){
-				$da1Time = strtotime($this->date_allow1);
-				$da2Time = strtotime($this->date_allow2);
+		//check year to be selected in case of time_allow is set
+		  if(!$this->show_not_allow && ($this->time_allow1 || $this->time_allow2)){
+			if($this->time_allow1 && $this->time_allow2){
+				$da1Time = strtotime($this->time_allow1);
+				$da2Time = strtotime($this->time_allow2);
 
 				if($da1Time < $da2Time){
 					$year_start = date('Y', $da1Time);
@@ -374,46 +401,53 @@ class tc_calendar{
 					$year_start = date('Y', $da2Time);
 					$year_end = date('Y', $da1Time);
 				}
-			}elseif($this->date_allow1){
+			}elseif($this->time_allow1){
 				//only date 1 specified
-				$da1Time = strtotime($this->date_allow1);
+				$da1Time = strtotime($this->time_allow1);
 				$year_start = date('Y', $da1Time);
-			}elseif($this->date_allow2){
+			}elseif($this->time_allow2){
 				//only date 2 specified
-				$da2Time = strtotime($this->date_allow2);
+				$da2Time = strtotime($this->time_allow2);
 				$year_end = date('Y', $da2Time);
 			}
 		  }
 
-//		for($i=$year_start; $i<=$year_end; $i++){ // current year bottom
-		for($i=$year_end; $i>=$year_start; $i--){ // current year up
+		for($i=$year_end; $i>=$year_start; $i--){
 			$selected = ((int)$this->year == $i) ? " selected" : "";
 			echo("<option value=\"$i\"$selected>$i</option>");
 		}
 		echo("</select> ");
 	}
 
+	function eHidden($suffix, $value) {
+		if($suffix) $suffix = "_".$suffix;
+		echo("<input type=\"hidden\" name=\"".$this->objname.$suffix."\" id=\"".$this->objname.$suffix."\" value=\"".$value."\" />");
+	}
+
 	//write hidden components
 	function writeHidden(){
-		echo("<input type=\"hidden\" name=\"".$this->objname."\" id=\"".$this->objname."\" value=\"".$this->getDate()."\">");
-		echo("<input type=\"hidden\" name=\"".$this->objname."_dp\" id=\"".$this->objname."_dp\" value=\"".$this->date_picker."\">");
-		echo("<input type=\"hidden\" name=\"".$this->objname."_year_start\" id=\"".$this->objname."_year_start\" value=\"".$this->year_start."\">");
-		echo("<input type=\"hidden\" name=\"".$this->objname."_year_end\" id=\"".$this->objname."_year_end\" value=\"".$this->year_end."\">");
-		echo("<input type=\"hidden\" name=\"".$this->objname."_mon\" id=\"".$this->objname."_mon\" value=\"".$this->startMonday."\">");
-		echo("<input type=\"hidden\" name=\"".$this->objname."_da1\" id=\"".$this->objname."_da1\" value=\"".$this->date_allow1."\">");
-		echo("<input type=\"hidden\" name=\"".$this->objname."_da2\" id=\"".$this->objname."_da2\" value=\"".$this->date_allow2."\">");
-		echo("<input type=\"hidden\" name=\"".$this->objname."_sna\" id=\"".$this->objname."_sna\" value=\"".$this->show_not_allow."\">");
-		echo("<input type=\"hidden\" name=\"".$this->objname."_aut\" id=\"".$this->objname."_aut\" value=\"".$this->auto_submit."\">");
-		echo("<input type=\"hidden\" name=\"".$this->objname."_frm\" id=\"".$this->objname."_frm\" value=\"".$this->form_container."\">");
-		echo("<input type=\"hidden\" name=\"".$this->objname."_tar\" id=\"".$this->objname."_tar\" value=\"".$this->target_url."\">");
-		echo("<input type=\"hidden\" name=\"".$this->objname."_inp\" id=\"".$this->objname."_inp\" value=\"".$this->show_input."\">");
-		echo("<input type=\"hidden\" name=\"".$this->objname."_fmt\" id=\"".$this->objname."_fmt\" value=\"".$this->date_format."\">");
-		echo("<input type=\"hidden\" name=\"".$this->objname."_dis\" id=\"".$this->objname."_dis\" value=\"".implode(",", $this->dsb_days)."\">");
-		echo("<input type=\"hidden\" name=\"".$this->objname."_pr1\" id=\"".$this->objname."_pr1\" value=\"".$this->date_pair1."\">");
-		echo("<input type=\"hidden\" name=\"".$this->objname."_pr2\" id=\"".$this->objname."_pr2\" value=\"".$this->date_pair2."\">");
-		echo("<input type=\"hidden\" name=\"".$this->objname."_prv\" id=\"".$this->objname."_prv\" value=\"".$this->date_pair_value."\">");
-		echo("<input type=\"hidden\" name=\"".$this->objname."_pth\" id=\"".$this->objname."_pth\" value=\"".$this->path."\">");
-		echo("<input type=\"hidden\" name=\"".$this->objname."_hl\" id=\"".$this->objname."_hl\" value=\"".$this->hl."\">");
+		$this->eHidden('', $this->getDate());
+		$this->eHidden('dp', $this->date_picker);
+		$this->eHidden('year_start', $this->year_start);
+		$this->eHidden('year_end', $this->year_end);
+		$this->eHidden('mon', $this->startMonday);
+		$this->eHidden('da1', $this->time_allow1);
+		$this->eHidden('da2', $this->time_allow2);
+		$this->eHidden('sna', $this->show_not_allow);
+		$this->eHidden('aut', $this->auto_submit);
+		$this->eHidden('frm', $this->form_container);
+		$this->eHidden('tar', $this->target_url);
+		$this->eHidden('inp', $this->show_input);
+		$this->eHidden('fmt', $this->date_format);
+		$this->eHidden('dis', implode(",", $this->dsb_days));
+		$this->eHidden('pr1', $this->date_pair1);
+		$this->eHidden('pr2', $this->date_pair2);
+		$this->eHidden('prv', $this->date_pair_value);
+		$this->eHidden('pth', $this->path);
+		$this->eHidden('hl', $this->hl);
+		$this->eHidden('spd', $this->check_json_encode($this->sp_dates));
+		$this->eHidden('spt', $this->sp_type);
+		$this->eHidden('spr', $this->sp_recursive);
 	}
 
 	//set width of calendar
@@ -455,7 +489,7 @@ class tc_calendar{
 	}
 
 	function getMonthNames(){
-		return array(l_january, l_february, l_march, l_april, l_may, l_june, l_july, l_august, l_september, l_october, l_november, l_december);
+		return array(L_JAN, L_FEB, L_MAR, L_APR, L_MAY, L_JUN, L_JUL, L_AUG, L_SEP, L_OCT, L_NOV, L_DEC);
 	}
 
 	function startMonday($flag){
@@ -466,51 +500,35 @@ class tc_calendar{
 		$time_from = strtotime($from);
 		$time_to = strtotime($to);
 
-		if($time_from > 0 && $time_to > 0){
-			//both set
-			if($time_from <= $time_to){
-				$this->date_allow1 = $from;
-				$this->date_allow2 = $to;
+		// prior to version 5.1 strtotime returns -1 for bad input
+        if (version_compare('5.1.0', phpversion()) == 1) {
+			if ($time_from == -1) $time_from = false;
+			if ($time_to == -1) $time_to = false;
+		}
 
-				//get years from allow date
-				$year_allow1 = date('Y', $time_from);
-				$year_allow2 = date('Y', $time_to);
-			}else{
-				$this->date_allow1 = $to;
-				$this->date_allow2 = $from;
+		// sanity check, ensure time_from earlier than time_to
+		if(is_int($time_from) && is_int($time_to) && $time_from > $time_to){
+			$tmp = $time_from;
+			$time_from = $time_to;
+			$time_to = $tmp;
+		}
 
-				//get years from allow date
-				$year_allow1 = date('Y', $time_to);
-				$year_allow2 = date('Y', $time_from);
-			}
-
-			//setup year_start and year_end, display in dropdown
-			if($this->year_start && $year_allow1 < $this->year_start) $this->year_start = $year_allow1;
-			if($this->year_end && $year_allow2 < $this->year_end) $this->year_end = $year_allow2;
-
-		}elseif($time_from > 0){
-			$this->date_allow1 = $from;
-
-			//get year from allow date
-			$year_allow1 = date('Y', $time_from);
-
-			//setup year start, display in dropdown
-			if($this->year_start && $year_allow1 < $this->year_start) $this->year_start = $year_allow1;
+		if (is_int($time_from)) {
+			$this->time_allow1 = $time_from;
+			$y = date('Y', $time_from);
+			if($this->year_start && $y < $this->year_start) $this->year_start = $y;
 
 			//setup year end from year start
-			if(!$this->year_end) $this->year_end = $this->year_start + $this->year_display_from_current;
+			if(!is_int($time_to) && !$this->year_end) $this->year_end = $this->year_start + $this->year_display_from_current;
+		}
 
-		}elseif($time_to > 0){
-			$this->date_allow2 = $to;
-
-			//get year from allow date
-			$year_allow2 = date('Y', $time_to);
-
-			//setup year end, display in dropdown
-			if($this->year_end && $year_allow2 < $this->year_end) $this->year_end = $year_allow2;
+		if (is_int($time_to)) {
+			$this->time_allow2 = $time_to;
+			$y = date('Y', $time_to);
+			if($this->year_end && $y < $this->year_end) $this->year_end = $y;
 
 			//setup year start from year end
-			if(!$this->year_start) $this->year_start = $this->year_end - $this->year_display_from_current;
+			if(!is_int($time_from) && !$this->year_start) $this->year_start = $this->year_end - $this->year_display_from_current;
 		}
 
 		$this->show_not_allow = $show_not_allow;
@@ -571,6 +589,109 @@ class tc_calendar{
 			$this->date_pair2 = $calendar_name2;
 			if($pair_value != "0000-00-00 00:00:00")
 				$this->date_pair_value = $pair_value;
+		}
+	}
+
+	function setSpecificDate($dates, $type=0, $recursive=""){
+		if(is_array($dates)){
+			//change specific date to time
+			foreach($dates as $sp_date){
+				$sp_time = strtotime($sp_date);
+				
+				if($sp_time > 0) $this->sp_dates[] = $sp_time;
+			}
+			
+			$this->sp_type = ($type == 1) ? 1 : 0; //control data type for $type
+			
+			$recursive = strtolower($recursive);
+			$this->sp_recursive = ($recursive == 'month' || $recursive == 'year') ? $recursive : ""; //control data type for $recursive
+		}
+	}
+
+	function checkDefaultDateValid(){
+		$default_datetime = mktime(0,0,0,$this->month,$this->day,$this->year);
+		$valid = true;
+		
+		//check with allow date
+		if($this->time_allow1 && $this->time_allow2){
+			if($default_datetime < $this->time_allow1 || $default_datetime > $this->time_allow2) $valid = false;
+		}elseif($this->time_allow1){
+			if($default_datetime < $this->time_allow1) $valid = false;
+		}elseif($this->time_allow2){
+			if($default_datetime > $this->time_allow2) $valid = false;
+		}
+		
+		//check with specific date
+		if(is_array($this->sp_dates) && sizeof($this->sp_dates) > 0){
+			//check if it is current date
+			$sp_found = false;
+			
+			switch($this->sp_recursive){
+				case 'month': //recursive every month, check on day
+					foreach($this->sp_dates as $sp_time){
+						$sp_time_d = date('d', $sp_time);
+						if($sp_time_d == $this->day){
+							$sp_found = true;
+							break;
+						}
+					}
+					break;
+				case 'year': //recursive every year, check on month and day
+					foreach($this->sp_dates as $sp_time){
+						$sp_time_md = date('md', $sp_time);	
+						$this_md = date('md', $default_datetime); 
+						if($sp_time_md == $this_md){
+							$sp_found = true;
+							break;
+						}
+					}
+					break;
+				default: //no recursive
+					//check exact date
+					$sp_found = in_array($default_datetime, $this->sp_dates);
+			}
+			
+			switch($this->sp_type){
+				case 0:
+				default:
+					//disabled specific and enabled others
+					if($sp_found) $valid = false;
+					break;
+				case 1:
+					//enabled specific and disabled others
+					if(!$sp_found) $valid = false;
+					break;
+			}					
+		}
+		
+		return $valid;
+	}
+	
+	function check_json_encode($obj){
+		//try customize to get it work, should replace with better solution in the future
+		
+		if(function_exists("json_encode")){
+			return json_encode($obj);
+		}else{			
+			//only array is assume for now			
+			if(is_array($obj)){
+				return "[".implode(",", $obj)."]";	
+			}else return "";
+		}
+	}
+	
+	function &check_json_decode($str){
+		//should replace with better solution in the future
+		
+		if(function_exists("json_decode")){
+			return json_decode($str);
+		}else{			
+			//only array is assume for now
+			$str = trim($str);
+			if($str && strlen($str) > 2){
+				$str = substr($str, 1, strlen($str)-2);
+				return explode(",", $str);
+			}else return array();
 		}
 	}
 

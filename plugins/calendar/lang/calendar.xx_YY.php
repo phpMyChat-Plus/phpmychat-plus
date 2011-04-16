@@ -1,7 +1,7 @@
 ﻿<?php
 # xx_YY translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.3
+# Version: 3.51
 # Language: Lang_name / Orig_name (in your lang) // ex: Romanian / Română
 # Translator: YourName <email@...>
 # Last file update: xx.xx.201x
@@ -19,6 +19,9 @@ define("L_SEL_ICON", "Select Icon");
 define("L_SEL_DATE", "Select Date");
 define("L_ERR_SEL", "Your selection is not valid");
 define("L_NOT_ALLOWED", "This date is not allowed to be selected");
+define("L_DATE_BEFORE", "Please choose a date before %s");
+define("L_DATE_AFTER", "Please choose a date after %s");
+define("L_DATE_BETWEEN", "Please choose a date between\n %s and %s");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "0");

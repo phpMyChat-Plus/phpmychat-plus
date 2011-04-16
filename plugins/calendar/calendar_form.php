@@ -7,7 +7,7 @@ elseif(defined("L_LANG") && L_LANG != "en_US" && L_LANG != "L_LANG") $language =
 if(isset($language)){
 include_once("lang/calendar.".$language.".php");
 }
-require('tc_calendar.php');
+require_once('tc_calendar.php');
 
 $thispage = $_SERVER['PHP_SELF'];
 
@@ -17,43 +17,30 @@ $sly = (isset($_REQUEST["selected_year"])) ? (int)$_REQUEST["selected_year"] : 0
 $year_start = (isset($_REQUEST["year_start"])) ? $_REQUEST["year_start"] : 0;
 $year_end = (isset($_REQUEST["year_end"])) ? $_REQUEST["year_end"] : 0;
 $startMonday = (isset($_REQUEST["mon"])) ? $_REQUEST["mon"] : 0;
-$date_allow1 = (isset($_REQUEST["da1"])) ? $_REQUEST["da1"] : "";
-$date_allow2 = (isset($_REQUEST["da2"])) ? $_REQUEST["da2"] : "";
+$time_allow1 = (isset($_REQUEST["da1"])) ? $_REQUEST["da1"] : "";
+$time_allow2 = (isset($_REQUEST["da2"])) ? $_REQUEST["da2"] : "";
+$ta1_set = is_numeric($time_allow1);
+$ta2_set = is_numeric($time_allow2);
 $show_not_allow = (isset($_REQUEST["sna"])) ? $_REQUEST["sna"] : true;
 $auto_submit = (isset($_REQUEST["aut"])) ? $_REQUEST["aut"] : false;
 $form_name = (isset($_REQUEST["frm"])) ? $_REQUEST["frm"] : "";
 $target_url = (isset($_REQUEST["tar"])) ? $_REQUEST["tar"] : "";
 $show_input = (isset($_REQUEST["inp"])) ? $_REQUEST["inp"] : true;
-$date_format = (isset($_REQUEST["fmt"])) ? $_REQUEST["fmt"] : 'd F Y';
+$date_format = (isset($_REQUEST["fmt"])) ? $_REQUEST["fmt"] : DATE_FORMAT; //format of date show in panel if $show_input is false
 $dsb_txt = (isset($_REQUEST["dis"])) ? $_REQUEST["dis"] : "";
 $date_pair1 = (isset($_REQUEST["pr1"])) ? $_REQUEST["pr1"] : "";
 $date_pair2 = (isset($_REQUEST["pr2"])) ? $_REQUEST["pr2"] : "";
 $date_pair_value = (isset($_REQUEST["prv"])) ? $_REQUEST["prv"] : "";
 $path = (isset($_REQUEST["pth"])) ? $_REQUEST["pth"] : "";
 $hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : 'en_US';
+$sp_dates = (isset($_REQUEST["spd"])) ? @tc_calendar::check_json_decode($_REQUEST["spd"]) : array();
+$sp_type = (isset($_REQUEST["spt"])) ? $_REQUEST["spt"] : 0;
+$sp_recursive = (isset($_REQUEST["spr"])) ? $_REQUEST["spr"] : "";
 
 //check year to be select in case of date_allow is set
-if(!$show_not_allow && ($date_allow1 || $date_allow2)){
-	if($date_allow1 && $date_allow2){
-		$da1Time = strtotime($date_allow1);
-		$da2Time = strtotime($date_allow2);
-
-		if($da1Time < $da2Time){
-			$year_start = date('Y', $da1Time);
-			$year_end = date('Y', $da2Time);
-		}else{
-			$year_start = date('Y', $da2Time);
-			$year_end = date('Y', $da1Time);
-		}
-	}elseif($date_allow1){
-		//only date 1 specified
-		$da1Time = strtotime($date_allow1);
-		$year_start = date('Y', $da1Time);
-	}elseif($date_allow2){
-		//only date 2 specified
-		$da2Time = strtotime($date_allow2);
-		$year_end = date('Y', $da2Time);
-	}
+if(!$show_not_allow){
+  if ($ta1_set) $year_start = date('Y', $time_allow1);
+  if ($ta2_set) $year_end = date('Y', $time_allow2);
 }
 
 if(isset($_REQUEST["m"]))
@@ -62,8 +49,7 @@ else{
 	if($slm){
 		$m = $slm;
 	}else{
-		$time_allow2 = strtotime($date_allow2);
-		if($time_allow2 > 0 && $year_end > 0){
+		if($ta2_set && $year_end > 0){
 			//compare which one is more
 			$year_allow2 = date('Y', $time_allow2);
 			if($year_allow2 >= $year_end){
@@ -73,7 +59,7 @@ else{
 				//use year_end
 				$m = ($year_end > date('Y')) ? date('m') : 12;
 			}
-		}elseif($time_allow2 > 0){
+		}elseif($ta2_set){
 			$m = ($time_allow2 > time()) ? date('m') : date('m', $time_allow2);
 		}elseif($year_end > 0){
 			$m = ($year_end > date('Y')) ? date('m') : 12;
@@ -97,6 +83,20 @@ if($y <= 0) $y = date('Y');
 //set startup calendar
 if($y >= $year_end) $y = $year_end;
 if($y <= $year_start) $y = $year_start;
+
+// ensure m-y fits date allow range
+if (!$show_not_allow) {
+  if ($ta1_set) {
+    $m1 = date('m', $time_allow1);
+    $y1 = date('Y', $time_allow1);
+    if ($y == $y1 && (int)$m < (int)$m1) $m = $m1;
+  }
+  if ($ta2_set) {
+    $m2 = date('m', $time_allow2);
+    $y2 = date('Y', $time_allow2);
+    if ($y == $y2 && (int)$m > (int)$m2) $m = $m2;
+  }
+}
 
 $objname = (isset($_REQUEST["objname"])) ? $_REQUEST["objname"] : "";
 $dp = (isset($_REQUEST["dp"])) ? $_REQUEST["dp"] : "";
@@ -297,11 +297,11 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
           <table border="0" align="center" cellpadding="1" cellspacing="0">
             <tr>
 			<?php
+            $monthnames = $cobj->getMonthNames();
 			if ($first_input == "B"){
 			?>
               <td align="left"><select name="m" onchange="javascript:submitCalendar();">
               <?php
-              $monthnames = $cobj->getMonthNames();
               for($f=1; $f<=sizeof($monthnames); $f++){
                 $selected = ($f == (int)$m) ? " selected" : "";
                 echo("<option value=\"".str_pad($f, 2, "0", STR_PAD_LEFT)."\"$selected>".$monthnames[$f-1]."</option>");
@@ -332,7 +332,6 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
 			?>
               <td align="right"><select name="m" onchange="javascript:submitCalendar();">
               <?php
-              $monthnames = $cobj->getMonthNames();
               for($f=1; $f<=sizeof($monthnames); $f++){
                 $selected = ($f == (int)$m) ? " selected" : "";
                 echo("<option value=\"".str_pad($f, 2, "0", STR_PAD_LEFT)."\"$selected>".$monthnames[$f-1]."</option>");
@@ -370,8 +369,8 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
             <input name="objname" type="hidden" id="objname" value="<?php echo($objname);?>" />
             <input name="dp" type="hidden" id="dp" value="<?php echo($dp);?>" />
             <input name="mon" type="hidden" id="mon" value="<?php echo($startMonday);?>" />
-            <input name="da1" type="hidden" id="da1" value="<?php echo($date_allow1);?>" />
-            <input name="da2" type="hidden" id="da2" value="<?php echo($date_allow2);?>" />
+            <input name="da1" type="hidden" id="da1" value="<?php echo($time_allow1);?>" />
+            <input name="da2" type="hidden" id="da2" value="<?php echo($time_allow2);?>" />
             <input name="sna" type="hidden" id="sna" value="<?php echo($show_not_allow);?>" />
             <input name="aut" type="hidden" id="aut" value="<?php echo($auto_submit);?>" />
             <input name="frm" type="hidden" id="frm" value="<?php echo($form_name);?>" />
@@ -384,6 +383,9 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
             <input name="prv" type="hidden" id="prv" value="<?php echo($date_pair_value);?>" />
             <input name="pth" type="hidden" id="pth" value="<?php echo($path);?>" />
             <input name="hl" type="hidden" id="hl" value="<?php echo($hl);?>" />
+            <input name="spd" type="hidden" id="spd" value="<?php echo($cobj->check_json_encode($sp_dates));?>" />
+            <input name="spt" type="hidden" id="spt" value="<?php echo($sp_type);?>" />
+            <input name="spr" type="hidden" id="spr" value="<?php echo($sp_recursive);?>" />
       </form>
     </div>
     <div id="calendar-container">
@@ -413,8 +415,8 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
             $pvMonthTime = strtotime($previous_year."-".$previous_month."-".$total_lastmonth);
 
             //check lastmonth is on allowed date
-            if($date_allow1 && !$show_not_allow){
-                if($pvMonthTime >= strtotime($date_allow1)){
+            if($ta1_set && !$show_not_allow){
+                if($pvMonthTime >= $time_allow1){
                     $show_previous = true;
                 }else $show_previous = false;
             }else $show_previous = true; //always show when not set
@@ -444,28 +446,15 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
                 if($is_selected == 0) $htmlClass[] = "select";
 
                 //check date allowed
-                if($date_allow1 || $date_allow2){
-                    //at least one date allowed specified
-                    $dateLink = true;
-                    if($date_allow1 && $date_allow2){
-                        //both date specified
-                        $da1Time = strtotime($date_allow1);
-                        $da2Time = strtotime($date_allow2);
-
-                        if($da1Time < $da2Time){
-                            $dateLink = ($da1Time <= $currentTime && $da2Time >= $currentTime) ? true : false;
-                        }else{
-                            $dateLink = ($da1Time >= $currentTime && $da2Time <= $currentTime) ? true : false;
-                        }
-                    }elseif($date_allow1){
-                        //only date 1 specified
-                        $da1Time = strtotime($date_allow1);
-                        $dateLink = ($currentTime >= $da1Time) ? true : false;
-                    }elseif($date_allow2){
-                        //only date 2 specified
-                        $da2Time = strtotime($date_allow2);
-                        $dateLink = ($currentTime <= $da2Time) ? true : false;
-                    }
+				if($ta1_set && $ta2_set){
+                    //both date specified
+                    $dateLink = ($time_allow1 <= $currentTime && $currentTime <= $time_allow2);
+                }elseif($ta1_set){
+                    //only date 1 specified
+                    $dateLink = ($currentTime >= $time_allow1);
+                }elseif($ta2_set){
+                    //only date 2 specified
+                    $dateLink = ($currentTime <= $time_allow2);
                 }else{
                     //no date allow specified, assume show all
                     $dateLink = true;
@@ -473,10 +462,55 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
 
                 if($dateLink){
 					//check for disable days
-                if(in_array(strtolower($day_txt), $cobj->dsb_days) !== false){
+                	if(in_array(strtolower($day_txt), $cobj->dsb_days) !== false){
 						$dateLink = false;
                 	}
                 }
+
+				//check specific date
+				if($dateLink){				
+					if(is_array($sp_dates) && sizeof($sp_dates) > 0){
+						//check if it is current date
+						$sp_found = false;
+						
+						switch($sp_recursive){
+							case 'month': //recursive every month, check on day
+								foreach($sp_dates as $sp_time){
+									$sp_time_d = date('d', $sp_time);									
+									if($sp_time_d == $day){
+										$sp_found = true;
+										break;
+									}
+								}
+								break;
+							case 'year': //recursive every year, check on month and day
+								foreach($sp_dates as $sp_time){
+									$sp_time_md = date('md', $sp_time);	
+									$this_md = date('md', $currentTime); 
+									if($sp_time_md == $this_md){
+										$sp_found = true;
+										break;
+									}
+								}
+								break;
+							default: //no recursive
+								//check exact date
+								$sp_found = in_array($currentTime, $sp_dates);
+						}
+						
+						switch($sp_type){
+							case 0:
+							default:
+								//disabled specific and enabled others
+								$dateLink = ($sp_found) ? false : true;
+								break;
+							case 1:
+								//enabled specific and disabled others
+								$dateLink = ($sp_found) ? true : false;
+								break;
+						}					
+					}
+				}
 
 				//check date_pair1 &  2 and disabled date
 				if($date_pair1 && $dp_time > 0 && $currentTime < $dp_time){ //set date only after date_pair1
@@ -535,9 +569,9 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
             }
 
             //check next month is on allowed date
-            if($date_allow2 && !$show_not_allow){
+            if($ta2_set && !$show_not_allow){
                 $nxMonthTime = strtotime($next_year."-".$next_month."-1");
-                if($nxMonthTime <= strtotime($date_allow2)){
+                if($nxMonthTime <= $time_allow2){
                     $show_next = true;
                 }else $show_next = false;
             }else $show_next = true; //always show when not set

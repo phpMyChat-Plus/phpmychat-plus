@@ -622,8 +622,6 @@ else
 			  }
 			  $myCalendar->setYearSelect(1935, date('Y'));
 			  $myCalendar->dateAllow('1935-01-01', date('Y-m-d'));
-			  $myCalendar->setDateFormat(str_replace("%","",str_replace("B","F",str_replace("d","j",L_CAL_FORMAT))));
-//			  $myCalendar->setDateFormat('j F Y');
 			  $myCalendar->writeScript();
 			?>
 				&nbsp;<?php if (!$done && C_REQUIRE_BDAY) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
