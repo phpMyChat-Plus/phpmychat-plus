@@ -34,7 +34,7 @@ A, A:hover, A:active, A:visited {
 #calendar-body a:link { text-decoration : none; font-family: tahoma; color: #000000; }
 #calendar-body a:visited { text-decoration : none; font-family: tahoma; color: #000000; }
 #calendar-body a:hover { text-decoration : underline; font-family: tahoma; color: #FF0000; background-color: #FFFFCC; }
-#calendar-body .disabledate { color: #669999; }
+#calendar-body .disabledate { color: #666666; background-color: #EEEEEE; }
 
 #calendar-body .refresh { color: #FFFFFF; padding: 10px 3px 3px; }
 #calendar-body .refresh .txt-container { padding: 25px 10px 10px; height: 50px; }

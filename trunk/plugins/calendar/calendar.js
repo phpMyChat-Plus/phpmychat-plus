@@ -44,145 +44,107 @@ function setValue(objname, d){
 	checkPairValue(objname, d);
 }
 
+function tc_submitDate(objname, dvalue, mvalue, yvalue){
+	var obj = document.getElementById(objname+'_frame');
+
+	var year_start = document.getElementById(objname+'_year_start').value;
+	var year_end = document.getElementById(objname+'_year_end').value;
+	var dp = document.getElementById(objname+'_dp').value;
+	var smon = document.getElementById(objname+'_mon').value;
+	var da1 = document.getElementById(objname+'_da1').value;
+	var da2 = document.getElementById(objname+'_da2').value;
+	var sna = document.getElementById(objname+'_sna').value;
+	var aut = document.getElementById(objname+'_aut').value;
+	var frm = document.getElementById(objname+'_frm').value;
+	var tar = document.getElementById(objname+'_tar').value;
+	var inp = document.getElementById(objname+'_inp').value;
+	var fmt = document.getElementById(objname+'_fmt').value;
+	var dis = document.getElementById(objname+'_dis').value;
+	var pr1 = document.getElementById(objname+'_pr1').value;
+	var pr2 = document.getElementById(objname+'_pr2').value;
+	var prv = document.getElementById(objname+'_prv').value;
+	var path = document.getElementById(objname+'_pth').value;
+	var hl = document.getElementById(objname+'_hl').value;
+	var spd = document.getElementById(objname+'_spd').value;
+	var spt = document.getElementById(objname+'_spt').value;
+	var spr = document.getElementById(objname+'_spr').value;
+
+	obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+dvalue+"&selected_month="+mvalue+"&selected_year="+yvalue+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&mon="+smon+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&pr1="+pr1+"&pr2="+pr2+"&prv="+prv+"&hl="+hl+"&spd="+spd+"&spt="+spt+"&spr="+spr;
+
+	obj.contentWindow.submitNow(dvalue, mvalue, yvalue);
+}
+
+function tc_setDMY(objname, dvalue, mvalue, yvalue){
+	var obj = document.getElementById(objname);
+	obj.value = yvalue + "-" + mvalue + "-" + dvalue;
+
+	tc_submitDate(objname, dvalue, mvalue, yvalue);
+}
+
 function tc_setDay(objname, dvalue){
 	var obj = document.getElementById(objname);
 	var date_array = obj.value.split("-");
-
+	
 	//check if date is not allow to select
-	if(!isDateAllow(objname, dvalue, date_array[1], date_array[0])){
+	if(!isDateAllow(objname, dvalue, date_array[1], date_array[0]) || !checkSpecifyDate(objname, dvalue, date_array[1], date_array[0])){
 		alert(l_not_allowed);
-
 		restoreDate(objname);
-	}else{
-		if(isDate(dvalue, date_array[1], date_array[0])){
-			obj.value = date_array[0] + "-" + date_array[1] + "-" + dvalue;
-
-			var obj = document.getElementById(objname+'_frame');
-
-			var year_start = document.getElementById(objname+'_year_start').value;
-			var year_end = document.getElementById(objname+'_year_end').value;
-			var dp = document.getElementById(objname+'_dp').value;
-			var smon = document.getElementById(objname+'_mon').value;
-			var da1 = document.getElementById(objname+'_da1').value;
-			var da2 = document.getElementById(objname+'_da2').value;
-			var sna = document.getElementById(objname+'_sna').value;
-			var aut = document.getElementById(objname+'_aut').value;
-			var frm = document.getElementById(objname+'_frm').value;
-			var tar = document.getElementById(objname+'_tar').value;
-			var inp = document.getElementById(objname+'_inp').value;
-			var fmt = document.getElementById(objname+'_fmt').value;
-			var dis = document.getElementById(objname+'_dis').value;
-			var pr1 = document.getElementById(objname+'_pr1').value;
-			var pr2 = document.getElementById(objname+'_pr2').value;
-			var prv = document.getElementById(objname+'_prv').value;
-			var path = document.getElementById(objname+'_pth').value;
-			var hl = document.getElementById(objname+'_hl').value;
-
-			obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+dvalue+"&selected_month="+date_array[1]+"&selected_year="+date_array[0]+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&mon="+smon+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&pr1="+pr1+"&pr2="+pr2+"&prv="+prv+"&hl="+hl;
-
-			obj.contentWindow.submitNow(dvalue, date_array[1], date_array[0]);
-
+	}else{		
+		if(isDate(dvalue, date_array[1], date_array[0])){			
+			tc_setDMY(objname, dvalue, date_array[1], date_array[0]);			
 		}else document.getElementById(objname+"_day").selectedIndex = date_array[2];
 	}
+	
+	checkPairValue(objname, obj.value);
 }
 
 function tc_setMonth(objname, mvalue){
 	var obj = document.getElementById(objname);
 	var date_array = obj.value.split("-");
-
+	
 	//check if date is not allow to select
-	if(!isDateAllow(objname, date_array[2], mvalue, date_array[0])){
+	if(!isDateAllow(objname, date_array[2], mvalue, date_array[0]) || !checkSpecifyDate(objname, date_array[2], mvalue, date_array[0])){
 		alert(l_not_allowed);
-
 		restoreDate(objname);
 	}else{
 		if(document.getElementById(objname+'_dp').value && document.getElementById(objname+'_inp').value){
 			//update 'day' combo box
 			date_array[2] = tc_updateDay(objname, date_array[0], mvalue, date_array[2]);
 		}
-
+		
 		if(isDate(date_array[2], mvalue, date_array[0])){
-			obj.value = date_array[0] + "-" + mvalue + "-" + date_array[2];
-
-			var obj = document.getElementById(objname+'_frame');
-
-			var year_start = document.getElementById(objname+'_year_start').value;
-			var year_end = document.getElementById(objname+'_year_end').value;
-			var dp = document.getElementById(objname+'_dp').value;
-			var smon = document.getElementById(objname+'_mon').value;
-			var da1 = document.getElementById(objname+'_da1').value;
-			var da2 = document.getElementById(objname+'_da2').value;
-			var sna = document.getElementById(objname+'_sna').value;
-			var aut = document.getElementById(objname+'_aut').value;
-			var frm = document.getElementById(objname+'_frm').value;
-			var tar = document.getElementById(objname+'_tar').value;
-			var inp = document.getElementById(objname+'_inp').value;
-			var fmt = document.getElementById(objname+'_fmt').value;
-			var dis = document.getElementById(objname+'_dis').value;
-			var pr1 = document.getElementById(objname+'_pr1').value;
-			var pr2 = document.getElementById(objname+'_pr2').value;
-			var prv = document.getElementById(objname+'_prv').value;
-			var path = document.getElementById(objname+'_pth').value;
-			var hl = document.getElementById(objname+'_hl').value;
-
-			obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+date_array[2]+"&selected_month="+mvalue+"&selected_year="+date_array[0]+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&mon="+smon+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&pr1="+pr1+"&pr2="+pr2+"&prv="+prv+"&hl="+hl;
-
-			obj.contentWindow.submitNow(date_array[2], mvalue, date_array[0]);
-
+			tc_setDMY(objname, date_array[2], mvalue, date_array[0]);			
 		}else document.getElementById(objname+"_month").selectedIndex = date_array[1];
 	}
+	
+	checkPairValue(objname, obj.value);
 }
 
 function tc_setYear(objname, yvalue){
 	var obj = document.getElementById(objname);
 	var date_array = obj.value.split("-");
-
+		
 	//check if date is not allow to select
-	if(!isDateAllow(objname, date_array[2], date_array[1], yvalue)){
+	if(!isDateAllow(objname, date_array[2], date_array[1], yvalue) || !checkSpecifyDate(objname, date_array[2], date_array[1], yvalue)){
 		alert(l_not_allowed);
-
 		restoreDate(objname);
 	}else{
 		if(document.getElementById(objname+'_dp').value && document.getElementById(objname+'_inp').value){
 			//update 'day' combo box
 			date_array[2] = tc_updateDay(objname, yvalue, date_array[1], date_array[2]);
 		}
-
+		
 		if(isDate(date_array[2], date_array[1], yvalue)){
-			obj.value = yvalue + "-" + date_array[1] + "-" + date_array[2];
-
-			var obj = document.getElementById(objname+'_frame');
-
-			var year_start = document.getElementById(objname+'_year_start').value;
-			var year_end = document.getElementById(objname+'_year_end').value;
-			var dp = document.getElementById(objname+'_dp').value;
-			var smon = document.getElementById(objname+'_mon').value;
-			var da1 = document.getElementById(objname+'_da1').value;
-			var da2 = document.getElementById(objname+'_da2').value;
-			var sna = document.getElementById(objname+'_sna').value;
-			var aut = document.getElementById(objname+'_aut').value;
-			var frm = document.getElementById(objname+'_frm').value;
-			var tar = document.getElementById(objname+'_tar').value;
-			var inp = document.getElementById(objname+'_inp').value;
-			var fmt = document.getElementById(objname+'_fmt').value;
-			var dis = document.getElementById(objname+'_dis').value;
-			var pr1 = document.getElementById(objname+'_pr1').value;
-			var pr2 = document.getElementById(objname+'_pr2').value;
-			var prv = document.getElementById(objname+'_prv').value;
-			var path = document.getElementById(objname+'_pth').value;
-			var hl = document.getElementById(objname+'_hl').value;
-
-			obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+date_array[2]+"&selected_month="+date_array[1]+"&selected_year="+yvalue+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&mon="+smon+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&pr1="+pr1+"&pr2="+pr2+"&prv="+prv+"&hl="+hl;
-
-			obj.contentWindow.submitNow(date_array[2], date_array[1], yvalue);
-
+			tc_setDMY(objname, date_array[2], date_array[1], yvalue);			
 		}else document.getElementById(objname+"_year").value = date_array[0];
 	}
+	
+	checkPairValue(objname, obj.value);
 }
 
 function yearEnter(e){
 	var characterCode;
-
+	
 	if(e && e.which){ //if which property of event object is supported (NN4)
 		e = e;
 		characterCode = e.which; //character code is contained in NN4's which property
@@ -190,9 +152,9 @@ function yearEnter(e){
 		e = event;
 		characterCode = e.keyCode; //character code is contained in IE's keyCode property
 	}
-
-	if(characterCode == 13){
-		//if Enter is pressed, do nothing
+	
+	if(characterCode == 13){ 
+		//if Enter is pressed, do nothing		
 		return true;
 	}else return false;
 }
@@ -272,68 +234,49 @@ function isDate(strDay, strMonth, strYear){
 }
 
 function isDateAllow(objname, strDay, strMonth, strYear){
-	var da1 = document.getElementById(objname+"_da1").value;
-	var da2 = document.getElementById(objname+"_da2").value;
+	var da1 = parseInt(document.getElementById(objname+"_da1").value);
+	var da2 = parseInt(document.getElementById(objname+"_da2").value);
+	
+	var da1_ok = !isNaN(da1);
+	var da2_ok = !isNaN(da2);
 
 	strDay = parseInt(parseFloat(strDay));
 	strMonth = parseInt(parseFloat(strMonth));
 	strYear = parseInt(parseFloat(strYear));
 
 	if(strDay>0 && strMonth>0 && strYear>0){
-		if(da1 || da2){
-			var date2Set = new Date();
-			date2Set.setFullYear(strYear, strMonth-1, strDay);
+		if(da1_ok || da2_ok){
+			// calculate the number of seconds since 1/1/1970 for the date (equiv to PHP strtotime())
+			var date = new Date(strYear, strMonth-1, strDay);
+			da2Set = date.getTime()/1000;
 
-			if(da1 && da2){
+			// alert(da1+"\n"+da2+"\n"+strDay+"\n"+strMonth+"\n"+strYear+"\n"+da2Set);
 
-				var da1Arr = da1.split('-', 3);
-				var da2Arr = da2.split('-', 3);
-
-				da1Arr[0] = parseInt(parseFloat(da1Arr[0]));
-				da1Arr[1] = parseInt(parseFloat(da1Arr[1]));
-				da1Arr[2] = parseInt(parseFloat(da1Arr[2]));
-
-				da2Arr[0] = parseInt(parseFloat(da2Arr[0]));
-				da2Arr[1] = parseInt(parseFloat(da2Arr[1]));
-				da2Arr[2] = parseInt(parseFloat(da2Arr[2]));
-
-				var da1Date=new Date();
-				da1Date.setFullYear(da1Arr[0],da1Arr[1]-1,da1Arr[2]);
-
-				var da2Date=new Date();
-				da2Date.setFullYear(da2Arr[0],da2Arr[1]-1,da2Arr[2]);
-
-				return (date2Set>=da1Date && date2Set<=da2Date) ? true : false;
-			}else if(da1){
-
-				var da1Arr = da1.split('-', 3);
-
-				da1Arr[0] = parseInt(parseFloat(da1Arr[0]));
-				da1Arr[1] = parseInt(parseFloat(da1Arr[1]));
-				da1Arr[2] = parseInt(parseFloat(da1Arr[2]));
-
-				var da1Date=new Date();
-				da1Date.setFullYear(da1Arr[0],da1Arr[1]-1,da1Arr[2]);
-
-				return (date2Set>=da1Date) ? true : false;
+			// return true if the date is in range
+			if ((!da1_ok || da2Set >= da1) && (!da2_ok || da2Set <= da2)){
+				return true;
 			}else{
-
-				var da2Arr = da2.split('-', 3);
-
-				da2Arr[0] = parseInt(parseFloat(da2Arr[0]));
-				da2Arr[1] = parseInt(parseFloat(da2Arr[1]));
-				da2Arr[2] = parseInt(parseFloat(da2Arr[2]));
-
-				var da2Date=new Date();
-				da2Date.setFullYear(da2Arr[0],da2Arr[1]-1,da2Arr[2]);
-
-				//alert(date2Set);
-				//alert(da2Date);
-
-				return (date2Set<=da2Date) ? true : false;
+				var dateFormat = document.getElementById(objname+"_fmt").value;
+				if (da1_ok){
+					date.setTime(da1*1000);
+					da1Str = date.format(dateFormat);
+				}
+				if (da2_ok){
+					date.setTime(da2*1000);
+					da2Str = date.format(dateFormat);
+				}
+				if (!da1_ok) 
+					alert("Please choose a date before " + da2Str);
+				else if (!da2_ok) 
+					alert("Please choose a date after " + da1Str);
+				else 
+					alert("Please choose a date between\n"+ da1Str + " and " + da2Str);
+				return false;
 			}
-		}else return true;
-	}else return true; //always return true if date not completely set
+		}
+	}
+
+	return true; //always return true if date not completely set
 }
 
 function restoreDate(objname){
@@ -370,7 +313,7 @@ Date.prototype.format = function(format) {
 };
 Date.replaceChars = {
 	shortMonths: [s_jan, s_feb, s_mar, s_apr, s_may, s_jun, s_jul, s_aug, s_sep, s_oct, s_nov, s_dec],
-	longMonths: [l_january, l_february, l_march, l_april, l_may, l_june, l_july, l_august, l_september, l_october, l_november, l_december],
+	longMonths: (l_lang != "el_GR" ? [l_january, l_february, l_march, l_april, l_may, l_june, l_july, l_august, l_september, l_october, l_november, l_december] : [l_januaryu, l_februaryu, l_marchu, l_aprilu, l_mayu, l_juneu, l_julyu, l_augustu, l_septemberu, l_octoberu, l_novemberu, l_decemberu]),
 	shortDays: [s_sun, s_mon, s_tue, s_wed, s_thu, s_fri, s_sat],
 	longDays: [l_sunday, l_monday, l_tuesday, l_wednesday, l_thursday, l_friday, l_saturday],
 
@@ -465,66 +408,89 @@ function checkPairValue(objname, d){
 	if(dp1 != "" && document.getElementById(dp1) != null){ //imply to date_pair1
 		document.getElementById(dp1+"_prv").value = d;
 		
-		var obj = document.getElementById(dp1+'_frame');
+		var date_array = document.getElementById(dp1).value.split("-");
 		
-		var date_selected = document.getElementById(dp1).value;
-		var date_array = date_selected.split("-");		
-		
-		var year_start = document.getElementById(dp1+'_year_start').value;
-		var year_end = document.getElementById(dp1+'_year_end').value;
-		var dp = document.getElementById(dp1+'_dp').value;
-		var smon = document.getElementById(dp1+'_mon').value;
-		var da1 = document.getElementById(dp1+'_da1').value;
-		var da2 = document.getElementById(dp1+'_da2').value;
-		var sna = document.getElementById(dp1+'_sna').value;
-		var aut = document.getElementById(dp1+'_aut').value;
-		var frm = document.getElementById(dp1+'_frm').value;
-		var tar = document.getElementById(dp1+'_tar').value;
-		var inp = document.getElementById(dp1+'_inp').value;
-		var fmt = document.getElementById(dp1+'_fmt').value;
-		var dis = document.getElementById(dp1+'_dis').value;
-		var pr1 = document.getElementById(dp1+'_pr1').value;
-		var pr2 = document.getElementById(dp1+'_pr2').value;
-		var prv = document.getElementById(dp1+'_prv').value;
-		var path = document.getElementById(dp1+'_pth').value;
-		var hl = document.getElementById(dp1+'_hl').value;
-		
-		obj.src = path+"calendar_form.php?objname="+dp1+"&selected_day="+date_array[2]+"&selected_month="+date_array[1]+"&selected_year="+date_array[0]+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&mon="+smon+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&pr1="+pr1+"&pr2="+pr2+"&prv="+prv+"&hl="+hl;
-		
-		obj.contentWindow.submitNow(date_array[2], date_array[1], date_array[0]);
-		//alert("1:"+dp1+","+document.getElementById(dp1+"_prv").value);
+		tc_submitDate(dp1, date_array[2], date_array[1], date_array[0]);
 	}
 	
 	if(dp2 != "" && document.getElementById(dp2) != null){ //imply to date_pair2
 		document.getElementById(dp2+"_prv").value = d;
 		
-		var obj = document.getElementById(dp2+'_frame');
+		var date_array = document.getElementById(dp2).value.split("-");
 		
-		var date_selected = document.getElementById(dp2).value;
-		var date_array = date_selected.split("-");		
-		
-		var year_start = document.getElementById(dp2+'_year_start').value;
-		var year_end = document.getElementById(dp2+'_year_end').value;
-		var dp = document.getElementById(dp2+'_dp').value;
-		var smon = document.getElementById(dp2+'_mon').value;
-		var da1 = document.getElementById(dp2+'_da1').value;
-		var da2 = document.getElementById(dp2+'_da2').value;
-		var sna = document.getElementById(dp2+'_sna').value;
-		var aut = document.getElementById(dp2+'_aut').value;
-		var frm = document.getElementById(dp2+'_frm').value;
-		var tar = document.getElementById(dp2+'_tar').value;
-		var inp = document.getElementById(dp2+'_inp').value;
-		var fmt = document.getElementById(dp2+'_fmt').value;
-		var dis = document.getElementById(dp2+'_dis').value;
-		var pr1 = document.getElementById(dp2+'_pr1').value;
-		var pr2 = document.getElementById(dp2+'_pr2').value;
-		var prv = document.getElementById(dp2+'_prv').value;
-		var path = document.getElementById(dp2+'_pth').value;
-		var hl = document.getElementById(dp2+'_hl').value;
-		
-		obj.src = path+"calendar_form.php?objname="+dp2+"&selected_day="+date_array[2]+"&selected_month="+date_array[1]+"&selected_year="+date_array[0]+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&mon="+smon+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&pr1="+pr1+"&pr2="+pr2+"&prv="+prv+"&hl="+hl;
-		
-		obj.contentWindow.submitNow(date_array[2], date_array[1], date_array[0]);
-		//alert("2:"+dp2+","+document.getElementById(dp2+"_prv").value);
+		tc_submitDate(dp2, date_array[2], date_array[1], date_array[0]);
 	}	
+}
+
+function checkSpecifyDate(objname, strDay, strMonth, strYear){
+	var spd = document.getElementById(objname+"_spd").value;
+	var spt = document.getElementById(objname+"_spt").value;
+	var spr = document.getElementById(objname+"_spr").value;
+	
+	//alert(spd);
+	
+	var sp_dates = JSON.parse(spd);
+	var found = false;
+	
+	switch(spr){
+		case 'month': //recursive every month, check on day
+			for (var key in sp_dates) {
+			  if (sp_dates.hasOwnProperty(key)) {
+				//alert(key + " -> " + p[key]);
+				this_date = new Date(sp_dates[key]*1000);
+				if(this_date.getDate() == parseInt(parseFloat(strDay))){
+					found = true;
+					break;
+				}
+			  }
+			}
+			break;
+		case 'year': //recursive every year, check on month and day
+			for (var key in sp_dates) {
+			  if (sp_dates.hasOwnProperty(key)) {
+				//alert(key + " -> " + p[key]);
+				this_date = new Date(sp_dates[key]*1000);
+				if(this_date.getDate() == parseInt(parseFloat(strDay)) && (this_date.getMonth()+1) == parseInt(parseFloat(strMonth))){
+					found = true;
+					break;
+				}
+			  }
+			}
+			break;
+		default: //no recursive, check specify day, month, year
+			var choose_date = new Date(strYear, strMonth-1, strDay);
+			var choose_time = choose_date.getTime()/1000;
+		
+			for (var key in sp_dates) {
+			  if (sp_dates.hasOwnProperty(key)) {
+				//alert(key + " -> " + p[key]);
+				if(choose_time == sp_dates[key]){
+					found = true;
+					break;
+				}
+			  }
+			}
+	}
+	
+	//alert("aa:"+found);
+	
+	switch(spt){
+		case 0:
+		default:
+			//date is disabled
+			if(found){
+				alert(l_not_allowed);
+				return false;
+			}
+			break;
+		case 1:
+			//other dates are disabled
+			if(!found){
+				alert(l_not_allowed);
+				return false;
+			}
+			break;
+	}
+	
+	return true;
 }

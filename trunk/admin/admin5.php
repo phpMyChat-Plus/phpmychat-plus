@@ -1487,7 +1487,6 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		  }
 		  $myCalendar->setYearSelect(2000, date('Y'));
 		  $myCalendar->dateAllow('2000-01-01', date('Y-m-d'));
-		  $myCalendar->setDateFormat(str_replace("%","",str_replace("B","F",str_replace("d","j",L_CAL_FORMAT))));
 		  $myCalendar->setAlignment('left', 'bottom'); //optional
 		  $myCalendar->writeScript();
 		?>

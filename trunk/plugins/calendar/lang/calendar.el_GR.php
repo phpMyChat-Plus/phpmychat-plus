@@ -1,8 +1,8 @@
 <?php
 # el_GR translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.3
-# Language: Greek / Ελληνικά (in your lang)
+# Version: 3.51
+# Language: Greek / ελληνικά (in your lang)
 # Translator: Kostas Filios
 # Last file update: 04.04.2011
 
@@ -24,6 +24,7 @@ define("L_NOT_ALLOWED", "Δεν επιτρέπετε η επιλογή αυτή�
 define("FIRST_DAY", "1");
 
 // Months Long Names
+# Menu
 define("L_JAN", "Ιανουάριος");
 define("L_FEB", "Φεβρουάριος");
 define("L_MAR", "Μάρτιος");
@@ -36,6 +37,19 @@ define("L_SEP", "Σεπτέμβρης");
 define("L_OCT", "Οκτώμβρης");
 define("L_NOV", "Νοέμβρης");
 define("L_DEC", "Δεκέμβρης");
+# Dates
+define("L_JANU", "Ιανουαρίου");
+define("L_FEBU", "Φεβρουαρίου");
+define("L_MARU", "Μαρτίου");
+define("L_APRU", "Απριλίου");
+define("L_MAYU", "Μαΐου");
+define("L_JUNU", "Ιουνίου");
+define("L_JULU", "Ιουλίου");
+define("L_AUGU", "Αυγούστου");
+define("L_SEPU", "Σεπτεμβρίου");
+define("L_OCTU", "Οκτωβρίου");
+define("L_NOVU", "Νοεμβρίου");
+define("L_DECU", "Δεκεμβρίου");
 // Months Short Names
 define("L_S_JAN", "Ιαν");
 define("L_S_FEB", "Φεβ");
