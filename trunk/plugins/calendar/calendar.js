@@ -84,24 +84,24 @@ function tc_setDMY(objname, dvalue, mvalue, yvalue){
 function tc_setDay(objname, dvalue){
 	var obj = document.getElementById(objname);
 	var date_array = obj.value.split("-");
-	
+
 	//check if date is not allow to select
 	if(!isDateAllow(objname, dvalue, date_array[1], date_array[0]) || !checkSpecifyDate(objname, dvalue, date_array[1], date_array[0])){
 		alert(l_not_allowed);
 		restoreDate(objname);
-	}else{		
-		if(isDate(dvalue, date_array[1], date_array[0])){			
-			tc_setDMY(objname, dvalue, date_array[1], date_array[0]);			
+	}else{
+		if(isDate(dvalue, date_array[1], date_array[0])){
+			tc_setDMY(objname, dvalue, date_array[1], date_array[0]);
 		}else document.getElementById(objname+"_day").selectedIndex = date_array[2];
 	}
-	
+
 	checkPairValue(objname, obj.value);
 }
 
 function tc_setMonth(objname, mvalue){
 	var obj = document.getElementById(objname);
 	var date_array = obj.value.split("-");
-	
+
 	//check if date is not allow to select
 	if(!isDateAllow(objname, date_array[2], mvalue, date_array[0]) || !checkSpecifyDate(objname, date_array[2], mvalue, date_array[0])){
 		alert(l_not_allowed);
@@ -111,19 +111,19 @@ function tc_setMonth(objname, mvalue){
 			//update 'day' combo box
 			date_array[2] = tc_updateDay(objname, date_array[0], mvalue, date_array[2]);
 		}
-		
+
 		if(isDate(date_array[2], mvalue, date_array[0])){
-			tc_setDMY(objname, date_array[2], mvalue, date_array[0]);			
+			tc_setDMY(objname, date_array[2], mvalue, date_array[0]);
 		}else document.getElementById(objname+"_month").selectedIndex = date_array[1];
 	}
-	
+
 	checkPairValue(objname, obj.value);
 }
 
 function tc_setYear(objname, yvalue){
 	var obj = document.getElementById(objname);
 	var date_array = obj.value.split("-");
-		
+
 	//check if date is not allow to select
 	if(!isDateAllow(objname, date_array[2], date_array[1], yvalue) || !checkSpecifyDate(objname, date_array[2], date_array[1], yvalue)){
 		alert(l_not_allowed);
@@ -133,18 +133,18 @@ function tc_setYear(objname, yvalue){
 			//update 'day' combo box
 			date_array[2] = tc_updateDay(objname, yvalue, date_array[1], date_array[2]);
 		}
-		
+
 		if(isDate(date_array[2], date_array[1], yvalue)){
-			tc_setDMY(objname, date_array[2], date_array[1], yvalue);			
+			tc_setDMY(objname, date_array[2], date_array[1], yvalue);
 		}else document.getElementById(objname+"_year").value = date_array[0];
 	}
-	
+
 	checkPairValue(objname, obj.value);
 }
 
 function yearEnter(e){
 	var characterCode;
-	
+
 	if(e && e.which){ //if which property of event object is supported (NN4)
 		e = e;
 		characterCode = e.which; //character code is contained in NN4's which property
@@ -152,9 +152,9 @@ function yearEnter(e){
 		e = event;
 		characterCode = e.keyCode; //character code is contained in IE's keyCode property
 	}
-	
-	if(characterCode == 13){ 
-		//if Enter is pressed, do nothing		
+
+	if(characterCode == 13){
+		//if Enter is pressed, do nothing
 		return true;
 	}else return false;
 }
@@ -236,7 +236,7 @@ function isDate(strDay, strMonth, strYear){
 function isDateAllow(objname, strDay, strMonth, strYear){
 	var da1 = parseInt(document.getElementById(objname+"_da1").value);
 	var da2 = parseInt(document.getElementById(objname+"_da2").value);
-	
+
 	var da1_ok = !isNaN(da1);
 	var da2_ok = !isNaN(da2);
 
@@ -265,11 +265,11 @@ function isDateAllow(objname, strDay, strMonth, strYear){
 					date.setTime(da2*1000);
 					da2Str = date.format(dateFormat);
 				}
-				if (!da1_ok) 
+				if (!da1_ok)
 					alert("Please choose a date before " + da2Str);
-				else if (!da2_ok) 
+				else if (!da2_ok)
 					alert("Please choose a date after " + da1Str);
-				else 
+				else
 					alert("Please choose a date between\n"+ da1Str + " and " + da2Str);
 				return false;
 			}
@@ -404,34 +404,34 @@ function tc_updateDay(objname, yearNum, monthNum, daySelected){
 function checkPairValue(objname, d){
 	var dp1 = document.getElementById(objname+"_pr1").value;
 	var dp2 = document.getElementById(objname+"_pr2").value;
-	
+
 	if(dp1 != "" && document.getElementById(dp1) != null){ //imply to date_pair1
 		document.getElementById(dp1+"_prv").value = d;
-		
+
 		var date_array = document.getElementById(dp1).value.split("-");
-		
+
 		tc_submitDate(dp1, date_array[2], date_array[1], date_array[0]);
 	}
-	
+
 	if(dp2 != "" && document.getElementById(dp2) != null){ //imply to date_pair2
 		document.getElementById(dp2+"_prv").value = d;
-		
+
 		var date_array = document.getElementById(dp2).value.split("-");
-		
+
 		tc_submitDate(dp2, date_array[2], date_array[1], date_array[0]);
-	}	
+	}
 }
 
 function checkSpecifyDate(objname, strDay, strMonth, strYear){
 	var spd = document.getElementById(objname+"_spd").value;
 	var spt = document.getElementById(objname+"_spt").value;
 	var spr = document.getElementById(objname+"_spr").value;
-	
+
 	//alert(spd);
-	
+
 	var sp_dates = JSON.parse(spd);
 	var found = false;
-	
+
 	switch(spr){
 		case 'month': //recursive every month, check on day
 			for (var key in sp_dates) {
@@ -460,7 +460,7 @@ function checkSpecifyDate(objname, strDay, strMonth, strYear){
 		default: //no recursive, check specify day, month, year
 			var choose_date = new Date(strYear, strMonth-1, strDay);
 			var choose_time = choose_date.getTime()/1000;
-		
+
 			for (var key in sp_dates) {
 			  if (sp_dates.hasOwnProperty(key)) {
 				//alert(key + " -> " + p[key]);
@@ -471,9 +471,9 @@ function checkSpecifyDate(objname, strDay, strMonth, strYear){
 			  }
 			}
 	}
-	
+
 	//alert("aa:"+found);
-	
+
 	switch(spt){
 		case 0:
 		default:
@@ -491,6 +491,6 @@ function checkSpecifyDate(objname, strDay, strMonth, strYear){
 			}
 			break;
 	}
-	
+
 	return true;
 }
