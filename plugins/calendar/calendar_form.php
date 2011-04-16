@@ -468,15 +468,15 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
                 }
 
 				//check specific date
-				if($dateLink){				
+				if($dateLink){
 					if(is_array($sp_dates) && sizeof($sp_dates) > 0){
 						//check if it is current date
 						$sp_found = false;
-						
+
 						switch($sp_recursive){
 							case 'month': //recursive every month, check on day
 								foreach($sp_dates as $sp_time){
-									$sp_time_d = date('d', $sp_time);									
+									$sp_time_d = date('d', $sp_time);
 									if($sp_time_d == $day){
 										$sp_found = true;
 										break;
@@ -485,8 +485,8 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
 								break;
 							case 'year': //recursive every year, check on month and day
 								foreach($sp_dates as $sp_time){
-									$sp_time_md = date('md', $sp_time);	
-									$this_md = date('md', $currentTime); 
+									$sp_time_md = date('md', $sp_time);
+									$this_md = date('md', $currentTime);
 									if($sp_time_md == $this_md){
 										$sp_found = true;
 										break;
@@ -497,7 +497,7 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
 								//check exact date
 								$sp_found = in_array($currentTime, $sp_dates);
 						}
-						
+
 						switch($sp_type){
 							case 0:
 							default:
@@ -508,15 +508,15 @@ window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1
 								//enabled specific and disabled others
 								$dateLink = ($sp_found) ? true : false;
 								break;
-						}					
+						}
 					}
 				}
 
 				//check date_pair1 &  2 and disabled date
 				if($date_pair1 && $dp_time > 0 && $currentTime < $dp_time){ //set date only after date_pair1
-					$dateLink = false;						
+					$dateLink = false;
 				}
-				
+
 				if($date_pair2 && $dp_time > 0 && $currentTime > $dp_time){ //set date only before date_pair2
 					$dateLink = false;
 				}

@@ -228,7 +228,7 @@ class tc_calendar{
 			$this->day = 0;
 			$this->month = 0;
 			$this->year = 0;
-		}		
+		}
 
 		$this->writeHidden();
 
@@ -316,9 +316,9 @@ class tc_calendar{
 				$img_attribs = getimagesize($this->icon);
 				$line_height = $img_attribs[1]+2;
 			}
-			
+
 			$div_align = "";
-			
+
 			//adjust alignment
 			switch($this->v_align){
 				case "top":
@@ -327,9 +327,9 @@ class tc_calendar{
 				case "bottom":
 				default:
 					$div_align .= "top:".$line_height."px;";
-					
+
 			}
-			
+
 			switch($this->h_align){
 				case "left":
 					$div_align .= "left:0px;";
@@ -337,9 +337,9 @@ class tc_calendar{
 				case "right":
 				default:
 					$div_align .= "right:0px;";
-					
+
 			}
-			
+
 		}else{
 			$div_display = "visible";
 			$div_position = "relative";
@@ -574,12 +574,12 @@ class tc_calendar{
 		if(in_array($day, $this->dsb_days) === false)
 			$this->dsb_days[] = $day;
 	}
-	
+
 	function setAlignment($h_align, $v_align){
 		$this->h_align = $h_align;
 		$this->v_align = $v_align;
 	}
-	
+
 	function setDatePair($calendar_name1, $calendar_name2, $pair_value = "0000-00-00 00:00:00"){
 		if($calendar_name1 != $this->objname){
 			$this->date_pair1 = $calendar_name1;
@@ -597,12 +597,12 @@ class tc_calendar{
 			//change specific date to time
 			foreach($dates as $sp_date){
 				$sp_time = strtotime($sp_date);
-				
+
 				if($sp_time > 0) $this->sp_dates[] = $sp_time;
 			}
-			
+
 			$this->sp_type = ($type == 1) ? 1 : 0; //control data type for $type
-			
+
 			$recursive = strtolower($recursive);
 			$this->sp_recursive = ($recursive == 'month' || $recursive == 'year') ? $recursive : ""; //control data type for $recursive
 		}
@@ -611,7 +611,7 @@ class tc_calendar{
 	function checkDefaultDateValid(){
 		$default_datetime = mktime(0,0,0,$this->month,$this->day,$this->year);
 		$valid = true;
-		
+
 		//check with allow date
 		if($this->time_allow1 && $this->time_allow2){
 			if($default_datetime < $this->time_allow1 || $default_datetime > $this->time_allow2) $valid = false;
@@ -620,12 +620,12 @@ class tc_calendar{
 		}elseif($this->time_allow2){
 			if($default_datetime > $this->time_allow2) $valid = false;
 		}
-		
+
 		//check with specific date
 		if(is_array($this->sp_dates) && sizeof($this->sp_dates) > 0){
 			//check if it is current date
 			$sp_found = false;
-			
+
 			switch($this->sp_recursive){
 				case 'month': //recursive every month, check on day
 					foreach($this->sp_dates as $sp_time){
@@ -638,8 +638,8 @@ class tc_calendar{
 					break;
 				case 'year': //recursive every year, check on month and day
 					foreach($this->sp_dates as $sp_time){
-						$sp_time_md = date('md', $sp_time);	
-						$this_md = date('md', $default_datetime); 
+						$sp_time_md = date('md', $sp_time);
+						$this_md = date('md', $default_datetime);
 						if($sp_time_md == $this_md){
 							$sp_found = true;
 							break;
@@ -650,7 +650,7 @@ class tc_calendar{
 					//check exact date
 					$sp_found = in_array($default_datetime, $this->sp_dates);
 			}
-			
+
 			switch($this->sp_type){
 				case 0:
 				default:
@@ -661,31 +661,31 @@ class tc_calendar{
 					//enabled specific and disabled others
 					if(!$sp_found) $valid = false;
 					break;
-			}					
+			}
 		}
-		
+
 		return $valid;
 	}
-	
+
 	function check_json_encode($obj){
 		//try customize to get it work, should replace with better solution in the future
-		
+
 		if(function_exists("json_encode")){
 			return json_encode($obj);
-		}else{			
-			//only array is assume for now			
+		}else{
+			//only array is assume for now
 			if(is_array($obj)){
-				return "[".implode(",", $obj)."]";	
+				return "[".implode(",", $obj)."]";
 			}else return "";
 		}
 	}
-	
+
 	function &check_json_decode($str){
 		//should replace with better solution in the future
-		
+
 		if(function_exists("json_decode")){
 			return json_decode($str);
-		}else{			
+		}else{
 			//only array is assume for now
 			$str = trim($str);
 			if($str && strlen($str) > 2){

@@ -34,7 +34,7 @@ A, A:hover, A:active, A:visited {
 #calendar-body a:link { text-decoration : none; font-family: tahoma; color: #000000; }
 #calendar-body a:visited { text-decoration : none; font-family: tahoma; color: #000000; }
 #calendar-body a:hover { text-decoration : underline; font-family: tahoma; color: #FF0000; background-color: #FFFFCC; }
-#calendar-body .disabledate { color: #666666; background-color: #EEEEEE; }
+#calendar-body .disabledate { background-color: #EEEEEE; color: #AAAAAA; }
 
 #calendar-body .refresh { color: #FFFFFF; padding: 10px 3px 3px; }
 #calendar-body .refresh .txt-container { padding: 25px 10px 10px; height: 50px; }
@@ -60,8 +60,8 @@ A, A:hover, A:active, A:visited {
 
 .tcday, .tcmonth, .tcyear { font-size: 11px; z-index: 10; }
 
-.date-tccontainer { border: 1px solid #cccccc; background-color: #efefef; padding: 2px; float: left; margin-right: 2px; text-align: center; }
+.date-tccontainer { border: 1px solid #CCCCCC; background-color: #EFEFEF; padding: 2px; float: left; margin-right: 2px; text-align: center; }
 
 #calendar-page { float: left; }
 .div_calendar { width: 150px; height: 200px; }
-.calendar-border { border: 1px solid #000; }
+.calendar-border { border: 1px solid #000000; }
