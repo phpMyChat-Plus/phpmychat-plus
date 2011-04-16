@@ -50,6 +50,7 @@ switch(L_LANG)
 		break;
 	case "el_GR":
 		$L_G_EXT = "gr";
+#		$L_G_SA = "Αναζήτηση";
 		$L_G_SA = "&#x0391;&#x03bd;&#x03b1;&#x03b6;&#x03ae;&#x03c4;&#x03b7;&#x03c3;&#x03b7;";
 		$L_G_HL = "el";
 		$L_G_CX = "q4w1tmnxnp7";

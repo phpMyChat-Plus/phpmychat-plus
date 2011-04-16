@@ -282,7 +282,7 @@ function adjustContainer(){
 	}
 }
 
-window.onload = function(){ adjustContainer(); setTimeout("adjustContainer()", 1000); };
+window.onload = function(){ window.parent.setDateLabel('<?php echo($objname); ?>'); adjustContainer(); setTimeout("adjustContainer()", 500); };
 //-->
 </script>
 </head>

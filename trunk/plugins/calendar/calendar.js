@@ -494,3 +494,23 @@ function checkSpecifyDate(objname, strDay, strMonth, strYear){
 
 	return true;
 }
+
+function setDateLabel(objname){
+	var lbl = document.getElementById("divCalendar_"+objname+"_lbl");
+	if(lbl != null){
+		var d = document.getElementById(objname).value;
+ 
+		var dateTxt = l_sel_date;
+  
+		if(d != "0000-00-00"){  
+			var date_array = d.split("-");
+   
+			var myDate = new Date();
+			myDate.setFullYear(date_array[0],(date_array[1]-1),date_array[2]);
+			var dateFormat = document.getElementById(objname+"_fmt").value;
+  
+			dateTxt = myDate.format(dateFormat); 
+		}
+		lbl.innerHTML = dateTxt;
+	}
+}

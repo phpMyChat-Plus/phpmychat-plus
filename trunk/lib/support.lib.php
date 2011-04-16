@@ -6,7 +6,7 @@ switch (L_LANG)
 {
 	case "bg_BG":
 		$ppbutton = ($pptype == "big") ? "3626487" : "3626473";
-		$ppalt = "PayPal - Сигурният и лесен начин да платите онлайн.";
+		$ppalt = "PayPal - Сигурният и лесен начин да платите онлайн!";
 		break;
 	case "cs_CZ":
 		$ppbutton = ($pptype == "big") ? "DBH7XN4YA7A2J" : "BTHKH33JLGLTN";
@@ -18,6 +18,7 @@ switch (L_LANG)
 		break;
 	case "el_GR":
 		$ppbutton = ($pptype == "big") ? "6JNU4L83BSTN2" : "JW4A2MMTLXYSU";
+		$ppalt = "PayPal – Ο ασφαλέστερος και ευκολότερος τρόπος να πληρώσεις online!";
 		break;
 	case "he_IL":
 		$ppbutton = ($pptype == "big") ? "7148858" : "7148805";
@@ -25,11 +26,11 @@ switch (L_LANG)
 		break;
 	case "hu_HU":
 		$ppbutton = ($pptype == "big") ? "3626529" : "3626553";
-		$ppalt = "PayPal - Biztonságosabb és egyszerűbb módja az internetes fizetésnek.";
+		$ppalt = "PayPal - Biztonságosabb és egyszerűbb módja az internetes fizetésnek!";
 		break;
 	case "id_ID":
 		$ppbutton = ($pptype == "big") ? "7988359" : "7988406";
-		$ppalt = "Paypal - Lebih aman dan mudah untuk pembayaran online.";
+		$ppalt = "Paypal - Lebih aman dan mudah untuk pembayaran online!";
 		break;
 	case "ja_JP":
 		$pplang .= "/JP";
@@ -39,7 +40,7 @@ switch (L_LANG)
 		break;
 	case "ne_NP":
 		$ppbutton = ($pptype == "big") ? "KYVK6TQWY4MXJ" : "QN9TYKJ49BM7S";
-		$ppalt = "Paypal - ईन्टनेटबाट पैसा तिर्ने सजिलो र सुरक्षित माध्यम.";
+		$ppalt = "Paypal - ईन्टनेटबाट पैसा तिर्ने सजिलो र सुरक्षित माध्यम!";
 		break;
 	case "ro_RO":
 		$ppbutton = ($pptype == "big") ? "3626613" : "3626645";
@@ -47,19 +48,19 @@ switch (L_LANG)
 		break;
 	case "ru_RU":
 		$ppbutton = ($pptype == "big") ? "6HRWUGAN73NPS" : "MGBHACRT5F4RE";
-		$ppalt = "PayPal – безопасный и простой способ оплаты в Интернете.";
+		$ppalt = "PayPal – безопасный и простой способ оплаты в Интернете!";
 		break;
 	case "sr_CS":
 		$ppbutton = ($pptype == "big") ? "3626707" : "3626691";
-		$ppalt = "PayPal - Bezbedniji i lakši način za on-line plaćanje.";
+		$ppalt = "PayPal - Bezbedniji i lakši način za on-line plaćanje!";
 		break;
 	case "sv_SE":
 		$ppbutton = ($pptype == "big") ? "3626744" : "3626768";
-		$ppalt = "PayPal - Det säkra, enkla sättet att betala online.";
+		$ppalt = "PayPal - Det säkra, enkla sättet att betala online!";
 		break;
 	case "tr_TR":
 		$ppbutton = ($pptype == "big") ? "3626822" : "3626800";
-		$ppalt = "PayPal - çevrimiçi ödeme yapmanın en kolay ve güvenli yolu.";
+		$ppalt = "PayPal - çevrimiçi ödeme yapmanın en kolay ve güvenli yolu!";
 		break;
 	case "uk_UA":
 		$ppbutton = ($pptype == "big") ? "WDA8GUU9GGSTS" : "T9MP68SK7HBKQ";
@@ -67,12 +68,12 @@ switch (L_LANG)
 		break;
 	case "vi_VN":
 		$ppbutton = ($pptype == "big") ? "3626846" : "3626856";
-		$ppalt = "PayPal - Cách an toàn hơn, dễ dàng hơn để thanh toán trực tuyến.";
+		$ppalt = "PayPal - Cách an toàn hơn, dễ dàng hơn để thanh toán trực tuyến!";
 		break;
 	case "de_DE":
 		$pplang .= "/DE";
 		$ppbutton = ($pptype == "big") ? "3625065" : "3625046";
-		$ppalt = "Jetzt einfach, schnell und sicher online bezahlen - mit PayPal.";
+		$ppalt = "Jetzt einfach, schnell und sicher online bezahlen - mit PayPal!";
 		$ppexists = 1;
 		break;
 	case "en_GB":
@@ -92,13 +93,13 @@ switch (L_LANG)
 	case "es_AR":
 		$pplang = "es_ES/ES";
 		$ppbutton = ($pptype == "big") ? "3626374" : "3626236";
-		$ppalt = "PayPal - La forma segura y fácil de pagar en línea.";
+		$ppalt = "PayPal - La forma segura y fácil de pagar en línea!";
 		$ppexists = 1;
 		break;
 	case "es_ES":
 		$pplang .= "/ES";
 		$ppbutton = ($pptype == "big") ? "3620198" : "3624872";
-		$ppalt = "PayPal. La forma rápida y segura de pagar en Internet.";
+		$ppalt = "PayPal. La forma rápida y segura de pagar en Internet!";
 		$ppexists = 1;
 		break;
 	case "fr_FR":
@@ -110,13 +111,13 @@ switch (L_LANG)
 	case "it_IT":
 		$pplang .= "/IT";
 		$ppbutton = ($pptype == "big") ? "3625096" : "3625114";
-		$ppalt = "PayPal - La più sicura, facile strada per pagare online";
+		$ppalt = "PayPal - La più sicura, facile strada per pagare online!";
 		$ppexists = 1;
 		break;
 	case "nl_NL":
 		$pplang .= "/NL";
 		$ppbutton = ($pptype == "big") ? "3625332" : "3625148";
-		$ppalt = "PayPal, de veilige en complete manier van online betalen.";
+		$ppalt = "PayPal, de veilige en complete manier van online betalen!";
 		$ppexists = 1;
 		break;
 	case "pt_BR":
