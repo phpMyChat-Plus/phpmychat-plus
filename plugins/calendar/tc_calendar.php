@@ -556,9 +556,15 @@ class tc_calendar{
 
 	function writeDateContainer(){
 		if($this->day && $this->month && $this->year){
-#			if($this->hl) $dd = strftime(L_CAL_FORMAT, mktime(0,0,0,$this->month,$this->day,$this->year));
-			if($this->hl) $dd = stristr(PHP_OS,"win") ? utf_conv(WIN_DEFAULT,'utf-8',strftime(L_CAL_FORMAT, mktime(0,0,0,$this->month,$this->day,$this->year))) : strftime(L_CAL_FORMAT, mktime(0,0,0,$this->month,$this->day,$this->year));
-			else $dd = date($this->date_format, mktime(0,0,0,$this->month,$this->day,$this->year));
+			if($this->hl){
+				if(stristr(PHP_OS,"win")){
+					$dd = utf_conv(WIN_DEFAULT,'utf-8',strftime(L_CAL_FORMAT, mktime(0,0,0,$this->month,$this->day,$this->year)));
+				}else{ 
+					$dd = strftime(L_CAL_FORMAT, mktime(0,0,0,$this->month,$this->day,$this->year));
+				}
+			}else{
+				$dd = date($this->date_format, mktime(0,0,0,$this->month,$this->day,$this->year));
+			}
 		}
 		else $dd = L_SEL_DATE;
 
