@@ -33,10 +33,10 @@ define("L_MAY", "Μάιος");
 define("L_JUN", "Ιούνιος");
 define("L_JUL", "Ιούλιος");
 define("L_AUG", "Αύγουστος");
-define("L_SEP", "Σεπτέμβρης");
-define("L_OCT", "Οκτώμβρης");
-define("L_NOV", "Νοέμβρης");
-define("L_DEC", "Δεκέμβρης");
+define("L_SEP", "Σεπτέμβριος");
+define("L_OCT", "Οκτώβριος");
+define("L_NOV", "Νοέμβριος");
+define("L_DEC", "Δεκέμβριος");
 # Dates
 define("L_JANU", "Ιανουαρίου");
 define("L_FEBU", "Φεβρουαρίου");
