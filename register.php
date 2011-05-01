@@ -613,14 +613,14 @@ else
 			<?php
 			  $myCalendar = new tc_calendar("date1", true, true);
 			  $myCalendar->zindex = 150; //default 1
-			  $myCalendar->setPicture("plugins/calendar/images/iconCalendar.gif");
+			  $myCalendar->setIcon("plugins/calendar/images/iconCalendar.gif");
 			  $myCalendar->setPath("plugins/calendar/");
 			  if(isset($BIRTHDAY))
 			  {
 			    $birth_day = strtotime($BIRTHDAY);
 				$myCalendar->setDate(date('d',$birth_day), date('m',$birth_day), date('Y',$birth_day));
 			  }
-			  $myCalendar->setYearSelect(1935, date('Y'));
+			  $myCalendar->setYearInterval(1935, date('Y'));
 			  $myCalendar->dateAllow('1935-01-01', date('Y-m-d'));
 			  $myCalendar->writeScript();
 			?>
