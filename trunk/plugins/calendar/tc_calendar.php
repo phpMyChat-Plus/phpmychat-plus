@@ -184,10 +184,6 @@ class tc_calendar{
 		$this->icon = $icon;
 	}
 
-	function setPicture($a){
-		$this->icon = $a;
-	}
-
 	function setText($txt){
 		$this->txt = $txt;
 	}
@@ -475,16 +471,6 @@ class tc_calendar{
 		}else{
 			$this->year_start = $end;
 			$this->year_end = $start;
-		}
-	}
-
-	function setYearSelect($a, $b){
-		if($a < $b){
-			$this->year_start = $a;
-			$this->year_end = $b;
-		}else{
-			$this->year_start = $b;
-			$this->year_end = $a;
 		}
 	}
 
