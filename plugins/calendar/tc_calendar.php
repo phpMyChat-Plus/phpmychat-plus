@@ -262,7 +262,7 @@ class tc_calendar{
 					$this->writeYear();
 				}
 			}else{
-				echo(" <a href=\"javascript:toggleCalendar('".$this->objname."');\">");
+				echo(" <a href=\"javascript:toggleCalendar('".$this->objname."');\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_15).".'; return true\" title=\"".sprintf(L_CLICK,L_LINKS_15)."\">");
 				$this->writeDateContainer();
 				echo("</a>");
 			}
