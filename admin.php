@@ -123,7 +123,7 @@ $pmc_username = urlencode(htmlspecialchars(stripslashes($pmc_username)));
 // Define URL queries to be sent to frames
 $URLQueryTop = "From=$From&What=Top&L=$L&pmc_username=$pmc_username&pmc_password=$PWD_Hash&sheet=$sheet";
 $Add2Body = (isset($First) ? "" : "&First=1");
-$Add2Body .= (isset($sortBy)  ? "&sortBy=$sortBy" : (($sheet != 5 && !ereg("a",$sheet)) ? "&sortBy=username" : "")).(isset($sortOrder) ? "&sortOrder=$sortOrder" : (($sheet != 5 && !ereg("a",$sheet)) ? "&sortOrder=ASC" : ""));
+$Add2Body .= (isset($sortBy)  ? "&sortBy=$sortBy" : (($sheet != 5 && !strstr($sheet,"a")) ? "&sortBy=username" : "")).(isset($sortOrder) ? "&sortOrder=$sortOrder" : (($sheet != 5 && !strstr($sheet,"a")) ? "&sortOrder=ASC" : ""));
 $Add2Body .= (isset($startReg) ? "&startReg=$startReg" : "");
 $Add2Body .= (isset($ReqVar) ? "&ReqVar=$ReqVar" : "");
 $URLQueryBody = "From=$From&What=Body&L=$L&pmc_username=$pmc_username&pmc_password=$PWD_Hash&sheet=$sheet".$Add2Body;

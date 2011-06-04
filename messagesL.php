@@ -420,65 +420,76 @@ if($DbLink->num_rows() > 0)
 				require("plugins/gravatars/get_gravatar.php");
 			}
 		}
-		if(COLOR_NAMES)
+
+		// Color names in chat
+		$colorname_tag = "";
+		$colornamedest_tag = "";
+		$colorname_endtag = "";
+		$colornamedest_endtag = "";
+		if(COLOR_NAMES || C_ITALICIZE_POWERS)
 		{
-			$colorname_tag = "";
-			$colorname_endtag = "";
-			$colornamedest_tag = "";
-			$colornamedest_endtag = "";
 			$DbColor = new DB;
 			if (isset($User))
 			{
 				$DbColor->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '$User'");
 				list($perms_user,$colorname) = $DbColor->next_record();
 				$DbColor->clean_results();
+				if(COLOR_NAMES && (isset($colorname) && $colorname != "" && strcasecmp($colorname, $COLOR_TB) != 0))
+				{
+					$colorname_tag = "<FONT color=".$colorname.">";
+					unset($colorname);
+				}
+				elseif(C_ITALICIZE_POWERS)
+				{
+					if ($perms_user == "admin" || ($perms_user == "topmod" && $User != C_BOT_NAME && $User != C_QUOTE_NAME))
+					{
+						$colorname_tag = "<FONT color=".COLOR_CA.">";
+						$text_tag = "<B>";
+						$text_endtag = "</B>";
+					}
+					
+					elseif ($perms_user == "moderator")
+					{
+						$colorname_tag = "<FONT color=".COLOR_CM.">";
+						$text_tag = "<B>";
+						$text_endtag = "</B>";
+					}
+#					else $colorname_tag = "<FONT color=".COLOR_CD.">";
+				}
+#				else $colorname_tag = "<FONT color=".COLOR_CD.">";
 			}
 			if (isset($Dest))
 			{
 				$DbColor->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '$Dest'");
 				list($perms_dest,$colornamedest) = $DbColor->next_record();
 				$DbColor->clean_results();
+				if(COLOR_NAMES && (isset($colornamedest) && $colornamedest != "" && strcasecmp($colornamedest, $COLOR_TB) != 0))
+				{
+					$colornamedest_tag = "<FONT color=".$colornamedest.">";
+					unset($colornamedest);
+				}
+				elseif (C_ITALICIZE_POWERS)
+				{
+					if ($perms_dest == "admin" || ($perms_dest == "topmod" && $Dest != C_BOT_NAME && $Dest != C_QUOTE_NAME)) 
+					{
+						$colornamedest_tag = "<FONT color=".COLOR_CA.">";
+						$textdest_tag = "<B>";
+						$textdest_endtag = "</B>";
+					}
+					elseif ($perms_dest == "moderator")
+					{
+						$colornamedest_tag = "<FONT color=".COLOR_CM.">";
+						$textdest_tag = "<B>";
+						$textdest_endtag = "</B>";
+					}
+#					else $colornamedest_tag = "<FONT color=".COLOR_CD.">";
+				}
+#				else $colornamedest_tag = "<FONT color=".COLOR_CD.">";
 			}
-			if(isset($colorname) && $colorname != "" && strcasecmp($colorname, $COLOR_TB) != 0)
-			{
-				$colorname_tag = "<FONT color=".$colorname.">";
-				unset($colorname);
-			}
-			elseif(C_ITALICIZE_POWERS)
-			{
-				if (($perms_user == "admin" && $User != C_BOT_NAME) || $perms_user == "topmod") $colorname_tag = "<FONT color=".COLOR_CA.">";
-				elseif ($perms_user == "moderator") $colorname_tag = "<FONT color=".COLOR_CM.">";
-				else $colorname_tag = "<FONT color=".COLOR_CD.">";
-			}
-			else
-			{
-				$colorname_tag = "<FONT color=".COLOR_CD.">";
-			}
-			if(isset($colornamedest) && $colornamedest != "" && strcasecmp($colornamedest, $COLOR_TB) != 0)
-			{
-				$colornamedest_tag = "<FONT color=".$colornamedest.">";
-				unset($colornamedest);
-			}
-			elseif (C_ITALICIZE_POWERS)
-			{
-				if (($perms_dest == "admin" && $Dest != C_BOT_NAME) || $perms_dest == "topmod") $colornamedest_tag = "<FONT color=".COLOR_CA.">";
-				elseif ($perms_dest == "moderator") $colornamedest_tag = "<FONT color=".COLOR_CM.">";
-				else $colornamedest_tag = "<FONT color=".COLOR_CD.">";
-			}
-			else
-			{
-				$colornamedest_tag = "<FONT color=".COLOR_CD.">";
-			}
-			$colorname_endtag = "</FONT>";
-			$colornamedest_endtag = "</FONT>";
 		}
-		else
-		{
-			$colorname_tag = "";
-			$colornamedest_tag = "";
-			$colorname_endtag = "";
-			$colornamedest_endtag = "";
-		}
+		if($colorname_tag != "") $colorname_endtag = "</FONT>";
+		if($colornamedest_tag != "") $colornamedest_endtag = "</FONT>";
+
 		// Skip the oldest message if the day seperator has been added
 		if (isset($day_separator) && $i == $N) continue;
 //------------------------------Begin HighLight command by R.Worley
@@ -548,17 +559,17 @@ else
 			{
 				$Dest = "<a onClick=\"window.parent.userClick('".special_char($Dest,$Latin1,1)."',false,'".special_char($U,$Latin1,1)."'); return false\" title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME1."'; return true\" CLASS=\"sender\">".$colornamedest_tag."[".special_char($Dest,$Latin1,0)."]".$colornamedest_endtag."</a>";
 			}
-			if ($Dest != "") $Dest = "</B><BDO dir=\"${textDirection}\"></BDO></td><td width=\"1%\" valign=\"top\"><B>></B></td><td width=\"1%\" valign=\"top\"><B>".$Dest;
+			if ($Dest != "") $Dest = "</B><BDO dir=\"${textDirection}\"></BDO></td><td width=\"1%\" valign=\"top\"><B>></B></td><td width=\"1%\" valign=\"top\"><B>".$colornamedest_tag.$Dest;
 // Avatar System Start:
       if (C_USE_AVATARS)
     	{
        		$avatar = "<a onClick=\"window.parent.runCmd('whois','".special_char2(stripslashes($Userx),$Latin1)."'); return false\" onMouseOver=\"window.status='".L_PROFILE.".'; return true\" title=\"".L_PROFILE."\"><img align=\"center\" src=\"$avatar\" width=".C_AVA_WIDTH." height=".C_AVA_HEIGHT." alt=\"".L_PROFILE."\" border=0></a>";
-   			if ($ST != 1) $NewMsg .= "</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\">".$avatar."</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\"><B>${User}${Dest}</B><BDO dir=\"${textDirection}\"></BDO></td><td valign=\"top\">".$Message."</td></tr></table>";
-   			else $NewMsg .= $avatar."</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\"><B>${User}${Dest}</B><BDO dir=\"${textDirection}\"></BDO></td><td valign=\"top\">".$Message."</td></tr></table>";
+   			if ($ST != 1) $NewMsg .= "</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\">".$avatar."</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."${User}${Dest}".$colornamedest_endtag."</B><BDO dir=\"${textDirection}\"></BDO></td><td valign=\"top\">".$Message."</td></tr></table>";
+   			else $NewMsg .= $avatar."</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."${User}${Dest}".$colornamedest_endtag."</B><BDO dir=\"${textDirection}\"></BDO></td><td valign=\"top\">".$Message."</td></tr></table>";
       }
       else
       {
-			if ($ST != 1) $NewMsg .= "</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\"><B>${User}${Dest}</B><BDO dir=\"${textDirection}\"></BDO></td><td valign=\"top\">".$Message."</td></tr></table>";
+			if ($ST != 1) $NewMsg .= "</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."${User}${Dest}".$colornamedest_endtag."</B><BDO dir=\"${textDirection}\"></BDO></td><td valign=\"top\">".$Message."</td></tr></table>";
 			else $NewMsg .= "<B>${User}${Dest}</B><BDO dir=\"${textDirection}\"></BDO></td><td valign=\"top\">".$Message."</td></tr></table>";
 			}
 		}

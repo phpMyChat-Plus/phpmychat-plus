@@ -1,7 +1,7 @@
 ﻿<?php
 # xx_YY translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.51
+# Version: 3.56
 # Language: Lang_name / Orig_name (in your lang) // ex: Romanian / Română
 # Translator: YourName <email@...>
 # Last file update: xx.xx.201x
