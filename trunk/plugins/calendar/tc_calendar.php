@@ -6,7 +6,7 @@
 // add on: translation  implemented - default is English en_US
 //	- thanks ciprianmp
 //
-// version 3.53-loc (16 April 2011)
+// version 3.56-loc (30 May 2011)
 
 //fixed: Incorrect next month display show on 'February 2008'
 //	- thanks Neeraj Jain for bug report
@@ -65,7 +65,7 @@
 //add on: setAlignment() and setDatePair() function
 //  - thanks ciprianmp and many guys guiding this :)
 //
-//fixed: the header of calendar looks tight when day's header more then 2 characters, this can be adjusted by increasing width on calendar.css [#calendar-body td div { width: 15px; }]
+//fixed: the header of calendar looks tight when day's header more than 2 characters, this can be adjusted by increasing width on calendar.css [#calendar-body td div { width: 15px; }]
 //	- thanks ciprianmp
 //
 //add on: setSpecificDate() to enable or disable specific date
@@ -83,6 +83,16 @@
 //fixed: writeYear bug from $date_allow1 & 2 must be changed to $time_allow1 & 2
 //	- thanks ciprianmp again :(
 //
+//updated: setSpecificDate can be set month, year, and no recursive simultaneously
+//	- thanks ciprianmp, Steve
+//
+//add on: setOnChange to handling javascript onChange event
+//
+//fixed: dateAllow contains error on calendar_form.php
+//	- thanks matthijs
+//
+//fixed: error on calendar.js function checkSpecifyDate
+//	- thanks Todd
 //********************************************************
 
 if((defined("L_LANG") && L_LANG != "en_US" && L_LANG != "L_LANG") || isset($lang) && $lang != "en_US") include_once("lang/calendar.".(isset($lang) ? $lang : L_LANG).".php");
@@ -105,7 +115,7 @@ class tc_calendar{
 	var $icon;
 	var $objname;
 	var $txt = L_SEL_ICON; //display when no calendar icon found or set up
-	var $date_format = DATE_FORMAT; //format of date show in panel if $show_input is false
+	var $date_format = DATE_FORMAT; //format of date shown in panel if $show_input is false
 	var $year_display_from_current = 30;
 	var $date_picker;
 	var $path = '';
@@ -133,9 +143,9 @@ class tc_calendar{
 	var $date_pair2 = "";
 	var $date_pair_value = "";
 	var $hl = L_LANG;
-	var $sp_dates = array();
+	var $sp_dates = array(array(), array(), array()); //array[0]=no recursive, array[1]=monthly, array[0]=yearly
 	var $sp_type = 0; //0=disabled specify date, 1=enabled only specify date
-	var $sp_recursive = ''; //''(blank) = no recursive, 'month'=recursive on month, or 'year'=recursive on year
+	var $tc_onchanged = "";
 
 	//calendar constructor
 	function tc_calendar($objname, $date_picker = false, $show_input = true){
@@ -298,7 +308,7 @@ class tc_calendar{
 		$params[] = "hl=".$this->hl;
 		$params[] = "spd=".$this->check_json_encode($this->sp_dates);
 		$params[] = "spt=".$this->sp_type;
-		$params[] = "spr=".$this->sp_recursive;
+		$params[] = "och=".urlencode($this->tc_onchanged);
 
 		$paramStr = (sizeof($params)>0) ? "?".implode("&", $params) : "";
 
@@ -443,7 +453,7 @@ class tc_calendar{
 		$this->eHidden('hl', $this->hl);
 		$this->eHidden('spd', $this->check_json_encode($this->sp_dates));
 		$this->eHidden('spt', $this->sp_type);
-		$this->eHidden('spr', $this->sp_recursive);
+		$this->eHidden('och', urlencode($this->tc_onchanged));
 	}
 
 	//set width of calendar
@@ -586,17 +596,30 @@ class tc_calendar{
 
 	function setSpecificDate($dates, $type=0, $recursive=""){
 		if(is_array($dates)){
+			$recursive = strtolower($recursive);
 			//change specific date to time
 			foreach($dates as $sp_date){
 				$sp_time = strtotime($sp_date);
 
-				if($sp_time > 0) $this->sp_dates[] = $sp_time;
+				if($sp_time > 0){
+					switch($recursive){
+						case "month": //add to monthly
+							if(!in_array($sp_time, $this->sp_dates[1]))
+								$this->sp_dates[1][] = $sp_time;
+							break;
+						case "year": //add to yearly
+							if(!in_array($sp_time, $this->sp_dates[2]))
+								$this->sp_dates[2][] = $sp_time;
+							break;
+						default: //add to no recursive
+							if(!in_array($sp_time, $this->sp_dates[0]))
+								$this->sp_dates[0][] = $sp_time;
+					}
+				}
 			}
 
 			$this->sp_type = ($type == 1) ? 1 : 0; //control data type for $type
 
-			$recursive = strtolower($recursive);
-			$this->sp_recursive = ($recursive == 'month' || $recursive == 'year') ? $recursive : ""; //control data type for $recursive
 		}
 	}
 
@@ -618,29 +641,29 @@ class tc_calendar{
 			//check if it is current date
 			$sp_found = false;
 
-			switch($this->sp_recursive){
-				case 'month': //recursive every month, check on day
-					foreach($this->sp_dates as $sp_time){
-						$sp_time_d = date('d', $sp_time);
-						if($sp_time_d == $this->day){
-							$sp_found = true;
-							break;
-						}
+			if(isset($this->sp_dates[2])){
+				foreach($this->sp_dates[2] as $sp_time){
+					$sp_time_md = date('md', $sp_time);	
+					$this_md = date('md', $default_datetime); 
+					if($sp_time_md == $this_md){
+						$sp_found = true;
+						break;
 					}
-					break;
-				case 'year': //recursive every year, check on month and day
-					foreach($this->sp_dates as $sp_time){
-						$sp_time_md = date('md', $sp_time);
-						$this_md = date('md', $default_datetime);
-						if($sp_time_md == $this_md){
-							$sp_found = true;
-							break;
-						}
+				}
+			}
+			
+			if(isset($this->sp_dates[1]) && !$sp_found){
+				foreach($this->sp_dates[1] as $sp_time){
+					$sp_time_d = date('d', $sp_time);
+					if($sp_time_d == $this->day){
+						$sp_found = true;
+						break;
 					}
-					break;
-				default: //no recursive
-					//check exact date
-					$sp_found = in_array($default_datetime, $this->sp_dates);
+				}
+			}
+			
+			if(isset($this->sp_dates[0]) && !$sp_found){
+				$sp_found = in_array($default_datetime, $this->sp_dates[0]);
 			}
 
 			switch($this->sp_type){
@@ -685,6 +708,10 @@ class tc_calendar{
 				return explode(",", $str);
 			}else return array();
 		}
+	}
+
+	function setOnChange($value){
+		$this->tc_onchanged = $value;
 	}
 
 }

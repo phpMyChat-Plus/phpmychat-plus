@@ -26,7 +26,7 @@ $auto_submit = (isset($_REQUEST["aut"])) ? $_REQUEST["aut"] : false;
 $form_name = (isset($_REQUEST["frm"])) ? $_REQUEST["frm"] : "";
 $target_url = (isset($_REQUEST["tar"])) ? $_REQUEST["tar"] : "";
 $show_input = (isset($_REQUEST["inp"])) ? $_REQUEST["inp"] : true;
-$date_format = (isset($_REQUEST["fmt"])) ? $_REQUEST["fmt"] : DATE_FORMAT; //format of date show in panel if $show_input is false
+$date_format = (isset($_REQUEST["fmt"])) ? $_REQUEST["fmt"] : DATE_FORMAT; //format of date shown in panel if $show_input is false
 $dsb_txt = (isset($_REQUEST["dis"])) ? $_REQUEST["dis"] : "";
 $date_pair1 = (isset($_REQUEST["pr1"])) ? $_REQUEST["pr1"] : "";
 $date_pair2 = (isset($_REQUEST["pr2"])) ? $_REQUEST["pr2"] : "";
@@ -35,7 +35,7 @@ $path = (isset($_REQUEST["pth"])) ? $_REQUEST["pth"] : "";
 $hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : 'en_US';
 $sp_dates = (isset($_REQUEST["spd"])) ? @tc_calendar::check_json_decode($_REQUEST["spd"]) : array();
 $sp_type = (isset($_REQUEST["spt"])) ? $_REQUEST["spt"] : 0;
-$sp_recursive = (isset($_REQUEST["spr"])) ? $_REQUEST["spr"] : "";
+$tc_onchanged = (isset($_REQUEST["och"])) ? $_REQUEST["och"] : "";
 
 //check year to be select in case of date_allow is set
 if(!$show_not_allow){
@@ -155,6 +155,7 @@ if($cobj->hl){
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<meta http-equiv="X-UA-Compatible" content="IE=7; IE=8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>TriConsole.com - PHP Calendar Date Picker</title>
 <link href="calendar.css" rel="stylesheet" type="text/css" />
@@ -282,7 +283,7 @@ function adjustContainer(){
 	}
 }
 
-window.onload = function(){ window.parent.setDateLabel('<?php echo($objname); ?>'); adjustContainer(); setTimeout("adjustContainer()", 500); };
+window.onload = function(){ window.parent.setDateLabel('<?php echo($objname); ?>'); adjustContainer(); setTimeout("adjustContainer()", 1000); };
 //-->
 </script>
 </head>
@@ -293,8 +294,8 @@ window.onload = function(){ window.parent.setDateLabel('<?php echo($objname); ?>
         <?php if($dp){ ?>
         <div align="right" class="closeme"><a href="javascript:closeMe();"><img src="images/close.gif" border="0" /></a></div>
         <?php } ?>
-        <form id="calendarform" name="calendarform" method="post" action="<?php echo($thispage);?>" style="margin: 0px;">
-          <table border="0" align="center" cellpadding="1" cellspacing="0">
+        <form id="calendarform" name="calendarform" method="post" action="<?php echo($thispage);?>">
+          <table align="center" cellpadding="1" cellspacing="0">
             <tr>
 			<?php
             $monthnames = $cobj->getMonthNames();
@@ -318,7 +319,6 @@ window.onload = function(){ window.parent.setDateLabel('<?php echo($objname); ?>
               $thisyear = date('Y');
 
               //write year options
-//              for($year=$year_start; $year<=$year_end; $year++){
               for($year=$year_end; $year>=$year_start; $year--){
                 $selected = ($year == $y) ? " selected" : "";
                 echo("<option value=\"$year\"$selected>$year</option>");
@@ -348,7 +348,6 @@ window.onload = function(){ window.parent.setDateLabel('<?php echo($objname); ?>
               $thisyear = date('Y');
 
               //write year options
-//              for($year=$year_start; $year<=$year_end; $year++){
               for($year=$year_end; $year>=$year_start; $year--){
                 $selected = ($year == $y) ? " selected" : "";
                 echo("<option value=\"$year\"$selected>$year</option>");
@@ -385,12 +384,12 @@ window.onload = function(){ window.parent.setDateLabel('<?php echo($objname); ?>
             <input name="hl" type="hidden" id="hl" value="<?php echo($hl);?>" />
             <input name="spd" type="hidden" id="spd" value="<?php echo($cobj->check_json_encode($sp_dates));?>" />
             <input name="spt" type="hidden" id="spt" value="<?php echo($sp_type);?>" />
-            <input name="spr" type="hidden" id="spr" value="<?php echo($sp_recursive);?>" />
+            <input name="och" type="hidden" id="och" value="<?php echo(urldecode($tc_onchanged));?>" />
       </form>
     </div>
     <div id="calendar-container">
         <div id="calendar-body">
-        <table border="0" cellspacing="1" cellpadding="0" align="center" class="bg">
+        <table border="0" cellspacing="1" cellpadding="0" align="center">
             <?php
             $day_headers = array_values($cobj->getDayHeaders());
 
@@ -423,7 +422,7 @@ window.onload = function(){ window.parent.setDateLabel('<?php echo($objname); ?>
 
             //$date_num = $cobj->getDayNum(date('D', strtotime($previous_year."-".$previous_month."-".$total_lastmonth)));
             $date_num = date('w', $pvMonthTime);
-            if((!$startMonday && $date_num == 6) || ($startMonday && $date_num == 0)){
+            if(((!$startMonday && $date_num == 6) || ($startMonday && $date_num == 0)) && $startwrite<$total_lastmonth){
                 echo("</tr><tr>");
                 $row_count++;
             }
@@ -472,32 +471,35 @@ window.onload = function(){ window.parent.setDateLabel('<?php echo($objname); ?>
 					if(is_array($sp_dates) && sizeof($sp_dates) > 0){
 						//check if it is current date
 						$sp_found = false;
-
-						switch($sp_recursive){
-							case 'month': //recursive every month, check on day
-								foreach($sp_dates as $sp_time){
-									$sp_time_d = date('d', $sp_time);
-									if($sp_time_d == $day){
-										$sp_found = true;
-										break;
-									}
+						
+						//check on yearly recursive
+						if(isset($sp_dates[2])){							
+							foreach($sp_dates[2] as $sp_time){
+								$sp_time_md = date('md', $sp_time);	
+								$this_md = date('md', $currentTime); 
+								if($sp_time_md == $this_md){
+									$sp_found = true;
+									break;
 								}
-								break;
-							case 'year': //recursive every year, check on month and day
-								foreach($sp_dates as $sp_time){
-									$sp_time_md = date('md', $sp_time);
-									$this_md = date('md', $currentTime);
-									if($sp_time_md == $this_md){
-										$sp_found = true;
-										break;
-									}
-								}
-								break;
-							default: //no recursive
-								//check exact date
-								$sp_found = in_array($currentTime, $sp_dates);
+							}
 						}
-
+						
+						//check on monthly recursive
+						if(isset($sp_dates[1]) && !$sp_found){							
+							foreach($sp_dates[1] as $sp_time){
+								$sp_time_d = date('d', $sp_time);									
+								if($sp_time_d == $day){
+									$sp_found = true;
+									break;
+								}
+							}
+						}
+						
+						//check on no recursive
+						if(isset($sp_dates[0]) && !$sp_found){							
+							$sp_found = in_array($currentTime, $sp_dates[0]);
+						}						
+						
 						switch($sp_type){
 							case 0:
 							default:
@@ -508,7 +510,7 @@ window.onload = function(){ window.parent.setDateLabel('<?php echo($objname); ?>
 								//enabled specific and disabled others
 								$dateLink = ($sp_found) ? true : false;
 								break;
-						}
+						}					
 					}
 				}
 
@@ -558,7 +560,7 @@ window.onload = function(){ window.parent.setDateLabel('<?php echo($objname); ?>
             }
 
             //write fulfil row to 6 rows
-            for($day=$row_count; $day<=5; $day++){
+            for($day=$row_count; $day<6; $day++){
                 echo("<tr>");
                 $tmpday = $write_end_days+1;
                 for($f=$tmpday; $f<=($tmpday+6); $f++){

@@ -41,7 +41,14 @@ function setValue(objname, d){
 
 		toggleCalendar(objname);
 	}
+
 	checkPairValue(objname, d);
+
+	//calling calendar_onchanged script
+	
+	if(document.getElementById(objname+"_och").value != "")
+		calendar_onchange(objname);	
+
 }
 
 function tc_submitDate(objname, dvalue, mvalue, yvalue){
@@ -67,9 +74,9 @@ function tc_submitDate(objname, dvalue, mvalue, yvalue){
 	var hl = document.getElementById(objname+'_hl').value;
 	var spd = document.getElementById(objname+'_spd').value;
 	var spt = document.getElementById(objname+'_spt').value;
-	var spr = document.getElementById(objname+'_spr').value;
-
-	obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+dvalue+"&selected_month="+mvalue+"&selected_year="+yvalue+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&mon="+smon+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&pr1="+pr1+"&pr2="+pr2+"&prv="+prv+"&hl="+hl+"&spd="+spd+"&spt="+spt+"&spr="+spr;
+	var och = document.getElementById(objname+'_och').value;
+			
+	obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+dvalue+"&selected_month="+mvalue+"&selected_year="+yvalue+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&mon="+smon+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&pr1="+pr1+"&pr2="+pr2+"&prv="+prv+"&hl="+hl+"&spd="+spd+"&spt="+spt+"&och="+och;
 
 	obj.contentWindow.submitNow(dvalue, mvalue, yvalue);
 }
@@ -87,7 +94,7 @@ function tc_setDay(objname, dvalue){
 
 	//check if date is not allow to select
 	if(!isDateAllow(objname, dvalue, date_array[1], date_array[0]) || !checkSpecifyDate(objname, dvalue, date_array[1], date_array[0])){
-		alert(l_not_allowed);
+		//alert(l_not_allowed);
 		restoreDate(objname);
 	}else{
 		if(isDate(dvalue, date_array[1], date_array[0])){
@@ -126,7 +133,7 @@ function tc_setYear(objname, yvalue){
 
 	//check if date is not allow to select
 	if(!isDateAllow(objname, date_array[2], date_array[1], yvalue) || !checkSpecifyDate(objname, date_array[2], date_array[1], yvalue)){
-		alert(l_not_allowed);
+		//alert(l_not_allowed);
 		restoreDate(objname);
 	}else{
 		if(document.getElementById(objname+'_dp').value && document.getElementById(objname+'_inp').value){
@@ -425,51 +432,50 @@ function checkPairValue(objname, d){
 function checkSpecifyDate(objname, strDay, strMonth, strYear){
 	var spd = document.getElementById(objname+"_spd").value;
 	var spt = document.getElementById(objname+"_spt").value;
-	var spr = document.getElementById(objname+"_spr").value;
 
 	//alert(spd);
 
 	var sp_dates = JSON.parse(spd);
 	var found = false;
 
-	switch(spr){
-		case 'month': //recursive every month, check on day
-			for (var key in sp_dates) {
-			  if (sp_dates.hasOwnProperty(key)) {
-				//alert(key + " -> " + p[key]);
-				this_date = new Date(sp_dates[key]*1000);
-				if(this_date.getDate() == parseInt(parseFloat(strDay))){
-					found = true;
-					break;
-				}
-			  }
-			}
+	for (var key in sp_dates[2]) {
+	  if (sp_dates[2].hasOwnProperty(key)) {
+		//alert(key + " -> " + p[key]);
+		this_date = new Date(sp_dates[2][key]*1000);
+		if(this_date.getDate() == parseInt(parseFloat(strDay)) && (this_date.getMonth()+1) == parseInt(parseFloat(strMonth))){
+			found = true;
 			break;
-		case 'year': //recursive every year, check on month and day
-			for (var key in sp_dates) {
-			  if (sp_dates.hasOwnProperty(key)) {
-				//alert(key + " -> " + p[key]);
-				this_date = new Date(sp_dates[key]*1000);
-				if(this_date.getDate() == parseInt(parseFloat(strDay)) && (this_date.getMonth()+1) == parseInt(parseFloat(strMonth))){
-					found = true;
-					break;
-				}
-			  }
-			}
-			break;
-		default: //no recursive, check specify day, month, year
-			var choose_date = new Date(strYear, strMonth-1, strDay);
-			var choose_time = choose_date.getTime()/1000;
+		}
+	  }
+	}
 
-			for (var key in sp_dates) {
-			  if (sp_dates.hasOwnProperty(key)) {
-				//alert(key + " -> " + p[key]);
-				if(choose_time == sp_dates[key]){
-					found = true;
-					break;
-				}
-			  }
+	if(!found){
+		for (var key in sp_dates[1]) {
+		  if (sp_dates[1].hasOwnProperty(key)) {
+			//alert(key + " -> " + p[key]);
+			this_date = new Date(sp_dates[1][key]*1000);
+			if(this_date.getDate() == parseInt(parseFloat(strDay))){
+				found = true;
+				break;
 			}
+		  }
+		}
+	}
+
+
+	if(!found){
+		var choose_date = new Date(strYear, strMonth-1, strDay);
+		var choose_time = choose_date.getTime()/1000;
+	
+		for (var key in sp_dates[0]) {
+		  if (sp_dates[0].hasOwnProperty(key)) {
+			//alert(key + " -> " + p[key]);
+			if(choose_time == sp_dates[0][key]){
+				found = true;
+				break;
+			}
+		  }
+		}
 	}
 
 	//alert("aa:"+found);
@@ -493,6 +499,17 @@ function checkSpecifyDate(objname, strDay, strMonth, strYear){
 	}
 
 	return true;
+}
+
+function urldecode (str) {
+	return decodeURIComponent((str + '').replace(/\+/g, '%20'));
+}
+
+function calendar_onchange(objname){
+	//you can modify or replace the code below
+	var fc = document.getElementById(objname+"_och").value;
+	//alert("Date has been set to "+obj.value);
+	eval(urldecode(fc));
 }
 
 function setDateLabel(objname){
