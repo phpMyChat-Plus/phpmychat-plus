@@ -170,66 +170,37 @@ if($DbLink1->num_rows() > 0)
 		else $Message = str_replace('target="_blank">','title="'.sprintf(L_CLICK,L_LINKS_3).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_LINKS_3).'.\'; return true" target="_blank">',$Message);
 
 		$Message = str_replace('alt="Send email">','title="'.sprintf(L_CLICK,L_EMAIL_1).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_EMAIL_1).'.\'; return true">',$Message);
-		if(COLOR_NAMES)
+		// Color names in chat
+		$colorname_tag = "";
+		$colorname_endtag = "";
+		if(COLOR_NAMES || C_ITALICIZE_POWERS)
 		{
-			$colorname_tag = "";
-			$colorname_endtag = "";
-			$colornamedest_tag = "";
-			$colornamedest_endtag = "";
-			global $COLOR_TB;
 			$DbColor = new DB;
 			if (isset($User))
 			{
 				$DbColor->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '$User'");
 				list($perms_user,$colorname) = $DbColor->next_record();
 				$DbColor->clean_results();
+				if(COLOR_NAMES && (isset($colorname) && $colorname != "" && strcasecmp($colorname, $COLOR_TB) != 0))
+				{
+					$colorname_tag = "<FONT color=".$colorname.">";
+					unset($colorname);
+				}
+				elseif(C_ITALICIZE_POWERS)
+				{
+					if ($perms_user == "admin" || ($perms_user == "topmod" && $User != C_BOT_NAME && $User != C_QUOTE_NAME))
+					{
+						$colorname_tag = "<FONT color=".COLOR_CA.">";
+					}
+					
+					elseif ($perms_user == "moderator")
+					{
+						$colorname_tag = "<FONT color=".COLOR_CM.">";
+					}
+				}
 			}
-			if (isset($Dest))
-			{
-				$DbColor->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '$Dest'");
-				list($perms_dest,$colornamedest) = $DbColor->next_record();
-				$DbColor->clean_results();
-			}
-			if(isset($colorname) && $colorname != "" && strcasecmp($colorname, $COLOR_TB) != 0)
-			{
-				$colorname_tag = "<FONT color=".$colorname.">";
-				unset($colorname);
-			}
-			elseif(C_ITALICIZE_POWERS)
-			{
-				if (($perms_user == "admin" && $User != C_BOT_NAME) || $perms_user == "topmod") $colorname_tag = "<FONT color=".COLOR_CA.">";
-				elseif ($perms_user == "moderator") $colorname_tag = "<FONT color=".COLOR_CM.">";
-				else $colorname_tag = "<FONT color=".COLOR_CD.">";
-			}
-			else
-			{
-				$colorname_tag = "<FONT color=".COLOR_CD.">";
-			}
-			if(isset($colornamedest) && $colornamedest != "" && strcasecmp($colornamedest, $COLOR_TB) != 0)
-			{
-				$colornamedest_tag = "<FONT color=".$colornamedest.">";
-				unset($colornamedest);
-			}
-			elseif (C_ITALICIZE_POWERS)
-			{
-				if (($perms_dest == "admin" && $Dest != C_BOT_NAME) || $perms_dest == "topmod") $colornamedest_tag = "<FONT color=".COLOR_CA.">";
-				elseif ($perms_dest == "moderator") $colornamedest_tag = "<FONT color=".COLOR_CM.">";
-				else $colornamedest_tag = "<FONT color=".COLOR_CD.">";
-			}
-			else
-			{
-				$colornamedest_tag = "<FONT color=".COLOR_CD.">";
-			}
-			$colorname_endtag = "</FONT>";
-			$colornamedest_endtag = "</FONT>";
 		}
-		else
-		{
-			$colorname_tag = "";
-			$colornamedest_tag = "";
-			$colorname_endtag = "";
-			$colornamedest_endtag = "";
-		}
+		if($colorname_tag != "") $colorname_endtag = "</FONT>";
 		$NewMsg = "<tr valign=top>";
 		$Time = $Time + C_TMZ_OFFSET*60*60;
 		$NewMsg .= "<td width=1% nowrap=\"nowrap\">".strftime(L_SHORT_DATETIME, $Time)."</td><td width=1% nowrap=\"nowrap\">".$Room."</td>";

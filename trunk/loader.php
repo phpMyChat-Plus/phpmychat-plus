@@ -438,15 +438,11 @@ if($DbLink->num_rows() > 0)
 					if ($perms_user == "admin" || ($perms_user == "topmod" && $User != C_BOT_NAME && $User != C_QUOTE_NAME))
 					{
 						$colorname_tag = "<FONT color=".COLOR_CA.">";
-						$text_tag = "<B>";
-						$text_endtag = "<\/B>";
 					}
 					
 					elseif ($perms_user == "moderator")
 					{
 						$colorname_tag = "<FONT color=".COLOR_CM.">";
-						$text_tag = "<B>";
-						$text_endtag = "<\/B>";
 					}
 #					else $colorname_tag = "<FONT color=".COLOR_CD.">";
 				}
@@ -467,14 +463,10 @@ if($DbLink->num_rows() > 0)
 					if ($perms_dest == "admin" || ($perms_dest == "topmod" && $Dest != C_BOT_NAME && $Dest != C_QUOTE_NAME)) 
 					{
 						$colornamedest_tag = "<FONT color=".COLOR_CA.">";
-						$textdest_tag = "<B>";
-						$textdest_endtag = "<\/B>";
 					}
 					elseif ($perms_dest == "moderator")
 					{
 						$colornamedest_tag = "<FONT color=".COLOR_CM.">";
-						$textdest_tag = "<B>";
-						$textdest_endtag = "<\/B>";
 					}
 #					else $colornamedest_tag = "<FONT color=".COLOR_CD.">";
 				}
