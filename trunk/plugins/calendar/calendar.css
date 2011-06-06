@@ -50,7 +50,7 @@ A, A:hover, A:active, A:visited {
 #calendar-body .sun { color: #993300; }
 #calendar-body .sun a:link { color: #993300; }
  
-#calendar-footer { background-color: #CCCCCC; width: 100%; margin: auto; }
+#calendar-footer { background-color: #CCCCCC; width: 100%; }
 #calendar-footer .btn { line-height: 21px; }
 #calendar-footer .btn a:link { text-decoration : none; color: #000000; display: block; }
 #calendar-footer .btn a:visited { text-decoration : none; color: #000000; }
