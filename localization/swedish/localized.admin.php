@@ -1,5 +1,5 @@
 <?php
-// File : swedish/localized.admin.php - plus version (07.06.2009 - rev.15)
+// File : swedish/localized.admin.php - plus version (13.06.2011 - rev.16)
 // Original file by Martin Edelius <martin.edelius@spirex.se>
 // Updates, corrections and additions for the Plus version by Heikki <heikki@yttervik.be> & Fimpen Högström <fimpen@relative-work.se>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -84,6 +84,7 @@ define("A_SHEET4_9", "Adress(er), ämne eller meddelande saknas!");
 define("A_SHEET4_10", "Lägg till extra mailadresser, separerade av kommatecken utan mallanslag (,)");
 define("A_SHEET4_11", "Signatur");
 define("A_SHEET4_12", "Bocka av alla");
+define("A_SHEET4_13", "Lägg alla mottagare i <b>’Bcc’</b>");
 
 // Frame for configuration
 define("A_SHEET5_0", "Din nuvarnade installations version är %s");

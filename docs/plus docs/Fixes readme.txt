@@ -35,6 +35,7 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 20.02.2011 - 1.94-beta6:
+- added an option (checkbox) to send emails as Bcc not To (from admin panel); (privacy & functionality related)
 - fixed some color names codes; (functionality related)
 - updated Calendar class to v3.56; (functionality related)
 - fixed some colorname/colortext selections to avoid the frame background match; (functionality related)

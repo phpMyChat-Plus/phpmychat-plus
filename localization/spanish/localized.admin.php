@@ -1,5 +1,5 @@
 <?php
-// File : spanish/localized.admin.php - plus version (07.06.2009 - rev.15)
+// File : spanish/localized.admin.php - plus version (13.06.2011 - rev.16)
 // Original translation by Josep Román <josep.roman@zuerich-see.ch>
 // Updates, corrections and additions for the Plus version by Roxana Castañeda <roxminu@yahoo.com> & Shelly Noyes <shelly.noyes@gmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -83,6 +83,7 @@ define("A_SHEET4_9", "¡Faltan la dirección o direcciones, el asunto o el mensa
 define("A_SHEET4_10", "Ańadir correos electrónicos extras,<br />separados por comas sin espacios (,)");
 define("A_SHEET4_11", "Firma");
 define("A_SHEET4_12", "Deseleccionar todos");
+define("A_SHEET4_13", "Ponga todos los destinatarios en el campo <b>’Bcc’</b>");
 
 // Frame for configuration
 define("A_SHEET5_0", "La versión instalada es %s");

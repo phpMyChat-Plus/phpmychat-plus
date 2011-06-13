@@ -68,11 +68,22 @@ if (isset($MailFunctionOn))
 
 	$mail_date = rfcDate();
 
-	function send_email_admin($To,$Subject,$Body,$pmc_email)
+	function send_email_admin($To,$Subject,$Body,$pmc_email,$BCC)
 	{
 		global $Charset;
 		global $Sender_Name, $Sender_Name1, $Sender_email, $Chat_URL, $Ccopy, $pmc_username, $Mail_Greeting;
-		global $mail_date, $eol;
+		global $mail_date, $eol, $bcc_list;
+		
+		$to_list = "";
+		$bcc_list = "<${Sender_email}>";
+		if(isset($BCC) && $BCC)
+		{
+			$bcc_list .= ", ".$To;
+		}
+		else
+		{
+			$to_list = $To;
+		}
 
 		if ($Sender_Name != "") $Sender_Name = quote_printable($Sender_Name,$Charset);
 		// Create a boundary so we know where to look for
@@ -82,7 +93,7 @@ if (isset($MailFunctionOn))
 		$Body = stripslashes($Body);
 		$Headers = "From: ${Sender_Name} <${Sender_email}>".$eol;
 		if ($Ccopy && ${pmc_email}) $Headers .= "Cc: ${pmc_username} <${pmc_email}>".$eol;
-		$Headers .= "Bcc: <${Sender_email}>".$eol;
+		$Headers .= "Bcc: ".$bcc_list.$eol;
 		if (${pmc_email}) $Headers .= "Reply-To: ${pmc_username} <${pmc_email}>".$eol;
 		$Headers .= "X-Sender: ${Sender_email}".$eol;
 		$Headers .= "X-Mailer: PHP/".PHPVERSION.$eol;
@@ -106,17 +117,17 @@ if (isset($MailFunctionOn))
 	#		$Headers .= chunk_split(str_replace($eol,"<br />",$Body));
 			$Headers .= "Content-Transfer-Encoding: ".(function_exists("base64_encode") ? "base64" : "8bit").$eol.$eol;
 			$Headers .= function_exists("base64_encode") ? chunk_split(base64_encode(str_replace($eol,"<br />",$Body))) : chunk_split(str_replace($eol,"<br />",$Body));
-
+			
 			// And then send the email ....
-			return @mail($To, $Subject, "", $Headers);
+			return @mail($to_list, $Subject, "", $Headers);
 		}
 		else {
 			$Headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed".$eol;
 			$Headers .= "Content-Transfer-Encoding: 8bit".$eol.$eol;
-			$Body .= chunk_split($Body);
+			$Body = chunk_split($Body);
 
 			// And then send the email ....
-			return @mail($To, $Subject, $Body, $Headers);
+			return @mail($to_list, $Subject, $Body, $Headers);
 		};
 	};
 

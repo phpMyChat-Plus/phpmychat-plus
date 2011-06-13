@@ -1,5 +1,5 @@
 <?php
-// File : japanese/localized.admin.php - plus version (01.08.2009 - rev.15)
+// File : japanese/localized.admin.php - plus version (13.06.2011 - rev.16)
 // Original translation by Dendeke <konchakka211@yahoo.co.jp>
 // Corrections by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -84,6 +84,7 @@ define("A_SHEET4_9", "宛先、件名、送信内容のいずれかがありま�
 define("A_SHEET4_10", "複数のメールアドレスは、スペースなしのコンマ（,）で列挙します");
 define("A_SHEET4_11", "署名");
 define("A_SHEET4_12", "全て未選択");
+define("A_SHEET4_13", "「<b>Bcc</b>」フィールド内のすべての受信者を配置");
 
 // Frame for configuration
 define("A_SHEET5_0", "現在インストールされているバージョンは%s");

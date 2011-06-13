@@ -1,5 +1,5 @@
 <?php
-// File : bulgarian/localized.admin.php - plus version (07.06.2009 - rev.15)
+// File : bulgarian/localized.admin.php - plus version (13.06.2011 - rev.16)
 // Translation by Peter Petrov <peter.m.petrov@gmail.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -82,6 +82,7 @@ define("A_SHEET4_9", "Непопълнен адрес, тема или съоб�
 define("A_SHEET4_10", "Добавете имейл адреси,<br />разделени със запетайки без интервали (,)");
 define("A_SHEET4_11", "Подпис");
 define("A_SHEET4_12", "Отмени избора");
+define("A_SHEET4_13", "Поставете всички получатели в полето <b>’Bcc’</b>");
 
 // Frame for configuration
 define("A_SHEET5_0", "В момента ползвате версия %s");

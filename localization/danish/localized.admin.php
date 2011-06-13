@@ -1,5 +1,5 @@
 <?php
-// File : danish/localized.admin.php - plus version (07.06.2009 - rev.14)
+// File : danish/localized.admin.php - plus version (13.06.2011 - rev.15)
 // Original translation by Kenneth Kristiansen <kk@linuxfreak.adsl.dk>
 // Updates, corrections and additions for the Plus version by Bente Feldballe
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -83,6 +83,7 @@ define("A_SHEET4_9", "Modtager(e), emne eller besked mangler!");
 define("A_SHEET4_10", "Tilføj e-mail-adresser adskilt af (,) og uden mellemrum");
 define("A_SHEET4_11", "Underskrift");
 define("A_SHEET4_12", "Fravælg alle");
+define("A_SHEET4_13", "Sæt alle modtagere i <b>’Bcc’</b>");
 
 // Frame for configuration
 define("A_SHEET5_0", "Din version er %s");

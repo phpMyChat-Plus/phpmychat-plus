@@ -1,5 +1,5 @@
 <?php
-// File : indonesian/localized.admin.php - plus version (01.08.2009 - rev.15)
+// File : indonesian/localized.admin.php - plus version (13.06.2011 - rev.16)
 // Translation by Hendriyo Kustrianjaya <hendriyo@gmail.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -82,6 +82,7 @@ define("A_SHEET4_9", "Alamat, judul atau isi pesan, belum diisi!");
 define("A_SHEET4_10", "Penambahan alamat email, dipisah menggunakan tanda koma (,)");
 define("A_SHEET4_11", "Tanda tangan");
 define("A_SHEET4_12", "Tidak memilih semua");
+define("A_SHEET4_13", "Masukkan semua penerima dalam <b>’Bcc’</b>");
 
 // Frame for configuration
 define("A_SHEET5_0", "Saat ini Anda menggunakan versi %s");
