@@ -1,5 +1,5 @@
 <?php
-// File : english/localized.admin.php - plus version (01.08.2009 - rev.15)
+// File : english/localized.admin.php - plus version (13.06.2011 - rev.16)
 // Original file by Loďc Chapeaux <lolo@phpheaven.net> & Dean Collins <joelford@pacbell.net>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -83,6 +83,7 @@ define("A_SHEET4_9", "Addresse(s), subject or message is missing!");
 define("A_SHEET4_10", "Add emails, separated by commas without spaces (,)");
 define("A_SHEET4_11", "Signature");
 define("A_SHEET4_12", "Unselect all");
+define("A_SHEET4_13", "Put all recipients in the <b>’Bcc’</b> field");
 
 // Frame for configuration
 define("A_SHEET5_0", "Your currently installed version is %s");

@@ -1,5 +1,5 @@
 <?php
-// File : french/localized.admin.php - plus version (07.06.2009 - rev.15)
+// File : french/localized.admin.php - plus version (13.06.2011 - rev.16)
 // Original file by Loďc Chapeaux <lolo@phpheaven.net> & Dean Collins <joelford@pacbell.net>
 // Translation for Plus version by Pierre Liget <sourceforge@pliget.freesurf.fr> 10.12.2007
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -84,6 +84,7 @@ define("A_SHEET4_9", "Adresse(s), sujet ou message manquant!");
 define("A_SHEET4_10", "Ajouter des emails, séparés par des virgules sans espace (,)");
 define("A_SHEET4_11", "Signature");
 define("A_SHEET4_12", "Tout déselectionner");
+define("A_SHEET4_13", "Mettez tous les destinataires dans le champ <b>’Bcc’</b>");
 
 // Frame for configuration
 define("A_SHEET5_0", "Votre version installée est %s");

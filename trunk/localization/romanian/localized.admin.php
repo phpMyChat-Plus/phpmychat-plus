@@ -1,5 +1,5 @@
 <?php
-// File : romanian/localized.admin.php - plus version (01.08.2009 - rev.15)
+// File : romanian/localized.admin.php - plus version (13.06.2011 - rev.16)
 // Original translation started by Radu Swider <swidera@satline.ro>, first updated by Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro>
 // Corrected, finalized and updated to Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -82,6 +82,7 @@ define("A_SHEET4_9", "Destinaţia, subiectul sau mesajul nu au fost completate!"
 define("A_SHEET4_10", "Adaugă email-uri, separate prin virgulă (,) fără spaţii");
 define("A_SHEET4_11", "Semnătură");
 define("A_SHEET4_12", "Deselectează tot");
+define("A_SHEET4_13", "Pune toţi destinatarii în câmpul <b>’Bcc’</b>");
 
 // Frame for configuration
 define("A_SHEET5_0", "Aveţi instalată versiunea %s");

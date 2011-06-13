@@ -38,9 +38,9 @@ if (isset($FORM_SEND) && $FORM_SEND == 4)
 			$MultiSend .= $mailTo.", ";
 			if ($MultiSend == "") break;
 		};
-		$Send = send_email_admin($MultiSend,$subject,$message,$pmc_email);
+		$Send = send_email_admin($MultiSend,$subject,$message,$pmc_email,$BCC);
 		if ($Ccopy) $MessCc = "<tr><td width=1% nowrap=\"nowrap\"><b>Cc:</b></td><td><b>".$pmc_username."</b> &lt;".$pmc_email."></td></tr>";
-		$Success = "<table border=1 width=70% class=\"msg2\"><tr><td width=1% nowrap=\"nowrap\"><b>From:</b></td><td><b>".$Sender_Name1."</b> &lt;".$Sender_email."></td></tr><tr><td width=1% nowrap=\"nowrap\" class=\"success\"><b>".A_SHEET4_2."</b></td><td><b>".str_replace(">,",">,<b>",str_replace("<","</b>&lt;",implode(", ",$SendTo)))."</td></tr>".$MessCc."<tr><td width=1% nowrap=\"nowrap\" class=\"error\"><b>Bcc:</b></td><td>".$Sender_email."</td></tr><tr><td width=1% nowrap=\"nowrap\"><b>".A_SHEET4_4."</b></td><td>".stripslashes($subject)."</td></tr><tr><td width=1% nowrap=\"nowrap\"><b>".A_SHEET4_5."</b></td><td>".stripslashes(str_replace("\n","<br />",$message))."</td></tr></table>";
+		$Success = "<table border=1 width=70% class=\"msg2\"><tr><td width=1% nowrap=\"nowrap\"><b>From:</b></td><td><b>".$Sender_Name1."</b> &lt;".$Sender_email."></td></tr><tr><td width=1% nowrap=\"nowrap\" class=\"success\"><b>".A_SHEET4_2."</b></td><td>".(!$BCC ? "<b>".str_replace(">,",">,<b>",str_replace("<","</b>&lt;",implode(", ",$SendTo))) : "")."</td></tr>".$MessCc."<tr><td width=1% nowrap=\"nowrap\" class=\"error\"><b>Bcc:</b></td><td>".($BCC ? "<b>".str_replace(">,",">,<b>",str_replace("<","</b>&lt;",implode(", ",$SendTo))) : "")."</td></tr><tr><td width=1% nowrap=\"nowrap\"><b>".A_SHEET4_4."</b></td><td>".stripslashes($subject)."</td></tr><tr><td width=1% nowrap=\"nowrap\"><b>".A_SHEET4_5."</b></td><td>".stripslashes(str_replace("\n","<br />",$message))."</td></tr></table>";
 		$Message = ($Send ? A_SHEET4_7.$Success : A_SHEET4_8);
 		$MsgStyle = ($Send ? "success" : "error");
 	}
@@ -98,6 +98,11 @@ else
 		$DbLink->query("SELECT COUNT(*) FROM ".C_BAN_TBL);
 		list($count_BanUsers) = $DbLink->next_record();
 	?>
+				<TR>
+					<TD ALIGN=CENTER><?php echo("Put all recipients in the <b>'Bcc'</b> field"); ?>
+					<INPUT TYPE="checkbox" NAME="BCC" value="1" checked>
+					</TD>
+				</TR>
 				<TR>
 					<TD ALIGN=CENTER><?php echo(A_SHEET4_2." ".A_MENU_1); ?></TD>
 				</TR>

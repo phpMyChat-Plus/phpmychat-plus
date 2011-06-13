@@ -1,5 +1,5 @@
 <?php
-// File : serbian_latin/localized.admin.php - plus version (07.06.2009 - rev.15)
+// File : serbian_latin/localized.admin.php - plus version (01.06.2011 - rev.16)
 // Original translation by Vedran Vučić <vedran.vucic@gnulinuxcentar.org>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -83,6 +83,7 @@ define("A_SHEET4_9", "Primalac(i), tema ili poruka nedostaje!");
 define("A_SHEET4_10", "Dodaj emailove, odvojene zapetama bez razmaka (,)");
 define("A_SHEET4_11", "Potpis");
 define("A_SHEET4_12", "Deselektuj sve");
+define("A_SHEET4_13", "Stavi sve primaoje u <b>’Bcc’</b>");
 
 // Frame for configuration
 define("A_SHEET5_0", "Vaš instalirana verzija je %s");

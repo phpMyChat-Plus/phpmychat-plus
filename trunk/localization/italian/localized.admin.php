@@ -1,5 +1,5 @@
 <?php
-// File : italian/localized.admin.php - plus version (07.06.2009 - rev.15)
+// File : italian/localized.admin.php - plus version (13.06.2011 - rev.16)
 // Original translation by Andrea D’Alessandro <andrea@abol.it> & Massimo Fubini <massimo@tomato.it>
 //	& Giuliano Yurij Beccaria <yurij@e-pages.it> & Marco Borrini <borrini@tradimento.it>
 // & Bartolotta Gioachino <developers@rockitalia.com> & Silvia M. Carrassi <silvia@ladysilvia.net>
@@ -85,6 +85,7 @@ define("A_SHEET4_9", "Indirizzo/i, oggetto o messaggio mancante!");
 define("A_SHEET4_10", "Aggiungi e-mail, separali con la virgola (,) senza spazio");
 define("A_SHEET4_11", "Firma");
 define("A_SHEET4_12", "Deseleziona tutto");
+define("A_SHEET4_13", "Mettere tutti i destinatari nella <b>’Bcc’</b>");
 
 // Frame for configuration
 define("A_SHEET5_0", "La tua versione installata è %s");

@@ -1,5 +1,5 @@
 <?php
-// File : german/localized.admin.php - plus version (07.06.2009 - rev.15)
+// File : german/localized.admin.php - plus version (13.06.2011 - rev.16)
 // Original translation by Robert Schaller <robert@schaller.com> & Wolfgang Schneider <schneider@bibelcenter.de>
 //    & Martin Sander <Martin.Sander@touch-screen.de> & Bernard Piller <bernard@bmpsystems.com>
 //    & Reinhard Hofmann <e9625556@student.tuwien.ac.at> & Christian Hacker <c.hacker@dreamer-chat.de>
@@ -85,6 +85,7 @@ define("A_SHEET4_9", "Adresse, Betreff oder Nachricht fehlt!");
 define("A_SHEET4_10", "Fügen Sie weitere eMail-Adressen an,<br />getrennt mit Komma ohne Leerzeichen (,)");
 define("A_SHEET4_11", "Signatur");
 define("A_SHEET4_12", "Markierung aufheben");
+define("A_SHEET4_13", "Setzen Sie alle Empfänger in der <b>’Bcc’</b>-Feld");
 
 // Frame for  configuration
 define("A_SHEET5_0", "Ihre installierte Version ist %s");

@@ -1,5 +1,5 @@
 <?php
-// File : hungarian/localized.admin.php - plus version (07.06.2009 - rev.15)
+// File : hungarian/localized.admin.php - plus version (13.06.2011 - rev.16)
 // Original file by Jácint Zsuzsanna <jacint.zsuzsanna@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
@@ -83,6 +83,7 @@ define("A_SHEET4_9", "A cím(ek), a tárgy vagy az üzenet hiányzik!");
 define("A_SHEET4_10", "A listán nem található e-mail címek hozzáadása:<br />vesszőkkel elválasztva, szóközök nélkül (,)");
 define("A_SHEET4_11", "Aláírás");
 define("A_SHEET4_12", "Az összes kiválasztás visszavonása");
+define("A_SHEET4_13", "Tegye az összes címzett a <b>’Bcc’</b> mezőbe");
 
 // Frame for configuration
 define("A_SHEET5_0", "A te telepített verziód: %s");

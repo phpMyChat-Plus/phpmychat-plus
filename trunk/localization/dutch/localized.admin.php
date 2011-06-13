@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.admin.php - plus version (07.06.2009 - rev.15)
+// File : dutch/localized.admin.php - plus version (13.06.2011 - rev.16)
 // Original translation by Corbesir <rock@jascrc.com>
 // Updates, corrections and additions for the Plus version by DJE Amesz & Romanesko  Genieusdanny@gmail.com and Bert Moorlag <berbia@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -83,6 +83,7 @@ define("A_SHEET4_9", "Adressen,onderwerp of boodschap mist!");
 define("A_SHEET4_10", "Voeg extra email toe,<br />gescheiden door een komma zonder spatie (,)");
 define("A_SHEET4_11", "Handtekening");
 define("A_SHEET4_12", "Deselecteer Alles");
+define("A_SHEET4_13", "Doe alle ontvangers in de <b>’Bcc’</b>");
 
 // Frame for configuration
 define("A_SHEET5_0", "Uw geïnstalleerden versie is %s");

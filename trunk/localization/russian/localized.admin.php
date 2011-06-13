@@ -1,5 +1,5 @@
 <?php
-// File : russian/localized.admin.php - plus version (01.08.2009 - rev.15)
+// File : russian/localized.admin.php - plus version (13.06.2011 - rev.16)
 // Do not use ' ; use ’ instead (utf-8 edit bug)
 
 // extra header for charset
@@ -81,6 +81,7 @@ define("A_SHEET4_9", "Адрес(а), тема или сообщение отс�
 define("A_SHEET4_10", "Добавленные E-Mail, должны быть разделены запятыми без пробелов (,)");
 define("A_SHEET4_11", "Подпись:");
 define("A_SHEET4_12", "Снять выделение со всех");
+define("A_SHEET4_13", "Положить всех получателей в <b>’Bcc’</b> поле");
 
 // Frame for configuration
 define("A_SHEET5_0", "Установленная версия %s");

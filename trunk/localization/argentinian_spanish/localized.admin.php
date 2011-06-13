@@ -1,5 +1,5 @@
 <?php
-// File : argentinian_spanish/localized.admin.php - plus version (07.06.2009 - rev.15)
+// File : argentinian_spanish/localized.admin.php - plus version (13.06.2011 - rev.16)
 // Original translation in Spanish (for the Argentinian dialect usage) by Jorge Colaccini <jrc@informas.com>
 // Updates, corrections and additions for the Plus version by Matias Olivera <matiolivera@yahoo.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -83,6 +83,7 @@ define("A_SHEET4_9", "Dirección/es, detalle o mensaje perdido!");
 define("A_SHEET4_10", "Agregá emails, separados por comas sin espacios (,)");
 define("A_SHEET4_11", "Firma");
 define("A_SHEET4_12", "Deseleccionar todos");
+define("A_SHEET4_13", "Ponga todos los destinatarios en el campo <b>’Bcc’</b>");
 
 // Frame for configuration
 define("A_SHEET5_0", "La versión instalado es %s");

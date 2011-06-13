@@ -1,5 +1,5 @@
 <?php
-// File : turkish/localized.admin.php - plus version (07.06.2009 - rev.15)
+// File : turkish/localized.admin.php - plus version (13.06.2011 - rev.16)
 // Original translation in turkish by Volkan Övün <vovun@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -82,6 +82,7 @@ define("A_SHEET4_9", "Adres(ler), konu veya ileti yazmadınız!");
 define("A_SHEET4_10", "Boşluk bırakmaksızın virgülle ayrılmış (,)<br />ilave e-postalar ekle");
 define("A_SHEET4_11", "İmza");
 define("A_SHEET4_12", "Bütün seçilenleri iptal et");
+define("A_SHEET4_13", "<b>’Bcc’</b> alanına tüm alıcıların koyun");
 
 // Frame for configuration
 define("A_SHEET5_0", "Kullandığınız sürümü %s dir");

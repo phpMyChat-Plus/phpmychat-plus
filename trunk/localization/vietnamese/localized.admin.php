@@ -1,5 +1,5 @@
 <?php
-// File : vietnamese/localized.admin.php - plus version (07.06.2009 - rev.15)
+// File : vietnamese/localized.admin.php - plus version (13.06.2011 - rev.16)
 // Translation by Marshall <hellomarshall_lookatme@yahoo.com.vn>
 // Updates and corrections by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -82,6 +82,7 @@ define("A_SHEET4_9", "Địa chỉs, tiêu đề hay lời nhắn thì không c�
 define("A_SHEET4_10", "Thêm những email , phân chia giữa dấu phẩy (,)");
 define("A_SHEET4_11", "Chữ ký");
 define("A_SHEET4_12", "Không chọn lọc Mọi thứ");
+define("A_SHEET4_13", "Đặt tất cả người nhận trong <b>’Bcc’</b>");
 
 // Frame for configuration
 define("A_SHEET5_0", "Bạn đang cài đặt phiên bản %s");
