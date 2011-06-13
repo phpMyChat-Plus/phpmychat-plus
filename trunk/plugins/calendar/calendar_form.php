@@ -33,7 +33,7 @@ $date_pair2 = (isset($_REQUEST["pr2"])) ? $_REQUEST["pr2"] : "";
 $date_pair_value = (isset($_REQUEST["prv"])) ? $_REQUEST["prv"] : "";
 $path = (isset($_REQUEST["pth"])) ? $_REQUEST["pth"] : "";
 $hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : 'en_US';
-$sp_dates = (isset($_REQUEST["spd"])) ? @tc_calendar::check_json_decode($_REQUEST["spd"]) : array();
+$sp_dates = (isset($_REQUEST["spd"])) ? @tc_calendar::check_json_decode($_REQUEST["spd"]) : array(array(),array(),array());
 $sp_type = (isset($_REQUEST["spt"])) ? $_REQUEST["spt"] : 0;
 $tc_onchanged = (isset($_REQUEST["och"])) ? $_REQUEST["och"] : "";
 
@@ -155,7 +155,6 @@ if($cobj->hl){
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=7; IE=8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>TriConsole.com - PHP Calendar Date Picker</title>
 <link href="calendar.css" rel="stylesheet" type="text/css" />
@@ -473,7 +472,7 @@ window.onload = function(){ window.parent.setDateLabel('<?php echo($objname); ?>
 						$sp_found = false;
 						
 						//check on yearly recursive
-						if(isset($sp_dates[2])){							
+						if(isset($sp_dates[2]) && is_array($sp_dates[2])){							
 							foreach($sp_dates[2] as $sp_time){
 								$sp_time_md = date('md', $sp_time);	
 								$this_md = date('md', $currentTime); 
@@ -485,7 +484,7 @@ window.onload = function(){ window.parent.setDateLabel('<?php echo($objname); ?>
 						}
 						
 						//check on monthly recursive
-						if(isset($sp_dates[1]) && !$sp_found){							
+						if(isset($sp_dates[1]) && is_array($sp_dates[1]) && !$sp_found){							
 							foreach($sp_dates[1] as $sp_time){
 								$sp_time_d = date('d', $sp_time);									
 								if($sp_time_d == $day){
@@ -496,7 +495,7 @@ window.onload = function(){ window.parent.setDateLabel('<?php echo($objname); ?>
 						}
 						
 						//check on no recursive
-						if(isset($sp_dates[0]) && !$sp_found){							
+						if(isset($sp_dates[0]) && is_array($sp_dates[0]) && !$sp_found){							
 							$sp_found = in_array($currentTime, $sp_dates[0]);
 						}						
 						
