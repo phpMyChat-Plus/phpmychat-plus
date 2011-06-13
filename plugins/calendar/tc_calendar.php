@@ -6,7 +6,7 @@
 // add on: translation  implemented - default is English en_US
 //	- thanks ciprianmp
 //
-// version 3.57-loc (5 June 2011)
+// version 3.58-loc (13 June 2011)
 
 //fixed: Incorrect next month display show on 'February 2008'
 //	- thanks Neeraj Jain for bug report
