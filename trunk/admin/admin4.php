@@ -99,7 +99,7 @@ else
 		list($count_BanUsers) = $DbLink->next_record();
 	?>
 				<TR>
-					<TD ALIGN=CENTER><?php echo("Put all recipients in the <b>'Bcc'</b> field"); ?>
+					<TD ALIGN=CENTER><?php echo(A_SHEET4_13); ?>
 					<INPUT TYPE="checkbox" NAME="BCC" value="1" checked>
 					</TD>
 				</TR>
