@@ -75,15 +75,15 @@ if (isset($MailFunctionOn))
 		global $mail_date, $eol, $bcc_list;
 		
 		$to_list = "";
-		$bcc_list = "<${Sender_email}>";
 		if(isset($BCC) && $BCC)
 		{
-			$bcc_list .= ", ".$To;
+			$bcc_list = $To;
 		}
 		else
 		{
 			$to_list = $To;
 		}
+		if($pmc_email != $Sender_email) $bcc_list .= " <${Sender_email}>";
 
 		if ($Sender_Name != "") $Sender_Name = quote_printable($Sender_Name,$Charset);
 		// Create a boundary so we know where to look for
@@ -93,7 +93,7 @@ if (isset($MailFunctionOn))
 		$Body = stripslashes($Body);
 		$Headers = "From: ${Sender_Name} <${Sender_email}>".$eol;
 		if ($Ccopy && ${pmc_email}) $Headers .= "Cc: ${pmc_username} <${pmc_email}>".$eol;
-		$Headers .= "Bcc: ".$bcc_list.$eol;
+		if ($bcc_list != "") $Headers .= "Bcc: ".$bcc_list.$eol;
 		if (${pmc_email}) $Headers .= "Reply-To: ${pmc_username} <${pmc_email}>".$eol;
 		$Headers .= "X-Sender: ${Sender_email}".$eol;
 		$Headers .= "X-Mailer: PHP/".PHPVERSION.$eol;
