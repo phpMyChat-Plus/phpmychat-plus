@@ -68,6 +68,7 @@ define("L_S_SUN", "d");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1250");
+define("L_CAL_FORMAT", "%d %B %Y");
 if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "ro_RO");
 
 // Set the RO specific date/time format

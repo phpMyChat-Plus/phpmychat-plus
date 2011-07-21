@@ -68,7 +68,7 @@ define("L_S_SUN", "Вс");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1251");
-define("L_CAL_FORMAT", "%d %B %Y"); // needed only if differs from this one
+define("L_CAL_FORMAT", "%d %B %Y");
 if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "ru_RU"); // en_US format of your language
 
 // Set the RU specific date/time format

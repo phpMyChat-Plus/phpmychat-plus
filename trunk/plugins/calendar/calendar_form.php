@@ -33,7 +33,7 @@ $date_pair2 = (isset($_REQUEST["pr2"])) ? $_REQUEST["pr2"] : "";
 $date_pair_value = (isset($_REQUEST["prv"])) ? $_REQUEST["prv"] : "";
 $path = (isset($_REQUEST["pth"])) ? $_REQUEST["pth"] : "";
 $hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : 'en_US';
-$sp_dates = (isset($_REQUEST["spd"])) ? @tc_calendar::check_json_decode($_REQUEST["spd"]) : array(array(),array(),array());
+$sp_dates = (isset($_REQUEST["spd"])) ? @tc_calendar::check_json_decode($_REQUEST["spd"]) : array(array(), array(), array());
 $sp_type = (isset($_REQUEST["spt"])) ? $_REQUEST["spt"] : 0;
 $tc_onchanged = (isset($_REQUEST["och"])) ? $_REQUEST["och"] : "";
 
@@ -144,7 +144,7 @@ else
 	$startwrite = $total_lastmonth - ($startdate - 1);
 
 if($cobj->hl){
-	$to_replace = array("d","%"," ",".","年","日");
+	$to_replace = array("d","%"," ",".",",","年","日");
 	$order = str_replace($to_replace,"",L_CAL_FORMAT);
 	if(strpos($order,"B") == 0) $first_input = "B";
 	elseif(strpos($order,"Y") == 0) $first_input = "Y";

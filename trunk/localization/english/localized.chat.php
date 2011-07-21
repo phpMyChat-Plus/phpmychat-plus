@@ -46,6 +46,7 @@ define("L_SET_19", "Remember me");
 
 define("L_SRC", "is freely available on");
 
+define("L_SEC", "second");
 define("L_SECS", "seconds");
 define("L_MIN", "minute");
 define("L_MINS", "minutes");
@@ -615,6 +616,7 @@ define("L_SHORT_DATETIME", "%d/%m/%Y %H:%M:%S"); //Change this to your local des
 define("L_LANG", "en_GB");
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
+define("L_CAL_FORMAT", "%d %B %Y"); // Calendar format
 }
 elseif (C_ENGLISH_FORMAT == "US")
 {
@@ -629,12 +631,12 @@ define("L_SHORT_DATETIME", "%m/%d/%Y %H:%M:%S"); //Change this to your local des
 define("L_LANG", "en_US");
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "0");
+define("L_CAL_FORMAT", "%B %d, %Y"); // Calendar format
 }
 define("ISO_DEFAULT", "iso-8859-1");
 define("WIN_DEFAULT", "windows-1252");
 define("L_LONG_DATE", "%A, %d of %B %Y"); //Change this to your local desired format (keep the long form)
 define("L_LONG_DATETIME", "%A, %d of %B %Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
-define("L_CAL_FORMAT", "%d %B %Y"); // Calendar format
 
 // Chat Activity displayed on remote web pages
 define("LOGIN_LINK", "<A HREF='".C_CHAT_URL."?L=".$L."' TITLE='".sprintf(L_CLICK,L_LINKS_12)."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_12).".'; return true;\" TARGET=_blank>");
