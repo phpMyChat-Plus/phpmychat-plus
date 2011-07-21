@@ -68,6 +68,7 @@ define("L_S_SUN", "sö");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1252");
+define("L_CAL_FORMAT", "%d %B %Y");
 if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "sv_SE");
 
 // Set the SV specific date/time format

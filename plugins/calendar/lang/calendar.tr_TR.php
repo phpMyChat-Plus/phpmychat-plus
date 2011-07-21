@@ -68,6 +68,7 @@ define("L_S_SUN", "Paz");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1254");
+define("L_CAL_FORMAT", "%d %B %Y");
 if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "tr_TR");
 
 // Set the TR specific date/time format

@@ -68,6 +68,7 @@ define("L_S_SUN", "CN");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1258");
+define("L_CAL_FORMAT", "%d %B %Y");
 if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "vi_VN");
 
 // Set the VN specific date/time format

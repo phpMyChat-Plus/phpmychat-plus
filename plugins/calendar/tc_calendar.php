@@ -245,7 +245,7 @@ class tc_calendar{
 
 			if($this->show_input){
 				if($this->hl){
-					$to_replace = array("%"," ",".","年","日");
+					$to_replace = array("%"," ",".",",","年","日");
 					$order = str_replace($to_replace,"",L_CAL_FORMAT);
 					if(strpos($order,"d") == 0) $this->writeDay();
 					elseif(strpos($order,"B") == 0) $this->writeMonth();

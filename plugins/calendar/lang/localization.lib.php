@@ -93,7 +93,7 @@ if(!defined("L_S_SUN")) define("L_S_SUN", "Su");
 
 // Windows encoding
 if(!defined("WIN_DEFAULT")) define("WIN_DEFAULT", "windows-1252");
-if(!defined("L_CAL_FORMAT")) define("L_CAL_FORMAT", "%d %B %Y");
+if(!defined("L_CAL_FORMAT")) define("L_CAL_FORMAT", "%B %d, %Y");
 if(!defined("DATE_FORMAT")) define("DATE_FORMAT", str_replace("%","",str_replace("B","F",str_replace("d","j",L_CAL_FORMAT))));
 
 ?>
