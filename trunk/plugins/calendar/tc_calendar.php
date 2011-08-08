@@ -6,7 +6,7 @@
 // add on: translation  implemented - default is English en_US
 //	- thanks ciprianmp
 //
-// version 3.58-loc (13 June 2011)
+// version 3.58-loc (8 August 2011)
 
 //fixed: Incorrect next month display show on 'February 2008'
 //	- thanks Neeraj Jain for bug report
@@ -93,6 +93,9 @@
 //
 //fixed: error on calendar.js function checkSpecifyDate
 //	- thanks Todd
+//
+//fixed: the value of calendar is not restored when using back button on browser
+//  - thanks Nicolai
 //********************************************************
 
 if((defined("L_LANG") && L_LANG != "en_US" && L_LANG != "L_LANG") || isset($lang) && $lang != "en_US") include_once("lang/calendar.".(isset($lang) ? $lang : L_LANG).".php");

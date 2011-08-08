@@ -164,7 +164,17 @@ function setValue(){
 	var f = document.calendarform;
 	var date_selected = padString(f.selected_year.value, 4, "0") + "-" + padString(f.selected_month.value, 2, "0") + "-" + padString(f.selected_day.value, 2, "0");
 
+	//not use for now
+	//toggle = typeof(toggle) != 'undefined' ? toggle : true;
+
 	window.parent.setValue(f.objname.value, date_selected);
+}
+
+function restoreValue(){
+	var f = document.calendarform;
+	var date_selected = padString(f.selected_year.value, 4, "0") + "-" + padString(f.selected_month.value, 2, "0") + "-" + padString(f.selected_day.value, 2, "0");
+
+	window.parent.updateValue(f.objname.value, date_selected);
 }
 
 function selectDay(d){
@@ -282,7 +292,12 @@ function adjustContainer(){
 	}
 }
 
-window.onload = function(){ window.parent.setDateLabel('<?php echo($objname); ?>'); adjustContainer(); setTimeout("adjustContainer()", 1000); };
+window.onload = function(){ 
+	window.parent.setDateLabel('<?php echo($objname); ?>');
+	adjustContainer(); 
+	setTimeout("adjustContainer()", 1000); 
+	restoreValue(); 
+};
 //-->
 </script>
 </head>
