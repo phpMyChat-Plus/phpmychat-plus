@@ -9,6 +9,22 @@ function toggleCalendar(objname){
 }
 
 function setValue(objname, d){
+	//compare if value is changed
+	var changed = (document.getElementById(objname).value != d) ? true : false;	
+	
+	updateValue(objname, d);
+	
+	var dp = document.getElementById(objname+"_dp").value;
+	if(dp) toggleCalendar(objname);
+	
+	checkPairValue(objname, d);		
+	
+	//calling calendar_onchanged script	
+	if(document.getElementById(objname+"_och").value != "" && changed)
+		calendar_onchange(objname);
+}
+
+function updateValue(objname, d){
 	document.getElementById(objname).value = d;
 
 	var dp = document.getElementById(objname+"_dp").value;
@@ -38,17 +54,7 @@ function setValue(objname, d){
 
 			document.getElementById("divCalendar_"+objname+"_lbl").innerHTML = dateTxt;
 		}
-
-		toggleCalendar(objname);
 	}
-
-	checkPairValue(objname, d);
-
-	//calling calendar_onchanged script
-	
-	if(document.getElementById(objname+"_och").value != "")
-		calendar_onchange(objname);	
-
 }
 
 function tc_submitDate(objname, dvalue, mvalue, yvalue){

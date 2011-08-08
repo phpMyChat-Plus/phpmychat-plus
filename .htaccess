@@ -3,7 +3,7 @@ deny from all
 </Files>
 AddCharset UTF-8 .utf8
 AddDefaultCharset UTF-8
-AddHandler application/x-httpd-php .php3 .php .shtml
+AddHandler application/x-httpd-php .php3 .php .shtml .html .htm
 php_value allow_url_include on
 php_value allow_url_fopen on
 php_value register_long_arrays 1
