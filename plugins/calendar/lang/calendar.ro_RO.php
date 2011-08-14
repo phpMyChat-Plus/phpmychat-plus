@@ -17,8 +17,11 @@ define("L_SEL_LANG", "Alege Limba");
 define("L_SEL_ICON", "Alege Icon-ul");
 define("L_SEL_DATE", "Alege data");
 define("L_REF_CAL", "Calendarul se reiniţializează...");
-define("L_ERR_SEL", "Data selectată nu este validă");
-define("L_NOT_ALLOWED", "Nu este permisă selectarea acestei date");
+define("L_ERR_SEL", "Data selectată nu este validă!");
+define("L_NOT_ALLOWED", "Nu este permisă selectarea acestei date!");
+define("L_DATE_BEFORE", "Selectaţi o dată înainte de %s!");
+define("L_DATE_AFTER", "Selectaţi o dată după %s!");
+define("L_DATE_BETWEEN", "Selectaţi o dată între\\n%s şi %s!");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

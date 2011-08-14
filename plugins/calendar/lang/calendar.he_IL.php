@@ -6,7 +6,8 @@
 # Translator: Shula Amokshim <shula.amokshim @gmx.net>
 # Last file update: 01.05.2010
 
-$Align = "right";
+define("ALIGN", "right");
+define("DIR", "rtl");
 
 // Class strings localization
 define("L_DAY", "יום");
@@ -70,7 +71,7 @@ define("L_S_SUN", "א");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1255");
-define("L_CAL_FORMAT", "%d %B %Y");
+define("L_CAL_FORMAT", "%d ב%B %Y");
 if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "he_IL");
 
 // Set the HE specific date/time format

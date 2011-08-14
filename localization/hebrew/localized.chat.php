@@ -49,6 +49,7 @@ define("L_SET_19", "זכור אותי");
 
 define("L_SRC", "חופשי להורדה ב-");
 
+define("L_SEC", "שנית");
 define("L_SECS", "שניות");
 define("L_MIN", "דקה");
 define("L_MINS", "דקות");
@@ -610,7 +611,7 @@ define("L_S_SUN", "א");
 // Localized date format
 // Set the HE specific date/time format
 if (stristr(PHP_OS,'win')) {
-setlocale(LC_ALL, "heb-heb.UTF-8", "heb-heb", "hebrew.UTF-8", "hebrew");
+setlocale(LC_ALL, "heb.UTF-8", "heb-heb.UTF-8", "heb-heb", "hebrew.UTF-8", "hebrew", "israel");
 } else {
 setlocale(LC_ALL, "he_IL.UTF-8", "heb.UTF-8", "he.UTF-8", "iw_IL.UTF-8", "iw.UTF-8", "heb_heb.UTF-8", "Hebrew-he.UTF-8"); // For HE formats
 }
@@ -619,9 +620,11 @@ define("ISO_DEFAULT", "iso-8859-8");
 define("WIN_DEFAULT", "windows-1255");
 define("L_SHORT_DATE", "%d/%m/%Y"); //Change this to your local desired format (keep the short form)
 define("L_SHORT_DATETIME", "%d/%m/%Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
-define("L_LONG_DATE", "%A - %e %B %Y"); //Change this to your local desired format (keep the long form)
-define("L_LONG_DATETIME", "%A - %e %B %Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
-define("L_CAL_FORMAT", "%d %B %Y"); // Calendar format
+define("L_LONG_DATE", "%A - %e ב%B %Y"); //Change this to your local desired format (keep the long form)
+define("L_LONG_DATETIME", "%A - %e ב%B %Y %H:%M:%S"); //Change this to your local desired format (keep the short form)
+define("L_CAL_FORMAT", "%d ב%B %Y");
+define("ALIGN", "right");
+define("DIR", "rtl");
 
 // Chat Activity displayed on remote web pages
 define("LOGIN_LINK", "<A HREF='".C_CHAT_URL."?L=".$L."' TITLE='".sprintf(L_CLICK,L_LINKS_12)."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_12).".'; return true;\" TARGET=_blank>");
