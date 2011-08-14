@@ -32,6 +32,8 @@ else
 };
 
 // English US format and localization - default strings when the specified translation is not available
+if(!defined("ALIGN")) define("ALIGN", "");
+if(!defined("DIR")) define("DIR", "ltr");
 if(!defined("L_DAY")) define("L_DAY", "Day");
 if(!defined("L_MONTH")) define("L_MONTH", "Month");
 if(!defined("L_YEAR")) define("L_YEAR", "Year");
@@ -44,6 +46,9 @@ if(!defined("L_SEL_ICON")) define("L_SEL_ICON", "Select Icon");
 if(!defined("L_SEL_DATE")) define("L_SEL_DATE", "Select Date");
 if(!defined("L_ERR_SEL")) define("L_ERR_SEL", "Your selection is not valid");
 if(!defined("L_NOT_ALLOWED")) define("L_NOT_ALLOWED", "This date is not allowed to be selected");
+if(!defined("L_DATE_BEFORE")) define("L_DATE_BEFORE", "Please choose a date before %s");
+if(!defined("L_DATE_AFTER")) define("L_DATE_AFTER", "Please choose a date after %s");
+if(!defined("L_DATE_BETWEEN")) define("L_DATE_BETWEEN", "Please choose a date between\\n%s and %s");
 
 // Set the first day of the week in your language
 if(!defined("FIRST_DAY")) define("FIRST_DAY", "0"); // 1 for Monday, 0 for Sunday
@@ -103,6 +108,9 @@ if(!defined("DATE_FORMAT")) define("DATE_FORMAT", str_replace("%","",str_replace
 	var l_lang = "<?php echo(L_LANG); ?>";
 	var l_sel_date = "<?php echo(L_SEL_DATE); ?>";
 	var l_not_allowed = "<?php echo(L_NOT_ALLOWED); ?>";
+	var l_date_before = "<?php echo(L_DATE_BEFORE); ?>";
+	var l_date_after = "<?php echo(L_DATE_AFTER); ?>";
+	var l_date_between = "<?php echo(L_DATE_BETWEEN); ?>";
 //	Long Month Names
 	var l_january = "<?php echo(defined('L_JAN') ? L_JAN : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1199145600')) : strftime('%B','1199145600'))); ?>";
 	var l_february = "<?php echo(defined('L_FEB') ? L_FEB : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1201824000')) : strftime('%B','1201824000'))); ?>";

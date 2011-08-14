@@ -78,11 +78,13 @@ function tc_submitDate(objname, dvalue, mvalue, yvalue){
 	var prv = document.getElementById(objname+'_prv').value;
 	var path = document.getElementById(objname+'_pth').value;
 	var hl = document.getElementById(objname+'_hl').value;
+	var al = document.getElementById(objname+'_al').value;
+	var dir = document.getElementById(objname+'_dir').value;
 	var spd = document.getElementById(objname+'_spd').value;
 	var spt = document.getElementById(objname+'_spt').value;
 	var och = document.getElementById(objname+'_och').value;
 			
-	obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+dvalue+"&selected_month="+mvalue+"&selected_year="+yvalue+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&mon="+smon+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&pr1="+pr1+"&pr2="+pr2+"&prv="+prv+"&hl="+hl+"&spd="+spd+"&spt="+spt+"&och="+och;
+	obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+dvalue+"&selected_month="+mvalue+"&selected_year="+yvalue+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&mon="+smon+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&pr1="+pr1+"&pr2="+pr2+"&prv="+prv+"&hl="+hl+"&al="+al+"&dir="+dir+"&spd="+spd+"&spt="+spt+"&och="+och;
 
 	obj.contentWindow.submitNow(dvalue, mvalue, yvalue);
 }
@@ -207,9 +209,9 @@ function is_leapYear(year){
 
 function daysInMonth(month, year){
 	var days = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
-	return (month == 2 && is_leapYear(year)) ? 29 : days[month-1];
+	return (month == 2 && year > 0 && is_leapYear(year)) ? 29 : days[month-1];
 }
-
+/*
 function DaysArray(n) {
 	for (var i = 1; i <= n; i++) {
 		this[i] = 31;
@@ -218,7 +220,7 @@ function DaysArray(n) {
    }
    return this
 }
-
+*/
 function isDate(strDay, strMonth, strYear){
 /*
 	//bypass check date
@@ -279,11 +281,11 @@ function isDateAllow(objname, strDay, strMonth, strYear){
 					da2Str = date.format(dateFormat);
 				}
 				if (!da1_ok)
-					alert("Please choose a date before " + da2Str);
+					alert(sprintf(l_date_before, da2Str));
 				else if (!da2_ok)
-					alert("Please choose a date after " + da1Str);
+					alert(sprintf(l_date_after, da1Str));
 				else
-					alert("Please choose a date between\n"+ da1Str + " and " + da2Str);
+					alert(sprintf(l_date_between, da1Str, da2Str));
 				return false;
 			}
 		}
@@ -390,7 +392,8 @@ function padString(stringToPad, padLength, padString) {
 }
 
 function tc_updateDay(objname, yearNum, monthNum, daySelected){
-	var totalDays = daysInMonth(monthNum, yearNum);
+	//var totalDays = (monthNum > 0) ? daysInMonth(monthNum, yearNum) : 31;
+	var totalDays = (monthNum > 0 && yearNum > 0) ? daysInMonth(monthNum, yearNum) : ((monthNum > 0) ? daysInMonth(monthNum, 2008) : 31);
 
 	var dayObj = document.getElementById(objname+"_day");
 	//var prevSelected = dayObj.value;
@@ -441,13 +444,39 @@ function checkSpecifyDate(objname, strDay, strMonth, strYear){
 
 	//alert(spd);
 
-	var sp_dates = JSON.parse(spd);
+	var sp_dates;
+	
+	if(typeof(JSON) != "undefined"){	
+		sp_dates = JSON.parse(spd);
+	}else{
+		//only array is assume for now
+		if(spd != "" && spd.length > 2){
+			var tmp_spd = spd.substring(2, spd.length-2);
+			//alert(tmp_spd);
+			var sp_dates = tmp_spd.split("],[");
+			for(i=0; i<sp_dates.length; i++){
+				//alert(sp_dates[i]);
+				var tmp_str = sp_dates[i]; //.substring(1, sp_dates[i].length-1);
+				if(tmp_str == "") 
+					sp_dates[i] = new Array();
+				else sp_dates[i] = tmp_str.split(",");
+			}
+		}else sp_dates = new Array();
+	}
+	/*
+	for(i=0; i<sp_dates.length; i++){
+		for(j=0; j<sp_dates[i].length; j++){
+			alert(sp_dates[i][j]);
+		}
+	}
+	*/
+	
 	var found = false;
 
 	for (var key in sp_dates[2]) {
 	  if (sp_dates[2].hasOwnProperty(key)) {
-		//alert(key + " -> " + p[key]);
 		this_date = new Date(sp_dates[2][key]*1000);
+		//alert(sp_dates[2][key]+","+this_date.getDate());
 		if(this_date.getDate() == parseInt(parseFloat(strDay)) && (this_date.getMonth()+1) == parseInt(parseFloat(strMonth))){
 			found = true;
 			break;
@@ -458,8 +487,8 @@ function checkSpecifyDate(objname, strDay, strMonth, strYear){
 	if(!found){
 		for (var key in sp_dates[1]) {
 		  if (sp_dates[1].hasOwnProperty(key)) {
-			//alert(key + " -> " + p[key]);
 			this_date = new Date(sp_dates[1][key]*1000);
+			//alert(sp_dates[2][key]+","+this_date.getDate());
 			if(this_date.getDate() == parseInt(parseFloat(strDay))){
 				found = true;
 				break;
@@ -467,7 +496,6 @@ function checkSpecifyDate(objname, strDay, strMonth, strYear){
 		  }
 		}
 	}
-
 
 	if(!found){
 		var choose_date = new Date(strYear, strMonth-1, strDay);
@@ -536,4 +564,94 @@ function setDateLabel(objname){
 		}
 		lbl.innerHTML = dateTxt;
 	}
+}
+
+function sprintf()
+{
+   if (!arguments || arguments.length < 1 || !RegExp)
+   {
+      return;
+   }
+   var str = arguments[0];
+   var re = /([^%]*)%('.|0|\x20)?(-)?(\d+)?(\.\d+)?(%|b|c|d|u|f|o|s|x|X)(.*)/;
+   var a = b = [], numSubstitutions = 0, numMatches = 0;
+   while (a = re.exec(str))
+   {
+      var leftpart = a[1], pPad = a[2], pJustify = a[3], pMinLength = a[4];
+      var pPrecision = a[5], pType = a[6], rightPart = a[7];
+
+      numMatches++;
+      if (pType == '%')
+      {
+         subst = '%';
+      }
+      else
+      {
+         numSubstitutions++;
+         if (numSubstitutions >= arguments.length)
+         {
+            alert('Error! Not enough function arguments (' + (arguments.length - 1)
+               + ', excluding the string)\n'
+               + 'for the number of substitution parameters in string ('
+               + numSubstitutions + ' so far).');
+         }
+         var param = arguments[numSubstitutions];
+         var pad = '';
+                if (pPad && pPad.substr(0,1) == "'") pad = leftpart.substr(1,1);
+           else if (pPad) pad = pPad;
+         var justifyRight = true;
+                if (pJustify && pJustify === "-") justifyRight = false;
+         var minLength = -1;
+                if (pMinLength) minLength = parseInt(pMinLength);
+         var precision = -1;
+                if (pPrecision && pType == 'f')
+                   precision = parseInt(pPrecision.substring(1));
+         var subst = param;
+         switch (pType)
+         {
+         case 'b':
+            subst = parseInt(param).toString(2);
+            break;
+         case 'c':
+            subst = String.fromCharCode(parseInt(param));
+            break;
+         case 'd':
+            subst = parseInt(param) ? parseInt(param) : 0;
+            break;
+         case 'u':
+            subst = Math.abs(param);
+            break;
+         case 'f':
+            subst = (precision > -1)
+             ? Math.round(parseFloat(param) * Math.pow(10, precision))
+              / Math.pow(10, precision)
+             : parseFloat(param);
+            break;
+         case 'o':
+            subst = parseInt(param).toString(8);
+            break;
+         case 's':
+            subst = param;
+            break;
+         case 'x':
+            subst = ('' + parseInt(param).toString(16)).toLowerCase();
+            break;
+         case 'X':
+            subst = ('' + parseInt(param).toString(16)).toUpperCase();
+            break;
+         }
+         var padLeft = minLength - subst.toString().length;
+         if (padLeft > 0)
+         {
+            var arrTmp = new Array(padLeft+1);
+            var padding = arrTmp.join(pad?pad:" ");
+         }
+         else
+         {
+            var padding = "";
+         }
+      }
+      str = leftpart + padding + subst + rightPart;
+   }
+   return str;
 }

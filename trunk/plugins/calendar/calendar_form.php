@@ -33,6 +33,8 @@ $date_pair2 = (isset($_REQUEST["pr2"])) ? $_REQUEST["pr2"] : "";
 $date_pair_value = (isset($_REQUEST["prv"])) ? $_REQUEST["prv"] : "";
 $path = (isset($_REQUEST["pth"])) ? $_REQUEST["pth"] : "";
 $hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : 'en_US';
+$al = (isset($_REQUEST["al"])) ? $_REQUEST["al"] : ALIGN;
+$dir = (isset($_REQUEST["dir"])) ? $_REQUEST["dir"] : DIR;
 $sp_dates = (isset($_REQUEST["spd"])) ? @tc_calendar::check_json_decode($_REQUEST["spd"]) : array(array(), array(), array());
 $sp_type = (isset($_REQUEST["spt"])) ? $_REQUEST["spt"] : 0;
 $tc_onchanged = (isset($_REQUEST["och"])) ? $_REQUEST["och"] : "";
@@ -144,12 +146,12 @@ else
 	$startwrite = $total_lastmonth - ($startdate - 1);
 
 if($cobj->hl){
-	$to_replace = array("d","%"," ",".",",","年","日");
+	$to_replace = array("d","%"," ",".",",","ב","年","日");
 	$order = str_replace($to_replace,"",L_CAL_FORMAT);
-	if(strpos($order,"B") == 0) $first_input = "B";
-	elseif(strpos($order,"Y") == 0) $first_input = "Y";
-	if(strpos($order,"B") == 1) $second_input = "B";
-	elseif(strpos($order,"Y") == 1) $second_input = "Y";
+	if(strpos($order,"B") == 0 && $dir != "rtl") $first_input = "B";
+	elseif(strpos($order,"Y") == 0 || $dir == "rtl") $first_input = "Y";
+	if(strpos($order,"B") == 1 || $dir == "rtl") $second_input = "B";
+	elseif(strpos($order,"Y") == 1 && $dir != "rtl") $second_input = "Y";
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -315,11 +317,11 @@ window.onload = function(){
             $monthnames = $cobj->getMonthNames();
 			if ($first_input == "B"){
 			?>
-              <td align="left"><select name="m" onchange="javascript:submitCalendar();">
+              <td align="left"><select name="m" onchange="javascript:submitCalendar();" dir="<?php echo(DIR); ?>">
               <?php
               for($f=1; $f<=sizeof($monthnames); $f++){
                 $selected = ($f == (int)$m) ? " selected" : "";
-                echo("<option value=\"".str_pad($f, 2, "0", STR_PAD_LEFT)."\"$selected>".$monthnames[$f-1]."</option>");
+                echo("<option value=\"".str_pad($f, 2, "0", STR_PAD_LEFT)."\"$selected dir=\"".DIR."\">".$monthnames[$f-1]."</option>");
               }
               ?>
               </select>
@@ -328,14 +330,14 @@ window.onload = function(){
 			}
 			elseif ($first_input == "Y"){
 			?>
-              <td align="left"><select name="y" onchange="javascript:submitCalendar();">
+              <td align="left"><select name="y" onchange="javascript:submitCalendar();" dir="<?php echo(DIR); ?>">
               <?php
               $thisyear = date('Y');
 
               //write year options
               for($year=$year_end; $year>=$year_start; $year--){
                 $selected = ($year == $y) ? " selected" : "";
-                echo("<option value=\"$year\"$selected>$year</option>");
+                echo("<option value=\"$year\"$selected dir=\"".DIR."\">$year</option>");
               }
               ?>
               </select>
@@ -344,11 +346,11 @@ window.onload = function(){
 			}
 			if ($second_input == "B"){
 			?>
-              <td align="right"><select name="m" onchange="javascript:submitCalendar();">
+              <td align="right"><select name="m" onchange="javascript:submitCalendar();" dir="<?php echo(DIR); ?>">
               <?php
               for($f=1; $f<=sizeof($monthnames); $f++){
                 $selected = ($f == (int)$m) ? " selected" : "";
-                echo("<option value=\"".str_pad($f, 2, "0", STR_PAD_LEFT)."\"$selected>".$monthnames[$f-1]."</option>");
+                echo("<option value=\"".str_pad($f, 2, "0", STR_PAD_LEFT)."\"$selected dir=\"".DIR."\">".$monthnames[$f-1]."</option>");
               }
               ?>
               </select>
@@ -357,14 +359,14 @@ window.onload = function(){
 			}
 			elseif ($second_input == "Y"){
 			?>
-              <td align="right"><select name="y" onchange="javascript:submitCalendar();">
+              <td align="right"><select name="y" onchange="javascript:submitCalendar();" dir="<?php echo(DIR); ?>">
               <?php
               $thisyear = date('Y');
 
               //write year options
               for($year=$year_end; $year>=$year_start; $year--){
                 $selected = ($year == $y) ? " selected" : "";
-                echo("<option value=\"$year\"$selected>$year</option>");
+                echo("<option value=\"$year\"$selected dir=\"".DIR."\">$year</option>");
               }
               ?>
               </select>
@@ -396,6 +398,8 @@ window.onload = function(){
             <input name="prv" type="hidden" id="prv" value="<?php echo($date_pair_value);?>" />
             <input name="pth" type="hidden" id="pth" value="<?php echo($path);?>" />
             <input name="hl" type="hidden" id="hl" value="<?php echo($hl);?>" />
+            <input name="al" type="hidden" id="al" value="<?php echo($al);?>" />
+            <input name="dir" type="hidden" id="dir" value="<?php echo($dir);?>" />
             <input name="spd" type="hidden" id="spd" value="<?php echo($cobj->check_json_encode($sp_dates));?>" />
             <input name="spt" type="hidden" id="spt" value="<?php echo($sp_type);?>" />
             <input name="och" type="hidden" id="och" value="<?php echo(urldecode($tc_onchanged));?>" />
