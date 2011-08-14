@@ -19,6 +19,9 @@ define("L_SEL_ICON", "Seleccione Icon");
 define("L_SEL_DATE", "Seleccione Data");
 define("L_ERR_SEL", "A sua escolha não é válida");
 define("L_NOT_ALLOWED", "Esta data não pode ser seleccionada");
+define("L_DATE_BEFORE", "Escolha uma data anterior a %s");
+define("L_DATE_AFTER", "Escolha uma data depois de %s");
+define("L_DATE_BETWEEN", "Escolha uma data entre\\n%s e %s");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

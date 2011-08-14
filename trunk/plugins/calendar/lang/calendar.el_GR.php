@@ -19,6 +19,9 @@ define("L_SEL_ICON", "Επέλεξε εικονίδιο");
 define("L_SEL_DATE", "Επέλεξε ημέρα");
 define("L_ERR_SEL", "Λάθος επιλογή");
 define("L_NOT_ALLOWED", "Δεν επιτρέπετε η επιλογή αυτής της ημέρας");
+define("L_DATE_BEFORE", "Επιλέξτε μια ημερομηνία πριν από την %s");
+define("L_DATE_AFTER", "Επιλέξτε μια ημερομηνία μετά την %s");
+define("L_DATE_BETWEEN", "Επιλέξτε μια ημερομηνία μεταξύ\\n%s και %s");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

@@ -19,6 +19,9 @@ define("L_SEL_ICON", "Selecteer Icoon");
 define("L_SEL_DATE", "Selecteer Datum");
 define("L_ERR_SEL", "Dit is geen geldige selectie");
 define("L_NOT_ALLOWED", "Dit is geen geldige datum");
+define("L_DATE_BEFORE", "Kies een datum vóór %s");
+define("L_DATE_AFTER", "Kies een datum na %s");
+define("L_DATE_BETWEEN", "Kies een datum tussen\\n%s en %s");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

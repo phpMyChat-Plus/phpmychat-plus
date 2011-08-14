@@ -19,6 +19,9 @@ define("L_SEL_ICON", "Изберете иконка");
 define("L_SEL_DATE", "Изберете дата");
 define("L_ERR_SEL", "Невалиден избор");
 define("L_NOT_ALLOWED", "Тази дата не е позволена за избор");
+define("L_DATE_BEFORE", "Моля, изберете дата преди %s");
+define("L_DATE_AFTER", "Моля, изберете дата след %s");
+define("L_DATE_BETWEEN", "Моля, изберете дата между\\n%s и %s");
 
 // Set the first day of the week in your language
 define("FIRST_DAY", "1"); // 1 for Monday, 0 for Sunday

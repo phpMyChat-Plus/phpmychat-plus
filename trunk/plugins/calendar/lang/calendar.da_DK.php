@@ -19,6 +19,9 @@ define("L_SEL_ICON", "Vælg ikon");
 define("L_SEL_DATE", "Vælg dato");
 define("L_ERR_SEL", "Ugyldigt valg");
 define("L_NOT_ALLOWED", "Du kan ikke vælge denne dato");
+define("L_DATE_BEFORE", "Vælg en dato før %s");
+define("L_DATE_AFTER", "Vælg en dato, efter %s");
+define("L_DATE_BETWEEN", "Vælg en dato mellem\\n%s og %s");
 
 // Set the first day of the week in your language
 define("FIRST_DAY", "1"); // 1 for Monday, 0 for Sunday

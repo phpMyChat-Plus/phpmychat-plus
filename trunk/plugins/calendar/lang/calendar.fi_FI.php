@@ -21,7 +21,7 @@ define("L_ERR_SEL", "Valintasi ei ole kelvollinen");
 define("L_NOT_ALLOWED", "Tätä päivämäärää ei voi valita");
 define("L_DATE_BEFORE", "Valitse päivämäärä ennen %s");
 define("L_DATE_AFTER", "Valitse päivämäärä %s jälkeen");
-define("L_DATE_BETWEEN", "Valitse päivämäärä väliltä\n %s ja %s");
+define("L_DATE_BETWEEN", "Valitse päivämäärä väliltä\\n%s ja %s");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

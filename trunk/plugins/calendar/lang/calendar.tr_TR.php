@@ -19,6 +19,9 @@ define("L_SEL_ICON", "İkon Seçimi");
 define("L_SEL_DATE", "Tarih Seçimi");
 define("L_ERR_SEL", "Geçersiz bir seçim yeptınız");
 define("L_NOT_ALLOWED", "Bu tarihin seçilmesine izin verilmiyor");
+define("L_DATE_BEFORE", "%s öncesi bir tarih seçin");
+define("L_DATE_AFTER", "%s sonra bir tarih seçin");
+define("L_DATE_BETWEEN", "%s ve %s\\narasındaki bir tarih seçin");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

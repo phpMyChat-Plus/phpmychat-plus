@@ -19,6 +19,9 @@ define("L_SEL_ICON", "Pilih Ikon");
 define("L_SEL_DATE", "Pilih Tanggal");
 define("L_ERR_SEL", "Pilihan yang ada pilih salah");
 define("L_NOT_ALLOWED", "Tanggal ini tidak dijinkan untuk dipilih");
+define("L_DATE_BEFORE", "Silakan memilih tanggal sebelum %s");
+define("L_DATE_AFTER", "Silakan pilih tanggal setelah %s");
+define("L_DATE_BETWEEN", "Silakan pilih tanggal antara\\n%s dan %s");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
