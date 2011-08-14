@@ -22,6 +22,9 @@ define("L_SEL_ICON", "בחר צלמית");
 define("L_SEL_DATE", "בחר תאריך");
 define("L_ERR_SEL", "הבחירה שלך לא תקינה");
 define("L_NOT_ALLOWED", "אי אפשר לבחור תאריך זה");
+define("L_DATE_BEFORE", "%s אנא בחר תאריך לפני");
+define("L_DATE_AFTER", "%s אנא בחר תאריך אחר");
+define("L_DATE_BETWEEN", "%s ו %s\\nאנא בחר תאריך בין");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "0");

@@ -19,6 +19,9 @@ define("L_SEL_ICON", "Válassz ikont");
 define("L_SEL_DATE", "Válassz dátumot");
 define("L_ERR_SEL", "A választásod nem érvényes");
 define("L_NOT_ALLOWED", "Ezt a dátumot nem lehet kiválasztani");
+define("L_DATE_BEFORE", "Kérjük, válasszon egy dátumot előtt %s");
+define("L_DATE_AFTER", "Kérjük, válasszon egy dátumot követően %s");
+define("L_DATE_BETWEEN", "Kérjük, válasszon egy dátumot közötti\\n%s és %s");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

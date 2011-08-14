@@ -19,6 +19,9 @@ define("L_SEL_ICON", "Lựa chọn biểu tượng");
 define("L_SEL_DATE", "Lựa chọn ngày");
 define("L_ERR_SEL", "Sự lựa chọn của bạn không hợp lệ");
 define("L_NOT_ALLOWED", "Ngày không được chấp nhận để chọn");
+define("L_DATE_BEFORE", "Hãy chọn một ngày trước khi %s");
+define("L_DATE_AFTER", "Hãy chọn một ngày sau khi %s");
+define("L_DATE_BETWEEN", "Hãy chọn một ngày giữa\\n%s %s");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

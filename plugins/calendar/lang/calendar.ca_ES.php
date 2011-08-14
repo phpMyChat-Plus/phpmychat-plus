@@ -19,6 +19,9 @@ define("L_SEL_ICON", "Selecciona icone");
 define("L_SEL_DATE", "Selecciona data");
 define("L_ERR_SEL", "La selecció no és vàlida");
 define("L_NOT_ALLOWED", "Aquesta data no és permesa");
+define("L_DATE_BEFORE", "Si us plau, escolliu una data anterior a %s");
+define("L_DATE_AFTER", "Si us plau, escolliu una data posterior al %s");
+define("L_DATE_BETWEEN", "Si us plau, escolliu una data entre el\\n%s i el %s");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
