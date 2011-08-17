@@ -19,6 +19,9 @@ define("L_SEL_ICON", "Odaberi sliku");
 define("L_SEL_DATE", "Odaberi datum");
 define("L_ERR_SEL", "Vaš izbor nije ispravan");
 define("L_NOT_ALLOWED", "Ovaj datum nemože biti odabran");
+define("L_DATE_BEFORE", "Odaberite prethodni datum %s");
+define("L_DATE_AFTER", "Odaberite datum nakon %s");
+define("L_DATE_BETWEEN", "Odaberite datum izmedju\\n%s i %s");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

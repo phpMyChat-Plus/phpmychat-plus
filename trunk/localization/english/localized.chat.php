@@ -658,26 +658,30 @@ define("L_LANG_ENUK", "English UK"); // for UK formats and flags
 define("L_LANG_ENUS", "English US"); // for US formats and flags
 define("L_LANG_ES", "Spanish");
 define("L_LANG_FA", "Persian (Farsi)");
+define("L_LANG_FI", "Finnish");
 define("L_LANG_FR", "French");
 define("L_LANG_GR", "Greek");
 define("L_LANG_HE", "Hebrew");
-define("L_LANG_HI", "Hindi");
+define("L_LANG_HI", "Hindi (Devanagari)");
 define("L_LANG_HU", "Hungarian");
 define("L_LANG_ID", "Indonesian (Bahasa)");
 define("L_LANG_IT", "Italian");
 define("L_LANG_JA", "Japanese (Kanji)");
 define("L_LANG_KA", "Georgian");
+define("L_LANG_NB", "Norwegian (Bokmål)");
 define("L_LANG_NE", "Nepali");
 define("L_LANG_NL", "Dutch");
 define("L_LANG_PL", "Polish");
+define("L_LANG_PT", "Portuguese");
 define("L_LANG_RO", "Romanian");
-define("L_LANG_RU", "Russian");
+define("L_LANG_RU", "Russian - Cyrillic");
 define("L_LANG_SK", "Slovak");
 define("L_LANG_SRC", "Serbian - Cyrillic");
 define("L_LANG_SRL", "Serbian - Latin");
 define("L_LANG_SV", "Swedish");
+define("L_LANG_TH", "Thai");
 define("L_LANG_TR", "Turkish");
-define("L_LANG_UK", "Ukrainian");
+define("L_LANG_UK", "Ukrainian - Cyrillic");
 define("L_LANG_UR", "Urdu");
 define("L_LANG_VI", "Vietnamese");
 define("L_LANG_YO", "Yoruba"); // Nigeria&Congo language

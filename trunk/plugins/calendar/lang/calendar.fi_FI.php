@@ -2,7 +2,7 @@
 # fi_FI translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 3.56
-# Language: Finnish / suomi (in your lang) // ex: Romanian / Română
+# Language: Finnish / suomi // ex: Romanian / Română
 # Translator: Ilja Mäki <iksa@netti.fi>
 # Last file update: 11.07.2011
 
@@ -76,8 +76,8 @@ if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "fi_FI"); // en_US
 
 // Set the FI specific date/time format
 if (stristr(PHP_OS,"win")) {
-setlocale(LC_ALL, "fin_fin.UTF-8", "fi_FI@euro", "fi_FI", "finnish");
+setlocale(LC_ALL, "fin_fin.UTF-8", "fi_FI@euro", "fi_FI.UTF-8", "Finnish_Finland");
 } else {
-setlocale(LC_ALL, "fi_FI.UTF-8", "fi_FI@euro", "fi_FI", "finnish");
+setlocale(LC_ALL, "fi_FI.UTF-8", "fi_FI@euro", "fi_FI", "Finnish.UTF-8");
 }
 ?>
