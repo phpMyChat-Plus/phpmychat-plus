@@ -53,19 +53,19 @@ define("L_S_DEC", "Dìs");
 // Week days Long Names
 define("L_MON", "Ajé");
 define("L_TUE", "Ìṣẹ́gun");
-define("L_WED", "Rìrú");
+define("L_WED", "Rú");
 define("L_THU", "Bọ̀");
 define("L_FRI", "Ẹ̀tì");
 define("L_SAT", "Àbámẹ́ta");
 define("L_SUN", "Àìkú");
 // Week days Short Names
-define("L_S_MON", "Ajé");
-define("L_S_TUE", "Ìṣẹ́");
-define("L_S_WED", "Rì");
+define("L_S_MON", "Aj");
+define("L_S_TUE", "Ìṣ");
+define("L_S_WED", "Rú");
 define("L_S_THU", "Bọ̀");
-define("L_S_FRI", "Ẹ̀tì");
-define("L_S_SAT", "Àbá");
-define("L_S_SUN", "Àìkú");
+define("L_S_FRI", "Ẹ̀t");
+define("L_S_SAT", "Àb");
+define("L_S_SUN", "Àì");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1252");
