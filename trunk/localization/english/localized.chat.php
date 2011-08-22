@@ -669,6 +669,7 @@ define("L_LANG_IT", "Italian");
 define("L_LANG_JA", "Japanese (Kanji)");
 define("L_LANG_KA", "Georgian");
 define("L_LANG_NB", "Norwegian (Bokmål)");
+define("L_LANG_NN", "Norwegian (Nynorsk)");
 define("L_LANG_NE", "Nepali");
 define("L_LANG_NL", "Dutch");
 define("L_LANG_PL", "Polish");

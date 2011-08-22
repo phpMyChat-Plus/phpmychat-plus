@@ -1,5 +1,5 @@
 <?php
-// "Black & white" skin for phpMyChat plus - by BluntDog
+// "OrangeVisions" skin for phpMyChat plus - by Ciprian
 
 $SKIN_NAME = "OrangeVisions";
 $SKIN_DATE = "2011".((date('Y')>"2011") ? "-".date('Y') : "");

@@ -651,6 +651,7 @@ define("L_LANG_IT", "italiană");
 define("L_LANG_JA", "japoneză (kanji)");
 define("L_LANG_KA", "georgiană");
 define("L_LANG_NB", "norvegiană (bokmål)");
+define("L_LANG_NN", "norvegiană (nynorsk)");
 define("L_LANG_NE", "nepaleză");
 define("L_LANG_NL", "olandeză");
 define("L_LANG_PL", "poloneză");

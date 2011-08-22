@@ -589,6 +589,9 @@ define("C_NUKE_BB_PATH", $NUKE_BB_PATH);
 // Added for owner personalizations to all the languages by Ciprian
 if(is_dir('./'.$ChatPath.'localization/_owner/') && file_exists('./'.$ChatPath.'localization/_owner/owner.php')) include("./${ChatPath}localization/_owner/owner.php");
 
+// Added for Original Language names by Ciprian
+if(file_exists('./'.$ChatPath.'localization/langnames.lib.php')) include("./${ChatPath}localization/langnames.lib.php");
+
 //Check for php server version
 define("PHPVERSION", phpversion());
 

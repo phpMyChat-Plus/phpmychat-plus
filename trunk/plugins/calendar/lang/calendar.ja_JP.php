@@ -53,13 +53,13 @@ define("L_S_OCT", "10月");
 define("L_S_NOV", "11月");
 define("L_S_DEC", "12月");
 // Week days Long Names
-define("L_MON", "月");
-define("L_TUE", "火");
-define("L_WED", "水");
-define("L_THU", "木");
-define("L_FRI", "金");
-define("L_SAT", "土");
-define("L_SUN", "日");
+define("L_MON", "月曜日");
+define("L_TUE", "火曜日");
+define("L_WED", "水曜日");
+define("L_THU", "木曜日");
+define("L_FRI", "金曜日");
+define("L_SAT", "土曜日");
+define("L_SUN", "日曜日");
 // Week days Short Names
 define("L_S_MON", "月");
 define("L_S_TUE", "火");
