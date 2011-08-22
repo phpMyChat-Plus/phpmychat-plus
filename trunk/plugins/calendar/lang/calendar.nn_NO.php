@@ -5,7 +5,7 @@
 # Version: 3.60
 # Language: Norwegian (Nynorsk) / norsk, nynorsk
 # Translator: Stian Hvatum <post@dream-web.no>
-# Last file update: 21.08.2011
+# Last file update: 22.08.2011
 
 // Class strings localization
 define("L_DAY", "Dag");
@@ -15,14 +15,14 @@ define("L_PREV", "Førre");
 define("L_NEXT", "Neste");
 define("L_REF_CAL", "Oppdaterer kalenderen...");
 define("L_CHK_VAL", "Sjekk verdien");
-define("L_SEL_LANG", "Velja språk");
-define("L_SEL_ICON", "Velja ikon");
-define("L_SEL_DATE", "Velja dato");
-define("L_ERR_SEL", "Valget er ikke gyldig");
+define("L_SEL_LANG", "Vel språk");
+define("L_SEL_ICON", "Vel ikon");
+define("L_SEL_DATE", "Vel dato");
+define("L_ERR_SEL", "Valet er ikkje gyldig");
 define("L_NOT_ALLOWED", "Denne datoen kan ikkje veljast");
-define("L_DATE_BEFORE", "Velja ein dato førre %s");
-define("L_DATE_AFTER", "Velja ein dato etter %s");
-define("L_DATE_BETWEEN", "Velja ein dato mellom\\n%s og %s");
+define("L_DATE_BEFORE", "Vel ein dato førre %s");
+define("L_DATE_AFTER", "Vel ein dato etter %s");
+define("L_DATE_BETWEEN", "Vel ein dato mellom\\n%s og %s");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
