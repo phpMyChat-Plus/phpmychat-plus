@@ -1,15 +1,16 @@
 <?php
 # ca_ES translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.3
+# Version: 3.61
 # Language: Catalan / català (in your lang) // ex: Romanian / Română
 # Translator: Jordi Babot <jordibabot@gmail.com>
-# Last file update: 22.02.2011
+# Last file update: 01.09.2011
 
 // Class strings localization
 define("L_DAY", "Dia");
 define("L_MONTH", "Mes");
 define("L_YEAR", "Any");
+define("L_TODAY", "Avui");
 define("L_PREV", "Anterior");
 define("L_NEXT", "Següent");
 define("L_REF_CAL", "Refrescant Calendari...");
@@ -19,9 +20,11 @@ define("L_SEL_ICON", "Selecciona icone");
 define("L_SEL_DATE", "Selecciona data");
 define("L_ERR_SEL", "La selecció no és vàlida");
 define("L_NOT_ALLOWED", "Aquesta data no és permesa");
-define("L_DATE_BEFORE", "Si us plau, escolliu una data anterior a %s");
-define("L_DATE_AFTER", "Si us plau, escolliu una data posterior al %s");
-define("L_DATE_BETWEEN", "Si us plau, escolliu una data entre el\\n%s i el %s");
+define("L_DATE_BEFORE", "Sisplau, selecciona una data abans del %s");
+define("L_DATE_AFTER", "Sisplau, selecciona una data després del %s");
+define("L_DATE_BETWEEN", "Sisplau, selecciona una data entre el\\n%s i el %s");
+define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
+define("L_UNSET", "Cap");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

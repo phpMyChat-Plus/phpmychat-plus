@@ -2,15 +2,18 @@
 # xx_YY translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Localized version of PHP-Calendar, DatePicker Calendar class: http://ciprianmp.com/scripts/calendar/
-# Version: 3.60
+# Version: 3.61
 # Language: Lang_name / Orig_name // ex: Romanian (English name) / Română (Original name)
 # Translator: YourName <email@...>
-# Last file update: xx.xx.201x
+# Last file update: 01.09.2011
+
+# define("RTL", 1); // uncomment only for right-to-left text (Arabic, Hebrew)
 
 // Class strings localization
 define("L_DAY", "Day");
 define("L_MONTH", "Month");
 define("L_YEAR", "Year");
+define("L_TODAY", "Today");
 define("L_PREV", "Previous");
 define("L_NEXT", "Next");
 define("L_REF_CAL", "Refreshing Calendar...");
@@ -23,8 +26,10 @@ define("L_NOT_ALLOWED", "This date is not allowed to be selected");
 define("L_DATE_BEFORE", "Please choose a date before %s");
 define("L_DATE_AFTER", "Please choose a date after %s");
 define("L_DATE_BETWEEN", "Please choose a date between\\n%s and %s");
+define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
+define("L_UNSET", "Unset");
 
-// Set the first day of the week in your language (0 for Sunday, 1 for Monday)
+// Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "0");
 
 // Months Long Names

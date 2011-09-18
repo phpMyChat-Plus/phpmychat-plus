@@ -1,15 +1,16 @@
 <?php
 # de_DE translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 2.30
+# Version: 3.61
 # Language: German / Deutsch
 # Translator: Thomas Pschernig <tpsde1970@aol.com>
-# Last file update: 01.05.2010
+# Last file update: 01.09.2011
 
 // Class strings localization
 define("L_DAY", "Tag");
 define("L_MONTH", "Monat");
 define("L_YEAR", "Jahr");
+define("L_TODAY", "Heute");
 define("L_PREV", "Zurück");
 define("L_NEXT", "Vor");
 define("L_REF_CAL", "Kalender Aktualisieren...");
@@ -22,6 +23,8 @@ define("L_NOT_ALLOWED", "Dieses Datum kann man nicht auswählen");
 define("L_DATE_BEFORE", "Bitte wählen Sie ein Datum vor dem %s");
 define("L_DATE_AFTER", "Bitte wählen Sie ein Datum nach %s");
 define("L_DATE_BETWEEN", "Bitte wählen Sie ein Datum zwischen\\n%s und %s");
+define("L_WEEK_HDR", "KW"); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
+define("L_UNSET", "Stornieren");
 
 // Set the first day of the week in your language
 define("FIRST_DAY", "1"); // 1 for Monday, 0 for Sunday

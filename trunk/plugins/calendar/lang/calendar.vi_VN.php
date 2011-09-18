@@ -1,16 +1,17 @@
 <?php
 # vi_VN translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.2
+# Version: 3.61
 # Language: Vietnamese / Tiếng Việt
 # Translator: Marshall <hellomarshal_lookatme@yahoo.com.vn>
-# Last file update: 01.05.2010
+# Last file update: 01.09.2011
 
 // Class strings localization
 define("L_DAY", "Ngày");
 define("L_MONTH", "Tháng");
 define("L_YEAR", "Năm");
-define("L_PREV", "Trước đây");
+define("L_TODAY", "Hôm nay");
+define("L_PREV", "Trước");
 define("L_NEXT", "Tiếp theo");
 define("L_REF_CAL", "Lịch làm mới...");
 define("L_CHK_VAL", "Kiểm tra giá trị");
@@ -22,6 +23,8 @@ define("L_NOT_ALLOWED", "Ngày không được chấp nhận để chọn");
 define("L_DATE_BEFORE", "Hãy chọn một ngày trước khi %s");
 define("L_DATE_AFTER", "Hãy chọn một ngày sau khi %s");
 define("L_DATE_BETWEEN", "Hãy chọn một ngày giữa\\n%s %s");
+define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
+define("L_UNSET", "Bỏ đặt");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

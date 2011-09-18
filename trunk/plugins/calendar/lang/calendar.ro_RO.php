@@ -1,15 +1,16 @@
 <?php
 # ro_RO translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 2.30
+# Version: 3.61
 # Language: Romanian / Română
 # Translator: Ciprian Murariu <ciprianmp@yahoo.com>
-# Last file update: 01.05.2010
+# Last file update: 01.09.2011
 
 // Class strings localization
 define("L_DAY", "Ziua");
 define("L_MONTH", "Luna");
 define("L_YEAR", "Anul");
+define("L_TODAY", "Azi");
 define("L_PREV", "Înapoi");
 define("L_NEXT", "Înainte");
 define("L_CHK_VAL", "Verifică valoarea");
@@ -22,6 +23,8 @@ define("L_NOT_ALLOWED", "Nu este permisă selectarea acestei date!");
 define("L_DATE_BEFORE", "Selectaţi o dată înainte de %s!");
 define("L_DATE_AFTER", "Selectaţi o dată după %s!");
 define("L_DATE_BETWEEN", "Selectaţi o dată între\\n%s şi %s!");
+define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
+define("L_UNSET", "Anulare");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

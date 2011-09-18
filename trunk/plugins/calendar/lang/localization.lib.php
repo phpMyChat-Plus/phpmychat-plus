@@ -1,10 +1,10 @@
 <?php
 # en_US - this file includes the specific strings for both en_GB/en_US
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.53
+# Version: 3.61
 # Language: American English / English US
 # Translator: Ciprian Murariu <ciprianmp@yahoo.com>
-# Last file update: 16.04.2011
+# Last file update: 29.08.2011
 
 if (!function_exists('utf_conv'))
 {
@@ -32,11 +32,11 @@ else
 };
 
 // English US format and localization - default strings when the specified translation is not available
-if(!defined("ALIGN")) define("ALIGN", "");
-if(!defined("DIR")) define("DIR", "ltr");
+if(!defined("RTL")) define("RTL", 0);
 if(!defined("L_DAY")) define("L_DAY", "Day");
 if(!defined("L_MONTH")) define("L_MONTH", "Month");
 if(!defined("L_YEAR")) define("L_YEAR", "Year");
+if(!defined("L_TODAY")) define("L_TODAY", "Today");
 if(!defined("L_PREV")) define("L_PREV", "Previous");
 if(!defined("L_NEXT")) define("L_NEXT", "Next");
 if(!defined("L_REF_CAL")) define("L_REF_CAL", "Refreshing Calendar...");
@@ -49,6 +49,8 @@ if(!defined("L_NOT_ALLOWED")) define("L_NOT_ALLOWED", "This date is not allowed 
 if(!defined("L_DATE_BEFORE")) define("L_DATE_BEFORE", "Please choose a date before %s");
 if(!defined("L_DATE_AFTER")) define("L_DATE_AFTER", "Please choose a date after %s");
 if(!defined("L_DATE_BETWEEN")) define("L_DATE_BETWEEN", "Please choose a date between\\n%s and %s");
+if(!defined("L_WEEK_HDR")) define("L_WEEK_HDR", "");
+if(!defined("L_UNSET")) define("L_UNSET", "Unset");
 
 // Set the first day of the week in your language
 if(!defined("FIRST_DAY")) define("FIRST_DAY", "0"); // 1 for Monday, 0 for Sunday

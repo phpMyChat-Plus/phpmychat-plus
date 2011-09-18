@@ -6,7 +6,7 @@
 // add on: translation  implemented - default is English en_US
 //	- thanks ciprianmp
 //
-// version 3.60-loc (14 August 2011)
+// version 3.61-loc (17 September 2011)
 
 //fixed: Incorrect next month display show on 'February 2008'
 //	- thanks Neeraj Jain for bug report
@@ -49,7 +49,7 @@
 //add on: setHeight() function to set the height of iframe container of calendar
 //	- thanks Nolochemcial
 //
-//add on: startMonday() function to set calendar display first day of week on Monday
+//add on: startMonday() function to set calendar display first day of week on Monday - deprecated since 3.61 and replaced by startDate()
 //
 //fixed: don't display year when not in year interval
 //
@@ -115,7 +115,17 @@
 //adjusted: change the color of today date to green with border
 //	- thanks ciprianmp
 //
-//********************************************************
+//adjusted: rearrange source code on calendar_form.php for future use
+//
+//add on: showWeeks function
+//	- thanks Michael
+//
+//add on: support for RTL (right-to-left output)
+//	- thanks ciprianmp
+//
+//add on: startDate function and will be used instead of startMonday
+//
+////********************************************************
 
 if((defined("L_LANG") && L_LANG != "en_US" && L_LANG != "L_LANG") || isset($lang) && $lang != "en_US") include_once("lang/calendar.".(isset($lang) ? $lang : L_LANG).".php");
 include_once("lang/localization.lib.php");
@@ -148,7 +158,7 @@ class tc_calendar{
 	var $height = 205;
 	var $year_start;
 	var $year_end;
-	var $startMonday = FIRST_DAY;
+	var $startDate = FIRST_DAY; //0 (for Sunday) through 6 (for Saturday)
 	var $time_allow1 = false;
 	var $time_allow2 = false;
 	var $show_not_allow = false;
@@ -164,12 +174,14 @@ class tc_calendar{
 	var $date_pair1 = "";
 	var $date_pair2 = "";
 	var $date_pair_value = "";
-	var $hl = L_LANG;
-	var $al = ALIGN;
-	var $dir = DIR;
 	var $sp_dates = array(array(), array(), array()); //array[0]=no recursive, array[1]=monthly, array[0]=yearly
 	var $sp_type = 0; //0=disabled specify date, 1=enabled only specify date
 	var $tc_onchanged = "";
+	var $rtl = RTL;
+	var $show_week = false;
+	var $week_hdr = L_WEEK_HDR;
+	var $interval = 1;
+	var $hl = L_LANG;
 
 	//calendar constructor
 	function tc_calendar($objname, $date_picker = false, $show_input = true){
@@ -207,11 +219,20 @@ class tc_calendar{
 
 	//get the day headers start from sunday till saturday
 	function getDayHeaders(){
-		if($this->startMonday){
-			return array("1"=>L_S_MON, "2"=>L_S_TUE, "3"=>L_S_WED, "4"=>L_S_THU, "5"=>L_S_FRI, "6"=>L_S_SAT, "7"=>L_S_SUN);
-		}else{
-			return array("7"=>L_S_SUN, "1"=>L_S_MON, "2"=>L_S_TUE, "3"=>L_S_WED, "4"=>L_S_THU, "5"=>L_S_FRI, "6"=>L_S_SAT);
+		$rtn_hdrs = array();
+		$hdrs = array("0"=>L_S_SUN, "1"=>L_S_MON, "2"=>L_S_TUE, "3"=>L_S_WED, "4"=>L_S_THU, "5"=>L_S_FRI, "6"=>L_S_SAT);
+
+		$startdate = $this->startDate;
+
+		for($i=0; $i<=6; $i++){
+			if($startdate >= sizeof($hdrs)) $startdate = 0;
+			//if(isset($hdrs[(string)$startdate]))
+				$rtn_hdrs[] = $hdrs[(string)$startdate];
+
+			$startdate++;
 		}
+
+		return $rtn_hdrs;
 	}
 
 	function setIcon($icon){
@@ -264,42 +285,40 @@ class tc_calendar{
 
 		//check whether it is a date picker
 		if($this->date_picker){
-//			echo("<span style=\"position: relative; z-index: $this->zindex;\">");
 			echo("<div style=\"position: relative; z-index: $this->zindex; float: left;\">");
 
 			if($this->show_input){
 				if($this->hl){
 					$to_replace = array("%"," ",".",",","ב","年","日");
 					$order = str_replace($to_replace,"",L_CAL_FORMAT);
-					if(strpos($order,"d") == 0 && $this->dir != "rtl") $this->writeDay();
-					elseif(strpos($order,"B") == 0 && $this->dir != "rtl") $this->writeMonth();
-					elseif(strpos($order,"Y") == 0 || $this->dir == "rtl") $this->writeYear();
-					if(strpos($order,"d") == 1 && $this->dir != "rtl") $this->writeDay();
-					elseif(strpos($order,"B") == 1 || $this->dir == "rtl") $this->writeMonth();
-					elseif(strpos($order,"Y") == 1 && $this->dir != "rtl") $this->writeYear();
-					if(strpos($order,"d") == 2 || $this->dir == "rtl") $this->writeDay();
-					elseif(strpos($order,"B") == 2 && $this->dir != "rtl") $this->writeMonth();
-					elseif(strpos($order,"Y") == 2 && $this->dir != "rtl") $this->writeYear();
+					if(strpos($order,"d") == 0 && !$this->rtl) $this->writeDay();
+					elseif(strpos($order,"B") == 0 && !$this->rtl) $this->writeMonth();
+					elseif(strpos($order,"Y") == 0 || $this->rtl) $this->writeYear();
+					if(strpos($order,"d") == 1 && !$this->rtl) $this->writeDay();
+					elseif(strpos($order,"B") == 1 || $this->rtl) $this->writeMonth();
+					elseif(strpos($order,"Y") == 1 && !$this->rtl) $this->writeYear();
+					if(strpos($order,"d") == 2 || $this->rtl) $this->writeDay();
+					elseif(strpos($order,"B") == 2 && !$this->rtl) $this->writeMonth();
+					elseif(strpos($order,"Y") == 2 && !$this->rtl) $this->writeYear();
 				}else{
 					$this->writeDay();
 					$this->writeMonth();
 					$this->writeYear();
 				}
 			}else{
-				echo(" <a href=\"javascript:toggleCalendar('".$this->objname."');\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_15).".'; return true\" title=\"".sprintf(L_CLICK,L_LINKS_15)."\">");
+				echo(" <a href=\"javascript:toggleCalendar('".$this->objname."');\">");
 				$this->writeDateContainer();
 				echo("</a>");
 			}
 
-			echo(" <a href=\"javascript:toggleCalendar('".$this->objname."');\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_15).".'; return true\" title=\"".sprintf(L_CLICK,L_LINKS_15)."\">");
+			echo(" <a href=\"javascript:toggleCalendar('".$this->objname."');\">");
 			if(is_file($this->icon)){
-				echo("<img src=\"".$this->icon."\" id=\"tcbtn_".$this->objname."\" name=\"tcbtn_".$this->objname."\" border=\"0\" align=\"absmiddle\" alt=\"".sprintf(L_CLICK,L_LINKS_15)."\" />");
+				echo("<img src=\"".$this->icon."\" id=\"tcbtn_".$this->objname."\" name=\"tcbtn_".$this->objname."\" border=\"0\" align=\"absmiddle\" />");
 			}else echo($this->txt);
 			echo("</a>");
 
 			$this->writeCalendarContainer();
 
-//			echo("</span>");
 			echo("</div>");
 		}else{
 			$this->writeCalendarContainer();
@@ -315,7 +334,6 @@ class tc_calendar{
 		$params[] = "year_start=".$this->year_start;
 		$params[] = "year_end=".$this->year_end;
 		$params[] = "dp=".(($this->date_picker) ? 1 : 0);
-		$params[] = "mon=".$this->startMonday;
 		$params[] = "da1=".$this->time_allow1;
 		$params[] = "da2=".$this->time_allow2;
 		$params[] = "sna=".$this->show_not_allow;
@@ -329,12 +347,14 @@ class tc_calendar{
 		$params[] = "pr2=".$this->date_pair2;
 		$params[] = "prv=".$this->date_pair_value;
 		$params[] = "pth=".$this->path;
-		$params[] = "hl=".$this->hl;
-		$params[] = "al=".$this->al;
-		$params[] = "dir=".$this->dir;
 		$params[] = "spd=".$this->check_json_encode($this->sp_dates);
 		$params[] = "spt=".$this->sp_type;
 		$params[] = "och=".urlencode($this->tc_onchanged);
+		$params[] = "str=".$this->startDate;
+		$params[] = "rtl=".$this->rtl;
+		$params[] = "wks=".$this->show_week;
+		$params[] = "int=".$this->interval;
+		$params[] = "hl=".$this->hl;
 
 		$paramStr = (sizeof($params)>0) ? "?".implode("&", $params) : "";
 
@@ -388,24 +408,24 @@ class tc_calendar{
 	function writeDay(){
 		$total_days = $this->total_days($this->month, $this->year);
 
-		echo("<select name=\"".$this->objname."_day\" id=\"".$this->objname."_day\" onChange=\"javascript:tc_setDay('".$this->objname."', this[this.selectedIndex].value);\" class=\"tcday\" dir=\"".$this->dir."\">");
-		echo("<option value=\"00\" dir=\"".$this->dir."\">".L_DAY."</option>");
+		echo("<select name=\"".$this->objname."_day\" id=\"".$this->objname."_day\" onChange=\"javascript:tc_setDay('".$this->objname."', this[this.selectedIndex].value);\" class=\"tcday\"".($this->rtl ? " dir=\"rtl\"" : "").">");
+		echo("<option value=\"00\"".($this->rtl ? " dir=\"rtl\"" : "").">".L_DAY."</option>");
 		for($i=1; $i<=$total_days; $i++){
 			$selected = ((int)$this->day == $i) ? " selected" : "";
-			echo("<option value=\"".str_pad($i, 2 , "0", STR_PAD_LEFT)."\"$selected dir=\"".$this->dir."\">$i</option>");
+			echo("<option value=\"".str_pad($i, 2 , "0", STR_PAD_LEFT)."\"$selected".($this->rtl ? " dir=\"rtl\"" : "").">$i</option>");
 		}
 		echo("</select> ");
 	}
 
 	//write the select box of months
 	function writeMonth(){
-		echo("<select name=\"".$this->objname."_month\" id=\"".$this->objname."_month\" onChange=\"javascript:tc_setMonth('".$this->objname."', this[this.selectedIndex].value);\" class=\"tcmonth\" dir=\"".$this->dir."\">");
-		echo("<option value=\"00\" dir=\"".$this->dir."\">".L_MONTH."</option>");
+		echo("<select name=\"".$this->objname."_month\" id=\"".$this->objname."_month\" onChange=\"javascript:tc_setMonth('".$this->objname."', this[this.selectedIndex].value);\" class=\"tcmonth\"".($this->rtl ? " dir=\"rtl\"" : "").">");
+		echo("<option value=\"00\"".($this->rtl ? " dir=\"rtl\"" : "").">".L_MONTH."</option>");
 
 		$monthnames = $this->getMonthNames();
 		for($i=1; $i<=sizeof($monthnames); $i++){
 			$selected = ((int)$this->month == $i) ? " selected" : "";
-			echo("<option value=\"".str_pad($i, 2, "0", STR_PAD_LEFT)."\"$selected dir=\"".$this->dir."\">".$monthnames[$i-1]."</option>");
+			echo("<option value=\"".str_pad($i, 2, "0", STR_PAD_LEFT)."\"$selected".($this->rtl ? " dir=\"rtl\"" : "").">".$monthnames[$i-1]."</option>");
 		}
 		echo("</select> ");
 	}
@@ -413,8 +433,8 @@ class tc_calendar{
 	//write the year textbox
 	function writeYear(){
 		//echo("<input type=\"textbox\" name=\"".$this->objname."_year\" id=\"".$this->objname."_year\" value=\"$this->year\" maxlength=4 size=5 onBlur=\"javascript:tc_setYear('".$this->objname."', this.value, '$this->path');\" onKeyPress=\"javascript:if(yearEnter(event)){ tc_setYear('".$this->objname."', this.value, '$this->path'); return false; }\"> ");
-		echo("<select name=\"".$this->objname."_year\" id=\"".$this->objname."_year\" onChange=\"javascript:tc_setYear('".$this->objname."', this[this.selectedIndex].value);\" class=\"tcyear\" dir=\"".$this->dir."\">");
-		echo("<option value=\"0000\" dir=\"".$this->dir."\">".L_YEAR."</option>");
+		echo("<select name=\"".$this->objname."_year\" id=\"".$this->objname."_year\" onChange=\"javascript:tc_setYear('".$this->objname."', this[this.selectedIndex].value);\" class=\"tcyear\"".($this->rtl ? " dir=\"rtl\"" : "").">");
+		echo("<option value=\"0000\"".($this->rtl ? " dir=\"rtl\"" : "").">".L_YEAR."</option>");
 
 		$year_start = $this->year_start;
 		$year_end = $this->year_end;
@@ -445,7 +465,7 @@ class tc_calendar{
 
 		for($i=$year_end; $i>=$year_start; $i--){
 			$selected = ((int)$this->year == $i) ? " selected" : "";
-			echo("<option value=\"$i\"$selected dir=\"".$this->dir."\">$i</option>");
+			echo("<option value=\"$i\"$selected".($this->rtl ? " dir=\"rtl\"" : "").">$i</option>");
 		}
 		echo("</select> ");
 	}
@@ -461,7 +481,6 @@ class tc_calendar{
 		$this->eHidden('dp', $this->date_picker);
 		$this->eHidden('year_start', $this->year_start);
 		$this->eHidden('year_end', $this->year_end);
-		$this->eHidden('mon', $this->startMonday);
 		$this->eHidden('da1', $this->time_allow1);
 		$this->eHidden('da2', $this->time_allow2);
 		$this->eHidden('sna', $this->show_not_allow);
@@ -475,12 +494,14 @@ class tc_calendar{
 		$this->eHidden('pr2', $this->date_pair2);
 		$this->eHidden('prv', $this->date_pair_value);
 		$this->eHidden('pth', $this->path);
-		$this->eHidden('hl', $this->hl);
-		$this->eHidden('al', $this->al);
-		$this->eHidden('dir', $this->dir);
 		$this->eHidden('spd', $this->check_json_encode($this->sp_dates));
 		$this->eHidden('spt', $this->sp_type);
 		$this->eHidden('och', urlencode($this->tc_onchanged));
+		$this->eHidden('str', $this->startDate);
+		$this->eHidden('rtl', $this->rtl);
+		$this->eHidden('wks', $this->show_week);
+		$this->eHidden('int', $this->interval);
+		$this->eHidden('hl', $this->hl);
 	}
 
 	//set width of calendar
@@ -515,8 +536,20 @@ class tc_calendar{
 		return array(L_JAN, L_FEB, L_MAR, L_APR, L_MAY, L_JUN, L_JUL, L_AUG, L_SEP, L_OCT, L_NOV, L_DEC);
 	}
 
+	//-------------------------------
+	// Deprecated since version 3.61
+	// override by startDate()
+	//-------------------------------
 	function startMonday($flag){
-		$this->startMonday = $flag;
+		//$this->startMonday = $flag;
+
+		//change it so that it will not cause an error after version 3.61
+		if($flag) $this->startDate = 1;
+	}
+
+	function startDate($num){
+		if(is_numeric($num) && $num >= 0 && $num <= 6)
+			$this->startDate = $num;
 	}
 
 	function dateAllow($from = "", $to = "", $show_not_allow = true){
@@ -582,7 +615,7 @@ class tc_calendar{
 			if($this->hl){
 				if(stristr(PHP_OS,"win")){
 					$dd = utf_conv(WIN_DEFAULT,'utf-8',strftime(L_CAL_FORMAT, mktime(0,0,0,$this->month,$this->day,$this->year)));
-				}else{ 
+				}else{
 					$dd = strftime(L_CAL_FORMAT, mktime(0,0,0,$this->month,$this->day,$this->year));
 				}
 			}else{
@@ -591,7 +624,7 @@ class tc_calendar{
 		}
 		else $dd = L_SEL_DATE;
 
-		echo("<span id=\"divCalendar_".$this->objname."_lbl\" class=\"date-tccontainer\" dir=\"".$this->dir."\">$dd</span>");
+		echo("<span id=\"divCalendar_".$this->objname."_lbl\" class=\"date-tccontainer\"".($this->rtl ? " dir=\"rtl\"" : "").">$dd</span>");
 	}
 
 	//------------------------------------------------------
@@ -624,6 +657,7 @@ class tc_calendar{
 	function setSpecificDate($dates, $type=0, $recursive=""){
 		if(is_array($dates)){
 			$recursive = strtolower($recursive);
+
 			//change specific date to time
 			foreach($dates as $sp_date){
 				$sp_time = strtotime($sp_date);
@@ -646,7 +680,6 @@ class tc_calendar{
 			}
 
 			$this->sp_type = ($type == 1) ? 1 : 0; //control data type for $type
-
 		}
 	}
 
@@ -670,15 +703,15 @@ class tc_calendar{
 
 			if(isset($this->sp_dates[2])){
 				foreach($this->sp_dates[2] as $sp_time){
-					$sp_time_md = date('md', $sp_time);	
-					$this_md = date('md', $default_datetime); 
+					$sp_time_md = date('md', $sp_time);
+					$this_md = date('md', $default_datetime);
 					if($sp_time_md == $this_md){
 						$sp_found = true;
 						break;
 					}
 				}
 			}
-			
+
 			if(isset($this->sp_dates[1]) && !$sp_found){
 				foreach($this->sp_dates[1] as $sp_time){
 					$sp_time_d = date('d', $sp_time);
@@ -688,7 +721,7 @@ class tc_calendar{
 					}
 				}
 			}
-			
+
 			if(isset($this->sp_dates[0]) && !$sp_found){
 				$sp_found = in_array($default_datetime, $this->sp_dates[0]);
 			}
@@ -705,11 +738,11 @@ class tc_calendar{
 					break;
 			}
 		}
-		
+
 		if(is_array($this->dsb_days) && sizeof($this->dsb_days) > 0){
 			$day_txt = date('D', $default_datetime);
 			if(in_array(strtolower($day_txt), $this->dsb_days) !== false){
-				$valid = false;	
+				$valid = false;
 			}
 		}
 
@@ -722,7 +755,7 @@ class tc_calendar{
 		if(function_exists("json_encode")){
 			return json_encode($obj);
 		}else{
-			//only array is assume for now
+			//only array is assumed for now
 			if(is_array($obj)){
 				return "[".implode(",", $obj)."]";
 			}else return "";
@@ -748,5 +781,8 @@ class tc_calendar{
 		$this->tc_onchanged = $value;
 	}
 
+	function showWeeks($flag){
+		$this->show_week = $flag;
+	}
 }
 ?>
