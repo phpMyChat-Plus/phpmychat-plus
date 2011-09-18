@@ -2,15 +2,16 @@
 # nn_NO translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Localized version of PHP-Calendar, DatePicker Calendar class: http://ciprianmp.com/scripts/calendar/
-# Version: 3.60
+# Version: 3.61
 # Language: Norwegian (Nynorsk) / norsk, nynorsk
 # Translator: Stian Hvatum <post@dream-web.no>
-# Last file update: 22.08.2011
+# Last file update: 01.09.2011
 
 // Class strings localization
 define("L_DAY", "Dag");
 define("L_MONTH", "Månad");
 define("L_YEAR", "År");
+define("L_TODAY", "I dag");
 define("L_PREV", "Førre");
 define("L_NEXT", "Neste");
 define("L_REF_CAL", "Oppdaterer kalenderen...");
@@ -23,6 +24,8 @@ define("L_NOT_ALLOWED", "Denne datoen kan ikkje veljast");
 define("L_DATE_BEFORE", "Vel ein dato førre %s");
 define("L_DATE_AFTER", "Vel ein dato etter %s");
 define("L_DATE_BETWEEN", "Vel ein dato mellom\\n%s og %s");
+define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
+define("L_UNSET", "Nullstill");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

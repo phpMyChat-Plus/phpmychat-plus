@@ -1,16 +1,17 @@
 ﻿<?php
 # th_TH translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.41
+# Version: 3.61
 # Language: Thai / ภาษาไทย
 # Translator: 
-# Last file update: 28.03.2011
+# Last file update: 01.09.2011
 // Thailand mainly uses the Buddhist Era which is 543 years ahead of the Gregorian year. 1 January 2549 BE (AD 2006) 
 
 // Class strings localization
 define("L_DAY", "วัน");
 define("L_MONTH", "เดือน");
 define("L_YEAR", "ปี");
+define("L_TODAY", "วันนี้");
 define("L_PREV", "ย้อน");
 define("L_NEXT", "ถัดไป");
 define("L_REF_CAL", "ปฏิทินกิจกรรมรีเฟรช ...");
@@ -23,6 +24,8 @@ define("L_NOT_ALLOWED", "วันนี้ไม่ได้รับอนุ�
 define("L_DATE_BEFORE", "กรุณาเลือกวันที่ก่อน %s");
 define("L_DATE_AFTER", "กรุณาเลือกวันหลังจาก %s");
 define("L_DATE_BETWEEN", "กรุณาเลือกวันที่ระหว่าง\\n%s และ %s");
+define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
+define("L_UNSET", "ยกเลิก");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

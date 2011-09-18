@@ -1,15 +1,16 @@
 <?php
 # fi_FI translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.56
+# Version: 3.61
 # Language: Finnish / suomi // ex: Romanian / Română
 # Translator: Ilja Mäki <iksa@netti.fi>
-# Last file update: 11.07.2011
+# Last file update: 01.09.2011
 
 // Class strings localization
 define("L_DAY", "Päivä");
 define("L_MONTH", "Kuukausi");
 define("L_YEAR", "Vuosi");
+define("L_TODAY", "Tänään");
 define("L_PREV", "Edellinen");
 define("L_NEXT", "Seuraava");
 define("L_REF_CAL", "Päivitetään kalenteria...");
@@ -22,6 +23,8 @@ define("L_NOT_ALLOWED", "Tätä päivämäärää ei voi valita");
 define("L_DATE_BEFORE", "Valitse päivämäärä ennen %s");
 define("L_DATE_AFTER", "Valitse päivämäärä %s jälkeen");
 define("L_DATE_BETWEEN", "Valitse päivämäärä väliltä\\n%s ja %s");
+define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
+define("L_UNSET", "Nollaa");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

@@ -1,15 +1,16 @@
 ﻿<?php
 # ru_RU translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 2.30
+# Version: 3.61
 # Language: Russian / Русский
 # Translator:
-# Last file update: 17.12.2010
+# Last file update: 01.09.2011
 
 // Class strings localization
 define("L_DAY", "День");
 define("L_MONTH", "Месяц");
 define("L_YEAR", "Год");
+define("L_TODAY", "Cегодня");
 define("L_PREV", "Предыдущее");
 define("L_NEXT", "Следущее");
 define("L_REF_CAL", "Обновить календарь...");
@@ -22,6 +23,8 @@ define("L_NOT_ALLOWED", "Эта дата не может быть выбрана
 define("L_DATE_BEFORE", "Выберите дату до %s");
 define("L_DATE_AFTER", "Выберите дату, после %s");
 define("L_DATE_BETWEEN", "Выберите дату между\\n%s и %s");
+define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
+define("L_UNSET", "Отменить");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

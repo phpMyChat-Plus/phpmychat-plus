@@ -2,15 +2,16 @@
 # hi_IN translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Localized version of PHP-Calendar, DatePicker Calendar class: http://ciprianmp.com/scripts/calendar/
-# Version: 3.60
+# Version: 3.61
 # Language: Hindi (Devanagari) / हिन्दी (in your lang) // ex: Romanian / Română
 # Translator: Sanjay Sarita Ghoriwala 'SanSar' <ghoriwala@gmail.com>
-# Last file update: 16.08.2011
+# Last file update: 01.09.2011
 
 // Class strings localization
 define("L_DAY", "दिन");
 define("L_MONTH", "माह");
 define("L_YEAR", "वर्ष");
+define("L_TODAY", "आज");
 define("L_PREV", "पिछला");
 define("L_NEXT", "अगला");
 define("L_REF_CAL", "ताजा तिथिपत्र ...");
@@ -23,6 +24,8 @@ define("L_NOT_ALLOWED", "यह दिनांक चयन करने की
 define("L_DATE_BEFORE", "कृपया %s से पहले की एक दिनांक का चयन करें");
 define("L_DATE_AFTER", "कृपया %s के बाद की एक दिनांक का चयन करें");
 define("L_DATE_BETWEEN", "कृपया %s और %s\\nके बीच किसी दिनांक का चयन करें");
+define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
+define("L_UNSET", "साफ कर");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "0");

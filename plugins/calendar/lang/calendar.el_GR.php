@@ -1,19 +1,20 @@
 <?php
 # el_GR translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.51
+# Version: 3.61
 # Language: Greek / ελληνικά (in your lang)
 # Translator: Kostas Filios
-# Last file update: 04.04.2011
+# Last file update: 01.09.2011
 
 // Class strings localization
 define("L_DAY", "Ημέρα");
 define("L_MONTH", "Μήνας");
 define("L_YEAR", "Χρόνος");
+define("L_TODAY", "Σήμερα");
 define("L_PREV", "Προηγούμενο");
 define("L_NEXT", "Επόμενο");
 define("L_REF_CAL", "Επαναφόρτωση ημερολογίου...");
-define("L_CHK_VAL", "Έλενξε την τιμή");
+define("L_CHK_VAL", "Έλεγξε την τιμή");
 define("L_SEL_LANG", "Επέλεξε γλώσσα");
 define("L_SEL_ICON", "Επέλεξε εικονίδιο");
 define("L_SEL_DATE", "Επέλεξε ημέρα");
@@ -22,6 +23,8 @@ define("L_NOT_ALLOWED", "Δεν επιτρέπετε η επιλογή αυτή�
 define("L_DATE_BEFORE", "Επιλέξτε μια ημερομηνία πριν από την %s");
 define("L_DATE_AFTER", "Επιλέξτε μια ημερομηνία μετά την %s");
 define("L_DATE_BETWEEN", "Επιλέξτε μια ημερομηνία μεταξύ\\n%s και %s");
+define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
+define("L_UNSET", "Αποεπιλογή");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

@@ -1,15 +1,16 @@
 <?php
 # sr_CS translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 2.30
+# Version: 3.61
 # Language: Serbian Latin / srpski
 # Translator: Vedran Vučić <vedran.vucic@gnulinuxcentar.org>
-# Last file update: 01.05.2010
+# Last file update: 01.09.2011
 
 // Class strings localization
 define("L_DAY", "Dan");
 define("L_MONTH", "Mesec");
 define("L_YEAR", "Godina");
+define("L_TODAY", "Danas");
 define("L_PREV", "Prethodni");
 define("L_NEXT", "Sledeći");
 define("L_REF_CAL", "Ponovo učitavam Kalendar...");
@@ -22,6 +23,8 @@ define("L_NOT_ALLOWED", "Ovaj datum nemože biti odabran");
 define("L_DATE_BEFORE", "Odaberite prethodni datum %s");
 define("L_DATE_AFTER", "Odaberite datum nakon %s");
 define("L_DATE_BETWEEN", "Odaberite datum izmedju\\n%s i %s");
+define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
+define("L_UNSET", "Poništi"); //Vrati na prethodno
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

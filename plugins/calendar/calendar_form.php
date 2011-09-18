@@ -16,7 +16,7 @@ $slm = (isset($_REQUEST["selected_month"])) ? (int)$_REQUEST["selected_month"] :
 $sly = (isset($_REQUEST["selected_year"])) ? (int)$_REQUEST["selected_year"] : 0;
 $year_start = (isset($_REQUEST["year_start"])) ? $_REQUEST["year_start"] : 0;
 $year_end = (isset($_REQUEST["year_end"])) ? $_REQUEST["year_end"] : 0;
-$startMonday = (isset($_REQUEST["mon"])) ? $_REQUEST["mon"] : 0;
+$startDate = (isset($_REQUEST["str"])) ? $_REQUEST["str"] : 0;
 $time_allow1 = (isset($_REQUEST["da1"])) ? $_REQUEST["da1"] : "";
 $time_allow2 = (isset($_REQUEST["da2"])) ? $_REQUEST["da2"] : "";
 $ta1_set = is_numeric($time_allow1);
@@ -32,12 +32,13 @@ $date_pair1 = (isset($_REQUEST["pr1"])) ? $_REQUEST["pr1"] : "";
 $date_pair2 = (isset($_REQUEST["pr2"])) ? $_REQUEST["pr2"] : "";
 $date_pair_value = (isset($_REQUEST["prv"])) ? $_REQUEST["prv"] : "";
 $path = (isset($_REQUEST["pth"])) ? $_REQUEST["pth"] : "";
-$hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : 'en_US';
-$al = (isset($_REQUEST["al"])) ? $_REQUEST["al"] : ALIGN;
-$dir = (isset($_REQUEST["dir"])) ? $_REQUEST["dir"] : DIR;
 $sp_dates = (isset($_REQUEST["spd"])) ? @tc_calendar::check_json_decode($_REQUEST["spd"]) : array(array(), array(), array());
 $sp_type = (isset($_REQUEST["spt"])) ? $_REQUEST["spt"] : 0;
 $tc_onchanged = (isset($_REQUEST["och"])) ? $_REQUEST["och"] : "";
+$rtl = (isset($_REQUEST["rtl"])) ? $_REQUEST["rtl"] : RTL;
+$show_weeks = (isset($_REQUEST["wks"])) ? $_REQUEST["wks"] : false;
+$interval = (isset($_REQUEST["int"])) ? $_REQUEST["int"] : 1;
+$hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : 'en_US';
 
 //check year to be select in case of date_allow is set
 if(!$show_not_allow){
@@ -104,7 +105,7 @@ $objname = (isset($_REQUEST["objname"])) ? $_REQUEST["objname"] : "";
 $dp = (isset($_REQUEST["dp"])) ? $_REQUEST["dp"] : "";
 
 $cobj = new tc_calendar("");
-$cobj->startMonday($startMonday);
+$cobj->startDate($startDate);
 $cobj->dsb_days = explode(",", $dsb_txt);
 
 if(!$year_start || !$year_end){
@@ -134,30 +135,238 @@ if($m == 12){
 $total_lastmonth = $cobj->total_days($previous_month, $previous_year);
 $today = date('Y-m-d');
 
-//$startdate = $cobj->getDayNum(date('D', strtotime($y."-".$m."-1")));
-$startdate = date('w', strtotime($y."-".$m."-1"));
+$firstdate = date('w', strtotime($y."-".$m."-1")); //first date of month, 0 (for Sunday) through 6 (for Saturday)
 
-if($startMonday)
-	if($startdate == 0)
-		$startwrite = $total_lastmonth - 5;
-	else
-		$startwrite = $total_lastmonth - ($startdate - 2);
-else
-	$startwrite = $total_lastmonth - ($startdate - 1);
+if($firstdate == $startDate){
+	//skip last month
+	$startwrite = $total_lastmonth+1;
+}elseif($firstdate < $startDate){
+	$startwrite = $total_lastmonth - (6-($startDate-$firstdate));
+}else{
+	$startwrite = $total_lastmonth - ($firstdate - $startDate - 1);
+}
+
+//--------------------------------
+//prepare the calendar in array
+//--------------------------------
+$calendar_rows = array();
+$week_rows = array(); //collection for week number, $week_rows[$row][$week_number] = counter
+
+$dayinweek_counter = 0;
+$row_count = 0;
+
+//write previous month
+for($day=$startwrite; $day<=$total_lastmonth; $day++){
+	$calendar_rows[$row_count][] = array($day, "", "othermonth", "");
+	$dayinweek_counter++;
+
+	$wknum = date('W', mktime(0,0,0, $m-1, $day, $y));
+	if(!isset($week_rows[$row_count][$wknum])){
+		$week_rows[$row_count][$wknum] = 1;
+	}else $week_rows[$row_count][$wknum] = $week_rows[$row_count][$wknum]+1;
+}
+
+$pvMonthTime = strtotime($previous_year."-".$previous_month."-".$total_lastmonth);
+
+//check lastmonth is on allowed date
+if($ta1_set && !$show_not_allow){
+	if($pvMonthTime >= $time_allow1){
+		$show_previous = true;
+	}else $show_previous = false;
+}else $show_previous = true; //always show when not set
+
+$date_num = date('w', $pvMonthTime);
+if(($startDate == 0 && $date_num == 6) || ($startDate > 0 && $date_num == $startDate-1) && $startwrite<$total_lastmonth){
+	$row_count++;
+}
+
+$dp_time = ($date_pair_value) ? strtotime($date_pair_value) : 0;
+
+$select_days = array();
+if($sld>0 && $slm>0 && $sly>0){
+	$sldate = "$sly-$slm-$sld";
+	for($i=0; $i<$interval; $i++){
+		$this_day = date("Y-m-d", mktime(0,0,0, date('m', strtotime($sldate)), date('d', strtotime($sldate))+$i, date('Y', strtotime($sldate))));
+		$select_days[] = strtotime($this_day);
+	}
+}
+
+//write current month
+for($day=1; $day<=$total_thismonth; $day++){
+	$date_num = date('w', strtotime($y."-".$m."-".$day));
+	$day_txt = date('D', strtotime($y."-".$m."-".$day));
+
+	$currentTime =  strtotime($y."-".$m."-".$day);
+	$htmlClass = array();
+
+	$is_today = $currentTime - strtotime($today);
+	$htmlClass[] = ($is_today == 0) ? "today" : "general";
+
+	/*
+	$is_selected = strtotime($y."-".$m."-".$day) - strtotime($sly."-".$slm."-".$sld);
+	if($is_selected == 0) $htmlClass[] = "select";
+	*/
+	
+	if(in_array($currentTime, $select_days)){
+		$htmlClass[] = "select";	
+	}
+
+	//check date allowed
+	if($ta1_set && $ta2_set){
+		//both date specified
+		$dateLink = ($time_allow1 <= $currentTime && $currentTime <= $time_allow2);
+	}elseif($ta1_set){
+		//only date 1 specified
+		$dateLink = ($currentTime >= $time_allow1);
+	}elseif($ta2_set){
+		//only date 2 specified
+		$dateLink = ($currentTime <= $time_allow2);
+	}else{
+		//no date allow specified, assume show all
+		$dateLink = true;
+	}
+
+	if($dateLink){
+		//check for disable days
+		if(in_array(strtolower($day_txt), $cobj->dsb_days) !== false){
+			$dateLink = false;
+		}
+	}
+
+
+	//check specific date
+	if($dateLink){
+		if(is_array($sp_dates) && sizeof($sp_dates) > 0){
+			//check if it is current date
+			$sp_found = false;
+
+			//check on yearly recursive
+			if(isset($sp_dates[2]) && is_array($sp_dates[2])){
+				foreach($sp_dates[2] as $sp_time){
+					$sp_time_md = date('md', $sp_time);
+					$this_md = date('md', $currentTime);
+					if($sp_time_md == $this_md){
+						$sp_found = true;
+						break;
+					}
+				}
+			}
+
+			//check on monthly recursive
+			if(isset($sp_dates[1]) && is_array($sp_dates[1]) && !$sp_found){
+				foreach($sp_dates[1] as $sp_time){
+					$sp_time_d = date('d', $sp_time);
+					if($sp_time_d == $day){
+						$sp_found = true;
+						break;
+					}
+				}
+			}
+
+			//check on no recursive
+			if(isset($sp_dates[0]) && is_array($sp_dates[0]) && !$sp_found){
+				$sp_found = in_array($currentTime, $sp_dates[0]);
+			}
+
+			switch($sp_type){
+				case 0:
+				default:
+					//disabled specific and enabled others
+					$dateLink = ($sp_found) ? false : true;
+					break;
+				case 1:
+					//enabled specific and disabled others
+					$dateLink = ($sp_found) ? true : false;
+					break;
+			}
+		}
+	}
+
+	//check date_pair1 &  2 and disabled date
+	if($date_pair1 && $dp_time > 0 && $currentTime < $dp_time){ //set date only after date_pair1
+		$dateLink = false;
+	}
+
+	if($date_pair2 && $dp_time > 0 && $currentTime > $dp_time){ //set date only before date_pair2
+		$dateLink = false;
+	}
+
+	$htmlClass[] = strtolower($day_txt);
+
+	if($dateLink){
+		//date with link
+		$class = implode(" ", $htmlClass);
+
+		$calendar_rows[$row_count][] = array($day, "javascript:selectDay('".str_pad($day, 2, "0", STR_PAD_LEFT)."');", $class, "$y".str_pad($m, 2, "0", STR_PAD_LEFT).str_pad($day, 2, "0", STR_PAD_LEFT));
+	}else{
+		$htmlClass[] = "disabledate";
+		$class = implode(" ", $htmlClass);
+
+		//date without link
+		$calendar_rows[$row_count][] = array($day, "", $class, "$y".str_pad($m, 2, "0", STR_PAD_LEFT).str_pad($day, 2, "0", STR_PAD_LEFT));
+	}
+	if(($startDate == 0 && $date_num == 6) || ($startDate > 0 && $date_num == $startDate-1)){
+		$row_count++;
+
+		$dayinweek_counter = 0;
+	}else $dayinweek_counter++;
+
+	$wknum = date('W', mktime(0,0,0, $m, $day, $y));
+	if(!isset($week_rows[$row_count][$wknum])){
+		$week_rows[$row_count][$wknum] = 1;
+	}else $week_rows[$row_count][$wknum] = $week_rows[$row_count][$wknum]+1;
+}
+
+//write next other month
+$write_end_days = (6-$dayinweek_counter)+1;
+if($write_end_days > 0){
+	for($day=1; $day<=$write_end_days; $day++){
+		$calendar_rows[$row_count][] = array($day, "", "othermonth", "");
+
+		$wknum = date('W', mktime(0,0,0, $m+1, $day, $y));
+		if(!isset($week_rows[$row_count][$wknum])){
+			$week_rows[$row_count][$wknum] = 1;
+		}else $week_rows[$row_count][$wknum] = $week_rows[$row_count][$wknum]+1;
+	}
+	 $row_count++;
+}
+
+//write fulfil row to 6 rows
+for($day=$row_count; $day<6; $day++){
+	$tmpday = $write_end_days+1;
+	for($f=$tmpday; $f<=($tmpday+6); $f++){
+		$calendar_rows[$row_count][] = array($f, "", "othermonth", "");
+
+		$wknum = date('W', mktime(0,0,0, $m+1, $f, $y));
+		if(!isset($week_rows[$row_count][$wknum])){
+			$week_rows[$row_count][$wknum] = 1;
+		}else $week_rows[$row_count][$wknum] = $week_rows[$row_count][$wknum]+1;
+	}
+	$write_end_days += 6;
+}
+
+//check next month is on allowed date
+if($ta2_set && !$show_not_allow){
+	$nxMonthTime = strtotime($next_year."-".$next_month."-1");
+	if($nxMonthTime <= $time_allow2){
+		$show_next = true;
+	}else $show_next = false;
+}else $show_next = true; //always show when not set
 
 if($cobj->hl){
 	$to_replace = array("d","%"," ",".",",","ב","年","日");
 	$order = str_replace($to_replace,"",L_CAL_FORMAT);
-	if(strpos($order,"B") == 0 && $dir != "rtl") $first_input = "B";
-	elseif(strpos($order,"Y") == 0 || $dir == "rtl") $first_input = "Y";
-	if(strpos($order,"B") == 1 || $dir == "rtl") $second_input = "B";
-	elseif(strpos($order,"Y") == 1 && $dir != "rtl") $second_input = "Y";
+	if(strpos($order,"B") == 0) $first_input = "B";
+	elseif(strpos($order,"Y") == 0) $first_input = "Y";
+	if(strpos($order,"B") == 1) $second_input = "B";
+	elseif(strpos($order,"Y") == 1) $second_input = "Y";
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"<?php if($rtl) echo(" dir=\"rtl\""); ?>>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=7; IE=8" />
 <title>TriConsole.com - PHP Calendar Date Picker</title>
 <link href="calendar.css" rel="stylesheet" type="text/css" />
 <script language="javascript">
@@ -170,6 +379,18 @@ function setValue(){
 	//toggle = typeof(toggle) != 'undefined' ? toggle : true;
 
 	window.parent.setValue(f.objname.value, date_selected);
+}
+
+function unsetValue(){
+	var f = document.calendarform;
+	f.selected_day.value = "00";
+	f.selected_month.value = "00";
+	f.selected_year.value = "0000";
+
+	setValue();
+
+	this.loading();
+	f.submit();
 }
 
 function restoreValue(){
@@ -221,6 +442,15 @@ function move(m, y){
 	var f = document.calendarform;
 	f.m.value = m;
 	f.y.value = y;
+
+	this.loading();
+	f.submit();
+}
+
+function today(){
+	var f = document.calendarform;
+	f.m.value = "<?php echo(date('m')); ?>";
+	f.y.value = "<?php echo(date('Y')); ?>";
 
 	this.loading();
 	f.submit();
@@ -294,11 +524,11 @@ function adjustContainer(){
 	}
 }
 
-window.onload = function(){ 
+window.onload = function(){
 	window.parent.setDateLabel('<?php echo($objname); ?>');
-	adjustContainer(); 
-	setTimeout("adjustContainer()", 1000); 
-	restoreValue(); 
+	adjustContainer();
+	setTimeout("adjustContainer()", 1000);
+	restoreValue();
 };
 //-->
 </script>
@@ -308,7 +538,7 @@ window.onload = function(){
 <div id="calendar-page">
     <div id="calendar-header" align="center">
         <?php if($dp){ ?>
-        <div align="right" class="closeme"><a href="javascript:closeMe();"><img src="images/close.gif" border="0" /></a></div>
+        <div align="<?php echo($rtl ? "left" : "right"); ?>" class="closeme"><a href="javascript:closeMe();"><img src="images/close.gif" border="0" /></a></div>
         <?php } ?>
         <form id="calendarform" name="calendarform" method="post" action="<?php echo($thispage);?>">
           <table align="center" cellpadding="1" cellspacing="0">
@@ -317,11 +547,11 @@ window.onload = function(){
             $monthnames = $cobj->getMonthNames();
 			if ($first_input == "B"){
 			?>
-              <td align="left"><select name="m" onchange="javascript:submitCalendar();" dir="<?php echo(DIR); ?>">
+              <td align="left"><select name="m" onchange="javascript:submitCalendar();">
               <?php
               for($f=1; $f<=sizeof($monthnames); $f++){
                 $selected = ($f == (int)$m) ? " selected" : "";
-                echo("<option value=\"".str_pad($f, 2, "0", STR_PAD_LEFT)."\"$selected dir=\"".DIR."\">".$monthnames[$f-1]."</option>");
+                echo("<option value=\"".str_pad($f, 2, "0", STR_PAD_LEFT)."\"$selected>".$monthnames[$f-1]."</option>");
               }
               ?>
               </select>
@@ -330,14 +560,14 @@ window.onload = function(){
 			}
 			elseif ($first_input == "Y"){
 			?>
-              <td align="left"><select name="y" onchange="javascript:submitCalendar();" dir="<?php echo(DIR); ?>">
+              <td align="left"><select name="y" onchange="javascript:submitCalendar();">
               <?php
               $thisyear = date('Y');
 
               //write year options
               for($year=$year_end; $year>=$year_start; $year--){
                 $selected = ($year == $y) ? " selected" : "";
-                echo("<option value=\"$year\"$selected dir=\"".DIR."\">$year</option>");
+                echo("<option value=\"$year\"$selected>$year</option>");
               }
               ?>
               </select>
@@ -346,11 +576,11 @@ window.onload = function(){
 			}
 			if ($second_input == "B"){
 			?>
-              <td align="right"><select name="m" onchange="javascript:submitCalendar();" dir="<?php echo(DIR); ?>">
+              <td align="right"><select name="m" onchange="javascript:submitCalendar();"">
               <?php
               for($f=1; $f<=sizeof($monthnames); $f++){
                 $selected = ($f == (int)$m) ? " selected" : "";
-                echo("<option value=\"".str_pad($f, 2, "0", STR_PAD_LEFT)."\"$selected dir=\"".DIR."\">".$monthnames[$f-1]."</option>");
+                echo("<option value=\"".str_pad($f, 2, "0", STR_PAD_LEFT)."\"$selected>".$monthnames[$f-1]."</option>");
               }
               ?>
               </select>
@@ -359,14 +589,14 @@ window.onload = function(){
 			}
 			elseif ($second_input == "Y"){
 			?>
-              <td align="right"><select name="y" onchange="javascript:submitCalendar();" dir="<?php echo(DIR); ?>">
+              <td align="right"><select name="y" onchange="javascript:submitCalendar();">
               <?php
               $thisyear = date('Y');
 
               //write year options
               for($year=$year_end; $year>=$year_start; $year--){
                 $selected = ($year == $y) ? " selected" : "";
-                echo("<option value=\"$year\"$selected dir=\"".DIR."\">$year</option>");
+                echo("<option value=\"$year\"$selected>$year</option>");
               }
               ?>
               </select>
@@ -383,7 +613,6 @@ window.onload = function(){
             <input name="year_end" type="hidden" id="year_end" value="<?php echo($year_end);?>" />
             <input name="objname" type="hidden" id="objname" value="<?php echo($objname);?>" />
             <input name="dp" type="hidden" id="dp" value="<?php echo($dp);?>" />
-            <input name="mon" type="hidden" id="mon" value="<?php echo($startMonday);?>" />
             <input name="da1" type="hidden" id="da1" value="<?php echo($time_allow1);?>" />
             <input name="da2" type="hidden" id="da2" value="<?php echo($time_allow2);?>" />
             <input name="sna" type="hidden" id="sna" value="<?php echo($show_not_allow);?>" />
@@ -397,12 +626,14 @@ window.onload = function(){
             <input name="pr2" type="hidden" id="pr2" value="<?php echo($date_pair2);?>" />
             <input name="prv" type="hidden" id="prv" value="<?php echo($date_pair_value);?>" />
             <input name="pth" type="hidden" id="pth" value="<?php echo($path);?>" />
-            <input name="hl" type="hidden" id="hl" value="<?php echo($hl);?>" />
-            <input name="al" type="hidden" id="al" value="<?php echo($al);?>" />
-            <input name="dir" type="hidden" id="dir" value="<?php echo($dir);?>" />
             <input name="spd" type="hidden" id="spd" value="<?php echo($cobj->check_json_encode($sp_dates));?>" />
             <input name="spt" type="hidden" id="spt" value="<?php echo($sp_type);?>" />
             <input name="och" type="hidden" id="och" value="<?php echo(urldecode($tc_onchanged));?>" />
+            <input name="str" type="hidden" id="str" value="<?php echo($startDate);?>" />
+            <input name="rtl" type="hidden" id="rtl" value="<?php echo($rtl);?>" />
+            <input name="wks" type="hidden" id="wks" value="<?php echo($show_weeks);?>" />
+            <input name="int" type="hidden" id="int" value="<?php echo($interval);?>" />
+            <input name="hl" type="hidden" id="hl" value="<?php echo($hl);?>" />
       </form>
     </div>
     <div id="calendar-container">
@@ -412,190 +643,44 @@ window.onload = function(){
             $day_headers = array_values($cobj->getDayHeaders());
 
             echo("<tr>");
-            //write calendar day header
+
+			if ($show_weeks) echo("<td align=\"center\" class=\"header wk-hdr\"><div>".$cobj->week_hdr."</div></td>");
+
+			//write calendar day header
             foreach($day_headers as $dh){
                 echo("<td align=\"center\" class=\"header\"><div>".$dh."</div></td>");
             }
             echo("</tr>");
 
-            echo("<tr>");
+			for($row=0; $row<sizeof($calendar_rows); $row++){
+				echo("<tr>");
 
-            $dayinweek_counter = 0;
-            $row_count = 0;
+				if ($show_weeks){
+					asort($week_rows[$row]);
 
-            //write previous month
-            for($day=$startwrite; $day<=$total_lastmonth; $day++){
-                echo("<td align=\"center\" class=\"othermonth\"><div>$day</div></td>");
-                $dayinweek_counter++;
-            }
+					//get week number with highest member
+					$cw_keys = array_keys($week_rows[$row]);
 
-            $pvMonthTime = strtotime($previous_year."-".$previous_month."-".$total_lastmonth);
+					echo("<td align=\"center\" class=\"wk\"><div>".$cw_keys[(sizeof($cw_keys)-1)]."</div></td>");
+				}
 
-            //check lastmonth is on allowed date
-            if($ta1_set && !$show_not_allow){
-                if($pvMonthTime >= $time_allow1){
-                    $show_previous = true;
-                }else $show_previous = false;
-            }else $show_previous = true; //always show when not set
+				foreach($calendar_rows[$row] as $column){
+					$this_day = isset($column[0]) ? $column[0] : "";
+					$this_link = isset($column[1]) ? $column[1] : "";
+					$this_class = isset($column[2]) ? $column[2] : "";
+					$this_id = isset($column[3]) ? $column[3] : "";
+					
+					$id_str = ($this_id) ? " id=\"$this_id\"" : "";
 
-            //$date_num = $cobj->getDayNum(date('D', strtotime($previous_year."-".$previous_month."-".$total_lastmonth)));
-            $date_num = date('w', $pvMonthTime);
-            if(((!$startMonday && $date_num == 6) || ($startMonday && $date_num == 0)) && $startwrite<$total_lastmonth){
-                echo("</tr><tr>");
-                $row_count++;
-            }
-
-			$dp_time = ($date_pair_value) ? strtotime($date_pair_value) : 0;
-
-            //write current month
-            for($day=1; $day<=$total_thismonth; $day++){
-                //$date_num = $cobj->getDayNum(date('D', strtotime($y."-".$m."-".$day)));
-                $date_num = date('w', strtotime($y."-".$m."-".$day));
-                $day_txt = date('D', strtotime($y."-".$m."-".$day));
-
-                $currentTime =  strtotime($y."-".$m."-".$day);
-                $htmlClass = array();
-
-                $is_today = $currentTime - strtotime($today);
-                $htmlClass[] = ($is_today == 0) ? "today" : "general";
-
-                $is_selected = strtotime($y."-".$m."-".$day) - strtotime($sly."-".$slm."-".$sld);
-                if($is_selected == 0) $htmlClass[] = "select";
-
-                //check date allowed
-				if($ta1_set && $ta2_set){
-                    //both date specified
-                    $dateLink = ($time_allow1 <= $currentTime && $currentTime <= $time_allow2);
-                }elseif($ta1_set){
-                    //only date 1 specified
-                    $dateLink = ($currentTime >= $time_allow1);
-                }elseif($ta2_set){
-                    //only date 2 specified
-                    $dateLink = ($currentTime <= $time_allow2);
-                }else{
-                    //no date allow specified, assume show all
-                    $dateLink = true;
-                }
-
-                if($dateLink){
-					//check for disable days
-                	if(in_array(strtolower($day_txt), $cobj->dsb_days) !== false){
-						$dateLink = false;
-                	}
-                }
-
-				//check specific date
-				if($dateLink){
-					if(is_array($sp_dates) && sizeof($sp_dates) > 0){
-						//check if it is current date
-						$sp_found = false;
-						
-						//check on yearly recursive
-						if(isset($sp_dates[2]) && is_array($sp_dates[2])){							
-							foreach($sp_dates[2] as $sp_time){
-								$sp_time_md = date('md', $sp_time);	
-								$this_md = date('md', $currentTime); 
-								if($sp_time_md == $this_md){
-									$sp_found = true;
-									break;
-								}
-							}
-						}
-						
-						//check on monthly recursive
-						if(isset($sp_dates[1]) && is_array($sp_dates[1]) && !$sp_found){							
-							foreach($sp_dates[1] as $sp_time){
-								$sp_time_d = date('d', $sp_time);									
-								if($sp_time_d == $day){
-									$sp_found = true;
-									break;
-								}
-							}
-						}
-						
-						//check on no recursive
-						if(isset($sp_dates[0]) && is_array($sp_dates[0]) && !$sp_found){							
-							$sp_found = in_array($currentTime, $sp_dates[0]);
-						}						
-						
-						switch($sp_type){
-							case 0:
-							default:
-								//disabled specific and enabled others
-								$dateLink = ($sp_found) ? false : true;
-								break;
-							case 1:
-								//enabled specific and disabled others
-								$dateLink = ($sp_found) ? true : false;
-								break;
-						}					
+					if($this_link){
+						echo("<td$id_str align=\"center\" class=\"$this_class\"><a href=\"$this_link\"><div>$this_day</div></a></td>");
+					}else{
+						echo("<td$id_str align=\"center\" class=\"$this_class\"><div>$this_day</div></td>");
 					}
 				}
-
-				//check date_pair1 &  2 and disabled date
-				if($date_pair1 && $dp_time > 0 && $currentTime < $dp_time){ //set date only after date_pair1
-					$dateLink = false;
-				}
-
-				if($date_pair2 && $dp_time > 0 && $currentTime > $dp_time){ //set date only before date_pair2
-					$dateLink = false;
-				}
-
-				$htmlClass[] = " ".strtolower($day_txt);
-
-                if($dateLink){
-                    //write date with link
-                    $class = implode(" ", $htmlClass);
-                    if($class) $class = " class=\"$class\"";
-
-                    echo("<td align=\"center\"$class><a href=\"javascript:selectDay('".str_pad($day, 2, "0", STR_PAD_LEFT)."');\"><div>$day</div></a></td>");
-                }else{
-                    $htmlClass[] = "disabledate";
-
-                    $class = implode(" ", $htmlClass);
-                    if($class) $class = " class=\"$class\"";
-
-                    //write date without link
-                    echo("<td align=\"center\"$class><div>$day</div></td>");
-                }
-                if((!$startMonday && $date_num == 6) || ($startMonday && $date_num == 0)){
-                    echo("</tr>");
-                    if($day < $total_thismonth) echo("<tr>");
-                    $row_count++;
-
-                    $dayinweek_counter = 0;
-                }else $dayinweek_counter++;
-            }
-
-            //write next other month
-            $write_end_days = (6-$dayinweek_counter)+1;
-            if($write_end_days > 0){
-                for($day=1; $day<=$write_end_days; $day++){
-                    echo("<td class=\"othermonth\" align=\"center\"><div>$day</div></td>");
-                }
-                 echo("</tr>");
-                 $row_count++;
-            }
-
-            //write fulfil row to 6 rows
-            for($day=$row_count; $day<6; $day++){
-                echo("<tr>");
-                $tmpday = $write_end_days+1;
-                for($f=$tmpday; $f<=($tmpday+6); $f++){
-                    echo("<td class=\"othermonth\" align=\"center\"><div>$f</div></td>");
-                }
-                $write_end_days += 6;
-                echo("</tr>");
-            }
-
-            //check next month is on allowed date
-            if($ta2_set && !$show_not_allow){
-                $nxMonthTime = strtotime($next_year."-".$next_month."-1");
-                if($nxMonthTime <= $time_allow2){
-                    $show_next = true;
-                }else $show_next = false;
-            }else $show_next = true; //always show when not set
-            ?>
+				echo("</tr>");
+			}
+        ?>
         </table>
         </div>
         <?php
@@ -603,19 +688,30 @@ window.onload = function(){
         ?>
         <div id="calendar-footer">
           <div class="btn">
-            <div style="float: left; text-align: center;">
+            <div style="float: <?php echo($rtl ? "right" : "left"); ?>;">
             <?php
             if($previous_year >= $year_start && $show_previous){
-            ?><a href="javascript:move('<?php echo(str_pad($previous_month, 2, "0", STR_PAD_LEFT));?>', '<?php echo($previous_year);?>');">&laquo;&nbsp;<?php echo(L_PREV); ?></a><?php
+            ?><a href="javascript:move('<?php echo(str_pad($previous_month, 2, "0", STR_PAD_LEFT));?>', '<?php echo($previous_year);?>');"><img src="images/btn_<?php echo($rtl ? "next" : "previous"); ?>.png" width="16" height="16" border="0" align="<?php echo(L_PREV); ?>" title="<?php echo(L_PREV); ?>" /></a>
+			<?php
             }else echo("&nbsp;");
             ?>
             </div>
-            <div style="float: right; text-align: center;">
+            <div style="float: <?php echo($rtl ? "left" : "right"); ?>;">
             <?php
             if($next_year <= $year_end && $show_next){
-            ?><a href="javascript:move('<?php echo(str_pad($next_month, 2, "0", STR_PAD_LEFT));?>', '<?php echo($next_year);?>');"><?php echo(L_NEXT); ?>&nbsp;&raquo;</a><?php
+            ?><a href="javascript:move('<?php echo(str_pad($next_month, 2, "0", STR_PAD_LEFT));?>', '<?php echo($next_year);?>');"><img src="images/btn_<?php echo($rtl ? "previous" : "next"); ?>.png" width="16" height="16" border="0" align="<?php echo(L_NEXT); ?>" title="<?php echo(L_NEXT); ?>" /></a>
+			<?php
             }else echo("&nbsp;");
             ?>
+            </div>
+            <div style="margin-left: 30px; margin-right: 30px;" align="center">
+            	<a href="javascript:today();" class="txt"><?php echo(L_TODAY); ?></a>
+                <?php
+				if($sld>0 && $slm>0 && $sly>0){
+				?> | <a href="javascript:unsetValue();" class="txt"><?php echo(L_UNSET); ?></a>
+                <?php
+				}
+				?>
             </div>
             <div style="clear: both;"></div>
           </div>
