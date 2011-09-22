@@ -177,7 +177,7 @@ if($ta1_set && !$show_not_allow){
 
 $date_num = date('w', $pvMonthTime);
 if(($startDate == 0 && $date_num == 6) || ($startDate > 0 && $date_num == $startDate-1) && $startwrite<$total_lastmonth){
-	$row_count++;
+	if(isset($calendar_rows[0])) $row_count++;
 }
 
 $dp_time = ($date_pair_value) ? strtotime($date_pair_value) : 0;
