@@ -24,7 +24,7 @@ define("L_DATE_BEFORE", "%s öncesi bir tarih seçin");
 define("L_DATE_AFTER", "%s sonra bir tarih seçin");
 define("L_DATE_BETWEEN", "%s ve %s\\narasındaki bir tarih seçin");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
-define("L_UNSET", "Seçimi kaldır"); // İptal
+define("L_UNSET", "İptal"); // Seçimi kaldır
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday... 6 for Saturday)
 define("FIRST_DAY", "1");
