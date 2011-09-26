@@ -1,16 +1,16 @@
 <?php
 # tr_TR translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.61
+# Version: 3.62
 # Language: Turkish / Türkçe
 # Translator: Volkan Övün <vovun@hotmail.com>
-# Last file update: 01.09.2011
+# Last file update: 26.09.2011
 
 // Class strings localization
 define("L_DAY", "Gün");
 define("L_MONTH", "Ay");
 define("L_YEAR", "Yıl");
-define("L_TODAY", "Bugün");
+define("L_TODAY", "Bu gün");
 define("L_PREV", "Önceki");
 define("L_NEXT", "Sonraki");
 define("L_REF_CAL", "Takvimi Yenile...");
@@ -24,9 +24,9 @@ define("L_DATE_BEFORE", "%s öncesi bir tarih seçin");
 define("L_DATE_AFTER", "%s sonra bir tarih seçin");
 define("L_DATE_BETWEEN", "%s ve %s\\narasındaki bir tarih seçin");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
-define("L_UNSET", "Iptal");
+define("L_UNSET", "Seçimi kaldır"); // İptal
 
-// Set the first day of the week in your language (0 for Sunday, 1 for Monday)
+// Set the first day of the week in your language (0 for Sunday, 1 for Monday... 6 for Saturday)
 define("FIRST_DAY", "1");
 
 // Months Long Names
@@ -78,9 +78,9 @@ define("L_CAL_FORMAT", "%d %B %Y");
 if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "tr_TR");
 
 // Set the TR specific date/time format
-if (stristr(PHP_OS,"win")) {
+if (stristr(PHP_OS,'win')) {
 setlocale(LC_ALL, "turkish.UTF-8", "turkish");
 } else {
-setlocale(LC_ALL, "tr_TR.UTF-8", "turkish.UTF-8");
+#setlocale(LC_ALL, "tr_TR.UTF-8", "turkish.UTF-8");
 }
 ?>

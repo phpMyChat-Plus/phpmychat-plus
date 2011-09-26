@@ -2,10 +2,10 @@
 # xx_YY translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Localized version of PHP-Calendar, DatePicker Calendar class: http://ciprianmp.com/scripts/calendar/
-# Version: 3.61
+# Version: 3.62
 # Language: Lang_name / Orig_name // ex: Romanian (English name) / Română (Original name)
 # Translator: YourName <email@...>
-# Last file update: 01.09.2011
+# Last file update: 26.09.2011
 
 # define("RTL", 1); // uncomment only for right-to-left text (Arabic, Hebrew)
 
@@ -78,7 +78,7 @@ define("L_S_SUN", "Sun");
 // Windows encoding
 define("WIN_DEFAULT", "windows-1252");
 define("L_CAL_FORMAT", "%d %B %Y");
-if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "xx_XX"); // en_US format of your language
+if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "xx_YY"); // en_US format of your language
 
 // Set the XX specific date/time format; ENGLISH EXAMPLE:
 if (stristr(PHP_OS,"win")) {
