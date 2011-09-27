@@ -82,7 +82,7 @@ function tc_submitDate(objname, dvalue, mvalue, yvalue){
 	var str = document.getElementById(objname+'_str').value;
 	var rtl = document.getElementById(objname+'_rtl').value;
 	var wks = document.getElementById(objname+'_wks').value;
-	var int = document.getElementById(objname+'_inv').value;
+	var int = document.getElementById(objname+'_int').value;
 	var hl = document.getElementById(objname+'_hl').value;
 
 	obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+dvalue+"&selected_month="+mvalue+"&selected_year="+yvalue+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&pr1="+pr1+"&pr2="+pr2+"&prv="+prv+"&spd="+spd+"&spt="+spt+"&och="+och+"&str="+str+"&rtl="+rtl+"&wks="+wks+"&int="+int+"&hl="+hl;
