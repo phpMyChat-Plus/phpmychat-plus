@@ -282,13 +282,15 @@ for($day=1; $day<=$total_thismonth; $day++){
 		}
 	}
 
-	//check date_pair1 &  2 and disabled date
-	if($date_pair1 && $dp_time > 0 && $currentTime < $dp_time){ //set date only after date_pair1
-		$dateLink = false;
+	//check date_pair1 & 2
+	if($date_pair1 && $dp_time > 0 && $currentTime >= $dp_time && ($currentTime <= mktime(0,0,0,$slm,$sld,$sly) && $slm>0 && $sld>0 && $sly>0)){ //set date only after date_pair1
+		if(!in_array("select", $htmlClass))
+			$htmlClass[] = "select";
 	}
 
-	if($date_pair2 && $dp_time > 0 && $currentTime > $dp_time){ //set date only before date_pair2
-		$dateLink = false;
+	if($date_pair2 && $dp_time > 0 && $currentTime <= $dp_time && ($currentTime >= mktime(0,0,0,$slm,$sld,$sly) && $slm>0 && $sld>0 && $sly>0)){ //set date only before date_pair2
+		if(!in_array("select", $htmlClass))
+			$htmlClass[] = "select";
 	}
 
 	$htmlClass[] = strtolower($day_txt);
@@ -691,7 +693,7 @@ window.onload = function(){
             <div style="float: <?php echo($rtl ? "right" : "left"); ?>;">
             <?php
             if($previous_year >= $year_start && $show_previous){
-            ?><a href="javascript:move('<?php echo(str_pad($previous_month, 2, "0", STR_PAD_LEFT));?>', '<?php echo($previous_year);?>');"><img src="images/btn_<?php echo($rtl ? "next" : "previous"); ?>.png" width="16" height="16" border="0" align="<?php echo(L_PREV); ?>" title="<?php echo(L_PREV); ?>" /></a>
+            ?><a href="javascript:move('<?php echo(str_pad($previous_month, 2, "0", STR_PAD_LEFT));?>', '<?php echo($previous_year);?>');"><img src="images/btn_<?php echo($rtl ? "next" : "previous"); ?>.png" width="16" height="16" border="0" alt="<?php echo(L_PREV); ?>" title="<?php echo(L_PREV); ?>" /></a>
 			<?php
             }else echo("&nbsp;");
             ?>
@@ -699,7 +701,7 @@ window.onload = function(){
             <div style="float: <?php echo($rtl ? "left" : "right"); ?>;">
             <?php
             if($next_year <= $year_end && $show_next){
-            ?><a href="javascript:move('<?php echo(str_pad($next_month, 2, "0", STR_PAD_LEFT));?>', '<?php echo($next_year);?>');"><img src="images/btn_<?php echo($rtl ? "previous" : "next"); ?>.png" width="16" height="16" border="0" align="<?php echo(L_NEXT); ?>" title="<?php echo(L_NEXT); ?>" /></a>
+            ?><a href="javascript:move('<?php echo(str_pad($next_month, 2, "0", STR_PAD_LEFT));?>', '<?php echo($next_year);?>');"><img src="images/btn_<?php echo($rtl ? "previous" : "next"); ?>.png" width="16" height="16" border="0" alt="<?php echo(L_NEXT); ?>" title="<?php echo(L_NEXT); ?>" /></a>
 			<?php
             }else echo("&nbsp;");
             ?>

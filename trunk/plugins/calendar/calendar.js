@@ -422,20 +422,41 @@ function checkPairValue(objname, d){
 	var dp1 = document.getElementById(objname+"_pr1").value;
 	var dp2 = document.getElementById(objname+"_pr2").value;
 
+	var this_value = document.getElementById(objname).value;
+	var date_array = this_value.split("-");
+	var this_date = new Date(date_array[2], date_array[1], date_array[0]);
+	var this_time = this_date.getTime()/1000;
+	
 	if(dp1 != "" && document.getElementById(dp1) != null){ //imply to date_pair1
 		document.getElementById(dp1+"_prv").value = d;
+		
+		var dp1_value = document.getElementById(dp1).value;
+		var dp1_array = dp1_value.split("-");
+		var dp1_date = new Date(dp1_array[2], dp1_array[1], dp1_array[0]);
+		var dp1_time = dp1_date.getTime()/1000;
 
-		var date_array = document.getElementById(dp1).value.split("-");
-
-		tc_submitDate(dp1, date_array[2], date_array[1], date_array[0]);
+		if(this_time < dp1_time){
+			tc_submitDate(dp1, "00", "00", "0000");
+		}else{
+			var date_array = document.getElementById(dp1).value.split("-");	
+			tc_submitDate(dp1, date_array[2], date_array[1], date_array[0]);
+		}
 	}
 
 	if(dp2 != "" && document.getElementById(dp2) != null){ //imply to date_pair2
 		document.getElementById(dp2+"_prv").value = d;
-
-		var date_array = document.getElementById(dp2).value.split("-");
-
-		tc_submitDate(dp2, date_array[2], date_array[1], date_array[0]);
+		
+		var dp2_value = document.getElementById(dp2).value;
+		var dp2_array = dp2_value.split("-");
+		var dp2_date = new Date(dp2_array[2], dp2_array[1], dp2_array[0]);
+		var dp2_time = dp2_date.getTime()/1000;
+		
+		if(this_time > dp2_time){
+			tc_submitDate(dp2, "00", "00", "0000");
+		}else{
+			var date_array = document.getElementById(dp2).value.split("-");
+			tc_submitDate(dp2, date_array[2], date_array[1], date_array[0]);
+		}
 	}
 }
 

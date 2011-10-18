@@ -1266,7 +1266,7 @@ function send_headers($title, $icon)
 	<SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
 	<!--
          <?php
-	if (eregi("MSIE|firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT'])){ ?>
+	if (eregi("MSIE|firefox|opera", $_SERVER['HTTP_USER_AGENT'])){ ?>
 		var NS4 = 1;
 		var IE4 = 1;
 		var ver4 = "H";
