@@ -6,7 +6,7 @@
 // add on: translation  implemented - default is English en_US
 //	- thanks ciprianmp
 //
-// version 3.64-loc (15 October 2011)
+// version 3.65-loc (18 October 2011)
 
 //fixed: Incorrect next month display show on 'February 2008'
 //	- thanks Neeraj Jain for bug report
@@ -131,6 +131,14 @@
 //fixed: incorrect parameter submited on javascript that caused an invalid date returned
 //	- thanks ciprianmp
 //
+//fixed: date selected highlight error
+//	- thanks John
+//
+//add on: auto hide calendar
+//	- thanks Wayne, Chris
+//
+//add on: auto focus an overlapping calendar to the top
+//
 ////********************************************************
 
 if((defined("L_LANG") && L_LANG != "en_US" && L_LANG != "L_LANG") || isset($lang) && $lang != "en_US") include_once("lang/calendar.".(isset($lang) ? $lang : L_LANG).".php");
@@ -187,6 +195,8 @@ class tc_calendar{
 	var $show_week = false;
 	var $week_hdr = L_WEEK_HDR;
 	var $interval = 1;
+	var $auto_hide = 1;
+	var $auto_hide_time = 1000;
 	var $hl = L_LANG;
 
 	//calendar constructor
@@ -291,7 +301,7 @@ class tc_calendar{
 
 		//check whether it is a date picker
 		if($this->date_picker){
-			echo("<div style=\"position: relative; z-index: $this->zindex; float: left;\">");
+			echo("<div style=\"position: relative; z-index: ".$this->zindex."; float: left;\" id=\"container_".$this->objname."\" onmouseover=\"javascript:focusCalendar('".$this->objname."');\" onmouseout=\"javascript:unFocusCalendar('".$this->objname."', ".$this->zindex.");\">");
 
 			if($this->show_input){
 				if($this->hl){
@@ -312,12 +322,12 @@ class tc_calendar{
 					$this->writeYear();
 				}
 			}else{
-				echo(" <a href=\"javascript:toggleCalendar('".$this->objname."');\">");
+				echo(" <a href=\"javascript:toggleCalendar('".$this->objname."', ".$this->auto_hide.", ".$this->auto_hide_time.");\">");
 				$this->writeDateContainer();
 				echo("</a>");
 			}
 
-			echo(" <a href=\"javascript:toggleCalendar('".$this->objname."');\">");
+			echo(" <a href=\"javascript:toggleCalendar('".$this->objname."', ".$this->auto_hide.", ".$this->auto_hide_time.");\">");
 			if(is_file($this->icon)){
 				echo("<img src=\"".$this->icon."\" id=\"tcbtn_".$this->objname."\" name=\"tcbtn_".$this->objname."\" border=\"0\" align=\"absmiddle\" />");
 			}else echo($this->txt);
@@ -360,6 +370,8 @@ class tc_calendar{
 		$params[] = "rtl=".$this->rtl;
 		$params[] = "wks=".$this->show_week;
 		$params[] = "int=".$this->interval;
+		$params[] = "hid=".$this->auto_hide;
+		$params[] = "hdt=".$this->auto_hide_time;
 		$params[] = "hl=".$this->hl;
 
 		$paramStr = (sizeof($params)>0) ? "?".implode("&", $params) : "";
@@ -404,8 +416,12 @@ class tc_calendar{
 			$div_align = "";
 		}
 
+		$mout_str = ($this->auto_hide && $this->date_picker) ? " onmouseout=\"javascript:prepareHide('".$this->objname."', ".$this->auto_hide_time.");\"" : "";
+
+		$mover_str = " onmouseover=\"javascript:cancelHide('".$this->objname."');\"";
+
 		//write the calendar container
-		echo("<div id=\"div_".$this->objname."\" style=\"position:".$div_position.";visibility:".$div_display.";z-index:100;".$div_align."\" class=\"div_calendar calendar-border\">");
+		echo("<div id=\"div_".$this->objname."\" style=\"position:".$div_position.";visibility:".$div_display.";z-index:100;".$div_align."\" class=\"div_calendar calendar-border\" ".$mout_str." ".$mover_str.">");
 		echo("<IFRAME id=\"".$this->objname."_frame\" src=\"".$this->path."calendar_form.php".$paramStr."\" frameBorder=\"0\" scrolling=\"no\" allowtransparency=\"true\" width=\"100%\" height=\"100%\" style=\"z-index: 100;\"></IFRAME>");
 		echo("</div>");
 	}
@@ -507,6 +523,8 @@ class tc_calendar{
 		$this->eHidden('rtl', $this->rtl);
 		$this->eHidden('wks', $this->show_week);
 		$this->eHidden('int', $this->interval);
+		$this->eHidden('hid', $this->auto_hide);
+		$this->eHidden('hdt', $this->auto_hide_time);
 		$this->eHidden('hl', $this->hl);
 	}
 
@@ -789,6 +807,13 @@ class tc_calendar{
 
 	function showWeeks($flag){
 		$this->show_week = $flag;
+	}
+	
+	function setAutoHide($auto, $time = ""){
+		$this->auto_hide = ($auto) ? 1 : 0;
+		if($time != "" && $time >= 0){
+			$this->auto_hide_time = $time;
+		}
 	}
 }
 ?>

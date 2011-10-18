@@ -38,6 +38,8 @@ $tc_onchanged = (isset($_REQUEST["och"])) ? $_REQUEST["och"] : "";
 $rtl = (isset($_REQUEST["rtl"])) ? $_REQUEST["rtl"] : RTL;
 $show_weeks = (isset($_REQUEST["wks"])) ? $_REQUEST["wks"] : false;
 $interval = (isset($_REQUEST["int"])) ? $_REQUEST["int"] : 1;
+$auto_hide = (isset($_REQUEST["hid"])) ? $_REQUEST["hid"] : 0;
+$auto_hide_time = (isset($_REQUEST["hdt"])) ? $_REQUEST["hdt"] : 1000;
 $hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : 'en_US';
 
 //check year to be select in case of date_allow is set
@@ -233,7 +235,6 @@ for($day=1; $day<=$total_thismonth; $day++){
 		}
 	}
 
-
 	//check specific date
 	if($dateLink){
 		if(is_array($sp_dates) && sizeof($sp_dates) > 0){
@@ -283,12 +284,12 @@ for($day=1; $day<=$total_thismonth; $day++){
 	}
 
 	//check date_pair1 & 2
-	if($date_pair1 && $dp_time > 0 && $currentTime >= $dp_time && ($currentTime <= mktime(0,0,0,$slm,$sld,$sly) && $slm>0 && $sld>0 && $sly>0)){ //set date only after date_pair1
+	if($date_pair1 && ($dp_time && $dp_time > 0) && $currentTime >= $dp_time && ($currentTime <= mktime(0,0,0,$slm,$sld,$sly) && $slm>0 && $sld>0 && $sly>0)){ //set date only after date_pair1
 		if(!in_array("select", $htmlClass))
 			$htmlClass[] = "select";
 	}
 
-	if($date_pair2 && $dp_time > 0 && $currentTime <= $dp_time && ($currentTime >= mktime(0,0,0,$slm,$sld,$sly) && $slm>0 && $sld>0 && $sly>0)){ //set date only before date_pair2
+	if($date_pair2 && ($dp_time && $dp_time > 0) && $currentTime <= $dp_time && ($currentTime >= mktime(0,0,0,$slm,$sld,$sly) && $slm>0 && $sld>0 && $sly>0)){ //set date only before date_pair2
 		if(!in_array("select", $htmlClass))
 			$htmlClass[] = "select";
 	}
@@ -373,6 +374,9 @@ if($cobj->hl){
 <link href="calendar.css" rel="stylesheet" type="text/css" />
 <script language="javascript">
 <!--
+var ccWidth = 0;
+var ccHeight = 0;
+
 function setValue(){
 	var f = document.calendarform;
 	var date_selected = padString(f.selected_year.value, 4, "0") + "-" + padString(f.selected_month.value, 2, "0") + "-" + padString(f.selected_day.value, 2, "0");
@@ -392,7 +396,7 @@ function unsetValue(){
 	setValue();
 
 	this.loading();
-	f.submit();
+	//f.submit();
 }
 
 function restoreValue(){
@@ -411,7 +415,7 @@ function selectDay(d){
 	setValue();
 
 	this.loading();
-	f.submit();
+	//f.submit();
 
 	submitNow(f.selected_day.value, f.selected_month.value, f.selected_year.value);
 }
@@ -495,6 +499,13 @@ function padString(stringToPad, padLength, padString) {
 }
 
 function loading(){
+	if(this.ccWidth > 0 && this.ccHeight > 0){
+		var ccobj = getObject('calendar-container');
+
+		ccobj.style.width = this.ccWidth+'px';
+		ccobj.style.height = this.ccHeight+'px';
+	}
+
 	document.getElementById('calendar-container').innerHTML = "<div id=\"calendar-body\"><div class=\"refresh\"><div align=\"center\" class=\"txt-container\"><?php echo(L_REF_CAL); ?></div></div></div>";
 	adjustContainer();
 }
@@ -522,6 +533,10 @@ function adjustContainer(){
 			div_obj.style.width = tc_obj.offsetWidth+'px';
 			div_obj.style.height = tc_obj.offsetHeight+'px';
 			//alert(div_obj.style.width+','+div_obj.style.height);
+
+			var ccsize = getObject('calendar-container');
+			this.ccWidth = ccsize.offsetWidth;
+			this.ccHeight = ccsize.offsetHeight;
 		}
 	}
 }
@@ -539,7 +554,7 @@ window.onload = function(){
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 <div id="calendar-page">
     <div id="calendar-header" align="center">
-        <?php if($dp){ ?>
+        <?php if($dp && !$auto_hide){ ?>
         <div align="<?php echo($rtl ? "left" : "right"); ?>" class="closeme"><a href="javascript:closeMe();"><img src="images/close.gif" border="0" /></a></div>
         <?php } ?>
         <form id="calendarform" name="calendarform" method="post" action="<?php echo($thispage);?>">
@@ -635,6 +650,8 @@ window.onload = function(){
             <input name="rtl" type="hidden" id="rtl" value="<?php echo($rtl);?>" />
             <input name="wks" type="hidden" id="wks" value="<?php echo($show_weeks);?>" />
             <input name="int" type="hidden" id="int" value="<?php echo($interval);?>" />
+            <input name="hid" type="hidden" id="hid" value="<?php echo($auto_hide);?>" />
+            <input name="hdt" type="hidden" id="hdt" value="<?php echo($auto_hide_time);?>" />
             <input name="hl" type="hidden" id="hl" value="<?php echo($hl);?>" />
       </form>
     </div>

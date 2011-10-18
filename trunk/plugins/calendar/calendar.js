@@ -1,10 +1,74 @@
-function toggleCalendar(objname){
+var hideCalendarTimer = new Array();
+
+function calendarTimer(objname){
+	this.objname = objname;
+	this.timers = new Array();
+}
+
+function toggleCalendar(objname, auto_hide, hide_timer){
 	var div_obj = document.getElementById('div_'+objname);
-	if (div_obj.style.visibility=="hidden") {
-	  div_obj.style.visibility = 'visible';
-	  document.getElementById(objname+'_frame').contentWindow.adjustContainer();
-	}else{
-	  div_obj.style.visibility = 'hidden';
+	if(div_obj != null){
+		if (div_obj.style.visibility=="hidden") {
+		  div_obj.style.visibility = 'visible';
+		  document.getElementById(objname+'_frame').contentWindow.adjustContainer();
+		  
+		  //auto hide if inactivities with calendar after open
+		  if(auto_hide){
+			  if(hide_timer < 3000) hide_timer = 3000; //put default 3 secs
+			  prepareHide(objname, hide_timer);
+		  }
+		}else{
+		  div_obj.style.visibility = 'hidden';
+		}
+	}
+}
+
+function showCalendar(objname){
+	var div_obj = document.getElementById('div_'+objname);
+	if(div_obj != null){
+		div_obj.style.visibility = 'visible';
+		document.getElementById(objname+'_frame').contentWindow.adjustContainer();
+	}
+}
+
+function hideCalendar(objname){
+	var div_obj = document.getElementById('div_'+objname);
+	if(div_obj != null){
+		div_obj.style.visibility = 'hidden';	
+	}
+}
+
+function prepareHide(objname, timeout){
+	cancelHide(objname);
+	
+	var timer = setTimeout(function(){ hideCalendar(objname) }, timeout);
+	
+	var found = false;
+	for(i=0; i<this.hideCalendarTimer.length; i++){
+		if(this.hideCalendarTimer[i].objname == objname){
+			found = true;
+			this.hideCalendarTimer[i].timers[this.hideCalendarTimer[i].timers.length] = timer;
+		}
+	}
+	
+	if(!found){
+		var obj = new calendarTimer(objname);
+		obj.timers[obj.timers.length] = timer;
+		
+		this.hideCalendarTimer[this.hideCalendarTimer.length] = obj;
+	}
+}
+
+function cancelHide(objname){
+	for(i=0; i<this.hideCalendarTimer.length; i++){
+		if(this.hideCalendarTimer[i].objname == objname){
+			var timers = this.hideCalendarTimer[i].timers;
+			for(n=0; n<timers.length; n++){
+				clearTimeout(timers[n]);
+			}
+			this.hideCalendarTimer[i].timers = new Array();
+			break;
+		}
 	}
 }
 
@@ -22,6 +86,9 @@ function setValue(objname, d){
 	//calling calendar_onchanged script
 	if(document.getElementById(objname+"_och").value != "" && changed)
 		calendar_onchange(objname);
+
+	var date_array = document.getElementById(objname).value.split("-");	
+	tc_submitDate(objname, date_array[2], date_array[1], date_array[0]);
 }
 
 function updateValue(objname, d){
@@ -83,9 +150,11 @@ function tc_submitDate(objname, dvalue, mvalue, yvalue){
 	var rtl = document.getElementById(objname+'_rtl').value;
 	var wks = document.getElementById(objname+'_wks').value;
 	var int = document.getElementById(objname+'_int').value;
+	var hid = document.getElementById(objname+'_hid').value;
+	var hdt = document.getElementById(objname+'_hdt').value;
 	var hl = document.getElementById(objname+'_hl').value;
 
-	obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+dvalue+"&selected_month="+mvalue+"&selected_year="+yvalue+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&pr1="+pr1+"&pr2="+pr2+"&prv="+prv+"&spd="+spd+"&spt="+spt+"&och="+och+"&str="+str+"&rtl="+rtl+"&wks="+wks+"&int="+int+"&hl="+hl;
+	obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+dvalue+"&selected_month="+mvalue+"&selected_year="+yvalue+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&pr1="+pr1+"&pr2="+pr2+"&prv="+prv+"&spd="+spd+"&spt="+spt+"&och="+och+"&str="+str+"&rtl="+rtl+"&wks="+wks+"&int="+int+"&hid="+hid+"&hdt="+hdt+"&hl="+hl;
 
 	obj.contentWindow.submitNow(dvalue, mvalue, yvalue);
 }
@@ -423,19 +492,19 @@ function checkPairValue(objname, d){
 	var dp2 = document.getElementById(objname+"_pr2").value;
 
 	var this_value = document.getElementById(objname).value;
-	var date_array = this_value.split("-");
-	var this_date = new Date(date_array[2], date_array[1], date_array[0]);
-	var this_time = this_date.getTime()/1000;
+	var this_time = Date.parse(this_value)/1000;
 	
+	//implementing dp2
 	if(dp1 != "" && document.getElementById(dp1) != null){ //imply to date_pair1
+		//set date pair value to date selected
 		document.getElementById(dp1+"_prv").value = d;
-		
+	
 		var dp1_value = document.getElementById(dp1).value;
-		var dp1_array = dp1_value.split("-");
-		var dp1_date = new Date(dp1_array[2], dp1_array[1], dp1_array[0]);
-		var dp1_time = dp1_date.getTime()/1000;
+		var dp1_time = Date.parse(dp1_value)/1000;
 
 		if(this_time < dp1_time){
+			//set self date pair value to null
+			document.getElementById(objname+"_prv").value = "";
 			tc_submitDate(dp1, "00", "00", "0000");
 		}else{
 			var date_array = document.getElementById(dp1).value.split("-");	
@@ -443,15 +512,17 @@ function checkPairValue(objname, d){
 		}
 	}
 
+	//implementing dp1
 	if(dp2 != "" && document.getElementById(dp2) != null){ //imply to date_pair2
+		//set date pair value to date selected
 		document.getElementById(dp2+"_prv").value = d;
-		
+	
 		var dp2_value = document.getElementById(dp2).value;
-		var dp2_array = dp2_value.split("-");
-		var dp2_date = new Date(dp2_array[2], dp2_array[1], dp2_array[0]);
-		var dp2_time = dp2_date.getTime()/1000;
+		var dp2_time = Date.parse(dp2_value)/1000;
 		
 		if(this_time > dp2_time){
+			//set self date pair value to null
+			document.getElementById(objname+"_prv").value = "";
 			tc_submitDate(dp2, "00", "00", "0000");
 		}else{
 			var date_array = document.getElementById(dp2).value.split("-");
@@ -565,6 +636,20 @@ function calendar_onchange(objname){
 	var fc = document.getElementById(objname+"_och").value;
 	//alert("Date has been set to "+obj.value);
 	eval(urldecode(fc));
+}
+
+function focusCalendar(objname){
+	var obj = document.getElementById("container_"+objname);
+	if(obj != null){
+		obj.style.zIndex = 999;
+	}
+}
+
+function unFocusCalendar(objname, zidx){
+	var obj = document.getElementById("container_"+objname);
+	if(obj != null){
+		obj.style.zIndex = zidx;
+	}
 }
 
 function setDateLabel(objname){
