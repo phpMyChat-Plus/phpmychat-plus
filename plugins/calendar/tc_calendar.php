@@ -6,7 +6,7 @@
 // add on: translation  implemented - default is English en_US
 //	- thanks ciprianmp
 //
-// version 3.62-loc (20 September 2011)
+// version 3.64-loc (15 October 2011)
 
 //fixed: Incorrect next month display show on 'February 2008'
 //	- thanks Neeraj Jain for bug report
@@ -124,6 +124,12 @@
 //	- thanks ciprianmp
 //
 //add on: startDate function and will be used instead of startMonday
+//
+//changed: make the DatePair function selectable on any dates. Date-from must be before Date-to, and on the other hand, otherwise it will be reset
+//	- thanks Chris, Rickard, ciprianmp
+//
+//fixed: incorrect parameter submited on javascript that caused an invalid date returned
+//	- thanks ciprianmp
 //
 ////********************************************************
 
