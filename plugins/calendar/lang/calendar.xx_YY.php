@@ -2,10 +2,10 @@
 # xx_YY translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Localized version of PHP-Calendar, DatePicker Calendar class: http://ciprianmp.com/scripts/calendar/
-# Version: 3.62
+# Version: 3.65
 # Language: Lang_name / Orig_name // ex: Romanian (English name) / Română (Original name)
 # Translator: YourName <email@...>
-# Last file update: 26.09.2011
+# Last file update: 20.10.2011
 
 # define("RTL", 1); // uncomment only for right-to-left text (Arabic, Hebrew)
 

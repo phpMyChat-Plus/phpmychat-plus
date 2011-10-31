@@ -6,7 +6,7 @@
 // add on: translation  implemented - default is English en_US
 //	- thanks ciprianmp
 //
-// version 3.65-loc (18 October 2011)
+// version 3.66-loc (29 October 2011)
 
 //fixed: Incorrect next month display show on 'February 2008'
 //	- thanks Neeraj Jain for bug report
@@ -779,9 +779,14 @@ class tc_calendar{
 		if(function_exists("json_encode")){
 			return json_encode($obj);
 		}else{
-			//only array is assumed for now
+			//only array is assumed for now			
 			if(is_array($obj)){
-				return "[".implode(",", $obj)."]";
+				$return_arr = array();
+				foreach($obj as $arr){
+					if(is_array($arr))
+						$return_arr[] = "[".implode(",", $arr)."]";
+				}
+				return "[".implode(",", $return_arr)."]";
 			}else return "";
 		}
 	}
@@ -796,7 +801,24 @@ class tc_calendar{
 			$str = trim($str);
 			if($str && strlen($str) > 2){
 				$str = substr($str, 1, strlen($str)-2);
-				return explode(",", $str);
+				
+				$return_arr = array();
+				
+				$offset = 0;
+				for($i=0; $i<3; $i++){
+					//find first '['
+					$start_pos = strpos($str, "[", $offset);
+					if($start_pos !== false){
+						//find next ']'	
+						$end_pos = strpos($str, "]", $offset);
+						if($end_pos !== false){
+							$return_str = substr($str, $start_pos+1, ($end_pos-$start_pos-1));
+							$return_arr[] = explode(",", $return_str);
+							$offset = $end_pos+1;
+						}else $return_arr[] = array();
+					}else $return_arr[] = array();
+				}
+				return $return_arr;
 			}else return array();
 		}
 	}
