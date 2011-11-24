@@ -6,7 +6,7 @@
 // add on: translation  implemented - default is English en_US
 //	- thanks ciprianmp
 //
-// version 3.66-loc (29 October 2011)
+// version 3.68-loc (25 November 2011)
 
 //fixed: Incorrect next month display show on 'February 2008'
 //	- thanks Neeraj Jain for bug report
@@ -138,6 +138,16 @@
 //	- thanks Wayne, Chris
 //
 //add on: auto focus an overlapping calendar to the top
+//
+//fixed: json checking function return error when server does not support for json
+//	- thanks strangeplant
+//
+//fixed: javascript possible error on Date.parse
+//fixed: add on-change javascript in dropdown datepicker mode (missing previously)
+//	- thanks Alex
+//
+//fixed: 1st and 31st are always disabled on php4
+//	- thanks dl
 //
 ////********************************************************
 
