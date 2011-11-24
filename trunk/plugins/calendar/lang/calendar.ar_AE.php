@@ -61,9 +61,9 @@ define("L_S_DEC", "الأول");
 define("L_MON", "الاثنين");
 define("L_TUE", "الثلاثاء");
 define("L_WED", "الأربعاء");
-define("L_THU", "الخميس");
-define("L_FRI", "الجمعة");
-define("L_SAT", "السبت");
+define("L_THU", "الخَمِيس");
+define("L_FRI", "الجُمْعَة");
+define("L_SAT", "السَّبْت");
 define("L_SUN", "الأحد");
 // Week days Short Names
 define("L_S_MON", "ن");

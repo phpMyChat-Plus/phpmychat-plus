@@ -1,6 +1,8 @@
 <?php
 if (!isset($ChatPath)) $ChatPath = "../";
 
+error_reporting (E_ERROR | E_WARNING | E_PARSE);
+
 //session variables
 ini_set('session.bug_compat_42',0);
 ini_set('session.bug_compat_warn',0);

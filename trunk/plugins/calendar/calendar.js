@@ -84,8 +84,7 @@ function setValue(objname, d){
 	checkPairValue(objname, d);
 
 	//calling calendar_onchanged script
-	if(document.getElementById(objname+"_och").value != "" && changed)
-		calendar_onchange(objname);
+	if(document.getElementById(objname+"_och").value != "" && changed) calendar_onchange(objname);
 
 	var date_array = document.getElementById(objname).value.split("-");	
 	tc_submitDate(objname, date_array[2], date_array[1], date_array[0]);
@@ -181,6 +180,12 @@ function tc_setDay(objname, dvalue){
 	}
 
 	checkPairValue(objname, obj.value);
+
+	//compare if value is changed
+	var changed = (document.getElementById(objname).value != d) ? true : false;
+
+	//calling calendar_onchanged script
+	if(document.getElementById(objname+"_och").value != "" && changed) calendar_onchange(objname);
 }
 
 function tc_setMonth(objname, mvalue){
@@ -203,6 +208,12 @@ function tc_setMonth(objname, mvalue){
 	}
 
 	checkPairValue(objname, obj.value);
+
+	//compare if value is changed
+	var changed = (document.getElementById(objname).value != d) ? true : false;
+
+	//calling calendar_onchanged script
+	if(document.getElementById(objname+"_och").value != "" && changed) calendar_onchange(objname);
 }
 
 function tc_setYear(objname, yvalue){
@@ -225,6 +236,12 @@ function tc_setYear(objname, yvalue){
 	}
 
 	checkPairValue(objname, obj.value);
+
+	//compare if value is changed
+	var changed = (document.getElementById(objname).value != d) ? true : false;
+
+	//calling calendar_onchanged script
+	if(document.getElementById(objname+"_och").value != "" && changed) calendar_onchange(objname);
 }
 
 function yearEnter(e){
@@ -492,7 +509,12 @@ function checkPairValue(objname, d){
 	var dp2 = document.getElementById(objname+"_pr2").value;
 
 	var this_value = document.getElementById(objname).value;
-	var this_time = Date.parse(this_value)/1000;
+	//var this_time = Date.parse(this_value)/1000;
+	//var this_time2 = Date.parse(this_value)/1000;
+	//var this_time1 = Date.parse(this_value.replace(/-/g,'/'))/1000;
+	
+	var this_dates = this_value.split('-');
+	var this_time = new Date(this_dates[0], this_dates[1]-1, this_dates[2]).getTime()/1000;
 	
 	//implementing dp2
 	if(dp1 != "" && document.getElementById(dp1) != null){ //imply to date_pair1
@@ -500,15 +522,19 @@ function checkPairValue(objname, d){
 		document.getElementById(dp1+"_prv").value = d;
 	
 		var dp1_value = document.getElementById(dp1).value;
-		var dp1_time = Date.parse(dp1_value)/1000;
+		//var dp1_time = Date.parse(dp1_value)/1000;
+		//var dp1_time = Date.parse(dp1_value.replace(/-/g,'/'))/1000;
+		
+		var dp1_dates = dp1_value.split('-');
+		var dp1_time = new Date(dp1_dates[0], dp1_dates[1]-1, dp1_dates[2]).getTime()/1000;
 
 		if(this_time < dp1_time){
 			//set self date pair value to null
 			document.getElementById(objname+"_prv").value = "";
 			tc_submitDate(dp1, "00", "00", "0000");
 		}else{
-			var date_array = document.getElementById(dp1).value.split("-");	
-			tc_submitDate(dp1, date_array[2], date_array[1], date_array[0]);
+			//var date_array = document.getElementById(dp1).value.split("-");	
+			tc_submitDate(dp1, dp1_dates[2], dp1_dates[1], dp1_dates[0]);
 		}
 	}
 
@@ -518,15 +544,19 @@ function checkPairValue(objname, d){
 		document.getElementById(dp2+"_prv").value = d;
 	
 		var dp2_value = document.getElementById(dp2).value;
-		var dp2_time = Date.parse(dp2_value)/1000;
+		//var dp2_time = Date.parse(dp2_value)/1000;
+		//var dp2_time = Date.parse(dp2_value.replace(/-/g,'/'))/1000;
 		
+		var dp2_dates = dp2_value.split('-');
+		var dp2_time = new Date(dp2_dates[0], dp2_dates[1]-1, dp2_dates[2]).getTime()/1000;
+
 		if(this_time > dp2_time){
 			//set self date pair value to null
 			document.getElementById(objname+"_prv").value = "";
 			tc_submitDate(dp2, "00", "00", "0000");
 		}else{
-			var date_array = document.getElementById(dp2).value.split("-");
-			tc_submitDate(dp2, date_array[2], date_array[1], date_array[0]);
+			//var date_array = document.getElementById(dp2).value.split("-");
+			tc_submitDate(dp2, dp2_dates[2], dp2_dates[1], dp2_dates[0]);
 		}
 	}
 }

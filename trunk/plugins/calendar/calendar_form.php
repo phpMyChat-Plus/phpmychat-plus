@@ -256,10 +256,12 @@ for($day=1; $day<=$total_thismonth; $day++){
 			//check on monthly recursive
 			if(isset($sp_dates[1]) && is_array($sp_dates[1]) && !$sp_found){
 				foreach($sp_dates[1] as $sp_time){
-					$sp_time_d = date('d', $sp_time);
-					if($sp_time_d == $day){
-						$sp_found = true;
-						break;
+					if($sp_time != "" && $sp_time > 0){ 
+						$sp_time_d = date('d', $sp_time);
+						if($sp_time_d == $day){
+							$sp_found = true;
+							break;
+						}
 					}
 				}
 			}
