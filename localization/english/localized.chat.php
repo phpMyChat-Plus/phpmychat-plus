@@ -134,7 +134,7 @@ define("L_ERR_USR_10", "Wrong username or password.");
 define("L_ERR_USR_11", "You must be administrator.");
 define("L_ERR_USR_12", "You are the administrator, so you cannot be removed.");
 define("L_ERR_USR_13", "To create your own room you must be registered.");
-define("L_ERR_USR_14", "You must be registered before chatting.");
+define("L_ERR_USR_14", "You must be registered to chat.");
 define("L_ERR_USR_15", "You must type your full name.");
 define("L_ERR_USR_16", "Only these extra-characters allowed:\\n".$REG_CHARS_ALLOWED."\\nSpaces, commas or backslashes (\\) not allowed.\\nCheck the syntax.");
 define("L_ERR_USR_16a", "Only these extra-characters allowed:<br />".$REG_CHARS_ALLOWED."<br />Spaces, commas or backslashes (\\) not allowed. Check the syntax.");
@@ -304,8 +304,8 @@ define("L_WHOIS_REG", "Registered");
 define("L_WHOIS_BOT", "Bot");
 
 // Notification messages of user entrance/exit
-define("ENTER_ROM", "%s enters this room.");
-define("L_EXIT_ROM", "%s exits this room.");
+define("ENTER_ROM", "%s entered this room.");
+define("L_EXIT_ROM", "%s left this room.");
 if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
