@@ -347,7 +347,6 @@ if (trim($C)!="")
 	    list($C) = $DbLink->next_record();
 		}
 	}
-	if (!COLOR_ALLOW_GUESTS && $status == "u") $C = '';
 	if (COLOR_FILTERS)
 	{
 		if (!isset($C))
@@ -380,6 +379,7 @@ if (trim($C)!="")
 			}
 		}
 	};
+	if (!COLOR_ALLOW_GUESTS && $status == "u") $C = '';
 		include_once("./lib/swearing.lib.php");
 		if (checkwords($C, true, $Charset)) $C = '';		//if user is using a swear word (defined in swearing.lib.php), the font color will resets to default. this is to keep your database as well as our computer clean of swearing (no swear into your cookies on your local computer).
 		if (isset($C) && $C != '' && strcasecmp($C, COLOR_CD) != 0)
@@ -404,7 +404,6 @@ if (trim($C)!="")
 	if (isset($_COOKIE["CookieColor"]) && (!isset($C))) $C = strcasecmp($_COOKIE["CookieColor"], $COLOR_TB) != 0 ? $_COOKIE["CookieColor"] : '';
 	//Registered colorname to use for text color by Ciprian
 	elseif (isset($colorname) && (!isset($C))) $C = strcasecmp($colorname, $COLOR_TB) != 0 ? $colorname : '';
-	if (!COLOR_ALLOW_GUESTS && $status == "u") $C = '';
 	if (COLOR_FILTERS)
 	{
 		if (!isset($C))
@@ -451,6 +450,7 @@ if (trim($C)!="")
 			}
 		}
 	};
+	if (!COLOR_ALLOW_GUESTS && $status == "u") $C = '';
 
 // ** Test for online commands and swear words **
 $IsCommand = false;
