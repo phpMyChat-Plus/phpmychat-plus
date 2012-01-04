@@ -315,7 +315,7 @@ class tc_calendar{
 
 			if($this->show_input){
 				if($this->hl){
-					$to_replace = array("%"," ",".",",","ב","年","日");
+					$to_replace = array("%"," ",".",",","ב","年","日","년","일");
 					$order = str_replace($to_replace,"",L_CAL_FORMAT);
 					if(strpos($order,"d") == 0 && !$this->rtl) $this->writeDay();
 					elseif(strpos($order,"B") == 0 && !$this->rtl) $this->writeMonth();
@@ -444,7 +444,7 @@ class tc_calendar{
 		echo("<option value=\"00\"".($this->rtl ? " dir=\"rtl\"" : "").">".L_DAY."</option>");
 		for($i=1; $i<=$total_days; $i++){
 			$selected = ((int)$this->day == $i) ? " selected" : "";
-			echo("<option value=\"".str_pad($i, 2 , "0", STR_PAD_LEFT)."\"$selected".($this->rtl ? " dir=\"rtl\"" : "").">$i</option>");
+			echo("<option value=\"".str_pad($i, 2 , "0", STR_PAD_LEFT)."\"$selected".($this->rtl ? " dir=\"rtl\"" : "").">".$i."</option>");
 		}
 		echo("</select> ");
 	}
@@ -497,7 +497,7 @@ class tc_calendar{
 
 		for($i=$year_end; $i>=$year_start; $i--){
 			$selected = ((int)$this->year == $i) ? " selected" : "";
-			echo("<option value=\"$i\"$selected".($this->rtl ? " dir=\"rtl\"" : "").">$i</option>");
+			echo("<option value=\"$i\"$selected".($this->rtl ? " dir=\"rtl\"" : "").">".$i.(L_USE_YMD_DROP ? L_YEAR : "")."</option>");
 		}
 		echo("</select> ");
 	}

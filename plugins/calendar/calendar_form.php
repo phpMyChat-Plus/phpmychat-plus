@@ -359,7 +359,7 @@ if($ta2_set && !$show_not_allow){
 }else $show_next = true; //always show when not set
 
 if($cobj->hl){
-	$to_replace = array("d","%"," ",".",",","ב","年","日");
+	$to_replace = array("d","%"," ",".",",","ב","年","日","년","일");
 	$order = str_replace($to_replace,"",L_CAL_FORMAT);
 	if(strpos($order,"B") == 0) $first_input = "B";
 	elseif(strpos($order,"Y") == 0) $first_input = "Y";
@@ -586,7 +586,7 @@ window.onload = function(){
               //write year options
               for($year=$year_end; $year>=$year_start; $year--){
                 $selected = ($year == $y) ? " selected" : "";
-                echo("<option value=\"$year\"$selected>$year</option>");
+                echo("<option value=\"".$year."\"$selected>".$year.(L_USE_YMD_DROP ? L_YEAR : "")."</option>");
               }
               ?>
               </select>
@@ -595,7 +595,7 @@ window.onload = function(){
 			}
 			if ($second_input == "B"){
 			?>
-              <td align="right"><select name="m" onchange="javascript:submitCalendar();"">
+              <td align="right"><select name="m" onchange="javascript:submitCalendar();">
               <?php
               for($f=1; $f<=sizeof($monthnames); $f++){
                 $selected = ($f == (int)$m) ? " selected" : "";
@@ -615,7 +615,7 @@ window.onload = function(){
               //write year options
               for($year=$year_end; $year>=$year_start; $year--){
                 $selected = ($year == $y) ? " selected" : "";
-                echo("<option value=\"$year\"$selected>$year</option>");
+                echo("<option value=\"".$year."\"$selected>".$year.(L_USE_YMD_DROP ? L_YEAR : "")."</option>");
               }
               ?>
               </select>
