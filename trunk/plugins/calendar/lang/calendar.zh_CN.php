@@ -2,10 +2,10 @@
 # zh_CN translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Localized version of PHP-Calendar, DatePicker Calendar class: http://ciprianmp.com/scripts/calendar/
-# Version: 3.61
+# Version: 3.68
 # Language: Chinese Simplified / 简体中文 // ex: Romanian (English name) / Română (Original name)
 # Translator: Ciprian <ciprianmp@yahoo.com>
-# Last file update: 01.09.2011
+# Last file update: 31.12.2011
 
 // Class strings localization
 define("L_DAY", "日");
@@ -72,6 +72,9 @@ define("L_S_THU", "四");
 define("L_S_FRI", "五");
 define("L_S_SAT", "六");
 define("L_S_SUN", "日");
+
+// Display extratext beside years, months and/or days in dropdowns (eg. Korean and Japan)
+define("L_USE_YMD_DROP", 1);
 
 // Windows encoding
 #define("WIN_DEFAULT", "windows-1252");

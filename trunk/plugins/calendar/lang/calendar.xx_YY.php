@@ -2,10 +2,10 @@
 # xx_YY translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Localized version of PHP-Calendar, DatePicker Calendar class: http://ciprianmp.com/scripts/calendar/
-# Version: 3.65
+# Version: 3.68
 # Language: Lang_name / Orig_name // ex: Romanian (English name) / Română (Original name)
 # Translator: YourName <email@...>
-# Last file update: 20.10.2011
+# Last file update: 31.12.2011
 
 # define("RTL", 1); // uncomment only for right-to-left text (Arabic, Hebrew)
 
@@ -74,6 +74,9 @@ define("L_S_THU", "Thu");
 define("L_S_FRI", "Fri");
 define("L_S_SAT", "Sat");
 define("L_S_SUN", "Sun");
+
+// Display extratext beside years, months and/or days in dropdowns (eg. Korean and Japan)
+#define("L_USE_YMD_DROP", 0);
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1252");

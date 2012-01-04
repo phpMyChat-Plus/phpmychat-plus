@@ -1,10 +1,10 @@
 <?php
 # ja_JP translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.61
+# Version: 3.68
 # Language: Japanese / 日本語
 # Translator:  Dendeke <konchakka211@yahoo.co.jp>
-# Last file update: 01.09.2011
+# Last file update: 31.12.2011
 
 // Class strings localization
 define("L_DAY", "日");
@@ -71,6 +71,9 @@ define("L_S_THU", "木");
 define("L_S_FRI", "金");
 define("L_S_SAT", "土");
 define("L_S_SUN", "日");
+
+// Display extratext beside years, months and/or days in dropdowns (eg. Korean and Japan)
+define("L_USE_YMD_DROP", 1);
 
 define("WIN_DEFAULT", "Shift_JIS");
 define("L_CAL_FORMAT", "%Y年%B%d日");

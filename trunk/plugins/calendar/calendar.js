@@ -493,6 +493,7 @@ function tc_updateDay(objname, yearNum, monthNum, daySelected){
 		var newOption = document.createElement("OPTION");
 		newOption.text = d;
 		newOption.value = d;
+		if(l_use_ymd_drop == "1") newOption.text += l_day;
 
 		dayObj.options[d] = new Option(newOption.text, padString(newOption.value, 2, "0"));
 	}

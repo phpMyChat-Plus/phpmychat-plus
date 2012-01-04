@@ -98,6 +98,9 @@ if(!defined("L_S_FRI")) define("L_S_FRI", "Fr");
 if(!defined("L_S_SAT")) define("L_S_SAT", "Sa");
 if(!defined("L_S_SUN")) define("L_S_SUN", "Su");
 
+// Display extratext beside years, months and/or days in dropdowns (eg. Korean and Japan)
+if(!defined("L_USE_YMD_DROP")) define("L_USE_YMD_DROP", 0);
+
 // Windows encoding
 if(!defined("WIN_DEFAULT")) define("WIN_DEFAULT", "windows-1252");
 if(!defined("L_CAL_FORMAT")) define("L_CAL_FORMAT", "%B %d, %Y");
@@ -113,6 +116,10 @@ if(!defined("DATE_FORMAT")) define("DATE_FORMAT", str_replace("%","",str_replace
 	var l_date_before = "<?php echo(L_DATE_BEFORE); ?>";
 	var l_date_after = "<?php echo(L_DATE_AFTER); ?>";
 	var l_date_between = "<?php echo(L_DATE_BETWEEN); ?>";
+	var l_use_ymd_drop = "<?php echo(L_USE_YMD_DROP); ?>";
+	var l_day = "<?php echo(L_DAY); ?>";
+	var l_month = "<?php echo(L_MONTH); ?>";
+	var l_year = "<?php echo(L_YEAR); ?>";
 //	Long Month Names
 	var l_january = "<?php echo(defined('L_JAN') ? L_JAN : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1199145600')) : strftime('%B','1199145600'))); ?>";
 	var l_february = "<?php echo(defined('L_FEB') ? L_FEB : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1201824000')) : strftime('%B','1201824000'))); ?>";
@@ -128,18 +135,18 @@ if(!defined("DATE_FORMAT")) define("DATE_FORMAT", str_replace("%","",str_replace
 	var l_december = "<?php echo(defined('L_DEC') ? L_DEC : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1228089600')) : strftime('%B','1228089600'))); ?>";
 if(l_lang == "el_GR"){
 //	Date Month Names Greek
-	var l_januaryu = "<?php echo(defined('L_JANU') ? L_JANU : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1199145600')) : strftime('%B','1199145600'))); ?>";
-	var l_februaryu = "<?php echo(defined('L_FEBU') ? L_FEBU : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1201824000')) : strftime('%B','1201824000'))); ?>";
-	var l_marchu = "<?php echo(defined('L_MARU') ? L_MARU : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1204329600')) : strftime('%B','1204329600'))); ?>";
-	var l_aprilu = "<?php echo(defined('L_APRU') ? L_APRU : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1207008000')) : strftime('%B','1207008000'))); ?>";
-	var l_mayu = "<?php echo(defined('L_MAYU') ? L_MAYU : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1209600000')) : strftime('%B','1209600000'))); ?>";
-	var l_juneu = "<?php echo(defined('L_JUNU') ? L_JUNU : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1212278400')) : strftime('%B','1212278400'))); ?>";
-	var l_julyu = "<?php echo(defined('L_JULU') ? L_JULU : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1214870400')) : strftime('%B','1214870400'))); ?>";
-	var l_augustu = "<?php echo(defined('L_AUGU') ? L_AUGU : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1217548800')) : strftime('%B','1217548800'))); ?>";
-	var l_septemberu = "<?php echo(defined('L_SEPU') ? L_SEPU : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1220227200')) : strftime('%B','1220227200'))); ?>";
-	var l_octoberu = "<?php echo(defined('L_OCTU') ? L_OCTU : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1222819200')) : strftime('%B','1220227200'))); ?>";
-	var l_novemberu = "<?php echo(defined('L_NOVU') ? L_NOVU : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1225497600')) : strftime('%B','1225497600'))); ?>";
-	var l_decemberu = "<?php echo(defined('L_DECU') ? L_DECU : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1228089600')) : strftime('%B','1228089600'))); ?>";
+	var l_januaryu = "<?php echo(defined('L_JANU') ? L_JANU : ""); ?>";
+	var l_februaryu = "<?php echo(defined('L_FEBU') ? L_FEBU : ""); ?>";
+	var l_marchu = "<?php echo(defined('L_MARU') ? L_MARU : ""); ?>";
+	var l_aprilu = "<?php echo(defined('L_APRU') ? L_APRU : ""); ?>";
+	var l_mayu = "<?php echo(defined('L_MAYU') ? L_MAYU : ""); ?>";
+	var l_juneu = "<?php echo(defined('L_JUNU') ? L_JUNU : ""); ?>";
+	var l_julyu = "<?php echo(defined('L_JULU') ? L_JULU : ""); ?>";
+	var l_augustu = "<?php echo(defined('L_AUGU') ? L_AUGU : ""); ?>";
+	var l_septemberu = "<?php echo(defined('L_SEPU') ? L_SEPU : ""); ?>";
+	var l_octoberu = "<?php echo(defined('L_OCTU') ? L_OCTU : ""); ?>";
+	var l_novemberu = "<?php echo(defined('L_NOVU') ? L_NOVU : ""); ?>";
+	var l_decemberu = "<?php echo(defined('L_DECU') ? L_DECU : ""); ?>";
 }
 //	Short Month Names
 	var s_jan = "<?php echo(defined('L_S_JAN') ? L_S_JAN : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%b','1199145600')) : strftime('%b','1199145600'))); ?>";
