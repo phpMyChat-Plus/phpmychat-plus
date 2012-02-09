@@ -10,7 +10,8 @@ if (isset($_GET))
 
 // Fix a security hole
 if (isset($L) && !is_dir("./localization/".$L)) exit();
-if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
+#if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
+if (preg_match("/SELECT|UNION|INSERT|UPDATE/i",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 if (isset($_COOKIE["CookieStatus"])) $statusu = $_COOKIE["CookieStatus"];
 if (isset($_COOKIE["CookieHash"])) $RemMe = $_COOKIE["CookieHash"];
@@ -28,7 +29,8 @@ require("./lib/clean.lib.php");
 
 // Special cache instructions for IE5+
 $CachePlus	= "";
-if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
+#if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
+if (stripos((isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"), "MSIE") !== false) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
 $now		= gmdate('D, d M Y H:i:s') . ' GMT';
 
 header("Expires: $now");
@@ -99,8 +101,8 @@ function GetY()
 	else var link = "";
 		window.focus();
 		url = '<?php echo("${ChatPath}"); ?>' + name + '<?php echo(".php?L=$L"); ?>' + u_name + '<?php echo(urlencode(stripslashes($U))."&LIMIT=1"); ?>' + link;
-		pop_width = ((name != 'admin' && name != 'pm_manager') ? 470:820);
-		pop_height = ((name != 'deluser' && name != 'pass_reset') ? ((name != 'admin' && name != 'pm_manager') ? 640:550):260);
+		pop_width = ((name != 'admin' && name != 'pm_manager') ? 470:830);
+		pop_height = ((name != 'deluser' && name != 'pass_reset') ? ((name != 'admin' && name != 'pm_manager') ? 640:580):260);
 		param = "width=" + pop_width + ",height=" + pop_height + ",resizable=yes,scrollbars=yes";
 		if (name == "pm_manager") param = param + ",status=yes";
 		name += "_popup";
@@ -128,9 +130,14 @@ if (!function_exists('mb_convert_case'))
 {
 	function mb_convert_case($str,$type,$Charset)
 	{
+/*
 		if (eregi("TITLE",$type)) $str = ucwords($str);
 		elseif (eregi("LOWER",$type)) $str = strtolower($str);
 		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+*/
+		if (stripos($type,"TITLE") !== false) $str = ucwords($str);
+		elseif (stripos($type,"LOWER") !== false) $str = strtolower($str);
+		elseif (stripos($type,"UPPER") !== false) $str = strtoupper($str);
 		return $str;
 	}
 };
@@ -549,11 +556,12 @@ if($DbLink->num_rows() > 0)
 			}
 			if ($i == 1) $FirstOtherRoom = "Parent".$id;
 			echo("<DIV ID=\"Parent${id}\" CLASS=\"parent\" style=\"margin-top: 1px;\">");
-if (eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
-{
-			echo("<a href=\"#\" onClick=\"window.parent.expandIt('${id}'); return false\" onMouseOver=\"window.status='".L_EXPCOL."'; return true;\" title=\"".L_EXPCOL."\">");
-			echo("<IMG NAME=\"imEx\" SRC=\"images/closed.gif\" WIDTH=9 HEIGHT=9 BORDER=0 ALT=\"".L_EXPCOL."\"></a>");
-}
+#			if (eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
+			if (stripos($_SERVER['HTTP_USER_AGENT'], "MSIE") !== false)
+			{
+				echo("<a href=\"#\" onClick=\"window.parent.expandIt('${id}'); return false\" onMouseOver=\"window.status='".L_EXPCOL."'; return true;\" title=\"".L_EXPCOL."\">");
+				echo("<IMG NAME=\"imEx\" SRC=\"images/closed.gif\" WIDTH=9 HEIGHT=9 BORDER=0 ALT=\"".L_EXPCOL."\"></a>");
+			}
 			echo("&nbsp;<a href=\"$From?Ver=H&L=$L&U=".stripslashes($U)."$AddPwd2Link&R1=".urlencode(stripslashes($Other))."&T=1&D=$D&N=$N&E=".urlencode(stripslashes($R))."&EN=$T".(isset($RemMe) ? "&RM=1" : "")."\" TARGET=\"_parent\" onMouseOver=\"window.status='".L_JOIN_ROOM.$tmpDispOtherRes."'; return true;\" title='".L_JOIN_ROOM.$tmpDispOtherRes."'>".htmlspecialchars($tmpDispOther)."</a><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$OthersUsers->num_rows().")</SPAN><br />\n");
 			echo("</DIV>\n");
 			echo("<DIV ID=\"Child${id}\" CLASS=\"child\" style=\"margin-top: 1px;\">\n");
@@ -569,7 +577,8 @@ if (eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
 		// Gravatar mod added by Ciprian
 		if (ALLOW_GRAVATARS == 2 || (ALLOW_GRAVATARS == 1 && (!isset($use_gravatar) || $use_gravatar)))
 		{
-			if (eregi(C_AVA_RELPATH, $avatar)) $local_avatar = 1;
+#			if (eregi(C_AVA_RELPATH, $avatar)) $local_avatar = 1;
+			if (stripos($avatar,C_AVA_RELPATH) !== false) $local_avatar = 1;
 			else $local_avatar = 0;
 			require("plugins/gravatars/get_gravatar.php");
 		}
@@ -629,7 +638,8 @@ if (eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
 		// Gravatar mod added by Ciprian
 		if (ALLOW_GRAVATARS == 2 || (ALLOW_GRAVATARS == 1 && (!isset($use_gravatar) || $use_gravatar)))
 		{
-			if (eregi(C_AVA_RELPATH, $avatar)) $local_avatar = 1;
+#			if (eregi(C_AVA_RELPATH, $avatar)) $local_avatar = 1;
+			if (stripos($avatar,C_AVA_RELPATH) !== false) $local_avatar = 1;
 			else $local_avatar = 0;
 		 	require("plugins/gravatars/get_gravatar.php");
 		}

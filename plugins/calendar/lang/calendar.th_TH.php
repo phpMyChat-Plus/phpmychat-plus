@@ -79,7 +79,7 @@ define("L_CAL_FORMAT", "%d %B %Y");
 if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "th_TH"); // en_US format of your language
 
 // Set the RU specific date/time format
-if (eregi("win", PHP_OS)) {
+if (stristr(PHP_OS,"win")) {
 setlocale(LC_ALL, "tha-tha.UTF-8", "tha-tha", "Thai.UTF-8", "Thai");
 } else {
 setlocale(LC_ALL, "th_TH.UTF-8", "tha.UTF-8", "tha_tha.UTF-8", "Thai.UTF-8");

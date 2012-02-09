@@ -19,7 +19,8 @@ if (isset($_POST))
 
 // Fix a security hole
 if (isset($L) && !is_dir("./localization/".$L)) exit();
-if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
+#if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
+if (preg_match("/SELECT|UNION|INSERT|UPDATE/i",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 // Fix some security issues
 if ((empty($From) || trim($From) == '')
@@ -70,9 +71,14 @@ if (!function_exists('mb_convert_case'))
 {
 	function mb_convert_case($str,$type,$Charset)
 	{
+/*
 		if (eregi("TITLE",$type)) $str = ucwords($str);
 		elseif (eregi("LOWER",$type)) $str = strtolower($str);
 		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+*/
+		if (stripos($type,"TITLE") !== false) $str = ucwords($str);
+		elseif (stripos($type,"LOWER") !== false) $str = strtolower($str);
+		elseif (stripos($type,"UPPER") !== false) $str = strtoupper($str);
 		return $str;
 	}
 };
@@ -196,7 +202,8 @@ $botpath = "botfb/" . $U . ".txt" ;
 $botcontrol ="botfb/$R.txt";
 	if(file_exists($botcontrol))
 	{
-		if (file_exists ($botpath) || eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)))
+# 		if (file_exists ($botpath) || eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)))
+		if (file_exists ($botpath) || stripos(mb_convert_case($M,MB_CASE_LOWER,$Charset), mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset)) !== false)
 		{
 			include("./lib/bot.lib.php");
 		}
@@ -251,21 +258,31 @@ $botcontrol ="botfb/$R.txt";
 	}
 
 	// Text Direction for dir commands by Ciprian
+/*
 	if(ereg('^bdo_rtl',$M)) $M = str_replace('bdo_rtl', '<BDO dir="rtl">', $M)."</BDO>";
 	elseif(ereg('^bdo_ltr',$M)) $M = str_replace('bdo_ltr', '<BDO dir="ltr">', $M)."</BDO>";
+*/
+	if(preg_match('/^bdo_rtl/',$M)) $M = str_replace('bdo_rtl', '<BDO dir="rtl">', $M)."</BDO>";
+	elseif(preg_match('/^bdo_ltr/',$M)) $M = str_replace('bdo_ltr', '<BDO dir="ltr">', $M)."</BDO>";
 	
 	// URL
+/*
 	$M = eregi_replace('([[:space:]]|^)(www[.])', '\\1http://\\2', $M); // no prefix (www.myurl.ext)
 	$M = eregi_replace('([[:space:]]|^)(ftp[.])', '\\1ftp://\\2', $M); // no prefix (ftp.myurl.ext)
+*/
+	$M = preg_replace('/([[:space:]]|^)(www[.])/i', '\\1http://\\2', $M); // no prefix (www.myurl.ext)
+	$M = preg_replace('/([[:space:]]|^)(ftp[.])/i', '\\1ftp://\\2', $M); // no prefix (ftp.myurl.ext)
 	// Word wrap fix by Alexander Eisele <xaex@xaex.de> - deprecated by Ciprian due to japanese (2-bytes undesired trimming)
 /*
 	if (!preg_match_all("((http://|https://|ftp://|mailto:)[^ ]+)", $M, $pmatch))
 	{
 		$M = wordwrap($M, 40, " ", 1);
 	}
-*/
 	$prefix = '(http|https|ftp|telnet|news|gopher|file|wais)://';
 	$pureUrl = '([[:alnum:]/\n+-=%&:_.~?]+[#[:alnum:]+-_~]*)';
+*/
+	$prefix = '(http|https|ftp|telnet|news|gopher|file|wais):\/\/';
+	$pureUrl = '([[:alnum:]\/\n+-=%&:_.~?]+[#[:alnum:]+-_~]*)';
 	if (C_POPUP_LINKS)
 	{
 	    $purl="";
@@ -273,18 +290,23 @@ $botcontrol ="botfb/$R.txt";
 	    {
 			$purl .= "||".$pmatch[0][$x];
 	    }
-		$M = eregi_replace($prefix.$pureUrl, '<a href="links.php?link='.urlencode($purl).'" target="_blank"></a>', $M);
+#		$M = eregi_replace($prefix.$pureUrl, '<a href="links.php?link='.urlencode($purl).'" target="_blank"></a>', $M);
+		$M = preg_replace("/".$prefix.$pureUrl."/i", '<a href="links.php?link='.urlencode($purl).'" target="_blank"></a>', $M);
 	}
-	else $M = eregi_replace($prefix.$pureUrl, '<a href="\\1://\\2" target="_blank">\\1://\\2</a>', $M);
+#	else $M = eregi_replace($prefix.$pureUrl, '<a href="\\1://\\2" target="_blank">\\1://\\2</a>', $M);
+	else $M = preg_replace("/".$prefix.$pureUrl."/i", '<a href="\\1://\\2" target="_blank">\\1://\\2</a>', $M);
 
 	// e-mail addresses
 //	$M = eregi_replace('([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](fo|g|l|m|mes|o|op|pa|ro|seum|t|u|v|z)?)', '<a href="mailto:\\1" alt="Send email">\\1</a>', $M);
 	// Added the new top-level domains (mail, asia, travel, aso)
-	$M = eregi_replace('([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](avel|bi|bs|fo|g|ia|l|m|me|mes|o|op|pa|ro|seum|t|to|u|v|z)?)', '<a href="mailto:\\1" alt="Send email">\\1</a>', $M);
+#	$M = eregi_replace('([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](avel|bi|bs|fo|g|ia|l|m|me|mes|o|op|pa|ro|seum|t|to|u|v|z)?)', '<a href="mailto:\\1" alt="Send email">\\1</a>', $M);
+	$M = preg_replace('/([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](avel|bi|bs|fo|g|ia|l|m|me|mes|o|op|pa|ro|seum|t|to|u|v|z)?)/i', '<a href="mailto:\\1" alt="Send email">\\1</a>', $M);
 	if(C_EN_STATS)
 	{
-		if(eregi('<a href="mailto',$M)) $DbLink->query("UPDATE ".C_STS_TBL." SET emails_posted=emails_posted+1 WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
-		if(eregi('<a href="http',$M)) $DbLink->query("UPDATE ".C_STS_TBL." SET urls_posted=urls_posted+1 WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
+#		if(eregi('<a href="mailto',$M)) $DbLink->query("UPDATE ".C_STS_TBL." SET emails_posted=emails_posted+1 WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
+		if(stripos($M,'<a href="mailto') !== false) $DbLink->query("UPDATE ".C_STS_TBL." SET emails_posted=emails_posted+1 WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
+#		if(eregi('<a href="http',$M)) $DbLink->query("UPDATE ".C_STS_TBL." SET urls_posted=urls_posted+1 WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
+		if(stripos($M,'<a href="http') !== false) $DbLink->query("UPDATE ".C_STS_TBL." SET urls_posted=urls_posted+1 WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
 	}
 
 	// Smilies
@@ -303,9 +325,11 @@ $botcontrol ="botfb/$R.txt";
 	if ($Latin1)
 	{
 		global $MsgTo;
-		ereg("(.*)(".$MsgTo."(&gt;)?)(.*)",$M,$Regs);
+#		ereg("(.*)(".$MsgTo."(&gt;)?)(.*)",$M,$Regs);
+		preg_match("/(.*)(".$MsgTo."(&gt;)?)(.*)/",$M,$Regs);
 		if ($MsgTo != "" && ($Regs[1] == "" && $Regs[4] == "")) $Regs[4] = $M;
-		if (!ereg("&[[:alnum:]]{1,10};",$Regs[1]) && !ereg("&[[:alnum:]]{1,10};",$Regs[4]))
+#		if (!ereg("&[[:alnum:]]{1,10};",$Regs[1]) && !ereg("&[[:alnum:]]{1,10};",$Regs[4]))
+		if (!preg_match("/&[[:alnum:]]{1,10};/",$Regs[1]) && !preg_match("/&[[:alnum:]]{1,10};/",$Regs[4]))
 		{
 			for ($i = 1; $i <= 4; $i++)
 			{
@@ -317,7 +341,8 @@ $botcontrol ="botfb/$R.txt";
 				$part = str_replace("&lt;", "<", $part);
 				$part = str_replace("&gt;", ">", $part);
 				$part = str_replace("&quot;","\"", $part);
-				$part = ereg_replace("&amp;(#[[:digit:]]{2,5};)", "&\\1", $part);
+#				$part = ereg_replace("&amp;(#[[:digit:]]{2,5};)", "&\\1", $part);
+				$part = preg_replace("/&amp;(#[[:digit:]]{2,5};)/", "&\\1", $part);
 				$Regs[$i] = $part;
 			}
 			$M = $Regs[1].$Regs[2].$Regs[4];
@@ -385,27 +410,54 @@ if (trim($C)!="")
 		}
 	};
 	if (!COLOR_ALLOW_GUESTS && $status == "u") $C = '';
-		include_once("./lib/swearing.lib.php");
-		if (checkwords($C, true, $Charset)) $C = '';		//if user is using a swear word (defined in swearing.lib.php), the font color will resets to default. this is to keep your database as well as our computer clean of swearing (no swear into your cookies on your local computer).
-		if (isset($C) && $C != '' && strcasecmp($C, COLOR_CD) != 0)
+	include_once("./lib/swearing.lib.php");
+	if (checkwords($C, true, $Charset)) $C = '';		//if user is using a swear word (defined in swearing.lib.php), the font color will resets to default. this is to keep your database as well as our computer clean of swearing (no swear into your cookies on your local computer).
+	if (isset($C) && $C != '' && strcasecmp($C, COLOR_CD) != 0)
+	{
+		$M = "<FONT COLOR=\"".$C."\">".$M."</FONT>";
+		setcookie("CookieColor", $C, time() + 60*60*24*365);        // cookie expires in one year
+	}
+	elseif(isset($_COOKIE["CookieColor"]))
+	{
+		setcookie("CookieColor", '', time());        // cookie expires in one year
+	}
+
+	// Text tags for power users
+	if(C_ITALICIZE_POWERS)
+	{
+		$text_tag = "";
+		$text_endtag = "";
+		if ($status == "a" || $status == "t" || $status == "m")
 		{
-			$M = "<FONT COLOR=\"".$C."\">".$M."</FONT>";
-			setcookie("CookieColor", $C, time() + 60*60*24*365);        // cookie expires in one year
+			if(stristr(C_TAGS_POWERS, "B"))
+			{
+				$text_tag .= "<B>";
+				$text_endtag .= "</B>";
+			}
+			if(stristr(C_TAGS_POWERS, "I"))
+			{
+				$text_tag .= "<I>";
+				$text_endtag .= "</I>";
+			}
+			if(stristr(C_TAGS_POWERS, "U"))
+			{
+				$text_tag .= "<U>";
+				$text_endtag .= "</U>";
+			}
 		}
-		elseif(isset($_COOKIE["CookieColor"]))
-		{
-			setcookie("CookieColor", '', time());        // cookie expires in one year
-		}
+		if ($text_tag != "") $M = $text_tag.$M.$text_endtag;
+	}
+	
 	$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', ".time().", '$Private', '".addslashes($M)."', '$Read', '$RF')");
 };
 
 	// ** Define the default color that will be used for messages **
 	//Color's Power Filter Mod by Ciprian
-		$DbLink->query("SELECT colorname FROM ".C_REG_TBL." WHERE username = '$U' LIMIT 1");
-		if ($DbLink->num_rows() != 0 && (!isset($C)))
-		{
-	    list($colorname) = $DbLink->next_record();
-		}
+	$DbLink->query("SELECT colorname FROM ".C_REG_TBL." WHERE username = '$U' LIMIT 1");
+	if ($DbLink->num_rows() != 0 && (!isset($C)))
+	{
+		list($colorname) = $DbLink->next_record();
+	}
 	if (isset($_COOKIE["CookieColor"]) && (!isset($C))) $C = strcasecmp($_COOKIE["CookieColor"], $COLOR_TB) != 0 ? $_COOKIE["CookieColor"] : '';
 	//Registered colorname to use for text color by Ciprian
 	elseif (isset($colorname) && (!isset($C))) $C = strcasecmp($colorname, $COLOR_TB) != 0 ? $colorname : '';
@@ -464,13 +516,15 @@ $IsPopup = false;
 $IsM = false;
 
 #if (isset($M) && trim($M) != "" && (ereg("^\/", $M) || ereg("^: ", $M))) include("./lib/commands.lib.php");
-if (isset($M) && trim($M) != "" && (ereg("^\/", $M) || ereg("^: ", $M)))
+#if (isset($M) && trim($M) != "" && (ereg("^\/", $M) || ereg("^: ", $M)))
+if (isset($M) && trim($M) != "" && (preg_match("#^\/#", $M) || preg_match("#^: #", $M)))
 {
 	if (file_exists("./${ChatPath}localization/${L}/localized.cmds.php")) require("./${ChatPath}localization/${L}/localized.cmds.php");
 	include("./lib/commands.lib.php");
 }
 
-if (isset($M) && (ereg("^\/", $M) || ereg("^: ", $M)) && !($IsCommand) && !isset($Error)) $Error = L_BAD_CMD;
+#if (isset($M) && (ereg("^\/", $M) || ereg("^: ", $M)) && !($IsCommand) && !isset($Error)) $Error = L_BAD_CMD;
+if (isset($M) && (preg_match("#^\/#", $M) || preg_match("#^: #", $M)) && !($IsCommand) && !isset($Error)) $Error = L_BAD_CMD;
 
 if (isset($M) && trim($M) != "" && (!isset($M0) || ($M != $M0)) && !($IsCommand || isset($Error)))
 {
@@ -577,7 +631,7 @@ if (!isset($FontName)) $FontName = "";
 		<INPUT TYPE="hidden" NAME="Ign" VALUE="<?php echo(isset($Ign) ? stripslashes($Ign) : ""); ?>">
 
 		<!-- Last sent message or command (will be used for the '/!' command) -->
-		<INPUT TYPE="hidden" NAME="M0" VALUE="<?php echo(isset($M1) ? stripslashes($M1) : (isset($M) ? stripslashes($M) : "")); ?>">
+		<INPUT TYPE="hidden" NAME="M0" VALUE="<?php echo(isset($M1) ? $M1 : (isset($M) ? stripslashes($M) : "")); ?>">
 
 		<A HREF="help_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>" onClick="window.parent.help_popup(); return false" TARGET="_blank" onmouseover="document.images['helpImg'].src = window.parent.imgHelpOn.src" onmouseout="document.images['helpImg'].src = window.parent.imgHelpOff.src" title="<?php echo(L_HLP); ?>"><IMG NAME="helpImg" SRC="localization/<?php echo($L); ?>/images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="<?php echo(L_HLP); ?>" onMouseOver="window.status='<?php echo(L_HLP); ?>.'; return true" onClick="document.forms['MsgForm'].elements['M'].focus();"></A>&nbsp;
 
@@ -587,11 +641,11 @@ if (!isset($FontName)) $FontName = "";
 		preg_match("/^[\w?(\Q".REG_CHARS_ALLOWED."\E)?\w]*\>/",$M,$add);
 		$M0 = stripslashes($M0);
 		$M0 = str_replace("&#39;", "'", $M0);
-		$ValM = $IsM ? $M0 : (strstr($add[0],">") ? $add[0]." " : "");
+		$ValM = $IsM ? $M0 : (strstr($add[0],">") && ($text_tag == "" || !$text_tag) ? $add[0]." " : "");
 		if (isset($Error) && !($IsCommand)) $ValM = $M1;
-//		unset($M0);
+#		unset($M0);
 		?>
-		<INPUT TYPE="text" NAME="M" SIZE="50" MAXLENGTH="299" VALUE="<?php echo(stripslashes($ValM)); ?>"<?php echo((isset($C) && $C != "") ? " style=\"color: $C;\"" : ""); ?>>
+		<INPUT TYPE="text" NAME="M" SIZE="50" MAXLENGTH="2000" VALUE="<?php echo(stripslashes($ValM)); ?>"<?php echo((isset($C) && $C != "") ? " style=\"color: $C;\"" : ""); ?>>
 
 		<!-- Addressee that will be filled when the user click on a nick at the users frame -->
 		<INPUT TYPE="hidden" NAME="MsgTo" VALUE="">
@@ -632,7 +686,8 @@ else
 $ColorList = str_ireplace($COLOR_TB.'","',"",COLORLIST);
 $ColorList = str_replace('"', "", $ColorList);
 $CC = explode(",", $ColorList);
-if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<SELECT NAME=\"C\" style=\"background-color:".$C.";\">\n");
+#if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<SELECT NAME=\"C\" style=\"background-color:".$C.";\">\n");
+if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false)) echo("<SELECT NAME=\"C\" style=\"background-color:".$C.";\">\n");
 else echo("<SELECT NAME=\"C\">\n");
 $not_selected = ((L_NOT_SELECTED_F != "") ? L_NOT_SELECTED_F : L_NOT_SELECTED);
 $null = ((L_NULL_F != "") ? L_NULL_F : L_NULL);
@@ -668,11 +723,7 @@ $not_selected = " ".$null." (".$not_selected.")";
 	}
 ?>
 		<INPUT TYPE="hidden" NAME="sent" VALUE="0">
-		<INPUT TYPE="submit" NAME="sendForm" VALUE=<?php echo(L_OK); ?> onClick="document.forms['MsgForm'].elements['M'].focus();">
-</TD>
-</TR>
-<TR>
-<TD valign=top align=left nowrap="nowrap">
+		<INPUT TYPE="submit" NAME="sendForm" VALUE=<?php echo(L_OK); ?> onClick="document.forms['MsgForm'].elements['M'].focus();"><br />
 <?php
 // Avatar System Start.
 	if (C_USE_AVATARS && C_AVA_PROFBUTTON)

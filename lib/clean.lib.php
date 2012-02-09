@@ -58,7 +58,7 @@ if(C_BDAY_EMAIL)
 	$email_intval = C_BDAY_TIME * 60 + C_BDAY_INTVAL * 24 *60 * 60;
 	$max_email_intval = time() - $email_intval - 24 *60 * 60;
 	$before_today = strftime("%Y-%m-%d",time() - $email_intval);
-	$ChatB->query("SELECT username,firstname,lastname,email,birthday,slang FROM ".C_REG_TBL." WHERE birthday IS NOT NULL AND CONCAT(YEAR(NOW()),'-',RIGHT(birthday,5)) BETWEEN '$before_today' AND '$today' AND (bday_email_sent<'".$max_email_intval."' OR bday_email_sent is NULL OR bday_email_sent='') ORDER BY birthday ASC");
+	$ChatB->query("SELECT username,firstname,lastname,email,birthday,slang FROM ".C_REG_TBL." WHERE birthday IS NOT NULL AND birthday!='0000-00-00' AND CONCAT(YEAR(NOW()),'-',RIGHT(birthday,5)) BETWEEN '$before_today' AND '$today' AND (bday_email_sent<'".$max_email_intval."' OR bday_email_sent is NULL OR bday_email_sent='') ORDER BY birthday ASC");
 	if ($ChatB->num_rows() > 0)
 	{
 		include_once("lib/mail_validation.lib.php");
@@ -122,7 +122,7 @@ if(C_CHAT_LURKING)
 //		$when = date('r', $usertime + C_TMZ_OFFSET*60*60);
 		$when = $usertime + C_TMZ_OFFSET*60*60;
 		$when = stristr(PHP_OS,'win') ? '\".utf_conv(WIN_DEFAULT,$Charset,strftime(L_LONG_DATETIME,'.$when.')).\"' : '\".strftime(L_LONG_DATETIME,'.$when.').\"';
-		$ChatM->query("SELECT type FROM ".C_MSG_TBL." WHERE username = '$userclosed' AND room = '$userroom' ORDER BY m_time DESC LIMIT 1");
+		$ChatM->query("SELECT type FROM ".C_MSG_TBL." WHERE room = '".$userroom."' ORDER BY m_time DESC LIMIT 1");
 		list($usertype) = $ChatM->next_record();
 		$userclosed = addslashes($userclosed);
 		// Ghost Control mod by Ciprian

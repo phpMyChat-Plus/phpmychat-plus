@@ -46,6 +46,7 @@ define("L_SET_19", "Запомни ме");
 
 define("L_SRC", "е наличен безплатно на");
 
+define("L_SEC", "секунда");
 define("L_SECS", "секунди");
 define("L_MIN", "минута");
 define("L_MINS", "минути");

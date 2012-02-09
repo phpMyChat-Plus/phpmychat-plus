@@ -10,7 +10,8 @@ if (isset($_GET))
 
 // Fix a security hole
 if (isset($L) && !is_dir("./localization/".$L)) exit();
-if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
+#if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
+if (preg_match("/SELECT|UNION|INSERT|UPDATE/i",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 require("./config/config.lib.php");
 require("./localization/".$L."/localized.chat.php");
@@ -141,7 +142,8 @@ if (EXIT_LINK_TYPE)
 <BODY CLASS="frame" onLoad="MM_preloadImages('localization/<?php echo ($L); ?>/images/exitdoorRoll.gif')" onUnload="leave();">
 <CENTER>
 <?php
-if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT'])))
+#if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT'])))
+if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false))
 {
 	?>
 <table align="center"><tr><td align="center">
@@ -157,7 +159,8 @@ else
 <BODY CLASS="frame" onUnload="close_popups();">
 <CENTER>
 <?php
-if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT'])))
+#if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT'])))
+if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false))
 {
 	?>
 <table align="center"><tr><td align="center">
@@ -171,7 +174,8 @@ if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGE
 <br />
 <?php
 if ($FontSize < 10) echo("<br />");
-if ($Ver == "H" && eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
+#if ($Ver == "H" && eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
+if ($Ver == "H" && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") !== false)
 {
 	?>
 	<!-- Display the big + clickable icon used to expand/collapse all rooms // -->
@@ -192,7 +196,8 @@ if ($Ver == "H")
 	<IMG NAME="ConState" SRC="images/connectOff.gif" WIDTH=13 HEIGHT=13 ALIGN="MIDDLE" BORDER=0 ALT="<?php echo(L_CONN_STATE); ?>"></A>
 	<?php
 }
-if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT'])))
+#if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT'])))
+if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false))
 {
 	?>
 </td></tr></table>

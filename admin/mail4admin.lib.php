@@ -5,7 +5,8 @@
 // an other function has been developed by your ISP to send PHP mail, just modify
 // the send_email function to make in runable.
 
-$Sender_Name = eregi("your name",C_ADMIN_NAME) ? "Chat Admin" : C_ADMIN_NAME;		// May also be the name of your site
+#$Sender_Name = eregi("your name",C_ADMIN_NAME) ? "Chat Admin" : C_ADMIN_NAME;		// May also be the name of your site
+$Sender_Name = (stripos(C_ADMIN_NAME,"your name") !== false && C_ADMIN_NAME != "") ? "" : C_ADMIN_NAME;		// May also be the name of your site
 $Sender_Name1 = $Sender_Name;		// unformated
 $Sender_email = C_ADMIN_EMAIL;			// For the reply address
 $Mail_Greeting = C_MAIL_GREETING;	// To be send as a signature

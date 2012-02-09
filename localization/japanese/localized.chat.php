@@ -47,6 +47,7 @@ define("L_SET_19", "以上の情報を記録する");
 
 define("L_SRC", "は次の場所から自由に手に入れることができます：");
 
+define("L_SEC", "秒");
 define("L_SECS", "秒");
 define("L_MIN", "分");
 define("L_MINS", "分");
@@ -604,15 +605,14 @@ define("L_S_SAT", "土");
 define("L_S_SUN", "日");
 
 // Localized date format - read the parameters here: http://www.php.net/manual/en/function.strftime.php
-if (stristr(PHP_OS,'win')) {
-setlocale(LC_ALL, "japanese.UTF-8", "japanese", "ja_JP.UTF-8");
+if (stristr(PHP_OS,"win")) {
+setlocale(LC_ALL, "jpn.utf8", "jpn.UTF-8", "japanese.UTF-8", "japanese", "ja_JP.UTF-8");
 } else {
 setlocale(LC_ALL, "ja_JP.utf8", "ja_JP.UTF-8", "ja_JP", "ja", "japanese", "jpn");
 }
 define("L_LANG", "ja_JP");
 define("ISO_DEFAULT", "iso-20220-jp");
 define("WIN_DEFAULT", "Shift_JIS");
-//define("WIN_DEFAULT", "windows-31j");
 define("L_SHORT_DATE", "%Y/%m/%d"); //Change this to your local desired date only format (keep the short form)
 define("L_LONG_DATE", "%Y年%B%d日(%A)"); //Change this to your local desired date only format (keep the long form)
 define("L_SHORT_DATETIME", "%Y/%m/%d %H:%M:%S"); //Change this to your local desired date&time format (keep the short form)
@@ -700,7 +700,7 @@ define("L_OPID_SIGN", "OpenIDでサインイン");
 define("L_OPID_REG", "OpenIDのプロファイルをインポート");
 
 // Support buttons
-define("L_SUPP_WARN", "開発者に寄付することで、\\n".APP_NAME."の開発に貢献する選択をしました。\\nご支援に感謝します！\\n\\n注意：寄付する相手はこのチャットの所有者ではありません。\\n寄付金額を次のページで入力してください。\\n\\n続けますか？");
+define("L_SUPP_WARN", "開発者に寄付することで、".APP_NAME."\\nの開発に貢献する選択をしました。\\nご支援に感謝します！\\n\\n注意：寄付する相手はこのチャットの所有者ではありません。\\n寄付金額を次のページで入力してください。\\n\\n続けますか？");
 define("L_SUPP_ALT", "PayPalを使って".APP_NAME."の開発を支援する－迅速、自由、かつ安全！");
 
 // Video & Audio & Youtube cmds (Embevi & YouTube player class)

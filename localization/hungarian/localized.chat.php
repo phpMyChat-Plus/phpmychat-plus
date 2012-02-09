@@ -46,6 +46,7 @@ define("L_SET_19", "Emlékezz rám");
 
 define("L_SRC", "szabadon letölthető a következő helyről");
 
+define("L_SEC", "másodperc");
 define("L_SECS", "másodperc");
 define("L_MIN", "perc");
 define("L_MINS", "perc");

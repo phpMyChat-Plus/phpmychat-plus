@@ -154,7 +154,8 @@ return $realip;
 
 $logIP = "&nbsp";
 $logIP = getip();
-if (!eregi("0.0.0.0", $logIP)) //Replace this IP with yours (entire - if it's a static IP, or partial - if it's a dinamic IP)
+#if (!eregi("0.0.0.0", $logIP))
+if (strpos($logIP, "0.0.0.0") === false) //Replace this IP with yours (entire - if it's a static IP, or partial - if it's a dinamic IP)
 {
 	$logURI = "&nbsp";
 	$logHOST = "&nbsp";

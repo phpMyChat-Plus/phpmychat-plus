@@ -1,7 +1,7 @@
 <?php
-// "CRUSH (Default)" skin for phpMyChat plus - by The Web Styles
+// "Crush" skin for phpMyChat plus - by The Web Styles
 
-$SKIN_NAME = "CRUSH (Default)";
+$SKIN_NAME = "Crush";
 $SKIN_DATE = "2011".((date('Y')>"2011") ? "-".date('Y') : "");
 $SKIN_BY = "The Web Styles";
 $COLOR_BK = "#FC9612"; //Orange main background color

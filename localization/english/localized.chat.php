@@ -747,4 +747,7 @@ define("L_PRO_10", "Age");
 define("L_PRO_11", "%1\$d years, %2\$d months and %3\$d days");
 define("L_DOB_TIT_1", "Birthdays list");
 $L_DOB_SUBJ = "Happy Birthday %s!";
+
+// MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
+define("L_MATH", "Equation posted by %s:");
 ?>

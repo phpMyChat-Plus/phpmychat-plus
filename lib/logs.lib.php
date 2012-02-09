@@ -48,7 +48,7 @@ if ($roomfrom != "" && $roomfrom != $room) $room = $roomfrom."><br />".$room;
 $m_time = stripslashes($result["m_time"]);
 $time_posted = date('H:i:s (d)', $m_time + C_TMZ_OFFSET*60*60);
 $address = htmlspecialchars(stripslashes($result["address"]));
-if ($address != "" && $address != " *" && $username != "SYS welcome" && $username != "SYS topic" && $username != "SYS topic reset" && substr($username,0,8) != "SYS dice" && $username != "SYS image" && $username != "SYS video" && $username != "SYS utube" && $username != "SYS room" && $username != $address) $toaddress = " to <b>".$address."</b>";
+if ($address != "" && $address != " *" && $username != "SYS welcome" && $username != "SYS topic" && $username != "SYS topic reset" && substr($username,0,8) != "SYS dice" && $username != "SYS image" && $username != "SYS video" && $username != "SYS utube" && $username != "SYS math" && $username != "SYS room" && $username != $address) $toaddress = " to <b>".$address."</b>";
 $address = "<b>".$address."</b>";
 if ($username == "SYS welcome") $username = $address;
 if ($room == "*" || ($username == "SYS room" && $address == "*") || $username == "SYS announce") $room = '<?php echo(L_ROOM_ALL); ?>';
@@ -73,7 +73,8 @@ $message = str_ireplace('class="table"','bgcolor="lightgrey"',$message);
 $message = str_ireplace('class="tabtitle"><td colspan="7">','bgcolor="blue"><td colspan="7">',$message);
 $message = str_ireplace('class="tabtitle"><td>','bgcolor="gray"><td>',$message);
 $message = str_ireplace('class="tabtitle"><td colspan="4">','bgcolor="blue"><td colspan="4">',$message);
-if ((ereg("stripslashes",$message) || ereg("sprintf",$message) || ereg("L_",$message)) && !ereg("php echo",$message))
+#if ((ereg("stripslashes",$message) || ereg("sprintf",$message) || ereg("L_",$message)) && !ereg("php echo",$message))
+if (preg_match("/(stripslashes|sprintf|L_)/",$message) && strpos($message,"php echo") === false)
 {
 	$message = "<?php echo(".$message."); ?>";
 }
@@ -137,6 +138,11 @@ elseif ($username == "SYS utube")
 elseif ($username == "SYS announce")
 {
 	$NewMsg .= '<b><?php echo(L_ANNOUNCE); ?>: </b>';
+	$NewMsg .= $message;
+}
+elseif ($username == "SYS math")
+{
+	$NewMsg .= '<b><?php echo(sprintf(L_MATH, "'.$address.'")); ?></b> ';
 	$NewMsg .= $message;
 }
 elseif ($username == "SYS room")
@@ -215,18 +221,17 @@ $logpath = "./".C_LOG_DIR."/".$year."/".$month."/".$year.$month.$day.".php"  ;
             }
             $retries += 1;
         } while (!@flock($fp, LOCK_EX) and $retries <= 50);
-
 //		@flock($fp, LOCK_EX);    // Lock file in exclusive mode
-		@fwrite($fp, sprintf($eol."<?php".$eol));
-		@fwrite($fp, sprintf("$chatSaved = strftime(L_LONG_DATETIME,$mess_time);".$eol));
+		@fwrite($fp, sprintf($eol.'<?php'.$eol));
+		@fwrite($fp, sprintf('$chatSaved = strftime(L_LONG_DATETIME,'.$mess_time.');'.$eol));
 		@fwrite($fp, sprintf('if (!function_exists("utf_conv"))'.$eol));
-		@fwrite($fp, sprintf("{".$eol));
+		@fwrite($fp, sprintf('{'.$eol));
 		@fwrite($fp, sprintf('function utf_conv($iso,$Charset,$what)'.$eol));
-		@fwrite($fp, sprintf("{".$eol));
+		@fwrite($fp, sprintf('{'.$eol));
 		@fwrite($fp, sprintf('if(function_exists(\'iconv\')) $what = iconv($iso, $Charset, $what);'.$eol));
 		@fwrite($fp, sprintf('return $what;'.$eol));
-		@fwrite($fp, sprintf("};".$eol));
-		@fwrite($fp, sprintf("};".$eol));
+		@fwrite($fp, sprintf('};'.$eol));
+		@fwrite($fp, sprintf('};'.$eol));
 		@fwrite($fp, sprintf("if(stristr(PHP_OS,'win')) $chatSaved = iconv(WIN_DEFAULT,\"utf-8\",$chatSaved);".$eol));
 		@fwrite($fp, sprintf("?>".$eol));
 		@fwrite($fp, sprintf("<div align=\"left\"><span dir=\"LTR\" style=\"font-weight: 800; color:#00008B; font-family: helvetica, arial, geneva, sans-serif; font-size: 12pt\"><?php echo(sprintf(A_CHAT_LOGS_23,$chatSaved)); ?></span></div>$eol</center>$eol"));
@@ -250,7 +255,7 @@ $i = 0;
 
 //Public logs
 $doneu = 0;
-$CondForQueryu	= "(m_time<".(time() - C_MSG_DEL*60*60)." AND (address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username = 'SYS video' OR username = 'SYS utube' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3'))))";
+$CondForQueryu	= "(m_time<".(time() - C_MSG_DEL*60*60)." AND (address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username = 'SYS video' OR username = 'SYS utube' OR username = 'SYS math' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3'))))";
 $sqlu = "SELECT * FROM ".C_MSG_TBL." WHERE ".$CondForQueryu." ORDER BY m_time DESC";
 $queryu = mysql_query($sqlu) or die("Cannot query the database.<br />" . mysql_error());
 // Collect and store new messages
@@ -270,7 +275,7 @@ if (is_array($DefaultDispChatRooms) && in_array($roomu." [R]",$DefaultDispChatRo
 	elseif ($usernameu == "SYS room" && $addressu == "*") {}
 	else continue;
 }
-if ($addressu != "" && $addressu != " *" && $usernameu != "SYS welcome" && $usernameu != "SYS topic" && $usernameu != "SYS topic reset" && substr($usernameu,0,8) != "SYS dice" && $usernameu != "SYS image" && $usernameu != "SYS video" && $usernameu != "SYS utube" && $usernameu != "SYS room" && $usernameu != $addressu) $toaddressu = " to <b>".$addressu."</b>";
+if ($addressu != "" && $addressu != " *" && $usernameu != "SYS welcome" && $usernameu != "SYS topic" && $usernameu != "SYS topic reset" && substr($usernameu,0,8) != "SYS dice" && $usernameu != "SYS image" && $usernameu != "SYS video" && $usernameu != "SYS utube" && $usernameu != "SYS math" && $usernameu != "SYS room" && $usernameu != $addressu) $toaddressu = " to <b>".$addressu."</b>";
 $addressu = "<b>".$addressu."</b>";
 if ($usernameu == "SYS welcome") $usernameu = $addressu;
 if ($roomu == "*" || ($usernameu == "SYS room" && $addressu == "*") || $usernameu == "SYS announce") $roomu = '<?php echo(L_ROOM_ALL); ?>';
@@ -295,7 +300,8 @@ $messageu = str_ireplace('class="table"','bgcolor="lightgrey"',$messageu);
 $messageu = str_ireplace('class="tabtitle"><td colspan="7">','bgcolor="blue"><td colspan="7">',$messageu);
 $messageu = str_ireplace('class="tabtitle"><td>','bgcolor="gray"><td>',$messageu);
 $messageu = str_ireplace('class="tabtitle"><td colspan="4">','bgcolor="blue"><td colspan="4">',$messageu);
-if ((ereg("stripslashes",$messageu) || ereg("sprintf",$messageu) || ereg("L_",$messageu)) && !ereg("php echo",$messageu))
+#if ((ereg("stripslashes",$messageu) || ereg("sprintf",$messageu) || ereg("L_",$messageu)) && !ereg("php echo",$messageu))
+if (preg_match("/(stripslashes|sprintf|L_)/",$messageu) && strpos($messageu,"php echo") === false)
 {
 	$messageu = '<?php echo('.$messageu.'); ?>';
 }
@@ -360,6 +366,11 @@ elseif ($usernameu == "SYS announce")
 {
 	$NewMsgu .= '<b><?php echo(L_ANNOUNCE); ?>: </b>';
 	$NewMsgu .= $message;
+}
+elseif ($usernameu == "SYS math")
+{
+	$NewMsgu .= '<b><?php echo(sprintf(L_MATH, "'.$addressu.'")); ?></b> ';
+	$NewMsgu .= $messageu;
 }
 elseif ($usernameu == "SYS room")
 {
@@ -440,7 +451,7 @@ $logpathu = "./logs/".$yearu."/".$monthu."/".$yearu.$monthu.$dayu.".php"  ;
 
 //		@flock($fpu, LOCK_EX);    // Lock file in exclusive mode
 		@fwrite($fpu, sprintf($eol."<?php".$eol));
-		@fwrite($fpu, sprintf("$chatSavedu = strftime(L_LONG_DATETIME,$mess_timeu);".$eol));
+		@fwrite($fpu, sprintf('$chatSavedu = strftime(L_LONG_DATETIME,'.$mess_timeu.');'.$eol));
 		@fwrite($fpu, sprintf('if (!function_exists("utf_conv"))'.$eol));
 		@fwrite($fpu, sprintf("{".$eol));
 		@fwrite($fpu, sprintf('function utf_conv($iso,$Charset,$what)'.$eol));

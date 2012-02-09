@@ -22,7 +22,8 @@ require("./lib/clean.lib.php");
 
 // Special cache instructions for IE5+
 $CachePlus	= "";
-if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
+#if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
+if (stripos((isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"), "MSIE") !== false) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
 $now		= gmdate('D, d M Y H:i:s') . ' GMT';
 
 header("Expires: $now");
@@ -54,9 +55,14 @@ if (!function_exists('mb_convert_case'))
 {
 	function mb_convert_case($str,$type,$Charset)
 	{
+/*
 		if (eregi("TITLE",$type)) $str = ucwords($str);
 		elseif (eregi("LOWER",$type)) $str = strtolower($str);
 		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+*/
+		if (stripos($type,"TITLE") !== false) $str = ucwords($str);
+		elseif (stripos($type,"LOWER") !== false) $str = strtolower($str);
+		elseif (stripos($type,"UPPER") !== false) $str = strtoupper($str);
 		return $str;
 	}
 };
@@ -278,7 +284,8 @@ if (C_USE_AVATARS)
 	// Gravatar mod added by Ciprian
 	if (ALLOW_GRAVATARS == 2 || (ALLOW_GRAVATARS == 1 && (!isset($use_gravatar) || $use_gravatar)))
 	{
-		if (eregi(C_AVA_RELPATH, $avatar)) $local_avatar = 1;
+#		if (eregi(C_AVA_RELPATH, $avatar)) $local_avatar = 1;
+		if (stripos($avatar,C_AVA_RELPATH) !== false) $local_avatar = 1;
 		else $local_avatar = 0;
 		require("./plugins/gravatars/get_gravatar.php");
 	}
@@ -310,7 +317,8 @@ if ($lastname != "")
 }
 if ($show_bday && $my_dobtime)
 {
-	$dob_format = $show_age ? L_LONG_DATE : trim(str_replace(array("%Y.","%Y","(%A)","%A",",","-","年","den"),"",str_replace("  "," ",L_LONG_DATE)));
+	$longdtformat = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e").date('S',$my_dobtime)." of"), L_LONG_DATE) : L_LONG_DATE);
+	$dob_format = $show_age ? $longdtformat : trim(str_replace(array("%Y.","%Y","(%A)","%A",",","-","年","년","den"),"",str_replace("  "," ",$longdtformat)));
 	$my_dob_time = stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime($dob_format, $my_dobtime)) : strftime($dob_format, $my_dobtime);
 	?>
 	<TR>
@@ -430,7 +438,8 @@ if ($description)
 	<TR>
 		<TD CLASS="whois" nowrap="nowrap"><?php echo(L_PRO_4); ?>: </TD>
 <?php
-if (eregi("<script", $description) || !eregi("mysql", $description))
+#if (eregi("<script", $description) || !eregi("mysql", $description))
+if (stripos($description, "<script") !== false || stripos($description, "mysql") === false)
 {
 	$description = str_replace("javascript", "", str_replace("mysql", "", str_replace("\n", "<br />", $description)));
 }
@@ -465,8 +474,16 @@ if ($login_counter && C_LOGIN_COUNTER)
 	</TR>
 <?php
 }
-	if ($User == C_BOT_NAME) $last_visit = strftime(L_LONG_DATETIME,$last_login);
-	else $last_visit = strftime(L_LONG_DATETIME,$reg_time);
+	if ($User == C_BOT_NAME)
+	{
+		$longdtformat1 = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e").date('S',$last_login)." of"), L_LONG_DATETIME) : L_LONG_DATETIME);
+		$last_visit = strftime($longdtformat1,$last_login);
+	}
+	else
+	{
+		$longdtformat1 = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e").date('S',$reg_time)." of"), L_LONG_DATETIME) : L_LONG_DATETIME);
+		$last_visit = strftime($longdtformat1,$reg_time);
+	}
 	if(stristr(PHP_OS,'win')) $last_visit = utf_conv(WIN_DEFAULT,$Charset,$last_visit);
 ?>
 	<TR>

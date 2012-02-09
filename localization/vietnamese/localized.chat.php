@@ -46,6 +46,7 @@ define("L_SET_19", "Nhớ tôi");
 
 define("L_SRC", "tùy biến có sẵn trên");
 
+define("L_SEC", "giây");
 define("L_SECS", "giây");
 define("L_MIN", "phút");
 define("L_MINS", "phút");

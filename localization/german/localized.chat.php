@@ -49,6 +49,7 @@ define("L_SET_19", "Vergiss mich nicht");
 
 define("L_SRC", "ist kostenlos verfügbar bei");
 
+define("L_SEC", "Sekunde");
 define("L_SECS", "Sekunden");
 define("L_MIN", "Minute");
 define("L_MINS", "Minuten");
@@ -697,7 +698,7 @@ define("L_OPID_SIGN", "Einlgeloggt mit Benutzername OpenID");
 define("L_OPID_REG", "Importiere deine OpenID ins profile.");
 
 // Support buttons
-define("L_SUPP_WARN", "Sie haben sich entschlossen, die nichtkommerzielle Entwicklung von\\n".APP_NAME." durch eine Geldspende an das Projekt zu unterstützen\\nHerzlichen Dank für Ihre Unterstützung!\\n\\nBitte beachten: Dies ist keine Spende an den Chatserverbetreiber!\\nBitte geben Sie den gewünschten Geldbetrag auf der nächsten Seite ein..\\n\\nFortfahren?");
+define("L_SUPP_WARN", "Sie haben sich entschlossen, die nichtkommerzielle Entwicklung von ".APP_NAME." durch eine Geldspende an das Projekt zu unterstützen.\\nHerzlichen Dank für Ihre Unterstützung!\\n\\nBitte beachten: Dies ist keine Spende an den Chatserverbetreiber!\\nBitte geben Sie den gewünschten Geldbetrag auf der nächsten Seite ein.\\n\\nFortfahren?");
 define("L_SUPP_ALT", "Unterstützen Sie die Weiterentwicklung und Sicherheitsbetreuung von ".APP_NAME." - es ist Schnell, Frei und Sicher!");
 
 // Video & Audio & Youtube cmds (Embevi & YouTube player class) – same approach as in // Img cmd mod section!

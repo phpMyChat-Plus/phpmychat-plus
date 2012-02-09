@@ -4,9 +4,14 @@ if (!function_exists('mb_convert_case'))
 {
 	function mb_convert_case($str,$type,$Charset)
 	{
+/*
 		if (eregi("TITLE",$type)) $str = ucwords($str);
 		elseif (eregi("LOWER",$type)) $str = strtolower($str);
 		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+*/
+		if (stripos($type,"TITLE") !== false) $str = ucwords($str);
+		elseif (stripos($type,"LOWER") !== false) $str = strtolower($str);
+		elseif (stripos($type,"UPPER") !== false) $str = strtoupper($str);
 		return $str;
 	}
 };
@@ -41,7 +46,8 @@ if (C_VERSION == 1)
 	if (!$IsCommand) $Error = L_ERR_USR_17;
 }
 // Check for invalid characters
-elseif (ereg("[\,]", stripslashes($new_room)))
+#elseif (ereg("[\,]", stripslashes($new_room)))
+elseif (preg_match("/[,|'|\\\\]/", $new_room))
 {
 	$Error = L_ERR_ROM_1;
 }

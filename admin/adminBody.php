@@ -125,6 +125,7 @@ if ($sheet < 3 || strstr($sheet,"a"))
 	</SCRIPT>
 <?php
 };
+if(C_ALLOW_MATH) echo("<script type=\"text/javascript\" src=\"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>");
 ?>
 </HEAD>
 

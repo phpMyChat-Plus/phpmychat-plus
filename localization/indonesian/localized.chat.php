@@ -46,6 +46,7 @@ define("L_SET_19", "Ingatkan saya");
 
 define("L_SRC", "tersedia dengan gratis di");
 
+define("L_SEC", "detik");
 define("L_SECS", "detik");
 define("L_MIN", "menit");
 define("L_MINS", "menit");
@@ -700,7 +701,7 @@ define("L_OPID_SIGN", "Masuk dengan OpenID");
 define("L_OPID_REG", "Impor ID biodata OpenID Anda");
 
 // Support buttons
-define("L_SUPP_WARN", "Anda terpilih untuk menjadi pengembang sukarela dari\\n".APP_NAME." dengan menyumbangkan sejumlah donasi bagi pengembang.\\nTerima kasih atas dukungan Anda!\\n\\nCatatan: penerima bukan sebagai pemilik tempat obrol ini.\\nMohon masukan jumlah donasi di halaman berikutnya.\\n\\nLanjutkan?");
+define("L_SUPP_WARN", "Anda terpilih untuk menjadi pengembang sukarela dari ".APP_NAME." dengan menyumbangkan sejumlah donasi bagi pengembang.\\nTerima kasih atas dukungan Anda!\\n\\nCatatan: penerima bukan sebagai pemilik tempat obrol ini.\\nMohon masukan jumlah donasi di halaman berikutnya.\\n\\nLanjutkan?");
 define("L_SUPP_ALT", "Pakai PayPal untuk pengembangan ".APP_NAME." - Ini Cepat, Gratis, dan Aman!");
 
 // Video & Audio & Youtube cmds (Embevi & YouTube player class) – same approach as in // Img cmd mod section!

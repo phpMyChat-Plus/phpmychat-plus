@@ -112,7 +112,8 @@ if(SHOW_ETIQ_IN_HELP == "1")
 		<SPAN CLASS="ChatCopy" dir="LTR">
 <?php
 include_once("./admin/mail4admin.lib.php");
-if (!eregi("Your name",C_ADMIN_NAME) && C_ADMIN_NAME != "") $Owner_name = C_ADMIN_NAME;
+#if (!eregi("Your name",C_ADMIN_NAME) && C_ADMIN_NAME != "") $Owner_name = C_ADMIN_NAME;
+if (stripos(C_ADMIN_NAME,"Your name") === false && C_ADMIN_NAME != "") $Owner_name = C_ADMIN_NAME;
 else $Owner_name = L_WHOIS_ADMIN;
 if (strstr($Sender_email,"@") && ($Sender_email != ""))
 {

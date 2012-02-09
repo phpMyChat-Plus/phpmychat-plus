@@ -78,7 +78,7 @@ define("L_CAL_FORMAT", "%d %B %Y");
 if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "uk_UA"); // en_US format of your language
 
 // Set the RU specific date/time format
-if (eregi("win", PHP_OS)) {
+if (stristr(PHP_OS,"win")) {
 setlocale(LC_ALL, "ukr-ukr.UTF-8", "ukr-ukr", "Ukrainian.UTF-8", "Ukrainian");
 } else {
 setlocale(LC_ALL, "uk_UA.UTF-8", "ukr.UTF-8", "ukr_ukr.UTF-8", "Ukrainian.UTF-8");

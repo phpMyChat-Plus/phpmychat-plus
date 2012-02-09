@@ -442,7 +442,8 @@ elseif ($Read == "Neww") $ReplyTo = "/wisp ".$User." ";
 $M = stripslashes($M);
 $M = str_replace("L_PRIV_PM",L_PRIV_PM,$M);
 $M = str_replace("L_PRIV_WISP",L_PRIV_WISP,$M);
-if (C_POPUP_LINKS || eregi('target="_blank"></a>',$M))
+#if (C_POPUP_LINKS || eregi('target="_blank"></a>',$M))
+if (C_POPUP_LINKS || stripos($M,'target="_blank"></a>') !== false)
 {
 	$M = str_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$M);
 }
@@ -529,7 +530,8 @@ elseif ($Read == "Neww") $ReplyTo = "/wisp ".$User." ";
 $M = stripslashes($M);
 $M = str_replace("L_PRIV_PM",L_PRIV_PM,$M);
 $M = str_replace("L_PRIV_WISP",L_PRIV_WISP,$M);
-if (C_POPUP_LINKS || eregi('target="_blank"></a>',$M))
+#if (C_POPUP_LINKS || eregi('target="_blank"></a>',$M))
+if (C_POPUP_LINKS || stripos($M,'target="_blank"></a>') !== false)
 {
 	$M = str_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$M);
 }

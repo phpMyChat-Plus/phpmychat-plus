@@ -25,7 +25,8 @@ function DetectTutorial($Str,$From)
 	reset($AvailableTutorials);
 	while($NotFound && list($key, $name) = each($AvailableTutorials))
 	{
-		if (($From == 1 && eregi("^(".trim($key).")$",$Str)) || ($From == 2 && eregi("(\(|\[|;[[:space:]])(".trim($key).")(;|\]|\))",$Str)))
+#		if (($From == 1 && eregi("^(".trim($key).")$",$Str)) || ($From == 2 && eregi("(\(|\[|;[[:space:]])(".trim($key).")(;|\]|\))",$Str)))
+		if (($From == 1 && preg_match("/^(".trim($key).")$/i",$Str)) || ($From == 2 && preg_match("/(\(|\[|;[[:space:]])(".trim($key).")(;|\]|\))/i",$Str)))
 		{
 			$L = $AvailableTutorials[$key];
 			$NotFound = false;

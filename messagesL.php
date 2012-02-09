@@ -23,7 +23,8 @@ if (isset($_COOKIE["CookieFontSize"])) $FontSize = $_COOKIE["CookieFontSize"];
 
 // Special cache instructions for IE5+
 $CachePlus	= "";
-if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
+#if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
+if (stripos((isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"), "MSIE") !== false) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
 $now		= gmdate('D, d M Y H:i:s') . ' GMT';
 
 header("Expires: $now");
@@ -65,9 +66,14 @@ if (!function_exists('mb_convert_case'))
 {
 	function mb_convert_case($str,$type,$Charset)
 	{
+/*
 		if (eregi("TITLE",$type)) $str = ucwords($str);
 		elseif (eregi("LOWER",$type)) $str = strtolower($str);
 		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+*/
+		if (stripos($type,"TITLE") !== false) $str = ucwords($str);
+		elseif (stripos($type,"LOWER") !== false) $str = strtolower($str);
+		elseif (stripos($type,"UPPER") !== false) $str = strtoupper($str);
 		return $str;
 	}
 };
@@ -326,6 +332,13 @@ if (!isset($FontName)) $FontName = "";
 if ($D > 0)	echo('<meta HTTP-EQUIV="Refresh" CONTENT="' . $D . '; URL=messagesL.php?' . ((isset($QUERY_STRING)) ? $QUERY_STRING : getenv('QUERY_STRING')) . '">');
 ?>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
+<?php
+if(C_ALLOW_MATH){
+?>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<?php
+}
+?>
 </HEAD>
 
 <BODY CLASS="mainframe" <?php if($O == 1) echo("onLoad=\"this.scrollTo(0,65000);\""); ?>>
@@ -351,7 +364,7 @@ if ($sghosts != "" && ghosts_in(stripslashes($U), $sghosts, $Charset) && ($statu
 }
 else
 {
-	$CondForQuery .= "(address = ' *' OR ((address = '$U' OR username = '$U') AND (room = '$R' OR room_from='$R' OR room = 'Offline PMs' OR username = 'SYS inviteTo')) OR ((room = '$R' OR room = 'Offline PMs') AND (address = '' OR username = '$U')) OR room = '*' OR (room = '$R' AND (username = 'SYS room' OR username = 'SYS image' OR username = 'SYS video' OR username = 'SYS utube' OR username LIKE 'SYS top%' OR username='SYS dice1' OR username='SYS dice2' OR username='SYS dice3')))";
+	$CondForQuery .= "(address = ' *' OR ((address = '$U' OR username = '$U') AND (room = '$R' OR room_from='$R' OR room = 'Offline PMs' OR username = 'SYS inviteTo')) OR ((room = '$R' OR room = 'Offline PMs') AND (address = '' OR username = '$U')) OR room = '*' OR (room = '$R' AND (username = 'SYS room' OR username = 'SYS image' OR username = 'SYS video' OR username = 'SYS utube' OR username = 'SYS math' OR username LIKE 'SYS top%' OR username='SYS dice1' OR username='SYS dice2' OR username='SYS dice3')))";
 }
 $DbLink->query("SELECT m_time, username, latin1, address, message FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC LIMIT $N");
 
@@ -364,6 +377,7 @@ if($DbLink->num_rows() > 0)
 	while(list($Time, $User, $Latin1, $Dest, $Message) = $DbLink->next_record())
 	{
 		$Message = stripslashes($Message);
+#		if($User != "SYS math") $Message = stripslashes($Message);
 
 		// Starts Smilies checkup
 		if (C_USE_SMILIES)
@@ -394,7 +408,13 @@ if($DbLink->num_rows() > 0)
 		$Message = str_replace("L_PRIV_WISP",L_PRIV_WISP,$Message);
 		$Message = str_replace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"".L_HELP_BUZZ1."\" title=\"".L_HELP_BUZZ1."\">",$Message);
 		if ($Align == "right") $Message = str_replace("arrowr","arrowl",$Message);
-		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
+		if ($L == "english" && strpos($Message,"L_LONG_DATETIME") !== false){
+			$longdtdate = substr($Message, (strpos($Message,"L_LONG_DATETIME") + 16), 10);
+			$longdtformat = 'str_replace("%d of", (stristr(PHP_OS,"win") ? "%#d" : "%e").date("S",'.$longdtdate.')." of", L_LONG_DATETIME)';
+			$Message = str_replace("L_LONG_DATETIME",$longdtformat,$Message);
+		}
+#		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
+		if (C_POPUP_LINKS || stripos($Message,'target="_blank"></a>') !== false)
 		{
 			$Message = str_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$Message);
 		}
@@ -415,7 +435,8 @@ if($DbLink->num_rows() > 0)
 			// Gravatar mod added by Ciprian
 			if ((ALLOW_GRAVATARS == 2 || (ALLOW_GRAVATARS == 1 && (!isset($use_gravatar) || $use_gravatar))) && !strstr($User,"SYS "))
 			{
-				if (eregi(C_AVA_RELPATH, $avatar)) $local_avatar = 1;
+#				if (eregi(C_AVA_RELPATH, $avatar)) $local_avatar = 1;
+				if (stripos($avatar, C_AVA_RELPATH) !== false) $local_avatar = 1;
 				else $local_avatar = 0;
 				require("plugins/gravatars/get_gravatar.php");
 			}
@@ -631,23 +652,33 @@ else
 					$NewMsg .= "<font class=\"notify\"><img src=\"".$eicon."\" border=0 width='16' alt='&copy; ".$ealt."' title='&copy; ".$ealt."'>&nbsp;<a href='".$Message."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_ORIG_VIDEO).".'; return true\" title='".sprintf(L_CLICK,L_ORIG_VIDEO)."' target=_blank>".L_VIDEO."</a> ".$Dest.":</font></td><td width=\"99%\" valign=\"top\">".$video."</td></tr></table>";
 				}
 			}
+			elseif ($User == "SYS math")
+			{
+				$MathDest = sprintf(L_MATH,$Dest);
+				$Mathslashed = $Message;
+				$NewMsg .="</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\" align=\"left\"><FONT class=\"notify\">".$MathDest."</FONT></td><td nowrap=\"nowrap\" valign=\"top\" align=\"left\">".$Mathslashed."</td></tr></table>";
+				$noteclass = "notify";
+			}
 			elseif ($User == "SYS room")
 			{
-       		$Message = "<I>".ROOM_SAYS." <FONT class=\"notify\">".$Message."</FONT></FONT></I></td></tr></table>";
-       		$noteclass = "notify2";
+				$Message = "<I>".ROOM_SAYS." <FONT class=\"notify\">".$Message."</FONT></FONT></I></td></tr></table>";
+				$noteclass = "notify2";
       		}
 			elseif (substr($User,0,8) != "SYS dice")
 			{
 				if ($Dest != "") $NewMsg .= "</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\"><B>".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]".$colornamedest_endtag."></B><BDO dir=\"${textDirection}\"></BDO> ";
-				$Message = str_replace("$","\\$",$Message);	// avoid '$' chars in nick to be parsed below
-				eval("\$Message = $Message;");
 				$noteclass = "notify";
-			};
-		    if ($User != "SYS image" && $User != "SYS video" && $User != "SYS utube")
+
+				if (!strstr($Message,"L_CLOSED"))
+				{
+					$Message = str_replace("$","\\$",$Message);	// avoid '$' chars in nick to be parsed below
+				}
+				eval("\$Message = $Message;");
+      		};
+		    if ($User != "SYS image" && $User != "SYS video" && $User != "SYS utube" && $User != "SYS math")
 		    {
 				if(substr($User,0,8) == "SYS dice")
 				{
-//					eval("\$Message = \"$Message\";");
 					$NewMsg .="</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\"><FONT class=\"notify\">".$Dest." ".DICE_RESULTS."</FONT></td><td nowrap=\"nowrap\" valign=\"top\">".$Message."</td></tr></table>";
 				}
 				else
@@ -753,7 +784,7 @@ if (C_QUOTE)
 }
 if(C_CHAT_BOOT)
 {
-	$CondForQueryM = "(username='$U' OR message='stripslashes(sprintf(L_ENTER_ROM, \"".$U."\"))' OR message='stripslashes(sprintf(L_ENTER_ROM_NOSOUND, \"".$U."\"))' OR ((username='SYS welcome' OR username LIKE 'SYS top%' OR username='SYS room' OR username='SYS image' OR username='SYS video' OR username='SYS utube' OR username='SYS dice1' OR username='SYS dice2' OR username='SYS dice3' OR username='SYS away') AND address='$U'))";
+	$CondForQueryM = "(username='$U' OR message='stripslashes(sprintf(L_ENTER_ROM, \"".$U."\"))' OR message='stripslashes(sprintf(L_ENTER_ROM_NOSOUND, \"".$U."\"))' OR ((username='SYS welcome' OR username LIKE 'SYS top%' OR username='SYS room' OR username='SYS image' OR username='SYS video' OR username='SYS utube' OR username='SYS math' OR username='SYS dice1' OR username='SYS dice2' OR username='SYS dice3' OR username='SYS away') AND address='$U'))";
 	$DbLink->query("SELECT type,m_time,room FROM ".C_MSG_TBL." WHERE ".$CondForQueryM." ORDER BY m_time DESC LIMIT 1");
 	list($m_type, $m_time, $m_room) = $DbLink->next_record();
 	$DbLink->clean_results();

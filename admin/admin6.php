@@ -73,7 +73,8 @@ $username = stripslashes($result["username"]);
 $address = stripslashes($result["address"]);
 if ($address != "") $address = " to <b>".$address."";
 $message = stripslashes($result["message"]);
-if (C_POPUP_LINKS || eregi('target="_blank"></a>',$message))
+#if (C_POPUP_LINKS || eregi('target="_blank"></a>',$message))
+if (C_POPUP_LINKS || stripos($message,'target="_blank"></a>') !== false)
 {
 	$message = str_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$message);
 }

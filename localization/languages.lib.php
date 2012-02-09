@@ -4,7 +4,7 @@ if (stristr($_SERVER["SCRIPT_NAME"], "install.php")) $ChatPath = "../";
 
 // Available languages
 $AvailableLanguages = array();
-$languageDirectories = dir('./'.$ChatPath.'localization/');
+$languageDirectories = dir('./'.${ChatPath}.'localization/');
 while($name = $languageDirectories->read())
 {
 if (stristr($_SERVER["SCRIPT_NAME"], "install"))
@@ -46,7 +46,8 @@ function Detect($Str,$From)
 	reset($AvailableLanguages);
 	while($NotFound && list($key, $name) = each($AvailableLanguages))
 	{
-		if (($From == 1 && eregi("^(".trim($key).")$",$Str)) || ($From == 2 && eregi("(\(|\[|;[[:space:]])(".trim($key).")(;|\]|\))",$Str)))
+#		if (($From == 1 && eregi("^(".trim($key).")$",$Str)) || ($From == 2 && eregi("(\(|\[|;[[:space:]])(".trim($key).")(;|\]|\))",$Str)))
+		if (($From == 1 && preg_match("/^(".trim($key).")$/i",$Str)) || ($From == 2 && preg_match("/(\(|\[|;[[:space:]])(".trim($key).")(;|\]|\))/i",$Str)))
 		{
 			$L = $AvailableLanguages[$key];
 			$NotFound = false;

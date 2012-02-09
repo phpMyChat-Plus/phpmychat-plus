@@ -62,7 +62,8 @@ if (!function_exists("utf8_substr"))
 
 // Special cache instructions for IE5+
 $CachePlus	= "";
-if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
+#if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
+if (stripos((isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"), "MSIE") !== false) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
 $now		= gmdate('D, d M Y H:i:s') . ' GMT';
 
 header("Expires: $now");
@@ -93,7 +94,8 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 	{
 		$Error = L_ERR_USR_5;
 	}
-	else if (ereg("[\, \']", stripslashes($U)))
+#	else if (ereg("[\, \']", stripslashes($U)))
+	else if (preg_match("/[ |,|'|\\\\]/", $U))
 	{
 		$Error = L_ERR_USR_16a;
 	}
@@ -115,7 +117,8 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 	}
 //	else if (!eregi("^([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](fo|g|l|m|mes|o|op|pa|ro|seum|t|u|v|z)?)$", $EMAIL))
 	// Added the new top-level domains (mail, asia, travel, aso)
-	else if (!eregi("^([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](avel|bi|bs|fo|g|ia|l|m|me|mes|o|op|pa|ro|seum|t|to|u|v|z)?)$", $EMAIL))
+#	else if (!eregi("^([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](avel|bi|bs|fo|g|ia|l|m|me|mes|o|op|pa|ro|seum|t|to|u|v|z)?)$", $EMAIL))
+	else if (preg_match("/^([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](avel|bi|bs|fo|g|ia|l|m|me|mes|o|op|pa|ro|seum|t|to|u|v|z)?)$/i", $EMAIL))
 	{
 		$Error = L_ERR_USR_8;
 	}
@@ -256,6 +259,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 		 $emailMessage .= L_REG_31.": ".($LASTNAME ? $LASTNAME : L_NOT_SELECTED).$eol
 		 . "".L_REG_30.": ".($FIRSTNAME ? $FIRSTNAME : L_NOT_SELECTED).$eol;
 	 }
+	 $longdtformat = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e").date('S')." of"), L_LONG_DATETIME) : L_LONG_DATETIME);
 	 $emailMessage .= "".L_PRO_7.": ".($BIRTHDAY != "0000-00-00" && $BIRTHDAY != "" ? $format_birth_day : L_NOT_SELECTED).$eol
      . "".L_REG_33.": ".$shweml.$eol
      . "".L_PRO_8.": ".$shwbday.$eol
@@ -271,7 +275,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 	 . "".L_PRO_6.": ".($C ? $C : L_NOT_SELECTED)." (".(COLOR_NAMES ? L_ENABLED : L_DISABLED).")".$eol
 	 . "".L_GRAV_USE.": ".$usegrav." (".(!ALLOW_GRAVATARS ? L_DISABLED : L_ENABLED).")".$eol
      . "----------------------------------------------".$eol
-	 . "".sprintf(L_EMAIL_VAL_6,strftime(L_LONG_DATETIME,time())).$eol
+	 . "".sprintf(L_EMAIL_VAL_6,strftime($longdtformat,time())).$eol
      . "----------------------------------------------".$eol.$eol
      . "".L_EMAIL_VAL_8.$eol.$eol
      .  $Mail_Greeting.$eol.$Sender_Name1.$eol.$Chat_URL;
@@ -511,7 +515,8 @@ if(isset($Error))
 				// Gravatars initialization
 				if (isset($EMAIL) && $EMAIL != "") $email = $EMAIL;
 				if (isset($U) && $U != "" && isset($email)) $User = $U;
-				if (eregi(C_AVA_RELPATH, $avatar)) $local_avatar = 1;
+#				if (eregi(C_AVA_RELPATH, $avatar)) $local_avatar = 1;
+				if (stripos($avatar,C_AVA_RELPATH) !== false) $local_avatar = 1;
 				else $local_avatar = 0;
 				require("plugins/gravatars/get_gravatar.php");
 				?>
@@ -817,7 +822,8 @@ $not_selected = ((L_NOT_SELECTED_F != "") ? L_NOT_SELECTED_F : L_NOT_SELECTED);
 $null = ((L_NULL_F != "") ? L_NULL_F : L_NULL);
 $selected = " (".$selected.")";
 $not_selected = " ".$null." (".$not_selected.")";
-			if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<SELECT NAME=\"COLORNAME\" style=\"background-color:".$COLORNAME.";\">\n");
+#			if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<SELECT NAME=\"COLORNAME\" style=\"background-color:".$COLORNAME.";\">\n");
+			if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false)) echo("<SELECT NAME=\"COLORNAME\" style=\"background-color:".$COLORNAME.";\">\n");
 			else echo("<SELECT NAME=\"COLORNAME\">");
 			while(list($ColorNumber1, $ColorCode) = each($CC))
 			{

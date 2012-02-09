@@ -4,9 +4,14 @@ if (!function_exists('mb_convert_case'))
 {
 	function mb_convert_case($str,$type,$Charset)
 	{
+/*
 		if (eregi("TITLE",$type)) $str = ucwords($str);
 		elseif (eregi("LOWER",$type)) $str = strtolower($str);
 		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+*/
+		if (stripos($type,"TITLE") !== false) $str = ucwords($str);
+		elseif (stripos($type,"LOWER") !== false) $str = strtolower($str);
+		elseif (stripos($type,"UPPER") !== false) $str = strtoupper($str);
 		return $str;
 	}
 };
@@ -25,7 +30,8 @@ else
 	else
 	{
 		// Check for invalid characters in the addressee name
-		if (ereg("[\, \']", stripslashes($Cmd[2])))
+#		if (ereg("[\, \']", stripslashes($Cmd[2])))
+		if (preg_match("/[ |,|'|\\\\]/", $Cmd[2]))
 		{
 			$Error = L_ERR_USR_16;
 		}

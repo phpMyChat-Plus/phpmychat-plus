@@ -49,6 +49,7 @@ define("L_SET_19", "Ricordami");
 
 define("L_SRC", "è disponibile gratuitamente");
 
+define("L_SEC", "secondo");
 define("L_SECS", "secondi");
 define("L_MIN", "minuto");
 define("L_MINS", "minuti");
@@ -694,7 +695,7 @@ define("L_OPID_SIGN", "Accedi con un OpenID");
 define("L_OPID_REG", "Importa uno dei tuoi profili OpenID");
 
 // Support buttons
-define("L_SUPP_WARN", "Hai scelto di contribuire al libero sviluppo di\\n".APP_NAME." facendo una donazione allo sviluppatore.\\nGrazie per il tuo supporto!\\n\\nNota: il contenitore non è il titolare di questa chat.\\nPer cortesia inserisci il tuo contributo nella pagina successiva.\\n\\nContinua?");
+define("L_SUPP_WARN", "Hai scelto di contribuire al libero sviluppo di ".APP_NAME." facendo una donazione allo sviluppatore.\\nGrazie per il tuo supporto!\\n\\nNota: il contenitore non è il titolare di questa chat.\\nPer cortesia inserisci il tuo contributo nella pagina successiva.\\n\\nContinua?");
 define("L_SUPP_ALT", "Supporta con PayPal lo svilujppo del ".APP_NAME." - E’ Veloce, Libero e Sicuro!");
 
 // Video & Audio & Youtube cmds (Embevi & YouTube player class) – same approach as in // Img cmd mod section!

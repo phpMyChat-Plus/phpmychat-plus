@@ -710,7 +710,7 @@ define("L_OPID_SIGN", "Identificare folosind OpenID");
 define("L_OPID_REG", "Importă un profil OpenID");
 
 // Support buttons
-define("L_SUPP_WARN", "Aţi ales să contribuiţi la dezvoltarea aplicaţiei ".APP_NAME.",\\nprin trimiterea unei donaţii dezvoltatorului.\\nVă mulţumim pentru încrederea şi sprijinul acordat!\\n\\nNotă: destinatarul acestei donaţii nu este una şi aceeaşi persoană\\ncu proprietarul acestui server de chat.\\nVă rugăm să introduceţi suma dorită în pagina următoare.\\n\\nContinuaţi?");
+define("L_SUPP_WARN", "Aţi ales să contribuiţi la dezvoltarea aplicaţiei ".APP_NAME.", prin trimiterea unei donaţii dezvoltatorului.\\nVă mulţumim pentru încrederea şi sprijinul acordat!\\n\\nNotă: destinatarul acestei donaţii nu este una şi aceeaşi persoană cu proprietarul acestui server de chat.\\nVă rugăm să introduceţi suma dorită în pagina următoare.\\n\\nContinuaţi?");
 define("L_SUPP_ALT", "Contribuiţi prin PayPal la dezvoltarea aplicaţiei ".APP_NAME." - este cel mai Rapid, Gratuit şi Sigur!");
 
 // Video & Audio & Youtube cmds (Embevi & YouTube player class)
@@ -728,4 +728,7 @@ define("L_PRO_10", "Vârsta");
 define("L_PRO_11", "%1\$d ani, %2\$d luni şi %3\$d zile");
 define("L_DOB_TIT_1", "Lista Aniversărilor");
 $L_DOB_SUBJ = "La Mulţi Ani %s!";
+
+// MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
+define("L_MATH", "%s a postat ecuaţia:");
 ?>

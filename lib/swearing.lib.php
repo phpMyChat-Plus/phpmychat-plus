@@ -7,9 +7,14 @@ if (!function_exists('mb_convert_case'))
 {
 	function mb_convert_case($str,$type,$Charset)
 	{
+/*
 		if (eregi("TITLE",$type)) $str = ucwords($str);
 		elseif (eregi("LOWER",$type)) $str = strtolower($str);
 		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+*/
+		if (stripos($type,"TITLE") !== false) $str = ucwords($str);
+		elseif (stripos($type,"LOWER") !== false) $str = strtolower($str);
+		elseif (stripos($type,"UPPER") !== false) $str = strtoupper($str);
 		return $str;
 	}
 };
@@ -409,8 +414,9 @@ function checkwords($String, $TestOnly, $Charset)
 	$b = 0;
 	for (reset($BadWords); $ToFind = current($BadWords); next($BadWords))
 	{
-		$Found = eregi(mb_convert_case(addslashes($ToFind),MB_CASE_LOWER,$Charset), mb_convert_case($String,MB_CASE_LOWER,$Charset));
-		if ($Found)
+#		$Found = eregi(mb_convert_case(addslashes($ToFind),MB_CASE_LOWER,$Charset), mb_convert_case($String,MB_CASE_LOWER,$Charset));
+		$Found = preg_match("/".mb_convert_case(addslashes($ToFind),MB_CASE_LOWER,$Charset)."/i",mb_convert_case($String,MB_CASE_LOWER,$Charset));
+		if ($Found !== false)
 		{
 			if ($TestOnly)
 			{

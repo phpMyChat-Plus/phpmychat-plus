@@ -1,27 +1,25 @@
-Note: if you’ve already modded your own files, please compare and edit the changes from those included in this log to identify the changes made for the fix. If not, just replace them in the according folders.
+Note: if you’ve already modded your own files, please compare and edit the changes from those included in this log to identify the changes made for the fix. If not, just replace all the files in the according folders.
 This log includes all the previously released fixes.
 Client browsers - tested with:
 	- IE < 5.5 = M;
-	- IE > 6.0SP2 (including > 7.0 & > 8.0) = H;
-	- Mozilla Firefox > 1.6.0.0 (including < 3.5.3) = H;
-	- Mozilla Firefox > 3.1a.2 = M;
+	- IE > 6.0SP2 (including > 7.0 & > 8.0 & > 9.0) = H;
+	- Mozilla Firefox > 1.6.0.0 (including < 10.0) = H;
 	- Mozilla Firebird 0.7 = L;
 	- Netscape > 8.1 = M;
 	- Opera 9.0 build 8502 = H;
 	- AvantBrowser 10.2 build 52 = H;
 	- Flock 1.2.1 = H;
 	- Apple Safari > 4.0.3 = H;
-	- Google Chrome > 2.0.172.34 = H.
+	- Google Chrome > 16.x.x.x.x = M.
 Server environment - tested env:
-	- Apache < 2.2.14 (Unix and Windows 2k/XP<SP3);
-	- php < 5.2.14 (non-safe-mode, but also a safe mode server has been tested and worked fine);
+	- Apache < 2.2.21 (Unix and Windows 2k/XP<SP3 & Vista);
+	- php < 5.3.5 (non-safe-mode, but also a safe mode server has been tested and worked fine);
 	- MySQL < 5.1.41;
 	- exif support enabled (gif/jpeg processing);
 	- GD2 support enabled (gif/jpeg processing);
 	- mail function support (optional but recommended).
 
 Known issues (read also the FAQ):
-- NOT COMPATIBLE YET with php >= 5.3.0! (due to the deprecation of ereg functions, which have been tremendously used until pmc+ 1.93; a separate version will be developed to replace ereg functions with preg/str class functions);
 - php 5.1.6 will not allow joining chat or/and changing settings or saving data into database (due to several bugs in 5.1.6 release);
 - php 4.4.4 has an issue of not posting the messages ($M value is null);
 - configurations cannot be saved from admin panel on servers having magic_quotes set "on"; this also happens if the c_config table structure has been altered somehow and it doesn’t exactly follow the admin5.php field definitions; another identified reason would be the use of single quote ’ in field values (like Room’s Names or such) - never use single quotes - use the utf-8 ’ instead (you can copy it from here when you need it);
@@ -34,6 +32,13 @@ On some pcs a restart might be necessary.
 We also added a small IE fixing script (reg file) as a link in Extra Options in chat.
 
 Fixes History:
+01.02.2012 - 1.94-beta8:
+- added some more reductions for AliceBot as well as fixing some date/time features; (functionality extension)
+- finished upgrading to php5.3.0 compatibility by changing all ereg functions to the according preg/strpos/strstr functions; (compatibility related)
+01.12.2011 - 1.94-beta7:
+- several code/bugs fixes (e.g. closing browser notice); (functionality related)
+- added the MatJax plugin support for posting equations/formula on scientific chatrooms; (functionality extension)
+- started the schedule mode, so the admin can set when to automatically close the chat entirely or by rooms, according to a daily/weekday based schedule; (functionality extension)
 20.02.2011 - 1.94-beta6:
 - added an option (checkbox) to send emails as Bcc not To (from admin panel); (privacy & functionality related)
 - fixed some color names codes; (functionality related)

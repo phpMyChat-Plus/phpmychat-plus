@@ -45,6 +45,7 @@ define("L_SET_19", "Zapamti me");
 
 define("L_SRC", "je slobodno dostupan na");
 
+define("L_SEC", "sekund");
 define("L_SECS", "sekundi");
 define("L_MIN", "minut");
 define("L_MINS", "minuta");

@@ -104,7 +104,7 @@ define("A_CHAT_LOGS_2", "Arhivarea mesajelor a fost dezactivată");
 define("A_CHAT_LOGS_3", "Deschide pagina cu istoricul IP-urilor");
 define("A_CHAT_LOGS_4", "Resetează istoricul IP-urilor");
 define("A_CHAT_LOGS_5", "Aceasta va salva şi reseta fişierul cu istoricul IP-urilor!\\n");
-define("A_CHAT_LOGS_6", "- Arhiva completă a mesajelor");
+define("A_CHAT_LOGS_6", "Arhiva completă a mesajelor");
 define("A_CHAT_LOGS_7", "Arată numai arhiva publică");
 define("A_CHAT_LOGS_8", "Aceasta va şterge toate istoricele\\nsalvate în anul %s!\\n");
 define("A_CHAT_LOGS_9", "Şterge tot istoricul din %s");
@@ -163,8 +163,6 @@ define("A_SEARCH_20", "Sex");
 define("A_SEARCH_21", "Termen căutare");
 define("A_SEARCH_22", "Căutare după");
 define("A_SEARCH_23", "Introduceţi un termen de căutare şi încercaţi din nou");
-define("A_SEARCH_24", "Nu au fost găsite informaţii conform criteriilor de căutare. Redefiniţi criteriile de căutare.");
-define("A_SEARCH_25", "Moderează acest utilizator");
 define("A_SEARCH_24", "Căutarea nu a returnat nici un rezultat. Redefiniţi criteriile de căutare.");
 define("A_SEARCH_25", "Moderează acest utilizator");
 
