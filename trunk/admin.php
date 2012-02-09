@@ -21,7 +21,8 @@ if (isset($_POST))
 if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 // avoid server configuration for magic quotes
-set_magic_quotes_runtime(0);
+#if (function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
+ini_set("magic_quotes_runtime", 0);
 // Can't turn off magic quotes gpc so just redo what it did if it is on.
 if (get_magic_quotes_gpc()) {
 	foreach($_GET as $k=>$v)
@@ -63,9 +64,14 @@ if (!function_exists('mb_convert_case'))
 {
 	function mb_convert_case($str,$type,$Charset)
 	{
+/*
 		if (eregi("TITLE",$type)) $str = ucwords($str);
 		elseif (eregi("LOWER",$type)) $str = strtolower($str);
 		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+*/
+		if (stripos($type,"TITLE") !== false) $str = ucwords($str);
+		elseif (stripos($type,"LOWER") !== false) $str = strtolower($str);
+		elseif (stripos($type,"UPPER") !== false) $str = strtoupper($str);
 		return $str;
 	}
 };
@@ -92,7 +98,8 @@ if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security
 
 // Special cache instructions for IE5+
 $CachePlus	= "";
-if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
+#if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
+if (stripos((isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"), "MSIE") !== false) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
 // Do not cache this page
 $now		= gmdate('D, d M Y H:i:s') . ' GMT';
 header("Expires: $now");

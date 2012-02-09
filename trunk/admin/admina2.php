@@ -91,10 +91,10 @@ while(list($stat_date) = $DbLink->next_record())
 #reset($stat_date);
 
 $DbLink->query("SELECT * FROM ".C_STS_TBL." WHERE stat_date>='$xstat_date' GROUP BY stat_date,room,username ORDER BY stat_date DESC, username ASC, room ASC");
-while(list($stat_date,$room,$username,$reguser,$last_in,$seconds_in,$longest_in,$last_away,$seconds_away,$longest_away,$times_away,$logins,$posts_sent,$pms_sent,$cmds_used,$profile_viewed,$profiles_checked,$imgs_posted,$urls_posted,$emails_posted,$swears_posted,$smilies_posted,$bans_rcvd,$bans_sent,$kicks_rcvd,$kicks_sent,$vids_posted) = $DbLink->next_record())
+while(list($stat_date,$room,$username,$reguser,$last_in,$seconds_in,$longest_in,$last_away,$seconds_away,$longest_away,$times_away,$logins,$posts_sent,$pms_sent,$cmds_used,$profile_viewed,$profiles_checked,$imgs_posted,$urls_posted,$emails_posted,$swears_posted,$smilies_posted,$bans_rcvd,$bans_sent,$kicks_rcvd,$kicks_sent,$vids_posted,$maths_posted) = $DbLink->next_record())
 {
 //		$stats[] = $stat_date,$room,$username,$reguser,$last_in,$seconds_in,$longest_in,$last_away,$seconds_away,$longest_away,$times_away,$logins,$posts_sent,$pms_sent,$cmds_used,$profile_viewed,$profiles_checked,$imgs_posted,$urls_posted,$emails_posted,$swears_posted,$smilies_posted,$bans_rcvd,$bans_sent,$kicks_rcvd,$kicks_sent;
-	$display .= $tr_s.$d.$td.strftime(L_SHORT_DATE,strtotime($stat_date)).$td.$room.$td.$username.$td.$reguser.$td.$logins.$td.($last_in ? strftime(L_SHORT_DATETIME,$last_in) : "&nbsp;").$td.time_transform($seconds_in).$td.time_transform($longest_in).$td.$times_away.$td.($last_away ? strftime(L_SHORT_DATETIME,$last_away) : "&nbsp;").$td.time_transform($seconds_away).$td.time_transform($longest_away).$td.$posts_sent.$td.$pms_sent.$td.$cmds_used.$td.$profile_viewed.$td.$profiles_checked.$td.$imgs_posted.$td.$vids_posted.$td.$urls_posted.$td.$emails_posted.$td.$swears_posted.$td.$smilies_posted.$td.$bans_rcvd.$td.$bans_sent.$td.$kicks_rcvd.$td.$kicks_sent.$tr_e;
+	$display .= $tr_s.$d.$td.strftime(L_SHORT_DATE,strtotime($stat_date)).$td.$room.$td.$username.$td.$reguser.$td.$logins.$td.($last_in ? strftime(L_SHORT_DATETIME,$last_in) : "&nbsp;").$td.time_transform($seconds_in).$td.time_transform($longest_in).$td.$times_away.$td.($last_away ? strftime(L_SHORT_DATETIME,$last_away) : "&nbsp;").$td.time_transform($seconds_away).$td.time_transform($longest_away).$td.$posts_sent.$td.$pms_sent.$td.$cmds_used.$td.$profile_viewed.$td.$profiles_checked.$td.$imgs_posted.$td.$vids_posted.$td.$maths_posted.$td.$urls_posted.$td.$emails_posted.$td.$swears_posted.$td.$smilies_posted.$td.$bans_rcvd.$td.$bans_sent.$td.$kicks_rcvd.$td.$kicks_sent.$tr_e;
 	$xlogins = $xlogins + $logins;
 	$xseconds_in = $xseconds_in + $seconds_in;
 	$xseconds_away = $xseconds_away + $seconds_away;
@@ -105,6 +105,7 @@ while(list($stat_date,$room,$username,$reguser,$last_in,$seconds_in,$longest_in,
 	$xprofiles_checked = $xprofiles_checked + $profiles_checked;
 	$ximgs_posted = $ximgs_posted + $imgs_posted;
 	$xvids_posted = $xvids_posted + $vids_posted;
+	$xmaths_posted = $xmaths_posted + $maths_posted;
 	$xurls_posted = $xurls_posted + $urls_posted;
 	$xemails_posted = $xemails_posted + $emails_posted;
 	$xswears_posted = $xswears_posted + $swears_posted;
@@ -113,7 +114,7 @@ while(list($stat_date,$room,$username,$reguser,$last_in,$seconds_in,$longest_in,
 	$xkicks_rcvd = $xkicks_rcvd + $kicks_rcvd;
 $d++;
 }
-$subtotal = "<TR><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=5>".sprintf(A_STATS_4,3).":".$tdt.$xlogins."</TD><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=3>".time_transform($xseconds_in).$tdt.$xtimes_away."</TD><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=3>".time_transform($xseconds_away).$tdt.$xposts_sent.$tdt.$xpms_sent.$tdt.$xcmds_used."</TD><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=2>".$xprofiles_checked.$tdt.$ximgs_posted.$tdt.$xvids_posted.$tdt.$xurls_posted.$tdt.$xemails_posted.$tdt.$xswears_posted.$tdt.$xsmilies_posted."</TD><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=2>".$xbans_rcvd."</TD><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=2>".$xkicks_rcvd.$tr_et;
+$subtotal = "<TR><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=5>".sprintf(A_STATS_4,3).":".$tdt.$xlogins."</TD><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=3>".time_transform($xseconds_in).$tdt.$xtimes_away."</TD><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=3>".time_transform($xseconds_away).$tdt.$xposts_sent.$tdt.$xpms_sent.$tdt.$xcmds_used."</TD><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=2>".$xprofiles_checked.$tdt.$ximgs_posted.$tdt.$xvids_posted.$tdt.$xmaths_posted.$tdt.$xurls_posted.$tdt.$xemails_posted.$tdt.$xswears_posted.$tdt.$xsmilies_posted."</TD><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=2>".$xbans_rcvd."</TD><TD VALIGN=CENTER ALIGN=\"CENTER\" CLASS=\"success\" COLSPAN=2>".$xkicks_rcvd.$tr_et;
 
 #reset($stat_date,$room,$username,$reguser,$last_in,$seconds_in,$longest_in,$last_away,$seconds_away,$longest_away,$times_away,$logins,$posts_sent,$pms_sent,$cmds_used,$profile_viewed,$profiles_checked,$imgs_posted,$urls_posted,$emails_posted,$swears_posted,$smilies_posted,$bans_rcvd,$bans_sent,$kicks_rcvd,$kicks_sent,$xlogins,$xseconds_in,$xseconds_away,$xtimes_away,$xposts_sent,$xpms_sent,$xcmds_used,$xprofiles_checked,$ximgs_posted,$xurls_posted,$xemails_posted,$xswears_posted,$xsmilies_posted,$xbans_rcvd,$xbans_sent,$xkicks_rcvd,$xkicks_sent);
 $DbLink->clean_results();
@@ -171,6 +172,7 @@ $DbLink->clean_results();
 				<TD VALIGN=CENTER ALIGN="CENTER" CLASS="small">Profiles checked</TD>
 				<TD VALIGN=CENTER ALIGN="CENTER" CLASS="small">Images posted</TD>
 				<TD VALIGN=CENTER ALIGN="CENTER" CLASS="small">Videos posted</TD>
+				<TD VALIGN=CENTER ALIGN="CENTER" CLASS="small">Equations posted</TD>
 				<TD VALIGN=CENTER ALIGN="CENTER" CLASS="small">URLs posted</TD>
 				<TD VALIGN=CENTER ALIGN="CENTER" CLASS="small">Emails posted</TD>
 				<TD VALIGN=CENTER ALIGN="CENTER" CLASS="small">Swears used</TD>
@@ -195,6 +197,7 @@ $DbLink->clean_results();
 				<TD VALIGN=CENTER ALIGN="CENTER" CLASS="small" COLSPAN=2>Profiles checked</TD>
 				<TD VALIGN=CENTER ALIGN="CENTER" CLASS="small">Images posted</TD>
 				<TD VALIGN=CENTER ALIGN="CENTER" CLASS="small">Videos posted</TD>
+				<TD VALIGN=CENTER ALIGN="CENTER" CLASS="small">Equations posted</TD>
 				<TD VALIGN=CENTER ALIGN="CENTER" CLASS="small">URLs posted</TD>
 				<TD VALIGN=CENTER ALIGN="CENTER" CLASS="small">Emails posted</TD>
 				<TD VALIGN=CENTER ALIGN="CENTER" CLASS="small">Swears used</TD>

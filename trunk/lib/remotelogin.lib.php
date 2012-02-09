@@ -91,7 +91,8 @@ if (isset($_POST))
 if (!isset($ChatPath)) $ChatPath = "";
 if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
 if (isset($L) && !is_dir("${ChatPath}localization/".$L)) exit();
-if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
+#if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
+if (preg_match("/SELECT|UNION|INSERT|UPDATE/i",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 if (isset($_COOKIE["CookieHash"])) $RemMe = $_COOKIE["CookieHash"];
 else unset($RemMe);
 if (isset($RemMe) && isset($_COOKIE["CookieUsername"]) && $_COOKIE["CookieUsername"] != urlencode(stripslashes($U))) unset($RemMe);
@@ -107,7 +108,8 @@ include("./${ChatPath}lib/get_IP.lib.php");
 
 // Special cache instructions for IE5+
 $CachePlus	= "";
-if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
+#if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
+if (stripos((isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"), "MSIE") !== false) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
 $now		= gmdate('D, d M Y H:i:s') . ' GMT';
 
 header("Expires: $now");
@@ -131,7 +133,8 @@ if (get_magic_quotes_gpc()) {
 // Get the relative path to the script that called this one
 if (!isset($PHP_SELF)) $PHP_SELF = $_SERVER["SCRIPT_NAME"];
 $Action = basename($PHP_SELF);
-$From = urlencode(ereg_replace("[^/]+/","../",$ChatPath).$Action);
+#$From = urlencode(ereg_replace("[^/]+/","../",$ChatPath).$Action);
+$From = urlencode(preg_replace("#[^/]+/#","../",$ChatPath).$Action);
 
 // For translations with a real iso code
 if (!isset($FontFace)) $FontFace = "";
@@ -150,9 +153,14 @@ if (!function_exists('mb_convert_case'))
 {
 	function mb_convert_case($str,$type,$Charset)
 	{
+/*
 		if (eregi("TITLE",$type)) $str = ucwords($str);
 		elseif (eregi("LOWER",$type)) $str = strtolower($str);
 		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+*/
+		if (stripos($type,"TITLE") !== false) $str = ucwords($str);
+		elseif (stripos($type,"LOWER") !== false) $str = strtolower($str);
+		elseif (stripos($type,"UPPER") !== false) $str = strtoupper($str);
 		return $str;
 	};
 };
@@ -243,6 +251,7 @@ if (isset($KK))
 		default:
 	};
 };
+
 
 // Fix some security issues
 if (isset($Reload))
@@ -362,7 +371,8 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 		$Error = L_ERR_USR_2;
 	}
 	// Check for invalid characters or empty nick
-	elseif (trim($U) == "" || ereg("[\, \']", stripslashes($U)))
+#	elseif (trim($U) == "" || ereg("[\, \']", stripslashes($U)))
+	elseif (trim($U) == "" || preg_match("/[ |,|'|\\\\]/", $U))
 	{
 		$Error = L_ERR_USR_16a;
 	}
@@ -468,6 +478,7 @@ if(!isset($Error) && (isset($N) && $N != "") && !isset($Reload))
 	};
 };
 
+
 // **	Ensures the user can create a room and the room name is a valid one (bypassed test
 //		when the frameset is reloaded because of the NN4+ resize bug).	**
 if(!isset($Error) && (isset($R3) && $R3 != ""))
@@ -481,7 +492,8 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 			$Error = $T ? L_ERR_USR_13 : L_ERR_USR_24;
 		}
 		// Check for invalid characters or empty room name
-		else if (trim($R3) == "" || ereg("[,\]", stripslashes($R3)))
+#		elseif (trim($R3) == "" || ereg("[,\]", stripslashes($R3)))
+		elseif (trim($R3) == "" || preg_match("/[,|'|\\\\]/", $R3))
 		{
 			$Error = L_ERR_ROM_1;
 		}
@@ -573,7 +585,8 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 				};
 				if ($changed)
 				{
-					$mod_rooms = str_replace(",,",",",ereg_replace("^,|,$","",implode(",",$roomTab)));
+#					$mod_rooms = str_replace(",,",",",ereg_replace("^,|,$","",implode(",",$roomTab)));
+					$mod_rooms = str_replace(",,", ",", preg_replace("/^,|,$/","",implode(",",$roomTab)));
 					$UpdLink->query("UPDATE ".C_REG_TBL." SET rooms='".addslashes($mod_rooms)."' WHERE username='".addslashes($mod_un)."'");
 					$UpdLink->query("UPDATE ".C_USR_TBL." SET status='r' WHERE room='$R3' AND username='".addslashes($mod_un)."'");
 				};
@@ -659,7 +672,8 @@ if(!isset($Error) && (isset($R2) && $R2 != ""))
 				};
 				if ($changed)
 				{
-					$mod_rooms = str_replace(",,",",",ereg_replace("^,|,$","",implode(",",$roomTab)));
+#					$mod_rooms = str_replace(",,",",",ereg_replace("^,|,$","",implode(",",$roomTab)));
+					$mod_rooms = str_replace(",,", ",", preg_replace("/^,|,$/","",implode(",",$roomTab)));
 					$UpdLink->query("UPDATE ".C_REG_TBL." SET rooms='".addslashes($mod_rooms)."' WHERE username='".addslashes($mod_un)."'");
 					$UpdLink->query("UPDATE ".C_USR_TBL." SET status='r' WHERE room='$R2' AND username='".addslashes($mod_un)."'");
 				};
@@ -703,6 +717,7 @@ if(!isset($Error) && ((isset($R0) && $R0 != "") || (isset($R1) && $R1 != "") || 
 		setcookie("CookieRoom", '', time());        // cookie expires in one year
 	}
 }
+
 
 // ** Enter the chat **
 if(!isset($Error) && (isset($N) && $N != ""))
@@ -811,7 +826,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 					{
 						$DbLink->query("UPDATE ".C_STS_TBL." SET logins=logins+1,last_in='$current_time' WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
 					}
-					else $DbLink->query("INSERT INTO ".C_STS_TBL." VALUES ('".date("Y-m-d")."', '$R', '$U', '$reguser', '$current_time', '', '', '', '', '', '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')");
+					else $DbLink->query("INSERT INTO ".C_STS_TBL." VALUES ('".date("Y-m-d")."', '$R', '$U', '$reguser', '$current_time', '', '', '', '', '', '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')");
 				}
 			}
 // modified by R Dickow for /away command:
@@ -862,7 +877,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 				{
 					$DbLink->query("UPDATE ".C_STS_TBL." SET logins=logins+1,last_in='$current_time' WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
 				}
-				else $DbLink->query("INSERT INTO ".C_STS_TBL." VALUES ('".date("Y-m-d")."', '$R', '$U', '$reguser', '$current_time', '', '', '', '', '', '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')");
+				else $DbLink->query("INSERT INTO ".C_STS_TBL." VALUES ('".date("Y-m-d")."', '$R', '$U', '$reguser', '$current_time', '', '', '', '', '', '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')");
 			}
 		}
 
@@ -1013,7 +1028,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	};
 	// -->
 	</SCRIPT>
-	<SCRIPT TYPE="text/javascript" LANGUAGE="Javascript1.2">
+	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript1.2">
 	<!--
 	// Misc vars
 	imgHelpOff = new Image(30,20); imgHelpOff.src = path2Chat + "localization/<?php echo($L); ?>/images/helpOff.gif";
@@ -1144,13 +1159,14 @@ if (file_exists("./localization/".$L."/localized.cmds.php"))
 	(L_CMD_RTL != "" && L_CMD_RTL != "L_CMD_RTL" ? str_replace(",","|",L_CMD_RTL)."|" : "").
 	(L_CMD_DICE != "" && L_CMD_DICE != "L_CMD_DICE" ? str_replace(",","|",L_CMD_DICE)."|" : "").
 	(L_CMD_VIDEO != "" && L_CMD_VIDEO != "L_CMD_VIDEO" ? str_replace(","," .+|",L_CMD_VIDEO)." .+|" : "").
-	(L_CMD_UTUBE != "" && L_CMD_UTUBE != "L_CMD_UTUBE" ? str_replace(","," .+|",L_CMD_UTUBE)." .+|" : "");
+	(L_CMD_UTUBE != "" && L_CMD_UTUBE != "L_CMD_UTUBE" ? str_replace(","," .+|",L_CMD_UTUBE)." .+|" : "").
+	(L_CMD_MATH != "" && L_CMD_MATH != "L_CMD_MATH" ? str_replace(","," .+|",L_CMD_MATH)." .+|" : "");
 	if ($TrsCmds != "") $TrsCmds = rtrim("|".$TrsCmds,"|");
 }
 ?>
 
 		// RegExp to quick check for valid commands
-		re = /^\/(!$|announce .+|ban .+|clear$|help$|\?$|ignore|invite .+|join .+|kick .+|boot .+|me .+|msg .+|to .+|notify$|order$|sort$|profile$|promote|quit|exit|bye|refresh|reload|recall$|save|export|show|last|size|timestamp$|whois .+|about .+|mr .+|away|demote .+|high|img .+|room .+|topic .+|wisp .+|whisp .+|vid .+|video .+|play .+|tube .+|utube .+|youtube .+|buzz|bot|rtl|ltr|dice|([1-9][0-9]?d)|([1-9][0-9]?d[1-9][0-9]?)|d([1-9][0-9]?[0-9]?)([t])([1-9][0-9]?)|d([1-9][0-9]?[0-9]?)<?php echo($TrsCmds != "" && $TrsCmds != "TrsCmds" ? $TrsCmds : ""); ?>)/i;
+		re = /^\/(!$|announce .+|ban .+|clear$|help$|\?$|ignore|invite .+|join .+|kick .+|boot .+|me .+|msg .+|to .+|notify$|order$|sort$|profile$|promote|quit|exit|bye|refresh|reload|recall$|save|export|show|last|size|timestamp$|whois .+|about .+|mr .+|away|demote .+|high|img .+|room .+|topic .+|wisp .+|whisp .+|vid .+|video .+|play .+|tube .+|utube .+|youtube .+|math .+|buzz|bot|rtl|ltr|dice|([1-9][0-9]?d)|([1-9][0-9]?d[1-9][0-9]?)|d([1-9][0-9]?[0-9]?)([t])([1-9][0-9]?)|d([1-9][0-9]?[0-9]?)<?php echo($TrsCmds != "" && $TrsCmds != "TrsCmds" ? $TrsCmds : ""); ?>)/i;
 		re1 = /^:( .+)/i;
 
 		// Ensure the message box isn't empty
@@ -1210,7 +1226,6 @@ if (file_exists("./localization/".$L."/localized.cmds.php"))
 } // end of entering the chat work
 
 
-
 /*********** 'send_headers' FUNCTION ***********/
 
 /* ------------------------------------------------------------------------------------------
@@ -1249,14 +1264,17 @@ function send_headers($title, $icon)
 	<LINK REL="stylesheet" HREF="<?php echo($ChatPath); ?>skins/start_page.css.php?<?php echo("Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 	<SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
 	<!--
-         <?php
-	if (eregi("MSIE|firefox|opera", $_SERVER['HTTP_USER_AGENT'])){ ?>
+    <?php
+#	if (eregi("MSIE|firefox|opera", $_SERVER['HTTP_USER_AGENT'])){
+	if (preg_match("/(MSIE|firefox|opera)/i", $_SERVER['HTTP_USER_AGENT'])){
+	?>
 		var NS4 = 1;
 		var IE4 = 1;
 		var ver4 = "H";
 	<?php
 	}
-	else{ ?>
+	else{
+	?>
 		var NS4 = (document.layers) ? 1 : 0;
 		var IE4 = ((document.all) && (parseInt(navigator.appVersion)>=4)) ? 1 : 0;
 		var ver4 = (NS4 || IE4) ? "H" : "L";
@@ -1346,8 +1364,8 @@ function isCookieEnabled() {
 		else var link = "";
 		window.focus();
 		url = '<?php echo("${ChatPath}"); ?>' + name + '<?php echo(".php?L=$L"); ?>' + u_name + uname + link;
-		pop_width = (name != 'admin'? 470:820);
-		pop_height = ((name != 'deluser' && name != 'pass_reset') ? (name != 'admin'? 640:550):260);
+		pop_width = (name != 'admin'? 470:830);
+		pop_height = ((name != 'deluser' && name != 'pass_reset') ? (name != 'admin'? 640:580):260);
 		param = "width=" + pop_width + ",height=" + pop_height + ",resizable=yes,scrollbars=yes";
 		name += "_popup";
 		window.open(url,name,param);

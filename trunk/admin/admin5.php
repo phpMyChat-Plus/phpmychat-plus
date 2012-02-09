@@ -269,10 +269,12 @@ function skin_selection($no,$roomskin)
 				$i = 0;
 				while (false !== ($skinfile = readdir($skinfiles)))
 				{
-					if (!eregi('\.html',$skinfile) && !eregi('\.css',$skinfile) && !is_dir($skinfile) && $skinfile!=='.' && $skinfile!=='..')
+# 					if (!eregi('\.html',$skinfile) && !eregi('\.css',$skinfile) && !is_dir($skinfile) && $skinfile!=='.' && $skinfile!=='..')
+##					if (stripos($skinfile,".html") === false && stripos($skinfile,".css") === false && !is_dir($skinfile) && !preg_match("/^[\.]/", $skinfile))
+					if (!preg_match("/(\.html|\.css)/i",$skinfile) && !is_dir($skinfile) && !preg_match("/^[\.]/", $skinfile))
 					{
 						$skinsfile[]=$skinfile;
-			 		$i++;
+						$i++;
 			 		}
 			 	}
 				closedir($skinfiles);
@@ -349,6 +351,7 @@ if (UPD_CHECK)
 					<li><a href="#registration">Registration</a></li>
 					<li><a href="#functionality">Functionality</a></li>
 					<li><a href="#timings">Timings</a></li>
+					<li><a href="#schedule">Open Schedule</a></li>
 				</ul>
 			</dd>
 	</dl>
@@ -388,15 +391,18 @@ if (UPD_CHECK)
 			<dd id="smenu4" onmouseover="javascript:show('smenu4');" onmouseout="javascript:show('');">
 				<ul>
 					<li><a href="http://sourceforge.net/projects/phpmychat/files/phpMyChat_Plus/" target=_blank Title="Open <?php echo(APP_NAME); ?> Download page" onMouseOver="window.status='Open <?php echo(APP_NAME); ?> Download page.'; return true">Download page</a></li>
-					<li><a href="http://www.ciprianmp.com/atm/index.php?directory=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Open <?php echo(APP_NAME); ?> Mirror Download page" onMouseOver="window.status='Open <?php echo(APP_NAME); ?> Mirror Download page.'; return true">Mirror page</a></li>
+					<li><a href="http://www.ciprianmp.com/atm/index.php?directory=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_LAST_VERSION); ?>" target=_blank Title="Open <?php echo(APP_NAME); ?> Mirror Download page" onMouseOver="window.status='Open <?php echo(APP_NAME); ?> Mirror Download page.'; return true">Mirror page</a></li>
 					<li><a href="http://sourceforge.net/projects/phpmychat/" target=_blank Title="Open <?php echo(APP_NAME); ?> Project page" onMouseOver="window.status='Open <?php echo(APP_NAME); ?> Project page.'; return true">Project page</a></li>
 					<li><a href="http://svn.sourceforge.net/viewvc/phpmychat/trunk/" target=_blank Title="Open <?php echo(APP_NAME); ?> SVN Project page" onMouseOver="window.status='Open <?php echo(APP_NAME); ?> SVN Project page.'; return true">Project SVN page</a></li>
 					<li><a href="http://tech.groups.yahoo.com/group/phpmychat/" target=_blank Title="Open <?php echo(APP_NAME); ?> Yahoo Support Group page" onMouseOver="window.status='Open <?php echo(APP_NAME); ?> Yahoo Support Group page.'; return true">Support Group page</a></li>
 					<li><a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Fixes readme.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_VERSION); ?>" target=_blank Title="Open <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> Release notes" onMouseOver="window.status='Open <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> Release notes.'; return true">Read <?php echo(APP_VERSION.APP_MINOR); ?> notes</a></li>
  <?php
- if(UPD_CHECK && (($app_last_version > $app_version) || (($app_last_version == $app_version) && ((APP_LAST_MINOR == "" && (ereg("RC",APP_MINOR) || ereg("ß",APP_MINOR))) || (ereg("f",APP_LAST_MINOR) && (ereg("RC",APP_MINOR) || ereg("ß",APP_MINOR) || APP_MINOR == "")) || (ereg("RC",APP_LAST_MINOR) && ereg("ß",APP_MINOR)) || (ereg("ß",APP_LAST_MINOR) && ereg("ß",APP_MINOR) && str_replace("-ß","",APP_LAST_MINOR) > str_replace("-ß","",APP_MINOR)) || (ereg("f",APP_LAST_MINOR) && ereg("f",APP_MINOR) && str_replace("-f","",APP_LAST_MINOR) > str_replace("-f","",APP_MINOR)) || (ereg("RC",APP_LAST_MINOR) && ereg("RC",APP_MINOR) && str_replace("-RC","",APP_LAST_MINOR) > str_replace("-RC","",APP_MINOR))))))
+# if(UPD_CHECK && (($app_last_version > $app_version) || (($app_last_version == $app_version) && ((APP_LAST_MINOR == "" && (ereg("RC",APP_MINOR) || ereg("ß",APP_MINOR))) || (ereg("f",APP_LAST_MINOR) && (ereg("RC",APP_MINOR) || ereg("ß",APP_MINOR) || APP_MINOR == "")) || (ereg("RC",APP_LAST_MINOR) && ereg("ß",APP_MINOR)) || (ereg("ß",APP_LAST_MINOR) && ereg("ß",APP_MINOR) && str_replace("-ß","",APP_LAST_MINOR) > str_replace("-ß","",APP_MINOR)) || (ereg("f",APP_LAST_MINOR) && ereg("f",APP_MINOR) && str_replace("-f","",APP_LAST_MINOR) > str_replace("-f","",APP_MINOR)) || (ereg("RC",APP_LAST_MINOR) && ereg("RC",APP_MINOR) && str_replace("-RC","",APP_LAST_MINOR) > str_replace("-RC","",APP_MINOR))))))
+ if(UPD_CHECK && (($app_last_version > $app_version) || (($app_last_version == $app_version) && ((APP_LAST_MINOR == "" && (stripos(APP_MINOR,"RC") !== false || strpos(APP_MINOR,"ß") !== false)) || (stripos(APP_LAST_MINOR,"f") !== false && (stripos(APP_MINOR,"RC") !== false || strpos(APP_MINOR,"ß") !== false || APP_MINOR == "")) || (stripos(APP_LAST_MINOR,"RC") !== false && strpos(APP_MINOR,"ß") !== false) || (strpos(APP_LAST_MINOR,"ß") !== false && strpos(APP_MINOR,"ß") !== false && str_replace("-ß","",APP_LAST_MINOR) > str_replace("-ß","",APP_MINOR)) || (stripos(APP_LAST_MINOR,"f") !== false && stripos(APP_MINOR,"f") !== false && str_ireplace("-f","",APP_LAST_MINOR) > str_ireplace("-f","",APP_MINOR)) || (stripos(APP_LAST_MINOR,"RC") !== false && stripos(APP_MINOR,"RC") && str_ireplace("-RC","",APP_LAST_MINOR) > str_ireplace("-RC","",APP_MINOR))))))
  {
- 	if (ereg("f",APP_LAST_MINOR) || ereg("ß",APP_LAST_MINOR) || ereg("RC",APP_LAST_MINOR)) $minor_dir = "/Fixes/";
+#  	if (ereg("f",APP_LAST_MINOR) || ereg("ß",APP_LAST_MINOR) || ereg("RC",APP_LAST_MINOR)) $minor_dir = "/Fixes/";
+ 	if (stripos(APP_LAST_MINOR,"f") !== false) $minor_dir = "/Fixes/";
+ 	elseif (strpos(APP_LAST_MINOR,"ß") !== false || stripos(APP_LAST_MINOR,"RC") !== false) $minor_dir = "/Betas/";
  	else $minor_dir = "/";
  	?>
  						<li><a href="http://www.ciprianmp.com/atm/index.php?directory=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_LAST_VERSION.$minor_dir); ?>" target=_blank Title="Download the <?php echo(APP_NAME." - ".APP_LAST_VERSION.APP_LAST_MINOR); ?> Update" onMouseOver="window.status='Download <?php echo(APP_NAME." - ".APP_LAST_VERSION.APP_LAST_MINOR); ?> Update.'; return true">Download <?php echo(APP_LAST_VERSION.APP_LAST_MINOR); ?></a></li>
@@ -425,7 +431,8 @@ if (UPD_CHECK)
 		?>
 <div><p><table align=center align=center border=0 cellpadding=0 class=menu style=background:white><tr><td class=success align=center><?php echo("<br />- ".sprintf(A_SHEET5_0, APP_NAME." - ".APP_VERSION.APP_MINOR)." -<br />"); ?>
 <?php
-		if (($app_last_version > $app_version) || (($app_last_version == $app_version) && ((APP_LAST_MINOR == "" && (ereg("RC",APP_MINOR) || ereg("ß",APP_MINOR))) || (ereg("f",APP_LAST_MINOR) && (ereg("RC",APP_MINOR) || ereg("ß",APP_MINOR) || APP_MINOR == "")) || (ereg("RC",APP_LAST_MINOR) && ereg("ß",APP_MINOR)) || (ereg("ß",APP_LAST_MINOR) && ereg("ß",APP_MINOR) && str_replace("-ß","",APP_LAST_MINOR) > str_replace("-ß","",APP_MINOR)) || (ereg("f",APP_LAST_MINOR) && ereg("f",APP_MINOR) && str_replace("-f","",APP_LAST_MINOR) > str_replace("-f","",APP_MINOR)) || (ereg("RC",APP_LAST_MINOR) && ereg("RC",APP_MINOR) && str_replace("-RC","",APP_LAST_MINOR) > str_replace("-RC","",APP_MINOR)))))
+# 		if (($app_last_version > $app_version) || (($app_last_version == $app_version) && ((APP_LAST_MINOR == "" && (ereg("RC",APP_MINOR) || ereg("ß",APP_MINOR))) || (ereg("f",APP_LAST_MINOR) && (ereg("RC",APP_MINOR) || ereg("ß",APP_MINOR) || APP_MINOR == "")) || (ereg("RC",APP_LAST_MINOR) && ereg("ß",APP_MINOR)) || (ereg("ß",APP_LAST_MINOR) && ereg("ß",APP_MINOR) && str_replace("-ß","",APP_LAST_MINOR) > str_replace("-ß","",APP_MINOR)) || (ereg("f",APP_LAST_MINOR) && ereg("f",APP_MINOR) && str_replace("-f","",APP_LAST_MINOR) > str_replace("-f","",APP_MINOR)) || (ereg("RC",APP_LAST_MINOR) && ereg("RC",APP_MINOR) && str_replace("-RC","",APP_LAST_MINOR) > str_replace("-RC","",APP_MINOR)))))
+		if (($app_last_version > $app_version) || (($app_last_version == $app_version) && ((APP_LAST_MINOR == "" && (stripos(APP_MINOR,"RC") !== false || strpos(APP_MINOR,"ß") !== false)) || (stripos(APP_LAST_MINOR,"f") !== false && (stripos(APP_MINOR,"RC") !== false || strpos(APP_MINOR,"ß") !== false || APP_MINOR == "")) || (stripos(APP_LAST_MINOR,"RC") !== false && strpos(APP_MINOR,"ß") !== false) || (strpos(APP_LAST_MINOR,"ß") !== false && strpos(APP_MINOR,"ß") !== false && str_replace("-ß","",APP_LAST_MINOR) > str_replace("-ß","",APP_MINOR)) || (stripos(APP_LAST_MINOR,"f") !== false && stripos(APP_MINOR,"f") !== false && str_ireplace("-f","",APP_LAST_MINOR) > str_ireplace("-f","",APP_MINOR)) || (stripos(APP_LAST_MINOR,"RC") !== false && stripos(APP_MINOR,"RC") !== false && str_ireplace("-RC","",APP_LAST_MINOR) > str_ireplace("-RC","",APP_MINOR)))))
 		{
 		?>
 			<script type="text/javascript" language="javascript">
@@ -643,32 +650,52 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"SEND_BDAY_INTVAL = '$vSEND_BDAY_INTVAL', ".
 						"SEND_BDAY_PATH = '$vSEND_BDAY_PATH', ".
 						"EN_WMPLAYER = '$vEN_WMPLAYER', ".
-						"WMP_STREAM = '$vWMP_STREAM'".
-				" WHERE ID='0'";
+						"WMP_STREAM = '$vWMP_STREAM', ".
+						"OPEN_ALL_BEG = '$vOPEN_ALL_BEG', ".
+						"OPEN_ALL_END = '$vOPEN_ALL_END', ".
+						"OPEN_SUN_BEG = '$vOPEN_SUN_BEG', ".
+						"OPEN_SUN_END = '$vOPEN_SUN_END', ".
+						"OPEN_MON_BEG = '$vOPEN_MON_BEG', ".
+						"OPEN_MON_END = '$vOPEN_MON_END', ".
+						"OPEN_TUE_BEG = '$vOPEN_TUE_BEG', ".
+						"OPEN_TUE_END = '$vOPEN_TUE_END', ".
+						"OPEN_WED_BEG = '$vOPEN_WED_BEG', ".
+						"OPEN_WED_END = '$vOPEN_WED_END', ".
+						"OPEN_THU_BEG = '$vOPEN_THU_BEG', ".
+						"OPEN_THU_END = '$vOPEN_THU_END', ".
+						"OPEN_FRI_BEG = '$vOPEN_FRI_BEG', ".
+						"OPEN_FRI_END = '$vOPEN_FRI_END', ".
+						"OPEN_SAT_BEG = '$vOPEN_SAT_BEG', ".
+						"OPEN_SAT_END = '$vOPEN_SAT_END', ".
+						"ALLOW_TEXT_COLORS = '$vALLOW_TEXT_COLORS', ".
+						"TAGS_POWERS = '$vTAGS_POWERS', ".
+						"ALLOW_MATH = '$vALLOW_MATH' ".
+				"WHERE ID='0'";
 
 		$DbLink->query($query);
 
 if(C_BOT_NAME != $vBOT_NAME || C_BOT_FONT_COLOR != $vBOT_FONT_COLOR || C_BOT_AVATAR != $vBOT_AVATAR)
 {
 	$query_botname1 = "UPDATE bot_bot SET ".
-						"value = '$vBOT_NAME'".
+						"value = '".stripslashes($vBOT_NAME)."'".
 				" WHERE name='name'";
 	$query_botname2 = "UPDATE bot_bots SET ".
-						"botname = '$vBOT_NAME'".
+						"botname = '".stripslashes($vBOT_NAME)."'".
 				" WHERE botname!='$vBOT_NAME'";
 	$query_botname3 = "UPDATE ".C_REG_TBL." SET ".
-						"username = '$vBOT_NAME', ".
+						"username = '".stripslashes($vBOT_NAME)."', ".
 						"colorname = '$vBOT_FONT_COLOR', ".
 						"avatar = '$vBOT_AVATAR'".
 				" WHERE email='bot@bot.com'";
 	$query_botname4 = "UPDATE ".C_USR_TBL." SET ".
-						"username = '$vBOT_NAME'".
+						"username = '".stripslashes($vBOT_NAME)."'".
 				" WHERE email='bot@bot.com'";
 	if (trim($vBOT_NAME) == "" && C_BOT_NAME != $vBOT_NAME)
 	{
 		$Error = "You must type a username for your Bot";
 	}
-	else if (ereg("[\, \']", stripslashes($vBOT_NAME)) && C_BOT_NAME != $vBOT_NAME)
+#	else if (ereg("[\, \']", stripslashes($vBOT_NAME)) && C_BOT_NAME != $vBOT_NAME)
+	else if(preg_match("/[ |,|'|\\\\]/", $vBOT_NAME) && C_BOT_NAME != $vBOT_NAME)
 	{
 		$Error = "Only these extra-characters allowed:<br />".$REG_CHARS_ALLOWED."<br />Spaces, commas or backslashes (\\) not allowed.<br />Check the syntax of the Bot name (".$vBOT_NAME.")";
 	}
@@ -699,7 +726,7 @@ if(C_BOT_NAME != $vBOT_NAME || C_BOT_FONT_COLOR != $vBOT_FONT_COLOR || C_BOT_AVA
 if((C_QUOTE_NAME != $vQUOTE_NAME || C_QUOTE_FONT_COLOR != $vQUOTE_FONT_COLOR || C_QUOTE_AVATAR != $vQUOTE_AVATAR) && $vQUOTE)
 {
 	$query_quote1 = "UPDATE ".C_REG_TBL." SET ".
-						"username = '$vQUOTE_NAME', ".
+						"username = '".stripslashes($vQUOTE_NAME)."', ".
 						"colorname = '$vQUOTE_FONT_COLOR', ".
 						"avatar = '$vQUOTE_AVATAR'".
 				" WHERE email='quote@quote.com'";
@@ -707,7 +734,8 @@ if((C_QUOTE_NAME != $vQUOTE_NAME || C_QUOTE_FONT_COLOR != $vQUOTE_FONT_COLOR || 
 	{
 		$Error = "You must type a username for your Random Quote";
 	}
-	else if (ereg("[\, \']", stripslashes($vQUOTE_NAME)) && C_QUOTE_NAME != $vQUOTE_NAME)
+# 	else if (ereg("[\, \']", stripslashes($vQUOTE_NAME)) && C_QUOTE_NAME != $vQUOTE_NAME)
+	else if(preg_match("/[ |,|'|\\\\]/", $vQUOTE_NAME) && C_QUOTE_NAME != $vQUOTE_NAME)
 	{
 		$Error = "Only these extra-characters allowed:<br />".$REG_CHARS_ALLOWED."<br />Spaces, commas or backslashes (\\) not allowed.<br />Check the syntax of the Random Quote name (".$vQUOTE_NAME.")";
 	}
@@ -762,7 +790,8 @@ if (C_LAST_SAVED_ON)
 	settype($last_saved_on = mysql_to_ts(C_LAST_SAVED_ON), "integer");
 	if (C_TMZ_OFFSET) settype($tmz_offset = C_TMZ_OFFSET, "integer");
 	$Last_Saved_On = $last_saved_on + $tmz_offset*60*60;
-	$Last_Saved_On = stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,$Charset,strftime(L_LONG_DATETIME,$Last_Saved_On)) : strftime(L_LONG_DATETIME,$Last_Saved_On);
+	$longdtformat = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e").date('S',$Last_Saved_On))." of", L_LONG_DATETIME) : L_LONG_DATETIME);
+	$Last_Saved_On = stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,$Charset,strftime($longdtformat, $Last_Saved_On)) : strftime($longdtformat, $Last_Saved_On);
 }
 if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 {
@@ -887,7 +916,11 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 				elseif ($name == "italian" && L_ORIG_LANG_IT != "L_ORIG_LANG_IT") $FLAG_NAME = L_ORIG_LANG_IT;
 				elseif ($name == "japanese" && L_ORIG_LANG_JA != "L_ORIG_LANG_JA") $FLAG_NAME = L_ORIG_LANG_JA;
 				elseif ($name == "nepali" && L_ORIG_LANG_NE != "L_ORIG_LANG_NE") $FLAG_NAME = L_ORIG_LANG_NE;
+				elseif ($name == "norwegian_bokmal" && L_ORIG_LANG_NB != "L_ORIG_LANG_NB") $FLAG_NAME = L_ORIG_LANG_NB;
+				elseif ($name == "norwegian_nynorsk" && L_ORIG_LANG_NN != "L_ORIG_LANG_NN") $FLAG_NAME = L_ORIG_LANG_NN;
 				elseif ($name == "persian" && L_ORIG_LANG_FA != "L_ORIG_LANG_FA") $FLAG_NAME = L_ORIG_LANG_FA;
+				elseif ($name == "polish" && L_ORIG_LANG_PL != "L_ORIG_LANG_PL") $FLAG_NAME = L_ORIG_LANG_PL;
+				elseif ($name == "portuguese" && L_ORIG_LANG_PT != "L_ORIG_LANG_PT") $FLAG_NAME = L_ORIG_LANG_PT;
 				elseif ($name == "romanian" && L_ORIG_LANG_RO != "L_ORIG_LANG_RO") $FLAG_NAME = L_ORIG_LANG_RO;
 				elseif ($name == "russian" && L_ORIG_LANG_RU != "L_ORIG_LANG_RU") $FLAG_NAME = L_ORIG_LANG_RU;
 				elseif ($name == "serbian_latin" && L_ORIG_LANG_SRL != "L_ORIG_LANG_SRL") $FLAG_NAME = L_ORIG_LANG_SRL;
@@ -895,6 +928,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 				elseif ($name == "slovak" && L_ORIG_LANG_SK != "L_ORIG_LANG_SK") $FLAG_NAME = L_ORIG_LANG_SK;
 				elseif ($name == "spanish" && L_ORIG_LANG_ES != "L_ORIG_LANG_ES") $FLAG_NAME = L_ORIG_LANG_ES;
 				elseif ($name == "swedish" && L_ORIG_LANG_SV != "L_ORIG_LANG_SV") $FLAG_NAME = L_ORIG_LANG_SV;
+				elseif ($name == "thai" && L_ORIG_LANG_TH != "L_ORIG_LANG_TH") $FLAG_NAME = L_ORIG_LANG_TH;
 				elseif ($name == "turkish" && L_ORIG_LANG_TR != "L_ORIG_LANG_TR") $FLAG_NAME = L_ORIG_LANG_TR;
 				elseif ($name == "ukrainian" && L_ORIG_LANG_UK != "L_ORIG_LANG_UK") $FLAG_NAME = L_ORIG_LANG_UK;
 				elseif ($name == "urdu" && L_ORIG_LANG_UR != "L_ORIG_LANG_UR") $FLAG_NAME = L_ORIG_LANG_UR;
@@ -1332,6 +1366,44 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 </table>
 <table align="center" width="780" class=table>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="schedule"></a><b>Open Schedule</b></td></tr>
+	<tr class=\"thumbIndex\">
+		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+	</tr>
+<tr bgcolor="#B0C4DE">
+    <td><b>Open times Schedule for your chat and rooms.</b><br />
+    	<font color=red>Important: This mod is still under development! The schedule fields have deliberately been disabled.</font></i>
+    </td>
+    <td align="center">
+		<b><font color=blue>Daily schedule:</font><br />
+		<input name="vOPEN_ALL_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_ALL_BEG; ?>" class=success DISABLED>&nbsp;÷&nbsp;
+		<input name="vOPEN_ALL_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_ALL_END; ?>" class=success DISABLED><br />
+		<font color=red>Sunday schedule:</font><br />
+		<input name="vOPEN_SUN_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_SUN_BEG; ?>" class=notify2 DISABLED>&nbsp;÷&nbsp;
+		<input name="vOPEN_SUN_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_SUN_END; ?>" class=notify2 DISABLED><br />
+		Monday schedule:<br />
+		<input name="vOPEN_MON_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_MON_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
+		<input name="vOPEN_MON_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_MON_END; ?>" class=notify DISABLED><br />
+		Tuesday schedule:<br />
+		<input name="vOPEN_TUE_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_TUE_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
+		<input name="vOPEN_TUE_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_TUE_END; ?>" class=notify DISABLED><br />
+		Wednesday schedule:<br />
+		<input name="vOPEN_WED_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_WED_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
+		<input name="vOPEN_WED_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_WED_END; ?>" class=notify DISABLED><br />
+		Thursday schedule:<br />
+		<input name="vOPEN_THU_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_THU_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
+		<input name="vOPEN_THU_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_THU_END; ?>" class=notify DISABLED><br />
+		Friday schedule:<br />
+		<input name="vOPEN_FRI_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_FRI_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
+		<input name="vOPEN_FRI_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_FRI_END; ?>" class=notify DISABLED><br />
+		Saturday schedule:<br />
+		<input name="vOPEN_SAT_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_SAT_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
+		<input name="vOPEN_SAT_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_SAT_END; ?>" class=notify DISABLED></b>
+	</td>
+</tr>
+</table>
+<table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="layout"></a><b>Login layout</b></td></tr>
 	<tr class=\"thumbIndex\">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
@@ -1485,6 +1557,11 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		    $installdate = strtotime($INSTALL_DATE);
 			$myCalendar->setDate(date('d',$installdate), date('m',$installdate), date('Y',$installdate));
 		  }
+		  else
+		  {
+			$CorrectedTime = mktime(date("G") + C_TMZ_OFFSET,date("i"),date("s"),date("m"),date("d"),date("Y"));
+			$myCalendar->setDate(date('d',$CorrectedTime), date('m',$CorrectedTime), date('Y',$CorrectedTime));
+		  }
 		  $myCalendar->setYearInterval(2000, date('Y'));
 		  $myCalendar->dateAllow('2000-01-01', date('Y-m-d'));
 		  $myCalendar->setAlignment('left', 'bottom'); //optional
@@ -1536,6 +1613,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         <select name="vEN_ROOM1">
 	        <option value="0"<?php if($EN_ROOM1==0){ echo " selected"; } ?>>Disabled</option>
 	        <option value="1"<?php if($EN_ROOM1==1){ echo " selected"; } ?>>Enabled</option>
+	    <!--    <option value="2"<?php if($EN_ROOM1==2){ echo " selected"; } ?>>Scheduled</option> -->
         </select>&nbsp;
         <select name="vRES_ROOM1">
 	        <option value="0"<?php if($RES_ROOM1==0){ echo " selected"; } ?>>Unrestricted</option>
@@ -1556,6 +1634,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         <select name="vEN_ROOM2">
 	        <option value="0"<?php if($EN_ROOM2==0){ echo " selected"; } ?>>Disabled</option>
 	        <option value="1"<?php if($EN_ROOM2==1){ echo " selected"; } ?>>Enabled</option>
+	    <!--    <option value="2"<?php if($EN_ROOM2==2){ echo " selected"; } ?>>Scheduled</option> -->
         </select>&nbsp;
         <select name="vRES_ROOM2">
 	        <option value="0"<?php if($RES_ROOM2==0){ echo " selected"; } ?>>Unrestricted</option>
@@ -1576,6 +1655,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         <select name="vEN_ROOM3">
 	        <option value="0"<?php if($EN_ROOM3==0){ echo " selected"; } ?>>Disabled</option>
 	        <option value="1"<?php if($EN_ROOM3==1){ echo " selected"; } ?>>Enabled</option>
+	    <!--    <option value="2"<?php if($EN_ROOM3==2){ echo " selected"; } ?>>Scheduled</option> -->
         </select>&nbsp;
         <select name="vRES_ROOM3">
 	        <option value="0"<?php if($RES_ROOM3==0){ echo " selected"; } ?>>Unrestricted</option>
@@ -1596,6 +1676,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         <select name="vEN_ROOM4">
 	        <option value="0"<?php if($EN_ROOM4==0){ echo " selected"; } ?>>Disabled</option>
 	        <option value="1"<?php if($EN_ROOM4==1){ echo " selected"; } ?>>Enabled</option>
+	    <!--    <option value="2"<?php if($EN_ROOM4==2){ echo " selected"; } ?>>Scheduled</option> -->
         </select>&nbsp;
         <select name="vRES_ROOM4">
 	        <option value="0"<?php if($RES_ROOM4==0){ echo " selected"; } ?>>Unrestricted</option>
@@ -1616,6 +1697,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         <select name="vEN_ROOM5">
 	        <option value="0"<?php if($EN_ROOM5==0){ echo " selected"; } ?>>Disabled</option>
 	        <option value="1"<?php if($EN_ROOM5==1){ echo " selected"; } ?>>Enabled</option>
+	    <!--    <option value="2"<?php if($EN_ROOM5==2){ echo " selected"; } ?>>Scheduled</option> -->
         </select>&nbsp;
         <select name="vRES_ROOM5">
 	        <option value="0"<?php if($RES_ROOM5==0){ echo " selected"; } ?>>Unrestricted</option>
@@ -1637,6 +1719,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         <select name="vEN_ROOM6">
 	        <option value="0"<?php if($EN_ROOM6==0){ echo " selected"; } ?>>Disabled</option>
 	        <option value="1"<?php if($EN_ROOM6==1){ echo " selected"; } ?>>Enabled</option>
+	    <!--    <option value="2"<?php if($EN_ROOM6==2){ echo " selected"; } ?>>Scheduled</option> -->
         </select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN6\">\n");
@@ -1654,6 +1737,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         <select name="vEN_ROOM7">
 	        <option value="0"<?php if($EN_ROOM7==0){ echo " selected"; } ?>>Disabled</option>
 	        <option value="1"<?php if($EN_ROOM7==1){ echo " selected"; } ?>>Enabled</option>
+	    <!--    <option value="2"<?php if($EN_ROOM7==2){ echo " selected"; } ?>>Scheduled</option> -->
         </select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN7\">\n");
@@ -1671,6 +1755,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         <select name="vEN_ROOM8">
 	        <option value="0"<?php if($EN_ROOM8==0){ echo " selected"; } ?>>Disabled</option>
 	        <option value="1"<?php if($EN_ROOM8==1){ echo " selected"; } ?>>Enabled</option>
+	    <!--    <option value="2"<?php if($EN_ROOM8==2){ echo " selected"; } ?>>Scheduled</option> -->
         </select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN8\">\n");
@@ -1688,6 +1773,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         <select name="vEN_ROOM9">
 	        <option value="0"<?php if($EN_ROOM9==0){ echo " selected"; } ?>>Disabled</option>
 	        <option value="1"<?php if($EN_ROOM9==1){ echo " selected"; } ?>>Enabled</option>
+	    <!--    <option value="2"<?php if($EN_ROOM9==2){ echo " selected"; } ?>>Scheduled</option> -->
         </select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN9\">\n");
@@ -1763,6 +1849,16 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
+	<td><b>Set Power users to post tagged text:</b><br />
+    	This option allows you to Set Power users to be able to post tagged text (bold, italic, underline or any combination of them).<br />
+    	<font color=red>Important: It only works if the setting above is set to Show italics/colors. Only B, I or/and U are allowed (case insensitive). Any other letters/characters will not be saved. Values must be separated by commas (if more than one).</font><br />
+		<i>Example: b,i,u (or b,i or b or u,b)</i>
+	</td>
+    <td>
+		<input name="vTAGS_POWERS" type="text" size="3" maxlength="5" value="<?php echo $TAGS_POWERS; ?>">
+    </td>
+</tr>
+<tr>
     <td><b>Color filters in posts.</b><br />
     	<i>Hint: If enabled, all the users can use any color, if not, they can use all except the power colors set below.</i>
     </td>
@@ -1773,12 +1869,14 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         </select>
     </td>
 </tr>
-<tr>
+<tr bgcolor="#B0C4DE">
     <td><b>Set the Power Colors to be used only by admins (first as default).</b><br />
     	<i>Hint: This applies to the posted messages' colors mainly, but if Colored Names are enabled above, it will also apply to the names colors.</i>
 	</td>
     <td>
-		<?php if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CA\" style=\"background-color:".$COLOR_CA.";\">\n");
+ 		<?php
+#		if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CA\" style=\"background-color:".$COLOR_CA.";\">\n");
+		if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false)) echo("<select name=\"vCOLOR_CA\" style=\"background-color:".$COLOR_CA.";\">\n");
 		else echo("<select name=\"vCOLOR_CA\">");
 			$CCA = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CCA))
@@ -1791,7 +1889,9 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			}
 			?>
 		</select><br />
-		<?php if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CA1\" style=\"background-color:".$COLOR_CA1.";\">\n");
+		<?php
+# 		if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CA1\" style=\"background-color:".$COLOR_CA1.";\">\n");
+		if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false)) echo("<select name=\"vCOLOR_CA1\" style=\"background-color:".$COLOR_CA1.";\">\n");
 		else echo("<select name=\"vCOLOR_CA1\">");
 			$CCA1 = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CCA1))
@@ -1804,7 +1904,9 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			}
 			?>
 		</select><br />
-		<?php if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CA2\" style=\"background-color:".$COLOR_CA2.";\">\n");
+		<?php
+#		if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CA2\" style=\"background-color:".$COLOR_CA2.";\">\n");
+		if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false)) echo("<select name=\"vCOLOR_CA2\" style=\"background-color:".$COLOR_CA2.";\">\n");
 		else echo("<select name=\"vCOLOR_CA2\">");
 			$CCA2 = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CCA2))
@@ -1819,12 +1921,14 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		</select>
     </td>
 </tr>
-<tr bgcolor="#B0C4DE">
+<tr>
     <td><b>Set the Power Colors to be used only by moderators (first as default).</b><br />
     	<i>Hint. This applies to the posted messages' colors mainly, but if Colored Names are enabled above, it will also apply to names colors.<br />Admins will also be able to use these colors, but no other users.</i>
     </td>
     <td>
-		<?php if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CM\" style=\"background-color:".$COLOR_CM.";\">\n");
+		<?php
+#		if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CM\" style=\"background-color:".$COLOR_CM.";\">\n");
+		if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false)) echo("<select name=\"vCOLOR_CM\" style=\"background-color:".$COLOR_CM.";\">\n");
 		else echo("<select name=\"vCOLOR_CM\">");
 			$CCM = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CCM))
@@ -1837,7 +1941,9 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			}
 			?>
 		</select><br />
-		<?php if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CM1\" style=\"background-color:".$COLOR_CM1.";\">\n");
+		<?php
+#		if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CM1\" style=\"background-color:".$COLOR_CM1.";\">\n");
+		if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false)) echo("<select name=\"vCOLOR_CM1\" style=\"background-color:".$COLOR_CM1.";\">\n");
 		else echo("<select name=\"vCOLOR_CM1\">");
 			$CCM1 = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CCM1))
@@ -1850,7 +1956,9 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			}
 			?>
 		</select><br />
-		<?php if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CM2\" style=\"background-color:".$COLOR_CM2.";\">\n");
+		<?php
+# 		if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CM2\" style=\"background-color:".$COLOR_CM2.";\">\n");
+		if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false)) echo("<select name=\"vCOLOR_CM2\" style=\"background-color:".$COLOR_CM2.";\">\n");
 		else echo("<select name=\"vCOLOR_CM2\">");
 			$CCM2 = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CCM2))
@@ -1865,7 +1973,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		</select>
     </td>
 </tr>
-<tr>
+<tr bgcolor="#B0C4DE">
     <td><b>Allow guests to use colors.</b><br />
     	<i>Hint: If disabled, unregistered users will only use the default color for that room in their posts. This will encourage them to register (hopefully).</i>
     </td>
@@ -2060,7 +2168,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>Enter the desired name for your BOT.</b><br />
-    	<i><font color=red>Important: Do not change the name before you make sure bot is fully loaded (check if it can post in chat).</i>
+    	<i><font color=red>Important: Do not change the name before you make sure bot is fully loaded. You can do this by checking if it answers you on this private chat page: <a href="./bot/talk.php" target="_blank">Talk2Bot</a> !</i>
 		<?php if (!$bot_id) echo ("<br />Note: Your bot has not been correctly loaded! Read the install/manual installation/Manual Instructions.txt"); ?></font>
     </td>
     <td>
@@ -2088,7 +2196,9 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     <td><b>Enter the color of the BOT response messages.</b>
 	</td>
     <td>
-		<?php if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vBOT_FONT_COLOR\" style=\"background-color:".$BOT_FONT_COLOR.";\">\n");
+		<?php
+# 		if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vBOT_FONT_COLOR\" style=\"background-color:".$BOT_FONT_COLOR.";\">\n");
+		if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false)) echo("<select name=\"vBOT_FONT_COLOR\" style=\"background-color:".$BOT_FONT_COLOR.";\">\n");
 		else echo("<select name=\"vBOT_FONT_COLOR\">");
 			$BOTF = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($BOTF))
@@ -2211,6 +2321,19 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<input name="vMAX_PIC_SIZE" type="text" size="7" maxlength="3" value="<?php echo $MAX_PIC_SIZE; ?>">
 	</td>
 </tr>
+<tr bgcolor="#B0C4DE">
+	<td><b>Enable use of /math commands:</b><br />
+    	This option allows you to post mathematical formulas using the LaTeX format provided by MathJax.<br />
+		<i>Hint: Here is a <a href="http://www.mathjax.org/demos/tex-samples/" target="_blank">sample page</a> from the original mathjax.org site. You just need to type /math and copy&paste the source code of the desired formula.</i>
+	</td>
+    <td>
+        <select name="vALLOW MATH">
+	        <option value="0"<?php if($ALLOW_MATH==0){ echo " selected"; } ?>>Disable MathJax</option>
+	        <option value="1"<?php if($ALLOW_MATH==1){ echo " selected"; } ?>>Enable MathJax</option>
+        </select><br />
+    </td>
+</tr>
+
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="mmedia"></a><b>Multimedia</b></td></tr>
@@ -2331,12 +2454,13 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
     <td>
 		<?php
-		$avatars=$AVA_RELPATH;
+		$avatars = $AVA_RELPATH;
 		$avatarfiles = opendir($avatars); #open directory
 			$i = 0;
 			while (false !== ($avatarfile = readdir($avatarfiles)))
 			{
-				if (!eregi("\.html",$avatarfile) && !eregi("uploaded",$avatarfile) && !eregi("quote_avatar",$avatarfile) && !eregi("bot_avatar",$avatarfile) && $avatarfile!=='.' && $avatarfile!=='..')
+# 				if (!eregi("\.html",$avatarfile) && !eregi("uploaded",$avatarfile) && !eregi("quote_avatar",$avatarfile) && !eregi("bot_avatar",$avatarfile) && $avatarfile!=='.' && $avatarfile!=='..')
+				if (!preg_match("/(\.html|uploaded|quote_avatar\.gif|bot_avatar\.gif)$/i", $avatarfile) && !preg_match("/^[\.]/", $avatarfile))
 				{
 					$avatarsfile[]=$avatarfile;
 			 		$i++;
@@ -2600,7 +2724,9 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	<td><b>Quote Name color:</b>
 	</td>
 	<td>
-		<?php if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vQUOTE_FONT_COLOR\" style=\"background-color:".$QUOTE_FONT_COLOR.";\">\n");
+		<?php
+# 		if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vQUOTE_FONT_COLOR\" style=\"background-color:".$QUOTE_FONT_COLOR.";\">\n");
+		if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false)) echo("<select name=\"vQUOTE_FONT_COLOR\" style=\"background-color:".$QUOTE_FONT_COLOR.";\">\n");
 		else echo("<select name=\"vQUOTE_FONT_COLOR\">");
 			$CQ = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CQ))
@@ -2637,7 +2763,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			$i = 0;
 			while (false !== ($quotefile = readdir($quotefiles)))
 			{
-				if (!eregi("\.html",$quotefile) && $quotefile!=='.' && $quotefile!=='..')
+# 				if (!eregi("\.html",$quotefile) && $quotefile!=='.' && $quotefile!=='..')
+				if (stripos($quotefile,".html") === false && !preg_match("/^[\.]/", $quotefile))
 				{
 					$quotesfile[]=$quotefile;
 			 		$i++;
@@ -2672,7 +2799,9 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	<td><b>Quote Background color:</b>
 	</td>
 	<td>
-		<?php if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vQUOTE_COLOR\" style=\"background-color:".$QUOTE_COLOR.";\">\n");
+		<?php
+# 		if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vQUOTE_COLOR\" style=\"background-color:".$QUOTE_COLOR.";\">\n");
+		if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false)) echo("<select name=\"vQUOTE_COLOR\" style=\"background-color:".$QUOTE_COLOR.";\">\n");
 		else echo("<select name=\"vQUOTE_COLOR\">");
 			$CQP = explode(",", $ColorList);
 			while(list($ColorNumber, $ColorCode) = each($CQP))
@@ -2791,7 +2920,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			$i = 0;
 			while (false !== ($bdayfile = readdir($bdayfiles)))
 			{
-				if (!eregi("\.html",$bdayfile) && $bdayfile!=='.' && $bdayfile!=='..')
+# 				if (!eregi("\.html",$bdayfile) && $bdayfile!=='.' && $bdayfile!=='..')
+				if (stripos($bdayfile,".html") === false && !preg_match("/^[\.]/", $bdayfile))
 				{
 					$bdaysfile[]=$bdayfile;
 			 		$i++;

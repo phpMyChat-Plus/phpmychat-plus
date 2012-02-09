@@ -17,7 +17,8 @@ if (!isset($U)) $U = "Guest";
 if (!isset($ChatPath)) $ChatPath = "";
 if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
 if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) exit();
-if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
+#if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
+if (preg_match("/SELECT|UNION|INSERT|UPDATE/i",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 // Added for Skin mod
 if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
@@ -45,9 +46,14 @@ if (!function_exists('mb_convert_case'))
 {
 	function mb_convert_case($str,$type,$Charset)
 	{
+/*
 		if (eregi("TITLE",$type)) $str = ucwords($str);
 		elseif (eregi("LOWER",$type)) $str = strtolower($str);
 		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+*/
+		if (stripos($type,"TITLE") !== false) $str = ucwords($str);
+		elseif (stripos($type,"LOWER") !== false) $str = strtolower($str);
+		elseif (stripos($type,"UPPER") !== false) $str = strtoupper($str);
 		return $str;
 	};
 };
@@ -116,7 +122,7 @@ function special_char($str,$lang)
 
 // Define the SQL query (depends on values for ignored users list and on whether to display
 // notification messages or not
-$CondForQuery	= "(address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username = 'SYS video' OR username = 'SYS utube' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3')))";
+$CondForQuery	= "(address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username = 'SYS video' OR username = 'SYS utube' OR username = 'SYS math' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3')))";
 
 $DbLink1 = new DB;
 $DbLink1->query("SELECT m_time, room, username, latin1, address, message FROM ".C_MSG_TBL." WHERE ".$CondForQuery.$Type." ORDER BY m_time DESC LIMIT $N");
@@ -163,7 +169,8 @@ if($DbLink1->num_rows() > 0)
 				$disp_note2 = 1;
 			}
 		}
-		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
+#		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
+		if (C_POPUP_LINKS || stripos($Message,'target="_blank"></a>') !== false)
 		{
 			$Message = str_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$Message);
 		}
@@ -204,7 +211,7 @@ if($DbLink1->num_rows() > 0)
 		$NewMsg = "<tr valign=top>";
 		$Time = $Time + C_TMZ_OFFSET*60*60;
 		$NewMsg .= "<td width=1% nowrap=\"nowrap\">".strftime(L_SHORT_DATETIME, $Time)."</td><td width=1% nowrap=\"nowrap\">".$Room."</td>";
-		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS video" && $User != "SYS utube" && $User != "SYS topic" && $User != "SYS topic reset" && substr($User,0,8) != "SYS dice")
+		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS video" && $User != "SYS utube" && $User != "SYS math" && $User != "SYS topic" && $User != "SYS topic reset" && substr($User,0,8) != "SYS dice")
 		{
 			$User = $colorname_tag."[".special_char($User,$Latin1)."]".$colorname_endtag;
 			if ($Dest != "") $Dest = ">".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]".$colornamedest_endtag;
@@ -241,6 +248,10 @@ if($DbLink1->num_rows() > 0)
 			if ($Message == 'L_RELOAD_CHAT') $Message = L_RELOAD_CHAT;
 			$NewMsg .= "<td colspan=2><SPAN CLASS=\"notify2\">[".L_ANNOUNCE."] $Message</SPAN></td>";
 		}
+		if ($User == "SYS math")
+		{
+ 			$NewMsg .= "<td colspan=2 valign=\"top\"><FONT class=\"notify\">".sprintf(L_MATH,$Dest)."</FONT> ".$Message."</td>";
+    	}
 		if ($User == "SYS room")
 		{
  			$NewMsg .= "<td colspan=2><SPAN class=\"notify2\"><I>".ROOM_SAYS."&nbsp;</SPAN><SPAN class=\"notify\">".$Message."</SPAN></I></td>";
@@ -306,6 +317,9 @@ if (C_WORLDTIME == 2)
 <META HTTP-EQUIV="Refresh" CONTENT="<?php echo($D); ?>" CHARSET=<?php echo($Charset); ?>">
 <TITLE><?php echo(($U == "Guest" ? L_WHOIS_GUEST : stripslashes($U))." ".L_LURKING_3." - ".date("r")." - ".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
+<?php
+if(C_ALLOW_MATH) echo("<script type=\"text/javascript\" src=\"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>");
+?>
 </HEAD>
 <BODY>
 <TABLE BORDER=1 CELLSPACING=2 CELLPADDING=1 CLASS="table">

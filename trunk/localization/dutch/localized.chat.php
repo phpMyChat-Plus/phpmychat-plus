@@ -47,6 +47,7 @@ define("L_SET_19", "Onthoud mijn login details");
 
 define("L_SRC", "vrijelijk verkrijgbaar op");
 
+define("L_SEC", "seconde");
 define("L_SECS", "seconden");
 define("L_MIN", "minuut");
 define("L_MINS", "minuten");

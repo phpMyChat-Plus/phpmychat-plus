@@ -20,6 +20,7 @@ define("L_CMD_INVITE", "invit,vino");
 define("L_CMD_JOIN", "intru");
 define("L_CMD_KICK", "sut,şut,afara,afară");
 define("L_CMD_LTR", "st,stanga,stânga");
+define("L_CMD_MATH", "mate,mat");
 define("L_CMD_ME", "eu");
 define("L_CMD_MR", "dl");
 define("L_CMD_MSG", "mes,către,pt,pentru");

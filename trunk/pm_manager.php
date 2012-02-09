@@ -21,7 +21,8 @@ if (isset($_POST))
 if (!isset($ChatPath)) $ChatPath = "";
 if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
 if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) exit();
-if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
+#if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
+if (preg_match("/SELECT|UNION|INSERT|UPDATE/i",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 // Added for Skin mod
 if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
@@ -35,7 +36,8 @@ require("./lib/login.lib.php");
 
 // Special cache instructions for IE5+
 $CachePlus	= "";
-if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
+#if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
+if (stripos((isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"), "MSIE") !== false) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
 $now		= gmdate('D, d M Y H:i:s') . ' GMT';
 
 header("Expires: $now");
@@ -107,7 +109,8 @@ if($DbLink->num_rows() > 0)
 	{
 		$TotalPMs++;
 		$new = 0;
-		if (eregi("New",$Read)) { $NewPMs++; $read_stat = L_PRIV_MSGS_NEW; $new = 1; }
+#		if (eregi("New",$Read)) { $NewPMs++; $read_stat = L_PRIV_MSGS_NEW; $new = 1; }
+		if (stripos($Read,"New") !== false) { $NewPMs++; $read_stat = L_PRIV_MSGS_NEW; $new = 1; }
 		else $read_stat = L_PRIV_MSGS_READ;
 		$Message = stripslashes($Message);
 		if ($Type) $Type = L_SET_10; else $Type = L_SET_11;
@@ -118,7 +121,8 @@ if($DbLink->num_rows() > 0)
 		$Message = str_replace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"".L_HELP_BUZZ1."\" title=\"".L_HELP_BUZZ1."\">",$Message);
 		if ($Align == "right") $Message = str_replace("arrowr","arrowl",$Message);
 		if ($Room == '*' || ($User == "SYS room" && $Dest == '*') || $User == "SYS announce") $Room = L_ROOM_ALL;
-		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
+#		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
+		if (C_POPUP_LINKS || stripos($Message,'target="_blank"></a>') !== false)
 		{
 			$Message = str_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$Message);
 		}
@@ -261,7 +265,8 @@ function reload()
 function sort_status(sort)
 {
 <?php
-if ($L == "turkish" && eregi("ORDER BY m_time",$sqlT))
+#if ($L == "turkish" && eregi("ORDER BY m_time",$sqlT))
+if ($L == "turkish" && stripos($sqlT,"ORDER BY m_time") !== false)
 {
 ?>
 	if (sort == "ASC") window.status='<?php echo(sprintf(L_CLICK,L_LINKS_18_T)); ?>';

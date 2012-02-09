@@ -46,6 +46,7 @@ define("L_SET_19", "Husk mig");
 
 define("L_SRC", "fås gratis på");
 
+define("L_SEC", "sekund");
 define("L_SECS", "sekunder");
 define("L_MIN", "minut");
 define("L_MINS", "minutter");

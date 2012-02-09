@@ -4,15 +4,21 @@ if (!function_exists('mb_convert_case'))
 {
 	function mb_convert_case($str,$type,$Charset)
 	{
+/*
 		if (eregi("TITLE",$type)) $str = ucwords($str);
 		elseif (eregi("LOWER",$type)) $str = strtolower($str);
 		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+*/
+		if (stripos($type,"TITLE") !== false) $str = ucwords($str);
+		elseif (stripos($type,"LOWER") !== false) $str = strtolower($str);
+		elseif (stripos($type,"UPPER") !== false) $str = strtoupper($str);
 		return $str;
 	}
 };
 
 // Check for invalid characters in the user name
-if ($Cmd[3] != "" && ereg("[\ \']", stripslashes($Cmd[3])))
+#if ($Cmd[3] != "" && ereg("[\ \']", stripslashes($Cmd[3])))
+if ($Cmd[3] != "" && preg_match("/[ |,|'|\\\\]/", $Cmd[3]))
 {
 	$Error = L_ERR_USR_16;
 }
@@ -27,7 +33,8 @@ else
 	// Message to add if user need to be registered to enter the current room
 	$ReqRegist = (($T == "0" && !C_REQUIRE_REGISTER) ? ".\" \".L_INVITE_REG" : "");
 		// Don't send self-invitations - by Ciprian
-		if (eregi(mb_convert_case($U,MB_CASE_LOWER,$Charset),mb_convert_case($Cmd[3],MB_CASE_LOWER,$Charset)))
+#		if (eregi(mb_convert_case($U,MB_CASE_LOWER,$Charset),mb_convert_case($Cmd[3],MB_CASE_LOWER,$Charset)))
+		if (stripos(mb_convert_case($Cmd[3],MB_CASE_LOWER,$Charset),mb_convert_case($U,MB_CASE_LOWER,$Charset)) !== false)
 		{
 			$Cmd[31] = str_replace($U, '', $Cmd[3]);
 			$Cmd[31] = str_replace(',,', ',', $Cmd[31]);

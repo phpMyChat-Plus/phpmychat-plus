@@ -36,7 +36,8 @@ if (($status == "m") || ($status == "t") || ($status == "a")) // use this to ena
 		}
 		$Mess .= " ...BUZZER...";
 	}
-	if (eregi("~",$Cmd[2]))
+#	if (eregi("~",$Cmd[2]))
+	if (strpos($Cmd[2], "~") !== false)
 	{
 		$Buzz_opt = str_replace("~", "", $Cmd[2]);
 		$BUZZ_SOUND_OPT = "sounds/".$Buzz_opt.".wav";

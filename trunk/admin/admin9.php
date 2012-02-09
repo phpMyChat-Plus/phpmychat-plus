@@ -126,7 +126,8 @@ else
 				$ipb = opendir($ipbak); #open directory
 				while (false !== ($ip = readdir($ipb)))
 				{
-					if (!eregi("index\.html",$ip) && !eregi("chat_ip_logs\.htm",$ip) && !eregi("error",$ip) && $ip!='.' && $ip!='..' && !is_dir($ipbak."/".$ip))
+#					if (!eregi("index\.html",$ip) && !eregi("chat_ip_logs\.htm",$ip) && !eregi("error",$ip) && $ip!='.' && $ip!='..' && !is_dir($ipbak."/".$ip))
+					if (!preg_match("/(index\.html|chat_ip_logs\.htm|error)$/i", $ip) && !preg_match("/^[\.]/", $ip) && !is_dir($ipbak."/".$ip))
 					{
 						$iparray[]=$ip;
 			 		}
@@ -262,7 +263,8 @@ foreach($yrs as $yr)
 				$day = opendir($d); #open directory
 				while (false !== ($dy = readdir($day)))
 				{
-					if (!eregi("\.html",$dy) && !eregi("_vti_conf",$dy) && !eregi("error",$dy) && $dy!='.' && $dy!='..')
+#					if (!eregi("\.html",$dy) && !eregi("_vti_conf",$dy) && !eregi("error",$dy) && $dy!='.' && $dy!='..')
+					if (!preg_match("/(\.html|_vti_conf|error)$/i", $dy) && !preg_match("/^[\.]/", $dy))
 					{
 						$dayarray[]=$dy;
 			 		}
@@ -274,9 +276,9 @@ foreach($yrs as $yr)
 					$i=1;
 					foreach ($dayarray as $dy)
 					{
-						if (eregi("\.htm",$dy)) $dyhtm=str_replace(".htm","",$dy);
-						else $dyhtm=str_replace(".php","",$dy);
-						$dyhtm=str_replace($yeardir.$monthdir,"",$dyhtm);
+#						if (eregi("\.htm",$dy)) $dyhtm=str_replace(".htm","",$dy);
+#						else $dyhtm=str_replace(".php","",$dy);
+						$dyhtm = str_replace($yeardir.$monthdir,"",preg_replace("/(\.htm|\.php)$/i", "", $dy));
 						echo ("\n<li><a href=\"$pstr&fdel=".$mt."/".$dy."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_14.A_CHAT_LOGS_19,$dy)."')\" title='".A_CHAT_LOGS_15."'><font size=-2 color=red><b>x</b></font></a>&nbsp;<a href=$d/$dy?L=$L title='".sprintf(A_CHAT_LOGS_16,$dyhtm." ".$MONTH)."' target=_self>$dyhtm</a>&nbsp;(".size_readable(filesize($d."/".$dy)).")"); #print name of each file found
 						if ($i % 5 == 0) echo ("\n</td>\n<td valign=top align=left nowrap=\"nowrap\">");
 						$i++;
@@ -300,7 +302,8 @@ else
 				$zip = opendir($y); #open directory
 				while (false !== ($zy = readdir($zip)))
 				{
-					if (eregi("\.zip",$zy))
+#					if (eregi("\.zip",$zy))
+					if (stripos($zy,".zip") !== false)
 					{
 						$ziparray[]=$zy;
 			 		}
@@ -425,7 +428,8 @@ foreach($yrsu as $yru)
 				$dayu = opendir($du); #open directory
 				while (false !== ($dyu = readdir($dayu)))
 				{
-					if (!eregi("\.html",$dyu) && !eregi("_vti_conf",$dyu) && !eregi("error",$dyu) && $dyu!='.' && $dyu!='..')
+#					if (!eregi("\.html",$dyu) && !eregi("_vti_conf",$dyu) && !eregi("error",$dyu) && $dyu!='.' && $dyu!='..')
+					if (!preg_match("/(\.html|_vti_conf|error)$/i", $dyu) && !preg_match("/^[\.]/", $dyu))
 					{
 						$dayarrayu[]=$dyu;
 			 		}
@@ -437,9 +441,9 @@ foreach($yrsu as $yru)
 					$j=1;
 					foreach ($dayarrayu as $dyu)
 					{
-						if (eregi("\.htm",$dyu)) $dyhtmu=str_replace(".htm","",$dyu);
-						else $dyhtmu=str_replace(".php","",$dyu);
-						$dyhtmu=str_replace($yeardiru.$monthdiru,"",$dyhtmu);
+#						if (eregi("\.htm",$dyu)) $dyhtmu=str_replace(".htm","",$dyu);
+#						else $dyhtmu=str_replace(".php","",$dyu);
+						$dyhtmu = str_replace($yeardiru.$monthdiru,"",preg_replace("/(\.htm|\.php)$/i", "", $dyu));
 						echo ("\n<li><a href=\"$pstr&fdel=".$mtu."/".$dyu."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_14.A_CHAT_LOGS_18."\\n".A_CHAT_LOGS_19,$dyu)."')\" title='".A_CHAT_LOGS_15."'><font size=-2 color=red><b>x</b></font></a>&nbsp;<a href=$du/$dyu?L=$L title='".sprintf(A_CHAT_LOGS_16." ".A_CHAT_LOGS_18,$dyhtmu." ".$MONTHU)."' target=_self>$dyhtmu</a>&nbsp;(".size_readable(filesize($du."/".$dyu)).")"); #print name of each file found
 						if ($j % 5 == 0) echo ("\n</td>\n<td valign=top align=left nowrap=\"nowrap\">");
 						$j++;
@@ -463,7 +467,8 @@ else
 		$zipu = opendir($yu); #open directory
 				while (false !== ($zyu = readdir($zipu)))
 				{
-					if (!eregi("\.html",$zyu) && !eregi("error",$zyu) && $zyu!='.' && $zyu!='..' && !is_dir($yu."/".$zyu))
+#					if (!eregi("\.html",$zyu) && !eregi("error",$zyu) && $zyu!='.' && $zyu!='..' && !is_dir($yu."/".$zyu))
+					if (!preg_match("/(\.html|error)$/i", $zyu) && !preg_match("/^[\.]/", $zyu) && !is_dir($yu."/".$zyu))
 					{
 						$ziparrayu[]=$zyu;
 			 		}

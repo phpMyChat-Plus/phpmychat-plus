@@ -75,7 +75,8 @@ if ($UR == "")
 		$Ex.='';
 	}
 		$UR = stripslashes($UR);
-		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$UR))
+#		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$UR))
+		if (C_POPUP_LINKS || stripos($UR,'target="_blank"></a>') !== false)
 		{
 			$UR = str_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$UR);
 		}

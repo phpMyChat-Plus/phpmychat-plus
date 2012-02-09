@@ -5,7 +5,8 @@
 
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
 
-$Sender_Name = (eregi("your name",C_ADMIN_NAME) && C_ADMIN_NAME != "") ? "" : C_ADMIN_NAME;		// May also be the name of your site
+#$Sender_Name = (eregi("your name",C_ADMIN_NAME) && C_ADMIN_NAME != "") ? "" : C_ADMIN_NAME;
+$Sender_Name = (stripos(C_ADMIN_NAME,"your name") !== false && C_ADMIN_NAME != "") ? "" : C_ADMIN_NAME;		// May also be the name of your site
 $Sender_Name1 = $Sender_Name;		// unformated
 $Chat_URL = (C_CHAT_URL == "./") ? "" : C_CHAT_URL;	// To be send as a signature
 

@@ -53,7 +53,8 @@ if (isset($FORM_SEND) && $FORM_SEND == 3)
 					};
 					if ($changed)
 					{
-						$mod_rooms = str_replace(",,",",",ereg_replace("^,|,$","",implode(",",$roomTab)));
+# 						$mod_rooms = str_replace(",,",",",ereg_replace("^,|,$","",implode(",",$roomTab)));
+						$mod_rooms = str_replace(",,",",",preg_replace("/^,|,$/","",implode(",",$roomTab)));
 						$UpdLink->query("UPDATE ".C_REG_TBL." SET rooms='".addslashes($mod_rooms)."' WHERE username='".addslashes($mod_un)."'");
 					};
 					unset($roomTab);

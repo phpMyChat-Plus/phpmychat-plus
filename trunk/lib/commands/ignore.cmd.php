@@ -4,9 +4,14 @@ if (!function_exists('mb_convert_case'))
 {
 	function mb_convert_case($str,$type,$Charset)
 	{
+/*
 		if (eregi("TITLE",$type)) $str = ucwords($str);
 		elseif (eregi("LOWER",$type)) $str = strtolower($str);
 		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+*/
+		if (stripos($type,"TITLE") !== false) $str = ucwords($str);
+		elseif (stripos($type,"LOWER") !== false) $str = strtolower($str);
+		elseif (stripos($type,"UPPER") !== false) $str = strtoupper($str);
 		return $str;
 	}
 };
@@ -23,7 +28,8 @@ function is_user_ignored($who, $userlist, $Charset)
 }
 
 // Check for invalid characters in the name of the user to be ignored
-if ($Cmd[4] != "" && ereg("[\ \']", stripslashes($Cmd[4])))
+#if ($Cmd[4] != "" && ereg("[\ \']", stripslashes($Cmd[4])))
+if ($Cmd[4] != "" && preg_match("/[ |,|'|\\\\]/", $Cmd[4]))
 {
 	$Error = L_ERR_USR_16;
 }

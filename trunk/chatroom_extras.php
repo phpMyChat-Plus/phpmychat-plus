@@ -32,7 +32,8 @@ if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 // Fix some security holes
 if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
 if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) exit();
-if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
+#if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
+if (preg_match("/SELECT|UNION|INSERT|UPDATE/i",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 require("./${ChatPath}config/config.lib.php");
 require("./${ChatPath}localization/languages.lib.php");
@@ -69,7 +70,7 @@ function special_char($str,$lang)
 // notification messages or not
 $DbLink = new DB;
 
-$CondForQuery	= "(address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username = 'SYS video' OR username = 'SYS utube' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3')))";
+$CondForQuery	= "(address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username = 'SYS video' OR username = 'SYS utube' OR username = 'SYS math' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3')))";
 
 $DbLink->query("SELECT m_time, room, username, latin1, address, message FROM ".C_MSG_TBL." WHERE ".$CondForQuery.$RoomFilter.$Type." ORDER BY m_time DESC LIMIT $N");
 
@@ -89,7 +90,8 @@ if($DbLink->num_rows() > 0)
 		$Message = str_replace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"".L_HELP_BUZZ1."\" title=\"".L_HELP_BUZZ1."\">",$Message);
 		if ($Align == "right") $Message = str_replace("arrowr","arrowl",$Message);
 		if ($Room == '*' || ($User == "SYS room" && $Dest == '*') || $User == "SYS announce") $Room = L_ROOM_ALL;
-		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
+#		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
+		if (C_POPUP_LINKS || stripos($Message,'target="_blank"></a>') !== false)
 		{
 			$Message = str_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$Message);
 		}
@@ -157,7 +159,7 @@ if($DbLink->num_rows() > 0)
 		}
 		$NewMsg = "<tr align=texttop valign=top>";
 		$NewMsg .= "<td width=1% nowrap=\"nowrap\">".date("d-M, H:i:s", $Time + C_TMZ_OFFSET*60*60)."</td><td width=1% nowrap=\"nowrap\">".$Room."</td>";
-		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS video" && $User != "SYS utube" && $User != "SYS topic" && $User != "SYS topic reset" && substr($User,0,8) != "SYS dice")
+		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS video" && $User != "SYS utube" && $User != "SYS math" && $User != "SYS topic" && $User != "SYS topic reset" && substr($User,0,8) != "SYS dice")
 		{
 			$User = $colorname_tag."[".special_char($User,$Latin1)."]".$colorname_endtag;
 			if ($Dest != "") $Dest = ">".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]".$colornamedest_endtag;
@@ -176,6 +178,10 @@ if($DbLink->num_rows() > 0)
 			if ($Message == 'L_RELOAD_CHAT') $Message = L_RELOAD_CHAT;
 			$NewMsg .= "<td colspan=2><SPAN CLASS=\"notify2\">[".L_ANNOUNCE."] $Message</SPAN></td>";
 		}
+		if ($User == "SYS math")
+		{
+ 			$NewMsg .= "<td colspan=2 valign=\"top\"><FONT class=\"notify\">".sprintf(L_MATH,$Dest)."</FONT> ".$Message."</td>";
+    	}
 		if ($User == "SYS room")
 		{
  			$NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>[${Dest}]</B></td><td><FONT class=\"notify2\"><I>".ROOM_SAYS."<FONT class=\"notify\">".$Message."</FONT></FONT></I></td>";
@@ -220,6 +226,9 @@ $CleanUsrTbl = 1;
 <META HTTP-EQUIV="Refresh" CONTENT="10" CHARSET=<?php echo($Charset); ?>">
 <TITLE><?php echo("Last ".$N." messages ".($Room != "" ? "in ".stripslashes($R)." room" : "")." - ".date('r')." - ".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo("${ChatPath}".$skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
+<?php
+if(C_ALLOW_MATH) echo("<script type=\"text/javascript\" src=\"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>");
+?>
 </HEAD>
 	<BODY>
 <CENTER>

@@ -225,6 +225,7 @@ function getid(){
 * @return string          formated date string, Day name, Month name, day number month, time, time zone and year.
 *
 */
+
 /* Deprecated
 function getfdate(){
 
@@ -232,36 +233,30 @@ function getfdate(){
 
 }
 */
-if (!function_exists('utf_conv'))
-{
-	function utf_conv($iso,$Charset,$what)
-	{
+
+if (!function_exists('utf_conv')){
+	function utf_conv($iso,$Charset,$what){
 		if(function_exists('iconv')) $what = iconv($iso, $Charset, $what);
 		return $what;
 	};
 };
 
 function getfdate($date_format){
-/*
-	global $L,$Charset;
-	if(file_exists("./localization/$L/localized.chat.php")) include_once("./localization/$L/localized.chat.php");
-	else
-	{
-*/
-		// Set the US specific date/time format
-		if (stristr(PHP_OS,'win')) {
-		setlocale(LC_TIME, "English_United States", "eng-usa.UTF-8", "eng-usa");
-		} else {
-		setlocale(LC_TIME, "en_US.UTF-8", "enu.UTF-8", "usa.UTF-8", "enu_enu.UTF-8", "English-usa.UTF-8");
-		}
-/*
+/*	global $BotPath;
+	if ($BotPath != "./") {
 	}
+	else{
+	};
+*/
+#	if ($date_format == "") $date_format = "%A, %d of %B %Y %H:%M:%S (%z)";
+#	return strftime($date_format);
+
+	if(file_exists("../localization/english/localized.chat.php")) include_once("../localization/english/localized.chat.php");
+	if ($date_format == "") $date_format = str_replace("%d of", (stristr(PHP_OS,'win') ? "%#d" : "%e").date('S')." of", L_LONG_DATETIME." (%z)");
+
 	if(stristr(PHP_OS,'win')) return utf_conv(WIN_DEFAULT,$Charset,strftime($date_format));
 	else return strftime($date_format);
-*/
-	if ($date_format == "") $date_format = "%A, %d of %B %Y %H:%M:%S (%z)";
-	return strftime($date_format);
-}
+};
 
 /**
 * Gets the numer of AIML categories stored in the database

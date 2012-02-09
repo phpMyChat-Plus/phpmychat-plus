@@ -9,7 +9,8 @@ if (isset($_GET))
 };
 // Fix a security hole
 if (isset($L) && !is_dir("./localization/".$L)) exit();
-if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
+#if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
+if (preg_match("/SELECT|UNION|INSERT|UPDATE/i",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 if (isset($_COOKIE["CookieStatus"])) $statusu = $_COOKIE["CookieStatus"];
 if (isset($_COOKIE["CookieRoom"]) && !isset($R)) $R = urldecode($_COOKIE["CookieRoom"]);
@@ -139,7 +140,8 @@ foreach($yrsu as $yru)
 			$dayu = opendir($du); #open directory
 			while (false !== ($dyu = readdir($dayu)))
 			{
-				if (!eregi("\.html",$dyu) && !eregi("_vti_conf",$dyu) && !eregi("error",$dyu) && $dyu!=='.' && $dyu!=='..')
+#				if (!eregi("\.html",$dyu) && !eregi("_vti_conf",$dyu) && !eregi("error",$dyu) && $dyu!=='.' && $dyu!=='..')
+				if (!preg_match("/(\.html|_vti_conf|error)$/i", $dyu) && !preg_match("/^[\.]/", $dyu))
 				{
 					$dayarrayu[]=$dyu;
 		 		}
@@ -151,9 +153,9 @@ foreach($yrsu as $yru)
 				$j=1;
 			  foreach ($dayarrayu as $dyu)
 			  {
-					if (eregi(".\htm",$dyu)) $dyhtmu=str_replace(".htm","",$dyu);
-					else $dyhtmu=str_replace(".php","",$dyu);
-					$dyhtmu=str_replace($yeardiru.$monthdiru,"",$dyhtmu);
+#					if (eregi(".\htm",$dyu)) $dyhtmu=str_replace(".htm","",$dyu);
+#					else $dyhtmu=str_replace(".php","",$dyu);
+					$dyhtmu = str_replace($yeardiru.$monthdiru,"",preg_replace("/(\.htm|\.php)$/i", "", $dyu));
 					echo ("<li><a href=$du/$dyu?L=$L onMouseOver=\"window.status='".sprintf(A_CHAT_LOGS_16,$dyhtmu." ".$MONTHU)."'; return true;\" title='".sprintf(A_CHAT_LOGS_16,$dyhtmu." ".$MONTHU)."'>$dyhtmu</a> (".size_readable(filesize($du."/".$dyu)).")<br />\n"); #print name of each file found
 					if ($j % 5 == 0) echo ("<td valign=top align=left nowrap=\"nowrap\">");
 					$j++;

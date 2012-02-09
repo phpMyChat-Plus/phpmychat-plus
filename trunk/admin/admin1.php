@@ -127,7 +127,8 @@ if (isset($FORM_SEND) && $FORM_SEND == 1)
 					unset($new_rooms_Tab);
 
 					if (count($diff_rooms_Tab) > 0)
-						$diff_rooms = str_replace(",,",",",ereg_replace("^,|,$","",implode(",",$diff_rooms_Tab)));
+# 						$diff_rooms = str_replace(",,",",",ereg_replace("^,|,$","",implode(",",$diff_rooms_Tab)));
+						$diff_rooms = str_replace(",,",",",preg_replace("/^,|,$/","",implode(",",$diff_rooms_Tab)));
 					unset($diff_rooms_Tab);
 				}
 

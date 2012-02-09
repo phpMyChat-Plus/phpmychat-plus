@@ -36,7 +36,8 @@ switch ($GetProxy)
 		$IP = $SimpleIP;
 		break;
 	case '1':
-		$b = ereg ("^([0-9]{1,3}\.){3,3}[0-9]{1,3}", $TrueIP, $IP_array);
+#		$b = ereg ("^([0-9]{1,3}\.){3,3}[0-9]{1,3}", $TrueIP, $IP_array);
+		$b = preg_match("/^([0-9]{1,3}\.){3,3}[0-9]{1,3}/", $TrueIP, $IP_array);
 		if ($b && (count($IP_array)>0))
 		{
 			// True IP behind a proxy

@@ -81,7 +81,8 @@ if($DbLink->num_rows() > 0)
 		$Message = str_replace("L_HELP_MS",L_HELP_MS,$Message);
 		$Message = str_replace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"".L_HELP_BUZZ1."\" title=\"".L_HELP_BUZZ1."\">",$Message);
 		if ($Align == "right") $Message = str_replace("arrowr","arrowl",$Message);
-		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
+#		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
+		if (C_POPUP_LINKS || stripos($Message,'target="_blank"></a>') !== false)
 		{
 			$Message = str_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$Message);
 		}

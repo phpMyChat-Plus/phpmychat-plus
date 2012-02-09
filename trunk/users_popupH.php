@@ -12,7 +12,8 @@ if (isset($_GET))
 if (!isset($ChatPath)) $ChatPath = "";
 if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
 if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) exit();
-if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
+#if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
+if (preg_match("/SELECT|UNION|INSERT|UPDATE/i",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 if (isset($_COOKIE["CookieBeep"])) $CookieBeep = $_COOKIE["CookieBeep"];
@@ -30,7 +31,8 @@ require("./${ChatPath}lib/clean.lib.php");
 
 // Special cache instructions for IE5+
 $CachePlus	= "";
-if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
+#if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
+if (stripos((isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"), "MSIE") !== false) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
 $now		= gmdate('D, d M Y H:i:s') . ' GMT';
 
 header("Expires: $now");
@@ -56,9 +58,14 @@ if (!function_exists('mb_convert_case'))
 {
 	function mb_convert_case($str,$type,$Charset)
 	{
+/*
 		if (eregi("TITLE",$type)) $str = ucwords($str);
 		elseif (eregi("LOWER",$type)) $str = strtolower($str);
 		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+*/
+		if (stripos($type,"TITLE") !== false) $str = ucwords($str);
+		elseif (stripos($type,"LOWER") !== false) $str = strtolower($str);
+		elseif (stripos($type,"UPPER") !== false) $str = strtoupper($str);
 		return $str;
 	};
 };
@@ -109,18 +116,21 @@ if ($B == 1)
 
 // ** Prepare the http refresh header **
 $URL_Query = (isset($QUERY_STRING)) ? $QUERY_STRING : getenv("QUERY_STRING");
-if (!ereg("LastCheck", $URL_Query))
+#if (!ereg("LastCheck", $URL_Query))
+if (strpos($URL_Query,"LastCheck") === false)
 {
 	$Refresh = $URL_Query."&LastCheck=${LastCheck}&B=${B}";
 }
 else
 {
-	$Refresh = ereg_replace("LastCheck=([0-9]+)","LastCheck=${LastCheck}", $URL_Query);
+#	$Refresh = ereg_replace("LastCheck=([0-9]+)","LastCheck=${LastCheck}", $URL_Query);
+	$Refresh = preg_replace("/LastCheck=([0-9]+)/","LastCheck=${LastCheck}", $URL_Query);
 }
 
 // ** Compute the beeps/nobeeps reload query used when the sound icon is clicked **
 $B1 = ($B == 1 ? 0 : 1);
-$ChangeBeeps_Reload = ereg_replace("&B=([0-2])","&B=${B1}",$Refresh);
+#$ChangeBeeps_Reload = ereg_replace("&B=([0-2])","&B=${B1}",$Refresh);
+$ChangeBeeps_Reload = preg_replace("/&B=([0-2])/","&B=${B1}",$Refresh);
 
 // For translations with an explicit charset (not the 'x-user-defined' one)
 if (!isset($FontName)) $FontName = "";
@@ -215,7 +225,8 @@ ver4 = (NS4 || IE4) ? 1 : 0;
 	<?php echo(LOGIN_LINK); ?><?php echo(L_CHAT); ?></A>
 	<P>
 <?php
-if (eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
+#if (eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
+if (stripos($_SERVER['HTTP_USER_AGENT'], "MSIE") !== false)
 {
 	?>
 		<A HREF="#" onClick="expandAll(); return false" onMouseOver="window.status='<?php echo(L_EXPCOL_ALL); ?>.'; return true;" title="<?php echo(L_EXPCOL_ALL); ?>">

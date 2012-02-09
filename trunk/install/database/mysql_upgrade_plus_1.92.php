@@ -12,6 +12,15 @@ ALTER TABLE ".$t_config."
 			CHANGE COLOR_CD7 ROOM_SKIN7 tinyint(1) NOT NULL default '7',
 			CHANGE COLOR_CD8 ROOM_SKIN8 tinyint(1) NOT NULL default '8',
 			CHANGE COLOR_CD9 ROOM_SKIN9 tinyint(1) NOT NULL default '9',
+			CHANGE EN_ROOM1 EN_ROOM1 enum('0','1','2') NOT NULL default '1',
+			CHANGE EN_ROOM2 EN_ROOM2 enum('0','1','2') NOT NULL default '1',
+			CHANGE EN_ROOM3 EN_ROOM3 enum('0','1','2') NOT NULL default '1',
+			CHANGE EN_ROOM4 EN_ROOM4 enum('0','1','2') NOT NULL default '1',
+			CHANGE EN_ROOM5 EN_ROOM5 enum('0','1','2') NOT NULL default '1',
+			CHANGE EN_ROOM6 EN_ROOM6 enum('0','1','2') NOT NULL default '1',
+			CHANGE EN_ROOM7 EN_ROOM7 enum('0','1','2') NOT NULL default '1',
+			CHANGE EN_ROOM8 EN_ROOM8 enum('0','1','2') NOT NULL default '1',
+			CHANGE EN_ROOM9 EN_ROOM9 enum('0','1','2') NOT NULL default '1',
 			ADD DISP_GENDER enum('0','1') NOT NULL default '0',
 			ADD SPECIAL_GHOSTS varchar(255) NOT NULL default '',
 			ADD FILLED_LOGIN enum('0','1') NOT NULL default '0',
@@ -45,7 +54,26 @@ ALTER TABLE ".$t_config."
 			ADD SEND_BDAY_INTVAL tinyint(1) NOT NULL default '7',
 			ADD SEND_BDAY_PATH varchar(255) NOT NULL default 'files/birthday/bday_greetings.txt',
 			ADD EN_WMPLAYER enum('0','1','2') NOT NULL default '0',
-			ADD WMP_STREAM varchar(255) default NULL;
+			ADD WMP_STREAM varchar(255) default NULL,
+			ADD OPEN_ALL_BEG time NOT NULL default '00:00:00',
+			ADD OPEN_ALL_END time NOT NULL default '00:00:00',
+			ADD OPEN_SUN_BEG time NOT NULL default '00:00:00',
+			ADD OPEN_SUN_END time NOT NULL default '00:00:00',
+			ADD OPEN_MON_BEG time NOT NULL default '00:00:00',
+			ADD OPEN_MON_END time NOT NULL default '00:00:00',
+			ADD OPEN_TUE_BEG time NOT NULL default '00:00:00',
+			ADD OPEN_TUE_END time NOT NULL default '00:00:00',
+			ADD OPEN_WED_BEG time NOT NULL default '00:00:00',
+			ADD OPEN_WED_END time NOT NULL default '00:00:00',
+			ADD OPEN_THU_BEG time NOT NULL default '00:00:00',
+			ADD OPEN_THU_END time NOT NULL default '00:00:00',
+			ADD OPEN_FRI_BEG time NOT NULL default '00:00:00',
+			ADD OPEN_FRI_END time NOT NULL default '00:00:00',
+			ADD OPEN_SAT_BEG time NOT NULL default '00:00:00',
+			ADD OPEN_SAT_END time NOT NULL default '00:00:00',
+			ADD ALLOW_TEXT_COLORS enum('0','1') NOT NULL default '1',
+			ADD TAGS_POWERS set('b','i','u') default NULL,
+			ADD ALLOW_MATH enum('0','1') NOT NULL default '0';
 ", $conn);
 mysql_query("
 UPDATE ".$t_config." SET
@@ -130,7 +158,8 @@ CREATE TABLE IF NOT EXISTS ".$t_stats." (
   bans_sent tinyint(4) NOT NULL DEFAULT '0',
   kicks_rcvd tinyint(4) NOT NULL DEFAULT '0',
   kicks_sent tinyint(4) NOT NULL DEFAULT '0',
-  vids_posted smallint(5) NOT NULL DEFAULT '0'
+  vids_posted smallint(5) NOT NULL DEFAULT '0',
+  maths_posted smallint(5) NOT NULL DEFAULT '0'
 ) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
 ?>

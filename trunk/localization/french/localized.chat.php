@@ -46,6 +46,7 @@ define("L_SET_19", "Me rappeler");
 
 define("L_SRC", "est disponible gratuitement sur");
 
+define("L_SEC", "seconde");
 define("L_SECS", "secondes");
 define("L_MIN", "minute");
 define("L_MINS", "minutes");

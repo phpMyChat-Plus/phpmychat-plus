@@ -47,6 +47,7 @@ define("L_SET_19", "Recordarme");
 
 define("L_SRC", "están habilitados");
 
+define("L_SEC", "segundo");
 define("L_SECS", "segundos");
 define("L_MIN", "minuto");
 define("L_MINS", "minutos");

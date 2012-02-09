@@ -44,6 +44,7 @@ define("L_SET_19", "Запомнить меня");
 
 define("L_SRC", "является свободно доступным на");
 
+define("L_SEC", "секунда");
 define("L_SECS", "секунды");
 define("L_MIN", "минута");
 define("L_MINS", "минут");
@@ -601,7 +602,7 @@ define("L_S_SUN", "Вс");
 
 // Localized date format
 // Set the RU specific date/time format
-if (eregi("win", PHP_OS)) {
+if (stristr(PHP_OS,'win')) {
 setlocale(LC_ALL, "Russian.UTF-8", "Russian", "rus-rus.UTF-8", "rus-rus");
 } else {
 setlocale(LC_ALL, "ru_RU.UTF-8", "rus.UTF-8", "rus_rus.UTF-8", "Russian.UTF-8");

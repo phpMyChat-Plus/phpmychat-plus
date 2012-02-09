@@ -9,9 +9,14 @@ if (!function_exists('mb_convert_case'))
 {
 	function mb_convert_case($str,$type,$Charset)
 	{
+/*
 		if (eregi("TITLE",$type)) $str = ucwords($str);
 		elseif (eregi("LOWER",$type)) $str = strtolower($str);
 		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+*/
+		if (stripos($type,"TITLE") !== false) $str = ucwords($str);
+		elseif (stripos($type,"LOWER") !== false) $str = strtolower($str);
+		elseif (stripos($type,"UPPER") !== false) $str = strtoupper($str);
 		return $str;
 	}
 };
@@ -50,7 +55,8 @@ function botmemory($U)                             // This writes a file to the 
               $botresponse=replybotname(stripslashes($botmess), $myuniqueid, C_BOT_NAME);    // Get bot's response from respond.php
           		$BOT = C_BOT_NAME;
               //Format response for phpMyChat DB
-              $D1 = ereg_replace("[\r]|[\n]|\t", " ",$botresponse->response) ;
+#              $D1 = ereg_replace("[\r]|[\n]|\t", " ",$botresponse->response) ;
+              $D1 = preg_replace("/([\r]|[\n]|[\t])/", " ",$botresponse->response) ;
               $D1 = str_replace("'","&#39;",$D1) ;
               $D1 = "<FONT COLOR=".C_BOT_FONT_COLOR.">".$myuniqueid."> <I>" . $D1 . "</I></FONT>" ;
               $D1 = trim($D1) ;
@@ -80,7 +86,8 @@ if (C_BOT_PUBLIC)
 //          $botmess = str_replace(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), " ", mb_convert_case($M,MB_CASE_LOWER,$Charset));
           bottalk(&$botmess, $R, 0);
       }
-     elseif (eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)))
+#     elseif (eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)))
+     elseif (stripos(mb_convert_case($M,MB_CASE_LOWER,$Charset),mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset)) !== false)
 	 // Looks for "BOT NAME" in $M (typed in INPUT)  WORKS
 	 {
           if (!file_exists ($botpath)) botmemory($U);                                     // starts conversation with BOT if none already.
@@ -91,7 +98,8 @@ if (C_BOT_PUBLIC)
           bottalk(&$botmess, $R);
 		  if (bget("name") == "") bset("name",$uid);
 	 }
-     if (eregi(mb_convert_case("bye ".C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)) || eregi(mb_convert_case(C_BOT_NAME."> bye",MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)) || eregi(mb_convert_case(C_BOT_NAME."> bye</FONT>",MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)))
+#     if (eregi(mb_convert_case("bye ".C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)) || eregi(mb_convert_case(C_BOT_NAME."> bye",MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)) || eregi(mb_convert_case(C_BOT_NAME."> bye</FONT>",MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)))
+     if (stripos(mb_convert_case($M,MB_CASE_LOWER,$Charset), mb_convert_case("bye ".C_BOT_NAME,MB_CASE_LOWER,$Charset)) !== false || stripos(mb_convert_case($M,MB_CASE_LOWER,$Charset), mb_convert_case(C_BOT_NAME."> bye",MB_CASE_LOWER,$Charset)) !== false || stripos(mb_convert_case($M,MB_CASE_LOWER,$Charset), mb_convert_case(C_BOT_NAME."> bye</FONT>",MB_CASE_LOWER,$Charset)) !== false)
 	 // if statment looks for "bye bot"
 	 {
       	if (file_exists ($botpath)) unlink ($botpath);

@@ -47,9 +47,14 @@ if (!function_exists('mb_convert_case'))
 {
 	function mb_convert_case($str,$type,$Charset)
 	{
+/*
 		if (eregi("TITLE",$type)) $str = ucwords($str);
 		elseif (eregi("LOWER",$type)) $str = strtolower($str);
 		elseif (eregi("UPPER",$type)) $str = strtoupper($str);
+*/
+		if (stripos($type,"TITLE") !== false) $str = ucwords($str);
+		elseif (stripos($type,"LOWER") !== false) $str = strtolower($str);
+		elseif (stripos($type,"UPPER") !== false) $str = strtoupper($str);
 		return $str;
 	}
 };
@@ -87,7 +92,8 @@ $_SESSION['ftpuname'] = $ftpuname;
 if ( $_SESSION['ftppass'] != "" ) $ftppass = $_SESSION['ftppass'];
 if ( $_POST['ftppass'] != "" ) $ftppass = $_POST['ftppass'];
 $_SESSION['ftppass'] = $ftppass;
-	if (eregi("@",$ftpuname))
+#	if (eregi("@",$ftpuname))
+	if (stripos($ftpuname,"@") !== false)
 	{
 		$ftppath == "";
 		if ( $_SESSION['ftppath'] != "" ) $_SESSION['ftppath'] = $ftppath;
@@ -184,7 +190,8 @@ instructions_popup=window.open("ins_popup.php","instructions","width=640,height=
 	{
 		if ( $ftphost == "" )
 		{
-			if (eregi("public_html", $_SERVER["SCRIPT_FILENAME"])) $ftphost = str_replace("www", "ftp", $domain);
+# 			if (eregi("public_html", $_SERVER["SCRIPT_FILENAME"])) $ftphost = str_replace("www", "ftp", $domain);
+			if (stripos($_SERVER["SCRIPT_FILENAME"], "public_html") !== false) $ftphost = str_replace("www", "ftp", $domain);
 			else  $ftphost = $domain;
 		}
 		if ( $ftppath == "" )
@@ -198,7 +205,8 @@ instructions_popup=window.open("ins_popup.php","instructions","width=640,height=
 				$ftpsubpath = substr($shortstring, 0, strcspn($shortstring, "/"));
 			}
 			if ($ftppath != "" && $ftpsubpath != "") $ftppath = str_replace($ftpsubpath, "", $ftppath);
-			if (eregi("public_html", $_SERVER["SCRIPT_FILENAME"])) $ftpuname = $ftpsubpath;
+#			if (eregi("public_html", $_SERVER["SCRIPT_FILENAME"])) $ftpuname = $ftpsubpath;
+			if (stripos($_SERVER["SCRIPT_FILENAME"], "public_html") !== false) $ftpuname = $ftpsubpath;
 		}
 	}
 }
@@ -253,10 +261,16 @@ if ( $p == 2 )
 		include ( $ChatPath."lib/release.lib.php" );
 		if (APP_VERSION != "")
 		{
+/*
 			if (eregi("$(v1.[0-6])",APP_VERSION)) $kind == "1016";
 			elseif (eregi("^(0.1[4-5](.[0-9])?)",APP_VERSION)) $kind == "014015";
 			elseif (eregi("^(0.1[2-3](.[0-9])?)",APP_VERSION)) $kind == "013";
 			elseif (eregi("^(0.1[1-2](.[0-9])?)",APP_VERSION)) $kind == "012";
+*/
+			if (preg_match("/$(v1.[0-6])/i",APP_VERSION)) $kind == "1016";
+			elseif (preg_match("/^(0.1[4-5](.[0-9])?)/",APP_VERSION)) $kind == "014015";
+			elseif (preg_match("/^(0.1[2-3](.[0-9])?)/",APP_VERSION)) $kind == "013";
+			elseif (preg_match("/^(0.1[1-2](.[0-9])?)/",APP_VERSION)) $kind == "012";
 			else
 			{
 				switch (APP_VERSION)
@@ -679,8 +693,11 @@ while(list($key, $name) = each($AvailableLanguages))
 		elseif ($name == "italian" && L_ORIG_LANG_IT != "L_ORIG_LANG_IT") $FLAG_NAME = L_ORIG_LANG_IT.(L_LANG_IT != "L_LANG_IT" ? "/".L_LANG_IT : "");
 		elseif ($name == "japanese" && L_ORIG_LANG_JA != "L_ORIG_LANG_JA") $FLAG_NAME = L_ORIG_LANG_JA.(L_LANG_JA != "L_LANG_JA" ? "/".L_LANG_JA : "");
 		elseif ($name == "nepali" && L_ORIG_LANG_NE != "L_ORIG_LANG_NE") $FLAG_NAME = L_ORIG_LANG_NE.(L_LANG_NE != "L_LANG_NE" ? "/".L_LANG_NE : "");
+		elseif ($name == "norwegian_bokmal" && L_ORIG_LANG_NB != "L_ORIG_LANG_NB") $FLAG_NAME = L_ORIG_LANG_NB.(L_LANG_NB != "L_LANG_NB" ? "/".L_LANG_NB : "");
+		elseif ($name == "norwegian_nynorsk" && L_ORIG_LANG_NN != "L_ORIG_LANG_NN") $FLAG_NAME = L_ORIG_LANG_NN.(L_LANG_NN != "L_LANG_NN" ? "/".L_LANG_NN : "");
 		elseif ($name == "persian" && L_ORIG_LANG_FA != "L_ORIG_LANG_FA") $FLAG_NAME = L_ORIG_LANG_FA.(L_LANG_FA != "L_LANG_FA" ? "/".L_LANG_FA : "");
 		elseif ($name == "polish" && L_ORIG_LANG_PL != "L_ORIG_LANG_PL") $FLAG_NAME = L_ORIG_LANG_PL.(L_LANG_PL != "L_LANG_PL" ? "/".L_LANG_PL : "");
+		elseif ($name == "portuguese" && L_ORIG_LANG_PT != "L_ORIG_LANG_PT") $FLAG_NAME = L_ORIG_LANG_PT.(L_LANG_PT != "L_LANG_PT" ? "/".L_LANG_PT : "");
 		elseif ($name == "romanian" && L_ORIG_LANG_RO != "L_ORIG_LANG_RO") $FLAG_NAME = L_ORIG_LANG_RO.(L_LANG_RO != "L_LANG_RO" ? "/".L_LANG_RO : "");
 		elseif ($name == "russian" && L_ORIG_LANG_RU != "L_ORIG_LANG_RU") $FLAG_NAME = L_ORIG_LANG_RU.(L_LANG_RU != "L_LANG_RU" ? "/".L_LANG_RU : "");
 		elseif ($name == "serbian_latin" && L_ORIG_LANG_SRL != "L_ORIG_LANG_SRL") $FLAG_NAME = L_ORIG_LANG_SRL.(L_LANG_SRL != "L_LANG_SRL" ? "/".L_LANG_SRL : "");
@@ -688,6 +705,7 @@ while(list($key, $name) = each($AvailableLanguages))
 		elseif ($name == "slovak" && L_ORIG_LANG_SK != "L_ORIG_LANG_SK") $FLAG_NAME = L_ORIG_LANG_SK.(L_LANG_SK != "L_LANG_SK" ? "/".L_LANG_SK : "");
 		elseif ($name == "spanish" && L_ORIG_LANG_ES != "L_ORIG_LANG_ES") $FLAG_NAME = L_ORIG_LANG_ES.(L_LANG_ES != "L_LANG_ES" ? "/".L_LANG_ES : "");
 		elseif ($name == "swedish" && L_ORIG_LANG_SV != "L_ORIG_LANG_SV") $FLAG_NAME = L_ORIG_LANG_SV.(L_LANG_SV != "L_LANG_SV" ? "/".L_LANG_SV : "");
+		elseif ($name == "thai" && L_ORIG_LANG_TH != "L_ORIG_LANG_TH") $FLAG_NAME = L_ORIG_LANG_TH.(L_LANG_TH != "L_LANG_TH" ? "/".L_LANG_TH : "");;
 		elseif ($name == "turkish" && L_ORIG_LANG_TR != "L_ORIG_LANG_TR") $FLAG_NAME = L_ORIG_LANG_TR.(L_LANG_TR != "L_LANG_TR" ? "/".L_LANG_TR : "");
 		elseif ($name == "ukrainian" && L_ORIG_LANG_UK != "L_ORIG_LANG_UK") $FLAG_NAME = L_ORIG_LANG_UK.(L_LANG_UK != "L_LANG_UK" ? "/".L_LANG_UK : "");
 		elseif ($name == "urdu" && L_ORIG_LANG_UR != "L_ORIG_LANG_UR") $FLAG_NAME = L_ORIG_LANG_UR.(L_LANG_UR != "L_LANG_UR" ? "/".L_LANG_UR : "");
@@ -981,6 +999,25 @@ $SEND_BDAY_INTVAL				= $row[177];
 $SEND_BDAY_PATH					= $row[178];
 $EN_WMPLAYER					= $row[179];
 $WMP_STREAM						= $row[180];
+$OPEN_ALL_BEG					= $row[181];
+$OPEN_ALL_END					= $row[182];
+$OPEN_SUN_BEG					= $row[183];
+$OPEN_SUN_END					= $row[184];
+$OPEN_MON_BEG					= $row[185];
+$OPEN_MON_END					= $row[186];
+$OPEN_TUE_BEG					= $row[187];
+$OPEN_TUE_END					= $row[188];
+$OPEN_WED_BEG					= $row[189];
+$OPEN_WED_END					= $row[190];
+$OPEN_THU_BEG					= $row[191];
+$OPEN_THU_END					= $row[192];
+$OPEN_FRI_BEG					= $row[193];
+$OPEN_FRI_END					= $row[194];
+$OPEN_SAT_BEG					= $row[195];
+$OPEN_SAT_END					= $row[196];
+$ALLOW_TEXT_COLORS				= $row[197];
+$TAGS_POWERS					= $row[198];
+$ALLOW_MATH						= $row[199];
 
 $query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.com'";
 $result_bot = mysql_query($query_bot);
@@ -1015,7 +1052,7 @@ define("C_PASS_LENGTH", $PASS_LENGTH);
 define("C_ADMIN_NOTIFY", $ADMIN_NOTIFY);
 define("C_ADMIN_NAME", $ADMIN_NAME);
 define("C_ADMIN_EMAIL", $ADMIN_EMAIL);
-define("C_CHAT_URL", eregi("http://",$CHAT_URL) ? $CHAT_URL : "./");
+define("C_CHAT_URL", stripos($CHAT_URL,"http://") !== false ? $CHAT_URL : "./");
 
 // Security and restrictions
 define("C_SHOW_ADMIN", $SHOW_ADMIN);
@@ -1430,6 +1467,31 @@ define("C_BDAY_PATH", $SEND_BDAY_PATH);
 // MediaPlayer add-on by Ciprian
 define("C_EN_WMPLAYER", $EN_WMPLAYER);
 define("C_WMP_STREAM", $WMP_STREAM);
+
+// Open/Close Schedule add-on by Ciprian
+define("C_OPEN_ALL_BEG", $OPEN_ALL_BEG);
+define("C_OPEN_ALL_END", $OPEN_ALL_END);
+define("C_OPEN_SUN_BEG", $OPEN_SUN_BEG);
+define("C_OPEN_SUN_END", $OPEN_SUN_END);
+define("C_OPEN_MON_BEG", $OPEN_MON_BEG);
+define("C_OPEN_MON_END", $OPEN_MON_END);
+define("C_OPEN_TUE_BEG", $OPEN_TUE_BEG);
+define("C_OPEN_TUE_END", $OPEN_TUE_END);
+define("C_OPEN_WED_BEG", $OPEN_WED_BEG);
+define("C_OPEN_WED_END", $OPEN_WED_END);
+define("C_OPEN_THU_BEG", $OPEN_THU_BEG);
+define("C_OPEN_THU_END", $OPEN_THU_END);
+define("C_OPEN_FRI_BEG", $OPEN_FRI_BEG);
+define("C_OPEN_FRI_END", $OPEN_FRI_END);
+define("C_OPEN_SAT_BEG", $OPEN_SAT_BEG);
+define("C_OPEN_SAT_END", $OPEN_SAT_END);
+
+// Colors and Tags for chat text Ciprian
+define("C_ALLOW_TEXT_COLORS", $ALLOW_TEXT_COLORS);
+define("C_TAGS_POWERS", $TAGS_POWERS);
+
+// MathJax LaTeX formulas rendering in chat
+define("C_ALLOW_MATH", $ALLOW_MATH);
 ?&gt;</textarea></p>
 <?php } // END OF IS NOT WRITEABLE
 else {
@@ -1656,6 +1718,25 @@ else {
   	fputs ( $fh, '$SEND_BDAY_PATH					= $row[178];'.$lfeed );
   	fputs ( $fh, '$EN_WMPLAYER					= $row[179];'.$lfeed );
   	fputs ( $fh, '$WMP_STREAM						= $row[180];'.$lfeed );
+  	fputs ( $fh, '$OPEN_ALL_BEG					= $row[181];'.$lfeed );
+  	fputs ( $fh, '$OPEN_ALL_END					= $row[182];'.$lfeed );
+  	fputs ( $fh, '$OPEN_SUN_BEG					= $row[183];'.$lfeed );
+  	fputs ( $fh, '$OPEN_SUN_END					= $row[184];'.$lfeed );
+  	fputs ( $fh, '$OPEN_MON_BEG					= $row[185];'.$lfeed );
+  	fputs ( $fh, '$OPEN_MON_END					= $row[186];'.$lfeed );
+  	fputs ( $fh, '$OPEN_TUE_BEG					= $row[187];'.$lfeed );
+  	fputs ( $fh, '$OPEN_TUE_END					= $row[188];'.$lfeed );
+  	fputs ( $fh, '$OPEN_WED_BEG					= $row[189];'.$lfeed );
+  	fputs ( $fh, '$OPEN_WED_END					= $row[190];'.$lfeed );
+  	fputs ( $fh, '$OPEN_THU_BEG					= $row[191];'.$lfeed );
+  	fputs ( $fh, '$OPEN_THU_END					= $row[192];'.$lfeed );
+  	fputs ( $fh, '$OPEN_FRI_BEG					= $row[193];'.$lfeed );
+  	fputs ( $fh, '$OPEN_FRI_END					= $row[194];'.$lfeed );
+  	fputs ( $fh, '$OPEN_SAT_BEG					= $row[195];'.$lfeed );
+  	fputs ( $fh, '$OPEN_SAT_END					= $row[196];'.$lfeed );
+  	fputs ( $fh, '$ALLOW_TEXT_COLORS				= $row[197];'.$lfeed );
+  	fputs ( $fh, '$TAGS_POWERS					= $row[198];'.$lfeed );
+  	fputs ( $fh, '$ALLOW_MATH					= $row[199];'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '$query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email=\'bot@bot.com\'";'.$lfeed );
   	fputs ( $fh, '$result_bot = mysql_query($query_bot);'.$lfeed );
@@ -1690,7 +1771,9 @@ else {
   	fputs ( $fh, 'define("C_ADMIN_NOTIFY", $ADMIN_NOTIFY);'.$lfeed );
   	fputs ( $fh, 'define("C_ADMIN_NAME", $ADMIN_NAME);'.$lfeed );
   	fputs ( $fh, 'define("C_ADMIN_EMAIL", $ADMIN_EMAIL);'.$lfeed );
-  	fputs ( $fh, 'define("C_CHAT_URL", eregi("http://",$CHAT_URL) ? $CHAT_URL : "./");'.$lfeed );
+#   fputs ( $fh, 'define("C_CHAT_URL", eregi("http://",$CHAT_URL) ? $CHAT_URL : "./");'.$lfeed );
+#   fputs ( $fh, 'define("C_CHAT_URL", strstr($CHAT_URL,"http://") ? $CHAT_URL : "./");'.$lfeed );
+  	fputs ( $fh, 'define("C_CHAT_URL", stripos($CHAT_URL,"http://") !== false ? $CHAT_URL : "./");'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// Security and restrictions'.$lfeed );
   	fputs ( $fh, 'define("C_SHOW_ADMIN", $SHOW_ADMIN);'.$lfeed );
@@ -2105,6 +2188,31 @@ else {
   	fputs ( $fh, '// MediaPlayer add-on by Ciprian'.$lfeed );
   	fputs ( $fh, 'define("C_EN_WMPLAYER", $EN_WMPLAYER);'.$lfeed );
   	fputs ( $fh, 'define("C_WMP_STREAM", $WMP_STREAM);'.$lfeed );
+  	fputs ( $fh, ''.$lfeed );
+  	fputs ( $fh, '// Open/Close Schedule add-on by Ciprian'.$lfeed );
+  	fputs ( $fh, 'define("C_OPEN_ALL_BEG", $OPEN_ALL_BEG);'.$lfeed );
+  	fputs ( $fh, 'define("C_OPEN_ALL_END", $OPEN_ALL_END);'.$lfeed );
+  	fputs ( $fh, 'define("C_OPEN_SUN_BEG", $OPEN_SUN_BEG);'.$lfeed );
+  	fputs ( $fh, 'define("C_OPEN_SUN_END", $OPEN_SUN_END);'.$lfeed );
+  	fputs ( $fh, 'define("C_OPEN_MON_BEG", $OPEN_MON_BEG);'.$lfeed );
+  	fputs ( $fh, 'define("C_OPEN_MON_END", $OPEN_MON_END);'.$lfeed );
+  	fputs ( $fh, 'define("C_OPEN_TUE_BEG", $OPEN_TUE_BEG);'.$lfeed );
+  	fputs ( $fh, 'define("C_OPEN_TUE_END", $OPEN_TUE_END);'.$lfeed );
+  	fputs ( $fh, 'define("C_OPEN_WED_BEG", $OPEN_WED_BEG);'.$lfeed );
+  	fputs ( $fh, 'define("C_OPEN_WED_END", $OPEN_WED_END);'.$lfeed );
+  	fputs ( $fh, 'define("C_OPEN_THU_BEG", $OPEN_THU_BEG);'.$lfeed );
+  	fputs ( $fh, 'define("C_OPEN_THU_END", $OPEN_THU_END);'.$lfeed );
+  	fputs ( $fh, 'define("C_OPEN_FRI_BEG", $OPEN_FRI_BEG);'.$lfeed );
+  	fputs ( $fh, 'define("C_OPEN_FRI_END", $OPEN_FRI_END);'.$lfeed );
+  	fputs ( $fh, 'define("C_OPEN_SAT_BEG", $OPEN_SAT_BEG);'.$lfeed );
+  	fputs ( $fh, 'define("C_OPEN_SAT_END", $OPEN_SAT_END);'.$lfeed );
+  	fputs ( $fh, ''.$lfeed );
+  	fputs ( $fh, '// Colors and Tags for chat text Ciprian'.$lfeed );
+  	fputs ( $fh, 'define("C_ALLOW_TEXT_COLORS", $ALLOW_TEXT_COLORS);'.$lfeed );
+  	fputs ( $fh, 'define("C_TAGS_POWERS", $TAGS_POWERS);'.$lfeed );
+  	fputs ( $fh, ''.$lfeed );
+  	fputs ( $fh, '// MathJax LaTeX formulas rendering in chat'.$lfeed );
+  	fputs ( $fh, 'define("C_ALLOW_MATH", $ALLOW_MATH);'.$lfeed );
   	fputs ( $fh, '?>' );
   } // END OF WRITE INTO config.lib.php
   fclose ( $fh );

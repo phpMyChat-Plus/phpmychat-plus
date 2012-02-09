@@ -152,7 +152,7 @@ function display_connected($Private,$Full,$String1,$String2,$Charset)
 // Define the SQL query (depends on values for ignored users list and on whether to display
 // notification messages or not
 
-$CondForQuery	= "(address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username = 'SYS video' OR username = 'SYS utube' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3')))";
+$CondForQuery	= "(address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username = 'SYS video' OR username = 'SYS utube' OR username = 'SYS math' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3')))";
 
 $DbLink->query("SELECT type, room, username, latin1, m_time, address, message, room_from FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC");
 
@@ -190,7 +190,8 @@ if($DbLink->num_rows() > 0)
 			$disp_note2 = 1;
 		}
 		if ($RoomFrom != "" && $RoomFrom != $Room && $RoomFrom != $Room." [R]") $Room = $RoomFrom."><br />>".$Room;
-		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
+# 		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
+		if (C_POPUP_LINKS || stripos($Message,'target="_blank"></a>') !== false)
 		{
 			$Message = str_replace('target="_blank"></a>','title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'.\'; return true" target="_blank">'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_1).'</a>',$Message);
 		}
@@ -255,7 +256,7 @@ if($DbLink->num_rows() > 0)
 		if($colornamedest_tag != "") $colornamedest_endtag = "</FONT>";
 		$NewMsg = "<tr align=texttop valign=top>";
 		$NewMsg .= "<td width=1% nowrap=\"nowrap\">".date("d-M, H:i:s", $Time + C_TMZ_OFFSET*60*60)."</td><td width=1% nowrap=\"nowrap\">&nbsp;".$Room."</td>";
-		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS video" && $User != "SYS utube" && $User != "SYS topic" && $User != "SYS topic reset" && substr($User,0,8) != "SYS dice")
+		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS video" && $User != "SYS utube" && $User != "SYS math" && $User != "SYS topic" && $User != "SYS topic reset" && substr($User,0,8) != "SYS dice")
 		{
 			$User = $colorname_tag."[".special_char($User,$Latin1)."]".$colorname_endtag;
 			if ($Dest != "") $Dest = ">".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]".$colornamedest_endtag;
@@ -294,8 +295,12 @@ if($DbLink->num_rows() > 0)
 		}
 		if ($User == "SYS room")
 		{
- 			$NewMsg .= "<td  width=1% nowrap=\"nowrap\"><B>".$colornamedest_tag."[${Dest}]".$colornamedest_endtag."</B></td><td><SPAN class=\"notify2\"><I>".ROOM_SAYS."&nbsp;</SPAN><SPAN class=\"notify\">".$Message."</SPAN></I></td>";
-    }
+			$NewMsg .= "<td colspan=2><SPAN class=\"notify2\"><I>".ROOM_SAYS."&nbsp;</SPAN><SPAN class=\"notify\">".$Message."</SPAN></I></td>";
+		}
+		elseif ($User == "SYS math")
+		{
+			$NewMsg .= "<td colspan=2 nowrap=\"nowrap\" valign=\"top\" align=\"left\"><FONT class=\"notify\">".sprintf(L_MATH,$Dest)."</FONT>".$Message."</td>";
+      	}
 		if ($User == "SYS topic")
 		{
  			$NewMsg .= "<td colspan=2><FONT class=\"notify\">".$Dest." ".L_TOPIC." ".$Message."</FONT></td>";

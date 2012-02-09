@@ -46,6 +46,7 @@ define("L_SET_19", "Beni hatırla");
 
 define("L_SRC", "ücretsiz olarak var");
 
+define("L_SEC", "saniye");
 define("L_SECS", "saniye");
 define("L_MIN", "dakika");
 define("L_MINS", "dakika");

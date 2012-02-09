@@ -46,6 +46,7 @@ define("L_SET_18", "Agregar a sus Favoritos: presione \"Ctrl+D\".");
 
 define("L_SRC", "se puede conseguir y usar gratis");
 
+define("L_SEC", "segundo");
 define("L_SECS", "segundos");
 define("L_MIN", "minuto");
 define("L_MINS", "minutos");
