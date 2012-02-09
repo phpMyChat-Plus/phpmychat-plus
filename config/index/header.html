@@ -10,7 +10,7 @@ if (isset($_GET))
 if ((!isset($L) || $L == "")) $L = "english";
 include("./../../../localization/".$L."/localized.chat.php");
 include("./../../../localization/".$L."/localized.admin.php");
-$textDirection = ($Align == "right") ? "RTL" : "LTR";
+$textDirection = (isset($Align) && $Align == "right" ? "RTL" : "LTR");
 ?>
 <html dir=<?php echo($textDirection) ?>>
 <head>

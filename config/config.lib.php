@@ -208,6 +208,25 @@ $SEND_BDAY_INTVAL				= $row[177];
 $SEND_BDAY_PATH					= $row[178];
 $EN_WMPLAYER					= $row[179];
 $WMP_STREAM						= $row[180];
+$OPEN_ALL_BEG					= $row[181];
+$OPEN_ALL_END					= $row[182];
+$OPEN_SUN_BEG					= $row[183];
+$OPEN_SUN_END					= $row[184];
+$OPEN_MON_BEG					= $row[185];
+$OPEN_MON_END					= $row[186];
+$OPEN_TUE_BEG					= $row[187];
+$OPEN_TUE_END					= $row[188];
+$OPEN_WED_BEG					= $row[189];
+$OPEN_WED_END					= $row[190];
+$OPEN_THU_BEG					= $row[191];
+$OPEN_THU_END					= $row[192];
+$OPEN_FRI_BEG					= $row[193];
+$OPEN_FRI_END					= $row[194];
+$OPEN_SAT_BEG					= $row[195];
+$OPEN_SAT_END					= $row[196];
+$ALLOW_TEXT_COLORS				= $row[197];
+$TAGS_POWERS					= $row[198];
+$ALLOW_MATH						= $row[199];
 
 $query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.com'";
 $result_bot = mysql_query($query_bot);
@@ -242,7 +261,8 @@ define("C_PASS_LENGTH", $PASS_LENGTH);
 define("C_ADMIN_NOTIFY", $ADMIN_NOTIFY);
 define("C_ADMIN_NAME", $ADMIN_NAME);
 define("C_ADMIN_EMAIL", $ADMIN_EMAIL);
-define("C_CHAT_URL", strstr($CHAT_URL,"http://") ? $CHAT_URL : "./");
+#define("C_CHAT_URL", strstr($CHAT_URL,"http://") ? $CHAT_URL : "./");
+define("C_CHAT_URL", stripos($CHAT_URL,"http://") !== false ? $CHAT_URL : "./");
 
 // Security and restrictions
 define("C_SHOW_ADMIN", $SHOW_ADMIN);
@@ -660,4 +680,29 @@ define("C_BDAY_PATH", $SEND_BDAY_PATH);
 // MediaPlayer add-on by Ciprian
 define("C_EN_WMPLAYER", $EN_WMPLAYER);
 define("C_WMP_STREAM", $WMP_STREAM);
+
+// Open/Close Schedule add-on by Ciprian
+define("C_OPEN_ALL_BEG", $OPEN_ALL_BEG);
+define("C_OPEN_ALL_END", $OPEN_ALL_END);
+define("C_OPEN_SUN_BEG", $OPEN_SUN_BEG);
+define("C_OPEN_SUN_END", $OPEN_SUN_END);
+define("C_OPEN_MON_BEG", $OPEN_MON_BEG);
+define("C_OPEN_MON_END", $OPEN_MON_END);
+define("C_OPEN_TUE_BEG", $OPEN_TUE_BEG);
+define("C_OPEN_TUE_END", $OPEN_TUE_END);
+define("C_OPEN_WED_BEG", $OPEN_WED_BEG);
+define("C_OPEN_WED_END", $OPEN_WED_END);
+define("C_OPEN_THU_BEG", $OPEN_THU_BEG);
+define("C_OPEN_THU_END", $OPEN_THU_END);
+define("C_OPEN_FRI_BEG", $OPEN_FRI_BEG);
+define("C_OPEN_FRI_END", $OPEN_FRI_END);
+define("C_OPEN_SAT_BEG", $OPEN_SAT_BEG);
+define("C_OPEN_SAT_END", $OPEN_SAT_END);
+
+// Colors and Tags for chat text Ciprian
+define("C_ALLOW_TEXT_COLORS", $ALLOW_TEXT_COLORS);
+define("C_TAGS_POWERS", $TAGS_POWERS);
+
+// MathJax (MathML/TeX) formulas rendering in chat by Ciprian
+define("C_ALLOW_MATH", $ALLOW_MATH);
 ?>
