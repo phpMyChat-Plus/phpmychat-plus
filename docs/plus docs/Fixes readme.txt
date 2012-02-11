@@ -10,7 +10,7 @@ Client browsers - tested with:
 	- AvantBrowser 10.2 build 52 = H;
 	- Flock 1.2.1 = H;
 	- Apple Safari > 4.0.3 = H;
-	- Google Chrome > 16.x.x.x.x = M.
+	- Google Chrome > 17.x.x.x.x = M.
 Server environment - tested env:
 	- Apache < 2.2.21 (Unix and Windows 2k/XP<SP3 & Vista);
 	- php < 5.3.5 (non-safe-mode, but also a safe mode server has been tested and worked fine);
@@ -33,6 +33,7 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 01.02.2012 - 1.94-beta8:
+- email list fix in send email tab/admin panel to separate banned users from the reg_users list; (functionality related)
 - added some more reductions for AliceBot as well as fixing some date/time features; (functionality extension)
 - finished upgrading to php5.3.0 compatibility by changing all ereg functions to the according preg/strpos/strstr functions; (compatibility related)
 01.12.2011 - 1.94-beta7:

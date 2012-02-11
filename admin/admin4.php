@@ -75,9 +75,9 @@ if (isset($ReqVar) && $ReqVar == "1")
 else
 {
 	// Ensure at least one registered user exist (except the administrator) before displaying the mail form
-	$DbLink->query("SELECT COUNT(*) FROM ".C_REG_TBL." WHERE username != '$pmc_username' LIMIT 1");
+	$DbLink->query("SELECT COUNT(*) FROM ".C_REG_TBL." WHERE (username != '$pmc_username' AND email != 'bot@bot.com' AND email != 'quote@quote.com' AND email != '')");
 	list($count_RegUsers) = $DbLink->next_record();
-	$DbLink->clean_results();
+//	$DbLink->clean_results();
 	?>
 	<!-- Mail form -->
 	<TR>
@@ -86,6 +86,7 @@ else
 			<INPUT TYPE=hidden NAME="From" value="<?php echo($From); ?>">
 			<INPUT TYPE=hidden NAME="pmc_username" value="<?php echo(htmlspecialchars(stripslashes($pmc_username))); ?>">
 			<INPUT TYPE=hidden NAME="pmc_password" value="<?php echo($pmc_password); ?>">
+			<INPUT TYPE=hidden NAME="pmc_email" value="<?php echo($pmc_email); ?>">
 			<INPUT TYPE=hidden NAME="FORM_SEND" value="4">
 			<TABLE BORDER=0 CELLSPACING=2 WIDTH=100%>
 			<TR>
@@ -94,10 +95,11 @@ else
 				<TD VALIGN=TOP>
 				<TABLE BORDER=0 WIDTH=100%>
 	<?php
-	if ($count_RegUsers != 0)
+	if ($count_RegUsers)
 	{
 		$DbLink->query("SELECT COUNT(*) FROM ".C_BAN_TBL);
 		list($count_BanUsers) = $DbLink->next_record();
+		$DbLink->clean_results();
 	?>
 				<TR>
 					<TD ALIGN=CENTER><?php echo(A_SHEET4_13); ?>
@@ -105,7 +107,7 @@ else
 					</TD>
 				</TR>
 				<TR>
-					<TD ALIGN=CENTER><?php echo(A_SHEET4_2." ".A_MENU_1); ?></TD>
+					<TD ALIGN=CENTER><?php echo(A_SHEET4_2." ".A_MENU_1." [".($count_BanUsers ? $count_RegUsers - $count_BanUsers : $count_RegUsers)."]"); ?></TD>
 				</TR>
 				<TR>
 					<TD ALIGN=CENTER>
@@ -113,11 +115,11 @@ else
 						<?php
 						if($count_BanUsers)
 						{
-							$DbLink->query("SELECT reg.username,reg.email FROM ".C_REG_TBL." reg RIGHT JOIN ".C_BAN_TBL." ban ON reg.username != ban.username WHERE reg.email != 'bot@bot.com' AND reg.email != 'quote@quote.com' AND reg.email != '' ORDER BY reg.username");
+							$DbLink->query("SELECT DISTINCT reg.username,reg.email FROM ".C_REG_TBL." reg LEFT OUTER JOIN ".C_BAN_TBL." ban ON reg.username = ban.username WHERE (reg.email != 'bot@bot.com' AND reg.email != 'quote@quote.com' AND reg.email != '' AND reg.email != '".$pmc_email."' AND ban.username IS NULL) ORDER BY reg.username");
 						}
 						else
 						{
-							$DbLink->query("SELECT username,email FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND email != '' ORDER BY username");
+							$DbLink->query("SELECT DISTINCT username,email FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND email != '' ORDER BY username");
 						}
 						while (list($U,$EMail) = $DbLink->next_record())
 						{
@@ -137,17 +139,16 @@ else
 						<INPUT TYPE=button VALUE="<?php echo(A_SHEET4_3); ?>" onClick="for (var i = 0; i < document.forms['MailForm'].elements['SendTo[]'].options.length; i++) {document.forms['MailForm'].elements['SendTo[]'].options[i].selected=true;}">
 						&nbsp;<INPUT TYPE=button VALUE="<?php echo(A_SHEET4_12); ?>" onClick="for (var i = 0; i < document.forms['MailForm'].elements['SendTo[]'].options.length; i++) {document.forms['MailForm'].elements['SendTo[]'].options[i].selected=false;}">
 						</SELECT>
-						<INPUT TYPE=hidden NAME=pmc_email VALUE="<?php echo($pmc_email); ?>">
 					</TD>
 				</TR>
 				<TR>
-					<TD ALIGN=CENTER><?php echo(A_SHEET4_2." ".A_MENU_2); ?></TD>
+					<TD ALIGN=CENTER><?php echo(A_SHEET4_2." ".A_MENU_2." [".($count_BanUsers)."]"); ?></TD>
 				</TR>
 				<TR>
 					<TD ALIGN=CENTER>
 						<SELECT NAME="SendToBan[]" MULTIPLE SIZE=3>
 						<?php
-						$DbLink->query("SELECT reg.username,reg.email FROM ".C_REG_TBL." reg RIGHT JOIN ".C_BAN_TBL." ban ON reg.username = ban.username WHERE reg.email != 'bot@bot.com' AND reg.email != 'quote@quote.com' AND reg.email != '' ORDER BY reg.username");
+						$DbLink->query("SELECT DISTINCT reg.username,reg.email FROM ".C_REG_TBL." reg RIGHT JOIN ".C_BAN_TBL." ban ON reg.username = ban.username WHERE reg.email != 'bot@bot.com' AND reg.email != 'quote@quote.com' AND reg.email != '' ORDER BY reg.username");
 						while (list($UB,$EMailB) = $DbLink->next_record())
 						{
 							if ($UB != $pmc_username) echo("<OPTION VALUE=\"".$UB." <".$EMailB.">\">".$UB." (".$EMailB.")</OPTION>");
@@ -165,11 +166,10 @@ else
 						<INPUT TYPE=button VALUE="<?php echo(A_SHEET4_3); ?>" onClick="for (var i = 0; i < document.forms['MailForm'].elements['SendToBan[]'].options.length; i++) {document.forms['MailForm'].elements['SendToBan[]'].options[i].selected=true;}">
 						&nbsp;<INPUT TYPE=button VALUE="<?php echo(A_SHEET4_12); ?>" onClick="for (var i = 0; i < document.forms['MailForm'].elements['SendToBan[]'].options.length; i++) {document.forms['MailForm'].elements['SendToBan[]'].options[i].selected=false;}">
 						</SELECT>
-						<INPUT TYPE=hidden NAME=pmc_email VALUE="<?php echo($pmc_email); ?>">
 					</TD>
 				</TR>
 		<?php
-		if (isset($pmc_email))
+		if (isset($pmc_email) && $pmc_email != "")
 		{
 		?>
 			<TR><TD ALIGN=CENTER>
