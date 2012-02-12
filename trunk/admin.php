@@ -21,8 +21,8 @@ if (isset($_POST))
 if (isset($L) && !is_dir("./localization/".$L)) exit();
 
 // avoid server configuration for magic quotes
-#if (function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
-ini_set("magic_quotes_runtime", 0);
+if (function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
+else ini_set("magic_quotes_runtime", 0);
 // Can't turn off magic quotes gpc so just redo what it did if it is on.
 if (get_magic_quotes_gpc()) {
 	foreach($_GET as $k=>$v)

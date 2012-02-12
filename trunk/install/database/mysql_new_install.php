@@ -13,7 +13,7 @@ CREATE TABLE bot_bot (
  value text NOT NULL,
  PRIMARY KEY (id),
  KEY botname (bot,name)
-) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
 mysql_query("
 DROP TABLE IF EXISTS bot_bots;
@@ -24,7 +24,7 @@ CREATE TABLE bot_bots (
  botname varchar(255) NOT NULL default '',
  PRIMARY KEY (botname),
  KEY id (id)
-) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
 mysql_query("
 DROP TABLE IF EXISTS bot_conversationlog;
@@ -39,7 +39,7 @@ CREATE TABLE bot_conversationlog (
  enteredtime timestamp(14) NOT NULL,
  PRIMARY KEY (id),
  KEY botid (bot)
-) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
 mysql_query("
 DROP TABLE IF EXISTS bot_dstore;
@@ -53,7 +53,7 @@ CREATE TABLE bot_dstore (
  id int(11) NOT NULL auto_increment,
  PRIMARY KEY (id),
  KEY nameidx (name(40))
-) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
 mysql_query("
 DROP TABLE IF EXISTS bot_gmcache;
@@ -71,7 +71,7 @@ CREATE TABLE bot_gmcache (
  combined text NOT NULL,
  PRIMARY KEY (id),
  KEY combined (bot,combined(255))
-) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
 mysql_query("
 DROP TABLE IF EXISTS bot_gossip;
@@ -83,7 +83,7 @@ CREATE TABLE bot_gossip (
  id int(11) NOT NULL auto_increment,
  PRIMARY KEY (id),
  KEY botidx (bot)
-) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
 mysql_query("
 DROP TABLE IF EXISTS bot_patterns;
@@ -99,7 +99,7 @@ CREATE TABLE bot_patterns (
  PRIMARY KEY (id),
  KEY wordparent (parent,word),
  KEY botid (bot)
-) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
 mysql_query("
 DROP TABLE IF EXISTS bot_templates;
@@ -113,7 +113,7 @@ CREATE TABLE bot_templates (
  that varchar(255) default NULL,
  topic varchar(255) default NULL,
  KEY bot (id)
-) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
 mysql_query("
 DROP TABLE IF EXISTS bot_thatindex;
@@ -124,7 +124,7 @@ CREATE TABLE bot_thatindex (
  enteredtime timestamp(14) NOT NULL,
  id int(11) NOT NULL auto_increment,
  PRIMARY KEY (id)
-) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
 mysql_query("
 DROP TABLE IF EXISTS bot_thatstack;
@@ -136,7 +136,7 @@ CREATE TABLE bot_thatstack (
  value varchar(255) default NULL,
  enteredtime timestamp(14) NOT NULL,
  PRIMARY KEY (id)
-) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
 mysql_query("
 DROP TABLE IF EXISTS ".$t_ban_users.";
@@ -149,7 +149,7 @@ CREATE TABLE ".$t_ban_users." (
  rooms varchar(100) NOT NULL default '',
  ban_until int(11) NOT NULL default '0',
  reason varchar(100) NOT NULL default ''
-) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
 mysql_query("
 DROP TABLE IF EXISTS ".$t_config.";
@@ -357,7 +357,7 @@ CREATE TABLE ".$t_config." (
  TAGS_POWERS set('b','i','u') default NULL,
  ALLOW_MATH enum('0','1') NOT NULL default '0',
  PRIMARY KEY (ID)
-) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
 mysql_query("
 INSERT INTO ".$t_config." (id, MODS, INSTALL_DATE, QUICKA, QUICKM, QUICKU, LAST_SAVED_ON) VALUES ('0', 'Advanced Admin, (GR)Avatars, Smilies Popup, Color Drop Box, Private Popup,<br />Quick Menu, Logs Archive, Lurking, Color names, WorldTime, UTF-8, Birthdays', NOW(), 'Greetings|\r\nWelcome|\r\nThanks for coming by|\r\nLoL|\r\n:rofl|\r\n/announce I have to go now!|\r\n/away be right back...|\r\n/away ...I\'m back!|\r\n/bot start|\r\n/bot stop|\r\n/buzz|\r\n/buzz ~chimeup|\r\n/me is busy right now!|\r\n/mr is watching TV|\r\n/bye See you around!|\r\n/high user|\r\n/join 0 #%s|\r\n/join 1 #%s|\r\n/invite %s|\r\n/img http://www.path_to_image|\r\n/promote %s|\r\n/demote %s|\r\n/demote * %s|\r\n/room Please follow the topic|\r\n/size 12|\r\n/size|\r\n/sort|\r\n/topic |\r\n/topic reset|\r\n/video url_to_video|\r\n/wisp %s Hey, in which room ru?|\r\n/whois %s', 'Greetings|\r\nWelcome|\r\nThanks for coming by|\r\nLoL|\r\n:rofl|\r\n/away be right back...|\r\n/away ...I\'m back!|\r\n/buzz|\r\n/buzz ~chimeup|\r\n/me is busy right now!|\r\n/mr is reading|\r\n/bye cyall!|\r\n/high %s|\r\n/join 0 #%s|\r\n/join 1 #%s|\r\n/invite %s|\r\n/img http://www.path_to_image|\r\n/promote %s|\r\n/room Please follow the topic|\r\n/size 12|\r\n/size|\r\n/sort|\r\n/topic |\r\n/topic reset|\r\n/video url_to_video|\r\n/wisp %s Hey, in which room ru?|\r\n/whois %s', 'Hello everyone|\r\nlol|\r\n:rofl|\r\n/away brb...|\r\n/away ...back!|\r\n/me is busy!|\r\n/mr is lurking|\r\n/bye ttyl!|\r\n/high %s|\r\n/join 0 #%s|\r\n/join 1 #%s|\r\n/invite %s|\r\n/img http://www.path_to_image|\r\n/size 12|\r\n/size|\r\n/sort|\r\n/wisp %s Hey, in which room ru?|\r\n/whois %s', NOW());
@@ -376,7 +376,7 @@ CREATE TABLE ".$t_lurkers." (
  PRIMARY KEY (time),
  KEY ip (ip),
  KEY file (file)
-) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
 mysql_query("
 DROP TABLE IF EXISTS ".$t_messages.";
@@ -392,7 +392,7 @@ CREATE TABLE ".$t_messages." (
  message text NOT NULL,
  pm_read varchar(19) NOT NULL default '',
  room_from varchar(30) NOT NULL default ''
-) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
 mysql_query("
 DROP TABLE IF EXISTS ".$t_reg_users.";
@@ -435,7 +435,7 @@ CREATE TABLE ".$t_reg_users." (
  bday_email_sent int(11) NOT NULL default '0',
  PRIMARY KEY (cid),
  UNIQUE KEY username (username)
-) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
 mysql_query("
 INSERT INTO ".$t_reg_users." VALUES ('', '', 'plusbot', '0', '3901e4a6c3d27909afef4c22f8337da8', 'Bot', 'phpMyChat - Plus', 'WorldWideWeb', '', 'bot@bot.com', '0', 'topmod', '', 1130763311, '-No tracking IP-', '1', '0', 'images/alice.gif', 'I am a Robot originally called <a href=http://www.alicebot.org/documentation/ target=_blank>Alice</a>.  I am proud to be the first Artificial Intelligence on the net! Please test my capabilities as you wish! To start a public conversation with me just type \"hello myname\" in the room I am active in, to stop the conversation type \"bye myname\" or \"myname> bye\". But we can also talk in private - just click on my name whenever you need a shoulder to cry on :p Ohhh... I wish to express my gratitude to Roy, Popeye and <a href=http://www.ciprianmp.com/plus/ target=_blank>Ciprian</a> for making me available for chatting in here. :)', 'http://www.alicebot.org/documentation/', 'http://sourceforge.net/forum/?group_id=43190', 'English, German', 'olive', 'images/avatars/bot_avatar.gif', '0', '', '', '', '', '', '', '', '', '');
@@ -476,7 +476,7 @@ CREATE TABLE IF NOT EXISTS ".$t_stats." (
   kicks_sent tinyint(4) NOT NULL DEFAULT '0',
   vids_posted smallint(5) NOT NULL DEFAULT '0',
   maths_posted smallint(5) NOT NULL DEFAULT '0'
-) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
 mysql_query("
 DROP TABLE IF EXISTS ".$t_users.";
@@ -493,6 +493,6 @@ CREATE TABLE ".$t_users." (
  r_time int(11) NOT NULL default '0',
  email varchar(64) NOT NULL default '',
  UNIQUE KEY room (room,username)
-) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
 ?>

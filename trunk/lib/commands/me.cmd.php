@@ -11,9 +11,9 @@ if (C_NO_SWEAR)
 	unset($Found, $b);
 };
 
-if(stristr("(mr".(L_CMD_MR != "" && L_CMD_MR != "L_CMD_MR" ? "|".str_replace(",","|",L_CMD_MR) : "").")", $Cmd[1]))
+if(stristr("(mr".((L_CMD_MR != "" && L_CMD_MR != "L_CMD_MR") ? "|".str_replace(",","|",L_CMD_MR) : "").")", $Cmd[1]))
 {
-	$DbLink->query("SELECT gender FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
+	$DbLink->query("SELECT gender FROM ".C_REG_TBL." WHERE username='".$U."' LIMIT 1");
 
 	list($gender) = $DbLink->next_record();
 	$DbLink->clean_results();

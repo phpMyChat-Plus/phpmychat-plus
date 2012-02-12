@@ -227,7 +227,7 @@ CREATE TABLE IF NOT EXISTS ".$t_stats." (
   kicks_sent tinyint(4) NOT NULL DEFAULT '0',
   vids_posted smallint(5) NOT NULL DEFAULT '0',
   maths_posted smallint(5) NOT NULL DEFAULT '0'
-) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ", $conn);
 mysql_query("
 ALTER TABLE ".$t_users."

@@ -242,20 +242,21 @@ if (!function_exists('utf_conv')){
 };
 
 function getfdate($date_format){
-/*	global $BotPath;
-	if ($BotPath != "./") {
+#	global $L,$Charset;
+
+#	if(file_exists("../localization/".$L."/localized.chat.php")) include_once("../localization/".$L."/localized.chat.php");
+#	if ($date_format == "") $date_format = str_replace("%d of", (stristr(PHP_OS,'win') ? "%#d" : "%e").date('S')." of", L_LONG_DATETIME." (%z)");
+#	return stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,$Charset,strftime($date_format)) : strftime($date_format);
+
+	if (stristr(PHP_OS,'win')) {
+	setlocale(LC_ALL, "English_United States", "eng-usa.UTF-8", "eng-usa");
+	} else {
+	setlocale(LC_ALL, "en_US.UTF-8", "enu.UTF-8", "usa.UTF-8", "enu_enu.UTF-8", "English-usa.UTF-8"); // For American formats
 	}
-	else{
-	};
-*/
-#	if ($date_format == "") $date_format = "%A, %d of %B %Y %H:%M:%S (%z)";
-#	return strftime($date_format);
 
-	if(file_exists("../localization/english/localized.chat.php")) include_once("../localization/english/localized.chat.php");
-	if ($date_format == "") $date_format = str_replace("%d of", (stristr(PHP_OS,'win') ? "%#d" : "%e").date('S')." of", L_LONG_DATETIME." (%z)");
+	if (!isset($date_format) || $date_format == "")  $date_format = "%A, ".(stristr(PHP_OS,'win') ? "%#d" : "%e").date('S')." of %B %Y %H:%M:%S (%z)";
 
-	if(stristr(PHP_OS,'win')) return utf_conv(WIN_DEFAULT,$Charset,strftime($date_format));
-	else return strftime($date_format);
+	return stristr(PHP_OS,'win') ? utf_conv("windows-1252","utf-8",strftime($date_format)) : strftime($date_format);
 };
 
 /**

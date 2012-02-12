@@ -107,7 +107,8 @@ function replybotname($userinput,$uniqueid,$botname){
 	$botid = lookupbotid($botname);
 
 	if ($botid==-1){
-		print "There is no such a bot: $botname<br />\n";
+#		print "There is no such a bot: $botname<br />\n";
+		return reply("There is no such a bot <b>$botname</b> loaded in the database.<br />\nPlease make sure the bot is fully loaded into the database.<br />\nNotify the chat administrator about this message!",$uniqueid,$botid);
 	}
 	else {
 		return reply($userinput,$uniqueid,$botid);
@@ -148,6 +149,9 @@ function replybotname($userinput,$uniqueid,$botname){
 * @return object                        A class link to 'Response'.
 */
 function reply($userinput,$uniqueid, $bot){
+
+	if (strstr($userinput, "There is no such a bot loaded")) $myresponse->response=$userinput;
+	else{
 
 	global $that,$topic,$uid,$loopcounter,$patternmatched,$inputmatched,$selectbot;
 
@@ -208,6 +212,8 @@ function reply($userinput,$uniqueid, $bot){
 	ss_timing_stop("all");
 
 	$myresponse->timer=ss_timing_current("all");
+
+	}
 
 	return $myresponse;
 

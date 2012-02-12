@@ -68,7 +68,8 @@ include ( $ChatPath."localization/".$L."/localized.chat.php" );
 header("Content-Type: text/html; charset=${Charset}");
 
 // avoid server configuration for magic quotes
-set_magic_quotes_runtime(0);
+if (function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
+else ini_set("magic_quotes_runtime", 0);
 // Can't turn off magic quotes gpc so just redo what it did if it is on.
 if (get_magic_quotes_gpc()) {
 	foreach($_GET as $k=>$v)
@@ -368,6 +369,11 @@ if ( $p == 4 )
 	mysql_query("SET NAMES 'utf8'");
 	if ( $conn != false )
 	{
+		// Get MySQL server version and set the corresponding engine type
+		$mysql_info = mysql_get_server_info();
+		$mysql_version = substr($mysql_info, 0, strpos($mysql_info, "-"));
+		$engine = (settype($mysql_version, "float") >= "4.1") ? "ENGINE" : "TYPE";
+
 		$myconn = mysql_select_db ( $dbname, $conn );
 		if ( $myconn == false )
 		{
@@ -705,7 +711,7 @@ while(list($key, $name) = each($AvailableLanguages))
 		elseif ($name == "slovak" && L_ORIG_LANG_SK != "L_ORIG_LANG_SK") $FLAG_NAME = L_ORIG_LANG_SK.(L_LANG_SK != "L_LANG_SK" ? "/".L_LANG_SK : "");
 		elseif ($name == "spanish" && L_ORIG_LANG_ES != "L_ORIG_LANG_ES") $FLAG_NAME = L_ORIG_LANG_ES.(L_LANG_ES != "L_LANG_ES" ? "/".L_LANG_ES : "");
 		elseif ($name == "swedish" && L_ORIG_LANG_SV != "L_ORIG_LANG_SV") $FLAG_NAME = L_ORIG_LANG_SV.(L_LANG_SV != "L_LANG_SV" ? "/".L_LANG_SV : "");
-		elseif ($name == "thai" && L_ORIG_LANG_TH != "L_ORIG_LANG_TH") $FLAG_NAME = L_ORIG_LANG_TH.(L_LANG_TH != "L_LANG_TH" ? "/".L_LANG_TH : "");;
+		elseif ($name == "thai" && L_ORIG_LANG_TH != "L_ORIG_LANG_TH") $FLAG_NAME = L_ORIG_LANG_TH.(L_LANG_TH != "L_LANG_TH" ? "/".L_LANG_TH : "");
 		elseif ($name == "turkish" && L_ORIG_LANG_TR != "L_ORIG_LANG_TR") $FLAG_NAME = L_ORIG_LANG_TR.(L_LANG_TR != "L_LANG_TR" ? "/".L_LANG_TR : "");
 		elseif ($name == "ukrainian" && L_ORIG_LANG_UK != "L_ORIG_LANG_UK") $FLAG_NAME = L_ORIG_LANG_UK.(L_LANG_UK != "L_LANG_UK" ? "/".L_LANG_UK : "");
 		elseif ($name == "urdu" && L_ORIG_LANG_UR != "L_ORIG_LANG_UR") $FLAG_NAME = L_ORIG_LANG_UR.(L_LANG_UR != "L_LANG_UR" ? "/".L_LANG_UR : "");
