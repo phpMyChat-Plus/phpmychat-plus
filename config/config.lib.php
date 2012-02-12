@@ -261,7 +261,6 @@ define("C_PASS_LENGTH", $PASS_LENGTH);
 define("C_ADMIN_NOTIFY", $ADMIN_NOTIFY);
 define("C_ADMIN_NAME", $ADMIN_NAME);
 define("C_ADMIN_EMAIL", $ADMIN_EMAIL);
-#define("C_CHAT_URL", strstr($CHAT_URL,"http://") ? $CHAT_URL : "./");
 define("C_CHAT_URL", stripos($CHAT_URL,"http://") !== false ? $CHAT_URL : "./");
 
 // Security and restrictions

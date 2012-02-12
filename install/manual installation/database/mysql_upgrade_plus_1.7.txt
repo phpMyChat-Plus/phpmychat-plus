@@ -234,7 +234,7 @@ CREATE TABLE IF NOT EXISTS c_stats (
   kicks_sent tinyint(4) NOT NULL DEFAULT '0',
   vids_posted smallint(5) NOT NULL DEFAULT '0',
   maths_posted smallint(5) NOT NULL DEFAULT '0'
-) TYPE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 ALTER TABLE c_users
 			ADD email varchar(64) NOT NULL default '';

@@ -50,7 +50,8 @@ require("./lib/clean.lib.php");
 header("Content-Type: text/html; charset=${Charset}");
 
 // avoid server configuration for magic quotes
-set_magic_quotes_runtime(0);
+if (function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
+else ini_set("magic_quotes_runtime", 0);
 // Can't turn off magic quotes gpc so just redo what it did if it is on.
 if (get_magic_quotes_gpc()) {
 	foreach($_GET as $k=>$v)
@@ -188,26 +189,26 @@ if (C_BOT_CONTROL) include("./bot/respond.php");
 // ** Send formated messages to the message table **
 function AddMessage($M, $T, $R, $U, $C, $Private, $Read, $RF, $Charset)
 {
-if (C_BOT_CONTROL && C_BOT_PUBLIC && $Private == "")
-{
-	//--Bot Control Popeye
-$botpath = "botfb/" . $U . ".txt" ;
-$botcontrol ="botfb/$R.txt";
-	if(file_exists($botcontrol))
+	if (C_BOT_CONTROL && C_BOT_PUBLIC && $Private == "")
 	{
-# 		if (file_exists ($botpath) || eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)))
-		if (file_exists ($botpath) || stripos(mb_convert_case($M,MB_CASE_LOWER,$Charset), mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset)) !== false)
+		//--Bot Control Popeye
+	$botpath = "botfb/" . $U . ".txt" ;
+	$botcontrol ="botfb/" . $R . ".txt";
+		if(file_exists($botcontrol))
 		{
-			include("./lib/bot.lib.php");
+	# 		if (file_exists ($botpath) || eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)))
+			if (file_exists ($botpath) || stripos(mb_convert_case($M,MB_CASE_LOWER,$Charset), mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset)) !== false)
+			{
+				include("./lib/bot.lib.php");
+			}
 		}
 	}
-}
-//---End Bot Control
+	//---End Bot Control
 	global $DbLink, $Latin1, $status, $Read, $M1, $COLOR_TB;
 
 	if (!isset($M1)) $M1 = $M;
 	$M = str_replace("\"", "&quot;", $M);
-	$M = str_replace("'","&#39;", $M);
+	$M = str_replace("'", "&#39;", $M);
 	$M = str_ireplace("<applet", "", $M);
 	$M = str_ireplace("<javascript", "", $M);
 	// Text formating tags
@@ -344,22 +345,22 @@ $botcontrol ="botfb/$R.txt";
 		}
 	}
 
-// Color Sniffer scripting safe mode filter by Alexander Eisele <xaex@xeax.de> & Ciprian
-$C = str_replace("<", "&lt;", $C);
-$C = str_replace(">", "&gt;", $C);
-$C = str_replace("\"", "&quot;", $C);
-$C = str_replace("x3c", "&lt;", $C);
-$C = str_replace("x3e", "&gt;", $C);
+	// Color Sniffer scripting safe mode filter by Alexander Eisele <xaex@xeax.de> & Ciprian
+	$C = str_replace("<", "&lt;", $C);
+	$C = str_replace(">", "&gt;", $C);
+	$C = str_replace("\"", "&quot;", $C);
+	$C = str_replace("x3c", "&lt;", $C);
+	$C = str_replace("x3e", "&gt;", $C);
 
-$CC = array("","black","dimgray","gray","darkgray","silver","lightgrey","gainsboro","whitesmoke","ghostwhite","white","slategray","lightslategray","midnightblue","navy","darkblue","darkslateblue","mediumblue","blue","steelblue","royalblue","cornflowerblue","dodgerblue","deepskyblue","lightskyblue","skyblue","lightsteelblue","lightblue","powderblue","paleturquoise","lightcyan","aliceblue","azure","mintcream","darkslategray","cadetblue","teal","darkcyan","lightseagreen","darkturquoise","mediumturquoise","turquoise","aqua","cyan","mediumaquamarine","aquamarine","darkolivegreen","olive","olivedrab","darkkhaki","darkgreen","green","forestgreen","seagreen","mediumseagreen","darkseagreen","mediumspringgreen","springgreen","palegreen","honeydew","limegreen","lime","lightgreen","lawngreen","chartreuse","greenyellow","yellowgreen","indigo","purple","darkmagenta","darkviolet","darkorchid","mediumorchid","orchid","violet","plum","thistle","blueviolet","mediumpurple","slateblue","mediumslateblue","lavender","mediumvioletred","magenta","fuchsia","deeppink","palevioletred","hotpink","lightpink","pink","mistyrose","lavenderblush","maroon","darkred","firebrick","crimson","red","orangered","tomato","indianred","lightcoral","salmon","darksalmon","lightsalmon","coral","darkorange","orange","sandybrown","darkgoldenrod","goldenrod","gold","yellow","khaki","palegoldenrod","lemonchiffon","cornsilk","lightgoldenrodyellow","beige","lightyellow","ivory","rosybrown","saddlebrown","brown","sienna","chocolate","peru","tan","burlywood","wheat","navajowhite","peachpuff","moccasin","bisque","blanchedalmond","papayawhip","antiquewhite","linen","oldlace","seashell","floralwhite","snow");
+	$CC = array("","black","dimgray","gray","darkgray","silver","lightgrey","gainsboro","whitesmoke","ghostwhite","white","slategray","lightslategray","midnightblue","navy","darkblue","darkslateblue","mediumblue","blue","steelblue","royalblue","cornflowerblue","dodgerblue","deepskyblue","lightskyblue","skyblue","lightsteelblue","lightblue","powderblue","paleturquoise","lightcyan","aliceblue","azure","mintcream","darkslategray","cadetblue","teal","darkcyan","lightseagreen","darkturquoise","mediumturquoise","turquoise","aqua","cyan","mediumaquamarine","aquamarine","darkolivegreen","olive","olivedrab","darkkhaki","darkgreen","green","forestgreen","seagreen","mediumseagreen","darkseagreen","mediumspringgreen","springgreen","palegreen","honeydew","limegreen","lime","lightgreen","lawngreen","chartreuse","greenyellow","yellowgreen","indigo","purple","darkmagenta","darkviolet","darkorchid","mediumorchid","orchid","violet","plum","thistle","blueviolet","mediumpurple","slateblue","mediumslateblue","lavender","mediumvioletred","magenta","fuchsia","deeppink","palevioletred","hotpink","lightpink","pink","mistyrose","lavenderblush","maroon","darkred","firebrick","crimson","red","orangered","tomato","indianred","lightcoral","salmon","darksalmon","lightsalmon","coral","darkorange","orange","sandybrown","darkgoldenrod","goldenrod","gold","yellow","khaki","palegoldenrod","lemonchiffon","cornsilk","lightgoldenrodyellow","beige","lightyellow","ivory","rosybrown","saddlebrown","brown","sienna","chocolate","peru","tan","burlywood","wheat","navajowhite","peachpuff","moccasin","bisque","blanchedalmond","papayawhip","antiquewhite","linen","oldlace","seashell","floralwhite","snow");
 
-if (trim($C)!="")
-{
-	if (!in_array($C, $CC))
+	if (trim($C)!="")
 	{
-		$C="lime";
+		if (!in_array($C, $CC))
+		{
+			$C="lime";
+		}
 	}
-}
 
 	//Color's Power Filter Mod by Ciprian
 	if (isset($_COOKIE["CookieColor"]) && (!isset($C))) $C = strcasecmp($_COOKIE["CookieColor"], $COLOR_TB) != 0 ? $_COOKIE["CookieColor"] : '';

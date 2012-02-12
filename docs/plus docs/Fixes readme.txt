@@ -14,7 +14,8 @@ Client browsers - tested with:
 Server environment - tested env:
 	- Apache < 2.2.21 (Unix and Windows 2k/XP<SP3 & Vista);
 	- php < 5.3.5 (non-safe-mode, but also a safe mode server has been tested and worked fine);
-	- MySQL < 5.1.41;
+	- MySQL < 5.4;
+	- MySQL >= 5.4 - just a calendar response from bot is bogus (still working on it);
 	- exif support enabled (gif/jpeg processing);
 	- GD2 support enabled (gif/jpeg processing);
 	- mail function support (optional but recommended).
@@ -33,8 +34,11 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 01.02.2012 - 1.94-beta8:
+- fixed a logs.lib.php bug on exporting /me commands; (functionality related)
+- fixed the closing browser notify message; (functionality related)
+- upgraded the installer to support MySQL 5 engine MyISAM type; (compatibility related)
 - email list fix in send email tab/admin panel to separate banned users from the reg_users list; (functionality related)
-- added some more reductions for AliceBot as well as fixing some date/time features; (functionality extension)
+- added some more reductions for AliceBot as well as fixing some date/time & calendar features; (functionality extension)
 - finished upgrading to php5.3.0 compatibility by changing all ereg functions to the according preg/strpos/strstr functions; (compatibility related)
 01.12.2011 - 1.94-beta7:
 - several code/bugs fixes (e.g. closing browser notice); (functionality related)

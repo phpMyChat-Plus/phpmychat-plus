@@ -34,7 +34,8 @@ header("Pragma: no-cache");
 header("Content-Type: text/html; charset=${Charset}");
 
 // Avoid server configuration for magic quotes
-set_magic_quotes_runtime(0);
+if (function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
+else ini_set("magic_quotes_runtime", 0);
 // Can't turn off magic quotes gpc so just redo what it did if it is on.
 if (get_magic_quotes_gpc()) {
 	foreach($_GET as $k=>$v)

@@ -256,7 +256,7 @@ if ($action != "submit")
 		$bot_loaded = 1;
 	}
 $ColorList = str_replace('"', "", COLORLIST);
-	settype($app_version = APP_VERSION, "double");
+	settype($app_version = APP_VERSION, "float");
 	$selected = ((L_SELECTED_F != "") ? L_SELECTED_F : L_SELECTED);
 	$not_selected = ((L_NOT_SELECTED_F != "") ? L_NOT_SELECTED_F : L_NOT_SELECTED);
 	$null = ((L_NULL_F != "") ? L_NULL_F : L_NULL);
@@ -309,7 +309,7 @@ if (UPD_CHECK)
 		if (isset($_GET['alv']) && isset($_GET['alm'])) {
 			define("APP_LAST_VERSION", $alv);
 			define("APP_LAST_MINOR", $alm);
-			settype($app_last_version = APP_LAST_VERSION, "double");
+			settype($app_last_version = APP_LAST_VERSION, "float");
 		} else {
 		  echo "<script language=\"javascript\" type=\"text/javascript\" src=\"$updatepath1\"></script>\n";
 		  echo "<script language=\"javascript\">\n";
@@ -324,7 +324,7 @@ if (UPD_CHECK)
 		if (isset($_GET['alv']) && isset($_GET['alm'])) {
 			define("APP_LAST_VERSION", $alv);
 			define("APP_LAST_MINOR", $alm);
-			settype($app_last_version = APP_LAST_VERSION, "double");
+			settype($app_last_version = APP_LAST_VERSION, "float");
 		} else {
 		  echo "<script language=\"javascript\" type=\"text/javascript\" src=\"$updatepath2\"></script>\n";
 		  echo "<script language=\"javascript\">\n";
@@ -335,8 +335,8 @@ if (UPD_CHECK)
 	}
 	else
 	{
-		settype($app_last_version = APP_VERSION, "double");
 		$upd_possible = 0;
+		settype($app_last_version = APP_VERSION, "float");
 	}
 }
 ?>
@@ -402,7 +402,7 @@ if (UPD_CHECK)
  {
 #  	if (ereg("f",APP_LAST_MINOR) || ereg("ß",APP_LAST_MINOR) || ereg("RC",APP_LAST_MINOR)) $minor_dir = "/Fixes/";
  	if (stripos(APP_LAST_MINOR,"f") !== false) $minor_dir = "/Fixes/";
- 	elseif (strpos(APP_LAST_MINOR,"ß") !== false || stripos(APP_LAST_MINOR,"RC") !== false) $minor_dir = "/Betas/";
+# 	elseif (strpos(APP_LAST_MINOR,"ß") !== false || stripos(APP_LAST_MINOR,"RC") !== false) $minor_dir = "/Betas/";
  	else $minor_dir = "/";
  	?>
  						<li><a href="http://www.ciprianmp.com/atm/index.php?directory=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_LAST_VERSION.$minor_dir); ?>" target=_blank Title="Download the <?php echo(APP_NAME." - ".APP_LAST_VERSION.APP_LAST_MINOR); ?> Update" onMouseOver="window.status='Download <?php echo(APP_NAME." - ".APP_LAST_VERSION.APP_LAST_MINOR); ?> Update.'; return true">Download <?php echo(APP_LAST_VERSION.APP_LAST_MINOR); ?></a></li>
