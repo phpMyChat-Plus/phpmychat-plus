@@ -196,11 +196,13 @@ if (C_BOT_CONTROL) include("./bot/respond.php");
 // ** Send formated messages to the message table **
 function AddMessage($M, $T, $R, $U, $C, $Private, $Read, $RF, $Charset)
 {
-	if (C_BOT_CONTROL && C_BOT_PUBLIC && $Private == "")
+#	if (C_BOT_CONTROL && C_BOT_PUBLIC && $Private == "")
+	if (C_BOT_CONTROL && C_BOT_PUBLIC && $Private == "" && !(preg_match("#^\/#", $M) || preg_match("#^:#", $M)))
 	{
 		//--Bot Control Popeye
-	$botpath = "botfb/" . $U . ".txt" ;
-	$botcontrol ="botfb/" . $R . ".txt";
+#		include("./bot/respond.php";
+		$botpath = "botfb/" . $U . ".txt" ;
+		$botcontrol ="botfb/" . $R . ".txt";
 		if(file_exists($botcontrol))
 		{
 	# 		if (file_exists ($botpath) || eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)))
