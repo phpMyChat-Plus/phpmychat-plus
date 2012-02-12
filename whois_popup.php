@@ -291,7 +291,7 @@ if (C_USE_AVATARS)
 		require("./plugins/gravatars/get_gravatar.php");
 	}
 ?>
-<br /><br /><div align="center"><img src="<?php echo($avatar); ?>" width="<?php echo(C_AVA_WIDTH); ?>" height="<?php echo(C_AVA_HEIGHT); ?>" border="0" alt="<?php echo($avatar == $gravatar ? "Gravatar" : L_AVATAR); ?>"></div>
+<br /><br /><div align="center"><img src="<?php echo($avatar); ?>" width="<?php echo(C_AVA_WIDTH); ?>" height="<?php echo(C_AVA_HEIGHT); ?>" border="0" alt="<?php echo($avatar == $gravatar ? "Gravatar" : L_AVATAR); ?>" title="<?php echo($avatar == $gravatar ? "Gravatar" : L_AVATAR); ?>"></div>
 <?php
 }
 ?>
@@ -320,7 +320,7 @@ if ($show_bday && $my_dobtime)
 {
 	$longdtformat = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e").date('S',$my_dobtime)." of"), L_LONG_DATE) : L_LONG_DATE);
 	$dob_format = $show_age ? $longdtformat : trim(str_replace(array("%Y.","%Y","(%A)","%A",",","-","年","년","den"),"",str_replace("  "," ",$longdtformat)));
-	$my_dob_time = stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime($dob_format, $my_dobtime)) : strftime($dob_format, $my_dobtime);
+	$my_dob_time = stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,$Charset,strftime($dob_format, $my_dobtime)) : strftime($dob_format, $my_dobtime);
 	?>
 	<TR>
 		<TD CLASS="whois" nowrap="nowrap"><?php echo(L_PRO_7); ?>: </TD>
@@ -367,7 +367,7 @@ else $gender = L_REG_48;
 ?>
 <TR>
 	<TD CLASS="whois" nowrap="nowrap"><?php echo(L_REG_45); ?>: </TD>
-	<TD CLASS="whois" nowrap="nowrap"><?php echo($gender); ?>&nbsp;<img src="<?php echo("images/gender_".$gender1.".gif\" width=\"$ava_width\" height=\"$ava_height\" border=\"0\" alt=\"$gender\"") ?>></TD>
+	<TD CLASS="whois" nowrap="nowrap"><?php echo($gender); ?>&nbsp;<img src="<?php echo("images/gender_".$gender1.".gif\" width=\"$ava_width\" height=\"$ava_height\" border=\"0\" alt=\"$gender\" title=\"$gender\"") ?>></TD>
 </TR>
 
 <?php
@@ -396,7 +396,7 @@ if ($showemail || ($power != "weak" && $email != 'bot@bot.com' && $email != 'quo
 	?>
 	<TR>
 		<TD CLASS="whois" nowrap="nowrap"><?php echo(L_REG_8); ?>: </TD>
-		<TD nowrap="nowrap"><A HREF="mailto:<?php echo(htmlspecialchars($email)); ?>" title="<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>.'; return true"><?php echo(htmlspecialchars($email)); ?></A></TD>
+		<TD nowrap="nowrap"><A HREF="mailto:<?php echo(htmlspecialchars($email)); ?>" title="<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_EMAIL_1)); ?>.'; return true" target="_blank"><?php echo(htmlspecialchars($email)); ?></A></TD>
 	</TR>
 	<?php
 };

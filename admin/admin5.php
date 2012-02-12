@@ -808,7 +808,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<input type=hidden name="FORM_SEND" id="FORM_SEND" value="5">
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="server"></a><b>Chat Server data</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -863,7 +863,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="languages"></a><b>Languages</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -990,7 +990,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="owner"></a><b>Owner data</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -1061,7 +1061,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="registration"></a><b>Registration</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -1156,7 +1156,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="functionality"></a><b>Functionality</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -1313,7 +1313,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="timings"></a><b>Timings</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -1367,7 +1367,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="schedule"></a><b>Open Schedule</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -1405,7 +1405,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="layout"></a><b>Login layout</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -1572,7 +1572,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="skins"></a><b>Rooms & Skins</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -1819,7 +1819,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="colors"></a><b>Colors</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -1987,7 +1987,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="sounds"></a><b>Sound settings</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -2035,7 +2035,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="profanity"></a><b>Profanity</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -2089,7 +2089,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="pm"></a><b>Private messaging</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -2140,7 +2140,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="bot"></a><b>Bot Settings</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -2244,7 +2244,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="commands"></a><b>Commands</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -2337,7 +2337,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="mmedia"></a><b>Multimedia</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -2385,7 +2385,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="quick"></a><b>Quick Menus</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -2416,7 +2416,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="avatars"></a><b>Avatars & Gravatars</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -2621,7 +2621,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="logging"></a><b>Logging Mod</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -2659,7 +2659,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="lurking"></a><b>Lurking Mod</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -2698,7 +2698,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="quote"></a><b>Random Quote</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -2822,7 +2822,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="ghost"></a><b>Ghost Control</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
@@ -2865,7 +2865,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </table>
 <table align="center" width="780" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="bday"></a><b>Birthday Mod</b></td></tr>
-	<tr class=\"thumbIndex\">
+	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>

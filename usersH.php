@@ -347,7 +347,8 @@ while(list($User, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup,
 		// Gravatar mod added by Ciprian
 		if (ALLOW_GRAVATARS == 2 || (ALLOW_GRAVATARS == 1 && (!isset($use_gravatar) || $use_gravatar)))
 		{
-			if (eregi(C_AVA_RELPATH, $avatar)) $local_avatar = 1;
+#			if (eregi(C_AVA_RELPATH, $avatar)) $local_avatar = 1;
+			if (stripos($avatar,C_AVA_RELPATH) !== false) $local_avatar = 1;
 			else $local_avatar = 0;
 			require("plugins/gravatars/get_gravatar.php");
 		}

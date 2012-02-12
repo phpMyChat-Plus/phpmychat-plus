@@ -61,7 +61,7 @@ function Check4Smilies(&$string,&$Table)
 		{
 		}
 		// $substring is not an HTTP link -> do the work for smilies
-		elseif (($i % 2) == 0)
+		elseif ($i % 2 == 0)
 		{
 			while(list($key, $prop) = each($Table))
 			{
