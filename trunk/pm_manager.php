@@ -26,6 +26,7 @@ if (preg_match("/SELECT|UNION|INSERT|UPDATE/i",$_SERVER["QUERY_STRING"])) exit()
 
 // Added for Skin mod
 if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
+if (!isset($R)) $skin = "skins/style1";
 
 require("./config/config.lib.php");
 require("./lib/release.lib.php");
@@ -69,22 +70,22 @@ if (!isset($sortOrder)) $sortOrder = "ASC";
 if($mord == "F")
 {
     $sqlT = " ORDER BY username $sortOrder, m_time DESC;";
-	$arrowf = ($sortOrder == "ASC") ? "<img src='./${ChatPath}images/arrowu.gif' border=0 alt='".L_ASC."'>" : "<img src='./${ChatPath}images/arrowd.gif' border=0 alt='".L_DESC."'>";
+	$arrowf = ($sortOrder == "ASC") ? "<img src='./${ChatPath}images/arrowu.gif' border=0 alt='".L_ASC."' title='".L_ASC."'>" : "<img src='./${ChatPath}images/arrowd.gif' border=0 alt='".L_DESC."' title='".L_DESC."'>";
 }
 else if($mord == "R")
 {
     $sqlT = " ORDER BY room_from $sortOrder, m_time DESC;";
-	$arrowr = ($sortOrder == "ASC") ? "<img src='./${ChatPath}images/arrowu.gif' border=0 alt='".L_ASC."'>" : "<img src='./${ChatPath}images/arrowd.gif' border=0 alt='".L_DESC."'>";
+	$arrowr = ($sortOrder == "ASC") ? "<img src='./${ChatPath}images/arrowu.gif' border=0 alt='".L_ASC."' title='".L_ASC."'>" : "<img src='./${ChatPath}images/arrowd.gif' border=0 alt='".L_DESC."' title='".L_DESC."'>";
 }
 else if($mord == "S")
 {
     $sqlT = " ORDER BY pm_read ".($sortOrder == "DESC" ? "ASC" : "DESC").", m_time DESC;";
-	$arrows = ($sortOrder == "ASC") ? "<img src='./${ChatPath}images/arrowu.gif' border=0 alt='".L_ASC."'>" : "<img src='./${ChatPath}images/arrowd.gif' border=0 alt='".L_DESC."'>";
+	$arrows = ($sortOrder == "ASC") ? "<img src='./${ChatPath}images/arrowu.gif' border=0 alt='".L_ASC."' title='".L_ASC."'>" : "<img src='./${ChatPath}images/arrowd.gif' border=0 alt='".L_DESC."' title='".L_DESC."'>";
 }
 else
 {
     $sqlT = " ORDER BY m_time $sortOrder;";
-	$arrowt = ($sortOrder == "ASC") ? "<img src='./${ChatPath}images/arrowu.gif' border=0 alt='".($L == "turkish" ? L_ASC_T : L_ASC)."'>" : "<img src='./${ChatPath}images/arrowd.gif' border=0 alt='".($L == "turkish" ? L_DESC_T : L_DESC)."'>";
+	$arrowt = ($sortOrder == "ASC") ? "<img src='./${ChatPath}images/arrowu.gif' border=0 alt='".($L == "turkish" ? L_ASC_T : L_ASC)."' title='".($L == "turkish" ? L_ASC_T : L_ASC)."'>" : "<img src='./${ChatPath}images/arrowd.gif' border=0 alt='".($L == "turkish" ? L_DESC_T : L_DESC)."' title='".($L == "turkish" ? L_DESC_T : L_DESC)."'>";
 }
 
 // Translate to html special characters, and entities if message was sent with a latin 1 charset
