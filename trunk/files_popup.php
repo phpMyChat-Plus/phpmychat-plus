@@ -337,7 +337,7 @@ function EditSmilies(&$ToDisplay,&$Table,&$TblSize,$Target)
 			$Str1 .= "\t\t<TD ALIGN=\"CENTER\" VALIGN=\"BOTTOM\" NOWRAP=\"NOWRAP\">
 			".($i+$k).".&nbsp;<INPUT TYPE=text SIZE=12 NAME=$key VALUE=".stripslashes($key)." TITLE=\"Smilie Code\"></TD>
 			<TD ALIGN=\"CENTER\" VALIGN=\"TOP\">
-			<IMG SRC=images/smilies/$prop BORDER=0 ALT=\"".stripslashes($prop)."\"></TD>\n";
+			<IMG SRC=images/smilies/$prop BORDER=0 ALT=\"".stripslashes($prop)."\" TITLE=\"".stripslashes($prop)."\"></TD>\n";
 		}
 		if  ($i+$k == $TblSize) {
 			if ($Str1 != "") $ToDisplay[] = "<TABLE BORDER=0 CELLPADDING=3 WIDTH=100% CLASS=\"table\" COLSPAN=6><TR>\n<TH ALIGN=CENTER COLSPAN=6 class=success><HR>Defined Smilies<HR></TH>\n".$Str1."</TR></TABLE>\n";
@@ -536,7 +536,7 @@ elseif (strstr($type,"smilies_"))
 				echo "\t\t<TD ALIGN=\"CENTER\" VALIGN=\"BOTTOM\" NOWRAP=\"NOWRAP\"><INPUT TYPE=hidden NAME=\"extra_image_".$lines."\" VALUE=\"".$extra_smilie."\">
 				".$lines.".&nbsp;Set Code:&nbsp;<INPUT TYPE=text SIZE=12 NAME=\"extra_key_".$lines."\" VALUE=\"".((isset($_POST["extra_image_".$lines.""]) && $_POST["extra_image_".$lines.""] == $extra_smilie) ? $_POST["extra_key_".$lines.""] : "")."\" TITLE=\"Enter Code for ".$extra_smilie."\"></TD>
 				<TD ALIGN=\"CENTER\" VALIGN=\"TOP\" NOWRAP=\"NOWRAP\">
-				<IMG SRC=images/smilies/".$extra_smilie." BORDER=0 ALT=\"Available Image\"></TD>\n";
+				<IMG SRC=images/smilies/".$extra_smilie." BORDER=0 ALT=\"Available Image\" TITLE=\"Available Image\"></TD>\n";
 				$lines++;
 			}
 			echo "<TD><INPUT TYPE=hidden NAME=\"lines\" VALUE=\"".($lines-1)."\"></TD>";

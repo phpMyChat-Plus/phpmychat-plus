@@ -27,7 +27,9 @@ if (preg_match("/SELECT|UNION|INSERT|UPDATE/i",$_SERVER["QUERY_STRING"])) exit()
 
 // Added for Skin mod
 if (isset($_COOKIE["CookieRoom"]) && !isset($R)) $R = urldecode($_COOKIE["CookieRoom"]);
-if (!isset($R)) $skin = "skins/style1";
+#if (!isset($R)) $skin = "skins/style1";
+
+if (isset($_COOKIE["CookieLang"])) $L = urldecode($_COOKIE["CookieLang"]);
 
 require("config/config.lib.php");
 require("lib/release.lib.php");
@@ -85,13 +87,11 @@ else if($mord == "A")
     $sqlT = " ORDER BY age $sortOrder, username ASC";
 	$arrowa = ($sortOrder == "ASC") ? "<img src='./${ChatPath}images/arrowu.gif' border=0 alt='".L_ASC."' title='".L_ASC."'>" : "<img src='./${ChatPath}images/arrowd.gif' border=0 alt='".L_DESC."' title='".L_DESC."'>";
 }
-/*
 else if($mord == "X")
 {
-    $sqlT = " ORDER BY pm_read ".($sortOrder == "DESC" ? "ASC" : "DESC").", m_time DESC;";
+    $sqlT = " ORDER BY gender $sortOrder, username ASC;";
 	$arrowx = ($sortOrder == "ASC") ? "<img src='./${ChatPath}images/arrowu.gif' border=0 alt='".L_ASC."' title='".L_ASC."'>" : "<img src='./${ChatPath}images/arrowd.gif' border=0 alt='".L_DESC."' title='".L_DESC."'>";
 }
-*/
 else
 {
     $sqlT = " ORDER BY RIGHT(birthday,5) $sortOrder, age DESC";
@@ -168,7 +168,7 @@ else
 	<tr>
 		<td style="vertical-align:middle; text-align:center;" class=tabtitle>#</td>
 		<td style="vertical-align:middle; text-align:center;" class=tabtitle></td>
-		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo(L_REG_45); ?></td>
+		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo($arrowx."&nbsp;<a href=\"$pstr&mord=X&sortOrder=".($sortOrder == "DESC" ? "ASC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_17)."\" onMouseOver=\"sort_status('DESC'); return true;\"" : "DESC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_18)."\" onMouseOver=\"sort_status('ASC'); return true;\"")."\" class=\"tabtitle\">".L_REG_45."</a>"); ?></td>
 		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo($arrowu."&nbsp;<a href=\"$pstr&mord=U&sortOrder=".($sortOrder == "DESC" ? "ASC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_17)."\" onMouseOver=\"sort_status('DESC'); return true;\"" : "DESC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_18)."\" onMouseOver=\"sort_status('ASC'); return true;\"")."\" class=\"tabtitle\">".L_SET_2."</a>"); ?></td>
 		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo(L_REG_30); ?></td>
 		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo(L_REG_31); ?></td>
@@ -215,15 +215,15 @@ else
 				$dob_name = $dob_firstname != "" ? $dob_firstname : $User;
 				?>
 				<?php
-				echo("\n\t<TR".($i & 1 ? " bgcolor=\"#B0C4DE\"" : "").">\n\t");
+				echo("\n\t<TR".($i & 1 ? " bgcolor=\"#C0C0C0\"" : "").">\n\t");
 				echo("<TD style=\"vertical-align:middle; text-align:center;\" class=\"notify\">".$i."</TD>");
 				echo("<TD style=\"vertical-align:middle; text-align:center;\" class=\"notify\">".(C_USE_AVATARS ? "<img src=\"".$avatar."\" width=\"25\" height=\"25\" border=\"0\" alt=\"".L_AVATAR."\" title=\"".L_AVATAR."\">" : "")."</TD>");
 				echo("<TD style=\"vertical-align:middle; text-align:center;\"><img src=\"images/gender_".$gender1.".gif\" width=\"".$ava_width."\" height=\"".$ava_height."\" border=\"0\" alt=\"".$gender."\" title=\"".$gender."\"></TD>");
 				echo("<TD style=\"vertical-align:middle; text-align:left;\" class=\"notify\">".($dob_showemail ? "<A HREF=\"mailto:".htmlspecialchars($email)."\" title=\"".sprintf(L_CLICK,L_EMAIL_1)."\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_EMAIL_1).".'; return true\" target=\"_blank\">".$User."</A>" : $User)."</TD>");
 				echo("<TD style=\"vertical-align:middle; text-align:left;\" class=\"notify\">".$dob_firstname."</TD>");
 				echo("<TD style=\"vertical-align:middle; text-align:left;\" class=\"notify\">".$dob_lastname."</TD>");
-				echo("<TD style=\"vertical-align:middle; text-align:left;\" class=\"notify\">".$dob_time."</TD>");
-				echo("<TD style=\"vertical-align:middle; text-align:right;\" class=\"notify\">".($dob_showage ? $dob_age : "**")."</TD>");
+				echo("<TD style=\"vertical-align:middle; text-align:center;\" class=\"notify\">".$dob_time."</TD>");
+				echo("<TD style=\"vertical-align:middle; text-align:center;\" class=\"notify\">".($dob_showage ? $dob_age : "**")."</TD>");
 				echo("\n\t</TR>\n");
 				$i++;
 			}
@@ -258,7 +258,7 @@ else
 </FORM>
 </CENTER>
 <P align="right"><div align="right"><span dir="LTR" style="font-weight: 600; color:#FFD700; font-size: 7pt">
-&copy; 2012-<?php echo(date('Y')); ?> - by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>.'; return true;" title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>" target=_blank>Ciprian Murariu</a></span></div>
+&copy; 2012<?php echo((date('Y')>"2012") ? "-".date('Y') : ""); ?> - by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>.'; return true;" title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>" target=_blank>Ciprian Murariu</a></span></div></P>
 </BODY>
 </HTML>
 <?php

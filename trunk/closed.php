@@ -1,7 +1,8 @@
 <?php
 if (isset($_COOKIE["CookieLang"])) $L = urldecode($_COOKIE["CookieLang"]);
 if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
-if (!isset($R)) $skin = "skins/style1";
+#if (!isset($R)) $skin = "skins/style1";
+
 require("./config/config.lib.php");
 require("./lib/release.lib.php");
 if (!isset($L) || $L == "") $L = C_LANGUAGE;

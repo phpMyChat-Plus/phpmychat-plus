@@ -26,7 +26,7 @@ if (preg_match("/SELECT|UNION|INSERT|UPDATE/i",$_SERVER["QUERY_STRING"])) exit()
 
 // Added for Skin mod
 if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
-if (!isset($R)) $skin = "skins/style1";
+#if (!isset($R)) $skin = "skins/style1";
 
 require("./config/config.lib.php");
 require("./lib/release.lib.php");

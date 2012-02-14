@@ -14,7 +14,7 @@ if (preg_match("/SELECT|UNION|INSERT|UPDATE/i",$_SERVER["QUERY_STRING"])) exit()
 
 if (isset($_COOKIE["CookieStatus"])) $statusu = $_COOKIE["CookieStatus"];
 if (isset($_COOKIE["CookieRoom"]) && !isset($R)) $R = urldecode($_COOKIE["CookieRoom"]);
-if (!isset($R)) $skin = "skins/style1";
+#if (!isset($R)) $skin = "skins/style1";
 
 require("config/config.lib.php");
 if (!isset($L) || $L == "") $L = C_LANGUAGE;

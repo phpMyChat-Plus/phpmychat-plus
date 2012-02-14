@@ -1192,7 +1192,7 @@ define ("C_SHOW_LOGO", $SHOW_LOGO);
 define ("C_LOGO_IMG", $LOGO_IMG);
 define ("C_LOGO_OPEN", $LOGO_OPEN);
 define ("C_LOGO_ALT", $LOGO_ALT);
-define ("APP_LOGO", "<A HREF='".$LOGO_OPEN."' TITLE='".$LOGO_ALT."' onMouseOver=\"window.status='".C_LOGO_ALT."'; return true\" TARGET=_blank><IMG SRC='".$LOGO_IMG."' BORDER=0 ALT='".$LOGO_ALT."'></A>");  // Application logo image
+define ("APP_LOGO", "<A HREF='".$LOGO_OPEN."' TITLE='".$LOGO_ALT."' onMouseOver=\"window.status='".C_LOGO_ALT."'; return true\" TARGET=_blank><IMG SRC='".$LOGO_IMG."' BORDER=0 ALT='".$LOGO_ALT."' TITLE='".$LOGO_ALT."'></A>");  // Application logo image
 
 // Show private rooms selection box on first page
 define ("C_SHOW_PRIV", $SHOW_PRIV);
@@ -1916,7 +1916,7 @@ else {
   	fputs ( $fh, 'define ("C_LOGO_IMG", $LOGO_IMG);'.$lfeed );
   	fputs ( $fh, 'define ("C_LOGO_OPEN", $LOGO_OPEN);'.$lfeed );
   	fputs ( $fh, 'define ("C_LOGO_ALT", $LOGO_ALT);'.$lfeed );
-  	fputs ( $fh, 'define ("APP_LOGO", "<A HREF=\'".$LOGO_OPEN."\' TITLE=\'".$LOGO_ALT."\' onMouseOver=\"window.status=\'".C_LOGO_ALT."\'; return true\" TARGET=_blank><IMG SRC=\'".$LOGO_IMG."\' BORDER=0 ALT=\'".$LOGO_ALT."\'></A>");  // Application logo image'.$lfeed );
+  	fputs ( $fh, 'define ("APP_LOGO", "<A HREF=\'".$LOGO_OPEN."\' TITLE=\'".$LOGO_ALT."\' onMouseOver=\"window.status=\'".C_LOGO_ALT."\'; return true\" TARGET=_blank><IMG SRC=\'".$LOGO_IMG."\' BORDER=0 ALT=\'".$LOGO_ALT."\' TITLE=\'".$LOGO_ALT."\'></A>");  // Application logo image'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// Show private rooms selection box on first page'.$lfeed );
   	fputs ( $fh, 'define ("C_SHOW_PRIV", $SHOW_PRIV);'.$lfeed );

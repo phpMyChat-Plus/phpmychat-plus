@@ -351,7 +351,7 @@ if (UPD_CHECK)
 					<li><a href="#registration">Registration</a></li>
 					<li><a href="#functionality">Functionality</a></li>
 					<li><a href="#timings">Timings</a></li>
-					<li><a href="#schedule">Open Schedule</a></li>
+					<li><a href="#schedule">Chat Schedule</a></li>
 				</ul>
 			</dd>
 	</dl>
@@ -1366,13 +1366,13 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="schedule"></a><b>Open Schedule</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="schedule"></a><b>Chat Schedule</b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Open times Schedule for your chat and rooms.</b><br />
+    <td><b>Open times Schedule for your chat and chatrooms.</b><br />
     	<font color=red>Important: This mod is still under development! The schedule fields have deliberately been disabled.</font></i>
     </td>
     <td align="center">

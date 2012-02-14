@@ -59,34 +59,6 @@ if (!isset($FontName)) $FontName = "";
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
 <HEAD>
-<SCRIPT TYPE="text/javascript" LANGUAGE="javascript1.2">
-<!--
-// Open the tutorial popup
-	function tutorial_popup()
-	{
-		window.focus();
-		tutorial_popupWin = window.open('<?php echo("./${ChatPath}tutorial_popup.php?L=$L&Ver=$Ver"); ?>','tutorial_popup','width=700,height=800,resizable=yes,scrollbars=yes,toolbar=yes,menubar=yes,status=yes');
-		tutorial_popupWin.focus();
-	}
-
-	// Open popups from users frame
-	function reg_popup(name)
-	{
-	if (name == "register") var u_name = "&U=";
-	else var u_name = "&pmc_username=";
-	if (name == "admin") var link = "&Link=1";
-	else var link = "";
-		window.focus();
-		url = '<?php echo("${ChatPath}"); ?>' + name + '<?php echo(".php?L=$L"); ?>' + u_name + '<?php echo(urlencode(stripslashes($U))."&LIMIT=1"); ?>' + link;
-		pop_width = ((name != 'admin' && name != 'pm_manager') ? 470:830);
-		pop_height = ((name != 'deluser' && name != 'pass_reset') ? ((name != 'admin' && name != 'pm_manager') ? 640:580):260);
-		param = "width=" + pop_width + ",height=" + pop_height + ",resizable=yes,scrollbars=yes";
-		if (name == "pm_manager") param = param + ",status=yes";
-		name += "_popup";
-		window.open(url,name,param);
-	}
-// -->
-</SCRIPT>
 <TITLE><?php echo((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME); ?></TITLE>
 <?php
 echo('<meta HTTP-EQUIV="Refresh" CONTENT="30; URL=usersL.php?' . ((isset($QUERY_STRING)) ? $QUERY_STRING : getenv('QUERY_STRING')) . '">');
@@ -765,27 +737,27 @@ for($k = 0; $k < count($DefaultChatRooms); $k++)
 if ($statusu == "a")
 {
 ?>
-<br /><a href="<?php echo($ChatPath."admin.php?L=".$L."&pmc_username=".$U."&LIMIT=1&Link=1"); ?>" onClick="reg_popup('admin'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_35); ?>.'; return true;" title="<?php echo(L_REG_35); ?>"><?php echo(L_REG_35); ?></a>
+<br /><a href="<?php echo($ChatPath."admin.php?L=".$L."&pmc_username=".$U."&LIMIT=1&Link=1"); ?>" onClick="window.parent.reg_popup('admin','<?php echo(urlencode(stripslashes($U))."&LIMIT=1"); ?>'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_35); ?>.'; return true;" title="<?php echo(L_REG_35); ?>"><?php echo(L_REG_35); ?></a>
 <?php
 }
 if ($statusu != "a" && $statusu != "t" && $statusu != "m" && $statusu != "r" && C_ALLOW_REGISTER)
 {
 $Cmd2Send = ("'quit','".special_char2(stripslashes($U),$Latin1)." - L_REG_BRB :p'");
 ?>
-<br /><a href="<?php echo($ChatPath."register.php?L=".$L."&U=".$U."&Link=1"); ?>" onClick="reg_popup('register'); window.parent.runCmd(<?php echo($Cmd2Send); ?>); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_3); ?>.'; return true;" title="<?php echo(L_REG_3); ?>"><?php echo(L_REG_3); ?></a>
+<br /><a href="<?php echo($ChatPath."register.php?L=".$L."&U=".$U."&Link=1"); ?>" onClick="window.parent.reg_popup('register','<?php echo(urlencode(stripslashes($U))."&LIMIT=1"); ?>'); window.parent.runCmd(<?php echo($Cmd2Send); ?>); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_3); ?>.'; return true;" title="<?php echo(L_REG_3); ?>"><?php echo(L_REG_3); ?></a>
 <?php
 }
 if ($statusu == "a" || $statusu == "t" || $statusu == "m" || $statusu == "r")
 {
 ?>
-<br /><a href="<?php echo($ChatPath."edituser.php?L=".$L."&pmc_username=".$U."&LIMIT=1&Link=1"); ?>" onClick="reg_popup('edituser'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_4); ?>.'; return true;" title="<?php echo(L_REG_4); ?>"><?php echo(L_REG_4); ?></a>
+<br /><a href="<?php echo($ChatPath."edituser.php?L=".$L."&pmc_username=".$U."&LIMIT=1&Link=1"); ?>" onClick="window.parent.reg_popup('edituser','<?php echo(urlencode(stripslashes($U))."&LIMIT=1"); ?>'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_4); ?>.'; return true;" title="<?php echo(L_REG_4); ?>"><?php echo(L_REG_4); ?></a>
 <?php
 }
 if ($statusu != "a" && $statusu != "t" && $statusu != "u")
 {
 $Cmd2Send = ("'quit','".special_char2(stripslashes($U),$Latin1)." - L_DEL_BYE :('");
 ?>
-<br /><a href="<?php echo($ChatPath."deluser.php?L=".$L."&pmc_username=".$U."&Link=1"); ?>" onClick="reg_popup('deluser'); window.parent.runCmd(<?php echo($Cmd2Send); ?>); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_5); ?>.'; return true;" title="<?php echo(L_REG_5); ?>"><?php echo(L_REG_5); ?></a>
+<br /><a href="<?php echo($ChatPath."deluser.php?L=".$L."&pmc_username=".$U."&Link=1"); ?>" onClick="window.parent.reg_popup('deluser','<?php echo(urlencode(stripslashes($U))."&LIMIT=1"); ?>'); window.parent.runCmd(<?php echo($Cmd2Send); ?>); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_5); ?>.'; return true;" title="<?php echo(L_REG_5); ?>"><?php echo(L_REG_5); ?></a>
 <?php
 }
 // Private Message Popup mod by Ciprian
@@ -811,14 +783,14 @@ if (C_ENABLE_PM && isset($PWD_Hash))
 	if ($NewPMs || $TotalPMs)
 	{
 	?>
-	<br /><a href="<?php echo($ChatPath."pm_manager.php?L=".$L.""); ?>" onClick="reg_popup('pm_manager'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(($NewPMs == 1) ? L_PRIV_MSG : ($NewPMs ? sprintf(L_PRIV_MSGS,$NewPMs) : ($TotalPMs == 1 ? L_PRIV_READ_MSG : ($TotalPMs ? sprintf(L_PRIV_READ_MSGS,$TotalPMs) : L_PRIV_NO_MSGS)))); ?>'; return true;" title="<?php echo(($NewPMs == 1) ? L_PRIV_MSG : ($NewPMs ? sprintf(L_PRIV_MSGS,$NewPMs) : ($TotalPMs == 1 ? L_PRIV_READ_MSG : ($TotalPMs ? sprintf(L_PRIV_READ_MSGS,$TotalPMs) : L_PRIV_NO_MSGS)))); ?>"><?php echo(!$NewPMs ? L_EXTRA_PRIV1 : "<font class=error>".L_EXTRA_PRIV2."</font>"); ?></a>
+	<br /><a href="<?php echo($ChatPath."pm_manager.php?L=".$L.""); ?>" onClick="window.parent.reg_popup('pm_manager','<?php echo(urlencode(stripslashes($U))."&LIMIT=1"); ?>'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(($NewPMs == 1) ? L_PRIV_MSG : ($NewPMs ? sprintf(L_PRIV_MSGS,$NewPMs) : ($TotalPMs == 1 ? L_PRIV_READ_MSG : ($TotalPMs ? sprintf(L_PRIV_READ_MSGS,$TotalPMs) : L_PRIV_NO_MSGS)))); ?>'; return true;" title="<?php echo(($NewPMs == 1) ? L_PRIV_MSG : ($NewPMs ? sprintf(L_PRIV_MSGS,$NewPMs) : ($TotalPMs == 1 ? L_PRIV_READ_MSG : ($TotalPMs ? sprintf(L_PRIV_READ_MSGS,$TotalPMs) : L_PRIV_NO_MSGS)))); ?>"><?php echo(!$NewPMs ? L_EXTRA_PRIV1 : "<font class=error>".L_EXTRA_PRIV2."</font>"); ?></a>
 	<?php
 	}
 };
 if (C_CHAT_LOGS && (C_SHOW_LOGS_USR || $statusu == "a" || $statusu == "t"))
 {
 ?>
-<br /><a href="<?php echo($ChatPath); ?>logs.php?<?php echo("L=$L"); ?>" TARGET="_blank" onMouseOver="window.status='<?php echo(L_ARCHIVE); ?>.'; return true;" title="<?php echo(L_ARCHIVE); ?>"><?php echo(L_ARCHIVE); ?></a>
+<br /><a href="<?php echo($ChatPath); ?>logs.php?<?php echo("L=$L"); ?>" onClick="window.parent.logs_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_ARCHIVE); ?>.'; return true;" title="<?php echo(L_ARCHIVE); ?>"><?php echo(L_ARCHIVE); ?></a>
 <?php
 }
 if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $statusu == "a" || $statusu == "t"))
@@ -843,7 +815,8 @@ if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $statusu == "a" || $statusu == "t"))
 	$CleanUsrTbl = 1;
 }
 ?>
-<br /><a href="<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>" onClick="tutorial_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_TUTORIAL); ?>.'; return true;" title="<?php echo(L_TUTORIAL); ?>"><?php echo(L_TUTORIAL); ?></a>
+<br /><a href="<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>" onClick="window.parent.tutorial_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_TUTORIAL); ?>.'; return true;" title="<?php echo(L_TUTORIAL); ?>"><?php echo(L_TUTORIAL); ?></a>
+<br /><a href="<?php echo($ChatPath); ?>bday_popup.php?<?php echo("L=$L"); ?>" onClick="window.parent.bday_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_L_DOB_TIT_1); ?>.'; return true;" title="<?php echo(L_DOB_TIT_1); ?>"><?php echo(L_DOB_TIT_1); ?></a>
 <br /><a href="<?php echo($ChatPath); ?>extra/fixes/fixes.zip" TARGET="_blank" onMouseOver="window.status='<?php echo (stristr($_SERVER['HTTP_USER_AGENT'],"MSIE") ? L_SOUNDFIX_IE_2 : str_replace("IE","FF",L_SOUNDFIX_IE_2)) ?>'; return true;" title="<?php echo (stristr($_SERVER['HTTP_USER_AGENT'],"MSIE") ? L_SOUNDFIX_IE_2 : str_replace("IE","FF",L_SOUNDFIX_IE_2)) ?>"><?php echo (stristr($_SERVER['HTTP_USER_AGENT'],"MSIE") ? L_SOUNDFIX_IE_1 : str_replace("IE","FF",L_SOUNDFIX_IE_1)) ?></a>
 </BODY>
 </HTML>
