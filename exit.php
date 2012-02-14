@@ -83,13 +83,17 @@ function close_popups()
 	with (window.parent)
 	{
 		if (is_help_popup && !is_help_popup.closed) is_help_popup.close();
-		// Smilie Popup mod by Cipprian
+		// Smilie Popup mod by Ciprian
 		if (is_smilie_popup && !is_smilie_popup.closed) is_smilie_popup.close();
-		// Buzzes Popup mod by Cipprian
+		// Buzzes Popup mod by Ciprian
 		if (is_buzz_popup && !is_buzz_popup.closed) is_buzz_popup.close();
-		// Private Message Popup mod by Cipprian
+		// Private Message Popup mod by Ciprian
 		if (is_priv_popup && !is_priv_popup.closed) is_priv_popup.close();
 		if (is_send_popup && !is_send_popup.closed) is_send_popup.close();
+		// Birthday Popup mod by Cipprian
+		if (is_bday_popup && !is_bday_popup.closed) is_bday_popup.close();
+		// Logs Popup mod by Cipprian
+		if (is_logs_popup && !is_logs_popup.closed) is_logs_popup.close();
 		if (is_ignored_popup && !is_ignored_popup.closed)
 		{
 			is_ignored_popup.window.document.forms['IgnForm'].elements['Exit'].value = '1';
@@ -151,7 +155,7 @@ if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTT
 	<?php
 }
 ?>
-<a href="<?php echo("$From?Ver=$Ver&L=$L&U=".stripslashes($U)."&E=".urlencode(stripslashes($R))."&EN=$T"); ?>" onClick="close_popups();" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image4','','localization/<?php echo ($L); ?>/images/exitdoorRoll.gif',1); window.status='<?php echo(L_EXIT); ?>.'; return true;" title="<?php echo(L_EXIT); ?>" target="_parent"><img name="Image4" border="0" alt="<?php echo(L_EXIT); ?>" src="localization/<?php echo ($L); ?>/images/exitdoor.gif"></a>
+<a href="<?php echo("$From?Ver=$Ver&L=$L&U=".stripslashes($U)."&E=".urlencode(stripslashes($R))."&EN=$T"); ?>" onClick="close_popups();" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image4','','localization/<?php echo ($L); ?>/images/exitdoorRoll.gif',1); window.status='<?php echo(L_EXIT); ?>.'; return true;" title="<?php echo(L_EXIT); ?>" target="_parent"><img name="Image4" border="0" alt="<?php echo(L_EXIT); ?>" title="<?php echo(L_EXIT); ?>" src="localization/<?php echo ($L); ?>/images/exitdoor.gif"></a>
 <?php
 }
 else
@@ -181,12 +185,12 @@ if ($Ver == "H" && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") !== false)
 	?>
 	<!-- Display the big + clickable icon used to expand/collapse all rooms // -->
 	<A HREF="#" onClick="window.parent.expandAll(); return false" onMouseOver="window.status='<?php echo(L_EXPCOL_ALL); ?>.'; return true;" title="<?php echo(L_EXPCOL_ALL); ?>">
-	<IMG NAME="imEx_big" SRC="images/closed_big.gif" WIDTH=13 HEIGHT=13 ALIGN="MIDDLE" BORDER=0 ALT="<?php echo(L_EXPCOL_ALL); ?>"></A>
+	<IMG NAME="imEx_big" SRC="images/closed_big.gif" WIDTH=13 HEIGHT=13 ALIGN="MIDDLE" BORDER=0 ALT="<?php echo(L_EXPCOL_ALL); ?>" TITLE="<?php echo(L_EXPCOL_ALL); ?>"></A>
 	&nbsp;
 	<?php
 }
 ?>
-<A HREF="users_popup<?php echo($Ver1); ?>.php?<?php echo("From=$From&L=$L"); ?>" onClick="if (window.parent.frames['input'] && window.parent.frames['input'].window.document.forms['MsgForm'].elements['M']) window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].focus(); users_popup(); return false" onMouseOver="window.status='<?php echo(L_DETACH); ?>.'; return true;" title="<?php echo(L_DETACH); ?>" TARGET="_blank"><IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 ALIGN="MIDDLE" BORDER=0 ALT="<?php echo(L_DETACH); ?>"></A>
+<A HREF="users_popup<?php echo($Ver1); ?>.php?<?php echo("From=$From&L=$L"); ?>" onClick="if (window.parent.frames['input'] && window.parent.frames['input'].window.document.forms['MsgForm'].elements['M']) window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].focus(); users_popup(); return false" onMouseOver="window.status='<?php echo(L_DETACH); ?>.'; return true;" title="<?php echo(L_DETACH); ?>" TARGET="_blank"><IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 ALIGN="MIDDLE" BORDER=0 ALT="<?php echo(L_DETACH); ?>" TITLE="<?php echo(L_DETACH); ?>"></A>
 <?php
 if ($Ver == "H")
 {
@@ -194,7 +198,7 @@ if ($Ver == "H")
 	<!-- Display the connection state icon // -->
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<A HREF="#" onMouseOver="window.status='<?php echo(L_CONN_STATE); ?>.'; return true;" onClick="if (window.parent.frames['input'] && window.parent.frames['input'].window.document.forms['MsgForm'].elements['M']) window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].focus(); window.parent.reConnect(); return false" title="<?php echo(L_CONN_STATE); ?>">
-	<IMG NAME="ConState" SRC="images/connectOff.gif" WIDTH=13 HEIGHT=13 ALIGN="MIDDLE" BORDER=0 ALT="<?php echo(L_CONN_STATE); ?>"></A>
+	<IMG NAME="ConState" SRC="images/connectOff.gif" WIDTH=13 HEIGHT=13 ALIGN="MIDDLE" BORDER=0 ALT="<?php echo(L_CONN_STATE); ?>" TITLE="<?php echo(L_CONN_STATE); ?>"></A>
 	<?php
 }
 #if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT'])))

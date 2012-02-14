@@ -926,7 +926,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript1.2">
 	<!--
 <?php
-// Display & remove the server time in the status bar
+	// Display & remove the server time in the status bar
 	include_once("./${ChatPath}lib/worldtime.lib.php");
 	$CorrectedTime = mktime(date("G") + C_TMZ_OFFSET,date("i"),date("s"),date("m"),date("d"),date("Y"));
 ?>
@@ -1040,7 +1040,72 @@ if(!isset($Error) && (isset($N) && $N != ""))
 				msgbox.value = user + oldStr;
 		};
 	};
-// -->
+
+	// Birthday Popup mod by Ciprian
+	// Launch the Birthday list popup
+	var is_bday_popup = null;
+
+	function bday_popup()
+	{
+		if (is_bday_popup && !is_bday_popup.closed)
+		{
+			is_bday_popup.focus();
+		}
+		else
+		{
+			is_bday_popup = window.open('<?php echo("./${ChatPath}bday_popup.php?L=$L"); ?>','bday_popup','bottom=0,right=0,width=650,height=450,scrollbars=yes,resizable=yes,status=yes,toolbar=no,menubar=no,directories=no,location=no');
+		};
+	};
+
+	// Logs Popup mod by Ciprian
+	// Launch the Public Archive popup
+	var is_logs_popup = null;
+
+	function logs_popup()
+	{
+		if (is_logs_popup && !is_logs_popup.closed)
+		{
+			is_logs_popup.focus();
+		}
+		else
+		{
+			is_logs_popup = window.open('<?php echo("./${ChatPath}logs.php?L=$L"); ?>','logs_popup','bottom=0,right=0,width=650,height=450,scrollbars=yes,resizable=yes,status=yes,toolbar=no,menubar=no,directories=no,location=no');
+		};
+	};
+
+	// Open the tutorial popup
+	function tutorial_popup()
+	{
+		window.focus();
+		tutorial_popupWin = window.open("<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L&Ver="); ?>"+ver4,"tutorial_popup","width=700,height=800,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,directories=no,status=yes,location=no");
+		tutorial_popupWin.focus();
+	};
+
+	// Open the users popup according to the DHTML capacities of the browser
+	function users_popup()
+	{
+		window.focus();
+		users_popupWin = window.open("<?php echo($ChatPath); ?>users_popup"+ver4+".php?<?php echo("From=$From&L=$L"); ?>","users_popup_<?php echo(md5(uniqid(""))); ?>","width=230,height=300,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,directories=no,status=yes,location=no");
+		users_popupWin.focus();
+	};
+
+	// Open popups for registration stuff
+	function reg_popup(name,uname)
+	{
+		if (name == "register") var u_name = "&U=";
+		else var u_name = "&pmc_username=";
+		if (name == "admin") var link = "&Link=1";
+		else var link = "";
+		window.focus();
+		url = '<?php echo("${ChatPath}"); ?>' + name + '<?php echo(".php?L=$L"); ?>' + u_name + uname + link;
+		pop_width = (name != 'admin'? 470:830);
+		pop_height = ((name != 'deluser' && name != 'pass_reset') ? (name != 'admin'? 640:580):260);
+		param = "width=" + pop_width + ",height=" + pop_height + ",resizable=yes,scrollbars=yes";
+		if (name == "pm_manager") param = param + ",status=yes";
+		name += "_popup";
+		window.open(url,name,param);
+	};
+	// -->
 	</SCRIPT>
 	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript1.2">
 	<!--
@@ -1121,7 +1186,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 			mouseY = e.screenY;
 		}
 		return;
-	}
+	};
 
 	// Quick validation of the message or the command submited at the input frame
 	function validateSubmission()
@@ -1217,7 +1282,7 @@ if (file_exists("./localization/".$L."/localized.cmds.php"))
 			if (document.all) inputFrameForm.elements['sendForm'].disabled = true;
 			return true;
 		};
-	}
+	};
 	// -->
 	</SCRIPT>
 	<?php
@@ -1262,8 +1327,8 @@ function send_headers($title, $icon)
 	?>
 	<!--
 	The lines below are usefull for debugging purpose, please do not remove them!
-	Release: phpMyChat-Plus 1.94-b3
-	© 2005-2010 Ciprian Murariu (ciprianmp@yahoo.com)
+	Release: phpMyChat-Plus 1.94-b8
+	© 2005-2012 Ciprian Murariu (ciprianmp@yahoo.com)
 	Based on phpMyChat 0.14.6-dev (also called 0.15.0)
 	© 2000-2005 The phpHeaven Team (http://www.phpheaven.net/)
 	-->
@@ -1303,7 +1368,7 @@ function send_headers($title, $icon)
 		if (document.images && ver4 == 'L')
 			document.forms['Params'].elements['Ver'].value = 'M';	// js1.1 enabled browser
 		else document.forms['Params'].elements['Ver'].value = ver4;
-	}
+	};
 
 	// will check the cookie settings of the client
 function getCookie(name) {
@@ -1314,7 +1379,7 @@ function getCookie(name) {
   var end = cookies.indexOf(';',len);
   if (end == -1) end = cookies.length;
   return unescape(cookies.substring(len,end));
-}
+};
 
 function set_Cookie(name, value, expires, path, domain, secure) {
   value = escape(value);
@@ -1324,7 +1389,7 @@ function set_Cookie(name, value, expires, path, domain, secure) {
   secure  = (secure)  ? ';secure'                           :'';
   document.cookie =
     name + '=' + value + expires + path + domain + secure;
-}
+};
 
 function deleteCookie(name, path, domain) {
   var expires = ';expires=Thu, 01-Jan-70 00:00:01 GMT';
@@ -1333,7 +1398,8 @@ function deleteCookie(name, path, domain) {
 
   if (getCookie(name))
     document.cookie = name + '=' + expires + path + domain;
-}
+};
+
 function isCookieEnabled() {
   if (document.all) {
     if (!navigator.cookieEnabled) {
@@ -1350,24 +1416,24 @@ function isCookieEnabled() {
       return true;
     }
     else return true;
-  }
-}
+  };
+};
 
-// Open the tutorial popup
+	// Open the tutorial popup
 	function tutorial_popup()
 	{
 		window.focus();
-		tutorial_popupWin = window.open("<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L&Ver="); ?>"+ver4,"tutorial_popup","width=700,height=800,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,directories=yes,status=yes,location=yes");
+		tutorial_popupWin = window.open("<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L&Ver="); ?>"+ver4,"tutorial_popup","width=700,height=800,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,directories=no,status=yes,location=no");
 		tutorial_popupWin.focus();
-	}
+	};
 
 	// Open the users popup according to the DHTML capacities of the browser
 	function users_popup()
 	{
 		window.focus();
-		users_popupWin = window.open("<?php echo($ChatPath); ?>users_popup"+ver4+".php?<?php echo("From=$From&L=$L"); ?>","users_popup_<?php echo(md5(uniqid(""))); ?>","width=230,height=300,resizable=yes,scrollbars=yes,status=yes");
+		users_popupWin = window.open("<?php echo($ChatPath); ?>users_popup"+ver4+".php?<?php echo("From=$From&L=$L"); ?>","users_popup_<?php echo(md5(uniqid(""))); ?>","width=230,height=300,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,directories=no,status=yes,location=no");
 		users_popupWin.focus();
-	}
+	};
 
 	// Open popups for registration stuff
 	function reg_popup(name,uname)
@@ -1381,9 +1447,10 @@ function isCookieEnabled() {
 		pop_width = (name != 'admin'? 470:830);
 		pop_height = ((name != 'deluser' && name != 'pass_reset') ? (name != 'admin'? 640:580):260);
 		param = "width=" + pop_width + ",height=" + pop_height + ",resizable=yes,scrollbars=yes";
+		if (name == "pm_manager") param = param + ",status=yes";
 		name += "_popup";
 		window.open(url,name,param);
-	}
+	};
 
 	// The three functions below allows to ensure an unique choice among rooms
 	function reset_R0()
@@ -1399,7 +1466,7 @@ function isCookieEnabled() {
 			<?php
 		}
 		?>
-	}
+	};
 
 	function reset_R1()
 	{
@@ -1407,7 +1474,7 @@ function isCookieEnabled() {
 		if (document.forms['Params'].elements['R2']) document.forms['Params'].elements['R2'].options[0].selected = true;
 		if (document.forms['Params'].elements['T']) document.forms['Params'].elements['T'].options[0].selected = true;
 		if (document.forms['Params'].elements['R3']) document.forms['Params'].elements['R3'].value = '';
-	}
+	};
 
 	function reset_R2()
 	{
@@ -1415,14 +1482,14 @@ function isCookieEnabled() {
 		if (document.forms['Params'].elements['R1']) document.forms['Params'].elements['R1'].options[0].selected = true;
 		if (document.forms['Params'].elements['T']) document.forms['Params'].elements['T'].options[1].selected = true;
 		if (document.forms['Params'].elements['R3']) document.forms['Params'].elements['R3'].value = '';
-	}
+	};
 
 	function reset_R3()
 	{
 		if (document.forms['Params'].elements['R0']) document.forms['Params'].elements['R0'].options[0].selected = true;
 		if (document.forms['Params'].elements['R1']) document.forms['Params'].elements['R1'].options[0].selected = true;
 		if (document.forms['Params'].elements['R2']) document.forms['Params'].elements['R2'].options[0].selected = true;
-	}
+	};
 	// -->
 	</SCRIPT>
 	<?php

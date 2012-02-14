@@ -162,7 +162,7 @@ if (C_MULTI_LANG)
 	<P>
 	Poţi alege una dintre limbile în care <?php echo(APP_NAME); ?> a fost tradus, apăsând pe unul dintre steagurile de pe prima pagină. În exemplul de mai jos, un utilizator îşi selecteaza limba Franceză:
 	<P ALIGN="center">
-	<IMG SRC="images/tutorials/flags.gif" HEIGHT="44" WIDTH="424" ALT="Steaguri pentru selectarea limbii">
+	<IMG SRC="images/tutorials/flags.gif" HEIGHT="44" WIDTH="424" ALT="Steaguri pentru selectarea limbii" TITLE="Steaguri pentru selectarea limbii">
 	<br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 	<hr />
 	<?php
@@ -236,9 +236,9 @@ if ($Ver == "H")
 	Un semn reprezentând starea conexiunii tale este afişat în colţul din dreapta sus al ecranului. Poate arăta în trei feluri:
 	<P>
 	<UL>
-		<LI><IMG SRC="images/connectOff.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Fără conexiune"> când nu e nevoie de nici o conexiune;
-		<LI><IMG SRC="images/connectOn.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Conectat"> când e stabilită o conexiune;
-		<LI><IMG SRC="images/connectError.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Conectare eşuată"> când conexiunea a eşuat.
+		<LI><IMG SRC="images/connectOff.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Fără conexiune" TITLE="Fără conexiune"> când nu e nevoie de nici o conexiune;
+		<LI><IMG SRC="images/connectOn.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Conectat" TITLE="Conectat"> când e stabilită o conexiune;
+		<LI><IMG SRC="images/connectError.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Conectare eşuată" TITLE="Conectare eşuată"> când conexiunea a eşuat.
 	</UL>
 	<P>
 	În cel de-al treilea caz, apăsarea "butonului" roşu va lansa o nouă încercare de conectare (refresh).
@@ -272,7 +272,7 @@ Poţi schimba culoarea textului afişat alegând o altă culoare din lista de cu
 <TABLE BORDER=0 CELLSPACING=10>
 <TR>
 	<TD>
-		<IMG SRC="images/tutorials/usersList.gif" WIDTH=128 HEIGHT=145 BORDER=0 ALT="users list">
+		<IMG SRC="images/tutorials/usersList.gif" WIDTH=128 HEIGHT=145 BORDER=0 ALT="listă utilizatori" TITLE="listă utilizatori">
 	</TD>
 	<TD>
 	<UL>
@@ -290,7 +290,7 @@ Poţi schimba culoarea textului afişat alegând o altă culoare din lista de cu
 <P>
 <FONT SIZE="+1"><A NAME="exit"><B>Părăsirea unei camere de chat:</B></A></FONT>
 <P>
-Pentru a părăsi camera, fă click pe <?php echo (EXIT_LINK_TYPE) ? "imaginea <img src='localization/$L/images/exitdoor.gif' border=0 alt='".L_EXIT."'>" : 'link-ul "'.L_EXIT.'"'; ?>. Poţi face acelaşi lucru utilizând comenzile de mai jos în căsuţa pentru mesaje (acest lucru poate fi util mai ales pentru cazul în care mouse-ul nu răspunde la comenzi):<br />
+Pentru a părăsi camera, fă click pe <?php echo (EXIT_LINK_TYPE) ? "imaginea <img src='localization/$L/images/exitdoor.gif' border=0 alt='".L_EXIT."' title='".L_EXIT."'>" : 'link-ul "'.L_EXIT.'"'; ?>. Poţi face acelaşi lucru utilizând comenzile de mai jos în căsuţa pentru mesaje (acest lucru poate fi util mai ales pentru cazul în care mouse-ul nu răspunde la comenzi):<br />
 /exit<br />
 /bye<br />
 /quit<br />
@@ -308,10 +308,10 @@ va trimite mesajul "La revedere!" pentru a fi citit de către ceilalţi particip
 <P>
 <FONT SIZE="+1"><A NAME="users_popup"><B>Cum afli cine e pe chat, fără a te loga:</B></A></FONT>
 <P>
-Poţi apăsa pe link-ul din pagina de start care arată numărul de utilizatori conectaţi pe chat, sau, dacă ai intrat deja în camera de chat, apasă pe imaginea <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_DETACH ?>"> din colţul dreapta-sus (sub Ieşire) pentru a deschide o fereastră separată ce va afişa lista utilizatorilor conectati şi camerele în care se află aceştia, actualizată aproape în timp real.<br />
+Poţi apăsa pe link-ul din pagina de start care arată numărul de utilizatori conectaţi pe chat, sau, dacă ai intrat deja în camera de chat, apasă pe imaginea <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_DETACH ?>" TITLE="<?php echo L_DETACH ?>"> din colţul dreapta-sus (sub Ieşire) pentru a deschide o fereastră separată ce va afişa lista utilizatorilor conectati şi camerele în care se află aceştia, actualizată aproape în timp real.<br />
 Titlul acestei pagini conţine poreclele utilizatorilor, dacă sunt mai puţin de trei; dacă sunt mai mulţi, titlul va conţine numărul utilizatorilor şi camerele deschise.
 <P>
-Apăsând pe imaginea <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_BEEP ?>"> din partea de sus a acestui popup va activa/dezactiva sunetele de înştiinţare la intrarea unui nou utilizator în cameră.
+Apăsând pe imaginea <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_BEEP ?>" TITLE="<?php echo L_BEEP ?>"> din partea de sus a acestui popup va activa/dezactiva sunetele de înştiinţare la intrarea unui nou utilizator în cameră.
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>
 <hr />
@@ -423,7 +423,7 @@ if (C_USE_SMILIES)
 	<FONT SIZE="+1"><A NAME="smilies"><B>Zâmbete grafice (Emoticons, Smilies):</B></A></FONT>
 	<P>Poţi adăuga zâmbete grafice în mesajele tale. Mai găseşti codul pe care trebuie să-l tastezi în cadrul unui mesaj pentru a obţine fiecare din zâmbetele de mai jos.
 	<P>
-	<I>De exemplu</I>, trimiţând mesajul "Salut Daniele :)" fără ghilimele, va fi afişat mesajul Salut Daniele <IMG SRC="images/smilies/smile1.gif" WIDTH=15 HEIGHT=15 ALT=":)"> în fereastra de mesaje.
+	<I>De exemplu</I>, trimiţând mesajul "Salut Daniele :)" fără ghilimele, va fi afişat mesajul Salut Daniele <IMG SRC="images/smilies/smile1.gif" WIDTH=15 HEIGHT=15 ALT=":)" TITLE=":)"> în fereastra de mesaje.
 	<P ALIGN="center">
 	<TABLE BORDER=0 CELLPADDING=3 CELLSPACING=5>
 	<?php

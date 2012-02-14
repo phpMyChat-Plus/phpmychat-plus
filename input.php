@@ -686,8 +686,7 @@ else
 		$ColorList = '"",'.COLOR_CD.'';
 	}
 }
-$ColorList = str_ireplace($COLOR_TB.'","',"",COLORLIST);
-$ColorList = str_replace('"', "", $ColorList);
+$ColorList = str_replace('"', "", $COLOR_TB != "" ? str_ireplace($COLOR_TB.'","',"",COLORLIST) : COLORLIST);
 $CC = explode(",", $ColorList);
 #if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<SELECT NAME=\"C\" style=\"background-color:".$C.";\">\n");
 if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false)) echo("<SELECT NAME=\"C\" style=\"background-color:".$C.";\">\n");

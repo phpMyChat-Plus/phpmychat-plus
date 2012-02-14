@@ -30,7 +30,7 @@ if ($Ver != "H")
 	<?php
 }
 ?>
-<A HREF="http://sourceforge.net/projects/phpmychat/" title="<?php echo(sprintf(L_CLICK,L_LINKS_7)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_LINKS_7)); ?>.'; return true" TARGET="_blank"><IMG SRC="images/icon.gif" WIDTH=88 HEIGHT=31 BORDER=0 ALT="<?php echo(sprintf(L_CLICK,L_LINKS_7)); ?>"></A>
+<A HREF="http://sourceforge.net/projects/phpmychat/" title="<?php echo(sprintf(L_CLICK,L_LINKS_7)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_LINKS_7)); ?>.'; return true" TARGET="_blank"><IMG SRC="images/icon.gif" WIDTH=88 HEIGHT=31 BORDER=0 ALT="<?php echo(sprintf(L_CLICK,L_LINKS_7)); ?>" TITLE="<?php echo(sprintf(L_CLICK,L_LINKS_7)); ?>"></A>
 <?php
 if ($Ver != "H")
 {
