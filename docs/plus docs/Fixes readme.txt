@@ -34,7 +34,7 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 01.02.2012 - 1.94-beta8:
-- added the birthday popup page whih shows a list of current month celebrations; (functionality extension)
+- added the birthday popup page which shows a list of current month or entire year celebrated users, to include some profile data, as per user profile setting, to assure desired privacy (avatar, username, date of birth, age, first name, last name, gender); (functionality extension)
 - fixed a logs.lib.php bug on exporting /me commands; (functionality related)
 - fixed the closing browser notify message; (functionality related)
 - upgraded the installer to support MySQL 5 engine MyISAM type; (compatibility related)
