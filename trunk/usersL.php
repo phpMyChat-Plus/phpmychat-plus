@@ -40,7 +40,7 @@ header("Pragma: no-cache");
 header("Content-Type: text/html; charset=".$Charset);
 
 // avoid server configuration for magic quotes
-if (function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
+if (function_exists('set_magic_quotes_runtime') && version_compare(PHP_VERSION, '5.3.0') < 0) set_magic_quotes_runtime(0);
 else ini_set("magic_quotes_runtime", 0);
 // Can't turn off magic quotes gpc so just redo what it did if it is on.
 if (get_magic_quotes_gpc()) {
@@ -64,6 +64,112 @@ if (!isset($FontName)) $FontName = "";
 echo('<meta HTTP-EQUIV="Refresh" CONTENT="30; URL=usersL.php?' . ((isset($QUERY_STRING)) ? $QUERY_STRING : getenv('QUERY_STRING')) . '">');
 ?>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
+<SCRIPT TYPE="text/javascript" LANGUAGE="javascript1.2">
+<!--
+// Colapsible Extra Options menu (drop-up)
+window.onload=show;
+function show(id) {
+var d = document.getElementById(id);
+	for (var i = 1; i<=10; i++) {
+		if (document.getElementById('smenu'+i)) document.getElementById('smenu'+i).style.display='none';
+	}
+if (d) d.style.display='block';
+}
+function hide(id) {
+var d = document.getElementById(id);
+if (d) d.style.display='none';
+}
+//-->
+</SCRIPT>
+
+<STYLE TYPE="text/css" MEDIA="screen">
+<!--
+body {
+position: relative;
+margin: 0;
+padding: 0;
+font: 80%;
+}
+dl, dt, dd, ul, li {
+text-align: center;
+margin: 0;
+padding: 0;
+list-style-type: none;
+z-index: 100;
+}
+#menu {
+position: absolute; /* Menu position that can be changed at will */
+bottom: 0;
+z-index: 100;
+width: 95%; /* precision for Opera */
+margin-left: 5px;
+margin-right: 5px;
+}
+#menu dl {
+//float: right;
+//width: 13em;
+display: inline;
+z-index: 100;
+}
+#menu dt {
+cursor: pointer;
+text-align: center;
+font-weight: bold;
+background: <?php echo($COLOR_BK); ?>;
+border: 1px solid gray;
+margin: 0;
+}
+#menu dl.nav{
+//float: right;
+width: 6em;
+z-index: 100;
+}
+#menu dd {
+display: none;
+border: 1px solid gray;
+}
+#menu li {
+text-align: center;
+background: <?php echo($COLOR_TB); ?>;
+position:static; /*safer*/
+}
+#menu li a, #menu dt a {
+//color: #000;
+color: <?php echo(COLOR_CD); ?>;
+text-decoration: none;
+display: block;
+height: 100%;
+border: 0 none;
+position:static; /*safer*/
+}
+#menu li a:hover, #menu li a:focus, #menu dt a:hover, #menu dt a:focus {
+//background: #eee;
+background: <?php echo($COLOR_LINK); ?>;
+position:static; /*safer*/
+}
+#site {
+position: absolute;
+z-index: 100;
+top : 70px;
+left : 10px;
+color: <?php echo(COLOR_CD); ?>;
+//background-color: #ddd;
+background-color: <?php echo($COLOR_BK); ?>;
+padding: 5px;
+border: 1px solid gray;
+}
+#container {
+position: relative;
+top: 20px;
+left: auto;
+width: 800px;
+height: 480px;
+margin-left:10px;
+z-index: 0;
+overflow:auto;
+}
+-->
+</STYLE>
 </HEAD>
 
 <BODY CLASS="frame">
@@ -454,8 +560,6 @@ while(list($User, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup,
 echo("\n</DIV>\n");
 }
 $DbLink->clean_results();
-?>
-<?php
 
 // Gravatars initialization
 unset($email);
@@ -508,7 +612,7 @@ if($DbLink->num_rows() > 0)
 				$tmpDispOtherRes = " (".L_RESTRICTED.")";
 			}
 			echo("<DIV style=\"margin-top: 1px;\">");
-			echo("<a href=\"$From?Ver=L&L=$L&U=".stripslashes($U)."$AddPwd2Link&R1=".urlencode(stripslashes($Other))."&T=1&D=$D&N=$N&E=".urlencode(stripslashes($R))."&EN=$T".(isset($RemMe) ? "&RM=1" : "")."\" TARGET=\"_parent\" onMouseOver=\"window.status='".L_JOIN_ROOM.$tmpDispOtherRes."'; return true;\" title=\"".L_JOIN_ROOM.$tmpDispOtherRes."\">".htmlspecialchars($tmpDispOther)."</a><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$OthersUsers->num_rows().")</SPAN><br />\n");
+			echo("<a href=\"$From?Ver=L&L=$L&U=".stripslashes($U)."$AddPwd2Link&R1=".urlencode(stripslashes($Other))."&T=1&D=$D&N=$N&E=".urlencode(stripslashes($R))."&EN=$T".(isset($RemMe) ? "&RM=1" : "")."\" TARGET=\"_parent\" onMouseOver=\"window.status='".L_JOIN_ROOM.$tmpDispOtherRes."'; return true;\" title='".L_JOIN_ROOM.$tmpDispOtherRes."'>".htmlspecialchars($tmpDispOther)."</a><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$OthersUsers->num_rows().")</SPAN><br />\n");
 			echo("</DIV>\n");
 			while(list($OtherUser, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup, $colorname, $avatar, $email, $use_gravatar) = $OthersUsers->next_record())
 			{
@@ -726,38 +830,42 @@ for($k = 0; $k < count($DefaultChatRooms); $k++)
 	if (strcasecmp(mb_convert_case($tmpRoom,MB_CASE_LOWER,$Charset), mb_convert_case(stripslashes($R),MB_CASE_LOWER,$Charset)) != 0 && (!isset($notEmptyRooms) || !isset($notEmptyRooms[$tmpRoom])))
 	{
 		echo("<DIV style=\"margin-top: 1px;\">");
-		echo("<a href=\"$From?Ver=L&L=$L&U=".stripslashes($U)."$AddPwd2Link&R0=".urlencode(stripslashes($tmpRoom))."&T=1&D=$D&N=$N&E=".urlencode(stripslashes($R))."&EN=$T".(isset($RemMe) ? "&RM=1" : "")."\" TARGET=\"_parent\" onMouseOver=\"window.status='".L_JOIN_ROOM."'; return true;\" title=\"".L_JOIN_ROOM.$tmpDispRes."\">".htmlspecialchars($tmpDispRoom)."</a><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(0)</SPAN><br />\n");
+		echo("<a href=\"$From?Ver=L&L=$L&U=".stripslashes($U)."$AddPwd2Link&R0=".urlencode(stripslashes($tmpRoom))."&T=1&D=$D&N=$N&E=".urlencode(stripslashes($R))."&EN=$T".(isset($RemMe) ? "&RM=1" : "")."\" TARGET=\"_parent\" onMouseOver=\"window.status='".L_JOIN_ROOM.$tmpDispRes."'; return true;\" title='".L_JOIN_ROOM.$tmpDispRes."'>".htmlspecialchars($tmpDispRoom)."</a><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(0)</SPAN><br />\n");
 		echo("</DIV>\n");
    }
 }
 ?>
 <hr />
-	<B><?php echo(L_EXTRA_OPT); ?></B>
+<div id="menu">
+	<dl>
+		<dt onmouseover="javascript:show('smenu1');"><?php echo(L_EXTRA_OPT); ?></dt>
+		<dd id="smenu1" onmouseover="javascript:show('smenu1');" onmouseout="javascript:show('');">
+			<ul>
 <?php
 if ($statusu == "a")
 {
 ?>
-<br /><a href="<?php echo($ChatPath."admin.php?L=".$L."&pmc_username=".$U."&LIMIT=1&Link=1"); ?>" onClick="window.parent.reg_popup('admin','<?php echo(urlencode(stripslashes($U))."&LIMIT=1"); ?>'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_35); ?>.'; return true;" title="<?php echo(L_REG_35); ?>"><?php echo(L_REG_35); ?></a>
+				<li><a href="<?php echo($ChatPath."admin.php?L=".$L."&pmc_username=".$U."&LIMIT=1&Link=1"); ?>" onClick="window.parent.reg_popup('admin','<?php echo(urlencode(stripslashes($U))."&LIMIT=1"); ?>'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_35); ?>.'; return true;" title="<?php echo(L_REG_35); ?>"><?php echo(L_REG_35); ?></a></li>
 <?php
 }
 if ($statusu != "a" && $statusu != "t" && $statusu != "m" && $statusu != "r" && C_ALLOW_REGISTER)
 {
 $Cmd2Send = ("'quit','".special_char2(stripslashes($U),$Latin1)." - L_REG_BRB :p'");
 ?>
-<br /><a href="<?php echo($ChatPath."register.php?L=".$L."&U=".$U."&Link=1"); ?>" onClick="window.parent.reg_popup('register','<?php echo(urlencode(stripslashes($U))."&LIMIT=1"); ?>'); window.parent.runCmd(<?php echo($Cmd2Send); ?>); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_3); ?>.'; return true;" title="<?php echo(L_REG_3); ?>"><?php echo(L_REG_3); ?></a>
+				<li><a href="<?php echo($ChatPath."register.php?L=".$L."&U=".$U."&Link=1"); ?>" onClick="window.parent.reg_popup('register','<?php echo(urlencode(stripslashes($U))."&LIMIT=1"); ?>'); window.parent.runCmd(<?php echo($Cmd2Send); ?>); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_3); ?>.'; return true;" title="<?php echo(L_REG_3); ?>"><?php echo(L_REG_3); ?></a></li>
 <?php
 }
 if ($statusu == "a" || $statusu == "t" || $statusu == "m" || $statusu == "r")
 {
 ?>
-<br /><a href="<?php echo($ChatPath."edituser.php?L=".$L."&pmc_username=".$U."&LIMIT=1&Link=1"); ?>" onClick="window.parent.reg_popup('edituser','<?php echo(urlencode(stripslashes($U))."&LIMIT=1"); ?>'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_4); ?>.'; return true;" title="<?php echo(L_REG_4); ?>"><?php echo(L_REG_4); ?></a>
+				<li><a href="<?php echo($ChatPath."edituser.php?L=".$L."&pmc_username=".$U."&LIMIT=1&Link=1"); ?>" onClick="window.parent.reg_popup('edituser','<?php echo(urlencode(stripslashes($U))."&LIMIT=1"); ?>'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_4); ?>.'; return true;" title="<?php echo(L_REG_4); ?>"><?php echo(L_REG_4); ?></a></li>
 <?php
 }
 if ($statusu != "a" && $statusu != "t" && $statusu != "u")
 {
 $Cmd2Send = ("'quit','".special_char2(stripslashes($U),$Latin1)." - L_DEL_BYE :('");
 ?>
-<br /><a href="<?php echo($ChatPath."deluser.php?L=".$L."&pmc_username=".$U."&Link=1"); ?>" onClick="window.parent.reg_popup('deluser','<?php echo(urlencode(stripslashes($U))."&LIMIT=1"); ?>'); window.parent.runCmd(<?php echo($Cmd2Send); ?>); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_5); ?>.'; return true;" title="<?php echo(L_REG_5); ?>"><?php echo(L_REG_5); ?></a>
+				<li><a href="<?php echo($ChatPath."deluser.php?L=".$L."&pmc_username=".$U."&Link=1"); ?>" onClick="window.parent.reg_popup('deluser','<?php echo(urlencode(stripslashes($U))."&LIMIT=1"); ?>'); window.parent.runCmd(<?php echo($Cmd2Send); ?>); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_REG_5); ?>.'; return true;" title="<?php echo(L_REG_5); ?>"><?php echo(L_REG_5); ?></a></li>
 <?php
 }
 // Private Message Popup mod by Ciprian
@@ -783,14 +891,14 @@ if (C_ENABLE_PM && isset($PWD_Hash))
 	if ($NewPMs || $TotalPMs)
 	{
 	?>
-	<br /><a href="<?php echo($ChatPath."pm_manager.php?L=".$L.""); ?>" onClick="window.parent.reg_popup('pm_manager','<?php echo(urlencode(stripslashes($U))."&LIMIT=1"); ?>'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(($NewPMs == 1) ? L_PRIV_MSG : ($NewPMs ? sprintf(L_PRIV_MSGS,$NewPMs) : ($TotalPMs == 1 ? L_PRIV_READ_MSG : ($TotalPMs ? sprintf(L_PRIV_READ_MSGS,$TotalPMs) : L_PRIV_NO_MSGS)))); ?>'; return true;" title="<?php echo(($NewPMs == 1) ? L_PRIV_MSG : ($NewPMs ? sprintf(L_PRIV_MSGS,$NewPMs) : ($TotalPMs == 1 ? L_PRIV_READ_MSG : ($TotalPMs ? sprintf(L_PRIV_READ_MSGS,$TotalPMs) : L_PRIV_NO_MSGS)))); ?>"><?php echo(!$NewPMs ? L_EXTRA_PRIV1 : "<font class=error>".L_EXTRA_PRIV2."</font>"); ?></a>
+				<li><a href="<?php echo($ChatPath."pm_manager.php?L=".$L.""); ?>" onClick="window.parent.reg_popup('pm_manager','<?php echo(urlencode(stripslashes($U))."&LIMIT=1"); ?>'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(($NewPMs == 1) ? L_PRIV_MSG : ($NewPMs ? sprintf(L_PRIV_MSGS,$NewPMs) : ($TotalPMs == 1 ? L_PRIV_READ_MSG : ($TotalPMs ? sprintf(L_PRIV_READ_MSGS,$TotalPMs) : L_PRIV_NO_MSGS)))); ?>'; return true;" title="<?php echo(($NewPMs == 1) ? L_PRIV_MSG : ($NewPMs ? sprintf(L_PRIV_MSGS,$NewPMs) : ($TotalPMs == 1 ? L_PRIV_READ_MSG : ($TotalPMs ? sprintf(L_PRIV_READ_MSGS,$TotalPMs) : L_PRIV_NO_MSGS)))); ?>"><?php echo(!$NewPMs ? L_EXTRA_PRIV1 : "<font class=error>".L_EXTRA_PRIV2."</font>"); ?></a></li>
 	<?php
 	}
 };
 if (C_CHAT_LOGS && (C_SHOW_LOGS_USR || $statusu == "a" || $statusu == "t"))
 {
 ?>
-<br /><a href="<?php echo($ChatPath); ?>logs.php?<?php echo("L=$L"); ?>" onClick="window.parent.logs_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_ARCHIVE); ?>.'; return true;" title="<?php echo(L_ARCHIVE); ?>"><?php echo(L_ARCHIVE); ?></a>
+				<li><a href="<?php echo($ChatPath); ?>logs.php?<?php echo("L=$L"); ?>" onClick="window.parent.logs_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_ARCHIVE); ?>.'; return true;" title="<?php echo(L_ARCHIVE); ?>"><?php echo(L_ARCHIVE); ?></a></li>
 <?php
 }
 if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $statusu == "a" || $statusu == "t"))
@@ -810,14 +918,21 @@ if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $statusu == "a" || $statusu == "t"))
 	$result = @mysql_query("SELECT DISTINCT ip,browser,username FROM ".C_LRK_TBL.$Hide1."",$handler);
 	$online_users = @mysql_numrows($result);
 	@mysql_close();
-	$lurklink = "<a href=\"lurking.php?L=".$L."&D=".$D."\" CLASS=\"ChatLink\" TARGET=\"_blank\" onMouseOver=\"window.status='".L_LURKING_1.".'; return true;\" title='".L_LURKING_2."'>";
-	echo("<br />".$lurklink.$online_users." ".($online_users != 1 ? L_LURKERS : L_LURKER)."</a>");
+	$lurklink = "<li><a href=\"lurking.php?L=".$L."&D=".$D."\" CLASS=\"ChatLink\" TARGET=\"_blank\" onMouseOver=\"window.status='".L_LURKING_1.".'; return true;\" title='".L_LURKING_2."'>";
+	echo($lurklink.$online_users." ".($online_users != 1 ? L_LURKERS : L_LURKER)."</a></li>");
 	$CleanUsrTbl = 1;
 }
 ?>
-<br /><a href="<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>" onClick="window.parent.tutorial_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_TUTORIAL); ?>.'; return true;" title="<?php echo(L_TUTORIAL); ?>"><?php echo(L_TUTORIAL); ?></a>
-<br /><a href="<?php echo($ChatPath); ?>bday_popup.php?<?php echo("L=$L"); ?>" onClick="window.parent.bday_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_L_DOB_TIT_1); ?>.'; return true;" title="<?php echo(L_DOB_TIT_1); ?>"><?php echo(L_DOB_TIT_1); ?></a>
-<br /><a href="<?php echo($ChatPath); ?>extra/fixes/fixes.zip" TARGET="_blank" onMouseOver="window.status='<?php echo (stristr($_SERVER['HTTP_USER_AGENT'],"MSIE") ? L_SOUNDFIX_IE_2 : str_replace("IE","FF",L_SOUNDFIX_IE_2)) ?>'; return true;" title="<?php echo (stristr($_SERVER['HTTP_USER_AGENT'],"MSIE") ? L_SOUNDFIX_IE_2 : str_replace("IE","FF",L_SOUNDFIX_IE_2)) ?>"><?php echo (stristr($_SERVER['HTTP_USER_AGENT'],"MSIE") ? L_SOUNDFIX_IE_1 : str_replace("IE","FF",L_SOUNDFIX_IE_1)) ?></a>
+				<li><a href="<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>" onClick="window.parent.tutorial_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_TUTORIAL); ?>.'; return true;" title="<?php echo(L_TUTORIAL); ?>"><?php echo(L_TUTORIAL); ?></a></li>
+				<li><a href="<?php echo($ChatPath); ?>bday_popup.php?<?php echo("L=$L"); ?>" onClick="window.parent.bday_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_L_DOB_TIT_1); ?>.'; return true;" title="<?php echo(L_DOB_TIT_1); ?>"><?php echo(L_DOB_TIT_1); ?></a></li>
+				<li><a href="<?php echo($ChatPath); ?>extra/fixes/fixes.zip" TARGET="_blank" onMouseOver="window.status='<?php echo (stristr($_SERVER['HTTP_USER_AGENT'],"MSIE") ? L_SOUNDFIX_IE_2 : str_replace("IE","FF",L_SOUNDFIX_IE_2)) ?>'; return true;" title="<?php echo (stristr($_SERVER['HTTP_USER_AGENT'],"MSIE") ? L_SOUNDFIX_IE_2 : str_replace("IE","FF",L_SOUNDFIX_IE_2)) ?>"><?php echo (stristr($_SERVER['HTTP_USER_AGENT'],"MSIE") ? L_SOUNDFIX_IE_1 : str_replace("IE","FF",L_SOUNDFIX_IE_1)) ?></a></li>
+				<li><a href="privacy.html" TARGET=_blank CLASS="ChatLink" title="<?php echo(sprintf(L_CLICK,L_PRIVACY)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_PRIVACY)); ?>'; return true">Our Privacy Policy</a></li>
+				<li><a href="<?php echo($ChatPath); ?>help_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>" onClick="window.parent.help_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_HLP); ?>.'; return true" onClick="window.parent.frames['input'].forms['MsgForm'].elements['M'].focus();" title="<?php echo(L_HLP); ?>"><?php echo(L_HLP); ?></a></li>
+				<li><a onClick="javascript:alert('<?php echo (APP_NAME." - ".APP_VERSION.APP_MINOR); ?>\n\nReleased on:\n<?php echo(RELEASE_DATE); ?>.\n\n&copy; 2001-<?php echo(date('Y')); ?>\nPlus Developer: <?php echo(PLUS_DEVELOPER); ?>\n\nBig thanks to all the contributors\nto the phpHeaven Team work\nand the phpMyChat groups on\nYahoo! and Sourceforge.\n\nThank you for using our work!')" Title="What is this?" onMouseOver="window.status='What is this?'; return true"><?php echo (APP_NAME); ?></a></li>
+			</ul>
+		</dd>
+	</dl>
+</div>
 </BODY>
 </HTML>
 <?php

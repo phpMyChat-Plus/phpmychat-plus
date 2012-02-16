@@ -611,9 +611,6 @@ if(is_dir("./${ChatPath}localization/_owner/") && file_exists("./${ChatPath}loca
 // Added for Original Language names by Ciprian
 if(file_exists("./${ChatPath}localization/langnames.lib.php")) include("./${ChatPath}localization/langnames.lib.php");
 
-//Check for php server version
-define("PHPVERSION", phpversion());
-
 // Public Name of your chat server as you wish to be known on the web - by Ciprian
 define("C_CHAT_NAME", $CHAT_NAME);
 

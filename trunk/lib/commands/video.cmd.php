@@ -1,6 +1,6 @@
 <?php
 
-	if (version_compare(PHPVERSION,'5','>='))
+	if (version_compare(PHP_VERSION,'5') >= 0)
 	{
 
 		$Cmd[2] = addslashes(str_replace(" ", "%20", $Cmd[2]));

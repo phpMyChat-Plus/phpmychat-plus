@@ -50,7 +50,7 @@ header("Pragma: no-cache");
 header("Content-Type: text/html; charset={$Charset}");
 
 // avoid server configuration for magic quotes
-if (function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
+if (function_exists('set_magic_quotes_runtime') && version_compare(PHP_VERSION, '5.3.0') < 0) set_magic_quotes_runtime(0);
 else ini_set("magic_quotes_runtime", 0);
 // Can't turn off magic quotes gpc so just redo what it did if it is on.
 if (get_magic_quotes_gpc()) {
@@ -133,7 +133,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_20)
      . "----------------------------------------------";
 		$Headers = "From: ${Sender_Name} <${Sender_email}>".$eol;
 		$Headers .= "X-Sender: <${Sender_email}>".$eol;
-		$Headers .= "X-Mailer: PHP/".PHPVERSION.$eol;
+		$Headers .= "X-Mailer: PHP/".PHP_VERSION.$eol;
 		$Headers .= "Return-Path: <${Sender_email}>".$eol;
 		$Headers .= "Date: ${mail_date}".$eol;
 		$Headers .= "Mime-Version: 1.0".$eol;

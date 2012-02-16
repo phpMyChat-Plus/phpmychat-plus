@@ -69,7 +69,7 @@ include ( $ChatPath."localization/".$L."/localized.chat.php" );
 header("Content-Type: text/html; charset=${Charset}");
 
 // avoid server configuration for magic quotes
-if (function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
+if (function_exists('set_magic_quotes_runtime') && version_compare(PHP_VERSION, '5.3.0') < 0) set_magic_quotes_runtime(0);
 else ini_set("magic_quotes_runtime", 0);
 // Can't turn off magic quotes gpc so just redo what it did if it is on.
 if (get_magic_quotes_gpc()) {
@@ -1409,9 +1409,6 @@ if(is_dir("./${ChatPath}localization/_owner/") && file_exists("./${ChatPath}loca
 // Added for Original Language names by Ciprian
 if(file_exists("./${ChatPath}localization/langnames.lib.php")) include("./${ChatPath}localization/langnames.lib.php");
 
-//Check for php server version
-define("PHPVERSION", phpversion());
-
 // Public Name of your chat server as you wish to be known on the web - by Ciprian
 define("C_CHAT_NAME", $CHAT_NAME);
 
@@ -2131,9 +2128,6 @@ else {
   	fputs ( $fh, 'if(is_dir("./${ChatPath}localization/_owner/") && file_exists("./${ChatPath}localization/_owner/owner.php")) include("./${ChatPath}localization/_owner/owner.php");'.$lfeed );
   	fputs ( $fh, '// Added for Original Language names by Ciprian'.$lfeed );
   	fputs ( $fh, 'if(file_exists("./${ChatPath}localization/langnames.lib.php")) include("./${ChatPath}localization/langnames.lib.php");'.$lfeed );
-  	fputs ( $fh, ''.$lfeed );
-  	fputs ( $fh, '//Check for php server version'.$lfeed );
-  	fputs ( $fh, 'define("PHPVERSION", phpversion());'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// Public Name of your chat server as you wish to be known on the web - by Ciprian'.$lfeed );
   	fputs ( $fh, 'define("C_CHAT_NAME", $CHAT_NAME);'.$lfeed );

@@ -45,7 +45,7 @@ require("./lib/clean.lib.php");
 header("Content-Type: text/html; charset=${Charset}");
 
 // avoid server configuration for magic quotes
-if (function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
+if (function_exists('set_magic_quotes_runtime') && version_compare(PHP_VERSION, '5.3.0') < 0) set_magic_quotes_runtime(0);
 else ini_set("magic_quotes_runtime", 0);
 // Can't turn off magic quotes gpc so just redo what it did if it is on.
 if (get_magic_quotes_gpc()) {
@@ -868,7 +868,7 @@ if(isset($Error))
 	<?php
 }
 
-// ** Display a JavaScript alert box with the error message if necessary, but send the message anyway (resets the color for Color mod bye Ciprian) **
+// ** Display a JavaScript alert box with the error message if necessary, but send the message anyway (resets the color for Color mod by Ciprian) **
 if(isset($ErrorC))
 {
 	?>

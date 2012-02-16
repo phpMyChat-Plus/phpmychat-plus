@@ -25,7 +25,7 @@ if (file_exists("./localization/".$L."/localized.cmds.php")) require("./localiza
 header("Content-Type: text/html; charset=${Charset}");
 
 // avoid server configuration for magic quotes
-if (function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
+if (function_exists('set_magic_quotes_runtime') && version_compare(PHP_VERSION, '5.3.0') < 0) set_magic_quotes_runtime(0);
 else ini_set("magic_quotes_runtime", 0);
 // Can't turn off magic quotes gpc so just redo what it did if it is on.
 if (get_magic_quotes_gpc()) {
@@ -462,7 +462,7 @@ if (C_ENABLE_PM)
 ?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
 <?php
-	if (version_compare(PHPVERSION,'5','>='))
+	if (version_compare(PHP_VERSION,'5') >= 0)
 	{
 ?>
 		<A HREF="#" onClick="cmd2Input('/vid',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/vid</A>
@@ -480,7 +480,7 @@ if (C_ENABLE_PM)
 	<TR>
 		<TD WIDTH=10>&nbsp;</TD>
 <?php
-	if (version_compare(PHPVERSION,'5','>='))
+	if (version_compare(PHP_VERSION,'5') >= 0)
 	{
 ?>
 			<TD><?php echo(L_HELP_CMD_35."<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/video /play".(L_CMD_VIDEO != "" && L_CMD_VIDEO != "L_CMD_VIDEO" ? " /".str_replace(","," /",L_CMD_VIDEO) : "")."</span>")); ?>

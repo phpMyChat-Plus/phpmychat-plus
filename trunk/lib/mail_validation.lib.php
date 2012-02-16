@@ -133,7 +133,7 @@ function send_email($subject,$userString,$pswdString,$welcomeString,$reset)
 	$headers = "From: ${Sender_Name} <${Sender_email}>".$eol;
 	$headers .= "Bcc: ${Sender_email}".$eol;
 	$headers .= "X-Sender: ${Sender_email}".$eol;
-	$headers .= "X-Mailer: PHP/".PHPVERSION.$eol;
+	$headers .= "X-Mailer: PHP/".PHP_VERSION.$eol;
 	$headers .= "Return-Path: ${Sender_email}".$eol;
 	$headers .= "Date: ${mail_date}".$eol;
 	$headers .= "Mime-Version: 1.0".$eol;
@@ -159,7 +159,7 @@ function send_dob_email($dob_name,$dob_email,$dob_subject,$DOB_String)
 	$dob_headers = "From: ${Sender_Name} <${Sender_email}>".$eol;
 	$dob_headers .= "Bcc: ${Sender_email}".$eol;
 	$dob_headers .= "X-Sender: ${Sender_email}".$eol;
-	$dob_headers .= "X-Mailer: PHP/".PHPVERSION.$eol;
+	$dob_headers .= "X-Mailer: PHP/".PHP_VERSION.$eol;
 	$dob_headers .= "Return-Path: ${Sender_email}".$eol;
 	$dob_headers .= "Date: ${mail_date}".$eol;
 	$dob_headers .= "Mime-Version: 1.0".$eol;

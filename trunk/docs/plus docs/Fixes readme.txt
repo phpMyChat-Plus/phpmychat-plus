@@ -34,6 +34,11 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 01.02.2012 - 1.94-beta8:
+- changed the MthJax plugin to use a secure connection; (security related)
+- more deprecated functions updated (eg set_magic_quotes_runtime); (compatibility related)
+- Extra Options section has moved on bottom of the users' list, as a colapsible menu; (functionality related)
+- fixed the color drop box in input.php when var COLOR_TB is not defined in skin file; (functionality related)
+- major improvements to popup openers in usersH&L files - all the functions moved to the parent container index.lib.php; (functionality related)
 - added the birthday popup page which shows a list of current month or entire year celebrated users, to include some profile data, as per user profile setting, to assure desired privacy (avatar, username, date of birth, age, first name, last name, gender); (functionality extension)
 - fixed a logs.lib.php bug on exporting /me commands; (functionality related)
 - fixed the closing browser notify message; (functionality related)

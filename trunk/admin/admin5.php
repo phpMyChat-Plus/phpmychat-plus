@@ -239,7 +239,7 @@ overflow:auto;
 if ($action != "submit")
 {
 	//Cache for Gravatars check
-	if (version_compare(PHPVERSION,'5','>=') && ini_get("allow_url_fopen") && function_exists('file_get_contents')) $cache_supported = 1;
+	if (version_compare(PHP_VERSION,'5') >= 0 && ini_get("allow_url_fopen") && function_exists('file_get_contents')) $cache_supported = 1;
 	else $cache_supported = 0;
 	if (!@fsockopen("gravatar.com", 80, $errno, $errstr, 2))
 	{
@@ -413,7 +413,7 @@ if (UPD_CHECK)
 					<li><a href="http://www.ciprianmp.com/latest/" target=_blank Title="Go to <?php echo(APP_NAME); ?> Try me server" onMouseOver="window.status='Go to <?php echo(APP_NAME); ?> Try me server.'; return true">Try me server</a></li>
 					<li><a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>.'; return true;" title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>" target=_blank>Submit your feedback</a></li>
 					<li><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ciprianmp%40hotmail%2ecom&item_name=Support%20for%20phpMyChat%20Plus%20development&no_shipping=1&cn=Optional%20Thoughts&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8" onClick="return confirm('<?php echo(L_SUPP_WARN); ?>');" onMouseOver="window.status='Wish to keep <?php echo(APP_NAME); ?> FREE?'; return true;" title="Wish to keep <?php echo(APP_NAME); ?> FREE?" target="_blank">Wish to donate?</a></li>
-					<li><a onClick="javascript:alert('<?php echo (sprintf(trim(A_SHEET5_0),":\\n".APP_NAME." - ".APP_VERSION.APP_MINOR)); ?>\n\nReleased on:\n<?php echo(RELEASE_DATE); ?>.\n\n&copy; 2001-<?php echo(date('Y')); ?>\nPlus Developer: <?php echo(PLUS_DEVELOPER); ?>\n\nBig thanks to all the contributors\nto the phpHeaven Team work\nand the Yahoo phpMyChat group.\n\nThank you for using our work!')" Title="What is this?" onMouseOver="window.status='What is this?'; return true">About Plus</a></li>
+					<li><a onClick="javascript:alert('<?php echo (sprintf(trim(A_SHEET5_0),":\\n".APP_NAME." - ".APP_VERSION.APP_MINOR)); ?>\n\nReleased on:\n<?php echo(RELEASE_DATE); ?>.\n\n&copy; 2001-<?php echo(date('Y')); ?>\nPlus Developer: <?php echo(PLUS_DEVELOPER); ?>\n\nBig thanks to all the contributors\nto the phpHeaven Team work\nand the phpMyChat groups on\nYahoo! and Sourceforge.\n\nThank you for using our work!')" Title="What is this?" onMouseOver="window.status='What is this?'; return true">About Plus</a></li>
 				</ul>
 			</dd>
 	</dl>
@@ -2552,7 +2552,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	<i>Server Info:<br /><font color=red>Important: if cache is enabled, make sure the "cache" folder exists in the chat root and it has public write permissions (CHMOD 0777)!<br />
 	<?php echo((!$cache_supported || $server_blocked) ? "<b>Cache not supported on this server!</b><br />" : ""); ?>
 		</font><font color=blue>Hosting Server IP: <b><?php echo($_SERVER['SERVER_ADDR']); ?></b> <?php echo(!$server_blocked ? "" : "<b><font color=red>cannot get access to gravatar.com!</font></b>"); ?></font><br />
-		<font color=blue>Php server version: <b><?php echo(!version_compare(PHPVERSION,'5','>=') ? "<font color=red>".PHPVERSION."</font>" : PHPVERSION); ?></b></font><br />
+		<font color=blue>Php server version: <b><?php echo(version_compare(PHP_VERSION,'5') >= 0 ? "<font color=red>".PHP_VERSION."</font>" : PHP_VERSION); ?></b></font><br />
 		<font color=blue>allow_url_fopen: <b><?php echo(!(ini_get("allow_url_fopen")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
 		<font color=blue>allow_url_include: <b><?php echo(!(ini_get("allow_url_include")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
 		<font color=blue>file_get_contents: <b><?php echo(!(function_exists("file_get_contents")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />

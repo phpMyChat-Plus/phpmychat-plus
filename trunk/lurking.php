@@ -100,7 +100,7 @@ header("Cache-Control: public");
 header("Content-Type: text/html; charset=${Charset}");
 
 // Avoid server configuration for magic quotes
-if (function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
+if (function_exists('set_magic_quotes_runtime') && version_compare(PHP_VERSION, '5.3.0') < 0) set_magic_quotes_runtime(0);
 else ini_set("magic_quotes_runtime", 0);
 // Can't turn off magic quotes gpc so just redo what it did if it is on.
 if (get_magic_quotes_gpc()) {
@@ -319,7 +319,7 @@ if (C_WORLDTIME == 2)
 <TITLE><?php echo(($U == "Guest" ? L_WHOIS_GUEST : stripslashes($U))." ".L_LURKING_3." - ".date("r")." - ".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <?php
-if(C_ALLOW_MATH) echo("<script type=\"text/javascript\" src=\"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>");
+if(C_ALLOW_MATH) echo("<script type=\"text/javascript\" src=\"https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>");
 ?>
 </HEAD>
 <BODY>
