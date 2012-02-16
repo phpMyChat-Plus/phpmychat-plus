@@ -97,7 +97,7 @@ if (isset($MailFunctionOn))
 		if ($bcc_list != "") $Headers .= "Bcc: ".$bcc_list.$eol;
 		if (${pmc_email}) $Headers .= "Reply-To: ${pmc_username} <${pmc_email}>".$eol;
 		$Headers .= "X-Sender: ${Sender_email}".$eol;
-		$Headers .= "X-Mailer: PHP/".PHPVERSION.$eol;
+		$Headers .= "X-Mailer: PHP/".PHP_VERSION.$eol;
 		$Headers .= "Return-Path: ${Sender_email}".$eol;
 		$Headers .= "Date: ${mail_date}".$eol;
 		$Headers .= "Mime-Version: 1.0".$eol;

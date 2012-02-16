@@ -24,7 +24,7 @@ if (isset($_COOKIE["CookieFontSize"])) $FontSize = $_COOKIE["CookieFontSize"];
 header("Content-Type: text/html; charset=${Charset}");
 
 // Avoid server configuration for magic quotes
-if (function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
+if (function_exists('set_magic_quotes_runtime') && version_compare(PHP_VERSION, '5.3.0') < 0) set_magic_quotes_runtime(0);
 else ini_set("magic_quotes_runtime", 0);
 // Can't turn off magic quotes gpc so just redo what it did if it is on.
 if (get_magic_quotes_gpc()) {
@@ -757,7 +757,9 @@ if ($First)
 		write("<HTML dir=\"<?php echo($textDirection); ?>\">\n<HEAD>\n");
 		write("<TITLE>Dynamic messages frame<\/TITLE>\n");
  		write("<LINK REL=\"stylesheet\" HREF=\"<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>\" TYPE=\"text\/css\">\n");
-		if (c_allow_math == 1) write("<script type=\"text\/javascript\" src=\"http:\/\/cdn\.mathjax\.org\/mathjax\/latest\/MathJax\.js?config=TeX-AMS-MML_HTMLorMML\"><\/script>\n");
+//		if (c_allow_math == 1) write("<script type=\"text\/javascript\" src=\"http:\/\/cdn\.mathjax\.org\/mathjax\/latest\/MathJax\.js?config=TeX-AMS-MML_HTMLorMML\"><\/script>\n");
+//		if (c_allow_math == 1) write('<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>\n');
+		if (c_allow_math == 1) write('<script type="text/javascript" src="https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>\n');
 		write("<\/HEAD>\n\n");
 		write("<BODY CLASS=\"mainframe\">\n");
 	};
@@ -949,8 +951,8 @@ if(C_CHAT_BOOT)
 		{
 			$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+($curtime-last_away), longest_away=IF($curtime-last_away < longest_away, longest_away, $curtime-last_away), last_away='' WHERE (stat_date=FROM_UNIXTIME(last_away,'%Y-%m-%d') OR stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d')) AND room='$m_room' AND username='$U' AND last_away!='0'");
 			$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_in=seconds_in+($curtime-last_in), longest_in=IF($curtime-last_in < longest_in, longest_in, $curtime-last_in), last_in='' WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$m_room' AND username='$U' AND last_in!='0'");
+			$DbLink->clean_results();
 		}
-	$DbLink->clean_results();
 	$botpath = "botfb/".$U;         // file is in DIR "botfb" and called "username"
 	if (file_exists($botpath)) unlink($botpath); // checks to see if user file exists.
 	                                     // if it does delete it.

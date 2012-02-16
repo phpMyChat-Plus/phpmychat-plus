@@ -591,7 +591,7 @@ class tc_calendar{
 		$time_to = strtotime($to);
 
 		// prior to version 5.1 strtotime returns -1 for bad input
-        if (version_compare('5.1.0', phpversion()) == 1) {
+        if (version_compare(PHP_VERSION, '5.1.0') < 0) {
 			if ($time_from == -1) $time_from = false;
 			if ($time_to == -1) $time_to = false;
 		}
