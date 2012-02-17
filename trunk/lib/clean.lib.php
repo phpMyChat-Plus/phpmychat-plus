@@ -24,7 +24,7 @@ if ($ChatS->num_rows() > 0)
 {
 	list($Buzz) = $ChatS->next_record();
 	$To_remove = strstr($Buzz, "<EMBED SRC=");
-	$Buzz_new = rtrim(str_replace($To_remove,"",$Buzz));
+	$Buzz_new = rtrim(str_ireplace($To_remove,"",$Buzz));
 	$ChatS->query("UPDATE ".C_MSG_TBL." SET message = '".$Buzz_new."' WHERE message='$Buzz' AND m_time<'".(time()-10)."' ORDER BY m_time DESC LIMIT 1");
 	$RefreshMessages = true;
 }
@@ -34,7 +34,7 @@ $ChatS->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE 'stripslashe
 if ($ChatS->num_rows() > 0)
 {
 	list($Hello) = $ChatS->next_record();
-	$Hello_new = rtrim(str_replace("L_ENTER_ROM","L_ENTER_ROM_NOSOUND",$Hello));
+	$Hello_new = rtrim(str_ireplace("L_ENTER_ROM","L_ENTER_ROM_NOSOUND",$Hello));
 	$ChatS->query("UPDATE ".C_MSG_TBL." SET message = '".$Hello_new."' WHERE message='$Hello' AND m_time<'".(time()-10)."' ORDER BY m_time DESC LIMIT 1");
 	$RefreshMessages = true;
 }
@@ -44,7 +44,7 @@ $ChatS->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE 'sprintf(WEL
 if ($ChatS->num_rows() > 0)
 {
 	list($Welcome) = $ChatS->next_record();
-	$Welcome_new = rtrim(str_replace("WELCOME_MSG","WELCOME_MSG_NOSOUND",$Welcome));
+	$Welcome_new = rtrim(str_ireplace("WELCOME_MSG","WELCOME_MSG_NOSOUND",$Welcome));
 	$ChatS->query("UPDATE ".C_MSG_TBL." SET message='".$Welcome_new."' WHERE message='$Welcome' AND m_time<'".(time()-10)."' ORDER BY m_time DESC LIMIT 1");
 	$RefreshMessages = true;
 }

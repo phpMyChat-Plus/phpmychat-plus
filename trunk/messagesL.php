@@ -385,7 +385,7 @@ if($DbLink->num_rows() > 0)
 		{
 			$SmilieResult = array();
 			$val = array();
-			if (preg_match_all('/<IMG SRC="images\\/smilies\\/([^>]*)" BORDER=0 ALT="([^>]*)">/', $Message, $SmilieResult, PREG_SET_ORDER))
+			if (preg_match_all('/<IMG SRC="images\\/smilies\\/([^>]*)" BORDER=0 ALT="([^>]*)" TITLE="([^>]*)">/', $Message, $SmilieResult, PREG_SET_ORDER))
 			{
 				if (count($SmilieResult))
 				{
@@ -393,7 +393,7 @@ if($DbLink->num_rows() > 0)
 					{
 						if (in_array($val[2], array_keys($codes)))
 						{
-							$Message = str_replace($val[0], "<A HREF=\"#\" onClick=\"window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].value += '".$val[2]."'; window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].focus(); return false\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_5).".'; return true\" title=\"".$val[2]."\">".$val[0]."</A>", $Message);
+							$Message = str_replace($val[0], "<A HREF=\"#\" onClick=\"window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].value += '".$val[2]."'; window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].focus(); return false\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_5).".'; return true\" TITLE=\"".$val[2]."\">".$val[0]."</A>", $Message);
 						}
 					}
 				}
@@ -401,18 +401,18 @@ if($DbLink->num_rows() > 0)
 		}
 		// Ends Smilies checkup
 
-		$Message = str_replace("L_DEL_BYE",L_DEL_BYE,$Message);
-		$Message = str_replace("L_REG_BRB",L_REG_BRB,$Message);
-		$Message = str_replace("L_HELP_MR",sprintf(L_HELP_MR,$User),$Message);
-		$Message = str_replace("L_HELP_MS",sprintf(L_HELP_MS,$User),$Message);
-		$Message = str_replace("L_PRIV_PM",L_PRIV_PM,$Message);
-		$Message = str_replace("L_PRIV_WISP",L_PRIV_WISP,$Message);
-		$Message = str_replace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"".L_HELP_BUZZ1."\" title=\"".L_HELP_BUZZ1."\">",$Message);
+		$Message = str_ireplace("L_DEL_BYE",L_DEL_BYE,$Message);
+		$Message = str_ireplace("L_REG_BRB",L_REG_BRB,$Message);
+		$Message = str_ireplace("L_HELP_MR",sprintf(L_HELP_MR,$User),$Message);
+		$Message = str_ireplace("L_HELP_MS",sprintf(L_HELP_MS,$User),$Message);
+		$Message = str_ireplace("L_PRIV_PM",L_PRIV_PM,$Message);
+		$Message = str_ireplace("L_PRIV_WISP",L_PRIV_WISP,$Message);
+		$Message = str_ireplace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"".L_HELP_BUZZ1."\" title=\"".L_HELP_BUZZ1."\">",$Message);
 		if ($Align == "right") $Message = str_replace("arrowr","arrowl",$Message);
 		if ($L == "english" && strpos($Message,"L_LONG_DATETIME") !== false){
 			$longdtdate = substr($Message, (strpos($Message,"L_LONG_DATETIME") + 16), 10);
 			$longdtformat = 'str_replace("%d of", (stristr(PHP_OS,"win") ? "%#d" : "%e").date("S",'.$longdtdate.')." of", L_LONG_DATETIME)';
-			$Message = str_replace("L_LONG_DATETIME",$longdtformat,$Message);
+			$Message = str_ireplace("L_LONG_DATETIME",$longdtformat,$Message);
 		}
 #		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
 		if (C_POPUP_LINKS || stripos($Message,'target="_blank"></a>') !== false)

@@ -34,7 +34,8 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 01.02.2012 - 1.94-beta8:
-- changed the MthJax plugin to use a secure connection; (security related)
+- fixed a bug related to embeding sounds that was lead ing to freezing in booting in IE7/8; (functionality related)
+- changed the MathJax plugin to use the secure connection; (security related)
 - more deprecated functions updated (eg set_magic_quotes_runtime); (compatibility related)
 - Extra Options section has moved on bottom of the users' list, as a colapsible menu; (functionality related)
 - fixed the color drop box in input.php when var COLOR_TB is not defined in skin file; (functionality related)
