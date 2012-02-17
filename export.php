@@ -76,11 +76,11 @@ if($DbLink->num_rows() > 0)
 	$MessagesString = "";
 	while(list($Time, $User, $Latin1, $Dest, $Message) = $DbLink->next_record())
 	{
-		$Message = str_replace("L_DEL_BYE",L_DEL_BYE,$Message);
-		$Message = str_replace("L_REG_BRB",L_REG_BRB,$Message);
-		$Message = str_replace("L_HELP_MR",L_HELP_MR,$Message);
-		$Message = str_replace("L_HELP_MS",L_HELP_MS,$Message);
-		$Message = str_replace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"".L_HELP_BUZZ1."\" title=\"".L_HELP_BUZZ1."\">",$Message);
+		$Message = str_ireplace("L_DEL_BYE",L_DEL_BYE,$Message);
+		$Message = str_ireplace("L_REG_BRB",L_REG_BRB,$Message);
+		$Message = str_ireplace("L_HELP_MR",L_HELP_MR,$Message);
+		$Message = str_ireplace("L_HELP_MS",L_HELP_MS,$Message);
+		$Message = str_ireplace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"".L_HELP_BUZZ1."\" title=\"".L_HELP_BUZZ1."\">",$Message);
 		if ($Align == "right") $Message = str_replace("arrowr","arrowl",$Message);
 #		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
 		if (C_POPUP_LINKS || stripos($Message,'target="_blank"></a>') !== false)

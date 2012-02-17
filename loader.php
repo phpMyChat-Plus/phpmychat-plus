@@ -361,6 +361,7 @@ if($DbLink->num_rows() > 0)
 {
 	$i = "1";
 	$today = date('j', time() +  C_TMZ_OFFSET*60*60);
+	$MessagesString = "";
 	while(list($Time, $User, $Latin1, $Dest, $Message) = $DbLink->next_record())
 	{
 #		$Message = stripslashes($Message);
@@ -371,7 +372,7 @@ if($DbLink->num_rows() > 0)
 		{
 			$SmilieResult = array();
 			$val = array();
-			if (preg_match_all('/<IMG SRC="images\\/smilies\\/([^>]*)" BORDER=0 ALT="([^>]*)">/', $Message, $SmilieResult, PREG_SET_ORDER))
+			if (preg_match_all('/<IMG SRC="images\\/smilies\\/([^>]*)" BORDER=0 ALT="([^>]*)" TITLE="([^>]*)">/', $Message, $SmilieResult, PREG_SET_ORDER))
 			{
 				if (count($SmilieResult))
 				{
@@ -379,7 +380,7 @@ if($DbLink->num_rows() > 0)
 					{
 						if (in_array($val[2], array_keys($codes)))
 						{
-							$Message = str_replace($val[0], "<A HREF=\"#\" onClick=\"window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].value += '".$val[2]."'; window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].focus(); return false\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_5).".'; return true\" title=\"".$val[2]."\">".$val[0]."</A>", $Message);
+							$Message = str_replace($val[0], "<A HREF=\"#\" onClick=\"window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].value += '".$val[2]."'; window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].focus(); return false\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_5).".'; return true\" TITLE=\"".$val[2]."\">".$val[0]."</A>", $Message);
 						}
 					}
 				}
@@ -387,18 +388,18 @@ if($DbLink->num_rows() > 0)
 		}
 		// Ends Smilies checkup
 
-		$Message = str_replace("L_DEL_BYE",L_DEL_BYE,$Message);
-		$Message = str_replace("L_REG_BRB",L_REG_BRB,$Message);
-		$Message = str_replace("L_HELP_MR",sprintf(L_HELP_MR,$User),$Message);
-		$Message = str_replace("L_HELP_MS",sprintf(L_HELP_MS,$User),$Message);
-		$Message = str_replace("L_PRIV_PM",L_PRIV_PM,$Message);
-		$Message = str_replace("L_PRIV_WISP",L_PRIV_WISP,$Message);
-		$Message = str_replace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"".L_HELP_BUZZ1."\" title=\"".L_HELP_BUZZ1."\">",$Message);
+		$Message = str_ireplace("L_DEL_BYE",L_DEL_BYE,$Message);
+		$Message = str_ireplace("L_REG_BRB",L_REG_BRB,$Message);
+		$Message = str_ireplace("L_HELP_MR",sprintf(L_HELP_MR,$User),$Message);
+		$Message = str_ireplace("L_HELP_MS",sprintf(L_HELP_MS,$User),$Message);
+		$Message = str_ireplace("L_PRIV_PM",L_PRIV_PM,$Message);
+		$Message = str_ireplace("L_PRIV_WISP",L_PRIV_WISP,$Message);
+		$Message = str_ireplace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"".L_HELP_BUZZ1."\" title=\"".L_HELP_BUZZ1."\">",$Message);
 		if ($Align == "right") $Message = str_replace("arrowr","arrowl",$Message);
 		if ($L == "english" && strpos($Message,"L_LONG_DATETIME") !== false){
 			$longdtdate = substr($Message, (strpos($Message,"L_LONG_DATETIME") + 16), 10);
 			$longdtformat = 'str_replace("%d of", (stristr(PHP_OS,"win") ? "%#d" : "%e").date("S",'.$longdtdate.')." of", L_LONG_DATETIME)';
-			$Message = str_replace("L_LONG_DATETIME",$longdtformat,$Message);
+			$Message = str_ireplace("L_LONG_DATETIME",$longdtformat,$Message);
 		}
 #		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
 		if (C_POPUP_LINKS || stripos($Message,'target="_blank"></a>') !== false)
@@ -686,12 +687,12 @@ else
 		if ($Time > $LastLoad) $LastLoad = $Time;
 		$i++;
 	};
-$DbLink->clean_results();
 }
 else
 {
 	if ($First) $Messages[] = "<table cellspacing=0 cellpading=0><tr><td valign=\"top\" style=\"background-color:yellow;\"><SPAN CLASS=\"notify\">".L_NO_MSG."<\/SPAN><\/td><\/tr><\/table>";
 };
+$DbLink->clean_results();
 
 
 // ** Define the URL query part of the http refresh header **
@@ -722,7 +723,7 @@ header("Pragma: no-cache");
 <TITLE>Loader hidden frame</TITLE>
 <?php
 if ($D > 0)
-	echo('<meta HTTP-EQUIV="Refresh" CONTENT="' . $D . '; URL=loader.php?' . $Refresh . '">' . "\n");
+	echo('<meta HTTP-EQUIV="Refresh" CONTENT="' . $D . '; URL=loader.php?' . $Refresh . '">' . '\n');
 ?>
 <SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
 <!--
@@ -758,8 +759,7 @@ if ($First)
 		write("<TITLE>Dynamic messages frame<\/TITLE>\n");
  		write("<LINK REL=\"stylesheet\" HREF=\"<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>\" TYPE=\"text\/css\">\n");
 //		if (c_allow_math == 1) write("<script type=\"text\/javascript\" src=\"http:\/\/cdn\.mathjax\.org\/mathjax\/latest\/MathJax\.js?config=TeX-AMS-MML_HTMLorMML\"><\/script>\n");
-//		if (c_allow_math == 1) write('<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>\n');
-		if (c_allow_math == 1) write('<script type="text/javascript" src="https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>\n');
+		if (c_allow_math == 1) write("<script type=\"text/javascript\" src=\"https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>\n");
 		write("<\/HEAD>\n\n");
 		write("<BODY CLASS=\"mainframe\">\n");
 	};
@@ -796,16 +796,16 @@ if (ALLOW_ENTRANCE_SOUND == "3" && WELCOME_SOUND)
     if ($xxx = 1)
     {
 			$tmpstr = stripslashes(L_ENTER_SND);
-			$Messages[$xxx] = str_replace($tmpstr,"",$Messages[$xxx]);
+			$Messages[$xxx] = str_ireplace($tmpstr,"",$Messages[$xxx]);
     };
 	}
 }
 if ($xxx > 1)
 {
 	$tmpstr = stripslashes(L_ENTER_SND);
-	$Messages[$xxx] = str_replace($tmpstr,"",$Messages[$xxx]);
+	$Messages[$xxx] = str_ireplace($tmpstr,"",$Messages[$xxx]);
 	$tmpstr1 = stripslashes(L_WELCOME_SND);
-	$Messages[$xxx] = str_replace($tmpstr1,"",$Messages[$xxx]);
+	$Messages[$xxx] = str_ireplace($tmpstr1,"",$Messages[$xxx]);
 };
 // end Bob Dickow mod for buzzes and hellos.
 	// doubles backslashes except the ones for closing HTML tags

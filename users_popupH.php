@@ -42,7 +42,8 @@ header("Pragma: no-cache");
 header("Content-Type: text/html; charset=${Charset}");
 
 // avoid server configuration for magic quotes
-set_magic_quotes_runtime(0);
+if (function_exists('set_magic_quotes_runtime') && version_compare(PHP_VERSION, '5.3.0') < 0) set_magic_quotes_runtime(0);
+else ini_set("magic_quotes_runtime", 0);
 // Can't turn off magic quotes gpc so just redo what it did if it is on.
 if (get_magic_quotes_gpc()) {
 	foreach($_GET as $k=>$v)
@@ -145,7 +146,7 @@ function special_char($str,$lang,$type)
 	$tag_open = (((($type == 'a' && $str != C_BOT_NAME) || $type == 't' || $type == 'm') && C_ITALICIZE_POWERS) ? "<I>":"");
 	$tag_close = ($tag_open != "" ? "</I>":"");
 	return $tag_open.($lang ? htmlentities($str) : htmlspecialchars($str)).$tag_close;
-}
+};
 
 // Special classes for usernames depending on users status (other users)
 function userClass($type,$name)
@@ -159,7 +160,7 @@ function userClass($type,$name)
 			$class = "Class=\"user\"";
 		}
 	return $class;
-}
+};
 
 // Ghost Control mod by Ciprian
 $Hide = "";
@@ -302,7 +303,6 @@ else
 $DbLink->close();
 ?>
 </P>
-
 <SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript1.2">
 <!--
 rooms_number = <?php echo(isset($i) ? $i : 0); ?>;
@@ -344,21 +344,17 @@ if (NS4)
 }
 //-->
 </SCRIPT>
-
 <?php
 // ** Beeps if necessary **
 if ($B == 1 && $BeepRoom)
 {
-		?>
-		<!-- Sound for user entrance -->
-		<EMBED SRC="sounds/beep.wav" HIDDEN="true" AUTOSTART="true" LOOP="false" NAME="Beep" MASTERSOUND>
-			<NOEMBED><BGSOUND SRC="sounds/beep.wav" LOOP=1></NOEMBED>
-		</EMBED>
-		<?php
+	?>
+	<!-- Sound for user entrance -->
+	<EMBED SRC="sounds/beep.wav" VOLUME="50" HIDDEN="true" AUTOSTART="true" LOOP="false" NAME="Beep" MASTERSOUND><NOEMBED><BGSOUND SRC="sounds/beep.wav" LOOP="1"></NOEMBED></EMBED>
+	<?php
 }
 ?>
 </BODY>
-
 </HTML>
 <?php
 ?>

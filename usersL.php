@@ -81,13 +81,15 @@ if (d) d.style.display='none';
 }
 //-->
 </SCRIPT>
-
 <STYLE TYPE="text/css" MEDIA="screen">
 <!--
 body {
-position: relative;
+position: inherit;
 margin: 0;
 padding: 0;
+width: 90%; /* precision for Opera */
+margin-left: 5px;
+margin-right: 5px;
 font: 80%;
 }
 dl, dt, dd, ul, li {
@@ -101,9 +103,9 @@ z-index: 100;
 position: absolute; /* Menu position that can be changed at will */
 bottom: 0;
 z-index: 100;
-width: 95%; /* precision for Opera */
 margin-left: 5px;
 margin-right: 5px;
+width: 90%; /* precision for Opera */
 }
 #menu dl {
 //float: right;
@@ -841,7 +843,40 @@ for($k = 0; $k < count($DefaultChatRooms); $k++)
 		<dt onmouseover="javascript:show('smenu1');"><?php echo(L_EXTRA_OPT); ?></dt>
 		<dd id="smenu1" onmouseover="javascript:show('smenu1');" onmouseout="javascript:show('');">
 			<ul>
+				<li><a href="<?php echo($ChatPath); ?>privacy.html" onClick="window.parent.privacy_popup(); return false" TARGET="_blank" title="<?php echo(sprintf(L_CLICK,L_PRIVACY)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_PRIVACY)); ?>'; return true">Our Privacy Policy</a></li>
+				<li><a onClick="javascript:alert('<?php echo (APP_NAME." - ".APP_VERSION.APP_MINOR); ?>\n\nReleased on:\n<?php echo(RELEASE_DATE); ?>.\n\n&copy; 2001-<?php echo(date('Y')); ?>\nPlus Developer: <?php echo(PLUS_DEVELOPER); ?>\n\nBig thanks to all the contributors\nto the phpHeaven Team work\nand the phpMyChat groups on\nYahoo! and Sourceforge.\n\nThank you for using our work!')" Title="What is this?" onMouseOver="window.status='What is this?'; return true"><?php echo (APP_NAME); ?></a></li>
+				<li><a href="<?php echo($ChatPath); ?>extra/fixes/fixes.zip" TARGET="_blank" onMouseOver="window.status='<?php echo (stristr($_SERVER['HTTP_USER_AGENT'],"MSIE") ? L_SOUNDFIX_IE_2 : str_replace("IE","FF",L_SOUNDFIX_IE_2)) ?>'; return true;" title="<?php echo (stristr($_SERVER['HTTP_USER_AGENT'],"MSIE") ? L_SOUNDFIX_IE_2 : str_replace("IE","FF",L_SOUNDFIX_IE_2)) ?>"><?php echo (stristr($_SERVER['HTTP_USER_AGENT'],"MSIE") ? L_SOUNDFIX_IE_1 : str_replace("IE","FF",L_SOUNDFIX_IE_1)) ?></a></li>
 <?php
+if (C_CHAT_LOGS && (C_SHOW_LOGS_USR || $statusu == "a" || $statusu == "t"))
+{
+?>
+				<li><a href="<?php echo($ChatPath); ?>logs.php?<?php echo("L=$L"); ?>" onClick="window.parent.logs_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_ARCHIVE); ?>.'; return true;" title="<?php echo(L_ARCHIVE); ?>"><?php echo(L_ARCHIVE); ?></a></li>
+<?php
+}
+?>
+				<li><a href="<?php echo($ChatPath); ?>bday_popup.php?<?php echo("L=$L"); ?>" onClick="window.parent.bday_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_L_DOB_TIT_1); ?>.'; return true;" title="<?php echo(L_DOB_TIT_1); ?>"><?php echo(L_DOB_TIT_1); ?></a></li>
+<?php
+if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $statusu == "a" || $statusu == "t"))
+{
+	$handler = @mysql_connect(C_DB_HOST,C_DB_USER,C_DB_PASS);
+	@@mysql_query("SET CHARACTER SET utf8");
+	@mysql_query("SET NAMES 'utf8'");
+	@mysql_select_db(C_DB_NAME,$handler);
+	$timeout = "15";
+	$closetime = $time-($timeout);
+	// Ghost Control mod by Ciprian
+	$Hide1 = "";
+	if (C_HIDE_ADMINS) $Hide1 .= ($Hide1 == "") ? " WHERE status != 'a' AND status != 't'" : " AND status != 'a' AND status != 't'";
+	if (C_HIDE_MODERS) $Hide1 .= ($Hide1 == "") ? " WHERE status != 'm'" : " AND status != 'm'";
+	if (C_SPECIAL_GHOSTS != "") $Hide1 .= ($Hide1 == "") ?  " WHERE username != ".C_SPECIAL_GHOSTS."" : " AND username != ".C_SPECIAL_GHOSTS."";
+	$delete = @mysql_query("DELETE FROM ".C_LRK_TBL." WHERE time<'$closetime'",$handler);
+	$result = @mysql_query("SELECT DISTINCT ip,browser,username FROM ".C_LRK_TBL.$Hide1."",$handler);
+	$online_users = @mysql_numrows($result);
+	@mysql_close();
+	$lurklink = "<li><a href=\"lurking.php?L=".$L."&D=".$D."\" CLASS=\"ChatLink\" TARGET=\"_blank\" onMouseOver=\"window.status='".L_LURKING_1.".'; return true;\" title='".L_LURKING_2."'>";
+	echo($lurklink.$online_users." ".($online_users != 1 ? L_LURKERS : L_LURKER)."</a></li>");
+	$CleanUsrTbl = 1;
+}
 if ($statusu == "a")
 {
 ?>
@@ -895,40 +930,9 @@ if (C_ENABLE_PM && isset($PWD_Hash))
 	<?php
 	}
 };
-if (C_CHAT_LOGS && (C_SHOW_LOGS_USR || $statusu == "a" || $statusu == "t"))
-{
-?>
-				<li><a href="<?php echo($ChatPath); ?>logs.php?<?php echo("L=$L"); ?>" onClick="window.parent.logs_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_ARCHIVE); ?>.'; return true;" title="<?php echo(L_ARCHIVE); ?>"><?php echo(L_ARCHIVE); ?></a></li>
-<?php
-}
-if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $statusu == "a" || $statusu == "t"))
-{
-	$handler = @mysql_connect(C_DB_HOST,C_DB_USER,C_DB_PASS);
-	@@mysql_query("SET CHARACTER SET utf8");
-	@mysql_query("SET NAMES 'utf8'");
-	@mysql_select_db(C_DB_NAME,$handler);
-	$timeout = "15";
-	$closetime = $time-($timeout);
-	// Ghost Control mod by Ciprian
-	$Hide1 = "";
-	if (C_HIDE_ADMINS) $Hide1 .= ($Hide1 == "") ? " WHERE status != 'a' AND status != 't'" : " AND status != 'a' AND status != 't'";
-	if (C_HIDE_MODERS) $Hide1 .= ($Hide1 == "") ? " WHERE status != 'm'" : " AND status != 'm'";
-	if (C_SPECIAL_GHOSTS != "") $Hide1 .= ($Hide1 == "") ?  " WHERE username != ".C_SPECIAL_GHOSTS."" : " AND username != ".C_SPECIAL_GHOSTS."";
-	$delete = @mysql_query("DELETE FROM ".C_LRK_TBL." WHERE time<'$closetime'",$handler);
-	$result = @mysql_query("SELECT DISTINCT ip,browser,username FROM ".C_LRK_TBL.$Hide1."",$handler);
-	$online_users = @mysql_numrows($result);
-	@mysql_close();
-	$lurklink = "<li><a href=\"lurking.php?L=".$L."&D=".$D."\" CLASS=\"ChatLink\" TARGET=\"_blank\" onMouseOver=\"window.status='".L_LURKING_1.".'; return true;\" title='".L_LURKING_2."'>";
-	echo($lurklink.$online_users." ".($online_users != 1 ? L_LURKERS : L_LURKER)."</a></li>");
-	$CleanUsrTbl = 1;
-}
 ?>
 				<li><a href="<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>" onClick="window.parent.tutorial_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_TUTORIAL); ?>.'; return true;" title="<?php echo(L_TUTORIAL); ?>"><?php echo(L_TUTORIAL); ?></a></li>
-				<li><a href="<?php echo($ChatPath); ?>bday_popup.php?<?php echo("L=$L"); ?>" onClick="window.parent.bday_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_L_DOB_TIT_1); ?>.'; return true;" title="<?php echo(L_DOB_TIT_1); ?>"><?php echo(L_DOB_TIT_1); ?></a></li>
-				<li><a href="<?php echo($ChatPath); ?>extra/fixes/fixes.zip" TARGET="_blank" onMouseOver="window.status='<?php echo (stristr($_SERVER['HTTP_USER_AGENT'],"MSIE") ? L_SOUNDFIX_IE_2 : str_replace("IE","FF",L_SOUNDFIX_IE_2)) ?>'; return true;" title="<?php echo (stristr($_SERVER['HTTP_USER_AGENT'],"MSIE") ? L_SOUNDFIX_IE_2 : str_replace("IE","FF",L_SOUNDFIX_IE_2)) ?>"><?php echo (stristr($_SERVER['HTTP_USER_AGENT'],"MSIE") ? L_SOUNDFIX_IE_1 : str_replace("IE","FF",L_SOUNDFIX_IE_1)) ?></a></li>
-				<li><a href="privacy.html" TARGET=_blank CLASS="ChatLink" title="<?php echo(sprintf(L_CLICK,L_PRIVACY)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_PRIVACY)); ?>'; return true">Our Privacy Policy</a></li>
 				<li><a href="<?php echo($ChatPath); ?>help_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>" onClick="window.parent.help_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_HLP); ?>.'; return true" onClick="window.parent.frames['input'].forms['MsgForm'].elements['M'].focus();" title="<?php echo(L_HLP); ?>"><?php echo(L_HLP); ?></a></li>
-				<li><a onClick="javascript:alert('<?php echo (APP_NAME." - ".APP_VERSION.APP_MINOR); ?>\n\nReleased on:\n<?php echo(RELEASE_DATE); ?>.\n\n&copy; 2001-<?php echo(date('Y')); ?>\nPlus Developer: <?php echo(PLUS_DEVELOPER); ?>\n\nBig thanks to all the contributors\nto the phpHeaven Team work\nand the phpMyChat groups on\nYahoo! and Sourceforge.\n\nThank you for using our work!')" Title="What is this?" onMouseOver="window.status='What is this?'; return true"><?php echo (APP_NAME); ?></a></li>
 			</ul>
 		</dd>
 	</dl>

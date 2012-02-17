@@ -173,10 +173,6 @@ if (C_SPECIAL_GHOSTS != "")
 	$Hide .= " AND u.username != ".$sghosts."";
 }
 
-// Restricted rooms mod by Ciprian
-$res_init = utf8_substr(L_RESTRICTED, 0, 1);
-$disp_note = 0;
-
 // ** count rooms **
 $DbLink->query("SELECT DISTINCT u.room FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room AND m.type = 1");
 $NbRooms = $DbLink->num_rows();
@@ -184,6 +180,9 @@ $DbLink->clean_results();
 
 if ($NbRooms > 0)
 {
+// Restricted rooms mod by Ciprian
+$res_init = utf8_substr(L_RESTRICTED, 0, 1);
+$disp_note = 0;
 	// ** count users **
 	$DbLink->query("SELECT DISTINCT u.username, u.latin1, u.r_time FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room AND m.type = 1".$Hide." ORDER BY ".$ordquery."");
 	$NbUsers = $DbLink->num_rows();
@@ -231,7 +230,7 @@ if(isset($NbUsers) && $NbUsers > 0)
 			$Users = new DB;
 			while(list($Other) = $DbLink->next_record())
 			{
-				if($Users->query("SELECT u.username, u.latin1, u.status, u.r_time FROM ".C_USR_TBL." u WHERE room = '".addslashes($Other)."'".$Hide." ORDER BY ".$ordquery.""))
+				if($Users->query("SELECT u.username, u.latin1, u.status, u.r_time FROM ".C_USR_TBL." u WHERE u.room = '".addslashes($Other)."'".$Hide." ORDER BY ".$ordquery.""))
 				{
 					if($Users->num_rows() > 0)
 					{
@@ -266,22 +265,17 @@ else
 $DbLink->close();
 ?>
 </P>
-
 <?php
 // ** Beeps if necessary **
 if ($B == 1 && $BeepRoom)
 {
 	?>
 	<!-- Sound for user entrance -->
-	<EMBED SRC="sounds/beep.wav" HIDDEN="true" AUTOSTART="true" LOOP="false" NAME="Beep" MASTERSOUND>
-		<NOEMBED><BGSOUND SRC="sounds/beep.wav" LOOP=1></NOEMBED>
-	</EMBED>
+	<EMBED SRC="sounds/beep.wav" VOLUME="50" HIDDEN="true" AUTOSTART="true" LOOP="false" NAME="Beep" MASTERSOUND><NOEMBED><BGSOUND SRC="sounds/beep.wav" LOOP="1"></NOEMBED></EMBED>
 	<?php
 }
 ?>
 </BODY>
-
 </HTML>
 <?php
-
 ?>

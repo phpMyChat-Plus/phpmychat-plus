@@ -94,6 +94,8 @@ function close_popups()
 		if (is_bday_popup && !is_bday_popup.closed) is_bday_popup.close();
 		// Logs Popup mod by Cipprian
 		if (is_logs_popup && !is_logs_popup.closed) is_logs_popup.close();
+		// Privacy Policy Popup mod by Cipprian
+		if (is_privacy_popup && !is_privacy_popup.closed) is_privacy_popup.close();
 		if (is_ignored_popup && !is_ignored_popup.closed)
 		{
 			is_ignored_popup.window.document.forms['IgnForm'].elements['Exit'].value = '1';

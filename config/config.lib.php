@@ -17,6 +17,7 @@ define("C_STS_TBL", 'c_stats'); 			// Name of the table where statistics data is
 define("C_USR_TBL", 'c_users');					// Name of the table where user names are stored
 
 // ------ THESE SETTINGS MUST NOT BE CHANGED ------
+
 error_reporting (E_ERROR | E_WARNING | E_PARSE);
 #error_reporting (E_ALL); //for debugging purposes only!
 
@@ -226,7 +227,7 @@ $OPEN_SAT_BEG					= $row[195];
 $OPEN_SAT_END					= $row[196];
 $ALLOW_TEXT_COLORS				= $row[197];
 $TAGS_POWERS					= $row[198];
-$ALLOW_MATH						= $row[199];
+$ALLOW_MATH					= $row[199];
 
 $query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.com'";
 $result_bot = mysql_query($query_bot);
@@ -333,17 +334,17 @@ define("ENTRANCE_SOUND", $ENTRANCE_SOUND);
 define("WELCOME_SOUND", $WELCOME_SOUND);
 if (ALLOW_ENTRANCE_SOUND == 3 && ENTRANCE_SOUND)
 {
-	define("L_ENTER_SND", "<EMBED SRC=".$ENTRANCE_SOUND." VOLUME=50 HIDDEN=true AUTOSTART=true LOOP=false NAME=Hello MASTERSOUND><NOEMBED><BGSOUND SRC=".$ENTRANCE_SOUND." LOOP=1></NOEMBED></EMBED>");
-	define("L_WELCOME_SND", "<EMBED SRC=".$WELCOME_SOUND." VOLUME=50 HIDDEN=true AUTOSTART=true LOOP=false NAME=Welcome MASTERSOUND><NOEMBED><BGSOUND SRC=".$WELCOME_SOUND." LOOP=1></NOEMBED></EMBED>");
+	define("L_ENTER_SND", "<EMBED SRC=\"".$ENTRANCE_SOUND."\" VOLUME=\"30\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Hello\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$ENTRANCE_SOUND."\" LOOP=\"1\"></NOEMBED></EMBED>");
+	define("L_WELCOME_SND", "<EMBED SRC=\"".$WELCOME_SOUND."\" VOLUME=\"30\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Welcome\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$WELCOME_SOUND."\' LOOP=\"1\"></NOEMBED></EMBED>");
 }
 elseif (ALLOW_ENTRANCE_SOUND == 2 && WELCOME_SOUND)
 {
 	define("L_ENTER_SND", "");
-	define("L_WELCOME_SND", "<EMBED SRC=".$WELCOME_SOUND." VOLUME=50 HIDDEN=true AUTOSTART=true LOOP=false NAME=Welcome MASTERSOUND><NOEMBED><BGSOUND SRC=".$WELCOME_SOUND." LOOP=1></NOEMBED></EMBED>");
+	define("L_WELCOME_SND", "<EMBED SRC=\"".$WELCOME_SOUND."\" VOLUME=\"30\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Welcome\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$WELCOME_SOUND."\" LOOP=\"1\"></NOEMBED></EMBED>");
 }
 elseif (ALLOW_ENTRANCE_SOUND == 1 && ENTRANCE_SOUND)
 {
-	define("L_ENTER_SND", "<EMBED SRC=".$ENTRANCE_SOUND." VOLUME=50 HIDDEN=true AUTOSTART=true LOOP=false NAME=Hello MASTERSOUND><NOEMBED><BGSOUND SRC=".$ENTRANCE_SOUND." LOOP=1></NOEMBED></EMBED>");
+	define("L_ENTER_SND", "<EMBED SRC=\"".$ENTRANCE_SOUND."\" VOLUME=\"30\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Hello\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$ENTRANCE_SOUND."\" LOOP=\"1\"></NOEMBED></EMBED>");
 	define("L_WELCOME_SND", "");
 }
 else
@@ -355,7 +356,7 @@ else
 // Buzz Sound command.
 define("ALLOW_BUZZ_SOUND", $ALLOW_BUZZ_SOUND);
 define("BUZZ_SOUND", $BUZZ_SOUND);
-if (ALLOW_BUZZ_SOUND && BUZZ_SOUND) define("L_BUZZ_SND", "<EMBED SRC=".$BUZZ_SOUND." HIDDEN=true AUTOSTART=true LOOP=false NAME=Buzz MASTERSOUND><NOEMBED><BGSOUND SRC=".$BUZZ_SOUND." LOOP=1></NOEMBED></EMBED>");
+if (ALLOW_BUZZ_SOUND && BUZZ_SOUND) define("L_BUZZ_SND", "<EMBED SRC=\"".$BUZZ_SOUND."\" VOLUME=\"30\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Buzz\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$BUZZ_SOUND."\" LOOP=\"1\"></NOEMBED></EMBED>");
 else define("L_BUZZ_SND", "");
 
 // Enable different Topics for each room, defined in topic.php.
@@ -699,6 +700,6 @@ define("C_OPEN_SAT_END", $OPEN_SAT_END);
 define("C_ALLOW_TEXT_COLORS", $ALLOW_TEXT_COLORS);
 define("C_TAGS_POWERS", $TAGS_POWERS);
 
-// MathJax (MathML/TeX) formulas rendering in chat by Ciprian
+// MathJax LaTeX formulas rendering in chat
 define("C_ALLOW_MATH", $ALLOW_MATH);
 ?>

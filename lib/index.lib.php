@@ -1105,10 +1105,23 @@ if(!isset($Error) && (isset($N) && $N != ""))
 		name += "_popup";
 		window.open(url,name,param);
 	};
-	// -->
-	</SCRIPT>
-	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript1.2">
-	<!--
+
+	// Privacy Policy Popup mod by Ciprian
+	// Launch the Privacy Policy popup
+	var is_privacy_popup = null;
+
+	function privacy_popup()
+	{
+		if (is_privacy_popup && !is_privacy_popup.closed)
+		{
+			is_privacy_popup.focus();
+		}
+		else
+		{
+			is_privacy_popup = window.open("privacy.html","privacy_popup","bottom=0,right=0,width=600,height=400,scrollbars=yes,resizable=yes,status=yes,toolbar=no,menubar=no,directories=no,location=no");
+		};
+	};
+
 	// Misc vars
 	imgHelpOff = new Image(30,20); imgHelpOff.src = path2Chat + "localization/<?php echo($L); ?>/images/helpOff.gif";
 	imgHelpOn = new Image(30,20); imgHelpOn.src = path2Chat + "localization/<?php echo($L); ?>/images/helpOn.gif";
@@ -1169,10 +1182,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 		window.frames['input'].window.focus();
 		window.frames['input'].window.document.forms['MsgForm'].elements['M'].focus();
 	};
-	// -->
-	</SCRIPT>
-	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript1.2">
-	<!--
+
 	// Get the position for the help popup
 	var mouseX = 0;
 	var mouseY = 0;
@@ -1452,6 +1462,22 @@ function isCookieEnabled() {
 		window.open(url,name,param);
 	};
 
+	// Privacy Policy Popup mod by Ciprian
+	// Launch the Privacy Policy popup
+	var is_privacy_popup = null;
+
+	function privacy_popup()
+	{
+		if (is_privacy_popup && !is_privacy_popup.closed)
+		{
+			is_privacy_popup.focus();
+		}
+		else
+		{
+			is_privacy_popup = window.open("privacy.html","privacy_popup","bottom=0,right=0,width=600,height=400,scrollbars=yes,resizable=yes,status=yes,toolbar=no,menubar=no,directories=no,location=no");
+		};
+	};
+
 	// The three functions below allows to ensure an unique choice among rooms
 	function reset_R0()
 	{
@@ -1577,7 +1603,7 @@ if (C_SPECIAL_GHOSTS != "")
 if($DbLink->query("SELECT DISTINCT u.username FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room AND m.type = 1".$Hide.""))
 {
 	$Nb = $DbLink->num_rows();
-	$link = " <A HREF=\"${ChatPath}users_popupL.php?From=$From&L=$L\" CLASS=\"ChatLink\" onClick=\"users_popup(); return false\" TARGET=\"_blank\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_11).".'; return true;\" title='".sprintf(L_CLICK,L_LINKS_11)."'>";
+	$link = " <A HREF=\"${ChatPath}users_popup".$Ver1.".php?From=$From&L=$L\" CLASS=\"ChatLink\" onClick=\"users_popup(); return false\" TARGET=\"_blank\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_11).".'; return true;\" title='".sprintf(L_CLICK,L_LINKS_11)."'>";
 	echo("<P CLASS=\"ChatP1\">".L_CUR_1." ".($Nb != 1 ? L_CUR_1a." ".$link.$Nb." ".L_USERS."</A>" : L_CUR_1b." ".$link.$Nb." ".L_USER."</A>")." ".L_CUR_2.".");
 	$DbLink->clean_results();
 }
@@ -2079,7 +2105,7 @@ else echo($Owner_name);
 <?php
 }
 ?>
-<br /><SPAN CLASS="ChatCopy" dir="LTR"><a HREF="privacy.html" TARGET=_blank CLASS="ChatLink" Title="<?php echo(sprintf(L_CLICK,L_PRIVACY)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_PRIVACY)); ?>'; return true">Our Privacy Policy</a>
+<br /><SPAN CLASS="ChatCopy" dir="LTR"><a HREF="privacy.html" onClick="privacy_popup(); return false" TARGET=_blank CLASS="ChatLink" Title="<?php echo(sprintf(L_CLICK,L_PRIVACY)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_PRIVACY)); ?>'; return true">Our Privacy Policy</a>
 </SPAN>
 <?php
 	if ($show_donation)

@@ -157,19 +157,19 @@ $CellAlign = ($Align == "right" ? "RIGHT" : "LEFT");
 		</TR>
 		<TR>
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_SET_2); ?> :</TD>
-			<TD VALIGN="TOP">
+			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP">
 				<INPUT TYPE="text" NAME="pmc_username" SIZE=11 MAXLENGTH=15 VALUE="<?php if (isset($pmc_username)) echo(htmlspecialchars(stripslashes($pmc_username))); ?>">
 			</TD>
 		</TR>
 		<TR>
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_1); ?> :</TD>
-			<TD VALIGN="TOP">
+			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP">
 				<INPUT TYPE="password" NAME="pmc_password" SIZE=11 MAXLENGTH=16 VALUE="<?php echo($RemMe ? $RemMe : ((isset($pmc_password)) ? htmlspecialchars(stripslashes($pmc_password)) : "")); ?>">
 				</TD>
 		</TR>
 		<TR>
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" NOWRAP="NOWRAP"></TD>
-			<TD VALIGN="TOP">
+			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP">
 			<A HREF="<?php echo(${ChatPath}); ?>pass_reset.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('pass_reset'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_PASS_7); ?>.'; return true;"><?php echo(L_PASS_7); ?></A>
 				</TD>
 		</TR>

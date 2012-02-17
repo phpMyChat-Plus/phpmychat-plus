@@ -24,7 +24,7 @@ if (window.parent.frames['loader'] && !window.parent.frames['loader'].closed)
 	if (typeof(window.parent.leaveChat) != 'undefined') window.parent.leaveChat = true;
 	window.parent.frames['loader'].close();
 };
-
+window.parent.frames['exit'].close_popups();
 window.parent.window.location = '<?php echo("$From?Ver=$Ver&L=$L&U=".urlencode(stripslashes($U))."&O=$O&ST=$ST&NT=$NT&E=".urlencode(stripslashes($R))."&EN=$T"); ?>';
 // -->
 </SCRIPT>
