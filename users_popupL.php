@@ -96,6 +96,27 @@ function ghosts_in($what, $in, $Charset)
 	return false;
 };
 
+function special_char($str,$lang,$type)
+{
+	$tag_open = (((($type == 'a' && $str != C_BOT_NAME) || $type == 't' || $type == 'm') && C_ITALICIZE_POWERS) ? "<I>":"");
+	$tag_close = ($tag_open != "" ? "</I>":"");
+	return $tag_open.($lang ? htmlentities($str) : htmlspecialchars($str)).$tag_close;
+};
+
+// Special classes for usernames depending on users status (other users)
+function userClass($type,$name)
+{
+		if (C_ITALICIZE_POWERS)
+		{
+			$class = ((($type == 'a' && $name != C_BOT_NAME) || $type == 't') ? "Class=\"admin\"":($type == 'm' ? "Class=\"mod\"":"Class=\"user\""));
+		}
+		else
+		{
+			$class = "Class=\"user\"";
+		}
+	return $class;
+};
+
 $DbLink = new DB;
 
 // ** Check for user entrance to beep **
@@ -142,27 +163,6 @@ if (!isset($FontName)) $FontName = "";
 
 <HEAD>
 <?php
-function special_char($str,$lang,$type)
-{
-	$tag_open = (((($type == 'a' && $str != C_BOT_NAME) || $type == 't' || $type == 'm') && C_ITALICIZE_POWERS) ? "<I>":"");
-	$tag_close = ($tag_open != "" ? "</I>":"");
-	return $tag_open.($lang ? htmlentities($str) : htmlspecialchars($str)).$tag_close;
-};
-
-// Special classes for usernames depending on users status (other users)
-function userClass($type,$name)
-{
-		if (C_ITALICIZE_POWERS)
-		{
-			$class = ((($type == 'a' && $name != C_BOT_NAME) || $type == 't') ? "Class=\"admin\"":($type == 'm' ? "Class=\"mod\"":"Class=\"user\""));
-		}
-		else
-		{
-			$class = "Class=\"user\"";
-		}
-	return $class;
-};
-
 // Ghost Control mod by Ciprian
 $Hide = "";
 if (C_HIDE_ADMINS) $Hide .= " AND (u.status != 'a' OR u.username = '".C_BOT_NAME."') AND u.status != 't'";
@@ -216,6 +216,16 @@ else
 <CENTER>
 	<?php echo(LOGIN_LINK); ?><?php echo(L_CHAT); ?></A>
 	<P><A HREF="users_popupL.php?<?php echo($ChangeBeeps_Reload); ?>" onMouseOver="window.status='<?php echo(L_BEEP); ?>.'; return true;" title="<?php echo(L_BEEP); ?>"><IMG SRC="images/<?php if ($B == 0) echo("no"); ?>sound.gif" WIDTH=13 HEIGHT=13 ALIGN=MIDDLE BORDER=0 ALT="<?php echo(L_BEEP); ?>"></A></P>
+	<?php
+	// ** Beeps if necessary **
+	if ($B == 1 && $BeepRoom)
+	{
+		?>
+		<!-- Sound for user entrance -->
+		<EMBED SRC="sounds/beep.wav" VOLUME="50" HIDDEN="true" AUTOSTART="true" LOOP="false" NAME="Beep" MASTERSOUND><NOEMBED><BGSOUND SRC="sounds/beep.wav" LOOP=1></NOEMBED></EMBED>
+		<?php
+	}
+	?>
 </CENTER>
 <P>
 <?php
@@ -265,16 +275,6 @@ else
 $DbLink->close();
 ?>
 </P>
-<?php
-// ** Beeps if necessary **
-if ($B == 1 && $BeepRoom)
-{
-	?>
-	<!-- Sound for user entrance -->
-	<EMBED SRC="sounds/beep.wav" VOLUME="50" HIDDEN="true" AUTOSTART="true" LOOP="false" NAME="Beep" MASTERSOUND><NOEMBED><BGSOUND SRC="sounds/beep.wav" LOOP="1"></NOEMBED></EMBED>
-	<?php
-}
-?>
 </BODY>
 </HTML>
 <?php

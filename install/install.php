@@ -1131,17 +1131,17 @@ define("ENTRANCE_SOUND", $ENTRANCE_SOUND);
 define("WELCOME_SOUND", $WELCOME_SOUND);
 if (ALLOW_ENTRANCE_SOUND == 3 && ENTRANCE_SOUND)
 {
-	define("L_ENTER_SND", "<EMBED SRC=\"".$ENTRANCE_SOUND."\" VOLUME=\"30\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Hello\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$ENTRANCE_SOUND."\" LOOP=\"1\"></NOEMBED></EMBED>");
-	define("L_WELCOME_SND", "<EMBED SRC=\"".$WELCOME_SOUND."\" VOLUME=\"30\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Welcome\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$WELCOME_SOUND."\' LOOP=\"1\"></NOEMBED></EMBED>");
+	define("L_ENTER_SND", "<EMBED SRC=\"".$ENTRANCE_SOUND."\" VOLUME=\"30\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Hello\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$ENTRANCE_SOUND."\" LOOP=1></NOEMBED></EMBED>");
+	define("L_WELCOME_SND", "<EMBED SRC=\"".$WELCOME_SOUND."\" VOLUME=\"30\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Welcome\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$WELCOME_SOUND."\" LOOP=1></NOEMBED></EMBED>");
 }
 elseif (ALLOW_ENTRANCE_SOUND == 2 && WELCOME_SOUND)
 {
 	define("L_ENTER_SND", "");
-	define("L_WELCOME_SND", "<EMBED SRC=\"".$WELCOME_SOUND."\" VOLUME=\"30\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Welcome\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$WELCOME_SOUND."\" LOOP=\"1\"></NOEMBED></EMBED>");
+	define("L_WELCOME_SND", "<EMBED SRC=\"".$WELCOME_SOUND."\" VOLUME=\"30\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Welcome\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$WELCOME_SOUND."\" LOOP=1></NOEMBED></EMBED>");
 }
 elseif (ALLOW_ENTRANCE_SOUND == 1 && ENTRANCE_SOUND)
 {
-	define("L_ENTER_SND", "<EMBED SRC=\"".$ENTRANCE_SOUND."\" VOLUME=\"30\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Hello\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$ENTRANCE_SOUND."\" LOOP=\"1\"></NOEMBED></EMBED>");
+	define("L_ENTER_SND", "<EMBED SRC=\"".$ENTRANCE_SOUND."\" VOLUME=\"30\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Hello\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$ENTRANCE_SOUND."\" LOOP=1></NOEMBED></EMBED>");
 	define("L_WELCOME_SND", "");
 }
 else
@@ -1153,7 +1153,7 @@ else
 // Buzz Sound command.
 define("ALLOW_BUZZ_SOUND", $ALLOW_BUZZ_SOUND);
 define("BUZZ_SOUND", $BUZZ_SOUND);
-if (ALLOW_BUZZ_SOUND && BUZZ_SOUND) define("L_BUZZ_SND", "<EMBED SRC=\"".$BUZZ_SOUND."\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Buzz\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$BUZZ_SOUND."\" LOOP=\"1\"></NOEMBED></EMBED>");
+if (ALLOW_BUZZ_SOUND && BUZZ_SOUND) define("L_BUZZ_SND", "<EMBED SRC=\"".$BUZZ_SOUND."\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Buzz\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$BUZZ_SOUND."\" LOOP=1></NOEMBED></EMBED>");
 else define("L_BUZZ_SND", "");
 
 // Enable different Topics for each room, defined in topic.php.
@@ -1192,7 +1192,7 @@ define ("C_SHOW_LOGO", $SHOW_LOGO);
 define ("C_LOGO_IMG", $LOGO_IMG);
 define ("C_LOGO_OPEN", $LOGO_OPEN);
 define ("C_LOGO_ALT", $LOGO_ALT);
-define ("APP_LOGO", "<A HREF='".$LOGO_OPEN."' TITLE='".$LOGO_ALT."' onMouseOver=\"window.status='".C_LOGO_ALT."'; return true\" TARGET=_blank><IMG SRC='".$LOGO_IMG."' BORDER=0 ALT='".$LOGO_ALT."' TITLE='".$LOGO_ALT."'></A>");  // Application logo image
+define ("APP_LOGO", "<A HREF='".$LOGO_OPEN."' TITLE='".$LOGO_ALT."' onMouseOver=\"window.status='".C_LOGO_ALT."'; return true\" TARGET=_blank><IMG SRC='".$LOGO_IMG."' BORDER=0 ALT='".$LOGO_ALT."'></A>");  // Application logo image
 
 // Show private rooms selection box on first page
 define ("C_SHOW_PRIV", $SHOW_PRIV);
@@ -1853,16 +1853,16 @@ else {
   	fputs ( $fh, 'if (ALLOW_ENTRANCE_SOUND == 3 && ENTRANCE_SOUND)'.$lfeed );
   	fputs ( $fh, '{'.$lfeed );
   	fputs ( $fh, '	define("L_ENTER_SND", "<EMBED SRC=\"".$ENTRANCE_SOUND."\" VOLUME=\"30\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Hello\" MASTERSOUND><NOEMBED><BGSOUND SRC=".$ENTRANCE_SOUND." LOOP=1></NOEMBED></EMBED>");'.$lfeed );
-  	fputs ( $fh, '	define("L_WELCOME_SND", "<EMBED SRC=\"".$WELCOME_SOUND."\" VOLUME=\"30\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Welcome\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$WELCOME_SOUND."\" LOOP=\"1\"></NOEMBED></EMBED>");'.$lfeed );
+  	fputs ( $fh, '	define("L_WELCOME_SND", "<EMBED SRC=\"".$WELCOME_SOUND."\" VOLUME=\"30\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Welcome\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$WELCOME_SOUND."\" LOOP=1></NOEMBED></EMBED>");'.$lfeed );
   	fputs ( $fh, '}'.$lfeed );
   	fputs ( $fh, 'elseif (ALLOW_ENTRANCE_SOUND == 2 && WELCOME_SOUND)'.$lfeed );
   	fputs ( $fh, '{'.$lfeed );
   	fputs ( $fh, '	define("L_ENTER_SND", "");'.$lfeed );
-  	fputs ( $fh, '	define("L_WELCOME_SND", "<EMBED SRC=\"".$WELCOME_SOUND."\" VOLUME=\"30\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Welcome\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$WELCOME_SOUND."\" LOOP=\"1\"></NOEMBED></EMBED>");'.$lfeed );
+  	fputs ( $fh, '	define("L_WELCOME_SND", "<EMBED SRC=\"".$WELCOME_SOUND."\" VOLUME=\"30\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Welcome\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$WELCOME_SOUND."\" LOOP=1></NOEMBED></EMBED>");'.$lfeed );
   	fputs ( $fh, '}'.$lfeed );
   	fputs ( $fh, 'elseif (ALLOW_ENTRANCE_SOUND == 1 && ENTRANCE_SOUND)'.$lfeed );
   	fputs ( $fh, '{'.$lfeed );
-  	fputs ( $fh, '	define("L_ENTER_SND", "<EMBED SRC=\"".$ENTRANCE_SOUND."\" VOLUME=\"30\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Hello\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$ENTRANCE_SOUND."\" LOOP=\"1\"></NOEMBED></EMBED>");'.$lfeed );
+  	fputs ( $fh, '	define("L_ENTER_SND", "<EMBED SRC=\"".$ENTRANCE_SOUND."\" VOLUME=\"30\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Hello\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$ENTRANCE_SOUND."\" LOOP=1></NOEMBED></EMBED>");'.$lfeed );
   	fputs ( $fh, '	define("L_WELCOME_SND", "");'.$lfeed );
   	fputs ( $fh, '}'.$lfeed );
   	fputs ( $fh, 'else'.$lfeed );
@@ -1874,7 +1874,7 @@ else {
   	fputs ( $fh, '// Buzz Sound command.'.$lfeed );
   	fputs ( $fh, 'define("ALLOW_BUZZ_SOUND", $ALLOW_BUZZ_SOUND);'.$lfeed );
   	fputs ( $fh, 'define("BUZZ_SOUND", $BUZZ_SOUND);'.$lfeed );
-  	fputs ( $fh, 'if (ALLOW_BUZZ_SOUND && BUZZ_SOUND) define("L_BUZZ_SND", "<EMBED SRC=\"".$BUZZ_SOUND."\" VOLUME=\"50\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Buzz\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$BUZZ_SOUND."\" LOOP=\"1\"></NOEMBED></EMBED>");'.$lfeed );
+  	fputs ( $fh, 'if (ALLOW_BUZZ_SOUND && BUZZ_SOUND) define("L_BUZZ_SND", "<EMBED SRC=\"".$BUZZ_SOUND."\" VOLUME=\"50\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Buzz\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$BUZZ_SOUND."\" LOOP=1></NOEMBED></EMBED>");'.$lfeed );
   	fputs ( $fh, 'else define("L_BUZZ_SND", "");'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// Enable different Topics for each room, defined in topic.php.'.$lfeed );
@@ -1913,7 +1913,7 @@ else {
   	fputs ( $fh, 'define ("C_LOGO_IMG", $LOGO_IMG);'.$lfeed );
   	fputs ( $fh, 'define ("C_LOGO_OPEN", $LOGO_OPEN);'.$lfeed );
   	fputs ( $fh, 'define ("C_LOGO_ALT", $LOGO_ALT);'.$lfeed );
-  	fputs ( $fh, 'define ("APP_LOGO", "<A HREF=\'".$LOGO_OPEN."\' TITLE=\'".$LOGO_ALT."\' onMouseOver=\"window.status=\'".C_LOGO_ALT."\'; return true\" TARGET=_blank><IMG SRC=\'".$LOGO_IMG."\' BORDER=0 ALT=\'".$LOGO_ALT."\' TITLE=\'".$LOGO_ALT."\'></A>");  // Application logo image'.$lfeed );
+  	fputs ( $fh, 'define ("APP_LOGO", "<A HREF=\'".$LOGO_OPEN."\' TITLE=\'".$LOGO_ALT."\' onMouseOver=\"window.status=\'".C_LOGO_ALT."\'; return true\" TARGET=_blank><IMG SRC=\'".$LOGO_IMG."\' BORDER=0 ALT=\'".$LOGO_ALT."\'></A>");  // Application logo image'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// Show private rooms selection box on first page'.$lfeed );
   	fputs ( $fh, 'define ("C_SHOW_PRIV", $SHOW_PRIV);'.$lfeed );

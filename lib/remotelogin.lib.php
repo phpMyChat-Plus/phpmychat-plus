@@ -1443,7 +1443,6 @@ function isCookieEnabled() {
 		pop_width = (name != 'admin'? 470:830);
 		pop_height = ((name != 'deluser' && name != 'pass_reset') ? (name != 'admin'? 640:580):260);
 		param = "width=" + pop_width + ",height=" + pop_height + ",resizable=yes,scrollbars=yes";
-		if (name == "pm_manager") param = param + ",status=yes";
 		name += "_popup";
 		window.open(url,name,param);
 	};

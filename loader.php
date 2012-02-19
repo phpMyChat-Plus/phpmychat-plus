@@ -315,7 +315,7 @@ if (!empty($kicked))
 if ($First) $LastCheck = 0;
 if ($CleanUsrTbl)
 {
-	$Users_Refresh = "1";
+	$Users_Refresh = 1;
 }
 else
 {
@@ -325,7 +325,6 @@ else
 	if ($Users_Refresh) list($LastCheck) = $DbLink->next_record();
 	$DbLink->clean_results();
 };
-
 
 // ** Check for updates in messages list and get new messages **
 if ($First) $LastLoad = 0;
@@ -648,19 +647,12 @@ else
 					$NewMsg .= "<font class=\"notify\"><img src=\"".$eicon."\" border=0 width='16' alt='&copy; ".$ealt."' title='&copy; ".$ealt."'>&nbsp;<a href='".$Message."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_ORIG_VIDEO).".'; return true\" title='".sprintf(L_CLICK,L_ORIG_VIDEO)."' target=_blank>".L_VIDEO."<\/a> ".$Dest.":<\/font><\/td><td width=\"99%\" valign=\"top\">".$video."<\/td><\/tr><\/table>";
 				}
       		}
-			elseif ($User == "SYS math")
-			{
-				$MathDest = sprintf(L_MATH,$Dest);
-				$Mathslashed = $Message;
-				$NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\"><FONT class=\"notify\">".$MathDest."<\/FONT><\/td><td nowrap=\"nowrap\" valign=\"top\">".$Mathslashed."<\/td><\/tr><\/table>";
-				$noteclass = "notify";
-      		}
 			elseif ($User == "SYS room")
 			{
 		  		$Message = "<I>".ROOM_SAYS." <FONT class=\"notify\">".$Message."<\/FONT><\/FONT><\/I><\/td><\/tr><\/table>";
 		 		$noteclass = "notify2";
 			}
-			elseif (substr($User,0,8) != "SYS dice")
+			elseif (substr($User,0,8) != "SYS dice" && $User != "SYS math")
 			{
 				if ($Dest != "") $NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]".$colornamedest_endtag."><\/B><BDO dir=\"${textDirection}\"><\/BDO> ";
 				$noteclass = "notify";
@@ -671,6 +663,20 @@ else
 				}
 				eval("\$Message = $Message;");
       		};
+			if ($User == "SYS math")
+			{
+				$MathDest = sprintf(L_MATH,$Dest);
+#				$Mathslashed = stripslashes(addslashes(addslashes($Message)));
+#				$Mathslashed = addslashes($Message);
+				$Mathslashed = $Message;
+				$NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\"><FONT class=\"notify\">".$MathDest."<\/FONT><\/td><td nowrap=\"nowrap\" valign=\"top\">".$Mathslashed."<\/td><\/tr><\/table>";
+				$noteclass = "notify";
+      		}
+			if ($User == "SYS enter" && strpos($Message,$U) !== false)
+			{
+				$To_remove = strstr($Message, "<EMBED SRC=");
+				$Message = rtrim(str_ireplace($To_remove,"",$Message));
+			}
 		    if ($User != "SYS image" && $User != "SYS video" && $User != "SYS utube" && $User != "SYS math")
 		    {
 				if(substr($User,0,8) == "SYS dice")
@@ -758,8 +764,8 @@ if ($First)
 		write("<HTML dir=\"<?php echo($textDirection); ?>\">\n<HEAD>\n");
 		write("<TITLE>Dynamic messages frame<\/TITLE>\n");
  		write("<LINK REL=\"stylesheet\" HREF=\"<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>\" TYPE=\"text\/css\">\n");
-//		if (c_allow_math == 1) write("<script type=\"text\/javascript\" src=\"http:\/\/cdn\.mathjax\.org\/mathjax\/latest\/MathJax\.js?config=TeX-AMS-MML_HTMLorMML\"><\/script>\n");
-		if (c_allow_math == 1) write("<script type=\"text/javascript\" src=\"https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>\n");
+		if (c_allow_math == 1) write("<script type=\"text\/javascript\" src=\"http:\/\/cdn\.mathjax\.org\/mathjax\/latest\/MathJax\.js?config=TeX-AMS-MML_HTMLorMML\"><\/script>\n");
+//		if (c_allow_math == 1) write("<script type=\"text/javascript\" src=\"https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"><\/script>\n");
 		write("<\/HEAD>\n\n");
 		write("<BODY CLASS=\"mainframe\">\n");
 	};
