@@ -41,7 +41,7 @@ if (($status == "m") || ($status == "t") || ($status == "a")) // use this to ena
 	{
 		$Buzz_opt = str_replace("~", "", $Cmd[2]);
 		$BUZZ_SOUND_OPT = "sounds/".$Buzz_opt.".wav";
-		$L_BUZZ_SND_OPT = "<EMBED SRC=\"".$BUZZ_SOUND_OPT."\" VOLUME=\"50\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Buzz\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$BUZZ_SOUND_OPT."\" LOOP=\"1\"></NOEMBED></EMBED>";
+		$L_BUZZ_SND_OPT = "<EMBED SRC=\"".$BUZZ_SOUND_OPT."\" VOLUME=\"50\" HIDDEN=\"true\" AUTOSTART=\"true\" LOOP=\"false\" NAME=\"Buzz\" MASTERSOUND><NOEMBED><BGSOUND SRC=\"".$BUZZ_SOUND_OPT."\" LOOP=1></NOEMBED></EMBED>";
 		$post = "...BUZZER...".$Mess.$L_BUZZ_SND_OPT ;
 	}
 	else

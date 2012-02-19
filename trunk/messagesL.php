@@ -336,7 +336,8 @@ if ($D > 0)	echo('<meta HTTP-EQUIV="Refresh" CONTENT="' . $D . '; URL=messagesL.
 <?php
 if(C_ALLOW_MATH){
 ?>
-<script type="text/javascript" src="https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!-- <script type="text/javascript" src="https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <?php
 }
 ?>
@@ -574,17 +575,17 @@ else
 				$Dest = "<a onClick=\"window.parent.userClick('".special_char($Dest,$Latin1,1)."',false,'".special_char($U,$Latin1,1)."'); return false\" title='".L_USE_NAME."' onMouseOver=\"window.status='".L_USE_NAME1."'; return true\" CLASS=\"sender\">".$colornamedest_tag."[".special_char($Dest,$Latin1,0)."]".$colornamedest_endtag."</a>";
 			}
 			if ($Dest != "") $Dest = "</B><BDO dir=\"${textDirection}\"></BDO></td><td width=\"1%\" valign=\"top\"><B>></B></td><td width=\"1%\" valign=\"top\"><B>".$colornamedest_tag.$Dest;
-// Avatar System Start:
-      if (C_USE_AVATARS)
-    	{
-       		$avatar = "<a onClick=\"window.parent.runCmd('whois','".special_char2(stripslashes($Userx),$Latin1)."'); return false\" onMouseOver=\"window.status='".L_PROFILE.".'; return true\" title=\"".L_PROFILE."\"><img align=\"center\" src=\"$avatar\" width=".C_AVA_WIDTH." height=".C_AVA_HEIGHT." alt=\"".L_PROFILE."\" border=0></a>";
-   			if ($ST != 1) $NewMsg .= "</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\">".$avatar."</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."${User}${Dest}".$colornamedest_endtag."</B><BDO dir=\"${textDirection}\"></BDO></td><td valign=\"top\">".$Message."</td></tr></table>";
-   			else $NewMsg .= $avatar."</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."${User}${Dest}".$colornamedest_endtag."</B><BDO dir=\"${textDirection}\"></BDO></td><td valign=\"top\">".$Message."</td></tr></table>";
-      }
-      else
-      {
-			if ($ST != 1) $NewMsg .= "</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."${User}${Dest}".$colornamedest_endtag."</B><BDO dir=\"${textDirection}\"></BDO></td><td valign=\"top\">".$Message."</td></tr></table>";
-			else $NewMsg .= "<B>${User}${Dest}</B><BDO dir=\"${textDirection}\"></BDO></td><td valign=\"top\">".$Message."</td></tr></table>";
+			// Avatar System Start:
+			if (C_USE_AVATARS)
+			{
+				$avatar = "<a onClick=\"window.parent.runCmd('whois','".special_char2(stripslashes($Userx),$Latin1)."'); return false\" onMouseOver=\"window.status='".L_PROFILE.".'; return true\" title=\"".L_PROFILE."\"><img align=\"center\" src=\"$avatar\" width=".C_AVA_WIDTH." height=".C_AVA_HEIGHT." alt=\"".L_PROFILE."\" border=0></a>";
+				if ($ST != 1) $NewMsg .= "</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\">".$avatar."</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."${User}${Dest}".$colornamedest_endtag."</B><BDO dir=\"${textDirection}\"></BDO></td><td valign=\"top\">".$Message."</td></tr></table>";
+				else $NewMsg .= $avatar."</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."${User}${Dest}".$colornamedest_endtag."</B><BDO dir=\"${textDirection}\"></BDO></td><td valign=\"top\">".$Message."</td></tr></table>";
+			}
+			else
+			{
+				if ($ST != 1) $NewMsg .= "</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."${User}${Dest}".$colornamedest_endtag."</B><BDO dir=\"${textDirection}\"></BDO></td><td valign=\"top\">".$Message."</td></tr></table>";
+				else $NewMsg .= "<B>${User}${Dest}</B><BDO dir=\"${textDirection}\"></BDO></td><td valign=\"top\">".$Message."</td></tr></table>";
 			}
 		}
 // Avatar System end.
@@ -676,6 +677,11 @@ else
 				}
 				eval("\$Message = $Message;");
       		};
+			if ($User == "SYS enter" && strpos($Message,$U) !== false)
+			{
+				$To_remove = strstr($Message, "<EMBED SRC=");
+				$Message = rtrim(str_ireplace($To_remove,"",$Message));
+			}
 		    if ($User != "SYS image" && $User != "SYS video" && $User != "SYS utube" && $User != "SYS math")
 		    {
 				if(substr($User,0,8) == "SYS dice")
