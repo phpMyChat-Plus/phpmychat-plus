@@ -761,16 +761,16 @@ if((C_QUOTE_NAME != $vQUOTE_NAME || C_QUOTE_FONT_COLOR != $vQUOTE_FONT_COLOR || 
 
 if (isset($Error))
 {
-	echo "<div><p><table align=center border=0 cellpadding=3 class=menu style=background:white><tr><td class=error align=center><br /><h3>".$Error."!</h3></td></tr></table></p></div>";
+	echo "<div><p><table align=center border=0 cellpadding=3 class=menu style=\"background: white;\"><tr><td class=error align=center><br /><h3>".$Error."!</h3></td></tr></table></p></div>";
 }
 else
 {
-	echo "<div><p><table align=center border=0 cellpadding=3 class=menu style=background:white><tr><td class=success align=center><br /><h3>Configuration Settings Changed Successfully!</h3></td></tr></table></p>";
+	echo "<div><p><table align=center border=0 cellpadding=3 class=menu style=\"background: white;\"><tr><td class=success align=center><br /><h3>Configuration Settings Changed Successfully!</h3></td></tr></table></p>";
 	if(C_LOG_DIR != $vLOG_DIR)
 	{
-		echo "<table align=center border=0 cellpadding=3 class=menu style=background:white><tr><td class=notify2 align=center valign=TOP>Important!</td><td class=success align=center>Don't forget to change remotely the name of <span style=background-color:white>".C_LOG_DIR."</span> directory to <span style=background-color:white>".$vLOG_DIR."</span><br />(and set its attributes to <b>777</b>)!</td></tr></table></p>";
+		echo "<p><table align=center border=0 cellpadding=3 class=menu style=\"background: white;\"><tr><td class=notify2 align=center valign=TOP>Important!</td><td class=success align=center>Don't forget to change remotely the name of <span style=background-color:white>".C_LOG_DIR."</span> directory to <span style=background-color:white>".$vLOG_DIR."</span><br />(and set its attributes to <b>777</b>)!</td></tr></table>";
 	}
-	echo "</div>";
+	echo "</p></div>";
 }
 
 	if(($USE_AVATARS !== $vUSE_AVATARS) || ($DISP_GENDER !== $vDISP_GENDER) || ($COLOR_NAMES !== $vCOLOR_NAMES) || ($PRIV_POPUP !== $vPRIV_POPUP) || ($USE_SKIN !== $vUSE_SKIN) || ($EN_WMPLAYER !== $vEN_WMPLAYER))

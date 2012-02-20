@@ -1,7 +1,6 @@
 <?php
-// Registered Users panel
-// This sheet is diplayed when the admin wants to modify perms for registered users
-// or remove the profiles of some of them
+// Statistics panel
+// This sheet is diplayed when the admin wants to check the saved statistics in chat
 
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
 while(list($name,$value) = each($_GET))
