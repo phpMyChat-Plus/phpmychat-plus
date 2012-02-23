@@ -515,7 +515,7 @@ $IsM = false;
 
 #if (isset($M) && trim($M) != "" && (ereg("^\/", $M) || ereg("^: ", $M))) include("./lib/commands.lib.php");
 #if (isset($M) && trim($M) != "" && (ereg("^\/", $M) || ereg("^: ", $M)))
-if (isset($M) && trim($M) != "" && (ereg("^\/", $M) || preg_match("#^: #", $M)))
+if (isset($M) && trim($M) != "" && (preg_match("#^\/#", $M) || preg_match("#^: #", $M)))
 {
 	if (file_exists("./${ChatPath}localization/${L}/localized.cmds.php")) require("./${ChatPath}localization/${L}/localized.cmds.php");
 	include("./lib/commands.lib.php");

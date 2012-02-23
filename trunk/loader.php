@@ -793,6 +793,7 @@ for ($i = 0; $i < $message_nb; $i++)
 //           if ($xxx <> 0) {
 //            $Messages[$xxx] = str_replace(L_BUZZ_SND,"",$Messages[$xxx]);
 //           };
+/*
 // Altered by ciprian for Notify & Welcome feature
 if (ALLOW_ENTRANCE_SOUND == "3" && WELCOME_SOUND)
 {
@@ -801,17 +802,17 @@ if (ALLOW_ENTRANCE_SOUND == "3" && WELCOME_SOUND)
 	{
     if ($xxx = 1)
     {
-			$tmpstr = stripslashes(L_ENTER_SND);
+			$tmpstr = stripslashes(L_WELCOME_SND);
 			$Messages[$xxx] = str_ireplace($tmpstr,"",$Messages[$xxx]);
     };
 	}
-}
+}*/
 if ($xxx > 1)
 {
-	$tmpstr = stripslashes(L_ENTER_SND);
-	$Messages[$xxx] = str_ireplace($tmpstr,"",$Messages[$xxx]);
-	$tmpstr1 = stripslashes(L_WELCOME_SND);
+	$tmpstr1 = stripslashes(L_ENTER_SND);
 	$Messages[$xxx] = str_ireplace($tmpstr1,"",$Messages[$xxx]);
+	$tmpstr2 = stripslashes(L_WELCOME_SND);
+	$Messages[$xxx] = str_ireplace($tmpstr2,"",$Messages[$xxx]);
 };
 // end Bob Dickow mod for buzzes and hellos.
 	// doubles backslashes except the ones for closing HTML tags
@@ -957,8 +958,8 @@ if(C_CHAT_BOOT)
 		{
 			$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+($curtime-last_away), longest_away=IF($curtime-last_away < longest_away, longest_away, $curtime-last_away), last_away='' WHERE (stat_date=FROM_UNIXTIME(last_away,'%Y-%m-%d') OR stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d')) AND room='$m_room' AND username='$U' AND last_away!='0'");
 			$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_in=seconds_in+($curtime-last_in), longest_in=IF($curtime-last_in < longest_in, longest_in, $curtime-last_in), last_in='' WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$m_room' AND username='$U' AND last_in!='0'");
-			$DbLink->clean_results();
 		}
+	$DbLink->clean_results();
 	$botpath = "botfb/".$U;         // file is in DIR "botfb" and called "username"
 	if (file_exists($botpath)) unlink($botpath); // checks to see if user file exists.
 	                                     // if it does delete it.
