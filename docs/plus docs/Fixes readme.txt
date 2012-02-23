@@ -34,6 +34,7 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 
 Fixes History:
 01.02.2012 - 1.94-beta8:
+- added the Profiles tab in admin panel, based on birthday popup features; (functionality extension)
 - fixed a bug related to embeding sounds that was leading to freezing and booting in IE7/8; (functionality related)
 - changed the MathJax plugin to use the secure connection; (security related)
 - more deprecated functions updated (eg set_magic_quotes_runtime); (compatibility related)
