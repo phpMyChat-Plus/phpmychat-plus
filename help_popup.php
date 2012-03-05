@@ -313,6 +313,20 @@ if (C_HTML_TAGS_KEEP != "none")
 		<TD WIDTH=10>&nbsp;</TD>
 		<TD><?php echo(L_HELP_CMD_34.((L_CMD_LTR != "" && L_CMD_LTR != "L_CMD_LTR") || (L_CMD_RTL != "" && L_CMD_RTL != "L_CMD_RTL") ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>".(L_CMD_LTR != "" && L_CMD_LTR != "L_CMD_LTR" ? "/".str_replace(","," /",L_CMD_LTR)." " : "").(L_CMD_RTL != "" && L_CMD_RTL != "L_CMD_RTL" ? "/".str_replace(","," /",L_CMD_RTL) : "")."</span>") : "")); ?></TD>
 	</TR>
+<?php
+if (C_ALLOW_MATH)
+{
+?>
+	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
+		<A HREF="#" onClick="cmd2Input('/math',false); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/math {<?php echo(L_HELP_MSG); ?>}</A>
+	</TH></TR>
+		<TR>
+			<TD WIDTH=10>&nbsp;</TD>
+			<TD><?php echo(L_HELP_CMD_37.(L_CMD_MATH != "" && L_CMD_MATH != "L_CMD_MATH" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_MATH)."</span>") : "")); ?></TD>
+		</TR>
+<?php
+}
+?>
 	<TR><TH ALIGN="<?php echo($CellAlign); ?>" COLSPAN=2>
 		<A HREF="#" onClick="cmd2Input('/me',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">/me {<?php echo(L_HELP_MSG); ?>}</A><br />
 		<A HREF="#" onClick="cmd2Input(':',true); return false" <?php echo($onMouseOver." ".$title); ?> CLASS="sender">: {<?php echo(L_HELP_MSG); ?>}</A><br />

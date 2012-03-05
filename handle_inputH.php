@@ -261,7 +261,7 @@ function AddMessage($M, $T, $R, $U, $C, $Private, $Read, $RF, $Charset)
 */
 	if(preg_match('/^bdo_rtl/',$M)) $M = str_replace('bdo_rtl', '<BDO dir="rtl">', $M)."</BDO>";
 	elseif(preg_match('/^bdo_ltr/',$M)) $M = str_replace('bdo_ltr', '<BDO dir="ltr">', $M)."</BDO>";
-	
+
 	// URL
 /*
 	$M = eregi_replace('([[:space:]]|^)(www[.])', '\\1http://\\2', $M); // no prefix (www.myurl.ext)
@@ -705,5 +705,6 @@ else
 };
 ?>
 </BODY>
-
 </HTML>
+<?php
+?>

@@ -96,6 +96,8 @@ function close_popups()
 		if (is_logs_popup && !is_logs_popup.closed) is_logs_popup.close();
 		// Privacy Policy Popup mod by Cipprian
 		if (is_privacy_popup && !is_privacy_popup.closed) is_privacy_popup.close();
+		// MathJax Equation Popup mod by Cipprian
+		if (is_math_popup && !is_math_popup.closed) is_math_popup.close();
 		if (is_ignored_popup && !is_ignored_popup.closed)
 		{
 			is_ignored_popup.window.document.forms['IgnForm'].elements['Exit'].value = '1';

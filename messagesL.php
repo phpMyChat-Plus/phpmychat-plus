@@ -333,14 +333,6 @@ if (!isset($FontName)) $FontName = "";
 if ($D > 0)	echo('<meta HTTP-EQUIV="Refresh" CONTENT="' . $D . '; URL=messagesL.php?' . ((isset($QUERY_STRING)) ? $QUERY_STRING : getenv('QUERY_STRING')) . '">');
 ?>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
-<?php
-if(C_ALLOW_MATH){
-?>
-<!-- <script type="text/javascript" src="https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<?php
-}
-?>
 </HEAD>
 
 <BODY CLASS="mainframe" <?php if($O == 1) echo("onLoad=\"this.scrollTo(0,65000);\""); ?>>
@@ -468,7 +460,7 @@ if($DbLink->num_rows() > 0)
 					{
 						$colorname_tag = "<FONT color=".COLOR_CA.">";
 					}
-					
+
 					elseif ($perms_user == "moderator")
 					{
 						$colorname_tag = "<FONT color=".COLOR_CM.">";
@@ -489,7 +481,7 @@ if($DbLink->num_rows() > 0)
 				}
 				elseif (C_ITALICIZE_POWERS)
 				{
-					if ($perms_dest == "admin" || ($perms_dest == "topmod" && $Dest != C_BOT_NAME && $Dest != C_QUOTE_NAME)) 
+					if ($perms_dest == "admin" || ($perms_dest == "topmod" && $Dest != C_BOT_NAME && $Dest != C_QUOTE_NAME))
 					{
 						$colornamedest_tag = "<FONT color=".COLOR_CA.">";
 					}
@@ -654,18 +646,18 @@ else
 					$NewMsg .= "<font class=\"notify\"><img src=\"".$eicon."\" border=0 width='16' alt='&copy; ".$ealt."' title='&copy; ".$ealt."'>&nbsp;<a href='".$Message."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_ORIG_VIDEO).".'; return true\" title='".sprintf(L_CLICK,L_ORIG_VIDEO)."' target=_blank>".L_VIDEO."</a> ".$Dest.":</font></td><td width=\"99%\" valign=\"top\">".$video."</td></tr></table>";
 				}
 			}
-			elseif ($User == "SYS math")
-			{
-				$MathDest = sprintf(L_MATH,$Dest);
-				$Mathslashed = $Message;
-				$NewMsg .="</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\" align=\"left\"><FONT class=\"notify\">".$MathDest."</FONT></td><td nowrap=\"nowrap\" valign=\"top\" align=\"left\">".$Mathslashed."</td></tr></table>";
-				$noteclass = "notify";
-			}
 			elseif ($User == "SYS room")
 			{
 				$Message = "<I>".ROOM_SAYS." <FONT class=\"notify\">".$Message."</FONT></FONT></I></td></tr></table>";
 				$noteclass = "notify2";
       		}
+			elseif ($User == "SYS math")
+			{
+				$Equation = '<a onClick="window.parent.math_popup(); return false" title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_20).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_20).'.\'; return true" target="_blank">'.L_EQUATION.'</a>';
+				$MathDest = sprintf(L_MATH,$Dest,$Equation);
+				$Message = "<FONT class=\"notify\">".$MathDest."</FONT></td></tr></table>";
+				$noteclass = "notify";
+			}
 			elseif (substr($User,0,8) != "SYS dice")
 			{
 				if ($Dest != "") $NewMsg .= "</td><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\"><B>".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]".$colornamedest_endtag."></B><BDO dir=\"${textDirection}\"></BDO> ";
@@ -682,7 +674,7 @@ else
 				$To_remove = strstr($Message, "<EMBED SRC=");
 				$Message = rtrim(str_ireplace($To_remove,"",$Message));
 			}
-		    if ($User != "SYS image" && $User != "SYS video" && $User != "SYS utube" && $User != "SYS math")
+		    if ($User != "SYS image" && $User != "SYS video" && $User != "SYS utube")
 		    {
 				if(substr($User,0,8) == "SYS dice")
 				{

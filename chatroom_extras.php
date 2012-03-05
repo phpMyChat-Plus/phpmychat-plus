@@ -159,20 +159,20 @@ if($DbLink->num_rows() > 0)
 			$colornamedest_endtag = "";
 		}
 		$NewMsg = "<tr align=texttop valign=top>";
-		$NewMsg .= "<td width=1% nowrap=\"nowrap\">".date("d-M, H:i:s", $Time + C_TMZ_OFFSET*60*60)."</td><td width=1% nowrap=\"nowrap\">".$Room."</td>";
+		$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\">".date("d-M, H:i:s", $Time + C_TMZ_OFFSET*60*60)."</td><td width=\"1%\" nowrap=\"nowrap\">".$Room."</td>";
 		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS video" && $User != "SYS utube" && $User != "SYS math" && $User != "SYS topic" && $User != "SYS topic reset" && substr($User,0,8) != "SYS dice")
 		{
 			$User = $colorname_tag."[".special_char($User,$Latin1)."]".$colorname_endtag;
 			if ($Dest != "") $Dest = ">".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]".$colornamedest_endtag;
-			$NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>${User}${Dest}</B></td><td>$Message</td>";
+			$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\"><B>${User}${Dest}</B></td><td>$Message</td>";
 		}
 		if ($User == "SYS image")
 		{
-   		$NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>[${Dest}]</B></td><td>".L_PIC." ${Dest}: <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_FULLSIZE_PIC).".'; return true\" title=\"".sprintf(L_CLICK,L_FULLSIZE_PIC)."\" target=_blank>".$Message."</A></td>";
+			$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\"><B>[${Dest}]</B></td><td>".L_PIC." ${Dest}: <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_FULLSIZE_PIC).".'; return true\" title=\"".sprintf(L_CLICK,L_FULLSIZE_PIC)."\" target=_blank>".$Message."</A></td>";
 		}
 		if ($User == "SYS video" || $User == "SYS utube")
 		{
-   		$NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>[${Dest}]</B></td><td>".L_VIDEO." ${Dest}: <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_ORIG_VIDEO).".'; return true\" title=\"".sprintf(L_CLICK,L_ORIG_VIDEO)."\" target=_blank>".$Message."</A></td>";
+			$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\"><B>[${Dest}]</B></td><td>".L_VIDEO." ${Dest}: <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_ORIG_VIDEO).".'; return true\" title=\"".sprintf(L_CLICK,L_ORIG_VIDEO)."\" target=_blank>".$Message."</A></td>";
 		}
 		if ($User == "SYS announce")
 		{
@@ -181,12 +181,12 @@ if($DbLink->num_rows() > 0)
 		}
 		if ($User == "SYS math")
 		{
- 			$NewMsg .= "<td colspan=2 valign=\"top\"><FONT class=\"notify\">".sprintf(L_MATH,$Dest)."</FONT> ".$Message."</td>";
+			$NewMsg .= "<td colspan=\"2\" valign=\"top\"><FONT class=\"notify\">".sprintf(L_MATH,$Dest,L_EQUATION)."</FONT><br />".$Message."</td>";
     	}
 		if ($User == "SYS room")
 		{
- 			$NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>[${Dest}]</B></td><td><FONT class=\"notify2\"><I>".ROOM_SAYS."<FONT class=\"notify\">".$Message."</FONT></FONT></I></td>";
-    }
+ 			$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\"><B>[${Dest}]</B></td><td><FONT class=\"notify2\"><I>".ROOM_SAYS."<FONT class=\"notify\">".$Message."</FONT></FONT></I></td>";
+		}
 		if ($User == "SYS topic")
 		{
  			$NewMsg .= "<td colspan=2><FONT class=\"notify\">".$Dest." ".L_TOPIC." ".$Message."</FONT></td>";
@@ -228,7 +228,8 @@ $CleanUsrTbl = 1;
 <TITLE><?php echo("Last ".$N." messages ".($Room != "" ? "in ".stripslashes($R)." room" : "")." - ".date('r')." - ".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo("${ChatPath}".$skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <?php
-if(C_ALLOW_MATH) echo("<script type=\"text/javascript\" src=\"https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>");
+#if(C_ALLOW_MATH) echo("<script type=\"text/javascript\" src=\"https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>");
+if(C_ALLOW_MATH) echo("<script type=\"text/javascript\" src=\"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>");
 ?>
 </HEAD>
 	<BODY>
@@ -248,6 +249,6 @@ if(C_ALLOW_MATH) echo("<script type=\"text/javascript\" src=\"https://d3eoax9i5h
 <P align="right"><div align="right"><span dir="LTR" style="font-weight: 600; color:#FFD700; font-size: 7pt">
 &copy; 2006-<?php echo(date('Y')); ?> - by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>.'; return true;" title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>" target=_blank>Ciprian Murariu</a></span></div>
 	</BODY>
-	</HTML>
-	<?php
+</HTML>
+<?php
 ?>

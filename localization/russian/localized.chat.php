@@ -1,5 +1,5 @@
 <?php
-// File : russian/localized.chat.php - plus version (02.01.2011 - rev.45)
+// File : russian/localized.chat.php - plus version (09.01.2012 - rev.46)
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
 // extra header for Charset
@@ -252,7 +252,7 @@ define("L_HELP_CMD_30", "Вторая команда делает то же /me 
 define("L_HELP_CMD_31", "Изменение порядка сортировки списка пользователей: по времени входа или по алфавиту.");
 define("L_HELP_CMD_32", "Это третья (ролевая) версия игры в кости.<br />Использование: /d{n1}[tn2] или /d{n1};<br />n1 может принимать любое значение <b>между 1 и 100</b> (определяет количество костей);<br />n2 может принимать любое значение <b>между 1 и %s</b> (определяет количество треугольных костей).");
 define("L_HELP_CMD_33", "Изменение размера шрифта сообщений в чате на выбор пользователя (допустимое значение n: <b>между 7 и 15</b>); команда /size сбрасывает размер шрифта в значение по умолчанию (<b>".$FontSize."</b>).");
-define("L_HELP_CMD_34", "Это позволит пользователю указать ориентацию текстового сообщения (ltr = left-to-right слева-направо, rtl = справа-налево ).");
+define("L_HELP_CMD_34", "Это позволит пользователю указать ориентацию текстового сообщения (ltr = слева-направо, rtl = справа-налево ).");
 define("L_HELP_CMD_35", "Это позволить опубликовать <i>одно видео</i> или <i>одно аудио</i> в маленьком Flash player на время.<br />Использование: Просто вставьте URL для того чтобы опубликовать ! Например <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Вам нужен Shockwave Flash Player установленный в системе. Ссылка чувствительна к регистру!<br />Подсказка: напишите /video затем пробел и вставьте URL в поле ввода.");
 define("L_HELP_CMD_35a", "Вторая команда работает только для youtube.com как источник видео.<br />Например <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
 define("L_HELP_CMD_36", "Это позволит опубликовать <i>одно youtube видео</i> в маленьком Flash player на время.<br />Использование: просто вставьте URL для опубликования! Например <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Вам нужен Shockwave Flash Player установленный в системе. Ссылка чувствительна к регистру!<br />Подсказка: напишите /tube затем пробел и вставьте URL в поле ввода.");
@@ -513,6 +513,7 @@ define("L_LINKS_16", "Галерея смайликов");
 define("L_LINKS_17", "чтобы сортировать по возрастанию");
 define("L_LINKS_18", "чтобы сортировать по убыванию");
 define("L_LINKS_19", "чтобы установить/изменить ваш Gravatar");
+define("L_LINKS_20", "Добавлено уравнения");
 define("L_SWITCH", "Переход к"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "выбранный"); // E.g. "French - selected" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
@@ -717,4 +718,8 @@ define("L_PRO_10", "Возраст");
 define("L_PRO_11", "%1\$d лет, %2\$d месяцев и %3\$d дней"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
 define("L_DOB_TIT_1", "Список именинников");
 $L_DOB_SUBJ = "С днем рождения %s!"; // username
+
+// MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
+define("L_EQUATION", "уравнение");
+define("L_MATH", "%s опубликовал %s"); // e.g. "username has posted an equation" (defined above); the word "equation" will render as a url to show popup with the posted formulas
 ?>

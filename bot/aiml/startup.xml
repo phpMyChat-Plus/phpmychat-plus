@@ -37,7 +37,7 @@ Be sure to set properties BEFORE loading AIML files. -->
  <property name="kindmusic" value="trance"/>
  <property name="location" value="World Wide Web"/>
  <property name="looklike" value="a computer"/>
- <property name="language" value="English"/>
+ <property name="language" value="English and a little German"/>
  <property name="msagent" value="no"/>
  <property name="genus" value="robot"/>
  <property name="species" value="chat robot"/>
@@ -63,9 +63,9 @@ Be sure to set properties BEFORE loading AIML files. -->
 
  <!-- Don't change the values bellow!! -->
 <!-- They refer to the project development and integration facts&figures -->
- <property name="size" value="22 MySQL MB"/>
- <property name="vocabulary" value="310.050 words"/>
- <property name="categories" value="48.021 categories"/>
+ <property name="size" value="27 MySQL MB"/>
+ <property name="vocabulary" value="745.237 patterns"/>
+ <property name="categories" value="103.520 templates"/>
  <property name="birthday" value="November 23, 1995"/>
  <property name="birthplace" value="Bethlehem, PA"/>
  <property name="age" value="13"/>

@@ -1,5 +1,5 @@
 <?php
-// File : romanian/localized.chat.php - plus version (02.01.2011 - rev.45)
+// File : romanian/localized.chat.php - plus version (09.01.2012 - rev.46)
 // Original translation started by Radu Swider <swidera@satline.ro>, first updated by Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro>
 // Corrected, finalized, diacritics addition and updated to Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -204,7 +204,7 @@ define("L_NO_ADMIN", "Numai un administrator poate folosi această comandă.");
 define("L_NO_REG_USER", "Trebuie să fii înregistrat pentru a folosi această comandă.");
 
 // help popup
-define("L_HELP_TIT_1", "Emoţii");
+define("L_HELP_TIT_1", "Galeria de Emoţii (Smilies)");
 define("L_HELP_TIT_2", "Formatarea textului pentru mesaje");
 define("L_HELP_FMT_1", "Textul poate fi îngroşat (bold), înclinat (italic) sau subliniat (underline), prin simpla sa încadrare între cuvintele cheie &lt;B&gt; &lt;/B&gt;, &lt;I&gt; &lt;/I&gt; sau &lt;U&gt; &lt;/U&gt;<br />Exemplu, &lt;B&gt;acest text&lt;/B&gt; va produce <B>acest text</B>.");
 define("L_HELP_FMT_2", "Pentru a crea un hyperlink (pentru email sau pagina www) în mesajul tău, tastează pur şi simplu adresa corespunzătoare. Hyperlink-ul va fi creat automat.");
@@ -257,7 +257,8 @@ define("L_HELP_CMD_33", "Schimbă dimensiunea textului mesajelor pe chat (valori
 define("L_HELP_CMD_34", "Această comandă permite unui utilizator să specifice orientarea unui mesaj text (ltr = de la stânga la dreapta, rtl = de la dreapta la stânga).");
 define("L_HELP_CMD_35", "Permite postarea <i>unui film video</i> sau a <i>unui fișier audio</i> în loc de mesaj, folosind un mini Flash Player integrat.<br />Utilizare: Nu trebuie decât să pastaţi adresa la care se află filmul! Exemplu <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Trebuie să aveţi Shockwave Flash Player instalat pe calculator. Atenţie la literele mari şi mici - contează.<br />SFAT: tastaţi /video urmat de un spaţiu şi apoi pastaţi adresa URL.");
 define("L_HELP_CMD_35a", "Cea de-a doua comandă funcţionează numai cu youtube.com ca sursă video.<br />Exemplu <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
-define("L_HELP_CMD_36", "Permite postarea <i>unui film video youtube</i> în loc de mesaj, folosind un mini Flash Player integrat.<br />Utilizare: Nu trebuie decât să pastaţi adresa la care se află filmul! Exemplu <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Trebuie să aveţi Shockwave Flash Player instalat pe calculator. Atenţie la literele mari şi mici - contează.<br />SFAT: tastaţi /tube urmat de un spaţiu şi apoi pastaţi adresa URL.");
+define("L_HELP_CMD_36", "Permite postarea unui <i>film video youtube</i> în loc de mesaj, folosind un mini Flash Player integrat.<br />Utilizare: Nu trebuie decât să pastaţi adresa la care se află filmul! Exemplu <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Trebuie să aveţi Shockwave Flash Player instalat pe calculator. Atenţie la literele mari şi mici - contează.<br />SFAT: tastaţi /tube urmat de un spaţiu şi apoi pastaţi adresa URL.");
+define("L_HELP_CMD_37", "Permite postarea unei <i>Ecuaţii/Formule MathJax</i> în loc de mesaj.<br />Utilizare: Nu trebuie decât să pastaţi codul TeX sau MathML (original)!<br />Exemplu <b>/math&nbsp;\sqrt{3x-1}+(1+x)^2</b><br />Pentru mai multe exemple şi instrucţiuni vizitaţi site-ul <a href=\"http://www.mathjax.org/demos/\" target=\"_blank'\">http://www.mathjax.org/demos</a>. Obţineţi codul cu click dreapta pe oricare dintre formule.<br />SFAT: tastaţi /math urmat de un spaţiu şi apoi pastaţi  codul obţinut.");
 define("L_HELP_CMD_VAR", "Sinonime (variante): %s");
 define("L_HELP_ETIQ_1", "Eticheta Chat-ului");
 define("L_HELP_ETIQ_2", "Site-ul nostru doreşte să păstreze o ambianţă plăcută şi prietenoasă, aşa că vă rugăm să aderaţi la următoarele reguli. Pentru nerespectarea acestor reguli, unul dintre moderatori ar putea să vă elimine din chat.<br /><br />Mulţumim,");
@@ -511,10 +512,11 @@ define("L_LINKS_12", "pentru a deschide pagina de Chat");
 define("L_LINKS_13", "pentru a trimite acest buzz"); // can also be translated as "to play this sound"
 define("L_LINKS_14", "pentru a folosi această comandă");
 define("L_LINKS_15", "pentru a deschide");
-define("L_LINKS_16", "Galerie Zâmbete");
+define("L_LINKS_16", "Galeria de Emoţii (Smilies)");
 define("L_LINKS_17", "pentru a sorta crescător");
 define("L_LINKS_18", "pentru a sorta descrescător");
 define("L_LINKS_19", "pentru a seta/modifica Gravatar-ul");
+define("L_LINKS_20", "Ecuaţii postate");
 define("L_SWITCH", "Schimbă în %s");
 define("L_SELECTED", "selectat");
 define("L_SELECTED_F", "selectată");
@@ -730,5 +732,6 @@ define("L_DOB_TIT_1", "Lista Aniversărilor");
 $L_DOB_SUBJ = "La Mulţi Ani %s!";
 
 // MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
-define("L_MATH", "%s a postat ecuaţia:");
+define("L_EQUATION", "ecuaţie");
+define("L_MATH", "%s a postat o %s");
 ?>
