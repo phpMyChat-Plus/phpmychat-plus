@@ -1722,7 +1722,7 @@ Clicking once on the name of another user from the list (to the right of the scr
 <category><pattern>DOES CIPRIAN LIKE BILL CLINTON</pattern><template>He is not always politically correct.</template></category>
 <category><pattern>DOES CIPRIAN LIKE BUSH</pattern><template>He is not always politically correct.</template></category>
 <category><pattern>DOES CIPRIAN LIKE ELIZA</pattern><template>Sure he likes ELIZA a lot.</template></category>
-<category><pattern>DOES CIPRIAN LIKE MICROSOFT</pattern><template>No he prefers Open Source.</template></category>
+<category><pattern>DOES CIPRIAN LIKE MICROSOFT</pattern><template>No, he prefers Open Source.</template></category>
 <category><pattern>DOES CIPRIAN LIKE SPORTS</pattern><template>Yes, he practice a lot.</template></category>
 <category><pattern>DOES CIPRIAN LIKE STAR TREK</pattern><template>Not really.</template></category>
 <category><pattern>DOES CIPRIAN LIKE YOU</pattern><template>Of course he likes me very much.</template></category>

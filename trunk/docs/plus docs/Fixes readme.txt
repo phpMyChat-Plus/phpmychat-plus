@@ -12,10 +12,10 @@ Client browsers - tested with:
 	- Apple Safari > 4.0.3 = H;
 	- Google Chrome > 17.x.x.x.x = M.
 Server environment - tested env:
-	- Apache < 2.2.21 (Unix and Windows 2k/XP<SP3 & Vista);
-	- php < 5.3.5 (non-safe-mode, but also a safe mode server has been tested and worked fine);
-	- MySQL < 5.4;
-	- MySQL >= 5.4 - just a calendar response from bot is bogus (still working on it);
+	- Apache < 2.2.22 (Unix and Windows 2k/XP<SP3 & Vista);
+	- php < 5.4 (non-safe-mode, but also a safe mode server has been tested and worked fine);
+	- MySQL < 5.5;
+	- MySQL >= 5.5 - just a calendar response from bot is bogus (still working on it);
 	- exif support enabled (gif/jpeg processing);
 	- GD2 support enabled (gif/jpeg processing);
 	- mail function support (optional but recommended).
@@ -31,6 +31,7 @@ Important: everytime you upgrade/reinstall a phpmychat server or change sensitiv
 When you install Firefox2 and/or QuickTime (RealPlayer), a QuickTime plugin will break the WMP plugin in IE, necesary for playing .wav sounds, therefore, you won’t get sounds in IE anymore. I fixed it by playing with enabling WMP/disabling QuickTime plugins in IE; re-associating the "wav" files in Media Player/Tools/Options/File Types also fixes this.
 On some pcs a restart might be necessary.
 We also added a small IE fixing script (reg file) as a link in Extra Options in chat.
+If your users encounter bootings for no reason, try to disable sounds in chat.
 
 Fixes History:
 01.02.2012 - 1.94-beta8:

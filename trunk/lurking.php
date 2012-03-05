@@ -211,16 +211,16 @@ if($DbLink1->num_rows() > 0)
 		if($colorname_tag != "") $colorname_endtag = "</FONT>";
 		$NewMsg = "<tr valign=top>";
 		$Time = $Time + C_TMZ_OFFSET*60*60;
-		$NewMsg .= "<td width=1% nowrap=\"nowrap\">".strftime(L_SHORT_DATETIME, $Time)."</td><td width=1% nowrap=\"nowrap\">".$Room."</td>";
+		$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\">".strftime(L_SHORT_DATETIME, $Time)."</td><td width=\"1%\" nowrap=\"nowrap\">".$Room."</td>";
 		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS video" && $User != "SYS utube" && $User != "SYS math" && $User != "SYS topic" && $User != "SYS topic reset" && substr($User,0,8) != "SYS dice")
 		{
 			$User = $colorname_tag."[".special_char($User,$Latin1)."]".$colorname_endtag;
 			if ($Dest != "") $Dest = ">".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]".$colornamedest_endtag;
-			$NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>${User}${Dest}</B></td><td>$Message</td>";
+			$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\"><B>${User}${Dest}</B></td><td>$Message</td>";
 		}
 		if ($User == "SYS image")
 		{
-      $NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>".$colornamedest_tag."[${Dest}]".$colornamedest_endtag."</B></td><td><FONT class=\"notify\">".L_PIC." ${Dest}:</FONT> <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_FULLSIZE_PIC).".'; return true\" title=\"".sprintf(L_CLICK,L_FULLSIZE_PIC)."\" target=_blank>".$Message."</A></td>";
+      $NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\"><B>".$colornamedest_tag."[${Dest}]".$colornamedest_endtag."</B></td><td><FONT class=\"notify\">".L_PIC." ${Dest}:</FONT> <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_FULLSIZE_PIC).".'; return true\" title=\"".sprintf(L_CLICK,L_FULLSIZE_PIC)."\" target=_blank>".$Message."</A></td>";
 		}
 		if ($User == "SYS video")
 		{
@@ -237,12 +237,12 @@ if($DbLink1->num_rows() > 0)
 #				$eicon = $embevi->getProviderIcon();
 				$ealt = $embevi->getEmbeddedInfo();
 				$eicon = $embevi->getProviderImageIdentifier();
-				$NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>".$colornamedest_tag."[${Dest}]".$colornamedest_endtag."</B></td><td><FONT class=\"notify\"><img src=\"".$eicon."\" width='16' border=0 alt='&copy; ".$ealt."' title='&copy; ".$ealt."'>&nbsp;".L_VIDEO." ${Dest}:</FONT> <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_ORIG_VIDEO).".'; return true\" title=\"".sprintf(L_CLICK,L_ORIG_VIDEO)."\" target=_blank>".$Message."</A></td>";
+				$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\"><B>".$colornamedest_tag."[${Dest}]".$colornamedest_endtag."</B></td><td><FONT class=\"notify\"><img src=\"".$eicon."\" width='16' border=0 alt='&copy; ".$ealt."' title='&copy; ".$ealt."'>&nbsp;".L_VIDEO." ${Dest}:</FONT> <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_ORIG_VIDEO).".'; return true\" title=\"".sprintf(L_CLICK,L_ORIG_VIDEO)."\" target=_blank>".$Message."</A></td>";
 			}
 		}
 		if ($User == "SYS utube")
 		{
-      $NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>".$colornamedest_tag."[${Dest}]".$colornamedest_endtag."</B></td><td><FONT class=\"notify\"><img src=\"images/icons/youtube.png\" border=0 alt='YouTube' title='YouTube'>&nbsp;".L_VIDEO." ${Dest}:</FONT> <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_ORIG_VIDEO).".'; return true\" title=\"".sprintf(L_CLICK,L_ORIG_VIDEO)."\" target=_blank>".$Message."</A></td>";
+      $NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\"><B>".$colornamedest_tag."[${Dest}]".$colornamedest_endtag."</B></td><td><FONT class=\"notify\"><img src=\"images/icons/youtube.png\" border=0 alt='YouTube' title='YouTube'>&nbsp;".L_VIDEO." ${Dest}:</FONT> <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_ORIG_VIDEO).".'; return true\" title=\"".sprintf(L_CLICK,L_ORIG_VIDEO)."\" target=_blank>".$Message."</A></td>";
 		}
 		if ($User == "SYS announce")
 		{
@@ -251,7 +251,7 @@ if($DbLink1->num_rows() > 0)
 		}
 		if ($User == "SYS math")
 		{
- 			$NewMsg .= "<td colspan=2 valign=\"top\"><FONT class=\"notify\">".sprintf(L_MATH,$Dest)."</FONT> ".$Message."</td>";
+			$NewMsg .= "<td colspan=\"2\" valign=\"top\"><FONT class=\"notify\">".sprintf(L_MATH,$Dest,L_EQUATION)."</FONT><br />".$Message."</td>";
     	}
 		if ($User == "SYS room")
 		{
@@ -319,7 +319,8 @@ if (C_WORLDTIME == 2)
 <TITLE><?php echo(($U == "Guest" ? L_WHOIS_GUEST : stripslashes($U))." ".L_LURKING_3." - ".date("r")." - ".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <?php
-if(C_ALLOW_MATH) echo("<script type=\"text/javascript\" src=\"https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>");
+#if(C_ALLOW_MATH) echo("<script type=\"text/javascript\" src=\"https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>");
+if(C_ALLOW_MATH) echo("<script type=\"text/javascript\" src=\"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>");
 ?>
 </HEAD>
 <BODY>

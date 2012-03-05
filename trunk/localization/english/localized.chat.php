@@ -1,5 +1,5 @@
 <?php
-// File : english/localized.chat.php - plus version (02.01.2011 - rev.45)
+// File : english/localized.chat.php - plus version (09.01.2012 - rev.46)
 // Original file by Nicolas Hoizey <nhoizey@phpheaven.net>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
@@ -258,6 +258,7 @@ define("L_HELP_CMD_34", "This will allow an user to specify the orientation of a
 define("L_HELP_CMD_35", "It allows posting of <i>one video</i> or <i>one audio file</i> in a small Flash player at a time.<br />Usage: Just paste the url of the source to be posted! E.g. <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />You need Shockwave Flash Player installed on your system. The link is case sensitive!<br />HINTS: type /video followed by a space and paste the URL into the box.");
 define("L_HELP_CMD_35a", "The second command only works with youtube.com as video source.<br />E.g. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
 define("L_HELP_CMD_36", "It allows posting of <i>one youtube video</i> in a small Flash player at a time.<br />Usage: Just paste the url of the source to be posted! E.g. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />You need Shockwave Flash Player installed on your system. The link is case sensitive!<br />HINTS: type /tube followed by a space and paste the URL into the box.");
+define("L_HELP_CMD_37", "It allows posting of <i>MathJax Equations/Formulas</i> in chat.<br />Usage: Just paste the TeX or MathML (original) codes! E.g. <b>/math&nbsp;\sqrt{3x-1}+(1+x)^2</b><br />For more code samples and instructions go to: <a href=\"http://www.mathjax.org/demos/\" target=\"_blank'\">http://www.mathjax.org/demos</a>. Get the code by right-clicking on the formulas.<br />HINTS: type /math followed by a space and paste the code into the box.");
 define("L_HELP_CMD_VAR", "Synonyms (variants): %s"); // a list of English and/or translated alternatives for each command
 define("L_HELP_ETIQ_1", "Chat Etiquette");
 define("L_HELP_ETIQ_2", "Our site would like to keep its community friendly and fun, so please adhere to the following guidelines. If you fail to observe these rules, one of our chat moderators may boot you from the chat.<br /><br />Thank you,");
@@ -492,7 +493,7 @@ define("L_OPEN_PUB", "OPEN TO THE PUBLIC");
 define("L_CLOSED_PUB", "CLOSED TO THE PUBLIC");
 
 // Links popup page by Alex
-define("L_LINKS_1", "Posted links");
+define("L_LINKS_1", "Posted Links");
 define("L_LINKS_2", "Here you can access the posted links");
 
 // Javascript Status/title messages on links/images mouseover
@@ -515,6 +516,7 @@ define("L_LINKS_16", "Smiley Gallery");
 define("L_LINKS_17", "to sort ascending");
 define("L_LINKS_18", "to sort descending");
 define("L_LINKS_19", "to set/modify your Gravatar");
+define("L_LINKS_20", "Posted Equations");
 define("L_SWITCH", "Switch to %s"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "selected"); // E.g. "French - selected" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
@@ -749,5 +751,6 @@ define("L_DOB_TIT_1", "Birthdays list");
 $L_DOB_SUBJ = "Happy Birthday %s!";
 
 // MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
-define("L_MATH", "Equation posted by %s:");
+define("L_EQUATION", "equation");
+define("L_MATH", "%s has posted an %s"); // e.g. "username has posted an equation" (defined above); the word "equation" will render as a url to show popup with the posted formulas
 ?>

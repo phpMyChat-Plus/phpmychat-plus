@@ -363,8 +363,8 @@ if($DbLink->num_rows() > 0)
 	$MessagesString = "";
 	while(list($Time, $User, $Latin1, $Dest, $Message) = $DbLink->next_record())
 	{
-#		$Message = stripslashes($Message);
-		if($User != "SYS math") $Message = stripslashes($Message);
+		$Message = stripslashes($Message);
+#		if($User != "SYS math") $Message = stripslashes($Message);
 
 		// Starts Smilies checkup
 		if (C_USE_SMILIES)
@@ -453,7 +453,7 @@ if($DbLink->num_rows() > 0)
 					{
 						$colorname_tag = "<FONT color=".COLOR_CA.">";
 					}
-					
+
 					elseif ($perms_user == "moderator")
 					{
 						$colorname_tag = "<FONT color=".COLOR_CM.">";
@@ -474,7 +474,7 @@ if($DbLink->num_rows() > 0)
 				}
 				elseif (C_ITALICIZE_POWERS)
 				{
-					if ($perms_dest == "admin" || ($perms_dest == "topmod" && $Dest != C_BOT_NAME && $Dest != C_QUOTE_NAME)) 
+					if ($perms_dest == "admin" || ($perms_dest == "topmod" && $Dest != C_BOT_NAME && $Dest != C_QUOTE_NAME))
 					{
 						$colornamedest_tag = "<FONT color=".COLOR_CA.">";
 					}
@@ -652,7 +652,14 @@ else
 		  		$Message = "<I>".ROOM_SAYS." <FONT class=\"notify\">".$Message."<\/FONT><\/FONT><\/I><\/td><\/tr><\/table>";
 		 		$noteclass = "notify2";
 			}
-			elseif (substr($User,0,8) != "SYS dice" && $User != "SYS math")
+			elseif ($User == "SYS math")
+			{
+				$Equation = '<a onClick="window.parent.math_popup(); return false" title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_20).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_20).'.\'; return true" target="_blank">'.L_EQUATION.'<\/a>';
+				$MathDest = sprintf(L_MATH,$Dest,$Equation);
+				$Message = "<FONT class=\"notify\">".$MathDest."<\/FONT><\/td><\/tr><\/table>";
+				$noteclass = "notify";
+			}
+			elseif (substr($User,0,8) != "SYS dice")
 			{
 				if ($Dest != "") $NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]".$colornamedest_endtag."><\/B><BDO dir=\"${textDirection}\"><\/BDO> ";
 				$noteclass = "notify";
@@ -663,21 +670,12 @@ else
 				}
 				eval("\$Message = $Message;");
       		};
-			if ($User == "SYS math")
-			{
-				$MathDest = sprintf(L_MATH,$Dest);
-#				$Mathslashed = stripslashes(addslashes(addslashes($Message)));
-#				$Mathslashed = addslashes($Message);
-				$Mathslashed = $Message;
-				$NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\"><FONT class=\"notify\">".$MathDest."<\/FONT><\/td><td nowrap=\"nowrap\" valign=\"top\">".$Mathslashed."<\/td><\/tr><\/table>";
-				$noteclass = "notify";
-      		}
 			if ($User == "SYS enter" && strpos($Message,$U) !== false)
 			{
 				$To_remove = strstr($Message, "<EMBED SRC=");
 				$Message = rtrim(str_ireplace($To_remove,"",$Message));
 			}
-		    if ($User != "SYS image" && $User != "SYS video" && $User != "SYS utube" && $User != "SYS math")
+		    if ($User != "SYS image" && $User != "SYS video" && $User != "SYS utube")
 		    {
 				if(substr($User,0,8) == "SYS dice")
 				{
@@ -757,15 +755,11 @@ if ($First)
 	?>
 	with (window.parent.frames['messages'].window.document)
 	{
-		var c_allow_math = "<?php echo(C_ALLOW_MATH); ?>";
-		
 		open("text/html", "replace");
 		write("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
 		write("<HTML dir=\"<?php echo($textDirection); ?>\">\n<HEAD>\n");
 		write("<TITLE>Dynamic messages frame<\/TITLE>\n");
  		write("<LINK REL=\"stylesheet\" HREF=\"<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>\" TYPE=\"text\/css\">\n");
-		if (c_allow_math == 1) write("<script type=\"text\/javascript\" src=\"http:\/\/cdn\.mathjax\.org\/mathjax\/latest\/MathJax\.js?config=TeX-AMS-MML_HTMLorMML\"><\/script>\n");
-//		if (c_allow_math == 1) write("<script type=\"text/javascript\" src=\"https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"><\/script>\n");
 		write("<\/HEAD>\n\n");
 		write("<BODY CLASS=\"mainframe\">\n");
 	};

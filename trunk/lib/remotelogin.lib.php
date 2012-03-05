@@ -119,7 +119,7 @@ header("Pragma: no-cache");
 header("Content-Type: text/html; charset=${Charset}");
 
 // avoid server configuration for magic quotes
-if (function_exists('set_magic_quotes_runtime')) set_magic_quotes_runtime(0);
+if (function_exists('set_magic_quotes_runtime') && version_compare(PHP_VERSION, '5.3.0') < 0) set_magic_quotes_runtime(0);
 else ini_set("magic_quotes_runtime", 0);
 // Can't turn off magic quotes gpc so just redo what it did if it is on.
 if (get_magic_quotes_gpc()) {
@@ -950,7 +950,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 		{
 			query = refresh_query + "&LastLoad=" + time4LastLoadedMsg + "&LastCheck=" + time4LastCheckedUser;
 			window.frames['loader'].window.location.replace("loader.php?" + query);
-		};
+		}
 		<?php
 	}
 	else
@@ -1108,6 +1108,22 @@ if(!isset($Error) && (isset($N) && $N != ""))
 		};
 	};
 
+	// MathJax Equation Popup mod by Ciprian
+	// Launch the Equation window popup
+	var is_math_popup = null;
+
+	function math_popup()
+	{
+		if (is_math_popup && !is_math_popup.closed)
+		{
+			is_math_popup.focus();
+		}
+		else
+		{
+			is_math_popup = window.open("math_popup.php","math_popup","bottom=0,right=0,width=700,height=600,scrollbars=yes,resizable=yes,status=no,toolbar=no,menubar=no,directories=no,location=no");
+		};
+	};
+
 	// Misc vars
 	imgHelpOff = new Image(30,20); imgHelpOff.src = path2Chat + "localization/<?php echo($L); ?>/images/helpOff.gif";
 	imgHelpOn = new Image(30,20); imgHelpOn.src = path2Chat + "localization/<?php echo($L); ?>/images/helpOn.gif";
@@ -1182,7 +1198,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 			mouseY = e.screenY;
 		}
 		return;
-	}
+	};
 
 	// Quick validation of the message or the command submited at the input frame
 	function validateSubmission()
@@ -1278,7 +1294,7 @@ if (file_exists("./localization/".$L."/localized.cmds.php"))
 			if (document.all) inputFrameForm.elements['sendForm'].disabled = true;
 			return true;
 		};
-	}
+	};
 	// -->
 	</SCRIPT>
 	<?php
@@ -1419,7 +1435,7 @@ function isCookieEnabled() {
 	function tutorial_popup()
 	{
 		window.focus();
-		tutorial_popupWin = window.open("<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L&Ver="); ?>"+ver4,"tutorial_popup","width=700,height=800,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,directories=yes,status=yes,location=yes");
+		tutorial_popupWin = window.open("<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L&Ver="); ?>"+ver4,"tutorial_popup","width=700,height=800,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,directories=no,status=yes,location=no");
 		tutorial_popupWin.focus();
 	};
 

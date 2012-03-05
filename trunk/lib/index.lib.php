@@ -1122,6 +1122,22 @@ if(!isset($Error) && (isset($N) && $N != ""))
 		};
 	};
 
+	// MathJax Equation Popup mod by Ciprian
+	// Launch the Equation window popup
+	var is_math_popup = null;
+
+	function math_popup()
+	{
+		if (is_math_popup && !is_math_popup.closed)
+		{
+			is_math_popup.focus();
+		}
+		else
+		{
+			is_math_popup = window.open("math_popup.php","math_popup","bottom=0,right=0,width=700,height=600,scrollbars=yes,resizable=yes,status=no,toolbar=no,menubar=no,directories=no,location=no");
+		};
+	};
+
 	// Misc vars
 	imgHelpOff = new Image(30,20); imgHelpOff.src = path2Chat + "localization/<?php echo($L); ?>/images/helpOff.gif";
 	imgHelpOn = new Image(30,20); imgHelpOn.src = path2Chat + "localization/<?php echo($L); ?>/images/helpOn.gif";
