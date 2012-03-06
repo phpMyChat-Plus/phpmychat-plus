@@ -517,6 +517,7 @@ define("L_LINKS_16", "Галерия Усмивки");
 define("L_LINKS_17", "за да сортирате възхоодящо");
 define("L_LINKS_18", "за да сортирате низходящо");
 define("L_LINKS_19", "за да нагласите/промените Вашия Gravatar");
+define("L_LINKS_20", "Пуснато на Уравнения");
 define("L_SWITCH", "Превключете на %s"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "избран"); // E.g. "French (selected)" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
@@ -722,4 +723,8 @@ define("L_PRO_10", "Възраст");
 define("L_PRO_11", "%1\$d години, %2\$d месеци и дни %3\$d дни"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
 define("L_DOB_TIT_1", "Списък на рождените дни");
 $L_DOB_SUBJ = "Честит рожден ден %s!";
+
+// MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
+define("L_EQUATION", "Уравнение");
+define("L_MATH", "%s, публикувана от %s"); //e.g. "Equation posted by username" (defined above); the word "Equation" will render as a url to show popup with the posted formulas
 ?>

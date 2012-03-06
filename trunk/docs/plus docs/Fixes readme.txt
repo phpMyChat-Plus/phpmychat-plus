@@ -3,10 +3,11 @@ This log includes all the previously released fixes.
 Client browsers - tested with:
 	- IE < 5.5 = M;
 	- IE > 6.0SP2 (including > 7.0 & > 8.0 & > 9.0) = H;
-	- Mozilla Firefox > 1.6.0.0 (including < 10.0) = H;
+	- Mozilla Aurora = 12.0 = H;
+	- Mozilla Firefox > 1.6.0.0 (including < 11.0) = H;
 	- Mozilla Firebird 0.7 = L;
 	- Netscape > 8.1 = M;
-	- Opera 9.0 build 8502 = H;
+	- Opera 11.61 = H;
 	- AvantBrowser 10.2 build 52 = H;
 	- Flock 1.2.1 = H;
 	- Apple Safari > 4.0.3 = H;
@@ -35,6 +36,7 @@ If your users encounter bootings for no reason, try to disable sounds in chat.
 
 Fixes History:
 01.02.2012 - 1.94-beta8:
+- fixed the sourceforge logo for sites with allow_url_include disabled; (functionality related)
 - added the Profiles tab in admin panel, based on birthday popup features; (functionality extension)
 - fixed a bug related to embeding sounds that was leading to freezing and booting in IE7/8; (functionality related)
 - changed the MathJax plugin to use the secure connection; (security related)

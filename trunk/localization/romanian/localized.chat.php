@@ -732,6 +732,6 @@ define("L_DOB_TIT_1", "Lista Aniversărilor");
 $L_DOB_SUBJ = "La Mulţi Ani %s!";
 
 // MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
-define("L_EQUATION", "ecuaţie");
-define("L_MATH", "%s a postat o %s");
+define("L_EQUATION", "Ecuaţie");
+define("L_MATH", "%s trimisă de %s");
 ?>

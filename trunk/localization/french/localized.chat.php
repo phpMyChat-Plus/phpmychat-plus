@@ -515,6 +515,7 @@ define("L_LINKS_16", "Galerie de Smiley");
 define("L_LINKS_17", "pour trier par ordre croissant");
 define("L_LINKS_18", "pour trier par ordre décroissant");
 define("L_LINKS_19", "pour définir/modifier votre Gravatar");
+define("L_LINKS_20", "Équations Posté"); //Click here to open Posted Equations
 define("L_SWITCH", "Basculer en %s"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "sélectionné"); // E.g. "French - selected" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", "sélectionnée"); // feminine word, if it's the case
@@ -722,4 +723,8 @@ define("L_PRO_10", "Age");
 define("L_PRO_11", "%1\$d ans, %2\$d mois et %3\$d jours"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
 define("L_DOB_TIT_1", "Liste des anniversaires");
 $L_DOB_SUBJ = "Bon Anniversaire %s!";
+
+// MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
+define("L_EQUATION", "Équation");
+define("L_MATH", "%s postée par %s"); //e.g. "Equation posted by username" (defined above); the word "Equation" will render as a url to show popup with the posted formulas
 ?>

@@ -517,6 +517,7 @@ define("L_LINKS_16", "Smeško Galerija");
 define("L_LINKS_17", "da poredate uzlazno");
 define("L_LINKS_18", "da poredate silazno");
 define("L_LINKS_19", "da se postavi/modifikuje vaš Gravatar");
+define("L_LINKS_20", "Posted Equations"); //Click here to open Posted Equations
 define("L_SWITCH", "Prebacite na %s"); // E.g. "Prebacite na Talijanski" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "odabran"); // E.g. "Francuski - odabran" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", "odabrana"); // feminine word, if it's the case
@@ -722,4 +723,8 @@ define("L_PRO_10", "Starosna dob");
 define("L_PRO_11", "%1\$d godina, %2\$d meseci i %3\$d dana"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
 define("L_DOB_TIT_1", "Lista Rođendana");
 $L_DOB_SUBJ = "Srećan Rođendan %s!";
+
+// MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
+define("L_EQUATION", "Equation");
+define("L_MATH", "%s posted by %s"); //e.g. "Equation posted by username" (defined above); the word "Equation" will render as a url to show popup with the posted formulas
 ?>

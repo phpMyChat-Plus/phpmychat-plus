@@ -125,7 +125,7 @@ if($DbLink->num_rows() > 0)
 		$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\">".date("H:i:s", $Time + C_TMZ_OFFSET*60*60)."</td><td width=\"1%\" nowrap=\"nowrap\">".$Room."</td>";
 		if ($User == "SYS math")
 		{
-			$NewMsg .= "<td valign=\"top\"><FONT class=\"notify\">".sprintf(L_MATH,$Dest,L_EQUATION)."</FONT><br />".$Message."</td>";
+			$NewMsg .= "<td valign=\"top\"><FONT class=\"notify\">".sprintf(L_MATH,L_EQUATION,$Dest)."</FONT><br />".$Message."</td>";
     	}
 		// Separator between messages sent before today and other ones
 		if (!isset($day_separator) && date("j", $Time +  C_TMZ_OFFSET*60*60) != date("j", time() +  C_TMZ_OFFSET*60*60))

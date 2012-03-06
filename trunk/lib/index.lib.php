@@ -210,6 +210,49 @@ function ghosts_in($what, $in, $Charset)
 	return false;
 };
 
+function remote_file_exists ($url)
+{
+/*
+	Return error codes:
+	1 = Invalid URL host
+	2 = Unable to connect to remote host
+*/
+	$head = "";
+	$url_p = parse_url ($url);
+
+	if (isset ($url_p["host"]))
+	{ $host = $url_p["host"]; }
+	else
+	{ return 1; }
+
+	if (isset ($url_p["path"]))
+	{ $path = $url_p["path"]; }
+	else
+	{ $path = ""; }
+
+	$fp = @fsockopen ($host, 80, $errno, $errstr, 20);
+	if (!$fp)
+	{ return 2; }
+	else
+	{
+		$parse = parse_url($url);
+		$host = $parse['host'];
+
+		@fputs($fp, "HEAD ".$url." HTTP/1.1\r\n");
+		@fputs($fp, "HOST: ".$host."\r\n");
+		@fputs($fp, "Connection: close\r\n\r\n");
+		$headers = "";
+		while (!feof ($fp))
+		{ $headers .= @fgets ($fp, 128); }
+	}
+	@fclose ($fp);
+	$arr_headers = explode("\n", $headers);
+	$return = false;
+	if (isset ($arr_headers[0]))
+	{ $return = strpos ($arr_headers[0], "404") === false; }
+	return $return;
+}
+
 /*********** PART I ***********/
 
 // Define the message to display if user comes here because he has been kicked
@@ -1134,7 +1177,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 		}
 		else
 		{
-			is_math_popup = window.open("math_popup.php","math_popup","bottom=0,right=0,width=700,height=600,scrollbars=yes,resizable=yes,status=no,toolbar=no,menubar=no,directories=no,location=no");
+			is_math_popup = window.open("math_popup.php","math_popup","bottom=0,right=0,width=730,height=600,scrollbars=yes,resizable=yes,status=no,toolbar=no,menubar=no,directories=no,location=no");
 		};
 	};
 
@@ -2091,10 +2134,13 @@ echo("</P>");
 }
 ?>
 <SPAN CLASS="ChatCopy" dir="LTR">
+<?php
+$sflogo = "http://sflogo.sourceforge.net/sflogo.php?group_id=19371&type=10";
+?>
 &copy; 2000-2005 <a HREF="http://sourceforge.net/projects/phpmychat/" TARGET=_blank CLASS="ChatLink" Title="<?php echo(sprintf(L_CLICK,L_LINKS_7)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_LINKS_7)); ?>.'; return true">The phpHeaven Team</a><br />
 &copy; 2005-<?php echo(date('Y'))?> Plus development by <a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" Title="<?php echo(sprintf(L_CLICK,L_LINKS_9)); ?>" CLASS="ChatLink" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_DEVELOPER)); ?>.'; return true;">Ciprian M</a>.<br />
 Thanks to all the contributors in the <a href="http://groups.yahoo.com/subscribe/phpmychat" CLASS="ChatLink" title="<?php echo(sprintf(L_CLICK,L_LINKS_8)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_LINKS_8)); ?>.'; return true;" target=_blank>phpMyChat group</a> !<br />
-Download this full chat pack from <a href="http://sourceforge.net/projects/phpmychat/files/phpMyChat_Plus/" target=_blank title="<?php echo(APP_NAME." ".L_SRC." Sorceforge.net!\n".sprintf(L_CLICK,L_LINKS_10)); ?>" onMouseOver="window.status='<?php echo(APP_NAME." ".L_SRC." Sorceforge.net!"); ?>'; return true;" CLASS="ChatLink"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=19371&type=10" border=0 width="80" height="15" /></a>
+Download this full chat pack from <a href="http://sourceforge.net/projects/phpmychat/files/phpMyChat_Plus/" target=_blank title="<?php echo(APP_NAME." ".L_SRC." Sorceforge.net!\n".sprintf(L_CLICK,L_LINKS_10)); ?>" onMouseOver="window.status='<?php echo(APP_NAME." ".L_SRC." Sorceforge.net!"); ?>'; return true;" CLASS="ChatLink"><img src="<?php echo((remote_file_exists($sflogo) === true || is_file($sflogo) || file_exists($sflogo)) ? $sflogo : "./${ChatPath}images/sflogo.gif"); ?>" border=0 width="80" height="15" /></a>
 </SPAN>
 <?php
 if (C_SHOW_OWNER)

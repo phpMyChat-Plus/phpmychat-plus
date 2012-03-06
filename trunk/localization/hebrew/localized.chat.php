@@ -518,6 +518,7 @@ define("L_LINKS_16", "גלריית סמיילים");
 define("L_LINKS_17", "למיון בסדר עולה");
 define("L_LINKS_18", "למיון בסדר יורד");
 define("L_LINKS_19", "לשמור את הגרווטר שלך");
+define("L_LINKS_20", "פורסם משוואות"); //Click here to open Posted Equations
 define("L_SWITCH", "%s מעבר אל"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "נבחרה"); // E.g. "French - selected" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
@@ -728,4 +729,8 @@ define("L_PRO_10", "Age");
 define("L_PRO_11", "%1\$d years, %2\$d months and %3\$d days");
 define("L_DOB_TIT_1", "Birthdays list");
 $L_DOB_SUBJ = "Happy Birthday %s!";
+
+// MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
+define("L_EQUATION", "משוואה");
+define("L_MATH", "%s פורסם על ידי %s"); //e.g. "Equation posted by username" (defined above); the word "Equation" will render as a url to show popup with the posted formulas
 ?>

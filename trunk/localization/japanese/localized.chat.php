@@ -514,6 +514,7 @@ define("L_LINKS_16", "スマイリーギャラリー");
 define("L_LINKS_17", "昇順にする");
 define("L_LINKS_18", "降順にする");
 define("L_LINKS_19", "Gravatarを設定／修正する");
+define("L_LINKS_20", "掲示式"); //Click here to open Posted Equations
 define("L_SWITCH", "次の言語に切り替える:%s"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "現設定"); // E.g. "French - selected" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
@@ -718,4 +719,8 @@ define("L_PRO_10", "年齢");
 define("L_PRO_11", "%1\$d年%2\$dヶ月と%3\$d日");
 define("L_DOB_TIT_1", "誕生日リスト"); // The list of birthdays in descending order
 $L_DOB_SUBJ = "%sさん、お誕生日おめでとう！"; // Firstname (if set) or Username
+
+// MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
+define("L_EQUATION", "式");
+define("L_MATH", "投稿者%s: %s"); //e.g. "Equation posted by username" (defined above); the word "Equation" will render as a url to show popup with the posted formulas
 ?>

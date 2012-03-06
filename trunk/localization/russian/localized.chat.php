@@ -720,6 +720,6 @@ define("L_DOB_TIT_1", "Список именинников");
 $L_DOB_SUBJ = "С днем рождения %s!"; // username
 
 // MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
-define("L_EQUATION", "уравнение");
-define("L_MATH", "%s опубликовал %s"); // e.g. "username has posted an equation" (defined above); the word "equation" will render as a url to show popup with the posted formulas
+define("L_EQUATION", "Уравнение");
+define("L_MATH", "%s опубликовано %s"); //e.g. "Equation posted by username" (defined above); the word "Equation" will render as a url to show popup with the posted formulas
 ?>

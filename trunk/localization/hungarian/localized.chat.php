@@ -515,6 +515,7 @@ define("L_LINKS_16", "Smiley Galéria");
 define("L_LINKS_17", " a növekvő sorrendhez");
 define("L_LINKS_18", " a csökkenő sorrendhez");
 define("L_LINKS_19", " a beállítani/módosítani a Gravatar-od");
+define("L_LINKS_20", "Elküldött Egyenletek"); //Click here to open Posted Equations
 define("L_SWITCH", "Váltás erre %s"); // E.g. "Váltás olaszra" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "kiválasztva"); // E.g. "francia - kiválasztva" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine form
@@ -707,7 +708,7 @@ define("L_SUPP_ALT", "Támogasd PayPal-lal a ".APP_NAME." fejlesztését - Gyors
 
 // Video & Audio & Youtube cmds (Embevi & YouTube player class) – same approach as in // Img cmd mod section!
 define("L_AUDIO", "Audio fájlt küldött:");
-define("L_VIDEO", "Videót küldött: ");
+define("L_VIDEO", "Videót küldött:");
 define("L_HELP_VIDEO", "az elküldendő videó vagy audio fájl teljes elérési útja");
 define("L_NO_VIDEO", "Ezt az URL-t nem lehet beilleszteni.\\nNem érvényes URL.\\nPróbáld újra!");
 define("L_ORIG_VIDEO", "az eredeti oldal megnyitásához"); //it sounds like: Click here to open the…
@@ -720,4 +721,8 @@ define("L_PRO_10", "Kor");
 define("L_PRO_11", "%1\$d év, %2\$d hónap és %3\$d nap"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
 define("L_DOB_TIT_1", "Születésnap-lista");
 $L_DOB_SUBJ = "Boldog születésnapot, %s!";
+
+// MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
+define("L_EQUATION", "Egyenletet");
+define("L_MATH", "%s küldött: %s"); //e.g. "Equation posted by username" (defined above); the word "Equation" will render as a url to show popup with the posted formulas
 ?>

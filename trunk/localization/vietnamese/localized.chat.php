@@ -508,6 +508,7 @@ define("L_LINKS_16", "phòng triển lãm tranh"); // to open/see Posted Links w
 define("L_LINKS_17", "để phân loại tăng lên");
 define("L_LINKS_18", "để phân loại đi xuống");
 define("L_LINKS_19", "để thiết lập/sửa chữa Gravatar");
+define("L_LINKS_20", "đăng phương trình"); //Click here to open Posted Equations
 define("L_SWITCH", "Sự Chuyển đổi Tới %s");
 define("L_SELECTED", "chọn");
 define("L_SELECTED_F", ""); // feminine word, if it's the case
@@ -712,4 +713,8 @@ define("L_PRO_10", "Tuổi");
 define("L_PRO_11", "%1\$d nhiều năm, %2\$d nhiều tháng và %3\$d nhiều ngày"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
 define("L_DOB_TIT_1", "Dòng sinh nhật");
 $L_DOB_SUBJ = "Chúc mừng sinh nhật %s!";
+
+// MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
+define("L_EQUATION", "Phương trình");
+define("L_MATH", "%s được đăng lên bởi %s"); //e.g. "Equation posted by username" (defined above); the word "Equation" will render as a url to show popup with the posted formulas
 ?>
