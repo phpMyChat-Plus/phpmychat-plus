@@ -512,6 +512,7 @@ define("L_LINKS_16", "Smilie Gallerie"); // to open/see Posted Links window
 define("L_LINKS_17", "um aufsteigend sortieren");
 define("L_LINKS_18", "um absteigend sortieren");
 define("L_LINKS_19", "um deinen Gravatar zu bearbeiten");
+define("L_LINKS_20", "Veröffentlichte Gleichungen"); //Click here to open Posted Equations
 define("L_SWITCH", "Wechseln zu %s"); // Switch to English (Country Flags over / Language switching)
 define("L_SELECTED", "gewählt"); // French - selected (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
@@ -702,7 +703,7 @@ define("L_SUPP_WARN", "Sie haben sich entschlossen, die nichtkommerzielle Entwic
 define("L_SUPP_ALT", "Unterstützen Sie die Weiterentwicklung und Sicherheitsbetreuung von ".APP_NAME." - es ist Schnell, Frei und Sicher!");
 
 // Video & Audio & Youtube cmds (Embevi & YouTube player class) – same approach as in // Img cmd mod section!
-define("L_AUDIO", "Audiodatei gepostet von ");
+define("L_AUDIO", "Audiodatei gepostet von");
 define("L_VIDEO", "Video gepostet von");
 define("L_HELP_VIDEO", "gesampters pfad zum Video und audio wird gepostet");
 define("L_NO_VIDEO", "die URL kann nicht eingebettet.\\nDies ist keine gültige URL eines akzeptierten\\noffentlichen Video oder Audio quelle.\\nVersuch nochmal!");
@@ -716,4 +717,8 @@ define("L_PRO_10", "Alte");
 define("L_PRO_11", "%1\$d Jahre, %2\$d Monate und %3\$d Tagen"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
 define("L_DOB_TIT_1", "Geburts Tag List");
 $L_DOB_SUBJ = "Herzlichen Glückwunsch zum Geburtstag %s!";
+
+// MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
+define("L_EQUATION", "Gleichungen");
+define("L_MATH", "%s gepostet von %s"); //e.g. "Equation posted by username" (defined above); the word "Equation" will render as a url to show popup with the posted formulas
 ?>

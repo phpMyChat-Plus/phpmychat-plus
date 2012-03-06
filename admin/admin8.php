@@ -299,7 +299,7 @@ if($DbLink->num_rows() > 0)
 		}
 		elseif ($User == "SYS math")
 		{
-			$NewMsg .= "<td colspan=\"2\" valign=\"top\"><FONT class=\"notify\">".sprintf(L_MATH,$Dest,L_EQUATION)."</FONT><br />".$Message."</td>";
+			$NewMsg .= "<td colspan=\"2\" valign=\"top\"><FONT class=\"notify\">".sprintf(L_MATH,L_EQUATION,$Dest)."</FONT><br />".$Message."</td>";
       	}
 		if ($User == "SYS topic")
 		{

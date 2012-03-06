@@ -1120,7 +1120,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 		}
 		else
 		{
-			is_math_popup = window.open("math_popup.php","math_popup","bottom=0,right=0,width=700,height=600,scrollbars=yes,resizable=yes,status=no,toolbar=no,menubar=no,directories=no,location=no");
+			is_math_popup = window.open("math_popup.php","math_popup","bottom=0,right=0,width=730,height=600,scrollbars=yes,resizable=yes,status=no,toolbar=no,menubar=no,directories=no,location=no");
 		};
 	};
 

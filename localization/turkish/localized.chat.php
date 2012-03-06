@@ -518,6 +518,7 @@ define("L_LINKS_18_T", "Yeniden eskiye sıralamak için"); // time: Recent -> Ol
 define("L_LINKS_17_N", "Küçükten büyüğe sıralamak için"); // numeric acending
 define("L_LINKS_18_N", "Büyükten küçüğe sıralamak için"); // numeric descending
 define("L_LINKS_19", "Gravatarınızı ayarlamak/düzenlemek için");
+define("L_LINKS_20", "Yazılan Denklemler"); //Click here to open Posted Equations
 define("L_ASCa", "");
 define("L_DESCa", "");
 define("L_SWITCH", "%s Değiştir");
@@ -729,4 +730,8 @@ define("L_PRO_10", "Yaş");
 define("L_PRO_11", "%1\$d yıl, %2\$d ay ve %3\$d gün"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
 define("L_DOB_TIT_1", "Doğum günü listesi");
 $L_DOB_SUBJ = "Doğum gününüz kutlu olsun %s!";
+
+// MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
+define("L_EQUATION", "denklemi");
+define("L_MATH", "%2\$s gönderen %1\$s"); //e.g. "Equation posted by username" (defined above); the word "Equation" will render as a url to show popup with the posted formulas
 ?>

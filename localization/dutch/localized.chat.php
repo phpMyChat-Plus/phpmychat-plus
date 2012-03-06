@@ -507,6 +507,7 @@ define("L_LINKS_16", "Smilie Gallerij");
 define("L_LINKS_17", "om oplopend te sorteren");
 define("L_LINKS_18", "om aflopend te sorteren");
 define("L_LINKS_19", "om aan te passen/veranderen van jou Gravatar");
+define("L_LINKS_20", "Geposte Vergelijkingen"); //Click here to open Posted Equations
 define("L_SWITCH", "Schakel over naar %s");
 define("L_SELECTED", "selecteer");
 define("L_SELECTED_F", ""); // feminine word, if it's the case
@@ -711,4 +712,8 @@ define("L_PRO_10", "Leeftijd");
 define("L_PRO_11", "%1\$d jaren, %2\$d maanden en %3\$d dagen");	//you can also change the order here 
 define("L_DOB_TIT_1", "Verjaardagenlijst");
 $L_DOB_SUBJ = "Gefeliciteerd met je verjaardag, %s!"; 
+
+// MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
+define("L_EQUATION", "Vergelijkingen");
+define("L_MATH", "%s gepost door %s"); //e.g. "Equation posted by username" (defined above); the word "Equation" will render as a url to show popup with the posted formulas
 ?>

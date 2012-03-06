@@ -654,7 +654,7 @@ else
 			elseif ($User == "SYS math")
 			{
 				$Equation = '<a onClick="window.parent.math_popup(); return false" title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_20).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_20).'.\'; return true" target="_blank">'.L_EQUATION.'</a>';
-				$MathDest = sprintf(L_MATH,$Dest,$Equation);
+				$MathDest = sprintf(L_MATH,$Equation,$Dest);
 				$Message = "<FONT class=\"notify\">".$MathDest."</FONT></td></tr></table>";
 				$noteclass = "notify";
 			}
@@ -708,7 +708,7 @@ else
 {
 	echo("<table cellspacing=0 cellpading=0><tr><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\" style=\"background-color:yellow;\"><SPAN CLASS=\"notify\">".L_NO_MSG."</SPAN></td></tr></table>");
 };
-$DbLink->clean_results();
+if ($DbLink) $DbLink->clean_results();
 
 // Private Message Popup mod by Ciprian
 if (C_ENABLE_PM)

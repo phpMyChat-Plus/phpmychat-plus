@@ -655,7 +655,7 @@ else
 			elseif ($User == "SYS math")
 			{
 				$Equation = '<a onClick="window.parent.math_popup(); return false" title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_20).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_20).'.\'; return true" target="_blank">'.L_EQUATION.'<\/a>';
-				$MathDest = sprintf(L_MATH,$Dest,$Equation);
+				$MathDest = sprintf(L_MATH,$Equation,$Dest);
 				$Message = "<FONT class=\"notify\">".$MathDest."<\/FONT><\/td><\/tr><\/table>";
 				$noteclass = "notify";
 			}
@@ -953,7 +953,7 @@ if(C_CHAT_BOOT)
 			$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+($curtime-last_away), longest_away=IF($curtime-last_away < longest_away, longest_away, $curtime-last_away), last_away='' WHERE (stat_date=FROM_UNIXTIME(last_away,'%Y-%m-%d') OR stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d')) AND room='$m_room' AND username='$U' AND last_away!='0'");
 			$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_in=seconds_in+($curtime-last_in), longest_in=IF($curtime-last_in < longest_in, longest_in, $curtime-last_in), last_in='' WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$m_room' AND username='$U' AND last_in!='0'");
 		}
-	$DbLink->clean_results();
+	if ($DbLink) $DbLink->clean_results();
 	$botpath = "botfb/".$U;         // file is in DIR "botfb" and called "username"
 	if (file_exists($botpath)) unlink($botpath); // checks to see if user file exists.
 	                                     // if it does delete it.

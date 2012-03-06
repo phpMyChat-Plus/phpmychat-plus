@@ -515,6 +515,7 @@ define("L_LINKS_16", "Smiley Galleriet");
 define("L_LINKS_17", "for at sortere i stigende orden");
 define("L_LINKS_18", "for at sortere i faldende orden");
 define("L_LINKS_19", "hvis du vil oprette/ændre dit Gravatar");
+define("L_LINKS_20", "Postede Ligninger");
 define("L_SWITCH", "Skift til %s"); // E.g. "Skift til italiensk" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "er valgt"); // E.g. "Fransk - er valgt" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
@@ -720,4 +721,8 @@ define("L_PRO_10", "Alder");
 define("L_PRO_11", "%1\$d år, %2\$d måneder og %3\$d dage"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
 define("L_DOB_TIT_1", "Fødselsdagsliste");
 $L_DOB_SUBJ = "Tillykke med Fødselsdagen %s!";
+
+// MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
+define("L_EQUATION", "Ligning");
+define("L_MATH", "%s postet af %s"); //e.g. "Equation posted by username" (defined above); the word "Equation" will render as a url to show popup with the posted formulas
 ?>

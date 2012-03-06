@@ -503,6 +503,7 @@ define("L_LINKS_16", "Banque de smileys");
 define("L_LINKS_17", "para sortear en orden ascendente");
 define("L_LINKS_18", "para sortear en orden descendente");
 define("L_LINKS_19", "para agregar/modificar su Gravatar");
+define("L_LINKS_20", "Ecuaciones expuestos");
 define("L_SWITCH", "Cambiar a %s");
 define("L_SELECTED", "seleccionado");
 define("L_SELECTED_F", ""); // feminine word, if it's the case
@@ -688,4 +689,24 @@ define("L_OPID_REG", "Importa tu perfil de OpenID");
 // Support buttons
 define("L_SUPP_WARN", "Has escogido contribuir con el Desarrollo gratuito de\\n".APP_NAME." al hacer una donación al programador.\\n¡Gracias por tu apoyo!\\n\\nNota: el beneficiario no es el dueño de este chat.\\nPor favor pon la cantidad en la siguiente página.\\n\\nContinuar?");
 define("L_SUPP_ALT", "¡Usa PayPal para apoyar el desarrollo de ".APP_NAME." - es Rápido, Gratis y Seguro!");
+
+// Video & Audio & Youtube cmds (Embevi & YouTube player class) – same approach as in // Img cmd mod section!
+define("L_AUDIO", "Archivo de audio publicado por");
+define("L_VIDEO", "Video publicado por");
+define("L_HELP_VIDEO", "ruta completa al video o audio a ser publicado");
+define("L_NO_VIDEO", "La URL no puede ser embebida.\\nNo es una URL válida a un video o audio público.\\n¡Intentá nuevamente!");
+define("L_ORIG_VIDEO", "para abrir el sitio original"); //it sounds like: Click here to open the…
+
+// Birthday mod - by Ciprian
+define("L_PRO_7", "Fecha de nacimiento");
+define("L_PRO_8", "mostrar fecha de nacimiento en tu información pública");
+define("L_PRO_9", "mostrar edad en información pública");
+define("L_PRO_10", "Edad");
+define("L_PRO_11", "%1\$d años, %2\$d meses y %3\$d días"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
+define("L_DOB_TIT_1", "Lista de cumpleaños");
+$L_DOB_SUBJ = "¡Feliz cumpleaños %s!";
+
+// MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
+define("L_EQUATION", "Ecuación");
+define("L_MATH", "%s publicado por %s"); //e.g. "Equation posted by username" (defined above); the word "Equation" will render as a url to show popup with the posted formulas
 ?>

@@ -20,6 +20,7 @@ define("L_CMD_INVITE", "покани"); // invite (send an invitation to the use
 define("L_CMD_JOIN", "ела"); // join (join an existing room)
 define("L_CMD_KICK", "изритай,изхвърли"); // kick,boot (kick an user from a room)
 define("L_CMD_LTR", "л-д,лд,ляво"); // ltr (post a left-to-right text)
+define("L_CMD_MATH", "мат,мате"); // math (post MathJax equations in chat)
 define("L_CMD_ME", "аз"); // me (tell the room what you are doing)
 define("L_CMD_MR", "г-н,г-жа,г-ца,гн,гжа,гца"); // mr (same as "me" but with the gender prefix)
 define("L_CMD_MSG", "бележка,до"); // msg,to (send a private message)

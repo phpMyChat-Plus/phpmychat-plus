@@ -508,6 +508,7 @@ define("L_LINKS_16", "Smilie Galleri");
 define("L_LINKS_17", "för att sortera stigande");
 define("L_LINKS_18", "för att sortera fallande");
 define("L_LINKS_19", "för att ställa in/ändra din Gravatar");
+define("L_LINKS_20", "Utsända Ekvationerna"); //Click here to open Posted Equations
 define("L_SWITCH", "Ändra språk %s");
 define("L_SELECTED", "valt");
 define("L_SELECTED_F", ""); // feminine word, if it's the case
@@ -712,4 +713,8 @@ define("L_PRO_10", "Ålder");
 define("L_PRO_11", "%1\$d år, %2\$d månad/månader och %3\$d dag/dagar"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
 define("L_DOB_TIT_1", "Födelsedagslista");
 $L_DOB_SUBJ = "Grattis på födelsedagen %s!";
+
+// MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
+define("L_EQUATION", "Ekvation");
+define("L_MATH", "%s infogad av %s"); //e.g. "Equation posted by username" (defined above); the word "Equation" will render as a url to show popup with the posted formulas
 ?>

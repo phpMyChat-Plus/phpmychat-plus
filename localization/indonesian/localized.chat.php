@@ -515,6 +515,7 @@ define("L_LINKS_16", "Kumpulan gambar Senyuman");
 define("L_LINKS_17", "urut dari atas ke bawah");
 define("L_LINKS_18", "urut dari bawah ke atas");
 define("L_LINKS_19", "untuk memodifikasi Gravatar"); // do not translate the word "Gravatar"!
+define("L_LINKS_20", "Persamaan yang ditampilkan"); //Click here to open Posted Equations
 define("L_SWITCH", "Pindah ke %s"); // E.g. "Switch to Italian" (Country Flags mouseover / Language switching)
 define("L_SELECTED", "dipilih"); // E.g. "French (selected)" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
@@ -719,4 +720,8 @@ define("L_PRO_10", "Umur");
 define("L_PRO_11", "%1\$d tahun, %2\$d bulan dan %3\$d hari"); //you can also change the order here, but 1 stands for years, 2 for months and 3 for days
 define("L_DOB_TIT_1", "Daftar yang Ulang Tahun");
 $L_DOB_SUBJ = "Selamat Ulang Tahun %s!";
+
+// MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
+define("L_EQUATION", "Persamaan");
+define("L_MATH", "%s diposting oleh %s"); //e.g. "Equation posted by username" (defined above); the word "Equation" will render as a url to show popup with the posted formulas
 ?>
