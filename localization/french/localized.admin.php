@@ -84,7 +84,7 @@ define("A_SHEET4_9", "Adresse(s), sujet ou message manquant!");
 define("A_SHEET4_10", "Ajouter des emails, séparés par des virgules sans espace (,)");
 define("A_SHEET4_11", "Signature");
 define("A_SHEET4_12", "Tout déselectionner");
-define("A_SHEET4_13", "Mettez tous les destinataires dans le champ <b>’Bcc’</b>");
+define("A_SHEET4_13", "Mettez tous les destinataires dans le champ <b>’Cci’</b>");
 
 // Frame for configuration
 define("A_SHEET5_0", "Votre version installée est %s");

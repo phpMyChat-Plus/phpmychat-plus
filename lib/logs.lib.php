@@ -142,7 +142,7 @@ elseif ($username == "SYS announce")
 }
 elseif ($username == "SYS math")
 {
-	$NewMsg .= '<b><?php echo(sprintf(L_MATH, "'.$address.'")); ?></b> ';
+	$NewMsg .= '<b><?php echo(sprintf(L_MATH,L_EQUATION,"'.$address.'")); ?></b> ';
 	$NewMsg .= $message;
 }
 elseif ($username == "SYS room")
@@ -369,7 +369,7 @@ elseif ($usernameu == "SYS announce")
 }
 elseif ($usernameu == "SYS math")
 {
-	$NewMsgu .= '<b><?php echo(sprintf(L_MATH, "'.$addressu.'")); ?></b> ';
+	$NewMsgu .= '<b><?php echo(sprintf(L_MATH,L_EQUATION,"'.$addressu.'")); ?></b> ';
 	$NewMsgu .= $messageu;
 }
 elseif ($usernameu == "SYS room")

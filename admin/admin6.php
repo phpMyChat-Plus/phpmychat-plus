@@ -83,10 +83,10 @@ $message = str_replace('alt="Send email">','title="'.sprintf(L_CLICK,L_EMAIL_1).
 $m_time = stripslashes($result["m_time"]);
 $time_posted = date("d-m-y H:i:s", $m_time);
 echo "<tr class=\"msg2\">
-<td align=center><a href=\"$pstr&mord=$mord&mdel=".$m_time."\"><font size=-2 color=red><b>x</b></font></a></td>
-<td width=110 align=center>$time_posted</td>
-<td width=150><b>$username</b>$address</b>:</td>
-<td width=100>$room</td>
+<td width=1% align=center><a href=\"$pstr&mord=$mord&mdel=".$m_time."\"><font size=-2 color=red><b>x</b></font></a></td>
+<td width=1% align=center>$time_posted</td>
+<td width=1%><b>$username</b>$address</b>:</td>
+<td width=1%>$room</td>
 <td>$message</td></tr>";
 }
 

@@ -6,6 +6,7 @@
 // Do not use ' ; use ’ instead (utf-8 edit bug)
 
 // Do not change these lines:
+define("L_ORIG_LANG_AE", "العربية");
 define("L_ORIG_LANG_AR", "español Argentina");
 define("L_ORIG_LANG_BG", "български");
 define("L_ORIG_LANG_BR", "português brasileiro");
@@ -17,6 +18,7 @@ define("L_ORIG_LANG_EN", "English");
 define("L_ORIG_LANG_ENUK", "English UK");
 define("L_ORIG_LANG_ENUS", "English US");
 define("L_ORIG_LANG_ES", "español");
+define("L_ORIG_LANG_FA", "فارسی");
 define("L_ORIG_LANG_FI", "suomi");
 define("L_ORIG_LANG_FR", "français");
 define("L_ORIG_LANG_GR", "Ελληνικά");
