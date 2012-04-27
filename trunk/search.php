@@ -183,6 +183,20 @@ switch(L_LANG)
 		$L_G_HL = "yo";
 		$L_G_CX = "x2nop2-xvsd";
 		break;
+	case "zh_CN":
+		$L_G_EXT = "com.hk";
+#		$L_G_SA = "搜寻";
+		$L_G_SA = "&#x641c;&#x7d22;";
+		$L_G_HL = "zh-Hans";
+		$L_G_CX = "2279383555";
+		break;
+	case "zh_TW":
+		$L_G_EXT = "com.hk";
+#		$L_G_SA = "搜尋";
+		$L_G_SA = "&#x641c;&#x5c0b;";
+		$L_G_HL = "zh-TW";
+		$L_G_CX = "3362117866";
+		break;
 	default:
 		$L_G_EXT = "com";
 		$L_G_CX = "v5m0ds-vk8w";

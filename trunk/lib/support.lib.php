@@ -126,6 +126,18 @@ switch (L_LANG)
 		$ppalt = "PayPal - A maneira mais fácil e segura de efetuar pagamentos on-line!";
 		$ppexists = 1;
 		break;
+	case "zh_CN":
+		$pplang = "zh_XC";
+		$ppbutton = ($pptype == "big") ? "RQ3GHM7HSY95Q" : "8C5WYJSNYG5BY";
+		$ppalt = "PayPal － 最安全便捷的在线支付方式！";
+		$ppexists = 1;
+		break;
+	case "zh_TW":
+		$pplang = "zh_HK/HK";
+		$ppbutton = ($pptype == "big") ? "DLBFN422X69WG" : "T2BQZSP33V2KA";
+		$ppalt = "PayPal － 更安全、更簡單的網上付款方式！";
+		$ppexists = 1;
+		break;
 	default:
 		$pplang = "en_US";
 		$ppbutton = ($pptype == "big") ? "3625361" : "3625382";
@@ -140,7 +152,7 @@ switch ($pptype)
 		$defpmcimage = "./localization/english/images/paypal_donate.gif";
 		break;
 	case "small":
-		$ppimage = "https://www.paypal.com/".(L_LANG == "pt_BR" ? L_LANG : $pplang)."/i/btn/btn_donate_SM.gif";
+		$ppimage = "https://www.paypal.com/".(L_LANG == "pt_BR" ? L_LANG : (L_LANG == "zh_TW" ? "zh_HK" : $pplang))."/i/btn/btn_donate_SM.gif";
 		$pmcimage = "./localization/".$L."/images/make_a_donation.gif";
 		$defpmcimage = "./localization/english/images/make_a_donation.gif";
 		break;

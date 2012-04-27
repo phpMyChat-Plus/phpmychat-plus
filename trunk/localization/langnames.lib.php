@@ -11,6 +11,8 @@ define("L_ORIG_LANG_AR", "español Argentina");
 define("L_ORIG_LANG_BG", "български");
 define("L_ORIG_LANG_BR", "português brasileiro");
 define("L_ORIG_LANG_CA", "català");
+define("L_ORIG_LANG_CNS", "简体中文");
+define("L_ORIG_LANG_CNT", "繁體中文");
 define("L_ORIG_LANG_CZ", "čeština");
 define("L_ORIG_LANG_DA", "dansk");
 define("L_ORIG_LANG_DE", "Deutsch");
