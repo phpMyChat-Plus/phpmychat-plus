@@ -1,0 +1,85 @@
+<?php
+// File : chinese_simplified/localized.install.php - plus version (07.06.2009 - rev.7)
+// Original file for Plus version by clouds_music <clouds.music@gmail.com>
+// Do not use ' ; use ’ istead (utf-8 edit bug)
+
+define("L_BTN1", "下一页");
+define("L_BTN2", "取消");
+define("L_BTN3", "返回");
+define("L_BTN4", "刷新");
+define("L_BTN5", "完成");
+define("L_BTN6", "跳过");
+define("L_CONN_ERROR", "FTP的主机地址错误!<br />请返回，并检查您的FTP主机位址。");
+define("L_LOGIN_ERROR", "登入验证失败!<br />请返回，并检查您的登入使用者名称和密码。");
+define("L_FTP_NAME", "FTP 用户名空白未填!");
+define("L_FTP_PASS", "FTP 密码 空白未填!");
+define("L_DB_NOCONNECT", "无法连接到数据库!");
+define("L_DB_HINT1", "数据库 %s 不存在,并且我不能创建它!");
+define("L_PASS_ERROR1", "你没有填写管理员名称。<br />请返回并选用一个名称到您的管理员帐户!");
+define("L_PASS_ERROR2", "你必须填写密码栏位。<br />请返回并键入相同的密码两次!");
+define("L_PASS_ERROR3", "密码和验证密码不符合。<br />请返回并重新输入密码!");
+define("L_FILE_ERROR1", "不能 CHMOD 这档案");
+define("L_FILE_ERROR2", "");
+define("L_FOLD_ERROR1", "不能 CHMOD 这资料夹");
+define("L_FOLD_ERROR2", "");
+define("L_INST_FOR", "安装 for %s");
+define("L_INST_VER", "版本:");
+define("L_INST_SETUP", "安装 -");
+define("L_INST_PAG_OF", "页面 %s of %s");
+define("L_P0_HINT1", "欢迎到我们的安装程序 %s。");
+define("L_P0_HINT2", "请输入你的FTP登入资料。");
+define("L_P1_HINT1", "此设置将引导您完成安装过程。<br />请选择您的安装类型。");
+define("L_P1_HINT2", "Please select what type of installation is this:");
+define("L_P1_HINT3", "你提供的 FTP -数据，似乎是错误的。 安装程序无法继续。请返回并纠正错误。这些是错误的:");
+define("L_P2_HINT1", "现在，我们检查了 phpMyChat 配置。必须改变一个档案 (\"config/config.lib.php\") 在此服务器上。");
+define("L_P2_HINT2", "那个 config 档案无法写入。 请让它可写入, 使用任何FTP程序（如Total Commander）连接到您的服务器和应用 CHMOD 666 to \"config.lib.php\" 档案在 config 资料夹)。 如果你不知道如何做到这一点,或是如果你不喜欢改变这个文件的权限，请填写下面的表格，然后按一下 \"".L_BTN1."\"。");
+define("L_P2_HINT3", "注意：如果您要改变您这个文件的权限，请点击 \"".L_BTN4."\" 按钮后 chmod 操作, 为了让安装程序知道该文件是可写的!");
+define("L_P2_HINT4", "这个文件 \"config/config.lib.php\" 是可写入的。 请填好这张表格的值,将被直接存储在文件中。");
+define("L_P3_HINT1", "回到前一页，改变值。如果安装程序无法创建数据库，请自己创建它。");
+define("L_P3_HINT2", "Here are your configuration results to be pasted into the \"config/config.lib.php\" file. Please select all the text from the message-box below, copy it and paste it in your prefered text-editor (e.g. Notepad++). Save the file as config.lib.php (make sure the type is All types not Text document) and put the file up on your ftp-server in the \"config\" directory.");
+define("L_P3_HINT3", "然后，你必须创建一个管理员帐户，就能访问 phpMyChat 的后台管理面板。");
+define("L_P3_HINT4", "Your \"config/config.lib.php\" - file:");
+define("L_P3_HINT5", "Could not open \"config/config.lib.php\" for writing!");
+define("L_P3_HINT6", "回到前一页，改变值。这个文件是无法写入。");
+define("L_P3_HINT7", "现在，你必须创建一个管理员帐户，就能访问后台管理phpMyChat的面板。");
+define("L_P3_HINT8", "您的变更已储存。");
+define("L_P3_HINT9", "附注：此用户帐户拥有后台管理面板及聊天室的所有管理及使用权限!");
+define("L_P3_BTN1", "选择全部");
+define("L_P4_HINT1", "你的主要管理员帐户已创建。");
+define("L_P4_HINT2", "你准备好登陆管理面板和改变你phpMyChat SEVER的设置。也有一些其他选项，帮助您管理聊天室，用户，信息和其它更多的。利用现有的设定连结，以便随时访问管理面板
+。");
+define("L_P4_HINT3", "Installation process has completed. Click \"".L_BTN5."\" to jump to the chat login page or close this window to leave this installer.");
+define("L_P4_HINT4", "The setup script already chmoded the needed files for you and also deleted this setup script. Please make sure the file \"install/install.php\" has been deleted from your web server! If not, please delete it yourself.");
+define("L_P1_OP01", "新安装");
+define("L_P1_OP02", "升级从 %s");
+define("L_P1_OP03", "No database changes");
+define("L_P0_FORM1", "FTP host address");
+define("L_P0_FORM2", "FTP username");
+define("L_P0_FORM3", "FTP password");
+define("L_P0_FORM4", "FTP root path (relative)");
+define("L_P2_FORM01", "Database-Host for phpMyChat host");
+define("L_P2_FORM02", "Database-Username for phpMyChat");
+define("L_P2_FORM03", "Database-Password for phpMyChat");
+define("L_P2_FORM04", "Database-Name for phpMyChat");
+define("L_P2_FORM05", "Type of database");
+define("L_P2_FORM06", "Table for messages");
+define("L_P2_FORM07", "Table for users in chat");
+define("L_P2_FORM08", "Table for registered users");
+define("L_P2_FORM09", "Table for banned users");
+define("L_P2_FORM10", "Table for configuration");
+define("L_P2_FORM11", "Table for lurkers");
+define("L_P2_FORM12", "Rename your admin logs folder");
+define("L_P2_FORM13", "If you intend to use phpMyChat as an integrated module for phpNuke or phpBB, the configuration table must be called \"c_config\" and the table for registered users must be called \"c_reg_users\"!");
+define("L_P2_FORM14", "Choose a hard to guess name!");
+define("L_P2_FORM15", "Name of your Chat server");
+define("L_P2_FORM16", "Table for statistics");
+define("L_P3_FORM1", "Administrator account name");
+define("L_P3_FORM2", "Administrator account password");
+define("L_P3_FORM3", "Verify password");
+define("L_P3_FORM4", "Contact Real name for emails");
+define("L_P3_FORM5", "Contact email address");
+define("L_P3_FORM6", "Chat url for emails");
+define("L_P4_FORM1", "Open Admin Panel");
+define("L_P4_FORM2", "Optionally, you can also install a bot (robot, virtual user) for your chat, so it can add some fun to your rooms. You can do this later, but this is the best time to do it. If you click on the link below, please do not stop the script from running in the new popup window!");
+define("L_P4_FORM3", "Install Bot");
+?>

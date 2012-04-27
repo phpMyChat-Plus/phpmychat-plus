@@ -1591,7 +1591,7 @@ if ($show_donation)
 {
 	$pptype = "big";
 	require("${ChatPath}lib/support.lib.php");
-	if ((intval($ppbutton) < 3620000 || (intval($ppbutton) > 3627000 && intval($ppbutton) != 7148858 && intval($ppbutton) != 7148805 && (intval($ppbutton) < 7988359 || intval($ppbutton) > 7988406))) && $ppbutton != "KYVK6TQWY4MXJ" && $ppbutton != "QN9TYKJ49BM7S" && $ppbutton != "RJK6MGRQVAJY2" && $ppbutton != "ZCXGTP265VU6S" && $ppbutton != "MGBHACRT5F4RE" && $ppbutton != "6HRWUGAN73NPS" && $ppbutton != "WDA8GUU9GGSTS" && $ppbutton != "T9MP68SK7HBKQ" && $ppbutton != "DBH7XN4YA7A2J" && $ppbutton != "BTHKH33JLGLTN" && $ppbutton != "9HQJX5TAPJ33A" && $ppbutton != "YJD5RVSDH55GA" && $ppbutton != "KLSRD9WFZH984" && $ppbutton != "2K6JTW959U66A" && $ppbutton != "6JNU4L83BSTN2" && $ppbutton != "JW4A2MMTLXYSU") $copy_break = 1;
+	if ((intval($ppbutton) < 3620000 || (intval($ppbutton) > 3627000 && intval($ppbutton) != 7148858 && intval($ppbutton) != 7148805 && (intval($ppbutton) < 7988359 || intval($ppbutton) > 7988406))) && $ppbutton != "KYVK6TQWY4MXJ" && $ppbutton != "QN9TYKJ49BM7S" && $ppbutton != "RJK6MGRQVAJY2" && $ppbutton != "ZCXGTP265VU6S" && $ppbutton != "MGBHACRT5F4RE" && $ppbutton != "6HRWUGAN73NPS" && $ppbutton != "WDA8GUU9GGSTS" && $ppbutton != "T9MP68SK7HBKQ" && $ppbutton != "DBH7XN4YA7A2J" && $ppbutton != "BTHKH33JLGLTN" && $ppbutton != "9HQJX5TAPJ33A" && $ppbutton != "YJD5RVSDH55GA" && $ppbutton != "KLSRD9WFZH984" && $ppbutton != "2K6JTW959U66A" && $ppbutton != "6JNU4L83BSTN2" && $ppbutton != "JW4A2MMTLXYSU" && $ppbutton != "RQ3GHM7HSY95Q" && $ppbutton != "8C5WYJSNYG5BY" && $ppbutton != "DLBFN422X69WG" && $ppbutton != "T2BQZSP33V2KA") $copy_break = 1;
 }
 ?>
 <INPUT TYPE="hidden" NAME="Ver" VALUE="<?php echo($Ver); ?>">
@@ -1655,6 +1655,8 @@ if ($show_donation)
 				elseif ($name == "bulgarian" && L_ORIG_LANG_BG != "L_ORIG_LANG_BG") $FLAG_NAME = L_ORIG_LANG_BG;
 				elseif ($name == "brazilian_portuguese" && L_ORIG_LANG_BR != "L_ORIG_LANG_BR") $FLAG_NAME = L_ORIG_LANG_BR;
 				elseif ($name == "catalan" && L_ORIG_LANG_CA != "L_ORIG_LANG_CA") $FLAG_NAME = L_ORIG_LANG_CA;
+				elseif ($name == "chinese_simplified" && L_ORIG_LANG_CNS != "L_ORIG_LANG_CNS") $FLAG_NAME = L_ORIG_LANG_CNS;
+				elseif ($name == "chinese_traditional" && L_ORIG_LANG_CNT != "L_ORIG_LANG_CNT") $FLAG_NAME = L_ORIG_LANG_CNT;
 				elseif ($name == "czech" && L_ORIG_LANG_CZ != "L_ORIG_LANG_CZ") $FLAG_NAME = L_ORIG_LANG_CZ;
 				elseif ($name == "danish" && L_ORIG_LANG_DA != "L_ORIG_LANG_DA") $FLAG_NAME = L_ORIG_LANG_DA;
 				elseif ($name == "dutch" && L_ORIG_LANG_NL != "L_ORIG_LANG_NL") $FLAG_NAME = L_ORIG_LANG_NL;

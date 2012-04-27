@@ -36,6 +36,7 @@ If your users encounter bootings for no reason, try to disable sounds in chat.
 
 Fixes History:
 01.02.2012 - 1.94-beta8:
+- Chinese (both Simplified and Traditional) translation started; (localization project) - Thanks to clouds_music <clouds.music@gmail.com>
 - fixed the sourceforge logo for sites with allow_url_include disabled; (functionality related)
 - added the Profiles tab in admin panel, based on birthday popup features; (functionality extension)
 - fixed a bug related to embeding sounds that was leading to freezing and booting in IE7/8; (functionality related)
