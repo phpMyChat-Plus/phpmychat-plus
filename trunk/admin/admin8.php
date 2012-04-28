@@ -94,7 +94,8 @@ function display_connected($Private,$Full,$String1,$String2,$Charset)
 					else $ghost = 1;
 				}
 				$UserU = user_status($UserU,$Status,$ghost,$superghost);
-				$RTime = date("d-M, H:i:s", $RTime + C_TMZ_OFFSET*60*60);
+				$RTime = $RTime + C_TMZ_OFFSET*60*60;
+				$RTime = strftime(L_SHORT_DATETIME, $RTime);
 				$List .= "<tr><td>".$UserU."</td><td>".$RoomU."</td><td>".L_LURKING_4." ".$RTime."</td><td>".$IP."";
 			}
 			echo($List);
@@ -255,7 +256,8 @@ if($DbLink->num_rows() > 0)
 		if($colorname_tag != "") $colorname_endtag = "</FONT>";
 		if($colornamedest_tag != "") $colornamedest_endtag = "</FONT>";
 		$NewMsg = "<tr align=texttop valign=top>";
-		$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\">".date("d-M, H:i:s", $Time + C_TMZ_OFFSET*60*60)."</td><td width=\"1%\" nowrap=\"nowrap\">&nbsp;".$Room."</td>";
+		$Time = $Time + C_TMZ_OFFSET*60*60;
+		$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\">".strftime(L_SHORT_DATETIME, $Time)."</td><td width=\"1%\" nowrap=\"nowrap\">".$Room."</td>";
 		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS video" && $User != "SYS utube" && $User != "SYS math" && $User != "SYS topic" && $User != "SYS topic reset" && substr($User,0,8) != "SYS dice")
 		{
 			$User = $colorname_tag."[".special_char($User,$Latin1)."]".$colorname_endtag;
