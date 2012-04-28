@@ -172,7 +172,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 7)
   elseif($searchCategory == 9 && $searchTerm != "")
   {
     // create query for all categories 9
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday FROM ".C_REG_TBL." WHERE (username LIKE '%".$searchTerm."%' OR firstname LIKE '%".$searchTerm."%' OR lastname LIKE '%".$searchTerm."%' OR country LIKE '%".$searchTerm."%' OR website LIKE '%".$searchTerm."%' OR ip LIKE '%".$searchTerm."%' OR perms LIKE '%".$searchTerm."%' OR email LIKE '%".$searchTerm."%' OR slang LIKE '%".$searchTerm."%' OR description LIKE '%".$searchTerm."%' OR favlink LIKE '%".$searchTerm."%' OR favlink1 LIKE '%".$searchTerm."%' OR birthday LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday,show_age,showemail FROM ".C_REG_TBL." WHERE (username LIKE '%".$searchTerm."%' OR firstname LIKE '%".$searchTerm."%' OR lastname LIKE '%".$searchTerm."%' OR country LIKE '%".$searchTerm."%' OR website LIKE '%".$searchTerm."%' OR ip LIKE '%".$searchTerm."%' OR perms LIKE '%".$searchTerm."%' OR email LIKE '%".$searchTerm."%' OR slang LIKE '%".$searchTerm."%' OR description LIKE '%".$searchTerm."%' OR favlink LIKE '%".$searchTerm."%' OR favlink1 LIKE '%".$searchTerm."%' OR birthday LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   else
   {
@@ -258,6 +258,12 @@ else
          $s_gender = "<img src=images/gender_undefined.gif alt='".L_REG_48."' title='".L_REG_48."'>";
        }
        $s_birthday = stripslashes($result["birthday"]);
+       $s_showage = stripslashes($result["show_age"]);
+       $s_showemail = stripslashes($result["showemail"]);
+		if($s_birthday && $s_birthday != "" && $s_birthday != "0000-00-00") $dobtime = strtotime($s_birthday);
+		if(!$s_showage || !$s_showemail) $note = 1;
+		$s_birthday = stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,$Charset,strftime(L_SHORT_DATE, $dobtime)) : strftime(L_SHORT_DATE, $dobtime);
+	   
        if (empty($s_username)) $s_username = "&nbsp;";
        if (empty($s_firstname)) $s_firstname = "&nbsp;";
        if (empty($s_lastname)) $s_lastname = "&nbsp;";
@@ -268,11 +274,22 @@ else
        if (empty($s_gender)) $s_gender = "&nbsp;";
        if (empty($s_birthday)) $s_birthday = "&nbsp;";
 		$checkbox = ($s_username == $pmc_username) ? "&nbsp;" : "<INPUT type=checkbox name=\"selected_$usrHash\" value=\"1\">";
-       echo "<tr align=\"center\">\n<INPUT TYPE=\"hidden\" NAME=\"user_$usrHash\" VALUE=\"1\">\n<TD VALIGN=CENTER ALIGN=CENTER>\n$checkbox\n</td>\n<td width=100>$s_username$bannished_user</td>\n<td>$s_firstname</td>\n<td>$s_lastname</td>\n<td>$s_country</td>\n<td><a href=\"mailto:$s_email\" target=_blank>$s_email</a></td>\n<td>$s_perms</td>\n<td>$s_ip$bannished_ip</td>\n<td align=center>$s_gender</td>\n<td align=center>$s_birthday</td>\n</tr>";
+       echo "<tr align=\"center\">\n<INPUT TYPE=\"hidden\" NAME=\"user_$usrHash\" VALUE=\"1\">\n<TD VALIGN=CENTER ALIGN=CENTER>\n$checkbox\n</td>\n<td width=100>$s_username$bannished_user</td>\n<td>$s_firstname</td>\n<td>$s_lastname</td>\n<td>$s_country</td>\n<td><a href=\"mailto:$s_email\" target=_blank>$s_email</a>".($s_showemail ? "" : "<font color=\"red\"> *</font>")."</td>\n<td>$s_perms</td>\n<td>$s_ip$bannished_ip</td>\n<td align=center>$s_gender</td>\n<td align=center>$s_birthday".($s_showage ? "" : "<font color=\"red\"> *</font>")."</td>\n</tr>";
        $bannished_user = "";
        $bannished_ip = "";
+	   
    }
-echo "</table><br />";
+	if($note)
+	{
+	?>
+		<tr>
+			<td colspan=10>
+				<b>*</b> <i>User has chosen to hide this info in public profiles! Keep her/his privacy safe.</i>
+			</td>
+		</tr>
+	<?php
+	}
+echo "</table>";
 ?>
 			</TD>
 		</TR>
@@ -332,8 +349,8 @@ echo "</table><br />";
 <table align="center" CLASS=table>
 <tr>
     <td>
-    <b>*</b> <?php echo (A_SEARCH_11) ; ?><br />
-    <b>*</b> <?php echo (A_SEARCH_12) ; ?><br />
+    <b>**</b> <?php echo (A_SEARCH_11) ; ?><br />
+    <b>**</b> <?php echo (A_SEARCH_12) ; ?><br />
 </tr>
 </table>
 </center>

@@ -153,9 +153,8 @@ else
 				}
 				else $gender = L_REG_48;
 				if($dob_birthday && $dob_birthday != "" && $dob_birthday != "0000-00-00") $dobtime = strtotime($dob_birthday);
-				$dob_format = L_SHORT_DATE . ($dob_showage ? "" : " *");
-				if($dob_showage || $dob_showemail) $note = 1;
-				$dob_time = stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,$Charset,strftime($dob_format, $dobtime)) : strftime($dob_format, $dobtime);
+				if(!$dob_showage || !$dob_showemail) $note = 1;
+				$dob_time = stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,$Charset,strftime(L_SHORT_DATE, $dobtime)) : strftime(L_SHORT_DATE, $dobtime);
 				$dob_name = $dob_firstname != "" ? $dob_firstname : $User;
 				?>
 				<?php
@@ -164,11 +163,11 @@ else
 				echo("<TD style=\"vertical-align:middle; text-align:center;\">".(C_USE_AVATARS ? "<img src=\"".$avatar."\" width=\"25\" height=\"25\" border=\"0\" alt=\"".L_AVATAR."\" title=\"".L_AVATAR."\">" : "")."</TD>");
 				echo("<TD style=\"vertical-align:middle; text-align:center;\"><img src=\"images/gender_".$gender1.".gif\" width=\"".$ava_width."\" height=\"".$ava_height."\" border=\"0\" alt=\"".$gender."\" title=\"".$gender."\"></TD>");
 				echo("<TD style=\"vertical-align:middle; text-align:left;\"><B>".$User."</B></TD>");
-				echo("<TD style=\"vertical-align:middle; text-align:left;\"><B><A HREF=\"mailto:".htmlspecialchars($email)."\" title=\"".sprintf(L_CLICK,L_EMAIL_1)."\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_EMAIL_1).".'; return true\" target=\"_blank\">".$email.($dob_showemail ? "" : " *")."</A></B></TD>");
+				echo("<TD style=\"vertical-align:middle; text-align:left;\"><B><A HREF=\"mailto:".htmlspecialchars($email)."\" title=\"".sprintf(L_CLICK,L_EMAIL_1)."\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_EMAIL_1).".'; return true\" target=\"_blank\">".$email."</A>".($dob_showemail ? "" : "<font color=\"red\"><b> *</b></font>")."</B></TD>");
 				echo("<TD style=\"vertical-align:middle; text-align:left;\">".$dob_firstname."</TD>");
 				echo("<TD style=\"vertical-align:middle; text-align:left;\">".$dob_lastname."</TD>");
 				echo("<TD style=\"vertical-align:middle; text-align:center;\">".$dob_time."</TD>");
-				echo("<TD style=\"vertical-align:middle; text-align:center;\">".$dob_age.($dob_showage ? "" : " *")."</TD>");
+				echo("<TD style=\"vertical-align:middle; text-align:center;\">".$dob_age.($dob_showage ? "" : "<font color=\"red\"><b> *</b></font>")."</TD>");
 				echo("\n\t</TR>\n");
 				$i++;
 			}
@@ -180,7 +179,7 @@ if($note)
 	?>
 	<tr>
 		<td colspan=9>
-			<b>*</b> User has choosen to hide this info in public profiles! Keep her/his privacy safe.
+			<b>* </b><i>User has chosen to hide this info in public profiles! Keep her/his privacy safe.</i>
 		</td>
 	</tr>
 <?php

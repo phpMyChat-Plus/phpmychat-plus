@@ -1,5 +1,5 @@
 <?php
-// File : romanian/localized.admin.php - plus version (13.06.2011 - rev.16)
+// File : romanian/localized.admin.php - plus version (29.04.2012 - rev.17)
 // Original translation started by Radu Swider <swidera@satline.ro>, first updated by Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro>
 // Corrected, finalized and updated to Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -165,6 +165,9 @@ define("A_SEARCH_22", "Căutare după");
 define("A_SEARCH_23", "Introduceţi un termen de căutare şi încercaţi din nou");
 define("A_SEARCH_24", "Căutarea nu a returnat nici un rezultat. Redefiniţi criteriile de căutare.");
 define("A_SEARCH_25", "Moderează acest utilizator");
+define("A_SEARCH_26", "Utilizatorul a decis să ascundă aceste informaţii de ochii publicului. Nu dezvălui nimănui informaţii confidenţiale!");
+define("A_SEARCH_27", "Arată luna curentă");
+define("A_SEARCH_28", "Arată toate aniversările");
 
 // Connected users Page
 define("A_LURKING_1", "Utilizatori conectaţi şi monitorizare") ;
