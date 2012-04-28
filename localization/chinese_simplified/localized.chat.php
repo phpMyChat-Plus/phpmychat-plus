@@ -610,16 +610,16 @@ setlocale(LC_ALL, "zh-cn.UTF-8", "Chinese.UTF-8", "zh-cn", "Chinese_China");
 } else {
 setlocale(LC_ALL, "zh_CN.UTF-8", "Chinese.UTF-8");
 }
-define("L_SHORT_DATE", "%Y年%B%d日"); //Change this to your local desired format (keep the short form)
-define("L_SHORT_DATETIME", "%Y年%B%d日 %H:%M:%S"); //Change this to your local desired format (keep the short form)
 define("L_LANG", "zh_CN");
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
 define("L_CAL_FORMAT", "%Y年%B%d日");
 define("ISO_DEFAULT", "ISO2022_CN_GB");
 define("WIN_DEFAULT", "windows-936");
-define("L_LONG_DATE", "%A, %Y年%B%d日"); //Change this to your local desired format (keep the long form)
-define("L_LONG_DATETIME", "%A, %Y年%B%d日 %H:%M:%S"); //Change this to your local desired format (keep the short form)
+define("L_SHORT_DATE", "%Y/%m/%d"); //Change this to your local desired format (keep the short form)
+define("L_SHORT_DATETIME", "%Y/%m/%d %H:%M:%S"); //Change this to your local desired format (keep the short form)
+define("L_LONG_DATE", "%Y年%B%d日 (%A)"); //Change this to your local desired format (keep the long form)
+define("L_LONG_DATETIME", "%Y年%B%d日 (%A) %H:%M:%S"); //Change this to your local desired format (keep the short form)
 
 if(!defined("L_DAY")) define("L_DAY", "日");
 if(!defined("L_MONTH")) define("L_MONTH", "月");

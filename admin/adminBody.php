@@ -133,7 +133,8 @@ if(C_ALLOW_MATH) echo("<script type=\"text/javascript\" src=\"http://cdn.mathjax
 <BODY>
 <CENTER>
 <?php
-require("./admin/admin${sheet}.php");
+if (${sheet} == 5 && file_exists("./localization/".$L."/localized.admin".$sheet.".php")) require("./localization/".$L."/localized.admin".$sheet.".php");
+else require("./admin/admin${sheet}.php");
 ?>
 </CENTER>
 </BODY>
