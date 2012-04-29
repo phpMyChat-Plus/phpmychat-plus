@@ -68,8 +68,8 @@ $pstr = "bday_popup.php?L=".$L;
 $limit = " LIMIT ".$limT;
 $use_limT = 1;
 
-if (isset($FORM_SEND) && stripslashes($submit_type) == "Show all birthdays") $cYr = 1;
-if (isset($FORM_SEND) && stripslashes($submit_type) == "Show current month") $cYr = 0;
+if (isset($FORM_SEND) && stripslashes($submit_type) == A_SEARCH_28) $cYr = 1;
+if (isset($FORM_SEND) && stripslashes($submit_type) == A_SEARCH_27) $cYr = 0;
 
 if(!isset($limT) || $limT == "" || $limT == 0)
 {
@@ -241,13 +241,13 @@ else
 if($cYr == 1)
 {
 ?>
-	<INPUT TYPE="submit" NAME="submit_type" style="color:blue" VALUE="<?php echo("Show current month"); ?>">&nbsp;
+	<INPUT TYPE="submit" NAME="submit_type" style="color:blue" VALUE="<?php echo(A_SEARCH_27); ?>">&nbsp;
 <?php
 }
 else
 {
 ?>
-	<INPUT TYPE="submit" NAME="submit_type" style="color:blue" VALUE="<?php echo("Show all birthdays"); ?>">&nbsp;
+	<INPUT TYPE="submit" NAME="submit_type" style="color:blue" VALUE="<?php echo(A_SEARCH_28); ?>">&nbsp;
 <?php
 }
 ?>

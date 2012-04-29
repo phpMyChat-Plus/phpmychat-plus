@@ -72,7 +72,7 @@ define("L_REG_16", "更新");
 define("L_REG_17", "您的个人资料已成功更新。");
 define("L_REG_18", "你被聊天室主持人踢出聊天室.");
 define("L_REG_18a", "您已被这个房间的主持人踢出了房间.<br />原因: %s");
-define("L_REG_19", "你真的确定要移除吗?");
+define("L_REG_19", "你真的确定要移除吗？");
 define("L_REG_20", "是");
 define("L_REG_21", "您已成功删除.");
 define("L_REG_22", "否");
@@ -92,8 +92,8 @@ define("L_REG_45", "性别");
 define("L_REG_46", "男");
 define("L_REG_47", "女");
 define("L_REG_48", "未指定的");
-define("L_REG_49", "需要注册!");
-define("L_REG_50", "注册暂停!");
+define("L_REG_49", "需要注册！");
+define("L_REG_50", "注册暂停！");
 
 // e-mail validation stuff
 define("L_EMAIL_VAL_1", "您进入聊天的设置");
@@ -146,10 +146,10 @@ define("L_ERR_USR_21", "您在这个房间持续没有发言 ".C_USR_DEL." ".((C
 define("L_ERR_USR_22", "此命令不能用于\\n您使用的浏览器 (IE 引擎).");
 define("L_ERR_USR_23", "要加入一间私人聊天房间您必须登入.");
 define("L_ERR_USR_24", "要创造您自己的私人聊天房间您必须登入.");
-define("L_ERR_USR_25", "只有管理员能使用 ".$COLORNAME." color!<br />不要设定使用 ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2.", ".COLOR_CM.", ".COLOR_CM1." or ".COLOR_CM2.".<br />这些被预留给权限用户!");
-define("L_ERR_USR_26", "只有管理员跟室长能使用 ".$COLORNAME." color!<br />不要设定使用 ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2.", ".COLOR_CM.", ".COLOR_CM1." or ".COLOR_CM2."。<br />这些被预留给权限用户!");
+define("L_ERR_USR_25", "只有管理员能使用 ".$COLORNAME." color！<br />不要设定使用 ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2.", ".COLOR_CM.", ".COLOR_CM1." or ".COLOR_CM2.".<br />这些被预留给权限用户！");
+define("L_ERR_USR_26", "只有管理员跟室长能使用 ".$COLORNAME." color！<br />不要设定使用 ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2.", ".COLOR_CM.", ".COLOR_CM1." or ".COLOR_CM2."。<br />这些被预留给权限用户！");
 define("L_ERR_USR_27", "您不能与你自己密谈.\\nDo that in your mind please...\\n现在选择不同的用户名.");
-define("L_ERR_USR_28", "您的进入 %s 被限制了!<br />请选择一间不同的房间.");
+define("L_ERR_USR_28", "您的进入 %s 被限制了！<br />请选择一间不同的房间.");
 define("L_ERR_ROM_1", "聊天室名称不能有逗号或倒斜线(\\).");
 define("L_ERR_ROM_2", "在您想要创建的房间名字里发现了不能用的词.");
 define("L_ERR_ROM_3", "这个聊天室的名字已经被已存在的公开聊天室所使用.");
@@ -188,9 +188,9 @@ define("L_INVITE_REG", "你必须注册才能进入这个房间.");
 define("L_INVITE_DONE", "已发送到您的邀请 %s.");
 define("L_OK", "送出");
 define("L_BUZZ", "Buzzes Gallery");
-define("L_BAD_CMD", "指令错误,这是无效的指令!");
-define("L_ADMIN", "%s 已经是系统管理员!");
-define("L_IS_MODERATOR", "%s 已经是聊天室主持人!");
+define("L_BAD_CMD", "指令错误,这是无效的指令！");
+define("L_ADMIN", "%s 已经是系统管理员！");
+define("L_IS_MODERATOR", "%s 已经是聊天室主持人！");
 define("L_NO_MODERATOR", "这个指令只有聊天室的主人可以使用.");
 define("L_NONEXIST_USER", "%s 现在不在这个聊天室.");
 define("L_NONREG_USER", "%s 没有注册.");
@@ -198,7 +198,7 @@ define("L_NONREG_USER_IP", "他的IP是: %s.");
 define("L_NO_KICKED", "%s 是系统管理员或聊天室主人, 你不能踢除他.");
 define("L_NO_BANISHED", "%s 是聊天室主持人或管理员不能被驱逐.");
 define("L_SVR_TIME", "系统时间: ");
-define("L_NO_SAVE", "没有保存的讯息!");
+define("L_NO_SAVE", "没有保存的讯息！");
 define("L_NO_ADMIN", "只有管理员可以使用此命令.");
 define("L_NO_REG_USER", "你必须先注册,聊天才能使用此命令.");
 
@@ -208,7 +208,7 @@ define("L_HELP_TIT_2", "讯息的正文格式");
 define("L_HELP_FMT_1", "在发送的讯息中你可以使用粗体, 斜体和底线的 HTML Tag 来表示 &lt;B&gt; &lt;/B&gt;, &lt;I&gt; &lt;/I&gt; 或 &lt;U&gt; &lt;/U&gt; tags.<br />例如： 使用　, &lt;B&gt;讯息&lt;/B&gt; 将会出现 <B>讯息</B>.");
 define("L_HELP_FMT_2", "如果讯息是 Email 或 URL 你不需要特别写任何 tag. 系统将会自己帮助你加上.");
 define("L_HELP_TIT_3", "指令");
-define("L_HELP_NOTE", "所有命令必须用英文下指令!");
+define("L_HELP_NOTE", "所有命令必须用英文下指令！");
 define("L_HELP_MSG", "讯息");
 define("L_HELP_MSGS", "讯息");
 define("L_HELP_ROOM", "房间");
@@ -247,17 +247,17 @@ define("L_HELP_CMD_24", "这个命令改变当前房间的话题. 尽量不覆�
 define("L_HELP_CMD_25", "A dice game for random/hazardous numbers.<br />Usage: /dice or /dice [n];<br />n can take any value <b>between 1 and %s</b> (it represents the number of dice). If no number is entered, the default maximum dice will be used.");
 define("L_HELP_CMD_26", "This is a more complex version of the /dice command.<br />Usage: /{n1}d[n2] or /{n1}d;<br />n1 can take any value <b>between 1 and %s</b> (it represents the number of dice per throws).<br />n2 can take any value <b>between 1 and %s</b> (it represents the number of sides per die).");
 define("L_HELP_CMD_27", "It highlights the messages of a specific user for an easier reading across the conversations.<br />Usage: /high {user} or press the small <img src=./images/highlightOff.gif> square on the right of the username (in the rooms/users list)");
-define("L_HELP_CMD_28", "It allows posting of <i>one single image</i> as message.<br />Usage: The picture has to be on the internet and free accessible by anyone. Don’t use pages that need login.<br />Full image link must be typed! 例如 <b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Allowed extensions: .jpg .bmp .gif .png. The link is case sensitive!<br />HINTS: type /img then a space and paste the URL into the box; to get the URL of an image from a webpage, when you right-click on the image, go to properties, then highlight the whole address/URL (sometimes needs to scroll down a bit) and copy/paste after the /img<br />Don’t use pictures from your pc: it will just break the chat window!!!");
+define("L_HELP_CMD_28", "It allows posting of <i>one single image</i> as message.<br />Usage: The picture has to be on the internet and free accessible by anyone. Don’t use pages that need login.<br />Full image link must be typed！ 例如 <b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Allowed extensions: .jpg .bmp .gif .png. The link is case sensitive！<br />HINTS: type /img then a space and paste the URL into the box; to get the URL of an image from a webpage, when you right-click on the image, go to properties, then highlight the whole address/URL (sometimes needs to scroll down a bit) and copy/paste after the /img<br />Don’t use pictures from your pc: it will just break the chat window！！！");
 define("L_HELP_CMD_29", "第二个命令将允许当前房间的管理员或主持人，降级同房间以前晋升的另一名主持人到一般注册用户。<br />这 * 选项将用户从所有的房间降级。");
 define("L_HELP_CMD_30", "The second command does the same as /me but it will show your respective title, according to your profile gender<br />例如 * ".sprintf(L_HELP_MR, "Ciprian")." is watching TV or * ".sprintf(L_HELP_MS, "Dana")." is happy.");
 define("L_HELP_CMD_31", "Change the order users are sorted in lists: by entrance time or alphabetically.");
 define("L_HELP_CMD_32", "This is a third (role-playing) version of the dice rolling.<br />Usage: /d{n1}[tn2] or /d{n1};<br />n1 can take any value <b>between 1 and 100</b> (it represents the number of sides per die);<br />n2 can take any value <b>between 1 and %s</b> (it represents the number of rolling dice per throw).");
 define("L_HELP_CMD_33", "Change the font size of the messages in chat to user choice (allowed values for n: <b>between 7 and 15</b>); the /size command resets the font size to the default value (<b>".$FontSize."</b>).");
 define("L_HELP_CMD_34", "This will allow an user to specify the orientation of a text message (ltr = left-to-right, rtl = right-to-left).");
-define("L_HELP_CMD_35", "It allows posting of <i>one video</i> or <i>one audio file</i> in a small Flash player at a time.<br />Usage: Just paste the url of the source to be posted! 例如 <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />You need Shockwave Flash Player installed on your system. The link is case sensitive!<br />HINTS: type /video followed by a space and paste the URL into the box.");
+define("L_HELP_CMD_35", "It allows posting of <i>one video</i> or <i>one audio file</i> in a small Flash player at a time.<br />Usage: Just paste the url of the source to be posted！ 例如 <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />You need Shockwave Flash Player installed on your system. The link is case sensitive！<br />HINTS: type /video followed by a space and paste the URL into the box.");
 define("L_HELP_CMD_35a", "第二条命令只适用于具有 YouTube.com 的视频源.<br />例如 <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
-define("L_HELP_CMD_36", "It allows posting of <i>one youtube video</i> in a small Flash player at a time.<br />Usage: Just paste the url of the source to be posted! 例如 <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />You need Shockwave Flash Player installed on your system. The link is case sensitive!<br />HINTS: type /tube followed by a space and paste the URL into the box.");
-define("L_HELP_CMD_37", "It allows posting of <i>MathJax Equations/Formulas</i> in chat.<br />Usage: Just paste the TeX or MathML (original) codes! E.g. <b>/math&nbsp;\sqrt{3x-1}+(1+x)^2</b><br />For more code samples and instructions go to: <a href=\"http://www.mathjax.org/demos/\" target=\"_blank\">http://www.mathjax.org/demos</a>. Get the code by right-clicking on the formulas.<br />HINTS: type /math followed by a space and paste the code into the box.");
+define("L_HELP_CMD_36", "It allows posting of <i>one youtube video</i> in a small Flash player at a time.<br />Usage: Just paste the url of the source to be posted！ 例如 <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />You need Shockwave Flash Player installed on your system. The link is case sensitive！<br />HINTS: type /tube followed by a space and paste the URL into the box.");
+define("L_HELP_CMD_37", "It allows posting of <i>MathJax Equations/Formulas</i> in chat.<br />Usage: Just paste the TeX or MathML (original) codes！ E.g. <b>/math&nbsp;\sqrt{3x-1}+(1+x)^2</b><br />For more code samples and instructions go to: <a href=\"http://www.mathjax.org/demos/\" target=\"_blank\">http://www.mathjax.org/demos</a>. Get the code by right-clicking on the formulas.<br />HINTS: type /math followed by a space and paste the code into the box.");
 define("L_HELP_CMD_VAR", "别名(变种): %s"); // a list of English and/or translated alternatives for each command
 define("L_HELP_ETIQ_1", "交谈礼仪");
 define("L_HELP_ETIQ_2", "我们的网站，希望保持友好的社会和乐趣，所以请坚持以下指导原则。如果你不遵守这些规则，我们的聊天主持人之一的，可以引导你聊天.<br /><br />谢谢你,");
@@ -316,7 +316,7 @@ define("L_CLOSED_ROM", "%s 关闭了浏览器.");
 
 // Text for /away command notification string:
 define("L_AWAY", "%s 标记为离开...");
-define("L_BACK", "%s 又回来了!");
+define("L_BACK", "%s 又回来了！");
 
 // Quick Menu mod
 define("L_QUICK", "快速选单");
@@ -325,20 +325,20 @@ define("L_QUICK", "快速选单");
 define("L_TOPIC", "已经设置的话题 to:");
 define("L_TOPIC_RESET", "已经重置这个话题");
 define("L_HELP_TOP", "话题至少要有两个词");
-define("L_BANNER_WELCOME", "欢迎到 %s!");
+define("L_BANNER_WELCOME", "欢迎到 %s！");
 define("L_BANNER_TOPIC", "话题:");
-define("L_DEFAULT_TOPIC_1", "欢迎光临云月楼音乐聊天系统!");
+define("L_DEFAULT_TOPIC_1", "欢迎光临云月楼音乐聊天系统！");
 
 // Img cmd mod
 define("L_PIC", "张贴图片");
 define("L_PIC_RESIZED", "调整到");
 define("L_HELP_IMG", "张贴图像的完整路径");
-define("L_NO_IMAGE", "这不是一个公共的远程图像的一个有效的网址.\\n再次尝试!");
+define("L_NO_IMAGE", "这不是一个公共的远程图像的一个有效的网址.\\n再次尝试！");
 
 // Demote command by Ciprian
 define("L_IS_NO_MOD_ALL", "%s 不再是任何这个聊天室的主持人.");
 define("L_IS_NO_MODERATOR", "%s 不再是这个聊天室的主持人.");
-define("L_ERR_IS_ADMIN", "%s 是这里的管理员!\\n你不能改变他的权限.");
+define("L_ERR_IS_ADMIN", "%s 是这里的管理员！\\n你不能改变他的权限.");
 
 // Info mod by Ciprian - displays a list of all the features & mods, including Bot's name, on the welcome page
 define("INFO_CMDS", "提供额外的命令:");
@@ -365,15 +365,15 @@ define("L_URL_AV", "网址: ");
 define("L_EXPL_AV", "(输入网址，然后按 ENTER 查看)");
 define("L_CANCEL", "取消");
 define("L_AVA_REG", "你必须先注册\ \才能来改变你的头像图标");
-define("L_SEL_NEW_AV_CONFIRM", "当这种档案形式不能提交.\\n目前指向的虚拟化身，将会失去\\到目前为止!\\n\\n你确定?");
+define("L_SEL_NEW_AV_CONFIRM", "当这种档案形式不能提交.\\n目前指向的虚拟化身，将会失去\\到目前为止！\\n\\n你确定？");
 
 // PlusBot bot mod (based on Alice bot)
 define("BOT_TIPS", "TIPS: Our bot is publicly active in this room. To start talking to the bot, type <b>hello ".C_BOT_NAME."</b>. To end conversation, type: <b>bye ".C_BOT_NAME."</b>. (private: /to <b>".C_BOT_NAME."</b> Message)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
 define("BOT_PRIV_TIPS", "TIPS: Our bot is publicly active in %s room. You can only talk private by clicking on it’s name and whispering. (command: /wisp <b>".C_BOT_NAME."</b> Message)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
 define("BOT_PRIVONLY_TIPS", "TIPS: Our bot is not publicly active. You can only talk private by clicking on it’s name. (commands: /to <b>".C_BOT_NAME."</b> Message or /wisp <b>".C_BOT_NAME."</b> Message)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
-define("BOT_STOP_ERROR", "机器人是在这个房间里没有运行!");
-define("BOT_START_ERROR", "在这个房间的机器人已在运行!");
-define("BOT_DISABLED_ERROR", "机器人已被禁用从管理面板!");
+define("BOT_STOP_ERROR", "机器人是在这个房间里没有运行！");
+define("BOT_START_ERROR", "在这个房间的机器人已在运行！");
+define("BOT_DISABLED_ERROR", "机器人已被禁用从管理面板！");
 
 // Dice v.1, v.2 and v.3 modes
 define("DICE_RESULTS", "滚动骰子，结果是:");
@@ -385,10 +385,10 @@ define("DICE3_WRONG", "第一（d）值介于1和 100.\\n第二个（t）值介�
 // Private Message Popup mod by Ciprian
 define("L_REG_POPUP", "打开弹出窗口私人讯息");
 define("L_REG_POPUP_NOTE", "您必须禁用弹出窗口阻止程序！( 关闭快显封锁程式 )");
-define("L_PRIV_POST_MSG", "发送悄悄话!");
-define("L_PRIV_MSG", "收到新的悄悄话!");
-define("L_PRIV_MSGS", "收到新的私人讯息 %s 则!");
-define("L_PRIV_MSGSa", "这里是前10条消息!<br />使用底部的连结看到其余的.");
+define("L_PRIV_POST_MSG", "发送悄悄话！");
+define("L_PRIV_MSG", "收到新的悄悄话！");
+define("L_PRIV_MSGS", "收到新的私人讯息 %s 则！");
+define("L_PRIV_MSGSa", "这里是前10条消息！<br />使用底部的连结看到其余的.");
 define("L_PRIV_MSG1", "从:");
 define("L_PRIV_MSG2", "房间:");
 define("L_PRIV_MSG3", "到:");
@@ -442,9 +442,9 @@ define("L_ROOM_COLOR", "房间的颜色");
 define("L_PRO_COLOR", "配置文件的颜色");
 
 // Alert messages on errors for Color Input Box mod by Ciprian
-define("COL_ERROR_BOX_MODA", "只有管理员可以使用 ".COLOR_CA." color!\\n\\n你的文字颜色将重置为 ".COLOR_CM."!\\n\\n请选择其他颜色。");
-define("COL_ERROR_BOX_USRA", "只有管理员可以使用 ".COLOR_CA." color!\\n\\n不要尝试使用 ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1."。\\n\\n这些是保留给超级用户!\\n\\n你的文字颜色将重置为 ".COLOR_CD."!\\n\\n请选择其他颜色。");
-define("COL_ERROR_BOX_USRM", "你必须是一个主持人才能使用 ".COLOR_CM." color!\\n\\n不要尝试使用 ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1."。\\n\\n这些是保留给超级用户!\\n\\n你的文字颜色将重置为 ".COLOR_CD."!\\n\\n请选择其他颜色。");
+define("COL_ERROR_BOX_MODA", "只有管理员可以使用 ".COLOR_CA." color！\\n\\n你的文字颜色将重置为 ".COLOR_CM."！\\n\\n请选择其他颜色。");
+define("COL_ERROR_BOX_USRA", "只有管理员可以使用 ".COLOR_CA." color！\\n\\n不要尝试使用 ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1."。\\n\\n这些是保留给超级用户！\\n\\n你的文字颜色将重置为 ".COLOR_CD."！\\n\\n请选择其他颜色。");
+define("COL_ERROR_BOX_USRM", "你必须是一个主持人才能使用 ".COLOR_CM." color！\\n\\n不要尝试使用 ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1."。\\n\\n这些是保留给超级用户！\\n\\n你的文字颜色将重置为 ".COLOR_CD."！\\n\\n请选择其他颜色。");
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "欢迎来到我们的聊天。请遵守纯净礼仪，一边聊天：<I>尝试愉快和礼貌</I>。");
@@ -461,23 +461,23 @@ define("L_ERR_SIZE", "字体大小的值只能是\\n空的（进行复位）或7
 // Password reset form by Ciprian
 define("L_PASS_0", "密码重置表");
 define("L_PASS_1", "密码提示问题");
-define("L_PASS_2", "你的第一部车子是什么品牌?"); // Don't change this question! Just translate it! And keep it short!
-define("L_PASS_3", "你的第一个宠物是什么名字?"); // Don't change this question! Just translate it! And keep it short!
-define("L_PASS_4", "你最喜爱的饮料是什么牌子?"); // Don't change this question! Just translate it! And keep it short!
-define("L_PASS_5", "你的出生日期是什么?"); // Don't change this question! Just translate it! And keep it short!
+define("L_PASS_2", "你的第一部车子是什么品牌？"); // Don't change this question! Just translate it! And keep it short!
+define("L_PASS_3", "你的第一个宠物是什么名字？"); // Don't change this question! Just translate it! And keep it short!
+define("L_PASS_4", "你最喜爱的饮料是什么牌子？"); // Don't change this question! Just translate it! And keep it short!
+define("L_PASS_5", "你的出生日期是什么？"); // Don't change this question! Just translate it! And keep it short!
 define("L_PASS_6", "密码提示答案");
 define("L_PASS_7", "重设密码");
 define("L_PASS_8", "您的密码已成功重置");
 define("L_PASS_9", "请用您的新密码进入聊天");
 define("L_PASS_10", "请用您的新密码进入聊天: %s");
-define("L_PASS_11", "欢迎回到我们的聊天服务器!");
+define("L_PASS_11", "欢迎回到我们的聊天服务器！");
 define("L_PASS_12", "选择你的问题 ...");
 define("L_ERR_PASS_1", "错误的用户名. 选择你的.");
-define("L_ERR_PASS_2", "错误的电子邮件,再试一次!");
-define("L_ERR_PASS_3", "不对的密码提示问题.<br />答复到如下所示的那个!");
-define("L_ERR_PASS_4", "错误的密码提示答案. 再试一次!");
+define("L_ERR_PASS_2", "错误的电子邮件,再试一次！");
+define("L_ERR_PASS_3", "不对的密码提示问题.<br />答复到如下所示的那个！");
+define("L_ERR_PASS_4", "错误的密码提示答案. 再试一次！");
 define("L_ERR_PASS_5", "您未设置您私有/密码提示.");
-define("L_ERR_PASS_6", "您未设置您私有/密码提示 yet.<br />您不可能使用这个形式。 请与管理员联系!");
+define("L_ERR_PASS_6", "您未设置您私有/密码提示 yet.<br />您不可能使用这个形式。 请与管理员联系！");
 
 // admin stuff - added for administrators promotions/demotions in admin panel - by Ciprian
 define("L_ADM_3", "%s 已成为这个聊天室的管理员.");
@@ -615,11 +615,11 @@ define("L_LANG", "zh_CN");
 define("FIRST_DAY", "1");
 define("L_CAL_FORMAT", "%Y年%B%d日");
 define("ISO_DEFAULT", "ISO2022_CN_GB");
-define("WIN_DEFAULT", "windows-936");
-define("L_SHORT_DATE", "%Y/%m/%d"); //Change this to your local desired format (keep the short form)
-define("L_SHORT_DATETIME", "%Y/%m/%d %H:%M:%S"); //Change this to your local desired format (keep the short form)
-define("L_LONG_DATE", "%Y年%B%d日 (%A)"); //Change this to your local desired format (keep the long form)
-define("L_LONG_DATETIME", "%Y年%B%d日 (%A) %H:%M:%S"); //Change this to your local desired format (keep the short form)
+define("WIN_DEFAULT", "utf-8");
+define("L_SHORT_DATE", "%Y年 %#m月 %#d日&nbsp;"); //Change this to your local desired format (keep the short form)
+define("L_SHORT_DATETIME", "%Y年 %#m月 %#d日 %H:%M:%S"); //Change this to your local desired format (keep the short form)
+define("L_LONG_DATE", "%Y年 %#m月 %#d日&nbsp;"); //Change this to your local desired format (keep the short form)
+define("L_LONG_DATETIME", "%Y年 %#m月 %#d日 %H:%M:%S"); //Change this to your local desired format (keep the long form)
 
 if(!defined("L_DAY")) define("L_DAY", "日");
 if(!defined("L_MONTH")) define("L_MONTH", "月");
@@ -719,14 +719,14 @@ define("L_OPID_SIGN", "登入到一个 OpenID");
 define("L_OPID_REG", "导入您的OpenID个人资料");
 
 // Support buttons
-define("L_SUPP_WARN", "您已选择到自由开发作者捐献\\n".APP_NAME." 通过捐赠给开发者.\\n感谢您的支持!\\n\\n注：收款人不是这个聊天室的主人.\\n请输入金额在下一页.\\n\\n继续?");
-define("L_SUPP_ALT", "通过 PayPal 支助 ".APP_NAME." 的发展 - 它是快速，自由和安全的!");
+define("L_SUPP_WARN", "您已选择到自由开发作者捐献\\n".APP_NAME." 通过捐赠给开发者.\\n感谢您的支持！\\n\\n注：收款人不是这个聊天室的主人.\\n请输入金额在下一页.\\n\\n继续？");
+define("L_SUPP_ALT", "通过 PayPal 支助 ".APP_NAME." 的发展 - 它是快速，自由和安全的！");
 
 // Video & Audio & Youtube cmds (Embevi & YouTube player class)
 define("L_AUDIO", "音讯档案发布人");
 define("L_VIDEO", "视讯发布人");
 define("L_HELP_VIDEO", "张贴的视频或音频源的完整路径");
-define("L_NO_VIDEO", "不能嵌入的 URL .\\n这是不是一个有效的URL，接受公众的视频或音频源\\ n请再试!");
+define("L_NO_VIDEO", "不能嵌入的 URL .\\n这是不是一个有效的URL，接受公众的视频或音频源\\ n请再试！");
 define("L_ORIG_VIDEO", "打开原始的来源网站");
 
 // Birthday mod - by Ciprian
@@ -736,7 +736,7 @@ define("L_PRO_9", "显示年龄在个人资料公开信息");
 define("L_PRO_10", "年龄");
 define("L_PRO_11", "%1\$d 年, %2\$d 月 and %3\$d 日");
 define("L_DOB_TIT_1", "生日列表");
-$L_DOB_SUBJ = "%s 生日快乐!";
+$L_DOB_SUBJ = "%s 生日快乐！";
 
 // MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
 define("L_EQUATION", "方程式");

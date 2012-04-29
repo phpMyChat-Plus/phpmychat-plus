@@ -19,8 +19,8 @@ $pstr = "$From?$URLQueryBody_Links";
 $limit = " LIMIT ".$limT;
 $use_limT = 1;
 
-if (isset($FORM_SEND) && stripslashes($submit_type) == "Show all birthdays") $cYr = 1;
-if (isset($FORM_SEND) && stripslashes($submit_type) == "Show current month") $cYr = 0;
+if (isset($FORM_SEND) && stripslashes($submit_type) == A_SEARCH_28) $cYr = 1;
+if (isset($FORM_SEND) && stripslashes($submit_type) == A_SEARCH_27) $cYr = 0;
 
 if(!isset($limT) || $limT == "" || $limT == 0)
 {
@@ -94,7 +94,7 @@ else
 	$CondMonth = "";
 	if(!isset($cYr) || $cYr == "" || $cYr == 0)  $CondMonth = " AND MONTH(birthday) = MONTH(CURDATE())";
 	$CondForQuery = "birthday IS NOT NULL AND birthday!='0000-00-00'".$CondMonth."";
-	$DbLink->query("SELECT username,firstname,lastname,gender,avatar,use_gravatar,email,showemail,birthday,show_bday,show_age,(CASE show_age WHEN 0 THEN 0 ELSE (YEAR(CURDATE())-YEAR(birthday)) - (RIGHT(CURDATE(),5)<RIGHT(birthday,5)) END) AS age FROM ".C_REG_TBL." WHERE ".$CondForQuery."".$sqlT."".$limit."");
+	$DbLink->query("SELECT username,firstname,lastname,gender,avatar,use_gravatar,email,showemail,birthday,show_bday,show_age,((YEAR(CURDATE())-YEAR(birthday)) - (RIGHT(CURDATE(),5)<RIGHT(birthday,5))) AS age FROM ".C_REG_TBL." WHERE ".$CondForQuery."".$sqlT."".$limit."");
 #	$DbLink->query("SELECT username,firstname,lastname,email,birthday,show_bday,show_age FROM ".C_REG_TBL." WHERE birthday IS NOT NULL AND birthday!='0000-00-00' ORDER BY birthday ASC LIMIT 10");
 ?>
 <P CLASS=title><?php echo(A_MENU_1a); ?></P>
@@ -179,7 +179,7 @@ if($note)
 	?>
 	<tr>
 		<td colspan=9>
-			<b>* </b><i>User has chosen to hide this info in public profiles! Keep her/his privacy safe.</i>
+			<b>* </b><i><?php echo(A_SEARCH_26); ?></i>
 		</td>
 	</tr>
 <?php
@@ -195,13 +195,13 @@ if($note)
 		if($cYr == 1)
 		{
 		?>
-			<INPUT TYPE="submit" NAME="submit_type" style="color:blue" VALUE="<?php echo("Show current month"); ?>">
+			<INPUT TYPE="submit" NAME="submit_type" style="color:blue" VALUE="<?php echo(A_SEARCH_27); ?>">
 		<?php
 		}
 		else
 		{
 		?>
-			<INPUT TYPE="submit" NAME="submit_type" style="color:blue" VALUE="<?php echo("Show all birthdays"); ?>">&nbsp;
+			<INPUT TYPE="submit" NAME="submit_type" style="color:blue" VALUE="<?php echo(A_SEARCH_28); ?>">&nbsp;
 		<?php
 		}
 		?>

@@ -79,7 +79,7 @@
     $translation['watermark_invalid']           = '未知文件格式, 无法读取水印文件。';
     $translation['file_create']                 = '%s 不支持创建。';
     $translation['no_conversion_type']          = '未定义转换类型';
-    $translation['copy_failed']                 = '在服务器上复制文件时出错。 copy() 操作失败.';
+    $translation['copy_failed']                 = '在服务器上复制文件时出错。 copy() 操作失败。';
     $translation['reading_failed']              = '读取过程中出错。';
 
 ?>
