@@ -284,7 +284,7 @@ else
 	?>
 		<tr>
 			<td colspan=10>
-				<b>*</b> <i>User has chosen to hide this info in public profiles! Keep her/his privacy safe.</i>
+				<b>* </b><i><?php echo(A_SEARCH_26); ?></i>
 			</td>
 		</tr>
 	<?php

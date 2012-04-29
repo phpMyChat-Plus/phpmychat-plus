@@ -1,5 +1,5 @@
 <?php
-// File : chinese_simplified/localized.admin.php - plus version (01.08.2009 - rev.15)
+// File : chinese_simplified/localized.admin.php - plus version (29.04.2012 - rev.17)
 // Original file by clouds_music <clouds.music@gmail.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
 
@@ -56,7 +56,7 @@ define("A_SHEET2_2", "IP");
 define("A_SHEET2_3", "有关的室");
 define("A_SHEET2_4", "直到");
 define("A_SHEET2_5", "没有结束");
-define("A_SHEET2_6", "房间由逗号分离，不用的空间()，如果少于4有，  ’<B>*</B>’ 标志从所有房间驱逐。");
+define("A_SHEET2_6", "房间由逗号分离，不用的空间()，如果少于4有， ’<B>*</B>’ 标志从所有房间驱逐。");
 define("A_SHEET2_7", "删除选中被放逐 user(s)");
 define("A_SHEET2_8", "没有被驱逐的用户。");
 define("A_SHEET2_9", "原因 (可选)");
@@ -75,18 +75,18 @@ define("A_SHEET4_2", "到:");
 define("A_SHEET4_3", "选择全部");
 define("A_SHEET4_4", "主题:");
 define("A_SHEET4_5", "讯息:");
-define("A_SHEET4_6", "现在发送 !");
+define("A_SHEET4_6", "现在发送！");
 define("A_SHEET4_7", "所有的电子邮件已发送。");
 define("A_SHEET4_8", "发送邮件时出现内部错误。");
-define("A_SHEET4_9", "地址信息，主题或邮件缺少内容!");
-define("A_SHEET4_10", "添加电子邮件，以逗号(,)分隔无空格");
+define("A_SHEET4_9", "地址信息，主题或邮件缺少内容！");
+define("A_SHEET4_10", "添加电子邮件，以逗号(，)分隔无空格");
 define("A_SHEET4_11", "署名");
 define("A_SHEET4_12", "取消全选");
 define("A_SHEET4_13", "放所有收件人在这 <b>’Bcc’</b> 栏位");
 
 // Frame for configuration
 define("A_SHEET5_0", "您的当前安装的版本是 %s");
-define("A_SHEET5_1", "有一个新的版本发布 (%s)!");
+define("A_SHEET5_1", "有一个新的版本发布 (%s)！");
 
 //Chat Extras
 define("A_EXTR_DSBL", "禁用聊天附加功能") ;
@@ -103,28 +103,28 @@ define("A_CHAT_LOGS_1", "IP日志的连接到 %s");
 define("A_CHAT_LOGS_2", "聊天记录存档已被禁用");
 define("A_CHAT_LOGS_3", "打开聊天的IP日志页");
 define("A_CHAT_LOGS_4", "重置聊天的IP日志文件");
-define("A_CHAT_LOGS_5", "这将归档并且重新设置聊天IP纪录文件!\\n");
+define("A_CHAT_LOGS_5", "这将归档并且重新设置聊天IP纪录文件！\\n");
 define("A_CHAT_LOGS_6", "全部聊天记录存档");
 define("A_CHAT_LOGS_7", "显示公共的聊天记录存档部分");
-define("A_CHAT_LOGS_8", "这将删除所有文件和文件夹\\n储存在这 %s 文件夹!\\n"); // year
+define("A_CHAT_LOGS_8", "这将删除所有文件和文件夹\\n储存在这 %s 文件夹！\\n"); // year
 define("A_CHAT_LOGS_9", "删除全部 %s 日志"); // year
 define("A_CHAT_LOGS_10", "删除一年");
-define("A_CHAT_LOGS_11", "这将删除所有文件\\n储存在这 %s 文件夹!\\n"); // month/year
+define("A_CHAT_LOGS_11", "这将删除所有文件\\n储存在这 %s 文件夹！\\n"); // month/year
 define("A_CHAT_LOGS_12", "(只有公众的)");
 define("A_CHAT_LOGS_13", "删除一个月");
-define("A_CHAT_LOGS_14", "这将删除 %s 档案!\\n"); // day.php file
+define("A_CHAT_LOGS_14", "这将删除 %s 档案！\\n"); // day.php file
 define("A_CHAT_LOGS_15", "删除此日志");
 define("A_CHAT_LOGS_16", "阅读 %s 日志"); // day month year
 define("A_CHAT_LOGS_17", "公共聊天记录存档");
 define("A_CHAT_LOGS_18", "(只有公共");
-define("A_CHAT_LOGS_19", "\\n这是不可恢复的...\\n你确定?");
+define("A_CHAT_LOGS_19", "\\n这是不可恢复的...\\n你确定？");
 define("A_CHAT_LOGS_20", "显示完整的聊天记录存档部分");
 define("A_CHAT_LOGS_21", "返回页首");
 define("A_CHAT_LOGS_22", "归档日志文件");
 define("A_CHAT_LOGS_23", "生成于 %s"); // Generated on "date"
 define("A_CHAT_LOGS_24", "压缩所有 %s 成一个 zip归档的日志"); // date
-define("A_CHAT_LOGS_25", "这将建立一个具有所有日志的zip\\n储存在这 %s 文件夹!\\n"); // month/year
-define("A_CHAT_LOGS_26", "\\n你确定?");
+define("A_CHAT_LOGS_25", "这将建立一个具有所有日志的zip\\n储存在这 %s 文件夹！\\n"); // month/year
+define("A_CHAT_LOGS_26", "\\n你确定？");
 define("A_CHAT_LOGS_27", "ZIP 压缩文件");
 define("A_CHAT_LOGS_28", "下载 %s");
 define("A_CHAT_LOGS_29", "删除这个 zip");
@@ -151,8 +151,8 @@ define("A_SEARCH_7", "性别");
 define("A_SEARCH_8", "简介");
 define("A_SEARCH_9", "链接");
 define("A_SEARCH_10", "搜寻");
-define("A_SEARCH_11", "权限的分类, 选项 <b>ad</b>, <b>mod</b> or <b>u</b>。");
-define("A_SEARCH_12", "用于 性别分类, 选项: <b>0</b> 秘密, <b>1</b> 男, <b>2</b> 女 或 <b>3</b> 夫妇。");
+define("A_SEARCH_11", "权限的分类，选项 <b>ad</b>，<b>mod</b> 女 或 <b>u</b>。");
+define("A_SEARCH_12", "用于 性别分类，选项: <b>0</b> 秘密，<b>1</b> 男，<b>2</b> 女 或 <b>3</b> 夫妇。");
 define("A_SEARCH_13", "用户名");
 define("A_SEARCH_14", "名字");
 define("A_SEARCH_15", "姓氏");
@@ -162,9 +162,12 @@ define("A_SEARCH_19", "IP");
 define("A_SEARCH_20", "性别");
 define("A_SEARCH_21", "搜寻字词");
 define("A_SEARCH_22", "搜索项");
-define("A_SEARCH_23", "请提供一个搜索词，然后再试一次!");
+define("A_SEARCH_23", "请提供一个搜索词，然后再试一次！");
 define("A_SEARCH_24", "没有符合条件的数据。请细化您的搜索。");
 define("A_SEARCH_25", "Moderate this user");
+define("A_SEARCH_26", "用户选定隐藏信息，在公告的个人资料。请确保 她/他 的隐私安全！");
+define("A_SEARCH_27", "显示当前的月份");
+define("A_SEARCH_28", "显示所有生日者");
 
 // Connected users Page
 define("A_LURKING_1", "连接的用户和潜水用户") ;

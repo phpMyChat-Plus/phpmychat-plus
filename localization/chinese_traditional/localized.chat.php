@@ -614,11 +614,11 @@ define("L_LANG", "zh_TW");
 define("FIRST_DAY", "1");
 define("L_CAL_FORMAT", "%Y年%B%d日");
 define("ISO_DEFAULT", "ISO2022_CN_CNS");
-define("WIN_DEFAULT", "Big5");
-define("L_SHORT_DATE", "%Y/%m/%d"); //Change this to your local desired format (keep the short form)
-define("L_SHORT_DATETIME", "%Y/%m/%d %H:%M:%S"); //Change this to your local desired format (keep the short form)
-define("L_LONG_DATE", "%Y年%B%d日 (%A)"); //Change this to your local desired format (keep the long form)
-define("L_LONG_DATETIME", "%Y年%B%d日 (%A) %H:%M:%S"); //Change this to your local desired format (keep the short form)
+define("WIN_DEFAULT", "utf-8");
+define("L_SHORT_DATE", "%Y年 %#m月 %#d日&nbsp;"); //Change this to your local desired format (keep the short form)
+define("L_SHORT_DATETIME", "%Y年 %#m月 %#d日 %H:%M:%S"); //Change this to your local desired format (keep the short form)
+define("L_LONG_DATE", "%Y年 %#m月 %#d日&nbsp;"); //Change this to your local desired format (keep the short form)
+define("L_LONG_DATETIME", "%Y年 %#m月 %#d日 %H:%M:%S"); //Change this to your local desired format (keep the long form)
 
 if(!defined("L_DAY")) define("L_DAY", "日");
 if(!defined("L_MONTH")) define("L_MONTH", "月");
