@@ -35,12 +35,12 @@ define("L_SET_9", "创建您自己的");
 define("L_SET_10", "公开");
 define("L_SET_11", "私人");
 define("L_SET_12", "房间");
-define("L_SET_13", "设定好, 请进来");
+define("L_SET_13", "设定好，请进来");
 define("L_SET_14", "聊天");
 define("L_SET_15", "预设的私人房间");
 define("L_SET_16", "由用户创建的私人房间");
 define("L_SET_17", "选择你的头像");
-define("L_SET_18", "收藏此页到我的最爱：按 \"Ctrl+D\".");
+define("L_SET_18", "收藏此页到我的最爱：按 \"Ctrl+D\"。");
 define("L_SET_19", "记住我");
 
 define("L_SRC", "免费可得");
@@ -61,7 +61,7 @@ define("L_REG_5", "删除用户");
 define("L_REG_6", "用户注册");
 define("L_REG_7", "注册会员才能记忆密码");
 define("L_REG_8", "电子邮件");
-define("L_REG_9", "您已成功注册.");
+define("L_REG_9", "您已成功注册。");
 define("L_REG_10", "返回");
 define("L_REG_11", "编辑");
 define("L_REG_12", "修改用户简介");
@@ -70,11 +70,11 @@ define("L_REG_14", "登入");
 define("L_REG_15", "登入");
 define("L_REG_16", "更新");
 define("L_REG_17", "您的个人资料已成功更新。");
-define("L_REG_18", "你被聊天室主持人踢出聊天室.");
-define("L_REG_18a", "您已被这个房间的主持人踢出了房间.<br />原因: %s");
+define("L_REG_18", "你被聊天室主持人踢出聊天室。");
+define("L_REG_18a", "您已被这个房间的主持人踢出了房间。<br />原因: %s");
 define("L_REG_19", "你真的确定要移除吗？");
 define("L_REG_20", "是");
-define("L_REG_21", "您已成功删除.");
+define("L_REG_21", "您已成功删除。");
 define("L_REG_22", "否");
 define("L_REG_25", "关闭");
 define("L_REG_30", "名字");
@@ -85,7 +85,7 @@ define("L_REG_34", "编辑用户资料");
 define("L_REG_35", "管理");
 define("L_REG_36", "居住地/国家");
 define("L_REG_37", "<span class=\"error\"> * </span> 号的栏位必需填写。");
-define("L_REG_39", "这个聊天室已经被系统管理员移除.");
+define("L_REG_39", "这个聊天室已经被系统管理员移除。");
 define("L_REG_43", "秘密");
 define("L_REG_44", "夫妇");
 define("L_REG_45", "性别");
@@ -97,9 +97,9 @@ define("L_REG_50", "注册暂停！");
 
 // e-mail validation stuff
 define("L_EMAIL_VAL_1", "您进入聊天的设置");
-define("L_EMAIL_VAL_2", "欢迎使用云月楼聊天系统.");
-define("L_EMAIL_VAL_Err", "内部错误，请联系管理员: <a href=\"mailto:%s\">%s</a>.");
-define("L_EMAIL_VAL_Done", "您的密码已经发送到您的电子邮件地址.<br />在登录页面您可以自行更改密码 \"".L_REG_4."\".");
+define("L_EMAIL_VAL_2", "欢迎使用云月楼聊天系统。");
+define("L_EMAIL_VAL_Err", "内部错误，请联系管理员: <a href=\"mailto:%s\">%s</a>。");
+define("L_EMAIL_VAL_Done", "您的密码已经发送到您的电子邮件地址。<br />在登录页面您可以自行更改密码 \"".L_REG_4."\"。");
 define("L_EMAIL_VAL_PENDING_Done", "您的注册资料已提交审查。");
 define("L_EMAIL_VAL_PENDING_Done1", "由管理员批准您的帐户后，您将收到您的密码。");
 define("L_EMAIL_VAL_3", " %s 您的注册等待确认"); //chat name
@@ -112,48 +112,48 @@ define("L_EMAIL_VAL_51", "您的 - %s - 帐户更新详细资料为 %s"); //user
 define("L_EMAIL_VAL_6", "注册于： %s");
 define("L_EMAIL_VAL_61", "更新于: %s");
 define("L_EMAIL_VAL_7", "以下是您 %s 更新帐户信息："); //username
-define("L_EMAIL_VAL_8", "储存此电子邮件供日后参考。\n请也使它安全和不共享这些数据.\n感谢您的加入！享受！");
-define("L_EMAIL_VAL_81", "您可以更改密码，在登录页面 \"".L_REG_4."\".");
+define("L_EMAIL_VAL_8", "储存此电子邮件供日后参考。\n请也使它安全和不共享这些数据。\n感谢您的加入！享受！");
+define("L_EMAIL_VAL_81", "您可以更改密码，在登录页面 \"".L_REG_4."\"。");
 
 // admin stuff
-define("L_ADM_1", "%s 不再是这个房间的主持人.");
-define("L_ADM_2", "你不再是注册用户.");
+define("L_ADM_1", "%s 不再是这个房间的主持人。");
+define("L_ADM_2", "你不再是注册用户。");
 
 // error messages
-define("L_ERR_USR_1", "这个使用者姓名已经有人使用，请选择另外一个名字.");
-define("L_ERR_USR_2", "您必须输入一个使用者姓名.");
-define("L_ERR_USR_3", "这个使用者姓名已经被注册，<br />请输入密码或选择另外一个名字.");
-define("L_ERR_USR_4", "你输入的密码错误.");
-define("L_ERR_USR_5", "你必需输入使用者姓名.");
-define("L_ERR_USR_6", "你必需输入密码.");
-define("L_ERR_USR_7", "你必需输入Email.");
-define("L_ERR_USR_8", "你必需输入正确的 Email.");
-define("L_ERR_USR_9", "这个使用者名称已经有人使用.");
-define("L_ERR_USR_10", "使用者名称或密码错误.");
-define("L_ERR_USR_11", "你必需是系统管理员.");
-define("L_ERR_USR_12", "你是系统管理员所以你不能移除你自己.");
-define("L_ERR_USR_13", "要创建自己的房间，你必须注册.");
-define("L_ERR_USR_14", "聊天之前你必须先注册.");
-define("L_ERR_USR_15", "您必须输入您的全名.");
-define("L_ERR_USR_16", "只允许这些额外的字符:\\n".$REG_CHARS_ALLOWED."\\空白, 逗号或倒斜线 (\\) 不能使用.\\nCheck the syntax.");
-define("L_ERR_USR_16a", "只允许这些额外的字符:<br />".$REG_CHARS_ALLOWED."<br />空白, 逗号或倒斜线 (\\) 不能使用. 请检查输入内容.");
-define("L_ERR_USR_17", "这个室不存在，并且您不允许创造一个.");
-define("L_ERR_USR_18", "在您的用户名找到不能使用的词.");
-define("L_ERR_USR_19", "您不能同时在超过一个室.");
-define("L_ERR_USR_20", "您已经被踢出您在聊天的聊天室.");
-define("L_ERR_USR_20a", "您已经被踢出您在聊天的聊天室.<br />原因: %s");
-define("L_ERR_USR_21", "您在这个房间持续没有发言 ".C_USR_DEL." ".((C_USR_DEL == "1") ? "".L_MIN."" : "".L_MINS."").",<br />因此您从聊天房间被断线了.");
-define("L_ERR_USR_22", "此命令不能用于\\n您使用的浏览器 (IE 引擎).");
-define("L_ERR_USR_23", "要加入一间私人聊天房间您必须登入.");
-define("L_ERR_USR_24", "要创造您自己的私人聊天房间您必须登入.");
-define("L_ERR_USR_25", "只有管理员能使用 ".$COLORNAME." color！<br />不要设定使用 ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2.", ".COLOR_CM.", ".COLOR_CM1." or ".COLOR_CM2.".<br />这些被预留给权限用户！");
-define("L_ERR_USR_26", "只有管理员跟室长能使用 ".$COLORNAME." color！<br />不要设定使用 ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2.", ".COLOR_CM.", ".COLOR_CM1." or ".COLOR_CM2."。<br />这些被预留给权限用户！");
-define("L_ERR_USR_27", "您不能与你自己密谈.\\nDo that in your mind please...\\n现在选择不同的用户名.");
-define("L_ERR_USR_28", "您的进入 %s 被限制了！<br />请选择一间不同的房间.");
-define("L_ERR_ROM_1", "聊天室名称不能有逗号或倒斜线(\\).");
-define("L_ERR_ROM_2", "在您想要创建的房间名字里发现了不能用的词.");
-define("L_ERR_ROM_3", "这个聊天室的名字已经被已存在的公开聊天室所使用.");
-define("L_ERR_ROM_4", "聊天室的名字错误.");
+define("L_ERR_USR_1", "这个使用者姓名已经有人使用，请选择另外一个名字。");
+define("L_ERR_USR_2", "您必须输入一个使用者姓名。");
+define("L_ERR_USR_3", "这个使用者姓名已经被注册，<br />请输入密码或选择另外一个名字。");
+define("L_ERR_USR_4", "你输入的密码错误。");
+define("L_ERR_USR_5", "你必需输入使用者姓名。");
+define("L_ERR_USR_6", "你必需输入密码。");
+define("L_ERR_USR_7", "你必需输入Email。");
+define("L_ERR_USR_8", "你必需输入正确的 Email。");
+define("L_ERR_USR_9", "这个使用者名称已经有人使用。");
+define("L_ERR_USR_10", "使用者名称或密码错误。");
+define("L_ERR_USR_11", "你必需是系统管理员。");
+define("L_ERR_USR_12", "你是系统管理员所以你不能移除你自己。");
+define("L_ERR_USR_13", "要创建自己的房间，你必须注册。");
+define("L_ERR_USR_14", "聊天之前你必须先注册。");
+define("L_ERR_USR_15", "您必须输入您的全名。");
+define("L_ERR_USR_16", "只允许这些额外的字符:\\n".$REG_CHARS_ALLOWED."\\空白，逗号或倒斜线 (\\) 不能使用。\\nCheck the syntax。");
+define("L_ERR_USR_16a", "只允许这些额外的字符:<br />".$REG_CHARS_ALLOWED."<br />空白，逗号或倒斜线 (\\) 不能使用。请检查输入内容。");
+define("L_ERR_USR_17", "这个室不存在，并且您不允许创造一个。");
+define("L_ERR_USR_18", "在您的用户名找到不能使用的词。");
+define("L_ERR_USR_19", "您不能同时在超过一个室。");
+define("L_ERR_USR_20", "您已经被踢出您在聊天的聊天室。");
+define("L_ERR_USR_20a", "您已经被踢出您在聊天的聊天室。<br />原因: %s");
+define("L_ERR_USR_21", "您在这个房间持续没有发言 ".C_USR_DEL." ".((C_USR_DEL == "1") ? "".L_MIN."" : "".L_MINS."")."，<br />因此您从聊天房间被断线了。");
+define("L_ERR_USR_22", "此命令不能用于\\n您使用的浏览器 (IE 引擎)。");
+define("L_ERR_USR_23", "要加入一间私人聊天房间您必须登入。");
+define("L_ERR_USR_24", "要创造您自己的私人聊天房间您必须登入。");
+define("L_ERR_USR_25", "只有管理员能使用 ".$COLORNAME." color！<br />不要设定使用 ".COLOR_CA."，".COLOR_CA1."，".COLOR_CA2."，".COLOR_CM."，".COLOR_CM1." or ".COLOR_CM2."。<br />这些被预留给权限用户！");
+define("L_ERR_USR_26", "只有管理员跟室长能使用 ".$COLORNAME." color！<br />不要设定使用 ".COLOR_CA."，".COLOR_CA1."，".COLOR_CA2."，".COLOR_CM."，".COLOR_CM1." or ".COLOR_CM2."。<br />这些被预留给权限用户！");
+define("L_ERR_USR_27", "您不能与你自己密谈。\\nDo that in your mind please...\\n现在选择不同的用户名。");
+define("L_ERR_USR_28", "您的进入 %s 被限制了！<br />请选择一间不同的房间。");
+define("L_ERR_ROM_1", "聊天室名称不能有逗号或倒斜线(\\)。");
+define("L_ERR_ROM_2", "在您想要创建的房间名字里发现了不能用的词。");
+define("L_ERR_ROM_3", "这个聊天室的名字已经被已存在的公开聊天室所使用。");
+define("L_ERR_ROM_4", "聊天室的名字错误。");
 
 // users frame or popup
 define("L_EXIT", "离开聊天室");
@@ -175,38 +175,38 @@ define("L_NO_PROFILE", "没有头像");
 
 // input frame
 define("L_HLP", "求助");
-define("L_MODERATOR", "%s 现在是这个房间的一位主持人.");
-define("L_KICKED", "%s 已经被踢出聊天室.");
-define("L_KICKED_REASON", "%s 已经被踢出聊天室. (原因: %s)");
-define("L_KICKED_ALL", "已经被踢出所有房间.");
-define("L_KICKED_ALL_REASON", "已经被踢出所有房间. (原因: %s)");
-define("L_BANISHED", "%s 顺利地被驱逐了.");
-define("L_BANISHED_REASON", "%s 顺利地被驱逐了. (原因: %s)");
+define("L_MODERATOR", "%s 现在是这个房间的一位主持人。");
+define("L_KICKED", "%s 已经被踢出聊天室。");
+define("L_KICKED_REASON", "%s 已经被踢出聊天室。(原因: %s)");
+define("L_KICKED_ALL", "已经被踢出所有房间。");
+define("L_KICKED_ALL_REASON", "已经被踢出所有房间。(原因: %s)");
+define("L_BANISHED", "%s 顺利地被驱逐了。");
+define("L_BANISHED_REASON", "%s 顺利地被驱逐了。(原因: %s)");
 define("L_ANNOUNCE", "公告");
-define("L_INVITE", "%s 请您加入到他/她 <a href=\"#\" onClick=\"window.parent.runCmd('%s','%s')\">%s</a> 房间.");
-define("L_INVITE_REG", "你必须注册才能进入这个房间.");
-define("L_INVITE_DONE", "已发送到您的邀请 %s.");
+define("L_INVITE", "%s 请您加入到他/她 <a href=\"#\" onClick=\"window.parent.runCmd('%s','%s')\">%s</a> 房间。");
+define("L_INVITE_REG", "你必须注册才能进入这个房间。");
+define("L_INVITE_DONE", "已发送到您的邀请 %s。");
 define("L_OK", "送出");
 define("L_BUZZ", "Buzzes Gallery");
-define("L_BAD_CMD", "指令错误,这是无效的指令！");
+define("L_BAD_CMD", "指令错误，这是无效的指令！");
 define("L_ADMIN", "%s 已经是系统管理员！");
 define("L_IS_MODERATOR", "%s 已经是聊天室主持人！");
-define("L_NO_MODERATOR", "这个指令只有聊天室的主人可以使用.");
-define("L_NONEXIST_USER", "%s 现在不在这个聊天室.");
-define("L_NONREG_USER", "%s 没有注册.");
-define("L_NONREG_USER_IP", "他的IP是: %s.");
-define("L_NO_KICKED", "%s 是系统管理员或聊天室主人, 你不能踢除他.");
-define("L_NO_BANISHED", "%s 是聊天室主持人或管理员不能被驱逐.");
+define("L_NO_MODERATOR", "这个指令只有聊天室的主人可以使用。");
+define("L_NONEXIST_USER", "%s 现在不在这个聊天室。");
+define("L_NONREG_USER", "%s 没有注册。");
+define("L_NONREG_USER_IP", "他的IP是: %s。");
+define("L_NO_KICKED", "%s 是系统管理员或聊天室主人，你不能踢除他。");
+define("L_NO_BANISHED", "%s 是聊天室主持人或管理员不能被驱逐。");
 define("L_SVR_TIME", "系统时间: ");
 define("L_NO_SAVE", "没有保存的讯息！");
-define("L_NO_ADMIN", "只有管理员可以使用此命令.");
-define("L_NO_REG_USER", "你必须先注册,聊天才能使用此命令.");
+define("L_NO_ADMIN", "只有管理员可以使用此命令。");
+define("L_NO_REG_USER", "你必须先注册，聊天才能使用此命令。");
 
 // help popup
 define("L_HELP_TIT_1", "表情符号");
 define("L_HELP_TIT_2", "讯息的正文格式");
-define("L_HELP_FMT_1", "在发送的讯息中你可以使用粗体, 斜体和底线的 HTML Tag 来表示 &lt;B&gt; &lt;/B&gt;, &lt;I&gt; &lt;/I&gt; 或 &lt;U&gt; &lt;/U&gt; tags.<br />例如： 使用　, &lt;B&gt;讯息&lt;/B&gt; 将会出现 <B>讯息</B>.");
-define("L_HELP_FMT_2", "如果讯息是 Email 或 URL 你不需要特别写任何 tag. 系统将会自己帮助你加上.");
+define("L_HELP_FMT_1", "在发送的讯息中你可以使用粗体，斜体和底线的 HTML Tag 来表示 &lt;B&gt; &lt;/B&gt;，&lt;I&gt; &lt;/I&gt; 或 &lt;U&gt; &lt;/U&gt; tags。<br />例如： 使用　，&lt;B&gt;讯息&lt;/B&gt; 将会出现 <B>讯息</B>。");
+define("L_HELP_FMT_2", "如果讯息是 Email 或 URL 你不需要特别写任何 tag。系统将会自己帮助你加上。");
 define("L_HELP_TIT_3", "指令");
 define("L_HELP_NOTE", "所有命令必须用英文下指令！");
 define("L_HELP_MSG", "讯息");
@@ -217,18 +217,18 @@ define("L_HELP_BUZZ1", "Buzz...");
 define("L_HELP_REASON", "原因");
 define("L_HELP_MR", "%s 先生");
 define("L_HELP_MS", "%s 小姐");
-define("L_HELP_CMD_0", "{} 代表一个必需的设置, [] 一个可选择使用的设置.");
-define("L_HELP_CMD_1a", "设置的邮件数量显示。最小和默认是 5.");
-define("L_HELP_CMD_1b", "刷新的消息帧，显示了N的最新消息，最小和预设 5.");
-define("L_HELP_CMD_2a", "修改邮件列表刷新延迟（秒）。<br/>如果n未指定或小于 3，没有刷新和10S之间的切换刷新.");
-define("L_HELP_CMD_2b", "修改消息和用户列表刷新延迟（秒）。<br/>如果n未指定或小于 3，没有刷新和10S之间的切换刷新.");
-define("L_HELP_CMD_3", "反转消息的顺序（不是在所有的浏览器）.");
-define("L_HELP_CMD_4", "加入另一个房间, 创建它，如果它不存在，如果你允许.<br />n 设 0 为私人 and 1 为公开, 假如没有设定默认为 1 .");
-define("L_HELP_CMD_5", "显示一个可选的消息后离开聊天.");
-define("L_HELP_CMD_6", "忽略避免来自用户的消息显示，如果指定了昵称.<br />设置移除一个被忽略用户时  \"-\" 跟昵称 同时指定.<br />指定移除所有被忽略用户时用 \"-\" 但不指定昵称.<br />不使用任何选项，该命令弹出一个窗口，显示所有被忽略的昵称.");
-define("L_HELP_CMD_7", "召回前面键入的文本（命令或消息）.");
-define("L_HELP_CMD_8", "显示/隐藏 消息之前的时间.");
-define("L_HELP_CMD_9", "从聊天的用户踢离开聊天室。此命令只能由那个房间的主持人或管理员使用。<br />可选, [".L_HELP_REASON."] 显示踢的原因（任何想要的文字）。<br />如果选项是使用 * , 该命令将踢出所有没有特别权力的聊天用户 （只有游客和注册用户）. 这是有用的，当服务器连接有问题，所有的人都应该重新载入他们聊天。 在第二种情况下, [".L_HELP_REASON."] 建议让用户知道为什么，他们已经被踢出。");
+define("L_HELP_CMD_0", "{} 代表一个必需的设置，[] 一个可选择使用的设置。");
+define("L_HELP_CMD_1a", "设置的邮件数量显示。最小和默认是 5。");
+define("L_HELP_CMD_1b", "刷新的消息帧，显示了N的最新消息，最小和预设 5。");
+define("L_HELP_CMD_2a", "修改邮件列表刷新延迟（秒）。<br/>如果n未指定或小于 3，没有刷新和10S之间的切换刷新。");
+define("L_HELP_CMD_2b", "修改消息和用户列表刷新延迟（秒）。<br/>如果n未指定或小于 3，没有刷新和10S之间的切换刷新。");
+define("L_HELP_CMD_3", "反转消息的顺序（不是在所有的浏览器）。");
+define("L_HELP_CMD_4", "加入另一个房间，创建它，如果它不存在，如果你允许。<br />n 设 0 为私人 and 1 为公开，假如没有设定默认为 1。");
+define("L_HELP_CMD_5", "显示一个可选的消息后离开聊天。");
+define("L_HELP_CMD_6", "忽略避免来自用户的消息显示，如果指定了昵称。<br />设置移除一个被忽略用户时  \"-\" 跟昵称 同时指定。<br />指定移除所有被忽略用户时用 \"-\" 但不指定昵称。<br />不使用任何选项，该命令弹出一个窗口，显示所有被忽略的昵称。");
+define("L_HELP_CMD_7", "召回前面键入的文本（命令或消息）。");
+define("L_HELP_CMD_8", "显示/隐藏 消息之前的时间。");
+define("L_HELP_CMD_9", "从聊天的用户踢离开聊天室。此命令只能由那个房间的主持人或管理员使用。<br />可选，[".L_HELP_REASON."] 显示踢的原因（任何想要的文字）。<br />如果选项是使用 *，该命令将踢出所有没有特别权力的聊天用户 （只有游客和注册用户）。这是有用的，当服务器连接有问题，所有的人都应该重新载入他们聊天。在第二种情况下，[".L_HELP_REASON."] 建议让用户知道为什么，他们已经被踢出。");
 define("L_HELP_CMD_10", "发送悄悄话给指定的用户 （其他用户将无法看到悄悄话）。");
 define("L_HELP_CMD_11", "显示指定用户的资料。");
 define("L_HELP_CMD_12", "弹出式窗口的 编辑用户的个人资料。");
@@ -238,36 +238,36 @@ define("L_HELP_CMD_15", "清除消息框，只显示最后5个消息。");
 define("L_HELP_CMD_16", "保存到一个HTML文件的最后n个消息（通知的除外）。如果没有指定n，将考虑所有可用的讯息。");
 define("L_HELP_CMD_17", "允许管理员在聊天室发送给所有用户公告。");
 define("L_HELP_CMD_18", "邀请在其他房间使用者加入你所在的一个聊天室里");
-define("L_HELP_CMD_19", "允许一个房间的主持人或管理员 \"banish\" 由管理员定义用户的禁入房间时间。<br />The later can banish a user chatting in an other room than the one he is into and use the * setting to banish \"forever\" a user from the chat as the whole.<br />Optionally, [".L_HELP_REASON."] 显示驱逐的原因（任何想要的文字）。");
-define("L_HELP_CMD_20", "描述你在做什么 without refer yourself.");
-define("L_HELP_CMD_21", "Announces the room and the users who try to send you messages<br />that you are away from the computer. If you want to be back to chat, just start typing.");
-define("L_HELP_CMD_22", "Sends a buzzer sound and optionally displays a message in the current room.<br />Usage:<br />- old usage: \"/buzz\" or \"/buzz message to be shown\" - this plays the default sound for buzz defined in Admin panel;<br />- extended usage: \"/buzz ~soundname\" or \"/buzz ~soundname message to be shown\" - this plays the soundname.wav file from the plus/sounds folder; please note the sign \"~\" to be used at the beginning of the second word, which is the name of the sound file, without the extension .wav (only .wav extensions allowed).<br />By default, this is a moderator/admin command.");
-define("L_HELP_CMD_23", "Sends a <i>whisper</i> (private message). The message will reach the destination, no matter which room the user is in. If the user is not on-line or has set away, you will be notified about it.");
-define("L_HELP_CMD_24", "这个命令改变当前房间的话题. 尽量不覆盖其他用户’ 话题. 使用的重要课题.<br />默认情况下, 这是 主持人/管理员 命令.<br />使用 \"/topic reset\" 命令 当前的话题将被删除并重置为预设的话题.<br />可选择, \"/topic * {}\" 或 \"/topic * reset\" 在所有的房间做同样的话题 (全聊天系统相同话题或回复为系统预设的话题).");
-define("L_HELP_CMD_25", "A dice game for random/hazardous numbers.<br />Usage: /dice or /dice [n];<br />n can take any value <b>between 1 and %s</b> (it represents the number of dice). If no number is entered, the default maximum dice will be used.");
-define("L_HELP_CMD_26", "This is a more complex version of the /dice command.<br />Usage: /{n1}d[n2] or /{n1}d;<br />n1 can take any value <b>between 1 and %s</b> (it represents the number of dice per throws).<br />n2 can take any value <b>between 1 and %s</b> (it represents the number of sides per die).");
-define("L_HELP_CMD_27", "It highlights the messages of a specific user for an easier reading across the conversations.<br />Usage: /high {user} or press the small <img src=./images/highlightOff.gif> square on the right of the username (in the rooms/users list)");
-define("L_HELP_CMD_28", "It allows posting of <i>one single image</i> as message.<br />Usage: The picture has to be on the internet and free accessible by anyone. Don’t use pages that need login.<br />Full image link must be typed！ 例如 <b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Allowed extensions: .jpg .bmp .gif .png. The link is case sensitive！<br />HINTS: type /img then a space and paste the URL into the box; to get the URL of an image from a webpage, when you right-click on the image, go to properties, then highlight the whole address/URL (sometimes needs to scroll down a bit) and copy/paste after the /img<br />Don’t use pictures from your pc: it will just break the chat window！！！");
+define("L_HELP_CMD_19", "允许一个房间的主持人或管理员 \"banish\" 由管理员定义用户的禁入房间时间。<br />The later can banish a user chatting in an other room than the one he is into and use the * setting to banish \"forever\" a user from the chat as the whole。<br />Optionally，[".L_HELP_REASON."] 显示驱逐的原因（任何想要的文字）。");
+define("L_HELP_CMD_20", "描述你在做什么 without refer yourself。");
+define("L_HELP_CMD_21", "Announces the room and the users who try to send you messages<br />that you are away from the computer。If you want to be back to chat，just start typing。");
+define("L_HELP_CMD_22", "Sends a buzzer sound and optionally displays a message in the current room。<br />Usage:<br />- old usage: \"/buzz\" or \"/buzz message to be shown\" - this plays the default sound for buzz defined in Admin panel;<br />- extended usage: \"/buzz ~soundname\" or \"/buzz ~soundname message to be shown\" - this plays the soundname.wav file from the plus/sounds folder; please note the sign \"~\" to be used at the beginning of the second word，which is the name of the sound file，without the extension .wav (only .wav extensions allowed)。<br />By default，this is a moderator/admin command。");
+define("L_HELP_CMD_23", "Sends a <i>whisper</i> (private message)。The message will reach the destination，no matter which room the user is in。If the user is not on-line or has set away，you will be notified about it。");
+define("L_HELP_CMD_24", "这个命令改变当前房间的话题。尽量不覆盖其他用户’ 话题。使用的重要课题。<br />默认情况下，这是 主持人/管理员 命令。<br />使用 \"/topic reset\" 命令 当前的话题将被删除并重置为预设的话题。<br />可选择，\"/topic * {}\" 或 \"/topic * reset\" 在所有的房间做同样的话题 (全聊天系统相同话题或回复为系统预设的话题)。");
+define("L_HELP_CMD_25", "A dice game for random/hazardous numbers。<br />Usage: /dice or /dice [n];<br />n can take any value <b>between 1 and %s</b> (it represents the number of dice)。If no number is entered，the default maximum dice will be used。");
+define("L_HELP_CMD_26", "This is a more complex version of the /dice command。<br />Usage: /{n1}d[n2] or /{n1}d;<br />n1 can take any value <b>between 1 and %s</b> (it represents the number of dice per throws)。<br />n2 can take any value <b>between 1 and %s</b> (it represents the number of sides per die)。");
+define("L_HELP_CMD_27", "It highlights the messages of a specific user for an easier reading across the conversations。<br />Usage: /high {user} or press the small <img src=./images/highlightOff.gif> square on the right of the username (in the rooms/users list)");
+define("L_HELP_CMD_28", "It allows posting of <i>one single image</i> as message。<br />Usage: The picture has to be on the internet and free accessible by anyone。Don’t use pages that need login。<br />Full image link must be typed！ 例如 <b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />Allowed extensions: .jpg .bmp .gif .png。The link is case sensitive！<br />HINTS: type /img then a space and paste the URL into the box; to get the URL of an image from a webpage，when you right-click on the image，go to properties，then highlight the whole address/URL (sometimes needs to scroll down a bit) and copy/paste after the /img<br />Don’t use pictures from your pc: it will just break the chat window！！！");
 define("L_HELP_CMD_29", "第二个命令将允许当前房间的管理员或主持人，降级同房间以前晋升的另一名主持人到一般注册用户。<br />这 * 选项将用户从所有的房间降级。");
-define("L_HELP_CMD_30", "The second command does the same as /me but it will show your respective title, according to your profile gender<br />例如 * ".sprintf(L_HELP_MR, "Ciprian")." is watching TV or * ".sprintf(L_HELP_MS, "Dana")." is happy.");
-define("L_HELP_CMD_31", "Change the order users are sorted in lists: by entrance time or alphabetically.");
-define("L_HELP_CMD_32", "This is a third (role-playing) version of the dice rolling.<br />Usage: /d{n1}[tn2] or /d{n1};<br />n1 can take any value <b>between 1 and 100</b> (it represents the number of sides per die);<br />n2 can take any value <b>between 1 and %s</b> (it represents the number of rolling dice per throw).");
-define("L_HELP_CMD_33", "Change the font size of the messages in chat to user choice (allowed values for n: <b>between 7 and 15</b>); the /size command resets the font size to the default value (<b>".$FontSize."</b>).");
-define("L_HELP_CMD_34", "This will allow an user to specify the orientation of a text message (ltr = left-to-right, rtl = right-to-left).");
-define("L_HELP_CMD_35", "It allows posting of <i>one video</i> or <i>one audio file</i> in a small Flash player at a time.<br />Usage: Just paste the url of the source to be posted！ 例如 <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />You need Shockwave Flash Player installed on your system. The link is case sensitive！<br />HINTS: type /video followed by a space and paste the URL into the box.");
-define("L_HELP_CMD_35a", "第二条命令只适用于具有 YouTube.com 的视频源.<br />例如 <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
-define("L_HELP_CMD_36", "It allows posting of <i>one youtube video</i> in a small Flash player at a time.<br />Usage: Just paste the url of the source to be posted！ 例如 <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />You need Shockwave Flash Player installed on your system. The link is case sensitive！<br />HINTS: type /tube followed by a space and paste the URL into the box.");
-define("L_HELP_CMD_37", "It allows posting of <i>MathJax Equations/Formulas</i> in chat.<br />Usage: Just paste the TeX or MathML (original) codes！ E.g. <b>/math&nbsp;\sqrt{3x-1}+(1+x)^2</b><br />For more code samples and instructions go to: <a href=\"http://www.mathjax.org/demos/\" target=\"_blank\">http://www.mathjax.org/demos</a>. Get the code by right-clicking on the formulas.<br />HINTS: type /math followed by a space and paste the code into the box.");
+define("L_HELP_CMD_30", "The second command does the same as /me but it will show your respective title，according to your profile gender<br />例如 * ".sprintf(L_HELP_MR, "Ciprian")." is watching TV or * ".sprintf(L_HELP_MS, "Dana")." is happy。");
+define("L_HELP_CMD_31", "Change the order users are sorted in lists: by entrance time or alphabetically。");
+define("L_HELP_CMD_32", "This is a third (role-playing) version of the dice rolling。<br />Usage: /d{n1}[tn2] or /d{n1};<br />n1 can take any value <b>between 1 and 100</b> (it represents the number of sides per die);<br />n2 can take any value <b>between 1 and %s</b> (it represents the number of rolling dice per throw)。");
+define("L_HELP_CMD_33", "Change the font size of the messages in chat to user choice (allowed values for n: <b>between 7 and 15</b>); the /size command resets the font size to the default value (<b>".$FontSize."</b>)。");
+define("L_HELP_CMD_34", "This will allow an user to specify the orientation of a text message (ltr = left-to-right，rtl = right-to-left)。");
+define("L_HELP_CMD_35", "It allows posting of <i>one video</i> or <i>one audio file</i> in a small Flash player at a time。<br />Usage: Just paste the url of the source to be posted！ 例如 <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />You need Shockwave Flash Player installed on your system。The link is case sensitive！<br />HINTS: type /video followed by a space and paste the URL into the box。");
+define("L_HELP_CMD_35a", "第二条命令只适用于具有 YouTube.com 的视频源。<br />例如 <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
+define("L_HELP_CMD_36", "It allows posting of <i>one youtube video</i> in a small Flash player at a time。<br />Usage: Just paste the url of the source to be posted！ 例如 <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />You need Shockwave Flash Player installed on your system。The link is case sensitive！<br />HINTS: type /tube followed by a space and paste the URL into the box。");
+define("L_HELP_CMD_37", "It allows posting of <i>MathJax Equations/Formulas</i> in chat。<br />Usage: Just paste the TeX or MathML (original) codes！ E.g. <b>/math&nbsp;\sqrt{3x-1}+(1+x)^2</b><br />For more code samples and instructions go to: <a href=\"http://www.mathjax.org/demos/\" target=\"_blank\">http://www.mathjax.org/demos</a>。Get the code by right-clicking on the formulas。<br />HINTS: type /math followed by a space and paste the code into the box。");
 define("L_HELP_CMD_VAR", "别名(变种): %s"); // a list of English and/or translated alternatives for each command
 define("L_HELP_ETIQ_1", "交谈礼仪");
-define("L_HELP_ETIQ_2", "我们的网站，希望保持友好的社会和乐趣，所以请坚持以下指导原则。如果你不遵守这些规则，我们的聊天主持人之一的，可以引导你聊天.<br /><br />谢谢你,");
+define("L_HELP_ETIQ_2", "我们的网站，希望保持友好的社会和乐趣，所以请坚持以下指导原则。如果你不遵守这些规则，我们的聊天主持人之一的，可以引导你聊天。<br /><br />谢谢你，");
 define("L_HELP_ETIQ_3", "我们的交谈礼仪指引");
-define("L_HELP_ETIQ_4", "<li>Do not \"spam\" the chat by typing nonsense or random letters.</li>
-<li>Do not use aLtErnAtiNg characters.</li>
-<li>Keep ALL CAPS use to a minimum, as it is considered yelling.</li>
-<li>Keep in mind that our chat users are from all over the world, and, most likely, you will encounter people of different beliefs. Please be kind and polite to these people.</li>
-<li>Do not direct profanity towards other members. In fact, try to steer clear of using profanity and/or swear words altogether.</li>
-<li>Do not call other members by their real names that they may not appreciate. Use their nicknames instead.</li>");
+define("L_HELP_ETIQ_4", "<li>Do not \"spam\" the chat by typing nonsense or random letters。</li>
+<li>Do not use aLtErnAtiNg characters。</li>
+<li>Keep ALL CAPS use to a minimum，as it is considered yelling。</li>
+<li>Keep in mind that our chat users are from all over the world，and，most likely，you will encounter people of different beliefs。Please be kind and polite to these people。</li>
+<li>Do not direct profanity towards other members。In fact，try to steer clear of using profanity and/or swear words altogether。</li>
+<li>Do not call other members by their real names that they may not appreciate。Use their nicknames instead。</li>");
 
 // messages frame
 define("L_NO_MSG", "这个聊天室目前没有任何讯息 ...");
@@ -304,15 +304,15 @@ define("L_WHOIS_REG", "注册的");
 define("L_WHOIS_BOT", "机器人");
 
 // Notification messages of user entrance/exit
-define("ENTER_ROM", "%s 进入这个聊天室.");
-define("L_EXIT_ROM", "%s 离开这个聊天室.");
+define("ENTER_ROM", "%s 进入这个聊天室。");
+define("L_EXIT_ROM", "%s 离开这个聊天室。");
 if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
 // Clean mod/fix by Ciprian
-define("L_BOOT_ROM", "%s 从这个闲置的房间已自动启动.");
-define("L_CLOSED_ROM", "%s 关闭了浏览器.");
+define("L_BOOT_ROM", "%s 从这个闲置的房间已自动启动。");
+define("L_CLOSED_ROM", "%s 关闭了浏览器。");
 
 // Text for /away command notification string:
 define("L_AWAY", "%s 标记为离开...");
@@ -333,12 +333,12 @@ define("L_DEFAULT_TOPIC_1", "欢迎光临云月楼音乐聊天系统！");
 define("L_PIC", "张贴图片");
 define("L_PIC_RESIZED", "调整到");
 define("L_HELP_IMG", "张贴图像的完整路径");
-define("L_NO_IMAGE", "这不是一个公共的远程图像的一个有效的网址.\\n再次尝试！");
+define("L_NO_IMAGE", "这不是一个公共的远程图像的一个有效的网址。\\n再次尝试！");
 
 // Demote command by Ciprian
-define("L_IS_NO_MOD_ALL", "%s 不再是任何这个聊天室的主持人.");
-define("L_IS_NO_MODERATOR", "%s 不再是这个聊天室的主持人.");
-define("L_ERR_IS_ADMIN", "%s 是这里的管理员！\\n你不能改变他的权限.");
+define("L_IS_NO_MOD_ALL", "%s 不再是任何这个聊天室的主持人。");
+define("L_IS_NO_MODERATOR", "%s 不再是这个聊天室的主持人。");
+define("L_ERR_IS_ADMIN", "%s 是这里的管理员！\\n你不能改变他的权限。");
 
 // Info mod by Ciprian - displays a list of all the features & mods, including Bot's name, on the welcome page
 define("INFO_CMDS", "提供额外的命令:");
@@ -356,31 +356,31 @@ define("L_PRO_6", "名称/文本颜色");
 
 // Avatar mod
 define("L_AVATAR", "头像");
-define("L_ERR_AV", "网址无效或不存在的主机.");
+define("L_ERR_AV", "网址无效或不存在的主机。");
 define("L_TITLE_AV", "您当前的头像: ");
-define("L_CHG_AV", "点击 \"".L_REG_16."\" 在个人资料表格 </>来储存您的头像.");
+define("L_CHG_AV", "点击 \"".L_REG_16."\" 在个人资料表格 </>来储存您的头像。");
 define("L_SEL_NEW_AV", "选择一个新的头像");
 define("L_EX_AV", "例如");
 define("L_URL_AV", "网址: ");
 define("L_EXPL_AV", "(输入网址，然后按 ENTER 查看)");
 define("L_CANCEL", "取消");
 define("L_AVA_REG", "你必须先注册\ \才能来改变你的头像图标");
-define("L_SEL_NEW_AV_CONFIRM", "当这种档案形式不能提交.\\n目前指向的虚拟化身，将会失去\\到目前为止！\\n\\n你确定？");
+define("L_SEL_NEW_AV_CONFIRM", "当这种档案形式不能提交。\\n目前指向的虚拟化身，将会失去\\到目前为止！\\n\\n你确定？");
 
 // PlusBot bot mod (based on Alice bot)
-define("BOT_TIPS", "TIPS: Our bot is publicly active in this room. To start talking to the bot, type <b>hello ".C_BOT_NAME."</b>. To end conversation, type: <b>bye ".C_BOT_NAME."</b>. (private: /to <b>".C_BOT_NAME."</b> Message)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
-define("BOT_PRIV_TIPS", "TIPS: Our bot is publicly active in %s room. You can only talk private by clicking on it’s name and whispering. (command: /wisp <b>".C_BOT_NAME."</b> Message)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
-define("BOT_PRIVONLY_TIPS", "TIPS: Our bot is not publicly active. You can only talk private by clicking on it’s name. (commands: /to <b>".C_BOT_NAME."</b> Message or /wisp <b>".C_BOT_NAME."</b> Message)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
+define("BOT_TIPS", "TIPS: Our bot is publicly active in this room。To start talking to the bot，type <b>hello ".C_BOT_NAME."</b>。To end conversation，type: <b>bye ".C_BOT_NAME."</b>。(private: /to <b>".C_BOT_NAME."</b> Message)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
+define("BOT_PRIV_TIPS", "TIPS: Our bot is publicly active in %s room。You can only talk private by clicking on it’s name and whispering。(command: /wisp <b>".C_BOT_NAME."</b> Message)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
+define("BOT_PRIVONLY_TIPS", "TIPS: Our bot is not publicly active。You can only talk private by clicking on it’s name。(commands: /to <b>".C_BOT_NAME."</b> Message or /wisp <b>".C_BOT_NAME."</b> Message)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
 define("BOT_STOP_ERROR", "机器人是在这个房间里没有运行！");
 define("BOT_START_ERROR", "在这个房间的机器人已在运行！");
 define("BOT_DISABLED_ERROR", "机器人已被禁用从管理面板！");
 
 // Dice v.1, v.2 and v.3 modes
 define("DICE_RESULTS", "滚动骰子，结果是:");
-define("DICE_WRONG", "你必须选择你想滚多少骰子\\n(选择一个介于1和 ".MAX_ROLLS.").\\n只需键入/dice 滚动所有的 ".MAX_ROLLS." 骰子.");
-define("DICE2_WRONG", "第二个值介于1和 ".MAX_ROLLS.".\\n留下它空白到使用全部 ".MAX_ROLLS." dice\\n(例如 /".MAX_DICES."d 或 /".MAX_DICES."d".MAX_ROLLS.").");
-define("DICE2_WRONG1", "第一个值介于1和 ".MAX_DICES.".\\n(例如 /".MAX_DICES."d 或 /".MAX_DICES."d".MAX_ROLLS.").");
-define("DICE3_WRONG", "第一（d）值介于1和 100.\\n第二个（t）值介于1和 ".MAX_ROLLS.".\\n留下它空白到使用全部 ".MAX_ROLLS." dice\\n(例如 /d50 or /d100t".MAX_ROLLS.").");
+define("DICE_WRONG", "你必须选择你想滚多少骰子\\n(选择一个介于1和 ".MAX_ROLLS.")。\\n只需键入/dice 滚动所有的 ".MAX_ROLLS." 骰子。");
+define("DICE2_WRONG", "第二个值介于1和 ".MAX_ROLLS."。\\n留下它空白到使用全部 ".MAX_ROLLS." dice\\n(例如 /".MAX_DICES."d 或 /".MAX_DICES."d".MAX_ROLLS.")。");
+define("DICE2_WRONG1", "第一个值介于1和 ".MAX_DICES."。\\n(例如 /".MAX_DICES."d 或 /".MAX_DICES."d".MAX_ROLLS.")。");
+define("DICE3_WRONG", "第一（d）值介于1和 100。\\n第二个（t）值介于1和 ".MAX_ROLLS."。\\n留下它空白到使用全部 ".MAX_ROLLS." dice\\n(例如 /d50 or /d100t".MAX_ROLLS.")。");
 
 // Private Message Popup mod by Ciprian
 define("L_REG_POPUP", "打开弹出窗口私人讯息");
@@ -388,7 +388,7 @@ define("L_REG_POPUP_NOTE", "您必须禁用弹出窗口阻止程序！( 关闭�
 define("L_PRIV_POST_MSG", "发送悄悄话！");
 define("L_PRIV_MSG", "收到新的悄悄话！");
 define("L_PRIV_MSGS", "收到新的私人讯息 %s 则！");
-define("L_PRIV_MSGSa", "这里是前10条消息！<br />使用底部的连结看到其余的.");
+define("L_PRIV_MSGSa", "这里是前10条消息！<br />使用底部的连结看到其余的。");
 define("L_PRIV_MSG1", "从:");
 define("L_PRIV_MSG2", "房间:");
 define("L_PRIV_MSG3", "到:");
@@ -398,11 +398,11 @@ define("L_PRIV_REPLY", "回覆");
 define("L_PRIV_READ", "请按下 ’".L_REG_25."’ 按钮标记为所有的文章已读！");
 define("L_PRIV_POPUP", "您可以随时 停用 /重新启用 这个弹出的功能<br />在编辑个人资料");
 define("L_PRIV_POPUP1", "简介</a> (只有注册用户)");
-define("L_NOT_ONLINE", "%s 现在不在线上.");
-define("L_PRIV_NOT_ONLINE", "%s 现在不在线上,\\n但登录后，仍然会收到您的消息.");
-define("L_PRIV_NOT_INROOM", "%s 是不在这个房间.\\n如果您仍然希望向用户密语这条,\\使用这个命令: /wisp %s 留言内容.");
-define("L_PRIV_AWAY", "%s 标记为离开,\\n但仍然会收到您的留言\\n当他回到电脑前时.");
-define("PM_DISABLED_ERROR", "耳语（私人讯息）\\在此聊天已被禁用.");
+define("L_NOT_ONLINE", "%s 现在不在线上。");
+define("L_PRIV_NOT_ONLINE", "%s 现在不在线上，\\n但登录后，仍然会收到您的消息。");
+define("L_PRIV_NOT_INROOM", "%s 是不在这个房间。\\n如果您仍然希望向用户密语这条，\\使用这个命令: /wisp %s 留言内容。");
+define("L_PRIV_AWAY", "%s 标记为离开，\\n但仍然会收到您的留言\\n当他回到电脑前时。");
+define("PM_DISABLED_ERROR", "耳语（私人讯息）\\在此聊天已被禁用。");
 define("L_NEXT_PAGE", "前往下一页");
 define("L_NEXT_READ", "阅读 下一个 %s"); // message / 10 messages
 define("L_ROOM_ALL", "所有房间");
@@ -432,8 +432,8 @@ define("L_COL_HELP_SUB2", "提示:");
 define("L_COL_HELP_P2", "<u>色彩范围</u><br />根据您的浏览器/操作系统功能，它是可能的，有的颜色不会呈现。只有16种颜色的名称是由W3C的HTML4.0标准的支持:");
 define("L_COL_HELP_P2a", "如果一个用户声称，他不能看到你所选的颜色，这意味着他很可能使用的是旧的浏览器。");
 define("L_COL_HELP_SUB3", "设置定义在这个聊天室:");
-define("L_COL_HELP_P3", "<u>级别使用颜色的权限</u>:<br />1. 管理员可以使用任何颜色。<br />管理员的默认颜色 <SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN>。<br />2. 版主可以使用任何颜色，但不能用 <SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN> 跟 <SPAN style=\"color:".COLOR_CA1."\">".COLOR_CA1."</SPAN>。<br />用于版主的默认颜色是 <SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN>。<br />3. 其他用户可以使用任何颜色，但不能用 <SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN>, <SPAN style=\"color:".COLOR_CA1."\">".COLOR_CA1."</SPAN>, <SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN> 跟 <SPAN style=\"color:".COLOR_CM1."\">".COLOR_CM1."</SPAN>。");
-define("L_COL_HELP_P3a", "默认颜色为 <u><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></u>。<br /><br /><u>技术性的东西</u>: 这些颜色已经被系统管理员定义在管理面板。<br />如果出现任何错误，或者如果有什么你不喜欢默认的颜色，你应该联系<b>管理员</b> 首先，没有在房间里的其他用户。 :-)");
+define("L_COL_HELP_P3", "<u>级别使用颜色的权限</u>:<br />1。管理员可以使用任何颜色。<br />管理员的默认颜色 <SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN>。<br />2。版主可以使用任何颜色，但不能用 <SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN> 跟 <SPAN style=\"color:".COLOR_CA1."\">".COLOR_CA1."</SPAN>。<br />用于版主的默认颜色是 <SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN>。<br />3。其他用户可以使用任何颜色，但不能用 <SPAN style=\"color:".COLOR_CA."\">".COLOR_CA."</SPAN>，<SPAN style=\"color:".COLOR_CA1."\">".COLOR_CA1."</SPAN>，<SPAN style=\"color:".COLOR_CM."\">".COLOR_CM."</SPAN> 跟 <SPAN style=\"color:".COLOR_CM1."\">".COLOR_CM1."</SPAN>。");
+define("L_COL_HELP_P3a", "默认颜色为 <u><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></u>。<br /><br /><u>技术性的东西</u>: 这些颜色已经被系统管理员定义在管理面板。<br />如果出现任何错误，或者如果有什么你不喜欢默认的颜色，你应该联系<b>管理员</b> 首先，没有在房间里的其他用户。:-)");
 define("L_COL_HELP_USER_STATUS", "您的状态");
 define("L_COL_TUT", "在聊天室中使用彩色文字");
 define("L_NULL", "Null");
@@ -443,8 +443,8 @@ define("L_PRO_COLOR", "配置文件的颜色");
 
 // Alert messages on errors for Color Input Box mod by Ciprian
 define("COL_ERROR_BOX_MODA", "只有管理员可以使用 ".COLOR_CA." color！\\n\\n你的文字颜色将重置为 ".COLOR_CM."！\\n\\n请选择其他颜色。");
-define("COL_ERROR_BOX_USRA", "只有管理员可以使用 ".COLOR_CA." color！\\n\\n不要尝试使用 ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1."。\\n\\n这些是保留给超级用户！\\n\\n你的文字颜色将重置为 ".COLOR_CD."！\\n\\n请选择其他颜色。");
-define("COL_ERROR_BOX_USRM", "你必须是一个主持人才能使用 ".COLOR_CM." color！\\n\\n不要尝试使用 ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1."。\\n\\n这些是保留给超级用户！\\n\\n你的文字颜色将重置为 ".COLOR_CD."！\\n\\n请选择其他颜色。");
+define("COL_ERROR_BOX_USRA", "只有管理员可以使用 ".COLOR_CA." color！\\n\\n不要尝试使用 ".COLOR_CA."，".COLOR_CA1."，".COLOR_CM." or ".COLOR_CM1."。\\n\\n这些是保留给超级用户！\\n\\n你的文字颜色将重置为 ".COLOR_CD."！\\n\\n请选择其他颜色。");
+define("COL_ERROR_BOX_USRM", "你必须是一个主持人才能使用 ".COLOR_CM." color！\\n\\n不要尝试使用 ".COLOR_CA."，".COLOR_CA1."，".COLOR_CM." or ".COLOR_CM1."。\\n\\n这些是保留给超级用户！\\n\\n你的文字颜色将重置为 ".COLOR_CD."！\\n\\n请选择其他颜色。");
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "欢迎来到我们的聊天。请遵守纯净礼仪，一边聊天：<I>尝试愉快和礼貌</I>。");
@@ -453,7 +453,7 @@ else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
 // Send alert to users in chat when important settings are changed in admin panel
-define("L_RELOAD_CHAT", "此服务器的设置，已被改变了。为了避免发生故障，请重新加载浏览器 (按F5键或退出，并重新进入聊天).");
+define("L_RELOAD_CHAT", "此服务器的设置，已被改变了。为了避免发生故障，请重新加载浏览器 (按F5键或退出，并重新进入聊天)。");
 
 //Size command error by Ciprian
 define("L_ERR_SIZE", "字体大小的值只能是\\n空的（进行复位）或7至15");
@@ -472,16 +472,16 @@ define("L_PASS_9", "请用您的新密码进入聊天");
 define("L_PASS_10", "请用您的新密码进入聊天: %s");
 define("L_PASS_11", "欢迎回到我们的聊天服务器！");
 define("L_PASS_12", "选择你的问题 ...");
-define("L_ERR_PASS_1", "错误的用户名. 选择你的.");
-define("L_ERR_PASS_2", "错误的电子邮件,再试一次！");
-define("L_ERR_PASS_3", "不对的密码提示问题.<br />答复到如下所示的那个！");
-define("L_ERR_PASS_4", "错误的密码提示答案. 再试一次！");
-define("L_ERR_PASS_5", "您未设置您私有/密码提示.");
-define("L_ERR_PASS_6", "您未设置您私有/密码提示 yet.<br />您不可能使用这个形式。 请与管理员联系！");
+define("L_ERR_PASS_1", "错误的用户名。选择你的。");
+define("L_ERR_PASS_2", "错误的电子邮件，再试一次！");
+define("L_ERR_PASS_3", "不对的密码提示问题。<br />答复到如下所示的那个！");
+define("L_ERR_PASS_4", "错误的密码提示答案。再试一次！");
+define("L_ERR_PASS_5", "您未设置您私有/密码提示。");
+define("L_ERR_PASS_6", "您未设置您私有/密码提示 yet。<br />您不可能使用这个形式。请与管理员联系！");
 
 // admin stuff - added for administrators promotions/demotions in admin panel - by Ciprian
-define("L_ADM_3", "%s 已成为这个聊天室的管理员.");
-define("L_ADM_4", "%s 不再是这个聊天室的管理员.");
+define("L_ADM_3", "%s 已成为这个聊天室的管理员。");
+define("L_ADM_4", "%s 不再是这个聊天室的管理员。");
 
 // Open Schedule by Ciprian
 define("L_DAILY", "每日");
@@ -616,20 +616,30 @@ define("FIRST_DAY", "1");
 define("L_CAL_FORMAT", "%Y年%B%d日");
 define("ISO_DEFAULT", "ISO2022_CN_GB");
 define("WIN_DEFAULT", "utf-8");
-define("L_SHORT_DATE", "%Y年 %#m月 %#d日&nbsp;"); //Change this to your local desired format (keep the short form)
-define("L_SHORT_DATETIME", "%Y年 %#m月 %#d日 %H:%M:%S"); //Change this to your local desired format (keep the short form)
-define("L_LONG_DATE", "%Y年 %#m月 %#d日&nbsp;"); //Change this to your local desired format (keep the short form)
-define("L_LONG_DATETIME", "%Y年 %#m月 %#d日 %H:%M:%S"); //Change this to your local desired format (keep the long form)
+if (stristr(PHP_OS,'win'))
+{
+define("L_SHORT_DATE", "%Y年 %#m月 %#d日 "); //Change this to your local desired format (keep the short form)
+define("L_SHORT_DATETIME", "%Y年 %#m月 %#d日 &nbsp;%H:%M:%S"); //Change this to your local desired format (keep the short form)
+define("L_LONG_DATE", "%Y年 %#m月 %#d日 "); //Change this to your local desired format (keep the short form)
+define("L_LONG_DATETIME", "%Y年 %#m月 %#d日 &nbsp;%H:%M:%S"); //Change this to your local desired format (keep the long form)
+}
+else
+{
+define("L_SHORT_DATE", "%Y年%-m月%-d日"); //Change this to your local desired format (keep the short form)
+define("L_SHORT_DATETIME", "%Y年%-m月%-d日 %H:%M:%S"); //Change this to your local desired format (keep the short form)
+define("L_LONG_DATE", "%Y年%-m月%-d日(%A)"); //Change this to your local desired format (keep the short form)
+define("L_LONG_DATETIME", "%Y年%-m月%-d日(%A) %H:%M:%S"); //Change this to your local desired format (keep the long form)
+}
 
 if(!defined("L_DAY")) define("L_DAY", "日");
 if(!defined("L_MONTH")) define("L_MONTH", "月");
 if(!defined("L_YEAR")) define("L_YEAR", "年");
 
 // Chat Activity displayed on remote web pages
-define("LOGIN_LINK", "<A HREF='".C_CHAT_URL."?L=".$L."' TITLE='".sprintf(L_CLICK,L_LINKS_12)."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_12).".'; return true;\" TARGET=_blank>");
-define("NB_USERS_IN","users are ".LOGIN_LINK."聊天</A> at this time.");
-define("USERS_LOGIN","这个时段1个用户在 ".LOGIN_LINK."聊天</A> .");
-define("NO_USER","这个时段没有人 ".LOGIN_LINK."聊天</A> .");
+define("LOGIN_LINK", "<A HREF='".C_CHAT_URL."?L=".$L."' TITLE='".sprintf(L_CLICK,L_LINKS_12)."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_12)."。'; return true;\" TARGET=_blank>");
+define("NB_USERS_IN", "users are ".LOGIN_LINK."聊天</A> at this time。");
+define("USERS_LOGIN", "这个时段1个用户在 ".LOGIN_LINK."聊天</A>。");
+define("NO_USER", "这个时段没有人 ".LOGIN_LINK."聊天</A>。");
 define("L_PRIV_REPLY_LOGIN", "登录到聊天，如果你想 ".LOGIN_LINK."发表回覆</A> 任何上面列出的未读项目经理");
 
 // Language names
@@ -707,26 +717,26 @@ define("L_UPLOAD", "上传 %s");
 define("L_UPLOAD_IMG", "图档");
 define("L_UPLOAD_SND", "声音档");
 define("L_UPLOAD_FLS", "档案");
-define("L_UPLOAD_SUCCESS", "%s 顺利的上传 %s.");
+define("L_UPLOAD_SUCCESS", "%s 顺利的上传 %s。");
 define("L_FILES_TITLE", "上传管理");
 
 // Room restriction mod by Ciprian
 define("L_RESTRICTED", "限会员");
-define("L_RESTRICTED_ROM", "%s 从这个房间已经被成功地限制.");
+define("L_RESTRICTED_ROM", "%s 从这个房间已经被成功地限制。");
 
 // OpenID login mod by Ciprian
 define("L_OPID_SIGN", "登入到一个 OpenID");
 define("L_OPID_REG", "导入您的OpenID个人资料");
 
 // Support buttons
-define("L_SUPP_WARN", "您已选择到自由开发作者捐献\\n".APP_NAME." 通过捐赠给开发者.\\n感谢您的支持！\\n\\n注：收款人不是这个聊天室的主人.\\n请输入金额在下一页.\\n\\n继续？");
+define("L_SUPP_WARN", "您已选择到自由开发作者捐献\\n".APP_NAME." 通过捐赠给开发者。\\n感谢您的支持！\\n\\n注：收款人不是这个聊天室的主人。\\n请输入金额在下一页。\\n\\n继续？");
 define("L_SUPP_ALT", "通过 PayPal 支助 ".APP_NAME." 的发展 - 它是快速，自由和安全的！");
 
 // Video & Audio & Youtube cmds (Embevi & YouTube player class)
 define("L_AUDIO", "音讯档案发布人");
 define("L_VIDEO", "视讯发布人");
 define("L_HELP_VIDEO", "张贴的视频或音频源的完整路径");
-define("L_NO_VIDEO", "不能嵌入的 URL .\\n这是不是一个有效的URL，接受公众的视频或音频源\\ n请再试！");
+define("L_NO_VIDEO", "不能嵌入的 URL。\\n这是不是一个有效的URL，接受公众的视频或音频源\\ n请再试！");
 define("L_ORIG_VIDEO", "打开原始的来源网站");
 
 // Birthday mod - by Ciprian
@@ -734,7 +744,7 @@ define("L_PRO_7", "出生日期");
 define("L_PRO_8", "显示生日在个人资料公开信息");
 define("L_PRO_9", "显示年龄在个人资料公开信息");
 define("L_PRO_10", "年龄");
-define("L_PRO_11", "%1\$d 年, %2\$d 月 and %3\$d 日");
+define("L_PRO_11", "%1\$d 年，%2\$d 月 and %3\$d 日");
 define("L_DOB_TIT_1", "生日列表");
 $L_DOB_SUBJ = "%s 生日快乐！";
 

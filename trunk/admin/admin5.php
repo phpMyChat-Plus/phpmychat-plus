@@ -791,7 +791,12 @@ if (C_LAST_SAVED_ON)
 	if (C_TMZ_OFFSET) settype($tmz_offset = C_TMZ_OFFSET, "integer");
 	$Last_Saved_On = $last_saved_on + $tmz_offset*60*60;
 	$longdtformat = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e").date('S',$Last_Saved_On))." of", L_LONG_DATETIME) : L_LONG_DATETIME);
-	$Last_Saved_On = stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,$Charset,strftime($longdtformat, $Last_Saved_On)) : strftime($longdtformat, $Last_Saved_On);
+	$Last_Saved_On = strftime($longdtformat, $Last_Saved_On);
+	if(stristr(PHP_OS,'win'))
+	{
+		$Last_Saved_On = utf_conv(WIN_DEFAULT,$Charset,$Last_Saved_On);
+		if(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) $Last_Saved_On = str_replace(" ","",$Last_Saved_On);
+	}
 }
 if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 {
@@ -1561,7 +1566,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		  }
 		  else
 		  {
-			$CorrectedTime = mktime(date("G") + C_TMZ_OFFSET,date("i"),date("s"),date("m"),date("d"),date("Y"));
+			$CorrectedTime = mktime(date("G") + C_TMZ_OFFSET*60*60,date("i"),date("s"),date("m"),date("d"),date("Y"));
 			$myCalendar->setDate(date('d',$CorrectedTime), date('m',$CorrectedTime), date('Y',$CorrectedTime));
 		  }
 		  $myCalendar->setYearInterval(2000, date('Y'));

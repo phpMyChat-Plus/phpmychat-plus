@@ -142,7 +142,9 @@ else
 					$ipbak_size = 0;
 					foreach ($iparray as $ip)
 					{
-						echo ("\n<li><a href=\"$pstr&fdel=".$ipbak."/".$ip."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_14.A_CHAT_LOGS_19,$ip)."')\" title='".A_CHAT_LOGS_15."'><font size=-2 color=red><b>x</b></font></a>&nbsp;<a href=$ipbak/$ip title='".sprintf(A_CHAT_LOGS_16,$ip)."'>$ip</a>&nbsp;(".size_readable(filesize($ipbak."/".$ip)).", ".strftime(L_SHORT_DATETIME, filemtime($ipbak."/".$ip)).")"); #print name of each file found
+						$ipbak_time = strftime(L_SHORT_DATETIME, filemtime($ipbak."/".$ip));
+						if(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) $ipbak_time = str_replace(" ","",$ipbak_time);
+						echo ("\n<li><a href=\"$pstr&fdel=".$ipbak."/".$ip."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_14.A_CHAT_LOGS_19,$ip)."')\" title='".A_CHAT_LOGS_15."'><font size=-2 color=red><b>x</b></font></a>&nbsp;<a href=$ipbak/$ip title='".sprintf(A_CHAT_LOGS_16,$ip)."'>$ip</a>&nbsp;(".size_readable(filesize($ipbak."/".$ip)).", ".$ipbak_time.")"); #print name of each file found
 						$ipbak_size = $ipbak_size + filesize($ipbak."/".$ip);
 						$i++;
 					}
@@ -317,7 +319,9 @@ else
 					$zip_size = 0;
 					foreach ($ziparray as $zy)
 					{
-						echo ("\n<li><a href=\"$pstr&fdel=".$y."/".$zy."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_14.A_CHAT_LOGS_19,$zy)."')\" title='".A_CHAT_LOGS_29."'><font size=-2 color=red><b>x</b></font></a>&nbsp;<a href=$y/$zy title='".sprintf(A_CHAT_LOGS_28,$zy)."'>$zy</a>&nbsp;(".size_readable(filesize($y."/".$zy)).", ".strftime(L_SHORT_DATETIME, filemtime($y."/".$zy)).")"); #print name of each file found
+						$y_time = strftime(L_SHORT_DATETIME, filemtime($y."/".$zy));
+						if(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) $y_time = str_replace(" ","",$y_time);
+						echo ("\n<li><a href=\"$pstr&fdel=".$y."/".$zy."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_14.A_CHAT_LOGS_19,$zy)."')\" title='".A_CHAT_LOGS_29."'><font size=-2 color=red><b>x</b></font></a>&nbsp;<a href=$y/$zy title='".sprintf(A_CHAT_LOGS_28,$zy)."'>$zy</a>&nbsp;(".size_readable(filesize($y."/".$zy)).", ".$y_time.")"); #print name of each file found
 						$zip_size = $zip_size + filesize($y."/".$zy);
 					}
 					echo("\n</td>\n</tr>\n<td valign=top nowrap=\"nowrap\" class=\"notify\"><li>".sprintf(A_CHAT_LOGS_31," = ",size_readable($zip_size,'%01.2f %s'))."</td>\n</tr>\n</table>\n<br />\n");
@@ -482,7 +486,9 @@ else
 					$zipu_size = 0;
 					foreach ($ziparrayu as $zyu)
 					{
-						echo ("\n<li><a href=\"$pstr&fdel=".$yu."/".$zyu."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_14.A_CHAT_LOGS_12.A_CHAT_LOGS_19,$zyu)."')\" title='".A_CHAT_LOGS_29." ".A_CHAT_LOGS_12."'><font size=-2 color=red><b>x</b></font></a>&nbsp;<a href=$yu/$zyu title='".sprintf(A_CHAT_LOGS_28,$zyu)." ".A_CHAT_LOGS_12."'>$zyu</a>&nbsp;(".size_readable(filesize($yu."/".$zyu))." / ".strftime(L_SHORT_DATETIME, filemtime($yu."/".$zyu)).")"); #print name of each file found
+						$yu_time = strftime(L_SHORT_DATETIME, filemtime($yu."/".$zyu));
+						if(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) $yu_time = str_replace(" ","",$yu_time);
+						echo ("\n<li><a href=\"$pstr&fdel=".$yu."/".$zyu."\" onclick=\"return confirm('".sprintf(A_CHAT_LOGS_14.A_CHAT_LOGS_12.A_CHAT_LOGS_19,$zyu)."')\" title='".A_CHAT_LOGS_29." ".A_CHAT_LOGS_12."'><font size=-2 color=red><b>x</b></font></a>&nbsp;<a href=$yu/$zyu title='".sprintf(A_CHAT_LOGS_28,$zyu)." ".A_CHAT_LOGS_12."'>$zyu</a>&nbsp;(".size_readable(filesize($yu."/".$zyu))." / ".$yu_time.")"); #print name of each file found
 						$zipu_size = $zipu_size + filesize($yu."/".$zyu);
 					}
 					echo("\n</td>\n</tr>\n<td valign=top nowrap=\"nowrap\" class=\"notify\"><li>".sprintf(A_CHAT_LOGS_31," = ",size_readable($zipu_size,'%01.2f %s'))."</td>\n</tr>\n</table>\n<br />\n");

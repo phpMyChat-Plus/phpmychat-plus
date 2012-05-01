@@ -55,6 +55,7 @@ require("./${ChatPath}/lib/clean.lib.php");
 
 function display_connected($Private,$Full,$NU,$String1,$String2,$DbLink,$Charset)
 {
+	global $L;
 	$List = "";
 	global $DefaultDispChatRooms, $res_init, $disp_note;
 	if ($NU > 0)
@@ -72,8 +73,9 @@ function display_connected($Private,$Full,$NU,$String1,$String2,$DbLink,$Charset
 				}
 				if ($Latin1) $User = htmlentities($User);
 				$User = user_status($User,$Status);
-				$RTime = $RTime + C_TMZ_OFFSET*60*60;
-				$List .= "<tr><td nowrap=\"nowrap\">".$User."</td><td nowrap=\"nowrap\">".$Room."</td><td nowrap=\"nowrap\">".L_LURKING_4." ".strftime(L_SHORT_DATETIME, $RTime)."";
+				$RTime = strftime(L_SHORT_DATETIME, $RTime + C_TMZ_OFFSET*60*60);
+				if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $RTime = str_replace(" ","",$RTime);
+				$List .= "<tr><td nowrap=\"nowrap\">".$User."</td><td nowrap=\"nowrap\">".$Room."</td><td nowrap=\"nowrap\">".L_LURKING_4." ".$RTime;
 			}
 			echo($List);
 		}

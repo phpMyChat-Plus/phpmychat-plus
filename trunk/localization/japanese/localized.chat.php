@@ -259,6 +259,7 @@ define("L_HELP_CMD_34", "発言内容の向きを指定します（ltr＝左か�
 define("L_HELP_CMD_35", "<i>動画</i>や<i>音声ファイル</i>を小さなフラッシュプレイヤーに貼り付けられるようにします。<br />使用法：貼り付けるファイルのURLをペーストするだけです！例：<b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />コンピュータにフラッシュプレイヤーがインストールされている必要があります。URLは大小文字を区別します！<br />ヒント：/videoコマンドに続き、半角スペースを打ってからURLを入力します。");
 define("L_HELP_CMD_35a", "2番目のコマンドは、ビデオファイルに対してyoutube.comの場合にのみ有効です。<br />例：<b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
 define("L_HELP_CMD_36", "小さなフラッシュプレイヤーに<i>youtubeビデオ</i>を貼り付けることができます。<br />使用法：貼り付けるファイルのURLをペーストするだけです！例：<b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />コンピュータにフラッシュプレイヤーがインストールされている必要があります。URLは大小文字を区別します！<br />ヒント：/tubeコマンドに続き、半角スペースを打ってからURLを入力します。");
+define("L_HELP_CMD_37", "It allows posting of <i>MathJax Equations/Formulas</i> in chat.<br />Usage: Just paste the TeX or MathML (original) codes! E.g. <b>/math&nbsp;\sqrt{3x-1}+(1+x)^2</b><br />For more code samples and instructions go to: <a href=\"http://www.mathjax.org/demos/\" target=\"_blank\">http://www.mathjax.org/demos</a>. Get the code by right-clicking on the formulas.<br />HINTS: type /math followed by a space and paste the code into the box.");
 define("L_HELP_CMD_VAR", "同義（類義）：%s"); // a list of English and/or translated alternatives for each command
 define("L_HELP_ETIQ_1", "チャットエチケット");
 define("L_HELP_ETIQ_2", "参加する誰もが楽しめるように、次のガイドラインに従ってください。ルールに従えない場合、モデレータによってチャットから退室させられる場合があります。<br /><br />敬具");
@@ -559,9 +560,6 @@ define("L_DEL_BYE", "待たなくていいです...");
 define("L_EXTRA_PRIV1", "PMを読む");
 define("L_EXTRA_PRIV2", "新しいPM");
 
-// Set the first day of the week in your language (0 for Sunday, 1 for Monday)
-define("FIRST_DAY", "0");
-
 // Months Long Names
 define("L_JAN", "1月");
 define("L_FEB", "2月");
@@ -612,13 +610,29 @@ setlocale(LC_ALL, "jpn.utf8", "jpn.UTF-8", "japanese.UTF-8", "japanese", "ja_JP.
 setlocale(LC_ALL, "ja_JP.utf8", "ja_JP.UTF-8", "ja_JP", "ja", "japanese", "jpn");
 }
 define("L_LANG", "ja_JP");
-define("ISO_DEFAULT", "iso-20220-jp");
-define("WIN_DEFAULT", "Shift_JIS");
-define("L_SHORT_DATE", "%Y/%m/%d"); //Change this to your local desired date only format (keep the short form)
-define("L_LONG_DATE", "%Y年%B%d日(%A)"); //Change this to your local desired date only format (keep the long form)
-define("L_SHORT_DATETIME", "%Y/%m/%d %H:%M:%S"); //Change this to your local desired date&time format (keep the short form)
-define("L_LONG_DATETIME", "%Y年%B%d日(%A) %H:%M:%S"); //Change this to your local desired date&time format (keep the long form)
+// Set the first day of the week in your language (0 for Sunday, 1 for Monday)
+define("FIRST_DAY", "0");
 define("L_CAL_FORMAT", "%Y年%B%d日"); // Calendar format
+define("ISO_DEFAULT", "iso-20220-jp");
+define("WIN_DEFAULT", "utf-8");
+if (stristr(PHP_OS,'win'))
+{
+define("L_SHORT_DATE", "%Y年 %#m月 %#d日 "); //Change this to your local desired format (keep the short form)
+define("L_SHORT_DATETIME", "%Y年 %#m月 %#d日 &nbsp;%H:%M:%S"); //Change this to your local desired format (keep the short form)
+define("L_LONG_DATE", "%Y年 %#m月 %#d日 "); //Change this to your local desired format (keep the short form)
+define("L_LONG_DATETIME", "%Y年 %#m月 %#d日 &nbsp;%H:%M:%S"); //Change this to your local desired format (keep the long form)
+}
+else
+{
+define("L_SHORT_DATE", "%Y年%-m月%-d日"); //Change this to your local desired format (keep the short form)
+define("L_SHORT_DATETIME", "%Y年%-m月%-d日 %H:%M:%S"); //Change this to your local desired format (keep the short form)
+define("L_LONG_DATE", "%Y年%-m月%-d日(%A)"); //Change this to your local desired format (keep the short form)
+define("L_LONG_DATETIME", "%Y年%-m月%-d日(%A) %H:%M:%S"); //Change this to your local desired format (keep the long form)
+}
+
+if(!defined("L_DAY")) define("L_DAY", "日");
+if(!defined("L_MONTH")) define("L_MONTH", "月");
+if(!defined("L_YEAR")) define("L_YEAR", "年");
 
 // Chat Activity displayed on remote web pages
 define("LOGIN_LINK", "<A HREF='".C_CHAT_URL."?L=".$L."' TITLE='".sprintf(L_CLICK,L_LINKS_12)."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_12).".'; return true;\" TARGET=_blank>");

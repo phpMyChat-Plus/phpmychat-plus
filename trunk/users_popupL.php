@@ -253,9 +253,10 @@ if(isset($NbUsers) && $NbUsers > 0)
 						echo("<B>".htmlspecialchars($Other)."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$Users->num_rows().")</SPAN><br />");
 						while(list($Username,$Latin1,$status,$room_time) = $Users->next_record())
 						{
-							$room_time = $room_time + C_TMZ_OFFSET*60*60;
-							$room_time = strftime(L_SHORT_DATETIME,$room_time);
-							echo("-&nbsp;<a ".userClass($status,$Username).";>".special_char($Username,$Latin1,$status)."</a><BDO dir=\"${textDirection}\"></BDO>&nbsp;<font size=1>(".special_char($room_time,$Latin1,"").")</font><br />");
+							$room_time = strftime(L_SHORT_DATETIME,$room_time + C_TMZ_OFFSET*60*60);
+							if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $room_time = str_replace(" ","",$room_time);
+#							echo("-&nbsp;<a ".userClass($status,$Username).";>".special_char($Username,$Latin1,$status)."</a><BDO dir=\"${textDirection}\"></BDO>&nbsp;<font size=1>(".special_char($room_time,$Latin1,"").")</font><br />");
+							echo("-&nbsp;<a ".userClass($status,$Username).";>".special_char($Username,$Latin1,$status)."</a><BDO dir=\"${textDirection}\"></BDO>&nbsp;<font size=1>(".$room_time.")</font><br />");
 						};
 					}
 				}

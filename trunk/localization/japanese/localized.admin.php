@@ -1,5 +1,5 @@
 <?php
-// File : japanese/localized.admin.php - plus version (13.06.2011 - rev.16)
+// File : japanese/localized.admin.php - plus version (29.04.2012 - rev.17)
 // Original translation by Dendeke <konchakka211@yahoo.co.jp>
 // Corrections by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -167,6 +167,9 @@ define("A_SEARCH_22", "検索対象");
 define("A_SEARCH_23", "検索語を指定してもう一度お試しください！");
 define("A_SEARCH_24", "あなたの基準にマッチするデータはありません。検索内容をもう一度吟味してください。");
 define("A_SEARCH_25", "このユーザをモデレートする");
+define("A_SEARCH_26", "ユーザーは自分のプライバシー保護のため、パブリックプロファイルでこの情報を隠すことを選択しました。それを開示してはいけない！");
+define("A_SEARCH_27", "現在の月を表示");
+define("A_SEARCH_28", "すべての誕生日を表示する");
 
 // Connected users Page
 define("A_LURKING_1", "接続ユーザとROM") ;

@@ -1,5 +1,5 @@
 <?php
-// File : spanish/localized.chat.php - plus version (01.08.2009 - rev.43)
+// File : spanish/localized.chat.php - plus version (20.03.2010 - rev.44)
 // Original translation by Josep Román <josep.roman@zuerich-see.ch> and León Del Río <leon@webmaster.com.mx>
 // Updates, corrections and additions for the Plus version by Roxana Castañeda <roxminu@yahoo.com> & Shelly Noyes <shelly.noyes@gmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -43,6 +43,7 @@ define("L_SET_15", "Salas privadas por defecto");
 define("L_SET_16", "Salas privadas creadas por usuarios");
 define("L_SET_17", "Elija su avatar");
 define("L_SET_18", "Agregar a sus Favoritos: presione \"Ctrl+D\".");
+define("L_SET_19", "Recuérdame");
 
 define("L_SRC", "se puede conseguir y usar gratis");
 
@@ -255,6 +256,10 @@ define("L_HELP_CMD_31", "Cambia el orden en que los usuarios se muestran en las 
 define("L_HELP_CMD_32", "Este tercero (representación/roleplaying) versión de tirar los dados.<br />Uso: /d{n1}[tn2] o /d{n1};<br />n1 puede tomar cualquier valor <b>entre 1 y 100</b> (representa el número de tiradas por dado).<br />n2 puede tomar cualquier valor <b>entre 1 y %s</b> (representa el número de dados por tirada).");
 define("L_HELP_CMD_33", "Cambia el tamaño de la fuente de los mensajes en el chat por el que elija el usuario (valores permitidos para n: <b>entre 7 y 15</b>); el comando /size vuelve el tamaño de la fuente al valor por defecto (<b>".$FontSize."</b>).");
 define("L_HELP_CMD_34", "Esto permitirá que el usuario especifique la orientación del mensaje de texto (ltr,iad = izquierda-a-derecha; rtl,dai = derecha-a-izquierda).");
+define("L_HELP_CMD_35", "Permite la publicación de <i>un video</i> o <i>un archivo de audio</i> en un pequeño reproductor Flash a la vez.<br />Como usar: Simplemente pega la URL de origen de lo que quieres publicar! Ej. <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Necesitarás Shockwave Flash Player Instalado en tu sistema. El enlace diferencia entre mayúsculas y minúsculas!<br />Sugerencia: escribe /video seguido por un espacio y pega la URL en el cuadro de texto.");
+define("L_HELP_CMD_35a", "El segundo comando solo funciona con videos provenientes de youtube.com.<br />Ej. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
+define("L_HELP_CMD_36", "Permite publicar <i>un video de youtube</i> en un pequeño reproductor Flash a la vez.<br />Como usar: Simplemente pega la URL de origen de lo que quieres publicar! Ej. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Necesitarás Shockwave Flash Player Instalado en tu sistema. El enlace diferencia entre mayúsculas y minúsculas!<br />Sugerencia: escribe /tube seguido por un espacio y pega la URL en el cuadro de texto.");
+define("L_HELP_CMD_37", "It allows posting of <i><b>MathJax</b> equations & formulas</i> in chat.<br />Usage: Just paste the TeX or MathML (original) codes! E.g. <b>/math&nbsp;\sqrt{3x-1}+(1+x)^2</b><br />For more code samples and instructions go to: <a href=\"http://www.mathjax.org/demos/\" target=\"_blank\">http://www.mathjax.org/demos</a>. Get the code by right-clicking on the formulas.<br />HINTS: type /math followed by a space and paste the code into the box.");
 define("L_HELP_CMD_VAR", "Sinónimos (variantes): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Etiqueta del Chat");
 define("L_HELP_ETIQ_2", "Nuestro sitio desea mantener su comunidad amigable y divertida, así que por favor siga las siguientes políticas. Si no sigue estas reglas, uno de los moderadores del chat probablemente lo expulse/destierre del chat.<br /><br />Gracias,");
@@ -466,6 +471,7 @@ define("L_PASS_6", "Respuesta secreta");
 define("L_PASS_7", "Reiniciar contraseña");
 define("L_PASS_8", "Su contraseña ha sido reiniciada.");
 define("L_PASS_9", "Su nueva contraseña para entrar al chat");
+define("L_PASS_10", "Su nueva contraseña para entrar en el chat: %s"); 
 define("L_PASS_11", "¡Bienvenido a nuestro servidor de chat!");
 define("L_PASS_12", "Elige tu pregunta ...");
 define("L_ERR_PASS_1", "Username incorrecto. Elige el tuyo.");
@@ -478,6 +484,14 @@ define("L_ERR_PASS_6", "No has configurado tu pregunta y respuesta secreta.<br /
 // admin stuff - added for administrators promotions/demotions in admin panel - by Ciprian
 define("L_ADM_3", "%s se ha convertido en adminitrador de este chat.");
 define("L_ADM_4", "%s ya no es un administrador de este chat.");
+
+// Open Schedule by Ciprian
+define("L_DAILY", "Diario");
+define("L_ALWAYS", "siempre");
+define("L_OPEN", "Abierto");
+define("L_CLOSED", "Cerrado");
+define("L_OPEN_PUB", "ABIERTO AL PUBLICO");
+define("L_CLOSED_PUB", "CERRADO AL PUBLICO");
 
 // Links popup page by Alex
 define("L_LINKS_1", "Enlaces expuestos");
@@ -627,6 +641,7 @@ define("L_LANG_EN", "inglés"); // for Admin panel only
 define("L_LANG_ENUK", "inglés (Reino Unido) "); // for UK formats and flags (also known as British)
 define("L_LANG_ENUS", "inglés (Americano)"); // for US formats and flags (also know as American English)
 define("L_LANG_ES", "español");
+define("L_LANG_FA", "persa (farsi)");
 define("L_LANG_FR", "francés");
 define("L_LANG_GR", "griego");
 define("L_LANG_HE", "hebreo");
@@ -634,7 +649,9 @@ define("L_LANG_HI", "indú");
 define("L_LANG_HU", "húngaro");
 define("L_LANG_ID", "indonesio");
 define("L_LANG_IT", "italiano");	// Note: Language names are not capitalized in Spanish
+define("L_LANG_JA", "japonés (Kanji)");
 define("L_LANG_KA", "georgiano");
+define("L_LANG_NE", "nepalés");
 define("L_LANG_NL", "holandés");
 define("L_LANG_RO", "rumano");
 define("L_LANG_SK", "eslovaco");

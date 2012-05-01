@@ -113,10 +113,24 @@ else
 		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo($arrowx."&nbsp;<a href=\"$pstr&mord=X&sortOrder=".($sortOrder == "DESC" ? "ASC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_17)."\" onMouseOver=\"sort_status('DESC'); return true;\"" : "DESC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_18)."\" onMouseOver=\"sort_status('ASC'); return true;\"")."\">".L_REG_45."</a>"); ?></td>
 		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo($arrowu."&nbsp;<a href=\"$pstr&mord=U&sortOrder=".($sortOrder == "DESC" ? "ASC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_17)."\" onMouseOver=\"sort_status('DESC'); return true;\"" : "DESC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_18)."\" onMouseOver=\"sort_status('ASC'); return true;\"")."\">".L_SET_2."</a>"); ?></td>
 		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo($arrowe."&nbsp;<a href=\"$pstr&mord=E&sortOrder=".($sortOrder == "DESC" ? "ASC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_17)."\" onMouseOver=\"sort_status('DESC'); return true;\"" : "DESC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_18)."\" onMouseOver=\"sort_status('ASC'); return true;\"")."\">".L_REG_8."</a>"); ?></td>
+<?php
+if(!(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")))
+{
+?>
 		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo(L_REG_30); ?></td>
 		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo(L_REG_31); ?></td>
-		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo($arrowb."&nbsp;<a href=\"$pstr&mord=B&sortOrder=".($sortOrder == "DESC" ? "ASC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_17)."\" onMouseOver=\"sort_status('DESC'); return true;\"" : "DESC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_18)."\" onMouseOver=\"sort_status('ASC'); return true;\"")."\">".L_PRO_7."</a>"); ?></td>
-		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo($arrowa."&nbsp;<a href=\"$pstr&mord=A&sortOrder=".($sortOrder == "DESC" ? "ASC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_17)."\" onMouseOver=\"sort_status('DESC'); return true;\"" : "DESC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_18)."\" onMouseOver=\"sort_status('ASC'); return true;\"")."\">".L_PRO_10."</a>"); ?></td>
+<?php
+}
+else
+{
+?>
+		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo(L_REG_31); ?></td>
+		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo(L_REG_30); ?></td>
+<?php
+}
+?>
+		<td style="vertical-align:middle; text-align:center;" class=tabtitle nowrap="nowrap"><?php echo($arrowb."&nbsp;<a href=\"$pstr&mord=B&sortOrder=".($sortOrder == "DESC" ? "ASC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_17)."\" onMouseOver=\"sort_status('DESC'); return true;\"" : "DESC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_18)."\" onMouseOver=\"sort_status('ASC'); return true;\"")."\">".L_PRO_7."</a>"); ?></td>
+		<td style="vertical-align:middle; text-align:center;" class=tabtitle nowrap="nowrap"><?php echo($arrowa."&nbsp;<a href=\"$pstr&mord=A&sortOrder=".($sortOrder == "DESC" ? "ASC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_17)."\" onMouseOver=\"sort_status('DESC'); return true;\"" : "DESC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_18)."\" onMouseOver=\"sort_status('ASC'); return true;\"")."\">".L_PRO_10."</a>"); ?></td>
 	</tr>
 <?php
 	if ($DbLink->num_rows() > 0)
@@ -154,7 +168,12 @@ else
 				else $gender = L_REG_48;
 				if($dob_birthday && $dob_birthday != "" && $dob_birthday != "0000-00-00") $dobtime = strtotime($dob_birthday);
 				if(!$dob_showage || !$dob_showemail) $note = 1;
-				$dob_time = stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,$Charset,strftime(L_SHORT_DATE, $dobtime)) : strftime(L_SHORT_DATE, $dobtime);
+				$dob_time = strftime(L_SHORT_DATE, $dobtime);
+				if(stristr(PHP_OS,'win'))
+				{
+					$dobtime = utf_conv(WIN_DEFAULT,$Charset,$dobtime);
+					if(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) $dob_time = str_replace(" ","",$dob_time);
+				}
 				$dob_name = $dob_firstname != "" ? $dob_firstname : $User;
 				?>
 				<?php
@@ -164,9 +183,17 @@ else
 				echo("<TD style=\"vertical-align:middle; text-align:center;\"><img src=\"images/gender_".$gender1.".gif\" width=\"".$ava_width."\" height=\"".$ava_height."\" border=\"0\" alt=\"".$gender."\" title=\"".$gender."\"></TD>");
 				echo("<TD style=\"vertical-align:middle; text-align:left;\"><B>".$User."</B></TD>");
 				echo("<TD style=\"vertical-align:middle; text-align:left;\"><B><A HREF=\"mailto:".htmlspecialchars($email)."\" title=\"".sprintf(L_CLICK,L_EMAIL_1)."\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_EMAIL_1).".'; return true\" target=\"_blank\">".$email."</A>".($dob_showemail ? "" : "<font color=\"red\"><b> *</b></font>")."</B></TD>");
-				echo("<TD style=\"vertical-align:middle; text-align:left;\">".$dob_firstname."</TD>");
-				echo("<TD style=\"vertical-align:middle; text-align:left;\">".$dob_lastname."</TD>");
-				echo("<TD style=\"vertical-align:middle; text-align:center;\">".$dob_time."</TD>");
+				if(!(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")))
+				{
+					echo("<TD style=\"vertical-align:middle; text-align:left;\">".$dob_firstname."</TD>");
+					echo("<TD style=\"vertical-align:middle; text-align:left;\">".$dob_lastname."</TD>");
+				}
+				else
+				{
+					echo("<TD style=\"vertical-align:middle; text-align:left;\">".$dob_lastname."</TD>");
+					echo("<TD style=\"vertical-align:middle; text-align:left;\">".$dob_firstname."</TD>");
+				}
+				echo("<TD style=\"vertical-align:middle; text-align:center;\" nowrap=\"nowrap\">".$dob_time."</TD>");
 				echo("<TD style=\"vertical-align:middle; text-align:center;\">".$dob_age.($dob_showage ? "" : "<font color=\"red\"><b> *</b></font>")."</TD>");
 				echo("\n\t</TR>\n");
 				$i++;

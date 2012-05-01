@@ -192,7 +192,7 @@ if (isset($Warning) && $Warning != "") echo("<P CLASS=\"error\">$Warning</SPAN><
 else
 {
    echo "<table align=center border=\"1\" cellpadding=\"1\" cellspacing=\"0\" width=\"800\" CLASS=table>";
-   echo "<tr align=\"center\" class=\"tabtitle\"><td>&nbsp;</td><td><b>".A_SEARCH_13."</b></td><td><b>".A_SEARCH_14."</b></td><td><b>".A_SEARCH_15."</b></td><td><b>".A_SEARCH_16."</b></td><td><b>".A_SEARCH_6."</b></td><td><b>".A_SEARCH_18."</b></td><td><b>".A_SEARCH_19."</b></td><td><b>".A_SEARCH_20."</b></td><td><b>".L_PRO_7."</b></td></tr>";
+   echo "<tr align=\"center\" class=\"tabtitle\"><td>&nbsp;</td><td><b>".A_SEARCH_13."</b></td><td><b>".(!(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) ? A_SEARCH_14."</b></td><td><b>".A_SEARCH_15 : A_SEARCH_15."</b></td><td><b>".A_SEARCH_14)."</b></td><td><b>".A_SEARCH_16."</b></td><td><b>".A_SEARCH_6."</b></td><td><b>".A_SEARCH_18."</b></td><td><b>".A_SEARCH_19."</b></td><td><b>".A_SEARCH_20."</b></td><td><b>".L_PRO_7."</b></td></tr>";
 
 	$DbLink->query("SELECT username FROM ".C_REG_TBL." WHERE email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%' AND username != '$pmc_username' ORDER BY username ASC");
 	$users = Array();
@@ -262,7 +262,12 @@ else
        $s_showemail = stripslashes($result["showemail"]);
 		if($s_birthday && $s_birthday != "" && $s_birthday != "0000-00-00") $dobtime = strtotime($s_birthday);
 		if(!$s_showage || !$s_showemail) $note = 1;
-		$s_birthday = stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,$Charset,strftime(L_SHORT_DATE, $dobtime)) : strftime(L_SHORT_DATE, $dobtime);
+		$s_birthday = strftime(L_SHORT_DATE, $dobtime);
+		if(stristr(PHP_OS,'win'))
+		{
+			$s_birthday = utf_conv(WIN_DEFAULT,$Charset,$s_birthday);
+			if(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) $s_birthday = str_replace(" ","",$s_birthday);
+		}
 	   
        if (empty($s_username)) $s_username = "&nbsp;";
        if (empty($s_firstname)) $s_firstname = "&nbsp;";
@@ -274,7 +279,7 @@ else
        if (empty($s_gender)) $s_gender = "&nbsp;";
        if (empty($s_birthday)) $s_birthday = "&nbsp;";
 		$checkbox = ($s_username == $pmc_username) ? "&nbsp;" : "<INPUT type=checkbox name=\"selected_$usrHash\" value=\"1\">";
-       echo "<tr align=\"center\">\n<INPUT TYPE=\"hidden\" NAME=\"user_$usrHash\" VALUE=\"1\">\n<TD VALIGN=CENTER ALIGN=CENTER>\n$checkbox\n</td>\n<td width=100>$s_username$bannished_user</td>\n<td>$s_firstname</td>\n<td>$s_lastname</td>\n<td>$s_country</td>\n<td><a href=\"mailto:$s_email\" target=_blank>$s_email</a>".($s_showemail ? "" : "<font color=\"red\"> *</font>")."</td>\n<td>$s_perms</td>\n<td>$s_ip$bannished_ip</td>\n<td align=center>$s_gender</td>\n<td align=center>$s_birthday".($s_showage ? "" : "<font color=\"red\"> *</font>")."</td>\n</tr>";
+       echo "<tr align=\"center\">\n<INPUT TYPE=\"hidden\" NAME=\"user_$usrHash\" VALUE=\"1\">\n<TD VALIGN=CENTER ALIGN=CENTER>\n$checkbox\n</td>\n<td width=100>$s_username$bannished_user</td>\n<td>".(!(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) ? "$s_firstname</td>\n<td>$s_lastname" : "$s_lastname</td>\n<td>$s_firstname")."</td>\n<td>$s_country</td>\n<td><a href=\"mailto:$s_email\" target=_blank>$s_email</a>".($s_showemail ? "" : "<font color=\"red\"> *</font>")."</td>\n<td>$s_perms</td>\n<td>$s_ip$bannished_ip</td>\n<td align=center>$s_gender</td>\n<td align=center nowrap=\"nowrap\">".$s_birthday.($s_showage ? "" : "<font color=\"red\"> *</font>")."</td>\n</tr>";
        $bannished_user = "";
        $bannished_ip = "";
 	   
