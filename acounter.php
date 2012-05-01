@@ -111,7 +111,11 @@ class acounter {
         $ani_digits = $this->counter+1;
         $html_output = "<BDO dir=ltr><table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr align=\"center\">\n";
 		$INSTALL_DATE = strftime(L_SHORT_DATE,strtotime(C_INSTALL_DATE));
-		if(stristr(PHP_OS,'win')) $INSTALL_DATE = utf_conv(WIN_DEFAULT,$Charset,$INSTALL_DATE);
+		if(stristr(PHP_OS,'win'))
+		{
+			$INSTALL_DATE = utf_conv(WIN_DEFAULT,$Charset,$INSTALL_DATE);
+			if(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) $INSTALL_DATE = str_replace(" ","",$INSTALL_DATE);
+		}
 		$visitors = sprintf(L_VISITOR_REPORT,$INSTALL_DATE);
         for ($i=0; $i<strlen($this->counter); $i++) {
             if (substr("$this->counter",$i,1) == substr("$ani_digits",$i,1)) {

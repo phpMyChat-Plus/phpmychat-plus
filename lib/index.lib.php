@@ -2128,7 +2128,11 @@ if (C_SHOW_COUNTER)
     $ani_counter = new acounter();
 	echo ($ani_counter->create_output("chat_index"));
 	$INSTALL_DATE = strftime(L_SHORT_DATE,strtotime(C_INSTALL_DATE));
-	if(stristr(PHP_OS,'win')) $INSTALL_DATE = utf_conv(WIN_DEFAULT,$Charset,$INSTALL_DATE);
+	if(stristr(PHP_OS,'win'))
+	{
+		$INSTALL_DATE = utf_conv(WIN_DEFAULT,$Charset,$INSTALL_DATE);
+		if(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) $INSTALL_DATE = str_replace(" ","",$INSTALL_DATE);
+	}
 ?>
 <font face=Verdana color=yellow size=1><?php echo (sprintf(L_VISITOR_REPORT,$INSTALL_DATE)) ?>.</font>
 <?php

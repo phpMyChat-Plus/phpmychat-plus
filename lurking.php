@@ -210,8 +210,9 @@ if($DbLink1->num_rows() > 0)
 		}
 		if($colorname_tag != "") $colorname_endtag = "</FONT>";
 		$NewMsg = "<tr valign=top>";
-		$Time = $Time + C_TMZ_OFFSET*60*60;
-		$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\">".strftime(L_SHORT_DATETIME, $Time)."</td><td width=\"1%\" nowrap=\"nowrap\">".$Room."</td>";
+		$Time = strftime(L_SHORT_DATETIME, $Time + C_TMZ_OFFSET*60*60);
+		if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $Time = str_replace(" ","",$Time);
+		$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\">".$Time."</td><td width=\"1%\" nowrap=\"nowrap\">".$Room."</td>";
 		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS video" && $User != "SYS utube" && $User != "SYS math" && $User != "SYS topic" && $User != "SYS topic reset" && substr($User,0,8) != "SYS dice")
 		{
 			$User = $colorname_tag."[".special_char($User,$Latin1)."]".$colorname_endtag;

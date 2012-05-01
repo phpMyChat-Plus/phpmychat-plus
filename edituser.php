@@ -43,6 +43,7 @@ if($mydate != "")
 {
 	$BIRTHDAY = $mydate;
 	$format_birth_day = strftime(L_SHORT_DATE,strtotime($BIRTHDAY));
+	if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $format_birth_day = str_replace(" ","",$format_birth_day);
 }
 
 // Special cache instructions for IE5+
@@ -234,7 +235,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 			 . "".L_REG_30.": ".($FIRSTNAME ? $FIRSTNAME : L_NOT_SELECTED).$eol;
 		 }
 		 $longdtformat = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e").date('S')." of"), L_LONG_DATETIME) : L_LONG_DATETIME);
-
+		 if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $longdtformat = str_replace(" ","",$longdtformat);
 		 $emailMessage .= "".L_PRO_7.": ".($BIRTHDAY != "0000-00-00" && $BIRTHDAY != "" ? $format_birth_day : L_NOT_SELECTED).$eol
 		 . "".L_PRO_8.": ".$shwbday.$eol
 		 . "".L_PRO_9.": ".$shwage.$eol

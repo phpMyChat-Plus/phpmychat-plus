@@ -298,29 +298,59 @@ if (C_USE_AVATARS)
 </P>
 <TABLE BORDER="0" align="center">
 <?php
-if ($firstname != "")
+if(!(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")))
 {
-?>
-<TR>
-	<TD CLASS="whois" nowrap="nowrap"><?php echo(L_REG_30); ?>: </TD>
-	<TD CLASS="whois" nowrap="nowrap"><?php echo(special_char($firstname,$Latin1)); ?></TD>
-</TR>
-<?php
+	if ($firstname != "")
+	{
+	?>
+	<TR>
+		<TD CLASS="whois" nowrap="nowrap"><?php echo(L_REG_30); ?>: </TD>
+		<TD CLASS="whois" nowrap="nowrap"><?php echo(special_char($firstname,$Latin1)); ?></TD>
+	</TR>
+	<?php
+	}
+	if ($lastname != "")
+	{
+	?>
+	<TR>
+		<TD CLASS="whois" nowrap="nowrap"><?php echo(L_REG_31); ?>: </TD>
+		<TD CLASS="whois" nowrap="nowrap"><?php echo(special_char($lastname,$Latin1)); ?></TD>
+	</TR>
+	<?php
+	}
 }
-if ($lastname != "")
+else
 {
-?>
-<TR>
-	<TD CLASS="whois" nowrap="nowrap"><?php echo(L_REG_31); ?>: </TD>
-	<TD CLASS="whois" nowrap="nowrap"><?php echo(special_char($lastname,$Latin1)); ?></TD>
-</TR>
-<?php
+	if ($lastname != "")
+	{
+	?>
+	<TR>
+		<TD CLASS="whois" nowrap="nowrap"><?php echo(L_REG_31); ?>: </TD>
+		<TD CLASS="whois" nowrap="nowrap"><?php echo(special_char($lastname,$Latin1)); ?></TD>
+	</TR>
+	<?php
+	}
+	if ($firstname != "")
+	{
+	?>
+	<TR>
+		<TD CLASS="whois" nowrap="nowrap"><?php echo(L_REG_30); ?>: </TD>
+		<TD CLASS="whois" nowrap="nowrap"><?php echo(special_char($firstname,$Latin1)); ?></TD>
+	</TR>
+	<?php
+	}
 }
+
 if ($show_bday && $my_dobtime)
 {
 	$longdtformat = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e").date('S',$my_dobtime)." of"), L_LONG_DATE) : L_LONG_DATE);
 	$dob_format = $show_age ? $longdtformat : trim(str_replace(array("%Y.","%Y","(%A)","%A",",","-","年","년","den"),"",str_replace("  "," ",$longdtformat)));
-	$my_dob_time = stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,$Charset,strftime($dob_format, $my_dobtime)) : strftime($dob_format, $my_dobtime);
+	$my_dob_time = strftime($dob_format, $my_dobtime);
+	if(stristr(PHP_OS,'win'))
+	{
+		$my_dob_time = utf_conv(WIN_DEFAULT,$Charset,$my_dob_time);
+		if(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) $my_dob_time = str_replace(" ","",$my_dob_time);
+	}
 	?>
 	<TR>
 		<TD CLASS="whois" nowrap="nowrap"><?php echo(L_PRO_7); ?>: </TD>
@@ -475,17 +505,14 @@ if ($login_counter && C_LOGIN_COUNTER)
 	</TR>
 <?php
 }
-	if ($User == C_BOT_NAME)
+	$last_login = ($User == C_BOT_NAME ? $last_login : $reg_time);
+	$longdtformat1 = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e").date('S',$last_login)." of"), L_LONG_DATETIME) : L_LONG_DATETIME);
+	$last_visit = strftime($longdtformat1,$last_login);
+	if(stristr(PHP_OS,'win'))
 	{
-		$longdtformat1 = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e").date('S',$last_login)." of"), L_LONG_DATETIME) : L_LONG_DATETIME);
-		$last_visit = strftime($longdtformat1,$last_login);
+		$last_visit = utf_conv(WIN_DEFAULT,$Charset,$last_visit);
+		if(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) $last_visit = str_replace(" ","",$last_visit);
 	}
-	else
-	{
-		$longdtformat1 = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e").date('S',$reg_time)." of"), L_LONG_DATETIME) : L_LONG_DATETIME);
-		$last_visit = strftime($longdtformat1,$reg_time);
-	}
-	if(stristr(PHP_OS,'win')) $last_visit = utf_conv(WIN_DEFAULT,$Charset,$last_visit);
 ?>
 	<TR>
 		<TD CLASS="whois" nowrap="nowrap"><?php echo(A_SHEET1_11); ?>: </TD>

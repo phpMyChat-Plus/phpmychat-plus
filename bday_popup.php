@@ -35,6 +35,7 @@ require("config/config.lib.php");
 require("lib/release.lib.php");
 if (!isset($L) || $L == "") $L = C_LANGUAGE;
 require("localization/".$L."/localized.chat.php");
+require("localization/".$L."/localized.admin.php");
 require("lib/database/".C_DB_TYPE.".lib.php");
 
 header("Content-Type: text/html; charset=${Charset}");
@@ -170,8 +171,22 @@ else
 		<td style="vertical-align:middle; text-align:center;" class=tabtitle></td>
 		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo($arrowx."&nbsp;<a href=\"$pstr&mord=X&sortOrder=".($sortOrder == "DESC" ? "ASC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_17)."\" onMouseOver=\"sort_status('DESC'); return true;\"" : "DESC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_18)."\" onMouseOver=\"sort_status('ASC'); return true;\"")."\">".L_REG_45."</a>"); ?></td>
 		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo($arrowu."&nbsp;<a href=\"$pstr&mord=U&sortOrder=".($sortOrder == "DESC" ? "ASC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_17)."\" onMouseOver=\"sort_status('DESC'); return true;\"" : "DESC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_18)."\" onMouseOver=\"sort_status('ASC'); return true;\"")."\">".L_SET_2."</a>"); ?></td>
-		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo(L_REG_30); ?></td>
-		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo(L_REG_31); ?></td>
+		<?php
+		if(!(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")))
+		{
+		?>
+			<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo(L_REG_30); ?></td>
+			<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo(L_REG_31); ?></td>
+		<?php
+		}
+		else
+		{
+		?>
+			<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo(L_REG_31); ?></td>
+			<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo(L_REG_30); ?></td>
+		<?php
+		}
+		?>
 		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo($arrowb."&nbsp;<a href=\"$pstr&mord=B&sortOrder=".($sortOrder == "DESC" ? "ASC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_17)."\" onMouseOver=\"sort_status('DESC'); return true;\"" : "DESC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_18)."\" onMouseOver=\"sort_status('ASC'); return true;\"")."\">".L_PRO_7."</a>"); ?></td>
 		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo($arrowa."&nbsp;<a href=\"$pstr&mord=A&sortOrder=".($sortOrder == "DESC" ? "ASC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_17)."\" onMouseOver=\"sort_status('DESC'); return true;\"" : "DESC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_18)."\" onMouseOver=\"sort_status('ASC'); return true;\"")."\">".L_PRO_10."</a>"); ?></td>
 	</tr>
@@ -211,7 +226,12 @@ else
 				else $gender = L_REG_48;
 				if($dob_birthday && $dob_birthday != "" && $dob_birthday != "0000-00-00") $dobtime = strtotime($dob_birthday);
 				$dob_format = $dob_showage ? L_SHORT_DATE : trim(str_replace("%Y","****",L_SHORT_DATE));
-				$dob_time = stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,$Charset,strftime($dob_format, $dobtime)) : strftime($dob_format, $dobtime);
+				$dob_time = strftime($dob_format, $dobtime);
+				if(stristr(PHP_OS,'win'))
+				{
+					$dobtime = utf_conv(WIN_DEFAULT,$Charset,$dobtime);
+					if(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) $dob_time = str_replace(" ","",$dob_time);
+				}
 				$dob_name = $dob_firstname != "" ? $dob_firstname : $User;
 				?>
 				<?php
@@ -220,8 +240,16 @@ else
 				echo("<TD style=\"vertical-align:middle; text-align:center;\" class=\"notify\">".(C_USE_AVATARS ? "<img src=\"".$avatar."\" width=\"25\" height=\"25\" border=\"0\" alt=\"".L_AVATAR."\" title=\"".L_AVATAR."\">" : "")."</TD>");
 				echo("<TD style=\"vertical-align:middle; text-align:center;\"><img src=\"images/gender_".$gender1.".gif\" width=\"".$ava_width."\" height=\"".$ava_height."\" border=\"0\" alt=\"".$gender."\" title=\"".$gender."\"></TD>");
 				echo("<TD style=\"vertical-align:middle; text-align:left;\" class=\"notify\">".($dob_showemail ? "<A HREF=\"mailto:".htmlspecialchars($email)."\" title=\"".sprintf(L_CLICK,L_EMAIL_1)."\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_EMAIL_1).".'; return true\" target=\"_blank\">".$User."</A>" : $User)."</TD>");
-				echo("<TD style=\"vertical-align:middle; text-align:left;\" class=\"notify\">".$dob_firstname."</TD>");
-				echo("<TD style=\"vertical-align:middle; text-align:left;\" class=\"notify\">".$dob_lastname."</TD>");
+				if(!(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")))
+				{
+					echo("<TD style=\"vertical-align:middle; text-align:left;\" class=\"notify\">".$dob_firstname."</TD>");
+					echo("<TD style=\"vertical-align:middle; text-align:left;\" class=\"notify\">".$dob_lastname."</TD>");
+				}
+				else
+				{
+					echo("<TD style=\"vertical-align:middle; text-align:left;\" class=\"notify\">".$dob_lastname."</TD>");
+					echo("<TD style=\"vertical-align:middle; text-align:left;\" class=\"notify\">".$dob_firstname."</TD>");
+				}
 				echo("<TD style=\"vertical-align:middle; text-align:center;\" class=\"notify\">".$dob_time."</TD>");
 				echo("<TD style=\"vertical-align:middle; text-align:center;\" class=\"notify\">".($dob_showage ? $dob_age : "**")."</TD>");
 				echo("\n\t</TR>\n");

@@ -93,7 +93,16 @@ $DbLink->query("SELECT * FROM ".C_STS_TBL." WHERE stat_date>='$xstat_date' GROUP
 while(list($stat_date,$room,$username,$reguser,$last_in,$seconds_in,$longest_in,$last_away,$seconds_away,$longest_away,$times_away,$logins,$posts_sent,$pms_sent,$cmds_used,$profile_viewed,$profiles_checked,$imgs_posted,$urls_posted,$emails_posted,$swears_posted,$smilies_posted,$bans_rcvd,$bans_sent,$kicks_rcvd,$kicks_sent,$vids_posted,$maths_posted) = $DbLink->next_record())
 {
 //		$stats[] = $stat_date,$room,$username,$reguser,$last_in,$seconds_in,$longest_in,$last_away,$seconds_away,$longest_away,$times_away,$logins,$posts_sent,$pms_sent,$cmds_used,$profile_viewed,$profiles_checked,$imgs_posted,$urls_posted,$emails_posted,$swears_posted,$smilies_posted,$bans_rcvd,$bans_sent,$kicks_rcvd,$kicks_sent;
-	$display .= $tr_s.$d.$td.strftime(L_SHORT_DATE,strtotime($stat_date)).$td.$room.$td.$username.$td.$reguser.$td.$logins.$td.($last_in ? strftime(L_SHORT_DATETIME,$last_in) : "&nbsp;").$td.time_transform($seconds_in).$td.time_transform($longest_in).$td.$times_away.$td.($last_away ? strftime(L_SHORT_DATETIME,$last_away) : "&nbsp;").$td.time_transform($seconds_away).$td.time_transform($longest_away).$td.$posts_sent.$td.$pms_sent.$td.$cmds_used.$td.$profile_viewed.$td.$profiles_checked.$td.$imgs_posted.$td.$vids_posted.$td.$maths_posted.$td.$urls_posted.$td.$emails_posted.$td.$swears_posted.$td.$smilies_posted.$td.$bans_rcvd.$td.$bans_sent.$td.$kicks_rcvd.$td.$kicks_sent.$tr_e;
+	$stat_date = strftime(L_SHORT_DATE,strtotime($stat_date));
+	$last_in = $last_in ? strftime(L_SHORT_DATETIME,$last_in) : "&nbsp;";
+	$last_away = $last_away ? strftime(L_SHORT_DATETIME,$last_away) : "&nbsp;";
+	if(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))
+	{
+		$stat_date = str_replace(" ","",$stat_date);
+		if($last_in != "&nbsp;") $last_in = str_replace(" ","",$last_in);
+		if($last_away != "&nbsp;") $last_away = str_replace(" ","",$last_away);
+	}
+	$display .= $tr_s.$d.$td.$stat_date.$td.$room.$td.$username.$td.$reguser.$td.$logins.$td.$last_in.$td.time_transform($seconds_in).$td.time_transform($longest_in).$td.$times_away.$td.$last_away.$td.time_transform($seconds_away).$td.time_transform($longest_away).$td.$posts_sent.$td.$pms_sent.$td.$cmds_used.$td.$profile_viewed.$td.$profiles_checked.$td.$imgs_posted.$td.$vids_posted.$td.$maths_posted.$td.$urls_posted.$td.$emails_posted.$td.$swears_posted.$td.$smilies_posted.$td.$bans_rcvd.$td.$bans_sent.$td.$kicks_rcvd.$td.$kicks_sent.$tr_e;
 	$xlogins = $xlogins + $logins;
 	$xseconds_in = $xseconds_in + $seconds_in;
 	$xseconds_away = $xseconds_away + $seconds_away;
@@ -123,7 +132,12 @@ $DbLink->clean_results();
 <P CLASS=title><?php echo(A_STATS_1); ?></P>
 <TABLE ALIGN=CENTER BORDER=0 CELLPADDING=3 CLASS="table">
 <TR>
-	<TD ALIGN=CENTER CLASS=menuTitle><?php echo(A_STATS_3." - ".sprintf(A_STATS_2,strftime(L_SHORT_DATE,strtotime($start_date)))); ?>
+	<?php
+	$start_date = strftime(L_SHORT_DATE,strtotime($start_date));
+	if(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) $start_date = str_replace(" ","",$start_date);
+
+	?>
+	<TD ALIGN=CENTER CLASS=menuTitle><?php echo(A_STATS_3." - ".sprintf(A_STATS_2,$start_date)); ?>
 		<TABLE BORDER=1 CELLPADDING=5 CELLSPACING=1 WIDTH=100% CLASS="table">
 			<TR CLASS=tabtitle>
 				<TD VALIGN=CENTER ALIGN="CENTER" CLASS="small">#</TD>

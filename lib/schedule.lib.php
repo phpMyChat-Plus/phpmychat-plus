@@ -16,7 +16,11 @@ $sched_sat = ($sat_hrs = floor(($open_sat = ($cosat_end = strtotime(C_OPEN_SAT_E
 	$timegap = $timegap/100 + C_TMZ_OFFSET;
 	$longdtformat = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e").date('S',$CorrectedTime)." of"), L_LONG_DATETIME) : L_LONG_DATETIME);
 	$datenow = strftime($longdtformat,$CorrectedTime);
-	if(stristr(PHP_OS,'win')) $datenow = utf_conv(WIN_DEFAULT,$Charset,$datenow);
+	if(stristr(PHP_OS,'win'))
+	{
+		$datenow = utf_conv(WIN_DEFAULT,$Charset,$datenow);
+		if(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) $datenow = str_replace(" ","",$datenow);
+	}
 	$datenow .= " (".$timegap.")";
 	$timenow = date('H:i:s', $CorrectedTime);
 

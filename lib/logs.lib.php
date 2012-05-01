@@ -176,11 +176,11 @@ while($lastresult = mysql_fetch_array($lastquery))
  $lastm_time = stripslashes($lastresult["m_time"]);
 }
 $mess_time = $lastm_time + C_TMZ_OFFSET*60*60;
-$year = date("Y", $lastm_time);
-$month = date("M", $lastm_time);
-$prev_year = date("Y", $lastm_time - 355*24*60*60);
-$prev_month = date("M", $lastm_time - 28*24*60*60);
-$day = date("d", $lastm_time);
+$year = date("Y", $mess_time);
+$month = date("M", $mess_time);
+$prev_year = date("Y", $mess_time - 355*24*60*60);
+$prev_month = date("M", $mess_time - 28*24*60*60);
+$day = date("d", $mess_time);
 $message_nb = count($Messages);
 if ($message_nb > 0)
 {
@@ -223,7 +223,10 @@ $logpath = "./".C_LOG_DIR."/".$year."/".$month."/".$year.$month.$day.".php"  ;
         } while (!@flock($fp, LOCK_EX) and $retries <= 50);
 //		@flock($fp, LOCK_EX);    // Lock file in exclusive mode
 		@fwrite($fp, sprintf($eol.'<?php'.$eol));
+#		@fwrite($fp, sprintf('$longdtformat = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,"win") ? "%#d" : "%e").date("S",$CorrectedTime)." of"), L_LONG_DATETIME) : L_LONG_DATETIME);'.$eol));
 		@fwrite($fp, sprintf('$chatSaved = strftime(L_LONG_DATETIME,'.$mess_time.');'.$eol));
+		@fwrite($fp, sprintf("if(stristr(PHP_OS,'win'))".$eol));
+		@fwrite($fp, sprintf('{'.$eol));
 		@fwrite($fp, sprintf('if (!function_exists("utf_conv"))'.$eol));
 		@fwrite($fp, sprintf('{'.$eol));
 		@fwrite($fp, sprintf('function utf_conv($iso,$Charset,$what)'.$eol));
@@ -232,7 +235,9 @@ $logpath = "./".C_LOG_DIR."/".$year."/".$month."/".$year.$month.$day.".php"  ;
 		@fwrite($fp, sprintf('return $what;'.$eol));
 		@fwrite($fp, sprintf('};'.$eol));
 		@fwrite($fp, sprintf('};'.$eol));
-		@fwrite($fp, sprintf("if(stristr(PHP_OS,'win')) $chatSaved = iconv(WIN_DEFAULT,\"utf-8\",$chatSaved);".$eol));
+		@fwrite($fp, sprintf('$chatSaved = utf_conv(WIN_DEFAULT,"utf-8",$chatSaved);'.$eol));
+		@fwrite($fp, sprintf('if(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) $chatSaved = str_replace(" ","",$chatSaved);'.$eol));
+		@fwrite($fp, sprintf('};'.$eol));
 		@fwrite($fp, sprintf("?>".$eol));
 		@fwrite($fp, sprintf("<div align=\"left\"><span dir=\"LTR\" style=\"font-weight: 800; color:#00008B; font-family: helvetica, arial, geneva, sans-serif; font-size: 12pt\"><?php echo(sprintf(A_CHAT_LOGS_23,$chatSaved)); ?></span></div>$eol</center>$eol"));
 		@fwrite($fp, sprintf($eol."<!-- MESSAGES TABLE STARTS BELOW -->$eol$eol<table border=1 cellspacing=0 cellpading=1>$eol<tr style=\"font-weight:bold; color:blue; background-color=yellow\" align=\"center\">$eol<td nowrap=\"nowrap\"><?php echo (A_POST_TIME); ?></td>$eol<td nowrap=\"nowrap\"><?php echo (A_CHTEX_ROOM); ?></td>$eol<td nowrap=\"nowrap\"><?php echo (A_FROM_TO); ?></td>$eol<td><?php echo (A_CHTEX_MSG); ?></td>$eol</tr>"));
@@ -403,11 +408,11 @@ while($lastresultu = mysql_fetch_array($lastqueryu))
  $lastm_timeu = stripslashes($lastresultu["m_time"]);
 }
 $mess_timeu = $lastm_timeu + C_TMZ_OFFSET*60*60;
-$yearu = date("Y", $lastm_timeu);
-$monthu = date("M", $lastm_timeu);
-$prev_yearu = date("Y", $lastm_timeu - 355*24*60*60);
-$prev_monthu = date("M", $lastm_timeu - 28*24*60*60);
-$dayu = date("d", $lastm_timeu);
+$yearu = date("Y", $mess_timeu);
+$monthu = date("M", $mess_timeu);
+$prev_yearu = date("Y", $mess_timeu - 355*24*60*60);
+$prev_monthu = date("M", $mess_timeu - 28*24*60*60);
+$dayu = date("d", $mess_timeu);
 $message_nbu = count($Messagesu);
 if ($message_nbu > 0)
 {
@@ -450,18 +455,22 @@ $logpathu = "./logs/".$yearu."/".$monthu."/".$yearu.$monthu.$dayu.".php"  ;
         } while (!@flock($fpu, LOCK_EX) and $retriesu <= 50);
 
 //		@flock($fpu, LOCK_EX);    // Lock file in exclusive mode
-		@fwrite($fpu, sprintf($eol."<?php".$eol));
+		@fwrite($fpu, sprintf($eol.'<?php'.$eol));
 		@fwrite($fpu, sprintf('$chatSavedu = strftime(L_LONG_DATETIME,'.$mess_timeu.');'.$eol));
+		@fwrite($fpu, sprintf("if(stristr(PHP_OS,'win'))".$eol));
+		@fwrite($fpu, sprintf('{'.$eol));
 		@fwrite($fpu, sprintf('if (!function_exists("utf_conv"))'.$eol));
-		@fwrite($fpu, sprintf("{".$eol));
+		@fwrite($fpu, sprintf('{'.$eol));
 		@fwrite($fpu, sprintf('function utf_conv($iso,$Charset,$what)'.$eol));
-		@fwrite($fpu, sprintf("{".$eol));
+		@fwrite($fpu, sprintf('{'.$eol));
 		@fwrite($fpu, sprintf('if(function_exists(\'iconv\')) $what = iconv($iso, $Charset, $what);'.$eol));
 		@fwrite($fpu, sprintf('return $what;'.$eol));
-		@fwrite($fpu, sprintf("};".$eol));
-		@fwrite($fpu, sprintf("};".$eol));
-		@fwrite($fpu, sprintf("if(stristr(PHP_OS,'win')) $chatSavedu = iconv(WIN_DEFAULT,\"utf-8\",$chatSavedu);".$eol));
-		@fwrite($fpu, sprintf("?>".$eol));
+		@fwrite($fpu, sprintf('};'.$eol));
+		@fwrite($fpu, sprintf('};'.$eol));
+		@fwrite($fpu, sprintf('$chatSavedu = utf_conv(WIN_DEFAULT,"utf-8",$chatSavedu);'.$eol));
+		@fwrite($fpu, sprintf('if(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) $chatSavedu = str_replace(" ","",$chatSavedu);'.$eol));
+		@fwrite($fpu, sprintf('};'.$eol));
+		@fwrite($fpu, sprintf('?>'.$eol));
 		@fwrite($fpu, sprintf("<div align=\"left\"><span dir=\"LTR\" style=\"font-weight: 800; color:#00008B; font-family: helvetica, arial, geneva, sans-serif; font-size: 12pt\"><?php echo(sprintf(A_CHAT_LOGS_23,$chatSavedu)); ?></span></div>$eol</center>$eol"));
 		@fwrite($fpu, sprintf($eol."<!-- MESSAGES TABLE STARTS BELOW -->$eol$eol<table border=1 cellspacing=0 cellpading=1>$eol<tr style=\"font-weight:bold; color:blue; background-color=yellow\" align=\"center\">$eol<td nowrap=\"nowrap\"><?php echo (A_POST_TIME); ?></td>$eol<td nowrap=\"nowrap\"><?php echo (A_CHTEX_ROOM); ?></td>$eol<td nowrap=\"nowrap\"><?php echo (A_FROM); ?></td>$eol<td><?php echo (A_CHTEX_MSG); ?></td>$eol</tr>"));
 	}
