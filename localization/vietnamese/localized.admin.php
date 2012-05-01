@@ -165,6 +165,9 @@ define("A_SEARCH_22", "Sự Tìm kiếm gần ");
 define("A_SEARCH_23", "Mời Cung cấp một Thuật ngữ Tìm kiếm và sự Thử lần nữa!");
 define("A_SEARCH_24", "Ở đó không có là dữ liệu để phù hợp với mục đích các bạn. Xin sàng lọc sự tìm kiếm các bạn .");
 define("A_SEARCH_25", "Làm Dịu xuống người sử dụng này");
+define("A_SEARCH_26", "Người sử dụng đã lựa chọn để ẩn thông tin này trong hồ sơ công cộng, riêng tư của mình. Không tiết lộ!");
+define("A_SEARCH_27", "Tháng hiện tại");
+define("A_SEARCH_28", "Tất cả các ngày sinh nhật");
 
 // Connected users Page
 define("A_LURKING_1", "Được nối cho những người sử dụng và Bí mật") ;

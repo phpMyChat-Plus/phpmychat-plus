@@ -167,6 +167,9 @@ define("A_SEARCH_22", "Keresés helye");
 define("A_SEARCH_23", "Kérlek, adj meg egy kifejezést és próbáld újra!");
 define("A_SEARCH_24", "Nincs adat, ami egyezik a megadott kritériumokkal. Kérlek, finomítsd a keresést.");
 define("A_SEARCH_25", "Moderálni ezt a felhasználót");
+define("A_SEARCH_26", "Felhasználó úgy döntött, hogy rejteni ezt a info-ben nyilvános profilok, az ő magánélet. Ne nem hozzák nyilvánosságra it!");
+define("A_SEARCH_27", "Aktuális hónap");
+define("A_SEARCH_28", "Minden születésnap");
 
 // Connected users Page
 define("A_LURKING_1", "Bejelentkezett felhasználók és a Leskelődők") ;

@@ -165,6 +165,9 @@ define("A_SEARCH_22", "Pencarian dari");
 define("A_SEARCH_23", "Mohong sertakan pencarian masa waktu dan coba lagi");
 define("A_SEARCH_24", "Tidak ada datang yang cocok dengan criteria Anda. Mohon diperbaikin penulisannya.");
 define("A_SEARCH_25", "Atur pengguna ini");
+define("A_SEARCH_26", "Pengguna memilih untuk menyembunyikan info ini dalam profil publik, untuk privasinya. Jangan mengungkapkan itu!");
+define("A_SEARCH_27", "Sekarang bulan");
+define("A_SEARCH_28", "Semua umur");
 
 // Connected users Page
 define("A_LURKING_1", "Pengguna yang terhubung dan yang bersembunyi") ;

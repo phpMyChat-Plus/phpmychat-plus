@@ -167,6 +167,9 @@ define("A_SEARCH_22", "Sök i");
 define("A_SEARCH_23", "Vänligen skriv ett sökord och försök igen!");
 define("A_SEARCH_24", "Din sökning gav ingen träff. Vänligen ändra dina sökkriterier.");
 define("A_SEARCH_25", "Ändra denna användaren");
+define("A_SEARCH_26", "Användaren har valt att dölja denna information i offentliga profiler, för hans privatliv. Avslöjar inte det!");
+define("A_SEARCH_27", "Innevarande månad");
+define("A_SEARCH_28", "Alla födelsedagar");
 
 // Connected users Page
 define("A_LURKING_1", "Inloggade användare och Lurkare");

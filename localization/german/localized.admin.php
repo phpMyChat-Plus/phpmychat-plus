@@ -168,6 +168,9 @@ define("A_SEARCH_22", "Suche nach");
 define("A_SEARCH_23", "Bitte geben Sie einen Suchstring ein und versuchen Sie es erneut!");
 define("A_SEARCH_24", "Es gibt keine Daten, die Ihren Suchkriterien entsprechen. Verfeinern Sie bitte Ihre Suche.");
 define("A_SEARCH_25", "Moderiere Benutzer");
+define("A_SEARCH_26", "Benutzer hat sich entschieden, diese Informationen in öffentlichen Profilen verbergen, für seine Privatsphäre. Geben die Daten nicht!");
+define("A_SEARCH_27", "Aktuellen Monat");
+define("A_SEARCH_28", "Alle Geburtstage");
 
 // Connected users Page
 define("A_LURKING_1", "Verbundene Mitglieder und Beobachter") ;

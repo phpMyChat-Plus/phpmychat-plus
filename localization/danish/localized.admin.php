@@ -166,6 +166,9 @@ define("A_SEARCH_22", "Søg på");
 define("A_SEARCH_23", "Indtast et Søgeord og Prøv Igen");
 define("A_SEARCH_24", "Ingen data matcher dine søgekriterier. Søg venligst igen.");
 define("A_SEARCH_25", "Moderér denne bruger");
+define("A_SEARCH_26", "Brugeren har valgt at skjule denne information i offentlige profiler, for hans privatliv. Må ikke afsløre det!");
+define("A_SEARCH_27", "Vis nuværende måned");
+define("A_SEARCH_28", "Vis alle fødselsdage");
 
 // Connected users Page
 define("A_LURKING_1", "Tilsluttede brugere og lurepassere");

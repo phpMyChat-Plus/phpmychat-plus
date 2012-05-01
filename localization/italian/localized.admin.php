@@ -170,6 +170,9 @@ define("A_SEARCH_24", "Il tuo criterio di ricerca non ha dato risultati. Ridefin
 define("A_SEARCH_25", "Modera questo utente");
 define("A_SEARCH_24", "La tua ricerca non ha dato risultati. Ridefinisci la tua ricerca, prego.");
 define("A_SEARCH_25", "Modera questo utente");
+define("A_SEARCH_26", "L’utente ha scelto di nascondere queste informazioni nei profili pubblici, per la sua privacy. Non divulgare!");
+define("A_SEARCH_27", "Mese corrente");
+define("A_SEARCH_28", "Tutti i compleanni");
 
 // Connected users Page
 define("A_LURKING_1", "Utenti e Osservatori connessi") ;

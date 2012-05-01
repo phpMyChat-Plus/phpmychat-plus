@@ -167,6 +167,9 @@ define("A_SEARCH_22", "Traži sa");
 define("A_SEARCH_23", "Upišite reč koju tražite i pokušajte ponovo");
 define("A_SEARCH_24", "Nema podataka koji se podudaraju sa vašim krietrijima. Molimo vas da precizirate pretragu.");
 define("A_SEARCH_25", "Moderirajte ovog korisnika");
+define("A_SEARCH_26", "User has chosen to hide this info in public profiles, for his privacy. Do not disclose it!");
+define("A_SEARCH_27", "Show current month");
+define("A_SEARCH_28", "Show all birthdays");
 
 // Connected users Page
 define("A_LURKING_1", "Konektovani korisnici i Posmatrači") ;

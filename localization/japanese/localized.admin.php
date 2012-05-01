@@ -168,8 +168,8 @@ define("A_SEARCH_23", "検索語を指定してもう一度お試しください
 define("A_SEARCH_24", "あなたの基準にマッチするデータはありません。検索内容をもう一度吟味してください。");
 define("A_SEARCH_25", "このユーザをモデレートする");
 define("A_SEARCH_26", "ユーザーは自分のプライバシー保護のため、パブリックプロファイルでこの情報を隠すことを選択しました。それを開示してはいけない！");
-define("A_SEARCH_27", "現在の月を表示");
-define("A_SEARCH_28", "すべての誕生日を表示する");
+define("A_SEARCH_27", "今月");
+define("A_SEARCH_28", "すべての誕生日");
 
 // Connected users Page
 define("A_LURKING_1", "接続ユーザとROM") ;

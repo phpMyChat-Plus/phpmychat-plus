@@ -166,6 +166,9 @@ define("A_SEARCH_22", "Buscar por");
 define("A_SEARCH_23", "Por favor escribí un texto para buscar e intentá otra vez");
 define("A_SEARCH_24", "No hay resultados para la búsqueda. Por favor intenta otra vez modificando el criterio.");
 define("A_SEARCH_25", "Moderar a este usuario");
+define("A_SEARCH_26", "El usuario ha decidido ocultar esta información en los perfiles públicos, por su privacidad. No revelamos!");
+define("A_SEARCH_27", "Mostrar mes en curso");
+define("A_SEARCH_28", "Mostrar todos los cumpleaños");
 
 // Connected users Page
 define("A_LURKING_1", "Usuarios conectados y solo mirando") ;

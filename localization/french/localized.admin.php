@@ -167,6 +167,9 @@ define("A_SEARCH_22", "Rechercher par");
 define("A_SEARCH_23", "Veuillez fournir une expression de recherche et réessayez");
 define("A_SEARCH_24", "Aucune donnée ne correspond à vos critères. Veuillez reformuler votre recherche.");
 define("A_SEARCH_25", "Modérer cet utilisateur");
+define("A_SEARCH_26", "L’utilisateur a choisi de se cacher cette information dans les profils publics, de sa vie privée. Ne pas divulguer!");
+define("A_SEARCH_27", "Afficher mois en cours");
+define("A_SEARCH_28", "Afficher tous les anniversaires");
 
 // Connected users Page
 define("A_LURKING_1", "Utilisateurs connectés et \"rôdeurs\" (Lurking)") ;
