@@ -166,6 +166,9 @@ define("A_SEARCH_22", "Search by");
 define("A_SEARCH_23", "Please Provide a Search Term and Try Again!");
 define("A_SEARCH_24", "There is no data to match your criteria. Please refine your search.");
 define("A_SEARCH_25", "Moderate this user");
+define("A_SEARCH_26", "User has chosen to hide this info in public profiles, for his privacy. Do not disclose it!");
+define("A_SEARCH_27", "Show current month");
+define("A_SEARCH_28", "Show all birthdays");
 
 // Connected users Page
 define("A_LURKING_1", "Connected users and Lurking") ;

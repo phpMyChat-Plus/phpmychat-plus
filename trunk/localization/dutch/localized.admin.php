@@ -165,6 +165,9 @@ define("A_SEARCH_22", "Zoeken op");
 define("A_SEARCH_23", "Vul een andere zoekterm in en probeer opnieuw!");
 define("A_SEARCH_24", "Geen data die voldoet aan jou criteria. Verfijn je zoekopdracht a.u.b.");
 define("A_SEARCH_25", "Modereer deze gebruiker");
+define("A_SEARCH_26", "Gebruiker heeft ervoor gekozen om deze informatie te verbergen in openbare profielen, voor zijn privacy. Niet openbaar maken!");
+define("A_SEARCH_27", "Toon huidige maand");
+define("A_SEARCH_28", "Toon alle verjaardagen");
 
 // Connected users Page
 define("A_LURKING_1", "Ingelogde gebruikers en gluurders") ;

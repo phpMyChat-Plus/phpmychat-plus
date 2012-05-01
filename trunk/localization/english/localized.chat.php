@@ -652,6 +652,8 @@ define("L_LANG_AR", "Argentinean Spanish");
 define("L_LANG_BG", "Bulgarian - Cyrillic");
 define("L_LANG_BR", "Brazilian Portuguese");
 define("L_LANG_CA", "Catalan");
+define("L_LANG_CNS", "Chinese (Simplified)");
+define("L_LANG_CNT", "Chinese (Traditional)");
 define("L_LANG_CZ", "Czech");
 define("L_LANG_DA", "Danish");
 define("L_LANG_DE", "German");

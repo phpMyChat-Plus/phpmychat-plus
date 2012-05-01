@@ -165,6 +165,9 @@ define("A_SEARCH_22", "Buna göre ara");
 define("A_SEARCH_23", "Lütfen aranacak bir kelime yazıp tekrar deneyiniz");
 define("A_SEARCH_24", "Kriterlerinize uyan veri bulunmuyor. Lütfen tekrar arayın.");
 define("A_SEARCH_25", "Bu kullanıcıyı denetle");
+define("A_SEARCH_26", "Kullanıcı, gizlilik, kamu profilleri bu bilgiyi gizlemek için seçti. Ifşa etmeyin!");
+define("A_SEARCH_27", "Geçerli ay göster");
+define("A_SEARCH_28", "Tüm doğum günü");
 
 // Connected users Page
 define("A_LURKING_1", "Bağlı kullanıcılar ve gözlem yapanlar") ;

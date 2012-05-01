@@ -634,6 +634,8 @@ define("L_LANG_AR", "spaniolă argentiniană");
 define("L_LANG_BG", "bulgară - chirilică");
 define("L_LANG_BR", "portugheză braziliană");
 define("L_LANG_CA", "catalană");
+define("L_LANG_CNS", "chineză (simplificată)");
+define("L_LANG_CNT", "chineză (traditională)");
 define("L_LANG_CZ", "cehă");
 define("L_LANG_DA", "daneză");
 define("L_LANG_DE", "germană");
