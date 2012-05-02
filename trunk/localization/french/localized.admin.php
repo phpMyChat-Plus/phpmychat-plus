@@ -1,5 +1,5 @@
 <?php
-// File : french/localized.admin.php - plus version (13.06.2011 - rev.16)
+// File : french/localized.admin.php - plus version (29.04.2012 - rev.17)
 // Original file by Loďc Chapeaux <lolo@phpheaven.net> & Dean Collins <joelford@pacbell.net>
 // Translation for Plus version by Pierre Liget <sourceforge@pliget.freesurf.fr> 10.12.2007
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -167,8 +167,8 @@ define("A_SEARCH_22", "Rechercher par");
 define("A_SEARCH_23", "Veuillez fournir une expression de recherche et réessayez");
 define("A_SEARCH_24", "Aucune donnée ne correspond à vos critères. Veuillez reformuler votre recherche.");
 define("A_SEARCH_25", "Modérer cet utilisateur");
-define("A_SEARCH_26", "L’utilisateur a choisi de se cacher cette information dans les profils publics, de sa vie privée. Ne pas divulguer!");
-define("A_SEARCH_27", "Afficher mois en cours");
+define("A_SEARCH_26", "L’utilisateur a choisi de ne pas render public ses informations personnelles. Merci de respecter sa vie privée!");
+define("A_SEARCH_27", "Afficher le mois courant");
 define("A_SEARCH_28", "Afficher tous les anniversaires");
 
 // Connected users Page

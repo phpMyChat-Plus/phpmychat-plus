@@ -159,7 +159,9 @@ if($DbLink->num_rows() > 0)
 			$colornamedest_endtag = "";
 		}
 		$NewMsg = "<tr align=texttop valign=top>";
-		$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\">".date("d-M, H:i:s", $Time + C_TMZ_OFFSET*60*60)."</td><td width=\"1%\" nowrap=\"nowrap\">".$Room."</td>";
+		$Time = strftime(L_SHORT_DATETIME, $Time + C_TMZ_OFFSET*60*60);
+		if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $Time = str_replace(" ","",$Time);
+		$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\">".$Time."</td><td width=\"1%\" nowrap=\"nowrap\">".$Room."</td>";
 		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS video" && $User != "SYS utube" && $User != "SYS math" && $User != "SYS topic" && $User != "SYS topic reset" && substr($User,0,8) != "SYS dice")
 		{
 			$User = $colorname_tag."[".special_char($User,$Latin1)."]".$colorname_endtag;
@@ -224,7 +226,7 @@ $CleanUsrTbl = 1;
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 <HEAD>
-<META HTTP-EQUIV="Refresh" CONTENT="10" CHARSET=<?php echo($Charset); ?>">
+<META HTTP-EQUIV="Refresh" CONTENT="10" CHARSET="<?php echo($Charset); ?>">
 <TITLE><?php echo("Last ".$N." messages ".($Room != "" ? "in ".stripslashes($R)." room" : "")." - ".date('r')." - ".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo("${ChatPath}".$skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <?php

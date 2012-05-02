@@ -58,9 +58,9 @@ $query = mysql_query($sql) or die("Cannot query the database.<br />" . mysql_err
 echo "<a href=\"$pstr&mdel=\"><b><font color=white>".A_REFRESH_MSG."</font></b></a></center><br />";
 echo "<table align=\"center\" border=\"0\" cellpadding=\"1\" cellspacing=\"1\" width=\"780\" CLASS=table>";
 echo "<tr CLASS=\"tabtitle\">
-<td VALIGN=CENTER ALIGN=CENTER height=20 CLASS=tabtitle align=center><a href=\"$pstr&mord=T\"><b>".A_MSG_DEL."</b></a></td>
+<td VALIGN=CENTER ALIGN=CENTER height=20 CLASS=tabtitle align=center><b>".A_MSG_DEL."</b></a></td>
 <td VALIGN=CENTER ALIGN=CENTER height=20 CLASS=tabtitle align=center><a href=\"$pstr&mord=T\"><b>".A_POST_TIME."</b></a></td>
-<td VALIGN=CENTER ALIGN=CENTER height=20 CLASS=tabtitle align=center><a href=\"$pstr&mord=F\"><b>".A_FROM_TO."</b></a></td>
+<td VALIGN=CENTER ALIGN=CENTER height=20 CLASS=tabtitle align=center nowrap=nowrap><a href=\"$pstr&mord=F\"><b>".A_FROM_TO."</b></a></td>
 <td VALIGN=CENTER ALIGN=CENTER height=20 CLASS=tabtitle align=center><a href=\"$pstr&mord=R\"><b>".A_CHTEX_ROOM."</b></a></td>
 <td VALIGN=CENTER ALIGN=CENTER height=20 CLASS=tabtitle align=center><a href=\"$pstr&mord=M\"><b>".A_CHTEX_MSG."</b></a></td>
 </tr>";
@@ -81,7 +81,9 @@ if (C_POPUP_LINKS || stripos($message,'target="_blank"></a>') !== false)
 else $message = str_replace('target="_blank">','title="'.sprintf(L_CLICK,L_LINKS_3).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_LINKS_3).'.\'; return true" target="_blank">',$message);
 $message = str_replace('alt="Send email">','title="'.sprintf(L_CLICK,L_EMAIL_1).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_EMAIL_1).'.\'; return true">',$message);
 $m_time = stripslashes($result["m_time"]);
-$time_posted = date("d-m-y H:i:s", $m_time);
+$time_posted = strftime(L_SHORT_DATETIME, $m_time);
+if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $time_posted = str_replace(" ","",$time_posted);
+
 echo "<tr class=\"msg2\">
 <td width=1% align=center><a href=\"$pstr&mord=$mord&mdel=".$m_time."\"><font size=-2 color=red><b>x</b></font></a></td>
 <td width=1% align=center>$time_posted</td>

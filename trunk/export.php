@@ -92,7 +92,9 @@ if($DbLink->num_rows() > 0)
 		$Message = str_replace('alt="Send email">','title="'.sprintf(L_CLICK,L_EMAIL_1).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_EMAIL_1).'.\'; return true">',$Message);
 
 		$NewMsg = "<P CLASS=\"msg\">";
-		if ($ST == 1) $NewMsg .= "<SPAN CLASS=\"time\">".date("d-M, H:i:s", $Time + C_TMZ_OFFSET*60*60)."</SPAN> ";
+		$STime = strftime(L_SHORT_DATETIME, $Time + C_TMZ_OFFSET*60*60);
+		if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $STime = str_replace(" ","",$STime);
+		if ($ST == 1) $NewMsg .= "<SPAN CLASS=\"time\">".$STime."</SPAN> ";
 		if ($Dest != " *")
 		{
 			$User = special_char($User,$Latin1);
@@ -123,8 +125,8 @@ $DbLink->close();
 if (isset($MessagesString) && $MessagesString != "")
 {
 	// Save messages to a file
-	header("Content-Type: application/octetstream");
-	header("Content-Disposition: attachement; filename=\"chat_save_".date("mdY").".htm\"");
+	header("Content-Type: application/octet-stream");
+	header("Content-Disposition: attachment; filename=\"chat_save_".date("mdY").".htm\"");
 	?>
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 	<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">

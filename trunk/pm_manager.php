@@ -166,9 +166,11 @@ if($DbLink->num_rows() > 0)
 		}
 		$User = $colorname_tag.special_char($User,$Latin1).$colorname_endtag;
 		$NewMsg = "<tr align=texttop valign=top>";
+		$PTime = strftime(L_SHORT_DATETIME, $Time + C_TMZ_OFFSET*60*60);
+		if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $PTime = str_replace(" ","",$PTime);
 		if (C_ALLOW_PM_DEL && $TotalPMs) $NewMsg .= "\n<INPUT TYPE=\"hidden\" NAME=\"msg_$Time\" VALUE=\"1\">\n<TD VALIGN=CENTER ALIGN=CENTER>\n<INPUT type=checkbox name=\"selected_$Time\" value=\"1\">\n</td>\n";
 	    $NewMsg .= "<td width=1% nowrap=\"nowrap\">".($new ? "<b><span class=error>".$read_stat."</span></b>" : "<span style=\"color:green\">".$read_stat."</span>")."</td>";
-		$NewMsg .= "<td width=1% nowrap=\"nowrap\">".date("d-M, H:i:s", $Time + C_TMZ_OFFSET*60*60)."</td>";
+		$NewMsg .= "<td width=1% nowrap=\"nowrap\">".$PTime."</td>";
 		$NewMsg .= "<td width=1% nowrap=\"nowrap\"><B>${User}</B></td>";
 		$NewMsg .= "<td width=1% nowrap=\"nowrap\">".$RF."</td>";
 		$NewMsg .= "<td>$Message</td>";

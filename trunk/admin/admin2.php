@@ -181,8 +181,10 @@ if ($count_BanUsers != 0)
 						}
 						else
 						{
+							$ban_until = strftime(L_SHORT_DATETIME, $until + C_TMZ_OFFSET*60*60);
+							if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $ban_until = str_replace(" ","",$ban_until);
 							?>
-							<OPTION value="date" SELECTED><?php echo(date("M j, Y - h:i a",$until + C_TMZ_OFFSET*60*60)); ?></OPTION>
+							<OPTION value="date" SELECTED><?php echo($ban_until); ?></OPTION>
 							<OPTION value="forever"><?php echo(A_SHEET2_5); ?></OPTION>
 							<?php
 						};

@@ -310,7 +310,11 @@ if ($count_RegUsers != 0)
 					<FONT size=-2><?php echo($login_counter);?></FONT>
 				</TD>
 				<TD VALIGN=CENTER ALIGN="<?php echo($CellAlign); ?>">
-					<FONT size=-2><?php echo(date("M j, Y - h:i a",$lastTime + C_TMZ_OFFSET*60*60));?></FONT>
+					<?php
+					$lastTime = strftime(L_SHORT_DATETIME, $lastTime + C_TMZ_OFFSET*60*60);
+					if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $lastTime = str_replace(" ","",$lastTime);
+					?>
+					<FONT size=-2><?php echo($lastTime);?></FONT>
 				</TD>
 				<TD VALIGN=CENTER ALIGN=CENTER>
 					<FONT size=-2><?php echo($IP."".$bannished_ip); ?></FONT>
