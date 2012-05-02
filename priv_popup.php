@@ -437,7 +437,9 @@ list($T, $User, $Room, $Dest, $M, $Read, $RF) = $DbLink->next_record();
 			$colorname_tag = "";
 			$colorname_endtag = "";
 		}
-$Time = date("d-M, H:i:s", $T + C_TMZ_OFFSET*60*60);
+#$Time = date("d-M, H:i:s", $T + C_TMZ_OFFSET*60*60);
+$Time = strftime(L_SHORT_DATETIME, $T + C_TMZ_OFFSET*60*60);
+if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $Time = str_replace(" ","",$Time);
 if ($Read == "New") $ReplyTo = "/to ".$User." ";
 elseif ($Read == "Neww") $ReplyTo = "/wisp ".$User." ";
 $M = stripslashes($M);
@@ -456,13 +458,13 @@ $M = str_replace('alt="Send email">','title="'.sprintf(L_CLICK,L_EMAIL_1).'" onM
 	<TR><TD width="100%" ALIGN="CENTER" CLASS="tabtitle"><?php echo(L_PRIV_MSG); ?></TD></TR>
 </TABLE>
 <TABLE BORDER=1 CELLPADDING=1 WIDTH=400 CLASS="table">
-	<TR><TD><B><U><?php echo(L_PRIV_MSG1); ?></U></B></TD>
+	<TR><TD nowrap="nowrap"><B><U><?php echo(L_PRIV_MSG1); ?></U></B></TD>
 		<TD width="100%"><B><I><?php echo($colorname_tag.$User.$colorname_endtag); ?></I></B></TD></TR>
-	<TR><TD><B><U><?php echo(L_PRIV_MSG2); ?></U></B></TD>
+	<TR><TD nowrap="nowrap"><B><U><?php echo(L_PRIV_MSG2); ?></U></B></TD>
 		<TD width="100%"><I><?php echo(($RF != "" && $RF == $Room) ? $RF : $Room); ?></I></TD></TR>
-	<TR><TD><B><U><?php echo(L_PRIV_MSG4) ?></U></B></TD>
+	<TR><TD nowrap="nowrap"><B><U><?php echo(L_PRIV_MSG4) ?></U></B></TD>
 		<TD width="100%"><I><?php echo($M); ?></I></TD></TR>
-	<TR><TD><B><U><?php echo(L_PRIV_MSG5); ?></U></B></TD>
+	<TR><TD nowrap="nowrap"><B><U><?php echo(L_PRIV_MSG5); ?></U></B></TD>
 		<TD width="100%"><I><?php echo($Time); ?></I></TD></TR>
 </TABLE>
 <br />
@@ -525,7 +527,9 @@ while(($i < 11) && (list($T, $User, $Room, $Dest, $M, $Read, $RF) = $DbLink->nex
 			$colorname_tag = "";
 			$colorname_endtag = "";
 		}
-$Time = date("d-M, H:i:s", $T + C_TMZ_OFFSET*60*60);
+#$Time = date("d-M, H:i:s", $T + C_TMZ_OFFSET*60*60);
+$Time = strftime(L_SHORT_DATETIME, $T + C_TMZ_OFFSET*60*60);
+if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $Time = str_replace(" ","",$Time);
 if ($Read == "New") $ReplyTo = "/to ".$User." ";
 elseif ($Read == "Neww") $ReplyTo = "/wisp ".$User." ";
 $M = stripslashes($M);
