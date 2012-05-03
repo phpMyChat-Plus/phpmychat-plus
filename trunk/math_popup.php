@@ -14,7 +14,7 @@ if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) exit();
 if (preg_match("/SELECT|UNION|INSERT|UPDATE/i",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
 require("./${ChatPath}config/config.lib.php");
-if (C_ALLOW_MATH)
+if(C_ALLOW_MATH && C_SRC_MATH != "")
 {
 require("./${ChatPath}localization/languages.lib.php");
 require("./${ChatPath}localization/".$L."/localized.chat.php");
@@ -154,7 +154,8 @@ $CleanUsrTbl = 1;
 <TITLE><?php echo(L_LINKS_20." - ".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo("${ChatPath}".$skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
 <!-- <script type="text/javascript" src="https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!-- <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script type="text/javascript" src="<?php echo(C_SRC_MATH); ?>"></script>
 </HEAD>
 	<BODY>
 <CENTER>

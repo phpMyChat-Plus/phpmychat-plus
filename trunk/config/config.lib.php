@@ -227,7 +227,8 @@ $OPEN_SAT_BEG					= $row[195];
 $OPEN_SAT_END					= $row[196];
 $ALLOW_TEXT_COLORS				= $row[197];
 $TAGS_POWERS					= $row[198];
-$ALLOW_MATH					= $row[199];
+$ALLOW_MATH						= $row[199];
+$SRC_MATH						= $row[200];
 
 $query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.com'";
 $result_bot = mysql_query($query_bot);
@@ -708,4 +709,5 @@ define("C_TAGS_POWERS", $TAGS_POWERS);
 
 // MathJax LaTeX formulas rendering in chat
 define("C_ALLOW_MATH", $ALLOW_MATH);
+define("C_SRC_MATH", $SRC_MATH);
 ?>

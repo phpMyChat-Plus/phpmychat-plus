@@ -72,12 +72,13 @@ ALTER TABLE ".$t_config."
 			ADD OPEN_SAT_END time NOT NULL default '00:00:00',
 			ADD ALLOW_TEXT_COLORS enum('0','1') NOT NULL default '1',
 			ADD TAGS_POWERS set('b','i','u') default NULL,
-			ADD ALLOW_MATH enum('0','1') NOT NULL default '0';
+			ADD ALLOW_MATH enum('0','1') NOT NULL default '0',
+			ADD SRC_MATH varchar(255) NOT NULL default 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
 ", $conn);
 mysql_query("
 UPDATE ".$t_config." SET
-			CMDS = '/away /buzz /demote /dice /dice2 /dice3 /high /img /mr<br />/room /size /sort /topic /utube /video /wisp',
-			MODS = 'Advanced Admin, (GR)Avatars, Smilies Popup, Color Drop Box, Private Popup,<br />Quick Menu, Logs Archive, Lurking, Color names, WorldTime, UTF-8, Birthdays',
+			CMDS = '/away /buzz /demote /dice /dice2 /dice3 /high /img /math /mr<br />/room /size /sort /topic /utube /video /wisp',
+			MODS = 'Advanced Admin, (GR)Avatars, Smilies Popup, Color Drop Box, Private Popup,<br />Quick Menu, Logs Archive, Lurking, Color names, WorldTime, UTF-8, Birthdays, MathJax',
 			ROOM_SKIN1 = '1',
 			ROOM_SKIN2 = '2',
 			ROOM_SKIN3 = '3',
