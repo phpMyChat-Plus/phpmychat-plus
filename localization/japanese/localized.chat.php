@@ -626,8 +626,8 @@ else
 {
 define("L_SHORT_DATE", "%Y年%-m月%-d日"); //Change this to your local desired format (keep the short form)
 define("L_SHORT_DATETIME", "%Y年%-m月%-d日 %H:%M:%S"); //Change this to your local desired format (keep the short form)
-define("L_LONG_DATE", "%Y年%-m月%-d日(%A)"); //Change this to your local desired format (keep the short form)
-define("L_LONG_DATETIME", "%Y年%-m月%-d日(%A) %H:%M:%S"); //Change this to your local desired format (keep the long form)
+define("L_LONG_DATE", "%Y年%-m月%- (%A)"); //Change this to your local desired format (keep the short form)
+define("L_LONG_DATETIME", "%Y年%-m月%-d日 (%A) %H:%M:%S"); //Change this to your local desired format (keep the long form)
 }
 
 if(!defined("L_DAY")) define("L_DAY", "日");

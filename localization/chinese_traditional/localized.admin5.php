@@ -414,7 +414,7 @@ if (UPD_CHECK)
 					<li><a href="http://www.ciprianmp.com/latest/" target=_blank Title="Go to <?php echo(APP_NAME); ?> Try me server" onMouseOver="window.status='Go to <?php echo(APP_NAME); ?> Try me server.'; return true">試試我的伺服器</a></li>
 					<li><a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>.'; return true;" title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>" target=_blank>提交您的 feedback</a></li>
 					<li><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ciprianmp%40hotmail%2ecom&item_name=Support%20for%20phpMyChat%20Plus%20development&no_shipping=1&cn=Optional%20Thoughts&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8" onClick="return confirm('<?php echo(L_SUPP_WARN); ?>');" onMouseOver="window.status='Wish to keep <?php echo(APP_NAME); ?> FREE?'; return true;" title="Wish to keep <?php echo(APP_NAME); ?> FREE?" target="_blank">願意捐贈?</a></li>
-					<li><a onClick="javascript:alert('<?php echo (sprintf(trim(A_SHEET5_0),":\\n".APP_NAME." - ".APP_VERSION.APP_MINOR)); ?>\n\nReleased on:\n<?php echo(RELEASE_DATE); ?>.\n\n&copy; 2001-<?php echo(date('Y')); ?>\nPlus Developer: <?php echo(PLUS_DEVELOPER); ?>\n\nBig thanks to all the contributors\nto the phpHeaven Team work\nand the Yahoo phpMyChat group.\n\nThank you for using our work!')" Title="這是什麼?" onMouseOver="window.status='這是什麼?'; return true">關於 Plus</a></li>
+					<li><a onClick="javascript:alert('<?php echo (sprintf(trim(A_SHEET5_0),":\\n".APP_NAME." - ".APP_VERSION.APP_MINOR)); ?>\n\nReleased on:\n<?php echo(RELEASE_DATE); ?>.\n\n&copy; 2000-<?php echo(date('Y')); ?>\nPlus Developer: <?php echo(PLUS_DEVELOPER); ?>\n\nBig thanks to all the contributors\nto the phpHeaven Team work\nand the Yahoo phpMyChat group.\n\nThank you for using our work!')" Title="這是什麼?" onMouseOver="window.status='這是什麼?'; return true">關於 Plus</a></li>
 				</ul>
 			</dd>
 	</dl>
@@ -670,7 +670,8 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"OPEN_SAT_END = '$vOPEN_SAT_END', ".
 						"ALLOW_TEXT_COLORS = '$vALLOW_TEXT_COLORS', ".
 						"TAGS_POWERS = '$vTAGS_POWERS', ".
-						"ALLOW_MATH = '$vALLOW_MATH' ".
+						"ALLOW_MATH = '$vALLOW_MATH', ".
+						"SRC_MATH = '$vSRC_MATH' ".
 				"WHERE ID='0'";
 
 		$DbLink->query($query);
@@ -2332,13 +2333,16 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 <tr bgcolor="#B0C4DE">
 	<td><b>啟用 use of /math commands:</b><br />
     	This option allows you to post mathematical formulas using the LaTeX format provided by MathJax.<br />
-		<i>Hint: Here is a <a href="http://www.mathjax.org/demos/tex-samples/" target="_blank">sample page</a> from the original mathjax.org site. You just need to type /math and copy&paste the source code of the desired formula.</i>
+		<i>Hint: Here is a <a href="http://www.mathjax.org/demos/tex-samples/" target="_blank">sample page</a> from the original mathjax.org site. You just need to type /math and copy&paste the source code of the desired formula.</i><br />
+		You can also use a local configuration file by setting the right source path. Default source (src) is: <font color="blue"><i>http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML</i></font>
 	</td>
     <td>
-        <select name="vALLOW MATH">
+        <select name="vALLOW_MATH">
 	        <option value="0"<?php if($ALLOW_MATH==0){ echo " selected"; } ?>>停用 MathJax</option>
 	        <option value="1"<?php if($ALLOW_MATH==1){ echo " selected"; } ?>>啟用 MathJax</option>
         </select><br />
+		Plugin Configuration Source:<br />
+		<input name="vSRC_MATH" type="text" size="25" maxlength="255" value="<?php echo $SRC_MATH; ?>">
     </td>
 </tr>
 

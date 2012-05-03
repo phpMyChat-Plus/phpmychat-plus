@@ -1027,6 +1027,7 @@ $OPEN_SAT_END					= $row[196];
 $ALLOW_TEXT_COLORS				= $row[197];
 $TAGS_POWERS					= $row[198];
 $ALLOW_MATH						= $row[199];
+$SRC_MATH						= $row[200];
 
 $query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email='bot@bot.com'";
 $result_bot = mysql_query($query_bot);
@@ -1507,6 +1508,7 @@ define("C_TAGS_POWERS", $TAGS_POWERS);
 
 // MathJax LaTeX formulas rendering in chat
 define("C_ALLOW_MATH", $ALLOW_MATH);
+define("C_SRC_MATH", $SRC_MATH);
 ?&gt;</textarea></p>
 <?php } // END OF IS NOT WRITEABLE
 else {
@@ -1752,6 +1754,7 @@ else {
   	fputs ( $fh, '$ALLOW_TEXT_COLORS				= $row[197];'.$lfeed );
   	fputs ( $fh, '$TAGS_POWERS					= $row[198];'.$lfeed );
   	fputs ( $fh, '$ALLOW_MATH					= $row[199];'.$lfeed );
+  	fputs ( $fh, '$SRC_MATH						= $row[200];'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '$query_bot = "SELECT username,avatar,colorname FROM ".C_REG_TBL." WHERE email=\'bot@bot.com\'";'.$lfeed );
   	fputs ( $fh, '$result_bot = mysql_query($query_bot);'.$lfeed );
@@ -2233,6 +2236,7 @@ else {
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// MathJax LaTeX formulas rendering in chat'.$lfeed );
   	fputs ( $fh, 'define("C_ALLOW_MATH", $ALLOW_MATH);'.$lfeed );
+  	fputs ( $fh, 'define("C_SRC_MATH", $SRC_MATH);'.$lfeed );
   	fputs ( $fh, '?>' );
   } // END OF WRITE INTO config.lib.php
   fclose ( $fh );
