@@ -72,12 +72,21 @@ define("L_S_THU", "四");
 define("L_S_FRI", "五");
 define("L_S_SAT", "六");
 define("L_S_SUN", "日");
+/*
+define("L_S_MON", "周一");
+define("L_S_TUE", "周二");
+define("L_S_WED", "周三");
+define("L_S_THU", "周四");
+define("L_S_FRI", "周五");
+define("L_S_SAT", "周六");
+define("L_S_SUN", "周日");
+*/
 
 // Display extratext beside years, months and/or days in dropdowns (eg. Korean and Japan)
 define("L_USE_YMD_DROP", 1);
 
 // Windows encoding
-define("WIN_DEFAULT", "windows-936");
+define("WIN_DEFAULT", "utf-8");
 define("L_CAL_FORMAT", "%Y年%B%d日");
 if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "zh_CN"); // en_US format of your language
 

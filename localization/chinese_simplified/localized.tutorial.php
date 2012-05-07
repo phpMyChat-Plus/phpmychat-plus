@@ -49,7 +49,7 @@ A.topLink:hover, A.topLink:active
 <P></P>
 <TABLE BORDER="5" CELLPADDING="5" ALIGN="center">
 <TR>
-	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>－ <?php echo(APP_NAME."-".APP_VERSION.APP_MINOR); ?> 簡体中文版本使用手册 －</FONT><br /><I>&copy; 2012<?php echo((date('Y')>"2012") ? "-".date('Y') : ""); ?> － 翻译者 <a href="mailto:clouds.music@gmail.com?subject=phpMyChat%20Plus%20translation" onMouseOver="window.status='<?php echo (sprintf(L_CLICKS,L_LINKS_6,L_TRANSLATOR)); ?>。'; return true;" title="<?php echo (sprintf(L_CLICKS,L_LINKS_6,L_TRANSLATOR)); ?>" target=_blank>clouds_music</a> 来自 - 台湾,台北。</I></B></TD>
+	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>－ <?php echo(APP_NAME."-".APP_VERSION.APP_MINOR); ?> 簡体中文版本使用手册 －</FONT><br /><I>&copy; 2012<?php echo((date('Y')>"2012") ? "-".date('Y') : ""); ?> － 翻译者 <a href="mailto:clouds.music@gmail.com?subject=phpMyChat%20Plus%20translation" onMouseOver="window.status='<?php echo (sprintf(L_CLICKS,L_LINKS_6,L_TRANSLATOR)); ?>。'; return true;" title="<?php echo (sprintf(L_CLICKS,L_LINKS_6,L_TRANSLATOR)); ?>" target=_blank>clouds_music</a> 来自 - 台湾，台北。</I></B></TD>
 </TR>
 </TABLE><br /><br />
 <P><A NAME="top"></A></P>
@@ -179,7 +179,7 @@ if (C_REQUIRE_REGISTER)
 {
 	?>
 <P>
-	否则你必须先 <A HREF="#register">注册</A> 。
+	否则你必须先 <A HREF="#register">注册</A>。
 	<?php
 }
 else
@@ -222,7 +222,7 @@ if (C_VERSION == "2")
 	<P>
 	已注册者可开新的聊天室，而私人的聊天室仅会显示于受邀请的聊天者，不会公开的显示出来。<br />
 	<P>
-	而新的聊天室名称它不能包含逗号 '，' 及反斜线 ' \ ' 。<?php if (C_NO_SWEAR) echo(" 无法使用\"不雅字语\"。"); ?>
+	而新的聊天室名称它不能包含逗号 ',' 及反斜线 '\'。<?php if (C_NO_SWEAR) echo(" 无法使用\"不雅字语\"。"); ?>
 	<br /><P ALIGN="right"><A HREF="#top">回页首</A></P>
 	<P>
 	<hr />
@@ -291,12 +291,12 @@ if ($Ver == "H")
 <P>
 <FONT SIZE="+1"><A NAME="exit"><B>离开聊天室：</B></A></FONT>
 <P>
-要退出聊天，只需点击一次在 <?php echo (EXIT_LINK_TYPE) ? "<img src='localization/$L/images/exitdoor.gif' border=0 alt='".L_EXIT."'> 图示" : '"'.L_EXIT.'" link'; ?>，在房间的右上角。此外，您也可以到您的文字发言方框中输入下列命令之一 : <br />
+要退出聊天，只需点击一次在 <?php echo (EXIT_LINK_TYPE) ? "<img src='localization/$L/images/exitdoor.gif' border=0 alt='".L_EXIT."'> 图示" : '"'.L_EXIT.'" link'; ?>，在房间的右上角。此外，您也可以到您的文字发言方框中输入下列命令之一：<br />
 /exit<br />
 /bye<br />
 /quit<br />
 这些命令可完成一个要发送的消息，在你离开前的聊天室。
-<I>例如 ：</I> /quit 下次再见!!
+<I>例如：</I> /quit 下次再见!!
 <P>
 将传送讯息 "下次再见!" 在主画面中，然后您登出。
 
@@ -347,7 +347,7 @@ if ($Ver == "H")
 	<P>
 	<I>例如：</I> /refresh 5
 	<P>
-	将改变速率为 5秒。 *请注意，如果n设置为小于 3，刷新复位 不刷新（有用的，当你想不受打扰地阅读大量的旧消息）！
+	将改变速率为 5秒。*请注意，如果n设置为小于 3，刷新复位 不刷新（有用的，当你想不受打扰地阅读大量的旧消息）！
 	<P>
 	<?php
 	if ($Ver == "L")
@@ -363,7 +363,7 @@ if ($Ver == "H")
 	else
 	{
 		?>
-		<LI>这 <B> show 和 Last 指令</B> 让你来清洁屏幕，并显示最近 <I>n</I> 讯息传送在你的屏幕上。 键入 "/show n" or "/last n" 不带引号，其中 n 是可视信息的数量。
+		<LI>这 <B> show 和 Last 指令</B> 让你来清洁屏幕，并显示最近 <I>n</I> 讯息传送在你的屏幕上。键入 "/show n" or "/last n" 不带引号，其中 n 是可视信息的数量。
 		<P>
 		<I>例如：</I> /show 50 or /last 50
 		<P>
@@ -416,7 +416,7 @@ if (C_USE_SMILIES)
 	unset($SmiliesTbl);
 	?>
 	<FONT SIZE="+1"><A NAME="smilies"><B>表情符号：</B></A></FONT>
-	<P>您的讯息内可能有图形的表情符号。 看到下面的代码，你必须输入到一个消息，到获得每一个这些表情符号。
+	<P>您的讯息内可能有图形的表情符号。看到下面的代码，你必须输入到一个消息，到获得每一个这些表情符号。
 	<P>
 	<I>例如</I>，发送文本 "Hi Jack :)" 不带引号 将显示讯息 <B>Hi Jack</B> <IMG SRC="images/smilies/smile1.gif" WIDTH=15 HEIGHT=15 ALT=":)"> 在主画面中。
 	<P ALIGN="center">
@@ -449,7 +449,7 @@ if (C_HTML_TAGS_KEEP != "none")
 	?>
 	<FONT SIZE="+1"><A NAME="text"><B>文字格式：</B></A></FONT>
 	<P>
-	文字可以是粗体，斜体或下划线，通过包围这适用部分于您的文字 无论是 &LT;B&GT; &LT;/B&GT，&LT;I&GT; &LT;/I&GT; or &LT;U&GT; &LT;/U&GT HTML 标记。
+	文字可以是粗体，斜体或下划线，通过包围这适用部分于您的文字 无论是 &LT;B&GT; &LT;/B&GT，&LT;I&GT;&LT;/I&GT; or &LT;U&GT; &LT;/U&GT HTML 标记。
 	<P>
 	<I>例如</I>，&LT;B&GT;文字&LT;/B&GT; 会产生 <B>文字</B>。
 	<P>
@@ -489,7 +489,7 @@ if (C_HTML_TAGS_KEEP != "none")
 <P>
 将发送悄悄话给 Jack 建议他加入您在的聊天室。此消息包含目标房间的名称，这个名字会出现一个链接。
 <P>
-请注意，你可以把多个用户名，在邀请指令（例如："/invite Jack,Helen,Alf")。 他们必须由逗号（,）分割，没有空格。
+请注意，你可以把多个用户名，在邀请指令（例如："/invite Jack,Helen,Alf")。他们必须由逗号（,）分割，没有空格。
 <br /><P ALIGN="right"><A HREF="#top">回页首</A></P>
 <P>
 <hr />
@@ -507,7 +507,7 @@ if (C_VERSION == "2")
 {
 	echo(!C_REQUIRE_REGISTER ? "<P>If you’re a registered user, you" : "<br /><P>You");
 	?>
-	 也可以创建一个与此相同的新房间 指令。 但你必须指定其 键入: 0 代表为私人，1 公开（默认值）。
+	 也可以创建一个与此相同的新房间 指令。但你必须指定其 键入：0 代表为私人，1 公开（默认值）。
 	<P>
 	<I>例如：</I> /join 0 #My Room
 	<P>
@@ -602,7 +602,7 @@ else
 <P>
 从那个时候起，由用户 Jack 发言的讯息 将没有显示在荧幕上。
 <P>
-若要有一个消息被忽略的用户列表。 只需键入这个 <B>指令 "/ignore"</B> 不带引号。
+若要有一个消息被忽略的用户列表。只需键入这个 <B>指令 "/ignore"</B> 不带引号。
 <P>
 恢复一个被忽略的用户的消息显示，键入这 <B>指令 "/ignore - username"</B> 不带引号，其中 "-" 是一个连字符（减号）。<P>
 <P>
@@ -611,7 +611,7 @@ else
 现在所有由 Jack 发布的消息在当前的聊天会话将显示在屏幕上，包括 Jack 之前张贴的那些消息 键入这指令。<br />
 如果你不指定一个连字符的用户名后，你的“忽略列表”将被清理。
 <P>
-请注意，你可以把多个用户名用在这 ignore 指令 (e.g. "/ignore Jack,Helen,Alf" or "/ignore - Jack,Alf")。 他们必须由逗号（，）分割，没有空格。
+请注意，你可以把多个用户名用在这 ignore 指令 (e.g. "/ignore Jack,Helen,Alf" or "/ignore - Jack,Alf")。他们必须由逗号（，）分割，没有空格。
 <br /><P ALIGN="right"><A HREF="#top">回页首</A></P>
 <P>
 <hr />
@@ -639,7 +639,7 @@ if (C_SAVE != "0")
 	<P>
 	<I>例如：</I> /save 5
 	<P>
-	其中 ’5’ 是保存的讯息数量。 如果 n 没有指定，所有可用的消息传送到当前房间。
+	其中 ’5’ 是保存的讯息数量。如果 n 没有指定，所有可用的消息传送到当前房间。
 	<br /><P ALIGN="right"><A HREF="#top">回页首</A></P>
 	<P>
 	<hr />
@@ -667,9 +667,9 @@ if (C_SAVE != "0")
 <P>
 <FONT SIZE="+1"><A NAME="kick"><B>踢用户：</B></FONT>
 <P>
-主持人可以踢用户 和 管理员可以踢与一个用户或一个主持人 <B>kick 指令</B>。 被踢的用户，必须在当前的房间，管理员才可以踢其他房间的用户。
+主持人可以踢用户 和 管理员可以踢与一个用户或一个主持人 <B>kick 指令</B>。被踢的用户，必须在当前的房间，管理员才可以踢其他房间的用户。
 <P>
-<I>例如</I>，如果 Jack 是要踹离开的用户名： <I>/kick Jack</I> 或 <I>/kick Jack 踢的理由</I>。 这里 "踢的理由" 可以是任何文本，例如“因为滥发讯息!"
+<I>例如</I>，如果 Jack 是要踹离开的用户名： <I>/kick Jack</I> 或 <I>/kick Jack 踢的理由</I>。这里 "踢的理由" 可以是任何文本，例如“因为滥发讯息!"
 <P>
 如果使用 * 选项 ( <I>/kick * <?php echo(L_HELP_REASON); ?></I> )，这指令将踢出聊天所有的用户不论权限（只有游客和注册用户）。服务器连接时出现问题，所有的人应该重新载入他们的聊天，这是非常有用的。在第二种情况下，<I><?php echo(L_HELP_REASON); ?></I> 建议让用户知道为什么他们已经被踢出。
 <br /><P ALIGN="right"><A HREF="#top">回页首</A></P>
@@ -685,10 +685,10 @@ if (C_BANISH != "0")
 	<FONT SIZE="+1"><A NAME="banish"><B>驱逐一个用户：</B></A></FONT>
 	<P>
 	主持人可以驱逐一个用户，管理员可以驱逐一个用户或主持人使用 <B>ban 指令</B>。<br />
-	管理员可以驱逐一个用户 从另一个房间 超过他正在聊天的聊天室。 他也可以永远驱逐一个用户和禁止使用整个聊天系统 ’<B>*</B>’ 设置必须在用户裂口之前插入将被驱逐。
+	管理员可以驱逐一个用户 从另一个房间 超过他正在聊天的聊天室。他也可以永远驱逐一个用户和禁止使用整个聊天系统 ’<B>*</B>’ 设置必须在用户裂口之前插入将被驱逐。
 
 	<P>
-	<I>例如</I>，如果 Jack 是驱逐的用户名： <I>/ban Jack</I>，<I>/ban * Jack</I>，<I>/ban Jack 驱逐的理由</I> 或 <I>/ban * Jack 驱逐的理由</I>。 这 "驱逐的理由" 可以是任何文字，例如“滥发讯息!"
+	<I>例如</I>，如果 Jack 是驱逐的用户名： <I>/ban Jack</I>，<I>/ban * Jack</I>，<I>/ban Jack 驱逐的理由</I> 或 <I>/ban * Jack 驱逐的理由</I>。这 "驱逐的理由" 可以是任何文字，例如“滥发讯息!"
 	<br /><P ALIGN="right"><A HREF="#top">回页首</A></P>
 	<P>
 	<hr />
@@ -701,11 +701,11 @@ if (C_BANISH != "0")
 <P>
 聊天室主人及系统管理员，可以将已注册的使用者，提拔成为聊天室主人，使用 <B>Promote 指令</B>。
 <P>
-<I>例如 ： </I>，如果 Jack 是要升级的用户的名字，使用 <I>/promote Jack</I>  将 Jack 提拔成为聊天室主人。( 当 Jack 是一位已注册使用者 }，
+<I>例如： </I>，如果 Jack 是要升级的用户的名字，使用 <I>/promote Jack</I>  将 Jack 提拔成为聊天室主人。( 当 Jack 是一位已注册使用者 }，
 <P>
 只有系统管理员能反向操作降级 (将聊天室主人降为一般使用者) 使用 <B>demote 指令</B>。
 <P>
-<I>例如 ： </I>，如果 Jack 是要降级的用户的名字，使用 <I>/demote Jack</I> 或 <I>/demote * Jack</I> (将降职他从现在或所有房间)。
+<I>例如： </I>，如果 Jack 是要降级的用户的名字，使用 <I>/demote Jack</I> 或 <I>/demote * Jack</I> (将降职他从现在或所有房间)。
 <br /><P ALIGN="right"><A HREF="#top">回页首</A></P>
 <P>
 </BODY>

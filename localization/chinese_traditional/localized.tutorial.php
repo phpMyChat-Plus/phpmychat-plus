@@ -49,7 +49,7 @@ A.topLink:hover, A.topLink:active
 <P></P>
 <TABLE BORDER="5" CELLPADDING="5" ALIGN="center">
 <TR>
-	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>－ <?php echo(APP_NAME."－".APP_VERSION.APP_MINOR); ?> 繁體中文版本使用手冊 －</FONT><br /><I>&copy; 2012<?php echo((date('Y')>"2012") ? "-".date('Y') : ""); ?> － 翻譯者 <a href="mailto:clouds.music@gmail.com?subject=phpMyChat%20Plus%20translation" onMouseOver="window.status='<?php echo (sprintf(L_CLICKS,L_LINKS_6,L_TRANSLATOR)); ?>。'; return true;" title="<?php echo (sprintf(L_CLICKS,L_LINKS_6,L_TRANSLATOR)); ?>" target=_blank>clouds_music</a> 來自 - 台灣,台北。</I></B></TD>
+	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>－ <?php echo(APP_NAME."－".APP_VERSION.APP_MINOR); ?> 繁體中文版本使用手冊 －</FONT><br /><I>&copy; 2012<?php echo((date('Y')>"2012") ? "-".date('Y') : ""); ?> － 翻譯者 <a href="mailto:clouds.music@gmail.com?subject=phpMyChat%20Plus%20translation" onMouseOver="window.status='<?php echo (sprintf(L_CLICKS,L_LINKS_6,L_TRANSLATOR)); ?>。'; return true;" title="<?php echo (sprintf(L_CLICKS,L_LINKS_6,L_TRANSLATOR)); ?>" target=_blank>clouds_music</a> 來自 - 台灣，台北。</I></B></TD>
 </TR>
 </TABLE><br /><br />
 <P><A NAME="top"></A></P>

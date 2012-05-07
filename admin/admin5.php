@@ -364,7 +364,7 @@ if (UPD_CHECK)
 					<li><a href="#colors">Colors</a></li>
 					<li><a href="#sounds">Sound settings</a></li>
 					<li><a href="#profanity">Profanity</a></li>
-					<li><a href="files_popup.php?<?php echo("L=$L&pmc_username=$pmc_username&pmc_password=$pmc_password"); ?>" onClick="files_popup(); return false" target="_blank">Uploads Management</A></li>
+					<li><a href="files_popup.php?<?php echo("L=$L&pmc_username=$pmc_username&pmc_password=$pmc_password"); ?>" onClick="files_popup(); return false" target="_blank">Uploads Management</a></li>
 				</ul>
 			</dd>
 	</dl>
@@ -1594,7 +1594,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	        <option value="0"<?php if($USE_SKIN==0){ echo " selected"; } ?>>Default Skin Only</option>
 	        <option value="1"<?php if($USE_SKIN==1){ echo " selected"; } ?>>Skin Mod Enabled</option>
         </select><br />
-	<A HREF="styles_popup.php?<?php echo("L=$L&startStyle=1"); ?>" onClick="styles_popup(); return false" class="ChatLink" TARGET="_blank">Skins Preview Page</A>
+	<a href="styles_popup.php?<?php echo("L=$L&startStyle=1"); ?>" onClick="styles_popup(); return false" class="ChatLink" target="_blank">Skins Preview Page</a>
 	</td>
 </tr>
 <tr>
@@ -2013,7 +2013,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr>
     <td><b>Path to the sound to be played on entrance (only .wav extensions).</b><br />
-    	<i>Example: sounds/beep.wav' (you can also use long/remote URLs)</i>
+    	<i>Example: sounds/beep.wav (you can also use long/remote URLs)</i>
     </td>
     <td>On Entrance:<br />
 		<input name="vENTRANCE_SOUND" type="text" size="20" maxlength="255" value="<?php echo $ENTRANCE_SOUND; ?>"><br />
@@ -2330,7 +2330,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-	<td><b>Enable use of /math commands:</b><br />
+	<td><b>Enable use of /math commands.</b><br />
     	This option allows you to post mathematical formulas using the LaTeX format provided by MathJax.<br />
 		<i>Hint: Here is a <a href="http://www.mathjax.org/demos/tex-samples/" target="_blank">sample page</a> from the original mathjax.org site. You just need to type /math and copy&paste the source code of the desired formula.</i><br />
 		You can also use a local configuration file by setting the right source path. Default source (src) is: <font color="blue"><i>http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML</i></font>
