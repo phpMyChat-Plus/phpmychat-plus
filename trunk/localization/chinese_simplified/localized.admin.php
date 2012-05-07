@@ -71,10 +71,10 @@ define("A_SHEET3_5", "您还没有作出任何选择。请至少选择一个，�
 // Frame for sending mails
 define("A_SHEET4_0", "您没有设置管理员电子邮件 ’".A_MENU_5."’ 页。");
 define("A_SHEET4_1", "传送邮件");
-define("A_SHEET4_2", "到:");
+define("A_SHEET4_2", "到：");
 define("A_SHEET4_3", "选择全部");
-define("A_SHEET4_4", "主题:");
-define("A_SHEET4_5", "讯息:");
+define("A_SHEET4_4", "主题：");
+define("A_SHEET4_5", "讯息：");
 define("A_SHEET4_6", "现在发送！");
 define("A_SHEET4_7", "所有的电子邮件已发送。");
 define("A_SHEET4_8", "发送邮件时出现内部错误。");
@@ -132,13 +132,13 @@ define("A_CHAT_LOGS_30", "IP 文件");
 define("A_CHAT_LOGS_31", "总计大小 %s %s");
 define("A_CHAT_LOGS_32", "文件");
 define("A_CHAT_LOGS_33", "文件夹");
-define("A_CHAT_LOGS_34", "%s 成功删除: %s");
-define("A_CHAT_LOGS_35", "%s 成功创建: %s");
-define("A_CHAT_LOGS_36", "%s 不存在: %s");
-define("A_CHAT_LOGS_37", "%s 无法删除: %s");
-define("A_CHAT_LOGS_38", "%s 无法创建: %s");
-define("A_CHAT_LOGS_39", "%s 写入受保护: %s");
-define("A_CHAT_LOGS_40", "储存档案时发生的错误: %s"); // filename
+define("A_CHAT_LOGS_34", "%s 成功删除： %s");
+define("A_CHAT_LOGS_35", "%s 成功创建： %s");
+define("A_CHAT_LOGS_36", "%s 不存在： %s");
+define("A_CHAT_LOGS_37", "%s 无法删除： %s");
+define("A_CHAT_LOGS_38", "%s 无法创建： %s");
+define("A_CHAT_LOGS_39", "%s 写入受保护： %s");
+define("A_CHAT_LOGS_40", "储存档案时发生的错误： %s"); // filename
 
 //Admin Search Page
 define("A_SEARCH_1", "聊天室搜寻页");
@@ -152,7 +152,7 @@ define("A_SEARCH_8", "简介");
 define("A_SEARCH_9", "链接");
 define("A_SEARCH_10", "搜寻");
 define("A_SEARCH_11", "权限的分类，选项 <b>ad</b>，<b>mod</b> 女 或 <b>u</b>。");
-define("A_SEARCH_12", "用于 性别分类，选项: <b>0</b> 秘密，<b>1</b> 男，<b>2</b> 女 或 <b>3</b> 夫妇。");
+define("A_SEARCH_12", "用于 性别分类，选项： <b>0</b> 秘密，<b>1</b> 男，<b>2</b> 女 或 <b>3</b> 夫妇。");
 define("A_SEARCH_13", "用户名");
 define("A_SEARCH_14", "名字");
 define("A_SEARCH_15", "姓氏");
@@ -165,7 +165,7 @@ define("A_SEARCH_22", "搜索项");
 define("A_SEARCH_23", "请提供一个搜索词，然后再试一次！");
 define("A_SEARCH_24", "没有符合条件的数据。请细化您的搜索。");
 define("A_SEARCH_25", "Moderate this user");
-define("A_SEARCH_26", "用户选定隐藏信息，在公告的个人资料。请确保 她/他 的隐私安全！");
+define("A_SEARCH_26", "用户选定隐藏信息，在公开的个人资料。请确保 她/他 的隐私安全！");
 define("A_SEARCH_27", "显示当前的月份");
 define("A_SEARCH_28", "显示所有生日者");
 

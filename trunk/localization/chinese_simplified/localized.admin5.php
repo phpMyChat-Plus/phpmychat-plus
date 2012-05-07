@@ -694,12 +694,12 @@ if(C_BOT_NAME != $vBOT_NAME || C_BOT_FONT_COLOR != $vBOT_FONT_COLOR || C_BOT_AVA
 				" WHERE email='bot@bot.com'";
 	if (trim($vBOT_NAME) == "" && C_BOT_NAME != $vBOT_NAME)
 	{
-		$Error = "You must type a username for your Bot";
+		$Error = "您必须输入一个用户名到你的BOT";
 	}
 #	else if (ereg("[\, \']", stripslashes($vBOT_NAME)) && C_BOT_NAME != $vBOT_NAME)
 	else if(preg_match("/[ |,|'|\\\\]/", $vBOT_NAME) && C_BOT_NAME != $vBOT_NAME)
 	{
-		$Error = "Only these extra-characters allowed:<br />".$REG_CHARS_ALLOWED."<br />Spaces, commas or backslashes (\\) not allowed.<br />Check the syntax of the Bot name (".$vBOT_NAME.")";
+		$Error = "只允许这些额外的字符:<br />".$REG_CHARS_ALLOWED."<br />空格，逗号或反斜线 (\\) 不允许。<br />检查该语法 BOT 的名称 (".$vBOT_NAME.")";
 	}
 	else if((C_NO_SWEAR && checkwords($vBOT_NAME, true, $Charset)) && C_BOT_NAME != $vBOT_NAME)
 	{
@@ -712,7 +712,7 @@ if(C_BOT_NAME != $vBOT_NAME || C_BOT_FONT_COLOR != $vBOT_FONT_COLOR || C_BOT_AVA
 		$DbLink->clean_results();
 		if ($rows != 0 && C_BOT_NAME != $vBOT_NAME)
 		{
-			$Error = "The name of your Bot (".$vBOT_NAME.") is already registered.<br />Choose another one";
+			$Error = "The name of your Bot (".$vBOT_NAME.") is already registered。<br />Choose another one";
 		}
 		else
 		{
@@ -734,12 +734,12 @@ if((C_QUOTE_NAME != $vQUOTE_NAME || C_QUOTE_FONT_COLOR != $vQUOTE_FONT_COLOR || 
 				" WHERE email='quote@quote.com'";
 	if (trim($vQUOTE_NAME) == "" && C_QUOTE_NAME != $vQUOTE_NAME)
 	{
-		$Error = "You must type a username for your Random Quote";
+		$Error = "您必须输入一个用户名，为你的 Random Quote";
 	}
 # 	else if (ereg("[\, \']", stripslashes($vQUOTE_NAME)) && C_QUOTE_NAME != $vQUOTE_NAME)
 	else if(preg_match("/[ |,|'|\\\\]/", $vQUOTE_NAME) && C_QUOTE_NAME != $vQUOTE_NAME)
 	{
-		$Error = "Only these extra-characters allowed:<br />".$REG_CHARS_ALLOWED."<br />Spaces, commas or backslashes (\\) not allowed.<br />Check the syntax of the Random Quote name (".$vQUOTE_NAME.")";
+		$Error = "只允许这些额外的字符：<br />".$REG_CHARS_ALLOWED."<br />空格，逗号或反斜线 (\\) 不允许.<br />检查该语法 Random Quote 的名称 (".$vQUOTE_NAME.")";
 	}
 	else if((C_NO_SWEAR && checkwords($vQUOTE_NAME, true, $Charset)) && C_QUOTE_NAME != $vQUOTE_NAME)
 	{
@@ -763,14 +763,14 @@ if((C_QUOTE_NAME != $vQUOTE_NAME || C_QUOTE_FONT_COLOR != $vQUOTE_FONT_COLOR || 
 
 if (isset($Error))
 {
-	echo "<div><p><table align=center border=0 cellpadding=3 class=menu style=\"background: white;\"><tr><td class=error align=center><br /><h3>".$Error."!</h3></td></tr></table></p></div>";
+	echo "<div><p><table align=center border=0 cellpadding=3 class=menu style=\"background: white;\"><tr><td class=error align=center><br /><h3>".$Error."！</h3></td></tr></table></p></div>";
 }
 else
 {
-	echo "<div><p><table align=center border=0 cellpadding=3 class=menu style=\"background: white;\"><tr><td class=success align=center><br /><h3>组态设定已成功更改!</h3></td></tr></table></p>";
+	echo "<div><p><table align=center border=0 cellpadding=3 class=menu style=\"background: white;\"><tr><td class=success align=center><br /><h3>组态设定已成功更改！</h3></td></tr></table></p>";
 	if(C_LOG_DIR != $vLOG_DIR)
 	{
-		echo "<p><table align=center border=0 cellpadding=3 class=menu style=\"background: white;\"><tr><td class=notify2 align=center valign=TOP>Important!</td><td class=success align=center>Don't forget to change remotely the name of <span style=background-color:white>".C_LOG_DIR."</span> directory to <span style=background-color:white>".$vLOG_DIR."</span><br />(and set its attributes to <b>777</b>)!</td></tr></table>";
+		echo "<p><table align=center border=0 cellpadding=3 class=menu style=\"background: white;\"><tr><td class=notify2 align=center valign=TOP>Important！</td><td class=success align=center>Don't forget to change remotely the name of <span style=background-color:white>".C_LOG_DIR."</span> directory to <span style=background-color:white>".$vLOG_DIR."</span><br />(and set its attributes to <b>777</b>)！</td></tr></table>";
 	}
 	echo "</p></div>";
 }
@@ -803,7 +803,7 @@ if (C_LAST_SAVED_ON)
 if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 {
 	?>
-		<div><p><table align=center border=0 cellpadding=0 class=menu style=background:white><tr><td class=success align=right>上次最后储存这些设定 <?php if (C_LAST_SAVED_ON) echo("on <span class=error>".$Last_Saved_On."</span> "); ?><?php if (C_LAST_SAVED_BY) echo("by <span class=error>".C_LAST_SAVED_BY."</span> "); ?>!</td></tr></table></div>
+		<div><p><table align=center border=0 cellpadding=0 class=menu style=background:white><tr><td class=success align=right>上次最后储存这些设定 <?php if (C_LAST_SAVED_ON) echo("on <span class=error>".$Last_Saved_On."</span> "); ?><?php if (C_LAST_SAVED_BY) echo("by <span class=error>".C_LAST_SAVED_BY."</span> "); ?>！</td></tr></table></div>
 	<?php
 }
 	?>
@@ -821,7 +821,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</tr>
 <tr bgcolor="#B0C4DE">
     <td><b>在服务器上启用自动在线更新检查.</b><br />
-    	<i>提示: 这个脚本可以自动检查新版本: ciprianmp.com/latest/ or svn.sourceforge.net!</i>
+    	<i>提示: 这个脚本可以自动检查新版本: ciprianmp.com/latest/ or svn.sourceforge.net！</i>
 	</td>
     <td>
         <select name="vUPD_CHECK">
@@ -832,7 +832,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr>
     <td><b>启用统计的信息在聊天室.</b><br />
-    	<i>提示:如果您的服务器的带宽确实有限，或您发现您的服务器超载, 您应禁用这个 mod!</i>
+    	<i>提示:如果您的服务器的带宽确实有限，或您发现您的服务器超载, 您应禁用这个 mod！</i>
 	</td>
     <td>
         <select name="vEN_STATS">
@@ -1150,7 +1150,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     <td colspan="2"><a name="reg_hint"></a>
 	<font color=red>* <b>提示</b></font> <b>for the 最好的设置，如果你想控制谁注册和进入您的聊天室:</b><br />
 			<i>- 允许注册用于您的聊天室: <font color=green>注册 启用</font><br />
-			- 需要注册加入聊天： 如果 <font color=green>需要</font> 设置，只有注册用户才能够登录到聊天室<br />
+			- 需要注册加入聊天：如果 <font color=green>需要</font> 设置，只有注册用户才能够登录到聊天室<br />
 			- 产生密码并发电子邮件给新注册用户: <font color=green>启用</font><br />
 			- 传送新注册用户帐户的详细资料: <font color=green>不传送</font><br />
 			- 传送新用户注册帐户的详细资料（通知）给管理员: <font color=green>通知管理员</font><br />
@@ -1158,7 +1158,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			在同一时间，管理员将收到 <u>2 电子邮件</u>:
 			<li>1st - 是一份登记数据，用于管理员的将来参考（如用户忘记密码时）。这总是以英文发送邮件;</li>
 			<li>2nd - 是电子邮件，其中包含新创建的帐户的随机密码和其余的资料 (此电子邮件已经准备要发送/转发给用户，如果该帐户被批准). 此电子邮件编写将选择于登记用户语言.</li><br />
-			该管理员验证谁是这个人，用户提供了什么资料。如果他决定批准该用户帐户，管理员只会有第二封电子邮件转发到该用户的电子邮件（电子邮件地址已经被格式化审批）。另一种方法是去"<?php echo(A_MENU_4); ?>" 和发送电子邮件登录到该用户的电子邮件资料。或者，管理员甚至可以用该名称/密码登录在“编辑个人资料” 形成和调整/修改资料/密码。<br />
+			该管理员验证谁是这个人，用户提供了什么资料。如果他决定批准该用户帐户，管理员只会有第二封电子邮件转发到该用户的电子邮件（电子邮件地址已经被格式化审批）。另一种方法是去"<?php echo(A_MENU_4); ?>" 和发送电子邮件登录到该用户的电子邮件资料。或者，管理员甚至可以用该名称/密码登录在"编辑个人资料" 形成和调整/修改资料/密码。<br />
 			<font color=red>重要的是：不要忘记放你正确的管理员电子邮件 <a href=#admin_email class="ChatLink">在这里</a>, 以完成以上所有这些工作).同时要考虑到非公开（限制性，私人），这些设置会变成您的聊天服务器。如果你忽略了未能验证和批准帐户，用户也许就放弃不回来了。</font></i>
 	</td>
 </tr>
@@ -1217,13 +1217,13 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     <td>
         <select name="vHTML_TAGS_SHOW">
 	        <option value="0"<?php if($HTML_TAGS_SHOW==0){ echo " selected"; } ?>>移除废弃的 tags</option>
-	        <option value="1"<?php if($HTML_TAGS_SHOW==1){ echo " selected"; } ?>>S显示废弃的 tags</option>
+	        <option value="1"<?php if($HTML_TAGS_SHOW==1){ echo " selected"; } ?>>显示废弃的 tags</option>
         </select>
     </td>
 </tr>
 <tr>
     <td><b>启用发布链路保护通过打开链接在一个弹出窗口中</b><br />
-			<i>提示: 假如 启用,一个额外的窗口将被打开 与所有张贴的链接列表在一个用户的讯息. 此选项可以保证额外的保护您的聊天室。</i>
+			<i>提示: 假如 启用,一个额外的窗口将被打开 与所有张贴的链接列表在一个用户的讯息。 此选项可以保证额外的保护您的聊天室。</i>
 	</td>
     <td>
         <select name="vPOPUP_LINKS">
@@ -1233,9 +1233,9 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>默认消息滚动顺序.</b><br />
+    <td><b>默认消息滚动顺序。</b><br />
     	<font color=red>(仅适用于 "non-H" 浏览器 -  IE 或 Firefox 以外的其他)</font><br />
-    	<i>提示: 这些用户也可以使用 /order 命令来改变滚动顺序.</i>
+    	<i>提示: 这些用户也可以使用 /order 命令来改变滚动顺序。</i>
     </td>
     <td>
         <select name="vMSG_ORDER">
@@ -1245,17 +1245,17 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>进入聊室首先显示的讯息的默认数量.</b><br />
-    	<font color=red>重要的是：从来没有设置这 <b>"0"</b>; 你可以将它设置到最低 <b>"1"</b> 但你必须启用至少一个 <b>接下来的两个设置</b>.<br />
-    	如果你想保留两集 "通知" 和 "显示" , 这里的值<b>必须至少有 "2"</b>.</font><br />
-    	<i>提示:用户还可以使用 /show "n" or /last "n" 命令来查看不同的数量.</i>
+    <td><b>进入聊室首先显示的讯息的默认数量。</b><br />
+    	<font color=red>重要的是：从来没有设置这 <b>"0"</b>; 你可以将它设置到最低 <b>"1"</b> 但你必须启用至少一个 <b>接下来的两个设置</b>。<br />
+    	如果你想保留两集 "通知" 和 "显示" , 这里的值<b>必须至少有 "2"</b>。</font><br />
+    	<i>提示:用户还可以使用 /show "n" or /last "n" 命令来查看不同的数量。</i>
     </td>
     <td>
 		<input name="vMSG_NB" type="text" size="7" maxlength="2" value="<?php echo $MSG_NB; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>显示每个用户在聊天室的 进入/退出 的通知.</b>
+    <td><b>显示每个用户在聊天室的 进入/退出 的通知。</b>
 	</td>
     <td>
         <select name="vNOTIFY">
@@ -1265,7 +1265,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>显示欢迎词，当用户进入聊天室.</b>
+    <td><b>显示欢迎词，当用户进入聊天室。</b>
 	</td>
     <td>
         <select name="vWELCOME">
@@ -1275,21 +1275,21 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>说明/求助里 表情符号的每行数量.</b>
+    <td><b>说明/求助里 表情符号的每行数量。</b>
 	</td>
     <td>
 		<input name="vSMILEY_COLS" type="text" size="7" maxlength="2" value="<?php echo $SMILEY_COLS; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>smilie_popup 表情符号的每行数量.</b>
+    <td><b>smilie_popup 表情符号的每行数量。</b>
 	</td>
     <td>
 		<input name="vSMILEY_COLS_POP" type="text" size="7" maxlength="2" value="<?php echo $SMILEY_COLS_POP; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>显示帮助弹出聊天规则上的交谈礼仪（聊天的规则）.</b>
+    <td><b>显示帮助弹出聊天规则上的交谈礼仪（聊天的规则）。</b>
 	</td>
     <td>
         <select name="vSHOW_ETIQ_IN_HELP">
@@ -1299,19 +1299,19 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>离开连结类型.</b><br />
-    	<i>Hint: Link stands for the original Exit link, Door rolling stands for the image of such a door.</i>
+    <td><b>离开连结类型。</b><br />
+    	<i>提示：链接代表原出口链路，一扇门的形象代表门滚动。</i>
     </td>
     <td>
         <select name="vEXIT_LINK_TYPE" id="door" onChange="swapImage('door','doorToSwap')">
-	        <option value="0"<?php if($EXIT_LINK_TYPE==0){ echo " selected"; } ?>>Exit link</option>
-	        <option value="1"<?php if($EXIT_LINK_TYPE==1){ echo " selected"; } ?>>Door rolling</option>
+	        <option value="0"<?php if($EXIT_LINK_TYPE==0){ echo " selected"; } ?>>Exit 链接</option>
+	        <option value="1"<?php if($EXIT_LINK_TYPE==1){ echo " selected"; } ?>>离开 滚动门</option>
         </select>&nbsp;<img id="doorToSwap" src="<?php echo(($EXIT_LINK_TYPE==1) ? "./".$ChatPath."localization/".$L."/images/exitdoor.gif" : "./".$ChatPath."images/gender_none.gif"); ?>" border=0 <?php echo("ALT=\"Exit link type\" Title=\"Exit link type\""); ?> />
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>设置你希望你的用户可以使用注册/登录.</b><br />
-    	<i>提示：这是默认的字符集: </i><b>a-zA-Z0-9_.-@#$%^&*()=<>?~{}|`:</b><i> 登录测试，这不会破坏你聊天室的布局/功能.<br />
+    <td><b>设置你希望你的用户可以使用注册/登录。</b><br />
+    	<i>提示：这是默认的字符集: </i><b>a-zA-Z0-9_.-@#$%^&*()=<>?~{}|`:</b><i> 登录测试，这不会破坏你聊天室的布局/功能。<br />
     	<font color=red>重要：不允许这些字符, 他们会破坏登录后聊天页面: 惊叹号，斜线，反斜线，逗号，空格，单引号和双引号和 方形(盒)括号 (<b>! / \ , ' " [ ]</b>)</font><br /></i>
     	虽然他们不会打破任何东西，它似乎/;不能禁止从正在使用的登录名。 $符号尚未被深深测试，但它也应避免，因为它通常为PHP变量。
     </td>
@@ -1327,10 +1327,10 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>在状态栏上的时区偏移和世界时间.</b><br />
+    <td><b>在状态栏上的时区偏移和世界时间。</b><br />
     	- 聊天服务器的时间和所需的位置之间的差异 (小时 - 整数)<br />
-    	<i>例如：如果我的伺服器托管在美国 -  CST（-6），但聊天是在布加勒斯特位于罗马尼亚的社区 - EET（+2），我可能想显示我的罗马尼亚用户在正确的时间聊天。对于这一点，我必须将此值设置为8。也不允许负值.<br />
-    	<font color=red>重要的是：编辑 “lib/worldtime.lib.php” 添加您自己的城市（经络） - 仅适用于世界时间模式!</font></i>
+    	<i>例如：如果我的伺服器托管在美国 -  CST（-6），但聊天是在布加勒斯特位于罗马尼亚的社区 - EET（+2），我可能想显示我的罗马尼亚用户在正确的时间聊天。对于这一点，我必须将此值设置为8。也不允许负值。<br />
+    	<font color=red>重要的是：编辑 "lib/worldtime.lib.php" 添加您自己的城市（经络） - 仅适用于世界时间模式！</font></i>
     </td>
     <td>
 		<input name="vTMZ_OFFSET" type="text" size="7" maxlength="5" value="<?php echo $TMZ_OFFSET; ?>"><br />
@@ -1342,7 +1342,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr>
-    <td><b>显示时间戳记在讯息前端.</b><br />
+    <td><b>显示时间戳记在讯息前端。</b><br />
     	(同时显示服务器时间在状态栏)
     </td>
     <td>
@@ -1353,15 +1353,15 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>每次更新之间的默认超时.</b>
+    <td><b>每次更新之间的默认超时。</b>
 	</td>
     <td>
 		<input name="vMSG_REFRESH" type="text" size="7" maxlength="2" value="<?php echo $MSG_REFRESH; ?>"> (秒)
 	</td>
 </tr>
 <tr>
-    <td><b>回访的访客计数器.</b><br />
-    	(It will count how many times a registered user returned to chat, displaying the counter on his profile page - whois popup)
+    <td><b>回访的访客计数器。</b><br />
+    	(它将返回一个注册用户多少次算聊天，个人资料页上显示的计数器 - WHOIS弹出查询)
     </td>
     <td>
         <select name="vLOGIN_COUNTER">
@@ -1381,32 +1381,32 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Open times Schedule for your chat and rooms.</b><br />
-    	<font color=red>Important: This mod is still under development! The schedule fields have deliberately been 已禁用.</font></i>
+    <td><b>开放时间安排为您的聊天和会议室。</b><br />
+    	<font color=red>重要：这个 mod 是仍在发展！日程表中的字段已刻意的禁用。</font></i>
     </td>
     <td align="center">
-		<b><font color=blue>Daily schedule:</font><br />
+		<b><font color=blue>每天的日程:</font><br />
 		<input name="vOPEN_ALL_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_ALL_BEG; ?>" class=success DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_ALL_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_ALL_END; ?>" class=success DISABLED><br />
-		<font color=red>Sunday schedule:</font><br />
+		<font color=red>周日时间表:</font><br />
 		<input name="vOPEN_SUN_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_SUN_BEG; ?>" class=notify2 DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_SUN_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_SUN_END; ?>" class=notify2 DISABLED><br />
-		Monday schedule:<br />
+		周一时间表:<br />
 		<input name="vOPEN_MON_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_MON_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_MON_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_MON_END; ?>" class=notify DISABLED><br />
-		Tuesday schedule:<br />
+		周二时间表:<br />
 		<input name="vOPEN_TUE_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_TUE_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_TUE_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_TUE_END; ?>" class=notify DISABLED><br />
-		Wednesday schedule:<br />
+		周三时间表:<br />
 		<input name="vOPEN_WED_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_WED_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_WED_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_WED_END; ?>" class=notify DISABLED><br />
-		Thursday schedule:<br />
+		周四时间表:<br />
 		<input name="vOPEN_THU_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_THU_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_THU_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_THU_END; ?>" class=notify DISABLED><br />
-		Friday schedule:<br />
+		周五时间表:<br />
 		<input name="vOPEN_FRI_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_FRI_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_FRI_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_FRI_END; ?>" class=notify DISABLED><br />
-		Saturday schedule:<br />
+		周六时间表:<br />
 		<input name="vOPEN_SAT_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_SAT_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_SAT_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_SAT_END; ?>" class=notify DISABLED></b>
 	</td>
@@ -1419,7 +1419,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>填写登入页面的背景.</b>
+    <td><b>填写登入页面的背景。</b>
 	</td>
     <td>
         <select name="vFILLED_LOGIN">
@@ -1429,9 +1429,9 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>Display a BACKGROUND image on index page.</b><br />
-		<i>Hint: to fill the rooms background with an image, you need to edit the desired style and add in BODY.frame and .framePreview the property "<b>background-image: url('path_to_the_image');</b>" (absolute or relative paths allowed) - e.g. http://path_to_the_image.jpg or ./../path_to_the_image.jpg - sample in style12.css.php. Optionally, BODY.mainframe can be used to display an image background to the messages frame (but this image has to be washed out, to make the posted text viewable).</i><br />
-    	(path_to_the_image.jpg can be any image accessible on/from the web - .jpg, .gif, .bmp, .png)
+    <td><b>显示背景图像在索引页上。</b><br />
+		<i>提示：填补房间背景图像，你需要编辑所需的样式和添加 BODY.frame 和 framePreview 属性 "<b>背景图像: url('path_to_the_image');</b>" (允许绝对或相对路径) - 例如 http://path_to_the_image.jpg 或 ./../path_to_the_image.jpg - 样本在 style12.css.php。 可选择, BODY.mainframe 可用于显示图像的背景的信息框架 (但这个图像就要被淘汰了，作出发布的文本浏览)。</i><br />
+    	(path_to_the_image.jpg 可以是任何图像 访问 on/从网上 - .jpg, .gif, .bmp, .png)
 	</td>
     <td>
         <select name="vBACKGR_IMG">
@@ -1443,7 +1443,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>显示删除连结在首页.</b><br />
+    <td><b>显示删除连结在首页。</b><br />
     	(允许用户删除自己的个人资料)
 	</td>
     <td>
@@ -1454,7 +1454,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>显示管理连结于首页.</b><br />
+    <td><b>显示管理连结于首页。</b><br />
     	(一个连结打开这个管理面板)
     </td>
     <td>
@@ -1465,7 +1465,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>显示帮助的连结于index页面.</b>
+    <td><b>显示帮助的连结于index页面。</b>
 	</td>
     <td>
         <select name="vSHOW_TUT">
@@ -1475,7 +1475,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>启用资讯在index页面.</b><br />
+    <td><b>启用资讯在index页面。</b><br />
     	(包含了一些关于聊天的额外功能的详细信息)
     </td>
     <td>
@@ -1486,7 +1486,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>显示可用的额外命令.</b>
+    <td><b>显示可用的额外命令。</b>
 	</td>
     <td>
         <select name="vSET_CMDS">
@@ -1496,15 +1496,15 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>列出你的额外命令.</b><br />
-    	<i>Hint: keep the first break and use it anytime to split the lines 如果他们是太长</i>
+    <td><b>列出你的额外命令。</b><br />
+    	<i>提示：如果他们是太长的时候，保持 空格分开 并用 / 分割线</i>
     </td>
     <td>
 		<input name="vCMDS" type="text" size="25" maxlength="255" value="<?php echo $CMDS; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>显示其他额外的功能/可用的外挂.</b>
+    <td><b>显示其他额外的功能/可用的外挂。</b>
 	</td>
     <td>
         <select name="vSET_MODS">
@@ -1514,15 +1514,15 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>列出你的额外的功能/外挂.</b><br />
-    	<i>Hint: keep the first break and use it anytime to split the lines if too long</i>
+    <td><b>列出你的额外的功能/外挂。</b><br />
+    	<i>提示：如果他们是太长的时候，保持 空格分开 并用 / 分割线</i>
     </td>
     <td>
 		<input name="vMODS" type="text" size="25" maxlength="255" value="<?php echo $MODS; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>显示机器人的名称（如果可用）.</b>
+    <td><b>显示机器人的名称（如果可用）。</b>
 	</td>
     <td>
         <select name="vSET_BOT">
@@ -1532,7 +1532,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>显示计数器（访问者点击）在index页面.</b>
+    <td><b>显示计数器（访问者点击）在index页面。</b>
 	</td>
     <td>
         <select name="vSHOW_COUNTER">
@@ -1542,7 +1542,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>显示所有者/站长 聊天资讯在index页面（下方的版权连结）.</b><br />
+    <td><b>显示所有者/站长 聊天资讯在index页面（下方的版权连结）。</b><br />
     	<i>提示：它跟您所输入在注册部分名称/文本 相同 - <a href=#ownername class="ChatLink">管理员名称</a></i>
     </td>
     <td>
@@ -1553,7 +1553,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>编辑聊天的安装日期.</b>
+    <td><b>编辑聊天的安装日期。</b>
     </td>
     <td class=success>
 		<?php
@@ -1586,9 +1586,9 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>启用 Skin mod in rooms.</b><br />
-    	<font color=red>Important: If you change this setting while there are users logged in, all your users must reload their browsers or exit and re-login. An announcement to all the rooms will be automatically sent if you 启用/停用 this.</font><br />
-		<i>Hint: If 已禁用, Skin1 becomes the default (set in the First Public Room above). If 启用, each room can be set to have it's own skin.</i>
+    <td><b>启用外观 mod 在房间。</b><br />
+    	<font color=red>重要：如果更改此设置，同时也有用户登录，您的所有用户必须重新载入他们的浏览器或退出并重新登录。将被自动发送到所有房间的一个公告，如果你 启用/停用 这项。</font><br />
+		<i>提示：假如 已禁用，skin1 成为默认（设置在首个公众室上面）。如果 启用，每个房间都可以有它自己的外观。</i>
 	</td>
     <td>
         <select name="vUSE_SKIN">
@@ -1599,23 +1599,23 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr>
-    <td><b>供用户选择的房间类型.</b><br />
-        <li>0 : 只有第一个房间 within the public default ones;</li>
-        <li>1 : 所有预设房间, 但不能创建房间;</li>
-        <li>2 : 所有的房间，及创建新的</li>
+    <td><b>供用户选择的房间类型。</b><br />
+        <li>0：只有第一个房间 内部公开预设的;</li>
+        <li>1：所有预设房间, 但不能创建房间;</li>
+        <li>2：所有的房间，及创建新的</li>
     </td>
     <td>
         <select name="vVERSION">
 	        <option value="0"<?php if($VERSION==0){ echo " selected"; } ?>>0 - 只有第一个房间</option>
 	        <option value="1"<?php if($VERSION==1){ echo " selected"; } ?>>1 - 所有预设房间</option>
-	        <option value="2"<?php if($VERSION==2){ echo " selected"; } ?>>2 - 创建新房间</option>
+	        <option value="2"<?php if($VERSION==2){ echo " selected"; } ?>>2 - 所有及创建新房间</option>
         </select>
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><a name="roomnames"></a><b>1. First Public room name (also <u>default</u> if 0 is selected above or there is no user selection from list).</b><br />
-    	<font color=red><i>Note: although disabling is possible, this first room should be 启用 and unrestricted at all times. (this is also the default room for people not selecting one from login page.)</i></font><br />
-		<i>Hint (for all the public rooms): If restricted, although the room is public, only admins, topmoderators and users set in the Registered Users sheet will be able to join this room. Also the lurking page and public archives will not contain any of the posts submitted to restricted rooms.</i>
+    <td><a name="roomnames"></a><b>1。 第一个公开房间的名称 (also <u>default</u> 假如 0 被选中高于或没有用户的选择从列表中)。</b><br />
+    	<font color=red><i>注：虽然禁用是可能的，这第一个房间，在任何时候都应该启用和不受限制。（这也是人们不要从登录页面中选择一个默认的房间。）</i></font><br />
+		<i>提示（适用于所有的公共房间）：如果限制，虽然房间是公开的，只有管理员，超级版主和注册用户表中设置的用户将能够加入这个房间。潜伏页的公共档案馆将不包含任何提交受限房间的职位。</i>
 	</td>
     <td>
 		<input name="vROOM1" type="text" size="25" maxlength="25" value="<?php echo $ROOM1; ?>"><br />
@@ -1636,7 +1636,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>2. Second Public room name.</b>
+    <td><b>2。 第二个公开房间名称。</b>
 	</td>
     <td>
 		<input name="vROOM2" type="text" size="25" maxlength="25" value="<?php echo $ROOM2; ?>"><br />
@@ -1657,7 +1657,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>3. Third Public room name.</b>
+    <td><b>3。 第三个公开房间名称。</b>
 	</td>
     <td>
 		<input name="vROOM3" type="text" size="25" maxlength="25" value="<?php echo $ROOM3; ?>"><br />
@@ -1678,7 +1678,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>4. Forth Public room name.</b>
+    <td><b>4。 第四个公开房间名称。</b>
 	</td>
     <td>
 		<input name="vROOM4" type="text" size="25" maxlength="25" value="<?php echo $ROOM4; ?>"><br />
@@ -1699,7 +1699,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>5. Fifth Public room name.</b>
+    <td><b>5。 第五个公开房间名称。</b>
 	</td>
     <td>
 		<input name="vROOM5" type="text" size="25" maxlength="25" value="<?php echo $ROOM5; ?>"><br />
@@ -1720,8 +1720,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>6. First Private room name.</b><br />
-    	<i>Note: This is displayed on login, only to admins</i>
+    <td><b>6。 第一个私人房间名称。</b><br />
+    	<i>注意：这是显示在登录时，只有管理员</i>
     </td>
     <td>
 		<input name="vROOM6" type="text" size="25" maxlength="25" value="<?php echo $ROOM6; ?>"><br />
@@ -1738,8 +1738,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>7. Second Private room name (also default if none selected).</b><br />
-    	<i>Note: This is displayed on login, only to admins</i>
+    <td><b>7。 第二个私人房间名称 (同时默认情况下，如果没有选)。</b><br />
+    	<i>注意：这是显示在登录时，只有管理员</i>
     </td>
     <td>
 		<input name="vROOM7" type="text" size="25" maxlength="25" value="<?php echo $ROOM7; ?>"><br />
@@ -1756,8 +1756,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>8. Third Private room name.</b><br />
-    	<i>Note: This is displayed on login to all power users (fits for "staff only" rooms)</i>
+    <td><b>8。 第三私人房间名称。</b><br />
+    	<i>注：这是显示在登录到所有的高级用户（适合"职员唯一"房间）</i>
     </td>
     <td>
 		<input name="vROOM8" type="text" size="25" maxlength="25" value="<?php echo $ROOM8; ?>"><br />
@@ -1774,8 +1774,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>9. Fourth Private room name.</b><br />
-    	<i>Note: This is displayed by default on login to all users (fits for "support" like rooms)</i>
+    <td><b>9。 第四私人房间名称。</b><br />
+    	<i>注：这是显示登录到所有用户的默认（"支援" 房间）</i>
     </td>
     <td>
 		<input name="vROOM9" type="text" size="25" maxlength="25" value="<?php echo $ROOM9; ?>"><br />
@@ -1792,9 +1792,9 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>1. 显示 Default Private rooms on index page.</b><br />
-    	<i>提示: Not all the private rooms will be shown as options for all the users (see next two settings)<br />
-    	This option will just let the <b>admins</b> see all default private rooms, but is <u><b>需要</b></u> for the next two settings to work.</i>
+    <td><b>1。 显示默认索引页上的私人房间。</b><br />
+    	<i>提示：并非所有的包房，将显示所有用户的选择（见接下来的两个设置）<br />
+    	此选项只会让<b>管理员</b>看到所有预设的包房，但 <u><b>需要</b></u> 到接下来的两个设置工作。</i>
     </td>
     <td>
         <select name="vSHOW_PRIV">
@@ -1804,8 +1804,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>2. 显示 Default Private rooms on index page to MODERATORS.</b><br />
-    	<i>提示: Moderators will only see rooms 8 and 9 (Staff and Support types). <font color=red>Setting no.1 is 需要!</font></i>
+    <td><b>2。 显示默认索引页上的私人房间到版主。</b><br />
+    	<i>提示：版主将只能看到房间8和第9（职员和支援类型）。 <font color=red>需要设置 no.1 ！</font></i>
     </td>
     <td>
         <select name="vSHOW_PRIV_MOD">
@@ -1815,8 +1815,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>3. 显示 Default Private rooms on index page to NORMAL USERS.</b><br />
-    	<i>提示: Non-power users (including guests) will only see room 9 (Support). <font color=red>Setting no.1 is 需要!</font></i>
+    <td><b>3。 显示默认索引页上的私人房间到普通用户。</b><br />
+    	<i>提示：非权力用户（包括客人）将只能看到房间9（支援）。 <font color=red>需要设置 no.1 ！</font></i>
     </td>
     <td>
         <select name="vSHOW_PRIV_USR">
@@ -1833,10 +1833,10 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>启用 different Colored Names in users lists and/or posts.</b><br />
-    	<i><font color=red>Important: If you change this setting while there are users logged in, all your users must reload their browsers or exit and re-login in order to apply the changes. An announcement to all the rooms will be automatically sent if you 启用/停用 this.</font><br />
-    	提示s: If 启用, users can set their personal color to use for their usernames in users lists only.<br />
-    	If 已禁用, admins will be shown in <a class="admin">red</a> and moderators in <a class="mod">blue</a> (their default power colors in skins/styleN.css.php), only if "Italicize power usernames" is 启用 below.</i>
+    <td><b>启用 不同颜色名称在用户列表 和/或 文章。</b><br />
+    	<i><font color=red>重要：如果更改此设置，同时也有用户登录，您的所有用户必须重新载入他们的浏览器或退出并重新登录以套用变更。将自动发送到所有房间的一个公告，如果你启用/停用这个。</font><br />
+    	提示：如果启用，用户可以设置自己的个人色彩，在用户用于他们的用户名列出唯一。<br />
+    	如果已禁用，管理员将显示在 <a class="admin">红色</a> 和主持人在 <a class="mod">蓝色</a> (其预设权力颜色在 skins/styleN.css.php), 只有"斜体 权力用户名"启用下。/i>
     </td>
     <td>
         <select name="vCOLOR_NAMES">
@@ -1846,9 +1846,9 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-	<td><b>Italicize Power usernames in users lists:</b><br />
-    	This option allows you to choose between showing or not who is admin and moderator in your chat (this doesn't change any powers, it only makes admin/moder names different or not - italics - from regular users).<br />
-		<i>提示: This also applies to color names, showing or not admins in <a class="admin">red</a> and moderators in <a class="mod">blue</a> (their default power colors in skins/styleN.css.php) or, if Colored Names are 启用 above, <?php echo("<font color=".$COLOR_CA.">".$COLOR_CA."</font>"); ?> and <?php echo("<font color=".$COLOR_CM.">".$COLOR_CM."</font>"); ?> (their default power colors chosen below).</i>
+	<td><b>斜体权力用户名在用户列表：</b><br />
+    	此选项允许您选择显示或没有谁是你聊天的管理员和版主（这不会改变任何权力，它不仅使管理/主持 名称不同或不 - 斜体 - 从普通用户）。<br />
+		<i>提示：这也适用于颜色的名称，显示或管理员在 <a class="admin">红色</a> 跟主持人在 <a class="mod">蓝色</a> (其预设权力颜色在 skins/styleN.css.php) or， 如果要彩色的名称启用上面， <?php echo("<font color=".$COLOR_CA.">".$COLOR_CA."</font>"); ?> and <?php echo("<font color=".$COLOR_CM.">".$COLOR_CM."</font>"); ?> (其预设权力颜色选择以下)。</i>
 	</td>
     <td>
         <select name="vITALICIZE_POWERS">
@@ -1858,18 +1858,18 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-	<td><b>Set Power users to post tagged text:</b><br />
-    	This option allows you to Set Power users to be able to post tagged text (bold, italic, underline or any combination of them).<br />
-    	<font color=red>Important: It only works if the setting above is set to 显示 italics/colors. Only B, I or/and U are allowed (case insensitive). Any other letters/characters will not be saved. Values must be separated by commas (if more than one).</font><br />
-		<i>Example: b,i,u (or b,i or b or u,b)</i>
+	<td><b>设置权力用户张贴标签的文本：</b><br />
+    	此选项允许您设置权力用户能够张贴标签的文本（粗体，斜体，下划线或它们的任意组合）。<br />
+    	<font color=red>重要：它仅适用于上面的设置，如果设置显示斜体/颜色。只有B，I或/和U允许（不区分大小写）。任何其他字母/字符将不会被保存。值必须用逗号隔开（如果多于一个）。</font><br />
+		<i>范例：b,i,u (or b,i or b or u,b)</i>
 	</td>
     <td>
 		<input name="vTAGS_POWERS" type="text" size="3" maxlength="5" value="<?php echo $TAGS_POWERS; ?>">
     </td>
 </tr>
 <tr>
-    <td><b>Color filters in posts.</b><br />
-    	<i>Hint: If 启用, all the users can use any color, if not, they can use all except the power colors set below.</i>
+    <td><b>颜色过滤器在发文。</b><br />
+    	<i>提示：如果启用，所有的用户可以使用任何颜色，如果没有，他们可以使用除下文所载的权力色彩。</i>
     </td>
     <td>
         <select name="vCOLOR_FILTERS">
@@ -1879,8 +1879,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Set the Power Colors to be used only by admins (first as default).</b><br />
-    	<i>Hint: This applies to the posted messages' colors mainly, but if Colored Names are 启用 above, it will also apply to the names colors.</i>
+    <td><b>设置使用的权力颜色由管理员唯一（第一为默认）。</b><br />
+    	<i>提示：这适用于发布消息的颜色为主，但如果颜色名称启用上面，它也将适用于名称颜色。</i>
 	</td>
     <td>
  		<?php
@@ -1931,8 +1931,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>Set the Power Colors to be used only by moderators (first as default).</b><br />
-    	<i>提示. This applies to the posted messages' colors mainly, but if Colored Names are 启用 above, it will also apply to names colors.<br />Admins will also be able to use these colors, but no other users.</i>
+    <td><b>设置权力颜色 只能用于主持人（第一为默认）。</b><br />
+    	<i>提示。这适用于发布消息的颜色为主，但如果颜色名称启用上面，它也将适用于名称颜色。<br />管理员也可以使用这些颜色，但其他用户不能。</i>
     </td>
     <td>
 		<?php
@@ -1983,13 +1983,13 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>允许 guests to use colors.</b><br />
-    	<i>Hint: If 已禁用, unregistered users will only use the default color for that room in their posts. This will encourage them to register (hopefully).</i>
+    <td><b>允许游客使用颜色。</b><br />
+    	<i>提示：如果已禁用，未注册的用户在自己的发言上，将只能使用默认颜色在房间。这将鼓励他们注册（希望）。</i>
     </td>
     <td>
         <select name="vCOLOR_ALLOW_GUESTS">
-	        <option value="0"<?php if($COLOR_ALLOW_GUESTS==0){ echo " selected"; } ?>>不允许 colors for Guests</option>
-	        <option value="1"<?php if($COLOR_ALLOW_GUESTS==1){ echo " selected"; } ?>>允许 colors for Guests</option>
+	        <option value="0"<?php if($COLOR_ALLOW_GUESTS==0){ echo " selected"; } ?>>不允许颜色供游客</option>
+	        <option value="1"<?php if($COLOR_ALLOW_GUESTS==1){ echo " selected"; } ?>>允许颜色供游客</option>
         </select>
     </td>
 </tr>
@@ -2001,7 +2001,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>于入口处播放声音.</b>
+    <td><b>于入口处播放声音。</b>
 	</td>
     <td>
         <select name="vALLOW_ENTRANCE_SOUND">
@@ -2013,29 +2013,29 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>Path to the sound to be played on entrance (only .wav extensions).</b><br />
-    	<i>Example: sounds/beep.wav' (you can also use long/remote URLs)</i>
+    <td><b>在入口处演奏声音的路径（只能用.WAV 副档名）。</b><br />
+    	<i>范例：'sounds/beep.wav' (您还可以使用 长/远程 网址)</i>
     </td>
-    <td>On Entrance:<br />
+    <td>在进入：<br />
 		<input name="vENTRANCE_SOUND" type="text" size="20" maxlength="255" value="<?php echo $ENTRANCE_SOUND; ?>"><br />
-    	On Welcome:<br />
+    	在欢迎：<br />
 		<input name="vWELCOME_SOUND" type="text" size="20" maxlength="255" value="<?php echo $WELCOME_SOUND; ?>">
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Play a buzz sound on /buzz command.</b><br />
-    	(or just display a [Buzz] message, without any sound)
+    <td><b>播放蜂鸣声在 /buzz 命令。</b><br />
+    	（或只是显示[叮咚]消息，没有任何声音）
     </td>
     <td>
         <select name="vALLOW_BUZZ_SOUND">
-	        <option value="0"<?php if($ALLOW_BUZZ_SOUND==0){ echo " selected"; } ?>>No buzz sounds</option>
-	        <option value="1"<?php if($ALLOW_BUZZ_SOUND==1){ echo " selected"; } ?>>Play buzz sounds</option>
+	        <option value="0"<?php if($ALLOW_BUZZ_SOUND==0){ echo " selected"; } ?>>没有BUZZ的声音</option>
+	        <option value="1"<?php if($ALLOW_BUZZ_SOUND==1){ echo " selected"; } ?>>播放BUZZ的声音</option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Path to the buzz sound to be played (only .wav extensions).</b><br />
-    	<i>Example: sounds/chimedwn.wav (you can also use long/remote URLs)</i>
+    <td><b>要播放的路径声路径(只能用 .wav 副档名)。</b><br />
+    	<i>范例：'sounds/chimedwn.wav' (你也可以使用 长/远程 URL)</i>
     </td>
     <td>
 		<input name="vBUZZ_SOUND" type="text" size="25" maxlength="255" value="<?php echo $BUZZ_SOUND; ?>">
@@ -2049,47 +2049,47 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>启用 Profanity filter.</b><br />
-    	(replacement of posted swear words with the chars below)
+    <td><b>启用脏话过滤。</b><br />
+    	(更换张贴的脏话与下面的字符的话)
     </td>
     <td>
         <select name="vNO_SWEAR">
-	        <option value="0"<?php if($NO_SWEAR==0){ echo " selected"; } ?>>允许 swearing</option>
-	        <option value="1"<?php if($NO_SWEAR==1){ echo " selected"; } ?>>不允许 swearing</option>
+	        <option value="0"<?php if($NO_SWEAR==0){ echo " selected"; } ?>>允许脏话</option>
+	        <option value="1"<?php if($NO_SWEAR==1){ echo " selected"; } ?>>不允许脏话</option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Expression to replace the swear words with.</b>
+    <td><b>表达式替换脏话。</b>
 	</td>
     <td>
 		<input name="vSWEAR_EXPR" type="text" size="7" maxlength="5" value="<?php echo $SWEAR_EXPR; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>1. Room name to allow swear words (avoid the filter).</b><br />
-    	<i>Note: You must enter the exact name of the room. <a href=#roomnames class="ChatLink">Click here</a> to check your room names.</i>
+    <td><b>1。 房间名称允许脏话字（避免过滤器）。</b><br />
+    	<i>注意：您必须输入房间的确切名称。 <a href=#roomnames class="ChatLink">点击这里</a> 检查你的房间名称。</i>
     </td>
     <td>
 		<input name="vSWEAR1" type="text" size="25" maxlength="25" value="<?php echo $SWEAR1; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>2. Room name to allow swear words (avoid the filter).</b>
+    <td><b>2。 房间名称允许脏话字（避免过滤器）。</b>
 	</td>
     <td>
 		<input name="vSWEAR2" type="text" size="25" maxlength="25" value="<?php echo $SWEAR2; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>3. Room name to allow swear words (avoid the filter).</b>
+    <td><b>3。 房间名称允许脏话字（避免过滤器）。</b>
 	</td>
     <td>
 		<input name="vSWEAR3" type="text" size="25" maxlength="25" value="<?php echo $SWEAR3; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>4. Room name to allow swear words (avoid the filter).</b>
+    <td><b>4。 房间名称允许脏话字（避免过滤器）。</b>
 	</td>
     <td>
 		<input name="vSWEAR4" type="text" size="25" maxlength="25" value="<?php echo $SWEAR4; ?>">
@@ -2103,8 +2103,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>启用 whispers (private messages) system.</b><br />
-    	<i>提示: if 已禁用, only the public messages will be allowed to be posted in chat</i>
+    <td><b>启用耳语（私人讯息）系统。</b><br />
+    	<i>提示：如果已禁用，只有公共信息将被允许在聊天张贴</i>
     </td>
     <td>
         <select name="vENABLE_PM">
@@ -2114,11 +2114,10 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>启用 popup whispers (private messages) system.</b><br />
-    	<i>提示: if 启用, guests will not receive PMs in popups - they must register)<br />
-    	This can also be configured per each registered user in their profile<br />
-    	<font color=red>Important: If you change this setting while there are users logged in, all your users must reload their browsers or exit and re-login. An announcement to all the rooms will be automatically sent if you 启用/停用 this.</font></i><br />
-		Off-line PMs will always show in a popup anyway (otherwise, recipients won't be notified about new PMs).
+    <td><b>启用弹出耳语（私人信息）系统。</b><br />
+    	<i>提示：如果启用，游客不会接受到弹出的 PMS  - 他们必须注册）<br/>每个注册用户可以自己配置私敲是否弹出视窗显示<br />
+    	<font color=red>重要：如果更改此设置，同时也有用户登录，您的所有用户必须重新载入他们的浏览器或退出并重新登录。将自动发送到所有房间的一个公告，如果你 启用/停用 这个。</font></i><br />
+		离线的项目经理无论如何将始终显示在弹出（否则，收件人不会被通知新的PMs）。
     </td>
     <td>
         <select name="vPRIV_POPUP">
@@ -2129,7 +2128,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>允许用户从数据库中删除自己（收到）项目经理.</b><br />
-    	<i>Hint: if 启用, users will be able to select and delete the private messages they received.</i>
+    	<i>提示：如果启用，用户将能够选择和删除他们收到的私人讯息。</i>
     </td>
     <td>
         <select name="vALLOW_PM_DEL">
@@ -2139,8 +2138,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>Clean-up time for unread off-line private messages.</b><br />
-    	<i><font color=red>Important: If the recipient does not login to chat in this interval, these old private messages are automatically removed from the database (they will not be exported to the log archive neither, so the old unread PMs get lost).</font></i>
+    <td><b>多久时间清理未读离线的私人讯息。/b><br />
+    	<i><font color=red>重要：如果收件人不登录到聊天，在此区间，这些旧型私人邮件被自动删除从数据库中（他们不会被导出到日志归档，所以旧的未读项目经理会丢失）。</font></i>
 	</td>
     <td>
 		<input name="vPM_KEEP_DAYS" type="text" size="7" maxlength="3" value="<?php echo $PM_KEEP_DAYS; ?>"> (天)
@@ -2154,7 +2153,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>启用机器人在聊天.</b><br />
+    <td><b>启用机器人在聊天。</b><br />
     	<i><font color=red>重要：以下改变任何的BOT设置之前，请停止机器人，如果它运行在聊天（你将无法踢它出事后，因为它被设置为admin）</font></i>
     </td>
     <td>
@@ -2165,8 +2164,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>启用聊天BOT公开对话.</b><br />
-    	<i>提示: 如果禁用此，机器人只会听和用户使用私人信息，在聊天交谈</i>
+    <td><b>启用聊天BOT公开对话。</b><br />
+    	<i>提示：如果禁用此，机器人只会听和用户使用私人信息，在聊天交谈</i>
     </td>
     <td>
         <select name="vBOT_PUBLIC">
@@ -2176,8 +2175,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>输入您的BOT想要的名称.</b><br />
-    	<i><font color=red>重要事项：确保 BOT是满载之前，请不要更改名称（检查它是否可以在聊天室张贴）: <a href="./bot/talk.php" target="_blank">Talk2Bot</a> !</i>
+    <td><b>输入您的BOT想要的名称。</b><br />
+    	<i><font color=red>重要事项：确保 BOT是满载之前，请不要更改名称（检查它是否可以在聊天室张贴）：<a href="./bot/talk.php" target="_blank">Talk2Bot</a> ！</i>
 		<?php if (!$bot_id) echo ("<br />注：你的机器人还没有被正确加载！阅读 install/manual installation/Manual Instructions.txt"); ?></font>
     </td>
     <td>
@@ -2185,24 +2184,24 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr>
-    <td><b>BOT status & maintainance.</b><br />
-    	<?php if ($bot_id <> 1) echo ("<i><font color=red>Important: If your bot is not responding properly (posts empty messages) and/or the Bot ID <> 1, you might need to reload your bot. This operation will empty the bot tables in the database and reload the entire script.</i></font>"); ?>
+    <td><b>BOT 状态 & maintainance。</b><br />
+    	<?php if ($bot_id <> 1) echo ("<i><font color=red>重要的是：如果你的BOT不正常响应（空消息帖子）和/或 Bot 的 ID <> 1，您可能需要重新载入你的机器人。此操作将清空数据库中的的BOT表，并重新加载整个脚本。</i></font>"); ?>
     </td>
     <td>
 			<?php
 			if (!$bot_loaded)
 			{
-				echo("<font color=red>Your Bot is not loaded to the DB.</font>".((file_exists("bot/aiml/startup.xml") && file_exists("bot/botloader.php")) ? "<br />Click <a href=\"./bot/botloader.php\" target=\"_blank\">here</a> to load it now!": ""));
+				echo("<font color=red>你的Bot 没有装载到资料库中。</font>".((file_exists("bot/aiml/startup.xml") && file_exists("bot/botloader.php")) ? "<br />Click <a href=\"./bot/botloader.php\" target=\"_blank\">here</a> 到装载它 现在！" : ""));
 			}
 			elseif ($bot_id)
 			{
-				echo(($bot_id == 1) ? "<font color=green>Bot ID:</font><input name=\"BotId\" type=\"text\" size=\"7\" maxlength=\"2\" value=\"$bot_id\" DISABLED READONLY>" : "<font color=red>Bot ID:</font><input name=\"BotId\" type=\"text\" size=\"7\" maxlength=\"2\" value=\"$bot_id\" DISABLED READONLY><br />Click <a href=\"./bot/botloader.php\" target=\"_blank\" class=\"error\">here</a> to reload bot");
+				echo(($bot_id == 1) ? "<font color=green>Bot ID：</font><input name=\"BotId\" type=\"text\" size=\"7\" maxlength=\"2\" value=\"$bot_id\" DISABLED READONLY>" : "<font color=red>Bot ID：</font><input name=\"BotId\" type=\"text\" size=\"7\" maxlength=\"2\" value=\"$bot_id\" DISABLED READONLY><br />Click <a href=\"./bot/botloader.php\" target=\"_blank\" class=\"error\">here</a> to reload bot");
 			}
 			?>
 		</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enter the color of the BOT response messages.</b>
+    <td><b>输入 BOT 回应讯息的颜色。</b>
 	</td>
     <td>
 		<?php
@@ -2226,8 +2225,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>Enter the 头像 of the BOT.</b><br />
-    	<i>提示: It will be shown only if the avatar system is 启用</i>
+    <td><b>输入BOT的头像。</b><br />
+    	<i>提示：只有头像系统启用了它才会显示</i>
     </td>
     <td>
 		<input name="vBOT_AVATAR" type="text" size="20" maxlength="255" value="<?php echo $BOT_AVATAR; ?>">
@@ -2235,16 +2234,16 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enter the message to be posted by BOT on start.</b><br />
-    	<i>提示: Avoid special characters or the settings will not be saved</i>
+    <td><b>输入被启动时BOT发布的训息。</b><br />
+    	<i>提示：避免使用 特殊字符 或设置 它们将不会被保存</i>
     </td>
     <td>
 		<input name="vBOT_HELLO" type="text" size="25" maxlength="100" value="<?php echo $BOT_HELLO; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>Enter the message to be posted by BOT on stop.</b><br />
-    	<i>提示: Avoid special characters or the settings will not be saved</i>
+    <td><b>输入在BOT停止时发布的讯息。</b><br />
+    	<i>提示：避免使用 特殊字符 或设置 它们将不会被保存</i>
     </td>
     <td>
 		<input name="vBOT_BYE" type="text" size="25" maxlength="100" value="<?php echo $BOT_BYE; ?>">
@@ -2258,36 +2257,36 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Max number of messages that user may export on /save command.</b><br />
-    	<i>Values: 0=停用, any integer=number of messages, *=no limit</i>
+    <td><b>用户可以导出保存 /save 命令讯息的最大数量。</b><br />
+    	<i>值：0=停用, 任何整数=数量 的消息， *=没有限制</i>
     </td>
     <td>
 		<input name="vSAVE" type="text" size="7" maxlength="2" value="<?php echo $SAVE; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>启用 Different Topics for each room (/topic or /topic * commands).</b><br />
-    	(or just display a default one, called Global topic)<br />
-		<i>提示: default topics ought to be edited in the according localized.chat.php / per each desired language, or, to add a default global topic (which overrides the localized topics), add it to localized/_owner/owner.php)</i>
+    <td><b>每个房间（/topic or /topic * 命令）启用不同的主题。</b><br />
+    	(或只显示一个默认的，被称为全球主题)<br />
+		<i>提示：默认的主题应该将在的根据 localized.chat.php/ per 每个所需的语言编辑，或添加一个默认的全球主题（覆盖本地化的主题），将它添加到 localized/_owner/owner.php)</i>
     </td>
     <td>
         <select name="vTOPIC_DIFF">
-	        <option value="0"<?php if($TOPIC_DIFF==0){ echo " selected"; } ?>>全局话题</option>
+	        <option value="0"<?php if($TOPIC_DIFF==0){ echo " selected"; } ?>>全球主题</option>
 	        <option value="1"<?php if($TOPIC_DIFF==1){ echo " selected"; } ?>>多重话题</option>
         </select>
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>输入 /room 命令的表达.</b><br />
-    	<i>举例: <font color=red>房间注意事项:</font> or <font color=red>解说员说:</font> or <font color=red>看这里:</font> or <font color=red>管管说:</font></i>
+    <td><b>输入 /room 命令的表达。</b><br />
+    	<i>举例：<font color=red>房间注意事项：</font> or <font color=red>解说员说：</font> or <font color=red>看这里：</font> or <font color=red>管管说：</font></i>
     </td>
     <td>
 		<input name="vROOM_SAYS" type="text" size="25" maxlength="255" value="<?php echo $ROOM_SAYS; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>允许 主持人来使用 /demote command.</b><br />
-		<i>提示: 如果设置为第二个选项，主持人就能降级其他主持人 - <font color=red>要非常小心!</font></i>
+    <td><b>允许 主持人来使用 /demote command。</b><br />
+		<i>提示：如果设置为第二个选项，主持人就能降级其他主持人 - <font color=red>要非常小心！</font></i>
 	</td>
     <td>
         <select name="vDEMOTE_MOD">
@@ -2297,24 +2296,24 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enter the max number of dice per throw.</b><br />
-    	<i><font color=red>Use a value smaller than 99.</font><br />
-		提示: Needed ONLY for Dice v.2. Please note that increasing this value too much, will lead to a load of how many dice images you choose, which can return delays displaying the messages (drastically for non-IE browsers)</i>
+    <td><b>输入每个掷骰子的最大数量。</b><br />
+    	<i><font color=red>使用值小于 99。</font><br />
+		提示：只需要V.2骰子。请注意，增加这个值太大，会导致到你选择多少骰子图像的负载，它可以显示消息（急剧的非IE浏览器的返回延迟）</i>
     </td>
     <td>
 		<input name="vMAX_DICES" type="text" size="7" maxlength="2" value="<?php echo $MAX_DICES; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>Enter the max number of dice per throw (sides per die for Dice v.2)</b>
+    <td><b>输入每个扔​​骰子的最大数量（每个模双方骰子V.2）</b>
 	</td>
     <td>
 		<input name="vMAX_ROLLS" type="text" size="7" maxlength="3" value="<?php echo $MAX_ROLLS; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>在用户列表的默认排序顺序 (/sort 命令).</b><br />
-    	<i>提示: 用户还可以使用 /sort 命令来改变他们的排序顺序</i>
+    <td><b>在用户列表的默认排序顺序 (/sort 命令)。</b><br />
+    	<i>提示：用户还可以使用 /sort 命令来改变他们的排序顺序</i>
     </td>
     <td>
         <select name="vUSERS_SORT_ORD">
@@ -2331,17 +2330,17 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-	<td><b>启用 use of /math commands:</b><br />
-    	This option allows you to post mathematical formulas using the LaTeX format provided by MathJax.<br />
-		<i>Hint: Here is a <a href="http://www.mathjax.org/demos/tex-samples/" target="_blank">sample page</a> from the original mathjax.org site. You just need to type /math and copy&paste the source code of the desired formula.</i><br />
-		You can also use a local configuration file by setting the right source path. Default source (src) is: <font color="blue"><i>http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML</i></font>
+	<td><b>启用使用者的 /math 数学的命令。</b><br />
+    	此选项允许您张贴使用LaTeX格式MathJax提供的数学公式。<br />
+		<i>提示：这里是一个 <a href="http://www.mathjax.org/demos/tex-samples/" target="_blank">样本页面</a> 从原始mathjax.org网站。你只需要输入/数学和拷贝和粘贴所需的公式的源代码。</i><br />
+		您还可以使用本地配置文件，通过设置合适的源路径。默认源（SRC）是： <font color="blue"><i>http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML</i></font>
 	</td>
     <td>
         <select name="vALLOW_MATH">
 	        <option value="0"<?php if($ALLOW_MATH==0){ echo " selected"; } ?>>停用 MathJax</option>
 	        <option value="1"<?php if($ALLOW_MATH==1){ echo " selected"; } ?>>启用 MathJax</option>
         </select><br />
-		Plugin Configuration Source:<br />
+		插件配置源：<br />
 		<input name="vSRC_MATH" type="text" size="25" maxlength="255" value="<?php echo $SRC_MATH; ?>">
     </td>
 </tr>
@@ -2355,7 +2354,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</tr>
 <tr bgcolor="#B0C4DE">
     <td><b>启用使用 /video 指令张贴影片（例如YouTube）</b><br />
-		<i>提示s: 如果 已禁用, 只有原始视频源的链接将被张贴在聊天; 如果 启用, 任何用户都可以发布所有用户可以直接在聊天观看视频; 设置以 管理员 将只显示管理员和超级室长张贴的影片，其他用户发布唯一链接到原来的视频源.</i>
+		<i>提示：如果 已禁用, 只有原始视频源的链接将被张贴在聊天; 如果 启用, 任何用户都可以发布所有用户可以直接在聊天观看视频; 设置以 管理员 将只显示管理员和超级室长张贴的影片，其他用户发布唯一链接到原来的视频源。</i>
 	</td>
     <td>
         <select name="vALLOW_VIDEO">
@@ -2369,14 +2368,14 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     <td><b>设置的视频播放器的宽度和高度</b>
 	</td>
     <td>
-		W: <input name="vVIDEO_WIDTH" type="text" size="4" maxlength="3" value="<?php echo $VIDEO_WIDTH; ?>">&nbsp;
-		H: <input name="vVIDEO_HEIGHT" type="text" size="4" maxlength="3" value="<?php echo $VIDEO_HEIGHT; ?>">
+		W：<input name="vVIDEO_WIDTH" type="text" size="4" maxlength="3" value="<?php echo $VIDEO_WIDTH; ?>">&nbsp;
+		H：<input name="vVIDEO_HEIGHT" type="text" size="4" maxlength="3" value="<?php echo $VIDEO_HEIGHT; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>启用 the MediaPlayer add-on in chat</b><br />
-    	<i><font color=red>选择正确的格式框架将根据大小（音频 < 视频）.<br />重要：如果更改此设置，同时也有用户登录，您的所有用户必须重新载入他们的浏览器或退出并重新登录。如果您启用/禁用此，将被自动发送到所有房间的一个公告.</font><br />
-    	<i>提示 : 假如 启用, 一个有效的流媒体URL也必须在接下来的领域。你可以设置一个静态的 audio/video  源或 radioplayer 的流媒体服务器。例如 http://playlist.yahoo.com/makeplaylist.dll?id=1369080&segment=149773 (NASA TV live station)</i>
+    	<i><font color=red>选择正确的格式框架将根据大小（音频 < 视频）。<br />重要：如果更改此设置，同时也有用户登录，您的所有用户必须重新载入他们的浏览器或退出并重新登录。如果您启用/禁用此，将被自动发送到所有房间的一个公告。</font><br />
+    	<i>提示：假如 启用, 一个有效的流媒体URL也必须在接下来的领域。你可以设置一个静态的 audio/video  源或 radioplayer 的流媒体服务器。例如 http://playlist.yahoo.com/makeplaylist.dll?id=1369080&segment=149773 (NASA TV live station)</i>
 	</td>
     <td>
         <select name="vEN_WMPLAYER">
@@ -2387,7 +2386,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr>
-    <td><b>流媒体的URL路径.</b>
+    <td><b>流媒体的URL路径。</b>
 	</td>
     <td>
 		<input name="vWMP_STREAM" type="text" size="25" maxlength="255" value="<?php echo $WMP_STREAM; ?>">
@@ -2401,25 +2400,25 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>对管理员定义快速选单.</b><br />
-    	<i>提示: 保持这些字符： <b>|</b> 在每一行结束时，除了最后一个<br />
-    	清空此复选框以禁用管理员的快速选单.</i>
+    <td><b>对管理员定义快速选单。</b><br />
+    	<i>提示：保持这些字符：<b>|</b> 在每一行结束时，除了最后一个<br />
+    	清空此复选框以禁用管理员的快速选单。</i>
     </td>
     <td><textarea name="vQUICKA" rows=5 cols=28 wrap=on><?php echo $QUICKA; ?></textarea>
 	</td>
 </tr>
 <tr>
-    <td><b>定义主持人快速选单.</b><br />
-    	<i>提示: 保持这些字符： <b>|</b> 在每一行结束时，除了最后一个<br />
-    	清空此复选框来禁用主持人的快速选单.</i>
+    <td><b>定义主持人快速选单。</b><br />
+    	<i>提示：保持这些字符：<b>|</b> 在每一行结束时，除了最后一个<br />
+    	清空此复选框来禁用主持人的快速选单。</i>
     </td>
     <td><textarea name="vQUICKM" rows=5 cols=28 wrap=on><?php echo $QUICKM; ?></textarea>
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>定义其他用户的快速选单.</b><br />
-    	<i>提示: 保持这些字符： <b>|</b> 在每一行结束时，除了最后一个<br />
-    	清空此复选框来禁用一般用户的快速选单.</i>
+    <td><b>定义其他用户的快速选单。</b><br />
+    	<i>提示：保持这些字符：<b>|</b> 在每一行结束时，除了最后一个<br />
+    	清空此复选框来禁用一般用户的快速选单。</i>
     </td>
     <td><textarea name="vQUICKU" rows=5 cols=28 wrap=on><?php echo $QUICKU; ?></textarea>
 	</td>
@@ -2432,8 +2431,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>启用 头像 System.</b><br />
-    	<i><font color=red>Important: If you change this setting while there are users logged in, all your users must reload their browsers or exit and re-login. An announcement to all the rooms will be automatically sent if you 启用/停用 this.</font></i>
+    <td><b>启用 头像系统。</b><br />
+    	<i><font color=red>重要：如果更改此设置，同时也有用户登录，您的所有用户必须重新载入他们的浏览器或退出并重新登录。如果你 启用/停用 这里，将自动发送一个公告到所有房间。</font></i>
     </td>
     <td>
         <select name="vUSE_AVATARS" id="use_avatars" onChange="swapImage('use_avatars','use_avatarsToSwap')">
@@ -2443,25 +2442,25 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>显示 Change 头像 (Profile) button in input bar.</b>
+    <td><b>显示变更头像 (Profile) 按钮在输入栏边。</b>
 	</td>
     <td>
         <select name="vAVA_PROFBUTTON" id="prof_button" onChange="swapImage('prof_button','prof_buttonToSwap')">
-	        <option value="0"<?php if($AVA_PROFBUTTON==0){ echo " selected"; } ?>>隐藏 头像 Button</option>
-	        <option value="1"<?php if($AVA_PROFBUTTON==1){ echo " selected"; } ?>>显示 头像 Button</option>
+	        <option value="0"<?php if($AVA_PROFBUTTON==0){ echo " selected"; } ?>>隐藏 头像按钮</option>
+	        <option value="1"<?php if($AVA_PROFBUTTON==1){ echo " selected"; } ?>>显示 头像按钮</option>
         </select>&nbsp;<img id="prof_buttonToSwap" src="<?php echo(($AVA_PROFBUTTON==1) ? "./".$ChatPath."images/avatarbutton.gif" : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 width=".$AVA_WIDTH." height=".$AVA_HEIGHT." ALT=\"Avatar button\" Title=\"Avatar button\""); ?> />
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>The path to your 头像 dir.</b>
+    <td><b>您的头像目录的路径。</b>
 	</td>
     <td>
 		<input name="vAVA_RELPATH" type="text" size="25" maxlength="55" value="<?php echo $AVA_RELPATH == "" ? "images/avatars/" : $AVA_RELPATH; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>Enter the number of avatars to be shown from your defined folder.</b><br />
-	<i>Hint: only the first <?php echo($NUM_AVATARS); ?> avatars will be shown to the users</i>
+    <td><b>输入头像号码要显示你定义的文件夹。</b><br />
+	<i>提示：只有第一 <?php echo($NUM_AVATARS); ?> 头像将显示给用户</i>
 	</td>
     <td>
 		<?php
@@ -2486,7 +2485,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Users default 头像.</b>
+    <td><b>使用者预设头像。</b>
 	</td>
     <td>
 		<select name="vDEF_AVATAR" id="def_avatar" onChange="swapImage('def_avatar','def_avatarToSwap')">
@@ -2509,74 +2508,74 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr>
-    <td><b>Enter the width and height for the avatars to be shown.</b><br />
-    	<i>Hint: Usually, for a nice layout, width and height values should be equal.</i>
+    <td><b>输入将显示的头像的宽度和高度。</b><br />
+    	<i>提示：通常情况下，一个不错的布局，宽度和高度值应该是平等的。</i>
 	</td>
     <td>
-		Width:&nbsp;&nbsp;<input name="vAVA_WIDTH" type="text" size="7" maxlength="3" value="<?php echo $AVA_WIDTH; ?>"> (px)<br />
-		Height:&nbsp;<input name="vAVA_HEIGHT" type="text" size="7" maxlength="3" value="<?php echo $AVA_HEIGHT; ?>"> (px)
+		Width：&nbsp;&nbsp;<input name="vAVA_WIDTH" type="text" size="7" maxlength="3" value="<?php echo $AVA_WIDTH; ?>"> (px)<br />
+		Height：&nbsp;<input name="vAVA_HEIGHT" type="text" size="7" maxlength="3" value="<?php echo $AVA_HEIGHT; ?>"> (px)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>允许 users to upload 头像s from their machines.</b><br />
-	<i><font color=red>Important: make sure the "images/avatars" and "images/avatars/uploaded" folders exist and they have public write permissions (CHMOD 0777)!</font></i>
+    <td><b>允许用户上传头像，从他们的机器。</b><br />
+	<i><font color=red>重要：确保 "images/avatars" 跟 "images/avatars/uploaded" 文件夹存在，并且他们有公开写入权限 (CHMOD 0777)！</font></i>
 	</td>
     <td>
         <select name="vALLOW_UPLOADS">
-	        <option value="0"<?php if($ALLOW_UPLOADS==0){ echo " selected"; } ?>>不允许 uploads</option>
-	        <option value="1"<?php if($ALLOW_UPLOADS==1){ echo " selected"; } ?>>允许 uploads</option>
+	        <option value="0"<?php if($ALLOW_UPLOADS==0){ echo " selected"; } ?>>不允许上传</option>
+	        <option value="1"<?php if($ALLOW_UPLOADS==1){ echo " selected"; } ?>>允许上传</option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>显示 gender icons beside avatars.</b>
+    <td><b>显示头像旁边的性别图标。</b>
 	</td>
     <td>
         <select name="vDISP_GENDER" id="genders" onChange="swapImage('genders','gendersToSwap')">
-	        <option value="0"<?php if($DISP_GENDER==0){ echo " selected"; } ?>>隐藏 Gender icons</option>
-	        <option value="1"<?php if($DISP_GENDER==1){ echo " selected"; } ?>>显示 Gender icons</option>
+	        <option value="0"<?php if($DISP_GENDER==0){ echo " selected"; } ?>>隐藏性别图标</option>
+	        <option value="1"<?php if($DISP_GENDER==1){ echo " selected"; } ?>>显示性别图标</option>
         </select>&nbsp;<img style="vertical-align:middle" id="gendersToSwap" src="<?php echo(($DISP_GENDER==1) ? "./".$ChatPath."images/gender_couple.gif" : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 ALT=\"Genders\" Title=\"Genders\""); ?> />
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><a name="force"></a><b>启用 use of GRAVATARS.</b><br />
-    	<i><font color=red>Important: <a href=#avatars>头像 System</a> must also be 启用 above!</font><br />
-		Hint: If 启用, all guests will have a default gravatar as avatar.</i>
+    <td><a name="force"></a><b>启用 use of GRAVATARS。</b><br />
+    	<i><font color=red>重要： <a href=#avatars>头像系统</a> 还必须启用上面！</font><br />
+		提示：如果启用，所有客人将作为默认的gravatar头像。</i>
     </td>
     <td>
         <select name="vALLOW_GRAVATARS" id="gravatars" onChange="swapImage('gravatars','gravatarsToSwap')">
 	        <option value="0"<?php if($ALLOW_GRAVATARS==0){ echo " selected"; } ?>>停用 Gravatars</option>
-	        <option value="1"<?php if($ALLOW_GRAVATARS==1){ echo " selected"; } ?>>Let users decide</option>
-	        <option value="2"<?php if($ALLOW_GRAVATARS==2){ echo " selected"; } ?>>Force Only Gravatars</option>
+	        <option value="1"<?php if($ALLOW_GRAVATARS==1){ echo " selected"; } ?>>让用户决定</option>
+	        <option value="2"<?php if($ALLOW_GRAVATARS==2){ echo " selected"; } ?>>强制使用Gravatar</option>
         </select>&nbsp;<img id="gravatarsToSwap" src="<?php echo(($ALLOW_GRAVATARS) ? "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=".$AVA_WIDTH."&r=g&d=".$GRAVATARS_DYNAMIC_DEF : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 ALT=\"Gravatar\" Title=\"Gravatar\""); ?> />
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
 	<td colspan="2">
-    	<i><font color=blue>Definition:</font><br />
-    	A gravatar, or <b>G</b>lobally <b>R</b>ecognized <b>A</b>vatar, is quite simply an avatar image that follows you from weblog to weblog appearing beside your name when you comment on gravatar 启用 sites. Avatars help identify your posts on web forums, so why not on weblogs.<br />Signing up for a gravatar.com account is FREE, and all that's required is an email address. Once you've signed up you can upload your avatar image and soon after you'll start seeing it on gravatar 启用 weblogs (including this chat)!<br />
-		<font color=blue>(read more about Gravatars on <a href="http://www.gravatar.com" target="_blank">http://www.gravatar.com</a> site)</font></i>
+    	<i><font color=blue>定义:</font><br />
+    	一个 gravatar，或 <b>G</b>lobally <b>R</b>ecognized <b>A</b>vatar，是很简单的头像图片后您的网志，您的名字旁边出现时，你对此有何评论的gravatar启用站点。替身帮助确定您的文章在网上论坛，所以为什么不是网志。<br/>注册为gravatar.com帐户是免费的，这是一个电子邮件地址。一旦你签署了，你可以上传你的头像图片后不久，你就会开始看到它的gravatar启用网志（包括本聊天）！<br/>
+		<font color=blue>（阅读更多有关Gravatar的 <a href="http://www.gravatar.com" target="_blank">http://www.gravatar.com</a> 位置)</font></i>
 	</td>
 </tr>
 <tr>
-    <td><b>GRAVATARS Cache Settings.</b><br />
-	<i>Server Info:<br /><font color=red>Important: if cache is 启用, make sure the "cache" folder exists in the chat root and it has public write permissions (CHMOD 0777)!<br />
+    <td><b>Gravatar的高速缓存设置。</b><br />
+	<i>服务器信息：<br /><font color=red>重要: 如果缓存是启用，确保 "cache" 缓存文件夹中存在的聊天根，它具有公开写入权限(CHMOD 0777)！<br />
 	<?php echo((!$cache_supported || $server_blocked) ? "<b>Cache not supported on this server!</b><br />" : ""); ?>
-		</font><font color=blue>Hosting Server IP: <b><?php echo($_SERVER['SERVER_ADDR']); ?></b> <?php echo(!$server_blocked ? "" : "<b><font color=red>cannot get access to gravatar.com!</font></b>"); ?></font><br />
-		<font color=blue>Php server version: <b><?php echo(version_compare(PHP_VERSION,'5') >= 0 ? "<font color=red>".PHP_VERSION."</font>" : PHP_VERSION); ?></b></font><br />
-		<font color=blue>allow_url_fopen: <b><?php echo(!(ini_get("allow_url_fopen")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
-		<font color=blue>allow_url_include: <b><?php echo(!(ini_get("allow_url_include")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
-		<font color=blue>file_get_contents: <b><?php echo(!(function_exists("file_get_contents")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
-		<font color=blue>MySQL server version: <b><?php echo(mysql_get_server_info()); ?></b></font></i>
+		</font><font color=blue>托管服务器 IP： <b><?php echo($_SERVER['SERVER_ADDR']); ?></b> <?php echo(!$server_blocked ? "" : "<b><font color=red>cannot get access to gravatar.com!</font></b>"); ?></font><br />
+		<font color=blue>PHP服务器版本： <b><?php echo(version_compare(PHP_VERSION,'5') >= 0 ? "<font color=red>".PHP_VERSION."</font>" : PHP_VERSION); ?></b></font><br />
+		<font color=blue>allow_url_fopen： <b><?php echo(!(ini_get("allow_url_fopen")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
+		<font color=blue>allow_url_include： <b><?php echo(!(ini_get("allow_url_include")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
+		<font color=blue>file_get_contents： <b><?php echo(!(function_exists("file_get_contents")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
+		<font color=blue>MySQL服务器的版本： <b><?php echo(mysql_get_server_info()); ?></b></font></i>
 	</td>
     <td>
-		<input type="radio" value="0" name="vGRAVATARS_CACHE" <?php if($GRAVATARS_CACHE==0 || !$cache_supported || $server_blocked) { echo " checked"; }; ?>>&nbsp;Cache Disabled<br />
-		<input type="radio" value="1" name="vGRAVATARS_CACHE" <?php if($GRAVATARS_CACHE==1 && $cache_supported){ echo " checked"; }; if(!$cache_supported || $server_blocked){ echo " DISABLED"; }; ?>>&nbsp;Cache Enabled<br />
-		Cache Age:<br /><input name="vGRAVATARS_CACHE_EXPIRE" type="text" size="7" maxlength="3" value="<?php echo $GRAVATARS_CACHE_EXPIRE; ?>"<?php if(!$cache_supported || $server_blocked){ echo " readonly"; }; ?>> (天)
+		<input type="radio" value="0" name="vGRAVATARS_CACHE" <?php if($GRAVATARS_CACHE==0 || !$cache_supported || $server_blocked) { echo " checked"; }; ?>>&nbsp;禁用缓存<br />
+		<input type="radio" value="1" name="vGRAVATARS_CACHE" <?php if($GRAVATARS_CACHE==1 && $cache_supported){ echo " checked"; }; if(!$cache_supported || $server_blocked){ echo " DISABLED"; }; ?>>&nbsp;启用高速缓存<br />
+		缓存期限：<br /><input name="vGRAVATARS_CACHE_EXPIRE" type="text" size="7" maxlength="3" value="<?php echo $GRAVATARS_CACHE_EXPIRE; ?>"<?php if(!$cache_supported || $server_blocked){ echo " readonly"; }; ?>> (天)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>GRAVATARS Allowed Ratings.</b>
+    <td><b>Gravatar的准许额定值。</b>
 	</td>
     <td>
         <select name="vGRAVATARS_RATING">
@@ -2590,16 +2589,16 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr bgcolor="#B0C4DE">
     <td colspan=2>
-		<i>G rated gravatar is suitable for display on all websites with any audience type. <font color=blue>(recommended & default)</font><br />
-		PG rated gravatars may contain rude gestures, provocatively dressed individuals, the lesser swear words, or mild violence.<br />
-		R rated gravatars may contain such things as harsh profanity, intense violence, nudity, or hard drug use.<br />
-		X rated gravatars may contain hardcore sexual imagery or extremely disturbing violence.</i>
+		<i>G 额定Gravatar是适合观众与任何类型的所有网站上显示。 <font color=blue>(建议与默认)</font><br />
+		PG 额定Gravatar的可能包含粗鲁的手势，挑衅穿着的个人，较小的粗话，或轻微暴力。<br />
+		R 额定Gravatar的可能含有恶劣的亵渎，激烈的暴力，裸露，或硬药物使用这样的事情。<br />
+		X 额定Gravatar的可能包含铁杆性的的图像或极其令人不安的暴力。</i>
 	</td>
 </tr>
 <tr>
-    <td><b>Dynamic Default GRAVATARS.</b><br />
-	<i>Hints: This will randomly return a dynamic image for each user who don't have a gravatar.com account for their email (chat guests and/or users without a registered gravatar.com account).<br />
-	<font color=red>You can force to display Random default Gravatars only if <a href="#force">Force Only Gravatars</a> is also 启用 above!</font></i>
+    <td><b>动态的默认Gravatar。</b><br />
+	<i>提示：这将随机返回一个为每个用户的动态图像，没有他们的电子邮件 gravatar.com 帐户。（聊天嘉宾和/或未经注册 gravatar.com 帐户的用户）。<br />
+	<font color=red>您可以强制显示随机的默认Gravatar<a href="#force">强制只有Gravatar</a>同时启用上面！</font></i>
     </td>
     <td>
         <select name="vGRAVATARS_DYNAMIC_DEF" id="gravatars_def" onChange="swapImage('gravatars_def','gravatars_defToSwap')">
@@ -2624,8 +2623,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         ?>
         &nbsp;<img id="gravatars_defToSwap" src="<?php echo((isset($grav_def_src) && $grav_def_src!= "") ? $grav_def_src : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 ALT=\"Dynamic Gravatar\" Title=\"Dynamic Gravatar\""); ?> /><br />
         <select name="vGRAVATARS_DYNAMIC_DEF_FORCE">
-	        <option value="0"<?php if($GRAVATARS_DYNAMIC_DEF_FORCE==0){ echo " selected"; } ?>>显示 Users' Defaults</option>
-	        <option value="1"<?php if($GRAVATARS_DYNAMIC_DEF_FORCE==1){ echo " selected"; } ?>>Force Random Defaults</option>
+	        <option value="0"<?php if($GRAVATARS_DYNAMIC_DEF_FORCE==0){ echo " selected"; } ?>>显示用户预设值</option>
+	        <option value="1"<?php if($GRAVATARS_DYNAMIC_DEF_FORCE==1){ echo " selected"; } ?>>强制随机预设值</option>
         </select>
 	</td>
 </tr>
@@ -2637,28 +2636,28 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>启用 chat logging.</b><br />
-    	<i>Hint: it will generate html files of the cleaned/deleted conversations. The full version can be accessed via the admin advanced menu, the short version (only the public messages) from the Extra Options menu in chat rooms.</i>
+    <td><b>启用聊天/记录。</b><br />
+    	<i>提示：将生成该HTML文件清理/删除对话。完整的版本，可通过管理的高级菜单，在聊天室的额外选项菜单（公共信息）的简短版本。</i>
     </td>
     <td>
         <select name="vCHAT_LOGS">
-	        <option value="0"<?php if($CHAT_LOGS==0){ echo " selected"; } ?>>停用 Logs/Archive</option>
-	        <option value="1"<?php if($CHAT_LOGS==1){ echo " selected"; } ?>>启用 Logs/Archive</option>
+	        <option value="0"<?php if($CHAT_LOGS==0){ echo " selected"; } ?>>停用聊天/记录</option>
+	        <option value="1"<?php if($CHAT_LOGS==1){ echo " selected"; } ?>>启用聊天/记录</option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Set the name of your admin (full) logs folder.</b><br />
-    	<i><font color=red>Important: Rename the original "logsadmin" folder to a hard to guess name for your full logs folder.</font><br />
-    	Hint: This is different from the public/users accessible one (called "logs"), which does not include any private/confidential data from your chat conversations/actions.</i>
+    <td><b>设置您的管理员（全）日志文件夹的名称。</b><br />
+    	<i><font color=red>重要：原有的"logsadmin"文件夹，重命名一个很难猜测，您的完整的日志文件夹的名称。</font><br />
+    	提示：这是从不同的公共/用户访问（称为"日志"），其中不包括任何私人/机密数据从您的聊天对话/动作。</i>
     </td>
     <td>
 		<input name="vLOG_DIR" type="text" size="25" maxlength="25" value="<?php echo $LOG_DIR; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Display logs to non-admin users in chat.</b><br />
-    	<i>Hint: Only if Chat logging is 启用.</i>
+    <td><b>日志显示-非管理员用户在聊天中</b><br />
+    	<i>提示：只有聊天记录是启用才有效。</i>
     </td>
     <td>
         <select name="vSHOW_LOGS_USR">
@@ -2675,19 +2674,19 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>启用 chat lurking.</b><br />
-    	<i>Hint: it will allow non-login people to monitor public conversations and events in the chat.</i>
+    <td><b>启用聊天潜伏。</b><br />
+    	<i>提示：它将允许非登录人监测在聊天的公开对话和事件。</i>
     </td>
     <td>
         <select name="vCHAT_LURKING">
-	        <option value="0"<?php if($CHAT_LURKING==0){ echo " selected"; } ?>>停用 Lurking page</option>
-	        <option value="1"<?php if($CHAT_LURKING==1){ echo " selected"; } ?>>启用 Lurking page</option>
+	        <option value="0"<?php if($CHAT_LURKING==0){ echo " selected"; } ?>>停用潜伏页面</option>
+	        <option value="1"<?php if($CHAT_LURKING==1){ echo " selected"; } ?>>启用潜伏页面</option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Display lurking page to non-admin users in chat and login page.</b><br />
-    	<i>提示: Only if Chat lurking is 启用.</i>
+    <td><b>显示潜伏页面在非管理员用户聊天中和登录页面。</b><br />
+    	<i>提示：只有，如果聊天潜伏是启用时。</i>
     </td>
     <td>
         <select name="vSHOW_LURK_USR">
@@ -2697,7 +2696,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>启用 the Chat extras in admin panel.</b>
+    <td><b>启用聊天extras在管理面板中。</b>
 	</td>
     <td>
         <select name="vCHAT_EXTRAS">
@@ -2714,8 +2713,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>启用 Random Quote mod.</b><br />
-    	<i><font color=red>重要：更改这些设置，你必须先启用引述模式!</font></i>
+    <td><b>启用引用外挂。</b><br />
+    	<i><font color=red>重要：更改这些设置，你必须先启用引述模式！</font></i>
 	</td>
     <td>
 		<select name="vQUOTE">
@@ -2725,14 +2724,14 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr>
-	<td><b>引用 Name:</b>
+	<td><b>引用名称：</b>
 	</td>
 	<td>
 		<input name="vQUOTE_NAME" type="text" size="25" maxlength="25" value="<?php echo $QUOTE_NAME; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-	<td><b>引用 Name color:</b>
+	<td><b>引用名称颜色：</b>
 	</td>
 	<td>
 		<?php
@@ -2756,7 +2755,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr>
-	<td><b>引用头像:</b>
+	<td><b>引用头像：</b>
 	</td>
 	<td>
 		<input name="vQUOTE_AVATAR" type="text" size="20" maxlength="255" value="<?php echo $QUOTE_AVATAR; ?>">
@@ -2764,7 +2763,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>引用 File:</b>
+    <td><b>引用档案：</b>
 	</td>
 	<td>
 		<?php
@@ -2800,14 +2799,14 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr>
-	<td><b>引用 Posting frequency:</b>
+	<td><b>引用发布频率：</b>
 	</td>
 	<td>
 		<input name="vQUOTE_TIME" type="text" size="7" maxlength="2" value="<?php echo $QUOTE_TIME; ?>"> (分钟)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-	<td><b>引用 Background color:</b>
+	<td><b>引用背景颜色：</b>
 	</td>
 	<td>
 		<?php
@@ -2838,9 +2837,9 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Control who will be visible in chat rooms.</b><br />
-    	<i><font color=red>Important: if you 启用 Ghost Control, users set as ghosts (invisible) will also be hidden from all the public pages and counters, except their posts and commands in rooms (messages frame)!</font><br />
-    	Hint: You can still monitor ghosts' connections and activity in the Connections tab. Please note that ghosts will still be able to act as usual in chat (can post public or private messages and can use all the commands, according to their powers).</i>
+    <td><b>控制谁将会在聊天室中可见。</b><br />
+    	<i><font color=red>重要：如果你启用控制鬼，鬼（无形）的用户也将被隐藏所有公共页面和计数器，除了他们的职位和房间中的命令（消息框架）！</font><br />
+		提示：您还可以监视鬼"连接，在连接选项卡上的活动。请注意，鬼仍然能够采取行动像往常一样在聊天中（可以发布公共或私人信息，并且可以使用所有的命令，根据他们的权力）。</i>
 	</td>
     <td>
         <select name="vHIDE_ADMINS">
@@ -2854,9 +2853,9 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-	<td><b>Special Ghosts (monitors):</b><br />
-    	<i><font color=red>Important: Add usernames, separated by commas, without spaces (,)!</font><br />
-    	Hint: These users will not be seen by others in chat (only in the Connection tab) and, if they are also admins, they will be able to monitor all the events in chat rooms (including private messages!). We recommend activate these powers <font color=red>only for Parental Control</font> purposes!</i>
+	<td><b>特别鬼（显示器）：</b><br />
+	   	<i><font color=red>重要：添加用户名，以逗号分隔，没有空格 (,)！</font><br />
+		提示：这些用户别人将不能看到在聊天中（仅在连接选项卡），如果他们也是管理员，他们将能够监视所有的聊天室的活动（包括私人讯息！）。我们建议激活这些权力 <font color=red>家长控制</font> 目的！</i>
 	</td>
 	<td>
 		<input name="vSPECIAL_GHOSTS" type="text" size="25" maxlength="255" value="<?php echo $SPECIAL_GHOSTS; ?>">
@@ -2864,9 +2863,9 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <!--
 <tr bgcolor="#B0C4DE">
-	<td><b>Punished Ghosts (Phantoms):</b><br />
-    	<i><font color=red>Important: Add usernames, separated by commas, without spaces (,)!</font><br />
-    	<i>Hint: These users will not be seen by others in chat (only in the Connection tab) and they will not be able to post or send any events in chat rooms. We recommend activate these powers <font color=red>only for Users that fail to be banished</font>!</i>
+	<td><b>惩罚的幽灵（幻影）：</b><br />
+    	<i><font color=red>重要： 添加用户名，以逗号分隔，没有空格 (,)!</font><br />
+    	<i>提示：这些用户将不能看到别人在聊天中（仅在连接选项卡），他们将无法在聊天室张贴或发送任何事件。我们建议只激活这些用户无法被放逐权力 <font color=red>唯一用在用户未能被驱逐</font>!</i>
 	</td>
 	<td>
 		<input name="vPUNNISHED_GHOSTS" type="text" size="25" maxlength="255" value="<?php //echo $PUNNISHED_GHOSTS; ?>">
@@ -2881,7 +2880,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>需要在注册和设定档设定生日与否.</b>
+    <td><b>需要在注册和设定档设定生日与否。</b>
 	</td>
     <td>
         <select name="vREQUIRE_BDAY">
@@ -2891,8 +2890,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>通过电子邮件发送到用户在他们的生日自动问候.</b><br />
-    	<i><font color=red>重要：如果 启用启用, the script will work only if the chat page will be visited/loaded in the sending interval (default = 7 days). After that interval, the email draft will be dropped off!</font></i>
+    <td><b>通过电子邮件发送到用户在他们的生日自动问候。</b><br />
+	   	<i><font color=red>重要：如果 启用发送，该脚本将工作只有在聊天页面将 visited/loaded 在发送间隔（默认值=7天）。该时间间隔后，电子邮件草案将关闭！</font></i>
 	</td>
     <td>
 		<select name="vSEND_BDAY_EMAIL">
@@ -2902,8 +2901,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>设定您希望问候发送触发时间从午夜何时.</b><br />
-    	<i>提示: 允许正值或负值 (0 = 午夜).<br />
+    <td><b>设定您希望问候发送触发时间从午夜何时。</b><br />
+    	<i>提示: 允许正值或负值 (0 = 午夜)。<br />
 		请注意：此设置是在考虑到服务器的时间，而不是用户的时间，因此它是可能的电子邮件将被发送在 (+-)时区偏差</i>
 	</td>
     <td>
@@ -2911,16 +2910,16 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>How many days the Greetings will be up for sending.</b><br />
-    	<i>Hint: If there is no one in the chat nor visiting the chat page within this interval, the Greeting will not be send anymore, as the effect on Celebrated user would not be the same.</i>
+	<td><b>多少天的问候，将会发送。</b><br />
+    	<i>提示：如果没有一个在聊天，也不访问此区间内的聊天页面，贺卡将不能发送了，为庆祝用户的影响将是不一样的。</i>
 	</td>
     <td>
 			<input name="vSEND_BDAY_INTVAL" type="text" size="7" maxlength="2" value="<?php echo $SEND_BDAY_INTVAL; ?>"> (天)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>设定发送的内文.</b><br />
-    	<i>提示: 你可以自行修改内文.<br />
+    <td><b>设定发送的内文。</b><br />
+    	<i>提示: 你可以自行修改内文。<br />
 		请注意：在资料夹加其他语言版本</i>
 	</td>
 	<td>
@@ -2965,7 +2964,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 {
 	?>
-		<div><p><table align=center border=0 cellpadding=0 class=menu style=background:white><tr><td class=success align=right>上次最后储存这些设定 <?php if (C_LAST_SAVED_ON) echo("on <span class=error>".$Last_Saved_On."</span> "); ?><?php if (C_LAST_SAVED_BY) echo("by <span class=error>".C_LAST_SAVED_BY."</span> "); ?>!</td></tr></table></div>
+		<div><p><table align=center border=0 cellpadding=0 class=menu style=background:white><tr><td class=success align=right>上次最后储存这些设定 <?php if (C_LAST_SAVED_ON) echo("on <span class=error>".$Last_Saved_On."</span> "); ?><?php if (C_LAST_SAVED_BY) echo("by <span class=error>".C_LAST_SAVED_BY."</span> "); ?>！</td></tr></table></div>
 	<?php
 }
 	?>

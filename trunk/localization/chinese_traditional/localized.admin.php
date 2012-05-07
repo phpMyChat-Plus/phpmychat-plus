@@ -71,10 +71,10 @@ define("A_SHEET3_5", "您還沒有作出任何選擇。請至少選擇一個，�
 // Frame for sending mails
 define("A_SHEET4_0", "您沒有設置管理員電子郵件 ’".A_MENU_5."’ 頁。");
 define("A_SHEET4_1", "傳送郵件");
-define("A_SHEET4_2", "到:");
+define("A_SHEET4_2", "到：");
 define("A_SHEET4_3", "選擇全部");
-define("A_SHEET4_4", "主題:");
-define("A_SHEET4_5", "訊息:");
+define("A_SHEET4_4", "主題：");
+define("A_SHEET4_5", "訊息：");
 define("A_SHEET4_6", "現在發送！");
 define("A_SHEET4_7", "所有的電子郵件已發送。");
 define("A_SHEET4_8", "發送郵件時出現內部錯誤。");
@@ -132,13 +132,13 @@ define("A_CHAT_LOGS_30", "IP 文件");
 define("A_CHAT_LOGS_31", "總計大小 %s %s");
 define("A_CHAT_LOGS_32", "文件");
 define("A_CHAT_LOGS_33", "文件夾");
-define("A_CHAT_LOGS_34", "%s 成功刪除: %s");
-define("A_CHAT_LOGS_35", "%s 成功創建: %s");
-define("A_CHAT_LOGS_36", "%s 不存在: %s");
-define("A_CHAT_LOGS_37", "%s 無法刪除: %s");
-define("A_CHAT_LOGS_38", "%s 無法創建: %s");
-define("A_CHAT_LOGS_39", "%s 寫入受保護: %s");
-define("A_CHAT_LOGS_40", "儲存檔案時發生的錯誤: %s"); // filename
+define("A_CHAT_LOGS_34", "%s 成功刪除： %s");
+define("A_CHAT_LOGS_35", "%s 成功創建： %s");
+define("A_CHAT_LOGS_36", "%s 不存在： %s");
+define("A_CHAT_LOGS_37", "%s 無法刪除： %s");
+define("A_CHAT_LOGS_38", "%s 無法創建： %s");
+define("A_CHAT_LOGS_39", "%s 寫入受保護： %s");
+define("A_CHAT_LOGS_40", "儲存檔案時發生的錯誤： %s"); // filename
 
 //Admin Search Page
 define("A_SEARCH_1", "聊天室搜尋頁");
@@ -152,7 +152,7 @@ define("A_SEARCH_8", "簡介");
 define("A_SEARCH_9", "鏈接");
 define("A_SEARCH_10", "搜尋");
 define("A_SEARCH_11", "權限的分類，選項 <b>ad</b>，<b>mod</b> 女 或 <b>u</b>。");
-define("A_SEARCH_12", "用於 性別分類，選項: <b>0</b> 秘密，<b>1</b> 男，<b>2</b> 女 或 <b>3</b> 夫婦。");
+define("A_SEARCH_12", "用於 性別分類，選項： <b>0</b> 秘密，<b>1</b> 男，<b>2</b> 女 或 <b>3</b> 夫婦。");
 define("A_SEARCH_13", "用戶名");
 define("A_SEARCH_14", "名字");
 define("A_SEARCH_15", "姓氏");
