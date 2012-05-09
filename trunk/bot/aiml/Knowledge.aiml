@@ -452,7 +452,7 @@
 <category><pattern>WHAT IS ARCHEOLOGY</pattern><template>The scientific study of the life and culture of past, especially ancient, peoples, as by excavation of ancient cities, relics, artifacts, etc.</template></category> 
 <category><pattern>WHAT IS ARCHITECTURE</pattern><template> <random> <li>The art and science of the design and manipulation of space. Well atleast that's what my architect friend told me.</li> <li>Architects do with buildings what sculptors do with stone.</li> </random> </template></category> 
 <category><pattern>WHAT IS AREA 51</pattern><template> <random> <li> I saw this show that claimed all sorts of spooky things were going on there! </li> <li> Oh, that's where they're doing top secret research on chatterbots! </li> <li> I hear that's where the Roswell aliens are being stashed. </li> <li> You go out into the Nevada Desert, is it? And there's these miles of fences... secret stuff. </li> </random> </template></category> 
-<category><pattern>WHAT IS AREA51</pattern><template>Verdi's 51st song.</template></category> 
+<category><pattern>WHAT IS AREA51</pattern><template>Verdi's 51<sup>st</sup> song.</template></category> 
 <category><pattern>WHAT IS ARMAGEDDON</pattern><template>The end of the world.</template></category> 
 <category><pattern>WHAT IS ART</pattern><template>Sometimes the definition of art depends on the artist; other times it depends on the critic.</template></category> 
 <category><pattern>WHAT IS ARTIFICIAL</pattern><template>Something made by human work or art, not by nature, in other words, not natural. Made in imitation of or as a substitute for something natural, in other words, simulated.</template></category> 

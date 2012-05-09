@@ -71,7 +71,7 @@ full calendar [year]	- displays the chosen year;
 	<srai>YGETEACHMONTHDATA</srai>
 	</think>
 	<condition name="wrongyear">
-		<li value="WRONG">Sorry <get name="name"/> but the chosen year <get name="masteryear"/> is not between 1700 and 2299 (centuries 18th to 23rd).<br />Please try again.<br /><think><set name="wrongyear"></set></think></li>
+		<li value="WRONG">Sorry <get name="name"/> but the chosen year <get name="masteryear"/> is not between 1700 and 2299 (centuries 18<sup>th</sup> to 23<sup>rd</sup>).<br />Please try again.<br /><think><set name="wrongyear"></set></think></li>
 		<li>Today is <date/>.<br />Below is the calendar for <get name="year"/> (<get name="centuryth"/> century).<br />
 	<table class="table" border="1">
 	<tr align="center" valign="top" class="tabtitle"><td colspan="4"><font color="white"><b>= <get name="year"/> Calendar =</b></font></td></tr>
@@ -310,7 +310,7 @@ full calendar [year]	- displays the chosen year;
 	<srai>YGETEACHMONTHDATA</srai>
 </think>
 	<condition name="wrongyear">
-		<li value="WRONG">Sorry <get name="name"/> but the chosen year <get name="masteryear"/> is not between 1700 and 2299 (centuries 18th to 23rd).<br />Please try again.<br /><think><set name="wrongyear"></set></think></li>
+		<li value="WRONG">Sorry <get name="name"/> but the chosen year <get name="masteryear"/> is not between 1700 and 2299 (centuries 18<sup>th</sup> to 23<sup>rd</sup>).<br />Please try again.<br /><think><set name="wrongyear"></set></think></li>
 		<li>Today is <date/>.<br />Below is the calendar for <get name="month"/> <get name="year"/> (<get name="centuryth"/> century).<br />
 	<table class="table" border="1"><srai>MONTHHEADER</srai><srai>YGETMONTHLAYOUT</srai></table>
 <think>

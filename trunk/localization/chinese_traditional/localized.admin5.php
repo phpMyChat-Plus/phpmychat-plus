@@ -792,7 +792,7 @@ if (C_LAST_SAVED_ON)
 	settype($last_saved_on = mysql_to_ts(C_LAST_SAVED_ON), "integer");
 	if (C_TMZ_OFFSET) settype($tmz_offset = C_TMZ_OFFSET, "integer");
 	$Last_Saved_On = $last_saved_on + $tmz_offset*60*60;
-	$longdtformat = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e").date('S',$Last_Saved_On))." of", L_LONG_DATETIME) : L_LONG_DATETIME);
+	$longdtformat = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e")."<sup>".date('S',$Last_Saved_On))."</sup> of", L_LONG_DATETIME) : L_LONG_DATETIME);
 	$Last_Saved_On = strftime($longdtformat, $Last_Saved_On);
 	if(stristr(PHP_OS,'win'))
 	{
@@ -1156,8 +1156,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			- 傳送新用戶註冊帳戶的詳細資料（通知）給管理員：<font color=green>通知管理員</font><br />
 			因此，用戶將選擇自己所需的數據，將生成一個隨機密碼，但用戶將不會收到電子郵件與密碼，所以他仍然無法登錄;他只會得到有關未決註冊的通知郵件。<br />
 			在同一時間，管理員將收到 <u>2 電子郵件</u>：
-			<li>1st - 是一份登記數據，用於管理員的將來參考（如用戶忘記密碼時）。這總是以英文發送郵件;</li>
-			<li>2nd - 是電子郵件，其中包含新創建的帳戶的隨機密碼和其餘的資料 (此電子郵件已經準備要發送/轉發給用戶，如果該帳戶被批准)。此電子郵件編寫將選擇於登記用戶語言。</li><br />
+			<li>1<sup>st</sup> - 是一份登記數據，用於管理員的將來參考（如用戶忘記密碼時）。這總是以英文發送郵件;</li>
+			<li>2<sup>nd</sup> - 是電子郵件，其中包含新創建的帳戶的隨機密碼和其餘的資料 (此電子郵件已經準備要發送/轉發給用戶，如果該帳戶被批准)。此電子郵件編寫將選擇於登記用戶語言。</li><br />
 			該管理員驗證誰是這個人，用戶提供了什麼資料。如果他決定批准該用戶帳戶，管理員只會有第二封電子郵件轉發到該用戶的電子郵件（電子郵件地址已經被格式化審批）。另一種方法是去"<?php echo(A_MENU_4); ?>" 和發送電子郵件登錄到該用戶的電子郵件資料。或者，管理員甚至可以用該名稱/密碼登錄在“編輯個人資料” 形成和調整/修改資料/密碼。<br />
 			<font color=red>重要的是：不要忘記放你正確的管理員電子郵件 <a href=#admin_email class="ChatLink">在這裡</a>，以完成以上所有這些工作)。同時要考慮到非公開（限制性，私人），這些設置會變成您的聊天服務器。如果你忽略了未能驗證和批准帳戶，用戶也許就放棄不回來了。</font></i>
 	</td>

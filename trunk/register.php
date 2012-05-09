@@ -261,7 +261,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 		 $emailMessage .= L_REG_31.": ".($LASTNAME ? $LASTNAME : L_NOT_SELECTED).$eol
 		 . "".L_REG_30.": ".($FIRSTNAME ? $FIRSTNAME : L_NOT_SELECTED).$eol;
 	 }
-	 $longdtformat = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e").date('S')." of"), L_LONG_DATETIME) : L_LONG_DATETIME);
+	 $longdtformat = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e")."<sup>".date('S')."</sup> of"), L_LONG_DATETIME) : L_LONG_DATETIME);
 	 if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $longdtformat = str_replace(" ","",$longdtformat);
 	 $emailMessage .= "".L_PRO_7.": ".($BIRTHDAY != "0000-00-00" && $BIRTHDAY != "" ? $format_birth_day : L_NOT_SELECTED).$eol
      . "".L_REG_33.": ".$shweml.$eol

@@ -404,7 +404,7 @@ if($DbLink->num_rows() > 0)
 		if ($Align == "right") $Message = str_replace("arrowr","arrowl",$Message);
 		if ($L == "english" && strpos($Message,"L_LONG_DATETIME") !== false){
 			$longdtdate = substr($Message, (strpos($Message,"L_LONG_DATETIME") + 16), 10);
-			$longdtformat = 'str_replace("%d of", (stristr(PHP_OS,"win") ? "%#d" : "%e").date("S",'.$longdtdate.')." of", L_LONG_DATETIME)';
+			$longdtformat = 'str_replace("%d of", (stristr(PHP_OS,"win") ? "%#d" : "%e")."<sup>".date("S",'.$longdtdate.')."</sup> of", L_LONG_DATETIME)';
 			$Message = str_ireplace("L_LONG_DATETIME",$longdtformat,$Message);
 		}
 #		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))

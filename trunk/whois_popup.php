@@ -343,7 +343,7 @@ else
 
 if ($show_bday && $my_dobtime)
 {
-	$longdtformat = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e").date('S',$my_dobtime)." of"), L_LONG_DATE) : L_LONG_DATE);
+	$longdtformat = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e")."<sup>".date('S',$my_dobtime)."</sup> of"), L_LONG_DATE) : L_LONG_DATE);
 	$dob_format = $show_age ? $longdtformat : trim(str_replace(array("%Y.","%Y","(%A)","%A",",","-","年","년","den"),"",str_replace("  "," ",$longdtformat)));
 	$my_dob_time = strftime($dob_format, $my_dobtime);
 	if(stristr(PHP_OS,'win'))
@@ -506,7 +506,7 @@ if ($login_counter && C_LOGIN_COUNTER)
 <?php
 }
 	$last_login = ($User == C_BOT_NAME ? $last_login : $reg_time);
-	$longdtformat1 = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e").date('S',$last_login)." of"), L_LONG_DATETIME) : L_LONG_DATETIME);
+	$longdtformat1 = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e")."<sup>".date('S',$last_login)."</sup> of"), L_LONG_DATETIME) : L_LONG_DATETIME);
 	$last_visit = strftime($longdtformat1,$last_login);
 	if(stristr(PHP_OS,'win'))
 	{

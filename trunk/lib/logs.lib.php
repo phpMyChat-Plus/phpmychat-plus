@@ -223,7 +223,7 @@ $logpath = "./".C_LOG_DIR."/".$year."/".$month."/".$year.$month.$day.".php"  ;
         } while (!@flock($fp, LOCK_EX) and $retries <= 50);
 //		@flock($fp, LOCK_EX);    // Lock file in exclusive mode
 		@fwrite($fp, sprintf($eol.'<?php'.$eol));
-#		@fwrite($fp, sprintf('$longdtformat = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,"win") ? "%#d" : "%e").date("S",$CorrectedTime)." of"), L_LONG_DATETIME) : L_LONG_DATETIME);'.$eol));
+#		@fwrite($fp, sprintf('$longdtformat = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,"win") ? "%#d" : "%e")."<sup>".date("S",$CorrectedTime)."</sup> of"), L_LONG_DATETIME) : L_LONG_DATETIME);'.$eol));
 		@fwrite($fp, sprintf('$chatSaved = strftime(L_LONG_DATETIME,'.$mess_time.');'.$eol));
 		@fwrite($fp, sprintf("if(stristr(PHP_OS,'win'))".$eol));
 		@fwrite($fp, sprintf('{'.$eol));
@@ -456,6 +456,7 @@ $logpathu = "./logs/".$yearu."/".$monthu."/".$yearu.$monthu.$dayu.".php"  ;
 
 //		@flock($fpu, LOCK_EX);    // Lock file in exclusive mode
 		@fwrite($fpu, sprintf($eol.'<?php'.$eol));
+#		@fwrite($fpu, sprintf('$longdtformat = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,"win") ? "%#d" : "%e")."<sup>".date("S",$CorrectedTime)."</sup> of"), L_LONG_DATETIME) : L_LONG_DATETIME);'.$eol));
 		@fwrite($fpu, sprintf('$chatSavedu = strftime(L_LONG_DATETIME,'.$mess_timeu.');'.$eol));
 		@fwrite($fpu, sprintf("if(stristr(PHP_OS,'win'))".$eol));
 		@fwrite($fpu, sprintf('{'.$eol));
