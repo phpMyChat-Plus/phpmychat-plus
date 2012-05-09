@@ -254,7 +254,7 @@ function getfdate($date_format){
 	setlocale(LC_ALL, "en_US.UTF-8", "enu.UTF-8", "usa.UTF-8", "enu_enu.UTF-8", "English-usa.UTF-8"); // For American formats
 	}
 
-	if (!isset($date_format) || $date_format == "")  $date_format = "%A, ".(stristr(PHP_OS,'win') ? "%#d" : "%e").date('S')." of %B %Y %H:%M:%S (%z)";
+	if (!isset($date_format) || $date_format == "")  $date_format = "%A, ".(stristr(PHP_OS,'win') ? "%#d" : "%e")."<sup>".date('S')."</sup> of %B %Y %H:%M:%S (%z)";
 
 	return stristr(PHP_OS,'win') ? utf_conv("windows-1252","utf-8",strftime($date_format)) : strftime($date_format);
 };

@@ -36,6 +36,7 @@ If your users encounter bootings for no reason, try to disable sounds in chat.
 
 Fixes History:
 04.05.2012 - 1.94-RC1:
+- added <sup> tags for the right numerals display in English (1st 2nd aso); (functionality related)
 - MathJax plugin configuration source url can now be set in configuration; (functionality extension)
 01.02.2012 - 1.94-beta8:
 - Chinese (both Simplified and Traditional) translation started; (localization project) - Thanks to clouds_music <clouds.music@gmail.com>
