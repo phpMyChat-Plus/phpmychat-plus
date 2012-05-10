@@ -365,7 +365,7 @@ if (UPD_CHECK)
 					<li><a href="#colors">颜色</a></li>
 					<li><a href="#sounds">音效设定</a></li>
 					<li><a href="#profanity">脏话</a></li>
-					<li><a href="files_popup.php?<?php echo("L=$L&pmc_username=$pmc_username&pmc_password=$pmc_password"); ?>" onClick="files_popup(); return false" target="_blank">上传管理</A></li>
+					<li><a href="files_popup.php?<?php echo("L=$L&pmc_username=$pmc_username&pmc_password=$pmc_password"); ?>" onClick="files_popup(); return false" target="_blank">上传管理</a></li>
 				</ul>
 			</dd>
 	</dl>
@@ -699,11 +699,11 @@ if(C_BOT_NAME != $vBOT_NAME || C_BOT_FONT_COLOR != $vBOT_FONT_COLOR || C_BOT_AVA
 #	else if (ereg("[\, \']", stripslashes($vBOT_NAME)) && C_BOT_NAME != $vBOT_NAME)
 	else if(preg_match("/[ |,|'|\\\\]/", $vBOT_NAME) && C_BOT_NAME != $vBOT_NAME)
 	{
-		$Error = "只允许这些额外的字符:<br />".$REG_CHARS_ALLOWED."<br />空格，逗号或反斜线 (\\) 不允许。<br />检查该语法 BOT 的名称 (".$vBOT_NAME.")";
+		$Error = "只允许这些额外的字符：<br />".$REG_CHARS_ALLOWED."<br />空格，逗号或反斜线 (\\) 不允许。<br />检查该语法 BOT 的名称 (".$vBOT_NAME.")";
 	}
 	else if((C_NO_SWEAR && checkwords($vBOT_NAME, true, $Charset)) && C_BOT_NAME != $vBOT_NAME)
 	{
-		$Error = "Banished word found in the Bot username (".$vBOT_NAME.")";
+		$Error = "不允许的字词或符号在机器人名称(".$vBOT_NAME.")";
 	}
 	else
 	{
@@ -712,7 +712,7 @@ if(C_BOT_NAME != $vBOT_NAME || C_BOT_FONT_COLOR != $vBOT_FONT_COLOR || C_BOT_AVA
 		$DbLink->clean_results();
 		if ($rows != 0 && C_BOT_NAME != $vBOT_NAME)
 		{
-			$Error = "The name of your Bot (".$vBOT_NAME.") is already registered。<br />Choose another one";
+			$Error = "这名称属于你的机器人的名称 (".$vBOT_NAME.") 已经注册。<br />请选择另一个名称";
 		}
 		else
 		{
@@ -739,11 +739,11 @@ if((C_QUOTE_NAME != $vQUOTE_NAME || C_QUOTE_FONT_COLOR != $vQUOTE_FONT_COLOR || 
 # 	else if (ereg("[\, \']", stripslashes($vQUOTE_NAME)) && C_QUOTE_NAME != $vQUOTE_NAME)
 	else if(preg_match("/[ |,|'|\\\\]/", $vQUOTE_NAME) && C_QUOTE_NAME != $vQUOTE_NAME)
 	{
-		$Error = "只允许这些额外的字符：<br />".$REG_CHARS_ALLOWED."<br />空格，逗号或反斜线 (\\) 不允许.<br />检查该语法 Random Quote 的名称 (".$vQUOTE_NAME.")";
+		$Error = "只允许这些额外的字符：<br />".$REG_CHARS_ALLOWED."<br />空格，逗号或反斜线 (\\) 不允许。<br />检查该语法 Random Quote 的名称 (".$vQUOTE_NAME.")";
 	}
 	else if((C_NO_SWEAR && checkwords($vQUOTE_NAME, true, $Charset)) && C_QUOTE_NAME != $vQUOTE_NAME)
 	{
-		$Error = "Banished word found in the Random Quote username (".$vQUOTE_NAME.")";
+		$Error = "发现不能使用的字，在 随机引用 的用户名里 (".$vQUOTE_NAME.")";
 	}
 	else
 	{
@@ -752,7 +752,7 @@ if((C_QUOTE_NAME != $vQUOTE_NAME || C_QUOTE_FONT_COLOR != $vQUOTE_FONT_COLOR || 
 		$DbLink->clean_results();
 		if ($rows != 0 && C_QUOTE_NAME != $vQUOTE_NAME)
 		{
-			$Error = "The name of your Random Quote (".$vQUOTE_NAME.") is already registered.<br />Choose another one";
+			$Error = "这是随机引用的名称 (".$vQUOTE_NAME.") 已被注册。<br />请选择另一个名称";
 		}
 		else
 		{
@@ -770,7 +770,7 @@ else
 	echo "<div><p><table align=center border=0 cellpadding=3 class=menu style=\"background: white;\"><tr><td class=success align=center><br /><h3>组态设定已成功更改！</h3></td></tr></table></p>";
 	if(C_LOG_DIR != $vLOG_DIR)
 	{
-		echo "<p><table align=center border=0 cellpadding=3 class=menu style=\"background: white;\"><tr><td class=notify2 align=center valign=TOP>Important！</td><td class=success align=center>Don't forget to change remotely the name of <span style=background-color:white>".C_LOG_DIR."</span> directory to <span style=background-color:white>".$vLOG_DIR."</span><br />(and set its attributes to <b>777</b>)！</td></tr></table>";
+		echo "<p><table align=center border=0 cellpadding=3 class=menu style=\"background: white;\"><tr><td class=notify2 align=center valign=TOP>重要！</td><td class=success align=center>Don't forget to change remotely the name of <span style=background-color:white>".C_LOG_DIR."</span> directory to <span style=background-color:white>".$vLOG_DIR."</span><br />(and set its attributes to <b>777</b>)！</td></tr></table>";
 	}
 	echo "</p></div>";
 }
@@ -820,8 +820,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>在服务器上启用自动在线更新检查.</b><br />
-    	<i>提示: 这个脚本可以自动检查新版本: ciprianmp.com/latest/ or svn.sourceforge.net！</i>
+    <td><b>在服务器上启用自动在线更新检查。</b><br />
+    	<i>提示：这个脚本可以自动检查新版本：ciprianmp.com/latest/ or svn.sourceforge.net！</i>
 	</td>
     <td>
         <select name="vUPD_CHECK">
@@ -831,8 +831,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr>
-    <td><b>启用统计的信息在聊天室.</b><br />
-    	<i>提示:如果您的服务器的带宽确实有限，或您发现您的服务器超载, 您应禁用这个 mod！</i>
+    <td><b>启用统计的信息在聊天室。</b><br />
+    	<i>提示：如果您的服务器的带宽确实有限，或您发现您的服务器超载，您应禁用这个外挂！</i>
 	</td>
     <td>
         <select name="vEN_STATS">
@@ -842,15 +842,15 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>旧邮件清理时间.</b>
+    <td><b>旧邮件清理时间。</b>
 	</td>
     <td>
 		<input name="vMSG_DEL" type="text" size="7" maxlength="3" value="<?php echo $MSG_DEL; ?>"> (小时)
 	</td>
 </tr>
 <tr>
-    <td><b>不活动的用户在房间的自动启动时间.</b><br />
-    	<i>提示: 此自动引导功能，强迫用户活跃在房间. 如果他们想成为潜伏的, 他们应该只使用潜伏页. 管理员，主持人和离开用户不会被启动</i>
+    <td><b>不活动的用户在房间的自动启动时间。</b><br />
+    	<i>提示：此自动引导功能，强迫用户活跃在房间。如果他们想成为潜伏的，他们应该只使用潜伏页。管理员，主持人和离开用户不会被启动</i>
 	</td>
     <td>
         <select name="vCHAT_BOOT">
@@ -861,7 +861,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>删除此时段内不活跃注册用户帐户 (0 永远不会).</b>
+    <td><b>删除此时段内不活跃注册用户帐户 (0 永远不会)。</b>
     </td>
     <td>
 		<input name="vREG_DEL" type="text" size="7" maxlength="4" value="<?php echo $REG_DEL; ?>"> (天)
@@ -875,7 +875,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>用于聊天室的预设语言.</b>
+    <td><b>用于聊天室的预设语言。</b>
 	</td>
     <td>
 		<?php
@@ -969,7 +969,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>英文格式（标志和日期和时间格式）.</b>
+    <td><b>英文格式（标志和日期和时间格式）。</b>
 	</td>
     <td><select name="vENGLISH_FORMAT" id="ENflag" onChange="swapImage('ENflag','ENToSwap'); swapImage('3Dflag','3DToSwap'); swapImage('flags','flagToSwap')">
 	        <option value="UK"<?php if($ENGLISH_FORMAT=="UK"){ echo " selected"; $ENsel = ($FLAGS_3D) ? "flag.gif" : "flag0.gif"; } ?>><?php echo(L_ORIG_LANG_ENUK); ?></option>
@@ -978,7 +978,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>允许用户选择一个可用的语言译本.</b>
+    <td><b>允许用户选择一个可用的语言译本。</b>
 	</td>
     <td>
         <select name="vMULTI_LANG">
@@ -988,7 +988,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>国旗的图像类型.</b>
+    <td><b>国旗的图像类型。</b>
 	</td>
     <td><select name="vFLAGS_3D" id="3Dflag" onChange="swapImage('3Dflag','3DToSwap'); swapImage('ENflag','ENToSwap'); swapImage('flags','flagToSwap')">
 	        <option value="0"<?php if($FLAGS_3D==0){ echo " selected"; } ?>>2D (std)</option>
@@ -1004,46 +1004,46 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><a name="ownername"></a><b>要发送电子邮件标题，输入管理员的真实姓名（或聊天的名称）.</b>
+    <td><a name="ownername"></a><b>要发送电子邮件标题，输入管理员的真实姓名（或聊天的名称）。</b>
 	</td>
     <td>
 		<input name="vADMIN_NAME" type="text" size="25" maxlength="35" value="<?php echo $ADMIN_NAME; ?>">
 	</td>
 </tr>
 <tr>
-    <td><a name="admin_email"></a><b>输入管理员的电子邮件在发送电子邮件标题.</b><br />
-    	<i>提示: 这信箱也用在接受新用户注册的通知</i>
+    <td><a name="admin_email"></a><b>输入管理员的电子邮件在发送电子邮件标题。</b><br />
+    	<i>提示：这信箱也用在接受新用户注册的通知</i>
     </td>
     <td>
 		<input name="vADMIN_EMAIL" type="text" size="25" maxlength="35" value="<?php echo $ADMIN_EMAIL; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>输入您的聊天网址在发送电子邮件标题.</b>
+    <td><b>输入您的聊天网址在发送电子邮件标题。</b>
 	</td>
     <td>
 		<input name="vCHAT_URL" type="text" size="25" maxlength="100" value="<?php echo $CHAT_URL; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>输入您的电子邮件的预设结尾问候语.</b><br />
-    		<i>提示: 这仅用于管理员发送电子邮件表格</i>
+    <td><b>输入您的电子邮件的预设结尾问候语。</b><br />
+    		<i>提示：这仅用于管理员发送电子邮件表格</i>
    	</td>
     <td>
 		<textarea name="vMAIL_GREETING" rows=3 cols=28 wrap=on><?php echo $MAIL_GREETING; ?></textarea>
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>公共聊天服务器名称，你想在网络上称为.</b>
+    <td><b>公共聊天服务器名称，你想在网络上称为。</b>
 	</td>
     <td>
 		<input name="vCHAT_NAME" type="text" size="25" maxlength="255" value="<?php echo $CHAT_NAME; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>LOGO 图片路径.</b><br />
-    		<i>提示: LOGO 的图像显示（允许绝对或相对路径） - 例如 http://path_to_the_image.jpg or ./../path_to_the_image.jpg</i><br />
-    		(path_to_the_image.jpg 可以是任何可访问图像/从网上 - .jpg, .gif, .bmp, .png)
+    <td><b>LOGO 图片路径。</b><br />
+    		<i>提示：LOGO 的图像显示（允许绝对或相对路径） - 例如 http://path_to_the_image.jpg or ./../path_to_the_image.jpg</i><br />
+    		(path_to_the_image.jpg 可以是任何可访问图像/从网上 - .jpg， .gif， .bmp， .png)
     </td>
     <td>
 		<select name="vSHOW_LOGO">
@@ -1055,13 +1055,13 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>网站 被打开网址（在新窗口打开）.</b></td>
+    <td><b>网站 被打开网址（在新窗口打开）。</b></td>
     <td>
 		<input name="vLOGO_OPEN" type="text" size="25" maxlength="255" value="<?php echo $LOGO_OPEN; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>LOGO 在鼠标悬停要显示的文字 (the ALT/TITLE property).</b>
+    <td><b>LOGO 在鼠标悬停要显示的文字 (the ALT/TITLE property)。</b>
 	</td>
     <td>
 		<input name="vLOGO_ALT" type="text" size="25" maxlength="255" value="<?php echo $LOGO_ALT; ?>">
@@ -1075,8 +1075,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>让注册用于您的聊天系统.</b><br />
-    	<font color=red>禁用此唯一的，如果你想手动添加注册用户，或阅读  <a href=#reg_hint class="ChatLink">提示</a> 使其自动等待您的批准下文.</font>
+    <td><b>让注册用于您的聊天系统。</b><br />
+    	<font color=red>禁用此唯一的，如果你想手动添加注册用户，或阅读 <a href=#reg_hint class="ChatLink">提示</a> 使其自动等待您的批准下文。</font>
 	</td>
     <td>
         <select name="vALLOW_REGISTER">
@@ -1087,7 +1087,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>需要注册才能加入聊天.</b>
+    <td><b>需要注册才能加入聊天。</b>
 	</td>
     <td>
         <select name="vREQUIRE_REGISTER">
@@ -1097,7 +1097,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>注册和设定档上需要填姓氏和名字.</b>
+    <td><b>注册和设定档上需要填姓氏和名字。</b>
 	</td>
     <td>
         <select name="vREQUIRE_NAMES">
@@ -1107,7 +1107,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>自动生成密码（并通过电子邮件发送到新的注册用户).</b>
+    <td><b>自动生成密码（并通过电子邮件发送到新的注册用户)。</b>
 	</td>
     <td>
         <select name="vEMAIL_PASWD">
@@ -1118,14 +1118,14 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>生成和通过电子邮件发送密码的长度.</b>
+    <td><b>生成和通过电子邮件发送密码的长度。</b>
 	</td>
     <td>
 		<input name="vPASS_LENGTH" type="text" size="7" maxlength="2" value="<?php echo $PASS_LENGTH; ?>">
     </td>
 </tr>
 <tr>
-    <td><b>新注册用户发送帐户的详细资料.</b>
+    <td><b>新注册用户发送帐户的详细资料。</b>
 	</td>
     <td>
         <select name="vEMAIL_USER">
@@ -1136,7 +1136,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>新用户注册传送帐户的详细资料（通知）给管理员.</b>
+    <td><b>新用户注册传送帐户的详细资料（通知）给管理员。</b>
 	</td>
     <td>
         <select name="vADMIN_NOTIFY">
@@ -1148,18 +1148,16 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr>
     <td colspan="2"><a name="reg_hint"></a>
-	<font color=red>* <b>提示</b></font> <b>for the 最好的设置，如果你想控制谁注册和进入您的聊天室:</b><br />
-			<i>- 允许注册用于您的聊天室: <font color=green>注册 启用</font><br />
+	<font color=red>* <b>提示</b></font> <b>到这最好的设置，如果你想控制谁注册和进入您的聊天室：</b><br />
+			<i>- 允许注册用于您的聊天室：<font color=green>注册 启用</font><br />
 			- 需要注册加入聊天：如果 <font color=green>需要</font> 设置，只有注册用户才能够登录到聊天室<br />
-			- 产生密码并发电子邮件给新注册用户: <font color=green>启用</font><br />
-			- 传送新注册用户帐户的详细资料: <font color=green>不传送</font><br />
-			- 传送新用户注册帐户的详细资料（通知）给管理员: <font color=green>通知管理员</font><br />
-			因此，用户将选择自己所需的数据，将生成一个随机密码，但用户将不会收到电子邮件与密码，所以他仍然无法登录;他只会得到有关未决注册的通知邮件.<br />
-			在同一时间，管理员将收到 <u>2 电子邮件</u>:
+			- 产生密码并发电子邮件给新注册用户：<font color=green>启用</font><br />
+			- 传送新注册用户帐户的详细资料：<font color=green>不传送</font><br />
+			- 传送新用户注册帐户的详细资料（通知）给管理员：<font color=green>通知管理员</font><br />因此，用户将选择自己所需的数据，将生成一个随机密码，但用户将不会收到电子邮件与密码，所以他仍然无法登录;他只会得到有关未决注册的通知邮件。<br />
+			在同一时间，管理员将收到 <u>2 电子邮件</u>：
 			<li>1<sup>st</sup> - 是一份登记数据，用于管理员的将来参考（如用户忘记密码时）。这总是以英文发送邮件;</li>
-			<li>2<sup>nd</sup> - 是电子邮件，其中包含新创建的帐户的随机密码和其余的资料 (此电子邮件已经准备要发送/转发给用户，如果该帐户被批准). 此电子邮件编写将选择于登记用户语言.</li><br />
-			该管理员验证谁是这个人，用户提供了什么资料。如果他决定批准该用户帐户，管理员只会有第二封电子邮件转发到该用户的电子邮件（电子邮件地址已经被格式化审批）。另一种方法是去"<?php echo(A_MENU_4); ?>" 和发送电子邮件登录到该用户的电子邮件资料。或者，管理员甚至可以用该名称/密码登录在"编辑个人资料" 形成和调整/修改资料/密码。<br />
-			<font color=red>重要的是：不要忘记放你正确的管理员电子邮件 <a href=#admin_email class="ChatLink">在这里</a>, 以完成以上所有这些工作).同时要考虑到非公开（限制性，私人），这些设置会变成您的聊天服务器。如果你忽略了未能验证和批准帐户，用户也许就放弃不回来了。</font></i>
+			<li>2<sup>nd</sup> - 是电子邮件，其中包含新创建的帐户的随机密码和其余的资料(此电子邮件已经准备要发送/转发给用户，如果该帐户被批准)。此电子邮件编写将选择于登记用户语言。</li><br />该管理员验证谁是这个人，用户提供了什么资料。如果他决定批准该用户帐户，管理员只会有第二封电子邮件转发到该用户的电子邮件（电子邮件地址已经被格式化审批）。另一种方法是去"<?php echo(A_MENU_4); ?>" 和发送电子邮件登录到该用户的电子邮件资料。或者，管理员甚至可以用该名称/密码登录在“编辑个人资料” 形成和调整/修改资料/密码。<br />
+			<font color=red>重要的是：不要忘记放你正确的管理员电子邮件 <a href=#admin_email class="ChatLink">在这里</a>，以完成以上所有这些工作)。同时要考虑到非公开（限制性，私人），这些设置会变成您的聊天服务器。如果你忽略了未能验证和批准帐户，用户也许就放弃不回来了。</font></i>
 	</td>
 </tr>
 </table>
@@ -1170,18 +1168,18 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle>当前设定</td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>启用驱逐功能，并定义这延迟到它.</b><br />
-		<i>提示: 0 = 已禁用, 任意整数 = 驱逐天数</i>
+    <td><b>启用驱逐功能，并定义这延迟到它。</b><br />
+		<i>提示： 0 = 已禁用，任意整数 = 驱逐天数</i>
 	</td>
     <td>
     	<input name="vBANISH" type="text" size="7" maxlength="3" value="<?php echo $BANISH; ?>"> (天)
     </td>
 </tr>
 <tr>
-    <td><b>驱逐类型.</b><br />
-    	<i>提示: 禁止 IP和用户名同时进行 或 仅用IP.
-		<li>- 第一个选项将禁止从一个共享IP的用户名，被禁止的用户来时非常有用，从一个共享的IP地址或父母控制之用 (例如:当一个共享的电脑 / 访问点是一个孩子使用);
-		<li>- 第二个选项将禁止所有的用户名试图登录来自同一个IP（更有效）。</i>
+    <td><b>驱逐类型。</b><br />
+    	<i>提示：禁止 IP 和用户名同时进行或仅用 IP。
+		<li>- 第一个选项将禁止从一个共享IP的用户名，被禁止的用户来时非常有用，从一个共享的IP地址或父母控制之用 (例如：当一个共享的电脑 / 访问点是一个孩子使用);
+		<li>- 第二个选项将禁止所有的用户名试图登录来自同一个 IP（更有效）。</i>
     </td>
     <td>
         <select name="vBAN_IP">
@@ -1201,8 +1199,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>保持邮件中的 HTML tags.</b><br />
-    <i>提示: <b>简单</b>: 保持粗体，斜体和下划线标记; <b>没有</b>: 无保留</i>
+    <td><b>保持邮件中的 HTML tags。</b><br />
+    <i>提示：<b>简单</b>：保持粗体，斜体和下划线标记; <b>没有</b>：无保留</i>
 	</td>
     <td>
         <select name="vHTML_TAGS_KEEP">
@@ -1212,7 +1210,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>显示丢弃的 HTML tags.</b>
+    <td><b>显示丢弃的 HTML tags。</b>
 	</td>
     <td>
         <select name="vHTML_TAGS_SHOW">
@@ -1223,7 +1221,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr>
     <td><b>启用发布链路保护通过打开链接在一个弹出窗口中</b><br />
-			<i>提示: 假如 启用,一个额外的窗口将被打开 与所有张贴的链接列表在一个用户的讯息。 此选项可以保证额外的保护您的聊天室。</i>
+			<i>提示：假如 启用，一个额外的窗口将被打开 与所有张贴的链接列表在一个用户的讯息。此选项可以保证额外的保护您的聊天室。</i>
 	</td>
     <td>
         <select name="vPOPUP_LINKS">
@@ -1235,7 +1233,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 <tr bgcolor="#B0C4DE">
     <td><b>默认消息滚动顺序。</b><br />
     	<font color=red>(仅适用于 "non-H" 浏览器 -  IE 或 Firefox 以外的其他)</font><br />
-    	<i>提示: 这些用户也可以使用 /order 命令来改变滚动顺序。</i>
+    	<i>提示：这些用户也可以使用 /order 命令来改变滚动顺序。</i>
     </td>
     <td>
         <select name="vMSG_ORDER">
@@ -1247,8 +1245,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 <tr>
     <td><b>进入聊室首先显示的讯息的默认数量。</b><br />
     	<font color=red>重要的是：从来没有设置这 <b>"0"</b>; 你可以将它设置到最低 <b>"1"</b> 但你必须启用至少一个 <b>接下来的两个设置</b>。<br />
-    	如果你想保留两集 "通知" 和 "显示" , 这里的值<b>必须至少有 "2"</b>。</font><br />
-    	<i>提示:用户还可以使用 /show "n" or /last "n" 命令来查看不同的数量。</i>
+    	如果你想保留两集 "通知" 和 "显示"，这里的值<b>必须至少有 "2"</b>。</font><br />
+    	<i>提示：用户还可以使用 /show "n" or /last "n" 命令来查看不同的数量。</i>
     </td>
     <td>
 		<input name="vMSG_NB" type="text" size="7" maxlength="2" value="<?php echo $MSG_NB; ?>">
@@ -1311,10 +1309,10 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>设置你希望你的用户可以使用注册/登录。</b><br />
-    	<i>提示：这是默认的字符集: </i><b>a-zA-Z0-9_.-@#$%^&*()=<>?~{}|`:</b><i> 登录测试，这不会破坏你聊天室的布局/功能。<br />
-    	<font color=red>重要：不允许这些字符, 他们会破坏登录后聊天页面: 惊叹号，斜线，反斜线，逗号，空格，单引号和双引号和 方形(盒)括号 (<b>! / \ , ' " [ ]</b>)</font><br /></i>
-    	虽然他们不会打破任何东西，它似乎/;不能禁止从正在使用的登录名。 $符号尚未被深深测试，但它也应避免，因为它通常为PHP变量。
-    </td>
+    	<i>提示：这是默认的字符集：</i><b>a-zA-Z0-9_.-@#$%^&*()=<>?~{}|`:</b><i> 登录测试，这不会破坏你聊天室的布局/功能。<br />
+    	<font color=red>重要：不允许这些字符，他们会破坏登录后聊天页面：惊叹号，斜线，反斜线，逗号，空格，单引号和双引号和 方形(盒)括号 (<b>! / \ , ' " [ ]</b>)</font><br /></i>
+    	虽然他们不会打破任何东西，它似乎/;不能禁止从正在使用的登录名。$符号尚未被深深测试，但它也应避免，因为它通常为PHP变量。
+		</td>
     <td>
 		<input name="vREG_CHARS_ALLOWED" type="text" size="25" maxlength="50" value="<?php echo $REG_CHARS_ALLOWED; ?>">
 	</td>
@@ -1330,7 +1328,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     <td><b>在状态栏上的时区偏移和世界时间。</b><br />
     	- 聊天服务器的时间和所需的位置之间的差异 (小时 - 整数)<br />
     	<i>例如：如果我的伺服器托管在美国 -  CST（-6），但聊天是在布加勒斯特位于罗马尼亚的社区 - EET（+2），我可能想显示我的罗马尼亚用户在正确的时间聊天。对于这一点，我必须将此值设置为8。也不允许负值。<br />
-    	<font color=red>重要的是：编辑 "lib/worldtime.lib.php" 添加您自己的城市（经络） - 仅适用于世界时间模式！</font></i>
+    	<font color=red>重要的是：编辑 “lib/worldtime.lib.php” 添加您自己的城市（经络） - 仅适用于世界时间模式！</font></i>
     </td>
     <td>
 		<input name="vTMZ_OFFSET" type="text" size="7" maxlength="5" value="<?php echo $TMZ_OFFSET; ?>"><br />
@@ -1385,28 +1383,28 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     	<font color=red>重要：这个 mod 是仍在发展！日程表中的字段已刻意的禁用。</font></i>
     </td>
     <td align="center">
-		<b><font color=blue>每天的日程:</font><br />
+		<b><font color=blue>每天的日程：</font><br />
 		<input name="vOPEN_ALL_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_ALL_BEG; ?>" class=success DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_ALL_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_ALL_END; ?>" class=success DISABLED><br />
-		<font color=red>周日时间表:</font><br />
+		<font color=red>周日时间表：</font><br />
 		<input name="vOPEN_SUN_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_SUN_BEG; ?>" class=notify2 DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_SUN_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_SUN_END; ?>" class=notify2 DISABLED><br />
-		周一时间表:<br />
+		周一时间表：<br />
 		<input name="vOPEN_MON_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_MON_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_MON_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_MON_END; ?>" class=notify DISABLED><br />
-		周二时间表:<br />
+		周二时间表：<br />
 		<input name="vOPEN_TUE_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_TUE_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_TUE_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_TUE_END; ?>" class=notify DISABLED><br />
-		周三时间表:<br />
+		周三时间表：<br />
 		<input name="vOPEN_WED_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_WED_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_WED_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_WED_END; ?>" class=notify DISABLED><br />
-		周四时间表:<br />
+		周四时间表：<br />
 		<input name="vOPEN_THU_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_THU_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_THU_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_THU_END; ?>" class=notify DISABLED><br />
-		周五时间表:<br />
+		周五时间表：<br />
 		<input name="vOPEN_FRI_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_FRI_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_FRI_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_FRI_END; ?>" class=notify DISABLED><br />
-		周六时间表:<br />
+		周六时间表：<br />
 		<input name="vOPEN_SAT_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_SAT_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_SAT_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_SAT_END; ?>" class=notify DISABLED></b>
 	</td>
@@ -1430,15 +1428,15 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr>
     <td><b>显示背景图像在索引页上。</b><br />
-		<i>提示：填补房间背景图像，你需要编辑所需的样式和添加 BODY.frame 和 framePreview 属性 "<b>背景图像: url('path_to_the_image');</b>" (允许绝对或相对路径) - 例如 http://path_to_the_image.jpg 或 ./../path_to_the_image.jpg - 样本在 style12.css.php。 可选择, BODY.mainframe 可用于显示图像的背景的信息框架 (但这个图像就要被淘汰了，作出发布的文本浏览)。</i><br />
-    	(path_to_the_image.jpg 可以是任何图像 访问 on/从网上 - .jpg, .gif, .bmp, .png)
+		<i>提示：填补房间背景图像，你需要编辑所需的样式和添加 BODY.frame 和 framePreview 属性 "<b>背景图像：url('path_to_the_image');</b>" (允许绝对或相对路径) - 例如 http://path_to_the_image.jpg 或 ./../path_to_the_image.jpg - 样本在 style12.css.php。可选择，BODY.mainframe 可用于显示图像的背景的信息框架 (但这个图像就要被淘汰了，作出发布的文本浏览)。</i><br />
+    	(path_to_the_image.jpg 可以是任何图像 访问 on/从网上 - .jpg， .gif， .bmp， .png)
 	</td>
     <td>
         <select name="vBACKGR_IMG">
 	        <option value="0"<?php if($BACKGR_IMG==0){ echo " selected"; } ?>>没有背景图片</option>
 	        <option value="1"<?php if($BACKGR_IMG==1){ echo " selected"; } ?>>显示在登入页面</option>
         </select><br />
-		图片的路径:<br />
+		图片的路径：<br />
 		<input name="vBACKGR_IMG_PATH" type="text" size="25" maxlength="255" value="<?php echo $BACKGR_IMG_PATH; ?>">
     </td>
 </tr>
@@ -1515,7 +1513,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr>
     <td><b>列出你的额外的功能/外挂。</b><br />
-    	<i>提示：如果他们是太长的时候，保持 空格分开 并用 / 分割线</i>
+    	<i>提示：如果他们是太长的时候，保持 空格分开 并用，分隔</i>
     </td>
     <td>
 		<input name="vMODS" type="text" size="25" maxlength="255" value="<?php echo $MODS; ?>">
@@ -1601,7 +1599,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 <tr>
     <td><b>供用户选择的房间类型。</b><br />
         <li>0：只有第一个房间 内部公开预设的;</li>
-        <li>1：所有预设房间, 但不能创建房间;</li>
+        <li>1：所有预设房间，但不能创建房间;</li>
         <li>2：所有的房间，及创建新的</li>
     </td>
     <td>
@@ -1613,7 +1611,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><a name="roomnames"></a><b>1。 第一个公开房间的名称 (also <u>default</u> 假如 0 被选中高于或没有用户的选择从列表中)。</b><br />
+    <td><a name="roomnames"></a><b>1. 第一个公开房间的名称 (also <u>default</u> 假如 0 被选中高于或没有用户的选择从列表中)。</b><br />
     	<font color=red><i>注：虽然禁用是可能的，这第一个房间，在任何时候都应该启用和不受限制。（这也是人们不要从登录页面中选择一个默认的房间。）</i></font><br />
 		<i>提示（适用于所有的公共房间）：如果限制，虽然房间是公开的，只有管理员，超级版主和注册用户表中设置的用户将能够加入这个房间。潜伏页的公共档案馆将不包含任何提交受限房间的职位。</i>
 	</td>
@@ -1636,7 +1634,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>2。 第二个公开房间名称。</b>
+    <td><b>2. 第二个公开房间名称。</b>
 	</td>
     <td>
 		<input name="vROOM2" type="text" size="25" maxlength="25" value="<?php echo $ROOM2; ?>"><br />
@@ -1657,7 +1655,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>3。 第三个公开房间名称。</b>
+    <td><b>3. 第三个公开房间名称。</b>
 	</td>
     <td>
 		<input name="vROOM3" type="text" size="25" maxlength="25" value="<?php echo $ROOM3; ?>"><br />
@@ -1678,7 +1676,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>4。 第四个公开房间名称。</b>
+    <td><b>4. 第四个公开房间名称。</b>
 	</td>
     <td>
 		<input name="vROOM4" type="text" size="25" maxlength="25" value="<?php echo $ROOM4; ?>"><br />
@@ -1699,7 +1697,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>5。 第五个公开房间名称。</b>
+    <td><b>5. 第五个公开房间名称。</b>
 	</td>
     <td>
 		<input name="vROOM5" type="text" size="25" maxlength="25" value="<?php echo $ROOM5; ?>"><br />
@@ -1720,7 +1718,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>6。 第一个私人房间名称。</b><br />
+    <td><b>6. 第一个私人房间名称。</b><br />
     	<i>注意：这是显示在登录时，只有管理员</i>
     </td>
     <td>
@@ -1738,7 +1736,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>7。 第二个私人房间名称 (同时默认情况下，如果没有选)。</b><br />
+    <td><b>7. 第二个私人房间名称 (同时默认情况下，如果没有选)。</b><br />
     	<i>注意：这是显示在登录时，只有管理员</i>
     </td>
     <td>
@@ -1756,8 +1754,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>8。 第三私人房间名称。</b><br />
-    	<i>注：这是显示在登录到所有的高级用户（适合"职员唯一"房间）</i>
+    <td><b>8. 第三私人房间名称。</b><br />
+    	<i>注：这是显示在登录到所有的高级用户（适合“职员唯一”房间）</i>
     </td>
     <td>
 		<input name="vROOM8" type="text" size="25" maxlength="25" value="<?php echo $ROOM8; ?>"><br />
@@ -1774,8 +1772,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>9。 第四私人房间名称。</b><br />
-    	<i>注：这是显示登录到所有用户的默认（"支援" 房间）</i>
+    <td><b>9. 第四私人房间名称。</b><br />
+    	<i>注：这是显示登录到所有用户的默认（“支援” 房间）</i>
     </td>
     <td>
 		<input name="vROOM9" type="text" size="25" maxlength="25" value="<?php echo $ROOM9; ?>"><br />
@@ -1792,7 +1790,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>1。 显示默认索引页上的私人房间。</b><br />
+    <td><b>1. 显示默认索引页上的私人房间。</b><br />
     	<i>提示：并非所有的包房，将显示所有用户的选择（见接下来的两个设置）<br />
     	此选项只会让<b>管理员</b>看到所有预设的包房，但 <u><b>需要</b></u> 到接下来的两个设置工作。</i>
     </td>
@@ -1804,8 +1802,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>2。 显示默认索引页上的私人房间到版主。</b><br />
-    	<i>提示：版主将只能看到房间8和第9（职员和支援类型）。 <font color=red>需要设置 no.1 ！</font></i>
+    <td><b>2. 显示默认索引页上的私人房间到版主。</b><br />
+    	<i>提示：版主将只能看到房间8和第9（职员和支援类型）。<font color=red>需要设置 no.1 ！</font></i>
     </td>
     <td>
         <select name="vSHOW_PRIV_MOD">
@@ -1815,8 +1813,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>3。 显示默认索引页上的私人房间到普通用户。</b><br />
-    	<i>提示：非权力用户（包括客人）将只能看到房间9（支援）。 <font color=red>需要设置 no.1 ！</font></i>
+    <td><b>3. 显示默认索引页上的私人房间到普通用户。</b><br />
+    	<i>提示：非权力用户（包括客人）将只能看到房间9（支援）。<font color=red>需要设置 no.1 ！</font></i>
     </td>
     <td>
         <select name="vSHOW_PRIV_USR">
@@ -1836,8 +1834,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     <td><b>启用 不同颜色名称在用户列表 和/或 文章。</b><br />
     	<i><font color=red>重要：如果更改此设置，同时也有用户登录，您的所有用户必须重新载入他们的浏览器或退出并重新登录以套用变更。将自动发送到所有房间的一个公告，如果你启用/停用这个。</font><br />
     	提示：如果启用，用户可以设置自己的个人色彩，在用户用于他们的用户名列出唯一。<br />
-    	如果已禁用，管理员将显示在 <a class="admin">红色</a> 和主持人在 <a class="mod">蓝色</a> (其预设权力颜色在 skins/styleN.css.php), 只有"斜体 权力用户名"启用下。/i>
-    </td>
+    	如果已禁用，管理员将显示在 <a class="admin">红色</a> 和主持人在 <a class="mod">蓝色</a> (其预设权力颜色在 skins/styleN.css.php)，只有“斜体 权力用户名”启用下。/i>
+		</td>
     <td>
         <select name="vCOLOR_NAMES">
 	        <option value="0"<?php if($COLOR_NAMES==0){ echo " selected"; } ?>>已禁用</option>
@@ -1848,8 +1846,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 <tr>
 	<td><b>斜体权力用户名在用户列表：</b><br />
     	此选项允许您选择显示或没有谁是你聊天的管理员和版主（这不会改变任何权力，它不仅使管理/主持 名称不同或不 - 斜体 - 从普通用户）。<br />
-		<i>提示：这也适用于颜色的名称，显示或管理员在 <a class="admin">红色</a> 跟主持人在 <a class="mod">蓝色</a> (其预设权力颜色在 skins/styleN.css.php) or， 如果要彩色的名称启用上面， <?php echo("<font color=".$COLOR_CA.">".$COLOR_CA."</font>"); ?> and <?php echo("<font color=".$COLOR_CM.">".$COLOR_CM."</font>"); ?> (其预设权力颜色选择以下)。</i>
-	</td>
+		<i>提示：这也适用于颜色的名称，显示或管理员在 <a class="admin">红色</a> 跟主持人在 <a class="mod">蓝色</a> (其预设权力颜色在 skins/styleN.css.php) or，如果要彩色的名称启用上面，<?php echo("<font color=".$COLOR_CA.">".$COLOR_CA."</font>"); ?> and <?php echo("<font color=".$COLOR_CM.">".$COLOR_CM."</font>"); ?> (其预设权力颜色选择以下)。</i>
+		</td>
     <td>
         <select name="vITALICIZE_POWERS">
 	        <option value="0"<?php if($ITALICIZE_POWERS==0){ echo " selected"; } ?>>不显示 italics/colors</option>
@@ -1932,7 +1930,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr>
     <td><b>设置权力颜色 只能用于主持人（第一为默认）。</b><br />
-    	<i>提示。这适用于发布消息的颜色为主，但如果颜色名称启用上面，它也将适用于名称颜色。<br />管理员也可以使用这些颜色，但其他用户不能。</i>
+    	<i>提示：这适用于发布消息的颜色为主，但如果颜色名称启用上面，它也将适用于名称颜色。<br />管理员也可以使用这些颜色，但其他用户不能。</i>
     </td>
     <td>
 		<?php
@@ -2067,29 +2065,29 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>1。 房间名称允许脏话字（避免过滤器）。</b><br />
-    	<i>注意：您必须输入房间的确切名称。 <a href=#roomnames class="ChatLink">点击这里</a> 检查你的房间名称。</i>
+    <td><b>1. 房间名称允许脏话字（避免过滤器）。</b><br />
+    	<i>注意：您必须输入房间的确切名称。<a href=#roomnames class="ChatLink">点击这里</a> 检查你的房间名称。</i>
     </td>
     <td>
 		<input name="vSWEAR1" type="text" size="25" maxlength="25" value="<?php echo $SWEAR1; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>2。 房间名称允许脏话字（避免过滤器）。</b>
+    <td><b>2. 房间名称允许脏话字（避免过滤器）。</b>
 	</td>
     <td>
 		<input name="vSWEAR2" type="text" size="25" maxlength="25" value="<?php echo $SWEAR2; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>3。 房间名称允许脏话字（避免过滤器）。</b>
+    <td><b>3. 房间名称允许脏话字（避免过滤器）。</b>
 	</td>
     <td>
 		<input name="vSWEAR3" type="text" size="25" maxlength="25" value="<?php echo $SWEAR3; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>4。 房间名称允许脏话字（避免过滤器）。</b>
+    <td><b>4. 房间名称允许脏话字（避免过滤器）。</b>
 	</td>
     <td>
 		<input name="vSWEAR4" type="text" size="25" maxlength="25" value="<?php echo $SWEAR4; ?>">
@@ -2115,7 +2113,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr>
     <td><b>启用弹出耳语（私人信息）系统。</b><br />
-    	<i>提示：如果启用，游客不会接受到弹出的 PMS  - 他们必须注册）<br/>每个注册用户可以自己配置私敲是否弹出视窗显示<br />
+    	<i>提示：如果启用，游客不会接受到弹出的 PMS  - 他们必须注册）<br />每个注册用户可以自己配置私敲是否弹出视窗显示<br />
     	<font color=red>重要：如果更改此设置，同时也有用户登录，您的所有用户必须重新载入他们的浏览器或退出并重新登录。将自动发送到所有房间的一个公告，如果你 启用/停用 这个。</font></i><br />
 		离线的项目经理无论如何将始终显示在弹出（否则，收件人不会被通知新的PMs）。
     </td>
@@ -2127,7 +2125,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>允许用户从数据库中删除自己（收到）项目经理.</b><br />
+    <td><b>允许用户从数据库中删除自己（收到）项目经理。</b><br />
     	<i>提示：如果启用，用户将能够选择和删除他们收到的私人讯息。</i>
     </td>
     <td>
@@ -2140,7 +2138,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 <tr>
     <td><b>多久时间清理未读离线的私人讯息。/b><br />
     	<i><font color=red>重要：如果收件人不登录到聊天，在此区间，这些旧型私人邮件被自动删除从数据库中（他们不会被导出到日志归档，所以旧的未读项目经理会丢失）。</font></i>
-	</td>
+		</td>
     <td>
 		<input name="vPM_KEEP_DAYS" type="text" size="7" maxlength="3" value="<?php echo $PM_KEEP_DAYS; ?>"> (天)
 	</td>
@@ -2176,7 +2174,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>输入您的BOT想要的名称。</b><br />
-    	<i><font color=red>重要事项：确保 BOT是满载之前，请不要更改名称（检查它是否可以在聊天室张贴）：<a href="./bot/talk.php" target="_blank">Talk2Bot</a> ！</i>
+    	<i><font color=red>重要事项：确保 BOT是满载之前，请不要更改名称（检查它是否可以在聊天室张贴）：<a href="./bot/talk.php" target="_blank">Talk2Bot</a>！</i>
 		<?php if (!$bot_id) echo ("<br />注：你的机器人还没有被正确加载！阅读 install/manual installation/Manual Instructions.txt"); ?></font>
     </td>
     <td>
@@ -2258,7 +2256,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</tr>
 <tr bgcolor="#B0C4DE">
     <td><b>用户可以导出保存 /save 命令讯息的最大数量。</b><br />
-    	<i>值：0=停用, 任何整数=数量 的消息， *=没有限制</i>
+    	<i>值：0=停用，任何整数=数量 的消息， *=没有限制</i>
     </td>
     <td>
 		<input name="vSAVE" type="text" size="7" maxlength="2" value="<?php echo $SAVE; ?>">
@@ -2285,7 +2283,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr>
-    <td><b>允许 主持人来使用 /demote command。</b><br />
+    <td><b>允许 主持人来使用 /demote 命令。</b><br />
 		<i>提示：如果设置为第二个选项，主持人就能降级其他主持人 - <font color=red>要非常小心！</font></i>
 	</td>
     <td>
@@ -2334,7 +2332,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     	此选项允许您张贴使用LaTeX格式MathJax提供的数学公式。<br />
 		<i>提示：这里是一个 <a href="http://www.mathjax.org/demos/tex-samples/" target="_blank">样本页面</a> 从原始mathjax.org网站。你只需要输入/数学和拷贝和粘贴所需的公式的源代码。</i><br />
 		您还可以使用本地配置文件，通过设置合适的源路径。默认源（SRC）是： <font color="blue"><i>http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML</i></font>
-	</td>
+		</td>
     <td>
         <select name="vALLOW_MATH">
 	        <option value="0"<?php if($ALLOW_MATH==0){ echo " selected"; } ?>>停用 MathJax</option>
@@ -2354,8 +2352,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</tr>
 <tr bgcolor="#B0C4DE">
     <td><b>启用使用 /video 指令张贴影片（例如YouTube）</b><br />
-		<i>提示：如果 已禁用, 只有原始视频源的链接将被张贴在聊天; 如果 启用, 任何用户都可以发布所有用户可以直接在聊天观看视频; 设置以 管理员 将只显示管理员和超级室长张贴的影片，其他用户发布唯一链接到原来的视频源。</i>
-	</td>
+		<i>提示：如果 已禁用，只有原始视频源的链接将被张贴在聊天; 如果 启用，任何用户都可以发布所有用户可以直接在聊天观看视频; 设置以 管理员 将只显示管理员和超级室长张贴的影片，其他用户发布唯一链接到原来的视频源。</i>
+		</td>
     <td>
         <select name="vALLOW_VIDEO">
 	        <option value="0"<?php if($ALLOW_VIDEO==0){ echo " selected"; } ?>>禁用</option>
@@ -2375,7 +2373,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 <tr bgcolor="#B0C4DE">
     <td><b>启用 the MediaPlayer add-on in chat</b><br />
     	<i><font color=red>选择正确的格式框架将根据大小（音频 < 视频）。<br />重要：如果更改此设置，同时也有用户登录，您的所有用户必须重新载入他们的浏览器或退出并重新登录。如果您启用/禁用此，将被自动发送到所有房间的一个公告。</font><br />
-    	<i>提示：假如 启用, 一个有效的流媒体URL也必须在接下来的领域。你可以设置一个静态的 audio/video  源或 radioplayer 的流媒体服务器。例如 http://playlist.yahoo.com/makeplaylist.dll?id=1369080&segment=149773 (NASA TV live station)</i>
+    	<i>提示：假如 启用，一个有效的流媒体URL也必须在接下来的领域。你可以设置一个静态的 audio/video  源或 radioplayer 的流媒体服务器。例如 http://playlist.yahoo.com/makeplaylist.dll?id=1369080&segment=149773 (NASA TV live station)</i>
 	</td>
     <td>
         <select name="vEN_WMPLAYER">
@@ -2401,7 +2399,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</tr>
 <tr bgcolor="#B0C4DE">
     <td><b>对管理员定义快速选单。</b><br />
-    	<i>提示：保持这些字符：<b>|</b> 在每一行结束时，除了最后一个<br />
+    	<i>提示：保持这些字符： <b>|</b> 在每一行结束时，除了最后一个<br />
     	清空此复选框以禁用管理员的快速选单。</i>
     </td>
     <td><textarea name="vQUICKA" rows=5 cols=28 wrap=on><?php echo $QUICKA; ?></textarea>
@@ -2409,7 +2407,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr>
     <td><b>定义主持人快速选单。</b><br />
-    	<i>提示：保持这些字符：<b>|</b> 在每一行结束时，除了最后一个<br />
+    	<i>提示：保持这些字符： <b>|</b> 在每一行结束时，除了最后一个<br />
     	清空此复选框来禁用主持人的快速选单。</i>
     </td>
     <td><textarea name="vQUICKM" rows=5 cols=28 wrap=on><?php echo $QUICKM; ?></textarea>
@@ -2417,7 +2415,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>定义其他用户的快速选单。</b><br />
-    	<i>提示：保持这些字符：<b>|</b> 在每一行结束时，除了最后一个<br />
+    	<i>提示：保持这些字符： <b>|</b> 在每一行结束时，除了最后一个<br />
     	清空此复选框来禁用一般用户的快速选单。</i>
     </td>
     <td><textarea name="vQUICKU" rows=5 cols=28 wrap=on><?php echo $QUICKU; ?></textarea>
@@ -2539,35 +2537,35 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><a name="force"></a><b>启用 use of GRAVATARS。</b><br />
-    	<i><font color=red>重要： <a href=#avatars>头像系统</a> 还必须启用上面！</font><br />
-		提示：如果启用，所有客人将作为默认的gravatar头像。</i>
+    	<i><font color=red>重要： <a href=#avatars>头像系统</a>还必须启用上面！</font><br />
+		提示：如果启用，所有客人将作为默认的 gravatar 头像。</i>
     </td>
     <td>
         <select name="vALLOW_GRAVATARS" id="gravatars" onChange="swapImage('gravatars','gravatarsToSwap')">
 	        <option value="0"<?php if($ALLOW_GRAVATARS==0){ echo " selected"; } ?>>停用 Gravatars</option>
 	        <option value="1"<?php if($ALLOW_GRAVATARS==1){ echo " selected"; } ?>>让用户决定</option>
-	        <option value="2"<?php if($ALLOW_GRAVATARS==2){ echo " selected"; } ?>>强制使用Gravatar</option>
+	        <option value="2"<?php if($ALLOW_GRAVATARS==2){ echo " selected"; } ?>>强制使用 Gravatars</option>
         </select>&nbsp;<img id="gravatarsToSwap" src="<?php echo(($ALLOW_GRAVATARS) ? "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=".$AVA_WIDTH."&r=g&d=".$GRAVATARS_DYNAMIC_DEF : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 ALT=\"Gravatar\" Title=\"Gravatar\""); ?> />
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
 	<td colspan="2">
-    	<i><font color=blue>定义:</font><br />
-    	一个 gravatar，或 <b>G</b>lobally <b>R</b>ecognized <b>A</b>vatar，是很简单的头像图片后您的网志，您的名字旁边出现时，你对此有何评论的gravatar启用站点。替身帮助确定您的文章在网上论坛，所以为什么不是网志。<br/>注册为gravatar.com帐户是免费的，这是一个电子邮件地址。一旦你签署了，你可以上传你的头像图片后不久，你就会开始看到它的gravatar启用网志（包括本聊天）！<br/>
-		<font color=blue>（阅读更多有关Gravatar的 <a href="http://www.gravatar.com" target="_blank">http://www.gravatar.com</a> 位置)</font></i>
+    	<i><font color=blue>定义：</font><br />
+    	一个 gravatar，或 <b>G</b>lobally <b>R</b>ecognized <b>A</b>vatar，是很简单的头像图片后您的网志，您的名字旁边出现时，你对此有何评论的gravatar启用站点。替身帮助确定您的文章在网上论坛，所以为什么不是网志。<br />注册为gravatar.com帐户是免费的，这是一个电子邮件地址。一旦你签署了，你可以上传你的头像图片后不久，你就会开始看到它的gravatar启用网志（包括本聊天）！<br />
+		<font color=blue>《阅读更多有关Gravatar的 <a href="http://www.gravatar.com" target="_blank">http://www.gravatar.com</a>位置》</font></i>
 	</td>
 </tr>
 <tr>
     <td><b>Gravatar的高速缓存设置。</b><br />
-	<i>服务器信息：<br /><font color=red>重要: 如果缓存是启用，确保 "cache" 缓存文件夹中存在的聊天根，它具有公开写入权限(CHMOD 0777)！<br />
-	<?php echo((!$cache_supported || $server_blocked) ? "<b>Cache not supported on this server!</b><br />" : ""); ?>
-		</font><font color=blue>托管服务器 IP： <b><?php echo($_SERVER['SERVER_ADDR']); ?></b> <?php echo(!$server_blocked ? "" : "<b><font color=red>cannot get access to gravatar.com!</font></b>"); ?></font><br />
-		<font color=blue>PHP服务器版本： <b><?php echo(version_compare(PHP_VERSION,'5') >= 0 ? "<font color=red>".PHP_VERSION."</font>" : PHP_VERSION); ?></b></font><br />
-		<font color=blue>allow_url_fopen： <b><?php echo(!(ini_get("allow_url_fopen")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
-		<font color=blue>allow_url_include： <b><?php echo(!(ini_get("allow_url_include")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
-		<font color=blue>file_get_contents： <b><?php echo(!(function_exists("file_get_contents")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
-		<font color=blue>MySQL服务器的版本： <b><?php echo(mysql_get_server_info()); ?></b></font></i>
-	</td>
+	<i>服务器信息：<br /><font color=red>重要：如果缓存是启用，确保“cache”缓存文件夹中存在的聊天根，它具有公开写入权限(CHMOD 0777)！<br />
+	<?php echo((!$cache_supported || $server_blocked) ? "<b>Cache not supported on this server！</b><br />" : ""); ?>
+		</font><font color=blue>托管服务器 IP：<b><?php echo($_SERVER['SERVER_ADDR']); ?></b> <?php echo(!$server_blocked ? "" : "<b><font color=red>cannot get access to gravatar.com！</font></b>"); ?></font><br />
+		<font color=blue>PHP服务器版本：<b><?php echo(version_compare(PHP_VERSION,'5') >= 0 ? "<font color=red>".PHP_VERSION."</font>" : PHP_VERSION); ?></b></font><br />
+		<font color=blue>allow_url_fopen：<b><?php echo(!(ini_get("allow_url_fopen")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
+		<font color=blue>allow_url_include：<b><?php echo(!(ini_get("allow_url_include")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
+		<font color=blue>file_get_contents：<b><?php echo(!(function_exists("file_get_contents")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
+		<font color=blue>MySQL服务器的版本：<b><?php echo(mysql_get_server_info()); ?></b></font></i>
+		</td>
     <td>
 		<input type="radio" value="0" name="vGRAVATARS_CACHE" <?php if($GRAVATARS_CACHE==0 || !$cache_supported || $server_blocked) { echo " checked"; }; ?>>&nbsp;禁用缓存<br />
 		<input type="radio" value="1" name="vGRAVATARS_CACHE" <?php if($GRAVATARS_CACHE==1 && $cache_supported){ echo " checked"; }; if(!$cache_supported || $server_blocked){ echo " DISABLED"; }; ?>>&nbsp;启用高速缓存<br />
@@ -2589,7 +2587,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr bgcolor="#B0C4DE">
     <td colspan=2>
-		<i>G 额定Gravatar是适合观众与任何类型的所有网站上显示。 <font color=blue>(建议与默认)</font><br />
+		<i>G 额定Gravatar是适合观众与任何类型的所有网站上显示。<font color=blue>(建议与默认)</font><br />
 		PG 额定Gravatar的可能包含粗鲁的手势，挑衅穿着的个人，较小的粗话，或轻微暴力。<br />
 		R 额定Gravatar的可能含有恶劣的亵渎，激烈的暴力，裸露，或硬药物使用这样的事情。<br />
 		X 额定Gravatar的可能包含铁杆性的的图像或极其令人不安的暴力。</i>
@@ -2648,8 +2646,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr>
     <td><b>设置您的管理员（全）日志文件夹的名称。</b><br />
-    	<i><font color=red>重要：原有的"logsadmin"文件夹，重命名一个很难猜测，您的完整的日志文件夹的名称。</font><br />
-    	提示：这是从不同的公共/用户访问（称为"日志"），其中不包括任何私人/机密数据从您的聊天对话/动作。</i>
+    	<i><font color=red>重要：原有的“logsadmin”文件夹，重命名一个很难猜测，您的完整的日志文件夹的名称。</font><br />
+    	提示：这是从不同的公共/用户访问（称为“日志”），其中不包括任何私人/机密数据从您的聊天对话/动作。</i>
     </td>
     <td>
 		<input name="vLOG_DIR" type="text" size="25" maxlength="25" value="<?php echo $LOG_DIR; ?>">
@@ -2839,7 +2837,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 <tr bgcolor="#B0C4DE">
     <td><b>控制谁将会在聊天室中可见。</b><br />
     	<i><font color=red>重要：如果你启用控制鬼，鬼（无形）的用户也将被隐藏所有公共页面和计数器，除了他们的职位和房间中的命令（消息框架）！</font><br />
-		提示：您还可以监视鬼"连接，在连接选项卡上的活动。请注意，鬼仍然能够采取行动像往常一样在聊天中（可以发布公共或私人信息，并且可以使用所有的命令，根据他们的权力）。</i>
+		提示：您还可以监视鬼“连接，在连接选项卡上的活动。请注意，鬼仍然能够采取行动像往常一样在聊天中（可以发布公共或私人信息，并且可以使用所有的命令，根据他们的权力）。</i>
 	</td>
     <td>
         <select name="vHIDE_ADMINS">
@@ -2864,8 +2862,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 <!--
 <tr bgcolor="#B0C4DE">
 	<td><b>惩罚的幽灵（幻影）：</b><br />
-    	<i><font color=red>重要： 添加用户名，以逗号分隔，没有空格 (,)!</font><br />
-    	<i>提示：这些用户将不能看到别人在聊天中（仅在连接选项卡），他们将无法在聊天室张贴或发送任何事件。我们建议只激活这些用户无法被放逐权力 <font color=red>唯一用在用户未能被驱逐</font>!</i>
+    	<i><font color=red>重要：添加用户名，以逗号分隔，没有空格 (,)！</font><br />
+    	<i>提示：这些用户将不能看到别人在聊天中（仅在连接选项卡），他们将无法在聊天室张贴或发送任何事件。我们建议只激活这些用户无法被放逐权力 <font color=red>唯一用在用户未能被驱逐</font>！</i>
 	</td>
 	<td>
 		<input name="vPUNNISHED_GHOSTS" type="text" size="25" maxlength="255" value="<?php //echo $PUNNISHED_GHOSTS; ?>">
@@ -2902,7 +2900,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>设定您希望问候发送触发时间从午夜何时。</b><br />
-    	<i>提示: 允许正值或负值 (0 = 午夜)。<br />
+    	<i>提示：允许正值或负值 (0 = 午夜)。<br />
 		请注意：此设置是在考虑到服务器的时间，而不是用户的时间，因此它是可能的电子邮件将被发送在 (+-)时区偏差</i>
 	</td>
     <td>
@@ -2911,7 +2909,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr>
 	<td><b>多少天的问候，将会发送。</b><br />
-    	<i>提示：如果没有一个在聊天，也不访问此区间内的聊天页面，贺卡将不能发送了，为庆祝用户的影响将是不一样的。</i>
+        <i>提示：如果没有一个在聊天，也不访问此区间内的聊天页面，贺卡将不能发送了，为庆祝用户的影响将是不一样的。</i>
 	</td>
     <td>
 			<input name="vSEND_BDAY_INTVAL" type="text" size="7" maxlength="2" value="<?php echo $SEND_BDAY_INTVAL; ?>"> (天)
@@ -2919,7 +2917,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>设定发送的内文。</b><br />
-    	<i>提示: 你可以自行修改内文。<br />
+    	<i>提示： 你可以自行修改内文。<br />
 		请注意：在资料夹加其他语言版本</i>
 	</td>
 	<td>

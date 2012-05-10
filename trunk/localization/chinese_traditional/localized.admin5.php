@@ -703,7 +703,7 @@ if(C_BOT_NAME != $vBOT_NAME || C_BOT_FONT_COLOR != $vBOT_FONT_COLOR || C_BOT_AVA
 	}
 	else if((C_NO_SWEAR && checkwords($vBOT_NAME, true, $Charset)) && C_BOT_NAME != $vBOT_NAME)
 	{
-		$Error = "Banished word found in the Bot username (".$vBOT_NAME.")";
+		$Error = "不允許的字詞或符號在機器人名稱 (".$vBOT_NAME.")";
 	}
 	else
 	{
@@ -712,7 +712,7 @@ if(C_BOT_NAME != $vBOT_NAME || C_BOT_FONT_COLOR != $vBOT_FONT_COLOR || C_BOT_AVA
 		$DbLink->clean_results();
 		if ($rows != 0 && C_BOT_NAME != $vBOT_NAME)
 		{
-			$Error = "The name of your Bot (".$vBOT_NAME.") is already registered。<br />Choose another one";
+			$Error = "這名稱屬於你的機器人的名稱 (".$vBOT_NAME.") 已經註冊。<br />請選擇另一個名稱";
 		}
 		else
 		{
@@ -739,11 +739,11 @@ if((C_QUOTE_NAME != $vQUOTE_NAME || C_QUOTE_FONT_COLOR != $vQUOTE_FONT_COLOR || 
 # 	else if (ereg("[\, \']", stripslashes($vQUOTE_NAME)) && C_QUOTE_NAME != $vQUOTE_NAME)
 	else if(preg_match("/[ |,|'|\\\\]/", $vQUOTE_NAME) && C_QUOTE_NAME != $vQUOTE_NAME)
 	{
-		$Error = "只允許這些額外的字符：<br />".$REG_CHARS_ALLOWED."<br />空格，逗號或反斜線 (\\) 不允許。<br />檢查該語法 Random Quote 的名稱 (".$vQUOTE_NAME.")";
+		$Error = "只允許這些額外的字符：<br />".$REG_CHARS_ALLOWED."<br />空格，逗號或反斜線 (\\) 不允許。 <br />檢查該語法 Random Quote 的名稱  (".$vQUOTE_NAME.")";
 	}
 	else if((C_NO_SWEAR && checkwords($vQUOTE_NAME, true, $Charset)) && C_QUOTE_NAME != $vQUOTE_NAME)
 	{
-		$Error = "Banished word found in the Random Quote username (".$vQUOTE_NAME.")";
+		$Error = "發現不能使用的字，在 隨機引用 的用戶名裡 (".$vQUOTE_NAME.")";
 	}
 	else
 	{
@@ -752,7 +752,7 @@ if((C_QUOTE_NAME != $vQUOTE_NAME || C_QUOTE_FONT_COLOR != $vQUOTE_FONT_COLOR || 
 		$DbLink->clean_results();
 		if ($rows != 0 && C_QUOTE_NAME != $vQUOTE_NAME)
 		{
-			$Error = "The name of your Random Quote (".$vQUOTE_NAME.") is already registered。<br />Choose another one";
+			$Error = "這是隨機引用的名稱 (".$vQUOTE_NAME.") 已被註冊。<br />請選擇另一個名稱";
 		}
 		else
 		{
@@ -832,7 +832,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr>
     <td><b>啟用統計的信息在聊天室。</b><br />
-    	<i>提示：如果您的服務器的帶寬確實有限，或您發現您的服務器超載，您應禁用這個 mod！</i>
+    	<i>提示：如果您的服務器的帶寬確實有限，或您發現您的服務器超載，您應禁用這個外掛！</i>
 	</td>
     <td>
         <select name="vEN_STATS">
@@ -1076,7 +1076,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</tr>
 <tr bgcolor="#B0C4DE">
     <td><b>讓註冊用於您的聊天系統。</b><br />
-    	<font color=red>禁用此唯一的，如果你想手動添加註冊用戶，或閱讀  <a href=#reg_hint class="ChatLink">提示</a> 使其自動等待您的批准下文。</font>
+    	<font color=red>禁用此唯一的，如果你想手動添加註冊用戶，或閱讀 <a href=#reg_hint class="ChatLink">提示</a> 使其自動等待您的批准下文。</font>
 	</td>
     <td>
         <select name="vALLOW_REGISTER">
@@ -1148,17 +1148,15 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr>
     <td colspan="2"><a name="reg_hint"></a>
-	<font color=red>* <b>提示</b></font> <b>for the 最好的設置，如果你想控制誰註冊和進入您的聊天室：</b><br />
+	<font color=red>* <b>提示</b></font> <b>到這最好的設置，如果你想控制誰註冊和進入您的聊天室：</b><br />
 			<i>- 允許註冊用於您的聊天室：<font color=green>註冊 啟用</font><br />
 			- 需要註冊加入聊天：如果 <font color=green>需要</font> 設置，只有註冊用戶才能夠登錄到聊天室<br />
 			- 產生密碼並發電子郵件給新註冊用戶：<font color=green>啟用</font><br />
 			- 傳送新註冊用戶帳戶的詳細資料：<font color=green>不傳送</font><br />
-			- 傳送新用戶註冊帳戶的詳細資料（通知）給管理員：<font color=green>通知管理員</font><br />
-			因此，用戶將選擇自己所需的數據，將生成一個隨機密碼，但用戶將不會收到電子郵件與密碼，所以他仍然無法登錄;他只會得到有關未決註冊的通知郵件。<br />
+			- 傳送新用戶註冊帳戶的詳細資料（通知）給管理員：<font color=green>通知管理員</font><br />因此，用戶將選擇自己所需的數據，將生成一個隨機密碼，但用戶將不會收到電子郵件與密碼，所以他仍然無法登錄;他只會得到有關未決註冊的通知郵件。<br />
 			在同一時間，管理員將收到 <u>2 電子郵件</u>：
 			<li>1<sup>st</sup> - 是一份登記數據，用於管理員的將來參考（如用戶忘記密碼時）。這總是以英文發送郵件;</li>
-			<li>2<sup>nd</sup> - 是電子郵件，其中包含新創建的帳戶的隨機密碼和其餘的資料 (此電子郵件已經準備要發送/轉發給用戶，如果該帳戶被批准)。此電子郵件編寫將選擇於登記用戶語言。</li><br />
-			該管理員驗證誰是這個人，用戶提供了什麼資料。如果他決定批准該用戶帳戶，管理員只會有第二封電子郵件轉發到該用戶的電子郵件（電子郵件地址已經被格式化審批）。另一種方法是去"<?php echo(A_MENU_4); ?>" 和發送電子郵件登錄到該用戶的電子郵件資料。或者，管理員甚至可以用該名稱/密碼登錄在“編輯個人資料” 形成和調整/修改資料/密碼。<br />
+			<li>2<sup>nd</sup> - 是電子郵件，其中包含新創建的帳戶的隨機密碼和其餘的資料(此電子郵件已經準備要發送/轉發給用戶，如果該帳戶被批准)。此電子郵件編寫將選擇於登記用戶語言。</li><br />該管理員驗證誰是這個人，用戶提供了什麼資料。如果他決定批准該用戶帳戶，管理員只會有第二封電子郵件轉發到該用戶的電子郵件（電子郵件地址已經被格式化審批）。另一種方法是去"<?php echo(A_MENU_4); ?>" 和發送電子郵件登錄到該用戶的電子郵件資料。或者，管理員甚至可以用該名稱/密碼登錄在“編輯個人資料” 形成和調整/修改資料/密碼。<br />
 			<font color=red>重要的是：不要忘記放你正確的管理員電子郵件 <a href=#admin_email class="ChatLink">在這裡</a>，以完成以上所有這些工作)。同時要考慮到非公開（限制性，私人），這些設置會變成您的聊天服務器。如果你忽略了未能驗證和批准帳戶，用戶也許就放棄不回來了。</font></i>
 	</td>
 </tr>
@@ -1171,7 +1169,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</tr>
 <tr bgcolor="#B0C4DE">
     <td><b>啟用驅逐功能，並定義這延遲到它。</b><br />
-		<i>提示：0 = 已禁用，任意整數 = 驅逐天數</i>
+		<i>提示： 0 = 已禁用，任意整數 = 驅逐天數</i>
 	</td>
     <td>
     	<input name="vBANISH" type="text" size="7" maxlength="3" value="<?php echo $BANISH; ?>"> (天)
@@ -1179,9 +1177,9 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr>
     <td><b>驅逐類型。</b><br />
-    	<i>提示：禁止 IP和用戶名同時進行 或 僅用IP。
+    	<i>提示：禁止 IP 和用戶名同時進行或僅用 IP。
 		<li>- 第一個選項將禁止從一個共享IP的用戶名，被禁止的用戶來時非常有用，從一個共享的IP地址或父母控制之用 (例如：當一個共享的電腦 / 訪問點是一個孩子使用);
-		<li>- 第二個選項將禁止所有的用戶名試圖登錄來自同一個IP（更有效）。</i>
+		<li>- 第二個選項將禁止所有的用戶名試圖登錄來自同一個 IP（更有效）。</i>
     </td>
     <td>
         <select name="vBAN_IP">
@@ -1515,7 +1513,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr>
     <td><b>列出你的額外的功能/外掛。</b><br />
-    	<i>提示：如果他們是太長的時候，保持 空格分開 並用 / 分割線</i>
+    	<i>提示：如果他們是太長的時候，保持 空格分開 並用，分隔</i>
     </td>
     <td>
 		<input name="vMODS" type="text" size="25" maxlength="255" value="<?php echo $MODS; ?>">
@@ -2116,7 +2114,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr>
     <td><b>啟用彈出耳語（私人信息）系統。</b><br />
-    	<i>提示：如果啟用，遊客不會接受到彈出的 PMS  - 他們必須註冊）<br/>每個註冊用戶可以自己配置私敲是否彈出視窗顯示<br />
+    	<i>提示：如果啟用，遊客不會接受到彈出的 PMS  - 他們必須註冊）<br />每個註冊用戶可以自己配置私敲是否彈出視窗顯示<br />
     	<font color=red>重要：如果更改此設置，同時也有用戶登錄，您的所有用戶必須重新載入他們的瀏覽器或退出並重新登錄。將自動發送到所有房間的一個公告，如果你 啟用/停用 這個。</font></i><br />
 		離線的項目經理無論如何將始終顯示在彈出（否則，收件人不會被通知新的PMs）。
     </td>
@@ -2402,7 +2400,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</tr>
 <tr bgcolor="#B0C4DE">
     <td><b>對管理員定義快速選單。</b><br />
-    	<i>提示：保持這些字符：<b>|</b> 在每一行結束時，除了最後一個<br />
+    	<i>提示：保持這些字符： <b>|</b> 在每一行結束時，除了最後一個<br />
     	清空此複選框以禁用管理員的快速選單。</i>
     </td>
     <td><textarea name="vQUICKA" rows=5 cols=28 wrap=on><?php echo $QUICKA; ?></textarea>
@@ -2410,7 +2408,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr>
     <td><b>定義主持人快速選單。</b><br />
-    	<i>提示：保持這些字符：<b>|</b> 在每一行結束時，除了最後一個<br />
+    	<i>提示：保持這些字符： <b>|</b> 在每一行結束時，除了最後一個<br />
     	清空此複選框來禁用主持人的快速選單。</i>
     </td>
     <td><textarea name="vQUICKM" rows=5 cols=28 wrap=on><?php echo $QUICKM; ?></textarea>
@@ -2418,7 +2416,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr bgcolor="#B0C4DE">
     <td><b>定義其他用戶的快速選單。</b><br />
-    	<i>提示：保持這些字符：<b>|</b> 在每一行結束時，除了最後一個<br />
+    	<i>提示：保持這些字符： <b>|</b> 在每一行結束時，除了最後一個<br />
     	清空此複選框來禁用一般用戶的快速選單。</i>
     </td>
     <td><textarea name="vQUICKU" rows=5 cols=28 wrap=on><?php echo $QUICKU; ?></textarea>
@@ -2434,7 +2432,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 <tr bgcolor="#B0C4DE">
     <td><b>啟用 頭像系統。</b><br />
     	<i><font color=red>重要：如果更改此設置，同時也有用戶登錄，您的所有用戶必須重新載入他們的瀏覽器或退出並重新登錄。如果你 啟用/停用 這裡，將自動發送一個公告到所有房間。</font></i>
-   </td>
+    </td>
     <td>
         <select name="vUSE_AVATARS" id="use_avatars" onChange="swapImage('use_avatars','use_avatarsToSwap')">
 	        <option value="0"<?php if($USE_AVATARS==0){ echo " selected"; } ?>>沒有頭像</option>
@@ -2554,8 +2552,8 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 <tr bgcolor="#B0C4DE">
 	<td colspan="2">
     	<i><font color=blue>定義：</font><br />
-    	一個 gravatar，或 <b>G</b>lobally <b>R</b>ecognized <b>A</b>vatar，是很簡單的頭像圖片後您的網誌，您的名字旁邊出現時，你對此有何評論的gravatar啟用站點。替身幫助確定您的文章在網上論壇，所以為什麼不是網誌。<br/>註冊為gravatar.com帳戶是免費的，這是一個電子郵件地址。一旦你簽署了，你可以上傳你的頭像圖片後不久，你就會開始看到它的gravatar啟用網誌（包括本聊天）！<br/>
-<font color=blue>（閱讀更多有關Gravatar的 <a href="http://www.gravatar.com" target="_blank">http://www.gravatar.com</a> site)</font></i>
+    	一個 gravatar，或 <b>G</b>lobally <b>R</b>ecognized <b>A</b>vatar，是很簡單的頭像圖片後您的網誌，您的名字旁邊出現時，你對此有何評論的gravatar啟用站點。替身幫助確定您的文章在網上論壇，所以為什麼不是網誌。<br />註冊為gravatar.com帳戶是免費的，這是一個電子郵件地址。一旦你簽署了，你可以上傳你的頭像圖片後不久，你就會開始看到它的gravatar啟用網誌（包括本聊天）！<br />
+<font color=blue>《閱讀更多有關Gravatar的 <a href="http://www.gravatar.com" target="_blank">http://www.gravatar.com</a>位置》</font></i>
 	</td>
 </tr>
 <tr>
@@ -2598,7 +2596,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 <tr>
     <td><b>動態的默認Gravatar。</b><br />
-	<i>提示：這將隨機返回一個為每個用戶的動態圖像，沒有他們的電子郵件gravatar.com帳戶。（聊天嘉賓和/或未經註冊 gravatar.com 帳戶的用戶）.<br />
+	<i>提示：這將隨機返回一個為每個用戶的動態圖像，沒有他們的電子郵件gravatar.com帳戶。（聊天嘉賓和/或未經註冊 gravatar.com 帳戶的用戶）。<br />
 	<font color=red>您可以強制顯示隨機的默認Gravatar<a href="#force">強制只有Gravatar</a>同時啟用上面！</font></i>
     </td>
     <td>
