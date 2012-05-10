@@ -1,7 +1,7 @@
 <?php
 // File : chinese_simplified/localized.install.php - plus version (07.06.2009 - rev.7)
 // Original file for Plus version by clouds_music <clouds.music@gmail.com>
-// Do not use ' ; use ’ istead (utf-8 edit bug)
+// Do not use ' ; use ’ instead (utf-8 edit bug)
 
 define("L_BTN1", "下一页");
 define("L_BTN2", "取消");
@@ -9,15 +9,15 @@ define("L_BTN3", "返回");
 define("L_BTN4", "刷新");
 define("L_BTN5", "完成");
 define("L_BTN6", "跳过");
-define("L_CONN_ERROR", "FTP的主机地址错误！<br />请返回，并检查您的FTP主机位址。");
-define("L_LOGIN_ERROR", "登入验证失败！<br />请返回，并检查您的登入使用者名称和密码。");
+define("L_CONN_ERROR", "FTP的主机地址错误！<br/>请返回，并检查您的FTP主机位址。");
+define("L_LOGIN_ERROR", "登入验证失败！<br/>请返回，并检查您的登入使用者名称和密码。");
 define("L_FTP_NAME", "FTP 用户名空白未填！");
 define("L_FTP_PASS", "FTP 密码 空白未填！");
 define("L_DB_NOCONNECT", "无法连接到数据库！");
 define("L_DB_HINT1", "数据库 %s 不存在，并且我不能创建它！");
-define("L_PASS_ERROR1", "你没有填写管理员名称。<br />请返回并选用一个名称到您的管理员帐户！");
-define("L_PASS_ERROR2", "你必须填写密码栏位。<br />请返回并键入相同的密码两次！");
-define("L_PASS_ERROR3", "密码和验证密码不符合。<br />请返回并重新输入密码！");
+define("L_PASS_ERROR1", "你没有填写管理员名称。<br/>请返回并选用一个名称到您的管理员帐户！");
+define("L_PASS_ERROR2", "你必须填写密码栏位。<br/>请返回并键入相同的密码两次！");
+define("L_PASS_ERROR3", "密码和验证密码不符合。<br/>请返回并重新输入密码！");
 define("L_FILE_ERROR1", "不能 CHMOD 这档案");
 define("L_FILE_ERROR2", "");
 define("L_FOLD_ERROR1", "不能 CHMOD 这资料夹");
@@ -28,7 +28,7 @@ define("L_INST_SETUP", "安装 -");
 define("L_INST_PAG_OF", "页面 %s of %s");
 define("L_P0_HINT1", "欢迎到我们的安装程序 %s。");
 define("L_P0_HINT2", "请输入你的FTP登入资料。");
-define("L_P1_HINT1", "此设置将引导您完成安装过程。<br />请选择您的安装类型。");
+define("L_P1_HINT1", "此设置将引导您完成安装过程。<br/>请选择您的安装类型。");
 define("L_P1_HINT2", "Please select what type of installation is this：");
 define("L_P1_HINT3", "你提供的 FTP -数据，似乎是错误的。 安装程序无法继续。请返回并纠正错误。这些是错误的：");
 define("L_P2_HINT1", "现在，我们检查了 phpMyChat 配置。必须改变一个档案 (\"config/config.lib.php\") 在此服务器上。");
