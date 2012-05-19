@@ -156,8 +156,11 @@ if(C_EN_STATS)
 $DbLink = new DB;
 	$DbLink->query("SELECT perms,rooms,allowpopup,join_room FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	$reguser = ($DbLink->num_rows() != 0);
-	if ($reguser) list($perms, $rooms, $allowpopupu, $join_room) = $DbLink->next_record();
-	$DbLink->clean_results();
+	if ($reguser)
+	{
+		list($perms, $rooms, $allowpopupu, $join_room) = $DbLink->next_record();
+		$DbLink->clean_results();
+	}
 
 // Get IP address
 require("./lib/get_IP.lib.php");		// Set the $IP var
@@ -231,7 +234,6 @@ if($DbLink->num_rows() != 0)
 	}
 	elseif ($status == "b")			// Banished by a moderator or the admin.
 	{
-		$DbLink->clean_results();
 		$DbLink->query("SELECT reason FROM ".C_BAN_TBL." WHERE username='$U' LIMIT 1");
 		$Nb = $DbLink->num_rows();
 		// IP is banished from some rooms
@@ -266,11 +268,13 @@ if($DbLink->num_rows() != 0)
 else
 {
 	// User hasn't been found in the users table -> add a row if he is registered
-	$DbLink->clean_results();
 	$DbLink->query("SELECT perms,rooms,allowpopup,join_room FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	$reguser = ($DbLink->num_rows() != 0);
-	if ($reguser) list($perms, $rooms, $allowpopupu, $join_room) = $DbLink->next_record();
-	$DbLink->clean_results();
+	if ($reguser)
+	{
+		list($perms, $rooms, $allowpopupu, $join_room) = $DbLink->next_record();
+		$DbLink->clean_results();
+	}
 	// Kick unreg users
 	if (!$reguser)
 	{
@@ -423,9 +427,12 @@ if($DbLink->num_rows() > 0)
 			unset($avatar);
 			$DbAvatar = new DB;
 			$DbAvatar->query("SELECT email, avatar, use_gravatar FROM ".C_REG_TBL." WHERE username = '$User'");
-			if($DbAvatar->num_rows()!=0) list($email, $avatar, $use_gravatar) = $DbAvatar->next_record();
+			if($DbAvatar->num_rows()!=0)
+			{
+				list($email, $avatar, $use_gravatar) = $DbAvatar->next_record();
+				$DbAvatar->clean_results();
+			}
 			if (empty($avatar) || $avatar == "") $avatar = C_AVA_RELPATH . C_DEF_AVATAR;
-			$DbAvatar->clean_results();
 			// Gravatar mod added by Ciprian
 			if ((ALLOW_GRAVATARS == 2 || (ALLOW_GRAVATARS == 1 && (!isset($use_gravatar) || $use_gravatar))) && !strstr($User,"SYS "))
 			{
@@ -447,8 +454,11 @@ if($DbLink->num_rows() > 0)
 			if (isset($User))
 			{
 				$DbColor->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '$User'");
-				list($perms_user,$colorname) = $DbColor->next_record();
-				$DbColor->clean_results();
+				if($DbColor->num_rows()!=0)
+				{
+					list($perms_user,$colorname) = $DbColor->next_record();
+					$DbColor->clean_results();
+				}
 				if(COLOR_NAMES && (isset($colorname) && $colorname != "" && strcasecmp($colorname, $COLOR_TB) != 0))
 				{
 					$colorname_tag = "<FONT color=".$colorname.">";
@@ -472,8 +482,11 @@ if($DbLink->num_rows() > 0)
 			if (isset($Dest))
 			{
 				$DbColor->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '$Dest'");
-				list($perms_dest,$colornamedest) = $DbColor->next_record();
-				$DbColor->clean_results();
+				if($DbColor->num_rows()!=0)
+				{
+					list($perms_dest,$colornamedest) = $DbColor->next_record();
+					$DbColor->clean_results();
+				}
 				if(COLOR_NAMES && (isset($colornamedest) && $colornamedest != "" && strcasecmp($colornamedest, $COLOR_TB) != 0))
 				{
 					$colornamedest_tag = "<FONT color=".$colornamedest.">";
@@ -716,9 +729,12 @@ if (C_ENABLE_PM)
 	if (!isset($allowpopupu))
 	{
 		$DbLink->query("SELECT allowpopup FROM ".C_REG_TBL." WHERE username = '$U'");
-		if($DbLink->num_rows() != 0) list($allowpopupu) = $DbLink->next_record();
+		if($DbLink->num_rows() != 0)
+		{
+			list($allowpopupu) = $DbLink->next_record();
+			$DbLink->clean_results();
+		}
 		else $allowpopupu = 0;
-		$DbLink->clean_results();
 	}
 	if (substr($User,0,4) != "SYS ")
 	{
@@ -747,8 +763,8 @@ if (C_ENABLE_PM)
 						</SCRIPT>
 					<?php
 					$IsPopup = true;
+					$DbLink->clean_results();
 				}
-				$DbLink->clean_results();
 			}
 		}
 	}
@@ -786,11 +802,10 @@ if(C_CHAT_BOOT)
 	$CondForQueryM = "(username='$U' OR message='stripslashes(sprintf(L_ENTER_ROM, \"".$U."\"))' OR message='stripslashes(sprintf(L_ENTER_ROM_NOSOUND, \"".$U."\"))' OR ((username='SYS welcome' OR username LIKE 'SYS top%' OR username='SYS room' OR username='SYS image' OR username='SYS video' OR username='SYS utube' OR username='SYS math' OR username='SYS dice1' OR username='SYS dice2' OR username='SYS dice3' OR username='SYS away') AND address='$U'))";
 	$DbLink->query("SELECT type,m_time,room FROM ".C_MSG_TBL." WHERE ".$CondForQueryM." ORDER BY m_time DESC LIMIT 1");
 	list($m_type, $m_time, $m_room) = $DbLink->next_record();
-	$DbLink->clean_results();
 	$CondForQueryU = "status!='a' AND status!='t' AND status!='m' AND username='$U' AND username!='".C_BOT_NAME."' AND awaystat='0' AND (u_time > ".($m_time + C_USR_DEL * 60)." OR (status ='k' AND u_time <  ".(time() - 20)."))".$Hide."";
 	$DbLink->query("DELETE FROM ".C_USR_TBL." WHERE ".$CondForQueryU."");
 	$CleanUsrTbl = ($DbLink->affected_rows() > 0);
-	if($DbLink->affected_rows() > 0)
+	if($CleanUsrTbl)
 	{
 		// Ghost Control mod by Ciprian
 		if (C_SPECIAL_GHOSTS != "")
@@ -806,25 +821,25 @@ if(C_CHAT_BOOT)
 			$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+($curtime-last_away), longest_away=IF($curtime-last_away < longest_away, longest_away, $curtime-last_away), last_away='' WHERE (stat_date=FROM_UNIXTIME(last_away,'%Y-%m-%d') OR stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d')) AND room='$m_room' AND username='$U' AND last_away!='0'");
 			$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_in=seconds_in+($curtime-last_in), longest_in=IF($curtime-last_in < longest_in, longest_in, $curtime-last_in), last_in='' WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$m_room' AND username='$U' AND last_in!='0'");
 		}
-	$DbLink->clean_results();
-	$botpath = "botfb/".$U;         // file is in DIR "botfb" and called "username"
-	if (file_exists($botpath)) unlink($botpath); // checks to see if user file exists.
-	                                     // if it does delete it.
-	$botpathbot = "botfb/".$U.".txt";   // file is in DIR "botfb" and called "username.txt"
-	if (file_exists($botpathbot)) unlink($botpathbot); // checks to see if user file exists.
-	?>
-	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
-	<!--
-		if (window.parent.frames['loader'] && !window.parent.frames['loader'].closed)
-		{
-			if (typeof(window.parent.leaveChat) != 'undefined') window.parent.leaveChat = true;
-			window.parent.frames['loader'].close();
-		};
-		window.parent.window.location = '<?php echo("$From?Ver=$Ver&L=$L&U=".stripslashes($U)."&O=$O&ST=$ST&NT=$NT&E=".urlencode(stripslashes($R))."&EN=$T&BT=1"); ?>';
-	// -->
-	</SCRIPT>
-	<?php
-	exit();
+		if ($DbLink) $DbLink->clean_results();
+		$botpath = "botfb/".$U;         // file is in DIR "botfb" and called "username"
+		if (file_exists($botpath)) unlink($botpath); // checks to see if user file exists.
+											 // if it does delete it.
+		$botpathbot = "botfb/".$U.".txt";   // file is in DIR "botfb" and called "username.txt"
+		if (file_exists($botpathbot)) unlink($botpathbot); // checks to see if user file exists.
+		?>
+		<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
+		<!--
+			if (window.parent.frames['loader'] && !window.parent.frames['loader'].closed)
+			{
+				if (typeof(window.parent.leaveChat) != 'undefined') window.parent.leaveChat = true;
+				window.parent.frames['loader'].close();
+			};
+			window.parent.window.location = '<?php echo("$From?Ver=$Ver&L=$L&U=".stripslashes($U)."&O=$O&ST=$ST&NT=$NT&E=".urlencode(stripslashes($R))."&EN=$T&BT=1"); ?>';
+		// -->
+		</SCRIPT>
+		<?php
+		exit();
 	}
 }
 // **	Ensures the user has no restrictions to the room he chooses to enter, create or join - Rooms Restriction mod by Ciprian
@@ -842,21 +857,20 @@ if(C_CHAT_BOOT)
 			$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+($curtime-last_away), longest_away=IF($curtime-last_away < longest_away, longest_away, $curtime-last_away), last_away='' WHERE (stat_date=FROM_UNIXTIME(last_away,'%Y-%m-%d') OR stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d')) AND room='$m_room' AND username='$U' AND last_away!='0'");
 			$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_in=seconds_in+($curtime-last_in), longest_in=IF($curtime-last_in < longest_in, longest_in, $curtime-last_in), last_in='' WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$m_room' AND username='$U' AND last_in!='0'");
 		}
-	$DbLink->clean_results();
-	setcookie("CookieRoom", '', time());        // cookie expires in one year
-	?>
-	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
-	<!--
-		if (window.parent.frames['loader'] && !window.parent.frames['loader'].closed)
-		{
-			if (typeof(window.parent.leaveChat) != 'undefined') window.parent.leaveChat = true;
-			window.parent.frames['loader'].close();
-		};
-		window.parent.window.location = '<?php echo("$From?Ver=$Ver&L=$L&U=".stripslashes($U)."&O=$O&ST=$ST&NT=$NT&E=".urlencode(stripslashes($R))."&EN=$T&RES=1"); ?>';
-	// -->
-	</SCRIPT>
-	<?php
-	exit();
+		setcookie("CookieRoom", '', time());        // cookie expires in one year
+		?>
+		<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
+		<!--
+			if (window.parent.frames['loader'] && !window.parent.frames['loader'].closed)
+			{
+				if (typeof(window.parent.leaveChat) != 'undefined') window.parent.leaveChat = true;
+				window.parent.frames['loader'].close();
+			};
+			window.parent.window.location = '<?php echo("$From?Ver=$Ver&L=$L&U=".stripslashes($U)."&O=$O&ST=$ST&NT=$NT&E=".urlencode(stripslashes($R))."&EN=$T&RES=1"); ?>';
+		// -->
+		</SCRIPT>
+		<?php
+		exit();
 	}
 ?>
 </BODY>
