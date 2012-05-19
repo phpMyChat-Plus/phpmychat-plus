@@ -220,8 +220,8 @@ define("L_HELP_MS", "%s 小姐");
 define("L_HELP_CMD_0", "{} 代表一个必需的设置，[] 一个可选择使用的设置。");
 define("L_HELP_CMD_1a", "设置的邮件数量显示。最小和默认是 5。");
 define("L_HELP_CMD_1b", "刷新的消息帧，显示了N的最新消息，最小和预设 5。");
-define("L_HELP_CMD_2a", "修改邮件列表刷新延迟（秒）。<br/>如果n未指定或小于 3，没有刷新和10S之间的切换刷新。");
-define("L_HELP_CMD_2b", "修改消息和用户列表刷新延迟（秒）。<br/>如果n未指定或小于 3，没有刷新和10S之间的切换刷新。");
+define("L_HELP_CMD_2a", "修改邮件列表刷新延迟（秒）。<br />如果n未指定或小于 3，没有刷新和10S之间的切换刷新。");
+define("L_HELP_CMD_2b", "修改消息和用户列表刷新延迟（秒）。<br />如果n未指定或小于 3，没有刷新和10S之间的切换刷新。");
 define("L_HELP_CMD_3", "反转消息的顺序（不是在所有的浏览器）。");
 define("L_HELP_CMD_4", "加入另一个房间，创建它，如果它不存在，如果你允许。<br />n 设 0 为私人 and 1 为公开，假如没有设定默认为 1。");
 define("L_HELP_CMD_5", "显示一个可选的消息后离开聊天。");
@@ -358,13 +358,13 @@ define("L_PRO_6", "名称/文本颜色");
 define("L_AVATAR", "头像");
 define("L_ERR_AV", "网址无效或不存在的主机。");
 define("L_TITLE_AV", "您当前的头像：");
-define("L_CHG_AV", "点击 \"".L_REG_16."\" 在个人资料表格 </>来储存您的头像。");
+define("L_CHG_AV", "点击 \"".L_REG_16."\" 在个人资料表格<br />来储存您的头像。");
 define("L_SEL_NEW_AV", "选择一个新的头像");
 define("L_EX_AV", "例如");
 define("L_URL_AV", "网址：");
 define("L_EXPL_AV", "(输入网址，然后按 ENTER 查看)");
 define("L_CANCEL", "取消");
-define("L_AVA_REG", "你必须先注册\ \才能来改变你的头像图标");
+define("L_AVA_REG", "你必须先注册\\n才能来改变你的头像图标");
 define("L_SEL_NEW_AV_CONFIRM", "当这种档案形式不能提交。\\n目前指向的虚拟化身，将会失去\\到目前为止！\\n\\n你确定？");
 
 // PlusBot bot mod (based on Alice bot)
@@ -736,7 +736,7 @@ define("L_SUPP_ALT", "通过 PayPal 支助 ".APP_NAME." 的发展 - 它是快速
 define("L_AUDIO", "音讯档案发布人");
 define("L_VIDEO", "视讯发布人");
 define("L_HELP_VIDEO", "张贴的视频或音频源的完整路径");
-define("L_NO_VIDEO", "不能嵌入的 URL。\\n这是不是一个有效的URL，接受公众的视频或音频源\\ n请再试！");
+define("L_NO_VIDEO", "不能嵌入的 URL。\\n这是不是一个有效的URL，接受公众的视频或音频源\\n请再试！");
 define("L_ORIG_VIDEO", "打开原始的来源网站");
 
 // Birthday mod - by Ciprian

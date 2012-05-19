@@ -148,7 +148,7 @@ if (C_BANISH != "0")
 	<?php
 };
 ?>
-&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#promote" CLASS="topLink">Promovisanje/Opoziv korisnika na/sa statusa moderatora:</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#promote" CLASS="topLink">Promovisanje/Opoziv korisnika na/sa statusa moderatora</A><br />
 <P>
 <hr />
 <hr />
@@ -205,7 +205,7 @@ Ako se niste registrovali<?php if (!C_REQUIRE_REGISTER) echo(" a želeli bi "); 
 	<LI>Zatim, unesite vaše ime, prezime, i vašu email adresu. Da bi se registrovali za čet morate sve ove informacije da unesete. Informacija o rodu nije neophodna.
 	<LI>Ako imate vaš sajt, možete da unesete URL u ovo polje.
 	<LI>Polje za jezik može da pomogne korisnike u budućim diskusijama. Tako će saznati koji jezik(e) vi razumete.
-	<LI>Na kraju, ako želite da vašu email adresu vide drugi korisnici, označite kutiju odmah pored "pokaži e-mail u javnoj informaciji". Ako želite da se vaša e-mail adresa ne vidi istavite tu kutiju neoznačenom.
+	<LI>Na kraju, ako želite da vašu email adresu vide drugi korisnici, označite kutiju odmah pored "<?php echo(L_REG_33); ?>". Ako želite da se vaša e-mail adresa ne vidi istavite tu kutiju neoznačenom.
 	<LI>Tada, pritisnite <?php echo(L_REG_3); ?> dugme ivaš nalog će biti kreiran. Ovisno o podešavanjima koje je postavio administrator možda ćete morati da čekate na administratorovo odobrenje. U svakom slučaju, dobit ćete poruku sa daljnjim instrukcijama. Ako u bilo kojem trenutku želite da se zaustavite bez registracije pritisnite, <?php echo(L_REG_25); ?> dugme.
 </UL>
 <P>

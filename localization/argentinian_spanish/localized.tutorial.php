@@ -150,7 +150,7 @@ if (C_BANISH != "0")
 	<?php
 };
 ?>
-&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#promote" CLASS="topLink">Promover/degradar a un usuario a/de moderador:</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#promote" CLASS="topLink">Promover/degradar a un usuario a/de moderador</A><br />
 <P>
 <hr />
 <hr />
@@ -209,7 +209,7 @@ Aparecerá una pequeña ventana popup.
  <li>Segundo, ingresá tu nombre, apellido, y tu dirección de email. Para ser registrado como usuario en el chat, toda esta información debe ser provista. La información sobre tu sexo es opcional.</li>
  <li>Si tenés una página Web, podés ingresar su URL en la casilla correspondiente.</li>
  <li>El campo del idioma puede ayudar a otros usuarios en futuras discuciones. Ellos podrán saber los idiomas que conocés.</li>
- <li>Finalmente, si te interesa que tu dirección de email pueda ser vista por otros usuarios, marcá la casilla ’mostrar e-mail en información pública’. Si no deseás que tu dirección de e-mail sea vista, dejá la casilla sin marcar.</li>
+ <li>Finalmente, si te interesa que tu dirección de email pueda ser vista por otros usuarios, marcá la casilla ’<?php echo(L_REG_33); ?>’. Si no deseás que tu dirección de e-mail sea vista, dejá la casilla sin marcar.</li>
  <li>Luego presioná el botón de <?php echo(L_REG_3); ?> y tu cuenta será creada. Dependiendo de lo que haya configurado el administrador, puede ser que tengas que esperar su aprobación. De cualquier forma recibirás un mail detallandote los pasos a seguir. Si deseás detener en algún momento la registración, presioná el botón <?php echo(L_REG_25); ?>.</li>
 </UL>
 <P>
@@ -635,7 +635,7 @@ Para describir lo que estás haciendo <B>comando "/me accion"</B> sin comillas.
 <P>
 Como variante de este comando, está disponible el <B>comando /mr </B>, el cual también pondrá el género en frente del nombre de usuario.
 <P>
-<I>Por ejemplo:</I> Si Jack envía el mensaje "/mr está viendo TV" se mostrará la ventana del mensaje "<B>* <?php echo(L_HELP_MR); ?> Jack</B> está viendo TV".
+<I>Por ejemplo:</I> Si Jack envía el mensaje "/mr está viendo TV" se mostrará la ventana del mensaje "<B>* <?php echo(sprintf(L_HELP_MR, "Jack")); ?></B> está viendo TV".
 <br /><P ALIGN="right"><A HREF="#top">Volver al comienzo</A></P>
 <P>
 <hr />

@@ -155,7 +155,7 @@ if (C_BANISH != "0")
 	<?php
 };
 ?>
-&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#promote" CLASS="topLink">Promote/Demote a user to/from moderator:</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#promote" CLASS="topLink">Promote/Demote a user to/from moderator</A><br />
 <P>
 <hr />
 <hr />
@@ -211,7 +211,7 @@ If you have not yet registered<?php if (!C_REQUIRE_REGISTER) echo(" and would li
 	<LI>Second, please enter your first name, last name, and your email address. In order to register to chat, all of this information must be provided. The gender information is optional.
 	<LI>If you have a homepage, you may enter the URL into the box.
 	<LI>The language field may help other users in future discussions. They will know which language(s) you understand.
-	<LI>Lastly, if you wish to allow your email address to be viewed by other participants, please check the box next to "show e-mail in public information". If you do not want your e-mail address to be viewable, leave the box unchecked.
+	<LI>Lastly, if you wish to allow your email address to be viewed by other participants, please check the box next to "<?php echo(L_REG_33); ?>". If you do not want your e-mail address to be viewable, leave the box unchecked.
 	<LI>Then, press the <?php echo(L_REG_3); ?> button and your account will be created. Depending on what has been set by the Administrator, you might have to wait for Admin's approval. Anyway, you will get a notifying email with further instructions. If you wish to stop at any time without registering, press the <?php echo(L_REG_25); ?> button.
 </UL>
 <P>
@@ -596,7 +596,7 @@ To describe what you’re doing you can use the <B>command "/me action"</B> with
 <P>
 As a variation to this command, there is the <B>/mr command</B> available, which will also put the gender title in front of the username.
 <P>
-<I>For example:</I> If Jack sends the message "/mr is watching TV" the message frame will show "<B>* <?php echo(L_HELP_MR); ?> Jack</B> is watching TV".
+<I>For example:</I> If Jack sends the message "/mr is watching TV" the message frame will show "<B>* <?php echo(sprintf(L_HELP_MR, "Jack")); ?></B> is watching TV".
 <br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 <P>
 <hr />

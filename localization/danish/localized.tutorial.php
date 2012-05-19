@@ -149,7 +149,7 @@ if (C_BANISH != "0")
 	<?php
 };
 ?>
-&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#promote" CLASS="topLink">Forfremmelse/degradering af en bruger til/fra moderator:</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#promote" CLASS="topLink">Forfremmelse/degradering af en bruger til/fra moderator</A><br />
 <P>
 <hr />
 <hr />
@@ -206,7 +206,7 @@ Hvis du endnu ikke er registreret <?php if (!C_REQUIRE_REGISTER) echo("men gerne
 	<LI>Som andet punkt skal du indtaste dit fornavn, efternavn og din e-mail-adresse. For at kunne registrere dig som bruger i chatten, skal disse felter være udfyldt. Det er frivilligt, om du vil oplyse køn.
 	<LI>Hvis du har en hjemmeside, kan du indtaste din URL i boksen.
 	<LI>Sprogfeltet kan hjælpe andre brugere i fremtidige diskussioner. Udfra boksen kan de se, hvilke(t) sprog du forstår.
-	<LI>Til sidst skal du tage stilling til, om din e-mail-adresse må kunne ses af andre deltagere på chatten. Markér boksen ved siden af "vis e-mail i tilgængelige oplysninger". Hvis du ikke ønsker, at din e-mail-adresse kan ses, skal du lade være at sætte markering i boksen.
+	<LI>Til sidst skal du tage stilling til, om din e-mail-adresse må kunne ses af andre deltagere på chatten. Markér boksen ved siden af "<?php echo(L_REG_33); ?>". Hvis du ikke ønsker, at din e-mail-adresse kan ses, skal du lade være at sætte markering i boksen.
 	<LI>Herefter trykker du blot på knappen <?php echo(L_REG_3); ?>, hvorefter din brugerkonto oprettes. Afhængigt af Administrators opsætning af chatten kan du komme ud for, at du skal vente på godkendelse fra Administrator. Under alle omstændigheder modtager du en e-mail med yderligere oplysninger. Hvis du fortryder og vil afbryde registreringen, kan du når som helst trykke på knappen <?php echo(L_REG_25); ?>.
 </UL>
 <P>
@@ -591,7 +591,7 @@ Hvis du vil fortælle, hvad du foretager dig, kan du anvende <B>kommandoen "/me 
 <P>
 Som en variant af denne kommando findes også <B>kommandoen /mr </B>, der samtidig sætter en kønsbestemt titel foran brugernavnet.
 <P>
-<I>For eksempel:</I> Hvis Jack sender beskeden "/mr ser TV", vil beskeden i chatvinduet se ud som følger: "<B>* <?php echo(L_HELP_MR); ?> Jack</B> ser TV".
+<I>For eksempel:</I> Hvis Jack sender beskeden "/mr ser TV", vil beskeden i chatvinduet se ud som følger: "<B>* <?php echo(sprintf(L_HELP_MR, "Jack")); ?></B> ser TV".
 <br /><P ALIGN="right"><A HREF="#top">Tilbage til toppen</A></P>
 <P>
 <hr />

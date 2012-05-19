@@ -116,7 +116,7 @@ define("A_CHAT_LOGS_14", "這將刪除 %s 檔案！\\n"); // day.php file
 define("A_CHAT_LOGS_15", "刪除此日誌");
 define("A_CHAT_LOGS_16", "閱讀 %s 日誌"); // day month year
 define("A_CHAT_LOGS_17", "公共聊天記錄存檔");
-define("A_CHAT_LOGS_18", "(只有公共");
+define("A_CHAT_LOGS_18", "(只有公共)");
 define("A_CHAT_LOGS_19", "\\n這是不可恢復的...\\n你確定？");
 define("A_CHAT_LOGS_20", "顯示完整的聊天記錄存檔部分");
 define("A_CHAT_LOGS_21", "返回頁首");

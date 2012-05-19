@@ -148,7 +148,7 @@ if (C_BANISH != "0")
 	<?php
 };
 ?>
-&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#promote" CLASS="topLink">升級/降級 一個已註冊的使用者/到主持人：</A><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#promote" CLASS="topLink">升級/降級 一個已註冊的使用者/到主持人</A><br/>
 <P>
 <hr />
 <hr />
@@ -196,15 +196,15 @@ else
 <P>
 <FONT SIZE="+1"><A NAME="register"><B>要註冊：</B></A></FONT>
 <P>
-如果你還沒有註冊<?php if (!C_REQUIRE_REGISTER) echo(" and would like to"); ?>, 請選擇註冊選項。會出現一個小的彈出窗口。
+如果你還沒有註冊<?php if (!C_REQUIRE_REGISTER) echo(" and would like to"); ?>，請選擇註冊選項。會出現一個小的彈出窗口。
 <P>
 <UL>
-	<LI>首先，創建一個用戶名 <?php if (!C_EMAIL_PASWD) echo(" 和密碼"); ?> 到相應的框中鍵入自己。您選擇的用戶名，將自動顯示在聊天室的名稱。它不能包含空格，逗號或反斜線 (\).
-<?php if (C_NO_SWEAR) echo(" It can not contain \"swear words\"."); ?>
+	<LI>首先，創建一個用戶名 <?php if (!C_EMAIL_PASWD) echo(" 和密碼"); ?> 到相應的框中鍵入自己。您選擇的用戶名，將自動顯示在聊天室的名稱。它不能包含空格，逗號或反斜線 (\)。
+<?php if (C_NO_SWEAR) echo(" It can not contain \"swear words\"。"); ?>
 	<LI>二，請輸入你的名字，姓氏，和您的電子郵件地址。為了註冊聊天，所有這些信息必須提供。性別信息是可選的。
 	<LI>如果你有一個網頁，你可以在框中輸入網址。
 	<LI>語言領域可能有助於在今後的討論中的其他用戶。他們會知道你理解的語言。
-	<LI>最後，如果你想，讓您的電子郵件地址被其他參與者觀看，請檢查“在公共信息顯示電子郵件”旁邊的方塊。如果您不希望您的e - mail地址，可取消勾選該選擇框。
+	<LI>最後，如果你想，讓您的電子郵件地址被其他參與者觀看，請檢查“<?php echo(L_REG_33); ?>”旁邊的方塊。如果您不希望您的e - mail地址，可取消勾選該選擇框。
 	<LI>然後，按 <?php echo(L_REG_3); ?> 按鈕 您的帳戶將被創建。根據已經由管理員設置，您可能需要等待管理員的批准。無論如何，你會得到進一步的指示通知電子郵件。如果你想在任何時間停止，無需註冊，按 <?php echo(L_REG_25); ?> 按鈕.
 </UL>
 <P>
@@ -253,7 +253,7 @@ if ($Ver == "H")
 <P>
 <FONT SIZE="+1"><A NAME="sending"><B>發送訊息(發言方法)：</B></A></FONT>
 <P>
-請將您的聊天訊息，鍵入左下方文字欄位中，輸入完畢後按 Enter 或 送出 鍵。開始傳送聊天訊息到所有聊天者的視窗中..<br/>
+請將您的聊天訊息，鍵入左下方文字欄位中，輸入完畢後按 Enter 或 送出 鍵。開始傳送聊天訊息到所有聊天者的視窗中。<br/>
 <?php if (C_NO_SWEAR) echo("請注意 \"不雅字語\" 從發言訊息被過濾."); ?>
 <P>
 您可以更改您的發言文字的顏色，從 文字欄位 右側，文字顏色 選擇框中，選擇一個新的色彩。
@@ -363,9 +363,9 @@ if ($Ver == "H")
 	else
 	{
 		?>
-		<LI>這 <B> show 和 Last 指令</B> 讓你來清潔屏幕，並顯示最近 <I>n</I> 訊息傳送在你的屏幕上。 鍵入 "/show n" or "/last n" 不帶引號, 其中 n 是可視信息的數量。
+		<LI>這 <B> show 和 Last 指令</B> 讓你來清潔屏幕，並顯示最近 <I>n</I> 訊息傳送在你的屏幕上。 鍵入 "/show n" 或 "/last n" 不帶引號, 其中 n 是可視信息的數量。
 		<P>
-		<I>例如：</I> /show 50 or /last 50
+		<I>例如：</I> /show 50 或 /last 50
 		<P>
 			將清除消息幀，並造成50個最新的消息是在屏幕上可見。如果所有的消息都不能顯示在消息框中，滾動條會出現在消息框的右側。</UL>
 		<?php
@@ -384,7 +384,7 @@ if ($Ver == "H")
 
 <FONT SIZE="+1"><A NAME="help"><B>指令：</B></A></FONT>
 <P>
-一旦進入一個聊天室，你可以啟動一個彈出幫助通過點擊 <IMG SRC="localization/<?php echo($L); ?>/images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="<?php echo(L_HLP); ?>" TITLE="<?php echo(L_HLP); ?>"> 剛才位於訊息方塊前的圖像。您還可以 鍵入這個 <B>"/help" or "/?" 指令</B> 在訊息方塊。
+一旦進入一個聊天室，你可以啟動一個彈出幫助通過點擊 <IMG SRC="localization/<?php echo($L); ?>/images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="<?php echo(L_HLP); ?>" TITLE="<?php echo(L_HLP); ?>"> 剛才位於訊息方塊前的圖像。您還可以 鍵入這個 <B>"/help" 或 "/?" 指令</B> 在訊息方塊。
 <br/><P ALIGN="right"><A HREF="#top">回頁首</A></P>
 <P>
 <P>
@@ -449,7 +449,7 @@ if (C_HTML_TAGS_KEEP != "none")
 	?>
 	<FONT SIZE="+1"><A NAME="text"><B>文字格式：</B></A></FONT>
 	<P>
-	文字可以是粗體，斜體或下劃線，通過包圍這適用部分於您的文字 無論是 &LT;B&GT; &LT;/B&GT, &LT;I&GT; &LT;/I&GT; or &LT;U&GT; &LT;/U&GT HTML 標記.
+	文字可以是粗體，斜體或下劃線，通過包圍這適用部分於您的文字 無論是 &LT;B&GT; &LT;/B&GT, &LT;I&GT; &LT;/I&GT; 或 &LT;U&GT; &LT;/U&GT HTML 標記.
 	<P>
 	<I>例如</I>, &LT;B&GT;文字&LT;/B&GT; 會產生 <B>文字</B>.
 	<P>
@@ -588,7 +588,7 @@ else
 <P>
 由於這個變化 指令, 還有就是 <B>/mr 指令</B> 可用，這也將在前面的用戶名性別稱號。
 <P>
-<I>例如：</I>假如 Jack 發送這訊息 "/mr 正在看電視" the message frame will show "<B>* Jack <?php echo(L_HELP_MR); ?></B> 正在看電視".
+<I>例如：</I>假如 Jack 發送這訊息 "/mr 正在看電視" the message frame will show "<B>* <?php echo(sprintf(L_HELP_MR, "Jack")); ?></B> 正在看電視".
 <br/><P ALIGN="right"><A HREF="#top">回頁首</A></P>
 <P>
 <hr />
@@ -611,7 +611,7 @@ else
 現在所有由 Jack 發布的消息在當前的聊天會話將顯示在屏幕上，包括 Jack 之前張貼的那些消息 鍵入這指令.<br/>
 如果你不指定一個連字符的用戶名後，你的“忽略列表”將被清理。
 <P>
-請注意，你可以把多個用戶名用在這 ignore 指令 (e.g. "/ignore Jack,Helen,Alf" or "/ignore - Jack,Alf"). 他們必須由逗號（，）分割，沒有空格。
+請注意，你可以把多個用戶名用在這 ignore 指令 (例如："/ignore Jack,Helen,Alf" 或 "/ignore - Jack,Alf")。他們必須由逗號（，）分割，沒有空格。
 <br/><P ALIGN="right"><A HREF="#top">回頁首</A></P>
 <P>
 <hr />

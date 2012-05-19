@@ -149,7 +149,7 @@ if (C_BANISH != "0")
 	<?php
 };
 ?>
-&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#promote" CLASS="topLink">Befordra/Upphöja/Sänka ner status för en användare till/från moderator:</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#promote" CLASS="topLink">Befordra/Upphöja/Sänka ner status för en användare till/från moderator</A><br />
 <P>
 <hr />
 <hr />
@@ -205,7 +205,7 @@ Om du inte har registrerat dig ännu <?php if (!C_REQUIRE_REGISTER) echo("och sk
 	<LI>Andra, vänligen skriv in ditt förnamn, efternamn, och din e-post adress. För att registrera dig i chatten, är dessa upplysningar obligatoriska. kön/genus upplysningar är valfritt.
 	<LI>Om du har hemsida, kan/får du skriva in URL’n till fältet.
 	<LI>Språk fält kan hjälpa andra användare i framtida diskussioner. De kommer att veta vilket/vilka språk du/ni förstår.
-	<LI>Slutligen, om du önskar/vill tillåta din e-post adress till vara synlig för andra deltagare, vänligen kontrollera denna är ibockad för att "visa e-post i öppna upplysningar". Om du inte vill att din e-post adress skall vara visningsbar, lämna rutan obockad.
+	<LI>Slutligen, om du önskar/vill tillåta din e-post adress till vara synlig för andra deltagare, vänligen kontrollera denna är ibockad för att "<?php echo(L_REG_33); ?>". Om du inte vill att din e-post adress skall vara visningsbar, lämna rutan obockad.
 	<LI>Sedan, tryck <?php echo(L_REG_3); ?> knappen och ditt konto kommer att skapas. Beroende på hur saker är inställt så måste du kanske vänta på Admin´s godkänande. Hur som helst så kommer du få ett mail med vidare instruktioner. Om du önskar avbryta när som helst, utan att registrera dig, tryck på <?php echo(L_REG_25); ?> knappen.
 </UL>
 <P>
@@ -589,7 +589,7 @@ För att beskriva vad du håller på med du kan använda <B>kommandot "/me "</B>
 <P>
 En variant på detta kommando är <B>/mr kommando</B> vilket gör att du får med använarens kön med kommandot framför använarnamnet.
 <P>
-<I>Som exempel:</I> Om Jack skickar ett meddelande "/mr tittar på TV" meddelanderutan kommer att visa "<B>* <?php echo(L_HELP_MR); ?> Jack</B> tittar på TV".
+<I>Som exempel:</I> Om Jack skickar ett meddelande "/mr tittar på TV" meddelanderutan kommer att visa "<B>* <?php echo(sprintf(L_HELP_MR, "Jack")); ?></B> tittar på TV".
 <br /><P ALIGN="right"><A HREF="#top">Tillbaka till topp</A></P>
 <P>
 <hr />
