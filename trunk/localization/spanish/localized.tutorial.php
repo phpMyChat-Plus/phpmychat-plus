@@ -150,7 +150,7 @@ if (C_BANISH != "0")
 	<?php
 };
 ?>
-&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#promote" CLASS="topLink">Promover/Degradar a un usuario para/de moderador:</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#promote" CLASS="topLink">Promover/Degradar a un usuario para/de moderador</A><br />
 <P>
 <hr />
 <hr />
@@ -207,7 +207,7 @@ Si todavía no se ha registrado<?php if (!C_REQUIRE_REGISTER) echo(" y te gustar
 	<LI>Segundo, por favor escriba su nombre, apellido y su dirección de correo electrónico (email). Para poder registrarse debe llenar todos esos campos. La información sobre su género es opcional.
 	<LI>Si tiene una web, puede escribir la dirección en la casilla.
 	<LI>El campo del idioma puede ayudar a otros usuarios durante conversaciones futuras. Así sabrán que idioma(s) habla usted.
-	<LI>Finalmente, si desea permitir que todos puedan ver su dirección de correo electrónico (email), por favor seleccione la casilla al lado de donde dice "mostrar email en información pública". Si no desea que los demás usuarios vean su dirección de correo electrónico (email), entonces deje la casilla vacía.
+	<LI>Finalmente, si desea permitir que todos puedan ver su dirección de correo electrónico (email), por favor seleccione la casilla al lado de donde dice "<?php echo(L_REG_33); ?>". Si no desea que los demás usuarios vean su dirección de correo electrónico (email), entonces deje la casilla vacía.
 	<LI>Luego, presione el botón de <?php echo(L_REG_3); ?> y su cuenta será creada. Dependiendo de las preferencias establecidas por el Administrador, quizá tenga que esperar por su aprobación. De un modo u otro, recibirá un correo con instrucciones. Si desea detenerse en cualquier momento sin registrarse, sólo presione el botón <?php echo(L_REG_25); ?>.
 </UL>
 <P>
@@ -616,7 +616,7 @@ Para describir lo que está haciendo puede usar el <B>comando "/me acción"</B> 
 <P>
 Como una variación a este comando, existe este otro <B>/mr command</B>, el cual también inserta el título del género delante del nombre del usuario.
 <P>
-<I>Por ejemplo:</I> Si Jack envía este mensaje "/mr está viendo la TV" la ventana del mensaje mostrará "<B>* <?php echo(L_HELP_MR); ?> Jack</B> está viendo la TV".
+<I>Por ejemplo:</I> Si Jack envía este mensaje "/mr está viendo la TV" la ventana del mensaje mostrará "<B>* <?php echo(sprintf(L_HELP_MR, "Jack")); ?></B> está viendo la TV".
 <br />
 <P ALIGN="right"><A HREF="#top">Subir</A></P>
 <P>

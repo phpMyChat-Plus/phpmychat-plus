@@ -149,7 +149,7 @@ if (C_BANISH != "0")
 	<?php
 };
 ?>
-&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#promote" CLASS="topLink">Promouvoir/révoquer un utilisateur au/du rôle de modérateur :</A><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#promote" CLASS="topLink">Promouvoir/révoquer un utilisateur au/du rôle de modérateur</A><br />
 <P>
 <hr />
 <hr />
@@ -205,7 +205,7 @@ Si vous n’êtes pas encore inscrit<?php if (!C_REQUIRE_REGISTER) echo(" et que
 	<LI>Deuxièmement, saisissez votre prénom, nom, et votre adresse e-mail. Pour vous inscrire au Chat, l’ensemble de ces informations est nécessaire. L’information concernant le sexe est facultative.
 	<LI>Si vous avez un site Web, vous pouvez indiquer son URL d’accès.
 	<LI>Précisez les langues que vous parlez pour faciliter les échanges avec les autres utilisateurs. Ils sauront quelles langues vous comprenez.
-	<LI>Enfin, si vous souhaitez que votre adresse e-mail soit visible par les autres participants, sélectionnez la case à cocher à côté de "montrer votre e-mail aux autres utilisateurs". Si vous ne souhaitez pas diffuser votre adresse e-mail, laissez la case décochée.
+	<LI>Enfin, si vous souhaitez que votre adresse e-mail soit visible par les autres participants, sélectionnez la case à cocher à côté de "<?php echo(L_REG_33); ?>". Si vous ne souhaitez pas diffuser votre adresse e-mail, laissez la case décochée.
 	<LI>Cliquer finalement sur le bouton "<?php echo(L_REG_3); ?>". En fonction du paramétrage effectué par l’Administrateur, vous pouvez avoir à attendre la validation de l’Administrateur. Quoiqu’il en soit, vous recevrez un mail qui vous indiquera la marche à suivre le cas échéant. Vous pouvez interrompre à tout moment le processus d’inscription en cliquant sur le bouton "<?php echo(L_REG_25); ?>".
 </UL>
 <P>

@@ -46,7 +46,7 @@ define("L_P3_HINT8", "Your changes have been saved.");
 define("L_P3_HINT9", "Note: This user account has all the rights and powers in Admin Panel and chatrooms!");
 define("L_P3_BTN1", "Select all");
 define("L_P4_HINT1", "Your main Administrator account has been created.");
-define("L_P4_HINT2", "You’re ready to login in the Admin Panel and change the settings of your phpMyChat sever. There are also several other options which help you manage chat rooms, users, messages and lots more. Use the available Administration links in order to access the Admin Panel at anytime.");
+define("L_P4_HINT2", "You’re ready to login in the Admin Panel and change the settings of your phpMyChat server. There are also several other options which help you manage chat rooms, users, messages and lots more. Use the available Administration links in order to access the Admin Panel at anytime.");
 define("L_P4_HINT3", "Installation process has completed. Click \"".L_BTN5."\" to jump to the chat login page or close this window to leave this installer.");
 define("L_P4_HINT4", "The setup script already chmoded the needed files for you and also deleted this setup script. Please make sure the file \"install/install.php\" has been deleted from your web server! If not, please delete it yourself.");
 define("L_P1_OP01", "New installation");

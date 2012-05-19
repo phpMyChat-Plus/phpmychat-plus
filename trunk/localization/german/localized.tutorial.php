@@ -148,7 +148,7 @@ if (C_BANISH != "0")
 	<?php
 }
 ?>
-&nbsp&nbsp&nbsp&nbsp<A HREF="#promote" CLASS="topLink">Einen Benutzer zum Moderator ernennen</A><br />
+&nbsp&nbsp&nbsp&nbsp<A HREF="#promote" CLASS="topLink">Ernennen/Degradieren eines Benutzer zum/vom Moderator</A><br />
 <P>
 <hr />
 <hr />
@@ -579,7 +579,7 @@ Um zu beschreiben, was Du grade tust, kannst Du den <B>Befehl "/me Tat"</B> ohne
 <P>
 Eine Variation des Befehls ist <b>/mr Befehl</b>, welches vor dem Benutzernamen einen Geschlechts-Titel hinzufügt.
 <P>
-<I>Beispiel:</I> Wenn Jack folgende Nachricht verschickt "/mr schaut TV" das Nachrichtenfenster zeigt dann: "<B>* <?php echo(L_HELP_MR); ?> Jack</B> schaut TV".
+<I>Beispiel:</I> Wenn Jack folgende Nachricht verschickt "/mr schaut TV" das Nachrichtenfenster zeigt dann: "<B>* <?php echo(sprintf(L_HELP_MR, "Jack")); ?></B> schaut TV".
 <br /><P ALIGN="right"><A HREF="#top">Zurück zum Anfang</A></P>
 <P>
 <hr />
@@ -686,7 +686,7 @@ if (C_BANISH != "0")
 ?>
 
 <P>
-<FONT SIZE="+1"><A NAME="promote"><B>Ernennen/Degradieren eines Users zum/vom Moderator:</B></A></FONT>
+<FONT SIZE="+1"><A NAME="promote"><B>Ernennen/Degradieren eines Benutzer zum/vom Moderator:</B></A></FONT>
 <P>
 Moderatoren und Administratoren können andere Benutzer mit dem <B>promote Befehl</B> zu Moderatoren ernennen.
 <P>

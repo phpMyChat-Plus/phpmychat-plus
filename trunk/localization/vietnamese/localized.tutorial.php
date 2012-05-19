@@ -206,7 +206,7 @@ Nếu bạn chưa đăng ký<?php if (!C_REQUIRE_REGISTER) echo(" và thích t�
 	<LI>Thứ hai, Bạn viết họ , tên, và địa chỉ e-mail . Để đăng ký tán gẫu, Tất cả những thông tin này phải được cung cấp.
 	<LI>Thông tin giới tính thì được chọn .Nếu bạn có một trang web , trang blog , hãy điền địa chỉ ( URL ) vào.
 	<LI>Trong những thời gian tới những ngôn ngữ của quốc gia khác sẽ được cập nhật để dễ dàng tán gẫu. Chúng bíêt ngôn ngữ nào bạn hiểu.
-	<LI>Cuối cùng, Phải chăng bạn muốn nhìn thấy những e-mail mình được hiển thị , Xin cho một dấu vào hộp "Hiển thị thông tin e-mail". Nếu bạn không muốn e-mail mình được hiển thị ,xin đừng chọn.
+	<LI>Cuối cùng, Phải chăng bạn muốn nhìn thấy những e-mail mình được hiển thị , Xin cho một dấu vào hộp "<?php echo(L_REG_33); ?>". Nếu bạn không muốn e-mail mình được hiển thị ,xin đừng chọn.
 	<LI>Tuy nhiên , nhấn <?php echo(L_REG_3); ?> nút vào tài khoản được tạo. Việc phụ thuộc vào cái gì được thiết lập bởi Người quản trị, bạn có lẽ đã phải đợi sự thừa nhận của người quản trị. Cách thức, bạn sẽ bắt đầu Một Thông báo email với những chỉ dẫn về sau. Nếu bạn muốn kết thúc mọi thứ cho sự đăng ký thì nhấn <?php echo(L_REG_25); ?> nút.
 </UL>
 <P>
@@ -591,7 +591,7 @@ Những pm offline chỉ được dùng cho những thành viên được đăng
 <P>
 Như một sự biến đổi tới lệnh này, có <B>/mr command</B> tính có sẵn , cũng đặt tiêu đề giống phía trước ten đăng nhập.
 <P>
-<I>Cho ví dụ:</I> Nếu jack gửi một tin nhắn "/mr đang xem TV" khung thông báo sẽ hiện ra "<B>* <?php echo(L_HELP_MR); ?> Jack</B> đang xem TV".
+<I>Cho ví dụ:</I> Nếu Jack gửi một tin nhắn "/mr đang xem TV" khung thông báo sẽ hiện ra "<B>* <?php echo(sprintf(L_HELP_MR, "Jack")); ?></B> đang xem TV".
 <br /><P ALIGN="right"><A HREF="#top">Quay lại từ đầu</A></P>
 <P>
 <hr />

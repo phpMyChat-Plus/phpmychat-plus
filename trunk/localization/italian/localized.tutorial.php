@@ -204,8 +204,7 @@ Se non siete ancora registrati<?php if (!C_REQUIRE_REGISTER) echo(" e volete far
 	<LI>Secondo, inserite il vostro nome, cognome e il vostro indirizzo email. Per far in modo che ci si registri alla chat, tutte queste informazioni devono essere fornite. Potete non specificare il vostro sesso.
 	<LI>Se avete una homepage, potete inserire l’URL in questo campo..
 	<LI>Il campo della lingua può aiutare altri utenti in future discussioni: essi sapranno quale lingue voi potere capire.
-	<LI>Infine, se volete permettere che la vostra email sia visibile dagli altri partecipanti della stanza di chat, potete spuntare la casellina di fianco a "mostra l’email nelle informazioni pubbliche". Se non
-desiderate che sia visibile il vostro indirizzo email, lasciate la casella non spuntata.
+	<LI>Infine, se volete permettere che la vostra email sia visibile dagli altri partecipanti della stanza di chat, potete spuntare la casellina di fianco a "<?php echo(L_REG_33); ?>". Se non desiderate che sia visibile il vostro indirizzo email, lasciate la casella non spuntata.
 	<LI>Dopo, premi il tasto <?php echo(L_REG_3); ?> ed il tuo account sarà creato. Dipendentemente come l’amministratore ha settato i parametric, potresti attendere l’approvazione dall’amministrazione. Comunque riceverai una mail di notifica con le istruzioni da seguire. Se vorresti fermare in qualsiasi momento senza registrarti, premi il tasto <?php echo(L_REG_25); ?>.
 </UL>
 <P>
@@ -589,7 +588,7 @@ Per descrivere cosa stai facendo potete usare il <B>comando "/me action"</B> sen
 <P>
 Come una variazione a questo comando, c’è disponibile il <B>comando /mr</B>, che mette anche il genere davante al nome utente.
 <P>
-<I>Per esempio:</I> Se Jack invia il messaggio "/mr sta guardando la TV" la finestra del messaggio mostrerà: "<B>* <?php echo(L_HELP_MR); ?> Jack</B> sta guardando la TV".
+<I>Per esempio:</I> Se Jack invia il messaggio "/mr sta guardando la TV" la finestra del messaggio mostrerà: "<B>* <?php echo(sprintf(L_HELP_MR, "Jack")); ?></B> sta guardando la TV".
 <br /><P ALIGN="right"><A HREF="#top">Torna all’inizio</A></P>
 <P>
 <hr />

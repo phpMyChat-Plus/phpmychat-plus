@@ -202,9 +202,9 @@ Dacă nu te-ai înregistrat deja<?php if (!C_REQUIRE_REGISTER) echo(" şi vrei s
 <?php if (C_NO_SWEAR) echo(" Nu este permisă utilizarea \"cuvintelor obscene\"."); ?>
 	<LI>Apoi, introdu-ţi prenumele, numele de familie şi adresa de email. Pentru a te putea înregistra pe chat, aceste informaţii sunt obligatorii. Informaţia privind sexul este opţională (deşi, în funcţie de această alegere, o mică imagine te va particulariza pe chat ca băiat sau fată).
 	<LI>Dacă ai o pagină personală, poţi să introduci URL-ul pentru a fi vizitată şi de către ceilalţi utilizatori.
-	<LI>Câmpul Limba poate ajuta pe ceilalti în discuţiile viitoare cu tine. Ei vor şti în ce limbă sa ţi se adreseze.
-	<LI>În cele din urmă, dacă vrei ca ceilalţi participanţi să-ţi cunoască adresa de email, bifează căsuţa de lângă expresia "Arată e-mailul la comanda /whois". Dacă nu vrei să-ţi fie cunoscut emailul, lasă căsuţa nebifată.
-	<LI>Apoi, apasă butonul <?php echo(L_REG_3); ?> şi contul îţi va fi creat. În funcţie de setările servcerului, este posibil să trebuiască să aştepţi aprobarea contului de către Administrator. Oricum, vei primi un email de înştiinţare cu instrucţiuni pentru paşii următori. Pentru a te opri fără să te înregistrezi, apasă <?php echo(L_REG_25); ?>.
+	<LI>Câmpul Limba poate ajuta pe ceilalti în discuţiile viitoare cu tine. Ei vor şti în ce limbă să ţi se adreseze.
+	<LI>În cele din urmă, dacă vrei ca ceilalţi participanţi să-ţi cunoască adresa de email, bifează căsuţa de lângă expresia "<?php echo(L_REG_33); ?>". Dacă nu vrei să-ţi fie cunoscut emailul, lasă căsuţa nebifată.
+	<LI>Apoi, apasă butonul <?php echo(L_REG_3); ?> şi contul îţi va fi creat. În funcţie de setările serverului, este posibil să trebuiască să aştepţi aprobarea contului de către Administrator. Oricum, vei primi un email de înştiinţare cu instrucţiuni pentru paşii următori. Pentru a te opri fără să te înregistrezi, apasă <?php echo(L_REG_25); ?>.
 </UL>
 <P>
 <A NAME="modProfile"></A>Bineînţeles, utilizatorii care s-au înregistrat îşi vor putea modifica<?php if (C_SHOW_DEL_PROF) echo("/şterge"); ?> profilul personal apăsând pe <?php echo((!C_SHOW_DEL_PROF ? "butonul corespunzător" : "butoanele corespunzătoare")); ?>.<br />
@@ -236,7 +236,7 @@ if ($Ver == "H")
 	Un semn reprezentând starea conexiunii tale este afişat în colţul din dreapta sus al ecranului. Poate arăta în trei feluri:
 	<P>
 	<UL>
-		<LI><IMG SRC="images/connectOff.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Fără conexiune" TITLE="Fără conexiune"> când nu e nevoie de nici o conexiune;
+		<LI><IMG SRC="images/connectOff.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Fără conexiune" TITLE="Fără conexiune"> când nu e nevoie de nicio conexiune;
 		<LI><IMG SRC="images/connectOn.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Conectat" TITLE="Conectat"> când e stabilită o conexiune;
 		<LI><IMG SRC="images/connectError.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="Conectare eşuată" TITLE="Conectare eşuată"> când conexiunea a eşuat.
 	</UL>
@@ -462,7 +462,7 @@ if (C_HTML_TAGS_KEEP != "none")
 	<P>
 	<I>De exemplu</I>, /ltr acest text va produce "<BDO dir="ltr">acest text</BDO>", iar /rtl acest text va produce "<BDO dir="rtl">acest text</BDO>".
 	<P>
-	Pentru a crea o hyper-legătură (link) pentru o adresă de email sau adresă WEB, pur şi simplu tastează adresa (fără nici un tag HTML). Hyper-legătura va fi creată în mod automat.
+	Pentru a crea o hyper-legătură (link) pentru o adresă de email sau adresă WEB, pur şi simplu tastează adresa (fără niciun tag HTML). Hyper-legătura va fi creată în mod automat.
 	<br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 	<P>
 	<P>
@@ -561,11 +561,11 @@ Apăsând pe numele unui utilizator din lista din dreapta ecranului, în căsuţ
 <P>
 <FONT SIZE="+1"><A NAME="private"><B>Mesaje Private:</B></A></FONT>
 <P>
-Pentu a trimite un mesaj privat către un utilizator din camera în care te afli, foloseşte <B>comanda "/msg nume_utilizator textul mesajului" sau "/to nume_utilizator textu mesajului"</B> fără ghilimele.
+Pentu a trimite un mesaj privat către un utilizator din camera în care te afli, foloseşte <B>comanda "/msg nume_utilizator textul mesajului" sau "/to nume_utilizator textul mesajului"</B> fără ghilimele.
 <P>
 <I>De exemplu, dacă Jack este numele utilizatorului:</I> /msg Jack Salutare, ce mai faci?
 <P>
-Mesajul va putea fi citit numai de către tine şi Jack şi niciun alt utilizator.
+Mesajul va putea fi citit numai de către tine şi Jack şi de niciun alt utilizator.
 <?php echo(L_CMD_MSG != "" && L_CMD_MSG != "L_CMD_MSG" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_MSG)."</span>") : ""); ?>
 <P>
 Dacă opţiunea MP (Mesagerie Privată) este activată, poţi de asemenea să trimiţi şoapte (whispers) către un utilizator aflat într-o altă cameră, folosind <B>comanda "/wisp nume_utilizator textul mesajului"</B> fără ghilimele.<?php echo(L_CMD_WISP != "" && L_CMD_WISP != "L_CMD_WISP" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_WISP)."</span>") : ""); ?>
@@ -604,7 +604,7 @@ To describe what you're doing you can use the <B>command "/me action"</B> fără
 <P>
 As a variation to this command, there is the <B>/mr command</B> available, which will also put the gender title in front of the username.
 <P>
-<I>For example:</I> If Jack sends the message "/mr is watching TV" the message frame will show "<B>* <?php echo(L_HELP_MR); ?> Jack</B> is watching TV".
+<I>For example:</I> If Jack sends the message "/mr is watching TV" the message frame will show "<B>* <?php echo(sprintf(L_HELP_MR, "Jack")); ?></B> is watching TV".
 <?php echo(L_CMD_MR != "" && L_CMD_MR != "L_CMD_MR" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_MR)."</span>") : ""); ?>
 <br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 <P>

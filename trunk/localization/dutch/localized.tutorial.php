@@ -148,7 +148,7 @@ if (C_BANISH != "0")
 	<?php
 };
 ?>
-&nbsp&nbsp&nbsp&nbsp<A HREF="#promote" CLASS="topLink">Promoot/Degradeer een gebruiker:</A><br />
+&nbsp&nbsp&nbsp&nbsp<A HREF="#promote" CLASS="topLink">Promoot/Degradeer een gebruiker</A><br />
 <P>
 <hr />
 <hr />
@@ -204,7 +204,7 @@ Als je nog niet hebt geregistreert<?php if (!C_REQUIRE_REGISTER) echo(" en je wi
 	<LI>Stap 2, Vul je voornaam, achternaam en je emailadres in. Om geregistreerd te kunnen chatten, moet dit worden ingevuld. Het geslacht is optineel, om in te vullen.
 	<LI>Als je een eigen website hebt, mag je de URL ook invullen.
 	<LI>Het taal veld, kan handig zijn voor andere gebruikers om te kunnen chatten. Ze weten dan welke taal(en) je spreekt.
-	<LI>Als laatste, wanneer je wilt dat anderen je emailadres kunnen zien, vink dan "laat e-mail zien" aan. Anders laat deze leeg.
+	<LI>Als laatste, wanneer je wilt dat anderen je emailadres kunnen zien, vink dan "<?php echo(L_REG_33); ?>" aan. Anders laat deze leeg.
 	<LI>Dan, klik op de Registreer knop en je account wordt gemaakt. Mocht je tussentijds willen stoppen met registreren, klik op de sluit knop.
 </UL>
 <P>
@@ -589,7 +589,7 @@ Om aan te geven wat er gebeurt met het commando <B> "/me action"</B> zonder &quo
 <P>
 Een variatie op deze commando is de <B>/mr command</B> , waarin ook het geslacht van de gebruiker in beeld verschijnt.
 <P>
-<I>Bijvoorbeeld:</I> Wanneer Jack een bericht verstuurt "/mr is koffie aan het drinken" zal er in beeld verschijnen "<B>* <?php echo(L_HELP_MR); ?> Jack</B> is koffie aan het drinken".
+<I>Bijvoorbeeld:</I> Wanneer Jack een bericht verstuurt "/mr is koffie aan het drinken" zal er in beeld verschijnen "<B>* <?php echo(sprintf(L_HELP_MR, "Jack")); ?></B> is koffie aan het drinken".
 <br /><P ALIGN="right"><A HREF="#top">Naar boven</A></P>
 <P>
 <hr />
