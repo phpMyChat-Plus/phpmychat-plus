@@ -48,7 +48,7 @@ define("A_USER", "一般使用者");
 define("A_MODER", "室長");
 define("A_TOPMOD", "超級室長");
 define("A_ADMIN", "管理員");
-define("A_PAGE_CNT", "Page %s of %s");
+define("A_PAGE_CNT", "頁 %s 屬於 %s");
 
 // Frame for banished users
 define("A_SHEET2_1", "被驅逐的用戶和有關房間名單");
@@ -57,13 +57,13 @@ define("A_SHEET2_3", "有關的室");
 define("A_SHEET2_4", "直到");
 define("A_SHEET2_5", "沒有結束");
 define("A_SHEET2_6", "房间由逗號分離，不用的空間()，如果少于4有， ’<B>*</B>’ 標誌從所有房間驅逐。");
-define("A_SHEET2_7", "刪除選中被放逐 user(s)");
+define("A_SHEET2_7", "刪除選中被放逐用戶(們)");
 define("A_SHEET2_8", "沒有被驅逐的用戶。");
 define("A_SHEET2_9", "原因 (可選)");
 
 // Frame for cleaning rooms
 define("A_SHEET3_1", "現有房間名單");
-define("A_SHEET3_2", "移除一個 \"non-default\" 房間，也將刪除所有主持人<br />在這個房間的地位。");
+define("A_SHEET3_2", "移除一個 \"非-預設\" 房間，也將刪除所有主持人<br />在這個房間的地位。");
 define("A_SHEET3_3", "移除選定的房間");
 define("A_SHEET3_4", "沒有可以移除的房間。");
 define("A_SHEET3_5", "您還沒有作出任何選擇。請至少選擇一個，從以下列表中的空間。");
@@ -82,7 +82,7 @@ define("A_SHEET4_9", "地址信息，主題或郵件缺少內容！");
 define("A_SHEET4_10", "添加電子郵件，以逗號(，)分隔無空格");
 define("A_SHEET4_11", "署名");
 define("A_SHEET4_12", "取消全選");
-define("A_SHEET4_13", "放所有收件人在這 <b>’Bcc’</b> 欄位");
+define("A_SHEET4_13", "放所有收件人在這 <b>’密件副本’ (Bcc)</b> 欄位");
 
 // Frame for configuration
 define("A_SHEET5_0", "您的當前安裝的版本是 %s");
@@ -144,9 +144,9 @@ define("A_CHAT_LOGS_40", "儲存檔案時發生的錯誤： %s"); // filename
 define("A_SEARCH_1", "聊天室搜尋頁");
 define("A_SEARCH_2", "所有類別");
 define("A_SEARCH_3", "姓名");
-define("A_SEARCH_4", "IP Address");
+define("A_SEARCH_4", "IP位址");
 define("A_SEARCH_5", "權限");
-define("A_SEARCH_6", "E-mail");
+define("A_SEARCH_6", "電子郵件");
 define("A_SEARCH_7", "性別");
 define("A_SEARCH_8", "簡介");
 define("A_SEARCH_9", "鏈接");
@@ -164,7 +164,7 @@ define("A_SEARCH_21", "搜尋字詞");
 define("A_SEARCH_22", "搜索項");
 define("A_SEARCH_23", "請提供一個搜索詞，然後再試一次！");
 define("A_SEARCH_24", "沒有符合條件的數據。請細化您的搜索。");
-define("A_SEARCH_25", "Moderate this user");
+define("A_SEARCH_25", "主持人這個用戶");
 define("A_SEARCH_26", "用戶選定隱藏信息，在公開的個人資料。請確保 她/他 的隱私安全！");
 define("A_SEARCH_27", "顯示當前的月份");
 define("A_SEARCH_28", "顯示所有生日者");
@@ -177,7 +177,7 @@ define("A_LURKING_2", "潛水禁用") ;
 define("A_STATS_1", "聊天統計頁");
 define("A_STATS_2", "數據收集開始 %s"); //date
 define("A_STATS_3", "總體統計數據（所有時間）");
-define("A_STATS_4", "詳細的統計 (Last %s days of activity)"); //number of days
+define("A_STATS_4", "詳細的統計（最後 %s 天的活動）"); //number of days
 define("A_STATS_5", "統計禁用");
-define("A_STATS_6", "Top %s"); //Top 10 or Top 5
+define("A_STATS_6", "最大 %s"); //Top 10 or Top 5
 ?>
