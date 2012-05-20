@@ -126,8 +126,8 @@ define("L_ERR_USR_3", "這個使用者姓名已經被註冊，<br />請輸入密
 define("L_ERR_USR_4", "你輸入的密碼錯誤。");
 define("L_ERR_USR_5", "你必需輸入使用者姓名。");
 define("L_ERR_USR_6", "你必需輸入密碼。");
-define("L_ERR_USR_7", "你必需輸入Email。");
-define("L_ERR_USR_8", "你必需輸入正確的 Email。");
+define("L_ERR_USR_7", "你必需輸入電子信箱地址。");
+define("L_ERR_USR_8", "你必需輸入正確的電子信箱地址。");
 define("L_ERR_USR_9", "這個使用者名稱已經有人使用。");
 define("L_ERR_USR_10", "使用者名稱或密碼錯誤。");
 define("L_ERR_USR_11", "你必需是系統管理員。");
@@ -135,7 +135,7 @@ define("L_ERR_USR_12", "你是系統管理員所以你不能移除你自己。")
 define("L_ERR_USR_13", "要創建自己的房間，你必須註冊。");
 define("L_ERR_USR_14", "聊天之前你必須先註冊。");
 define("L_ERR_USR_15", "您必須輸入您的全名。");
-define("L_ERR_USR_16", "只允許這些額外的字符：\\n".$REG_CHARS_ALLOWED."\\空白，逗號或倒斜線 (\\) 不能使用。\\nCheck the syntax。");
+define("L_ERR_USR_16", "只允許這些額外的字符：\\n".$REG_CHARS_ALLOWED."\\n空白，逗號或倒斜線 (\\) 不能使用。\\n檢查語法。");
 define("L_ERR_USR_16a", "只允許這些額外的字符：<br />".$REG_CHARS_ALLOWED."<br />空白，逗號或倒斜線 (\\) 不能使用。請檢查輸入內容。");
 define("L_ERR_USR_17", "這個室不存在，並且您不允許創造一個。");
 define("L_ERR_USR_18", "在您的用戶名找到不能使用的詞。");
@@ -146,9 +146,9 @@ define("L_ERR_USR_21", "您在這個房間持續沒有發言 ".C_USR_DEL." ".((C
 define("L_ERR_USR_22", "此命令不能用於\\n您使用的瀏覽器 (IE 引擎)。");
 define("L_ERR_USR_23", "要加入一間私人聊天房間您必須登入。");
 define("L_ERR_USR_24", "要創造您自己的私人聊天房間您必須登入。");
-define("L_ERR_USR_25", "只有管理員能使用 ".$COLORNAME." color！<br />不要設定使用 ".COLOR_CA."，".COLOR_CA1."，".COLOR_CA2."，".COLOR_CM."，".COLOR_CM1." or ".COLOR_CM2."。<br />這些被預留給權限用户！");
-define("L_ERR_USR_26", "只有管理員跟室長能使用 ".$COLORNAME." color！<br />不要設定使用 ".COLOR_CA."，".COLOR_CA1."，".COLOR_CA2."，".COLOR_CM."，".COLOR_CM1." or ".COLOR_CM2."。<br />這些被預留給權限用户！");
-define("L_ERR_USR_27", "您不能與你自己密談。\\nDo that in your mind please...\\n現在選擇不同的用戶名。");
+define("L_ERR_USR_25", "只有管理員能使用 ".$COLORNAME." 顏色！<br />不要設定使用 ".COLOR_CA."，".COLOR_CA1."，".COLOR_CA2."，".COLOR_CM."，".COLOR_CM1." 或 ".COLOR_CM2."。<br />這些被預留給權限用户！");
+define("L_ERR_USR_26", "只有管理員跟室長能使用 ".$COLORNAME." 顏色！<br />不要設定使用 ".COLOR_CA."，".COLOR_CA1."，".COLOR_CA2."，".COLOR_CM."，".COLOR_CM1." 或".COLOR_CM2."。<br />這些被預留給權限用户！");
+define("L_ERR_USR_27", "您不能與你自己密談。\\n請記住這點...\\n現在選擇不同的用戶名。");
 define("L_ERR_USR_28", "您的進入 %s 被限制了！<br />請選擇一間不同的房間。");
 define("L_ERR_ROM_1", "聊天室名稱不能有逗號或倒斜線(\\)。");
 define("L_ERR_ROM_2", "在您想要創建的房間名字裡發現了不能用的詞。");
@@ -187,14 +187,14 @@ define("L_INVITE", "%s 請您加入到他/她 <a href=\"#\" onClick=\"window.par
 define("L_INVITE_REG", "你必須註冊才能進入這個房間。");
 define("L_INVITE_DONE", "已發送到您的邀請 %s。");
 define("L_OK", "送出");
-define("L_BUZZ", "Buzzes Gallery");
+define("L_BUZZ", "嗡鳴聲 庫");
 define("L_BAD_CMD", "指令錯誤，這是無效的指令！");
 define("L_ADMIN", "%s 已經是系統管理員！");
 define("L_IS_MODERATOR", "%s 已經是聊天室主持人！");
 define("L_NO_MODERATOR", "這個指令只有聊天室的主人可以使用。");
 define("L_NONEXIST_USER", "%s 現在不在這個聊天室。");
 define("L_NONREG_USER", "%s 沒有註冊。");
-define("L_NONREG_USER_IP", "他的IP是： %s。");
+define("L_NONREG_USER_IP", "他的網際協定地址是： %s。");
 define("L_NO_KICKED", "%s 是系統管理員或聊天室主人，你不能踢除他。");
 define("L_NO_BANISHED", "%s 是聊天室主持人或管理員不能被驅逐。");
 define("L_SVR_TIME", "系統時間：");
@@ -205,15 +205,15 @@ define("L_NO_REG_USER", "你必須先註冊，聊天才能使用此命令。");
 // help popup
 define("L_HELP_TIT_1", "表情符號");
 define("L_HELP_TIT_2", "訊息的正文格式");
-define("L_HELP_FMT_1", "在發送的訊息中你可以使用粗體，斜體和底線的 HTML Tag 來表示 &lt;B&gt; &lt;/B&gt;，&lt;I&gt; &lt;/I&gt; 或 &lt;U&gt; &lt;/U&gt; tags。<br />例如：使用　，&lt;B&gt;訊息&lt;/B&gt; 將會出現 <B>訊息</B>。");
-define("L_HELP_FMT_2", "如果訊息是 Email 或 URL 你不需要特別寫任何 tag。系統將會自己幫助你加上。");
+define("L_HELP_FMT_1", "在發送的訊息中你可以使用粗體，斜體和底線的超文本標記語言標籤來表示 &lt;B&gt; &lt;/B&gt;，&lt;I&gt; &lt;/I&gt; 或 &lt;U&gt; &lt;/U&gt; 標籤。<br />例如：使用　，&lt;B&gt;訊息&lt;/B&gt; 將會出現 <B>訊息</B>。");
+define("L_HELP_FMT_2", "如果訊息是電子信箱地址或網址，你不需要特別寫任何標籤。系統將會自己幫助你加上。");
 define("L_HELP_TIT_3", "指令");
 define("L_HELP_NOTE", "所有命令必須用英文下指令！");
 define("L_HELP_MSG", "訊息");
 define("L_HELP_MSGS", "訊息");
 define("L_HELP_ROOM", "房間");
 define("L_HELP_BUZZ", "~聲音的名稱");
-define("L_HELP_BUZZ1", "Buzz...");
+define("L_HELP_BUZZ1", "嗡鳴聲...");
 define("L_HELP_REASON", "原因");
 define("L_HELP_MR", "%s 先生");
 define("L_HELP_MS", "%s 小姐");
@@ -223,7 +223,7 @@ define("L_HELP_CMD_1b", "刷新的消息幀，顯示了N的最新消息，最小
 define("L_HELP_CMD_2a", "修改郵件列表刷新延遲（秒）。<br />如果n未指定或小於 3，沒有刷新和10S之間的切換刷新。");
 define("L_HELP_CMD_2b", "修改消息和用戶列表刷新延遲（秒）。<br />如果n未指定或小於 3，沒有刷新和10S之間的切換刷新。");
 define("L_HELP_CMD_3", "反轉消息的順序（不是在所有的瀏覽器）。");
-define("L_HELP_CMD_4", "加入另一個房間，創建它，如果它不存在，如果你允許。<br />n 設 0 為私人 and 1 為公開，假如沒有設定默認為 1。");
+define("L_HELP_CMD_4", "加入另一個房間，創建它，如果它不存在，如果你允許。<br />n 設 0 為私人 或者 1 為公開，假如沒有設定默認為 1。");
 define("L_HELP_CMD_5", "顯示一個可選的消息後離開聊天。");
 define("L_HELP_CMD_6", "忽略避免來自用戶的消息顯示，如果指定了暱稱。<br />設置移除一個被忽略用戶時  \"-\" 跟暱稱 同時指定。<br />指定移除所有被忽略用戶時用 \"-\" 但不指定暱稱。<br />不使用任何選項，該命令彈出一個窗口，顯示所有被忽略的暱稱。");
 define("L_HELP_CMD_7", "召回前面鍵入的文本（命令或消息）。");
@@ -238,26 +238,26 @@ define("L_HELP_CMD_15", "清除消息框，只顯示最後5個消息。");
 define("L_HELP_CMD_16", "保存到一個HTML文件的最後n個消息（通知的除外）。如果沒有指定n，將考慮所有可用的訊息。");
 define("L_HELP_CMD_17", "允許管理員在聊天室發送給所有用戶公告。");
 define("L_HELP_CMD_18", "邀請在其他房間使用者加入你所在的一個聊天室裡");
-define("L_HELP_CMD_19", "允許一個房間的主持人或管理員 \"驅逐\" 由管理員定義用戶的禁入房間時間。<br />以後可以驅逐使用者在其他房間裡聊天 than the one he is into and use the * 設置驅逐 \"永遠\" 一個用戶從整個聊天系統。<br />（可選），[".L_HELP_REASON."] 顯示驅逐的原因（任何想要的文字）。");
+define("L_HELP_CMD_19", "允許一個房間的主持人或管理員 \"驅逐\" 由管理員定義用戶的禁入房間時間。<br />以後可以驅逐使用者在其他房間裡聊天，比這一個他插入並使用 * 設置驅逐 \"永遠\" 一個用戶從整個聊天系統。<br />（可選），[".L_HELP_REASON."] 顯示驅逐的原因（任何想要的文字）。");
 define("L_HELP_CMD_20", "描述你在做什麼，不一定指自己。");
 define("L_HELP_CMD_21", "公佈房間和用戶當誰嘗試向您發送訊息<br />告知這時你是遠離電腦。如果你想回來聊天，只要開始打字。");
-define("L_HELP_CMD_22", "發送蜂鳴聲，並選擇性顯示消息，在當前的房間。<br />用法：<br />- 舊的用法： \"/buzz\" or \"/buzz 訊息顯示\" - 這播放的默認聲音蜂鳴聲在管理面板中定義;<br />- 衍生用途： \"/buzz ~聲音的名稱\" or \"/buzz ~聲音的名稱 訊息顯示\" - 這是播放 聲音名稱.wav 檔案 從 plus/sounds 聲音文件夾; 請注意符號 \"~\" 在第二個字開始使用，這是聲音文件的名稱，不帶擴展名 .wav (只允許 .wav 擴展名)。<br />依預設，這是一個 主持人/管理員 命令。");
+define("L_HELP_CMD_22", "發送蜂鳴聲，並選擇性顯示消息，在當前的房間。<br />用法：<br />- 舊的用法： \"/buzz\" 或 \"/buzz 訊息顯示\" - 這播放的默認聲音蜂鳴聲在管理面板中定義;<br />- 衍生用途： \"/buzz ".L_HELP_BUZZ."\" 或 \"/buzz ".L_HELP_BUZZ." 訊息顯示\" - 這是播放 聲音名稱.wav 檔案 從 plus/sounds 聲音文件夾; 請注意符號 \"~\" 在第二個字開始使用，這是聲音文件的名稱，不帶擴展名 .wav (只允許 .wav 擴展名)。<br />依預設，這是一個 主持人/管理員 命令。");
 define("L_HELP_CMD_23", "發送 <i>私語</i>（悄悄話）。該消息將送達目的地，無論用戶在哪個房間。如果用戶沒有上線或已設置離開，你會被通知。");
-define("L_HELP_CMD_24", "這個命令改變當前房間的話題。盡量不覆蓋其他用戶’ 話題。使用的重要課題。<br />默認情況下，這是 主持人/管理員 命令。<br />使用 \"/topic reset\" 命令 當前的話題將被刪除並重置為預設的話題。<br />可選擇，\"/topic * {}\" 或 \"/topic * reset\" 在所有的房間做同樣的話題 (全聊天系統相同話題或回復為系統預設的話題)。");
-define("L_HELP_CMD_25", "一個隨機/賭運氣的數字骰子遊戲。<br />用法： /dice or /dice [n];<br />n 可以採取任何值 <b>介於 1 and %s</b> (它代表骰子數量)。如果沒有數字輸入，將使用默認的最大骰子。");
-define("L_HELP_CMD_26", "這是一個比較複雜的版本屬於這個 /dice 命令。<br />用法： /{n1}d[n2] or /{n1}d;<br />n1 可以採取任何值 <b>介於 1 and %s</b> (它代表了每次拋出的骰子數目)。<br />n2 可以採取任何值 <b>介於 1 and %s</b> (它代表了每個芯片的邊數)。");
-define("L_HELP_CMD_27", "它用高亮突出了一個特定的用戶信息，以方便您閱讀整個談話。<br />用法： /high {user} 或按 <img src=./images/highlightOff.gif> 在大廳用戶名字右邊 (在房間/用戶列表)");
+define("L_HELP_CMD_24", "這個命令改變當前房間的話題。盡量不覆蓋其他用戶的話題。使用的重要課題。<br />默認情況下，這是 主持人/管理員 命令。<br />使用 \"/topic reset\" 命令 當前的話題將被刪除並重置為預設的話題。<br />可選擇，\"/topic * {}\" 或 \"/topic * reset\" 在所有的房間做同樣的話題 (全聊天系統相同話題或回復為系統預設的話題)。");
+define("L_HELP_CMD_25", "一個隨機/賭運氣的數字骰子遊戲。<br />用法： /dice 或 /dice [n];<br />n 可以採取任何值 <b>介於 1 到 %s</b> (它代表骰子數量)。如果沒有數字輸入，將使用默認的最大骰子。");
+define("L_HELP_CMD_26", "這是一個比較複雜的版本屬於這個 /dice 命令。<br />用法： /{n1}d[n2] 或 /{n1}d;<br />n1 可以採取任何值 <b>介於 1 到 %s</b> (它代表了每次拋出的骰子數目)。<br />n2 可以採取任何值 <b>介於 1 到 %s</b> (它代表了每個芯片的邊數)。");
+define("L_HELP_CMD_27", "它用高亮突出了一個特定的用戶信息，以方便您閱讀整個談話。<br />用法： /high {用戶} 或按 <img src=./images/highlightOff.gif> 在大廳用戶名字右邊 (在房間/用戶列表)"); 
 define("L_HELP_CMD_28", "它允許張貼 <i>一個單幅圖像</i> 做為訊息。<br />用法：圖片是在互聯網上和任何人可以自由訪問的。不要使用需要登錄的網頁。<br />必須輸入完整的圖像鏈接！ 例如 <b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />允許副檔名： .jpg .bmp .gif .png。鏈接是區分大小寫！<br />提示：輸入 /img 然後是一個空格，並貼上 URL 在輸入框中; 從網路取得圖片網址的方法：右鍵點擊圖片，內容，就會顯示整個位址/URL (有時需要向下滾動) 並複製/粘貼在 /img 後面<br />不要使用自己電腦上的圖片，它只會破壞聊天窗口！！！");
 define("L_HELP_CMD_29", "第二個命令將允許當前房間的管理員或主持人，降級同房間以前晉升的另一名主持人到一般註冊用戶。<br />這 * 選項將用戶從所有的房間降級。");
-define("L_HELP_CMD_30", "這第二個命令 不同於 /me 但它會顯示您的相應的標題，根據您的個人資料性別<br />例如 * ".sprintf(L_HELP_MR, "Ciprian")." 正在看電視 or * ".sprintf(L_HELP_MS, "Dana")." 很高興。");
+define("L_HELP_CMD_30", "這第二個命令 不同於 /me 但它會顯示您的相應的標題，根據您的個人資料性別<br />例如 * ".sprintf(L_HELP_MR, "Ciprian")." 正在看電視 或 * ".sprintf(L_HELP_MS, "Dana")." 很高興。");
 define("L_HELP_CMD_31", "改變用戶列表中的排序：入口時間或按字母順序排列。");
-define("L_HELP_CMD_32", "這是第三個（角色扮演）版本的滾動骰子。<br />用法： /d{n1}[tn2] or /d{n1};<br />n1 可以採取任何值 <b>1 and 100 之間</b> (它代表了每個芯片的邊數);<br />n2 可以採取任何值 <b>介於 1 and %s</b> (它代表了每次扔滾動骰子的數量)。");
+define("L_HELP_CMD_32", "這是第三個（角色扮演）版本的滾動骰子。<br />用法： /d{n1}[tn2] 或 /d{n1};<br />n1 可以採取任何值 <b>1 到 100 之間</b> (它代表了每個芯片的邊數);<br />n2 可以採取任何值 <b>介於 1 到 %s</b> (它代表了每次扔滾動骰子的數量)。");
 define("L_HELP_CMD_33", "改變聊天訊息字體到用戶選擇的大小 (允許值 n： <b>7 跟 15 之間</b>); 這個 /size 命令 將復位為默認值的字體大小 (<b>".$FontSize."</b>)。");
 define("L_HELP_CMD_34", "這將允許用戶指定文字訊息的一個方向 (ltr = 從左到右，rtl = 從右到左)。");
-define("L_HELP_CMD_35", "它允許張貼<i>一個視頻</i> 或 <i>一個音頻文件</i> 在一次小型的Flash播放器。<br />用法：只要貼上媒體源的URL！ 例如 <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />您系統上需要安裝 Shockwave Flash 播放器。鏈接是區分大小寫！<br />提示：輸入 //video 後跟一個空格，並貼上 URL 在輸入框中。");
+define("L_HELP_CMD_35", "它允許張貼<i>一個視頻</i> 或 <i>一個音頻文件</i> 在一次小型的Flash播放器。<br />用法：只要貼上媒體源的URL！ 例如 <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />您系統上需要安裝 Shockwave Flash 播放器。鏈接是區分大小寫！<br />提示：輸入 //video 後跟一個空格，並貼上網址在輸入框中。");
 define("L_HELP_CMD_35a", "第二條命令只適用於具有 YouTube.com 的視頻源。<br />例如 <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
-define("L_HELP_CMD_36", "它允許張貼 <i>一個 youtube video</i> 在一次小型的Flash播放器。<br />用法：只需貼上要播放的來源網址！ 例如 <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />您需要在系統上安裝 Shockwave Flash 播放器。鏈接是區分大小寫的！<br />提示： type /tube 後跟一個空格，再粘貼 URL 到發言框中。");
-define("L_HELP_CMD_37", "它允許張貼 <i>MathJax 方程式/公式</i> 在聊天中。<br />用法：只需將其粘貼在 TeX 或 MathML (原始) codes！ 例如 <b>/math&nbsp;\sqrt{3x-1}+(1+x)^2</b><br />對於更多的代碼樣本和說明去： <a href=\"http://www.mathjax.org/demos/\" target=\"_blank\">http://www.mathjax.org/demos</a>。右鍵單擊公式獲取代碼。<br />提示：輸入 /math 其次是空格 代碼 粘貼到框中。");
+define("L_HELP_CMD_36", "它允許張貼 <i>一個YouTube影片</i> 在一次小型的Flash播放器。<br />用法：只需貼上要播放的來源網址！ 例如 <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />您需要在系統上安裝 Shockwave Flash 播放器。鏈接是區分大小寫的！<br />提示：輸入 /tube 後跟一個空格，再粘貼 URL 到發言框中。");
+define("L_HELP_CMD_37", "它允許張貼 <i>MathJax 方程式/公式</i> 在聊天中。<br />用法：只需將其粘貼在 TeX 或 MathML (原始) 代碼！ 例如 <b>/math&nbsp;\sqrt{3x-1}+(1+x)^2</b><br />對於更多的代碼樣本和說明去： <a href=\"http://www.mathjax.org/demos/\" target=\"_blank\">http://www.mathjax.org/demos</a>。右鍵單擊公式獲取代碼。<br />提示：輸入 /math 其次是空格 代碼 粘貼到框中。");
 define("L_HELP_CMD_VAR", "別名(變種)： %s"); // a list of English and/or translated alternatives for each command
 define("L_HELP_ETIQ_1", "交談禮儀");
 define("L_HELP_ETIQ_2", "我們的網站，希望保持友好的社會和樂趣，所以請堅持以下指導原則。如果你不遵守這些規則，我們的聊天主持人之一的，可以引導你聊天。<br /><br />謝謝你，");
@@ -322,7 +322,7 @@ define("L_BACK", "%s 又回來了！");
 define("L_QUICK", "快速選單");
 
 // Topic Banner mod
-define("L_TOPIC", "已經設置的話題 to：");
+define("L_TOPIC", "已經設置話題到：");
 define("L_TOPIC_RESET", "已經重置這個話題");
 define("L_HELP_TOP", "話題至少要有兩個詞");
 define("L_BANNER_WELCOME", "歡迎到 %s！");
@@ -342,8 +342,8 @@ define("L_ERR_IS_ADMIN", "%s 是這裡的管理員！\\n你不能改變他的權
 
 // Info mod by Ciprian - displays a list of all the features & mods, including Bot's name, on the welcome page
 define("INFO_CMDS", "提供額外的命令：");
-define("INFO_MODS", "額外的功能/可用 MODS：");
-define("INFO_BOT", "我們提供的BOT：");
+define("INFO_MODS", "額外的功能/可用外掛：");
+define("INFO_BOT", "我們提供的機器人：");
 
 // Profile mod
 define("L_PRO_1", "使用語言");
@@ -362,15 +362,15 @@ define("L_CHG_AV", "點擊 \"".L_REG_16."\" 在個人資料表格<br />來儲存
 define("L_SEL_NEW_AV", "選擇一個新的頭像");
 define("L_EX_AV", "例如");
 define("L_URL_AV", "網址：");
-define("L_EXPL_AV", "(輸入網址，然後按 ENTER 查看)");
+define("L_EXPL_AV", "(輸入網址，然後按Enter鍵來查看)");
 define("L_CANCEL", "取消");
 define("L_AVA_REG", "你必須先註冊\\n才能來改變你的頭像圖標");
 define("L_SEL_NEW_AV_CONFIRM", "當這種檔案形式不能提交。\\n目前指向的虛擬化身，將會失去\\到目前為止！\\n\\n你確定？");
 
 // PlusBot bot mod (based on Alice bot)
-define("BOT_TIPS", "提示：我們的機器人是公開活躍在這個房間。若要機器人開始說話，打字輸入 <b>hello ".C_BOT_NAME."</b>。談話結束，打字輸入： <b>bye ".C_BOT_NAME."</b>。(private： /to <b>".C_BOT_NAME."</b> Message)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
-define("BOT_PRIV_TIPS", "提示：我們的機器人是公開活躍在 %s 房間。你只能通過點擊它的名字和私下用悄悄話跟機器人交談。(command： /wisp <b>".C_BOT_NAME."</b> Message)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
-define("BOT_PRIVONLY_TIPS", "提示：我們的機器人是不公開活躍。通過點擊它的名字，你只能跟機器人私下談。(commands： /to <b>".C_BOT_NAME."</b> Message or /wisp <b>".C_BOT_NAME."</b> Message)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
+define("BOT_TIPS", "提示：我們的機器人是公開活躍在這個房間。若要機器人開始說話，打字輸入 <b>hello ".C_BOT_NAME."</b>。談話結束，打字輸入： <b>bye ".C_BOT_NAME."</b>。(私人： /to <b>".C_BOT_NAME."</b> 訊息)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
+define("BOT_PRIV_TIPS", "提示：我們的機器人是公開活躍在 %s 房間。你只能通過點擊它的名字和私下用悄悄話跟機器人交談。(指令： /wisp <b>".C_BOT_NAME."</b> 訊息)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
+define("BOT_PRIVONLY_TIPS", "提示：我們的機器人是不公開活躍。通過點擊它的名字，你只能跟機器人私下談。(指令： /to <b>".C_BOT_NAME."</b> 訊息 或 /wisp <b>".C_BOT_NAME."</b> 訊息)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
 define("BOT_STOP_ERROR", "機器人是在這個房間裡沒有運行！");
 define("BOT_START_ERROR", "在這個房間的機器人已在運行！");
 define("BOT_DISABLED_ERROR", "機器人已被禁用從管理面板！");
@@ -380,7 +380,7 @@ define("DICE_RESULTS", "滾動骰子，結果是：");
 define("DICE_WRONG", "你必須選擇你想滾多少骰子\\n(選擇一個介於1和 ".MAX_ROLLS.")。\\n只需鍵入/dice 滾動所有的 ".MAX_ROLLS." 骰子。");
 define("DICE2_WRONG", "第二個值介於1和 ".MAX_ROLLS."。\\n留下它空白到使用全部 ".MAX_ROLLS." dice\\n(例如 /".MAX_DICES."d 或 /".MAX_DICES."d".MAX_ROLLS.")。");
 define("DICE2_WRONG1", "第一個值介於1和 ".MAX_DICES."。\\n(例如 /".MAX_DICES."d 或 /".MAX_DICES."d".MAX_ROLLS.")。");
-define("DICE3_WRONG", "第一（d）值介於1和 100。\\n第二個（t）值介於1和 ".MAX_ROLLS."。\\n留下它空白到使用全部 ".MAX_ROLLS." dice\\n(例如 /d50 or /d100t".MAX_ROLLS.")。");
+define("DICE3_WRONG", "第一（d）值介於1和 100。\\n第二個（t）值介於1和 ".MAX_ROLLS."。\\n留下它空白到使用全部 ".MAX_ROLLS." 骰子\\n(例如 /d50 或 /d100t".MAX_ROLLS.")。");
 
 // Private Message Popup mod by Ciprian
 define("L_REG_POPUP", "打開彈出窗口私人訊息");
@@ -427,7 +427,7 @@ define("L_COLOR_HEAD_SETTINGSa", "預設的色彩：");
 define("L_COLOR_HEAD_SETTINGSb", "預設的色彩：");
 define("L_COL_HELP_TITLE", "顏色選擇器");
 define("L_COL_HELP_SUB1", "使用：");
-define("L_COL_HELP_P1", "編輯您的個人資料（您的用戶名顏色相同的顏色），您可以選擇自己的默認顏色。你仍然可以使用任何其他顏色。要改變從一個隨機使用您的默認顏色，你有一次選擇默認的顏色 (Null) - 它是在選擇列表中的第一個。");
+define("L_COL_HELP_P1", "編輯您的個人資料（您的用戶名顏色相同的顏色），您可以選擇自己的默認顏色。你仍然可以使用任何其他顏色。要改變從一個隨機使用您的默認顏色，你有一次選擇默認的顏色 (空值) - 它是在選擇列表中的第一個。");
 define("L_COL_HELP_SUB2", "提示：");
 define("L_COL_HELP_P2", "<u>色彩範圍</u><br />根據您的瀏覽器/操作系統功能，它是可能的，有的顏色不會呈現。只有16種顏色的名稱是由W3C的HTML4.0標準的支持：");
 define("L_COL_HELP_P2a", "如果一個用戶聲稱，他不能看到你所選的顏色，這意味著他很可能使用的是舊的瀏覽器。");
@@ -436,15 +436,15 @@ define("L_COL_HELP_P3", "<u>級別使用顏色的權限</u>：<br />1。管理�
 define("L_COL_HELP_P3a", "默認顏色為 <u><SPAN style=\"color:".COLOR_CD."\">".COLOR_CD."</SPAN></u>。<br /><br /><u>技術性的東西</u>：這些顏色已經被系統管理員定義在管理面板。<br />如果出現任何錯誤，或者如果有什麼你不喜歡默認的顏色，你應該聯繫<b>管理員</b> 首先，沒有在房間裡的其他用戶。:-)");
 define("L_COL_HELP_USER_STATUS", "您的狀態");
 define("L_COL_TUT", "在聊天室中使用彩色文字");
-define("L_NULL", "Null");
+define("L_NULL", "空值");
 define("L_NULL_F", ""); // feminine word, if it's the case
 define("L_ROOM_COLOR", "房間的顏色");
 define("L_PRO_COLOR", "配置文件的顏色");
 
 // Alert messages on errors for Color Input Box mod by Ciprian
-define("COL_ERROR_BOX_MODA", "只有管理員可以使用 ".COLOR_CA." color！\\n\\n你的文字顏色將重置為 ".COLOR_CM."！\\n\\n請選擇其他顏色。");
-define("COL_ERROR_BOX_USRA", "只有管理員可以使用 ".COLOR_CA." color！\\n\\n不要嘗試使用 ".COLOR_CA."，".COLOR_CA1."，".COLOR_CM." or ".COLOR_CM1."。\\n\\n這些是保留給超級用戶！\\n\\n你的文字顏色將重置為 ".COLOR_CD."！\\n\\n請選擇其他顏色。");
-define("COL_ERROR_BOX_USRM", "你必須是一個主持人才能使用 ".COLOR_CM." color！\\n\\n不要嘗試使用 ".COLOR_CA."，".COLOR_CA1."，".COLOR_CM." or ".COLOR_CM1."。\\n\\n這些是保留給超級用戶！\\n\\n你的文字顏色將重置為 ".COLOR_CD."！\\n\\n請選擇其他顏色。");
+define("COL_ERROR_BOX_MODA", "只有管理員可以使用 ".COLOR_CA." 顏色！\\n\\n你的文字顏色將重置為 ".COLOR_CM."！\\n\\n請選擇其他顏色。");
+define("COL_ERROR_BOX_USRA", "只有管理員可以使用 ".COLOR_CA." 顏色！\\n\\n不要嘗試使用 ".COLOR_CA."，".COLOR_CA1."，".COLOR_CM." 或 ".COLOR_CM1."。\\n\\n這些是保留給超級用戶！\\n\\n你的文字顏色將重置為 ".COLOR_CD."！\\n\\n請選擇其他顏色。");
+define("COL_ERROR_BOX_USRM", "你必須是一個主持人才能使用 ".COLOR_CM." 顏色！\\n\\n不要嘗試使用 ".COLOR_CA."，".COLOR_CA1."，".COLOR_CM." 或 ".COLOR_CM1."。\\n\\n這些是保留給超級用戶！\\n\\n你的文字顏色將重置為 ".COLOR_CD."！\\n\\n請選擇其他顏色。");
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "歡迎來到我們的聊天。請遵守純淨禮儀，一邊聊天：<I>嘗試愉快和禮貌</I>。");
@@ -477,7 +477,7 @@ define("L_ERR_PASS_2", "錯誤的電子郵件，再試一次！");
 define("L_ERR_PASS_3", "不對的密碼提示問題。<br />答復到如下所示的那個！");
 define("L_ERR_PASS_4", "錯誤的密碼提示答案。再試一次！");
 define("L_ERR_PASS_5", "您未設置您私有/密碼提示。");
-define("L_ERR_PASS_6", "您未設置您私有/密碼提示 yet。<br />您不可能使用這個形式。請與管理員聯繫！");
+define("L_ERR_PASS_6", "你還沒有設置您的私人/密碼提示。<br />您不能使用這種形式。聯繫管理員！");
 
 // admin stuff - added for administrators promotions/demotions in admin panel - by Ciprian
 define("L_ADM_3", "%s 已成為這個聊天室的管理員。");
@@ -504,7 +504,7 @@ define("L_LINKS_5", "插入這個笑臉");
 define("L_LINKS_6", "聯繫");
 define("L_LINKS_7", "訪問phpMyChat-Plus主頁");
 define("L_LINKS_8", "加入phpMyChat小組");
-define("L_LINKS_9", "發送您的 feedback");
+define("L_LINKS_9", "發送您的臉書");
 define("L_LINKS_10", "下載 phpMyChat-Plus");
 define("L_LINKS_11", "查看誰在聊天");
 define("L_LINKS_12", "打開聊天的登錄頁面");
@@ -514,8 +514,8 @@ define("L_LINKS_15", "打開");
 define("L_LINKS_16", "笑臉圖庫");
 define("L_LINKS_17", "升序排序");
 define("L_LINKS_18", "降序排序");
-define("L_LINKS_19", "設置/修改您的Gravatar");
-define("L_LINKS_20", "發布 Equations");
+define("L_LINKS_19", "設置/修改您的全球認證肖像");
+define("L_LINKS_20", "發布方程式"); //方程式
 define("L_SWITCH", "切換到 %s"); // 例如 “切換到意大利" (鼠標停留的國旗國家 / 語言切換)
 define("L_SELECTED", "現在設定"); // 例如 "French - selected" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
@@ -530,7 +530,7 @@ define("L_OWNER", "此聊天室的所有者"); //same here
 define("L_TRANSLATOR", "譯者"); //same here
 
 // Counter on login
-define("L_VISITOR_REPORT", "... 遊客 since %s");
+define("L_VISITOR_REPORT", "... 開設日 %s 後訪問人數");
 
 // Status bar messages
 define("L_JOIN_ROOM", "加入這個房間");
@@ -555,7 +555,7 @@ define("L_ARCHIVE", "打開紀錄");
 define("L_SOUNDFIX_IE_1", "IE 聲音修正檔");
 define("L_SOUNDFIX_IE_2", "下載 IE 聲音修正檔");
 define("L_LURKING_1", "打開潛伏的頁");
-define("L_REG_BRB", "brb(需要先註冊)");
+define("L_REG_BRB", "廣檢(需要先註冊)");
 define("L_DEL_BYE", "不要等待我...");
 define("L_EXTRA_PRIV1", "讀取留言");
 define("L_EXTRA_PRIV2", "新留言");
@@ -645,62 +645,61 @@ if(!defined("L_YEAR")) define("L_YEAR", "年");
 
 // Chat Activity displayed on remote web pages
 define("LOGIN_LINK", "<A HREF='".C_CHAT_URL."?L=".$L."' TITLE='".sprintf(L_CLICK,L_LINKS_12)."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_LINKS_12)."。'; return true;\" TARGET=_blank>");
-define("NB_USERS_IN", "users are ".LOGIN_LINK."聊天</A> at this time。");
+define("NB_USERS_IN", "使用者 ".LOGIN_LINK."聊天</A> 在這個時候。");
 define("USERS_LOGIN", "這個時段1個用戶在 ".LOGIN_LINK."聊天</A>。");
 define("NO_USER", "這個時段沒有人 ".LOGIN_LINK."聊天</A>。");
 define("L_PRIV_REPLY_LOGIN", "登錄到聊天，如果你想 ".LOGIN_LINK."發表回覆</A> 任何上面列出的未讀項目經理");
 
 // Language names
-define("L_LANG_AR", "Argentinean Spanish");
-define("L_LANG_BG", "Bulgarian - Cyrillic");
-define("L_LANG_BR", "Brazilian Portuguese");
-define("L_LANG_CA", "Catalan");
+define("L_LANG_AR", "阿根廷 西班牙");
+define("L_LANG_BG", "保加利亞語 - 西里爾文");
+define("L_LANG_BR", "葡萄牙語（巴西）");
+define("L_LANG_CA", "加泰羅尼亞");
 define("L_LANG_CNS", "簡體中文"); // Chinese simplified
 define("L_LANG_CNT", "繁體中文"); // Chinese traditional
-define("L_LANG_CZ", "Czech");
-define("L_LANG_DA", "Danish");
-define("L_LANG_DE", "German");
-define("L_LANG_EN", "English"); // for admin panel only
-define("L_LANG_ENUK", "English UK"); // for UK formats and flags
-define("L_LANG_ENUS", "English US"); // for US formats and flags
-define("L_LANG_ES", "Spanish");
-define("L_LANG_FA", "Persian (Farsi)");
-define("L_LANG_FI", "Finnish");
-define("L_LANG_FR", "French");
-define("L_LANG_GR", "Greek");
-define("L_LANG_HE", "Hebrew");
-define("L_LANG_HI", "Hindi (Devanagari)");
-define("L_LANG_HU", "Hungarian");
-define("L_LANG_ID", "Indonesian (Bahasa)");
-define("L_LANG_IT", "Italian");
-define("L_LANG_JA", "Japanese (Kanji)");
-define("L_LANG_KA", "Georgian");
-define("L_LANG_NB", "Norwegian (Bokmål)");
-define("L_LANG_NN", "Norwegian (Nynorsk)");
-define("L_LANG_NE", "Nepali");
-define("L_LANG_NL", "Dutch");
-define("L_LANG_PL", "Polish");
-define("L_LANG_PT", "Portuguese");
-define("L_LANG_RO", "Romanian");
-define("L_LANG_RU", "Russian - Cyrillic");
-define("L_LANG_SK", "Slovak");
-define("L_LANG_SRC", "Serbian - Cyrillic");
-define("L_LANG_SRL", "Serbian - Latin");
-define("L_LANG_SV", "Swedish");
-define("L_LANG_TH", "Thai");
-define("L_LANG_TW", "Taiwan (台灣)");
-define("L_LANG_TR", "Turkish");
-define("L_LANG_UK", "Ukrainian - Cyrillic");
-define("L_LANG_UR", "Urdu");
-define("L_LANG_VI", "Vietnamese");
-define("L_LANG_YO", "Yoruba"); // Nigeria&Congo language
+define("L_LANG_CZ", "捷克文");
+define("L_LANG_DA", "丹麥文");
+define("L_LANG_DE", "德文");
+define("L_LANG_EN", "英文"); // 僅管理面板
+define("L_LANG_ENUK", "英國英文"); // 英國的格式和標誌
+define("L_LANG_ENUS", "美國英文"); // 美國的格式和標誌
+define("L_LANG_ES", "西班牙");
+define("L_LANG_FA", "波斯文");
+define("L_LANG_FI", "芬蘭文");
+define("L_LANG_FR", "法文");
+define("L_LANG_GR", "希臘文");
+define("L_LANG_HE", "希伯來文");
+define("L_LANG_HI", "印度文 (梵文)");
+define("L_LANG_HU", "匈牙利");
+define("L_LANG_ID", "印度尼西亞（印尼文）");
+define("L_LANG_IT", "意大利");
+define("L_LANG_JA", "日語（漢字）");
+define("L_LANG_KA", "格魯吉亞語");
+define("L_LANG_NB", "挪威文 (Bokmål)");
+define("L_LANG_NN", "新挪威語 (Nynorsk)");
+define("L_LANG_NE", "尼泊爾文");
+define("L_LANG_NL", "荷蘭文");
+define("L_LANG_PL", "波蘭文");
+define("L_LANG_PT", "葡萄牙文");
+define("L_LANG_RO", "羅馬尼亞文");
+define("L_LANG_RU", "俄文 - Cyrillic");
+define("L_LANG_SK", "斯洛伐克文");
+define("L_LANG_SRC", "塞爾維亞 - Cyrillic");
+define("L_LANG_SRL", "塞爾維亞 - 拉丁");
+define("L_LANG_SV", "瑞典文");
+define("L_LANG_TH", "泰文");
+define("L_LANG_TR", "土耳其文");
+define("L_LANG_UK", "烏克蘭 - Cyrillic");
+define("L_LANG_UR", "Urdu 烏爾都語");
+define("L_LANG_VI", "越南文");
+define("L_LANG_YO", "約魯巴語"); //尼日利亞和剛果語
 
 // Skins preview page
-define("L_SKINS_TITLE", "外觀預覽");
-define("L_SKINS_TITLE1", "Skins %s to %s preview"); // Skins 1 to 4 preview
-define("L_SKINS_AV", "可用外觀");
-define("L_SKINS_NONAV", "There are no styles defined in the \"skins\" folder");
-define("L_SKINS_COPY", "&copy; %s Skin by %s");
+define("L_SKINS_TITLE", "外觀風格預覽");
+define("L_SKINS_TITLE1", "外觀風格 %s 到 %s 預覽"); // Skins 1 to 4 preview
+define("L_SKINS_AV", "可用外觀風格");
+define("L_SKINS_NONAV", "還有沒有定義外觀風格在這 \"skins\" 資料夾");
+define("L_SKINS_COPY", "&copy;%s 外觀風格來自 %s"); 
 
 // Swap image titles by Ciprian
 define("L_GEN_ICON", "性別圖示");
@@ -718,7 +717,7 @@ define("L_DESC", "遞減");
 define("L_LOGIN_COUNT", "總訪問量");
 
 // Gravatar from email mod by Ciprian
-define("L_GRAV_USE", "使用的Gravatar");
+define("L_GRAV_USE", "使用的全球認證肖像");
 
 // Uploader mod by Ciprian
 define("L_UPLOAD", "上傳 %s");
@@ -752,7 +751,7 @@ define("L_PRO_7", "出生日期");
 define("L_PRO_8", "顯示生日在個人資料公開信息");
 define("L_PRO_9", "顯示年齡在個人資料公開信息");
 define("L_PRO_10", "年齡");
-define("L_PRO_11", "%1\$d 年，%2\$d 月 and %3\$d 日");
+define("L_PRO_11", "%1\$d 年，%2\$d 月 和 %3\$d 日");
 define("L_DOB_TIT_1", "生日列表");
 $L_DOB_SUBJ = "%s 生日快樂！";
 

@@ -196,15 +196,15 @@ else
 <P>
 <FONT SIZE="+1"><A NAME="register"><B>要注册：</B></A></FONT>
 <P>
-如果你还没有注册<?php if (!C_REQUIRE_REGISTER) echo(" and would like to"); ?>，请选择注册选项。会出现一个小的弹出窗口。
+如果你还没有注册<?php if (!C_REQUIRE_REGISTER) echo("并且希望注册"); ?>，请选择注册选项。会出现一个小的弹出窗口。
 <P>
 <UL>
 	<LI>首先，创建一个用户名 <?php if (!C_EMAIL_PASWD) echo(" 和密码"); ?> 到相应的框中键入自己。您选择的用户名，将自动显示在聊天室的名称。它不能包含空格，逗号或反斜线 (\)。
-<?php if (C_NO_SWEAR) echo(" It can not contain \"swear words\"。"); ?>
+<?php if (C_NO_SWEAR) echo("它不能包含 \"脏话\"。"); ?>
 	<LI>二，请输入你的名字，姓氏，和您的电子邮件地址。为了注册聊天，所有这些信息必须提供。性别信息是可选的。
 	<LI>如果你有一个网页，你可以在框中输入网址。
 	<LI>语言领域可能有助于在今后的讨论中的其他用户。他们会知道你理解的语言。
-	<LI>最后，如果你想，让您的电子邮件地址被其他参与者观看，请检查“<?php echo(L_REG_33); ?>”旁边的方块。如果您不希望您的e - mail地址，可取消勾选该选择框。
+	<LI>最后，如果你想，让您的电子邮件地址被其他参与者观看，请检查“<?php echo(L_REG_33); ?>”旁边的方块。如果您不希望您的电子信箱地址地址，可取消勾选该选择框。
 	<LI>然后，按 <?php echo(L_REG_3); ?> 按钮 您的帐户将被创建。根据已经由管理员设置，您可能需要等待管理员的批准。无论如何，你会得到进一步的指示通知电子邮件。如果你想在任何时间停止，无需注册，按 <?php echo(L_REG_25); ?> 按钮。
 </UL>
 <P>
@@ -222,7 +222,7 @@ if (C_VERSION == "2")
 	<P>
 	已注册者可开新的聊天室，而私人的聊天室仅会显示于受邀请的聊天者，不会公开的显示出来。<br />
 	<P>
-	而新的聊天室名称它不能包含逗号 ',' 及反斜线 '\'。<?php if (C_NO_SWEAR) echo(" 无法使用\"不雅字语\"。"); ?>
+	而新的聊天室名称它不能包含逗号 ',' 及反斜线 '\'。<?php if (C_NO_SWEAR) echo(" 无法使用 \"不雅字语\"。"); ?>
 	<br /><P ALIGN="right"><A HREF="#top">回页首</A></P>
 	<P>
 	<hr />
@@ -253,7 +253,7 @@ if ($Ver == "H")
 <P>
 <FONT SIZE="+1"><A NAME="sending"><B>发送讯息(发言方法)：</B></A></FONT>
 <P>
-请将您的聊天讯息，键入左下方文字栏位中，输入完毕后按 Enter 或 送出 键。开始传送聊天讯息到所有聊天者的视窗中。<br />
+请将您的聊天讯息，键入左下方文字栏位中，输入完毕后按 输入键 或 送出 键。开始传送聊天讯息到所有聊天者的视窗中。<br />
 <?php if (C_NO_SWEAR) echo("请注意 \"不雅字语\" 从发言讯息被过滤。"); ?>
 <P>
 您可以更改您的发言文字的颜色，从 文字栏位 右侧，文字颜色 选择框中，选择一个新的色彩。
@@ -320,7 +320,7 @@ if ($Ver == "H")
 <P>
 <FONT SIZE="+1"><A NAME="customize"><B>自定义聊天室视图：</B></A></FONT>
 <P>
-有许多不同的方法来定制聊天的外观。要更改设置，只需到您的文字方块中键入相应的命令，并按下Enter / 传送 键。
+有许多不同的方法来定制聊天的外观。要更改设置，只需到您的文字方块中键入相应的命令，并按下输入键/ 传送 键。
 <P>
 <UL>
 	<?php
@@ -339,9 +339,9 @@ if ($Ver == "H")
 		<?php
 	};
 	?>
-	<LI>这 <B>Notify 指令</B> 允许您打开或关闭看到的告示，当其他用户进入或退出聊天室的选项。默认情况下此选项 <?php echo(C_NOTIFY ? "on" : "off"); ?> 和 告示 <?php echo(C_NOTIFY ? "will" : "won’t"); ?> 可见。<br /> 键入 "/notify" 不带引号。
+	<LI>这 <B>Notify 指令</B> 允许您打开或关闭看到的告示，当其他用户进入或退出聊天室的选项。默认情况下此选项 <?php echo(C_NOTIFY ? "开" : "关"); ?> 和 告示 <?php echo(C_NOTIFY ? "将会" : "不会"); ?> 可见。<br />键入 "/notify" 不带引号。
 	<P>
-	<LI>这 <B>Timestamp 指令</B> 允许您打开或关闭看到在状态栏上的每个消息和服务器时间发布消息之前的选项。默认情况下此选项 <?php echo(C_SHOW_TIMESTAMP ? "on" : "off"); ?>。<br />键入 "/timestamp" 不带引号。
+	<LI>这 <B>Timestamp 指令</B> 允許您打開或關閉看到在狀態欄上的每個消息和服務器時間發布消息之前的選項。默認情況下此選項 <?php echo(C_SHOW_TIMESTAMP ? "开" : "关"); ?>.<br />鍵入 "/timestamp" 不帶引號。
 	<P>
 	<LI>这 <B>Refresh 指令</B> 允许您调整在屏幕上刷新发布消息的速度。目前默认刷新率为 <?php echo(C_MSG_REFRESH); ?> 秒。要改变率 键入 "/refresh n" 不带引号，其中 n 是在新的刷新率秒的时间。
 	<P>
@@ -418,7 +418,7 @@ if (C_USE_SMILIES)
 	<FONT SIZE="+1"><A NAME="smilies"><B>表情符号：</B></A></FONT>
 	<P>您的讯息内可能有图形的表情符号。看到下面的代码，你必须输入到一个消息，到获得每一个这些表情符号。
 	<P>
-	<I>例如</I>，发送文本 "Hi Jack :)" 不带引号 将显示讯息 <B>Hi Jack</B> <IMG SRC="images/smilies/smile1.gif" WIDTH=15 HEIGHT=15 ALT=":)"> 在主画面中。
+	<I>例如</I>，发送文本 "嗨Jack :)" 不带引号 将显示讯息 <B>嗨Jack</B> <IMG SRC="images/smilies/smile1.gif" WIDTH=15 HEIGHT=15 ALT=":)"> 在主画面中。
 	<P ALIGN="center">
 	<TABLE BORDER=0 CELLPADDING=3 CELLSPACING=5>
 	<?php
@@ -505,7 +505,7 @@ if (C_HTML_TAGS_KEEP != "none")
 <?php
 if (C_VERSION == "2")
 {
-	echo(!C_REQUIRE_REGISTER ? "<P>If you’re a registered user, you" : "<br /><P>You");
+	echo(!C_REQUIRE_REGISTER ? "<P>如果你是注册用户，您" : "<br /><P>您");
 	?>
 	 也可以创建一个与此相同的新房间 指令。但你必须指定其 键入：0 代表为私人，1 公开（默认值）。
 	<P>
@@ -588,7 +588,7 @@ else
 <P>
 由于这个变化 指令，还有就是 <B>/mr 指令</B> 可用，这也将在前面的用户名性别称号。
 <P>
-<I>例如：</I>假如 Jack 发送这讯息 "/mr 正在看电视" the message frame will show "<B>* <?php echo(sprintf(L_HELP_MR, "Jack")); ?></B> 正在看电视"。
+<I>例如：</I>假如 Jack 发送这讯息 "/mr 正在看电视" 大厅会显示 "<B>* <?php echo(sprintf(L_HELP_MR, "Jack")); ?></B> 正在看电视"。
 <br /><P ALIGN="right"><A HREF="#top">回页首</A></P>
 <P>
 <hr />
@@ -596,7 +596,7 @@ else
 <P>
 <FONT SIZE="+1"><A NAME="ignore"><B>忽略其他用户：</B></A></FONT>
 <P>
-要忽略由其他用户发言的所有讯息，键入这个 <B>指令 "/ignore username"</B> 不带引号。
+要忽略由其他用户发言的所有讯息，键入这个 <B>指令 "/ignore 用户名字"</B> 不带引号。
 <P>
 <I>例如：</I> /ignore Jack
 <P>
@@ -604,7 +604,7 @@ else
 <P>
 若要有一个消息被忽略的用户列表。只需键入这个 <B>指令 "/ignore"</B> 不带引号。
 <P>
-恢复一个被忽略的用户的消息显示，键入这 <B>指令 "/ignore - username"</B> 不带引号，其中 "-" 是一个连字符（减号）。<P>
+恢复一个被忽略的用户的消息显示，键入这 <B>指令 "/ignore - 用户名字"</B> 不带引号，其中 "-" 是一个连字符（减号）。<P>
 <P>
 <I>例如：</I> /ignore - Jack
 <P>
@@ -701,11 +701,11 @@ if (C_BANISH != "0")
 <P>
 聊天室主人及系统管理员，可以将已注册的使用者，提拔成为聊天室主人，使用 <B>Promote 指令</B>。
 <P>
-<I>例如： </I>，如果 Jack 是要升级的用户的名字，使用 <I>/promote Jack</I>  将 Jack 提拔成为聊天室主人。( 当 Jack 是一位已注册使用者 }，
+<I>例如</I>，如果 Jack 是要升级的用户的名字，使用 <I>/promote Jack</I> 将 Jack 提拔成为聊天室主人(当 Jack 是一位已注册使用者)。
 <P>
-只有系统管理员能反向操作降级 (将聊天室主人降为一般使用者) 使用 <B>demote 指令</B>。
+只有系统管理员能反向操作降级 (将聊天室主人降为一般使用者) 使用 <B>Demote 指令</B>。
 <P>
-<I>例如： </I>，如果 Jack 是要降级的用户的名字，使用 <I>/demote Jack</I> 或 <I>/demote * Jack</I> (将降职他从现在或所有房间)。
+<I>例如</I>，如果 Jack 是要降级的用户的名字，使用 <I>/demote Jack</I> 或 <I>/demote * Jack</I> (将降职他从现在或所有房间)。
 <br /><P ALIGN="right"><A HREF="#top">回页首</A></P>
 <P>
 </BODY>

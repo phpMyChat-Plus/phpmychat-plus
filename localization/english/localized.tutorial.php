@@ -707,7 +707,7 @@ if (C_BANISH != "0")
 <P>
 Moderators and the administrator can promote another user to moderator with the <B>promote command</B>.
 <P>
-<I>For example</I>, if Jack is the name of the user to promote: <I>/promote Jack</I>
+<I>For example</I>, if Jack is the name of the user to promote: <I>/promote Jack</I>.
 <P>
 Only the administrator can access the opposite feature (reduce a moderator to simple user) using the <B>demote command</B>.
 <P>
