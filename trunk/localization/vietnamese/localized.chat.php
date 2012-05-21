@@ -147,8 +147,8 @@ define("L_ERR_USR_21", "Bạn không tích cực sau ".C_USR_DEL." Phút <br />B
 define("L_ERR_USR_22", "Lệnh này không sẵn sàng cho bộ duyệt bạn đang sử dụng (IE engine).");
 define("L_ERR_USR_23", "Để vào phòng này bạn cầy đăng nhập sau khi đăng ký(");
 define("L_ERR_USR_24", "Để tạo được phòng riêng thì bạn phải đăng ký");
-define("L_ERR_USR_25", "Chỉ người quản trị có thể sử dụng ".$COLORNAME." Màu sắc!<br />Không thử tới sự sử dụng ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1.".<br />Thành viên bắc đầu!");
-define("L_ERR_USR_26", "Admin là người duy nhất có thể sử dụng ".$COLORNAME." màu sắc!<br />Không thử cho việc sử dụng ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1.".<br />Sự dự trữ cho người sử dụng!");
+define("L_ERR_USR_25", "Chỉ người quản trị có thể sử dụng ".$COLORNAME." Màu sắc!<br />Không thử tới sự sử dụng ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." hoặc ".COLOR_CM1.".<br />Thành viên bắc đầu!");
+define("L_ERR_USR_26", "Admin là người duy nhất có thể sử dụng ".$COLORNAME." màu sắc!<br />Không thử cho việc sử dụng ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." hoặc ".COLOR_CM1.".<br />Sự dự trữ cho người sử dụng!");
 define("L_ERR_USR_27", "Bạn không thể tạo cuộc trò chuyện riêng tư đới với chính bạn//..tốt nhất...\\Bây giờ chọn một tên đăng nhập khác.");
 define("L_ERR_USR_28", "Sự truy cập tới %s đã được hạn chế!<br />Xin chọn một phòng khác nhau."); // room name
 define("L_ERR_ROM_1", "Phòng không chứa đựng dấu phẩy hay dấu sổ ngược (\\).");
@@ -206,8 +206,8 @@ define("L_NO_REG_USER", "Bạn phải đăng ký chat để có thể sử dụn
 // help popup
 define("L_HELP_TIT_1", "Trợ giúp");
 define("L_HELP_TIT_2", "Văn bản chuẩn những thông báo");
-define("L_HELP_FMT_1", "Những thông báo gạch nghiên hay gạch ngang &lt;B&gt; &lt;/B&gt;, &lt;I&gt; &lt;/I&gt; or &lt;U&gt; &lt;/U&gt; tags.<br />Ví dụ &lt;B&gt;văn bản này&lt;/B&gt; Sẽ sản xúât <B>văn bản này</B>.");
-define("L_HELP_FMT_2", "Để tạo một link liên kết (for e-mail or URL) Trong thông báo của các bạn, đơn giản đánh máy tương ứng không trùng hợp cái này. Link liên kết sẽ được tạo ra tự động");
+define("L_HELP_FMT_1", "Những thông báo gạch nghiên hay gạch ngang &lt;B&gt; &lt;/B&gt;, &lt;I&gt; &lt;/I&gt; hoặc &lt;U&gt; &lt;/U&gt; tags.<br />Ví dụ &lt;B&gt;văn bản này&lt;/B&gt; Sẽ sản xúât <B>văn bản này</B>.");
+define("L_HELP_FMT_2", "Để tạo một link liên kết (for e-mail hoặc URL) Trong thông báo của các bạn, đơn giản đánh máy tương ứng không trùng hợp cái này. Link liên kết sẽ được tạo ra tự động");
 define("L_HELP_TIT_3", "Những lệnh");
 define("L_HELP_NOTE", "Tất cả những lệnh sử dụng phải được sử dụng bằng tiếng Anh!");
 define("L_HELP_MSG", "tin nhắn");
@@ -242,23 +242,23 @@ define("L_HELP_CMD_18", "Mời một thành viên đang chat sang phòng mình h
 define("L_HELP_CMD_19", "Cho phép người điều tiết(s) một phòng hay quản trị tới \"banish\" một người sử dụng từ phòng trong một thời gian ngắn được định nghĩa bởi người quản trị.<br />Có thể trục xuất một ngừoi sử dụng đang tán gẫu mặt dù anh ta không biết gì hết * sự thiết lập để trục xúât \"mãi mãi\" một người sử dụng tán gẫu tòan bộ.<br />Để chọn, [".L_HELP_REASON."] trình bày lý do sự trục xuất (bất kỳ văn bản mong muốn ).");
 define("L_HELP_CMD_20", "Mô tả bạn là gì ?.");
 define("L_HELP_CMD_21", "Những phòng và người sử dụng mà thử để gửi bạn truyền tin<br /> bạn ra khỏi đến từ máy tính. Nếu bạn muốn trở về để tán gẫu, chỉ bắt đầu đánh máy.");
-define("L_HELP_CMD_22", "Gửi một âm thanh còi (chuông) và những màn hình để chọn một thông báo trong phòng.<br />- Cách dùng:<br />- old usage: \"/buzz\" or \"/buzz message to be shown\" - những âm thanh mặc định sẽ được phát ra trong bảng Admin;<br />- Cách dùng mở rộng: \"/buzz ~tênâmthanh\" or \"/buzz ~tênâmthanh message to be shown\" - Chơi tênâmthanh.wav hồ sơ thư mục âm thanh trong plus ; xin ghi nhớ dấu hiệu \"~\" để được sử dụng từ thứ 2, mà tên hồ sơ âm thanh , không có mở rộng ngòai .wav (chỉ .wav là những mở rộng được cho phép ).<br />Theo mặc định, đây là lệnh của mod/admin.");
+define("L_HELP_CMD_22", "Gửi một âm thanh còi (chuông) và những màn hình để chọn một thông báo trong phòng.<br />- Cách dùng:<br />- old usage: \"/buzz\" hoặc \"/buzz tin nhắn đến được hiển thị\" - những âm thanh mặc định sẽ được phát ra trong bảng Admin;<br />- Cách dùng mở rộng: \"/buzz ".L_HELP_BUZZ."\" hoặc \"/buzz ".L_HELP_BUZZ." tin nhắn đến được hiển thị\" - Chơi tênâmthanh.wav hồ sơ thư mục âm thanh trong plus ; xin ghi nhớ dấu hiệu \"~\" để được sử dụng từ thứ 2, mà tên hồ sơ âm thanh , không có mở rộng ngòai .wav (chỉ .wav là những mở rộng được cho phép ).<br />Theo mặc định, đây là lệnh của mod/admin.");
 define("L_HELP_CMD_23", "Gửi tới <i>âm thầm</i> (thông báo riêng tư). thông báo sẽ được gửi đến nơi đến, không có phòng nào vấn đề người sử dụng trong. Nếu người sử dụng không trực tuyến hay sữ dụng ra khỏi , bạn sẽ thông báo về nó.");
 define("L_HELP_CMD_24", "Lệnh này thay đổi đề tài phòng hiện thời.Sử dụng những đề tài quan trọng<br />Theo mặc định thì mod/admin được quyền ra lệnh.<br />Sử dụng \"/topic reset\" lệnh.đề tài hiện thời sẽ là sự khởi động lại và đã bị xóa để vắng mặt một trong số phòng.<br />Để chọn, \"/topic * {}\" and \"/topic * reset\" chính xác trong tất cả các phòng (đề tài và sự khởi động lại tòan cầu).");
-define("L_HELP_CMD_25", "Mộ trò chơi ngẫu nhiên như gane xúc sắc , hên xui.<br />Hướng dẫn: /dice or /dice [n];<br />n cần nói số lượng <b>giữa 1 and %s</b> (nó đại diện cho những xúc sắc lăn). Nếu không có số được vào, những cuộn cực đại mặc định sẽ là được dùng.");
-define("L_HELP_CMD_26", "Đây là một phiên bản phức tạp hơn (của) lệnh xúc xắc/.<br />Usage: /{n1}d[n2] or /{n1}d;<br />n1 có thể cầm lấy bất kỳ giá trị nào <b>giữa 1 and %s</b> (nó đại diện cho những con số tượng trưng).<br />n2 có thể cầm lấy bất kỳ giá trị nào <b>giữa 1 và %s</b> (nó đại diện cho số lượng xúc xắc lăn trên sự tung).");
+define("L_HELP_CMD_25", "Mộ trò chơi ngẫu nhiên như gane xúc sắc , hên xui.<br />Hướng dẫn: /dice hoặc /dice [n];<br />n cần nói số lượng <b>giữa 1 and %s</b> (nó đại diện cho những xúc sắc lăn). Nếu không có số được vào, những cuộn cực đại mặc định sẽ là được dùng.");
+define("L_HELP_CMD_26", "Đây là một phiên bản phức tạp hơn (của) lệnh xúc xắc/.<br />Usage: /{n1}d[n2] hoặc /{n1}d;<br />n1 có thể cầm lấy bất kỳ giá trị nào <b>giữa 1 and %s</b> (nó đại diện cho những con số tượng trưng).<br />n2 có thể cầm lấy bất kỳ giá trị nào <b>giữa 1 và %s</b> (nó đại diện cho số lượng xúc xắc lăn trên sự tung).");
 define("L_HELP_CMD_27", "Làm đặc trực ánh sáng bằng một thông báo.<br />hướng dẫn: /high {user} hoặc nó nhỏ gọn <img src=./images/highlightOff.gif> thẳng góc trên quyền thành viên (trong danh sách phòng thành viên)");
 define("L_HELP_CMD_28", "It allows posting of <i>one single image</i> as message.<br />Usage: Bức tranh phải là trên Internet và tự do Có thể tiếp cận bởi bất cứ ai. Không sử dụng nhiều trang để đăng nhập <br />Mối liên kết ảnh đầy đủ được đánh máy! E.g.<b>/img&nbsp;http://ciprianmp.com/images/CIPRIAN.jpg</b><br />cho phép mở rộng chỉ: .jpg .bmp .gif .png. Link sẽ dẫn đến!<br />HINTS: type /img không có khỏang trống URl trong box; mở bức ảnh từ link cho website, click chuột phảt lên ảnh, chọn properties, bạn sẽ thấy address/URL (đôi khi bạn cần cuộn xuống để xem hết) và copy/dán sau khi /img<br />không sử dụng hình ảnh trong máy tính của bạn: Ý định phá họai cuộc tán gẫu!!!");
 define("L_HELP_CMD_29", "Lệnh thứ 2 dành cho mod và admin (s) người sử dụng trước đó đẫy mạnh đến người điều tiết như vậy.<br />mục * tùy chọn sẽ giáng chức người sử dụng từ tất cả những phòng.");
 define("L_HELP_CMD_30", "Đâylàm giống như vậy như /me nhưng có thể thấy sự tương tự của bạn, the giống như thông tin tài khoản bạn<br />Ví dụ * ".sprintf(L_HELP_MR, "Ciprian")." dang xem TV hoặc * ".sprintf(L_HELP_MS, "Dana")." thì vui vẻ.");
 define("L_HELP_CMD_31", "Thay đổi những người sử dụng mệnh lệnh Được phân loại trong những danh sách: bởi thời gian hay thứ tự abc");
-define("L_HELP_CMD_32", "Đây là phiên bản thứ 3 hên xui.<br />Usage: /d{n1}[tn2] or /d{n1};<br />n1 có thể chọn bất kỳ giá trị <b>từ 1 đến 100</b> (nó đại diện cho số lượng cuộn trên xúc xắc).<br />n2 có thể cầm lấy bất kỳ giá trị nào <b>giữa số 1 và %s</b> (đại diện những con xúc xắc trên trục tung).");
+define("L_HELP_CMD_32", "Đây là phiên bản thứ 3 hên xui.<br />Usage: /d{n1}[tn2] hoặc /d{n1};<br />n1 có thể chọn bất kỳ giá trị <b>từ 1 đến 100</b> (nó đại diện cho số lượng cuộn trên xúc xắc).<br />n2 có thể cầm lấy bất kỳ giá trị nào <b>giữa số 1 và %s</b> (đại diện những con xúc xắc trên trục tung).");
 define("L_HELP_CMD_33", "Thay đổi số font khi chat với các thành viên khác (cho phép những giá trị cho n: <b>từ 7 đến 15</b>); the /size đây là lệnh cơ bản để chat(<b>".$FontSize."</b>).");
 define("L_HELP_CMD_34", "Điều này sẽ làm cho thành viên hướng rõ đến thông điệp (ltr = Trái tới phải, rtl = Phải tới trái).");
 define("L_HELP_CMD_35", "Được chấp nhận đăng lên bởi <i>một phim</i> hoặc <i>một hồ sơ âm thanh</i> ở chương trình chơi Flash nhỏ tại thời điểm.<br />Cách dùng: Chỉ bỏ địa chỉ của nguồn đã được đăng! Ví dụ <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Bạn cần Shockwave Flash Player được cài đặt trên hệ thống của bạn. Đường dẫn là trường hợp nhạy cảm!<br />Gợi ý: đánh /video theo bởi khoảng trống và bỏ đường dẫn vào hộp.");
 define("L_HELP_CMD_35a", "Lệnh thứ hai chỉ làm với youtube.com bởi nguồn video.<br />Ví dụ <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
 define("L_HELP_CMD_36", "Nó được chấp nhận để đăng lên bởi <i>một phim youtube</i> ở chương trình chơi Flash nhỏ tại thời điểm.<br />Cách dùng: Chỉ bỏ đường dẫn của nguồn được đăng lên! Ví dụ <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Bạn cần Shockwave Flash Player được cài đặt trên hệ thống của bạn. Đường dẫn là trường hợp nhạy cảm!<br />Gợi ý: đánh /tube theo bởi khoảng trống và bỏ đường dẫn vào hộp.");
-define("L_HELP_CMD_37", "It allows posting of <i>MathJax Equations/Formulas</i> in chat.<br />Usage: Just paste the TeX or MathML (original) codes! E.g. <b>/math&nbsp;\sqrt{3x-1}+(1+x)^2</b><br />For more code samples and instructions go to: <a href=\"http://www.mathjax.org/demos/\" target=\"_blank\">http://www.mathjax.org/demos</a>. Get the code by right-clicking on the formulas.<br />HINTS: type /math followed by a space and paste the code into the box.");
+define("L_HELP_CMD_37", "It allows posting of <i>MathJax Equations/Formulas</i> in chat.<br />Usage: Just paste the TeX hoặc MathML (original) codes! E.g. <b>/math&nbsp;\sqrt{3x-1}+(1+x)^2</b><br />For more code samples and instructions go to: <a href=\"http://www.mathjax.org/demos/\" target=\"_blank\">http://www.mathjax.org/demos</a>. Get the code by right-clicking on the formulas.<br />HINTS: type /math followed by a space and paste the code into the box.");
 define("L_HELP_CMD_VAR", "Đồng nghĩa (Phương án): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Phép xã giao chuyện tán gẫu");
 define("L_HELP_ETIQ_2", "Chỗ của Chúng ta muốn giữ những IT cộng đồng thân thiện và ngộ nghĩnh, vì thế xin dính chặt vào những hướng dẫn sau đây. Nếu bạn không quan sát những quy tắc này, một trong số những người điều tiết chuyện gẫu của chúng ta có thể khởi động bạn từ chuyện gẫu.<br /><br />Thank you,");
@@ -380,9 +380,9 @@ define("BOT_DISABLED_ERROR", "Bot đã được vô hiệu hóa từ admin!");
 // Dice v.1, v.2 and v.3 modes
 define("DICE_RESULTS", "cuộn xúc xắc , những kết quả:");
 define("DICE_WRONG", "Phải lựa chọn nhiều ô vuông khi quay xuống\\n(chọn 1 và ".MAX_ROLLS.").\\nĐúng kiểu /dice xoay vòng tất cả ".MAX_ROLLS." những viên xúc xắc.");
-define("DICE2_WRONG", "Thứ 2 nằm giữa 1".MAX_ROLLS.".\\nđể trống rỗng sử dụng ".MAX_ROLLS." những viên xúc xắc\\n(ví dụ /".MAX_DICES."d or /".MAX_DICES."d".MAX_ROLLS.").");
-define("DICE2_WRONG1", "Giá trị đầu tiên giữa số 1 và ".MAX_DICES.".\\n(ví dụ /".MAX_DICES."d or /".MAX_DICES."d".MAX_ROLLS.").");
-define("DICE3_WRONG", "Giá trị thứ 2 nằm giữa số 1 và ".MAX_ROLLS.".\\nLeave it empty to use all ".MAX_ROLLS." những viên xúc xắc\\n(ví dụ /d50 or /d100t".MAX_ROLLS.").");
+define("DICE2_WRONG", "Thứ 2 nằm giữa 1".MAX_ROLLS.".\\nđể trống rỗng sử dụng ".MAX_ROLLS." những viên xúc xắc\\n(ví dụ /".MAX_DICES."d hoặc /".MAX_DICES."d".MAX_ROLLS.").");
+define("DICE2_WRONG1", "Giá trị đầu tiên giữa số 1 và ".MAX_DICES.".\\n(ví dụ /".MAX_DICES."d hoặc /".MAX_DICES."d".MAX_ROLLS.").");
+define("DICE3_WRONG", "Giá trị thứ 2 nằm giữa số 1 và ".MAX_ROLLS.".\\nLeave it empty to use all ".MAX_ROLLS." những viên xúc xắc\\n(ví dụ /d50 hoặc /d100t".MAX_ROLLS.").");
 
 // Private Message Popup mod by Ciprian
 define("L_REG_POPUP", "mở popup lời nhắn");
@@ -446,7 +446,7 @@ define("L_PRO_COLOR", "màu của bạn");
 // Alert messages on errors for Color Input Box mod by Ciprian
 define("COL_ERROR_BOX_MODA", "Chỉ có người quản trị mới được sử dụng ".COLOR_CA." màu!\\n\\nMàu văn bản mà bạn đặt tới ".COLOR_CM."!\\n\\nXin chọn một màu khác.");
 define("COL_ERROR_BOX_USRA", "Chỉ có người quản trị mới được sử dụng ".COLOR_CA." màu!\\n\\nKhông thử tới sử dụng ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." hay ".COLOR_CM1.".\\n\\nGìn giữ những sức mạnh người sử dụng!\\n\\nMàu văn bản mà bạn đặt tới ".COLOR_CD."!\\n\\nXin chọn một màu khác.");
-define("COL_ERROR_BOX_USRM", "Bạn phải là mod để sử dụng".COLOR_CM." màu!\\n\\nKhông sử dụng thử ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1.".\\n\\nGìn giữ những sức mạnh người sử dụng!\\n\\nMàu văn bản mà bạn đặt tới ".COLOR_CD."!\\n\\nXin chọn một màu khác.");
+define("COL_ERROR_BOX_USRM", "Bạn phải là mod để sử dụng".COLOR_CM." màu!\\n\\nKhông sử dụng thử ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." hoặc ".COLOR_CM1.".\\n\\nGìn giữ những sức mạnh người sử dụng!\\n\\nMàu văn bản mà bạn đặt tới ".COLOR_CD."!\\n\\nXin chọn một màu khác.");
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "Chảo mừng bạn đến chat. Hãy lịch sự trong khi tán gẫu: <I>bạn sẽ xả giao tốt hơn trong cuộc sống</I>.");
