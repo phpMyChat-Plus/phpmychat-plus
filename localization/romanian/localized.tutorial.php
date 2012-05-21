@@ -336,7 +336,7 @@ Sunt mai multe moduri de a personaliza aspectul cmerei de Chat. Pentru a schimba
 	else
 	{
 		?>
-		<LI><B>Comanda Order</B> > îţi permite să afişezi mesajele noi în partea de sus sau în partea de jos a ecranului.<br />Scrie "/order" fără ghilimele.
+		<LI><B>Comanda Order</B> îţi permite să afişezi mesajele noi în partea de sus sau în partea de jos a ecranului.<br />Scrie "/order" fără ghilimele.
 <?php echo(L_CMD_ORDER != "" && L_CMD_ORDER != "L_CMD_ORDER" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_ORDER)."</span>") : ""); ?>
 		<P>
 		<?php

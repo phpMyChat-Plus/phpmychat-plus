@@ -153,6 +153,10 @@ function getip() {
     $realip = getenv( 'REMOTE_ADDR' );
   }
 }
+	if (strstr($realip, ',')) {
+		$ips = explode(',', $realip);
+		$realip = $ips[0];
+	}
 return $realip;
 }
 
