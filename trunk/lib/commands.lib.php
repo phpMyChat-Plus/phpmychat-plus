@@ -7,7 +7,7 @@ elseif (preg_match("/^\/(bot".(L_CMD_BOT != "" && L_CMD_BOT != "L_CMD_BOT" ? "|"
 {
 	include("./lib/commands/bot.cmd.php");
 }
-elseif ((preg_match("/^\/(buzz".(L_CMD_BUZZ != "" && L_CMD_BUZZ != "L_CMD_BUZZ" ? "|".str_replace(",","|",L_CMD_BUZZ) : "").")([[:space:]](.+))?$/i", $M, $Cmd) && !eregi("~",$Cmd[2])) || preg_match("/^\/(buzz".(L_CMD_BUZZ != "" && L_CMD_BUZZ != "L_CMD_BUZZ" ? "|".str_replace(",","|",L_CMD_BUZZ) : "").")[[:space:]]([^[:space:]]{1,30})([[:space:]](.+))?$/i", $M, $Cmd))
+elseif ((preg_match("/^\/(buzz".(L_CMD_BUZZ != "" && L_CMD_BUZZ != "L_CMD_BUZZ" ? "|".str_replace(",","|",L_CMD_BUZZ) : "").")([[:space:]](.+))?$/i", rtrim($M), $Cmd) && strpos($Cmd[2], "~") === false) || preg_match("/^\/(buzz".(L_CMD_BUZZ != "" && L_CMD_BUZZ != "L_CMD_BUZZ" ? "|".str_replace(",","|",L_CMD_BUZZ) : "").")[[:space:]]([^[:space:]]{1,30})([[:space:]](.+))?$/i", rtrim($M), $Cmd))
 {
 	include("./lib/commands/buzz.cmd.php");
 }
