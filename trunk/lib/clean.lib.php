@@ -62,7 +62,7 @@ if(C_BDAY_EMAIL)
 	if ($ChatB->num_rows() > 0)
 	{
 		include_once("lib/mail_validation.lib.php");
-		if (C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@"))
+		if (C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@") && $Sender_email != "your@email.com")
 		{
 			if (isset($MailFunctionOn))
 			{
