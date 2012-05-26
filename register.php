@@ -158,7 +158,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 			include("./lib/get_IP.lib.php");		// Set the $IP var
 
 			// Send e-mail
-			if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@"))
+			if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@") && $Sender_email != "your@email.com")
 			{
 				$pmc_password = gen_password();
 				$send = send_email(sprintf(L_EMAIL_VAL_3,"[".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]"), L_SET_2, L_EMAIL_VAL_PENDING_Done.$eol.L_EMAIL_VAL_PENDING_Done1, "", 0);
@@ -182,7 +182,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 			$av_done = 1;
 			// End of Upload avatar mod - by Ciprian
 			$DbLink->query("INSERT INTO ".C_REG_TBL." VALUES ('', '', '$U', '$Latin1', '$PWD_Hash', '$FIRSTNAME', '$LASTNAME', '$COUNTRY', '$WEBSITE', '$EMAIL', $showemail, 'user', '',".time().", '$IP', '$GENDER', '$allowpopup', '$PICTURE', '".str_replace("'","&#39;",$DESCRIPTION)."', '$FAVLINK', '$FAVLINK1', '$SLANG', '$COLORNAME', '$AVATARURL', '$SECRET_QUESTION', '$SECRET_ANSWER', '', '', '$USE_GRAV', '', '$BIRTHDAY', '$SHOW_BDAY', '$SHOW_AGE', '')");
-			if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@")) $Message = "";
+			if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@") && $Sender_email != "your@email.com") $Message = "";
 			else $Message = L_REG_9;
 // Patch for sending an email to the Administrator upon new user registration to the chat system.
 // by Bob Dickow, April 28, 2003
@@ -211,7 +211,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 	$Headers .= "Mime-Version: 1.0".$eol;
 	$Headers .= "Content-Type: text/plain; charset=${Charset}; format=flowed".$eol;
 	$Headers .= "Content-Transfer-Encoding: 8bit".$eol;
-	if (C_EMAIL_USER || (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@")))
+	if (C_EMAIL_USER || (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@") && $Sender_email != "your@email.com"))
 	{
    	if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@")) $emailMessage = L_EMAIL_VAL_31.$eol.$eol.sprintf(L_EMAIL_VAL_32,((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME),$Chat_URL).$eol.$eol;
     else $emailMessage = sprintf(L_EMAIL_VAL_4,((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME),$Chat_URL).$eol.$eol;
@@ -285,7 +285,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 		$emailMessage = stripslashes($emailMessage);
 		$Subject = sprintf(L_EMAIL_VAL_5,$U,"[".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]");
 		$Subject = quote_printable($Subject,$Charset);
-		if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@"))
+		if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@") && $Sender_email != "your@email.com")
 		{
 			@mail($Sender_Name." <".$Sender_email.">", $Subject, $emailMessage, $Headers);
 		}
@@ -296,7 +296,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
   	};
 // End of patch to send an email to the User after registration.
 
-	if (C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@"))
+	if (C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@") && $Sender_email != "your@email.com")
 	{
 		if 	($SECRET_QUESTION==1) $secret_questiona = "What make was your first car?";
 		if 	($SECRET_QUESTION==2) $secret_questiona = "What was your first pet name?";

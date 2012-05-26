@@ -125,7 +125,7 @@ function send_email($subject,$userString,$pswdString,$welcomeString,$reset)
 
 	$body =  $userString.": ".$U.$eol;
 	if ($reset) $body .= $pswdString.": ".$pmc_password.$eol.$eol;
-	elseif (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@")) $body .= $pswdString.$eol.$eol;
+	elseif (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@") && $Sender_email != "your@email.com") $body .= $pswdString.$eol.$eol;
 	$body .= $welcomeString.$eol;
 	$body .= $Mail_Greeting.$eol.$Sender_Name1.$eol.$Chat_URL;
 	$body = stripslashes($body);

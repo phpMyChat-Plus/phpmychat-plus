@@ -42,7 +42,7 @@ $URLQueryTop = "L=$L&pmc_username=".urlencode($pmc_username)."&pmc_password=$pmc
 	include('./admin/mail4admin.lib.php');
 	if (isset($MailFunctionOn))
 	{
-		$ReqVar = ((strstr($Sender_email,"@") && ($Sender_email != "")) ? "" : "&ReqVar=1");
+		$ReqVar = (strstr($Sender_email,"@") && $Sender_email != "" && $Sender_email != "your@email.com") ? "" : "&ReqVar=1";
 		?>
 		<TD WIDTH=1><IMG SRC="images/selColor.gif" WIDTH=1></TD>
 		<TD ALIGN=CENTER NOWRAP="NOWRAP" CLASS="thumbIndex">

@@ -261,7 +261,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 			@mail($FIRSTNAME ? $FIRSTNAME." <".$EMAIL.">" : $U." <".$EMAIL.">", $Subject, $emailMessage, $Headers);
 	   };
 
-		if (C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@"))
+		if (C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@") && $Sender_email != "your@email.com")
 		{
 		if 	($SECRET_QUESTION==1) $secret_questiona = "What make was your first car?";
 		if 	($SECRET_QUESTION==2) $secret_questiona = "What was your first pet name?";

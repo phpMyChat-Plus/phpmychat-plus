@@ -2153,13 +2153,13 @@ if (C_SHOW_OWNER)
 {
 ?>
 <br /><SPAN CLASS="ChatCopy" dir="LTR">
-Owner of this chat server -
+Owner of this chat server -<b>
 <?php
 include_once("admin/mail4admin.lib.php");
 #if (!eregi("Your name",C_ADMIN_NAME) && C_ADMIN_NAME != "") $Owner_name = C_ADMIN_NAME;
 if (stripos(C_ADMIN_NAME,"Your name") === false && C_ADMIN_NAME != "") $Owner_name = C_ADMIN_NAME;
 else $Owner_name = L_LURKING_5;
-if (strstr($Sender_email,"@") && ($Sender_email != ""))
+if (strstr($Sender_email,"@") && $Sender_email != "" && $Sender_email != "your@email.com")
 {
 	$Owner_email = $Sender_email;
 ?>
@@ -2168,7 +2168,7 @@ if (strstr($Sender_email,"@") && ($Sender_email != ""))
 }
 else echo($Owner_name);
 ?>
-</SPAN>
+</b></SPAN>
 <?php
 }
 ?>
