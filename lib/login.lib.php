@@ -7,7 +7,7 @@ else
 	ini_set('session.use_trans_sid',1);
 	ini_set('session.use_cookies',1);
 	session_start();
-	session_register("adminlogged");
+//	session_register("adminlogged");
 }
 
 // Added for Skin mod
