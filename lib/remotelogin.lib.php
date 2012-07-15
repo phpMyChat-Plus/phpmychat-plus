@@ -1353,6 +1353,15 @@ function send_headers($title, $icon)
 	if (!isset($FontName)) $FontName = "";
 	?>
 	<LINK REL="stylesheet" HREF="<?php echo($ChatPath); ?>skins/start_page.css.php?<?php echo("Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/<?php echo(str_replace("sr_CS","sr_RS",str_replace("es_AR","es_ES",L_LANG))); ?>/all.js#xfbml=1&appId=49226597181";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+	</script>
 	<SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
 	<!--
     <?php
@@ -1767,16 +1776,21 @@ if (C_REQUIRE_REGISTER)
 	?>
 	<TR>
 		<TD ALIGN="CENTER" CLASS="ChatCell">
-		<br /><form action="https://www.paypal.com/cgi-bin/webscr" method="post" name="support" target="_blank" onSubmit="return confirm('<?php echo(L_SUPP_WARN); ?>');">
+		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" name="support" target="_blank" onSubmit="return confirm('<?php echo(L_SUPP_WARN); ?>');">
 		<input type="hidden" name="cmd" value="_s-xclick">
 		<input type="hidden" name="hosted_button_id" value="<?php echo($ppbutton); ?>">
 		<input type="image" style="background-color: transparent;" src="<?php echo($donate); ?>" border="0" name="donate" alt="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" title="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" onMouseOver="window.status='<?php echo($ppalt); ?>'; return true;">
 		</form>
-	</TD>
+		</TD>
 	</TR>
 	<?php
 	}
 	?>
+<TR>
+	<TD ALIGN="CENTER">
+	<div class="fb-like" data-href="https://www.facebook.com/pages/phpMyChat-Plus/112950852062055" data-send="false" data-layout="button_count" data-show-faces="false" data-font="tahoma"></div>
+	</TD>
+</TR>
 </TABLE>
 </CENTER>
 </TD>

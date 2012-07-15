@@ -1613,6 +1613,14 @@ function layout($Err, $U, $R, $T, $C, $status, $RemMe)
 */
 
 ?>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/<?php echo(str_replace("sr_CS","sr_RS",str_replace("es_AR","es_ES",L_LANG))); ?>/all.js#xfbml=1&appId=49226597181";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <TABLE ALIGN="center" CELLPADDING=5 CLASS="ChatBody">
 <TR>
 <TD CLASS="ChatBody">
@@ -2178,7 +2186,7 @@ else echo($Owner_name);
 	if ($show_donation)
 	{
 	?>
-		<br /><br />
+		<br />
 		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" name="support" target="_blank" onSubmit="return confirm('<?php echo(L_SUPP_WARN); ?>');">
 		<input type="hidden" name="cmd" value="_s-xclick">
 		<input type="hidden" name="hosted_button_id" value="<?php echo($ppbutton); ?>">
@@ -2187,6 +2195,7 @@ else echo($Owner_name);
 	<?php
 	}
 	?>
+<div class="fb-like" data-href="https://www.facebook.com/pages/phpMyChat-Plus/112950852062055" data-send="true" data-layout="button_count" data-show-faces="false" data-font="tahoma"></div>
 </TD>
 </TR>
 </TABLE>
