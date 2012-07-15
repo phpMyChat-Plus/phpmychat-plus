@@ -588,6 +588,15 @@ if (!isset($FontName)) $FontName = "";
 <HEAD>
 <TITLE>Input frame</TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/<?php echo(str_replace("sr_CS","sr_RS",str_replace("es_AR","es_ES",L_LANG))); ?>/all.js#xfbml=1&appId=49226597181";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
 <SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript1.2">
 <!--
 	// Get the position for the help popup
@@ -816,9 +825,10 @@ if (($status == "m") || ($status == "t") || ($status == "a")) // use this to sho
 // -->
 </SCRIPT>
 	&nbsp;&nbsp;<span style="background-color:yellow; color:blue; font-weight:800">&nbsp;<?php echo($U); ?><span style="color:red"><?php if($superghost) echo("&nbsp;*&nbsp;".L_SUPER_GHOST."&nbsp;*"); elseif($ghost) echo("&nbsp;*&nbsp;".L_GHOST."&nbsp;*");?>&nbsp;</span></span>
+<div class="fb-like" data-href="https://www.facebook.com/pages/phpMyChat-Plus/112950852062055" data-send="false" data-layout="button_count" data-show-faces="false" data-font="tahoma"></div>
 </TD>
-</FORM>
 </TR>
+</FORM>
 </TABLE>
 
 <?php
