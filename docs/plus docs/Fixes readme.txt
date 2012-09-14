@@ -36,6 +36,7 @@ If your users encounter bootings for no reason, try to disable sounds in chat.
 
 Fixes History:
 04.05.2012 - 1.94-RC1:
+- fixed a CAPS issue when swearing filter was enabled, making all letters being posted lowercase; (functionality related)
 - added the Facebook Like Button - social plugin; (socialization)
 - added <sup> tags for the right numerals display in English (1st 2nd aso); (functionality related)
 - MathJax plugin configuration source url can now be set in configuration; (functionality extension)
