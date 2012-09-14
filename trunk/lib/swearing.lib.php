@@ -424,7 +424,7 @@ function checkwords($String, $TestOnly, $Charset)
 			}
 			else
 			{
-				$String = str_replace(addslashes($ToFind), $ReplaceString, mb_convert_case($String,MB_CASE_LOWER,$Charset));
+				$String = str_replace(addslashes($ToFind), $ReplaceString, $String);
 				$b++;
 			};
 		};
