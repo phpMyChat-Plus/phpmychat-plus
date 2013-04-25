@@ -33,9 +33,6 @@ mysql_query("
 ALTER TABLE bot_thatstack CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 ", $conn);
 mysql_query("
-ALTER TABLE bot_templates CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-", $conn);
-mysql_query("
 ALTER TABLE ".$t_ban_users." CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 ", $conn);
 mysql_query("
@@ -49,6 +46,9 @@ ALTER TABLE ".$t_messages." CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_c
 ", $conn);
 mysql_query("
 ALTER TABLE ".$t_reg_users." CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+", $conn);
+mysql_query("
+ALTER TABLE ".$t_stats." CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 ", $conn);
 mysql_query("
 ALTER TABLE ".$t_users." CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
