@@ -7,9 +7,9 @@
 # Last file update: 01.09.2011
 
 // Class strings localization
-define("L_DAY", "День");
-define("L_MONTH", "Місяць");
-define("L_YEAR", "Рік");
+define("L_DAYC", "День");
+define("L_MONTHC", "Місяць");
+define("L_YEARC", "Рік");
 define("L_TODAY", "Cьогодні");
 define("L_PREV", "Попередня");
 define("L_NEXT", "Наступна");

@@ -16,7 +16,7 @@ if (!function_exists('utf_conv'))
 };
 
 $hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : false;
-if(file_exists("lang/calendar.".($hl ? $hl : L_LANG).".php")) include_once("lang/calendar.".($hl ? $hl : L_LANG).".php");
+if(file_exists("lang/calendar.".($hl ? $hl : (defined("L_LANG") ? L_LANG : "")).".php")) include_once("lang/calendar.".($hl ? $hl : (defined("L_LANG") ? L_LANG : "")).".php");
 else
 {
 	if(!defined("L_LANG") || L_LANG == "L_LANG")
@@ -33,9 +33,9 @@ else
 
 // English US format and localization - default strings when the specified translation is not available
 if(!defined("RTL")) define("RTL", 0);
-if(!defined("L_DAY")) define("L_DAY", "Day");
-if(!defined("L_MONTH")) define("L_MONTH", "Month");
-if(!defined("L_YEAR")) define("L_YEAR", "Year");
+if(!defined("L_DAYC")) define("L_DAYC", "Day");
+if(!defined("L_MONTHC")) define("L_MONTHC", "Month");
+if(!defined("L_YEARC")) define("L_YEARC", "Year");
 if(!defined("L_TODAY")) define("L_TODAY", "Today");
 if(!defined("L_PREV")) define("L_PREV", "Previous");
 if(!defined("L_NEXT")) define("L_NEXT", "Next");
@@ -117,9 +117,9 @@ if(!defined("DATE_FORMAT")) define("DATE_FORMAT", str_replace("%","",str_replace
 	var l_date_after = "<?php echo(L_DATE_AFTER); ?>";
 	var l_date_between = "<?php echo(L_DATE_BETWEEN); ?>";
 	var l_use_ymd_drop = "<?php echo(L_USE_YMD_DROP); ?>";
-	var l_day = "<?php echo(L_DAY); ?>";
-	var l_month = "<?php echo(L_MONTH); ?>";
-	var l_year = "<?php echo(L_YEAR); ?>";
+	var l_day = "<?php echo(L_DAYC); ?>";
+	var l_month = "<?php echo(L_MONTHC); ?>";
+	var l_year = "<?php echo(L_YEARC); ?>";
 //	Long Month Names
 	var l_january = "<?php echo(defined('L_JAN') ? L_JAN : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1199145600')) : strftime('%B','1199145600'))); ?>";
 	var l_february = "<?php echo(defined('L_FEB') ? L_FEB : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1201824000')) : strftime('%B','1201824000'))); ?>";

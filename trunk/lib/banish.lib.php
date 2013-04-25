@@ -27,7 +27,7 @@ else // ban by both IP and username
 }
 $Nb = $DbLink->num_rows();
 // Nick of the user is banished from some rooms
-if ($Nb != "0")
+if ($Nb > 0)
 {
 	list($Old_IP,$BanishedFromRooms,$Reason) = $DbLink->next_record();
 	$DbLink->clean_results();
@@ -72,7 +72,7 @@ else
 	}
 	$Nb = $DbLink->num_rows();
 	// IP is banished from some rooms
-	if ($Nb != "0")
+	if ($Nb > 0)
 	{
 		list($BanishedFromRooms,$Until,$Reason) = $DbLink->next_record();
 		$DbLink->clean_results();

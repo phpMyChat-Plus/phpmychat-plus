@@ -37,6 +37,7 @@ if (preg_match("/[ |,|'|\\\\]/", $UU))
 else
 {
 	// Ensure the current user is moderator for the current room or admin.
+	$DbLink = new DB;
 	$DbLink->query("SELECT password,perms,rooms FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	if ($DbLink->num_rows() == 0)
 	{
@@ -106,7 +107,7 @@ else
 				{
 					$DelLink = new DB;
 					$DelLink->query("UPDATE ".C_USR_TBL." SET u_time='".time()."', status='k' WHERE username!='$U'");
-					$DelLink->close;
+					$DelLink->close();
 					if(C_EN_STATS)
 					{
 						$curtime = time();
@@ -136,5 +137,6 @@ else
 			};
 		};
 	};
+	$DbLink->close();
 };
 ?>

@@ -1,5 +1,5 @@
 <?php
-// File : french/localized.chat.php - plus version (09.01.2012 - rev.46 - missing 45)
+// File : french/localized.chat.php - plus version (03.02.2013 - rev.47 - missing 45)
 // Translation for Plus version by Pierre Liget <sourceforge@pliget.freesurf.fr> 10.12.2007
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -52,6 +52,8 @@ define("L_MIN", "minute");
 define("L_MINS", "minutes");
 define("L_HOUR", "heure");
 define("L_HOURS", "heures");
+define("L_DAY", "jour");
+define("L_DAYS", "jours");
 
 // registration stuff:
 define("L_REG_1", "Mot de passe");

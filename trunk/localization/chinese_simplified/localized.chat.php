@@ -51,6 +51,8 @@ define("L_MIN", "分");
 define("L_MINS", "分钟");
 define("L_HOUR", "时");
 define("L_HOURS", "小时");
+define("L_DAY", "天");
+define("L_DAYS", "天");
 
 // registration stuff:
 define("L_REG_1", "密码");
@@ -421,7 +423,7 @@ define("L_PRIV_WISP", "(耳语)");
 
 // Color Input Box mod by Ciprian
 define("L_ENABLED", "启用");
-define("L_DISABLED", "禁用");
+define("L_DISABLED", "已禁用");
 define("L_COLOR_HEAD_SETTINGS", "在此服务器上的当前设置：");
 define("L_COLOR_HEAD_SETTINGSa", "预设的色彩：");
 define("L_COLOR_HEAD_SETTINGSb", "预设的色彩：");

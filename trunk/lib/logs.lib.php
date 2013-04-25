@@ -25,34 +25,40 @@ if (stristr(PHP_OS,'win')) {
 
 //Full logs
 $done = 0;
+/*
 $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
 @mysql_query("SET CHARACTER SET utf8");
 @mysql_query("SET NAMES 'utf8'");
 mysql_select_db(C_DB_NAME);
+*/
 
 $CondForQuery = "(m_time < ".(time() - C_MSG_DEL*60*60)." AND username != '".C_QUOTE_NAME."' AND username != 'SYS welcome' AND pm_read NOT LIKE 'New%' AND !(username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"%'))";
-$sql = "SELECT * FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC";
-$query = mysql_query($sql) or die("Cannot query the database.<br />" . mysql_error());
+#$sql = "SELECT * FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC";
+#$query = mysql_query($sql) or die("Cannot query the database.<br />" . mysql_error());
+$DbLink = new DB;
+$DbLink->query("SELECT type,room,username,room_from,m_time,address,message FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC");
+
 // Collect and store new messages
 $Messages = Array();
 $i = 1;
-while($result = mysql_fetch_array($query))
+#while($result = mysql_fetch_array($query))
+while(list($type,$room,$username,$room_from,$m_time,$address,$message) = $DbLink->next_record())
 {
-$type = stripslashes($result["type"]);
+$type = stripslashes($type);
 if ($type) $type = '<?php echo(L_SET_10); ?>'; else $type = '<?php echo(L_SET_11); ?>';
-$room = htmlspecialchars(stripslashes($result["room"]));
+$room = htmlspecialchars(stripslashes($room));
 $room = $room." (".$type.")";
-$username = htmlspecialchars(stripslashes($result["username"]));
-$roomfrom = htmlspecialchars(stripslashes($result["room_from"]));
+$username = htmlspecialchars(stripslashes($username));
+$roomfrom = htmlspecialchars(stripslashes($room_from));
 if ($roomfrom != "" && $roomfrom != $room) $room = $roomfrom."><br />".$room;
-$m_time = stripslashes($result["m_time"]);
+$m_time = stripslashes($m_time);
 $time_posted = date('H:i:s (d)', $m_time + C_TMZ_OFFSET*60*60);
-$address = htmlspecialchars(stripslashes($result["address"]));
+$address = htmlspecialchars(stripslashes($address));
 if ($address != "" && $address != " *" && $username != "SYS welcome" && $username != "SYS topic" && $username != "SYS topic reset" && substr($username,0,8) != "SYS dice" && $username != "SYS image" && $username != "SYS video" && $username != "SYS utube" && $username != "SYS math" && $username != "SYS room" && $username != $address) $toaddress = " to <b>".$address."</b>";
 $address = "<b>".$address."</b>";
 if ($username == "SYS welcome") $username = $address;
 if ($room == "*" || ($username == "SYS room" && $address == "*") || $username == "SYS announce") $room = '<?php echo(L_ROOM_ALL); ?>';
-$message = stripslashes($result["message"]);
+$message = stripslashes($message);
 $message = str_ireplace("<!-- UPDTUSRS //-->","",$message);
 $message = str_ireplace("...BUZZER...","<img src=\"./../../../images/buzz.gif\" alt=\"L_HELP_BUZZ1\" title=\"L_HELP_BUZZ1\">",$message);
 $message = str_ireplace("SRC=images/","src=./../../../images/",$message);
@@ -169,11 +175,14 @@ $i++;
 if ($i > 1)
 {
 $today = date('d-m-y H:i:s', time() + C_TMZ_OFFSET*60*60);
-$lastsql = "SELECT * FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC LIMIT 1";
-$lastquery = mysql_query($lastsql) or die("Cannot query the database.<br />" . mysql_error());
-while($lastresult = mysql_fetch_array($lastquery))
+#$lastsql = "SELECT * FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC LIMIT 1";
+#$lastquery = mysql_query($lastsql) or die("Cannot query the database.<br />" . mysql_error());
+$DbLink->query("SELECT m_time FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC LIMIT 1");
+
+#while($lastresult = mysql_fetch_array($lastquery))
+while(list($lastresult) = $DbLink->next_record())
 {
- $lastm_time = stripslashes($lastresult["m_time"]);
+	$lastm_time = stripslashes($lastresult);
 }
 $mess_time = $lastm_time + C_TMZ_OFFSET*60*60;
 $year = date("Y", $mess_time);
@@ -261,18 +270,21 @@ $i = 0;
 //Public logs
 $doneu = 0;
 $CondForQueryu	= "(m_time<".(time() - C_MSG_DEL*60*60)." AND (address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username = 'SYS video' OR username = 'SYS utube' OR username = 'SYS math' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3'))))";
-$sqlu = "SELECT * FROM ".C_MSG_TBL." WHERE ".$CondForQueryu." ORDER BY m_time DESC";
-$queryu = mysql_query($sqlu) or die("Cannot query the database.<br />" . mysql_error());
+#$sqlu = "SELECT * FROM ".C_MSG_TBL." WHERE ".$CondForQueryu." ORDER BY m_time DESC";
+#$queryu = mysql_query($sqlu) or die("Cannot query the database.<br />" . mysql_error());
+$DbLink->query("SELECT room,username,m_time,address,message FROM ".C_MSG_TBL." WHERE ".$CondForQueryu." ORDER BY m_time DESC");
+
 // Collect and store new messages
 $Messagesu = Array();
 $iu = 1;
-while($resultu = mysql_fetch_array($queryu))
+#while($resultu = mysql_fetch_array($queryu))
+while(list($roomu,$usernameu,$m_timeu,$addressu,$messageu) = $DbLink->next_record())
 {
-$m_timeu = stripslashes($resultu["m_time"]);
+$m_timeu = stripslashes($m_timeu);
 $time_postedu = date('H:i:s (d)', $m_timeu + C_TMZ_OFFSET*60*60);
-$roomu = htmlspecialchars(stripslashes($resultu["room"]));
-$usernameu = htmlspecialchars(stripslashes($resultu["username"]));
-$addressu = htmlspecialchars(stripslashes($resultu["address"]));
+$roomu = htmlspecialchars(stripslashes($roomu));
+$usernameu = htmlspecialchars(stripslashes($usernameu));
+$addressu = htmlspecialchars(stripslashes($addressu));
 // Restricted rooms mod by Ciprian
 if (is_array($DefaultDispChatRooms) && in_array($roomu." [R]",$DefaultDispChatRooms))
 {
@@ -284,7 +296,7 @@ if ($addressu != "" && $addressu != " *" && $usernameu != "SYS welcome" && $user
 $addressu = "<b>".$addressu."</b>";
 if ($usernameu == "SYS welcome") $usernameu = $addressu;
 if ($roomu == "*" || ($usernameu == "SYS room" && $addressu == "*") || $usernameu == "SYS announce") $roomu = '<?php echo(L_ROOM_ALL); ?>';
-$messageu = stripslashes($resultu["message"]);
+$messageu = stripslashes($messageu);
 $messageu = str_ireplace("<!-- UPDTUSRS //-->","",$messageu);
 $messageu = str_ireplace("...BUZZER...","<img src=\"./../../../images/buzz.gif\" alt=\"L_HELP_BUZZ1\" title=\"L_HELP_BUZZ1\">",$messageu);
 $messageu = str_ireplace("SRC=images/","src=./../../../images/",$messageu);
@@ -401,11 +413,14 @@ $iu++;
 if ($iu > 1)
 {
 $todayu = date('d-m-y H:i:s', time() + C_TMZ_OFFSET*60*60);
-$lastsqlu = "SELECT * FROM ".C_MSG_TBL." WHERE ".$CondForQueryu." ORDER BY m_time DESC LIMIT 1";
-$lastqueryu = mysql_query($lastsqlu) or die("Cannot query the database.<br />" . mysql_error());
-while($lastresultu = mysql_fetch_array($lastqueryu))
+#$lastsqlu = "SELECT * FROM ".C_MSG_TBL." WHERE ".$CondForQueryu." ORDER BY m_time DESC LIMIT 1";
+#$lastqueryu = mysql_query($lastsqlu) or die("Cannot query the database.<br />" . mysql_error());
+$DbLink->query("SELECT m_time FROM ".C_MSG_TBL." WHERE ".$CondForQueryu." ORDER BY m_time DESC LIMIT 1");
+
+#while($lastresultu = mysql_fetch_array($lastqueryu))
+while(list($lastresultu) = $DbLink->next_record())
 {
- $lastm_timeu = stripslashes($lastresultu["m_time"]);
+	$lastm_timeu = stripslashes($lastresultu);
 }
 $mess_timeu = $lastm_timeu + C_TMZ_OFFSET*60*60;
 $yearu = date("Y", $mess_timeu);
@@ -494,6 +509,9 @@ if ($done == 1 || $doneu == 1)
 {
 // Delete the exported messages as well as the unread off-line pms older than 1 month
 $delsql = "DELETE FROM ".C_MSG_TBL." WHERE ((m_time < ".(time() - C_MSG_DEL * 60 * 60)." AND pm_read NOT LIKE 'New%') OR (m_time < ".(time() - ((C_MSG_DEL + (C_PM_KEEP_DAYS * 24)) * 60 * 60)).")) AND !(username = 'SYS enter' AND message LIKE '%\"".C_BOT_NAME."\"%')";
-$delquery = mysql_query($delsql) or die("Cannot query the database.<br />" . mysql_error());
+#$delquery = mysql_query($delsql) or die("Cannot query the database.<br />" . mysql_error());
+$DbLink->query($delsql);
 }
+#$DbLink->clean_results();
+$DbLink->close();
 ?>

@@ -143,12 +143,12 @@ function timedst_eu()
 	return timedsteu;
 };
 
-// Calculates the US Daylight savings from 2009 to 2015
+// Calculates the US Daylight savings from 2009 to 2018
 function timedst_usa()
 {
 	timedstusa = 0;
 	timenow = <?php echo(time()); ?>;
-	if ((timenow > 1236477600 && timenow < 1257040799) || (timenow > 1268532000 && timenow < 1289095199) || (timenow > 1299981600 && timenow < 1320544799) || (timenow > 1331431200 && timenow < 1351994399) || (timenow > 1362880800 && timenow < 1383443999) || (timenow > 1394330400 && timenow < 1414893599) || (timenow > 1425780000 && timenow < 1446343199)) timedstusa = 1;
+	if ((timenow > 1236477600 && timenow < 1257040799) || (timenow > 1268532000 && timenow < 1289095199) || (timenow > 1299981600 && timenow < 1320544799) || (timenow > 1331431200 && timenow < 1351994399) || (timenow > 1362880800 && timenow < 1383443999) || (timenow > 1394330400 && timenow < 1414893599) || (timenow > 1425780000 && timenow < 1446343199) || (timenow > 1457834400 && timenow < 1478397599) || (timenow > 1489284000 && timenow < 1509847199) || (timenow > 1520733600 && timenow < 1541296799)) timedstusa = 1;
 	return timedstusa;
 };
 

@@ -134,14 +134,16 @@ if(C_ALLOW_MATH && C_SRC_MATH != "") echo("<script type=\"text/javascript\" src=
 <BODY>
 <CENTER>
 <?php
-if (${sheet} == 5 && file_exists("./localization/".$L."/localized.admin".$sheet.".php")) require("./localization/".$L."/localized.admin".$sheet.".php");
-else require("./admin/admin${sheet}.php");
+//if (${sheet} == 5 && file_exists("./localization/".$L."/localized.admin".$sheet.".php")) require("./localization/".$L."/localized.admin".$sheet.".php");
+//else require("./admin/admin${sheet}.php");
+require("./admin/admin${sheet}.php");
 ?>
 </CENTER>
 </BODY>
 
 </HTML>
 <?php
+$DbLink->clean_results();
 $DbLink->close();
 exit();
 ?>

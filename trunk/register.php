@@ -87,6 +87,9 @@ if (get_magic_quotes_gpc()) {
 }
 
 $DbLink = new DB;
+$field_errorU = false;
+$field_errorSQ = false;
+$field_errorSA = false;
 
 // Check for valid entries
 if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
@@ -100,10 +103,13 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 	else if (preg_match("/[ |,|'|\\\\]/", $U))
 	{
 		$Error = L_ERR_USR_16a;
+		$field_errorU = true;
+		if (preg_match("/['|\\\\]/", $SECRET_ANSWER)) $field_errorSA = true;
 	}
 	else if(C_NO_SWEAR && checkwords($U, true, $Charset))
 	{
 		$Error = L_ERR_USR_18;
+		$field_errorU = true;
 	}
 	else if (!C_EMAIL_PASWD && $pmc_password == "")
 	{
@@ -139,6 +145,13 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 	else if ($SECRET_QUESTION == "" || $SECRET_QUESTION == 0 || $SECRET_ANSWER == "")
 	{
 		$Error = L_ERR_PASS_5;
+		if ($SECRET_QUESTION == "" || $SECRET_QUESTION == 0) $field_errorSQ = true;
+		if ($SECRET_ANSWER == "") $field_errorSA = true;
+	}
+	else if (preg_match("/['|\\\\]/", $SECRET_ANSWER))
+	{
+		$Error = L_ERR_USR_16a;
+		$field_errorSA = true;
 	}
 	else
 	{
@@ -148,6 +161,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 		if ($rows != 0)
 		{
 			$Error = L_ERR_USR_9;
+			$field_errorU = true;
 		}
 		else
 		{
@@ -181,7 +195,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 			if (stristr($avatar,C_AVA_RELPATH . "uploaded/") && @rename($avatar, C_AVA_RELPATH . "uploaded/avatar_".$av_user_name.".gif")) $AVATARURL = C_AVA_RELPATH . "uploaded/avatar_".$av_user_name.".gif";
 			$av_done = 1;
 			// End of Upload avatar mod - by Ciprian
-			$DbLink->query("INSERT INTO ".C_REG_TBL." VALUES ('', '', '$U', '$Latin1', '$PWD_Hash', '$FIRSTNAME', '$LASTNAME', '$COUNTRY', '$WEBSITE', '$EMAIL', $showemail, 'user', '',".time().", '$IP', '$GENDER', '$allowpopup', '$PICTURE', '".str_replace("'","&#39;",$DESCRIPTION)."', '$FAVLINK', '$FAVLINK1', '$SLANG', '$COLORNAME', '$AVATARURL', '$SECRET_QUESTION', '$SECRET_ANSWER', '', '', '$USE_GRAV', '', '$BIRTHDAY', '$SHOW_BDAY', '$SHOW_AGE', '')");
+			$DbLink->query("INSERT INTO ".C_REG_TBL." VALUES ('', '', '$U', '$Latin1', '$PWD_Hash', '$FIRSTNAME', '$LASTNAME', '$COUNTRY', '$WEBSITE', '$EMAIL', $showemail, 'user', '',".time().", '$IP', '$GENDER', '$allowpopup', '$PICTURE', '".str_replace("'","&#39;",$DESCRIPTION)."', '$FAVLINK', '$FAVLINK1', '$SLANG', '$COLORNAME', '$AVATARURL', '$SECRET_QUESTION', '".htmlspecialchars($SECRET_ANSWER, ENT_NOQUOTES, 'UTF-8')."', '', '', '$USE_GRAV', '', '$BIRTHDAY', '$SHOW_BDAY', '$SHOW_AGE', '')");
 			if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@") && $Sender_email != "your@email.com") $Message = "";
 			else $Message = L_REG_9;
 // Patch for sending an email to the Administrator upon new user registration to the chat system.
@@ -539,7 +553,7 @@ if(isset($Error))
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_SET_2); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="U" SIZE=15 MAXLENGTH=15 VALUE="<?php if (isset($U)) echo(htmlspecialchars(stripslashes($U))); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
+				<INPUT TYPE="text" NAME="U" SIZE=15 MAXLENGTH=15<?php echo($field_errorU ? " style=\"background-color: #FF0000;\"" : ""); ?> VALUE="<?php if (isset($U)) echo(htmlspecialchars(stripslashes($U))); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
 			</TD>
 		</TR>
 		<?php
@@ -564,8 +578,8 @@ if(isset($Error))
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PASS_1); ?> :</TD>
 			<TD VALIGN="TOP">
-				<SELECT name="SECRET_QUESTION">
-				<OPTION value="0" <?php if ($SECRET_QUESTION==0 || $SECRET_QUESTION=="") echo ("selected=\"selected\"")?>><?php echo(L_PASS_12)?></OPTION>
+				<SELECT name="SECRET_QUESTION"<?php echo($field_errorSQ ? " style=\"background-color: #FF0000;\"" : ""); ?>>
+				<OPTION value="0"<?php echo($field_errorSQ ? " style=\"background-color: #FF0000;\"" : ""); ?> <?php if ($SECRET_QUESTION==0 || $SECRET_QUESTION=="") echo ("selected=\"selected\"")?>><?php echo(L_PASS_12)?></OPTION>
 				<OPTION value="1" <?php if ($SECRET_QUESTION==1) echo ("selected=\"selected\"")?>><?php echo(L_PASS_2)?></OPTION>
 				<OPTION value="2" <?php if ($SECRET_QUESTION==2) echo ("selected=\"selected\"")?>><?php echo(L_PASS_3)?></OPTION>
 				<OPTION value="3" <?php if ($SECRET_QUESTION==3) echo ("selected=\"selected\"")?>><?php echo(L_PASS_4)?></OPTION>
@@ -576,7 +590,7 @@ if(isset($Error))
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PASS_6); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="SECRET_ANSWER" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($SECRET_ANSWER)) echo(stripslashes($SECRET_ANSWER)); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
+				<INPUT TYPE="text" NAME="SECRET_ANSWER" SIZE=25 MAXLENGTH=15<?php echo($field_errorSA ? " style=\"background-color: #FF0000;\"" : ""); ?> VALUE="<?php if (isset($SECRET_ANSWER)) echo(stripslashes(htmlspecialchars($SECRET_ANSWER, ENT_NOQUOTES, 'UTF-8'))); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
 			</TD>
 		</TR>
 <?php

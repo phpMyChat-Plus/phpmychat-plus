@@ -9,9 +9,9 @@
 define("RTL", 1);
 
 // Class strings localization
-define("L_DAY", "يوم");
-define("L_MONTH", "شهر");
-define("L_YEAR", "عام");
+define("L_DAYC", "يوم");
+define("L_MONTHC", "شهر");
+define("L_YEARC", "عام");
 define("L_TODAY", "اليوم");
 define("L_PREV", "السابق");
 define("L_NEXT", "التالي");

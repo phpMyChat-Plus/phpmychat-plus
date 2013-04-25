@@ -53,6 +53,8 @@ define("L_MIN", "分");
 define("L_MINS", "分");
 define("L_HOUR", "時間");
 define("L_HOURS", "時間");
+define("L_DAY", "日");
+define("L_DAYS", "日");
 
 // registration stuff:
 define("L_REG_1", "パスワード");

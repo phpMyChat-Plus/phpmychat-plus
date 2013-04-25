@@ -85,8 +85,8 @@ if (d) d.style.display='none';
 <!--
 body {
 position: inherit;
-margin: 0;
-padding: 0;
+margin: 0px;
+padding: 0px;
 width: 90%; /* precision for Opera */
 margin-left: 5px;
 margin-right: 5px;
@@ -94,14 +94,14 @@ font: 80%;
 }
 dl, dt, dd, ul, li {
 text-align: center;
-margin: 0;
-padding: 0;
+margin: 0px;
+padding: 0px;
 list-style-type: none;
 z-index: 100;
 }
 #menu {
 position: absolute; /* Menu position that can be changed at will */
-bottom: 0;
+bottom: 0px;
 z-index: 100;
 margin-left: 5px;
 margin-right: 5px;
@@ -117,9 +117,9 @@ z-index: 100;
 cursor: pointer;
 text-align: center;
 font-weight: bold;
-background: <?php echo($COLOR_BK); ?>;
+background: <?php echo($COLOR_BK && $COLOR_BK != "COLOR_BK" ? $COLOR_BK : "#6A5ACD"); ?>;
 border: 1px solid gray;
-margin: 0;
+margin: 0px;
 }
 #menu dl.nav{
 //float: right;
@@ -132,7 +132,7 @@ border: 1px solid gray;
 }
 #menu li {
 text-align: center;
-background: <?php echo($COLOR_TB); ?>;
+background: <?php echo($COLOR_TB && $COLOR_TB != "COLOR_TB" ? $COLOR_TB : "#CCCCFF"); ?>;
 position:static; /*safer*/
 }
 #menu li a, #menu dt a {
@@ -141,12 +141,12 @@ color: <?php echo(COLOR_CD); ?>;
 text-decoration: none;
 display: block;
 height: 100%;
-border: 0 none;
+border: 0px none;
 position:static; /*safer*/
 }
 #menu li a:hover, #menu li a:focus, #menu dt a:hover, #menu dt a:focus {
 //background: #eee;
-background: <?php echo($COLOR_LINK); ?>;
+background: <?php echo($COLOR_LINK && $COLOR_LINK != "COLOR_LINK" ? $COLOR_LINK : "#FFFFFF"); ?>;
 position:static; /*safer*/
 }
 #site {
@@ -156,7 +156,7 @@ top : 70px;
 left : 10px;
 color: <?php echo(COLOR_CD); ?>;
 //background-color: #ddd;
-background-color: <?php echo($COLOR_BK); ?>;
+background-color: <?php echo($COLOR_BK && $COLOR_BK != "COLOR_BK" ? $COLOR_BK : "#6A5ACD"); ?>;
 padding: 5px;
 border: 1px solid gray;
 }
@@ -285,7 +285,7 @@ $DbLink = new DB;
 
 if (C_ENABLE_PM && C_PRIV_POPUP && !isset($allowpopupu))
 {
-	$DbLink = new DB;
+#	$DbLink = new DB;
 	$DbLink->query("SELECT allowpopup FROM ".C_REG_TBL." WHERE username = '$U'");
 	if($DbLink->num_rows() != 0) list($allowpopupu) = $DbLink->next_record();
 	else $allowpopupu = 0;
@@ -810,10 +810,9 @@ if($DbLink->num_rows() > 0)
 		}
 		$OthersUsers->clean_results();
 	}
+	$OthersUsers->close();
 }
 $DbLink->clean_results();
-$DbLink->close();
-
 
 // Display all rest default rooms
 for($k = 0; $k < count($DefaultChatRooms); $k++)
@@ -858,21 +857,27 @@ if (C_CHAT_LOGS && (C_SHOW_LOGS_USR || $statusu == "a" || $statusu == "t"))
 <?php
 if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $statusu == "a" || $statusu == "t"))
 {
+/*
 	$handler = @mysql_connect(C_DB_HOST,C_DB_USER,C_DB_PASS);
 	@@mysql_query("SET CHARACTER SET utf8");
 	@mysql_query("SET NAMES 'utf8'");
 	@mysql_select_db(C_DB_NAME,$handler);
-	$timeout = "15";
-	$closetime = $time-($timeout);
-	// Ghost Control mod by Ciprian
-	$Hide1 = "";
-	if (C_HIDE_ADMINS) $Hide1 .= ($Hide1 == "") ? " WHERE status != 'a' AND status != 't'" : " AND status != 'a' AND status != 't'";
-	if (C_HIDE_MODERS) $Hide1 .= ($Hide1 == "") ? " WHERE status != 'm'" : " AND status != 'm'";
-	if (C_SPECIAL_GHOSTS != "") $Hide1 .= ($Hide1 == "") ?  " WHERE username != ".C_SPECIAL_GHOSTS."" : " AND username != ".C_SPECIAL_GHOSTS."";
 	$delete = @mysql_query("DELETE FROM ".C_LRK_TBL." WHERE time<'$closetime'",$handler);
 	$result = @mysql_query("SELECT DISTINCT ip,browser,username FROM ".C_LRK_TBL.$Hide1."",$handler);
 	$online_users = @mysql_numrows($result);
 	@mysql_close();
+*/
+	$timeout = 15;
+	$closetime = time() - $timeout;
+	// Ghost Control mod by Ciprian
+	$Hide1 = "";
+	$online_users = 0;
+	if (C_HIDE_ADMINS) $Hide1 .= ($Hide1 == "") ? " WHERE status != 'a' AND status != 't'" : " AND status != 'a' AND status != 't'";
+	if (C_HIDE_MODERS) $Hide1 .= ($Hide1 == "") ? " WHERE status != 'm'" : " AND status != 'm'";
+	if (C_SPECIAL_GHOSTS != "") $Hide1 .= ($Hide1 == "") ?  " WHERE username != ".C_SPECIAL_GHOSTS."" : " AND username != ".C_SPECIAL_GHOSTS."";
+	$DbLink->query("DELETE FROM ".C_LRK_TBL." WHERE time<'".$closetime."'");
+	$DbLink->query("SELECT DISTINCT ip,browser,username FROM ".C_LRK_TBL.$Hide1);
+	$online_users = $DbLink->num_rows();
 	$lurklink = "<li><a href=\"lurking.php?L=".$L."&D=".$D."\" CLASS=\"ChatLink\" TARGET=\"_blank\" onMouseOver=\"window.status='".L_LURKING_1.".'; return true;\" title='".L_LURKING_2."'>";
 	echo($lurklink.$online_users." ".($online_users != 1 ? L_LURKERS : L_LURKER)."</a></li>");
 	$CleanUsrTbl = 1;
@@ -930,6 +935,7 @@ if (C_ENABLE_PM && isset($PWD_Hash))
 	<?php
 	}
 };
+$DbLink->close();
 ?>
 				<li><a href="<?php echo($ChatPath); ?>tutorial_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>" onClick="window.parent.tutorial_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_TUTORIAL); ?>.'; return true;" title="<?php echo(L_TUTORIAL); ?>"><?php echo(L_TUTORIAL); ?></a></li>
 				<li><a href="<?php echo($ChatPath); ?>help_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>" onClick="window.parent.help_popup(); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_HLP); ?>.'; return true" onClick="window.parent.frames['input'].forms['MsgForm'].elements['M'].focus();" title="<?php echo(L_HLP); ?>"><?php echo(L_HLP); ?></a></li>

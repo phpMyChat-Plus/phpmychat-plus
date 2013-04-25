@@ -7,9 +7,9 @@
 # Last file update: 20.10.2011
 
 // Class strings localization
-define("L_DAY", "Ngày");
-define("L_MONTH", "Tháng");
-define("L_YEAR", "Năm");
+define("L_DAYC", "Ngày");
+define("L_MONTHC", "Tháng");
+define("L_YEARC", "Năm");
 define("L_TODAY", "Hôm nay");
 define("L_PREV", "Trước");
 define("L_NEXT", "Tiếp theo");

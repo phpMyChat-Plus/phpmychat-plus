@@ -649,6 +649,7 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 				};
 				unset($roomTab);
 			};
+			$UpdLink->close();
 			$DbLink->clean_results();
 
 			// Update the current user status for the room to be created in registered users table
@@ -736,6 +737,7 @@ if(!isset($Error) && (isset($R2) && $R2 != ""))
 				};
 				unset($roomTab);
 			};
+			$UpdLink->close();
 			$DbLink->clean_results();
 
 			// Update the current user status for the room to be created in registered users table
@@ -953,12 +955,13 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	$DbLink->query("SELECT m_time FROM ".C_MSG_TBL." WHERE username='SYS inviteTo' AND address='$U' AND room='$R'");
 	if($DbLink->num_rows() != 0)
 	{
-		$DelLink = new DB;
+#		$DelLink = new DB;
 		while(list($sent_time) = $DbLink->next_record())
 		{
-			$DelLink->query("DELETE FROM ".C_MSG_TBL." WHERE m_time='$sent_time' AND (username='SYS inviteFrom' OR (username='SYS inviteTo' AND address='$U'))");
+			$DbLink->query("DELETE FROM ".C_MSG_TBL." WHERE m_time='$sent_time' AND (username='SYS inviteFrom' OR (username='SYS inviteTo' AND address='$U'))");
 		};
-		$DelLink->close;
+#		$DelLink->close();
+#		$DbLink->close();
 	};
 	?>
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
@@ -1396,8 +1399,8 @@ function send_headers($title, $icon)
 	?>
 	<!--
 	The lines below are usefull for debugging purpose, please do not remove them!
-	Release: phpMyChat-Plus 1.94-b8
-	© 2005-2012 Ciprian Murariu (ciprianmp@yahoo.com)
+	Release: phpMyChat-Plus 1.94-RC2
+	© 2005-2013 Ciprian Murariu (ciprianmp@yahoo.com)
 	Based on phpMyChat 0.14.6-dev (also called 0.15.0)
 	© 2000-2005 The phpHeaven Team (http://www.phpheaven.net/)
 	-->
@@ -1675,21 +1678,28 @@ if($DbLink->query("SELECT DISTINCT u.username FROM ".C_USR_TBL." u, ".C_MSG_TBL.
 }
 if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $status == "a" || $status == "t"))
 {
+/*
 	$handler = @mysql_connect(C_DB_HOST,C_DB_USER,C_DB_PASS);
 	@mysql_query("SET CHARACTER SET utf8");
 	@mysql_query("SET NAMES 'utf8'");
 	@mysql_select_db(C_DB_NAME,$handler);
-	$timeout = "15";
-	$closetime = $time-($timeout);
-	// Ghost Control mod by Ciprian
-	$Hide1 = "";
-	if (C_HIDE_ADMINS) $Hide1 .= ($Hide1 == "") ? " WHERE status != 'a' AND status != 't'" : " AND status != 'a' AND status != 't'";
-	if (C_HIDE_MODERS) $Hide1 .= ($Hide1 == "") ? " WHERE status != 'm'" : " AND status != 'm'";
-	if (C_SPECIAL_GHOSTS != "") $Hide1 .= ($Hide1 == "") ?  " WHERE username != ".C_SPECIAL_GHOSTS."" : " AND username != ".C_SPECIAL_GHOSTS."";
 	$delete = @mysql_query("DELETE FROM ".C_LRK_TBL." WHERE time<'$closetime'",$handler);
 	$result = @mysql_query("SELECT DISTINCT ip,browser,username FROM ".C_LRK_TBL.$Hide1."",$handler);
 	$online_users = @mysql_numrows($result);
 	@mysql_close();
+*/
+	$timeout = "15";
+#	$closetime = time() + C_TMZ_OFFSET*60*60 - $timeout;
+	$closetime = time() - $timeout;
+	// Ghost Control mod by Ciprian
+	$Hide1 = "";
+	$online_users = 0;
+	if (C_HIDE_ADMINS) $Hide1 .= ($Hide1 == "") ? " WHERE status != 'a' AND status != 't'" : " AND status != 'a' AND status != 't'";
+	if (C_HIDE_MODERS) $Hide1 .= ($Hide1 == "") ? " WHERE status != 'm'" : " AND status != 'm'";
+	if (C_SPECIAL_GHOSTS != "") $Hide1 .= ($Hide1 == "") ?  " WHERE username != ".C_SPECIAL_GHOSTS."" : " AND username != ".C_SPECIAL_GHOSTS."";
+	$DbLink->query("DELETE FROM ".C_LRK_TBL." WHERE time<'".$closetime."'");
+	$DbLink->query("SELECT DISTINCT ip,browser,username FROM ".C_LRK_TBL.$Hide1);
+	$online_users = $DbLink->num_rows();
 	$lurklink = " <A HREF=\"lurking.php?L=$L&D=10\" CLASS=\"ChatLink\" TARGET=\"_blank\" onMouseOver=\"window.status='".L_LURKING_1.".'; return true;\" title='".L_LURKING_1."'>";
 	echo("<br />".L_CUR_1." ".($online_users != 1 ? L_CUR_1a.$lurklink.$online_users." ".L_LURKERS."</A>." : L_CUR_1b.$lurklink.$online_users." ".L_LURKER."</A>."));
 }
@@ -2181,12 +2191,12 @@ else echo($Owner_name);
 }
 ?>
 <br /><SPAN CLASS="ChatCopy" dir="LTR"><a HREF="privacy.html" onClick="privacy_popup(); return false" TARGET=_blank CLASS="ChatLink" Title="<?php echo(sprintf(L_CLICK,L_PRIVACY)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_PRIVACY)); ?>'; return true">Our Privacy Policy</a>
-</SPAN>
+</SPAN><br />
+<div class="fb-like" data-href="https://www.facebook.com/pages/phpMyChat-Plus/112950852062055" data-send="true" data-layout="button_count" data-show-faces="false" data-font="tahoma"></div>
 <?php
 	if ($show_donation)
 	{
 	?>
-		<br />
 		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" name="support" target="_blank" onSubmit="return confirm('<?php echo(L_SUPP_WARN); ?>');">
 		<input type="hidden" name="cmd" value="_s-xclick">
 		<input type="hidden" name="hosted_button_id" value="<?php echo($ppbutton); ?>">
@@ -2195,7 +2205,6 @@ else echo($Owner_name);
 	<?php
 	}
 	?>
-<div class="fb-like" data-href="https://www.facebook.com/pages/phpMyChat-Plus/112950852062055" data-send="true" data-layout="button_count" data-show-faces="false" data-font="tahoma"></div>
 </TD>
 </TR>
 </TABLE>

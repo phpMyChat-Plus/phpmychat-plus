@@ -7,9 +7,9 @@
 # Last file update: 01.09.2011
 
 // Class strings localization
-define("L_DAY", "Ziua");
-define("L_MONTH", "Luna");
-define("L_YEAR", "Anul");
+define("L_DAYC", "Ziua");
+define("L_MONTHC", "Luna");
+define("L_YEARC", "Anul");
 define("L_TODAY", "Azi");
 define("L_PREV", "Înapoi");
 define("L_NEXT", "Înainte");

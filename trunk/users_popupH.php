@@ -301,6 +301,7 @@ if (eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
 				}
 				$Users->clean_results();
 			}
+			$Users->close();
 		}
 	}
 	if($disp_note) echo("<P><table WIDTH=100%><tr valign=top><td colspan=4 align=left CLASS=small>[".$res_init."] = ".L_RESTRICTED.".</td></tr></table>");

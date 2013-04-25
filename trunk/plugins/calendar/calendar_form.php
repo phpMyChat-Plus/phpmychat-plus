@@ -569,7 +569,7 @@ window.onload = function(){
               <td align="left"><select name="m" onchange="javascript:submitCalendar();">
               <?php
               for($f=1; $f<=sizeof($monthnames); $f++){
-                $selected = ($f == (int)$m) ? " selected" : "";
+                $selected = ($f == (int)$m) ? " selected='selected'" : "";
                 echo("<option value=\"".str_pad($f, 2, "0", STR_PAD_LEFT)."\"$selected>".$monthnames[$f-1]."</option>");
               }
               ?>
@@ -585,8 +585,8 @@ window.onload = function(){
 
               //write year options
               for($year=$year_end; $year>=$year_start; $year--){
-                $selected = ($year == $y) ? " selected" : "";
-                echo("<option value=\"".$year."\"$selected>".$year.(L_USE_YMD_DROP ? L_YEAR : "")."</option>");
+                $selected = ($year == $y) ? " selected='selected'" : "";
+                echo("<option value=\"".$year."\"$selected>".$year.(L_USE_YMD_DROP ? L_YEARC : "")."</option>");
               }
               ?>
               </select>
@@ -598,7 +598,7 @@ window.onload = function(){
               <td align="right"><select name="m" onchange="javascript:submitCalendar();">
               <?php
               for($f=1; $f<=sizeof($monthnames); $f++){
-                $selected = ($f == (int)$m) ? " selected" : "";
+                $selected = ($f == (int)$m) ? " selected='selected'" : "";
                 echo("<option value=\"".str_pad($f, 2, "0", STR_PAD_LEFT)."\"$selected>".$monthnames[$f-1]."</option>");
               }
               ?>
@@ -614,8 +614,8 @@ window.onload = function(){
 
               //write year options
               for($year=$year_end; $year>=$year_start; $year--){
-                $selected = ($year == $y) ? " selected" : "";
-                echo("<option value=\"".$year."\"$selected>".$year.(L_USE_YMD_DROP ? L_YEAR : "")."</option>");
+                $selected = ($year == $y) ? " selected='selected'" : "";
+                echo("<option value=\"".$year."\"$selected>".$year.(L_USE_YMD_DROP ? L_YEARC : "")."</option>");
               }
               ?>
               </select>

@@ -8,7 +8,7 @@
 # by Avram, www.avramovic.info
 
 # php>=5 versions
-if (version_compare(PHPVERSION,'5') >= 0)
+if (version_compare(PHP_VERSION, '5') >= 0)
 {
 
 class YouTube {

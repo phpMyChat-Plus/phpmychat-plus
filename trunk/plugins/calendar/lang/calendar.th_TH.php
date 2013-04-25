@@ -8,9 +8,9 @@
 // Thailand mainly uses the Buddhist Era which is 543 years ahead of the Gregorian year. 1 January 2549 BE (AD 2006) 
 
 // Class strings localization
-define("L_DAY", "วัน");
-define("L_MONTH", "เดือน");
-define("L_YEAR", "ปี");
+define("L_DAYC", "วัน");
+define("L_MONTHC", "เดือน");
+define("L_YEARC", "ปี");
 define("L_TODAY", "วันนี้");
 define("L_PREV", "ย้อน");
 define("L_NEXT", "ถัดไป");

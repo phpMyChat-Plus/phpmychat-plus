@@ -288,6 +288,26 @@ Clear the messages frame and show only the last 5 messages.</span>
 </category>
 
 <category>
+<pattern>GET THIS CHAT _</pattern>
+<template><srai>CHAT DOWNLOAD PAGE</srai></template>
+</category>
+
+<category>
+<pattern>GET PHPMYCHAT _</pattern>
+<template><srai>CHAT DOWNLOAD PAGE</srai></template>
+</category>
+
+<category>
+<pattern>GET MYCHAT _</pattern>
+<template><srai>CHAT DOWNLOAD PAGE</srai></template>
+</category>
+
+<category>
+<pattern>GET CHAT _</pattern>
+<template><srai>CHAT DOWNLOAD PAGE</srai></template>
+</category>
+
+<category>
 <pattern>DICE CMD</pattern>
 <template>
 <a href="help_popup.php" target="_blank"><bot name="chatname"/> Help</a> paragraph follows:

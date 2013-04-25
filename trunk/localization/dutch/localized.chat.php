@@ -53,6 +53,8 @@ define("L_MIN", "minuut");
 define("L_MINS", "minuten");
 define("L_HOUR", "uur");
 define("L_HOURS", "uren");
+define("L_DAY", "dag");
+define("L_DAYS", "dagen");
 
 // registration stuff:
 define("L_REG_1", "Wachtwoord");

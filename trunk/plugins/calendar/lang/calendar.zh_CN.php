@@ -8,9 +8,9 @@
 # Last file update: 27.04.2012
 
 // Class strings localization
-define("L_DAY", "日");
-define("L_MONTH", "月");
-define("L_YEAR", "年");
+define("L_DAYC", "日");
+define("L_MONTHC", "月");
+define("L_YEARC", "年");
 define("L_TODAY", "今天");
 define("L_PREV", "上月");
 define("L_NEXT", "下月");
@@ -72,15 +72,6 @@ define("L_S_THU", "四");
 define("L_S_FRI", "五");
 define("L_S_SAT", "六");
 define("L_S_SUN", "日");
-/*
-define("L_S_MON", "周一");
-define("L_S_TUE", "周二");
-define("L_S_WED", "周三");
-define("L_S_THU", "周四");
-define("L_S_FRI", "周五");
-define("L_S_SAT", "周六");
-define("L_S_SUN", "周日");
-*/
 
 // Display extratext beside years, months and/or days in dropdowns (eg. Korean and Japan)
 define("L_USE_YMD_DROP", 1);

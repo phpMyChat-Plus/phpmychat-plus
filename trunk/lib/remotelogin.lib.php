@@ -593,6 +593,7 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 				};
 				unset($roomTab);
 			};
+			$UpdLink->close();
 			$DbLink->clean_results();
 
 			// Update the current user status for the room to be created in registered users table
@@ -680,6 +681,7 @@ if(!isset($Error) && (isset($R2) && $R2 != ""))
 				};
 				unset($roomTab);
 			};
+			$UpdLink->close();
 			$DbLink->clean_results();
 
 			// Update the current user status for the room to be created in registered users table
@@ -897,12 +899,13 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	$DbLink->query("SELECT m_time FROM ".C_MSG_TBL." WHERE username='SYS inviteTo' AND address='$U' AND room='$R'");
 	if($DbLink->num_rows() != 0)
 	{
-		$DelLink = new DB;
+#		$DelLink = new DB;
 		while(list($sent_time) = $DbLink->next_record())
 		{
-			$DelLink->query("DELETE FROM ".C_MSG_TBL." WHERE m_time='$sent_time' AND (username='SYS inviteFrom' OR (username='SYS inviteTo' AND address='$U'))");
+			$DbLink->query("DELETE FROM ".C_MSG_TBL." WHERE m_time='$sent_time' AND (username='SYS inviteFrom' OR (username='SYS inviteTo' AND address='$U'))");
 		};
-		$DelLink->close;
+#		$DelLink->close();
+#		$DbLink->close();
 	};
 	?>
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
@@ -1339,8 +1342,8 @@ function send_headers($title, $icon)
 	?>
 	<!--
 	The lines below are usefull for debugging purpose, please do not remove them!
-	Release: phpMyChat-Plus 1.94-b8
-	© 2005-2012 Ciprian Murariu (ciprianmp@yahoo.com)
+	Release: phpMyChat-Plus 1.94-RC2
+	© 2005-2013 Ciprian Murariu (ciprianmp@yahoo.com)
 	Based on phpMyChat 0.14.6-dev (also called 0.15.0)
 	© 2000-2005 The phpHeaven Team (http://www.phpheaven.net/)
 	-->
@@ -1583,7 +1586,7 @@ function layout($Err, $U, $R, $T, $C, $status, $RemMe)
 <TR>
 <TD CLASS="ChatBody">
 <CENTER>
-<FORM ACTION="<?php echo("$Action"); ?>" METHOD="POST" AUTOCOMPLETE="" NAME="Params" onSubmit="this.target='_blank';" onSubmit="defineVerField(); return isCookieEnabled();">
+<FORM ACTION="<?php echo("$Action"); ?>" METHOD="POST" AUTOCOMPLETE="" NAME="Params" onSubmit="this.target='_parent';" onSubmit="defineVerField(); return isCookieEnabled();">
 <?php
 // Msg for translations with no real iso code
 if (isset($FontPack) && $FontPack != "" && file_exists($ChatPath."localization/${L}/${FontPack}"))
@@ -1655,7 +1658,7 @@ if ($show_donation)
 			asort($AvailableLanguages);
 			reset($AvailableLanguages);
 		?>
-		    <SELECT NAME="L" id="flags" onChange="window.location.href='<?php echo $_SERVER["SCRIPT_NAME"]; ?>?L='+this.options[this.selectedIndex].value;" onChange="swapImage('flags','flagToSwap')" CLASS="ChatBox">
+		    <SELECT NAME="L" id="flags" onChange="window.location.href='<?php echo $_SERVER["SCRIPT_NAME"]; ?>?L='+this.options[this.selectedIndex].value; swapImage('flags','flagToSwap');" CLASS="ChatBox">
 		<?php
 			$i = 0;
 			while(list($key, $name) = each($AvailableLanguages))
@@ -1770,6 +1773,11 @@ if (C_REQUIRE_REGISTER)
 			</TD>
 		</TR>
 </FORM>
+<TR>
+	<TD ALIGN="CENTER">
+	<div class="fb-like" data-href="https://www.facebook.com/pages/phpMyChat-Plus/112950852062055" data-send="false" data-layout="button_count" data-show-faces="false" data-font="tahoma"></div>
+	</TD>
+</TR>
 	<?php
 	if ($show_donation)
 	{
@@ -1786,11 +1794,6 @@ if (C_REQUIRE_REGISTER)
 	<?php
 	}
 	?>
-<TR>
-	<TD ALIGN="CENTER">
-	<div class="fb-like" data-href="https://www.facebook.com/pages/phpMyChat-Plus/112950852062055" data-send="false" data-layout="button_count" data-show-faces="false" data-font="tahoma"></div>
-	</TD>
-</TR>
 </TABLE>
 </CENTER>
 </TD>

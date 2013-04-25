@@ -1,5 +1,5 @@
 <?php
-// File : romanian/localized.chat.php - plus version (09.01.2012 - rev.46)
+// File : romanian/localized.chat.php - plus version (03.02.2013 - rev.47)
 // Original translation started by Radu Swider <swidera@satline.ro>, first updated by Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro>
 // Corrected, finalized, diacritics addition and updated to Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -35,7 +35,7 @@ define("L_SET_8", "Camere publice create de utilizatori");
 define("L_SET_9", "Creează-ţi camera ta");
 define("L_SET_10", "publică");
 define("L_SET_11", "privată");
-define("L_SET_12", "");
+define("L_SET_12", ""); // cameră
 define("L_SET_13", "Apoi intră pe");
 define("L_SET_14", "chat");
 define("L_SET_15", "Camere private disponibile");
@@ -52,6 +52,8 @@ define("L_MIN", "minut");
 define("L_MINS", "minute");
 define("L_HOUR", "oră");
 define("L_HOURS", "ore");
+define("L_DAY", "zi");
+define("L_DAYS", "zile");
 
 // registration stuff:
 define("L_REG_1", "Parola");
@@ -635,7 +637,7 @@ define("L_LANG_BG", "bulgară - chirilică");
 define("L_LANG_BR", "portugheză braziliană");
 define("L_LANG_CA", "catalană");
 define("L_LANG_CNS", "chineză (simplificată)");
-define("L_LANG_CNT", "chineză (traditională)");
+define("L_LANG_CNT", "chineză (tradiţională)");
 define("L_LANG_CZ", "cehă");
 define("L_LANG_DA", "daneză");
 define("L_LANG_DE", "germană");

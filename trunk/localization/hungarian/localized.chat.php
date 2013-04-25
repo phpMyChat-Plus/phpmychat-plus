@@ -52,6 +52,8 @@ define("L_MIN", "perc");
 define("L_MINS", "perc");
 define("L_HOUR", "óra");
 define("L_HOURS", "óra");
+define("L_DAY", "nap");
+define("L_DAYS", "nap");
 
 // registration stuff:
 define("L_REG_1", "Jelszó");

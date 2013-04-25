@@ -53,6 +53,8 @@ define("L_MIN", "minut");
 define("L_MINS", "minuter");
 define("L_HOUR", "timme");
 define("L_HOURS", "timmar");
+define("L_DAY", "dag");
+define("L_DAYS", "dagar");
 
 // registration stuff:
 define("L_REG_1", "Lösenord");

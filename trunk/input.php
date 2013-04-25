@@ -196,6 +196,7 @@ if (C_BOT_CONTROL) include("./bot/respond.php");
 // ** Send formated messages to the message table **
 function AddMessage($M, $T, $R, $U, $C, $Private, $Read, $RF, $Charset)
 {
+	global $DbLink, $Latin1, $status, $Read, $M1, $COLOR_TB;
 #	if (C_BOT_CONTROL && C_BOT_PUBLIC && $Private == "")
 	if (C_BOT_CONTROL && C_BOT_PUBLIC && $Private == "" && !(preg_match("#^\/#", $M) || preg_match("#^:#", $M)))
 	{
@@ -213,7 +214,6 @@ function AddMessage($M, $T, $R, $U, $C, $Private, $Read, $RF, $Charset)
 		}
 	}
 	//---End Bot Control
-	global $DbLink, $Latin1, $status, $Read, $M1, $COLOR_TB;
 
 	if (!isset($M1)) $M1 = $M;
 	$M = str_replace("\"", "&quot;", $M);
@@ -570,15 +570,11 @@ if (isset($M) && trim($M) != "" && (!isset($M0) || ($M != $M0)) && !($IsCommand 
 	{
 		$DbLink->query("UPDATE ".C_STS_TBL." SET posts_sent=posts_sent+1 WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
 	}
-}
-if(C_EN_STATS)
-{
-	if($IsCommand)
+	if(C_EN_STATS && $IsCommand)
 	{
 		$DbLink->query("UPDATE ".C_STS_TBL." SET cmds_used=cmds_used+1 WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
 	}
 }
-
 // For translations with an explicit charset (not the 'x-user-defined' one)
 if (!isset($FontName)) $FontName = "";
 ?>
@@ -588,15 +584,6 @@ if (!isset($FontName)) $FontName = "";
 <HEAD>
 <TITLE>Input frame</TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/<?php echo(str_replace("sr_CS","sr_RS",str_replace("es_AR","es_ES",L_LANG))); ?>/all.js#xfbml=1&appId=49226597181";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
 <SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript1.2">
 <!--
 	// Get the position for the help popup
@@ -645,7 +632,7 @@ if (!isset($FontName)) $FontName = "";
 		<!-- Last sent message or command (will be used for the '/!' command) -->
 		<INPUT TYPE="hidden" NAME="M0" VALUE="<?php echo(isset($M1) ? $M1 : (isset($M) ? stripslashes($M) : "")); ?>">
 
-		<A HREF="help_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>" onClick="window.parent.help_popup(); return false" TARGET="_blank" onmouseover="document.images['helpImg'].src = window.parent.imgHelpOn.src" onmouseout="document.images['helpImg'].src = window.parent.imgHelpOff.src" title="<?php echo(L_HLP); ?>"><IMG NAME="helpImg" SRC="localization/<?php echo($L); ?>/images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="<?php echo(L_HLP); ?>" onMouseOver="window.status='<?php echo(L_HLP); ?>.'; return true" onClick="document.forms['MsgForm'].elements['M'].focus();"></A>&nbsp;
+		<A HREF="help_popup.php?<?php echo("L=$L&Ver=$Ver"); ?>" onClick="window.parent.help_popup(); return false" TARGET="_blank" onMouseOver="document.images['helpImg'].src = window.parent.imgHelpOn.src" onMouseOut="document.images['helpImg'].src = window.parent.imgHelpOff.src" title="<?php echo(L_HLP); ?>"><IMG NAME="helpImg" SRC="localization/<?php echo($L); ?>/images/helpOff.gif" WIDTH=30 HEIGHT=20 BORDER=0 ALT="<?php echo(L_HLP); ?>" onMouseOver="window.status='<?php echo(L_HLP); ?>.'; return true" onClick="document.forms['MsgForm'].elements['M'].focus();"></A>&nbsp;
 
 		<?php
 		// Get the value to put in the message box : preceding M0 field value for /! command,
@@ -744,12 +731,13 @@ $not_selected = " ".$null." (".$not_selected.")";
     {
       $Cmd2Send = "'profile',''";
 ?>
-<A HREF="#" onClick="window.parent.runCmd(<?php echo($Cmd2Send); ?>); return false;" TARGET="_blank" onmouseover="document.images['launchProfimage'].src = window.parent.ProfimageOn.src" onmouseout="document.images['launchProfimage'].src = window.parent.ProfimageOff.src" title="<?php echo(L_SEL_NEW_AV); ?>"><IMG name="launchProfimage" SRC="images/avatarbuttonroll.gif" WIDTH=25 HEIGHT=25 BORDER=0 ALT="<?php echo(L_SEL_NEW_AV); ?>" onMouseOver="window.status='<?php echo(L_SEL_NEW_AV); ?>'; return true;"></A>&nbsp;
+<A HREF="#" onClick="window.parent.runCmd(<?php echo($Cmd2Send); ?>); return false;" TARGET="_blank" onMouseOver="document.images['launchProfimage'].src = window.parent.ProfimageOn.src" onMouseOut="document.images['launchProfimage'].src = window.parent.ProfimageOff.src" title="<?php echo(L_SEL_NEW_AV); ?>"><IMG name="launchProfimage" SRC="images/avatarbuttonroll.gif" WIDTH=25 HEIGHT=25 BORDER=0 ALT="<?php echo(L_SEL_NEW_AV); ?>" onMouseOver="window.status='<?php echo(L_SEL_NEW_AV); ?>'; return true;"></A>&nbsp;
 <?php
     }
            $DbLink->clean_results();
 	}
-$DbLink->close(); // Avatar: moved down from earlier in file.
+$DbLink->close();
+// Avatar: moved down from earlier in file.
 // Avatar System End.
 ?>
 <SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
@@ -824,8 +812,7 @@ if (($status == "m") || ($status == "t") || ($status == "a")) // use this to sho
 	clock_input(gap);
 // -->
 </SCRIPT>
-	&nbsp;&nbsp;<span style="background-color:yellow; color:blue; font-weight:800">&nbsp;<?php echo($U); ?><span style="color:red"><?php if($superghost) echo("&nbsp;*&nbsp;".L_SUPER_GHOST."&nbsp;*"); elseif($ghost) echo("&nbsp;*&nbsp;".L_GHOST."&nbsp;*");?>&nbsp;</span></span>
-<div class="fb-like" data-href="https://www.facebook.com/pages/phpMyChat-Plus/112950852062055" data-send="false" data-layout="button_count" data-show-faces="false" data-font="tahoma"></div>
+	&nbsp;&nbsp;<span style="background-color:yellow; color:blue; font-weight:800" title="<?php echo($U); if($superghost) echo("&nbsp;*&nbsp;<span style=\"color:red\">".L_SUPER_GHOST."&nbsp;*</span>"); elseif($ghost) echo("&nbsp;*&nbsp;<span style=\"color:red\">".L_GHOST."&nbsp;*</span>");?>">&nbsp;<?php echo($U."&nbsp;"); if($superghost) echo("&nbsp;&nbsp;*&nbsp;<span style=\"color:red\">".L_SUPER_GHOST."&nbsp;*</span>"); elseif($ghost) echo("&nbsp;*&nbsp;<span style=\"color:red\">".L_GHOST."&nbsp;*</span>");?></span>
 </TD>
 </TR>
 </FORM>
@@ -902,5 +889,6 @@ if (isset($jsTbl))
 }
 ?>
 </BODY>
-
 </HTML>
+<?php
+?>

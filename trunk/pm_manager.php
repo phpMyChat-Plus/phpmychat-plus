@@ -158,6 +158,7 @@ if($DbLink->num_rows() > 0)
 				$colorname_tag = "<FONT color=".COLOR_CD.">";
 			}
 			$colorname_endtag = "</FONT>";
+			$DbColor->close();
 		}
 		else
 		{

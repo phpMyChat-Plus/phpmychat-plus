@@ -206,7 +206,7 @@ if($note)
 	?>
 	<tr>
 		<td colspan=9>
-			<b>* </b><i><?php echo(A_SEARCH_26); ?></i>
+			<b>* </b><i><font size="1"><?php echo(A_SEARCH_26); ?></font></i>
 		</td>
 	</tr>
 <?php

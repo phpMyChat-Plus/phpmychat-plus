@@ -117,6 +117,7 @@ else
 			{
 				$DbLink->query("UPDATE ".C_STS_TBL." SET pms_sent=pms_sent+1 WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
 			}
+			$DbLink->close();
 			unset($Found, $b);
 			$M1 = $Cmd[0];
 		};

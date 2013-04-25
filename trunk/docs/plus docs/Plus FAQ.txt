@@ -215,9 +215,13 @@ The server encountered an internal error or misconfiguration and was unable to c
 Optional:
 When I look at my errorlog I see the following message:
 [25-Nov-2007 06:42:08] PHP Warning:  Unknown(): Your script possibly relies on a session side-effect which existed until PHP 4.2.3. Please be advised that the session extension does not consider global variables as a source of data, unless register_globals is enabled. You can disable this functionality and this warning by setting session.bug_compat_42 or session.bug_compat_warn to off, respectively. in Unknown on line 0
-17A.
+17A1.
 Check if the permissions of your "plus" (chat name) and "config" folders are 777. If so, change them to 755 (chmod). Sometimes, due to different servers configuration, they remain 777 after the installing process.
 Reply: As soon as I changed the permission of the plus folder (chat folder in my case) it worked.
+17A2.
+As of php 5.3 version and up, the included .htaccess directives might be restricted on the server, returning this 500 error. Delete the initial .htaccess, look in the same root directory of your chat for the file called .htaccess500 and rename it back to .htaccess
+This should fix it.
+IMPORTANT: I strongly recommend not to let your chat main folder without a .htaccess file, as it protects the config and other sensitive data!
 
 18Q.
 My /img command doesn't seem to work - it returns no error, but it also doesn't return any image.

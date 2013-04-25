@@ -9,9 +9,9 @@
 define("RTL", 1);
 
 // Class strings localization
-define("L_DAY", "יום");
-define("L_MONTH", "חודש");
-define("L_YEAR", "שנה");
+define("L_DAYC", "יום");
+define("L_MONTHC", "חודש");
+define("L_YEARC", "שנה");
 define("L_TODAY", "היום");
 define("L_PREV", "קודם");
 define("L_NEXT", "הבא");

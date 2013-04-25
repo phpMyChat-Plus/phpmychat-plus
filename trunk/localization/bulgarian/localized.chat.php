@@ -52,6 +52,8 @@ define("L_MIN", "минута");
 define("L_MINS", "минути");
 define("L_HOUR", "час");
 define("L_HOURS", "часа");
+define("L_DAY", "ден");
+define("L_DAYS", "дни");
 
 // registration stuff:
 define("L_REG_1", "Парола");

@@ -23,7 +23,7 @@ CREATE TABLE bot_conversationlog (
  input text,
  response text,
  uid varchar(255) default NULL,
- enteredtime timestamp(14) NOT NULL,
+ enteredtime timestamp NOT NULL,
  PRIMARY KEY (id),
  KEY botid (bot)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -33,7 +33,7 @@ CREATE TABLE bot_dstore (
  uid varchar(255) default NULL,
  name text,
  value text,
- enteredtime timestamp(14) NOT NULL,
+ enteredtime timestamp NOT NULL,
  id int(11) NOT NULL auto_increment,
  PRIMARY KEY (id),
  KEY nameidx (name(40))
@@ -90,7 +90,7 @@ CREATE TABLE bot_templates (
 DROP TABLE IF EXISTS bot_thatindex;
 CREATE TABLE bot_thatindex (
  uid varchar(255) default NULL,
- enteredtime timestamp(14) NOT NULL,
+ enteredtime timestamp NOT NULL,
  id int(11) NOT NULL auto_increment,
  PRIMARY KEY (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -100,7 +100,7 @@ CREATE TABLE bot_thatstack (
  thatid int(11) NOT NULL default '0',
  id int(11) NOT NULL auto_increment,
  value varchar(255) default NULL,
- enteredtime timestamp(14) NOT NULL,
+ enteredtime timestamp NOT NULL,
  PRIMARY KEY (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -155,7 +155,7 @@ CREATE TABLE c_config (
  BUZZ_SOUND varchar(255) NOT NULL default 'sounds/chimedwn.wav',
  TOPIC_DIFF enum('0','1') NOT NULL default '1',
  SHOW_TUT enum('0','1') NOT NULL default '1',
- SHOW_INFO enum('0','1') NOT NULL default '1',
+ SHOW_INFO enum('0','1') NOT NULL default '0',
  SET_CMDS enum('0','1') NOT NULL default '1',
  CMDS varchar(255) NOT NULL default '/away /buzz /demote /dice /dice2 /dice3 /high /img /math /mr<br />/room /size /sort /topic /utube /video /wisp',
  SET_MODS enum('0','1') NOT NULL default '1',

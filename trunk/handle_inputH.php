@@ -72,8 +72,6 @@ function special_char($str,$lang)
 	return addslashes($lang ? htmlentities(stripslashes($str)) : htmlspecialchars(stripslashes($str)));
 };
 
-$DbLink = new DB;
-
 // Added for php4 support of mb functions
 if (!function_exists('mb_convert_case'))
 {
@@ -90,6 +88,8 @@ if (!function_exists('mb_convert_case'))
 		return $str;
 	}
 };
+
+$DbLink = new DB;
 
 // ** Updates user info in connected users tables and fix some security issues **
 // Fixed a security issue thanks to SeazoN
@@ -189,6 +189,7 @@ if (C_BOT_CONTROL) include("./bot/respond.php");
 // ** Send formated messages to the message table **
 function AddMessage($M, $T, $R, $U, $C, $Private, $Read, $RF, $Charset)
 {
+	global $DbLink, $Latin1, $status, $Read, $M1, $COLOR_TB;
 #	if (C_BOT_CONTROL && C_BOT_PUBLIC && $Private == "")
 	if (C_BOT_CONTROL && C_BOT_PUBLIC && $Private == "" && !(preg_match("#^\/#", $M) || preg_match("#^:#", $M)))
 	{
@@ -206,7 +207,6 @@ function AddMessage($M, $T, $R, $U, $C, $Private, $Read, $RF, $Charset)
 		}
 	}
 	//---End Bot Control
-	global $DbLink, $Latin1, $status, $Read, $M1, $COLOR_TB;
 
 	if (!isset($M1)) $M1 = $M;
 	$M = str_replace("\"", "&quot;", $M);
@@ -565,16 +565,13 @@ if (isset($M) && trim($M) != "" && (!isset($M0) || ($M != $M0)) && !($IsCommand 
 	{
 		$DbLink->query("UPDATE ".C_STS_TBL." SET posts_sent=posts_sent+1 WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
 	}
-}
-if(C_EN_STATS)
-{
-	if($IsCommand)
+	if(C_EN_STATS && $IsCommand)
 	{
 		$DbLink->query("UPDATE ".C_STS_TBL." SET cmds_used=cmds_used+1 WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
 	}
 }
 
-$DbLink->close();
+#$DbLink->close();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
@@ -599,9 +596,9 @@ if (typeof(window.parent.frames['input']) != 'undefined'
 		elements['Ign'].value = "<?php echo(isset($Ign) ? stripslashes($Ign) : ""); ?>";
 		elements['M0'].value = "<?php echo(isset($M1) ? $M1 : (isset($M) ? stripslashes($M) : "")); ?>";
 
+		<?php
 		// Get the value to put in the message box : previous M0 field value for /! command,
 		// previous entry if it was an erroneous command, else nothing;
-		<?php
 		preg_match("/^[\w?(\Q".REG_CHARS_ALLOWED."\E)?\w]*\>/",$M,$add);
 		$M0 = stripslashes($M0);
 		$M0 = str_replace("&#39;", "'", $M0);

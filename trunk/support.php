@@ -30,18 +30,28 @@ if (!C_SUPPORT_PAID)
 <HTML>
 <HEAD>
 <LINK REL="stylesheet" HREF="<?php echo($skin); ?>.css.php" TYPE="text/css">
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/<?php echo(str_replace("sr_CS","sr_RS",str_replace("es_AR","es_ES",L_LANG))); ?>/all.js#xfbml=1&appId=49226597181";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
 </HEAD>
 <BODY CLASS="frame">
 <CENTER>
 <?php
+if ($Ver != "H") echo("<table align=\"center\"><tr><td align=\"center\">");
+?>
+<span class="fb-like" data-href="https://www.facebook.com/pages/phpMyChat-Plus/112950852062055" data-send="false" data-layout="button_count" data-show-faces="false" data-font="tahoma"></span>
+<?php
+if ($Ver != "H") echo("</td></tr>");
 if (!C_SUPPORT_PAID)
 {
-if ($Ver != "H")
-{
-	?>
-<table align="center"><tr><td align="center">
-	<?php
-}
+if ($Ver != "H") echo("<tr><td align=\"center\">");
 ?>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" name="support" target="_blank" onSubmit="return confirm('<?php echo(L_SUPP_WARN); ?>');">
 <input type="hidden" name="cmd" value="_s-xclick">
@@ -49,12 +59,7 @@ if ($Ver != "H")
 <input type="image" style="background-color: transparent;" src="<?php echo($donate); ?>" border="0" name="submit" alt="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" title="<?php echo($ppalt."\n".L_SUPP_ALT); ?>" onMouseOver="window.status='<?php echo($ppalt); ?>'; return true;">
 </form>
 <?php
-if ($Ver != "H")
-{
-	?>
-</td></tr></table>
-	<?php
-}
+if ($Ver != "H") echo("</td></tr></table>");
 }
 ?>
 </CENTER>

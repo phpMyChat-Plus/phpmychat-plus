@@ -5,14 +5,14 @@
 # Version: 3.68
 # Language: Lang_name / Orig_name // ex: Romanian (English name) / Română (Original name)
 # Translator: YourName <email@...>
-# Last file update: 31.12.2011
+# Last file update: 22.03.2013
 
 # define("RTL", 1); // uncomment only for right-to-left text (Arabic, Hebrew)
 
 // Class strings localization
-define("L_DAY", "Day");
-define("L_MONTH", "Month");
-define("L_YEAR", "Year");
+define("L_DAYC", "Day");
+define("L_MONTHC", "Month");
+define("L_YEARC", "Year");
 define("L_TODAY", "Today");
 define("L_PREV", "Previous");
 define("L_NEXT", "Next");

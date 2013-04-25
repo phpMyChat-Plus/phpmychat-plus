@@ -7,9 +7,9 @@
 # Last file update: 01.09.2011
 
 // Class strings localization
-define("L_DAY", "Hari");
-define("L_MONTH", "Bulan");
-define("L_YEAR", "Tahun");
+define("L_DAYC", "Hari");
+define("L_MONTHC", "Bulan");
+define("L_YEARC", "Tahun");
 define("L_TODAY", "Hari ini");
 define("L_PREV", "Sebelumnya");
 define("L_NEXT", "Selanjutnya");

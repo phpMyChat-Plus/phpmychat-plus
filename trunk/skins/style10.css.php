@@ -32,7 +32,11 @@ if (isset($Charset))
 
 if (!isset($medium) || $medium == "") $medium = 10;
 $large = round(1.4 * $medium);
+$largest = $large+2;
+$larger = $large+1;
 $small = round(0.8 * $medium);
+$smaller = $small-1;
+$smallest = $small-2;
 
 include_once('style10.php');
 ?>
@@ -200,14 +204,25 @@ INPUT, SELECT, TEXTAREA
 
 .error
 {
-	font-weight: 800;
 	color: #FF0000;
+	font-weight: 800;
 }
 
 .small
 {
 	color: #FFFFFF;
 	font-size: <?php echo($small); ?>pt;
+}
+
+.topic
+{
+	color: <?php echo($COLOR_TOPIC); ?>;
+	font-weight: 800;
+}
+
+.tips
+{
+	font-size: <?php echo($smaller); ?>pt;
 }
 
 .time
@@ -291,8 +306,8 @@ INPUT, SELECT, TEXTAREA
 
 .success
 {
-	font-weight: 800;
 	color: #0000FF;
+	font-weight: 800;
 }
 
 .mesframePreview
