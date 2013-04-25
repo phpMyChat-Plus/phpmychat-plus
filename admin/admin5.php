@@ -12,6 +12,14 @@ if (C_NO_SWEAR) include("./lib/swearing.lib.php");
 $pptype = "big";
 require_once("./lib/support.lib.php");
 require("./plugins/calendar/tc_calendar.php");
+
+// Added for configuration sheet optional translation (default English)
+if (file_exists("./localization/${L}/localized.config.php")) require_once("./localization/${L}/localized.config.php");
+elseif (file_exists("./localization/english/localized.config.php"))
+{
+	require_once("./localization/english/localized.config.php");
+	if ($L != "english") $translate_it = 1;
+}
 ?>
 
 <script type="text/javascript" language="javascript">
@@ -155,20 +163,20 @@ if (d) d.style.display='none';
 <!--
 body {
 position: absolute;
-margin: 0;
-padding: 0;
+margin: 0px;
+padding: 0px;
 font: 80% verdana, arial, sans-serif;
 }
 dl, dt, dd, ul, li {
-margin: 0;
-padding: 0;
+margin: 0px;
+padding: 0px;
 list-style-type: none;
 z-index: 100;
 }
 #menu {
 position: absolute; /* Menu position that can be changed at will */
-top: 0;
-left: 0;
+top: 0px;
+left: 0px;
 z-index: 100;
 width: 100%; /* precision for Opera */
 margin-left: 5px;
@@ -182,7 +190,7 @@ z-index: 100;
 cursor: pointer;
 text-align: center;
 font-weight: bold;
-background: #aaa;
+background: aaa;
 border: 1px solid gray;
 margin: 0px;
 }
@@ -207,7 +215,7 @@ color: #000;
 text-decoration: none;
 display: block;
 height: 100%;
-border: 0 none;
+border: 0px none;
 }
 #menu li a:hover, #menu li a:focus, #menu dt a:hover, #menu dt a:focus {
 background: #eee;
@@ -342,60 +350,60 @@ if (UPD_CHECK)
 ?>
 <div id="menu">
 	<dl>
-		<dt onmouseover="javascript:show('smenu1');">General settings</dt>
+		<dt onmouseover="javascript:show('smenu1');"><?php echo A_CONF_0; ?></dt>
 			<dd id="smenu1" onmouseover="javascript:show('smenu1');" onmouseout="javascript:show('');">
 				<ul>
-					<li><a href="#server">Chat Server data</a></li>
-					<li><a href="#languages">Languages</a></li>
-					<li><a href="#owner">Owner data</a></li>
-					<li><a href="#registration">Registration</a></li>
-					<li><a href="#functionality">Functionality</a></li>
-					<li><a href="#timings">Timings</a></li>
-					<li><a href="#schedule">Chat Schedule</a></li>
+					<li><a href="#server"><?php echo A_CONF_1; ?></a></li>
+					<li><a href="#languages"><?php echo A_CONF_2; ?></a></li>
+					<li><a href="#owner"><?php echo A_CONF_3; ?></a></li>
+					<li><a href="#registration"><?php echo A_CONF_4; ?></a></li>
+					<li><a href="#functionality"><?php echo A_CONF_5; ?></a></li>
+					<li><a href="#timings"><?php echo A_CONF_6; ?></a></li>
+					<li><a href="#schedule"><?php echo A_CONF_7; ?></a></li>
 				</ul>
 			</dd>
 	</dl>
 	<dl>
-		<dt onmouseover="javascript:show('smenu2');">Interface</dt>
+		<dt onmouseover="javascript:show('smenu2');"><?php echo A_CONF_26; ?></dt>
 			<dd id="smenu2" onmouseover="javascript:show('smenu2');" onmouseout="javascript:show('');">
 				<ul>
-					<li><a href="#layout">Login layout</a></li>
-					<li><a href="#skins">Rooms & Skins</a></li>
-					<li><a href="#colors">Colors</a></li>
-					<li><a href="#sounds">Sound settings</a></li>
-					<li><a href="#profanity">Profanity</a></li>
-					<li><a href="files_popup.php?<?php echo("L=$L&pmc_username=$pmc_username&pmc_password=$pmc_password"); ?>" onClick="files_popup(); return false" target="_blank">Uploads Management</a></li>
+					<li><a href="#layout"><?php echo A_CONF_8; ?></a></li>
+					<li><a href="#skins"><?php echo A_CONF_9; ?></a></li>
+					<li><a href="#colors"><?php echo A_CONF_10; ?></a></li>
+					<li><a href="#sounds"><?php echo A_CONF_11; ?></a></li>
+					<li><a href="#profanity"><?php echo A_CONF_12; ?></a></li>
+					<li><a href="files_popup.php?<?php echo("L=$L&pmc_username=$pmc_username&pmc_password=$pmc_password"); ?>" onClick="files_popup(); return false" target="_blank"><?php echo A_CONF_13; ?></a></li>
 				</ul>
 			</dd>
 	</dl>
 	<dl>
-		<dt onmouseover="javascript:show('smenu3');">Features & Mods</dt>
+		<dt onmouseover="javascript:show('smenu3');"><?php echo A_CONF_14; ?></dt>
 			<dd id="smenu3" onmouseover="javascript:show('smenu3');" onmouseout="javascript:show('');">
 				<ul>
-					<li><a href="#pm">Private messaging</a></li>
-					<li><a href="#bot">Bot settings</a></li>
-					<li><a href="#commands">Commands</a></li>
-					<li><a href="#mmedia">Multimedia</a></li>
-					<li><a href="#quick">Quick Menus</a></li>
-					<li><a href="#avatars">Avatars & Gravatars</a></li>
-					<li><a href="#logging">Logging Mod</a></li>
-					<li><a href="#lurking">Lurking Mod</a></li>
-					<li><a href="#quote">Random Quote</a></li>
-					<li><a href="#ghost">Ghost Control</a></li>
-					<li><a href="#bday">Birthday Mod</a></li>
+					<li><a href="#pm"><?php echo A_CONF_15; ?></a></li>
+					<li><a href="#bot"><?php echo A_CONF_16; ?></a></li>
+					<li><a href="#commands"><?php echo A_CONF_17; ?></a></li>
+					<li><a href="#mmedia"><?php echo A_CONF_18; ?></a></li>
+					<li><a href="#quick"><?php echo A_CONF_19; ?></a></li>
+					<li><a href="#avatars"><?php echo A_CONF_20; ?></a></li>
+					<li><a href="#logging"><?php echo A_CONF_21; ?></a></li>
+					<li><a href="#lurking"><?php echo A_CONF_22; ?></a></li>
+					<li><a href="#quote"><?php echo A_CONF_23; ?></a></li>
+					<li><a href="#ghost"><?php echo A_CONF_24; ?></a></li>
+					<li><a href="#bday"><?php echo A_CONF_25; ?></a></li>
 				</ul>
 			</dd>
 	</dl>
 	<dl>
-		<dt onmouseover="javascript:show('smenu4');">Help & Support</dt>
+		<dt onmouseover="javascript:show('smenu4');"><?php echo A_CONF_27; ?></dt>
 			<dd id="smenu4" onmouseover="javascript:show('smenu4');" onmouseout="javascript:show('');">
 				<ul>
-					<li><a href="http://sourceforge.net/projects/phpmychat/files/phpMyChat_Plus/" target=_blank Title="Open <?php echo(APP_NAME); ?> Download page" onMouseOver="window.status='Open <?php echo(APP_NAME); ?> Download page.'; return true">Download page</a></li>
-					<li><a href="http://www.ciprianmp.com/atm/index.php?directory=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_LAST_VERSION); ?>" target=_blank Title="Open <?php echo(APP_NAME); ?> Mirror Download page" onMouseOver="window.status='Open <?php echo(APP_NAME); ?> Mirror Download page.'; return true">Mirror page</a></li>
-					<li><a href="http://sourceforge.net/projects/phpmychat/" target=_blank Title="Open <?php echo(APP_NAME); ?> Project page" onMouseOver="window.status='Open <?php echo(APP_NAME); ?> Project page.'; return true">Project page</a></li>
-					<li><a href="http://svn.sourceforge.net/viewvc/phpmychat/trunk/" target=_blank Title="Open <?php echo(APP_NAME); ?> SVN Project page" onMouseOver="window.status='Open <?php echo(APP_NAME); ?> SVN Project page.'; return true">Project SVN page</a></li>
-					<li><a href="http://tech.groups.yahoo.com/group/phpmychat/" target=_blank Title="Open <?php echo(APP_NAME); ?> Yahoo Support Group page" onMouseOver="window.status='Open <?php echo(APP_NAME); ?> Yahoo Support Group page.'; return true">Support Group page</a></li>
-					<li><a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Fixes readme.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_VERSION); ?>" target=_blank Title="Open <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> Release notes" onMouseOver="window.status='Open <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> Release notes.'; return true">Read <?php echo(APP_VERSION.APP_MINOR); ?> notes</a></li>
+					<li><a href="http://sourceforge.net/projects/phpmychat/files/phpMyChat_Plus/" target=_blank Title="<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_28)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_28)); ?>.'; return true"><?php echo A_CONF_28; ?></a></li>
+					<li><a href="http://www.ciprianmp.com/atm/index.php?directory=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_LAST_VERSION); ?>" target=_blank Title="<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_29)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_29)); ?>.'; return true"><?php echo A_CONF_29; ?></a></li>
+					<li><a href="http://sourceforge.net/projects/phpmychat/" target=_blank Title="<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_30)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_30)); ?>.'; return true"><?php echo A_CONF_30; ?></a></li>
+					<li><a href="http://phpmychat.svn.sourceforge.net/svnroot/phpmychat/trunk/" target=_blank Title="<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_31)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_31)); ?>.'; return true"><?php echo A_CONF_31; ?></a></li>
+					<li><a href="http://tech.groups.yahoo.com/group/phpmychat/" target=_blank Title="<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_32)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_32)); ?>.'; return true"><?php echo A_CONF_32; ?></a></li>
+					<li><a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Fixes readme.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_VERSION); ?>" target=_blank Title="<?php echo(sprintf(L_CLICKS, L_LINKS_15, sprintf(A_CONF_33, APP_NAME." - ".APP_VERSION.APP_MINOR))); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS, L_LINKS_15, sprintf(A_CONF_33, APP_NAME." - ".APP_VERSION.APP_MINOR))); ?>.'; return true"><?php echo (sprintf(A_CONF_33, APP_VERSION.APP_MINOR)); ?></a></li>
  <?php
 # if(UPD_CHECK && (($app_last_version > $app_version) || (($app_last_version == $app_version) && ((APP_LAST_MINOR == "" && (ereg("RC",APP_MINOR) || ereg("ß",APP_MINOR))) || (ereg("f",APP_LAST_MINOR) && (ereg("RC",APP_MINOR) || ereg("ß",APP_MINOR) || APP_MINOR == "")) || (ereg("RC",APP_LAST_MINOR) && ereg("ß",APP_MINOR)) || (ereg("ß",APP_LAST_MINOR) && ereg("ß",APP_MINOR) && str_replace("-ß","",APP_LAST_MINOR) > str_replace("-ß","",APP_MINOR)) || (ereg("f",APP_LAST_MINOR) && ereg("f",APP_MINOR) && str_replace("-f","",APP_LAST_MINOR) > str_replace("-f","",APP_MINOR)) || (ereg("RC",APP_LAST_MINOR) && ereg("RC",APP_MINOR) && str_replace("-RC","",APP_LAST_MINOR) > str_replace("-RC","",APP_MINOR))))))
  if(UPD_CHECK && (($app_last_version > $app_version) || (($app_last_version == $app_version) && ((APP_LAST_MINOR == "" && (stripos(APP_MINOR,"RC") !== false || strpos(APP_MINOR,"ß") !== false)) || (stripos(APP_LAST_MINOR,"f") !== false && (stripos(APP_MINOR,"RC") !== false || strpos(APP_MINOR,"ß") !== false || APP_MINOR == "")) || (stripos(APP_LAST_MINOR,"RC") !== false && strpos(APP_MINOR,"ß") !== false) || (strpos(APP_LAST_MINOR,"ß") !== false && strpos(APP_MINOR,"ß") !== false && str_replace("-ß","",APP_LAST_MINOR) > str_replace("-ß","",APP_MINOR)) || (stripos(APP_LAST_MINOR,"f") !== false && stripos(APP_MINOR,"f") !== false && str_ireplace("-f","",APP_LAST_MINOR) > str_ireplace("-f","",APP_MINOR)) || (stripos(APP_LAST_MINOR,"RC") !== false && stripos(APP_MINOR,"RC") && str_ireplace("-RC","",APP_LAST_MINOR) > str_ireplace("-RC","",APP_MINOR))))))
@@ -405,23 +413,32 @@ if (UPD_CHECK)
  	if (stripos(APP_LAST_MINOR,"f") !== false) $minor_dir = "/Fixes/";
 # 	elseif (strpos(APP_LAST_MINOR,"ß") !== false || stripos(APP_LAST_MINOR,"RC") !== false) $minor_dir = "/Betas/";
  	?>
- 						<li><a href="http://www.ciprianmp.com/atm/index.php?directory=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_LAST_VERSION.$minor_dir); ?>" target=_blank Title="Download the <?php echo(APP_NAME." - ".APP_LAST_VERSION.APP_LAST_MINOR); ?> Update" onMouseOver="window.status='Download <?php echo(APP_NAME." - ".APP_LAST_VERSION.APP_LAST_MINOR); ?> Update.'; return true">Download <?php echo(APP_LAST_VERSION.APP_LAST_MINOR); ?></a></li>
+ 						<li><a href="http://www.ciprianmp.com/atm/index.php?directory=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_LAST_VERSION.$minor_dir); ?>" target=_blank Title="<?php echo sprintf(A_CONF_ERR_3b, APP_LAST_VERSION.APP_LAST_MINOR); ?>" onMouseOver="window.status='<?php echo sprintf(A_CONF_ERR_3b, APP_LAST_VERSION.APP_LAST_MINOR); ?>.'; return true"><?php echo sprintf(A_CONF_35, APP_LAST_VERSION.APP_LAST_MINOR); ?></a></li>
  <?php
  }
  	?>
-					<li><a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Plus FAQ.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="Open <?php echo(APP_NAME); ?> Online FAQ" onMouseOver="window.status='Open <?php echo(APP_NAME); ?> Online FAQ'; return true">FAQ Online</a></li>
-					<li><a href="http://www.ciprianmp.com/latest/" target=_blank Title="Go to <?php echo(APP_NAME); ?> Try me server" onMouseOver="window.status='Go to <?php echo(APP_NAME); ?> Try me server.'; return true">Try me server</a></li>
-					<li><a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>.'; return true;" title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>" target=_blank>Submit your feedback</a></li>
-					<li><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ciprianmp%40hotmail%2ecom&item_name=Support%20for%20phpMyChat%20Plus%20development&no_shipping=1&cn=Optional%20Thoughts&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8" onClick="return confirm('<?php echo(L_SUPP_WARN); ?>');" onMouseOver="window.status='Wish to keep <?php echo(APP_NAME); ?> FREE?'; return true;" title="Wish to keep <?php echo(APP_NAME); ?> FREE?" target="_blank">Wish to donate?</a></li>
-					<li><a onClick="javascript:alert('<?php echo (sprintf(trim(A_SHEET5_0),":\\n".APP_NAME." - ".APP_VERSION.APP_MINOR)); ?>\n\nReleased on:\n<?php echo(RELEASE_DATE); ?>.\n\n&copy; 2000-<?php echo(date('Y')); ?>\nPlus Developer: <?php echo(PLUS_DEVELOPER); ?>\n\nBig thanks to all the contributors\nto the phpHeaven Team work\nand the phpMyChat groups on\nYahoo! and Sourceforge.\n\nThank you for using our work!')" Title="What is this?" onMouseOver="window.status='What is this?'; return true">About Plus</a></li>
+					<li><a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Plus FAQ.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_36)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_36)); ?>'; return true"><?php echo A_CONF_36; ?></a></li>
+					<li><a href="http://www.ciprianmp.com/latest/" target=_blank Title="<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_37)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_37)); ?>.'; return true"><?php echo A_CONF_37; ?></a></li>
+					<li><a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>.'; return true;" title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>" target=_blank><?php echo A_CONF_38; ?></a></li>
+					<li><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ciprianmp%40hotmail%2ecom&item_name=Support%20for%20phpMyChat%20Plus%20development&no_shipping=1&cn=Optional%20Thoughts&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8" onClick="return confirm('<?php echo(L_SUPP_WARN); ?>');" onMouseOver="window.status='Wish to keep <?php echo(APP_NAME); ?> FREE?'; return true;" title="Wish to keep <?php echo(APP_NAME); ?> FREE?" target="_blank"><?php echo A_CONF_39; ?></a></li> <!-- Wish to donate? -->
+<?php
+					if ($translate_it)
+					{
+?>
+						<li><a onClick="javascript:alert('<?php echo("Would you like this Configuration page\\nfully translated into your ".mb_convert_case(str_replace("_"," ",$L),MB_CASE_TITLE,$Charset)." language?\\n\\nYou can contribute yourself by copying the file\\nlocalization/english/localized.config.php\\ninto your language folder localization/".$L."/\\nand then translate it using Notepad++ (free),\\navailable at http://notepad-plus-plus.org.\\n\\nDon\'t forget to send your final file to the developer\\nat ".PLUS_DEVELOPER_EMAIL." for review and packing.\\n\\nThank you and Good luck!\\n".PLUS_DEVELOPER); ?>')" Title="<?php echo("Translate this configuration file"); ?>" onMouseOver="window.status='<?php echo("Translate this configuration file"); ?>'; return true"><?php echo("Translate it!"); ?></a></li>
+<?php
+					}
+					$longdtformatrel = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e").date('S',strtotime(RELEASE_DATE)))." of", L_LONG_DATE) : L_LONG_DATE);
+?>
+					<li><a onClick="javascript:alert('<?php echo(sprintf(trim(A_SHEET5_0),":\\n".APP_NAME." - ".APP_VERSION.APP_MINOR) . "\\n\\n" . sprintf(A_CONF_40, (stristr(PHP_OS,'win') ? ((strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) ? str_replace(" ","",utf_conv(WIN_DEFAULT,$Charset,strftime($longdtformatrel, strtotime(RELEASE_DATE)))) : utf_conv(WIN_DEFAULT,$Charset,strftime($longdtformatrel, strtotime(RELEASE_DATE)))) : strftime($longdtformatrel, strtotime(RELEASE_DATE)))) . "\\n\\n" . A_CONF_42 . "\\n\\n" . sprintf(A_CONF_41, PLUS_DEVELOPER) . "\\n&copy; 2000-" . date('Y')); ?>')" Title="<?php echo(A_CONF_43); ?>" onMouseOver="window.status='<?php echo(A_CONF_43); ?>'; return true"><?php echo(A_CONF_44); ?></a></li>
 				</ul>
 			</dd>
 	</dl>
 	<dl class="nav">
-		<dt onmouseover="javascript:show();"><a href="#home" title="Scroll home">Home</a></dt>
+		<dt onmouseover="javascript:show();"><a href="#home" title="<?php echo A_CONF_46a; ?>"><?php echo A_CONF_46; ?></a></dt>
 	</dl>
 	<dl class="nav">
-		<dt onmouseover="javascript:show();"><a class="save" href="#save_settings" title="Jump to save button">Save</a></dt>
+		<dt onmouseover="javascript:show();"><a class="save" href="#save_settings" title="<?php echo A_CONF_47a; ?>"><?php echo A_CONF_47; ?></a></dt>
 	</dl>
 </div>
 <div id="container">
@@ -441,7 +458,7 @@ if (UPD_CHECK)
 			// -->
 			</script>
 <?php
-			echo("</td></tr><tr><td class=error align=center><h3>".sprintf(A_SHEET5_1,APP_LAST_VERSION.APP_LAST_MINOR)."<br />Download the ".APP_LAST_VERSION.APP_LAST_MINOR." update from <a href=\"http://www.ciprianmp.com/atm/index.php?directory=programming/phpMyChat/Ciprian_releases/Plus_version/".APP_LAST_VERSION.$minor_dir."\" target=\"_blank\" Title=\"Download the ".APP_LAST_VERSION.APP_LAST_MINOR." Update\" onMouseOver=\"window.status='Download the ".APP_LAST_VERSION.APP_LAST_MINOR." Update.'; return true\">here</a></h3>");
+			echo("</td></tr><tr><td class=error align=center><h3>".sprintf(A_SHEET5_1,APP_LAST_VERSION.APP_LAST_MINOR)."<br />".sprintf(A_CONF_ERR_3, APP_LAST_VERSION.APP_LAST_MINOR, "<a href=\"http://www.ciprianmp.com/atm/index.php?directory=programming/phpMyChat/Ciprian_releases/Plus_version/".APP_LAST_VERSION.$minor_dir."\" target=\"_blank\" Title=\"".sprintf(A_CONF_ERR_3b, APP_LAST_VERSION.APP_LAST_MINOR)."\" onMouseOver=\"window.status='".sprintf(A_CONF_ERR_4, APP_LAST_VERSION.APP_LAST_MINOR).".'; return true\">".A_CONFHERE."</a></h3>"));
 		}
 ?>
 <br /></td></tr></table></p></div>
@@ -693,16 +710,16 @@ if(C_BOT_NAME != $vBOT_NAME || C_BOT_FONT_COLOR != $vBOT_FONT_COLOR || C_BOT_AVA
 				" WHERE email='bot@bot.com'";
 	if (trim($vBOT_NAME) == "" && C_BOT_NAME != $vBOT_NAME)
 	{
-		$Error = "You must type a username for your Bot";
+		$Error = sprintf(A_CONF_ERR_6, A_CONFBOT);
 	}
 #	else if (ereg("[\, \']", stripslashes($vBOT_NAME)) && C_BOT_NAME != $vBOT_NAME)
 	else if(preg_match("/[ |,|'|\\\\]/", $vBOT_NAME) && C_BOT_NAME != $vBOT_NAME)
 	{
-		$Error = "Only these extra-characters allowed:<br />".$REG_CHARS_ALLOWED."<br />Spaces, commas or backslashes (\\) not allowed.<br />Check the syntax of the Bot name (".$vBOT_NAME.")";
+		$Error = A_CONF_ERR_7."<br />".$REG_CHARS_ALLOWED."<br />".sprintf(A_CONF_ERR_8, A_CONFBOT, "(".$vBOT_NAME.")");
 	}
 	else if((C_NO_SWEAR && checkwords($vBOT_NAME, true, $Charset)) && C_BOT_NAME != $vBOT_NAME)
 	{
-		$Error = "Banished word found in the Bot username (".$vBOT_NAME.")";
+		$Error = sprintf(A_CONF_ERR_9, A_CONFBOT, "(".$vBOT_NAME.")");
 	}
 	else
 	{
@@ -711,7 +728,7 @@ if(C_BOT_NAME != $vBOT_NAME || C_BOT_FONT_COLOR != $vBOT_FONT_COLOR || C_BOT_AVA
 		$DbLink->clean_results();
 		if ($rows != 0 && C_BOT_NAME != $vBOT_NAME)
 		{
-			$Error = "The name of your Bot (".$vBOT_NAME.") is already registered.<br />Choose another one";
+			$Error = sprintf(A_CONF_ERR_10, A_CONFBOT, "(".$vBOT_NAME.")");
 		}
 		else
 		{
@@ -733,16 +750,16 @@ if((C_QUOTE_NAME != $vQUOTE_NAME || C_QUOTE_FONT_COLOR != $vQUOTE_FONT_COLOR || 
 				" WHERE email='quote@quote.com'";
 	if (trim($vQUOTE_NAME) == "" && C_QUOTE_NAME != $vQUOTE_NAME)
 	{
-		$Error = "You must type a username for your Random Quote";
+		$Error = sprintf(A_CONF_ERR_6, A_CONFRDQ);
 	}
 # 	else if (ereg("[\, \']", stripslashes($vQUOTE_NAME)) && C_QUOTE_NAME != $vQUOTE_NAME)
 	else if(preg_match("/[ |,|'|\\\\]/", $vQUOTE_NAME) && C_QUOTE_NAME != $vQUOTE_NAME)
 	{
-		$Error = "Only these extra-characters allowed:<br />".$REG_CHARS_ALLOWED."<br />Spaces, commas or backslashes (\\) not allowed.<br />Check the syntax of the Random Quote name (".$vQUOTE_NAME.")";
+		$Error = A_CONF_ERR_7."<br />".$REG_CHARS_ALLOWED."<br />".sprintf(A_CONF_ERR_8, A_CONFRDQ, "(".$vQUOTE_NAME.")");
 	}
 	else if((C_NO_SWEAR && checkwords($vQUOTE_NAME, true, $Charset)) && C_QUOTE_NAME != $vQUOTE_NAME)
 	{
-		$Error = "Banished word found in the Random Quote username (".$vQUOTE_NAME.")";
+		$Error = sprintf(A_CONF_ERR_9, A_CONFRDQ, "(".$vQUOTE_NAME.")");
 	}
 	else
 	{
@@ -751,7 +768,7 @@ if((C_QUOTE_NAME != $vQUOTE_NAME || C_QUOTE_FONT_COLOR != $vQUOTE_FONT_COLOR || 
 		$DbLink->clean_results();
 		if ($rows != 0 && C_QUOTE_NAME != $vQUOTE_NAME)
 		{
-			$Error = "The name of your Random Quote (".$vQUOTE_NAME.") is already registered.<br />Choose another one";
+			$Error = sprintf(A_CONF_ERR_10, A_CONFRDQ, "(".$vQUOTE_NAME.")");
 		}
 		else
 		{
@@ -762,14 +779,14 @@ if((C_QUOTE_NAME != $vQUOTE_NAME || C_QUOTE_FONT_COLOR != $vQUOTE_FONT_COLOR || 
 
 if (isset($Error))
 {
-	echo "<div><p><table align=center border=0 cellpadding=3 class=menu style=\"background: white;\"><tr><td class=error align=center><br /><h3>".$Error."!</h3></td></tr></table></p></div>";
+	echo "<div><p><table align=center border=0 cellpadding=3 class=menu style=\"background: white;\"><tr><td class=error align=center><br /><h3>".$Error."</h3></td></tr></table></p></div>";
 }
 else
 {
-	echo "<div><p><table align=center border=0 cellpadding=3 class=menu style=\"background: white;\"><tr><td class=success align=center><br /><h3>Configuration Settings Changed Successfully!</h3></td></tr></table></p>";
+	echo "<div><p><table align=center border=0 cellpadding=3 class=menu style=\"background: white;\"><tr><td class=success align=center><br /><h3>".A_CONF_ERR_1."</h3></td></tr></table></p>";
 	if(C_LOG_DIR != $vLOG_DIR)
 	{
-		echo "<p><table align=center border=0 cellpadding=3 class=menu style=\"background: white;\"><tr><td class=notify2 align=center valign=TOP>Important!</td><td class=success align=center>Don't forget to change remotely the name of <span style=background-color:white>".C_LOG_DIR."</span> directory to <span style=background-color:white>".$vLOG_DIR."</span><br />(and set its attributes to <b>777</b>)!</td></tr></table>";
+		echo "<p><table align=center border=0 cellpadding=3 class=menu style=\"background: white;\"><tr><td class=notify2 align=center valign=TOP>".A_CONFIMPORTANT."</td><td class=success align=center>".sprintf(A_CONF_ERR_2, "<span style=background-color:white>".C_LOG_DIR."</span>", "<span style=background-color:white>".$vLOG_DIR."</span><br />")."</td></tr></table>";
 	}
 	echo "</p></div>";
 }
@@ -783,15 +800,14 @@ else
 {
 ?>
 <a name="home"></a>
-<br />
-<p class=title><?php echo(APP_NAME); ?> Configuration Page</p>
+<p class=title><?php echo(APP_NAME); ?> <?php echo (A_CONFTITLE_0);?></p>
 <?php
 if (C_LAST_SAVED_ON)
 {
 	settype($last_saved_on = mysql_to_ts(C_LAST_SAVED_ON), "integer");
 	if (C_TMZ_OFFSET) settype($tmz_offset = C_TMZ_OFFSET, "integer");
 	$Last_Saved_On = $last_saved_on + $tmz_offset*60*60;
-	$longdtformat = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e").date('S',$Last_Saved_On))." of", L_LONG_DATETIME) : L_LONG_DATETIME);
+	$longdtformat = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e")."<sup>".date('S',$Last_Saved_On))."</sup> of", L_LONG_DATETIME) : L_LONG_DATETIME);
 	$Last_Saved_On = strftime($longdtformat, $Last_Saved_On);
 	if(stristr(PHP_OS,'win'))
 	{
@@ -802,7 +818,7 @@ if (C_LAST_SAVED_ON)
 if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 {
 	?>
-		<div><p><table align=center border=0 cellpadding=0 class=menu style=background:white><tr><td class=success align=right>The current settings were last saved <?php if (C_LAST_SAVED_ON) echo("on <span class=error>".$Last_Saved_On."</span> "); ?><?php if (C_LAST_SAVED_BY) echo("by <span class=error>".C_LAST_SAVED_BY."</span> "); ?>!</td></tr></table></div>
+	<div><p><table align=center border=0 cellpadding=0 class=menu style=background:white><tr><td class=success align=right><?php echo sprintf(A_CONF_ERR_5, (C_LAST_SAVED_ON ? " <span class=error>".$Last_Saved_On."</span>" : ""), (C_LAST_SAVED_BY ? "<span class=error>".C_LAST_SAVED_BY."</span>" : "")); ?></td></tr></table></div>
 	<?php
 }
 	?>
@@ -813,68 +829,65 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<input type=hidden name="pmc_password" value="<?php echo($pmc_password); ?>">
 		<input type=hidden name="FORM_SEND" id="FORM_SEND" value="5">
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="server"></a><b>Chat Server data</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="server"></a><b><?php echo A_CONF_1; ?></b></td></tr>
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enable automatic checking for online updates on the servers.</b><br />
-    	<i>Hint: The script can automatically check up for new releases on: ciprianmp.com/latest/ or svn.sourceforge.net!</i>
+    <td><b><?php echo A_CONFCONTENT_1; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_2); ?></i>
 	</td>
     <td>
         <select name="vUPD_CHECK">
-	        <option value="0"<?php if($UPD_CHECK==0 || !$upd_possible){ echo " selected"; } ?>>Disabled</option>
-	        <option value="1"<?php if($UPD_CHECK==1 && $upd_possible){ echo " selected"; } ?>>Enabled</option>
+	        <option value="0"<?php if($UPD_CHECK==0 || !$upd_possible){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($UPD_CHECK==1 && $upd_possible){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
         </select>
 	</td>
 </tr>
 <tr>
-    <td><b>Enable Statistics in chat.</b><br />
-    	<i>Hint: If your server bandwidth is really limited or you notice overloading of your server, you shall disable this mod!</i>
+    <td><b><?php echo A_CONFCONTENT_3; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_4); ?></i>
 	</td>
     <td>
         <select name="vEN_STATS">
-	        <option value="0"<?php if($EN_STATS==0){ echo " selected"; } ?>>Disabled</option>
-	        <option value="1"<?php if($EN_STATS==1){ echo " selected"; } ?>>Enabled</option>
+	        <option value="0"<?php if($EN_STATS==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($EN_STATS==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
         </select>
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Clean-up time for old messages.</b>
+    <td><b><?php echo A_CONFCONTENT_5; ?></b>
 	</td>
     <td>
-		<input name="vMSG_DEL" type="text" size="7" maxlength="3" value="<?php echo $MSG_DEL; ?>"> (hours)
-	</td>
+		<input name="vMSG_DEL" type="text" size="7" maxlength="3" value="<?php echo $MSG_DEL; ?>">&nbsp;(<?php echo $MSG_DEL == 1 ? L_HOUR : L_HOURS; ?>)</td>
 </tr>
 <tr>
-    <td><b>Autoboot time for inactive users in rooms.</b><br />
-    	<i>Hint: This autoboot feature forces users to be active in rooms. If they want to be lurking, they should just use the lurking page. Admins, moderators and away users won't be booted</i>
+    <td><b><?php echo A_CONFCONTENT_7; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_8); ?></i>
 	</td>
     <td>
         <select name="vCHAT_BOOT">
-	        <option value="0"<?php if($CHAT_BOOT==0){ echo " selected"; } ?>>Disabled</option>
-	        <option value="1"<?php if($CHAT_BOOT==1){ echo " selected"; } ?>>Enabled</option>
+	        <option value="0"<?php if($CHAT_BOOT==0){ echo " selected"; } ?>><?php echo L_DISABLED ?></option>
+	        <option value="1"<?php if($CHAT_BOOT==1){ echo " selected"; } ?>><?php echo L_ENABLED ?></option>
         </select><br />
-    	<input name="vUSR_DEL" type="text" size="7" maxlength="2" value="<?php echo $USR_DEL; ?>"> (minutes)
-	</td>
+    	<input name="vUSR_DEL" type="text" size="7" maxlength="2" value="<?php echo $USR_DEL; ?>">&nbsp;(<?php echo $USR_DEL == 1 ? L_MIN : L_MINS; ?>)</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Delete registered users accounts not active in this interval (0 for never).</b>
+    <td><b><?php echo A_CONFCONTENT_10 ?></b>
     </td>
     <td>
-		<input name="vREG_DEL" type="text" size="7" maxlength="4" value="<?php echo $REG_DEL; ?>"> (days)
-	</td>
+		<input name="vREG_DEL" type="text" size="7" maxlength="4" value="<?php echo $REG_DEL; ?>">&nbsp;(<?php echo $REG_DEL == 1 ? L_DAY : L_DAYS; ?>)</td>
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="languages"></a><b>Languages</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="languages"></a><b><?php echo A_CONF_2 ?></b></td></tr>
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1 ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2 ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Default Language for Chatroom.</b>
+    <td><b><?php echo A_CONFCONTENT_12; ?></b>
 	</td>
     <td>
 		<?php
@@ -964,103 +977,103 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 				$flagsel = "flag0.gif";
 			}
 			?>
-	    </select>&nbsp;<img style="vertical-align:middle" id="flagToSwap" src="<?php echo("./".$ChatPath."localization/".$namesel."/images/".($FLAGS_3D ? $flagsel_3d : $flagsel)); ?>" <?php echo("border=0 ALT=\"Language Flag selector\" Title=\"Language Flag selector\""); ?> />
+	    </select>&nbsp;<img style="vertical-align:middle" id="flagToSwap" src="<?php echo("./".$ChatPath."localization/".$namesel."/images/".($FLAGS_3D ? $flagsel_3d : $flagsel)); ?>" <?php echo("border=0 ALT=\"".A_CONFCONTENT_12a."\" Title=\"".A_CONFCONTENT_12a."\""); ?> />
     </td>
 </tr>
 <tr>
-    <td><b>English format (for flags and date&time formats).</b>
+    <td><b><?php echo A_CONFCONTENT_13; ?></b>
 	</td>
     <td><select name="vENGLISH_FORMAT" id="ENflag" onChange="swapImage('ENflag','ENToSwap'); swapImage('3Dflag','3DToSwap'); swapImage('flags','flagToSwap')">
 	        <option value="UK"<?php if($ENGLISH_FORMAT=="UK"){ echo " selected"; $ENsel = ($FLAGS_3D) ? "flag.gif" : "flag0.gif"; } ?>><?php echo(L_ORIG_LANG_ENUK); ?></option>
 	        <option value="US"<?php if($ENGLISH_FORMAT=="US"){ echo " selected"; $ENsel = ($FLAGS_3D) ? "flag_us.gif" : "flag_us0.gif"; } ?>><?php echo(L_ORIG_LANG_ENUS); ?></option>
-        </select>&nbsp;<img style="vertical-align:middle" id="ENToSwap" src="<?php echo(($FLAGS_3D) ? "./".$ChatPath."localization/english/images/".$ENsel."" : "./".$ChatPath."localization/english/images/".$ENsel.""); ?>" <?php echo("border=0 ALT=\"English locale formats\" Title=\"English locale formats\""); ?> />
+        </select>&nbsp;<img style="vertical-align:middle" id="ENToSwap" src="<?php echo(($FLAGS_3D) ? "./".$ChatPath."localization/english/images/".$ENsel."" : "./".$ChatPath."localization/english/images/".$ENsel.""); ?>" <?php echo("border=0 ALT=\"".A_CONFCONTENT_13a."\" Title=\"".A_CONFCONTENT_13a."\""); ?> />
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Allow users to choose a language from the available translations.</b>
+    <td><b><?php echo A_CONFCONTENT_14; ?></b>
 	</td>
     <td>
         <select name="vMULTI_LANG">
-	        <option value="0"<?php if($MULTI_LANG==0){ echo " selected"; } ?>>Default only</option>
-	        <option value="1"<?php if($MULTI_LANG==1){ echo " selected"; } ?>>All available</option>
+	        <option value="0"<?php if($MULTI_LANG==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_14_1; ?></option>
+	        <option value="1"<?php if($MULTI_LANG==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_14_2; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Flags images type.</b>
+    <td><b><?php echo A_CONFCONTENT_15; ?></b>
 	</td>
     <td><select name="vFLAGS_3D" id="3Dflag" onChange="swapImage('3Dflag','3DToSwap'); swapImage('ENflag','ENToSwap'); swapImage('flags','flagToSwap')">
-	        <option value="0"<?php if($FLAGS_3D==0){ echo " selected"; } ?>>2D (std)</option>
-	        <option value="1"<?php if($FLAGS_3D==1){ echo " selected"; } ?>>3D (new)</option>
-        </select>&nbsp;<img style="vertical-align:middle" id="3DToSwap" src="<?php echo(($FLAGS_3D) ? "./".$ChatPath."localization/english/images/flag.gif" : "./".$ChatPath."localization/english/images/flag0.gif"); ?>" <?php echo("border=0 ALT=\"Flags format\" Title=\"Flags format\""); ?> />
+	        <option value="0"<?php if($FLAGS_3D==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_15b; ?></option>
+	        <option value="1"<?php if($FLAGS_3D==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_15c; ?></option>
+        </select>&nbsp;<img style="vertical-align:middle" id="3DToSwap" src="<?php echo(($FLAGS_3D) ? "./".$ChatPath."localization/english/images/flag.gif" : "./".$ChatPath."localization/english/images/flag0.gif"); ?>" <?php echo("border=0 ALT=\"".A_CONFCONTENT_15a."\" Title=\"".A_CONFCONTENT_15a."\""); ?> />
     </td>
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="owner"></a><b>Owner data</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="owner"></a><b><?php echo A_CONF_3; ?></b></td></tr>
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2 ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><a name="ownername"></a><b>Enter admin real name (or chat name) to be sent on email headers.</b>
+    <td><a name="ownername"></a><b><?php echo A_CONFCONTENT_16; ?></b>
 	</td>
     <td>
 		<input name="vADMIN_NAME" type="text" size="25" maxlength="35" value="<?php echo $ADMIN_NAME; ?>">
 	</td>
 </tr>
 <tr>
-    <td><a name="admin_email"></a><b>Enter admin email to be sent on email headers.</b><br />
-    	<i>Hint: also to receive notifications on new user registration</i>
+    <td><a name="admin_email"></a><b><?php echo A_CONFCONTENT_17; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_18); ?></i>
     </td>
     <td>
 		<input name="vADMIN_EMAIL" type="text" size="25" maxlength="35" value="<?php echo $ADMIN_EMAIL; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enter your chat URL to be sent on email headers.</b>
+    <td><b><?php echo A_CONFCONTENT_19; ?></b>
 	</td>
     <td>
 		<input name="vCHAT_URL" type="text" size="25" maxlength="100" value="<?php echo $CHAT_URL; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>Enter your Default Closing Greeting for your emails.</b><br />
-    		<i>Hint: This is used only by admins in the Send emails sheet</i>
+    <td><b><?php echo A_CONFCONTENT_20; ?></b><br />
+    		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_21); ?></i>
    	</td>
     <td>
 		<textarea name="vMAIL_GREETING" rows=3 cols=28 wrap=on><?php echo $MAIL_GREETING; ?></textarea>
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Public Name of your chat server as you wish to be known on the web.</b>
+    <td><b><?php echo A_CONFCONTENT_22; ?></b>
 	</td>
     <td>
 		<input name="vCHAT_NAME" type="text" size="25" maxlength="255" value="<?php echo $CHAT_NAME; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>Path to the LOGO image.</b><br />
-    		<i>Hint: Logo image to display (absolute or relative paths allowed) - e.g. http://path_to_the_image.jpg or ./../path_to_the_image.jpg</i><br />
-    		(path_to_the_image.jpg can be any image accessible on/from the web - .jpg, .gif, .bmp, .png)
+    <td><b><?php echo A_CONFCONTENT_23; ?></b><br />
+    		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_24); ?></i><br />
+    		<?php echo A_CONFCONTENT_25; ?>
     </td>
     <td>
 		<select name="vSHOW_LOGO">
-	        <option value="0"<?php if($SHOW_LOGO==0){ echo " selected"; } ?>>Hide Logo</option>
-	        <option value="1"<?php if($SHOW_LOGO==1){ echo " selected"; } ?>>Show Logo</option>
+	        <option value="0"<?php if($SHOW_LOGO==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_23_1; ?></option>
+	        <option value="1"<?php if($SHOW_LOGO==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_23_2; ?></option>
         </select><br />
 		<input name="vLOGO_IMG" type="text" size="25" maxlength="255" value="<?php echo $LOGO_IMG; ?>"><br />
 		<img src="<?php echo($LOGO_IMG); ?>" border=0 width=180 <?php echo("ALT=\"".$LOGO_ALT."\" Title=\"".$LOGO_ALT."\""); ?> />
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>URL to be opened by LOGO (opens in new window).</b></td>
+    <td><b><?php echo A_CONFCONTENT_26; ?></b></td>
     <td>
 		<input name="vLOGO_OPEN" type="text" size="25" maxlength="255" value="<?php echo $LOGO_OPEN; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>Text to be displayed by LOGO on MouseOver (the ALT/TITLE property).</b>
+    <td><b><?php echo A_CONFCONTENT_27; ?></b>
 	</td>
     <td>
 		<input name="vLOGO_ALT" type="text" size="25" maxlength="255" value="<?php echo $LOGO_ALT; ?>">
@@ -1068,251 +1081,253 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="registration"></a><b>Registration</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="registration"></a><b><?php echo A_CONF_4; ?></b></td></tr>
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Allow Registration for your chat.</b><br />
-    	<font color=red>Disable this only if you want to add the registered users manually, or read the <a href=#reg_hint class="ChatLink">Hint</a> below to make it automatically but to wait for your approval.</font>
+    <td><b><?php echo A_CONFCONTENT_28; ?></b><br />
+    	<font color=red><?php echo A_CONFCONTENT_29; ?></font>
 	</td>
     <td>
         <select name="vALLOW_REGISTER">
-	        <option value="0"<?php if($ALLOW_REGISTER==0){ echo " selected"; } ?>>Registration disabled</option>
-	        <option value="1"<?php if($ALLOW_REGISTER==1){ echo " selected"; } ?>>Registration enabled</option>
-        </select><br />
-		<font color=red> * - Registration enabled</font>
+	        <option value="0"<?php if($ALLOW_REGISTER==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($ALLOW_REGISTER==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+        </select>
+		<font color=red> * - <?php echo L_ENABLED; ?></font>
     </td>
 </tr>
 <tr>
-    <td><b>Require Registration to join chat.</b>
+    <td><b><?php echo A_CONFCONTENT_30; ?></b>
 	</td>
     <td>
         <select name="vREQUIRE_REGISTER">
-	        <option value="0"<?php if($REQUIRE_REGISTER==0){ echo " selected"; } ?>>Optional</option>
-	        <option value="1"<?php if($REQUIRE_REGISTER==1){ echo " selected"; } ?>>Required</option>
+	        <option value="0"<?php if($REQUIRE_REGISTER==0){ echo " selected"; } ?>><?php echo A_CONFOPTIONAL; ?></option>
+	        <option value="1"<?php if($REQUIRE_REGISTER==1){ echo " selected"; } ?>><?php echo A_CONFREQUIRED; ?></option>
         </select>
+		<font color=red> *</font>
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>First and Last names required on registration and profiles.</b>
+    <td><b><?php echo A_CONFCONTENT_31; ?></b>
 	</td>
     <td>
         <select name="vREQUIRE_NAMES">
-	        <option value="0"<?php if($REQUIRE_NAMES==0){ echo " selected"; } ?>>Optional</option>
-	        <option value="1"<?php if($REQUIRE_NAMES==1){ echo " selected"; } ?>>Required</option>
+	        <option value="0"<?php if($REQUIRE_NAMES==0){ echo " selected"; } ?>><?php echo A_CONFOPTIONAL; ?></option>
+	        <option value="1"<?php if($REQUIRE_NAMES==1){ echo " selected"; } ?>><?php echo A_CONFREQUIRED; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Automatically generate Password (and email it to new registered users).</b>
+    <td><b><?php echo A_CONFCONTENT_32; ?></b>
 	</td>
     <td>
         <select name="vEMAIL_PASWD">
-	        <option value="0"<?php if($EMAIL_PASWD==0){ echo " selected"; } ?>>Disabled</option>
-	        <option value="1"<?php if($EMAIL_PASWD==1){ echo " selected"; } ?>>Enabled</option>
+	        <option value="0"<?php if($EMAIL_PASWD==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($EMAIL_PASWD==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
         </select>
-		<font color=red> * - Enabled</font>
+		<font color=red> * - <?php echo L_ENABLED; ?></font>
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Length of the Password to be generated and sent by email.</b>
+    <td><b><?php echo A_CONFCONTENT_33; ?></b>
 	</td>
     <td>
 		<input name="vPASS_LENGTH" type="text" size="7" maxlength="2" value="<?php echo $PASS_LENGTH; ?>">
     </td>
 </tr>
 <tr>
-    <td><b>Send account details to the new registered user.</b>
+    <td><b><?php echo A_CONFCONTENT_34; ?></b>
 	</td>
     <td>
         <select name="vEMAIL_USER">
-	        <option value="0"<?php if($EMAIL_USER==0){ echo " selected"; } ?>>Don't send</option>
-	        <option value="1"<?php if($EMAIL_USER==1){ echo " selected"; } ?>>Send details</option>
+	        <option value="0"<?php if($EMAIL_USER==0){ echo " selected"; } ?>><?php echo A_CONFNOTSEND; ?></option>
+	        <option value="1"<?php if($EMAIL_USER==1){ echo " selected"; } ?>><?php echo A_CONFSEND; ?></option>
         </select>
-		<font color=red> * - Don't send</font>
+		<font color=red> * - <?php echo A_CONFNOTSEND; ?></font>
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Send account details (notifications) to admin on new user registration.</b>
+    <td><b><?php echo A_CONFCONTENT_35; ?></b>
 	</td>
     <td>
         <select name="vADMIN_NOTIFY">
-	        <option value="0"<?php if($ADMIN_NOTIFY==0){ echo " selected"; } ?>>Don't notify</option>
-	        <option value="1"<?php if($ADMIN_NOTIFY==1){ echo " selected"; } ?>>Notify admin</option>
+	        <option value="0"<?php if($ADMIN_NOTIFY==0){ echo " selected"; } ?>><?php echo A_CONFNOTSEND; ?></option>
+	        <option value="1"<?php if($ADMIN_NOTIFY==1){ echo " selected"; } ?>><?php echo A_CONFSEND; ?></option>
         </select>
-		<font color=red> * - Notify admin</font>
+		<font color=red> * - <?php echo A_CONFSEND; ?></font>
     </td>
 </tr>
 <tr>
     <td colspan="2"><a name="reg_hint"></a>
-	<font color=red>* <b>Hint</b></font> <b>for the best settings if you want to control who registers and gets into your chat:</b><br />
-			<i>- Allow Registration for your chat: <font color=green>Registration enabled</font><br />
-			- Require Registration to join chat: if <font color=green>Required</font> is set, only the registered users will be able to login to chat<br />
-			- Generate and email Password to new registered users: <font color=green>Enabled</font><br />
-			- Send account details to the new registered user: <font color=green>Don't send</font><br />
-			- Send account details (notifications) to admin on new user registration: <font color=green>Notify admin</font><br />
-			As a result, the user will choose his desired data, a random password will be generated, but the user will not receive the email with the password, so he still cannot login; he will only get a notifying email about the pending registration.<br />
-			In the same time, the admin will receive <u>2 emails</u>:
-			<li>1st - is a copy of the registration data, for admin's future reference (like when the user forgets the password). This is email is always sent in English;</li>
-			<li>2nd - is the email which contains the generated password and rest of the data for the new created account (this email is already prepared to be sent/forwarded to the user, if the account is approved). This email it will be written in the language the user chosen on registration.</li><br />
-			The admin verifies who is the person, what data did the user provide. If he decides to approve that user account, admin will just have to forward the second email to that user's email (the email is already formatted for approval). Another way is to go to "<?php echo(A_MENU_4); ?>" and send an email with the login data to that user's email. Optionally, the admin can even login with that name/password in the "Edit profile" form and adjust/change the data/password<br />
-			<font color=red>Important: Don't forget to put your right admin email <a href=#admin_email class="ChatLink">here</a>, in order to have all these to work). Also keep into account that these settings will turn your chat server into a non-public one (restrictive, private). If you fail to verify and approve the account in time, your neglected user might just give up on coming back.</font></i>
+	<b><font color=red>* <?php echo sprintf(A_CONFHINT, A_CONFCONTENT_37); ?></b></font>
+			<i><ul>
+				<li>- <?php echo A_CONFCONTENT_38; ?> <b><font color=blue><?php echo L_ENABLED; ?></font></b></li>
+				<li>- <?php echo sprintf(A_CONFCONTENT_39, "<b><font color=blue>".A_CONFREQUIRED."</font></b>"); ?></li>
+				<li>- <?php echo A_CONFCONTENT_41; ?> <b><font color=blue><?php echo L_ENABLED; ?></font></b></li>
+				<li>- <?php echo A_CONFCONTENT_42; ?> <b><font color=blue><?php echo A_CONFNOTSEND; ?></font></b></li>
+				<li>- <?php echo A_CONFCONTENT_43; ?> <b><font color=blue><?php echo A_CONFSEND; ?></font></b></li>
+			</ul>
+			<?php echo A_CONFCONTENT_44; ?><br />
+			<?php echo A_CONFCONTENT_45; ?>
+			<li><?php echo A_CONFCONTENT_46; ?></li>
+			<li><?php echo A_CONFCONTENT_47; ?></li><br />
+			<?php echo sprintf(A_CONFCONTENT_48, "\"".A_MENU_4."\""); ?><br />
+			<font color=red><?php echo sprintf(A_CONFIMPORTANT, sprintf(A_CONFCONTENT_50, "<a href=#admin_email class=\"ChatLink\">".A_CONFHERE."</a>")); ?></i>
 	</td>
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="functionality"></a><b>Functionality</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="functionality"></a><b><?php echo A_CONF_5; ?></b></td></tr>
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enable banishment feature and define the delay for it.</b><br />
-		<i>Hint: 0 = disabled, any integer = day(s) for banishment</i>
+    <td><b><?php echo A_CONFCONTENT_53; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_54); ?></i>
 	</td>
     <td>
-    	<input name="vBANISH" type="text" size="7" maxlength="3" value="<?php echo $BANISH; ?>"> (days)
+    	<input name="vBANISH" type="text" size="7" maxlength="3" value="<?php echo $BANISH; ?>">&nbsp;(<?php echo $BANISH == 1 ? L_DAY : L_DAYS; ?>)
     </td>
 </tr>
 <tr>
-    <td><b>Banishment type.</b><br />
-    	<i>Hint: ban by IP and username simultaneously or only by IP.
-		<li>- First option will only ban the username from a shared IP, useful when the banned user comes from a shared IP or for parental control purposes (e.g. when a shared computer/access point is used by a child);
-		<li>- The second option will ban all the usernames trying to login from the same IP (more effective).</i>
+    <td><b><?php echo A_CONFCONTENT_55; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_56); ?>
+		<li><?php echo A_CONFCONTENT_57; ?>
+		<li><?php echo A_CONFCONTENT_58; ?></i>
     </td>
     <td>
         <select name="vBAN_IP">
-	        <option value="0"<?php if($BAN_IP==0){ echo " selected"; } ?>>By IP and Username</option>
-	        <option value="1"<?php if($BAN_IP==1){ echo " selected"; } ?>>Only by IP</option>
+	        <option value="0"<?php if($BAN_IP==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_59; ?></option>
+	        <option value="1"<?php if($BAN_IP==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_60; ?></option>
         </select>
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Use graphical smilies in messages.</b>
+    <td><b><?php echo A_CONFCONTENT_61; ?></b>
 	</td>
     <td>
         <select name="vUSE_SMILIES">
-	        <option value="0"<?php if($USE_SMILIES==0){ echo " selected"; } ?>>No smilies</option>
-	        <option value="1"<?php if($USE_SMILIES==1){ echo " selected"; } ?>>Show smilies</option>
+	        <option value="0"<?php if($USE_SMILIES==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_62; ?></option>
+	        <option value="1"<?php if($USE_SMILIES==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_63; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Keep HTML tags in messages.</b><br />
-    <i>Hint: <b>simple</b>: keep bold, italic and underline tags; <b>none</b>: keep none</i>
+    <td><b><?php echo A_CONFCONTENT_64; ?></b><br />
+    <i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_65); ?></i>
 	</td>
     <td>
         <select name="vHTML_TAGS_KEEP">
-	        <option value="0"<?php if($HTML_TAGS_KEEP=='simple'){ echo " selected"; } ?>>Simple</option>
-	        <option value="1"<?php if($HTML_TAGS_KEEP=='none'){ echo " selected"; } ?>>None</option>
+	        <option value="0"<?php if($HTML_TAGS_KEEP=='simple'){ echo " selected"; } ?>><?php echo A_CONFCONTENT_66; ?></option>
+	        <option value="1"<?php if($HTML_TAGS_KEEP=='none'){ echo " selected"; } ?>><?php echo A_CONFCONTENT_67; ?></option>
         </select>
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Show discarded HTML tags.</b>
+    <td><b><?php echo A_CONFCONTENT_68; ?></b>
 	</td>
     <td>
         <select name="vHTML_TAGS_SHOW">
-	        <option value="0"<?php if($HTML_TAGS_SHOW==0){ echo " selected"; } ?>>Remove discarded tags</option>
-	        <option value="1"<?php if($HTML_TAGS_SHOW==1){ echo " selected"; } ?>>Show discarded tags</option>
+	        <option value="0"<?php if($HTML_TAGS_SHOW==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_69; ?></option>
+	        <option value="1"<?php if($HTML_TAGS_SHOW==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_70; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Enable posted links protection by opening links in a popup window.</b><br />
-			<i>Hint: if enabled, an extra window will be opened with a list of all the links posted in a message by an user. This option can assure extra protection to your chat rooms.</i>
+    <td><b><?php echo A_CONFCONTENT_71; ?></b><br />
+			<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_72); ?></i>
 	</td>
     <td>
         <select name="vPOPUP_LINKS">
-	        <option value="0"<?php if($POPUP_LINKS==0){ echo " selected"; } ?>>Open links directly from chat</option>
-	        <option value="1"<?php if($POPUP_LINKS==1){ echo " selected"; } ?>>Open links in a popup first</option>
+	        <option value="0"<?php if($POPUP_LINKS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_73; ?></option>
+	        <option value="1"<?php if($POPUP_LINKS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_74; ?></option>
         </select>
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Default messages scroll order.</b><br />
-    	<font color=red>(only for "non-H" browsers - other than IE or Firefox)</font><br />
-    	<i>Hint: those users can also use /order command to change this behavior.</i>
+    <td><b><?php echo A_CONFCONTENT_75; ?></b><br />
+    	<font color=red><?php echo A_CONFCONTENT_76; ?></font><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_77); ?></i>
     </td>
     <td>
         <select name="vMSG_ORDER">
-	        <option value="0"<?php if($MSG_ORDER==0){ echo " selected"; } ?>>Last on Top</option>
-	        <option value="1"<?php if($MSG_ORDER==1){ echo " selected"; } ?>>Last on Bottom</option>
+	        <option value="0"<?php if($MSG_ORDER==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_78; ?></option>
+	        <option value="1"<?php if($MSG_ORDER==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_79; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Default number of messages to display on first entrance.</b><br />
-    	<font color=red>Important: never set this to <b>"0"</b>; You can set it to minimum <b>"1"</b> but then you have to enable at least one of the <b>next two settings</b>.<br />
-    	If you want to keep both set to "Notify" and "Show", the value here <b>must be at least "2"</b>.</font><br />
-    	<i>Hint: users can also use /show "n" or /last "n" commands to view a different amount.</i>
+    <td><b><?php echo A_CONFCONTENT_80; ?></b><br />
+    	<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_81); ?></font><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_82); ?></i>
     </td>
     <td>
 		<input name="vMSG_NB" type="text" size="7" maxlength="2" value="<?php echo $MSG_NB; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Show notifications on every user entrance/exit in Chat rooms.</b>
+    <td><b><?php echo A_CONFCONTENT_83; ?></b>
 	</td>
     <td>
         <select name="vNOTIFY">
-	        <option value="0"<?php if($NOTIFY==0){ echo " selected"; } ?>>No notification</option>
-	        <option value="1"<?php if($NOTIFY==1){ echo " selected"; } ?>>Notify room</option>
+	        <option value="0"<?php if($NOTIFY==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_84; ?></option>
+	        <option value="1"<?php if($NOTIFY==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_85; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Display a Welcome Message when user enters chatroom.</b>
+    <td><b><?php echo A_CONFCONTENT_86; ?></b>
 	</td>
     <td>
         <select name="vWELCOME">
-	        <option value="0"<?php if($WELCOME==0){ echo " selected"; } ?>>No welcome message</option>
-	        <option value="1"<?php if($WELCOME==1){ echo " selected"; } ?>>Show welcome message</option>
+	        <option value="0"<?php if($WELCOME==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_87; ?></option>
+	        <option value="1"<?php if($WELCOME==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_88; ?></option>
         </select>
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Number of smilies on a row in tutorial/help.</b>
+    <td><b><?php echo A_CONFCONTENT_89; ?></b>
 	</td>
     <td>
 		<input name="vSMILEY_COLS" type="text" size="7" maxlength="2" value="<?php echo $SMILEY_COLS; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>Number of smilies on a row in smilie_popup.</b>
+    <td><b><?php echo A_CONFCONTENT_90; ?></b>
 	</td>
     <td>
 		<input name="vSMILEY_COLS_POP" type="text" size="7" maxlength="2" value="<?php echo $SMILEY_COLS_POP; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Display the Chat Etiquette on top of the Help popup (Chat rules).</b>
+    <td><b><?php echo A_CONFCONTENT_91; ?></b>
 	</td>
     <td>
         <select name="vSHOW_ETIQ_IN_HELP">
-	        <option value="0"<?php if($SHOW_ETIQ_IN_HELP==0){ echo " selected"; } ?>>Hide Etiquette</option>
-	        <option value="1"<?php if($SHOW_ETIQ_IN_HELP==1){ echo " selected"; } ?>>Show Etiquette</option>
+	        <option value="0"<?php if($SHOW_ETIQ_IN_HELP==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_92; ?></option>
+	        <option value="1"<?php if($SHOW_ETIQ_IN_HELP==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_93; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Exit link type.</b><br />
-    	<i>Hint: Link stands for the original Exit link, Door rolling stands for the image of such a door.</i>
+    <td><b><?php echo A_CONFCONTENT_94; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_95); ?></i>
     </td>
     <td>
         <select name="vEXIT_LINK_TYPE" id="door" onChange="swapImage('door','doorToSwap')">
-	        <option value="0"<?php if($EXIT_LINK_TYPE==0){ echo " selected"; } ?>>Exit link</option>
-	        <option value="1"<?php if($EXIT_LINK_TYPE==1){ echo " selected"; } ?>>Door rolling</option>
-        </select>&nbsp;<img id="doorToSwap" src="<?php echo(($EXIT_LINK_TYPE==1) ? "./".$ChatPath."localization/".$L."/images/exitdoor.gif" : "./".$ChatPath."images/gender_none.gif"); ?>" border=0 <?php echo("ALT=\"Exit link type\" Title=\"Exit link type\""); ?> />
+	        <option value="0"<?php if($EXIT_LINK_TYPE==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_96; ?></option>
+	        <option value="1"<?php if($EXIT_LINK_TYPE==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_97; ?></option>
+        </select>&nbsp;<img id="doorToSwap" src="<?php echo(($EXIT_LINK_TYPE == 1) ? "./".$ChatPath."localization/".$L."/images/exitdoor.gif" : "./".$ChatPath."images/gender_none.gif"); ?>" border=0 <?php echo("ALT=\"".A_CONFCONTENT_97."\" Title=\"".A_CONFCONTENT_97."\""); ?> />
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Set the characters you wish your users to be allowed to use on registration/login.</b><br />
-    	<i>Hint: This is the default set of chars: </i><b>a-zA-Z0-9_.-@#$%^&*()=<>?~{}|`:</b><i> tested for login, which will not break the layout/functionality of your chat.<br />
-    	<font color=red>Important: Do not allow these characters, as they will break your chat page after login: exclamation mark, slash, backslash, comma, space, single and double quotes and square (box) brackets (<b>! / \ , ' " [ ]</b>)</font><br /></i>
-    	Although they will not break anything, it seems that / and ; cannot be banned from being used in login names. $ sign hasn't been deeply tested, but it should be also avoided as it usually stands for php variables.
+    <td><b><?php echo A_CONFCONTENT_98; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, sprintf(A_CONFCONTENT_99, "</i><b>a-zA-Z0-9_.-@#$%^&*()=<>?~{}|`:</b><i>")); ?><br />
+    	<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_101); ?></font><br /></i>
+		<?php echo A_CONFCONTENT_102; ?>
     </td>
     <td>
 		<input name="vREG_CHARS_ALLOWED" type="text" size="25" maxlength="50" value="<?php echo $REG_CHARS_ALLOWED; ?>">
@@ -1320,239 +1335,239 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="timings"></a><b>Timings</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="timings"></a><b><?php echo A_CONF_6; ?></b></td></tr
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Timezone offset and World time in Status bar.</b><br />
-    	- the difference between the server time and the desired location for the Chat (hours - integer)<br />
-    	<i>Example: If my server is hosted in USA - CST (-6) but the chat is for a Romanian community located in Bucharest - EET (+2), I might wish to show my Romanian users the correct time in the chat. For this, I have to set this value to 8. Negative values are also allowed.<br />
-    	<font color=red>Important: Edit "lib/worldtime.lib.php" to add your own cities (meridians) - only for World time mode!</font></i>
+    <td><b><?php echo A_CONFCONTENT_103; ?></b><br />
+    	<?php echo A_CONFCONTENT_104; ?><br />
+    	<i><?php echo A_CONFCONTENT_105; ?><br />
+    	<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_106); ?></font></i>
     </td>
     <td>
-		<input name="vTMZ_OFFSET" type="text" size="7" maxlength="5" value="<?php echo $TMZ_OFFSET; ?>"><br />
+		<input name="vTMZ_OFFSET" type="text" size="7" maxlength="5" value="<?php echo $TMZ_OFFSET; ?>">&nbsp;(<?php echo abs($TMZ_OFFSET) == 1 ? L_HOUR : L_HOURS; ?>)<br />
         <select name="vWORLDTIME">
-	        <option value="0"<?php if($WORLDTIME==0){ echo " selected"; } ?>>Server time only (standard)</option>
-	        <option value="1"<?php if($WORLDTIME==1){ echo " selected"; } ?>>World time in Chat only (new)</option>
-	        <option value="2"<?php if($WORLDTIME==2){ echo " selected"; } ?>>World time on Index & Chat</option>
+	        <option value="0"<?php if($WORLDTIME==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_107; ?></option>
+	        <option value="1"<?php if($WORLDTIME==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_108; ?></option>
+	        <option value="2"<?php if($WORLDTIME==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_109; ?></option>
         </select>
 	</td>
 </tr>
 <tr>
-    <td><b>Show Timestamp in front of the message.</b><br />
-    	(also shows the Server Time in the Status bar)
+    <td><b><?php echo A_CONFCONTENT_110; ?></b><br />
+    	<?php echo A_CONFCONTENT_111; ?>
     </td>
     <td>
         <select name="vSHOW_TIMESTAMP">
-	        <option value="0"<?php if($SHOW_TIMESTAMP==0){ echo " selected"; } ?>>No timestamps in chat</option>
-	        <option value="1"<?php if($SHOW_TIMESTAMP==1){ echo " selected"; } ?>>Show timestamps in chat</option>
+	        <option value="0"<?php if($SHOW_TIMESTAMP==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_112; ?></option>
+	        <option value="1"<?php if($SHOW_TIMESTAMP==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_113; ?></option>
         </select>
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Default timeout between each update.</b>
+    <td><b><?php echo A_CONFCONTENT_114; ?></b>
 	</td>
     <td>
-		<input name="vMSG_REFRESH" type="text" size="7" maxlength="2" value="<?php echo $MSG_REFRESH; ?>"> (seconds)
+		<input name="vMSG_REFRESH" type="text" size="7" maxlength="2" value="<?php echo $MSG_REFRESH; ?>">&nbsp;(<?php echo $MSG_REFRESH == 1 ? L_SEC : L_SECS; ?>)
 	</td>
 </tr>
 <tr>
-    <td><b>Returning visitors counter.</b><br />
-    	(It will count how many times a registered user returned to chat, displaying the counter on his profile page - whois popup)
+    <td><b><?php echo A_CONFCONTENT_116; ?></b><br />
+	<?php echo A_CONFCONTENT_117; ?>
     </td>
     <td>
         <select name="vLOGIN_COUNTER">
-	        <option value="0"<?php if($LOGIN_COUNTER==0){ echo " selected"; } ?>>No counter on Profiles</option>
-	        <option value="1"<?php if($LOGIN_COUNTER==1){ echo " selected"; } ?>>Count on Every login</option>
-	        <option value="60"<?php if($LOGIN_COUNTER==60){ echo " selected"; } ?>>One count per Hour</option>
-	        <option value="1440"<?php if($LOGIN_COUNTER==1440){ echo " selected"; } ?>>One count per Day</option>
-	        <option value="10080"<?php if($LOGIN_COUNTER==10080){ echo " selected"; } ?>>One count per Week</option>
+	        <option value="0"<?php if($LOGIN_COUNTER==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_118; ?></option>
+	        <option value="1"<?php if($LOGIN_COUNTER==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_119; ?></option>
+	        <option value="60"<?php if($LOGIN_COUNTER==60){ echo " selected"; } ?>><?php echo A_CONFCONTENT_120; ?></option>
+	        <option value="1440"<?php if($LOGIN_COUNTER==1440){ echo " selected"; } ?>><?php echo A_CONFCONTENT_121; ?></option>
+	        <option value="10080"<?php if($LOGIN_COUNTER==10080){ echo " selected"; } ?>><?php echo A_CONFCONTENT_122; ?></option>
         </select>
     </td>
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="schedule"></a><b>Chat Schedule</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="schedule"></a><b><?php echo A_CONF_7; ?></b></td></tr>
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Open times Schedule for your chat and chatrooms.</b><br />
-    	<font color=red>Important: This mod is still under development! The schedule fields have deliberately been disabled.</font></i>
+    <td><b><?php echo A_CONFCONTENT_123; ?></b><br />
+    	<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_124); ?></font></i>
     </td>
     <td align="center">
-		<b><font color=blue>Daily schedule:</font><br />
+		<b><font color=blue><?php echo A_CONFCONTENT_125; ?></font><br />
 		<input name="vOPEN_ALL_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_ALL_BEG; ?>" class=success DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_ALL_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_ALL_END; ?>" class=success DISABLED><br />
-		<font color=red>Sunday schedule:</font><br />
+		<font color=red><?php echo A_CONFCONTENT_126; ?></font><br />
 		<input name="vOPEN_SUN_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_SUN_BEG; ?>" class=notify2 DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_SUN_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_SUN_END; ?>" class=notify2 DISABLED><br />
-		Monday schedule:<br />
+		<?php echo A_CONFCONTENT_127; ?><br />
 		<input name="vOPEN_MON_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_MON_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_MON_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_MON_END; ?>" class=notify DISABLED><br />
-		Tuesday schedule:<br />
+		<?php echo A_CONFCONTENT_128; ?><br />
 		<input name="vOPEN_TUE_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_TUE_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_TUE_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_TUE_END; ?>" class=notify DISABLED><br />
-		Wednesday schedule:<br />
+		<?php echo A_CONFCONTENT_129; ?><br />
 		<input name="vOPEN_WED_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_WED_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_WED_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_WED_END; ?>" class=notify DISABLED><br />
-		Thursday schedule:<br />
+		<?php echo A_CONFCONTENT_130; ?><br />
 		<input name="vOPEN_THU_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_THU_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_THU_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_THU_END; ?>" class=notify DISABLED><br />
-		Friday schedule:<br />
+		<?php echo A_CONFCONTENT_131; ?><br />
 		<input name="vOPEN_FRI_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_FRI_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_FRI_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_FRI_END; ?>" class=notify DISABLED><br />
-		Saturday schedule:<br />
+		<?php echo A_CONFCONTENT_132; ?><br />
 		<input name="vOPEN_SAT_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_SAT_BEG; ?>" class=notify DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_SAT_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_SAT_END; ?>" class=notify DISABLED></b>
 	</td>
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="layout"></a><b>Login layout</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="layout"></a><b><?php echo A_CONF_8; ?></b></td></tr>
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Fill in the background of the login page.</b>
+    <td><b><?php echo A_CONFCONTENT_133; ?></b>
 	</td>
     <td>
         <select name="vFILLED_LOGIN">
-	        <option value="0"<?php if($FILLED_LOGIN==0){ echo " selected"; } ?>>Background unfilled</option>
-	        <option value="1"<?php if($FILLED_LOGIN==1){ echo " selected"; } ?>>Background filled</option>
+	        <option value="0"<?php if($FILLED_LOGIN==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_134; ?></option>
+	        <option value="1"<?php if($FILLED_LOGIN==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_135; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Display a BACKGROUND image on index page.</b><br />
-		<i>Hint: to fill the rooms background with an image, you need to edit the desired style and add in BODY.frame and .framePreview the property "<b>background-image: url('path_to_the_image');</b>" (absolute or relative paths allowed) - e.g. http://path_to_the_image.jpg or ./../path_to_the_image.jpg - sample in style12.css.php. Optionally, BODY.mainframe can be used to display an image background to the messages frame (but this image has to be washed out, to make the posted text viewable).</i><br />
-    	(path_to_the_image.jpg can be any image accessible on/from the web - .jpg, .gif, .bmp, .png)
+    <td><b><?php echo A_CONFCONTENT_136; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_137); ?></i><br />
+    	<?php echo A_CONFCONTENT_138; ?>
 	</td>
     <td>
         <select name="vBACKGR_IMG">
-	        <option value="0"<?php if($BACKGR_IMG==0){ echo " selected"; } ?>>No background image</option>
-	        <option value="1"<?php if($BACKGR_IMG==1){ echo " selected"; } ?>>Show on Login page</option>
+	        <option value="0"<?php if($BACKGR_IMG==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_139; ?></option>
+	        <option value="1"<?php if($BACKGR_IMG==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_140; ?></option>
         </select><br />
-		Image path:<br />
+		<?php echo A_CONFCONTENT_141; ?><br />
 		<input name="vBACKGR_IMG_PATH" type="text" size="25" maxlength="255" value="<?php echo $BACKGR_IMG_PATH; ?>">
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Show Delete link on index.</b><br />
-    	(to allow users delete their own profile)
+    <td><b><?php echo A_CONFCONTENT_142; ?></b><br />
+    	<?php echo A_CONFCONTENT_143; ?>
 	</td>
     <td>
         <select name="vSHOW_DEL_PROF">
-	        <option value="0"<?php if($SHOW_DEL_PROF==0){ echo " selected"; } ?>>Hide Delete link</option>
-	        <option value="1"<?php if($SHOW_DEL_PROF==1){ echo " selected"; } ?>>Show Delete link</option>
+	        <option value="0"<?php if($SHOW_DEL_PROF==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_144; ?></option>
+	        <option value="1"<?php if($SHOW_DEL_PROF==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_145; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Show Administration link on index.</b><br />
-    	(a link to open this Administration Panel)
+    <td><b><?php echo A_CONFCONTENT_146; ?></b><br />
+    	<?php echo A_CONFCONTENT_147; ?>
     </td>
     <td>
         <select name="vSHOW_ADMIN">
-	        <option value="0"<?php if($SHOW_ADMIN==0){ echo " selected"; } ?>>Hide Admin link</option>
-	        <option value="1"<?php if($SHOW_ADMIN==1){ echo " selected"; } ?>>Show Admin link</option>
+	        <option value="0"<?php if($SHOW_ADMIN==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_148; ?></option>
+	        <option value="1"<?php if($SHOW_ADMIN==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_149; ?></option>
         </select>
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Display the Tutorial link on index page.</b>
+    <td><b><?php echo A_CONFCONTENT_150; ?></b>
 	</td>
     <td>
         <select name="vSHOW_TUT">
-	        <option value="0"<?php if($SHOW_TUT==0){ echo " selected"; } ?>>Hide tutorial</option>
-	        <option value="1"<?php if($SHOW_TUT==1){ echo " selected"; } ?>>Show tutorial</option>
+	        <option value="0"<?php if($SHOW_TUT==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_151; ?></option>
+	        <option value="1"<?php if($SHOW_TUT==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_152; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Enable Info on index page.</b><br />
-    	(contains some info about the chat extra-features)
+    <td><b><?php echo A_CONFCONTENT_153; ?></b><br />
+    	<?php echo A_CONFCONTENT_154; ?>
     </td>
     <td>
         <select name="vSHOW_INFO">
-	        <option value="0"<?php if($SHOW_INFO==0){ echo " selected"; } ?>>Hide Info</option>
-	        <option value="1"<?php if($SHOW_INFO==1){ echo " selected"; } ?>>Show Info</option>
+	        <option value="0"<?php if($SHOW_INFO==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_155; ?></option>
+	        <option value="1"<?php if($SHOW_INFO==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_156; ?></option>
         </select>
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Display Extra commands available.</b>
+    <td><b><?php echo A_CONFCONTENT_157; ?></b>
 	</td>
     <td>
         <select name="vSET_CMDS">
-	        <option value="0"<?php if($SET_CMDS==0){ echo " selected"; } ?>>Hide Extra commands</option>
-	        <option value="1"<?php if($SET_CMDS==1){ echo " selected"; } ?>>Show Extra commands</option>
+	        <option value="0"<?php if($SET_CMDS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_158; ?></option>
+	        <option value="1"<?php if($SET_CMDS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_159; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>List your extra commands.</b><br />
-    	<i>Hint: keep the first break and use it anytime to split the lines if they are too long</i>
+    <td><b><?php echo A_CONFCONTENT_160; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_161); ?></i>
     </td>
     <td>
 		<input name="vCMDS" type="text" size="25" maxlength="255" value="<?php echo $CMDS; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Display Other Extra features/mods available.</b>
+    <td><b><?php echo A_CONFCONTENT_162; ?></b>
 	</td>
     <td>
         <select name="vSET_MODS">
-	        <option value="0"<?php if($SET_MODS==0){ echo " selected"; } ?>>Hide Extra features</option>
-	        <option value="1"<?php if($SET_MODS==1){ echo " selected"; } ?>>Show Extra features</option>
+	        <option value="0"<?php if($SET_MODS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_163; ?></option>
+	        <option value="1"<?php if($SET_MODS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_164; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>List your extra features/mods.</b><br />
-    	<i>Hint: keep the first break and use it anytime to split the lines if too long</i>
+    <td><b><?php echo A_CONFCONTENT_165; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_161); ?></i>
     </td>
     <td>
 		<input name="vMODS" type="text" size="25" maxlength="255" value="<?php echo $MODS; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Display the name of your bot (if available).</b>
+    <td><b><?php echo A_CONFCONTENT_167; ?></b>
 	</td>
     <td>
         <select name="vSET_BOT">
-	        <option value="0"<?php if($SET_BOT==0){ echo " selected"; } ?>>Hide bot name</option>
-	        <option value="1"<?php if($SET_BOT==1){ echo " selected"; } ?>>Show bot name</option>
+	        <option value="0"<?php if($SET_BOT==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_168; ?></option>
+	        <option value="1"<?php if($SET_BOT==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_169; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Show counter (visitor hits) on index page.</b>
+    <td><b><?php echo A_CONFCONTENT_170; ?></b>
 	</td>
     <td>
         <select name="vSHOW_COUNTER">
-	        <option value="0"<?php if($SHOW_COUNTER==0){ echo " selected"; } ?>>Disable counter</option>
-	        <option value="1"<?php if($SHOW_COUNTER==1){ echo " selected"; } ?>>Show counter</option>
+	        <option value="0"<?php if($SHOW_COUNTER==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_171; ?></option>
+	        <option value="1"<?php if($SHOW_COUNTER==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_172; ?></option>
         </select>
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Show owner/webmaster of the chat info on index page (below the copyright link).</b><br />
-    	<i>Hint: It is the same name/text you entered in the registration section - <a href=#ownername class="ChatLink">Admin name</a></i>
+    <td><b><?php echo A_CONFCONTENT_173; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_174); ?> - <a href=#ownername class="ChatLink"><?php echo A_CONFCONTENT_175; ?></a></i>
     </td>
     <td>
         <select name="vSHOW_OWNER">
-	        <option value="0"<?php if($SHOW_OWNER==0){ echo " selected"; } ?>>Hide Owner</option>
-	        <option value="1"<?php if($SHOW_OWNER==1){ echo " selected"; } ?>>Show Owner</option>
+	        <option value="0"<?php if($SHOW_OWNER==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_176; ?></option>
+	        <option value="1"<?php if($SHOW_OWNER==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_177; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Edit the installation date of your chat.</b>
+    <td><b><?php echo A_CONFCONTENT_178; ?></b>
     </td>
     <td class=success>
 		<?php
@@ -1579,53 +1594,53 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="skins"></a><b>Rooms & Skins</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="skins"></a><b><?php echo A_CONF_9; ?></b></td></tr><!--Rooms & Skins-->
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enable Skin mod in rooms.</b><br />
-    	<font color=red>Important: If you change this setting while there are users logged in, all your users must reload their browsers or exit and re-login. An announcement to all the rooms will be automatically sent if you enable/disable this.</font><br />
-		<i>Hint: If disabled, Skin1 becomes the default (set in the First Public Room above). If enabled, each room can be set to have it's own skin.</i>
+    <td><b><?php echo A_CONFCONTENT_179; ?></b><br />
+    	<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONF_ERR_11); ?></font><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_181); ?></i>
 	</td>
     <td>
         <select name="vUSE_SKIN">
-	        <option value="0"<?php if($USE_SKIN==0){ echo " selected"; } ?>>Default Skin Only</option>
-	        <option value="1"<?php if($USE_SKIN==1){ echo " selected"; } ?>>Skin Mod Enabled</option>
+	        <option value="0"<?php if($USE_SKIN==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_182; ?></option>
+	        <option value="1"<?php if($USE_SKIN==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_183; ?></option>
         </select><br />
-	<a href="styles_popup.php?<?php echo("L=$L&startStyle=1"); ?>" onClick="styles_popup(); return false" class="ChatLink" target="_blank">Skins Preview Page</a>
+	<a href="styles_popup.php?<?php echo("L=$L&startStyle=1"); ?>" onClick="styles_popup(); return false" class="ChatLink" target="_blank"><?php echo A_CONFCONTENT_184; ?></a>
 	</td>
 </tr>
 <tr>
-    <td><b>Types of Rooms Available for users.</b><br />
-        <li>0 : only the first room within the public default ones;</li>
-        <li>1 : all default rooms, but not create a room;</li>
-        <li>2 : all the rooms and create new ones</li>
+    <td><b><?php echo A_CONFCONTENT_185; ?></b><br />
+        <li>0 : <?php echo A_CONFCONTENT_186; ?></li>
+        <li>1 : <?php echo A_CONFCONTENT_187; ?></li>
+        <li>2 : <?php echo A_CONFCONTENT_188; ?></li>
     </td>
     <td>
         <select name="vVERSION">
-	        <option value="0"<?php if($VERSION==0){ echo " selected"; } ?>>0 - Only the first room</option>
-	        <option value="1"<?php if($VERSION==1){ echo " selected"; } ?>>1 - All default rooms</option>
-	        <option value="2"<?php if($VERSION==2){ echo " selected"; } ?>>2 - Create new rooms</option>
+	        <option value="0"<?php if($VERSION==0){ echo " selected"; } ?>>0 - <?php echo A_CONFCONTENT_189; ?></option>
+	        <option value="1"<?php if($VERSION==1){ echo " selected"; } ?>>1 - <?php echo A_CONFCONTENT_190; ?></option>
+	        <option value="2"<?php if($VERSION==2){ echo " selected"; } ?>>2 - <?php echo A_CONFCONTENT_191; ?></option>
         </select>
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><a name="roomnames"></a><b>1. First Public room name (also <u>default</u> if 0 is selected above or there is no user selection from list).</b><br />
-    	<font color=red><i>Note: although disabling is possible, this first room should be enabled and unrestricted at all times. (this is also the default room for people not selecting one from login page.)</i></font><br />
-		<i>Hint (for all the public rooms): If restricted, although the room is public, only admins, topmoderators and users set in the Registered Users sheet will be able to join this room. Also the lurking page and public archives will not contain any of the posts submitted to restricted rooms.</i>
+    <td><a name="roomnames"></a><b>1. <?php echo A_CONFCONTENT_192; ?></b><br />
+    	<font color=red><i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_193); ?></i></font><br />
+		<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_194); ?></i>
 	</td>
     <td>
 		<input name="vROOM1" type="text" size="25" maxlength="25" value="<?php echo $ROOM1; ?>"><br />
         <select name="vEN_ROOM1">
-	        <option value="0"<?php if($EN_ROOM1==0){ echo " selected"; } ?>>Disabled</option>
-	        <option value="1"<?php if($EN_ROOM1==1){ echo " selected"; } ?>>Enabled</option>
-	    <!--    <option value="2"<?php if($EN_ROOM1==2){ echo " selected"; } ?>>Scheduled</option> -->
+	        <option value="0"<?php if($EN_ROOM1==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($EN_ROOM1==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+	    <!--    <option value="2"<?php if($EN_ROOM1==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
         </select>&nbsp;
         <select name="vRES_ROOM1">
-	        <option value="0"<?php if($RES_ROOM1==0){ echo " selected"; } ?>>Unrestricted</option>
-	        <option value="1"<?php if($RES_ROOM1==1){ echo " selected"; } ?>>Restricted</option>
+	        <option value="0"<?php if($RES_ROOM1==0){ echo " selected"; } ?>><?php echo A_CONFUNRESTRICT; ?></option>
+	        <option value="1"<?php if($RES_ROOM1==1){ echo " selected"; } ?>><?php echo A_CONFRESTRICT; ?></option>
         </select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN1\">\n");
@@ -1635,18 +1650,18 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>2. Second Public room name.</b>
+    <td><b>2. <?php echo A_CONFCONTENT_195; ?></b>
 	</td>
     <td>
 		<input name="vROOM2" type="text" size="25" maxlength="25" value="<?php echo $ROOM2; ?>"><br />
         <select name="vEN_ROOM2">
-	        <option value="0"<?php if($EN_ROOM2==0){ echo " selected"; } ?>>Disabled</option>
-	        <option value="1"<?php if($EN_ROOM2==1){ echo " selected"; } ?>>Enabled</option>
-	    <!--    <option value="2"<?php if($EN_ROOM2==2){ echo " selected"; } ?>>Scheduled</option> -->
+	        <option value="0"<?php if($EN_ROOM2==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($EN_ROOM2==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+	    <!--    <option value="2"<?php if($EN_ROOM2==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
         </select>&nbsp;
         <select name="vRES_ROOM2">
-	        <option value="0"<?php if($RES_ROOM2==0){ echo " selected"; } ?>>Unrestricted</option>
-	        <option value="1"<?php if($RES_ROOM2==1){ echo " selected"; } ?>>Restricted</option>
+	        <option value="0"<?php if($RES_ROOM2==0){ echo " selected"; } ?>><?php echo A_CONFUNRESTRICT; ?></option>
+	        <option value="1"<?php if($RES_ROOM2==1){ echo " selected"; } ?>><?php echo A_CONFRESTRICT; ?></option>
         </select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN2\">\n");
@@ -1656,18 +1671,18 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>3. Third Public room name.</b>
+    <td><b>3. <?php echo A_CONFCONTENT_196; ?></b>
 	</td>
     <td>
 		<input name="vROOM3" type="text" size="25" maxlength="25" value="<?php echo $ROOM3; ?>"><br />
         <select name="vEN_ROOM3">
-	        <option value="0"<?php if($EN_ROOM3==0){ echo " selected"; } ?>>Disabled</option>
-	        <option value="1"<?php if($EN_ROOM3==1){ echo " selected"; } ?>>Enabled</option>
-	    <!--    <option value="2"<?php if($EN_ROOM3==2){ echo " selected"; } ?>>Scheduled</option> -->
+	        <option value="0"<?php if($EN_ROOM3==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($EN_ROOM3==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+	    <!--    <option value="2"<?php if($EN_ROOM3==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
         </select>&nbsp;
         <select name="vRES_ROOM3">
-	        <option value="0"<?php if($RES_ROOM3==0){ echo " selected"; } ?>>Unrestricted</option>
-	        <option value="1"<?php if($RES_ROOM3==1){ echo " selected"; } ?>>Restricted</option>
+	        <option value="0"<?php if($RES_ROOM3==0){ echo " selected"; } ?>><?php echo A_CONFUNRESTRICT; ?></option>
+	        <option value="1"<?php if($RES_ROOM3==1){ echo " selected"; } ?>><?php echo A_CONFRESTRICT; ?></option>
         </select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN3\">\n");
@@ -1677,18 +1692,18 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>4. Forth Public room name.</b>
+    <td><b>4. <?php echo A_CONFCONTENT_197; ?></b>
 	</td>
     <td>
 		<input name="vROOM4" type="text" size="25" maxlength="25" value="<?php echo $ROOM4; ?>"><br />
         <select name="vEN_ROOM4">
-	        <option value="0"<?php if($EN_ROOM4==0){ echo " selected"; } ?>>Disabled</option>
-	        <option value="1"<?php if($EN_ROOM4==1){ echo " selected"; } ?>>Enabled</option>
-	    <!--    <option value="2"<?php if($EN_ROOM4==2){ echo " selected"; } ?>>Scheduled</option> -->
+	        <option value="0"<?php if($EN_ROOM4==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($EN_ROOM4==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+	    <!--    <option value="2"<?php if($EN_ROOM4==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
         </select>&nbsp;
         <select name="vRES_ROOM4">
-	        <option value="0"<?php if($RES_ROOM4==0){ echo " selected"; } ?>>Unrestricted</option>
-	        <option value="1"<?php if($RES_ROOM4==1){ echo " selected"; } ?>>Restricted</option>
+	        <option value="0"<?php if($RES_ROOM4==0){ echo " selected"; } ?>><?php echo A_CONFUNRESTRICT; ?></option>
+	        <option value="1"<?php if($RES_ROOM4==1){ echo " selected"; } ?>><?php echo A_CONFRESTRICT; ?></option>
         </select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN4\">\n");
@@ -1698,18 +1713,18 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>5. Fifth Public room name.</b>
+    <td><b>5. <?php echo A_CONFCONTENT_198; ?></b>
 	</td>
     <td>
 		<input name="vROOM5" type="text" size="25" maxlength="25" value="<?php echo $ROOM5; ?>"><br />
         <select name="vEN_ROOM5">
-	        <option value="0"<?php if($EN_ROOM5==0){ echo " selected"; } ?>>Disabled</option>
-	        <option value="1"<?php if($EN_ROOM5==1){ echo " selected"; } ?>>Enabled</option>
-	    <!--    <option value="2"<?php if($EN_ROOM5==2){ echo " selected"; } ?>>Scheduled</option> -->
+	        <option value="0"<?php if($EN_ROOM5==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($EN_ROOM5==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+	    <!--    <option value="2"<?php if($EN_ROOM5==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
         </select>&nbsp;
         <select name="vRES_ROOM5">
-	        <option value="0"<?php if($RES_ROOM5==0){ echo " selected"; } ?>>Unrestricted</option>
-	        <option value="1"<?php if($RES_ROOM5==1){ echo " selected"; } ?>>Restricted</option>
+	        <option value="0"<?php if($RES_ROOM5==0){ echo " selected"; } ?>><?php echo A_CONFUNRESTRICT; ?></option>
+	        <option value="1"<?php if($RES_ROOM5==1){ echo " selected"; } ?>><?php echo A_CONFRESTRICT; ?></option>
         </select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN5\">\n");
@@ -1719,15 +1734,15 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>6. First Private room name.</b><br />
-    	<i>Note: This is displayed on login, only to admins</i>
+    <td><b>6. <?php echo A_CONFCONTENT_199; ?></b><br />
+    	<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_200); ?></i>
     </td>
     <td>
 		<input name="vROOM6" type="text" size="25" maxlength="25" value="<?php echo $ROOM6; ?>"><br />
         <select name="vEN_ROOM6">
-	        <option value="0"<?php if($EN_ROOM6==0){ echo " selected"; } ?>>Disabled</option>
-	        <option value="1"<?php if($EN_ROOM6==1){ echo " selected"; } ?>>Enabled</option>
-	    <!--    <option value="2"<?php if($EN_ROOM6==2){ echo " selected"; } ?>>Scheduled</option> -->
+	        <option value="0"<?php if($EN_ROOM6==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($EN_ROOM6==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+	    <!--    <option value="2"<?php if($EN_ROOM6==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
         </select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN6\">\n");
@@ -1737,15 +1752,15 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>7. Second Private room name (also default if none selected).</b><br />
-    	<i>Note: This is displayed on login, only to admins</i>
+    <td><b>7. <?php echo A_CONFCONTENT_201; ?></b><br />
+    	<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_200); ?></i>
     </td>
     <td>
 		<input name="vROOM7" type="text" size="25" maxlength="25" value="<?php echo $ROOM7; ?>"><br />
         <select name="vEN_ROOM7">
-	        <option value="0"<?php if($EN_ROOM7==0){ echo " selected"; } ?>>Disabled</option>
-	        <option value="1"<?php if($EN_ROOM7==1){ echo " selected"; } ?>>Enabled</option>
-	    <!--    <option value="2"<?php if($EN_ROOM7==2){ echo " selected"; } ?>>Scheduled</option> -->
+	        <option value="0"<?php if($EN_ROOM7==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($EN_ROOM7==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+	    <!--    <option value="2"<?php if($EN_ROOM7==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
         </select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN7\">\n");
@@ -1755,15 +1770,15 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>8. Third Private room name.</b><br />
-    	<i>Note: This is displayed on login to all power users (fits for "staff only" rooms)</i>
+    <td><b>8. <?php echo A_CONFCONTENT_203; ?></b><br />
+    	<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_204); ?></i>
     </td>
     <td>
 		<input name="vROOM8" type="text" size="25" maxlength="25" value="<?php echo $ROOM8; ?>"><br />
         <select name="vEN_ROOM8">
-	        <option value="0"<?php if($EN_ROOM8==0){ echo " selected"; } ?>>Disabled</option>
-	        <option value="1"<?php if($EN_ROOM8==1){ echo " selected"; } ?>>Enabled</option>
-	    <!--    <option value="2"<?php if($EN_ROOM8==2){ echo " selected"; } ?>>Scheduled</option> -->
+	        <option value="0"<?php if($EN_ROOM8==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($EN_ROOM8==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+	    <!--    <option value="2"<?php if($EN_ROOM8==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
         </select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN8\">\n");
@@ -1773,15 +1788,15 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>9. Fourth Private room name.</b><br />
-    	<i>Note: This is displayed by default on login to all users (fits for "support" like rooms)</i>
+    <td><b>9. <?php echo A_CONFCONTENT_205; ?></b><br />
+    	<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_206); ?></i>
     </td>
     <td>
 		<input name="vROOM9" type="text" size="25" maxlength="25" value="<?php echo $ROOM9; ?>"><br />
         <select name="vEN_ROOM9">
-	        <option value="0"<?php if($EN_ROOM9==0){ echo " selected"; } ?>>Disabled</option>
-	        <option value="1"<?php if($EN_ROOM9==1){ echo " selected"; } ?>>Enabled</option>
-	    <!--    <option value="2"<?php if($EN_ROOM9==2){ echo " selected"; } ?>>Scheduled</option> -->
+	        <option value="0"<?php if($EN_ROOM9==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($EN_ROOM9==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+	    <!--    <option value="2"<?php if($EN_ROOM9==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
         </select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN9\">\n");
@@ -1791,95 +1806,94 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>1. Show Default Private rooms on index page.</b><br />
-    	<i>Hint: Not all the private rooms will be shown as options for all the users (see next two settings)<br />
-    	This option will just let the <b>admins</b> see all default private rooms, but is <u><b>required</b></u> for the next two settings to work.</i>
+    <td><b>1. <?php echo A_CONFCONTENT_207; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_208); ?></i><br />
+		<?php echo A_CONFCONTENT_209; ?>
     </td>
     <td>
         <select name="vSHOW_PRIV">
-	        <option value="0"<?php if($SHOW_PRIV==0){ echo " selected"; } ?>>Hide</option>
-	        <option value="1"<?php if($SHOW_PRIV==1){ echo " selected"; } ?>>Show</option>
+	        <option value="0"<?php if($SHOW_PRIV==0){ echo " selected"; } ?>><?php echo A_CONFHIDE; ?></option>
+	        <option value="1"<?php if($SHOW_PRIV==1){ echo " selected"; } ?>><?php echo A_CONFSHOW; ?></option>
         </select>
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>2. Show Default Private rooms on index page to MODERATORS.</b><br />
-    	<i>Hint: Moderators will only see rooms 8 and 9 (Staff and Support types). <font color=red>Setting no.1 is required!</font></i>
+    <td><b>2. <?php echo A_CONFCONTENT_210; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_211); ?> <font color=red><?php echo A_CONFCONTENT_212; ?></font></i>
     </td>
     <td>
         <select name="vSHOW_PRIV_MOD">
-	        <option value="0"<?php if($SHOW_PRIV_MOD==0){ echo " selected"; } ?>>Hide</option>
-	        <option value="1"<?php if($SHOW_PRIV_MOD==1){ echo " selected"; } ?>>Show</option>
+	        <option value="0"<?php if($SHOW_PRIV_MOD==0){ echo " selected"; } ?>><?php echo A_CONFHIDE; ?></option>
+	        <option value="1"<?php if($SHOW_PRIV_MOD==1){ echo " selected"; } ?>><?php echo A_CONFSHOW; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>3. Show Default Private rooms on index page to NORMAL USERS.</b><br />
-    	<i>Hint: Non-power users (including guests) will only see room 9 (Support). <font color=red>Setting no.1 is required!</font></i>
+    <td><b>3. <?php echo A_CONFCONTENT_213; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_214); ?> <font color=red><?php echo A_CONFCONTENT_212; ?></font></i>
     </td>
     <td>
         <select name="vSHOW_PRIV_USR">
-	        <option value="0"<?php if($SHOW_PRIV_USR==0){ echo " selected"; } ?>>Hide</option>
-	        <option value="1"<?php if($SHOW_PRIV_USR==1){ echo " selected"; } ?>>Show</option>
+	        <option value="0"<?php if($SHOW_PRIV_USR==0){ echo " selected"; } ?>><?php echo A_CONFHIDE; ?></option>
+	        <option value="1"<?php if($SHOW_PRIV_USR==1){ echo " selected"; } ?>><?php echo A_CONFSHOW; ?></option>
         </select>
     </td>
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="colors"></a><b>Colors</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="colors"></a><b><?php echo A_CONF_10; ?></b></td></tr>
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enable different Colored Names in users lists and/or posts.</b><br />
-    	<i><font color=red>Important: If you change this setting while there are users logged in, all your users must reload their browsers or exit and re-login in order to apply the changes. An announcement to all the rooms will be automatically sent if you enable/disable this.</font><br />
-    	Hints: If enabled, users can set their personal color to use for their usernames in users lists only.<br />
-    	If disabled, admins will be shown in <a class="admin">red</a> and moderators in <a class="mod">blue</a> (their default power colors in skins/styleN.css.php), only if "Italicize power usernames" is enabled below.</i>
+    <td><b><?php echo A_CONFCONTENT_216; ?></b><br />
+    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONF_ERR_11); ?></font><br />
+	<?php echo sprintf(A_CONFHINT, A_CONFCONTENT_218); ?></i>
     </td>
     <td>
         <select name="vCOLOR_NAMES">
-	        <option value="0"<?php if($COLOR_NAMES==0){ echo " selected"; } ?>>Disabled</option>
-	        <option value="1"<?php if($COLOR_NAMES==1){ echo " selected"; } ?>>Enabled</option>
+	        <option value="0"<?php if($COLOR_NAMES==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($COLOR_NAMES==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-	<td><b>Italicize Power usernames in users lists:</b><br />
-    	This option allows you to choose between showing or not who is admin and moderator in your chat (this doesn't change any powers, it only makes admin/moder names different or not - italics - from regular users).<br />
-		<i>Hint: This also applies to color names, showing or not admins in <a class="admin">red</a> and moderators in <a class="mod">blue</a> (their default power colors in skins/styleN.css.php) or, if Colored Names are enabled above, <?php echo("<font color=".$COLOR_CA.">".$COLOR_CA."</font>"); ?> and <?php echo("<font color=".$COLOR_CM.">".$COLOR_CM."</font>"); ?> (their default power colors chosen below).</i>
+	<td><b><?php echo A_CONFCONTENT_219; ?></b><br />
+    	<?php echo A_CONFCONTENT_220; ?><br />
+		<i><?php echo sprintf(A_CONFHINT, sprintf(A_CONFCONTENT_221, "<font color=".$COLOR_CA.">".$COLOR_CA."</font>", "<font color=".$COLOR_CM.">".$COLOR_CM."</font>")); ?></i>
 	</td>
     <td>
         <select name="vITALICIZE_POWERS">
-	        <option value="0"<?php if($ITALICIZE_POWERS==0){ echo " selected"; } ?>>Don't show italics/colors</option>
-	        <option value="1"<?php if($ITALICIZE_POWERS==1){ echo " selected"; } ?>>Show italics/colors</option>
+	        <option value="0"<?php if($ITALICIZE_POWERS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_224; ?></option>
+	        <option value="1"<?php if($ITALICIZE_POWERS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_225; ?></option>
         </select>
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-	<td><b>Set Power users to post tagged text:</b><br />
-    	This option allows you to Set Power users to be able to post tagged text (bold, italic, underline or any combination of them).<br />
-    	<font color=red>Important: It only works if the setting above is set to Show italics/colors. Only B, I or/and U are allowed (case insensitive). Any other letters/characters will not be saved. Values must be separated by commas (if more than one).</font><br />
-		<i>Example: b,i,u (or b,i or b or u,b)</i>
+	<td><b><?php echo A_CONFCONTENT_226; ?></b><br />
+    	<?php echo A_CONFCONTENT_227; ?><br />
+    	<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_228); ?></font><br />
+		<i><?php echo A_CONFCONTENT_229; ?></i>
 	</td>
     <td>
 		<input name="vTAGS_POWERS" type="text" size="3" maxlength="5" value="<?php echo $TAGS_POWERS; ?>">
     </td>
 </tr>
 <tr>
-    <td><b>Color filters in posts.</b><br />
-    	<i>Hint: If enabled, all the users can use any color, if not, they can use all except the power colors set below.</i>
+    <td><b><?php echo A_CONFCONTENT_230; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_231); ?></i>
     </td>
     <td>
         <select name="vCOLOR_FILTERS">
-	        <option value="0"<?php if($COLOR_FILTERS==0){ echo " selected"; } ?>>Filters Disabled</option>
-	        <option value="1"<?php if($COLOR_FILTERS==1){ echo " selected"; } ?>>Filters Enabled</option>
+	        <option value="0"<?php if($COLOR_FILTERS==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($COLOR_FILTERS==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
         </select>
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Set the Power Colors to be used only by admins (first as default).</b><br />
-    	<i>Hint: This applies to the posted messages' colors mainly, but if Colored Names are enabled above, it will also apply to the names colors.</i>
+    <td><b><?php echo A_CONFCONTENT_232; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_233); ?></i>
 	</td>
     <td>
  		<?php
@@ -1930,8 +1944,9 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>Set the Power Colors to be used only by moderators (first as default).</b><br />
-    	<i>Hint. This applies to the posted messages' colors mainly, but if Colored Names are enabled above, it will also apply to names colors.<br />Admins will also be able to use these colors, but no other users.</i>
+    <td><b><?php echo A_CONFCONTENT_234; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_233); ?><br />
+		<?php echo A_CONFCONTENT_236; ?></i>
     </td>
     <td>
 		<?php
@@ -1982,59 +1997,59 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Allow guests to use colors.</b><br />
-    	<i>Hint: If disabled, unregistered users will only use the default color for that room in their posts. This will encourage them to register (hopefully).</i>
+    <td><b><?php echo A_CONFCONTENT_237; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_238); ?></i>
     </td>
     <td>
         <select name="vCOLOR_ALLOW_GUESTS">
-	        <option value="0"<?php if($COLOR_ALLOW_GUESTS==0){ echo " selected"; } ?>>Disallow colors for Guests</option>
-	        <option value="1"<?php if($COLOR_ALLOW_GUESTS==1){ echo " selected"; } ?>>Allow colors for Guests</option>
+	        <option value="0"<?php if($COLOR_ALLOW_GUESTS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_239; ?></option>
+	        <option value="1"<?php if($COLOR_ALLOW_GUESTS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_240; ?></option>
         </select>
     </td>
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="sounds"></a><b>Sound settings</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="sounds"></a><b><?php echo A_CONF_11; ?></b></td></tr>
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Play a sound on entrance.</b>
+    <td><b><?php echo A_CONFCONTENT_241; ?></b><!--Play a sound on entrance.-->
 	</td>
     <td>
         <select name="vALLOW_ENTRANCE_SOUND">
-	        <option value="0"<?php if($ALLOW_ENTRANCE_SOUND==0){ echo " selected"; } ?>>0 - Disabled</option>
-	        <option value="1"<?php if($ALLOW_ENTRANCE_SOUND==1){ echo " selected"; } ?>>1 - Notify the entire room</option>
-	        <option value="2"<?php if($ALLOW_ENTRANCE_SOUND==2){ echo " selected"; } ?>>2 - Welcome only the user</option>
-	        <option value="3"<?php if($ALLOW_ENTRANCE_SOUND==3){ echo " selected"; } ?>>3 - Notify & Welcome (1&2)</option>
+	        <option value="0"<?php if($ALLOW_ENTRANCE_SOUND==0){ echo " selected"; } ?>>0 - <?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($ALLOW_ENTRANCE_SOUND==1){ echo " selected"; } ?>>1 - <?php echo A_CONFCONTENT_242; ?></option>
+	        <option value="2"<?php if($ALLOW_ENTRANCE_SOUND==2){ echo " selected"; } ?>>2 - <?php echo A_CONFCONTENT_243; ?></option>
+	        <option value="3"<?php if($ALLOW_ENTRANCE_SOUND==3){ echo " selected"; } ?>>3 - <?php echo A_CONFCONTENT_244; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Path to the sound to be played on entrance (only .wav extensions).</b><br />
-    	<i>Example: sounds/beep.wav (you can also use long/remote URLs)</i>
+    <td><b><?php echo A_CONFCONTENT_245; ?></b><br />
+    	<i><?php echo A_CONFCONTENT_246; ?></i>
     </td>
-    <td>On Entrance:<br />
+    <td><?php echo A_CONFCONTENT_247; ?><br />
 		<input name="vENTRANCE_SOUND" type="text" size="20" maxlength="255" value="<?php echo $ENTRANCE_SOUND; ?>"><br />
-    	On Welcome:<br />
+    	<?php echo A_CONFCONTENT_248; ?><br />
 		<input name="vWELCOME_SOUND" type="text" size="20" maxlength="255" value="<?php echo $WELCOME_SOUND; ?>">
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Play a buzz sound on /buzz command.</b><br />
-    	(or just display a [Buzz] message, without any sound)
+    <td><b><?php echo A_CONFCONTENT_249; ?></b><br />
+    	<?php echo A_CONFCONTENT_250; ?>
     </td>
     <td>
         <select name="vALLOW_BUZZ_SOUND">
-	        <option value="0"<?php if($ALLOW_BUZZ_SOUND==0){ echo " selected"; } ?>>No buzz sounds</option>
-	        <option value="1"<?php if($ALLOW_BUZZ_SOUND==1){ echo " selected"; } ?>>Play buzz sounds</option>
+	        <option value="0"<?php if($ALLOW_BUZZ_SOUND==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_251; ?></option>
+	        <option value="1"<?php if($ALLOW_BUZZ_SOUND==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_252; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Path to the buzz sound to be played (only .wav extensions).</b><br />
-    	<i>Example: sounds/chimedwn.wav (you can also use long/remote URLs)</i>
+    <td><b><?php echo A_CONFCONTENT_253; ?></b><br />
+    	<i><?php echo A_CONFCONTENT_254; ?></i>
     </td>
     <td>
 		<input name="vBUZZ_SOUND" type="text" size="25" maxlength="255" value="<?php echo $BUZZ_SOUND; ?>">
@@ -2042,53 +2057,53 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="profanity"></a><b>Profanity</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="profanity"></a><b><?php echo A_CONF_12; ?></b></td></tr>
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enable Profanity filter.</b><br />
-    	(replacement of posted swear words with the chars below)
+    <td><b><?php echo A_CONFCONTENT_255; ?></b><br />
+    	<?php echo A_CONFCONTENT_256; ?>
     </td>
     <td>
         <select name="vNO_SWEAR">
-	        <option value="0"<?php if($NO_SWEAR==0){ echo " selected"; } ?>>Allow swearing</option>
-	        <option value="1"<?php if($NO_SWEAR==1){ echo " selected"; } ?>>Disallow swearing</option>
+	        <option value="0"<?php if($NO_SWEAR==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_257; ?></option>
+	        <option value="1"<?php if($NO_SWEAR==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_258; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Expression to replace the swear words with.</b>
+    <td><b><?php echo A_CONFCONTENT_259; ?></b>
 	</td>
     <td>
 		<input name="vSWEAR_EXPR" type="text" size="7" maxlength="5" value="<?php echo $SWEAR_EXPR; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>1. Room name to allow swear words (avoid the filter).</b><br />
-    	<i>Note: You must enter the exact name of the room. <a href=#roomnames class="ChatLink">Click here</a> to check your room names.</i>
+    <td><b>1. <?php echo A_CONFCONTENT_260; ?></b><br />
+    	<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_261); ?></i>
     </td>
     <td>
 		<input name="vSWEAR1" type="text" size="25" maxlength="25" value="<?php echo $SWEAR1; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>2. Room name to allow swear words (avoid the filter).</b>
+    <td><b>2. <?php echo A_CONFCONTENT_260; ?></b>
 	</td>
     <td>
 		<input name="vSWEAR2" type="text" size="25" maxlength="25" value="<?php echo $SWEAR2; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>3. Room name to allow swear words (avoid the filter).</b>
+    <td><b>3. <?php echo A_CONFCONTENT_260; ?></b>
 	</td>
     <td>
 		<input name="vSWEAR3" type="text" size="25" maxlength="25" value="<?php echo $SWEAR3; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>4. Room name to allow swear words (avoid the filter).</b>
+    <td><b>4. <?php echo A_CONFCONTENT_260; ?></b>
 	</td>
     <td>
 		<input name="vSWEAR4" type="text" size="25" maxlength="25" value="<?php echo $SWEAR4; ?>">
@@ -2096,112 +2111,112 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="pm"></a><b>Private messaging</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="pm"></a><b><?php echo A_CONF_15; ?></b></td></tr>
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enable whispers (private messages) system.</b><br />
-    	<i>Hint: if disabled, only the public messages will be allowed to be posted in chat</i>
+    <td><b><?php echo A_CONFCONTENT_263; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_264); ?></i>
     </td>
     <td>
         <select name="vENABLE_PM">
-	        <option value="0"<?php if($ENABLE_PM==0){ echo " selected"; } ?>>PM disabled</option>
-	        <option value="1"<?php if($ENABLE_PM==1){ echo " selected"; } ?>>PM enabled</option>
+	        <option value="0"<?php if($ENABLE_PM==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($ENABLE_PM==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Enable popup whispers (private messages) system.</b><br />
-    	<i>Hint: if enabled, guests will not receive PMs in popups - they must register)<br />
-    	This can also be configured per each registered user in their profile<br />
-    	<font color=red>Important: If you change this setting while there are users logged in, all your users must reload their browsers or exit and re-login. An announcement to all the rooms will be automatically sent if you enable/disable this.</font></i><br />
-		Off-line PMs will always show in a popup anyway (otherwise, recipients won't be notified about new PMs).
+    <td><b><?php echo A_CONFCONTENT_265; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_266); ?><br />
+	<?php echo A_CONFCONTENT_267; ?><br />
+	<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONF_ERR_11); ?></font></i><br />
+	<?php echo A_CONFCONTENT_269; ?>
     </td>
     <td>
         <select name="vPRIV_POPUP">
-	        <option value="0"<?php if($PRIV_POPUP==0){ echo " selected"; } ?>>PM pop-ups disabled</option>
-	        <option value="1"<?php if($PRIV_POPUP==1){ echo " selected"; } ?>>PM pop-ups enabled</option>
+	        <option value="0"<?php if($PRIV_POPUP==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($PRIV_POPUP==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
         </select>
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Allow users to delete their own (received) PMs from the database.</b><br />
-    	<i>Hint: if enabled, users will be able to select and delete the private messages they received.</i>
+    <td><b><?php echo A_CONFCONTENT_270; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_271); ?></i>
     </td>
     <td>
         <select name="vALLOW_PM_DEL">
-	        <option value="0"<?php if($ALLOW_PM_DEL==0){ echo " selected"; } ?>>Disallow PM deletion</option>
-	        <option value="1"<?php if($ALLOW_PM_DEL==1){ echo " selected"; } ?>>Allow PM deletion</option>
+	        <option value="0"<?php if($ALLOW_PM_DEL==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_272; ?></option>
+	        <option value="1"<?php if($ALLOW_PM_DEL==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_273; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Clean-up time for unread off-line private messages.</b><br />
-    	<i><font color=red>Important: If the recipient does not login to chat in this interval, these old private messages are automatically removed from the database (they will not be exported to the log archive neither, so the old unread PMs get lost).</font></i>
+    <td><b><?php echo A_CONFCONTENT_274; ?></b><br />
+    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_275); ?></font></i>
 	</td>
     <td>
-		<input name="vPM_KEEP_DAYS" type="text" size="7" maxlength="3" value="<?php echo $PM_KEEP_DAYS; ?>"> (days)
+		<input name="vPM_KEEP_DAYS" type="text" size="7" maxlength="3" value="<?php echo $PM_KEEP_DAYS; ?>">&nbsp;(<?php echo $PM_KEEP_DAYS == 1 ? L_DAY : L_DAYS; ?>)
 	</td>
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="bot"></a><b>Bot Settings</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="bot"></a><b><?php echo A_CONF_16; ?></b></td></tr>
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enable BOT in chat.</b><br />
-    	<i><font color=red>Important: Before changing any of the bot settings below, please stop the bot if it is running in the chat (you will not be able to kick it out afterwards, because it is set as admin)</font></i>
+    <td><b><?php echo A_CONFCONTENT_276; ?></b><br />
+    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_277); ?></font></i>
     </td>
     <td>
         <select name="vBOT_CONTROL">
-	        <option value="0"<?php if($BOT_CONTROL==0){ echo " selected"; } ?>>Disable Bot</option>
-	        <option value="1"<?php if($BOT_CONTROL==1){ echo " selected"; } ?>>Enable Bot</option>
+	        <option value="0"<?php if($BOT_CONTROL==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($BOT_CONTROL==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Enable Public conversations with BOT in chat.</b><br />
-    	<i>Hint: if you disable this, the bot will only listen and talk to users using private messages in chat</i>
+    <td><b><?php echo A_CONFCONTENT_278; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_279); ?></i>
     </td>
     <td>
         <select name="vBOT_PUBLIC">
-	        <option value="0"<?php if($BOT_PUBLIC==0){ echo " selected"; } ?>>Private Bot Only</option>
-	        <option value="1"<?php if($BOT_PUBLIC==1){ echo " selected"; } ?>>Public Bot</option>
+	        <option value="0"<?php if($BOT_PUBLIC==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_280; ?></option>
+	        <option value="1"<?php if($BOT_PUBLIC==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_281; ?></option>
         </select>
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enter the desired name for your BOT.</b><br />
-    	<i><font color=red>Important: Do not change the name before you make sure bot is fully loaded. You can do this by checking if it answers you on this private chat page: <a href="./bot/talk.php" target="_blank">Talk2Bot</a> !</i>
-		<?php if (!$bot_id) echo ("<br />Note: Your bot has not been correctly loaded! Read the install/manual installation/Manual Instructions.txt"); ?></font>
+    <td><b><?php echo A_CONFCONTENT_282; ?></b><br />
+    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, sprintf(A_CONFCONTENT_283, "<a href=\"./bot/talk.php\" target=\"_blank\">Talk2Bot</a>")); ?></i>
+		<?php if (!$bot_id) echo "<br />" . sprintf(A_CONFNOTE, sprintf(A_CONFCONTENT_284, "install/manual installation/Manual Instructions.txt")); ?></font>
     </td>
     <td>
 			<input name="vBOT_NAME" type="text" size="25" maxlength="25" value="<?php echo $BOT_NAME; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>BOT status & maintainance.</b><br />
-    	<?php if ($bot_id <> 1) echo ("<i><font color=red>Important: If your bot is not responding properly (posts empty messages) and/or the Bot ID <> 1, you might need to reload your bot. This operation will empty the bot tables in the database and reload the entire script.</i></font>"); ?>
+    <td><b><?php echo A_CONFCONTENT_285; ?></b><br />
+    	<?php if ($bot_id <> 1) echo "<i><font color=red>" . sprintf(A_CONFIMPORTANT, A_CONFCONTENT_286) . "</i></font>"; ?>
     </td>
     <td>
 			<?php
 			if (!$bot_loaded)
 			{
-				echo("<font color=red>Your Bot is not loaded to the DB.</font>".((file_exists("bot/aiml/startup.xml") && file_exists("bot/botloader.php")) ? "<br />Click <a href=\"./bot/botloader.php\" target=\"_blank\">here</a> to load it now!": ""));
+				echo ("<font color=red>" . A_CONFCONTENT_287 . ((file_exists("bot/aiml/startup.xml") && file_exists("bot/botloader.php")) ? "<br />" . A_CONFCONTENT_288 : ""));
 			}
 			elseif ($bot_id)
 			{
-				echo(($bot_id == 1) ? "<font color=green>Bot ID:</font><input name=\"BotId\" type=\"text\" size=\"7\" maxlength=\"2\" value=\"$bot_id\" DISABLED READONLY>" : "<font color=red>Bot ID:</font><input name=\"BotId\" type=\"text\" size=\"7\" maxlength=\"2\" value=\"$bot_id\" DISABLED READONLY><br />Click <a href=\"./bot/botloader.php\" target=\"_blank\" class=\"error\">here</a> to reload bot");
+				echo(($bot_id == 1) ? "<font color=green>" . A_CONFCONTENT_289 . "</font><input name=\"BotId\" type=\"text\" size=\"7\" maxlength=\"2\" value=\"$bot_id\" DISABLED READONLY>" : "<font color=red>" . A_CONFCONTENT_289 . "</font><input name=\"BotId\" type=\"text\" size=\"7\" maxlength=\"2\" value=\"$bot_id\" DISABLED READONLY><br />" . A_CONFCONTENT_291);
 			}
 			?>
 		</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enter the color of the BOT response messages.</b>
+    <td><b><?php echo A_CONFCONTENT_292; ?></b>
 	</td>
     <td>
 		<?php
@@ -2225,25 +2240,25 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
-    <td><b>Enter the avatar of the BOT.</b><br />
-    	<i>Hint: It will be shown only if the avatar system is enabled</i>
+    <td><b><?php echo A_CONFCONTENT_293; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_294); ?></i>
     </td>
     <td>
 		<input name="vBOT_AVATAR" type="text" size="20" maxlength="255" value="<?php echo $BOT_AVATAR; ?>">
-		<?php echo(($BOT_AVATAR != "") ? "&nbsp;<img id=\"bot_avatarToSwap\" src=\"".$BOT_AVATAR."\" border=0 width=".$AVA_WIDTH." height=".$AVA_HEIGHT." ALT=\"Bot Avatar\" Title=\"Bot Avatar\" />" : ""); ?>
+		<?php echo(($BOT_AVATAR != "") ? "&nbsp;<img id=\"bot_avatarToSwap\" src=\"".$BOT_AVATAR."\" border=0 width=".$AVA_WIDTH." height=".$AVA_HEIGHT." ALT=\"".A_CONFCONTENT_294a."\" Title=\"".A_CONFCONTENT_294a."\" />" : ""); ?>
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enter the message to be posted by BOT on start.</b><br />
-    	<i>Hint: Avoid special characters or the settings will not be saved</i>
+    <td><b><?php echo A_CONFCONTENT_295; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_296); ?></i>
     </td>
     <td>
 		<input name="vBOT_HELLO" type="text" size="25" maxlength="100" value="<?php echo $BOT_HELLO; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>Enter the message to be posted by BOT on stop.</b><br />
-    	<i>Hint: Avoid special characters or the settings will not be saved</i>
+    <td><b><?php echo A_CONFCONTENT_297; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_296); ?></i>
     </td>
     <td>
 		<input name="vBOT_BYE" type="text" size="25" maxlength="100" value="<?php echo $BOT_BYE; ?>">
@@ -2251,143 +2266,145 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="commands"></a><b>Commands</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="commands"></a><b><?php echo A_CONFTITLE_1; ?></b></td></tr>
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Max number of messages that user may export on /save command.</b><br />
-    	<i>Values: 0=disable, any integer=number of messages, *=no limit</i>
+    <td><b><?php echo A_CONFCONTENT_299; ?></b><br />
+    	<i><?php echo A_CONFCONTENT_300; ?></i>
     </td>
     <td>
 		<input name="vSAVE" type="text" size="7" maxlength="2" value="<?php echo $SAVE; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>Enable Different Topics for each room (/topic or /topic * commands).</b><br />
-    	(or just display a default one, called Global topic)<br />
-		<i>Hint: default topics ought to be edited in the according localized.chat.php / per each desired language, or, to add a default global topic (which overrides the localized topics), add it to localized/_owner/owner.php)</i>
+    <td><b><?php echo A_CONFCONTENT_301; ?></b><br />
+    	<?php echo A_CONFCONTENT_302; ?><br />
+		<i><?php echo sprintf(A_CONFHINT, sprintf(A_CONFCONTENT_303, "localized.chat.php/", "localized/_owner/owner.php")); ?></i>
     </td>
     <td>
         <select name="vTOPIC_DIFF">
-	        <option value="0"<?php if($TOPIC_DIFF==0){ echo " selected"; } ?>>Global topic</option>
-	        <option value="1"<?php if($TOPIC_DIFF==1){ echo " selected"; } ?>>Multiple topics</option>
+	        <option value="0"<?php if($TOPIC_DIFF==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_304; ?></option>
+	        <option value="1"<?php if($TOPIC_DIFF==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_305; ?></option>
         </select>
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enter the expression for the /room command.</b><br />
-    	<i>Examples: <font color=red>Attention Room:</font> or <font color=red>Narrator Says:</font> or <font color=red>Read this:</font> or <font color=red>Author says:</font></i>
+    <td><b><?php echo A_CONFCONTENT_306; ?></b><br />
+    	<i><?php echo A_CONFCONTENT_307; ?></i>
     </td>
     <td>
 		<input name="vROOM_SAYS" type="text" size="25" maxlength="255" value="<?php echo $ROOM_SAYS; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>Allow moderators to use /demote command.</b><br />
-		<i>Hint: if set to second option, moderators will be able to demote other moderators - <font color=red>be very careful!</font></i>
+    <td><b><?php echo A_CONFCONTENT_308; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_309); ?></i>
 	</td>
     <td>
         <select name="vDEMOTE_MOD">
-	        <option value="0"<?php if($DEMOTE_MOD==0){ echo " selected"; } ?>>Only admins</option>
-	        <option value="1"<?php if($DEMOTE_MOD==1){ echo " selected"; } ?>>Moderators & admins</option>
+	        <option value="0"<?php if($DEMOTE_MOD==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_310; ?></option>
+	        <option value="1"<?php if($DEMOTE_MOD==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_311; ?></option>
         </select>
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enter the max number of dice per throw.</b><br />
-    	<i><font color=red>Use a value smaller than 99.</font><br />
-		Hint: Needed ONLY for Dice v.2. Please note that increasing this value too much, will lead to a load of how many dice images you choose, which can return delays displaying the messages (drastically for non-IE browsers)</i>
+    <td><b><?php echo A_CONFCONTENT_312; ?></b><br />
+    	<i><font color=red><?php echo A_CONFCONTENT_313; ?></font><br />
+		<?php echo sprintf(A_CONFHINT, A_CONFCONTENT_314); ?></i>
     </td>
     <td>
 		<input name="vMAX_DICES" type="text" size="7" maxlength="2" value="<?php echo $MAX_DICES; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>Enter the max number of dice per throw (sides per die for Dice v.2)</b>
+    <td><b><?php echo A_CONFCONTENT_315; ?></b>
 	</td>
     <td>
 		<input name="vMAX_ROLLS" type="text" size="7" maxlength="3" value="<?php echo $MAX_ROLLS; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Default sort order in the users lists (/sort command).</b><br />
-    	<i>Hint: users can also use the /sort command to change their sorting order</i>
+    <td><b><?php echo A_CONFCONTENT_316; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_317); ?></i>
     </td>
     <td>
         <select name="vUSERS_SORT_ORD">
-	        <option value="0"<?php if($USERS_SORT_ORD==0){ echo " selected"; } ?>>By time of entrance</option>
-	        <option value="1"<?php if($USERS_SORT_ORD==1){ echo " selected"; } ?>>Alphabetically</option>
+	        <option value="0"<?php if($USERS_SORT_ORD==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_318; ?></option>
+	        <option value="1"<?php if($USERS_SORT_ORD==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_319; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Set the maximum size for resizing posted pictures using /img command</b>
+    <td><b><?php echo A_CONFCONTENT_320; ?></b>
 	</td>
     <td>
-		<input name="vMAX_PIC_SIZE" type="text" size="7" maxlength="3" value="<?php echo $MAX_PIC_SIZE; ?>">
+		<input name="vMAX_PIC_SIZE" type="text" size="7" maxlength="3" value="<?php echo $MAX_PIC_SIZE; ?>">&nbsp;(<?php echo A_CONFPX; ?>)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-	<td><b>Enable use of /math commands.</b><br />
-    	This option allows you to post mathematical formulas using the LaTeX format provided by MathJax.<br />
-		<i>Hint: Here is a <a href="http://www.mathjax.org/demos/tex-samples/" target="_blank">sample page</a> from the original mathjax.org site. You just need to type /math and copy&paste the source code of the desired formula.</i><br />
-		You can also use a local configuration file by setting the right source path. Default source (src) is: <font color="blue"><i>http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML</i></font>
+	<td><b><?php echo A_CONFCONTENT_321; ?></b><br />
+    	<?php echo A_CONFCONTENT_322; ?><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_323); ?></i><br />
+		<?php echo A_CONFCONTENT_324; ?>
 	</td>
     <td>
         <select name="vALLOW_MATH">
-	        <option value="0"<?php if($ALLOW_MATH==0){ echo " selected"; } ?>>Disable MathJax</option>
-	        <option value="1"<?php if($ALLOW_MATH==1){ echo " selected"; } ?>>Enable MathJax</option>
+	        <option value="0"<?php if($ALLOW_MATH==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($ALLOW_MATH==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
         </select><br />
-		Plugin Configuration Source:<br />
+		<?php echo A_CONFCONTENT_325; ?><br />
 		<input name="vSRC_MATH" type="text" size="25" maxlength="255" value="<?php echo $SRC_MATH; ?>">
     </td>
 </tr>
 
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="mmedia"></a><b>Multimedia</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="mmedia"></a><b><?php echo A_CONF_18; ?></b></td></tr>
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enable posting videos (e.g. YouTube) by using the /video command</b><br />
-		<i>Hints: If disabled, only the links to the original video source will be posted in chat; if enabled, any user can post a video that can be watched directly in chat by all users; setting to admins only will only show videos posted by admins and topmoders, rest of the users posting only links to the original video source.</i>
+    <td><b><?php echo A_CONFCONTENT_326; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_327); ?></i>
 	</td>
     <td>
         <select name="vALLOW_VIDEO">
-	        <option value="0"<?php if($ALLOW_VIDEO==0){ echo " selected"; } ?>>Disabled</option>
-	        <option value="1"<?php if($ALLOW_VIDEO==1){ echo " selected"; } ?>>Enabled</option>
-	        <option value="2"<?php if($ALLOW_VIDEO==2){ echo " selected"; } ?>>From admins only</option>
+	        <option value="0"<?php if($ALLOW_VIDEO==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($ALLOW_VIDEO==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+	        <option value="2"<?php if($ALLOW_VIDEO==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_328; ?></option>
         </select>
 	</td>
 </tr>
 <tr>
-    <td><b>Set the width and height of the Video Player</b>
+    <td><b><?php echo A_CONFCONTENT_329; ?></b>
 	</td>
-    <td>
-		W: <input name="vVIDEO_WIDTH" type="text" size="4" maxlength="3" value="<?php echo $VIDEO_WIDTH; ?>">&nbsp;
-		H: <input name="vVIDEO_HEIGHT" type="text" size="4" maxlength="3" value="<?php echo $VIDEO_HEIGHT; ?>">
+    <td align=right>
+		<?php echo A_CONFWIDTH; ?>:&nbsp;<input name="vVIDEO_WIDTH" type="text" size="7" maxlength="3" value="<?php echo $VIDEO_WIDTH; ?>">&nbsp;(<?php echo A_CONFPX; ?>)<br />
+		<?php echo A_CONFHEIGHT; ?>:&nbsp;<input name="vVIDEO_HEIGHT" type="text" size="7" maxlength="3" value="<?php echo $VIDEO_HEIGHT; ?>">&nbsp;(<?php echo A_CONFPX; ?>)
 	</td>
+
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enable the MediaPlayer add-on in chat</b><br />
-    	<i><font color=red>Choose the correct format as the frame will take the according size (audio < video).<br />
-    	Important: If you change this setting while there are users logged in, all your users must reload their browsers or exit and re-login. An announcement to all the rooms will be automatically sent if you enable/disable this.</font><br />
-    	<i>Hints: If enabled, a valid streaming URL must be also set in the next field. You can set either a static audio/video source or a radioplayer streaming server. E.g. http://playlist.yahoo.com/makeplaylist.dll?id=1369080&segment=149773 (NASA TV live station)</i>
+    <td><b><?php echo A_CONFCONTENT_330; ?></b><br />
+    	<?php echo A_CONFCONTENT_331; ?><br />
+    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONF_ERR_11); ?></font><br />
+    	<?php echo sprintf(A_CONFHINT, A_CONFCONTENT_333); ?></i>
 	</td>
     <td>
         <select name="vEN_WMPLAYER">
-	        <option value="0"<?php if($EN_WMPLAYER==0){ echo " selected"; } ?>>Disabled</option>
-	        <option value="1"<?php if($EN_WMPLAYER==1){ echo " selected"; } ?>>Audio/Radio</option>
-	        <option value="2"<?php if($EN_WMPLAYER==2){ echo " selected"; } ?>>Video/TV</option>
+	        <option value="0"<?php if($EN_WMPLAYER==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($EN_WMPLAYER==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_334; ?></option>
+	        <option value="2"<?php if($EN_WMPLAYER==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_335; ?></option>
         </select>
 	</td>
 </tr>
 <tr>
-    <td><b>The path to the streaming URL.</b>
+    <td><b><?php echo A_CONFCONTENT_336; ?></b><br />
+    	<?php echo A_CONFCONTENT_336a; ?>
 	</td>
     <td>
 		<input name="vWMP_STREAM" type="text" size="25" maxlength="255" value="<?php echo $WMP_STREAM; ?>">
@@ -2395,73 +2412,73 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="quick"></a><b>Quick Menus</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="quick"></a><b><?php echo A_CONF_19; ?></b></td></tr>
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Define the Quick Menu for admins.</b><br />
-    	<i>Hint: keep these chars: <b>|</b> at the end of each line except the last one<br />
-    	Empty this box to disable admin's Quick Menu.</i>
+    <td><b><?php echo A_CONFCONTENT_337; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_340a); ?></i><br />
+		<?php echo A_CONFCONTENT_340; ?>
     </td>
     <td><textarea name="vQUICKA" rows=5 cols=28 wrap=on><?php echo $QUICKA; ?></textarea>
 	</td>
 </tr>
 <tr>
-    <td><b>Define the Quick Menu for moderators.</b><br />
-    	<i>Hint: keep these chars: <b>|</b> at the end of each line except the last one<br />
-    	Empty this box to disable moder's Quick Menu.</i>
+    <td><b><?php echo A_CONFCONTENT_338; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_340a); ?></i><br />
+		<?php echo A_CONFCONTENT_341; ?>
     </td>
     <td><textarea name="vQUICKM" rows=5 cols=28 wrap=on><?php echo $QUICKM; ?></textarea>
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Define the Quick Menu for other users.</b><br />
-    	<i>Hint: keep these chars: <b>|</b> at the end of each line except the last one<br />
-    	Empty this box to disable user's Quick Menu.</i>
+    <td><b><?php echo A_CONFCONTENT_339; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_340a); ?></i><br />
+		<?php echo A_CONFCONTENT_342; ?>
     </td>
     <td><textarea name="vQUICKU" rows=5 cols=28 wrap=on><?php echo $QUICKU; ?></textarea>
 	</td>
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="avatars"></a><b>Avatars & Gravatars</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="avatars"></a><b><?php echo A_CONF_20; ?></b></td></tr>
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enable AVATAR System.</b><br />
-    	<i><font color=red>Important: If you change this setting while there are users logged in, all your users must reload their browsers or exit and re-login. An announcement to all the rooms will be automatically sent if you enable/disable this.</font></i>
+    <td><b><?php echo A_CONFCONTENT_343; ?></b><br />
+    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONF_ERR_11); ?></font></i>
     </td>
     <td>
         <select name="vUSE_AVATARS" id="use_avatars" onChange="swapImage('use_avatars','use_avatarsToSwap')">
-	        <option value="0"<?php if($USE_AVATARS==0){ echo " selected"; } ?>>No avatars</option>
-	        <option value="1"<?php if($USE_AVATARS==1){ echo " selected"; } ?>>Use avatars</option>
-        </select>&nbsp;<img id="use_avatarsToSwap" src="<?php echo(($USE_AVATARS==1) ? "./".$ChatPath.$AVA_RELPATH.$DEF_AVATAR : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 width=".$AVA_WIDTH." height=".$AVA_HEIGHT." ALT=\"Default Avatar\" Title=\"Default Avatar\""); ?> />
+	        <option value="0"<?php if($USE_AVATARS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_345; ?></option>
+	        <option value="1"<?php if($USE_AVATARS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_346; ?></option>
+        </select>&nbsp;<img id="use_avatarsToSwap" src="<?php echo(($USE_AVATARS==1) ? "./".$ChatPath.$AVA_RELPATH.$DEF_AVATAR : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 width=".$AVA_WIDTH." height=".$AVA_HEIGHT." ALT=\"".A_CONFCONTENT_352."\" Title=\"".A_CONFCONTENT_352."\""); ?> />
     </td>
 </tr>
 <tr>
-    <td><b>Show Change Avatar (Profile) button in input bar.</b>
+    <td><b><?php echo A_CONFCONTENT_347; ?></b>
 	</td>
     <td>
         <select name="vAVA_PROFBUTTON" id="prof_button" onChange="swapImage('prof_button','prof_buttonToSwap')">
-	        <option value="0"<?php if($AVA_PROFBUTTON==0){ echo " selected"; } ?>>Hide Avatar Button</option>
-	        <option value="1"<?php if($AVA_PROFBUTTON==1){ echo " selected"; } ?>>Show Avatar Button</option>
-        </select>&nbsp;<img id="prof_buttonToSwap" src="<?php echo(($AVA_PROFBUTTON==1) ? "./".$ChatPath."images/avatarbutton.gif" : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 width=".$AVA_WIDTH." height=".$AVA_HEIGHT." ALT=\"Avatar button\" Title=\"Avatar button\""); ?> />
+	        <option value="0"<?php if($AVA_PROFBUTTON==0){ echo " selected"; } ?>><?php echo A_CONFHIDE; ?></option>
+	        <option value="1"<?php if($AVA_PROFBUTTON==1){ echo " selected"; } ?>><?php echo A_CONFSHOW; ?></option>
+        </select>&nbsp;<img id="prof_buttonToSwap" src="<?php echo(($AVA_PROFBUTTON==1) ? "./".$ChatPath."images/avatarbutton.gif" : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 width=".$AVA_WIDTH." height=".$AVA_HEIGHT." ALT=\"".A_CONFCONTENT_351."\" Title=\"".A_CONFCONTENT_351."\""); ?> />
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>The path to your avatar dir.</b>
+    <td><b><?php echo A_CONFCONTENT_348; ?></b>
 	</td>
     <td>
 		<input name="vAVA_RELPATH" type="text" size="25" maxlength="55" value="<?php echo $AVA_RELPATH == "" ? "images/avatars/" : $AVA_RELPATH; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>Enter the number of avatars to be shown from your defined folder.</b><br />
-	<i>Hint: only the first <?php echo($NUM_AVATARS); ?> avatars will be shown to the users</i>
+    <td><b><?php echo A_CONFCONTENT_349; ?></b><br />
+	<i><?php echo sprintf(A_CONFHINT, sprintf(A_CONFCONTENT_350, $NUM_AVATARS)); ?></i>
 	</td>
     <td>
 		<?php
@@ -2481,12 +2498,12 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			$max_num_avatars = $i-2;
 ?>
 		<input name="vNUM_AVATARS" type="text" size="7" maxlength="3" value="<?php echo (($NUM_AVATARS > $max_num_avatars) ? $max_num_avatars : $NUM_AVATARS); ?>">
-		&nbsp;(max <?php echo($max_num_avatars); ?>)
+		&nbsp;(<= <?php echo($max_num_avatars); ?>)
 		<input name="max_num_avatars" type="hidden" value="<?php echo $max_num_avatars; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Users default avatar.</b>
+    <td><b><?php echo A_CONFCONTENT_352; ?></b>
 	</td>
     <td>
 		<select name="vDEF_AVATAR" id="def_avatar" onChange="swapImage('def_avatar','def_avatarToSwap')">
@@ -2505,78 +2522,78 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			}
 		unset($avatarsfile);
 		?>
-		</select><?php echo("&nbsp;<img id=\"def_avatarToSwap\" src=\"./".$ChatPath.$AVA_RELPATH.$DEF_AVATAR."\" border=0 width=".$AVA_WIDTH." height=".$AVA_HEIGHT." ALT=\"Default Avatar\" Title=\"Default Avatar\""); ?> />
+		</select><?php echo("&nbsp;<img id=\"def_avatarToSwap\" src=\"./".$ChatPath.$AVA_RELPATH.$DEF_AVATAR."\" border=0 width=".$AVA_WIDTH." height=".$AVA_HEIGHT." ALT=\"".A_CONFCONTENT_352."\" Title=\"".A_CONFCONTENT_352."\""); ?> />
 	</td>
 </tr>
 <tr>
-    <td><b>Enter the width and height for the avatars to be shown.</b><br />
-    	<i>Hint: Usually, for a nice layout, width and height values should be equal.</i>
+    <td><b><?php echo A_CONFCONTENT_353; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_354); ?></i>
 	</td>
-    <td>
-		Width:&nbsp;&nbsp;<input name="vAVA_WIDTH" type="text" size="7" maxlength="3" value="<?php echo $AVA_WIDTH; ?>"> (px)<br />
-		Height:&nbsp;<input name="vAVA_HEIGHT" type="text" size="7" maxlength="3" value="<?php echo $AVA_HEIGHT; ?>"> (px)
+    <td align=right>
+		<?php echo A_CONFWIDTH; ?>:&nbsp;<input name="vAVA_WIDTH" type="text" size="7" maxlength="3" value="<?php echo $AVA_WIDTH; ?>">&nbsp;(<?php echo A_CONFPX; ?>)<br />
+		<?php echo A_CONFHEIGHT; ?>:&nbsp;<input name="vAVA_HEIGHT" type="text" size="7" maxlength="3" value="<?php echo $AVA_HEIGHT; ?>">&nbsp;(<?php echo A_CONFPX; ?>)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Allow users to upload Avatars from their machines.</b><br />
-	<i><font color=red>Important: make sure the "images/avatars" and "images/avatars/uploaded" folders exist and they have public write permissions (CHMOD 0777)!</font></i>
+    <td><b><?php echo A_CONFCONTENT_355; ?></b><br />
+	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_356); ?></font></i>
 	</td>
     <td>
         <select name="vALLOW_UPLOADS">
-	        <option value="0"<?php if($ALLOW_UPLOADS==0){ echo " selected"; } ?>>Disallow uploads</option>
-	        <option value="1"<?php if($ALLOW_UPLOADS==1){ echo " selected"; } ?>>Allow uploads</option>
+	        <option value="0"<?php if($ALLOW_UPLOADS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_357; ?></option>
+	        <option value="1"<?php if($ALLOW_UPLOADS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_358; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Show gender icons beside avatars.</b>
+    <td><b><?php echo A_CONFCONTENT_359; ?></b>
 	</td>
     <td>
         <select name="vDISP_GENDER" id="genders" onChange="swapImage('genders','gendersToSwap')">
-	        <option value="0"<?php if($DISP_GENDER==0){ echo " selected"; } ?>>Hide Gender icons</option>
-	        <option value="1"<?php if($DISP_GENDER==1){ echo " selected"; } ?>>Show Gender icons</option>
-        </select>&nbsp;<img style="vertical-align:middle" id="gendersToSwap" src="<?php echo(($DISP_GENDER==1) ? "./".$ChatPath."images/gender_couple.gif" : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 ALT=\"Genders\" Title=\"Genders\""); ?> />
+	        <option value="0"<?php if($DISP_GENDER==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_360; ?></option>
+	        <option value="1"<?php if($DISP_GENDER==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_361; ?></option>
+        </select>&nbsp;<img style="vertical-align:middle" id="gendersToSwap" src="<?php echo(($DISP_GENDER==1) ? "./".$ChatPath."images/gender_couple.gif" : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 ALT=\"".A_CONFCONTENT_351a."\" Title=\"".A_CONFCONTENT_351a."\""); ?> />
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><a name="force"></a><b>Enable use of GRAVATARS.</b><br />
-    	<i><font color=red>Important: <a href=#avatars>Avatar System</a> must also be enabled above!</font><br />
-		Hint: If enabled, all guests will have a default gravatar as avatar.</i>
+    <td><a name="force"></a><b><?php echo A_CONFCONTENT_362; ?></b><br />
+    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_363); ?></font><br />
+		<?php echo sprintf(A_CONFHINT, A_CONFCONTENT_364); ?></i>
     </td>
     <td>
         <select name="vALLOW_GRAVATARS" id="gravatars" onChange="swapImage('gravatars','gravatarsToSwap')">
-	        <option value="0"<?php if($ALLOW_GRAVATARS==0){ echo " selected"; } ?>>Disable Gravatars</option>
-	        <option value="1"<?php if($ALLOW_GRAVATARS==1){ echo " selected"; } ?>>Let users decide</option>
-	        <option value="2"<?php if($ALLOW_GRAVATARS==2){ echo " selected"; } ?>>Force Only Gravatars</option>
+	        <option value="0"<?php if($ALLOW_GRAVATARS==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($ALLOW_GRAVATARS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_365; ?></option>
+	        <option value="2"<?php if($ALLOW_GRAVATARS==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_366; ?></option>
         </select>&nbsp;<img id="gravatarsToSwap" src="<?php echo(($ALLOW_GRAVATARS) ? "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=".$AVA_WIDTH."&r=g&d=".$GRAVATARS_DYNAMIC_DEF : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 ALT=\"Gravatar\" Title=\"Gravatar\""); ?> />
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
 	<td colspan="2">
-    	<i><font color=blue>Definition:</font><br />
-    	A gravatar, or <b>G</b>lobally <b>R</b>ecognized <b>A</b>vatar, is quite simply an avatar image that follows you from weblog to weblog appearing beside your name when you comment on gravatar enabled sites. Avatars help identify your posts on web forums, so why not on weblogs.<br />Signing up for a gravatar.com account is FREE, and all that's required is an email address. Once you've signed up you can upload your avatar image and soon after you'll start seeing it on gravatar enabled weblogs (including this chat)!<br />
-		<font color=blue>(read more about Gravatars on <a href="http://www.gravatar.com" target="_blank">http://www.gravatar.com</a> site)</font></i>
+    	<i><font color=blue><?php echo A_CONFCONTENT_367; ?></font><br />
+    	<?php echo A_CONFCONTENT_368; ?><br />
+		<font color=blue><?php echo A_CONFCONTENT_369; ?></font></i>
 	</td>
 </tr>
 <tr>
-    <td><b>GRAVATARS Cache Settings.</b><br />
-	<i>Server Info:<br /><font color=red>Important: if cache is enabled, make sure the "cache" folder exists in the chat root and it has public write permissions (CHMOD 0777)!<br />
-	<?php echo((!$cache_supported || $server_blocked) ? "<b>Cache not supported on this server!</b><br />" : ""); ?>
-		</font><font color=blue>Hosting Server IP: <b><?php echo($_SERVER['SERVER_ADDR']); ?></b> <?php echo(!$server_blocked ? "" : "<b><font color=red>cannot get access to gravatar.com!</font></b>"); ?></font><br />
-		<font color=blue>Php server version: <b><?php echo(version_compare(PHP_VERSION,'5') >= 0 ? "<font color=red>".PHP_VERSION."</font>" : PHP_VERSION); ?></b></font><br />
-		<font color=blue>allow_url_fopen: <b><?php echo(!(ini_get("allow_url_fopen")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
-		<font color=blue>allow_url_include: <b><?php echo(!(ini_get("allow_url_include")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
-		<font color=blue>file_get_contents: <b><?php echo(!(function_exists("file_get_contents")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
-		<font color=blue>MySQL server version: <b><?php echo(mysql_get_server_info()); ?></b></font></i>
+    <td><b><?php echo A_CONFCONTENT_370; ?></b><br />
+	<i><?php echo A_CONFCONTENT_371 . "<br /><font color=red>" . sprintf(A_CONFIMPORTANT, A_CONFCONTENT_371a); ?><br />
+	<?php echo((!$cache_supported || $server_blocked) ? "<b>".A_CONFCONTENT_371b."</b><br />" : ""); ?>
+		</font><font color=blue><?php echo A_CONFCONTENT_372; ?>&nbsp;<b><?php echo($_SERVER['SERVER_ADDR']); ?></b> <?php echo(!$server_blocked ? "" : "<b><font color=red>".A_CONFCONTENT_371c."</font></b>"); ?></font><br />
+		<font color=blue><?php echo A_CONFCONTENT_377; ?>&nbsp;<b><?php echo(mysql_get_server_info()); ?></b></font><br />
+		<font color=blue><?php echo A_CONFCONTENT_373; ?>&nbsp;<b><?php echo(version_compare(PHP_VERSION,'5') >= 0 ? "<font color=red>".PHP_VERSION."</font>" : PHP_VERSION); ?></b></font><br />
+		<font color=blue><?php echo A_CONFCONTENT_374; ?>&nbsp;<b><?php echo(!(ini_get("allow_url_fopen")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
+		<font color=blue><?php echo A_CONFCONTENT_375; ?>&nbsp;<b><?php echo(!(ini_get("allow_url_include")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
+		<font color=blue><?php echo A_CONFCONTENT_376; ?>&nbsp;<b><?php echo(!(function_exists("file_get_contents")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font></i>
 	</td>
     <td>
-		<input type="radio" value="0" name="vGRAVATARS_CACHE" <?php if($GRAVATARS_CACHE==0 || !$cache_supported || $server_blocked) { echo " checked"; }; ?>>&nbsp;Cache Disabled<br />
-		<input type="radio" value="1" name="vGRAVATARS_CACHE" <?php if($GRAVATARS_CACHE==1 && $cache_supported){ echo " checked"; }; if(!$cache_supported || $server_blocked){ echo " disabled"; }; ?>>&nbsp;Cache Enabled<br />
-		Cache Age:<br /><input name="vGRAVATARS_CACHE_EXPIRE" type="text" size="7" maxlength="3" value="<?php echo $GRAVATARS_CACHE_EXPIRE; ?>"<?php if(!$cache_supported || $server_blocked){ echo " readonly"; }; ?>> (days)
+		<input type="radio" value="0" name="vGRAVATARS_CACHE" <?php if($GRAVATARS_CACHE==0 || !$cache_supported || $server_blocked) { echo " checked"; }; ?>>&nbsp;<?php echo A_CONFCONTENT_378; ?><br />
+		<input type="radio" value="1" name="vGRAVATARS_CACHE" <?php if($GRAVATARS_CACHE==1 && $cache_supported){ echo " checked"; }; if(!$cache_supported || $server_blocked){ echo " disabled"; }; ?>>&nbsp;<?php echo A_CONFCONTENT_379; ?><br />
+		<?php echo A_CONFCONTENT_380; ?><!--Cache Age:--><br /><input name="vGRAVATARS_CACHE_EXPIRE" type="text" size="7" maxlength="3" value="<?php echo $GRAVATARS_CACHE_EXPIRE; ?>"<?php if(!$cache_supported || $server_blocked){ echo " readonly"; }; ?>>&nbsp;(<?php echo $GRAVATARS_CACHE_EXPIRE == 1 ? L_DAY : L_DAYS; ?>)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>GRAVATARS Allowed Ratings.</b>
+    <td><b><?php echo A_CONFCONTENT_381; ?></b>
 	</td>
     <td>
         <select name="vGRAVATARS_RATING">
@@ -2584,22 +2601,22 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	        <option value="PG"<?php if($GRAVATARS_RATING=="PG"){ echo " selected"; } ?>>PG</option>
 	        <option value="R"<?php if($GRAVATARS_RATING=="R"){ echo " selected"; } ?>>R</option>
 	        <option value="X"<?php if($GRAVATARS_RATING=="X"){ echo " selected"; } ?>>X</option>
-	        <option value="ANY"<?php if($GRAVATARS_RATING=="ANY"){ echo " selected"; } ?>>ANY</option>
+	        <option value="ANY"<?php if($GRAVATARS_RATING=="ANY"){ echo " selected"; } ?>><?php echo A_CONFCONTENT_382; ?></option>
         </select>
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
     <td colspan=2>
-		<i>G rated gravatar is suitable for display on all websites with any audience type. <font color=blue>(recommended & default)</font><br />
-		PG rated gravatars may contain rude gestures, provocatively dressed individuals, the lesser swear words, or mild violence.<br />
-		R rated gravatars may contain such things as harsh profanity, intense violence, nudity, or hard drug use.<br />
-		X rated gravatars may contain hardcore sexual imagery or extremely disturbing violence.</i>
+		<i><?php echo A_CONFCONTENT_383; ?><br />
+		<?php echo A_CONFCONTENT_385; ?><br />
+		<?php echo A_CONFCONTENT_386; ?><br />
+		<?php echo A_CONFCONTENT_387; ?></i>
 	</td>
 </tr>
 <tr>
-    <td><b>Dynamic Default GRAVATARS.</b><br />
-	<i>Hints: This will randomly return a dynamic image for each user who don't have a gravatar.com account for their email (chat guests and/or users without a registered gravatar.com account).<br />
-	<font color=red>You can force to display Random default Gravatars only if <a href="#force">Force Only Gravatars</a> is also enabled above!</font></i>
+    <td><b><?php echo A_CONFCONTENT_388; ?></b><br />
+	<i><?php echo A_CONFCONTENT_389; ?><br />
+	<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_390); ?></font></i>
     </td>
     <td>
         <select name="vGRAVATARS_DYNAMIC_DEF" id="gravatars_def" onChange="swapImage('gravatars_def','gravatars_defToSwap')">
@@ -2622,117 +2639,117 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
         	else $grav_def_src = "./".$ChatPath."images/gender_none.gif";
         }
         ?>
-        &nbsp;<img id="gravatars_defToSwap" src="<?php echo((isset($grav_def_src) && $grav_def_src!= "") ? $grav_def_src : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 ALT=\"Dynamic Gravatar\" Title=\"Dynamic Gravatar\""); ?> /><br />
+        &nbsp;<img id="gravatars_defToSwap" src="<?php echo((isset($grav_def_src) && $grav_def_src!= "") ? $grav_def_src : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 ALT=\"".A_CONFCONTENT_388a."\" Title=\"".A_CONFCONTENT_388a."\""); ?> /><br />
         <select name="vGRAVATARS_DYNAMIC_DEF_FORCE">
-	        <option value="0"<?php if($GRAVATARS_DYNAMIC_DEF_FORCE==0){ echo " selected"; } ?>>Show Users' Defaults</option>
-	        <option value="1"<?php if($GRAVATARS_DYNAMIC_DEF_FORCE==1){ echo " selected"; } ?>>Force Random Defaults</option>
+	        <option value="0"<?php if($GRAVATARS_DYNAMIC_DEF_FORCE==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_391; ?></option>
+	        <option value="1"<?php if($GRAVATARS_DYNAMIC_DEF_FORCE==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_392; ?></option>
         </select>
 	</td>
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="logging"></a><b>Logging Mod</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="logging"></a><b><?php echo A_CONF_21; ?></b></td></tr><!--Logging Mod-->
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enable chat logging.</b><br />
-    	<i>Hint: it will generate html files of the cleaned/deleted conversations. The full version can be accessed via the admin advanced menu, the short version (only the public messages) from the Extra Options menu in chat rooms.</i>
+    <td><b><?php echo A_CONFCONTENT_393; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_394); ?></i>
     </td>
     <td>
         <select name="vCHAT_LOGS">
-	        <option value="0"<?php if($CHAT_LOGS==0){ echo " selected"; } ?>>Disable Logs/Archive</option>
-	        <option value="1"<?php if($CHAT_LOGS==1){ echo " selected"; } ?>>Enable Logs/Archive</option>
+	        <option value="0"<?php if($CHAT_LOGS==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($CHAT_LOGS==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Set the name of your admin (full) logs folder.</b><br />
-    	<i><font color=red>Important: Rename the original "logsadmin" folder to a hard to guess name for your full logs folder.</font><br />
-    	Hint: This is different from the public/users accessible one (called "logs"), which does not include any private/confidential data from your chat conversations/actions.</i>
+    <td><b><?php echo A_CONFCONTENT_395; ?></b><br />
+    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_396); ?></font><br />
+    	<?php echo sprintf(A_CONFHINT, A_CONFCONTENT_397); ?></i>
     </td>
     <td>
 		<input name="vLOG_DIR" type="text" size="25" maxlength="25" value="<?php echo $LOG_DIR; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Display logs to non-admin users in chat.</b><br />
-    	<i>Hint: Only if Chat logging is enabled.</i>
+    <td><b><?php echo A_CONFCONTENT_398; ?></b><br />
+    	<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_399); ?></i>
     </td>
     <td>
         <select name="vSHOW_LOGS_USR">
-	        <option value="0"<?php if($SHOW_LOGS_USR==0){ echo " selected"; } ?>>Hide</option>
-	        <option value="1"<?php if($SHOW_LOGS_USR==1){ echo " selected"; } ?>>Show</option>
+	        <option value="0"<?php if($SHOW_LOGS_USR==0){ echo " selected"; } ?>><?php echo A_CONFHIDE; ?></option>
+	        <option value="1"<?php if($SHOW_LOGS_USR==1){ echo " selected"; } ?>><?php echo A_CONFSHOW; ?></option>
         </select>
     </td>
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="lurking"></a><b>Lurking Mod</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="lurking"></a><b><?php echo A_CONF_22; ?></b></td></tr>
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enable chat lurking.</b><br />
-    	<i>Hint: it will allow non-login people to monitor public conversations and events in the chat.</i>
+    <td><b><?php echo A_CONFCONTENT_400; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_401); ?></i>
     </td>
     <td>
         <select name="vCHAT_LURKING">
-	        <option value="0"<?php if($CHAT_LURKING==0){ echo " selected"; } ?>>Disable Lurking page</option>
-	        <option value="1"<?php if($CHAT_LURKING==1){ echo " selected"; } ?>>Enable Lurking page</option>
+	        <option value="0"<?php if($CHAT_LURKING==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($CHAT_LURKING==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Display lurking page to non-admin users in chat and login page.</b><br />
-    	<i>Hint: Only if Chat lurking is enabled.</i>
+    <td><b><?php echo A_CONFCONTENT_402; ?></b><br />
+    	<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_403); ?></i>
     </td>
     <td>
         <select name="vSHOW_LURK_USR">
-	        <option value="0"<?php if($SHOW_LURK_USR==0){ echo " selected"; } ?>>Hide</option>
-	        <option value="1"<?php if($SHOW_LURK_USR==1){ echo " selected"; } ?>>Show</option>
+	        <option value="0"<?php if($SHOW_LURK_USR==0){ echo " selected"; } ?>><?php echo A_CONFHIDE; ?></option>
+	        <option value="1"<?php if($SHOW_LURK_USR==1){ echo " selected"; } ?>><?php echo A_CONFSHOW; ?></option>
         </select>
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enable the Chat extras in admin panel.</b>
+    <td><b><?php echo A_CONFCONTENT_404; ?></b>
 	</td>
     <td>
         <select name="vCHAT_EXTRAS">
-	        <option value="0"<?php if($CHAT_EXTRAS==0){ echo " selected"; } ?>>Disable Chat extras</option>
-	        <option value="1"<?php if($CHAT_EXTRAS==1){ echo " selected"; } ?>>Enable Chat extras</option>
+	        <option value="0"<?php if($CHAT_EXTRAS==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($CHAT_EXTRAS==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
         </select>
     </td>
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="quote"></a><b>Random Quote</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="quote"></a><b><?php echo A_CONF_23; ?></b></td></tr>
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Enable Random Quote mod.</b><br />
-    	<i><font color=red>Important: to change these settings, you have to enable quote mode first!</font></i>
+    <td><b><?php echo A_CONFCONTENT_405; ?></b><br />
+    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_406); ?></font></i>
 	</td>
     <td>
 		<select name="vQUOTE">
-	        <option value="0"<?php if($QUOTE==0){ echo " selected"; } ?>>Disable Quotes</option>
-	        <option value="1"<?php if($QUOTE==1){ echo " selected"; } ?>>Enable Quotes</option>
+	        <option value="0"<?php if($QUOTE==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($QUOTE==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
         </select>
 	</td>
 </tr>
 <tr>
-	<td><b>Quote Name:</b>
+	<td><b><?php echo A_CONFCONTENT_407; ?></b>
 	</td>
 	<td>
 		<input name="vQUOTE_NAME" type="text" size="25" maxlength="25" value="<?php echo $QUOTE_NAME; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-	<td><b>Quote Name color:</b>
+	<td><b><?php echo A_CONFCONTENT_408; ?></b>
 	</td>
 	<td>
 		<?php
@@ -2756,15 +2773,16 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr>
-	<td><b>Quote Avatar:</b>
+	<td><b><?php echo A_CONFCONTENT_409; ?></b>
 	</td>
 	<td>
 		<input name="vQUOTE_AVATAR" type="text" size="20" maxlength="255" value="<?php echo $QUOTE_AVATAR; ?>">
-    <?php echo(($QUOTE_AVATAR != "") ? "&nbsp;<img id=\"quote_avatarToSwap\" src=\"".$QUOTE_AVATAR."\" border=0 width=".$AVA_WIDTH." height=".$AVA_HEIGHT." ALT=\"Quote Avatar\" Title=\"Quote Avatar\" />" : ""); ?>
+    <?php echo(($QUOTE_AVATAR != "") ? "&nbsp;<img id=\"quote_avatarToSwap\" src=\"".$QUOTE_AVATAR."\" border=0 width=".$AVA_WIDTH." height=".$AVA_HEIGHT." ALT=\"".A_CONFCONTENT_409."\" Title=\"".A_CONFCONTENT_409."\" />" : ""); ?>
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Quote File:</b>
+    <td><b><?php echo A_CONFCONTENT_410; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, sprintf(A_CONFCONTENT_412, "files/quotes")); ?></i>
 	</td>
 	<td>
 		<?php
@@ -2800,14 +2818,14 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr>
-	<td><b>Quote Posting frequency:</b>
+	<td><b><?php echo A_CONFCONTENT_411; ?></b>
 	</td>
 	<td>
-		<input name="vQUOTE_TIME" type="text" size="7" maxlength="2" value="<?php echo $QUOTE_TIME; ?>"> (mins)
+		<input name="vQUOTE_TIME" type="text" size="7" maxlength="2" value="<?php echo $QUOTE_TIME; ?>">&nbsp;(<?php echo $QUOTE_TIME == 1 ? L_MIN : L_MINS; ?>)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-	<td><b>Quote Background color:</b>
+	<td><b><?php echo A_CONFCONTENT_413; ?></b>
 	</td>
 	<td>
 		<?php
@@ -2832,97 +2850,107 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="ghost"></a><b>Ghost Control</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="ghost"></a><b><?php echo A_CONF_24; ?></b></td></tr>
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Control who will be visible in chat rooms.</b><br />
-    	<i><font color=red>Important: if you enable Ghost Control, users set as ghosts (invisible) will also be hidden from all the public pages and counters, except their posts and commands in rooms (messages frame)!</font><br />
-    	Hint: You can still monitor ghosts' connections and activity in the Connections tab. Please note that ghosts will still be able to act as usual in chat (can post public or private messages and can use all the commands, according to their powers).</i>
+    <td><b><?php echo A_CONFCONTENT_414; ?></b><br />
+		<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_415); ?></font></i>
 	</td>
     <td>
         <select name="vHIDE_ADMINS">
-	        <option value="0"<?php if($HIDE_ADMINS==0){ echo " selected"; } ?>>Show online administrators</option>
-	        <option value="1"<?php if($HIDE_ADMINS==1){ echo " selected"; } ?>>Hide online admins (ghosts)</option>
+	        <option value="0"<?php if($HIDE_ADMINS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_417; ?></option>
+	        <option value="1"<?php if($HIDE_ADMINS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_418; ?></option>
         </select><br /><br />
         <select name="vHIDE_MODERS">
-	        <option value="0"<?php if($HIDE_MODERS==0){ echo " selected"; } ?>>Show online moderators</option>
-	        <option value="1"<?php if($HIDE_MODERS==1){ echo " selected"; } ?>>Hide online moders (ghosts)</option>
+	        <option value="0"<?php if($HIDE_MODERS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_419; ?></option>
+	        <option value="1"<?php if($HIDE_MODERS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_420; ?></option>
         </select>
     </td>
 </tr>
+<tr bgcolor="#B0C4DE">
+    <td colspan=2>
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_416); ?></i>
+	</td>
+</tr>
 <tr>
-	<td><b>Special Ghosts (monitors):</b><br />
-    	<i><font color=red>Important: Add usernames, separated by commas, without spaces (,)!</font><br />
-    	Hint: These users will not be seen by others in chat (only in the Connection tab) and, if they are also admins, they will be able to monitor all the events in chat rooms (including private messages!). We recommend activate these powers <font color=red>only for Parental Control</font> purposes!</i>
+	<td><b><?php echo A_CONFCONTENT_421; ?></b><br />
+		<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_422); ?></font></i>
 	</td>
 	<td>
 		<input name="vSPECIAL_GHOSTS" type="text" size="25" maxlength="255" value="<?php echo $SPECIAL_GHOSTS; ?>">
 	</td>
 </tr>
+<tr>
+	<td colspan=2>
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_423); ?></i>
+	</td>
+</tr>
 <!--
 <tr bgcolor="#B0C4DE">
-	<td><b>Punished Ghosts (Phantoms):</b><br />
-    	<i><font color=red>Important: Add usernames, separated by commas, without spaces (,)!</font><br />
-    	<i>Hint: These users will not be seen by others in chat (only in the Connection tab) and they will not be able to post or send any events in chat rooms. We recommend activate these powers <font color=red>only for Users that fail to be banished</font>!</i>
-	</td>
+	<td><b><?php echo A_CONFCONTENT_421a; ?></b><br />
+		<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_422); ?></font></i>
 	<td>
-		<input name="vPUNNISHED_GHOSTS" type="text" size="25" maxlength="255" value="<?php //echo $PUNNISHED_GHOSTS; ?>">
+		<input name="vPUNNISHED_GHOSTS" type="text" size="25" maxlength="255" value="<?php echo $PUNNISHED_GHOSTS; ?>">
+	</td>
+</tr>
+<tr>
+	<td colspan=2>
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_423a); ?></i>
 	</td>
 </tr>
 -->
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="bday"></a><b>Birthday Mod</b></td></tr>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="bday"></a><b><?php echo A_CONF_25; ?></b></td></tr>
 	<tr class="thumbIndex">
-		<td valign=center align=center height="20" class=tabtitle>Configuration Options</td>
-		<td valign=center align=center width="25%" height="20" class=tabtitle>Current Settings</td>
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Birthdays required on registration and profiles.</b>
+    <td><b><?php echo A_CONFCONTENT_424; ?></b>
 	</td>
     <td>
         <select name="vREQUIRE_BDAY">
-	        <option value="0"<?php if($REQUIRE_BDAY==0){ echo " selected"; } ?>>Optional</option>
-	        <option value="1"<?php if($REQUIRE_BDAY==1){ echo " selected"; } ?>>Required</option>
+	        <option value="0"<?php if($REQUIRE_BDAY==0){ echo " selected"; } ?>><?php echo A_CONFOPTIONAL; ?></option>
+	        <option value="1"<?php if($REQUIRE_BDAY==1){ echo " selected"; } ?>><?php echo A_CONFREQUIRED; ?></option>
         </select>
     </td>
 </tr>
 <tr>
-    <td><b>Send automatic Greetings by email to users on their Birthdays.</b><br />
-    	<i><font color=red>Important: if enabled, the script will work only if the chat page will be visited/loaded in the sending interval (default = 7 days). After that interval, the email draft will be dropped off!</font></i>
+    <td><b><?php echo A_CONFCONTENT_425; ?></b><br />
+    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_426); ?></font></i>
 	</td>
     <td>
 		<select name="vSEND_BDAY_EMAIL">
-	        <option value="0"<?php if($SEND_BDAY_EMAIL==0){ echo " selected"; } ?>>Don't send</option>
-	        <option value="1"<?php if($SEND_BDAY_EMAIL==1){ echo " selected"; } ?>>Send Greetings</option>
+	        <option value="0"<?php if($SEND_BDAY_EMAIL==0){ echo " selected"; } ?>><?php echo A_CONFNOTSEND; ?></option>
+	        <option value="1"<?php if($SEND_BDAY_EMAIL==1){ echo " selected"; } ?>><?php echo A_CONFSEND; ?></option>
         </select>
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Set the time from midnight you want Greetings to be triggered for sending.</b><br />
-    	<i>Hint: Positive or negative values allowed (0 = midnight).<br />
-		Please note that this setting is taking in consideration the server time, not the user's time, therefore it's possible that the email will be send within a (+-)timezone deviation</i>
+    <td><b><?php echo A_CONFCONTENT_427; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_428); ?><br />
+		<?php echo A_CONFCONTENT_429; ?></i>
 	</td>
     <td>
-			<input name="vSEND_BDAY_TIME" type="text" size="7" maxlength="2" value="<?php echo $SEND_BDAY_TIME; ?>"> (mins)
+			<input name="vSEND_BDAY_TIME" type="text" size="7" maxlength="2" value="<?php echo $SEND_BDAY_TIME; ?>">&nbsp;(<?php echo $SEND_BDAY_TIME == 1 ? L_MIN : L_MINS; ?>)
     </td>
 </tr>
 <tr>
-    <td><b>How many days the Greetings will be up for sending.</b><br />
-    	<i>Hint: If there is no one in the chat nor visiting the chat page within this interval, the Greeting will not be send anymore, as the effect on Celebrated user would not be the same.</i>
+    <td><b><?php echo A_CONFCONTENT_430; ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_431); ?></i>
 	</td>
     <td>
-			<input name="vSEND_BDAY_INTVAL" type="text" size="7" maxlength="2" value="<?php echo $SEND_BDAY_INTVAL; ?>"> (days)
+			<input name="vSEND_BDAY_INTVAL" type="text" size="7" maxlength="2" value="<?php echo $SEND_BDAY_INTVAL; ?>">&nbsp;(<?php echo $SEND_BDAY_INTVAL == 1 ? L_DAY : L_DAYS; ?>)
     </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>Set the time from midnight you want Greetings to be triggered for sending.</b><br />
-    	<i>Hint: Positive or negative values allowed (0 = midnight).<br />
-		Please note that this setting is taking in consideration the server time, not the user's time, therefore it's possible that the email will be send within a (+-)timezone deviation</i>
-	</td>
+    <td><b><?php echo A_CONFCONTENT_432; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, sprintf(A_CONFCONTENT_412, "files/birthday")); ?></i>
+		</td>
 	<td>
 		<?php
 		$bdays='files/birthday/';
@@ -2960,12 +2988,12 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 <br />
 <tr>
 	<td><input type="hidden" name="action" id="action" value="submit"></td>
-	<td><a name="save_settings"></a><input type="submit" name="submit_type" class="error" value="Save Changed Settings"></td>
+	<td><a name="save_settings"></a><input type="submit" name="submit_type" class="error" value="<?php echo A_CONFSAVE; ?>"></td>
 <?php
 if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 {
 	?>
-		<div><p><table align=center border=0 cellpadding=0 class=menu style=background:white><tr><td class=success align=right>These settings were last saved <?php if (C_LAST_SAVED_ON) echo("on <span class=error>".$Last_Saved_On."</span> "); ?><?php if (C_LAST_SAVED_BY) echo("by <span class=error>".C_LAST_SAVED_BY."</span> "); ?>!</td></tr></table></div>
+	<div><p><table align=center border=0 cellpadding=0 class=menu style=background:white><tr><td class=success align=right><?php echo sprintf(A_CONF_ERR_5, (C_LAST_SAVED_ON ? " <span class=error>".$Last_Saved_On."</span>" : ""), (C_LAST_SAVED_BY ? "<span class=error>".C_LAST_SAVED_BY."</span>" : "")); ?></td></tr></table></div>
 	<?php
 }
 	?>

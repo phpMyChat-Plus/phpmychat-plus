@@ -397,12 +397,12 @@ window.status='<?php echo(L_PRIV_MSG); ?>';
 <BODY CLASS="frame" onLoad="setTimeout('window.close()',240000); self.focus(); window.document.forms['ReplyForm'].elements['Reply1'].focus();" onUnload="window.opener.window.parent.frames['input'].window.document.forms['MsgForm'].elements['M'].focus();">
 <CENTER>
 <?php
-	$DbLink= new DB;
-	$DbLink->query("SELECT m_time, username, room, address, message, pm_read, room_from FROM ".C_MSG_TBL." WHERE (room = '$R' OR room = 'Offline PMs') AND address = '$U' AND pm_read LIKE 'New%' ORDER BY username AND m_time DESC LIMIT 11");
+	$DbLink = new DB;
+	$DbLink->query("SELECT m_time, username, room, address, message, pm_read, room_from FROM ".C_MSG_TBL." WHERE (room='".$R."' OR room='Offline PMs') AND address='".$U."' AND pm_read LIKE 'New%' ORDER BY username AND m_time DESC LIMIT 11");
 	$NewPMs = $DbLink->num_rows();
-if ($NewPMs == "1")
-{
 $i=1;
+if ($NewPMs == 1)
+{
 list($T, $User, $Room, $Dest, $M, $Read, $RF) = $DbLink->next_record();
 		if(COLOR_NAMES)
 		{
@@ -411,7 +411,7 @@ list($T, $User, $Room, $Dest, $M, $Read, $RF) = $DbLink->next_record();
 			$DbColor = new DB;
 			if (isset($User))
 			{
-				$DbColor->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '$User'");
+				$DbColor->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username='".$User."'");
 				list($perms_user,$colorname) = $DbColor->next_record();
 				$DbColor->clean_results();
 			}
@@ -431,6 +431,7 @@ list($T, $User, $Room, $Dest, $M, $Read, $RF) = $DbLink->next_record();
 				$colorname_tag = "<FONT color=".COLOR_CD.">";
 			}
 			$colorname_endtag = "</FONT>";
+#			$DbColor->close();
 		}
 		else
 		{
@@ -491,7 +492,7 @@ if($NewPMs > 10)
 	<TR><TD width="100%" align="center" CLASS="tabtitle" colspan="2"><B><FONT class="notify2"><I><?php echo($R); ?></I></B></TD></TR>
 <FORM ACTION="priv_popup.php?L=<?php echo($L); ?>" METHOD="POST" AUTOCOMPLETE="OFF" NAME="ReplyForm">
 <?php
-$i = 1;
+#$i = 1;
 while(($i < 11) && (list($T, $User, $Room, $Dest, $M, $Read, $RF) = $DbLink->next_record()))
 {
 		if(COLOR_NAMES)
@@ -563,7 +564,7 @@ if ($L != "turkish") $Mess1 =  " ".L_HELP_MSGS; else $Mess1 =  " ".L_HELP_MSG;
 if ($NewPMsRest == 1) $Mess_rest = $Mess1; else $Mess_rest = " ".$NewPMsRest." ".L_HELP_MSGS;
 ?>
 <br />
-<a href=<?php $PHP_SELF; ?> onMouseOver="window.status='<?php echo(L_NEXT_PAGE) ?>.'; return true"><?php echo(sprintf(L_NEXT_READ,$Mess_rest)) ?> </a>
+<a href="<?php $PHP_SELF; ?>" onMouseOver="window.status='<?php echo(L_NEXT_PAGE) ?>.'; return true"><?php echo(sprintf(L_NEXT_READ,$Mess_rest)) ?></a>
 <br />
 <?php
 }
@@ -573,8 +574,9 @@ if ($NewPMsRest == 1) $Mess_rest = $Mess1; else $Mess_rest = " ".$NewPMsRest." "
 <?php
 }
 	$DbLink->clean_results;
-	$DbLink->query("UPDATE ".C_MSG_TBL." SET pm_read='".date("Y-m-d H:i:s")."', room = '".$R."' WHERE (room = '".$R."' OR room = 'Offline PMs') AND address = '".$U."' AND pm_read LIKE 'New%' ORDER BY username AND m_time DESC LIMIT ".$i."");
+	$DbLink->query("UPDATE ".C_MSG_TBL." SET pm_read='".date("Y-m-d H:i:s")."', room='".$R."' WHERE (room='".$R."' OR room='Offline PMs') AND address='".$U."' AND pm_read LIKE 'New%' ORDER BY username AND m_time DESC LIMIT ".$i."");
 $DbLink->close();
+#$DbColor->close();
 ?>
 <?php echo(($L != "turkish") ? L_PRIV_POPUP." <a href=\"#\" onClick=\"window.parent.runCmd('profile',''); return false;\" onMouseOver=\"window.status='".L_REG_4.".'; return true\" title='".L_REG_4."'>".L_PRIV_POPUP1 : "<a href=\"#\" onClick=\"window.parent.runCmd('profile',''); return false;\" onMouseOver=\"window.status='".L_REG_4.".'; return true\" title='".L_REG_4."'>".L_PRIV_POPUP1." ".L_PRIV_POPUP) ?>
 </CENTER>

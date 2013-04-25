@@ -1,5 +1,5 @@
 <?php
-// File : english/localized.tutorial.php - plus version (26.08.2008 - rev.10)
+// File : english/localized.tutorial.php - plus version (09.11.2012 - rev.11)
 // Original translation by Sharif Islam <mislam@students.uiuc.edu> & Jessica Gibson <oram@uiuc.edu> & Dean Collins <joelford@pacbell.net>
 // Original translation for Plus version by Pierre Liget <sourceforge@pliget.freesurf.fr> 10.12.2007
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -271,11 +271,11 @@ You may change the color of the text of your messages by choosing a new color fr
 <P>
 <FONT SIZE="+1"><A NAME="users_list"><B>Understanding the users list (not for users pop-up window):</B></A></FONT>
 <P>
-<OL>
-	Two basic rules have been defined for the users list:<br />
+Two basic rules have been defined for the users list:<br />
+<UL>
 	<LI>a little icon that shows gender is displayed before the nick of a registered user (clicking on it will launch the <A HREF="#whois">whois pop-up</A> for this user), while unregistered users have nothing but blank spaces displayed before their nick;<br />
 	<LI>the nick of the administrator or of a moderator is italicized.
-</OL>
+</UL>
 <P><I>For example</I>, from the snapshot below you can conclude that:
 <TABLE BORDER=0 CELLSPACING=10>
 <TR>
@@ -360,11 +360,11 @@ There are many different ways to customize the look of the Chat. To change setti
 	if ($Ver == "L")
 	{
 		?>
- <LI>The <B>Show command</B> allows you to adjust the number of messages viewable on your screen. To change the default number, type "/show n" without quotes, where n is the number of viewable messages.
+		 <LI>The <B>Show command</B> allows you to adjust the number of messages viewable on your screen. To change the default number, type "/show n" without quotes, where n is the number of viewable messages.
 		<P>
 		<I>For example:</I> /show 50
 		<P>
-		will cause the 50 newest messages to be viewable on your screen. If all of the messages cannot be displayed within the message box, a scroll bar will appear on the right side of the message box.</UL>
+		will cause the 50 newest messages to be viewable on your screen. If all of the messages cannot be displayed within the message box, a scroll bar will appear on the right side of the message box.
 		<?php
 	}
 	else
@@ -374,13 +374,13 @@ There are many different ways to customize the look of the Chat. To change setti
 		<P>
 		<I>For example:</I> /show 50 or /last 50
 		<P>
-		will clean the message frame and cause the 50 newest messages to be viewable on your screen. If all of the messages cannot be displayed within the message box, a scroll bar will appear on the right side of the message box.</UL>
+		will clean the message frame and cause the 50 newest messages to be viewable on your screen. If all of the messages cannot be displayed within the message box, a scroll bar will appear on the right side of the message box.
 		<?php
 	};
 	?>
-	<br /><P ALIGN="right"><A HREF="#top">Back to the top</A></P>
+	</UL>
+	<P ALIGN="right"><A HREF="#top">Back to the top</A></P>
 	<P>
-</UL>
 <hr />
 <hr />
 

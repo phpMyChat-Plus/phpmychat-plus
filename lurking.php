@@ -183,12 +183,11 @@ if($DbLink1->num_rows() > 0)
 		$colorname_endtag = "";
 		if(COLOR_NAMES || C_ITALICIZE_POWERS)
 		{
-			$DbColor = new DB;
+			$DbColor1 = new DB;
 			if (isset($User))
 			{
-				$DbColor->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '$User'");
-				list($perms_user,$colorname) = $DbColor->next_record();
-				$DbColor->clean_results();
+				$DbColor1->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '$User'");
+				list($perms_user,$colorname) = $DbColor1->next_record();
 				if(COLOR_NAMES && (isset($colorname) && $colorname != "" && strcasecmp($colorname, $COLOR_TB) != 0))
 				{
 					$colorname_tag = "<FONT color=".$colorname.">";
@@ -207,6 +206,8 @@ if($DbLink1->num_rows() > 0)
 					}
 				}
 			}
+#			$DbColor1->clean_results();
+			$DbColor1->close();
 		}
 		if($colorname_tag != "") $colorname_endtag = "</FONT>";
 		$NewMsg = "<tr valign=top>";
@@ -288,7 +289,7 @@ else
 	$MessagesString = "<tr align=texttop valign=top><td valign=top colspan=4 align=center style=\"background-color:yellow;\"><SPAN CLASS=\"notify\">".L_NO_MSG."</SPAN></td></tr>";
 };
 
-$DbLink1->clean_results();
+#$DbLink1->clean_results();
 $DbLink1->close();
 $CleanUsrTbl = 1;
 
@@ -371,7 +372,7 @@ else
 </head>
 
 <body class="frame">
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><center><font size="+2"><b>You don't have access to this file.<br />Lurking feature has been disabled<br />Press <a href=./>here</a> to go to the index page or just wait...</b><font>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><center><font size="+2"><b>You don't have access to this file.<br />Lurking feature has been disabled<br />Press <a href="./">here</a> to go to the index page or just wait...</b><font>
 <br /><br /><br /><br />Hacking attempt! Redirection to the index page in 5 seconds.</center>
 <meta http-equiv="refresh" content="5; url=./">
 </body>

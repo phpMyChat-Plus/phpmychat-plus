@@ -6,7 +6,7 @@
 // add on: translation  implemented - default is English en_US
 //	- thanks ciprianmp
 //
-// version 3.68-loc (25 November 2011)
+// version 3.68-loc (released 25 November 2011/updated 21 March 2013)
 
 //fixed: Incorrect next month display show on 'February 2008'
 //	- thanks Neeraj Jain for bug report
@@ -149,9 +149,12 @@
 //fixed: 1st and 31st are always disabled on php4
 //	- thanks dl
 //
+//fixed: selected property changed to selected="selected" for FF compatibility
+//	- thanks Michele
+//
 ////********************************************************
 
-if((defined("L_LANG") && L_LANG != "en_US" && L_LANG != "L_LANG") || isset($lang) && $lang != "en_US") include_once("lang/calendar.".(isset($lang) ? $lang : L_LANG).".php");
+if((defined("L_LANG") && L_LANG != "en_US" && L_LANG != "L_LANG") || isset($language) && $language != "en_US") include_once("lang/calendar.".(isset($language) ? $language : L_LANG).".php");
 include_once("lang/localization.lib.php");
 
 if(file_exists("plugins/calendar/calendar.js"))
@@ -441,9 +444,9 @@ class tc_calendar{
 		$total_days = $this->total_days($this->month, $this->year);
 
 		echo("<select name=\"".$this->objname."_day\" id=\"".$this->objname."_day\" onChange=\"javascript:tc_setDay('".$this->objname."', this[this.selectedIndex].value);\" class=\"tcday\"".($this->rtl ? " dir=\"rtl\"" : "").">");
-		echo("<option value=\"00\"".($this->rtl ? " dir=\"rtl\"" : "").">".L_DAY."</option>");
+		echo("<option value=\"00\"".($this->rtl ? " dir=\"rtl\"" : "").">".L_DAYC."</option>");
 		for($i=1; $i<=$total_days; $i++){
-			$selected = ((int)$this->day == $i) ? " selected" : "";
+			$selected = ((int)$this->day == $i) ? " selected='selected'" : "";
 			echo("<option value=\"".str_pad($i, 2 , "0", STR_PAD_LEFT)."\"$selected".($this->rtl ? " dir=\"rtl\"" : "").">".$i."</option>");
 		}
 		echo("</select> ");
@@ -452,11 +455,11 @@ class tc_calendar{
 	//write the select box of months
 	function writeMonth(){
 		echo("<select name=\"".$this->objname."_month\" id=\"".$this->objname."_month\" onChange=\"javascript:tc_setMonth('".$this->objname."', this[this.selectedIndex].value);\" class=\"tcmonth\"".($this->rtl ? " dir=\"rtl\"" : "").">");
-		echo("<option value=\"00\"".($this->rtl ? " dir=\"rtl\"" : "").">".L_MONTH."</option>");
+		echo("<option value=\"00\"".($this->rtl ? " dir=\"rtl\"" : "").">".L_MONTHC."</option>");
 
 		$monthnames = $this->getMonthNames();
 		for($i=1; $i<=sizeof($monthnames); $i++){
-			$selected = ((int)$this->month == $i) ? " selected" : "";
+			$selected = ((int)$this->month == $i) ? " selected='selected'" : "";
 			echo("<option value=\"".str_pad($i, 2, "0", STR_PAD_LEFT)."\"$selected".($this->rtl ? " dir=\"rtl\"" : "").">".$monthnames[$i-1]."</option>");
 		}
 		echo("</select> ");
@@ -466,7 +469,7 @@ class tc_calendar{
 	function writeYear(){
 		//echo("<input type=\"textbox\" name=\"".$this->objname."_year\" id=\"".$this->objname."_year\" value=\"$this->year\" maxlength=4 size=5 onBlur=\"javascript:tc_setYear('".$this->objname."', this.value, '$this->path');\" onKeyPress=\"javascript:if(yearEnter(event)){ tc_setYear('".$this->objname."', this.value, '$this->path'); return false; }\"> ");
 		echo("<select name=\"".$this->objname."_year\" id=\"".$this->objname."_year\" onChange=\"javascript:tc_setYear('".$this->objname."', this[this.selectedIndex].value);\" class=\"tcyear\"".($this->rtl ? " dir=\"rtl\"" : "").">");
-		echo("<option value=\"0000\"".($this->rtl ? " dir=\"rtl\"" : "").">".L_YEAR."</option>");
+		echo("<option value=\"0000\"".($this->rtl ? " dir=\"rtl\"" : "").">".L_YEARC."</option>");
 
 		$year_start = $this->year_start;
 		$year_end = $this->year_end;
@@ -496,8 +499,8 @@ class tc_calendar{
 		  }
 
 		for($i=$year_end; $i>=$year_start; $i--){
-			$selected = ((int)$this->year == $i) ? " selected" : "";
-			echo("<option value=\"$i\"$selected".($this->rtl ? " dir=\"rtl\"" : "").">".$i.(L_USE_YMD_DROP ? L_YEAR : "")."</option>");
+			$selected = ((int)$this->year == $i) ? " selected='selected'" : "";
+			echo("<option value=\"$i\"$selected".($this->rtl ? " dir=\"rtl\"" : "").">".$i.(L_USE_YMD_DROP ? L_YEARC : "")."</option>");
 		}
 		echo("</select> ");
 	}

@@ -7,7 +7,7 @@ if (!function_exists('replybotname'))
 	include("bot/respond.php");
 }
 
-global $uid;                   // WORKS  it is to keep the bot on a topic per user
+#global $uid;                   // WORKS  it is to keep the bot on a topic per user
 
 // Added for php4 support of mb functions
 if (!function_exists('mb_convert_case'))
@@ -40,23 +40,17 @@ if (!function_exists('mb_convert_case'))
   $botpath = "botfb/".$U.".txt";	// Made this global so I can delete user file when they don't want to talk to bot anymore.
 
  // Include the guts of the program. respond.php at top of handle_inputH.php
-        function bottalk_priv(&$botmess, $R, $UR, $Private, $Read)
-        {            // $botmess is phpMyChat $M
+function bottalk_priv(&$botmess, $R, $UR, $Private, $Read)
+{            // $botmess is phpMyChat $M
 
-				 // Start the session or get the existing session.
-         global $U,$T,$myuniqueid,$uid;                                            // it worked when I simplified the origional bot page not here though.
+		 // Start the session or get the existing session.
+         global $U,$T,$myuniqueid,$uid,$numselects,$DbLink;                                            // it worked when I simplified the origional bot page not here though.
          $uid = $U;
 
-         session_register($U);
-         session_name($uid);
-         session_id($U) ;                                         // Get the Session name
-         $myuniqueid = session_id();
-
-           mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or
-           die("could not connect");                          // open "bot" DB connection
-				   @mysql_query("SET CHARACTER SET utf8");
-				   mysql_query("SET NAMES 'utf8'");
-           mysql_select_db(C_DB_NAME);
+#         session_register($U);
+#         session_name($uid);
+#         session_id($U) ;                                         // Get the Session name
+         $myuniqueid = $U;
 
 	            $botresponse=replybotname(stripslashes($botmess), $myuniqueid, C_BOT_NAME);    // Get bot's response from respond.php
           		$BOT = C_BOT_NAME;
@@ -65,51 +59,49 @@ if (!function_exists('mb_convert_case'))
               $D1 = preg_replace("/([\r]|[\n]|[\t])/", " ",$botresponse->response) ;
               $D1 = str_replace("'","&#39;",$D1);
 
-              global $numselects;
-              //." NumSelect = ".$numselects;
-
               $mytime = time() + 2;	// Add 2 secs to bot time, seperates it in the DB better.
+#$DbLink = new DB;
 
-if (C_PRIV_POPUP)
-{
-	$DbLink = new DB;
-	$DbLink->query("SELECT allowpopup FROM ".C_REG_TBL." WHERE username = '$U'");
-	if($DbLink->num_rows() != 0)
+	if (C_PRIV_POPUP)
 	{
-		if ($Read == "New" || $Read == "Old")
+		$DbLink->query("SELECT allowpopup FROM ".C_REG_TBL." WHERE username = '$U'");
+		if($DbLink->num_rows() != 0)
 		{
-			$D1 = "<FONT COLOR=\"".C_BOT_FONT_COLOR."\"><I>L_PRIV_PM " . $D1 . "</I></FONT>" ;
-		  mysql_query("UPDATE ".C_MSG_TBL." SET pm_read='".date("Y-m-d H:i:s")."' WHERE pm_read='New' AND address='$BOT' AND username='$myuniqueid'") ;
-			$Readu = "New";
+			if ($Read == "New" || $Read == "Old")
+			{
+				$D1 = "<FONT COLOR=\"".C_BOT_FONT_COLOR."\"><I>L_PRIV_PM " . $D1 . "</I></FONT>" ;
+				$DbLink->query("UPDATE ".C_MSG_TBL." SET pm_read='".date("Y-m-d H:i:s")."' WHERE pm_read='New' AND address='".$BOT."' AND username='".$myuniqueid."'") ;
+				$Readu = "New";
+			}
+			elseif ($Read == "Neww" || $Read == "Oldw")
+			{
+				$D1 = "<FONT COLOR=\"".C_BOT_FONT_COLOR."\"><I>L_PRIV_WISP " . $D1 . "</I></FONT>" ;
+				$DbLink->query("UPDATE ".C_MSG_TBL." SET pm_read='".date("Y-m-d H:i:s")."' WHERE pm_read='Neww' AND address='".$BOT."' AND username='".$myuniqueid."'") ;
+				$Readu = "Neww";
+			}
 		}
-		elseif ($Read == "Neww" || $Read == "Oldw")
+		else
 		{
-			$D1 = "<FONT COLOR=\"".C_BOT_FONT_COLOR."\"><I>L_PRIV_WISP " . $D1 . "</I></FONT>" ;
-			mysql_query("UPDATE ".C_MSG_TBL." SET pm_read='".date("Y-m-d H:i:s")."' WHERE pm_read='Neww' AND address='$BOT' AND username='$myuniqueid'") ;
-			$Readu = "Neww";
+			if ($Read == "New" || $Read == "Old")
+			{
+				$D1 = "<FONT COLOR=\"".C_BOT_FONT_COLOR."\"><I>L_PRIV_PM " . $D1 . "</I></FONT>" ;
+				$DbLink->query("UPDATE ".C_MSG_TBL." SET pm_read='".date("Y-m-d H:i:s")."' WHERE pm_read='New' AND address='".$BOT."' AND username='".$myuniqueid."'") ;
+				$Readu = date("Y-m-d H:i:s");
+			}
+			elseif ($Read == "Neww" || $Read == "Oldw")
+			{
+				$D1 = "<FONT COLOR=\"".C_BOT_FONT_COLOR."\"><I>L_PRIV_WISP " . $D1 . "</I></FONT>" ;
+				$DbLink->query("UPDATE ".C_MSG_TBL." SET pm_read='".date("Y-m-d H:i:s")."' WHERE pm_read='Neww' AND address='".$BOT."' AND username='".$myuniqueid."'") ;
+				$Readu = date("Y-m-d H:i:s");
+			}
 		}
+#		$DbLink->clean_results();
 	}
-	else
-	{
-		if ($Read == "New" || $Read == "Old")
-		{
-			$D1 = "<FONT COLOR=\"".C_BOT_FONT_COLOR."\"><I>L_PRIV_PM " . $D1 . "</I></FONT>" ;
-		  mysql_query("UPDATE ".C_MSG_TBL." SET pm_read='".date("Y-m-d H:i:s")."' WHERE pm_read='New' AND address='$BOT' AND username='$myuniqueid'") ;
-			$Readu = date("Y-m-d H:i:s");
-		}
-		elseif ($Read == "Neww" || $Read == "Oldw")
-		{
-			$D1 = "<FONT COLOR=\"".C_BOT_FONT_COLOR."\"><I>L_PRIV_WISP " . $D1 . "</I></FONT>" ;
-			mysql_query("UPDATE ".C_MSG_TBL." SET pm_read='".date("Y-m-d H:i:s")."' WHERE pm_read='Neww' AND address='$BOT' AND username='$myuniqueid'") ;
-			$Readu = date("Y-m-d H:i:s");
-		}
-	}
-	$DbLink->clean_results();
-}
               $D1 = trim($D1) ;
               $DR = addslashes($D1);
-                  mysql_query("INSERT INTO ".C_MSG_TBL." VALUES ('$T', '$R', '$BOT', '0', '$mytime', '$U', '$DR', '$Readu', '$UR')") ;
+              $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$T', '$R', '$BOT', '0', '$mytime', '$U', '$DR', '$Readu', '$UR')") ;
 }              // End of function
+#$DbLink->close();
 
 // set and execute the above function via an if statment WORKS
 #  if (eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)) || eregi(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case($Private,MB_CASE_LOWER,$Charset)))
@@ -120,8 +112,8 @@ if (C_PRIV_POPUP)
       $botmess = str_replace(C_BOT_NAME, "", $M);
 //    $botmess = str_replace(mb_convert_case(C_BOT_NAME,MB_CASE_LOWER,$Charset), " ", mb_convert_case($M,MB_CASE_LOWER,$Charset));
       if ($R == $UR) $UR = "";
-		  bottalk_priv(&$botmess, $R, $UR, $Private, $Read);
-		  if (bget("name") == "") bset("name",$uid);
+		  bottalk_priv($botmess, $R, $UR, $Private, $Read);
+		  if (bget("name") == "") bset("name",$U);
 	}
 #     if (eregi(mb_convert_case("bye ".C_BOT_NAME,MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)) || eregi(mb_convert_case(C_BOT_NAME."> bye",MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)) || eregi(mb_convert_case(C_BOT_NAME."> bye</FONT>",MB_CASE_LOWER,$Charset), mb_convert_case($M,MB_CASE_LOWER,$Charset)))
      if (stripos(mb_convert_case($M,MB_CASE_LOWER,$Charset), mb_convert_case("bye ".C_BOT_NAME,MB_CASE_LOWER,$Charset)) !== false || stripos(mb_convert_case($M,MB_CASE_LOWER,$Charset), mb_convert_case(C_BOT_NAME."> bye",MB_CASE_LOWER,$Charset)) !== false || stripos(mb_convert_case($M,MB_CASE_LOWER,$Charset), mb_convert_case(C_BOT_NAME."> bye</FONT>",MB_CASE_LOWER,$Charset)) !== false)

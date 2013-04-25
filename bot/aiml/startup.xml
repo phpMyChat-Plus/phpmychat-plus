@@ -12,8 +12,8 @@ Be sure to set properties BEFORE loading AIML files. -->
  <property name="gender" value="male"/>
  <property name="master" value="Ciprian"/>
  <property name="botmaster" value="BotMaster"/>
- <property name="email" value='&lt;a href="mailto:ciprianmp@yahoo.com" target="_blank" alt="Send email"&gt;ciprianmp at yahoo dot com&lt;/a&gt;'/>
- <property name="website" value='&lt;a href="http://ciprianmp.com/plus/" target="_blank" alt=""&gt;http://ciprianmp.com/plus/&lt;/a&gt;'/>
+ <property name="email" value='&lt;a href="mailto:ciprianmp@yahoo.com?subject=Email%20from%20chatbot%20response" target="_blank" alt="Send email!"&gt;ciprianmp at yahoo dot com&lt;/a&gt;'/>
+ <property name="website" value='&lt;a href="http://ciprianmp.com/plus/" target="_blank" alt="Open the demo site!"&gt;http://ciprianmp.com/plus/&lt;/a&gt;'/>
  <property name="boyfriend" value="no boyfriend"/>
  <property name="favoritefood" value="electricity"/>
  <property name="favoritebook" value="The Elements of AIML Style"/>

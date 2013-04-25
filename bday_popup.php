@@ -258,6 +258,7 @@ else
 		}
 			unset($User,$dob_firstname,$dob_lastname,$gender,$avatar,$use_gravatar,$email,$dob_showemail,$dob_birthday,$dob_showbday,$dob_showage,$dob_age,$dob_name,$dobtime,$dob_time,$gender1,$ava_width);
 	}
+	$DbLink->close();
 	?>
 	</TABLE>
 <hr>

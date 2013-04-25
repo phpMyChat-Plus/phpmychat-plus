@@ -52,6 +52,8 @@ define("L_MIN", "dakika");
 define("L_MINS", "dakika");
 define("L_HOUR", "saat");
 define("L_HOURS", "saat");
+define("L_DAY", "gün");
+define("L_DAYS", "gün");
 
 // registration stuff:
 define("L_REG_1", "Şifreniz");

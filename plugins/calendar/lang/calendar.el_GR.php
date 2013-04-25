@@ -7,9 +7,9 @@
 # Last file update: 01.09.2011
 
 // Class strings localization
-define("L_DAY", "Ημέρα");
-define("L_MONTH", "Μήνας");
-define("L_YEAR", "Χρόνος");
+define("L_DAYC", "Ημέρα");
+define("L_MONTHC", "Μήνας");
+define("L_YEARC", "Χρόνος");
 define("L_TODAY", "Σήμερα");
 define("L_PREV", "Προηγούμενο");
 define("L_NEXT", "Επόμενο");

@@ -1,5 +1,5 @@
 <?php
-// File : russian/localized.chat.php - plus version (09.01.2012 - rev.46)
+// File : russian/localized.chat.php - plus version (03.02.2013 - rev.47)
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
 // extra header for Charset
@@ -50,6 +50,8 @@ define("L_MIN", "минута");
 define("L_MINS", "минут");
 define("L_HOUR", "час");
 define("L_HOURS", "часов");
+define("L_DAY", "день");
+define("L_DAYS", "дня");
 
 // registration stuff:
 define("L_REG_1", "Пароль");

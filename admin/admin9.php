@@ -168,19 +168,33 @@ else
 <?php
 		echo("\n<P ALIGN=right><A HREF=#user>".A_CHAT_LOGS_7."</A></P>\n");
 		$total_size = 0;
-		$y='./'.C_LOG_DIR.''; #define which year you want to read
+		$y='./'.C_LOG_DIR; #define which year you want to read
 $yrs = preg_find('/./', $y, PREG_FIND_DIRONLY|PREG_FIND_SORTKEYS|PREG_FIND_SORTDESC);
+rsort($yrs);
 foreach($yrs as $yr)
 {
 		$year_size = 0;
 		$yeardir = str_replace($y."/",'',$yr);
 		if ($yeardir > date('Y')) continue;
 			echo("\n<table BORDER=1 CELLSPACING=0 CELLPADDING=0 class=table>");
-			echo ("\n<tr>\n<td valign=top align=center nowrap=\"nowrap\" colspan=7>\n<font size=4 color=red><b>$yeardir</b></font>\n</td>"); #print name of each year found
+			echo("\n<tr>\n<td valign=top align=center nowrap=\"nowrap\" colspan=7>\n<font size=4 color=red><b>$yeardir</b></font>\n</td>"); #print name of each year found
 		$m=$yr; #define which month you want to read
 		$mts = preg_find('/./', $yr, PREG_FIND_DIRONLY|PREG_FIND_RETURNASSOC|PREG_FIND_SORTMODIFIED|PREG_FIND_SORTKEYS|PREG_FIND_SORTDESC);
 		$date1 = mktime(0,0,0,date('m'),1,date('Y'));
-		foreach($mts as $mt => $stats)
+
+#$mts = array_flip($mts);
+/*		foreach($mts as $k => $v){
+			unset ($mts[$v]);
+			echo $monthdirName = str_replace($yr."/",'',$k);
+			echo $monthdirKey = strftime("%m", strtotime("01 ".$monthdirName." ".$yeardir));
+			echo $k;
+			echo $v;
+			$mts[$monthdirKey] = $k;
+		}
+#$mts = array_flip($mts);
+		krsort($mts);
+#		reset($mts);
+*/		foreach($mts as $mt => $stats)
 		{
 			$month_size = 0;
 			$monthdir = str_replace($yr."/",'',$mt);
@@ -188,7 +202,7 @@ foreach($yrs as $yr)
 			if ($date1 < $date2) continue;
 			if($L == "hungarian") $MONTH = $yeardir.". ";
 			else $MONTH = "";
-				switch ($monthdir)
+			switch ($monthdir)
 				{
 					case 'Jan':
 					{
@@ -263,10 +277,11 @@ foreach($yrs as $yr)
 				echo("\n</tr>\n<tr>\n<td valign=top align=left nowrap=\"nowrap\">");
 				$d=$yr."/".$monthdir; #define which month you want to read
 				$day = opendir($d); #open directory
+//				read_dir($d, $dayarray);
 				while (false !== ($dy = readdir($day)))
 				{
 #					if (!eregi("\.html",$dy) && !eregi("_vti_conf",$dy) && !eregi("error",$dy) && $dy!='.' && $dy!='..')
-					if (!preg_match("/(\.html|_vti_conf|error)$/i", $dy) && !preg_match("/^[\.]/", $dy))
+					if (!preg_match("/(\.html|_vti_conf|_vti_cnf|error)$/i", $dy) && !preg_match("/^[\.]/", $dy))
 					{
 						$dayarray[]=$dy;
 			 		}
@@ -337,6 +352,7 @@ else
 		$totalu_size = 0;
 		$yu='./logs'; #define which year you want to read
 $yrsu = preg_find('/./', $yu, PREG_FIND_DIRONLY|PREG_FIND_SORTKEYS|PREG_FIND_SORTDESC);
+rsort($yrsu);
 foreach($yrsu as $yru)
 {
 		$yearu_size = 0;
@@ -433,7 +449,7 @@ foreach($yrsu as $yru)
 				while (false !== ($dyu = readdir($dayu)))
 				{
 #					if (!eregi("\.html",$dyu) && !eregi("_vti_conf",$dyu) && !eregi("error",$dyu) && $dyu!='.' && $dyu!='..')
-					if (!preg_match("/(\.html|_vti_conf|error)$/i", $dyu) && !preg_match("/^[\.]/", $dyu))
+					if (!preg_match("/(\.html|_vti_conf|_vti_cnf|error)$/i", $dyu) && !preg_match("/^[\.]/", $dyu))
 					{
 						$dayarrayu[]=$dyu;
 			 		}

@@ -153,7 +153,9 @@ if(C_EN_STATS)
 	$curtime = time();
 }
 
-$DbLink = new DB;
+	if(C_USE_AVATARS) $DbAvatar = new DB;
+	if(COLOR_NAMES) $DbColor = new DB;
+	$DbLink = new DB;
 	$DbLink->query("SELECT perms,rooms,allowpopup,join_room FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	$reguser = ($DbLink->num_rows() != 0);
 	if ($reguser)
@@ -425,13 +427,10 @@ if($DbLink->num_rows() > 0)
 			unset($email);
 			unset($use_gravatar);
 			unset($avatar);
-			$DbAvatar = new DB;
-			$DbAvatar->query("SELECT email, avatar, use_gravatar FROM ".C_REG_TBL." WHERE username = '$User'");
-			if($DbAvatar->num_rows()!=0)
-			{
+#			$DbAvatar = new DB;
+			$DbAvatar->query("SELECT email, avatar, use_gravatar FROM ".C_REG_TBL." WHERE username = '".$User."'");
 				list($email, $avatar, $use_gravatar) = $DbAvatar->next_record();
-				$DbAvatar->clean_results();
-			}
+				if($DbAvatar) $DbAvatar->clean_results();
 			if (empty($avatar) || $avatar == "") $avatar = C_AVA_RELPATH . C_DEF_AVATAR;
 			// Gravatar mod added by Ciprian
 			if ((ALLOW_GRAVATARS == 2 || (ALLOW_GRAVATARS == 1 && (!isset($use_gravatar) || $use_gravatar))) && !strstr($User,"SYS "))
@@ -450,15 +449,12 @@ if($DbLink->num_rows() > 0)
 		$colornamedest_endtag = "";
 		if(COLOR_NAMES || C_ITALICIZE_POWERS)
 		{
-			$DbColor = new DB;
+#			$DbColor = new DB;
 			if (isset($User))
 			{
-				$DbColor->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '$User'");
-				if($DbColor->num_rows()!=0)
-				{
+				$DbColor->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '".$User."'");
 					list($perms_user,$colorname) = $DbColor->next_record();
-					$DbColor->clean_results();
-				}
+					if($DbColor) $DbColor->clean_results();
 				if(COLOR_NAMES && (isset($colorname) && $colorname != "" && strcasecmp($colorname, $COLOR_TB) != 0))
 				{
 					$colorname_tag = "<FONT color=".$colorname.">";
@@ -481,12 +477,9 @@ if($DbLink->num_rows() > 0)
 			}
 			if (isset($Dest))
 			{
-				$DbColor->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '$Dest'");
-				if($DbColor->num_rows()!=0)
-				{
+				$DbColor->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '".$Dest."'");
 					list($perms_dest,$colornamedest) = $DbColor->next_record();
-					$DbColor->clean_results();
-				}
+					if($DbColor) $DbColor->clean_results();
 				if(COLOR_NAMES && (isset($colornamedest) && $colornamedest != "" && strcasecmp($colornamedest, $COLOR_TB) != 0))
 				{
 					$colornamedest_tag = "<FONT color=".$colornamedest.">";
@@ -721,7 +714,6 @@ else
 {
 	echo("<table cellspacing=0 cellpading=0><tr><td width=\"1%\" nowrap=\"nowrap\" valign=\"top\" style=\"background-color:yellow;\"><SPAN CLASS=\"notify\">".L_NO_MSG."</SPAN></td></tr></table>");
 };
-if ($DbLink) $DbLink->clean_results();
 
 // Private Message Popup mod by Ciprian
 if (C_ENABLE_PM)
@@ -872,6 +864,11 @@ if(C_CHAT_BOOT)
 		<?php
 		exit();
 	}
+if ($DbLink) $DbLink->clean_results();
+#$DbLink->clean_results();
+#$DbLink->close();
+#$DbAvatar->close();
+#$DbColor->close();
 ?>
 </BODY>
 </HTML>

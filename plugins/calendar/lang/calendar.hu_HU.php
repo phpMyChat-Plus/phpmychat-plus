@@ -7,9 +7,9 @@
 # Last file update: 01.09.2011
 
 // Class strings localization
-define("L_DAY", "Nap");
-define("L_MONTH", "Hónap");
-define("L_YEAR", "Év");
+define("L_DAYC", "Nap");
+define("L_MONTHC", "Hónap");
+define("L_YEARC", "Év");
 define("L_TODAY", "Ma");
 define("L_PREV", "Előző");
 define("L_NEXT", "Következő");

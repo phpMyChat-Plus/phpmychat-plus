@@ -118,56 +118,58 @@ if (isset($FORM_SEND) && ($FORM_SEND == 1 || $FORM_SEND == 7))
 		};
 	};
 };
-if (isset($Success) && $Success != "") echo("<P CLASS=\"success\">$Success</SPAN></P>\n");
+if (isset($Success) && $Success != "") echo("<P CLASS=\"success\">".$Success."</SPAN></P>\n");
 
 // If form is submitted update values in the database
 if (isset($FORM_SEND) && $FORM_SEND == 7)
 {
+/*
   $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database.');
   @mysql_query("SET CHARACTER SET utf8");
   mysql_query("SET NAMES 'utf8'"); 
   mysql_select_db(C_DB_NAME)or die('Could Not Connect To Database.');
+*/
 
   if($searchCategory == 1 && $searchTerm != "")
   {
     // create query for 1
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday FROM ".C_REG_TBL." WHERE (username LIKE '%".$searchTerm."%' OR firstname LIKE '%".$searchTerm."%' OR lastname LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday,show_age,showemail FROM ".C_REG_TBL." WHERE (username LIKE '%".$searchTerm."%' OR firstname LIKE '%".$searchTerm."%' OR lastname LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
     //echo $query;
   }
   elseif($searchCategory == 2 && $searchTerm != "")
   {
     // create query for 2
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday FROM ".C_REG_TBL." WHERE ip LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday,show_age,showemail FROM ".C_REG_TBL." WHERE ip LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   elseif($searchCategory == 3 && $searchTerm != "")
   {
     // create query for 3
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday FROM ".C_REG_TBL." WHERE perms LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday,show_age,showemail FROM ".C_REG_TBL." WHERE perms LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   elseif($searchCategory == 4 && $searchTerm != "")
   {
     // create query for 4
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday FROM ".C_REG_TBL." WHERE email LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday,show_age,showemail FROM ".C_REG_TBL." WHERE email LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   elseif($searchCategory == 5 && $searchTerm != "")
   {
     // create query for 5
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday FROM ".C_REG_TBL." WHERE gender='".$searchTerm."' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday,show_age,showemail FROM ".C_REG_TBL." WHERE gender='".$searchTerm."' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   elseif($searchCategory == 6 && $searchTerm != "")
   {
     // create query for 6
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday FROM ".C_REG_TBL." WHERE description LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday,show_age,showemail FROM ".C_REG_TBL." WHERE description LIKE '%".$searchTerm."%' AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   elseif($searchCategory == 7 && $searchTerm != "")
   {
     // create query for 7
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday FROM ".C_REG_TBL." WHERE (favlink LIKE '%".$searchTerm."%' OR favlink1 LIKE '%".$searchTerm."%' OR website LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday,show_age,showemail FROM ".C_REG_TBL." WHERE (favlink LIKE '%".$searchTerm."%' OR favlink1 LIKE '%".$searchTerm."%' OR website LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   elseif($searchCategory == 8 && $searchTerm != "")
   {
     // create query for 8
-    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday FROM ".C_REG_TBL." WHERE (birthday LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
+    $sql = "SELECT username,firstname,lastname,country,email,perms,ip,gender,birthday,show_age,showemail FROM ".C_REG_TBL." WHERE (birthday LIKE '%".$searchTerm."%') AND email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%';";
   }
   elseif($searchCategory == 9 && $searchTerm != "")
   {
@@ -182,25 +184,28 @@ if (isset($FORM_SEND) && $FORM_SEND == 7)
     exit;
   }
 
-   //echo $query;
-   $query = mysql_query($sql) or die("Cannot query the database.<br />" . mysql_error());
-   //mysql_query($query)or die("Could not execute search query!");
-	if (mysql_numrows($query) == 0) $Warning = A_SEARCH_24;
-   // Display search result on screen
-
-if (isset($Warning) && $Warning != "") echo("<P CLASS=\"error\">$Warning</SPAN></P>\n");
-else
-{
-   echo "<table align=center border=\"1\" cellpadding=\"1\" cellspacing=\"0\" width=\"800\" CLASS=table>";
-   echo "<tr align=\"center\" class=\"tabtitle\"><td>&nbsp;</td><td><b>".A_SEARCH_13."</b></td><td><b>".(!(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) ? A_SEARCH_14."</b></td><td><b>".A_SEARCH_15 : A_SEARCH_15."</b></td><td><b>".A_SEARCH_14)."</b></td><td><b>".A_SEARCH_16."</b></td><td><b>".A_SEARCH_6."</b></td><td><b>".A_SEARCH_18."</b></td><td><b>".A_SEARCH_19."</b></td><td><b>".A_SEARCH_20."</b></td><td><b>".L_PRO_7."</b></td></tr>";
-
-	$DbLink->query("SELECT username FROM ".C_REG_TBL." WHERE email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%' AND username != '$pmc_username' ORDER BY username ASC");
+	$DbLink->query("SELECT username FROM ".C_REG_TBL." WHERE email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%' AND username != '".$pmc_username."' ORDER BY username ASC");
 	$users = Array();
 	while (list($usernames) = $DbLink->next_record())
 	{
 		$users[] = $usernames;
 	}
 	$DbLink->clean_results();
+
+	//echo $query;
+#	$query = mysql_query($sql) or die("Cannot query the database.<br />" . mysql_error());
+	//mysql_query($query)or die("Could not execute search query!");
+	$DbLink->query($sql);
+#	if (mysql_numrows($query) == 0) $Warning = A_SEARCH_24;
+	if ($DbLink->num_rows() == 0) $Warning = A_SEARCH_24;
+
+	// Display search result on screen
+if (isset($Warning) && $Warning != "") echo("<P CLASS=\"error\">".$Warning."</SPAN></P>\n");
+else
+{
+   echo "<table align=center border=\"1\" cellpadding=\"1\" cellspacing=\"0\" width=\"800\" CLASS=table>";
+   echo "<tr align=\"center\" class=\"tabtitle\"><td>&nbsp;</td><td><b>".A_SEARCH_13."</b></td><td><b>".(!(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) ? A_SEARCH_14."</b></td><td><b>".A_SEARCH_15 : A_SEARCH_15."</b></td><td><b>".A_SEARCH_14)."</b></td><td><b>".A_SEARCH_16."</b></td><td><b>".A_SEARCH_6."</b></td><td><b>".A_SEARCH_18."</b></td><td><b>".A_SEARCH_19."</b></td><td><b>".A_SEARCH_20."</b></td><td><b>".L_PRO_7."</b></td></tr>";
+
 // Find the position of the username in the sorted table
 	function pos_array($needle,$haystack)
 	{
@@ -218,29 +223,29 @@ else
        $s_birthday = "&nbsp;";
        $bannished_user = "";
        $bannished_ip = "";
-   while($result = mysql_fetch_array($query))
+	   $DbLinkNew = new DB;
+#   while($result = mysql_fetch_array($query))
+   while(list($s_username,$s_firstname,$s_lastname,$s_country,$s_email,$s_perms,$s_ip,$s_gender,$s_birthday,$s_show_age,$s_showemail) = $DbLink->next_record())
    {
-       $s_username = stripslashes($result["username"]);
-	   $DbLink->query("SELECT username,reason FROM ".C_BAN_TBL." WHERE username='$s_username' LIMIT 1");
-	   list($Nb,$reason) = $DbLink->next_record();
-	   $DbLink->clean_results();
+       $s_username = stripslashes($s_username);
+	   $DbLinkNew->query("SELECT username,reason FROM ".C_BAN_TBL." WHERE username='$s_username' LIMIT 1");
+	   list($Nb,$reason) = $DbLinkNew->next_record();
 	   if ($reason != "") $reason = " (".L_HELP_REASON.": ".$reason.")";
 	   if ($Nb) $bannished_user = "&nbsp;<img src=images/bannished.gif alt='".A_MENU_21.$reason."' title='".A_MENU_21.$reason."'>";
 	   $usrHash = md5($s_username);
 	   $a_username = pos_array($s_username,$users);
 	   if ($s_username != $pmc_username) $s_username = "<a onClick=\"browse_user($a_username);\" target=\"_self\" title=\"".A_SEARCH_25."\">$s_username</a>";
-       $s_firstname = stripslashes($result["firstname"]);
-       $s_lastname = stripslashes($result["lastname"]);
-       $s_country = stripslashes($result["country"]);
-       $s_email = stripslashes($result["email"]);
-       $s_perms = stripslashes($result["perms"]);
-       $s_ip = stripslashes($result["ip"]);
-	   $DbLink->query("SELECT ip,reason FROM ".C_BAN_TBL." WHERE ip='$s_ip' LIMIT 1");
-	   list($NbIP,$reasonIP) = $DbLink->next_record();
-	   $DbLink->clean_results();
+       $s_firstname = stripslashes($s_firstname);
+       $s_lastname = stripslashes($s_lastname);
+       $s_country = stripslashes($s_country);
+       $s_email = stripslashes($s_email);
+       $s_perms = stripslashes($s_perms);
+       $s_ip = stripslashes($s_ip);
+	   $DbLinkNew->query("SELECT ip,reason FROM ".C_BAN_TBL." WHERE ip='$s_ip' LIMIT 1");
+	   list($NbIP,$reasonIP) = $DbLinkNew->next_record();
 	   if ($reasonIP != "") $reasonIP = " (".L_HELP_REASON.": ".$reasonIP.")";
 	   if ($NbIP) $bannished_ip = "&nbsp;<img src=images/bannished.gif alt='".A_MENU_21.$reasonIP."' title='".A_MENU_21.$reasonIP."'>";
-       $s_gender = stripslashes($result["gender"]);
+       $s_gender = stripslashes($s_gender);
        if($s_gender == "1")
        {
          $s_gender = "<img src=images/gender_boy.gif alt='".L_REG_46."' title='".L_REG_46."'>";
@@ -257,9 +262,9 @@ else
        {
          $s_gender = "<img src=images/gender_undefined.gif alt='".L_REG_48."' title='".L_REG_48."'>";
        }
-       $s_birthday = stripslashes($result["birthday"]);
-       $s_showage = stripslashes($result["show_age"]);
-       $s_showemail = stripslashes($result["showemail"]);
+       $s_birthday = stripslashes($s_birthday);
+       $s_showage = stripslashes($s_show_age);
+       $s_showemail = stripslashes($s_showemail);
 		if($s_birthday && $s_birthday != "" && $s_birthday != "0000-00-00") $dobtime = strtotime($s_birthday);
 		if(!$s_showage || !$s_showemail) $note = 1;
 		$s_birthday = strftime(L_SHORT_DATE, $dobtime);
@@ -282,14 +287,16 @@ else
        echo "<tr align=\"center\">\n<INPUT TYPE=\"hidden\" NAME=\"user_$usrHash\" VALUE=\"1\">\n<TD VALIGN=CENTER ALIGN=CENTER>\n$checkbox\n</td>\n<td width=100>$s_username$bannished_user</td>\n<td>".(!(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) ? "$s_firstname</td>\n<td>$s_lastname" : "$s_lastname</td>\n<td>$s_firstname")."</td>\n<td>$s_country</td>\n<td><a href=\"mailto:$s_email\" target=_blank>$s_email</a>".($s_showemail ? "" : "<font color=\"red\"> *</font>")."</td>\n<td>$s_perms</td>\n<td>$s_ip$bannished_ip</td>\n<td align=center>$s_gender</td>\n<td align=center nowrap=\"nowrap\">".$s_birthday.($s_showage ? "" : "<font color=\"red\"> *</font>")."</td>\n</tr>";
        $bannished_user = "";
        $bannished_ip = "";
-	   
+	   $DbLinkNew->clean_results();
    }
+   $DbLinkNew->close();
+   $DbLink->close();
 	if($note)
 	{
 	?>
 		<tr>
 			<td colspan=10>
-				<b>* </b><i><?php echo(A_SEARCH_26); ?></i>
+				<b>* </b><i><font size="1"><?php echo(A_SEARCH_26); ?></font></i>
 			</td>
 		</tr>
 	<?php

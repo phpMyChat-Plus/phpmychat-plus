@@ -55,6 +55,7 @@ function size_readable($size, $retstring = null) {
 // Credit for this goes to Ciprian Murariu <ciprianmp@yahoo.com>.
 $yu='./logs'; #define which year you want to read
 $yrsu = preg_find('/./', $yu, PREG_FIND_DIRONLY|PREG_FIND_SORTKEYS|PREG_FIND_SORTDESC);
+rsort($yrsu);
 foreach($yrsu as $yru)
 {
 		$yeardiru = str_replace($yu."/",'',$yru);
@@ -63,7 +64,7 @@ foreach($yrsu as $yru)
 		echo ("<td valign=top align=center nowrap=\"nowrap\" colspan=6><font size=4 color=red><b>$yeardiru</b></font></td>"); #print name of each file found
 		$mu=$yu."/".$yeardiru; #define which month you want to read
 		$mtsu = preg_find('/./', $mu, PREG_FIND_DIRONLY|PREG_FIND_RETURNASSOC|PREG_FIND_SORTMODIFIED|PREG_FIND_SORTKEYS|PREG_FIND_SORTDESC);
-		$dateu1 = mktime(0,0,0,date('m'),1,$yeardiru);
+		$dateu1 = mktime(0,0,0,date('m'),1,date('Y'));
 		foreach($mtsu as $mtu => $stats)
 		{
 			$monthdiru = str_replace($mu."/",'',$mtu);
@@ -141,7 +142,7 @@ foreach($yrsu as $yru)
 			while (false !== ($dyu = readdir($dayu)))
 			{
 #				if (!eregi("\.html",$dyu) && !eregi("_vti_conf",$dyu) && !eregi("error",$dyu) && $dyu!=='.' && $dyu!=='..')
-				if (!preg_match("/(\.html|_vti_conf|error)$/i", $dyu) && !preg_match("/^[\.]/", $dyu))
+				if (!preg_match("/(\.html|_vti_conf|_vti_cnf|_vti_cnf|error)$/i", $dyu) && !preg_match("/^[\.]/", $dyu))
 				{
 					$dayarrayu[]=$dyu;
 		 		}

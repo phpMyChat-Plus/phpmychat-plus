@@ -10,9 +10,9 @@
 define("RTL", 1); // uncomment only for right-to-left text (Arabic, Hebrew)
 
 // Class strings localization
-define("L_DAY", "روز");
-define("L_MONTH", "ماه");
-define("L_YEAR", "سال");
+define("L_DAYC", "روز");
+define("L_MONTHC", "ماه");
+define("L_YEARC", "سال");
 define("L_TODAY", "امروز");
 define("L_PREV", "قبل");
 define("L_NEXT", "بعد");

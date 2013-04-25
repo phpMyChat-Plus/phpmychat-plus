@@ -7,9 +7,9 @@
 # Last file update: 01.09.2011
 
 // Class strings localization
-define("L_DAY", "Dia");
-define("L_MONTH", "Mês");
-define("L_YEAR", "Ano");
+define("L_DAYC", "Dia");
+define("L_MONTHC", "Mês");
+define("L_YEARC", "Ano");
 define("L_TODAY", "Hoje");
 define("L_PREV", "Anterior");
 define("L_NEXT", "Seguinte");
@@ -56,21 +56,21 @@ define("L_S_OCT", "Out");
 define("L_S_NOV", "Nov");
 define("L_S_DEC", "Dez");
 // Week days Long Names
-define("L_MON", "segunda");
-define("L_TUE", "terça");
-define("L_WED", "quarta");
-define("L_THU", "quinta");
-define("L_FRI", "sexta");
-define("L_SAT", "sábado");
-define("L_SUN", "domingo");
+define("L_MON", "Segunda");
+define("L_TUE", "Terça");
+define("L_WED", "Quarta");
+define("L_THU", "Quinta");
+define("L_FRI", "Sexta");
+define("L_SAT", "Sábado");
+define("L_SUN", "Domingo");
 // Week days Short Names
-define("L_S_MON", "seg");
-define("L_S_TUE", "ter");
-define("L_S_WED", "qua");
-define("L_S_THU", "qui");
-define("L_S_FRI", "sex");
-define("L_S_SAT", "sáb");
-define("L_S_SUN", "dom");
+define("L_S_MON", "Seg");
+define("L_S_TUE", "Ter");
+define("L_S_WED", "Qua");
+define("L_S_THU", "Qui");
+define("L_S_FRI", "Sex");
+define("L_S_SAT", "Sáb");
+define("L_S_SUN", "Dom");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1252");

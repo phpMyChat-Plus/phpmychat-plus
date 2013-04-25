@@ -51,6 +51,8 @@ define("L_MIN", "minut");
 define("L_MINS", "minuta");
 define("L_HOUR", "sat");
 define("L_HOURS", "sati");
+define("L_DAY", "dan");
+define("L_DAYS", "dana");
 
 // registration stuff:
 define("L_REG_1", "Lozinka");

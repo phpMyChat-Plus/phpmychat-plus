@@ -55,6 +55,8 @@ define("L_MIN", "Minute");
 define("L_MINS", "Minuten");
 define("L_HOUR", "Stunde");
 define("L_HOURS", "Stunden");
+define("L_DAY", "Tag");
+define("L_DAYS", "Tage");
 
 // registration stuff:
 define("L_REG_1", "Passwort");

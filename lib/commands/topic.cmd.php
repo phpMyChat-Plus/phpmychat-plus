@@ -87,7 +87,7 @@ function room_in($what, $in, $Charset)
 								{
 								  unlink ($toppath);                             // if it does delete it.
 								}
-								$DbLink = new DB;
+#								$DbLink = new DB;
 								$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS topic reset', '', ".time().", '$U', '', '', '')");
 							}
 							else
@@ -96,7 +96,7 @@ function room_in($what, $in, $Charset)
 								{
 								  unlink ($topgpath);                             // if it does delete it.
 								}
-									$DbLink = new DB;
+#									$DbLink = new DB;
 									$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS topic reset', '', ".time().", '$U', '', '', '')");
 							}
 						}
@@ -159,7 +159,7 @@ else $Top = preg_replace("/".$prefix.$pureUrl."/i", '<a href="\\1://\\2" target=
 								$fp = fopen($toppath, "a") ;                // file will be writen.
 								fputs($fp, stripslashes($Top));                // and will include the topic to be listed on topic frame.
 								fclose($fp) ;
-								$DbLink = new DB;
+#								$DbLink = new DB;
 								$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS topic', '', ".time().", '$U', '$Top', '', '')");
 							}
 							else
@@ -172,7 +172,7 @@ else $Top = preg_replace("/".$prefix.$pureUrl."/i", '<a href="\\1://\\2" target=
 								$fp = fopen($topgpath, "a") ;                // file will be writen.
 								fputs($fp, stripslashes($Top));                // and will include the topic to be listed on topic frame.
 								fclose($fp) ;
-								$DbLink = new DB;
+#								$DbLink = new DB;
 								$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS topic', '', ".time().", '$U', '$Top', '', '')");
 							}
 						}
@@ -189,4 +189,6 @@ else $Top = preg_replace("/".$prefix.$pureUrl."/i", '<a href="\\1://\\2" target=
 				}
 		}
 	}
+	$DbLink->close();
+
 ?>

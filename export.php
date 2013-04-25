@@ -67,7 +67,7 @@ $CondForQuery .= "(address = ' *' OR (room = '$R' AND (address IN ('$U','') OR u
 
 $LimitForQuery = (isset($Limit) && $Limit != "") ? " LIMIT ".$Limit : "";
 
-$DbLink = new DB;
+#$DbLink = new DB;
 $DbLink->query("SELECT m_time, username, latin1, address, message FROM ".C_MSG_TBL." WHERE ".$CondForQuery." ORDER BY m_time DESC".$LimitForQuery);
 
 // Format and display new messages

@@ -55,6 +55,8 @@ define("L_MIN", "דקה");
 define("L_MINS", "דקות");
 define("L_HOUR", "שעה");
 define("L_HOURS", "שעות");
+define("L_DAY", "zi");
+define("L_DAYS", "zile");
 
 // registration stuff:
 define("L_REG_1", "סיסמא");

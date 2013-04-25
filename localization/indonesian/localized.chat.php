@@ -52,6 +52,8 @@ define("L_MIN", "menit");
 define("L_MINS", "menit");
 define("L_HOUR", "jam");
 define("L_HOURS", "jam");
+define("L_DAY", "hari");
+define("L_DAYS", "hari");
 
 // registration stuff:
 define("L_REG_1", "Kata sandi");

@@ -10,9 +10,9 @@
 # define("RTL", 1); // uncomment only for right-to-left text (Arabic, Hebrew)
 
 // Class strings localization
-define("L_DAY", "일");
-define("L_MONTH", "월");
-define("L_YEAR", "년");
+define("L_DAYC", "일");
+define("L_MONTHC", "월");
+define("L_YEARC", "년");
 define("L_TODAY", "오늘");
 define("L_PREV", "이전");
 define("L_NEXT", "다음");

@@ -21,10 +21,10 @@ class DB
 
 	function connect()
 	{
-		if($this->Link_ID == 0)
+		if(!$this->Link_ID)
 		{
 			$this->Link_ID = mysql_connect($this->Host, $this->User, $this->Password);
-			@mysql_query("SET CHARACTER SET utf8");
+			mysql_query("SET CHARACTER SET utf8");
 			mysql_query("SET NAMES 'utf8'"); 
 			if (!$this->Link_ID)
 			{
@@ -42,8 +42,8 @@ class DB
 
 	function query($Query_String)
 	{
-		$this->connect();
-		$this->Query_ID = mysql_query($Query_String,$this->Link_ID);
+		if(!$this->Link_ID) $this->connect();
+		if(gettype($this->Link_ID) == "resource") $this->Query_ID = mysql_query($Query_String,$this->Link_ID);
 		$this->Row = 0;
 		$this->Errno = mysql_errno();
 		$this->Error = mysql_error();
@@ -52,6 +52,8 @@ class DB
 			$this->halt("Invalid SQL: ".$Query_String);
 		}
 		return $this->Query_ID;
+		if (function_exists('mysql_free_result')) mysql_free_result($this->Query_ID);
+		else mysql_freeresult($this->Query_ID);
 	}
 
 	function next_record()
@@ -63,7 +65,8 @@ class DB
 		$stat = is_array($this->Record);
 		if (!$stat)
 		{
-			mysql_free_result($this->Query_ID);
+			if (function_exists('mysql_free_result')) mysql_free_result($this->Query_ID);
+			else mysql_freeresult($this->Query_ID);
 			$this->Query_ID = 0;
 		}
 		return $this->Record;
@@ -71,40 +74,46 @@ class DB
 
 	function num_rows()
 	{
-		return mysql_num_rows($this->Query_ID);
+		if(gettype($this->Query_ID) == "resource") return mysql_num_rows($this->Query_ID);
 	}
 
 	function affected_rows()
 	{
-		return mysql_affected_rows($this->Link_ID);
+		if (gettype($this->Link_ID) == "resource") return mysql_affected_rows($this->Link_ID);
 	}
 
 	function optimize($tbl_name)
 	{
-		$this->connect();
-		$this->Query_ID = @mysql_query("OPTIMIZE TABLE $tbl_name",$this->Link_ID);
+		if(!$this->Link_ID) $this->connect();
+		$this->Query_ID = mysql_query("OPTIMIZE TABLE $tbl_name",$this->Link_ID);
 	}
 
 	function truncate($tbl_name)
 	{
-		$this->connect();
-		$this->Query_ID = @mysql_query("TRUNCATE TABLE $tbl_name",$this->Link_ID);
+		if(!$this->Link_ID) $this->connect();
+		$this->Query_ID = mysql_query("TRUNCATE TABLE $tbl_name",$this->Link_ID);
 	}
 
 	function repair($tbl_name)
 	{
-		$this->connect();
-		$this->Query_ID = @mysql_query("REPAIR TABLE $tbl_name",$this->Link_ID);
+		if(!$this->Link_ID) $this->connect();
+		$this->Query_ID = mysql_query("REPAIR TABLE $tbl_name",$this->Link_ID);
 	}
 
 	function clean_results()
 	{
-		if($this->Query_ID != 0) mysql_freeresult($this->Query_ID);
+#		if($this->Query_ID != 0) mysql_freeresult($this->Query_ID);
+		if($this->Query_ID && gettype($this->Query_ID) == "resource")
+		{
+			if (function_exists('mysql_free_result')) mysql_free_result($this->Query_ID);
+			else mysql_freeresult($this->Query_ID);
+		}
 	}
 
 	function close()
 	{
-		if($this->Link_ID != 0) mysql_close($this->Link_ID);
+#		if($this->Link_ID != 0) mysql_close($this->Link_ID);
+		if(gettype($this->Link_ID) == "resource") mysql_close($this->Link_ID);
 	}
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-// File : romanian/localized.tutorial.php - plus version (26.08.2008 - rev.10)
+// File : romanian/localized.tutorial.php - plus version (09.11.2012 - rev.11)
 //Translated and updated to Plus version by Ciprian Murariu <ciprianm@yahoo.com>
 
 // Get the names and values for vars sent by the script that called this one
@@ -263,11 +263,11 @@ Poţi schimba culoarea textului afişat alegând o altă culoare din lista de cu
 <P>
 <FONT SIZE="+1"><A NAME="users_list"><B>Explicarea listei de utilizatori (nu şi pentru fereastra tip popup):</B></A></FONT>
 <P>
-<OL>
-	Au fost definite două reguli de bază pentru lista de utilizatori:<br />
+Au fost definite două reguli de bază pentru lista de utilizatori:<br />
+<UL>
 	<LI>o mică imagine reprezentând sexul (băiat sau fată) este afişată înaintea poreclei unui utilizator înregistrat (apăsând pe acea imagine va lansa comanda <A HREF="#whois">/whois</A>, deschizând un popup cu informaţii despre profilul utilizatorului respectiv), în timp ce utilizatorii neînregistraţi, vor avea doar un spaţiu înaintea poreclei;<br />
 	<LI>porecla administratorului sau a moderatorilor va fi afişată cu caractere italice <I>(înclinate)</I>.
-</OL>
+</UL>
 <P><I>Spre exemplificare</I>, în imaginea de mai jos poţi înţelege următoarele:
 <TABLE BORDER=0 CELLSPACING=10>
 <TR>
@@ -363,7 +363,7 @@ Sunt mai multe moduri de a personaliza aspectul cmerei de Chat. Pentru a schimba
 		<P>
 		<I>De exemplu:</I> /show 50
 		<P>
-		îţi va afişa pe ecran ultimele 50 de mesaje. Dacă nu toate mesajele încap în fereastra de pe ecran, o bară verticală de navigare va apărea în partea dreapta a ferestrei.</UL>
+		îţi va afişa pe ecran ultimele 50 de mesaje. Dacă nu toate mesajele încap în fereastra de pe ecran, o bară verticală de navigare va apărea în partea dreapta a ferestrei.
 <?php echo(L_CMD_SHOW != "" && L_CMD_SHOW != "L_CMD_SHOW" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_SHOW)."</span>") : ""); ?>
 		<?php
 	}
@@ -375,11 +375,11 @@ Sunt mai multe moduri de a personaliza aspectul cmerei de Chat. Pentru a schimba
 		<I>De exemplu:</I> /show 50 sau /last 50
 		<P>
 		vor curăţa ecranul şi vor afişa numai ultimele 50 de mesaje. Dacă nu toate mesajele încap în fereastra de pe ecran, o bară verticală de navigare va apărea în partea dreapta a ferestrei.
-<?php echo(L_CMD_SHOW != "" && L_CMD_SHOW != "L_CMD_SHOW" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_SHOW)."</span>") : ""); ?></UL>
+<?php echo(L_CMD_SHOW != "" && L_CMD_SHOW != "L_CMD_SHOW" ? "<br />* ".sprintf(L_HELP_CMD_VAR,"<span class=success>/".str_replace(","," /",L_CMD_SHOW)."</span>") : ""); ?>
 		<?php
 	}
 	?>
-	<br /><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
+	</UL><P ALIGN="right"><A HREF="#top">Sus la Cuprins</A></P>
 	<hr />
 
 <P>

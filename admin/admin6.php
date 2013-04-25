@@ -14,10 +14,12 @@ else
 {
 // Credit for this goes to Pete Soheil <webmaster@digioz.com>
 $pstr = "admin.php?From=admin.php&What=Body&L=".$L."&pmc_username=".$pmc_username."&pmc_password=".$pmc_password."&sheet=6";
+/*
 $conn = mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
 @mysql_query("SET CHARACTER SET utf8");
 mysql_query("SET NAMES 'utf8'"); 
 mysql_select_db(C_DB_NAME);
+*/
 
 $mdel = $_GET['mdel'];
 $mord = $_GET['mord'];
@@ -45,15 +47,17 @@ else
 
 if($mdel != "")
 {
-    $sql = "DELETE FROM ".C_MSG_TBL." WHERE m_time='$mdel'";
-    mysql_query($sql);
+#    $sql = "DELETE FROM ".C_MSG_TBL." WHERE m_time='$mdel'";
+#    mysql_query($sql);
+    $DbLink->query("DELETE FROM ".C_MSG_TBL." WHERE m_time='".$mdel."'");
     //echo $mdel;
 }
 
 // View List of Current Chat (HIDDEN and VISIBLE) ------------------------------------------------------
 
-$sql = "SELECT * FROM ".C_MSG_TBL."".$sqlT;
-$query = mysql_query($sql) or die("Cannot query the database.<br />" . mysql_error());
+#$sql = "SELECT * FROM ".C_MSG_TBL."".$sqlT;
+#$query = mysql_query($sql) or die("Cannot query the database.<br />" . mysql_error());
+$DbLink->query("SELECT room,username,address,message,m_time FROM ".C_MSG_TBL."".$sqlT);
 
 echo "<a href=\"$pstr&mdel=\"><b><font color=white>".A_REFRESH_MSG."</font></b></a></center><br />";
 echo "<table align=\"center\" border=\"0\" cellpadding=\"1\" cellspacing=\"1\" width=\"780\" CLASS=table>";
@@ -65,14 +69,14 @@ echo "<tr CLASS=\"tabtitle\">
 <td VALIGN=CENTER ALIGN=CENTER height=20 CLASS=tabtitle align=center><a href=\"$pstr&mord=M\"><b>".A_CHTEX_MSG."</b></a></td>
 </tr>";
 
-while($result = mysql_fetch_array($query))
+#while($result = mysql_fetch_array($query))
+while(list($room, $username, $address, $message, $m_time) = $DbLink->next_record())
 {
-
-$room = stripslashes($result["room"]);
-$username = stripslashes($result["username"]);
-$address = stripslashes($result["address"]);
+#$room = stripslashes($result["room"]);
+#$username = stripslashes($result["username"]);
+#$address = stripslashes($result["address"]);
 if ($address != "") $address = " to <b>".$address."";
-$message = stripslashes($result["message"]);
+#$message = stripslashes($result["message"]);
 #if (C_POPUP_LINKS || eregi('target="_blank"></a>',$message))
 if (C_POPUP_LINKS || stripos($message,'target="_blank"></a>') !== false)
 {
@@ -80,18 +84,19 @@ if (C_POPUP_LINKS || stripos($message,'target="_blank"></a>') !== false)
 }
 else $message = str_replace('target="_blank">','title="'.sprintf(L_CLICK,L_LINKS_3).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_LINKS_3).'.\'; return true" target="_blank">',$message);
 $message = str_replace('alt="Send email">','title="'.sprintf(L_CLICK,L_EMAIL_1).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_EMAIL_1).'.\'; return true">',$message);
-$m_time = stripslashes($result["m_time"]);
+#$m_time = stripslashes($result["m_time"]);
 $time_posted = strftime(L_SHORT_DATETIME, $m_time);
 if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $time_posted = str_replace(" ","",$time_posted);
 
 echo "<tr class=\"msg2\">
 <td width=1% align=center><a href=\"$pstr&mord=$mord&mdel=".$m_time."\"><font size=-2 color=red><b>x</b></font></a></td>
-<td width=1% align=center>$time_posted</td>
-<td width=1%><b>$username</b>$address</b>:</td>
-<td width=1%>$room</td>
-<td>$message</td></tr>";
+<td width=1% align=center>".$time_posted."</td>
+<td width=1%><b>$username</b>".$address."</b>:</td>
+<td width=1%>".$room."</td>
+<td>".$message."</td></tr>";
 }
 
 echo "</table><br />";
+$DbLink->clean_results();
 }
 ?>

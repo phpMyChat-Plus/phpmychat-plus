@@ -64,6 +64,9 @@ if (get_magic_quotes_gpc()) {
 }
 
 $DbLink = new DB;
+$field_errorU = false;
+$field_errorSQ = false;
+$field_errorSA = false;
 
 // Check for valid entries
 if (isset($FORM_SEND) && stripslashes($submit_type) == L_PASS_7)
@@ -77,10 +80,13 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_PASS_7)
 	else if (preg_match("/[ |,|'|\\\\]/", $U))
 	{
 		$Error = L_ERR_USR_16a;
+		$field_errorU = true;
+		if (preg_match("/['|\\\\]/", $SECRET_ANSWER)) $field_errorSA = true;
 	}
 	else if(C_NO_SWEAR && checkwords($U, true, $Charset))
 	{
 		$Error = L_ERR_USR_18;
+		$field_errorU = true;
 	}
 	else if (trim($EMAIL) == "")
 	{
@@ -97,6 +103,17 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_PASS_7)
 	{
 		$Error = L_ERR_USR_8;
 	}
+	else if ($SECRET_QUESTION == "" || $SECRET_QUESTION == 0 || $SECRET_ANSWER == "")
+	{
+		$Error = L_ERR_PASS_5;
+		if ($SECRET_QUESTION == "" || $SECRET_QUESTION == 0) $field_errorSQ = true;
+		if ($SECRET_ANSWER == "") $field_errorSA = true;
+	}
+	else if (preg_match("/['|\\\\]/", $SECRET_ANSWER))
+	{
+		$Error = L_ERR_USR_16a;
+		$field_errorSA = true;
+	}
 	else
 	{
 		$DbLink->query("SELECT email,s_question,s_answer FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
@@ -106,6 +123,8 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_PASS_7)
 			if ($pmc_SECRET_QUESTION == 0 || $pmc_SECRET_ANSWER == "")
 			{
 				$Error = L_ERR_PASS_6;
+				if ($pmc_SECRET_QUESTION == 0) $field_errorSQ = true;
+				if ($pmc_SECRET_ANSWER == "") $field_errorSA = true;
 			}
 			else if ($EMAIL != $pmc_EMAIL)
 			{
@@ -114,18 +133,19 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_PASS_7)
 			else if ($SECRET_QUESTION != $pmc_SECRET_QUESTION)
 			{
 				$Error = L_ERR_PASS_3;
+				$field_errorSQ = true;
 				$SECRET_QUESTION = $pmc_SECRET_QUESTION;
 			}
 			else if ($SECRET_ANSWER != $pmc_SECRET_ANSWER)
 			{
 				$Error = L_ERR_PASS_4;
+				$field_errorSA = true;
 			}
 			else
 			{
 				$DbLink->clean_results();
 				$DbLink->query("SELECT count(*) FROM ".C_REG_TBL." WHERE username='$U'");
 				list($rows) = $DbLink->next_record();
-				$DbLink->clean_results();
 				if ($rows != 0)
 				{
 					$Latin1 = ($Charset != "utf-8");
@@ -134,10 +154,11 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_PASS_7)
 					$pmc_password = gen_password();
 					$PWD_Hash = md5(stripslashes($pmc_password));
 					// Send e-mail
-					$send = send_email(L_PASS_9." [".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]", L_SET_2, L_REG_1, L_PASS_11, TRUE);
+					$send = send_email(L_PASS_9." [".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)."]", L_SET_2, L_REG_1, L_PASS_11, 1);
 					if (!$send) $Error = sprintf(L_EMAIL_VAL_Err,$Sender_email,$Sender_email);
 					if (!isset($Error) || $Error == "")
 					{
+						$DbLink->clean_results();
 						$DbLink->query("UPDATE ".C_REG_TBL." SET password='$PWD_Hash', ip='$IP' WHERE username='$U' AND email='$EMAIL' AND s_question='$SECRET_QUESTION' AND s_answer='$SECRET_ANSWER'");
 						$Message = L_PASS_8."<br />".sprintf(L_PASS_10,$pmc_password);
 					};
@@ -228,7 +249,7 @@ if(isset($Error))
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_SET_2); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="U" SIZE=25 MAXLENGTH=15 VALUE="<?php echo(isset($pmc_username) ? stripslashes($pmc_username) : $U); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<INPUT TYPE="text" NAME="U" SIZE=15 MAXLENGTH=15<?php echo($field_errorU ? " style=\"background-color: #FF0000;\"" : ""); ?> VALUE="<?php echo(isset($pmc_username) ? stripslashes($pmc_username) : $U); ?>"<?php if ($done) echo(" READONLY"); ?>>
 				<?php if (!$done) { ?><SPAN CLASS=error>*</SPAN><?php }; ?>
 			</TD>
 		</TR>
@@ -242,21 +263,19 @@ if(isset($Error))
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PASS_1); ?> :</TD>
 			<TD VALIGN="TOP">
-				<SELECT name="SECRET_QUESTION">
-				<OPTION value="0" <?php if ($SECRET_QUESTION==0 || $SECRET_QUESTION=="") echo ("selected=\"selected\"")?>><?php echo(L_PASS_12)?></OPTION>
+				<SELECT name="SECRET_QUESTION"<?php echo($field_errorSQ ? " style=\"background-color: #FF0000;\"" : ""); ?>>
+				<OPTION value="0"<?php echo($field_errorSQ ? " style=\"background-color: #FF0000;\"" : ""); ?> <?php if ($SECRET_QUESTION==0 || $SECRET_QUESTION=="") echo ("selected=\"selected\"")?>><?php echo(L_PASS_12)?></OPTION>
 				<OPTION value="1" <?php if ($SECRET_QUESTION==1) echo ("selected=\"selected\"")?>><?php echo(L_PASS_2)?></OPTION>
 				<OPTION value="2" <?php if ($SECRET_QUESTION==2) echo ("selected=\"selected\"")?>><?php echo(L_PASS_3)?></OPTION>
 				<OPTION value="3" <?php if ($SECRET_QUESTION==3) echo ("selected=\"selected\"")?>><?php echo(L_PASS_4)?></OPTION>
 				<OPTION value="4" <?php if ($SECRET_QUESTION==4) echo ("selected=\"selected\"")?>><?php echo(L_PASS_5)?></OPTION>
-				</SELECT>
-				<?php if (!$done) { ?><SPAN CLASS="error">*</SPAN><?php }; ?>
+				</SELECT>&nbsp;<?php if (!$done) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
 			</TD>
 		</TR>
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PASS_6); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="SECRET_ANSWER" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($SECRET_ANSWER)) echo(stripslashes($SECRET_ANSWER)); ?>"<?php if ($done) echo(" READONLY"); ?>>
-				<?php if (!$done) { ?><SPAN CLASS="error">*</SPAN><?php }; ?>
+				<INPUT TYPE="text" NAME="SECRET_ANSWER" SIZE=25 MAXLENGTH=15<?php echo($field_errorSA ? " style=\"background-color: #FF0000;\"" : ""); ?> VALUE="<?php if (isset($SECRET_ANSWER)) echo(stripslashes(htmlspecialchars($SECRET_ANSWER, ENT_NOQUOTES, 'UTF-8'))); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
 			</TD>
 		</TR>
 		</TABLE>

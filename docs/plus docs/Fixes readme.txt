@@ -4,19 +4,18 @@ Client browsers - tested with:
 	- IE < 5.5 = M;
 	- IE > 6.0SP2 (including > 7.0 & > 8.0 & > 9.0) = H;
 	- Mozilla Aurora = 12.0 = H;
-	- Mozilla Firefox > 1.6.0.0 (including < 11.0) = H;
+	- Mozilla Firefox > 1.6.0.0 (including < 12.0) = H;
 	- Mozilla Firebird 0.7 = L;
 	- Netscape > 8.1 = M;
 	- Opera 11.61 = H;
 	- AvantBrowser 10.2 build 52 = H;
 	- Flock 1.2.1 = H;
 	- Apple Safari > 4.0.3 = H;
-	- Google Chrome > 17.x.x.x.x = M.
+	- Google Chrome > 24.x.x.x.x = M.
 Server environment - tested env:
 	- Apache < 2.2.22 (Unix and Windows 2k/XP<SP3 & Vista);
-	- php < 5.4 (non-safe-mode, but also a safe mode server has been tested and worked fine);
-	- MySQL < 5.5;
-	- MySQL >= 5.5 - just a calendar response from bot is bogus (still working on it);
+	- php < 6;
+	- MySQL < 6;
 	- exif support enabled (gif/jpeg processing);
 	- GD2 support enabled (gif/jpeg processing);
 	- mail function support (optional but recommended).
@@ -26,7 +25,6 @@ Known issues (read also the FAQ):
 - php 4.4.4 has an issue of not posting the messages ($M value is null);
 - configurations cannot be saved from admin panel on servers having magic_quotes set "on"; this also happens if the c_config table structure has been altered somehow and it doesn’t exactly follow the admin5.php field definitions; another identified reason would be the use of single quote ’ in field values (like Room’s Names or such) - never use single quotes - use the utf-8 ’ instead (you can copy it from here when you need it);
 - when a username uses utf-8 chars like ă î â , php cannot recognize a name with small caps as being similar with caps (Îrban is different than îrban) so please make sure you use the name in PMs and commands exacly as the one of the desired username (this is working fine on php > 5 servers, due to the added mb_* functions support);
-- on IE7, registered users don’t always actually leave the chat after clicking the Exit door or Exit link - the loader frame doesn’t actually close but keep showing that user to the users’ lists until the user closes that specific browser window.
 
 Important: everytime you upgrade/reinstall a phpmychat server or change sensitive data in Admin panel (like default room names), the old cookies must be deleted from the clients’ machines - so let your users know! (also cache clearing might be a good idea)
 When you install Firefox2 and/or QuickTime (RealPlayer), a QuickTime plugin will break the WMP plugin in IE, necesary for playing .wav sounds, therefore, you won’t get sounds in IE anymore. I fixed it by playing with enabling WMP/disabling QuickTime plugins in IE; re-associating the "wav" files in Media Player/Tools/Options/File Types also fixes this.
@@ -35,13 +33,35 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 If your users encounter bootings for no reason, try to disable sounds in chat.
 
 Fixes History:
+06.02.2013 - 1.94-RC2:
+- moved FB like button to the support frame; (functionality related)
+- updated the calendar plugin with the new Day.Format js function, fixing the day word in the drop down (conflict introduced with config panel translation); (functionality related)
+- fixed the secret_answer field in registration to check for disallowed characters; (functionality related)
+- fixed a username color bug in messages frame; (functionality related)
+- fixed a php mysql_close() error that reported invalid resources (link already closed); (functionality related)
+- on IE7, registered users don’t always actually leave the chat after clicking the Exit door or Exit link - the loader frame doesn’t actually close but keep showing that user to the users’ lists until the user closes that specific browser window; in the latest 1.94-RC2 this should be fixed but we are keep monitoring for feedback; (functionality related)
+- fixed a bug in MySQL >= 5.5 which made a calendar response from bot stop; (functionality related);
+- more DB connections stripped down: multiple connections per user are required as phpMyChat is based on HTML frames and popups, for each one a separate mysql connection being needed; in this version, most direct mysql connections have been changed to mysql.lib.php class global usage, with the benefit of less than 1/3 of previous number of connections made per user; the bot will still use direct connections to the DB, as per Alice ProgramE; (functionality related)
+- converted chinese config translations in admin panel; (translation related)
+- adjusted fb like position in input bar; (display related)
+- fixed hangout in exit.php by changing link to _top not _parent; (functionality related)
+- resized Secret answer field maxsize to 14 chars, in registration and edit profile; (security related)
+- admin panel Configuration sheet converted and optimized for localizations - thanks to Marco Gelli Marchese <mvmcgm@gmail.com>; (translation related)
 04.05.2012 - 1.94-RC1:
+- completed FAQ with a new solution for 500 error on php>=5.3 servers; (functionality related)
+- added a new directive in .htaccess for servers that don't recognize index.php as home; (functionality related)
+- embevi added support for shorthenUrl youtu.be and vid.ly videos; (functionality related)
+- database timestamp type update to mysql v5.2 (before was timestamp(n) which got deprecated); (installation related)
+- important public logs fix to display the entire archive not only first month of each year; (functionality related)
+- installer fixes, including incorrect permissions set after first step on some servers; (functionality related)
+- calendar plugin fixes; (functionality related)
+- Brasilian Portuguese translation added; (localization project) - Thanks to Marco Gelli Marchese <mvmcgm@gmail.com>
 - fixed a CAPS issue when swearing filter was enabled, making all letters being posted lowercase; (functionality related)
 - added the Facebook Like Button - social plugin; (socialization)
 - added <sup> tags for the right numerals display in English (1st 2nd aso); (functionality related)
 - MathJax plugin configuration source url can now be set in configuration; (functionality extension)
 01.02.2012 - 1.94-beta8:
-- Chinese (both Simplified and Traditional) translation started; (localization project) - Thanks to clouds_music <clouds.music@gmail.com>
+- Chinese (both Simplified and Traditional) translation added; (localization project) - Thanks to clouds_music <clouds.music@gmail.com>
 - fixed the sourceforge logo for sites with allow_url_include disabled; (functionality related)
 - added the Profiles tab in admin panel, based on birthday popup features; (functionality extension)
 - fixed a bug related to embeding sounds that was leading to freezing and booting in IE7/8; (functionality related)

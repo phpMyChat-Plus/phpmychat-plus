@@ -260,9 +260,10 @@ if(isset($NbUsers) && $NbUsers > 0)
 						};
 					}
 				}
+				$Users->clean_results();
 			}
-			$Users->clean_results();
 			echo("</P><P>");
+			$Users->close();
 		}
 	}
 	if($disp_note) echo("<P><table WIDTH=100%><tr valign=top><td colspan=4 align=left CLASS=small>[".$res_init."] = ".L_RESTRICTED.".</td></tr></table>");

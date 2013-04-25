@@ -7,9 +7,9 @@
 # Last file update: 01.09.2011
 
 // Class strings localization
-define("L_DAY", "Päivä");
-define("L_MONTH", "Kuukausi");
-define("L_YEAR", "Vuosi");
+define("L_DAYC", "Päivä");
+define("L_MONTHC", "Kuukausi");
+define("L_YEARC", "Vuosi");
 define("L_TODAY", "Tänään");
 define("L_PREV", "Edellinen");
 define("L_NEXT", "Seuraava");

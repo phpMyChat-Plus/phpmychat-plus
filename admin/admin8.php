@@ -55,7 +55,7 @@ function user_status($name,$stat,$ghost,$superghost)
 function display_connected($Private,$Full,$String1,$String2,$Charset)
 {
 	$List = "";
-	global $ordquery, $DefaultDispChatRooms, $res_init, $disp_note, $L;
+	global $ordquery, $DbLink, $DefaultDispChatRooms, $res_init, $disp_note, $L;
 	if ($Private)
 	{
 		$query = "SELECT DISTINCT u.username, u.latin1, u.room, u.r_time, u.ip, u.status FROM ".C_USR_TBL." u ORDER BY $ordquery";
@@ -65,7 +65,6 @@ function display_connected($Private,$Full,$String1,$String2,$Charset)
 		$query = "SELECT DISTINCT u.username, u.latin1, u.room, u.r_time, u.ip, u.status FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room AND m.type = 1 ORDER BY $ordquery";
 	}
 
-	$DbLink = new DB;
 	$DbLink->query($query);
 	$NbUsers = $DbLink->num_rows();
 
@@ -373,16 +372,19 @@ $browser = getenv('HTTP_USER_AGENT');
 $closetime = $time-15;
 
 //Database-Connect
-$handler = @mysql_connect(C_DB_HOST,C_DB_USER,C_DB_PASS);
-@mysql_query("SET CHARACTER SET utf8");
-mysql_query("SET NAMES 'utf8'");
-@mysql_select_db(C_DB_NAME,$handler);
+#$handler = @mysql_connect(C_DB_HOST,C_DB_USER,C_DB_PASS);
+#@mysql_query("SET CHARACTER SET utf8");
+#mysql_query("SET NAMES 'utf8'");
+#@mysql_select_db(C_DB_NAME,$handler);
 
 //Database-Commands
-$delete = @mysql_query("DELETE FROM ".C_LRK_TBL." WHERE time<'$closetime'",$handler);
-$result = @mysql_query("SELECT DISTINCT ip,browser,username,status FROM ".C_LRK_TBL." ORDER BY ip ASC",$handler);
-$online_users = @mysql_numrows($result);
-//@mysql_close($handler);
+#$delete = @mysql_query("DELETE FROM ".C_LRK_TBL." WHERE time<'$closetime'",$handler);
+#$result = @mysql_query("SELECT DISTINCT ip,browser,username,status FROM ".C_LRK_TBL." ORDER BY ip ASC",$handler);
+#$online_users = @mysql_numrows($result);
+#@mysql_close($handler);
+$DbLink->query("DELETE FROM ".C_LRK_TBL." WHERE time<'".$closetime."'");
+$DbLink->query("SELECT DISTINCT ip,browser,username,status FROM ".C_LRK_TBL." ORDER BY ip ASC");
+$online_users = $DbLink->num_rows();
 ?>
 <hr /><table border=1 cellspacing=1 cellpadding=1 class="table"><tr>
 	<td><?php echo(L_CUR_5)?></td>
@@ -398,20 +400,21 @@ if ($online_users)
 $sghosts = "";
 $sghosts = str_replace("'","",C_SPECIAL_GHOSTS);
 $sghosts = str_replace(" AND username != ",",",$sghosts);
-while($data = @mysql_fetch_array($result))
+#while($data = @mysql_fetch_array($result))
+while(list($ipu, $browseru, $usernameu, $statusu) = $DbLink->next_record())
 {
-	if ($data[username] == "Guest") $data[username] = L_LURKING_5;
+	if ($usernameu == "Guest") $usernameu = L_LURKING_5;
 	$ghost = 0;
 	$superghost = 0;
-	if (($sghosts != "" && ghosts_in($data[username], $sghosts, $Charset)) || (C_HIDE_MODERS && $Status == "m") || (C_HIDE_ADMINS && ($Status == "a" || $Status == "t")))
+	if (($sghosts != "" && ghosts_in($usernameu, $sghosts, $Charset)) || (C_HIDE_MODERS && $Status == "m") || (C_HIDE_ADMINS && ($Status == "a" || $Status == "t")))
 	{
 		if ($Status == "a" || $Status == "t") $superghost = 1;
 		else $ghost = 1;
 	}
-	$User = user_status($data[username],$data[status],$ghost,$superghost);
+	$User = user_status($usernameu,$statusu,$ghost,$superghost);
 	echo("<tr><td>".$User."");
-	echo("<td>".$data[ip]."</td>");
-	echo("<td>".$data[browser]."</td></tr>");
+	echo("<td>".$ipu."</td>");
+	echo("<td>".$browseru."</td></tr>");
 }
 ?>
 </table>

@@ -51,6 +51,8 @@ define("L_MIN", "分");
 define("L_MINS", "分鐘");
 define("L_HOUR", "時");
 define("L_HOURS", "小時");
+define("L_DAY", "天");
+define("L_DAYS", "天");
 
 // registration stuff:
 define("L_REG_1", "密碼");
@@ -421,7 +423,7 @@ define("L_PRIV_WISP", "(耳語)");
 
 // Color Input Box mod by Ciprian
 define("L_ENABLED", "啟用");
-define("L_DISABLED", "禁用");
+define("L_DISABLED", "已禁用");
 define("L_COLOR_HEAD_SETTINGS", "在此服務器上的當前設置：");
 define("L_COLOR_HEAD_SETTINGSa", "預設的色彩：");
 define("L_COLOR_HEAD_SETTINGSb", "預設的色彩：");

@@ -93,9 +93,9 @@ if(isset($S) && $S)
 		};
 	};
 
-	$conn = @mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
+#	$conn = @mysql_connect(C_DB_HOST, C_DB_USER, C_DB_PASS) or die ('<center>Error: Could Not Connect To Database');
 	echo("<TD><SPAN style=\"color:blue; background-color:black;\"><b>Debug data:</b><SPAN style=\"color:yellow;\"><br />Admin name: <b><font color=green>".C_ADMIN_NAME."</font></b><br />Admin email: <b><font color=green>".C_ADMIN_EMAIL."</font></b><br />App name: <b><font color=green>".APP_NAME."</font></b><br />Chat name: <b><font color=green>".C_CHAT_NAME."</font></b><br />App version: <b><font color=green>".APP_VERSION.APP_MINOR."</font></b><br />Hosting Server IP: <b><font color=green>".$_SERVER['SERVER_ADDR']."</font></b>".(@fsockopen("gravatar.com", 80, $errno, $errstr, 2) ? "" : "<br /><b><font color=red>Cache not allowed - cannot get access to gravatar.com!</font></b>")."<br />Apache version: <b><font color=green>".apache_get_version()."</font></b><br />Php server version: <b>".(version_compare(PHP_VERSION,'5') < 0 ? "<font color=red>".PHP_VERSION." - Cache not allowed</font>" : "<font color=green>".PHP_VERSION."</font>")."</b><br />allow_url_fopen: <b>".(!(ini_get("allow_url_fopen")) ? "<font color=red>".L_DISABLED." - Cache not allowed</font>" : "<font color=green>".L_ENABLED."</font>")."</b><br />allow_url_include: <b>".(!(ini_get("allow_url_include")) ? "<font color=red>".L_DISABLED."</font>" : "<font color=green>".L_ENABLED."</font>")."</b><br />fsockopen: <b>".(!(@fsockopen("ciprianmp.com", 80, $errno, $errstr, 2) && @fsockopen("phpmychat.svn.sourceforge.net", 80, $errno, $errstr, 2)) ? "<font color=red>".L_DISABLED." - Update checking not allowed</font>" : "<font color=green>".L_ENABLED."</font>")."</b><br />file_get_contents: <b>".(!(function_exists("file_get_contents")) ? "<font color=red>".L_DISABLED." - Cache not allowed</font>" : "<font color=green>".L_ENABLED."</font>")."</b><br />MySQL server version: <b><font color=green>".mysql_get_server_info()."</font></b></SPAN></SPAN></TD>");
-	@mysql_close($conn);
+#	@mysql_close($conn);
 }
 // The following line is required
 $DbLink->close();

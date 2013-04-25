@@ -52,6 +52,8 @@ define("L_MIN", "phút");
 define("L_MINS", "phút");
 define("L_HOUR", "giờ");
 define("L_HOURS", "giờ");
+define("L_DAY", "ngày");
+define("L_DAYS", "ngày");
 
 // registration stuff:
 define("L_REG_1", "Pass đăng nhập");

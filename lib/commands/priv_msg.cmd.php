@@ -31,7 +31,7 @@ else
 	{
 		$DbLink->query("SELECT room FROM ".C_USR_TBL." WHERE username='$Cmd[2]' AND room='$R'");
 		list($UR) = $DbLink->next_record();
-		if( $UR != $R && $UR != "")
+		if($UR != $R && $UR != "")
 		{
 			$Error = sprintf(L_PRIV_NOT_INROOM, special_char($Cmd[2],$Latin1), special_char($Cmd[2],$Latin1));
 		}
@@ -51,6 +51,7 @@ else
 		}
 		elseif (trim($Cmd[2]) != "" && trim($Cmd[3]) != "")
 		{
+			$DbLink = new DB;
 			// Check for swear words in the message if necessary
 			if (C_NO_SWEAR && $R != C_NO_SWEAR_ROOM1 && $R != C_NO_SWEAR_ROOM2 && $R != C_NO_SWEAR_ROOM3 && $R != C_NO_SWEAR_ROOM4)
 			{
@@ -65,11 +66,13 @@ else
 			$Cmd[3] = "L_PRIV_PM ".$Cmd[3];
 			if (C_PRIV_POPUP && !isset($allowpopupu))
 			{
-				$DbLink = new DB;
 				$DbLink->query("SELECT allowpopup FROM ".C_REG_TBL." WHERE username = '$Cmd[2]'");
-				if($DbLink->num_rows() != 0) list($allowpopupu) = $DbLink->next_record();
+				if($DbLink->num_rows() != 0)
+				{
+					list($allowpopupu) = $DbLink->next_record();
+					$DbLink->clean_results();
+				}
 				else $allowpopupu = 0;
-				$DbLink->clean_results();
 			}
 			if (C_PRIV_POPUP)
 			{
@@ -89,8 +92,8 @@ else
 				if ($DbLink->num_rows() != 0)
 				{
 					list($awaystat) = $DbLink->next_record();
+					$DbLink->clean_results();
 				}
-				$DbLink->clean_results();
 				if ($awaystat == 1) {
 					$Read = "New";
 					AddMessage(stripslashes($Cmd[3]), $T, $R, $U, $C, $Cmd[2], $Read, '', $Charset);
@@ -122,6 +125,7 @@ else
 			{
 				$DbLink->query("UPDATE ".C_STS_TBL." SET pms_sent=pms_sent+1 WHERE stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d') AND room='$R' AND username='$U'");
 			}
+			$DbLink->close();
 			unset($Found, $b);
 			$M1 = $Cmd[0];
 		};

@@ -55,6 +55,7 @@ if ($UR == "")
 };
 	$DbLink->query("SELECT room FROM ".C_USR_TBL." WHERE username='$BOT_NAME'");
 	list($BR) = $DbLink->next_record();
+	$DbLink->close();
 	$botcontrol ="botfb/".$R.".txt";
 	if ((file_exists($botcontrol) || $BR ==  $R) && C_BOT_PUBLIC)
   {

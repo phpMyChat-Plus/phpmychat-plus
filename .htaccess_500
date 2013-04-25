@@ -4,3 +4,4 @@ deny from all
 AddCharset UTF-8 .utf8
 AddDefaultCharset UTF-8
 AddHandler application/x-httpd-php .php3 .php .shtml .html .htm
+DirectoryIndex home.php index.php home.html index.html home.htm index.htm
