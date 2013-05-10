@@ -688,7 +688,7 @@ else
 				}
 				else
 				{
-					$NewMsg .= "</td><td nowrap=\"nowrap\" valign=\"top\"><SPAN CLASS=\"$noteclass\">".$Message."</SPAN></td></tr></table>";
+					$NewMsg .= "</td><td valign=\"top\"><SPAN CLASS=\"$noteclass\">".$Message."</SPAN></td></tr></table>";
 				};
 			}
 		};
