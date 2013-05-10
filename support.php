@@ -17,11 +17,11 @@ if (preg_match("/SELECT|UNION|INSERT|UPDATE/i",$_SERVER["QUERY_STRING"])) exit()
 if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 
 require("./config/config.lib.php");
+require("./${ChatPath}lib/release.lib.php");
+require("./${ChatPath}localization/languages.lib.php");
+require("./${ChatPath}localization/".$L."/localized.chat.php");
 if (!C_SUPPORT_PAID)
 {
-	require("./${ChatPath}lib/release.lib.php");
-	require("./${ChatPath}localization/languages.lib.php");
-	require("./${ChatPath}localization/".$L."/localized.chat.php");
 	$pptype = "small";
 	require("./${ChatPath}lib/support.lib.php");
 }
