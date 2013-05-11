@@ -219,7 +219,7 @@ When I look at my errorlog I see the following message:
 Check if the permissions of your "plus" (chat name) and "config" folders are 777. If so, change them to 755 (chmod). Sometimes, due to different servers configuration, they remain 777 after the installing process.
 Reply: As soon as I changed the permission of the plus folder (chat folder in my case) it worked.
 17A2.
-As of php 5.3 version and up, the included .htaccess directives might be restricted on the server, returning this 500 error. Delete the initial .htaccess, look in the same root directory of your chat for the file called .htaccess500 and rename it back to .htaccess
+As of php 5.3 version and up, some of the included .htaccess directives might be restricted on the server, returning this 500 error. Delete the existing .htaccess, look in the same root directory of your chat for the file called .htaccess500 and rename it to .htaccess.
 This should fix it.
 IMPORTANT: I strongly recommend not to let your chat main folder without a .htaccess file, as it protects the config and other sensitive data!
 
@@ -248,7 +248,7 @@ You should be done!
 20Q.
 After uploading the chat content and trying a first run, I get a "500 Internal server error encountered" message.
 20A.
-This happens on php servers which have the .htaccess files disabled. Delete the .htaccess file from the main directory.
+This happens on php servers which have the .htaccess files disabled. Delete the .htaccess file from the main directory. Also read the 17A2 above.
 
 21Q.
 I'm on a shared server and I cannot login by ftp in the first page of the installer wizard.
