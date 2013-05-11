@@ -1,0 +1,1953 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+<!-- Free software (c)2008 Square Bear. -->
+<!-- This program is open source code released under -->
+<!-- the terms of the GNU General Public License -->
+<!-- as published by the Free Software Foundation. -->
+<!-- Complies with AIML 1.0.1 Tag Set Specification -->
+<!-- as adopted by the ALICE A.I. Foundation. -->
+<!-- calendar.aiml by Square Bear -->
+<!-- http://www.square-bear.co.uk -->
+
+<!-- Extended by Ciprian Murariu to let the user pick up his own month and/or year -->
+<!-- Added the year layout calendar by Ciprian Murariu <bestofchip-69@yahoo.com> -->
+<!--
+User input USAGE:		- we consider as example that the current month is March and current year is 2008
+1. Monthly layouts (1 month at a time):
+calendar			- displays the current month of the current year;
+					eg: "calendar" will display the month March of 2008
+calendar {month}		- displays the chosen month of the current year;
+					{allowed formats: january-december | may | jan-dec | april | 1-12 | 01-09} - case insensitive!
+					e.g. "calendar 6" will display the month June of 2008
+					e.g. "calendar 10" will display the month September of 2008
+					e.g. "calendar feb" will display the month February of 2008
+calendar {month} [year]	- displays the chosen month of the chosen year;
+					{allowed formats: january-december | may | jan-dec | april | 1-12 | 01-09} - case insensitive!
+					[allowed formats: 0-299 | 1700-2299] - years entered in a 1-3 figures format will be set the 21st century (current)
+					e.g. "calendar 11 9" will display the month November of 2009 (21st century automatically set)
+					e.g. "calendar aug 1989" will display the month August of 1989
+1. Yearly layouts (12 months at a time):
+full calendar		- displays the current year;
+					eg: "full calendar" will display the year 2008
+full calendar [year]	- displays the chosen year;
+					[allowed formats: 0-299 | 1700-2299] - years entered in a 1-3 figures format will be set the 21st century (current)
+					e.g. "full calendar 9" will display the year 2009 (21st century automatically set)
+					e.g. "full calendar 111" will display the year 2111 (21st century automatically set)
+					e.g. "full calendar 1989" will display the year 1989
+-->
+
+<!-- Version 26.03.2008 -->
+<!-- This layout is using tables -->
+<!-- Demo at: http://ciprianmp.com/plus/bot/talk.php -->
+
+<!-- Work out which calendar format to display. -->
+
+<category>
+<pattern>FULL CALENDAR</pattern>
+<template>
+	<srai>FULL CALENDAR <date format="%Y"/></srai>
+</template>
+</category>
+
+<category>
+<pattern>FULL CALENDAR _</pattern>
+<template>
+	<think>
+		<condition name="month">
+			<li value=""><set name="month">January</set><set name="date">01</set><set name="masteryear"><star/></set><srai>YFIXYEAR</srai></li>
+		</condition>
+		<condition name="year">
+			<li value="">
+				<srai>YSPLITYEAR</srai>
+				<set name="year"><get name="century"/><get name="splityear"/></set>
+			</li>
+		</condition>
+		<condition name="checkdate">
+			<li value="">
+				<srai>YGETDATE</srai>
+			</li>
+		</condition>
+	<srai>YGETEACHMONTHDATA</srai>
+	</think>
+	<condition name="wrongyear">
+		<li value="WRONG">Sorry <get name="name"/> but the chosen year <get name="masteryear"/> is not between 1700 and 2299 (centuries 18<sup>th</sup> to 23<sup>rd</sup>).<br />Please try again.<br /><think><set name="wrongyear"></set></think></li>
+		<li>Today is <date/>.<br />Below is the calendar for <get name="year"/> (<get name="centuryth"/> century).<br />
+	<table class="table" border="1">
+	<tr align="center" valign="top" class="tabtitle"><td colspan="4"><font color="white"><b>= <get name="year"/> Calendar =</b></font></td></tr>
+	<tr valign="top"><td><table class="table" border="1"><srai>YMONTHHEADER</srai><srai>YGETMONTHLAYOUT</srai></table></td>
+	<think>
+		<set name="day"></set>
+		<set name="month"></set>
+		<set name="monthno"></set>
+		<set name="weekday"></set>
+		<set name="checkdate"></set>
+		<set name="layout"></set>
+<set name="month">February</set>
+		<condition name="day">
+			<li value="">
+				<srai>YGETDATE</srai>
+			</li>
+		</condition>
+	<srai>YGETEACHMONTHDATA</srai>
+	</think>
+	<td><table class="table" border="1"><srai>YMONTHHEADER</srai><srai>YGETMONTHLAYOUT</srai></table></td>
+	<think>
+		<set name="day"></set>
+		<set name="month"></set>
+		<set name="monthno"></set>
+		<set name="weekday"></set>
+		<set name="checkdate"></set>
+		<set name="layout"></set>
+<set name="month">March</set>
+		<condition name="day">
+			<li value="">
+				<srai>YGETDATE</srai>
+			</li>
+		</condition>
+	<srai>YGETEACHMONTHDATA</srai>
+	</think>
+	<td><table class="table" border="1"><srai>YMONTHHEADER</srai><srai>YGETMONTHLAYOUT</srai></table></td>
+	<think>
+		<set name="day"></set>
+		<set name="month"></set>
+		<set name="monthno"></set>
+		<set name="weekday"></set>
+		<set name="checkdate"></set>
+		<set name="layout"></set>
+<set name="month">April</set>
+		<condition name="day">
+			<li value="">
+				<srai>YGETDATE</srai>
+			</li>
+		</condition>
+	<srai>YGETEACHMONTHDATA</srai>
+	</think>
+	<td><table class="table" border="1"><srai>YMONTHHEADER</srai><srai>YGETMONTHLAYOUT</srai></table></td></tr>
+	<think>
+		<set name="day"></set>
+		<set name="month"></set>
+		<set name="monthno"></set>
+		<set name="weekday"></set>
+		<set name="checkdate"></set>
+		<set name="layout"></set>
+<set name="month">May</set>
+		<condition name="day">
+			<li value="">
+				<srai>YGETDATE</srai>
+			</li>
+		</condition>
+	<srai>YGETEACHMONTHDATA</srai>
+	</think>
+	<tr valign="top"><td><table class="table" border="1"><srai>YMONTHHEADER</srai><srai>YGETMONTHLAYOUT</srai></table></td>
+	<think>
+		<set name="day"></set>
+		<set name="month"></set>
+		<set name="monthno"></set>
+		<set name="weekday"></set>
+		<set name="checkdate"></set>
+		<set name="layout"></set>
+<set name="month">June</set>
+		<condition name="day">
+			<li value="">
+				<srai>YGETDATE</srai>
+			</li>
+		</condition>
+	<srai>YGETEACHMONTHDATA</srai>
+	</think>
+	<td><table class="table" border="1"><srai>YMONTHHEADER</srai><srai>YGETMONTHLAYOUT</srai></table></td>
+	<think>
+		<set name="day"></set>
+		<set name="month"></set>
+		<set name="monthno"></set>
+		<set name="weekday"></set>
+		<set name="checkdate"></set>
+		<set name="layout"></set>
+<set name="month">July</set>
+		<condition name="day">
+			<li value="">
+				<srai>YGETDATE</srai>
+			</li>
+		</condition>
+	<srai>YGETEACHMONTHDATA</srai>
+	</think>
+	<td><table class="table" border="1"><srai>YMONTHHEADER</srai><srai>YGETMONTHLAYOUT</srai></table></td>
+	<think>
+		<set name="day"></set>
+		<set name="month"></set>
+		<set name="monthno"></set>
+		<set name="weekday"></set>
+		<set name="checkdate"></set>
+		<set name="layout"></set>
+<set name="month">August</set>
+		<condition name="day">
+			<li value="">
+				<srai>YGETDATE</srai>
+			</li>
+		</condition>
+	<srai>YGETEACHMONTHDATA</srai>
+	</think>
+	<td><table class="table" border="1"><srai>YMONTHHEADER</srai><srai>YGETMONTHLAYOUT</srai></table></td></tr>
+	<think>
+		<set name="day"></set>
+		<set name="month"></set>
+		<set name="monthno"></set>
+		<set name="weekday"></set>
+		<set name="checkdate"></set>
+		<set name="layout"></set>
+<set name="month">September</set>
+		<condition name="day">
+			<li value="">
+				<srai>YGETDATE</srai>
+			</li>
+		</condition>
+	<srai>YGETEACHMONTHDATA</srai>
+	</think>
+	<tr valign="top"><td><table class="table" border="1"><srai>YMONTHHEADER</srai><srai>YGETMONTHLAYOUT</srai></table></td>
+	<think>
+		<set name="day"></set>
+		<set name="month"></set>
+		<set name="monthno"></set>
+		<set name="weekday"></set>
+		<set name="checkdate"></set>
+		<set name="layout"></set>
+<set name="month">October</set>
+		<condition name="day">
+			<li value="">
+				<srai>YGETDATE</srai>
+			</li>
+		</condition>
+	<srai>YGETEACHMONTHDATA</srai>
+	</think>
+	<td><table class="table" border="1"><srai>YMONTHHEADER</srai><srai>YGETMONTHLAYOUT</srai></table></td>
+	<think>
+		<set name="day"></set>
+		<set name="month"></set>
+		<set name="monthno"></set>
+		<set name="weekday"></set>
+		<set name="checkdate"></set>
+		<set name="layout"></set>
+<set name="month">November</set>
+		<condition name="day">
+			<li value="">
+				<srai>YGETDATE</srai>
+			</li>
+		</condition>
+	<srai>YGETEACHMONTHDATA</srai>
+	</think>
+	<td><table class="table" border="1"><srai>YMONTHHEADER</srai><srai>YGETMONTHLAYOUT</srai></table></td>
+	<think>
+		<set name="day"></set>
+		<set name="month"></set>
+		<set name="monthno"></set>
+		<set name="weekday"></set>
+		<set name="checkdate"></set>
+		<set name="layout"></set>
+<set name="month">December</set>
+		<condition name="day">
+			<li value="">
+				<srai>YGETDATE</srai>
+			</li>
+		</condition>
+	<srai>YGETEACHMONTHDATA</srai>
+	</think>
+	<td><table class="table" border="1"><srai>YMONTHHEADER</srai><srai>YGETMONTHLAYOUT</srai></table></td></tr></table>
+	<think>
+		<set name="day"></set>
+		<set name="month"></set>
+		<set name="monthno"></set>
+		<set name="date"></set>
+		<set name="getdate"></set>
+		<set name="year"></set>
+		<set name="splityear"></set>
+		<set name="masteryear"></set>
+		<set name="layout"></set>
+		<set name="weekday"></set>
+		<set name="checkdate"></set>
+		<set name="endofmonth"></set>
+		<set name="29th"></set>
+		<set name="30th"></set>
+		<set name="31st"></set>
+		<set name="centuryth"></set>
+	</think>
+		</li>
+	</condition>
+</template>
+</category>
+
+<category>
+<pattern>CALENDAR</pattern>
+<template>
+<srai>CALENDAR <date format="%B"/> <date format="%Y"/></srai>
+</template>
+</category>
+
+<category>
+<pattern>CALENDAR _</pattern>
+<template>
+<srai>CALENDAR <star/> <date format="%Y"/></srai>
+</template>
+</category>
+
+<category>
+<pattern>CALENDAR _ _</pattern>
+<template>
+<think>
+	<set name="month"><star index="1"/></set><set name="date">01</set><set name="masteryear"><star index="2"/></set>
+	<srai>YFIXYEAR</srai>
+	<condition name="year">
+		<li value="">
+			<srai>YSPLITYEAR</srai>
+			<set name="year"><get name="century"/><get name="splityear"/></set>
+		</li>
+	</condition>
+	<srai>YGETMONTH</srai>
+	<condition>
+		<li name="day" value="">
+			<srai>YGETDATE</srai>
+		</li>
+	</condition>
+	<srai>YGETEACHMONTHDATA</srai>
+</think>
+	<condition name="wrongyear">
+		<li value="WRONG">Sorry <get name="name"/> but the chosen year <get name="masteryear"/> is not between 1700 and 2299 (centuries 18<sup>th</sup> to 23<sup>rd</sup>).<br />Please try again.<br /><think><set name="wrongyear"></set></think></li>
+		<li>Today is <date/>.<br />Below is the calendar for <get name="month"/> <get name="year"/> (<get name="centuryth"/> century).<br />
+	<table class="table" border="1"><srai>MONTHHEADER</srai><srai>YGETMONTHLAYOUT</srai></table>
+<think>
+		<set name="day"></set>
+		<set name="month"></set>
+		<set name="monthno"></set>
+		<set name="date"></set>
+		<set name="getdate"></set>
+		<set name="year"></set>
+		<set name="splityear"></set>
+		<set name="masteryear"></set>
+		<set name="weekday"></set>
+		<set name="layout"></set>
+		<set name="checkdate"></set>
+		<set name="endofmonth"></set>
+		<set name="29th"></set>
+		<set name="30th"></set>
+		<set name="31st"></set>
+		<set name="centuryth"></set>
+</think>
+		</li>
+	</condition>
+</template>
+</category>
+
+<category>
+<pattern>YGETMONTH</pattern>
+<template>
+<think>
+	<condition name="month">
+		<li value="januar"><set name="month">January</set></li>
+		<li value="jan"><set name="month">January</set></li>
+		<li value="1"><set name="month">January</set></li>
+		<li value="01"><set name="month">January</set></li>
+		<li value="februar"><set name="month">February</set></li>
+		<li value="febr"><set name="month">February</set></li>
+		<li value="feb"><set name="month">February</set></li>
+		<li value="2"><set name="month">February</set></li>
+		<li value="02"><set name="month">February</set></li>
+		<li value="mar"><set name="month">March</set></li>
+		<li value="3"><set name="month">March</set></li>
+		<li value="03"><set name="month">March</set></li>
+		<li value="apr"><set name="month">April</set></li>
+		<li value="4"><set name="month">April</set></li>
+		<li value="04"><set name="month">April</set></li>
+		<li value="5"><set name="month">May</set></li>
+		<li value="05"><set name="month">May</set></li>
+		<li value="jun"><set name="month">June</set></li>
+		<li value="6"><set name="month">June</set></li>
+		<li value="06"><set name="month">June</set></li>
+		<li value="jul"><set name="month">July</set></li>
+		<li value="7"><set name="month">July</set></li>
+		<li value="07"><set name="month">July</set></li>
+		<li value="aug"><set name="month">August</set></li>
+		<li value="8"><set name="month">August</set></li>
+		<li value="08"><set name="month">August</set></li>
+		<li value="septembr"><set name="month">September</set></li>
+		<li value="septem"><set name="month">September</set></li>
+		<li value="sept"><set name="month">September</set></li>
+		<li value="sep"><set name="month">September</set></li>
+		<li value="9"><set name="month">September</set></li>
+		<li value="09"><set name="month">September</set></li>
+		<li value="octob"><set name="month">October</set></li>
+		<li value="octo"><set name="month">October</set></li>
+		<li value="oct"><set name="month">October</set></li>
+		<li value="10"><set name="month">October</set></li>
+		<li value="novemb"><set name="month">November</set></li>
+		<li value="novem"><set name="month">November</set></li>
+		<li value="nov"><set name="month">November</set></li>
+		<li value="11"><set name="month">November</set></li>
+		<li value="decemb"><set name="month">December</set></li>
+		<li value="decem"><set name="month">December</set></li>
+		<li value="dec"><set name="month">December</set></li>
+		<li value="12"><set name="month">December</set></li>
+	</condition>
+</think>
+</template>
+</category>
+
+<category>
+<pattern>YGETEACHMONTHDATA</pattern>
+<template>
+<think>
+	<set name="29th">29</set>
+	<set name="30th">30</set>
+	<set name="31st">31</set>
+	<condition name="month">
+		<li value="February">
+		<set name="29th">--</set>
+		<set name="30th">--</set>
+		<set name="31st">--</set>
+		<condition name="year">
+			<li value="2000"><set name="29th">29</set></li>
+			<li value="2004"><set name="29th">29</set></li>
+			<li value="2008"><set name="29th">29</set></li>
+			<li value="2012"><set name="29th">29</set></li>
+			<li value="2016"><set name="29th">29</set></li>
+			<li value="2020"><set name="29th">29</set></li>
+			<li value="2024"><set name="29th">29</set></li>
+			<li value="2028"><set name="29th">29</set></li>
+			<li value="2032"><set name="29th">29</set></li>
+			<li value="2036"><set name="29th">29</set></li>
+			<li value="2040"><set name="29th">29</set></li>
+			<li value="2044"><set name="29th">29</set></li>
+			<li value="2048"><set name="29th">29</set></li>
+			<li value="2052"><set name="29th">29</set></li>
+			<li value="2056"><set name="29th">29</set></li>
+			<li value="2060"><set name="29th">29</set></li>
+			<li value="2064"><set name="29th">29</set></li>
+			<li value="2068"><set name="29th">29</set></li>
+			<li value="2072"><set name="29th">29</set></li>
+			<li value="2076"><set name="29th">29</set></li>
+			<li value="2080"><set name="29th">29</set></li>
+			<li value="2084"><set name="29th">29</set></li>
+			<li value="2088"><set name="29th">29</set></li>
+			<li value="2092"><set name="29th">29</set></li>
+			<li value="2096"><set name="29th">29</set></li>
+		</condition>
+		</li>
+		<li value="April"><set name="31st">--</set></li>
+		<li value="June"><set name="31st">--</set></li>
+		<li value="September"><set name="31st">--</set></li>
+		<li value="November"><set name="31st">--</set></li>
+	</condition>
+	<condition name="date">
+		<li value="01"><set name="getdate">01</set></li>
+		<li value="02"><set name="getdate">02</set></li>
+		<li value="03"><set name="getdate">03</set></li>
+		<li value="04"><set name="getdate">04</set></li>
+		<li value="05"><set name="getdate">05</set></li>
+		<li value="06"><set name="getdate">06</set></li>
+		<li value="07"><set name="getdate">07</set></li>
+		<li value="08"><set name="getdate">01</set></li>
+		<li value="09"><set name="getdate">02</set></li>
+		<li value="10"><set name="getdate">03</set></li>
+		<li value="11"><set name="getdate">04</set></li>
+		<li value="12"><set name="getdate">05</set></li>
+		<li value="13"><set name="getdate">06</set></li>
+		<li value="14"><set name="getdate">07</set></li>
+		<li value="15"><set name="getdate">01</set></li>
+		<li value="16"><set name="getdate">02</set></li>
+		<li value="17"><set name="getdate">03</set></li>
+		<li value="18"><set name="getdate">04</set></li>
+		<li value="19"><set name="getdate">05</set></li>
+		<li value="20"><set name="getdate">06</set></li>
+		<li value="21"><set name="getdate">07</set></li>
+		<li value="22"><set name="getdate">01</set></li>
+		<li value="23"><set name="getdate">02</set></li>
+		<li value="24"><set name="getdate">03</set></li>
+		<li value="25"><set name="getdate">04</set></li>
+		<li value="26"><set name="getdate">05</set></li>
+		<li value="27"><set name="getdate">06</set></li>
+		<li value="28"><set name="getdate">07</set></li>
+		<li value="29"><set name="getdate">01</set></li>
+		<li value="30"><set name="getdate">02</set></li>
+		<li value="31"><set name="getdate">03</set></li>
+	</condition>
+	<set name="checkdate"><get name="day"/> <get name="getdate"/></set>
+	<condition name="checkdate">
+		<li value="Monday 01"><set name="layout">1</set></li>
+		<li value="Monday 02"><set name="layout">7</set></li>
+		<li value="Monday 03"><set name="layout">6</set></li>
+		<li value="Monday 04"><set name="layout">5</set></li>
+		<li value="Monday 05"><set name="layout">4</set></li>
+		<li value="Monday 06"><set name="layout">3</set></li>
+		<li value="Monday 07"><set name="layout">2</set></li>
+		<li value="Tuesday 01"><set name="layout">2</set></li>
+		<li value="Tuesday 02"><set name="layout">1</set></li>
+		<li value="Tuesday 03"><set name="layout">7</set></li>
+		<li value="Tuesday 04"><set name="layout">6</set></li>
+		<li value="Tuesday 05"><set name="layout">5</set></li>
+		<li value="Tuesday 06"><set name="layout">4</set></li>
+		<li value="Tuesday 07"><set name="layout">3</set></li>
+		<li value="Wednesday 01"><set name="layout">3</set></li>
+		<li value="Wednesday 02"><set name="layout">2</set></li>
+		<li value="Wednesday 03"><set name="layout">1</set></li>
+		<li value="Wednesday 04"><set name="layout">7</set></li>
+		<li value="Wednesday 05"><set name="layout">6</set></li>
+		<li value="Wednesday 06"><set name="layout">5</set></li>
+		<li value="Wednesday 07"><set name="layout">4</set></li>
+		<li value="Thursday 01"><set name="layout">4</set></li>
+		<li value="Thursday 02"><set name="layout">3</set></li>
+		<li value="Thursday 03"><set name="layout">2</set></li>
+		<li value="Thursday 04"><set name="layout">1</set></li>
+		<li value="Thursday 05"><set name="layout">7</set></li>
+		<li value="Thursday 06"><set name="layout">6</set></li>
+		<li value="Thursday 07"><set name="layout">5</set></li>
+		<li value="Friday 01"><set name="layout">5</set></li>
+		<li value="Friday 02"><set name="layout">4</set></li>
+		<li value="Friday 03"><set name="layout">3</set></li>
+		<li value="Friday 04"><set name="layout">2</set></li>
+		<li value="Friday 05"><set name="layout">1</set></li>
+		<li value="Friday 06"><set name="layout">7</set></li>
+		<li value="Friday 07"><set name="layout">6</set></li>
+		<li value="Saturday 01"><set name="layout">6</set></li>
+		<li value="Saturday 02"><set name="layout">5</set></li>
+		<li value="Saturday 03"><set name="layout">4</set></li>
+		<li value="Saturday 04"><set name="layout">3</set></li>
+		<li value="Saturday 05"><set name="layout">2</set></li>
+		<li value="Saturday 06"><set name="layout">1</set></li>
+		<li value="Saturday 07"><set name="layout">7</set></li>
+		<li value="Sunday 01"><set name="layout">7</set></li>
+		<li value="Sunday 02"><set name="layout">6</set></li>
+		<li value="Sunday 03"><set name="layout">5</set></li>
+		<li value="Sunday 04"><set name="layout">4</set></li>
+		<li value="Sunday 05"><set name="layout">3</set></li>
+		<li value="Sunday 06"><set name="layout">2</set></li>
+		<li value="Sunday 07"><set name="layout">1</set></li>
+	</condition>
+</think>
+</template>
+</category>
+
+<category>
+<pattern>YGETMONTHLAYOUT</pattern>
+<template>
+<condition name="layout">
+	<li value="7"><srai>CALLAYOUT1</srai></li>
+	<li value="1"><srai>CALLAYOUT2</srai></li>
+	<li value="2"><srai>CALLAYOUT3</srai></li>
+	<li value="3"><srai>CALLAYOUT4</srai></li>
+	<li value="4"><srai>CALLAYOUT5</srai></li>
+	<li value="5"><srai>CALLAYOUT6</srai></li>
+	<li value="6"><srai>CALLAYOUT7</srai></li>
+</condition>
+</template>
+</category>
+
+<category>
+<pattern>YGETDATE</pattern>
+<template>
+<think>
+	<srai>YCHECKMONTH</srai>
+	<srai>YPADDATE</srai>
+	<srai>YADDYEAR</srai>
+	<srai>YADDMONTH</srai>
+	<srai>YADDCENTURY</srai>
+	<condition name="monthno">
+		<li value="01"><srai>YSUBLEAPYEAR</srai></li>
+		<li value="02"><srai>YSUBLEAPYEAR</srai></li>
+	</condition>
+	<srai>YADDDATE</srai>
+	<srai>YCONVERTDAY</srai>
+</think>
+</template>
+</category>
+
+<category>
+<pattern>YCHECKMONTH</pattern>
+<template>
+<think>
+	<condition name="month">
+		<li value="JANUARY"><set name="monthno">01</set></li>
+		<li value="FEBRUARY"><set name="monthno">02</set></li>
+		<li value="MARCH"><set name="monthno">03</set></li>
+		<li value="APRIL"><set name="monthno">04</set></li>
+		<li value="MAY"><set name="monthno">05</set></li>
+		<li value="JUNE"><set name="monthno">06</set></li>
+		<li value="JULY"><set name="monthno">07</set></li>
+		<li value="AUGUST"><set name="monthno">08</set></li>
+		<li value="SEPTEMBER"><set name="monthno">09</set></li>
+		<li value="OCTOBER"><set name="monthno">10</set></li>
+		<li value="NOVEMBER"><set name="monthno">11</set></li>
+		<li value="DECEMBER"><set name="monthno">12</set></li>
+	</condition>
+</think>
+</template>
+</category>
+
+
+<!-- Pad the date out to two characters if the chatter has only entered 1 digit -->
+
+<category>
+<pattern>YPADDATE</pattern>
+<template>
+<think>
+	<condition name="date">
+		<li value="1"><set name="date">01</set></li>
+		<li value="2"><set name="date">02</set></li>
+		<li value="3"><set name="date">03</set></li>
+		<li value="4"><set name="date">04</set></li>
+		<li value="5"><set name="date">05</set></li>
+		<li value="6"><set name="date">06</set></li>
+		<li value="7"><set name="date">07</set></li>
+		<li value="8"><set name="date">08</set></li>
+		<li value="9"><set name="date">09</set></li>
+	</condition>
+</think>
+</template>
+</category>
+
+
+<!-- Work out the weekday number -->
+
+<category>
+<pattern>YADDYEAR</pattern>
+<template>
+<think>
+	<condition name="splityear">
+		<li value="00"><set name="weekday">0</set></li>
+		<li value="01"><set name="weekday">1</set></li>
+		<li value="02"><set name="weekday">2</set></li>
+		<li value="03"><set name="weekday">3</set></li>
+		<li value="04"><set name="weekday">5</set></li>
+		<li value="05"><set name="weekday">6</set></li>
+		<li value="06"><set name="weekday">0</set></li>
+		<li value="07"><set name="weekday">1</set></li>
+		<li value="08"><set name="weekday">3</set></li>
+		<li value="09"><set name="weekday">4</set></li>
+		<li value="10"><set name="weekday">5</set></li>
+		<li value="11"><set name="weekday">6</set></li>
+		<li value="12"><set name="weekday">1</set></li>
+		<li value="13"><set name="weekday">2</set></li>
+		<li value="14"><set name="weekday">3</set></li>
+		<li value="15"><set name="weekday">4</set></li>
+		<li value="16"><set name="weekday">6</set></li>
+		<li value="17"><set name="weekday">0</set></li>
+		<li value="18"><set name="weekday">1</set></li>
+		<li value="19"><set name="weekday">2</set></li>
+		<li value="20"><set name="weekday">4</set></li>
+		<li value="21"><set name="weekday">5</set></li>
+		<li value="22"><set name="weekday">6</set></li>
+		<li value="23"><set name="weekday">0</set></li>
+		<li value="24"><set name="weekday">2</set></li>
+		<li value="25"><set name="weekday">3</set></li>
+		<li value="26"><set name="weekday">4</set></li>
+		<li value="27"><set name="weekday">5</set></li>
+		<li value="28"><set name="weekday">0</set></li>
+		<li value="29"><set name="weekday">1</set></li>
+		<li value="30"><set name="weekday">2</set></li>
+		<li value="31"><set name="weekday">3</set></li>
+		<li value="32"><set name="weekday">5</set></li>
+		<li value="33"><set name="weekday">6</set></li>
+		<li value="34"><set name="weekday">0</set></li>
+		<li value="35"><set name="weekday">1</set></li>
+		<li value="36"><set name="weekday">3</set></li>
+		<li value="37"><set name="weekday">4</set></li>
+		<li value="38"><set name="weekday">5</set></li>
+		<li value="39"><set name="weekday">6</set></li>
+		<li value="40"><set name="weekday">1</set></li>
+		<li value="41"><set name="weekday">2</set></li>
+		<li value="42"><set name="weekday">3</set></li>
+		<li value="43"><set name="weekday">4</set></li>
+		<li value="44"><set name="weekday">6</set></li>
+		<li value="45"><set name="weekday">0</set></li>
+		<li value="46"><set name="weekday">1</set></li>
+		<li value="47"><set name="weekday">2</set></li>
+		<li value="48"><set name="weekday">4</set></li>
+		<li value="49"><set name="weekday">5</set></li>
+		<li value="50"><set name="weekday">6</set></li>
+		<li value="51"><set name="weekday">0</set></li>
+		<li value="52"><set name="weekday">2</set></li>
+		<li value="53"><set name="weekday">3</set></li>
+		<li value="54"><set name="weekday">4</set></li>
+		<li value="55"><set name="weekday">5</set></li>
+		<li value="56"><set name="weekday">0</set></li>
+		<li value="57"><set name="weekday">1</set></li>
+		<li value="58"><set name="weekday">2</set></li>
+		<li value="59"><set name="weekday">3</set></li>
+		<li value="60"><set name="weekday">5</set></li>
+		<li value="61"><set name="weekday">6</set></li>
+		<li value="62"><set name="weekday">0</set></li>
+		<li value="63"><set name="weekday">1</set></li>
+		<li value="64"><set name="weekday">3</set></li>
+		<li value="65"><set name="weekday">4</set></li>
+		<li value="66"><set name="weekday">5</set></li>
+		<li value="67"><set name="weekday">6</set></li>
+		<li value="68"><set name="weekday">1</set></li>
+		<li value="69"><set name="weekday">2</set></li>
+		<li value="70"><set name="weekday">3</set></li>
+		<li value="71"><set name="weekday">4</set></li>
+		<li value="72"><set name="weekday">6</set></li>
+		<li value="73"><set name="weekday">0</set></li>
+		<li value="74"><set name="weekday">1</set></li>
+		<li value="75"><set name="weekday">2</set></li>
+		<li value="76"><set name="weekday">4</set></li>
+		<li value="77"><set name="weekday">5</set></li>
+		<li value="78"><set name="weekday">6</set></li>
+		<li value="79"><set name="weekday">0</set></li>
+		<li value="80"><set name="weekday">2</set></li>
+		<li value="81"><set name="weekday">3</set></li>
+		<li value="82"><set name="weekday">4</set></li>
+		<li value="83"><set name="weekday">5</set></li>
+		<li value="84"><set name="weekday">0</set></li>
+		<li value="85"><set name="weekday">1</set></li>
+		<li value="86"><set name="weekday">2</set></li>
+		<li value="87"><set name="weekday">3</set></li>
+		<li value="88"><set name="weekday">5</set></li>
+		<li value="89"><set name="weekday">6</set></li>
+		<li value="90"><set name="weekday">0</set></li>
+		<li value="91"><set name="weekday">1</set></li>
+		<li value="92"><set name="weekday">3</set></li>
+		<li value="93"><set name="weekday">4</set></li>
+		<li value="94"><set name="weekday">5</set></li>
+		<li value="95"><set name="weekday">6</set></li>
+		<li value="96"><set name="weekday">1</set></li>
+		<li value="97"><set name="weekday">2</set></li>
+		<li value="98"><set name="weekday">3</set></li>
+		<li value="99"><set name="weekday">4</set></li>
+		<li><set name="wrongyear">wrong</set></li>
+	</condition>
+</think>
+</template>
+</category>
+
+
+<!-- Add the month of the year -->
+
+<category>
+<pattern>YADDMONTH</pattern>
+<template>
+<think>
+	<condition name="monthno">
+		<li value="01"><srai>YADD3DAY</srai><srai>YADD3DAY</srai></li>
+		<li value="02"><srai>YADDDAY</srai><srai>YADDDAY</srai></li>
+		<li value="03"><srai>YADDDAY</srai><srai>YADDDAY</srai></li>
+		<li value="04"><srai>YADD3DAY</srai><srai>YADDDAY</srai><srai>YADDDAY</srai></li>
+		<li value="06"><srai>YADD3DAY</srai></li>
+		<li value="07"><srai>YADD3DAY</srai><srai>YADDDAY</srai><srai>YADDDAY</srai></li>
+		<li value="08"><srai>YADDDAY</srai></li>
+		<li value="09"><srai>YADD3DAY</srai><srai>YADDDAY</srai></li>
+		<li value="10"><srai>YADD3DAY</srai><srai>YADD3DAY</srai></li>
+		<li value="11"><srai>YADDDAY</srai><srai>YADDDAY</srai></li>
+		<li value="12"><srai>YADD3DAY</srai><srai>YADDDAY</srai></li>
+	</condition>
+</think>
+</template>
+</category>
+
+
+<!-- Add the century if not in the 21st century -->
+
+<category>
+<pattern>YADDCENTURY</pattern>
+<template>
+<think>
+	<condition name="century">
+		<li value="17"><srai>YADD3DAY</srai><srai>YADDDAY</srai><srai>YADDDAY</srai></li>
+		<li value="18"><srai>YADD3DAY</srai></li>
+		<li value="19"><srai>YADDDAY</srai></li>
+		<li value="21"><srai>YSUBDAY</srai><srai>YSUBDAY</srai></li>
+		<li value="22"><srai>YSUBDAY</srai><srai>YSUBDAY</srai><srai>YSUBDAY</srai><srai>YSUBDAY</srai></li>
+	</condition>
+</think>
+</template>
+</category>
+
+
+<!-- Take away 1 for a leap year. 2000 is a leap year but 1700, 1800, 1900, 2100 and 2200 are not -->
+
+<category>
+<pattern>YSUBLEAPYEAR</pattern>
+<template>
+<think>
+	<condition name="splityear">
+		<li value="04"><srai>YSUBDAY</srai></li>
+		<li value="08"><srai>YSUBDAY</srai></li>
+		<li value="12"><srai>YSUBDAY</srai></li>
+		<li value="16"><srai>YSUBDAY</srai></li>
+		<li value="20"><srai>YSUBDAY</srai></li>
+		<li value="24"><srai>YSUBDAY</srai></li>
+		<li value="28"><srai>YSUBDAY</srai></li>
+		<li value="32"><srai>YSUBDAY</srai></li>
+		<li value="36"><srai>YSUBDAY</srai></li>
+		<li value="40"><srai>YSUBDAY</srai></li>
+		<li value="44"><srai>YSUBDAY</srai></li>
+		<li value="48"><srai>YSUBDAY</srai></li>
+		<li value="52"><srai>YSUBDAY</srai></li>
+		<li value="56"><srai>YSUBDAY</srai></li>
+		<li value="60"><srai>YSUBDAY</srai></li>
+		<li value="64"><srai>YSUBDAY</srai></li>
+		<li value="68"><srai>YSUBDAY</srai></li>
+		<li value="72"><srai>YSUBDAY</srai></li>
+		<li value="76"><srai>YSUBDAY</srai></li>
+		<li value="80"><srai>YSUBDAY</srai></li>
+		<li value="84"><srai>YSUBDAY</srai></li>
+		<li value="88"><srai>YSUBDAY</srai></li>
+		<li value="92"><srai>YSUBDAY</srai></li>
+		<li value="96"><srai>YSUBDAY</srai></li>
+	</condition>
+	<condition name="year">
+		<li value="2000"><srai>YSUBDAY</srai></li>
+	</condition>
+</think>
+</template>
+</category>
+
+
+<!-- Add the date of the month -->
+
+<category>
+<pattern>YADDDATE</pattern>
+<template>
+<think>
+	<condition name="date">
+		<li value="01"><srai>YADDDAY</srai></li>
+		<li value="02"><srai>YADDDAY</srai><srai>YADDDAY</srai></li>
+		<li value="03"><srai>YADD3DAY</srai></li>
+		<li value="04"><srai>YADD3DAY</srai><srai>YADDDAY</srai></li>
+		<li value="05"><srai>YADD3DAY</srai><srai>YADDDAY</srai><srai>YADDDAY</srai></li>
+		<li value="06"><srai>YADD3DAY</srai><srai>YADD3DAY</srai></li>
+		<li value="08"><srai>YADDDAY</srai></li>
+		<li value="09"><srai>YADDDAY</srai><srai>YADDDAY</srai></li>
+		<li value="10"><srai>YADD3DAY</srai></li>
+		<li value="11"><srai>YADD3DAY</srai><srai>YADDDAY</srai></li>
+		<li value="12"><srai>YADD3DAY</srai><srai>YADDDAY</srai><srai>YADDDAY</srai></li>
+		<li value="13"><srai>YADD3DAY</srai><srai>YADD3DAY</srai></li>
+		<li value="15"><srai>YADDDAY</srai></li>
+		<li value="16"><srai>YADDDAY</srai><srai>YADDDAY</srai></li>
+		<li value="17"><srai>YADD3DAY</srai></li>
+		<li value="18"><srai>YADD3DAY</srai><srai>YADDDAY</srai></li>
+		<li value="19"><srai>YADD3DAY</srai><srai>YADDDAY</srai><srai>YADDDAY</srai></li>
+		<li value="20"><srai>YADD3DAY</srai><srai>YADD3DAY</srai></li>
+		<li value="22"><srai>YADDDAY</srai></li>
+		<li value="23"><srai>YADDDAY</srai><srai>YADDDAY</srai></li>
+		<li value="24"><srai>YADD3DAY</srai></li>
+		<li value="25"><srai>YADD3DAY</srai><srai>YADDDAY</srai></li>
+		<li value="26"><srai>YADD3DAY</srai><srai>YADDDAY</srai><srai>YADDDAY</srai></li>
+		<li value="27"><srai>YADD3DAY</srai><srai>YADD3DAY</srai></li>
+		<li value="29"><srai>YADDDAY</srai></li>
+		<li value="30"><srai>YADDDAY</srai><srai>YADDDAY</srai></li>
+		<li value="31"><srai>YADD3DAY</srai></li>
+	</condition>
+</think>
+</template>
+</category>
+
+<!-- Work out the day name -->
+
+<category>
+<pattern>YCONVERTDAY</pattern>
+<template>
+<think>
+	<condition name="weekday">
+		<li value="0"><set name="day">Sunday</set></li>
+		<li value="1"><set name="day">Monday</set></li>
+		<li value="2"><set name="day">Tuesday</set></li>
+		<li value="3"><set name="day">Wednesday</set></li>
+		<li value="4"><set name="day">Thursday</set></li>
+		<li value="5"><set name="day">Friday</set></li>
+		<li value="6"><set name="day">Saturday</set></li>
+	</condition>
+</think>
+</template>
+</category>
+
+<category>
+<pattern>YADD3DAY</pattern>
+<template>
+<think>
+	<srai>YADDDAY</srai>
+	<srai>YADDDAY</srai>
+	<srai>YADDDAY</srai>
+</think>
+</template>
+</category>
+
+
+<!-- Category to add 1 to the day. Set the day to 0 if it reaches 6 -->
+
+<category>
+<pattern>YADDDAY</pattern>
+<template>
+<think>
+	<condition name="weekday">
+		<li value="0"><set name="weekday">1</set></li>
+		<li value="1"><set name="weekday">2</set></li>
+		<li value="2"><set name="weekday">3</set></li>
+		<li value="3"><set name="weekday">4</set></li>
+		<li value="4"><set name="weekday">5</set></li>
+		<li value="5"><set name="weekday">6</set></li>
+		<li value="6"><set name="weekday">0</set></li>
+	</condition>
+</think>
+</template>
+</category>
+
+
+<!-- Category to subtract 1 from the day. Set the day to 6 if it reaches 0 -->
+
+<category>
+<pattern>YSUBDAY</pattern>
+<template>
+<think>
+	<condition name="weekday">
+		<li value="6"><set name="weekday">5</set></li>
+		<li value="5"><set name="weekday">4</set></li>
+		<li value="4"><set name="weekday">3</set></li>
+		<li value="3"><set name="weekday">2</set></li>
+		<li value="2"><set name="weekday">1</set></li>
+		<li value="1"><set name="weekday">0</set></li>
+		<li value="0"><set name="weekday">6</set></li>
+	</condition>
+</think>
+</template>
+</category>
+
+
+<!-- LARGE Category to fix the master year input if century not entered (sets to 21st century) and break it into two halves. -->
+
+<category>
+<pattern>YFIXYEAR</pattern>
+<template>
+<think>
+	<condition name="masteryear">
+		<li value="0"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">00</set></li>
+		<li value="1"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">01</set></li>
+		<li value="2"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">02</set></li>
+		<li value="3"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">03</set></li>
+		<li value="4"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">04</set></li>
+		<li value="5"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">05</set></li>
+		<li value="6"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">06</set></li>
+		<li value="7"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">07</set></li>
+		<li value="8"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">08</set></li>
+		<li value="9"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">09</set></li>
+		<li value="00"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">00</set></li>
+		<li value="01"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">01</set></li>
+		<li value="02"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">02</set></li>
+		<li value="03"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">03</set></li>
+		<li value="04"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">04</set></li>
+		<li value="05"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">05</set></li>
+		<li value="06"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">06</set></li>
+		<li value="07"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">07</set></li>
+		<li value="08"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">08</set></li>
+		<li value="09"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">09</set></li>
+		<li value="10"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">10</set></li>
+		<li value="11"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">11</set></li>
+		<li value="12"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">12</set></li>
+		<li value="13"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">13</set></li>
+		<li value="14"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">14</set></li>
+		<li value="15"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">15</set></li>
+		<li value="16"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">16</set></li>
+		<li value="17"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">17</set></li>
+		<li value="18"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">18</set></li>
+		<li value="19"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">19</set></li>
+		<li value="20"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">20</set></li>
+		<li value="21"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">21</set></li>
+		<li value="22"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">22</set></li>
+		<li value="23"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">23</set></li>
+		<li value="24"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">24</set></li>
+		<li value="25"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">25</set></li>
+		<li value="26"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">26</set></li>
+		<li value="27"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">27</set></li>
+		<li value="28"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">28</set></li>
+		<li value="29"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">29</set></li>
+		<li value="30"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">30</set></li>
+		<li value="31"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">31</set></li>
+		<li value="32"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">32</set></li>
+		<li value="33"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">33</set></li>
+		<li value="34"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">34</set></li>
+		<li value="35"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">35</set></li>
+		<li value="36"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">36</set></li>
+		<li value="37"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">37</set></li>
+		<li value="38"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">38</set></li>
+		<li value="39"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">39</set></li>
+		<li value="40"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">40</set></li>
+		<li value="41"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">41</set></li>
+		<li value="42"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">42</set></li>
+		<li value="43"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">43</set></li>
+		<li value="44"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">44</set></li>
+		<li value="45"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">45</set></li>
+		<li value="46"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">46</set></li>
+		<li value="47"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">47</set></li>
+		<li value="48"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">48</set></li>
+		<li value="49"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">49</set></li>
+		<li value="50"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">50</set></li>
+		<li value="51"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">51</set></li>
+		<li value="52"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">52</set></li>
+		<li value="53"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">53</set></li>
+		<li value="54"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">54</set></li>
+		<li value="55"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">55</set></li>
+		<li value="56"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">56</set></li>
+		<li value="57"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">57</set></li>
+		<li value="58"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">58</set></li>
+		<li value="59"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">59</set></li>
+		<li value="60"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">60</set></li>
+		<li value="61"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">61</set></li>
+		<li value="62"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">62</set></li>
+		<li value="63"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">63</set></li>
+		<li value="64"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">64</set></li>
+		<li value="65"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">65</set></li>
+		<li value="66"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">66</set></li>
+		<li value="67"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">67</set></li>
+		<li value="68"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">68</set></li>
+		<li value="69"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">69</set></li>
+		<li value="70"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">70</set></li>
+		<li value="71"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">71</set></li>
+		<li value="72"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">72</set></li>
+		<li value="73"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">73</set></li>
+		<li value="74"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">74</set></li>
+		<li value="75"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">75</set></li>
+		<li value="76"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">76</set></li>
+		<li value="77"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">77</set></li>
+		<li value="78"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">78</set></li>
+		<li value="79"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">79</set></li>
+		<li value="80"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">80</set></li>
+		<li value="81"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">81</set></li>
+		<li value="82"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">82</set></li>
+		<li value="83"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">83</set></li>
+		<li value="84"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">84</set></li>
+		<li value="85"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">85</set></li>
+		<li value="86"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">86</set></li>
+		<li value="87"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">87</set></li>
+		<li value="88"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">88</set></li>
+		<li value="89"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">89</set></li>
+		<li value="90"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">90</set></li>
+		<li value="91"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">91</set></li>
+		<li value="92"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">92</set></li>
+		<li value="93"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">93</set></li>
+		<li value="94"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">94</set></li>
+		<li value="95"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">95</set></li>
+		<li value="96"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">96</set></li>
+		<li value="97"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">97</set></li>
+		<li value="98"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">98</set></li>
+		<li value="99"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">99</set></li>
+		<li value="100"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">00</set></li>
+		<li value="101"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">01</set></li>
+		<li value="102"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">02</set></li>
+		<li value="103"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">03</set></li>
+		<li value="104"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">04</set></li>
+		<li value="105"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">05</set></li>
+		<li value="106"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">06</set></li>
+		<li value="107"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">07</set></li>
+		<li value="108"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">08</set></li>
+		<li value="109"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">09</set></li>
+		<li value="110"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">10</set></li>
+		<li value="111"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">11</set></li>
+		<li value="112"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">12</set></li>
+		<li value="113"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">13</set></li>
+		<li value="114"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">14</set></li>
+		<li value="115"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">15</set></li>
+		<li value="116"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">16</set></li>
+		<li value="117"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">17</set></li>
+		<li value="118"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">18</set></li>
+		<li value="119"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">19</set></li>
+		<li value="120"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">20</set></li>
+		<li value="121"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">21</set></li>
+		<li value="122"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">22</set></li>
+		<li value="123"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">23</set></li>
+		<li value="124"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">24</set></li>
+		<li value="125"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">25</set></li>
+		<li value="126"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">26</set></li>
+		<li value="127"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">27</set></li>
+		<li value="128"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">28</set></li>
+		<li value="129"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">29</set></li>
+		<li value="130"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">30</set></li>
+		<li value="131"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">31</set></li>
+		<li value="132"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">32</set></li>
+		<li value="133"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">33</set></li>
+		<li value="134"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">34</set></li>
+		<li value="135"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">35</set></li>
+		<li value="136"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">36</set></li>
+		<li value="137"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">37</set></li>
+		<li value="138"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">38</set></li>
+		<li value="139"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">39</set></li>
+		<li value="140"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">40</set></li>
+		<li value="141"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">41</set></li>
+		<li value="142"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">42</set></li>
+		<li value="143"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">43</set></li>
+		<li value="144"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">44</set></li>
+		<li value="145"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">45</set></li>
+		<li value="146"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">46</set></li>
+		<li value="147"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">47</set></li>
+		<li value="148"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">48</set></li>
+		<li value="149"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">49</set></li>
+		<li value="150"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">50</set></li>
+		<li value="151"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">51</set></li>
+		<li value="152"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">52</set></li>
+		<li value="153"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">53</set></li>
+		<li value="154"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">54</set></li>
+		<li value="155"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">55</set></li>
+		<li value="156"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">56</set></li>
+		<li value="157"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">57</set></li>
+		<li value="158"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">58</set></li>
+		<li value="159"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">59</set></li>
+		<li value="160"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">60</set></li>
+		<li value="161"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">61</set></li>
+		<li value="162"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">62</set></li>
+		<li value="163"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">63</set></li>
+		<li value="164"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">64</set></li>
+		<li value="165"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">65</set></li>
+		<li value="166"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">66</set></li>
+		<li value="167"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">67</set></li>
+		<li value="168"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">68</set></li>
+		<li value="169"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">69</set></li>
+		<li value="170"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">70</set></li>
+		<li value="171"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">71</set></li>
+		<li value="172"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">72</set></li>
+		<li value="173"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">73</set></li>
+		<li value="174"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">74</set></li>
+		<li value="175"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">75</set></li>
+		<li value="176"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">76</set></li>
+		<li value="177"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">77</set></li>
+		<li value="178"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">78</set></li>
+		<li value="179"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">79</set></li>
+		<li value="180"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">80</set></li>
+		<li value="181"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">81</set></li>
+		<li value="182"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">82</set></li>
+		<li value="183"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">83</set></li>
+		<li value="184"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">84</set></li>
+		<li value="185"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">85</set></li>
+		<li value="186"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">86</set></li>
+		<li value="187"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">87</set></li>
+		<li value="188"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">88</set></li>
+		<li value="189"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">89</set></li>
+		<li value="190"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">90</set></li>
+		<li value="191"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">91</set></li>
+		<li value="192"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">92</set></li>
+		<li value="193"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">93</set></li>
+		<li value="194"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">94</set></li>
+		<li value="195"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">95</set></li>
+		<li value="196"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">96</set></li>
+		<li value="197"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">97</set></li>
+		<li value="198"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">98</set></li>
+		<li value="199"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">99</set></li>
+		<li value="200"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">00</set></li>
+		<li value="201"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">01</set></li>
+		<li value="202"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">02</set></li>
+		<li value="203"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">03</set></li>
+		<li value="204"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">04</set></li>
+		<li value="205"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">05</set></li>
+		<li value="206"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">06</set></li>
+		<li value="207"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">07</set></li>
+		<li value="208"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">08</set></li>
+		<li value="209"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">09</set></li>
+		<li value="210"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">10</set></li>
+		<li value="211"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">11</set></li>
+		<li value="212"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">12</set></li>
+		<li value="213"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">13</set></li>
+		<li value="214"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">14</set></li>
+		<li value="215"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">15</set></li>
+		<li value="216"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">16</set></li>
+		<li value="217"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">17</set></li>
+		<li value="218"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">18</set></li>
+		<li value="219"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">19</set></li>
+		<li value="220"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">20</set></li>
+		<li value="221"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">21</set></li>
+		<li value="222"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">22</set></li>
+		<li value="223"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">23</set></li>
+		<li value="224"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">24</set></li>
+		<li value="225"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">25</set></li>
+		<li value="226"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">26</set></li>
+		<li value="227"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">27</set></li>
+		<li value="228"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">28</set></li>
+		<li value="229"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">29</set></li>
+		<li value="230"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">30</set></li>
+		<li value="231"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">31</set></li>
+		<li value="232"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">32</set></li>
+		<li value="233"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">33</set></li>
+		<li value="234"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">34</set></li>
+		<li value="235"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">35</set></li>
+		<li value="236"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">36</set></li>
+		<li value="237"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">37</set></li>
+		<li value="238"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">38</set></li>
+		<li value="239"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">39</set></li>
+		<li value="240"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">40</set></li>
+		<li value="241"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">41</set></li>
+		<li value="242"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">42</set></li>
+		<li value="243"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">43</set></li>
+		<li value="244"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">44</set></li>
+		<li value="245"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">45</set></li>
+		<li value="246"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">46</set></li>
+		<li value="247"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">47</set></li>
+		<li value="248"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">48</set></li>
+		<li value="249"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">49</set></li>
+		<li value="250"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">50</set></li>
+		<li value="251"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">51</set></li>
+		<li value="252"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">52</set></li>
+		<li value="253"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">53</set></li>
+		<li value="254"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">54</set></li>
+		<li value="255"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">55</set></li>
+		<li value="256"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">56</set></li>
+		<li value="257"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">57</set></li>
+		<li value="258"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">58</set></li>
+		<li value="259"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">59</set></li>
+		<li value="260"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">60</set></li>
+		<li value="261"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">61</set></li>
+		<li value="262"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">62</set></li>
+		<li value="263"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">63</set></li>
+		<li value="264"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">64</set></li>
+		<li value="265"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">65</set></li>
+		<li value="266"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">66</set></li>
+		<li value="267"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">67</set></li>
+		<li value="268"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">68</set></li>
+		<li value="269"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">69</set></li>
+		<li value="270"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">70</set></li>
+		<li value="271"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">71</set></li>
+		<li value="272"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">72</set></li>
+		<li value="273"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">73</set></li>
+		<li value="274"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">74</set></li>
+		<li value="275"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">75</set></li>
+		<li value="276"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">76</set></li>
+		<li value="277"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">77</set></li>
+		<li value="278"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">78</set></li>
+		<li value="279"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">79</set></li>
+		<li value="280"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">80</set></li>
+		<li value="281"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">81</set></li>
+		<li value="282"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">82</set></li>
+		<li value="283"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">83</set></li>
+		<li value="284"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">84</set></li>
+		<li value="285"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">85</set></li>
+		<li value="286"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">86</set></li>
+		<li value="287"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">87</set></li>
+		<li value="288"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">88</set></li>
+		<li value="289"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">89</set></li>
+		<li value="290"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">90</set></li>
+		<li value="291"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">91</set></li>
+		<li value="292"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">92</set></li>
+		<li value="293"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">93</set></li>
+		<li value="294"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">94</set></li>
+		<li value="295"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">95</set></li>
+		<li value="296"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">96</set></li>
+		<li value="297"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">97</set></li>
+		<li value="298"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">98</set></li>
+		<li value="299"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">99</set></li>
+		<li value="1700"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">00</set></li>
+		<li value="1701"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">01</set></li>
+		<li value="1702"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">02</set></li>
+		<li value="1703"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">03</set></li>
+		<li value="1704"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">04</set></li>
+		<li value="1705"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">05</set></li>
+		<li value="1706"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">06</set></li>
+		<li value="1707"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">07</set></li>
+		<li value="1708"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">08</set></li>
+		<li value="1709"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">09</set></li>
+		<li value="1710"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">10</set></li>
+		<li value="1711"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">11</set></li>
+		<li value="1712"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">12</set></li>
+		<li value="1713"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">13</set></li>
+		<li value="1714"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">14</set></li>
+		<li value="1715"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">15</set></li>
+		<li value="1716"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">16</set></li>
+		<li value="1717"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">17</set></li>
+		<li value="1718"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">18</set></li>
+		<li value="1719"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">19</set></li>
+		<li value="1720"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">20</set></li>
+		<li value="1721"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">21</set></li>
+		<li value="1722"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">22</set></li>
+		<li value="1723"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">23</set></li>
+		<li value="1724"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">24</set></li>
+		<li value="1725"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">25</set></li>
+		<li value="1726"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">26</set></li>
+		<li value="1727"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">27</set></li>
+		<li value="1728"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">28</set></li>
+		<li value="1729"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">29</set></li>
+		<li value="1730"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">30</set></li>
+		<li value="1731"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">31</set></li>
+		<li value="1732"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">32</set></li>
+		<li value="1733"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">33</set></li>
+		<li value="1734"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">34</set></li>
+		<li value="1735"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">35</set></li>
+		<li value="1736"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">36</set></li>
+		<li value="1737"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">37</set></li>
+		<li value="1738"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">38</set></li>
+		<li value="1739"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">39</set></li>
+		<li value="1740"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">40</set></li>
+		<li value="1741"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">41</set></li>
+		<li value="1742"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">42</set></li>
+		<li value="1743"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">43</set></li>
+		<li value="1744"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">44</set></li>
+		<li value="1745"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">45</set></li>
+		<li value="1746"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">46</set></li>
+		<li value="1747"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">47</set></li>
+		<li value="1748"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">48</set></li>
+		<li value="1749"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">49</set></li>
+	</condition>
+</think>
+</template>
+</category>
+
+<!-- LARGE Category to break the year into two halves, as there doesn't seem to be any way to do this easily. -->
+
+<category>
+<pattern>YSPLITYEAR</pattern>
+<template>
+<think>
+	<condition name="masteryear">
+		<li value="1750"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">50</set></li>
+		<li value="1751"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">51</set></li>
+		<li value="1752"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">52</set></li>
+		<li value="1753"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">53</set></li>
+		<li value="1754"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">54</set></li>
+		<li value="1755"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">55</set></li>
+		<li value="1756"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">56</set></li>
+		<li value="1757"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">57</set></li>
+		<li value="1758"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">58</set></li>
+		<li value="1759"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">59</set></li>
+		<li value="1760"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">60</set></li>
+		<li value="1761"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">61</set></li>
+		<li value="1762"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">62</set></li>
+		<li value="1763"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">63</set></li>
+		<li value="1764"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">64</set></li>
+		<li value="1765"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">65</set></li>
+		<li value="1766"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">66</set></li>
+		<li value="1767"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">67</set></li>
+		<li value="1768"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">68</set></li>
+		<li value="1769"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">69</set></li>
+		<li value="1770"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">70</set></li>
+		<li value="1771"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">71</set></li>
+		<li value="1772"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">72</set></li>
+		<li value="1773"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">73</set></li>
+		<li value="1774"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">74</set></li>
+		<li value="1775"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">75</set></li>
+		<li value="1776"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">76</set></li>
+		<li value="1777"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">77</set></li>
+		<li value="1778"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">78</set></li>
+		<li value="1779"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">79</set></li>
+		<li value="1780"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">80</set></li>
+		<li value="1781"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">81</set></li>
+		<li value="1782"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">82</set></li>
+		<li value="1783"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">83</set></li>
+		<li value="1784"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">84</set></li>
+		<li value="1785"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">85</set></li>
+		<li value="1786"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">86</set></li>
+		<li value="1787"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">87</set></li>
+		<li value="1788"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">88</set></li>
+		<li value="1789"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">89</set></li>
+		<li value="1790"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">90</set></li>
+		<li value="1791"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">91</set></li>
+		<li value="1792"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">92</set></li>
+		<li value="1793"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">93</set></li>
+		<li value="1794"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">94</set></li>
+		<li value="1795"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">95</set></li>
+		<li value="1796"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">96</set></li>
+		<li value="1797"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">97</set></li>
+		<li value="1798"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">98</set></li>
+		<li value="1799"><set name="century">17</set><set name="centuryth">18th</set><set name="splityear">99</set></li>
+		<li value="1800"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">00</set></li>
+		<li value="1801"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">01</set></li>
+		<li value="1802"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">02</set></li>
+		<li value="1803"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">03</set></li>
+		<li value="1804"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">04</set></li>
+		<li value="1805"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">05</set></li>
+		<li value="1806"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">06</set></li>
+		<li value="1807"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">07</set></li>
+		<li value="1808"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">08</set></li>
+		<li value="1809"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">09</set></li>
+		<li value="1810"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">10</set></li>
+		<li value="1811"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">11</set></li>
+		<li value="1812"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">12</set></li>
+		<li value="1813"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">13</set></li>
+		<li value="1814"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">14</set></li>
+		<li value="1815"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">15</set></li>
+		<li value="1816"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">16</set></li>
+		<li value="1817"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">17</set></li>
+		<li value="1818"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">18</set></li>
+		<li value="1819"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">19</set></li>
+		<li value="1820"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">20</set></li>
+		<li value="1821"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">21</set></li>
+		<li value="1822"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">22</set></li>
+		<li value="1823"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">23</set></li>
+		<li value="1824"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">24</set></li>
+		<li value="1825"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">25</set></li>
+		<li value="1826"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">26</set></li>
+		<li value="1827"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">27</set></li>
+		<li value="1828"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">28</set></li>
+		<li value="1829"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">29</set></li>
+		<li value="1830"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">30</set></li>
+		<li value="1831"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">31</set></li>
+		<li value="1832"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">32</set></li>
+		<li value="1833"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">33</set></li>
+		<li value="1834"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">34</set></li>
+		<li value="1835"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">35</set></li>
+		<li value="1836"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">36</set></li>
+		<li value="1837"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">37</set></li>
+		<li value="1838"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">38</set></li>
+		<li value="1839"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">39</set></li>
+		<li value="1840"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">40</set></li>
+		<li value="1841"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">41</set></li>
+		<li value="1842"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">42</set></li>
+		<li value="1843"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">43</set></li>
+		<li value="1844"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">44</set></li>
+		<li value="1845"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">45</set></li>
+		<li value="1846"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">46</set></li>
+		<li value="1847"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">47</set></li>
+		<li value="1848"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">48</set></li>
+		<li value="1849"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">49</set></li>
+		<li value="1850"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">50</set></li>
+		<li value="1851"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">51</set></li>
+		<li value="1852"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">52</set></li>
+		<li value="1853"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">53</set></li>
+		<li value="1854"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">54</set></li>
+		<li value="1855"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">55</set></li>
+		<li value="1856"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">56</set></li>
+		<li value="1857"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">57</set></li>
+		<li value="1858"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">58</set></li>
+		<li value="1859"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">59</set></li>
+		<li value="1860"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">60</set></li>
+		<li value="1861"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">61</set></li>
+		<li value="1862"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">62</set></li>
+		<li value="1863"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">63</set></li>
+		<li value="1864"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">64</set></li>
+		<li value="1865"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">65</set></li>
+		<li value="1866"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">66</set></li>
+		<li value="1867"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">67</set></li>
+		<li value="1868"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">68</set></li>
+		<li value="1869"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">69</set></li>
+		<li value="1870"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">70</set></li>
+		<li value="1871"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">71</set></li>
+		<li value="1872"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">72</set></li>
+		<li value="1873"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">73</set></li>
+		<li value="1874"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">74</set></li>
+		<li value="1875"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">75</set></li>
+		<li value="1876"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">76</set></li>
+		<li value="1877"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">77</set></li>
+		<li value="1878"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">78</set></li>
+		<li value="1879"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">79</set></li>
+		<li value="1880"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">80</set></li>
+		<li value="1881"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">81</set></li>
+		<li value="1882"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">82</set></li>
+		<li value="1883"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">83</set></li>
+		<li value="1884"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">84</set></li>
+		<li value="1885"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">85</set></li>
+		<li value="1886"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">86</set></li>
+		<li value="1887"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">87</set></li>
+		<li value="1888"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">88</set></li>
+		<li value="1889"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">89</set></li>
+		<li value="1890"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">90</set></li>
+		<li value="1891"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">91</set></li>
+		<li value="1892"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">92</set></li>
+		<li value="1893"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">93</set></li>
+		<li value="1894"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">94</set></li>
+		<li value="1895"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">95</set></li>
+		<li value="1896"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">96</set></li>
+		<li value="1897"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">97</set></li>
+		<li value="1898"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">98</set></li>
+		<li value="1899"><set name="century">18</set><set name="centuryth">19th</set><set name="splityear">99</set></li>
+		<li value="1900"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">00</set></li>
+		<li value="1901"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">01</set></li>
+		<li value="1902"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">02</set></li>
+		<li value="1903"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">03</set></li>
+		<li value="1904"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">04</set></li>
+		<li value="1905"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">05</set></li>
+		<li value="1906"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">06</set></li>
+		<li value="1907"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">07</set></li>
+		<li value="1908"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">08</set></li>
+		<li value="1909"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">09</set></li>
+		<li value="1910"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">10</set></li>
+		<li value="1911"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">11</set></li>
+		<li value="1912"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">12</set></li>
+		<li value="1913"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">13</set></li>
+		<li value="1914"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">14</set></li>
+		<li value="1915"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">15</set></li>
+		<li value="1916"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">16</set></li>
+		<li value="1917"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">17</set></li>
+		<li value="1918"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">18</set></li>
+		<li value="1919"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">19</set></li>
+		<li value="1920"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">20</set></li>
+		<li value="1921"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">21</set></li>
+		<li value="1922"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">22</set></li>
+		<li value="1923"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">23</set></li>
+		<li value="1924"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">24</set></li>
+		<li value="1925"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">25</set></li>
+		<li value="1926"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">26</set></li>
+		<li value="1927"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">27</set></li>
+		<li value="1928"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">28</set></li>
+		<li value="1929"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">29</set></li>
+		<li value="1930"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">30</set></li>
+		<li value="1931"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">31</set></li>
+		<li value="1932"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">32</set></li>
+		<li value="1933"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">33</set></li>
+		<li value="1934"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">34</set></li>
+		<li value="1935"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">35</set></li>
+		<li value="1936"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">36</set></li>
+		<li value="1937"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">37</set></li>
+		<li value="1938"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">38</set></li>
+		<li value="1939"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">39</set></li>
+		<li value="1940"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">40</set></li>
+		<li value="1941"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">41</set></li>
+		<li value="1942"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">42</set></li>
+		<li value="1943"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">43</set></li>
+		<li value="1944"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">44</set></li>
+		<li value="1945"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">45</set></li>
+		<li value="1946"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">46</set></li>
+		<li value="1947"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">47</set></li>
+		<li value="1948"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">48</set></li>
+		<li value="1949"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">49</set></li>
+		<li value="1950"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">50</set></li>
+		<li value="1951"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">51</set></li>
+		<li value="1952"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">52</set></li>
+		<li value="1953"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">53</set></li>
+		<li value="1954"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">54</set></li>
+		<li value="1955"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">55</set></li>
+		<li value="1956"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">56</set></li>
+		<li value="1957"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">57</set></li>
+		<li value="1958"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">58</set></li>
+		<li value="1959"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">59</set></li>
+		<li value="1960"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">60</set></li>
+		<li value="1961"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">61</set></li>
+		<li value="1962"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">62</set></li>
+		<li value="1963"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">63</set></li>
+		<li value="1964"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">64</set></li>
+		<li value="1965"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">65</set></li>
+		<li value="1966"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">66</set></li>
+		<li value="1967"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">67</set></li>
+		<li value="1968"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">68</set></li>
+		<li value="1969"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">69</set></li>
+		<li value="1970"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">70</set></li>
+		<li value="1971"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">71</set></li>
+		<li value="1972"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">72</set></li>
+		<li value="1973"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">73</set></li>
+		<li value="1974"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">74</set></li>
+		<li value="1975"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">75</set></li>
+		<li value="1976"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">76</set></li>
+		<li value="1977"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">77</set></li>
+		<li value="1978"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">78</set></li>
+		<li value="1979"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">79</set></li>
+		<li value="1980"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">80</set></li>
+		<li value="1981"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">81</set></li>
+		<li value="1982"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">82</set></li>
+		<li value="1983"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">83</set></li>
+		<li value="1984"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">84</set></li>
+		<li value="1985"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">85</set></li>
+		<li value="1986"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">86</set></li>
+		<li value="1987"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">87</set></li>
+		<li value="1988"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">88</set></li>
+		<li value="1989"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">89</set></li>
+		<li value="1990"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">90</set></li>
+		<li value="1991"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">91</set></li>
+		<li value="1992"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">92</set></li>
+		<li value="1993"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">93</set></li>
+		<li value="1994"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">94</set></li>
+		<li value="1995"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">95</set></li>
+		<li value="1996"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">96</set></li>
+		<li value="1997"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">97</set></li>
+		<li value="1998"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">98</set></li>
+		<li value="1999"><set name="century">19</set><set name="centuryth">20th</set><set name="splityear">99</set></li>
+		<li value="2000"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">00</set></li>
+		<li value="2001"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">01</set></li>
+		<li value="2002"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">02</set></li>
+		<li value="2003"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">03</set></li>
+		<li value="2004"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">04</set></li>
+		<li value="2005"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">05</set></li>
+		<li value="2006"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">06</set></li>
+		<li value="2007"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">07</set></li>
+		<li value="2008"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">08</set></li>
+		<li value="2009"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">09</set></li>
+		<li value="2010"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">10</set></li>
+		<li value="2011"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">11</set></li>
+		<li value="2012"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">12</set></li>
+		<li value="2013"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">13</set></li>
+		<li value="2014"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">14</set></li>
+		<li value="2015"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">15</set></li>
+		<li value="2016"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">16</set></li>
+		<li value="2017"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">17</set></li>
+		<li value="2018"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">18</set></li>
+		<li value="2019"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">19</set></li>
+		<li value="2020"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">20</set></li>
+		<li value="2021"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">21</set></li>
+		<li value="2022"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">22</set></li>
+		<li value="2023"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">23</set></li>
+		<li value="2024"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">24</set></li>
+		<li value="2025"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">25</set></li>
+		<li value="2026"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">26</set></li>
+		<li value="2027"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">27</set></li>
+		<li value="2028"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">28</set></li>
+		<li value="2029"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">29</set></li>
+		<li value="2030"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">30</set></li>
+		<li value="2031"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">31</set></li>
+		<li value="2032"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">32</set></li>
+		<li value="2033"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">33</set></li>
+		<li value="2034"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">34</set></li>
+		<li value="2035"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">35</set></li>
+		<li value="2036"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">36</set></li>
+		<li value="2037"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">37</set></li>
+		<li value="2038"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">38</set></li>
+		<li value="2039"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">39</set></li>
+		<li value="2040"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">40</set></li>
+		<li value="2041"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">41</set></li>
+		<li value="2042"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">42</set></li>
+		<li value="2043"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">43</set></li>
+		<li value="2044"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">44</set></li>
+		<li value="2045"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">45</set></li>
+		<li value="2046"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">46</set></li>
+		<li value="2047"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">47</set></li>
+		<li value="2048"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">48</set></li>
+		<li value="2049"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">49</set></li>
+		<li value="2050"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">50</set></li>
+		<li value="2051"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">51</set></li>
+		<li value="2052"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">52</set></li>
+		<li value="2053"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">53</set></li>
+		<li value="2054"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">54</set></li>
+		<li value="2055"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">55</set></li>
+		<li value="2056"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">56</set></li>
+		<li value="2057"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">57</set></li>
+		<li value="2058"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">58</set></li>
+		<li value="2059"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">59</set></li>
+		<li value="2060"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">60</set></li>
+		<li value="2061"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">61</set></li>
+		<li value="2062"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">62</set></li>
+		<li value="2063"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">63</set></li>
+		<li value="2064"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">64</set></li>
+		<li value="2065"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">65</set></li>
+		<li value="2066"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">66</set></li>
+		<li value="2067"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">67</set></li>
+		<li value="2068"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">68</set></li>
+		<li value="2069"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">69</set></li>
+		<li value="2070"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">70</set></li>
+		<li value="2071"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">71</set></li>
+		<li value="2072"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">72</set></li>
+		<li value="2073"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">73</set></li>
+		<li value="2074"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">74</set></li>
+		<li value="2075"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">75</set></li>
+		<li value="2076"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">76</set></li>
+		<li value="2077"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">77</set></li>
+		<li value="2078"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">78</set></li>
+		<li value="2079"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">79</set></li>
+		<li value="2080"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">80</set></li>
+		<li value="2081"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">81</set></li>
+		<li value="2082"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">82</set></li>
+		<li value="2083"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">83</set></li>
+		<li value="2084"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">84</set></li>
+		<li value="2085"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">85</set></li>
+		<li value="2086"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">86</set></li>
+		<li value="2087"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">87</set></li>
+		<li value="2088"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">88</set></li>
+		<li value="2089"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">89</set></li>
+		<li value="2090"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">90</set></li>
+		<li value="2091"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">91</set></li>
+		<li value="2092"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">92</set></li>
+		<li value="2093"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">93</set></li>
+		<li value="2094"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">94</set></li>
+		<li value="2095"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">95</set></li>
+		<li value="2096"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">96</set></li>
+		<li value="2097"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">97</set></li>
+		<li value="2098"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">98</set></li>
+		<li value="2099"><set name="century">20</set><set name="centuryth">21st</set><set name="splityear">99</set></li>
+		<li value="2100"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">00</set></li>
+		<li value="2101"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">01</set></li>
+		<li value="2102"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">02</set></li>
+		<li value="2103"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">03</set></li>
+		<li value="2104"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">04</set></li>
+		<li value="2105"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">05</set></li>
+		<li value="2106"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">06</set></li>
+		<li value="2107"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">07</set></li>
+		<li value="2108"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">08</set></li>
+		<li value="2109"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">09</set></li>
+		<li value="2110"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">10</set></li>
+		<li value="2111"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">11</set></li>
+		<li value="2112"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">12</set></li>
+		<li value="2113"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">13</set></li>
+		<li value="2114"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">14</set></li>
+		<li value="2115"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">15</set></li>
+		<li value="2116"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">16</set></li>
+		<li value="2117"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">17</set></li>
+		<li value="2118"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">18</set></li>
+		<li value="2119"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">19</set></li>
+		<li value="2120"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">20</set></li>
+		<li value="2121"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">21</set></li>
+		<li value="2122"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">22</set></li>
+		<li value="2123"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">23</set></li>
+		<li value="2124"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">24</set></li>
+		<li value="2125"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">25</set></li>
+		<li value="2126"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">26</set></li>
+		<li value="2127"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">27</set></li>
+		<li value="2128"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">28</set></li>
+		<li value="2129"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">29</set></li>
+		<li value="2130"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">30</set></li>
+		<li value="2131"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">31</set></li>
+		<li value="2132"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">32</set></li>
+		<li value="2133"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">33</set></li>
+		<li value="2134"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">34</set></li>
+		<li value="2135"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">35</set></li>
+		<li value="2136"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">36</set></li>
+		<li value="2137"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">37</set></li>
+		<li value="2138"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">38</set></li>
+		<li value="2139"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">39</set></li>
+		<li value="2140"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">40</set></li>
+		<li value="2141"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">41</set></li>
+		<li value="2142"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">42</set></li>
+		<li value="2143"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">43</set></li>
+		<li value="2144"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">44</set></li>
+		<li value="2145"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">45</set></li>
+		<li value="2146"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">46</set></li>
+		<li value="2147"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">47</set></li>
+		<li value="2148"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">48</set></li>
+		<li value="2149"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">49</set></li>
+		<li value="2150"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">50</set></li>
+		<li value="2151"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">51</set></li>
+		<li value="2152"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">52</set></li>
+		<li value="2153"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">53</set></li>
+		<li value="2154"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">54</set></li>
+		<li value="2155"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">55</set></li>
+		<li value="2156"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">56</set></li>
+		<li value="2157"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">57</set></li>
+		<li value="2158"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">58</set></li>
+		<li value="2159"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">59</set></li>
+		<li value="2160"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">60</set></li>
+		<li value="2161"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">61</set></li>
+		<li value="2162"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">62</set></li>
+		<li value="2163"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">63</set></li>
+		<li value="2164"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">64</set></li>
+		<li value="2165"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">65</set></li>
+		<li value="2166"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">66</set></li>
+		<li value="2167"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">67</set></li>
+		<li value="2168"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">68</set></li>
+		<li value="2169"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">69</set></li>
+		<li value="2170"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">70</set></li>
+		<li value="2171"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">71</set></li>
+		<li value="2172"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">72</set></li>
+		<li value="2173"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">73</set></li>
+		<li value="2174"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">74</set></li>
+		<li value="2175"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">75</set></li>
+		<li value="2176"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">76</set></li>
+		<li value="2177"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">77</set></li>
+		<li value="2178"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">78</set></li>
+		<li value="2179"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">79</set></li>
+		<li value="2180"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">80</set></li>
+		<li value="2181"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">81</set></li>
+		<li value="2182"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">82</set></li>
+		<li value="2183"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">83</set></li>
+		<li value="2184"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">84</set></li>
+		<li value="2185"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">85</set></li>
+		<li value="2186"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">86</set></li>
+		<li value="2187"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">87</set></li>
+		<li value="2188"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">88</set></li>
+		<li value="2189"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">89</set></li>
+		<li value="2190"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">90</set></li>
+		<li value="2191"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">91</set></li>
+		<li value="2192"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">92</set></li>
+		<li value="2193"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">93</set></li>
+		<li value="2194"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">94</set></li>
+		<li value="2195"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">95</set></li>
+		<li value="2196"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">96</set></li>
+		<li value="2197"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">97</set></li>
+		<li value="2198"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">98</set></li>
+		<li value="2199"><set name="century">21</set><set name="centuryth">22nd</set><set name="splityear">99</set></li>
+		<li value="2200"><set name="century">22</set><set name="centuryth">22nd</set><set name="splityear">00</set></li>
+		<li value="2201"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">01</set></li>
+		<li value="2202"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">02</set></li>
+		<li value="2203"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">03</set></li>
+		<li value="2204"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">04</set></li>
+		<li value="2205"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">05</set></li>
+		<li value="2206"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">06</set></li>
+		<li value="2207"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">07</set></li>
+		<li value="2208"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">08</set></li>
+		<li value="2209"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">09</set></li>
+		<li value="2210"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">10</set></li>
+		<li value="2211"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">11</set></li>
+		<li value="2212"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">12</set></li>
+		<li value="2213"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">13</set></li>
+		<li value="2214"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">14</set></li>
+		<li value="2215"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">15</set></li>
+		<li value="2216"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">16</set></li>
+		<li value="2217"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">17</set></li>
+		<li value="2218"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">18</set></li>
+		<li value="2219"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">19</set></li>
+		<li value="2220"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">20</set></li>
+		<li value="2221"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">21</set></li>
+		<li value="2222"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">22</set></li>
+		<li value="2223"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">23</set></li>
+		<li value="2224"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">24</set></li>
+		<li value="2225"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">25</set></li>
+		<li value="2226"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">26</set></li>
+		<li value="2227"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">27</set></li>
+		<li value="2228"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">28</set></li>
+		<li value="2229"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">29</set></li>
+		<li value="2230"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">30</set></li>
+		<li value="2231"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">31</set></li>
+		<li value="2232"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">32</set></li>
+		<li value="2233"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">33</set></li>
+		<li value="2234"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">34</set></li>
+		<li value="2235"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">35</set></li>
+		<li value="2236"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">36</set></li>
+		<li value="2237"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">37</set></li>
+		<li value="2238"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">38</set></li>
+		<li value="2239"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">39</set></li>
+		<li value="2240"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">40</set></li>
+		<li value="2241"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">41</set></li>
+		<li value="2242"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">42</set></li>
+		<li value="2243"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">43</set></li>
+		<li value="2244"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">44</set></li>
+		<li value="2245"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">45</set></li>
+		<li value="2246"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">46</set></li>
+		<li value="2247"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">47</set></li>
+		<li value="2248"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">48</set></li>
+		<li value="2249"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">49</set></li>
+		<li value="2250"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">50</set></li>
+		<li value="2251"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">51</set></li>
+		<li value="2252"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">52</set></li>
+		<li value="2253"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">53</set></li>
+		<li value="2254"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">54</set></li>
+		<li value="2255"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">55</set></li>
+		<li value="2256"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">56</set></li>
+		<li value="2257"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">57</set></li>
+		<li value="2258"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">58</set></li>
+		<li value="2259"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">59</set></li>
+		<li value="2260"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">60</set></li>
+		<li value="2261"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">61</set></li>
+		<li value="2262"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">62</set></li>
+		<li value="2263"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">63</set></li>
+		<li value="2264"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">64</set></li>
+		<li value="2265"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">65</set></li>
+		<li value="2266"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">66</set></li>
+		<li value="2267"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">67</set></li>
+		<li value="2268"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">68</set></li>
+		<li value="2269"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">69</set></li>
+		<li value="2270"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">70</set></li>
+		<li value="2271"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">71</set></li>
+		<li value="2272"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">72</set></li>
+		<li value="2273"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">73</set></li>
+		<li value="2274"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">74</set></li>
+		<li value="2275"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">75</set></li>
+		<li value="2276"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">76</set></li>
+		<li value="2277"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">77</set></li>
+		<li value="2278"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">78</set></li>
+		<li value="2279"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">79</set></li>
+		<li value="2280"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">80</set></li>
+		<li value="2281"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">81</set></li>
+		<li value="2282"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">82</set></li>
+		<li value="2283"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">83</set></li>
+		<li value="2284"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">84</set></li>
+		<li value="2285"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">85</set></li>
+		<li value="2286"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">86</set></li>
+		<li value="2287"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">87</set></li>
+		<li value="2288"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">88</set></li>
+		<li value="2289"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">89</set></li>
+		<li value="2290"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">90</set></li>
+		<li value="2291"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">91</set></li>
+		<li value="2292"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">92</set></li>
+		<li value="2293"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">93</set></li>
+		<li value="2294"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">94</set></li>
+		<li value="2295"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">95</set></li>
+		<li value="2296"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">96</set></li>
+		<li value="2297"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">97</set></li>
+		<li value="2298"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">98</set></li>
+		<li value="2299"><set name="century">22</set><set name="centuryth">23rd</set><set name="splityear">99</set></li>
+	</condition>
+</think>
+</template>
+</category>
+
+<!-- The different possible calendar header layouts. These may need adjusting if your bot doesn't used a fixed width font. Just pad them out with spaces until they look right. -->
+
+<category>
+<pattern>YMONTHHEADER</pattern>
+<template>
+<tr align="center" valign="top" class="tabtitle"><td colspan="7"><font color="yellow"><b><get name="month"/></b></font></td></tr>
+<tr align="center" valign="top" class="tabtitle"><td><font color="red"><b>Su</b></font></td><td><b>Mo</b></td><td><b>Tu</b></td><td><b>We</b></td><td><b>Th</b></td><td><b>Fr</b></td><td><font color="red"><b>Sa</b></font></td></tr>
+</template>
+</category>
+
+<category>
+<pattern>MONTHHEADER</pattern>
+<template>
+<tr align="center" valign="top" class="tabtitle"><td colspan="7"><font color="yellow"><b>= <get name="month"/> <get name="year"/> =</b></font></td></tr>
+<tr align="center" valign="top" class="tabtitle"><td><font color="red"><b>Su</b></font></td><td><b>Mo</b></td><td><b>Tu</b></td><td><b>We</b></td><td><b>Th</b></td><td><b>Fr</b></td><td><font color="red"><b>Sa</b></font></td></tr>
+</template>
+</category>
+
+<!-- The different possible monthly calendar layouts. These may need adjusting if your bot doesn't use a fixed width font. Just pad them out with spaces until they look right. -->
+
+<category>
+<pattern>CALLAYOUT1</pattern>
+<template>
+<tr align="center"><td><font color="red">01</font></td><td>02</td><td>03</td><td>04</td><td>05</td><td>06</td><td><font color="red">07</font></td></tr>
+<tr align="center"><td><font color="red">08</font></td><td>09</td><td>10</td><td>11</td><td>12</td><td>13</td><td><font color="red">14</font></td></tr>
+<tr align="center"><td><font color="red">15</font></td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td><font color="red">21</font></td></tr>
+<tr align="center"><td><font color="red">22</font></td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td><font color="red">28</font></td></tr>
+<tr align="center"><td><font color="red"><get name="29th"/></font></td><td><get name="30th"/></td><td><get name="31st"/></td><td>--</td><td>--</td><td>--</td><td><font color="red">--</font></td></tr>
+</template>
+</category>
+
+<category>
+<pattern>CALLAYOUT2</pattern>
+<template>
+<tr align="center"><td><font color="red">--</font></td><td>01</td><td>02</td><td>03</td><td>04</td><td>05</td><td><font color="red">06</font></td></tr>
+<tr align="center"><td><font color="red">07</font></td><td>08</td><td>09</td><td>10</td><td>11</td><td>12</td><td><font color="red">13</font></td></tr>
+<tr align="center"><td><font color="red">14</font></td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td><font color="red">20</font></td></tr>
+<tr align="center"><td><font color="red">21</font></td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td><font color="red">27</font></td></tr>
+<tr align="center"><td><font color="red">28</font></td><td><get name="29th"/></td><td><get name="30th"/></td><td><get name="31st"/></td><td>--</td><td>--</td><td><font color="red">--</font></td></tr>
+</template>
+</category>
+
+<category>
+<pattern>CALLAYOUT3</pattern>
+<template>
+<tr align="center"><td><font color="red">--</font></td><td>--</td><td>01</td><td>02</td><td>03</td><td>04</td><td><font color="red">05</font></td></tr>
+<tr align="center"><td><font color="red">06</font></td><td>07</td><td>08</td><td>09</td><td>10</td><td>11</td><td><font color="red">12</font></td></tr>
+<tr align="center"><td><font color="red">13</font></td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td><font color="red">19</font></td></tr>
+<tr align="center"><td><font color="red">20</font></td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td><font color="red">26</font></td></tr>
+<tr align="center"><td><font color="red">27</font></td><td>28</td><td><get name="29th"/></td><td><get name="30th"/></td><td><get name="31st"/></td><td>--</td><td><font color="red">--</font></td></tr>
+</template>
+</category>
+
+<category>
+<pattern>CALLAYOUT4</pattern>
+<template>
+<tr align="center"><td><font color="red">--</font></td><td>--</td><td>--</td><td>01</td><td>02</td><td>03</td><td><font color="red">04</font></td></tr>
+<tr align="center"><td><font color="red">05</font></td><td>06</td><td>07</td><td>08</td><td>09</td><td>10</td><td><font color="red">11</font></td></tr>
+<tr align="center"><td><font color="red">12</font></td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td><font color="red">18</font></td></tr>
+<tr align="center"><td><font color="red">19</font></td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td><font color="red">25</font></td></tr>
+<tr align="center"><td><font color="red">26</font></td><td>27</td><td>28</td><td><get name="29th"/></td><td><get name="30th"/></td><td><get name="31st"/></td><td><font color="red">--</font></td></tr>
+</template>
+</category>
+
+<category>
+<pattern>CALLAYOUT5</pattern>
+<template>
+<tr align="center"><td><font color="red">--</font></td><td>--</td><td>--</td><td>--</td><td>01</td><td>02</td><td><font color="red">03</font></td></tr>
+<tr align="center"><td><font color="red">04</font></td><td>05</td><td>06</td><td>07</td><td>08</td><td>09</td><td><font color="red">10</font></td></tr>
+<tr align="center"><td><font color="red">11</font></td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td><font color="red">17</font></td></tr>
+<tr align="center"><td><font color="red">18</font></td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td><font color="red">24</font></td></tr>
+<tr align="center"><td><font color="red">25</font></td><td>26</td><td>27</td><td>28</td><td><get name="29th"/></td><td><get name="30th"/></td><td><font color="red"><get name="31st"/></font></td></tr>
+</template>
+</category>
+
+<category>
+<pattern>CALLAYOUT6</pattern>
+<template>
+<tr align="center"><td><font color="red">--</font></td><td>--</td><td>--</td><td>--</td><td>--</td><td>01</td><td><font color="red">02</font></td></tr>
+<tr align="center"><td><font color="red">03</font></td><td>04</td><td>05</td><td>06</td><td>07</td><td>08</td><td><font color="red">09</font></td></tr>
+<tr align="center"><td><font color="red">10</font></td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td><font color="red">16</font></td></tr>
+<tr align="center"><td><font color="red">17</font></td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td><font color="red">23</font></td></tr>
+<tr align="center"><td><font color="red">24</font></td><td>25</td><td>26</td><td>27</td><td>28</td><td><get name="29th"/></td><td><font color="red"><get name="30th"/></font></td></tr>
+<condition name="31st">
+	<li value="31"><tr align="center"><td><font color="red">31</font></td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td><font color="red">--</font></td></tr></li>
+</condition>
+</template>
+</category>
+
+<category>
+<pattern>CALLAYOUT7</pattern>
+<template>
+<tr align="center"><td><font color="red">--</font></td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td><font color="red">01</font></td></tr>
+<tr align="center"><td><font color="red">02</font></td><td>03</td><td>04</td><td>05</td><td>06</td><td>07</td><td><font color="red">08</font></td></tr>
+<tr align="center"><td><font color="red">09</font></td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td><font color="red">15</font></td></tr>
+<tr align="center"><td><font color="red">16</font></td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td><font color="red">22</font></td></tr>
+<tr align="center"><td><font color="red">23</font></td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td><font color="red"><get name="29th"/></font></td></tr>
+<think>
+	<set name="endofmonth"><get name="30th"/> <get name="31st"/></set>
+</think>
+<condition name="endofmonth">
+	<li value="30 31"><tr align="center"><td><font color="red">30</font></td><td>31</td><td>--</td><td>--</td><td>--</td><td>--</td><td><font color="red">--</font></td></tr></li>
+	<li value="30 --"><tr align="center"><td><font color="red">30</font></td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td><font color="red">--</font></td></tr></li>
+</condition>
+</template>
+</category>
+
+</aiml>
