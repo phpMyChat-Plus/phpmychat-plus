@@ -34,6 +34,7 @@ If your users encounter bootings for no reason, try to disable sounds in chat.
 
 Fixes History:
 06.02.2013 - 1.94-RC2:
+- bot adjustments: German.aiml put in a zip so the bot will load only English  by default; bot calendar has been modified to use the US format by default - previous UK format aiml is renamed to .bak; (bot functionality related)
 - moved FB like button to the support frame; (functionality related)
 - updated the calendar plugin with the new Day.Format js function, fixing the day word in the drop down (conflict introduced with config panel translation); (functionality related)
 - fixed the secret_answer field in registration to check for disallowed characters; (functionality related)
