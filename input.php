@@ -276,12 +276,12 @@ function AddMessage($M, $T, $R, $U, $C, $Private, $Read, $RF, $Charset)
 	$M = preg_replace('/([[:space:]]|^)(www[.])/i', '\\1http://\\2', $M); // no prefix (www.myurl.ext)
 	$M = preg_replace('/([[:space:]]|^)(ftp[.])/i', '\\1ftp://\\2', $M); // no prefix (ftp.myurl.ext)
 	// Word wrap fix by Alexander Eisele <xaex@xaex.de> - deprecated by Ciprian due to japanese (2-bytes undesired trimming)
-/*
+
 	if (!preg_match_all("((http://|https://|ftp://|mailto:)[^ ]+)", $M, $pmatch))
 	{
 		$M = wordwrap($M, 40, " ", 1);
 	}
-	$prefix = '(http|https|ftp|telnet|news|gopher|file|wais)://';
+/*	$prefix = '(http|https|ftp|telnet|news|gopher|file|wais)://';
 	$pureUrl = '([[:alnum:]/\n+-=%&:_.~?]+[#[:alnum:]+-_~]*)';
 */
 	$prefix = '(http|https|ftp|telnet|news|gopher|file|wais):\/\/';
@@ -812,7 +812,8 @@ if (($status == "m") || ($status == "t") || ($status == "a")) // use this to sho
 	clock_input(gap);
 // -->
 </SCRIPT>
-	&nbsp;&nbsp;<span style="background-color:yellow; color:blue; font-weight:800" title="<?php echo($U); if($superghost) echo("&nbsp;*&nbsp;<span style=\"color:red\">".L_SUPER_GHOST."&nbsp;*</span>"); elseif($ghost) echo("&nbsp;*&nbsp;<span style=\"color:red\">".L_GHOST."&nbsp;*</span>");?>">&nbsp;<?php echo($U."&nbsp;"); if($superghost) echo("&nbsp;&nbsp;*&nbsp;<span style=\"color:red\">".L_SUPER_GHOST."&nbsp;*</span>"); elseif($ghost) echo("&nbsp;*&nbsp;<span style=\"color:red\">".L_GHOST."&nbsp;*</span>");?></span>
+<!--	&nbsp;&nbsp;<span style="background-color:yellow; color:blue; font-weight:800" title="<?php echo($U); if($superghost) echo("&nbsp;*&nbsp;<span style=\"color:red\">".L_SUPER_GHOST."&nbsp;*</span>"); elseif($ghost) echo("&nbsp;*&nbsp;<span style=\"color:red\">".L_GHOST."&nbsp;*</span>");?>">&nbsp;<?php echo($U."&nbsp;"); if($superghost) echo("&nbsp;&nbsp;*&nbsp;<span style=\"color:red\">".L_SUPER_GHOST."&nbsp;*</span>"); elseif($ghost) echo("&nbsp;*&nbsp;<span style=\"color:red\">".L_GHOST."&nbsp;*</span>");?></span>-->
+	&nbsp;&nbsp;<span style="background-color:yellow; color:blue; font-weight:800" title="<?php echo($U); if($superghost) echo(" * ".L_SUPER_GHOST." *"); elseif($ghost) echo(" * ".L_GHOST." *"); ?>">&nbsp;<?php echo($U); if($superghost) echo("&nbsp;*&nbsp;<span style=\"color:red\">".L_SUPER_GHOST."&nbsp;*</span>"); elseif($ghost) echo("&nbsp;*&nbsp;<span style=\"color:red\">".L_GHOST."&nbsp;*</span>");?></span>
 </TD>
 </TR>
 </FORM>

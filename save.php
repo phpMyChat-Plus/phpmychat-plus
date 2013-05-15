@@ -82,6 +82,7 @@ if($DbLink->num_rows() > 0)
 		$Message = str_ireplace("L_HELP_MS",sprintf(L_HELP_MS,$User),$Message);
 		$Message = str_ireplace(" COLOR=\"".$COLOR_TB."\"", " COLOR=\"".COLOR_CD."\"",$Message);
 		$Message = str_ireplace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"".L_HELP_BUZZ1."\" title=\"".L_HELP_BUZZ1."\">",$Message);
+		$Message = str_ireplace(" src=\""," src=\"http://".$_SERVER['HTTP_HOST'] . str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME'])."",$Message);
 		if ($Align == "right") $Message = str_replace("arrowr","arrowl",$Message);
 #		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
 		if (C_POPUP_LINKS || stripos($Message,'target="_blank"></a>') !== false)
@@ -171,27 +172,103 @@ if($DbLink->num_rows() > 0)
 $DbLink->clean_results();
 $DbLink->close();
 
-$Save_URL_Query = isset($Ign) ? "&Ign=".urlencode(stripslashes($Ign)) : "";
-$Save_URL_Query .= "&Limit=".$Limit;
 
 if (isset($MessagesString) && $MessagesString != "")
 {
 	// Save messages to a file
-#	header("Content-Type: application/octet-stream");
-#	header("Content-Disposition: attachment; filename=\"chat_save_".date("mdY").".htm\"");
+	header("Content-Type: application/octet-stream");
+	header("Content-Disposition: attachment; filename=\"chat_save_".date("mdY").".htm\"");
 	?>
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 	<HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 	<HEAD>
 		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=<?php echo($Charset); ?>">
 		<TITLE><?php echo(htmlspecialchars(stripslashes($R))." - ".date("F j, Y")." - ".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)); ?></TITLE>
-		<LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
-	<BODY CLASS="mainframe">
-		<button type="button" name="Save" onClick=window.open("<?php echo("save.php?L=$L&U=".urlencode(stripslashes($U))."&R=".urlencode(stripslashes($R))."&ST=$ST".$Save_URL_Query); ?>")>Save</button>
+		<STYLE>
 		<?php
-		echo($MessagesString);
-		unset($MessagesString);
-		?>
+			if (isset($Charset))
+			{
+				if (isset($FontName) && $FontName != "")
+				{
+					?>
+					* {font-family: <?php echo($FontName); ?>, sans-serif;}
+					<?php
+				}
+				else
+				{
+					?>
+					* {font-family: helvetica, arial, geneva, sans-serif;}
+					<?php
+				}
+			}
+			if (!isset($medium) || $medium == "") $medium = 10;
+			?>
+			BODY.mainframe
+			{
+				background-color: <?php echo($COLOR_TB); ?>;
+				color: <?php echo(COLOR_CD); ?>;
+				font-size: <?php echo($medium); ?>pt;
+				font-weight: 400;
+				margin: 5px;
+				scrollbar-3dlight-color: #00ffff;
+				scrollbar-arrow-color: #ffff00;
+				scrollbar-base-color: <?php echo($COLOR_BODY); ?>;
+				scrollbar-track-color: <?php echo($COLOR_SCROLL_TRACK); ?>;
+				scrollbar-darkshadow-color: #0000ff;
+				scrollbar-face-color: #37658d;
+				scrollbar-highlight-color: #ffff00;
+				scrollbar-shadow-color: #808080;
+			}
+
+			A
+			{
+				text-decoration: none;
+				color: <?php echo($COLOR_LINK); ?>;
+				font-weight: 600;
+				cursor:pointer;
+			}
+
+			A:hover, A:active
+			{
+				color: #FF9900;
+				text-decoration: none;
+				cursor:pointer;
+			}
+
+			.msg
+			{
+				margin-top: 0px;
+				margin-bottom: 2px;
+				margin-left: <?php #echo($Align == "right" ? "5" : "55"); ?>0px;
+				margin-right: <?php #echo($Align == "right" ? "55" : "5"); ?>0px;
+				text-indent: 0px;
+			}
+
+			.time
+			{
+				unicode-bidi: embed;
+				color: <?php echo(COLOR_CD); ?>;
+			}
+
+			.notify
+			{
+				color: <?php echo($COLOR_BK); ?>;
+				font-size: <?php echo($medium); ?>pt;
+				font-weight: 600;
+			}
+
+			.notify2
+			{
+				color: #FF0000;
+				font-size: <?php echo($medium); ?>pt;
+				font-weight: 600;
+			}
+		</STYLE>
+	<BODY CLASS="mainframe">
+	<?php
+	echo($MessagesString);
+	unset($MessagesString);
+	?>
 	</BODY>
 	</HTML>
 	<?php

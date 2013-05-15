@@ -123,7 +123,7 @@ function special_char($str,$lang)
 
 // Define the SQL query (depends on values for ignored users list and on whether to display
 // notification messages or not
-$CondForQuery	= "(address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username = 'SYS video' OR username = 'SYS utube' OR username = 'SYS math' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3')))";
+$CondForQuery = "(address = ' *' OR (room = '*' AND username NOT LIKE 'SYS %') OR (address = '' AND username NOT LIKE 'SYS %' AND username != '".C_QUOTE_NAME."') OR (address != '' AND (username = 'SYS room' OR username = 'SYS image' OR username = 'SYS video' OR username = 'SYS utube' OR username = 'SYS math' OR username LIKE 'SYS top%' OR username = 'SYS dice1' OR username = 'SYS dice2' OR username = 'SYS dice3')))";
 
 $DbLink1 = new DB;
 $DbLink1->query("SELECT m_time, room, username, latin1, address, message FROM ".C_MSG_TBL." WHERE ".$CondForQuery.$Type." ORDER BY m_time DESC LIMIT $N");
@@ -184,9 +184,9 @@ if($DbLink1->num_rows() > 0)
 		if(COLOR_NAMES || C_ITALICIZE_POWERS)
 		{
 			$DbColor1 = new DB;
-			if (isset($User))
+			if (isset($User) || isset($Dest))
 			{
-				$DbColor1->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '$User'");
+				$DbColor1->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '$User' OR username = '$Dest'");
 				list($perms_user,$colorname) = $DbColor1->next_record();
 				if(COLOR_NAMES && (isset($colorname) && $colorname != "" && strcasecmp($colorname, $COLOR_TB) != 0))
 				{
@@ -217,12 +217,12 @@ if($DbLink1->num_rows() > 0)
 		if ($Dest != " *" && $User != "SYS room" && $User != "SYS image" && $User != "SYS video" && $User != "SYS utube" && $User != "SYS math" && $User != "SYS topic" && $User != "SYS topic reset" && substr($User,0,8) != "SYS dice")
 		{
 			$User = $colorname_tag."[".special_char($User,$Latin1)."]".$colorname_endtag;
-			if ($Dest != "") $Dest = ">".$colornamedest_tag."[".htmlspecialchars(stripslashes($Dest))."]".$colornamedest_endtag;
-			$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\"><B>${User}${Dest}</B></td><td>$Message</td>";
+			if ($Dest != "") $Dest = ">".$colorname_tag."[".htmlspecialchars(stripslashes($Dest))."]".$colorname_endtag;
+			$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\"><B>${User}${Dest}</B></td><td>".$Message."</td>";
 		}
 		if ($User == "SYS image")
 		{
-      $NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\"><B>".$colornamedest_tag."[${Dest}]".$colornamedest_endtag."</B></td><td><FONT class=\"notify\">".L_PIC." ${Dest}:</FONT> <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_FULLSIZE_PIC).".'; return true\" title=\"".sprintf(L_CLICK,L_FULLSIZE_PIC)."\" target=_blank>".$Message."</A></td>";
+      $NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\"><B>".$colorname_tag."[${Dest}]".$colorname_endtag."</B></td><td><FONT class=\"notify\">".L_PIC." ${Dest}:</FONT> <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_FULLSIZE_PIC).".'; return true\" title=\"".sprintf(L_CLICK,L_FULLSIZE_PIC)."\" target=_blank>".$Message."</A></td>";
 		}
 		if ($User == "SYS video")
 		{
@@ -239,17 +239,17 @@ if($DbLink1->num_rows() > 0)
 #				$eicon = $embevi->getProviderIcon();
 				$ealt = $embevi->getEmbeddedInfo();
 				$eicon = $embevi->getProviderImageIdentifier();
-				$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\"><B>".$colornamedest_tag."[${Dest}]".$colornamedest_endtag."</B></td><td><FONT class=\"notify\"><img src=\"".$eicon."\" width='16' border=0 alt='&copy; ".$ealt."' title='&copy; ".$ealt."'>&nbsp;".L_VIDEO." ${Dest}:</FONT> <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_ORIG_VIDEO).".'; return true\" title=\"".sprintf(L_CLICK,L_ORIG_VIDEO)."\" target=_blank>".$Message."</A></td>";
+				$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\"><B>".$colorname_tag."[${Dest}]".$colorname_endtag."</B></td><td><FONT class=\"notify\"><img src=\"".$eicon."\" width='16' border=0 alt='&copy; ".$ealt."' title='&copy; ".$ealt."'>&nbsp;".L_VIDEO." ${Dest}:</FONT> <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_ORIG_VIDEO).".'; return true\" title=\"".sprintf(L_CLICK,L_ORIG_VIDEO)."\" target=_blank>".$Message."</A></td>";
 			}
 		}
 		if ($User == "SYS utube")
 		{
-      $NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\"><B>".$colornamedest_tag."[${Dest}]".$colornamedest_endtag."</B></td><td><FONT class=\"notify\"><img src=\"images/icons/youtube.png\" border=0 alt='YouTube' title='YouTube'>&nbsp;".L_VIDEO." ${Dest}:</FONT> <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_ORIG_VIDEO).".'; return true\" title=\"".sprintf(L_CLICK,L_ORIG_VIDEO)."\" target=_blank>".$Message."</A></td>";
+      $NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\"><B>".$colorname_tag."[${Dest}]".$colorname_endtag."</B></td><td><FONT class=\"notify\"><img src=\"images/icons/youtube.png\" border=0 alt='YouTube' title='YouTube'>&nbsp;".L_VIDEO." ${Dest}:</FONT> <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_ORIG_VIDEO).".'; return true\" title=\"".sprintf(L_CLICK,L_ORIG_VIDEO)."\" target=_blank>".$Message."</A></td>";
 		}
 		if ($User == "SYS announce")
 		{
 			if ($Message == 'L_RELOAD_CHAT') $Message = L_RELOAD_CHAT;
-			$NewMsg .= "<td colspan=2><SPAN CLASS=\"notify2\">[".L_ANNOUNCE."] $Message</SPAN></td>";
+			$NewMsg .= "<td colspan=2><SPAN CLASS=\"notify2\">[".L_ANNOUNCE."] ".$Message."</SPAN></td>";
 		}
 		if ($User == "SYS math")
 		{
@@ -257,7 +257,7 @@ if($DbLink1->num_rows() > 0)
     	}
 		if ($User == "SYS room")
 		{
- 			$NewMsg .= "<td colspan=2><SPAN class=\"notify2\"><I>".ROOM_SAYS."&nbsp;</SPAN><SPAN class=\"notify\">".$Message."</SPAN></I></td>";
+ 			$NewMsg .= "<td colspan=2><SPAN class=\"notify2\"><I>".ROOM_SAYS."</SPAN><SPAN class=\"notify\"> ".$Message."</SPAN></I></td>";
     	}
 		if ($User == "SYS topic")
 		{

@@ -17,6 +17,20 @@ if (stristr(PHP_OS,'win')) {
   $eol="\n";
 }
 
+// Ghost Control mod by Ciprian
+if (!function_exists("ghosts_in"))
+{
+	function ghosts_in($what, $in, $Charset)
+	{
+		$ghosts = explode(",",$in);
+		for (reset($ghosts); $ghost_name=current($ghosts); next($ghosts))
+		{
+			if (strcasecmp(mb_convert_case($what,MB_CASE_LOWER,$Charset), mb_convert_case($ghost_name,MB_CASE_LOWER,$Charset)) == 0) return true;
+		}
+		return false;
+	};
+};
+
 // Clean the buzz sounds after play
 $ChatS = new DB;
 $ChatS->query("SELECT message FROM ".C_MSG_TBL." WHERE message LIKE '%...BUZZER...%' AND m_time<'".(time()-10)."' ORDER BY m_time DESC LIMIT 1");
