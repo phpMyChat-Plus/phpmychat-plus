@@ -114,20 +114,20 @@ function room_in($what, $in, $Charset)
 							};
 	// URL
 #	$Top = eregi_replace('([[:space:]]|^)(www[.])', '\\1http://\\2', $Top); // no prefix (www.myurl.ext)
-	$Top = preg_replace('/([[:space:]]|^)(www[.])/i', '\\1http://\\2', $Top); // no prefix (www.myurl.ext)
 #	$Top = eregi_replace('([[:space:]]|^)(ftp[.])', '\\1ftp://\\2', $Top); // no prefix (ftp.myurl.ext)
+#	$Top = eregi_replace('([[:space:]]|^)(www)', '\\1http://\\2', $Top); // no prefix (www.myurl.ext)
+	$Top = preg_replace('/([[:space:]]|^)(www[.])/i', '\\1http://\\2', $Top); // no prefix (www.myurl.ext)
 	$Top = preg_replace('/([[:space:]]|^)(ftp[.])/i', '\\1ftp://\\2', $Top); // no prefix (ftp.myurl.ext)
+	$Top = preg_replace('/([[:space:]]|^)(www)/i', '\\1http://\\2', $Top); // no prefix (www.myurl.ext)
 	// Word wrap fix by Alexander Eisele <xaex@xaex.de>
-/*
 	if (!preg_match_all("((http://|https://|ftp://|mailto:)[^ ]+)", $Top, $pmatch))
 	{
 		$Top = wordwrap($Top, 40, " ", 1);
 	}
-	$Top = eregi_replace('([[:space:]]|^)(www)', '\\1http://\\2', $Top); // no prefix (www.myurl.ext)
+/*
 	$prefix = '(http|https|ftp|telnet|news|gopher|file|wais)://';
     $pureUrl = '([[:alnum:]/\n+-=%&:_.~?]+[#[:alnum:]+-_~]*)';
 */
-	$Top = preg_replace('/([[:space:]]|^)(www)/i', '\\1http://\\2', $Top); // no prefix (www.myurl.ext)
 	$prefix = '(http|https|ftp|telnet|news|gopher|file|wais):\/\/';
     $pureUrl = '([[:alnum:]\/\n+-=%&:_.~?]+[#[:alnum:]+-_~]*)';
     $purl="";

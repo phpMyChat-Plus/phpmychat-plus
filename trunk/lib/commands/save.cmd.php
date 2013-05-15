@@ -6,7 +6,7 @@
 
 $CondForQuery = "";
 $IgnoreList = "'SYS enter','SYS exit','SYS delreg','SYS promote','SYS demote','SYS inviteTo','SYS inviteFrom','SYS topic','SYS announce','SYS welcome'";
-if (isset($Ign) && $Ign != "") $IgnoreList = ",'".str_replace(",","','",addslashes(urldecode($Ign)))."'";
+if (isset($Ign) && $Ign != "") $IgnoreList .= ",'".str_replace(",","','",addslashes(urldecode($Ign)))."'";
 if ($IgnoreList != "") $CondForQuery = "username NOT IN (${IgnoreList}) AND ";
 $CondForQuery .= "(address IN ('$U',' *') OR (room = '$R' AND (address = '' OR username = '$U')) OR (room = '$R' AND username = 'SYS room'))";
 
@@ -19,7 +19,7 @@ if ($Count != "0")
 	$IsCommand = true;
 	$Save_URL_Query = isset($Ign) ? "&Ign=".urlencode(stripslashes($Ign)) : "";
 	if (C_SAVE != "*" && ($Cmd[3] > C_SAVE || $Cmd[3] == "")) $Cmd[3] = C_SAVE;
-	if ($Cmd[3] != "") $Save_URL_Query .= "&Limit=$Cmd[3]";
+	if ($Cmd[3] != "") $Save_URL_Query .= "&Limit=".$Cmd[3];
 
 	// Define a table that contains JavaScript instructions to be ran
 	$jsTbl = array(
