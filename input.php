@@ -812,8 +812,7 @@ if (($status == "m") || ($status == "t") || ($status == "a")) // use this to sho
 	clock_input(gap);
 // -->
 </SCRIPT>
-<!--	&nbsp;&nbsp;<span style="background-color:yellow; color:blue; font-weight:800" title="<?php echo($U); if($superghost) echo("&nbsp;*&nbsp;<span style=\"color:red\">".L_SUPER_GHOST."&nbsp;*</span>"); elseif($ghost) echo("&nbsp;*&nbsp;<span style=\"color:red\">".L_GHOST."&nbsp;*</span>");?>">&nbsp;<?php echo($U."&nbsp;"); if($superghost) echo("&nbsp;&nbsp;*&nbsp;<span style=\"color:red\">".L_SUPER_GHOST."&nbsp;*</span>"); elseif($ghost) echo("&nbsp;*&nbsp;<span style=\"color:red\">".L_GHOST."&nbsp;*</span>");?></span>-->
-	&nbsp;&nbsp;<span style="background-color:yellow; color:blue; font-weight:800" title="<?php echo($U); if($superghost) echo(" * ".L_SUPER_GHOST." *"); elseif($ghost) echo(" * ".L_GHOST." *"); ?>">&nbsp;<?php echo($U); if($superghost) echo("&nbsp;*&nbsp;<span style=\"color:red\">".L_SUPER_GHOST."&nbsp;*</span>"); elseif($ghost) echo("&nbsp;*&nbsp;<span style=\"color:red\">".L_GHOST."&nbsp;*</span>");?></span>
+	&nbsp;&nbsp;<span style="background-color:yellow; color:blue; font-weight:800" title="<?php echo($U); if($superghost) echo(" * ".L_SUPER_GHOST." *"); elseif($ghost) echo(" * ".L_GHOST." *"); ?>">&nbsp;<?php echo($U); if($superghost) echo("&nbsp;<span style=\"color:red\">*&nbsp;".L_SUPER_GHOST."&nbsp;*</span>"); elseif($ghost) echo("&nbsp;<span style=\"color:red\">*&nbsp;".L_GHOST."&nbsp;*</span>");?>&nbsp;</span>
 </TD>
 </TR>
 </FORM>
