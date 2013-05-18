@@ -655,7 +655,7 @@ define("L_LANG_HI", "Hindi");
 define("L_LANG_HU", "Hungarian");
 define("L_LANG_ID", "Indonesian");
 define("L_LANG_IT", "Italian");
-define("L_LANG_JA", "Japanese (Kanji)");
+define("L_LANG_JA", "Japanese - Kanji");
 define("L_LANG_KA", "גרוזינית");
 define("L_LANG_NE", "Nepali");
 define("L_LANG_NL", "הולנדית");

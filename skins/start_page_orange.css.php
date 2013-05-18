@@ -47,7 +47,7 @@ $small = round(0.8 * $medium);
 {
 	<?php if (isset($FontFace)) echo($FontFace); ?>
 	background-color: #FE9D00;
-	color: wheat;
+	color: #FFF4E6;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
 	margin: 5px;
@@ -55,16 +55,16 @@ $small = round(0.8 * $medium);
 	scrollbar-3d-light-color:#C1B5A6;
 	scrollbar-arrow-color:#C1B5A6;
 	scrollbar-base-color:black;
-	scrollbar-dark-shadow-color:wheat;
+	scrollbar-dark-shadow-color:#FFF4E6;
 	scrollbar-face-color:#FE9D00;
-	scrollbar-highlight-color:wheat;
+	scrollbar-highlight-color:#FFF4E6;
 	scrollbar-shadow-color:black
 }
 
 .ChatTable
 {
 	<?php if (isset($FontFace)) echo($FontFace); ?>
-	background-color: wheat;
+	background-color: #FFF4E6;
 	color: #FE9D00;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
@@ -74,7 +74,7 @@ $small = round(0.8 * $medium);
 {
 	<?php if (isset($FontFace)) echo($FontFace); ?>
 	background-color: #FE9D00;
-	color: wheat;
+	color: #FFF4E6;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 800;
 }
@@ -121,7 +121,7 @@ A.ChatLink
 {
 	<?php if (isset($FontFace)) echo($FontFace); ?>
 	text-decoration: underline;
-	color: wheat;
+	color: #FFF4E6;
 	font-weight: 600;
 	cursor:pointer;
 }
@@ -154,13 +154,13 @@ A.ChatReg:hover,A.ChatReg:active
 INPUT.ChatBox, SELECT.ChatBox, TEXTAREA.ChatBox
 {
 	<?php if (isset($FontFace)) echo($FontFace); ?>
-	background: wheat;
+	background: #FFF4E6;
 }
 
 .ChatTitle
 {
 	<?php if (isset($FontFace)) echo($FontFace); ?>
-	color: wheat;
+	color: #FFF4E6;
 	font-size: <?php echo($large); ?>pt;
 	font-weight: 800;
 }
@@ -168,7 +168,7 @@ INPUT.ChatBox, SELECT.ChatBox, TEXTAREA.ChatBox
 .ChatError
 {
 	<?php if (isset($FontFace)) echo($FontFace); ?>
-	background-color: wheat;
+	background-color: #FFF4E6;
 	color: #FF0000;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 800;
@@ -178,14 +178,14 @@ INPUT.ChatBox, SELECT.ChatBox, TEXTAREA.ChatBox
 {
 	font-family: helvetica, arial, geneva, sans-serif;
 	unicode-bidi: embed;
-	color: wheat;
+	color: #FFF4E6;
 	font-size: 8pt;
 }
 
 A.ChatCopy, A.ChatCopy:active
 {
 	font-family: helvetica, arial, geneva, sans-serif;
-	color: wheat;
+	color: #FFF4E6;
 	cursor:pointer;
 }
 
@@ -193,7 +193,7 @@ A.ChatCopy, A.ChatCopy:active
 {
 	<?php if (isset($FontFace)) echo($FontFace); ?>
 	font-size: <?php echo($medium); ?>pt;
-	color: wheat;
+	color: #FFF4E6;
 }
 
 .ChatP2
@@ -208,7 +208,7 @@ A.ChatCopy, A.ChatCopy:active
 	<?php if (isset($FontFace)) echo($FontFace); ?>
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 600;
-	color: wheat;
+	color: #FFF4E6;
 }
 
 .ChatFlags

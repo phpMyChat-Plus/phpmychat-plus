@@ -722,12 +722,16 @@ else
 $CachePlus	= "";
 #if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
 if (stripos((isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"), "MSIE") !== false) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
+// Do not cache this page
 $now		= gmdate('D, d M Y H:i:s') . ' GMT';
 
 header("Expires: $now");
 header("Last-Modified: $now");
-header("Cache-Control: no-cache, must-revalidate".$CachePlus);
-header("Pragma: no-cache");
+header("Cache-Control: no-store, no-cache, must-revalidate".$CachePlus);
+header("Pragma: no-store, no-cache");
+// Define charset
+header("Content-Type: text/html; charset=${Charset}");
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML dir="<?php echo($textDirection); ?>">

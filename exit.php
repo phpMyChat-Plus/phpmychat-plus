@@ -72,9 +72,8 @@ function delete_files()
 // Open the users popup
 function users_popup()
 {
-//	window.focus();
 	users_popupWin = window.open("users_popup<?php echo($Ver1); ?>.php?<?php echo("From=$From&L=$L"); ?>","users_popup_<?php echo(md5(uniqid(""))); ?>","width=230,height=300,resizable=yes,scrollbars=yes");
-	users_popupWin.focus();
+//	users_popupWin.focus();
 }
 
 // Close some popups when the user exits the chat
@@ -159,7 +158,7 @@ if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTT
 	<?php
 }
 ?>
-<a href="<?php echo("$From?Ver=$Ver&L=$L&U=".stripslashes($U)."&E=".urlencode(stripslashes($R))."&EN=$T"); ?>" onClick="close_popups();" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image4','','localization/<?php echo ($L); ?>/images/exitdoorRoll.gif',1); window.status='<?php echo(L_EXIT); ?>.'; return true;" title="<?php echo(L_EXIT); ?>" target="_top"><img name="Image4" border="0" alt="<?php echo(L_EXIT); ?>" title="<?php echo(L_EXIT); ?>" src="localization/<?php echo ($L); ?>/images/exitdoor.gif"></a>
+<a href="<?php echo("$From?Ver=$Ver&L=$L&U=".stripslashes($U)."&E=".urlencode(stripslashes($R))."&EN=$T"); ?>" onClick="close_popups();" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image4','','localization/<?php echo ($L); ?>/images/exitdoorRoll.gif',1); window.status='<?php echo(L_EXIT); ?>.'; return true;" title="<?php echo(L_EXIT); ?>" target="_top" tabindex="-1"><img name="Image4" border="0" alt="<?php echo(L_EXIT); ?>" title="<?php echo(L_EXIT); ?>" src="localization/<?php echo ($L); ?>/images/exitdoor.gif"></a>
 <?php
 }
 else
@@ -176,7 +175,7 @@ if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTT
 	<?php
 }
 ?>
-	<A HREF="<?php echo("$From?Ver=$Ver&L=$L&U=".stripslashes($U)."&E=".urlencode(stripslashes($R))."&EN=$T"); ?>"  title="<?php echo(L_EXIT); ?>" onMouseOver="window.status='<?php echo(L_EXIT); ?>.'; return true;" title="<?php echo(L_EXIT); ?>" TARGET="_top"><?php echo(L_EXIT); ?></A>
+	<A HREF="<?php echo("$From?Ver=$Ver&L=$L&U=".stripslashes($U)."&E=".urlencode(stripslashes($R))."&EN=$T"); ?>"  title="<?php echo(L_EXIT); ?>" onMouseOver="window.status='<?php echo(L_EXIT); ?>.'; return true;" title="<?php echo(L_EXIT); ?>" TARGET="_top" tabindex="-1"><?php echo(L_EXIT); ?></A>
 <?php
 }
 ?>

@@ -43,8 +43,9 @@ $now		= gmdate('D, d M Y H:i:s') . ' GMT';
 
 header("Expires: $now");
 header("Last-Modified: $now");
-header("Cache-Control: no-cache, must-revalidate".$CachePlus);
-header("Pragma: no-cache");
+header("Cache-Control: no-store, no-cache, must-revalidate".$CachePlus);
+header("Pragma: no-store, no-cache");
+// Define charset
 header("Content-Type: text/html; charset=${Charset}");
 
 // Avoid server configuration for magic quotes
