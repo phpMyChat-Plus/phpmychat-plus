@@ -12,7 +12,7 @@ This error is related to misconfig of your sql data in config/config.lib.php.
 Make sure the database and username have a prefix like yourcpanelusername_name.
 
 1aQ.
-After installing, I get this errors:
+After installing, I get one or more of these errors:
 - I cannot login or register a new account;
 - There is no error message returned;
 - I cannot select a different language. Whatever I try, the page is in English;

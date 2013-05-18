@@ -721,7 +721,7 @@ $not_selected = " ".$null." (".$not_selected.")";
 	}
 ?>
 		<INPUT TYPE="hidden" NAME="sent" VALUE="0">
-		<INPUT TYPE="submit" NAME="sendForm" VALUE=<?php echo(L_OK); ?> onClick="document.forms['MsgForm'].elements['M'].focus();"><br />
+		<INPUT TYPE="submit" NAME="sendForm" VALUE=<?php echo(L_OK); ?> onClick="document.forms['MsgForm'].elements['M'].focus();" tabindex="0"><br />
 <?php
 // Avatar System Start.
 	if (C_USE_AVATARS && C_AVA_PROFBUTTON)
