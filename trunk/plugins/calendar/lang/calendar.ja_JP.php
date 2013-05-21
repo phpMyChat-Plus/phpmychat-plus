@@ -1,10 +1,10 @@
 <?php
 # ja_JP translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.68
+# Version: 3.69
 # Language: Japanese / 日本語
 # Translator:  Dendeke <konchakka211@yahoo.co.jp>
-# Last file update: 31.12.2011
+# Last file update: 19.05.2013
 
 // Class strings localization
 define("L_DAYC", "日");
@@ -16,7 +16,7 @@ define("L_NEXT", "次");
 define("L_REF_CAL", "カレンダーの更新...");
 define("L_CHK_VAL", "値の確認");
 define("L_SEL_LANG", "言語の選択");
-define("L_SEL_ICON", "アイコンの選択");
+define("L_SEL_ICON", "の選択");
 define("L_SEL_DATE", "日付の選択");
 define("L_ERR_SEL", "選択が間違っています");
 define("L_NOT_ALLOWED", "その日付は選択できません");
@@ -25,6 +25,7 @@ define("L_DATE_AFTER", "%s以降の日付を選択してください");
 define("L_DATE_BETWEEN", "%sと%sの間の日付を選択してください");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "リセット");
+define("L_CLOSE", "閉じる");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "0");

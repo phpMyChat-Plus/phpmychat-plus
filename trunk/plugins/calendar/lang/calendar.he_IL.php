@@ -1,10 +1,10 @@
 <?php
 # he_IL translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.61
+# Version: 3.69
 # Language: Hebrew / עברית
 # Translator: Shula Amokshim <shula.amokshim @gmx.net>
-# Last file update: 01.09.2011
+# Last file update: 19.05.2013
 
 define("RTL", 1);
 
@@ -18,7 +18,7 @@ define("L_NEXT", "הבא");
 define("L_REF_CAL", "מרענן יומן...");
 define("L_CHK_VAL", "בדוק ערך");
 define("L_SEL_LANG", "בחר שפה");
-define("L_SEL_ICON", "בחר צלמית");
+define("L_SEL_ICON", "בחר");
 define("L_SEL_DATE", "בחר תאריך");
 define("L_ERR_SEL", "הבחירה שלך לא תקינה");
 define("L_NOT_ALLOWED", "אי אפשר לבחור תאריך זה");
@@ -27,6 +27,7 @@ define("L_DATE_AFTER", "%s אנא בחר תאריך אחר");
 define("L_DATE_BETWEEN", "%s ו %s\\nאנא בחר תאריך בין");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "לבטל");
+define("L_CLOSE", "סגור");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "0");

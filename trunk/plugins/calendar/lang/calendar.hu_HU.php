@@ -1,10 +1,10 @@
 <?php
 # hu_HU translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.61
+# Version: 3.69
 # Language: Hungarian / magyar
 # Translator: Jácint Zsuzsanna <jacint.zsuzsanna@yahoo.com>
-# Last file update: 01.09.2011
+# Last file update: 19.05.2013
 
 // Class strings localization
 define("L_DAYC", "Nap");
@@ -16,7 +16,7 @@ define("L_NEXT", "Következő");
 define("L_REF_CAL", "Naptár frissítése...");
 define("L_CHK_VAL", "Ellenőrizd az értéket");
 define("L_SEL_LANG", "Válassz nyelvet");
-define("L_SEL_ICON", "Válassz ikont");
+define("L_SEL_ICON", "Kiválaszt");
 define("L_SEL_DATE", "Válassz dátumot");
 define("L_ERR_SEL", "A választásod nem érvényes");
 define("L_NOT_ALLOWED", "Ezt a dátumot nem lehet kiválasztani");
@@ -25,6 +25,7 @@ define("L_DATE_AFTER", "Kérjük, válasszon egy dátumot követően %s");
 define("L_DATE_BETWEEN", "Kérjük, válasszon egy dátumot közötti\\n%s és %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Mégse");
+define("L_CLOSE", "Bezár");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

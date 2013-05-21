@@ -1,11 +1,9 @@
 ﻿<?php
 # yo_NG translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.61
+# Version: 3.69
 # Language: Yoruba (Nigeria) / Yorùbá
-# Translator: Ameh Rotimi Samson (Profsam) <philanthropist4eva@gmail.com>
-
-# Last file update: 01.09.2011
+# Last file update: 19.05.2013
 
 // Class strings localization
 define("L_DAYC", "Day");
@@ -17,7 +15,7 @@ define("L_NEXT", "Next");
 define("L_REF_CAL", "Refreshing Calendar...");
 define("L_CHK_VAL", "Check the value");
 define("L_SEL_LANG", "Select Language");
-define("L_SEL_ICON", "Select Icon");
+define("L_SEL_ICON", "Select");
 define("L_SEL_DATE", "Select Date");
 define("L_ERR_SEL", "Your selection is not valid");
 define("L_NOT_ALLOWED", "This date is not allowed to be selected");
@@ -25,6 +23,8 @@ define("L_DATE_BEFORE", "Please choose a date before %s");
 define("L_DATE_AFTER", "Please choose a date after %s");
 define("L_DATE_BETWEEN", "Please choose a date between\\n%s and %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
+define("L_UNSET", "Unset");
+define("L_CLOSE", "Close");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

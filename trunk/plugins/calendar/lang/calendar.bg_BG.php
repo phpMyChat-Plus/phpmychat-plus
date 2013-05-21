@@ -1,10 +1,10 @@
 <?php
 # bg_BG translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.61
+# Version: 3.69
 # Language: Bulgarian / български
 # Translator: Peter Petrov <peter.m.petrov@gmail.com>
-# Last file update: 01.09.2011
+# Last file update: 19.05.2013
 
 // Class strings localization
 define("L_DAYC", "Ден");
@@ -16,7 +16,7 @@ define("L_NEXT", "Следващи");
 define("L_REF_CAL", "Обновяване на Календара...");
 define("L_CHK_VAL", "Проверете стойността");
 define("L_SEL_LANG", "Изберете език");
-define("L_SEL_ICON", "Изберете иконка");
+define("L_SEL_ICON", "Изберете");
 define("L_SEL_DATE", "Изберете дата");
 define("L_ERR_SEL", "Невалиден избор");
 define("L_NOT_ALLOWED", "Тази дата не е позволена за избор");
@@ -25,6 +25,7 @@ define("L_DATE_AFTER", "Моля, изберете дата след %s");
 define("L_DATE_BETWEEN", "Моля, изберете дата между\\n%s и %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Нулирай");
+define("L_CLOSE", "Затвори");
 
 // Set the first day of the week in your language
 define("FIRST_DAY", "1"); // 1 for Monday, 0 for Sunday

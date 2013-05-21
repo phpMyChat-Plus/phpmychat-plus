@@ -11,7 +11,7 @@ function toggleCalendar(objname, auto_hide, hide_timer){
 		if (div_obj.style.visibility=="hidden") {
 		  div_obj.style.visibility = 'visible';
 		  document.getElementById(objname+'_frame').contentWindow.adjustContainer();
-		  
+
 		  //auto hide if inactivities with calendar after open
 		  if(auto_hide){
 			  if(hide_timer < 3000) hide_timer = 3000; //put default 3 secs
@@ -34,15 +34,15 @@ function showCalendar(objname){
 function hideCalendar(objname){
 	var div_obj = document.getElementById('div_'+objname);
 	if(div_obj != null){
-		div_obj.style.visibility = 'hidden';	
+		div_obj.style.visibility = 'hidden';
 	}
 }
 
 function prepareHide(objname, timeout){
 	cancelHide(objname);
-	
+
 	var timer = setTimeout(function(){ hideCalendar(objname) }, timeout);
-	
+
 	var found = false;
 	for(i=0; i<this.hideCalendarTimer.length; i++){
 		if(this.hideCalendarTimer[i].objname == objname){
@@ -50,11 +50,11 @@ function prepareHide(objname, timeout){
 			this.hideCalendarTimer[i].timers[this.hideCalendarTimer[i].timers.length] = timer;
 		}
 	}
-	
+
 	if(!found){
 		var obj = new calendarTimer(objname);
 		obj.timers[obj.timers.length] = timer;
-		
+
 		this.hideCalendarTimer[this.hideCalendarTimer.length] = obj;
 	}
 }
@@ -78,15 +78,16 @@ function setValue(objname, d){
 
 	updateValue(objname, d);
 
-	var dp = document.getElementById(objname+"_dp").value;
-	if(dp) toggleCalendar(objname);
+//	var dp = document.getElementById(objname+"_dp").value;
+//	if(dp) toggleCalendar(objname);
 
 	checkPairValue(objname, d);
 
 	//calling calendar_onchanged script
 	if(document.getElementById(objname+"_och").value != "" && changed) calendar_onchange(objname);
 
-	var date_array = document.getElementById(objname).value.split("-");	
+	var date_array = document.getElementById(objname).value.split("-");
+
 	tc_submitDate(objname, date_array[2], date_array[1], date_array[0]);
 }
 
@@ -108,6 +109,7 @@ function updateValue(objname, d){
 			tc_updateDay(objname, date_array[0], date_array[1], date_array[2]);
 
 		}else{
+			var dateTxt = l_sel_date;
 			if(date_array[0] > 0 && date_array[1] > 0 && date_array[2] > 0){
 				//update date pane
 
@@ -115,10 +117,13 @@ function updateValue(objname, d){
 				myDate.setFullYear(date_array[0],(date_array[1]-1),date_array[2]);
 				var dateFormat = document.getElementById(objname+"_fmt").value;
 
-				var dateTxt = myDate.format(dateFormat);
-			}else var dateTxt = l_sel_date;
+				dateTxt = myDate.format(dateFormat);
+			}
 
-			document.getElementById("divCalendar_"+objname+"_lbl").innerHTML = dateTxt;
+			document.getElementById("divCalendar_"+objname+"_lbl").style.whiteSpace="pre"; //text no wrap on white space
+			//Digitizer
+			document.getElementById("divCalendar_"+objname+"_lbl").innerHTML = convertDigitIn(objname, dateTxt);
+
 		}
 	}
 }
@@ -152,8 +157,10 @@ function tc_submitDate(objname, dvalue, mvalue, yvalue){
 	var hid = document.getElementById(objname+'_hid').value;
 	var hdt = document.getElementById(objname+'_hdt').value;
 	var hl = document.getElementById(objname+'_hl').value;
+	//Digitizer
+	var dig = document.getElementById(objname+'_dig').value;
 
-	obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+dvalue+"&selected_month="+mvalue+"&selected_year="+yvalue+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&pr1="+pr1+"&pr2="+pr2+"&prv="+prv+"&spd="+spd+"&spt="+spt+"&och="+och+"&str="+str+"&rtl="+rtl+"&wks="+wks+"&int="+int+"&hid="+hid+"&hdt="+hdt+"&hl="+hl;
+	obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+dvalue+"&selected_month="+mvalue+"&selected_year="+yvalue+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&pr1="+pr1+"&pr2="+pr2+"&prv="+prv+"&spd="+spd+"&spt="+spt+"&och="+och+"&str="+str+"&rtl="+rtl+"&wks="+wks+"&int="+int+"&hid="+hid+"&hdt="+hdt+"&hl="+hl+"&dig="+dig;
 
 	obj.contentWindow.submitNow(dvalue, mvalue, yvalue);
 }
@@ -194,7 +201,7 @@ function tc_setMonth(objname, mvalue){
 
 	//check if date is not allow to select
 	if(!isDateAllow(objname, date_array[2], mvalue, date_array[0]) || !checkSpecifyDate(objname, date_array[2], mvalue, date_array[0])){
-		alert(l_not_allowed);
+		//alert(l_not_allowed);
 		restoreDate(objname);
 	}else{
 		if(document.getElementById(objname+'_dp').value && document.getElementById(objname+'_inp').value){
@@ -260,7 +267,6 @@ function yearEnter(e){
 		return true;
 	}else return false;
 }
-
 
 // Declaring valid date character, minimum year and maximum year
 var minYear=1900;
@@ -393,10 +399,10 @@ function restoreDate(objname){
 }
 
 //----------------------------------------------------------------
-//javascript date format function thanks to
+// javascript date format function thanks to Jacob Wright
 // http://jacwright.com/projects/javascript/date_format
 // updated 2/8/2013 with an addition from Haravikk
-//
+// MIT Licensed!
 // some modifications to match the calendar script
 //----------------------------------------------------------------
 
@@ -404,6 +410,7 @@ function restoreDate(objname){
 Date.prototype.format = function(format) {
     var returnStr = '';
     var replace = Date.replaceChars;
+
     for (var i = 0; i < format.length; i++) {
 			var curChar = format.charAt(i);
 			if (i - 1 >= 0 && format.charAt(i - 1) == "\\") {
@@ -420,7 +427,7 @@ Date.prototype.format = function(format) {
 
 Date.replaceChars = {
 	shortMonths: [s_jan, s_feb, s_mar, s_apr, s_may, s_jun, s_jul, s_aug, s_sep, s_oct, s_nov, s_dec],
-	longMonths: (l_lang != "el_GR" ? [l_january, l_february, l_march, l_april, l_may, l_june, l_july, l_august, l_september, l_october, l_november, l_december] : [l_januaryu, l_februaryu, l_marchu, l_aprilu, l_mayu, l_juneu, l_julyu, l_augustu, l_septemberu, l_octoberu, l_novemberu, l_decemberu]),
+	longMonths: (l_genitive == 1 ? [l_januaryg, l_februaryg, l_marchg, l_aprilg, l_mayg, l_juneg, l_julyg, l_augustg, l_septemberg, l_octoberg, l_novemberg, l_decemberg] : [l_january, l_february, l_march, l_april, l_may, l_june, l_july, l_august, l_september, l_october, l_november, l_december]),
 	shortDays: [s_sun, s_mon, s_tue, s_wed, s_thu, s_fri, s_sat],
 	longDays: [l_sunday, l_monday, l_tuesday, l_wednesday, l_thursday, l_friday, l_saturday],
 
@@ -495,6 +502,78 @@ function padString(stringToPad, padLength, padString) {
 	return stringToPad;
 }
 
+//Digitizer
+function convertDigitIn(objname, enDigit){
+	var digIn = document.getElementById(objname+"_dig").value;
+	
+	if(digIn == 1){
+		var newValue = "";
+
+		for (var i=0; i<enDigit.length; i++){
+			var ch = enDigit.charCodeAt(i);
+
+			if (ch>=48 && ch<=57){
+				var newChar = ch+l_utf_digit;
+				newValue = newValue+String.fromCharCode(newChar);
+			}
+		else newValue = newValue+String.fromCharCode(ch);
+		}
+		return newValue;
+	}
+	else return enDigit;
+}
+
+//Digitizer frame
+function toggleDigitsFrame(objname){
+	var s_digIn = document.getElementById(objname+"_dig").value;
+	var digIn = (s_digIn == 1) ? 0 : 1;
+
+	var f = document.getElementById(objname+'_frame');
+
+	f.contentWindow.calendarform.dig.value = digIn;
+	f.contentWindow.loading();
+	f.contentWindow.calendarform.submit();
+
+	document.getElementById(objname+"_dig").value = digIn;
+
+	//toggle dropdown if not in datepicker mode
+	if(document.getElementById(objname+'_inp').value){
+		if(document.getElementById(objname+'_day') != null){
+			var obj = document.getElementById(objname+'_day');
+			for (var i=0; i<obj.length; i++){
+				//retrieve option value
+				var val = obj.options[i].value;
+				if(val != "00"){
+					var obj_txt = convertDigitIn(objname, val);
+					obj.options[i].text = obj_txt;
+				}
+			}
+		}
+		if(document.getElementById(objname+'_year') != null){
+			var obj = document.getElementById(objname+'_year');
+			for (var i=0; i<obj.length; i++){
+				//retrieve option value
+				var val = obj.options[i].value;
+				if(val != "0000"){
+					var obj_txt = convertDigitIn(objname, val);
+					obj.options[i].text = obj_txt;
+				}
+			}
+		}
+	}
+
+	//toggle digit icon
+	if(document.getElementById(objname+'_digicon') != null){
+		var obj = document.getElementById(objname+'_digicon');
+		obj.src = document.getElementById(objname+'_pth').value+"images/digit_"+((digIn == 1) ? "ar" : "hi")+".gif";
+		obj.alt = (digIn == 1) ? l_arabic : l_indic;
+		obj.title = (digIn == 1) ? l_arabic : l_indic;
+	}
+
+	var dp = document.getElementById(objname).value;
+	updateValue(objname, dp);
+}
+
 function tc_updateDay(objname, yearNum, monthNum, daySelected){
 	//var totalDays = (monthNum > 0) ? daysInMonth(monthNum, yearNum) : 31;
 	var totalDays = (monthNum > 0 && yearNum > 0) ? daysInMonth(monthNum, yearNum) : ((monthNum > 0) ? daysInMonth(monthNum, 2008) : 31);
@@ -508,11 +587,13 @@ function tc_updateDay(objname, yearNum, monthNum, daySelected){
 
 	for(d=1; d<=totalDays; d++){
 		var newOption = document.createElement("OPTION");
+
 		newOption.text = d;
 		newOption.value = d;
-		if(l_use_ymd_drop == "1") newOption.text += l_day;
+		if(l_use_ymd_drop == 1) newOption.text+=l_day;
 
-		dayObj.options[d] = new Option(newOption.text, padString(newOption.value, 2, "0"));
+		//Digitizer
+		dayObj.options[d] = new Option(convertDigitIn(objname, newOption.text), padString(newOption.value, 2, "0"));
 	}
 
 	if(daySelected > totalDays)
@@ -527,31 +608,31 @@ function checkPairValue(objname, d){
 	var dp2 = document.getElementById(objname+"_pr2").value;
 
 	var this_value = document.getElementById(objname).value;
-	//var this_time = Date.parse(this_value)/1000;
 	//var this_time2 = Date.parse(this_value)/1000;
 	//var this_time1 = Date.parse(this_value.replace(/-/g,'/'))/1000;
-	
+
 	var this_dates = this_value.split('-');
 	var this_time = new Date(this_dates[0], this_dates[1]-1, this_dates[2]).getTime()/1000;
-	
+
 	//implementing dp2
 	if(dp1 != "" && document.getElementById(dp1) != null){ //imply to date_pair1
 		//set date pair value to date selected
 		document.getElementById(dp1+"_prv").value = d;
-	
+
 		var dp1_value = document.getElementById(dp1).value;
 		//var dp1_time = Date.parse(dp1_value)/1000;
 		//var dp1_time = Date.parse(dp1_value.replace(/-/g,'/'))/1000;
-		
+
 		var dp1_dates = dp1_value.split('-');
 		var dp1_time = new Date(dp1_dates[0], dp1_dates[1]-1, dp1_dates[2]).getTime()/1000;
 
-		if(this_time < dp1_time){
+		if(this_time < dp1_time || this_value == "0000-00-00"){
 			//set self date pair value to null
 			document.getElementById(objname+"_prv").value = "";
+
 			tc_submitDate(dp1, "00", "00", "0000");
 		}else{
-			//var date_array = document.getElementById(dp1).value.split("-");	
+			//var date_array = document.getElementById(dp1).value.split("-");
 			tc_submitDate(dp1, dp1_dates[2], dp1_dates[1], dp1_dates[0]);
 		}
 	}
@@ -560,17 +641,18 @@ function checkPairValue(objname, d){
 	if(dp2 != "" && document.getElementById(dp2) != null){ //imply to date_pair2
 		//set date pair value to date selected
 		document.getElementById(dp2+"_prv").value = d;
-	
+
 		var dp2_value = document.getElementById(dp2).value;
 		//var dp2_time = Date.parse(dp2_value)/1000;
 		//var dp2_time = Date.parse(dp2_value.replace(/-/g,'/'))/1000;
-		
+
 		var dp2_dates = dp2_value.split('-');
 		var dp2_time = new Date(dp2_dates[0], dp2_dates[1]-1, dp2_dates[2]).getTime()/1000;
 
-		if(this_time > dp2_time){
+		if(this_time > dp2_time || this_value == "0000-00-00"){
 			//set self date pair value to null
 			document.getElementById(objname+"_prv").value = "";
+
 			tc_submitDate(dp2, "00", "00", "0000");
 		}else{
 			//var date_array = document.getElementById(dp2).value.split("-");
@@ -652,8 +734,6 @@ function checkSpecifyDate(objname, strDay, strMonth, strYear){
 		}
 	}
 
-	//alert("aa:"+found);
-
 	switch(spt){
 		case 0:
 		default:
@@ -704,7 +784,6 @@ function setDateLabel(objname){
 	var lbl = document.getElementById("divCalendar_"+objname+"_lbl");
 	if(lbl != null){
 		var d = document.getElementById(objname).value;
-
 		var dateTxt = l_sel_date;
 
 		if(d != "0000-00-00"){
@@ -716,7 +795,9 @@ function setDateLabel(objname){
 
 			dateTxt = myDate.format(dateFormat);
 		}
-		lbl.innerHTML = dateTxt;
+		lbl.style.whiteSpace="pre";
+		//Digitizer
+		lbl.innerHTML = convertDigitIn(objname, dateTxt);
 	}
 }
 

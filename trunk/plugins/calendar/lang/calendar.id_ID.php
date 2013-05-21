@@ -1,10 +1,10 @@
 ﻿<?php
 # id_ID translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.61
-# Language: Indonesian - Bahasa / Bahasa Indonesia
+# Version: 3.69
+# Language: Indonesian / Bahasa Indonesia
 # Translator: Hendriyo <hendriyo@gmail.com>
-# Last file update: 01.09.2011
+# Last file update: 19.05.2013
 
 // Class strings localization
 define("L_DAYC", "Hari");
@@ -16,7 +16,7 @@ define("L_NEXT", "Selanjutnya");
 define("L_REF_CAL", "Menyegarkan Kalender...");
 define("L_CHK_VAL", "Periksa Nilainya");
 define("L_SEL_LANG", "Pilih Bahasa");
-define("L_SEL_ICON", "Pilih Ikon");
+define("L_SEL_ICON", "Pilih");
 define("L_SEL_DATE", "Pilih Tanggal");
 define("L_ERR_SEL", "Pilihan yang ada pilih salah");
 define("L_NOT_ALLOWED", "Tanggal ini tidak dijinkan untuk dipilih");
@@ -25,6 +25,7 @@ define("L_DATE_AFTER", "Silakan pilih tanggal setelah %s");
 define("L_DATE_BETWEEN", "Silakan pilih tanggal antara\\n%s dan %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Belum diset");
+define("L_CLOSE", "Tutup");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
@@ -48,8 +49,9 @@ define("L_S_FEB", "Feb");
 define("L_S_MAR", "Mar");
 define("L_S_APR", "Apr");
 define("L_S_MAY", "Mei");
+define("L_S_JUN", "Jun");
 define("L_S_JUL", "Jul");
-define("L_S_AUG", "Agust");
+define("L_S_AUG", "Agu");
 define("L_S_SEP", "Sep");
 define("L_S_OCT", "Okt");
 define("L_S_NOV", "Nov");

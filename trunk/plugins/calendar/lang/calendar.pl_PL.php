@@ -1,10 +1,10 @@
 <?php
 # pl_PL translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.61
+# Version: 3.69
 # Language: Polish / polska
 # Translator: Adam Królikowski <goldunube@gmail.com>
-# Last file update: 01.09.2011
+# Last file update: 19.05.2013
 
 // Class strings localization
 define("L_DAYC", "Dzień");
@@ -16,7 +16,7 @@ define("L_NEXT", "Następny");
 define("L_REF_CAL", "Odśwież Kalendarz...");
 define("L_CHK_VAL", "Sprawdź wartość");
 define("L_SEL_LANG", "Wybierz język");
-define("L_SEL_ICON", "Wybierz ikone");
+define("L_SEL_ICON", "Wybierać");
 define("L_SEL_DATE", "Wybierz Datę");
 define("L_ERR_SEL", "Twój wybór jest niepoprawny");
 define("L_NOT_ALLOWED", "Ta dana nie może zostać wybrana");
@@ -25,11 +25,13 @@ define("L_DATE_AFTER", "Wybierz datę po %s");
 define("L_DATE_BETWEEN", "Wybierz datę między\\n%s a %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Anulować");
+define("L_CLOSE", "Zamknąć");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
 
 // Months Long Names
+# Menu - nominative
 define("L_JAN", "styczeń");
 define("L_FEB", "luty");
 define("L_MAR", "marzec");
@@ -42,6 +44,19 @@ define("L_SEP", "wrzesień");
 define("L_OCT", "październik");
 define("L_NOV", "listopad");
 define("L_DEC", "grudzień");
+# Dates - genitive
+define("L_JANG", "stycznia");
+define("L_FEBG", "lutego");
+define("L_MARG", "marca");
+define("L_APRG", "kwietnia");
+define("L_MAYG", "maja");
+define("L_JUNG", "czerwca");
+define("L_JULG", "lipca");
+define("L_AUGG", "sierpnia");
+define("L_SEPG", "września");
+define("L_OCTG", "października");
+define("L_NOVG", "listopada");
+define("L_DECG", "grudnia");
 // Months Short Names
 define("L_S_JAN", "st");
 define("L_S_FEB", "lu");
@@ -74,7 +89,7 @@ define("L_S_SUN", "nie");
 
 // Windows encoding
 define("WIN_DEFAULT", "iso-8859-2");
-define("L_CAL_FORMAT", "%d %B %Y"); //(d-m-Y")
+define("L_CAL_FORMAT", "%d. %B %Y"); //(d-m-Y")
 if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "pl_PL"); // en_US format of your language
 
 // Set the PL specific date/time format

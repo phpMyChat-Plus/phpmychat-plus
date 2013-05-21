@@ -1,10 +1,10 @@
 <?php
 # en_US - this file includes the specific strings for both en_GB/en_US
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.61
+# Version: 3.69
 # Language: American English / English US
 # Translator: Ciprian Murariu <ciprianmp@yahoo.com>
-# Last file update: 29.08.2011
+# Last file update: 18.05.2013
 
 if (!function_exists('utf_conv'))
 {
@@ -42,7 +42,7 @@ if(!defined("L_NEXT")) define("L_NEXT", "Next");
 if(!defined("L_REF_CAL")) define("L_REF_CAL", "Refreshing Calendar...");
 if(!defined("L_CHK_VAL")) define("L_CHK_VAL", "Check the value");
 if(!defined("L_SEL_LANG")) define("L_SEL_LANG", "Select Language");
-if(!defined("L_SEL_ICON")) define("L_SEL_ICON", "Select Icon");
+if(!defined("L_SEL_ICON")) define("L_SEL_ICON", "Select");
 if(!defined("L_SEL_DATE")) define("L_SEL_DATE", "Select Date");
 if(!defined("L_ERR_SEL")) define("L_ERR_SEL", "Your selection is not valid");
 if(!defined("L_NOT_ALLOWED")) define("L_NOT_ALLOWED", "This date is not allowed to be selected");
@@ -51,9 +51,9 @@ if(!defined("L_DATE_AFTER")) define("L_DATE_AFTER", "Please choose a date after 
 if(!defined("L_DATE_BETWEEN")) define("L_DATE_BETWEEN", "Please choose a date between\\n%s and %s");
 if(!defined("L_WEEK_HDR")) define("L_WEEK_HDR", "");
 if(!defined("L_UNSET")) define("L_UNSET", "Unset");
-
-// Set the first day of the week in your language
-if(!defined("FIRST_DAY")) define("FIRST_DAY", "0"); // 1 for Monday, 0 for Sunday
+if(!defined("L_CLOSE")) define("L_CLOSE", "Close");
+if(!defined("L_WARN_2038")) define("L_WARN_2038", "Your php version does not have support for year 2038 and later!"); #3.69
+if(!defined("FIRST_DAY")) define("FIRST_DAY", "0"); // 0 for Sunday
 
 // Months Long Names
 if(!defined("L_JAN")) define("L_JAN", "January");
@@ -98,7 +98,7 @@ if(!defined("L_S_FRI")) define("L_S_FRI", "Fr");
 if(!defined("L_S_SAT")) define("L_S_SAT", "Sa");
 if(!defined("L_S_SUN")) define("L_S_SUN", "Su");
 
-// Display extratext beside years, months and/or days in dropdowns (eg. Korean and Japan)
+// Display extra text beside years, months and/or days in dropdowns (eg. Korean and Japan)
 if(!defined("L_USE_YMD_DROP")) define("L_USE_YMD_DROP", 0);
 
 // Windows encoding
@@ -106,11 +106,15 @@ if(!defined("WIN_DEFAULT")) define("WIN_DEFAULT", "windows-1252");
 if(!defined("L_CAL_FORMAT")) define("L_CAL_FORMAT", "%B %d, %Y");
 if(!defined("DATE_FORMAT")) define("DATE_FORMAT", str_replace("%","",str_replace("B","F",str_replace("d","j",L_CAL_FORMAT))));
 
+// Arabic-Indic Digits variant
+if(!defined("L_DIGIT")) define("L_DIGIT", 0);
+if(!defined("L_UTF_DIGIT")) define("L_UTF_DIGIT", 0);
+if(!defined("L_ARABIC")) define("L_ARABIC", "Arabic Digits");
 ?>
 <SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
 <!--
 //	JS strings
-	var l_lang = "<?php echo(L_LANG); ?>";
+	var l_lang = "<?php echo($hl ? $hl : (defined("L_LANG") ? L_LANG : "")); ?>";
 	var l_sel_date = "<?php echo(L_SEL_DATE); ?>";
 	var l_not_allowed = "<?php echo(L_NOT_ALLOWED); ?>";
 	var l_date_before = "<?php echo(L_DATE_BEFORE); ?>";
@@ -120,6 +124,17 @@ if(!defined("DATE_FORMAT")) define("DATE_FORMAT", str_replace("%","",str_replace
 	var l_day = "<?php echo(L_DAYC); ?>";
 	var l_month = "<?php echo(L_MONTHC); ?>";
 	var l_year = "<?php echo(L_YEARC); ?>";
+	var l_ref_cal = "<?php echo(L_REF_CAL); ?>";
+	//Digitizer
+	var l_arabic = "<?php echo(L_ARABIC); ?>";
+<?php
+if(defined("L_INDIC") && L_INDIC != "L_INDIC"){
+?>
+	var l_indic = "<?php echo(L_INDIC); ?>";
+<?php
+}
+?>
+	var l_utf_digit = <?php echo(L_UTF_DIGIT); ?>;
 //	Long Month Names
 	var l_january = "<?php echo(defined('L_JAN') ? L_JAN : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1199145600')) : strftime('%B','1199145600'))); ?>";
 	var l_february = "<?php echo(defined('L_FEB') ? L_FEB : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1201824000')) : strftime('%B','1201824000'))); ?>";
@@ -133,21 +148,32 @@ if(!defined("DATE_FORMAT")) define("DATE_FORMAT", str_replace("%","",str_replace
 	var l_october = "<?php echo(defined('L_OCT') ? L_OCT : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1222819200')) : strftime('%B','1220227200'))); ?>";
 	var l_november = "<?php echo(defined('L_NOV') ? L_NOV : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1225497600')) : strftime('%B','1225497600'))); ?>";
 	var l_december = "<?php echo(defined('L_DEC') ? L_DEC : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%B','1228089600')) : strftime('%B','1228089600'))); ?>";
-if(l_lang == "el_GR"){
-//	Date Month Names Greek
-	var l_januaryu = "<?php echo(defined('L_JANU') ? L_JANU : ""); ?>";
-	var l_februaryu = "<?php echo(defined('L_FEBU') ? L_FEBU : ""); ?>";
-	var l_marchu = "<?php echo(defined('L_MARU') ? L_MARU : ""); ?>";
-	var l_aprilu = "<?php echo(defined('L_APRU') ? L_APRU : ""); ?>";
-	var l_mayu = "<?php echo(defined('L_MAYU') ? L_MAYU : ""); ?>";
-	var l_juneu = "<?php echo(defined('L_JUNU') ? L_JUNU : ""); ?>";
-	var l_julyu = "<?php echo(defined('L_JULU') ? L_JULU : ""); ?>";
-	var l_augustu = "<?php echo(defined('L_AUGU') ? L_AUGU : ""); ?>";
-	var l_septemberu = "<?php echo(defined('L_SEPU') ? L_SEPU : ""); ?>";
-	var l_octoberu = "<?php echo(defined('L_OCTU') ? L_OCTU : ""); ?>";
-	var l_novemberu = "<?php echo(defined('L_NOVU') ? L_NOVU : ""); ?>";
-	var l_decemberu = "<?php echo(defined('L_DECU') ? L_DECU : ""); ?>";
+<?php
+//	Date Month Names in genitive format
+if(defined("L_JANG") && L_JANG != "L_JANG")
+{
+?>
+	var l_genitive = 1;
+	var l_januaryg = "<?php echo(defined('L_JANG') ? L_JANG : ""); ?>";
+	var l_februaryg = "<?php echo(defined('L_FEBG') ? L_FEBG : ""); ?>";
+	var l_marchg = "<?php echo(defined('L_MARG') ? L_MARG : ""); ?>";
+	var l_aprilg = "<?php echo(defined('L_APRG') ? L_APRG : ""); ?>";
+	var l_mayg = "<?php echo(defined('L_MAYG') ? L_MAYG : ""); ?>";
+	var l_juneg = "<?php echo(defined('L_JUNG') ? L_JUNG : ""); ?>";
+	var l_julyg = "<?php echo(defined('L_JULG') ? L_JULG : ""); ?>";
+	var l_augustg = "<?php echo(defined('L_AUGG') ? L_AUGG : ""); ?>";
+	var l_septemberg = "<?php echo(defined('L_SEPG') ? L_SEPG : ""); ?>";
+	var l_octoberg = "<?php echo(defined('L_OCTG') ? L_OCTG : ""); ?>";
+	var l_novemberg = "<?php echo(defined('L_NOVG') ? L_NOVG : ""); ?>";
+	var l_decemberg = "<?php echo(defined('L_DECG') ? L_DECG : ""); ?>";
+<?php
 }
+else{
+?>
+	var l_genitive = 0;
+<?php
+}
+?>
 //	Short Month Names
 	var s_jan = "<?php echo(defined('L_S_JAN') ? L_S_JAN : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%b','1199145600')) : strftime('%b','1199145600'))); ?>";
 	var s_feb = "<?php echo(defined('L_S_FEB') ? L_S_FEB : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%b','1201824000')) : strftime('%b','1201824000'))); ?>";

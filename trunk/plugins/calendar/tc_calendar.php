@@ -3,154 +3,10 @@
 // The php calendar component
 // written by TJ @triconsole
 //
-// add on: translation  implemented - default is English en_US
+// add on: translation implemented - default is English en_US
 //	- thanks ciprianmp
 //
-// version 3.68-loc (released 25 November 2011/updated 21 March 2013)
-
-//fixed: Incorrect next month display show on 'February 2008'
-//	- thanks Neeraj Jain for bug report
-//
-//fixed: Incorrect month comparable on calendar_form.php line 113
-// - thanks Djenan Ganic, Ian Parsons, Jesse Davis for bug report
-//
-//add on: date on calendar form change upon textbox in datepicker mode
-//add on: validate date enter from dropdown and textbox
-//
-//fixed: Calendar path not valid when select date from dropdown
-// - thanks yamba for bug report
-//
-//adjust: add new function setWidth and deprecate getDayNum function
-//
-//fixed: year combo box display not correct when extend its value
-//	- thanks Luiz Augusto for bug report
-//
-//fixed on date and month value return that is not leading by '0'
-//
-//adjust: change php short open tag (<?=) to normal tag (<?php)
-//  - thanks Michael Lynch
-//
-//add on: getMonthNames() function to make custom month names on each language
-//  - thanks Jean-Francois Harrington
-//
-//add on: button close on datepicker on the top-right corner of calendar
-//  - thanks denis
-//
-//fixed: hide javascript alert when default date not defined
-//	- thanks jon-b
-//
-//fixed: incorrect layout when select part of date
-//	- thanks simonzebu (I just got what you said  :) )
-//
-//fixed: not support date('N') for php version lower 5.0.1 so change to date('w') instead
-//  - thanks simonzebu, Kamil, greensilver for bug report
-//  - thanks Paul for the solution
-//
-//add on: setHeight() function to set the height of iframe container of calendar
-//	- thanks Nolochemcial
-//
-//add on: startMonday() function to set calendar display first day of week on Monday - deprecated since 3.61 and replaced by startDate()
-//
-//fixed: don't display year when not in year interval
-//
-//fixed: day combobox not update when select date from calendar
-//	- thanks ciprianmp
-//
-//add on: disabledDay() function to let the calendar disabled on specified day
-//  - thanks Jim R.
-//
-//fixed: total number of days startup incorrect
-//  - thanks Francois du Toit, ciprianmp
-//
-//add on: setAlignment() and setDatePair() function
-//  - thanks ciprianmp and many guys guiding this :)
-//
-//fixed: the header of calendar looks tight when day's header more than 2 characters, this can be adjusted by increasing width on calendar.css [#calendar-body td div { width: 15px; }]
-//	- thanks ciprianmp
-//
-//add on: setSpecificDate() to enable or disable specific date
-//	- thanks ciprianmp, phillip, and Steve to suggest this
-//
-//utilizing and cleaning up some codes on tc_calendar.php, calendar_form.php, and calendar.js
-//	- thanks Peter
-//
-//added: 2 functions for php version that does not support json
-//	- thanks Steve
-//
-//fixed: javascript error on datepair function on v3.50 and 3.51
-//	- thanks ciprianmp
-//
-//fixed: writeYear bug from $date_allow1 & 2 must be changed to $time_allow1 & 2
-//	- thanks ciprianmp again :(
-//
-//updated: setSpecificDate can be set month, year, and no recursive simultaneously
-//	- thanks ciprianmp, Steve
-//
-//add on: setOnChange to handling javascript onChange event
-//
-//fixed: dateAllow contains error on calendar_form.php
-//	- thanks matthijs
-//
-//fixed: error on calendar.js function checkSpecifyDate
-//	- thanks Todd
-//
-//fixed: the value of calendar is not restored when using back button on browser
-//  - thanks Nicolai
-//
-//add on: add X as background of disabled days
-//	- thanks SanSar
-//
-//fixed: 'Day' combobox contain no list dropdown when not call setDate() on initialization
-//	- thanks Fulin
-//
-//fixed: Fixed display style still have the default value in case the date is disabled.
-//	- thanks ciprianmp
-//
-//fixed: today date color disappear when date is disabled.
-//	- thanks ciprianmp
-//
-//fixed: javascript error from IE compatible not support for JSON
-//	- thanks ciprianmp
-//
-//adjusted: change the color of today date to green with border
-//	- thanks ciprianmp
-//
-//adjusted: rearrange source code on calendar_form.php for future use
-//
-//add on: showWeeks function
-//	- thanks Michael
-//
-//add on: support for RTL (right-to-left output)
-//	- thanks ciprianmp
-//
-//add on: startDate function and will be used instead of startMonday
-//
-//changed: make the DatePair function selectable on any dates. Date-from must be before Date-to, and on the other hand, otherwise it will be reset
-//	- thanks Chris, Rickard, ciprianmp
-//
-//fixed: incorrect parameter submited on javascript that caused an invalid date returned
-//	- thanks ciprianmp
-//
-//fixed: date selected highlight error
-//	- thanks John
-//
-//add on: auto hide calendar
-//	- thanks Wayne, Chris
-//
-//add on: auto focus an overlapping calendar to the top
-//
-//fixed: json checking function return error when server does not support for json
-//	- thanks strangeplant
-//
-//fixed: javascript possible error on Date.parse
-//fixed: add on-change javascript in dropdown datepicker mode (missing previously)
-//	- thanks Alex
-//
-//fixed: 1st and 31st are always disabled on php4
-//	- thanks dl
-//
-//fixed: selected property changed to selected="selected" for FF compatibility
-//	- thanks Michele
+// version 3.69-loc (released 23 March 2011/updated 19 May 2013)
 //
 ////********************************************************
 
@@ -170,6 +26,8 @@ elseif(file_exists("calendar.js"))
 <?php
 }
 
+require_once('classes/tc_date.php');
+
 class tc_calendar{
 	var $icon;
 	var $objname;
@@ -185,6 +43,8 @@ class tc_calendar{
 	var $height = 205;
 	var $year_start;
 	var $year_end;
+	var $year_start_input;
+	var $year_end_input;
 	var $startDate = FIRST_DAY; //0 (for Sunday) through 6 (for Saturday)
 	var $time_allow1 = false;
 	var $time_allow2 = false;
@@ -207,10 +67,14 @@ class tc_calendar{
 	var $rtl = RTL;
 	var $show_week = false;
 	var $week_hdr = L_WEEK_HDR;
-	var $interval = 1;
+	var $interval = 1; //date selected interval, default 1 day
 	var $auto_hide = 1;
 	var $auto_hide_time = 1000;
+	var $mydate;
+	var $warning_msgs = array();
 	var $hl = L_LANG;
+	//Digitizer
+	var $dig = L_DIGIT;
 
 	//calendar constructor
 	function tc_calendar($objname, $date_picker = false, $show_input = true){
@@ -224,6 +88,8 @@ class tc_calendar{
 		$this->year_end = $thisyear+$this->year_display_from_current;
 
 		$this->show_input = $show_input;
+
+		$this->mydate = new tc_date();
 	}
 
 	//check for leapyear
@@ -305,9 +171,7 @@ class tc_calendar{
 		//check valid default date
 		if(!$this->checkDefaultDateValid()){
 			//unset default date
-			$this->day = 0;
-			$this->month = 0;
-			$this->year = 0;
+			$this->setDate(00, 00, 0000);
 		}
 
 		$this->writeHidden();
@@ -318,7 +182,7 @@ class tc_calendar{
 
 			if($this->show_input){
 				if($this->hl){
-					$to_replace = array("%"," ",".",",","ב","年","日","년","일");
+					$to_replace = array("%"," ",".",",","،","η","ב","г","年","日","月","년","일");
 					$order = str_replace($to_replace,"",L_CAL_FORMAT);
 					if(strpos($order,"d") == 0 && !$this->rtl) $this->writeDay();
 					elseif(strpos($order,"B") == 0 && !$this->rtl) $this->writeMonth();
@@ -335,14 +199,19 @@ class tc_calendar{
 					$this->writeYear();
 				}
 			}else{
-				echo(" <a href=\"javascript:toggleCalendar('".$this->objname."', ".$this->auto_hide.", ".$this->auto_hide_time.");\">");
+				echo("&nbsp;<a href=\"javascript:toggleCalendar('".$this->objname."', ".$this->auto_hide.", ".$this->auto_hide_time.");\" class=\"tclabel\">");
 				$this->writeDateContainer();
 				echo("</a>");
 			}
 
-			echo(" <a href=\"javascript:toggleCalendar('".$this->objname."', ".$this->auto_hide.", ".$this->auto_hide_time.");\">");
+			//Digitizer frame
+			if($this->dig || L_UTF_DIGIT){
+				echo("&nbsp;<a href=\"javascript:toggleDigitsFrame('".$this->objname."');\" class=\"btn\"><img src=\"".($this->path ? $this->path : "")."images/digit_".($this->dig ? "ar" : "hi").".gif\" width=\"20\" height=\"13\" border=\"0\" alt=\"".($this->dig ? L_ARABIC : L_INDIC)."\" title=\"".($this->dig ? L_ARABIC : L_INDIC)."\" id=\"".$this->objname."_digicon\" /></a>&nbsp;");
+			}
+
+			echo("&nbsp;<a href=\"javascript:toggleCalendar('".$this->objname."', ".$this->auto_hide.", ".$this->auto_hide_time.");\">");
 			if(is_file($this->icon)){
-				echo("<img src=\"".$this->icon."\" id=\"tcbtn_".$this->objname."\" name=\"tcbtn_".$this->objname."\" border=\"0\" align=\"absmiddle\" />");
+				echo("<img src=\"".$this->icon."\" id=\"tcbtn_".$this->objname."\" name=\"tcbtn_".$this->objname."\" border=\"0\" align=\"absmiddle\" alt=\"".$this->txt."\" title=\"".$this->txt."\" />");
 			}else echo($this->txt);
 			echo("</a>");
 
@@ -360,8 +229,8 @@ class tc_calendar{
 		$params[] = "selected_day=".$this->day;
 		$params[] = "selected_month=".$this->month;
 		$params[] = "selected_year=".$this->year;
-		$params[] = "year_start=".$this->year_start;
-		$params[] = "year_end=".$this->year_end;
+		$params[] = "year_start=".$this->year_start_input;
+		$params[] = "year_end=".$this->year_end_input;
 		$params[] = "dp=".(($this->date_picker) ? 1 : 0);
 		$params[] = "da1=".$this->time_allow1;
 		$params[] = "da2=".$this->time_allow2;
@@ -386,6 +255,8 @@ class tc_calendar{
 		$params[] = "hid=".$this->auto_hide;
 		$params[] = "hdt=".$this->auto_hide_time;
 		$params[] = "hl=".$this->hl;
+		//Digitizer
+		$params[] = "dig=".$this->dig;
 
 		$paramStr = (sizeof($params)>0) ? "?".implode("&", $params) : "";
 
@@ -434,7 +305,7 @@ class tc_calendar{
 		$mover_str = " onmouseover=\"javascript:cancelHide('".$this->objname."');\"";
 
 		//write the calendar container
-		echo("<div id=\"div_".$this->objname."\" style=\"position:".$div_position.";visibility:".$div_display.";z-index:100;".$div_align."\" class=\"div_calendar calendar-border\" ".$mout_str." ".$mover_str.">");
+		echo("<div id=\"div_".$this->objname."\" style=\"position:".$div_position."; visibility:".$div_display."; z-index:100;".$div_align."\" class=\"div_calendar calendar-border\" ".$mout_str.$mover_str.">");
 		echo("<IFRAME id=\"".$this->objname."_frame\" src=\"".$this->path."calendar_form.php".$paramStr."\" frameBorder=\"0\" scrolling=\"no\" allowtransparency=\"true\" width=\"100%\" height=\"100%\" style=\"z-index: 100;\"></IFRAME>");
 		echo("</div>");
 	}
@@ -447,7 +318,11 @@ class tc_calendar{
 		echo("<option value=\"00\"".($this->rtl ? " dir=\"rtl\"" : "").">".L_DAYC."</option>");
 		for($i=1; $i<=$total_days; $i++){
 			$selected = ((int)$this->day == $i) ? " selected='selected'" : "";
-			echo("<option value=\"".str_pad($i, 2 , "0", STR_PAD_LEFT)."\"$selected".($this->rtl ? " dir=\"rtl\"" : "").">".$i."</option>");
+#			$day_txt = $this->mydate->getDateFromTimestamp($this->mydate->getTimestamp($this->year."-".$this->month."-".$i), 'D');
+#			if(in_array(strtolower($day_txt), $this->dsb_days) !== false){
+			//Digitizer
+			echo("<option value=\"".str_pad($i, 2 , "0", STR_PAD_LEFT)."\"".$selected.($this->rtl ? " dir=\"rtl\"" : "").">".($this->dig ? $this->digitize_arabics($i) : $i)."</option>");
+#			}
 		}
 		echo("</select> ");
 	}
@@ -460,7 +335,7 @@ class tc_calendar{
 		$monthnames = $this->getMonthNames();
 		for($i=1; $i<=sizeof($monthnames); $i++){
 			$selected = ((int)$this->month == $i) ? " selected='selected'" : "";
-			echo("<option value=\"".str_pad($i, 2, "0", STR_PAD_LEFT)."\"$selected".($this->rtl ? " dir=\"rtl\"" : "").">".$monthnames[$i-1]."</option>");
+			echo("<option value=\"".str_pad($i, 2, "0", STR_PAD_LEFT)."\"".$selected.($this->rtl ? " dir=\"rtl\"" : "").">".($this->dig ? $this->digitize_arabics($monthnames[$i-1]) : $monthnames[$i-1])."</option>");
 		}
 		echo("</select> ");
 	}
@@ -477,30 +352,21 @@ class tc_calendar{
 		//check year to be selected in case of time_allow is set
 		  if(!$this->show_not_allow && ($this->time_allow1 || $this->time_allow2)){
 			if($this->time_allow1 && $this->time_allow2){
-				$da1Time = strtotime($this->time_allow1);
-				$da2Time = strtotime($this->time_allow2);
-
-				if($da1Time < $da2Time){
-					$year_start = date('Y', $da1Time);
-					$year_end = date('Y', $da2Time);
-				}else{
-					$year_start = date('Y', $da2Time);
-					$year_end = date('Y', $da1Time);
-				}
+				$year_start = $this->mydate->getDateFromTimestamp($this->time_allow1, 'Y');
+				$year_end = $this->mydate->getDateFromTimestamp($this->time_allow2, 'Y');
 			}elseif($this->time_allow1){
 				//only date 1 specified
-				$da1Time = strtotime($this->time_allow1);
-				$year_start = date('Y', $da1Time);
+				$year_start = $this->mydate->getDateFromTimestamp($this->time_allow1, 'Y');
 			}elseif($this->time_allow2){
 				//only date 2 specified
-				$da2Time = strtotime($this->time_allow2);
-				$year_end = date('Y', $da2Time);
+				$year_end = $this->mydate->getDateFromTimestamp($this->time_allow2, 'Y');
 			}
 		  }
 
 		for($i=$year_end; $i>=$year_start; $i--){
 			$selected = ((int)$this->year == $i) ? " selected='selected'" : "";
-			echo("<option value=\"$i\"$selected".($this->rtl ? " dir=\"rtl\"" : "").">".$i.(L_USE_YMD_DROP ? L_YEARC : "")."</option>");
+			//Digitizer
+			echo("<option value=\"".$i."\"".$selected.($this->rtl ? " dir=\"rtl\"" : "").">".($this->dig ? $this->digitize_arabics($i) : $i).(L_USE_YMD_DROP ? L_YEARC : "")."</option>");
 		}
 		echo("</select> ");
 	}
@@ -539,6 +405,8 @@ class tc_calendar{
 		$this->eHidden('hid', $this->auto_hide);
 		$this->eHidden('hdt', $this->auto_hide_time);
 		$this->eHidden('hl', $this->hl);
+		//Digitizer
+		$this->eHidden('dig', $this->dig);
 	}
 
 	//set width of calendar
@@ -560,12 +428,26 @@ class tc_calendar{
 	}
 
 	function setYearInterval($start, $end){
+		$this->year_start_input = $start;
+		$this->year_end_input = $end;
+
+		if(!$start) $start = $this->year_start;
+		if(!$end) $end = $this->year_end;
+
 		if($start < $end){
 			$this->year_start = $start;
 			$this->year_end = $end;
 		}else{
 			$this->year_start = $end;
 			$this->year_end = $start;
+		}
+
+		//check for supported year
+		if($this->year_start < 1900) $this->year_start = 1900;
+
+		if(!$this->mydate->compatible && $this->year_end > 2037){
+			$this->year_end = 2037;
+			$this->warning_msgs[] = L_WARN_2038;
 		}
 	}
 
@@ -590,38 +472,38 @@ class tc_calendar{
 	}
 
 	function dateAllow($from = "", $to = "", $show_not_allow = true){
-		$time_from = strtotime($from);
-		$time_to = strtotime($to);
+		$time_from = ($from) ? $this->mydate->getTimestamp($from) : 0;
+		$time_to = ($to) ? $this->mydate->getTimestamp($to) : 0;
 
 		// prior to version 5.1 strtotime returns -1 for bad input
         if (version_compare(PHP_VERSION, '5.1.0') < 0) {
-			if ($time_from == -1) $time_from = false;
-			if ($time_to == -1) $time_to = false;
+			if ($time_from == -1) $time_from = 0;
+			if ($time_to == -1) $time_to = 0;
 		}
 
 		// sanity check, ensure time_from earlier than time_to
-		if(is_int($time_from) && is_int($time_to) && $time_from > $time_to){
+		if($time_from>0 && $time_to>0 && $time_from > $time_to){
 			$tmp = $time_from;
 			$time_from = $time_to;
 			$time_to = $tmp;
 		}
 
-		if (is_int($time_from)) {
+		if ($time_from>0) {
 			$this->time_allow1 = $time_from;
-			$y = date('Y', $time_from);
-			if($this->year_start && $y < $this->year_start) $this->year_start = $y;
+			$y = $this->mydate->getDateFromTimestamp($time_from, 'Y');
+			if($this->year_start && $y > $this->year_start) $this->year_start = $y;
 
 			//setup year end from year start
-			if(!is_int($time_to) && !$this->year_end) $this->year_end = $this->year_start + $this->year_display_from_current;
+			if($time_to<=0 && !$this->year_end) $this->year_end = $this->year_start + $this->year_display_from_current;
 		}
 
-		if (is_int($time_to)) {
+		if ($time_to>0) {
 			$this->time_allow2 = $time_to;
-			$y = date('Y', $time_to);
+			$y = $this->mydate->getDateFromTimestamp($time_to, 'Y');
 			if($this->year_end && $y < $this->year_end) $this->year_end = $y;
 
 			//setup year start from year end
-			if(!is_int($time_from) && !$this->year_start) $this->year_start = $this->year_end - $this->year_display_from_current;
+			if($time_from<=0 && !$this->year_start) $this->year_start = $this->year_end - $this->year_display_from_current;
 		}
 
 		$this->show_not_allow = $show_not_allow;
@@ -656,12 +538,13 @@ class tc_calendar{
 					$dd = strftime(L_CAL_FORMAT, mktime(0,0,0,$this->month,$this->day,$this->year));
 				}
 			}else{
-				$dd = date($this->date_format, mktime(0,0,0,$this->month,$this->day,$this->year));
+				$dd = $this->mydate->getDate($this->date_format, $this->year."-".$this->month."-".$this->day);
 			}
 		}
 		else $dd = L_SEL_DATE;
 
-		echo("<span id=\"divCalendar_".$this->objname."_lbl\" class=\"date-tccontainer\"".($this->rtl ? " dir=\"rtl\"" : "").">$dd</span>");
+		//Digitizer
+		echo("<span id=\"divCalendar_".$this->objname."_lbl\" class=\"date-tccontainer\"".($this->rtl ? " dir=\"rtl\"" : "").">".($this->dig ? $this->digitize_arabics($dd) : $dd)."</span>");
 	}
 
 	//------------------------------------------------------
@@ -697,7 +580,7 @@ class tc_calendar{
 
 			//change specific date to time
 			foreach($dates as $sp_date){
-				$sp_time = strtotime($sp_date);
+				$sp_time = $this->mydate->getTimestamp($sp_date);
 
 				if($sp_time > 0){
 					switch($recursive){
@@ -720,17 +603,36 @@ class tc_calendar{
 		}
 	}
 
-	function checkDefaultDateValid(){
-		$default_datetime = mktime(0,0,0,$this->month,$this->day,$this->year);
-		$valid = true;
+	function checkDefaultDateValid($reset = true){
+		$date_str = $this->year."-".$this->month."-".$this->day;
+		$default_datetime = $this->mydate->getTimestamp($date_str);
+
+		//reset year if set to 2038 and later
+		if(!$this->mydate->compatible && $this->year >= 2038){
+			return false;
+		}
+
+		//check if set date is in year interval
+		$start_interval = $this->year_start."-01-01";
+		$end_interval = $this->year_end."-12-31";
+
+		//check if set date is before start_interval
+		if($this->mydate->dateBefore($start_interval, $date_str)){
+			return false;
+		}
+
+		//check if set date is after end_interval
+		if($this->mydate->dateAfter($end_interval, $date_str)){
+			return false;
+		}
 
 		//check with allow date
 		if($this->time_allow1 && $this->time_allow2){
-			if($default_datetime < $this->time_allow1 || $default_datetime > $this->time_allow2) $valid = false;
+			if($default_datetime < $this->time_allow1 || $default_datetime > $this->time_allow2) return false;
 		}elseif($this->time_allow1){
-			if($default_datetime < $this->time_allow1) $valid = false;
+			if($default_datetime < $this->time_allow1) return false;
 		}elseif($this->time_allow2){
-			if($default_datetime > $this->time_allow2) $valid = false;
+			if($default_datetime > $this->time_allow2) return false;
 		}
 
 		//check with specific date
@@ -740,8 +642,8 @@ class tc_calendar{
 
 			if(isset($this->sp_dates[2])){
 				foreach($this->sp_dates[2] as $sp_time){
-					$sp_time_md = date('md', $sp_time);
-					$this_md = date('md', $default_datetime);
+					$sp_time_md = $this->mydate->getDateFromTimestamp($sp_time, 'md');
+					$this_md = $this->mydate->getDateFromTimestamp($default_datetime, 'md');
 					if($sp_time_md == $this_md){
 						$sp_found = true;
 						break;
@@ -751,7 +653,7 @@ class tc_calendar{
 
 			if(isset($this->sp_dates[1]) && !$sp_found){
 				foreach($this->sp_dates[1] as $sp_time){
-					$sp_time_d = date('d', $sp_time);
+					$sp_time_d = $this->mydate->getDateFromTimestamp($sp_time, 'd');
 					if($sp_time_d == $this->day){
 						$sp_found = true;
 						break;
@@ -767,23 +669,23 @@ class tc_calendar{
 				case 0:
 				default:
 					//disabled specific and enabled others
-					if($sp_found) $valid = false;
+					if($sp_found) return false;
 					break;
 				case 1:
 					//enabled specific and disabled others
-					if(!$sp_found) $valid = false;
+					if(!$sp_found) return false;
 					break;
 			}
 		}
 
 		if(is_array($this->dsb_days) && sizeof($this->dsb_days) > 0){
-			$day_txt = date('D', $default_datetime);
+			$day_txt = $this->mydate->getDateFromTimestamp($default_datetime, 'D');
 			if(in_array(strtolower($day_txt), $this->dsb_days) !== false){
-				$valid = false;
+				return false;
 			}
 		}
 
-		return $valid;
+		return true;
 	}
 
 	function check_json_encode($obj){
@@ -792,7 +694,7 @@ class tc_calendar{
 		if(function_exists("json_encode")){
 			return json_encode($obj);
 		}else{
-			//only array is assumed for now			
+			//only array is assumed for now
 			if(is_array($obj)){
 				$return_arr = array();
 				foreach($obj as $arr){
@@ -814,15 +716,15 @@ class tc_calendar{
 			$str = trim($str);
 			if($str && strlen($str) > 2){
 				$str = substr($str, 1, strlen($str)-2);
-				
+
 				$return_arr = array();
-				
+
 				$offset = 0;
 				for($i=0; $i<3; $i++){
 					//find first '['
 					$start_pos = strpos($str, "[", $offset);
 					if($start_pos !== false){
-						//find next ']'	
+						//find next ']'
 						$end_pos = strpos($str, "]", $offset);
 						if($end_pos !== false){
 							$return_str = substr($str, $start_pos+1, ($end_pos-$start_pos-1));
@@ -843,12 +745,58 @@ class tc_calendar{
 	function showWeeks($flag){
 		$this->show_week = $flag;
 	}
-	
+
 	function setAutoHide($auto, $time = ""){
 		$this->auto_hide = ($auto) ? 1 : 0;
 		if($time != "" && $time >= 0){
 			$this->auto_hide_time = $time;
 		}
 	}
+
+	//*****************
+	// Validate the today date of calendar
+	//*****************
+	function validTodayDate(){
+		$today = $this->mydate->getDate();
+
+		//check if today is year 2038 and later
+		if(!$this->mydate->compatible && date('Y') >= 2038){
+			return false;
+		}
+
+		//check if today is in range of date allow
+		if($this->time_allow1 > 0){
+			//get date of time allow1
+			$date_allow1 = $this->mydate->getDateFromTimestamp($this->time_allow1);
+
+			//check valid if today is after date_allow1
+			if(!$this->mydate->dateAfter($date_allow1, $today))
+				return false;
+		}
+
+		if($this->time_allow2 > 0){
+			//get date of time allow2
+			$date_allow2 = $this->mydate->getDateFromTimestamp($this->time_allow2);
+
+			//check valid if today is before date_allow2
+			if(!$this->mydate->dateBefore($date_allow2, $today))
+				return false;
+		}
+		return true;
+	}
+
+	//Digitizer
+	//transform numbers to Arabic variants digits
+	function digitize_arabics($digit)
+	{
+		$digitized = $digit;
+		if(defined("L_ARABIC_DIGIT") && L_ARABIC_DIGIT != "L_ARABIC_DIGIT")
+		{
+			$digit_arabic = explode(", ", L_ARABIC_DIGIT);
+			$digitized = str_replace(range(0, 9), $digit_arabic, $digit);
+		}
+		return $digitized;
+	}
+
 }
 ?>

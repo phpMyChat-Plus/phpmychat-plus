@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // File : langnames.lib.php - plus version (21.08.2011 - rev.0)
 // Original file by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -37,10 +37,10 @@ define("L_ORIG_LANG_NL", "Nederlands");
 define("L_ORIG_LANG_PL", "polska");
 define("L_ORIG_LANG_PT", "português");
 define("L_ORIG_LANG_RO", "română");
-define("L_ORIG_LANG_RU", "rусский");
+define("L_ORIG_LANG_RU", "Русский");
 define("L_ORIG_LANG_SRL", "srpski");
 define("L_ORIG_LANG_SV", "svenska");
-define("L_ORIG_LANG_UK", "український");
+define("L_ORIG_LANG_UK", "Українське");
 define("L_ORIG_LANG_TH", "ภาษาไทย");
 define("L_ORIG_LANG_TR", "Türkçe");
 define("L_ORIG_LANG_VI", "Tiếng Việt");
