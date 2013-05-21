@@ -2,10 +2,10 @@
 # zh_TW translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Localized version of PHP-Calendar, DatePicker Calendar class: http://ciprianmp.com/scripts/calendar/
-# Version: 3.68
+# Version: 3.69
 # Language: Chinese Traditional / 繁體中文 // ex: Romanian (English name) / Română (Original name)
 # Translator: clouds_music <clouds.music@gmail.com>
-# Last file update: 27.04.2012
+# Last file update: 19.05.2013
 
 # define("RTL", 1); // uncomment only for right-to-left text (Arabic, Hebrew)
 
@@ -19,7 +19,7 @@ define("L_NEXT", "下月");
 define("L_REF_CAL", "更新日曆...");
 define("L_CHK_VAL", "檢查值");
 define("L_SEL_LANG", "語言選擇");
-define("L_SEL_ICON", "選擇圖標");
+define("L_SEL_ICON", "選擇");
 define("L_SEL_DATE", "選擇日期");
 define("L_ERR_SEL", "你的選擇是不正確");
 define("L_NOT_ALLOWED", "此日期是不允許被選中");
@@ -28,6 +28,7 @@ define("L_DATE_AFTER", "請選擇%s以後的日期");
 define("L_DATE_BETWEEN", "請選擇日期%s和%s之間");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "取消");
+define("L_CLOSE", "關閉");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "1");

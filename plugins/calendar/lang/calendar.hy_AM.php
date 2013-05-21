@@ -2,10 +2,10 @@
 # hy_AM translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Localized version of PHP-Calendar, DatePicker Calendar class: http://ciprianmp.com/scripts/calendar/
-# Version: 3.62
+# Version: 3.69
 # Language: Armenian / Հայերեն
 # Translator: Ptuchik <avo@pisem.net>
-# Last file update: 26.09.2011
+# Last file update: 19.05.2013
 
 # define("RTL", 1); // uncomment only for right-to-left text (Arabic, Hebrew)
 
@@ -19,15 +19,16 @@ define("L_NEXT", "Հաջորդ");
 define("L_REF_CAL", "Օրացույցը թարմացվում է...");
 define("L_CHK_VAL", "Ստուգել արդյունքը");
 define("L_SEL_LANG", "Ընտրել լեզուն");
-define("L_SEL_ICON", "Ընտրել նկարը");
+define("L_SEL_ICON", "Ընտրել");
 define("L_SEL_DATE", "Ընտրել ամսաթիվը");
 define("L_ERR_SEL", "Ձեր ընտրությունը սխալ է");
 define("L_NOT_ALLOWED", "Այդ ամսաթիվն ընտրելն արգելված է");
 define("L_DATE_BEFORE", "Խնդրում ենք ընտրել ամսաթիվ մինչև %s-ը");
 define("L_DATE_AFTER", "Խնդրում ենք ընտրել ամսաթիվ %s-ից հետո");
 define("L_DATE_BETWEEN", "Խնդրում ենք ընտրել ամսաթիվ %s-ից %s-ն ընկած ժամանակահատվածում");
-define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
+define("L_WEEK_HDR", "շ"); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Չեղարկել");
+define("L_CLOSE", "Մոտիկ");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "1");

@@ -1,10 +1,10 @@
 <?php
 # el_GR translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.61
+# Version: 3.69
 # Language: Greek / ελληνικά (in your lang)
 # Translator: Kostas Filios
-# Last file update: 01.09.2011
+# Last file update: 19.05.2013
 
 // Class strings localization
 define("L_DAYC", "Ημέρα");
@@ -16,7 +16,7 @@ define("L_NEXT", "Επόμενο");
 define("L_REF_CAL", "Επαναφόρτωση ημερολογίου...");
 define("L_CHK_VAL", "Έλεγξε την τιμή");
 define("L_SEL_LANG", "Επέλεξε γλώσσα");
-define("L_SEL_ICON", "Επέλεξε εικονίδιο");
+define("L_SEL_ICON", "Επέλεξε");
 define("L_SEL_DATE", "Επέλεξε ημέρα");
 define("L_ERR_SEL", "Λάθος επιλογή");
 define("L_NOT_ALLOWED", "Δεν επιτρέπετε η επιλογή αυτής της ημέρας");
@@ -25,12 +25,13 @@ define("L_DATE_AFTER", "Επιλέξτε μια ημερομηνία μετά τ
 define("L_DATE_BETWEEN", "Επιλέξτε μια ημερομηνία μεταξύ\\n%s και %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Αποεπιλογή");
+define("L_CLOSE", "Κλείσιμο");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
 
 // Months Long Names
-# Menu
+# Menu - nominative
 define("L_JAN", "Ιανουάριος");
 define("L_FEB", "Φεβρουάριος");
 define("L_MAR", "Μάρτιος");
@@ -43,19 +44,19 @@ define("L_SEP", "Σεπτέμβριος");
 define("L_OCT", "Οκτώβριος");
 define("L_NOV", "Νοέμβριος");
 define("L_DEC", "Δεκέμβριος");
-# Dates
-define("L_JANU", "Ιανουαρίου");
-define("L_FEBU", "Φεβρουαρίου");
-define("L_MARU", "Μαρτίου");
-define("L_APRU", "Απριλίου");
-define("L_MAYU", "Μαΐου");
-define("L_JUNU", "Ιουνίου");
-define("L_JULU", "Ιουλίου");
-define("L_AUGU", "Αυγούστου");
-define("L_SEPU", "Σεπτεμβρίου");
-define("L_OCTU", "Οκτωβρίου");
-define("L_NOVU", "Νοεμβρίου");
-define("L_DECU", "Δεκεμβρίου");
+# Dates - genitive
+define("L_JANG", "Ιανουαρίου");
+define("L_FEBG", "Φεβρουαρίου");
+define("L_MARG", "Μαρτίου");
+define("L_APRG", "Απριλίου");
+define("L_MAYG", "Μαΐου");
+define("L_JUNG", "Ιουνίου");
+define("L_JULG", "Ιουλίου");
+define("L_AUGG", "Αυγούστου");
+define("L_SEPG", "Σεπτεμβρίου");
+define("L_OCTG", "Οκτωβρίου");
+define("L_NOVG", "Νοεμβρίου");
+define("L_DECG", "Δεκεμβρίου");
 // Months Short Names
 define("L_S_JAN", "Ιαν");
 define("L_S_FEB", "Φεβ");
@@ -88,7 +89,7 @@ define("L_S_SUN", "Κυρ");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1253");
-define("L_CAL_FORMAT", "%d %B %Y");
+define("L_CAL_FORMAT", "%dη %B %Y");
 if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "el_GR"); // en_US format of your language
 
 // Set the EL specific date/time format;

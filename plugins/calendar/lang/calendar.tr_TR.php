@@ -1,10 +1,10 @@
 <?php
 # tr_TR translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.62
+# Version: 3.69
 # Language: Turkish / Türkçe
 # Translator: Volkan Övün <vovun@hotmail.com>
-# Last file update: 26.09.2011
+# Last file update: 19.05.2013
 
 // Class strings localization
 define("L_DAYC", "Gün");
@@ -16,7 +16,7 @@ define("L_NEXT", "Sonraki");
 define("L_REF_CAL", "Takvimi Yenile...");
 define("L_CHK_VAL", "Seçilmiş tarihi kontrol et");
 define("L_SEL_LANG", "Dil Seçimi");
-define("L_SEL_ICON", "İkon Seçimi");
+define("L_SEL_ICON", "Seç");
 define("L_SEL_DATE", "Tarih Seçimi");
 define("L_ERR_SEL", "Geçersiz bir seçim yeptınız");
 define("L_NOT_ALLOWED", "Bu tarihin seçilmesine izin verilmiyor");
@@ -25,6 +25,8 @@ define("L_DATE_AFTER", "%s sonra bir tarih seçin");
 define("L_DATE_BETWEEN", "%s ve %s\\narasındaki bir tarih seçin");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "İptal"); // Seçimi kaldır
+define("L_CLOSE", "Kapat");
+define("L_WARN_2038", "PHP sürümünüz 2038 yılı ve sonrasını desteklemiyor!");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday... 6 for Saturday)
 define("FIRST_DAY", "1");

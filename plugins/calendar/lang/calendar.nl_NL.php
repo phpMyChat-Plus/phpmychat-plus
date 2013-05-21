@@ -1,10 +1,10 @@
 ﻿<?php
 # nl_NL translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.61
+# Version: 3.69
 # Language: Dutch / Nederlands
 # Translator: Bert Moorlag <berbia@hotmail.com>
-# Last file update: 01.09.2011
+# Last file update: 19.05.2013
 
 // Class strings localization
 define("L_DAYC", "Dag");
@@ -16,7 +16,7 @@ define("L_NEXT", "Volgende");
 define("L_REF_CAL", "Kalender Vernieuwen...");
 define("L_CHK_VAL", "Controleer datum");
 define("L_SEL_LANG", "Selecteer Taal");
-define("L_SEL_ICON", "Selecteer Icoon");
+define("L_SEL_ICON", "Selecteer");
 define("L_SEL_DATE", "Selecteer Datum");
 define("L_ERR_SEL", "Dit is geen geldige selectie");
 define("L_NOT_ALLOWED", "Dit is geen geldige datum");
@@ -25,6 +25,7 @@ define("L_DATE_AFTER", "Kies een datum na %s");
 define("L_DATE_BETWEEN", "Kies een datum tussen\\n%s en %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Uitzetten "); //Zet uit
+define("L_CLOSE", "Sluiten");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

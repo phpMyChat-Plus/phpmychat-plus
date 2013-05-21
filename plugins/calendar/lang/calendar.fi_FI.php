@@ -1,10 +1,10 @@
 <?php
 # fi_FI translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.61
+# Version: 3.69
 # Language: Finnish / suomi // ex: Romanian / Română
 # Translator: Ilja Mäki <iksa@netti.fi>
-# Last file update: 01.09.2011
+# Last file update: 19.05.2013
 
 // Class strings localization
 define("L_DAYC", "Päivä");
@@ -16,7 +16,7 @@ define("L_NEXT", "Seuraava");
 define("L_REF_CAL", "Päivitetään kalenteria...");
 define("L_CHK_VAL", "Tarkista arvo");
 define("L_SEL_LANG", "Valitse kieli");
-define("L_SEL_ICON", "Valitse kuva");
+define("L_SEL_ICON", "Valitse");
 define("L_SEL_DATE", "Valitse päiväys");
 define("L_ERR_SEL", "Valintasi ei ole kelvollinen");
 define("L_NOT_ALLOWED", "Tätä päivämäärää ei voi valita");
@@ -25,11 +25,14 @@ define("L_DATE_AFTER", "Valitse päivämäärä %s jälkeen");
 define("L_DATE_BETWEEN", "Valitse päivämäärä väliltä\\n%s ja %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Nollaa");
+define("L_CLOSE", "Sulje");
+define("L_WARN_2038", "PHP-versiosi ei tue vuotta 2038 ja myöhempiä vuosia!");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
 
 // Months Long Names
+# Menu - nominative
 define("L_JAN", "tammikuu");
 define("L_FEB", "helmikuu");
 define("L_MAR", "maaliskuu");
@@ -42,6 +45,19 @@ define("L_SEP", "syyskuu");
 define("L_OCT", "lokakuu");
 define("L_NOV", "marraskuu");
 define("L_DEC", "joulukuu");
+# Dates - genitive
+define("L_JANG", "tammikuuta");
+define("L_FEBG", "helmikuuta");
+define("L_MARG", "maaliskuuta");
+define("L_APRG", "huhtikuuta");
+define("L_MAYG", "toukokuuta");
+define("L_JUNG", "kesäkuuta");
+define("L_JULG", "heinäkuuta");
+define("L_AUGG", "elokuuta");
+define("L_SEPG", "syyskuuta");
+define("L_OCTG", "lokakuuta");
+define("L_NOVG", "marraskuuta");
+define("L_DECG", "joulukuuta");
 // Months Short Names
 define("L_S_JAN", "tam");
 define("L_S_FEB", "hel");

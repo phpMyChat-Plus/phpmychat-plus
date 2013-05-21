@@ -1,10 +1,10 @@
 ﻿<?php
 # th_TH translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.61
+# Version: 3.69
 # Language: Thai / ภาษาไทย
 # Translator: 
-# Last file update: 01.09.2011
+# Last file update: 19.05.2013
 // Thailand mainly uses the Buddhist Era which is 543 years ahead of the Gregorian year. 1 January 2549 BE (AD 2006) 
 
 // Class strings localization
@@ -17,7 +17,7 @@ define("L_NEXT", "ถัดไป");
 define("L_REF_CAL", "ปฏิทินกิจกรรมรีเฟรช ...");
 define("L_CHK_VAL", "ตรวจสอบค่า");
 define("L_SEL_LANG", "เลือกภาษา");
-define("L_SEL_ICON", "เลือกไอคอน");
+define("L_SEL_ICON", "เลือก");
 define("L_SEL_DATE", "เลือกวันที่");
 define("L_ERR_SEL", "การเลือกของคุณไม่ถูกต้อง");
 define("L_NOT_ALLOWED", "วันนี้ไม่ได้รับอนุญาตให้มีการเลือก");
@@ -26,6 +26,7 @@ define("L_DATE_AFTER", "กรุณาเลือกวันหลังจ�
 define("L_DATE_BETWEEN", "กรุณาเลือกวันที่ระหว่าง\\n%s และ %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "ยกเลิก");
+define("L_CLOSE", "ปิด");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
@@ -84,4 +85,11 @@ setlocale(LC_ALL, "tha-tha.UTF-8", "tha-tha", "Thai.UTF-8", "Thai");
 } else {
 setlocale(LC_ALL, "th_TH.UTF-8", "tha.UTF-8", "tha_tha.UTF-8", "Thai.UTF-8");
 }
+
+// Thai Digits variant
+define("L_ARABIC_DIGIT", "๐ , ๑, ๒, ๓, ๔, ๕, ๖, ๗, ๘, ๙");
+define("L_DIGIT", 0); //Show Thai by default
+define("L_UTF_DIGIT", 3616);
+#define("L_ARABIC", "Arabic Digits"); // To switch to regular Arabic digits
+define("L_INDIC", "ภาษาไทย");
 ?>
