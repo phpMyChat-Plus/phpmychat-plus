@@ -4,7 +4,7 @@
 # Version: 3.69
 # Language: Turkish / Türkçe
 # Translator: Volkan Övün <vovun@hotmail.com>
-# Last file update: 19.05.2013
+# Last file update: 26.05.2013
 
 // Class strings localization
 define("L_DAYC", "Gün");
@@ -26,7 +26,7 @@ define("L_DATE_BETWEEN", "%s ve %s\\narasındaki bir tarih seçin");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "İptal"); // Seçimi kaldır
 define("L_CLOSE", "Kapat");
-define("L_WARN_2038", "PHP sürümünüz 2038 yılı ve sonrasını desteklemiyor!");
+define("L_WARN_2038", "PHP sürümünüz 2038 yılı ve sonrasını desteklemiyor! (<5.3.0)");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday... 6 for Saturday)
 define("FIRST_DAY", "1");
@@ -80,9 +80,9 @@ define("L_CAL_FORMAT", "%d %B %Y");
 if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "tr_TR");
 
 // Set the TR specific date/time format
-if (stristr(PHP_OS,'win')) {
+if (stristr(PHP_OS,"win")) {
 setlocale(LC_ALL, "turkish.UTF-8", "turkish");
 } else {
-#setlocale(LC_ALL, "tr_TR.UTF-8", "turkish.UTF-8");
+#setlocale(LC_ALL, "tr_TR.UTF-8", "tr_TR", "tr-TR", "turkish.UTF-8");
 }
 ?>

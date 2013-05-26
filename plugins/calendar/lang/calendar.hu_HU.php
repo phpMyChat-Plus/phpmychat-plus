@@ -4,7 +4,7 @@
 # Version: 3.69
 # Language: Hungarian / magyar
 # Translator: Jácint Zsuzsanna <jacint.zsuzsanna@yahoo.com>
-# Last file update: 19.05.2013
+# Last file update: 26.05.2013
 
 // Class strings localization
 define("L_DAYC", "Nap");
@@ -26,6 +26,7 @@ define("L_DATE_BETWEEN", "Kérjük, válasszon egy dátumot közötti\\n%s és %
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Mégse");
 define("L_CLOSE", "Bezár");
+define("L_WARN_2038", "A php szerver ezen verziója nem támogatja a 2038-as illetve az ezt követő éveket! (<5.3.0)");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

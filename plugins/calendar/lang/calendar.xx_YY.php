@@ -29,7 +29,7 @@ define("L_DATE_BETWEEN", "Please choose a date between\\n%s and %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Unset");
 define("L_CLOSE", "Close"); #3.69
-define("L_WARN_2038", "This php server's version does not have support for year 2038 and later! (< 5.3.0)"); #3.69
+define("L_WARN_2038", "This php server’s version does not have support for year 2038 and later! (<5.3.0)"); #3.69
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "0");

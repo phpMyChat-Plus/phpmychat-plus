@@ -3,7 +3,7 @@
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 3.69
 # Language: Yoruba (Nigeria) / Yorùbá
-# Last file update: 19.05.2013
+# Last file update: 26.05.2013
 
 // Class strings localization
 define("L_DAYC", "Day");
@@ -78,7 +78,7 @@ define("L_CAL_FORMAT", "%B %d %Y");
 if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "yo_NG"); // en_US format of your language
 
 // Set the YO specific date/time format
-if (stristr(PHP_OS,'win')) {
+if (stristr(PHP_OS,"win")) {
 setlocale(LC_ALL, "yor-yor.UTF-8", "yor-nga.UTF-8", "yor", "Yoruba");
 } else {
 setlocale(LC_ALL, "yo_NG.UTF-8", "yor.UTF-8", "yor_yor.UTF-8", "yor_nga.UTF-8", "Yoruba.UTF-8"); // For American formats

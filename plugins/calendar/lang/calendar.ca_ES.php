@@ -4,7 +4,7 @@
 # Version: 3.69
 # Language: Catalan / català (in your lang) // ex: Romanian / Română
 # Translator: Jordi Babot <jordibabot@gmail.com>
-# Last file update: 19.05.2013
+# Last file update: 26.05.2013
 
 // Class strings localization
 define("L_DAYC", "Dia");
@@ -26,6 +26,7 @@ define("L_DATE_BETWEEN", "Sisplau, selecciona una data entre el\\n%s i el %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Cap");
 define("L_CLOSE", "Tancar");
+define("L_WARN_2038", "Aquesta versió del PHP al servidor no contempla anys superiors al 2038! (<5.3.0)");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
