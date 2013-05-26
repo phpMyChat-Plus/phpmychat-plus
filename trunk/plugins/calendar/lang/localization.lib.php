@@ -52,7 +52,7 @@ if(!defined("L_DATE_BETWEEN")) define("L_DATE_BETWEEN", "Please choose a date be
 if(!defined("L_WEEK_HDR")) define("L_WEEK_HDR", "");
 if(!defined("L_UNSET")) define("L_UNSET", "Unset");
 if(!defined("L_CLOSE")) define("L_CLOSE", "Close");
-if(!defined("L_WARN_2038")) define("L_WARN_2038", "This php server's version does not have support for year 2038 and later! (<5.3.0)"); #3.69
+if(!defined("L_WARN_2038")) define("L_WARN_2038", "This php server’s version does not have support for year 2038 and later! (<5.3.0)"); #3.69
 if(!defined("FIRST_DAY")) define("FIRST_DAY", "0"); // 0 for Sunday
 
 // Months Long Names

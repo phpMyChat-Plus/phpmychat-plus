@@ -4,13 +4,13 @@
 # Version: 3.69
 # Language: French / français
 # Translator: Pierre Liget <sourceforge@pliget.freesurf.fr>
-# Last file update: 19.05.2013
+# Last file update: 26.05.2013
 
 // Class strings localization
 define("L_DAYC", "Jour");
 define("L_MONTHC", "Mois");
 define("L_YEARC", "Année");
-define("L_TODAY", "Aujourd'hui");
+define("L_TODAY", "Aujourd’hui");
 define("L_PREV", "Précédent");
 define("L_NEXT", "Suivant");
 define("L_REF_CAL", "Actualisation du calendrier en cours ...");
@@ -26,6 +26,7 @@ define("L_DATE_BETWEEN", "Veuillez sélectionner une date entre le\\n%s et le %s
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Annuler"); //Remise à zéro
 define("L_CLOSE", "Fermer");
+define("L_WARN_2038", "La version de ce serveur PHP ne prend pas en charge l’année 2038 et au delà! (<5.3.0)");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

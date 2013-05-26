@@ -4,7 +4,7 @@
 # Version: 3.69
 # Language: Bulgarian / български
 # Translator: Peter Petrov <peter.m.petrov@gmail.com>
-# Last file update: 19.05.2013
+# Last file update: 26.05.2013
 
 // Class strings localization
 define("L_DAYC", "Ден");
@@ -26,6 +26,7 @@ define("L_DATE_BETWEEN", "Моля, изберете дата между\\n%s и
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Нулирай");
 define("L_CLOSE", "Затвори");
+define("L_WARN_2038", "Тази php версия на сървъра не поддържа годините от 2038 нататък! (<5.3.0)");
 
 // Set the first day of the week in your language
 define("FIRST_DAY", "1"); // 1 for Monday, 0 for Sunday

@@ -75,7 +75,7 @@ define("L_MON", "понеділок");
 define("L_TUE", "вівторок");
 define("L_WED", "середа");
 define("L_THU", "четвер");
-define("L_FRI", "п'ятниця");
+define("L_FRI", "п’ятниця");
 define("L_SAT", "субота");
 define("L_SUN", "неділя");
 // Week days Short Names
