@@ -4,7 +4,7 @@
 # Version: 3.69
 # Language: Dutch / Nederlands
 # Translator: Bert Moorlag <berbia@hotmail.com>
-# Last file update: 19.05.2013
+# Last file update: 26.05.2013
 
 // Class strings localization
 define("L_DAYC", "Dag");
@@ -26,6 +26,7 @@ define("L_DATE_BETWEEN", "Kies een datum tussen\\n%s en %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Uitzetten "); //Zet uit
 define("L_CLOSE", "Sluiten");
+define("L_WARN_2038", "Deze versie wordt niet ondersteund voor het jaar 2038 en later! (<5.3.0)");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
