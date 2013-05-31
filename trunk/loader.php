@@ -80,7 +80,7 @@ if (!function_exists('utf_conv'))
 
 function setImageSize($image_file,$maxSize) {
 
-if (function_exists("getimagesize"))
+if (function_exists("getimagesize") && ini_get("allow_url_fopen"))
 {
 	$image_size = getimagesize($image_file);
 	$width = $image_size[0];
