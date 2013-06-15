@@ -5,6 +5,9 @@ localization by ciprianmp
 version 3.69-loc (21 May 2013)
 - it includes all the updates in the original class
 
+fixed: checkdate() function generated an error on some php servers
+	- thanks Tri
+
 add on: implemented the genitive month names in date long formats, for languages that require that approach (CZ, GR, FI, PL, RU, SK, SR, UK)
 	- thanks ciprianmp
 
