@@ -34,6 +34,7 @@ If your users encounter bootings for no reason, try to disable sounds in chat.
 
 Fixes History:
 06.02.2013 - 1.94-RC2:
+- tooltips linebreak fix; (functionality related)
 - calendar class update to 3.69-loc version; (functionality related)
 - improved /save command to display the window before saving to html; (functionality related)
 - fixed a bug that prevented links to be posted in links.php; (functionality related)
