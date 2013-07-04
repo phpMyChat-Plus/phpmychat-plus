@@ -82,7 +82,7 @@ if (isset($FORM_SEND) && ($FORM_SEND == 1 || $FORM_SEND == 7))
 					list($type) = $DbLink->next_record();
 					$DbLink->clean_results();
 					$DbLink->query("UPDATE ".C_USR_TBL." SET status='u' WHERE username='$uuu'");
-					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS delreg', '', ".time().", '$uuu', 'L_ADM_2', '', '')");
+					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS delreg', '$Latin1', ".time().", '$uuu', 'L_ADM_2', '', '')");
 				};
 				// Optimize the registered users table when a MySQL DB is used
 				$DbLink->optimize(C_REG_TBL);

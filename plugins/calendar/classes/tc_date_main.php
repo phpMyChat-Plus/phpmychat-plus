@@ -111,9 +111,9 @@ class tc_date_main{
 		if($date_str != ""){
 			$date_arr = explode("-", $date_str, 3);
 
-//			if(isset($date_arr[0]) && is_int($date_arr[0]) && isset($date_arr[1]) && is_int($date_arr[1]) && isset($date_arr[2]) && is_int($date_arr[2])){
+			if((isset($date_arr[0]) && is_numeric($date_arr[0])) && (isset($date_arr[1]) && is_numeric($date_arr[1])) && (isset($date_arr[2]) && is_numeric($date_arr[2]))){
 				return (checkdate($date_arr[1], $date_arr[2], $date_arr[0])) ? true : false;
-//			}else return false;
+			}else return false;
 		}else return false;
 	}
 }

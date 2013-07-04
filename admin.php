@@ -59,6 +59,8 @@ if (isset($Charset_Sav))
 	$FontSize = $FontSize_Sav; unset($FontSize_Sav);
 };
 
+$Latin1 = ($Charset != "utf-8" ? 1 : 0);
+
 // Added for php4 support of mb functions
 if (!function_exists('mb_convert_case'))
 {

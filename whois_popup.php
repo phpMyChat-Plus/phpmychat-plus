@@ -45,7 +45,7 @@ if (get_magic_quotes_gpc()) {
 		$_COOKIE[$k] = stripslashes($v);
 }
 
-$Latin1 = ($Charset != "utf-8");
+$Latin1 = ($Charset != "utf-8" ? 1 : 0);
 function special_char($str,$lang)
 {
 	return ($lang ? htmlentities($str) : htmlspecialchars($str));

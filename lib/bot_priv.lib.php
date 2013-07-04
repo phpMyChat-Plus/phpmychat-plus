@@ -99,7 +99,7 @@ function bottalk_priv(&$botmess, $R, $UR, $Private, $Read)
 	}
               $D1 = trim($D1) ;
               $DR = addslashes($D1);
-              $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$T', '$R', '$BOT', '0', '$mytime', '$U', '$DR', '$Readu', '$UR')") ;
+              $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$T', '$R', '$BOT', '$Latin1', '$mytime', '$U', '$DR', '$Readu', '$UR')") ;
 }              // End of function
 #$DbLink->close();
 

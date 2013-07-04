@@ -39,6 +39,9 @@ $auto_hide_time = (isset($_REQUEST["hdt"])) ? $_REQUEST["hdt"] : 1000;
 $hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : 'en_US';
 //Digitizer
 $dig = (isset($_REQUEST["dig"])) ? $_REQUEST["dig"] : 0;
+//Tooltips
+$tt_dates = (isset($_REQUEST["ttd"])) ? @tc_calendar::check_json_decode($_REQUEST["ttd"]) : array(array(), array(), array());
+$tt_tooltips = (isset($_REQUEST["ttt"])) ? @tc_calendar::check_json_decode(urldecode($_REQUEST["ttt"])) : array(array(), array(), array());
 
 //check year to be select in case of date_allow is set
 if(!$show_not_allow){
@@ -312,6 +315,47 @@ for($day=1; $day<=$total_thismonth; $day++){
 		}
 	}
 
+	//Tooltips
+	//check specific date
+	if(is_array($tt_dates) && sizeof($tt_dates) > 0){
+		$tt_tooltip = "";
+
+		//check on no recursive
+		if(isset($tt_dates[0]) && is_array($tt_dates[0])){
+			$tt_idx = array_search($currentTime, $tt_dates[0]);
+			if($tt_idx !== false){
+				$tt_tooltip .= ($tt_tooltip != "") ? "&#10;".$tt_tooltips[0][$tt_idx] : $tt_tooltips[0][$tt_idx];
+			}
+		}
+
+		//check on monthly recursive
+		if(isset($tt_dates[1]) && is_array($tt_dates[1])){
+			for($i=0; $i<sizeof($tt_dates[1]); $i++){
+				$tt_time = $tt_dates[1][$i];
+				if($tt_time != "" && $tt_time > 0){
+					$tt_time_d = date('d', $tt_time);
+					if($tt_time_d == $day && isset($tt_tooltips[1][$i])){
+						$tt_tooltip .= ($tt_tooltip != "") ? "&#10;".$tt_tooltips[1][$i] : $tt_tooltips[1][$i];
+					}
+				}
+			}
+		}
+
+		//check on yearly recursive
+		if(isset($tt_dates[2]) && is_array($tt_dates[2])){			
+			for($i=0; $i<sizeof($tt_dates[2]); $i++){
+				$tt_time = $tt_dates[2][$i];
+				if($tt_time != "" && $tt_time > 0){
+					$tt_time_md = date('md', $tt_time);
+					$this_md = date('md', $currentTime);
+					if($tt_time_md == $this_md && isset($tt_tooltips[2][$i])){
+						$tt_tooltip .= ($tt_tooltip != "") ? "&#10;".$tt_tooltips[2][$i] : $tt_tooltips[2][$i];
+					}
+				}
+			}
+		}
+	}
+
 	$htmlClass[] = strtolower($day_txt);
 
 	if($dateLink){
@@ -322,13 +366,13 @@ for($day=1; $day<=$total_thismonth; $day++){
 		//date with link
 		$class = implode(" ", $htmlClass);
 
-		$calendar_rows[$row_count][] = array($day, "javascript:selectDay('".str_pad($day, 2, "0", STR_PAD_LEFT)."');", $class, "$y".str_pad($m, 2, "0", STR_PAD_LEFT).str_pad($day, 2, "0", STR_PAD_LEFT));
+		$calendar_rows[$row_count][] = array($day, "javascript:selectDay('".str_pad($day, 2, "0", STR_PAD_LEFT)."');", $class, "$y".str_pad($m, 2, "0", STR_PAD_LEFT).str_pad($day, 2, "0", STR_PAD_LEFT), $tt_tooltip);
 	}else{
 		$htmlClass[] = "disabledate";
 		$class = implode(" ", $htmlClass);
 
 		//date without link
-		$calendar_rows[$row_count][] = array($day, "", $class, "$y".str_pad($m, 2, "0", STR_PAD_LEFT).str_pad($day, 2, "0", STR_PAD_LEFT));
+		$calendar_rows[$row_count][] = array($day, "", $class, "$y".str_pad($m, 2, "0", STR_PAD_LEFT).str_pad($day, 2, "0", STR_PAD_LEFT), $tt_tooltip);
 	}
 	if(($startDate == 0 && $date_num == 6) || ($startDate > 0 && $date_num == $startDate-1)){
 		$row_count++;
@@ -559,6 +603,9 @@ function submitNow(dvalue, mvalue, yvalue){
             <input name="hl" type="hidden" id="hl" value="<?php echo($hl);?>" />
 			<!-- Digitizer -->
             <input name="dig" type="hidden" id="dig" value="<?php echo($dig);?>" />
+			<!-- //Tooltips -->
+            <input name="ttd" type="hidden" id="ttd" value="<?php echo($cobj->check_json_encode($tt_dates));?>" />
+            <input name="ttt" type="hidden" id="ttt" value="<?php echo(urlencode($cobj->check_json_encode($tt_tooltips)));?>" />
       </form>
     </div>
     <div id="calendar-container">
@@ -590,20 +637,25 @@ function submitNow(dvalue, mvalue, yvalue){
 					echo("<td align=\"center\" class=\"wk\"><div>".($dig ? $cobj->digitize_arabics($cw_keys[(sizeof($cw_keys)-1)]) : $cw_keys[(sizeof($cw_keys)-1)])."</div></td>");
 				}
 
+				$info_icon = "<span class=\"calendar-info\" alt=\"{title}\" title=\"{title}\"></span>";
+
 				foreach($calendar_rows[$row] as $column){
 					$this_day = isset($column[0]) ? $column[0] : "";
 					$this_link = isset($column[1]) ? $column[1] : "";
 					$this_class = isset($column[2]) ? $column[2] : "";
 					$this_id = isset($column[3]) ? $column[3] : "";
-
 					$id_str = ($this_id) ? " id=\"".$this_id."\"" : "";
-
+					
+					//Tooltips
+					$this_day_title = isset($column[4]) ? $column[4] : "";
+					$title_obj = ($this_day_title) ? str_replace("{title}", $this_day_title, $info_icon) : "";
+					
 					if($this_link){
-						//Digitizer
-						echo("<td".$id_str." align=\"center\" class=\"".$this_class."\"><a href=\"".$this_link."\"><div>".($dig ? $cobj->digitize_arabics($this_day) : $this_day)."</div></a></td>");
+						//Digitizer & Tooltips
+						echo("<td".$id_str." align=\"center\" class=\"".$this_class."\"><a href=\"".$this_link."\"><div>".($dig ? $cobj->digitize_arabics($this_day) : $this_day).$title_obj."</div></a></td>");
 					}else{
-						//Digitizer
-						echo("<td".$id_str." align=\"center\" class=\"".$this_class."\"><div>".($dig ? $cobj->digitize_arabics($this_day) : $this_day)."</div></td>");
+						//Digitizer & Tooltips
+						echo("<td".$id_str." align=\"center\" class=\"".$this_class."\"><div>".($dig ? $cobj->digitize_arabics($this_day) : $this_day).$title_obj."</div></td>");
 					}
 				}
 				echo("</tr>");

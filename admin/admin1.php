@@ -48,7 +48,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 1)
 					list($type) = $DbLink->next_record();
 					$DbLink->clean_results();
 					$DbLink->query("UPDATE ".C_USR_TBL." SET status='u' WHERE username='$uuu'");
-					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS delreg', '', ".time().", '$uuu', 'L_ADM_2', '', '')");
+					$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS delreg', '$Latin1', ".time().", '$uuu', 'L_ADM_2', '', '')");
 				};
 				// Optimize the registered users table when a MySQL DB is used
 				$DbLink->optimize(C_REG_TBL);
@@ -167,8 +167,8 @@ if (isset($FORM_SEND) && $FORM_SEND == 1)
 					$DbLink->query("SELECT type FROM ".C_MSG_TBL." WHERE room='".addslashes($room)."' LIMIT 1");
 					list($type) = $DbLink->next_record();
 					$DbLink->clean_results();
-					if (isset($message)) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS promote', '', ".time().", '', '$message', '', '')");
-					if (isset($messagead)) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '*', 'SYS promote', '', ".time().", '', '$messagead', '', '')");
+					if (isset($message)) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS promote', '$Latin1', ".time().", '', '$message', '', '')");
+					if (isset($messagead)) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '*', 'SYS promote', '$Latin1', ".time().", '', '$messagead', '', '')");
 				};
 			}
 			else

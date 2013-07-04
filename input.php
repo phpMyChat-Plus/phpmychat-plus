@@ -61,7 +61,7 @@ $U = urldecode($U);
 $R = urldecode($R);
 
 // Translate to html special characters, and entities if message was sent with a latin 1 charset
-$Latin1 = ($Charset != "utf-8");
+$Latin1 = ($Charset != "utf-8" ? 1 : 0);
 function special_char($str,$lang)
 {
 	return addslashes($lang ? htmlentities(stripslashes($str)) : htmlspecialchars(stripslashes($str)));
@@ -142,7 +142,7 @@ if ($DbLink->num_rows() != 0)
 	// Update users info
 	if ($room != stripslashes($R))	// Same nick in another room
 	{
-		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '', '')");
+		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '$Latin1', ".time().", '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '', '')");
 		$kicked = 3;
 	}
 	elseif ($status == "k")			// Kicked by a moderator or the admin.
@@ -155,7 +155,7 @@ if ($DbLink->num_rows() != 0)
 	}
 	elseif ($status == "b")			// Banished by a moderator or the admin.
 	{
-		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_BANISHED, \"".special_char($U,$Latin1)."\")', '', '')");
+		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '$Latin1', ".time().", '', 'sprintf(L_BANISHED, \"".special_char($U,$Latin1)."\")', '', '')");
 		$kicked = 4;
 	};
 	if ($kicked > 0)

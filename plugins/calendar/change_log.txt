@@ -2,8 +2,11 @@ The php calendar component
 written by TJ @triconsole
 localization by ciprianmp
 
-version 3.69-loc (21 May 2013)
+version 3.70-loc (01 July 2013)
 - it includes all the updates in the original class
+
+add on: implemented the setToolTips() function to display infos for any date on calendar form
+	- thanks ciprianmp and TJ
 
 fixed: checkdate() function generated an error on some php servers
 	- thanks Tri

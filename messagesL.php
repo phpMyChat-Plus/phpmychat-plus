@@ -50,7 +50,7 @@ if (get_magic_quotes_gpc()) {
 $textDirection = ($Align == "right") ? "RTL" : "LTR";
 
 // Translate to html special characters, and entities if message was sent with a latin 1 charset
-$Latin1 = ($Charset != "utf-8");
+$Latin1 = ($Charset != "utf-8" ? 1 : 0);
 function special_char($str,$lang,$slash_on)
 {
 	$str = ($lang ? htmlentities(stripslashes($str)) : htmlspecialchars(stripslashes($str)));
@@ -217,7 +217,7 @@ if($DbLink->num_rows() != 0)
 	}
 	else
 	{
-		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1,1)."\")', '', '')");
+		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '$Latin1', ".time().", '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1,1)."\")', '', '')");
 	}
 	if(C_EN_STATS)
 	{
@@ -243,11 +243,11 @@ if($DbLink->num_rows() != 0)
 		{
 			list($Reason) = $DbLink->next_record();
 			$DbLink->clean_results();
-			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_BANISHED_REASON, \"".special_char($U,$Latin1)."\", \"".$Reason."\")', '', '')");
+			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '$Latin1', ".time().", '', 'sprintf(L_BANISHED_REASON, \"".special_char($U,$Latin1)."\", \"".$Reason."\")', '', '')");
 		}
 		else
 		{
-			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_BANISHED, \"".special_char($U,$Latin1)."\")', '', '')");
+			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '$Latin1', ".time().", '', 'sprintf(L_BANISHED, \"".special_char($U,$Latin1)."\")', '', '')");
 		}
 		if(C_EN_STATS)
 		{
@@ -784,7 +784,7 @@ if (C_QUOTE)
 		$DbLink->query("SELECT m_time FROM ".C_MSG_TBL." WHERE username='".C_QUOTE_NAME."' AND room = '$R' AND m_time > ".(time() - $quotetime)." ORDER BY m_time DESC LIMIT 1");
 			if ($DbLink->num_rows() == 0)
 			{
-				$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".C_QUOTE_NAME."', '', ".time().", '', '$quotetext', '', '')");
+				$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".C_QUOTE_NAME."', '$Latin1', ".time().", '', '$quotetext', '', '')");
 			}
 		}
 	}
@@ -807,7 +807,7 @@ if(C_CHAT_BOOT)
 			$sghosts = str_replace(" AND username != ",",",$sghosts);
 		}
 	 	if (($sghosts != "" && ghosts_in(stripslashes($U), $sghosts, $Charset)) || (C_HIDE_ADMINS && ($status == "a" || $status == "t")) || (C_HIDE_MODERS && $status == "m")) {}
-		else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('".$m_type."', '".$m_room."', 'SYS exit', '', ".time().", '', 'sprintf(L_BOOT_ROM, \"$U\")', '', '')");
+		else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('".$m_type."', '".$m_room."', 'SYS exit', '$Latin1', ".time().", '', 'sprintf(L_BOOT_ROM, \"$U\")', '', '')");
 		if(C_EN_STATS)
 		{
 			$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+($curtime-last_away), longest_away=IF($curtime-last_away < longest_away, longest_away, $curtime-last_away), last_away='' WHERE (stat_date=FROM_UNIXTIME(last_away,'%Y-%m-%d') OR stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d')) AND room='$m_room' AND username='$U' AND last_away!='0'");
@@ -843,7 +843,7 @@ if(C_CHAT_BOOT)
 	elseif ($R == ROOM5 && $EN_ROOM5 && $RES_ROOM5 && $join_room != "ROOM5") $restriction = 1;
 	if ($restriction)
 	{
-		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('".$m_type."', '".$m_room."', 'SYS exit', '', ".time().", '', 'sprintf(L_RESTRICTED_ROM, \"$U\")', '', '')");
+		$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('".$m_type."', '".$m_room."', 'SYS exit', '$Latin1', ".time().", '', 'sprintf(L_RESTRICTED_ROM, \"$U\")', '', '')");
 		if(C_EN_STATS)
 		{
 			$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+($curtime-last_away), longest_away=IF($curtime-last_away < longest_away, longest_away, $curtime-last_away), last_away='' WHERE (stat_date=FROM_UNIXTIME(last_away,'%Y-%m-%d') OR stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d')) AND room='$m_room' AND username='$U' AND last_away!='0'");

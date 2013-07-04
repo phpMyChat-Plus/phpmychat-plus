@@ -88,7 +88,7 @@ function room_in($what, $in, $Charset)
 								  unlink ($toppath);                             // if it does delete it.
 								}
 #								$DbLink = new DB;
-								$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS topic reset', '', ".time().", '$U', '', '', '')");
+								$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS topic reset', '$Latin1', ".time().", '$U', '', '', '')");
 							}
 							else
 							{
@@ -97,7 +97,7 @@ function room_in($what, $in, $Charset)
 								  unlink ($topgpath);                             // if it does delete it.
 								}
 #									$DbLink = new DB;
-									$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS topic reset', '', ".time().", '$U', '', '', '')");
+									$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS topic reset', '$Latin1', ".time().", '$U', '', '', '')");
 							}
 						}
 						else
@@ -160,7 +160,7 @@ else $Top = preg_replace("/".$prefix.$pureUrl."/i", '<a href="\\1://\\2" target=
 								fputs($fp, stripslashes($Top));                // and will include the topic to be listed on topic frame.
 								fclose($fp) ;
 #								$DbLink = new DB;
-								$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS topic', '', ".time().", '$U', '$Top', '', '')");
+								$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS topic', '$Latin1', ".time().", '$U', '$Top', '', '')");
 							}
 							else
 							{
@@ -173,7 +173,7 @@ else $Top = preg_replace("/".$prefix.$pureUrl."/i", '<a href="\\1://\\2" target=
 								fputs($fp, stripslashes($Top));                // and will include the topic to be listed on topic frame.
 								fclose($fp) ;
 #								$DbLink = new DB;
-								$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS topic', '', ".time().", '$U', '$Top', '', '')");
+								$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '*', 'SYS topic', '$Latin1', ".time().", '$U', '$Top', '', '')");
 							}
 						}
 						?>

@@ -113,7 +113,7 @@ if (get_magic_quotes_gpc()) {
 }
 
 // Translate to html special characters, and entities if message was sent with a latin 1 charset
-$Latin1 = ($Charset != "utf-8");
+$Latin1 = ($Charset != "utf-8" ? 1 : 0);
 function special_char($str,$lang)
 {
 	return ($lang ? htmlentities(stripslashes($str)) : htmlspecialchars(stripslashes($str)));

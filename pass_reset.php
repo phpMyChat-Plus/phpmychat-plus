@@ -148,7 +148,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_PASS_7)
 				list($rows) = $DbLink->next_record();
 				if ($rows != 0)
 				{
-					$Latin1 = ($Charset != "utf-8");
+					$Latin1 = ($Charset != "utf-8" ? 1 : 0);
 					include("./lib/get_IP.lib.php");		// Set the $IP var
 
 					$pmc_password = gen_password();

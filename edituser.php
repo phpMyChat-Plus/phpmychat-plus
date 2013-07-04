@@ -148,7 +148,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 
 	if (!isset($Error) || $Error == "")
 	{
-		$Latin1 = ($Charset != "utf-8");
+		$Latin1 = ($Charset != "utf-8" ? 1 : 0);
 		$PWD_Hash = md5(stripslashes($prev_PASSWORD));
 		if (!isset($GENDER) || $GENDER == "") $GENDER = 0;
 		$showemail = (isset($SHOWEMAIL) && $SHOWEMAIL)? 1:0;
@@ -392,8 +392,6 @@ else
 	}
 	$DbLink->clean_results();
 }
-
-$DbLink->close();
 
 // Modifications have been done ?
 $done = (isset($Message) && $Message == L_REG_17);
@@ -654,6 +652,31 @@ else
 			  }
 			  $myCalendar->setYearInterval(1935, date('Y'));
 			  $myCalendar->dateAllow('1935-01-01', date('Y-m-d'));
+				$DbLink->query("SELECT username,birthday,show_bday,show_age FROM ".C_REG_TBL." WHERE birthday != '' AND birthday != '0000-00-00' ORDER BY birthday ASC");
+				if ($DbLink->num_rows() != 0)
+				{
+					include_once('plugins/birthday/age.class.php');
+					while(list($birthname, $birthday, $show_bday, $show_age) = $DbLink->next_record())
+					{
+						if($show_bday)
+						{
+							if ($show_age)
+							{
+								$my_dobtime = strtotime($birthday);
+								$my_dob = new DateOfBirth();
+								$my_dob->birth_num_year = date('Y',$my_dobtime);
+								$my_dob->birth_num_month = date('n',$my_dobtime);
+								$my_dob->birth_num_day = date('j',$my_dobtime);
+								$my_dob->calculate_age();
+								$age = $my_dob->age;
+							}
+							$myCalendar->setToolTips(array($birthday), $age ? $birthname." (".$age.")" : $birthname, 'year');
+							unset($age,$my_dobtime);
+						}
+					}
+				$DbLink->clean_results();
+				$DbLink->close();
+				}
 			  $myCalendar->writeScript();
 			?>
 				&nbsp;<?php if (!$done && C_REQUIRE_BDAY) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>

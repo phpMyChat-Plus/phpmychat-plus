@@ -80,11 +80,11 @@ else
 						if ($Cmd[3] != "")
 						{
 							$Reason = trim($Cmd[3]);
-							$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_KICKED_REASON, \"".special_char($UU,$Latin1)."\", \"".$Reason."\")', '', '')");
+							$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '$Latin1', ".time().", '', 'sprintf(L_KICKED_REASON, \"".special_char($UU,$Latin1)."\", \"".$Reason."\")', '', '')");
 						}
 						else
 						{
-							$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_KICKED, \"".special_char($UU,$Latin1)."\")', '', '')");
+							$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '$Latin1', ".time().", '', 'sprintf(L_KICKED, \"".special_char($UU,$Latin1)."\")', '', '')");
 						}
 						// Statistics mod by Ciprian
 				 		if(C_EN_STATS)
@@ -121,11 +121,11 @@ else
 					if ($Cmd[3] != "")
 					{
 						$Reason = trim($Cmd[3]);
-						$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'sprintf(L_KICKED_ALL_REASON, \"".$Reason."\")', '', '')");
+						$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '$Latin1', ".time().", '', 'sprintf(L_KICKED_ALL_REASON, \"".$Reason."\")', '', '')");
 					}
 					else
 					{
-						$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '', ".time().", '', 'L_KICKED_ALL', '', '')");
+						$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS exit', '$Latin1', ".time().", '', 'L_KICKED_ALL', '', '')");
 					}
 
 					// Statistics mod by Ciprian

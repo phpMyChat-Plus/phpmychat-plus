@@ -147,7 +147,7 @@ if(C_CHAT_LURKING)
 			$sghosts = str_replace(" AND username != ",",",$sghosts);
 		}
  		if (($sghosts != "" && ghosts_in($userclosed, $sghosts, $Charset)) || (C_HIDE_ADMINS && ($statusclosed == "a" || $statusclosed == "t")) || (C_HIDE_MODERS && $statusclosed == "m")) {}
-		else $ChatM->query("INSERT INTO ".C_MSG_TBL." VALUES ('".$usertype."', '".$userroom."', 'SYS exit', '', '".time()."', '', 'sprintf(L_CLOSED_ROM, \"(".$when.") ".$userclosed."\")', '', '')");
+		else $ChatM->query("INSERT INTO ".C_MSG_TBL." VALUES ('".$usertype."', '".$userroom."', 'SYS exit', '$Latin1', '".time()."', '', 'sprintf(L_CLOSED_ROM, \"(".$when.") ".$userclosed."\")', '', '')");
 		if(C_EN_STATS)
 		{
 			$ChatM->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+($usertime-last_away), longest_away=IF($usertime-last_away < longest_away, longest_away, $usertime-last_away), last_away='' WHERE (stat_date=FROM_UNIXTIME(last_away,'%Y-%m-%d') OR stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d')) AND room='$userroom' AND username='$userclosed' AND last_away!='0'");
