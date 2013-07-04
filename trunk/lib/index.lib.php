@@ -142,7 +142,7 @@ if (!isset($FontFace)) $FontFace = "";
 $DisplayFontMsg = !(isset($U) && $U != "");
 
 // Translate to html special characters, and entities if message was sent with a latin 1 charset
-$Latin1 = ($Charset != "utf-8");
+$Latin1 = ($Charset != "utf-8" ? 1 : 0);
 function special_char($str,$lang)
 {
 	return addslashes($lang ? htmlentities(stripslashes($str)) : htmlspecialchars(stripslashes($str)));
@@ -389,7 +389,7 @@ if(isset($E) && $E != "")
 		}
 		elseif (isset($EN))
 		{
-			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($EN, '$E', 'SYS exit', '', ".time().", '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '', '')");
+			$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($EN, '$E', 'SYS exit', '$Latin1', ".time().", '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '', '')");
 			if(C_EN_STATS)
 			{
 				$curtime = time();
@@ -872,10 +872,10 @@ if(!isset($Error) && (isset($N) && $N != ""))
 			}
 			else
 			{
-				$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS exit', '', '$current_time', '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '', '')");
+				$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS exit', '$Latin1', '$current_time', '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '', '')");
 			// next line WELCOME SOUND feature altered for compatibility with /away command R Dickow:
-				if(isset($CookieBeep) && $CookieBeep) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
-				else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM_NOSOUND, \"".special_char($U,$Latin1)."\"))', '', '')");
+				if(isset($CookieBeep) && $CookieBeep) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '$Latin1', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
+				else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '$Latin1', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM_NOSOUND, \"".special_char($U,$Latin1)."\"))', '', '')");
 				if(C_EN_STATS)
 				{
 					$DbLink->query("UPDATE ".C_STS_TBL." SET seconds_away=seconds_away+($current_time-last_away), longest_away=IF($current_time-last_away < longest_away, longest_away, $current_time-last_away), last_away='' WHERE (stat_date=FROM_UNIXTIME(last_away,'%Y-%m-%d') OR stat_date=FROM_UNIXTIME(last_in,'%Y-%m-%d')) AND room='$room' AND username='$U' AND last_away!='0'");
@@ -898,8 +898,8 @@ if(!isset($Error) && (isset($N) && $N != ""))
 				$DbLink->query("DELETE FROM ".C_MSG_TBL." WHERE username LIKE 'SYS welcome' AND address = '$U'");
 				// Insert a new welcome message in the messages table
 				$current_time_plus = $current_time + 1;	// ensures the welcome msg is the last one
-				if(isset($CookieBeep) && $CookieBeep) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '', '$current_time_plus', '$U', 'sprintf(WELCOME_MSG)', '', '')");
-				else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '', '$current_time_plus', '$U', 'sprintf(WELCOME_MSG_NOSOUND)', '', '')");
+				if(isset($CookieBeep) && $CookieBeep) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '$Latin1', '$current_time_plus', '$U', 'sprintf(WELCOME_MSG)', '', '')");
+				else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '$Latin1', '$current_time_plus', '$U', 'sprintf(WELCOME_MSG_NOSOUND)', '', '')");
 			};
 		};
 	}
@@ -927,8 +927,8 @@ if(!isset($Error) && (isset($N) && $N != ""))
 		else
 		{
 			// next line WELCOME SOUND feature altered for compatibility with /away command R Dickow:
-			if(isset($CookieBeep) && $CookieBeep) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
-			else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM_NOSOUND, \"".special_char($U,$Latin1)."\"))', '', '')");
+			if(isset($CookieBeep) && $CookieBeep) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '$Latin1', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
+			else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '$Latin1', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM_NOSOUND, \"".special_char($U,$Latin1)."\"))', '', '')");
 			if(C_EN_STATS)
 			{
 				$DbLink->query("SELECT room FROM ".C_STS_TBL." WHERE stat_date='".date("Y-m-d")."' AND username='$U' AND room='$R'");
@@ -947,7 +947,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 			// Insert a new welcome message in the messages table
 			$current_time_plus = $current_time + 1;	// ensures the welcome msg is the last one
 			if(isset($CookieBeep) && $CookieBeep) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '', '$current_time_plus', '$U', 'sprintf(WELCOME_MSG)', '', '')");
-			else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '', '$current_time_plus', '$U', 'sprintf(WELCOME_MSG_NOSOUND)', '', '')");
+			else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '$Latin1', '$current_time_plus', '$U', 'sprintf(WELCOME_MSG_NOSOUND)', '', '')");
 		};
 	};
 

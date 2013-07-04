@@ -6,7 +6,7 @@
 // add on: translation implemented - default is English en_US
 //	- thanks ciprianmp
 //
-// version 3.69-loc (released 23 March 2011/updated 19 May 2013)
+// version 3.70-loc (released 23 March 2011/updated 01 July 2013)
 //
 ////********************************************************
 
@@ -17,6 +17,12 @@ if(file_exists("plugins/calendar/calendar.js"))
 {
 ?>
 <script language="javascript" src="plugins/calendar/calendar.js"></script>
+<?php
+}
+elseif(file_exists("calendar/calendar.js"))
+{
+?>
+<script language="javascript" src="calendar/calendar.js"></script>
 <?php
 }
 elseif(file_exists("calendar.js"))
@@ -75,6 +81,9 @@ class tc_calendar{
 	var $hl = L_LANG;
 	//Digitizer
 	var $dig = L_DIGIT;
+	//Tooltips
+	var $tt_dates = array(array(), array(), array()); //array[0]=no recursive, array[1]=monthly, array[0]=yearly
+	var $tt_tooltips = array(array(), array(), array()); //array[0]=no recursive, array[1]=monthly, array[0]=yearly
 
 	//calendar constructor
 	function tc_calendar($objname, $date_picker = false, $show_input = true){
@@ -257,6 +266,9 @@ class tc_calendar{
 		$params[] = "hl=".$this->hl;
 		//Digitizer
 		$params[] = "dig=".$this->dig;
+		//Tooltips
+		$params[] = "ttd=".$this->check_json_encode($this->tt_dates);
+		$params[] = "ttt=".urlencode($this->check_json_encode($this->tt_tooltips));
 
 		$paramStr = (sizeof($params)>0) ? "?".implode("&", $params) : "";
 
@@ -371,7 +383,7 @@ class tc_calendar{
 		echo("</select> ");
 	}
 
-	function eHidden($suffix, $value) {
+	function eHidden($suffix, $value) {		
 		if($suffix) $suffix = "_".$suffix;
 		echo("<input type=\"hidden\" name=\"".$this->objname.$suffix."\" id=\"".$this->objname.$suffix."\" value=\"".$value."\" />");
 	}
@@ -407,6 +419,9 @@ class tc_calendar{
 		$this->eHidden('hl', $this->hl);
 		//Digitizer
 		$this->eHidden('dig', $this->dig);
+		//Tooltips
+		$this->eHidden('ttd', $this->check_json_encode($this->tt_dates));
+		$this->eHidden('ttt', urlencode($this->check_json_encode($this->tt_tooltips)));
 	}
 
 	//set width of calendar
@@ -600,6 +615,53 @@ class tc_calendar{
 			}
 
 			$this->sp_type = ($type == 1) ? 1 : 0; //control data type for $type
+		}
+	}
+
+	//Tooltips
+	function setToolTips($dates, $tooltip="", $recursive=""){
+		
+		if(is_array($dates)){
+			$recursive = strtolower($recursive);
+
+			//change specific date to time
+			foreach($dates as $tt_date){
+				$tt_time = $this->mydate->getTimestamp($tt_date);
+
+				if($tt_time > 0){
+					switch($recursive){
+						case "year": //add to yearly
+							if(!in_array($tt_time, $this->tt_dates[2])){
+								$this->tt_dates[2][] = $tt_time;
+								$this->tt_tooltips[2][] = $tooltip;
+							}
+							else{
+								$tt_key = array_search($tt_time, $this->tt_dates[2]);
+								$this->tt_tooltips[2][$tt_key] = $this->tt_tooltips[2][$tt_key]."&#10;".$tooltip;
+							}
+							break;
+						case "month": //add to monthly
+							if(!in_array($tt_time, $this->tt_dates[1])){
+								$this->tt_dates[1][] = $tt_time;
+								$this->tt_tooltips[1][] = $tooltip;
+							}
+							else{
+								$tt_key = array_search($tt_time, $this->tt_dates[1]);
+								$this->tt_tooltips[1][$tt_key] = $this->tt_tooltips[1][$tt_key]."&#10;".$tooltip;
+							}
+							break;
+						default: //add to no recursive
+							if(!in_array($tt_time, $this->tt_dates[0])){
+								$this->tt_dates[0][] = $tt_time;
+								$this->tt_tooltips[0][] = $tooltip;
+							}
+							else{
+								$tt_key = array_search($tt_time, $this->tt_dates[0]);
+								$this->tt_tooltips[0][$tt_key] = $this->tt_tooltips[0][$tt_key]."&#10;".$tooltip;
+							}
+					}
+				}
+			}
 		}
 	}
 

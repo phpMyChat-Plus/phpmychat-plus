@@ -60,7 +60,7 @@ function botmemory($U)                             // This writes a file to the 
 
   // Open and Write it to phpMyChat DB
               $mytime = time() + 2;                    // Add 2 secs to bot time, seperates it in the DB better.
-              $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$T', '$R', '$BOT', '0', '$mytime', '', '$DR', '', '')") ;
+              $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$T', '$R', '$BOT', '$Latin1', '$mytime', '', '$DR', '', '')") ;
         }              // End of function
 
                        // set and execute the above function via an if statment WORKS

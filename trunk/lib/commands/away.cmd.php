@@ -161,7 +161,7 @@ if ($xtra !="")
 	$xtra = "<FONT COLOR=\"".$C."\">".$xtra."</FONT>";
 	$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".addslashes($U)."', '$Latin1', '$time', '$Private', '".addslashes($xtra)."', '', '')");
 }
-	$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS away', '', '".time()."', '', '$msg', '', '')");
+	$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS away', '$Latin1', '".time()."', '', '$msg', '', '')");
 	$DbLink->query("UPDATE ".C_USR_TBL." SET awaystat='".$awaystat."' WHERE username='$U'");
 	if(C_EN_STATS && $awaystat < 2)
 	{

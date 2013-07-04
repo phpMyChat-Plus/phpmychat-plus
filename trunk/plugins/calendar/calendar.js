@@ -159,8 +159,12 @@ function tc_submitDate(objname, dvalue, mvalue, yvalue){
 	var hl = document.getElementById(objname+'_hl').value;
 	//Digitizer
 	var dig = document.getElementById(objname+'_dig').value;
+	//Tooltips
+	var ttd = document.getElementById(objname+'_ttd').value;
+	var ttt = document.getElementById(objname+'_ttt').value;
 
-	obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+dvalue+"&selected_month="+mvalue+"&selected_year="+yvalue+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&pr1="+pr1+"&pr2="+pr2+"&prv="+prv+"&spd="+spd+"&spt="+spt+"&och="+och+"&str="+str+"&rtl="+rtl+"&wks="+wks+"&int="+int+"&hid="+hid+"&hdt="+hdt+"&hl="+hl+"&dig="+dig;
+	//Tooltips
+	obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+dvalue+"&selected_month="+mvalue+"&selected_year="+yvalue+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&pr1="+pr1+"&pr2="+pr2+"&prv="+prv+"&spd="+spd+"&spt="+spt+"&och="+och+"&str="+str+"&rtl="+rtl+"&wks="+wks+"&int="+int+"&hid="+hid+"&hdt="+hdt+"&hl="+hl+"&dig="+dig+"&ttd="+ttd+"&ttt="+ttt;
 
 	obj.contentWindow.submitNow(dvalue, mvalue, yvalue);
 }
@@ -751,7 +755,6 @@ function checkSpecifyDate(objname, strDay, strMonth, strYear){
 			}
 			break;
 	}
-
 	return true;
 }
 
