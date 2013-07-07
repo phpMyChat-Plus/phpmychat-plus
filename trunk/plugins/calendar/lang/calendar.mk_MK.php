@@ -3,7 +3,7 @@
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Localized version of PHP-Calendar, DatePicker Calendar class: http://ciprianmp.com/scripts/calendar/
 # Version: 3.70
-# Language: Macedonian / Македонски
+# Language: Macedonian / македонски
 # Translator: Миле Ѓоргиев <milegorgiev@yahoo.com>
 # Last file update: 04.07.2013
 
@@ -26,52 +26,54 @@ define("L_DATE_AFTER", "Одберете датум после %s");
 define("L_DATE_BETWEEN", "Одберете датум помеѓу\\n%s and %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Ресетирај");
+define("L_CLOSE", "Затвори");
+define("L_WARN_2038", "php верзијата на серверот ја нема поддршката за 2038 година и наредните години! (<5.3.0)");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "1");
 
 // Months Long Names
-define("L_JAN", "Јануари");
-define("L_FEB", "Февруари");
-define("L_MAR", "Март");
-define("L_APR", "Април");
-define("L_MAY", "Мај");
-define("L_JUN", "Јуни");
-define("L_JUL", "Јули");
-define("L_AUG", "Август");
-define("L_SEP", "Септември");
-define("L_OCT", "Октомври");
-define("L_NOV", "Ноември");
-define("L_DEC", "Декември");
+define("L_JAN", "јануари");
+define("L_FEB", "февруари");
+define("L_MAR", "март");
+define("L_APR", "aприл");
+define("L_MAY", "мај");
+define("L_JUN", "јуни");
+define("L_JUL", "јули");
+define("L_AUG", "aвгуст");
+define("L_SEP", "cептември");
+define("L_OCT", "oктомври");
+define("L_NOV", "ноември");
+define("L_DEC", "декември");
 // Months Short Names
-define("L_S_JAN", "Јан");
-define("L_S_FEB", "Фев");
-define("L_S_MAR", "Мар");
-define("L_S_APR", "Апр");
-define("L_S_MAY", "Мај");
-define("L_S_JUN", "Јун");
-define("L_S_JUL", "Јул");
-define("L_S_AUG", "Авг");
-define("L_S_SEP", "Сеп");
-define("L_S_OCT", "Окт");
-define("L_S_NOV", "Ное");
-define("L_S_DEC", "Дек");
+define("L_S_JAN", "јан");
+define("L_S_FEB", "фев");
+define("L_S_MAR", "мар");
+define("L_S_APR", "aпр");
+define("L_S_MAY", "мај");
+define("L_S_JUN", "јун");
+define("L_S_JUL", "јул");
+define("L_S_AUG", "aвг");
+define("L_S_SEP", "cеп");
+define("L_S_OCT", "oкт");
+define("L_S_NOV", "ное");
+define("L_S_DEC", "дек");
 // Week days Long Names
-define("L_MON", "Понеделник");
-define("L_TUE", "Вторник");
-define("L_WED", "Среда");
-define("L_THU", "Четврток");
-define("L_FRI", "Петок");
-define("L_SAT", "Сабота");
-define("L_SUN", "Недела");
+define("L_MON", "понеделник");
+define("L_TUE", "вторник");
+define("L_WED", "cреда");
+define("L_THU", "четврток");
+define("L_FRI", "петок");
+define("L_SAT", "cабота");
+define("L_SUN", "недела");
 // Week days Short Names
-define("L_S_MON", "Пон");
-define("L_S_TUE", "Вто");
-define("L_S_WED", "Сре");
-define("L_S_THU", "Чет");
-define("L_S_FRI", "Пет");
-define("L_S_SAT", "Саб");
-define("L_S_SUN", "Нед");
+define("L_S_MON", "пон");
+define("L_S_TUE", "вто");
+define("L_S_WED", "cре");
+define("L_S_THU", "чет");
+define("L_S_FRI", "пет");
+define("L_S_SAT", "cаб");
+define("L_S_SUN", "нед");
 
 // Windows encoding
 define("WIN_DEFAULT", "windows-1251");
