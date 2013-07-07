@@ -650,34 +650,31 @@ else
 			    $birth_day = strtotime($BIRTHDAY);
 				$myCalendar->setDate(date('d',$birth_day), date('m',$birth_day), date('Y',$birth_day));
 			  }
-			  $myCalendar->setYearInterval(1935, date('Y'));
-			  $myCalendar->dateAllow('1935-01-01', date('Y-m-d'));
-				$DbLink->query("SELECT username,birthday,show_bday,show_age FROM ".C_REG_TBL." WHERE birthday != '' AND birthday != '0000-00-00' ORDER BY birthday ASC");
+			  $myCalendar->setYearInterval(1901, date('Y'));
+			  $myCalendar->dateAllow('1901-01-01', date('Y-m-d'));
+				$DbLink->query("SELECT username,birthday,show_age FROM ".C_REG_TBL." WHERE birthday != '' AND birthday != '0000-00-00' AND show_bday = '1' ORDER BY birthday DESC LIMIT 34");
 				if ($DbLink->num_rows() != 0)
 				{
 					include_once('plugins/birthday/age.class.php');
-					while(list($birthname, $birthday, $show_bday, $show_age) = $DbLink->next_record())
+					$my_dob = new DateOfBirth();
+					while(list($birthname, $birthday, $show_age) = $DbLink->next_record())
 					{
-						if($show_bday)
+						if ($show_age)
 						{
-							if ($show_age)
-							{
-								$my_dobtime = strtotime($birthday);
-								$my_dob = new DateOfBirth();
-								$my_dob->birth_num_year = date('Y',$my_dobtime);
-								$my_dob->birth_num_month = date('n',$my_dobtime);
-								$my_dob->birth_num_day = date('j',$my_dobtime);
-								$my_dob->calculate_age();
-								$age = $my_dob->age;
-							}
-							$myCalendar->setToolTips(array($birthday), $age ? $birthname." (".$age.")" : $birthname, 'year');
-							unset($age,$my_dobtime);
+							$my_dobtime = strtotime($birthday);
+							$my_dob->birth_num_year = date('Y',$my_dobtime);
+							$my_dob->birth_num_month = date('n',$my_dobtime);
+							$my_dob->birth_num_day = date('j',$my_dobtime);
+							$my_dob->calculate_age();
+							$age = $my_dob->age;
 						}
+						$myCalendar->setToolTips(array($birthday), $show_age ? $birthname." (".$age.")" : $birthname, 'year');
+						unset($age, $my_dobtime);
 					}
 				$DbLink->clean_results();
-				$DbLink->close();
 				}
 			  $myCalendar->writeScript();
+$DbLink->close();
 			?>
 				&nbsp;<?php if (!$done && C_REQUIRE_BDAY) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
 				<INPUT TYPE="hidden" NAME="BIRTHDAY" VALUE="<?php echo($BIRTHDAY); ?>">

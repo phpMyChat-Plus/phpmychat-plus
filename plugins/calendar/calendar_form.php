@@ -261,8 +261,8 @@ for($day=1; $day<=$total_thismonth; $day++){
 			//check on yearly recursive
 			if(isset($sp_dates[2]) && is_array($sp_dates[2])){
 				foreach($sp_dates[2] as $sp_time){
-					$sp_time_md = date('md', $sp_time);
-					$this_md = date('md', $currentTime);
+					$sp_time_md = (int)$cdate->getDateFromTimestamp($sp_time, 'md'); //date('md', $sp_time);
+					$this_md = (int)$cdate->getDateFromTimestamp($currentTime, 'md'); //date('md', $currentTime);
 					if($sp_time_md == $this_md){
 						$sp_found = true;
 						break;
@@ -274,7 +274,7 @@ for($day=1; $day<=$total_thismonth; $day++){
 			if(isset($sp_dates[1]) && is_array($sp_dates[1]) && !$sp_found){
 				foreach($sp_dates[1] as $sp_time){
 					if($sp_time != "" && $sp_time > 0){
-						$sp_time_d = date('d', $sp_time);
+						$sp_time_d = (int)$cdate->getDateFromTimestamp($sp_time, 'd'); //date('d', $sp_time);
 						if($sp_time_d == $day){
 							$sp_found = true;
 							break;
@@ -333,7 +333,7 @@ for($day=1; $day<=$total_thismonth; $day++){
 			for($i=0; $i<sizeof($tt_dates[1]); $i++){
 				$tt_time = $tt_dates[1][$i];
 				if($tt_time != "" && $tt_time > 0){
-					$tt_time_d = date('d', $tt_time);
+					$tt_time_d = (int)$cdate->getDateFromTimestamp($tt_time, 'd'); //date('d', $tt_time);
 					if($tt_time_d == $day && isset($tt_tooltips[1][$i])){
 						$tt_tooltip .= ($tt_tooltip != "") ? "&#10;".$tt_tooltips[1][$i] : $tt_tooltips[1][$i];
 					}
@@ -346,8 +346,8 @@ for($day=1; $day<=$total_thismonth; $day++){
 			for($i=0; $i<sizeof($tt_dates[2]); $i++){
 				$tt_time = $tt_dates[2][$i];
 				if($tt_time != "" && $tt_time > 0){
-					$tt_time_md = date('md', $tt_time);
-					$this_md = date('md', $currentTime);
+					$tt_time_md = (int)$cdate->getDateFromTimestamp($tt_time, 'md'); //date('md', $tt_time);
+					$this_md = (int)$cdate->getDateFromTimestamp($currentTime, 'md'); //date('md', $currentTime);
 					if($tt_time_md == $this_md && isset($tt_tooltips[2][$i])){
 						$tt_tooltip .= ($tt_tooltip != "") ? "&#10;".$tt_tooltips[2][$i] : $tt_tooltips[2][$i];
 					}
@@ -440,8 +440,8 @@ if($cobj->hl){
 <link href="calendar.css" rel="stylesheet" type="text/css" />
 <script language="javascript">
 <!--
-var today_month = "<?php echo(date('m')); ?>";
-var today_year = "<?php echo(date('Y')); ?>";
+var today_month = "<?php echo($cdate->getDate('m')); ?>";
+var today_year = "<?php echo($cdate->getDate('Y')); ?>";
 var obj_name = "<?php echo($objname); ?>";
 //-->
 </script>
@@ -515,7 +515,7 @@ function submitNow(dvalue, mvalue, yvalue){
 			</td>
               <td align="left"><select name="y" onchange="javascript:submitCalendar();" class="font">
               <?php
-              $thisyear = date('Y');
+              $thisyear = $cdate->getDate('Y'); //date('Y');
 
               //write year options
               for($year=$year_end; $year>=$year_start; $year--){
@@ -546,7 +546,7 @@ function submitNow(dvalue, mvalue, yvalue){
 			?>
               <td align="right"><select name="y" onchange="javascript:submitCalendar();" class="font">
               <?php
-              $thisyear = date('Y');
+              $thisyear = $cdate->getDate('Y'); //date('Y');
 
               //write year options
               for($year=$year_end; $year>=$year_start; $year--){

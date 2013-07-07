@@ -34,6 +34,7 @@ If your users encounter bootings for no reason, try to disable sounds in chat.
 
 Fixes History:
 06.02.2013 - 1.94-RC2:
+- added birthdays to calendar as tooltips; (calendar related)
 - Latin1 empty value fix; (functionality related)
 - tooltips linebreak fix; (functionality related)
 - calendar class update to 3.70-loc version; (functionality related)

@@ -772,7 +772,7 @@ class tc_calendar{
 		//should replace with better solution in the future
 
 		if(function_exists("json_decode")){
-			return json_decode($str);
+			return json_decode(get_magic_quotes_gpc() ? stripslashes($str) : $str);
 		}else{
 			//only array is assume for now
 			$str = trim($str);

@@ -510,7 +510,7 @@ if($DbLink->num_rows() > 0)
 		};
 
 //------------------------------Begin HighLight command by R.Worley
-global $contents ;
+global $contents, $Latin1;
 $highpath = "botfb/" .$U ;
 if (file_exists ($highpath))
 {

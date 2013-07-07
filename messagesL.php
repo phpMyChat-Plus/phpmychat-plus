@@ -506,7 +506,7 @@ if($DbLink->num_rows() > 0)
 		// Skip the oldest message if the day seperator has been added
 		if (isset($day_separator) && $i == $N) continue;
 //------------------------------Begin HighLight command by R.Worley
-global $contents ;
+global $contents, $Latin1;
 $highpath = "botfb/" .$U ;
 if (file_exists ($highpath))
 {
