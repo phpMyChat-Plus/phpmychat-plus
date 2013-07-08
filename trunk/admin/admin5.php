@@ -420,7 +420,7 @@ if (UPD_CHECK)
 					<li><a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Plus FAQ.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_36)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_36)); ?>'; return true"><?php echo A_CONF_36; ?></a></li>
 					<li><a href="http://www.ciprianmp.com/latest/" target=_blank Title="<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_37)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_37)); ?>.'; return true"><?php echo A_CONF_37; ?></a></li>
 					<li><a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>.'; return true;" title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>" target=_blank><?php echo A_CONF_38; ?></a></li>
-					<li><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ciprianmp%40hotmail%2ecom&item_name=Support%20for%20phpMyChat%20Plus%20development&no_shipping=1&cn=Optional%20Thoughts&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8" onClick="return confirm('<?php echo(L_SUPP_WARN); ?>');" onMouseOver="window.status='Wish to keep <?php echo(APP_NAME); ?> FREE?'; return true;" title="Wish to keep <?php echo(APP_NAME); ?> FREE?" target="_blank"><?php echo A_CONF_39; ?></a></li> <!-- Wish to donate? -->
+					<li><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=ciprianmp%40hotmail%2ecom&item_name=Support%20for%20phpMyChat%20Plus%20development&no_shipping=1&cn=Optional%20Thoughts&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8" onClick="return confirm('<?php echo(L_SUPP_WARN); ?>');" onMouseOver="window.status='Wish to keep <?php echo(APP_NAME); ?> FREE?'; return true;" title="Wish to keep <?php echo(APP_NAME); ?> FREE?" target="_blank"><?php echo A_CONF_39; ?></a></li>
 <?php
 					if ($translate_it)
 					{
@@ -454,7 +454,7 @@ if (UPD_CHECK)
 		?>
 			<script type="text/javascript" language="javascript">
 			<!--
-		alert("<?php echo("- ".sprintf(A_SHEET5_0, APP_VERSION.APP_MINOR)." -") ?>\n<?php echo(sprintf(A_SHEET5_1, APP_LAST_VERSION.$alm)); ?>")
+				alert("<?php echo("- ".sprintf(A_SHEET5_0, APP_VERSION.APP_MINOR)." -") ?>\n<?php echo(sprintf(A_SHEET5_1, APP_LAST_VERSION.$alm)); ?>")
 			// -->
 			</script>
 <?php
@@ -628,8 +628,8 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"HIDE_MODERS = '$vHIDE_MODERS', ".
 						"LAST_SAVED_ON = NOW(), ".
 						"LAST_SAVED_BY = '$pmc_username', ".
-						"CHAT_SYSTEM = '$vCHAT_SYSTEM', ".
-						"NUKE_BB_PATH = '$vNUKE_BB_PATH', ".
+#						"CHAT_SYSTEM = '$vCHAT_SYSTEM', ".
+#						"NUKE_BB_PATH = '$vNUKE_BB_PATH', ".
 						"CHAT_NAME = '".trim(str_replace("'", "’", $vCHAT_NAME))."', ".
 						"ENGLISH_FORMAT = '$vENGLISH_FORMAT', ".
 						"FLAGS_3D = '$vFLAGS_3D', ".
@@ -1594,7 +1594,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="skins"></a><b><?php echo A_CONF_9; ?></b></td></tr><!--Rooms & Skins-->
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="skins"></a><b><?php echo A_CONF_9; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
@@ -2015,7 +2015,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_241; ?></b><!--Play a sound on entrance.-->
+    <td><b><?php echo A_CONFCONTENT_241; ?></b>
 	</td>
     <td>
         <select name="vALLOW_ENTRANCE_SOUND">
@@ -2589,7 +2589,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     <td>
 		<input type="radio" value="0" name="vGRAVATARS_CACHE" <?php if($GRAVATARS_CACHE==0 || !$cache_supported || $server_blocked) { echo " checked"; }; ?>>&nbsp;<?php echo A_CONFCONTENT_378; ?><br />
 		<input type="radio" value="1" name="vGRAVATARS_CACHE" <?php if($GRAVATARS_CACHE==1 && $cache_supported){ echo " checked"; }; if(!$cache_supported || $server_blocked){ echo " disabled"; }; ?>>&nbsp;<?php echo A_CONFCONTENT_379; ?><br />
-		<?php echo A_CONFCONTENT_380; ?><!--Cache Age:--><br /><input name="vGRAVATARS_CACHE_EXPIRE" type="text" size="7" maxlength="3" value="<?php echo $GRAVATARS_CACHE_EXPIRE; ?>"<?php if(!$cache_supported || $server_blocked){ echo " readonly"; }; ?>>&nbsp;(<?php echo $GRAVATARS_CACHE_EXPIRE == 1 ? L_DAY : L_DAYS; ?>)
+		<?php echo A_CONFCONTENT_380; ?><br /><input name="vGRAVATARS_CACHE_EXPIRE" type="text" size="7" maxlength="3" value="<?php echo $GRAVATARS_CACHE_EXPIRE; ?>"<?php if(!$cache_supported || $server_blocked){ echo " readonly"; }; ?>>&nbsp;(<?php echo $GRAVATARS_CACHE_EXPIRE == 1 ? L_DAY : L_DAYS; ?>)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
@@ -2648,7 +2648,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 </table>
 <table align="center" width="780" class=table>
-<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="logging"></a><b><?php echo A_CONF_21; ?></b></td></tr><!--Logging Mod-->
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="logging"></a><b><?php echo A_CONF_21; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
