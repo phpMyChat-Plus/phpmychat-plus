@@ -268,7 +268,7 @@ class tc_calendar{
 		$params[] = "dig=".$this->dig;
 		//Tooltips
 		$params[] = "ttd=".$this->check_json_encode($this->tt_dates);
-		$params[] = "ttt=".urlencode($this->check_json_encode($this->tt_tooltips));
+		$params[] = "ttt=".rawurlencode($this->check_json_encode($this->tt_tooltips));
 
 		$paramStr = (sizeof($params)>0) ? "?".implode("&", $params) : "";
 
@@ -421,7 +421,7 @@ class tc_calendar{
 		$this->eHidden('dig', $this->dig);
 		//Tooltips
 		$this->eHidden('ttd', $this->check_json_encode($this->tt_dates));
-		$this->eHidden('ttt', urlencode($this->check_json_encode($this->tt_tooltips)));
+		$this->eHidden('ttt', rawurlencode($this->check_json_encode($this->tt_tooltips)));
 	}
 
 	//set width of calendar
@@ -771,8 +771,10 @@ class tc_calendar{
 	function &check_json_decode($str){
 		//should replace with better solution in the future
 
+		$str = get_magic_quotes_gpc() ? stripslashes($str) : $str;
+		
 		if(function_exists("json_decode")){
-			return json_decode(get_magic_quotes_gpc() ? stripslashes($str) : $str);
+			return json_decode($str);
 		}else{
 			//only array is assume for now
 			$str = trim($str);
