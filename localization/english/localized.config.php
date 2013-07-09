@@ -1,5 +1,5 @@
 <?php
-// File : english/localized.config.php - plus version (17.02.2013 - rev.1)
+// File : english/localized.config.php - plus version (09.07.2013 - rev.2)
 // First version is based on the work of Marco Gelli Marchese <mvmcgm@gmail.com> for the Brasilian version
 // Original English file by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
@@ -105,6 +105,9 @@ define("A_CONFCONTENT_5", "Clean-up time for old messages.");
 define("A_CONFCONTENT_7", "Autoboot time for inactive users in rooms.");
 define("A_CONFCONTENT_8", "This autoboot feature forces users to be active in rooms. If they want to be lurking, they should just use the lurking page. Admins, moderators and away users won’t be booted.");
 define("A_CONFCONTENT_10", "Delete registered users accounts not active in this interval (0 for never).");
+define("A_CONFCONTENT_11", "Set the mode your chat server runs.");
+define("A_CONFCONTENT_11a", "The plugin mode is not implemented. Explanations for running it as a phpnuke/phpbb plugin will follow here."); 
+define("A_CONFCONTENT_11b", "Path to local Nuke/phpBB folder:");
 
 //Content - Languages
 define("A_CONFCONTENT_12", "Default Language for Chatroom.");

@@ -628,8 +628,8 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"HIDE_MODERS = '$vHIDE_MODERS', ".
 						"LAST_SAVED_ON = NOW(), ".
 						"LAST_SAVED_BY = '$pmc_username', ".
-#						"CHAT_SYSTEM = '$vCHAT_SYSTEM', ".
-#						"NUKE_BB_PATH = '$vNUKE_BB_PATH', ".
+						"CHAT_SYSTEM = '$vCHAT_SYSTEM', ".
+						"NUKE_BB_PATH = '$vNUKE_BB_PATH', ".
 						"CHAT_NAME = '".trim(str_replace("'", "’", $vCHAT_NAME))."', ".
 						"ENGLISH_FORMAT = '$vENGLISH_FORMAT', ".
 						"FLAGS_3D = '$vFLAGS_3D', ".
@@ -878,6 +878,19 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
     <td>
 		<input name="vREG_DEL" type="text" size="7" maxlength="4" value="<?php echo $REG_DEL; ?>">&nbsp;(<?php echo $REG_DEL == 1 ? L_DAY : L_DAYS; ?>)</td>
+</tr>
+<tr>
+    <td><b><?php echo A_CONFCONTENT_11 ?></b><br />
+    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_11a); ?></i>
+    </td>
+    <td>
+        <select name="vCHAT_SYSTEM" DISABLED>
+	        <option value="standalone"<?php if($CHAT_SYSTEM=="standalone"){ echo " selected"; } ?>><?php echo "standalone" ?></option>
+	        <option value="phpnuke"<?php if($CHAT_SYSTEM=="phpnuke"){ echo " selected"; } ?>><?php echo "phpnuke" ?></option>
+	        <option value="phpbb"<?php if($CHAT_SYSTEM=="phpbb"){ echo " selected"; } ?>><?php echo "phpbb" ?></option>
+        </select><br />
+    		<?php echo A_CONFCONTENT_11b; ?><br />
+		<input name="vNUKE_BB_PATH" type="text" size="25" maxlength="100" value="<?php echo $NUKE_BB_PATH; ?>" DISABLED></td>
 </tr>
 </table>
 <table align="center" width="780" class=table>

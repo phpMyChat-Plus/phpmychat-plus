@@ -506,7 +506,7 @@ if($DbLink->num_rows() > 0)
 		// Skip the oldest message if the day seperator has been added
 		if (isset($day_separator) && $i == $N) continue;
 //------------------------------Begin HighLight command by R.Worley
-global $contents, $Latin1;
+global $contents;
 $highpath = "botfb/" .$U ;
 if (file_exists ($highpath))
 {
@@ -784,7 +784,7 @@ if (C_QUOTE)
 		$DbLink->query("SELECT m_time FROM ".C_MSG_TBL." WHERE username='".C_QUOTE_NAME."' AND room = '$R' AND m_time > ".(time() - $quotetime)." ORDER BY m_time DESC LIMIT 1");
 			if ($DbLink->num_rows() == 0)
 			{
-				$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".C_QUOTE_NAME."', '$Latin1', ".time().", '', '$quotetext', '', '')");
+				$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', '".C_QUOTE_NAME."', '0', ".time().", '', '$quotetext', '', '')");
 			}
 		}
 	}
