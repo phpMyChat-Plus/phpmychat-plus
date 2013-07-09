@@ -105,6 +105,9 @@ define("A_CONFCONTENT_5", "Tempo de limpeza de mensagens antigas."); //Clean-up 
 define("A_CONFCONTENT_7", "Tempo de término de sessão automático (autoboot) para usuários inativos nas salas."); //Autoboot time for inactive users in rooms.
 define("A_CONFCONTENT_8", "Este recurso autoboot força os usuários a permanecerem ativos nas salas. Se eles querem estar à espreita, eles devem apenas utilizar a página à espreita. Usuários administradores, moderadores e distância não serão deslogados."); // This autoboot feature forces users to be active in rooms. If they want to be lurking, they should just use the lurking page. Admins, moderators and away users won’t be booted.
 define("A_CONFCONTENT_10", "Excluir usuários registrados com contas não ativas neste intervalo (0 para nunca)."); //Delete registered users accounts not active in this interval (0 for never).
+define("A_CONFCONTENT_11", "Set the mode your chat server runs.");
+define("A_CONFCONTENT_11a", "The plugin mode is not implemented. Explanations for running it as a phpnuke/phpbb plugin will follow here."); 
+define("A_CONFCONTENT_11b", "Path to local Nuke/phpBB folder:");
 
 //Content - Languages
 define("A_CONFCONTENT_12", "Idioma padrão para as salas de chat."); //Default Language for Chatroom.

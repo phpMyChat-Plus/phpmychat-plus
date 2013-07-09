@@ -976,8 +976,8 @@ $HIDE_ADMINS			= $row[137];
 $HIDE_MODERS			= $row[138];
 $LAST_SAVED_ON		= $row[139];
 $LAST_SAVED_BY		= $row[140];
-#$CHAT_SYSTEM      = $row[141];
-#$NUKE_BB_PATH     = $row[142];
+$CHAT_SYSTEM      = $row[141];
+$NUKE_BB_PATH     = $row[142];
 $CHAT_NAME	     = $row[143];
 $ENGLISH_FORMAT	     = $row[144];
 $FLAGS_3D	     = $row[145];
@@ -1417,8 +1417,8 @@ define("C_LAST_SAVED_ON", $LAST_SAVED_ON);
 define("C_LAST_SAVED_BY", $LAST_SAVED_BY);
 
 // PHP-Nuke / phpBB integration by TPS
-#define("C_CHAT_SYSTEM", $CHAT_SYSTEM);
-#define("C_NUKE_BB_PATH", $NUKE_BB_PATH);
+define("C_CHAT_SYSTEM", $CHAT_SYSTEM);
+define("C_NUKE_BB_PATH", $NUKE_BB_PATH);
 
 // Added for owner personalizations to all the languages by Ciprian
 if(is_dir("./${ChatPath}localization/_owner/") && file_exists("./${ChatPath}localization/_owner/owner.php")) include("./${ChatPath}localization/_owner/owner.php");
@@ -1703,8 +1703,8 @@ else {
   	fputs ( $fh, '$HIDE_MODERS			= $row[138];'.$lfeed );
   	fputs ( $fh, '$LAST_SAVED_ON		= $row[139];'.$lfeed );
   	fputs ( $fh, '$LAST_SAVED_BY		= $row[140];'.$lfeed );
-  	fputs ( $fh, '#$CHAT_SYSTEM			= $row[141];'.$lfeed );
-  	fputs ( $fh, '#$NUKE_BB_PATH			= $row[142];'.$lfeed );
+  	fputs ( $fh, '$CHAT_SYSTEM			= $row[141];'.$lfeed );
+  	fputs ( $fh, '$NUKE_BB_PATH			= $row[142];'.$lfeed );
   	fputs ( $fh, '$CHAT_NAME			= $row[143];'.$lfeed );
   	fputs ( $fh, '$ENGLISH_FORMAT		= $row[144];'.$lfeed );
   	fputs ( $fh, '$FLAGS_3D				= $row[145];'.$lfeed );
@@ -2146,8 +2146,8 @@ else {
   	fputs ( $fh, 'define("C_LAST_SAVED_BY", $LAST_SAVED_BY);'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// PHP-Nuke / phpBB integration by TPS'.$lfeed );
-  	fputs ( $fh, '#define("C_CHAT_SYSTEM", $CHAT_SYSTEM);'.$lfeed );
-  	fputs ( $fh, '#define("C_NUKE_BB_PATH", $NUKE_BB_PATH);'.$lfeed );
+  	fputs ( $fh, 'define("C_CHAT_SYSTEM", $CHAT_SYSTEM);'.$lfeed );
+  	fputs ( $fh, 'define("C_NUKE_BB_PATH", $NUKE_BB_PATH);'.$lfeed );
   	fputs ( $fh, ''.$lfeed );
   	fputs ( $fh, '// Added for owner personalizations to all the languages by Ciprian'.$lfeed );
   	fputs ( $fh, 'if(is_dir("./${ChatPath}localization/_owner/") && file_exists("./${ChatPath}localization/_owner/owner.php")) include("./${ChatPath}localization/_owner/owner.php");'.$lfeed );

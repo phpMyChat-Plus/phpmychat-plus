@@ -104,6 +104,9 @@ define("A_CONFCONTENT_5", "旧邮件清理时间。");
 define("A_CONFCONTENT_7", "不活动的用户在房间的自动启动时间。");
 define("A_CONFCONTENT_8", "此自动引导功能，强迫用户活跃在房间。如果他们想成为潜伏的，他们应该只使用潜伏页。管理员，主持人和离开用户不会被启动。");
 define("A_CONFCONTENT_10", "删除此时段内不活跃注册用户帐户 （0 永远不会）。");
+define("A_CONFCONTENT_11", "Set the mode your chat server runs.");
+define("A_CONFCONTENT_11a", "The plugin mode is not implemented. Explanations for running it as a phpnuke/phpbb plugin will follow here."); 
+define("A_CONFCONTENT_11b", "Path to local Nuke/phpBB folder:");
 
 //Content - Languages
 define("A_CONFCONTENT_12", "用于聊天室的预设语言。");
