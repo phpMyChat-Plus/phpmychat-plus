@@ -104,9 +104,9 @@ define("A_CONFCONTENT_5", "舊郵件清理時間。");
 define("A_CONFCONTENT_7", "不活動的用戶在房間的自動啟動時間。");
 define("A_CONFCONTENT_8", "此自動引導功能，強迫用戶活躍在房間。如果他們想成為潛伏的，他們應該只使用潛伏頁。管理員，主持人和離開用戶不會被啟動。");
 define("A_CONFCONTENT_10", "刪除此時段內不活躍註冊用戶帳戶 （0 永遠不會）。");
-define("A_CONFCONTENT_11", "设置您的聊天服务器运行模式。");
-define("A_CONFCONTENT_11a", "这个外挂模式未启动。这里将按照 phpnuke/phpbb 外挂运行的解释。"); 
-define("A_CONFCONTENT_11b", "本地 Nuke/phpBB 资料夹的路径：");
+define("A_CONFCONTENT_11", "設置您的聊天服務器運行模式。");
+define("A_CONFCONTENT_11a", "這個外掛模式未啟動。這裡將按照 phpnuke/phpbb 外掛運行的解釋。"); 
+define("A_CONFCONTENT_11b", "本地 Nuke/phpBB 資料夾的路徑：");
 
 //Content - Languages
 define("A_CONFCONTENT_12", "用於聊天室的預設語言。");
