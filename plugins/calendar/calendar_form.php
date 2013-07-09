@@ -41,7 +41,7 @@ $hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : 'en_US';
 $dig = (isset($_REQUEST["dig"])) ? $_REQUEST["dig"] : 0;
 //Tooltips
 $tt_dates = (isset($_REQUEST["ttd"])) ? @tc_calendar::check_json_decode($_REQUEST["ttd"]) : array(array(), array(), array());
-$tt_tooltips = (isset($_REQUEST["ttt"])) ? @tc_calendar::check_json_decode(urldecode($_REQUEST["ttt"])) : array(array(), array(), array());
+$tt_tooltips = (isset($_REQUEST["ttt"])) ? @tc_calendar::check_json_decode(rawurldecode($_REQUEST["ttt"])) : array(array(), array(), array());
 
 //check year to be select in case of date_allow is set
 if(!$show_not_allow){
@@ -605,7 +605,7 @@ function submitNow(dvalue, mvalue, yvalue){
             <input name="dig" type="hidden" id="dig" value="<?php echo($dig);?>" />
 			<!-- //Tooltips -->
             <input name="ttd" type="hidden" id="ttd" value="<?php echo($cobj->check_json_encode($tt_dates));?>" />
-            <input name="ttt" type="hidden" id="ttt" value="<?php echo(urlencode($cobj->check_json_encode($tt_tooltips)));?>" />
+            <input name="ttt" type="hidden" id="ttt" value="<?php echo(rawurlencode($cobj->check_json_encode($tt_tooltips)));?>" />
       </form>
     </div>
     <div id="calendar-container">

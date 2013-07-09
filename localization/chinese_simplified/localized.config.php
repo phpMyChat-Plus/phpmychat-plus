@@ -1,5 +1,5 @@
 <?php
-// File : chinese_simplified/localized.config.php - plus version （17.02.2013 - rev.1）
+// File: chinese_simplified/localized.config.php - plus version （09.07.2013 - rev.2）
 // Translated by clouds_music <clouds.music@gmail.com>
 // Do not use ' but use ’ instead （utf-8 edit bug）
 
@@ -66,8 +66,8 @@ define("A_CONF_36", "线上常见问题");
 define("A_CONF_37", "试试我的伺服器");
 define("A_CONF_38", "提交您的 反馈"); //Submit your feedback
 define("A_CONF_39", "愿意捐赠？");
-define("A_CONF_40", "发行日期:\\n%s"); //%s = date
-define("A_CONF_41", "Plus 开发人员: %s"); //%s = developer name
+define("A_CONF_40", "发行日期：\\n%s"); //%s = date
+define("A_CONF_41", "Plus 开发人员： %s"); //%s = developer name
 define("A_CONF_42", "Big thanks to all the contributors\\nto the phpHeaven Team work\\nand the phpMyChat groups on\\nYahoo！ and Sourceforge.\\n\\nThank you for using our work！");
 define("A_CONF_43", "这是什么？");
 define("A_CONF_44", "关于 Plus");
@@ -87,7 +87,7 @@ define("A_CONF_ERR_6", "您必须输入一个用户名，为你的 %s！"); //%s
 define("A_CONF_ERR_7", "只允许这些额外的字符：");
 define("A_CONF_ERR_8", "空格，逗号或反斜线 （\\） 不允许。<br />检查该语法 %s 的名称 %s！"); //%s = Bot/Quote word | （Bot/Quote names）
 define("A_CONF_ERR_9", "发现不能使用的字，在 随机引用 的用户名里 %s %s！"); //%s = Bot/Quote word | （Bot/Quote names） //Banished word found in the %s name %s！
-define("A_CONF_ERR_10", "这是随机引用的名称 %s %s 已被注册。<br />请选择另一个名称！！"); //%s = Bot/Quote word | （Bot/Quote names） //The name of your %s %s is already registered.<br />Choose another name！
+define("A_CONF_ERR_10", "这是随机引用的名称 %s %s 已被注册。<br />请选择另一个名称！"); //%s = Bot/Quote word | （Bot/Quote names） //The name of your %s %s is already registered.<br />Choose another name！
 define("A_CONF_ERR_11", "如果更改此设置，同时也有用户登录，您的所有用户必须重新载入他们的浏览器或退出并重新登录。如果您启用/禁用此，将被自动发送到所有房间的一个公告。");
 
 //Content - Title
@@ -104,9 +104,9 @@ define("A_CONFCONTENT_5", "旧邮件清理时间。");
 define("A_CONFCONTENT_7", "不活动的用户在房间的自动启动时间。");
 define("A_CONFCONTENT_8", "此自动引导功能，强迫用户活跃在房间。如果他们想成为潜伏的，他们应该只使用潜伏页。管理员，主持人和离开用户不会被启动。");
 define("A_CONFCONTENT_10", "删除此时段内不活跃注册用户帐户 （0 永远不会）。");
-define("A_CONFCONTENT_11", "Set the mode your chat server runs.");
-define("A_CONFCONTENT_11a", "The plugin mode is not implemented. Explanations for running it as a phpnuke/phpbb plugin will follow here."); 
-define("A_CONFCONTENT_11b", "Path to local Nuke/phpBB folder:");
+define("A_CONFCONTENT_11", "設置您的聊天服務器運行模式。");
+define("A_CONFCONTENT_11a", "這個外掛模式未啟動。這裡將按照 phpnuke/phpbb 外掛運行的解釋。"); 
+define("A_CONFCONTENT_11b", "本地 Nuke/phpBB 資料夾的路徑：");
 
 //Content - Languages
 define("A_CONFCONTENT_12", "用于聊天室的预设语言。");
@@ -403,7 +403,7 @@ define("A_CONFCONTENT_285", "BOT状态和维护。");
 define("A_CONFCONTENT_286", "如果你的BOT不正常响应（空消息帖子）和/或 BOT 的 ID <> 1，您可能需要重新载入你的机器人。此操作将清空数据库中的的BOT表，并重新加载整个脚本。");
 define("A_CONFCONTENT_287", "你的BOT没有装载到资料库中。");
 define("A_CONFCONTENT_288", "<a href=\"./bot/botloader.php\" target=\"_blank\">".A_CONFHERE."</a> 到装载它 现在！");
-define("A_CONFCONTENT_289", "BOT 的 ID:");
+define("A_CONFCONTENT_289", "BOT 的 ID：");
 define("A_CONFCONTENT_291", "<a href=\"./bot/botloader.php\" target=\"_blank\" class=\"error\">".A_CONFHERE."</a> 重新加载BOT！");
 define("A_CONFCONTENT_292", "输入BOT回应讯息的颜色。");
 define("A_CONFCONTENT_293", "输入BOT的头像。");
