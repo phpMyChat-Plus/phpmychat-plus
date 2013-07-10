@@ -234,7 +234,7 @@ define("A_CONFCONTENT_122", "Uma contagem por semana"); //One count per Week
 
 //Content Chat Schedule
 define("A_CONFCONTENT_123", "Programar tempos de abertura do chat e salas de chat."); //Open times Schedule for your chat and chatrooms.
-define("A_CONFCONTENT_124", "Este mod ainda está em desenvolvimento! Os campos de programação, deliberadamente, foram desativados."); // This mod is still under development! The schedule fields have deliberately been disabled.
+define("A_CONFCONTENT_124", "Este mod ainda está em desenvolvimento! Os campos, deliberadamente, foram desativados."); // This mod is still under development! The fields have deliberately been disabled.
 define("A_CONFCONTENT_125", "Programação diária"); //Daily schedule:
 define("A_CONFCONTENT_126", "Programação de domingos"); //Sunday schedule:
 define("A_CONFCONTENT_127", "Programação de segundas"); //Monday schedule:
