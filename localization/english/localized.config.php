@@ -105,9 +105,9 @@ define("A_CONFCONTENT_5", "Clean-up time for old messages.");
 define("A_CONFCONTENT_7", "Autoboot time for inactive users in rooms.");
 define("A_CONFCONTENT_8", "This autoboot feature forces users to be active in rooms. If they want to be lurking, they should just use the lurking page. Admins, moderators and away users won’t be booted.");
 define("A_CONFCONTENT_10", "Delete registered users accounts not active in this interval (0 for never).");
-define("A_CONFCONTENT_11", "Set the mode your chat server runs.");
-define("A_CONFCONTENT_11a", "The plugin mode is not implemented. Explanations for running it as a phpnuke/phpbb plugin will follow here."); 
-define("A_CONFCONTENT_11b", "Path to local Nuke/phpBB folder:");
+define("A_CONFCONTENT_11", "Set the mode your chat server runs."); //rev.2
+define("A_CONFCONTENT_11a", "The plugin mode is not implemented. Explanations for running it as a phpnuke/phpbb plugin will follow here."); //rev.2 
+define("A_CONFCONTENT_11b", "Path to local Nuke/phpBB folder:"); //rev.2
 
 //Content - Languages
 define("A_CONFCONTENT_12", "Default Language for Chatroom.");
@@ -330,6 +330,8 @@ define("A_CONFCONTENT_214", "Non-power users (including guests) will only see ro
 
 //Content Colors
 define("A_CONFCONTENT_216", "Enable different Colored Names in users lists and/or posts.");
+define("A_CONFCONTENT_217", "Users can post texts using the color palette."); //rev.2
+define("A_CONFCONTENT_217a", "If disabled, only the default color (as defined for the current skin) will be used for all posts in chatroom."); //rev.2
 define("A_CONFCONTENT_219", "Italicize Power usernames in users lists.");
 define("A_CONFCONTENT_218", "If enabled, users can set their personal color to use for their usernames in users lists only.<br />If disabled, admins will be shown in <a class=\"admin\">red</a> and moderators in <a class=\"mod\">blue</a> (their default power colors in skins/styleN.css.php), only if \"".A_CONFCONTENT_219."\" is enabled below.");
 define("A_CONFCONTENT_220", "This option allows you to choose between showing or not who is admin and moderator in your chat (this doesn’t change any powers, it only makes admin/moder names different or not - italics - from regular users).");

@@ -160,7 +160,7 @@ INPUT, SELECT, TEXTAREA
 
 .msg2
 {
-	background: #FFFAFA;
+	background: <?php echo($COLOR_HIGH); ?>;
 	margin-top: 0px;
 	margin-bottom: 0px;
 	margin-left: <?php #echo($Align == "right" ? "5" : "55"); ?>0px;

@@ -10,5 +10,6 @@ $COLOR_TB = "PaleGreen"; //SeaGreen default table color
 $COLOR_SCROLL_TRACK = "LightGrey"; //main table color
 $COLOR_LINK = "DarkGreen"; //links color
 $COLOR_TOPIC = "OrangeRed"; //topic color
+$COLOR_HIGH = "Gainsboro"; //highlight background color
 define("COLOR_CD", "green"); //default messages color (also the filter color of this room)
 ?>
