@@ -57,7 +57,7 @@ BODY
 
 BODY.frame
 {
-	background-color: <?php echo(COLOR_CD); ?>;
+	background: #FFB6C1;
 	color: #FFC0CB;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
@@ -158,7 +158,7 @@ A.mod, A.mod:active
 A.sender, A.sender:active
 {
 	text-decoration: none;
-	color: <?php echo(COLOR_CD); ?>;
+	color: #800080;
 	font-weight: 600;
 	cursor:pointer;
 }
@@ -180,8 +180,7 @@ INPUT, SELECT, TEXTAREA
 
 .msg2
 {
-	background: <?php echo(COLOR_CD); ?>;
-	color: #FFFAFA;
+	background: <?php echo($COLOR_HIGH); ?>;
 	margin-top: 0px;
 	margin-bottom: 0px;
 	margin-left: <?php #echo($Align == "right" ? "5" : "55"); ?>0px;

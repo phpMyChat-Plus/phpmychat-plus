@@ -27,23 +27,23 @@ require_once("./${ChatPath}localization/".$L."/localized.chat.php");
 				<td CLASS="tabtitle" align=center>Other frames</td>
 			</tr>
 			<tr>
-				<td width=50% class="mesframePreview" class="msg">Default message sample</td>
+				<td width=50% class="msg" class="mesframePreview">Default message sample</td>
 				<td class="framePreview"><a href=#>Link sample</a></td>
 			</tr>
 			<tr>
-				<td class="mesframePreview" class="msg2">Highlighted text sample</td>
+				<td class="msg2" class="mesframePreview">Highlighted text sample</td>
 				<td class="framePreview"><a href=#>Room name sample</a></td>
 			</tr>
 			<tr>
-				<td class="mesframePreview" class="msg"><a href=# class="sender">User sample</a></td>
+				<td class="msg" class="mesframePreview"><a href=# class="sender">User sample</a></td>
 				<td class="framePreview"><a href=# class="sender">Sender sample</a></td>
 			</tr>
 			<tr>
-				<td class="mesframePreview" class="notify">Notify sample</td>
+				<td class="notify" class="mesframePreview">Notify sample</td>
 				<td class="framePreview"><div class=success>Success sample</div></td>
 			</tr>
 			<tr>
-				<td class="mesframePreview" class="notify2">Announcement sample</td>
+				<td class="notify2 class="mesframePreview"">Announcement sample</td>
 				<td class="framePreview"><div class="small">Small text sample</div></td>
 			</tr>
 </table>

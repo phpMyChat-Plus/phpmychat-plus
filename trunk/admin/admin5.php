@@ -686,8 +686,8 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"OPEN_FRI_END = '$vOPEN_FRI_END', ".
 						"OPEN_SAT_BEG = '$vOPEN_SAT_BEG', ".
 						"OPEN_SAT_END = '$vOPEN_SAT_END', ".
-*/						"ALLOW_TEXT_COLORS = '$vALLOW_TEXT_COLORS', ".
-						"TAGS_POWERS = '$vTAGS_POWERS', ".
+						"ALLOW_TEXT_COLORS = '$vALLOW_TEXT_COLORS', ".
+*/						"TAGS_POWERS = '$vTAGS_POWERS', ".
 						"ALLOW_MATH = '$vALLOW_MATH', ".
 						"SRC_MATH = '$vSRC_MATH' ".
 				"WHERE ID='0'";
@@ -1875,6 +1875,19 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     </td>
 </tr>
 <tr>
+    <td><b><?php echo A_CONFCONTENT_217 ?></b><br />
+    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONF_ERR_11); ?></font><br />
+	<?php echo sprintf(A_CONFHINT, A_CONFCONTENT_217a); ?></i><br />
+    	<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_124); ?></font></i>
+    </td>
+    <td>
+        <select name="vALLOW_TEXT_COLORS" DISABLED>
+	        <option value="0"<?php if($ALLOW_TEXT_COLORS==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+	        <option value="1"<?php if($ALLOW_TEXT_COLORS==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+        </select>
+    </td>
+</tr>
+<tr bgcolor="#B0C4DE">
 	<td><b><?php echo A_CONFCONTENT_219; ?></b><br />
     	<?php echo A_CONFCONTENT_220; ?><br />
 		<i><?php echo sprintf(A_CONFHINT, sprintf(A_CONFCONTENT_221, "<font color=".$COLOR_CA.">".$COLOR_CA."</font>", "<font color=".$COLOR_CM.">".$COLOR_CM."</font>")); ?></i>

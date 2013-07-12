@@ -34,6 +34,8 @@ If your users encounter bootings for no reason, try to disable sounds in chat.
 
 Fixes History:
 06.02.2013 - 1.94-RC2:
+- fixed the text/frames in styles preview; (functionality related)
+- improved the skins highlighting colors; (theme related)
 - fixed a flag/language bug in edituser.php; (functionality related)
 - added Nuke/phpBB plugin mode to Configuration for future developments; (functionality related)
 - fixed some empty values being not-saved to database on some servers; (functionality related)

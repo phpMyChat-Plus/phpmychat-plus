@@ -10,5 +10,6 @@ $COLOR_TB = "LightBlue"; //main table color
 $COLOR_SCROLL_TRACK = "NavajoWhite"; //main table color
 $COLOR_LINK = "Khaki"; //main table color
 $COLOR_TOPIC = "Yellow"; //topic color
+$COLOR_HIGH = "Snow"; //highlight background color
 define("COLOR_CD", "black"); //default messages color (also the filter color of this room)
 ?>
