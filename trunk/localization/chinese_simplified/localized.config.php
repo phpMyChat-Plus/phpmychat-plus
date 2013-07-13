@@ -329,6 +329,8 @@ define("A_CONFCONTENT_214", "非权力用户（包括客人）将只能看到房
 
 //Content Colors
 define("A_CONFCONTENT_216", "启用 不同颜色名称在用户列表 和/或 文章。");
+define("A_CONFCONTENT_217", "使用者可以使用的發文顏色調色板。");
+define("A_CONFCONTENT_217a", "如果禁用，只有默認的顏色（定義為當前模板）將被用於在聊天室發表的所有文章。");
 define("A_CONFCONTENT_219", "斜体权力用户名在用户列表。");
 define("A_CONFCONTENT_218", "如果启用，用户可以设置自己的个人色彩，在用户用于他们的用户名列出唯一。<br />如果已禁用，管理员将显示在<a class=\"admin\">红色</a>和主持人在<a class=\"mod\">蓝色</a>（其预设权力颜色在 skins/styleN.css.php），只有\"".A_CONFCONTENT_219."\"启用下。");
 define("A_CONFCONTENT_220", "此选项允许您选择显示或没有谁是你聊天的管理员和版主（这不会改变任何权力，它不仅使管理/主持 名称不同或不 - 斜体 - 从普通用户）。");
