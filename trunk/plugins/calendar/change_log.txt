@@ -5,9 +5,14 @@ localization by ciprianmp
 version 3.70-loc (01 July 2013)
 - it includes all the updates in the original class
 
-add on: automatic check for an updated version available
+add on: built the FB page of the class and embeded the Like action button
+	- thanks ciprianmp
 
-add on: credits & version info displayed on hover the About icon
+add on: automatic check for an updated version available
+	- thanks Tri
+
+add on: About icon, credits & version info displayed on hovering the About icon
+	- thanks ciprianmp
 
 add on: implemented the setToolTips() function to display infos for any date on calendar form
 	- thanks ciprianmp and TJ
