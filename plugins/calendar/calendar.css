@@ -3,7 +3,7 @@ a.tclabel span { text-decoration: none; font-family: tahoma; cursor: pointer; }
 
 #calendar-page { background-color: #6699CC; display: inline-block; }
 
-#calendar-header { padding-top: 2px; }
+#calendar-header { padding-top: 2px; position: relative; }
 #calendar-header .closeme { padding: 0px 3px 2px 0px; }
 
 #calendar-body { padding: 2px 3px 3px 3px; }
@@ -64,3 +64,5 @@ a.tclabel span { text-decoration: none; font-family: tahoma; cursor: pointer; }
 #calendar-alert { background-color: #CC3300; border: 1px solid #993300; color: #FFFFFF; padding: 3px; margin: 2px; border-radius: 5px 5px 5px 5px; -moz-border-radius: 5px 5px 5px 5px; -webkit-border-radius: 5px 5px 5px 5px; }
 
 .calendar-info { position: absolute; top: 0px; right: 0px; width: 8px; height: 8px; background: url(images/info.gif) no-repeat; }
+#about { background: none repeat scroll 0 0 #F8F8FF; color: #191970; width: 160px; height: 0px; overflow: hidden; left: 0; position: absolute; -webkit-transition: all .5s ease; -moz-transition: all .5s ease; -ms-transition: all .5s ease; -o-transition: all .5s ease; transition: all .5s ease; }
+#info:hover > #about { display: inline-block; z-index: 1000; height: 97px; border: 1px solid #191970; cursor: help; }

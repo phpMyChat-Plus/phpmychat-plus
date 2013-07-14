@@ -6,8 +6,14 @@
 // add on: translation implemented - default is English en_US
 //	- thanks ciprianmp
 //
-// version 3.70-loc (released 23 March 2011/updated 01 July 2013)
+// version 3.70-loc (released 23 March 2011/updated 14 July 2013)
 //
+////********************************************************
+$AUTHOR = "Triconsole";
+$WEB_SUPPORT = "http://www.triconsole.com/php/calendar_datepicker.php";
+$AUTHOR_LOC = "Ciprian Murariu";
+$LANGS_NUM = 42;
+$WEB_LOC = "http://ciprianmp.com/scripts/calendar/";
 ////********************************************************
 
 if((defined("L_LANG") && L_LANG != "en_US" && L_LANG != "L_LANG") || isset($language) && $language != "en_US") include_once("lang/calendar.".(isset($language) ? $language : L_LANG).".php");
@@ -19,8 +25,7 @@ if(file_exists("plugins/calendar/calendar.js"))
 <script language="javascript" src="plugins/calendar/calendar.js"></script>
 <?php
 }
-elseif(file_exists("calendar/calendar.js"))
-{
+elseif(file_exists("calendar/calendar.js")){
 ?>
 <script language="javascript" src="calendar/calendar.js"></script>
 <?php
@@ -35,6 +40,8 @@ elseif(file_exists("calendar.js"))
 require_once('classes/tc_date.php');
 
 class tc_calendar{
+	var $version = "3.70";
+	var $check_new_version = true;
 	var $icon;
 	var $objname;
 	var $txt = L_SEL_ICON; //display when no calendar icon found or set up
@@ -266,9 +273,6 @@ class tc_calendar{
 		$params[] = "hl=".$this->hl;
 		//Digitizer
 		$params[] = "dig=".$this->dig;
-		//Tooltips
-		$params[] = "ttd=".$this->check_json_encode($this->tt_dates);
-		$params[] = "ttt=".rawurlencode($this->check_json_encode($this->tt_tooltips));
 
 		$paramStr = (sizeof($params)>0) ? "?".implode("&", $params) : "";
 
@@ -330,11 +334,8 @@ class tc_calendar{
 		echo("<option value=\"00\"".($this->rtl ? " dir=\"rtl\"" : "").">".L_DAYC."</option>");
 		for($i=1; $i<=$total_days; $i++){
 			$selected = ((int)$this->day == $i) ? " selected='selected'" : "";
-#			$day_txt = $this->mydate->getDateFromTimestamp($this->mydate->getTimestamp($this->year."-".$this->month."-".$i), 'D');
-#			if(in_array(strtolower($day_txt), $this->dsb_days) !== false){
 			//Digitizer
 			echo("<option value=\"".str_pad($i, 2 , "0", STR_PAD_LEFT)."\"".$selected.($this->rtl ? " dir=\"rtl\"" : "").">".($this->dig ? $this->digitize_arabics($i) : $i)."</option>");
-#			}
 		}
 		echo("</select> ");
 	}
@@ -559,7 +560,7 @@ class tc_calendar{
 		else $dd = L_SEL_DATE;
 
 		//Digitizer
-		echo("<span id=\"divCalendar_".$this->objname."_lbl\" class=\"date-tccontainer\"".($this->rtl ? " dir=\"rtl\"" : "").">".($this->dig ? $this->digitize_arabics($dd) : $dd)."</span>");
+		echo("<span id=\"divCalendar_".$this->objname."_lbl\" class=\"date-tccontainer\"".($this->rtl ? " dir=\"rtl\"" : "")." alt=\"".(($this->year != "undefined") ? $this->getDayName($this->year."-".$this->month."-".$this->day) : "")."\" title=\"".(($this->year != "undefined") ? $this->getDayName($this->year."-".$this->month."-".$this->day) : "")."\">".($this->dig ? $this->digitize_arabics($dd) : $dd)."</span>");
 	}
 
 	//------------------------------------------------------
@@ -615,53 +616,6 @@ class tc_calendar{
 			}
 
 			$this->sp_type = ($type == 1) ? 1 : 0; //control data type for $type
-		}
-	}
-
-	//Tooltips
-	function setToolTips($dates, $tooltip="", $recursive=""){
-		
-		if(is_array($dates)){
-			$recursive = strtolower($recursive);
-
-			//change specific date to time
-			foreach($dates as $tt_date){
-				$tt_time = $this->mydate->getTimestamp($tt_date);
-
-				if($tt_time > 0){
-					switch($recursive){
-						case "year": //add to yearly
-							if(!in_array($tt_time, $this->tt_dates[2])){
-								$this->tt_dates[2][] = $tt_time;
-								$this->tt_tooltips[2][] = $tooltip;
-							}
-							else{
-								$tt_key = array_search($tt_time, $this->tt_dates[2]);
-								$this->tt_tooltips[2][$tt_key] = $this->tt_tooltips[2][$tt_key]."&#10;".$tooltip;
-							}
-							break;
-						case "month": //add to monthly
-							if(!in_array($tt_time, $this->tt_dates[1])){
-								$this->tt_dates[1][] = $tt_time;
-								$this->tt_tooltips[1][] = $tooltip;
-							}
-							else{
-								$tt_key = array_search($tt_time, $this->tt_dates[1]);
-								$this->tt_tooltips[1][$tt_key] = $this->tt_tooltips[1][$tt_key]."&#10;".$tooltip;
-							}
-							break;
-						default: //add to no recursive
-							if(!in_array($tt_time, $this->tt_dates[0])){
-								$this->tt_dates[0][] = $tt_time;
-								$this->tt_tooltips[0][] = $tooltip;
-							}
-							else{
-								$tt_key = array_search($tt_time, $this->tt_dates[0]);
-								$this->tt_tooltips[0][$tt_key] = $this->tt_tooltips[0][$tt_key]."&#10;".$tooltip;
-							}
-					}
-				}
-			}
 		}
 	}
 
@@ -753,7 +707,7 @@ class tc_calendar{
 	function check_json_encode($obj){
 		//try customize to get it work, should replace with better solution in the future
 
-		if(function_exists("json_encode")){
+		if(function_exists("json_encode") && false){
 			return json_encode($obj);
 		}else{
 			//only array is assumed for now
@@ -771,9 +725,9 @@ class tc_calendar{
 	function &check_json_decode($str){
 		//should replace with better solution in the future
 
-		$str = get_magic_quotes_gpc() ? stripslashes($str) : $str;
-		
-		if(function_exists("json_decode")){
+#		$str = get_magic_quotes_gpc() ? stripslashes($str) : $str;
+
+		if(function_exists("json_decode") && false){
 			return json_decode($str);
 		}else{
 			//only array is assume for now
@@ -824,7 +778,7 @@ class tc_calendar{
 		$today = $this->mydate->getDate();
 
 		//check if today is year 2038 and later
-		if(!$this->mydate->compatible && date('Y') >= 2038){
+		if(!$this->mydate->compatible && $this->mydate->getDate("Y") >= 2038){
 			return false;
 		}
 
@@ -862,5 +816,68 @@ class tc_calendar{
 		return $digitized;
 	}
 
+	//Tooltips
+	function setToolTips($dates, $tooltip="", $recursive=""){
+		
+		if(is_array($dates)){
+			$recursive = strtolower($recursive);
+
+			//change specific date to time
+			foreach($dates as $tt_date){
+				$tt_time = $this->mydate->getTimestamp($tt_date);
+
+				if($tt_time > 0){
+					switch($recursive){
+						case "year": //add to yearly
+							if(!in_array($tt_time, $this->tt_dates[2])){
+								$this->tt_dates[2][] = $tt_time;
+								$this->tt_tooltips[2][] = $tooltip;
+							}
+							else{
+								$tt_key = array_search($tt_time, $this->tt_dates[2]);
+								$this->tt_tooltips[2][$tt_key] = $this->tt_tooltips[2][$tt_key]."\n".$tooltip;
+							}
+							break;
+						case "month": //add to monthly
+							if(!in_array($tt_time, $this->tt_dates[1])){
+								$this->tt_dates[1][] = $tt_time;
+								$this->tt_tooltips[1][] = $tooltip;
+							}
+							else{
+								$tt_key = array_search($tt_time, $this->tt_dates[1]);
+								$this->tt_tooltips[1][$tt_key] = $this->tt_tooltips[1][$tt_key]."\n".$tooltip;
+							}
+							break;
+						default: //add to no recursive
+							if(!in_array($tt_time, $this->tt_dates[0])){
+								$this->tt_dates[0][] = $tt_time;
+								$this->tt_tooltips[0][] = $tooltip;
+							}
+							else{
+								$tt_key = array_search($tt_time, $this->tt_dates[0]);
+								$this->tt_tooltips[0][$tt_key] = $this->tt_tooltips[0][$tt_key]."\n".$tooltip;
+							}
+					}
+				}
+			}
+		}
+	}
+
+	function getDayName($date){
+		$day_name = $this->mydate->getDate("D", $this->year."-".$this->month."-".$this->day);
+
+		$rday_name = $day_name;
+		switch(strtoupper($day_name)){
+			case "MON": $rday_name = L_MON; break;
+			case "TUE": $rday_name = L_TUE; break;
+			case "WED": $rday_name = L_WED; break;
+			case "THU": $rday_name = L_THU; break;
+			case "FRI": $rday_name = L_FRI; break;
+			case "SAT": $rday_name = L_SAT; break;
+			case "SUN": $rday_name = L_SUN; break;
+			default:
+		}
+		return $rday_name;
+	}
 }
 ?>

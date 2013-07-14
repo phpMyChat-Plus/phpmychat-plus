@@ -413,7 +413,7 @@ if (UPD_CHECK)
  	if (stripos(APP_LAST_MINOR,"f") !== false) $minor_dir = "/Fixes/";
 # 	elseif (strpos(APP_LAST_MINOR,"ß") !== false || stripos(APP_LAST_MINOR,"RC") !== false) $minor_dir = "/Betas/";
  	?>
- 						<li><a href="http://www.ciprianmp.com/atm/index.php?directory=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_LAST_VERSION.$minor_dir); ?>" target=_blank Title="<?php echo sprintf(A_CONF_ERR_3b, APP_LAST_VERSION.APP_LAST_MINOR); ?>" onMouseOver="window.status='<?php echo sprintf(A_CONF_ERR_3b, APP_LAST_VERSION.APP_LAST_MINOR); ?>.'; return true"><?php echo sprintf(A_CONF_35, APP_LAST_VERSION.APP_LAST_MINOR); ?></a></li>
+ 						<li><a href="http://www.ciprianmp.com/atm/index.php?directory=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_LAST_VERSION.$minor_dir); ?>" target=_blank Title="<?php echo sprintf(A_CONF_ERR_4, APP_LAST_VERSION.APP_LAST_MINOR); ?>" onMouseOver="window.status='<?php echo sprintf(A_CONF_ERR_4, APP_LAST_VERSION.APP_LAST_MINOR); ?>.'; return true"><?php echo sprintf(A_CONF_35, APP_LAST_VERSION.APP_LAST_MINOR); ?></a></li>
  <?php
  }
  	?>
@@ -458,7 +458,7 @@ if (UPD_CHECK)
 			// -->
 			</script>
 <?php
-			echo("</td></tr><tr><td class=error align=center><h3>".sprintf(A_SHEET5_1,APP_LAST_VERSION.APP_LAST_MINOR)."<br />".sprintf(A_CONF_ERR_3, APP_LAST_VERSION.APP_LAST_MINOR, "<a href=\"http://www.ciprianmp.com/atm/index.php?directory=programming/phpMyChat/Ciprian_releases/Plus_version/".APP_LAST_VERSION.$minor_dir."\" target=\"_blank\" Title=\"".sprintf(A_CONF_ERR_3b, APP_LAST_VERSION.APP_LAST_MINOR)."\" onMouseOver=\"window.status='".sprintf(A_CONF_ERR_4, APP_LAST_VERSION.APP_LAST_MINOR).".'; return true\">".A_CONFHERE."</a></h3>"));
+			echo("</td></tr><tr><td class=error align=center><h3>".sprintf(A_SHEET5_1,APP_LAST_VERSION.APP_LAST_MINOR)."<br />".sprintf(A_CONF_ERR_3, APP_LAST_VERSION.APP_LAST_MINOR, "<a href=\"http://www.ciprianmp.com/atm/index.php?directory=programming/phpMyChat/Ciprian_releases/Plus_version/".APP_LAST_VERSION.$minor_dir."\" target=\"_blank\" Title=\"".sprintf(A_CONF_ERR_4, APP_LAST_VERSION.APP_LAST_MINOR)."\" onMouseOver=\"window.status='".sprintf(A_CONF_ERR_4, APP_LAST_VERSION.APP_LAST_MINOR).".'; return true\">".A_CONFHERE."</a></h3>"));
 		}
 ?>
 <br /></td></tr></table></p></div>

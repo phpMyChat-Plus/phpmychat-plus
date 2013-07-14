@@ -53,6 +53,13 @@ if(!defined("L_WEEK_HDR")) define("L_WEEK_HDR", "");
 if(!defined("L_UNSET")) define("L_UNSET", "Unset");
 if(!defined("L_CLOSE")) define("L_CLOSE", "Close");
 if(!defined("L_WARN_2038")) define("L_WARN_2038", "This php server’s version does not have support for year 2038 and later! (<5.3.0)"); #3.69
+if(!defined("L_ERR_NOSET")) define("L_ERR_NOSET", "Error! The calendar value cannot be set"); #3.70
+/*
+if(!defined("L_VERSION")) define("L_VERSION", "Version: %s (%s languages)"); #3.70
+if(!defined("L_POWBY")) define("L_POWBY", "Powered by:"); #3.70
+if(!defined("L_HERE")) define("L_HERE", "here"); #3.70
+if(!defined("L_UPDATE")) define("L_UPDATE", "Update available %s !"); #3.70
+*/
 if(!defined("FIRST_DAY")) define("FIRST_DAY", "0"); // 0 for Sunday
 
 // Months Long Names
@@ -120,6 +127,7 @@ if(!defined("L_ARABIC")) define("L_ARABIC", "Arabic Digits");
 	var l_date_before = "<?php echo(L_DATE_BEFORE); ?>";
 	var l_date_after = "<?php echo(L_DATE_AFTER); ?>";
 	var l_date_between = "<?php echo(L_DATE_BETWEEN); ?>";
+	var l_err_noset = "<?php echo(L_ERR_NOSET); ?>";
 	var l_use_ymd_drop = "<?php echo(L_USE_YMD_DROP); ?>";
 	var l_day = "<?php echo(L_DAYC); ?>";
 	var l_month = "<?php echo(L_MONTHC); ?>";
