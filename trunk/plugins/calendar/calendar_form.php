@@ -41,7 +41,7 @@ $hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : 'en_US';
 $dig = (isset($_REQUEST["dig"])) ? $_REQUEST["dig"] : 0;
 //Tooltips
 $tt_dates = (isset($_REQUEST["ttd"])) ? @tc_calendar::check_json_decode($_REQUEST["ttd"]) : array(array(), array(), array());
-$tt_tooltips = (isset($_REQUEST["ttt"])) ? @tc_calendar::check_json_decode(rawurldecode($_REQUEST["ttt"])) : array(array(), array(), array());
+$tt_tooltips = (isset($_REQUEST["ttt"])) ? @tc_calendar::check_json_decode(stripslashes(rawurldecode($_REQUEST["ttt"]))) : array(array(), array(), array());
 
 //check year to be select in case of date_allow is set
 if(!$show_not_allow){
@@ -109,6 +109,9 @@ $cobj->startDate($startDate);
 $cobj->dsb_days = explode(",", $dsb_txt);
 $cobj->time_allow1 = $time_allow1;
 $cobj->time_allow2 = $time_allow2;
+
+$version = $cobj->version;
+$check_version = $cobj->check_new_version;
 
 $cobj->setYearInterval($year_start, $year_end);
 
@@ -315,47 +318,6 @@ for($day=1; $day<=$total_thismonth; $day++){
 		}
 	}
 
-	//Tooltips
-	//check specific date
-	if(is_array($tt_dates) && sizeof($tt_dates) > 0){
-		$tt_tooltip = "";
-
-		//check on no recursive
-		if(isset($tt_dates[0]) && is_array($tt_dates[0])){
-			$tt_idx = array_search($currentTime, $tt_dates[0]);
-			if($tt_idx !== false){
-				$tt_tooltip .= ($tt_tooltip != "") ? "&#10;".$tt_tooltips[0][$tt_idx] : $tt_tooltips[0][$tt_idx];
-			}
-		}
-
-		//check on monthly recursive
-		if(isset($tt_dates[1]) && is_array($tt_dates[1])){
-			for($i=0; $i<sizeof($tt_dates[1]); $i++){
-				$tt_time = $tt_dates[1][$i];
-				if($tt_time != "" && $tt_time > 0){
-					$tt_time_d = (int)$cdate->getDateFromTimestamp($tt_time, 'd'); //date('d', $tt_time);
-					if($tt_time_d == $day && isset($tt_tooltips[1][$i])){
-						$tt_tooltip .= ($tt_tooltip != "") ? "&#10;".$tt_tooltips[1][$i] : $tt_tooltips[1][$i];
-					}
-				}
-			}
-		}
-
-		//check on yearly recursive
-		if(isset($tt_dates[2]) && is_array($tt_dates[2])){			
-			for($i=0; $i<sizeof($tt_dates[2]); $i++){
-				$tt_time = $tt_dates[2][$i];
-				if($tt_time != "" && $tt_time > 0){
-					$tt_time_md = (int)$cdate->getDateFromTimestamp($tt_time, 'md'); //date('md', $tt_time);
-					$this_md = (int)$cdate->getDateFromTimestamp($currentTime, 'md'); //date('md', $currentTime);
-					if($tt_time_md == $this_md && isset($tt_tooltips[2][$i])){
-						$tt_tooltip .= ($tt_tooltip != "") ? "&#10;".$tt_tooltips[2][$i] : $tt_tooltips[2][$i];
-					}
-				}
-			}
-		}
-	}
-
 	$htmlClass[] = strtolower($day_txt);
 
 	if($dateLink){
@@ -366,13 +328,13 @@ for($day=1; $day<=$total_thismonth; $day++){
 		//date with link
 		$class = implode(" ", $htmlClass);
 
-		$calendar_rows[$row_count][] = array($day, "javascript:selectDay('".str_pad($day, 2, "0", STR_PAD_LEFT)."');", $class, "$y".str_pad($m, 2, "0", STR_PAD_LEFT).str_pad($day, 2, "0", STR_PAD_LEFT), $tt_tooltip);
+		$calendar_rows[$row_count][] = array($day, "javascript:selectDay('".str_pad($day, 2, "0", STR_PAD_LEFT)."');", $class, "$y".str_pad($m, 2, "0", STR_PAD_LEFT).str_pad($day, 2, "0", STR_PAD_LEFT));
 	}else{
 		$htmlClass[] = "disabledate";
 		$class = implode(" ", $htmlClass);
 
 		//date without link
-		$calendar_rows[$row_count][] = array($day, "", $class, "$y".str_pad($m, 2, "0", STR_PAD_LEFT).str_pad($day, 2, "0", STR_PAD_LEFT), $tt_tooltip);
+		$calendar_rows[$row_count][] = array($day, "", $class, "$y".str_pad($m, 2, "0", STR_PAD_LEFT).str_pad($day, 2, "0", STR_PAD_LEFT));
 	}
 	if(($startDate == 0 && $date_num == 6) || ($startDate > 0 && $date_num == $startDate-1)){
 		$row_count++;
@@ -408,6 +370,7 @@ for($day=$row_count; $day<6; $day++){
 		$calendar_rows[$row_count][] = array($f, "", "othermonth", "");
 
 		$wknum = $cdate->getWeekNumber($cdate->addMonth("Y-m-d", 1, ($y."-".$m."-".$f))); //date('W', mktime(0,0,0, $m+1, $f, $y));
+
 		if(!isset($week_rows[$row_count][$wknum])){
 			$week_rows[$row_count][$wknum] = 1;
 		}else $week_rows[$row_count][$wknum] = $week_rows[$row_count][$wknum]+1;
@@ -431,6 +394,14 @@ if($cobj->hl){
 	if(strpos($order,"B") == 1) $second_input = "B";
 	elseif(strpos($order,"Y") == 1) $second_input = "Y";
 }
+
+$new_version = 0;
+if($check_version){
+	if(function_exists("file_get_contents")){
+		$new_version = @file_get_contents("http://www.ciprianmp.com/scripts/calendar/tc_calendar_version.php?v=".$version);
+	}
+}
+define("L_ABOUT_LOC", "<b>Localized Datepicker</b><br />Version: <b>".strval($version)."</b> (<b>$LANGS_NUM</b> languages)".($new_version ? "<br /><b><font color=\"red\">Update available <a href=\"$LOC_SUPPORT\" target=\"_blank\">here</a> !</font></b>" : "")."<br />&copy; 2010-".$cdate->getDate("Y")." <b><a href=\"$WEB_LOC\" target=\"_blank\" title=\"http://ciprianmp.com\">$AUTHOR_LOC</a></b>".($new_version ? "" : "<br />")."<br /><i>Powered by:<br /><b>PHP Datepicker Calendar</b><br />&copy; 2008-".$cdate->getDate("Y")." <b><a href=\"$WEB_SUPPORT\" target=\"_blank\" title=\"http://triconsole.com\">$AUTHOR</a></b></i>");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"<?php if($rtl) echo(" dir=\"rtl\""); ?>>
@@ -443,6 +414,8 @@ if($cobj->hl){
 var today_month = "<?php echo($cdate->getDate('m')); ?>";
 var today_year = "<?php echo($cdate->getDate('Y')); ?>";
 var obj_name = "<?php echo($objname); ?>";
+var current_month = "<?php echo($m);?>";
+var current_year = "<?php echo($y);?>";
 //-->
 </script>
 <script language="javascript" src="calendar_form.js"></script>
@@ -468,12 +441,12 @@ function submitNow(dvalue, mvalue, yvalue){
 //-->
 </script>
 </head>
-
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 <span id="calendar-page" class="font">
     <div id="calendar-header" align="center">
+        <div style="float: <?php echo($rtl ? "right" : "left"); ?>;" id="info"><a href="<?php echo($WEB_LOC); ?>" target="_blank"><img src="images/<?php echo($new_version ? "version_info.gif" : "about.png"); ?>" width="9" height="9" border="0" /></a><div id="about" dir="ltr"><?php echo(L_ABOUT_LOC); ?></div></div>
         <?php if($dp && !$auto_hide){ ?>
-        <div align="<?php echo($rtl ? "left" : "right"); ?>" class="closeme"><a href="javascript:closeMe();"><img src="images/close.gif" border="0" alt="<?php echo(L_CLOSE); ?>" title="<?php echo(L_CLOSE); ?>" /></a></div>
+        <div style="float: <?php echo($rtl ? "left" : "right"); ?>;" class="closeme"><a href="javascript:closeMe();"><img src="images/close.gif" border="0" alt="<?php echo(L_CLOSE); ?>" title="<?php echo(L_CLOSE); ?>" /></a></div>
         <?php } ?>
 
         <?php
@@ -546,7 +519,7 @@ function submitNow(dvalue, mvalue, yvalue){
 			?>
               <td align="right"><select name="y" onchange="javascript:submitCalendar();" class="font">
               <?php
-              $thisyear = $cdate->getDate('Y'); //date('Y');
+              $thisyear = $cdate->getDate('Y');
 
               //write year options
               for($year=$year_end; $year>=$year_start; $year--){
@@ -637,25 +610,20 @@ function submitNow(dvalue, mvalue, yvalue){
 					echo("<td align=\"center\" class=\"wk\"><div>".($dig ? $cobj->digitize_arabics($cw_keys[(sizeof($cw_keys)-1)]) : $cw_keys[(sizeof($cw_keys)-1)])."</div></td>");
 				}
 
-				$info_icon = "<span class=\"calendar-info\" alt=\"{title}\" title=\"{title}\"></span>";
-
 				foreach($calendar_rows[$row] as $column){
 					$this_day = isset($column[0]) ? $column[0] : "";
 					$this_link = isset($column[1]) ? $column[1] : "";
 					$this_class = isset($column[2]) ? $column[2] : "";
 					$this_id = isset($column[3]) ? $column[3] : "";
-					$id_str = ($this_id) ? " id=\"".$this_id."\"" : "";
 					
-					//Tooltips
-					$this_day_title = isset($column[4]) ? $column[4] : "";
-					$title_obj = ($this_day_title) ? str_replace("{title}", $this_day_title, $info_icon) : "";
+					$id_str = ($this_id) ? " id=\"$this_id\"" : "";
 					
 					if($this_link){
-						//Digitizer & Tooltips
-						echo("<td".$id_str." align=\"center\" class=\"".$this_class."\"><a href=\"".$this_link."\"><div>".($dig ? $cobj->digitize_arabics($this_day) : $this_day).$title_obj."</div></a></td>");
+						//Digitizer
+						echo("<td".$id_str." align=\"center\" class=\"".$this_class."\"><a href=\"".$this_link."\"><div>".($dig ? $cobj->digitize_arabics($this_day) : $this_day)."</div></a></td>");
 					}else{
-						//Digitizer & Tooltips
-						echo("<td".$id_str." align=\"center\" class=\"".$this_class."\"><div>".($dig ? $cobj->digitize_arabics($this_day) : $this_day).$title_obj."</div></td>");
+						//Digitizer
+						echo("<td".$id_str." align=\"center\" class=\"".$this_class."\"><div>".($dig ? $cobj->digitize_arabics($this_day) : $this_day)."</div></td>");
 					}
 				}
 				echo("</tr>");

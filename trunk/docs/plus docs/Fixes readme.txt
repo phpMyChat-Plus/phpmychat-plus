@@ -34,6 +34,8 @@ If your users encounter bootings for no reason, try to disable sounds in chat.
 
 Fixes History:
 06.02.2013 - 1.94-RC2:
+- edituser and register calendars will now show the regusers birthdays and ages, if allowed by each respective user privacy set; (functionality extension)
+- calendar class update to 3.70-loc version; (functionality related)
 - fixed the text/frames in styles preview; (functionality related)
 - improved the skins highlighting colors; (theme related)
 - fixed a flag/language bug in edituser.php; (functionality related)
@@ -42,7 +44,6 @@ Fixes History:
 - added birthdays to calendar as tooltips; (calendar related)
 - Latin1 empty value fix; (functionality related)
 - tooltips linebreak fix; (functionality related)
-- calendar class update to 3.70-loc version; (functionality related)
 - improved /save command to display the window before saving to html; (functionality related)
 - fixed a bug that prevented links to be posted in links.php; (functionality related)
 - bot adjustments: German.aiml put in a zip so the bot will load only English  by default; bot calendar has been modified to use the US format by default - previous UK format aiml is renamed to .bak; (bot functionality related)

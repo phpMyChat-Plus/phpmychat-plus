@@ -124,6 +124,14 @@ function updateValue(objname, d){
 			//Digitizer
 			document.getElementById("divCalendar_"+objname+"_lbl").innerHTML = convertDigitIn(objname, dateTxt);
 
+			var lobj = document.getElementById("divCalendar_"+objname+"_lbl");
+			if(lobj != null){
+				lobj.style.whiteSpace="pre"; //text no wrap on white space
+				//Digitizer
+				lobj.innerHTML = convertDigitIn(objname, dateTxt);
+				//update day name
+				lobj.setAttribute("title", new Date(d).format('l'))
+			}
 		}
 	}
 }
@@ -159,12 +167,7 @@ function tc_submitDate(objname, dvalue, mvalue, yvalue){
 	var hl = document.getElementById(objname+'_hl').value;
 	//Digitizer
 	var dig = document.getElementById(objname+'_dig').value;
-	//Tooltips
-	var ttd = document.getElementById(objname+'_ttd').value;
-	var ttt = document.getElementById(objname+'_ttt').value;
-
-	//Tooltips
-	obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+dvalue+"&selected_month="+mvalue+"&selected_year="+yvalue+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&pr1="+pr1+"&pr2="+pr2+"&prv="+prv+"&spd="+spd+"&spt="+spt+"&och="+och+"&str="+str+"&rtl="+rtl+"&wks="+wks+"&int="+int+"&hid="+hid+"&hdt="+hdt+"&hl="+hl+"&dig="+dig+"&ttd="+ttd+"&ttt="+ttt;
+	obj.src = path+"calendar_form.php?objname="+objname.toString()+"&selected_day="+dvalue+"&selected_month="+mvalue+"&selected_year="+yvalue+"&year_start="+year_start+"&year_end="+year_end+"&dp="+dp+"&da1="+da1+"&da2="+da2+"&sna="+sna+"&aut="+aut+"&frm="+frm+"&tar="+tar+"&inp="+inp+"&fmt="+fmt+"&dis="+dis+"&pr1="+pr1+"&pr2="+pr2+"&prv="+prv+"&spd="+spd+"&spt="+spt+"&och="+och+"&str="+str+"&rtl="+rtl+"&wks="+wks+"&int="+int+"&hid="+hid+"&hdt="+hdt+"&hl="+hl+"&dig="+dig;
 
 	obj.contentWindow.submitNow(dvalue, mvalue, yvalue);
 }
@@ -675,6 +678,7 @@ function checkSpecifyDate(objname, strDay, strMonth, strYear){
 	if(typeof(JSON) != "undefined"){
 		sp_dates = JSON.parse(spd);
 	}else{
+/*		
 		//only array is assume for now
 		if(spd != "" && spd.length > 2){
 			var tmp_spd = spd.substring(2, spd.length-2);
@@ -688,6 +692,8 @@ function checkSpecifyDate(objname, strDay, strMonth, strYear){
 				else sp_dates[i] = tmp_str.split(",");
 			}
 		}else sp_dates = new Array();
+*/		
+		sp_dates = myJSONParse(spd);
 	}
 	/*
 	for(i=0; i<sp_dates.length; i++){
@@ -781,6 +787,24 @@ function unFocusCalendar(objname, zidx){
 	if(obj != null){
 		obj.style.zIndex = zidx;
 	}
+}
+
+function myJSONParse(d){
+	//only array is assume for now
+	if(d != "" && d.length > 2){
+		var tmp_d = d.substring(2, d.length-2);
+		//alert(tmp_spd);
+		var v = tmp_d.split("],[");
+		for(i=0; i<v.length; i++){
+			//alert(sp_dates[i]);
+			var s = v[i]; //.substring(1, sp_dates[i].length-1);
+			if(s == "")
+				v[i] = new Array();
+			else v[i] = s.split(",");
+		}
+	}else v = new Array();
+	
+	return v;
 }
 
 function setDateLabel(objname){
