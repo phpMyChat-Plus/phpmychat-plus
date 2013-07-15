@@ -130,7 +130,9 @@ function updateValue(objname, d){
 				//Digitizer
 				lobj.innerHTML = convertDigitIn(objname, dateTxt);
 				//update day name
-				lobj.setAttribute("title", new Date(d).format('l'))
+				if(d != "0000-00-00"){
+					lobj.setAttribute("title", new Date(d).format('l'));
+				}else lobj.setAttribute("title", "");
 			}
 		}
 	}
