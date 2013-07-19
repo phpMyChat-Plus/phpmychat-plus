@@ -155,7 +155,7 @@ function adjustContainer(){
 function getCalendarParam(name){
 	var f = document.calendarform;
 	var obj_name = f.objname.value;
-	
+
 	if(window.parent.document.getElementById(obj_name+"_"+name) != null){
 		return window.parent.document.getElementById(obj_name+"_"+name).value;
 	}else return "";
@@ -164,109 +164,23 @@ function getCalendarParam(name){
 function processTooltips(){
 	var ttd = myJSONParse(getCalendarParam("ttd"));
 	var ttt = myJSONParse(decodeURIComponent(getCalendarParam("ttt")));
-	
+
 	//console.log("Processing tooltips "+current_year+" "+current_month);
-	
+
 	//yearly recursive
 	for (var key in ttd[2]) {
-	  if (ttd[2].hasOwnProperty(key)) {
-		this_date = new Date(ttd[2][key]*1000);
-
-		this_date_str = current_year+''+pad(this_date.getMonth()+1, 2, "0")+''+pad(this_date.getDate(), 2, "0");
-		this_tooltip = typeof(ttt[2][key]) != "undefined" ? ttt[2][key] : "";
-
-		if((this_tooltip.substring(0,1) == '"' && this_tooltip.substring(this_tooltip.length-1) == '"') || (this_tooltip.substring(0,1) == "'" && this_tooltip.substring(this_tooltip.length-1) == "'")){
-			this_tooltip = this_tooltip.substring(1, this_tooltip.length-1);
-			this_tooltip = replaceAll("&#10;", String.fromCharCode(10), this_tooltip);
-		}
-		//alert(this_date_str+','+this_tooltip);
-		if(this_tooltip != ""){
-			//console.log(this_tooltip);
-			var date_obj = document.getElementById(this_date_str);
-			if(date_obj != null){
-				var obj_list = date_obj.getElementsByTagName("div");
-				if(obj_list[0] != null){
-					//check if tooltip is already existed
-					var spn_obj = obj_list[0].getElementsByTagName("span");
-					
-					if(spn_obj[0] != null){
-						var alt_txt = spn_obj[0].getAttribute("alt");
-						alt_txt += String.fromCharCode(10)+this_tooltip;
-						spn_obj[0].setAttribute("alt", alt_txt);
-						spn_obj[0].setAttribute("title", alt_txt);
-					}else{
-						var info_obj = document.createElement("span");
-						info_obj.setAttribute("class", "calendar-info");
-						info_obj.setAttribute("alt", this_tooltip);
-						info_obj.setAttribute("title", this_tooltip);
-						
-						obj_list[0].insertBefore(info_obj, null);
-					}
-				}
-				//console.log(date_obj.innerHTML);
-			}
-		}
-	  }
-	}
-
-	//monthly recursive
-	for (var key in ttd[1]) {
-	  if (ttd[1].hasOwnProperty(key)) {
-		this_date = new Date(ttd[1][key]*1000);
-		//alert(sp_dates[2][key]+","+this_date.getDate());
-		this_date_str = current_year+''+current_month+''+pad(this_date.getDate(), 2, "0");
-		this_tooltip = typeof(ttt[1][key]) != "undefined" ? ttt[1][key] : "";
-		
-		if((this_tooltip.substring(0,1) == '"' && this_tooltip.substring(this_tooltip.length-1) == '"') || (this_tooltip.substring(0,1) == "'" && this_tooltip.substring(this_tooltip.length-1) == "'")){
-			this_tooltip = this_tooltip.substring(1, this_tooltip.length-1);
-			this_tooltip = replaceAll("&#10;", String.fromCharCode(10), this_tooltip);
-		}		
-		//alert(this_date_str+','+this_tooltip);
-
-		if(this_tooltip != ""){
-			//console.log(this_tooltip);
-			var date_obj = document.getElementById(this_date_str);
-			if(date_obj != null){
-				var obj_list = date_obj.getElementsByTagName("div");
-				if(obj_list[0] != null){
-					//check if tooltip is already existed
-					var spn_obj = obj_list[0].getElementsByTagName("span");
-					
-					if(spn_obj[0] != null){
-						var alt_txt = spn_obj[0].getAttribute("alt");
-						alt_txt += String.fromCharCode(10)+this_tooltip;
-						spn_obj[0].setAttribute("alt", alt_txt);
-						spn_obj[0].setAttribute("title", alt_txt);
-					}else{
-						var info_obj = document.createElement("span");
-						info_obj.setAttribute("class", "calendar-info");
-						info_obj.setAttribute("alt", this_tooltip);
-						info_obj.setAttribute("title", this_tooltip);
-						
-						obj_list[0].insertBefore(info_obj, null);
-					}
-				}
-				//console.log(date_obj.innerHTML);
-			}
-		}
-	  }
-	}
-
-
-	//no recursive
-	for (var key in ttd[0]) {
-		if (ttd[0].hasOwnProperty(key)) {
-			this_date = new Date(ttd[0][key]*1000);
+		if (ttd[2].hasOwnProperty(key)) {
+			this_date = new Date(ttd[2][key]*1000);
 			//alert(sp_dates[2][key]+","+this_date.getDate());
-			this_date_str = this_date.getFullYear()+''+pad(this_date.getMonth()+1, 2, "0")+''+pad(this_date.getDate(), 2, "0");
-			this_tooltip = typeof(ttt[0][key]) != "undefined" ? ttt[0][key] : "";
-			
+			this_date_str = current_year+''+pad(this_date.getMonth()+1, 2, "0")+''+pad(this_date.getDate(), 2, "0");
+			this_tooltip = typeof(ttt[2][key]) != "undefined" ? ttt[2][key] : "";
+
 			if((this_tooltip.substring(0,1) == '"' && this_tooltip.substring(this_tooltip.length-1) == '"') || (this_tooltip.substring(0,1) == "'" && this_tooltip.substring(this_tooltip.length-1) == "'")){
 				this_tooltip = this_tooltip.substring(1, this_tooltip.length-1);
 				this_tooltip = replaceAll("&#10;", String.fromCharCode(10), this_tooltip);
 			}
 			//alert(this_date_str+','+this_tooltip);
-	
+
 			if(this_tooltip != ""){
 				//console.log(this_tooltip);
 				var date_obj = document.getElementById(this_date_str);
@@ -275,7 +189,7 @@ function processTooltips(){
 					if(obj_list[0] != null){
 						//check if tooltip is already existed
 						var spn_obj = obj_list[0].getElementsByTagName("span");
-						
+
 						if(spn_obj[0] != null){
 							var alt_txt = spn_obj[0].getAttribute("alt");
 							alt_txt += String.fromCharCode(10)+this_tooltip;
@@ -286,12 +200,98 @@ function processTooltips(){
 							info_obj.setAttribute("class", "calendar-info");
 							info_obj.setAttribute("alt", this_tooltip);
 							info_obj.setAttribute("title", this_tooltip);
-							
+
 							obj_list[0].insertBefore(info_obj, null);
 						}
 					}
 					//console.log(date_obj.innerHTML);
-				}				
+				}
+			}
+		}
+	}
+
+	//monthly recursive
+	for (var key in ttd[1]) {
+		if (ttd[1].hasOwnProperty(key)) {
+			this_date = new Date(ttd[1][key]*1000);
+			//alert(sp_dates[1][key]+","+this_date.getDate());
+					this_date_str = current_year+''+current_month+''+pad(this_date.getDate(), 2, "0");
+			this_tooltip = typeof(ttt[1][key]) != "undefined" ? ttt[1][key] : "";
+
+			if((this_tooltip.substring(0,1) == '"' && this_tooltip.substring(this_tooltip.length-1) == '"') || (this_tooltip.substring(0,1) == "'" && this_tooltip.substring(this_tooltip.length-1) == "'")){
+				this_tooltip = this_tooltip.substring(1, this_tooltip.length-1);
+				this_tooltip = replaceAll("&#10;", String.fromCharCode(10), this_tooltip);
+			}
+			//alert(this_date_str+','+this_tooltip);
+
+			if(this_tooltip != ""){
+				//console.log(this_tooltip);
+				var date_obj = document.getElementById(this_date_str);
+				if(date_obj != null){
+					var obj_list = date_obj.getElementsByTagName("div");
+					if(obj_list[0] != null){
+						//check if tooltip is already existed
+						var spn_obj = obj_list[0].getElementsByTagName("span");
+
+						if(spn_obj[0] != null){
+							var alt_txt = spn_obj[0].getAttribute("alt");
+							alt_txt += String.fromCharCode(10)+this_tooltip;
+							spn_obj[0].setAttribute("alt", alt_txt);
+							spn_obj[0].setAttribute("title", alt_txt);
+						}else{
+							var info_obj = document.createElement("span");
+							info_obj.setAttribute("class", "calendar-info");
+							info_obj.setAttribute("alt", this_tooltip);
+							info_obj.setAttribute("title", this_tooltip);
+
+							obj_list[0].insertBefore(info_obj, null);
+						}
+					}
+					//console.log(date_obj.innerHTML);
+				}
+			}
+		}
+	}
+
+	//no recursive
+	for (var key in ttd[0]) {
+		if (ttd[0].hasOwnProperty(key)) {
+			this_date = new Date(ttd[0][key]*1000);
+			//alert(sp_dates[0][key]+","+this_date.getDate());
+			this_date_str = this_date.getFullYear()+''+pad(this_date.getMonth()+1, 2, "0")+''+pad(this_date.getDate(), 2, "0");
+			this_tooltip = typeof(ttt[0][key]) != "undefined" ? ttt[0][key] : "";
+
+			if((this_tooltip.substring(0,1) == '"' && this_tooltip.substring(this_tooltip.length-1) == '"') || (this_tooltip.substring(0,1) == "'" && this_tooltip.substring(this_tooltip.length-1) == "'")){
+				this_tooltip = this_tooltip.substring(1, this_tooltip.length-1);
+				this_tooltip = replaceAll("&#10;", String.fromCharCode(10), this_tooltip);
+			}
+			//alert(this_date_str+','+this_tooltip);
+
+			if(this_tooltip != ""){
+				//console.log(this_tooltip);
+				var date_obj = document.getElementById(this_date_str);
+				if(date_obj != null){
+					var obj_list = date_obj.getElementsByTagName("div");
+					if(obj_list[0] != null){
+						//check if tooltip is already existed
+						var spn_obj = obj_list[0].getElementsByTagName("span");
+
+						if(spn_obj[0] != null){
+							var alt_txt = spn_obj[0].getAttribute("alt");
+							alt_txt += String.fromCharCode(10)+this_tooltip;
+							spn_obj[0].setAttribute("alt", alt_txt);
+							spn_obj[0].setAttribute("title", alt_txt);
+						}else{
+							var info_obj = document.createElement("span");
+							info_obj.setAttribute("class", "calendar-info");
+							info_obj.setAttribute("alt", this_tooltip);
+							info_obj.setAttribute("title", this_tooltip);
+
+							obj_list[0].insertBefore(info_obj, null);
+						}
+					}
+					//console.log(date_obj.innerHTML);
+				}
 			}
 		}
 	}
@@ -319,7 +319,7 @@ function myJSONParse(d){
 			else v[i] = s.split(",");
 		}
 	}else v = new Array();
-	
+
 	return v;
 }
 

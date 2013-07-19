@@ -93,7 +93,7 @@ class tc_date extends tc_date_main{
 		if($stime){
 			if(!$this->compatible){
 				return tc_date_main::getDateFromTimestamp($stime, $format);
-			}else{			
+			}else{
 				$tmp_date = new DateTime();
 				$tmp_date->setTimestamp($stime);
 				return $tmp_date->format($format);

@@ -384,7 +384,7 @@ class tc_calendar{
 		echo("</select> ");
 	}
 
-	function eHidden($suffix, $value) {		
+	function eHidden($suffix, $value) {
 		if($suffix) $suffix = "_".$suffix;
 		echo("<input type=\"hidden\" name=\"".$this->objname.$suffix."\" id=\"".$this->objname.$suffix."\" value=\"".$value."\" />");
 	}
@@ -818,7 +818,7 @@ class tc_calendar{
 
 	//Tooltips
 	function setToolTips($dates, $tooltip="", $recursive=""){
-		
+
 		if(is_array($dates)){
 			$recursive = strtolower($recursive);
 

@@ -401,7 +401,7 @@ if($check_version){
 		$new_version = @file_get_contents("http://www.ciprianmp.com/scripts/calendar/tc_calendar_version.php?v=".$version);
 	}
 }
-define("L_ABOUT_LOC", "<b>Localized Datepicker</b><br />Version: <b>".strval($version)."</b> (<b>$LANGS_NUM</b> languages)".($new_version ? "<br /><b><font color=\"red\">Update available <a href=\"$LOC_SUPPORT\" target=\"_blank\">here</a> !</font></b>" : "")."<br />&copy; 2010-".$cdate->getDate("Y")." <b><a href=\"$WEB_LOC\" target=\"_blank\" title=\"http://ciprianmp.com\">$AUTHOR_LOC</a></b><br /><div class=\"fb-like\" data-href=\"https://www.facebook.com/DatePicker\" data-send=\"false\" data-layout=\"button_count\" data-show-faces=\"false\" data-font=\"tahoma\" ref=\"loc_about_info\"></div>".($new_version ? "" : "<br />")."<br /><i>Powered by:<br /><b>PHP Datepicker Calendar</b><br />&copy; 2008-".$cdate->getDate("Y")." <b><a href=\"$WEB_SUPPORT\" target=\"_blank\" title=\"http://triconsole.com\">$AUTHOR</a></b></i>");
+define("L_ABOUT_LOC", "<b>Localized Datepicker</b><br />".sprintf(L_VERSION, "<b>".strval($version)."</b>", "<b>$LANGS_NUM</b>").($new_version ? "<br /><b><font color=\"red\">".sprintf(L_UPDATE, "<a href=\"$LOC_SUPPORT\" target=\"_blank\">".L_HERE."</a>")."</font></b>" : "")."<br />&copy; 2010-".$cdate->getDate("Y")." <b><a href=\"$WEB_LOC\" target=\"_blank\" title=\"http://ciprianmp.com\">$AUTHOR_LOC</a></b><br /><div class=\"fb-like\" data-href=\"https://www.facebook.com/DatePicker\" data-send=\"false\" data-layout=\"button_count\" data-show-faces=\"false\" data-font=\"tahoma\" ref=\"loc_about_info\"></div>".($new_version ? "" : "<br />")."<br /><i>".L_POWBY."<br /><b>PHP Datepicker Calendar</b><br />&copy; 2008-".$cdate->getDate("Y")." <b><a href=\"$WEB_SUPPORT\" target=\"_blank\" title=\"http://triconsole.com\">$AUTHOR</a></b></i>");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"<?php if($rtl) echo(" dir=\"rtl\""); ?>>
@@ -416,6 +416,7 @@ var today_year = "<?php echo($cdate->getDate('Y')); ?>";
 var obj_name = "<?php echo($objname); ?>";
 var current_month = "<?php echo($m);?>";
 var current_year = "<?php echo($y);?>";
+var current_day = "<?php echo($d);?>";
 //-->
 </script>
 <script language="javascript" src="calendar_form.js"></script>
@@ -469,10 +470,10 @@ function submitNow(dvalue, mvalue, yvalue){
 					obj.style.border = "1px solid #191970";
 					obj.onmouseover = function(){ displayAbout('1'); }
 				}else{
-					this.timeoutID = window.setTimeout(function(){ 
+					this.timeoutID = window.setTimeout(function(){
 						obj.style.border = "none";
-						obj.style.height = '0px';						
-						//obj.style.display = "none";			
+						obj.style.height = '0px';
+						//obj.style.display = "none";
 						}
 						, 500);
 				}
@@ -650,9 +651,9 @@ function submitNow(dvalue, mvalue, yvalue){
 					$this_link = isset($column[1]) ? $column[1] : "";
 					$this_class = isset($column[2]) ? $column[2] : "";
 					$this_id = isset($column[3]) ? $column[3] : "";
-					
+
 					$id_str = ($this_id) ? " id=\"$this_id\"" : "";
-					
+
 					if($this_link){
 						//Digitizer
 						echo("<td".$id_str." align=\"center\" class=\"".$this_class."\"><a href=\"".$this_link."\"><div>".($dig ? $cobj->digitize_arabics($this_day) : $this_day)."</div></a></td>");

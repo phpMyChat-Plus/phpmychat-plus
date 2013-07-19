@@ -514,7 +514,7 @@ function padString(stringToPad, padLength, padString) {
 //Digitizer
 function convertDigitIn(objname, enDigit){
 	var digIn = document.getElementById(objname+"_dig").value;
-	
+
 	if(digIn == 1){
 		var newValue = "";
 
@@ -680,7 +680,7 @@ function checkSpecifyDate(objname, strDay, strMonth, strYear){
 	if(typeof(JSON) != "undefined"){
 		sp_dates = JSON.parse(spd);
 	}else{
-/*		
+/*
 		//only array is assume for now
 		if(spd != "" && spd.length > 2){
 			var tmp_spd = spd.substring(2, spd.length-2);
@@ -694,7 +694,7 @@ function checkSpecifyDate(objname, strDay, strMonth, strYear){
 				else sp_dates[i] = tmp_str.split(",");
 			}
 		}else sp_dates = new Array();
-*/		
+*/
 		sp_dates = myJSONParse(spd);
 	}
 	/*
@@ -805,7 +805,7 @@ function myJSONParse(d){
 			else v[i] = s.split(",");
 		}
 	}else v = new Array();
-	
+
 	return v;
 }
 
