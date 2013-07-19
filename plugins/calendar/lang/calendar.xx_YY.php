@@ -2,10 +2,10 @@
 # xx_YY translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Localized version of PHP-Calendar, DatePicker Calendar class: http://ciprianmp.com/scripts/calendar/
-# Version: 3.69
+# Version: 3.70
 # Language: Lang_name / Orig_name // Ex: Romanian (English name) / Română (Original name)
 # Translator: YourName <email@...>
-# Last file update: 26.05.2013
+# Last file update: 19.07.2013
 
 # define("RTL", 1); // uncomment only for right-to-left text (Arabic, Hebrew)
 
@@ -30,6 +30,11 @@ define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing t
 define("L_UNSET", "Unset");
 define("L_CLOSE", "Close"); #3.69
 define("L_WARN_2038", "This php server’s version does not have support for year 2038 and later! (<5.3.0)"); #3.69
+define("L_ERR_NOSET", "Error! The calendar value cannot be set"); #3.70
+define("L_VERSION", "Version: %s (%s languages)"); #3.70
+define("L_POWBY", "Powered by:"); //or "Based on:", "Supported by" #3.70
+define("L_HERE", "here"); #3.70
+define("L_UPDATE", "Update available %s !"); #3.70
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "0");

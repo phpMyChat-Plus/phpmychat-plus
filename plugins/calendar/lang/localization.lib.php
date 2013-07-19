@@ -1,10 +1,10 @@
 <?php
 # en_US - this file includes the specific strings for both en_GB/en_US
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.69
+# Version: 3.70
 # Language: American English / English US
 # Translator: Ciprian Murariu <ciprianmp@yahoo.com>
-# Last file update: 26.05.2013
+# Last file update: 19.07.2013
 
 if (!function_exists('utf_conv'))
 {
@@ -54,12 +54,11 @@ if(!defined("L_UNSET")) define("L_UNSET", "Unset");
 if(!defined("L_CLOSE")) define("L_CLOSE", "Close");
 if(!defined("L_WARN_2038")) define("L_WARN_2038", "This php server’s version does not have support for year 2038 and later! (<5.3.0)"); #3.69
 if(!defined("L_ERR_NOSET")) define("L_ERR_NOSET", "Error! The calendar value cannot be set"); #3.70
-/*
 if(!defined("L_VERSION")) define("L_VERSION", "Version: %s (%s languages)"); #3.70
-if(!defined("L_POWBY")) define("L_POWBY", "Powered by:"); #3.70
+if(!defined("L_POWBY")) define("L_POWBY", "Powered by:"); //or "Based on:", "Supported by" #3.70
 if(!defined("L_HERE")) define("L_HERE", "here"); #3.70
 if(!defined("L_UPDATE")) define("L_UPDATE", "Update available %s !"); #3.70
-*/
+
 if(!defined("FIRST_DAY")) define("FIRST_DAY", "0"); // 0 for Sunday
 
 // Months Long Names
