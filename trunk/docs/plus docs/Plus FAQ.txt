@@ -255,4 +255,14 @@ I'm on a shared server and I cannot login by ftp in the first page of the instal
 22A.
 If your ftp username looks like an email address, try with an empty/null "FTP root path (relative)". It worked for me on the Lunarpages servers (shared).
 
+22Q.
+I'm getting all kind of strange mysql errors, especially:
+MySQL error: 1366 (Incorrect integer value: '' for column 'latin1' at row 1)
+Session halted.
+22A.
+Sounds like you are running MySQL 5.0 with SQL strict mode enabled.
+To disable strict mode open your my.cnf (or my.ini) in an editor and remove/comment out the following line:
+sql-mode="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+Then restart the database server.
+
 More to come...
