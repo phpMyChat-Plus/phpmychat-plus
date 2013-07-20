@@ -824,6 +824,12 @@ class tc_calendar{
 
 			//change specific date to time
 			foreach($dates as $tt_date){
+				//Patch for year outside the interval 1970-2037
+				$tt_date_year = substr($tt_date, 0, 4);
+				if((int)$tt_date_year < 1970) $tt_date = str_replace($tt_date_year, "1970", $tt_date);
+				elseif((int)$tt_date_year > 2037) $tt_date = str_replace($tt_date_year, "2037", $tt_date);
+				//End of patch for year outside the interval 1970-2037
+
 				$tt_time = $this->mydate->getTimestamp($tt_date);
 
 				if($tt_time > 0){

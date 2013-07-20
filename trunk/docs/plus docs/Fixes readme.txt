@@ -34,6 +34,7 @@ If your users encounter bootings for no reason, try to disable sounds in chat.
 
 Fixes History:
 06.02.2013 - 1.94-RC2:
+- fixed calendar birthdays to display the birthdates before 1970; (functionality related)
 - edituser and register calendars will now show the regusers birthdays and ages, if allowed by each respective user privacy set; (functionality extension)
 - calendar class update to 3.70-loc version; (functionality related)
 - fixed the text/frames in styles preview; (functionality related)

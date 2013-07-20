@@ -652,7 +652,7 @@ function submitNow(dvalue, mvalue, yvalue){
 					$this_class = isset($column[2]) ? $column[2] : "";
 					$this_id = isset($column[3]) ? $column[3] : "";
 
-					$id_str = ($this_id) ? " id=\"$this_id\"" : "";
+					$id_str = ($this_id) ? " id=\"".$this_id."\"" : "";
 
 					if($this_link){
 						//Digitizer
