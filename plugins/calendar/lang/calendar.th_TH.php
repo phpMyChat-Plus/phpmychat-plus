@@ -1,10 +1,10 @@
 ﻿<?php
 # th_TH translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.69
+# Version: 3.70
 # Language: Thai / ภาษาไทย
-# Translator: 
-# Last file update: 19.05.2013
+# Translator: Ciprian using Google Translate
+# Last file update: 21.07.2013
 // Thailand mainly uses the Buddhist Era which is 543 years ahead of the Gregorian year. 1 January 2549 BE (AD 2006) 
 
 // Class strings localization
@@ -26,7 +26,15 @@ define("L_DATE_AFTER", "กรุณาเลือกวันหลังจ�
 define("L_DATE_BETWEEN", "กรุณาเลือกวันที่ระหว่าง\\n%s และ %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "ยกเลิก");
-define("L_CLOSE", "ปิด");
+define("L_CLOSE", "ปิด"); #3.69
+define("L_WARN_2038", "รุ่นนี้ php server ของไม่ได้มีการสนับสนุนสำหรับปี 2038 และต่อมา! (<5.3.0)"); #3.69
+define("L_ERR_NOSET", "ข้อผิดพลาด! ค่าปฏิทินไม่สามารถตั้งค่า!"); #3.70
+define("L_VERSION", "เวอร์ชัน: %s (%s ภาษา)"); #3.70
+define("L_POWBY", "บนพื้นฐานต่อไป:"); //or "Based on:", "Supported by" #3.70
+define("L_HERE", "ที่นี่"); #3.70
+define("L_UPDATE", "ปรับปรุง %s !"); #3.70
+define("L_TRANAME", "Google"); //Keep a short name #3.70
+define("L_TRABY", "แปลโดย %s"); //Keep a short name #3.70
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

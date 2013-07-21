@@ -4,7 +4,7 @@
 # Version: 3.70
 # Language: Romanian / Română
 # Translator: Ciprian Murariu <ciprianmp@yahoo.com>
-# Last file update: 19.07.2013
+# Last file update: 21.07.2013
 
 // Class strings localization
 define("L_DAYC", "Ziua");
@@ -23,7 +23,7 @@ define("L_NOT_ALLOWED", "Nu este permisă selectarea acestei date!");
 define("L_DATE_BEFORE", "Selectaţi o dată înainte de %s!");
 define("L_DATE_AFTER", "Selectaţi o dată după %s!");
 define("L_DATE_BETWEEN", "Selectaţi o dată între\\n%s şi %s!");
-define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
+define("L_WEEK_HDR", "S"); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Anulare");
 define("L_CLOSE", "Închide");
 define("L_WARN_2038", "Versiunea serverului php nu suportă ani mai mari decât 2038! (<5.3.0)"); #3.69
@@ -32,7 +32,8 @@ define("L_VERSION", "Versiunea: %s (%s de limbi)"); #3.70
 define("L_POWBY", "Bazat pe:"); #3.70
 define("L_HERE", "aici"); #3.70
 define("L_UPDATE", "Update disponibil %s !"); #3.70
-
+define("L_TRANAME", "Ciprian"); #3.70
+define("L_TRABY", "Tradus de %s"); #3.70
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
