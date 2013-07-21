@@ -1,10 +1,10 @@
 ﻿<?php
 # ru_RU translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.69
+# Version: 3.70
 # Language: Russian / pусский
 # Translator: Ciprian <ciprianmp@yahoo.com> - using Google Talk translator
-# Last file update: 19.05.2013
+# Last file update: 21.07.2013
 
 // Class strings localization
 define("L_DAYC", "День");
@@ -25,7 +25,15 @@ define("L_DATE_AFTER", "Выберите дату, после %s");
 define("L_DATE_BETWEEN", "Выберите дату между\\n%s и %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Отменить");
-define("L_CLOSE", "Закрыть");
+define("L_CLOSE", "Закрыть"); #3.69
+define("L_WARN_2038", "Этот сервер версии PHP не имеет поддержки 2038 году и позже! (<5.3.0)"); #3.69
+define("L_ERR_NOSET", "Ошибка! Календарь стоимость не может быть установлен!"); #3.70
+define("L_VERSION", "Версия: %s (%s языков)"); #3.70
+define("L_POWBY", "Создано:"); //or "Based on:", "Supported by" #3.70
+define("L_HERE", "здесь"); #3.70
+define("L_UPDATE", "Доступно обновление %s !"); #3.70
+define("L_TRANAME", "Google"); //Keep a short name #3.70
+define("L_TRABY", "Перевод %s"); #3.70
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

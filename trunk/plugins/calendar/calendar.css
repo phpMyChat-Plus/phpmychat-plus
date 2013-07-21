@@ -66,5 +66,5 @@ a.tclabel span { text-decoration: none; font-family: tahoma; cursor: pointer; }
 .calendar-info { position: absolute; top: 0px; right: 0px; width: 8px; height: 8px; background: url(images/info.gif) no-repeat; }
 
 #info { width: 9px; height: 9px; position: relative; }
-#info #about { background-color: #F8F8FF; color: #191970; width: 160px; height: 0px; left: 0px; right: 0px; top: 0px; position: absolute; overflow: hidden; display: none; z-index: 1000; border: 1px solid #191970; -webkit-transition: all .3s ease; -moz-transition: all .3s ease; -ms-transition: all .3s ease; -o-transition: all .3s ease; transition: all .3s ease; border: 0px solid #191970; display: inline-block; }
-#info:hover > #about { display: inline-block; z-index: 1000; height: 118px; border: 1px solid #191970; cursor: help; }
+#info #about { background-color: #F8F8FF; color: #191970; width: 160px; height: 0px; top: 0px; position: absolute; overflow: hidden; display: none; z-index: 1000; border: 1px solid #191970; -webkit-transition: all .3s ease; -moz-transition: all .3s ease; -ms-transition: all .3s ease; -o-transition: all .3s ease; transition: all .3s ease; border: 0px solid #191970; display: inline-block; }
+#info:hover > #about { display: inline-block; z-index: 1000; height: auto; border: 1px solid #191970; cursor: help; }

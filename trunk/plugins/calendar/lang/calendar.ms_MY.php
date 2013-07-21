@@ -2,10 +2,10 @@
 # ms_MY translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Localized version of PHP-Calendar, DatePicker Calendar class: http://ciprianmp.com/scripts/calendar/
-# Version: 3.69
+# Version: 3.70
 # Language: Malaysian / Bahasa Melayu
 # Translator: Noralbaniah <noralbaniahnia@yahoo.com>
-# Last file update: 19.05.2013
+# Last file update: 21.07.2013
 
 // Class strings localization
 define("L_DAYC", "Hari");
@@ -26,8 +26,13 @@ define("L_DATE_AFTER", "Sila pilih tarikh selepas %s");
 define("L_DATE_BETWEEN", "Sila pilih tarikh di antara\\n%s dan %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Belum Ditetap");
-define("L_CLOSE", "Tutup");
-define("L_WARN_2038", "Versi php anda tidak mempunyai sokongan untuk tahun 2038 dan kemudian!");
+define("L_CLOSE", "Tutup"); #3.69
+define("L_WARN_2038", "Versi server php ini tidak mempunyai sokongan bagi tahun 2038 dan kemudian! (<5.3.0)"); #3.69
+define("L_ERR_NOSET", "Ralat! Nilai kelandar tidak boleh ditetapkan!"); #3.70
+define("L_VERSION", "Versi: %s (%s bahasa)"); #3.70
+define("L_POWBY", "Dikuasakan oleh:"); //or "Based on:", "Supported by" #3.70
+define("L_HERE", "di sini"); #3.70
+define("L_UPDATE", "Kemaskini disediakan %s !"); #3.70
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "1");

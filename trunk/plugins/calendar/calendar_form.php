@@ -401,7 +401,7 @@ if($check_version){
 		$new_version = @file_get_contents("http://www.ciprianmp.com/scripts/calendar/tc_calendar_version.php?v=".$version);
 	}
 }
-define("L_ABOUT_LOC", "<b>Localized Datepicker</b><br />".sprintf(L_VERSION, "<b>".strval($version)."</b>", "<b>$LANGS_NUM</b>").($new_version ? "<br /><b><font color=\"red\">".sprintf(L_UPDATE, "<a href=\"$LOC_SUPPORT\" target=\"_blank\">".L_HERE."</a>")."</font></b>" : "")."<br />&copy; 2010-".$cdate->getDate("Y")." <b><a href=\"$WEB_LOC\" target=\"_blank\" title=\"http://ciprianmp.com\">$AUTHOR_LOC</a></b><br /><div class=\"fb-like\" data-href=\"https://www.facebook.com/DatePicker\" data-send=\"false\" data-layout=\"button_count\" data-show-faces=\"false\" data-font=\"tahoma\" ref=\"loc_about_info\"></div>".($new_version ? "" : "<br />")."<br /><i>".L_POWBY."<br /><b>PHP Datepicker Calendar</b><br />&copy; 2008-".$cdate->getDate("Y")." <b><a href=\"$WEB_SUPPORT\" target=\"_blank\" title=\"http://triconsole.com\">$AUTHOR</a></b></i>");
+define("L_ABOUT_LOC", "<b>Localized Datepicker</b><br />".sprintf(L_VERSION, "<b>".strval($version)."</b>", "<b>$LANGS_NUM</b>").($new_version ? "<br /><b><font color=\"red\">".sprintf(L_UPDATE, "<a href=\"$LOC_SUPPORT\" target=\"_blank\">".L_HERE."</a>")."</font></b>" : "").(defined("L_TRABY") && L_TRABY != "L_TRABY" ? "<br />".sprintf(L_TRABY, "<b>".L_TRANAME."</b>") : "")."<br /><bdo dir=\"ltr\">&copy;2010-".$cdate->getDate("Y")." <b><a href=\"$WEB_LOC\" target=\"_blank\" title=\"http://ciprianmp.com\">$AUTHOR_LOC</a></b></bdo><br /><div class=\"fb-like\" data-href=\"https://www.facebook.com/DatePicker\" data-send=\"false\" data-layout=\"button_count\" data-show-faces=\"false\" data-font=\"tahoma\" ref=\"loc_about_info\"></div><hr /><i>".L_POWBY."<br /><b>PHP Datepicker Calendar</b><br /><bdo dir=\"ltr\">&copy;2008-".$cdate->getDate("Y")." <b><a href=\"$WEB_SUPPORT\" target=\"_blank\" title=\"http://triconsole.com\">$AUTHOR</a></b></bdo></i>");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"<?php if($rtl) echo(" dir=\"rtl\""); ?>>
@@ -454,7 +454,7 @@ function submitNow(dvalue, mvalue, yvalue){
 	}(document, 'script', 'facebook-jssdk'));
 	</script>
     <div id="calendar-header" align="center">
-        <div style="float: <?php echo($rtl ? "right" : "left"); ?>;" id="info" onmouseover="javascript:displayAbout('1');" onmouseout="javascript:displayAbout('0');"><img src="images/<?php echo($new_version ? "version_info.gif" : "about.png"); ?>" width="9" height="9" border="0" /><div id="about" dir="ltr"><?php echo(L_ABOUT_LOC); ?></div>
+        <div style="float: <?php echo($rtl ? "right" : "left"); ?>;" id="info" onmouseover="javascript:displayAbout('1');" onmouseout="javascript:displayAbout('0');"><img src="images/<?php echo($new_version ? "version_info.gif" : "about.png"); ?>" width="9" height="9" border="0" /><div id="about" dir="<?php echo(($rtl && L_HERE != "here") ? "rtl" : "ltr"); ?>" style="<?php echo($rtl ? "right: 0px;".(L_HERE != "here" ? " direction: rtl; unicode-bidi: embed;" : "") : "left: 0px;"); ?>"><?php echo(L_ABOUT_LOC); ?></div>
         	<script language="javascript">
 			<!--
 			var timeoutID = "";
@@ -466,7 +466,7 @@ function submitNow(dvalue, mvalue, yvalue){
 						this.timeoutID = "";
 					}
 					obj.style.display = "inline-block";
-					obj.style.height = '118px';
+					obj.style.height = 'auto';
 					obj.style.border = "1px solid #191970";
 					obj.onmouseover = function(){ displayAbout('1'); }
 				}else{

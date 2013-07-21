@@ -4,7 +4,7 @@
 # Version: 3.70
 # Language: American English / English US
 # Translator: Ciprian Murariu <ciprianmp@yahoo.com>
-# Last file update: 19.07.2013
+# Last file update: 21.07.2013
 
 if (!function_exists('utf_conv'))
 {
@@ -53,7 +53,7 @@ if(!defined("L_WEEK_HDR")) define("L_WEEK_HDR", "");
 if(!defined("L_UNSET")) define("L_UNSET", "Unset");
 if(!defined("L_CLOSE")) define("L_CLOSE", "Close");
 if(!defined("L_WARN_2038")) define("L_WARN_2038", "This php server’s version does not have support for year 2038 and later! (<5.3.0)"); #3.69
-if(!defined("L_ERR_NOSET")) define("L_ERR_NOSET", "Error! The calendar value cannot be set"); #3.70
+if(!defined("L_ERR_NOSET")) define("L_ERR_NOSET", "Error! The calendar value cannot be set!"); #3.70
 if(!defined("L_VERSION")) define("L_VERSION", "Version: %s (%s languages)"); #3.70
 if(!defined("L_POWBY")) define("L_POWBY", "Powered by:"); //or "Based on:", "Supported by" #3.70
 if(!defined("L_HERE")) define("L_HERE", "here"); #3.70
