@@ -5,7 +5,7 @@
 # Version: 3.70
 # Language: Malaysian / Bahasa Melayu
 # Translator: Noralbaniah <noralbaniahnia@yahoo.com>
-# Last file update: 21.07.2013
+# Last file update: 22.07.2013
 
 // Class strings localization
 define("L_DAYC", "Hari");
@@ -33,6 +33,8 @@ define("L_VERSION", "Versi: %s (%s bahasa)"); #3.70
 define("L_POWBY", "Dikuasakan oleh:"); //or "Based on:", "Supported by" #3.70
 define("L_HERE", "di sini"); #3.70
 define("L_UPDATE", "Kemaskini disediakan %s !"); #3.70
+define("L_TRANAME", "Noralbaniah"); #3.70
+define("L_TRABY", "Diterjemahkan oleh<br />%s"); #3.70
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "1");

@@ -26,6 +26,7 @@ define("L_DATE_BETWEEN", "Vælg en dato mellem\\n%s og %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Frakoblet"); //Annuller
 define("L_CLOSE", "Luk");
+define("L_TRANAME", "Bente Feldballe"); #3.70
 
 // Set the first day of the week in your language
 define("FIRST_DAY", "1"); // 1 for Monday, 0 for Sunday

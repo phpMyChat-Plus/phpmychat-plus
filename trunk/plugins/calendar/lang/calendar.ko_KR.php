@@ -29,6 +29,7 @@ define("L_DATE_BETWEEN", "\\n%s와 %s사이의 날짜를 선택해주세요.");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "재설정");
 define("L_CLOSE", "끝내다");
+define("L_TRANAME", "Jong-Youn Kim"); #3.70
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "0");

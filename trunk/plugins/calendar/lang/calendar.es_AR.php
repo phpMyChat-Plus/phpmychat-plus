@@ -1,10 +1,10 @@
 <?php
 # es_AR translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.69
+# Version: 3.70
 # Language: Argentinian Spanish / español Argentina
-# Translator: Matias Olivera <matiolivera@yahoo.com>
-# Last file update: 19.05.2013
+# Translator: Matías Olivera <matiolivera@yahoo.com>
+# Last file update: 23.07.2013
 
 // Class strings localization
 define("L_DAYC", "Día");
@@ -25,7 +25,15 @@ define("L_DATE_AFTER", "Elija una fecha posterior al %s");
 define("L_DATE_BETWEEN", "Elija una fecha entre el\\n%s y el %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Cancelar");
-define("L_CLOSE", "Cerrar");
+define("L_CLOSE", "Cerrar"); #3.69
+define("L_WARN_2038", "La versión de este servidor php no tiene soporte para el año 2038 o posterior! (<5.3.0)"); #3.69
+define("L_ERR_NOSET", "Error! No se puede definir este valor de calendario!"); #3.70
+define("L_VERSION", "Versión: %s (%s lenguajes)"); #3.70
+define("L_POWBY", "Desarrollado por:"); //or "Based on:", "Supported by" #3.70
+define("L_HERE", "aquí"); #3.70
+define("L_UPDATE", "Actualización disponible %s !"); #3.70
+define("L_TRANAME", "Matías Olivera"); #3.70
+define("L_TRABY", "Traducido por %s"); #3.70
 
 // Set the first day of the week in your language
 define("FIRST_DAY", "0"); // 1 for Monday, 0 for Sunday

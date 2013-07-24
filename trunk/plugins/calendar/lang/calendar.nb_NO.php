@@ -26,8 +26,15 @@ define("L_DATE_AFTER", "Velg en dato etter %s");
 define("L_DATE_BETWEEN", "Velg en dato mellom\\n%s og %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Nullstill");
-define("L_CLOSE", "Lukk");
-define("L_WARN_2038", "Denne php-serveren har ikke støtte for år 2038 eller senere! (<5.3.0)");
+define("L_CLOSE", "Steng"); #3.69
+define("L_WARN_2038", "Denne php-serveren har ikke støtte for år 2038 eller senere! (<5.3.0)"); #3.69
+define("L_ERR_NOSET", "Feil! Kalenderverdien kunne ikke bli satt!"); #3.70
+define("L_VERSION", "Versjon: %s (%s språk)"); #3.70
+define("L_POWBY", "Bygget på:"); //or "Based on:", "Supported by" #3.70
+define("L_HERE", "her"); #3.70
+define("L_UPDATE", "Oppdatering tilgjengelig %s !"); #3.70
+define("L_TRANAME", "Stian Hvatum"); #3.70
+define("L_TRABY", "Oversatt av %s"); #3.70
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

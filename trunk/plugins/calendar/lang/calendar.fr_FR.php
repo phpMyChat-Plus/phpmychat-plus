@@ -27,6 +27,7 @@ define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing t
 define("L_UNSET", "Annuler"); //Remise à zéro
 define("L_CLOSE", "Fermer");
 define("L_WARN_2038", "La version de ce serveur PHP ne prend pas en charge l’année 2038 et au delà! (<5.3.0)");
+define("L_TRANAME", "Pierre Liget"); #3.70
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
