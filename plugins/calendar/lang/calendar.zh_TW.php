@@ -29,6 +29,7 @@ define("L_DATE_BETWEEN", "請選擇日期%s和%s之間");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "取消");
 define("L_CLOSE", "關閉");
+define("L_TRANAME", "Clouds Music"); #3.70
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "1");

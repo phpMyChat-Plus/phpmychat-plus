@@ -29,6 +29,7 @@ define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing t
 define("L_UNSET", "לבטל");
 define("L_CLOSE", "סגור");
 define("L_WARN_2038", "גרסת שרת ה-PHP הנוכחית לא תומכת בשנה 2038 ואילך! (<5.3.0)"); #3.69
+define("L_TRANAME", "Avi Morlevi"); #3.70
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "0");

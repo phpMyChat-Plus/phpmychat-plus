@@ -27,6 +27,7 @@ define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing t
 define("L_UNSET", "Nollaa");
 define("L_CLOSE", "Sulje");
 define("L_WARN_2038", "PHP-versiosi ei tue vuotta 2038 ja myöhempiä vuosia!");
+define("L_TRANAME", "Ilja Mäki"); #3.70
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

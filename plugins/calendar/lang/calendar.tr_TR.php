@@ -27,6 +27,7 @@ define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing t
 define("L_UNSET", "İptal"); // Seçimi kaldır
 define("L_CLOSE", "Kapat");
 define("L_WARN_2038", "Bu php sunucusu sürümü 2038 yılı ve sonrasını desteklemiyor! (<5.3.0)");
+define("L_TRANAME", "Volkan Övün"); #3.70
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday... 6 for Saturday)
 define("FIRST_DAY", "1");

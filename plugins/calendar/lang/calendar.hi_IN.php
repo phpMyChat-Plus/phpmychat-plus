@@ -28,6 +28,7 @@ define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing t
 define("L_UNSET", "साफ कर");
 define("L_CLOSE", "बंद करे");
 define("L_WARN_2038", "आपके PHP संस्करण में वर्ष 2038 और बाद के वर्षों का समर्थन नहीं है!");
+define("L_TRANAME", "SanSar"); #3.70
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "0");
