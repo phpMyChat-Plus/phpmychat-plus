@@ -3,8 +3,8 @@ a.tclabel span { text-decoration: none; font-family: tahoma; cursor: pointer; }
 
 #calendar-page { background-color: #6699CC; display: inline-block; }
 
-#calendar-header { padding-top: 2px; position: relative; }
-#calendar-header .closeme { padding: 0px 3px 2px 0px; }
+#calendar-header { padding-top: 2px; position: relative; z-index: 150; }
+#calendar-header .closeme  { padding: 0px 3px 2px 0px; }
 
 #calendar-body { padding: 2px 3px 3px 3px; }
 #calendar-body .general { background-color: #FFFFFF; }
@@ -13,7 +13,7 @@ a.tclabel span { text-decoration: none; font-family: tahoma; cursor: pointer; }
 #calendar-body .othermonth a:link { text-decoration: none; color: #CCFFCC; }
 #calendar-body .othermonth a:visited { text-decoration: none; color: #CCFFCC; }
 #calendar-body .othermonth a:hover { text-decoration: none; color: #FFFFFF; }
-#calendar-body td div { padding: 3px; width: 15px; white-space: nowrap; position: relative; }
+#calendar-body td div { padding: 3px; width: 15px; white-space: nowrap; position: relative; z-index: 100; }
 #calendar-body td a { display: block; white-space: nowrap; }
 #calendar-body a:link { text-decoration: none; color: #000000; }
 #calendar-body a:visited { text-decoration: none; color: #000000; }
@@ -63,8 +63,8 @@ a.tclabel span { text-decoration: none; font-family: tahoma; cursor: pointer; }
 
 #calendar-alert { background-color: #CC3300; border: 1px solid #993300; color: #FFFFFF; padding: 3px; margin: 2px; border-radius: 5px 5px 5px 5px; -moz-border-radius: 5px 5px 5px 5px; -webkit-border-radius: 5px 5px 5px 5px; }
 
-.calendar-info { position: absolute; top: 0px; right: 0px; width: 8px; height: 8px; background: url(images/info.gif) no-repeat; }
+.calendartooltip { position: absolute; top: 0px; right: 0px; width: 8px; height: 8px; background: url(images/info.gif) no-repeat top right; z-index: 102; }
 
-#info { width: 9px; height: 9px; position: relative; }
-#info #about { background-color: #F8F8FF; color: #191970; width: 160px; height: 0px; top: 0px; position: absolute; overflow: hidden; display: none; z-index: 1000; border: 1px solid #191970; -webkit-transition: all .3s ease; -moz-transition: all .3s ease; -ms-transition: all .3s ease; -o-transition: all .3s ease; transition: all .3s ease; border: 0px solid #191970; display: inline-block; }
-#info:hover > #about { display: inline-block; z-index: 1000; height: auto; border: 1px solid #191970; cursor: help; }
+#info { width: 9px; height: 9px; position: relative; z-index: 140; }
+#info #about { background-color: #F8F8FF; color: #191970; width: 163px; height: auto; top: 0px; white-space: nowrap; position: absolute; overflow: hidden; display: none; /*z-index: 1000;*/ -webkit-transition: all .3s ease; -moz-transition: all .3s ease; -ms-transition: all .3s ease; -o-transition: all .3s ease; transition: all .3s ease; border: 0px solid #191970; cursor: help; }
+#info #about.border { border: 1px solid #191970; }

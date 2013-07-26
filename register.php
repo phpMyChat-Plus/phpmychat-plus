@@ -640,8 +640,9 @@ else
 			    $birth_day = strtotime($BIRTHDAY);
 				$myCalendar->setDate(date('d',$birth_day), date('m',$birth_day), date('Y',$birth_day));
 			  }
-			  $myCalendar->setYearInterval("1920", date('Y'));
-			  $myCalendar->dateAllow('1920-01-01', date('Y-m-d'));
+			  $myCalendar->setYearInterval(1900, date('Y'));
+			  $myCalendar->dateAllow('1900-01-01', date('Y-m-d'));
+			  $myCalendar->setSpecificDate(array(""), 0, 'year');
 				$DbLink->query("SELECT username,birthday,show_age FROM ".C_REG_TBL." WHERE birthday != '' AND birthday != '0000-00-00' AND show_bday = '1' ORDER BY birthday ASC");
 				if ($DbLink->num_rows() != 0)
 				{

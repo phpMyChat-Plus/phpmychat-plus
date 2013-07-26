@@ -2,10 +2,10 @@
 # zh_CN translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Localized version of PHP-Calendar, DatePicker Calendar class: http://ciprianmp.com/scripts/calendar/
-# Version: 3.69
+# Version: 3.70
 # Language: Chinese Simplified / 简体中文 // ex: Romanian (English name) / Română (Original name)
-# Translator: Ciprian <ciprianmp@yahoo.com> - using Google Talk translator
-# Last file update: 19.05.2013
+# Translator: clouds_music <clouds.music@gmail.com>
+# Last file update: 25.07.2013
 
 // Class strings localization
 define("L_DAYC", "日");
@@ -26,9 +26,16 @@ define("L_DATE_AFTER", "请选择%s以后的日期");
 define("L_DATE_BETWEEN", "请选择日期%s和%s之间");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "取消");
-define("L_CLOSE", "关闭");
-define("L_TRANAME", "Clouds Music"); #3.70
-
+define("L_CLOSE", "关闭"); #3.69
+define("L_WARN_2038", "这个PHP服务器的版本没有支持2038年以后！(< 5.3.0 )"); #3.69
+define("L_ERR_NOSET", "错误！日历值，不能设置！"); #3.70
+define("L_VERSION", "版本： %s (%s语言)"); #3.70
+define("L_POWBY", "技术支援："); //or "Based on:", "Supported by" #3.70
+define("L_HERE", "这里"); #3.70
+define("L_UPDATE", "可用更新%s！"); #3.70
+define("L_TRANAME", "clouds_music"); #3.70
+define("L_TRABY", "中文翻译作者<br />%s云上的音乐"); #3.70
+ 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
 
