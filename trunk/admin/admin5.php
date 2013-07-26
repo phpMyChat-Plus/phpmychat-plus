@@ -1604,6 +1604,27 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		  $myCalendar->setYearInterval(2000, date('Y'));
 		  $myCalendar->dateAllow('2000-01-01', date('Y-m-d'));
 		  $myCalendar->setAlignment('left', 'bottom'); //optional
+			$DbLink->query("SELECT username,birthday,show_age FROM ".C_REG_TBL." WHERE birthday != '' AND birthday != '0000-00-00' AND show_bday = '1' ORDER BY birthday ASC");
+			if ($DbLink->num_rows() != 0)
+			{
+				include_once('plugins/birthday/age.class.php');
+				$my_dob = new DateOfBirth();
+				while(list($birthname, $birthday, $show_age) = $DbLink->next_record())
+				{
+					if ($show_age)
+					{
+						$my_dobtime = strtotime($birthday);
+						$my_dob->birth_num_year = date('Y',$my_dobtime);
+						$my_dob->birth_num_month = date('n',$my_dobtime);
+						$my_dob->birth_num_day = date('j',$my_dobtime);
+						$my_dob->calculate_age();
+						$age = $my_dob->age;
+					}
+					$myCalendar->setToolTips(array($birthday), ($show_age && $age) ? $birthname." (".$age.")" : $birthname, 'year');
+					unset($age, $my_dobtime);
+				}
+			$DbLink->clean_results();
+			}
 		  $myCalendar->writeScript();
 		?>
 	</td>
