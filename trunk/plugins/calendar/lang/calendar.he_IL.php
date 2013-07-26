@@ -1,10 +1,10 @@
 <?php
 # he_IL translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.69
+# Version: 3.70
 # Language: Hebrew / עברית
 # Translators: Avi Morlevi <avimorlevi@gmail.com>
-# Last file update: 19.06.2013
+# Last file update: 25.07.2013
 
 define("RTL", 1);
 
@@ -27,9 +27,15 @@ define("L_DATE_AFTER", "%s אנא בחר תאריך לאחר");
 define("L_DATE_BETWEEN", "%s ו %s\\nאנא בחר תאריך בין");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "לבטל");
-define("L_CLOSE", "סגור");
-define("L_WARN_2038", "גרסת שרת ה-PHP הנוכחית לא תומכת בשנה 2038 ואילך! (<5.3.0)"); #3.69
-define("L_TRANAME", "Avi Morlevi"); #3.70
+define("L_CLOSE", "סגור"); #3.69
+define("L_WARN_2038", "גרסת שרת ה-PHP לא תומכת בבחירת שנה 2038 ואילך! (<5.3.0)"); #3.69
+define("L_ERR_NOSET", "!שגיאה! לא ניתן לעדכן ערך זה בלוח השנה"); #3.70
+define("L_VERSION", "גרסה: %s (%s שפות)"); #3.70
+define("L_POWBY", "נבנה עכוי:"); //or "Based on:", "Supported by" #3.70
+define("L_HERE", "כאן"); #3.70
+define("L_UPDATE", "עדכון זמין %s !"); #3.70
+define("L_TRANAME", "אבי מורלוי<br /><bdo dir=\"ltr\">(Avi Morlevi)</bdo>"); #3.70
+define("L_TRABY", "תורגם עכוי %s"); #3.70
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "0");

@@ -4,7 +4,7 @@
 # Version: 3.70
 # Language: Romanian / Română
 # Translator: Ciprian Murariu <ciprianmp@yahoo.com>
-# Last file update: 21.07.2013
+# Last file update: 26.07.2013
 
 // Class strings localization
 define("L_DAYC", "Ziua");
@@ -34,6 +34,7 @@ define("L_HERE", "aici"); #3.70
 define("L_UPDATE", "Update disponibil %s !"); #3.70
 define("L_TRANAME", "Ciprian"); #3.70
 define("L_TRABY", "Tradus de %s"); #3.70
+define("L_DONATE", "Vreţi să donaţi?"); #3.70
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

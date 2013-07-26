@@ -2,10 +2,10 @@
 # nb_NO translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Localized version of PHP-Calendar, DatePicker Calendar class: http://ciprianmp.com/scripts/calendar/
-# Version: 3.69
+# Version: 3.70
 # Language: Norwegian (Bokmål) / norsk, bokmål
 # Translator: Stian Hvatum <post@dream-web.no>
-# Last file update: 26.05.2013
+# Last file update: 25.07.2013
 
 // Class strings localization
 define("L_DAYC", "Dag");
