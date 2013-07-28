@@ -59,7 +59,7 @@ if(!defined("L_POWBY")) define("L_POWBY", "Powered by:"); //or "Based on:", "Sup
 if(!defined("L_HERE")) define("L_HERE", "here"); #3.70
 if(!defined("L_UPDATE")) define("L_UPDATE", "Update available %s !"); #3.70
 if(!defined("L_TRABY") && defined("L_TRANAME")) define("L_TRABY", "Translated by %s"); #3.70
-if(!defined("L_DONATE")) define("L_DONATE", "Wish to donate?"); #3.70
+if(!defined("L_DONATE")) define("L_DONATE", "<bdo dir=\"ltr\">Do you wish to donate?</bdo>"); #3.70
 
 if(!defined("FIRST_DAY")) define("FIRST_DAY", "0"); // 0 for Sunday
 

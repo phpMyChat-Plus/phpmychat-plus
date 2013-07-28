@@ -32,7 +32,7 @@ define("L_ERR_NOSET", "Feil! Kalenderverdien kan ikkje setjast!"); #3.70
 define("L_VERSION", "Versjon: %s (%s språk)"); #3.70
 define("L_POWBY", "Dreven av:"); //or "Based on:", "Supported by" #3.70
 define("L_HERE", "her"); #3.70
-define("L_UPDATE", "Ny oppdatering %s !"); #3.70
+define("L_UPDATE", "Oppdatering tilgjengeleg %s !"); #3.70
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

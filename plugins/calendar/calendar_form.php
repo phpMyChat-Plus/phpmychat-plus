@@ -415,7 +415,7 @@ elseif(function_exists("file_get_contents")){
 }
 $donation_url = '<br />'.(($rtl && L_DONATE != "Wish to donate?") ? "" : ($rtl ? '<bdo dir="ltr">' : "")).'<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=BX3RZAYPUMA28&lc=GB&item_name=Appreciate%20%26%20Support%20the%20Localized%20Calendar%20Class%20development&item_number=LCalClass%20about&no_note=0&cn=Your%20comments%20%28optional%29&no_shipping=1&rm=1&return=http%3a%2f%2fciprianmp%2ecom%2fscripts%2fcalendar&cancel_return=http%3a%2f%2fciprianmp%2ecom%2fscripts%2fcalendar&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted&page_style=LCalCLass" target="_blank" alt="PayPal — The safer, easier way to pay online.&#10;Thank you for your support!" title="PayPal — The safer, easier way to pay online.&#10;Thank you for your support!">'.L_DONATE.'</a></bdo>';
 
-define("L_ABOUT_LOC", "<b>Localized Datepicker</b><br />".sprintf(L_VERSION, "<b>".strval($version)."</b>", "<b>$LANGS_NUM</b>").($new_version ? "<br /><b><font color=\"red\">".sprintf(L_UPDATE, "<a href=\"$WEB_LOC\" target=\"_blank\">".L_HERE."</a>")."</font></b>" : "").(defined("L_TRABY") && L_TRABY != "L_TRABY" ? "<br />".sprintf(L_TRABY, "<b>".L_TRANAME."</b>") : "")."<br /><bdo dir=\"ltr\">&copy;2010-".$cdate->getDate("Y")." <b><a href=\"$WEB_LOC\" target=\"_blank\" title=\"http://ciprianmp.com\">$AUTHOR_LOC</a></b></bdo><br />".($wan_enabled ? "<div class=\"fb-like\" data-href=\"https://www.facebook.com/DatePicker\" data-send=\"false\" data-layout=\"button_count\" data-show-faces=\"false\" data-font=\"tahoma\" ref=\"loc_about_info\"></div>".$donation_url : "")."<hr /><i>".L_POWBY."<br /><b>PHP Datepicker Calendar</b><br /><bdo dir=\"ltr\">&copy;2006-".$cdate->getDate("Y")." <b><a href=\"$WEB_SUPPORT\" target=\"_blank\" title=\"http://triconsole.com\">$AUTHOR</a></b></bdo></i>");
+define("L_ABOUT_LOC", "<b>Localized Datepicker</b><br />".sprintf(L_VERSION, "<b>".strval($version)."</b>", "<b>$LANGS_NUM</b>").($new_version ? "<br /><b><font color=\"red\">".sprintf(L_UPDATE, "<a href=\"$WEB_LOC\" target=\"_blank\">".L_HERE."</a>")."</font></b>" : "").(defined("L_TRABY") && L_TRABY != "L_TRABY" ? "<br />".sprintf(L_TRABY, "<b>".L_TRANAME."</b>") : "")."<br /><bdo dir=\"ltr\">&copy;2010-".$cdate->getDate("Y")." <b><a href=\"$WEB_LOC\" target=\"_blank\" title=\"http://ciprianmp.com\">$AUTHOR_LOC</a></b></bdo><br />".($wan_enabled ? "<div id=\"fb-like\" class=\"fb-like\" data-href=\"https://www.facebook.com/DatePicker\" data-send=\"false\" data-layout=\"button_count\" data-show-faces=\"false\" data-font=\"tahoma\" ref=\"loc_about_info\"></div>".$donation_url : "")."<hr /><i>".L_POWBY."<br /><b>PHP Datepicker Calendar</b><br /><bdo dir=\"ltr\">&copy;2006-".$cdate->getDate("Y")." <b><a href=\"$WEB_SUPPORT\" target=\"_blank\" title=\"http://triconsole.com\">$AUTHOR</a></b></bdo></i>");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"<?php if($rtl) echo(" dir=\"rtl\""); ?>>
@@ -480,7 +480,6 @@ function submitNow(dvalue, mvalue, yvalue){
         	<script language="javascript">
 			<!--
 			var timeoutID = new Array();
-			var fb_parse = false;
 		
 			var obj = document.getElementById("info");
 			obj.onmouseover = function(){ displayAbout(); }
@@ -495,18 +494,19 @@ function submitNow(dvalue, mvalue, yvalue){
 
 				cancelTimer();
 				
-				obj.style.display = "block";
+				//obj.style.display = "block";
+				obj.style.height = "auto";
 				obj.style.border = "1px solid #191970";
-			<?php if($wan_enabled){ ?>
-				checkFBParse();
-			<?php } ?>
+				obj.style.backgroundColor = "#F8F8FF";
 			}
 			function hideAbout(){
 				var obj = document.getElementById("about");
 				
 				this.timeoutID[this.timeoutID.length] = window.setTimeout(function(){
 					obj.style.border = "none";
-					obj.style.display = "none";
+					//obj.style.display = "none";
+					obj.style.height = "1px";
+					obj.style.backgroundColor = "";
 					}
 					, 500);
 			}
@@ -517,13 +517,6 @@ function submitNow(dvalue, mvalue, yvalue){
 					clearTimeout(timers);
 				}
 				this.timeoutID = new Array();
-			}
-			
-			function checkFBParse(){
-				if(!this.fb_parse && document.getElementById("about").style.display == "block"){ 
-					FB.XFBML.parse();
-					this.fb_parse = true;
-				}
 			}
 			//-->
 			</script>

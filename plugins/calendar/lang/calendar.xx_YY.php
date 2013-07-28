@@ -5,7 +5,7 @@
 # Version: 3.70
 # Language: Lang_name / Orig_name // Ex: Romanian (English name) / Română (Original name)
 # Translator: YourName <email@...>
-# Last file update: 21.07.2013
+# Last file update: 27.07.2013
 
 # define("RTL", 1); // uncomment only for right-to-left text (Arabic, Hebrew)
 
@@ -35,8 +35,9 @@ define("L_VERSION", "Version: %s (%s languages)"); #3.70
 define("L_POWBY", "Powered by:"); //or "Based on:", "Supported by" #3.70
 define("L_HERE", "here"); #3.70
 define("L_UPDATE", "Update available %s !"); #3.70
-define("L_TRANAME", "ReplaceWithYourName"); //Keep a short name #3.70
+define("L_TRANAME", "ReplaceWith YourName"); //Keep a short name #3.70
 define("L_TRABY", "Translated by %s"); #3.70
+define("L_DONATE", "Do you wish to donate?"); #3.70
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "0");
