@@ -1,10 +1,10 @@
 <?php
 # da_DK translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.69
+# Version: 3.70
 # Language: Danish / dansk
 # Translator: Bente Feldballe
-# Last file update: 19.05.2013
+# Last file update: 28.07.2013
 
 // Class strings localization
 define("L_DAYC", "Dato");
@@ -25,8 +25,16 @@ define("L_DATE_AFTER", "Vælg en dato, efter %s");
 define("L_DATE_BETWEEN", "Vælg en dato mellem\\n%s og %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Frakoblet"); //Annuller
-define("L_CLOSE", "Luk");
+define("L_CLOSE", "Luk"); #3.69
+define("L_WARN_2038", "Denne version php-server understøtter ikke året 2038 og senere! (<5.3.0)"); #3.69
+define("L_ERR_NOSET", "Fejl! Kalenderværdien kan ikke vælges!"); #3.70
+define("L_VERSION", "Version: %s (%s sprog)"); #3.70
+define("L_POWBY", "Baseret på:"); //or "Based on:", "Supported by" #3.70
+define("L_HERE", "her"); #3.70
+define("L_UPDATE", "Opdatering tilgængelig %s !"); #3.70
 define("L_TRANAME", "Bente Feldballe"); #3.70
+define("L_TRABY", "Oversat af %s"); #3.70
+define("L_DONATE", "Vil du give et bidrag?"); #3.70
 
 // Set the first day of the week in your language
 define("FIRST_DAY", "1"); // 1 for Monday, 0 for Sunday

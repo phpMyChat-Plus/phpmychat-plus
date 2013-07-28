@@ -311,7 +311,7 @@ function myJSONParse(d){
 
 window.onload = function(){
 	window.parent.setDateLabel('obj_name');
-	adjustContainer();
+	//adjustContainer();
 	setTimeout("adjustContainer()", 1000);
 	restoreValue();
 	processTooltips();
