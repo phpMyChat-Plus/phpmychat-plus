@@ -4,7 +4,7 @@
 # Version: 3.70
 # Language: French / français
 # Translator: Pierre Liget <sourceforge@pliget.freesurf.fr>
-# Last file update: 25.07.2013
+# Last file update: 30.07.2013
 
 // Class strings localization
 define("L_DAYC", "Jour");
@@ -25,15 +25,16 @@ define("L_DATE_AFTER", "Veuillez sélectionner une date\\npostérieure au %s");
 define("L_DATE_BETWEEN", "Veuillez sélectionner une date entre le\\n%s et le %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Annuler"); //Remise à zéro
-define("L_CLOSE", "Fermer"); #3.69
-define("L_WARN_2038", "Cette version de PHP ne supporte pas les années 2038 et au delà! (<5.3.0)"); #3.69
-define("L_ERR_NOSET", "Erreur! La valeur du calendrier ne peut pas être fixée!"); #3.70
-define("L_VERSION", "Version: %s (%s langues)"); #3.70
-define("L_POWBY", "Basé sur:"); //or "Based on:", "Supported by" #3.70
-define("L_HERE", "ici"); #3.70
-define("L_UPDATE", "Mise à jour disponible %s !"); #3.70
-define("L_TRANAME", "Pierre Liget"); #3.70
-define("L_TRABY", "Traduit par %s"); #3.70
+define("L_CLOSE", "Fermer");
+define("L_WARN_2038", "Cette version de PHP ne supporte pas les années 2038 et au delà! (<5.3.0)");
+define("L_ERR_NOSET", "Erreur! La valeur du calendrier ne peut pas être fixée!");
+define("L_VERSION", "Version: %s (%s langues)");
+define("L_POWBY", "Basé sur:"); //or "Based on:", "Supported by"
+define("L_HERE", "ici");
+define("L_UPDATE", "Mise à jour disponible %s !");
+define("L_TRANAME", "Pierre Liget");
+define("L_TRABY", "Traduit par %s");
+define("L_DONATE", "Souhaitez vous faire un don?");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

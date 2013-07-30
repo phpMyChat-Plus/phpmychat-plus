@@ -26,7 +26,7 @@ define("L_DATE_BETWEEN", "Odaberite datum izmedju\\n%s i %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Poništi"); //Vrati na prethodno
 define("L_CLOSE", "Zatvori");
-define("L_TRANAME", "Vedran Vučić"); #3.70
+define("L_TRANAME", "Vedran Vučić");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

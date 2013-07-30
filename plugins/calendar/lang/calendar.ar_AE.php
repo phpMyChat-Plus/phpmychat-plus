@@ -29,13 +29,13 @@ define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing t
 define("L_UNSET", "تجبر");
 define("L_CLOSE", "أغلق");
 define("L_WARN_2038", "الإصدار الخاص بي ليس لديها الدعم للعام 2038 وفيما بعد!");
-define("L_ERR_NOSET", "خطأ! قيمة التقويم لا يمكن تعيين!"); #3.70
-define("L_VERSION", "الإصدار: %s (%s لغات)"); #3.70
-define("L_POWBY", "مدعوم من:"); //or "Based on:", "Supported by" #3.70
-define("L_HERE", "هنا"); #3.70
-define("L_UPDATE", " %s تحديث متوفر!"); #3.70
-define("L_TRANAME", "Google"); //Keep a short name #3.70
-define("L_TRABY", "ترجم من قبل %s"); #3.70
+define("L_ERR_NOSET", "خطأ! قيمة التقويم لا يمكن تعيين!");
+define("L_VERSION", "الإصدار: %s (%s لغات)");
+define("L_POWBY", "مدعوم من:"); //or "Based on:", "Supported by"
+define("L_HERE", "هنا");
+define("L_UPDATE", " %s تحديث متوفر!");
+define("L_TRANAME", "Google"); //Keep a short name
+define("L_TRABY", "ترجم من قبل %s");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "6"); //6 Sabath

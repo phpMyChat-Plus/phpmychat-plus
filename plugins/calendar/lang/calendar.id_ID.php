@@ -1,10 +1,10 @@
 ﻿<?php
 # id_ID translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.69
+# Version: 3.70
 # Language: Indonesian / Bahasa Indonesia
-# Translator: Hendriyo <hendriyo@gmail.com>
-# Last file update: 19.05.2013
+# Translator: Hendriyo Kustrianjaya <hendriyo@gmail.com>
+# Last file update: 29.07.2013
 
 // Class strings localization
 define("L_DAYC", "Hari");
@@ -26,7 +26,15 @@ define("L_DATE_BETWEEN", "Silakan pilih tanggal antara\\n%s dan %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Belum diset");
 define("L_CLOSE", "Tutup");
-define("L_TRANAME", "Hendriyo"); #3.70
+define("L_WARN_2038", "Versi server php ini tidak dapat pakai tahun 2038 atau lebih! (<5.3.0)");
+define("L_ERR_NOSET", "Gagal! Angka di kalender tidak dapat diset!");
+define("L_VERSION", "Versi: %s (%s Bahasa)");
+define("L_POWBY", "Ditenagai oleh:"); //or "Based on:", "Supported by"
+define("L_HERE", "sini");
+define("L_UPDATE", "Perbaharuan tersedia %s !");
+define("L_TRANAME", "Hendriyo Kustrianjaya");
+define("L_TRABY", "Diterjemahkan oleh<br />%s");
+define("L_DONATE", "Anda ingin mendonasikan?");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

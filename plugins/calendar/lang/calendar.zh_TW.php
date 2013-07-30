@@ -27,15 +27,15 @@ define("L_DATE_BETWEEN", "請選擇日期%s和%s之間");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "取消");
 define("L_CLOSE", "關閉");
-define("L_CLOSE", "關閉"); #3.69
-define("L_WARN_2038", "這個PHP服務器的版本沒有支持2038年以後！(< 5.3.0 )"); #3.69
-define("L_ERR_NOSET", "錯誤！日曆值，不能設置！"); #3.70
-define("L_VERSION", "版本： %s (%s語言)"); #3.70
-define("L_POWBY", "技術支援："); //or "Based on:", "Supported by" #3.70
-define("L_HERE", "這裡"); #3.70
-define("L_UPDATE", "可用更新%s！"); #3.70
-define("L_TRANAME", "clouds_music"); #3.70
-define("L_TRABY", "中文翻譯作者<br />%s雲上的音樂 "); #3.70
+define("L_CLOSE", "關閉");
+define("L_WARN_2038", "這個PHP服務器的版本沒有支持2038年以後！(< 5.3.0 )");
+define("L_ERR_NOSET", "錯誤！日曆值，不能設置！");
+define("L_VERSION", "版本： %s (%s語言)");
+define("L_POWBY", "技術支援："); //or "Based on:", "Supported by"
+define("L_HERE", "這裡");
+define("L_UPDATE", "可用更新%s！");
+define("L_TRANAME", "clouds_music");
+define("L_TRABY", "中文翻譯作者<br />%s雲上的音樂 ");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "1");

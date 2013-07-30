@@ -26,7 +26,7 @@ define("L_DATE_BETWEEN", "Bitte wählen Sie ein Datum zwischen\\n%s und %s");
 define("L_WEEK_HDR", "KW"); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Stornieren");
 define("L_CLOSE", "Schließen");
-define("L_TRANAME", "Thomas Pschernig"); #3.70
+define("L_TRANAME", "Thomas Pschernig");
 
 // Set the first day of the week in your language
 define("FIRST_DAY", "1"); // 1 for Monday, 0 for Sunday

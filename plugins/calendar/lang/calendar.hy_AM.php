@@ -29,7 +29,7 @@ define("L_DATE_BETWEEN", "Խնդրում ենք ընտրել ամսաթիվ %s-�
 define("L_WEEK_HDR", "շ"); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Չեղարկել");
 define("L_CLOSE", "Մոտիկ");
-define("L_TRANAME", "Ptuchik"); #3.70
+define("L_TRANAME", "Ptuchik");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "1");

@@ -26,15 +26,15 @@ define("L_DATE_AFTER", "Одберете датум после %s");
 define("L_DATE_BETWEEN", "Одберете датум помеѓу\\n%s and %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Ресетирај");
-define("L_CLOSE", "Затвори"); #3.69
-define("L_WARN_2038", "php верзијата на серверот ја нема поддршката за 2038 година и наредните години! (<5.3.0)"); #3.69
-define("L_ERR_NOSET", "Грешка! Вредноста на календарот не може да биде поставена!"); #3.70
-define("L_VERSION", "Верзија: %s (%s јазици)"); #3.70
-define("L_POWBY", "Покренато од:"); //or "Базирано на:", "Поддржано од" #3.70
-define("L_HERE", "here"); #3.70
-define("L_UPDATE", "Достапни се<br />надоградби %s !"); #3.70
-define("L_TRANAME", "Миле Ѓоргиев"); #3.70
-define("L_TRABY", "Преведено од %s"); #3.70
+define("L_CLOSE", "Затвори");
+define("L_WARN_2038", "php верзијата на серверот ја нема поддршката за 2038 година и наредните години! (<5.3.0)");
+define("L_ERR_NOSET", "Грешка! Вредноста на календарот не може да биде поставена!");
+define("L_VERSION", "Верзија: %s (%s јазици)");
+define("L_POWBY", "Покренато од:"); //or "Базирано на:", "Поддржано од"
+define("L_HERE", "here");
+define("L_UPDATE", "Достапни се<br />надоградби %s !");
+define("L_TRANAME", "Миле Ѓоргиев");
+define("L_TRABY", "Преведено од %s");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "1");

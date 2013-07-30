@@ -4,7 +4,7 @@
 # Version: 3.70
 # Language: Dutch / Nederlands
 # Translator: Bert Moorlag <berbia@hotmail.com>
-# Last file update: 21.07.2013
+# Last file update: 29.07.2013
 
 // Class strings localization
 define("L_DAYC", "Dag");
@@ -25,15 +25,16 @@ define("L_DATE_AFTER", "Kies een datum na %s");
 define("L_DATE_BETWEEN", "Kies een datum tussen\\n%s en %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Uitzetten "); //Zet uit
-define("L_CLOSE", "Sluiten"); #3.69
-define("L_WARN_2038", "Deze php server versie geeft geen ondersteuning vanaf het jaar 2038! (<5.3.0)"); #3.69
-define("L_ERR_NOSET", "Fout! De kalender kan niet worden ingesteld"); #3.70
-define("L_VERSION", "Versie: %s (%s talen)"); #3.70
-define("L_POWBY", "Gemaakt door:"); #3.70
-define("L_HERE", "hier"); #3.70
-define("L_UPDATE", "Update beschikbaar %s !"); #3.70
-define("L_TRANAME", "Bert Moorlag"); #3.70
-define("L_TRABY", "Vertaling door %s"); #3.70
+define("L_CLOSE", "Sluiten");
+define("L_WARN_2038", "Deze php server versie geeft geen ondersteuning vanaf het jaar 2038! (<5.3.0)");
+define("L_ERR_NOSET", "Fout! De kalender kan niet worden ingesteld");
+define("L_VERSION", "Versie: %s (%s talen)");
+define("L_POWBY", "Gemaakt door:");
+define("L_HERE", "hier");
+define("L_UPDATE", "Update beschikbaar %s !");
+define("L_TRANAME", "Bert Moorlag");
+define("L_TRABY", "Vertaling door %s");
+define("L_DONATE", "Wilt u doneren?");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

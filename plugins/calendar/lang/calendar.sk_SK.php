@@ -26,7 +26,7 @@ define("L_DATE_BETWEEN", "Vyberte dátum medzi\\n%s a %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Zrušiť");
 define("L_CLOSE", "Zavrieť");
-define("L_TRANAME", "Trolo"); #3.70
+define("L_TRANAME", "Trolo");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
