@@ -5,7 +5,7 @@
 # Version: 3.70
 # Language: Norwegian (Bokmål) / norsk, bokmål
 # Translator: Stian Hvatum <post@dream-web.no>
-# Last file update: 25.07.2013
+# Last file update: 30.07.2013
 
 // Class strings localization
 define("L_DAYC", "Dag");
@@ -35,6 +35,7 @@ define("L_HERE", "her");
 define("L_UPDATE", "Oppdatering tilgjengelig %s !");
 define("L_TRANAME", "Stian Hvatum");
 define("L_TRABY", "Oversatt av %s");
+define("L_DONATE", "Ønsker du å donere?");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

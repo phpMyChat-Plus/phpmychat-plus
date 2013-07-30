@@ -4,7 +4,7 @@
 # Version: 3.70
 # Language: Hebrew / עברית
 # Translators: Avi Morlevi <avimorlevi@gmail.com>
-# Last file update: 29.07.2013
+# Last file update: 30.07.2013
 
 define("RTL", 1);
 
@@ -33,9 +33,9 @@ define("L_ERR_NOSET", "!שגיאה! לא ניתן לעדכן ערך זה בלו�
 define("L_VERSION", "גרסה: %s (%s שפות)");
 define("L_POWBY", "זכויות יוצרים:"); //or "Based on:", "Supported by"
 define("L_HERE", "כאן");
-define("L_UPDATE", "עדכון זמין %s !");
-define("L_TRANAME", "תורגם על יד<br /><bdo dir=\"ltr\">(Avi Morlevi)</bdo>");
-define("L_TRABY", "י אבי מורלוי %s");
+define("L_UPDATE", "אבי מורלוי %s !");
+define("L_TRANAME", "אבי מורלוי<br /><bdo dir=\"ltr\">(Avi Morlevi)</bdo>");
+define("L_TRABY", "תורגם על ידי %s");
 define("L_DONATE", "אהבת? לחץ כאן לתרומה.");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)

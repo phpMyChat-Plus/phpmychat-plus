@@ -5,7 +5,7 @@
 # Version: 3.70
 # Language: Macedonian / македонски
 # Translator: Миле Ѓоргиев <milegorgiev@yahoo.com>
-# Last file update: 23.07.2013
+# Last file update: 30.07.2013
 
 // Class strings localization
 define("L_DAY", "Ден");
@@ -31,10 +31,11 @@ define("L_WARN_2038", "php верзијата на серверот ја нем�
 define("L_ERR_NOSET", "Грешка! Вредноста на календарот не може да биде поставена!");
 define("L_VERSION", "Верзија: %s (%s јазици)");
 define("L_POWBY", "Покренато од:"); //or "Базирано на:", "Поддржано од"
-define("L_HERE", "here");
+define("L_HERE", "овде");
 define("L_UPDATE", "Достапни се<br />надоградби %s !");
 define("L_TRANAME", "Миле Ѓоргиев");
 define("L_TRABY", "Преведено од %s");
+define("L_DONATE", "Дали сакате да донирате?");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "1");
