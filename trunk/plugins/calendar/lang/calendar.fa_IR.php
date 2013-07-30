@@ -28,9 +28,9 @@ define("L_DATE_AFTER", "لطفا یک تاریخ بعد از %s انتخاب ک�
 define("L_DATE_BETWEEN", "لطفا یک تاریخ بین\\n%s و %s انتخاب کنید");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "پاک کردن");
-define("L_CLOSE", "نزدیک"); #3.69
-define("L_WARN_2038", "نسخه پی اچ پی پشتیبانی می کند برای سال 2038 و بعد از آن!"); #3.69
-define("L_TRANAME", "Sma Mohseni"); #3.70
+define("L_CLOSE", "نزدیک");
+define("L_WARN_2038", "نسخه پی اچ پی پشتیبانی می کند برای سال 2038 و بعد از آن!");
+define("L_TRANAME", "Sma Mohseni");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "6");

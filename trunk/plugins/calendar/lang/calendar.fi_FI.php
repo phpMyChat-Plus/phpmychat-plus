@@ -1,10 +1,10 @@
 <?php
 # fi_FI translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.69
+# Version: 3.70
 # Language: Finnish / suomi // ex: Romanian / Română
 # Translator: Ilja Mäki <iksa@netti.fi>
-# Last file update: 19.05.2013
+# Last file update: 29.07.2013
 
 // Class strings localization
 define("L_DAYC", "Päivä");
@@ -26,8 +26,14 @@ define("L_DATE_BETWEEN", "Valitse päivämäärä väliltä\\n%s ja %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Nollaa");
 define("L_CLOSE", "Sulje");
-define("L_WARN_2038", "PHP-versiosi ei tue vuotta 2038 ja myöhempiä vuosia!");
-define("L_TRANAME", "Ilja Mäki"); #3.70
+define("L_WARN_2038", "Tässä php-palvelimen versiossa ei ole tukea vuodelle 2038 ja siitä eteenpäin! (<5.3.0)");
+define("L_ERR_NOSET", "Virhe! Kalenteriarvoa ei voi asettaa!");
+define("L_VERSION", "Versio: %s (%s kieltä)");
+define("L_POWBY", "Tuki:"); //or "Based on:", "Supported by"
+define("L_HERE", "tässä");
+define("L_UPDATE", "Päivitys saatavilla %s !");
+define("L_TRANAME", "Ilja Mäki");
+define("L_TRABY", "Suomentanut %s");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

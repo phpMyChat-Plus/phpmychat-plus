@@ -5,7 +5,7 @@
 # Version: 3.70
 # Language: Hungarian / magyar
 # Translator: Jácint Zsuzsanna <jacint.zsuzsanna@yahoo.com>
-# Last file update: 22.07.2013
+# Last file update: 29.07.2013
 
 // Class strings localization
 define("L_DAYC", "Nap");
@@ -28,13 +28,14 @@ define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing t
 define("L_UNSET", "Mégse");
 define("L_CLOSE", "Bezár");
 define("L_WARN_2038", "A php szerver ezen verziója nem támogatja a 2038-as illetve az ezt követő éveket! (<5.3.0)");
-define("L_ERR_NOSET", "Hiba! A naptári értéket nem lehet beállítani!"); #3.70
-define("L_VERSION", "Verzió: %s (%s nyelvek)"); #3.70
-define("L_POWBY", "Üzemelteti:"); //or "Based on:", "Supported by" #3.70
-define("L_HERE", "itt"); #3.70
-define("L_UPDATE", "Frissítés %s elérhető."); #3.70
-define("L_TRANAME", "Jácint Zsuzsanna"); #3.70
-define("L_TRABY", "Fordította %s"); #3.70
+define("L_ERR_NOSET", "Hiba! A naptári értéket nem lehet beállítani!");
+define("L_VERSION", "Verzió: %s (%s nyelvek)");
+define("L_POWBY", "Üzemelteti:"); //or "Based on:", "Supported by"
+define("L_HERE", "itt");
+define("L_UPDATE", "Frissítés %s elérhető.");
+define("L_TRANAME", "Jácint Zsuzsanna");
+define("L_TRABY", "Fordította %s");
+define("L_DONATE", "Szeretnél adományozni?");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

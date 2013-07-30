@@ -5,7 +5,7 @@
 # Version: 3.70
 # Language: Norwegian (Nynorsk) / norsk, nynorsk
 # Translator: Abraham Straume Bah <abraham.bah@gmail.com>
-# Last file update: 25.07.2013
+# Last file update: 29.07.2013
 
 // Class strings localization
 define("L_DAYC", "Dag");
@@ -26,13 +26,15 @@ define("L_DATE_AFTER", "Vel ein dato etter %s");
 define("L_DATE_BETWEEN", "Vel ein dato mellom\\n%s og %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Nullstill");
-define("L_CLOSE", "Lukka"); #3.69
-define("L_WARN_2038", "Php versjonen på denne servaren støttar ikkje år 2038 eller seinare! (<5.3.0)"); #3.69
-define("L_ERR_NOSET", "Feil! Kalenderverdien kan ikkje setjast!"); #3.70
-define("L_VERSION", "Versjon: %s (%s språk)"); #3.70
-define("L_POWBY", "Dreven av:"); //or "Based on:", "Supported by" #3.70
-define("L_HERE", "her"); #3.70
-define("L_UPDATE", "Oppdatering tilgjengeleg %s !"); #3.70
+define("L_CLOSE", "Lukka");
+define("L_WARN_2038", "Php versjonen på denne servaren støttar ikkje år 2038 eller seinare! (<5.3.0)");
+define("L_ERR_NOSET", "Feil! Kalenderverdien kan ikkje setjast!");
+define("L_VERSION", "Versjon: %s (%s språk)");
+define("L_POWBY", "Dreven av:"); //or "Based on:", "Supported by"
+define("L_HERE", "her");
+define("L_UPDATE", "Oppdatering tilgjengeleg %s !");
+define("L_DONATE", "Ynskjer du å donera?");
+# Keep translated by private!
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

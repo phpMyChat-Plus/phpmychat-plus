@@ -52,14 +52,14 @@ if(!defined("L_DATE_BETWEEN")) define("L_DATE_BETWEEN", "Please choose a date be
 if(!defined("L_WEEK_HDR")) define("L_WEEK_HDR", "");
 if(!defined("L_UNSET")) define("L_UNSET", "Unset");
 if(!defined("L_CLOSE")) define("L_CLOSE", "Close");
-if(!defined("L_WARN_2038")) define("L_WARN_2038", "This php server’s version does not have support for year 2038 and later! (<5.3.0)"); #3.69
-if(!defined("L_ERR_NOSET")) define("L_ERR_NOSET", "Error! The calendar value cannot be set!"); #3.70
-if(!defined("L_VERSION")) define("L_VERSION", "Version: %s (%s languages)"); #3.70
-if(!defined("L_POWBY")) define("L_POWBY", "Powered by:"); //or "Based on:", "Supported by" #3.70
-if(!defined("L_HERE")) define("L_HERE", "here"); #3.70
-if(!defined("L_UPDATE")) define("L_UPDATE", "Update available %s !"); #3.70
-if(!defined("L_TRABY") && defined("L_TRANAME")) define("L_TRABY", "Translated by %s"); #3.70
-if(!defined("L_DONATE")) define("L_DONATE", "<bdo dir=\"ltr\">Do you wish to donate?</bdo>"); #3.70
+if(!defined("L_WARN_2038")) define("L_WARN_2038", "This php server’s version does not have support for year 2038 and later! (<5.3.0)");
+if(!defined("L_ERR_NOSET")) define("L_ERR_NOSET", "Error! The calendar value cannot be set!");
+if(!defined("L_VERSION")) define("L_VERSION", "Version: %s (%s languages)");
+if(!defined("L_POWBY")) define("L_POWBY", "Powered by:"); //or "Based on:", "Supported by"
+if(!defined("L_HERE")) define("L_HERE", "here");
+if(!defined("L_UPDATE")) define("L_UPDATE", "Update available %s !");
+if(!defined("L_TRABY") && defined("L_TRANAME")) define("L_TRABY", "Translated by %s");
+if(!defined("L_DONATE")) define("L_DONATE", "<bdo dir=\"ltr\">Do you wish to donate?</bdo>");
 
 if(!defined("FIRST_DAY")) define("FIRST_DAY", "0"); // 0 for Sunday
 

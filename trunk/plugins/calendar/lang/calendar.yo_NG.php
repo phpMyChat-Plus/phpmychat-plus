@@ -25,8 +25,16 @@ define("L_DATE_BETWEEN", "Please choose a date between\\n%s and %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Unset");
 define("L_CLOSE", "Close");
-define("L_TRANAME", "Google"); //Keep a short name #3.70
-define("L_TRABY", "Translated by %s"); #3.70
+define("L_WARN_2038", "This php server’s version does not have support for year 2038 and later! (<5.3.0)");
+define("L_ERR_NOSET", "Error! The calendar value cannot be set!");
+define("L_VERSION", "Version: %s (%s languages)");
+define("L_POWBY", "Powered by:"); //or "Based on:", "Supported by"
+define("L_HERE", "here");
+define("L_UPDATE", "Update available %s !");
+define("L_TRANAME", "ReplaceWith YourName"); //Keep a short name
+define("L_TRANAME", "Google"); //Keep a short name
+define("L_TRABY", "Translated by %s");
+define("L_DONATE", "Do you wish to donate?");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

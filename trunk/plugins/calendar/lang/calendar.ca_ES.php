@@ -5,7 +5,7 @@
 # Version: 3.70
 # Language: Catalan / català (in your lang) // ex: Romanian / Română
 # Translator: Jordi Babot <jordibabot@gmail.com>
-# Last file update: 22.07.2013
+# Last file update: 29.07.2013
 
 // Class strings localization
 define("L_DAYC", "Dia");
@@ -28,13 +28,14 @@ define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing t
 define("L_UNSET", "Cap");
 define("L_CLOSE", "Tancar");
 define("L_WARN_2038", "Aquesta versió del PHP al servidor no contempla anys superiors al 2038! (<5.3.0)");
-define("L_ERR_NOSET", "Error! El valor del calendari no s'ha pogut desar!"); #3.70
-define("L_VERSION", "Versió: %s (%s idiomes)"); #3.70
-define("L_POWBY", "Impulsat per:"); //or "Based on:", "Supported by" #3.70
-define("L_HERE", "aquí"); #3.70
-define("L_UPDATE", "Actualització disponible %s !"); #3.70
-define("L_TRANAME", "Jordi Babot Casacuberta"); #3.70
-define("L_TRABY", "Traduït per<br />%s"); #3.70
+define("L_ERR_NOSET", "Error! El valor del calendari no s'ha pogut desar!");
+define("L_VERSION", "Versió: %s (%s idiomes)");
+define("L_POWBY", "Impulsat per:"); //or "Based on:", "Supported by"
+define("L_HERE", "aquí");
+define("L_UPDATE", "Actualització disponible %s !");
+define("L_TRANAME", "Jordi Babot Casacuberta");
+define("L_TRABY", "Traduït per<br />%s");
+define("L_DONATE", "Vols col·laborar amb el projecte?");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

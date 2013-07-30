@@ -26,15 +26,15 @@ define("L_DATE_BETWEEN", "Selectaţi o dată între\\n%s şi %s!");
 define("L_WEEK_HDR", "S"); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Anulare");
 define("L_CLOSE", "Închide");
-define("L_WARN_2038", "Versiunea serverului php nu suportă ani mai mari decât 2038! (<5.3.0)"); #3.69
-define("L_ERR_NOSET", "Eroare! Valoarea calendarului nu poate fi setată!"); #3.70
-define("L_VERSION", "Versiunea: %s (%s de limbi)"); #3.70
-define("L_POWBY", "Bazat pe:"); #3.70
-define("L_HERE", "aici"); #3.70
-define("L_UPDATE", "Update disponibil %s !"); #3.70
-define("L_TRANAME", "Ciprian"); #3.70
-define("L_TRABY", "Tradus de %s"); #3.70
-define("L_DONATE", "Vreţi să donaţi?"); #3.70
+define("L_WARN_2038", "Versiunea serverului php nu suportă ani mai mari decât 2038! (<5.3.0)");
+define("L_ERR_NOSET", "Eroare! Valoarea calendarului nu poate fi setată!");
+define("L_VERSION", "Versiunea: %s (%s de limbi)");
+define("L_POWBY", "Bazat pe:");
+define("L_HERE", "aici");
+define("L_UPDATE", "Update disponibil %s !");
+define("L_TRANAME", "Ciprian");
+define("L_TRABY", "Tradus de %s");
+define("L_DONATE", "Vreţi să donaţi?");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

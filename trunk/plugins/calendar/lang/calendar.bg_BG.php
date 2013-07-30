@@ -4,7 +4,7 @@
 # Version: 3.70
 # Language: Bulgarian / български
 # Translator: Peter Petrov <peter.m.petrov@gmail.com>
-# Last file update: 21.07.2013
+# Last file update: 29.07.2013
 
 // Class strings localization
 define("L_DAYC", "Ден");
@@ -25,15 +25,16 @@ define("L_DATE_AFTER", "Моля, изберете дата след %s");
 define("L_DATE_BETWEEN", "Моля, изберете дата между\\n%s и %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Нулирай");
-define("L_CLOSE", "Затвори"); #3.69
-define("L_WARN_2038", "Версията на този php сървър не поддържа годините от 2038 нататък! (<5.3.0)"); #3.69
-define("L_ERR_NOSET", "Грешка! Показанието на календара не може да бъде зададено!"); #3.70
-define("L_VERSION", "Версия: %s (%s езика)"); #3.70
-define("L_POWBY", "Базирано на:"); //or "Based on:", "Supported by" #3.70
-define("L_HERE", "тук"); #3.70
-define("L_UPDATE", "Наличен ъпдейт %s !"); #3.70
-define("L_TRANAME", "Петър Петров"); //Keep a short name #3.70
-define("L_TRABY", "Превод: %s"); #3.70
+define("L_CLOSE", "Затвори");
+define("L_WARN_2038", "Версията на този php сървър не поддържа годините от 2038 нататък! (<5.3.0)");
+define("L_ERR_NOSET", "Грешка! Показанието на календара не може да бъде зададено!");
+define("L_VERSION", "Версия: %s (%s езика)");
+define("L_POWBY", "Базирано на:"); //or "Based on:", "Supported by"
+define("L_HERE", "тук");
+define("L_UPDATE", "Наличен ъпдейт %s !");
+define("L_TRANAME", "Петър Петров"); //Keep a short name
+define("L_TRABY", "Превод: %s");
+define("L_DONATE", "Желаете ли да дарите?");
 
 // Set the first day of the week in your language
 define("FIRST_DAY", "1"); // 1 for Monday, 0 for Sunday
