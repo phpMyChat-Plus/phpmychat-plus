@@ -1,10 +1,10 @@
 <?php
 # sv_SE translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.69
+# Version: 3.70
 # Language: Swedish / svenska
 # Translator: Fimpen Högström <fimpen@relative-work.se>
-# Last file update: 19.05.2013
+# Last file update: 31.07.2013
 
 // Class strings localization
 define("L_DAYC", "Dag");
@@ -26,7 +26,15 @@ define("L_DATE_BETWEEN", "Välj ett datum mellan\\n%s och %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Avbryt");
 define("L_CLOSE", "Stäng");
+define("L_WARN_2038", "Denna version av php server stödjer inte datum efter år 2038! (<5.3.0)");
+define("L_ERR_NOSET", "FEL! Kalendervärdet kan inte användas!");
+define("L_VERSION", "Version: %s (%s språk)");
+define("L_POWBY", "Powered by:"); //or "Based on:", "Supported by"
+define("L_HERE", "här");
+define("L_UPDATE", "Uppdatering tillgänglig %s !");
 define("L_TRANAME", "Fimpen Högström");
+define("L_TRABY", "Translated by %s");
+define("L_DONATE", "Do you wish to donate?");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
