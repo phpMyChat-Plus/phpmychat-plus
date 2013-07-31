@@ -31,7 +31,6 @@ define("L_VERSION", "Version: %s (%s languages)");
 define("L_POWBY", "Powered by:"); //or "Based on:", "Supported by"
 define("L_HERE", "here");
 define("L_UPDATE", "Update available %s !");
-define("L_TRANAME", "ReplaceWith YourName"); //Keep a short name
 define("L_TRANAME", "Google"); //Keep a short name
 define("L_TRABY", "Translated by %s");
 define("L_DONATE", "Do you wish to donate?");

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 # en_US - this file includes the specific strings for both en_GB/en_US
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 3.70
@@ -118,6 +118,93 @@ if(!defined("DATE_FORMAT")) define("DATE_FORMAT", str_replace("%","",str_replace
 if(!defined("L_DIGIT")) define("L_DIGIT", 0);
 if(!defined("L_UTF_DIGIT")) define("L_UTF_DIGIT", 0);
 if(!defined("L_ARABIC")) define("L_ARABIC", "Arabic Digits");
+
+// Localization patches
+$pptit = "&#10;Thank you for your support!";
+switch ($hl)
+{
+	case "bg_BG":
+		$ppalt = "PayPal - Сигурният и лесен начин да платите онлайн!";
+		break;
+	case "ca_ES":
+		$ppalt = "PayPal – La millor manera i la més fàcil de pagar en línia!";
+		break;
+	case "cs_CZ":
+		$ppalt = "PayPal - bezpečnější, jednodušší způsob, jak zaplatit on-line!";
+		break;
+	case "da_DK":
+		$ppalt = "PayPal - Den sikreste og nemmeste måde at overføre penge online!";
+		break;
+	case "de_DE":
+		$ppalt = "Jetzt einfach, schnell und sicher online bezahlen - mit PayPal!";
+		break;
+	case "el_GR":
+		$ppalt = "PayPal – Ο ασφαλέστερος και ευκολότερος τρόπος να πληρώσεις online!";
+		break;
+	case "es_AR":
+		$ppalt = "PayPal - La forma segura y fácil de pagar en línea!";
+		break;
+	case "es_ES":
+		$ppalt = "PayPal. ¡La forma rápida y segura de pagar en Internet!";
+		break;
+	case "fr_FR":
+		$ppalt = "PayPal - Le moyen le plus sûr et facile de payer en ligne!";
+		break;
+	case "he_IL":
+		$ppalt = "פייפאל - הדרך הבטוחה, הקלה לשלם באינטרנט.";
+		break;
+	case "hu_HU":
+		$ppalt = "PayPal - Biztonságosabb és egyszerűbb módja az internetes fizetésnek!";
+		break;
+	case "id_ID":
+		$ppalt = "Paypal - Lebih aman dan mudah untuk pembayaran online!";
+		break;
+	case "it_IT":
+		$ppalt = "PayPal - La più sicura, facile strada per pagare online!";
+		break;
+	case "ja_JP":
+		$ppalt = "PayPal－オンラインで安全、簡単にお支払い。";
+		break;
+	case "ne_NP":
+		$ppalt = "Paypal - ईन्टनेटबाट पैसा तिर्ने सजिलो र सुरक्षित माध्यम!";
+		break;
+	case "nl_NL":
+		$ppalt = "PayPal, de veilige en complete manier van online betalen!";
+		break;
+	case "pt_BR":
+		$ppalt = "PayPal - A maneira mais fácil e segura de efetuar pagamentos on-line!";
+		break;
+	case "ro_RO":
+		$ppalt = "PayPal - Calea cea mai sigură şi facilă de a efectua plăţi online!";
+		break;
+	case "ru_RU":
+		$ppalt = "PayPal – безопасный и простой способ оплаты в Интернете!";
+		break;
+	case "sr_CS":
+		$ppalt = "PayPal - Bezbedniji i lakši način za on-line plaćanje!";
+		break;
+	case "sv_SE":
+		$ppalt = "PayPal - Det säkra, enkla sättet att betala online!";
+		break;
+	case "tr_TR":
+		$ppalt = "PayPal - çevrimiçi ödeme yapmanın en kolay ve güvenli yolu!";
+		break;
+	case "uk_UA":
+		$ppalt = "PayPal - безпечний і простий спосіб для оплати в інтернеті!";
+		break;
+	case "vi_VN":
+		$ppalt = "PayPal - Cách an toàn hơn, dễ dàng hơn để thanh toán trực tuyến!";
+		break;
+	case "zh_CN":
+		$ppalt = "PayPal － 最安全便捷的在线支付方式！";
+		break;
+	case "zh_TW":
+		$ppalt = "PayPal － 更安全、更簡單的網上付款方式！";
+		break;
+	default:
+		$ppalt = "PayPal - The safer, easier way to pay online!";
+		break;
+};
 ?>
 <SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
 <!--

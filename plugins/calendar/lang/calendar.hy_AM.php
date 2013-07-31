@@ -2,10 +2,10 @@
 # hy_AM translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Localized version of PHP-Calendar, DatePicker Calendar class: http://ciprianmp.com/scripts/calendar/
-# Version: 3.69
+# Version: 3.70
 # Language: Armenian / Հայերեն
 # Translator: Ptuchik <avo@pisem.net>
-# Last file update: 19.05.2013
+# Last file update: 30.07.2013
 
 # define("RTL", 1); // uncomment only for right-to-left text (Arabic, Hebrew)
 
@@ -28,8 +28,16 @@ define("L_DATE_AFTER", "Խնդրում ենք ընտրել ամսաթիվ %s-ի�
 define("L_DATE_BETWEEN", "Խնդրում ենք ընտրել ամսաթիվ %s-ից %s-ն ընկած ժամանակահատվածում");
 define("L_WEEK_HDR", "շ"); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Չեղարկել");
-define("L_CLOSE", "Մոտիկ");
-define("L_TRANAME", "Ptuchik");
+define("L_CLOSE", "Փակել");
+define("L_WARN_2038", "Ձեր PHP սերվերի տարբերակը չի ապահովվում 2038 թվականից հետո եկող ամսաթվերը! (<5.3.0)");
+define("L_ERR_NOSET", "Սխալ! Օրացույցի արժեքը չի կարող նշանակվել!");
+define("L_VERSION", "Տարբերակ: %s (%s լեզու)");
+define("L_POWBY", "Ստեղծված է:"); //or "Based on:", "Supported by"
+define("L_HERE", "այստեղ");
+define("L_UPDATE", "Կա թարմացում %s !");
+define("L_TRANAME", "Ավիկ Աղաջանյանի");
+define("L_TRABY", "Թարգմանված է<br />%s կողմից<br /><b>(Ptuchik)</b>");
+define("L_DONATE", "Ցանկանո՞ւմ եք արդյոք<br />նվիրատվություն կատարել:");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "1");

@@ -2,9 +2,9 @@
 # fi_FI translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 3.70
-# Language: Finnish / suomi // ex: Romanian / Română
+# Language: Finnish / suomi // ex: Romanian / română
 # Translator: Ilja Mäki <iksa@netti.fi>
-# Last file update: 29.07.2013
+# Last file update: 31.07.2013
 
 // Class strings localization
 define("L_DAYC", "Päivä");
@@ -29,11 +29,12 @@ define("L_CLOSE", "Sulje");
 define("L_WARN_2038", "Tässä php-palvelimen versiossa ei ole tukea vuodelle 2038 ja siitä eteenpäin! (<5.3.0)");
 define("L_ERR_NOSET", "Virhe! Kalenteriarvoa ei voi asettaa!");
 define("L_VERSION", "Versio: %s (%s kieltä)");
-define("L_POWBY", "Tuki:"); //or "Based on:", "Supported by"
+define("L_POWBY", "Perustuu:"); //or "Based on:", "Supported by"
 define("L_HERE", "tässä");
 define("L_UPDATE", "Päivitys saatavilla %s !");
 define("L_TRANAME", "Ilja Mäki");
 define("L_TRABY", "Suomentanut %s");
+define("L_DONATE", "Haluatko lahjoittaa?");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

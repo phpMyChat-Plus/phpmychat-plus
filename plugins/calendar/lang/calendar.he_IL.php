@@ -33,7 +33,7 @@ define("L_ERR_NOSET", "!שגיאה! לא ניתן לעדכן ערך זה בלו�
 define("L_VERSION", "גרסה: %s (%s שפות)");
 define("L_POWBY", "זכויות יוצרים:"); //or "Based on:", "Supported by"
 define("L_HERE", "כאן");
-define("L_UPDATE", "אבי מורלוי %s !");
+define("L_UPDATE", "עדכון אפשרי %s !");
 define("L_TRANAME", "אבי מורלוי<br /><bdo dir=\"ltr\">(Avi Morlevi)</bdo>");
 define("L_TRABY", "תורגם על ידי %s");
 define("L_DONATE", "אהבת? לחץ כאן לתרומה.");
