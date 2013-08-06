@@ -656,6 +656,7 @@ else
 				$DbLink->query("SELECT username,birthday,show_age FROM ".C_REG_TBL." WHERE birthday != '' AND birthday != '0000-00-00' AND show_bday = '1' ORDER BY birthday ASC");
 				if ($DbLink->num_rows() != 0)
 				{
+					$mday = array();
 					include_once('plugins/birthday/age.class.php');
 					$my_dob = new DateOfBirth();
 					while(list($birthname, $birthday, $show_age) = $DbLink->next_record())
@@ -669,10 +670,16 @@ else
 							$my_dob->calculate_age();
 							$age = $my_dob->age;
 						}
-						$myCalendar->setToolTips(array($birthday), ($show_age && $age) ? $birthname." (".$age.")" : $birthname, 'year');
+						if(!in_array(substr($birthday, -5), $mday))
+						{
+							$myCalendar->setToolTips(array($birthday), L_DOB_TIT_1.":", 'year');
+							array_push($mday, substr($birthday, -5));
+						}
+						$myCalendar->setToolTips(array($birthday), ($show_age && $age) ? "- ".$birthname." (".$age.")" : "- ".$birthname, 'year');
 						unset($age, $my_dobtime);
 					}
-				$DbLink->clean_results();
+					$mday = array();
+					$DbLink->clean_results();
 				}
 			  $myCalendar->writeScript();
 $DbLink->close();
