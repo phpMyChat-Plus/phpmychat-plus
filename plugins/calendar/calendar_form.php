@@ -429,7 +429,6 @@ var today_year = "<?php echo($cdate->getDate('Y')); ?>";
 var obj_name = "<?php echo($objname); ?>";
 var current_month = "<?php echo($m);?>";
 var current_year = "<?php echo($y);?>";
-var current_day = "<?php echo($d);?>";
 //-->
 </script>
 <script language="javascript" src="calendar_form.js"></script>
@@ -475,24 +474,26 @@ function submitNow(dvalue, mvalue, yvalue){
 	</script>
 <?php } ?>
     <div id="calendar-header" align="center">
-        <div style="float: <?php echo($rtl ? "right" : "left"); ?>;" id="info"><img src="images/<?php echo($new_version ? "version_info.gif" : "about.png"); ?>" width="9" height="9" border="0" /><div id="about" dir="<?php echo(($rtl && L_HERE != "here") ? "rtl" : "ltr"); ?>" style="<?php echo($rtl ? "right: 0px;".(L_HERE != "here" ? " direction: rtl; unicode-bidi: embed;" : "") : "left: 0px;"); ?>"><?php echo(L_ABOUT_LOC); ?></div>
+        <div style="float: <?php echo($rtl ? "right" : "left"); ?>;" id="info">
+		<img src="images/<?php echo($new_version ? "version_info.gif" : "about.png"); ?>" width="9" height="9" border="0" />
+		<div id="about" dir="<?php echo(($rtl && L_HERE != "here") ? "rtl" : "ltr"); ?>" style="<?php echo($rtl ? "right: 0px;".(L_HERE != "here" ? " direction: rtl; unicode-bidi: embed;" : "") : "left: 0px;"); ?>"><?php echo(L_ABOUT_LOC); ?></div>
         	<script language="javascript">
 			<!--
 			var timeoutID = new Array();
-		
+
 			var obj = document.getElementById("info");
 			obj.onmouseover = function(){ displayAbout(); }
 			obj.onmouseout = function(){ hideAbout(); }
-			
+
 			var obj = document.getElementById("about");
 			obj.onmouseover = function(){ displayAbout(); }
 			obj.onmouseout = function(){ hideAbout(); }
-			
+
 			function displayAbout(){
 				var obj = document.getElementById("about");
 
 				cancelTimer();
-				
+
 				//obj.style.display = "block";
 				obj.style.height = "auto";
 				obj.style.border = "1px solid #191970";
@@ -500,7 +501,7 @@ function submitNow(dvalue, mvalue, yvalue){
 			}
 			function hideAbout(){
 				var obj = document.getElementById("about");
-				
+
 				this.timeoutID[this.timeoutID.length] = window.setTimeout(function(){
 					obj.style.border = "none";
 					//obj.style.display = "none";
@@ -509,7 +510,6 @@ function submitNow(dvalue, mvalue, yvalue){
 					}
 					, 500);
 			}
-			
 			function cancelTimer(){
 				for(i=0; i<this.timeoutID.length; i++){
 					var timers = this.timeoutID[i];
