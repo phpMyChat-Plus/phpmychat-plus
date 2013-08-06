@@ -127,7 +127,7 @@ function submitCalendar(){
 }
 
 function getObject(item){
-	if( window.mmIsOpera ) return(document.getElementById(item));
+	if(window.mmIsOpera) return(document.getElementById(item));
 	if(document.all) return(document.all[item]);
 	if(document.getElementById) return(document.getElementById(item));
 	if(document.layers) return(document.layers[item]);
@@ -169,7 +169,7 @@ function processTooltips(){
 	for (var key in ttd[2]) {
 		if (ttd[2].hasOwnProperty(key)) {
 			this_date = new Date(ttd[2][key]*1000);
-			this_date_str = current_year+''+pad(this_date.getMonth()+1, 2, "0")+''+pad(this_date.getDate(), 2, "0");
+			this_date_str = pad(current_year, 4, "0")+''+pad(this_date.getMonth()+1, 2, "0")+''+pad(this_date.getDate(), 2, "0");
 			this_tooltip = typeof(ttt[2][key]) != "undefined" ? ttt[2][key] : "";
 
 			if((this_tooltip.substring(0,1) == '"' && this_tooltip.substring(this_tooltip.length-1) == '"') || (this_tooltip.substring(0,1) == "'" && this_tooltip.substring(this_tooltip.length-1) == "'")){
@@ -190,10 +190,12 @@ function processTooltips(){
 							alt_txt += String.fromCharCode(10)+this_tooltip;
 							spn_obj[0].setAttribute("alt", alt_txt);
 							spn_obj[0].setAttribute("title", alt_txt);
+							spn_obj[0].onclick = function() {showTitle(this);};
 						}else{
 							var info_obj = document.createElement("span");
 							info_obj.setAttribute("alt", this_tooltip);
 							info_obj.setAttribute("title", this_tooltip);
+							info_obj.onclick = function() {showTitle(this);};
 							info_obj.className = "calendartooltip";
 
 							obj_list[0].insertBefore(info_obj, null);
@@ -208,7 +210,7 @@ function processTooltips(){
 	for (var key in ttd[1]) {
 		if (ttd[1].hasOwnProperty(key)) {
 			this_date = new Date(ttd[1][key]*1000);
-			this_date_str = current_year+''+current_month+''+pad(this_date.getDate(), 2, "0");
+			this_date_str = pad(current_year, 4, "0")+''+pad(current_month, 2, "0")+''+pad(this_date.getDate(), 2, "0");
 			this_tooltip = typeof(ttt[1][key]) != "undefined" ? ttt[1][key] : "";
 
 			if((this_tooltip.substring(0,1) == '"' && this_tooltip.substring(this_tooltip.length-1) == '"') || (this_tooltip.substring(0,1) == "'" && this_tooltip.substring(this_tooltip.length-1) == "'")){
@@ -229,10 +231,12 @@ function processTooltips(){
 							alt_txt += String.fromCharCode(10)+this_tooltip;
 							spn_obj[0].setAttribute("alt", alt_txt);
 							spn_obj[0].setAttribute("title", alt_txt);
+							spn_obj[0].onclick = function() {showTitle(this);};
 						}else{
 							var info_obj = document.createElement("span");
 							info_obj.setAttribute("alt", this_tooltip);
 							info_obj.setAttribute("title", this_tooltip);
+							info_obj.onclick = function() {showTitle(this);};
 							info_obj.className = "calendartooltip";
 
 							obj_list[0].insertBefore(info_obj, null);
@@ -247,7 +251,7 @@ function processTooltips(){
 	for (var key in ttd[0]) {
 		if (ttd[0].hasOwnProperty(key)) {
 			this_date = new Date(ttd[0][key]*1000);
-			this_date_str = this_date.getFullYear()+''+pad(this_date.getMonth()+1, 2, "0")+''+pad(this_date.getDate(), 2, "0");
+			this_date_str = pad(this_date.getFullYear(), 4, "0")+''+pad(this_date.getMonth()+1, 2, "0")+''+pad(this_date.getDate(), 2, "0");
 			this_tooltip = typeof(ttt[0][key]) != "undefined" ? ttt[0][key] : "";
 
 			if((this_tooltip.substring(0,1) == '"' && this_tooltip.substring(this_tooltip.length-1) == '"') || (this_tooltip.substring(0,1) == "'" && this_tooltip.substring(this_tooltip.length-1) == "'")){
@@ -268,10 +272,12 @@ function processTooltips(){
 							alt_txt += String.fromCharCode(10)+this_tooltip;
 							spn_obj[0].setAttribute("alt", alt_txt);
 							spn_obj[0].setAttribute("title", alt_txt);
+							spn_obj[0].onclick = function() {showTitle(this);};
 						}else{
 							var info_obj = document.createElement("span");
 							info_obj.setAttribute("alt", this_tooltip);
 							info_obj.setAttribute("title", this_tooltip);
+							info_obj.onclick = function() {showTitle(this);};
 							info_obj.className = "calendartooltip";
 
 							obj_list[0].insertBefore(info_obj, null);
@@ -307,6 +313,10 @@ function myJSONParse(d){
 	}else v = new Array();
 
 	return v;
+}
+
+function showTitle(obj){
+	alert(obj.getAttribute("title"));
 }
 
 window.onload = function(){
