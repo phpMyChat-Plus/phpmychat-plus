@@ -35,6 +35,7 @@ define("L_HERE", "여기");
 define("L_UPDATE", "업데이트 가능 %s !");
 define("L_TRANAME", "김종윤 (Jong-Youn Kim)");
 define("L_TRABY", "번역: %s");
+define("L_DONATE", "개발자를 위해 기부하기를 원하시나요?");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "0");

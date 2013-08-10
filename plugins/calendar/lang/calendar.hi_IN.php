@@ -2,10 +2,10 @@
 # hi_IN translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Localized version of PHP-Calendar, DatePicker Calendar class: http://ciprianmp.com/scripts/calendar/
-# Version: 3.69
+# Version: 3.70
 # Language: Hindi (Devanagari) / हिन्दी (in your lang)
 # Translator: Sanjay Sarita Ghoriwala 'SanSar' <ghoriwala@gmail.com>
-# Last file update: 19.05.2013
+# Last file update: 10.08.2013
 
 // Class strings localization
 define("L_DAYC", "दिन");
@@ -27,8 +27,15 @@ define("L_DATE_BETWEEN", "कृपया %s और %s\\nके बीच कि
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "साफ कर");
 define("L_CLOSE", "बंद करे");
-define("L_WARN_2038", "आपके PHP संस्करण में वर्ष 2038 और बाद के वर्षों का समर्थन नहीं है!");
-define("L_TRANAME", "SanSar");
+define("L_WARN_2038", "इस PHP सर्वर के संस्करण (<5.3.0) में वर्ष 2038 और बाद के वर्षों का समर्थन नहीं है ");
+define("L_ERR_NOSET", "त्रुटि! तिथिपत्र परिमाण तय नहीं हो सका");
+define("L_VERSION", "संस्करण: %s (%s भाषाएँ)");
+define("L_POWBY", "ऊर्जायुक्त:");
+define("L_HERE", "यहाँ");
+define("L_UPDATE", "नवीन संस्करण उपलब्ध है %s !");
+define("L_TRANAME", "संजय घोडिवाला<br />(Sanjay Godiwala)");
+define("L_TRABY", "अनुवाद %s");
+define("L_DONATE", "क्या आप दान देना चाहते है?");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "0");
