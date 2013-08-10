@@ -33,7 +33,7 @@ define("L_VERSION", "संस्करण: %s (%s भाषाएँ)");
 define("L_POWBY", "ऊर्जायुक्त:");
 define("L_HERE", "यहाँ");
 define("L_UPDATE", "नवीन संस्करण उपलब्ध है %s !");
-define("L_TRANAME", "संजय घोडिवाला<br />(Sanjay Godiwala)");
+define("L_TRANAME", "संजय घोडिवाला<br />(Sanjay Ghoriwala)");
 define("L_TRABY", "अनुवाद %s");
 define("L_DONATE", "क्या आप दान देना चाहते है?");
 
