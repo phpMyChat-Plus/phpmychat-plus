@@ -475,29 +475,33 @@ function submitNow(dvalue, mvalue, yvalue){
 <?php } ?>
     <div id="calendar-header" align="center">
         <div style="float: <?php echo($rtl ? "right" : "left"); ?>;" id="info">
-		<img src="images/<?php echo($new_version ? "version_info.gif" : "about.png"); ?>" width="9" height="9" border="0" />
-		<div id="about" dir="<?php echo(($rtl && L_HERE != "here") ? "rtl" : "ltr"); ?>" style="<?php echo($rtl ? "right: 0px;".(L_HERE != "here" ? " direction: rtl; unicode-bidi: embed;" : "") : "left: 0px;"); ?>"><?php echo(L_ABOUT_LOC); ?></div>
+		<img src="images/<?php echo($new_version ? "version_info.gif" : "about.png"); ?>" width="9" height="9" border="0" id="info_icon" />
+		<div id="about" dir="<?php echo(($rtl && L_HERE != "here") ? "rtl" : "ltr"); ?>" style="<?php echo($rtl ? "right: 0px;".(L_HERE != "here" ? " direction: rtl; unicode-bidi: embed;" : "") : "left: 0px;"); ?>"><?php echo($dig ? $cobj->digitize_arabics(L_ABOUT_LOC) : L_ABOUT_LOC); ?></div>
         	<script language="javascript">
 			<!--
 			var timeoutID = new Array();
 
-			var obj = document.getElementById("info");
+			var obj = document.getElementById("info_icon");
 			obj.onmouseover = function(){ displayAbout(); }
 			obj.onmouseout = function(){ hideAbout(); }
 
 			var obj = document.getElementById("about");
-			obj.onmouseover = function(){ displayAbout(); }
+			obj.onmouseover = function(){ displayAbout(true); }
 			obj.onmouseout = function(){ hideAbout(); }
 
-			function displayAbout(){
+			function displayAbout(flag){				
 				var obj = document.getElementById("about");
 
-				cancelTimer();
+				var this_height = obj.style.height;
 
-				//obj.style.display = "block";
-				obj.style.height = "auto";
-				obj.style.border = "1px solid #191970";
-				obj.style.backgroundColor = "#F8F8FF";
+				if(typeof(flag) == "undefined" || (flag === true && (this_height != "1px" && this_height != ""))){
+					cancelTimer();
+	
+					//obj.style.display = "block";
+					obj.style.height = "auto";
+					obj.style.border = "1px solid #191970";
+					obj.style.backgroundColor = "#F8F8FF";
+				}
 			}
 			function hideAbout(){
 				var obj = document.getElementById("about");

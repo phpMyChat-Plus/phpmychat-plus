@@ -4,7 +4,7 @@
 # Version: 3.70
 # Language: Serbian Latin / srpski
 # Translator: Vedran Vučić <vedran.vucic@gnulinuxcentar.org>
-# Last file update: 05.08.2013
+# Last file update: 08.08.2013
 
 // Class strings localization
 define("L_DAYC", "Dan");
@@ -34,6 +34,7 @@ define("L_HERE", "ovde");
 define("L_UPDATE", "Moguće ažuriranje %s !");
 define("L_TRANAME", "Vedran Vučić");
 define("L_TRABY", "Preveo %s");
+define("L_DONATE", "Da li ’elitet da donirate?");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
