@@ -33,8 +33,8 @@ define("L_POWBY", "Destekleyen:"); //or "Based on:", "Supported by"
 define("L_HERE", "burada");
 define("L_UPDATE", "Güncelleme %s !");
 define("L_TRANAME", "Volkan Övün");
-define("L_TRABY", "Translated by %s");
-#missing
+define("L_TRABY", "Çeviren: %s");
+define("L_DONATE", "Bağış yapmak ister misiniz?");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday... 6 for Saturday)
 define("FIRST_DAY", "1");
