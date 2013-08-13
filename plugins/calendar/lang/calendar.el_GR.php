@@ -4,7 +4,7 @@
 # Version: 3.70
 # Language: Greek / ελληνικά (in your lang)
 # Translator: Kostas Filios
-# Last file update: 30.07.2013
+# Last file update: 13.08.2013
 
 // Class strings localization
 define("L_DAYC", "Ημέρα");
@@ -27,11 +27,11 @@ define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing t
 define("L_UNSET", "Αποεπιλογή");
 define("L_CLOSE", "Κλείσιμο");
 define("L_WARN_2038", "Η έκδοση php του server δεν υποστηρίζει την χρονιά 2038 ή μεγαλύτερη (<5.3.0)");
-define("L_ERR_NOSET", "Παρουσιάστηκε πρόβλημα! το ημερολόγιο δεν μπορεί να ρυθμιστεί");
+define("L_ERR_NOSET", "Παρουσιάστηκε πρόβλημα! το ημερολόγιο δεν μπορεί να ρυθμιστεί!");
 define("L_VERSION", "Έκδοση: %s (%s γλώσσες)");
-define("L_POWBY", "Βασισμένη σεPowered by:"); //or "Based on:", "Supported by"
+define("L_POWBY", "Βασισμένη σε:"); //or "Based on:", "Supported by"
 define("L_HERE", "εδώ");
-define("L_UPDATE", "αναβάθμιση διαθέσιμη %s !"); 
+define("L_UPDATE", "Αναβάθμιση διαθέσιμη %s !"); 
 define("L_TRANAME", "Exoskeletor");
 define("L_TRABY", "Μεταφράστηκε απ΄τον<br />%s");
 define("L_DONATE", "Μήπως επιθυμείτε να<br />δωρίσετε χρήματα?");
