@@ -135,9 +135,11 @@ function swapImage(img,imgid) {
 		if (document.getElementById('gravatars').value != "0")
 		{
 			if (dropd.value == "") image.src = 'http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=<?php echo($AVA_WIDTH); ?>&r=g';
+			else if (dropd.value == "mm") image.src = 'http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=<?php echo($AVA_WIDTH); ?>&r=g&d=mm';
 			else if (dropd.value == "identicon") image.src = 'http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=<?php echo($AVA_WIDTH); ?>&r=g&d=identicon';
 			else if (dropd.value == "monsterid") image.src = 'http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=<?php echo($AVA_WIDTH); ?>&r=g&d=monsterid';
 			else if (dropd.value == "wavatar") image.src = 'http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=<?php echo($AVA_WIDTH); ?>&r=g&d=wavatar';
+			else if (dropd.value == "retro") image.src = 'http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=<?php echo($AVA_WIDTH); ?>&r=g&d=retro';
 			document.getElementById('gravatarsToSwap').src = 'http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=<?php echo($AVA_WIDTH); ?>&r=g&d=' + dropd.value;
 		}
 		else
@@ -310,7 +312,7 @@ if (UPD_CHECK)
 {
 	// Check for application update on main sites (ciprianmp.com & sourceforge) resources.
 	$updatepath1 = "http://ciprianmp.com/latest/lib/update.php";
-	$updatepath2 = "http://phpmychat.svn.sourceforge.net/viewvc/*checkout*/phpmychat/trunk/lib/update.php";
+	$updatepath2 = "http://phpmychat.svn.sourceforge.net/viewvc/phpmychat/trunk/lib/update.php";
 	if (@fsockopen("ciprianmp.com", 80, $errno, $errstr, 2))
 	{
 		$upd_possible = 1;
@@ -2678,21 +2680,27 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
     <td>
         <select name="vGRAVATARS_DYNAMIC_DEF" id="gravatars_def" onChange="swapImage('gravatars_def','gravatars_defToSwap')">
 	        <option value=""<?php if($GRAVATARS_DYNAMIC_DEF==""){ echo " selected"; } ?>>Blue G</option>
-	        <option value="identicon"<?php if($GRAVATARS_DYNAMIC_DEF=="identicon"){ echo " selected"; } ?>>identicon</option>
-	        <option value="monsterid"<?php if($GRAVATARS_DYNAMIC_DEF=="monsterid"){ echo " selected"; } ?>>monsterid</option>
-	        <option value="wavatar"<?php if($GRAVATARS_DYNAMIC_DEF=="wavatar"){ echo " selected"; } ?>>wavatar</option>
+	        <option value="mm"<?php if($GRAVATARS_DYNAMIC_DEF=="mm"){ echo " selected"; } ?>>Mystery Man</option>
+	        <option value="identicon"<?php if($GRAVATARS_DYNAMIC_DEF=="identicon"){ echo " selected"; } ?>>Identicon</option>
+	        <option value="monsterid"<?php if($GRAVATARS_DYNAMIC_DEF=="monsterid"){ echo " selected"; } ?>>MonsterID</option>
+	        <option value="wavatar"<?php if($GRAVATARS_DYNAMIC_DEF=="wavatar"){ echo " selected"; } ?>>Wavatar</option>
+	        <option value="retro"<?php if($GRAVATARS_DYNAMIC_DEF=="retro"){ echo " selected"; } ?>>Retro</option>
         </select>
         <?php
         if ($ALLOW_GRAVATARS)
         {
         	if ($GRAVATARS_DYNAMIC_DEF=="")
         	$grav_def_src = "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=$AVA_WIDTH&r=g";
+        	elseif ($GRAVATARS_DYNAMIC_DEF=="mm")
+        	$grav_def_src = "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=$AVA_WIDTH&r=g&d=mm";
         	elseif ($GRAVATARS_DYNAMIC_DEF=="identicon")
         	$grav_def_src = "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=$AVA_WIDTH&r=g&d=identicon";
         	elseif ($GRAVATARS_DYNAMIC_DEF=="monsterid")
         	$grav_def_src = "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=$AVA_WIDTH&r=g&d=monsterid";
         	elseif ($GRAVATARS_DYNAMIC_DEF=="wavatar")
         	$grav_def_src = "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=$AVA_WIDTH&r=g&d=wavatar";
+        	elseif ($GRAVATARS_DYNAMIC_DEF=="retro")
+        	$grav_def_src = "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=$AVA_WIDTH&r=g&d=retro";
         	else $grav_def_src = "./".$ChatPath."images/gender_none.gif";
         }
         ?>
