@@ -20,6 +20,7 @@ ALTER TABLE c_ban_users
 			ADD reason varchar(100) NOT NULL default '';
 
 ALTER TABLE c_config
+			CHANGE GRAVATARS_DYNAMIC_DEF GRAVATARS_DYNAMIC_DEF enum('mm','identicon','monsterid','wavatar','retro') default 'monsterid',
 			CHANGE LANGUAGE LANGUAGE varchar(40) NOT NULL default 'english',
 			CHANGE CHAT_URL CHAT_URL varchar(100) NOT NULL default 'Your server/chat URL here',
 			CHANGE ALLOW_ENTRANCE_SOUND ALLOW_ENTRANCE_SOUND enum('0','1','2','3') NOT NULL default '1',

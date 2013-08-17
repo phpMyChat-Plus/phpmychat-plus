@@ -1,6 +1,7 @@
 <?php
 mysql_query("
 ALTER TABLE ".$t_config."
+			CHANGE GRAVATARS_DYNAMIC_DEF GRAVATARS_DYNAMIC_DEF enum('mm','identicon','monsterid','wavatar','retro') default 'monsterid',
 			CHANGE LANGUAGE LANGUAGE varchar(40) NOT NULL default 'english',
 			CHANGE ROOM_SAYS ROOM_SAYS varchar(255) NOT NULL default 'Attention Room:',
 			CHANGE COLOR_CD1 ROOM_SKIN1 tinyint(1) NOT NULL default '1',
@@ -75,8 +76,7 @@ ALTER TABLE ".$t_config."
 			ADD TAGS_POWERS set('b','i','u') default NULL,
 			ADD ALLOW_MATH enum('0','1') NOT NULL default '0',
 			ADD SRC_MATH varchar(255) NOT NULL default 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
-", $conn);
-mysql_query("
+
 UPDATE ".$t_config." SET
 			CMDS = '/away /buzz /demote /dice /dice2 /dice3 /high /img /math /mr<br />/room /size /sort /topic /utube /video /wisp',
 			MODS = 'Advanced Admin, (GR)Avatars, Smilies Popup, Color Drop Box, Private Popup,<br />Quick Menu, Logs Archive, Lurking, Color names, WorldTime, UTF-8, Birthdays, MathJax',
@@ -98,12 +98,10 @@ UPDATE ".$t_config." SET
 			BACKGR_IMG = '0',
 			POPUP_LINKS = '0'
 	WHERE ID='0';
-", $conn);
-mysql_query("
+
 ALTER TABLE ".$t_lurkers."
 			ADD status varchar(1) NOT NULL default '';
-", $conn);
-mysql_query("
+
 ALTER TABLE ".$t_reg_users."
 			CHANGE latin1 latin1 tinyint(1) NOT NULL default '0',
 			CHANGE gender gender tinyint(1) NOT NULL default '0',
@@ -115,23 +113,19 @@ ALTER TABLE ".$t_reg_users."
 			ADD show_bday enum('0','1') NOT NULL default '1',
 			ADD show_age enum('0','1') NOT NULL default '1',
 			ADD bday_email_sent int(11) NOT NULL default '0';
-", $conn);
-mysql_query("
+
 UPDATE ".$t_reg_users."	SET
 			latin1='0',
 			perms='topmod'
 	WHERE email='bot@bot.com';
-", $conn);
-mysql_query("
+
 UPDATE ".$t_reg_users." SET
 			latin1='0',
 			perms='topmod'
 	WHERE email='quote@quote.com';
-", $conn);
-mysql_query("
+
 UPDATE ".$t_reg_users." SET latin1='0' WHERE latin1='1';
-", $conn);
-mysql_query("
+
 CREATE TABLE IF NOT EXISTS ".$t_stats." (
   stat_date date NOT NULL,
   room varchar(30) DEFAULT NULL,

@@ -1,17 +1,13 @@
 <?php
 mysql_query("
 ALTER DATABASE ".$dbname." DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-", $conn);
-mysql_query("
+
 ALTER TABLE ".$t_messages." CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-", $conn);
-mysql_query("
+
 ALTER TABLE ".$t_reg_users." CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-", $conn);
-mysql_query("
+
 ALTER TABLE ".$t_users." CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-", $conn);
-mysql_query("
+
 CREATE TABLE bot_bot (
  id int(11) NOT NULL auto_increment,
  bot tinyint(4) NOT NULL default '0',
@@ -20,16 +16,14 @@ CREATE TABLE bot_bot (
  PRIMARY KEY (id),
  KEY botname (bot,name)
 ) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-", $conn);
-mysql_query("
+
 CREATE TABLE bot_bots (
  id tinyint(3) unsigned NOT NULL auto_increment,
  botname varchar(255) NOT NULL default '',
  PRIMARY KEY (botname),
  KEY id (id)
 ) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-", $conn);
-mysql_query("
+
 CREATE TABLE bot_conversationlog (
  bot tinyint(3) unsigned NOT NULL default '0',
  id int(11) NOT NULL auto_increment,
@@ -40,8 +34,7 @@ CREATE TABLE bot_conversationlog (
  PRIMARY KEY (id),
  KEY botid (bot)
 ) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-", $conn);
-mysql_query("
+
 CREATE TABLE bot_dstore (
  uid varchar(255) default NULL,
  name text,
@@ -51,8 +44,7 @@ CREATE TABLE bot_dstore (
  PRIMARY KEY (id),
  KEY nameidx (name(40))
 ) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-", $conn);
-mysql_query("
+
 CREATE TABLE bot_gmcache (
  id int(11) NOT NULL auto_increment,
  bot tinyint(3) unsigned NOT NULL default '0',
@@ -66,8 +58,7 @@ CREATE TABLE bot_gmcache (
  PRIMARY KEY (id),
  KEY combined (bot,combined(255))
 ) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-", $conn);
-mysql_query("
+
 CREATE TABLE bot_gossip (
  bot tinyint(3) unsigned NOT NULL default '0',
  gossip text,
@@ -75,8 +66,7 @@ CREATE TABLE bot_gossip (
  PRIMARY KEY (id),
  KEY botidx (bot)
 ) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-", $conn);
-mysql_query("
+
 CREATE TABLE bot_patterns (
  bot tinyint(3) unsigned NOT NULL default '0',
  id int(11) NOT NULL auto_increment,
@@ -88,8 +78,7 @@ CREATE TABLE bot_patterns (
  KEY wordparent (parent,word),
  KEY botid (bot)
 ) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-", $conn);
-mysql_query("
+
 CREATE TABLE bot_templates (
  bot tinyint(3) unsigned NOT NULL default '0',
  id int(11) NOT NULL default '0',
@@ -99,16 +88,14 @@ CREATE TABLE bot_templates (
  topic varchar(255) default NULL,
  KEY bot (id)
 ) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-", $conn);
-mysql_query("
+
 CREATE TABLE bot_thatindex (
  uid varchar(255) default NULL,
  enteredtime ".$timestamp." NOT NULL,
  id int(11) NOT NULL auto_increment,
  PRIMARY KEY (id)
 ) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-", $conn);
-mysql_query("
+
 CREATE TABLE bot_thatstack (
  thatid int(11) NOT NULL default '0',
  id int(11) NOT NULL auto_increment,
@@ -116,8 +103,7 @@ CREATE TABLE bot_thatstack (
  enteredtime ".$timestamp." NOT NULL,
  PRIMARY KEY (id)
 ) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-", $conn);
-mysql_query("
+
 CREATE TABLE ".$t_ban_users." (
  username varchar(30) NOT NULL default '',
  latin1 tinyint(1) NOT NULL default '0',
@@ -126,8 +112,7 @@ CREATE TABLE ".$t_ban_users." (
  ban_until int(11) NOT NULL default '0',
  reason varchar(100) NOT NULL default ''
 ) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-", $conn);
-mysql_query("
+
 CREATE TABLE ".$t_config." (
  ID tinyint(1) NOT NULL default '0',
  MSG_DEL tinyint(1) NOT NULL default '96',
@@ -291,7 +276,7 @@ CREATE TABLE ".$t_config." (
  GRAVATARS_CACHE enum('0','1') NOT NULL default '1',
  GRAVATARS_CACHE_EXPIRE tinyint(1) NOT NULL default '7',
  GRAVATARS_RATING enum('G','PG','R','X','ANY') NOT NULL default 'G',
- GRAVATARS_DYNAMIC_DEF enum('identicon','monsterid','wavatar') default 'monsterid',
+ GRAVATARS_DYNAMIC_DEF enum('mm','identicon','monsterid','wavatar','retro') default 'monsterid',
  GRAVATARS_DYNAMIC_DEF_FORCE enum('0','1') NOT NULL default '0',
  ALLOW_UPLOADS enum('0','1') NOT NULL default '0',
  RES_ROOM1 enum('0','1') NOT NULL default '0',
@@ -332,11 +317,9 @@ CREATE TABLE ".$t_config." (
  SRC_MATH varchar(255) NOT NULL default 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML',
  PRIMARY KEY (ID)
 ) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-", $conn);
-mysql_query("
+
 INSERT INTO ".$t_config." (id, MODS, INSTALL_DATE, QUICKA, QUICKM, QUICKU, LAST_SAVED_ON, CHAT_SYSTEM, ALLOW_TEXT_COLORS) VALUES ('0', 'Advanced Admin, (GR)Avatars, Smilies Popup, Color Drop Box, Private Popup,<br />Quick Menu, Logs Archive, Lurking, Color names, WorldTime, UTF-8, Birthdays, MathJax', NOW(), 'Greetings|\r\nWelcome|\r\nThanks for coming by|\r\nLoL|\r\n:rofl|\r\n/announce I have to go now!|\r\n/away be right back...|\r\n/away ...I\'m back!|\r\n/bot start|\r\n/bot stop|\r\n/buzz|\r\n/buzz ~chimeup|\r\n/me is busy right now!|\r\n/mr is watching TV|\r\n/bye See you around!|\r\n/high user|\r\n/join 0 #%s|\r\n/join 1 #%s|\r\n/invite %s|\r\n/img http://www.path_to_image|\r\n/promote %s|\r\n/demote %s|\r\n/demote * %s|\r\n/room Please follow the topic|\r\n/size 12|\r\n/size|\r\n/sort|\r\n/topic |\r\n/topic reset|\r\n/video url_to_video|\r\n/wisp %s Hey, in which room ru?|\r\n/whois %s', 'Greetings|\r\nWelcome|\r\nThanks for coming by|\r\nLoL|\r\n:rofl|\r\n/away be right back...|\r\n/away ...I\'m back!|\r\n/buzz|\r\n/buzz ~chimeup|\r\n/me is busy right now!|\r\n/mr is reading|\r\n/bye cyall!|\r\n/high %s|\r\n/join 0 #%s|\r\n/join 1 #%s|\r\n/invite %s|\r\n/img http://www.path_to_image|\r\n/promote %s|\r\n/room Please follow the topic|\r\n/size 12|\r\n/size|\r\n/sort|\r\n/topic |\r\n/topic reset|\r\n/video url_to_video|\r\n/wisp %s Hey, in which room ru?|\r\n/whois %s', 'Hello everyone|\r\nlol|\r\n:rofl|\r\n/away brb...|\r\n/away ...back!|\r\n/me is busy!|\r\n/mr is lurking|\r\n/bye ttyl!|\r\n/high %s|\r\n/join 0 #%s|\r\n/join 1 #%s|\r\n/invite %s|\r\n/img http://www.path_to_image|\r\n/size 12|\r\n/size|\r\n/sort|\r\n/wisp %s Hey, in which room ru?|\r\n/whois %s', NOW(), 'standalone', '1');
-", $conn);
-mysql_query("
+
 CREATE TABLE ".$t_lurkers." (
  time int(15) NOT NULL default '0',
  ip varchar(15) NOT NULL default '',
@@ -348,15 +331,13 @@ CREATE TABLE ".$t_lurkers." (
  KEY ip (ip),
  KEY file (file)
 ) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-", $conn);
-mysql_query("
+
 ALTER TABLE ".$t_messages."
 			CHANGE type type tinyint(1) NOT NULL default '0',
 			CHANGE latin1 latin1 tinyint(1) NOT NULL default '0',
 			ADD pm_read varchar(19) NOT NULL default '',
 			ADD room_from varchar(30) NOT NULL default '';
-", $conn);
-mysql_query("
+
 ALTER TABLE ".$t_reg_users."
 			CHANGE latin1 latin1 tinyint(1) NOT NULL default '0',
 			ADD id int(11) NOT NULL default '0' FIRST,
@@ -387,20 +368,15 @@ ALTER TABLE ".$t_reg_users."
 			CHANGE latin1 latin1 tinyint(1) NOT NULL default '0',
 			CHANGE showemail showemail tinyint(1) NOT NULL default '0',
 			CHANGE perms perms varchar(9) NOT NULL;
-", $conn);
-mysql_query("
+
 UPDATE ".$t_reg_users." SET reg_time =".time().";
-", $conn);
-mysql_query("
+
 INSERT INTO ".$t_reg_users." VALUES ('', '', 'plusbot', '0', '3901e4a6c3d27909afef4c22f8337da8', 'Bot', 'phpMyChat - Plus', 'WorldWideWeb', '', 'bot@bot.com', '0', 'topmod', '', 1130763311, '-No tracking IP-', '1', '0', 'images/alice.gif', 'I am a Robot originally called <a href=http://www.alicebot.org/documentation/ target=_blank>Alice</a>.  I am proud to be the first Artificial Intelligence on the net! Please test my capabilities as you wish! To start a public conversation with me just type \"hello myname\" in the room I am active in, to stop the conversation type \"bye myname\" or \"myname> bye\". But we can also talk in private - just click on my name whenever you need a shoulder to cry on :p Ohhh... I wish to express my gratitude to Roy, Popeye and <a href=http://www.ciprianmp.com/plus/ target=_blank>Ciprian</a> for making me available for chatting in here. :)', 'http://www.alicebot.org/documentation/', 'http://sourceforge.net/forum/?group_id=43190', 'English, German', 'olive', 'images/avatars/bot_avatar.gif', '0', '', '', '', '', '', '', '', '', '');
-", $conn);
-mysql_query("
+
 INSERT INTO ".$t_reg_users." VALUES ('', '', 'Random_Quote', '0', 'ef93e0948b007826a1a7a49a17b72a59', 'Random Quote', 'phpMyChat - Plus', 'WorldWideWeb', '', 'quote@quote.com', '0', 'topmod', '', 1130763311, '-No tracking IP-', '1', '0', 'images/avatars/avatar56.gif', 'I am a virtual user, added here to post random quotes at my admin’s will. Ohhh... I wish to express my gratitude to <a href=http://www.ciprianmp.com/plus/ target=_blank>Ciprian</a> for making me available for enlighting you in here. :)', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', 'English (any actually)', 'limegreen', 'images/avatars/quote_avatar.gif', '0', '', '', '', '', '', '', '', '', '');
-", $conn);
-mysql_query("
+
 UPDATE ".$t_reg_users." SET latin1='0' WHERE latin1='1';
-", $conn);
-mysql_query("
+
 CREATE TABLE IF NOT EXISTS ".$t_stats." (
   stat_date date NOT NULL,
   room varchar(30) DEFAULT NULL,
@@ -431,8 +407,7 @@ CREATE TABLE IF NOT EXISTS ".$t_stats." (
   vids_posted smallint(5) NOT NULL DEFAULT '0',
   maths_posted smallint(5) NOT NULL DEFAULT '0'
 ) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-", $conn);
-mysql_query("
+
 ALTER TABLE ".$t_users."
 			CHANGE latin1 latin1 tinyint(1) NOT NULL default '0',
 			ADD status varchar(1) NOT NULL default '',

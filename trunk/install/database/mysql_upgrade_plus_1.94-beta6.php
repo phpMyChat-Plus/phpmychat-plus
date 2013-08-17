@@ -1,6 +1,7 @@
 <?php
 mysql_query("
 ALTER TABLE ".$t_config."
+			CHANGE GRAVATARS_DYNAMIC_DEF GRAVATARS_DYNAMIC_DEF enum('mm','identicon','monsterid','wavatar','retro') default 'monsterid',
 			CHANGE EN_ROOM1 EN_ROOM1 enum('0','1','2') NOT NULL default '1',
 			CHANGE EN_ROOM2 EN_ROOM2 enum('0','1','2') NOT NULL default '1',
 			CHANGE EN_ROOM3 EN_ROOM3 enum('0','1','2') NOT NULL default '1',
@@ -30,14 +31,12 @@ ALTER TABLE ".$t_config."
 			ADD TAGS_POWERS set('b','i','u') default NULL,
 			ADD ALLOW_MATH enum('0','1') NOT NULL default '0',
 			ADD SRC_MATH varchar(255) NOT NULL default 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
-", $conn);
-mysql_query("
+
 UPDATE ".$t_config." SET
 			CMDS = '/away /buzz /demote /dice /dice2 /dice3 /high /img /math /mr<br />/room /size /sort /topic /utube /video /wisp',
 			MODS = 'Advanced Admin, (GR)Avatars, Smilies Popup, Color Drop Box, Private Popup,<br />Quick Menu, Logs Archive, Lurking, Color names, WorldTime, UTF-8, Birthdays, MathJax',
 	WHERE ID='0';
-", $conn);
-mysql_query("
+	
 ALTER TABLE ".$t_stats."
 			ADD maths_posted smallint(5) NOT NULL DEFAULT '0';
 ", $conn);

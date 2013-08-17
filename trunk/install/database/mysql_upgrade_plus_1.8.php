@@ -2,9 +2,9 @@
 mysql_query("
 ALTER TABLE ".$t_ban_users."
 			ADD reason varchar(100) NOT NULL default '';
-", $conn);
-mysql_query("
+
 ALTER TABLE ".$t_config."
+			CHANGE GRAVATARS_DYNAMIC_DEF GRAVATARS_DYNAMIC_DEF enum('mm','identicon','monsterid','wavatar','retro') default 'monsterid',
 			CHANGE LANGUAGE LANGUAGE varchar(40) NOT NULL default 'english',
 			CHANGE CHAT_URL CHAT_URL varchar(100) NOT NULL default 'Your server/chat URL here',
 			CHANGE ALLOW_ENTRANCE_SOUND ALLOW_ENTRANCE_SOUND enum('0','1','2','3') NOT NULL default '1',
@@ -110,8 +110,7 @@ ALTER TABLE ".$t_config."
 			ADD TAGS_POWERS set('b','i','u') default NULL,
 			ADD ALLOW_MATH enum('0','1') NOT NULL default '0',
 			ADD SRC_MATH varchar(255) NOT NULL default 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
-", $conn);
-mysql_query("
+
 UPDATE ".$t_config." SET
 			ENTRANCE_SOUND = 'sounds/chimeup.wav',
 			ROOM_SKIN1 = '1',
@@ -149,17 +148,14 @@ UPDATE ".$t_config." SET
 			BACKGR_IMG = '0',
 			POPUP_LINKS = '0'
 	WHERE ID='0';
-", $conn);
-mysql_query("
+
 ALTER TABLE ".$t_lurkers."
 			ADD username varchar(30) NOT NULL default '',
 			ADD status varchar(1) NOT NULL default '';
-", $conn);
-mysql_query("
+
 ALTER TABLE ".$t_messages."
 			CHANGE pm_read pm_read VARCHAR(19) NOT NULL default '';
-", $conn);
-mysql_query("
+
 ALTER TABLE ".$t_reg_users."
 			CHANGE latin1 latin1 tinyint(1) NOT NULL default '0',
 			CHANGE gender gender tinyint(1) NOT NULL default '0',
@@ -177,8 +173,7 @@ ALTER TABLE ".$t_reg_users."
 			ADD bday_email_sent int(11) NOT NULL default '0',
 			ADD PRIMARY KEY (cid),
 			ADD UNIQUE KEY username (username);
-", $conn);
-mysql_query("
+
 UPDATE ".$t_reg_users." SET
 			latin1='0',
 			password='3901e4a6c3d27909afef4c22f8337da8',
@@ -191,14 +186,11 @@ UPDATE ".$t_reg_users." SET
 			favlink1 = 'http://sourceforge.net/forum/?group_id=43190',
 			avatar = 'images/avatars/bot_avatar.gif'
 	WHERE email='bot@bot.bot.com';
-", $conn);
-mysql_query("
+
 INSERT INTO ".$t_reg_users." VALUES ('', '', 'Random_Quote', '0', 'ef93e0948b007826a1a7a49a17b72a59', 'Random Quote', 'phpMyChat - Plus', 'WorldWideWeb', '', 'quote@quote.com', '0', 'topmod', '', 1130763311, '-No tracking IP-', '1', '0', 'images/avatars/avatar56.gif', 'I am a virtual user, added here to post random quotes at my admin’s will. Ohhh... I wish to express my gratitude to <a href=http://www.ciprianmp.com/plus/ target=_blank>Ciprian</a> for making me available for enlighting you in here. :)', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', 'English (any actually)', 'limegreen', 'images/avatars/quote_avatar.gif', '0', '', '', '', '', '', '', '', '', '');
-", $conn);
-mysql_query("
+
 UPDATE ".$t_reg_users." SET latin1='0' WHERE latin1='1';
-", $conn);
-mysql_query("
+
 CREATE TABLE IF NOT EXISTS ".$t_stats." (
   stat_date date NOT NULL,
   room varchar(30) DEFAULT NULL,
@@ -229,12 +221,10 @@ CREATE TABLE IF NOT EXISTS ".$t_stats." (
   vids_posted smallint(5) NOT NULL DEFAULT '0',
   maths_posted smallint(5) NOT NULL DEFAULT '0'
 ) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-", $conn);
-mysql_query("
+
 ALTER TABLE ".$t_users."
 			ADD email varchar(64) NOT NULL default '';
-", $conn);
-mysql_query("
+
 UPDATE ".$t_users." u LEFT JOIN ".$t_reg_users." r
 			ON u.username = r.username
 			SET u.email='bot@bot.com'

@@ -1,4 +1,5 @@
 ALTER TABLE c_config
+			CHANGE GRAVATARS_DYNAMIC_DEF GRAVATARS_DYNAMIC_DEF enum('mm','identicon','monsterid','wavatar','retro') default 'monsterid',
 			CHANGE LANGUAGE LANGUAGE varchar(40) NOT NULL default 'english',
 			CHANGE ROOM_SAYS ROOM_SAYS varchar(255) NOT NULL default 'Attention Room:',
 			CHANGE COLOR_CD1 ROOM_SKIN1 tinyint(1) NOT NULL default '1',

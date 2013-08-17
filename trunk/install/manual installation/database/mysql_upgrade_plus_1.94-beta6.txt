@@ -1,4 +1,5 @@
 ALTER TABLE c_config
+			CHANGE GRAVATARS_DYNAMIC_DEF GRAVATARS_DYNAMIC_DEF enum('mm','identicon','monsterid','wavatar','retro') default 'monsterid',
 			CHANGE EN_ROOM1 EN_ROOM1 enum('0','1','2') NOT NULL default '1',
 			CHANGE EN_ROOM2 EN_ROOM2 enum('0','1','2') NOT NULL default '1',
 			CHANGE EN_ROOM3 EN_ROOM3 enum('0','1','2') NOT NULL default '1',
