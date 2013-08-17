@@ -2,7 +2,7 @@ Note: if you’ve already modded your own files, please compare and edit the cha
 This log includes all the previously released fixes.
 Client browsers - tested with:
 	- IE < 5.5 = M;
-	- IE > 6.0SP2 (including > 7.0 & > 8.0 & > 9.0) = H;
+	- IE > 6.0SP2 (including > 7.0 & > 8.0 & > 9.0 & > 10.0) = H;
 	- Mozilla Aurora = 12.0 = H;
 	- Mozilla Firefox > 1.6.0.0 (including < 12.0) = H;
 	- Mozilla Firebird 0.7 = L;
@@ -13,7 +13,7 @@ Client browsers - tested with:
 	- Apple Safari > 4.0.3 = H;
 	- Google Chrome > 24.x.x.x.x = M.
 Server environment - tested env:
-	- Apache < 2.2.22 (Unix and Windows 2k/XP<SP3 & Vista);
+	- Apache < 2.4.4 (Unix and Windows 2k/XP<SP3 & Vista);
 	- php < 6;
 	- MySQL < 6;
 	- exif support enabled (gif/jpeg processing);
@@ -33,7 +33,11 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 If your users encounter bootings for no reason, try to disable sounds in chat.
 
 Fixes History:
+26.07.2013 - 1.94-RC3:
+- added 2 more Gravatars support (Mystery Man - static and Retro - dynamic); (functionality related) - required DB modification
 06.02.2013 - 1.94-RC2:
+- added birthday tooltips to Admin panel calendar; (functionality related)
+- fixed the calendar to allow years before 1970 (1902 the lowest allowed year); (functionality related)
 - fixed calendar birthdays to display the birthdates before 1970; (functionality related)
 - edituser and register calendars will now show the regusers birthdays and ages, if allowed by each respective user privacy set; (functionality extension)
 - calendar class update to 3.70-loc version; (functionality related)

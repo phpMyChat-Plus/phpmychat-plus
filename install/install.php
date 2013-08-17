@@ -624,7 +624,7 @@ if ( $p == 5 )
 					@mysql_query("SET CHARACTER SET utf8");
 					mysql_query("SET NAMES 'utf8'");
 					mysql_select_db ( $dbname );
-					mysql_query ( "INSERT INTO $t_reg_users VALUES ('', '', '$admin', '0', '$pass_crypt', '', '', '', '$chaturl', '$adminemail', 0, 'admin', '', '".time()."', '', 0, 1, '', '', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', '', 'red', 'images/avatars/def_avatar.gif', '0', '', '', '', '', '', '', '', '', '');" );
+					mysql_query ( "INSERT INTO $t_reg_users VALUES ('', '1', '$admin', '0', '$pass_crypt', '', '', '', '$chaturl', '$adminemail', 0, 'admin', '', '".time()."', '', 0, 1, '', '', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', '', 'red', 'images/avatars/def_avatar.gif', '0', '', '', '', '', '', '', '', '', '');" );
 				}
 			}
 		}
