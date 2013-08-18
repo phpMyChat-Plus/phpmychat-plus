@@ -3,7 +3,7 @@
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 3.69
 # Language: Brazilian Portuguese / português brasileiro
-# Translator: Jaime Dias ( jaime@jotadias.com.br)
+# Translator: Jaime Dias (jaime@jotadias.com.br)
 # Last file update: 19.05.2013
 
 // Class strings localization

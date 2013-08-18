@@ -5,7 +5,7 @@ ALTER TABLE ".$t_config."
 
 UPDATE ".$t_config." SET
 			CHAT_SYSTEM = 'standalone',
-			ALLOW_TEXT_COLORS = '1',
+			ALLOW_TEXT_COLORS = '1'
 	WHERE ID='0';
 ", $conn);
 ?>
