@@ -1,10 +1,10 @@
 <?php
 # vi_VN translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.69
+# Version: 3.70
 # Language: Vietnamese / Tiếng Việt
-# Translator: Marshall <hellomarshal_lookatme@yahoo.com.vn>
-# Last file update: 19.05.2013
+# Translators: Marshall <hellomarshal_lookatme@yahoo.com.vn> & Aks Mac <ask.bi92@gmail.com>
+# Last file update: 18.08.2013
 
 // Class strings localization
 define("L_DAYC", "Ngày");
@@ -25,8 +25,16 @@ define("L_DATE_AFTER", "Làm ơn chọn ngày sau %s");
 define("L_DATE_BETWEEN", "Làm ơn chọn ngày giữa\\n%s và %s");
 define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
 define("L_UNSET", "Bỏ lựa chọn");
-define("L_CLOSE", "Đóng lại");
-define("L_TRANAME", "Marshall");
+define("L_CLOSE", "Đóng");
+define("L_WARN_2038", "Phiên bản PHP này máy chủ không có hỗ trợ cho năm 2038 và sau đó! (<5.3.0)");
+define("L_ERR_NOSET", "Lỗi ! Lịch không được thiệt lập!");
+define("L_VERSION", "Phiên bản: %s (%s ngôn ngữ)");
+define("L_POWBY", "Hỗ trợ bởi:"); //or "Based on:", "Supported by"
+define("L_HERE", "tại đây");
+define("L_UPDATE", "Cập nhật %s !");
+define("L_TRANAME", "Marshall & Aks Mac");
+define("L_TRABY", "Dịch bởi %s");
+define("L_DONATE", "Bạn có muốn tặng?");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");
