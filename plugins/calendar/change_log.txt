@@ -5,6 +5,9 @@ Localization version & support by ciprianmp
 version 3.70-loc (20 July 2013)
 - it includes all the updates in the original class
 
+fixed: the year interval limitation (1970/2038) has been eliminated for the entire class (timestamps not used anymore)
+	- thanks Tri
+
 fixed: recursive tooltips can now be set outside the limited interval 1970-2037
 	- thanks ciprianmp
 	

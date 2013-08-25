@@ -6,7 +6,7 @@
 // add on: translation implemented - default is English en_US
 //	- thanks ciprianmp
 //
-// version 3.70-loc (released 23 March 2011/updated 14 July 2013)
+// version 3.70-loc (released 23 March 2011/updated 20 August 2013)
 //
 ////********************************************************
 $AUTHOR = "Triconsole";
@@ -22,20 +22,34 @@ include_once("lang/localization.lib.php");
 if(file_exists("plugins/calendar/calendar.js"))
 {
 ?>
-<script language="javascript" src="plugins/calendar/calendar.js"></script>
+<script type="text/javascript" src="plugins/calendar/calendar.js"></script>
 <?php
 }
 elseif(file_exists("calendar/calendar.js")){
 ?>
-<script language="javascript" src="calendar/calendar.js"></script>
+<script type="text/javascript" src="calendar/calendar.js"></script>
 <?php
 }
 elseif(file_exists("calendar.js"))
 {
 ?>
-<script language="javascript" src="calendar.js"></script>
+<script type="text/javascript" src="calendar.js"></script>
 <?php
 }
+
+/* Set the default timezone identifier; List of all identifiers: http://www.php.net/manual/en/timezones.php
+Example:
+date_default_timezone_set('Europe/Bucharest');
+Make sure your php.ini has the appropriate timezone identifier here:
+  [Date]
+; Defines the default timezone used by the date functions
+date.timezone = Europe/Bucharest
+*/
+if (version_compare(PHP_VERSION, 5.3, '>='))
+{
+  @date_default_timezone_set(date_default_timezone_get());
+}
+#echo date_default_timezone_get(); //test your php timezone
 
 require_once('classes/tc_date.php');
 
@@ -365,14 +379,14 @@ class tc_calendar{
 		//check year to be selected in case of time_allow is set
 		  if(!$this->show_not_allow && ($this->time_allow1 || $this->time_allow2)){
 			if($this->time_allow1 && $this->time_allow2){
-				$year_start = $this->mydate->getDateFromTimestamp($this->time_allow1, 'Y');
-				$year_end = $this->mydate->getDateFromTimestamp($this->time_allow2, 'Y');
+				$year_start = $this->mydate->getDate("Y", $this->time_allow1);
+				$year_end = $this->mydate->getDate("Y", $this->time_allow2);
 			}elseif($this->time_allow1){
 				//only date 1 specified
-				$year_start = $this->mydate->getDateFromTimestamp($this->time_allow1, 'Y');
+				$year_start = $this->mydate->getDate("Y", $this->time_allow1);
 			}elseif($this->time_allow2){
 				//only date 2 specified
-				$year_end = $this->mydate->getDateFromTimestamp($this->time_allow2, 'Y');
+				$year_end = $this->mydate->getDate("Y", $this->time_allow2);
 			}
 		  }
 
@@ -459,13 +473,13 @@ class tc_calendar{
 		}
 
 		//check for supported year
-		if($this->year_start < 1900) $this->year_start = 1900;
+/*		if($this->year_start < 1900) $this->year_start = 1900;
 
 		if(!$this->mydate->compatible && $this->year_end > 2037){
 			$this->year_end = 2037;
 			$this->warning_msgs[] = L_WARN_2038;
 		}
-	}
+*/	}
 
 	function getMonthNames(){
 		return array(L_JAN, L_FEB, L_MAR, L_APR, L_MAY, L_JUN, L_JUL, L_AUG, L_SEP, L_OCT, L_NOV, L_DEC);
@@ -487,6 +501,39 @@ class tc_calendar{
 			$this->startDate = $num;
 	}
 
+	function dateAllow($from = "", $to = "", $show_not_allow = true){
+		$time_from = $this->mydate->validDate($from) ? $from : null;
+		$time_to = $this->mydate->validDate($to) ? $to : null;
+		
+		// sanity check, ensure time_from earlier than time_to
+		if($time_from != null && $time_to != null && $this->mydate->dateAfter($time_to, $time_from, true)){
+			$tmp = $time_from;
+			$time_from = $time_to;
+			$time_to = $tmp;
+		}
+
+		if ($time_from != null) {
+			$this->time_allow1 = $time_from;
+			$y = $this->mydate->getDate('Y', $time_from);
+			if($this->year_start && $y > $this->year_start) $this->year_start = $y;
+
+			//setup year end from year start
+			if($time_to == null && !$this->year_end) $this->year_end = $this->year_start + $this->year_display_from_current;
+		}
+
+		if ($time_to>0) {
+			$this->time_allow2 = $time_to;
+			$y = $this->mydate->getDate('Y', $time_to);
+			if($this->year_end && $y < $this->year_end) $this->year_end = $y;
+
+			//setup year start from year end
+			if($time_from == null && !$this->year_start) $this->year_start = $this->year_end - $this->year_display_from_current;
+		}
+
+		$this->show_not_allow = $show_not_allow;
+	}
+	/*
+	//old method use timestamp
 	function dateAllow($from = "", $to = "", $show_not_allow = true){
 		$time_from = ($from) ? $this->mydate->getTimestamp($from) : 0;
 		$time_to = ($to) ? $this->mydate->getTimestamp($to) : 0;
@@ -524,7 +571,7 @@ class tc_calendar{
 
 		$this->show_not_allow = $show_not_allow;
 	}
-
+	*/
 	function autoSubmit($auto, $form_name, $target = ""){
 		$this->auto_submit = $auto;
 		$this->form_container = $form_name;
@@ -596,6 +643,34 @@ class tc_calendar{
 
 			//change specific date to time
 			foreach($dates as $sp_date){
+				if($this->mydate->validDate($sp_date)){	
+					switch($recursive){
+						case "month": //add to monthly
+							if(!in_array($sp_date, $this->sp_dates[1]))
+								$this->sp_dates[1][] = $sp_date;
+							break;
+						case "year": //add to yearly
+							if(!in_array($sp_date, $this->sp_dates[2]))
+								$this->sp_dates[2][] = $sp_date;
+							break;
+						default: //add to no recursive
+							if(!in_array($sp_date, $this->sp_dates[0]))
+								$this->sp_dates[0][] = $sp_date;
+					}
+				}
+			}
+
+			$this->sp_type = ($type == 1) ? 1 : 0; //control data type for $type
+		}
+	}
+	/*
+	//old method use timestamp
+	function setSpecificDate($dates, $type=0, $recursive=""){
+		if(is_array($dates)){
+			$recursive = strtolower($recursive);
+
+			//change specific date to time
+			foreach($dates as $sp_date){
 				$sp_time = $this->mydate->getTimestamp($sp_date);
 
 				if($sp_time > 0){
@@ -618,16 +693,17 @@ class tc_calendar{
 			$this->sp_type = ($type == 1) ? 1 : 0; //control data type for $type
 		}
 	}
+	*/
 
 	function checkDefaultDateValid($reset = true){
-		$date_str = $this->year."-".$this->month."-".$this->day;
-		$default_datetime = $this->mydate->getTimestamp($date_str);
-
+		$date_str = $this->year."-".str_pad($this->month, 2, "0", STR_PAD_LEFT)."-".str_pad($this->day, 2, "0", STR_PAD_LEFT);
+		//$default_datetime = $this->mydate->getTimestamp($date_str);
+/*
 		//reset year if set to 2038 and later
 		if(!$this->mydate->compatible && $this->year >= 2038){
 			return false;
 		}
-
+*/
 		//check if set date is in year interval
 		$start_interval = $this->year_start."-01-01";
 		$end_interval = $this->year_end."-12-31";
@@ -644,11 +720,11 @@ class tc_calendar{
 
 		//check with allow date
 		if($this->time_allow1 && $this->time_allow2){
-			if($default_datetime < $this->time_allow1 || $default_datetime > $this->time_allow2) return false;
+			if($this->mydate->dateBefore($this->time_allow1, $date_str) || $this->mydate->dateAfter($this->time_allow2, $date_str)) return false;
 		}elseif($this->time_allow1){
-			if($default_datetime < $this->time_allow1) return false;
+			if($this->mydate->dateBefore($this->time_allow1, $date_str)) return false;
 		}elseif($this->time_allow2){
-			if($default_datetime > $this->time_allow2) return false;
+			if($this->mydate->dateAfter($this->time_allow2, $date_str)) return false;
 		}
 
 		//check with specific date
@@ -658,8 +734,8 @@ class tc_calendar{
 
 			if(isset($this->sp_dates[2])){
 				foreach($this->sp_dates[2] as $sp_time){
-					$sp_time_md = $this->mydate->getDateFromTimestamp($sp_time, 'md');
-					$this_md = $this->mydate->getDateFromTimestamp($default_datetime, 'md');
+					$this_md = $this->mydate->getDate("md", $date_str);
+					$sp_time_md = $this->mydate->getDate("md", $sp_time);
 					if($sp_time_md == $this_md){
 						$sp_found = true;
 						break;
@@ -669,7 +745,7 @@ class tc_calendar{
 
 			if(isset($this->sp_dates[1]) && !$sp_found){
 				foreach($this->sp_dates[1] as $sp_time){
-					$sp_time_d = $this->mydate->getDateFromTimestamp($sp_time, 'd');
+					$sp_time_d = $this->mydate->getDate("d", $sp_time);
 					if($sp_time_d == $this->day){
 						$sp_found = true;
 						break;
@@ -678,7 +754,7 @@ class tc_calendar{
 			}
 
 			if(isset($this->sp_dates[0]) && !$sp_found){
-				$sp_found = in_array($default_datetime, $this->sp_dates[0]);
+				$sp_found = in_array($date_str, $this->sp_dates[0]);
 			}
 
 			switch($this->sp_type){
@@ -695,7 +771,7 @@ class tc_calendar{
 		}
 
 		if(is_array($this->dsb_days) && sizeof($this->dsb_days) > 0){
-			$day_txt = $this->mydate->getDateFromTimestamp($default_datetime, 'D');
+			$day_txt = $this->mydate->getDate("D", $date_str);
 			if(in_array(strtolower($day_txt), $this->dsb_days) !== false){
 				return false;
 			}
@@ -724,8 +800,6 @@ class tc_calendar{
 
 	function &check_json_decode($str){
 		//should replace with better solution in the future
-
-#		$str = get_magic_quotes_gpc() ? stripslashes($str) : $str;
 
 		if(function_exists("json_decode") && false){
 			return json_decode($str);
@@ -783,21 +857,15 @@ class tc_calendar{
 		}
 
 		//check if today is in range of date allow
-		if($this->time_allow1 > 0){
-			//get date of time allow1
-			$date_allow1 = $this->mydate->getDateFromTimestamp($this->time_allow1);
-
+		if($this->time_allow1 != ""){
 			//check valid if today is after date_allow1
-			if(!$this->mydate->dateAfter($date_allow1, $today))
+			if($this->mydate->validDate($this->time_allow1) && !$this->mydate->dateAfter($this->time_allow1, $today))
 				return false;
 		}
 
 		if($this->time_allow2 > 0){
-			//get date of time allow2
-			$date_allow2 = $this->mydate->getDateFromTimestamp($this->time_allow2);
-
 			//check valid if today is before date_allow2
-			if(!$this->mydate->dateBefore($date_allow2, $today))
+			if($this->mydate->validDate($this->time_allow2) && !$this->mydate->dateBefore($this->time_allow2, $today))
 				return false;
 		}
 		return true;
@@ -825,46 +893,48 @@ class tc_calendar{
 			//change specific date to time
 			foreach($dates as $tt_date){
 				//Patch for year outside the interval 1970-2037
-				$tt_date_year = substr($tt_date, 0, 4);
+/*				$tt_date_year = substr($tt_date, 0, 4);
 				if((int)$tt_date_year < 1970) $tt_date = str_replace($tt_date_year, "1970", $tt_date);
 				elseif((int)$tt_date_year > 2037) $tt_date = str_replace($tt_date_year, "2037", $tt_date);
 				//End of patch for year outside the interval 1970-2037
 
 				$tt_time = $this->mydate->getTimestamp($tt_date);
+*/
 
-				if($tt_time > 0){
-					switch($recursive){
-						case "year": //add to yearly
-							if(!in_array($tt_time, $this->tt_dates[2])){
-								$this->tt_dates[2][] = $tt_time;
-								$this->tt_tooltips[2][] = $tooltip;
-							}
-							else{
-								$tt_key = array_search($tt_time, $this->tt_dates[2]);
-								$this->tt_tooltips[2][$tt_key] = $this->tt_tooltips[2][$tt_key]."\n".$tooltip;
-							}
-							break;
-						case "month": //add to monthly
-							if(!in_array($tt_time, $this->tt_dates[1])){
-								$this->tt_dates[1][] = $tt_time;
-								$this->tt_tooltips[1][] = $tooltip;
-							}
-							else{
-								$tt_key = array_search($tt_time, $this->tt_dates[1]);
-								$this->tt_tooltips[1][$tt_key] = $this->tt_tooltips[1][$tt_key]."\n".$tooltip;
-							}
-							break;
-						default: //add to no recursive
-							if(!in_array($tt_time, $this->tt_dates[0])){
-								$this->tt_dates[0][] = $tt_time;
-								$this->tt_tooltips[0][] = $tooltip;
-							}
-							else{
-								$tt_key = array_search($tt_time, $this->tt_dates[0]);
-								$this->tt_tooltips[0][$tt_key] = $this->tt_tooltips[0][$tt_key]."\n".$tooltip;
-							}
-					}
+//				if($tt_time > 0){
+				$tt_time = $tt_date;
+				switch($recursive){
+					case "year": //add to yearly
+						if(!in_array($tt_time, $this->tt_dates[2])){
+							$this->tt_dates[2][] = $tt_time;
+							$this->tt_tooltips[2][] = $tooltip;
+						}
+						else{
+							$tt_key = array_search($tt_time, $this->tt_dates[2]);
+							$this->tt_tooltips[2][$tt_key] = $this->tt_tooltips[2][$tt_key]."\n".$tooltip;
+						}
+						break;
+					case "month": //add to monthly
+						if(!in_array($tt_time, $this->tt_dates[1])){
+							$this->tt_dates[1][] = $tt_time;
+							$this->tt_tooltips[1][] = $tooltip;
+						}
+						else{
+							$tt_key = array_search($tt_time, $this->tt_dates[1]);
+							$this->tt_tooltips[1][$tt_key] = $this->tt_tooltips[1][$tt_key]."\n".$tooltip;
+						}
+						break;
+					default: //add to no recursive
+						if(!in_array($tt_time, $this->tt_dates[0])){
+							$this->tt_dates[0][] = $tt_time;
+							$this->tt_tooltips[0][] = $tooltip;
+						}
+						else{
+							$tt_key = array_search($tt_time, $this->tt_dates[0]);
+							$this->tt_tooltips[0][$tt_key] = $this->tt_tooltips[0][$tt_key]."\n".$tooltip;
+						}
 				}
+//				}
 			}
 		}
 	}

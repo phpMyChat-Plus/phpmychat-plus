@@ -1595,8 +1595,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		  $myCalendar->setPath("./plugins/calendar/");
 		  if($INSTALL_DATE && $INSTALL_DATE != "")
 		  {
-		    $installdate = strtotime($INSTALL_DATE);
-			$myCalendar->setDate(date('d',$installdate), date('m',$installdate), date('Y',$installdate));
+			$myCalendar->setDate(substr($INSTALL_DATE, -2), substr($INSTALL_DATE, 5, 2), substr($INSTALL_DATE, 0, 4));
 		  }
 		  else
 		  {
@@ -1604,7 +1603,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			$myCalendar->setDate(date('d',$CorrectedTime), date('m',$CorrectedTime), date('Y',$CorrectedTime));
 		  }
 		  $myCalendar->setYearInterval(2000, date('Y'));
-		  $myCalendar->dateAllow('2000-01-01', date('Y-m-d'));
+		  $myCalendar->dateAllow('1900-01-01', date('Y-m-d'));
 		  $myCalendar->setAlignment('left', 'bottom'); //optional
 			$DbLink->query("SELECT username,birthday,show_age FROM ".C_REG_TBL." WHERE birthday != '' AND birthday != '0000-00-00' AND show_bday = '1' ORDER BY birthday ASC");
 			if ($DbLink->num_rows() != 0)
@@ -1616,10 +1615,9 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 				{
 					if ($show_age)
 					{
-						$my_dobtime = strtotime($birthday);
-						$my_dob->birth_num_year = date('Y',$my_dobtime);
-						$my_dob->birth_num_month = date('n',$my_dobtime);
-						$my_dob->birth_num_day = date('j',$my_dobtime);
+						$my_dob->birth_num_year = substr($birthday, 0, 4);
+						$my_dob->birth_num_month = str_replace("0","",substr($birthday, 5, 1)).substr($birthday, 6, 1);
+						$my_dob->birth_num_day = str_replace("0","",substr($birthday, -2, 1)).substr($birthday, -1);
 						$my_dob->calculate_age();
 						$age = $my_dob->age;
 					}
@@ -1629,7 +1627,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 						array_push($mday, substr($birthday, -5));
 					}
 					$myCalendar->setToolTips(array($birthday), ($show_age && $age) ? "- ".$birthname." (".$age.")" : "- ".$birthname, 'year');
-					unset($age, $my_dobtime);
+					unset($age);
 				}
 				$mday = array();
 				$DbLink->clean_results();

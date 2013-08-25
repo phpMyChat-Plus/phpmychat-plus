@@ -168,7 +168,7 @@ function processTooltips(){
 	//yearly recursive
 	for (var key in ttd[2]) {
 		if (ttd[2].hasOwnProperty(key)) {
-			this_date = new Date(ttd[2][key]*1000);
+		this_date = new Date(ttd[2][key]);
 			this_date_str = pad(current_year, 4, "0")+''+pad(this_date.getMonth()+1, 2, "0")+''+pad(this_date.getDate(), 2, "0");
 			this_tooltip = typeof(ttt[2][key]) != "undefined" ? ttt[2][key] : "";
 
@@ -209,7 +209,7 @@ function processTooltips(){
 	//monthly recursive
 	for (var key in ttd[1]) {
 		if (ttd[1].hasOwnProperty(key)) {
-			this_date = new Date(ttd[1][key]*1000);
+		this_date = new Date(ttd[1][key]);
 			this_date_str = pad(current_year, 4, "0")+''+pad(current_month, 2, "0")+''+pad(this_date.getDate(), 2, "0");
 			this_tooltip = typeof(ttt[1][key]) != "undefined" ? ttt[1][key] : "";
 
@@ -250,7 +250,7 @@ function processTooltips(){
 	//no recursive
 	for (var key in ttd[0]) {
 		if (ttd[0].hasOwnProperty(key)) {
-			this_date = new Date(ttd[0][key]*1000);
+			this_date = new Date(ttd[0][key]);
 			this_date_str = pad(this_date.getFullYear(), 4, "0")+''+pad(this_date.getMonth()+1, 2, "0")+''+pad(this_date.getDate(), 2, "0");
 			this_tooltip = typeof(ttt[0][key]) != "undefined" ? ttt[0][key] : "";
 

@@ -45,8 +45,8 @@ $tt_tooltips = (isset($_REQUEST["ttt"])) ? @tc_calendar::check_json_decode(strip
 
 //check year to be select in case of date_allow is set
 if(!$show_not_allow){
-  if ($ta1_set) $year_start = $cdate->getDateFromTimestamp($time_allow1, 'Y');
-  if ($ta2_set) $year_end = $cdate->getDateFromTimestamp($time_allow2, 'Y');
+  if ($ta1_set && $cdate->validDate($time_allow1)) $year_start = $cdate->getDate('Y', $time_allow1);
+  if ($ta2_set && $cdate->validDate($time_allow2)) $year_end = $cdate->getDate('Y', $time_allow2);
 }
 
 if(isset($_REQUEST["m"]))
@@ -57,16 +57,16 @@ else{
 	}else{
 		if($ta2_set && $year_end > 0){
 			//compare which one is more
-			$year_allow2 = $cdate->getDateFromTimestamp($time_allow2, 'Y');
+			$year_allow2 = $cdate->getDate('Y', $time_allow2);
 			if($year_allow2 >= $year_end){
 				//use time_allow2
-				$m = ($time_allow2 > time()) ? $cdate->getDate("m") : $cdate->getDateFromTimestamp($time_allow2, 'm');
+				$m = ($cdate->dateBefore($time_allow2)) ? $cdate->getDate("m") : $cdate->getDate('m', $time_allow2);
 			}else{
 				//use year_end
 				$m = ($year_end > $cdate->getDate("Y")) ? $cdate->getDate("m") : 12;
 			}
 		}elseif($ta2_set){
-			$m = ($time_allow2 > time()) ? $cdate->getDate("m") : $cdate->getDateFromTimestamp($time_allow2, 'm');
+			$m = ($cdate->dateBefore($time_allow2)) ? $cdate->getDate("m") : $cdate->getDate('m', $time_allow2);
 		}elseif($year_end > 0){
 			$m = ($year_end > $cdate->getDate("Y")) ? $cdate->getDate("m") : 12; //date('m')
 		}else $m = $cdate->getDate("m");
@@ -74,6 +74,8 @@ else{
 }
 
 if($m < 1 && $m > 12) $m = $cdate->getDate("m");
+
+$m = str_pad($m, 2, "0", STR_PAD_LEFT);
 
 $cyr = ($sly) ? true : false;
 if($sly && $sly < $year_start) $sly = $year_start;
@@ -89,13 +91,13 @@ if($y <= 0) $y = $cdate->getDate("Y");
 // ensure m-y fits date allow range
 if (!$show_not_allow) {
   if ($ta1_set) {
-    $m1 = $cdate->getDateFromTimestamp($time_allow1, 'm');
-    $y1 = $cdate->getDateFromTimestamp($time_allow1, 'Y');
+    $m1 = $cdate->getDate('m', $time_allow1);
+    $y1 = $cdate->getDate('Y', $time_allow1);
     if ($y == $y1 && (int)$m < (int)$m1) $m = $m1;
   }
   if ($ta2_set) {
-    $m2 = $cdate->getDateFromTimestamp($time_allow1, 'm');
-    $y2 = $cdate->getDateFromTimestamp($time_allow1, 'Y');
+    $m2 = $cdate->getDate('m', $time_allow2);
+    $y2 = $cdate->getDate('Y', $time_allow2);
     if ($y == $y2 && (int)$m > (int)$m2) $m = $m2;
   }
 }
@@ -117,15 +119,15 @@ $cobj->setYearInterval($year_start, $year_end);
 
 //check and show default calendar month and year on valid range of date_allow
 if(!isset($_REQUEST["m"])){
-	if($time_allow1 > 0){
+	if($time_allow1 != ""){
 		//get date of time allow1
-		$date_allow1 = $cdate->getDateFromTimestamp($time_allow1);
-
-		//check valid if today is after date_allow1
-		if(!$cdate->dateAfter($date_allow1, $today)){
-			//reset default calendar display
-			$y = $cdate->getDateFromTimestamp($time_allow1, 'Y');
-			$m = $cdate->getDateFromTimestamp($time_allow1, 'm');
+		if($cdate->validDate($time_allow1)){	
+			//check valid if today is after date_allow1
+			if(!$cdate->dateAfter($time_allow1, $today)){
+				//reset default calendar display
+				$y = $cdate->getDate('Y', $time_allow1);
+				$m = $cdate->getDate('m', $time_allow1);
+			}
 		}
 	}
 }
@@ -191,11 +193,11 @@ for($day=$startwrite; $day<=$total_lastmonth; $day++){
 	}else $week_rows[$row_count][$wknum] = $week_rows[$row_count][$wknum]+1;
 }
 
-$pvMonthTime = strtotime($previous_year."-".$previous_month."-".$total_lastmonth);
+$pvMonthTime = $previous_year."-".$previous_month."-".$total_lastmonth;
 
 //check lastmonth is on allowed date
 if($ta1_set && !$show_not_allow){
-	if($pvMonthTime >= $time_allow1){
+	if($cdate->dateBefore($pvMonthTime, $time_allow1)){
 		$show_previous = true;
 	}else $show_previous = false;
 }else $show_previous = true; //always show when not set
@@ -224,7 +226,6 @@ for($day=1; $day<=$total_thismonth; $day++){
 	$date_num = $cdate->getDayOfWeek($date_str);
 	$day_txt = $cdate->getDate('D', $date_str);
 
-	$currentTime = $cdate->getTimestamp($y."-".$m."-".$day);
 	$htmlClass = array();
 
 	$is_today = ($cdate->differentDate($date_str) == 0) ? 1 : 0; //$is_today = $currentTime - strtotime($today);
@@ -236,13 +237,13 @@ for($day=1; $day<=$total_thismonth; $day++){
 	//check date allowed
 	if($ta1_set && $ta2_set){
 		//both date specified
-		$dateLink = ($time_allow1 <= $currentTime && $currentTime <= $time_allow2);
+		$dateLink = ($cdate->dateBefore($date_str, $time_allow1) && $cdate->dateAfter($date_str, $time_allow2)) ? true : false;
 	}elseif($ta1_set){
 		//only date 1 specified
-		$dateLink = ($currentTime >= $time_allow1);
+		$dateLink = $cdate->dateBefore($date_str, $time_allow1) ? true : false;
 	}elseif($ta2_set){
 		//only date 2 specified
-		$dateLink = ($currentTime <= $time_allow2);
+		$dateLink = $cdate->dateAfter($date_str, $time_allow2) ? true : false;
 	}else{
 		//no date allow specified, assume show all
 		$dateLink = true;
@@ -264,11 +265,13 @@ for($day=1; $day<=$total_thismonth; $day++){
 			//check on yearly recursive
 			if(isset($sp_dates[2]) && is_array($sp_dates[2])){
 				foreach($sp_dates[2] as $sp_time){
-					$sp_time_md = (int)$cdate->getDateFromTimestamp($sp_time, 'md'); //date('md', $sp_time);
-					$this_md = (int)$cdate->getDateFromTimestamp($currentTime, 'md'); //date('md', $currentTime);
-					if($sp_time_md == $this_md){
-						$sp_found = true;
-						break;
+					if($sp_time != ""){
+						$sp_time_md = (int)$cdate->getDate('md', $sp_time); //date('md', $sp_time);
+						$this_md = (int)$cdate->getDate('md', $date_str); //date('md', $currentTime);
+						if($sp_time_md == $this_md){
+							$sp_found = true;
+							break;
+						}
 					}
 				}
 			}
@@ -277,7 +280,7 @@ for($day=1; $day<=$total_thismonth; $day++){
 			if(isset($sp_dates[1]) && is_array($sp_dates[1]) && !$sp_found){
 				foreach($sp_dates[1] as $sp_time){
 					if($sp_time != "" && $sp_time > 0){
-						$sp_time_d = (int)$cdate->getDateFromTimestamp($sp_time, 'd'); //date('d', $sp_time);
+						$sp_time_d = (int)$cdate->getDate('d', $sp_time); //date('d', $sp_time);
 						if($sp_time_d == $day){
 							$sp_found = true;
 							break;
@@ -288,7 +291,7 @@ for($day=1; $day<=$total_thismonth; $day++){
 
 			//check on no recursive
 			if(isset($sp_dates[0]) && is_array($sp_dates[0]) && !$sp_found){
-				$sp_found = in_array($currentTime, $sp_dates[0]);
+				$sp_found = in_array($date_str, $sp_dates[0]);
 			}
 
 			switch($sp_type){
@@ -380,8 +383,8 @@ for($day=$row_count; $day<6; $day++){
 
 //check next month is on allowed date
 if($ta2_set && !$show_not_allow){
-	$nxMonthTime = strtotime($next_year."-".$next_month."-1");
-	if($nxMonthTime <= $time_allow2){
+	$nxMonthTime = $next_year."-".$next_month."-1";	
+	if($cdate->dateAfter($nxMonthTime, $time_allow2)){
 		$show_next = true;
 	}else $show_next = false;
 }else $show_next = true; //always show when not set
@@ -422,7 +425,7 @@ define("L_ABOUT_LOC", "<b>Localized Datepicker</b><br />".sprintf(L_VERSION, "<b
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>TriConsole.com - PHP Calendar Date Picker</title>
 <link href="calendar.css" rel="stylesheet" type="text/css" />
-<script language="javascript">
+<script type="text/javascript">
 <!--
 var today_month = "<?php echo($cdate->getDate('m')); ?>";
 var today_year = "<?php echo($cdate->getDate('Y')); ?>";
@@ -431,8 +434,8 @@ var current_month = "<?php echo($m);?>";
 var current_year = "<?php echo($y);?>";
 //-->
 </script>
-<script language="javascript" src="calendar_form.js"></script>
-<script language="javascript">
+<script type="text/javascript" src="calendar_form.js"></script>
+<script type="text/javascript">
 <!--
 function submitNow(dvalue, mvalue, yvalue){
 	<?php
@@ -475,9 +478,9 @@ function submitNow(dvalue, mvalue, yvalue){
 <?php } ?>
     <div id="calendar-header" align="center">
         <div style="float: <?php echo($rtl ? "right" : "left"); ?>;" id="info">
-		<img src="images/<?php echo($new_version ? "version_info.gif" : "about.png"); ?>" width="9" height="9" border="0" id="info_icon" />
-		<div id="about" dir="<?php echo(($rtl && L_HERE != "here") ? "rtl" : "ltr"); ?>" style="<?php echo($rtl ? "right: 0px;".(L_HERE != "here" ? " direction: rtl; unicode-bidi: embed;" : "") : "left: 0px;"); ?>"><?php echo($dig ? $cobj->digitize_arabics(L_ABOUT_LOC) : L_ABOUT_LOC); ?></div>
-        	<script language="javascript">
+			<img src="images/<?php echo($new_version ? "version_info.gif" : "about.png"); ?>" width="9" height="9" border="0" id="info_icon" />
+			<div id="about" dir="<?php echo(($rtl && L_HERE != "here") ? "rtl" : "ltr"); ?>" style="<?php echo($rtl ? "right: 0px;".(L_HERE != "here" ? " direction: rtl; unicode-bidi: embed;" : "") : "left: 0px;"); ?>"><?php echo($dig ? $cobj->digitize_arabics(L_ABOUT_LOC) : L_ABOUT_LOC); ?></div>
+        	<script type="text/javascript">
 			<!--
 			var timeoutID = new Array();
 
