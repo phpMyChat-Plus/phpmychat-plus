@@ -34,6 +34,7 @@ If your users encounter bootings for no reason, try to disable sounds in chat.
 
 Fixes History:
 26.07.2013 - 1.94-RC3:
+- calendar year limitation on some servers to >1970 and/or <2038 has been fixed; (functionality related)
 - added 2 more Gravatars support (Mystery Man - static and Retro - dynamic); (functionality related) - required DB modification
 06.02.2013 - 1.94-RC2:
 - added birthday tooltips to Admin panel calendar; (functionality related)

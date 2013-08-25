@@ -206,7 +206,7 @@ switch ($hl)
 		break;
 };
 ?>
-<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
+<script type="text/javascript">
 <!--
 //	JS strings
 	var l_lang = "<?php echo($hl ? $hl : (defined("L_LANG") ? L_LANG : "")); ?>";
@@ -300,6 +300,6 @@ else{
 	var s_sat = "<?php echo(defined('L_S_SAT') ? L_S_SAT : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%a','1270857600')) : strftime('%a','1270857600'))); ?>";
 	var s_sun = "<?php echo(defined('L_S_SUN') ? L_S_SUN : (stristr(PHP_OS,'win') ? utf_conv(WIN_DEFAULT,'utf-8',strftime('%a','1270944000')) : strftime('%a','1270944000'))); ?>";
 // -->
-</SCRIPT>
+</script>
 <?php
 ?>

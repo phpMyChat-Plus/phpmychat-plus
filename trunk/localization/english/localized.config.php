@@ -234,7 +234,7 @@ define("A_CONFCONTENT_122", "One count per Week");
 
 //Content Chat Schedule
 define("A_CONFCONTENT_123", "Open times Schedule for your chat and chatrooms.");
-define("A_CONFCONTENT_124", "This mod is still under development! The fields have deliberately been disabled.");
+define("A_CONFCONTENT_124", "This mod is still under development! The schedule fields have deliberately been disabled.");
 define("A_CONFCONTENT_125", "Daily schedule:");
 define("A_CONFCONTENT_126", "Sunday schedule:");
 define("A_CONFCONTENT_127", "Monday schedule:");

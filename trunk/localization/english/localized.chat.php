@@ -698,7 +698,7 @@ define("L_SKINS_TITLE", "Skins Preview");
 define("L_SKINS_TITLE1", "Skins %s to %s preview"); // Skins 1 to 4 preview
 define("L_SKINS_AV", "Available skins");
 define("L_SKINS_NONAV", "There are no styles defined in the \"skins\" folder");
-define("L_SKINS_COPY", "&copy; %s Skin by %s");
+define("L_SKINS_COPY", "&copy;%s Skin by %s");
 
 // Swap image titles by Ciprian
 define("L_GEN_ICON", "Gender icon");

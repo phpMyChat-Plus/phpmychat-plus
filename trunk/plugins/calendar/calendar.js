@@ -78,8 +78,8 @@ function setValue(objname, d){
 
 	updateValue(objname, d);
 
-//	var dp = document.getElementById(objname+"_dp").value;
-//	if(dp) toggleCalendar(objname);
+	var dp = document.getElementById(objname+"_dp").value;
+	if(dp) toggleCalendar(objname);
 
 	checkPairValue(objname, d);
 

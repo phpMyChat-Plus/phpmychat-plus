@@ -647,12 +647,10 @@ else
 			  $myCalendar->setPath("plugins/calendar/");
 			  if(isset($BIRTHDAY))
 			  {
-			    $birth_day = strtotime($BIRTHDAY);
-				$myCalendar->setDate(date('d',$birth_day), date('m',$birth_day), date('Y',$birth_day));
+				$myCalendar->setDate(substr($BIRTHDAY, -2), substr($BIRTHDAY, 5, 2), substr($BIRTHDAY, 0, 4));
 			  }
 			  $myCalendar->setYearInterval(1900, date('Y'));
 			  $myCalendar->dateAllow('1900-01-01', date('Y-m-d'));
-			  $myCalendar->setSpecificDate(array(""), 0, 'year');
 				$DbLink->query("SELECT username,birthday,show_age FROM ".C_REG_TBL." WHERE birthday != '' AND birthday != '0000-00-00' AND show_bday = '1' ORDER BY birthday ASC");
 				if ($DbLink->num_rows() != 0)
 				{
@@ -663,10 +661,9 @@ else
 					{
 						if ($show_age)
 						{
-							$my_dobtime = strtotime($birthday);
-							$my_dob->birth_num_year = date('Y',$my_dobtime);
-							$my_dob->birth_num_month = date('n',$my_dobtime);
-							$my_dob->birth_num_day = date('j',$my_dobtime);
+							$my_dob->birth_num_year = substr($birthday, 0, 4);
+							$my_dob->birth_num_month = str_replace("0","",substr($birthday, 5, 1)).substr($birthday, 6, 1);
+							$my_dob->birth_num_day = str_replace("0","",substr($birthday, -2, 1)).substr($birthday, -1);
 							$my_dob->calculate_age();
 							$age = $my_dob->age;
 						}
@@ -676,7 +673,7 @@ else
 							array_push($mday, substr($birthday, -5));
 						}
 						$myCalendar->setToolTips(array($birthday), ($show_age && $age) ? "- ".$birthname." (".$age.")" : "- ".$birthname, 'year');
-						unset($age, $my_dobtime);
+						unset($age);
 					}
 					$mday = array();
 					$DbLink->clean_results();
