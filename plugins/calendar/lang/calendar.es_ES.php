@@ -3,8 +3,8 @@
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 3.70
 # Language: Spanish / español
-# Translator: Roxana Castañeda <roxminu@yahoo.com>
-# Last file update: 16.08.2013
+# Translator: Roxana Castañeda Sanguinetti <roxminu@yahoo.com>
+# Last file update: 11.09.2013
 
 // Class strings localization
 define("L_DAYC", "Día");
@@ -34,7 +34,7 @@ define("L_HERE", "aquí");
 define("L_UPDATE", "Actualización disponible %s !");
 define("L_TRANAME", "Roxana Castañeda");
 define("L_TRABY", "Traducido por %s");
-#missing L_DONATE
+define("L_DONATE", "¿Deseas donar? Ninguna cantidad es muy pequeña.");
 
 // Set the first day of the week in your language
 define("FIRST_DAY", "1"); // 1 for Monday, 0 for Sunday
