@@ -142,7 +142,7 @@ foreach($yrsu as $yru)
 			while (false !== ($dyu = readdir($dayu)))
 			{
 #				if (!eregi("\.html",$dyu) && !eregi("_vti_conf",$dyu) && !eregi("error",$dyu) && $dyu!=='.' && $dyu!=='..')
-				if (!preg_match("/(\.html|_vti_conf|_vti_cnf|_vti_cnf|error)$/i", $dyu) && !preg_match("/^[\.]/", $dyu))
+				if (!preg_match("/(\.html|_vti_conf|error)$/i", $dyu) && !preg_match("/^[\.]/", $dyu))
 				{
 					$dayarrayu[]=$dyu;
 		 		}

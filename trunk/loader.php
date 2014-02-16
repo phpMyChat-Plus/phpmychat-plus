@@ -144,7 +144,7 @@ if(C_EN_STATS)
 }
 
 	if(C_USE_AVATARS) $DbAvatar = new DB;
-	if(COLOR_NAMES) $DbColor = new DB;
+	if(COLOR_NAMES || C_ITALICIZE_POWERS) $DbColor = new DB;
 	$DbLink = new DB;
 	$DbLink->query("SELECT perms,rooms,allowpopup,join_room FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	$reguser = ($DbLink->num_rows() != 0);
@@ -424,7 +424,7 @@ if($DbLink->num_rows() > 0)
 			unset($use_gravatar);
 			unset($avatar);
 #			$DbAvatar = new DB;
-			$DbAvatar->query("SELECT email, avatar, use_gravatar FROM ".C_REG_TBL." WHERE username = '".$User."'");
+			$DbAvatar->query("SELECT email, avatar, use_gravatar FROM ".C_REG_TBL." WHERE username = '$User'");
 				list($email, $avatar, $use_gravatar) = $DbAvatar->next_record();
 				if($DbAvatar) $DbAvatar->clean_results();
 			if (empty($avatar) || $avatar == "") $avatar = C_AVA_RELPATH . C_DEF_AVATAR;
@@ -448,7 +448,7 @@ if($DbLink->num_rows() > 0)
 #			$DbColor = new DB;
 			if (isset($User))
 			{
-				$DbColor->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '".$User."'");
+				$DbColor->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '$User'");
 					list($perms_user,$colorname) = $DbColor->next_record();
 					if($DbColor) $DbColor->clean_results();
 				if(COLOR_NAMES && (isset($colorname) && $colorname != "" && strcasecmp($colorname, $COLOR_TB) != 0))
@@ -473,7 +473,7 @@ if($DbLink->num_rows() > 0)
 			}
 			if (isset($Dest))
 			{
-				$DbColor->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '".$Dest."'");
+				$DbColor->query("SELECT perms,colorname FROM ".C_REG_TBL." WHERE username = '$Dest'");
 					list($perms_dest,$colornamedest) = $DbColor->next_record();
 					if($DbColor) $DbColor->clean_results();
 				if(COLOR_NAMES && (isset($colornamedest) && $colornamedest != "" && strcasecmp($colornamedest, $COLOR_TB) != 0))

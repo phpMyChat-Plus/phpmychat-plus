@@ -86,7 +86,7 @@ if (stripos(C_WMP_STREAM,"mp3") !== false)
 		s1.write("container");
 	</script>
 </div>
-		<?php
+<?php
 }
 else
 {
