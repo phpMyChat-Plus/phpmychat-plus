@@ -130,10 +130,6 @@ else
 						?>
 					</TD>
 				</TR>
-			<?php
-			if($count_BanUsers)
-			{
-			?>
 				<TR>
 					<TD ALIGN=CENTER>
 						<INPUT TYPE=button VALUE="<?php echo(A_SHEET4_3); ?>" onClick="for (var i = 0; i < document.forms['MailForm'].elements['SendTo[]'].options.length; i++) {document.forms['MailForm'].elements['SendTo[]'].options[i].selected=true;}">
@@ -141,6 +137,10 @@ else
 						</SELECT>
 					</TD>
 				</TR>
+			<?php
+			if($count_BanUsers)
+			{
+			?>
 				<TR>
 					<TD ALIGN=CENTER><?php echo(A_SHEET4_2." ".A_MENU_2." [".($count_BanUsers)."]"); ?></TD>
 				</TR>
@@ -158,9 +158,6 @@ else
 						?>
 					</TD>
 				</TR>
-				<?php
-				}
-				?>
 				<TR>
 					<TD ALIGN=CENTER>
 						<INPUT TYPE=button VALUE="<?php echo(A_SHEET4_3); ?>" onClick="for (var i = 0; i < document.forms['MailForm'].elements['SendToBan[]'].options.length; i++) {document.forms['MailForm'].elements['SendToBan[]'].options[i].selected=true;}">
@@ -168,6 +165,9 @@ else
 						</SELECT>
 					</TD>
 				</TR>
+				<?php
+				}
+				?>
 		<?php
 		if (isset($pmc_email) && $pmc_email != "")
 		{

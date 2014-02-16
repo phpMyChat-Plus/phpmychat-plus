@@ -404,7 +404,7 @@ $i=1;
 if ($NewPMs == 1)
 {
 list($T, $User, $Room, $Dest, $M, $Read, $RF) = $DbLink->next_record();
-		if(COLOR_NAMES)
+		if(COLOR_NAMES || C_ITALICIZE_POWERS)
 		{
 			$colorname_tag = "";
 			$colorname_endtag = "";
@@ -495,7 +495,7 @@ if($NewPMs > 10)
 #$i = 1;
 while(($i < 11) && (list($T, $User, $Room, $Dest, $M, $Read, $RF) = $DbLink->next_record()))
 {
-		if(COLOR_NAMES)
+		if(COLOR_NAMES || C_ITALICIZE_POWERS)
 		{
 			$colorname_tag = "";
 			$colorname_endtag = "";

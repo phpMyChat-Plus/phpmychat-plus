@@ -131,7 +131,7 @@ if($DbLink->num_rows() > 0)
 		else $Message = str_replace('target="_blank">','title="'.sprintf(L_CLICK,L_LINKS_3).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_LINKS_3).'.\'; return true" target="_blank">',$Message);
 
 		$Message = str_replace('alt="Send email">','title="'.sprintf(L_CLICK,L_EMAIL_1).'" onMouseOver="window.status=\''.sprintf(L_CLICK,L_EMAIL_1).'.\'; return true">',$Message);
-		if(COLOR_NAMES)
+		if(COLOR_NAMES || C_ITALICIZE_POWERS)
 		{
 			$colorname_tag = "";
 			$colorname_endtag = "";
