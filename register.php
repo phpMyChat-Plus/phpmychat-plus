@@ -371,7 +371,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 	 . "----------------------------------------------".$eol
      . "Prefered language: ".$L.$eol
      . "Registered on: $dt $ti".$eol
-     . "From IP address: $IP (".gethostbyaddr($IP).")".$eol
+     . "From IP address: $IP".$eol
 	 . "----------------------------------------------".$eol.$eol
 	 . "Please note that some data should be disabled from this copy for privacy concerns!".$eol
 	 . "Save this email for your further reference.".$eol

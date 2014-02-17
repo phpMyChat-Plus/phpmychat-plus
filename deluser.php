@@ -129,7 +129,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_20)
 	 . "----------------------------------------------".$eol
 	 . "Preffered language: ".$L.$eol
      . "Deletion on: $dt $ti".$eol
-     . "IP address: $IP (".gethostbyaddr($IP).")".$eol
+     . "From IP address: $IP".$eol
      . "----------------------------------------------";
 		$Headers = "From: ${Sender_Name} <${Sender_email}>".$eol;
 		$Headers .= "X-Sender: <${Sender_email}>".$eol;
