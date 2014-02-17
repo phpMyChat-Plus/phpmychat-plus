@@ -33,8 +33,10 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 If your users encounter bootings for no reason, try to disable sounds in chat.
 
 Fixes History:
-26.07.2013 - 1.94-RC3:
+16.02.0214 - 1.94-RC4
+- fixed a registration/profile edit issue for users behind proxies; (functionality related)
 - fixed a "select all" bug in Admin Panel/Send emails tab; (functionality related)
+26.07.2013 - 1.94-RC3:
 - calendar year limitation on some servers to >1970 and/or <2038 has been fixed; (functionality related)
 - added 2 more Gravatars support (Mystery Man - static and Retro - dynamic); (functionality related) - required DB modification
 06.02.2013 - 1.94-RC2:
