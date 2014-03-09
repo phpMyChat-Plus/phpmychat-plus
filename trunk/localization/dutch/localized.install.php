@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.install.php - plus version (07.06.2009 - rev.7)
+// File : dutch/localized.install.php - plus version (09.03.2014 - rev.8)
 // Translation by Bert Moorlag <berbia@hotmail.com>
 // Do not use ' ; use ’ istead (utf-8 edit bug)
 
@@ -17,7 +17,7 @@ define("L_DB_NOCONNECT", "Kan geen verbinding maken met de database!");
 define("L_DB_HINT1", "Database %s bestaat niet en kan niet worden gemaakt!");
 define("L_PASS_ERROR1", "Je hebt geen beheerders naam ingevuld.<br />Ga terug en kies een naam voor jou Beheerders Account!");
 define("L_PASS_ERROR2", "Je moet de wachtwoord veld invullen.<br />Ga terug en vul 2 x je wachtwoord in!");
-define("L_PASS_ERROR3", "Het wachtwoord en de verificatie wactwoord komen niet overeen.<br />Ga terug en vul opnieuw wachtwoord in!");
+define("L_PASS_ERROR3", "Het wachtwoord en de verificatie wachtwoord komen niet overeen.<br />Ga terug en vul opnieuw wachtwoord in!");
 define("L_FILE_ERROR1", "Kan niet CHMOD de file");
 define("L_FILE_ERROR2", "");
 define("L_FOLD_ERROR1", "Kan niet CHMOD de map");
@@ -33,7 +33,7 @@ define("L_P1_HINT2", "Selecteer hieronder welke type installatie dit is.");
 define("L_P1_HINT3", "De FTP - gegevens lijkt niet goed te zijn. De setup kan niet verder gaan. Ga terug en verander de gegevens. Dit zijn de fouten:");
 define("L_P2_HINT1", "Nu controleren we de configuratie van phpMyChat. Er moet een file worden veranderd(\"config/config.lib.php\") op deze server.");
 define("L_P2_HINT2", "De configuratie file is niet overschrijfbaar. Om deze te veranderen, gebruik een FTP-program (e.g. Total Commander) om verbinding te krijgen met je server en CHMOD 666 to \"config.lib.php\" file in de configuratie map). Als je niet weet hoe dit moet of als je de permissie´s niet wilt veranderen van deze file, vul dan de formulier hieronder in en klik op \"".L_BTN1."\".");
-define("L_P2_HINT3", "Note: Als je de permissie´s wel hebt veranderd, klik op \"".L_BTN4."\" knop na de chmod actie, om de setup te laten weten dat de file overschrijfbaar is!");
+define("L_P2_HINT3", "Note: Als je de permissie’s hebt veranderd, klik op \"".L_BTN4."\" knop na de chmod actie, om de setup te laten weten dat de file overschrijfbaar is!");
 define("L_P2_HINT4", "De file \"config/config.lib.php\" is overschrijfbaar. Vul de rest van de gegevens in en deze worden automatisch bewaard in de file.");
 define("L_P3_HINT1", "Ga terug naar de vorige pagina en verander de gegevens. Als de setup geen database kan maken, doe dit dan handmatig.");
 define("L_P3_HINT2", "Dit zijn de configuratie resultaten die je kan plaatsen in \"config/config.lib.php\" file. Selecteer de gehele tekst, kopieer en plak het in een tekstverwerker(e.g. Notepad++). Sla deze file op als config.lib.php (let op dat de file Alle types zijn en geen Tekst document) en upload deze file via je ftp-server in  \"config\" directory.");
@@ -41,7 +41,7 @@ define("L_P3_HINT3", "Dan moet je nog een Beheerders account aanmaken, om toegan
 define("L_P3_HINT4", "Jou \"config/config.lib.php\" - file:");
 define("L_P3_HINT5", "Kan de \"config/config.lib.php\" niet openen om te schrijven!");
 define("L_P3_HINT6", "Ga terug naar de vorige pagina en verander de gegevens. De file is niet schrijfbaar.");
-define("L_P3_HINT7", "Nu moet je een Beheerders account aanmaken, om toegang te krijgen tot de Beheerders Panel van phpMyChat.");
+define("L_P3_HINT7", "Nu moet je een beheerders account aanmaken, om toegang te krijgen tot de Beheerders Panel van phpMyChat.");
 define("L_P3_HINT8", "De veranderingen zijn opgeslagen.");
 define("L_P3_HINT9", "Merk op: Deze gebruikers account heeft alle rechten in de Beheerders Panel en chatrooms!");
 define("L_P3_BTN1", "Selecteer alles");

@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.cmds.php (23.08.2009 - rev.1)
+// File : dutch/localized.cmds.php (09.03.2014 - rev.2)
 // Translation by Bert Moorlag <berbia@zeelandnet.nl>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -28,7 +28,7 @@ define("L_CMD_ORDER", "sorteer"); // order (change the posts order to first-on-t
 define("L_CMD_PROFILE", "profiel"); // profile (open the personal profile page for editing)
 define("L_CMD_PROMOTE", "promoveer"); // promote (promote an user to the next power level - user->mod->admin)
 define("L_CMD_QUIT", "stoppen"); // quit,bye,exit (quit a room)
-define("L_CMD_RECALL", "herhaall"); // !,recall (recalls last sent message in the message box)
+define("L_CMD_RECALL", "herhaal"); // !,recall (recalls last sent message in the message box)
 define("L_CMD_REFRESH", "ververs,herlaad"); // refresh,reload (modify/reset the time between browser refreshes/reloads)
 define("L_CMD_ROOM", "kamer"); // room (send an announcement/warning to the current room)
 define("L_CMD_RTL", "rnl"); // rtl (post a right-to-left text)
