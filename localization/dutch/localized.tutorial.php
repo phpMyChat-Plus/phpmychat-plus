@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.tutorial.php - plus version (26.08.2008 - rev.10)
+// File : dutch/localized.tutorial.php - plus version (09.03.2014 - rev.11)
 // Original translation for the Plus version by Bert Moorlag <berbia@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -49,7 +49,7 @@ A.topLink:hover, A.topLink:active
 <P></P>
 <TABLE BORDER="5" CELLPADDING="5" ALIGN="center">
 <TR>
-	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- Handleiding voor <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -</FONT><br /><I>&copy; 2007<?php echo((date('Y')>"2007") ? "-".date('Y') : ""); ?> - Vertaling door Bert Moorlag - Vlissingen, Nederland</I></B></TD>
+	<TD ALIGN="center"><FONT SIZE="+2" COLOR="GREEN"><B>- Handleiding voor <?php echo(APP_NAME." - ".APP_VERSION.APP_MINOR); ?> -</FONT><br /><I>&copy; 2007<?php echo((date('Y')>"2007") ? "-".date('Y') : ""); ?> - Vertaling door Bert Moorlag - Oost-Souburg, Nederland</I></B></TD>
 </TR>
 </TABLE><br /><br />
 <P><A NAME="top"></A></P>
@@ -148,7 +148,7 @@ if (C_BANISH != "0")
 	<?php
 };
 ?>
-&nbsp&nbsp&nbsp&nbsp<A HREF="#promote" CLASS="topLink">Promoot/Degradeer een gebruiker</A><br />
+&nbsp&nbsp&nbsp&nbsp<A HREF="#promote" CLASS="topLink">Promotie/Degradatie van een gebruiker</A><br />
 <P>
 <hr />
 <hr />
@@ -173,7 +173,7 @@ if (C_MULTI_LANG)
 <P>
 <FONT SIZE="+1"><A NAME="login"><B>Login naar chat:</B></A></FONT>
 <P>
-Als je al bent geregistreert, log in door je gebruikersnaam en wachtwoord in te voeren. Selecteer daarna de chat room die je binnen wilt gaan en klik op de ’<?php echo(L_SET_14); ?>’ knop.<br />
+Zodra je bent geregistreert kan je inloggen door je gebruikersnaam en wachtwoord in te voeren. Selecteer daarna de chat room die je binnen wilt gaan en klik op de ’<?php echo(L_SET_14); ?>’ knop.<br />
 <?php
 if (C_REQUIRE_REGISTER)
 {
@@ -208,7 +208,7 @@ Als je nog niet hebt geregistreert<?php if (!C_REQUIRE_REGISTER) echo(" en je wi
 	<LI>Dan, klik op de Registreer knop en je account wordt gemaakt. Mocht je tussentijds willen stoppen met registreren, klik op de sluit knop.
 </UL>
 <P>
-<a name="modProfile"></a>Merk op, geregistreerde gebruikers kunnen hun eigen <?php if (C_SHOW_DEL_PROF) echo("profiel"); ?> verwijderen/bewerken door te klikken op de bijpassende <?php echo((!C_SHOW_DEL_PROF ? "link" : "links")); ?>.<br />
+<a name="modProfile"></a>Let op: geregistreerde gebruikers kunnen hun eigen <?php if (C_SHOW_DEL_PROF) echo("profiel"); ?> verwijderen/bewerken door te klikken op de bijpassende <?php echo((!C_SHOW_DEL_PROF ? "link" : "links")); ?>.<br />
 <br /><P ALIGN="right"><A HREF="#top">Naar boven</A></P>
 <P>
 <hr />
@@ -220,7 +220,7 @@ if (C_VERSION == "2")
 	<P>
 	<FONT SIZE="+1"><A NAME="create_room"><B>Maak een kamer :</B></A></FONT>
 	<P>
-	Alleen geregistreerde gebruikers kunnen een eigen kamer maken. In een prive kamer kunnen alleen gebruikers toegang krijgen die hun naam weten, deze komt niet in beeld, behalve voor degene die daar in zitten.<br />
+	Alleen geregistreerde gebruikers kunnen een eigen kamer maken. In een privé kamer kunnen alleen gebruikers toegang krijgen die hun naam weten, deze komt niet in beeld, behalve voor degene die daar in zitten.<br />
 	<P>
 	De naam van een kamer mag geen komma of een backslash (\) bevatten.<?php if (C_NO_SWEAR) echo(" Wat niet mag zijn \"vloekwoorden\"."); ?>
 	<br /><P ALIGN="right"><A HREF="#top">Naar boven</A></P>
@@ -253,7 +253,7 @@ if ($Ver == "H")
 <P>
 <FONT SIZE="+1"><A NAME="sending"><B>Een bericht verzenden :</B></A></FONT>
 <P>
-Om een bericht te posten in een chat room, typ de tekst in het venster, links onder en daarna Enter om te verzenden. Berichten van alle gebruiken rollen naar beneden in de chat box.<br />
+Om een bericht te plaatsen in een chat room, typ de tekst in het venster, links onder en daarna Enter om te verzenden. Berichten van alle gebruiken rollen naar beneden in de chat box.<br />
 <?php if (C_NO_SWEAR) echo("Merk op \"vloekwoorden\" worden verwijderd uit berichten."); ?>
 <P>
 Je kan de tekst kleuren van je bericht veranderen, door een andere kleur te kiezen, aan de rechterkant van het venster.
@@ -291,7 +291,7 @@ Je kan de tekst kleuren van je bericht veranderen, door een andere kleur te kiez
 <P>
 <FONT SIZE="+1"><A NAME="exit"><B>De chatroom verlaten :</B></A></FONT>
 <P>
-Je kan de chat verlaten door eenvoudig op de <?php echo (EXIT_LINK_TYPE) ? "<img src='localization/$L/images/exitdoor.gif' border=0 alt='".L_EXIT."'> plaatje" : '"'.L_EXIT.'" link'; ?>. Ook kan je een commando in je tekst venster schrijven:<br />
+Je kan de chat verlaten door eenvoudig op de <?php echo (EXIT_LINK_TYPE) ? "<img src='localization/$L/images/exitdoor.gif' border=0 alt='".L_EXIT."'> plaatje" : '"'.L_EXIT.'" link'; ?> te klikken. Ook kan je een commando in je tekst venster schrijven:<br />
 /exit<br />
 /bye<br />
 /quit<br />
@@ -307,7 +307,7 @@ Het bericht is dan &quot;Tot de volgende keer!&quot; en daarna wordt je uitgelog
 <P>
 <FONT SIZE="+1"><A NAME="users_popup"><B>Wie is op de chat, zonder ingelogd te zijn:</B></A></FONT>
 <P>
-Je kan op de link klikken, wat aangeeft hoeveel gebruikers zijn ingelogd (startpagina), of als je aan het chatten bent op het plaatje <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_DETACH ?>"> klikken, rechts-boven in beeld, en er opent een venster met alle gebruikers, en de kamer waar ze zich bevinden.<br />
+Je kan op de link klikken, welke aangeeft hoeveel gebruikers zijn ingelogd (startpagina), of als je aan het chatten bent op het plaatje <IMG SRC="images/popup.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_DETACH ?>"> klikken, rechts-boven in beeld, en er opent een venster met alle gebruikers, en de kamer waar ze zich bevinden.<br />
 De titel van dit venster omvat de gebruikersnamen, wanneer er minder dan drie zijn.
 <P>
 Door op dit <IMG SRC="images/sound.gif" WIDTH=13 HEIGHT=13 BORDER=0 ALT="<?php echo L_BEEP ?>"> plaatje te klikken zal het geluid aan/uit zetten wanneer er een gebruiker te chat binnenkomt. <br />
@@ -341,7 +341,7 @@ Er zijn verschillende manieren om het beeld van de Chat te veranderen. Om deze i
 	?>
 	<LI>De <B>Notify command</B> kan je aan/uit zetten, deze laat zien wanneer gebruikers een chatroom in of uit gaan. Standaard is deze optie <?php echo(C_NOTIFY ? "aan" : "uit"); ?> en de mededeling <?php echo(C_NOTIFY ? "wel" : "niet"); ?> te zien.<br />Typ "/notify" zonder de &quot;
 	<P>
-	<LI>De <B>Timestamp command</B> laat bij de berichten de tijd van posten zien. Deze kan je aan/uit zetten. Standaard staat deze op <?php echo(C_SHOW_TIMESTAMP ? "aan" : "uit"); ?>.<br />Typ "/timestamp" zonder de &quot;
+	<LI>De <B>Timestamp command</B> laat bij de berichten de tijd van plaatsen zien. Deze kan je aan/uit zetten. Standaard staat deze op <?php echo(C_SHOW_TIMESTAMP ? "aan" : "uit"); ?>.<br />Typ "/timestamp" zonder de &quot;
 	<P>
 	<LI>De <B>Refresh command</B> gebruik je wanneer je het scherm met berichten wilt verversen. Standaard is dit <?php echo(C_MSG_REFRESH); ?> seconden. Om dit te veranderen typ "/refresh n" zonder de &quot;, waarvoor n staat voor het aantal seconden om te verversen.
 	<P>
@@ -397,7 +397,7 @@ If (C_USE_AVATARS) {
 <P>Avatars zijn afbeeldingen hoe de gebruiker zich voor stelt. Alleen geregistreerde gebruikers kunnen hun avatar veranderen. Geregistreerde gebruikers kunnen hun Profiel openen (zie <A HREF="#changeprofile">/profile</A> command) klik daarna op de avatar afbeelding of een andere avatar te kunnen selecteren uit de keuze menu, of om een URL in te vullen, deze moet dan wel publiekelijk zijn op het internet(dus niet met een paswoord beveiligde site). De afbeelding moet geschikt zijn voor browsers (.gif, .jpg, etc. ) en de grootte 32 x 32 pixel is het beste formaat om te laten zien.
 <P>Door op iemand zijn avatar te klikken, zal er een gebruikers profiel pop-up venster verschijnen (zie <A HREF="#whois">/whois</A> command).
 Op je eigen avatar klikken in de gebruikerslijst krijg je automatisch de /profile command oproepen, mits je geregistreerd bent.
-Ben je niet geregistreerd, klik dan op je eigen avatar (default) zal een bericht laten verschijnen om je aan te moedigen toch te laten registreren.
+Ben je niet geregistreerd, klik dan op je eigen avatar (standaard) zal een bericht laten verschijnen om je aan te moedigen toch te laten registreren.
   <P ALIGN="right"><A HREF="#top">Naar boven</A></P>
 <P>
 <?php
@@ -487,7 +487,7 @@ Je kan met het <B>invite command</B> iemand uitnodigen om deel te nemen in de ka
 <P>
 <I>Bijvoorbeeld:</I> /invite Jack
 <P>
-zal een prive bericht zenden naar Jack om hem uit te nodigingen om naar jou kamer te gaan. Dit bericht geeft de naam van de kamer aan en zet tevens een link naar de kamer.
+zal een privé bericht zenden naar Jack om hem uit te nodigingen om naar jou kamer te gaan. Dit bericht geeft de naam van de kamer aan en zet tevens een link naar de kamer.
 <P>
 Merk op dat je meer dan 1 naam in deze commando kan zetten (eg "/invite Jack,Helen,Alf"). Ze moeten wel worden gescheiden door een komma, zonder spaties.
 <br /><P ALIGN="right"><A HREF="#top">Naar boven</A></P>
@@ -497,11 +497,11 @@ Merk op dat je meer dan 1 naam in deze commando kan zetten (eg "/invite Jack,Hel
 <P>
 <FONT SIZE="+1"><A NAME="changeroom"><B>Veranderen van kamer :</B></A></FONT>
 <P>
-De lijst aan de rechterkant van het scherm, laat een lijst zien van beschikbare chatrooms en de gebruikers wie in de kamers zich bevinden. Om een kamer te verlaten waar je in zit, klik simpelweg op de naam van jou gewenste kamer. Lege kamers staan niet in deze lijst. Je kan in een lege kamer door het volgende commando te typen <B>command "/join #room name"</B> zonder &quot;.
+De lijst aan de rechterkant van het scherm, laat een lijst zien van beschikbare chatkamers en de gebruikers wie in de kamers zich bevinden. Om een kamer te verlaten waar je in zit, klik simpelweg op de naam van jou gewenste kamer. Lege kamers staan niet in deze lijst. Je kan in een lege kamer door het volgende commando te typen <B>command "/join #room name"</B> zonder &quot;.
 <P>
-<I>Bijvoorbeeld:</I> /join #Red Room
+<I>Bijvoorbeeld:</I> /join #Rode kamer
 <P>
-dan kom je in de "Red Room".
+dan kom je in de "Rode kamer".
 <?php
 if (C_VERSION == "2")
 {
@@ -509,7 +509,7 @@ if (C_VERSION == "2")
 	?>
 	 kan dan zelf een kamer creëeren met dezelfde commando. Maar dan moet je deze kamer specificeren met: 0 staat voor privé, 1 voor iedereen (standaard).
 	<P>
-	<I>Bijvoorbeeld:</I> /join 0 #My Room
+	<I>Bijvoorbeeld:</I> /join 0 #Mijn kamer
 	<P>
 	creëert een privé kamer (vanuit gegaan dat er niet al een publieke kamer met dezelfde naam is gemaakt) genaamd "My Room" en zet jou daarin.
 	<P>
@@ -540,7 +540,7 @@ Met de <B> ! command</B> kan je de laatste commando, die je ingevoerd hebt, teru
 <P>
 <FONT SIZE="+1"><A NAME="respond"><B>Reageren op een bepaalde gebruiker:</B></FONT>
 <P>
-Door op een bepaalde naam van een gebruiker te klikken (rechts van het scherm) zal zijn gebruikersnaam in jou tekst venster verschijnen. Deze mogelijkheid staat je toe om gemakkelijk een publieke boodschap voor de gebruiker te posten, misschien als reactie op wat hij heeft geschreven.
+Door op een bepaalde naam van een gebruiker te klikken (rechts van het scherm) zal zijn gebruikersnaam in jou tekst venster verschijnen. Deze mogelijkheid staat je toe om gemakkelijk een publieke boodschap voor de gebruiker te plaatsen, misschien als reactie op wat hij heeft geschreven.
 <br /><P ALIGN="right"><A HREF="#top">Naar boven</A></P>
 <P>
 <hr />
@@ -650,7 +650,7 @@ if (C_SAVE != "0")
 <hr />
 
 <P>
-<FONT SIZE="+2"><A NAME="moderator"><B><U>Commando’s alleen voor adminstrator en/of moderators </U></B></A></FONT>
+<FONT SIZE="+2"><A NAME="moderator"><B><U>Commando’s alleen voor administrator en/of moderators </U></B></A></FONT>
 <P>
 <FONT SIZE="+1"><A NAME="announce"><B>Verstuur een bekendmaking:</B></A></FONT>
 <P>
@@ -696,11 +696,11 @@ if (C_BANISH != "0")
 ?>
 
 <P>
-<FONT SIZE="+1"><A NAME="promote"><B>Bevorder/Degradeer een gebruiker:</B></A></FONT>
+<FONT SIZE="+1"><A NAME="promote"><B>Promoveer/Degradeer een gebruiker:</B></A></FONT>
 <P>
 Moderators en de administrator kunnen gebruikers bevorderen naar moderator met het commando <B>promote</B>.
 <P>
-<I>Bijvoorbeeld</I>, Jack is de gebruikersnaam om te bevorderen: <I>/promote Jack</I>
+<I>Bijvoorbeeld</I>, Jack is de gebruikersnaam om te promoveren: <I>/promote Jack</I>
 <P>
 Alleen de administrator kan iemand degraderen (van moderator naar gebruiker) met het commando <B>demote.</B>.
 <P>
