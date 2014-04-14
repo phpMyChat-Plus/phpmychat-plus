@@ -94,8 +94,14 @@ $field_errorSA = false;
 // Check for valid entries
 if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 {
+	include("./lib/banish.lib.php");
 	if (C_NO_SWEAR) include("./lib/swearing.lib.php");
-	if (trim($U) == "")
+	if ($IsBanished)
+	{
+		if ($Reason == "") $Error = L_ERR_USR_20;
+		else $Error = sprintf(L_ERR_USR_20a, $Reason);
+	}
+	elseif (trim($U) == "")
 	{
 		$Error = L_ERR_USR_5;
 	}
