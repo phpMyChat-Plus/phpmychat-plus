@@ -34,6 +34,7 @@ If your users encounter bootings for no reason, try to disable sounds in chat.
 
 Fixes History:
 16.02.0214 - 1.94-RC4
+- prevent banished user from registering again - anti-spamming/anti-phishing; (security related)
 - fixed a registration/profile edit issue for users behind proxies; (functionality related)
 - fixed a "select all" bug in Admin Panel/Send emails tab; (functionality related)
 26.07.2013 - 1.94-RC3:
