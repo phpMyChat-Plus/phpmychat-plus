@@ -1,47 +1,63 @@
 <?php
 require_once('classes/tc_date.php');
 require_once('tc_calendar.php');
+require_once('calendar_functions.php');
+
+//change the following line to show or hide calendar information
+$show_calendar_info = true;
 
 $thispage = $_SERVER['PHP_SELF'];
+
+//timezone var, need to setup before any other tasks
+$timezone = getParameter("tmz");
+
+if(!$timezone) $timezone = date_default_timezone_get();
+@date_default_timezone_set($timezone);
 
 $cdate = new tc_date();
 $today = $cdate->getDate();
 
-$sld = (isset($_REQUEST["selected_day"])) ? $_REQUEST["selected_day"] : 0;
-$slm = (isset($_REQUEST["selected_month"])) ? (int)$_REQUEST["selected_month"] : 0;
-$sly = (isset($_REQUEST["selected_year"])) ? (int)$_REQUEST["selected_year"] : 0;
-$year_start = (isset($_REQUEST["year_start"])) ? $_REQUEST["year_start"] : 0;
-$year_end = (isset($_REQUEST["year_end"])) ? $_REQUEST["year_end"] : 0;
-$startDate = (isset($_REQUEST["str"])) ? $_REQUEST["str"] : 0;
-$time_allow1 = (isset($_REQUEST["da1"])) ? $_REQUEST["da1"] : "";
-$time_allow2 = (isset($_REQUEST["da2"])) ? $_REQUEST["da2"] : "";
+$sld = getParameter("selected_day", "number", 0);
+$slm = getParameter("selected_month", "number", 0);
+$sly = getParameter("selected_year", "number", 0);
+$year_start = getParameter("year_start", "number", 0);
+$year_end = getParameter("year_end", "number", 0);
+$startDate = getParameter("str", "number", 0);
+$time_allow1 = getParameter("da1");
+$time_allow2 = getParameter("da2");
 $ta1_set = ($time_allow1 != "") ? true : false;
 $ta2_set = ($time_allow2 != "") ? true : false;
-$show_not_allow = (isset($_REQUEST["sna"])) ? $_REQUEST["sna"] : true;
-$auto_submit = (isset($_REQUEST["aut"])) ? $_REQUEST["aut"] : false;
-$form_name = (isset($_REQUEST["frm"])) ? $_REQUEST["frm"] : "";
-$target_url = (isset($_REQUEST["tar"])) ? $_REQUEST["tar"] : "";
-$show_input = (isset($_REQUEST["inp"])) ? $_REQUEST["inp"] : true;
-$date_format = (isset($_REQUEST["fmt"])) ? $_REQUEST["fmt"] : DATE_FORMAT; //format of date shown in panel if $show_input is false
-$dsb_txt = (isset($_REQUEST["dis"])) ? $_REQUEST["dis"] : "";
-$date_pair1 = (isset($_REQUEST["pr1"])) ? $_REQUEST["pr1"] : "";
-$date_pair2 = (isset($_REQUEST["pr2"])) ? $_REQUEST["pr2"] : "";
-$date_pair_value = (isset($_REQUEST["prv"])) ? $_REQUEST["prv"] : "";
-$path = (isset($_REQUEST["pth"])) ? $_REQUEST["pth"] : "";
-$sp_dates = (isset($_REQUEST["spd"])) ? @tc_calendar::check_json_decode($_REQUEST["spd"]) : array(array(), array(), array());
-$sp_type = (isset($_REQUEST["spt"])) ? $_REQUEST["spt"] : 0;
-$tc_onchanged = (isset($_REQUEST["och"])) ? $_REQUEST["och"] : "";
-$rtl = (isset($_REQUEST["rtl"])) ? $_REQUEST["rtl"] : RTL;
-$show_weeks = (isset($_REQUEST["wks"])) ? $_REQUEST["wks"] : false;
-$interval = (isset($_REQUEST["int"])) ? $_REQUEST["int"] : 1;
-$auto_hide = (isset($_REQUEST["hid"])) ? $_REQUEST["hid"] : 0;
-$auto_hide_time = (isset($_REQUEST["hdt"])) ? $_REQUEST["hdt"] : 1000;
-$hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : 'en_US';
+$show_not_allow = getParameter("sna", "boolean", true);
+$auto_submit = getParameter("aut", "boolean", false);
+$form_name = getParameter("frm");
+$target_url = getParameter("tar");
+$show_input = getParameter("inp", "boolean", true);
+$date_format = getParameter("fmt", "text", DATE_FORMAT);
+$dsb_txt = getParameter("dis");
+$date_pair1 = getParameter("pr1");
+$date_pair2 = getParameter("pr2");
+$date_pair_value = getParameter("prv");
+$path = getParameter("pth");
+#$sp_dates = (isset($_REQUEST["spd"])) ? @tc_calendar::check_json_decode($_REQUEST["spd"]) : array(array(), array(), array());
+$sp_dates = @tc_calendar::check_json_decode(htmlspecialchars_decode(getParameter("spd"), ENT_QUOTES));
+$sp_type = getParameter("spt", "number", 0);
+$tc_onchanged = getParameter("och");
+$rtl = getParameter("rtl", "boolean", RTL);
+$show_weeks = getParameter("wks", "boolean", false);
+$interval = getParameter("int", "number", 1);
+$auto_hide = getParameter("hid", "number", 0);
+$auto_hide_time = getParameter("hdt", "number", 1000);
+$timezone = getParameter("tmz");
+#$hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : 'en_US';
+$hl = getParameter("hl", "text", "en_US");
 //Digitizer
-$dig = (isset($_REQUEST["dig"])) ? $_REQUEST["dig"] : 0;
+#$dig = (isset($_REQUEST["dig"])) ? $_REQUEST["dig"] : 0;
+$dig = getParameter("dig", "boolean", false);
 //Tooltips
-$tt_dates = (isset($_REQUEST["ttd"])) ? @tc_calendar::check_json_decode($_REQUEST["ttd"]) : array(array(), array(), array());
-$tt_tooltips = (isset($_REQUEST["ttt"])) ? @tc_calendar::check_json_decode(stripslashes(rawurldecode($_REQUEST["ttt"]))) : array(array(), array(), array());
+#$tt_dates = (isset($_REQUEST["ttd"])) ? @tc_calendar::check_json_decode($_REQUEST["ttd"]) : array(array(), array(), array());
+$tt_dates = @tc_calendar::check_json_decode($getParameter["ttd"]);
+#$tt_tooltips = (isset($_REQUEST["ttt"])) ? @tc_calendar::check_json_decode(stripslashes(rawurldecode($_REQUEST["ttt"]))) : array(array(), array(), array());
+$tt_tooltips = @tc_calendar::check_json_decode(stripslashes(rawurldecode($getParameter["ttt"])));
 
 //check year to be select in case of date_allow is set
 if(!$show_not_allow){
@@ -50,9 +66,9 @@ if(!$show_not_allow){
 }
 
 if(isset($_REQUEST["m"]))
-	$m = $_REQUEST["m"];
+	$m = getParameter("m", "number");
 else{
-	if($slm){
+	if($slm != "00"){
 		$m = $slm;
 	}else{
 		if($ta2_set && $year_end > 0){
@@ -69,7 +85,9 @@ else{
 			$m = ($cdate->dateBefore($time_allow2)) ? $cdate->getDate("m") : $cdate->getDate('m', $time_allow2);
 		}elseif($year_end > 0){
 			$m = ($year_end > $cdate->getDate("Y")) ? $cdate->getDate("m") : 12; //date('m')
-		}else $m = $cdate->getDate("m");
+		}else{
+			$m = $cdate->getDate("m");
+		}
 	}
 }
 
@@ -77,12 +95,12 @@ if($m < 1 && $m > 12) $m = $cdate->getDate("m");
 
 $m = str_pad($m, 2, "0", STR_PAD_LEFT);
 
-$cyr = ($sly) ? true : false;
-if($sly && $sly < $year_start) $sly = $year_start;
-if($sly && $sly > $year_end) $sly = $year_end;
+$cyr = ($sly != "0000") ? true : false;
+if($cyr && $sly && $sly < $year_start) $sly = $year_start;
+if($cyr && $sly && $sly > $year_end) $sly = $year_end;
 
 if(isset($_REQUEST["y"]))
-	$y = $_REQUEST["y"];
+	$y = getParameter("y", "number");
 else
 	$y = ($cyr) ? $sly : $cdate->getDate("Y");
 
@@ -102,8 +120,8 @@ if (!$show_not_allow) {
   }
 }
 
-$objname = (isset($_REQUEST["objname"])) ? $_REQUEST["objname"] : "";
-$dp = (isset($_REQUEST["dp"])) ? $_REQUEST["dp"] : "";
+$objname = getParameter("objname");
+$dp = getParameter("dp", "boolean");
 
 $cobj = new tc_calendar("");
 $cobj->setDate($sld, $slm, $sly);
@@ -116,12 +134,13 @@ $version = $cobj->version;
 $check_version = $cobj->check_new_version;
 
 $cobj->setYearInterval($year_start, $year_end);
+$cobj->setTimezone($timezone); //set for further usage, nothing for now
 
 //check and show default calendar month and year on valid range of date_allow
 if(!isset($_REQUEST["m"])){
 	if($time_allow1 != ""){
 		//get date of time allow1
-		if($cdate->validDate($time_allow1)){	
+		if($cdate->validDate($time_allow1)){
 			//check valid if today is after date_allow1
 			if(!$cdate->dateAfter($time_allow1, $today)){
 				//reset default calendar display
@@ -309,7 +328,7 @@ for($day=1; $day<=$total_thismonth; $day++){
 	}
 
 	if($date_pair_value){
-	//check date_pair1 & 2
+		//check date_pair1 & 2
 		if($date_pair1 && $date_pair_value != "0000-00-00" && $cdate->dateAfter($date_pair_value, $date_str) && (($slm>0 && $sld>0 && $sly>0) && $cdate->dateBefore("$sly-$slm-$sld", $date_str))){ //set date only after date_pair1
 			if(!in_array("select", $htmlClass))
 				$htmlClass[] = "select";
@@ -383,7 +402,7 @@ for($day=$row_count; $day<6; $day++){
 
 //check next month is on allowed date
 if($ta2_set && !$show_not_allow){
-	$nxMonthTime = $next_year."-".$next_month."-1";	
+	$nxMonthTime = $next_year."-".$next_month."-1";
 	if($cdate->dateAfter($nxMonthTime, $time_allow2)){
 		$show_next = true;
 	}else $show_next = false;
@@ -416,8 +435,8 @@ elseif(function_exists("file_get_contents")){
 		}
 	}
 }
-$donation_url = '<br />'.(($rtl && L_DONATE != "Do you wish to donate?") ? "" : ($rtl ? '<bdo dir="ltr">' : "")).'<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=BX3RZAYPUMA28&lc='.$hl.'&item_name=Appreciate%20%26%20Support%20the%20Localized%20Calendar%20Class%20development&item_number=LCalClass%20about&no_note=0&cn=Your%20comments%20%28optional%29&no_shipping=1&rm=1&return=http%3a%2f%2fciprianmp%2ecom%2fscripts%2fcalendar&cancel_return=http%3a%2f%2fciprianmp%2ecom%2fscripts%2fcalendar&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted&page_style=LCalCLass" target="_blank" alt="'.$ppalt.$pptit.'" title="'.$ppalt.$pptit.'">'.L_DONATE.'</a></bdo>';
-define("L_ABOUT_LOC", "<b>Localized Datepicker</b><br />".sprintf(L_VERSION, "<b>".strval($version)."</b>", "<b>$LANGS_NUM</b>").($new_version ? "<br /><b><font color=\"red\">".sprintf(L_UPDATE, "<a href=\"$WEB_LOC\" target=\"_blank\">".L_HERE."</a>")."</font></b>" : "").(defined("L_TRABY") && L_TRABY != "L_TRABY" ? "<br />".sprintf(L_TRABY, "<b>".L_TRANAME."</b>") : "")."<br /><bdo dir=\"ltr\">&copy;2010-".$cdate->getDate("Y")." <b><a href=\"$WEB_LOC\" target=\"_blank\" title=\"http://ciprianmp.com\">$AUTHOR_LOC</a></b></bdo><br />".($wan_enabled ? "<div id=\"fb-like\" class=\"fb-like\" data-href=\"https://www.facebook.com/DatePicker\" data-send=\"false\" data-layout=\"button_count\" data-show-faces=\"false\" data-font=\"tahoma\" ref=\"loc_about_info\"></div>".$donation_url : "")."<hr /><i>".L_POWBY."<br /><b>PHP Datepicker Calendar</b><br /><bdo dir=\"ltr\">&copy;2006-".$cdate->getDate("Y")." <b><a href=\"$WEB_SUPPORT\" target=\"_blank\" title=\"http://triconsole.com\">$AUTHOR</a></b></bdo></i>");
+$donation_url = (($rtl && L_DONATE != "Do you wish to donate?") ? "" : ($rtl ? '<bdo dir="ltr">' : "")).'<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=BX3RZAYPUMA28&lc='.$hl.'&item_name=Appreciate%20%26%20Support%20the%20Localized%20Calendar%20Class%20development&item_number=LCalClass%20about&no_note=0&cn=Your%20comments%20%28optional%29&no_shipping=1&rm=1&return=http%3a%2f%2fciprianmp%2ecom%2fscripts%2fcalendar&cancel_return=http%3a%2f%2fciprianmp%2ecom%2fscripts%2fcalendar&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted&page_style=LCalCLass" target="_blank" alt="'.$ppalt.$pptit.'" title="'.$ppalt.$pptit.'">'.L_DONATE.'</a></bdo>';
+define("L_ABOUT_LOC", "<b>Localized Datepicker</b><br />".sprintf(L_VERSION, "<b>".strval($version)."</b>", "<b>$LANGS_NUM</b>").($new_version ? "<br /><b><font color=\"red\">".sprintf(L_UPDATE, "<a href=\"$WEB_LOC\" target=\"_blank\">".L_HERE."</a>")."</font></b>" : "").(defined("L_TRABY") && L_TRABY != "L_TRABY" ? "<br />".sprintf(L_TRABY, "<b>".L_TRANAME."</b>") : "")."<br /><bdo dir=\"ltr\">&copy;2010-".$cdate->getDate("Y")." <b><a href=\"$WEB_LOC\" target=\"_blank\" title=\"http://ciprianmp.com\">$AUTHOR_LOC</a></b></bdo>".($wan_enabled ? ($show_calendar_info ? "<br /><div id=\"fb-like\" class=\"fb-like\" data-href=\"https://www.facebook.com/DatePicker\" data-send=\"false\" data-layout=\"button_count\" data-show-faces=\"false\" data-font=\"tahoma\" ref=\"loc_about_info\"></div><br />".$donation_url : "<br />".$donation_url) : "")."<hr /><i>".L_POWBY."<br /><b>PHP Datepicker Calendar</b><br /><bdo dir=\"ltr\">&copy;2006-".$cdate->getDate("Y")." <b><a href=\"$WEB_SUPPORT\" target=\"_blank\" title=\"http://triconsole.com\">$AUTHOR</a></b></bdo></i><!--<br />Server Timezone:<br />$timezone<br /><span id=\"timecontainer\">".$cdate->getDate("Y-m-d H:i:s")."</span> -->");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"<?php if($rtl) echo(" dir=\"rtl\""); ?>>
@@ -432,6 +451,8 @@ var today_year = "<?php echo($cdate->getDate('Y')); ?>";
 var obj_name = "<?php echo($objname); ?>";
 var current_month = "<?php echo($m);?>";
 var current_year = "<?php echo($y);?>";
+
+var this_time = "<?php echo(date("F d, Y H:i:s", time())); ?>";
 //-->
 </script>
 <script type="text/javascript" src="calendar_form.js"></script>
@@ -459,7 +480,7 @@ function submitNow(dvalue, mvalue, yvalue){
 </head>
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 <span id="calendar-page" class="font">
-<?php if($wan_enabled){ ?>
+<?php if($wan_enabled && $show_calendar_info){ ?>
 	<div id="fb-root"></div>
     <script>
 		window.fbAsyncInit = function() {
@@ -480,6 +501,10 @@ function submitNow(dvalue, mvalue, yvalue){
         <div style="float: <?php echo($rtl ? "right" : "left"); ?>;" id="info">
 			<img src="images/<?php echo($new_version ? "version_info.gif" : "about.png"); ?>" width="9" height="9" border="0" id="info_icon" />
 			<div id="about" dir="<?php echo(($rtl && L_HERE != "here") ? "rtl" : "ltr"); ?>" style="<?php echo($rtl ? "right: 0px;".(L_HERE != "here" ? " direction: rtl; unicode-bidi: embed;" : "") : "left: 0px;"); ?>"><?php echo($dig ? $cobj->digitize_arabics(L_ABOUT_LOC) : L_ABOUT_LOC); ?></div>
+            <script type="text/javascript" src="calendar_servertime.js"></script>
+			<script type="text/javascript">
+            new showLocalTime("timecontainer", "server-php", 0, "long")
+            </script>
         	<script type="text/javascript">
 			<!--
 			var timeoutID = new Array();
@@ -492,14 +517,14 @@ function submitNow(dvalue, mvalue, yvalue){
 			obj.onmouseover = function(){ displayAbout(true); }
 			obj.onmouseout = function(){ hideAbout(); }
 
-			function displayAbout(flag){				
+			function displayAbout(flag){
 				var obj = document.getElementById("about");
 
 				var this_height = obj.style.height;
 
 				if(typeof(flag) == "undefined" || (flag === true && (this_height != "1px" && this_height != ""))){
 					cancelTimer();
-	
+
 					//obj.style.display = "block";
 					obj.style.height = "auto";
 					obj.style.border = "1px solid #191970";
@@ -540,7 +565,7 @@ function submitNow(dvalue, mvalue, yvalue){
 
         <form id="calendarform" name="calendarform" method="post" action="<?php echo($thispage);?>">
           <table align="center" cellpadding="1" cellspacing="0">
-            <tr>
+			<tr>
 			<?php
             $monthnames = $cobj->getMonthNames();
 			if ($first_input == "B"){
@@ -646,7 +671,7 @@ function submitNow(dvalue, mvalue, yvalue){
             <input name="pr2" type="hidden" id="pr2" value="<?php echo($date_pair2);?>" />
             <input name="prv" type="hidden" id="prv" value="<?php echo($date_pair_value);?>" />
             <input name="pth" type="hidden" id="pth" value="<?php echo($path);?>" />
-            <input name="spd" type="hidden" id="spd" value="<?php echo($cobj->check_json_encode($sp_dates));?>" />
+            <input name="spd" type="hidden" id="spd" value="<?php echo(htmlspecialchars($cobj->check_json_encode($sp_dates), ENT_QUOTES));?>" />
             <input name="spt" type="hidden" id="spt" value="<?php echo($sp_type);?>" />
             <input name="och" type="hidden" id="och" value="<?php echo(urldecode($tc_onchanged));?>" />
             <input name="str" type="hidden" id="str" value="<?php echo($startDate);?>" />
@@ -655,6 +680,7 @@ function submitNow(dvalue, mvalue, yvalue){
             <input name="int" type="hidden" id="int" value="<?php echo($interval);?>" />
             <input name="hid" type="hidden" id="hid" value="<?php echo($auto_hide);?>" />
             <input name="hdt" type="hidden" id="hdt" value="<?php echo($auto_hide_time);?>" />
+            <input name="tmz" type="hidden" id="tmz" value="<?php echo($timezone);?>" />
             <input name="hl" type="hidden" id="hl" value="<?php echo($hl);?>" />
 			<!-- Digitizer -->
             <input name="dig" type="hidden" id="dig" value="<?php echo($dig);?>" />
@@ -662,7 +688,7 @@ function submitNow(dvalue, mvalue, yvalue){
             <input name="ttd" type="hidden" id="ttd" value="<?php echo($cobj->check_json_encode($tt_dates));?>" />
             <input name="ttt" type="hidden" id="ttt" value="<?php echo(rawurlencode($cobj->check_json_encode($tt_tooltips)));?>" />
       </form>
-    </div>
+	</div>
     <div id="calendar-container">
         <div id="calendar-body">
         <table border="0" cellspacing="1" cellpadding="0" align="center" class="font">

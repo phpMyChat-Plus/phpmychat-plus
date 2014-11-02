@@ -34,6 +34,7 @@ If your users encounter bootings for no reason, try to disable sounds in chat.
 
 Fixes History:
 16.02.0214 - 1.94-RC4
+- calendar class updated to 3.73-loc version; (functionality related)
 - prevent banished user from registering again - anti-spamming/anti-phishing; (security related)
 - fixed a registration/profile edit issue for users behind proxies; (functionality related)
 - fixed a "select all" bug in Admin Panel/Send emails tab; (functionality related)
@@ -45,7 +46,7 @@ Fixes History:
 - fixed the calendar to allow years before 1970 (1902 the lowest allowed year); (functionality related)
 - fixed calendar birthdays to display the birthdates before 1970; (functionality related)
 - edituser and register calendars will now show the regusers birthdays and ages, if allowed by each respective user privacy set; (functionality extension)
-- calendar class update to 3.70-loc version; (functionality related)
+- calendar class updated to 3.70-loc version; (functionality related)
 - fixed the text/frames in styles preview; (functionality related)
 - improved the skins highlighting colors; (theme related)
 - fixed a flag/language bug in edituser.php; (functionality related)

@@ -7,12 +7,17 @@
 
 require_once('tc_date_main.php');
 
+// Set the default timezone identifier; List of all identifiers: http://www.php.net/manual/en/timezones.php
+// Example:
+// date_default_timezone_set('Europe/Bucharest');
+#date_default_timezone_set('UTC'); //for php servers >5.4 that require setting timezone before calling date()
+
 class tc_date extends tc_date_main{
 	var $compatible;
 
 	function tc_date(){
 		//check if we should use DateTime that comes with 5.3.0 and later
-        if (version_compare(PHP_VERSION, '5.3.0') <= 0) {
+		if (version_compare(PHP_VERSION, '5.3.0') <= 0) {
 			$this->compatible = false;
 		}else $this->compatible = true;
 

@@ -11,7 +11,7 @@ function setValue(){
 	//toggle = typeof(toggle) != 'undefined' ? toggle : true;
 
 	if(typeof(window.parent.setValue) == "function")
-		window.parent.setValue(f.objname.value, date_selected);
+		window.parent.setValue(f.objname.value, date_selected, false);
 	else alert(l_err_noset);
 }
 
@@ -24,7 +24,7 @@ function unsetValue(){
 	setValue();
 
 	this.loading();
-	//f.submit();
+	f.submit();
 }
 
 function restoreValue(){
@@ -32,7 +32,7 @@ function restoreValue(){
 	var date_selected = padString(f.selected_year.value, 4, "0") + "-" + padString(f.selected_month.value, 2, "0") + "-" + padString(f.selected_day.value, 2, "0");
 
 	if(typeof(window.parent.updateValue) == "function")
-	window.parent.updateValue(f.objname.value, date_selected);
+		window.parent.updateValue(f.objname.value, date_selected);
 }
 
 function selectDay(d){
@@ -162,43 +162,55 @@ function getCalendarParam(name){
 }
 
 function processTooltips(){
-	var ttd = myJSONParse(getCalendarParam("ttd"));
-	var ttt = myJSONParse(decodeURIComponent(getCalendarParam("ttt")));
-
+//	var ttd = myJSONParse(getCalendarParam("ttd"));
+	var ttd = myJSONParse(decodeURIComponent(htmlspecialchars_decode(getCalendarParam("ttd"))));
+//	var ttt = myJSONParse(decodeURIComponent(getCalendarParam("ttt")));
+	var ttt = myJSONParse(htmlspecialchars_decode(getCalendarParam("ttt")));
 	//yearly recursive
 	for (var key in ttd[2]) {
 		if (ttd[2].hasOwnProperty(key)) {
-		this_date = new Date(ttd[2][key]);
-			this_date_str = pad(current_year, 4, "0")+''+pad(this_date.getMonth()+1, 2, "0")+''+pad(this_date.getDate(), 2, "0");
-			this_tooltip = typeof(ttt[2][key]) != "undefined" ? ttt[2][key] : "";
 
-			if((this_tooltip.substring(0,1) == '"' && this_tooltip.substring(this_tooltip.length-1) == '"') || (this_tooltip.substring(0,1) == "'" && this_tooltip.substring(this_tooltip.length-1) == "'")){
-				this_tooltip = this_tooltip.substring(1, this_tooltip.length-1);
-				this_tooltip = replaceAll("&#10;", String.fromCharCode(10), this_tooltip);
-			}
+		var date_str = ttd[2][key];
+		var date_arr = date_str.split(/[^0-9]/);
 
-			if(this_tooltip != ""){
-				var date_obj = document.getElementById(this_date_str);
-				if(date_obj != null){
-					var obj_list = date_obj.getElementsByTagName("div");
-					if(obj_list[0] != null){
-						//check if tooltip is already existed
-						var spn_obj = obj_list[0].getElementsByTagName("span");
+		var date_y = date_arr[0];
+		var date_m = date_arr[1]-1;
+		var date_d = date_arr[2];
 
-						if(spn_obj[0] != null){
-							var alt_txt = spn_obj[0].getAttribute("alt");
-							alt_txt += String.fromCharCode(10)+this_tooltip;
-							spn_obj[0].setAttribute("alt", alt_txt);
-							spn_obj[0].setAttribute("title", alt_txt);
-							spn_obj[0].onclick = function() {showTitle(this);};
-						}else{
-							var info_obj = document.createElement("span");
-							info_obj.setAttribute("alt", this_tooltip);
-							info_obj.setAttribute("title", this_tooltip);
-							info_obj.onclick = function() {showTitle(this);};
-							info_obj.className = "calendartooltip";
+			if(typeof(date_y) != "undefined" && typeof(date_m) != "undefined" && typeof(date_d) != "undefined"){
+				this_date = new Date(date_y, date_m, date_d);
+//				this_date = new Date(ttd[2][key]);
+				this_date_str = pad(current_year, 4, "0")+''+pad(this_date.getMonth()+1, 2, "0")+''+pad(this_date.getDate(), 2, "0");
+				this_tooltip = typeof(ttt[2][key]) != "undefined" ? ttt[2][key] : "";
 
-							obj_list[0].insertBefore(info_obj, null);
+				if((this_tooltip.substring(0,1) == '"' && this_tooltip.substring(this_tooltip.length-1) == '"') || (this_tooltip.substring(0,1) == "'" && this_tooltip.substring(this_tooltip.length-1) == "'")){
+					this_tooltip = this_tooltip.substring(1, this_tooltip.length-1);
+					this_tooltip = replaceAll("&#10;", String.fromCharCode(10), this_tooltip);
+				}
+				if(this_tooltip != ""){
+					var date_obj = document.getElementById(this_date_str);
+					if(date_obj != null){
+						var obj_list = date_obj.getElementsByTagName("div");
+						if(obj_list[0] != null){
+							obj_list[0].classList.add("hasEvent");
+							//check if tooltip is already existed
+							var spn_obj = obj_list[0].getElementsByTagName("span");
+
+							if(spn_obj[0] != null){
+								var alt_txt = spn_obj[0].getAttribute("alt");
+								alt_txt += String.fromCharCode(10)+this_tooltip;
+								spn_obj[0].setAttribute("alt", alt_txt);
+								spn_obj[0].setAttribute("title", alt_txt);
+								spn_obj[0].onclick = function() {showTitle(this);};
+							}else{
+								var info_obj = document.createElement("span");
+								info_obj.setAttribute("alt", this_tooltip);
+								info_obj.setAttribute("title", this_tooltip);
+								info_obj.onclick = function() {showTitle(this);};
+								info_obj.className = "calendartooltip";
+
+								obj_list[0].insertBefore(info_obj, null);
+							}
 						}
 					}
 				}
@@ -209,37 +221,50 @@ function processTooltips(){
 	//monthly recursive
 	for (var key in ttd[1]) {
 		if (ttd[1].hasOwnProperty(key)) {
-		this_date = new Date(ttd[1][key]);
-			this_date_str = pad(current_year, 4, "0")+''+pad(current_month, 2, "0")+''+pad(this_date.getDate(), 2, "0");
-			this_tooltip = typeof(ttt[1][key]) != "undefined" ? ttt[1][key] : "";
+		var date_str = ttd[1][key];
+		var date_arr = date_str.split(/[^0-9]/);
 
-			if((this_tooltip.substring(0,1) == '"' && this_tooltip.substring(this_tooltip.length-1) == '"') || (this_tooltip.substring(0,1) == "'" && this_tooltip.substring(this_tooltip.length-1) == "'")){
-				this_tooltip = this_tooltip.substring(1, this_tooltip.length-1);
-				this_tooltip = replaceAll("&#10;", String.fromCharCode(10), this_tooltip);
-			}
+		var date_y = date_arr[0];
+		var date_m = date_arr[1]-1;
+		var date_d = date_arr[2];
 
-			if(this_tooltip != ""){
-				var date_obj = document.getElementById(this_date_str);
-				if(date_obj != null){
-					var obj_list = date_obj.getElementsByTagName("div");
-					if(obj_list[0] != null){
-						//check if tooltip is already existed
-						var spn_obj = obj_list[0].getElementsByTagName("span");
+			if(typeof(date_y) != "undefined" && typeof(date_m) != "undefined" && typeof(date_d) != "undefined"){
+				this_date = new Date(date_y, date_m, date_d);
+//				this_date = new Date(ttd[1][key]);
+				this_date_str = pad(current_year, 4, "0")+''+pad(current_month, 2, "0")+''+pad(this_date.getDate(), 2, "0");
+				this_tooltip = typeof(ttt[1][key]) != "undefined" ? ttt[1][key] : "";
 
-						if(spn_obj[0] != null){
-							var alt_txt = spn_obj[0].getAttribute("alt");
-							alt_txt += String.fromCharCode(10)+this_tooltip;
-							spn_obj[0].setAttribute("alt", alt_txt);
-							spn_obj[0].setAttribute("title", alt_txt);
-							spn_obj[0].onclick = function() {showTitle(this);};
-						}else{
-							var info_obj = document.createElement("span");
-							info_obj.setAttribute("alt", this_tooltip);
-							info_obj.setAttribute("title", this_tooltip);
-							info_obj.onclick = function() {showTitle(this);};
-							info_obj.className = "calendartooltip";
+				if((this_tooltip.substring(0,1) == '"' && this_tooltip.substring(this_tooltip.length-1) == '"') || (this_tooltip.substring(0,1) == "'" && this_tooltip.substring(this_tooltip.length-1) == "'")){
+					this_tooltip = this_tooltip.substring(1, this_tooltip.length-1);
+					this_tooltip = replaceAll("&#10;", String.fromCharCode(10), this_tooltip);
+				}
 
-							obj_list[0].insertBefore(info_obj, null);
+
+				if(this_tooltip != ""){
+
+					var date_obj = document.getElementById(this_date_str);
+					if(date_obj != null){
+						var obj_list = date_obj.getElementsByTagName("div");
+						if(obj_list[0] != null){
+							obj_list[0].classList.add("hasEvent");
+							//check if tooltip is already existed
+							var spn_obj = obj_list[0].getElementsByTagName("span");
+
+							if(spn_obj[0] != null){
+								var alt_txt = spn_obj[0].getAttribute("alt");
+								alt_txt += String.fromCharCode(10)+this_tooltip;
+								spn_obj[0].setAttribute("alt", alt_txt);
+								spn_obj[0].setAttribute("title", alt_txt);
+								spn_obj[0].onclick = function() {showTitle(this);};
+							}else{
+								var info_obj = document.createElement("span");
+								info_obj.setAttribute("alt", this_tooltip);
+								info_obj.setAttribute("title", this_tooltip);
+								info_obj.onclick = function() {showTitle(this);};
+								info_obj.className = "calendartooltip";
+
+								obj_list[0].insertBefore(info_obj, null);
+							}
 						}
 					}
 				}
@@ -249,38 +274,49 @@ function processTooltips(){
 
 	//no recursive
 	for (var key in ttd[0]) {
-		if (ttd[0].hasOwnProperty(key)) {
-			this_date = new Date(ttd[0][key]);
-			this_date_str = pad(this_date.getFullYear(), 4, "0")+''+pad(this_date.getMonth()+1, 2, "0")+''+pad(this_date.getDate(), 2, "0");
-			this_tooltip = typeof(ttt[0][key]) != "undefined" ? ttt[0][key] : "";
+		if (ttd[0].hasOwnProperty(key)){
+			var date_str = ttd[0][key];
+			var date_arr = date_str.split(/[^0-9]/);
 
-			if((this_tooltip.substring(0,1) == '"' && this_tooltip.substring(this_tooltip.length-1) == '"') || (this_tooltip.substring(0,1) == "'" && this_tooltip.substring(this_tooltip.length-1) == "'")){
-				this_tooltip = this_tooltip.substring(1, this_tooltip.length-1);
-				this_tooltip = replaceAll("&#10;", String.fromCharCode(10), this_tooltip);
-			}
+			var date_y = date_arr[0];
+			var date_m = date_arr[1]-1;
+			var date_d = date_arr[2];
 
-			if(this_tooltip != ""){
-				var date_obj = document.getElementById(this_date_str);
-				if(date_obj != null){
-					var obj_list = date_obj.getElementsByTagName("div");
-					if(obj_list[0] != null){
-						//check if tooltip is already existed
-						var spn_obj = obj_list[0].getElementsByTagName("span");
+			if(typeof(date_y) != "undefined" && typeof(date_m) != "undefined" && typeof(date_d) != "undefined"){
+				this_date = new Date(date_y, date_m, date_d);
+//				this_date = new Date(ttd[0][key]);
+				this_date_str = pad(this_date.getFullYear(), 4, "0")+''+pad(this_date.getMonth()+1, 2, "0")+''+pad(this_date.getDate(), 2, "0");
+				this_tooltip = typeof(ttt[0][key]) != "undefined" ? ttt[0][key] : "";
 
-						if(spn_obj[0] != null){
-							var alt_txt = spn_obj[0].getAttribute("alt");
-							alt_txt += String.fromCharCode(10)+this_tooltip;
-							spn_obj[0].setAttribute("alt", alt_txt);
-							spn_obj[0].setAttribute("title", alt_txt);
-							spn_obj[0].onclick = function() {showTitle(this);};
-						}else{
-							var info_obj = document.createElement("span");
-							info_obj.setAttribute("alt", this_tooltip);
-							info_obj.setAttribute("title", this_tooltip);
-							info_obj.onclick = function() {showTitle(this);};
-							info_obj.className = "calendartooltip";
+				if((this_tooltip.substring(0,1) == '"' && this_tooltip.substring(this_tooltip.length-1) == '"') || (this_tooltip.substring(0,1) == "'" && this_tooltip.substring(this_tooltip.length-1) == "'")){
+					this_tooltip = this_tooltip.substring(1, this_tooltip.length-1);
+					this_tooltip = replaceAll("&#10;", String.fromCharCode(10), this_tooltip);
+				}
 
-							obj_list[0].insertBefore(info_obj, null);
+				if(this_tooltip != ""){
+					var date_obj = document.getElementById(this_date_str);
+					if(date_obj != null){
+						var obj_list = date_obj.getElementsByTagName("div");
+						if(obj_list[0] != null){
+							obj_list[0].classList.add("hasEvent");
+							//check if tooltip is already existed
+							var spn_obj = obj_list[0].getElementsByTagName("span");
+
+							if(spn_obj[0] != null){
+								var alt_txt = spn_obj[0].getAttribute("alt");
+								alt_txt += String.fromCharCode(10)+this_tooltip;
+								spn_obj[0].setAttribute("alt", alt_txt);
+								spn_obj[0].setAttribute("title", alt_txt);
+								spn_obj[0].onclick = function() {showTitle(this);};
+							}else{
+								var info_obj = document.createElement("span");
+								info_obj.setAttribute("alt", this_tooltip);
+								info_obj.setAttribute("title", this_tooltip);
+								info_obj.onclick = function() {showTitle(this);};
+								info_obj.className = "calendartooltip";
+
+								obj_list[0].insertBefore(info_obj, null);
+							}
 						}
 					}
 				}
@@ -306,9 +342,19 @@ function myJSONParse(d){
 		var v = tmp_d.split("],[");
 		for(i=0; i<v.length; i++){
 			var s = v[i];
-			if(s == "")
+			if(s == ""){
 				v[i] = new Array();
-			else v[i] = s.split(",");
+			}else{
+				var arr = s.split(",");
+				for(j=0; j<arr.length; j++){
+					var first_char = arr[j].charAt(0);
+					var last_char = arr[j].charAt(arr[j].length-1);
+					if((first_char == '"' && last_char == '"') || (first_char == "'" && last_char == "'")){
+						arr[j] = arr[j].substring(1, arr[j].length-1);
+					}
+				}
+				v[i] = arr;
+			}
 		}
 	}else v = new Array();
 
@@ -317,6 +363,69 @@ function myJSONParse(d){
 
 function showTitle(obj){
 	alert(obj.getAttribute("title"));
+}
+
+function htmlspecialchars_decode (string, quote_style) {
+  // http://kevin.vanzonneveld.net
+  // +   original by: Mirek Slugen
+  // +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+  // +   bugfixed by: Mateusz "loonquawl" Zalega
+  // +      input by: ReverseSyntax
+  // +      input by: Slawomir Kaniecki
+  // +      input by: Scott Cariss
+  // +      input by: Francois
+  // +   bugfixed by: Onno Marsman
+  // +    revised by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+  // +   bugfixed by: Brett Zamir (http://brett-zamir.me)
+  // +      input by: Ratheous
+  // +      input by: Mailfaker (http://www.weedem.fr/)
+  // +      reimplemented by: Brett Zamir (http://brett-zamir.me)
+  // +    bugfixed by: Brett Zamir (http://brett-zamir.me)
+  // *     example 1: htmlspecialchars_decode("<p>this -&gt; &quot;</p>", 'ENT_NOQUOTES');
+  // *     returns 1: '<p>this -> &quot;</p>'
+  // *     example 2: htmlspecialchars_decode("&amp;quot;");
+  // *     returns 2: '&quot;'
+  var optTemp = 0,
+    i = 0,
+    noquotes = false;
+  if (typeof quote_style === 'undefined') {
+    quote_style = 2;
+  }
+  string = string.toString().replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+  var OPTS = {
+    'ENT_NOQUOTES': 0,
+    'ENT_HTML_QUOTE_SINGLE': 1,
+    'ENT_HTML_QUOTE_DOUBLE': 2,
+    'ENT_COMPAT': 2,
+    'ENT_QUOTES': 3,
+    'ENT_IGNORE': 4
+  };
+  if (quote_style === 0) {
+    noquotes = true;
+  }
+  if (typeof quote_style !== 'number') { // Allow for a single string or an array of string flags
+    quote_style = [].concat(quote_style);
+    for (i = 0; i < quote_style.length; i++) {
+      // Resolve string input to bitwise e.g. 'PATHINFO_EXTENSION' becomes 4
+      if (OPTS[quote_style[i]] === 0) {
+        noquotes = true;
+      } else if (OPTS[quote_style[i]]) {
+        optTemp = optTemp | OPTS[quote_style[i]];
+      }
+    }
+    quote_style = optTemp;
+  }
+  if (quote_style & OPTS.ENT_HTML_QUOTE_SINGLE) {
+    string = string.replace(/&#0*39;/g, "'"); // PHP doesn't currently escape if more than one 0, but it should
+    // string = string.replace(/&apos;|&#x0*27;/g, "'"); // This would also be useful here, but not a part of PHP
+  }
+  if (!noquotes) {
+    string = string.replace(/&quot;/g, '"');
+  }
+  // Put this in last place to avoid escape being double-decoded
+  string = string.replace(/&amp;/g, '&');
+
+  return string;
 }
 
 window.onload = function(){
