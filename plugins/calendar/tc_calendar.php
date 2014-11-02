@@ -6,14 +6,14 @@
 // add on: translation implemented - default is English en_US
 //	- thanks ciprianmp
 //
-// version 3.70-loc (released 23 March 2011/updated 20 August 2013)
+// version 3.73-loc (released 23 March 2011/updated 02 November 2014)
 //
 ////********************************************************
 $AUTHOR = "Triconsole";
 $WEB_SUPPORT = "http://www.triconsole.com/php/calendar_datepicker.php";
 $AUTHOR_LOC = "Ciprian Murariu";
-$LANGS_NUM = 42;
 $WEB_LOC = "http://ciprianmp.com/scripts/calendar/";
+$LANGS_NUM = 42;
 ////********************************************************
 
 if((defined("L_LANG") && L_LANG != "en_US" && L_LANG != "L_LANG") || isset($language) && $language != "en_US") include_once("lang/calendar.".(isset($language) ? $language : L_LANG).".php");
@@ -37,77 +37,68 @@ elseif(file_exists("calendar.js"))
 <?php
 }
 
-/* Set the default timezone identifier; List of all identifiers: http://www.php.net/manual/en/timezones.php
-Example:
-date_default_timezone_set('Europe/Bucharest');
-Make sure your php.ini has the appropriate timezone identifier here:
-  [Date]
-; Defines the default timezone used by the date functions
-date.timezone = Europe/Bucharest
-*/
-if (version_compare(PHP_VERSION, 5.3, '>='))
-{
-  @date_default_timezone_set(date_default_timezone_get());
-}
-#echo date_default_timezone_get(); //test your php timezone
-
 require_once('classes/tc_date.php');
 
 class tc_calendar{
-	var $version = "3.70";
-	var $check_new_version = true;
-	var $icon;
-	var $objname;
-	var $txt = L_SEL_ICON; //display when no calendar icon found or set up
-	var $date_format = DATE_FORMAT; //format of date shown in panel if $show_input is false
-	var $year_display_from_current = 30;
-	var $date_picker;
-	var $path = '';
-	var $day = 00;
-	var $month = 00;
-	var $year = 0000;
-	var $width = 150;
-	var $height = 205;
-	var $year_start;
-	var $year_end;
-	var $year_start_input;
-	var $year_end_input;
-	var $startDate = FIRST_DAY; //0 (for Sunday) through 6 (for Saturday)
-	var $time_allow1 = false;
-	var $time_allow2 = false;
-	var $show_not_allow = false;
-	var $auto_submit = false;
-	var $form_container;
-	var $target_url;
-	var $show_input = true;
-	var $dsb_days = array(); //collection of days to disabled
-	var $zindex = 1;
-	var $v_align = "bottom";
-	var $h_align = "right";
-	var $line_height = 18; //for vertical align offset
-	var $date_pair1 = "";
-	var $date_pair2 = "";
-	var $date_pair_value = "";
-	var $sp_dates = array(array(), array(), array()); //array[0]=no recursive, array[1]=monthly, array[0]=yearly
-	var $sp_type = 0; //0=disabled specify date, 1=enabled only specify date
-	var $tc_onchanged = "";
-	var $rtl = RTL;
-	var $show_week = false;
-	var $week_hdr = L_WEEK_HDR;
-	var $interval = 1; //date selected interval, default 1 day
-	var $auto_hide = 1;
-	var $auto_hide_time = 1000;
-	var $mydate;
-	var $warning_msgs = array();
-	var $hl = L_LANG;
+	public $version = "3.73";
+	public $check_new_version = true;
+	private $icon;
+	private $objname;
+	private $txt = L_SEL_ICON; //display when no calendar icon found or set up
+	private $date_format = DATE_FORMAT; //format of date shown in panel if $show_input is false
+	private $year_display_from_current = 30;
+	private $date_picker;
+	private $path = '';
+	private $day = 00;
+	private $month = 00;
+	private $year = 0000;
+	private $width = 150;
+	private $height = 205;
+	public $year_start;
+	public $year_end;
+	public $year_start_input;
+	public $year_end_input;
+	private $startDate = FIRST_DAY; //0 (for Sunday) through 6 (for Saturday)
+	public $time_allow1 = false;
+	public $time_allow2 = false;
+	private $show_not_allow = false;
+	private $auto_submit = false;
+	private $form_container;
+	private $target_url;
+	private $show_input = true;
+	public $dsb_days = array(); //collection of days to disabled
+	public $zindex = 1;
+	private $v_align = "bottom";
+	private $h_align = "right";
+	private $line_height = 18; //for vertical align offset
+	private $date_pair1 = "";
+	private $date_pair2 = "";
+	private $date_pair_value = "";
+	private $sp_dates = array(array(), array(), array()); //array[0]=no recursive, array[1]=monthly, array[0]=yearly
+	private $sp_type = 0; //0=disabled specify date, 1=enabled only specify date
+	private $tc_onchanged = "";
+	public $rtl = RTL;
+	private $show_week = false;
+	public $week_hdr = L_WEEK_HDR;
+	private $interval = 1; //date selected interval, default 1 day
+	private $auto_hide = 1;
+	private $auto_hide_time = 1000;
+	private $mydate;
+	public $warning_msgs = array();
+	public $hl = L_LANG;
 	//Digitizer
-	var $dig = L_DIGIT;
+	public $dig = L_DIGIT;
 	//Tooltips
-	var $tt_dates = array(array(), array(), array()); //array[0]=no recursive, array[1]=monthly, array[0]=yearly
-	var $tt_tooltips = array(array(), array(), array()); //array[0]=no recursive, array[1]=monthly, array[0]=yearly
+	private $tt_dates = array(array(), array(), array()); //array[0]=no recursive, array[1]=monthly, array[0]=yearly
+	private $tt_tooltips = array(array(), array(), array()); //array[0]=no recursive, array[1]=monthly, array[0]=yearly
+
+	//Timezone
+	//Leave blank will use server settings.
+	//Please refer to the supported timezones here http://php.net/manual/en/timezones.php
+	private $timezone = "UTC";
 
 	//calendar constructor
-	function tc_calendar($objname, $date_picker = false, $show_input = true){
+	function __construct($objname, $date_picker = false, $show_input = true){
 		$this->objname = $objname;
 		//$this->year_display_from_current = 50;
 		$this->date_picker = $date_picker;
@@ -275,15 +266,18 @@ class tc_calendar{
 		$params[] = "pr2=".$this->date_pair2;
 		$params[] = "prv=".$this->date_pair_value;
 		$params[] = "pth=".$this->path;
-		$params[] = "spd=".$this->check_json_encode($this->sp_dates);
+#		$params[] = "spd=".$this->check_json_encode($this->sp_dates);
+		$params[] = "spd=".htmlspecialchars($this->check_json_encode($this->sp_dates), ENT_QUOTES);
 		$params[] = "spt=".$this->sp_type;
-		$params[] = "och=".urlencode($this->tc_onchanged);
+#		$params[] = "och=".urlencode($this->tc_onchanged);
+		$params[] = "och=".rawurlencode($this->tc_onchanged);
 		$params[] = "str=".$this->startDate;
 		$params[] = "rtl=".$this->rtl;
 		$params[] = "wks=".$this->show_week;
 		$params[] = "int=".$this->interval;
 		$params[] = "hid=".$this->auto_hide;
 		$params[] = "hdt=".$this->auto_hide_time;
+		$params[] = "tmz=".$this->timezone;
 		$params[] = "hl=".$this->hl;
 		//Digitizer
 		$params[] = "dig=".$this->dig;
@@ -422,9 +416,11 @@ class tc_calendar{
 		$this->eHidden('pr2', $this->date_pair2);
 		$this->eHidden('prv', $this->date_pair_value);
 		$this->eHidden('pth', $this->path);
-		$this->eHidden('spd', $this->check_json_encode($this->sp_dates));
+#		$this->eHidden('spd', $this->check_json_encode($this->sp_dates));
+		$this->eHidden('spd', htmlspecialchars($this->check_json_encode($this->sp_dates), ENT_QUOTES));
 		$this->eHidden('spt', $this->sp_type);
-		$this->eHidden('och', urlencode($this->tc_onchanged));
+#		$this->eHidden('och', urlencode($this->tc_onchanged));
+		$this->eHidden('och', rawurlencode($this->tc_onchanged));
 		$this->eHidden('str', $this->startDate);
 		$this->eHidden('rtl', $this->rtl);
 		$this->eHidden('wks', $this->show_week);
@@ -435,8 +431,11 @@ class tc_calendar{
 		//Digitizer
 		$this->eHidden('dig', $this->dig);
 		//Tooltips
-		$this->eHidden('ttd', $this->check_json_encode($this->tt_dates));
-		$this->eHidden('ttt', rawurlencode($this->check_json_encode($this->tt_tooltips)));
+#		$this->eHidden('ttd', $this->check_json_encode($this->tt_dates));
+		$this->eHidden('ttd', htmlspecialchars($this->check_json_encode($this->tt_dates), ENT_QUOTES));
+#		$this->eHidden('ttt', rawurlencode($this->check_json_encode($this->tt_tooltips)));
+		$this->eHidden('ttt', htmlspecialchars($this->check_json_encode($this->tt_tooltips), ENT_QUOTES));
+		$this->eHidden('tmz', $this->timezone);
 	}
 
 	//set width of calendar
@@ -479,7 +478,8 @@ class tc_calendar{
 			$this->year_end = 2037;
 			$this->warning_msgs[] = L_WARN_2038;
 		}
-*/	}
+*/
+	}
 
 	function getMonthNames(){
 		return array(L_JAN, L_FEB, L_MAR, L_APR, L_MAY, L_JUN, L_JUL, L_AUG, L_SEP, L_OCT, L_NOV, L_DEC);
@@ -504,7 +504,7 @@ class tc_calendar{
 	function dateAllow($from = "", $to = "", $show_not_allow = true){
 		$time_from = $this->mydate->validDate($from) ? $from : null;
 		$time_to = $this->mydate->validDate($to) ? $to : null;
-		
+
 		// sanity check, ensure time_from earlier than time_to
 		if($time_from != null && $time_to != null && $this->mydate->dateAfter($time_to, $time_from, true)){
 			$tmp = $time_from;
@@ -643,7 +643,7 @@ class tc_calendar{
 
 			//change specific date to time
 			foreach($dates as $sp_date){
-				if($this->mydate->validDate($sp_date)){	
+				if($this->mydate->validDate($sp_date)){
 					switch($recursive){
 						case "month": //add to monthly
 							if(!in_array($sp_date, $this->sp_dates[1]))
@@ -782,20 +782,21 @@ class tc_calendar{
 
 	function check_json_encode($obj){
 		//try customize to get it work, should replace with better solution in the future
-
-		if(function_exists("json_encode") && false){
-			return json_encode($obj);
-		}else{
-			//only array is assumed for now
-			if(is_array($obj)){
+		if(is_array($obj)){
+			if(function_exists("json_encode") && false){
+				return json_encode($obj);
+			}else{
+				//only array is assumed for now
 				$return_arr = array();
 				foreach($obj as $arr){
-					if(is_array($arr))
-						$return_arr[] = "[".implode(",", $arr)."]";
+					if(is_array($arr) && sizeof($arr)>0)
+#						$return_arr[] = "[".implode(",", $arr)."]";
+						$return_arr[] = "[\"".implode("\",\"", $arr)."\"]";
+					else $return_arr[] = "[]";
 				}
 				return "[".implode(",", $return_arr)."]";
-			}else return "";
-		}
+			}
+		}else return "";
 	}
 
 	function &check_json_decode($str){
@@ -805,27 +806,38 @@ class tc_calendar{
 			return json_decode($str);
 		}else{
 			//only array is assume for now
+			$str = stripslashes(rawurldecode($str));
 			$str = trim($str);
+
 			if($str && strlen($str) > 2){
 				$str = substr($str, 1, strlen($str)-2);
 
-				$return_arr = array();
+				if($str && strlen($str) > 2){
+					$str = substr($str, 1, strlen($str)-2);
 
-				$offset = 0;
-				for($i=0; $i<3; $i++){
-					//find first '['
-					$start_pos = strpos($str, "[", $offset);
-					if($start_pos !== false){
-						//find next ']'
-						$end_pos = strpos($str, "]", $offset);
-						if($end_pos !== false){
-							$return_str = substr($str, $start_pos+1, ($end_pos-$start_pos-1));
-							$return_arr[] = explode(",", $return_str);
-							$offset = $end_pos+1;
-						}else $return_arr[] = array();
-					}else $return_arr[] = array();
-				}
-				return $return_arr;
+					$return_arr = array();
+
+					$offset = 0;
+
+					$arr = explode("],[", $str);
+					for($i=0; $i<sizeof($arr); $i++){
+						$this_v = $arr[$i];
+						if($this_v == "")
+							$return_arr[] = array();
+						else{
+							$this_arr = explode(",", $this_v);
+
+							for($j=0; $j<sizeof($this_arr); $j++){
+								if(substr($this_arr[$j], 0, 1)=="\"" && substr($this_arr[$j], strlen($this_arr[$j])-1, 1)=="\""){
+									$this_arr[$j] = substr($this_arr[$j], 1, strlen($this_arr[$j])-2);
+								}
+							}
+
+							$return_arr[] = $this_arr;
+						}
+					}
+					return $return_arr;
+				}else return array();
 			}else return array();
 		}
 	}
@@ -912,6 +924,7 @@ class tc_calendar{
 						else{
 							$tt_key = array_search($tt_time, $this->tt_dates[2]);
 							$this->tt_tooltips[2][$tt_key] = $this->tt_tooltips[2][$tt_key]."\n".$tooltip;
+#							$this->tt_tooltips[2][$tt_key] = $this->tt_tooltips[2][$tt_key]."&#10;".$tooltip;
 						}
 						break;
 					case "month": //add to monthly
@@ -922,6 +935,7 @@ class tc_calendar{
 						else{
 							$tt_key = array_search($tt_time, $this->tt_dates[1]);
 							$this->tt_tooltips[1][$tt_key] = $this->tt_tooltips[1][$tt_key]."\n".$tooltip;
+#							$this->tt_tooltips[1][$tt_key] = $this->tt_tooltips[1][$tt_key]."&#10;".$tooltip;
 						}
 						break;
 					default: //add to no recursive
@@ -932,11 +946,16 @@ class tc_calendar{
 						else{
 							$tt_key = array_search($tt_time, $this->tt_dates[0]);
 							$this->tt_tooltips[0][$tt_key] = $this->tt_tooltips[0][$tt_key]."\n".$tooltip;
+#							$this->tt_tooltips[0][$tt_key] = $this->tt_tooltips[0][$tt_key]."&#10;".$tooltip;
 						}
-				}
 //				}
+				}
 			}
 		}
+	}
+
+	function setTimezone($tz){
+		$this->timezone = $tz;
 	}
 
 	function getDayName($date){

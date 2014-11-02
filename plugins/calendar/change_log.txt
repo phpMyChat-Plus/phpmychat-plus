@@ -2,15 +2,36 @@ The php calendar component
 written by TJ @triconsole
 Localization version & support by ciprianmp
 
-version 3.70-loc (20 July 2013)
+version 3.73-loc (01 November 2013)
 - it includes all the updates in the original class
+
+add on: Tooltips function
+	- thanks ciprianmp
+
+add on: Timezone function
+	- thanks Tri
+
+updated: vulnerabilities update on REQUEST parameter
+	- thanks Arvid V.
+
+fixed: minor bugs fixed on unset calendar value
+	- thanks Tri
+
+fixed: tooltips are not display on Safari browser (windows)
+	- thanks Larry
+
+fixed: an error when choose day and month, and year dropdown to null (first item on dropdown)
+	- thanks Marco
+
+add on: an event colors specified on calendar.css, alternative to the tooltip icons or use both
+	- thanks Larry
 
 fixed: the year interval limitation (1970/2038) has been eliminated for the entire class (timestamps not used anymore)
 	- thanks Tri
 
 fixed: recursive tooltips can now be set outside the limited interval 1970-2037
 	- thanks ciprianmp
-	
+
 add on: built the FB page of the class and embedded the Like action button
 	- thanks ciprianmp
 

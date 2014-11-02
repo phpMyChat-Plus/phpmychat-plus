@@ -34,7 +34,7 @@ define("L_POWBY", "技術支援："); //or "Based on:", "Supported by"
 define("L_HERE", "這裡");
 define("L_UPDATE", "可用更新%s！");
 define("L_TRANAME", "clouds_music");
-define("L_TRABY", "中文翻譯作者<br />%s雲上的音樂 ");
+define("L_TRABY", "中文翻譯作者<br />%s雲上的音樂");
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "1");
