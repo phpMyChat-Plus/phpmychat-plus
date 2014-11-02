@@ -133,7 +133,7 @@ $cobj->time_allow2 = $time_allow2;
 $version = $cobj->version;
 $check_version = $cobj->check_new_version;
 
-$cobj->setYearInterval($year_start, $year_end);
+$cobj->setYearPeriod($year_start, $year_end);
 $cobj->setTimezone($timezone); //set for further usage, nothing for now
 
 //check and show default calendar month and year on valid range of date_allow

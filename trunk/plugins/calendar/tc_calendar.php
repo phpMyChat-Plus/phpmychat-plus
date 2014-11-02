@@ -151,7 +151,7 @@ class tc_calendar{
 		return $rtn_hdrs;
 	}
 
-	function setIcon($icon){
+	function setPicture($icon){
 		$this->icon = $icon;
 	}
 
@@ -456,7 +456,7 @@ class tc_calendar{
 		if($height) $this->height = $height;
 	}
 
-	function setYearInterval($start, $end){
+	function setYearPeriod($start, $end){
 		$this->year_start_input = $start;
 		$this->year_end_input = $end;
 
