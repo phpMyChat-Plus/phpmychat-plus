@@ -643,13 +643,13 @@ else
 			<?php
 			  $myCalendar = new tc_calendar("date1", true, true);
 			  $myCalendar->zindex = 150; //default 1
-			  $myCalendar->setPicture("plugins/calendar/images/iconCalendar.gif");
+			  $myCalendar->setIcon("plugins/calendar/images/iconCalendar.gif");
 			  $myCalendar->setPath("plugins/calendar/");
 			  if(isset($BIRTHDAY))
 			  {
 				$myCalendar->setDate(substr($BIRTHDAY, -2), substr($BIRTHDAY, 5, 2), substr($BIRTHDAY, 0, 4));
 			  }
-			  $myCalendar->setYearPeriod(1900, date('Y'));
+			  $myCalendar->setYearInterval(1900, date('Y'));
 			  $myCalendar->dateAllow('1900-01-01', date('Y-m-d'));
 				$DbLink->query("SELECT username,birthday,show_age FROM ".C_REG_TBL." WHERE birthday != '' AND birthday != '0000-00-00' AND show_bday = '1' ORDER BY birthday ASC");
 				if ($DbLink->num_rows() != 0)

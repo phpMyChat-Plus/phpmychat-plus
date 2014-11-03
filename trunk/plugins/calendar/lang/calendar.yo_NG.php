@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 # yo_NG translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 3.69
