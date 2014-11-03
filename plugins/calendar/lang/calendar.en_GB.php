@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 # en_GB - this file includes only the format settings;
 # the specific strings are already included as default en_GB/en_US in localization.lib.php
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php

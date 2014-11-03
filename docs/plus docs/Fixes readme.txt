@@ -4,10 +4,10 @@ Client browsers - tested with:
 	- IE < 5.5 = M;
 	- IE > 6.0SP2 (including > 7.0 & > 8.0 & > 9.0 & > 10.0) = H;
 	- Mozilla Aurora = 12.0 = H;
-	- Mozilla Firefox > 1.6.0.0 (including < 12.0) = H;
+	- Mozilla Firefox > 1.6.0.0 (including 33.02) = H;
 	- Mozilla Firebird 0.7 = L;
 	- Netscape > 8.1 = M;
-	- Opera 11.61 = H;
+	- Opera < 25 = H;
 	- AvantBrowser 10.2 build 52 = H;
 	- Flock 1.2.1 = H;
 	- Apple Safari > 4.0.3 = H;
@@ -24,13 +24,13 @@ Known issues (read also the FAQ):
 - php 5.1.6 will not allow joining chat or/and changing settings or saving data into database (due to several bugs in 5.1.6 release);
 - php 4.4.4 has an issue of not posting the messages ($M value is null);
 - configurations cannot be saved from admin panel on servers having magic_quotes set "on"; this also happens if the c_config table structure has been altered somehow and it doesn’t exactly follow the admin5.php field definitions; another identified reason would be the use of single quote ’ in field values (like Room’s Names or such) - never use single quotes - use the utf-8 ’ instead (you can copy it from here when you need it);
-- when a username uses utf-8 chars like ă î â , php cannot recognize a name with small caps as being similar with caps (Îrban is different than îrban) so please make sure you use the name in PMs and commands exacly as the one of the desired username (this is working fine on php > 5 servers, due to the added mb_* functions support);
+- when a username uses utf-8 chars like ă î â , php cannot recognize a name with small caps as being similar with caps (Îrban is different than îrban) so please make sure you use the name in PMs and commands exactly as the one of the desired username (this is working fine on php > 5 servers, due to the added mb_* functions support);
 
-Important: everytime you upgrade/reinstall a phpmychat server or change sensitive data in Admin panel (like default room names), the old cookies must be deleted from the clients’ machines - so let your users know! (also cache clearing might be a good idea)
-When you install Firefox2 and/or QuickTime (RealPlayer), a QuickTime plugin will break the WMP plugin in IE, necesary for playing .wav sounds, therefore, you won’t get sounds in IE anymore. I fixed it by playing with enabling WMP/disabling QuickTime plugins in IE; re-associating the "wav" files in Media Player/Tools/Options/File Types also fixes this.
+Important: every time you upgrade/reinstall a phpmychat server or change sensitive data in Admin panel (like default room names), the old cookies must be deleted from the clients’ machines - so let your users know! (also cache clearing might be a good idea)
+When you install Firefox2 and/or QuickTime (RealPlayer), a QuickTime plugin will break the WMP plugin in IE, necessary for playing .wav sounds, therefore, you won’t get sounds in IE anymore. I fixed it by playing with enabling WMP/disabling QuickTime plugins in IE; re-associating the "wav" files in Media Player/Tools/Options/File Types also fixes this.
 On some pcs a restart might be necessary.
 We also added a small IE fixing script (reg file) as a link in Extra Options in chat.
-If your users encounter bootings for no reason, try to disable sounds in chat.
+If your users encounter booting for no reason, try to disable sounds in chat.
 
 Fixes History:
 16.02.0214 - 1.94-RC4
@@ -54,7 +54,7 @@ Fixes History:
 - fixed some empty values being not-saved to database on some servers; (functionality related)
 - added birthdays to calendar as tooltips; (calendar related)
 - Latin1 empty value fix; (functionality related)
-- tooltips linebreak fix; (functionality related)
+- tooltips line break fix; (functionality related)
 - improved /save command to display the window before saving to html; (functionality related)
 - fixed a bug that prevented links to be posted in links.php; (functionality related)
 - bot adjustments: German.aiml put in a zip so the bot will load only English  by default; bot calendar has been modified to use the US format by default - previous UK format aiml is renamed to .bak; (bot functionality related)
@@ -66,7 +66,7 @@ Fixes History:
 - on IE7, registered users don’t always actually leave the chat after clicking the Exit door or Exit link - the loader frame doesn’t actually close but keep showing that user to the users’ lists until the user closes that specific browser window; in the latest 1.94-RC2 this should be fixed but we are keep monitoring for feedback; (functionality related)
 - fixed a bug in MySQL >= 5.5 which made a calendar response from bot stop; (functionality related);
 - more DB connections stripped down: multiple connections per user are required as phpMyChat is based on HTML frames and popups, for each one a separate mysql connection being needed; in this version, most direct mysql connections have been changed to mysql.lib.php class global usage, with the benefit of less than 1/3 of previous number of connections made per user; the bot will still use direct connections to the DB, as per Alice ProgramE; (functionality related)
-- converted chinese config translations in admin panel; (translation related)
+- converted Chinese config translations in admin panel; (translation related)
 - adjusted fb like position in input bar; (display related)
 - fixed hangout in exit.php by changing link to _top not _parent; (functionality related)
 - resized Secret answer field maxsize to 14 chars, in registration and edit profile; (security related)
@@ -79,7 +79,7 @@ Fixes History:
 - important public logs fix to display the entire archive not only first month of each year; (functionality related)
 - installer fixes, including incorrect permissions set after first step on some servers; (functionality related)
 - calendar plugin fixes; (functionality related)
-- Brasilian Portuguese translation added; (localization project) - Thanks to Marco Gelli Marchese <mvmcgm@gmail.com>
+- Brazilian Portuguese translation added; (localization project) - Thanks to Marco Gelli Marchese <mvmcgm@gmail.com>
 - fixed a CAPS issue when swearing filter was enabled, making all letters being posted lowercase; (functionality related)
 - added the Facebook Like Button - social plugin; (socialization)
 - added <sup> tags for the right numerals display in English (1st 2nd aso); (functionality related)
@@ -88,10 +88,10 @@ Fixes History:
 - Chinese (both Simplified and Traditional) translation added; (localization project) - Thanks to clouds_music <clouds.music@gmail.com>
 - fixed the sourceforge logo for sites with allow_url_include disabled; (functionality related)
 - added the Profiles tab in admin panel, based on birthday popup features; (functionality extension)
-- fixed a bug related to embeding sounds that was leading to freezing and booting in IE7/8; (functionality related)
+- fixed a bug related to embedding sounds that was leading to freezing and booting in IE7/8; (functionality related)
 - changed the MathJax plugin to use the secure connection; (security related)
 - more deprecated functions updated (eg set_magic_quotes_runtime); (compatibility related)
-- Extra Options section has moved on bottom of the users' list, as a colapsible menu; (functionality related)
+- Extra Options section has moved on bottom of the users' list, as a collapsible menu; (functionality related)
 - fixed the color drop box in input.php when var COLOR_TB is not defined in skin file; (functionality related)
 - major improvements to popup openers in usersH&L files - all the functions moved to the parent container index.lib.php; (functionality related)
 - added the birthday popup page which shows a list of current month or entire year celebrated users, to include some profile data, as per user profile setting, to assure desired privacy (avatar, username, date of birth, age, first name, last name, gender); (functionality extension)
@@ -115,36 +115,36 @@ Fixes History:
 - language selection added to the remote login box; (functionality related)
 - important sound fix - users can not set sound on/off for notifications in chat (except for buzzes sent by power users); (functionality related)
 - Catalan translation started; (localization project) - Thanks to Jordi Babot <jordibabot@gmail.com> - suspended
-- important BOT fix for Windows servers, when answering with date formated string (locale stays in English now); (functionality related)
+- important BOT fix for Windows servers, when answering with date formatted string (locale stays in English now); (functionality related)
 - Help popup - admin email link (mailto) fix; (functionality related)
 - several ereg/eregi_replace functions replaced by str_replace - steps for php5.3 compatibility; (compatibility related)
 02.06.2010 - 1.94-beta5:
-- download link updated in all occurences in chat; (functionality related)
+- download link updated in all occurrences in chat; (functionality related)
 - updated Calendar class to v3.3; (functionality related)
 - Czech translation started; (localization project) - Thanks to Chenzee <chenzee@email.cz> - suspended
 - Yoruba (Nigeria) translation started; (localization project) - Thanks to Samson Ameh <philanthropist4eva@gmail.com> - suspended
 - uploader class updated to version 0.30; (functionality related)
 - important installer fixes - the skip button and ftp process were broken in 1.93; (functionality related)
-- addressess called bye "username>" will now stay in the input box for the entire addressed conversation, until removed by user; (functionality extension)
+- addresses called bye "username>" will now stay in the input box for the entire addressed conversation, until removed by user; (functionality extension)
 - Ukrainian translation started; (localization project) - suspended
 - Russian translation added; (localization project)
 - updated Calendar class to v3.2 and fixed a few small js bugs; (functionality related)
-- separated banished users from the reg ones in the send email tab in admin panel, so they don’t get selected by mistake to receive unwanted emails from admins; (functionality extention)
+- separated banished users from the reg ones in the send email tab in admin panel, so they don’t get selected by mistake to receive unwanted emails from admins; (functionality extension)
 - fixed a bug that caused page titles with space at the end to break the popups/openers; (functionality related)
 - posted smilies can now be reused by clicking on them; (functionality extension)
-- decription field in profiles is now right aligned and will display the according line breaks; (functionality related)
+- description field in profiles is now right aligned and will display the according line breaks; (functionality related)
 - fixed the profile description field input where single quotes couldn’t be used; (functionality related)
 - updated Calendar class to v.3.1; (functionality extension)
 - fixed some Birthday email related localized output; the wishes will be received in the user specific language or default language of the chat (functionality related)
 - changed "Spoken languages" profile field to "Language", selectable from the available chat languages; the purpose is to support localized emails from chat; (functionality related)
-- added the MediaPlayer plugin mod for video/audio stream embeding; admins can set the streaming source in Admin panel; (functionality extension)
+- added the MediaPlayer plugin mod for video/audio stream embedding; admins can set the streaming source in Admin panel; (functionality extension)
 08.05.2010 - 1.94-beta4:
 - fixed a bot entrance issue; (functionality related)
 - enabled sending of html formatted emails from admin panel; (functionality extension)
 - Birthday mod added - for profiles; (functionality extension)
 25.04.2010 - 1.94-beta3:
 - upload class updated to latest 0.29 version; (functionality related)
-- added the Remember me checkbox to remember login data; (privacy & login related)
+- added the Remember me check-box to remember login data; (privacy & login related)
 19.04.2010 - 1.94-beta2:
 - provided Privacy policy updated; (privacy related)
 - some important changes in the video posting approach; (functionality extension)
@@ -179,11 +179,11 @@ Fixes History:
 
 10.06.2009 - 1.93-RC5:
 - fixed a small bug in private popups replies; (functionality related)
-- small change in stylesheets to format the rtl quotes
-- dir comands added (/rtl and /ltr) - changes the posts text direction when needed ;(functionality extension)
+- small change in style-sheets to format the rtl quotes
+- dir commands added (/rtl and /ltr) - changes the posts text direction when needed ;(functionality extension)
 - admin.php and invite command fixes; (functionality related)
 - Hebrew translation added; (localization project) - Thanks to Shula
-- added statistics table for admin analyses purposes; (c_stats table added and lots of testings and fine-tunings); (functionality extension)
+- added statistics table for admin analyses purposes; (c_stats table added and lots of testing and fine-tunings); (functionality extension)
 
 27.08.2008 - 1.93-RC4:
 - logs header include paths fixed to avoid safe mode restrictions (access to relative paths to localization files); (functionality related)
@@ -211,13 +211,13 @@ Fixes History:
 
 11.08.2008 - 1.93-RC3:
 - kick command fix; (functionality related)
-- Multi local avatars & sounds/buzes upload by admins; (functionality extension) - work started
+- Multi local avatars & sounds/buzzes upload by admins; (functionality extension) - work started
 - Local avatars upload by users in profile; (functionality extension)
 - translation updates for all included languages; (localization related)
 
 10.06.2008 - 1.93-RC2:
 - small installer pagination fixes; (localization related)
-- banner.php filename is changed now to topic.php as well as all it’s old references; the AdBlock and AdBlock Plus plugins in Firefox were blocking it because the previous filename (banner.php) stands for advertisments; (functionality related)
+- banner.php filename is changed now to topic.php as well as all it’s old references; the AdBlock and AdBlock Plus plugins in Firefox were blocking it because the previous filename (banner.php) stands for advertisements; (functionality related)
 - the bot will not dissapear anymore from userlists when clean.lib or logs.lib are in action; (functionality related)
 - phpMyChat-Plus becomes the First Gravatarized LiveChat system in the world!!! (functionality extension)
 	- added option to display Gravatars as users’ avatars in chat (more details on gravatar.com);
@@ -231,7 +231,7 @@ Fixes History:
 - improved the installer;
 - send mail improvements for registration/edit profiles, as well as in Admin Panel:
 	- utf-8 compatibility;
-	- added Cc (sender admin) and Bcc (chat owner) for email sent from Send email sheet (it helps when there are more than 1 admins of a chat);
+	- added Cc (sender admin) and Bcc (chat owner) for email sent from Send email sheet (it helps when there are more than 1 admin of a chat);
 - stripped more redundant codes from several files;
 - added users visits counter to profiles;
 
@@ -245,7 +245,7 @@ Fixes History:
 	- added a clock box into the Input frame; (useful for users with hidden status bar in their browsers, so they can see the current server time)
 - user related links (edit profile, delete profile, administration and other) - moved from Input frame into the Extra Options menu in the right frame in chatrooms; (functionality related)
 - added power colors to usernames in users_popup lists (only if italicized is enabled); (functionality extension)
-- Expand/Colapse rooms fix; (functionality related)
+- Expand/Collapse rooms fix; (functionality related)
 - Cc and Bcc added for sending emails from admin panel - for more spam control (if someone is accessing Admin panel and start using the send email sheet, the Owner will get copies so he can take counter-measures); (security & functionality extensions)
 - translation updates for all included languages; (localization related)
 
@@ -272,22 +272,22 @@ Fixes History:
 05.03.2008 - 1.93-beta4:
 - added option in Admin panel to show/hide italicized names and power colors for admins and moderators; (functionality extension)
 - several improvements of IP logging (acounter.php); (functionality related)
-- different finetunes of language specific expressions, order, singular/plural, gender, etc; (localization & functionality related)
-- lots of utf-8 extensions, mostly for php5 full compatibility (multibyte functions added); (functionality extension)
+- different fine-tunes of language specific expressions, order, singular/plural, gender, etc; (localization & functionality related)
+- lots of utf-8 extensions, mostly for php5 full compatibility (multi-byte functions added); (functionality extension)
 - important fixes for php servers which have "short_open_tag = Off" - all short tags have been converted to long tags; (functionality related)
 - chat has been changed to fully working on windows servers; (functionality extension)
 
 18.02.2008 - 1.93-beta2:
 - Admin panel and profile forms (edit and register) are displaying now the images of the picture selections (flags, flag types, genders, doorroll, aso); (display related)
 - several logs exporting/handling changes/improvements; (functionality related)
-- windows utf-8 encoding fixes - date names are now correctly decoded on Windows enviroments; (localization & functionality related)
+- windows utf-8 encoding fixes - date names are now correctly decoded on Windows environments; (localization & functionality related)
 - chat booting, clean.lib and superghost mode improvements; (functionality related)
 - lurking page also displays the status of the connected users (in Admin panel/Connected users, it also shows ghosts and superghosts status); (functionality related)
 - Hungarian has been added - thanks to Zsuzsi; (localization related)
 - Serbian - Latin has been added (localization project) - Thanks to Vedran;
 
 01.02.2008 - 1.93-beta1:
-- pagination improvement in Admin panel/Registered users and Baned users, and Styles preview, respectivey - added a page selector for easier navigation through pages; (functionality extension)
+- pagination improvement in Admin panel/Registered users and Banned users, and Styles preview, respectively - added a page selector for easier navigation through pages; (functionality extension)
 - Admin panel/Search tab improvement: the results of a search can now directly be banned/deleted from the same sheet, without having to look for the user in the Registered users sheet; (functionality extension)
 - added option in Admin panel to display a color filled and/or an image background index (login) page; (functionality extension)
 - added option in Admin panel to enable/disable Links popup - some users requested the old links behavior in chat; (functionality extension)
@@ -300,16 +300,16 @@ Fixes History:
 	- Note: to add new skins, read explanations in install/Instructions.txt;
 - important Ghost Mode changes: (functionality extension)
 	- new approach to hiding users;
-	- added a new field in Admin panel to enter user names you want to be hiden (Admins and TopModers in this hiden mode are called Special Ghosts due to their Extra abilities to watch all the activities in chat rooms - very useful for parental control);
+	- added a new field in Admin panel to enter user names you want to be hidden (Admins and TopModers in this hidden mode are called Special Ghosts due to their Extra abilities to watch all the activities in chat rooms - very useful for parental control);
 - Several language improvements to help with the new translations; (localization & functionality related)
 - French and Swedish translations have been updated and added - thanks to Pierre and Anon; (localization related)
 - Danish has been added - thanks to Dit; (localization related)
 - Some dice usage improvements; (functionality related)
 - Banner/topic improvement - the default topic stays now in the file called "localization/_owner/owner.php" - which replaces localized.owner.php; (functionality related)
 - config/config.lib.php changed (replaced "localized.owner" with "owner"); (functionality related)
-- buzz_popup fix, to hide the .txt files in the sounds folder (some user also uploaded the redme.txt provided in the extrasounds archive); (functionality related)
-- ghost mode fix - the conected_users number was still showing the hiden users; (functionality related)
-- counter fix - counter won’t increase for one hour per each visitator - before, it was counting each time the user loaded/reloaded the login page; (functionality related)
+- buzz_popup fix, to hide the .txt files in the sounds folder (some user also uploaded the readme.txt provided in the extrasounds archive); (functionality related)
+- ghost mode fix - the conected_users number was still showing the hidden users; (functionality related)
+- counter fix - counter won’t increase for one hour per each visitor - before, it was counting each time the user loaded/reloaded the login page; (functionality related)
 - new gender added (couple); (functionality extension)
 - added an option to display both avatars and gender icons, only one of them or neither one; (functionality extension)
 - one more field added to the c_config table in the database.
@@ -366,7 +366,7 @@ After 1.92 release fixes (f means the released fix):
 - IP logs fix for creating  new log after deleting it from Admin panel; actually, IP logs don’t get deleted but backed up into the acounter/pages/bak folder; (functionality related)
 - several logging improvements; (functionality related)
 - new PMs & whispers will not get cleaned up/archived until they get read; (functionality related)
-- Added multilangual PayPal buttons for desirable donations; (support & localization related)
+- Added multilingual PayPal buttons for desirable donations; (support & localization related)
 
 20.10.2007 - 1.91-beta8:
 - fixed url/email parsing in private messaging popups; (functionality related)
@@ -376,7 +376,7 @@ After 1.92 release fixes (f means the released fix):
 
 10.10.2007 - 1.91-beta7:
 - some tutorial fixes/changes; (localization related)
-- Firefox center issue fixed - to align center tables/content in admin pages, exit frame and link frame; (functionality related)
+- Firefox center alignment issue fixed - to align center tables/content in admin pages, exit frame and link frame; (functionality related)
 - added a new power to the chat users: "Top Moderator"; this has all the admin’s powers, except Admin panel access; (based on Luke’s idea & Cissy’s request) (functionality related)
 - language changes/updates to include the Turkish grammar needs for different order of words in sentences; (localization related)
 
@@ -426,23 +426,23 @@ Known issues (as of 1.91-beta6):
 			Note: to make sense, I suggest the two sounds to be different from each other, otherwise, setting to only 1 or 2 would be enough.
 - Changed the /kick command to display a reason of kicking (optional)
 	Usage:
-	- old format/behavior:
+	- old format/behaviour:
 			/kick user - displays: "You have been kicked out of the room by a moderator of this room" to the kicked user and
 												"user has successfully been kicked away."
-	- new format/behavior:
+	- new format/behaviour:
 			/kick user [for spamming] - displays: "You have been kicked out of the room by a moderator of this room.<br />(Reason: for spamming)" to the kicked user and
 												"user has successfully been kicked away. (Reason: for spamming)" - ["for spamming" can be any text string]
 - Changed the /ban command and Admin Panel/Banish tab to display a reason of baning (optional)
 	Usage:
-	- old format/behavior (there is also an optional * /ban * user to ban forever - read the chat for more details):
+	- old format/behaviour (there is also an optional * /ban * user to ban forever - read the chat for more details):
 			/ban user - displays: "You have been banished from this room or from the chat." to the banished user and
 												"user has successfully been banished." to the room
-	- new format/behavior:
+	- new format/behaviour:
 			/ban user [for spamming] - displays: "You have been banished from this room or from the chat.<br />(Reason: for spamming)" to the banished user and
 												"user has successfully been banished. (Reason: for spamming)" to the room - ["for spamming" can be any text string]
-		The Reason field added in both Admin panels ("Registered Users" and "Banished Users") to add/edit the reason of banishment (the reson will be displayed to the banished user everytime he tries to login)
+		The Reason field added in both Admin panels ("Registered Users" and "Banished Users") to add/edit the reason of banishment (the reson will be displayed to the banished user every time he tries to login)
 - Changed the Help link image from ? to Help text. (functionality related)
-- Fixed the Archive/Log feature to display the right formated system messages: entrances/exits from chat, topic changes, announcements, aso. It is also multi-langual, according to the reader language (functionality related)
+- Fixed the Archive/Log feature to display the right formatted system messages: entrances/exits from chat, topic changes, announcements, aso. It is also multi-lingual, according to the reader language (functionality related)
 - Fixed the /invite command to remove sender’s name from the invitation list (based on Matias Oliveira feedback, a user could have invited himself, in the same room, of course) (functionality related)
 - /topic command improvements: (functionality related)
 		- Topic subject now stored in a file in botfb (keep it shown in banners even after messages clean-up);
@@ -458,20 +458,20 @@ Known issues (as of 1.91-beta6):
 		- Color selector in input bar, register/edituser pages and admin panel; (replaces the color picker) (functionality related)
 		- Color sniffer scripting safe mode filter; (security related)
 		- Messages displayed in tables in messages frame (text alignment fix by cells); (display related)
-- Argentinian spanish language updated and included (localization related) - Thanks to Matias Olivera <matiolivera@yahoo.com>.
+- Argentinian Spanish language updated and included (localization related) - Thanks to Matias Olivera <matiolivera@yahoo.com>.
 - Dutch language updated and included (localization project) - Thanks to Danny & Berb.
 - French language updated and included (localization project) - Thanks to Leloup <leloup@le-loup.info>.
 - German language updated and included (localization project) - Thanks to Alexander Eisele <xaex@xeax.de>.
 - Italian language updated and included (localization project) - Thanks to Mike Mikius <mikiusss@yahoo.com>.
 - Spanish language updated and included (localization project) - Thanks to Roxana Castaneda <roxminu@yahoo.com>.
 - Swedish language updated and included (localization project) - Thanks to Heikki <heikki@yttervik.be>.
-- Vetnamese language included - new for phpmychat (localization project) - Thanks to Marshall <hellomarshal_lookatme@netzero.net>.
-- Romanian language changed to include the special chars of the Central European encoding (with diactritics) (display related)
+- Vietnamese language included - new for phpmychat (localization project) - Thanks to Marshall <hellomarshal_lookatme@netzero.net>.
+- Romanian language changed to include the special chars of the Central European encoding (with diacritics) (display related)
 - In all the languages, the single quote eventually used in phrases (not codes) changed to unicode &#39; in order to eliminate any script error (functionality related)
 - Changed the icon.gif background to transparency in order to pick and fit the chat room skin background color; (display related)
 - Added ten more smilies;
 - Added Buzz Gallery popup link in input bar (like smilies) - to automatically add a different sound from the sounds folder; (functionality extension)
-- Added Randome Quote mod - to automatically send a public message containing a quote from a .txt file - configurable in Admin panel/Configuration; (functionality extension)
+- Added Random Quote mod - to automatically send a public message containing a quote from a .txt file - configurable in Admin panel/Configuration; (functionality extension)
 - Enlarged the users frame (for long names); (display related)
 - POST, GET, COOKIE and SERVER methods updated to php5 - thanks to Alexander Eisele (php5 compatibility related)
 - Fixed the private messages function in users list, when pm popup is disabled but pm enabled; (functionality related)
@@ -517,20 +517,20 @@ Files updated:
 
 06.08.2006 - 1.90:
 - /size command added (changes the font size of the messages’ text in the rooms) (functionality extension)
-- Help file udated to include the demote and size commands usage (support related)
+- Help file updated to include the demote and size commands usage (support related)
 - Tutorial updated to include the demote and room command usage (on Promote and Announce sections) (support related)
 - Romanian language updated and included (localization related)
 - Some English language corrections - bugs discovered while I was translating to Romanian (make some strings to have more sense). (localization related)
 - Extra commands and mods lists displayed on Info Section at login page have been updated in mysql (info update)
 - Bot Hello and Bye messages posted to the room on start/stop can be customized now in Admin Panel (functionality related)
-- Bot can be enabled now in more than one room (before, it could talk only in the single room he was running; now, he can talk public to people in each room he is enabled in - at this point, the bot will have the same name in everyroom he is enabled - should we change that so he might have more names? umm...) (functionality extension)
+- Bot can be enabled now in more than one room (before, it could talk only in the single room he was running; now, he can talk public to people in each room he is enabled in - at this point, the bot will have the same name in every room he is enabled - should we change that so he might have more names? umm...) (functionality extension)
 - Fixed the bot responses by removing some trailing expressions from the user input (like /to , /to Re: , Re: , and others) - that made bot answer very strange before on replies (Ummm... and non-senses) (functionality related)
 		- I have to admit, this was caused by my own mistakes (priv popup mod) not checking what is actually the user input to the bot in bot_conversationlog
 - Extra setting for bot: disable/enable public conversations - the bot can be running in chat but won’t talk to the public, only private (functionality related)
-- Room says command improved (roleplaying useful): a narator can say something to all the rooms using the [/room * message to display] command (functionality extension)
+- Room says command improved (role-playing useful): a narrator can say something to all the rooms using the [/room * message to display] command (functionality extension)
 - Welcome messages moved to localization/[lang]/localized.chat.php - no need for lib/welcome.lib.php anymore (localization/optimization related)
-- Number of default rooms and which to be used/shown can now also be defined/configured in Admin Panel (no more file editting needed for that) (support related)
-- Removed the strikethrough for hyperlinks in styles (only underline left) (display related)
+- Number of default rooms and which to be used/shown can now also be defined/configured in Admin Panel (no more file editing needed for that) (support related)
+- Removed the strike-through for hyperlinks in styles (only underline left) (display related)
 - Changed the version format from vX.X to X.XX (v1.9 is called now 1.90)
 SQL updates:
 - CMDS, MODS, QUICKA, QUICKM and QUICKU fields of the c_config table have been updated to include the latest commands/mods (for the login page and Quick menu in the chat); //this step is not compulsory for upgrades from 1.7 or 1.8
@@ -602,7 +602,7 @@ Files removed:
 To do (other then To do Cip.txt):
 - database installer/upgrade for mysql;
 - put back the old color picker with an option for which one to use in admin panel;
-- extend the bannishment feature to be able to ban an ip either by using the command or from admin panel;
+- extend the banishment feature to be able to ban an ip either by using the command or from admin panel;
 
 31.07.2006 - v1.8:
 - The bot has been enhanced (thanks to Sally Linus for her ideas)! It acts now just like any other human user in the chat. It can be invoked privately and it’ll answer privately. Bot can talk from different rooms. (functionality extension)
@@ -628,7 +628,7 @@ Files added:
 - 111 aiml files for bot to be loaded (distributed as optional before) - you can remove the ones you don’t want, before loading them into the database (these are the most interesting I found over the internet 1 year ago. if anyone has time to check them out and optimize them, it would be appreciated)
 
 05.07.2006: - v1.7 - The Plus version is called now v1.7 and it’s mature enough to become a final release (New name: phpMyChat-Plus v1.7 - not "based on 0.15.4" anymore - this is not alpha nor beta, it is not preview nor starter edition - it is the mature version of phpMyChat - I hope Nick Hozey will agree with me, as well as the other contributors who might have tried the Plus version so far)
-- Main reason of this release: Firefox is now treated as an "H" browser due to Popeye’s flickering fix, so I wanted to improve its behavior a little bit.
+- Main reason of this release: Firefox is now treated as an "H" browser due to Popeye’s flickering fix, so I wanted to improve its behaviour a little bit.
 - /buzz command improvements: (functionality related)
  - able to choose different sounds to be sent;
  - the buzz messages get deleted after 60 secs if they were sent like "/buzz" (if there is any text sent like "/buzz hello there", those messages remain in the database to be seen by the users in chat);
@@ -685,8 +685,8 @@ Files added:
 - plus/images/dice/index.html.
 
 06.12.2005:
-- Autoboot feature improved/fixed:
-	- SYS dice should have been SYS dice1 in plus/lib/clean.lib.php (to count time from the last dice thrown, if the user has done noother activities) (functionality related);
+- Auto-boot feature improved/fixed:
+	- SYS dice should have been SYS dice1 in plus/lib/clean.lib.php (to count time from the last dice thrown, if the user has done no other activities) (functionality related);
 	- Normal users couldn’t login if the welcome message has been disabled. (very important - functionality related);
 - plus/chat folder contains now two files called index.php and index.php3 to redirect the users who are trying to login using the old bookmarks. Users will automatically be redirected to the new chatpath, whatever the name of the folder will be (plus, chat, etc.). You can safely delete the old index.html in that folder. (functionality related)
 - topic and skin fix for rooms called like this: Dan’s room (containing quotes) - I strongly suggest you don’t use special chars in your chat rooms names. At this point, posting in those rooms is not possible. (functionality related)

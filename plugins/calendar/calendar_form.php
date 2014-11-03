@@ -48,16 +48,14 @@ $interval = getParameter("int", "number", 1);
 $auto_hide = getParameter("hid", "number", 0);
 $auto_hide_time = getParameter("hdt", "number", 1000);
 $timezone = getParameter("tmz");
-#$hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : 'en_US';
 $hl = getParameter("hl", "text", "en_US");
 //Digitizer
-#$dig = (isset($_REQUEST["dig"])) ? $_REQUEST["dig"] : 0;
 $dig = getParameter("dig", "boolean", false);
 //Tooltips
 #$tt_dates = (isset($_REQUEST["ttd"])) ? @tc_calendar::check_json_decode($_REQUEST["ttd"]) : array(array(), array(), array());
-$tt_dates = @tc_calendar::check_json_decode($getParameter["ttd"]);
+//$tt_dates = @tc_calendar::check_json_decode($getParameter["ttd"]);
 #$tt_tooltips = (isset($_REQUEST["ttt"])) ? @tc_calendar::check_json_decode(stripslashes(rawurldecode($_REQUEST["ttt"]))) : array(array(), array(), array());
-$tt_tooltips = @tc_calendar::check_json_decode(stripslashes(rawurldecode($getParameter["ttt"])));
+//$tt_tooltips = @tc_calendar::check_json_decode(stripslashes(rawurldecode($getParameter["ttt"])));
 
 //check year to be select in case of date_allow is set
 if(!$show_not_allow){
@@ -133,7 +131,7 @@ $cobj->time_allow2 = $time_allow2;
 $version = $cobj->version;
 $check_version = $cobj->check_new_version;
 
-$cobj->setYearPeriod($year_start, $year_end);
+$cobj->setYearInterval($year_start, $year_end);
 $cobj->setTimezone($timezone); //set for further usage, nothing for now
 
 //check and show default calendar month and year on valid range of date_allow
@@ -436,7 +434,7 @@ elseif(function_exists("file_get_contents")){
 	}
 }
 $donation_url = (($rtl && L_DONATE != "Do you wish to donate?") ? "" : ($rtl ? '<bdo dir="ltr">' : "")).'<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=BX3RZAYPUMA28&lc='.$hl.'&item_name=Appreciate%20%26%20Support%20the%20Localized%20Calendar%20Class%20development&item_number=LCalClass%20about&no_note=0&cn=Your%20comments%20%28optional%29&no_shipping=1&rm=1&return=http%3a%2f%2fciprianmp%2ecom%2fscripts%2fcalendar&cancel_return=http%3a%2f%2fciprianmp%2ecom%2fscripts%2fcalendar&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted&page_style=LCalCLass" target="_blank" alt="'.$ppalt.$pptit.'" title="'.$ppalt.$pptit.'">'.L_DONATE.'</a></bdo>';
-define("L_ABOUT_LOC", "<b>Localized Datepicker</b><br />".sprintf(L_VERSION, "<b>".strval($version)."</b>", "<b>$LANGS_NUM</b>").($new_version ? "<br /><b><font color=\"red\">".sprintf(L_UPDATE, "<a href=\"$WEB_LOC\" target=\"_blank\">".L_HERE."</a>")."</font></b>" : "").(defined("L_TRABY") && L_TRABY != "L_TRABY" ? "<br />".sprintf(L_TRABY, "<b>".L_TRANAME."</b>") : "")."<br /><bdo dir=\"ltr\">&copy;2010-".$cdate->getDate("Y")." <b><a href=\"$WEB_LOC\" target=\"_blank\" title=\"http://ciprianmp.com\">$AUTHOR_LOC</a></b></bdo>".($wan_enabled ? ($show_calendar_info ? "<br /><div id=\"fb-like\" class=\"fb-like\" data-href=\"https://www.facebook.com/DatePicker\" data-send=\"false\" data-layout=\"button_count\" data-show-faces=\"false\" data-font=\"tahoma\" ref=\"loc_about_info\"></div><br />".$donation_url : "<br />".$donation_url) : "")."<hr /><i>".L_POWBY."<br /><b>PHP Datepicker Calendar</b><br /><bdo dir=\"ltr\">&copy;2006-".$cdate->getDate("Y")." <b><a href=\"$WEB_SUPPORT\" target=\"_blank\" title=\"http://triconsole.com\">$AUTHOR</a></b></bdo></i><!--<br />Server Timezone:<br />$timezone<br /><span id=\"timecontainer\">".$cdate->getDate("Y-m-d H:i:s")."</span> -->");
+define("L_ABOUT_LOC", "<b>Localized Datepicker</b><br />".sprintf(L_VERSION, "<b>".strval($version)."</b>", "<b>$LANGS_NUM</b>").($new_version ? "<br /><b><font color=\"red\">".sprintf(L_UPDATE, "<a href=\"$WEB_LOC\" target=\"_blank\">".L_HERE."</a>")."</font></b>" : "").(defined("L_TRABY") && L_TRABY != "L_TRABY" ? "<br />".sprintf(L_TRABY, "<b>".L_TRANAME."</b>") : "")."<br /><bdo dir=\"ltr\">&copy;2010-".$cdate->getDate("Y")." <b><a href=\"$WEB_LOC\" target=\"_blank\" title=\"http://ciprianmp.com\">$AUTHOR_LOC</a></b></bdo>".($wan_enabled ? ($show_calendar_info ? "<br /><div id=\"fb-like\" class=\"fb-like\" data-href=\"https://www.facebook.com/DatePicker\" data-send=\"false\" data-layout=\"button_count\" data-show-faces=\"false\" data-font=\"tahoma\" ref=\"loc_about_info\"></div><br />".$donation_url : "<br />".$donation_url) : "")."<hr /><i>".L_POWBY."<br /><b>PHP Datepicker Calendar</b><br /><bdo dir=\"ltr\">&copy;2006-".$cdate->getDate("Y")." <b><a href=\"$WEB_SUPPORT\" target=\"_blank\" title=\"http://triconsole.com\">$AUTHOR</a></b></bdo></i><br />Server Timezone:<br />$timezone<br /><span id=\"timecontainer\">".$cdate->getDate("Y-m-d H:i:s")."</span>");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"<?php if($rtl) echo(" dir=\"rtl\""); ?>>
@@ -498,7 +496,8 @@ function submitNow(dvalue, mvalue, yvalue){
 	</script>
 <?php } ?>
     <div id="calendar-header" align="center">
-        <div style="float: <?php echo($rtl ? "right" : "left"); ?>;" id="info">
+     	<?php if($show_calendar_info){ ?>
+		<div style="float: <?php echo($rtl ? "right" : "left"); ?>;" id="info">
 			<img src="images/<?php echo($new_version ? "version_info.gif" : "about.png"); ?>" width="9" height="9" border="0" id="info_icon" />
 			<div id="about" dir="<?php echo(($rtl && L_HERE != "here") ? "rtl" : "ltr"); ?>" style="<?php echo($rtl ? "right: 0px;".(L_HERE != "here" ? " direction: rtl; unicode-bidi: embed;" : "") : "left: 0px;"); ?>"><?php echo($dig ? $cobj->digitize_arabics(L_ABOUT_LOC) : L_ABOUT_LOC); ?></div>
             <script type="text/javascript" src="calendar_servertime.js"></script>
@@ -552,7 +551,8 @@ function submitNow(dvalue, mvalue, yvalue){
 			//-->
 			</script>
         </div>
-        <?php if($dp && !$auto_hide){ ?>
+        <?php } ?>
+		<?php if($dp && !$auto_hide){ ?>
         <div style="float: <?php echo($rtl ? "left" : "right"); ?>;" class="closeme"><a href="javascript:closeMe();"><img src="images/close.gif" border="0" alt="<?php echo(L_CLOSE); ?>" title="<?php echo(L_CLOSE); ?>" /></a></div>
         <?php } ?>
 
@@ -685,8 +685,8 @@ function submitNow(dvalue, mvalue, yvalue){
 			<!-- Digitizer -->
             <input name="dig" type="hidden" id="dig" value="<?php echo($dig);?>" />
 			<!-- //Tooltips -->
-            <input name="ttd" type="hidden" id="ttd" value="<?php echo($cobj->check_json_encode($tt_dates));?>" />
-            <input name="ttt" type="hidden" id="ttt" value="<?php echo(rawurlencode($cobj->check_json_encode($tt_tooltips)));?>" />
+<!--            <input name="ttd" type="hidden" id="ttd" value="<?php echo($cobj->check_json_encode($tt_dates));?>" />
+            <input name="ttt" type="hidden" id="ttt" value="<?php echo(rawurlencode($cobj->check_json_encode($tt_tooltips)));?>" /> -->
       </form>
 	</div>
     <div id="calendar-container">

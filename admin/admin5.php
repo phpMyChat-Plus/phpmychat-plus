@@ -1591,7 +1591,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<?php
 		  $myCalendar = new tc_calendar("date1", true, false);
 		  $myCalendar->zindex = 150; //default 1
-		  $myCalendar->setPicture("./plugins/calendar/images/iconCalendar.gif");
+		  $myCalendar->setIcon("./plugins/calendar/images/iconCalendar.gif");
 		  $myCalendar->setPath("./plugins/calendar/");
 		  if($INSTALL_DATE && $INSTALL_DATE != "")
 		  {
@@ -1602,7 +1602,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			$CorrectedTime = mktime(date("G") + C_TMZ_OFFSET*60*60,date("i"),date("s"),date("m"),date("d"),date("Y"));
 			$myCalendar->setDate(date('d',$CorrectedTime), date('m',$CorrectedTime), date('Y',$CorrectedTime));
 		  }
-		  $myCalendar->setYearPeriod(2000, date('Y'));
+		  $myCalendar->setYearInterval(2000, date('Y'));
 		  $myCalendar->dateAllow('1900-01-01', date('Y-m-d'));
 		  $myCalendar->setAlignment('left', 'bottom'); //optional
 			$DbLink->query("SELECT username,birthday,show_age FROM ".C_REG_TBL." WHERE birthday != '' AND birthday != '0000-00-00' AND show_bday = '1' ORDER BY birthday ASC");
