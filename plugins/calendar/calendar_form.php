@@ -5,6 +5,8 @@ require_once('calendar_functions.php');
 
 //change the following line to show or hide calendar information
 $show_calendar_info = true;
+$show_fb_info = true;
+$show_servertime_info = false;
 
 $thispage = $_SERVER['PHP_SELF'];
 
@@ -415,6 +417,7 @@ if($cobj->hl){
 	elseif(strpos($order,"Y") == 1) $second_input = "Y";
 }
 
+if($show_calendar_info){
 $wan_enabled = 0;
 $new_version = 0;
 if($wan_enabled = @fsockopen("www.google.com", 80, $errno, $errstr, 1)){
@@ -434,7 +437,8 @@ elseif(function_exists("file_get_contents")){
 	}
 }
 $donation_url = (($rtl && L_DONATE != "Do you wish to donate?") ? "" : ($rtl ? '<bdo dir="ltr">' : "")).'<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=BX3RZAYPUMA28&lc='.$hl.'&item_name=Appreciate%20%26%20Support%20the%20Localized%20Calendar%20Class%20development&item_number=LCalClass%20about&no_note=0&cn=Your%20comments%20%28optional%29&no_shipping=1&rm=1&return=http%3a%2f%2fciprianmp%2ecom%2fscripts%2fcalendar&cancel_return=http%3a%2f%2fciprianmp%2ecom%2fscripts%2fcalendar&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted&page_style=LCalCLass" target="_blank" alt="'.$ppalt.$pptit.'" title="'.$ppalt.$pptit.'">'.L_DONATE.'</a></bdo>';
-define("L_ABOUT_LOC", "<b>Localized Datepicker</b><br />".sprintf(L_VERSION, "<b>".strval($version)."</b>", "<b>$LANGS_NUM</b>").($new_version ? "<br /><b><font color=\"red\">".sprintf(L_UPDATE, "<a href=\"$WEB_LOC\" target=\"_blank\">".L_HERE."</a>")."</font></b>" : "").(defined("L_TRABY") && L_TRABY != "L_TRABY" ? "<br />".sprintf(L_TRABY, "<b>".L_TRANAME."</b>") : "")."<br /><bdo dir=\"ltr\">&copy;2010-".$cdate->getDate("Y")." <b><a href=\"$WEB_LOC\" target=\"_blank\" title=\"http://ciprianmp.com\">$AUTHOR_LOC</a></b></bdo>".($wan_enabled ? ($show_calendar_info ? "<br /><div id=\"fb-like\" class=\"fb-like\" data-href=\"https://www.facebook.com/DatePicker\" data-send=\"false\" data-layout=\"button_count\" data-show-faces=\"false\" data-font=\"tahoma\" ref=\"loc_about_info\"></div><br />".$donation_url : "<br />".$donation_url) : "")."<hr /><i>".L_POWBY."<br /><b>PHP Datepicker Calendar</b><br /><bdo dir=\"ltr\">&copy;2006-".$cdate->getDate("Y")." <b><a href=\"$WEB_SUPPORT\" target=\"_blank\" title=\"http://triconsole.com\">$AUTHOR</a></b></bdo></i><br />Server Timezone:<br />$timezone<br /><span id=\"timecontainer\">".$cdate->getDate("Y-m-d H:i:s")."</span>");
+define("L_ABOUT_LOC", "<b>Localized Datepicker</b><br />".sprintf(L_VERSION, "<b>".strval($version)."</b>", "<b>$LANGS_NUM</b>").($new_version ? "<br /><b><font color=\"red\">".sprintf(L_UPDATE, "<a href=\"$WEB_LOC\" target=\"_blank\">".L_HERE."</a>")."</font></b>" : "").(defined("L_TRABY") && L_TRABY != "L_TRABY" ? "<br />".sprintf(L_TRABY, "<b>".L_TRANAME."</b>") : "")."<br /><bdo dir=\"ltr\">&copy;2010-".$cdate->getDate("Y")." <b><a href=\"$WEB_LOC\" target=\"_blank\" title=\"http://ciprianmp.com\">$AUTHOR_LOC</a></b></bdo>".($wan_enabled ? ($show_fb_info ? "<br /><div id=\"fb-like\" class=\"fb-like\" data-href=\"https://www.facebook.com/DatePicker\" data-send=\"false\" data-layout=\"button_count\" data-show-faces=\"false\" data-font=\"tahoma\" ref=\"loc_about_info\"></div><br />".$donation_url : "<br />".$donation_url) : "")."<hr /><i>".L_POWBY."<br /><b>PHP Datepicker Calendar</b><br /><bdo dir=\"ltr\">&copy;2006-".$cdate->getDate("Y")." <b><a href=\"$WEB_SUPPORT\" target=\"_blank\" title=\"http://triconsole.com\">$AUTHOR</a></b></bdo></i><br />".($show_servertime_info ? "Server Timezone:<br />$timezone<br /><span id=\"timecontainer\">".$cdate->getDate("Y-m-d H:i:s")."</span>" : ""));
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"<?php if($rtl) echo(" dir=\"rtl\""); ?>>
@@ -478,25 +482,25 @@ function submitNow(dvalue, mvalue, yvalue){
 </head>
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 <span id="calendar-page" class="font">
-<?php if($wan_enabled && $show_calendar_info){ ?>
-	<div id="fb-root"></div>
-    <script>
-		window.fbAsyncInit = function() {
-			FB.init({
-			  appId: '674148172599839',
-			  xfbml: true
-			});
-		  };
-		  (function() {
-			var e = document.createElement('script'); e.async = true;
-			e.src = document.location.protocol +
-			  '//connect.facebook.net/<?php echo(str_replace("sr_CS","sr_RS",str_replace("es_AR","es_ES",str_replace("ar_AE","ar_AR",L_LANG)))); ?>/all.js';
-			document.getElementById('fb-root').appendChild(e);
-		  }());
-	</script>
-<?php } ?>
     <div id="calendar-header" align="center">
      	<?php if($show_calendar_info){ ?>
+		<?php if($wan_enabled && $show_fb_info){ ?>
+			<div id="fb-root"></div>
+			<script>
+				window.fbAsyncInit = function() {
+					FB.init({
+					  appId: '674148172599839',
+					  xfbml: true
+					});
+				  };
+				  (function() {
+					var e = document.createElement('script'); e.async = true;
+					e.src = document.location.protocol +
+					  '//connect.facebook.net/<?php echo(str_replace("sr_CS","sr_RS",str_replace("es_AR","es_ES",str_replace("ar_AE","ar_AR",L_LANG)))); ?>/all.js';
+					document.getElementById('fb-root').appendChild(e);
+				  }());
+			</script>
+		<?php } ?>
 		<div style="float: <?php echo($rtl ? "right" : "left"); ?>;" id="info">
 			<img src="images/<?php echo($new_version ? "version_info.gif" : "about.png"); ?>" width="9" height="9" border="0" id="info_icon" />
 			<div id="about" dir="<?php echo(($rtl && L_HERE != "here") ? "rtl" : "ltr"); ?>" style="<?php echo($rtl ? "right: 0px;".(L_HERE != "here" ? " direction: rtl; unicode-bidi: embed;" : "") : "left: 0px;"); ?>"><?php echo($dig ? $cobj->digitize_arabics(L_ABOUT_LOC) : L_ABOUT_LOC); ?></div>
