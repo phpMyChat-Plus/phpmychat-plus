@@ -428,8 +428,8 @@ Date.prototype.format = function(format) {
     var replace = Date.replaceChars;
 
     for (var i = 0; i < format.length; i++) {
-			var curChar = format.charAt(i);
-			if (i - 1 >= 0 && format.charAt(i - 1) == "\\") {
+		var curChar = format.charAt(i);
+		if (i - 1 >= 0 && format.charAt(i - 1) == "\\") {
             returnStr += curChar;
         }
         else if (replace[curChar]) {
@@ -485,12 +485,12 @@ Date.replaceChars = {
     I: function() {
         var DST = null;
             for (var i = 0; i < 12; ++i) {
-                    var d = new Date(this.getFullYear(), i, 1);
-                    var offset = d.getTimezoneOffset();
+				var d = new Date(this.getFullYear(), i, 1);
+				var offset = d.getTimezoneOffset();
 
-                    if (DST === null) DST = offset;
-                    else if (offset < DST) { DST = offset; break; }
-					else if (offset > DST) break;
+				if (DST === null) DST = offset;
+				else if (offset < DST) { DST = offset; break; }
+				else if (offset > DST) break;
             }
             return (this.getTimezoneOffset() == DST) | 0;
         },
