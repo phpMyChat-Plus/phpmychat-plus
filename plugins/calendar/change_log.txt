@@ -2,8 +2,8 @@ The php calendar component
 written by TJ @triconsole
 Localization version & support by ciprianmp
 
-version 3.73-loc (01 November 2013)
-- it includes all the updates in the original class
+version 3.73-loc (02 November 2013)
+- it includes all the updates in the corresponding version of the original class
 
 fixed: applied a Turkish fix for i vs I usage in function names php<5.5 on Linux bug (http://trac.roundcube.net/ticket/1485470)
 	- thanks ciprianmp and Tri
