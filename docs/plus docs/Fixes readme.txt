@@ -34,6 +34,7 @@ If your users encounter booting for no reason, try to disable sounds in chat.
 
 Fixes History:
 16.02.0214 - 1.94-RC4
+- applied a Turkish fix for i vs I usage in function names php<5.5 on Linux bug (http://trac.roundcube.net/ticket/1485470) - (functionality related)
 - calendar class updated to 3.73-loc version; (functionality related)
 - prevent banished user from registering again - anti-spamming/anti-phishing; (security related)
 - fixed a registration/profile edit issue for users behind proxies; (functionality related)
