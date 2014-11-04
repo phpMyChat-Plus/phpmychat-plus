@@ -620,6 +620,9 @@ setlocale(LC_ALL, "turkish.UTF-8", "turkish");
 } else {
 setlocale(LC_ALL, "tr_TR.UTF-8", "turkish.UTF-8");
 }
+// workaround for http://bugs.php.net/bug.php?id=18556
+if (version_compare(PHP_VERSION,'5.5') < 0) setlocale(LC_CTYPE, 'en_US.utf8');
+
 define("L_LANG", "tr_TR");
 define("ISO_DEFAULT", "iso-8859-9");
 define("WIN_DEFAULT", "windows-1254");

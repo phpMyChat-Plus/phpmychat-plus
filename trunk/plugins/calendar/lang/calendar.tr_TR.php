@@ -88,9 +88,11 @@ define("L_CAL_FORMAT", "%d %B %Y");
 if(!defined("L_LANG") || L_LANG == "L_LANG") define("L_LANG", "tr_TR");
 
 // Set the TR specific date/time format
-if (stristr(PHP_OS,"win")) {
+if (stristr(PHP_OS,'win')) {
 setlocale(LC_ALL, "turkish.UTF-8", "turkish");
 } else {
-#setlocale(LC_ALL, "tr_TR.UTF-8", "tr_TR", "tr-TR", "turkish.UTF-8");
+setlocale(LC_ALL, "tr_TR.UTF-8", "turkish.UTF-8");
 }
+// workaround for http://bugs.php.net/bug.php?id=18556
+if (version_compare(PHP_VERSION,'5.5') < 0) setlocale(LC_CTYPE, 'en_US.utf8');
 ?>
