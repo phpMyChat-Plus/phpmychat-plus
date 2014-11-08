@@ -185,7 +185,7 @@ function processTooltips(){
 
 				if((this_tooltip.substring(0,1) == '"' && this_tooltip.substring(this_tooltip.length-1) == '"') || (this_tooltip.substring(0,1) == "'" && this_tooltip.substring(this_tooltip.length-1) == "'")){
 					this_tooltip = this_tooltip.substring(1, this_tooltip.length-1);
-					this_tooltip = replaceAll("&#10;", String.fromCharCode(10), this_tooltip);
+//					this_tooltip = replaceAll("&#10;", String.fromCharCode(10), this_tooltip);
 				}
 				if(this_tooltip != ""){
 					var date_obj = document.getElementById(this_date_str);
@@ -236,7 +236,7 @@ function processTooltips(){
 
 				if((this_tooltip.substring(0,1) == '"' && this_tooltip.substring(this_tooltip.length-1) == '"') || (this_tooltip.substring(0,1) == "'" && this_tooltip.substring(this_tooltip.length-1) == "'")){
 					this_tooltip = this_tooltip.substring(1, this_tooltip.length-1);
-					this_tooltip = replaceAll("&#10;", String.fromCharCode(10), this_tooltip);
+//					this_tooltip = replaceAll("&#10;", String.fromCharCode(10), this_tooltip);
 				}
 
 
@@ -290,7 +290,7 @@ function processTooltips(){
 
 				if((this_tooltip.substring(0,1) == '"' && this_tooltip.substring(this_tooltip.length-1) == '"') || (this_tooltip.substring(0,1) == "'" && this_tooltip.substring(this_tooltip.length-1) == "'")){
 					this_tooltip = this_tooltip.substring(1, this_tooltip.length-1);
-					this_tooltip = replaceAll("&#10;", String.fromCharCode(10), this_tooltip);
+//					this_tooltip = replaceAll("&#10;", String.fromCharCode(10), this_tooltip);
 				}
 
 				if(this_tooltip != ""){

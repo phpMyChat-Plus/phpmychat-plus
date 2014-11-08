@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 # en_US - this file includes the specific strings for both en_GB/en_US
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Version: 3.70
@@ -120,7 +120,7 @@ if(!defined("L_UTF_DIGIT")) define("L_UTF_DIGIT", 0);
 if(!defined("L_ARABIC")) define("L_ARABIC", "Arabic Digits");
 
 // Localization patches
-$pptit = "&#10;Thank you for your support!";
+$pptit = "\nThank you for your support!";
 switch ($hl)
 {
 	case "bg_BG":
