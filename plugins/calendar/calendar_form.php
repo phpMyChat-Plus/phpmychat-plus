@@ -688,9 +688,6 @@ function submitNow(dvalue, mvalue, yvalue){
             <input name="hl" type="hidden" id="hl" value="<?php echo($hl);?>" />
 			<!-- Digitizer -->
             <input name="dig" type="hidden" id="dig" value="<?php echo($dig);?>" />
-			<!-- //Tooltips -->
-<!--            <input name="ttd" type="hidden" id="ttd" value="<?php echo($cobj->check_json_encode($tt_dates));?>" />
-            <input name="ttt" type="hidden" id="ttt" value="<?php echo(rawurlencode($cobj->check_json_encode($tt_tooltips)));?>" /> -->
       </form>
 	</div>
     <div id="calendar-container">
