@@ -120,89 +120,168 @@ if(!defined("L_UTF_DIGIT")) define("L_UTF_DIGIT", 0);
 if(!defined("L_ARABIC")) define("L_ARABIC", "Arabic Digits");
 
 // Localization patches
-$pptit = "\nThank you for your support!";
+$pptit = "\n";
 switch ($hl)
 {
+	case "ar_AE":
+		$ppalt = "PayPal - أكثر أمانا وأسهل طريقة للدفع عبر الإنترنت!";
+		$pptit .= "شكرا لدعمكم!";
+		break;
 	case "bg_BG":
 		$ppalt = "PayPal - Сигурният и лесен начин да платите онлайн!";
+		$pptit .= "Благодарим ви за вашата подкрепа!";
 		break;
 	case "ca_ES":
 		$ppalt = "PayPal – La millor manera i la més fàcil de pagar en línia!";
+		$pptit .= "Gràcies pel seu suport!";
 		break;
 	case "cs_CZ":
 		$ppalt = "PayPal - bezpečnější, jednodušší způsob, jak zaplatit on-line!";
+		$pptit .= "Děkujeme vám za vaši podporu!";
 		break;
 	case "da_DK":
 		$ppalt = "PayPal - Den sikreste og nemmeste måde at overføre penge online!";
+		$pptit .= "Tak for din støtte!";
 		break;
 	case "de_DE":
 		$ppalt = "Jetzt einfach, schnell und sicher online bezahlen - mit PayPal!";
+		$pptit .= "Vielen Dank für Ihre Unterstützung!";
 		break;
 	case "el_GR":
 		$ppalt = "PayPal – Ο ασφαλέστερος και ευκολότερος τρόπος να πληρώσεις online!";
+		$pptit .= "Σας ευχαριστούμε για την υποστήριξή σας!";
 		break;
 	case "es_AR":
 		$ppalt = "PayPal - La forma segura y fácil de pagar en línea!";
+		$pptit .= "Gracias por su apoyo!";
 		break;
 	case "es_ES":
 		$ppalt = "PayPal. ¡La forma rápida y segura de pagar en Internet!";
+		$pptit .= "Gracias por su apoyo!";
+		break;
+	case "fa_IR":
+		$ppalt = "PayPal - امن تر، راه ساده تر برای پرداخت آنلاین!";
+		$pptit .= "با تشکر از شما برای حمایت از شما!";
+		break;
+	case "fi_FI":
+		$ppalt = "PayPal - Turvallisempi, helpompi tapa maksaa verkossa!";
+		$pptit .= "Kiitos tuesta!";
 		break;
 	case "fr_FR":
 		$ppalt = "PayPal - Le moyen le plus sûr et facile de payer en ligne!";
+		$pptit .= "Merci pour votre soutien!";
 		break;
 	case "he_IL":
 		$ppalt = "פייפאל - הדרך הבטוחה, הקלה לשלם באינטרנט.";
+		$pptit .= "דאנק איר פֿאַר דיין שטיצן!";
+		break;
+	case "hi_IN":
+		$ppalt = "PayPal - ऑनलाइन भुगतान करने के लिए सुरक्षित, आसान तरीका!";
+		$pptit .= "आपके समर्थन के लिए धन्यवाद!";
 		break;
 	case "hu_HU":
 		$ppalt = "PayPal - Biztonságosabb és egyszerűbb módja az internetes fizetésnek!";
+		$pptit .= "Köszönjük a támogatást!";
+		break;
+	case "hy_AM":
+		$ppalt = "PayPal - Ապահով, ավելի հեշտ ճանապարհ է արդյոք վճարել առցանց.";
+		$pptit .= "Շնորհակալություն ձեր աջակցության.";
 		break;
 	case "id_ID":
 		$ppalt = "Paypal - Lebih aman dan mudah untuk pembayaran online!";
+		$pptit .= "Terima kasih atas dukungannya!";
 		break;
 	case "it_IT":
 		$ppalt = "PayPal - La più sicura, facile strada per pagare online!";
+		$pptit .= "Grazie per il vostro supporto!";
 		break;
 	case "ja_JP":
 		$ppalt = "PayPal－オンラインで安全、簡単にお支払い。";
+		$pptit .= "ご支援いただきありがとうございます！";
+		break;
+	case "ko_KR":
+		$ppalt = "PayPal－온라인으로 지불하는 것이 안전, 쉬운 방법!";
+		$pptit .= "귀하의 지원에 감사드립니다!";
+		break;
+	case "mk_MK":
+		$ppalt = "PayPal - Побезбедно, полесен начин да платат онлајн!";
+		$pptit .= "Ви благодариме за вашата поддршка!";
+		break;
+	case "ms_MY":
+		$ppalt = "PayPal - Lebih selamat, cara yang lebih mudah untuk membayar dalam talian!";
+		$pptit .= "Matur nuwun atas sokongan anda!";
+		break;
+	case "nb_NO":
+		$ppalt = "PayPal - Den sikrere, enklere måte å betale på nettet!";
+		$pptit .= "Takk for støtten!";
 		break;
 	case "ne_NP":
 		$ppalt = "Paypal - ईन्टनेटबाट पैसा तिर्ने सजिलो र सुरक्षित माध्यम!";
+		$pptit .= "आफ्नो समर्थन लागि धन्यवाद!";
 		break;
 	case "nl_NL":
 		$ppalt = "PayPal, de veilige en complete manier van online betalen!";
+		$pptit .= "Dank u voor uw steun!";
+		break;
+	case "pl_PL":
+		$ppalt = "PayPal - Bezpieczniejszy, łatwiejszy sposób, aby zapłacić online!";
+		$pptit .= "Dziękujemy za wsparcie!";
 		break;
 	case "pt_BR":
 		$ppalt = "PayPal - A maneira mais fácil e segura de efetuar pagamentos on-line!";
+		$pptit .= "Obrigado por seu apoio!";
+		break;
+	case "pt_PT":
+		$ppalt = "PayPal - A maneira mais fácil e segura de efetuar pagamentos on-line!";
+		$pptit .= "Obrigado por seu apoio!";
 		break;
 	case "ro_RO":
 		$ppalt = "PayPal - Calea cea mai sigură şi facilă de a efectua plăţi online!";
+		$pptit .= "Mulţumim anticipat pentru susţinere!";
 		break;
 	case "ru_RU":
 		$ppalt = "PayPal – безопасный и простой способ оплаты в Интернете!";
+		$pptit .= "Спасибо за вашу поддержку!";
+		break;
+	case "sk_SK":
+		$ppalt = "PayPal - Bezpečnejší, jednoduchší spôsob, ako zaplatiť on-line!";
+		$pptit .= "Ďakujeme vám za vašu podporu!";
 		break;
 	case "sr_CS":
 		$ppalt = "PayPal - Bezbedniji i lakši način za on-line plaćanje!";
+		$pptit .= "Hvala vam na podršci!";
 		break;
 	case "sv_SE":
 		$ppalt = "PayPal - Det säkra, enkla sättet att betala online!";
+		$pptit .= "Tack för ditt stöd!";
+		break;
+	case "th_TH":
+		$ppalt = "PayPal - ปลอดภัยวิธีที่ง่ายต่อการชำระเงินออนไลน์!";
+		$pptit .= "ขอขอบคุณสำหรับการสนับสนุนของคุณ!";
 		break;
 	case "tr_TR":
 		$ppalt = "PayPal - çevrimiçi ödeme yapmanın en kolay ve güvenli yolu!";
+		$pptit .= "Desteğiniz için teşekkür ederiz!";
 		break;
 	case "uk_UA":
 		$ppalt = "PayPal - безпечний і простий спосіб для оплати в інтернеті!";
+		$pptit .= "Спасибі за вашу підтримку!";
 		break;
 	case "vi_VN":
 		$ppalt = "PayPal - Cách an toàn hơn, dễ dàng hơn để thanh toán trực tuyến!";
+		$pptit .= "Cảm ơn bạn đã hỗ trợ của bạn!";
 		break;
 	case "zh_CN":
 		$ppalt = "PayPal － 最安全便捷的在线支付方式！";
+		$pptit .= "谢谢您的支持！";
 		break;
 	case "zh_TW":
 		$ppalt = "PayPal － 更安全、更簡單的網上付款方式！";
+		$pptit .= "謝謝您的支持！";
 		break;
 	default:
 		$ppalt = "PayPal - The safer, easier way to pay online!";
+		$pptit .= "Thank you for your support!";
 		break;
 };
 ?>
