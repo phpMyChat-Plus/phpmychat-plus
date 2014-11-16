@@ -107,7 +107,7 @@ CREATE TABLE bot_thatstack (
 CREATE TABLE ".$t_ban_users." (
  username varchar(30) NOT NULL default '',
  latin1 tinyint(1) NOT NULL default '0',
- ip varchar(16) NOT NULL default '',
+ ip varchar(30) NOT NULL default '',
  rooms varchar(100) NOT NULL default '',
  ban_until int(11) NOT NULL default '0',
  reason varchar(100) NOT NULL default ''
@@ -322,7 +322,7 @@ INSERT INTO ".$t_config." (id, MODS, INSTALL_DATE, QUICKA, QUICKM, QUICKU, LAST_
 
 CREATE TABLE ".$t_lurkers." (
  time int(15) NOT NULL default '0',
- ip varchar(15) NOT NULL default '',
+ ip varchar(30) NOT NULL default '',
  browser varchar(255) NOT NULL default '',
  file varchar(50) NOT NULL default '',
  username varchar(30) NOT NULL default '',
@@ -340,7 +340,7 @@ ALTER TABLE ".$t_reg_users."
 			CHANGE latin1 latin1 tinyint(1) NOT NULL default '0',
 			ADD id int(11) NOT NULL default '0' FIRST,
 			ADD cid int(11) NOT NULL auto_increment after id,
-			ADD ip varchar(16) NOT NULL default '',
+			ADD ip varchar(30) NOT NULL default '',
 			ADD gender tinyint(1) NOT NULL default '0',
 			ADD allowpopup tinyint(1) NOT NULL default '1',
 			ADD picture varchar(255) NOT NULL default '',
@@ -401,7 +401,7 @@ CREATE TABLE IF NOT EXISTS ".$t_stats." (
 ) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 ALTER TABLE ".$t_users."
-			ADD ip varchar(16) NOT NULL default '',
+			ADD ip varchar(30) NOT NULL default '',
 			ADD awaystat char(1) NOT NULL default '0',
 			ADD r_time int(11) NOT NULL default '0',
 			ADD email varchar(64) NOT NULL default '';

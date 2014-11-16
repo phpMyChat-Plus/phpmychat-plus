@@ -314,7 +314,7 @@ INSERT INTO ".$t_config." (id, MODS, INSTALL_DATE, QUICKA, QUICKM, QUICKU, LAST_
 
 CREATE TABLE ".$t_lurkers." (
  time int(15) NOT NULL default '0',
- ip varchar(15) NOT NULL default '',
+ ip varchar(30) NOT NULL default '',
  browser varchar(255) NOT NULL default '',
  file varchar(50) NOT NULL default '',
  username varchar(30) NOT NULL default '',

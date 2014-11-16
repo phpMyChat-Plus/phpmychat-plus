@@ -123,7 +123,7 @@ DROP TABLE IF EXISTS ".$t_ban_users.";
 CREATE TABLE ".$t_ban_users." (
  username varchar(30) NOT NULL default '',
  latin1 tinyint(1) NOT NULL default '0',
- ip varchar(16) NOT NULL default '',
+ ip varchar(30) NOT NULL default '',
  rooms varchar(100) NOT NULL default '',
  ban_until int(11) NOT NULL default '0',
  reason varchar(100) NOT NULL default ''
@@ -342,7 +342,7 @@ DROP TABLE IF EXISTS ".$t_lurkers.";
 
 CREATE TABLE ".$t_lurkers." (
  time int(15) NOT NULL default '0',
- ip varchar(15) NOT NULL default '',
+ ip varchar(30) NOT NULL default '',
  browser varchar(255) NOT NULL default '',
  file varchar(50) NOT NULL default '',
  username varchar(30) NOT NULL default '',
@@ -383,7 +383,7 @@ CREATE TABLE ".$t_reg_users." (
  perms varchar(9) NOT NULL default '',
  rooms varchar(128) NOT NULL default '',
  reg_time int(11) NOT NULL default '0',
- ip varchar(16) NOT NULL default '',
+ ip varchar(30) NOT NULL default '',
  gender tinyint(1) NOT NULL default '0',
  allowpopup tinyint(1) NOT NULL default '1',
  picture varchar(255) NOT NULL default '',
@@ -452,7 +452,7 @@ CREATE TABLE ".$t_users." (
  latin1 tinyint(1) NOT NULL default '0',
  u_time int(11) NOT NULL default '0',
  status char(1) NOT NULL default '',
- ip varchar(16) NOT NULL default '',
+ ip varchar(30) NOT NULL default '',
  awaystat char(1) NOT NULL default '0',
  r_time int(11) NOT NULL default '0',
  email varchar(64) NOT NULL default '',

@@ -120,7 +120,7 @@ For an user to stay logged even though he don’t type for a while, he can go aw
 How can I totally disable the plusbot? I’ve already disabled it in the config menu but the name still appears in the chat room...
 6A.
 First - you need to go to Admin panel and re-enable it, then please go to the room he is in and use the command /bot stop.
-Rule: Everytime you want to change a settings related to the bot (disable, name of the bot, font, avatar, aso), you need to stop it first in the room/rooms he is eventually running!
+Rule: Every time you want to change a settings related to the bot (disable, name of the bot, font, avatar, aso), you need to stop it first in the room/rooms he is eventually running!
 Bot has admin permissions therefore, if you don’t follow the rule or forget about it, you won’t be able to change/kick/remove the old running bot user from chat. So be careful.
 If you did it already, go back to Admin panel and rename it back to the old name, then stop it then change the settings at your will.
 6aQ.
@@ -129,7 +129,7 @@ How do I make my bot talk only private?
 Enable/Disable public conversations in Admin panel.
 
 7Q.
-How can I change the size of the differents frames of the room page? (i.e. size of banner.php, link.php, messages.php etc.)
+How can I change the size of the different frames of the room page? (i.e. size of banner.php, link.php, messages.php etc.)
 7A.
 All the sizes can be handled in lib/frameset_def.lib.php (not too much different from 0.14.5)
 Basically:
@@ -175,7 +175,7 @@ Fatal error: main(): Failed opening required
 './localization/ Deutsch/localize d.chat.php' (include_path= '.') in
 /home/www/web2/ html/plus/ lib/index. lib.php on line 69
 9A.
-That’s because the Deutch language isn’t installed. It really shouldn’t happen. I’ll check on that for the next version...
+That’s because the Deutsch language isn’t installed. It really shouldn’t happen. I’ll check on that for the next version...
 The reason is: you have to delete the chat cookie after upgrade (clean the cookies). So tell that your users.
 Quick solution: type in the address bar this url: http://yourwebsite/plus/index.php?L=english (for the first time only)
 
@@ -307,5 +307,10 @@ Sounds like you are running MySQL 5.0 with SQL strict mode enabled.
 To disable strict mode open your my.cnf (or my.ini) in an editor and remove/comment out the following line:
 sql-mode="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
 Then restart the database server.
+
+23Q.
+I try to login in a room, I get to see the room for a second then I'm thrown out immediately. I see no error returned, not on the login page nor in my server logs.
+23A.
+This bug was there since users started using IPv6, which has more than 16 characters (the IPv4 standard). That IPv6 value was getting trimmed when saved in the database, so when the login script was cross-checking the real ip with the saved one, the values couldn't match. To fix it, you need to change all 4 ip fields in your mysql database tables c_ban_users, c_lurking, c_reg_users and c_users to varchar(30). This was fixed starting with 1.94-RC4 version, so you might consider an upgrade.
 
 More to come...
