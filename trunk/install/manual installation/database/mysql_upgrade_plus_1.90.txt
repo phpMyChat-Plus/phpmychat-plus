@@ -17,7 +17,8 @@ ALTER TABLE c_reg_users CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 ALTER TABLE c_users CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 ALTER TABLE c_ban_users
-			ADD reason varchar(100) NOT NULL default '';
+			ADD reason varchar(100) NOT NULL default '',
+			CHANGE ip ip varchar(30) NOT NULL default '';
 
 ALTER TABLE c_config
 			CHANGE GRAVATARS_DYNAMIC_DEF GRAVATARS_DYNAMIC_DEF enum('mm','identicon','monsterid','wavatar','retro') default 'monsterid',
@@ -160,7 +161,8 @@ UPDATE c_config SET
 
 ALTER TABLE c_lurkers
 			ADD username varchar(30) NOT NULL default '',
-			ADD status varchar(1) NOT NULL default '';
+			ADD status varchar(1) NOT NULL default '',
+			CHANGE ip ip varchar(30) NOT NULL default '';
 
 ALTER TABLE c_messages
 			CHANGE pm_read pm_read VARCHAR(19) NOT NULL default '';
@@ -180,7 +182,8 @@ ALTER TABLE c_reg_users
 			ADD show_bday enum('0','1') NOT NULL default '1',
 			ADD show_age enum('0','1') NOT NULL default '1',
 			ADD bday_email_sent int(11) NOT NULL default '0',
-			ADD PRIMARY KEY (cid);
+			ADD PRIMARY KEY (cid),
+			CHANGE ip ip varchar(30) NOT NULL default '';
 
 UPDATE c_reg_users SET
 			latin1='0',
@@ -230,7 +233,8 @@ CREATE TABLE IF NOT EXISTS c_stats (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 ALTER TABLE c_users
-			ADD email varchar(64) NOT NULL default '';
+			ADD email varchar(64) NOT NULL default '',
+			CHANGE ip ip varchar(30) NOT NULL default '';
 
 UPDATE c_users u LEFT JOIN c_reg_users r
 			ON u.username = r.username

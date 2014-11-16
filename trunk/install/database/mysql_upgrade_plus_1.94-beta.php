@@ -1,5 +1,8 @@
 <?php
 mysql_query("
+ALTER TABLE ".$t_ban_users."
+			CHANGE ip ip varchar(30) NOT NULL default '';
+
 ALTER TABLE ".$t_config."
 			CHANGE GRAVATARS_DYNAMIC_DEF GRAVATARS_DYNAMIC_DEF enum('mm','identicon','monsterid','wavatar','retro') default 'monsterid',
 			CHANGE ALLOW_VIDEO ALLOW_VIDEO enum('0','1','2') NOT NULL default '1',
@@ -45,14 +48,20 @@ UPDATE ".$t_config." SET
 			MODS = 'Advanced Admin, (GR)Avatars, Smilies Popup, Color Drop Box, Private Popup,<br />Quick Menu, Logs Archive, Lurking, Color names, WorldTime, UTF-8, Birthdays, MathJax',
 	WHERE ID='0';
 
+ALTER TABLE ".$t_lurkers."
+			CHANGE ip ip varchar(30) NOT NULL default '';
+
 UPDATE ".$t_reg_users." SET
 			ADD birthday date default NULL,
 			ADD show_bday enum('0','1') NOT NULL default '1',
 			ADD show_age enum('0','1') NOT NULL default '1',
-			ADD bday_email_sent int(11) NOT NULL default '0';
+			ADD bday_email_sent int(11) NOT NULL default '0',
+			CHANGE ip ip varchar(30) NOT NULL default '';
 
 ALTER TABLE ".$t_stats."
 			ADD maths_posted smallint(5) NOT NULL DEFAULT '0';
-", $conn);
 
+ALTER TABLE ".$t_users."
+			CHANGE ip ip varchar(30) NOT NULL default '';
+", $conn);
 ?>

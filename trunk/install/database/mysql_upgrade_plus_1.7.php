@@ -1,7 +1,8 @@
 <?php
 mysql_query("
 ALTER TABLE ".$t_ban_users."
-			ADD reason varchar(100) NOT NULL default '';
+			ADD reason varchar(100) NOT NULL default '',
+			CHANGE ip ip varchar(30) NOT NULL default '';
 
 ALTER TABLE ".$t_config."
 			CHANGE GRAVATARS_DYNAMIC_DEF GRAVATARS_DYNAMIC_DEF enum('mm','identicon','monsterid','wavatar','retro') default 'monsterid',
@@ -151,7 +152,8 @@ UPDATE ".$t_config." SET
 
 ALTER TABLE ".$t_lurkers."
 			ADD username varchar(30) NOT NULL default '',
-			ADD status varchar(1) NOT NULL default '';
+			ADD status varchar(1) NOT NULL default '',
+			CHANGE ip ip varchar(30) NOT NULL default '';
 
 ALTER TABLE ".$t_messages."
 			CHANGE pm_read pm_read VARCHAR(19) NOT NULL default '',
@@ -173,7 +175,8 @@ ALTER TABLE ".$t_reg_users."
 			ADD show_age enum('0','1') NOT NULL default '1',
 			ADD bday_email_sent int(11) NOT NULL default '0',
 			ADD PRIMARY KEY (cid),
-			ADD UNIQUE KEY username (username);
+			ADD UNIQUE KEY username (username),
+			CHANGE ip ip varchar(30) NOT NULL default '';
 
 UPDATE ".$t_reg_users." SET
 			latin1='0',
@@ -224,7 +227,8 @@ CREATE TABLE IF NOT EXISTS ".$t_stats." (
 ) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 ALTER TABLE ".$t_users."
-			ADD email varchar(64) NOT NULL default '';
+			ADD email varchar(64) NOT NULL default '',
+			CHANGE ip ip varchar(30) NOT NULL default '';
 
 UPDATE ".$t_users." u LEFT JOIN ".$t_reg_users." r
 			ON u.username = r.username

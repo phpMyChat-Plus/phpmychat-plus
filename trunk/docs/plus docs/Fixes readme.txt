@@ -13,7 +13,7 @@ Client browsers - tested with:
 	- Apple Safari > 4.0.3 = H;
 	- Google Chrome > 24.x.x.x.x = M.
 Server environment - tested env:
-	- Apache < 2.4.4 (Unix and Windows 2k/XP<SP3 & Vista);
+	- Apache < 2.4.9 (Unix and Windows 2k/XP<SP3 & Vista);
 	- php < 6;
 	- MySQL < 6;
 	- exif support enabled (gif/jpeg processing);
@@ -34,6 +34,7 @@ If your users encounter booting for no reason, try to disable sounds in chat.
 
 Fixes History:
 16.02.0214 - 1.94-RC4
+- changed the 4 ip fields in the database to varchar(30) to allow IPv6 connections to the chat (Important: this is bug fix for users being kicked out on login without any error!); (functionality related)
 - applied a Turkish fix for i vs I usage in function names php<5.5 on Linux bug (http://trac.roundcube.net/ticket/1485470) - (functionality related)
 - calendar class updated to 3.73-loc version; (functionality related)
 - prevent banished user from registering again - anti-spamming/anti-phishing; (security related)
