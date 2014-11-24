@@ -8,6 +8,7 @@ else
 	ini_set('session.use_cookies',1);
 	session_start();
 //	session_register("adminlogged");
+	$_SESSION['adminlogged'] = true;
 }
 
 // Added for Skin mod
@@ -40,7 +41,7 @@ if ((isset($pmc_username) && $pmc_username != "") && (isset($pmc_password) && $p
 			else
 			{
 				$do_not_login = true;
-				$_SESSION["adminlogged"] = "1";
+				$_SESSION["adminlogged"] = true;
 			}
 		}
 	}
@@ -170,8 +171,8 @@ $CellAlign = ($Align == "right" ? "RIGHT" : "LEFT");
 		<TR>
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" NOWRAP="NOWRAP"></TD>
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP">
-			<A HREF="<?php echo(${ChatPath}); ?>pass_reset.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('pass_reset'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_PASS_7); ?>.'; return true;"><?php echo(L_PASS_7); ?></A>
-				</TD>
+				<A HREF="<?php echo(${ChatPath}); ?>pass_reset.php?L=<?php echo($L); ?>" CLASS="ChatReg" onClick="reg_popup('pass_reset'); return false" TARGET="_blank" onMouseOver="window.status='<?php echo(L_PASS_7); ?>.'; return true;"><?php echo(L_PASS_7); ?></A>
+			</TD>
 		</TR>
 		</TABLE>
 		<P>

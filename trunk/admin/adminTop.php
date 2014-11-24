@@ -1,6 +1,6 @@
 <?php
 
-if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
+if (!$_SESSION["adminlogged"]) exit(); // added by Bob Dickow for security.
 
 // Remove some var from the url query
 $URLQueryTop = "L=$L&pmc_username=".urlencode($pmc_username)."&pmc_password=$pmc_password";
