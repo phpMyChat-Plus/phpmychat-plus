@@ -93,7 +93,7 @@ define("PROGRAMEVERSION","v0.09");
 $rootdir="aiml/";
 
 $errors="";
-if (C_DB_HOST != 'localhost' || C_DB_HOST == '') include("./../config/config.lib.php");
+if (!defined("C_DB_HOST")) include("./../config/config.lib.php");
 mysql_connect(C_DB_HOST,C_DB_USER,C_DB_PASS) or $errors = $errors . "Could not connect to database.\n";
 @mysql_query("SET CHARACTER SET utf8");
 @mysql_query("SET NAMES 'utf8'");

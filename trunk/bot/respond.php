@@ -536,6 +536,7 @@ function handlenode($xmlnode,$inputstar,$thatstar,$topicstar){
 
 		$liarray=array();
 
+		$children = array();
 		$children = $xmlnode["children"];
 
 		for ($randomc=0;$randomc<sizeof($children);$randomc++){
