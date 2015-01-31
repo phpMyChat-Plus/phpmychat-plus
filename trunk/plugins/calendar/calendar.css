@@ -37,7 +37,7 @@ a.tclabel span { text-decoration: none; font-family: tahoma; cursor: pointer; }
 #calendar-body .sun { color: #993300; }
 #calendar-body .sun a:link { color: #993300; }
 
-#calendar-body .hasEvent { /* background-color: #4DEF88; */ } /* event color */
+#calendar-body .hasEvent { background-color: /*#4DEF88*/; } /* event color */
 
 #calendar-footer { background-color: #CCCCCC; font-size: 11px; overflow: hidden; }
 #calendar-footer .btn { width: 16px; }
@@ -69,4 +69,4 @@ a.tclabel span { text-decoration: none; font-family: tahoma; cursor: pointer; }
 .calendartooltip { position: absolute; top: 0px; right: 0px; width: 8px; height: 8px; background: url(images/info.gif) no-repeat top right; z-index: 102; cursor: help; } /* event icons */
 
 #info { width: 9px; height: 9px; position: relative; z-index: 140; }
-#info #about { color: #191970; width: 163px; height: 1px; top: 0px; /* left: 0px; */ white-space: nowrap; position: absolute; overflow: hidden; display: block; -webkit-transition: all .3s ease; -moz-transition: all .3s ease; -ms-transition: all .3s ease; -o-transition: all .3s ease; transition: all .3s ease; border: 0px solid #191970; cursor: help;/*padding: 1px 2px;*/ }
+#info #about { color: #191970; width: 163px; height: 1px; top: 0px; /*left: 0px;*/ white-space: nowrap; position: absolute; overflow: hidden; display: block; /*z-index: 1000;*/ -webkit-transition: all .3s ease; -moz-transition: all .3s ease; -ms-transition: all .3s ease; -o-transition: all .3s ease; transition: all .3s ease; border: 0px solid #191970; cursor: help; /*padding: 1px 2px;*/ }

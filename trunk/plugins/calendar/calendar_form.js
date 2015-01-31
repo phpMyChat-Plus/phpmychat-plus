@@ -86,6 +86,7 @@ function today(){
 	var f = document.calendarform;
 	f.m.value = this.today_month;
 	f.y.value = this.today_year;
+//	selectDay(this.today_day);
 
 	this.loading();
 	f.submit();
@@ -162,30 +163,26 @@ function getCalendarParam(name){
 }
 
 function processTooltips(){
-//	var ttd = myJSONParse(getCalendarParam("ttd"));
 	var ttd = myJSONParse(decodeURIComponent(htmlspecialchars_decode(getCalendarParam("ttd"))));
-//	var ttt = myJSONParse(decodeURIComponent(getCalendarParam("ttt")));
 	var ttt = myJSONParse(htmlspecialchars_decode(getCalendarParam("ttt")));
 	//yearly recursive
 	for (var key in ttd[2]) {
 		if (ttd[2].hasOwnProperty(key)) {
 
-		var date_str = ttd[2][key];
-		var date_arr = date_str.split(/[^0-9]/);
+			var date_str = ttd[2][key];
+			var date_arr = date_str.split(/[^0-9]/);
 
-		var date_y = date_arr[0];
-		var date_m = date_arr[1]-1;
-		var date_d = date_arr[2];
+			var date_y = date_arr[0];
+			var date_m = date_arr[1]-1;
+			var date_d = date_arr[2];
 
 			if(typeof(date_y) != "undefined" && typeof(date_m) != "undefined" && typeof(date_d) != "undefined"){
 				this_date = new Date(date_y, date_m, date_d);
-//				this_date = new Date(ttd[2][key]);
 				this_date_str = pad(current_year, 4, "0")+''+pad(this_date.getMonth()+1, 2, "0")+''+pad(this_date.getDate(), 2, "0");
 				this_tooltip = typeof(ttt[2][key]) != "undefined" ? ttt[2][key] : "";
 
 				if((this_tooltip.substring(0,1) == '"' && this_tooltip.substring(this_tooltip.length-1) == '"') || (this_tooltip.substring(0,1) == "'" && this_tooltip.substring(this_tooltip.length-1) == "'")){
 					this_tooltip = this_tooltip.substring(1, this_tooltip.length-1);
-//					this_tooltip = replaceAll("&#10;", String.fromCharCode(10), this_tooltip);
 				}
 				if(this_tooltip != ""){
 					var date_obj = document.getElementById(this_date_str);
@@ -221,24 +218,21 @@ function processTooltips(){
 	//monthly recursive
 	for (var key in ttd[1]) {
 		if (ttd[1].hasOwnProperty(key)) {
-		var date_str = ttd[1][key];
-		var date_arr = date_str.split(/[^0-9]/);
+			var date_str = ttd[1][key];
+			var date_arr = date_str.split(/[^0-9]/);
 
-		var date_y = date_arr[0];
-		var date_m = date_arr[1]-1;
-		var date_d = date_arr[2];
+			var date_y = date_arr[0];
+			var date_m = date_arr[1]-1;
+			var date_d = date_arr[2];
 
 			if(typeof(date_y) != "undefined" && typeof(date_m) != "undefined" && typeof(date_d) != "undefined"){
 				this_date = new Date(date_y, date_m, date_d);
-//				this_date = new Date(ttd[1][key]);
 				this_date_str = pad(current_year, 4, "0")+''+pad(current_month, 2, "0")+''+pad(this_date.getDate(), 2, "0");
 				this_tooltip = typeof(ttt[1][key]) != "undefined" ? ttt[1][key] : "";
 
 				if((this_tooltip.substring(0,1) == '"' && this_tooltip.substring(this_tooltip.length-1) == '"') || (this_tooltip.substring(0,1) == "'" && this_tooltip.substring(this_tooltip.length-1) == "'")){
 					this_tooltip = this_tooltip.substring(1, this_tooltip.length-1);
-//					this_tooltip = replaceAll("&#10;", String.fromCharCode(10), this_tooltip);
 				}
-
 
 				if(this_tooltip != ""){
 
@@ -284,13 +278,11 @@ function processTooltips(){
 
 			if(typeof(date_y) != "undefined" && typeof(date_m) != "undefined" && typeof(date_d) != "undefined"){
 				this_date = new Date(date_y, date_m, date_d);
-//				this_date = new Date(ttd[0][key]);
 				this_date_str = pad(this_date.getFullYear(), 4, "0")+''+pad(this_date.getMonth()+1, 2, "0")+''+pad(this_date.getDate(), 2, "0");
 				this_tooltip = typeof(ttt[0][key]) != "undefined" ? ttt[0][key] : "";
 
 				if((this_tooltip.substring(0,1) == '"' && this_tooltip.substring(this_tooltip.length-1) == '"') || (this_tooltip.substring(0,1) == "'" && this_tooltip.substring(this_tooltip.length-1) == "'")){
 					this_tooltip = this_tooltip.substring(1, this_tooltip.length-1);
-//					this_tooltip = replaceAll("&#10;", String.fromCharCode(10), this_tooltip);
 				}
 
 				if(this_tooltip != ""){

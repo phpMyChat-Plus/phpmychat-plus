@@ -2,10 +2,10 @@
 # xx_YY translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Localized version of PHP-Calendar, DatePicker Calendar class: http://ciprianmp.com/scripts/calendar/
-# Version: 3.70
+# Version: 3.74
 # Language: Lang_name / Orig_name // Ex: Romanian (English name) / Română (Original name)
 # Translator: YourName <email@...>
-# Last file update: 27.07.2013
+# Last file update: 29.01.2015
 
 # define("RTL", 1); // uncomment only for right-to-left text (Arabic, Hebrew)
 
@@ -38,6 +38,7 @@ define("L_UPDATE", "Update available %s !"); #3.70
 define("L_TRANAME", "ReplaceWith YourName"); //Keep a short name #3.70
 define("L_TRABY", "Translated by %s"); #3.70
 define("L_DONATE", "Do you wish to donate?"); #3.70
+define("L_SRV_TIMEZONE", "Server Timezone:"); //3.74
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "0");

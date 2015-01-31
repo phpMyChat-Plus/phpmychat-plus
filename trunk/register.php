@@ -639,6 +639,7 @@ else
 			<?php
 			  $myCalendar = new tc_calendar("date1", true, true);
 			  $myCalendar->zindex = 150; //default 1
+			  $myCalendar->setAutoHide(false);
 			  $myCalendar->setIcon("plugins/calendar/images/iconCalendar.gif");
 			  $myCalendar->setPath("plugins/calendar/");
 			  if(isset($BIRTHDAY))
