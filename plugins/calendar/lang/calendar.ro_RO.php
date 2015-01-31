@@ -1,10 +1,10 @@
 <?php
 # ro_RO translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.70
+# Version: 3.74
 # Language: Romanian / Română
 # Translator: Ciprian Murariu <ciprianmp@yahoo.com>
-# Last file update: 26.07.2013
+# Last file update: 29.01.2015
 
 // Class strings localization
 define("L_DAYC", "Ziua");
@@ -35,6 +35,7 @@ define("L_UPDATE", "Update disponibil %s !");
 define("L_TRANAME", "Ciprian");
 define("L_TRABY", "Tradus de %s");
 define("L_DONATE", "Vreţi să donaţi?");
+define("L_SRV_TIMEZONE", "Fusul orar al serverului:"); //3.74
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday)
 define("FIRST_DAY", "1");

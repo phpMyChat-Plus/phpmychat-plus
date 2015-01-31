@@ -1,15 +1,18 @@
-/***********************************************
-* Local Time script- ? Dynamic Drive (http://www.dynamicdrive.com)
+/*****************************************************************
+* Local Time script- © Dynamic Drive (http://www.dynamicdrive.com)
 * This notice MUST stay intact for legal use
 * Visit http://www.dynamicdrive.com/ for this script and 100s more.
-***********************************************/
+******************************************************************
+*********** Adapted for localization by Ciprian Murariu *********/
 
-var weekdaystxt=[s_sun, s_mon, s_tue, s_wed, s_thu, s_fri, s_sat]
+//var weekdaystxt=["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"]
+var weekdaystxt=[l_sunday, l_monday, l_tuesday, l_wednesday, l_thursday, l_friday, l_saturday]
 
-function showLocalTime(container, servermode, offsetMinutes, displayversion){
+function showLocalTime(container, servermode, offsetMinutes, displayversion, lang){
 if (!document.getElementById || !document.getElementById(container)) return
 this.container=document.getElementById(container)
 this.displayversion=displayversion
+this.lang=lang
 var servertimestring=this_time;
 //console.log("AAA: "+this_time);
 this.localtime=this.serverdate=new Date(servertimestring)
@@ -27,7 +30,7 @@ setTimeout(function(){thisobj.updateTime()}, 1000) //update time every second
 showLocalTime.prototype.updateContainer=function(){
 var thisobj=this
 if (this.displayversion=="long")
-this.container.innerHTML=this.localtime.toLocaleString()
+this.container.innerHTML=this.localtime.toLocaleString(this.lang)
 else{
 var hour=this.localtime.getHours()
 var minutes=this.localtime.getMinutes()

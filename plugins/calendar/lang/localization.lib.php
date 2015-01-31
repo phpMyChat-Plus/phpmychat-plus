@@ -1,10 +1,10 @@
 <?php
 # en_US - this file includes the specific strings for both en_GB/en_US
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
-# Version: 3.70
+# Version: 3.74
 # Language: American English / English US
 # Translator: Ciprian Murariu <ciprianmp@yahoo.com>
-# Last file update: 26.07.2013
+# Last file update: 29.01.2015
 
 if (!function_exists('utf_conv'))
 {
@@ -60,6 +60,7 @@ if(!defined("L_HERE")) define("L_HERE", "here");
 if(!defined("L_UPDATE")) define("L_UPDATE", "Update available %s !");
 if(!defined("L_TRABY") && defined("L_TRANAME")) define("L_TRABY", "Translated by %s");
 if(!defined("L_DONATE")) define("L_DONATE", "<bdo dir=\"ltr\">Do you wish to donate?</bdo>");
+if(!defined("L_SRV_TIMEZONE")) define("L_SRV_TIMEZONE", "<bdo dir=\"ltr\">Server Timezone:</bdo>"); //3.74
 
 if(!defined("FIRST_DAY")) define("FIRST_DAY", "0"); // 0 for Sunday
 

@@ -1,9 +1,29 @@
+//*****************************************
 The php calendar component
 written by TJ @triconsole
+//*****************************************
 Localization version & support by ciprianmp
+//*****************************************
 
-version 3.73-loc (02 November 2013)
-- it includes all the updates in the corresponding version of the original class
+version 3.74-loc (29 January 2015)
+- it includes all the updates/fixes in the
+corresponding version of the original class
+//*****************************************
+
+add lang: "Server Timezone:"
+	- thanks ciprianmp
+
+updated: optimized and add functions to reduce parameter sending over calendar pages
+	- thanks Tri
+
+fixed: minor bug fixed, error on function checkSpecifyDate() and prevent date-allow input errors
+	- thanks ciprianmp
+
+fixed: checkdate() function generated an error on some php servers
+	- thanks Tri
+
+fixed: minor bug fixed, for dropdown selection only of 2 values out of 3 (year null after selection)
+	- thanks Tri and ciprianmp
 
 fixed: applied a Turkish fix for i vs I usage in function names php<5.5 on Linux bug (http://trac.roundcube.net/ticket/1485470)
 	- thanks ciprianmp and Tri
@@ -20,7 +40,7 @@ updated: vulnerabilities update on REQUEST parameter
 fixed: minor bugs fixed on unset calendar value
 	- thanks Tri
 
-fixed: tooltips are not display on Safari browser (windows)
+fixed: tooltips are not displayed on Safari browser (windows)
 	- thanks Larry
 
 fixed: an error when choose day and month, and year dropdown to null (first item on dropdown)
@@ -35,11 +55,11 @@ fixed: the year interval limitation (1970/2038) has been eliminated for the enti
 fixed: recursive tooltips can now be set outside the limited interval 1970-2037
 	- thanks ciprianmp
 
-add on: built the FB page of the class and embedded the Like action button
-	- thanks ciprianmp
-
 add on: automatic check for an updated version available
 	- thanks Tri
+
+add on: built the FB page of the class and embedded the Like action button in the About section
+	- thanks ciprianmp
 
 add on: About icon, credits & version info displayed on hovering the About icon
 	- thanks Tri and ciprianmp
