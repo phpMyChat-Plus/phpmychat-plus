@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.cmds.php (09.03.2014 - rev.2)
+// File : dutch/localized.cmds.php (09.01.2012 - rev.3)
 // Translation by Bert Moorlag <berbia@zeelandnet.nl>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -20,6 +20,7 @@ define("L_CMD_INVITE", "uitnodiging"); // invite (send an invitation to the user
 define("L_CMD_JOIN", "meedoen"); // join (join an existing room)
 define("L_CMD_KICK", ""); // kick,boot (kick an user from a room)
 define("L_CMD_LTR", "lnr"); // ltr (post a left-to-right text)
+define("L_CMD_MATH", "wiskundige,wisk"); //math (post MathJax equations in chat)
 define("L_CMD_ME", "ik"); // me (tell the room what you are doing)
 define("L_CMD_MR", ""); // mr (same as "me" but with the gender prefix)
 define("L_CMD_MSG", ""); // msg,to (send a private message)
@@ -38,6 +39,8 @@ define("L_CMD_SIZE", "grootte"); //size (change/reset the size of the font in ch
 define("L_CMD_SORT", "rangschik"); // sort (sort - ascending the usernames in the lists, alphabetically or by the time they joined chat)
 define("L_CMD_TIMESTAMP", "datum"); // timestamp (show/hide the timestamp in posts and server/worldtime in the status bar)
 define("L_CMD_TOPIC", "onderwerp"); // topic (set/change the topic)
+define("L_CMD_UTUBE", ""); // tube,utube,youtube (post an youtube video)
+define("L_CMD_VIDEO", ""); // vid,video,play (post a video)
 define("L_CMD_WISP", "fluister"); //wisp,whisp (send a whisper / private message to an user in a different room)
 define("L_CMD_WHOIS", "wieis,over"); // whois,about (shows the profile page of an user) 
 ?>

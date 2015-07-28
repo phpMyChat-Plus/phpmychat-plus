@@ -1,7 +1,9 @@
 <?php
 mysql_query("
 ALTER TABLE ".$t_ban_users."
-			CHANGE ip ip varchar(30) NOT NULL default '';
+			CHANGE ip ip varchar(30) NOT NULL default '',
+			ADD country_code varchar(3) NOT NULL default '',
+			ADD country_name varchar(100) NOT NULL default '';
 
 ALTER TABLE ".$t_config."
 			CHANGE GRAVATARS_DYNAMIC_DEF GRAVATARS_DYNAMIC_DEF enum('mm','identicon','monsterid','wavatar','retro') default 'monsterid',
@@ -33,23 +35,43 @@ ALTER TABLE ".$t_config."
 			ADD ALLOW_TEXT_COLORS enum('0','1') NOT NULL default '1',
 			ADD TAGS_POWERS set('b','i','u') default NULL,
 			ADD ALLOW_MATH enum('0','1') NOT NULL default '0',
-			ADD SRC_MATH varchar(255) NOT NULL default 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+			ADD SRC_MATH varchar(255) NOT NULL default 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML',
+			ADD USE_FLAGS enum('0','1') NOT NULL default '1',
+			ADD SHOW_FLAGS enum('0','1') NOT NULL default '1';
 
 UPDATE ".$t_config." SET
 			CMDS = '/away /buzz /demote /dice /dice2 /dice3 /high /img /math /mr<br />/room /size /sort /topic /utube /video /wisp',
-			MODS = 'Advanced Admin, (GR)Avatars, Smilies Popup, Color Drop Box, Private Popup,<br />Quick Menu, Logs Archive, Lurking, Color names, WorldTime, UTF-8, Birthdays, MathJax',
+			MODS = 'Advanced Admin, (GR)Avatars, Smilies Popup, Color Drop Box, Private Popup,<br />Quick Menu, Logs Archive, Lurking, Color names, WorldTime, UTF-8, Birthdays, MathJax'
 	WHERE ID='0';
 	
 ALTER TABLE ".$t_lurkers."
-			CHANGE ip ip varchar(30) NOT NULL default '';
+			CHANGE ip ip varchar(30) NOT NULL default '',
+			ADD country_code varchar(3) NOT NULL default '',
+			ADD country_name varchar(100) NOT NULL default '';
 
 ALTER TABLE ".$t_reg_users."
-			CHANGE ip ip varchar(30) NOT NULL default '';
+			CHANGE ip ip varchar(30) NOT NULL default '',
+			ADD country_code varchar(3) NOT NULL default '',
+			ADD country_name varchar(100) NOT NULL default '',
+			ADD use_sounds enum('0','1') NOT NULL default '1';
+
+UPDATE ".$t_reg_users."SET
+			use_sounds='0'
+	WHERE email='bot@bot.com';
+
+UPDATE ".$t_reg_users." SET
+			use_sounds='0'
+	WHERE email='quote@quote.com';
 
 ALTER TABLE ".$t_stats."
-			ADD maths_posted smallint(5) NOT NULL DEFAULT '0';
+			ADD maths_posted smallint(5) NOT NULL DEFAULT '0',
+			ADD ip varchar(30) NOT NULL default '',
+			ADD country_code varchar(3) NOT NULL default '',
+			ADD country_name varchar(100) NOT NULL default '';
 
 ALTER TABLE ".$t_users."
-			CHANGE ip ip varchar(30) NOT NULL default '';
+			CHANGE ip ip varchar(30) NOT NULL default '',
+			ADD country_code varchar(3) NOT NULL default '',
+			ADD country_name varchar(100) NOT NULL default '';
 ", $conn);
 ?>

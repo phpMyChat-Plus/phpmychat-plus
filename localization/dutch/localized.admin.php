@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.admin.php - plus version (09.03.2014 - rev.17)
+// File : dutch/localized.admin.php - plus version (01.01.2015 - rev.18)
 // Original translation by Corbesir <rock@jascrc.com>
 // Updates, corrections and additions for the Plus version by DJE Amesz & Romanesko <Genieusdanny@gmail.com> and Bert Moorlag <berbia@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -83,7 +83,7 @@ define("A_SHEET4_9", "Adressen,onderwerp of boodschap mist!");
 define("A_SHEET4_10", "Voeg extra email toe,<br />gescheiden door een komma zonder spatie (,)");
 define("A_SHEET4_11", "Handtekening");
 define("A_SHEET4_12", "Deselecteer Alles");
-define("A_SHEET4_13", "Doe alle ontvangers in de <b>’Bcc’</b>");
+define("A_SHEET4_13", "Plaats alle ontvangers in het <b>’Bcc’</b> veld");
 
 // Frame for configuration
 define("A_SHEET5_0", "Uw geïnstalleerde versie is %s");
@@ -168,6 +168,7 @@ define("A_SEARCH_25", "Modereer deze gebruiker");
 define("A_SEARCH_26", "Gebruiker heeft ervoor gekozen om deze informatie te verbergen in openbare profielen, voor zijn privacy. Niet openbaar maken!");
 define("A_SEARCH_27", "Toon huidige maand");
 define("A_SEARCH_28", "Toon alle verjaardagen");
+define("A_SEARCH_29", "Er is geen verjaardag in %s"); //current month name
 
 // Connected users Page
 define("A_LURKING_1", "Ingelogde gebruikers en gluurders") ;

@@ -1,6 +1,6 @@
 <?php
-// File : english/localized.config.php - plus version (09.07.2013 - rev.2)
-// First version is based on the work of Marco Gelli Marchese <mvmcgm@gmail.com> for the Brasilian version
+// File : english/localized.config.php - plus version (01.01.2015 - rev.4)
+// First version is based on the work of Marco Gelli Marchese <mvmcgm@gmail.com> for the Brazilian version
 // Original English file by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -54,6 +54,7 @@ define("A_CONF_22", "Lurking Mod");
 define("A_CONF_23", "Random Quote");
 define("A_CONF_24", "Ghost Control");
 define("A_CONF_25", "Birthday Mod");
+define("A_CONF_45", "GeoIP Country Flags"); //rev.4
 
 define("A_CONF_27", "Help & Support");
 define("A_CONF_28", "Download page");
@@ -234,7 +235,7 @@ define("A_CONFCONTENT_122", "One count per Week");
 
 //Content Chat Schedule
 define("A_CONFCONTENT_123", "Open times Schedule for your chat and chatrooms.");
-define("A_CONFCONTENT_124", "This mod is still under development! The schedule fields have deliberately been disabled.");
+define("A_CONFCONTENT_124", "This mod is still under development! The fields have deliberately been disabled."); //rev.3
 define("A_CONFCONTENT_125", "Daily schedule:");
 define("A_CONFCONTENT_126", "Sunday schedule:");
 define("A_CONFCONTENT_127", "Monday schedule:");
@@ -569,8 +570,15 @@ define("A_CONFCONTENT_425", "Send automatic Greetings by email to users on their
 define("A_CONFCONTENT_426", "If enabled, the script will work only if the chat page will be visited/loaded in the sending interval (default = 7 days). After that interval, the email draft will be dropped off!");
 define("A_CONFCONTENT_427", "Set the time from midnight you want Greetings to be triggered for sending.");
 define("A_CONFCONTENT_428", "Positive or negative values allowed (0 = midnight).");
-define("A_CONFCONTENT_429", "Please note that this setting is taking in consideration the server time, not the user’s local time, therefore it’s possible that the email will be sent within a (+ -) timezone deviation.");
+define("A_CONFCONTENT_429", "Please note that this setting is taking into consideration the server time, not the user’s local time, therefore it’s possible that the email will be sent within a (+ -) timezone deviation.");
 define("A_CONFCONTENT_430", "How many days the Greetings will be up for sending.");
 define("A_CONFCONTENT_431", "If there is no one in chat nor visiting the chat page within this interval, the Greeting will not be sent anymore, as the effect on the Celebrated user would not be the same, if the message come very late (like one month later).");
 define("A_CONFCONTENT_432", "Set the text file you want Greetings to be extracted from.");
+
+//Content GeoIP Country Flags
+define("A_CONFCONTENT_433", "Enable use of the GeoIP Country Flags Mod in chat."); //rev.4
+define("A_CONFCONTENT_434", "This mod will display country name, country flag and country code, based on the current/most recent location of every user visiting the chat."); //rev.4
+define("A_CONFCONTENT_435", "Show the GeoIP Country Flags to all users on public chat pages."); //rev.4
+define("A_CONFCONTENT_436", "Even if hidden, power users can still see users’ locations by flags (for more control), by keeping the use of flags enabled above."); //rev.4
+define("A_CONFCONTENT_437", "The GeoIP databases (GeoLite&trade;) are saved in your plugins/countryflags folder as GeoIP.dat and GeoIPv6.dat. These databases contain the countries based on the IPs of the visitors (both IPv4 and IPv6) and are updated once a month by the MaxMind developers (on first Tuesday of each month). The IP allocation could change very often from one country to another, therefore, for the best accuracy, you can download and replace the GeoIP.dat and GeoIPv6.dat files with the latest published versions.");
 ?>

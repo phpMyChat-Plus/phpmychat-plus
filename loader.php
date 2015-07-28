@@ -20,6 +20,11 @@ if (C_USE_SMILIES) require("./lib/smilies.lib.php");
 
 // Size command by Ciprian
 if (isset($_COOKIE["CookieFontSize"])) $FontSize = $_COOKIE["CookieFontSize"];
+if (isset($_COOKIE["CookieBeep"]))
+{
+	$CookieBeep = $_COOKIE["CookieBeep"];
+	if(!isset($USE_SOUNDS)) $USE_SOUNDS = $CookieBeep;
+}
 
 header("Content-Type: text/html; charset=${Charset}");
 
@@ -146,13 +151,14 @@ if(C_EN_STATS)
 	if(C_USE_AVATARS) $DbAvatar = new DB;
 	if(COLOR_NAMES || C_ITALICIZE_POWERS) $DbColor = new DB;
 	$DbLink = new DB;
-	$DbLink->query("SELECT perms,rooms,allowpopup,join_room FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
+	$DbLink->query("SELECT perms,rooms,allowpopup,join_room,use_sounds FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	$reguser = ($DbLink->num_rows() != 0);
 	if ($reguser)
 	{
-		list($perms, $rooms, $allowpopupu, $join_room) = $DbLink->next_record();
+		list($perms, $rooms, $allowpopupu, $join_room, $USE_SOUNDS) = $DbLink->next_record();
 		$DbLink->clean_results();
 	}
+	elseif(!isset($USE_SOUNDS) || !$USE_SOUNDS) $USE_SOUNDS = isset($CookieBeep) ? $CookieBeep : 1;
 
 // Get IP address
 require("./lib/get_IP.lib.php");		// Set the $IP var
@@ -165,7 +171,7 @@ if (C_REQUIRE_REGISTER && (!isset($PWD_Hash) || $PWD_Hash == ''))
 }
 else if (isset($PWD_Hash) && $PWD_Hash != '')
 {
-	$DbLink->query(	'SELECT ' . C_USR_TBL . '.room, ' . C_USR_TBL . '.status, ' . C_USR_TBL . '.ip'
+	$DbLink->query(	'SELECT ' . C_USR_TBL . '.room, ' . C_USR_TBL . '.status, ' . C_USR_TBL . '.ip, ' . C_USR_TBL . '.country_code, ' . C_USR_TBL . '.country_name'
 					. ' FROM ' . C_USR_TBL . ', ' . C_REG_TBL
 					. ' WHERE ' . C_USR_TBL . '.username = \'' . $U . '\''
 					. ' AND ' . C_REG_TBL . '.username = \'' . $U . '\''
@@ -177,7 +183,7 @@ else // C_REQUIRE_REGISTER == 0 && $PWD_Hash is empty
 	$DbLink->query('SELECT username FROM ' . C_REG_TBL . ' WHERE username = \'' . $U . '\' LIMIT 1');
 	if ($DbLink->num_rows() == 0)
 	{
-		$DbLink->query('SELECT room, status, ip FROM ' . C_USR_TBL . ' WHERE username = \'' . $U . '\' LIMIT 1');
+		$DbLink->query('SELECT room, status, ip, country_code, country_name FROM ' . C_USR_TBL . ' WHERE username = \'' . $U . '\' LIMIT 1');
 	}
 	else
 	{
@@ -190,7 +196,7 @@ else // C_REQUIRE_REGISTER == 0 && $PWD_Hash is empty
 if($DbLink->num_rows() != 0)
 {
 	// There is a row for the user in the users table
-	list($room,$status,$knownIp) = $DbLink->next_record();
+	list($room,$status,$knownIp,$COUNTRY_CODE,$COUNTRY_NAME) = $DbLink->next_record();
 	$DbLink->clean_results();
 	$kicked = 0;
 	if ($room != stripslashes($R))	// Same nick in another room
@@ -260,11 +266,11 @@ if($DbLink->num_rows() != 0)
 else
 {
 	// User hasn't been found in the users table -> add a row if he is registered
-	$DbLink->query("SELECT perms,rooms,allowpopup,join_room FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
+	$DbLink->query("SELECT perms,rooms,allowpopup,join_room,use_sounds FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	$reguser = ($DbLink->num_rows() != 0);
 	if ($reguser)
 	{
-		list($perms, $rooms, $allowpopupu, $join_room) = $DbLink->next_record();
+		list($perms, $rooms, $allowpopupu, $join_room, $USE_SOUNDS) = $DbLink->next_record();
 		$DbLink->clean_results();
 	}
 	// Kick unreg users
@@ -297,7 +303,8 @@ else
 			default:
 				$status = "r";
 		};
-		$DbLink->query("INSERT INTO ".C_USR_TBL." VALUES ('$R', '$U', '$Latin1', ".time().", '$status', '$IP', '0', ".time().", '$email')");
+		if(!isset($USE_SOUNDS) || !$USE_SOUNDS) $USE_SOUNDS = isset($CookieBeep) ? $CookieBeep : 1;
+		$DbLink->query("INSERT INTO ".C_USR_TBL." VALUES ('$R', '$U', '$Latin1', ".time().", '$status', '$IP', '0', ".time().", '$email', '$COUNTRY_CODE', '$COUNTRY_NAME')");
 	}
 }
 
@@ -339,8 +346,8 @@ else
 if ($First) $LastLoad = 0;
 
 // Define the SQL query (depends on values for ignored users list and on whether to display notification messages or not)
-$CondForQuery	= "";
-$IgnoreList	= "";
+$CondForQuery = "";
+$IgnoreList = "";
 if (isset($Ign)) $IgnoreList = "'".str_replace(",","','",addslashes(urldecode($Ign)))."'";
 if ($NT == "0") $IgnoreList .= ($IgnoreList != "" ? ",":"")."'SYS enter','SYS exit'";
 if ($IgnoreList != "") $CondForQuery = "username NOT IN (${IgnoreList}) AND ";
@@ -577,19 +584,19 @@ else
 			}
 			if ($Dest != "") $Dest = "<\/B><BDO dir=\"${textDirection}\"><\/BDO><\/td><td valign=\"top\"><B>><\/B><\/td><td valign=\"top\"><B>".$colornamedest_tag.$Dest;
 			$Message = str_replace("</FONT>","<\\/FONT>",$Message);	// slashes the closing HTML font tag
- // Avatar System Start:
-		    if (C_USE_AVATARS)
-		    {
-	       		$avatar = "<a onClick=\"window.parent.runCmd('whois','".special_char2(stripslashes($Userx),$Latin1)."'); return false\" onMouseOver=\"window.status='".L_PROFILE.".'; return true\" title=\"".L_PROFILE."\"><img align=\"center\" src=\"$avatar\" width=".C_AVA_WIDTH." height=".C_AVA_HEIGHT." alt=\"".L_PROFILE."\" border=0><\/a>";
+			// Avatar System Start:
+			if (C_USE_AVATARS)
+			{
+				$avatar = "<a onClick=\"window.parent.runCmd('whois','".special_char2(stripslashes($Userx),$Latin1)."'); return false\" onMouseOver=\"window.status='".L_PROFILE.".'; return true\" title=\"".L_PROFILE."\"><img align=\"center\" src=\"$avatar\" width=".C_AVA_WIDTH." height=".C_AVA_HEIGHT." alt=\"".L_PROFILE."\" border=0><\/a>";
 				if ($ST != 1) $NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\">".$avatar."<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."${User}${Dest}".$colornamedest_endtag."<\/B><BDO dir=\"${textDirection}\"><\/BDO><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
-	   			else $NewMsg .= $avatar."<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."${User}${Dest}".$colornamedest_endtag."<\/B><BDO dir=\"${textDirection}\"><\/BDO><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
+				else $NewMsg .= $avatar."<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."${User}${Dest}".$colornamedest_endtag."<\/B><BDO dir=\"${textDirection}\"><\/BDO><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
 			}
 			else
 			{
-						if ($ST != 1) $NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."${User}${Dest}".$colornamedest_endtag."<\/B><BDO dir=\"${textDirection}\"><\/BDO><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
-						else $NewMsg .= "<B>${User}${Dest}<\/B><BDO dir=\"${textDirection}\"><\/BDO><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
+				if ($ST != 1) $NewMsg .= "<\/td><td nowrap=\"nowrap\" valign=\"top\"><B>".$colorname_tag."${User}${Dest}".$colornamedest_endtag."<\/B><BDO dir=\"${textDirection}\"><\/BDO><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
+				else $NewMsg .= "<B>${User}${Dest}<\/B><BDO dir=\"${textDirection}\"><\/BDO><\/td><td width=\"99%\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
 			}
-	    }
+		}
 // Avatar System end.
 
 		// "System" messages
@@ -630,7 +637,7 @@ else
 				$jutjub = new YouTube();
 				$youtube = $jutjub->EmbedVideo($Message,C_VIDEO_WIDTH,C_VIDEO_HEIGHT);
         		$NewMsg .= "<font class=\"notify\"><img src=\"images/icons/youtube.png\" border=0 alt='YouTube' title='YouTube'>&nbsp;<a href='".$Message."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_ORIG_VIDEO).".'; return true\" title='".sprintf(L_CLICK,L_ORIG_VIDEO)."' target=_blank>".L_VIDEO."<\/a> ".$Dest.":<\/font><\/td><td width=\"99%\" valign=\"top\">".$youtube."<\/td><\/tr><\/table>";
-      		}
+     		}
 			elseif ($User == "SYS video")
 			{
 				//require EmbeVi Class
@@ -655,11 +662,11 @@ else
 					$video = $embevi->getCode();
 					$NewMsg .= "<font class=\"notify\"><img src=\"".$eicon."\" border=0 width='16' alt='&copy; ".$ealt."' title='&copy; ".$ealt."'>&nbsp;<a href='".$Message."' onMouseOver=\"window.status='".sprintf(L_CLICK,L_ORIG_VIDEO).".'; return true\" title='".sprintf(L_CLICK,L_ORIG_VIDEO)."' target=_blank>".L_VIDEO."<\/a> ".$Dest.":<\/font><\/td><td width=\"99%\" valign=\"top\">".$video."<\/td><\/tr><\/table>";
 				}
-      		}
+			}
 			elseif ($User == "SYS room")
 			{
-		  		$Message = "<I>".ROOM_SAYS." <FONT class=\"notify\">".$Message."<\/FONT><\/FONT><\/I><\/td><\/tr><\/table>";
-		 		$noteclass = "notify2";
+				$Message = "<I>".ROOM_SAYS." <FONT class=\"notify\">".$Message."<\/FONT><\/FONT><\/I><\/td><\/tr><\/table>";
+				$noteclass = "notify2";
 			}
 			elseif ($User == "SYS math")
 			{
@@ -679,7 +686,7 @@ else
 				}
 				eval("\$Message = $Message;");
       		};
-			if ($User == "SYS enter" && strpos($Message,$U) !== false)
+			if ($User == "SYS enter" && (strpos($Message,$U) !== false || !$USE_SOUNDS))
 			{
 				$To_remove = strstr($Message, "<EMBED SRC=");
 				$Message = rtrim(str_ireplace($To_remove,"",$Message));
@@ -690,8 +697,8 @@ else
 				{
 					$NewMsg .="<\/td><td nowrap=\"nowrap\" valign=\"top\"><FONT class=\"notify\">".$Dest." ".DICE_RESULTS."<\/FONT><\/td><td nowrap=\"nowrap\" valign=\"top\">".$Message."<\/td><\/tr><\/table>";
 				}
-			    else
-			    {
+				else
+				{
 					$NewMsg .= "<\/td><td valign=\"top\"><SPAN CLASS=\"$noteclass\">".$Message."<\/SPAN><\/td><\/tr><\/table>";
 				};
 			}

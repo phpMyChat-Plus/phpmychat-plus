@@ -11,7 +11,7 @@ if (isset($_GET))
 	};
 };
 
-// Get the names and values for post vars
+// Get the names and values for vars posted from the form below
 if (isset($_POST))
 {
 	while(list($name,$value) = each($_POST))
@@ -22,14 +22,15 @@ if (isset($_POST))
 
 // Fix a security hole
 if (isset($L) && !is_dir("./localization/".$L)) exit();
-
 $mydate = isset($_POST["date1"]) ? $_POST["date1"] : "";
+
 require("./config/config.lib.php");
 require("./lib/release.lib.php");
 require("./localization/languages.lib.php");
 require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
 include("./lib/mail_validation.lib.php");
+require("./lib/get_IP.lib.php");		// Set the $IP var
 
 # Is the OS Windows or Mac or Linux
 if (stristr(PHP_OS,'win')) {
@@ -90,6 +91,8 @@ $DbLink = new DB;
 $field_errorU = false;
 $field_errorSQ = false;
 $field_errorSA = false;
+$field_errorEM = false;
+$field_errorUR = false;
 
 // Check for valid entries
 if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
@@ -132,9 +135,16 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 //	else if (!eregi("^([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](fo|g|l|m|mes|o|op|pa|ro|seum|t|u|v|z)?)$", $EMAIL))
 	// Added the new top-level domains (mail, asia, travel, aso)
 #	else if (!eregi("^([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](avel|bi|bs|fo|g|ia|l|m|me|mes|o|op|pa|ro|seum|t|to|u|v|z)?)$", $EMAIL))
-	else if (!preg_match("/^([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](avel|bi|bs|fo|g|ia|l|m|me|mes|o|op|pa|ro|seum|t|to|u|v|z)?)$/i", $EMAIL))
+#	else if (!preg_match("/^([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](avel|bi|bs|fo|g|ia|l|m|me|mes|o|op|pa|ro|seum|t|to|u|v|z)?)$/i", $EMAIL))
+	else if ($EMAIL != "" && !validator($EMAIL,"email"))
 	{
 		$Error = L_ERR_USR_8;
+		$field_errorEM = true;
+	}
+	else if (($WEBSITE != "" && !validator($WEBSITE,"url")) || ($FAVLINK != "" && !validator($FAVLINK,"url")) || ($FAVLINK1 != "" && !validator($FAVLINK1,"url")))
+	{
+		$Error = L_ERR_AV;
+		$field_errorUR = true;
 	}
 	else if ((C_EMAIL_PASWD && !checkdnsrr('www.w3.org', 'ANY')) && !checkdnsrr(substr(strstr($EMAIL,'@'),1), 'ANY'))
 	{
@@ -159,6 +169,10 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 		$Error = L_ERR_USR_16a;
 		$field_errorSA = true;
 	}
+	else if(strpos($BIRTHDAY, "00") === 0 || strpos($BIRTHDAY, "-00") > 0 || (C_REQUIRE_BDAY && !$BIRTHDAY))
+	{
+		$Error = L_ERR_USR_29;
+	}
 	else
 	{
 		$DbLink->query("SELECT count(*) FROM ".C_REG_TBL." WHERE username='$U'");
@@ -175,7 +189,6 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 			if (!isset($GENDER) || $GENDER == "") $GENDER = 0;
 			$showemail = (isset($SHOWEMAIL) && $SHOWEMAIL)? 1:0;
 			$allowpopup = 1;
-			include("./lib/get_IP.lib.php");		// Set the $IP var
 
 			// Send e-mail
 			if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@") && $Sender_email != "your@email.com")
@@ -201,7 +214,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
 			if (stristr($avatar,C_AVA_RELPATH . "uploaded/") && @rename($avatar, C_AVA_RELPATH . "uploaded/avatar_".$av_user_name.".gif")) $AVATARURL = C_AVA_RELPATH . "uploaded/avatar_".$av_user_name.".gif";
 			$av_done = 1;
 			// End of Upload avatar mod - by Ciprian
-			$DbLink->query("INSERT INTO ".C_REG_TBL." VALUES ('', '', '$U', '$Latin1', '$PWD_Hash', '$FIRSTNAME', '$LASTNAME', '$COUNTRY', '$WEBSITE', '$EMAIL', $showemail, 'user', '',".time().", '$IP', '$GENDER', '$allowpopup', '$PICTURE', '".str_replace("'","&#39;",$DESCRIPTION)."', '$FAVLINK', '$FAVLINK1', '$SLANG', '$COLORNAME', '$AVATARURL', '$SECRET_QUESTION', '".htmlspecialchars($SECRET_ANSWER, ENT_NOQUOTES, 'UTF-8')."', '', '', '$USE_GRAV', '', '$BIRTHDAY', '$SHOW_BDAY', '$SHOW_AGE', '')");
+			$DbLink->query("INSERT INTO ".C_REG_TBL." VALUES ('', '', '$U', '$Latin1', '$PWD_Hash', '$FIRSTNAME', '$LASTNAME', '$COUNTRY', '$WEBSITE', '$EMAIL', $showemail, 'user', '',".time().", '$IP', '$GENDER', '$allowpopup', '$PICTURE', '".str_replace("'","&#39;",$DESCRIPTION)."', '$FAVLINK', '$FAVLINK1', '$SLANG', '$COLORNAME', '$AVATARURL', '$SECRET_QUESTION', '".htmlspecialchars($SECRET_ANSWER, ENT_NOQUOTES, 'UTF-8')."', '', '', '$USE_GRAV', '', '$BIRTHDAY', '$SHOW_BDAY', '$SHOW_AGE', '', '$COUNTRY_CODE', '$COUNTRY_NAME', '1')");
 			if (C_EMAIL_PASWD && !C_EMAIL_USER && C_ADMIN_NOTIFY && $Sender_email != "" && strstr($Sender_email,"@") && $Sender_email != "your@email.com") $Message = "";
 			else $Message = L_REG_9;
 // Patch for sending an email to the Administrator upon new user registration to the chat system.
@@ -364,7 +377,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      . ($BIRTHDAY != "" ? $eol."Display birthday in public info: ".$shwbday : "")
      . ($BIRTHDAY != "" ? $eol."Display age in public info: ".$shwage : "")
      . $eol."Gender: ".$sex
-     . ($COUNTRY ? $eol."Country: ".$COUNTRY : "")
+     . ($COUNTRY ? $eol."Location/Country: ".$COUNTRY : "")
      . ($WEBSITE ? $eol."WWW: ".$WEBSITE."" : "")
      . ($SLANG ? $eol.$eol."Language: ".$SLANG : "")
      . ($FAVLINK ? $eol.$eol."Favorite link 1: ".$FAVLINK : "")
@@ -378,6 +391,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_3)
      . "Prefered language: ".$L.$eol
      . "Registered on: $dt $ti".$eol
      . "From IP address: $IP".$eol
+     . "GeoIP Country: ".($COUNTRY_CODE != "LAN" ? $COUNTRY_CODE." - " : "")."$COUNTRY_NAME".$eol
 	 . "----------------------------------------------".$eol.$eol
 	 . "Please note that some data should be disabled from this copy for privacy concerns!".$eol
 	 . "Save this email for your further reference.".$eol
@@ -405,6 +419,7 @@ if (!isset($FontName)) $FontName = "";
 <HEAD>
 <TITLE><?php echo(L_REG_6." - ".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
+<!--<link href="plugins/calendar/css/default/calendar.css" rel="stylesheet" type="text/css" />-->
 <?php
 require("./plugins/calendar/tc_calendar.php");
 ?>
@@ -576,7 +591,7 @@ if(isset($Error))
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_8); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="EMAIL" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($EMAIL)) echo(stripslashes($EMAIL)); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
+				<INPUT TYPE="text" NAME="EMAIL" SIZE=25 MAXLENGTH=64<?php echo($field_errorEM ? " style=\"background-color: #FF0000;\"" : ""); ?> VALUE="<?php if (isset($EMAIL)) echo(stripslashes($EMAIL)); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
 			</TD>
 		</TR>
 		<TR>
@@ -675,7 +690,7 @@ else
 					$mday = array();
 					$DbLink->clean_results();
 				}
-			  $myCalendar->setTimezone("Europe/Bucharest");
+#			  $myCalendar->setTimezone("Europe/Bucharest");
 			  $myCalendar->writeScript();
 $DbLink->close();
 			?>
@@ -719,7 +734,7 @@ $DbLink->close();
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_32); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="WEBSITE" SIZE=25 MAXLENGTH=64 VALUE="<?php if (isset($WEBSITE)) echo(stripslashes($WEBSITE)); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<INPUT TYPE="text" NAME="WEBSITE" SIZE=25 MAXLENGTH=64<?php echo($field_errorUR ? " style=\"background-color: #FF0000;\"" : ""); ?> VALUE="<?php if (isset($WEBSITE)) echo(stripslashes($WEBSITE)); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
 		</TR>
 		<TR>
@@ -818,13 +833,13 @@ $DbLink->close();
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_2); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="FAVLINK" SIZE=25 MAXLENGTH=255 VALUE="<?php if (isset($FAVLINK)) echo(stripslashes($FAVLINK)); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<INPUT TYPE="text" NAME="FAVLINK" SIZE=25 MAXLENGTH=255<?php echo($field_errorUR ? " style=\"background-color: #FF0000;\"" : ""); ?> VALUE="<?php if (isset($FAVLINK)) echo(stripslashes($FAVLINK)); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
 		</TR>
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_3); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="FAVLINK1" SIZE=25 MAXLENGTH=255 VALUE="<?php if (isset($FAVLINK1)) echo(stripslashes($FAVLINK1)); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<INPUT TYPE="text" NAME="FAVLINK1" SIZE=25 MAXLENGTH=255<?php echo($field_errorUR ? " style=\"background-color: #FF0000;\"" : ""); ?> VALUE="<?php if (isset($FAVLINK1)) echo(stripslashes($FAVLINK1)); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
 		</TR>
 		<TR>
@@ -838,10 +853,10 @@ $DbLink->close();
 			<TD VALIGN="TOP">
 				<INPUT TYPE="text" NAME="PICTURE" SIZE=25 MAXLENGTH=255 VALUE="<?php if (isset($PICTURE)) echo(stripslashes($PICTURE)); ?>"<?php if ($done) echo(" READONLY"); ?>>
 				<?php
-				if (isset($PICTURE) && stripslashes($PICTURE) != "" && ini_get("allow_url_fopen") && file(stripslashes($PICTURE)))
+				if (isset($PICTURE) && validator($PICTURE,"img"))
 				{
 				?>
-					<IMG src="<?php echo(stripslashes($PICTURE)); ?>" width = "<?php echo(C_AVA_WIDTH); ?>" ALT="<?php echo(L_PRO_5); ?>" />
+					<IMG src="<?php echo(stripslashes($PICTURE)); ?>" width="<?php echo(C_AVA_WIDTH); ?>" ALT="<?php echo(L_PRO_5); ?>" />
 				<?php
 				}
 				?>

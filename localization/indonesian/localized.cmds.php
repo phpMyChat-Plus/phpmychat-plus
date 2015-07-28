@@ -22,6 +22,7 @@ define("L_CMD_INVITE", "undang"); // invite (send an invitation to the user to f
 define("L_CMD_JOIN", "bergabung"); // join (join an existing room)
 define("L_CMD_KICK", "tendang,ulang"); // kick,boot (kick an user from a room)
 define("L_CMD_LTR", "kirkan,kirikanan"); // ltr (post a left-to-right text)
+define("L_CMD_MATH", ""); //math (post MathJax equations in chat)
 define("L_CMD_ME", "saya"); // me (tell the room what you are doing)
 define("L_CMD_MR", "sdr"); // mr (same as "me" but with the gender prefix)
 define("L_CMD_MSG", "psn,ke"); // msg,to (send a private message)
@@ -40,6 +41,8 @@ define("L_CMD_SIZE", "ukuran"); // size (change/reset the size of the font in ch
 define("L_CMD_SORT", "urut"); // sort (sort - ascending the usernames in the lists, alphabetically or by the time they joined chat)
 define("L_CMD_TIMESTAMP", "waktu"); // timestamp (show/hide the timestamp in posts and server/worldtime in the status bar)
 define("L_CMD_TOPIC", "topik"); // topic (set/change the topic)
+define("L_CMD_UTUBE", ""); // tube,utube,youtube (post an youtube video)
+define("L_CMD_VIDEO", ""); // vid,video,play (post a video)
 define("L_CMD_WISP", "siul,siulan"); //wisp,whisp (send a whisper / private message to an user in a different room)
 define("L_CMD_WHOIS", "siapaini,tentang"); // whois,about (shows the profile page of an user) 
 ?>

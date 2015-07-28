@@ -60,7 +60,7 @@ if($mdel != "")
 $DbLink->query("SELECT room,username,address,message,m_time FROM ".C_MSG_TBL."".$sqlT);
 
 echo "<a href=\"$pstr&mdel=\"><b><font color=white>".A_REFRESH_MSG."</font></b></a></center><br />";
-echo "<table align=\"center\" border=\"0\" cellpadding=\"1\" cellspacing=\"1\" width=\"780\" CLASS=table>";
+echo "<table align=\"center\" border=\"0\" cellpadding=\"1\" cellspacing=\"1\" width=\"98%\" CLASS=table>";
 echo "<tr CLASS=\"tabtitle\">
 <td VALIGN=CENTER ALIGN=CENTER height=20 CLASS=tabtitle align=center><b>".A_MSG_DEL."</b></a></td>
 <td VALIGN=CENTER ALIGN=CENTER height=20 CLASS=tabtitle align=center><a href=\"$pstr&mord=T\"><b>".A_POST_TIME."</b></a></td>

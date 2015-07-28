@@ -22,6 +22,7 @@ define("L_CMD_INVITE", "cagir,çagir,çağır"); // invite (send an invitation t
 define("L_CMD_JOIN", "katil,katıl"); // join (join an existing room)
 define("L_CMD_KICK", "kullaniciyi,kullanıcıyı"); // kick,boot (kick an user from a room)
 define("L_CMD_LTR", "sola"); // ltr (post a left-to-right text)
+define("L_CMD_MATH", ""); //math (post MathJax equations in chat)
 define("L_CMD_ME", "ben"); // me (tell the room what you are doing)
 define("L_CMD_MR", "bay"); // mr (same as "me" but with the gender prefix)
 define("L_CMD_MSG", "mesaj"); // msg,to (send a private message)
@@ -40,6 +41,8 @@ define("L_CMD_SIZE", "boyut"); // size (change/reset the size of the font in cha
 define("L_CMD_SORT", "sirala,sırala"); // sort (sort - ascending the usernames in the lists, alphabetically or by the time they joined chat)
 define("L_CMD_TIMESTAMP", "zamani,zamanı"); // timestamp (show/hide the timestamp in posts and server/worldtime in the status bar)
 define("L_CMD_TOPIC", "konu"); // topic (set/change the topic)
+define("L_CMD_UTUBE", ""); // tube,utube,youtube (post an youtube video)
+define("L_CMD_VIDEO", ""); // vid,video,play (post a video)
 define("L_CMD_WISP", "fisilda,fısılda"); //wisp,whisp (send a whisper / private message to an user in a different room)
 define("L_CMD_WHOIS", "bukim"); // whois,about (shows the profile page of an user) 
 ?>

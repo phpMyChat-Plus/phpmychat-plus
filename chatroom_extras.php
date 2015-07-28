@@ -65,6 +65,17 @@ function special_char($str,$lang)
 	return ($lang ? htmlentities(stripslashes($str)) : htmlspecialchars(stripslashes($str)));
 }
 
+/**
+ * Check Internet Connection.
+ * 
+ * @param string $sCheckHost Default: www.google.com
+ * @return boolean
+ */
+function check_internet_connection($sCheckHost = 'www.google.com') 
+{
+    return (bool) @fsockopen($sCheckHost, 80, $iErrno, $sErrStr, 2);
+}
+
 // ** Get messages **
 
 // Define the SQL query (depends on values for ignored users list and on whether to display
@@ -233,7 +244,7 @@ $CleanUsrTbl = 1;
 <?php
 #if(C_ALLOW_MATH) echo("<script type=\"text/javascript\" src=\"https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>");
 #if(C_ALLOW_MATH) echo("<script type=\"text/javascript\" src=\"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>");
-if(C_ALLOW_MATH && C_SRC_MATH != "") echo("<script type=\"text/javascript\" src=\"".C_SRC_MATH."\"></script>");
+if(C_ALLOW_MATH && C_SRC_MATH != "" && check_internet_connection()) echo("<script type=\"text/javascript\" src=\"".C_SRC_MATH."\"></script>");
 ?>
 </HEAD>
 	<BODY>

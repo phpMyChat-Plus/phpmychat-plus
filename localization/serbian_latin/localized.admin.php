@@ -1,5 +1,5 @@
 <?php
-// File : serbian_latin/localized.admin.php - plus version (01.06.2011 - rev.16)
+// File : serbian_latin/localized.admin.php - plus version (01.01.2015 - rev.18)
 // Original translation by Vedran Vučić <vedran.vucic@gnulinuxcentar.org>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -83,7 +83,7 @@ define("A_SHEET4_9", "Primalac(i), tema ili poruka nedostaje!");
 define("A_SHEET4_10", "Dodaj emailove, odvojene zapetama bez razmaka (,)");
 define("A_SHEET4_11", "Potpis");
 define("A_SHEET4_12", "Deselektuj sve");
-define("A_SHEET4_13", "Stavi sve primaoje u <b>’Bcc’</b>");
+define("A_SHEET4_13", "Stavite sve primaoce u <b>’Bcc’</b> polje");
 
 // Frame for configuration
 define("A_SHEET5_0", "Vaš instalirana verzija je %s");
@@ -167,9 +167,10 @@ define("A_SEARCH_22", "Traži sa");
 define("A_SEARCH_23", "Upišite reč koju tražite i pokušajte ponovo");
 define("A_SEARCH_24", "Nema podataka koji se podudaraju sa vašim krietrijima. Molimo vas da precizirate pretragu.");
 define("A_SEARCH_25", "Moderirajte ovog korisnika");
-define("A_SEARCH_26", "User has chosen to hide this info in public profiles, for his privacy. Do not disclose it!");
-define("A_SEARCH_27", "Show current month");
-define("A_SEARCH_28", "Show all birthdays");
+define("A_SEARCH_26", "Korisnik je odabrao da sakrije svoje informacije iz javnih profila radi privatnosti. Ne prikazujte podatke o korisniku!");
+define("A_SEARCH_27", "Pokaži tekući mesec");
+define("A_SEARCH_28", "Pokaži sve rođendane");
+define("A_SEARCH_29", "Nema rođendana u toku %s"); //current month name
 
 // Connected users Page
 define("A_LURKING_1", "Konektovani korisnici i Posmatrači") ;

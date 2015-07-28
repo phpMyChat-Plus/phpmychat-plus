@@ -1,5 +1,5 @@
 <?php
-// File : italian/localized.admin.php - plus version (13.06.2011 - rev.16)
+// File : italian/localized.admin.php - plus version (01.01.2015 - rev.18)
 // Original translation by Andrea D’Alessandro <andrea@abol.it> & Massimo Fubini <massimo@tomato.it>
 //	& Giuliano Yurij Beccaria <yurij@e-pages.it> & Marco Borrini <borrini@tradimento.it>
 // & Bartolotta Gioachino <developers@rockitalia.com> & Silvia M. Carrassi <silvia@ladysilvia.net>
@@ -28,7 +28,7 @@ define("A_MENU_9", "Archivio registro");
 define("A_MENU_1a", "Profili");
 define("A_MENU_2a", "Statistiche");
 define("A_MOD_DEV", "Mod sotto sviluppo");
-define("A_LOGOUT", "Sconnetti"); 
+define("A_LOGOUT", "Sconnetti");
 
 // Frame for registered users
 define("A_SHEET1_1", "Lista degli utenti registrati e dei loro permessi");
@@ -85,7 +85,7 @@ define("A_SHEET4_9", "Indirizzo/i, oggetto o messaggio mancante!");
 define("A_SHEET4_10", "Aggiungi e-mail, separali con la virgola (,) senza spazio");
 define("A_SHEET4_11", "Firma");
 define("A_SHEET4_12", "Deseleziona tutto");
-define("A_SHEET4_13", "Mettere tutti i destinatari nella <b>’Bcc’</b>");
+define("A_SHEET4_13", "Metti tutti i contenitori nel campo <b>’Bcc’</b>");
 
 // Frame for configuration
 define("A_SHEET5_0", "La tua versione installata è %s");
@@ -170,9 +170,12 @@ define("A_SEARCH_24", "Il tuo criterio di ricerca non ha dato risultati. Ridefin
 define("A_SEARCH_25", "Modera questo utente");
 define("A_SEARCH_24", "La tua ricerca non ha dato risultati. Ridefinisci la tua ricerca, prego.");
 define("A_SEARCH_25", "Modera questo utente");
-define("A_SEARCH_26", "L’utente ha scelto di nascondere queste informazioni nei profili pubblici, per la sua privacy. Non divulgare!");
 define("A_SEARCH_27", "Mese corrente");
 define("A_SEARCH_28", "Tutti i compleanni");
+define("A_SEARCH_26", "L’Utente ha scelto di nascondere questa info dal profilo pubblico, per la sua privacy. Non divulgare!");
+define("A_SEARCH_27", "Mostra mese corrente");
+define("A_SEARCH_28", "Mostra tutti I compleanni");
+define("A_SEARCH_29", "Non ci sono compleanni nel mese di %s"); //current month name
 
 // Connected users Page
 define("A_LURKING_1", "Utenti e Osservatori connessi") ;

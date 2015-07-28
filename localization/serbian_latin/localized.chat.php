@@ -1,5 +1,5 @@
 <?php
-// File : serbian_latin/localized.chat.php - plus version (20.03.2010 - rev.44)
+// File : serbian_latin/localized.chat.php - plus version (25.01.2015 - rev.49)
 // Original translation by Vedran Vučić <vedran.vucic@gnulinuxcentar.org>
 // Do not use ' but use ’ instead (utf-8 edit bug)
 
@@ -95,7 +95,9 @@ define("L_REG_46", "Muško");
 define("L_REG_47", "Žensko");
 define("L_REG_48", "Neodređen");
 define("L_REG_49", "Potrebna registracija!");
-define("L_REG_50", "Registracija suspendovana!");
+define("L_REG_50", "Registracija suspendovana!"); //rev.48
+define("L_REG_51", "Nikad"); //rev.48
+define("L_REG_52", "Nedavna lokacija"); //rev.48
 
 // e-mail validation stuff
 define("L_EMAIL_VAL_1", "Vaša podešavanja za ulazak u čet");
@@ -152,6 +154,7 @@ define("L_ERR_USR_25", "Samo administrator može da koristi ".$COLORNAME." boju!
 define("L_ERR_USR_26", "Samo administratori i moderatori mogu da koriste ".$COLORNAME." boje!<br />Nemojte da pokušate da koristite ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." ili ".COLOR_CM1.".<br />One su rezervisane za moćne morisnike.!");
 define("L_ERR_USR_27", "Nemožete privatno da govorite sami sa sobom.\\nČinite to u svom umu, molim...\\nSada, odaberite drugo ime.");
 define("L_ERR_USR_28", "Vaš pristup %s je ograničen!<br />Molimo vas da odaberete drugu sobu."); // room name
+define("L_ERR_USR_29", "Unesite vaš rođendan!<br />Nekompletni podaci neće biti prihvaćeni."); //rev.49
 define("L_ERR_ROM_1", "Ime sobe nemože da sadrži zapete i kose crte. (\\).");
 define("L_ERR_ROM_2", "Pronađena zabranjena reš u imenu sobe koju želite da kreirate.");
 define("L_ERR_ROM_3", "Ova soba već postoji kao javna soba.");
@@ -308,7 +311,7 @@ define("L_WHOIS_BOT", "Bot");
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "%s ulazi u ovu sobu.");
 define("L_EXIT_ROM", "%s izlazi iz ove sobe.");
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND != "") define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
@@ -452,7 +455,7 @@ define("COL_ERROR_BOX_USRM", "Treba da ste moderator da bi koristili ".COLOR_CM.
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "Dobro došli na naš čet. Molimo vas da poštujete bon-ton dok četujete: <I>pokušajte da budete prijatni i ljubazni</I>.");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND != "") define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
@@ -507,10 +510,10 @@ define("L_LINKS_3", "da bi otvorili vezu");
 define("L_LINKS_4", "da bi otvorili autorov sajt");
 define("L_LINKS_5", "da umetnete smeška");
 define("L_LINKS_6", "da kontaktirate");
-define("L_LINKS_7", "da posetite phpMyChat sajt");
-define("L_LINKS_8", "da se pridužite phpMyChat Grupi");
+define("L_LINKS_7", "da posetite %s sajt");
+define("L_LINKS_8", "da se pridužite %s Grupi");
 define("L_LINKS_9", "da pošaljete vašu povratnu informaciju");
-define("L_LINKS_10", "da prevučete phpMyChat Plus");
+define("L_LINKS_10", "da prevučete %s");
 define("L_LINKS_11", "da proverite ko četuje");
 define("L_LINKS_12", "da otvorite Chat Login Stranu");
 define("L_LINKS_13", "da svirate ovaj zvuk"); // can also be translated as "to play this sound"
@@ -638,6 +641,9 @@ define("L_PRIV_REPLY_LOGIN", "Prijavite se u ćaskanje akoželite da ".LOGIN_LIN
 define("L_LANG_AR", "argentinski španski");
 define("L_LANG_BG", "bugarski - latinica");
 define("L_LANG_BR", "brazilski portugalski");
+define("L_LANG_CA", "katalonski");
+define("L_LANG_CNS", "kineski (pojednostavljen)");
+define("L_LANG_CNT", "kineski (tradicionalan)");
 define("L_LANG_CZ", "češki");
 define("L_LANG_DA", "danski");
 define("L_LANG_DE", "nemački");
@@ -646,6 +652,7 @@ define("L_LANG_ENUK", "engleski UK"); // for UK formats and flags
 define("L_LANG_ENUS", "engleski US"); // for US formats and flags
 define("L_LANG_ES", "španski");
 define("L_LANG_FA", "perzijski (farsi)");
+define("L_LANG_FI", "finski");
 define("L_LANG_FR", "francuski");
 define("L_LANG_GR", "grčki");
 define("L_LANG_HE", "hebrejski");
@@ -655,16 +662,24 @@ define("L_LANG_ID", "indonezijski");
 define("L_LANG_IT", "talijanski");
 define("L_LANG_JA", "japanski (kanji)");
 define("L_LANG_KA", "gruzijski");
-define("L_LANG_NL", "holandski");
+define("L_LANG_NB", "norveški (bokmal)");
+define("L_LANG_NN", "norveški (najnorsk)");
 define("L_LANG_NE", "nepalski");
+define("L_LANG_NL", "holandski");
+define("L_LANG_PL", "poljski");
+define("L_LANG_PT", "portugalski");
 define("L_LANG_RO", "rumunski");
+define("L_LANG_RU", "ruski - ćirilica");
 define("L_LANG_SK", "slovački");
 define("L_LANG_SRL", "srpski - latinica");
 define("L_LANG_SRC", "srpski - ćirilica");
 define("L_LANG_SV", "švedski");
+define("L_LANG_TH", "tai");
 define("L_LANG_TR", "turski");
+define("L_LANG_UK", "ukrajinski - ćirilica");
 define("L_LANG_UR", "pakistanski urdu");
 define("L_LANG_VI", "vijetnamski");
+define("L_LANG_YO", "joruba");
 
 // Skins preview page
 define("L_SKINS_TITLE", "Pregled skinova");
@@ -728,6 +743,8 @@ define("L_DOB_TIT_1", "Lista Rođendana");
 $L_DOB_SUBJ = "Srećan Rođendan %s!";
 
 // MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
-define("L_EQUATION", "Equation");
-define("L_MATH", "%s posted by %s"); //e.g. "Equation posted by username" (defined above); the word "Equation" will render as a url to show popup with the posted formulas
+define("L_EQUATION", "Jednačina");
+define("L_MATH", "%s postavio %s"); //e.g. "Equation posted by username" (defined above); the word "Equation" will render as a url to show popup with the posted formulas
+define("L_LINKS_20", "Poslate jednačine"); //Click here to open Posted Equations
+define("L_HELP_CMD_37", "Dozvoljava slanje i postavljanje <i><b>MathJax</b> jednačina i formula</i> u četu.<br />Upotreba: Postavite  TeX or MathML (originalan) kod! Npr. <b>/math&nbsp;\sqrt{3x-1}+(1+x)^2</b><br />Otiđite da vidite više primera koda na: <a href=\"http://www.mathjax.org/demos/\" target=\"_blank\">http://www.mathjax.org/demos</a>. Preuzmite kod tako što kliknete na desno dugme miša na formulama.<br />NAPOMENA: upišite /math pa razmak pa kod u kutiji.");
 ?>

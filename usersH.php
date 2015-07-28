@@ -307,17 +307,18 @@ $DbLink = new DB;
 
 if (C_ENABLE_PM && C_PRIV_POPUP && !isset($allowpopupu))
 {
-#	$DbLink = new DB;
 	$DbLink->query("SELECT allowpopup FROM ".C_REG_TBL." WHERE username = '$U'");
 	if($DbLink->num_rows() != 0) list($allowpopupu) = $DbLink->next_record();
 	else $allowpopupu = 0;
 	$DbLink->clean_results();
 }
 
-// Gravatars initialization
-unset($email);
-unset($use_gravatar);
-unset($avatar);
+// GeoIP mode for country flags
+if(C_USE_FLAGS && ($statusu == "a" || $statusu == "t" || $statusu == "m" || C_SHOW_FLAGS))
+{
+	if (!class_exists("GeoIP")) include("plugins/countryflags/geoip.inc");
+	if(!isset($gi)) $gi = geoip_open("plugins/countryflags/GeoIP.dat",GEOIP_STANDARD);
+}
 
 // Restricted rooms mod by Ciprian
 $res_init = utf8_substr(L_RESTRICTED, 0, 1);
@@ -326,14 +327,14 @@ $res_init = utf8_substr(L_RESTRICTED, 0, 1);
 if (C_DB_TYPE == 'mysql')
 {
 // Modified next line by R Dickow for /away command:
-  $currentRoomQuery = 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar, reg.email, reg.use_gravatar '
+  $currentRoomQuery = 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, usr.ip, usr.country_code, usr.country_name, reg.gender, reg.allowpopup, reg.colorname, reg.avatar, reg.email, reg.use_gravatar '
 						. 'FROM ' . C_USR_TBL . ' usr LEFT JOIN ' . C_REG_TBL . ' reg ON usr.username = reg.username '
 						. 'WHERE usr.room = \'' . $R . '\'' . $Hide . ' '
 						. 'ORDER BY ' . $ordquery . '';
 }
 else if (C_DB_TYPE == 'pgsql')
 {
-	$currentRoomQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar, reg.email, reg.use_gravatar '
+	$currentRoomQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, usr.ip, usr.country_code, usr.country_name, reg.gender, reg.allowpopup, reg.colorname, reg.avatar, reg.email, reg.use_gravatar '
 						. 'FROM ' . C_USR_TBL . ' usr, ' . C_REG_TBL . ' reg '
 						. 'WHERE usr.room = \'' . $R . '\'' . $Hide . ' AND usr.username = reg.username '
 						. 'UNION '
@@ -344,7 +345,7 @@ else if (C_DB_TYPE == 'pgsql')
 }
 else
 {
-	$currentRoomQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar, reg.email, reg.use_gravatar NULL AS gender '
+	$currentRoomQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, usr.ip, usr.country_code, usr.country_name, reg.gender, reg.allowpopup, reg.colorname, reg.avatar, reg.email, reg.use_gravatar NULL AS gender '
 						. 'FROM ' . C_USR_TBL . ' usr, ' . C_REG_TBL . ' reg '
 						. 'WHERE usr.room = \'' . $R . '\'' . $Hide . ' '
 						. 'ORDER BY ' . $ordquery . '';
@@ -356,8 +357,8 @@ $DbLink->query($currentRoomQuery);
 $tmpDispR = $R;
 if (is_array($DefaultDispChatRooms) && in_array($R." [R]",$DefaultDispChatRooms)) $tmpDispR .= " [".$res_init."]";
 
-echo("<B>".htmlspecialchars(stripslashes($tmpDispR))."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$DbLink->num_rows().")</SPAN>\n");
-while(list($User, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup, $colorname, $avatar, $email, $use_gravatar) = $DbLink->next_record())
+echo("<B>".htmlspecialchars(stripslashes($tmpDispR))."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$DbLink->num_rows().")</SPAN><br />\n");
+while(list($User, $Latin1, $status, $awaystat, $room_time, $IP, $COUNTRY_CODE, $COUNTRY_NAME, $gender, $allowpopup, $colorname, $avatar, $email, $use_gravatar) = $DbLink->next_record())
 {
 	echo("<DIV STYLE=\"margin-top: 1px\">\n");
 	$title1 = ($User == stripslashes($U) ? L_REG_4 : L_PROFILE);
@@ -387,7 +388,7 @@ while(list($User, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup,
 		elseif($gender == 3) $gender = 'couple';
 		else $gender = 'none';
 		// Avatar System Start: Inserted:
-    $avatar = "images/gender_".$gender.".gif";
+		$avatar = "images/gender_".$gender.".gif";
 		$ava_none = "images/gender_none.gif";
 		if ($gender != "couple") $ava_width = 14;
 		else $ava_width = 28;
@@ -433,11 +434,11 @@ while(list($User, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup,
 			else $local_avatar = 0;
 			require("plugins/gravatars/get_gravatar.php");
 		}
-    $avatar1 = $avatar;
-    $ava_none1 = $avatar1;
-    $ava_width1 = C_AVA_WIDTH;
-    $ava_height1 = C_AVA_HEIGHT;
-    $avatar2 = "images/gender_".$gender.".gif";
+		$avatar1 = $avatar;
+		$ava_none1 = $avatar1;
+		$ava_width1 = C_AVA_WIDTH;
+		$ava_height1 = C_AVA_HEIGHT;
+		$avatar2 = "images/gender_".$gender.".gif";
 		$ava_none2 = "images/gender_none.gif";
 		if ($gender != "couple") $ava_width2 = 14;
 		else $ava_width2 = 28;
@@ -447,18 +448,37 @@ while(list($User, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup,
 	}
 	else
 	{
-    $ava_width = "";
-    $ava_height = "";
+		$ava_width = "";
+		$ava_height = "";
 		$avatar = "";
 		$ava_none = "";
 	}
-// Avatar System End.
-  // add for /away command modification by R Dickow.
-  if ($awaystat == 1) {
+	// Avatar System End.
+
+	// GeoIP mode for country flags
+	if(C_USE_FLAGS && ($statusu == "a" || $statusu == "t" || $statusu == "m" || C_SHOW_FLAGS) && $User != C_BOT_NAME)
+	{
+		if(!isset($COUNTRY_CODE) || $COUNTRY_CODE == "")
+		{
+			$COUNTRY_CODE = geoip_country_code_by_addr($gi, ltrim($IP,"p"));
+			if (empty($COUNTRY_CODE))
+			{
+				$COUNTRY_CODE = "LAN";
+				$COUNTRY_NAME = "Other/LAN";
+			}
+			if ($COUNTRY_CODE != "LAN") $COUNTRY_NAME = $gi->GEOIP_COUNTRY_NAMES[$gi->GEOIP_COUNTRY_CODE_TO_NUMBER[$COUNTRY_CODE]];
+			if ($PROXY || substr($IP, 0, 1) == "p") $COUNTRY_NAME .= " (Proxy Server)";
+		};
+		$c_flag = "&nbsp;<img src=\"./plugins/countryflags/flags/".strtolower($COUNTRY_CODE).".gif\" alt=\"".$COUNTRY_NAME."\" title=\"".$COUNTRY_NAME."\" border=\"0\"><SPAN CLASS=\"small\">&nbsp;(".$COUNTRY_CODE.")</SPAN>";
+	}
+	// GeoIP country flags Mod End.
+
+	// add for /away command modification by R Dickow.
+	if ($awaystat == 1) {
   		$Usera = $User;
     	$User = "(".$User.")";
-  }
-  // end add for /away command
+	}
+	// end add for /away command
 	if ($status != "u" && $status != "k" && $status != "d" && $status != "b" && $awaystat == 0)
 	{
 		$Cmd2Send = ($User == stripslashes($U) ? "'profile',''" : "'whois','".special_char2(stripslashes($User),$Latin1)."'");
@@ -471,32 +491,32 @@ while(list($User, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup,
 	}
 	else
 	{
-// Avatar System Start.
-    if (C_USE_AVATARS && ($User == stripslashes($U)))
-    {
-			$script = " onClick=\"alert('".L_AVA_REG.".'); return false;\">&nbsp;<img src=";
-			echo(str_replace('>&nbsp;<img src=',$script,$ava_none));
-    }
-    else
-    {
-			echo($ava_none);
-    }
-// Avatar System End.
+		// Avatar System Start.
+		if (C_USE_AVATARS && ($User == stripslashes($U)))
+		{
+				$script = " onClick=\"alert('".L_AVA_REG.".'); return false;\">&nbsp;<img src=";
+				echo(str_replace('>&nbsp;<img src=',$script,$ava_none));
+		}
+		else
+		{
+				echo($ava_none);
+		}
+		// Avatar System End.
 	}
 	if($User != stripslashes($U))
 	{
-// R Dickow /away mod alteration:
-  if ($awaystat == 0) {
-//--------------------------Begin HighLight command by R.Worley
-		$Cmd2Send = ($User == stripslashes($U) ? "'high',''" : "'high','".special_char2($User,$Latin1)."'");
-				if (COLOR_NAMES)
-				{
-					echo("<a onClick=\"window.parent.userClick('".special_char2($User,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$User)." title='".L_USE_NAME." ($User)' onMouseOver=\"window.status='".L_USE_NAME." ($User)'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($User,$Latin1,$status)."</span></a>&nbsp;");
-				}
-				else
-				{
-					echo("<a onClick=\"window.parent.userClick('".special_char2($User,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$User)." title='".L_USE_NAME." ($User)' onMouseOver=\"window.status='".L_USE_NAME." ($User)'; return true\">".special_char($User,$Latin1,$status)."</a>&nbsp;");
-				}
+		// R Dickow /away mod alteration:
+		if ($awaystat == 0) {
+			//--------------------------Begin HighLight command by R.Worley
+			$Cmd2Send = ($User == stripslashes($U) ? "'high',''" : "'high','".special_char2($User,$Latin1)."'");
+			if (COLOR_NAMES)
+			{
+				echo("<a onClick=\"window.parent.userClick('".special_char2($User,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$User)." title='".L_USE_NAME." ($User)' onMouseOver=\"window.status='".L_USE_NAME." ($User)'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($User,$Latin1,$status)."</span></a>&nbsp;");
+			}
+			else
+			{
+				echo("<a onClick=\"window.parent.userClick('".special_char2($User,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$User)." title='".L_USE_NAME." ($User)' onMouseOver=\"window.status='".L_USE_NAME." ($User)'; return true\">".special_char($User,$Latin1,$status)."</a>&nbsp;");
+			}
 			//------------------------------Begin HighLight command by R.Worley
 			global $contents ;
 			$highpath = "botfb/" .$U ;
@@ -514,53 +534,55 @@ while(list($User, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup,
 			{
 				$highlight = "images/highlightOff.gif";
 			}
-			echo('<a onClick="window.parent.runCmd('.$Cmd2Send.'); return false;" title="'.L_HIGHLIGHT.'" onMouseOver="window.status=\''.L_HIGHLIGHT_SB.'.\'; return true"><img src="'.$highlight.'" border="0"></a><br />');
+			echo('<a onClick="window.parent.runCmd('.$Cmd2Send.'); return false;" title="'.L_HIGHLIGHT.'" onMouseOver="window.status=\''.L_HIGHLIGHT_SB.'.\'; return true"><img src="'.$highlight.'" border="0"></a>');
 			//-------------------------------End HighLight Mod
-  }
-  else
-  {
-		$Cmd2Send = ($User == stripslashes($U) ? "'high',''" : "'high','".special_char2($Usera,$Latin1)."'");
-				if (COLOR_NAMES)
-				{
-					echo("<a onClick=\"window.parent.userClick('".special_char2($Usera,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$Usera)." title='".L_USE_NAME." ($User)' onMouseOver=\"window.status='".L_USE_NAME." ($User)'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($User,$Latin1,$status)."</span></a>&nbsp;");
-				}
-				else
-				{
-					echo("<a onClick=\"window.parent.userClick('".special_char2($Usera,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$Usera)." title='".L_USE_NAME." ($User)' onMouseOver=\"window.status='".L_USE_NAME." ($User)'; return true\">".special_char($User,$Latin1,$status)."</a>&nbsp;");
-				}
-		//------------------------------Begin HighLight command by R.Worley
-		global $contents ;
-		$highpath = "botfb/" .$U ;
-		if (file_exists ($highpath))
-		{
-			$fd = fopen ($highpath, "rb");
-			$contents = fread ($fd, filesize ($highpath));
-			fclose ($fd);
-		}
-		if($contents == $Usera)
-		{
-			$highlight = "images/highlightOn.gif";
+			echo(isset($c_flag) ? $c_flag."<br />" : "<br />");
 		}
 		else
 		{
-			$highlight = "images/highlightOff.gif";
+			$Cmd2Send = ($User == stripslashes($U) ? "'high',''" : "'high','".special_char2($Usera,$Latin1)."'");
+			if (COLOR_NAMES)
+			{
+				echo("<a onClick=\"window.parent.userClick('".special_char2($Usera,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$Usera)." title='".L_USE_NAME." ($User)' onMouseOver=\"window.status='".L_USE_NAME." ($User)'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($User,$Latin1,$status)."</span></a>&nbsp;");
+			}
+			else
+			{
+				echo("<a onClick=\"window.parent.userClick('".special_char2($Usera,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$Usera)." title='".L_USE_NAME." ($User)' onMouseOver=\"window.status='".L_USE_NAME." ($User)'; return true\">".special_char($User,$Latin1,$status)."</a>&nbsp;");
+			}
+			//------------------------------Begin HighLight command by R.Worley
+			global $contents ;
+			$highpath = "botfb/" .$U ;
+			if (file_exists ($highpath))
+			{
+				$fd = fopen ($highpath, "rb");
+				$contents = fread ($fd, filesize ($highpath));
+				fclose ($fd);
+			}
+			if($contents == $Usera)
+			{
+				$highlight = "images/highlightOn.gif";
+			}
+			else
+			{
+				$highlight = "images/highlightOff.gif";
+			}
+			echo('<a onClick="window.parent.runCmd('.$Cmd2Send.'); return false;" title="'.L_HIGHLIGHT.'" onMouseOver="window.status=\''.L_HIGHLIGHT_SB.'.\'; return true"><img src="'.$highlight.'" border="0"></a>');
+			//---------------------------End HighLight Mod
+			echo(isset($c_flag) ? $c_flag."<br />" : "<br />");
 		}
-		echo('<a onClick="window.parent.runCmd('.$Cmd2Send.'); return false;" title="'.L_HIGHLIGHT.'" onMouseOver="window.status=\''.L_HIGHLIGHT_SB.'.\'; return true"><img src="'.$highlight.'" border="0"></a><br />');
-		//---------------------------End HighLight Mod
-  }
-// end /away mod alteration.
+		// end /away mod alteration.
 	}
 	else
 	{
 		$Cmd2Send = ($User != stripslashes($U) ? "'high',''" : "'high','".special_char2($User,$Latin1)."'");
-				if (COLOR_NAMES)
-				{
-					echo("<a onClick=\"window.parent.userClick('".special_char2($User,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$User)." title='".L_USE_NAME." ($User)' onMouseOver=\"window.status='".L_USE_NAME." ($User)'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($User,$Latin1,$status)."</span></a>&nbsp;");
-				}
-				else
-				{
-					echo("<a onClick=\"window.parent.userClick('".special_char2($User,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$User)." title='".L_USE_NAME." ($User)' onMouseOver=\"window.status='".L_USE_NAME." ($User)'; return true\">".special_char($User,$Latin1,$status)."</a>&nbsp;");
-				}
+		if (COLOR_NAMES)
+		{
+			echo("<a onClick=\"window.parent.userClick('".special_char2($User,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$User)." title='".L_USE_NAME." ($User)' onMouseOver=\"window.status='".L_USE_NAME." ($User)'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($User,$Latin1,$status)."</span></a>&nbsp;");
+		}
+		else
+		{
+			echo("<a onClick=\"window.parent.userClick('".special_char2($User,$Latin1)."',false,'".special_char2($U,$Latin1)."');\" ".userClass($status,$User)." title='".L_USE_NAME." ($User)' onMouseOver=\"window.status='".L_USE_NAME." ($User)'; return true\">".special_char($User,$Latin1,$status)."</a>&nbsp;");
+		}
 		//------------------------------Begin HighLight command by R.Worley
 		global $contents ;
 		$highpath = "botfb/" .$U ;
@@ -578,17 +600,24 @@ while(list($User, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup,
 		{
 			$highlight = "images/highlightOff.gif";
 		}
-		echo('<a onClick="window.parent.runCmd('.$Cmd2Send.'); return false;" title="'.L_HIGHLIGHT.'" onMouseOver="window.status=\''.L_HIGHLIGHT_SB.'.\'; return true"><img src="'.$highlight.'" border="0"></a><br />');
+		echo('<a onClick="window.parent.runCmd('.$Cmd2Send.'); return false;" title="'.L_HIGHLIGHT.'" onMouseOver="window.status=\''.L_HIGHLIGHT_SB.'.\'; return true"><img src="'.$highlight.'" border="0"></a>');
 		//-------------------------------End HighLight Mod
+		echo(isset($c_flag) ? $c_flag."<br />" : "<br />");
 	}
-echo("\n</DIV>\n");
+	echo("\n</DIV>\n");
+
+	// Gravatars initialization
+	unset($email);
+	unset($use_gravatar);
+	unset($avatar);
+	// GeoIP Country flags initialization
+	unset($IP);
+	unset($COUNTRY_CODE);
+	unset($COUNTRY_NAME);
+	unset($c_flag);
 }
 $DbLink->clean_results();
 
-// Gravatars initialization
-unset($email);
-unset($use_gravatar);
-unset($avatar);
 //** Build users list for other rooms **
 $AddPwd2Link = (isset($PWD_Hash) && $PWD_Hash != "") ? "&PWD_Hash=$PWD_Hash" : "";
 $DbLink->query("SELECT DISTINCT room FROM ".C_MSG_TBL." WHERE room != '$R' AND type = 1 ORDER BY room");
@@ -601,14 +630,14 @@ if($DbLink->num_rows() > 0)
 	{
 		if (C_DB_TYPE == 'mysql')
 		{
-			$otherRoomsQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar, reg.email, reg.use_gravatar '
+			$otherRoomsQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, usr.ip, usr.country_code, usr.country_name, reg.gender, reg.allowpopup, reg.colorname, reg.avatar, reg.email, reg.use_gravatar '
 								. 'FROM ' . C_USR_TBL . ' usr LEFT JOIN ' . C_REG_TBL . ' reg ON usr.username = reg.username '
 								. 'WHERE usr.room = \'' . addslashes($Other) . '\'' . $Hide . ' '
 								. 'ORDER BY ' . $ordquery . '';
 		}
 		else if (C_DB_TYPE == 'pgsql')
 		{
-			$otherRoomsQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar, reg.email, reg.use_gravatar '
+			$otherRoomsQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, usr.ip, usr.country_code, usr.country_name, reg.gender, reg.allowpopup, reg.colorname, reg.avatar, reg.email, reg.use_gravatar '
 								. 'FROM ' . C_USR_TBL . ' usr, ' . C_REG_TBL . ' reg '
 								. 'WHERE usr.room = \'' . addslashes($Other) . '\'' . $Hide . ' AND usr.username = reg.username '
 								. 'UNION '
@@ -619,7 +648,7 @@ if($DbLink->num_rows() > 0)
 		}
 		else
 		{
-			$otherRoomsQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, reg.gender, reg.allowpopup, reg.colorname, reg.avatar, reg.email, reg.use_gravatar NULL AS gender '
+			$otherRoomsQuery	= 'SELECT usr.username, usr.latin1, usr.status, usr.awaystat, usr.r_time, usr.ip, usr.country_code, usr.country_name, reg.gender, reg.allowpopup, reg.colorname, reg.avatar, reg.email, reg.use_gravatar NULL AS gender '
 								. 'FROM ' . C_USR_TBL . ' usr, ' . C_REG_TBL . ' reg '
 								. 'WHERE usr.room = \'' . addslashes($Other) . '\'' . $Hide . ' '
 								. 'ORDER BY ' . $ordquery . '';
@@ -649,205 +678,239 @@ if($DbLink->num_rows() > 0)
 			echo("</DIV>\n");
 			echo("<DIV ID=\"Child${id}\" CLASS=\"child\" style=\"margin-top: 1px;\">\n");
 			$j = 0;
-			while(list($OtherUser, $Latin1, $status, $awaystat, $room_time, $gender, $allowpopup, $colorname, $avatar, $email, $use_gravatar) = $OthersUsers->next_record())
+			while(list($OtherUser, $Latin1, $status, $awaystat, $room_time, $IP, $COUNTRY_CODE, $COUNTRY_NAME, $gender, $allowpopup, $colorname, $avatar, $email, $use_gravatar) = $OthersUsers->next_record())
 			{
-			echo("<DIV style=\"margin-top: 1px; margin-left: 12px\">\n");
+				echo("<DIV style=\"margin-top: 1px; margin-left: 12px\">\n");
 				$j++;
-	if (C_USE_AVATARS && !C_DISP_GENDER)
-	{
-		// Avatar System Start: Inserted:
-	    if (empty($avatar)) $avatar = C_AVA_RELPATH . C_DEF_AVATAR;
-		// Gravatar mod added by Ciprian
-		if (ALLOW_GRAVATARS == 2 || (ALLOW_GRAVATARS == 1 && (!isset($use_gravatar) || $use_gravatar)))
-		{
-#			if (eregi(C_AVA_RELPATH, $avatar)) $local_avatar = 1;
-			if (stripos($avatar,C_AVA_RELPATH) !== false) $local_avatar = 1;
-			else $local_avatar = 0;
-			require("plugins/gravatars/get_gravatar.php");
-		}
-    $ava_none = $avatar;
-    $ava_width = C_AVA_WIDTH;
-    $ava_height = C_AVA_HEIGHT;
-		$avatar = "<img src=\"$avatar\" width=\"$ava_width\" height=\"$ava_height\" border=\"0\" alt=\"".L_PROFILE."\" title=\"".L_PROFILE."\">";
-		$ava_none = "<img src=\"$ava_none\" width=\"$ava_width\" height=\"$ava_height\" border=\"0\" alt=\"".L_NO_PROFILE."\" title=\"".L_NO_PROFILE."\">";
-	}
-	elseif (!C_USE_AVATARS && C_DISP_GENDER)
-	{
-		// Put an icon when there is a profile for the user
-		if($gender == 0) $gender = 'undefined';
-		elseif($gender == 1) $gender = 'boy';
-		elseif($gender == 2) $gender = 'girl';
-		elseif($gender == 3) $gender = 'couple';
-		else $gender = 'none';
-		// Avatar System Start: Inserted:
-    $avatar = "images/gender_".$gender.".gif";
-		$ava_none = "images/gender_none.gif";
-		if ($gender != "couple") $ava_width = 14;
-		else $ava_width = 28;
-		$ava_height = 14;
-		$avatar = "<img src=\"$avatar\" width=\"$ava_width\" height=\"$ava_height\" border=\"0\" alt=\"".L_PROFILE."\" title=\"".L_PROFILE."\">";
-		$ava_none = "<img src=\"$ava_none\" width=\"$ava_width\" height=\"$ava_height\" border=\"0\" alt=\"".L_NO_PROFILE."\" title=\"".L_NO_PROFILE."\">";
-	}
-	elseif (C_USE_AVATARS && C_DISP_GENDER)
-	{
-		// Put an icon when there is a profile for the user
-		if($gender == 0)
-		{
-			$gender = 'undefined';
-			$title2 = L_REG_43;
-		}
-		elseif($gender == 1)
-		{
-			$gender = 'boy';
-			$title2 = L_REG_46;
-		}
-		elseif($gender == 2)
-		{
-			$gender = 'girl';
-			$title2 = L_REG_47;
-		}
-		elseif($gender == 3)
-		{
-			$gender = 'couple';
-			$title2 = L_REG_44;
-		}
-		else
-		{
-			$gender = 'none';
-			$title2 = L_REG_48;
-		}
-		// Avatar System Start: Inserted:
-	    if (empty($avatar)) $avatar = C_AVA_RELPATH . C_DEF_AVATAR;
-		// Gravatar mod added by Ciprian
-		if (ALLOW_GRAVATARS == 2 || (ALLOW_GRAVATARS == 1 && (!isset($use_gravatar) || $use_gravatar)))
-		{
-#			if (eregi(C_AVA_RELPATH, $avatar)) $local_avatar = 1;
-			if (stripos($avatar,C_AVA_RELPATH) !== false) $local_avatar = 1;
-			else $local_avatar = 0;
-		 	require("plugins/gravatars/get_gravatar.php");
-		}
-    $avatar1 = $avatar;
-    $ava_none1 = $avatar1;
-    $ava_width1 = C_AVA_WIDTH;
-    $ava_height1 = C_AVA_HEIGHT;
-    $avatar2 = "images/gender_".$gender.".gif";
-		$ava_none2 = "images/gender_none.gif";
-		if ($gender != "couple") $ava_width2 = 14;
-		else $ava_width2 = 28;
-		$ava_height2 = 14;
-		$avatar = "<img src=\"$avatar1\" width=\"$ava_width1\" height=\"$ava_height1\" border=\"0\" alt=\"".L_PROFILE."\" title=\"".L_PROFILE."\">&nbsp;<img src=\"$avatar2\" width=\"$ava_width2\" height=\"$ava_height2\" border=\"0\" alt=\"".$title2."\" title=\"".$title2."\">";
-		$ava_none = "<img src=\"$ava_none1\" width=\"$ava_width1\" height=\"$ava_height1\" border=\"0\" alt=\"".L_NO_PROFILE."\" title=\"".L_NO_PROFILE."\">&nbsp;<img src=\"$ava_none2\" width=\"$ava_width2\" height=\"$ava_height2\" border=\"0\" alt=\"".L_NO_PROFILE."\" title=\"".L_NO_PROFILE."\">";
-	}
-	else
-	{
-    $ava_width = "";
-    $ava_height = "";
-		$avatar = "";
-		$ava_none = "";
-	}
-// Avatar System End.
-  // add for /away command modification by R Dickow.
-  if ($awaystat == 1) {
-  		$OtherUsera = $OtherUser;
-    	$OtherUser = "(".$OtherUser.")";
-  }
-  // end add for /away command
-	if ($awaystat == 0) {
-				if ($status != "u" && $status != "k" && $status != "d" && $status != "b")
+				if (C_USE_AVATARS && !C_DISP_GENDER)
 				{
-					echo('<a onClick="window.parent.runCmd(\'whois\',\''.special_char2($OtherUser,$Latin1).'\'); return false;" onMouseOver="window.status=\''.L_PROFILE.'\'; return true;" title="'.L_PROFILE.'">'.$avatar.'</a>&nbsp;');
+					// Avatar System Start: Inserted:
+					if (empty($avatar)) $avatar = C_AVA_RELPATH . C_DEF_AVATAR;
+					// Gravatar mod added by Ciprian
+					if (ALLOW_GRAVATARS == 2 || (ALLOW_GRAVATARS == 1 && (!isset($use_gravatar) || $use_gravatar)))
+					{
+#						if (eregi(C_AVA_RELPATH, $avatar)) $local_avatar = 1;
+						if (stripos($avatar,C_AVA_RELPATH) !== false) $local_avatar = 1;
+						else $local_avatar = 0;
+						require("plugins/gravatars/get_gravatar.php");
+					}
+					$ava_none = $avatar;
+					$ava_width = C_AVA_WIDTH;
+					$ava_height = C_AVA_HEIGHT;
+					$avatar = "<img src=\"$avatar\" width=\"$ava_width\" height=\"$ava_height\" border=\"0\" alt=\"".L_PROFILE."\" title=\"".L_PROFILE."\">";
+					$ava_none = "<img src=\"$ava_none\" width=\"$ava_width\" height=\"$ava_height\" border=\"0\" alt=\"".L_NO_PROFILE."\" title=\"".L_NO_PROFILE."\">";
+				}
+				elseif (!C_USE_AVATARS && C_DISP_GENDER)
+				{
+					// Put an icon when there is a profile for the user
+					if($gender == 0) $gender = 'undefined';
+					elseif($gender == 1) $gender = 'boy';
+					elseif($gender == 2) $gender = 'girl';
+					elseif($gender == 3) $gender = 'couple';
+					else $gender = 'none';
+					// Avatar System Start: Inserted:
+					$avatar = "images/gender_".$gender.".gif";
+					$ava_none = "images/gender_none.gif";
+					if ($gender != "couple") $ava_width = 14;
+					else $ava_width = 28;
+					$ava_height = 14;
+					$avatar = "<img src=\"$avatar\" width=\"$ava_width\" height=\"$ava_height\" border=\"0\" alt=\"".L_PROFILE."\" title=\"".L_PROFILE."\">";
+					$ava_none = "<img src=\"$ava_none\" width=\"$ava_width\" height=\"$ava_height\" border=\"0\" alt=\"".L_NO_PROFILE."\" title=\"".L_NO_PROFILE."\">";
+				}
+				elseif (C_USE_AVATARS && C_DISP_GENDER)
+				{
+					// Put an icon when there is a profile for the user
+					if($gender == 0)
+					{
+						$gender = 'undefined';
+						$title2 = L_REG_43;
+					}
+					elseif($gender == 1)
+					{
+						$gender = 'boy';
+						$title2 = L_REG_46;
+					}
+					elseif($gender == 2)
+					{
+						$gender = 'girl';
+						$title2 = L_REG_47;
+					}
+					elseif($gender == 3)
+					{
+						$gender = 'couple';
+						$title2 = L_REG_44;
+					}
+					else
+					{
+						$gender = 'none';
+						$title2 = L_REG_48;
+					}
+					// Avatar System Start: Inserted:
+					if (empty($avatar)) $avatar = C_AVA_RELPATH . C_DEF_AVATAR;
+					// Gravatar mod added by Ciprian
+					if (ALLOW_GRAVATARS == 2 || (ALLOW_GRAVATARS == 1 && (!isset($use_gravatar) || $use_gravatar)))
+					{
+#						if (eregi(C_AVA_RELPATH, $avatar)) $local_avatar = 1;
+						if (stripos($avatar,C_AVA_RELPATH) !== false) $local_avatar = 1;
+						else $local_avatar = 0;
+						require("plugins/gravatars/get_gravatar.php");
+					}
+					$avatar1 = $avatar;
+					$ava_none1 = $avatar1;
+					$ava_width1 = C_AVA_WIDTH;
+					$ava_height1 = C_AVA_HEIGHT;
+					$avatar2 = "images/gender_".$gender.".gif";
+					$ava_none2 = "images/gender_none.gif";
+					if ($gender != "couple") $ava_width2 = 14;
+					else $ava_width2 = 28;
+					$ava_height2 = 14;
+					$avatar = "<img src=\"$avatar1\" width=\"$ava_width1\" height=\"$ava_height1\" border=\"0\" alt=\"".L_PROFILE."\" title=\"".L_PROFILE."\">&nbsp;<img src=\"$avatar2\" width=\"$ava_width2\" height=\"$ava_height2\" border=\"0\" alt=\"".$title2."\" title=\"".$title2."\">";
+					$ava_none = "<img src=\"$ava_none1\" width=\"$ava_width1\" height=\"$ava_height1\" border=\"0\" alt=\"".L_NO_PROFILE."\" title=\"".L_NO_PROFILE."\">&nbsp;<img src=\"$ava_none2\" width=\"$ava_width2\" height=\"$ava_height2\" border=\"0\" alt=\"".L_NO_PROFILE."\" title=\"".L_NO_PROFILE."\">";
 				}
 				else
 				{
-					echo($ava_none.'&nbsp;');
+					$ava_width = "";
+					$ava_height = "";
+					$avatar = "";
+					$ava_none = "";
 				}
-  		if (C_ENABLE_PM && C_PRIV_POPUP && ($allowpopupu || $statusu == "u"))
-			{
-				if (COLOR_NAMES)
+				// Avatar System End.
+
+				// GeoIP mode for country flags
+				if(C_USE_FLAGS && ($statusu == "a" || $statusu == "t" || $statusu == "m" || C_SHOW_FLAGS) && $OtherUser != C_BOT_NAME)
 				{
-					echo("<a onClick=\"window.parent.send_popup('/wisp ".special_char2($OtherUser,$Latin1)."');\" ".userClass($status,$OtherUser)." title='".L_WHSP."' onMouseOver=\"window.status='".L_SEND_WHSP."'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a><br />\n");
+					if(!isset($COUNTRY_CODE) || $COUNTRY_CODE == "")
+					{
+						$COUNTRY_CODE = geoip_country_code_by_addr($gi, ltrim($IP,"p"));
+						if (empty($COUNTRY_CODE))
+						{
+							$COUNTRY_CODE = "LAN";
+							$COUNTRY_NAME = "Other/LAN";
+						}
+						if ($COUNTRY_CODE != "LAN") $COUNTRY_NAME = $gi->GEOIP_COUNTRY_NAMES[$gi->GEOIP_COUNTRY_CODE_TO_NUMBER[$COUNTRY_CODE]];
+						if ($PROXY || substr($IP, 0, 1) == "p") $COUNTRY_NAME .= " (Proxy Server)";
+					};
+					$c_flag = "&nbsp;<img src=\"./plugins/countryflags/flags/".strtolower($COUNTRY_CODE).".gif\" alt=\"".$COUNTRY_NAME."\" title=\"".$COUNTRY_NAME."\" border=\"0\"><SPAN CLASS=\"small\">&nbsp;(".$COUNTRY_CODE.")</SPAN>";
+				}
+				// GeoIP country flags Mod End.
+
+				// add for /away command modification by R Dickow.
+				if ($awaystat == 1) {
+					$OtherUsera = $OtherUser;
+					$OtherUser = "(".$OtherUser.")";
+				}
+				// end add for /away command
+				if ($awaystat == 0)
+				{
+					if ($status != "u" && $status != "k" && $status != "d" && $status != "b")
+					{
+						echo('<a onClick="window.parent.runCmd(\'whois\',\''.special_char2($OtherUser,$Latin1).'\'); return false;" onMouseOver="window.status=\''.L_PROFILE.'\'; return true;" title="'.L_PROFILE.'">'.$avatar.'</a>&nbsp;');
+					}
+					else
+					{
+						echo($ava_none.'&nbsp;');
+					}
+					if (C_ENABLE_PM && C_PRIV_POPUP && ($allowpopupu || $statusu == "u"))
+					{
+						if (COLOR_NAMES)
+						{
+							echo("<a onClick=\"window.parent.send_popup('/wisp ".special_char2($OtherUser,$Latin1)."');\" ".userClass($status,$OtherUser)." title='".L_WHSP."' onMouseOver=\"window.status='".L_SEND_WHSP."'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a>".(isset($c_flag) ? $c_flag : "")."<br />\n");
+						}
+						else
+						{
+							echo("<a onClick=\"window.parent.send_popup('/wisp ".special_char2($OtherUser,$Latin1)."');\" ".userClass($status,$OtherUser)." title='".L_WHSP."' onMouseOver=\"window.status='".L_SEND_WHSP."'; return true\">".special_char($OtherUser,$Latin1,$status)."</a>".(isset($c_flag) ? $c_flag : "")."<br />\n");
+						}
+					}
+					elseif (C_ENABLE_PM)
+					{
+						if (COLOR_NAMES)
+						{
+							echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUser,$Latin1)."',true);\" ".userClass($status,$OtherUser)." title='".L_WHSP."' onMouseOver=\"window.status='".L_SEND_WHSP."'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a>".(isset($c_flag) ? $c_flag : "")."<br />\n");
+						}
+						else
+						{
+							echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUser,$Latin1)."',true);\" ".userClass($status,$OtherUser)." title='".L_WHSP."' onMouseOver=\"window.status='".L_SEND_WHSP."'; return true\">".special_char($OtherUser,$Latin1,$status)."</a>".(isset($c_flag) ? $c_flag : "")."<br />\n");
+						}
+					}
+					else
+					{
+						if (COLOR_NAMES)
+						{
+							echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUser,$Latin1)."',false);\" ".userClass($status,$OtherUser)." title='".L_USE_NAME." ($OtherUser)' onMouseOver=\"window.status='".L_USE_NAME." ($OtherUser)'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a>".(isset($c_flag) ? $c_flag : "")."<br />\n");
+						}
+						else
+						{
+							echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUser,$Latin1)."',false);\" ".userClass($status,$OtherUser)." title='".L_USE_NAME." ($OtherUser)' onMouseOver=\"window.status='".L_USE_NAME." ($OtherUser)'; return true\">".special_char($OtherUser,$Latin1,$status)."</a>".(isset($c_flag) ? $c_flag : "")."<br />\n");
+						}
+					}
 				}
 				else
 				{
-					echo("<a onClick=\"window.parent.send_popup('/wisp ".special_char2($OtherUser,$Latin1)."');\" ".userClass($status,$OtherUser)." title='".L_WHSP."' onMouseOver=\"window.status='".L_SEND_WHSP."'; return true\">".special_char($OtherUser,$Latin1,$status)."</a><br />\n");
+					if ($status != "u" && $status != "k" && $status != "d" && $status != "b")
+					{
+						echo('<a onClick="window.parent.runCmd(\'whois\',\''.special_char2($OtherUsera,$Latin1).'\'); return false;" onMouseOver="window.status=\''.L_PROFILE.'\'; return true;" title="'.L_PROFILE.'">'.$avatar.'</a>&nbsp;');
+					}
+					else
+					{
+						echo($ava_none.'&nbsp;');
+					}
+					if (C_ENABLE_PM && (C_PRIV_POPUP && ($allowpopupu || $statusu == "u")))
+					{
+						if (COLOR_NAMES)
+						{
+							echo("<a onClick=\"window.parent.send_popup('/wisp ".special_char2($OtherUsera,$Latin1)."');\" ".userClass($status,$OtherUsera)." title='".L_WHSP."' onMouseOver=\"window.status='".L_SEND_WHSP."'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a>".(isset($c_flag) ? $c_flag : "")."<br />\n");
+						}
+						else
+						{
+							echo("<a onClick=\"window.parent.send_popup('/wisp ".special_char2($OtherUsera,$Latin1)."');\" ".userClass($status,$OtherUsera)." title='".L_WHSP."' onMouseOver=\"window.status='".L_SEND_WHSP."'; return true\">".special_char($OtherUser,$Latin1,$status)."</a>".(isset($c_flag) ? $c_flag : "")."<br />\n");
+						}
+					}
+					elseif (C_ENABLE_PM)
+					{
+						if (COLOR_NAMES)
+						{
+							echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUsera,$Latin1)."',true);\" ".userClass($status,$OtherUsera)." title='".L_WHSP."' onMouseOver=\"window.status='".L_SEND_WHSP."'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a>".(isset($c_flag) ? $c_flag : "")."<br />\n");
+						}
+						else
+						{
+							echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUsera,$Latin1)."',true);\" ".userClass($status,$OtherUsera)." title='".L_WHSP."' onMouseOver=\"window.status='".L_SEND_WHSP."'; return true\">".special_char($OtherUser,$Latin1,$status)."</a>".(isset($c_flag) ? $c_flag : "")."<br />\n");
+						}
+					}
+					else
+					{
+						if (COLOR_NAMES)
+						{
+							echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUsera,$Latin1)."',false);\" ".userClass($status,$OtherUsera)." title='".L_USE_NAME." ($OtherUser)' onMouseOver=\"window.status='".L_USE_NAME." ($OtherUser)'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a>".(isset($c_flag) ? $c_flag : "")."<br />\n");
+						}
+						else
+						{
+							echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUsera,$Latin1)."',false);\" ".userClass($status,$OtherUsera)." title='".L_USE_NAME." ($OtherUser)' onMouseOver=\"window.status='".L_USE_NAME." ($OtherUser)'; return true\">".special_char($OtherUser,$Latin1,$status)."</a>".(isset($c_flag) ? $c_flag : "")."<br />\n");
+						}
+					}
 				}
+				echo("</DIV>\n");
+
+				// Gravatars initialization
+				unset($email);
+				unset($use_gravatar);
+				unset($avatar);
+				// GeoIP Country flags initialization
+				unset($IP);
+				unset($COUNTRY_CODE);
+				unset($COUNTRY_NAME);
+				unset($c_flag);
 			}
-			elseif (C_ENABLE_PM)
-			{
-				if (COLOR_NAMES)
-				{
-					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUser,$Latin1)."',true);\" ".userClass($status,$OtherUser)." title='".L_WHSP."' onMouseOver=\"window.status='".L_SEND_WHSP."'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a><br />\n");
-				}
-				else
-				{
-					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUser,$Latin1)."',true);\" ".userClass($status,$OtherUser)." title='".L_WHSP."' onMouseOver=\"window.status='".L_SEND_WHSP."'; return true\">".special_char($OtherUser,$Latin1,$status)."</a><br />\n");
-				}
-			}
-			else
-			{
-				if (COLOR_NAMES)
-				{
-					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUser,$Latin1)."',false);\" ".userClass($status,$OtherUser)." title='".L_USE_NAME." ($OtherUser)' onMouseOver=\"window.status='".L_USE_NAME." ($OtherUser)'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a><br />\n");
-				}
-				else
-				{
-					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUser,$Latin1)."',false);\" ".userClass($status,$OtherUser)." title='".L_USE_NAME." ($OtherUser)' onMouseOver=\"window.status='".L_USE_NAME." ($OtherUser)'; return true\">".special_char($OtherUser,$Latin1,$status)."</a><br />\n");
-				}
-			}
-		}
-	else
-	{
-				if ($status != "u" && $status != "k" && $status != "d" && $status != "b")
-				{
-					echo('<a onClick="window.parent.runCmd(\'whois\',\''.special_char2($OtherUsera,$Latin1).'\'); return false;" onMouseOver="window.status=\''.L_PROFILE.'\'; return true;" title="'.L_PROFILE.'">'.$avatar.'</a>&nbsp;');
-				}
-				else
-				{
-					echo($ava_none.'&nbsp;');
-				}
-  			if (C_ENABLE_PM && (C_PRIV_POPUP && ($allowpopupu || $statusu == "u")))
-			{
-				if (COLOR_NAMES)
-				{
-					echo("<a onClick=\"window.parent.send_popup('/wisp ".special_char2($OtherUsera,$Latin1)."');\" ".userClass($status,$OtherUsera)." title='".L_WHSP."' onMouseOver=\"window.status='".L_SEND_WHSP."'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a><br />\n");
-				}
-				else
-				{
-					echo("<a onClick=\"window.parent.send_popup('/wisp ".special_char2($OtherUsera,$Latin1)."');\" ".userClass($status,$OtherUsera)." title='".L_WHSP."' onMouseOver=\"window.status='".L_SEND_WHSP."'; return true\">".special_char($OtherUser,$Latin1,$status)."</a><br />\n");
-				}
-			}
-			elseif (C_ENABLE_PM)
-			{
-				if (COLOR_NAMES)
-				{
-					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUsera,$Latin1)."',true);\" ".userClass($status,$OtherUsera)." title='".L_WHSP."' onMouseOver=\"window.status='".L_SEND_WHSP."'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a><br />\n");
-				}
-				else
-				{
-					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUsera,$Latin1)."',true);\" ".userClass($status,$OtherUsera)." title='".L_WHSP."' onMouseOver=\"window.status='".L_SEND_WHSP."'; return true\">".special_char($OtherUser,$Latin1,$status)."</a><br />\n");
-				}
-			}
-			else
-			{
-				if (COLOR_NAMES)
-				{
-					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUsera,$Latin1)."',false);\" ".userClass($status,$OtherUsera)." title='".L_USE_NAME." ($OtherUser)' onMouseOver=\"window.status='".L_USE_NAME." ($OtherUser)'; return true\"><span style=color:".userColor($status,$colorname).";>".special_char($OtherUser,$Latin1,$status)."</span></a><br />\n");
-				}
-				else
-				{
-					echo("<a onClick=\"window.parent.userClick2('".special_char2($OtherUsera,$Latin1)."',false);\" ".userClass($status,$OtherUsera)." title='".L_USE_NAME." ($OtherUser)' onMouseOver=\"window.status='".L_USE_NAME." ($OtherUser)'; return true\">".special_char($OtherUser,$Latin1,$status)."</a><br />\n");
-				}
-			}
-		}
-			echo("</DIV>\n");
-	}
 			echo("</DIV>\n");
 			$ChildNb[$id] = $j;
 		}
 		$OthersUsers->clean_results();
 	}
 	$OthersUsers->close();
-}
+};
+// GeoIP mode for country flags
+if(isset($gi) && $gi != "") geoip_close($gi);
+if(isset($gi6) && $gi6 != "") geoip_close($gi6);
+
 $DbLink->clean_results();
 
 // Display all rest default rooms
@@ -896,24 +959,15 @@ if (C_CHAT_LOGS && (C_SHOW_LOGS_USR || $statusu == "a" || $statusu == "t"))
 <?php
 if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $statusu == "a" || $statusu == "t"))
 {
-/*	$handler = @mysql_connect(C_DB_HOST,C_DB_USER,C_DB_PASS);
-	@@mysql_query("SET CHARACTER SET utf8");
-	@mysql_query("SET NAMES 'utf8'");
-	@mysql_select_db(C_DB_NAME,$handler);
-	$delete = @mysql_query("DELETE FROM ".C_LRK_TBL." WHERE time<'$closetime'",$handler);
-	$result = @mysql_query("SELECT DISTINCT ip,browser,username FROM ".C_LRK_TBL.$Hide1."",$handler);
-	$online_users = @mysql_numrows($result);
-	@mysql_close();
-*/
+	//Timeout to delete Lurkers in Seconds after they left the page
 	$timeout = 15;
-	$closetime = time() - $timeout;
 	// Ghost Control mod by Ciprian
 	$Hide1 = "";
 	$online_users = 0;
 	if (C_HIDE_ADMINS) $Hide1 .= ($Hide1 == "") ? " WHERE status != 'a' AND status != 't'" : " AND status != 'a' AND status != 't'";
 	if (C_HIDE_MODERS) $Hide1 .= ($Hide1 == "") ? " WHERE status != 'm'" : " AND status != 'm'";
 	if (C_SPECIAL_GHOSTS != "") $Hide1 .= ($Hide1 == "") ?  " WHERE username != ".C_SPECIAL_GHOSTS."" : " AND username != ".C_SPECIAL_GHOSTS."";
-	$DbLink->query("DELETE FROM ".C_LRK_TBL." WHERE time<'".$closetime."'");
+	$DbLink->query("DELETE FROM ".C_LRK_TBL." WHERE time<'".(time() - $timeout)."'");
 	$DbLink->query("SELECT DISTINCT ip,browser,username FROM ".C_LRK_TBL.$Hide1);
 	$online_users = $DbLink->num_rows();
 	$lurklink = "<li><a href=\"lurking.php?L=".$L."&D=".$D."\" CLASS=\"ChatLink\" TARGET=\"_blank\" onMouseOver=\"window.status='".L_LURKING_1.".'; return true;\" title='".L_LURKING_2."'>";

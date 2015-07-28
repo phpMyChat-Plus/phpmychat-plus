@@ -89,6 +89,17 @@ if (!function_exists('mb_convert_case'))
 	}
 };
 
+/**
+ * Check Internet Connection.
+ * 
+ * @param string $sCheckHost Default: www.google.com
+ * @return boolean
+ */
+function check_internet_connection($sCheckHost = 'www.google.com') 
+{
+    return (bool) @fsockopen($sCheckHost, 80, $iErrno, $sErrStr, 2);
+}
+
 $DbLink = new DB;
 
 // ** Updates user info in connected users tables and fix some security issues **
@@ -127,7 +138,7 @@ if ($DbLink->num_rows() != 0)
 	$DbLink->clean_results();
 	$kicked = 0;
 	// Security issue
-	include("./lib/get_IP.lib.php");
+	require("./lib/get_IP.lib.php");
 	if ($knownIp != $IP)
 	{
 		$kicked = 5;

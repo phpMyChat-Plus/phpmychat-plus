@@ -149,8 +149,8 @@ $DbLink = new DB;
 	{
 		$power = "weak";
 	};
-$DbLink->query("SELECT latin1,firstname,lastname,country,website,email,showemail,perms,rooms,ip,gender,picture,description,favlink,favlink1,slang,colorname,avatar,reg_time,last_login,login_counter,use_gravatar,birthday,show_bday,show_age FROM ".C_REG_TBL." WHERE username='$User' LIMIT 1");
-list($Latin1,$firstname,$lastname,$country,$website,$email,$showemail,$perms,$rooms,$ip,$gender,$picture,$description,$favlink,$favlink1,$slang,$colorname,$avatar,$reg_time,$last_login,$login_counter,$use_gravatar,$birthday,$show_bday,$show_age) = $DbLink->next_record();
+$DbLink->query("SELECT latin1,firstname,lastname,country,website,email,showemail,perms,rooms,ip,gender,picture,description,favlink,favlink1,slang,colorname,avatar,reg_time,last_login,login_counter,use_gravatar,birthday,show_bday,show_age,country_code,country_name FROM ".C_REG_TBL." WHERE username='$User' LIMIT 1");
+list($Latin1,$firstname,$lastname,$country,$website,$email,$showemail,$perms,$rooms,$ip,$gender,$picture,$description,$favlink,$favlink1,$slang,$colorname,$avatar,$reg_time,$last_login,$login_counter,$use_gravatar,$birthday,$show_bday,$show_age,$COUNTRY_CODE,$COUNTRY_NAME) = $DbLink->next_record();
 if($birthday && $birthday != "" && $birthday != "0000-00-00") $my_dobtime = strtotime($birthday);
 else $my_dobtime = 0;
 $DbLink->clean_results();
@@ -505,31 +505,87 @@ if ($login_counter && C_LOGIN_COUNTER)
 	</TR>
 <?php
 }
-	$last_login = ($User == C_BOT_NAME ? $last_login : $reg_time);
-	$longdtformat1 = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e")."<sup>".date('S',$last_login)."</sup> of"), L_LONG_DATETIME) : L_LONG_DATETIME);
-	$last_visit = strftime($longdtformat1,$last_login);
+	$longdtformat1 = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e")."<sup>".date('S',$reg_time + C_TMZ_OFFSET*60*60)."</sup> of"), L_LONG_DATETIME) : L_LONG_DATETIME);
+	$member_since = strftime($longdtformat1,$reg_time + C_TMZ_OFFSET*60*60);
 	if(stristr(PHP_OS,'win'))
 	{
-		$last_visit = utf_conv(WIN_DEFAULT,$Charset,$last_visit);
-		if(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) $last_visit = str_replace(" ","",$last_visit);
+		$member_since = utf_conv(WIN_DEFAULT,$Charset,$member_since);
+		if(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) $member_since = str_replace(" ","",$member_since);
 	}
+?>
+	<TR>
+		<TD CLASS="whois" nowrap="nowrap"><?php echo(L_REG_6); ?>: </TD>
+		<TD CLASS="whois" nowrap="nowrap"><?php echo($member_since); ?></TD>
+	</TR>
+<?php
+	if ($last_login > $reg_time)
+	{
+		$longdtformat2 = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e")."<sup>".date('S',$last_login + C_TMZ_OFFSET*60*60)."</sup> of"), L_LONG_DATETIME) : L_LONG_DATETIME);
+		$last_visit = strftime($longdtformat2,$last_login + C_TMZ_OFFSET*60*60);
+		if(stristr(PHP_OS,'win'))
+		{
+			$last_visit = utf_conv(WIN_DEFAULT,$Charset,$last_visit);
+			if(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) $last_visit = str_replace(" ","",$last_visit);
+		}
+	}
+	elseif ($last_login < $reg_time && $last_login)
+	{
+		$longdtformat3 = ($L == "english" ? str_replace("%d of", ((stristr(PHP_OS,'win') ? "%#d" : "%e")."<sup>".date('S',$reg_time + C_TMZ_OFFSET*60*60)."</sup> of"), L_LONG_DATETIME) : L_LONG_DATETIME);
+		$last_visit = strftime($longdtformat3,$reg_time + C_TMZ_OFFSET*60*60);
+		if(stristr(PHP_OS,'win'))
+		{
+			$last_visit = utf_conv(WIN_DEFAULT,$Charset,$last_visit);
+			if(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) $last_visit = str_replace(" ","",$last_visit);
+		}
+	}
+	else $last_visit = L_REG_51;
+
+	// GeoIP mode for country flags
+	if(C_USE_FLAGS && ($power != "weak" || C_SHOW_FLAGS) && $email != 'bot@bot.com' && $email != 'quote@quote.com')
+	{
+		if(!isset($COUNTRY_CODE) || $COUNTRY_CODE == "")
+		{
+			// GeoIP mode for country flags
+			if (!class_exists("GeoIP")) include("plugins/countryflags/geoip.inc");
+			if(!isset($gi)) $gi = geoip_open("plugins/countryflags/GeoIP.dat",GEOIP_STANDARD);
+			$COUNTRY_CODE = geoip_country_code_by_addr($gi, ltrim($ip,"p"));
+			if (empty($COUNTRY_CODE))
+			{
+				$COUNTRY_CODE = "LAN";
+				$COUNTRY_NAME = "Other/LAN";
+			}
+			if ($COUNTRY_CODE != "LAN") $COUNTRY_NAME = $gi->GEOIP_COUNTRY_NAMES[$gi->GEOIP_COUNTRY_CODE_TO_NUMBER[$COUNTRY_CODE]];
+			if ($PROXY || substr($ip, 0, 1) == "p") $COUNTRY_NAME .= " (Proxy Server)";
+			if(isset($gi) && $gi != "") geoip_close($gi);
+			if(isset($gi6) && $gi6 != "") geoip_close($gi6);
+		}
+		$c_flag = "<img src=\"./plugins/countryflags/flags/".strtolower($COUNTRY_CODE).".gif\" alt=\"".$COUNTRY_NAME."\" title=\"".$COUNTRY_NAME."\" border=\"0\">&nbsp;".$COUNTRY_NAME."&nbsp;(".$COUNTRY_CODE.")";
+	};
 ?>
 	<TR>
 		<TD CLASS="whois" nowrap="nowrap"><?php echo(A_SHEET1_11); ?>: </TD>
 		<TD CLASS="whois" nowrap="nowrap"><?php echo($last_visit); ?></TD>
 	</TR>
-
 <?php
-if ($power != "weak" && ($email != 'bot@bot.com' && $email != 'quote@quote.com'))
+if ($power != "weak" && $email != 'bot@bot.com' && $email != 'quote@quote.com')
 {
 	if (substr($ip, 0, 1) == "p") $ip = substr($ip, 1)." (proxy)";
 	?>
 	<TR>
-		<TD CLASS="whois" nowrap="nowrap">IP: </TD>
+		<TD CLASS="whois" nowrap="nowrap"><?php echo(A_SHEET2_2); ?>: </TD>
 		<TD CLASS="whois" nowrap="nowrap"><?php echo($ip); ?></TD>
 	</TR>
 	<?php
 };
+if(isset($c_flag))
+{
+?>
+	<TR>
+		<TD CLASS="whois" nowrap="nowrap"><?php echo(L_REG_52); ?>: </TD>
+		<TD CLASS="whois" nowrap="nowrap"><?php echo($c_flag); ?></TD>
+	</TR>
+<?php
+}
 ?>
 </TABLE>
 <br />

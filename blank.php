@@ -12,7 +12,7 @@ header("Content-Type: text/html; charset=${Charset}");
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 <HEAD>
 	<TITLE>Blank title</TITLE>
-<HEAD>
+</HEAD>
 <BODY>
 	<!-- Not a blank document ;) -->
 </BODY>

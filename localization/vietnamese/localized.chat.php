@@ -310,7 +310,7 @@ define("L_WHOIS_BOT", "Bot");
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "%s vào phòng này.");
 define("L_EXIT_ROM", "%s thóat ra khỏi phòng.");
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND != "") define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
@@ -452,7 +452,7 @@ define("COL_ERROR_BOX_USRM", "Bạn phải là mod để sử dụng".COLOR_CM."
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "Chảo mừng bạn đến chat. Hãy lịch sự trong khi tán gẫu: <I>bạn sẽ xả giao tốt hơn trong cuộc sống</I>.");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND != "") define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
@@ -498,10 +498,10 @@ define("L_LINKS_3", "mở liên kết");
 define("L_LINKS_4", "để mở tác giả");
 define("L_LINKS_5", "chèn vào mặt cười");
 define("L_LINKS_6", "tới sự tiếp xúc");
-define("L_LINKS_7", "để thăm phpMyChat trang chủ");
-define("L_LINKS_8", "để nối nhóm phpMyChat");
+define("L_LINKS_7", "để thăm %s trang chủ");
+define("L_LINKS_8", "để nối nhóm %s");
 define("L_LINKS_9", "để gửi sự phản hồi của các bạn");
-define("L_LINKS_10", "để tải xuống phpMyChat-Plus");
+define("L_LINKS_10", "để tải xuống %s");
 define("L_LINKS_11", "để kiểm tra người đang tán gẫu");
 define("L_LINKS_12", "để mở Trang Đăng nhập Chuyện gẫu");
 define("L_LINKS_13", "gửi tiếng buzz"); // Click to blablabla : it can also be translated as "to play this sound", if buzz has no translation.

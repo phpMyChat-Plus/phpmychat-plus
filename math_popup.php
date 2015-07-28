@@ -13,8 +13,19 @@ if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) exit();
 #if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 if (preg_match("/SELECT|UNION|INSERT|UPDATE/i",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 
+/**
+ * Check Internet Connection.
+ * 
+ * @param string $sCheckHost Default: www.google.com
+ * @return boolean
+ */
+function check_internet_connection($sCheckHost = 'www.google.com') 
+{
+    return (bool) @fsockopen($sCheckHost, 80, $iErrno, $sErrStr, 2);
+}
+
 require("./${ChatPath}config/config.lib.php");
-if(C_ALLOW_MATH && C_SRC_MATH != "")
+if(C_ALLOW_MATH && C_SRC_MATH != "" && check_internet_connection())
 {
 require("./${ChatPath}localization/languages.lib.php");
 require("./${ChatPath}localization/".$L."/localized.chat.php");
@@ -196,7 +207,7 @@ else
 </head>
 
 <body class="frame">
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><center><font size="+2"><b>You don't have access to this file.<br />MathJax plugin feature has been disabled<br />Press <a href=./>here</a> to go to the index page or just wait...</b><font>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><center><font size="+2"><b>You don't have access to this file.<br />MathJax plugin feature has been disabled or the internet connection is down.<br />Press <a href=./>here</a> to go to the index page or just wait...</b><font>
 <br /><br /><br /><br />Hacking attempt! Redirection to the index page in 5 seconds.</center>
 <meta http-equiv="refresh" content="5; url=./">
 </body>

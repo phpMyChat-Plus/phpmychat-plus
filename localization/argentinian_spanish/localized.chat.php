@@ -87,7 +87,7 @@ define("L_REG_32", "WEB");
 define("L_REG_33", "mostrar públicamente tu e-mail");
 define("L_REG_34", "Editando datos del usuario");
 define("L_REG_35", "Administración");
-define("L_REG_36", "Idiomas posibles");
+define("L_REG_36", "Ubicación/País");
 define("L_REG_37", "Los campos con un <span class=\"error\">*</span> necesariamente deben ser completados.");
 define("L_REG_39", "El salón en el que te encontrabas ha sido removido por el administrador.");
 define("L_REG_43", "Confidencial");
@@ -310,7 +310,7 @@ define("L_WHOIS_BOT", "Robot");
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "%s ingresó a este salón.");
 define("L_EXIT_ROM", "%s salió de este salón.");
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND != "") define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
@@ -452,7 +452,7 @@ define("COL_ERROR_BOX_USRM", "Debes ser Moderador para usar el color ".COLOR_CM.
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "Bienvenido a nuestro chat! Por favor mientras chatees seguí las reglas de la red: <I>ser amable y correcto</I>.");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND != "") define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
@@ -506,10 +506,10 @@ define("L_LINKS_3", "para abrir link");
 define("L_LINKS_4", "para abrir el sitio del autor");
 define("L_LINKS_5", "para insertar este emoticón");
 define("L_LINKS_6", "para contactar a");
-define("L_LINKS_7", "para visitar phpMyChat Homepage");
-define("L_LINKS_8", "para unirte a phpMyChat Group");
+define("L_LINKS_7", "para visitar %s Homepage");
+define("L_LINKS_8", "para unirte a %s Group");
 define("L_LINKS_9", "para enviar tus comentarios");
-define("L_LINKS_10", "para descargar phpMyChat Plus");
+define("L_LINKS_10", "para descargar %s");
 define("L_LINKS_11", "para ver quién esta chateando");
 define("L_LINKS_12", "para abrir la página de logueo");
 define("L_LINKS_13", "para enviar este zumbido"); // Click to blablabla : it can also be translated as "to play this sound", if buzz has no translation.

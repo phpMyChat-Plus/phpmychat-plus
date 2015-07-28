@@ -86,7 +86,7 @@ function user_status($name,$stat)
 	elseif ($stat == 't') $newname .= (C_ITALICIZE_POWERS) ? "</td><td nowrap=\"nowrap\">".L_WHOIS_TOPMOD."</td>" : "</td><td nowrap=\"nowrap\">".L_WHOIS_REG."</td>";
 	elseif ($stat == 'm') $newname .= (C_ITALICIZE_POWERS) ? "</td><td nowrap=\"nowrap\">".L_WHOIS_MODER."</td>" : "</td><td nowrap=\"nowrap\">".L_WHOIS_REG."</td>";
 	elseif ($stat == 'r') $newname .= "</td><td nowrap=\"nowrap\">".L_WHOIS_REG."</td>";
-	elseif ($name == C_BOT_NAME) $newname .= "</td><td nowrap=\"nowrap\">".L_WHOIS_BOT."</td>";
+#	elseif ($name == C_BOT_NAME) $newname .= "</td><td nowrap=\"nowrap\">".L_WHOIS_BOT."</td>";
 	else $newname .= "</td><td nowrap=\"nowrap\">".L_WHOIS_GUEST."</td>";
 	return $newname;
 }
@@ -104,7 +104,7 @@ function user_status($name,$stat)
 <CENTER>
 <TABLE BORDER=1 CELLSPACING=0 CELLPADDING=0 CLASS="table">
 <TR>
-	<TD ALIGN=CENTER colspan=<?php echo($DisplayUsers ? "4" : "3"); ?>>
+	<TD ALIGN=CENTER colspan=<?php echo($DisplayUsers ? "5" : "5"); ?>>
 		<?php
 		// Restricted room mod by Ciprian
 		$res_init = utf8_substr(L_RESTRICTED, 0, 1);
@@ -116,7 +116,7 @@ function user_status($name,$stat)
 </TR>
 </TABLE>
 <?php
-	if($disp_note) echo("<table WIDTH=100%><tr valign=top><td colspan=".($DisplayUsers ? "4" : "3")." align=left CLASS=small>[".$res_init."] = ".L_RESTRICTED."</td></tr></table>");
+	if($disp_note) echo("<table WIDTH=100%><tr valign=top><td colspan=".($DisplayUsers ? "5" : "4")." align=left CLASS=small>[".$res_init."] = ".L_RESTRICTED."</td></tr></table>");
 ?>
 </CENTER>
 </BODY>

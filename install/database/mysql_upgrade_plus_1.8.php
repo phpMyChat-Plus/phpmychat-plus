@@ -2,7 +2,9 @@
 mysql_query("
 ALTER TABLE ".$t_ban_users."
 			ADD reason varchar(100) NOT NULL default '',
-			CHANGE ip ip varchar(30) NOT NULL default '';
+			CHANGE ip ip varchar(30) NOT NULL default '',
+			ADD country_code varchar(3) NOT NULL default '',
+			ADD country_name varchar(100) NOT NULL default '';
 
 ALTER TABLE ".$t_config."
 			CHANGE GRAVATARS_DYNAMIC_DEF GRAVATARS_DYNAMIC_DEF enum('mm','identicon','monsterid','wavatar','retro') default 'monsterid',
@@ -110,7 +112,9 @@ ALTER TABLE ".$t_config."
 			ADD ALLOW_TEXT_COLORS enum('0','1') NOT NULL default '1',
 			ADD TAGS_POWERS set('b','i','u') default NULL,
 			ADD ALLOW_MATH enum('0','1') NOT NULL default '0',
-			ADD SRC_MATH varchar(255) NOT NULL default 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+			ADD SRC_MATH varchar(255) NOT NULL default 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML',
+			ADD USE_FLAGS enum('0','1') NOT NULL default '1',
+			ADD SHOW_FLAGS enum('0','1') NOT NULL default '1';
 
 UPDATE ".$t_config." SET
 			ENTRANCE_SOUND = 'sounds/chimeup.wav',
@@ -153,7 +157,9 @@ UPDATE ".$t_config." SET
 ALTER TABLE ".$t_lurkers."
 			ADD username varchar(30) NOT NULL default '',
 			ADD status varchar(1) NOT NULL default '',
-			CHANGE ip ip varchar(30) NOT NULL default '';
+			CHANGE ip ip varchar(30) NOT NULL default '',
+			ADD country_code varchar(3) NOT NULL default '',
+			ADD country_name varchar(100) NOT NULL default '';
 
 ALTER TABLE ".$t_messages."
 			CHANGE pm_read pm_read VARCHAR(19) NOT NULL default '';
@@ -173,61 +179,70 @@ ALTER TABLE ".$t_reg_users."
 			ADD show_bday enum('0','1') NOT NULL default '1',
 			ADD show_age enum('0','1') NOT NULL default '1',
 			ADD bday_email_sent int(11) NOT NULL default '0',
+			CHANGE ip ip varchar(30) NOT NULL default '',
+			ADD country_code varchar(3) NOT NULL default '',
+			ADD country_name varchar(100) NOT NULL default '',
+			ADD use_sounds enum('0','1') NOT NULL default '1',
 			ADD PRIMARY KEY (cid),
-			ADD UNIQUE KEY username (username),
-			CHANGE ip ip varchar(30) NOT NULL default '';
+			ADD UNIQUE KEY username (username);
 
 UPDATE ".$t_reg_users." SET
 			latin1='0',
 			password='3901e4a6c3d27909afef4c22f8337da8',
 			perms='topmod',
 			IP = '-No tracking IP-',
-			description = 'I am a Robot originally called <a href=http://www.alicebot.org/documentation/ target=_blank>Alice</a>.  I am proud to be the first Artificial Intelligence on the net! Please test my capabilities as you wish! To start a public conversation with me just type \"hello myname\" in the room I am active in, to stop the conversation type \"bye myname\" or \"myname> bye\". But we can also talk in private - just click on my name whenever you need a shoulder to cry on :p Ohhh... I wish to express my gratitude to Roy, Popeye and <a href=http://www.ciprianmp.com/plus/ target=_blank>Ciprian</a>  for making me available for chatting in here. :)',
+			description = 'I am a Robot originally called <a href=http://www.alicebot.org/documentation/ target=_blank>Alice</a>. I am proud to be the first Artificial Intelligence on the net! Please test my capabilities as you wish! To start a public conversation with me just type \"hello myname\" in the room I am active in, to stop the conversation type \"bye myname\" or \"myname> bye\". But we can also talk in private - just click on my name whenever you need a shoulder to cry on :p Ohhh... I wish to express my gratitude to Roy, Popeye and <a href=http://www.ciprianmp.com/plus/ target=_blank>Ciprian</a> for making me available for chatting in here. :)',
 			email = 'bot@bot.com',
 			slang = 'English, German',
 			favlink = 'http://www.alicebot.org/documentation/',
 			favlink1 = 'http://sourceforge.net/forum/?group_id=43190',
-			avatar = 'images/avatars/bot_avatar.gif'
+			avatar = 'images/avatars/bot_avatar.gif',
+			use_sounds = '0'
 	WHERE email='bot@bot.bot.com';
 
-INSERT INTO ".$t_reg_users." VALUES ('', '', 'Random_Quote', '0', 'ef93e0948b007826a1a7a49a17b72a59', 'Random Quote', 'phpMyChat - Plus', 'WorldWideWeb', '', 'quote@quote.com', '0', 'topmod', '', 1130763311, '-No tracking IP-', '1', '0', 'images/avatars/avatar56.gif', 'I am a virtual user, added here to post random quotes at my admin’s will. Ohhh... I wish to express my gratitude to <a href=http://www.ciprianmp.com/plus/ target=_blank>Ciprian</a> for making me available for enlighting you in here. :)', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', 'English (any actually)', 'limegreen', 'images/avatars/quote_avatar.gif', '0', '', '', '', '', '', '', '', '', '');
+INSERT INTO ".$t_reg_users." VALUES ('', '', 'Random_Quote', '0', 'ef93e0948b007826a1a7a49a17b72a59', 'Random Quote', 'phpMyChat - Plus', 'WorldWideWeb', '', 'quote@quote.com', '0', 'topmod', '', 1130763311, '-No tracking IP-', '1', '0', 'images/avatars/avatar56.gif', 'I am a virtual user, added here to post random quotes at my admin’s will. Ohhh... I wish to express my gratitude to <a href=http://www.ciprianmp.com/plus/ target=_blank>Ciprian</a> for making me available for enlighting you in here. :)', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', 'English (any actually)', 'limegreen', 'images/avatars/quote_avatar.gif', '0', '', '', '', '', '', '', '', '', '', '0');
 
 UPDATE ".$t_reg_users." SET latin1='0' WHERE latin1='1';
 
 CREATE TABLE IF NOT EXISTS ".$t_stats." (
-  stat_date date NOT NULL,
-  room varchar(30) DEFAULT NULL,
-  username varchar(30) DEFAULT NULL,
-  reguser enum('0','1') NOT NULL DEFAULT '0',
-  last_in int(11) NOT NULL DEFAULT '0',
-  seconds_in int(11) NOT NULL DEFAULT '0',
-  longest_in int(11) NOT NULL DEFAULT '0',
-  last_away int(11) NOT NULL DEFAULT '0',
-  seconds_away int(11) NOT NULL DEFAULT '0',
-  longest_away int(11) NOT NULL DEFAULT '0',
-  times_away tinyint(4) NOT NULL DEFAULT '0',
-  logins smallint(5) NOT NULL DEFAULT '0',
-  posts_sent smallint(5) NOT NULL DEFAULT '0',
-  pms_sent smallint(5) NOT NULL DEFAULT '0',
-  cmds_used smallint(5) NOT NULL DEFAULT '0',
-  profile_viewed smallint(5) NOT NULL DEFAULT '0',
-  profiles_checked smallint(5) NOT NULL DEFAULT '0',
-  imgs_posted smallint(5) NOT NULL DEFAULT '0',
-  urls_posted smallint(5) NOT NULL DEFAULT '0',
-  emails_posted smallint(5) NOT NULL DEFAULT '0',
-  swears_posted smallint(5) NOT NULL DEFAULT '0',
-  smilies_posted smallint(5) NOT NULL DEFAULT '0',
-  bans_rcvd tinyint(4) NOT NULL DEFAULT '0',
-  bans_sent tinyint(4) NOT NULL DEFAULT '0',
-  kicks_rcvd tinyint(4) NOT NULL DEFAULT '0',
-  kicks_sent tinyint(4) NOT NULL DEFAULT '0',
-  vids_posted smallint(5) NOT NULL DEFAULT '0',
-  maths_posted smallint(5) NOT NULL DEFAULT '0'
+ stat_date date NOT NULL,
+ room varchar(30) DEFAULT NULL,
+ username varchar(30) DEFAULT NULL,
+ reguser enum('0','1') NOT NULL DEFAULT '0',
+ last_in int(11) NOT NULL DEFAULT '0',
+ seconds_in int(11) NOT NULL DEFAULT '0',
+ longest_in int(11) NOT NULL DEFAULT '0',
+ last_away int(11) NOT NULL DEFAULT '0',
+ seconds_away int(11) NOT NULL DEFAULT '0',
+ longest_away int(11) NOT NULL DEFAULT '0',
+ times_away tinyint(4) NOT NULL DEFAULT '0',
+ logins smallint(5) NOT NULL DEFAULT '0',
+ posts_sent smallint(5) NOT NULL DEFAULT '0',
+ pms_sent smallint(5) NOT NULL DEFAULT '0',
+ cmds_used smallint(5) NOT NULL DEFAULT '0',
+ profile_viewed smallint(5) NOT NULL DEFAULT '0',
+ profiles_checked smallint(5) NOT NULL DEFAULT '0',
+ imgs_posted smallint(5) NOT NULL DEFAULT '0',
+ urls_posted smallint(5) NOT NULL DEFAULT '0',
+ emails_posted smallint(5) NOT NULL DEFAULT '0',
+ swears_posted smallint(5) NOT NULL DEFAULT '0',
+ smilies_posted smallint(5) NOT NULL DEFAULT '0',
+ bans_rcvd tinyint(4) NOT NULL DEFAULT '0',
+ bans_sent tinyint(4) NOT NULL DEFAULT '0',
+ kicks_rcvd tinyint(4) NOT NULL DEFAULT '0',
+ kicks_sent tinyint(4) NOT NULL DEFAULT '0',
+ vids_posted smallint(5) NOT NULL DEFAULT '0',
+ maths_posted smallint(5) NOT NULL DEFAULT '0',
+ ip varchar(30) NOT NULL default '',
+ country_code varchar(3) NOT NULL default '',
+ country_name varchar(100) NOT NULL default ''
 ) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 ALTER TABLE ".$t_users."
 			ADD email varchar(64) NOT NULL default '',
-			CHANGE ip ip varchar(30) NOT NULL default '';
+			CHANGE ip ip varchar(30) NOT NULL default '',
+			ADD country_code varchar(3) NOT NULL default '',
+			ADD country_name varchar(100) NOT NULL default '';
 
 UPDATE ".$t_users." u LEFT JOIN ".$t_reg_users." r
 			ON u.username = r.username

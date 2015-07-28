@@ -266,15 +266,15 @@ INPUT, SELECT, TEXTAREA
 
 .quote
 {
-	border: thin ridge <?php echo($QUOTE_COLOR); ?>;
+	<?php echo(isset($QUOTE_COLOR) && $QUOTE_COLOR != "" ? "border: thin ridge ".$QUOTE_COLOR.";" : ""); ?>;
 	background: <?php echo($COLOR_BK); ?>;
 	color: <?php echo(COLOR_CD); ?>;
 	text-align: justify;
 	font-size: <?php echo($medium); ?>pt;
 	font-weight: 400;
-  border: solid;
-  border-color: <?php echo(COLOR_CD); ?>;
-  border-width: 1pt;
+	border: solid;
+	border-color: <?php echo(COLOR_CD); ?>;
+	border-width: 1pt;
 }
 
 .menu

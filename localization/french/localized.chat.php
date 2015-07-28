@@ -309,7 +309,7 @@ define("L_WHOIS_BOT", "Robot");
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "%s entre dans ce salon.");
 define("L_EXIT_ROM", "%s sort de ce salon.");
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND != "") define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
@@ -451,7 +451,7 @@ define("COL_ERROR_BOX_USRM", "Vous devez être modérateur pour utiliser le ".CO
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "Bienvenue sur notre chat. Merci de respecter l’Etiquette de ce chat: <I>essayez d’être aimable et poli</I>.");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND != "") define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
@@ -505,10 +505,10 @@ define("L_LINKS_3", "pour ouvrir le lien");
 define("L_LINKS_4", "pour aller sur le site de l’auteur");
 define("L_LINKS_5", "pour insérer ce smiley");
 define("L_LINKS_6", "pour contacter");
-define("L_LINKS_7", "pour visiter le site phpMyChat");
-define("L_LINKS_8", "pour vous joindre au Groupe phpMyChat");
-define("L_LINKS_9", "pour envoyer votre retour sur phpMyChat");
-define("L_LINKS_10", "pour télécharger phpMyChat Plus");
+define("L_LINKS_7", "pour visiter le site %s");
+define("L_LINKS_8", "pour vous joindre au Groupe %s");
+define("L_LINKS_9", "pour envoyer votre retour sur phpMyChat-Plus");
+define("L_LINKS_10", "pour télécharger %s");
 define("L_LINKS_11", "pour voir qui est présent actuellement sur le chat");
 define("L_LINKS_12", "pour aller à la page de connexion du Chat");
 define("L_LINKS_13", "pour jouer ce son"); // can also be translated as "to play this sound"

@@ -174,6 +174,16 @@ if (!function_exists('utf_conv'))
 		return $what;
 	};
 };
+/**
+ * Check Internet Connection.
+ * 
+ * @param string $sCheckHost Default: www.google.com
+ * @return boolean
+ */
+function check_internet_connection($sCheckHost = 'www.google.com') 
+{
+    return (bool) @fsockopen($sCheckHost, 80, $iErrno, $sErrStr, 2);
+};
 ?>
 </HEAD>
 

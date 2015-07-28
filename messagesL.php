@@ -20,6 +20,7 @@ if (C_USE_SMILIES) require("./lib/smilies.lib.php");
 
 // Size command by Ciprian
 if (isset($_COOKIE["CookieFontSize"])) $FontSize = $_COOKIE["CookieFontSize"];
+if (isset($_COOKIE["CookieBeep"])) $CookieBeep = $_COOKIE["CookieBeep"];
 
 // Special cache instructions for IE5+
 $CachePlus	= "";
@@ -156,13 +157,14 @@ if(C_EN_STATS)
 	if(C_USE_AVATARS) $DbAvatar = new DB;
 	if(COLOR_NAMES || C_ITALICIZE_POWERS) $DbColor = new DB;
 	$DbLink = new DB;
-	$DbLink->query("SELECT perms,rooms,allowpopup,join_room FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
+	$DbLink->query("SELECT perms,rooms,allowpopup,join_room,use_sounds FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	$reguser = ($DbLink->num_rows() != 0);
 	if ($reguser)
 	{
-		list($perms, $rooms, $allowpopupu, $join_room) = $DbLink->next_record();
+		list($perms, $rooms, $allowpopupu, $join_room, $USE_SOUNDS) = $DbLink->next_record();
 		$DbLink->clean_results();
 	}
+	elseif(!isset($USE_SOUNDS) || !$USE_SOUNDS) $USE_SOUNDS = isset($CookieBeep) ? $CookieBeep : 1;
 
 // Get IP address
 require("./lib/get_IP.lib.php");		// Set the $IP var
@@ -175,7 +177,7 @@ if (C_REQUIRE_REGISTER && (!isset($PWD_Hash) || $PWD_Hash == ''))
 }
 else if (isset($PWD_Hash) && $PWD_Hash != '')
 {
-	$DbLink->query(	'SELECT ' . C_USR_TBL . '.room, ' . C_USR_TBL . '.status, ' . C_USR_TBL . '.ip'
+	$DbLink->query(	'SELECT ' . C_USR_TBL . '.room, ' . C_USR_TBL . '.status, ' . C_USR_TBL . '.ip, ' . C_USR_TBL . '.country_code, ' . C_USR_TBL . '.country_name'
 					. ' FROM ' . C_USR_TBL . ', ' . C_REG_TBL
 					. ' WHERE ' . C_USR_TBL . '.username = \'' . $U . '\''
 					. ' AND ' . C_REG_TBL . '.username = \'' . $U . '\''
@@ -187,7 +189,7 @@ else // C_REQUIRE_REGISTER == 0 && $PWD_Hash is empty
 	$DbLink->query('SELECT username FROM ' . C_REG_TBL . ' WHERE username = \'' . $U . '\' LIMIT 1');
 	if ($DbLink->num_rows() == 0)
 	{
-		$DbLink->query('SELECT room, status, ip FROM ' . C_USR_TBL . ' WHERE username = \'' . $U . '\' LIMIT 1');
+		$DbLink->query('SELECT room, status, ip, country_code, country_name FROM ' . C_USR_TBL . ' WHERE username = \'' . $U . '\' LIMIT 1');
 	}
 	else
 	{
@@ -200,7 +202,7 @@ else // C_REQUIRE_REGISTER == 0 && $PWD_Hash is empty
 if($DbLink->num_rows() != 0)
 {
 	// There is a row for the user in the users table
-	list($room,$status,$knownIp) = $DbLink->next_record();
+	list($room,$status,$knownIp,$COUNTRY_CODE,$COUNTRY_NAME) = $DbLink->next_record();
 	$DbLink->clean_results();
 	$kicked = 0;
 	if ($room != stripslashes($R))	// Same nick in another room
@@ -270,11 +272,11 @@ if($DbLink->num_rows() != 0)
 else
 {
 	// User hasn't been found in the users table -> add a row if he is registered
-	$DbLink->query("SELECT perms,rooms,allowpopup,join_room FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
+	$DbLink->query("SELECT perms,rooms,allowpopup,join_room,use_sounds FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	$reguser = ($DbLink->num_rows() != 0);
 	if ($reguser)
 	{
-		list($perms, $rooms, $allowpopupu, $join_room) = $DbLink->next_record();
+		list($perms, $rooms, $allowpopupu, $join_room, $USE_SOUNDS) = $DbLink->next_record();
 		$DbLink->clean_results();
 	}
 	// Kick unreg users
@@ -307,7 +309,8 @@ else
 			default:
 				$status = "r";
 		};
-		$DbLink->query("INSERT INTO ".C_USR_TBL." VALUES ('$R', '$U', '$Latin1', ".time().", '$status', '$IP', '0', ".time().", '$email')");
+		if(!isset($USE_SOUNDS) || !$USE_SOUNDS) $USE_SOUNDS = isset($CookieBeep) ? $CookieBeep : 1;
+		$DbLink->query("INSERT INTO ".C_USR_TBL." VALUES ('$R', '$U', '$Latin1', ".time().", '$status', '$IP', '0', ".time().", '$email', '$COUNTRY_CODE', '$COUNTRY_NAME')");
 	}
 }
 
@@ -656,7 +659,7 @@ else
 			{
 				$Message = "<I>".ROOM_SAYS." <FONT class=\"notify\">".$Message."</FONT></FONT></I></td></tr></table>";
 				$noteclass = "notify2";
-      		}
+			}
 			elseif ($User == "SYS math")
 			{
 				$Equation = '<a onClick="window.parent.math_popup(); return false" title="'.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_20).'" onMouseOver="window.status=\''.sprintf(L_CLICKS,L_LINKS_15,L_LINKS_20).'.\'; return true" target="_blank">'.L_EQUATION.'</a>';
@@ -675,7 +678,7 @@ else
 				}
 				eval("\$Message = $Message;");
       		};
-			if ($User == "SYS enter" && strpos($Message,$U) !== false)
+			if ($User == "SYS enter" && (strpos($Message,$U) !== false || !$USE_SOUNDS))
 			{
 				$To_remove = strstr($Message, "<EMBED SRC=");
 				$Message = rtrim(str_ireplace($To_remove,"",$Message));
@@ -696,7 +699,7 @@ else
 		// Separator between messages sent before today and other ones
 		if (!isset($day_separator) && date("j", $Time +  C_TMZ_OFFSET*60*60) != $today)
 		{
-			$day_separator = "<table cellspacing=0 cellpading=0><tr class=\"msg\"><td colspan=6 width=\"1%\" nowrap=\"nowrap\" valign=\"top\"><SPAN CLASS=\"notify\" style=\"background-color:yellow;\">--------- ".($O == 0 ? L_TODAY_UP : L_TODAY_DWN)." ---------</SPAN></td></tr></table>";
+			$day_separator = "<table cellspacing=0 cellpading=0><tr class=\"msg\"><td colspan=6 width=\"1%\" nowrap=\"nowrap\" valign=\"top\"><SPAN CLASS=\"notify\" style=\"background-color:yellow;\">--------- ".(!$O ? L_TODAY_UP : L_TODAY_DWN)." ---------</SPAN></td></tr></table>";
 		};
 
 		if($O == 0) {

@@ -3,7 +3,7 @@
 // | class.upload.ro_RO.php                                                 |
 // +------------------------------------------------------------------------+
 // | Copyright (c) Cristian Datculescu 2007 & Ciprian Murariu 2008. All rights reserved.           |
-// | Version       0.28                                                     |
+// | Version       0.32                                                     |
 // | Email         cristian.datculescu@gmail.com                            |
 // | Last modified 25/09/2009                                               |
 // +------------------------------------------------------------------------+
@@ -29,7 +29,7 @@
 /**
  * Class upload romanian translation
  *
- * @version   0.28
+ * @version   0.32
  * @author Cristian Datculescu (cristian.datculescu@gmail.com) - v.0.25
  * @updater Ciprian Murariu (ciprianmp@yahoo.com) - added utf-8 & diacritics support
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License

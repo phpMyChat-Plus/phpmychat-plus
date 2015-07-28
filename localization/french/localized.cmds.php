@@ -22,6 +22,7 @@ define("L_CMD_INVITE", ""); // invite (send an invitation to the user to follow 
 define("L_CMD_JOIN", "joindre"); // join (join an existing room)
 define("L_CMD_KICK", "ejecter,éjecter"); // kick,boot (kick an user from a room)
 define("L_CMD_LTR", "gad,gàd,g2d"); // ltr (post a left-to-right text)
+define("L_CMD_MATH", ""); //math (post MathJax equations in chat)
 define("L_CMD_ME", "je"); // me (tell the room what you are doing)
 define("L_CMD_MR", "moi"); // mr (same as "me" but with the gender prefix)
 define("L_CMD_MSG", "priv"); // msg,to (send a private message)
@@ -40,6 +41,8 @@ define("L_CMD_SIZE", "taille"); // size (change/reset the size of the font in ch
 define("L_CMD_SORT", "tri"); // sort (sort - ascending the usernames in the lists, alphabetically or by the time they joined chat)
 define("L_CMD_TIMESTAMP", "horo,horodatage"); // timestamp (show/hide the timestamp in posts and server/worldtime in the status bar)
 define("L_CMD_TOPIC", "sujet"); // topic (set/change the topic)
+define("L_CMD_UTUBE", ""); // tube,utube,youtube (post an youtube video)
+define("L_CMD_VIDEO", ""); // vid,video,play (post a video)
 define("L_CMD_WISP", "murm,murmure"); //wisp,whisp (send a whisper / private message to an user in a different room)
 define("L_CMD_WHOIS", "qui,apropos"); // whois,about (shows the profile page of an user) 
 ?>

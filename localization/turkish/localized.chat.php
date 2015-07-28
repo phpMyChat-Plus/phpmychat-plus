@@ -308,7 +308,7 @@ define("L_WHOIS_BOT", "Robotumuz");
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "%s bu odaya girdi.");
 define("L_EXIT_ROM", "%s bu odadan çıktı.");
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND != "") define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
@@ -450,7 +450,7 @@ define("COL_ERROR_BOX_USRM", "" .COLOR_CM." rengini sadece yönetici kullanabili
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "Sohbetimize hoşgeldiniz. Lütfen sohbet ederken internet görgü kurallarına uyunuz: <I>nazik ve kibar olmaya çalışınız</I>.");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND != "") define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
@@ -504,10 +504,10 @@ define("L_LINKS_3", "Bağlantıyı açmak için");
 define("L_LINKS_4", "Yazarın sitesini açmak için");
 define("L_LINKS_5", "Bu duygu ifadesini eklemek için");
 define("L_LINKS_6", "Irtibata geçmek için");
-define("L_LINKS_7", "phpMyChat Ana Sayfasını ziyaret etmek için");
-define("L_LINKS_8", "phpMyChat Grubuna katılmak için");
+define("L_LINKS_7", "%s Ana Sayfasını ziyaret etmek için");
+define("L_LINKS_8", "%s Grubuna katılmak için");
 define("L_LINKS_9", "Düşüncelerinizi göndermek için");
-define("L_LINKS_10", "phpMyChat Plus indirmek için");
+define("L_LINKS_10", "%s indirmek için");
 define("L_LINKS_11", "Kimin sohbet ettiğini görmek için");
 define("L_LINKS_12", "Sohbet Giriş Sayfasını açmak için");
 define("L_LINKS_13", "Bu sesi çalmak için"); // Click to blablabla : it can also be translated as "to play this sound", if buzz has no translation.

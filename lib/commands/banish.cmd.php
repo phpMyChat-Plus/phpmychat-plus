@@ -111,14 +111,14 @@ else
 						// IP needs to be updated ?
 						if (substr($IP, 0, 1) == "p" && substr($Old_IP, 0, 1) != "p") $IP = $Old_IP;
 						// Update the table
-						$DbLink->query("UPDATE ".C_BAN_TBL." SET ip='$IP',rooms='$New_ban_rooms',ban_until='$Until',reason='$Reason' WHERE username='$UU'");
+						$DbLink->query("UPDATE ".C_BAN_TBL." SET ip='$IP',rooms='$New_ban_rooms',ban_until='$Until',reason='$Reason',country_code='$COUNTRY_CODE',country_name='$COUNTRY_NAME' WHERE username='$UU'");
 					}
 					// User isn't already banished from any room -> Insert into the banished table
 					else
 					{
 						$DbLink->clean_results();
 						$New_ban_rooms = ($Cmd[2] == "* ") ? "*" : addslashes($UURoom);
-						$DbLink->query("INSERT INTO ".C_BAN_TBL." VALUES ('$UU', '$UULatin1', '$IP', '$New_ban_rooms', '$Until', '$Reason')");
+						$DbLink->query("INSERT INTO ".C_BAN_TBL." VALUES ('$UU', '$UULatin1', '$IP', '$New_ban_rooms', '$Until', '$Reason', '$COUNTRY_CODE', '$COUNTRY_NAME')");
 					};
 
 					// Modify the status of the banished user in users table

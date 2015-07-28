@@ -14,7 +14,7 @@ $DbLink->query("DELETE FROM ".C_BAN_TBL." WHERE ban_until < ".time());
 if (!isset($ChatPath)) $ChatPath = "";
 // Fix a security holes
 else if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
-if (!isset($IP) || $IP == "") include("./${ChatPath}lib/get_IP.lib.php");
+if (!isset($IP) || $IP == "") require("./${ChatPath}lib/get_IP.lib.php");
 
 // Seek for a banished nick
 if (C_BAN_IP) // ban only by IP
@@ -56,7 +56,7 @@ if ($Nb > 0)
 	};
 
 	// Update the IP of the user in the banished table when necessary
-	if ($IsBanished && $IP != $Old_IP && (substr($IP, 0, 1) != "p" || substr($Old_IP, 0, 1) == "p")) $DbLink->query("UPDATE ".C_BAN_TBL." SET ip='$IP' WHERE username='$U'");
+	if ($IsBanished && $IP != $Old_IP && (substr($IP, 0, 1) != "p" || substr($Old_IP, 0, 1) == "p")) $DbLink->query("UPDATE ".C_BAN_TBL." SET ip='$IP', country_code='$COUNTRY_CODE', country_name='$COUNTRY_NAME' WHERE username='$U'");
 }
 // Nick of the user isn't banished from any room, seek for banished IP
 else
@@ -101,7 +101,7 @@ else
 		};
 
 		// Add the user to the banished table when necessary
-		if ($IsBanished) $DbLink->query("INSERT INTO ".C_BAN_TBL." VALUES ('$U', '$Latin1', '$IP', '$BanishedFromRooms', '$Until', '$Reason')");
+		if ($IsBanished) $DbLink->query("INSERT INTO ".C_BAN_TBL." VALUES ('$U', '$Latin1', '$IP', '$BanishedFromRooms', '$Until', '$Reason', '$COUNTRY_CODE', '$COUNTRY_NAME')");
 	}
 	else
 	{

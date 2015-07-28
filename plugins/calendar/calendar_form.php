@@ -19,9 +19,13 @@ if(!$timezone) $timezone = date_default_timezone_get();
 $cdate = new tc_date();
 $today = $cdate->getDate();
 
-$sld = getParameter("selected_day", "number", 0);
-$slm = getParameter("selected_month", "number", 0);
-$sly = getParameter("selected_year", "number", 0);
+$sld = getParameter("selected_day");
+$slm = getParameter("selected_month");
+$sly = getParameter("selected_year");
+if(!is_numeric($sld)) $sld = "00";
+if(!is_numeric($slm)) $slm = "00";
+if(!is_numeric($sly)) $sly = "0000";
+
 $year_start = getParameter("year_start", "number", 0);
 $year_end = getParameter("year_end", "number", 0);
 $startDate = getParameter("str", "number", 0);
@@ -53,6 +57,22 @@ $timezone = getParameter("tmz");
 $hl = getParameter("hl", "text", "en_US");
 //Digitizer
 $dig = getParameter("dig", "boolean", false);
+
+//validate theme
+$theme = getParameter("thm");
+if($theme != ""){
+	$theme_path = "css/".$theme."/";
+	if(!is_file($theme_path."calendar.css")){
+		//try default
+		$theme_path = "css/default/";
+	}
+}else{
+	//use default
+	$theme_path = "css/default/";
+}
+if(!is_file($theme_path."/calendar.css") && is_file("calendar.css")){
+	$theme_path = "";
+}
 
 //check year to be select in case of date_allow is set
 if(!$show_not_allow){
@@ -104,14 +124,14 @@ if($y <= 0) $y = $cdate->getDate("Y");
 // ensure m-y fits date allow range
 if (!$show_not_allow) {
   if ($ta1_set) {
-    $m1 = $cdate->getDate('m', $time_allow1);
-    $y1 = $cdate->getDate('Y', $time_allow1);
-    if ($y == $y1 && (int)$m < (int)$m1) $m = $m1;
+	$m1 = $cdate->getDate('m', $time_allow1);
+	$y1 = $cdate->getDate('Y', $time_allow1);
+	if ($y == $y1 && (int)$m < (int)$m1) $m = $m1;
   }
   if ($ta2_set) {
-    $m2 = $cdate->getDate('m', $time_allow2);
-    $y2 = $cdate->getDate('Y', $time_allow2);
-    if ($y == $y2 && (int)$m > (int)$m2) $m = $m2;
+	$m2 = $cdate->getDate('m', $time_allow2);
+	$y2 = $cdate->getDate('Y', $time_allow2);
+	if ($y == $y2 && (int)$m > (int)$m2) $m = $m2;
   }
 }
 
@@ -124,9 +144,6 @@ $cobj->startDate($startDate);
 $cobj->dsb_days = explode(",", $dsb_txt);
 $cobj->time_allow1 = $time_allow1;
 $cobj->time_allow2 = $time_allow2;
-
-$version = $cobj->version;
-$check_version = $cobj->check_new_version;
 
 $cobj->setYearInterval($year_start, $year_end);
 $cobj->setTimezone($timezone); //set for further usage, nothing for now
@@ -356,7 +373,7 @@ for($day=1; $day<=$total_thismonth; $day++){
 		//check if selected date is a disabled date
 		if($date_str == $sly."-".str_pad($slm, 2, "0", STR_PAD_LEFT)."-".str_pad($sld, 2, "0", STR_PAD_LEFT)){
 			//disabled
-//			$sly = $slm = $sld = "";
+			//$sly = $slm = $sld = "";
 		}
 	}
 	if(($startDate == 0 && $date_num == 6) || ($startDate > 0 && $date_num == $startDate-1)){
@@ -417,38 +434,13 @@ if($cobj->hl){
 	if(strpos($order,"B") == 1) $second_input = "B";
 	elseif(strpos($order,"Y") == 1) $second_input = "Y";
 }
-
-if($show_calendar_info){
-	$wan_enabled = 0;
-	$new_version = 0;
-	if($wan_enabled = @fsockopen("www.google.com", 80, $errno, $errstr, 1)){
-		if($check_version && $wan_enabled){
-			if(function_exists("file_get_contents")){
-				$new_version = @file_get_contents("http://www.ciprianmp.com/scripts/calendar/tc_calendar_version.php?v=".$version);
-
-			}
-		}
-	}
-	elseif(function_exists("file_get_contents")){
-		$ctx = stream_context_create(array('http' => array('timeout' => 1)));
-		$wan_enabled = @file_get_contents("http://www.google.com",null,$ctx,0,1);
-		if($check_version && $wan_enabled){
-			if(function_exists("file_get_contents")){
-				$new_version = @file_get_contents("http://www.ciprianmp.com/scripts/calendar/tc_calendar_version.php?v=".$version);
-
-			}
-		}
-	}
-	$donation_url = (($rtl && L_DONATE != "Do you wish to donate?") ? "" : ($rtl ? '<bdo dir="ltr">' : "")).'<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=BX3RZAYPUMA28&lc='.$hl.'&item_name=Appreciate%20%26%20Support%20the%20Localized%20Calendar%20Class%20development&item_number=LCalClass%20about&no_note=0&cn=Your%20comments%20%28optional%29&no_shipping=1&rm=1&return=http%3a%2f%2fciprianmp%2ecom%2fscripts%2fcalendar&cancel_return=http%3a%2f%2fciprianmp%2ecom%2fscripts%2fcalendar&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted&page_style=LCalCLass" target="_blank" alt="'.$ppalt.$pptit.'" title="'.$ppalt.$pptit.'">'.L_DONATE.'</a></bdo>';
-	define("L_ABOUT_LOC", "<b>Localized Datepicker</b><br />".sprintf(L_VERSION, "<b>".strval($version)."</b>", "<b>$LANGS_NUM</b>").($new_version ? "<br /><b><font color=\"red\">".sprintf(L_UPDATE, "<a href=\"$WEB_LOC\" target=\"_blank\">".L_HERE."</a>")."</font></b>" : "").(defined("L_TRABY") && L_TRABY != "L_TRABY" ? "<br />".sprintf(L_TRABY, "<b>".L_TRANAME."</b>") : "")."<br /><bdo dir=\"ltr\">&copy;2010-".$cdate->getDate("Y")." <b><a href=\"$WEB_LOC\" target=\"_blank\" title=\"http://ciprianmp.com\">$AUTHOR_LOC</a></b></bdo>".($wan_enabled ? ($show_fb_info ? "<br /><div id=\"fb-like\" class=\"fb-like\" data-href=\"https://www.facebook.com/DatePicker\" data-send=\"false\" data-layout=\"button_count\" data-show-faces=\"false\" data-font=\"tahoma\" ref=\"loc_about_info\"></div><br />".$donation_url : "<br />".$donation_url) : "")."<hr /><i>".L_POWBY."<br /><b>PHP Datepicker Calendar</b><br /><bdo dir=\"ltr\">&copy;2006-".$cdate->getDate("Y")." <b><a href=\"$WEB_SUPPORT\" target=\"_blank\" title=\"http://triconsole.com\">$AUTHOR</a></b></bdo></i><br />".($show_servertime_info ? L_SRV_TIMEZONE.($timezone ? "<br />$timezone" : "")."<br /><span id=\"timecontainer\">".$cdate->getDate("Y-m-d H:i:s")."</span>" : ""));
-}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"<?php if($rtl) echo(" dir=\"rtl\""); ?>>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>TriConsole.com - PHP Calendar Date Picker</title>
-<link href="calendar.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo($theme_path); ?>calendar.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 <!--
 var today_day = "<?php echo($cdate->getDate('d')); ?>";
@@ -487,84 +479,12 @@ function submitNow(dvalue, mvalue, yvalue){
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 <span id="calendar-page" class="font">
 	<div id="calendar-header" align="center">
-    	<?php if($show_calendar_info){ ?>
-		<?php if($wan_enabled && $show_fb_info){ ?>
-			<div id="fb-root"></div>
-			<script>
-				window.fbAsyncInit = function(){
-					FB.init({
-						appId: '674148172599839',
-						xfbml: true
-					});
-				};
-				(function() {
-					var e = document.createElement('script'); e.async = true;
-					e.src = document.location.protocol +
-						'//connect.facebook.net/<?php echo(str_replace("sr_CS","sr_RS",str_replace("es_AR","es_ES",str_replace("ar_AE","ar_AR",L_LANG)))); ?>/all.js';
-					document.getElementById('fb-root').appendChild(e);
-				}());
-			</script>
-		<?php } ?>
-		<div style="float: <?php echo($rtl ? "right" : "left"); ?>;" id="info">
-			<img src="images/<?php echo($new_version ? "version_info.gif" : "about.png"); ?>" width="9" height="9" border="0" id="info_icon" />
-			<div id="about" dir="<?php echo(($rtl && L_HERE != "here") ? "rtl" : "ltr"); ?>" style="<?php echo($rtl ? "right: 0px;".(L_HERE != "here" ? " direction: rtl; unicode-bidi: embed;" : "") : "left: 0px;"); ?>"><?php echo($dig ? $cobj->digitize_arabics(L_ABOUT_LOC) : L_ABOUT_LOC); ?></div>
-            <script type="text/javascript" src="calendar_servertime.js"></script>
-			<script type="text/javascript">
-	            new showLocalTime("timecontainer", "server-php", 0, "long", l_lang.replace("_","-"))
-            </script>
-        	<script type="text/javascript">
-			<!--
-			var timeoutID = new Array();
-
-			var obj = document.getElementById("info_icon");
-			obj.onmouseover = function(){ displayAbout(); }
-			obj.onmouseout = function(){ hideAbout(); }
-
-			var obj = document.getElementById("about");
-			obj.onmouseover = function(){ displayAbout(true); }
-			obj.onmouseout = function(){ hideAbout(); }
-
-			function displayAbout(flag){
-				var obj = document.getElementById("about");
-
-				var this_height = obj.style.height;
-
-				if(typeof(flag) == "undefined" || (flag === true && (this_height != "1px" && this_height != ""))){
-					cancelTimer();
-
-					//obj.style.display = "block";
-					obj.style.height = "auto";
-					obj.style.border = "1px solid #191970";
-					obj.style.backgroundColor = "#F8F8FF";
-				}
-			}
-			function hideAbout(){
-				var obj = document.getElementById("about");
-
-				this.timeoutID[this.timeoutID.length] = window.setTimeout(function(){
-					obj.style.border = "none";
-					//obj.style.display = "none";
-					obj.style.height = "1px";
-					obj.style.backgroundColor = "";
-					}
-					, 500);
-			}
-			function cancelTimer(){
-				for(i=0; i<this.timeoutID.length; i++){
-					var timers = this.timeoutID[i];
-					clearTimeout(timers);
-				}
-				this.timeoutID = new Array();
-			}
-			//-->
-			</script>
-        </div>
-        <?php } ?>
+		<?php if($show_calendar_info) include("calendar_info.php"); ?>
 		<?php if($dp && !$auto_hide){ ?>
-        <div style="float: <?php echo($rtl ? "left" : "right"); ?>;" class="closeme"><a href="javascript:closeMe();"><img src="images/close.gif" border="0" alt="<?php echo(L_CLOSE); ?>" title="<?php echo(L_CLOSE); ?>" /></a></div>
-        <?php } ?>
+		<div style="float: <?php echo($rtl ? "left" : "right"); ?>;" class="closeme"><a href="javascript:closeMe();"><img src="images/close.gif" border="0" alt="<?php echo(L_CLOSE); ?>" title="<?php echo(L_CLOSE); ?>" /></a></div>
+		<?php } ?>
 
-        <?php
+		<?php
 		if(sizeof($cobj->warning_msgs)>0){
 			//Digitizer
 			echo("<div id=\"calendar-alert\">".($dig ? $cobj->digitize_arabics(implode(", ", $cobj->warning_msgs)) : implode(", ", $cobj->warning_msgs))."</div>");
@@ -591,7 +511,7 @@ function submitNow(dvalue, mvalue, yvalue){
 				}
 				elseif ($first_input == "Y"){
 				?>
-	            <?php
+				<?php
 				//Digitizer
 				if($dig || L_UTF_DIGIT){
 					?>
@@ -602,7 +522,7 @@ function submitNow(dvalue, mvalue, yvalue){
 					</td>
 					<td align="left"><select name="y" onchange="javascript:submitCalendar();" class="font">
 					<?php
-					$thisyear = $cdate->getDate('Y'); //date('Y');
+					$thisyear = $cdate->getDate('Y');
 
 					//write year options
 					for($year=$year_end; $year>=$year_start; $year--){
@@ -656,56 +576,59 @@ function submitNow(dvalue, mvalue, yvalue){
 				?>
 				</tr>
 			</table>
-            <input name="selected_day" type="hidden" id="selected_day" value="<?php echo($sld);?>" />
-            <input name="selected_month" type="hidden" id="selected_month" value="<?php echo($slm);?>" />
-            <input name="selected_year" type="hidden" id="selected_year" value="<?php echo($sly);?>" />
-            <input name="year_start" type="hidden" id="year_start" value="<?php echo($cobj->year_start_input);?>" />
-            <input name="year_end" type="hidden" id="year_end" value="<?php echo($cobj->year_end_input);?>" />
-            <input name="objname" type="hidden" id="objname" value="<?php echo($objname);?>" />
-            <input name="dp" type="hidden" id="dp" value="<?php echo($dp);?>" />
-            <input name="da1" type="hidden" id="da1" value="<?php echo($time_allow1);?>" />
-            <input name="da2" type="hidden" id="da2" value="<?php echo($time_allow2);?>" />
-            <input name="sna" type="hidden" id="sna" value="<?php echo($show_not_allow);?>" />
-            <input name="aut" type="hidden" id="aut" value="<?php echo($auto_submit);?>" />
-            <input name="frm" type="hidden" id="frm" value="<?php echo($form_name);?>" />
-            <input name="tar" type="hidden" id="tar" value="<?php echo($target_url);?>" />
-            <input name="inp" type="hidden" id="inp" value="<?php echo($show_input);?>" />
-            <input name="fmt" type="hidden" id="fmt" value="<?php echo($date_format);?>" />
-            <input name="dis" type="hidden" id="dis" value="<?php echo($dsb_txt);?>" />
-            <input name="pr1" type="hidden" id="pr1" value="<?php echo($date_pair1);?>" />
-            <input name="pr2" type="hidden" id="pr2" value="<?php echo($date_pair2);?>" />
-            <input name="prv" type="hidden" id="prv" value="<?php echo($date_pair_value);?>" />
-            <input name="pth" type="hidden" id="pth" value="<?php echo($path);?>" />
-            <input name="spd" type="hidden" id="spd" value="<?php echo(htmlspecialchars($cobj->check_json_encode($sp_dates), ENT_QUOTES));?>" />
-            <input name="spt" type="hidden" id="spt" value="<?php echo($sp_type);?>" />
-            <input name="och" type="hidden" id="och" value="<?php echo(urldecode($tc_onchanged));?>" />
-            <input name="str" type="hidden" id="str" value="<?php echo($startDate);?>" />
-            <input name="rtl" type="hidden" id="rtl" value="<?php echo($rtl);?>" />
-            <input name="wks" type="hidden" id="wks" value="<?php echo($show_weeks);?>" />
-            <input name="int" type="hidden" id="int" value="<?php echo($interval);?>" />
-            <input name="hid" type="hidden" id="hid" value="<?php echo($auto_hide);?>" />
-            <input name="hdt" type="hidden" id="hdt" value="<?php echo($auto_hide_time);?>" />
-            <input name="tmz" type="hidden" id="tmz" value="<?php echo($timezone);?>" />
-            <input name="hl" type="hidden" id="hl" value="<?php echo($hl);?>" />
+			<input name="selected_day" type="hidden" id="selected_day" value="<?php echo($sld);?>" />
+			<input name="selected_month" type="hidden" id="selected_month" value="<?php echo($slm);?>" />
+			<input name="selected_year" type="hidden" id="selected_year" value="<?php echo($sly);?>" />
+			<input name="year_start" type="hidden" id="year_start" value="<?php echo($cobj->year_start_input);?>" />
+			<input name="year_end" type="hidden" id="year_end" value="<?php echo($cobj->year_end_input);?>" />
+			<input name="objname" type="hidden" id="objname" value="<?php echo($objname);?>" />
+			<input name="dp" type="hidden" id="dp" value="<?php echo($dp);?>" />
+			<input name="da1" type="hidden" id="da1" value="<?php echo($time_allow1);?>" />
+			<input name="da2" type="hidden" id="da2" value="<?php echo($time_allow2);?>" />
+			<input name="sna" type="hidden" id="sna" value="<?php echo($show_not_allow);?>" />
+			<input name="aut" type="hidden" id="aut" value="<?php echo($auto_submit);?>" />
+			<input name="frm" type="hidden" id="frm" value="<?php echo($form_name);?>" />
+			<input name="tar" type="hidden" id="tar" value="<?php echo($target_url);?>" />
+			<input name="inp" type="hidden" id="inp" value="<?php echo($show_input);?>" />
+			<input name="fmt" type="hidden" id="fmt" value="<?php echo($date_format);?>" />
+			<input name="dis" type="hidden" id="dis" value="<?php echo($dsb_txt);?>" />
+			<input name="pr1" type="hidden" id="pr1" value="<?php echo($date_pair1);?>" />
+			<input name="pr2" type="hidden" id="pr2" value="<?php echo($date_pair2);?>" />
+			<input name="prv" type="hidden" id="prv" value="<?php echo($date_pair_value);?>" />
+			<input name="pth" type="hidden" id="pth" value="<?php echo($path);?>" />
+			<input name="spd" type="hidden" id="spd" value="<?php echo(htmlspecialchars($cobj->check_json_encode($sp_dates), ENT_QUOTES));?>" />
+			<input name="spt" type="hidden" id="spt" value="<?php echo($sp_type);?>" />
+			<input name="och" type="hidden" id="och" value="<?php echo(urldecode($tc_onchanged));?>" />
+			<input name="str" type="hidden" id="str" value="<?php echo($startDate);?>" />
+			<input name="rtl" type="hidden" id="rtl" value="<?php echo($rtl);?>" />
+			<input name="wks" type="hidden" id="wks" value="<?php echo($show_weeks);?>" />
+			<input name="int" type="hidden" id="int" value="<?php echo($interval);?>" />
+			<input name="hid" type="hidden" id="hid" value="<?php echo($auto_hide);?>" />
+			<input name="hdt" type="hidden" id="hdt" value="<?php echo($auto_hide_time);?>" />
+			<input name="tmz" type="hidden" id="tmz" value="<?php echo($timezone);?>" />
+			<input name="thm" type="hidden" id="thm" value="<?php echo($theme);?>" />
+			<input name="hl" type="hidden" id="hl" value="<?php echo($hl);?>" />
 			<!-- Digitizer -->
-            <input name="dig" type="hidden" id="dig" value="<?php echo($dig);?>" />
-      </form>
+			<input name="dig" type="hidden" id="dig" value="<?php echo($dig);?>" />
+			<!-- focus var //-->
+			<input name="fcs" type="hidden" id="fcs" value="0" />
+	  </form>
 	</div>
-    <div id="calendar-container">
-        <div id="calendar-body">
-        <table border="0" cellspacing="1" cellpadding="0" align="center" class="font">
-            <?php
-            $day_headers = array_values($cobj->getDayHeaders());
+	<div id="calendar-container">
+		<div id="calendar-body">
+		<table border="0" cellspacing="1" cellpadding="0" align="center" class="font">
+			<?php
+			$day_headers = array_values($cobj->getDayHeaders());
 
-            echo("<tr>");
+			echo("<tr>");
 
 			if ($show_weeks) echo("<td align=\"center\" class=\"header wk-hdr\"><div>".$cobj->week_hdr."</div></td>");
 
 			//write calendar day header
-            foreach($day_headers as $dh){
-                echo("<td align=\"center\" class=\"header\"><div>".$dh."</div></td>");
-            }
-            echo("</tr>");
+			foreach($day_headers as $dh){
+				echo("<td align=\"center\" class=\"header\"><div>".$dh."</div></td>");
+			}
+			echo("</tr>");
 
 			for($row=0; $row<sizeof($calendar_rows); $row++){
 				echo("<tr>");
@@ -738,9 +661,9 @@ function submitNow(dvalue, mvalue, yvalue){
 				}
 				echo("</tr>");
 			}
-        ?>
-        </table>
-        </div>
+		?>
+		</table>
+		</div>
 
 		<?php
 		if(($previous_year >= $year_start || $next_year <= $year_end) && ($show_previous || $show_next)){
@@ -764,18 +687,18 @@ function submitNow(dvalue, mvalue, yvalue){
 			</div>
 			<div class="links">
 				<?php
-                $footer_links = array();
+				$footer_links = array();
 
-                if($cobj->validTodayDate() && ($m != $cdate->getDate('m') || $y != $cdate->getDate('Y')))
-                    $footer_links[] = "<a href=\"javascript:today();\" class=\"txt\" alt=\"".L_TODAY."\" title=\"".L_TODAY."\">".L_TODAY."</a>";
+				if($cobj->validTodayDate() && ($m != $cdate->getDate('m') || $y != $cdate->getDate('Y')))
+					$footer_links[] = "<a href=\"javascript:today();\" class=\"txt\" alt=\"".L_TODAY."\" title=\"".L_TODAY."\">".L_TODAY."</a>";
 
-                if($sld>0 && $slm>0 && $sly>0)
-                    $footer_links[] = "<a href=\"javascript:unsetValue();\" class=\"txt\" alt=\"".L_UNSET."\" title=\"".L_UNSET."\">".L_UNSET."</a>";
+				if($sld>0 && $slm>0 && $sly>0)
+					$footer_links[] = "<a href=\"javascript:unsetValue();\" class=\"txt\" alt=\"".L_UNSET."\" title=\"".L_UNSET."\">".L_UNSET."</a>";
 
-                if(sizeof($footer_links)>0){
-                    echo(implode("|", $footer_links));
-                }
-                ?>
+				if(sizeof($footer_links)>0){
+					echo(implode("|", $footer_links));
+				}
+				?>
 			</div>
 		</div>
 		<?php } ?>

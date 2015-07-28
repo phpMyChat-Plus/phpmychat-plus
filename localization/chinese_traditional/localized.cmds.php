@@ -20,6 +20,7 @@ define("L_CMD_INVITE", "邀請"); // invite (send an invitation to the user to f
 define("L_CMD_JOIN", "登入"); // join (join an existing room)
 define("L_CMD_KICK", "踢"); // kick,boot (kick an user from a room)
 define("L_CMD_LTR", "左右"); // ltr (post a left-to-right text)
+define("L_CMD_MATH", ""); //math (post MathJax equations in chat)
 define("L_CMD_ME", "自己"); // me (tell the room what you are doing)
 define("L_CMD_MR", "敬稱"); // mr (same as "me" but with the gender prefix)
 define("L_CMD_MSG", "悄悄話"); // msg,to (send a private message)

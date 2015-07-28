@@ -29,15 +29,20 @@ require("./${ChatPath}localization/languages.lib.php");
 require("./${ChatPath}localization/".$L."/localized.chat.php");
 
 // User Status  by Ciprian
-function user_status($name,$stat)
+function user_status($name,$stat,$ghost,$superghost,$status)
 {
 	$newname = $name;
 	if ($stat == 'a') $newname .= ($name == C_BOT_NAME) ? "</td><td nowrap=\"nowrap\">".L_WHOIS_BOT."</td>" : ((C_ITALICIZE_POWERS) ? "</td><td nowrap=\"nowrap\">".L_WHOIS_ADMIN."</td>" : "</td><td nowrap=\"nowrap\">".L_WHOIS_REG."</td>");
 	elseif ($stat == 't') $newname .= (C_ITALICIZE_POWERS) ? "</td><td nowrap=\"nowrap\">".L_WHOIS_TOPMOD."</td>" : "</td><td nowrap=\"nowrap\">".L_WHOIS_REG."</td>";
 	elseif ($stat == 'm') $newname .= (C_ITALICIZE_POWERS) ? "</td><td nowrap=\"nowrap\">".L_WHOIS_MODER."</td>" : "</td><td nowrap=\"nowrap\">".L_WHOIS_REG."</td>";
 	elseif ($stat == 'r') $newname .= "</td><td nowrap=\"nowrap\">".L_WHOIS_REG."</td>";
-	elseif ($name == C_BOT_NAME) $newname .= "</td><td nowrap=\"nowrap\">".L_WHOIS_BOT."</td>";
 	else $newname .= "</td><td nowrap=\"nowrap\">".L_WHOIS_GUEST."</td>";
+	if ($status == "a" || $status == "t")
+	{
+		if ($superghost) $newname .= "<td nowrap=\"nowrap\">".L_SUPER_GHOST."</td>";
+		elseif ($ghost) $newname .= "<td nowrap=\"nowrap\">".L_GHOST."</td>";
+		else $newname .= "<td nowrap=\"nowrap\">".L_NO_GHOST."</td>";
+	}
 	return $newname;
 }
 
@@ -86,12 +91,23 @@ if (!function_exists('ghosts_in'))
 	};
 };
 
+/**
+ * Check Internet Connection.
+ * 
+ * @param string $sCheckHost Default: www.google.com
+ * @return boolean
+ */
+function check_internet_connection($sCheckHost = 'www.google.com') 
+{
+    return (bool) @fsockopen($sCheckHost, 80, $iErrno, $sErrStr, 2);
+}
+
 // Restricted room mod by Ciprian
 $res_init = utf8_substr(L_RESTRICTED, 0, 1);
 $disp_note = 0;
 $disp_note2 = 0;
 
-require("lib/connected_users.lib.php");
+include("lib/connected_users.lib.php");
 
 if (C_CHAT_LURKING && (C_SHOW_LURK_USR || $status == "a" || $status == "t" || $status == "m"))
 {
@@ -211,6 +227,7 @@ if($DbLink1->num_rows() > 0)
 		}
 		if($colorname_tag != "") $colorname_endtag = "</FONT>";
 		$NewMsg = "<tr valign=top>";
+		$TimeSent = $Time;
 		$Time = strftime(L_SHORT_DATETIME, $Time + C_TMZ_OFFSET*60*60);
 		if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $Time = str_replace(" ","",$Time);
 		$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\">".$Time."</td><td width=\"1%\" nowrap=\"nowrap\">".$Room."</td>";
@@ -236,7 +253,6 @@ if($DbLink1->num_rows() > 0)
 			$embevi->setAcceptExtendedSupport();
 			if($embevi->parseUrl($Message))
 			{
-#				$eicon = $embevi->getProviderIcon();
 				$ealt = $embevi->getEmbeddedInfo();
 				$eicon = $embevi->getProviderImageIdentifier();
 				$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\"><B>".$colorname_tag."[${Dest}]".$colorname_endtag."</B></td><td><FONT class=\"notify\"><img src=\"".$eicon."\" width='16' border=0 alt='&copy; ".$ealt."' title='&copy; ".$ealt."'>&nbsp;".L_VIDEO." ${Dest}:</FONT> <A href=".$Message." onMouseOver=\"window.status='".sprintf(L_CLICK,L_ORIG_VIDEO).".'; return true\" title=\"".sprintf(L_CLICK,L_ORIG_VIDEO)."\" target=_blank>".$Message."</A></td>";
@@ -274,9 +290,9 @@ if($DbLink1->num_rows() > 0)
 		}
 
 		// Separator between messages sent before today and other ones
-		if (!isset($day_separator) && date("j", $Time +  C_TMZ_OFFSET*60*60) != date("j", time() +  C_TMZ_OFFSET*60*60))
+		if (!isset($day_separator) && date("j", $TimeSent +  C_TMZ_OFFSET*60*60) != date("j", time() +  C_TMZ_OFFSET*60*60))
 		{
-			$day_separator = "<tr align=texttop valign=top><td valign=top colspan=4 align=center style=\"background-color:yellow;\"><SPAN CLASS=\"notify\">--------- ".(!$O ? L_TODAY_UP : L_TODAY_DWN)." ---------</SPAN></td>";
+			$day_separator = "<tr align=texttop valign=top><td valign=top colspan=4 align=center style=\"background-color:yellow;\"><SPAN CLASS=\"notify\">--------- ".L_TODAY_UP." ---------</SPAN></td>";
 		};
 
 			$MessagesString .= ((isset($day_separator) && $day_separator != "") ? "</tr>".$day_separator : "").$NewMsg."</tr>";
@@ -290,6 +306,9 @@ else
 };
 
 #$DbLink1->clean_results();
+// GeoIP mode for country flags
+if(isset($gi) && $gi != "") geoip_close($gi);
+if(isset($gi6) && $gi6 != "") geoip_close($gi6);
 $DbLink1->close();
 $CleanUsrTbl = 1;
 
@@ -323,13 +342,13 @@ if (C_WORLDTIME == 2)
 <?php
 #if(C_ALLOW_MATH) echo("<script type=\"text/javascript\" src=\"https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>");
 #if(C_ALLOW_MATH) echo("<script type=\"text/javascript\" src=\"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>");
-if(C_ALLOW_MATH && C_SRC_MATH != "") echo("<script type=\"text/javascript\" src=\"".C_SRC_MATH."\"></script>");
+if(C_ALLOW_MATH && C_SRC_MATH != "" && check_internet_connection()) echo("<script type=\"text/javascript\" src=\"".C_SRC_MATH."\"></script>");
 ?>
 </HEAD>
 <BODY>
 <TABLE BORDER=1 CELLSPACING=2 CELLPADDING=1 CLASS="table">
 <TR>
-	<TD ALIGN=CENTER colspan=4>
+	<TD ALIGN=CENTER colspan="<?php echo(($status == "a" || $status == "t" || $status == "m") ? 6 : 5); ?>">
 		<?php
 		display_connected($ShowPrivate,$DisplayUsers,$NbUsers,($NbUsers != 1 ? $NbUsers." ".NB_USERS_IN : USERS_LOGIN),NO_USER,$DbLink,$Charset);
 		?>

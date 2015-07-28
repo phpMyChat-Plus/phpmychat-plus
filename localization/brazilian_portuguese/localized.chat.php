@@ -311,7 +311,7 @@ define("L_WHOIS_BOT", "Robô"); //Robot
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "%s entra na sala.");
 define("L_EXIT_ROM", "%s sai da sala.");
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND != "") define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
@@ -453,7 +453,7 @@ define("COL_ERROR_BOX_USRM", "É preciso ser um moderador para usar a cor ".COLO
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "Bem vindo ao nosso chat. Por favor obedeça as etiquetas de internet, quando utilizar o chat: <I>Tente ser educado e bondoso</I>.");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG . L_WELCOME_SND);
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND != "") define("WELCOME_MSG", L_WELCOME_MSG . L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG); 
 
@@ -509,10 +509,10 @@ define("L_LINKS_3", "para abrir um link");
 define("L_LINKS_4", "para abrir o site do autor");
 define("L_LINKS_5", "para inserir esse Emoticon");
 define("L_LINKS_6", "para contato");
-define("L_LINKS_7", "para visitar a págino oficial do phpMyChat");
-define("L_LINKS_8", "para se juntar ao grupo do phpMyChat");
+define("L_LINKS_7", "para visitar a págino oficial do %s");
+define("L_LINKS_8", "para se juntar ao grupo do %s");
 define("L_LINKS_9", "para enviar os seus comentários");
-define("L_LINKS_10", "para baixar o phpMyChat-Plus");
+define("L_LINKS_10", "para baixar o %s");
 define("L_LINKS_11", "para ver quem está no chat");
 define("L_LINKS_12", "para abrir a página de login de Chat");
 define("L_LINKS_13", "para tocar este som (buzz)"); // can also be translated as "to play this sound"

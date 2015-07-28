@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.config.php - plus version (18.10.2013 - rev.1)
+// File : dutch/localized.config.php - plus version (01.01.2015 - rev.4)
 // First version is based on the work of Marco Gelli Marchese <mvmcgm@gmail.com> for the Brasilian version
 // Original Dutch file by Bert Moorlag <berbia@hotmail.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
@@ -56,6 +56,7 @@ define("A_CONF_22", "Instellingen voor gluren");
 define("A_CONF_23", "Willekeurige Citaat");
 define("A_CONF_24", "Zichtbaarheid");
 define("A_CONF_25", "Verjaardag Instellingen");
+define("A_CONF_45", "GeoIP Vlaggen van landen");
 
 define("A_CONF_27", "Help & Ondersteuning");
 define("A_CONF_28", "Downloadpagina");
@@ -107,9 +108,9 @@ define("A_CONFCONTENT_5", "Verwijderen van oude berichten na:");
 define("A_CONFCONTENT_7", "Herstel de tijd voor inaktieve gebruikers in de kamers.");
 define("A_CONFCONTENT_8", "Deze mogelijkheid spoort de gebruiker aan aktief deel te nemen. Admins, mods en gebruikers die afwezig zijn zullen niet worden herstart.");
 define("A_CONFCONTENT_10", "Verwijder account van niet aktieve gebruikers na: (0 is nooit).");
-define("A_CONFCONTENT_11", "Set the mode your chat server runs.");
-define("A_CONFCONTENT_11a", "Deze plugin instelling is niet in gebruik. Uitleg op deze te activeren als een phpnuke/phpbb plugin zal nog komen."); 
-define("A_CONFCONTENT_11b", "Pad naar de lokale Nuke/phpBB map:");
+define("A_CONFCONTENT_11", "Plaats jou chat server in de juiste stand."); //rev.2
+define("A_CONFCONTENT_11a", "De plugin mode is niet geimplementeerd. Uitleg om deze draaiende te krijgen voor een phpnuke/phpbb plugin komt hier."); //rev.2 
+define("A_CONFCONTENT_11b", "Pad naar basis Nuke/phpBB map:"); //rev.2
 
 //Content - Languages
 define("A_CONFCONTENT_12", "Standaard taal voor chatkamers.");
@@ -236,7 +237,7 @@ define("A_CONFCONTENT_122", "Eén telling per Week");
 
 //Content Chat Schedule
 define("A_CONFCONTENT_123", "Tabel voor het openstellen van de chat en de chatkamers.");
-define("A_CONFCONTENT_124", "Dit is nog in ontwikkeling. De tabelvelden zijn opzettelijk uitgeschakeld.");
+define("A_CONFCONTENT_124", "Deze functie is in ontwikkeling! De velden zijn bewust uitgezet."); //rev.3
 define("A_CONFCONTENT_125", "Dagelijks:");
 define("A_CONFCONTENT_126", "Zondag:");
 define("A_CONFCONTENT_127", "Maandag:");
@@ -332,8 +333,8 @@ define("A_CONFCONTENT_214", "Gebruikers zonder extra bevoegdheden (ook gasten) z
 
 //Content Colors
 define("A_CONFCONTENT_216", "Inschakelen kleur van naam op gebruikerslijst en/of berichten.");
-define("A_CONFCONTENT_217", "Users can post texts using the color palette.");
-define("A_CONFCONTENT_217a", "If disabled, only the default color (as defined for the current skin) will be used for all posts in chatroom.");
+define("A_CONFCONTENT_217", "Gebruikers kunnen de kleurenpalet gebruiken voor teksten in de berichten."); //rev.2
+define("A_CONFCONTENT_217a", "Wanneer dit is uitgezet, kan alleen de standard kleur worden gebruikt (die in de kamer is ingesteld voor desbetreffende chatkamer)."); //rev.2
 define("A_CONFCONTENT_219", "Italic gebruikersnaam in gebruikerslijst.");
 define("A_CONFCONTENT_218", "Wanneer deze is ingeschakeld, kunnen gebruikers hun eigen kleur bepalen voor hun eigen gebruikersnaam in alleen de gebruikerslijst.<br />Wanneer deze is uitgeschakeld zal wel de <a class=\"admin\">rood</a> en de moderators in <a class=\"mod\">blauw</a> te zien zijn (dit zijn de standaard kleuren skins/styleN.css.php), alleen wanneer \"".A_CONFCONTENT_219."\" hieronder is ingeschakeld.");
 define("A_CONFCONTENT_220", "Deze optie stelt je in staat om NIET te laten zien wie de admin of moderator is in de chatkamer (dit doet geen afbreuk aan de rechten van de admin of moderator). Het laat alleen geen onderscheidt zien tussen alle gebruikers.");
@@ -575,4 +576,11 @@ define("A_CONFCONTENT_429", "Houd er rekening mee dat de tijd van de server word
 define("A_CONFCONTENT_430", "Hoeveel dagen voor verzenden van de groeten.");
 define("A_CONFCONTENT_431", "wanneer er niemand in de chat aanwezig is of de chat niet wordt bezocht binnen de interval, de Groeten zal dan niet meer worden verzonden, daar dit geen effect meer heeft voor een jarige, wanneer een bericht heel laat aankomt (bijvoorbeeld een maand).");
 define("A_CONFCONTENT_432", "Instellen van de tekstbestand die verstuurt moet worden.");
+
+//Content GeoIP Country Flags
+define("A_CONFCONTENT_433", "Aanzetten van GeoIP Vlaggen van landen functie in chat.");
+define("A_CONFCONTENT_434", "Deze functie zal de naam van het land tonen, vlag van het land en landcode, gebaseerd op de huidige/meest recente locatie van iedere bezoeker van de chat.");
+define("A_CONFCONTENT_435", "Toon de GeoIP Vlag van het land aan alle gebruikers van de publieke chat.");
+define("A_CONFCONTENT_436", "Ook wanneer dit verborgen is, kunnen, moderators met bepaalde rechten, de vlag zien, om zo te zien in  welke locatie de gebruiker zich bevindt. (door het aanzetten van gebruik vlaggen, hier boven.");
+define("A_CONFCONTENT_437", "De GeoIP databases (GeoLite&trade;) worden bewaard in jou plugins/countryflags map als GeoIP.dat en GeoIPv6.dat. Deze databases bevat de landen gebaseerd op de  IPs van de bezoekers (beide IPv4 en IPv6) en worden iedere maand geupdate door de ontwikkelaars van MaxMind  (iedere eerste Dinsdag van de maand). De IP toewijzing kunnen vaak worden veranderd van het ene land naar de ander, derhalve, voor het beste resultaat, kun je beter GeoIP.dat opnieuw downloaden en vervangen door GeoIPv6.dat bestanden met de laatste versies.");
 ?>

@@ -43,6 +43,7 @@ $myuniqueid=session_id();
 	<html>
 	<head>
 	<title>Sample talk to Program E page</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<LINK REL="stylesheet" HREF="../skins/style1.css.php?Charset=uft-8&medium=10" TYPE="text/css">
 	</head>

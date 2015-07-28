@@ -312,7 +312,7 @@ define("L_WHOIS_BOT", "Bot");
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "%s betritt diesen Raum.");
 define("L_EXIT_ROM", "%s verläßt den Raum.");
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND != "") define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
@@ -456,7 +456,7 @@ define("COL_ERROR_BOX_USRM", "Sie müssen Moderator sein um ".COLOR_CM." Farbe n
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "Willkommen im Chat. Bitte beim Chatten folgende Regel befolgen: <I>angenehm und höfflich zu sein</I>.");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND != "") define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
@@ -502,10 +502,10 @@ define("L_LINKS_3", "um einen Link zu öffnen"); // Click here + all above (Clic
 define("L_LINKS_4", "um die Seite des Autors zu öffnen");
 define("L_LINKS_5", "um diesen Smilie einzufügen");
 define("L_LINKS_6", "um den Autor"); // Click here + to contact + author -> translator (below)
-define("L_LINKS_7", "um die Homepage von phpMyChat zu besuchen");
-define("L_LINKS_8", "um der phpMyChat - Gruppe beizutreten");
+define("L_LINKS_7", "um die Homepage von %s zu besuchen");
+define("L_LINKS_8", "um der %s - Gruppe beizutreten");
 define("L_LINKS_9", "um Ihr Feedback zu senden");
-define("L_LINKS_10", "um phpMyChat Plus herunterzuladen");
+define("L_LINKS_10", "um %s herunterzuladen");
 define("L_LINKS_11", "um zu sehen, wer gerade chattet");
 define("L_LINKS_12", "um die Chat-Login-Seite zu öffnen");
 define("L_LINKS_13", "um diesen ’buzz’ zu senden"); // can also be translated as "to play this sound"

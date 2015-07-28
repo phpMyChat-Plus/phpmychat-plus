@@ -55,8 +55,8 @@ define("L_MIN", "דקה");
 define("L_MINS", "דקות");
 define("L_HOUR", "שעה");
 define("L_HOURS", "שעות");
-define("L_DAY", "zi");
-define("L_DAYS", "zile");
+define("L_DAY", "day");
+define("L_DAYS", "days");
 
 // registration stuff:
 define("L_REG_1", "סיסמא");
@@ -100,6 +100,9 @@ define("L_REG_47", "נקבה");
 define("L_REG_48", "לא ידוע");
 define("L_REG_49", "נדרשת הרשמה");
 define("L_REG_50", "הרשמה נדחית");
+define("L_REG_51", "Never"); //rev.48
+define("L_REG_52", "Recent location"); //rev.48
+define("L_REG_53", "use notification sounds"); //rev.48
 
 // e-mail validation stuff
 define("L_EMAIL_VAL_1", "ההגדרות שלך בשביל להיכנס לצאט");
@@ -243,7 +246,7 @@ define("L_HELP_CMD_14", "Allow the administrator or moderator(s) of the current 
 define("L_HELP_CMD_15", "Clear the messages frame and show only the last 5 messages.");
 define("L_HELP_CMD_16", "Save the last n messages (notifications ones excluded) to an HTML file. If n is not specified, all available messages will be taken into account.");
 define("L_HELP_CMD_17", "Allow the administrator to send an announcement to all users in all צ`אט rooms.");
-define("L_HELP_CMD_18", "Invite a user צ`אטting in an other room join the one you are in.");
+define("L_HELP_CMD_18", "Invite a user chatting in an other room join the one you are in.");
 define("L_HELP_CMD_19", "Allow the moderator(s) of a room or the administrator to \"banish\" a user from the room for a time defined by the administrator.<br />The later can banish a user chatting in an other room than the one he is into and use the * setting to banish \"forever\" a user from the האם אתה רוצה להסיר את עצמך? as the whole.<br />Optionally, [".L_HELP_REASON."] displays the reason of banishment (any desired text).");
 define("L_HELP_CMD_20", "Describe what you’re doing without refer yourself.");
 define("L_HELP_CMD_21", "Announces the room and the users who try to send you messages<br />that you are away from the computer. If you want to be back to האם אתה רוצה להסיר את עצמך?, just start typing.");
@@ -312,7 +315,7 @@ define("L_WHOIS_BOT", "רובוט");
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "נכנס לחדר %s");
 define("L_EXIT_ROM", "יצא מהחדר %s");
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND != "") define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
@@ -454,7 +457,7 @@ define("COL_ERROR_BOX_USRM", "You must be a moderator to use ".COLOR_CM." color!
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "ברוכים הבאים לצ`אט<I><br />נסו להיות נעימים ומנומסים</I>.");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND != "") define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
@@ -508,10 +511,10 @@ define("L_LINKS_3", "כדי לפתוח קישור");
 define("L_LINKS_4", "to open author’s site");
 define("L_LINKS_5", "כדי להכניס את הסמילי הזה");
 define("L_LINKS_6", "כדי ליצור קשר עם");
-define("L_LINKS_7", "לבקר את דף הבית של התוכנה");
-define("L_LINKS_8", "to join phpMyChat Group");
+define("L_LINKS_7", "%s לבקר את דף הבית של התוכנה");
+define("L_LINKS_8", "to join %s Group");
 define("L_LINKS_9", "לשלוח פידבק ליוצרי התוכנה");
-define("L_LINKS_10", "להורדת התוכנה");
+define("L_LINKS_10", "%s להורדת התוכנה");
 define("L_LINKS_11", "כדי לדעת מי נמצא בצאט");
 define("L_LINKS_12", "כדי לפתוח את דף הכניסה למערכת");
 define("L_LINKS_13", "כדי לצפצף"); // can also be translated as "to play this sound"
@@ -641,6 +644,9 @@ define("L_PRIV_REPLY_LOGIN", "Login to chat if you wish to ".LOGIN_LINK."post a 
 define("L_LANG_AR", "Argentinean Spanish");
 define("L_LANG_BG", "Bulgarian - Cyrillic");
 define("L_LANG_BR", "Brazilian Portuguese");
+define("L_LANG_CA", "Catalan");
+define("L_LANG_CNS", "Chinese (Simplified)");
+define("L_LANG_CNT", "Chinese (Traditional)");
 define("L_LANG_CZ", "Czech");
 define("L_LANG_DA", "Danish");
 define("L_LANG_DE", "German");
@@ -648,26 +654,32 @@ define("L_LANG_EN", "English"); // for admin panel only
 define("L_LANG_ENUK", "English UK"); // for UK formats and flags
 define("L_LANG_ENUS", "English US"); // for US formats and flags
 define("L_LANG_ES", "Spanish");
+define("L_LANG_FA", "Persian (Farsi)");
+define("L_LANG_FI", "Finnish");
 define("L_LANG_FR", "French");
 define("L_LANG_GR", "Greek");
 define("L_LANG_HE", "עברית");
-define("L_LANG_HI", "Hindi");
+define("L_LANG_HI", "Hindi (Devanagari)");
 define("L_LANG_HU", "Hungarian");
-define("L_LANG_ID", "Indonesian");
+define("L_LANG_ID", "Indonesian (Bahasa)");
 define("L_LANG_IT", "Italian");
-define("L_LANG_JA", "Japanese - Kanji");
+define("L_LANG_JA", "Japanese (Kanji)");
 define("L_LANG_KA", "גרוזינית");
+define("L_LANG_NB", "Norwegian (Bokmål)");
+define("L_LANG_NN", "Norwegian (Nynorsk)");
 define("L_LANG_NE", "Nepali");
 define("L_LANG_NL", "הולנדית");
 define("L_LANG_PL", "Polish");
+define("L_LANG_PT", "Portuguese");
 define("L_LANG_RO", "רומנית");
-define("L_LANG_RU", "Russian");
+define("L_LANG_RU", "Russian - Cyrillic");
 define("L_LANG_SK", "Slovak");
 define("L_LANG_SRC", "Serbian - Cyrillic");
 define("L_LANG_SRL", "Serbian - Latin");
 define("L_LANG_SV", "Swedish");
+define("L_LANG_TH", "Thai");
 define("L_LANG_TR", "Turkish");
-define("L_LANG_UK", "Ukrainian");
+define("L_LANG_UK", "Ukrainian - Cyrillic");
 define("L_LANG_UR", "Urdu");
 define("L_LANG_VI", "Vietnamese");
 define("L_LANG_YO", "Yoruba"); // Nigeria&Congo language
@@ -677,7 +689,7 @@ define("L_SKINS_TITLE", "Skins Preview");
 define("L_SKINS_TITLE1", "Skins %s to %s preview"); // Skins 1 to 4 preview
 define("L_SKINS_AV", "Available skins");
 define("L_SKINS_NONAV", "There are no styles defined in the \"skins\" folder");
-define("L_SKINS_COPY", "&copy; %s Skin by %s");
+define("L_SKINS_COPY", "&copy;%s Skin by %s");
 
 // Swap image titles by Ciprian
 define("L_GEN_ICON", "Gender icon");

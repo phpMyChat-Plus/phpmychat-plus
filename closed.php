@@ -20,7 +20,7 @@ require("./localization/".$L."/localized.chat.php");
 	{
 		window.focus();
 		url = "<?php echo($ChatPath); ?>admin.php?L=<?php echo($L); ?>&Link=1";
-		param = "width=820,height=550,resizable=yes,scrollbars=yes";
+		param = "width=900,height=610,resizable=yes,scrollbars=yes";
 		window.open(url,"admin_popup",param);
 	}
 // -->

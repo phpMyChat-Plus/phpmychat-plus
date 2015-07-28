@@ -310,7 +310,7 @@ define("L_WHOIS_BOT", "Bot");
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "%s entra en esta sala.");
 define("L_EXIT_ROM", "%s sale de esta sala.");
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND != "") define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
@@ -452,7 +452,7 @@ define("COL_ERROR_BOX_USRM", "¡Usted tiene que ser un moderador para usar el co
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "Bienvenido a nuestro chat. Por favor siga las reglas de la etiqueta mientras chatea: <I>trate de ser amable y educado</I>.");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND != "") define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
@@ -509,7 +509,7 @@ define("L_LINKS_6", "para contactar");
 define("L_LINKS_7", "para visitar la página principal de phpMyChat");
 define("L_LINKS_8", "para unirse con el grupo de phpMyChat");
 define("L_LINKS_9", "para enviar sus comentarios");
-define("L_LINKS_10", "para cargar phpMyChat Plus");
+define("L_LINKS_10", "para cargar %s");
 define("L_LINKS_11", "para comprobar quién está charlando");
 define("L_LINKS_12", "para abrir la página principal");
 define("L_LINKS_13", "tocar este sonido");

@@ -6,7 +6,7 @@
 // Translation implemented - default is English en_US
 //		- thanks ciprianmp
 //
-// version 3.74-loc (released 23 March 2011/updated 29 January 2015)
+// version 3.75-loc (released 23 March 2011/updated 20 May 2015)
 //
 //*********************************************************************
 $AUTHOR = "Triconsole";
@@ -25,7 +25,8 @@ if(file_exists("plugins/calendar/calendar.js"))
 <script type="text/javascript" src="plugins/calendar/calendar.js"></script>
 <?php
 }
-elseif(file_exists("calendar/calendar.js")){
+elseif(file_exists("calendar/calendar.js"))
+{
 ?>
 <script type="text/javascript" src="calendar/calendar.js"></script>
 <?php
@@ -40,7 +41,7 @@ elseif(file_exists("calendar.js"))
 require_once('classes/tc_date.php');
 
 class tc_calendar{
-	public $version = "3.74";
+	public $version = "3.75";
 	public $check_new_version = true;
 	private $icon;
 	private $objname;
@@ -96,6 +97,7 @@ class tc_calendar{
 	//Leave blank will use server settings.
 	//Please refer to the supported timezones here http://php.net/manual/en/timezones.php
 	private $timezone = "";
+	private $theme = "default";
 
 	//calendar constructor
 	function __construct($objname, $date_picker = false, $show_input = true){
@@ -189,58 +191,74 @@ class tc_calendar{
 	}
 
 	function writeScript(){
+		$this->processScript();
+	}
+
+	function getScript(){
+		return $this->processScript(true);
+	}
+
+	function processScript($buffer = false){
+		$str = "";
+
 		//check valid default date
 		if(!$this->checkDefaultDateValid()){
 			//unset default date
 			$this->setDate(00, 00, 0000);
 		}
 
-		$this->writeHidden();
+		$str .= $this->writeHidden();
 
 		//check whether it is a date picker
 		if($this->date_picker){
-			echo("<div style=\"position: relative; z-index: ".$this->zindex."; float: left;\" id=\"container_".$this->objname."\" onmouseover=\"javascript:focusCalendar('".$this->objname."');\" onmouseout=\"javascript:unFocusCalendar('".$this->objname."', ".$this->zindex.");\">");
+			$str .= "<div style=\"position: relative; z-index: ".$this->zindex."; display: inline-block; vertical-align: top;\" id=\"container_".$this->objname."\" onmouseover=\"javascript:focusCalendar('".$this->objname."');\" onmouseout=\"javascript:unFocusCalendar('".$this->objname."', ".$this->zindex.");\">";
 
 			if($this->show_input){
 				if($this->hl){
 					$to_replace = array("%"," ",".",",","،","η","ב","г","年","日","月","년","일");
 					$order = str_replace($to_replace,"",L_CAL_FORMAT);
-					if(strpos($order,"d") == 0 && !$this->rtl) $this->writeDay();
-					elseif(strpos($order,"B") == 0 && !$this->rtl) $this->writeMonth();
-					elseif(strpos($order,"Y") == 0 || $this->rtl) $this->writeYear();
-					if(strpos($order,"d") == 1 && !$this->rtl) $this->writeDay();
-					elseif(strpos($order,"B") == 1 || $this->rtl) $this->writeMonth();
-					elseif(strpos($order,"Y") == 1 && !$this->rtl) $this->writeYear();
-					if(strpos($order,"d") == 2 || $this->rtl) $this->writeDay();
-					elseif(strpos($order,"B") == 2 && !$this->rtl) $this->writeMonth();
-					elseif(strpos($order,"Y") == 2 && !$this->rtl) $this->writeYear();
+					if(strpos($order,"d") == 0 && !$this->rtl) $str .= $this->writeDay();
+					elseif(strpos($order,"B") == 0 && !$this->rtl) $str .= $this->writeMonth();
+					elseif(strpos($order,"Y") == 0 || $this->rtl) $str .= $this->writeYear();
+					if(strpos($order,"d") == 1 && !$this->rtl) $str .= $this->writeDay();
+					elseif(strpos($order,"B") == 1 || $this->rtl) $str .= $this->writeMonth();
+					elseif(strpos($order,"Y") == 1 && !$this->rtl) $str .= $this->writeYear();
+					if(strpos($order,"d") == 2 || $this->rtl) $str .= $this->writeDay();
+					elseif(strpos($order,"B") == 2 && !$this->rtl) $str .= $this->writeMonth();
+					elseif(strpos($order,"Y") == 2 && !$this->rtl) $str .= $this->writeYear();
 				}else{
-					$this->writeDay();
-					$this->writeMonth();
-					$this->writeYear();
+					$str .= $this->writeDay();
+					$str .= $this->writeMonth();
+					$str .= $this->writeYear();
 				}
 			}else{
-				echo("&nbsp;<a href=\"javascript:toggleCalendar('".$this->objname."', ".$this->auto_hide.", ".$this->auto_hide_time.");\" class=\"tclabel\">");
-				$this->writeDateContainer();
-				echo("</a>");
+				$str .= "&nbsp;<a href=\"javascript:toggleCalendar('".$this->objname."', ".$this->auto_hide.", ".$this->auto_hide_time.");\" class=\"tclabel\">";
+				$str .= $this->writeDateContainer();
+				$str .= "</a>";
 			}
 
 			//Digitizer frame
 			if($this->dig || L_UTF_DIGIT){
-				echo("&nbsp;<a href=\"javascript:toggleDigitsFrame('".$this->objname."');\" class=\"btn\"><img src=\"".($this->path ? $this->path : "")."images/digit_".($this->dig ? "ar" : "hi").".gif\" width=\"20\" height=\"13\" border=\"0\" align=\"absmiddle\" style=\"vertical-align:middle;\" alt=\"".($this->dig ? L_ARABIC : L_INDIC)."\" title=\"".($this->dig ? L_ARABIC : L_INDIC)."\" id=\"".$this->objname."_digicon\" /></a>&nbsp;");
+				$str .= "&nbsp;<a href=\"javascript:toggleDigitsFrame('".$this->objname."');\" class=\"btn\"><img src=\"".($this->path ? $this->path : "")."images/digit_".($this->dig ? "ar" : "hi").".gif\" width=\"20\" height=\"13\" border=\"0\" align=\"absmiddle\" style=\"vertical-align:middle;\" alt=\"".($this->dig ? L_ARABIC : L_INDIC)."\" title=\"".($this->dig ? L_ARABIC : L_INDIC)."\" id=\"".$this->objname."_digicon\" /></a>&nbsp;";
 			}
 
-			echo("&nbsp;<a href=\"javascript:toggleCalendar('".$this->objname."', ".$this->auto_hide.", ".$this->auto_hide_time.");\">");
+			$str .= "&nbsp;<a href=\"javascript:toggleCalendar('".$this->objname."', ".$this->auto_hide.", ".$this->auto_hide_time.");\">";
 			if(is_file($this->icon)){
-				echo("<img src=\"".$this->icon."\" id=\"tcbtn_".$this->objname."\" name=\"tcbtn_".$this->objname."\" border=\"0\" align=\"absmiddle\" style=\"vertical-align:middle;\" alt=\"".$this->txt."\" title=\"".$this->txt."\" />");
-			}else echo($this->txt);
-			echo("</a>");
+				$str .= "<img src=\"".$this->icon."\" id=\"tcbtn_".$this->objname."\" name=\"tcbtn_".$this->objname."\" border=\"0\" align=\"absmiddle\" style=\"vertical-align:middle;\" alt=\"".$this->txt."\" title=\"".$this->txt."\" />";
+			}else $str .= $this->txt;
+			$str .= "</a>";
 
-			$this->writeCalendarContainer();
+			$str .= $this->writeCalendarContainer();
 
-			echo("</div>");
+			$str .= "</div>";
 		}else{
-			$this->writeCalendarContainer();
+			$str .= $this->writeCalendarContainer();
+		}
+
+		if($buffer){
+			return $str;
+		}else{
+			echo($str);
 		}
 	}
 
@@ -335,6 +353,9 @@ class tc_calendar{
 		$param = $this->timezone;
 		if($param != "") $params[] = "tmz=".$param;
 
+		$param = $this->theme;
+		if($param != "") $params[] = "thm=".$param;
+
 		$param = $this->hl;
 		if($param != "") $params[] = "hl=".$param;
 
@@ -364,7 +385,6 @@ class tc_calendar{
 				case "bottom":
 				default:
 					$div_align .= "top:".$line_height."px;";
-
 			}
 
 			switch($this->h_align){
@@ -374,9 +394,7 @@ class tc_calendar{
 				case "right":
 				default:
 					$div_align .= "right:0px;";
-
 			}
-
 		}else{
 			$div_display = "visible";
 			$div_position = "relative";
@@ -387,50 +405,60 @@ class tc_calendar{
 
 		$mover_str = " onmouseover=\"javascript:cancelHide('".$this->objname."');\"";
 
+		$str = "";
 		//write the calendar container
-		echo("<div id=\"div_".$this->objname."\" style=\"position:".$div_position."; visibility:".$div_display."; z-index:100;".$div_align."\" class=\"div_calendar calendar-border\" ".$mout_str.$mover_str.">");
-		echo("<IFRAME id=\"".$this->objname."_frame\" src=\"".$this->path."calendar_form.php".$paramStr."\" frameBorder=\"0\" scrolling=\"no\" allowtransparency=\"true\" width=\"100%\" height=\"100%\" style=\"z-index: 100;\"></IFRAME>");
-		echo("</div>");
+		$str .= "<div id=\"div_".$this->objname."\" style=\"position:".$div_position."; visibility:".$div_display."; z-index:100;".$div_align."\" class=\"div_calendar calendar-border\" ".$mout_str.$mover_str.">";
+		$str .= "<IFRAME id=\"".$this->objname."_frame\" src=\"".$this->path."calendar_form.php".$paramStr."\" frameBorder=\"0\" scrolling=\"no\" allowtransparency=\"true\" width=\"100%\" height=\"100%\" style=\"z-index: 100;\"></IFRAME>";
+		$str .= "</div>";
+
+		return $str;
 	}
 
 	//write the select box of days
 	function writeDay(){
 		$total_days = $this->total_days($this->month, $this->year);
 
-		echo("<select name=\"".$this->objname."_day\" id=\"".$this->objname."_day\" onChange=\"javascript:tc_setDay('".$this->objname."', this[this.selectedIndex].value);\" class=\"tcday\"".($this->rtl ? " dir=\"rtl\"" : "").">");
-		echo("<option value=\"00\"".($this->rtl ? " dir=\"rtl\"" : "").">".L_DAYC."</option>");
+		$str = "";
+		$str .= "<select name=\"".$this->objname."_day\" id=\"".$this->objname."_day\" onChange=\"javascript:tc_setDay('".$this->objname."', this[this.selectedIndex].value);\" class=\"tcday\"".($this->rtl ? " dir=\"rtl\"" : "").">";
+		$str .= "<option value=\"00\"".($this->rtl ? " dir=\"rtl\"" : "").">".L_DAYC."</option>";
 		for($i=1; $i<=$total_days; $i++){
 			$selected = ((int)$this->day == $i) ? " selected='selected'" : "";
 			//Digitizer
-			echo("<option value=\"".str_pad($i, 2 , "0", STR_PAD_LEFT)."\"".$selected.($this->rtl ? " dir=\"rtl\"" : "").">".($this->dig ? $this->digitize_arabics($i) : $i)."</option>");
-			}
-		echo("</select> ");
+			$str .= "<option value=\"".str_pad($i, 2 , "0", STR_PAD_LEFT)."\"".$selected.($this->rtl ? " dir=\"rtl\"" : "").">".($this->dig ? $this->digitize_arabics($i) : $i)."</option>";
+		}
+		$str .= "</select> ";
+
+		return $str;
 	}
 
 	//write the select box of months
 	function writeMonth(){
-		echo("<select name=\"".$this->objname."_month\" id=\"".$this->objname."_month\" onChange=\"javascript:tc_setMonth('".$this->objname."', this[this.selectedIndex].value);\" class=\"tcmonth\"".($this->rtl ? " dir=\"rtl\"" : "").">");
-		echo("<option value=\"00\"".($this->rtl ? " dir=\"rtl\"" : "").">".L_MONTHC."</option>");
+		$str = "";
+		$str .= "<select name=\"".$this->objname."_month\" id=\"".$this->objname."_month\" onChange=\"javascript:tc_setMonth('".$this->objname."', this[this.selectedIndex].value);\" class=\"tcmonth\"".($this->rtl ? " dir=\"rtl\"" : "").">";
+		$str .= "<option value=\"00\"".($this->rtl ? " dir=\"rtl\"" : "").">".L_MONTHC."</option>";
 
 		$monthnames = $this->getMonthNames();
 		for($i=1; $i<=sizeof($monthnames); $i++){
 			$selected = ((int)$this->month == $i) ? " selected='selected'" : "";
-			echo("<option value=\"".str_pad($i, 2, "0", STR_PAD_LEFT)."\"".$selected.($this->rtl ? " dir=\"rtl\"" : "").">".($this->dig ? $this->digitize_arabics($monthnames[$i-1]) : $monthnames[$i-1])."</option>");
+			$str .= "<option value=\"".str_pad($i, 2, "0", STR_PAD_LEFT)."\"".$selected.($this->rtl ? " dir=\"rtl\"" : "").">".($this->dig ? $this->digitize_arabics($monthnames[$i-1]) : $monthnames[$i-1])."</option>";
 		}
-		echo("</select> ");
+		$str .= "</select> ";
+
+		return $str;
 	}
 
 	//write the year textbox
 	function writeYear(){
-		//echo("<input type=\"textbox\" name=\"".$this->objname."_year\" id=\"".$this->objname."_year\" value=\"$this->year\" maxlength=4 size=5 onBlur=\"javascript:tc_setYear('".$this->objname."', this.value, '$this->path');\" onKeyPress=\"javascript:if(yearEnter(event)){ tc_setYear('".$this->objname."', this.value, '$this->path'); return false; }\"> ");
-		echo("<select name=\"".$this->objname."_year\" id=\"".$this->objname."_year\" onChange=\"javascript:tc_setYear('".$this->objname."', this[this.selectedIndex].value);\" class=\"tcyear\"".($this->rtl ? " dir=\"rtl\"" : "").">");
-		echo("<option value=\"0000\"".($this->rtl ? " dir=\"rtl\"" : "").">".L_YEARC."</option>");
+		$str = "";
+		//$str .= "<input type=\"textbox\" name=\"".$this->objname."_year\" id=\"".$this->objname."_year\" value=\"$this->year\" maxlength=4 size=5 onBlur=\"javascript:tc_setYear('".$this->objname."', this.value, '$this->path');\" onKeyPress=\"javascript:if(yearEnter(event)){ tc_setYear('".$this->objname."', this.value, '$this->path'); return false; }\"> ";
+		$str .= "<select name=\"".$this->objname."_year\" id=\"".$this->objname."_year\" onChange=\"javascript:tc_setYear('".$this->objname."', this[this.selectedIndex].value);\" class=\"tcyear\"".($this->rtl ? " dir=\"rtl\"" : "").">";
+		$str .= "<option value=\"0000\"".($this->rtl ? " dir=\"rtl\"" : "").">".L_YEARC."</option>";
 
 		$year_start = $this->year_start;
 		$year_end = $this->year_end;
 
 		//check year to be selected in case of time_allow is set
-		  if(!$this->show_not_allow && ($this->time_allow1 || $this->time_allow2)){
+		if(!$this->show_not_allow && ($this->time_allow1 || $this->time_allow2)){
 			if($this->time_allow1 && $this->time_allow2){
 				$year_start = $this->mydate->getDate("Y", $this->time_allow1);
 				$year_end = $this->mydate->getDate("Y", $this->time_allow2);
@@ -441,58 +469,65 @@ class tc_calendar{
 				//only date 2 specified
 				$year_end = $this->mydate->getDate("Y", $this->time_allow2);
 			}
-		  }
+		}
 
 		for($i=$year_end; $i>=$year_start; $i--){
 			$selected = ((int)$this->year == $i) ? " selected='selected'" : "";
 			//Digitizer
-			echo("<option value=\"".$i."\"".$selected.($this->rtl ? " dir=\"rtl\"" : "").">".($this->dig ? $this->digitize_arabics($i) : $i).(L_USE_YMD_DROP ? L_YEARC : "")."</option>");
+			$str .= "<option value=\"".$i."\"".$selected.($this->rtl ? " dir=\"rtl\"" : "").">".($this->dig ? $this->digitize_arabics($i) : $i).(L_USE_YMD_DROP ? L_YEARC : "")."</option>";
 		}
-		echo("</select> ");
+		$str .= "</select> ";
+
+		return $str;
 	}
 
 	function eHidden($suffix, $value) {
 		if(trim($value) != ""){
 			if($suffix) $suffix = "_".$suffix;
-			echo("<input type=\"hidden\" name=\"".$this->objname.$suffix."\" id=\"".$this->objname.$suffix."\" value=\"".$value."\" />");
+			return "<input type=\"hidden\" name=\"".$this->objname.$suffix."\" id=\"".$this->objname.$suffix."\" value=\"".$value."\" />";
 		}
 	}
 
 	//write hidden components
 	function writeHidden(){
-		$this->eHidden('', $this->getDate());
-		$this->eHidden('dp', $this->date_picker);
-		$this->eHidden('year_start', $this->year_start);
-		$this->eHidden('year_end', $this->year_end);
-		$this->eHidden('da1', $this->time_allow1);
-		$this->eHidden('da2', $this->time_allow2);
-		$this->eHidden('sna', $this->show_not_allow);
-		$this->eHidden('aut', $this->auto_submit);
-		$this->eHidden('frm', $this->form_container);
-		$this->eHidden('tar', $this->target_url);
-		$this->eHidden('inp', $this->show_input);
-		$this->eHidden('fmt', $this->date_format);
-		$this->eHidden('dis', implode(",", $this->dsb_days));
-		$this->eHidden('pr1', $this->date_pair1);
-		$this->eHidden('pr2', $this->date_pair2);
-		$this->eHidden('prv', $this->date_pair_value);
-		$this->eHidden('pth', $this->path);
-		$this->eHidden('spd', htmlspecialchars($this->check_json_encode($this->sp_dates), ENT_QUOTES));
-		$this->eHidden('spt', $this->sp_type);
-		$this->eHidden('och', rawurlencode($this->tc_onchanged));
-		$this->eHidden('str', $this->startDate);
-		$this->eHidden('rtl', $this->rtl);
-		$this->eHidden('wks', $this->show_week);
-		$this->eHidden('int', $this->interval);
-		$this->eHidden('hid', $this->auto_hide);
-		$this->eHidden('hdt', $this->auto_hide_time);
+		$str = "";
+		
+		$str .= $this->eHidden('', $this->getDate());
+		$str .= $this->eHidden('dp', $this->date_picker);
+		$str .= $this->eHidden('year_start', $this->year_start);
+		$str .= $this->eHidden('year_end', $this->year_end);
+		$str .= $this->eHidden('da1', $this->time_allow1);
+		$str .= $this->eHidden('da2', $this->time_allow2);
+		$str .= $this->eHidden('sna', $this->show_not_allow);
+		$str .= $this->eHidden('aut', $this->auto_submit);
+		$str .= $this->eHidden('frm', $this->form_container);
+		$str .= $this->eHidden('tar', $this->target_url);
+		$str .= $this->eHidden('inp', $this->show_input);
+		$str .= $this->eHidden('fmt', $this->date_format);
+		$str .= $this->eHidden('dis', implode(",", $this->dsb_days));
+		$str .= $this->eHidden('pr1', $this->date_pair1);
+		$str .= $this->eHidden('pr2', $this->date_pair2);
+		$str .= $this->eHidden('prv', $this->date_pair_value);
+		$str .= $this->eHidden('pth', $this->path);
+		$str .= $this->eHidden('spd', htmlspecialchars($this->check_json_encode($this->sp_dates), ENT_QUOTES));
+		$str .= $this->eHidden('spt', $this->sp_type);
+		$str .= $this->eHidden('och', rawurlencode($this->tc_onchanged));
+		$str .= $this->eHidden('str', $this->startDate);
+		$str .= $this->eHidden('rtl', $this->rtl);
+		$str .= $this->eHidden('wks', $this->show_week);
+		$str .= $this->eHidden('int', $this->interval);
+		$str .= $this->eHidden('hid', $this->auto_hide);
+		$str .= $this->eHidden('hdt', $this->auto_hide_time);
 		//Tooltips
-		$this->eHidden('ttd', htmlspecialchars($this->check_json_encode($this->tt_dates), ENT_QUOTES));
-		$this->eHidden('ttt', htmlspecialchars($this->check_json_encode($this->tt_tooltips), ENT_QUOTES));
-		$this->eHidden('tmz', $this->timezone);
-		$this->eHidden('hl', $this->hl);
+		$str .= $this->eHidden('ttd', htmlspecialchars($this->check_json_encode($this->tt_dates), ENT_QUOTES));
+		$str .= $this->eHidden('ttt', htmlspecialchars($this->check_json_encode($this->tt_tooltips), ENT_QUOTES));
+		$str .= $this->eHidden('tmz', $this->timezone);
+		$str .= $this->eHidden('thm', $this->theme);
+		$str .= $this->eHidden('hl', $this->hl);
 		//Digitizer
-		$this->eHidden('dig', $this->dig);
+		$str .= $this->eHidden('dig', $this->dig);
+
+		return $str;
 	}
 
 	//set width of calendar
@@ -616,7 +651,7 @@ class tc_calendar{
 		}
 
 		//Digitizer
-		echo("<span id=\"divCalendar_".$this->objname."_lbl\" class=\"date-tccontainer\"".($this->rtl ? " dir=\"rtl\"" : "")." alt=\"".(($this->year != "undefined") ? $this->getDayName($this->year."-".$this->month."-".$this->day) : "")."\" title=\"".(($this->year != "undefined") ? $this->getDayName($this->year."-".$this->month."-".$this->day) : "")."\">".($this->dig ? $this->digitize_arabics($dd) : $dd)."</span>");
+		return "<span id=\"divCalendar_".$this->objname."_lbl\" class=\"date-tccontainer\"".($this->rtl ? " dir=\"rtl\"" : "")." alt=\"".(($this->year != "undefined") ? $this->getDayName($this->year."-".$this->month."-".$this->day) : "")."\" title=\"".(($this->year != "undefined") ? $this->getDayName($this->year."-".$this->month."-".$this->day) : "")."\">".($this->dig ? $this->digitize_arabics($dd) : $dd)."</span>";
 	}
 
 	//------------------------------------------------------
@@ -917,6 +952,10 @@ class tc_calendar{
 
 	function setTimezone($tz){
 		$this->timezone = $tz;
+	}
+
+	function setTheme($theme){
+		$this->theme = $theme;
 	}
 
 	function getDayName($date){

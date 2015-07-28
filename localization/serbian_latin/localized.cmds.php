@@ -20,6 +20,7 @@ define("L_CMD_INVITE", "poziv"); // invite (send an invitation to the user to fo
 define("L_CMD_JOIN", "prik,prikljuci,priključi"); // join (join an existing room)
 define("L_CMD_KICK", "izbaci,udalji"); // kick,boot (kick an user from a room)
 define("L_CMD_LTR", "lud,lev,leva"); // ltr (post a left-to-right text)
+define("L_CMD_MATH", ""); //math (post MathJax equations in chat)
 define("L_CMD_ME", "ja"); // me (tell the room what you are doing)
 define("L_CMD_MR", "gosp,go"); // mr (same as "me" but with the gender prefix)
 define("L_CMD_MSG", "za,poruka"); // msg,to (send a private message)
@@ -38,6 +39,8 @@ define("L_CMD_SIZE", "veli,velicina,veličina"); //size (change/reset the size o
 define("L_CMD_SORT", "sortir,sortiranje"); // sort (sort - ascending the usernames in the lists, alphabetically or by the time they joined chat)
 define("L_CMD_TIMESTAMP", "oznaka,vremena"); // timestamp (show/hide the timestamp in posts and server/worldtime in the status bar)
 define("L_CMD_TOPIC", "tema"); // topic (set/change the topic)
+define("L_CMD_UTUBE", ""); // youtube,tube (post an youtube video)
+define("L_CMD_VIDEO", ""); // video,vid (post a video)
 define("L_CMD_WISP", "sapat,šapat,saotanje,šaotanje"); //wisp,whisp (send a whisper / private message to an user in a different room)
 define("L_CMD_WHOIS", "ko,koje,korisniku"); // whois,about (shows the profile page of an user) 
 ?>

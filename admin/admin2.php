@@ -93,7 +93,7 @@ document.location = '<?php echo("$From?$URLQueryBody_MoveLinks&startReg="); ?>'+
 
 <P CLASS=title><?php echo(A_SHEET2_1); ?></P>
 
-<TABLE ALIGN=CENTER BORDER=0 CELLPADDING=3 CLASS=table>
+<TABLE WIDTH=98% ALIGN=CENTER BORDER=0 CELLPADDING=3 CLASS="table">
 
 <?php
 // Ensure at least one banished user exist
@@ -114,7 +114,7 @@ if ($count_BanUsers != 0)
 		<INPUT TYPE=hidden NAME="sortOrder" value="<?php echo($sortOrder); ?>">
 		<INPUT TYPE=hidden NAME="startReg" value="<?php echo($startReg); ?>">
 		<INPUT TYPE=hidden NAME="FORM_SEND" value="2">
-		<TABLE BORDER=0 CELLPADDING=5 CELLSPACING=1 WIDTH=100%>
+		<TABLE WIDTH=100% BORDER=0 CELLPADDING=5 CELLSPACING=1>
 		<TR CLASS=tabtitle>
 			<TD VALIGN=CENTER ALIGN=CENTER>
 				&nbsp;
@@ -123,7 +123,7 @@ if ($count_BanUsers != 0)
 				<A HREF="<?php echo("$From?$URLQueryBody_SortLinks&sortBy=username"); if ($sortBy == "username") echo("&sortOrder=$New_sortOrder"); ?>"><?php echo(A_SHEET1_2); ?></A>
 			</TD>
 			<TD VALIGN=CENTER ALIGN=CENTER>
-				<A HREF="<?php echo("$From?$URLQueryBody_SortLinks&sortBy=ip"); if ($sortBy == "ip") echo("&sortOrder=$New_sortOrder"); ?>"><?php echo(A_SHEET2_2); ?></A>
+				<A HREF="<?php echo("$From?$URLQueryBody_SortLinks&sortBy=ip"); if ($sortBy == "ip") echo("&sortOrder=$New_sortOrder"); ?>"><?php echo(A_SHEET2_2." / ".L_REG_52); ?></A>
 			</TD>
 			<TD VALIGN=CENTER ALIGN=CENTER CLASS=tabtitle>
 				<?php echo(A_SHEET2_3)?> *
@@ -148,10 +148,35 @@ if ($count_BanUsers != 0)
 		elseif (C_DB_TYPE == "pgsql") $limits = " LIMIT 10 OFFSET $startReg";
 		else $limits = "";
 
-		$DbLink->query("SELECT username,latin1,ip,rooms,ban_until,reason FROM ".C_BAN_TBL." ORDER BY $sortBy $sortOrder".$limits);
-		while (list($username,$Latin1,$ip,$rooms,$until,$reason) = $DbLink->next_record())
+		// GeoIP mode for country flags
+		if(C_USE_FLAGS)
+		{
+			if(!isset($COUNTRY_CODE) || $COUNTRY_CODE == "")
+			{
+				if (!class_exists("GeoIP")) include("plugins/countryflags/geoip.inc");
+				if(!isset($gi)) $gi = geoip_open("plugins/countryflags/GeoIP.dat",GEOIP_STANDARD);
+			}
+		}
+		$DbLink->query("SELECT username,latin1,ip,rooms,ban_until,reason,country_code,country_name FROM ".C_BAN_TBL." ORDER BY ".($sortBy != "ip" ? $sortBy : "country_code OR ".$sortBy)." ".$sortOrder.$limits);
+		while (list($username,$Latin1,$IP,$rooms,$until,$reason,$COUNTRY_CODE,$COUNTRY_NAME) = $DbLink->next_record())
 		{
 			$usrHash = md5($username);
+			// GeoIP mode for country flags
+			if(C_USE_FLAGS)
+			{
+				if(!isset($COUNTRY_CODE) || $COUNTRY_CODE == "")
+				{
+					$COUNTRY_CODE = geoip_country_code_by_addr($gi, ltrim($IP,"p"));
+					if (empty($COUNTRY_CODE))
+					{
+						$COUNTRY_CODE = "LAN";
+						$COUNTRY_NAME = "Other/LAN";
+					}
+					if ($COUNTRY_CODE != "LAN") $COUNTRY_NAME = $gi->GEOIP_COUNTRY_NAMES[$gi->GEOIP_COUNTRY_CODE_TO_NUMBER[$COUNTRY_CODE]];
+					if ($PROXY || substr($IP, 0, 1) == "p") $COUNTRY_NAME .= " (Proxy Server)";
+				}
+				$c_flag = "&nbsp;<img src=\"./plugins/countryflags/flags/".strtolower($COUNTRY_CODE).".gif\" alt=\"".$COUNTRY_NAME."\" title=\"".$COUNTRY_NAME."\" border=\"0\">&nbsp;(".$COUNTRY_CODE.")";
+			}
 			?>
 			<TR>
 				<TD VALIGN=CENTER ALIGN=CENTER>
@@ -161,8 +186,8 @@ if ($count_BanUsers != 0)
 				<TD VALIGN=CENTER ALIGN="<?php echo($CellAlign); ?>">
 					<B><?php echo(special_char($username,$Latin1)); ?></B>
 				</TD>
-				<TD VALIGN=CENTER ALIGN=CENTER>
-					<?php echo($ip); ?>
+				<TD VALIGN=CENTER ALIGN=LEFT>
+					<?php echo($IP.(isset($c_flag) ? $c_flag : "")); ?>
 				</TD>
 				<TD VALIGN=CENTER ALIGN=CENTER>
 					<INPUT type=text name="rooms_<?php echo($usrHash)?>" value="<?php echo(stripslashes(htmlspecialchars($rooms)))?>" SIZE="30">
@@ -198,7 +223,15 @@ if ($count_BanUsers != 0)
 				</TD>
 			</TR>
 			<?php
+			// GeoIP Country flags initialization
+			unset($IP);
+			unset($COUNTRY_CODE);
+			unset($COUNTRY_NAME);
+			unset($c_flag);
 		};
+		// GeoIP mode for country flags
+		if(isset($gi) && $gi != "") geoip_close($gi);
+		if(isset($gi6) && $gi6 != "") geoip_close($gi6);
 		$DbLink->clean_results();
 		?>
 		<TR>
@@ -220,7 +253,7 @@ if ($count_BanUsers != 0)
 
 		<!-- Navigation cells at the footer -->
 		<FORM name="PageSelect">
-		<TABLE BORDER=0 CELLPADDING=5 CELLSPACING=0 CLASS="tabletitle" WIDTH=100%>
+		<TABLE WIDTH=100% BORDER=0 CELLPADDING=5 CELLSPACING=0 CLASS="tabletitle">
 		<TR>
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN=CENTER WIDTH=70 HEIGHT=20 CLASS=tabtitle>
 			<?php

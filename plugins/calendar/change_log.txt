@@ -3,13 +3,40 @@ The php calendar component
 written by TJ @triconsole
 //*****************************************
 Localization version & support by ciprianmp
-//*****************************************
-
-version 3.74-loc (29 January 2015)
 - it includes all the updates/fixes in the
 corresponding version of the original class
 //*****************************************
 
+//*****************************************
+version 3.75-loc (20 May 2015)
+//*****************************************
+add on: calendar theme ('theme1', 'theme2', 'theme3') - function setTheme(theme_name)
+	- thanks Tri
+
+add on: buffer calendar output for print on screen later - function getScript()
+	- thanks Tri
+
+fixed: calendar auto hide glitch on Internet Explorer and Opera browser
+	- thanks Sébastien
+
+fixed: javascript split array support for Safari
+	- thanks Tri
+
+add on: month dropdown options use colors to differentiate between month statuses (enabled/disabled)
+	- thanks ciprianmp
+
+add on: disabled months cannot be selected in month dropdown anymore (option disabled, less annoying)
+	- thanks ciprianmp
+
+add on: day dropdown options use colors to differentiate between day statuses (weekday enabled/disabled, weekday, weekend)
+	- thanks ciprianmp
+
+add on: disabled days cannot be selected in day dropdown anymore (option disabled, less annoying)
+	- thanks ciprianmp
+
+//*****************************************
+version 3.74 (29 January 2015)
+//*****************************************
 add lang: "Server Timezone:"
 	- thanks ciprianmp
 
@@ -22,14 +49,14 @@ fixed: minor bug fixed, error on function checkSpecifyDate() and prevent date-al
 fixed: checkdate() function generated an error on some php servers
 	- thanks Tri
 
-fixed: minor bug fixed, for dropdown selection only of 2 values out of 3 (year null after selection)
+fixed: major bug fixed, for dropdown selection, only picked 2 values out of 3 (year null after selection)
 	- thanks Tri and ciprianmp
 
+//*****************************************
+version 3.73 (7 October 2014)
+//*****************************************
 fixed: applied a Turkish fix for i vs I usage in function names php<5.5 on Linux bug (http://trac.roundcube.net/ticket/1485470)
 	- thanks ciprianmp and Tri
-
-add on: Tooltips function
-	- thanks ciprianmp
 
 add on: Timezone function
 	- thanks Tri
@@ -55,6 +82,12 @@ fixed: the year interval limitation (1970/2038) has been eliminated for the enti
 fixed: recursive tooltips can now be set outside the limited interval 1970-2037
 	- thanks ciprianmp
 
+add on: Tooltips function
+	- thanks ciprianmp
+
+//*****************************************
+version 3.72 (25 July 2014)
+//*****************************************
 add on: automatic check for an updated version available
 	- thanks Tri
 

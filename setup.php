@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>phpMyChat-Plus - Installer setup</title>
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo(${Charset}); ?>">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK REL="stylesheet" HREF="./config/style1.css.php" TYPE="text/css">
 </head>
 

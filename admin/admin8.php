@@ -5,9 +5,7 @@
 if ($_SESSION["adminlogged"] != "1") exit(); // added by Bob Dickow for security.
 
 // HTML link to launch the chat (used by constants below)
-$ShowPrivate = "1";     // 1 to display users even if they are in a private room,
-						// 0 else
-
+$ShowPrivate = "1";     // 1 to display users even if they are in a private room, 0 else
 $DisplayUsers = "1";    // 0 to display only the number of connected users
                         // 1 to display a list of users
 
@@ -52,98 +50,83 @@ function user_status($name,$stat,$ghost,$superghost)
 	return $newname;
 }
 
-function display_connected($Private,$Full,$String1,$String2,$Charset)
+function display_connected($Private,$Full,$String1,$String2,$Charset,$gi)
 {
 	$List = "";
 	global $ordquery, $DbLink, $DefaultDispChatRooms, $res_init, $disp_note, $L;
 	if ($Private)
 	{
-		$query = "SELECT DISTINCT u.username, u.latin1, u.room, u.r_time, u.ip, u.status FROM ".C_USR_TBL." u ORDER BY $ordquery";
+		$query = "SELECT DISTINCT u.username, u.latin1, u.room, u.r_time, u.ip, u.status, u.country_code, u.country_name FROM ".C_USR_TBL." u ORDER BY $ordquery";
 	}
 	else
 	{
-		$query = "SELECT DISTINCT u.username, u.latin1, u.room, u.r_time, u.ip, u.status FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room AND m.type = 1 ORDER BY $ordquery";
+		$query = "SELECT DISTINCT u.username, u.latin1, u.room, u.r_time, u.ip, u.status, u.country_code, u.country_name FROM ".C_USR_TBL." u, ".C_MSG_TBL." m WHERE u.room = m.room AND m.type = 1 ORDER BY $ordquery";
 	}
 
 	$DbLink->query($query);
 	$NbUsers = $DbLink->num_rows();
 
 	// Ghost Control mod by Ciprian
-	if ($NbUsers == 1)
+	if($Full && $NbUsers >= 1)
 	{
-		if ($Full)
+		$sghosts = "";
+		$sghosts = str_replace("'","",C_SPECIAL_GHOSTS);
+		$sghosts = str_replace(" AND username != ",",",$sghosts);
+		if($NbUsers == 1) echo($String1."<br />");
+		else echo($NbUsers." ".NB_USERS_IN."<br />");
+		while(list($UserU,$Latin1U,$RoomU,$RTime,$IP,$StatusU,$COUNTRY_CODE,$COUNTRY_NAME) = $DbLink->next_record())
 		{
-			$sghosts = "";
-			$sghosts = str_replace("'","",C_SPECIAL_GHOSTS);
-			$sghosts = str_replace(" AND username != ",",",$sghosts);
-			echo($String1."<br />");
-			while(list($UserU,$Latin1U,$RoomU,$RTime,$IP,$Status) = $DbLink->next_record())
+			if (is_array($DefaultDispChatRooms) && in_array($RoomU." [R]",$DefaultDispChatRooms))
 			{
-				if (is_array($DefaultDispChatRooms) && in_array($RoomU." [R]",$DefaultDispChatRooms))
-				{
-					$RoomU .= " [".$res_init."]";
-					$disp_note = 1;
-				}
-				if ($Latin1) $UserU = htmlentities($UserU);
-				$ghost = 0;
-				$superghost = 0;
-				if (($sghosts != "" && ghosts_in($UserU, $sghosts, $Charset)) || (C_HIDE_MODERS && $Status == "m") || (C_HIDE_ADMINS && ($Status == "a" || $Status == "t")))
-				{
-					if ($Status == "a" || $Status == "t") $superghost = 1;
-					else $ghost = 1;
-				}
-				$UserU = user_status($UserU,$Status,$ghost,$superghost);
-				$RTime = strftime(L_SHORT_DATETIME, $RTime + C_TMZ_OFFSET*60*60);
-				if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $RTime = str_replace(" ","",$RTime);
-				$List .= "<tr><td>".$UserU."</td><td>".$RoomU."</td><td>".L_LURKING_4." ".$RTime."</td><td>".$IP;
+				$RoomU .= " [".$res_init."]";
+				$disp_note = 1;
 			}
-			echo($List);
-		}
-		else
-		{
-			echo($NbUsers." ".$String1);
-		}
+			if ($Latin1U) $UserU = htmlentities($UserU);
+			$ghost = 0;
+			$superghost = 0;
+			if (($sghosts != "" && ghosts_in($UserU, $sghosts, $Charset)) || (C_HIDE_MODERS && $StatusU == "m") || (C_HIDE_ADMINS && ($StatusU == "a" || $StatusU == "t")))
+			{
+				if ($StatusU == "a" || $StatusU == "t") $superghost = 1;
+				else $ghost = 1;
+			}
+			$user_not = $UserU;
+			$UserU = user_status($UserU,$StatusU,$ghost,$superghost);
+			$RTime = strftime(L_SHORT_DATETIME, $RTime + C_TMZ_OFFSET*60*60);
+			if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $RTime = str_replace(" ","",$RTime);
+			// GeoIP mode for country flags
+			if(C_USE_FLAGS)
+			{
+				if((!isset($COUNTRY_CODE) || $COUNTRY_CODE == "") && $user_not != C_BOT_NAME && $user_not != C_QUOTE_NAME)
+				{
+					$COUNTRY_CODE = geoip_country_code_by_addr($gi, ltrim($IP,"p"));
+					if (empty($COUNTRY_CODE))
+					{
+						$COUNTRY_CODE = "LAN";
+						$COUNTRY_NAME = "Other/LAN";
+					}
+					if ($COUNTRY_CODE != "LAN") $COUNTRY_NAME = $gi->GEOIP_COUNTRY_NAMES[$gi->GEOIP_COUNTRY_CODE_TO_NUMBER[$COUNTRY_CODE]];
+					if ($PROXY || substr($IP, 0, 1) == "p") $COUNTRY_NAME .= " (Proxy Server)";
+				}
+				$c_flag = "&nbsp;<img src=\"./plugins/countryflags/flags/".strtolower($COUNTRY_CODE).".gif\" alt=\"".$COUNTRY_NAME."\" title=\"".$COUNTRY_NAME."\" border=\"0\">&nbsp;(".$COUNTRY_CODE.")";
+			}
+			$List .= "<tr><td>".$UserU."</td><td>".$RoomU."</td><td>".L_LURKING_4." ".$RTime.($user_not != C_BOT_NAME && $user_not != C_QUOTE_NAME ? "</td><td>".$IP.(isset($c_flag) ? $c_flag : "") : "");
+			// GeoIP Country flags initialization
+			unset($IP);
+			unset($COUNTRY_CODE);
+			unset($COUNTRY_NAME);
+			unset($c_flag);
+		};
+		echo($List);
+		unset($List);
 	}
-	elseif ($NbUsers > 1)
+	elseif(!$Full)
 	{
-		if ($Full)
-		{
-			$sghosts = "";
-			$sghosts = str_replace("'","",C_SPECIAL_GHOSTS);
-			$sghosts = str_replace(" AND username != ",",",$sghosts);
-			echo($NbUsers." ".NB_USERS_IN."<br />");
-			while(list($UserU,$Latin1U,$RoomU,$RTime,$IP,$Status) = $DbLink->next_record())
-			{
-				if (is_array($DefaultDispChatRooms) && in_array($RoomU." [R]",$DefaultDispChatRooms))
-				{
-					$RoomU .= " [".$res_init."]";
-					$disp_note = 1;
-				}
-				if ($Latin1U) $UserU = htmlentities($UserU);
-				$ghost = 0;
-				$superghost = 0;
-				if (($sghosts != "" && ghosts_in($UserU, $sghosts, $Charset)) || (C_HIDE_MODERS && $Status == "m") || (C_HIDE_ADMINS && ($Status == "a" || $Status == "t")))
-				{
-					if ($Status == "a" || $Status == "t") $superghost = 1;
-					else $ghost = 1;
-				}
-				$UserU = user_status($UserU,$Status,$ghost,$superghost);
-				$RTime = date("d-M, H:i:s", $RTime + C_TMZ_OFFSET*60*60);
-				$List .= "<tr><td>".$UserU."</td><td>".$RoomU."</td><td>".L_LURKING_4." ".$RTime."</td><td>".$IP."";
-			}
-			echo($List);
-		}
-		else
-		{
-			echo($NbUsers." ".$String1);
-		}
-	unset($List);
+		echo($NbUsers." ".$String1);
 	}
 	else
 	{
 		echo($String2);
 	}
-
 	$DbLink->clean_results();
 }
 
@@ -255,6 +238,7 @@ if($DbLink->num_rows() > 0)
 		if($colorname_tag != "") $colorname_endtag = "</FONT>";
 		if($colornamedest_tag != "") $colornamedest_endtag = "</FONT>";
 		$NewMsg = "<tr align=texttop valign=top>";
+		$TimeSent = $Time;
 		$Time = strftime(L_SHORT_DATETIME, $Time + C_TMZ_OFFSET*60*60);
 		if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $Time = str_replace(" ","",$Time);
 		$NewMsg .= "<td width=\"1%\" nowrap=\"nowrap\">".$Time."</td><td width=\"1%\" nowrap=\"nowrap\">".$Room."</td>";
@@ -317,9 +301,9 @@ if($DbLink->num_rows() > 0)
 		}
 
 		// Separator between messages sent before today and other ones
-		if (!isset($day_separator) && date("j", $Time +  C_TMZ_OFFSET*60*60) != date("j", time() +  C_TMZ_OFFSET*60*60))
+		if (!isset($day_separator) && date("j", $TimeSent + C_TMZ_OFFSET*60*60) != date("j", time() + C_TMZ_OFFSET*60*60))
 		{
-			$day_separator = "<tr align=texttop valign=top><td colspan=4 align=center style=\"background-color:yellow;\"><SPAN CLASS=\"notify\">--------- ".(!$O ? L_TODAY_UP : L_TODAY_DWN)." ---------</SPAN></td>";
+			$day_separator = "<tr align=texttop valign=top><td colspan=4 align=center style=\"background-color:yellow;\"><SPAN CLASS=\"notify\">--------- ".L_TODAY_UP." ---------</SPAN></td>";
 		};
 
 			$MessagesString .= ((isset($day_separator) && $day_separator != "") ? "</tr>".$day_separator : "").$NewMsg."</tr>";
@@ -354,7 +338,19 @@ if (!C_CHAT_LURKING)
 <TR>
 	<TD ALIGN=CENTER colspan=6>
 		<?php
-		display_connected($ShowPrivate,$DisplayUsers,($DisplayUsers ? USERS_LOGIN : NB_USERS_IN),NO_USER,$Charset);
+
+			// GeoIP mode for country flags
+			if(!isset($COUNTRY_CODE) || $COUNTRY_CODE == "")
+			{
+				if (!class_exists("GeoIP")) include("plugins/countryflags/geoip.inc");
+				if(!isset($gi)) $gi = geoip_open("plugins/countryflags/GeoIP.dat",GEOIP_STANDARD);
+			}
+
+			display_connected($ShowPrivate,$DisplayUsers,($DisplayUsers ? USERS_LOGIN : NB_USERS_IN),NO_USER,$Charset,$gi);
+
+			// GeoIP mode for country flags
+			if(isset($gi) && $gi != "") geoip_close($gi);
+			if(isset($gi6) && $gi6 != "") geoip_close($gi6);
 		?>
 	</TD>
 </TR>
@@ -364,26 +360,14 @@ if($disp_note) echo("<table WIDTH=100%><tr valign=top><td colspan=4 align=left C
 if (C_CHAT_LURKING)
 {
 //Declaration of Parameters
-$time = time();
-$ip = getenv('REMOTE_ADDR');
+require("./lib/get_IP.lib.php");		// Set the $IP var
 $browser = getenv('HTTP_USER_AGENT');
 
 //Timeout to delete Users in Seconds
-$closetime = $time-15;
+$timeout = 15;
 
-//Database-Connect
-#$handler = @mysql_connect(C_DB_HOST,C_DB_USER,C_DB_PASS);
-#@mysql_query("SET CHARACTER SET utf8");
-#mysql_query("SET NAMES 'utf8'");
-#@mysql_select_db(C_DB_NAME,$handler);
-
-//Database-Commands
-#$delete = @mysql_query("DELETE FROM ".C_LRK_TBL." WHERE time<'$closetime'",$handler);
-#$result = @mysql_query("SELECT DISTINCT ip,browser,username,status FROM ".C_LRK_TBL." ORDER BY ip ASC",$handler);
-#$online_users = @mysql_numrows($result);
-#@mysql_close($handler);
-$DbLink->query("DELETE FROM ".C_LRK_TBL." WHERE time<'".$closetime."'");
-$DbLink->query("SELECT DISTINCT ip,browser,username,status FROM ".C_LRK_TBL." ORDER BY ip ASC");
+$DbLink->query("DELETE FROM ".C_LRK_TBL." WHERE time<'".(time() - $timeout)."'");
+$DbLink->query("SELECT DISTINCT ip,browser,username,status,country_code,country_name FROM ".C_LRK_TBL." ORDER BY country_code OR ip ASC");
 $online_users = $DbLink->num_rows();
 ?>
 <hr /><table border=1 cellspacing=1 cellpadding=1 class="table"><tr>
@@ -400,28 +384,49 @@ if ($online_users)
 $sghosts = "";
 $sghosts = str_replace("'","",C_SPECIAL_GHOSTS);
 $sghosts = str_replace(" AND username != ",",",$sghosts);
-#while($data = @mysql_fetch_array($result))
-while(list($ipu, $browseru, $usernameu, $statusu) = $DbLink->next_record())
+while(list($ipu, $browseru, $usernameu, $statusu, $country_codeu, $country_nameu) = $DbLink->next_record())
 {
-	if ($usernameu == "Guest") $usernameu = L_LURKING_5;
-	$ghost = 0;
-	$superghost = 0;
-	if (($sghosts != "" && ghosts_in($usernameu, $sghosts, $Charset)) || (C_HIDE_MODERS && $Status == "m") || (C_HIDE_ADMINS && ($Status == "a" || $Status == "t")))
+	if ($usernameu == "Guest") $usernameuo = L_LURKING_5;
+	$ghostu = 0;
+	$superghostu = 0;
+	if (($sghosts != "" && ghosts_in($usernameu, $sghosts, $Charset)) || (C_HIDE_MODERS && $statusu == "m") || (C_HIDE_ADMINS && ($statusu == "a" || $statusu == "t")))
 	{
-		if ($Status == "a" || $Status == "t") $superghost = 1;
-		else $ghost = 1;
+		if ($statusu == "a" || $statusu == "t") $superghostu = 1;
+		else $ghostu = 1;
 	}
-	$User = user_status($usernameu,$statusu,$ghost,$superghost);
+	$User = user_status($usernameu,$statusu,$ghostu,$superghostu);
+	// GeoIP mode for country flags
+	if(C_USE_FLAGS)
+	{
+		if(!isset($country_codeu) || $country_codeu == "")
+		{
+			$country_codeu = geoip_country_code_by_addr($gi, ltrim($ipu,"p"));
+			if (empty($country_codeu))
+			{
+				$country_codeu = "LAN";
+				$country_nameu = "Other/LAN";
+			}
+			if ($country_codeu != "LAN") $country_nameu = $gi->GEOIP_COUNTRY_NAMES[$gi->GEOIP_COUNTRY_CODE_TO_NUMBER[$country_codeu]];
+			if ($PROXY || substr($ipu, 0, 1) == "p") $country_nameu .= " (Proxy Server)";
+		}
+		$c_flagu = "&nbsp;<img src=\"./plugins/countryflags/flags/".strtolower($country_codeu).".gif\" alt=\"".$country_nameu."\" title=\"".$country_nameu."\" border=0>&nbsp;(".$country_codeu.")";
+	}
 	echo("<tr><td>".$User."");
-	echo("<td>".$ipu."</td>");
-	echo("<td>".$browseru."</td></tr>");
-}
+	echo("<td nowrap=\"nowrap\">".$ipu.(isset($c_flagu) ? $c_flagu : "")."</td>");
+	echo("<td width=\"100%\">".$browseru."</td></tr>");
+	// GeoIP Country flags initialization
+	unset($User);
+	unset($ipu);
+	unset($country_codeu);
+	unset($country_nameu);
+	unset($c_flagu);
+};
 ?>
 </table>
 <?php
 }
 }
-	echo("<center><hr />");
+	echo("<hr />");
 	echo("<table BORDER=1 WIDTH=100% CELLSPACING=0 CELLPADDING=1 CLASS=table>");
 	if ($NBMessages)
 	{

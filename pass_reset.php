@@ -37,6 +37,8 @@ require("./localization/languages.lib.php");
 require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
 include("./lib/mail_validation.lib.php");
+#require("./lib/validator.lib.php");
+require("./lib/get_IP.lib.php");		// Set the $IP var
 
 // Special cache instructions for IE5+
 $CachePlus	= "";
@@ -95,7 +97,8 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_PASS_7)
 //	else if (!eregi("^([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](fo|g|l|m|mes|o|op|pa|ro|seum|t|u|v|z)?)$", $EMAIL))
 	// Added the new top-level domains (mail, asia, travel, aso)
 #	else if (!eregi("^([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](avel|bi|bs|fo|g|ia|l|m|me|mes|o|op|pa|ro|seum|t|to|u|v|z)?)$", $EMAIL))
-	else if (!preg_match("/^([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](avel|bi|bs|fo|g|ia|l|m|me|mes|o|op|pa|ro|seum|t|to|u|v|z)?)$/i", $EMAIL))
+#	else if (!preg_match("/^([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](avel|bi|bs|fo|g|ia|l|m|me|mes|o|op|pa|ro|seum|t|to|u|v|z)?)$/i", $EMAIL))
+	else if (!validator($EMAIL,"email"))
 	{
 		$Error = L_ERR_USR_8;
 	}
@@ -149,7 +152,6 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_PASS_7)
 				if ($rows != 0)
 				{
 					$Latin1 = ($Charset != "utf-8" ? 1 : 0);
-					include("./lib/get_IP.lib.php");		// Set the $IP var
 
 					$pmc_password = gen_password();
 					$PWD_Hash = md5(stripslashes($pmc_password));
@@ -159,7 +161,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_PASS_7)
 					if (!isset($Error) || $Error == "")
 					{
 						$DbLink->clean_results();
-						$DbLink->query("UPDATE ".C_REG_TBL." SET password='$PWD_Hash', ip='$IP' WHERE username='$U' AND email='$EMAIL' AND s_question='$SECRET_QUESTION' AND s_answer='$SECRET_ANSWER'");
+						$DbLink->query("UPDATE ".C_REG_TBL." SET password='$PWD_Hash', ip='$IP', country_code='$COUNTRY_CODE', country_name='$COUNTRY_NAME' WHERE username='$U' AND email='$EMAIL' AND s_question='$SECRET_QUESTION' AND s_answer='$SECRET_ANSWER'");
 						$Message = L_PASS_8."<br />".sprintf(L_PASS_10,$pmc_password);
 					};
 				}

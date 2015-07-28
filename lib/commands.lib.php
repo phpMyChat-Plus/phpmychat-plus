@@ -144,16 +144,19 @@ elseif (preg_match("/^\/(ltr|rtl".(L_CMD_LTR != "" && L_CMD_LTR != "L_CMD_LTR" ?
 {
 	include("./lib/commands/dir.cmd.php");
 }
-elseif (preg_match("/^\/(vid|video|play".(L_CMD_VIDEO != "" && L_CMD_VIDEO != "L_CMD_VIDEO" ? "|".str_replace(",","|",L_CMD_VIDEO) : "").")[[:space:]](.+)?$/i", $M, $Cmd))
+elseif(check_internet_connection())
 {
-	include("./lib/commands/video.cmd.php");
-}
-elseif (preg_match("/^\/(tube|youtube|utube".(L_CMD_UTUBE != "" && L_CMD_UTUBE != "L_CMD_UTUBE" ? "|".str_replace(",","|",L_CMD_UTUBE) : "").")[[:space:]](.+)?$/i", $M, $Cmd))
-{
-	include("./lib/commands/youtube.cmd.php");
-}
-elseif (preg_match("/^\/(math".(L_CMD_MATH != "" && L_CMD_MATH != "L_CMD_MATH" ? "|".str_replace(",","|",L_CMD_MATH) : "").")[[:space:]](.+)?$/i", $M, $Cmd))
-{
-	include("./lib/commands/math.cmd.php");
+	if(preg_match("/^\/(vid|video|play".(L_CMD_VIDEO != "" && L_CMD_VIDEO != "L_CMD_VIDEO" ? "|".str_replace(",","|",L_CMD_VIDEO) : "").")[[:space:]](.+)?$/i", $M, $Cmd))
+	{
+		include("./lib/commands/video.cmd.php");
+	}
+	elseif (preg_match("/^\/(tube|youtube|utube".(L_CMD_UTUBE != "" && L_CMD_UTUBE != "L_CMD_UTUBE" ? "|".str_replace(",","|",L_CMD_UTUBE) : "").")[[:space:]](.+)?$/i", $M, $Cmd))
+	{
+		include("./lib/commands/youtube.cmd.php");
+	}
+	elseif (preg_match("/^\/(math".(L_CMD_MATH != "" && L_CMD_MATH != "L_CMD_MATH" ? "|".str_replace(",","|",L_CMD_MATH) : "").")[[:space:]](.+)?$/i", $M, $Cmd))
+	{
+		include("./lib/commands/math.cmd.php");
+	}
 };
 ?>

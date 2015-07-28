@@ -90,13 +90,17 @@ if (isset($_POST))
 // Fix some security holes
 if (!isset($ChatPath)) $ChatPath = "";
 if (!is_dir('./'.substr($ChatPath, 0, -1))) exit();
-if (isset($L) && !is_dir("${ChatPath}localization/".$L)) exit();
+if (isset($L) && !is_dir("./${ChatPath}localization/".$L)) exit();
 #if (ereg("SELECT|UNION|INSERT|UPDATE",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 if (preg_match("/SELECT|UNION|INSERT|UPDATE/i",$_SERVER["QUERY_STRING"])) exit();  //added by Bob Dickow for extra security NB Kludge
 if (isset($_COOKIE["CookieHash"])) $RemMe = $_COOKIE["CookieHash"];
 else unset($RemMe);
 if (isset($RemMe) && isset($_COOKIE["CookieUsername"]) && $_COOKIE["CookieUsername"] != urlencode(stripslashes($U))) unset($RemMe);
-if (isset($_COOKIE["CookieBeep"])) $CookieBeep = $_COOKIE["CookieBeep"];
+if (isset($_COOKIE["CookieBeep"]))
+{
+	$CookieBeep = $_COOKIE["CookieBeep"];
+	if(!isset($USE_SOUNDS)) $USE_SOUNDS = $CookieBeep;
+}
 
 require("./${ChatPath}config/config.lib.php");
 require("./${ChatPath}lib/release.lib.php");
@@ -104,7 +108,7 @@ require("./${ChatPath}localization/languages.lib.php");
 require("./${ChatPath}localization/".$L."/localized.chat.php");
 require("./${ChatPath}lib/database/".C_DB_TYPE.".lib.php");
 require("./${ChatPath}lib/clean.lib.php");
-include("./${ChatPath}lib/get_IP.lib.php");
+require("./${ChatPath}lib/get_IP.lib.php");
 
 // Special cache instructions for IE5+
 $CachePlus	= "";
@@ -196,6 +200,17 @@ function ghosts_in($what, $in, $Charset)
 	}
 	return false;
 };
+
+/**
+ * Check Internet Connection.
+ * 
+ * @param string $sCheckHost Default: www.google.com
+ * @return boolean
+ */
+function check_internet_connection($sCheckHost = 'www.google.com') 
+{
+    return (bool) @fsockopen($sCheckHost, 80, $iErrno, $sErrStr, 2);
+}
 
 /*********** PART I ***********/
 
@@ -396,9 +411,9 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 		{
 			list($room) = $DbLink->next_record();
 			$DbLink->clean_results();
-			$DbLink->query("SELECT password,perms,rooms,allowpopup,last_login,login_counter,join_room FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
+			$DbLink->query("SELECT password,perms,rooms,allowpopup,last_login,login_counter,join_room,use_sounds FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 			$reguser = ($DbLink->num_rows() != 0);
-			if ($reguser) list($user_password,$perms,$rooms,$allowpopupu,$last_login,$login_counter,$join_room) = $DbLink->next_record();
+			if ($reguser) list($user_password,$perms,$rooms,$allowpopupu,$last_login,$login_counter,$join_room,$USE_SOUNDS) = $DbLink->next_record();
 			else $join_room = "";
 			$DbLink->clean_results();
 
@@ -421,9 +436,10 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 						if ((time() - $last_login > C_LOGIN_COUNTER * 60) || $last_login = "")
 						{
 							$login_counter = $login_counter + 1;
-							$DbLink->query("UPDATE ".C_REG_TBL." SET reg_time=".time().", last_login=".time().", login_counter=".$login_counter." WHERE username='$U'");
+#							$DbLink->query("UPDATE ".C_REG_TBL." SET reg_time=".time().", last_login=".time().", login_counter=".$login_counter." WHERE username='$U'");
+							$DbLink->query("UPDATE ".C_REG_TBL." SET last_login=".time().", login_counter=".$login_counter." WHERE username='$U'");
 						}
-						else $DbLink->query("UPDATE ".C_REG_TBL." SET reg_time=".time()." WHERE username='$U'");
+#						else $DbLink->query("UPDATE ".C_REG_TBL." SET reg_time=".time()." WHERE username='$U'");
 						if(isset($remember) && $pmc_password != $user_password && $RemMe != md5(stripslashes($pmc_password)) && $pmc_password != "")
 						{
 							setcookie("CookieHash", md5(stripslashes($pmc_password)), time() + 60*60*24*365);	// cookie expires in one year
@@ -458,9 +474,9 @@ if(!isset($Reload) && isset($U) && (isset($N) && $N != ""))
 // **	Get perms of the user if the script is called by a join command	**
 if (isset($Reload) && $Reload == "JoinCmd")
 {
-	$DbLink->query("SELECT perms,rooms,allowpopup,join_room FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
+	$DbLink->query("SELECT perms,rooms,allowpopup,join_room,use_sounds FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	$reguser = ($DbLink->num_rows() != 0);
-	if ($reguser) list($perms,$rooms,$allowpopupu,$join_room) = $DbLink->next_record();
+	if ($reguser) list($perms,$rooms,$allowpopupu,$join_room,$USE_SOUNDS) = $DbLink->next_record();
 	$DbLink->clean_results();
 };
 
@@ -567,7 +583,7 @@ if(!isset($Error) && (isset($R3) && $R3 != ""))
 
 		if ($register_room)
 		{
-			// If an other registered user is already moderator for the room to be created but
+			// If another registered user is already moderator for the room to be created but
 			// there is no "true" message in this room then set his status to user for this room
 			$UpdLink = new DB;
 			$DbLink->query("SELECT username,rooms FROM ".C_REG_TBL." WHERE perms = 'moderator' AND username != '$U'");
@@ -736,7 +752,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	elseif (!isset($R))		// $R is set when the frameset is reloaded because of the NN4+ resize bug.
 	{
 		$T = 1;
-		$R = (isset($R0) && $R0 != "")? $R0 : $R1;
+		$R = (isset($R0) && $R0 != "") ? $R0 : $R1;
 	};
 
 	$CookieRoom = urlencode(stripslashes($R));
@@ -782,12 +798,12 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	// Color Input Box mod by Ciprian - it will add the status to the curent cookie for the color_popup
 	setcookie("CookieStatus", $status, time() + 60*60*24*365);        // cookie expires in one year
 
-	// Udpates the IP address and the last log. time of the user in the registered users table if necessary
-	if (isset($reguser) && $reguser) $DbLink->query("UPDATE ".C_REG_TBL." SET reg_time='".time()."', ip='$IP' WHERE username='$U'");
+	// Udpates the IP address, GeoIP country codes and the last login time of the user in the registered users table if necessary
+	if (isset($reguser) && $reguser) $DbLink->query("UPDATE ".C_REG_TBL." SET last_login='".time()."', ip='$IP', country_code='$COUNTRY_CODE', country_name='$COUNTRY_NAME' WHERE username='$U'");
 
 	// In the case of a registered user that logs again...
 	// ...in the same room update his logging time and update his IP address;
-	// ...in an other room kick him from the other room, put a notification message of
+	// ...in another room kick him from the other room, put a notification message of
 	// 		exit for this room, update the users table and put a notification message of
 	// 		entrance for the room he log in.
 	$current_time = time();
@@ -796,7 +812,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 		if (stripslashes($R) == $room)
 		{
 // modified by R Dickow for /away command:
-			$DbLink->query("UPDATE ".C_USR_TBL." SET u_time='$current_time', ip='$IP', awaystat='0' WHERE username='$U'");
+			$DbLink->query("UPDATE ".C_USR_TBL." SET u_time='$current_time', ip='$IP', awaystat='0', country_code='$COUNTRY_CODE', country_name='$COUNTRY_NAME' WHERE username='$U'");
 // end R Dickow /away modification.
 		}
 		else
@@ -818,7 +834,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 			{
 				$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ('$type', '".addslashes($room)."', 'SYS exit', '$Latin1', '$current_time', '', 'sprintf(L_EXIT_ROM, \"".special_char($U,$Latin1)."\")', '', '')");
 				// next line WELCOME SOUND feature altered for compatibility with /away command R Dickow:
-				if(isset($CookieBeep) && $CookieBeep) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '$Latin1', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
+				if(ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '$Latin1', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
 				else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '$Latin1', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM_NOSOUND, \"".special_char($U,$Latin1)."\"))', '', '')");
 				if(C_EN_STATS)
 				{
@@ -829,11 +845,11 @@ if(!isset($Error) && (isset($N) && $N != ""))
 					{
 						$DbLink->query("UPDATE ".C_STS_TBL." SET logins=logins+1,last_in='$current_time' WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
 					}
-					else $DbLink->query("INSERT INTO ".C_STS_TBL." VALUES ('".date("Y-m-d")."', '$R', '$U', '$reguser', '$current_time', '', '', '', '', '', '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')");
+					else $DbLink->query("INSERT INTO ".C_STS_TBL." VALUES ('".date("Y-m-d")."', '$R', '$U', '$reguser', '$current_time', '', '', '', '', '', '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '$IP', '$COUNTRY_CODE', '$COUNTRY_NAME')");
 				}
 			}
 // modified by R Dickow for /away command:
-			$DbLink->query("UPDATE ".C_USR_TBL." SET room='$R',u_time='$current_time', status='$status', ip='$IP', awaystat='0' WHERE username='$U'");
+			$DbLink->query("UPDATE ".C_USR_TBL." SET room='$R',u_time='$current_time', status='$status', ip='$IP', awaystat='0', country_code='$COUNTRY_CODE', country_name='$COUNTRY_NAME' WHERE username='$U'");
 // end R Dickow /away modification.
 
 			if (C_WELCOME)
@@ -842,7 +858,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 				$DbLink->query("DELETE FROM ".C_MSG_TBL." WHERE username LIKE 'SYS welcome' AND address = '$U'");
 				// Insert a new welcome message in the messages table
 				$current_time_plus = $current_time + 1;	// ensures the welcome msg is the last one
-				if(isset($CookieBeep) && $CookieBeep) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '$Latin1', '$current_time_plus', '$U', 'sprintf(WELCOME_MSG)', '', '')");
+				if((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && (($reguser && $USE_SOUNDS && $CookieBeep) || $CookieBeep)) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '$Latin1', '$current_time_plus', '$U', 'sprintf(WELCOME_MSG)', '', '')");
 				else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '$Latin1', '$current_time_plus', '$U', 'sprintf(WELCOME_MSG_NOSOUND)', '', '')");
 			};
 		};
@@ -851,13 +867,13 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	// update his logging time and his IP address
 	elseif (isset($Reload) && $Reload == "NNResize")
 	{
-		$DbLink->query("UPDATE ".C_USR_TBL." SET room='$R',u_time='$current_time', ip='$IP' WHERE username='$U'");
+		$DbLink->query("UPDATE ".C_USR_TBL." SET room='$R',u_time='$current_time', ip='$IP', country_code='$COUNTRY_CODE', country_name='$COUNTRY_NAME' WHERE username='$U'");
 	}
 	// For all other case of users entering in, set user infos. in users table and put a
 	// notification message of entrance in the messages table
 	else
 	{
-		$DbLink->query("INSERT INTO ".C_USR_TBL." VALUES ('$R', '$U', '$Latin1', '$current_time', '$status','$IP', '0', '$current_time', '$email')");
+		$DbLink->query("INSERT INTO ".C_USR_TBL." VALUES ('$R', '$U', '$Latin1', '$current_time', '$status', '$IP', '0', '$current_time', '$email', '$COUNTRY_CODE', '$COUNTRY_NAME')");
 		// Ghost Control mod by Ciprian
 		if (C_SPECIAL_GHOSTS != "")
 		{
@@ -871,7 +887,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 		else
 		{
 			// next line WELCOME SOUND feature altered for compatibility with /away command R Dickow:
-			if(isset($CookieBeep) && $CookieBeep) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '$Latin1', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
+			if(ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '$Latin1', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM, \"".special_char($U,$Latin1)."\"))', '', '')");
 			else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '$Latin1', '$current_time', '', 'stripslashes(sprintf(L_ENTER_ROM_NOSOUND, \"".special_char($U,$Latin1)."\"))', '', '')");
 			if(C_EN_STATS)
 			{
@@ -880,7 +896,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 				{
 					$DbLink->query("UPDATE ".C_STS_TBL." SET logins=logins+1,last_in='$current_time' WHERE stat_date='".date("Y-m-d")."' AND room='$R' AND username='$U'");
 				}
-				else $DbLink->query("INSERT INTO ".C_STS_TBL." VALUES ('".date("Y-m-d")."', '$R', '$U', '$reguser', '$current_time', '', '', '', '', '', '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')");
+				else $DbLink->query("INSERT INTO ".C_STS_TBL." VALUES ('".date("Y-m-d")."', '$R', '$U', '$reguser', '$current_time', '', '', '', '', '', '', '1', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '$IP', '$COUNTRY_CODE', '$COUNTRY_NAME')");
 			}
 		}
 
@@ -890,7 +906,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 			$DbLink->query("DELETE FROM ".C_MSG_TBL." WHERE username LIKE 'SYS welcome' AND address = '$U'");
 			// Insert a new welcome message in the messages table
 			$current_time_plus = $current_time + 1;	// ensures the welcome msg is the last one
-			if(isset($CookieBeep) && $CookieBeep) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '$Latin1', '$current_time_plus', '$U', 'sprintf(WELCOME_MSG)', '', '')");
+			if((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && (($reguser && $USE_SOUNDS && $CookieBeep) || $CookieBeep)) $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '0', '$current_time_plus', '$U', 'sprintf(WELCOME_MSG)', '', '')");
 			else $DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS welcome', '$Latin1', '$current_time_plus', '$U', 'sprintf(WELCOME_MSG_NOSOUND)', '', '')");
 		};
 	};
@@ -916,7 +932,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript1.2">
 	<!--
 <?php
-// Display & remove the server time in the status bar
+	// Display & remove the server time in the status bar
 	include_once("./${ChatPath}lib/worldtime.lib.php");
 	$CorrectedTime = mktime(date("G") + C_TMZ_OFFSET,date("i"),date("s"),date("m"),date("d"),date("Y"));
 ?>
@@ -1062,6 +1078,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 			is_logs_popup = window.open('<?php echo("./${ChatPath}logs.php?L=$L"); ?>','logs_popup','bottom=0,right=0,width=650,height=450,scrollbars=yes,resizable=yes,status=yes,toolbar=no,menubar=no,directories=no,location=no');
 		};
 	};
+
 	// Open the tutorial popup
 	function tutorial_popup()
 	{
@@ -1074,7 +1091,7 @@ if(!isset($Error) && (isset($N) && $N != ""))
 	function users_popup()
 	{
 		window.focus();
-		users_popupWin = window.open("<?php echo($ChatPath); ?>users_popup"+ver4+".php?<?php echo("From=$From&L=$L"); ?>","users_popup_<?php echo(md5(uniqid(""))); ?>","width=230,height=300,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,directories=no,status=yes,location=no");
+		users_popupWin = window.open("<?php echo($ChatPath); ?>users_popup"+ver4+".php?<?php echo("From=$From&L=$L"); ?>","users_popup_<?php echo(md5(uniqid(""))); ?>","width=300,height=300,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,directories=no,status=yes,location=no");
 		users_popupWin.focus();
 	};
 
@@ -1087,8 +1104,8 @@ if(!isset($Error) && (isset($N) && $N != ""))
 		else var link = "";
 		window.focus();
 		url = '<?php echo("${ChatPath}"); ?>' + name + '<?php echo(".php?L=$L"); ?>' + u_name + uname + link;
-		pop_width = (name != 'admin'? 470:830);
-		pop_height = ((name != 'deluser' && name != 'pass_reset') ? (name != 'admin'? 640:580):260);
+		pop_width = (name != 'admin'? 470:900);
+		pop_height = ((name != 'deluser' && name != 'pass_reset') ? (name != 'admin'? 640:610):260);
 		param = "width=" + pop_width + ",height=" + pop_height + ",resizable=yes,scrollbars=yes";
 		if (name == "pm_manager") param = param + ",status=yes";
 		name += "_popup";
@@ -1342,8 +1359,8 @@ function send_headers($title, $icon)
 	?>
 	<!--
 	The lines below are usefull for debugging purpose, please do not remove them!
-	Release: phpMyChat-Plus 1.94-RC3
-	© 2005-2013 Ciprian Murariu (ciprianmp@yahoo.com)
+	Release: phpMyChat-Plus 1.94-RC5
+	© 2005-2015 Ciprian Murariu (ciprianmp@yahoo.com)
 	Based on phpMyChat 0.14.6-dev (also called 0.15.0)
 	© 2000-2005 The phpHeaven Team (http://www.phpheaven.net/)
 	-->
@@ -1356,15 +1373,22 @@ function send_headers($title, $icon)
 	if (!isset($FontName)) $FontName = "";
 	?>
 	<LINK REL="stylesheet" HREF="<?php echo($ChatPath); ?>skins/start_page.css.php?<?php echo("Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-	  var js, fjs = d.getElementsByTagName(s)[0];
-	  if (d.getElementById(id)) return;
-	  js = d.createElement(s); js.id = id;
-	  js.src = "//connect.facebook.net/<?php echo(str_replace("sr_CS","sr_RS",str_replace("es_AR","es_ES",L_LANG))); ?>/all.js#xfbml=1&appId=49226597181";
-	  fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));
-	</script>
+		<?php
+	if(check_internet_connection())
+	{
+	?>
+		<div id="fb-root"></div>
+			<script>(function(d, s, id) {
+			  var js, fjs = d.getElementsByTagName(s)[0];
+			  if (d.getElementById(id)) return;
+			  js = d.createElement(s); js.id = id;
+			  js.src = "//connect.facebook.net/<?php echo(str_replace("sr_CS","sr_RS",str_replace("es_AR","es_ES",L_LANG))); ?>/all.js#xfbml=1&appId=49226597181";
+			  fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+			</script>
+	<?php
+	}
+	?>
 	<SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
 	<!--
     <?php
@@ -1382,8 +1406,8 @@ function send_headers($title, $icon)
 		var IE4 = ((document.all) && (parseInt(navigator.appVersion)>=4)) ? 1 : 0;
 		var ver4 = (NS4 || IE4) ? "H" : "L";
 	<?php
-}
-?>
+	}
+	?>
 
 	// Will update the "Ver" field in the form below according to the javascript abilities of
 	// the browser the users surf with
@@ -1455,7 +1479,7 @@ function isCookieEnabled() {
 	function users_popup()
 	{
 		window.focus();
-		users_popupWin = window.open("<?php echo($ChatPath); ?>users_popup"+ver4+".php?<?php echo("From=$From&L=$L"); ?>","users_popup_<?php echo(md5(uniqid(""))); ?>","width=230,height=300,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,directories=no,status=yes,location=no");
+		users_popupWin = window.open("<?php echo($ChatPath); ?>users_popup"+ver4+".php?<?php echo("From=$From&L=$L"); ?>","users_popup_<?php echo(md5(uniqid(""))); ?>","width=300,height=300,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,directories=no,status=yes,location=no");
 		users_popupWin.focus();
 	};
 
@@ -1468,8 +1492,8 @@ function isCookieEnabled() {
 		else var link = "";
 		window.focus();
 		url = '<?php echo("${ChatPath}"); ?>' + name + '<?php echo(".php?L=$L"); ?>' + u_name + uname + link;
-		pop_width = (name != 'admin'? 470:830);
-		pop_height = ((name != 'deluser' && name != 'pass_reset') ? (name != 'admin'? 640:580):260);
+		pop_width = (name != 'admin'? 470:900);
+		pop_height = ((name != 'deluser' && name != 'pass_reset') ? (name != 'admin'? 640:610):260);
 		param = "width=" + pop_width + ",height=" + pop_height + ",resizable=yes,scrollbars=yes";
 		name += "_popup";
 		window.open(url,name,param);
@@ -1531,8 +1555,8 @@ function isCookieEnabled() {
 	};
 
 	function swapImage(img,imgid) {
-		var image = document.getElementById(imgid);
-		var dropd = document.getElementById(img);
+		var image = (document.all) ? document.all[imgid] : document.getElementById(imgid);
+		var dropd = (document.all) ? document.all[img] : document.getElementById(img);
 		if (imgid == "flagToSwap")
 		{
 			var path = '<?php echo("./".$ChatPath."localization/"); ?>';
@@ -1728,7 +1752,7 @@ if ($show_donation)
 			</TD>
 		</TR>
 		<?php
-		}
+		};
 		?>
 		<TR CLASS="ChatCell">
 			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_SET_2); ?> :</TD>
@@ -1737,8 +1761,7 @@ if ($show_donation)
 			</TD>
 		</TR>
 		<TR CLASS="ChatCell">
-			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_REG_1); ?> :
-			</TD>
+			<TD ALIGN="<?php echo($CellAlign); ?>" VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP"><?php echo(L_REG_1); ?> :</TD>
 			<TD VALIGN="TOP" CLASS="ChatCell" NOWRAP="NOWRAP">
 				<INPUT TYPE="password" NAME="pmc_password" SIZE=11 MAXLENGTH=16 VALUE="<?php echo($RemMe ? $RemMe : ""); ?>" CLASS="ChatBox">
 				<INPUT TYPE="checkbox" NAME="remember" alt="<?php echo(L_SET_19); ?>" title="<?php echo(L_SET_19); ?>"<?php echo($RemMe ? " checked" : "")?>>
@@ -1773,12 +1796,17 @@ if (C_REQUIRE_REGISTER)
 			</TD>
 		</TR>
 </FORM>
+<?php
+if(check_internet_connection())
+{
+	?>
 <TR>
 	<TD ALIGN="CENTER">
 	<div class="fb-like" data-href="https://www.facebook.com/pages/phpMyChat-Plus/112950852062055" data-send="false" data-layout="button_count" data-show-faces="false" data-font="tahoma"></div>
 	</TD>
 </TR>
 	<?php
+}
 	if ($show_donation)
 	{
 	?>
