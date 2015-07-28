@@ -71,7 +71,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_20)
 // by Ciprian using Bob Dickow's registration patch.
 	if (C_ADMIN_NOTIFY)
 	{
-	include("./lib/get_IP.lib.php");		// Set the $IP var
+	require("./lib/get_IP.lib.php");		// Set the $IP var
 	$DbLink->query("SELECT firstname,lastname,country,website,email,showemail,gender,allowpopup,picture,description,favlink,favlink1,slang FROM ".C_REG_TBL." WHERE username='$pmc_username' LIMIT 1");
 	if ($DbLink->num_rows() != 0)
 	{

@@ -1,5 +1,5 @@
 <?php
-// File : romanian/localized.admin.php - plus version (29.04.2012 - rev.17)
+// File : romanian/localized.admin.php - plus version (01.01.2015 - rev.18)
 // Original translation started by Radu Swider <swidera@satline.ro>, first updated by Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro>
 // Corrected, finalized and updated to Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 
@@ -88,7 +88,7 @@ define("A_SHEET4_13", "Pune toţi destinatarii în câmpul <b>’Bcc’</b>");
 define("A_SHEET5_0", "Aveţi instalată versiunea %s");
 define("A_SHEET5_1", "A fost lansată deja o nouă versiune (%s)!");
 
-//Chat Extras
+// Chat Extras
 define("A_EXTR_DSBL", "Extras-ul Chat a fost dezactivat") ;
 define("A_REFRESH_MSG", "Reîncarcă Mesajele") ;
 define("A_MSG_DEL", "Şterge") ;
@@ -98,7 +98,7 @@ define("A_FROM", "De la") ;
 define("A_CHTEX_ROOM", "Camera") ;
 define("A_CHTEX_MSG", "Mesajul") ;
 
-//Save chat logs
+// Save chat logs
 define("A_CHAT_LOGS_1", "Istoricul IP-urilor Connectate la %s");
 define("A_CHAT_LOGS_2", "Arhivarea mesajelor a fost dezactivată");
 define("A_CHAT_LOGS_3", "Deschide pagina cu istoricul IP-urilor");
@@ -138,9 +138,9 @@ define("A_CHAT_LOGS_36", "%s nu există: %s");
 define("A_CHAT_LOGS_37", "%s nu poate fi şters: %s");
 define("A_CHAT_LOGS_38", "%s nu poate fi creat: %s");
 define("A_CHAT_LOGS_39", "%s protejat la scriere: %s");
-define("A_CHAT_LOGS_40", "Erori întâmpinate la salvarea fişierului: %s"); // filename
+define("A_CHAT_LOGS_40", "Erori întâmpinate la salvarea fişierului: %s"); //filename
 
-//Admin Search Page
+// Admin Search Page
 define("A_SEARCH_1", "Pagina de căutare");
 define("A_SEARCH_2", "Toate categoriile");
 define("A_SEARCH_3", "Nume");
@@ -163,11 +163,12 @@ define("A_SEARCH_20", "Sex");
 define("A_SEARCH_21", "Termen căutare");
 define("A_SEARCH_22", "Căutare după");
 define("A_SEARCH_23", "Introduceţi un termen de căutare şi încercaţi din nou");
-define("A_SEARCH_24", "Căutarea nu a returnat nici un rezultat. Redefiniţi criteriile de căutare.");
+define("A_SEARCH_24", "Căutarea nu a returnat niciun rezultat. Redefiniţi criteriile de căutare.");
 define("A_SEARCH_25", "Moderează acest utilizator");
 define("A_SEARCH_26", "Utilizatorul a decis să ascundă aceste informaţii de ochii publicului. Nu dezvălui nimănui informaţii confidenţiale!");
 define("A_SEARCH_27", "Arată luna curentă");
 define("A_SEARCH_28", "Arată toate aniversările");
+define("A_SEARCH_29", "Nu este niciun sărbătorit în luna %s"); //rev.18
 
 // Connected users Page
 define("A_LURKING_1", "Utilizatori conectaţi şi monitorizare") ;

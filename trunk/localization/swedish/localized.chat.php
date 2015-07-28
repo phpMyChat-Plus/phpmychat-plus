@@ -310,7 +310,7 @@ define("L_WHOIS_BOT", "Bot");
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "%s kom till rummet.");
 define("L_EXIT_ROM", "%s lämnar rummet.");
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND != "") define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
@@ -452,7 +452,7 @@ define("COL_ERROR_BOX_USRM", "Du måste bli moderator att kunna använda ".COLOR
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "Välkommen till vår chat. Vänligen använd vårdat spårk (netikett) medan du chattar: <I>pröva vara angenäm och artig</I>.");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND != "") define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
@@ -498,10 +498,10 @@ define("L_LINKS_3", "för att öppna länk");
 define("L_LINKS_4", "gå till ägarens sida");
 define("L_LINKS_5", "för att infoga denna smiley");
 define("L_LINKS_6", "för kontakt");
-define("L_LINKS_7", "besök phpMyChat Hemsida");
-define("L_LINKS_8", "bli medlem phpMyChat Group");
+define("L_LINKS_7", "besök %s Hemsida");
+define("L_LINKS_8", "bli medlem %s Group");
 define("L_LINKS_9", "för att sända din feedback");
-define("L_LINKS_10", "för att ladda ner phpMyChat Plus");
+define("L_LINKS_10", "för att ladda ner %s");
 define("L_LINKS_11", "för att se vilka som chattar");
 define("L_LINKS_12", "för att öppna denna chattens loginfönster");
 define("L_LINKS_13", "för att sända denna buzz");

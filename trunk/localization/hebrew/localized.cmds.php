@@ -21,6 +21,7 @@ define("L_CMD_INVITE", "הזמנה,להזמין"); // invite (send an invitation
 define("L_CMD_JOIN", "לצרף"); // join (join an existing room)
 define("L_CMD_KICK", "לבעוט,בעט,להעיף"); // kick,boot (kick an user from a room)
 define("L_CMD_LTR", ""); // ltr (post a left-to-right text)
+define("L_CMD_MATH", ""); //math (post MathJax equations in chat)
 define("L_CMD_ME", ""); // me (tell the room what you are doing)
 define("L_CMD_MR", ""); // mr (same as "me" but with the gender prefix)
 define("L_CMD_MSG", "אל,פרטי"); // msg,to (send a private message)
@@ -39,6 +40,8 @@ define("L_CMD_SIZE", "גודל"); //size (change/reset the size of the font in c
 define("L_CMD_SORT", "למיין"); // sort (sort - ascending the usernames in the lists, alphabetically or by the time they joined chat)
 define("L_CMD_TIMESTAMP", "זמנים"); // timestamp (show/hide the timestamp in posts and server/worldtime in the status bar)
 define("L_CMD_TOPIC", ""); // topic (set/change the topic)
+define("L_CMD_UTUBE", ""); // tube,utube,youtube (post an youtube video)
+define("L_CMD_VIDEO", ""); // vid,video,play (post a video)
 define("L_CMD_WISP", ""); //wisp,whisp (send a whisper / private message to an user in a different room)
 define("L_CMD_WHOIS", "אודות,מיזה"); // whois,about (shows the profile page of an user) 
 ?>

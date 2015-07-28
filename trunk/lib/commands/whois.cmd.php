@@ -68,13 +68,34 @@ else
 		$Error = sprintf(L_NONREG_USER, $UU);
 		if ($power != "weak")
 		{
-			$DbLink->query("SELECT ip FROM ".C_USR_TBL." WHERE username='".$UU."' LIMIT 1");
+			$DbLink->query("SELECT ip,country_code,country_name FROM ".C_USR_TBL." WHERE username='".$UU."' LIMIT 1");
 			$Nb = $DbLink->num_rows();
 			if ($Nb != "0")
 			{
-				list($IP) = $DbLink->next_record();
+				list($IP,$COUNTRY_CODE,$COUNTRY_NAME) = $DbLink->next_record();
+				// GeoIP mode for country flags
+				if(C_USE_FLAGS && $email != 'bot@bot.com' && $email != 'quote@quote.com')
+				{
+					if(!isset($COUNTRY_CODE) || $COUNTRY_CODE == "")
+					{
+						// GeoIP mode for country flags
+						if (!class_exists("GeoIP")) include("plugins/countryflags/geoip.inc");
+						if(!isset($gi)) $gi = geoip_open("plugins/countryflags/GeoIP.dat",GEOIP_STANDARD);
+						$COUNTRY_CODE = geoip_country_code_by_addr($gi, ltrim($IP,"p"));
+						if (empty($COUNTRY_CODE))
+						{
+							$COUNTRY_CODE = "LAN";
+							$COUNTRY_NAME = "Other/LAN";
+						}
+						if ($COUNTRY_CODE != "LAN") $COUNTRY_NAME = $gi->GEOIP_COUNTRY_NAMES[$gi->GEOIP_COUNTRY_CODE_TO_NUMBER[$COUNTRY_CODE]];
+						if ($PROXY || substr($IP, 0, 1) == "p") $COUNTRY_NAME .= " (Proxy Server)";
+						if(isset($gi) && $gi != "") geoip_close($gi);
+						if(isset($gi6) && $gi6 != "") geoip_close($gi6);
+						$c_flag = L_REG_52.": ".$COUNTRY_NAME." (".$COUNTRY_CODE.")";
+					}
+				}
 				if (substr($IP, 0, 1) == "p") $IP = substr($IP, 1)." (proxy)";
-				$Error .= "\\n".sprintf(L_NONREG_USER_IP, $IP);
+				$Error .= "\\n".sprintf(L_NONREG_USER_IP, $IP)."\\n".(isset($c_flag) ? $c_flag : "");
 			};
 			$DbLink->clean_results();
  		};

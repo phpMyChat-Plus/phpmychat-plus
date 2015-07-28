@@ -1,5 +1,5 @@
 <?php
-// File : english/localized.admin.php - plus version (29.04.2012 - rev.17)
+// File : english/localized.admin.php - plus version (01.01.2015 - rev.18)
 // Original file by Loďc Chapeaux <lolo@phpheaven.net> & Dean Collins <joelford@pacbell.net>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -89,7 +89,7 @@ define("A_SHEET4_13", "Put all recipients in the <b>’Bcc’</b> field");
 define("A_SHEET5_0", "Your currently installed version is %s");
 define("A_SHEET5_1", "There is a new version released (%s)!");
 
-//Chat Extras
+// Chat Extras
 define("A_EXTR_DSBL", "Chat Extras disabled") ;
 define("A_REFRESH_MSG", "Refresh Messages") ;
 define("A_MSG_DEL", "Del") ;
@@ -99,7 +99,7 @@ define("A_FROM", "From") ;
 define("A_CHTEX_ROOM", "Room") ;
 define("A_CHTEX_MSG", "Message") ;
 
-//Save chat logs
+// Save chat logs
 define("A_CHAT_LOGS_1", "Logs of IP Connections to %s");
 define("A_CHAT_LOGS_2", "Chat Archive has been disabled");
 define("A_CHAT_LOGS_3", "Open the Chat IP logs page");
@@ -107,24 +107,24 @@ define("A_CHAT_LOGS_4", "Reset the Chat IP logs file");
 define("A_CHAT_LOGS_5", "This will archive and reset the Chat IP logs file!\\n");
 define("A_CHAT_LOGS_6", "Full Chat Logs Archive");
 define("A_CHAT_LOGS_7", "Show the public chat archive section");
-define("A_CHAT_LOGS_8", "This will delete all the files and folders\\nstored in the %s folder!\\n"); // year
+define("A_CHAT_LOGS_8", "This will delete all the files and folders\\nstored in the %s folder!\\n"); //year
 define("A_CHAT_LOGS_9", "Delete all %s logs"); // year
 define("A_CHAT_LOGS_10", "Delete year");
-define("A_CHAT_LOGS_11", "This will delete all the files\\nstored in the %s folder!\\n"); // month/year
+define("A_CHAT_LOGS_11", "This will delete all the files\\nstored in the %s folder!\\n"); //month/year
 define("A_CHAT_LOGS_12", "(only the public ones)");
 define("A_CHAT_LOGS_13", "Delete month");
-define("A_CHAT_LOGS_14", "This will delete the %s file!\\n"); // day.php file
+define("A_CHAT_LOGS_14", "This will delete the %s file!\\n"); //day.php file
 define("A_CHAT_LOGS_15", "Delete this log");
-define("A_CHAT_LOGS_16", "Read %s log"); // day month year
+define("A_CHAT_LOGS_16", "Read %s log"); //day month year
 define("A_CHAT_LOGS_17", "Public Chat Logs Archive");
 define("A_CHAT_LOGS_18", "(only the public one)");
 define("A_CHAT_LOGS_19", "\\nThis is not reversible...\\nAre you sure?");
 define("A_CHAT_LOGS_20", "Show the full chat archive section");
 define("A_CHAT_LOGS_21", "Go to top");
 define("A_CHAT_LOGS_22", "Archived Log File");
-define("A_CHAT_LOGS_23", "Generated on %s"); // Generated on "date"
-define("A_CHAT_LOGS_24", "Compress all %s logs into a zip archive"); // date
-define("A_CHAT_LOGS_25", "This will build a zip with all the logs\\nstored in the %s folder!\\n"); // month/year
+define("A_CHAT_LOGS_23", "Generated on %s"); //Generated on "date"
+define("A_CHAT_LOGS_24", "Compress all %s logs into a zip archive"); //date
+define("A_CHAT_LOGS_25", "This will build a zip with all the logs\\nstored in the %s folder!\\n"); //month/year
 define("A_CHAT_LOGS_26", "\\nAre you sure?");
 define("A_CHAT_LOGS_27", "Zip archives");
 define("A_CHAT_LOGS_28", "Download %s");
@@ -139,9 +139,9 @@ define("A_CHAT_LOGS_36", "%s doesn’t exist: %s");
 define("A_CHAT_LOGS_37", "%s couldn’t be deleted: %s");
 define("A_CHAT_LOGS_38", "%s couldn’t be created: %s");
 define("A_CHAT_LOGS_39", "%s write protected: %s");
-define("A_CHAT_LOGS_40", "Errors occurred while saving file: %s"); // filename
+define("A_CHAT_LOGS_40", "Errors occurred while saving file: %s"); //filename
 
-//Admin Search Page
+// Admin Search Page
 define("A_SEARCH_1", "Chatroom Search Page");
 define("A_SEARCH_2", "All categories");
 define("A_SEARCH_3", "Names");
@@ -169,6 +169,7 @@ define("A_SEARCH_25", "Moderate this user");
 define("A_SEARCH_26", "User has chosen to hide this info in public profiles, for his privacy. Do not disclose it!");
 define("A_SEARCH_27", "Show current month");
 define("A_SEARCH_28", "Show all birthdays");
+define("A_SEARCH_29", "There is no birthday celebration during %s"); //rev.18
 
 // Connected users Page
 define("A_LURKING_1", "Connected users and Lurking") ;
@@ -178,7 +179,7 @@ define("A_LURKING_2", "Lurking disabled") ;
 define("A_STATS_1", "Chat Statistics Page");
 define("A_STATS_2", "Data collection started on %s"); //date
 define("A_STATS_3", "Overall statistics (All times)");
-define("A_STATS_4", "Detailed statistics (Last %s days of activity)"); //number of days
+define("A_STATS_4", "Detailed statistics (Last %s days of activity)");//number of days
 define("A_STATS_5", "Statistics disabled");
 define("A_STATS_6", "Top %s"); //Top 10 or Top 5
 ?>

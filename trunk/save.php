@@ -80,9 +80,12 @@ if($DbLink->num_rows() > 0)
 		$Message = str_ireplace("L_REG_BRB",L_REG_BRB,$Message);
 		$Message = str_ireplace("L_HELP_MR",sprintf(L_HELP_MR,$User),$Message);
 		$Message = str_ireplace("L_HELP_MS",sprintf(L_HELP_MS,$User),$Message);
+		$Message = str_ireplace("L_PRIV_PM",L_PRIV_PM,$Message);
+		$Message = str_ireplace("L_PRIV_WISP",L_PRIV_WISP,$Message);
 		$Message = str_ireplace(" COLOR=\"".$COLOR_TB."\"", " COLOR=\"".COLOR_CD."\"",$Message);
 		$Message = str_ireplace("...BUZZER...","<img src=\"images/buzz.gif\" alt=\"".L_HELP_BUZZ1."\" title=\"".L_HELP_BUZZ1."\">",$Message);
 		$Message = str_ireplace(" src=\""," src=\"http://".$_SERVER['HTTP_HOST'] . str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME'])."",$Message);
+		if ($Room == '*' || ($User == "SYS room" && $Dest == '*') || $User == "SYS announce") $Room = L_ROOM_ALL;
 		if ($Align == "right") $Message = str_replace("arrowr","arrowl",$Message);
 #		if (C_POPUP_LINKS || eregi('target="_blank"></a>',$Message))
 		if (C_POPUP_LINKS || stripos($Message,'target="_blank"></a>') !== false)

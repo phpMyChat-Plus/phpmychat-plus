@@ -17,6 +17,7 @@ if (preg_match("/SELECT|UNION|INSERT|UPDATE/i",$_SERVER["QUERY_STRING"])) exit()
 
 if (isset($_COOKIE["CookieRoom"])) $R = urldecode($_COOKIE["CookieRoom"]);
 if (isset($_COOKIE["CookieBeep"])) $CookieBeep = $_COOKIE["CookieBeep"];
+if (isset($_COOKIE["CookieStatus"])) $statusu = $_COOKIE["CookieStatus"];
 
 // Sort order by Ciprian
 require("./${ChatPath}config/config.lib.php");
@@ -121,18 +122,17 @@ $DbLink = new DB;
 
 // ** Check for user entrance to beep **
 // Initialize some vars if necessary and put beep on/off in a cookie
-if (!isset($B)) $B = (isset($CookieBeep) ? $CookieBeep : 1);
-setcookie("CookieBeep", $B, time() + 60*60*24*365);		// cookie expires in one year
+if (!isset($B)) $B = (isset($CookieBeep) ? $CookieBeep : 0);
 $BeepRoom = 0;
-if (!isset($LastCheck) || $B == 0) $LastCheck = time();
-if ($B == 1)
+if (!isset($LastCheck) || !$B) $LastCheck = time();
+if ($B)
 {
 	$DbLink->query("SELECT m_time FROM ".C_MSG_TBL." WHERE m_time > '$LastCheck' AND username = 'SYS enter' AND type = 1 ORDER BY m_time DESC LIMIT 1");
 	if ($DbLink->num_rows() > 0)
 	{
-		$BeepRoom = 1;
 		list($LastCheck) = $DbLink->next_record();
-	};
+		$BeepRoom = 1;
+	}
 	$DbLink->clean_results();
 }
 
@@ -150,7 +150,9 @@ else
 }
 
 // ** Compute the beeps/nobeeps reload query used when the sound icon is clicked **
-$B1 = ($B == 1 ? 0 : 1);
+$B1 = ($B ? 0 : 1);
+if($B) setcookie("CookieBeep", $B, time() + 60*60*24*365);		// cookie expires in one year
+else setcookie("CookieBeep", "", time());
 #$ChangeBeeps_Reload = ereg_replace("&B=([0-2])","&B=${B1}",$Refresh);
 $ChangeBeeps_Reload = preg_replace("/&B=([0-2])/","&B=${B1}",$Refresh);
 
@@ -225,31 +227,30 @@ ver4 = (NS4 || IE4) ? 1 : 0;
 <CENTER>
 	<?php echo(LOGIN_LINK); ?><?php echo(L_CHAT); ?></A>
 	<P>
-<?php
-#if (eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
-if (stripos($_SERVER['HTTP_USER_AGENT'], "MSIE") !== false)
-{
-	?>
-		<A HREF="#" onClick="expandAll(); return false" onMouseOver="window.status='<?php echo(L_EXPCOL_ALL); ?>.'; return true;" title="<?php echo(L_EXPCOL_ALL); ?>">
-		<IMG NAME="imEx_big" SRC="images/closed_big.gif" WIDTH=13 HEIGHT=13 ALIGN="MIDDLE" BORDER=0 ALT="<?php echo(L_EXPCOL_ALL); ?>"></A>
-		&nbsp;
-<?php
-}
-?>
-		<A HREF="users_popupH.php?<?php echo($ChangeBeeps_Reload); ?>" onMouseOver="window.status='<?php echo(L_BEEP); ?>.'; return true;" title="<?php echo(L_BEEP); ?>"><IMG SRC="images/<?php if ($B == 0) echo("no"); ?>sound.gif" WIDTH=13 HEIGHT=13 ALIGN="MIDDLE" BORDER=0 ALT="<?php echo(L_BEEP); ?>"></A>
-<?php
-	// ** Beeps if necessary **
-	if ($B == 1 && $BeepRoom)
-	{
-		?>
-		<!-- Sound for user entrance -->
-		<EMBED SRC="sounds/beep.wav" VOLUME="50" HIDDEN="true" AUTOSTART="true" LOOP="false" NAME="Beep" MASTERSOUND><NOEMBED><BGSOUND SRC="sounds/beep.wav" LOOP=1></NOEMBED></EMBED>
 		<?php
-	}
-?>
+		#if (eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
+		if (stripos($_SERVER['HTTP_USER_AGENT'], "MSIE") !== false)
+		{
+		?>
+			<A HREF="#" onClick="expandAll(); return false" onMouseOver="window.status='<?php echo(L_EXPCOL_ALL); ?>.'; return true;" title="<?php echo(L_EXPCOL_ALL); ?>">
+			<IMG NAME="imEx_big" SRC="images/closed_big.gif" WIDTH=13 HEIGHT=13 ALIGN="MIDDLE" BORDER=0 ALT="<?php echo(L_EXPCOL_ALL); ?>"></A>
+			&nbsp;
+		<?php
+		}
+		?>
+		<A HREF="users_popupH.php?<?php echo($ChangeBeeps_Reload); ?>" onMouseOver="window.status='<?php echo(L_BEEP); ?>.'; return true;" title="<?php echo(L_BEEP); ?>"><IMG SRC="images/<?php if ($B == 0) echo("no"); ?>sound.gif" WIDTH=13 HEIGHT=13 ALIGN="MIDDLE" BORDER=0 ALT="<?php echo(L_BEEP); ?>"></A>
+		<?php
+		// ** Beeps if necessary **
+		if($B && $BeepRoom)
+		{
+			?>
+			<!-- Sound for user entrance -->
+			<EMBED SRC="sounds/beep.wav" VOLUME="50" HIDDEN="true" AUTOSTART="true" LOOP="false" NAME="Beep" MASTERSOUND><NOEMBED><BGSOUND SRC="sounds/beep.wav" LOOP=1></NOEMBED></EMBED>
+			<?php
+		}
+		?>
 	</P>
 </CENTER>
-
 <P>
 <?php
 
@@ -263,9 +264,15 @@ if(isset($NbUsers) && $NbUsers > 0)
 			$i = 0;
 			$ChildNb = Array();
 			$Users = new DB;
+			// GeoIP mode for country flags
+			if(C_USE_FLAGS && ($statusu == "a" || $statusu == "t" || $statusu == "m" || C_SHOW_FLAGS))
+			{
+				if (!class_exists("GeoIP")) include("plugins/countryflags/geoip.inc");
+				if(!isset($gi)) $gi = geoip_open("plugins/countryflags/GeoIP.dat",GEOIP_STANDARD);
+			}
 			while(list($Other) = $DbLink->next_record())
 			{
-				if($Users->query("SELECT u.username, u.latin1, u.status, u.r_time FROM ".C_USR_TBL." u WHERE u.room = '".addslashes($Other)."'".$Hide." ORDER BY ".$ordquery.""))
+				if($Users->query("SELECT u.username, u.latin1, u.status, u.r_time, u.ip, u.country_code, u.country_name FROM ".C_USR_TBL." u WHERE u.room = '".addslashes($Other)."'".$Hide." ORDER BY ".$ordquery.""))
 				{
 					if($Users->num_rows() > 0)
 					{
@@ -278,22 +285,45 @@ if(isset($NbUsers) && $NbUsers > 0)
 							$disp_note = 1;
 						}
 						echo("<DIV ID=\"${id}Parent\" CLASS=\"parent\" STYLE=\"margin-top: 5px;\">");
-if (eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
-{
-						echo("<A HREF=\"#\" onClick=\"expandIt('${id}'); return false\" onMouseOver=\"window.status='".L_EXPCOL."'; return true;\" title=\"".L_EXPCOL."\">");
-						echo("<IMG NAME=\"imEx\" SRC=\"images/closed.gif\" WIDTH=9 HEIGHT=9 BORDER=0 ALT=\"".L_EXPCOL."\"></A>");
-}
+						if (eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
+						{
+							echo("<A HREF=\"#\" onClick=\"expandIt('${id}'); return false\" onMouseOver=\"window.status='".L_EXPCOL."'; return true;\" title=\"".L_EXPCOL."\">");
+							echo("<IMG NAME=\"imEx\" SRC=\"images/closed.gif\" WIDTH=9 HEIGHT=9 BORDER=0 ALT=\"".L_EXPCOL."\"></A>");
+						}
 						echo("&nbsp;<B>".htmlspecialchars($Other)."</B><SPAN CLASS=\"small\"><BDO dir=\"${textDirection}\"></BDO>&nbsp;(".$Users->num_rows().")</SPAN><br />");
 						echo("</DIV>");
 						echo("<DIV ID=\"${id}Child\" CLASS=\"child\" STYLE=\"margin-left: 12px\">");
 						$j = 0;
-						while(list($Username,$Latin1,$status,$room_time) = $Users->next_record())
+						while(list($Username,$Latin1,$status,$room_time,$IP,$COUNTRY_CODE,$COUNTRY_NAME) = $Users->next_record())
 						{
 							$j++;
+
+							// GeoIP mode for country flags
+							if(C_USE_FLAGS && ($statusu == "a" || $statusu == "t" || $statusu == "m" || C_SHOW_FLAGS) && $Username != C_BOT_NAME)
+							{
+								if(!isset($COUNTRY_CODE) || $COUNTRY_CODE == "")
+								{
+									$COUNTRY_CODE = geoip_country_code_by_addr($gi, ltrim($IP,"p"));
+									if (empty($COUNTRY_CODE))
+									{
+										$COUNTRY_CODE = "LAN";
+										$COUNTRY_NAME = "Other/LAN";
+									}
+									if ($COUNTRY_CODE != "LAN") $COUNTRY_NAME = $gi->GEOIP_COUNTRY_NAMES[$gi->GEOIP_COUNTRY_CODE_TO_NUMBER[$COUNTRY_CODE]];
+									if ($PROXY || substr($IP, 0, 1) == "p") $COUNTRY_NAME .= " (Proxy Server)";
+								};
+								$c_flag = "&nbsp;<img src=\"./plugins/countryflags/flags/".strtolower($COUNTRY_CODE).".gif\" alt=\"".$COUNTRY_NAME."\" title=\"".$COUNTRY_NAME."\" border=\"0\">&nbsp;(".$COUNTRY_CODE.")";
+							}
+							// GeoIP country flags Mod End.
+
 							$room_time = strftime(L_SHORT_DATETIME,$room_time + C_TMZ_OFFSET*60*60);
 							if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $room_time = str_replace(" ","",$room_time);
-#							echo("-&nbsp;<a ".userClass($status,$Username).";>".special_char($Username,$Latin1,$status)."</a><BDO dir=\"${textDirection}\"></BDO>&nbsp;<font size=1>(".special_char($room_time,$Latin1,"").")</font><br />");
-							echo("-&nbsp;<a ".userClass($status,$Username).";>".special_char($Username,$Latin1,$status)."</a><BDO dir=\"${textDirection}\"></BDO>&nbsp;<font size=1>(".$room_time.")</font><br />");
+							echo("-&nbsp;<a ".userClass($status,$Username).";>".special_char($Username,$Latin1,$status)."</a><BDO dir=\"${textDirection}\"></BDO><font size=1>&nbsp;(".$room_time.")".(isset($c_flag) ? $c_flag : "")."</font><br />");
+							// GeoIP Country flags initialization
+							unset($IP);
+							unset($COUNTRY_CODE);
+							unset($COUNTRY_NAME);
+							unset($c_flag);
 						};
 						echo("</DIV>");
 						$ChildNb[$id] = $j;
@@ -301,6 +331,9 @@ if (eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))
 				}
 				$Users->clean_results();
 			}
+			// GeoIP mode for country flags
+			if(isset($gi) && $gi != "") geoip_close($gi);
+			if(isset($gi6) && $gi6 != "") geoip_close($gi6);
 			$Users->close();
 		}
 	}

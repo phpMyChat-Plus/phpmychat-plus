@@ -22,25 +22,16 @@ require("./localization/".$L."/localized.chat.php");
 </HEAD>
 <BODY CLASS="frame">
 <CENTER>
-<?php
-if ($Ver != "H")
-{
-	?>
-<table align="center"><tr><td align="center">
 	<?php
-}
-?>
-<A HREF="http://sourceforge.net/projects/phpmychat/" title="<?php echo(sprintf(L_CLICK,L_LINKS_7)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,L_LINKS_7)); ?>.'; return true" TARGET="_blank"><IMG SRC="images/icon.gif" WIDTH=88 HEIGHT=31 BORDER=0 ALT="<?php echo(sprintf(L_CLICK,L_LINKS_7)); ?>" TITLE="<?php echo(sprintf(L_CLICK,L_LINKS_7)); ?>"></A>
-<?php
-if ($Ver != "H")
-{
-	?>
-<?php echo ("<div align=\"center\" class=\"small\">".sprintf(L_SKINS_COPY,$SKIN_DATE,$SKIN_BY)."</div>"); ?>
-</td></tr></table>
+	if ($Ver != "H") { ?>
+		<table align="center"><tr><td align="center">
+	<?php }; ?>
+	<A HREF="http://sourceforge.net/projects/phpmychat/" title="<?php echo(sprintf(L_CLICK,sprintf(L_LINKS_7,"phpMyChat-Plus"))); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICK,sprintf(L_LINKS_7,"phpMyChat-Plus"))); ?>.'; return true" TARGET="_blank"><IMG SRC="images/icon.gif" WIDTH=88 HEIGHT=31 BORDER=0 ALT="<?php echo(sprintf(L_CLICK,sprintf(L_LINKS_7,"phpMyChat-Plus"))); ?>" TITLE="<?php echo(sprintf(L_CLICK,sprintf(L_LINKS_7,"phpMyChat-Plus"))); ?>"></A>
 	<?php
-}
-else echo ("<div align=\"center\" class=\"small\">".sprintf(L_SKINS_COPY,$SKIN_DATE,$SKIN_BY)."</div>");
-?>
+	echo ("<div align=\"center\" class=\"small\">".sprintf(L_SKINS_COPY,$SKIN_DATE,$SKIN_BY)."</div>");
+	if ($Ver != "H") { ?>
+		</td></tr></table>
+	<?php }; ?>
 </CENTER>
 </BODY>
 </HTML>

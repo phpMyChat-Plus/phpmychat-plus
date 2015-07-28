@@ -37,8 +37,8 @@ function files_popup() {
 		files_popupWin.focus();
 }
 function swapImage(img,imgid) {
-	var image = document.getElementById(imgid);
-	var dropd = document.getElementById(img);
+	var image = (document.all) ? document.all[imgid] : document.getElementById(imgid);
+	var dropd = (document.all) ? document.all[img] : document.getElementById(img);
 	if (imgid == "flagToSwap")
 	{
 		var path = '<?php echo("./".$ChatPath."localization/"); ?>';
@@ -91,7 +91,7 @@ function swapImage(img,imgid) {
 		document.getElementById('flagToSwap').src = path_flag + document.getElementById('flags').value + flagstype;
 		document.getElementById('ENToSwap').src = '<?php echo("./".$ChatPath."localization/english/images/"); ?>' + flagtype;
 		image.src = path + flagtype;
- 	}
+	}
 	if (imgid == "doorToSwap")
 	{
 		if (dropd.value == "1") image.src = '<?php echo("./".$ChatPath."localization/".$L."/images/exitdoor.gif"); ?>';
@@ -236,8 +236,8 @@ border: 1px solid gray;
 position: relative;
 top: 20px;
 left: auto;
-width: 800px;
-height: 480px;
+width: 880px;
+height: 500px;
 margin-left:10px;
 z-index: 0;
 overflow:auto;
@@ -279,18 +279,18 @@ function skin_selection($no,$roomskin)
 				$i = 0;
 				while (false !== ($skinfile = readdir($skinfiles)))
 				{
-# 					if (!eregi('\.html',$skinfile) && !eregi('\.css',$skinfile) && !is_dir($skinfile) && $skinfile!=='.' && $skinfile!=='..')
-##					if (stripos($skinfile,".html") === false && stripos($skinfile,".css") === false && !is_dir($skinfile) && !preg_match("/^[\.]/", $skinfile))
+#					if (!eregi('\.html',$skinfile) && !eregi('\.css',$skinfile) && !is_dir($skinfile) && $skinfile!=='.' && $skinfile!=='..')
+#					if (stripos($skinfile,".html") === false && stripos($skinfile,".css") === false && !is_dir($skinfile) && !preg_match("/^[\.]/", $skinfile))
 					if (!preg_match("/(\.html|\.css)/i",$skinfile) && !is_dir($skinfile) && !preg_match("/^[\.]/", $skinfile))
 					{
 						$skinsfile[]=$skinfile;
 						$i++;
-			 		}
-			 	}
+					}
+				}
 				closedir($skinfiles);
 				if ($skinsfile)
 				{
-				  	natsort($skinsfile);
+					natsort($skinsfile);
 				}
 				$j = 1;
 				$what = "";
@@ -393,6 +393,7 @@ if (UPD_CHECK)
 					<li><a href="#quote"><?php echo A_CONF_23; ?></a></li>
 					<li><a href="#ghost"><?php echo A_CONF_24; ?></a></li>
 					<li><a href="#bday"><?php echo A_CONF_25; ?></a></li>
+					<li><a href="#ipcflags"><?php echo A_CONF_45; ?></a></li>
 				</ul>
 			</dd>
 	</dl>
@@ -410,15 +411,15 @@ if (UPD_CHECK)
 # if(UPD_CHECK && (($app_last_version > $app_version) || (($app_last_version == $app_version) && ((APP_LAST_MINOR == "" && (ereg("RC",APP_MINOR) || ereg("ß",APP_MINOR))) || (ereg("f",APP_LAST_MINOR) && (ereg("RC",APP_MINOR) || ereg("ß",APP_MINOR) || APP_MINOR == "")) || (ereg("RC",APP_LAST_MINOR) && ereg("ß",APP_MINOR)) || (ereg("ß",APP_LAST_MINOR) && ereg("ß",APP_MINOR) && str_replace("-ß","",APP_LAST_MINOR) > str_replace("-ß","",APP_MINOR)) || (ereg("f",APP_LAST_MINOR) && ereg("f",APP_MINOR) && str_replace("-f","",APP_LAST_MINOR) > str_replace("-f","",APP_MINOR)) || (ereg("RC",APP_LAST_MINOR) && ereg("RC",APP_MINOR) && str_replace("-RC","",APP_LAST_MINOR) > str_replace("-RC","",APP_MINOR))))))
  if(UPD_CHECK && (($app_last_version > $app_version) || (($app_last_version == $app_version) && ((APP_LAST_MINOR == "" && (stripos(APP_MINOR,"RC") !== false || strpos(APP_MINOR,"ß") !== false)) || (stripos(APP_LAST_MINOR,"f") !== false && (stripos(APP_MINOR,"RC") !== false || strpos(APP_MINOR,"ß") !== false || APP_MINOR == "")) || (stripos(APP_LAST_MINOR,"RC") !== false && strpos(APP_MINOR,"ß") !== false) || (strpos(APP_LAST_MINOR,"ß") !== false && strpos(APP_MINOR,"ß") !== false && str_replace("-ß","",APP_LAST_MINOR) > str_replace("-ß","",APP_MINOR)) || (stripos(APP_LAST_MINOR,"f") !== false && stripos(APP_MINOR,"f") !== false && str_ireplace("-f","",APP_LAST_MINOR) > str_ireplace("-f","",APP_MINOR)) || (stripos(APP_LAST_MINOR,"RC") !== false && stripos(APP_MINOR,"RC") && str_ireplace("-RC","",APP_LAST_MINOR) > str_ireplace("-RC","",APP_MINOR))))))
  {
-#  	if (ereg("f",APP_LAST_MINOR) || ereg("ß",APP_LAST_MINOR) || ereg("RC",APP_LAST_MINOR)) $minor_dir = "/Fixes/";
- 	$minor_dir = "/";
- 	if (stripos(APP_LAST_MINOR,"f") !== false) $minor_dir = "/Fixes/";
-# 	elseif (strpos(APP_LAST_MINOR,"ß") !== false || stripos(APP_LAST_MINOR,"RC") !== false) $minor_dir = "/Betas/";
- 	?>
- 						<li><a href="http://www.ciprianmp.com/atm/index.php?directory=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_LAST_VERSION.$minor_dir); ?>" target=_blank Title="<?php echo sprintf(A_CONF_ERR_4, APP_LAST_VERSION.APP_LAST_MINOR); ?>" onMouseOver="window.status='<?php echo sprintf(A_CONF_ERR_4, APP_LAST_VERSION.APP_LAST_MINOR); ?>.'; return true"><?php echo sprintf(A_CONF_35, APP_LAST_VERSION.APP_LAST_MINOR); ?></a></li>
+#	if (ereg("f",APP_LAST_MINOR) || ereg("ß",APP_LAST_MINOR) || ereg("RC",APP_LAST_MINOR)) $minor_dir = "/Fixes/";
+	$minor_dir = "/";
+	if (stripos(APP_LAST_MINOR,"f") !== false) $minor_dir = "/Fixes/";
+#	elseif (strpos(APP_LAST_MINOR,"ß") !== false || stripos(APP_LAST_MINOR,"RC") !== false) $minor_dir = "/Betas/";
+	?>
+						<li><a href="http://www.ciprianmp.com/atm/index.php?directory=programming/phpMyChat/Ciprian_releases/Plus_version/<?php echo(APP_LAST_VERSION.$minor_dir); ?>" target=_blank Title="<?php echo sprintf(A_CONF_ERR_4, APP_LAST_VERSION.APP_LAST_MINOR); ?>" onMouseOver="window.status='<?php echo sprintf(A_CONF_ERR_4, APP_LAST_VERSION.APP_LAST_MINOR); ?>.'; return true"><?php echo sprintf(A_CONF_35, APP_LAST_VERSION.APP_LAST_MINOR); ?></a></li>
  <?php
  }
- 	?>
+	?>
 					<li><a href="http://www.ciprianmp.com/atm/viewer_content.php?file=Plus FAQ.txt&dir=programming/phpMyChat/Ciprian_releases/Plus_version" target=_blank Title="<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_36)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_36)); ?>'; return true"><?php echo A_CONF_36; ?></a></li>
 					<li><a href="http://www.ciprianmp.com/latest/" target=_blank Title="<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_37)); ?>" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS, L_LINKS_15, A_CONF_37)); ?>.'; return true"><?php echo A_CONF_37; ?></a></li>
 					<li><a href="mailto:ciprianmp@yahoo.com?subject=phpMychat%20Plus%20feedback" onMouseOver="window.status='<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>.'; return true;" title="<?php echo(sprintf(L_CLICKS,L_LINKS_6,L_AUTHOR)); ?>" target=_blank><?php echo A_CONF_38; ?></a></li>
@@ -450,7 +451,7 @@ if (UPD_CHECK)
 		?>
 <div><p><table align=center align=center border=0 cellpadding=0 class=menu style=background:white><tr><td class=success align=center><?php echo("<br />- ".sprintf(A_SHEET5_0, APP_NAME." - ".APP_VERSION.APP_MINOR)." -<br />"); ?>
 <?php
-# 		if (($app_last_version > $app_version) || (($app_last_version == $app_version) && ((APP_LAST_MINOR == "" && (ereg("RC",APP_MINOR) || ereg("ß",APP_MINOR))) || (ereg("f",APP_LAST_MINOR) && (ereg("RC",APP_MINOR) || ereg("ß",APP_MINOR) || APP_MINOR == "")) || (ereg("RC",APP_LAST_MINOR) && ereg("ß",APP_MINOR)) || (ereg("ß",APP_LAST_MINOR) && ereg("ß",APP_MINOR) && str_replace("-ß","",APP_LAST_MINOR) > str_replace("-ß","",APP_MINOR)) || (ereg("f",APP_LAST_MINOR) && ereg("f",APP_MINOR) && str_replace("-f","",APP_LAST_MINOR) > str_replace("-f","",APP_MINOR)) || (ereg("RC",APP_LAST_MINOR) && ereg("RC",APP_MINOR) && str_replace("-RC","",APP_LAST_MINOR) > str_replace("-RC","",APP_MINOR)))))
+#		if (($app_last_version > $app_version) || (($app_last_version == $app_version) && ((APP_LAST_MINOR == "" && (ereg("RC",APP_MINOR) || ereg("ß",APP_MINOR))) || (ereg("f",APP_LAST_MINOR) && (ereg("RC",APP_MINOR) || ereg("ß",APP_MINOR) || APP_MINOR == "")) || (ereg("RC",APP_LAST_MINOR) && ereg("ß",APP_MINOR)) || (ereg("ß",APP_LAST_MINOR) && ereg("ß",APP_MINOR) && str_replace("-ß","",APP_LAST_MINOR) > str_replace("-ß","",APP_MINOR)) || (ereg("f",APP_LAST_MINOR) && ereg("f",APP_MINOR) && str_replace("-f","",APP_LAST_MINOR) > str_replace("-f","",APP_MINOR)) || (ereg("RC",APP_LAST_MINOR) && ereg("RC",APP_MINOR) && str_replace("-RC","",APP_LAST_MINOR) > str_replace("-RC","",APP_MINOR)))))
 		if (($app_last_version > $app_version) || (($app_last_version == $app_version) && ((APP_LAST_MINOR == "" && (stripos(APP_MINOR,"RC") !== false || strpos(APP_MINOR,"ß") !== false)) || (stripos(APP_LAST_MINOR,"f") !== false && (stripos(APP_MINOR,"RC") !== false || strpos(APP_MINOR,"ß") !== false || APP_MINOR == "")) || (stripos(APP_LAST_MINOR,"RC") !== false && strpos(APP_MINOR,"ß") !== false) || (strpos(APP_LAST_MINOR,"ß") !== false && strpos(APP_MINOR,"ß") !== false && str_replace("-ß","",APP_LAST_MINOR) > str_replace("-ß","",APP_MINOR)) || (stripos(APP_LAST_MINOR,"f") !== false && stripos(APP_MINOR,"f") !== false && str_ireplace("-f","",APP_LAST_MINOR) > str_ireplace("-f","",APP_MINOR)) || (stripos(APP_LAST_MINOR,"RC") !== false && stripos(APP_MINOR,"RC") !== false && str_ireplace("-RC","",APP_LAST_MINOR) > str_ireplace("-RC","",APP_MINOR)))))
 		{
 		?>
@@ -481,11 +482,11 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 {
   while(list($name,$value) = each($_GET))
   {
-           $$name = $value;
+		   $$name = $value;
   };
   while(list($name,$value) = each($_POST))
   {
-           $$name = $value;
+		   $$name = $value;
   };
 
   if($vNUM_AVATARS > $max_num_avatars) $vNUM_AVATARS = $max_num_avatars;
@@ -691,7 +692,9 @@ if (isset($FORM_SEND) && $FORM_SEND == 5)
 						"ALLOW_TEXT_COLORS = '$vALLOW_TEXT_COLORS', ".
 */						"TAGS_POWERS = '$vTAGS_POWERS', ".
 						"ALLOW_MATH = '$vALLOW_MATH', ".
-						"SRC_MATH = '$vSRC_MATH' ".
+						"SRC_MATH = '$vSRC_MATH', ".
+						"USE_FLAGS = '$vUSE_FLAGS', ".
+						"SHOW_FLAGS = '$vSHOW_FLAGS' ".
 				"WHERE ID='0'";
 
 		$DbLink->query($query);
@@ -756,7 +759,7 @@ if((C_QUOTE_NAME != $vQUOTE_NAME || C_QUOTE_FONT_COLOR != $vQUOTE_FONT_COLOR || 
 	{
 		$Error = sprintf(A_CONF_ERR_6, A_CONFRDQ);
 	}
-# 	else if (ereg("[\, \']", stripslashes($vQUOTE_NAME)) && C_QUOTE_NAME != $vQUOTE_NAME)
+#	else if (ereg("[\, \']", stripslashes($vQUOTE_NAME)) && C_QUOTE_NAME != $vQUOTE_NAME)
 	else if(preg_match("/[ |,|'|\\\\]/", $vQUOTE_NAME) && C_QUOTE_NAME != $vQUOTE_NAME)
 	{
 		$Error = A_CONF_ERR_7."<br />".$REG_CHARS_ALLOWED."<br />".sprintf(A_CONF_ERR_8, A_CONFRDQ, "(".$vQUOTE_NAME.")");
@@ -832,82 +835,84 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<input type=hidden name="pmc_username" value="<?php echo(htmlspecialchars(stripslashes($pmc_username))); ?>">
 		<input type=hidden name="pmc_password" value="<?php echo($pmc_password); ?>">
 		<input type=hidden name="FORM_SEND" id="FORM_SEND" value="5">
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="server"></a><b><?php echo A_CONF_1; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_1; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_2); ?></i>
+	<td><b><?php echo A_CONFCONTENT_1; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_2); ?></i>
 	</td>
-    <td>
-        <select name="vUPD_CHECK">
-	        <option value="0"<?php if($UPD_CHECK==0 || !$upd_possible){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($UPD_CHECK==1 && $upd_possible){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-        </select>
+	<td>
+		<select name="vUPD_CHECK">
+			<option value="0"<?php if($UPD_CHECK==0 || !$upd_possible){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($UPD_CHECK==1 && $upd_possible){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		</select>
 	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_3; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_4); ?></i>
+	<td><b><?php echo A_CONFCONTENT_3; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_4); ?></i>
 	</td>
-    <td>
-        <select name="vEN_STATS">
-	        <option value="0"<?php if($EN_STATS==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($EN_STATS==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-        </select>
+	<td>
+		<select name="vEN_STATS">
+			<option value="0"<?php if($EN_STATS==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($EN_STATS==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		</select>
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_5; ?></b>
+	<td><b><?php echo A_CONFCONTENT_5; ?></b>
 	</td>
-    <td>
+	<td>
 		<input name="vMSG_DEL" type="text" size="7" maxlength="3" value="<?php echo $MSG_DEL; ?>">&nbsp;(<?php echo $MSG_DEL == 1 ? L_HOUR : L_HOURS; ?>)</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_7; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_8); ?></i>
+	<td><b><?php echo A_CONFCONTENT_7; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_8); ?></i>
 	</td>
-    <td>
-        <select name="vCHAT_BOOT">
-	        <option value="0"<?php if($CHAT_BOOT==0){ echo " selected"; } ?>><?php echo L_DISABLED ?></option>
-	        <option value="1"<?php if($CHAT_BOOT==1){ echo " selected"; } ?>><?php echo L_ENABLED ?></option>
-        </select><br />
-    	<input name="vUSR_DEL" type="text" size="7" maxlength="2" value="<?php echo $USR_DEL; ?>">&nbsp;(<?php echo $USR_DEL == 1 ? L_MIN : L_MINS; ?>)</td>
+	<td>
+		<select name="vCHAT_BOOT">
+			<option value="0"<?php if($CHAT_BOOT==0){ echo " selected"; } ?>><?php echo L_DISABLED ?></option>
+			<option value="1"<?php if($CHAT_BOOT==1){ echo " selected"; } ?>><?php echo L_ENABLED ?></option>
+		</select><br />
+		<input name="vUSR_DEL" type="text" size="7" maxlength="2" value="<?php echo $USR_DEL; ?>">&nbsp;(<?php echo $USR_DEL == 1 ? L_MIN : L_MINS; ?>)</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_10 ?></b>
-    </td>
-    <td>
+	<td><b><?php echo A_CONFCONTENT_10 ?></b>
+	</td>
+	<td>
 		<input name="vREG_DEL" type="text" size="7" maxlength="4" value="<?php echo $REG_DEL; ?>">&nbsp;(<?php echo $REG_DEL == 1 ? L_DAY : L_DAYS; ?>)</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_11 ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_11a); ?><br />
-    	<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_124); ?></font></i>
-    </td>
-    <td>
-        <select name="vCHAT_SYSTEM" DISABLED>
-	        <option value="standalone"<?php if($CHAT_SYSTEM=="standalone"){ echo " selected"; } ?>><?php echo "standalone" ?></option>
-	        <option value="phpnuke"<?php if($CHAT_SYSTEM=="phpnuke"){ echo " selected"; } ?>><?php echo "phpnuke" ?></option>
-	        <option value="phpbb"<?php if($CHAT_SYSTEM=="phpbb"){ echo " selected"; } ?>><?php echo "phpbb" ?></option>
-        </select><br />
-    		<?php echo A_CONFCONTENT_11b; ?><br />
+	<td><b><?php echo A_CONFCONTENT_11 ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_11a); ?><br />
+		<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_124); ?></font></i>
+	</td>
+	<td>
+		<select name="vCHAT_SYSTEM" DISABLED>
+			<option value="standalone"<?php if($CHAT_SYSTEM=="standalone"){ echo " selected"; } ?>><?php echo "standalone" ?></option>
+			<option value="phpnuke"<?php if($CHAT_SYSTEM=="phpnuke"){ echo " selected"; } ?>><?php echo "phpnuke" ?></option>
+			<option value="phpbb"<?php if($CHAT_SYSTEM=="phpbb"){ echo " selected"; } ?>><?php echo "phpbb" ?></option>
+		</select><br />
+			<?php echo A_CONFCONTENT_11b; ?><br />
 		<input name="vNUKE_BB_PATH" type="text" size="25" maxlength="100" value="<?php echo $NUKE_BB_PATH; ?>" DISABLED></td>
 </tr>
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="languages"></a><b><?php echo A_CONF_2 ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1 ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2 ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_12; ?></b>
+	<td><b><?php echo A_CONFCONTENT_12; ?></b>
 	</td>
-    <td>
+	<td>
 		<?php
 			// Available languages
 			$AvailableLanguages = array();
@@ -929,7 +934,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			asort($AvailableLanguages);
 			reset($AvailableLanguages);
 		?>
-		    <select name="vLANGUAGE" id="flags" onChange="swapImage('flags','flagToSwap')">
+			<select name="vLANGUAGE" id="flags" onChange="swapImage('flags','flagToSwap')">
 		<?php
 			$i = 0;
 			while(list($key, $langname) = each($AvailableLanguages))
@@ -995,190 +1000,192 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 				$flagsel = "flag0.gif";
 			}
 			?>
-	    </select>&nbsp;<img style="vertical-align:middle" id="flagToSwap" src="<?php echo("./".$ChatPath."localization/".$langnamesel."/images/".($FLAGS_3D ? $flagsel_3d : $flagsel)); ?>" <?php echo("border=0 ALT=\"".A_CONFCONTENT_12a."\" Title=\"".A_CONFCONTENT_12a."\""); ?> />
-    </td>
+		</select>&nbsp;<img style="vertical-align:middle" id="flagToSwap" src="<?php echo("./".$ChatPath."localization/".$langnamesel."/images/".($FLAGS_3D ? $flagsel_3d : $flagsel)); ?>" <?php echo("border=0 ALT=\"".A_CONFCONTENT_12a."\" Title=\"".A_CONFCONTENT_12a."\""); ?> />
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_13; ?></b>
+	<td><b><?php echo A_CONFCONTENT_13; ?></b>
 	</td>
-    <td><select name="vENGLISH_FORMAT" id="ENflag" onChange="swapImage('ENflag','ENToSwap'); swapImage('3Dflag','3DToSwap'); swapImage('flags','flagToSwap')">
-	        <option value="UK"<?php if($ENGLISH_FORMAT=="UK"){ echo " selected"; $ENsel = ($FLAGS_3D) ? "flag.gif" : "flag0.gif"; } ?>><?php echo(L_ORIG_LANG_ENUK); ?></option>
-	        <option value="US"<?php if($ENGLISH_FORMAT=="US"){ echo " selected"; $ENsel = ($FLAGS_3D) ? "flag_us.gif" : "flag_us0.gif"; } ?>><?php echo(L_ORIG_LANG_ENUS); ?></option>
-        </select>&nbsp;<img style="vertical-align:middle" id="ENToSwap" src="<?php echo(($FLAGS_3D) ? "./".$ChatPath."localization/english/images/".$ENsel."" : "./".$ChatPath."localization/english/images/".$ENsel.""); ?>" <?php echo("border=0 ALT=\"".A_CONFCONTENT_13a."\" Title=\"".A_CONFCONTENT_13a."\""); ?> />
-    </td>
+	<td><select name="vENGLISH_FORMAT" id="ENflag" onChange="swapImage('ENflag','ENToSwap'); swapImage('3Dflag','3DToSwap'); swapImage('flags','flagToSwap')">
+			<option value="UK"<?php if($ENGLISH_FORMAT=="UK"){ echo " selected"; $ENsel = ($FLAGS_3D) ? "flag.gif" : "flag0.gif"; } ?>><?php echo(L_ORIG_LANG_ENUK); ?></option>
+			<option value="US"<?php if($ENGLISH_FORMAT=="US"){ echo " selected"; $ENsel = ($FLAGS_3D) ? "flag_us.gif" : "flag_us0.gif"; } ?>><?php echo(L_ORIG_LANG_ENUS); ?></option>
+		</select>&nbsp;<img style="vertical-align:middle" id="ENToSwap" src="<?php echo(($FLAGS_3D) ? "./".$ChatPath."localization/english/images/".$ENsel."" : "./".$ChatPath."localization/english/images/".$ENsel.""); ?>" <?php echo("border=0 ALT=\"".A_CONFCONTENT_13a."\" Title=\"".A_CONFCONTENT_13a."\""); ?> />
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_14; ?></b>
+	<td><b><?php echo A_CONFCONTENT_14; ?></b>
 	</td>
-    <td>
-        <select name="vMULTI_LANG">
-	        <option value="0"<?php if($MULTI_LANG==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_14_1; ?></option>
-	        <option value="1"<?php if($MULTI_LANG==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_14_2; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vMULTI_LANG">
+			<option value="0"<?php if($MULTI_LANG==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_14_1; ?></option>
+			<option value="1"<?php if($MULTI_LANG==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_14_2; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_15; ?></b>
+	<td><b><?php echo A_CONFCONTENT_15; ?></b>
 	</td>
-    <td><select name="vFLAGS_3D" id="3Dflag" onChange="swapImage('3Dflag','3DToSwap'); swapImage('ENflag','ENToSwap'); swapImage('flags','flagToSwap')">
-	        <option value="0"<?php if($FLAGS_3D==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_15b; ?></option>
-	        <option value="1"<?php if($FLAGS_3D==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_15c; ?></option>
-        </select>&nbsp;<img style="vertical-align:middle" id="3DToSwap" src="<?php echo(($FLAGS_3D) ? "./".$ChatPath."localization/english/images/flag.gif" : "./".$ChatPath."localization/english/images/flag0.gif"); ?>" <?php echo("border=0 ALT=\"".A_CONFCONTENT_15a."\" Title=\"".A_CONFCONTENT_15a."\""); ?> />
-    </td>
+	<td><select name="vFLAGS_3D" id="3Dflag" onChange="swapImage('3Dflag','3DToSwap'); swapImage('ENflag','ENToSwap'); swapImage('flags','flagToSwap')">
+			<option value="0"<?php if($FLAGS_3D==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_15b; ?></option>
+			<option value="1"<?php if($FLAGS_3D==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_15c; ?></option>
+		</select>&nbsp;<img style="vertical-align:middle" id="3DToSwap" src="<?php echo(($FLAGS_3D) ? "./".$ChatPath."localization/english/images/flag.gif" : "./".$ChatPath."localization/english/images/flag0.gif"); ?>" <?php echo("border=0 ALT=\"".A_CONFCONTENT_15a."\" Title=\"".A_CONFCONTENT_15a."\""); ?> />
+	</td>
 </tr>
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="owner"></a><b><?php echo A_CONF_3; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2 ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><a name="ownername"></a><b><?php echo A_CONFCONTENT_16; ?></b>
+	<td><a name="ownername"></a><b><?php echo A_CONFCONTENT_16; ?></b>
 	</td>
-    <td>
+	<td>
 		<input name="vADMIN_NAME" type="text" size="25" maxlength="35" value="<?php echo $ADMIN_NAME; ?>">
 	</td>
 </tr>
 <tr>
-    <td><a name="admin_email"></a><b><?php echo A_CONFCONTENT_17; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_18); ?></i>
-    </td>
-    <td>
+	<td><a name="admin_email"></a><b><?php echo A_CONFCONTENT_17; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_18); ?></i>
+	</td>
+	<td>
 		<input name="vADMIN_EMAIL" type="text" size="25" maxlength="35" value="<?php echo $ADMIN_EMAIL; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_19; ?></b>
+	<td><b><?php echo A_CONFCONTENT_19; ?></b>
 	</td>
-    <td>
+	<td>
 		<input name="vCHAT_URL" type="text" size="25" maxlength="100" value="<?php echo $CHAT_URL; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_20; ?></b><br />
-    		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_21); ?></i>
-   	</td>
-    <td>
+	<td><b><?php echo A_CONFCONTENT_20; ?></b><br />
+			<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_21); ?></i>
+	</td>
+	<td>
 		<textarea name="vMAIL_GREETING" rows=3 cols=28 wrap=on><?php echo $MAIL_GREETING; ?></textarea>
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_22; ?></b>
+	<td><b><?php echo A_CONFCONTENT_22; ?></b>
 	</td>
-    <td>
+	<td>
 		<input name="vCHAT_NAME" type="text" size="25" maxlength="255" value="<?php echo $CHAT_NAME; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_23; ?></b><br />
-    		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_24); ?></i><br />
-    		<?php echo A_CONFCONTENT_25; ?>
-    </td>
-    <td>
+	<td><b><?php echo A_CONFCONTENT_23; ?></b><br />
+			<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_24); ?></i><br />
+			<?php echo A_CONFCONTENT_25; ?>
+	</td>
+	<td>
 		<select name="vSHOW_LOGO">
-	        <option value="0"<?php if($SHOW_LOGO==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_23_1; ?></option>
-	        <option value="1"<?php if($SHOW_LOGO==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_23_2; ?></option>
-        </select><br />
+			<option value="0"<?php if($SHOW_LOGO==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_23_1; ?></option>
+			<option value="1"<?php if($SHOW_LOGO==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_23_2; ?></option>
+		</select><br />
 		<input name="vLOGO_IMG" type="text" size="25" maxlength="255" value="<?php echo $LOGO_IMG; ?>"><br />
 		<img src="<?php echo($LOGO_IMG); ?>" border=0 width=180 <?php echo("ALT=\"".$LOGO_ALT."\" Title=\"".$LOGO_ALT."\""); ?> />
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_26; ?></b></td>
-    <td>
+	<td><b><?php echo A_CONFCONTENT_26; ?></b></td>
+	<td>
 		<input name="vLOGO_OPEN" type="text" size="25" maxlength="255" value="<?php echo $LOGO_OPEN; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_27; ?></b>
+	<td><b><?php echo A_CONFCONTENT_27; ?></b>
 	</td>
-    <td>
+	<td>
 		<input name="vLOGO_ALT" type="text" size="25" maxlength="255" value="<?php echo $LOGO_ALT; ?>">
 	</td>
 </tr>
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="registration"></a><b><?php echo A_CONF_4; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_28; ?></b><br />
-    	<font color=red><?php echo A_CONFCONTENT_29; ?></font>
+	<td><b><?php echo A_CONFCONTENT_28; ?></b><br />
+		<font color=red><?php echo A_CONFCONTENT_29; ?></font>
 	</td>
-    <td>
-        <select name="vALLOW_REGISTER">
-	        <option value="0"<?php if($ALLOW_REGISTER==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($ALLOW_REGISTER==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-        </select>
+	<td>
+		<select name="vALLOW_REGISTER">
+			<option value="0"<?php if($ALLOW_REGISTER==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($ALLOW_REGISTER==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		</select>
 		<font color=red> * - <?php echo L_ENABLED; ?></font>
-    </td>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_30; ?></b>
+	<td><b><?php echo A_CONFCONTENT_30; ?></b>
 	</td>
-    <td>
-        <select name="vREQUIRE_REGISTER">
-	        <option value="0"<?php if($REQUIRE_REGISTER==0){ echo " selected"; } ?>><?php echo A_CONFOPTIONAL; ?></option>
-	        <option value="1"<?php if($REQUIRE_REGISTER==1){ echo " selected"; } ?>><?php echo A_CONFREQUIRED; ?></option>
-        </select>
+	<td>
+		<select name="vREQUIRE_REGISTER">
+			<option value="0"<?php if($REQUIRE_REGISTER==0){ echo " selected"; } ?>><?php echo A_CONFOPTIONAL; ?></option>
+			<option value="1"<?php if($REQUIRE_REGISTER==1){ echo " selected"; } ?>><?php echo A_CONFREQUIRED; ?></option>
+		</select>
 		<font color=red> *</font>
-    </td>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_31; ?></b>
+	<td><b><?php echo A_CONFCONTENT_31; ?></b>
 	</td>
-    <td>
-        <select name="vREQUIRE_NAMES">
-	        <option value="0"<?php if($REQUIRE_NAMES==0){ echo " selected"; } ?>><?php echo A_CONFOPTIONAL; ?></option>
-	        <option value="1"<?php if($REQUIRE_NAMES==1){ echo " selected"; } ?>><?php echo A_CONFREQUIRED; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vREQUIRE_NAMES">
+			<option value="0"<?php if($REQUIRE_NAMES==0){ echo " selected"; } ?>><?php echo A_CONFOPTIONAL; ?></option>
+			<option value="1"<?php if($REQUIRE_NAMES==1){ echo " selected"; } ?>><?php echo A_CONFREQUIRED; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_32; ?></b>
+	<td><b><?php echo A_CONFCONTENT_32; ?></b>
 	</td>
-    <td>
-        <select name="vEMAIL_PASWD">
-	        <option value="0"<?php if($EMAIL_PASWD==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($EMAIL_PASWD==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-        </select>
+	<td>
+		<select name="vEMAIL_PASWD">
+			<option value="0"<?php if($EMAIL_PASWD==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($EMAIL_PASWD==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		</select>
 		<font color=red> * - <?php echo L_ENABLED; ?></font>
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_33; ?></b>
+	<td><b><?php echo A_CONFCONTENT_33; ?></b>
 	</td>
-    <td>
+	<td>
 		<input name="vPASS_LENGTH" type="text" size="7" maxlength="2" value="<?php echo $PASS_LENGTH; ?>">
-    </td>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_34; ?></b>
+	<td><b><?php echo A_CONFCONTENT_34; ?></b>
 	</td>
-    <td>
-        <select name="vEMAIL_USER">
-	        <option value="0"<?php if($EMAIL_USER==0){ echo " selected"; } ?>><?php echo A_CONFNOTSEND; ?></option>
-	        <option value="1"<?php if($EMAIL_USER==1){ echo " selected"; } ?>><?php echo A_CONFSEND; ?></option>
-        </select>
+	<td>
+		<select name="vEMAIL_USER">
+			<option value="0"<?php if($EMAIL_USER==0){ echo " selected"; } ?>><?php echo A_CONFNOTSEND; ?></option>
+			<option value="1"<?php if($EMAIL_USER==1){ echo " selected"; } ?>><?php echo A_CONFSEND; ?></option>
+		</select>
 		<font color=red> * - <?php echo A_CONFNOTSEND; ?></font>
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_35; ?></b>
+	<td><b><?php echo A_CONFCONTENT_35; ?></b>
 	</td>
-    <td>
-        <select name="vADMIN_NOTIFY">
-	        <option value="0"<?php if($ADMIN_NOTIFY==0){ echo " selected"; } ?>><?php echo A_CONFNOTSEND; ?></option>
-	        <option value="1"<?php if($ADMIN_NOTIFY==1){ echo " selected"; } ?>><?php echo A_CONFSEND; ?></option>
-        </select>
+	<td>
+		<select name="vADMIN_NOTIFY">
+			<option value="0"<?php if($ADMIN_NOTIFY==0){ echo " selected"; } ?>><?php echo A_CONFNOTSEND; ?></option>
+			<option value="1"<?php if($ADMIN_NOTIFY==1){ echo " selected"; } ?>><?php echo A_CONFSEND; ?></option>
+		</select>
 		<font color=red> * - <?php echo A_CONFSEND; ?></font>
-    </td>
+	</td>
 </tr>
 <tr>
-    <td colspan="2"><a name="reg_hint"></a>
+	<td colspan="2"><a name="reg_hint"></a>
 	<b><font color=red>* <?php echo sprintf(A_CONFHINT, A_CONFCONTENT_37); ?></b></font>
 			<i><ul>
 				<li>- <?php echo A_CONFCONTENT_38; ?> <b><font color=blue><?php echo L_ENABLED; ?></font></b></li>
@@ -1196,230 +1203,233 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="functionality"></a><b><?php echo A_CONF_5; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_53; ?></b><br />
+	<td><b><?php echo A_CONFCONTENT_53; ?></b><br />
 		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_54); ?></i>
 	</td>
-    <td>
-    	<input name="vBANISH" type="text" size="7" maxlength="3" value="<?php echo $BANISH; ?>">&nbsp;(<?php echo $BANISH == 1 ? L_DAY : L_DAYS; ?>)
-    </td>
+	<td>
+		<input name="vBANISH" type="text" size="7" maxlength="3" value="<?php echo $BANISH; ?>">&nbsp;(<?php echo $BANISH == 1 ? L_DAY : L_DAYS; ?>)
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_55; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_56); ?>
+	<td><b><?php echo A_CONFCONTENT_55; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_56); ?>
 		<li><?php echo A_CONFCONTENT_57; ?>
 		<li><?php echo A_CONFCONTENT_58; ?></i>
-    </td>
-    <td>
-        <select name="vBAN_IP">
-	        <option value="0"<?php if($BAN_IP==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_59; ?></option>
-	        <option value="1"<?php if($BAN_IP==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_60; ?></option>
-        </select>
-    </td>
+	</td>
+	<td>
+		<select name="vBAN_IP">
+			<option value="0"<?php if($BAN_IP==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_59; ?></option>
+			<option value="1"<?php if($BAN_IP==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_60; ?></option>
+		</select>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_61; ?></b>
+	<td><b><?php echo A_CONFCONTENT_61; ?></b>
 	</td>
-    <td>
-        <select name="vUSE_SMILIES">
-	        <option value="0"<?php if($USE_SMILIES==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_62; ?></option>
-	        <option value="1"<?php if($USE_SMILIES==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_63; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vUSE_SMILIES">
+			<option value="0"<?php if($USE_SMILIES==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_62; ?></option>
+			<option value="1"<?php if($USE_SMILIES==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_63; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_64; ?></b><br />
-    <i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_65); ?></i>
+	<td><b><?php echo A_CONFCONTENT_64; ?></b><br />
+	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_65); ?></i>
 	</td>
-    <td>
-        <select name="vHTML_TAGS_KEEP">
-	        <option value="0"<?php if($HTML_TAGS_KEEP=='simple'){ echo " selected"; } ?>><?php echo A_CONFCONTENT_66; ?></option>
-	        <option value="1"<?php if($HTML_TAGS_KEEP=='none'){ echo " selected"; } ?>><?php echo A_CONFCONTENT_67; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vHTML_TAGS_KEEP">
+			<option value="0"<?php if($HTML_TAGS_KEEP=='simple'){ echo " selected"; } ?>><?php echo A_CONFCONTENT_66; ?></option>
+			<option value="1"<?php if($HTML_TAGS_KEEP=='none'){ echo " selected"; } ?>><?php echo A_CONFCONTENT_67; ?></option>
+		</select>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_68; ?></b>
+	<td><b><?php echo A_CONFCONTENT_68; ?></b>
 	</td>
-    <td>
-        <select name="vHTML_TAGS_SHOW">
-	        <option value="0"<?php if($HTML_TAGS_SHOW==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_69; ?></option>
-	        <option value="1"<?php if($HTML_TAGS_SHOW==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_70; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vHTML_TAGS_SHOW">
+			<option value="0"<?php if($HTML_TAGS_SHOW==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_69; ?></option>
+			<option value="1"<?php if($HTML_TAGS_SHOW==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_70; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_71; ?></b><br />
+	<td><b><?php echo A_CONFCONTENT_71; ?></b><br />
 			<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_72); ?></i>
 	</td>
-    <td>
-        <select name="vPOPUP_LINKS">
-	        <option value="0"<?php if($POPUP_LINKS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_73; ?></option>
-	        <option value="1"<?php if($POPUP_LINKS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_74; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vPOPUP_LINKS">
+			<option value="0"<?php if($POPUP_LINKS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_73; ?></option>
+			<option value="1"<?php if($POPUP_LINKS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_74; ?></option>
+		</select>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_75; ?></b><br />
-    	<font color=red><?php echo A_CONFCONTENT_76; ?></font><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_77); ?></i>
-    </td>
-    <td>
-        <select name="vMSG_ORDER">
-	        <option value="0"<?php if($MSG_ORDER==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_78; ?></option>
-	        <option value="1"<?php if($MSG_ORDER==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_79; ?></option>
-        </select>
-    </td>
+	<td><b><?php echo A_CONFCONTENT_75; ?></b><br />
+		<font color=red><?php echo A_CONFCONTENT_76; ?></font><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_77); ?></i>
+	</td>
+	<td>
+		<select name="vMSG_ORDER">
+			<option value="0"<?php if($MSG_ORDER==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_78; ?></option>
+			<option value="1"<?php if($MSG_ORDER==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_79; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_80; ?></b><br />
-    	<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_81); ?></font><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_82); ?></i>
-    </td>
-    <td>
+	<td><b><?php echo A_CONFCONTENT_80; ?></b><br />
+		<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_81); ?></font><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_82); ?></i>
+	</td>
+	<td>
 		<input name="vMSG_NB" type="text" size="7" maxlength="2" value="<?php echo $MSG_NB; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_83; ?></b>
+	<td><b><?php echo A_CONFCONTENT_83; ?></b>
 	</td>
-    <td>
-        <select name="vNOTIFY">
-	        <option value="0"<?php if($NOTIFY==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_84; ?></option>
-	        <option value="1"<?php if($NOTIFY==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_85; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vNOTIFY">
+			<option value="0"<?php if($NOTIFY==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_84; ?></option>
+			<option value="1"<?php if($NOTIFY==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_85; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_86; ?></b>
+	<td><b><?php echo A_CONFCONTENT_86; ?></b>
 	</td>
-    <td>
-        <select name="vWELCOME">
-	        <option value="0"<?php if($WELCOME==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_87; ?></option>
-	        <option value="1"<?php if($WELCOME==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_88; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vWELCOME">
+			<option value="0"<?php if($WELCOME==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_87; ?></option>
+			<option value="1"<?php if($WELCOME==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_88; ?></option>
+		</select>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_89; ?></b>
+	<td><b><?php echo A_CONFCONTENT_89; ?></b>
 	</td>
-    <td>
+	<td>
 		<input name="vSMILEY_COLS" type="text" size="7" maxlength="2" value="<?php echo $SMILEY_COLS; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_90; ?></b>
+	<td><b><?php echo A_CONFCONTENT_90; ?></b>
 	</td>
-    <td>
+	<td>
 		<input name="vSMILEY_COLS_POP" type="text" size="7" maxlength="2" value="<?php echo $SMILEY_COLS_POP; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_91; ?></b>
+	<td><b><?php echo A_CONFCONTENT_91; ?></b>
 	</td>
-    <td>
-        <select name="vSHOW_ETIQ_IN_HELP">
-	        <option value="0"<?php if($SHOW_ETIQ_IN_HELP==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_92; ?></option>
-	        <option value="1"<?php if($SHOW_ETIQ_IN_HELP==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_93; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vSHOW_ETIQ_IN_HELP">
+			<option value="0"<?php if($SHOW_ETIQ_IN_HELP==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_92; ?></option>
+			<option value="1"<?php if($SHOW_ETIQ_IN_HELP==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_93; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_94; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_95); ?></i>
-    </td>
-    <td>
-        <select name="vEXIT_LINK_TYPE" id="door" onChange="swapImage('door','doorToSwap')">
-	        <option value="0"<?php if($EXIT_LINK_TYPE==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_96; ?></option>
-	        <option value="1"<?php if($EXIT_LINK_TYPE==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_97; ?></option>
-        </select>&nbsp;<img id="doorToSwap" src="<?php echo(($EXIT_LINK_TYPE == 1) ? "./".$ChatPath."localization/".$L."/images/exitdoor.gif" : "./".$ChatPath."images/gender_none.gif"); ?>" border=0 <?php echo("ALT=\"".A_CONFCONTENT_97."\" Title=\"".A_CONFCONTENT_97."\""); ?> />
-    </td>
+	<td><b><?php echo A_CONFCONTENT_94; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_95); ?></i>
+	</td>
+	<td>
+		<select name="vEXIT_LINK_TYPE" id="door" onChange="swapImage('door','doorToSwap')">
+			<option value="0"<?php if($EXIT_LINK_TYPE==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_96; ?></option>
+			<option value="1"<?php if($EXIT_LINK_TYPE==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_97; ?></option>
+		</select>&nbsp;<img id="doorToSwap" src="<?php echo(($EXIT_LINK_TYPE == 1) ? "./".$ChatPath."localization/".$L."/images/exitdoor.gif" : "./".$ChatPath."images/gender_none.gif"); ?>" border=0 <?php echo("ALT=\"".A_CONFCONTENT_97."\" Title=\"".A_CONFCONTENT_97."\""); ?> />
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_98; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, sprintf(A_CONFCONTENT_99, "</i><b>a-zA-Z0-9_.-@#$%^&*()=<>?~{}|`:</b><i>")); ?><br />
-    	<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_101); ?></font><br /></i>
+	<td><b><?php echo A_CONFCONTENT_98; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, sprintf(A_CONFCONTENT_99, "</i><b>a-zA-Z0-9_.-@#$%^&*()=<>?~{}|`:</b><i>")); ?><br />
+		<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_101); ?></font><br /></i>
 		<?php echo A_CONFCONTENT_102; ?>
-    </td>
-    <td>
+	</td>
+	<td>
 		<input name="vREG_CHARS_ALLOWED" type="text" size="25" maxlength="50" value="<?php echo $REG_CHARS_ALLOWED; ?>">
 	</td>
 </tr>
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="timings"></a><b><?php echo A_CONF_6; ?></b></td></tr
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_103; ?></b><br />
-    	<?php echo A_CONFCONTENT_104; ?><br />
-    	<i><?php echo A_CONFCONTENT_105; ?><br />
-    	<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_106); ?></font></i>
-    </td>
-    <td>
+	<td><b><?php echo A_CONFCONTENT_103; ?></b><br />
+		<?php echo A_CONFCONTENT_104; ?><br />
+		<i><?php echo A_CONFCONTENT_105; ?><br />
+		<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_106); ?></font></i>
+	</td>
+	<td>
 		<input name="vTMZ_OFFSET" type="text" size="7" maxlength="5" value="<?php echo $TMZ_OFFSET; ?>">&nbsp;(<?php echo abs($TMZ_OFFSET) == 1 ? L_HOUR : L_HOURS; ?>)<br />
-        <select name="vWORLDTIME">
-	        <option value="0"<?php if($WORLDTIME==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_107; ?></option>
-	        <option value="1"<?php if($WORLDTIME==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_108; ?></option>
-	        <option value="2"<?php if($WORLDTIME==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_109; ?></option>
-        </select>
+		<select name="vWORLDTIME">
+			<option value="0"<?php if($WORLDTIME==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_107; ?></option>
+			<option value="1"<?php if($WORLDTIME==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_108; ?></option>
+			<option value="2"<?php if($WORLDTIME==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_109; ?></option>
+		</select>
 	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_110; ?></b><br />
-    	<?php echo A_CONFCONTENT_111; ?>
-    </td>
-    <td>
-        <select name="vSHOW_TIMESTAMP">
-	        <option value="0"<?php if($SHOW_TIMESTAMP==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_112; ?></option>
-	        <option value="1"<?php if($SHOW_TIMESTAMP==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_113; ?></option>
-        </select>
-    </td>
+	<td><b><?php echo A_CONFCONTENT_110; ?></b><br />
+		<?php echo A_CONFCONTENT_111; ?>
+	</td>
+	<td>
+		<select name="vSHOW_TIMESTAMP">
+			<option value="0"<?php if($SHOW_TIMESTAMP==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_112; ?></option>
+			<option value="1"<?php if($SHOW_TIMESTAMP==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_113; ?></option>
+		</select>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_114; ?></b>
+	<td><b><?php echo A_CONFCONTENT_114; ?></b>
 	</td>
-    <td>
+	<td>
 		<input name="vMSG_REFRESH" type="text" size="7" maxlength="2" value="<?php echo $MSG_REFRESH; ?>">&nbsp;(<?php echo $MSG_REFRESH == 1 ? L_SEC : L_SECS; ?>)
 	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_116; ?></b><br />
+	<td><b><?php echo A_CONFCONTENT_116; ?></b><br />
 	<?php echo A_CONFCONTENT_117; ?>
-    </td>
-    <td>
-        <select name="vLOGIN_COUNTER">
-	        <option value="0"<?php if($LOGIN_COUNTER==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_118; ?></option>
-	        <option value="1"<?php if($LOGIN_COUNTER==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_119; ?></option>
-	        <option value="60"<?php if($LOGIN_COUNTER==60){ echo " selected"; } ?>><?php echo A_CONFCONTENT_120; ?></option>
-	        <option value="1440"<?php if($LOGIN_COUNTER==1440){ echo " selected"; } ?>><?php echo A_CONFCONTENT_121; ?></option>
-	        <option value="10080"<?php if($LOGIN_COUNTER==10080){ echo " selected"; } ?>><?php echo A_CONFCONTENT_122; ?></option>
-        </select>
-    </td>
+	</td>
+	<td>
+		<select name="vLOGIN_COUNTER">
+			<option value="0"<?php if($LOGIN_COUNTER==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_118; ?></option>
+			<option value="1"<?php if($LOGIN_COUNTER==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_119; ?></option>
+			<option value="60"<?php if($LOGIN_COUNTER==60){ echo " selected"; } ?>><?php echo A_CONFCONTENT_120; ?></option>
+			<option value="1440"<?php if($LOGIN_COUNTER==1440){ echo " selected"; } ?>><?php echo A_CONFCONTENT_121; ?></option>
+			<option value="10080"<?php if($LOGIN_COUNTER==10080){ echo " selected"; } ?>><?php echo A_CONFCONTENT_122; ?></option>
+		</select>
+	</td>
 </tr>
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="schedule"></a><b><?php echo A_CONF_7; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_123; ?></b><br />
-    	<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_124); ?></font></i>
-    </td>
-    <td align="center">
+	<td><b><?php echo A_CONFCONTENT_123; ?></b><br />
+		<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_124); ?></font></i>
+	</td>
+	<td align="center">
 		<b><font color=blue><?php echo A_CONFCONTENT_125; ?></font><br />
-		<input name="vOPEN_ALL_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_ALL_BEG; ?>" class=success DISABLED>&nbsp;÷&nbsp;
-		<input name="vOPEN_ALL_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_ALL_END; ?>" class=success DISABLED><br />
+		<input name="vOPEN_ALL_BEG" type="text" size="5" maxlength="8" value="<?php echo $OPEN_ALL_BEG; ?>" class=success DISABLED>&nbsp;÷&nbsp;
+		<input name="vOPEN_ALL_END" type="text" size="5" maxlength="8" value="<?php echo $OPEN_ALL_END; ?>" class=success DISABLED><br />
 		<font color=red><?php echo A_CONFCONTENT_126; ?></font><br />
 		<input name="vOPEN_SUN_BEG" type="text" size="4" maxlength="8" value="<?php echo $OPEN_SUN_BEG; ?>" class=notify2 DISABLED>&nbsp;÷&nbsp;
 		<input name="vOPEN_SUN_END" type="text" size="4" maxlength="8" value="<?php echo $OPEN_SUN_END; ?>" class=notify2 DISABLED><br />
@@ -1444,150 +1454,151 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="layout"></a><b><?php echo A_CONF_8; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_133; ?></b>
+	<td><b><?php echo A_CONFCONTENT_133; ?></b>
 	</td>
-    <td>
-        <select name="vFILLED_LOGIN">
-	        <option value="0"<?php if($FILLED_LOGIN==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_134; ?></option>
-	        <option value="1"<?php if($FILLED_LOGIN==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_135; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vFILLED_LOGIN">
+			<option value="0"<?php if($FILLED_LOGIN==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_134; ?></option>
+			<option value="1"<?php if($FILLED_LOGIN==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_135; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_136; ?></b><br />
+	<td><b><?php echo A_CONFCONTENT_136; ?></b><br />
 		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_137); ?></i><br />
-    	<?php echo A_CONFCONTENT_138; ?>
+		<?php echo A_CONFCONTENT_138; ?>
 	</td>
-    <td>
-        <select name="vBACKGR_IMG">
-	        <option value="0"<?php if($BACKGR_IMG==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_139; ?></option>
-	        <option value="1"<?php if($BACKGR_IMG==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_140; ?></option>
-        </select><br />
+	<td>
+		<select name="vBACKGR_IMG">
+			<option value="0"<?php if($BACKGR_IMG==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_139; ?></option>
+			<option value="1"<?php if($BACKGR_IMG==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_140; ?></option>
+		</select><br />
 		<?php echo A_CONFCONTENT_141; ?><br />
 		<input name="vBACKGR_IMG_PATH" type="text" size="25" maxlength="255" value="<?php echo $BACKGR_IMG_PATH; ?>">
-    </td>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_142; ?></b><br />
-    	<?php echo A_CONFCONTENT_143; ?>
+	<td><b><?php echo A_CONFCONTENT_142; ?></b><br />
+		<?php echo A_CONFCONTENT_143; ?>
 	</td>
-    <td>
-        <select name="vSHOW_DEL_PROF">
-	        <option value="0"<?php if($SHOW_DEL_PROF==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_144; ?></option>
-	        <option value="1"<?php if($SHOW_DEL_PROF==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_145; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vSHOW_DEL_PROF">
+			<option value="0"<?php if($SHOW_DEL_PROF==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_144; ?></option>
+			<option value="1"<?php if($SHOW_DEL_PROF==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_145; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_146; ?></b><br />
-    	<?php echo A_CONFCONTENT_147; ?>
-    </td>
-    <td>
-        <select name="vSHOW_ADMIN">
-	        <option value="0"<?php if($SHOW_ADMIN==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_148; ?></option>
-	        <option value="1"<?php if($SHOW_ADMIN==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_149; ?></option>
-        </select>
-    </td>
+	<td><b><?php echo A_CONFCONTENT_146; ?></b><br />
+		<?php echo A_CONFCONTENT_147; ?>
+	</td>
+	<td>
+		<select name="vSHOW_ADMIN">
+			<option value="0"<?php if($SHOW_ADMIN==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_148; ?></option>
+			<option value="1"<?php if($SHOW_ADMIN==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_149; ?></option>
+		</select>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_150; ?></b>
+	<td><b><?php echo A_CONFCONTENT_150; ?></b>
 	</td>
-    <td>
-        <select name="vSHOW_TUT">
-	        <option value="0"<?php if($SHOW_TUT==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_151; ?></option>
-	        <option value="1"<?php if($SHOW_TUT==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_152; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vSHOW_TUT">
+			<option value="0"<?php if($SHOW_TUT==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_151; ?></option>
+			<option value="1"<?php if($SHOW_TUT==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_152; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_153; ?></b><br />
-    	<?php echo A_CONFCONTENT_154; ?>
-    </td>
-    <td>
-        <select name="vSHOW_INFO">
-	        <option value="0"<?php if($SHOW_INFO==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_155; ?></option>
-	        <option value="1"<?php if($SHOW_INFO==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_156; ?></option>
-        </select>
-    </td>
+	<td><b><?php echo A_CONFCONTENT_153; ?></b><br />
+		<?php echo A_CONFCONTENT_154; ?>
+	</td>
+	<td>
+		<select name="vSHOW_INFO">
+			<option value="0"<?php if($SHOW_INFO==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_155; ?></option>
+			<option value="1"<?php if($SHOW_INFO==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_156; ?></option>
+		</select>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_157; ?></b>
+	<td><b><?php echo A_CONFCONTENT_157; ?></b>
 	</td>
-    <td>
-        <select name="vSET_CMDS">
-	        <option value="0"<?php if($SET_CMDS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_158; ?></option>
-	        <option value="1"<?php if($SET_CMDS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_159; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vSET_CMDS">
+			<option value="0"<?php if($SET_CMDS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_158; ?></option>
+			<option value="1"<?php if($SET_CMDS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_159; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_160; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_161); ?></i>
-    </td>
-    <td>
+	<td><b><?php echo A_CONFCONTENT_160; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_161); ?></i>
+	</td>
+	<td>
 		<input name="vCMDS" type="text" size="25" maxlength="255" value="<?php echo $CMDS; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_162; ?></b>
+	<td><b><?php echo A_CONFCONTENT_162; ?></b>
 	</td>
-    <td>
-        <select name="vSET_MODS">
-	        <option value="0"<?php if($SET_MODS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_163; ?></option>
-	        <option value="1"<?php if($SET_MODS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_164; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vSET_MODS">
+			<option value="0"<?php if($SET_MODS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_163; ?></option>
+			<option value="1"<?php if($SET_MODS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_164; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_165; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_161); ?></i>
-    </td>
-    <td>
+	<td><b><?php echo A_CONFCONTENT_165; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_161); ?></i>
+	</td>
+	<td>
 		<input name="vMODS" type="text" size="25" maxlength="255" value="<?php echo $MODS; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_167; ?></b>
+	<td><b><?php echo A_CONFCONTENT_167; ?></b>
 	</td>
-    <td>
-        <select name="vSET_BOT">
-	        <option value="0"<?php if($SET_BOT==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_168; ?></option>
-	        <option value="1"<?php if($SET_BOT==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_169; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vSET_BOT">
+			<option value="0"<?php if($SET_BOT==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_168; ?></option>
+			<option value="1"<?php if($SET_BOT==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_169; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_170; ?></b>
+	<td><b><?php echo A_CONFCONTENT_170; ?></b>
 	</td>
-    <td>
-        <select name="vSHOW_COUNTER">
-	        <option value="0"<?php if($SHOW_COUNTER==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_171; ?></option>
-	        <option value="1"<?php if($SHOW_COUNTER==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_172; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vSHOW_COUNTER">
+			<option value="0"<?php if($SHOW_COUNTER==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_171; ?></option>
+			<option value="1"<?php if($SHOW_COUNTER==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_172; ?></option>
+		</select>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_173; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_174); ?> - <a href=#ownername class="ChatLink"><?php echo A_CONFCONTENT_175; ?></a></i>
-    </td>
-    <td>
-        <select name="vSHOW_OWNER">
-	        <option value="0"<?php if($SHOW_OWNER==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_176; ?></option>
-	        <option value="1"<?php if($SHOW_OWNER==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_177; ?></option>
-        </select>
-    </td>
+	<td><b><?php echo A_CONFCONTENT_173; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_174); ?> - <a href=#ownername class="ChatLink"><?php echo A_CONFCONTENT_175; ?></a></i>
+	</td>
+	<td>
+		<select name="vSHOW_OWNER">
+			<option value="0"<?php if($SHOW_OWNER==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_176; ?></option>
+			<option value="1"<?php if($SHOW_OWNER==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_177; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_178; ?></b>
-    </td>
-    <td class=success>
+	<td><b><?php echo A_CONFCONTENT_178; ?></b>
+	</td>
+	<td class=success>
 		<?php
 		  $myCalendar = new tc_calendar("date1", true, false);
 		  $myCalendar->zindex = 150; //default 1
@@ -1638,323 +1649,325 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="skins"></a><b><?php echo A_CONF_9; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_179; ?></b><br />
-    	<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONF_ERR_11); ?></font><br />
+	<td><b><?php echo A_CONFCONTENT_179; ?></b><br />
+		<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONF_ERR_11); ?></font><br />
 		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_181); ?></i>
 	</td>
-    <td>
-        <select name="vUSE_SKIN">
-	        <option value="0"<?php if($USE_SKIN==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_182; ?></option>
-	        <option value="1"<?php if($USE_SKIN==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_183; ?></option>
-        </select><br />
+	<td>
+		<select name="vUSE_SKIN">
+			<option value="0"<?php if($USE_SKIN==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_182; ?></option>
+			<option value="1"<?php if($USE_SKIN==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_183; ?></option>
+		</select><br />
 	<a href="styles_popup.php?<?php echo("L=$L&startStyle=1"); ?>" onClick="styles_popup(); return false" class="ChatLink" target="_blank"><?php echo A_CONFCONTENT_184; ?></a>
 	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_185; ?></b><br />
-        <li>0 : <?php echo A_CONFCONTENT_186; ?></li>
-        <li>1 : <?php echo A_CONFCONTENT_187; ?></li>
-        <li>2 : <?php echo A_CONFCONTENT_188; ?></li>
-    </td>
-    <td>
-        <select name="vVERSION">
-	        <option value="0"<?php if($VERSION==0){ echo " selected"; } ?>>0 - <?php echo A_CONFCONTENT_189; ?></option>
-	        <option value="1"<?php if($VERSION==1){ echo " selected"; } ?>>1 - <?php echo A_CONFCONTENT_190; ?></option>
-	        <option value="2"<?php if($VERSION==2){ echo " selected"; } ?>>2 - <?php echo A_CONFCONTENT_191; ?></option>
-        </select>
-    </td>
+	<td><b><?php echo A_CONFCONTENT_185; ?></b><br />
+		<li>0 : <?php echo A_CONFCONTENT_186; ?></li>
+		<li>1 : <?php echo A_CONFCONTENT_187; ?></li>
+		<li>2 : <?php echo A_CONFCONTENT_188; ?></li>
+	</td>
+	<td>
+		<select name="vVERSION">
+			<option value="0"<?php if($VERSION==0){ echo " selected"; } ?>>0 - <?php echo A_CONFCONTENT_189; ?></option>
+			<option value="1"<?php if($VERSION==1){ echo " selected"; } ?>>1 - <?php echo A_CONFCONTENT_190; ?></option>
+			<option value="2"<?php if($VERSION==2){ echo " selected"; } ?>>2 - <?php echo A_CONFCONTENT_191; ?></option>
+		</select>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><a name="roomnames"></a><b>1. <?php echo A_CONFCONTENT_192; ?></b><br />
-    	<font color=red><i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_193); ?></i></font><br />
+	<td><a name="roomnames"></a><b>1. <?php echo A_CONFCONTENT_192; ?></b><br />
+		<font color=red><i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_193); ?></i></font><br />
 		<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_194); ?></i>
 	</td>
-    <td>
+	<td>
 		<input name="vROOM1" type="text" size="25" maxlength="25" value="<?php echo $ROOM1; ?>"><br />
-        <select name="vEN_ROOM1">
-	        <option value="0"<?php if($EN_ROOM1==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($EN_ROOM1==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-	    <!--    <option value="2"<?php if($EN_ROOM1==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
-        </select>&nbsp;
-        <select name="vRES_ROOM1">
-	        <option value="0"<?php if($RES_ROOM1==0){ echo " selected"; } ?>><?php echo A_CONFUNRESTRICT; ?></option>
-	        <option value="1"<?php if($RES_ROOM1==1){ echo " selected"; } ?>><?php echo A_CONFRESTRICT; ?></option>
-        </select><br />
+		<select name="vEN_ROOM1">
+			<option value="0"<?php if($EN_ROOM1==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($EN_ROOM1==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		<!--	<option value="2"<?php if($EN_ROOM1==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
+		</select>&nbsp;
+		<select name="vRES_ROOM1">
+			<option value="0"<?php if($RES_ROOM1==0){ echo " selected"; } ?>><?php echo A_CONFUNRESTRICT; ?></option>
+			<option value="1"<?php if($RES_ROOM1==1){ echo " selected"; } ?>><?php echo A_CONFRESTRICT; ?></option>
+		</select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN1\">\n");
 		skin_selection(1,$ROOM_SKIN1);
 		echo ("</select>\n");
 	?>
-    </td>
+	</td>
 </tr>
 <tr>
-    <td><b>2. <?php echo A_CONFCONTENT_195; ?></b>
+	<td><b>2. <?php echo A_CONFCONTENT_195; ?></b>
 	</td>
-    <td>
+	<td>
 		<input name="vROOM2" type="text" size="25" maxlength="25" value="<?php echo $ROOM2; ?>"><br />
-        <select name="vEN_ROOM2">
-	        <option value="0"<?php if($EN_ROOM2==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($EN_ROOM2==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-	    <!--    <option value="2"<?php if($EN_ROOM2==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
-        </select>&nbsp;
-        <select name="vRES_ROOM2">
-	        <option value="0"<?php if($RES_ROOM2==0){ echo " selected"; } ?>><?php echo A_CONFUNRESTRICT; ?></option>
-	        <option value="1"<?php if($RES_ROOM2==1){ echo " selected"; } ?>><?php echo A_CONFRESTRICT; ?></option>
-        </select><br />
+		<select name="vEN_ROOM2">
+			<option value="0"<?php if($EN_ROOM2==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($EN_ROOM2==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		<!--	<option value="2"<?php if($EN_ROOM2==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
+		</select>&nbsp;
+		<select name="vRES_ROOM2">
+			<option value="0"<?php if($RES_ROOM2==0){ echo " selected"; } ?>><?php echo A_CONFUNRESTRICT; ?></option>
+			<option value="1"<?php if($RES_ROOM2==1){ echo " selected"; } ?>><?php echo A_CONFRESTRICT; ?></option>
+		</select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN2\">\n");
 		skin_selection(2,$ROOM_SKIN2);
 		echo ("</select>\n");
 	?>
-    </td>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>3. <?php echo A_CONFCONTENT_196; ?></b>
+	<td><b>3. <?php echo A_CONFCONTENT_196; ?></b>
 	</td>
-    <td>
+	<td>
 		<input name="vROOM3" type="text" size="25" maxlength="25" value="<?php echo $ROOM3; ?>"><br />
-        <select name="vEN_ROOM3">
-	        <option value="0"<?php if($EN_ROOM3==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($EN_ROOM3==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-	    <!--    <option value="2"<?php if($EN_ROOM3==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
-        </select>&nbsp;
-        <select name="vRES_ROOM3">
-	        <option value="0"<?php if($RES_ROOM3==0){ echo " selected"; } ?>><?php echo A_CONFUNRESTRICT; ?></option>
-	        <option value="1"<?php if($RES_ROOM3==1){ echo " selected"; } ?>><?php echo A_CONFRESTRICT; ?></option>
-        </select><br />
+		<select name="vEN_ROOM3">
+			<option value="0"<?php if($EN_ROOM3==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($EN_ROOM3==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		<!--	<option value="2"<?php if($EN_ROOM3==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
+		</select>&nbsp;
+		<select name="vRES_ROOM3">
+			<option value="0"<?php if($RES_ROOM3==0){ echo " selected"; } ?>><?php echo A_CONFUNRESTRICT; ?></option>
+			<option value="1"<?php if($RES_ROOM3==1){ echo " selected"; } ?>><?php echo A_CONFRESTRICT; ?></option>
+		</select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN3\">\n");
 		skin_selection(3,$ROOM_SKIN3);
 		echo ("</select>\n");
 	?>
-    </td>
+	</td>
 </tr>
 <tr>
-    <td><b>4. <?php echo A_CONFCONTENT_197; ?></b>
+	<td><b>4. <?php echo A_CONFCONTENT_197; ?></b>
 	</td>
-    <td>
+	<td>
 		<input name="vROOM4" type="text" size="25" maxlength="25" value="<?php echo $ROOM4; ?>"><br />
-        <select name="vEN_ROOM4">
-	        <option value="0"<?php if($EN_ROOM4==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($EN_ROOM4==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-	    <!--    <option value="2"<?php if($EN_ROOM4==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
-        </select>&nbsp;
-        <select name="vRES_ROOM4">
-	        <option value="0"<?php if($RES_ROOM4==0){ echo " selected"; } ?>><?php echo A_CONFUNRESTRICT; ?></option>
-	        <option value="1"<?php if($RES_ROOM4==1){ echo " selected"; } ?>><?php echo A_CONFRESTRICT; ?></option>
-        </select><br />
+		<select name="vEN_ROOM4">
+			<option value="0"<?php if($EN_ROOM4==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($EN_ROOM4==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		<!--	<option value="2"<?php if($EN_ROOM4==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
+		</select>&nbsp;
+		<select name="vRES_ROOM4">
+			<option value="0"<?php if($RES_ROOM4==0){ echo " selected"; } ?>><?php echo A_CONFUNRESTRICT; ?></option>
+			<option value="1"<?php if($RES_ROOM4==1){ echo " selected"; } ?>><?php echo A_CONFRESTRICT; ?></option>
+		</select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN4\">\n");
 		skin_selection(4,$ROOM_SKIN4);
 		echo ("</select>\n");
 	?>
-    </td>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>5. <?php echo A_CONFCONTENT_198; ?></b>
+	<td><b>5. <?php echo A_CONFCONTENT_198; ?></b>
 	</td>
-    <td>
+	<td>
 		<input name="vROOM5" type="text" size="25" maxlength="25" value="<?php echo $ROOM5; ?>"><br />
-        <select name="vEN_ROOM5">
-	        <option value="0"<?php if($EN_ROOM5==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($EN_ROOM5==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-	    <!--    <option value="2"<?php if($EN_ROOM5==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
-        </select>&nbsp;
-        <select name="vRES_ROOM5">
-	        <option value="0"<?php if($RES_ROOM5==0){ echo " selected"; } ?>><?php echo A_CONFUNRESTRICT; ?></option>
-	        <option value="1"<?php if($RES_ROOM5==1){ echo " selected"; } ?>><?php echo A_CONFRESTRICT; ?></option>
-        </select><br />
+		<select name="vEN_ROOM5">
+			<option value="0"<?php if($EN_ROOM5==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($EN_ROOM5==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		<!--	<option value="2"<?php if($EN_ROOM5==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
+		</select>&nbsp;
+		<select name="vRES_ROOM5">
+			<option value="0"<?php if($RES_ROOM5==0){ echo " selected"; } ?>><?php echo A_CONFUNRESTRICT; ?></option>
+			<option value="1"<?php if($RES_ROOM5==1){ echo " selected"; } ?>><?php echo A_CONFRESTRICT; ?></option>
+		</select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN5\">\n");
 		skin_selection(5,$ROOM_SKIN5);
 		echo ("</select>\n");
 	?>
-    </td>
+	</td>
 </tr>
 <tr>
-    <td><b>6. <?php echo A_CONFCONTENT_199; ?></b><br />
-    	<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_200); ?></i>
-    </td>
-    <td>
+	<td><b>6. <?php echo A_CONFCONTENT_199; ?></b><br />
+		<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_200); ?></i>
+	</td>
+	<td>
 		<input name="vROOM6" type="text" size="25" maxlength="25" value="<?php echo $ROOM6; ?>"><br />
-        <select name="vEN_ROOM6">
-	        <option value="0"<?php if($EN_ROOM6==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($EN_ROOM6==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-	    <!--    <option value="2"<?php if($EN_ROOM6==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
-        </select><br />
+		<select name="vEN_ROOM6">
+			<option value="0"<?php if($EN_ROOM6==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($EN_ROOM6==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		<!--	<option value="2"<?php if($EN_ROOM6==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
+		</select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN6\">\n");
 		skin_selection(6,$ROOM_SKIN6);
 		echo ("</select>\n");
 	?>
-    </td>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>7. <?php echo A_CONFCONTENT_201; ?></b><br />
-    	<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_200); ?></i>
-    </td>
-    <td>
+	<td><b>7. <?php echo A_CONFCONTENT_201; ?></b><br />
+		<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_200); ?></i>
+	</td>
+	<td>
 		<input name="vROOM7" type="text" size="25" maxlength="25" value="<?php echo $ROOM7; ?>"><br />
-        <select name="vEN_ROOM7">
-	        <option value="0"<?php if($EN_ROOM7==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($EN_ROOM7==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-	    <!--    <option value="2"<?php if($EN_ROOM7==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
-        </select><br />
+		<select name="vEN_ROOM7">
+			<option value="0"<?php if($EN_ROOM7==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($EN_ROOM7==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		<!--	<option value="2"<?php if($EN_ROOM7==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
+		</select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN7\">\n");
 		skin_selection(7,$ROOM_SKIN7);
 		echo ("</select>\n");
 	?>
-    </td>
+	</td>
 </tr>
 <tr>
-    <td><b>8. <?php echo A_CONFCONTENT_203; ?></b><br />
-    	<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_204); ?></i>
-    </td>
-    <td>
+	<td><b>8. <?php echo A_CONFCONTENT_203; ?></b><br />
+		<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_204); ?></i>
+	</td>
+	<td>
 		<input name="vROOM8" type="text" size="25" maxlength="25" value="<?php echo $ROOM8; ?>"><br />
-        <select name="vEN_ROOM8">
-	        <option value="0"<?php if($EN_ROOM8==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($EN_ROOM8==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-	    <!--    <option value="2"<?php if($EN_ROOM8==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
-        </select><br />
+		<select name="vEN_ROOM8">
+			<option value="0"<?php if($EN_ROOM8==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($EN_ROOM8==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		<!--	<option value="2"<?php if($EN_ROOM8==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
+		</select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN8\">\n");
 		skin_selection(8,$ROOM_SKIN8);
 		echo ("</select>\n");
 	?>
-    </td>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>9. <?php echo A_CONFCONTENT_205; ?></b><br />
-    	<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_206); ?></i>
-    </td>
-    <td>
+	<td><b>9. <?php echo A_CONFCONTENT_205; ?></b><br />
+		<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_206); ?></i>
+	</td>
+	<td>
 		<input name="vROOM9" type="text" size="25" maxlength="25" value="<?php echo $ROOM9; ?>"><br />
-        <select name="vEN_ROOM9">
-	        <option value="0"<?php if($EN_ROOM9==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($EN_ROOM9==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-	    <!--    <option value="2"<?php if($EN_ROOM9==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
-        </select><br />
+		<select name="vEN_ROOM9">
+			<option value="0"<?php if($EN_ROOM9==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($EN_ROOM9==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		<!--	<option value="2"<?php if($EN_ROOM9==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_132a; ?></option> -->
+		</select><br />
 	<?php
 		echo ("<select name=\"vROOM_SKIN9\">\n");
 		skin_selection(9,$ROOM_SKIN9);
 		echo ("</select>\n");
 	?>
-    </td>
+	</td>
 </tr>
 <tr>
-    <td><b>1. <?php echo A_CONFCONTENT_207; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_208); ?></i><br />
+	<td><b>1. <?php echo A_CONFCONTENT_207; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_208); ?></i><br />
 		<?php echo A_CONFCONTENT_209; ?>
-    </td>
-    <td>
-        <select name="vSHOW_PRIV">
-	        <option value="0"<?php if($SHOW_PRIV==0){ echo " selected"; } ?>><?php echo A_CONFHIDE; ?></option>
-	        <option value="1"<?php if($SHOW_PRIV==1){ echo " selected"; } ?>><?php echo A_CONFSHOW; ?></option>
-        </select>
-    </td>
+	</td>
+	<td>
+		<select name="vSHOW_PRIV">
+			<option value="0"<?php if($SHOW_PRIV==0){ echo " selected"; } ?>><?php echo A_CONFHIDE; ?></option>
+			<option value="1"<?php if($SHOW_PRIV==1){ echo " selected"; } ?>><?php echo A_CONFSHOW; ?></option>
+		</select>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>2. <?php echo A_CONFCONTENT_210; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_211); ?> <font color=red><?php echo A_CONFCONTENT_212; ?></font></i>
-    </td>
-    <td>
-        <select name="vSHOW_PRIV_MOD">
-	        <option value="0"<?php if($SHOW_PRIV_MOD==0){ echo " selected"; } ?>><?php echo A_CONFHIDE; ?></option>
-	        <option value="1"<?php if($SHOW_PRIV_MOD==1){ echo " selected"; } ?>><?php echo A_CONFSHOW; ?></option>
-        </select>
-    </td>
+	<td><b>2. <?php echo A_CONFCONTENT_210; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_211); ?> <font color=red><?php echo A_CONFCONTENT_212; ?></font></i>
+	</td>
+	<td>
+		<select name="vSHOW_PRIV_MOD">
+			<option value="0"<?php if($SHOW_PRIV_MOD==0){ echo " selected"; } ?>><?php echo A_CONFHIDE; ?></option>
+			<option value="1"<?php if($SHOW_PRIV_MOD==1){ echo " selected"; } ?>><?php echo A_CONFSHOW; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b>3. <?php echo A_CONFCONTENT_213; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_214); ?> <font color=red><?php echo A_CONFCONTENT_212; ?></font></i>
-    </td>
-    <td>
-        <select name="vSHOW_PRIV_USR">
-	        <option value="0"<?php if($SHOW_PRIV_USR==0){ echo " selected"; } ?>><?php echo A_CONFHIDE; ?></option>
-	        <option value="1"<?php if($SHOW_PRIV_USR==1){ echo " selected"; } ?>><?php echo A_CONFSHOW; ?></option>
-        </select>
-    </td>
+	<td><b>3. <?php echo A_CONFCONTENT_213; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_214); ?> <font color=red><?php echo A_CONFCONTENT_212; ?></font></i>
+	</td>
+	<td>
+		<select name="vSHOW_PRIV_USR">
+			<option value="0"<?php if($SHOW_PRIV_USR==0){ echo " selected"; } ?>><?php echo A_CONFHIDE; ?></option>
+			<option value="1"<?php if($SHOW_PRIV_USR==1){ echo " selected"; } ?>><?php echo A_CONFSHOW; ?></option>
+		</select>
+	</td>
 </tr>
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="colors"></a><b><?php echo A_CONF_10; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_216; ?></b><br />
-    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONF_ERR_11); ?></font><br />
+	<td><b><?php echo A_CONFCONTENT_216; ?></b><br />
+		<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONF_ERR_11); ?></font><br />
 	<?php echo sprintf(A_CONFHINT, A_CONFCONTENT_218); ?></i>
-    </td>
-    <td>
-        <select name="vCOLOR_NAMES">
-	        <option value="0"<?php if($COLOR_NAMES==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($COLOR_NAMES==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-        </select>
-    </td>
+	</td>
+	<td>
+		<select name="vCOLOR_NAMES">
+			<option value="0"<?php if($COLOR_NAMES==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($COLOR_NAMES==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_217 ?></b><br />
-    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONF_ERR_11); ?></font><br />
+	<td><b><?php echo A_CONFCONTENT_217 ?></b><br />
+		<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONF_ERR_11); ?></font><br />
 	<?php echo sprintf(A_CONFHINT, A_CONFCONTENT_217a); ?></i><br />
-    	<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_124); ?></font></i>
-    </td>
-    <td>
-        <select name="vALLOW_TEXT_COLORS" DISABLED>
-	        <option value="0"<?php if($ALLOW_TEXT_COLORS==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($ALLOW_TEXT_COLORS==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-        </select>
-    </td>
+		<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_124); ?></font></i>
+	</td>
+	<td>
+		<select name="vALLOW_TEXT_COLORS" DISABLED>
+			<option value="0"<?php if($ALLOW_TEXT_COLORS==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($ALLOW_TEXT_COLORS==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		</select>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
 	<td><b><?php echo A_CONFCONTENT_219; ?></b><br />
-    	<?php echo A_CONFCONTENT_220; ?><br />
+		<?php echo A_CONFCONTENT_220; ?><br />
 		<i><?php echo sprintf(A_CONFHINT, sprintf(A_CONFCONTENT_221, "<font color=".$COLOR_CA.">".$COLOR_CA."</font>", "<font color=".$COLOR_CM.">".$COLOR_CM."</font>")); ?></i>
 	</td>
-    <td>
-        <select name="vITALICIZE_POWERS">
-	        <option value="0"<?php if($ITALICIZE_POWERS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_224; ?></option>
-	        <option value="1"<?php if($ITALICIZE_POWERS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_225; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vITALICIZE_POWERS">
+			<option value="0"<?php if($ITALICIZE_POWERS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_224; ?></option>
+			<option value="1"<?php if($ITALICIZE_POWERS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_225; ?></option>
+		</select>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
 	<td><b><?php echo A_CONFCONTENT_226; ?></b><br />
-    	<?php echo A_CONFCONTENT_227; ?><br />
-    	<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_228); ?></font><br />
+		<?php echo A_CONFCONTENT_227; ?><br />
+		<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_228); ?></font><br />
 		<i><?php echo A_CONFCONTENT_229; ?></i>
 	</td>
-    <td>
+	<td>
 		<input name="vTAGS_POWERS" type="text" size="3" maxlength="5" value="<?php echo $TAGS_POWERS; ?>">
-    </td>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_230; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_231); ?></i>
-    </td>
-    <td>
-        <select name="vCOLOR_FILTERS">
-	        <option value="0"<?php if($COLOR_FILTERS==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($COLOR_FILTERS==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-        </select>
-    </td>
+	<td><b><?php echo A_CONFCONTENT_230; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_231); ?></i>
+	</td>
+	<td>
+		<select name="vCOLOR_FILTERS">
+			<option value="0"<?php if($COLOR_FILTERS==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($COLOR_FILTERS==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		</select>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_232; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_233); ?></i>
+	<td><b><?php echo A_CONFCONTENT_232; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_233); ?></i>
 	</td>
-    <td>
- 		<?php
+	<td>
+		<?php
 #		if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CA\" style=\"background-color:".$COLOR_CA.";\">\n");
 		if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false)) echo("<select name=\"vCOLOR_CA\" style=\"background-color:".$COLOR_CA.";\">\n");
 		else echo("<select name=\"vCOLOR_CA\">");
@@ -1970,7 +1983,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			?>
 		</select><br />
 		<?php
-# 		if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CA1\" style=\"background-color:".$COLOR_CA1.";\">\n");
+#		if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CA1\" style=\"background-color:".$COLOR_CA1.";\">\n");
 		if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false)) echo("<select name=\"vCOLOR_CA1\" style=\"background-color:".$COLOR_CA1.";\">\n");
 		else echo("<select name=\"vCOLOR_CA1\">");
 			$CCA1 = explode(",", $ColorList);
@@ -1999,14 +2012,14 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			}
 			?>
 		</select>
-    </td>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_234; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_233); ?><br />
+	<td><b><?php echo A_CONFCONTENT_234; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_233); ?><br />
 		<?php echo A_CONFCONTENT_236; ?></i>
-    </td>
-    <td>
+	</td>
+	<td>
 		<?php
 #		if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CM\" style=\"background-color:".$COLOR_CM.";\">\n");
 		if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false)) echo("<select name=\"vCOLOR_CM\" style=\"background-color:".$COLOR_CM.";\">\n");
@@ -2038,7 +2051,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			?>
 		</select><br />
 		<?php
-# 		if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CM2\" style=\"background-color:".$COLOR_CM2.";\">\n");
+#		if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vCOLOR_CM2\" style=\"background-color:".$COLOR_CM2.";\">\n");
 		if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false)) echo("<select name=\"vCOLOR_CM2\" style=\"background-color:".$COLOR_CM2.";\">\n");
 		else echo("<select name=\"vCOLOR_CM2\">");
 			$CCM2 = explode(",", $ColorList);
@@ -2052,215 +2065,219 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			}
 			?>
 		</select>
-    </td>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_237; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_238); ?></i>
-    </td>
-    <td>
-        <select name="vCOLOR_ALLOW_GUESTS">
-	        <option value="0"<?php if($COLOR_ALLOW_GUESTS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_239; ?></option>
-	        <option value="1"<?php if($COLOR_ALLOW_GUESTS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_240; ?></option>
-        </select>
-    </td>
+	<td><b><?php echo A_CONFCONTENT_237; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_238); ?></i>
+	</td>
+	<td>
+		<select name="vCOLOR_ALLOW_GUESTS">
+			<option value="0"<?php if($COLOR_ALLOW_GUESTS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_239; ?></option>
+			<option value="1"<?php if($COLOR_ALLOW_GUESTS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_240; ?></option>
+		</select>
+	</td>
 </tr>
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="sounds"></a><b><?php echo A_CONF_11; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_241; ?></b>
+	<td><b><?php echo A_CONFCONTENT_241; ?></b>
 	</td>
-    <td>
-        <select name="vALLOW_ENTRANCE_SOUND">
-	        <option value="0"<?php if($ALLOW_ENTRANCE_SOUND==0){ echo " selected"; } ?>>0 - <?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($ALLOW_ENTRANCE_SOUND==1){ echo " selected"; } ?>>1 - <?php echo A_CONFCONTENT_242; ?></option>
-	        <option value="2"<?php if($ALLOW_ENTRANCE_SOUND==2){ echo " selected"; } ?>>2 - <?php echo A_CONFCONTENT_243; ?></option>
-	        <option value="3"<?php if($ALLOW_ENTRANCE_SOUND==3){ echo " selected"; } ?>>3 - <?php echo A_CONFCONTENT_244; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vALLOW_ENTRANCE_SOUND">
+			<option value="0"<?php if($ALLOW_ENTRANCE_SOUND==0){ echo " selected"; } ?>>0 - <?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($ALLOW_ENTRANCE_SOUND==1){ echo " selected"; } ?>>1 - <?php echo A_CONFCONTENT_242; ?></option>
+			<option value="2"<?php if($ALLOW_ENTRANCE_SOUND==2){ echo " selected"; } ?>>2 - <?php echo A_CONFCONTENT_243; ?></option>
+			<option value="3"<?php if($ALLOW_ENTRANCE_SOUND==3){ echo " selected"; } ?>>3 - <?php echo A_CONFCONTENT_244; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_245; ?></b><br />
-    	<i><?php echo A_CONFCONTENT_246; ?></i>
-    </td>
-    <td><?php echo A_CONFCONTENT_247; ?><br />
+	<td><b><?php echo A_CONFCONTENT_245; ?></b><br />
+		<i><?php echo A_CONFCONTENT_246; ?></i>
+	</td>
+	<td><?php echo A_CONFCONTENT_247; ?><br />
 		<input name="vENTRANCE_SOUND" type="text" size="20" maxlength="255" value="<?php echo $ENTRANCE_SOUND; ?>"><br />
-    	<?php echo A_CONFCONTENT_248; ?><br />
+		<?php echo A_CONFCONTENT_248; ?><br />
 		<input name="vWELCOME_SOUND" type="text" size="20" maxlength="255" value="<?php echo $WELCOME_SOUND; ?>">
-    </td>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_249; ?></b><br />
-    	<?php echo A_CONFCONTENT_250; ?>
-    </td>
-    <td>
-        <select name="vALLOW_BUZZ_SOUND">
-	        <option value="0"<?php if($ALLOW_BUZZ_SOUND==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_251; ?></option>
-	        <option value="1"<?php if($ALLOW_BUZZ_SOUND==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_252; ?></option>
-        </select>
-    </td>
+	<td><b><?php echo A_CONFCONTENT_249; ?></b><br />
+		<?php echo A_CONFCONTENT_250; ?>
+	</td>
+	<td>
+		<select name="vALLOW_BUZZ_SOUND">
+			<option value="0"<?php if($ALLOW_BUZZ_SOUND==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_251; ?></option>
+			<option value="1"<?php if($ALLOW_BUZZ_SOUND==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_252; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_253; ?></b><br />
-    	<i><?php echo A_CONFCONTENT_254; ?></i>
-    </td>
-    <td>
+	<td><b><?php echo A_CONFCONTENT_253; ?></b><br />
+		<i><?php echo A_CONFCONTENT_254; ?></i>
+	</td>
+	<td>
 		<input name="vBUZZ_SOUND" type="text" size="25" maxlength="255" value="<?php echo $BUZZ_SOUND; ?>">
 	</td>
 </tr>
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="profanity"></a><b><?php echo A_CONF_12; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_255; ?></b><br />
-    	<?php echo A_CONFCONTENT_256; ?>
-    </td>
-    <td>
-        <select name="vNO_SWEAR">
-	        <option value="0"<?php if($NO_SWEAR==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_257; ?></option>
-	        <option value="1"<?php if($NO_SWEAR==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_258; ?></option>
-        </select>
-    </td>
+	<td><b><?php echo A_CONFCONTENT_255; ?></b><br />
+		<?php echo A_CONFCONTENT_256; ?>
+	</td>
+	<td>
+		<select name="vNO_SWEAR">
+			<option value="0"<?php if($NO_SWEAR==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_257; ?></option>
+			<option value="1"<?php if($NO_SWEAR==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_258; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_259; ?></b>
+	<td><b><?php echo A_CONFCONTENT_259; ?></b>
 	</td>
-    <td>
+	<td>
 		<input name="vSWEAR_EXPR" type="text" size="7" maxlength="5" value="<?php echo $SWEAR_EXPR; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>1. <?php echo A_CONFCONTENT_260; ?></b><br />
-    	<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_261); ?></i>
-    </td>
-    <td>
+	<td><b>1. <?php echo A_CONFCONTENT_260; ?></b><br />
+		<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_261); ?></i>
+	</td>
+	<td>
 		<input name="vSWEAR1" type="text" size="25" maxlength="25" value="<?php echo $SWEAR1; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>2. <?php echo A_CONFCONTENT_260; ?></b>
+	<td><b>2. <?php echo A_CONFCONTENT_260; ?></b>
 	</td>
-    <td>
+	<td>
 		<input name="vSWEAR2" type="text" size="25" maxlength="25" value="<?php echo $SWEAR2; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b>3. <?php echo A_CONFCONTENT_260; ?></b>
+	<td><b>3. <?php echo A_CONFCONTENT_260; ?></b>
 	</td>
-    <td>
+	<td>
 		<input name="vSWEAR3" type="text" size="25" maxlength="25" value="<?php echo $SWEAR3; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b>4. <?php echo A_CONFCONTENT_260; ?></b>
+	<td><b>4. <?php echo A_CONFCONTENT_260; ?></b>
 	</td>
-    <td>
+	<td>
 		<input name="vSWEAR4" type="text" size="25" maxlength="25" value="<?php echo $SWEAR4; ?>">
 	</td>
 </tr>
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="pm"></a><b><?php echo A_CONF_15; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_263; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_264); ?></i>
-    </td>
-    <td>
-        <select name="vENABLE_PM">
-	        <option value="0"<?php if($ENABLE_PM==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($ENABLE_PM==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-        </select>
-    </td>
+	<td><b><?php echo A_CONFCONTENT_263; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_264); ?></i>
+	</td>
+	<td>
+		<select name="vENABLE_PM">
+			<option value="0"<?php if($ENABLE_PM==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($ENABLE_PM==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_265; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_266); ?><br />
+	<td><b><?php echo A_CONFCONTENT_265; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_266); ?><br />
 	<?php echo A_CONFCONTENT_267; ?><br />
 	<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONF_ERR_11); ?></font></i><br />
 	<?php echo A_CONFCONTENT_269; ?>
-    </td>
-    <td>
-        <select name="vPRIV_POPUP">
-	        <option value="0"<?php if($PRIV_POPUP==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($PRIV_POPUP==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-        </select>
-    </td>
+	</td>
+	<td>
+		<select name="vPRIV_POPUP">
+			<option value="0"<?php if($PRIV_POPUP==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($PRIV_POPUP==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		</select>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_270; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_271); ?></i>
-    </td>
-    <td>
-        <select name="vALLOW_PM_DEL">
-	        <option value="0"<?php if($ALLOW_PM_DEL==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_272; ?></option>
-	        <option value="1"<?php if($ALLOW_PM_DEL==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_273; ?></option>
-        </select>
-    </td>
+	<td><b><?php echo A_CONFCONTENT_270; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_271); ?></i>
+	</td>
+	<td>
+		<select name="vALLOW_PM_DEL">
+			<option value="0"<?php if($ALLOW_PM_DEL==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_272; ?></option>
+			<option value="1"<?php if($ALLOW_PM_DEL==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_273; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_274; ?></b><br />
-    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_275); ?></font></i>
+	<td><b><?php echo A_CONFCONTENT_274; ?></b><br />
+		<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_275); ?></font></i>
 	</td>
-    <td>
+	<td>
 		<input name="vPM_KEEP_DAYS" type="text" size="7" maxlength="3" value="<?php echo $PM_KEEP_DAYS; ?>">&nbsp;(<?php echo $PM_KEEP_DAYS == 1 ? L_DAY : L_DAYS; ?>)
 	</td>
 </tr>
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="bot"></a><b><?php echo A_CONF_16; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_276; ?></b><br />
-    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_277); ?></font></i>
-    </td>
-    <td>
-        <select name="vBOT_CONTROL">
-	        <option value="0"<?php if($BOT_CONTROL==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($BOT_CONTROL==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-        </select>
-    </td>
+	<td><b><?php echo A_CONFCONTENT_276; ?></b><br />
+		<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_277); ?></font></i>
+	</td>
+	<td>
+		<select name="vBOT_CONTROL">
+			<option value="0"<?php if($BOT_CONTROL==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($BOT_CONTROL==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_278; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_279); ?></i>
-    </td>
-    <td>
-        <select name="vBOT_PUBLIC">
-	        <option value="0"<?php if($BOT_PUBLIC==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_280; ?></option>
-	        <option value="1"<?php if($BOT_PUBLIC==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_281; ?></option>
-        </select>
-    </td>
+	<td><b><?php echo A_CONFCONTENT_278; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_279); ?></i>
+	</td>
+	<td>
+		<select name="vBOT_PUBLIC">
+			<option value="0"<?php if($BOT_PUBLIC==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_280; ?></option>
+			<option value="1"<?php if($BOT_PUBLIC==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_281; ?></option>
+		</select>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_282; ?></b><br />
-    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, sprintf(A_CONFCONTENT_283, "<a href=\"./bot/talk.php\" target=\"_blank\">Talk2Bot</a>")); ?></i>
+	<td><b><?php echo A_CONFCONTENT_282; ?></b><br />
+		<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, sprintf(A_CONFCONTENT_283, "<a href=\"./bot/talk.php\" target=\"_blank\">Talk2Bot</a>")); ?></i>
 		<?php if (!$bot_id) echo "<br />" . sprintf(A_CONFNOTE, sprintf(A_CONFCONTENT_284, "install/manual installation/Manual Instructions.txt")); ?></font>
-    </td>
-    <td>
+	</td>
+	<td>
 			<input name="vBOT_NAME" type="text" size="25" maxlength="25" value="<?php echo $BOT_NAME; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_285; ?></b><br />
-    	<?php if ($bot_id <> 1) echo "<i><font color=red>" . sprintf(A_CONFIMPORTANT, A_CONFCONTENT_286) . "</i></font>"; ?>
-    </td>
-    <td>
+	<td><b><?php echo A_CONFCONTENT_285; ?></b><br />
+		<?php if ($bot_id <> 1) echo "<i><font color=red>" . sprintf(A_CONFIMPORTANT, A_CONFCONTENT_286) . "</i></font>"; ?>
+	</td>
+	<td>
 			<?php
 			if (!$bot_loaded)
 			{
@@ -2274,11 +2291,11 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_292; ?></b>
+	<td><b><?php echo A_CONFCONTENT_292; ?></b>
 	</td>
-    <td>
+	<td>
 		<?php
-# 		if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vBOT_FONT_COLOR\" style=\"background-color:".$BOT_FONT_COLOR.";\">\n");
+#		if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vBOT_FONT_COLOR\" style=\"background-color:".$BOT_FONT_COLOR.";\">\n");
 		if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false)) echo("<select name=\"vBOT_FONT_COLOR\" style=\"background-color:".$BOT_FONT_COLOR.";\">\n");
 		else echo("<select name=\"vBOT_FONT_COLOR\">");
 			$BOTF = explode(",", $ColorList);
@@ -2295,261 +2312,265 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			}
 			?>
 		</select>
-    </td>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_293; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_294); ?></i>
-    </td>
-    <td>
+	<td><b><?php echo A_CONFCONTENT_293; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_294); ?></i>
+	</td>
+	<td>
 		<input name="vBOT_AVATAR" type="text" size="20" maxlength="255" value="<?php echo $BOT_AVATAR; ?>">
 		<?php echo(($BOT_AVATAR != "") ? "&nbsp;<img id=\"bot_avatarToSwap\" src=\"".$BOT_AVATAR."\" border=0 width=".$AVA_WIDTH." height=".$AVA_HEIGHT." ALT=\"".A_CONFCONTENT_294a."\" Title=\"".A_CONFCONTENT_294a."\" />" : ""); ?>
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_295; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_296); ?></i>
-    </td>
-    <td>
+	<td><b><?php echo A_CONFCONTENT_295; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_296); ?></i>
+	</td>
+	<td>
 		<input name="vBOT_HELLO" type="text" size="25" maxlength="100" value="<?php echo $BOT_HELLO; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_297; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_296); ?></i>
-    </td>
-    <td>
+	<td><b><?php echo A_CONFCONTENT_297; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_296); ?></i>
+	</td>
+	<td>
 		<input name="vBOT_BYE" type="text" size="25" maxlength="100" value="<?php echo $BOT_BYE; ?>">
 	</td>
 </tr>
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="commands"></a><b><?php echo A_CONFTITLE_1; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_299; ?></b><br />
-    	<i><?php echo A_CONFCONTENT_300; ?></i>
-    </td>
-    <td>
+	<td><b><?php echo A_CONFCONTENT_299; ?></b><br />
+		<i><?php echo A_CONFCONTENT_300; ?></i>
+	</td>
+	<td>
 		<input name="vSAVE" type="text" size="7" maxlength="2" value="<?php echo $SAVE; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_301; ?></b><br />
-    	<?php echo A_CONFCONTENT_302; ?><br />
+	<td><b><?php echo A_CONFCONTENT_301; ?></b><br />
+		<?php echo A_CONFCONTENT_302; ?><br />
 		<i><?php echo sprintf(A_CONFHINT, sprintf(A_CONFCONTENT_303, "localized.chat.php/", "localized/_owner/owner.php")); ?></i>
-    </td>
-    <td>
-        <select name="vTOPIC_DIFF">
-	        <option value="0"<?php if($TOPIC_DIFF==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_304; ?></option>
-	        <option value="1"<?php if($TOPIC_DIFF==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_305; ?></option>
-        </select>
-    </td>
+	</td>
+	<td>
+		<select name="vTOPIC_DIFF">
+			<option value="0"<?php if($TOPIC_DIFF==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_304; ?></option>
+			<option value="1"<?php if($TOPIC_DIFF==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_305; ?></option>
+		</select>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_306; ?></b><br />
-    	<i><?php echo A_CONFCONTENT_307; ?></i>
-    </td>
-    <td>
+	<td><b><?php echo A_CONFCONTENT_306; ?></b><br />
+		<i><?php echo A_CONFCONTENT_307; ?></i>
+	</td>
+	<td>
 		<input name="vROOM_SAYS" type="text" size="25" maxlength="255" value="<?php echo $ROOM_SAYS; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_308; ?></b><br />
+	<td><b><?php echo A_CONFCONTENT_308; ?></b><br />
 		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_309); ?></i>
 	</td>
-    <td>
-        <select name="vDEMOTE_MOD">
-	        <option value="0"<?php if($DEMOTE_MOD==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_310; ?></option>
-	        <option value="1"<?php if($DEMOTE_MOD==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_311; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vDEMOTE_MOD">
+			<option value="0"<?php if($DEMOTE_MOD==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_310; ?></option>
+			<option value="1"<?php if($DEMOTE_MOD==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_311; ?></option>
+		</select>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_312; ?></b><br />
-    	<i><font color=red><?php echo A_CONFCONTENT_313; ?></font><br />
+	<td><b><?php echo A_CONFCONTENT_312; ?></b><br />
+		<i><font color=red><?php echo A_CONFCONTENT_313; ?></font><br />
 		<?php echo sprintf(A_CONFHINT, A_CONFCONTENT_314); ?></i>
-    </td>
-    <td>
+	</td>
+	<td>
 		<input name="vMAX_DICES" type="text" size="7" maxlength="2" value="<?php echo $MAX_DICES; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_315; ?></b>
+	<td><b><?php echo A_CONFCONTENT_315; ?></b>
 	</td>
-    <td>
+	<td>
 		<input name="vMAX_ROLLS" type="text" size="7" maxlength="3" value="<?php echo $MAX_ROLLS; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_316; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_317); ?></i>
-    </td>
-    <td>
-        <select name="vUSERS_SORT_ORD">
-	        <option value="0"<?php if($USERS_SORT_ORD==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_318; ?></option>
-	        <option value="1"<?php if($USERS_SORT_ORD==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_319; ?></option>
-        </select>
-    </td>
+	<td><b><?php echo A_CONFCONTENT_316; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_317); ?></i>
+	</td>
+	<td>
+		<select name="vUSERS_SORT_ORD">
+			<option value="0"<?php if($USERS_SORT_ORD==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_318; ?></option>
+			<option value="1"<?php if($USERS_SORT_ORD==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_319; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_320; ?></b>
+	<td><b><?php echo A_CONFCONTENT_320; ?></b>
 	</td>
-    <td>
+	<td>
 		<input name="vMAX_PIC_SIZE" type="text" size="7" maxlength="3" value="<?php echo $MAX_PIC_SIZE; ?>">&nbsp;(<?php echo A_CONFPX; ?>)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
 	<td><b><?php echo A_CONFCONTENT_321; ?></b><br />
-    	<?php echo A_CONFCONTENT_322; ?><br />
+		<?php echo A_CONFCONTENT_322; ?><br />
 		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_323); ?></i><br />
 		<?php echo A_CONFCONTENT_324; ?>
 	</td>
-    <td>
-        <select name="vALLOW_MATH">
-	        <option value="0"<?php if($ALLOW_MATH==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($ALLOW_MATH==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-        </select><br />
+	<td>
+		<select name="vALLOW_MATH">
+			<option value="0"<?php if($ALLOW_MATH==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($ALLOW_MATH==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		</select><br />
 		<?php echo A_CONFCONTENT_325; ?><br />
 		<input name="vSRC_MATH" type="text" size="25" maxlength="255" value="<?php echo $SRC_MATH; ?>">
-    </td>
+	</td>
 </tr>
 
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="mmedia"></a><b><?php echo A_CONF_18; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_326; ?></b><br />
+	<td><b><?php echo A_CONFCONTENT_326; ?></b><br />
 		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_327); ?></i>
 	</td>
-    <td>
-        <select name="vALLOW_VIDEO">
-	        <option value="0"<?php if($ALLOW_VIDEO==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($ALLOW_VIDEO==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-	        <option value="2"<?php if($ALLOW_VIDEO==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_328; ?></option>
-        </select>
+	<td>
+		<select name="vALLOW_VIDEO">
+			<option value="0"<?php if($ALLOW_VIDEO==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($ALLOW_VIDEO==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+			<option value="2"<?php if($ALLOW_VIDEO==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_328; ?></option>
+		</select>
 	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_329; ?></b>
+	<td><b><?php echo A_CONFCONTENT_329; ?></b>
 	</td>
-    <td align=right>
+	<td align=right>
 		<?php echo A_CONFWIDTH; ?>:&nbsp;<input name="vVIDEO_WIDTH" type="text" size="7" maxlength="3" value="<?php echo $VIDEO_WIDTH; ?>">&nbsp;(<?php echo A_CONFPX; ?>)<br />
 		<?php echo A_CONFHEIGHT; ?>:&nbsp;<input name="vVIDEO_HEIGHT" type="text" size="7" maxlength="3" value="<?php echo $VIDEO_HEIGHT; ?>">&nbsp;(<?php echo A_CONFPX; ?>)
 	</td>
 
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_330; ?></b><br />
-    	<?php echo A_CONFCONTENT_331; ?><br />
-    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONF_ERR_11); ?></font><br />
-    	<?php echo sprintf(A_CONFHINT, A_CONFCONTENT_333); ?></i>
+	<td><b><?php echo A_CONFCONTENT_330; ?></b><br />
+		<?php echo A_CONFCONTENT_331; ?><br />
+		<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONF_ERR_11); ?></font><br />
+		<?php echo sprintf(A_CONFHINT, A_CONFCONTENT_333); ?></i>
 	</td>
-    <td>
-        <select name="vEN_WMPLAYER">
-	        <option value="0"<?php if($EN_WMPLAYER==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($EN_WMPLAYER==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_334; ?></option>
-	        <option value="2"<?php if($EN_WMPLAYER==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_335; ?></option>
-        </select>
+	<td>
+		<select name="vEN_WMPLAYER">
+			<option value="0"<?php if($EN_WMPLAYER==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($EN_WMPLAYER==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_334; ?></option>
+			<option value="2"<?php if($EN_WMPLAYER==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_335; ?></option>
+		</select>
 	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_336; ?></b><br />
-    	<?php echo A_CONFCONTENT_336a; ?>
+	<td><b><?php echo A_CONFCONTENT_336; ?></b><br />
+		<?php echo A_CONFCONTENT_336a; ?>
 	</td>
-    <td>
+	<td>
 		<input name="vWMP_STREAM" type="text" size="25" maxlength="255" value="<?php echo $WMP_STREAM; ?>">
 	</td>
 </tr>
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="quick"></a><b><?php echo A_CONF_19; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_337; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_340a); ?></i><br />
+	<td><b><?php echo A_CONFCONTENT_337; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_340a); ?></i><br />
 		<?php echo A_CONFCONTENT_340; ?>
-    </td>
-    <td><textarea name="vQUICKA" rows=5 cols=28 wrap=on><?php echo $QUICKA; ?></textarea>
+	</td>
+	<td><textarea name="vQUICKA" rows=5 cols=28 wrap=on><?php echo $QUICKA; ?></textarea>
 	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_338; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_340a); ?></i><br />
+	<td><b><?php echo A_CONFCONTENT_338; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_340a); ?></i><br />
 		<?php echo A_CONFCONTENT_341; ?>
-    </td>
-    <td><textarea name="vQUICKM" rows=5 cols=28 wrap=on><?php echo $QUICKM; ?></textarea>
+	</td>
+	<td><textarea name="vQUICKM" rows=5 cols=28 wrap=on><?php echo $QUICKM; ?></textarea>
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_339; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_340a); ?></i><br />
+	<td><b><?php echo A_CONFCONTENT_339; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_340a); ?></i><br />
 		<?php echo A_CONFCONTENT_342; ?>
-    </td>
-    <td><textarea name="vQUICKU" rows=5 cols=28 wrap=on><?php echo $QUICKU; ?></textarea>
+	</td>
+	<td><textarea name="vQUICKU" rows=5 cols=28 wrap=on><?php echo $QUICKU; ?></textarea>
 	</td>
 </tr>
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="avatars"></a><b><?php echo A_CONF_20; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_343; ?></b><br />
-    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONF_ERR_11); ?></font></i>
-    </td>
-    <td>
-        <select name="vUSE_AVATARS" id="use_avatars" onChange="swapImage('use_avatars','use_avatarsToSwap')">
-	        <option value="0"<?php if($USE_AVATARS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_345; ?></option>
-	        <option value="1"<?php if($USE_AVATARS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_346; ?></option>
-        </select>&nbsp;<img id="use_avatarsToSwap" src="<?php echo(($USE_AVATARS==1) ? "./".$ChatPath.$AVA_RELPATH.$DEF_AVATAR : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 width=".$AVA_WIDTH." height=".$AVA_HEIGHT." ALT=\"".A_CONFCONTENT_352."\" Title=\"".A_CONFCONTENT_352."\""); ?> />
-    </td>
+	<td><b><?php echo A_CONFCONTENT_343; ?></b><br />
+		<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONF_ERR_11); ?></font></i>
+	</td>
+	<td>
+		<select name="vUSE_AVATARS" id="use_avatars" onChange="swapImage('use_avatars','use_avatarsToSwap')">
+			<option value="0"<?php if($USE_AVATARS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_345; ?></option>
+			<option value="1"<?php if($USE_AVATARS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_346; ?></option>
+		</select>&nbsp;<img id="use_avatarsToSwap" src="<?php echo(($USE_AVATARS==1) ? "./".$ChatPath.$AVA_RELPATH.$DEF_AVATAR : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 width=".$AVA_WIDTH." height=".$AVA_HEIGHT." ALT=\"".A_CONFCONTENT_352."\" Title=\"".A_CONFCONTENT_352."\""); ?> />
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_347; ?></b>
+	<td><b><?php echo A_CONFCONTENT_347; ?></b>
 	</td>
-    <td>
-        <select name="vAVA_PROFBUTTON" id="prof_button" onChange="swapImage('prof_button','prof_buttonToSwap')">
-	        <option value="0"<?php if($AVA_PROFBUTTON==0){ echo " selected"; } ?>><?php echo A_CONFHIDE; ?></option>
-	        <option value="1"<?php if($AVA_PROFBUTTON==1){ echo " selected"; } ?>><?php echo A_CONFSHOW; ?></option>
-        </select>&nbsp;<img id="prof_buttonToSwap" src="<?php echo(($AVA_PROFBUTTON==1) ? "./".$ChatPath."images/avatarbutton.gif" : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 width=".$AVA_WIDTH." height=".$AVA_HEIGHT." ALT=\"".A_CONFCONTENT_351."\" Title=\"".A_CONFCONTENT_351."\""); ?> />
-    </td>
+	<td>
+		<select name="vAVA_PROFBUTTON" id="prof_button" onChange="swapImage('prof_button','prof_buttonToSwap')">
+			<option value="0"<?php if($AVA_PROFBUTTON==0){ echo " selected"; } ?>><?php echo A_CONFHIDE; ?></option>
+			<option value="1"<?php if($AVA_PROFBUTTON==1){ echo " selected"; } ?>><?php echo A_CONFSHOW; ?></option>
+		</select>&nbsp;<img id="prof_buttonToSwap" src="<?php echo(($AVA_PROFBUTTON==1) ? "./".$ChatPath."images/avatarbutton.gif" : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 width=".$AVA_WIDTH." height=".$AVA_HEIGHT." ALT=\"".A_CONFCONTENT_351."\" Title=\"".A_CONFCONTENT_351."\""); ?> />
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_348; ?></b>
+	<td><b><?php echo A_CONFCONTENT_348; ?></b>
 	</td>
-    <td>
+	<td>
 		<input name="vAVA_RELPATH" type="text" size="25" maxlength="55" value="<?php echo $AVA_RELPATH == "" ? "images/avatars/" : $AVA_RELPATH; ?>">
 	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_349; ?></b><br />
+	<td><b><?php echo A_CONFCONTENT_349; ?></b><br />
 	<i><?php echo sprintf(A_CONFHINT, sprintf(A_CONFCONTENT_350, $NUM_AVATARS)); ?></i>
 	</td>
-    <td>
+	<td>
 		<?php
 		$avatars = $AVA_RELPATH;
 		$avatarfiles = opendir($avatars); #open directory
 			$i = 0;
 			while (false !== ($avatarfile = readdir($avatarfiles)))
 			{
-# 				if (!eregi("\.html",$avatarfile) && !eregi("uploaded",$avatarfile) && !eregi("quote_avatar",$avatarfile) && !eregi("bot_avatar",$avatarfile) && $avatarfile!=='.' && $avatarfile!=='..')
+#				if (!eregi("\.html",$avatarfile) && !eregi("uploaded",$avatarfile) && !eregi("quote_avatar",$avatarfile) && !eregi("bot_avatar",$avatarfile) && $avatarfile!=='.' && $avatarfile!=='..')
 				if (!preg_match("/(\.html|uploaded|quote_avatar\.gif|bot_avatar\.gif)$/i", $avatarfile) && !preg_match("/^[\.]/", $avatarfile))
 				{
 					$avatarsfile[]=$avatarfile;
-			 		$i++;
+					$i++;
 				}
 			}
 			closedir($avatarfiles);
@@ -2561,14 +2582,14 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_352; ?></b>
+	<td><b><?php echo A_CONFCONTENT_352; ?></b>
 	</td>
-    <td>
+	<td>
 		<select name="vDEF_AVATAR" id="def_avatar" onChange="swapImage('def_avatar','def_avatarToSwap')">
 <?php
 			if ($avatarsfile)
 			{
-			  	natsort($avatarsfile);
+				natsort($avatarsfile);
 			}
 			$j = 1;
 			foreach ($avatarsfile as $avatarname)
@@ -2584,57 +2605,57 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_353; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_354); ?></i>
+	<td><b><?php echo A_CONFCONTENT_353; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_354); ?></i>
 	</td>
-    <td align=right>
+	<td align=right>
 		<?php echo A_CONFWIDTH; ?>:&nbsp;<input name="vAVA_WIDTH" type="text" size="7" maxlength="3" value="<?php echo $AVA_WIDTH; ?>">&nbsp;(<?php echo A_CONFPX; ?>)<br />
 		<?php echo A_CONFHEIGHT; ?>:&nbsp;<input name="vAVA_HEIGHT" type="text" size="7" maxlength="3" value="<?php echo $AVA_HEIGHT; ?>">&nbsp;(<?php echo A_CONFPX; ?>)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_355; ?></b><br />
+	<td><b><?php echo A_CONFCONTENT_355; ?></b><br />
 	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_356); ?></font></i>
 	</td>
-    <td>
-        <select name="vALLOW_UPLOADS">
-	        <option value="0"<?php if($ALLOW_UPLOADS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_357; ?></option>
-	        <option value="1"<?php if($ALLOW_UPLOADS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_358; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vALLOW_UPLOADS">
+			<option value="0"<?php if($ALLOW_UPLOADS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_357; ?></option>
+			<option value="1"<?php if($ALLOW_UPLOADS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_358; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_359; ?></b>
+	<td><b><?php echo A_CONFCONTENT_359; ?></b>
 	</td>
-    <td>
-        <select name="vDISP_GENDER" id="genders" onChange="swapImage('genders','gendersToSwap')">
-	        <option value="0"<?php if($DISP_GENDER==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_360; ?></option>
-	        <option value="1"<?php if($DISP_GENDER==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_361; ?></option>
-        </select>&nbsp;<img style="vertical-align:middle" id="gendersToSwap" src="<?php echo(($DISP_GENDER==1) ? "./".$ChatPath."images/gender_couple.gif" : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 ALT=\"".A_CONFCONTENT_351a."\" Title=\"".A_CONFCONTENT_351a."\""); ?> />
-    </td>
+	<td>
+		<select name="vDISP_GENDER" id="genders" onChange="swapImage('genders','gendersToSwap')">
+			<option value="0"<?php if($DISP_GENDER==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_360; ?></option>
+			<option value="1"<?php if($DISP_GENDER==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_361; ?></option>
+		</select>&nbsp;<img style="vertical-align:middle" id="gendersToSwap" src="<?php echo(($DISP_GENDER==1) ? "./".$ChatPath."images/gender_couple.gif" : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 ALT=\"".A_CONFCONTENT_351a."\" Title=\"".A_CONFCONTENT_351a."\""); ?> />
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><a name="force"></a><b><?php echo A_CONFCONTENT_362; ?></b><br />
-    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_363); ?></font><br />
+	<td><a name="force"></a><b><?php echo A_CONFCONTENT_362; ?></b><br />
+		<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_363); ?></font><br />
 		<?php echo sprintf(A_CONFHINT, A_CONFCONTENT_364); ?></i>
-    </td>
-    <td>
-        <select name="vALLOW_GRAVATARS" id="gravatars" onChange="swapImage('gravatars','gravatarsToSwap')">
-	        <option value="0"<?php if($ALLOW_GRAVATARS==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($ALLOW_GRAVATARS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_365; ?></option>
-	        <option value="2"<?php if($ALLOW_GRAVATARS==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_366; ?></option>
-        </select>&nbsp;<img id="gravatarsToSwap" src="<?php echo(($ALLOW_GRAVATARS) ? "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=".$AVA_WIDTH."&r=g&d=".$GRAVATARS_DYNAMIC_DEF : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 ALT=\"Gravatar\" Title=\"Gravatar\""); ?> />
-    </td>
+	</td>
+	<td>
+		<select name="vALLOW_GRAVATARS" id="gravatars" onChange="swapImage('gravatars','gravatarsToSwap')">
+			<option value="0"<?php if($ALLOW_GRAVATARS==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($ALLOW_GRAVATARS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_365; ?></option>
+			<option value="2"<?php if($ALLOW_GRAVATARS==2){ echo " selected"; } ?>><?php echo A_CONFCONTENT_366; ?></option>
+		</select>&nbsp;<img id="gravatarsToSwap" src="<?php echo(($ALLOW_GRAVATARS) ? "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=".$AVA_WIDTH."&r=g&d=".$GRAVATARS_DYNAMIC_DEF : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 ALT=\"Gravatar\" Title=\"Gravatar\""); ?> />
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
 	<td colspan="2">
-    	<i><font color=blue><?php echo A_CONFCONTENT_367; ?></font><br />
-    	<?php echo A_CONFCONTENT_368; ?><br />
+		<i><font color=blue><?php echo A_CONFCONTENT_367; ?></font><br />
+		<?php echo A_CONFCONTENT_368; ?><br />
 		<font color=blue><?php echo A_CONFCONTENT_369; ?></font></i>
 	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_370; ?></b><br />
+	<td><b><?php echo A_CONFCONTENT_370; ?></b><br />
 	<i><?php echo A_CONFCONTENT_371 . "<br /><font color=red>" . sprintf(A_CONFIMPORTANT, A_CONFCONTENT_371a); ?><br />
 	<?php echo((!$cache_supported || $server_blocked) ? "<b>".A_CONFCONTENT_371b."</b><br />" : ""); ?>
 		</font><font color=blue><?php echo A_CONFCONTENT_372; ?>&nbsp;<b><?php echo($_SERVER['SERVER_ADDR']); ?></b> <?php echo(!$server_blocked ? "" : "<b><font color=red>".A_CONFCONTENT_371c."</font></b>"); ?></font><br />
@@ -2644,27 +2665,27 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		<font color=blue><?php echo A_CONFCONTENT_375; ?>&nbsp;<b><?php echo(!(ini_get("allow_url_include")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font><br />
 		<font color=blue><?php echo A_CONFCONTENT_376; ?>&nbsp;<b><?php echo(!(function_exists("file_get_contents")) ? "<font color=red>".L_DISABLED."</font>" : L_ENABLED); ?></b></font></i>
 	</td>
-    <td>
+	<td>
 		<input type="radio" value="0" name="vGRAVATARS_CACHE" <?php if($GRAVATARS_CACHE==0 || !$cache_supported || $server_blocked) { echo " checked"; }; ?>>&nbsp;<?php echo A_CONFCONTENT_378; ?><br />
 		<input type="radio" value="1" name="vGRAVATARS_CACHE" <?php if($GRAVATARS_CACHE==1 && $cache_supported){ echo " checked"; }; if(!$cache_supported || $server_blocked){ echo " disabled"; }; ?>>&nbsp;<?php echo A_CONFCONTENT_379; ?><br />
 		<?php echo A_CONFCONTENT_380; ?><br /><input name="vGRAVATARS_CACHE_EXPIRE" type="text" size="7" maxlength="3" value="<?php echo $GRAVATARS_CACHE_EXPIRE; ?>"<?php if(!$cache_supported || $server_blocked){ echo " readonly"; }; ?>>&nbsp;(<?php echo $GRAVATARS_CACHE_EXPIRE == 1 ? L_DAY : L_DAYS; ?>)
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_381; ?></b>
+	<td><b><?php echo A_CONFCONTENT_381; ?></b>
 	</td>
-    <td>
-        <select name="vGRAVATARS_RATING">
-	        <option value="G"<?php if($GRAVATARS_RATING=="G"){ echo " selected"; } ?>>G</option>
-	        <option value="PG"<?php if($GRAVATARS_RATING=="PG"){ echo " selected"; } ?>>PG</option>
-	        <option value="R"<?php if($GRAVATARS_RATING=="R"){ echo " selected"; } ?>>R</option>
-	        <option value="X"<?php if($GRAVATARS_RATING=="X"){ echo " selected"; } ?>>X</option>
-	        <option value="ANY"<?php if($GRAVATARS_RATING=="ANY"){ echo " selected"; } ?>><?php echo A_CONFCONTENT_382; ?></option>
-        </select>
+	<td>
+		<select name="vGRAVATARS_RATING">
+			<option value="G"<?php if($GRAVATARS_RATING=="G"){ echo " selected"; } ?>>G</option>
+			<option value="PG"<?php if($GRAVATARS_RATING=="PG"){ echo " selected"; } ?>>PG</option>
+			<option value="R"<?php if($GRAVATARS_RATING=="R"){ echo " selected"; } ?>>R</option>
+			<option value="X"<?php if($GRAVATARS_RATING=="X"){ echo " selected"; } ?>>X</option>
+			<option value="ANY"<?php if($GRAVATARS_RATING=="ANY"){ echo " selected"; } ?>><?php echo A_CONFCONTENT_382; ?></option>
+		</select>
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td colspan=2>
+	<td colspan=2>
 		<i><?php echo A_CONFCONTENT_383; ?><br />
 		<?php echo A_CONFCONTENT_385; ?><br />
 		<?php echo A_CONFCONTENT_386; ?><br />
@@ -2672,137 +2693,140 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_388; ?></b><br />
+	<td><b><?php echo A_CONFCONTENT_388; ?></b><br />
 	<i><?php echo A_CONFCONTENT_389; ?><br />
 	<font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_390); ?></font></i>
-    </td>
-    <td>
-        <select name="vGRAVATARS_DYNAMIC_DEF" id="gravatars_def" onChange="swapImage('gravatars_def','gravatars_defToSwap')">
-	        <option value=""<?php if($GRAVATARS_DYNAMIC_DEF==""){ echo " selected"; } ?>>Blue G</option>
-	        <option value="mm"<?php if($GRAVATARS_DYNAMIC_DEF=="mm"){ echo " selected"; } ?>>Mystery Man</option>
-	        <option value="identicon"<?php if($GRAVATARS_DYNAMIC_DEF=="identicon"){ echo " selected"; } ?>>Identicon</option>
-	        <option value="monsterid"<?php if($GRAVATARS_DYNAMIC_DEF=="monsterid"){ echo " selected"; } ?>>MonsterID</option>
-	        <option value="wavatar"<?php if($GRAVATARS_DYNAMIC_DEF=="wavatar"){ echo " selected"; } ?>>Wavatar</option>
-	        <option value="retro"<?php if($GRAVATARS_DYNAMIC_DEF=="retro"){ echo " selected"; } ?>>Retro</option>
-        </select>
-        <?php
-        if ($ALLOW_GRAVATARS)
-        {
-        	if ($GRAVATARS_DYNAMIC_DEF=="")
-        	$grav_def_src = "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=$AVA_WIDTH&r=g";
-        	elseif ($GRAVATARS_DYNAMIC_DEF=="mm")
-        	$grav_def_src = "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=$AVA_WIDTH&r=g&d=mm";
-        	elseif ($GRAVATARS_DYNAMIC_DEF=="identicon")
-        	$grav_def_src = "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=$AVA_WIDTH&r=g&d=identicon";
-        	elseif ($GRAVATARS_DYNAMIC_DEF=="monsterid")
-        	$grav_def_src = "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=$AVA_WIDTH&r=g&d=monsterid";
-        	elseif ($GRAVATARS_DYNAMIC_DEF=="wavatar")
-        	$grav_def_src = "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=$AVA_WIDTH&r=g&d=wavatar";
-        	elseif ($GRAVATARS_DYNAMIC_DEF=="retro")
-        	$grav_def_src = "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=$AVA_WIDTH&r=g&d=retro";
-        	else $grav_def_src = "./".$ChatPath."images/gender_none.gif";
-        }
-        ?>
-        &nbsp;<img id="gravatars_defToSwap" src="<?php echo((isset($grav_def_src) && $grav_def_src!= "") ? $grav_def_src : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 ALT=\"".A_CONFCONTENT_388a."\" Title=\"".A_CONFCONTENT_388a."\""); ?> /><br />
-        <select name="vGRAVATARS_DYNAMIC_DEF_FORCE">
-	        <option value="0"<?php if($GRAVATARS_DYNAMIC_DEF_FORCE==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_391; ?></option>
-	        <option value="1"<?php if($GRAVATARS_DYNAMIC_DEF_FORCE==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_392; ?></option>
-        </select>
+	</td>
+	<td>
+		<select name="vGRAVATARS_DYNAMIC_DEF" id="gravatars_def" onChange="swapImage('gravatars_def','gravatars_defToSwap')">
+			<option value=""<?php if($GRAVATARS_DYNAMIC_DEF==""){ echo " selected"; } ?>>Blue G</option>
+			<option value="mm"<?php if($GRAVATARS_DYNAMIC_DEF=="mm"){ echo " selected"; } ?>>Mystery Man</option>
+			<option value="identicon"<?php if($GRAVATARS_DYNAMIC_DEF=="identicon"){ echo " selected"; } ?>>Identicon</option>
+			<option value="monsterid"<?php if($GRAVATARS_DYNAMIC_DEF=="monsterid"){ echo " selected"; } ?>>MonsterID</option>
+			<option value="wavatar"<?php if($GRAVATARS_DYNAMIC_DEF=="wavatar"){ echo " selected"; } ?>>Wavatar</option>
+			<option value="retro"<?php if($GRAVATARS_DYNAMIC_DEF=="retro"){ echo " selected"; } ?>>Retro</option>
+		</select>
+		<?php
+		if ($ALLOW_GRAVATARS)
+		{
+			if ($GRAVATARS_DYNAMIC_DEF=="")
+			$grav_def_src = "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=$AVA_WIDTH&r=g";
+			elseif ($GRAVATARS_DYNAMIC_DEF=="mm")
+			$grav_def_src = "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=$AVA_WIDTH&r=g&d=mm";
+			elseif ($GRAVATARS_DYNAMIC_DEF=="identicon")
+			$grav_def_src = "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=$AVA_WIDTH&r=g&d=identicon";
+			elseif ($GRAVATARS_DYNAMIC_DEF=="monsterid")
+			$grav_def_src = "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=$AVA_WIDTH&r=g&d=monsterid";
+			elseif ($GRAVATARS_DYNAMIC_DEF=="wavatar")
+			$grav_def_src = "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=$AVA_WIDTH&r=g&d=wavatar";
+			elseif ($GRAVATARS_DYNAMIC_DEF=="retro")
+			$grav_def_src = "http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=$AVA_WIDTH&r=g&d=retro";
+			else $grav_def_src = "./".$ChatPath."images/gender_none.gif";
+		}
+		?>
+		&nbsp;<img id="gravatars_defToSwap" src="<?php echo((isset($grav_def_src) && $grav_def_src!= "") ? $grav_def_src : "./".$ChatPath."images/gender_none.gif"); ?>" <?php echo("border=0 ALT=\"".A_CONFCONTENT_388a."\" Title=\"".A_CONFCONTENT_388a."\""); ?> /><br />
+		<select name="vGRAVATARS_DYNAMIC_DEF_FORCE">
+			<option value="0"<?php if($GRAVATARS_DYNAMIC_DEF_FORCE==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_391; ?></option>
+			<option value="1"<?php if($GRAVATARS_DYNAMIC_DEF_FORCE==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_392; ?></option>
+		</select>
 	</td>
 </tr>
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="logging"></a><b><?php echo A_CONF_21; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_393; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_394); ?></i>
-    </td>
-    <td>
-        <select name="vCHAT_LOGS">
-	        <option value="0"<?php if($CHAT_LOGS==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($CHAT_LOGS==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-        </select>
-    </td>
+	<td><b><?php echo A_CONFCONTENT_393; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_394); ?></i>
+	</td>
+	<td>
+		<select name="vCHAT_LOGS">
+			<option value="0"<?php if($CHAT_LOGS==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($CHAT_LOGS==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_395; ?></b><br />
-    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_396); ?></font><br />
-    	<?php echo sprintf(A_CONFHINT, A_CONFCONTENT_397); ?></i>
-    </td>
-    <td>
+	<td><b><?php echo A_CONFCONTENT_395; ?></b><br />
+		<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_396); ?></font><br />
+		<?php echo sprintf(A_CONFHINT, A_CONFCONTENT_397); ?></i>
+	</td>
+	<td>
 		<input name="vLOG_DIR" type="text" size="25" maxlength="25" value="<?php echo $LOG_DIR; ?>">
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_398; ?></b><br />
-    	<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_399); ?></i>
-    </td>
-    <td>
-        <select name="vSHOW_LOGS_USR">
-	        <option value="0"<?php if($SHOW_LOGS_USR==0){ echo " selected"; } ?>><?php echo A_CONFHIDE; ?></option>
-	        <option value="1"<?php if($SHOW_LOGS_USR==1){ echo " selected"; } ?>><?php echo A_CONFSHOW; ?></option>
-        </select>
-    </td>
+	<td><b><?php echo A_CONFCONTENT_398; ?></b><br />
+		<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_399); ?></i>
+	</td>
+	<td>
+		<select name="vSHOW_LOGS_USR">
+			<option value="0"<?php if($SHOW_LOGS_USR==0){ echo " selected"; } ?>><?php echo A_CONFHIDE; ?></option>
+			<option value="1"<?php if($SHOW_LOGS_USR==1){ echo " selected"; } ?>><?php echo A_CONFSHOW; ?></option>
+		</select>
+	</td>
 </tr>
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="lurking"></a><b><?php echo A_CONF_22; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_400; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_401); ?></i>
-    </td>
-    <td>
-        <select name="vCHAT_LURKING">
-	        <option value="0"<?php if($CHAT_LURKING==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($CHAT_LURKING==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-        </select>
-    </td>
+	<td><b><?php echo A_CONFCONTENT_400; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_401); ?></i>
+	</td>
+	<td>
+		<select name="vCHAT_LURKING">
+			<option value="0"<?php if($CHAT_LURKING==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($CHAT_LURKING==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_402; ?></b><br />
-    	<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_403); ?></i>
-    </td>
-    <td>
-        <select name="vSHOW_LURK_USR">
-	        <option value="0"<?php if($SHOW_LURK_USR==0){ echo " selected"; } ?>><?php echo A_CONFHIDE; ?></option>
-	        <option value="1"<?php if($SHOW_LURK_USR==1){ echo " selected"; } ?>><?php echo A_CONFSHOW; ?></option>
-        </select>
-    </td>
+	<td><b><?php echo A_CONFCONTENT_402; ?></b><br />
+		<i><?php echo sprintf(A_CONFNOTE, A_CONFCONTENT_403); ?></i>
+	</td>
+	<td>
+		<select name="vSHOW_LURK_USR">
+			<option value="0"<?php if($SHOW_LURK_USR==0){ echo " selected"; } ?>><?php echo A_CONFHIDE; ?></option>
+			<option value="1"<?php if($SHOW_LURK_USR==1){ echo " selected"; } ?>><?php echo A_CONFSHOW; ?></option>
+		</select>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_404; ?></b>
+	<td><b><?php echo A_CONFCONTENT_404; ?></b>
 	</td>
-    <td>
-        <select name="vCHAT_EXTRAS">
-	        <option value="0"<?php if($CHAT_EXTRAS==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($CHAT_EXTRAS==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vCHAT_EXTRAS">
+			<option value="0"<?php if($CHAT_EXTRAS==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($CHAT_EXTRAS==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		</select>
+	</td>
 </tr>
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="quote"></a><b><?php echo A_CONF_23; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_405; ?></b><br />
-    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_406); ?></font></i>
+	<td><b><?php echo A_CONFCONTENT_405; ?></b><br />
+		<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_406); ?></font></i>
 	</td>
-    <td>
+	<td>
 		<select name="vQUOTE">
-	        <option value="0"<?php if($QUOTE==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
-	        <option value="1"<?php if($QUOTE==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
-        </select>
+			<option value="0"<?php if($QUOTE==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($QUOTE==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		</select>
 	</td>
 </tr>
 <tr>
@@ -2817,7 +2841,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 	<td>
 		<?php
-# 		if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vQUOTE_FONT_COLOR\" style=\"background-color:".$QUOTE_FONT_COLOR.";\">\n");
+#		if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vQUOTE_FONT_COLOR\" style=\"background-color:".$QUOTE_FONT_COLOR.";\">\n");
 		if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false)) echo("<select name=\"vQUOTE_FONT_COLOR\" style=\"background-color:".$QUOTE_FONT_COLOR.";\">\n");
 		else echo("<select name=\"vQUOTE_FONT_COLOR\">");
 			$CQ = explode(",", $ColorList);
@@ -2841,11 +2865,11 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 	<td>
 		<input name="vQUOTE_AVATAR" type="text" size="20" maxlength="255" value="<?php echo $QUOTE_AVATAR; ?>">
-    <?php echo(($QUOTE_AVATAR != "") ? "&nbsp;<img id=\"quote_avatarToSwap\" src=\"".$QUOTE_AVATAR."\" border=0 width=".$AVA_WIDTH." height=".$AVA_HEIGHT." ALT=\"".A_CONFCONTENT_409."\" Title=\"".A_CONFCONTENT_409."\" />" : ""); ?>
+	<?php echo(($QUOTE_AVATAR != "") ? "&nbsp;<img id=\"quote_avatarToSwap\" src=\"".$QUOTE_AVATAR."\" border=0 width=".$AVA_WIDTH." height=".$AVA_HEIGHT." ALT=\"".A_CONFCONTENT_409."\" Title=\"".A_CONFCONTENT_409."\" />" : ""); ?>
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_410; ?></b><br />
+	<td><b><?php echo A_CONFCONTENT_410; ?></b><br />
 		<i><?php echo sprintf(A_CONFHINT, sprintf(A_CONFCONTENT_412, "files/quotes")); ?></i>
 	</td>
 	<td>
@@ -2856,17 +2880,17 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			$i = 0;
 			while (false !== ($quotefile = readdir($quotefiles)))
 			{
-# 				if (!eregi("\.html",$quotefile) && $quotefile!=='.' && $quotefile!=='..')
+#				if (!eregi("\.html",$quotefile) && $quotefile!=='.' && $quotefile!=='..')
 				if (stripos($quotefile,".html") === false && !preg_match("/^[\.]/", $quotefile))
 				{
 					$quotesfile[]=$quotefile;
-			 		$i++;
+					$i++;
 				}
 			}
 			closedir($quotefiles);
 			if ($quotesfile)
 			{
-			  	natsort($quotesfile);
+				natsort($quotesfile);
 			}
 			$j = 1;
 			foreach ($quotesfile as $quotename)
@@ -2893,7 +2917,7 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 	<td>
 		<?php
-# 		if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vQUOTE_COLOR\" style=\"background-color:".$QUOTE_COLOR.";\">\n");
+#		if ($Ver != "H" || (eregi("firefox|chrome|opera|safari", $_SERVER['HTTP_USER_AGENT']) && !eregi("MSIE", $_SERVER['HTTP_USER_AGENT']))) echo("<select name=\"vQUOTE_COLOR\" style=\"background-color:".$QUOTE_COLOR.";\">\n");
 		if ($Ver != "H" || (preg_match("/[firefox|chrome|opera|safari]/i", $_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'],"MSIE") === false)) echo("<select name=\"vQUOTE_COLOR\" style=\"background-color:".$QUOTE_COLOR.";\">\n");
 		else echo("<select name=\"vQUOTE_COLOR\">");
 			$CQP = explode(",", $ColorList);
@@ -2913,30 +2937,31 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 	</td>
 </tr>
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="ghost"></a><b><?php echo A_CONF_24; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
-<tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_414; ?></b><br />
-		<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_415); ?></font></i>
-	</td>
-    <td>
-        <select name="vHIDE_ADMINS">
-	        <option value="0"<?php if($HIDE_ADMINS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_417; ?></option>
-	        <option value="1"<?php if($HIDE_ADMINS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_418; ?></option>
-        </select><br /><br />
-        <select name="vHIDE_MODERS">
-	        <option value="0"<?php if($HIDE_MODERS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_419; ?></option>
-	        <option value="1"<?php if($HIDE_MODERS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_420; ?></option>
-        </select>
-    </td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td colspan=2>
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_416); ?></i>
+	<td><b><?php echo A_CONFCONTENT_414; ?></b><br />
+		<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_415); ?></font></i>
+	</td>
+	<td>
+		<select name="vHIDE_ADMINS">
+			<option value="0"<?php if($HIDE_ADMINS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_417; ?></option>
+			<option value="1"<?php if($HIDE_ADMINS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_418; ?></option>
+		</select><br /><br />
+		<select name="vHIDE_MODERS">
+			<option value="0"<?php if($HIDE_MODERS==0){ echo " selected"; } ?>><?php echo A_CONFCONTENT_419; ?></option>
+			<option value="1"<?php if($HIDE_MODERS==1){ echo " selected"; } ?>><?php echo A_CONFCONTENT_420; ?></option>
+		</select>
+	</td>
+</tr>
+<tr bgcolor="#B0C4DE">
+	<td colspan=2>
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_416); ?></i>
 	</td>
 </tr>
 <tr>
@@ -2967,52 +2992,53 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 </tr>
 -->
 </table>
-<table align="center" width="780" class=table>
+<table align="center" width="98%" class=table>
 <tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="bday"></a><b><?php echo A_CONF_25; ?></b></td></tr>
 	<tr class="thumbIndex">
 		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
 		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
 	</tr>
+</tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_424; ?></b>
+	<td><b><?php echo A_CONFCONTENT_424; ?></b>
 	</td>
-    <td>
-        <select name="vREQUIRE_BDAY">
-	        <option value="0"<?php if($REQUIRE_BDAY==0){ echo " selected"; } ?>><?php echo A_CONFOPTIONAL; ?></option>
-	        <option value="1"<?php if($REQUIRE_BDAY==1){ echo " selected"; } ?>><?php echo A_CONFREQUIRED; ?></option>
-        </select>
-    </td>
+	<td>
+		<select name="vREQUIRE_BDAY">
+			<option value="0"<?php if($REQUIRE_BDAY==0){ echo " selected"; } ?>><?php echo A_CONFOPTIONAL; ?></option>
+			<option value="1"<?php if($REQUIRE_BDAY==1){ echo " selected"; } ?>><?php echo A_CONFREQUIRED; ?></option>
+		</select>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_425; ?></b><br />
-    	<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_426); ?></font></i>
+	<td><b><?php echo A_CONFCONTENT_425; ?></b><br />
+		<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, A_CONFCONTENT_426); ?></font></i>
 	</td>
-    <td>
+	<td>
 		<select name="vSEND_BDAY_EMAIL">
-	        <option value="0"<?php if($SEND_BDAY_EMAIL==0){ echo " selected"; } ?>><?php echo A_CONFNOTSEND; ?></option>
-	        <option value="1"<?php if($SEND_BDAY_EMAIL==1){ echo " selected"; } ?>><?php echo A_CONFSEND; ?></option>
-        </select>
+			<option value="0"<?php if($SEND_BDAY_EMAIL==0){ echo " selected"; } ?>><?php echo A_CONFNOTSEND; ?></option>
+			<option value="1"<?php if($SEND_BDAY_EMAIL==1){ echo " selected"; } ?>><?php echo A_CONFSEND; ?></option>
+		</select>
 	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_427; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_428); ?><br />
+	<td><b><?php echo A_CONFCONTENT_427; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_428); ?><br />
 		<?php echo A_CONFCONTENT_429; ?></i>
 	</td>
-    <td>
+	<td>
 			<input name="vSEND_BDAY_TIME" type="text" size="7" maxlength="2" value="<?php echo $SEND_BDAY_TIME; ?>">&nbsp;(<?php echo $SEND_BDAY_TIME == 1 ? L_MIN : L_MINS; ?>)
-    </td>
+	</td>
 </tr>
 <tr>
-    <td><b><?php echo A_CONFCONTENT_430; ?></b><br />
-    	<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_431); ?></i>
+	<td><b><?php echo A_CONFCONTENT_430; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_431); ?></i>
 	</td>
-    <td>
+	<td>
 			<input name="vSEND_BDAY_INTVAL" type="text" size="7" maxlength="2" value="<?php echo $SEND_BDAY_INTVAL; ?>">&nbsp;(<?php echo $SEND_BDAY_INTVAL == 1 ? L_DAY : L_DAYS; ?>)
-    </td>
+	</td>
 </tr>
 <tr bgcolor="#B0C4DE">
-    <td><b><?php echo A_CONFCONTENT_432; ?></b><br />
+	<td><b><?php echo A_CONFCONTENT_432; ?></b><br />
 		<i><?php echo sprintf(A_CONFHINT, sprintf(A_CONFCONTENT_412, "files/birthday")); ?></i>
 		</td>
 	<td>
@@ -3023,17 +3049,17 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 			$i = 0;
 			while (false !== ($bdayfile = readdir($bdayfiles)))
 			{
-# 				if (!eregi("\.html",$bdayfile) && $bdayfile!=='.' && $bdayfile!=='..')
+#				if (!eregi("\.html",$bdayfile) && $bdayfile!=='.' && $bdayfile!=='..')
 				if (stripos($bdayfile,".html") === false && !preg_match("/^[\.]/", $bdayfile))
 				{
 					$bdaysfile[]=$bdayfile;
-			 		$i++;
+					$i++;
 				}
 			}
 			closedir($bdayfiles);
 			if ($bdaysfile)
 			{
-			  	natsort($bdaysfile);
+				natsort($bdaysfile);
 			}
 			$j = 1;
 			foreach ($bdaysfile as $bdayname)
@@ -3046,6 +3072,42 @@ if (C_LAST_SAVED_ON || C_LAST_SAVED_BY)
 		unset($bdaysfile);
 		?>
 		</select>
+	</td>
+</tr>
+</table>
+<table align="center" width="98%" class=table>
+<tr bgcolor="#FFFFFF"><td colspan=2 align=center><a name="ipcflags"></a><b><?php echo A_CONF_45; ?></b></td></tr>
+	<tr class="thumbIndex">
+		<td valign=center align=center height="20" class=tabtitle><?php echo A_CONFTITLE_1; ?></td>
+		<td valign=center align=center width="25%" height="20" class=tabtitle><?php echo A_CONFTITLE_2; ?></td>
+	</tr>
+</tr>
+<tr bgcolor="#B0C4DE">
+	<td><b><?php echo A_CONFCONTENT_433; ?></b><br />
+		<?php echo A_CONFCONTENT_434; ?>
+	</td>
+	<td>
+		<select name="vUSE_FLAGS">
+			<option value="0"<?php if($USE_FLAGS==0){ echo " selected"; } ?>><?php echo L_DISABLED; ?></option>
+			<option value="1"<?php if($USE_FLAGS==1){ echo " selected"; } ?>><?php echo L_ENABLED; ?></option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td><b><?php echo A_CONFCONTENT_435; ?></b><br />
+		<i><?php echo sprintf(A_CONFHINT, A_CONFCONTENT_436); ?></i>
+	</td>
+	<td>
+		<select name="vSHOW_FLAGS">
+			<option value="0"<?php if($SHOW_FLAGS==0){ echo " selected"; } ?>><?php echo A_CONFHIDE; ?></option>
+			<option value="1"<?php if($SHOW_FLAGS==1){ echo " selected"; } ?>><?php echo A_CONFSHOW; ?></option>
+		</select>
+	</td>
+</tr>
+<tr bgcolor="#B0C4DE">
+	<td colspan=2>
+		<?php echo A_CONFCONTENT_437; ?><br />
+		<i><font color=red><?php echo sprintf(A_CONFIMPORTANT, "<a href=\"http://dev.maxmind.com/geoip/legacy/geolite/\" target=\"_blank\" class=\"error\" alt=\"".sprintf(L_CLICK,sprintf(L_LINKS_10,"GeoLite Country & GeoLite Country IPv6 (Binary/gzip)!"))."\" title=\"".sprintf(L_CLICK,sprintf(L_LINKS_10,"GeoLite Country & GeoLite Country IPv6 (Binary/gzip)!"))."\">".sprintf(L_CLICK,sprintf(L_LINKS_10,"GeoLite Country & GeoLite Country IPv6 (Binary/gzip)!"))."</a>"); ?></font></i>
 	</td>
 </tr>
 </table>

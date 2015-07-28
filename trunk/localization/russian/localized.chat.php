@@ -307,7 +307,7 @@ define("L_WHOIS_BOT", "Бот");
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "%s входит в эту комнату.");
 define("L_EXIT_ROM", "%s выходит из этой комнаты.");
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND != "") define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
@@ -449,7 +449,7 @@ define("COL_ERROR_BOX_USRM", "Вы должны быть модератором,
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "Добро пожаловать в наш чат. Пожалуйста, придерживайтесь этикета: <I>старайтесь быть приятным и вежливым</I>.");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND != "") define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
@@ -503,10 +503,10 @@ define("L_LINKS_3", "чтобы открыть ссылку");
 define("L_LINKS_4", "чтобы открыть сайт автора");
 define("L_LINKS_5", "чтобы вставить смайлик");
 define("L_LINKS_6", "чтобы связаться");
-define("L_LINKS_7", "чтобы посетить phpMyChat домашнюю страницу (Homepage)");
-define("L_LINKS_8", "чтобы присоединиться к phpMyChat группе (Group)");
+define("L_LINKS_7", "чтобы посетить %s домашнюю страницу");
+define("L_LINKS_8", "чтобы присоединиться к %s группе");
 define("L_LINKS_9", "чтобы отправить отзыв");
-define("L_LINKS_10", "чтобы скачать phpMyChat-Plus");
+define("L_LINKS_10", "чтобы скачать %s");
 define("L_LINKS_11", "чтобы проверить кто в чате");
 define("L_LINKS_12", "чтобы открыть страницу входа в чат");
 define("L_LINKS_13", "чтобы отправить этот звук"); // can also be translated as "to play this sound"

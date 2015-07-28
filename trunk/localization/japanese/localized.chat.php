@@ -308,7 +308,7 @@ define("L_WHOIS_BOT", "ロボット"); //robot
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "%sが入室しました。");
 define("L_EXIT_ROM", "%sが退室しました。");
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND != "") define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
@@ -450,7 +450,7 @@ define("COL_ERROR_BOX_USRM", "".COLOR_CM."という色はモデレータ専用�
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "チャットへようこそ。マナーを守って礼儀正しく：<I>全ての人が楽しく心地よいひと時を過ごせますように</I>。");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND != "") define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
@@ -504,10 +504,10 @@ define("L_LINKS_3", "リンクを開く");
 define("L_LINKS_4", "作者のサイトを開く");
 define("L_LINKS_5", "このスマイリーを挿入する");
 define("L_LINKS_6", "次の人に連絡する");
-define("L_LINKS_7", "phpMyChatのホームページを訪問する");
-define("L_LINKS_8", "phpMyChatのグループに参加する");
+define("L_LINKS_7", "%sのホームページを訪問する");
+define("L_LINKS_8", "%sのグループに参加する");
 define("L_LINKS_9", "フィードバックを送信する");
-define("L_LINKS_10", "phpMyChat-Plusをダウンロードする");
+define("L_LINKS_10", "%sをダウンロードする");
 define("L_LINKS_11", "チャット中の人を確認する");
 define("L_LINKS_12", "チャットのログインページを開く");
 define("L_LINKS_13", "このサウンドを送信する"); // can also be translated as "to play this sound"

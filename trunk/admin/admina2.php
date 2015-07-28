@@ -138,7 +138,7 @@ $DbLink->clean_results();
 
 	?>
 	<TD ALIGN=CENTER CLASS=menuTitle><?php echo(A_STATS_3." - ".sprintf(A_STATS_2,$start_date)); ?>
-		<TABLE BORDER=1 CELLPADDING=5 CELLSPACING=1 WIDTH=100% CLASS="table">
+		<TABLE BORDER=1 CELLPADDING=5 CELLSPACING=1 WIDTH=98% CLASS="table">
 			<TR CLASS=tabtitle>
 				<TD VALIGN=CENTER ALIGN="CENTER" CLASS="small">#</TD>
 				<TD VALIGN=CENTER ALIGN="CENTER" CLASS="small">User name</TD>
@@ -163,7 +163,7 @@ $DbLink->clean_results();
 <TABLE ALIGN=CENTER BORDER=0 CELLPADDING=3 CLASS="table">
 <TR>
 	<TD ALIGN=<?php echo($CellAlign); ?> CLASS=menuTitle><?php echo(sprintf(A_STATS_4,3)); ?>
-		<TABLE BORDER=1 CELLPADDING=5 CELLSPACING=1 WIDTH=100% CLASS="table">
+		<TABLE BORDER=1 CELLPADDING=5 CELLSPACING=1 WIDTH=98% CLASS="table">
 			<TR CLASS=tabtitle>
 				<TD VALIGN=CENTER ALIGN="CENTER" CLASS="small">#</TD>
 				<TD VALIGN=CENTER ALIGN="CENTER" CLASS="small">Stat date</TD>

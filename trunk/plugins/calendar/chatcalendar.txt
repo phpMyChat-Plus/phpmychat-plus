@@ -1,0 +1,8 @@
+1. tc_calendar.php:
+plugins/calendar path
+
+2. calendar_form.php: no servertime (false)
+$show_servertime_info = false;
+
+3. calendar.css: no event colors - only icons
+#calendar-body .hasEvent { background-color: /*#4DEF88*/; } /* event color */

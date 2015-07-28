@@ -41,7 +41,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 4)
 		};
 		$Send = send_email_admin($MultiSend,$subject,$message,$pmc_email,$BCC);
 		if ($Ccopy) $MessCc = "<tr><td width=1% nowrap=\"nowrap\"><b>Cc:</b></td><td><b>".$pmc_username."</b> &lt;".$pmc_email."></td></tr>";
-		$Success = "<table border=1 width=70% class=\"msg2\"><tr><td width=1% nowrap=\"nowrap\"><b>From:</b></td><td><b>".$Sender_Name1."</b> &lt;".$Sender_email."></td></tr><tr><td width=1% nowrap=\"nowrap\" class=\"success\"><b>".A_SHEET4_2."</b></td><td>".(!$BCC ? "<b>".str_replace(">,",">,<b>",str_replace("<","</b>&lt;",implode(", ",$SendTo))) : "")."</td></tr>".$MessCc."<tr><td width=1% nowrap=\"nowrap\" class=\"error\"><b>Bcc:</b></td><td>".($BCC ? "<b>".str_replace(">,",">,<b>",str_replace("<","</b>&lt;",implode(", ",$SendTo))) : "")."</td></tr><tr><td width=1% nowrap=\"nowrap\"><b>".A_SHEET4_4."</b></td><td>".stripslashes($subject)."</td></tr><tr><td width=1% nowrap=\"nowrap\"><b>".A_SHEET4_5."</b></td><td>".stripslashes(str_replace("\n","<br />",$message))."</td></tr></table>";
+		$Success = "<table border=1 width=98% class=\"msg2\"><tr><td width=1% nowrap=\"nowrap\"><b>From:</b></td><td><b>".$Sender_Name1."</b> &lt;".$Sender_email."></td></tr><tr><td width=1% nowrap=\"nowrap\" class=\"success\"><b>".A_SHEET4_2."</b></td><td>".(!$BCC ? "<b>".str_replace(">,",">,<b>",str_replace("<","</b>&lt;",implode(", ",$SendTo))) : "")."</td></tr>".$MessCc."<tr><td width=1% nowrap=\"nowrap\" class=\"error\"><b>Bcc:</b></td><td>".($BCC ? "<b>".str_replace(">,",">,<b>",str_replace("<","</b>&lt;",implode(", ",$SendTo))) : "")."</td></tr><tr><td nowrap=\"nowrap\"><b>".A_SHEET4_4."</b></td><td>".stripslashes($subject)."</td></tr><tr><td width=1% nowrap=\"nowrap\"><b>".A_SHEET4_5."</b></td><td>".stripslashes(str_replace("\n","<br />",$message))."</td></tr></table>";
 		$Message = ($Send ? A_SHEET4_7.$Success : A_SHEET4_8);
 		$MsgStyle = ($Send ? "success" : "error");
 	}
@@ -88,7 +88,7 @@ else
 			<INPUT TYPE=hidden NAME="pmc_password" value="<?php echo($pmc_password); ?>">
 			<INPUT TYPE=hidden NAME="pmc_email" value="<?php echo($pmc_email); ?>">
 			<INPUT TYPE=hidden NAME="FORM_SEND" value="4">
-			<TABLE BORDER=0 CELLSPACING=2 WIDTH=100%>
+			<TABLE BORDER=0 CELLSPACING=2 WIDTH=98%>
 			<TR>
 
 				<!-- Addressees list -->

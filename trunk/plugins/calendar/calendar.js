@@ -32,9 +32,15 @@ function showCalendar(objname){
 }
 
 function hideCalendar(objname){
-	var div_obj = getTCCalendarObject('div_'+objname);
-	if(div_obj != null){
-		div_obj.style.visibility = 'hidden';
+	var focusing = getTCCalendarObject(objname+'_frame').contentWindow.calendarform.fcs.value;
+	if(focusing == 0){
+		var div_obj = getTCCalendarObject('div_'+objname);
+		if(div_obj != null){
+			div_obj.style.visibility = 'hidden';
+		}
+	}else{
+		//still focus, another hide timer
+		prepareHide(objname, getTCCalendarObject(objname+'_frame').contentWindow.calendarform.hdt.value);
 	}
 }
 
@@ -76,22 +82,25 @@ function setValue(objname, d, submt){
 	//compare if value is changed
 	var changed = (getTCCalendar(objname) != d) ? true : false;
 
-	updateValue(objname, d);
+	var date_array = getDateSplit(d, "-");
+	if(changed && isDateAllow(objname, date_array[2], date_array[1], date_array[0]) && checkSpecifyDate(objname, date_array[2], date_array[1], date_array[0])){
+		updateValue(objname, d);
 
-	var dp = getTCCalendar(objname+"_dp");
-	if(dp) toggleCalendar(objname);
+		var dp = getTCCalendar(objname+"_dp");
+		if(dp) hideCalendar(objname);
 
-	checkPairValue(objname, d);
+		checkPairValue(objname, d);
 
-	//calling calendar_onchanged script
-	if(getTCCalendar(objname+"_och") != "" && changed) calendar_onchange(objname);
+		//calling calendar_onchanged script
+		if(getTCCalendar(objname+"_och") != "") calendar_onchange(objname);
 
-	if(typeof(submt) == "undefined") submt = true;
+		if(typeof(submt) == "undefined") submt = true;
 
-	if(submt){
-		var date_array = getTCCalendar(objname).split("-");
+		if(submt){
+			var date_array = getTCCalendar(objname).split("-");
 
-		tc_submitDate(objname, date_array[2], date_array[1], date_array[0]);
+			tc_submitDate(objname, date_array[2], date_array[1], date_array[0]);
+		}
 	}
 }
 
@@ -225,6 +234,9 @@ function tc_submitDate(objname, dvalue, mvalue, yvalue){
 
 	var tmz = getTCCalendar(objname+'_tmz');
 	if(tmz != "") addToArray(params, "tmz="+tmz);
+	
+	var thm = getTCCalendar(objname+'_thm');
+	if(thm != "") addToArray(params, "thm="+thm);
 
 	var hl = getTCCalendar(objname+'_hl');
 	if(hl != "") addToArray(params, "hl="+hl);
@@ -393,8 +405,10 @@ function isDateAllow(objname, strDay, strMonth, strYear){
 		var this_date = new Date(strYear, strMonth-1, strDay);
 
 		if(da1 != "" && da2 != ""){
-			da1_date = new Date(da1);
-			da2_date = new Date(da2);
+			da1_arr = getDateSplit(da1, "-");
+			da1_date = new Date(da1_arr[0], (da1_arr[1]-1), da1_arr[2]);
+			da2_arr = getDateSplit(da2, "-");
+			da2_date = new Date(da2_arr[0], (da2_arr[1]-1), da2_arr[2]);
 			var dateFormat = getTCCalendar(objname+"_fmt");
 			var da1Str = da1_date.format(dateFormat);
 			var da2Str = da2_date.format(dateFormat);
@@ -406,7 +420,8 @@ function isDateAllow(objname, strDay, strMonth, strYear){
 				return false;
 			}
 		}else if(da1 != ""){
-			da1_date = new Date(da1);
+			da1_arr = getDateSplit(da1, "-");
+			da1_date = new Date(da1_arr[0], (da1_arr[1]-1), da1_arr[2]);
 			if(da1_date<=this_date){
 				return true;
 			}else{
@@ -414,7 +429,8 @@ function isDateAllow(objname, strDay, strMonth, strYear){
 				return false;
 			}
 		}else if(da2 != ""){
-			da2_date = new Date(da2);
+			da2_arr = getDateSplit(da2, "-");
+			da2_date = new Date(da2_arr[0], (da2_arr[1]-1), da2_arr[2]);
 			if(da2_date>=this_date){
 				return true;
 			}else{
@@ -632,6 +648,8 @@ function tc_updateDay(objname, yearNum, monthNum, daySelected){
 		dayObj.value = padString(totalDays, 2, "0");
 	else dayObj.value = padString(daySelected, 2, "0");
 
+	checkSpecifyDateDisabled(objname, daySelected, monthNum, yearNum);
+
 	return dayObj.value;
 }
 
@@ -641,7 +659,7 @@ function checkPairValue(objname, d){
 
 	var this_value = getTCCalendar(objname);
 
-	var this_dates = this_value.split('-');
+	var this_dates = getDateSplit(this_value, "-");
 	var this_time = new Date(this_dates[0], this_dates[1]-1, this_dates[2]).getTime()/1000;
 
 	//implementing dp2
@@ -650,7 +668,7 @@ function checkPairValue(objname, d){
 		setTCCalendar(dp1+"_prv", d);
 
 		var dp1_value = getTCCalendar(dp1);
-		var dp1_dates = dp1_value.split('-');
+		var dp1_dates = getDateSplit(dp1_value, "-");
 		var dp1_time = new Date(dp1_dates[0], dp1_dates[1]-1, dp1_dates[2]).getTime()/1000;
 
 		if(this_time < dp1_time || this_value == "0000-00-00"){
@@ -669,7 +687,7 @@ function checkPairValue(objname, d){
 		setTCCalendar(dp2+"_prv", d);
 
 		var dp2_value = getTCCalendar(dp2);
-		var dp2_dates = dp2_value.split('-');
+		var dp2_dates = getDateSplit(dp2_value, "-");
 		var dp2_time = new Date(dp2_dates[0], dp2_dates[1]-1, dp2_dates[2]).getTime()/1000;
 
 		if(this_time > dp2_time || this_value == "0000-00-00"){
@@ -680,6 +698,295 @@ function checkPairValue(objname, d){
 		}else{
 			tc_submitDate(dp2, dp2_dates[2], dp2_dates[1], dp2_dates[0]);
 		}
+	}
+}
+
+function checkSpecifyDateDisabled(objname, strDay, strMonth, strYear){
+	var dd = getTCCalendarObject(objname+"_day");
+	var mm = getTCCalendarObject(objname+"_month");
+	var yy = getTCCalendarObject(objname+"_year");
+	var disyear = false;
+
+	for (i=0; i<yy.options.length; i++){
+		if (yy.options[i].value == "0000"){
+		}else{
+			var atty = document.createAttribute("class");
+			atty.value = "drop_year";
+			yy.options[i].setAttributeNode(atty);
+		}
+	}
+
+	if(parseInt(parseFloat(strYear)) > 0 || (parseInt(parseFloat(strYear)) > 0 && parseInt(parseFloat(strMonth)) > 0)){
+		var spd = urldecode(getTCCalendar(objname+"_spd"));
+		var spt = getTCCalendar(objname+"_spt");
+		var dis = getTCCalendar(objname+"_dis");
+		var da1 = getTCCalendar(objname+"_da1");
+		var da2 = getTCCalendar(objname+"_da2");
+		var sp_dates;
+		var Day, Month, Year;
+		var found = false;
+		var dismonth = false;
+		var disday = false;
+		var class_drop;
+
+		if(typeof(JSON) != "undefined"){
+			sp_dates = JSON.parse(spd);
+		}else{
+			sp_dates = myJSONParse(spd);
+		}
+
+		if(da1 != "" && da2 != ""){
+			var dp1_dates = getDateSplit(da1, "-");
+			var da1_date = new Date(dp1_dates[0], dp1_dates[1]-1, dp1_dates[2]);
+			var mo1 = da1_date.getMonth()+1;
+			var dp2_dates = getDateSplit(da2, "-");
+			var da2_date = new Date(dp2_dates[0], dp2_dates[1]-1, dp2_dates[2]) ;
+			var mo2 = da2_date.getMonth()+1;
+		}else if(da1 != ""){
+			var dp1_dates = getDateSplit(da1, "-");
+			var da1_date = new Date(dp1_dates[0], dp1_dates[1]-1, dp1_dates[2]) ;
+			var mo1 = da1_date.getMonth()+1;
+		}else if(da2 != ""){
+			var dp2_dates = getDateSplit(da2, "-");
+			var da2_date = new Date(dp2_dates[0], dp2_dates[1]-1, dp2_dates[2]) ;
+			var mo2 = da2_date.getMonth()+1;
+		}
+
+		if(parseInt(parseFloat(strYear)) > 0 && parseInt(parseFloat(strMonth)) > 0){
+			for (var i=1; i<dd.options.length; i++){
+				Day = padString(i.toString(), 2, "0");
+				da_date = new Date(strYear, strMonth-1, Day);
+
+				if(da1 != "" && da2 != ""){
+					if(da1_date<=da_date && da2_date>=da_date){
+					}else{
+						found = true;
+					}
+				}else if(da1 != ""){
+					if(da1_date<=da_date){
+					}else{
+						found = true;
+					}
+				}else if(da2 != ""){
+					if(da2_date>=da_date){
+					}else{
+						found = true;
+					}
+				}
+
+				if(!found){
+					for (var key in sp_dates[2]) {
+					  if (sp_dates[2].hasOwnProperty(key)) {
+						var this_date_arr = getDateSplit(sp_dates[2][key], "-");
+						var this_date = new Date(this_date_arr[0], this_date_arr[1]-1, this_date_arr[2]);
+						if(this_date.getDate() == parseInt(parseFloat(Day)) && (this_date.getMonth()+1) == parseInt(parseFloat(strMonth))){
+							found = true;
+							break;
+						}
+					  }
+					}
+				}
+
+				if(!found){
+					for (var key in sp_dates[1]) {
+					  if (sp_dates[1].hasOwnProperty(key)) {
+						var this_date_arr = getDateSplit(sp_dates[1][key], "-");
+						var this_date = new Date(this_date_arr[0], this_date_arr[1]-1, this_date_arr[2]);
+						if(this_date.getDate() == parseInt(parseFloat(Day))){
+							found = true;
+							break;
+						}
+					  }
+					}
+				}
+
+				if(!found){
+					var choose_date = new Date(strYear, strMonth-1, Day);
+					var choose_time = choose_date.getTime()/1000;
+
+					for (var key in sp_dates[0]) {
+						if (sp_dates[0].hasOwnProperty(key)) {
+							if(choose_time == sp_dates[0][key]){
+								found = true;
+								break;
+							}
+						}
+					}
+				}
+
+				switch(spt){
+					case "0":
+					default:
+						//date is disabled
+						if(found){
+							disday = true;
+							class_drop = "drop_dis";
+						}else{
+							disday = false;
+							class_drop = "drop_wday";
+						}
+						break;
+					case "1":
+						//other dates are disabled
+						if(!found){
+							disday = true;
+							class_drop = "drop_dis";
+						}else{
+							disday = false;
+							class_drop = "drop_wday";
+						}
+						break;
+				}
+
+				//check disable day sun - sat
+				if(dis != ""){
+					var dis_arr = dis.split(",");
+					var choose_date = new Date(strYear, strMonth-1, Day);
+					var chk_num = choose_date.getDay();
+					for(var j=0; j<dis_arr.length; j++){
+						switch(dis_arr[j]){
+							case "sun":
+								if(chk_num==0){
+									disday = true;
+								}
+								break;
+							case "mon":
+								if(chk_num==1){
+									disday = true;
+								}
+								break;
+							case "tue":
+								if(chk_num==2){
+									disday = true;
+									class_drop = "drop_dis";
+								}
+								break;
+							case "wed":
+								if(chk_num==3){
+									disday = true;
+									class_drop = "drop_dis";
+								}
+								break;
+							case "thu":
+								if(chk_num==4){
+									disday = true;
+									class_drop = "drop_dis";
+								}
+								break;
+							case "fri":
+								if(chk_num==5){
+									disday = true;
+									class_drop = "drop_dis";
+								}
+								break;
+							case "sat":
+								if(chk_num==6){
+									disday = true;
+								}
+								break;
+						}
+					}
+				}
+
+				if(da_date.getDay() == 0){
+					class_drop = "drop_sun";
+				}else if(da_date.getDay() == 6){
+					class_drop = "drop_sat";
+				}
+
+
+				if(disday){
+					dd.options[i].disabled = "disabled";
+					disday = false;
+				}else{
+					dd.options[i].disabled = "";
+				}
+				found = false;
+				var att = document.createAttribute("class");
+				att.value = class_drop;
+				dd.options[i].setAttributeNode(att);
+			}
+		}
+	}
+
+	for (var k=1; k<mm.options.length; k++){
+		Month = padString(k.toString(), 2, "0");
+
+		if(parseInt(parseFloat(strYear)) > 0){			
+			mo_date = new Date(strYear, Month-1, "01");
+
+			if(da1 != "" && da2 != ""){
+				if(da1_date<=mo_date && da2_date>=mo_date){
+				}else if((da1_date>mo_date && mo1 == parseInt(parseFloat(Month))) || (da2_date<mo_date && mo2 == parseInt(parseFloat(Month)))){
+				}else{
+					dismonth = true;
+				}
+			}else if(da1 != ""){
+				if(da1_date<=mo_date){
+				}else if(da1_date>mo_date && mo1 == parseInt(parseFloat(Month))){
+				}else{
+					dismonth = true;
+				}
+			}else if(da2 != ""){
+				if(da2_date>=mo_date){
+				}else if(da2_date<mo_date && mo2 == parseInt(parseFloat(Month))){
+				}else{
+					dismonth = true;
+				}
+			}
+
+			if(dismonth){
+				mm.options[k].disabled = "disabled";
+				class_drop = "drop_dis";
+				dismonth = false;
+			}
+			else{
+				mm.options[k].disabled = "";
+				class_drop = "drop_mnth";
+			}
+		}else{
+			mm.options[k].disabled = "";
+			class_drop = "drop_mnth";
+		}
+		var attm = document.createAttribute("class");
+		attm.value = class_drop;
+		mm.options[k].setAttributeNode(attm);
+	}
+
+	//Set/Reset style for select objects
+	if (dd.value == "00"){
+		dd.style.backgroundColor="white";
+		dd.style.color="black";
+	}else{
+		var ddStyle = getComputedStyle(dd.options[dd.selectedIndex], null)
+		dd.style.backgroundColor=ddStyle.backgroundColor;
+		dd.style.color=ddStyle.color;
+		dd.options[0].style.backgroundColor="white";
+		dd.options[0].style.color="black";
+	}
+	if (mm.value == "00"){
+		dd.style.backgroundColor="white";
+		dd.style.color="black";
+		mm.style.backgroundColor="white";
+		mm.style.color="black";
+	}else{
+		var mmComputedStyle = getComputedStyle(mm.options[mm.selectedIndex], null)
+		mm.style.backgroundColor=mmComputedStyle.backgroundColor;
+		mm.options[0].style.backgroundColor="white";
+		mm.options[0].style.color="black";
+	}
+	if (yy.value == "0000"){
+		dd.style.backgroundColor="white";
+		dd.style.color="black";
+		mm.style.backgroundColor="white";
+		mm.style.color="black";
+		yy.style.backgroundColor="white";
+		yy.style.color="black";
+	}else{
+		var yyComputedStyle = getComputedStyle(yy.options[yy.selectedIndex], null)
+		yy.style.backgroundColor=yyComputedStyle.backgroundColor;
+		yy.options[0].style.backgroundColor="white";
+		yy.options[0].style.color="black";
 	}
 }
 
@@ -703,20 +1010,24 @@ function checkSpecifyDate(objname, strDay, strMonth, strYear){
 		var found = false;
 
 		if(da1 != "" && da2 != ""){
-			da1_date = new Date(da1);
-			da2_date = new Date(da2);
+			var dp1_dates = getDateSplit(da1, "-");
+			var da1_date = new Date(dp1_dates[0], dp1_dates[1]-1, dp1_dates[2]) ;
+			var dp2_dates = getDateSplit(da2, "-");
+			var da2_date = new Date(dp2_dates[0], dp2_dates[1]-1, dp2_dates[2]) ;
 			if(da1_date<=da_date && da2_date>=da_date){
 			}else{
 				found = true;
 			}
 		}else if(da1 != ""){
-			da1_date = new Date(da1);
+			var dp1_dates = getDateSplit(da1, "-");
+			var da1_date = new Date(dp1_dates[0], dp1_dates[1]-1, dp1_dates[2]) ;
 			if(da1_date<=da_date){
 			}else{
 				found = true;
 			}
 		}else if(da2 != ""){
-			da2_date = new Date(da2);
+			var dp2_dates = getDateSplit(da2, "-");
+			var da2_date = new Date(dp2_dates[0], dp2_dates[1]-1, dp2_dates[2]) ;
 			if(da2_date>=da_date){
 			}else{
 				found = true;
@@ -726,7 +1037,8 @@ function checkSpecifyDate(objname, strDay, strMonth, strYear){
 		if(!found){
 			for (var key in sp_dates[2]) {
 				if (sp_dates[2].hasOwnProperty(key)) {
-					var this_date = new Date(sp_dates[2][key]);
+					var this_date_arr = getDateSplit(sp_dates[2][key], "-");
+					var this_date = new Date(this_date_arr[0], this_date_arr[1]-1, this_date_arr[2]);
 					if(this_date.getDate() == parseInt(parseFloat(strDay)) && (this_date.getMonth()+1) == parseInt(parseFloat(strMonth))){
 						found = true;
 						break;
@@ -738,8 +1050,9 @@ function checkSpecifyDate(objname, strDay, strMonth, strYear){
 		if(!found){
 			for (var key in sp_dates[1]) {
 			  if (sp_dates[1].hasOwnProperty(key)) {
-				var that_date = new Date(sp_dates[1][key]);
-				if(that_date.getDate() == parseInt(parseFloat(strDay))){
+				var this_date_arr = getDateSplit(sp_dates[1][key], "-");
+				var this_date = new Date(this_date_arr[0], this_date_arr[1]-1, this_date_arr[2]);
+				if(this_date.getDate() == parseInt(parseFloat(strDay))){
 					found = true;
 					break;
 				}
@@ -766,7 +1079,7 @@ function checkSpecifyDate(objname, strDay, strMonth, strYear){
 			default:
 				//date is disabled
 				if(found){
-					alert(l_not_allowed);
+					alert(l_not_allowed); //alert(msg_disabled); var msg_disabled = "You cannot choose this date. Date is disabled";
 					return false;
 				}else{
 					//check disable day sun - sat
@@ -917,6 +1230,10 @@ function setTCCalendar(id, val){
 	}
 }
 
+function getDateSplit(date, delim){
+	return date.split(delim);
+}
+
 function setDateLabel(objname){
 	var lbl = getTCCalendarObject("divCalendar_"+objname+"_lbl");
 	if(lbl != null){
@@ -924,7 +1241,7 @@ function setDateLabel(objname){
 		var dateTxt = l_sel_date;
 
 		if(d != "0000-00-00"){
-			var date_array = d.split("-");
+			var date_array = getDatesplit(d, "-");
 
 			var myDate = new Date();
 			myDate.setFullYear(date_array[0],(date_array[1]-1),date_array[2]);

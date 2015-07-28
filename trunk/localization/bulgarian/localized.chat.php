@@ -310,7 +310,7 @@ define("L_WHOIS_BOT", "Бот");
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "%s влиза в тази стая.");
 define("L_EXIT_ROM", "%s излиза от тази стая.");
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND != "") define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
@@ -453,7 +453,7 @@ define("COL_ERROR_BOX_USRM", "Трябва да сте модератор, за 
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "Добре дошли на нашия чат. Моля спазвайте чат етикета, докато чатвате: <I>опитайте да сте внимателни и учтиви</I>.");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND != "") define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
@@ -507,10 +507,10 @@ define("L_LINKS_3", "за да отворите линка");
 define("L_LINKS_4", "за да отворите сайта на автора");
 define("L_LINKS_5", "за да вмъкнете тази усмивка");
 define("L_LINKS_6", "за да се свържете с");
-define("L_LINKS_7", "за да посетите phpMyChat Cайта");
-define("L_LINKS_8", "за да се присъедините към phpMyChat Групата");
+define("L_LINKS_7", "за да посетите %s Cайта");
+define("L_LINKS_8", "за да се присъедините към %s Групата");
 define("L_LINKS_9", "за да изпратите Вашия отзив");
-define("L_LINKS_10", "за да свалите phpMyChat Plus");
+define("L_LINKS_10", "за да свалите %s");
 define("L_LINKS_11", "за да провериш кой е в чата");
 define("L_LINKS_12", "за да отвориш входната страница на чата");
 define("L_LINKS_13", "за да пуснете този звук"); // can also be translated as "to play this sound"

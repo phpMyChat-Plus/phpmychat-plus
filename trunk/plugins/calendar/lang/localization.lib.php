@@ -61,6 +61,7 @@ if(!defined("L_UPDATE")) define("L_UPDATE", "Update available %s !");
 if(!defined("L_TRABY") && defined("L_TRANAME")) define("L_TRABY", "Translated by %s");
 if(!defined("L_DONATE")) define("L_DONATE", "<bdo dir=\"ltr\">Do you wish to donate?</bdo>");
 if(!defined("L_SRV_TIMEZONE")) define("L_SRV_TIMEZONE", "<bdo dir=\"ltr\">Server Timezone:</bdo>"); //3.74
+if(!defined("L_MSG_DISABLED")) define("L_MSG_DISABLED", "You cannot choose this date. Date is disabled!"); //3.75
 
 if(!defined("FIRST_DAY")) define("FIRST_DAY", "0"); // 0 for Sunday
 
@@ -296,6 +297,7 @@ switch ($hl)
 	var l_date_after = "<?php echo(L_DATE_AFTER); ?>";
 	var l_date_between = "<?php echo(L_DATE_BETWEEN); ?>";
 	var l_err_noset = "<?php echo(L_ERR_NOSET); ?>";
+	var l_msg_disabled = "<?php echo(L_MSG_DISABLED); ?>";
 	var l_use_ymd_drop = "<?php echo(L_USE_YMD_DROP); ?>";
 	var l_day = "<?php echo(L_DAYC); ?>";
 	var l_month = "<?php echo(L_MONTHC); ?>";

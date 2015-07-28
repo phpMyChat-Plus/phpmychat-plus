@@ -309,7 +309,7 @@ define("L_WHOIS_BOT", "Bot"); // Robot
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "%s belépett a szobába.");
 define("L_EXIT_ROM", "%s kilépett a szobából.");
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM . L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND != "") define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
@@ -451,7 +451,7 @@ define("COL_ERROR_BOX_USRM", "Moderátornak kell lenned, hogy használhasd ezt a
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "Üdvözlünk a chat-en. Kérünk, tartsd be a net-etikett szabályait beszélgetés közben: <I>légy kedves és udvarias</I>.");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG . L_WELCOME_SND);
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND != "") define("WELCOME_MSG", L_WELCOME_MSG . L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
@@ -505,10 +505,10 @@ define("L_LINKS_3", " a link megnyitásához");
 define("L_LINKS_4", " a szerző oldalának megnyitásához");
 define("L_LINKS_5", " smiley beillesztéséhez");
 define("L_LINKS_6", ", hogy felvedd vele a kapcsolatot");
-define("L_LINKS_7", " a phpMyChat Homepage megnyitásához");
-define("L_LINKS_8", ", hogy csatlakozz a phpMyChat Group-hoz");
+define("L_LINKS_7", " a %s Homepage megnyitásához");
+define("L_LINKS_8", ", hogy csatlakozz a %s Group-hoz");
 define("L_LINKS_9", " a visszajelzésed elküldéséhez");
-define("L_LINKS_10", " a phpMyChat-Plus letöltéséhez");
+define("L_LINKS_10", " a %s letöltéséhez");
 define("L_LINKS_11", ", hogy megnézd ki beszélget");
 define("L_LINKS_12", " a chat bejelentkezési oldalának megnyitásához");
 define("L_LINKS_13", " a figyelmeztető hang lejátszásához"); // can also be translated as "to play this sound"

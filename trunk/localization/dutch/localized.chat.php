@@ -1,5 +1,5 @@
 <?php
-// File : dutch/localized.chat.php - plus version (09.03.2014 - rev.45)
+// File : dutch/localized.chat.php - plus version (25.01.2015 - rev.49)
 // Original translation by Hans Paijmans <paai@kub.nl>, Kasper Souren <guaka@industree.org> and Sander Corbesir <rock@jascrc.com>
 // Updates, corrections and additions for the Plus version by DJE.Amesz & Romanesko <Genieusdanny@gmail.com> and Bert Moorlag <berbia@hotmail.com>
 // Fine tuning by Ciprian Murariu <ciprianmp@yahoo.com>
@@ -98,6 +98,9 @@ define("L_REG_47", "Vrouw");
 define("L_REG_48", "Niet aangegeven");
 define("L_REG_49", "Registratie vereist!");
 define("L_REG_50", "Registratie opgeschort!");
+define("L_REG_51", "Nooit"); //rev.48
+define("L_REG_52", "Recente locatie"); //rev.48
+define("L_REG_53", "zet geluid voor meldingen aan"); //rev.48
 
 // e-mail validation stuff
 define("L_EMAIL_VAL_1", "Uw instellingen");
@@ -154,6 +157,7 @@ define("L_ERR_USR_25", "Alleen een administrator of moderator kan de kleuren geb
 define("L_ERR_USR_26", "Alleen een administrator of moderator kan de kleuren gebruiken ".$COLORNAME." !<br />gebruik geen! ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1.".<br />deze zijn gereserveerd voor power users!");
 define("L_ERR_USR_27", "Je kunt niet privé tegen jezelf praten.\\nDoe dat in stilte...\\nKies een andere gebruikersnaam.");
 define("L_ERR_USR_28", "Jou toegang tot %s is beperkt!<br />Kies een andere kamer a.u.b."); // room name
+define("L_ERR_USR_29", "Vul je geboortedatum in, alsjeblieft!<br />Onvolledige gegevens niet geaccepteerd."); //rev.49
 define("L_ERR_ROM_1", "Kamernaam kan niet met komma en backslash (\\).");
 define("L_ERR_ROM_2", "Verboden woord gevonden in de naam van de kamer die je wil maken.");
 define("L_ERR_ROM_3", "Deze kamer is al in gebruik als openbare kamer.");
@@ -309,8 +313,8 @@ define("L_WHOIS_BOT", "Bot");
 
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "%s komt binnen in deze kamer.");
-define("L_EXIT_ROM", "%s is uitlogd.");
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+define("L_EXIT_ROM", "%s is uitgelogd.");
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND != "") define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
@@ -451,7 +455,7 @@ define("COL_ERROR_BOX_USRM", "Je moet een moderator zijn om gebruik te maken van
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "Welkom op deze chatbox, wees netjes en aardig voor iedereen, volg de regels van de chatbox: <I>blijf netjes en aardig</I>.");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND != "") define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
@@ -497,10 +501,10 @@ define("L_LINKS_3", "om link te openen");
 define("L_LINKS_4", "om auteurs site te openen");
 define("L_LINKS_5", "om een smiley toe te voegen");
 define("L_LINKS_6", "om contact");
-define("L_LINKS_7", "om phpMyChat Homepagina te bezoeken");
-define("L_LINKS_8", "om lid te worden bij phpMyChat Group");
+define("L_LINKS_7", "om %s Homepagina te bezoeken");
+define("L_LINKS_8", "om lid te worden bij %s Group");
 define("L_LINKS_9", "om je feedback te sturen");
-define("L_LINKS_10", "om phpMyChat-Plus te downloaden");
+define("L_LINKS_10", "om %s te downloaden");
 define("L_LINKS_11", "voor controle wie aan het chatten is");
 define("L_LINKS_12", "om de Chat Login Pagina te openen");
 define("L_LINKS_13", "om geluid te verzenden"); // Click to blablabla : it can also be translated as "to play this sound", if buzz has no translation.
@@ -627,6 +631,9 @@ define("L_PRIV_REPLY_LOGIN", "Login in chat wanneer je een ".LOGIN_LINK."bericht
 define("L_LANG_AR", "Spaans Argentijns");
 define("L_LANG_BR", "Braziliaans Portugees");
 define("L_LANG_BG", "Bulgaars - Cyrillic");
+define("L_LANG_CA", "Catalaans"); 
+define("L_LANG_CNS", "Chinees (Eenvoudig)"); 
+define("L_LANG_CNT", "Chinees (Traditioneel)");
 define("L_LANG_CZ", "Tjechisch");
 define("L_LANG_DA", "Deens");
 define("L_LANG_DE", "Duits");
@@ -635,6 +642,7 @@ define("L_LANG_ES", "Spaans");
 define("L_LANG_ENUK", "Engels UK");
 define("L_LANG_ENUS", "Engels US");
 define("L_LANG_FA", "Farsi");
+define("L_LANG_FI", "Fins");
 define("L_LANG_FR", "Frans");
 define("L_LANG_GR", "Grieks");
 define("L_LANG_HE", "Hebreeuws");
@@ -644,16 +652,24 @@ define("L_LANG_ID", "Indonesch");
 define("L_LANG_IT", "Italiaans");
 define("L_LANG_JA", "Japans (Kanji)");
 define("L_LANG_KA", "Georgië");
+define("L_LANG_NB", "Noors (Bokmål)");
+define("L_LANG_NN", "Noors (Nynorsk)");
 define("L_LANG_NE", "Nepalees");
 define("L_LANG_NL", "Nederlands");
+define("L_LANG_PL", "Pools");
+define("L_LANG_PT", "Portugees");
 define("L_LANG_RO", "Roemeens");
+define("L_LANG_RU", "Russisch - Cyrillic");
 define("L_LANG_SK", "Slovaaks");
 define("L_LANG_SRL", "Servië - Latin");
 define("L_LANG_SRC", "Servië - Cyrillic");
 define("L_LANG_SV", "Zweeds");
+define("L_LANG_TH", "Thais");
 define("L_LANG_TR", "Turks");
+define("L_LANG_UK", "Ukrainsch - Cyrillic");
 define("L_LANG_UR", "Indisch");
 define("L_LANG_VI", "Vietnamees");
+define("L_LANG_YO", "Yoruba"); //Nigeria&Congo
 
 // Skins preview page
 define("L_SKINS_TITLE", "Voorbeeld bekijken");
@@ -717,6 +733,9 @@ define("L_DOB_TIT_1", "Verjaardagenlijst");
 $L_DOB_SUBJ = "Gefeliciteerd met je verjaardag, %s!"; 
 
 // MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
-define("L_EQUATION", "Vergelijkingen");
+define("L_EQUATION", "Vergelijking");
 define("L_MATH", "%s geplaatst door %s"); //e.g. "Equation posted by username" (defined above); the word "Equation" will render as a url to show popup with the posted formulas
+define("L_LINKS_20", "Post Vergelijkingen"); //Click here to open Posted Equations
+define("L_HELP_CMD_37", "Het is toegestaan om posting van <i><b>MathJax</b> vergelijkingen & formules</i> in chat.<br />Gebruik: Plak de TeX or MathML (origineel) codes! Bijv. <b>/math&nbsp;\sqrt{3x-1}+(1+x)^2</b><br />Voor meer code voorbeelden en instructies ga naar: <a href=\"http://www.mathjax.org/demos/\" target=\"_blank\">http://www.mathjax.org/demos</a>. Kopieer de code door rechts te klikken op de formule.<br />HINTS: type /math gevolgd door een spatie en plak de code in de kader.");
+
 ?>

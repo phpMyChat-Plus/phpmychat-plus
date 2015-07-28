@@ -20,6 +20,7 @@ define("L_CMD_INVITE", "invitar");
 define("L_CMD_JOIN", "unirse");
 define("L_CMD_KICK", "echar");
 define("L_CMD_LTR", "iad");
+define("L_CMD_MATH", ""); //math (post MathJax equations in chat)
 define("L_CMD_ME", "yo");
 define("L_CMD_MR", "sr");
 define("L_CMD_MSG", "para");
@@ -38,6 +39,8 @@ define("L_CMD_SHOW", "mostrar,ultimos,últimos");
 define("L_CMD_SORT", "ordenar");
 define("L_CMD_TIMESTAMP", "fecha");
 define("L_CMD_TOPIC", "tema,topico,tópico");
+define("L_CMD_UTUBE", ""); // tube,utube,youtube (post an youtube video)
+define("L_CMD_VIDEO", ""); // vid,video,play (post a video)
 define("L_CMD_WISP", "susurrar,pst");
 define("L_CMD_WHOIS", "quien,quienes,info");
 ?>

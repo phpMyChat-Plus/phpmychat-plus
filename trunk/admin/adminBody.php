@@ -30,6 +30,13 @@ if (!function_exists("utf_conv"))
 	};
 };
 
+// Find the position of the username in the sorted table
+function pos_array($needle,$haystack)
+{
+	for($i=0;$i<count($haystack) && $haystack[$i] != $needle;$i++);
+	return ($i);
+};
+
 $DbLink = new DB;
 
 // Optimize MySQL table when the script run for the first time
@@ -96,6 +103,17 @@ else
 	$UpGif		= "up.gif";
 };
 ?>
+<SCRIPT TYPE="text/javascript" LANGUAGE="javascript">
+<!--
+// Function to dinamically switch pages
+function browse_user($a_username)
+{
+	document.location = '<?php echo($From."?What=Body&L=".$L."&sheet=1&pmc_username=".urlencode($pmc_username)."&pmc_password=$pmc_password&sortBy=username&sortOrder=ASC&startReg="); ?>'+$a_username;
+}
+// -->
+</SCRIPT>
+<?php
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
 
@@ -127,7 +145,7 @@ if ($sheet < 3 || strstr($sheet,"a"))
 };
 #if(C_ALLOW_MATH) echo("<script type=\"text/javascript\" src=\"https://d3eoax9i5htok0.cloudfront.net/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>");
 #if(C_ALLOW_MATH) echo("<script type=\"text/javascript\" src=\"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>");
-if(C_ALLOW_MATH && C_SRC_MATH != "") echo("<script type=\"text/javascript\" src=\"".C_SRC_MATH."\"></script>");
+if(C_ALLOW_MATH && C_SRC_MATH != "" && check_internet_connection()) echo("<script type=\"text/javascript\" src=\"".C_SRC_MATH."\"></script>");
 ?>
 </HEAD>
 

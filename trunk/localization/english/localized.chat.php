@@ -1,5 +1,5 @@
 <?php
-// File : english/localized.chat.php - plus version (03.02.2013 - rev.47)
+// File : english/localized.chat.php - plus version (25.01.2015 - rev.49)
 // Original file by Nicolas Hoizey <nhoizey@phpheaven.net>
 // Updates, corrections and additions for the Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' but use ’ instead (utf-8 edit bug)
@@ -97,6 +97,9 @@ define("L_REG_47", "Female");
 define("L_REG_48", "Unspecified");
 define("L_REG_49", "Registration required!");
 define("L_REG_50", "Registration suspended!");
+define("L_REG_51", "Never"); //rev.48
+define("L_REG_52", "Recent location"); //rev.48
+define("L_REG_53", "use notification sounds"); //rev.48
 
 // e-mail validation stuff
 define("L_EMAIL_VAL_1", "Your settings to enter the chat");
@@ -153,6 +156,7 @@ define("L_ERR_USR_25", "Only the administrator can use ".$COLORNAME." color!<br 
 define("L_ERR_USR_26", "Only admins and moderators can use ".$COLORNAME." color!<br />Don’t try to use ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CA2.", ".COLOR_CM.", ".COLOR_CM1." or ".COLOR_CM2.".<br />These are reserved to power users!");
 define("L_ERR_USR_27", "You cannot talk private to yourself.\\nDo that in your mind please...\\nNow choose a different username.");
 define("L_ERR_USR_28", "Your access to %s has been restricted!<br />Please choose a different room.");
+define("L_ERR_USR_29", "Please fill in your birthday!<br />Incomplete data not accepted."); //rev.49
 define("L_ERR_ROM_1", "Room’s name cannot contain commas or backslashes (\\).");
 define("L_ERR_ROM_2", "Banished word found in the room’s name you want to create.");
 define("L_ERR_ROM_3", "This room already exists as a public one.");
@@ -197,7 +201,7 @@ define("L_IS_MODERATOR", "%s is already a moderator!");
 define("L_NO_MODERATOR", "Only a moderator of this room can use this command.");
 define("L_NONEXIST_USER", "%s isn’t in the current room.");
 define("L_NONREG_USER", "%s isn’t registered.");
-define("L_NONREG_USER_IP", "His IP is: %s.");
+define("L_NONREG_USER_IP", "His IP is: %s");
 define("L_NO_KICKED", "%s is a moderator or the administrator and can’t be kicked away.");
 define("L_NO_BANISHED", "%s is a moderator or the administrator and can’t be banished.");
 define("L_SVR_TIME", "Server time: ");
@@ -279,16 +283,16 @@ define("L_TODAY_UP", "The messages sent yesterday start below");
 
 // message colors
 $TextColors = array("Black" => "#000000",
-				"Red" => "#FF0000",
-				"Green" => "#009900",
-				"Blue" => "#0000FF",
-				"Purple" => "#9900FF",
-				"Dark red" => "#990000",
-				"Dark green" => "#006600",
-				"Dark blue" => "#000099",
-				"Maroon" => "#996633",
-				"Aqua blue" => "#006699",
-				"Carrot" => "#FF6600");
+					"Red" => "#FF0000",
+					"Green" => "#009900",
+					"Blue" => "#0000FF",
+					"Purple" => "#9900FF",
+					"Dark red" => "#990000",
+					"Dark green" => "#006600",
+					"Dark blue" => "#000099",
+					"Maroon" => "#996633",
+					"Aqua blue" => "#006699",
+					"Carrot" => "#FF6600");
 
 // ignored popup
 define("L_IGNOR_TIT", "Ignored");
@@ -309,7 +313,7 @@ define("L_WHOIS_BOT", "Bot");
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "%s entered this room.");
 define("L_EXIT_ROM", "%s left this room.");
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND != "") define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
@@ -451,7 +455,7 @@ define("COL_ERROR_BOX_USRM", "You must be a moderator to use ".COLOR_CM." color!
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "Welcome to our chat. Please obey the net etiquette while chatting: <I>try to be pleasant and polite</I>.");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND != "") define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
@@ -505,10 +509,10 @@ define("L_LINKS_3", "to open link");
 define("L_LINKS_4", "to open author’s site");
 define("L_LINKS_5", "to insert this smiley");
 define("L_LINKS_6", "to contact");
-define("L_LINKS_7", "to visit phpMyChat Homepage");
-define("L_LINKS_8", "to join phpMyChat Group");
+define("L_LINKS_7", "to visit %s Homepage"); //rev.48
+define("L_LINKS_8", "to join %s Group"); //rev.48
 define("L_LINKS_9", "to send your feedback");
-define("L_LINKS_10", "to download phpMyChat-Plus");
+define("L_LINKS_10", "to download %s"); //rev.48
 define("L_LINKS_11", "to check who is chatting");
 define("L_LINKS_12", "to open the Chat Login Page");
 define("L_LINKS_13", "to send this buzz"); // can also be translated as "to play this sound"

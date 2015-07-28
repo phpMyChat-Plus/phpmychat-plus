@@ -255,7 +255,7 @@ INPUT, SELECT, TEXTAREA
 
 .quote
 {
-	<?php echo(isset($QUOTE_COLOR) ? "border: thin ridge ".$QUOTE_COLOR.";" : ""); ?>;
+	<?php echo(isset($QUOTE_COLOR) && $QUOTE_COLOR != "" ? "border: thin ridge ".$QUOTE_COLOR.";" : ""); ?>;
 	background: #FFFAFA;
 	color: #696969;
 	text-align: justify;

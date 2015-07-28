@@ -93,8 +93,8 @@ else
 					{
 						list($last_login,$login_counter) = $DbLink->next_record();
 						$DbLink->clean_results();
-						$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '$Latin1', '".time()."', '$Private', 'sprintf(L_ENTER_ROM_NOSOUND, \"".$botuser."\")', '', '')");
-						$DbLink->query("INSERT INTO ".C_USR_TBL." VALUES ('$R','$botuser', '$Latin1', '9999999999', '$status','$IP', '0', ".time().", 'bot@bot.com')");
+						$DbLink->query("INSERT INTO ".C_MSG_TBL." VALUES ($T, '$R', 'SYS enter', '$Latin1', '".time()."', '$Private', 'stripslashes(sprintf(L_ENTER_ROM, \"".$botuser."\"))', '', '')");
+						$DbLink->query("INSERT INTO ".C_USR_TBL." VALUES ('$R','$botuser', '$Latin1', '9999999999', '$status', '$IP', '0', ".time().", 'bot@bot.com', '$COUNTRY_CODE', '$COUNTRY_NAME')");
 						if ((time() - $last_login > C_LOGIN_COUNTER * 60) || $last_login = "")
 						{
 							$login_counter = $login_counter + 1;

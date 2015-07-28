@@ -62,8 +62,8 @@ if (isset($FORM_SEND) && $FORM_SEND == 1)
 			if (isset($$VarName))
 			{
 				$uuu = addslashes($username);
-				$DbLink->query("SELECT latin1,ip FROM ".C_REG_TBL." WHERE username='$uuu' LIMIT 1");
-				list($Latin1, $IP) = $DbLink->next_record();
+				$DbLink->query("SELECT latin1,ip,country_code,country_name FROM ".C_REG_TBL." WHERE username='$uuu' LIMIT 1");
+				list($Latin1, $IP, $COUNTRY_CODE, $COUNTRY_NAME) = $DbLink->next_record();
 				$DbLink->clean_results();
 				$DbLink->query("SELECT count(*) FROM ".C_BAN_TBL." WHERE username='$uuu' LIMIT 1");
 				list($Nb) = $DbLink->next_record();
@@ -72,7 +72,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 1)
 				{
 					$Until = time() + round(C_BANISH * 60 * 60 * 24);
 					if ($Until > 2222222222) $Until = "2222222222";
-					$DbLink->query("INSERT INTO ".C_BAN_TBL." VALUES ('$uuu','$Latin1','$IP','*','$Until','$reason')");
+					$DbLink->query("INSERT INTO ".C_BAN_TBL." VALUES ('$uuu','$Latin1','$IP','*','$Until','$reason','$COUNTRY_CODE','$COUNTRY_NAME')");
 				}
 				elseif ($reason != "")
 				{
@@ -180,7 +180,7 @@ if (isset($FORM_SEND) && $FORM_SEND == 1)
 };
 
 // Remove profiles of users that have not been chatting for a time > C_REG_DEL
-if (!isset($FORM_SEND) && C_REG_DEL != 0) $DbLink->query("DELETE FROM ".C_REG_TBL." WHERE reg_time < ".(time() - C_REG_DEL * 60 * 60 * 24)." AND perms != 'admin' AND perms != 'topmod' AND perms != 'moderator'");
+if (!isset($FORM_SEND) && C_REG_DEL != 0) $DbLink->query("DELETE FROM ".C_REG_TBL." WHERE last_login < ".(time() - C_REG_DEL * 60 * 60 * 24)." AND perms != 'admin' AND perms != 'topmod' AND perms != 'moderator'");
 
 // Remove moderator status if no room is specified
 $DbLink->query("UPDATE ".C_REG_TBL." SET perms='user' WHERE perms='moderator' AND rooms=''");
@@ -248,10 +248,13 @@ if ($count_RegUsers != 0)
 				<A HREF="<?php echo("$From?$URLQueryBody_SortLinks&sortBy=login_counter"); if ($sortBy == "login_counter") echo("&sortOrder=$New_sortOrder"); ?>"><?php echo(L_LOGIN_COUNT); ?></A>
 			</TD>
 			<TD VALIGN=CENTER ALIGN=CENTER>
-				<A HREF="<?php echo("$From?$URLQueryBody_SortLinks&sortBy=reg_time"); if ($sortBy == "reg_time") echo("&sortOrder=$New_sortOrder"); ?>"><?php echo(A_SHEET1_11); ?></A>
+				<A HREF="<?php echo("$From?$URLQueryBody_SortLinks&sortBy=reg_time"); if ($sortBy == "reg_time") echo("&sortOrder=$New_sortOrder"); ?>"><?php echo(L_REG_6); ?></A>
 			</TD>
 			<TD VALIGN=CENTER ALIGN=CENTER>
-				<A HREF="<?php echo("$From?$URLQueryBody_SortLinks&sortBy=ip"); if ($sortBy == "ip") echo("&sortOrder=$New_sortOrder"); ?>"><?php echo(A_SHEET2_2); ?></A>
+				<A HREF="<?php echo("$From?$URLQueryBody_SortLinks&sortBy=last_login"); if ($sortBy == "last_login") echo("&sortOrder=$New_sortOrder"); ?>"><?php echo(A_SHEET1_11); ?></A>
+			</TD>
+			<TD VALIGN=CENTER ALIGN=CENTER>
+				<A HREF="<?php echo("$From?$URLQueryBody_SortLinks&sortBy=ip"); if ($sortBy == "ip") echo("&sortOrder=$New_sortOrder"); ?>"><?php echo(A_SHEET2_2." / ".L_REG_52); ?></A>
 			</TD>
 			<TD VALIGN=CENTER ALIGN=CENTER>
 				<A HREF="<?php echo("$From?$URLQueryBody_SortLinks&sortBy=perms"); if ($sortBy == "perms") echo("&sortOrder=$New_sortOrder"); ?>"><?php echo(A_SHEET1_3); ?></A>
@@ -276,27 +279,54 @@ if ($count_RegUsers != 0)
 		elseif (C_DB_TYPE == "pgsql") $limits = " LIMIT 10 OFFSET $startReg";
 		else $limits = "";
 
-		$DbLink->query("SELECT username,latin1,perms,rooms,reg_time,ip,login_counter,join_room FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND username != '$pmc_username' ORDER BY $sortBy $sortOrder".$limits);
+		$DbLink->query("SELECT username,latin1,perms,rooms,reg_time,last_login,ip,login_counter,join_room,country_code,country_name FROM ".C_REG_TBL." WHERE email != 'bot@bot.com' AND email != 'quote@quote.com' AND username != '".$pmc_username."' ORDER BY ".($sortBy != "ip" ? $sortBy : "country_code OR ".$sortBy)." ".$sortOrder.$limits);
 		$bannished_user = "";
 		$bannished_ip = "";
 		$DbLinkban = new DB;
-		while (list($username,$Latin1,$perms,$rooms,$lastTime,$IP,$login_counter,$join_room) = $DbLink->next_record())
+		// GeoIP mode for country flags
+		if(C_USE_FLAGS)
 		{
-	   $DbLinkban->query("SELECT username,reason FROM ".C_BAN_TBL." WHERE username='$username' LIMIT 1");
-	   list($Nb,$reason) = $DbLinkban->next_record();
-	   $DbLinkban->clean_results();
-	   if ($reason != "") $reason = " (".L_HELP_REASON.": ".$reason.")";
-	   if ($Nb) $bannished_user = "&nbsp;<img src=images/bannished.gif alt='".A_MENU_21.$reason."' title='".A_MENU_21.$reason."'>";
-	   $DbLinkban->query("SELECT ip,reason FROM ".C_BAN_TBL." WHERE ip='$IP' LIMIT 1");
-	   list($NbIP,$reasonIP) = $DbLinkban->next_record();
-	   $DbLinkban->clean_results();
-	   if ($reasonIP != "") $reasonIP = " (".L_HELP_REASON.": ".$reasonIP.")";
-	   if ($NbIP) $bannished_ip = "&nbsp;<img src=images/bannished.gif alt='".A_MENU_21.$reasonIP."' title='".A_MENU_21.$reasonIP."'>";
-		// Restricted rooms mod by Ciprian
-		$enab_init = utf8_substr(L_ENABLED, 0, ($L == 'serbian_latin') ? '2' : '1');
-		$disab_init = utf8_substr(L_DISABLED, 0, ($L == 'serbian_latin') ? '2' : '1');
-		$res_init = utf8_substr(L_RESTRICTED, 0, 1);
+			if (!class_exists("GeoIP")) include("plugins/countryflags/geoip.inc");
+			if(!isset($gi)) $gi = geoip_open("plugins/countryflags/GeoIP.dat",GEOIP_STANDARD);
+		}
+		while (list($username,$Latin1,$perms,$rooms,$regTime,$lastTime,$IP,$login_counter,$join_room,$COUNTRY_CODE,$COUNTRY_NAME) = $DbLink->next_record())
+		{
+			// GeoIP mode for country flags
+			if(C_USE_FLAGS)
+			{
+				if(!isset($COUNTRY_CODE) || $COUNTRY_CODE == "")
+				{
+					$COUNTRY_CODE = geoip_country_code_by_addr($gi, ltrim($IP,"p"));
+					if (empty($COUNTRY_CODE))
+					{
+						$COUNTRY_CODE = "LAN";
+						$COUNTRY_NAME = "Other/LAN";
+					}
+					if ($COUNTRY_CODE != "LAN") $COUNTRY_NAME = $gi->GEOIP_COUNTRY_NAMES[$gi->GEOIP_COUNTRY_CODE_TO_NUMBER[$COUNTRY_CODE]];
+					if ($PROXY || substr($IP, 0, 1) == "p") $COUNTRY_NAME .= " (Proxy Server)";
+
+					$DbLinkban->query("UPDATE ".C_BAN_TBL." SET country_code='$COUNTRY_CODE', country_name='$COUNTRY_NAME' WHERE username='$username'");
+					$DbLinkban->query("UPDATE ".C_REG_TBL." SET country_code='$COUNTRY_CODE', country_name='$COUNTRY_NAME' WHERE username='$username'");
+				}
+				$c_flag = "&nbsp;<img src=\"./plugins/countryflags/flags/".strtolower($COUNTRY_CODE).".gif\" alt=\"".$COUNTRY_NAME."\" title=\"".$COUNTRY_NAME."\" border=\"0\">&nbsp;(".$COUNTRY_CODE.")";
+			}
+			$DbLinkban->query("SELECT username,reason FROM ".C_BAN_TBL." WHERE username='$username' LIMIT 1");
+			list($Nb,$reason) = $DbLinkban->next_record();
+			$DbLinkban->clean_results();
+			if ($reason != "") $reason = " (".L_HELP_REASON.": ".$reason.")";
+			if ($Nb) $bannished_user = "&nbsp;<img src=images/bannished.gif alt='".A_MENU_21.$reason."' title='".A_MENU_21.$reason."'>";
+			$DbLinkban->query("SELECT ip,reason FROM ".C_BAN_TBL." WHERE ip='$IP' LIMIT 1");
+			list($NbIP,$reasonIP) = $DbLinkban->next_record();
+			$DbLinkban->clean_results();
+			if ($reasonIP != "") $reasonIP = " (".L_HELP_REASON.": ".$reasonIP.")";
+			if ($NbIP) $bannished_ip = "&nbsp;<img src=images/bannished.gif alt='".A_MENU_21.$reasonIP."' title='".A_MENU_21.$reasonIP."'>";
+			// Restricted rooms mod by Ciprian
+			$enab_init = utf8_substr(L_ENABLED, 0, ($L == 'serbian_latin') ? '2' : '1');
+			$disab_init = utf8_substr(L_DISABLED, 0, ($L == 'serbian_latin') ? '2' : '1');
+			$res_init = utf8_substr(L_RESTRICTED, 0, 1);
 			$usrHash = md5($username);
+#			$nums = explode(".", $IP) ;
+#			$IP_table = "<td>{$nums[0]}.</td><td>{$nums[1]}.</td><td>{$nums[2]}.</td><td>{$nums[3]}</td>";
 			?>
 			<TR>
 				<TD VALIGN=CENTER ALIGN=CENTER>
@@ -311,13 +341,29 @@ if ($count_RegUsers != 0)
 				</TD>
 				<TD VALIGN=CENTER ALIGN="<?php echo($CellAlign); ?>">
 					<?php
-					$lastTime = strftime(L_SHORT_DATETIME, $lastTime + C_TMZ_OFFSET*60*60);
-					if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $lastTime = str_replace(" ","",$lastTime);
+					$regTime1 = strftime(L_SHORT_DATETIME, $regTime + C_TMZ_OFFSET*60*60);
+					if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $regTime1 = str_replace(" ","",$regTime1);
 					?>
-					<FONT size=-2><?php echo($lastTime);?></FONT>
+					<FONT size=-2><?php echo($regTime1);?></FONT>
 				</TD>
-				<TD VALIGN=CENTER ALIGN=CENTER>
-					<FONT size=-2><?php echo($IP."".$bannished_ip); ?></FONT>
+				<TD VALIGN=CENTER ALIGN="<?php echo($CellAlign); ?>">
+					<?php
+					if ($lastTime > $regTime)
+					{
+						$lastTime1 = strftime(L_SHORT_DATETIME, $lastTime + C_TMZ_OFFSET*60*60);
+						if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $lastTime1 = str_replace(" ","",$lastTime1);
+					}
+					elseif ($lastTime)
+					{
+						$lastTime1 = strftime(L_SHORT_DATETIME, $regTime + C_TMZ_OFFSET*60*60);
+						if(stristr(PHP_OS,'win') && (strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese"))) $lastTime1 = str_replace(" ","",$lastTime1);
+					}
+					else $lastTime1 = L_REG_51;
+					?>
+					<FONT size=-2><?php echo($lastTime1);?></FONT>
+				</TD>
+				<TD VALIGN=CENTER ALIGN=LEFT>
+					<FONT size=-2><?php echo($IP.(isset($c_flag) ? $c_flag : "").$bannished_ip); ?></FONT>
 				</TD>
 				<TD VALIGN=CENTER ALIGN=CENTER>
 					<SELECT name="perms_<?php echo($usrHash)?>">
@@ -346,9 +392,17 @@ if ($count_RegUsers != 0)
 				</TD>
 			</TR>
 			<?php
-		$bannished_user = "";
-		$bannished_ip = "";
+			$bannished_user = "";
+			$bannished_ip = "";
+			// GeoIP Country flags initialization
+			unset($IP);
+			unset($COUNTRY_CODE);
+			unset($COUNTRY_NAME);
+			unset($c_flag);
 		};
+		// GeoIP mode for country flags
+		if(isset($gi) && $gi != "") geoip_close($gi);
+		if(isset($gi6) && $gi6 != "") geoip_close($gi6);
 		$DbLink->clean_results();
 		?>
 		<TR>
@@ -415,12 +469,12 @@ if ($count_RegUsers != 0)
 				$i=1;
 				while ($i <= $PagesCount)
 				{
-			        print "<option value=\"$i\"";
+				     print "<option value=\"$i\"";
 					if ($i==$PageNum) print " selected";
 					print ">$i</option>\n";
-		        $i++;
+			     $i++;
 				}
-		        print "</select>\n";
+			     print "</select>\n";
 			?>
 			</TD>
 			<?php

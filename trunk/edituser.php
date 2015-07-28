@@ -21,6 +21,7 @@ if (isset($_POST))
 if (isset($L) && !is_dir("./localization/".$L)) exit();
 if (isset($_COOKIE["CookieStatus"])) $status = $_COOKIE["CookieStatus"];
 if (isset($_COOKIE["CookieHash"])) $RemMe = $_COOKIE["CookieHash"];
+if (isset($_COOKIE["CookieBeep"])) $CookieBeep = $_COOKIE["CookieBeep"];
 $mydate = isset($_POST["date1"]) ? $_POST["date1"] : "";
 
 require("./config/config.lib.php");
@@ -29,6 +30,7 @@ require("./localization/languages.lib.php");
 require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
 require("./lib/login.lib.php");
+require("./lib/get_IP.lib.php");		// Set the $IP var
 
 # Is the OS Windows or Mac or Linux
 if (stristr(PHP_OS,'win')) {
@@ -39,7 +41,7 @@ if (stristr(PHP_OS,'win')) {
   $eol="\n";
 }
 
-if($mydate != "")
+if($mydate && $mydate != "0000-00-00")
 {
 	$BIRTHDAY = $mydate;
 	$format_birth_day = strftime(L_SHORT_DATE,strtotime($BIRTHDAY));
@@ -75,6 +77,8 @@ $DbLink = new DB;
 $field_errorU = false;
 $field_errorSQ = false;
 $field_errorSA = false;
+$field_errorEM = false;
+$field_errorUR = false;
 
 // Check for valid entries if the form have been sent
 if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
@@ -111,9 +115,16 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 //	else if (!eregi("^([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](fo|g|l|m|mes|o|op|pa|ro|seum|t|u|v|z)?)$", $EMAIL))
 	// Added the new top-level domains (mail, asia, travel, aso)
 #	else if (!eregi("^([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](avel|bi|bs|fo|g|ia|l|m|me|mes|o|op|pa|ro|seum|t|to|u|v|z)?)$", $EMAIL))
-	else if (!preg_match("/^([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](avel|bi|bs|fo|g|ia|l|m|me|mes|o|op|pa|ro|seum|t|to|u|v|z)?)$/i", $EMAIL))
+#	else if (!preg_match("/^([0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-.]?[0-9a-z])*\\.[a-wyz][a-z](avel|bi|bs|fo|g|ia|l|m|me|mes|o|op|pa|ro|seum|t|to|u|v|z)?)$/i", $EMAIL))
+	else if ($WEBSITE != "" && !validator($EMAIL,"email"))
 	{
 		$Error = L_ERR_USR_8;
+		$field_errorEM = true;
+	}
+	else if (($WEBSITE != "" && !validator($WEBSITE,"url")) || ($FAVLINK != "" && !validator($FAVLINK,"url")) || ($FAVLINK1 != "" && !validator($FAVLINK1,"url")))
+	{
+		$Error = L_ERR_AV;
+		$field_errorUR = true;
 	}
 	else if ($U != $pmc_username)
 	{
@@ -145,6 +156,10 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 		$Error = L_ERR_USR_16a;
 		$field_errorSA = true;
 	}
+	else if(strpos($BIRTHDAY, "00") === 0 || strpos($BIRTHDAY, "-00") > 0 || (C_REQUIRE_BDAY && !$BIRTHDAY))
+	{
+		$Error = L_ERR_USR_29;
+	}
 
 	if (!isset($Error) || $Error == "")
 	{
@@ -158,7 +173,8 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 			$C = $COLORNAME;
 			setcookie("CookieColor", $C, time() + 60*60*24*365);        // cookie expires in one year
 		}
-		include("./lib/get_IP.lib.php");		// Set the $IP var
+		if (isset($USE_SOUNDS) && $USE_SOUNDS) setcookie("CookieBeep", "1", time() + 60*60*24*365);        // cookie expires in one year
+		else setcookie("CookieBeep", "", time());        // cookie expires in one year
 
 		// Upload avatar mod addition - by Ciprian
 		// We try to keep the link between the usernames and uploaded avatars filenames,
@@ -171,7 +187,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 		elseif ($pmc_username != $U && @rename(C_AVA_RELPATH . "uploaded/avatar_".$av_user_name.".gif", C_AVA_RELPATH . "uploaded/avatar_".$av_new_user_name.".gif")) $AVATARURL = C_AVA_RELPATH . "uploaded/avatar_".$av_new_user_name.".gif";
 		// End of Upload avatar mod - by Ciprian
 
-		$DbLink->query("UPDATE ".C_REG_TBL." SET username='$U', latin1='$Latin1', ".(!isset($RemMe) || (isset($RemMe) && $prev_PASSWORD != $RemMe && $PWD_hash != $RemMe) ? "password='$PWD_Hash', " : "")."firstname='$FIRSTNAME', lastname='$LASTNAME', country='$COUNTRY', website='$WEBSITE', email='$EMAIL', showemail=$showemail, allowpopup=$allowpopup, reg_time=".time().", ip='$IP', gender='$GENDER', picture='$PICTURE', description='".str_replace("'","&#39;",$DESCRIPTION)."', favlink='$FAVLINK', favlink1='$FAVLINK1', slang='$SLANG', colorname='$COLORNAME', avatar='$AVATARURL', s_question='$SECRET_QUESTION', s_answer='".htmlspecialchars($SECRET_ANSWER, ENT_NOQUOTES, 'UTF-8')."', use_gravatar='$USE_GRAV', birthday='$BIRTHDAY', show_bday='$SHOW_BDAY', show_age='$SHOW_AGE' WHERE username='$pmc_username'");
+		$DbLink->query("UPDATE ".C_REG_TBL." SET username='$U', latin1='$Latin1', ".(!isset($RemMe) || (isset($RemMe) && $prev_PASSWORD != $RemMe && $PWD_hash != $RemMe) ? "password='$PWD_Hash', " : "")."firstname='$FIRSTNAME', lastname='$LASTNAME', country='$COUNTRY', website='$WEBSITE', email='$EMAIL', showemail=$showemail, allowpopup=$allowpopup, last_login=".time().", ip='$IP', gender='$GENDER', picture='$PICTURE', description='".str_replace("'","&#39;",$DESCRIPTION)."', favlink='$FAVLINK', favlink1='$FAVLINK1', slang='$SLANG', colorname='$COLORNAME', avatar='$AVATARURL', s_question='$SECRET_QUESTION', s_answer='".htmlspecialchars($SECRET_ANSWER, ENT_NOQUOTES, 'UTF-8')."', use_gravatar='$USE_GRAV', birthday='$BIRTHDAY', show_bday='$SHOW_BDAY', show_age='$SHOW_AGE', country_code='$COUNTRY_CODE', country_name='$COUNTRY_NAME', use_sounds='$USE_SOUNDS' WHERE username='$pmc_username'");
 // Patch to send an email to the User and/or admin after changing username or password.
 // by Ciprian using Bob Dickow's registration patch.
 	if ($pmc_username != $U || ($pmc_password != $prev_PASSWORD && (!isset($RemMe) || (isset($RemMe) && $PWD_hash != $RemMe && $prev_PASSWORD != $RemMe))))
@@ -332,7 +348,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 		 . ($BIRTHDAY != "" ? $eol."Display birthday on public info: ".$shwbday : "")
 		 . ($BIRTHDAY != "" ? $eol."Display age on public info: ".$shwage : "")
 		 . $eol."Gender: ".$sex
-		 . ($COUNTRY ? $eol."Country: ".$COUNTRY : "")
+		 . ($COUNTRY ? $eol."Location/Country: ".$COUNTRY : "")
 		 . ($WEBSITE ? $eol."WWW: ".$WEBSITE : "")
 		 . ($SLANG ? $eol."Language: ".$SLANG : "")
 		 . ($FAVLINK ? $eol."Favorite link 1: ".$FAVLINK : "")
@@ -347,6 +363,7 @@ if (isset($FORM_SEND) && stripslashes($submit_type) == L_REG_16)
 		 . "Prefered language: ".$L.$eol
 	     . "Updated on: $dt $ti".$eol
 		 . "From IP address: $IP".$eol
+		 . "GeoIP Country: ".($COUNTRY_CODE != "LAN" ? $COUNTRY_CODE." - " : "")."$COUNTRY_NAME".$eol
 	     . "----------------------------------------------".$eol.$eol
 		 . "Please note that some data should be disabled from this copy for privacy concerns!".$eol
 	     . "Save this email for your further reference.".$eol
@@ -372,23 +389,23 @@ else
 {
 	$U = $pmc_username;
 	$prev_PASSWORD = $pmc_password;
-	$DbLink->query("SELECT password,firstname,lastname,perms,country,website,email,showemail,gender,allowpopup,picture,description,favlink,favlink1,slang,colorname,avatar,s_question,s_answer,use_gravatar,birthday,show_bday,show_age FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
+	$DbLink->query("SELECT password,firstname,lastname,perms,country,website,email,showemail,gender,allowpopup,picture,description,favlink,favlink1,slang,colorname,avatar,s_question,s_answer,use_gravatar,birthday,show_bday,show_age,use_sounds FROM ".C_REG_TBL." WHERE username='$U' LIMIT 1");
 	if ($DbLink->num_rows() != 0)
 	{
-			  list($SAVEDHASH, $FIRSTNAME, $LASTNAME, $PERMS, $COUNTRY, $WEBSITE, $EMAIL, $SHOWEMAIL, $GENDER, $ALLOWPOPUP, $PICTURE, $DESCRIPTION, $FAVLINK, $FAVLINK1, $SLANG, $COLORNAME, $AVATARURL, $SECRET_QUESTION, $SECRET_ANSWER, $USE_GRAV, $BIRTHDAY, $SHOW_BDAY, $SHOW_AGE) = $DbLink->next_record();
-               if (!isset($ORIGAVATAR)) $ORIGAVATAR = $AVATARURL;
-               if (!empty($avatar))
-               {
-                 $AVATARURL = $avatar;
-               }
-               elseif (!empty($url))
-               {
-               		$AVATARURL = $url;
-               }
-               if (empty($AVATARURL))
-               {
-               $AVATARURL = C_AVA_RELPATH . C_DEF_AVATAR;
-               }
+		list($SAVEDHASH, $FIRSTNAME, $LASTNAME, $PERMS, $COUNTRY, $WEBSITE, $EMAIL, $SHOWEMAIL, $GENDER, $ALLOWPOPUP, $PICTURE, $DESCRIPTION, $FAVLINK, $FAVLINK1, $SLANG, $COLORNAME, $AVATARURL, $SECRET_QUESTION, $SECRET_ANSWER, $USE_GRAV, $BIRTHDAY, $SHOW_BDAY, $SHOW_AGE, $USE_SOUNDS) = $DbLink->next_record();
+		if (!isset($ORIGAVATAR)) $ORIGAVATAR = $AVATARURL;
+		if (!empty($avatar))
+		{
+			$AVATARURL = $avatar;
+		}
+		elseif (!empty($url))
+		{
+			$AVATARURL = $url;
+		}
+		if (empty($AVATARURL))
+		{
+			$AVATARURL = C_AVA_RELPATH . C_DEF_AVATAR;
+		}
 	}
 	$DbLink->clean_results();
 }
@@ -405,6 +422,7 @@ if (!isset($FontName)) $FontName = "";
 <HEAD>
 <TITLE><?php echo(L_REG_34." - ".((C_CHAT_NAME != "") ? C_CHAT_NAME : APP_NAME)); ?></TITLE>
 <LINK REL="stylesheet" HREF="<?php echo($skin.".css.php?Charset=${Charset}&medium=${FontSize}&FontName=".urlencode($FontName)); ?>" TYPE="text/css">
+<!--<link href="plugins/calendar/css/default/calendar.css" rel="stylesheet" type="text/css" />-->
 <?php
 require("./plugins/calendar/tc_calendar.php");
 ?>
@@ -441,21 +459,21 @@ function put_focus()
 	};
 };
 function swapImage(img,imgid) {
-	var image = document.getElementById(imgid);
-	var dropd = document.getElementById(img);
+	var image = (document.all) ? document.all[imgid] : document.getElementById(imgid);
+	var dropd = (document.all) ? document.all[img] : document.getElementById(img);
 	if (imgid == "flagToSwap")
 	{
-		var path = '<?php echo("./".$ChatPath."localization/"); ?>';
+		var path = '<?php echo("./${ChatPath}localization/"); ?>';
 		var type = '<?php echo(C_FLAGS_3D); ?>';
 		var enfmt = '<?php echo(C_ENGLISH_FORMAT); ?>';
-		if(type == "1")
+		if (type == "1")
 		{
-			if(enfmt == "US" && dropd.value == "english") var flagtype = '/images/flag_us.gif';
+			if (enfmt == "US" && dropd.value == "english") var flagtype = '/images/flag_us.gif';
 			else var flagtype = '/images/flag.gif';
 		}
 		else
 		{
-			if(enfmt == "US" && dropd.value == "english") var flagtype = '/images/flag_us0.gif';
+			if (enfmt == "US" && dropd.value == "english") var flagtype = '/images/flag_us0.gif';
 			else var flagtype = '/images/flag0.gif';
 		}
 		image.src = path + dropd.value + flagtype;
@@ -469,6 +487,19 @@ function swapImage(img,imgid) {
 		else if (dropd.value == "3") var gender = "couple.gif";
 		else if (dropd.value == "4") var gender = "undefined.gif";
 		image.src = path + gender;
+	}
+	if (imgid == "beepToSwap")
+	{
+		var path = '<?php echo("./${ChatPath}images/"); ?>';
+		var beep = "sound.gif";
+		if (image.checked) {
+			image.checked = '';
+			beep = "nosound.gif";
+		} else {
+			image.checked = 'checked';
+			beep = "sound.gif";
+		}
+		image.src = path + beep;
 	}
 };
 // -->
@@ -580,7 +611,7 @@ if(isset($Error))
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_8); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="EMAIL" SIZE=25 MAXLENGTH=64 VALUE="<?php echo(stripslashes($EMAIL)); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
+				<INPUT TYPE="text" NAME="EMAIL" SIZE=25 MAXLENGTH=64<?php echo($field_errorEM ? " style=\"background-color: #FF0000;\"" : ""); ?> VALUE="<?php echo(stripslashes($EMAIL)); ?>"<?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php if (!$done) echo("<SPAN CLASS=\"error\">*</SPAN>"); ?>
 			</TD>
 		</TR>
 		<TR>
@@ -642,8 +673,8 @@ else
 			<TD VALIGN="TOP" CLASS=success>
 			<?php
 			  $myCalendar = new tc_calendar("date1", true, true);
-			  $myCalendar->zindex = 150; //default 1
 			  $myCalendar->setAutoHide(false);
+			  $myCalendar->zindex = 150; //default 1
 			  $myCalendar->setIcon("plugins/calendar/images/iconCalendar.gif");
 			  $myCalendar->setPath("plugins/calendar/");
 			  if(isset($BIRTHDAY))
@@ -679,7 +710,7 @@ else
 					$mday = array();
 					$DbLink->clean_results();
 				}
-			  $myCalendar->setTimezone("Europe/Bucharest");
+#			  $myCalendar->setTimezone("Europe/Bucharest");
 			  $myCalendar->writeScript();
 $DbLink->close();
 			?>
@@ -714,6 +745,11 @@ $DbLink->close();
 				<INPUT type="checkbox" name="SHOW_AGE" value="1" <?php if (isset($SHOW_AGE) && $SHOW_AGE) echo("checked"); ?><?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_PRO_9); ?>
 			</TD>
 		</TR>
+		<TR>
+			<TD COLSPAN=2 ALIGN="center">
+				<INPUT type="checkbox" name="USE_SOUNDS" id="beep" value="1" onChange="swapImage('beep','beepToSwap')" <?php if(isset($USE_SOUNDS) && $USE_SOUNDS) { echo("checked"); $beepselected = "sound.gif"; } else $beepselected = "nosound.gif"; ?><?php if ($done) echo(" READONLY"); ?>>&nbsp;<?php echo(L_REG_53); ?>&nbsp;<img style="vertical-align:top" id="beepToSwap" src="<?php echo("./${ChatPath}images/".$beepselected.""); ?>" BORDER=0 <?php echo("ALT=\"".L_BEEP."\" Title=\"".L_BEEP."\""); ?> />
+			</TD>
+		</TR>
 <?php
 if (C_PRIV_POPUP == 1)
 {
@@ -735,7 +771,7 @@ if (C_PRIV_POPUP == 1)
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_REG_32); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="WEBSITE" SIZE=25 MAXLENGTH=64 VALUE="<?php echo(stripslashes($WEBSITE)); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<INPUT TYPE="text" NAME="WEBSITE" SIZE=25 MAXLENGTH=64<?php echo($field_errorUR ? " style=\"background-color: #FF0000;\"" : ""); ?> VALUE="<?php echo(stripslashes($WEBSITE)); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
 		</TR>
 		<TR>
@@ -834,13 +870,13 @@ if (C_PRIV_POPUP == 1)
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_2); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="FAVLINK" SIZE=25 MAXLENGTH=255 VALUE="<?php echo(stripslashes($FAVLINK)); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<INPUT TYPE="text" NAME="FAVLINK" SIZE=25 MAXLENGTH=255<?php echo($field_errorUR ? " style=\"background-color: #FF0000;\"" : ""); ?> VALUE="<?php echo(stripslashes($FAVLINK)); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
 		</TR>
 		<TR>
 			<TD ALIGN="RIGHT" VALIGN="TOP" NOWRAP="NOWRAP"><?php echo(L_PRO_3); ?> :</TD>
 			<TD VALIGN="TOP">
-				<INPUT TYPE="text" NAME="FAVLINK1" SIZE=25 MAXLENGTH=255 VALUE="<?php echo(stripslashes($FAVLINK1)); ?>"<?php if ($done) echo(" READONLY"); ?>>
+				<INPUT TYPE="text" NAME="FAVLINK1" SIZE=25 MAXLENGTH=255<?php echo($field_errorUR ? " style=\"background-color: #FF0000;\"" : ""); ?> VALUE="<?php echo(stripslashes($FAVLINK1)); ?>"<?php if ($done) echo(" READONLY"); ?>>
 			</TD>
 		</TR>
 		<TR>
@@ -854,7 +890,7 @@ if (C_PRIV_POPUP == 1)
 			<TD VALIGN="TOP">
 				<INPUT TYPE="text" NAME="PICTURE" SIZE=25 MAXLENGTH=255 VALUE="<?php echo(stripslashes($PICTURE)); ?>"<?php if ($done) echo(" READONLY"); ?>>
 				<?php
-				if (isset($PICTURE) && stripslashes($PICTURE) != "" && ini_get("allow_url_fopen") && file(stripslashes($PICTURE)))
+				if (isset($PICTURE) && validator($PICTURE,"img"))
 				{
 				?>
 					<IMG src="<?php echo(stripslashes($PICTURE)); ?>" width="<?php echo(C_AVA_WIDTH); ?>" ALT="<?php echo(L_PRO_5); ?>" />

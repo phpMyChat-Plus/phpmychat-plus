@@ -103,14 +103,17 @@ CREATE TABLE bot_thatstack (
 ) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 ALTER TABLE ".$t_ban_users."
-			ADD reason varchar(100) NOT NULL default '';
+			ADD reason varchar(100) NOT NULL default '',
+			CHANGE ip ip varchar(30) NOT NULL default '',
+			ADD country_code varchar(3) NOT NULL default '',
+			ADD country_name varchar(100) NOT NULL default '';
 
 CREATE TABLE ".$t_config." (
  ID tinyint(1) NOT NULL default '0',
  MSG_DEL tinyint(1) NOT NULL default '96',
  USR_DEL tinyint(1) NOT NULL default '10',
  REG_DEL tinyint(1) NOT NULL default '0',
- LANGUAGE varchar(20) NOT NULL default 'english',
+ LANGUAGE varchar(40) NOT NULL default 'english',
  MULTI_LANG enum('0','1') NOT NULL default '1',
  REQUIRE_REGISTER enum('0','1') NOT NULL default '0',
  REQUIRE_NAMES enum('0','1') NOT NULL default '0',
@@ -247,7 +250,7 @@ CREATE TABLE ".$t_config." (
  HIDE_MODERS enum('0','1') NOT NULL default '0',
  LAST_SAVED_ON datetime NOT NULL default '0000-00-00 00:00:00',
  LAST_SAVED_BY varchar(30) NOT NULL default 'installer (upgrade)',
- CHAT_SYSTEM enum('alone','phpnuke','phpbb') NOT NULL default 'alone',
+ CHAT_SYSTEM enum('standalone','phpnuke','phpbb') NOT NULL default 'standalone',
  NUKE_BB_PATH varchar(255) NOT NULL default '',
  CHAT_NAME varchar(255) NOT NULL default 'My WonderfulWorldWide Chat',
  ENGLISH_FORMAT enum('UK','US') NOT NULL default 'UK',
@@ -307,6 +310,8 @@ CREATE TABLE ".$t_config." (
  TAGS_POWERS set('b','i','u') default NULL,
  ALLOW_MATH enum('0','1') NOT NULL default '0',
  SRC_MATH varchar(255) NOT NULL default 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML',
+ USE_FLAGS enum('0','1') NOT NULL default '1',
+ SHOW_FLAGS enum('0','1') NOT NULL default '1',
  PRIMARY KEY (ID)
 ) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -319,6 +324,8 @@ CREATE TABLE ".$t_lurkers." (
  file varchar(50) NOT NULL default '',
  username varchar(30) NOT NULL default '',
  status varchar(1) NOT NULL default '',
+ country_code varchar(3) NOT NULL default '',
+ country_name varchar(100) NOT NULL default '',
  PRIMARY KEY (time),
  KEY ip (ip),
  KEY file (file)
@@ -351,49 +358,59 @@ ALTER TABLE ".$t_reg_users."
 			ADD show_bday enum('0','1') NOT NULL default '1',
 			ADD show_age enum('0','1') NOT NULL default '1',
 			ADD bday_email_sent int(11) NOT NULL default '0',
+			CHANGE ip ip varchar(30) NOT NULL default '',
+			ADD country_code varchar(3) NOT NULL default '',
+			ADD country_name varchar(100) NOT NULL default '',
+			ADD use_sounds enum('0','1') NOT NULL default '1',
 			ADD PRIMARY KEY (cid),
 			ADD UNIQUE KEY username (username);
 
-INSERT INTO ".$t_reg_users." VALUES ('', '', 'plusbot', '0', '3901e4a6c3d27909afef4c22f8337da8', 'Bot', 'phpMyChat - Plus', 'WorldWideWeb', '', 'bot@bot.com', '0', 'topmod', '', 1130763311, '-No tracking IP-', '1', '0', 'images/alice.gif', 'I am a Robot originally called <a href=http://www.alicebot.org/documentation/ target=_blank>Alice</a>.  I am proud to be the first Artificial Intelligence on the net! Please test my capabilities as you wish! To start a public conversation with me just type \"hello myname\" in the room I am active in, to stop the conversation type \"bye myname\" or \"myname> bye\". But we can also talk in private - just click on my name whenever you need a shoulder to cry on :p Ohhh... I wish to express my gratitude to Roy, Popeye and <a href=http://www.ciprianmp.com/plus/ target=_blank>Ciprian</a> for making me available for chatting in here. :)', 'http://www.alicebot.org/documentation/', 'http://sourceforge.net/forum/?group_id=43190', 'English, German', 'olive', 'images/avatars/bot_avatar.gif', '0', '', '', '', '', '', '', '', '', '');
+INSERT INTO ".$t_reg_users." VALUES ('', '', 'plusbot', '0', '3901e4a6c3d27909afef4c22f8337da8', 'Bot', 'phpMyChat - Plus', 'WorldWideWeb', '', 'bot@bot.com', '0', 'topmod', '', 1130763311, '-No tracking IP-', '1', '0', 'images/alice.gif', 'I am a Robot originally called <a href=http://www.alicebot.org/documentation/ target=_blank>Alice</a>. I am proud to be the first Artificial Intelligence on the net! Please test my capabilities as you wish! To start a public conversation with me just type \"hello myname\" in the room I am active in, to stop the conversation type \"bye myname\" or \"myname> bye\". But we can also talk in private - just click on my name whenever you need a shoulder to cry on :p Ohhh... I wish to express my gratitude to Roy, Popeye and <a href=http://www.ciprianmp.com/plus/ target=_blank>Ciprian</a> for making me available for chatting in here. :)', 'http://www.alicebot.org/documentation/', 'http://sourceforge.net/forum/?group_id=43190', 'English, German', 'olive', 'images/avatars/bot_avatar.gif', '0', '', '', '', '', '', '', '', '', '', '0');
 
-INSERT INTO ".$t_reg_users." VALUES ('', '', 'Random_Quote', '0', 'ef93e0948b007826a1a7a49a17b72a59', 'Random Quote', 'phpMyChat - Plus', 'WorldWideWeb', '', 'quote@quote.com', '0', 'topmod', '', 1130763311, '-No tracking IP-', '1', '0', 'images/avatars/avatar56.gif', 'I am a virtual user, added here to post random quotes at my admin’s will. Ohhh... I wish to express my gratitude to <a href=http://www.ciprianmp.com/plus/ target=_blank>Ciprian</a> for making me available for enlighting you in here. :)', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', 'English (any actually)', 'limegreen', 'images/avatars/quote_avatar.gif', '0', '', '', '', '', '', '', '', '', '');
+INSERT INTO ".$t_reg_users." VALUES ('', '', 'Random_Quote', '0', 'ef93e0948b007826a1a7a49a17b72a59', 'Random Quote', 'phpMyChat - Plus', 'WorldWideWeb', '', 'quote@quote.com', '0', 'topmod', '', 1130763311, '-No tracking IP-', '1', '0', 'images/avatars/avatar56.gif', 'I am a virtual user, added here to post random quotes at my admin’s will. Ohhh... I wish to express my gratitude to <a href=http://www.ciprianmp.com/plus/ target=_blank>Ciprian</a> for making me available for enlighting you in here. :)', 'http://sourceforge.net/projects/phpmychat', 'http://ciprianmp.com/plus', 'English (any actually)', 'limegreen', 'images/avatars/quote_avatar.gif', '0', '', '', '', '', '', '', '', '', '', '0');
 
 UPDATE ".$t_reg_users." SET latin1='0' WHERE latin1='1';
 
 CREATE TABLE IF NOT EXISTS ".$t_stats." (
-  stat_date date NOT NULL,
-  room varchar(30) DEFAULT NULL,
-  username varchar(30) DEFAULT NULL,
-  reguser enum('0','1') NOT NULL DEFAULT '0',
-  last_in int(11) NOT NULL DEFAULT '0',
-  seconds_in int(11) NOT NULL DEFAULT '0',
-  longest_in int(11) NOT NULL DEFAULT '0',
-  last_away int(11) NOT NULL DEFAULT '0',
-  seconds_away int(11) NOT NULL DEFAULT '0',
-  longest_away int(11) NOT NULL DEFAULT '0',
-  times_away tinyint(4) NOT NULL DEFAULT '0',
-  logins smallint(5) NOT NULL DEFAULT '0',
-  posts_sent smallint(5) NOT NULL DEFAULT '0',
-  pms_sent smallint(5) NOT NULL DEFAULT '0',
-  cmds_used smallint(5) NOT NULL DEFAULT '0',
-  profile_viewed smallint(5) NOT NULL DEFAULT '0',
-  profiles_checked smallint(5) NOT NULL DEFAULT '0',
-  imgs_posted smallint(5) NOT NULL DEFAULT '0',
-  urls_posted smallint(5) NOT NULL DEFAULT '0',
-  emails_posted smallint(5) NOT NULL DEFAULT '0',
-  swears_posted smallint(5) NOT NULL DEFAULT '0',
-  smilies_posted smallint(5) NOT NULL DEFAULT '0',
-  bans_rcvd tinyint(4) NOT NULL DEFAULT '0',
-  bans_sent tinyint(4) NOT NULL DEFAULT '0',
-  kicks_rcvd tinyint(4) NOT NULL DEFAULT '0',
-  kicks_sent tinyint(4) NOT NULL DEFAULT '0',
-  vids_posted smallint(5) NOT NULL DEFAULT '0',
-  maths_posted smallint(5) NOT NULL DEFAULT '0'
+ stat_date date NOT NULL,
+ room varchar(30) DEFAULT NULL,
+ username varchar(30) DEFAULT NULL,
+ reguser enum('0','1') NOT NULL DEFAULT '0',
+ last_in int(11) NOT NULL DEFAULT '0',
+ seconds_in int(11) NOT NULL DEFAULT '0',
+ longest_in int(11) NOT NULL DEFAULT '0',
+ last_away int(11) NOT NULL DEFAULT '0',
+ seconds_away int(11) NOT NULL DEFAULT '0',
+ longest_away int(11) NOT NULL DEFAULT '0',
+ times_away tinyint(4) NOT NULL DEFAULT '0',
+ logins smallint(5) NOT NULL DEFAULT '0',
+ posts_sent smallint(5) NOT NULL DEFAULT '0',
+ pms_sent smallint(5) NOT NULL DEFAULT '0',
+ cmds_used smallint(5) NOT NULL DEFAULT '0',
+ profile_viewed smallint(5) NOT NULL DEFAULT '0',
+ profiles_checked smallint(5) NOT NULL DEFAULT '0',
+ imgs_posted smallint(5) NOT NULL DEFAULT '0',
+ urls_posted smallint(5) NOT NULL DEFAULT '0',
+ emails_posted smallint(5) NOT NULL DEFAULT '0',
+ swears_posted smallint(5) NOT NULL DEFAULT '0',
+ smilies_posted smallint(5) NOT NULL DEFAULT '0',
+ bans_rcvd tinyint(4) NOT NULL DEFAULT '0',
+ bans_sent tinyint(4) NOT NULL DEFAULT '0',
+ kicks_rcvd tinyint(4) NOT NULL DEFAULT '0',
+ kicks_sent tinyint(4) NOT NULL DEFAULT '0',
+ vids_posted smallint(5) NOT NULL DEFAULT '0',
+ maths_posted smallint(5) NOT NULL DEFAULT '0',
+ ip varchar(30) NOT NULL default '',
+ country_code varchar(3) NOT NULL default '',
+ country_name varchar(100) NOT NULL default ''
 ) ".$engine."=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 ALTER TABLE ".$t_users."
 			ADD awaystat char(1) NOT NULL default '0',
 			ADD r_time int(11) NOT NULL default '0',
-			ADD email varchar(64) NOT NULL default '';
+			ADD email varchar(64) NOT NULL default '',
+			CHANGE ip ip varchar(30) NOT NULL default '',
+			ADD country_code varchar(3) NOT NULL default '',
+			ADD country_name varchar(100) NOT NULL default '';
 ", $conn);
 ?>

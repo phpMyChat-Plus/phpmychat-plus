@@ -308,7 +308,7 @@ define("L_WHOIS_BOT", "机器人");
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "%s 进入这个聊天室。");
 define("L_EXIT_ROM", "%s 离开这个聊天室。");
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND != "") define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
@@ -450,7 +450,7 @@ define("COL_ERROR_BOX_USRM", "你必须是一个主持人才能使用 ".COLOR_CM
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "欢迎来到我们的聊天。请遵守纯净礼仪，一边聊天：<I>尝试愉快和礼貌</I>。");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND != "") define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
@@ -504,10 +504,10 @@ define("L_LINKS_3", "打开链接");
 define("L_LINKS_4", "打开作者的网站");
 define("L_LINKS_5", "插入这个笑脸");
 define("L_LINKS_6", "联系");
-define("L_LINKS_7", "访问phpMyChat-Plus主页");
-define("L_LINKS_8", "加入phpMyChat小组");
+define("L_LINKS_7", "访问%s主页");
+define("L_LINKS_8", "加入%s小组");
 define("L_LINKS_9", "发送您的脸书"); 
-define("L_LINKS_10", "下载 phpMyChat-Plus");
+define("L_LINKS_10", "下载%s");
 define("L_LINKS_11", "查看谁在聊天");
 define("L_LINKS_12", "打开聊天的登录页面");
 define("L_LINKS_13", "播放这个声音"); // can also be translated as "to play this sound"

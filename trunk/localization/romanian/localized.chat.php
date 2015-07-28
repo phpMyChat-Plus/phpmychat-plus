@@ -1,5 +1,5 @@
 <?php
-// File : romanian/localized.chat.php - plus version (03.02.2013 - rev.47)
+// File : romanian/localized.chat.php - plus version (25.01.2015 - rev.49)
 // Original translation started by Radu Swider <swidera@satline.ro>, first updated by Ciprian Popovici-Oana <floppy@kermit.cs.pub.ro>
 // Corrected, finalized, diacritics addition and updated to Plus version by Ciprian Murariu <ciprianmp@yahoo.com>
 // Do not use ' ; use ’ instead (utf-8 edit bug)
@@ -14,7 +14,7 @@ $FontSize = 10;
 define("L_TUTORIAL", "Tutorial");
 
 define("L_WEL_1", "Mesajele se şterg după %s %s");
-define("L_WEL_2", "iar utilizatorii inactivi după %s %s");
+define("L_WEL_2", "iar conturile inactive se şterg după %s %s");
 
 define("L_CUR_1", "Acum");
 define("L_CUR_1a", "sunt");
@@ -97,6 +97,9 @@ define("L_REG_47", "Feminin");
 define("L_REG_48", "Nespecificat");
 define("L_REG_49", "Înregistrare obligatorie!");
 define("L_REG_50", "Înregistrare suspendată!");
+define("L_REG_51", "Niciodată"); //rev.48
+define("L_REG_52", "Ultima locaţie"); //rev.48
+define("L_REG_53", "redă sunetele de notificare"); //rev.48
 
 // email validation stuff
 define("L_EMAIL_VAL_1", "Datele tale pentru a te loga la chat");
@@ -153,6 +156,7 @@ define("L_ERR_USR_25", "Numai administratorul poate folosi culoarea ".$COLORNAME
 define("L_ERR_USR_26", "Numai administratorii sau moderatorii pot folosi culoarea ".$COLORNAME."!<br />Nu încerca să foloseşti ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." or ".COLOR_CM1.".<br />Acestea sunt rezervate utilizatorilor speciali!");
 define("L_ERR_USR_27", "Nu-ţi poţi vorbi ţie însuţi în şoaptă.\\nFă asta în minte...\\nAlege un alt destinatar.");
 define("L_ERR_USR_28", "Accesul tău în camera %s a fost restricţionat!<br />Alegeţi o altă cameră.");
+define("L_ERR_USR_29", "Completează data naşterii!<br />Nu se acceptă date incomplete."); //rev.49
 define("L_ERR_ROM_1", "Numele camerei nu poate conţine virgule sau backslash (\\).");
 define("L_ERR_ROM_2", "Numele camerei pe care ai vrut s-o creezi conţine un cuvânt interzis. Reformulează.");
 define("L_ERR_ROM_3", "Exista deja o cameră publică cu acest nume.");
@@ -168,7 +172,7 @@ define("L_USER", "utilizator");
 define("L_USERS", "utilizatori");
 define("L_LURKER", "spectator");
 define("L_LURKERS", "spectatori");
-define("L_NO_USER", "Nici un utilizator");
+define("L_NO_USER", "Niciun utilizator");
 define("L_ROOM", "cameră");
 define("L_ROOMS", "camere");
 define("L_EXPCOL", "Extinde/Comprimă camera");
@@ -197,7 +201,7 @@ define("L_IS_MODERATOR", "%s este deja moderator!");
 define("L_NO_MODERATOR", "Numai un moderator poate folosi această comandă.");
 define("L_NONEXIST_USER", "%s nu este în camera curentă.");
 define("L_NONREG_USER", "%s nu este înregistrat.");
-define("L_NONREG_USER_IP", "IP-ul său este: %s.");
+define("L_NONREG_USER_IP", "IP-ul său este: %s");
 define("L_NO_KICKED", "%s este moderator sau administrator şi nu poate fi dat afară.");
 define("L_NO_BANISHED", "%s este moderator sau administrator şi nu poate fi blocat.");
 define("L_SVR_TIME", "Timpul pe server: ");
@@ -228,7 +232,7 @@ define("L_HELP_CMD_2b", "Modifică timpul de reactualizare (refresh) a mesajelor
 define("L_HELP_CMD_3", "Schimbă ordinea mesajelor (nu în toate browser-ele).");
 define("L_HELP_CMD_4", "Intră în altă camera; dacă această cameră nu exista şi ai dreptul (din setări) o poţi crea.<br />Utilizare: n este 0 pentru camere private şi 1 pentru camere publice. Dacă n nu este specificat, valoarea sa implicită este 1.");
 define("L_HELP_CMD_5", "Părăseşte chat-ul după ce ai scris un mesaj opţional.");
-define("L_HELP_CMD_6", "Ignoră mesaje de la utilizatorul a cărui poreclă este specificată.<br />Fără nici o opţiune, va apărea o fereastră care va afişa toţi utilizatorii ignoraţi de tine.");
+define("L_HELP_CMD_6", "Ignoră mesaje de la utilizatorul a cărui poreclă este specificată.<br />Fără nicio opţiune, va apărea o fereastră care va afişa toţi utilizatorii ignoraţi de tine.");
 define("L_HELP_CMD_7", "Recheamă textul introdus anterior (comandă sau mesaj).");
 define("L_HELP_CMD_8", "Arată/Ascunde timpul din faţa mesajelor.");
 define("L_HELP_CMD_9", "Elimină utilizatori din chat. Această comandă poate fi dată numai de un moderator al camerei sau de un administrator.<br />Opţional, [".L_HELP_REASON."] va arăta şi motivul eliminării (orice frază).<br />Dacă este folosită opţiunea *, aceasta va elimina din camera de chat toţi utilizatorii obişnuiţi (nu şi moderatorii sau adminii). Aceasta este util atunci când sunt probleme de conectare la server, fiind necesar ca toţi utilizatorii să reîncarce chat-ul prin relogare. În acest caz, se recomandă ca [".L_HELP_REASON."] să fie precizat, pentru ca utilizatorul să ştie de ce a fost eliminat din cameră.");
@@ -273,26 +277,26 @@ define("L_HELP_ETIQ_4", "<li>Nu faceţi \"spam\" pe chat postând non-sensuri sa
 <li>Nu vă adresaţi celorlalţi utilizatori pe numele lor reale, chiar dacă îi cunoaşteţi personal. Mulţi utilizatori nu apreciază folosirea identităţii reale pe chat-uri. Folosiţi în schimb poreclele acestora (nicknames).</li>");
 
 // messages frame
-define("L_NO_MSG", "Nu este nici un mesaj ...");
+define("L_NO_MSG", "Nu este niciun mesaj ...");
 define("L_TODAY_DWN", "De aici încep mesajele trimise astăzi");
 define("L_TODAY_UP", "De aici încep mesajele trimise ieri");
 
 // message colors
 $TextColors = array("Negru" => "#000000",
-										"Roşu" => "#FF0000",
-										"Verde" => "#009900",
-										"Albastru" => "#0000FF",
-										"Mov" => "#9900FF",
-										"Roşu închis" => "#990000",
-										"Verde închis" => "#006600",
-										"Albastru închis" => "#000099",
-										"Maro" => "#996633",
-										"Albastru deschis" => "#006699",
-										"Portocaliu" => "#FF6600");
+					"Roşu" => "#FF0000",
+					"Verde" => "#009900",
+					"Albastru" => "#0000FF",
+					"Mov" => "#9900FF",
+					"Roşu închis" => "#990000",
+					"Verde închis" => "#006600",
+					"Albastru închis" => "#000099",
+					"Maro" => "#996633",
+					"Albastru deschis" => "#006699",
+					"Portocaliu" => "#FF6600");
 
 // ignored popup
 define("L_IGNOR_TIT", "Utilizatori Ignoraţi");
-define("L_IGNOR_NON", "Nici un utilizator ignorat");
+define("L_IGNOR_NON", "Niciun utilizator ignorat");
 
 // whois popup
 define("L_WHOIS_ADMIN", "Administrator");
@@ -309,7 +313,7 @@ define("L_WHOIS_BOT", "RoBoţel");
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "%s a intrat în cameră.");
 define("L_EXIT_ROM", "%s a ieşit din cameră.");
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND != "") define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
@@ -339,7 +343,7 @@ define("L_HELP_IMG", "calea/link-ul către imaginea de postat");
 define("L_NO_IMAGE", "Aceasta nu este o adresă URL validă\\na unei imagini afişate public on-line.\\nCorectează adresa!");
 
 // Demote command by Ciprian
-define("L_IS_NO_MOD_ALL", "%s nu mai este moderator în nici una dintre camerele acestui chat.");
+define("L_IS_NO_MOD_ALL", "%s nu mai este moderator în niciuna dintre camerele acestui chat.");
 define("L_IS_NO_MODERATOR", "%s nu este moderator!");
 define("L_ERR_IS_ADMIN", "%s este administrator!\\nNu ai dreptul sa-i modifici permisiunile.");
 
@@ -371,9 +375,9 @@ define("L_AVA_REG", "Trebuie să fii înregistrat pentru\\na-ţi putea schimba a
 define("L_SEL_NEW_AV_CONFIRM", "Acest formular nu a fost salvat.\\nSchimbând avatar-ul, datele introduse\\nîn această sesiune se vor pierde!\\n\\nDoriţi să continuaţi?");
 
 // PlusBot bot mod (based on Alice bot)
-define("BOT_TIPS", "Sfat: Bot-ul este activ public în această camera. Pentru a-i vorbi, scrie <b>hello ".C_BOT_NAME."</b>. Pentru a-l opri, scrie <b>bye ".C_BOT_NAME."</b>. (privat: /to <b>".C_BOT_NAME."</b> Mesaj)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
-define("BOT_PRIV_TIPS", "Sfat: Bot-ul este activ public în camera %s. Poţi discuta numai privat cu el apăsând pe numele său <b>".C_BOT_NAME."</b>. (comanda: /wisp <b>".C_BOT_NAME."</b> Mesaj)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
-define("BOT_PRIVONLY_TIPS", "Sfat: Bot-ul nu este activ public. Poţi discuta numai privat cu el apăsând pe numele său. (comenzile: /to <b>".C_BOT_NAME."</b> Mesaj sau /wisp <b>".C_BOT_NAME."</b> Mesaj)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
+define("BOT_TIPS", "Sfat: RoBoţelul este activ public în această camera. Pentru a-i vorbi, scrie <b>hello ".C_BOT_NAME."</b>. Pentru a-l opri, scrie <b>bye ".C_BOT_NAME."</b>. (privat: /to <b>".C_BOT_NAME."</b> Mesaj)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
+define("BOT_PRIV_TIPS", "Sfat: RoBoţelul este activ public în camera %s. Poţi discuta numai privat cu el apăsând pe numele său <b>".C_BOT_NAME."</b>. (comanda: /wisp <b>".C_BOT_NAME."</b> Mesaj)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
+define("BOT_PRIVONLY_TIPS", "Sfat: RoBoţelul nu este activ public. Poţi discuta numai privat cu el apăsând pe numele său. (comenzile: /to <b>".C_BOT_NAME."</b> Mesaj sau /wisp <b>".C_BOT_NAME."</b> Mesaj)"); //make sure your translation don't go too long here; it must fit to one line on the banner (under topic)
 define("BOT_STOP_ERROR", "RoBoţelul nu este pornit în această cameră!");
 define("BOT_START_ERROR", "RoBoţelul este deja pornit în această cameră!");
 define("BOT_DISABLED_ERROR", "RoBoţelul a fost dezactivat în Admin Panel!");
@@ -409,7 +413,7 @@ define("PM_DISABLED_ERROR", "Mesageria privată este\\ndezactivată în acest ch
 define("L_NEXT_PAGE", "Pagina următoare");
 define("L_NEXT_READ", "Mai sunt de citit %s"); // message / 10 messages
 define("L_ROOM_ALL", "Toate camerele");
-define("L_PRIV_NO_MSGS", "Nici un mesaj privat primit");
+define("L_PRIV_NO_MSGS", "Niciun mesaj privat primit");
 define("L_PRIV_READ_MSG", "1 mesaj privat primit");
 define("L_PRIV_READ_MSGS", "%s mesaje private primite");
 define("L_PRIV_MSGS_NEW", "Nou");
@@ -451,7 +455,7 @@ define("COL_ERROR_BOX_USRM", "Trebuie să fii moderator pentru a folosi culoarea
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "Bun venit pe chat-ul nostru! Vă rugăm să nu folosiţi expresii nepoliticoase, <I>pentru o ambianţă cât mai plăcută</I>.");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND != "") define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
@@ -505,10 +509,10 @@ define("L_LINKS_3", "pentru a deschide link-ul");
 define("L_LINKS_4", "pentru a deschide site-ul autorului");
 define("L_LINKS_5", "pentru a trimite acest zâmbet");
 define("L_LINKS_6", "pentru a contacta");
-define("L_LINKS_7", "pentru a vizita Pagina phpMyChat");
-define("L_LINKS_8", "pentru a te înscrie în Grupul phpMyChat");
+define("L_LINKS_7", "pentru a vizita Pagina Oficială %s"); //rev.48
+define("L_LINKS_8", "pentru a te înscrie în Grupul %s"); //rev.48
 define("L_LINKS_9", "pentru a trimite părerea ta");
-define("L_LINKS_10", "pentru a descărca phpMyChat-Plus");
+define("L_LINKS_10", "pentru a descărca %s"); //rev.48
 define("L_LINKS_11", "pentru a vedea cine e acum pe chat");
 define("L_LINKS_12", "pentru a deschide pagina de Chat");
 define("L_LINKS_13", "pentru a trimite acest buzz"); // can also be translated as "to play this sound"
@@ -616,7 +620,7 @@ setlocale(LC_ALL, "ROU_ROU.UTF-8", "ROU_ROU", "romanian.UTF-8", "romanian"); // 
 setlocale(LC_ALL, "ro_RO.UTF-8@euro", "ro_RO.UTF-8", "rou.UTF-8", "rou_rou.UTF-8"); // For Unix/FreeBSD servers
 }
 define("L_LANG", "ro_RO");
-define("ISO_DEFAULT", "iso-8859-2");
+define("ISO_DEFAULT", "iso-8859-1");
 define("WIN_DEFAULT", "windows-1250");
 define("L_SHORT_DATE", "%d.%m.%Y");
 define("L_LONG_DATE", "%A, %d %B %Y"); //Change this to your local desired format (keep the short form)

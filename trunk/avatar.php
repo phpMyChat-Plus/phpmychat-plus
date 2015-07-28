@@ -26,6 +26,7 @@ require("./lib/release.lib.php");
 require("./localization/languages.lib.php");
 require("./localization/".$L."/localized.chat.php");
 require("./lib/database/".C_DB_TYPE.".lib.php");
+include("./lib/validator.lib.php");
 
 header("Content-Type: text/html; charset=${Charset}");
 
@@ -130,12 +131,12 @@ $DbAva = new DB;
 // parse a avatar image from input url
 if (isset($url)) {
     $isok = false;
-    if (strncasecmp($url,"http://",7) == 0) {  // it's a URL string, perhaps.
+    if (validator($url,"img")) {  // it's a URL string, perhaps.
        // find out if there is a real computer in the URL:
        $isok = true;
     }
     if ($isok) {
-      $avatar = $url;
+      $avatar = !preg_match("~^(?:f|ht)tps?://~i", $url) ? "http://" . $url : $url;
 //	  $avamsgurl = "<P class=\"success\">Remote path correct.</P>";
     } else {
       $avamsgurl = "<P class=\"error\">".L_ERR_AV."</P>";
@@ -152,8 +153,8 @@ if (isset($avatar)) {
   $query = "SELECT avatar FROM ".C_REG_TBL." WHERE username='".$User."'";
   $DbAva->query($query);
   list ($avatar) = $DbAva->next_record();
-  if ((strncasecmp($avatar,"http://",7) == 0) && (!isset($url))) {  // it's a URL string, perhaps.
-    $url = $avatar;
+  if (validator($avatar,"img") && (!isset($url))) {  // it's a URL string, perhaps.
+    $url = validator($avatar,"img");
   }
   $typeit = "";
 }
@@ -162,13 +163,23 @@ $DbAva->close();
 
 if (!isset($ORIGAVATAR)) {
     $avatar=$ORIGAVATAR;
-    if (strncasecmp($avatar,"http://",7) == 0) {  // it's a URL string, perhaps.
-      $url = $avatar;
+    if (validator($avatar,"img")) {  // it's a URL string, perhaps.
+      $url = validator($avatar,"img");
     }
 }
 
 // For translations with an explicit charset (not the 'x-user-defined' one)
 if (!isset($FontName)) $FontName = "";
+// Special cache instructions for IE5+
+$CachePlus	= "";
+#if (ereg("MSIE [56789]", (isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"))) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
+if (stripos((isset($HTTP_USER_AGENT)) ? $HTTP_USER_AGENT : getenv("HTTP_USER_AGENT"), "MSIE") !== false) $CachePlus = ", pre-check=0, post-check=0, max-age=0";
+$now		= gmdate('D, d M Y H:i:s') . ' GMT';
+
+header("Expires: $now");
+header("Last-Modified: $now");
+header("Cache-Control: no-cache, must-revalidate".$CachePlus);
+header("Pragma: no-cache");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML dir="<?php echo(($Align == "right") ? "RTL" : "LTR"); ?>">
@@ -248,5 +259,81 @@ For ($i=$j; $i <= C_NUM_AVATARS; $i++) {
 echo("<a href=\"$From?avatar=$avatarmatch&User=$User&U=$User&L=$L&FORM_SEND=0&LIMIT=$LIMIT&pmc_password=$pmc_password&pmc_username=$User\" onMouseOver=\"window.status='".L_REG_10."'; return true;\" ><br />".L_REG_10."</a>");
 ?>
 </center>
+    <script type="text/javascript">
+
+    window.onload = function () {
+
+      function xhr_send(f, e) {
+        if (f) {
+          xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4){
+              document.getElementById(e).innerHTML = xhr.responseText;
+            }
+          }
+          xhr.open("POST", "upload.php?action=xhr");
+          xhr.setRequestHeader("Cache-Control", "no-cache");
+          xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+          xhr.setRequestHeader("X-File-Name", f.name);
+          xhr.send(f);
+        }
+      }
+
+      function xhr_parse(f, e) {
+        if (f) {
+          document.getElementById(e).innerHTML = "File selected : " + f.name + "(" + f.type + ", " + f.size + ")";
+        } else {
+          document.getElementById(e).innerHTML = "No file selected!";
+        }
+      }
+
+      function dnd_hover(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        e.target.className = (e.type == "dragover" ? "hover" : "");  
+      }
+
+      var xhr = new XMLHttpRequest();
+
+      if (xhr && window.File && window.FileList) {
+
+        // xhr example
+        var xhr_file = null;
+        document.getElementById("xhr_field").onchange = function () {
+          xhr_file = this.files[0];
+          xhr_parse(xhr_file, "xhr_status");
+        }
+        document.getElementById("xhr_upload").onclick = function (e) {
+          e.preventDefault();
+          xhr_send(xhr_file, "xhr_result");
+        }
+
+        // drag and drop example
+        var dnd_file = null; 
+        document.getElementById("dnd_drag").style.display = "block";
+        document.getElementById("dnd_field").style.display = "none";
+        document.getElementById("dnd_drag").ondragover = function (e) {
+          dnd_hover(e);
+        }
+        document.getElementById("dnd_drag").ondragleave = function (e) {
+          dnd_hover(e);
+        }
+        document.getElementById("dnd_drag").ondrop = function (e) {
+          dnd_hover(e);
+          var files = e.target.files || e.dataTransfer.files;
+          dnd_file = files[0];
+          xhr_parse(dnd_file, "dnd_status");
+        }
+        document.getElementById("dnd_field").onchange = function (e) {
+          dnd_file = this.files[0];
+          xhr_parse(dnd_file, "dnd_status");
+        }
+        document.getElementById("dnd_upload").onclick = function (e) {
+          e.preventDefault();
+          xhr_send(dnd_file, "dnd_result");
+        }
+
+      }
+    }
+    </script>
 </BODY>
 </HTML>

@@ -73,7 +73,7 @@ function delete_files()
 function users_popup()
 {
 //	window.focus();
-	users_popupWin = window.open("users_popup<?php echo($Ver1); ?>.php?<?php echo("From=$From&L=$L"); ?>","users_popup_<?php echo(md5(uniqid(""))); ?>","width=230,height=300,resizable=yes,scrollbars=yes");
+	users_popupWin = window.open("users_popup<?php echo($Ver1); ?>.php?<?php echo("From=$From&L=$L"); ?>","users_popup_<?php echo(md5(uniqid(""))); ?>","width=300,height=300,resizable=yes,scrollbars=yes");
 	users_popupWin.focus();
 }
 

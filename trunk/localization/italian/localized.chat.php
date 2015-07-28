@@ -1,5 +1,5 @@
 <?php
-// File : italian/localized.chat.php - plus version (20.03.2010 - rev.44)
+// File : italian/localized.chat.php - plus version (25.01.2015 - rev.49)
 // Original translation by Andrea D’Alessandro <andrea@abol.it> & Massimo Fubini <massimo@tomato.it>
 // & Giuliano Yurij Beccaria <yurij@e-pages.it> & Marco Borrini <borrini@tradimento.it>
 // & Bartolotta Gioachino <developers@rockitalia.com> & Silvia M. Carrassi <silvia@ladysilvia.net>
@@ -100,6 +100,9 @@ define("L_REG_47", "Donna");
 define("L_REG_48", "Non specificato");
 define("L_REG_49", "Registratione richiesta!");
 define("L_REG_50", "Registratione sospesa!");
+define("L_REG_51", "Mai");  //rev.48
+define("L_REG_52", "Luogo recente"); //rev.48
+define("L_REG_53", "attiva suoni per le notifiche"); //rev.48
 
 // e-mail validation stuff
 define("L_EMAIL_VAL_1", "Le tue impostazioni per entrare nella chat");
@@ -156,6 +159,7 @@ define("L_ERR_USR_25", "Solo l’amministratore può usare ".$COLORNAME." come c
 define("L_ERR_USR_26", "Solo l’amministratore può usare ".$COLORNAME." come colore!<br />Non provare ad usarlo ".COLOR_CA.", ".COLOR_CA1.", ".COLOR_CM." o ".COLOR_CM1.".<br />Questi sono riservati ai poteri degli utenti!");
 define("L_ERR_USR_27", "Non puoi parlare in privato con te stesso.\\nFallo con la mente per piacere...\\nOra scegli un username differente.");
 define("L_ERR_USR_28", "Il tuo accesso per la stanza %s è stato limitato!<br />Per cortesia scegli un’altra stanza."); // room name
+define("L_ERR_USR_29", "Si prega di compilare la data del compleanno!<br />Date incomplete non sono accettate."); //rev.49
 define("L_ERR_ROM_1", "Il nome delle chat non può contenere virgole o backslash (\\).");
 define("L_ERR_ROM_2", "Nel nome di chat è stata trovata una parola censurabile.");
 define("L_ERR_ROM_3", "Già esiste una stanza pubblica con questo nome.");
@@ -263,7 +267,7 @@ define("L_HELP_CMD_34", "Permette all’utente di specificare l’orientamento d
 define("L_HELP_CMD_35", "Permette di inserire <i>un video</i> o <i>un file audio</i> in un piccolo Flash player per volta.<br />Uso: Incolla l’url di origine da inserire! Es. <b>/video&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Hai bisogno di Shockwave Flash Player installato nel tuo sistema. Il link riconosce maiscole e minuscule!<br />HINT: scrivi /video seguito da uno spazio e incolla l’URL nel box.");
 define("L_HELP_CMD_35a", "Il secondo commando serve solo per i video  di origina da youtube.com.<br />Es. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b>");
 define("L_HELP_CMD_36", "Permette di inserire <i>un video youtube</i> in un piccolo Flash player per volta.<br />Uso: Incolla l’url di origine da inserire! Es. <b>/tube&nbsp;http://www.youtube.com/watch?v=ypAvUNiZG5k</b><br />Hai bisogno di Shockwave Flash Player installato nel tuo sistema. Il link riconosce maiscole e minuscule!<br />HINTS: scrivi /tube seguito da uno spazio e incolla l’URL nel box.");
-define("L_HELP_CMD_37", "It allows posting of <i>MathJax Equations/Formulas</i> in chat.<br />Usage: Just paste the TeX or MathML (original) codes! E.g. <b>/math&nbsp;\sqrt{3x-1}+(1+x)^2</b><br />For more code samples and instructions go to: <a href=\"http://www.mathjax.org/demos/\" target=\"_blank\">http://www.mathjax.org/demos</a>. Get the code by right-clicking on the formulas.<br />HINTS: type /math followed by a space and paste the code into the box.");
+define("L_HELP_CMD_37", "Permette di pubblicare <i><b>MathJax</b> Equazioni/Formule</i> nella chat.<br />Uso: incolla solo il codice TeX o MathML (originale) ! Es. <b>/math&nbsp;\sqrt{3x-1}+(1+x)^2</b><br />Per altri tipi di codici e istrizioni vai: <a href=\"http://www.mathjax.org/demos/\" target=\"_blank\">http://www.mathjax.org/demos</a>. Per prendere il codice bisogna cliccare sulla formula con il tasto destro del mous e si aprirà una nuova finestra pop-up. Seleziona tutto e copia tutto con il tasto destro del mouse.<br />HINTS: scrivere /math seguito da uno spazio e incollare il codice copiato .");
 define("L_HELP_CMD_VAR", "Sinonimi (varianti): %s"); // a list of English and/or translated alternatives for each command, provided in help.
 define("L_HELP_ETIQ_1", "Netiquette della Chat");
 define("L_HELP_ETIQ_2", "Nella nostra chat si auspica un incontro amichevole e simpatico, quindi ti preghiamo di aderire alle seguenti direttive. Se verrai meno all’osservanza di queste regole, i moderatori potrebbero espellerti dalla chat.<br /><br />Grazie!");
@@ -312,7 +316,7 @@ define("L_WHOIS_BOT", "Bot");
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "%s entra in questa stanza.");
 define("L_EXIT_ROM", "%s esce da questa stanza.");
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND != "") define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
@@ -454,7 +458,7 @@ define("COL_ERROR_BOX_USRM", "Devi essere moderatore per usare ".COLOR_CM." colo
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "Benvenuto nella nostra chat. Vi preghiamo di rispettare la netiquette: <I>siate rispettosi e civili</I>.");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND != "") define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
@@ -500,10 +504,10 @@ define("L_LINKS_3", "per aprire il link");
 define("L_LINKS_4", "per aprire il sito dell’autore");
 define("L_LINKS_5", "per inserire questo smiley");
 define("L_LINKS_6", "per contatto");
-define("L_LINKS_7", "per visitare l’Homepage di phpMyChat");
-define("L_LINKS_8", "per entrare nel gruppo di phpMyChat");
+define("L_LINKS_7", "per visitare l’Homepage di %s");
+define("L_LINKS_8", "per entrare nel gruppo di %s");
 define("L_LINKS_9", "per inviare il tuo feedback");
-define("L_LINKS_10", "per il download phpMyChat-Plus");
+define("L_LINKS_10", "per il download %s");
 define("L_LINKS_11", "controllochi sta chattando");
 define("L_LINKS_12", "per aprire la pagina di Login");
 define("L_LINKS_13", "invia questo buzz"); // Click to blablabla : it can also be translated as "to play this sound", if buzz has no translation.
@@ -513,7 +517,7 @@ define("L_LINKS_16", "Galleria Smilie"); // to open/see Posted Links window
 define("L_LINKS_17", "per ordinare in modo ascendente"); //Click here to ...
 define("L_LINKS_18", "per ordinare in modo discendente"); //Click here to ...
 define("L_LINKS_19", "per impostare/modificare il tuo Gravatar");
-define("L_LINKS_20", "Equazioni segnalati"); //Click here to open Posted Equations
+define("L_LINKS_20", "Equazioni pubblicate"); //Click here to open Posted Equations
 define("L_SWITCH", "Cambia in %s"); // Switch to Language
 define("L_SELECTED", "selezionato"); // E.g. "French - selected" (Country Flags mouseover / Language switching)
 define("L_SELECTED_F", ""); // feminine word, if it's the case
@@ -628,8 +632,11 @@ define("L_PRIV_REPLY_LOGIN", "Login in chat se vorresti ".LOGIN_LINK."rispondere
 
 // Language names
 define("L_LANG_AR", "spagnolo argentino");
-define("L_LANG_BG", "bulgaro - cyrillic");
+define("L_LANG_BG", "bulgaro - cirillico");
 define("L_LANG_BR", "brasiliano portoghese");
+define("L_LANG_CA", "catalano");
+define("L_LANG_CNS", "cinese (semplificato)");
+define("L_LANG_CNT", "cinese (tradizionale)");
 define("L_LANG_CZ", "ceco");
 define("L_LANG_DA", "danese");
 define("L_LANG_DE", "tedesco");
@@ -638,6 +645,7 @@ define("L_LANG_ENUK", "inglese UK"); // for UK formats and flags
 define("L_LANG_ENUS", "inglese US"); // for US formats and flags
 define("L_LANG_ES", "spagnolo");
 define("L_LANG_FA", "persiano (farsi)");
+define("L_LANG_FI", "finlandese");
 define("L_LANG_FR", "frencese");
 define("L_LANG_GR", "greco");
 define("L_LANG_HI", "indiano");
@@ -646,16 +654,24 @@ define("L_LANG_ID", "indonesiano");
 define("L_LANG_IT", "italiano");
 define("L_LANG_JA", "giapponese (kanji)");
 define("L_LANG_KA", "georgiano");
+define("L_LANG_NB", "norvegese (Bokmål)");
+define("L_LANG_NN", "norvegese (Nynorsk)");
 define("L_LANG_NE", "nepalese");
 define("L_LANG_NL", "olandese");
+define("L_LANG_PL", "polacco");
+define("L_LANG_PT", "portoghese");
 define("L_LANG_RO", "rumeno");
+define("L_LANG_RU", "russo - cirillico");
 define("L_LANG_SK", "slovacco");
-define("L_LANG_SRC", "serbo - cyrillic");
+define("L_LANG_SRC", "serbo - cirillico");
 define("L_LANG_SRL", "serbo - latin");
 define("L_LANG_SV", "svedese");
+define("L_LANG_TH", "tailandese");
 define("L_LANG_TR", "turco");
+define("L_LANG_UK", "ucraino - cirillico");
 define("L_LANG_UR", "pakistano urdu");
 define("L_LANG_VI", "vietnamita");
+define("L_LANG_YO", "yoruba"); //Nigeria&Congo language
 
 // Skins preview page
 define("L_SKINS_TITLE", "Anteprima aspetto");
@@ -682,7 +698,7 @@ define("L_LOGIN_COUNT", "Totale visite"); // number of logins (returning visits)
 // Gravatar from email mod by Ciprian
 define("L_GRAV_USE", "usa il Gravatar");
 
-// Uploader mod by Ciprian 
+// Uploader mod by Ciprian
 define("L_UPLOAD", "Invia %s");
 define("L_UPLOAD_IMG", "File immagine");
 define("L_UPLOAD_SND", "File audio");
@@ -720,5 +736,5 @@ $L_DOB_SUBJ = "Buon compleanno %s!";
 
 // MathJax (MathML/TeX) formulas rendering in chat - by Ciprian
 define("L_EQUATION", "Equazione");
-define("L_MATH", "%s inserito da %s"); //e.g. "Equation posted by username" (defined above); the word "Equation" will render as a url to show popup with the posted formulas
+define("L_MATH", "%s pubblicata da %s"); //e.g. "Equation posted by username" (defined above); the word "Equation" will render as a url to show popup with the posted formulas
 ?>

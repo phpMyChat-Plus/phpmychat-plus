@@ -2,10 +2,10 @@
 # xx_YY translation for
 # PHP-Calendar, DatePicker Calendar class: http://www.triconsole.com/php/calendar_datepicker.php
 # Localized version of PHP-Calendar, DatePicker Calendar class: http://ciprianmp.com/scripts/calendar/
-# Version: 3.74
+# Version: 3.75
 # Language: Lang_name / Orig_name // Ex: Romanian (English name) / Română (Original name)
 # Translator: YourName <email@...>
-# Last file update: 29.01.2015
+# Last file update: 20.05.2015
 
 # define("RTL", 1); // uncomment only for right-to-left text (Arabic, Hebrew)
 
@@ -26,10 +26,10 @@ define("L_NOT_ALLOWED", "This date is not allowed to be selected");
 define("L_DATE_BEFORE", "Please choose a date before %s");
 define("L_DATE_AFTER", "Please choose a date after %s");
 define("L_DATE_BETWEEN", "Please choose a date between\\n%s and %s");
-define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - max 2 letters)
+define("L_WEEK_HDR", ""); // Optional Short Name for the column header showing the current Week number (W or CW in English - use max 2 letters)
 define("L_UNSET", "Unset");
 define("L_CLOSE", "Close"); #3.69
-define("L_WARN_2038", "This php server’s version does not have support for year 2038 and later! (<5.3.0)"); #3.69
+define("L_WARN_2038", "This php server’s version does not have support for year 2038 and later! (<5.3.0)"); #3.69 - deprecated
 define("L_ERR_NOSET", "Error! The calendar value cannot be set!"); #3.70
 define("L_VERSION", "Version: %s (%s languages)"); #3.70
 define("L_POWBY", "Powered by:"); //or "Based on:", "Supported by" #3.70
@@ -39,6 +39,7 @@ define("L_TRANAME", "ReplaceWith YourName"); //Keep a short name #3.70
 define("L_TRABY", "Translated by %s"); #3.70
 define("L_DONATE", "Do you wish to donate?"); #3.70
 define("L_SRV_TIMEZONE", "Server Timezone:"); //3.74
+define("L_MSG_DISABLED", "You cannot choose this date. Date is disabled!"); //3.75
 
 // Set the first day of the week in your language (0 for Sunday, 1 for Monday ... 6 for Saturday)
 define("FIRST_DAY", "0");

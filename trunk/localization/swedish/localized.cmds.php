@@ -22,6 +22,7 @@ define("L_CMD_INVITE", "inventera,bjud"); // invite (send an invitation to the u
 define("L_CMD_JOIN", "anslut"); // join (join an existing room)
 define("L_CMD_KICK", "uteslut,kicka"); // kick,boot (kick an user from a room)
 define("L_CMD_LTR", "vth,vanster,vänster"); // ltr (post a left-to-right text)
+define("L_CMD_MATH", ""); //math (post MathJax equations in chat)
 define("L_CMD_ME", "mig"); // me (tell the room what you are doing)
 define("L_CMD_MR", "herr"); // mr (same as "me" but with the gender prefix)
 define("L_CMD_MSG", "skicka,till"); // msg,to (send a private message)
@@ -40,6 +41,8 @@ define("L_CMD_SIZE", "storlek"); //size (change/reset the size of the font in ch
 define("L_CMD_SORT", "sortera"); // sort (sort - ascending the usernames in the lists, alphabetically or by the time they joined chat)
 define("L_CMD_TIMESTAMP", "tidskod,tid"); // timestamp (show/hide the timestamp in posts and server/worldtime in the status bar)
 define("L_CMD_TOPIC", "amne,ämne"); // topic (set/change the topic)
+define("L_CMD_UTUBE", ""); // tube,utube,youtube (post an youtube video)
+define("L_CMD_VIDEO", ""); // vid,video,play (post a video)
 define("L_CMD_WISP", "viska"); //wisp,whisp (send a whisper / private message to an user in a different room)
 define("L_CMD_WHOIS", "om,somar,somär"); // whois,about (shows the profile page of an user) 
 ?>

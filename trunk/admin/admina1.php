@@ -48,6 +48,11 @@ else if($mord == "E")
     $sqlT = " ORDER BY email $sortOrder, username $sortOrder;";
 	$arrowe = ($sortOrder == "ASC") ? "<img src='./${ChatPath}images/arrowu.gif' border=0 alt='".L_ASC."' title='".L_ASC."'>" : "<img src='./${ChatPath}images/arrowd.gif' border=0 alt='".L_DESC."' title='".L_DESC."'>";
 }
+else if($mord == "F")
+{
+    $sqlT = " ORDER BY country_code OR ip $sortOrder, username ASC;";
+	$arrowf = ($sortOrder == "ASC") ? "<img src='./${ChatPath}images/arrowu.gif' border=0 alt='".L_ASC."' title='".L_ASC."'>" : "<img src='./${ChatPath}images/arrowd.gif' border=0 alt='".L_DESC."' title='".L_DESC."'>";
+}
 else
 {
     $sqlT = " ORDER BY RIGHT(birthday,5) $sortOrder, age DESC";
@@ -92,10 +97,9 @@ else
 
 	$DbLink = new DB;
 	$CondMonth = "";
-	if(!isset($cYr) || $cYr == "" || $cYr == 0)  $CondMonth = " AND MONTH(birthday) = MONTH(CURDATE())";
+	if(!isset($cYr) || $cYr == "" || $cYr == 0) $CondMonth = " AND MONTH(birthday) = MONTH(CURDATE())";
 	$CondForQuery = "birthday IS NOT NULL AND birthday!='0000-00-00'".$CondMonth."";
-	$DbLink->query("SELECT username,firstname,lastname,gender,avatar,use_gravatar,email,showemail,birthday,show_bday,show_age,((YEAR(CURDATE())-YEAR(birthday)) - (RIGHT(CURDATE(),5)<RIGHT(birthday,5))) AS age FROM ".C_REG_TBL." WHERE ".$CondForQuery."".$sqlT."".$limit."");
-#	$DbLink->query("SELECT username,firstname,lastname,email,birthday,show_bday,show_age FROM ".C_REG_TBL." WHERE birthday IS NOT NULL AND birthday!='0000-00-00' ORDER BY birthday ASC LIMIT 10");
+	$DbLink->query("SELECT username,firstname,lastname,gender,avatar,use_gravatar,email,showemail,birthday,show_bday,show_age,ip,country_code,country_name,((YEAR(CURDATE())-YEAR(birthday)) - (RIGHT(CURDATE(),5)<RIGHT(birthday,5))) AS age FROM ".C_REG_TBL." WHERE ".$CondForQuery."".$sqlT."".$limit."");
 ?>
 <P CLASS=title><?php echo(A_MENU_1a); ?></P>
 <FORM ACTION="<?php echo($pstr."&mord=".$mord."&sortOrder=".$sortOrder.($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")); ?>" METHOD="POST" AUTOCOMPLETE="OFF" NAME="FORM1" onSubmit="reload();">
@@ -106,40 +110,65 @@ else
 	<INPUT TYPE="hidden" NAME="sortOrder" value="<?php echo($sortOrder); ?>">
 	<INPUT TYPE="hidden" NAME="limT" value="<?php echo($limT); ?>">
 	<INPUT TYPE="hidden" NAME="cYr" value="<?php echo($cYr); ?>">
-	<TABLE BORDER=0 CELLPADDING=5 CELLSPACING=1 CLASS="table">
+	<TABLE WIDTH=98% BORDER=0 CLASS="table">
+	<?php
+	if ($DbLink->num_rows() > 0)
+	{
+	?>
 	<tr class=tabtitle>
 		<td style="vertical-align:middle; text-align:center;" class=tabtitle>#</td>
 		<td style="vertical-align:middle; text-align:center;" class=tabtitle></td>
 		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo($arrowx."&nbsp;<a href=\"$pstr&mord=X&sortOrder=".($sortOrder == "DESC" ? "ASC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_17)."\" onMouseOver=\"sort_status('DESC'); return true;\"" : "DESC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_18)."\" onMouseOver=\"sort_status('ASC'); return true;\"")."\">".L_REG_45."</a>"); ?></td>
 		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo($arrowu."&nbsp;<a href=\"$pstr&mord=U&sortOrder=".($sortOrder == "DESC" ? "ASC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_17)."\" onMouseOver=\"sort_status('DESC'); return true;\"" : "DESC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_18)."\" onMouseOver=\"sort_status('ASC'); return true;\"")."\">".L_SET_2."</a>"); ?></td>
-		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo($arrowe."&nbsp;<a href=\"$pstr&mord=E&sortOrder=".($sortOrder == "DESC" ? "ASC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_17)."\" onMouseOver=\"sort_status('DESC'); return true;\"" : "DESC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_18)."\" onMouseOver=\"sort_status('ASC'); return true;\"")."\">".L_REG_8."</a>"); ?></td>
-<?php
-if(!(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")))
-{
-?>
-		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo(L_REG_30); ?></td>
-		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo(L_REG_31); ?></td>
-<?php
-}
-else
-{
-?>
-		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo(L_REG_31); ?></td>
-		<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo(L_REG_30); ?></td>
-<?php
-}
-?>
+		<?php
+		if(C_USE_FLAGS)
+		{
+		?>
+			<td style="vertical-align:middle; text-align:center;" class=tabtitle nowrap="wrap"><?php echo($arrowf."&nbsp;<a href=\"$pstr&mord=F&sortOrder=".($sortOrder == "DESC" ? "ASC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_17)."\" onMouseOver=\"sort_status('DESC'); return true;\"" : "DESC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_18)."\" onMouseOver=\"sort_status('ASC'); return true;\"")."\">".L_REG_52."</a>"); ?></td>
+		<?php
+		}
+		?>
+			<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo($arrowe."&nbsp;<a href=\"$pstr&mord=E&sortOrder=".($sortOrder == "DESC" ? "ASC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_17)."\" onMouseOver=\"sort_status('DESC'); return true;\"" : "DESC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_18)."\" onMouseOver=\"sort_status('ASC'); return true;\"")."\">".L_REG_8."</a>"); ?></td>
+		<?php
+		if(!(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")))
+		{
+		?>
+			<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo(L_REG_30); ?></td>
+			<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo(L_REG_31); ?></td>
+		<?php
+		}
+		else
+		{
+		?>
+			<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo(L_REG_31); ?></td>
+			<td style="vertical-align:middle; text-align:center;" class=tabtitle><?php echo(L_REG_30); ?></td>
+		<?php
+		}
+		?>
 		<td style="vertical-align:middle; text-align:center;" class=tabtitle nowrap="nowrap"><?php echo($arrowb."&nbsp;<a href=\"$pstr&mord=B&sortOrder=".($sortOrder == "DESC" ? "ASC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_17)."\" onMouseOver=\"sort_status('DESC'); return true;\"" : "DESC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_18)."\" onMouseOver=\"sort_status('ASC'); return true;\"")."\">".L_PRO_7."</a>"); ?></td>
 		<td style="vertical-align:middle; text-align:center;" class=tabtitle nowrap="nowrap"><?php echo($arrowa."&nbsp;<a href=\"$pstr&mord=A&sortOrder=".($sortOrder == "DESC" ? "ASC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_17)."\" onMouseOver=\"sort_status('DESC'); return true;\"" : "DESC".($cYr ? "&cYr=".$cYr : "").($use_limT ? "&limT=".$limT : "")."\" title=\"".sprintf(L_CLICK,L_LINKS_18)."\" onMouseOver=\"sort_status('ASC'); return true;\"")."\">".L_PRO_10."</a>"); ?></td>
 	</tr>
-<?php
-	if ($DbLink->num_rows() > 0)
-	{
+	<?php
 		$ava_height = 14;
 		$i = 1;
-		while(list($User,$dob_firstname,$dob_lastname,$gender,$avatar,$use_gravatar,$email,$dob_showemail,$dob_birthday,$dob_showbday,$dob_showage,$dob_age) = $DbLink->next_record())
+		$users = Array();
+		$DbLinkU = new DB;
+		$DbLinkU->query("SELECT username FROM ".C_REG_TBL." WHERE email NOT LIKE '%@bot.com%' AND email NOT LIKE '%@quote.com%' AND username != '".$pmc_username."' ORDER BY username ASC");
+		while (list($usernames) = $DbLinkU->next_record())
 		{
-			if($dob_showbday)
+			$users[] = $usernames;
+		}
+		$DbLinkU->clean_results();
+		$DbLinkU->close();
+		// GeoIP mode for country flags
+		if(C_USE_FLAGS)
+		{
+			if (!class_exists("GeoIP")) include("plugins/countryflags/geoip.inc");
+			if(!isset($gi)) $gi = geoip_open("plugins/countryflags/GeoIP.dat",GEOIP_STANDARD);
+		}
+		while(list($User,$dob_firstname,$dob_lastname,$gender,$avatar,$use_gravatar,$email,$dob_showemail,$dob_birthday,$dob_showbday,$dob_showage,$IP,$COUNTRY_CODE,$COUNTRY_NAME,$dob_age) = $DbLink->next_record())
+		{
+			if(!empty($dob_birthday) && $dob_birthday != "0000-00-00")
 			{
 				if (C_USE_AVATARS)
 				{
@@ -174,7 +203,11 @@ else
 					$dobtime = utf_conv(WIN_DEFAULT,$Charset,$dobtime);
 					if(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")) $dob_time = str_replace(" ","",$dob_time);
 				}
+				$User = stripslashes($User);
 				$dob_name = $dob_firstname != "" ? $dob_firstname : $User;
+				$dob_username = pos_array($User,$users);
+				if ($User != $pmc_username) $User = "<a onClick=\"browse_user($dob_username);\" target=\"_self\" title=\"".A_SEARCH_25."\">$User</a>";
+
 				?>
 				<?php
 				echo("\n\t<TR".($i & 1 ? " bgcolor=\"#C0C0C0\"" : "").">\n\t");
@@ -182,6 +215,23 @@ else
 				echo("<TD style=\"vertical-align:middle; text-align:center;\">".(C_USE_AVATARS ? "<img src=\"".$avatar."\" width=\"25\" height=\"25\" border=\"0\" alt=\"".L_AVATAR."\" title=\"".L_AVATAR."\">" : "")."</TD>");
 				echo("<TD style=\"vertical-align:middle; text-align:center;\"><img src=\"images/gender_".$gender1.".gif\" width=\"".$ava_width."\" height=\"".$ava_height."\" border=\"0\" alt=\"".$gender."\" title=\"".$gender."\"></TD>");
 				echo("<TD style=\"vertical-align:middle; text-align:left;\"><B>".$User."</B></TD>");
+				// GeoIP mode for country flags
+				if(C_USE_FLAGS)
+				{
+					if(!isset($COUNTRY_CODE) || $COUNTRY_CODE == "")
+					{
+						$COUNTRY_CODE = geoip_country_code_by_addr($gi, ltrim($IP,"p"));
+						if (empty($COUNTRY_CODE))
+						{
+							$COUNTRY_CODE = "LAN";
+							$COUNTRY_NAME = "Other/LAN";
+						}
+						if ($COUNTRY_CODE != "LAN") $COUNTRY_NAME = $gi->GEOIP_COUNTRY_NAMES[$gi->GEOIP_COUNTRY_CODE_TO_NUMBER[$COUNTRY_CODE]];
+						if ($PROXY || substr($IP, 0, 1) == "p") $COUNTRY_NAME .= " (Proxy Server)";
+					}
+					$c_flag = "<img src=\"./plugins/countryflags/flags/".strtolower($COUNTRY_CODE).".gif\" alt=\"".$COUNTRY_NAME."\" title=\"".$COUNTRY_NAME."\" border=\"0\">&nbsp;(".$COUNTRY_CODE.")";
+					echo("<TD style=\"vertical-align:middle; text-align:center;\">".$c_flag."</TD>");
+				};
 				echo("<TD style=\"vertical-align:middle; text-align:left;\"><B><A HREF=\"mailto:".htmlspecialchars($email)."\" title=\"".sprintf(L_CLICK,L_EMAIL_1)."\" onMouseOver=\"window.status='".sprintf(L_CLICK,L_EMAIL_1).".'; return true\" target=\"_blank\">".$email."</A>".($dob_showemail ? "" : "<font color=\"red\"><b> *</b></font>")."</B></TD>");
 				if(!(strstr($L,"chinese") || strstr($L,"korean") || strstr($L,"japanese")))
 				{
@@ -193,45 +243,56 @@ else
 					echo("<TD style=\"vertical-align:middle; text-align:left;\">".$dob_lastname."</TD>");
 					echo("<TD style=\"vertical-align:middle; text-align:left;\">".$dob_firstname."</TD>");
 				}
-				echo("<TD style=\"vertical-align:middle; text-align:center;\" nowrap=\"nowrap\">".$dob_time."</TD>");
+				echo("<TD style=\"vertical-align:middle; text-align:center;\" nowrap=\"nowrap\">".$dob_time.($dob_showbday ? "" : "<font color=\"red\"><b> *</b></font>")."</TD>");
 				echo("<TD style=\"vertical-align:middle; text-align:center;\">".$dob_age.($dob_showage ? "" : "<font color=\"red\"><b> *</b></font>")."</TD>");
 				echo("\n\t</TR>\n");
 				$i++;
 			}
+			unset($User,$dob_firstname,$dob_lastname,$gender,$avatar,$use_gravatar,$email,$dob_showemail,$dob_birthday,$dob_showbday,$dob_showage,$IP,$COUNTRY_CODE,$COUNTRY_NAME,$dob_age,$dob_name,$dobtime,$dob_time,$gender1,$ava_width);
 		}
-			unset($User,$dob_firstname,$dob_lastname,$gender,$avatar,$use_gravatar,$email,$dob_showemail,$dob_birthday,$dob_showbday,$dob_showage,$dob_age,$dob_name,$dobtime,$dob_time,$gender1,$ava_width);
+		// GeoIP mode for country flags
+		if(isset($gi) && $gi != "") geoip_close($gi);
+		if(isset($gi6) && $gi6 != "") geoip_close($gi6);
+		if($note)
+		{
+			?>
+			<tr>
+				<td colspan=9 class=error>
+					<b>* </b><i><font size="1"><?php echo(A_SEARCH_26); ?></font></i>
+				</td>
+			</tr>
+		<?php
+		}
 	}
-if($note)
-{
+	else
+	{
 	?>
-	<tr>
-		<td colspan=9>
-			<b>* </b><i><font size="1"><?php echo(A_SEARCH_26); ?></font></i>
-		</td>
-	</tr>
-<?php
-}
-?>
+		<TR>
+			<TD ALIGN=CENTER CLASS=error><?php echo(sprintf(A_SEARCH_29,strftime("%B", time()))); ?></TD>
+		</TR>
+	<?php
+	};
+	?>
 	</TABLE>
-<TABLE>
+	<br /><hr /><br />
+	<TABLE>
 	<TR>
 		<TD>
-		<br />
-		<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(L_PRIV_RELOAD); ?>">&nbsp;
-		<?php
-		if($cYr == 1)
-		{
-		?>
-			<INPUT TYPE="submit" NAME="submit_type" style="color:blue" VALUE="<?php echo(A_SEARCH_27); ?>">
-		<?php
-		}
-		else
-		{
-		?>
-			<INPUT TYPE="submit" NAME="submit_type" style="color:blue" VALUE="<?php echo(A_SEARCH_28); ?>">&nbsp;
-		<?php
-		}
-		?>
+			<INPUT TYPE="submit" NAME="submit_type" VALUE="<?php echo(L_PRIV_RELOAD); ?>">&nbsp;
+			<?php
+			if($cYr == 1)
+			{
+			?>
+				<INPUT TYPE="submit" NAME="submit_type" style="color:blue" VALUE="<?php echo(A_SEARCH_27); ?>">&nbsp;
+			<?php
+			}
+			else
+			{
+			?>
+				<INPUT TYPE="submit" NAME="submit_type" style="color:blue" VALUE="<?php echo(A_SEARCH_28); ?>">&nbsp;
+			<?php
+			}
+			?>
 		</TD>
 	</TR>
 </TABLE>

@@ -14,6 +14,7 @@ Client browsers - tested with:
 	- Google Chrome > 24.x.x.x.x = M.
 Server environment - tested env:
 	- Apache < 2.4.9 (Unix and Windows 2k/XP<SP3 & Vista);
+	- ISS < 7;
 	- php < 6;
 	- MySQL < 6;
 	- exif support enabled (gif/jpeg processing);
@@ -33,8 +34,16 @@ We also added a small IE fixing script (reg file) as a link in Extra Options in 
 If your users encounter booting for no reason, try to disable sounds in chat.
 
 Fixes History:
-16.02.0214 - 1.94-RC4
-- calendar class updated to 3.74-loc version (fixed missing year on selection); (functionality related)
+01.01.2015 - 1.94-RC5
+- calendar class updated to 3.75-loc version (fixed missing year on selection); (functionality related)
+- added option in profile for users to enable/disable sound notifications in chat (it doesn't apply to buzzes and media posts e.g. youtube); (functionality extenssion)
+- fixed a bug that didn't play sounds on entrance; (functionality related)
+- fixes to improve performance on LAN networks without internet connection (disabled functions that require internet access, making the script to freeze/hang); (functionality related)
+- uploader class updated to version 0.33dev; (functionality related)
+- added GeoIP Country Flag Mod, based on MaxMind GeoIPLite2 offline database, thanks Daniël for the suggestion; (functionality extension)
+- added drag&drop support to avatar upload page; (functionality related)
+- lurking page improved for admins; (functionality related)
+16.02.2014 - 1.94-RC4
 - fixed session_register deprecated bug, for admin logins; (functionality related)
 - changed the 4 ip fields in the database to varchar(30) to allow IPv6 connections to the chat (Important: this is bug fix for users being kicked out on login without any error!); (functionality related)
 - applied a Turkish fix for i vs I usage in function names php<5.5 on Linux bug (http://trac.roundcube.net/ticket/1485470) - (functionality related)
@@ -46,6 +55,7 @@ Fixes History:
 - calendar year limitation on some servers to >1970 and/or <2038 has been fixed; (functionality related)
 - added 2 more Gravatars support (Mystery Man - static and Retro - dynamic); (functionality related) - required DB modification
 06.02.2013 - 1.94-RC2:
+- uploader class updated to version 0.31; (functionality related)
 - added birthday tooltips to Admin panel calendar; (functionality related)
 - fixed the calendar to allow years before 1970 (1902 the lowest allowed year); (functionality related)
 - fixed calendar birthdays to display the birthdates before 1970; (functionality related)
@@ -147,7 +157,7 @@ Fixes History:
 - enabled sending of html formatted emails from admin panel; (functionality extension)
 - Birthday mod added - for profiles; (functionality extension)
 25.04.2010 - 1.94-beta3:
-- upload class updated to latest 0.29 version; (functionality related)
+- upload class updated to version 0.29; (functionality related)
 - added the Remember me check-box to remember login data; (privacy & login related)
 19.04.2010 - 1.94-beta2:
 - provided Privacy policy updated; (privacy related)
@@ -174,7 +184,7 @@ Fixes History:
 - email domains for registration (register.php & edituser.php) and for domain check-up - updated to the latest top-level list: asia, travel, name, aso; (functionality related)
 - new stats mod translation added to admin panel; (localization project)
 - translation of words (private) and (whisper) added to all pages; (localization project)
-- updated the class.upload to v0.28; (functionality related)
+- updated the class.upload to version 0.28; (functionality related)
 - Indonesian translation added; (localization project) - Thanks to Hendriyo Kustrianjaya <hendriyo@gmail.com>
 - fixed recalling previous commands in the input box, not only the previous posts; (functionality extension)
 - more rtl/ltr orientation fixes; (display related)

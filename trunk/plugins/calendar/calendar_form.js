@@ -420,10 +420,34 @@ function htmlspecialchars_decode (string, quote_style) {
   return string;
 }
 
+function ddFocus(){
+	var f = document.calendarform;
+	f.fcs.value = 1;
+}
+
+function ddUnFocus(){
+	var f = document.calendarform;
+	f.fcs.value = 0;
+
+	if(typeof(window.parent.prepareHide) == "function"){
+		window.parent.prepareHide(f.objname.value, f.hdt.value);
+	}
+}
+
 window.onload = function(){
 	window.parent.setDateLabel('obj_name');
 	//adjustContainer();
 	setTimeout("adjustContainer()", 1000);
 	restoreValue();
 	processTooltips();
+
+	var f = document.calendarform;
+
+	if(f.dp.value == 1){
+		f.m.onfocus = ddFocus;
+		f.y.onfocus = ddFocus;
+
+		f.m.onblur = ddUnFocus;
+		f.y.onblur = ddUnFocus;
+	}
 };

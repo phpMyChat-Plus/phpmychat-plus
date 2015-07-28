@@ -309,7 +309,7 @@ define("L_WHOIS_BOT", "Bot"); //Robot
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "%s masuk ke kamar ini.");
 define("L_EXIT_ROM", "%s keluar dari kamar ini.");
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND != "") define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
@@ -451,7 +451,7 @@ define("COL_ERROR_BOX_USRM", "Anda harus sebagai moderator untuk menggunakan war
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "Selamat datang di tempat obrol kami. Mohon untuk menjaga tata-krama ketika ngobrol: <I>coba untuk tetap sopan dan santun</I>.");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG . L_WELCOME_SND);
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND != "") define("WELCOME_MSG", L_WELCOME_MSG . L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
@@ -505,10 +505,10 @@ define("L_LINKS_3", "untuk membuka linknya");
 define("L_LINKS_4", "untuk membuka tempat dari pemilik/authornya");
 define("L_LINKS_5", "untuk memasukan tanda senyum ini");
 define("L_LINKS_6", "menuju ke kontak");
-define("L_LINKS_7", "menuju ke phpMyChat Homepage");
-define("L_LINKS_8", "menuju ke phpMyChat Group");
+define("L_LINKS_7", "menuju ke %s Homepage");
+define("L_LINKS_8", "menuju ke %s Group");
 define("L_LINKS_9", "untuk mengirim saran Anda");
-define("L_LINKS_10", "untuk mengunduh phpMyChat-Plus");
+define("L_LINKS_10", "untuk mengunduh %s");
 define("L_LINKS_11", "untuk melihat siapa yang mengobrol");
 define("L_LINKS_12", "untuk membuka Chat Login Page");
 define("L_LINKS_13", "untuk memutar suara ini"); // can also be translated as "to play this sound"

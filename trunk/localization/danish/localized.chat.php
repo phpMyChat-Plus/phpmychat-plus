@@ -309,7 +309,7 @@ define("L_WHOIS_BOT", "Bot");
 // Notification messages of user entrance/exit
 define("ENTER_ROM", "%s er tiltrådt chatten.");
 define("L_EXIT_ROM", "%s har afsluttet chatten.");
-if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND) define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
+if ((ALLOW_ENTRANCE_SOUND == "1" || ALLOW_ENTRANCE_SOUND == "3") && ENTRANCE_SOUND != "") define("L_ENTER_ROM", ENTER_ROM.L_ENTER_SND);
 else define("L_ENTER_ROM", ENTER_ROM);
 define("L_ENTER_ROM_NOSOUND", ENTER_ROM);
 
@@ -451,7 +451,7 @@ define("COL_ERROR_BOX_USRM", "Du skal være moderator for at kunne anvende ".COL
 
 //Welcome message to be displayed on login
 define("L_WELCOME_MSG", "Velkommen til chatten. Følg venligst netiketten, mens du chatter: <I>forsøg at være venlig og imødekommende</I>.");
-if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND) define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
+if ((ALLOW_ENTRANCE_SOUND == "2" || ALLOW_ENTRANCE_SOUND == "3") && WELCOME_SOUND != "") define("WELCOME_MSG", L_WELCOME_MSG.L_WELCOME_SND);
 else define("WELCOME_MSG", L_WELCOME_MSG);
 define("WELCOME_MSG_NOSOUND", L_WELCOME_MSG);
 
@@ -505,10 +505,10 @@ define("L_LINKS_3", "for at åbne linket");
 define("L_LINKS_4", "for at åbne forfatterens hjemmeside");
 define("L_LINKS_5", "for at indsætte smiley");
 define("L_LINKS_6", "for at kontakte");
-define("L_LINKS_7", "for at besøge hjemmesiden phpMyChat");
-define("L_LINKS_8", "for at blive medlem af phpMyChat Group");
+define("L_LINKS_7", "for at besøge hjemmesiden %s");
+define("L_LINKS_8", "for at blive medlem af %s Group");
 define("L_LINKS_9", "for at sende feedback");
-define("L_LINKS_10", "for at downloade phpMyChat Plus");
+define("L_LINKS_10", "for at downloade %s");
 define("L_LINKS_11", "for at se, hvem der chatter");
 define("L_LINKS_12", "for at åbne siden Chat Login");
 define("L_LINKS_13", "for at afspille denne lydfil"); // can also be translated as "to play this sound"

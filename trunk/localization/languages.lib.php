@@ -7,29 +7,29 @@ $AvailableLanguages = array();
 $languageDirectories = dir('./'.${ChatPath}.'localization/');
 while($name = $languageDirectories->read())
 {
-if (stristr($_SERVER["SCRIPT_NAME"], "install"))
-{
+	if (stristr($_SERVER["SCRIPT_NAME"], "install"))
+	{
 		if(is_dir('./'.$ChatPath.'localization/'.$name)
-		&& file_exists('./'.$ChatPath.'localization/'.$name.'/regex.txt')
-		&& file_exists('./'.$ChatPath.'localization/'.$name.'/localized.chat.php')
-		&& file_exists('./'.$ChatPath.'localization/'.$name.'/localized.install.php')
-		&& file_exists('./'.$ChatPath.'localization/'.$name.'/images/flag.gif'))
+			&& file_exists('./'.$ChatPath.'localization/'.$name.'/regex.txt')
+			&& file_exists('./'.$ChatPath.'localization/'.$name.'/localized.chat.php')
+			&& file_exists('./'.$ChatPath.'localization/'.$name.'/localized.install.php')
+			&& file_exists('./'.$ChatPath.'localization/'.$name.'/images/flag.gif'))
+		{
+			list($key) = file('./'.$ChatPath.'localization/'.$name.'/regex.txt');
+			$AvailableLanguages[$key] = $name;
+		};
+	}
+	else
 	{
-		list($key) = file('./'.$ChatPath.'localization/'.$name.'/regex.txt');
-		$AvailableLanguages[$key] = $name;
-	};
-}
-else
-{
-	if(is_dir('./'.$ChatPath.'localization/'.$name)
-		&& file_exists('./'.$ChatPath.'localization/'.$name.'/regex.txt')
-		&& file_exists('./'.$ChatPath.'localization/'.$name.'/localized.chat.php')
-		&& file_exists('./'.$ChatPath.'localization/'.$name.'/images/flag.gif'))
-	{
-		list($key) = file('./'.$ChatPath.'localization/'.$name.'/regex.txt');
-		$AvailableLanguages[$key] = $name;
-	};
-}
+		if(is_dir('./'.$ChatPath.'localization/'.$name)
+			&& file_exists('./'.$ChatPath.'localization/'.$name.'/regex.txt')
+			&& file_exists('./'.$ChatPath.'localization/'.$name.'/localized.chat.php')
+			&& file_exists('./'.$ChatPath.'localization/'.$name.'/images/flag.gif'))
+		{
+			list($key) = file('./'.$ChatPath.'localization/'.$name.'/regex.txt');
+			$AvailableLanguages[$key] = $name;
+		};
+	}
 };
 $languageDirectories->close();
 if (!function_exists("krsort")) include("./${ChatPath}localization/sort_languages.php");
